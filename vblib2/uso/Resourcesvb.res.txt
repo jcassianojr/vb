@@ -1,0 +1,1 @@
+caso usar este resource os ocx que estiverem nele precisam estar na pasta do exe

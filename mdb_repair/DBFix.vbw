@@ -1,0 +1,8 @@
+Form1 = 0, 0, 1146, 434, , 104, 104, 832, 538, C
+Module1 = 130, 130, 1276, 564, 
+clsRegistry = 0, 0, 0, 0, C
+frmProgress = 0, 0, 0, 0, C, 156, 156, 1302, 590, C
+frmPassword = 0, 0, 0, 0, C, 182, 182, 1328, 616, C
+VisualStyles = 0, 0, 0, 0, C
+Common = 0, 0, 0, 0, C
+mFileAPI = 104, 104, 1250, 538, 

@@ -1,0 +1,71 @@
+
+
+PrinterEx.ShowPrintPreview Me, "MyPrintingRoutine"
+Public Sub MyPrintingRoutine()
+    On Error Resume Next
+    Printer.Print
+    Printer.PaintPicture Picture1, 0, 0
+    Printer.EndDoc
+End Sub
+
+Public Property Get Printer() As Printer
+    Set Printer = vbExtra.Printer2
+End Property
+
+Public Property Set Printer(nPrinter As Printer)
+    Set vbExtra.Printer2 = nPrinter
+End Property
+
+
+PrinterEx.ShowPrintPreview Me, "MyPrintingRTF"
+
+Public Property Get Printer() As Printer
+    Set Printer = vbExtra.Printer2
+End Property
+
+Public Property Set Printer(nPrinter As Printer)
+    Set vbExtra.Printer2 = nPrinter
+End Property
+
+
+Public Sub MyPrintingRTF()
+'    Printer.FontName = "Arial"
+'    Printer.FontSize = 12
+    PrinterEx.PrintRichTextBox RichTextBox1
+    Printer.EndDoc
+End Sub
+
+
+PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
+
+Public Property Get Printer() As Printer
+    Set Printer = vbExtra.Printer2
+End Property
+
+Public Property Set Printer(nPrinter As Printer)
+    Set vbExtra.Printer2 = nPrinter
+End Property
+
+
+Public Sub MyPrintingTXT()
+    Dim fileFile As Integer
+    Dim STRBUFFER As String
+	If FileExist(cARQRTF, true) Then        
+        Exit Function
+    End If	
+    fileFile = FreeFile
+    Open cARQRTF For Input As #fileFile
+    Do While Not EOF(fileFile)
+        'read line
+        Input #fileFile, STRBUFFER
+        Printer.Print STRBUFFER
+    Loop
+    Close fileFile
+    Printer.EndDoc
+End Sub
+
+
+
+
+
+
