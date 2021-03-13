@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmSENHA 
@@ -295,6 +295,12 @@ Private Sub cmdOK_Click()
     On Error GoTo errhandler
 
     USALX = PegPath("PATH", "USALX")
+    
+    If UCase(txtUSUARIO) = "ADMLOG" Or UCase(txtUSUARIO) = "ADMINISTRADOR" Or UCase(txtUSUARIO) = "SUPERVISOR" Then
+       txtUSUARIO = "ADMIN"
+    End If
+    
+    
     ''Armazena Codigo empresa
 1   zEMPRESA = FixInt(txtempresa.Value)
 2   If zEMPRESA < 0 Then zEMPRESA = 1
@@ -562,14 +568,14 @@ End Sub
 'End Sub
 
 Private Sub fixuser()
-    If UCase(txtUSUARIO.tEXT) = "ADMLOG" Then
-        txtUSUARIO.tEXT = "admin"
+    If UCase(txtUSUARIO.Text) = "ADMLOG" Then
+        txtUSUARIO.Text = "admin"
     End If
-    If UCase(txtUSUARIO.tEXT) = "ADMINISTRA" Then
-        txtUSUARIO.tEXT = "admin"
+    If UCase(txtUSUARIO.Text) = "ADMINISTRA" Then
+        txtUSUARIO.Text = "admin"
     End If
-    If UCase(txtUSUARIO.tEXT) = "SUPERVISOR" Then
-        txtUSUARIO.tEXT = "admin"
+    If UCase(txtUSUARIO.Text) = "SUPERVISOR" Then
+        txtUSUARIO.Text = "admin"
     End If
 
 End Sub
