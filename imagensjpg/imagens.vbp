@@ -47,14 +47,14 @@ IconForm="escIMG"
 Startup="Sub Main"
 HelpFile=""
 Title="imagens"
-ExeName32="imgmp04.exe"
+ExeName32="imgjpg.exe"
 Command32="01%[CONN]Provider=MSDASQL.1;Persist Security Info=False;Data Source=ol_logix"
 Name="Imagens"
 HelpContextID="0"
 CompatibleMode="0"
 MajorVer=1
 MinorVer=2
-RevisionVer=133
+RevisionVer=135
 AutoIncrementVer=1
 ServerSupportFiles=0
 VersionComments="1.1 Incluir Opcao caminho zzz  1.2 Inclusao de Help"
