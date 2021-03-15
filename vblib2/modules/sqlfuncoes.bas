@@ -24,7 +24,7 @@ Public Function GrvSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
     Case "ADO"
         GrvSQL = GrvSQLado(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR)
     Case "SDE"
-        GrvSQL = GrvSQLsde(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR)
+        GrvSQL = GrvSQLSDE(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR)
         'Case Else
         '   GrvSQL = GrvSQLdao(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR)
     End Select
@@ -125,7 +125,7 @@ Public Function SomaSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM A
     Case "ADO"
         SomaSQL = SomaSQLAdo(cARQ, cSQL, aCAM)
     Case "SDE"
-        SomaSQL = somaSQLSDE(cARQ, cSQL, aCAM)
+        SomaSQL = SomaSQLSDE(cARQ, cSQL, aCAM)
         'Case Else
         '   SomaSQL = SomaSQLDao(cARQ, cSQL, aCAM)
     End Select
@@ -140,7 +140,7 @@ Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
     Case "ADO"
         PegSQLDeli = PegSQLDeliAdo(cARQ, cSQL, aCAM, cDELI)
     Case "SDE"
-        PegSQLDeli = pegSQLdeliSDE(cARQ, cSQL, aCAM, cDELI)
+        PegSQLDeli = PegSQLDeliSDE(cARQ, cSQL, aCAM, cDELI)
         'Case Else
         '   PegSQLDeli = PegSQLDeliDao(cARQ, cSQL, aCAM, cDELI)
     End Select
@@ -196,7 +196,7 @@ Public Function SqlMoveReg(ByVal cARQORI As String, _
                       cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, _
                       aIDDES
     Case "SDE"
-        sqlmoveregSDE cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
+        SQLMoveRegSDE cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
                       cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, _
                       aIDDES
                  
@@ -294,7 +294,8 @@ Public Function Mana5Fec() As Boolean
         End If
         If cCAMFEC = "C" Then
             If Not MDG("Usar Acumulo Anterior", "Confirmaçao") Then
-                Shell "somaano $" & UCase(aARQFEC(0)), vbNormalFocus
+                ''Shell "somaano $" & UCase(aARQFEC(0)), vbNormalFocus
+                ShellEx "SOMAANO", essSW_SHOWDEFAULT, "$" & UCase(aARQFEC(0)), PegPath("PATH", "SOMAANO")
                 Alert "Clique em Ok, Após o Termino do Acumulo", "Aguarde.."
             End If
         End If

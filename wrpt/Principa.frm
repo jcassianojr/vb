@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
    Caption         =   " "
@@ -58,7 +58,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":0000
-            TextSave        =   "12:38"
+            TextSave        =   "12:18"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -66,7 +66,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":059A
-            TextSave        =   "05/03/2021"
+            TextSave        =   "15/03/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -287,8 +287,9 @@ Dim carqhelp As String
 
 
     ''cLINHA = "MAIL $" & UCase(zUSER)
-    CLINHA = "$" & UCase(zUSER)
-    ShellEx "MAIL.EXE", , CLINHA, , , Me.hWnd
+   ' CLINHA = "$" & UCase(zUSER)
+   ' ShellEx "MAIL.EXE", , CLINHA, , , Me.hWnd
+    ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hWnd
     
 
     '* Carrega imagens para o ImageList
@@ -319,7 +320,7 @@ Dim carqhelp As String
     
         
        
-    StatusBar1.Panels(6).tEXT = zUSER
+    StatusBar1.Panels(6).Text = zUSER
     If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
        frmDica.Show
     End If

@@ -18,7 +18,6 @@ frmLocalizar = 52, 52, 1198, 486, C, 159, 161, 664, 595, C
 jpgpicture = 0, 0, 0, 0, C
 frmIMAGENS = 0, 0, 0, 0, C, 78, 78, 692, 512, C
 FrmPrintSetup = 0, 0, 0, 0, C, 104, 104, 1250, 538, C
-PrismPrinters = 0, 0, 0, 0, C
 clsCommonDialogs = 0, 0, 0, 0, C
 VisualStyles = 0, 0, 0, 0, C
 clsOSInfo = 0, 0, 0, 0, C

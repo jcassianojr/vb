@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form escMANREL 
    Caption         =   "Escolha o grupo de Relatorio"
@@ -131,8 +131,8 @@ Private Sub imprima_click()
     Grid.Col = 1
     zRPT = Grid
     eRUN = ZMANA5IMP & "IMPREL " & zgrp & " " & zRPT & " " & zUSER & " " & cTIPO & " " & ZMANA5IMP
-    Shell eRUN, vbNormalFocus
-
+    'Shell eRUN, vbNormalFocus
+    ShellEx "IMPREL", essSW_SHOWDEFAULT, zgrp & " " & zRPT & " " & zUSER & " " & cTIPO, ZMANA5IMP, , Me.hWnd
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)

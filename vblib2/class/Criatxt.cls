@@ -161,7 +161,8 @@ Public Sub arqimpdos(Optional ByVal cDESTINO As String = ">PRN")
     ''Mapeamento impressora rede e usb
     ''net use lpt1 \\computer\printer password /persistent:yes
     If mvarDESTINO = "ARQ" Then
-        Shell "copy " & mvarArquivo & " " & cDESTINO
+        'Shell "copy " & mvarArquivo & " " & cDESTINO
+        CopyFileWindowsWay mvarArquivo, cDESTINO
     End If
 End Sub
 
@@ -190,11 +191,11 @@ Public Sub ABRIR()
 End Sub
 
 Public Sub novafolha()
-    Dim x As Integer
+    Dim X As Integer
     ReDim mvaraLINHAS(mvarnROW)
-    For x = 0 To mvarnROW - 1
-        mvaraLINHAS(x) = Space(mvarnCOL)
-    Next x
+    For X = 0 To mvarnROW - 1
+        mvaraLINHAS(X) = Space(mvarnCOL)
+    Next X
 End Sub
 
 Public Property Let aLINHAS(ByVal vData As Variant)

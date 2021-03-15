@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form escRPT 
    Caption         =   "Escolha o grupo de Relatorio"
@@ -376,9 +376,9 @@ Private Sub imprima_click()
     
     
     
-    ''Direitos
-    If aRELCFG(1) = "VORETRUN.EXE" Then cARQRTF = cARQRTF & MONTARSN(, "") & "#" & aARQUIVOS(0) & "#" & aRELCFG(15)
-    If aRELCFG(1) = "VORTF.EXE" Then cARQRTF = cARQRTF & MONTARSN()
+    ''Direitos agora no shellex abaixo
+    'If aRELCFG(1) = "VORETRUN.EXE" Then cARQRTF = cARQRTF & MONTARSN(, "") & "#" & aARQUIVOS(0) & "#" & aRELCFG(15)
+    'If aRELCFG(1) = "VORTF.EXE" Then cARQRTF = cARQRTF & MONTARSN()
 
 
     ''Imprime conforme Abrir Com
@@ -396,11 +396,14 @@ Private Sub imprima_click()
     Case "EXECUTARDLL"
         ExecutarDLL cARQRTF
     Case "IMPRELM5P"
-        eRUN = ZMANA5IMP & "IMPREL " & zgrp & " " & zRPT & " " & zUSER & " P " & ZMANA5IMP
-        Shell eRUN, vbNormalFocus
+        'eRUN = ZMANA5IMP & "IMPREL " & zgrp & " " & zRPT & " " & zUSER & " P " & ZMANA5IMP
+        'Shell eRUN, vbNormalFocus
+        ShellEx "IMPREL", essSW_SHOWDEFAULT, zgrp & " " & zRPT & " " & zUSER & " P ", ZMANA5IMP, , Me.hWnd
+        
     Case "IMPRELM5M"
-        eRUN = ZMANA5IMP & "IMPREL " & zgrp & " " & zRPT & " " & zUSER & " M " & ZMANA5IMP
-        Shell eRUN, vbNormalFocus
+        'eRUN = ZMANA5IMP & "IMPREL " & zgrp & " " & zRPT & " " & zUSER & " M " & ZMANA5IMP
+        'Shell eRUN, vbNormalFocus
+        ShellEx "IMPREL", essSW_SHOWDEFAULT, zgrp & " " & zRPT & " " & zUSER & " M ", ZMANA5IMP, , Me.hWnd
     Case "ABRIRCOM"
         Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
     Case "SHELL"
@@ -431,9 +434,12 @@ Private Sub imprima_click()
         aRELCFG(1) = Trim(Replace(aRELCFG(1), ".EXE", " "))
         Select Case aRELCFG(1)
         Case "CARETRUN"
-            Shell "caretrun  " & cARQRTF, vbNormalFocus
+            'Shell "caretrun  " & cARQRTF, vbNormalFocus
+            Alert ("configur para voretrun")
+            Exit Sub
         Case "VORETRUN"
-            Shell "VORETRUN " & cARQRTF, vbNormalFocus
+            'Shell "VORETRUN " & cARQRTF, vbNormalFocus
+            ShellEx "VORETRUN", essSW_SHOWDEFAULT, cARQRTF & MONTARSN(, "") & "#" & aARQUIVOS(0) & "#" & aRELCFG(15), PegPath("PATH", "VORETRUN"), , Me.hWnd
         Case "MKRVIEW"
             ShellEx aRELCFG(1), essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
         Case Else

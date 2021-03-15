@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
    Caption         =   " "
@@ -59,7 +59,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":0000
-            TextSave        =   "12:39"
+            TextSave        =   "13:05"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -67,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":059A
-            TextSave        =   "05/03/2021"
+            TextSave        =   "15/03/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -295,6 +295,7 @@ Private Sub MDIForm_Load()
     'opcao somente via menu
     'CLINHA = "MAIL $" & UCase(zUSER)
     'Shell CLINHA, vbNormalFocus
+    'ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER),PegPath("PATH", "MAIL") , , Me.hWnd
     
     '* Carrega imagens para o ImageList
     DB.ConnectionTimeout = 120
@@ -437,8 +438,9 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
         Calculadora.Show
         Exit Sub
     Case 9
-        CLINHA = "MAIL $" & UCase(zUSER)
-        Shell CLINHA, vbNormalFocus
+        ''CLINHA = "MAIL $" & UCase(zUSER)
+        ''Shell CLINHA, vbNormalFocus
+        ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hWnd
         Exit Sub
     End Select
     
@@ -652,8 +654,9 @@ Private Sub Relat_Click(Index As Integer)
     Case 6
         FrmLstView.Show vbModal, Me
     Case 7
-        zRPTARQ = PegPath("PATH", "WRPTX") + " $" + Trim(zUSER) + "%#"
-        Shell zRPTARQ, vbNormalFocus
+        'zRPTARQ = PegPath("PATH", "WRPTX") + " $" + Trim(zUSER) + "%#"
+        'Shell zRPTARQ, vbNormalFocus
+        ShellEx "WRPTX", essSW_SHOWDEFAULT, "$" + Trim(zUSER) + "%#", PegPath("PATH", "WRPTX"), , Me.hWnd
     End Select
 End Sub
 
