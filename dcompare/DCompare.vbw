@@ -7,6 +7,6 @@ GeralVars = 0, 0, 0, 0, C
 SqlFuncoesAdo = 0, 0, 0, 0, C
 clsOSInfo = 0, 0, 0, 0, C
 Common = 0, 0, 0, 0, C
-MdbRepComSimples = 0, 0, 0, 0, C
+MdbRepComSimples = 104, 104, 1250, 548, C
 centraliza = 0, 0, 0, 0, C
 VisualStyles = 0, 0, 0, 0, C

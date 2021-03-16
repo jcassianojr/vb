@@ -291,7 +291,7 @@ Private Sub imprima_click()
         Case "REP"
             aRELCFG(1) = "FRMREP"
         Case "RET"
-            aRELCFG(1) = "CARETRUN.EXE"
+            aRELCFG(1) = "VORETRUN" ''"CARETRUN.EXE"
         Case "TXL"
             aRELCFG(1) = "FRMTXL"
         Case "SQL"
@@ -302,7 +302,9 @@ Private Sub imprima_click()
             aRELCFG(1) = "IMPRELM5P"             ''PADREL
         Case "M5M"                               ''Mana5 Padrao /Mana5 Manrel
             aRELCFG(1) = "IMPRELM5M"             ''MANREL
-        Case "PDF", "HTM", "HTML", "CHM", "HLP"
+        Case "HTM", "HTML"
+             aRELCFG(1) = "FRMPREVIEW"
+        Case "PDF", "CHM", "HLP"
             aRELCFG(1) = "SHELL"
         Case "DOC", "XLS", "PPS", "PPT"
             aRELCFG(1) = "SHELL"
@@ -320,14 +322,14 @@ Private Sub imprima_click()
             Case 1
                 aRELCFG(1) = "FRMTXL"
             End Select
-        Case "QRP"
-            aRELCFG(1) = "qrpVIEW.EXE"
+        'Case "QRP"
+         '   aRELCFG(1) = "qrpVIEW.EXE"
         Case "RTF"
             aRELCFG(1) = "FRMRTF"
-        Case "DWF"
-            aRELCFG(1) = "FRMDWF"
-        Case "DWG", "DXF", "RML", "IPT", "IAM", "IDW"
-            aRELCFG(1) = "FRMDWG"
+        'Case "DWF"
+        '    aRELCFG(1) = "FRMDWF"
+        'Case "DWG", "DXF", "RML", "IPT", "IAM", "IDW"
+        '    aRELCFG(1) = "FRMDWG"
         Case "WMF", "EMF", "BMP", "ICO", "JPG", "JPEG", "JNG", "KOALA", "LBM", "IFF", "MNG", "PBM", "PBMRAW", _
              "PCD", "PCX", "PGM", "PGMRAW", "PNG", "PPM", "PPMRAW", "RAS", "TARGA", _
              "DIB", "TGA", "PIC", "TIF", "TIFF", "WBMP", "PSD", "CUT", "XBM", "XPM", "DDS", "GIF", "HDR"
@@ -420,6 +422,10 @@ Private Sub imprima_click()
         '    ePASS01 = False
         '    ePASS02 = ""
         '    Frmimg.Show vbModal, Me
+     Case "FRMPREVIEW"
+        ePASS01 = cARQRTF
+        FrmPreview.Show vbModal, Me
+       
     Case "FRMVID"
         FrmVid.Show vbModal, Me
         ''Encerra Para Evitar Nova Abertura Sistema Novo
@@ -428,9 +434,9 @@ Private Sub imprima_click()
     
     '' Executavel
     If InStr(aRELCFG(1), ".EXE") Then
-        If aRELCFG(1) = "MKRVIEW.EXE" Then
-            cARQRTF = Chr(34) & aARQUIVOS(0) & Chr(34) & " " & Chr(34) & "SYSDBA" & Chr(34) & " " & Chr(34) & "masterkey" & Chr(34) & " " & Chr(34) & " " & Chr(34) & " " & Chr(34) & "none" & Chr(34) & " " & Chr(34) & cARQRTF & Chr(34)
-        End If
+       ' If aRELCFG(1) = "MKRVIEW.EXE" Then
+       '     cARQRTF = Chr(34) & aARQUIVOS(0) & Chr(34) & " " & Chr(34) & "SYSDBA" & Chr(34) & " " & Chr(34) & "masterkey" & Chr(34) & " " & Chr(34) & " " & Chr(34) & " " & Chr(34) & "none" & Chr(34) & " " & Chr(34) & cARQRTF & Chr(34)
+       ' End If
         aRELCFG(1) = Trim(Replace(aRELCFG(1), ".EXE", " "))
         Select Case aRELCFG(1)
         Case "CARETRUN"
@@ -440,8 +446,8 @@ Private Sub imprima_click()
         Case "VORETRUN"
             'Shell "VORETRUN " & cARQRTF, vbNormalFocus
             ShellEx "VORETRUN", essSW_SHOWDEFAULT, cARQRTF & MONTARSN(, "") & "#" & aARQUIVOS(0) & "#" & aRELCFG(15), PegPath("PATH", "VORETRUN"), , Me.hWnd
-        Case "MKRVIEW"
-            ShellEx aRELCFG(1), essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
+        'Case "MKRVIEW"
+        '    ShellEx aRELCFG(1), essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
         Case Else
             ShellEx aRELCFG(1), essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
         End Select

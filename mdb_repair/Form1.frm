@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form Form1 
    BorderStyle     =   1  'Fixed Single
@@ -1357,7 +1357,8 @@ Text2.Text = ""
 'make a copy of corrupt database
 lblStatus.Caption = "Making a copy of the database..."
 lblStatus.Refresh
-FileCopy Text1.Text, strNew
+'FileCopy Text1.Text, strNew
+CopyFileWindowsWay Text1.Text, strNew
 If Err.Number Then
    Screen.MousePointer = vbDefault
    lblStatus.Caption = "Unable to copy database. If the database is open, close it and try again."

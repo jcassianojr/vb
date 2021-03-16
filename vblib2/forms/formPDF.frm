@@ -386,7 +386,7 @@ Private Sub Form_Load()
   
     '  CentralizaJanela Me
     Center Me
-    txtCreator.tEXT = AppName
+'    txtCreator.tEXT = AppName
     cmbFont.ListIndex = 1                        ' 10 pt
     cmbFontSize.ListIndex = 0
     cmbRotation.ListIndex = 0
@@ -489,7 +489,7 @@ Private Sub btnConvert_Click()
     End If
 End Sub
 
-Public Sub ConvertToPDF(FileName As String, outputfile As String, _
+Public Function ConvertToPDF(FileName As String, outputfile As String, _
                         Optional TextAuthor As String, Optional TextCreator As String, Optional TextKeywords As String, _
                         Optional TextSubject As String, Optional TextTitle As String, _
                         Optional FontName As String = "Courier", Optional FontSize As Integer = 10, Optional Rotation As Integer, _
@@ -501,7 +501,7 @@ Public Sub ConvertToPDF(FileName As String, outputfile As String, _
     On Error GoTo er
     If Not FileExist(FileName) Then
         MsgBox "Arquivo '" & FileName & "' não existe."
-        Exit Sub
+        Exit Function
     ElseIf FileExist(outputfile) Then
         If MDG("Arquivo Ja Existente" & outputfile, "Confirma Exclusao") Then
             Kill outputfile
@@ -530,10 +530,10 @@ Public Sub ConvertToPDF(FileName As String, outputfile As String, _
     Call WriteHead
     Call WritePages
     Call endpdf
-    Exit Sub
+    Exit Function
 er:
     MsgBox Err.Description
-End Sub
+End Function
 
 Private Sub initialize(FontName As String, FontSize As Integer, Rotation As Integer, pwidth As Single, pheight As Single)
     pageHeight = 72 * pheight

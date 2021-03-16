@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}#1.1#0"; "ieframe.dll"
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form FrmPreview 
    Caption         =   "Preview"
    ClientHeight    =   6240
@@ -175,8 +175,28 @@ Private Sub Form_Load()
     Me.Width = Screen.Width - 1200
     Me.Top = 100
     Me.Left = 100
-
-
+' 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
+    ' 4-Editar,5-Visualizar,6-Imprimir,7-Exportar 8-Abrir Com
+    If Not aDIREITOS(3) Then
+       XPButton3.Enabled = False
+       XPButton3.Visible = False
+    End If
+    If Not aDIREITOS(6) Then
+       XPButton9.Enabled = False
+       XPButton9.Visible = False
+       XPButton5.Enabled = False
+       XPButton5.Visible = False
+       
+    End If
+     If Not aDIREITOS(5) Then
+       XPButton10.Enabled = False
+       XPButton10.Visible = False
+    End If
+      If Not aDIREITOS(2) Then
+       Salvar(1).Enabled = False
+       Salvar(1).Visible = False
+    End If
+    
     WebBrowser1.Navigate ePASS01
 End Sub
 

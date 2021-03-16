@@ -144,16 +144,43 @@ End Sub
 
 Public Sub arqview()
     cARQRTF = mvarArquivo
+' 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
+            ' 4-Editar,5-Visualizar,6-Imprimir,7-Exportar
+           aDIREITOS = Array(False, False, False, False, False, True, True, False)
     FrmRTf.Show vbModal
 End Sub
 
 Public Sub gravahtml(Optional cDESTINO As String = "", Optional cTITULO As String = "", Optional cAUTOR As String = "")
+    If cDESTINO = "" Then
+       cDESTINO = TrocaExt(mvarArquivo, "html")
+    End If
     txttohtml mvarArquivo, cDESTINO, cTITULO, cAUTOR
 End Sub
 
 Public Sub gravartf(Optional cDESTINO As String = "")
+    If cDESTINO = "" Then
+       cDESTINO = TrocaExt(mvarArquivo, "rtf")
+    End If
     txttoRTF mvarArquivo, cDESTINO
 End Sub
+Public Sub gravapdf(Optional cDESTINO As String = "")
+   'If cDESTINO = "" Then
+   '    cDESTINO = TrocaExt(mvarArquivo, "pdf") 'no formConvertToPDF ja tem trocaext
+   ' End If
+    'ConvertToPDF(FileName As String, outputfile As String, _
+    '                    Optional TextAuthor As String, Optional TextCreator As String, Optional TextKeywords As String, _
+    '                    Optional TextSubject As String, Optional TextTitle As String, _
+    '                    Optional FontName As String = "Courier", Optional FontSize As Integer = 10, Optional Rotation As Integer, _
+    '                    Optional pwidth As Single = 8.5, Optional pheight As Single = 11, _
+    '                    Optional lPAISAGEM As Boolean = False)
+                        
+    
+    'ConvertToPDF mvarArquivo, cDESTINO
+    
+     ePASS01 = mvarArquivo
+     formConvertToPDF.Show
+End Sub
+
 
 Public Sub arqimpdos(Optional ByVal cDESTINO As String = ">PRN")
     ''Caminho Rede "\\Server\HP"
