@@ -3,15 +3,16 @@ Public ZGRP As Variant
 Public iImage As Long
 
 Sub Main()
-    '    InitXPStyles
+    'InitXPStyles
     '01%[CONN]Provider=MSDASQL.1;Persist Security Info=False;Data Source=ol_logix
     EnabledVisualStyles
     zMES = Month(Date)
     zANO = Year(Date)
     zEMPRESA = 1
+ 
     
-   ' HtmlHelp.HtmlHelp Me.hWnd, StrPtr("c:\develop\modelos\help\img.chm"), HH_DISPLAY_TOC, 0
-    
+'    Adodbfteste GeracArq("c:\develop\modelos\banco\", "JETFOX"), "ba01"
+   
     escIMG.Show
 End Sub
 

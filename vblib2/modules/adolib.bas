@@ -182,10 +182,25 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     'jetfox
     If InStr(cARQTMP, "[JETFOX]") > 0 Then
         cARQ = Replace(cARQ, "[JETFOX]", "")
-        If lWRITE Then
-            cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=ReadWrite|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE"
+        ' PROVIDER=VFPOLEDB.1;Data Source=caminho
+        ' ;SourceType=dbf;Deleted=Yes;Mode=ReadWrite|Share Deny None;Mode=Share Deny None
+        ' ;DELETED=True;CODEPAGE=1252;MVCOUNT=16384;ENGINEBEHAVIOR=90
+        ' ;TABLEVALIDATE=0;REFRESH=5;VARCHARMAPPING=False
+        ' ;ANSI=True;REPROCESS=5;OLE DB Services = 0;
+        '   MVCOUNT - sets the maximum number of variables that Visual FoxPro can maintain.
+        '   ENGINEBEHAVIOR - specifies the SQL Engine compatibility level.
+        '   TABLEVALIDATE - specifies the level of table validation to perform.
+        '   REFRESH - specifies how often local memory buffers are refreshed with changes from other users on the network.
+        '   DELETED=true/false
+        '   ANSI=true/false
+        '   REPROCESS=nnn
+        '   CODEPAGE=nnnn
+        '   VARCHARMAPPING=true/false
+        '   Collating Sequence=cSequenceName
+        If lWRITE Then 'deleted=true tambem no where pode incluir  and deleted()
+            cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=ReadWrite|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE;DELETED=True"
         Else
-            cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=Read|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE"
+            cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=Read|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE;DELETED=True"
         End If
         TipoConn = Array("ADO", cARQ, "DBF")
         Exit Function

@@ -1,5 +1,67 @@
 Attribute VB_Name = "SqlFuncoesAdo"
 Option Explicit
+Public Function Adodbfteste(ByVal cARQ As String, ByVal cTABLE As String) As Boolean
+    Dim cCOM As String
+    Dim oCON As ADODB.Connection
+    Dim oCOMANDO As ADODB.Command
+    Dim nANO As Integer
+    
+    On Error GoTo trataerro
+    Adodbfteste = False
+    nANO = Year(Date)
+    nANO = nANO - 60
+    cCOM = ""
+    Set oCON = New ADODB.Connection
+    Set oCOMANDO = New ADODB.Command
+    oCON.ConnectionTimeout = 120
+    oCON.Open cARQ
+    oCOMANDO.ActiveConnection = oCON
+    
+    'na string de conecao delete =yes
+    'oCOMANDO.CommandType = adCmdText
+    'cCOM = "set deleted on"
+    'oCOMANDO.CommandText = cCOM
+    'oCOMANDO.Execute
+'    cCOM = "set softseek on"
+'    oCOMANDO.CommandText = cCOM
+ '   oCOMANDO.Execute
+ '   cCOM = "set date BRITISH"
+ '   oCOMANDO.CommandText = cCOM
+ '   oCOMANDO.Execute
+'    cCOM = "set epoch to " & StrZero(nANO, 4)
+'    oCOMANDO.CommandText = cCOM
+'    oCOMANDO.Execute
+
+    
+    cCOM = "use " & cTABLE
+    oCOMANDO.CommandText = cCOM
+    oCOMANDO.Execute
+    
+'   cCOM = "append"
+'   oCOMANDO.CommandText = cCOM
+'   oCOMANDO.Execute
+   
+ '     cCOM = ""
+ '   oCOMANDO.CommandText = cCOM
+ '   oCOMANDO.Execute
+ 
+    
+    
+   ' cCOM = ""
+   ' oCOMANDO.CommandText = cCOM
+   ' oCOMANDO.Execute
+   
+    oCON.Close
+    Adodbfteste = True
+    Exit Function
+trataerro:
+    Select Case Err.Number
+    Case Else
+        SayErro "Adodbfteste" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTABLE & Chr(13) & Chr(10) & cCOM & Chr(13) & Chr(10)
+        Exit Function
+    End Select
+End Function
+
 
 Public Function AdoZeradbf(ByVal cARQ As String, ByVal cTABLE As String) As Boolean
     Dim cCOM As String
@@ -67,17 +129,27 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
     Dim oDB As ADODB.Connection
     Dim oCOM As ADODB.Command
     Dim cCONN As String
+   Dim oCOMANDO As ADODB.Command
+   Dim cCOM As String
+   
     On Error GoTo trataerro
     ADOComando = False
     cARQ = GeraConn(cARQ)
-    aRETU = TipoConn(cARQ)                       ''Gera string conneccao
+    aRETU = TipoConn(cARQ)                      ''Gera string conneccao
     If aRETU(0) = "ADO" Then
         cCONN = aRETU(1)
         Set oDB = New ADODB.Connection
         oDB.ConnectionTimeout = 120
         oDB.Open cCONN
-        Set oCOM = New ADODB.Command
-        oCOM.ActiveConnection = oDB
+        'Set oCOM = New ADODB.Command na string de conecao delete =yes
+        'oCOM.ActiveConnection = oDB
+        'If InStr(cCONN, "[JETFOX]") Or InStr(cCONN, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
+        '    Set oCOMANDO = New ADODB.Command
+        '    oCOMANDO.CommandType = adCmdText
+        '    cCOM = "set deleted on"
+        '    oCOMANDO.CommandText = cCOM
+        '    oCOMANDO.Execute
+        'End If
         oCOM.CommandText = cSQL
         oCOM.Execute
         ADOComando = True
@@ -139,9 +211,11 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     Dim oRS              As ADODB.Recordset
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
-    Dim X, nCAMPOS As Integer
+    Dim x, nCAMPOS As Integer
     Dim aRETU, aOPE, eVAL As Variant
     Dim cERRO As String
+     Dim oCOMANDO As ADODB.Command
+    Dim cCOM As String
     
     On Error GoTo errhandler
     
@@ -149,9 +223,9 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     lRSOP = False
     nCAMPOS = UBound(aCAM) + 1
     ReDim aRETU(nCAMPOS)
-    For X = 0 To nCAMPOS - 1
-        aRETU(X) = 0
-    Next X
+    For x = 0 To nCAMPOS - 1
+        aRETU(x) = 0
+    Next x
     
     If Not FileExist(SomaExt(cARQ), True) Then
         SomaSQLAdo = aRETU
@@ -166,22 +240,36 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     oDB.ConnectionTimeout = 120
     oDB.Open cARQ
     lOPEN = True
+    
+    'na string de conecao delete =yes
+    'If InStr(cARQ, "[JETFOX]") Or InStr(cARQ, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
+    '    Set oCOMANDO = New ADODB.Command
+    '    oCOMANDO.ActiveConnection = oDB
+    '    oCOMANDO.CommandType = adCmdText
+    '    cCOM = "set deleted on"
+    '    oCOMANDO.CommandText = cCOM
+    '    oCOMANDO.Execute
+    'End If
+    
+    
     Set oRS = New ADODB.Recordset
     oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
     lRSOP = True
     
+    
+    
     If Not oRS.EOF Then
         oRS.MoveFirst
         While Not oRS.EOF
-            For X = 0 To nCAMPOS - 1
-                aOPE = SepSqlOpe(aCAM(X))
+            For x = 0 To nCAMPOS - 1
+                aOPE = SepSqlOpe(aCAM(x))
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then ''Sem Operacoes
-                    eVAL = oRS(aCAM(X))
+                    eVAL = oRS(aCAM(x))
                 Else
                     eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
                 End If
-                aRETU(X) = aRETU(X) + eVAL
-            Next X
+                aRETU(x) = aRETU(x) + eVAL
+            Next x
             oRS.MoveNext
         Wend
     End If
@@ -213,11 +301,13 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
 
     Dim oDB              As ADODB.Connection
     Dim oRS              As ADODB.Recordset
-    Dim X, nCAMPOS As Integer
+    Dim x, nCAMPOS As Integer
     Dim aRETU, aOPE, eVAL As Variant
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
     Dim cERRO As String
+    Dim oCOMANDO As ADODB.Command
+    Dim cCOM As String
     
     On Error GoTo errhandler
     
@@ -225,9 +315,9 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
     lRSOP = False
     nCAMPOS = UBound(aCAM) + 1
     ReDim aRETU(nCAMPOS)
-    For X = 0 To nCAMPOS - 1
-        aRETU(X) = ""
-    Next X
+    For x = 0 To nCAMPOS - 1
+        aRETU(x) = ""
+    Next x
     
     If Not FileExist(SomaExt(cARQ), True) Then
         PegSQLDeliAdo = aRETU
@@ -241,6 +331,17 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
     oDB.CursorLocation = adUseClient
     oDB.ConnectionTimeout = 120
     oDB.Open cARQ
+    
+    'na string de conecao delete =yes
+  'If InStr(cARQ, "[JETFOX]") Or InStr(cARQ, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
+  '  Set oCOMANDO = New ADODB.Command
+  '  oCOMANDO.ActiveConnection = oDB
+  '  oCOMANDO.CommandType = adCmdText
+  '  cCOM = "set deleted on"
+  '  oCOMANDO.CommandText = cCOM
+  '  oCOMANDO.Execute
+'End If
+  
 
     lOPEN = True
     
@@ -252,20 +353,20 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
     If Not oRS.EOF Then
         oRS.MoveFirst
         While Not oRS.EOF
-            For X = 0 To nCAMPOS - 1
-                aOPE = SepSqlOpe(aCAM(X))
+            For x = 0 To nCAMPOS - 1
+                aOPE = SepSqlOpe(aCAM(x))
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then ''Sem Operacoes
-                    eVAL = oRS(aCAM(X))
+                    eVAL = oRS(aCAM(x))
                 Else
                     eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
                 End If
-                aRETU(X) = aRETU(X) & FixStr(eVAL)
-            Next X
+                aRETU(x) = aRETU(x) & FixStr(eVAL)
+            Next x
             oRS.MoveNext
             If Not oRS.EOF Then
-                For X = 0 To nCAMPOS - 1
-                    aRETU(X) = aRETU(X) & cDELI
-                Next X
+                For x = 0 To nCAMPOS - 1
+                    aRETU(x) = aRETU(x) & cDELI
+                Next x
             End If
 
         Wend
@@ -304,7 +405,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Dim oDB              As ADODB.Connection
     Dim oRS              As ADODB.Recordset
     Dim eVAL, aOPE  As Variant
-    Dim X, nLENVAR, nLENCAM As Long
+    Dim x, nLENVAR, nLENCAM As Long
     'Dim nPOS As Long
     Dim lGRAVA           As Boolean
     Dim cTabela          As String
@@ -315,6 +416,8 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Dim lRSOP As Boolean
     Dim cERRO As String
     Dim oFIELD As ADODB.Field
+     Dim oCOMANDO As ADODB.Command
+    Dim cCOM As String
 
     On Error GoTo errhandler
     lOPEN = False
@@ -328,6 +431,15 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     oDB.CursorLocation = adUseClient
     oDB.ConnectionTimeout = 120
     oDB.Open cARQ
+    'na string de conecao delete =yes
+    'If InStr(cARQ, "[JETFOX]") Or InStr(cARQ, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
+    '    Set oCOMANDO = New ADODB.Command
+    '    oCOMANDO.ActiveConnection = oDB
+    '    oCOMANDO.CommandType = adCmdText
+    '    cCOM = "set deleted on"
+    '    oCOMANDO.CommandText = cCOM
+    '    oCOMANDO.Execute
+    'End If
 
     lOPEN = True
     Set oRS = New ADODB.Recordset
@@ -347,9 +459,9 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
 
     While Not oRS.EOF
 
-        For X = 0 To nITEM - 1                   ''Matriz Vb comeca 0
+        For x = 0 To nITEM - 1                   ''Matriz Vb comeca 0
        
-            Set oFIELD = oRS(aCAM(X))
+            Set oFIELD = oRS(aCAM(x))
             ''nLENCAM = oRS(aCAM(x)).DefinedSize
             ''cTIPO = TipoDado2(oRS(aCAM(x)).type)
         
@@ -359,13 +471,13 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
        
         
             ''Evita Gravar Campos nullos correcao data nula abaixo
-            If IsNull(aVAL(X)) Then
+            If IsNull(aVAL(x)) Then
                 lGRAVA = False
-                eVAL = aVAL(X)
+                eVAL = aVAL(x)
             Else
-                aOPE = SepSqlOpe(aCAM(X))
+                aOPE = SepSqlOpe(aCAM(x))
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then ''Operacao com Campos
-                    eVAL = aVAL(X)               ''Grava o Valor Default
+                    eVAL = aVAL(x)               ''Grava o Valor Default
                 Else
                     eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
                 End If
@@ -402,7 +514,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
                     If aRETU(2) = "MDB" Or aRETU(2) = "MYSQL" Then
                         eVAL = NullDate(aRETU(2))
                         lGRAVA = True
-                        aFOR(X) = ""
+                        aFOR(x) = ""
                     Else
                         lGRAVA = False
                     End If
@@ -410,17 +522,17 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
             End If
         
             If cTIPO = "B" Then
-                aFOR(X) = ""
+                aFOR(x) = ""
             End If
             
       
             ''Efetua a Gravaçao
             If lGRAVA Then
-                oRS(aCAM(X)) = FVar(eVAL, aFOR(X), eVAZIO)
+                oRS(aCAM(x)) = FVar(eVAL, aFOR(x), eVAZIO)
                 'oFIELD = FVar(eVAL, aFOR(X), eVAZIO)
             End If
  
-        Next X
+        Next x
         oRS.Update
         oRS.MoveNext
       
@@ -440,7 +552,7 @@ errhandler:
     End If
     Select Case Err.Number
     Case 3265, 3421, 94
-        cERRO = cERRO & "Campo:" & aCAM(X) & Chr(13) & Chr(10)
+        cERRO = cERRO & "Campo:" & aCAM(x) & Chr(13) & Chr(10)
         ADOErro oRS.ActiveConnection.Errors, cERRO
         Resume Next
     Case -2147217864 '', -2147467259                 'Update Mysql/informix
@@ -468,7 +580,7 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
                              Optional ByVal aIDDES As Variant = 0) As Boolean
     Dim oDB              As ADODB.Connection
     Dim oRS              As ADODB.Recordset
-    Dim X As Long
+    Dim x As Long
     Dim nCAMPOS               As Long
     Dim lTEM As Boolean
     Dim lGRAVA            As Boolean
@@ -478,6 +590,8 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
     Dim cERRO As String
+    Dim oCOMANDO As ADODB.Command
+    Dim cCOM As String
     
     IncluiSQLAdo = False
     On Error GoTo errhandler
@@ -496,6 +610,16 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     oDB.Open cARQ1
     
     lOPEN = True
+    
+    'na string de conecao delete =yes
+    'If InStr(cARQ1, "[JETFOX]") Or InStr(cARQ1, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
+    '    Set oCOMANDO = New ADODB.Command
+    '    oCOMANDO.ActiveConnection = oDB
+    '    oCOMANDO.CommandType = adCmdText
+    '    cCOM = "set deleted on"
+    '    oCOMANDO.CommandText = cCOM
+    '    oCOMANDO.Execute
+    'End If
 
     Set oRS = New ADODB.Recordset
     oRS.Open cSQL, oDB, adOpenStatic, adLockOptimistic
@@ -511,14 +635,14 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     If Not lTEM Then
         
         oRS.AddNew
-        For X = 0 To nITEM - 1                   ''Matriz Vb comeca 0
+        For x = 0 To nITEM - 1                   ''Matriz Vb comeca 0
             lGRAVA = True
             ''Evita Gravar Campos nullos
-            If IsNull(aVAL(X)) Then
+            If IsNull(aVAL(x)) Then
                 lGRAVA = False
             End If
             If lGRAVA Then
-                oRS(aCAM(X)) = aVAL(X)
+                oRS(aCAM(x)) = aVAL(x)
             End If
         Next
         
@@ -530,9 +654,9 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
         If Not IsNumeric(aIDDES) Then            ''Se for numerico nao e matriz
             nCAMPOS = UBound(aIDDES)
             ReDim aRETUID(nCAMPOS + 1)
-            For X = 0 To nCAMPOS
-                aRETUID(X) = oRS(aIDDES(X))
-            Next X
+            For x = 0 To nCAMPOS
+                aRETUID(x) = oRS(aIDDES(x))
+            Next x
             eRETU01 = aRETUID
         End If
         Select Case aRETU(2)
@@ -563,17 +687,17 @@ errhandler:
     End If
     Select Case Err.Number
     Case 3265                                    ''Campo Diferente
-        cERRO = cERRO & "Campo Diferente:" & aCAM(X) & Chr(13) & Chr(10)
+        cERRO = cERRO & "Campo Diferente:" & aCAM(x) & Chr(13) & Chr(10)
         ADOErro oRS.ActiveConnection.Errors, cERRO
         Resume Next
     Case 3315, 94                                'Campo null
         Resume Next
     Case 424                                     ''Campo Inexistente
-        cERRO = cERRO & "Campo Inexistente:" & aCAM(X) & Chr(13) & Chr(10)
+        cERRO = cERRO & "Campo Inexistente:" & aCAM(x) & Chr(13) & Chr(10)
         ADOErro oRS.ActiveConnection.Errors, cERRO
         Resume Next
     Case 3163                                    ''Valor Maior que o Campo
-        cERRO = cERRO & "Valor Maior que o Campo:" & aCAM(X) & Chr(13) & Chr(10)
+        cERRO = cERRO & "Valor Maior que o Campo:" & aCAM(x) & Chr(13) & Chr(10)
         ADOErro oRS.ActiveConnection.Errors, cERRO
         Resume Next
     Case 3219                                    ''close jetfox
@@ -594,13 +718,16 @@ End Function
 Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim oDB         As ADODB.Connection
     Dim oRS         As ADODB.Recordset
-    Dim X           As Long
+    Dim x           As Long
     Dim aRETU       As Variant
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
     Dim cERRO As String
     Dim aOPE As Variant
     Dim eVAL As Variant
+    Dim oCOMANDO As ADODB.Command
+    Dim cCOM As String
+    
 
     On Error GoTo errhandler
     ReDim aRETU(nITEM)
@@ -612,6 +739,17 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     oDB.ConnectionTimeout = 120
     oDB.Open cARQ
 
+'na string de conecao delete =yes
+'If InStr(cARQ, "[JETFOX]") Or InStr(cARQ, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
+'    Set oCOMANDO = New ADODB.Command
+'    oCOMANDO.ActiveConnection = oDB
+'    oCOMANDO.CommandType = adCmdText
+'    cCOM = "set deleted on"
+'    oCOMANDO.CommandText = cCOM
+'    oCOMANDO.Execute
+'End If
+
+
     lOPEN = True
     Set oRS = New ADODB.Recordset
     oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
@@ -621,15 +759,15 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
 
     If Not oRS.EOF Then
         lRETU = True
-        For X = 0 To nITEM - 1                   ''Matriz Vb comeca 0
-            aOPE = SepSqlOpe(aCAM(X))
+        For x = 0 To nITEM - 1                   ''Matriz Vb comeca 0
+            aOPE = SepSqlOpe(aCAM(x))
             If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then ''Sem Operacoes
-                eVAL = oRS(aCAM(X))
+                eVAL = oRS(aCAM(x))
             Else
                 eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
             End If
               
-            aRETU(X) = FVar(eVAL, aFOR(X), aPAD(X))
+            aRETU(x) = FVar(eVAL, aFOR(x), aPAD(x))
         Next
     Else
         lRETU = False
@@ -649,13 +787,13 @@ errhandler:
     End If
     Select Case Err.Number
     Case 3265, 5
-        aRETU(X) = aPAD(X)
-        cERRO = cERRO & "Campo:" & aCAM(X) & Chr(13) & Chr(10)
+        aRETU(x) = aPAD(x)
+        cERRO = cERRO & "Campo:" & aCAM(x) & Chr(13) & Chr(10)
         ADOErro oRS.ActiveConnection.Errors, cERRO
         Resume Next
     Case 94                                      ''Campo Esta com Null Pega Padrao
         ''SayErro (" PEGSQL Campo:" & aCAM(x))
-        aRETU(X) = aPAD(X)
+        aRETU(x) = aPAD(x)
         Resume Next
     Case Else
         If lOPEN Then
@@ -695,6 +833,8 @@ Public Function PegUltSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal c
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
     Dim cERRO As String
+   Dim oCOMANDO As ADODB.Command
+    Dim cCOM As String
 
     On Error GoTo errhandler
 
@@ -706,6 +846,17 @@ Public Function PegUltSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal c
     oDB.CursorLocation = adUseClient
     oDB.ConnectionTimeout = 120
     oDB.Open cARQ
+    
+   'na string de conecao delete =yes
+  'If InStr(cARQ, "[JETFOX]") Or InStr(cARQ, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
+  '  Set oCOMANDO = New ADODB.Command
+  '  oCOMANDO.ActiveConnection = oDB
+  '  oCOMANDO.CommandType = adCmdText
+  '  cCOM = "set deleted on"
+  '  oCOMANDO.CommandText = cCOM
+  '  oCOMANDO.Execute
+'End If
+  
 
     lOPEN = True
     Set oRS = New ADODB.Recordset
@@ -759,13 +910,18 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
     Dim cARQORI1 As String
     Dim cARQDES1 As String
     Dim aRETU As Variant
-    Dim X As Integer
+    Dim x As Integer
     Dim nCAMPOS As Integer
     Dim aVALORI As Variant
     Dim aRETUID As Variant
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
     Dim cERRO As String
+     Dim oCOMANDO As ADODB.Command
+     Dim OCOMANDO2 As ADODB.Command
+     
+     
+    Dim cCOM As String
     
     On Error GoTo errhandler
 
@@ -787,10 +943,32 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
     oDB.ConnectionTimeout = 120
     oDB.Open cARQORI1
     
+ 'na string de conecao delete =yes
+'If InStr(cARQORI, "[JETFOX]") Or InStr(cARQORI, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
+'    Set oCOMANDO = New ADODB.Command
+'    oCOMANDO.ActiveConnection = oDB
+'    oCOMANDO.CommandType = adCmdText
+'    cCOM = "set deleted on"
+'    oCOMANDO.CommandText = cCOM
+'    oCOMANDO.Execute
+'End If
+    
+    
     Set oDBDES = New ADODB.Connection
     oDBDES.CursorLocation = adUseClient
     oDBDES.ConnectionTimeout = 120
     oDBDES.Open cARQDES1
+    
+'na string de conecao delete =yes
+'If InStr(cARQDES, "[JETFOX]") Or InStr(cARQDES, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
+'    Set OCOMANDO2 = New ADODB.Command
+'    OCOMANDO2.ActiveConnection = oDBDES
+'    OCOMANDO2.CommandType = adCmdText
+'    cCOM = "set deleted on"
+'    OCOMANDO2.CommandText = cCOM
+'    OCOMANDO2.Execute
+'End If
+    
     
     lOPEN = True
   
@@ -809,9 +987,9 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
             If Not IsNumeric(aCAMORI) Then       ''Se for numerico nao e matriz
                 nCAMPOS = UBound(aCAMORI)
                 ReDim aVALORI(nCAMPOS + 1)
-                For X = 0 To nCAMPOS
-                    aVALORI(X) = oRS(aCAMORI(X))
-                Next X
+                For x = 0 To nCAMPOS
+                    aVALORI(x) = oRS(aCAMORI(x))
+                Next x
             End If
             If InStr(cOPEORI, "DEL") > 0 Then
                 oRS.Delete
@@ -824,15 +1002,15 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
             
             If Not IsNumeric(aCAMDES) Then       ''Se for numerico nao e matriz
                 nCAMPOS = UBound(aCAMDES)
-                For X = 0 To nCAMPOS
-                    oRSDES(aCAMDES(X)) = aVALORI(X)
-                Next X
+                For x = 0 To nCAMPOS
+                    oRSDES(aCAMDES(x)) = aVALORI(x)
+                Next x
             End If
             If Not IsNumeric(aOUTDES) Then       ''Se for numerico nao e matriz
                 nCAMPOS = UBound(aOUTDES)
-                For X = 0 To nCAMPOS
-                    oRSDES(aOUTDES(X)) = aOUTORI(X)
-                Next X
+                For x = 0 To nCAMPOS
+                    oRSDES(aOUTDES(x)) = aOUTORI(x)
+                Next x
             End If
             Select Case aRETU(2)
             Case "SQLSERVER", "MDB", "MYSQL"
@@ -843,9 +1021,9 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
             If Not IsNumeric(aIDDES) Then        ''Se for numerico nao e matriz
                 nCAMPOS = UBound(aIDDES)
                 ReDim aRETUID(nCAMPOS + 1)
-                For X = 0 To nCAMPOS
-                    aRETUID(X) = oRSDES(aIDDES(X))
-                Next X
+                For x = 0 To nCAMPOS
+                    aRETUID(x) = oRSDES(aIDDES(x))
+                Next x
                 eRETU01 = aRETUID
             End If
             Select Case aRETU(2)
@@ -881,7 +1059,7 @@ errhandler:
 End Function
 
 Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String = "")
-    Dim errorObject As ADODB.error
+    Dim errorObject As ADODB.Error
     For Each errorObject In oErro
         cERRO = cERRO & " Ado Erro Numero: " & errorObject.Number & vbCrLf
         cERRO = cERRO & " Ado Descricao  : " & errorObject.Description & vbCrLf
