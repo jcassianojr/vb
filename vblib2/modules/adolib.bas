@@ -69,8 +69,16 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     If InStr(cARQ, "[") > 0 Then                 ''ja e uma connecao
         Exit Function
     End If
-    If cTIPO = "JETMDB" Or cTIPO = "MDB" Then
+    If cTIPO = "JETMDB" Or cTIPO = "MDB" Or InStr(cARQ, ".MDB") > 0 Then
         GeraConn = "[JETMDB]" & cARQ
+        Exit Function
+    End If
+    If cTIPO = "JETFOX" Or cTIPO = "FOX" Or cTIPO = "DBF" Then
+        GeraConn = "[JETFOX]" & cARQ
+        Exit Function
+    End If
+    If cTIPO = "SDECDX" Or cTIPO = "SDEFOX" Then
+        GeraConn = "[SDECDX]" & cARQ
         Exit Function
     End If
     If cTIPO = "A16MDB" Or cTIPO = "A16JETMDB" Then
@@ -81,65 +89,61 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
         GeraConn = "[A12MDB]" & cARQ
         Exit Function
     End If
-    If InStr(cARQ, ".MDB") > 0 Then
-        GeraConn = "[JETMDB]" & cARQ
-        Exit Function
-    End If
-    If cTIPO = "JETFOX" Or cTIPO = "FOX" Then
+    If InStr(cARQ, ".DBF") > 0 Then  'DBF
+        nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
+        cARQ = Mid(cARQ, 1, nPOS)
         GeraConn = "[JETFOX]" & cARQ
         Exit Function
     End If
-    If cTIPO = "SDECDX" Or cTIPO = "SDEFOX" Then
-        GeraConn = "[SDECDX]" & cARQ
-        Exit Function
-    End If
-    If InStr(cARQ, ".DBF") > 0 Or InStr(cARQ, ".DB") Then 'DBF ou paradox
+    If InStr(cARQ, ".DB") Then  ' paradox
         nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
         cARQ = Mid(cARQ, 1, nPOS)
+        GeraConn = "[JETPDX5]" & cARQ
+        Exit Function
     End If
     Select Case cTIPO
-    Case "XLS"
-        GeraConn = "[XLS]" & cARQ
-    Case "XLSX"
-        GeraConn = "[XLSX]" & cARQ
-    Case "XLSDRV"
-        GeraConn = "[XLSDRV]" & cARQ
-    Case "JETTXT"
-        GeraConn = "[JETTXT]" & cARQ
-    Case "DBFIII"
-        GeraConn = "[JETDBFIII]" & cARQ
-    Case "ADSDX"
-        GeraConn = "[ADSCDX]" & cARQ
-    Case "ADSNTX"
-        GeraConn = "[ADSNTX]" & cARQ
-    Case "ADSADT"
-        GeraConn = "[ADSADT]" & cARQ
-    Case "SDENTX"
-        GeraConn = "[SDENTX]" & cARQ
-    Case "SDENSX"
-        GeraConn = "[SDENSX]" & cARQ
-    Case "PDX3"
-        GeraConn = "[JETPDX3]" & cARQ
-    Case "PDX4"
-        GeraConn = "[JETPDX4]" & cARQ
-    Case "PDX5"
-        GeraConn = "[JETPDX5]" & cARQ
-    Case "A12DBFIII"
-        GeraConn = "[A12DBFIII]" & cARQ
-    Case "A12PDX3"
-        GeraConn = "[A12PDX3]" & cARQ
-    Case "A12PDX4"
-        GeraConn = "[A12PDX4]" & cARQ
-    Case "A12PDX5"
-        GeraConn = "[A12PDX5]" & cARQ
-    Case "A16DBFIII"
-        GeraConn = "[A16DBFIII]" & cARQ
-    Case "A16PDX3"
-        GeraConn = "[A16PDX3]" & cARQ
-    Case "A16PDX4"
-        GeraConn = "[A16PDX4]" & cARQ
-    Case "A16PDX5"
-        GeraConn = "[A16PDX5]" & cARQ
+        Case "XLS"
+            GeraConn = "[XLS]" & cARQ
+        Case "XLSX"
+            GeraConn = "[XLSX]" & cARQ
+        Case "XLSDRV"
+            GeraConn = "[XLSDRV]" & cARQ
+        Case "JETTXT"
+            GeraConn = "[JETTXT]" & cARQ
+        Case "DBFIII"
+            GeraConn = "[JETDBFIII]" & cARQ
+        Case "ADSDX"
+            GeraConn = "[ADSCDX]" & cARQ
+        Case "ADSNTX"
+            GeraConn = "[ADSNTX]" & cARQ
+        Case "ADSADT"
+            GeraConn = "[ADSADT]" & cARQ
+        Case "SDENTX"
+            GeraConn = "[SDENTX]" & cARQ
+        Case "SDENSX"
+            GeraConn = "[SDENSX]" & cARQ
+        Case "PDX3"
+            GeraConn = "[JETPDX3]" & cARQ
+        Case "PDX4"
+            GeraConn = "[JETPDX4]" & cARQ
+        Case "PDX5"
+            GeraConn = "[JETPDX5]" & cARQ
+        Case "A12DBFIII"
+            GeraConn = "[A12DBFIII]" & cARQ
+        Case "A12PDX3"
+            GeraConn = "[A12PDX3]" & cARQ
+        Case "A12PDX4"
+            GeraConn = "[A12PDX4]" & cARQ
+        Case "A12PDX5"
+            GeraConn = "[A12PDX5]" & cARQ
+        Case "A16DBFIII"
+            GeraConn = "[A16DBFIII]" & cARQ
+        Case "A16PDX3"
+            GeraConn = "[A16PDX3]" & cARQ
+        Case "A16PDX4"
+            GeraConn = "[A16PDX4]" & cARQ
+        Case "A16PDX5"
+            GeraConn = "[A16PDX5]" & cARQ
     End Select
 End Function
 
@@ -148,6 +152,8 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     Dim cARQTMP As String
     Dim cJETUSO As String
     Dim lTEMMDB As Boolean
+    Dim cADSTIP As String
+    Dim cADSNOM As String
     lTEMMDB = False
     TipoConn = Array("ADO", cARQ, "???")
     cARQTMP = UCase(cARQ)
@@ -236,6 +242,11 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
         End If
         Exit Function
     End If
+    If InStr(cARQTMP, "[SQLSERVER]") > 0 Then
+        cARQ = Replace(cARQ, "[SQLSERVER]", "")
+        TipoConn = Array("ADO", cARQ, "SQLSERVER")
+        Exit Function
+    End If
     If InStr(cARQTMP, "[A12MDB]") > 0 Then
         cARQ = Replace(cARQ, "[A12MDB]", "")
         If Len(cUSER) > 0 Then
@@ -258,13 +269,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
         Else
             cARQ = cARQ & ";Mode=Share Deny None" '";Mode=Read"
         End If
-   
         TipoConn = Array("ADO", cARQ, "MDB")
-        Exit Function
-    End If
-    If InStr(cARQTMP, "[SQLSERVER]") > 0 Then
-        cARQ = Replace(cARQ, "[SQLSERVER]", "")
-        TipoConn = Array("ADO", cARQ, "SQLSERVER")
         Exit Function
     End If
     If InStr(cARQTMP, "[MYSQL]") > 0 Then
@@ -301,53 +306,35 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     'ADS
     If InStr(cARQTMP, "[ADS") > 0 Then
         If InStr(cARQTMP, "[ADSCDX]") > 0 Then
-            cARQ = Replace(cARQ, "[ADSCDX]", "")
-            cARQ = "Provider=Advantage.OLEDB.1;" & _
-                    "Mode=Share Deny None;" & _
-                    "Show Deleted Records in DBF Tables with Advantage=False;" & _
-                    "Data Source=" & cARQ & ";Advantage Server Type=ADS_Local_Server;" & _
-                    "TableType=ADS_CDX;Security Mode=ADS_IGNORERIGHTS;" & _
-                    "Lock Mode=Compatible;" & _
-                    "Use NULL values in DBF Tables with Advantage=True;" & _
-                    "Exclusive=No;Deleted=No;" & _
-                    "Persist Security Info=False;Advantage Character Data Type=ADS_OEM;"
-            'cARQ = cJetADV & cARQ & ";Persist Security Info=False;Advantage Character Data Type=ADS_OEM;Advantage Table Type=ADS_CDX"
-            TipoConn = Array("ADO", cARQ, "ADSCDX")
-            Exit Function
+          cADSTIP = "ADS_CDX"
+          cADSNOM = "ADSCDX"
         End If
         If InStr(cARQTMP, "[ADSNTX]") > 0 Then
-            cARQ = Replace(cARQ, "[ADSNTX]", "")
-            cARQ = "Provider=Advantage.OLEDB.1;" & _
+          cADSTIP = "ADS_CDX"
+          cADSNOM = "ADSCDX"
+        End If
+        If InStr(cARQTMP, "[ADSADDT]") > 0 Then
+          cADSTIP = "ADS_ADT"
+          cADSNOM = "ADSADT"
+        End If
+        cARQ = Replace(cARQ, "[" + cADSNOM + "]", "")
+        cARQ = "Provider=Advantage.OLEDB.1;" & _
                     "Mode=Share Deny None;" & _
                     "Show Deleted Records in DBF Tables with Advantage=False;" & _
                     "Data Source=" & cARQ & ";Advantage Server Type=ADS_Local_Server;" & _
-                    "TableType=ADS_NTX;Security Mode=ADS_IGNORERIGHTS;" & _
+                    "TableType=" + cADSTIP + ";Security Mode=ADS_IGNORERIGHTS;" & _
                     "Lock Mode=Compatible;" & _
                     "Use NULL values in DBF Tables with Advantage=True;" & _
                     "Exclusive=No;Deleted=No;" & _
                     "Persist Security Info=False;Advantage Character Data Type=ADS_OEM;"
-'            cARQ = cJetADV & cARQ & ";Persist Security Info=False;Advantage Character Data Type=ADS_OEM;Advantage Table Type=ADS_NTX"
-            TipoConn = Array("ADO", cARQ, "ADSNTX")
-            Exit Function
-        End If
-        If InStr(cARQTMP, "[ADSADT]") > 0 Then
-            cARQ = Replace(cARQ, "[ADSADT]", "")
-            cARQ = "Provider=Advantage.OLEDB.1;" & _
-                    "Mode=Share Deny None;" & _
-                    "Show Deleted Records in DBF Tables with Advantage=False;" & _
-                    "Data Source=" & cARQ & ";Advantage Server Type=ADS_Local_Server;" & _
-                    "TableType=ADS_ADT;Security Mode=ADS_IGNORERIGHTS;" & _
-                    "Lock Mode=Compatible;" & _
-                    "Use NULL values in DBF Tables with Advantage=True;" & _
-                    "Exclusive=No;Deleted=No;" & _
-                    "Persist Security Info=False;Advantage Character Data Type=ADS_OEM;"
-'            cARQ = cJetADV & cARQ & ";Persist Security Info=False;Advantage Character Data Type=ADS_OEM;Advantage Table Type=ADS_ADT"
-            TipoConn = Array("ADO", cARQ, "ADSADT")
-            Exit Function
-        End If
+        TipoConn = Array("ADO", cARQ, cADSNOM)
+        Exit Function
     End If
     'tratamentos JET
-    cJETUSO = cJetPro
+    cJETUSO = cJetPro ''usa padrao jet mas a12 a 16 tem especifico
+    'a12MDB a16MDB acima
+    'aqui a12 a16 pdx dbiii seta o jetuso
+    'retorno abaixo com o jet jeta12 ou jeta16
     If InStr(cARQTMP, "[A12") > 0 Then
         cARQTMP = Replace(cARQTMP, "[A12", "[JET")
         cARQ = Replace(cARQ, "[A12", "[JET")
@@ -370,21 +357,35 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
         TipoConn = Array("ADO", cARQ, "XLSX")
         Exit Function
     End If
-    If InStr(cARQTMP, "[JETTXT]") > 0 Then
-        'Delimited      File is considered as a comma delimited file. Comma is the default delimited character.
+    If InStr(cARQTMP, "[JETTXTPIPE]") > 0 Then
         'Delimited(x)   File is considered as a delimited file with delimited character ‘x’.
-        'TabDelimited   File is considered as a tab delimited file.
         cARQ = Replace(cARQ, "[JETTXT]", "")
         cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;FMT=Delimited(|)" & Chr(34) & ";"
         TipoConn = Array("ADO", cARQ, "JETXT")
         Exit Function
     End If
+    If InStr(cARQTMP, "[JETTXTTAB]") > 0 Then
+        'TabDelimited   File is considered as a tab delimited file.
+        cARQ = Replace(cARQ, "[JETTXT]", "")
+        cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;FMT=TabDelimited" & Chr(34) & ";"
+        TipoConn = Array("ADO", cARQ, "JETXT")
+        Exit Function
+    End If
+    If InStr(cARQTMP, "[JETTXTCSV]") > 0 Or InStr(cARQTMP, "[JETTXT]") > 0 Then
+        'Delimited      File is considered as a comma delimited file. Comma is the default delimited character.
+        cARQ = Replace(cARQ, "[JETTXT]", "")
+        cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;FMT=Delimited" & Chr(34) & ";"
+        TipoConn = Array("ADO", cARQ, "JETXT")
+        Exit Function
+    End If
+    'dbfiii com jet a12 ou a16
     If InStr(cARQTMP, "[JETDBFIII]") > 0 Then
         cARQ = Replace(cARQ, "[JETDBFIII]", "")
         cARQ = cJETUSO & cARQ & cJetExt & "DBASE III" & ";"
         TipoConn = Array("ADO", cARQ, "DBF")
         Exit Function
     End If
+    'paradox com jet a12 ou a16
     If InStr(cARQTMP, "[JETPD") > 0 Then
         If InStr(cARQTMP, "[JETPDX3]") > 0 Then
             cARQ = Replace(cARQ, "[JETPDX3]", "")
