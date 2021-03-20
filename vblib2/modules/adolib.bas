@@ -198,9 +198,9 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
         '   VARCHARMAPPING=true/false
         '   Collating Sequence=cSequenceName
         If lWRITE Then 'deleted=true tambem no where pode incluir  and deleted()
-            cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=ReadWrite|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE;DELETED=True"
+            cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=ReadWrite|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE;DELETED=True;" 'NULL=NO"
         Else
-            cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=Read|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE;DELETED=True"
+            cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=Read|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE;DELETED=True;" 'NULL=NO"
         End If
         TipoConn = Array("ADO", cARQ, "DBF")
         Exit Function

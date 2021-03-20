@@ -1,6 +1,6 @@
 Attribute VB_Name = "SqlFuncoesAdo"
 Option Explicit
-Public Function Adodbfteste(ByVal cARQ As String, ByVal cTABLE As String) As Boolean
+Public Function Adodbfteste(ByVal cARQ As String, ByVal cTABLE As String, ByVal CCOMANDO As String) As Boolean
     Dim cCOM As String
     Dim oCON As ADODB.Connection
     Dim oCOMANDO As ADODB.Command
@@ -37,6 +37,15 @@ Public Function Adodbfteste(ByVal cARQ As String, ByVal cTABLE As String) As Boo
     oCOMANDO.CommandText = cCOM
     oCOMANDO.Execute
     
+      cCOM = "Set null off"
+    oCOMANDO.CommandText = cCOM
+    oCOMANDO.Execute
+    
+   oCOMANDO.CommandText = CCOMANDO
+   oCOMANDO.Execute
+ 
+    
+    'insert into mail (numero,erro,data,hora,de,destino,assunto,texto) values (recno(),"erro",ctod(date()),"12:00","de","destino","assunto","texto")
 '   cCOM = "append"
 '   oCOMANDO.CommandText = cCOM
 '   oCOMANDO.Execute
@@ -431,15 +440,16 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     oDB.CursorLocation = adUseClient
     oDB.ConnectionTimeout = 120
     oDB.Open cARQ
-    'na string de conecao delete =yes
-    'If InStr(cARQ, "[JETFOX]") Or InStr(cARQ, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
-    '    Set oCOMANDO = New ADODB.Command
-    '    oCOMANDO.ActiveConnection = oDB
-    '    oCOMANDO.CommandType = adCmdText
-    '    cCOM = "set deleted on"
-    '    oCOMANDO.CommandText = cCOM
-    '    oCOMANDO.Execute
-    'End If
+    
+ 'Set null off permitido deixar campos em branco set deleted on ja esta na string de conecao
+    If InStr(cARQ, "VFPOLEDB") Then
+        Set oCOMANDO = New ADODB.Command
+        oCOMANDO.ActiveConnection = oDB
+        oCOMANDO.CommandType = adCmdText
+        cCOM = "Set null off"
+        oCOMANDO.CommandText = cCOM
+        oCOMANDO.Execute
+    End If
 
     lOPEN = True
     Set oRS = New ADODB.Recordset
@@ -611,16 +621,16 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     
     lOPEN = True
     
-    'na string de conecao delete =yes
-    'If InStr(cARQ1, "[JETFOX]") Or InStr(cARQ1, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
-    '    Set oCOMANDO = New ADODB.Command
-    '    oCOMANDO.ActiveConnection = oDB
-    '    oCOMANDO.CommandType = adCmdText
-    '    cCOM = "set deleted on"
-    '    oCOMANDO.CommandText = cCOM
-    '    oCOMANDO.Execute
-    'End If
-
+    'Set null off permitido deixar campos em branco set deleted on ja esta na string de conecao
+    If InStr(cARQ1, "VFPOLEDB") Then
+        Set oCOMANDO = New ADODB.Command
+        oCOMANDO.ActiveConnection = oDB
+        oCOMANDO.CommandType = adCmdText
+        cCOM = "Set null off"
+        oCOMANDO.CommandText = cCOM
+        oCOMANDO.Execute
+    End If
+ 
     Set oRS = New ADODB.Recordset
     oRS.Open cSQL, oDB, adOpenStatic, adLockOptimistic
 
@@ -943,32 +953,21 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
     oDB.ConnectionTimeout = 120
     oDB.Open cARQORI1
     
- 'na string de conecao delete =yes
-'If InStr(cARQORI, "[JETFOX]") Or InStr(cARQORI, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
-'    Set oCOMANDO = New ADODB.Command
-'    oCOMANDO.ActiveConnection = oDB
-'    oCOMANDO.CommandType = adCmdText
-'    cCOM = "set deleted on"
-'    oCOMANDO.CommandText = cCOM
-'    oCOMANDO.Execute
-'End If
-    
-    
     Set oDBDES = New ADODB.Connection
     oDBDES.CursorLocation = adUseClient
     oDBDES.ConnectionTimeout = 120
     oDBDES.Open cARQDES1
     
-'na string de conecao delete =yes
-'If InStr(cARQDES, "[JETFOX]") Or InStr(cARQDES, "VFPOLEDB") Then ''delete on para foxpro nao usar registro deletados
-'    Set OCOMANDO2 = New ADODB.Command
-'    OCOMANDO2.ActiveConnection = oDBDES
-'    OCOMANDO2.CommandType = adCmdText
-'    cCOM = "set deleted on"
-'    OCOMANDO2.CommandText = cCOM
-'    OCOMANDO2.Execute
-'End If
-    
+
+   'Set null off permitido deixar campos em branco set deleted on ja esta na string de conecao
+    If InStr(cARQDES1, "VFPOLEDB") Then
+        Set OCOMANDO2 = New ADODB.Command
+        OCOMANDO2.ActiveConnection = oDBDES
+        OCOMANDO2.CommandType = adCmdText
+        cCOM = "Set null off"
+        OCOMANDO2.CommandText = cCOM
+        OCOMANDO2.Execute
+    End If
     
     lOPEN = True
   
