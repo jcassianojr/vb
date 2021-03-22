@@ -108,6 +108,8 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
             GeraConn = "[XLSX]" & cARQ
         Case "XLSDRV"
             GeraConn = "[XLSDRV]" & cARQ
+            
+            
         Case "JETTXT"
             GeraConn = "[JETTXT]" & cARQ
         Case "DBFIII"
@@ -136,6 +138,14 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
             GeraConn = "[A12PDX4]" & cARQ
         Case "A12PDX5"
             GeraConn = "[A12PDX5]" & cARQ
+        Case "A16XLS"
+            GeraConn = "[A16XLS]" & cARQ
+        Case "A16XLSX"
+            GeraConn = "[A16XLSX]" & cARQ
+        Case "A16XLSM"
+            GeraConn = "[A16XLSM]" & cARQ
+        Case "A16XLSB"
+            GeraConn = "[A16XLSB]" & cARQ
         Case "A16DBFIII"
             GeraConn = "[A16DBFIII]" & cARQ
         Case "A16PDX3"
@@ -154,6 +164,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     Dim lTEMMDB As Boolean
     Dim cADSTIP As String
     Dim cADSNOM As String
+    Dim cXLSVER As String '
     lTEMMDB = False
     TipoConn = Array("ADO", cARQ, "???")
     cARQTMP = UCase(cARQ)
@@ -334,29 +345,45 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     cJETUSO = cJetPro ''usa padrao jet mas a12 a 16 tem especifico
     'a12MDB a16MDB acima
     'aqui a12 a16 pdx dbiii seta o jetuso
-    'retorno abaixo com o jet jeta12 ou jeta16
+    'retorno abaixo com o jet jeta12 ou jeTa16
+    cXLSVER = "8.0"
     If InStr(cARQTMP, "[A12") > 0 Then
         cARQTMP = Replace(cARQTMP, "[A12", "[JET")
         cARQ = Replace(cARQ, "[A12", "[JET")
         cJETUSO = cJetA12
+        cXLSVER = "12.0"
     End If
     If InStr(cARQTMP, "[A16") > 0 Then
         cARQTMP = Replace(cARQTMP, "[A16", "[JET")
         cARQ = Replace(cARQ, "[A16", "[JET")
         cJETUSO = cJetA16
+        cXLSVER = "12.0"
     End If
     If InStr(cARQTMP, "[XLS]") > 0 Then
         cARQ = Replace(cARQ, "[XLS]", "")
-        cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "Excel 8.0;HDR=Yes" & Chr(34) & ";"
+        cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "Excel " + cXLSVER + ";HDR=Yes" & Chr(34) & ";"
         TipoConn = Array("ADO", cARQ, "XLS")
         Exit Function
     End If
     If InStr(cARQTMP, "[XLSX]") > 0 Then
         cARQ = Replace(cARQ, "[XLSX]", "")
-        cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "Excel 12.0;HDR=Yes" & Chr(34) & ";"
+        cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "Excel " + cXLSVER + ";HDR=Yes" & Chr(34) & ";"
         TipoConn = Array("ADO", cARQ, "XLSX")
         Exit Function
     End If
+    If InStr(cARQTMP, "[XLSM]") > 0 Then
+        cARQ = Replace(cARQ, "[XLSM]", "")
+        cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "Excel " + cXLSVER + ";HDR=Yes" & Chr(34) & ";"
+        TipoConn = Array("ADO", cARQ, "XLSM")
+        Exit Function
+    End If
+     If InStr(cARQTMP, "[XLSB]") > 0 Then
+        cARQ = Replace(cARQ, "[XLSB]", "")
+        cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "Excel 12.0;HDR=Yes" & Chr(34) & ";"
+        TipoConn = Array("ADO", cARQ, "XLSB")
+        Exit Function
+    End If
+    
     If InStr(cARQTMP, "[JETTXTPIPE]") > 0 Then
         'Delimited(x)   File is considered as a delimited file with delimited character ‘x’.
         cARQ = Replace(cARQ, "[JETTXT]", "")

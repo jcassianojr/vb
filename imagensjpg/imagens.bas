@@ -18,7 +18,7 @@ Dim nNUMERO As Integer
 
 '     nNUMERO = FixInt(PegMAXSQL(GeracArq("c:\develop\modelos\mail\", "JETFOX"), "MAIL", "NUMERO", 0)) + 1
 
-nNUMERO = FixInt(PegMAXSQL(GeracArq("c:\develop\modelos\banco\", "JETFOX"), "BA01", "NUMERO", 0)) + 1
+'nNUMERO = FixInt(PegMAXSQL(GeracArq("c:\develop\modelos\banco\", "JETFOX"), "BA01", "NUMERO", 0)) + 1
 
 
   '  CCOMANDO = "insert into mail (numero) values (" + Str(nNUMERO) + ")"
@@ -28,10 +28,10 @@ nNUMERO = FixInt(PegMAXSQL(GeracArq("c:\develop\modelos\banco\", "JETFOX"), "BA0
     
  '   IncluiSQL GeracArq("c:\develop\modelos\mail\", "JETFOX"), "SELECT * FROM MAIL WHERE NUMERO=" & nNUMERO, 3, Array("NUMERO", "DATA", "HORA"), Array(nNUMERO, Date, FixStr(Time)), False, False
     
-     IncluiSQL GeracArq("c:\develop\modelos\banco\", "JETFOX"), "SELECT * FROM BA01 WHERE NUMERO=" & nNUMERO, 1, Array("NUMERO"), Array(nNUMERO), False, False
+ '    IncluiSQL GeracArq("c:\develop\modelos\banco\", "JETFOX"), "SELECT * FROM BA01 WHERE NUMERO=" & nNUMERO, 1, Array("NUMERO"), Array(nNUMERO), False, False
     
    
-  '  escIMG.Show
+    escIMG.Show
 End Sub
 
 Public Function gravalog(Optional ByVal e01, Optional ByVal e02, Optional ByVal e03)
