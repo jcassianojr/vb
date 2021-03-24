@@ -243,15 +243,15 @@ Private Sub gridrptusr_KeyPress(KeyAscii As Integer)
 
 End Sub
 
-Private Sub gridrptusr_SelChange()
-    With gridrptusr
-        If .Rows > 2 Then
-            .Col = .Cols - 1
-            .ColSel = 0
-            .TopRow = .Row
-        End If
-    End With
-End Sub
+'Private Sub gridrptusr_SelChange()
+'    With gridrptusr
+'        If .Rows > 2 Then
+'            .Col = .Cols - 1
+'            .ColSel = 0
+'            .TopRow = .Row
+ '       End If
+ '   End With
+'End Sub
 
 Private Sub gridusr_KeyPress(KeyAscii As Integer)
     If KeyAscii > 31 And KeyAscii < 123 Then
@@ -260,15 +260,15 @@ Private Sub gridusr_KeyPress(KeyAscii As Integer)
 
 End Sub
 
-Private Sub gridusr_SelChange()
-    With gridusr
-        If .Rows > 2 Then
-            .Col = .Cols - 1
-            .ColSel = 0
-            .TopRow = .Row
-        End If
-    End With
-End Sub
+'Private Sub gridusr_SelChange()
+'    With gridusr
+'        If .Rows > 2 Then
+'            .Col = .Cols - 1
+'            .ColSel = 0
+'            .TopRow = .Row
+'        End If
+'    End With
+'End Sub
 
 Private Sub incusrrpt_Click()
     Dim sSQL As String

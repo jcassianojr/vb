@@ -95,7 +95,7 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
         GeraConn = "[JETFOX]" & cARQ
         Exit Function
     End If
-    If InStr(cARQ, ".DB") Then  ' paradox
+    If InStr(cARQ, ".PD") Then  ' paradox
         nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
         cARQ = Mid(cARQ, 1, nPOS)
         GeraConn = "[JETPDX5]" & cARQ
@@ -108,9 +108,9 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
             GeraConn = "[XLSX]" & cARQ
         Case "XLSDRV"
             GeraConn = "[XLSDRV]" & cARQ
-        Case "SQLLITE" 'http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
+       Case "SQLLITE" Or InStr(LCase(cARQ), ".db") > 0 'http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
             GeraConn = "[SQLLITE]" & cARQ
-        Case "SQLLITE3" Or InStr(LCase(cARQTMP), ".sqlite3") > 0 'http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
+        Case "SQLLITE3" Or InStr(LCase(cARQ), ".sqlite3") Or InStr(LCase(cARQ), ".fossil") Or InStr(LCase(cARQ), ".db3") > 0  'http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
             GeraConn = "[SQLLITE3]" & cARQ
         Case "JETTXT"
             GeraConn = "[JETTXT]" & cARQ

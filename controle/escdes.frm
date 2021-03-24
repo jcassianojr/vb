@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form escDes 
    Caption         =   "Selecione o Processo  desejado:"
@@ -144,17 +144,17 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
 
 End Sub
 
-Private Sub Grid_SelChange()
+'Private Sub Grid_SelChange()
 
-    With Grid
-        If .Rows > 2 Then
-            .Col = .Cols - 1
-            .ColSel = 0
-            .TopRow = .Row
-        End If
-    End With
+   ' With Grid
+   '     If .Rows > 2 Then
+   '         .Col = .Cols - 1
+   '         .ColSel = 0
+   '         .TopRow = .Row
+   '     End If
+   ' End With
 
-End Sub
+'End Sub
 
 Private Sub incluir_Click()
     Dim sSQL As String

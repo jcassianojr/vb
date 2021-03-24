@@ -1,16 +1,16 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form escRPTGRP 
    Caption         =   "Escolha o grupo de Relatorio"
-   ClientHeight    =   5775
+   ClientHeight    =   6135
    ClientLeft      =   165
    ClientTop       =   450
-   ClientWidth     =   8880
+   ClientWidth     =   9345
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5775
-   ScaleWidth      =   8880
+   ScaleHeight     =   6135
+   ScaleWidth      =   9345
    StartUpPosition =   2  'CenterScreen
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
@@ -34,13 +34,13 @@ Begin VB.Form escRPTGRP
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
-      Height          =   5775
-      Left            =   7410
+      Height          =   6135
+      Left            =   7875
       TabIndex        =   1
       Top             =   0
       Width           =   1470
       _ExtentX        =   2593
-      _ExtentY        =   10186
+      _ExtentY        =   10821
       ButtonWidth     =   609
       ButtonHeight    =   953
       Appearance      =   1
@@ -49,13 +49,14 @@ Begin VB.Form escRPTGRP
    End
    Begin MSFlexGridLib.MSFlexGrid Grid 
       Height          =   5235
-      Left            =   60
+      Left            =   240
       TabIndex        =   0
-      Top             =   480
+      Top             =   720
       Width           =   7335
       _ExtentX        =   12938
       _ExtentY        =   9234
       _Version        =   393216
+      SelectionMode   =   1
    End
 End
 Attribute VB_Name = "escRPTGRP"
@@ -67,21 +68,23 @@ Option Explicit
 
 Private Sub Apaga_Click()
     Dim cGRUPO, sSQL As String
-    Grid.Col = 0
-    cGRUPO = FixStr(Grid)
-    '******************************************************************
-    'RPTGRP
-    sSQL = "select * from RPTGRP WHERE GRP='" & cGRUPO & "'"
-    If ApagaSQLP(zRPTARQ, sSQL) Then
+    If Grid.Row > 0 Then 'And Grid.Row < Grid.Rows - 1 Then
+        Grid.Col = 0
+        cGRUPO = FixStr(Grid, tEXT)
         '******************************************************************
-        'RPT
-        sSQL = "select * from RPT WHERE GRP='" & cGRUPO & "'"
-        '******************************************************************
-        ApagaSQL zRPTARQ, sSQL
-        'RPTUSR
-        sSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & cGRUPO & "'"
-        ApagaSQL DBWRPT, sSQL
-        FilRelat
+        'RPTGRP
+        sSQL = "select * from RPTGRP WHERE GRP='" & cGRUPO & "'"
+        If ApagaSQLP(zRPTARQ, sSQL) Then
+            '******************************************************************
+            'RPT
+            sSQL = "select * from RPT WHERE GRP='" & cGRUPO & "'"
+            '******************************************************************
+            ApagaSQL zRPTARQ, sSQL
+            'RPTUSR
+            sSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & cGRUPO & "'"
+            ApagaSQL DBWRPT, sSQL
+            FilRelat
+        End If
     End If
 End Sub
 
@@ -91,16 +94,20 @@ Private Sub CmdSair_Click()
 End Sub
 
 Private Sub Edit_Click()
-    Grid.Col = 0
-    zgrp = Grid
-    frmRPTGRP.Show vbModal
-    FilRelat
+  If Grid.Row > 0 Then ''And Grid.Row < Grid.Rows - 1 Then
+        Grid.Col = 0
+        zgrp = Grid.tEXT
+        frmRPTGRP.Show vbModal
+         FilRelat
+    End If
 End Sub
 
 Private Sub Escolher_Click()
-    Grid.Col = 0
-    zgrp = Grid
-    escRPT.Show vbModal, Me
+    If Grid.Row > 0 Then 'And Grid.Row < Grid.Rows - 1 Then
+        Grid.Col = 0
+        zgrp = Grid.tEXT
+        escRPT.Show vbModal, Me
+    End If
 End Sub
 
 Private Sub FilRelat()
@@ -120,22 +127,26 @@ Private Sub Form_Load()
     If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
 End Sub
 
+Private Sub grid_Click()
+ '   grid.se
+End Sub
+
 Private Sub Grid_KeyPress(KeyAscii As Integer)
     If KeyAscii > 31 And KeyAscii < 123 Then
         LocalizaGrid Grid, Chr(KeyAscii), 1, False
     End If
 
 End Sub
-
-Private Sub Grid_SelChange()
-    With Grid
-        If .Rows > 2 Then
-            .Col = .Cols - 1
-            .ColSel = 0
-            .TopRow = .Row
-        End If
-    End With
-End Sub
+'
+'rivate Sub Grid_SelChange()
+'   With Grid
+'       If .Rows > 2 Then
+'           .Col = .Cols - 1
+'           .ColSel = 0
+'           .TopRow = .Row
+'       End If
+'   End With
+'end Sub
 
 Private Sub Novo_Click()
     Dim cSQL As String

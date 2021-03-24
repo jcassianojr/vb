@@ -4,23 +4,23 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form escRPT 
    Caption         =   "Escolha o grupo de Relatorio"
-   ClientHeight    =   6330
+   ClientHeight    =   6675
    ClientLeft      =   165
    ClientTop       =   450
-   ClientWidth     =   10440
+   ClientWidth     =   10785
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6330
-   ScaleWidth      =   10440
+   ScaleHeight     =   6675
+   ScaleWidth      =   10785
    StartUpPosition =   2  'CenterScreen
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
-      Height          =   6330
-      Left            =   8970
+      Height          =   6675
+      Left            =   9315
       TabIndex        =   1
       Top             =   0
       Width           =   1470
       _ExtentX        =   2593
-      _ExtentY        =   11165
+      _ExtentY        =   11774
       ButtonWidth     =   1138
       ButtonHeight    =   582
       Appearance      =   1
@@ -29,9 +29,9 @@ Begin VB.Form escRPT
    End
    Begin MSFlexGridLib.MSFlexGrid Grid 
       Height          =   5895
-      Left            =   60
+      Left            =   240
       TabIndex        =   0
-      Top             =   420
+      Top             =   600
       Width           =   8775
       _ExtentX        =   15478
       _ExtentY        =   10398
@@ -70,11 +70,13 @@ Dim cORDEM As String
 
 Private Sub Apaga_Click()
     Dim sSQL As String
-    Grid.Col = 2
-    zRPT = Grid
-    sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
-    If ApagaSQLP(zRPTARQ, sSQL) Then
-        FilRelat
+    If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
+        Grid.Col = 2
+        zRPT = Grid.tEXT
+        sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
+        If ApagaSQLP(zRPTARQ, sSQL) Then
+            FilRelat
+        End If
     End If
 End Sub
 
@@ -84,12 +86,14 @@ Private Sub CmdSair_Click()
 End Sub
 
 Private Sub Edit_Click()
+If Grid.Row > 0 Then 'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid
+    zRPT = Grid.tEXT
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
     FilRelat
+End If
 End Sub
 
 Private Sub FilRelat()
@@ -130,15 +134,15 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub Grid_SelChange()
-    With Grid
-        If .Rows > 2 Then
-            .Col = .Cols - 1
-            .ColSel = 0
-            .TopRow = .Row
-        End If
-    End With
-End Sub
+'Private Sub Grid_SelChange()
+'    With Grid
+'        If .Rows > 2 Then
+'            .Col = .Cols - 1
+'            .ColSel = 0
+'            .TopRow = .Row
+'        End If
+'    End With
+'End Sub
 
 Private Sub imprima_click()
     Dim nPOS, X            As Integer
@@ -147,12 +151,19 @@ Private Sub imprima_click()
     Dim lLIBGRP As Boolean
     Dim aRETU As Variant
     Dim eRUN As String
+         Dim fileFile As Integer
+    Dim STRBUFFER As String
+    Dim CLINHA As String
+    
     
     On Error Resume Next
 
+    If Grid.Row < 1 Then 'nao entre se a selecao for cabecario row 0
+       Exit Sub
+    End If
     ''Pega Nome Relatorio
     Grid.Col = 2
-    zRPT = Grid
+    zRPT = Grid.tEXT
     
     cARQ = zRPTARQ
     cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -302,7 +313,7 @@ Private Sub imprima_click()
             aRELCFG(1) = "IMPRELM5P"             ''PADREL
         Case "M5M"                               ''Mana5 Padrao /Mana5 Manrel
             aRELCFG(1) = "IMPRELM5M"             ''MANREL
-        Case "HTM", "HTML"
+        Case "HTM", "HTML", "ZPL"
              aRELCFG(1) = "FRMPREVIEW"
         Case "PDF", "CHM", "HLP"
             aRELCFG(1) = "SHELL"
@@ -424,6 +435,21 @@ Private Sub imprima_click()
         '    Frmimg.Show vbModal, Me
      Case "FRMPREVIEW"
         ePASS01 = cARQRTF
+           If cEXTENSAO = "ZPL" Then
+           fileFile = FreeFile
+           Open cARQRTF For Input As #fileFile
+            Do While Not EOF(fileFile)
+                'read line
+                Input #fileFile, STRBUFFER
+                CLINHA = CLINHA + STRBUFFER
+            Loop
+            Close fileFile
+            CLINHA = Replace(CLINHA, Chr(13), "")
+            CLINHA = Replace(CLINHA, Chr(10), "")
+            ePASS01 = "http://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/"
+            ePASS01 = ePASS01 + Chr(34) + CLINHA + Chr(34)
+        End If
+        
         FrmPreview.Show vbModal, Me
        
     Case "FRMVID"
@@ -459,9 +485,11 @@ Private Sub imprima_click()
 End Sub
 
 Private Sub liberar_click()
+If Grid.Row > 0 Then 'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid
+    zRPT = Grid.tEXT
     escrptusr.Show vbModal
+End If
 End Sub
 
 Function MONTARSN(Optional ByVal cDELI As String = "$", Optional ByVal cSEP As String = ",") As String

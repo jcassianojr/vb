@@ -114,16 +114,16 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
 
 End Sub
 
-Private Sub Grid_SelChange()
+'Private Sub Grid_SelChange()
 
-    With Grid
-        If .Rows > 2 Then
-            .Col = .Cols - 1
-            .ColSel = 0
-            .TopRow = .Row
-        End If
-    End With
-End Sub
+ '   With Grid
+  '      If .Rows > 2 Then
+   '         .Col = .Cols - 1
+    '        .ColSel = 0
+     '       .TopRow = .Row
+      '  End If
+    'End With
+'End Sub
 
 Private Sub imprima_click()
 

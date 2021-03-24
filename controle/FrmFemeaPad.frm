@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form FrmFemeaPad 
    Caption         =   "Femea Padrao"
@@ -876,10 +876,10 @@ Private Sub CmdEdiRevi_Click()
     ePASS01 = "select * from FEMREVI WHERE TIPOAPU='P' AND PRONUM=" & aNUM(0) & " AND FALNUM=" & aNUM(1) & " AND EFENUM=" & aNUM(2) & " AND CAUNUM=" & aNUM(3) & " AND SEGGRA=" & nREVI
     ePASS02 = cARQFEMEA
     Load frmFEMEI
-    frmFEMEI.txtFields(2).Enabled = False
-    frmFEMEI.txtFields(3).Enabled = False
-    frmFEMEI.txtFields(4).Enabled = False
-    frmFEMEI.txtFields(5).Enabled = False
+    frmFEMEI.TXTFIELDS(2).Enabled = False
+    frmFEMEI.TXTFIELDS(3).Enabled = False
+    frmFEMEI.TXTFIELDS(4).Enabled = False
+    frmFEMEI.TXTFIELDS(5).Enabled = False
     frmFEMEI.cmdClose.Enabled = False
     frmFEMEI.CmdAltman.Enabled = False
     frmFEMEI.Show vbModal, Me
@@ -1377,7 +1377,7 @@ Private Sub CmdMacSig_Click(Index As Integer)
     Dim cSQL
     Dim cSQL2
     Dim cSIG As String
-    cSIG = txtFields(24)
+    cSIG = TXTFIELDS(24)
 
     If Len(cSIG) = 0 Then
         Alert ("Siginificativa Nao Escolhida")
@@ -1474,10 +1474,10 @@ Private Sub CmdNovo_Click(Index As Integer)
         ePASS01 = "select * from FEMCAU WHERE PRONUM=" & aNUM(0) & " AND FALNUM=" & aNUM(1) & " AND EFENUM=" & aNUM(2) & " AND CAUNUM=" & aNUM(3)
         ePASS02 = cARQFEMEA
         Load frmFEMEI
-        frmFEMEI.txtFields(2).Enabled = False
-        frmFEMEI.txtFields(3).Enabled = False
-        frmFEMEI.txtFields(4).Enabled = False
-        frmFEMEI.txtFields(5).Enabled = False
+        frmFEMEI.TXTFIELDS(2).Enabled = False
+        frmFEMEI.TXTFIELDS(3).Enabled = False
+        frmFEMEI.TXTFIELDS(4).Enabled = False
+        frmFEMEI.TXTFIELDS(5).Enabled = False
         frmFEMEI.Show vbModal, Me
         gerapfs
         Alert ("Indices Transferidos")
@@ -1795,7 +1795,7 @@ Private Sub CMDSIG_Click(Index As Integer)
         frmCharacters.Show vbModal, Me
     End If
     If lRETU Then
-        Me.txtFields(24) = eRETU01
+        Me.TXTFIELDS(24) = eRETU01
     End If
     
   
@@ -1820,15 +1820,15 @@ Private Sub Command1_Click()
     frmFEMEI.cmdpegpro(1).Enabled = False
     frmFEMEI.cmdpegpro(2).Enabled = False
     frmFEMEI.cmdpegpro(3).Enabled = False
-    frmFEMEI.txtFields(2).Enabled = False
-    frmFEMEI.txtFields(3).Enabled = False
-    frmFEMEI.txtFields(4).Enabled = False
-    frmFEMEI.txtFields(5).Enabled = False
+    frmFEMEI.TXTFIELDS(2).Enabled = False
+    frmFEMEI.TXTFIELDS(3).Enabled = False
+    frmFEMEI.TXTFIELDS(4).Enabled = False
+    frmFEMEI.TXTFIELDS(5).Enabled = False
     
-    frmFEMEI.txtFields(7).Enabled = False
-    frmFEMEI.txtFields(8).Enabled = False
-    frmFEMEI.txtFields(9).Enabled = False
-    frmFEMEI.txtFields(10).Enabled = False
+    frmFEMEI.TXTFIELDS(7).Enabled = False
+    frmFEMEI.TXTFIELDS(8).Enabled = False
+    frmFEMEI.TXTFIELDS(9).Enabled = False
+    frmFEMEI.TXTFIELDS(10).Enabled = False
     
     frmFEMEI.Show vbModal, Me
     ALTERAFEMEA
@@ -2034,10 +2034,6 @@ Private Sub Command6_Click()
 
 End Sub
 
-Private Sub dizpro_Click(Index As Integer)
-
-End Sub
-
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
     TeclaEnter KeyCode
 End Sub
@@ -2075,7 +2071,7 @@ Private Sub Form_Load()
     xmontatoolbar Me.Toolbar1, "escFemeaApu", True
     FilRelat
     
-    txtFields(24).Font = "isoqsymbol"
+    TXTFIELDS(24).Font = "isoqsymbol"
     
     
 End Sub
@@ -2311,14 +2307,14 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub Grid_SelChange()
-    With Grid
-        If .Rows > 2 Then
-            .Col = .Cols - 1
-            .ColSel = 0
-            .TopRow = .Row
-        End If
-    End With
-End Sub
+'Private Sub Grid_SelChange()
+  '  With Grid
+'        If .Rows > 2 Then
+ '           .Col = .Cols - 1
+  '          .ColSel = 0
+   '         .TopRow = .Row
+    '    End If
+   ' End With
+'End Sub
 
 

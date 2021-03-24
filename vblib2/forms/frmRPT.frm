@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form FrmRpt 
    BorderStyle     =   3  'Fixed Dialog
@@ -1020,14 +1020,14 @@ Private Sub CmdAbrirCom_Click(Index As Integer)
     'Dim cEXTENSAO As String
     'Dim nPOS As Long
 
-    eLOCALIZA = Text(5)
+    eLOCALIZA = text(5)
     ePASS01 = ""
     If Index = 0 Then
-        ePASS01 = NomeEXT(FixStr(Text(4).Text))
+        ePASS01 = NomeEXT(FixStr(text(4).text))
     End If
     EscRptExec.Show vbModal, Me
     If lRETU Then
-        Text(5).Text = eRETU02
+        text(5).text = eRETU02
     End If
     
 End Sub
@@ -1039,9 +1039,9 @@ End Sub
 Private Sub CmdEDIT_Click(Index As Integer)
     Dim cEXTENSAO As String
     Dim nPOS As Long
-    eLOCALIZA = Text(5)
+    eLOCALIZA = text(5)
     If Index = 0 Then
-        cARQRTF = Text(4)
+        cARQRTF = text(4)
         nPOS = InStrRev(cARQRTF, ".")
         If nPOS > 0 Then
             cEXTENSAO = Mid(cARQRTF, nPOS + 1)
@@ -1065,22 +1065,22 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub Command2_Click()
-    Text(5).Text = ""
+    text(5).text = ""
 End Sub
 
 Private Sub escarq_Click(Index As Integer)
     Index = Index + 18
-    ePASS01 = Text(Index)
+    ePASS01 = text(Index)
     FrmPegdb.Show vbModal, Me
     If lRETU Then
-        Text(Index) = eRETU01
+        text(Index) = eRETU01
     End If
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     If MDG("Gravar e Sair", "Gravando ") Then
         For nITEM = 0 To 23
-            aVAL(nITEM) = Text(nITEM)
+            aVAL(nITEM) = text(nITEM)
         Next nITEM
         For nITEM = 24 To 26
             aVAL(nITEM) = FixNumBol(chkFields(nITEM).Value)
@@ -1098,18 +1098,25 @@ Private Sub escolherrpt_Click()
     Dim sPath As String
 
     cFILTER = "Crystal Reports (*.RPT)" & vbNullChar & "*.RPT" & vbNullChar
-    cFILTER = cFILTER & "Report Manager (*.REP)" & vbNullChar & "*.REP" & vbNullChar
-    cFILTER = cFILTER & "CA-RET Reports (*.RET)" & vbNullChar & "*.RET" & vbNullChar
-    cFILTER = cFILTER & "QuickReport MMK-Report (*.QRP)" & vbNullChar & "*.QRP" & vbNullChar
+    
+   ' cFILTER = cFILTER & "Report Manager (*.REP)" & vbNullChar & "*.REP" & vbNullChar 'Removidos rep com pouco uso
+    cFILTER = cFILTER & "CA-RET Reports VORETRUN (*.RET)" & vbNullChar & "*.RET" & vbNullChar ''usar voretrun pois caretrun e 16 bits
+    cFILTER = cFILTER & "ZPL Etiquetas preview(*.ZPL)" & vbNullChar & "*.RET" & vbNullChar
+    
+    'cFILTER = cFILTER & "QuickReport MMK-Report (*.QRP)" & vbNullChar & "*.QRP" & vbNullChar
+    
     cFILTER = cFILTER & "Rich-Text Format (*.RTF)" & vbNullChar & "*.RTF" & vbNullChar
+    cFILTER = cFILTER & "Acrobat Reader (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar
     cFILTER = cFILTER & "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar
     cFILTER = cFILTER & "Documentos do Word  (*.DOC)" & vbNullChar & "*.DOC" & vbNullChar
     cFILTER = cFILTER & "Planilhas do Excel  (*.XLS)" & vbNullChar & "*.XLS" & vbNullChar
     cFILTER = cFILTER & "Apresentacao Power-Point (*.PPS)(*.PPT)" & vbNullChar & "*.PPS;*.PPT" & vbNullChar
+    
     cFILTER = cFILTER & "Ajuda Windows (*.HLP)" & vbNullChar & "*.HLP" & vbNullChar
-    cFILTER = cFILTER & "Acrobat Reader (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar
     cFILTER = cFILTER & "Ajuda Windows Compactadas (*.CHM)" & vbNullChar & "*.CHM" & vbNullChar
+    
     cFILTER = cFILTER & "Internet (*.HTM;*.HTML) " & vbNullChar & "*.HTM;*.HTML" & vbNullChar
+    
     cFILTER = cFILTER & "Windows Control Panel (*.CPL)" & vbNullChar & "*.CPL" & vbNullChar
     cFILTER = cFILTER & "Video - MPEG (*.mpeg;*.MPG;*.M1V;*.MP2;*.MPA;*.MPE) " & vbNullChar & "*.mpeg;*.MPG;*.M1V;*.MP2;*.MPA;*.MPE" & vbNullChar
     cFILTER = cFILTER & "Videos (*.avi;*.wmf) " & vbNullChar & "*.avi;*.wmf" & vbNullChar
@@ -1130,7 +1137,7 @@ Private Sub escolherrpt_Click()
             sPath = Caminex(zRPTCAM)
         End If
     End If
-    Text(4).Text = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
+    text(4).text = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
 
 End Sub
 
@@ -1174,7 +1181,7 @@ Private Sub Form_Load()
                  "", "", "", "", False, False, False)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For nITEM = 0 To 23
-        Text(nITEM) = aVAL(nITEM)
+        text(nITEM) = aVAL(nITEM)
     Next nITEM
     For nITEM = 24 To 26
         chkFields(nITEM) = aVAL(nITEM)
