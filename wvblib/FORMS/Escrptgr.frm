@@ -128,7 +128,12 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub grid_Click()
- '   grid.se
+Dim X As Integer
+ ' Grid.Col = 0
+Grid.ColSel = Grid.Cols - 1
+'For X = 0 To Grid.Cols - 1
+'  Grid.ColSel = X
+'Next X
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
@@ -137,17 +142,6 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
     End If
 
 End Sub
-'
-'rivate Sub Grid_SelChange()
-'   With Grid
-'       If .Rows > 2 Then
-'           .Col = .Cols - 1
-'           .ColSel = 0
-'           .TopRow = .Row
-'       End If
-'   End With
-'end Sub
-
 Private Sub Novo_Click()
     Dim cSQL As String
     zgrp = InputBox("Digite o Codigo", "Inclusão Relatorio", "____")
