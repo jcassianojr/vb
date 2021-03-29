@@ -14,7 +14,7 @@ Public Function xMAILENV(cCODIGO, cTexto)
     Dim aRETU As Variant
     Dim oMAIL As Variant
     Dim nNUMERO As Variant
-    Dim poSendMail As vbSendMail.clsSendMail
+   ' Dim poSendMail As vbSendMail.clsSendMail
     Dim cASSUNTO As String
     Dim txt_email_from As String
 
@@ -82,32 +82,18 @@ Public Function xMAILENV(cCODIGO, cTexto)
     DB.Close
         
     Screen.MousePointer = vbHourglass
-    'txt_status.tEXT = "Preparando Coneccao"
-    Set poSendMail = New clsSendMail
-    With poSendMail
-        .SMTPHostValidation = VALIDATE_HOST_DNS
-        .EmailAddressValidation = VALIDATE_SYNTAX
-        .Delimiter = ";"
-    End With
-    With poSendMail
-        .SMTPHost = PegPath("EMAIL", "SERVER", "stmp..com.br")
-        txt_email_from = PegPath("EMAIL", UCase(zNOMEFOLHA), " ")
-        If Len(Trim(txt_email_from)) = 0 Then
-            txt_email_from = PegPath("EMAIL", "FROM", "@.com.br")
-        End If
-        .From = txt_email_from
-        .FromDisplayName = txt_email_from
-        .Message = FixStr(cTexto)
-        If .Connect Then
-            'txt_status.tEXT = "Enviando Mensagem"
-            .Recipient = PegPath("EMAIL", cCODIGO, "")
-            .RecipientDisplayName = ""
-            .subject = cASSUNTO
-            .Send
-            .Disconnect
-            
-        End If
-    End With
+    
+    SendMailCDO PegPath("EMAIL", cCODIGO, ""), cASSUNTO, PegPath("EMAIL", UCase(zNOMEFOLHA), PegPath("EMAIL", "FROM", "@.com.br")), _
+    FixStr(cTexto), PegPath("EMAIL", "SERVER", "stmp..com.br"), FixNum(PegPath("EMAIL", "PORTA", "25")), _
+    "", "", _
+    "", False
+
+'sendmail via cdo
+'SendMail(sTo As String, sSubject As String, sFrom As String, _
+'    sBody As String, sSmtpServer As String, iSmtpPort As Integer, _
+'    sSmtpUser As String, sSmtpPword As String, _
+'    sFilePath As String, bSmtpSSL As Boolean) As String
+      
     Screen.MousePointer = vbDefault
 
         

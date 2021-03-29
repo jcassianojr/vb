@@ -388,12 +388,12 @@ Public Function GeraSplit(ByVal aVAR As Variant, Optional ByVal cINI As String =
                           Optional ByVal cMID As String = "", _
                           Optional ByVal cFIM As String = "") As String
     Dim nUSO As Long
-    Dim x As Long
+    Dim X As Long
     nUSO = UBound(aVAR) - 1
     GeraSplit = cINI & aVAR(0) & cMID
-    For x = 1 To nUSO
-        GeraSplit = GeraSplit & aVAR(x) & cMID
-    Next x
+    For X = 1 To nUSO
+        GeraSplit = GeraSplit & aVAR(X) & cMID
+    Next X
     GeraSplit = GeraSplit & aVAR(nUSO + 1)
     GeraSplit = GeraSplit & cFIM
 End Function
@@ -1618,11 +1618,11 @@ Public Function ShellEx( _
 End Function
 
 Public Function SomaArr(ByVal aARRAY As Variant, ByVal nITEM As Integer)
-    Dim x                As Integer
+    Dim X                As Integer
     SomaArr = 0
-    For x = 0 To nITEM - 1
-        SomaArr = SomaArr + FixNum(aARRAY(x))
-    Next x
+    For X = 0 To nITEM - 1
+        SomaArr = SomaArr + FixNum(aARRAY(X))
+    Next X
 End Function
 
 Public Function SomaExt(ByVal cARQ As String, Optional ByVal cEXT As String = ".MDB") As String
@@ -1665,7 +1665,7 @@ Public Function Tirace(ByVal texto As String) As String
 End Function
 
 Public Function StrToArray(ByVal cGRUPO As String) As Variant
-    Dim x, nLEN As Integer
+    Dim X, nLEN As Integer
     Dim aUSO As Variant
     Dim cCHAR, eCNV As String
     Select Case cGRUPO
@@ -1710,60 +1710,60 @@ Public Function StrToArray(ByVal cGRUPO As String) As Variant
 
     nLEN = Len(eCNV)
     ReDim aUSO(nLEN)
-    For x = 1 To nLEN
-        cCHAR = Mid(eCNV, x, 1)
+    For X = 1 To nLEN
+        cCHAR = Mid(eCNV, X, 1)
         Select Case cCHAR
         Case "ª"
-            aUSO(x - 1) = "a."
+            aUSO(X - 1) = "a."
 
         Case "º"
-            aUSO(x - 1) = "o."
+            aUSO(X - 1) = "o."
 
         Case Else
-            aUSO(x - 1) = cCHAR
+            aUSO(X - 1) = cCHAR
 
         End Select
-    Next x
+    Next X
     StrToArray = aUSO
 End Function
 
 Public Function TiraSin(ByVal texto As String)
-    For x = 0 To 31
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 33 To 38
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 39 To 47
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 58 To 64
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 91 To 96
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 123 To 127
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 155 To 159
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 168 To 180
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 184 To 197
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 200 To 209
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 217 To 223
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 238 To 255
-        texto = Replace(texto, Chr(x), "")
-    Next x
+    For X = 0 To 31
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 33 To 38
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 39 To 47
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 58 To 64
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 91 To 96
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 123 To 127
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 155 To 159
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 168 To 180
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 184 To 197
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 200 To 209
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 217 To 223
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 238 To 255
+        texto = Replace(texto, Chr(X), "")
+    Next X
     TiraSin = texto
 End Function
 
@@ -1814,7 +1814,7 @@ Public Sub FocusMe()
 End Sub
 
 Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
-    Dim nLEN, nTEXTO, x, y As Integer
+    Dim nLEN, nTEXTO, X, Y As Integer
     Dim aORI, aDES, aTEXTO As Variant
     If IsArray(eORI) Then
         aORI = eORI
@@ -1826,18 +1826,18 @@ Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eD
     aTEXTO = StrToArray(cTexto)
     nLEN = UBound(aORI)
     nTEXTO = UBound(aTEXTO)
-    For y = 0 To nTEXTO
-        For x = 0 To nLEN
-            If aTEXTO(y) = aORI(x) Then          ''Encerra Analise Para Evitar
-                aTEXTO(y) = aDES(x)              ''Loop de Troca
+    For Y = 0 To nTEXTO
+        For X = 0 To nLEN
+            If aTEXTO(Y) = aORI(X) Then          ''Encerra Analise Para Evitar
+                aTEXTO(Y) = aDES(X)              ''Loop de Troca
                 Exit For
             End If
         Next
     Next
     CharConv = ""
-    For y = 0 To nTEXTO
-        CharConv = CharConv & aTEXTO(y)
-    Next y
+    For Y = 0 To nTEXTO
+        CharConv = CharConv & aTEXTO(Y)
+    Next Y
 End Function
 
 Public Function TiraOut(ByVal eVAR As Variant) As String
@@ -1968,7 +1968,7 @@ Public Function Extenso(ByVal Valor As Double, _
 End Function
 
 Public Function Txt2Lin(ByVal cTexto As String, Optional ByVal nCOL As Integer = 80) As Variant
-    Dim nLIN, x As Integer
+    Dim nLIN, X As Integer
     Dim aRETU As Variant
     cTexto = FixStr(cTexto)
     If nCOL < 1 Then nCOL = 80                   'Evita Erros Divisao
@@ -1978,9 +1978,9 @@ Public Function Txt2Lin(ByVal cTexto As String, Optional ByVal nCOL As Integer =
         nLIN = nLIN + 1                          ''Soma mais um pois e necesario
     End If
     ReDim aRETU(nLIN)
-    For x = 1 To nLIN
-        aRETU(x - 1) = Mid(cTexto, ((x - 1) * nCOL) + 1, nCOL)
-    Next x
+    For X = 1 To nLIN
+        aRETU(X - 1) = Mid(cTexto, ((X - 1) * nCOL) + 1, nCOL)
+    Next X
     Txt2Lin = aRETU
     eRETU01 = nLIN
 End Function
@@ -2089,7 +2089,41 @@ Public Sub OpenUrl(ByVal strURL As String)
     ShellExecute 0, "Open", strURL, 0&, 0&, SW_SHOWNORMAL
 End Sub
 
-Public Sub SendEMail(ByVal sEmailAddress As String, Optional ByVal sSubject As String = "", Optional ByVal sBody As String = "", Optional ByVal cARQ As String = "")
+Public Function SendMailCDO(sTo As String, sSubject As String, sFrom As String, _
+    sBody As String, sSmtpServer As String, iSmtpPort As Integer, _
+    sSmtpUser As String, sSmtpPword As String, _
+    sFilePath As String, bSmtpSSL As Boolean) As String
+      
+    On Error GoTo SendMail_Error:
+    Dim lobj_cdomsg      As CDO.Message
+    Set lobj_cdomsg = New CDO.Message
+    lobj_cdomsg.Configuration.Fields(cdoSMTPServer) = sSmtpServer
+    lobj_cdomsg.Configuration.Fields(cdoSMTPServerPort) = iSmtpPort
+    lobj_cdomsg.Configuration.Fields(cdoSMTPUseSSL) = bSmtpSSL
+    lobj_cdomsg.Configuration.Fields(cdoSMTPAuthenticate) = cdoBasic
+    lobj_cdomsg.Configuration.Fields(cdoSendUserName) = sSmtpUser
+    lobj_cdomsg.Configuration.Fields(cdoSendPassword) = sSmtpPword
+    lobj_cdomsg.Configuration.Fields(cdoSMTPConnectionTimeout) = 30
+    lobj_cdomsg.Configuration.Fields(cdoSendUsingMethod) = cdoSendUsingPort
+    lobj_cdomsg.Configuration.Fields.Update
+    lobj_cdomsg.To = sTo
+    lobj_cdomsg.From = sFrom
+    lobj_cdomsg.subject = sSubject
+    lobj_cdomsg.TextBody = sBody
+    If Trim$(sFilePath) <> vbNullString Then
+        lobj_cdomsg.AddAttachment (sFilePath)
+    End If
+    lobj_cdomsg.Send
+    Set lobj_cdomsg = Nothing
+    SendMail = "ok"
+    Exit Function
+          
+SendMail_Error:
+    SendMail = Err.Description
+End Function
+
+
+Public Sub SendEmailShell(ByVal sEmailAddress As String, Optional ByVal sSubject As String = "", Optional ByVal sBody As String = "", Optional ByVal cARQ As String = "")
     Dim nTENTA As Integer
     nTENTA = 0
     Rem HotTo use:

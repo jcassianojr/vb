@@ -385,7 +385,7 @@ Private Sub CmdLimpa_Click()
 End Sub
 Private Sub shellenviar_Click()
     If campos_checagem Then
-        SendEMail txt_email_to.tEXT, txt_subject.tEXT, txt_message_text.tEXT, txt_attach.tEXT
+        SendEmailShell txt_email_to.tEXT, txt_subject.tEXT, txt_message_text.tEXT, txt_attach.tEXT
     End If
 End Sub
 Private Sub mapienviar_Click()
@@ -432,7 +432,7 @@ End Sub
 
 Private Sub cdoenviar_Click()
    Dim RetVal          As String
-   RetVal = SendMail(Trim$(txt_email_to.tEXT), _
+   RetVal = SendMailCDO(Trim$(txt_email_to.tEXT), _
         Trim$(txt_subject.tEXT), _
         Trim$(txtFromName.tEXT) & "<" & Trim$(txt_email_from.tEXT) & ">", _
         Trim$(txt_message_text.tEXT), _
@@ -452,9 +452,8 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    '    CentralizaJanela Me
     Center Me
-     txt_status.tEXT = "Pronto." & vbCrLf
+    txt_status.tEXT = "Pronto." & vbCrLf
     txt_smtp_server.tEXT = ePASS01(0)
     Txt_Porta.tEXT = ePASS01(1)
     txt_email_from.tEXT = ePASS01(2)
@@ -503,38 +502,6 @@ Private Sub txt_porta_KeyPress(KeyAscii As Integer)
     KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
-Public Function SendMail(sTo As String, sSubject As String, sFrom As String, _
-    sBody As String, sSmtpServer As String, iSmtpPort As Integer, _
-    sSmtpUser As String, sSmtpPword As String, _
-    sFilePath As String, bSmtpSSL As Boolean) As String
-      
-    On Error GoTo SendMail_Error:
-    Dim lobj_cdomsg      As CDO.Message
-    Set lobj_cdomsg = New CDO.Message
-    lobj_cdomsg.Configuration.Fields(cdoSMTPServer) = sSmtpServer
-    lobj_cdomsg.Configuration.Fields(cdoSMTPServerPort) = iSmtpPort
-    lobj_cdomsg.Configuration.Fields(cdoSMTPUseSSL) = bSmtpSSL
-    lobj_cdomsg.Configuration.Fields(cdoSMTPAuthenticate) = cdoBasic
-    lobj_cdomsg.Configuration.Fields(cdoSendUserName) = sSmtpUser
-    lobj_cdomsg.Configuration.Fields(cdoSendPassword) = sSmtpPword
-    lobj_cdomsg.Configuration.Fields(cdoSMTPConnectionTimeout) = 30
-    lobj_cdomsg.Configuration.Fields(cdoSendUsingMethod) = cdoSendUsingPort
-    lobj_cdomsg.Configuration.Fields.Update
-    lobj_cdomsg.To = sTo
-    lobj_cdomsg.From = sFrom
-    lobj_cdomsg.subject = sSubject
-    lobj_cdomsg.TextBody = sBody
-    If Trim$(sFilePath) <> vbNullString Then
-        lobj_cdomsg.AddAttachment (sFilePath)
-    End If
-    lobj_cdomsg.Send
-    Set lobj_cdomsg = Nothing
-    SendMail = "ok"
-    Exit Function
-          
-SendMail_Error:
-    SendMail = Err.Description
-End Function
 
 
 Function campos_checagem() As Boolean
