@@ -59,7 +59,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":0000
-            TextSave        =   "13:05"
+            TextSave        =   "12:54"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -67,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":059A
-            TextSave        =   "15/03/2021"
+            TextSave        =   "29/03/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -315,7 +315,7 @@ Private Sub MDIForm_Load()
     
     Exit Sub
 ErrorHandler:
-    Alert error$ & " - " & str$(Err)
+    Alert error$ & " - " & Str$(Err)
     Select Case Err
     Case 3024, 3044
         Alert "Verifiqie ini e banco de dados " & App.EXEName & ".MDB!"
@@ -422,7 +422,11 @@ End Sub
 
 Private Sub mnuSUBMENU4_Click(Index As Integer)
     Dim CLINHA As String
+    
+    ''nao verifica acesso todos entram
+    ''os que necessitam case abaixo
     Select Case Index
+    
     Case 0
         FrmPrintSetup.Show vbModal
         Exit Sub
@@ -435,7 +439,8 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
         frmDica.Show
         Exit Sub
     Case 8
-        Calculadora.Show
+        'Calculadora.Show
+        ShellEx "calc"
         Exit Sub
     Case 9
         ''CLINHA = "MAIL $" & UCase(zUSER)

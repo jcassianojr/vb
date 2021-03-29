@@ -1,187 +1,144 @@
 VERSION 5.00
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form frmUSUSENHA 
-   Caption         =   "Senha de Usuario"
-   ClientHeight    =   2670
+   Caption         =   "Troca de Senha"
+   ClientHeight    =   1800
    ClientLeft      =   60
    ClientTop       =   345
-   ClientWidth     =   4590
-   HelpContextID   =   13
+   ClientWidth     =   4980
    Icon            =   "frmUsusen.frx":0000
    LinkTopic       =   "Form1"
-   LockControls    =   -1  'True
-   ScaleHeight     =   2670
-   ScaleWidth      =   4590
-   StartUpPosition =   3  'Windows Default
-   Begin VB.CommandButton cmdCANCELAR 
-      BackColor       =   &H00C0C0FF&
-      Caption         =   "&Cancelar"
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   960
-      Left            =   1020
-      Picture         =   "frmUsusen.frx":038A
-      Style           =   1  'Graphical
-      TabIndex        =   3
-      ToolTipText     =   "Cancelar Troca de Senha"
-      Top             =   1590
-      Width           =   1095
-   End
-   Begin VB.CommandButton cmdOK 
-      BackColor       =   &H00C0FFFF&
-      Caption         =   "&Ok"
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   960
-      Left            =   2640
-      Picture         =   "frmUsusen.frx":0C54
-      Style           =   1  'Graphical
-      TabIndex        =   2
-      ToolTipText     =   "Confirme Troca Senha"
-      Top             =   1590
-      Width           =   1095
-   End
+   ScaleHeight     =   1800
+   ScaleWidth      =   4980
+   StartUpPosition =   2  'CenterScreen
    Begin VB.PictureBox Picture1 
       BorderStyle     =   0  'None
       Height          =   375
-      Left            =   285
-      Picture         =   "frmUsusen.frx":0F5E
+      Left            =   240
+      Picture         =   "frmUsusen.frx":038A
       ScaleHeight     =   375
       ScaleWidth      =   615
       TabIndex        =   6
-      Top             =   600
+      Top             =   480
       Width           =   615
    End
    Begin VB.TextBox txtFields 
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   285
       IMEMode         =   3  'DISABLE
       Index           =   2
-      Left            =   2340
-      MaxLength       =   8
+      Left            =   1920
       PasswordChar    =   "*"
-      TabIndex        =   1
-      ToolTipText     =   "Confirme Nova Senha"
-      Top             =   1050
-      Width           =   1875
+      TabIndex        =   2
+      Top             =   1200
+      Width           =   975
    End
    Begin VB.TextBox txtFields 
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   285
       IMEMode         =   3  'DISABLE
       Index           =   1
-      Left            =   2340
-      MaxLength       =   8
+      Left            =   1920
+      PasswordChar    =   "*"
+      TabIndex        =   1
+      Top             =   840
+      Width           =   975
+   End
+   Begin VB.TextBox txtFields 
+      Height          =   285
+      IMEMode         =   3  'DISABLE
+      Index           =   0
+      Left            =   1920
       PasswordChar    =   "*"
       TabIndex        =   0
-      ToolTipText     =   "Nova Senha"
-      Top             =   630
-      Width           =   1875
+      Top             =   480
+      Width           =   975
    End
-   Begin VB.Label Label4 
-      Alignment       =   2  'Center
-      BackColor       =   &H00C0FFFF&
-      BeginProperty Font 
+   Begin XPControls.XPButton cmdCANCELAR 
+      Height          =   435
+      Left            =   3120
+      TabIndex        =   9
+      Top             =   960
+      Width           =   1515
+      _ExtentX        =   2672
+      _ExtentY        =   767
+      Picture         =   "frmUsusen.frx":07CC
+      Caption         =   "Cancelar"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
          Charset         =   0
-         Weight          =   700
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin XPControls.XPButton cmdOK 
+      Height          =   435
+      Left            =   3120
+      TabIndex        =   10
+      Top             =   360
+      Width           =   1515
+      _ExtentX        =   2672
+      _ExtentY        =   767
+      Picture         =   "frmUsusen.frx":0D66
+      Caption         =   "Confirmar"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin VB.Label Label4 
       Height          =   255
-      Left            =   1410
+      Left            =   1200
       TabIndex        =   8
-      ToolTipText     =   "Nome do Usuario"
-      Top             =   210
-      Width           =   2685
+      Top             =   120
+      Width           =   1695
    End
    Begin VB.Label Label3 
       Alignment       =   1  'Right Justify
       Caption         =   "Usuário:"
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00C00000&
       Height          =   255
-      Left            =   285
+      Left            =   240
       TabIndex        =   7
-      Top             =   210
+      Top             =   120
       Width           =   855
    End
    Begin VB.Label Label2 
       Alignment       =   1  'Right Justify
       Caption         =   "Confirme a nova senha:"
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   120
       TabIndex        =   5
-      Top             =   1095
-      Width           =   2145
+      Top             =   1200
+      Width           =   1695
    End
    Begin VB.Label Label1 
       Alignment       =   1  'Right Justify
-      Caption         =   "Nova senha:"
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Caption         =   "Novo senha:"
       ForeColor       =   &H00C00000&
       Height          =   255
-      Left            =   945
+      Left            =   480
       TabIndex        =   4
-      Top             =   675
-      Width           =   1290
+      Top             =   840
+      Width           =   1335
+   End
+   Begin VB.Label lblLabels 
+      Alignment       =   1  'Right Justify
+      Caption         =   "Senha:"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   1
+      Left            =   960
+      TabIndex        =   3
+      Top             =   480
+      Width           =   855
    End
 End
 Attribute VB_Name = "frmUSUSENHA"
@@ -189,35 +146,39 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Const nFORMID = 1013
-Const cFORMID = "Usuario Trocar Senha"
+Option Explicit
+
 Private Sub CmdCancelar_Click()
-    lRETU = False
     Unload Me
 End Sub
 
 Private Sub cmdOK_Click()
-Dim cSENHA, cCRYPTO, cARQ, cSQL As String
-Dim aRETU As Variant
-    lRETU = False
+    Dim DB As ADODB.Connection
+    Dim RSSENHA As ADODB.Recordset
+    Dim strEncryptedText As String
+    Dim sSQL As String
    
-
-    txtFields(1) = UCase(Trim(txtFields(1)))
-    txtFields(2) = UCase(Trim(txtFields(2)))
+    lRETU = True
+    txtFields(0) = Trim(txtFields(0))
+    txtFields(1) = Trim(txtFields(1))
+    txtFields(2) = Trim(txtFields(2))
 
     If Len(txtFields(1)) > 8 Then
 
         Alert "Máximo 8 digitos para a Senha", "Senha Invalida"
-        txtFields(1).Text = ""
+        txtFields(1).tEXT = ""
         txtFields(1).SetFocus
+        lRETU = False
         Exit Sub
+
     End If
 
     If Len(txtFields(2)) > 8 Then
 
         Alert "Máximo 8 digitos para a Senha", "Senha Invalida"
-        txtFields(2).Text = ""
+        txtFields(2).tEXT = ""
         txtFields(2).SetFocus
+        lRETU = False
         Exit Sub
 
     End If
@@ -225,8 +186,9 @@ Dim aRETU As Variant
     If Len(txtFields(1)) < 8 Then
 
         Alert "Necessário 8 digitos para a Senha", "Senha Invalida"
-        txtFields(1).Text = ""
+        txtFields(1).tEXT = ""
         txtFields(1).SetFocus
+        lRETU = False
         Exit Sub
 
     End If
@@ -234,66 +196,81 @@ Dim aRETU As Variant
     If Len(txtFields(2)) < 8 Then
 
         Alert "Necessário 8 digitos para a Senha", "Senha Invalida"
-        txtFields(2).Text = ""
+        txtFields(2).tEXT = ""
         txtFields(2).SetFocus
+        lRETU = False
         Exit Sub
 
     End If
 
-   
-    cARQ = PegPath("PATH", "SYSUSER")
-    cSQL = "select * from USUARIO WHERE IDUSUARIO=" & zIDTEMP
-    aRETU = PegSQL(cARQ, cSQL, 1, Array("SENHA"), Array("C"), Array(Space(8)))
-    cSENHA = aRETU(0)
-    cCRYPTO = XOREncryption(SysCodeKey, txtFields(1))
-   
-    If cSENHA = cCRYPTO Then
+    If txtFields(0) = txtFields(1) Then
+
         Alert "Senha Precisa ser Diferente da Anterior", "Senha Invalida"
-        txtFields(1).Text = ""
-        txtFields(2).Text = ""
+        txtFields(1).tEXT = ""
+        txtFields(2).tEXT = ""
         txtFields(1).SetFocus
+        lRETU = False
         Exit Sub
-    End If
-   
-    GrvSQL cARQ, cSQL, 2, Array("SENHA", "TROCAR"), Array(cCRYPTO, Date + 90), Array("C", "D")
 
-    lRETU = True
-    eRETU01 = cCRYPTO
-    eRETU02 = Date + 90
-   
+    End If
+    
+    Set DB = New ADODB.Connection
+    Set RSSENHA = New ADODB.Recordset
+
+    DB.ConnectionTimeout = 120
+    DB.Open GeracArq(dbuser)
+
+    
+    sSQL = "select * from USUARIO WHERE IDUSUARIO=" & zIDTEMP
+    RSSENHA.Open sSQL, DB, adOpenStatic, adLockOptimistic
+    
+
+    With RSSENHA
+
+        If Not .EOF Then
+
+            strEncryptedText = XOREncryption(strCodeKey, txtFields(0))
+
+            If strEncryptedText = "" & !senha Then
+
+                If txtFields(1) = txtFields(2) Then
+
+                    '                    .Edit
+                    strEncryptedText = XOREncryption(strCodeKey, txtFields(1))
+                    RSSENHA("SENHA") = strEncryptedText
+                    RSSENHA("TROCAR") = Date + 60
+                    .Update
+
+                Else
+                    Alert "Confirmação não confere! A Senha não foi alterada.", "Alteração de senha"
+
+                End If
+
+            Else
+
+                Alert "Senha não confere! A Senha não foi alterada.", "Alteração de senha"
+
+            End If
+
+        End If
+
+        .Close
+
+    End With
+    DB.Close
+
     Unload Me
+
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-   TeclaEnter KeyCode
+    TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    frmUSUSENHA.Left = (Screen.Width - frmUSUSENHA.Width) / 2
-    frmUSUSENHA.Top = (Screen.Height - frmUSUSENHA.Height) / 2
+    Center Me
+    
+    Label4 = zIDTEMP
 
-    cARQ = PegPath("PATH", "SYSUSER")
-    cSQL = "select * from USUARIO WHERE IDUSUARIO=" & zIDTEMP
-    aRETU = PegSQL(cARQ, cSQL, 1, Array("USUARIO"), Array("C"), Array(Space(8)))
-    Label4.Caption = aRETU(0)
-
-    lRETU = False
-    ''Configura Help
-    HelpContextID = nFORMID
-    Me.Caption = cFORMID
-   
 End Sub
 
-
-Private Sub txtFields_GotFocus(Index As Integer)
-FocusMe
-End Sub
-
-Private Sub txtFields_KeyUp(Index As Integer, KeyCode As Integer, Shift As Integer)
-    If KeyCode = 13 Or KeyCode = 40 Then
-        SendKeys Chr(9)
-    End If
-    If KeyCode = 38 Then
-        SendKeys "+" + Chr(9)
-    End If
-End Sub

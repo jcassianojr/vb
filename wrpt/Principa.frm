@@ -34,6 +34,7 @@ Begin VB.MDIForm frmPRINCIPAL
          BeginProperty Panel1 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   1
             AutoSize        =   2
+            Enabled         =   0   'False
             Object.Width           =   1058
             MinWidth        =   1058
             TextSave        =   "CAPS"
@@ -58,7 +59,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":0000
-            TextSave        =   "12:18"
+            TextSave        =   "12:58"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -66,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":059A
-            TextSave        =   "15/03/2021"
+            TextSave        =   "29/03/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -435,7 +436,8 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
            frmDica.Show
            
         Case 8
-           Calculadora.Show
+           'Calculadora.Show
+           ShellEx "calc"
         
     End Select
 
