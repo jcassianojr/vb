@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHtx32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form FrmRTf 
    Caption         =   "Editor Textos"
    ClientHeight    =   7245
@@ -72,7 +72,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "FrmRtf.frx":109E
-            TextSave        =   "14:39"
+            TextSave        =   "12:39"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -80,7 +80,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "FrmRtf.frx":1638
-            TextSave        =   "20/03/2019"
+            TextSave        =   "29/03/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -93,8 +93,8 @@ Begin VB.Form FrmRTf
       EndProperty
    End
    Begin MSComctlLib.ImageList ImgMenu 
-      Left            =   480
-      Top             =   1800
+      Left            =   11040
+      Top             =   240
       _ExtentX        =   1005
       _ExtentY        =   1005
       BackColor       =   -2147483643
@@ -652,11 +652,11 @@ Begin VB.Form FrmRTf
    End
    Begin RichTextLib.RichTextBox RichTextbox1 
       Height          =   6135
-      Left            =   0
+      Left            =   120
       TabIndex        =   0
-      Top             =   720
-      Width           =   10695
-      _ExtentX        =   18865
+      Top             =   840
+      Width           =   11295
+      _ExtentX        =   19923
       _ExtentY        =   10821
       _Version        =   393217
       ScrollBars      =   3
@@ -1070,7 +1070,7 @@ End Sub
 '***************************************************************************
 
 Private Sub cmbFontSize_Click()
-    RichTextbox1.SelFontSize = cmbFontSize.tEXT
+    RichTextbox1.SelFontSize = cmbFontSize.Text
     ''RichTextbox1.SetFocus
 End Sub
 
@@ -1562,7 +1562,7 @@ Private Sub Form_Load()
     ''Abre o Arquivo se passado cARQRTF
     ABRIR
     
-    StatusBar1.Panels(6).tEXT = zUSER
+    StatusBar1.Panels(6).Text = zUSER
    
 End Sub
 
@@ -1872,7 +1872,7 @@ End Sub
 '***************************************************************************
 
 Private Sub mnunew_Click()
-    RichTextbox1.tEXT = ""
+    RichTextbox1.Text = ""
     RichTextbox1.SetFocus
 End Sub
 
@@ -2113,7 +2113,7 @@ End Sub
 
 Private Sub mnuselectall_Click()
     RichTextbox1.SelStart = 0
-    RichTextbox1.SelLength = Len(RichTextbox1.tEXT)
+    RichTextbox1.SelLength = Len(RichTextbox1.Text)
     RichTextbox1.SetFocus
 End Sub
 
@@ -2237,11 +2237,11 @@ Private Sub RichTextBox1_SelChange()
     '******************************************************************
 
     If Not IsNull(RichTextbox1.SelFontSize) Then
-        cmbFontSize.tEXT = RichTextbox1.SelFontSize
+        cmbFontSize.Text = RichTextbox1.SelFontSize
     End If
 
     '* Show Font name in the ComboBox.
-    cmbfontname.tEXT = RichTextbox1.SelFontName
+    cmbfontname.Text = RichTextbox1.SelFontName
 
     '******************************************************************
     '* Show color of text in the ComboBox. Use the
@@ -2261,7 +2261,7 @@ Private Sub RichTextBox1_SelChange()
     End Select
     Exit Sub
 errhandler:
-    cmbfontname.tEXT = cmbfontname.tEXT
+    cmbfontname.Text = cmbfontname.Text
 End Sub
 
 Private Sub MenuEvents_MenuHelp(ByVal MenuText As String, ByVal MenuHelp As String, ByVal Enabled As Boolean)

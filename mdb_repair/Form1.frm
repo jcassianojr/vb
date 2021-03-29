@@ -1,15 +1,14 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form Form1 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "DBFix 1.0"
-   ClientHeight    =   4035
+   ClientHeight    =   4710
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   8865
+   ClientWidth     =   9420
    BeginProperty Font 
       Name            =   "Arial"
       Size            =   8.25
@@ -21,29 +20,98 @@ Begin VB.Form Form1
    EndProperty
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
-   LockControls    =   -1  'True
    MaxButton       =   0   'False
-   ScaleHeight     =   4035
-   ScaleWidth      =   8865
+   ScaleHeight     =   4710
+   ScaleWidth      =   9420
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CommandButton cmdCompare 
+      Caption         =   "Compare &Database with Schema"
+      Height          =   375
+      Left            =   5520
+      TabIndex        =   8
+      Top             =   1920
+      Width           =   3375
+   End
+   Begin VB.CommandButton cmdCreate 
+      Caption         =   "&Create Master Schema Database"
+      Height          =   375
+      Left            =   5520
+      TabIndex        =   7
+      Top             =   1440
+      Width           =   3375
+   End
+   Begin VB.CommandButton Command2 
+      Caption         =   "&Fix Corrupt Database"
+      Height          =   375
+      Left            =   5520
+      TabIndex        =   5
+      Top             =   960
+      Width           =   3375
+   End
+   Begin VB.TextBox Text2 
+      BeginProperty Font 
+         Name            =   "Courier New"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   2055
+      Left            =   240
+      Locked          =   -1  'True
+      MultiLine       =   -1  'True
+      ScrollBars      =   3  'Both
+      TabIndex        =   4
+      Top             =   960
+      Width           =   5055
+   End
+   Begin VB.CheckBox chkNoMods 
+      Caption         =   "Do not modify database"
+      Height          =   210
+      Left            =   1320
+      TabIndex        =   2
+      Top             =   120
+      Value           =   1  'Checked
+      Width           =   2295
+   End
+   Begin VB.TextBox Text1 
+      Height          =   315
+      Left            =   240
+      TabIndex        =   1
+      Top             =   480
+      Width           =   8100
+   End
+   Begin VBCCR17.ProgressBar PB1 
+      Height          =   495
+      Left            =   240
+      Top             =   3120
+      Width           =   8895
+      _ExtentX        =   15690
+      _ExtentY        =   873
+      Step            =   10
+      Text            =   "Form1.frx":058A
+   End
    Begin vbExtra.CommonDialogEx CDL1 
-      Left            =   5280
-      Top             =   3600
+      Left            =   8880
+      Top             =   4200
       _ExtentX        =   900
       _ExtentY        =   900
       MaxFileSize     =   255
       FontName        =   ""
    End
-   Begin VB.CommandButton Command2 
-      Caption         =   "&Fix Corrupt Database"
-      Height          =   375
-      Left            =   5280
+   Begin XPControls.XPButton Command1 
+      Height          =   405
+      Left            =   8400
       TabIndex        =   3
-      Top             =   840
-      Width           =   3375
-   End
-   Begin VB.Frame Frame1 
-      BeginProperty Font 
+      Top             =   480
+      Width           =   375
+      _ExtentX        =   661
+      _ExtentY        =   714
+      Picture         =   "Form1.frx":05BE
+      Caption         =   ""
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
          Charset         =   0
@@ -52,113 +120,10 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   3495
-      Left            =   0
-      TabIndex        =   7
-      Top             =   0
-      Width           =   8775
-      Begin VB.CheckBox chkNoMods 
-         Caption         =   "Do not modify database"
-         Height          =   210
-         Left            =   6360
-         TabIndex        =   0
-         Top             =   240
-         Value           =   1  'Checked
-         Width           =   2295
-      End
-      Begin VB.TextBox Text1 
-         Height          =   315
-         Left            =   120
-         TabIndex        =   1
-         Top             =   480
-         Width           =   8100
-      End
-      Begin VB.CommandButton cmdCompare 
-         Caption         =   "Compare &Database with Schema"
-         Height          =   375
-         Left            =   5280
-         TabIndex        =   5
-         Top             =   1940
-         Width           =   3375
-      End
-      Begin VB.CommandButton cmdCreate 
-         Caption         =   "&Create Master Schema Database"
-         Height          =   375
-         Left            =   5280
-         TabIndex        =   4
-         Top             =   1400
-         Width           =   3375
-      End
-      Begin VB.TextBox Text2 
-         BeginProperty Font 
-            Name            =   "Courier New"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   2055
-         Left            =   120
-         Locked          =   -1  'True
-         MultiLine       =   -1  'True
-         ScrollBars      =   3  'Both
-         TabIndex        =   2
-         Top             =   840
-         Width           =   5055
-      End
-      Begin MSComctlLib.ProgressBar PB1 
-         Height          =   375
-         Left            =   120
-         TabIndex        =   6
-         Top             =   3000
-         Width           =   8535
-         _ExtentX        =   15055
-         _ExtentY        =   661
-         _Version        =   393216
-         Appearance      =   1
-         Scrolling       =   1
-      End
-      Begin XPControls.XPButton Command1 
-         Height          =   400
-         Left            =   8300
-         TabIndex        =   11
-         Top             =   410
-         Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   714
-         Picture         =   "Form1.frx":058A
-         Caption         =   ""
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-      End
-      Begin VB.Label Label1 
-         AutoSize        =   -1  'True
-         Caption         =   "Database"
-         Height          =   210
-         Left            =   120
-         TabIndex        =   8
-         Top             =   240
-         Width           =   750
-      End
-   End
-   Begin MSComDlg.CommonDialog CDL1old 
-      Left            =   0
-      Top             =   3600
-      _ExtentX        =   847
-      _ExtentY        =   847
-      _Version        =   393216
    End
    Begin VB.Label lblStatus 
       BackStyle       =   0  'Transparent
+      Caption         =   "..."
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   9.75
@@ -170,18 +135,19 @@ Begin VB.Form Form1
       EndProperty
       ForeColor       =   &H000000C0&
       Height          =   375
-      Left            =   120
-      TabIndex        =   10
-      Top             =   3600
-      Width           =   8655
+      Left            =   240
+      TabIndex        =   6
+      Top             =   3720
+      Width           =   8895
    End
-   Begin VB.Label Label2 
-      Caption         =   "Label2"
-      Height          =   495
-      Left            =   3840
-      TabIndex        =   9
-      Top             =   1920
-      Width           =   1215
+   Begin VB.Label Label1 
+      AutoSize        =   -1  'True
+      Caption         =   "Database"
+      Height          =   210
+      Left            =   240
+      TabIndex        =   0
+      Top             =   120
+      Width           =   750
    End
 End
 Attribute VB_Name = "Form1"
