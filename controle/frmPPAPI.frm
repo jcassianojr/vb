@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmPPAPI 
    Caption         =   "Itens PPAP"
    ClientHeight    =   3390
@@ -47,56 +47,14 @@ Begin VB.Form frmPPAPI
       Top             =   720
       Width           =   3675
    End
-   Begin MSComCtl2.DTPicker DTPicker3 
-      Height          =   375
-      Left            =   5880
-      TabIndex        =   17
-      Top             =   1200
-      Width           =   1695
-      _ExtentX        =   2990
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   265355265
-      CurrentDate     =   37294
-   End
-   Begin MSComCtl2.DTPicker DTPicker2 
-      Height          =   375
-      Left            =   3720
-      TabIndex        =   16
-      Top             =   1200
-      Width           =   1635
-      _ExtentX        =   2884
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   265355265
-      CurrentDate     =   37294
-   End
    Begin VB.CommandButton Setor 
       Caption         =   "Interina"
       Height          =   315
       Index           =   3
       Left            =   5220
-      TabIndex        =   15
+      TabIndex        =   14
       Top             =   60
       Width           =   1575
-   End
-   Begin MSComCtl2.DTPicker DTPicker1 
-      Height          =   375
-      Left            =   1080
-      TabIndex        =   14
-      Top             =   1200
-      Width           =   1695
-      _ExtentX        =   2990
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   265355265
-      CurrentDate     =   37077
    End
    Begin VB.CommandButton Setor 
       Caption         =   "Aprovado"
@@ -145,7 +103,7 @@ Begin VB.Form frmPPAPI
       MultiLine       =   -1  'True
       ScrollBars      =   2  'Vertical
       TabIndex        =   7
-      Top             =   1920
+      Top             =   2040
       Width           =   8835
    End
    Begin VB.TextBox TXTFIELDS 
@@ -177,7 +135,7 @@ Begin VB.Form frmPPAPI
    Begin XPControls.XPButton Encerrar 
       Height          =   435
       Left            =   7320
-      TabIndex        =   21
+      TabIndex        =   18
       Top             =   600
       Width           =   1515
       _ExtentX        =   2672
@@ -197,7 +155,7 @@ Begin VB.Form frmPPAPI
    Begin XPControls.XPButton cmdClose 
       Height          =   435
       Left            =   7320
-      TabIndex        =   22
+      TabIndex        =   19
       Top             =   120
       Width           =   1515
       _ExtentX        =   2672
@@ -214,13 +172,49 @@ Begin VB.Form frmPPAPI
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR17.DTPicker DTPicker1 
+      Height          =   375
+      Left            =   1080
+      TabIndex        =   20
+      Top             =   1320
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
+   Begin VBCCR17.DTPicker DTPicker2 
+      Height          =   375
+      Left            =   3840
+      TabIndex        =   21
+      Top             =   1320
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
+   Begin VBCCR17.DTPicker DTPicker3 
+      Height          =   375
+      Left            =   6360
+      TabIndex        =   22
+      Top             =   1320
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
    Begin VB.Label lblLabels 
       Caption         =   "Prazo"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   6
-      Left            =   5400
-      TabIndex        =   20
+      Left            =   5760
+      TabIndex        =   17
       Top             =   1320
       Width           =   975
    End
@@ -230,7 +224,7 @@ Begin VB.Form frmPPAPI
       Height          =   255
       Index           =   5
       Left            =   2880
-      TabIndex        =   19
+      TabIndex        =   16
       Top             =   1320
       Width           =   975
    End
@@ -240,7 +234,7 @@ Begin VB.Form frmPPAPI
       Height          =   255
       Index           =   4
       Left            =   240
-      TabIndex        =   18
+      TabIndex        =   15
       Top             =   1200
       Width           =   855
    End
@@ -261,7 +255,7 @@ Begin VB.Form frmPPAPI
       Index           =   2
       Left            =   120
       TabIndex        =   8
-      Top             =   1680
+      Top             =   1800
       Width           =   975
    End
    Begin VB.Label lblLabels 
@@ -304,7 +298,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 4
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         '         aVAL(4) = DTPicker1
         '         aVAL(5) = DTPicker2
@@ -355,7 +349,7 @@ Private Sub Form_Load()
     aPAD = Array(0, 0, "", "", 0, "", "", Date, Date, Date)
     aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 4
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
 
     If IsDate(aVAL(7)) Then
@@ -384,23 +378,23 @@ Private Sub Setor_Click(Index As Integer)
     
     Select Case Index
     Case 0
-        txtFields(2) = "A"
+        TXTFIELDS(2) = "A"
         eRETU03 = "Aprovado"
     Case 1
-        txtFields(2) = "R"
+        TXTFIELDS(2) = "R"
         eRETU03 = "Reprovado"
     Case 2
-        txtFields(2) = "O"
+        TXTFIELDS(2) = "O"
         eRETU03 = "Outros"
     Case 3
-        txtFields(2) = "I"
+        TXTFIELDS(2) = "I"
         eRETU03 = "Interina"
     End Select
     
     
-    txtFields(4) = zIDFOLHA
-    txtFields(5) = zNOMEFOLHA
-    txtFields(6) = Date
+    TXTFIELDS(4) = zIDFOLHA
+    TXTFIELDS(5) = zNOMEFOLHA
+    TXTFIELDS(6) = Date
     
     
     If Index = 0 Then
@@ -449,16 +443,16 @@ Private Sub Setor_Click(Index As Integer)
     eRETU02 = ""
     Select Case iPPAP
     Case 1, 11
-        eRETU02 = "PPAP:" & Trim(str(nPPAP)) & Chr(13) & Chr(10)
+        eRETU02 = "PPAP:" & Trim(Str(nPPAP)) & Chr(13) & Chr(10)
     Case 2
-        eRETU02 = "PPAP Fornecedor:" & Trim(str(nPPAP)) & Chr(13) & Chr(10)
+        eRETU02 = "PPAP Fornecedor:" & Trim(Str(nPPAP)) & Chr(13) & Chr(10)
     Case 3
-        eRETU02 = "GP11:" & Trim(str(nPPAP)) & Chr(13) & Chr(10)
+        eRETU02 = "GP11:" & Trim(Str(nPPAP)) & Chr(13) & Chr(10)
     End Select
     
 
-    eRETU02 = eRETU02 & "PF:" & frmPPAP.txtFields(32) & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & "Código:" & frmPPAP.txtFields(5) & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & "PF:" & frmPPAP.TXTFIELDS(32) & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & "Código:" & frmPPAP.TXTFIELDS(5) & Chr(13) & Chr(10)
     If IsDate(DTPicker1) Then
         eRETU02 = eRETU02 & " Abertura:" & Fdata(DTPicker1) & Chr(13) & Chr(10)
     End If

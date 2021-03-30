@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmETI 
    Caption         =   "Cadastro ETI"
    ClientHeight    =   6285
@@ -12,11 +12,24 @@ Begin VB.Form frmETI
    ScaleHeight     =   6285
    ScaleWidth      =   10170
    StartUpPosition =   2  'CenterScreen
+   Begin VBCCR17.DTPicker DTPicker1 
+      Height          =   375
+      Left            =   2160
+      TabIndex        =   28
+      TabStop         =   0   'False
+      Top             =   2520
+      Width           =   1575
+      _ExtentX        =   2778
+      _ExtentY        =   661
+      Enabled         =   0   'False
+      Value           =   44285
+      CheckBox        =   -1  'True
+   End
    Begin VB.CommandButton Command1 
       Caption         =   "Distribuicao"
       Height          =   495
       Left            =   7680
-      TabIndex        =   23
+      TabIndex        =   22
       Top             =   3480
       Width           =   1335
    End
@@ -48,7 +61,7 @@ Begin VB.Form frmETI
       Caption         =   "Nova Revisão"
       Height          =   495
       Left            =   4080
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   2520
       Width           =   735
    End
@@ -56,27 +69,9 @@ Begin VB.Form frmETI
       Caption         =   "Motivos"
       Height          =   375
       Left            =   7680
-      TabIndex        =   16
+      TabIndex        =   15
       Top             =   3120
       Width           =   1335
-   End
-   Begin MSComCtl2.DTPicker DTPicker1 
-      DataField       =   "REVDATA"
-      DataSource      =   "Data"
-      Height          =   375
-      Left            =   2040
-      TabIndex        =   15
-      TabStop         =   0   'False
-      Top             =   2520
-      Width           =   1815
-      _ExtentX        =   3201
-      _ExtentY        =   661
-      _Version        =   393216
-      Enabled         =   0   'False
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   137887745
-      CurrentDate     =   36871
    End
    Begin VB.TextBox TXTFIELDS 
       BackColor       =   &H00C0FFFF&
@@ -136,7 +131,7 @@ Begin VB.Form frmETI
    Begin MSFlexGridLib.MSFlexGrid gridrev 
       Height          =   1095
       Left            =   120
-      TabIndex        =   17
+      TabIndex        =   16
       TabStop         =   0   'False
       Top             =   3120
       Width           =   7455
@@ -147,7 +142,7 @@ Begin VB.Form frmETI
    Begin MSFlexGridLib.MSFlexGrid gridrevi 
       Height          =   1575
       Left            =   120
-      TabIndex        =   18
+      TabIndex        =   17
       TabStop         =   0   'False
       Top             =   4320
       Width           =   7455
@@ -158,7 +153,7 @@ Begin VB.Form frmETI
    Begin XPControls.XPButton Encerrar 
       Height          =   435
       Left            =   8280
-      TabIndex        =   24
+      TabIndex        =   23
       Top             =   840
       Width           =   1575
       _ExtentX        =   2778
@@ -178,7 +173,7 @@ Begin VB.Form frmETI
    Begin XPControls.XPButton cmdClose 
       Height          =   435
       Left            =   8280
-      TabIndex        =   25
+      TabIndex        =   24
       Top             =   240
       Width           =   1515
       _ExtentX        =   2672
@@ -198,7 +193,7 @@ Begin VB.Form frmETI
    Begin XPControls.XPButton ComMotInc 
       Height          =   435
       Left            =   7800
-      TabIndex        =   26
+      TabIndex        =   25
       TabStop         =   0   'False
       Top             =   4320
       Width           =   1575
@@ -219,7 +214,7 @@ Begin VB.Form frmETI
    Begin XPControls.XPButton ComMotAlt 
       Height          =   435
       Left            =   7800
-      TabIndex        =   27
+      TabIndex        =   26
       TabStop         =   0   'False
       Top             =   4800
       Width           =   1575
@@ -240,7 +235,7 @@ Begin VB.Form frmETI
    Begin XPControls.XPButton ComMotExc 
       Height          =   435
       Left            =   7800
-      TabIndex        =   28
+      TabIndex        =   27
       TabStop         =   0   'False
       Top             =   5280
       Width           =   1575
@@ -264,7 +259,7 @@ Begin VB.Form frmETI
       Height          =   255
       Index           =   8
       Left            =   3240
-      TabIndex        =   22
+      TabIndex        =   21
       Top             =   120
       Width           =   975
    End
@@ -274,7 +269,7 @@ Begin VB.Form frmETI
       Height          =   255
       Index           =   7
       Left            =   120
-      TabIndex        =   21
+      TabIndex        =   20
       Top             =   1320
       Width           =   975
    End
@@ -284,7 +279,7 @@ Begin VB.Form frmETI
       Height          =   255
       Index           =   6
       Left            =   5040
-      TabIndex        =   20
+      TabIndex        =   19
       Top             =   2640
       Width           =   255
    End
@@ -372,7 +367,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 2
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         aVAL(9) = DTPicker1.Value
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
@@ -395,10 +390,10 @@ Private Sub CmdNovaREV_Click()
         Alert ("Preencher numero interno")
         Exit Sub
     End If
-    txtFields(5) = FixInt(txtFields(5), 0) + 1
+    TXTFIELDS(5) = FixInt(TXTFIELDS(5), 0) + 1
     DTPicker1 = Date
-    IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & " and tipo='ETI' and revisao=" & txtFields(5), 4, Array("PF", "REVISAO", "TIPO", "DatA"), _
-        Array(nNUMERO, txtFields(5), "ETI", Date), True, False
+    IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & " and tipo='ETI' and revisao=" & TXTFIELDS(5), 4, Array("PF", "REVISAO", "TIPO", "DatA"), _
+        Array(nNUMERO, TXTFIELDS(5), "ETI", Date), True, False
     Filgridrev
 End Sub
 
@@ -481,12 +476,12 @@ Private Sub Form_Load()
     aPAD = Array("", "", "", "", "", 0, 0, "", "", Date)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 2
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     If IsDate(aVAL(9)) Then
         DTPicker1.Value = aVAL(9)
     End If
-    nNUMERO = FixInt(txtFields(6), 0)
+    nNUMERO = FixInt(TXTFIELDS(6), 0)
     ComMotAlt.Enabled = False
     ComMotExc.Enabled = False
     ComMotInc.Enabled = False
@@ -505,7 +500,7 @@ End Sub
 
 Private Sub TXTFIELDS_LostFocus(Index As Integer)
     If Index = 6 Then
-        nNUMERO = FixInt(txtFields(6), 0)
+        nNUMERO = FixInt(TXTFIELDS(6), 0)
     End If
 End Sub
 

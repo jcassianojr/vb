@@ -1,7 +1,5 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
@@ -15,12 +13,42 @@ Begin VB.Form frmFemeaApu
    ScaleHeight     =   6630
    ScaleWidth      =   9615
    StartUpPosition =   2  'CenterScreen
+   Begin VBCCR17.DTPicker DTPicker2 
+      Height          =   375
+      Left            =   4200
+      TabIndex        =   47
+      Top             =   120
+      Width           =   1455
+      _ExtentX        =   2566
+      _ExtentY        =   661
+      Value           =   44285
+      AllowUserInput  =   -1  'True
+   End
+   Begin VBCCR17.DTPicker DTPicker1 
+      Height          =   375
+      Left            =   2520
+      TabIndex        =   46
+      Top             =   120
+      Width           =   1455
+      _ExtentX        =   2566
+      _ExtentY        =   661
+      Value           =   44285
+      AllowUserInput  =   -1  'True
+   End
+   Begin VBCCR17.ProgressBar barra 
+      Height          =   255
+      Left            =   5760
+      Top             =   960
+      Width           =   2535
+      _ExtentX        =   4471
+      _ExtentY        =   450
+   End
    Begin VB.CommandButton CmdApurar 
       Caption         =   "Checagem "
       Height          =   315
       Index           =   1
       Left            =   8400
-      TabIndex        =   40
+      TabIndex        =   37
       Top             =   960
       Width           =   915
    End
@@ -30,26 +58,15 @@ Begin VB.Form frmFemeaApu
       Height          =   285
       Left            =   6840
       Locked          =   -1  'True
-      TabIndex        =   39
+      TabIndex        =   36
       TabStop         =   0   'False
       Top             =   480
       Width           =   1215
    End
-   Begin MSComctlLib.ProgressBar Barra 
-      Height          =   375
-      Left            =   5760
-      TabIndex        =   38
-      Top             =   840
-      Width           =   2535
-      _ExtentX        =   4471
-      _ExtentY        =   661
-      _Version        =   393216
-      Appearance      =   1
-   End
    Begin TabDlg.SSTab SSTab1 
       Height          =   5055
       Left            =   120
-      TabIndex        =   16
+      TabIndex        =   14
       Top             =   1440
       Width           =   9255
       _ExtentX        =   16325
@@ -108,20 +125,24 @@ Begin VB.Form frmFemeaApu
       TabPicture(1)   =   "frmFemeaApu.frx":001C
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Cmdeditar"
+      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Grid10"
+      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Resumo Operacoes"
       TabPicture(2)   =   "frmFemeaApu.frx":0038
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Command3"
+      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "GridOpe"
+      Tab(2).Control(1).Enabled=   0   'False
       Tab(2).ControlCount=   2
       Begin VB.TextBox text 
          Alignment       =   1  'Right Justify
          Height          =   330
          Index           =   4
          Left            =   240
-         TabIndex        =   26
+         TabIndex        =   24
          TabStop         =   0   'False
          Text            =   "0"
          Top             =   840
@@ -132,7 +153,7 @@ Begin VB.Form frmFemeaApu
          Height          =   330
          Index           =   5
          Left            =   1080
-         TabIndex        =   25
+         TabIndex        =   23
          TabStop         =   0   'False
          Text            =   "0"
          Top             =   855
@@ -143,7 +164,7 @@ Begin VB.Form frmFemeaApu
          Height          =   330
          Index           =   6
          Left            =   1920
-         TabIndex        =   24
+         TabIndex        =   22
          TabStop         =   0   'False
          Text            =   "0"
          Top             =   855
@@ -154,7 +175,7 @@ Begin VB.Form frmFemeaApu
          Height          =   330
          Index           =   7
          Left            =   2760
-         TabIndex        =   23
+         TabIndex        =   21
          TabStop         =   0   'False
          Text            =   "0"
          Top             =   855
@@ -165,7 +186,7 @@ Begin VB.Form frmFemeaApu
          Height          =   330
          Index           =   8
          Left            =   3600
-         TabIndex        =   22
+         TabIndex        =   20
          TabStop         =   0   'False
          Text            =   "0"
          Top             =   855
@@ -176,7 +197,7 @@ Begin VB.Form frmFemeaApu
          Height          =   330
          Index           =   9
          Left            =   4440
-         TabIndex        =   21
+         TabIndex        =   19
          TabStop         =   0   'False
          Text            =   "0"
          Top             =   840
@@ -187,7 +208,7 @@ Begin VB.Form frmFemeaApu
          Height          =   330
          Index           =   10
          Left            =   5280
-         TabIndex        =   20
+         TabIndex        =   18
          TabStop         =   0   'False
          Text            =   "0"
          Top             =   855
@@ -198,7 +219,7 @@ Begin VB.Form frmFemeaApu
          Height          =   330
          Index           =   11
          Left            =   6120
-         TabIndex        =   19
+         TabIndex        =   17
          TabStop         =   0   'False
          Text            =   "0"
          Top             =   855
@@ -208,7 +229,7 @@ Begin VB.Form frmFemeaApu
          Caption         =   "Excluir Tudo"
          Height          =   435
          Left            =   7500
-         TabIndex        =   18
+         TabIndex        =   16
          Top             =   2640
          Width           =   1095
       End
@@ -216,14 +237,14 @@ Begin VB.Form frmFemeaApu
          Caption         =   "Checar Nome Clientes"
          Height          =   495
          Left            =   7500
-         TabIndex        =   17
+         TabIndex        =   15
          Top             =   3180
          Width           =   1095
       End
       Begin MSFlexGridLib.MSFlexGrid Grid 
          Height          =   2535
          Left            =   240
-         TabIndex        =   27
+         TabIndex        =   25
          TabStop         =   0   'False
          Top             =   1320
          Width           =   7155
@@ -234,7 +255,7 @@ Begin VB.Form frmFemeaApu
       Begin MSFlexGridLib.MSFlexGrid Grid10 
          Height          =   4335
          Left            =   -74880
-         TabIndex        =   36
+         TabIndex        =   34
          TabStop         =   0   'False
          Top             =   480
          Width           =   7635
@@ -245,7 +266,7 @@ Begin VB.Form frmFemeaApu
       Begin MSFlexGridLib.MSFlexGrid GridOpe 
          Height          =   4335
          Left            =   -74760
-         TabIndex        =   37
+         TabIndex        =   35
          TabStop         =   0   'False
          Top             =   480
          Width           =   7635
@@ -256,7 +277,7 @@ Begin VB.Form frmFemeaApu
       Begin XPControls.XPButton Cmdeditar 
          Height          =   435
          Left            =   -67200
-         TabIndex        =   44
+         TabIndex        =   41
          TabStop         =   0   'False
          Top             =   480
          Width           =   1275
@@ -277,7 +298,7 @@ Begin VB.Form frmFemeaApu
       Begin XPControls.XPButton Command3 
          Height          =   435
          Left            =   -67200
-         TabIndex        =   45
+         TabIndex        =   42
          TabStop         =   0   'False
          Top             =   480
          Width           =   1275
@@ -298,7 +319,7 @@ Begin VB.Form frmFemeaApu
       Begin XPControls.XPButton EditSeq 
          Height          =   435
          Left            =   7440
-         TabIndex        =   46
+         TabIndex        =   43
          TabStop         =   0   'False
          Top             =   2040
          Width           =   1275
@@ -319,7 +340,7 @@ Begin VB.Form frmFemeaApu
       Begin XPControls.XPButton Command2 
          Height          =   435
          Left            =   7440
-         TabIndex        =   47
+         TabIndex        =   44
          TabStop         =   0   'False
          Top             =   1560
          Width           =   1275
@@ -340,7 +361,7 @@ Begin VB.Form frmFemeaApu
       Begin XPControls.XPButton Command1 
          Height          =   435
          Left            =   7440
-         TabIndex        =   48
+         TabIndex        =   45
          TabStop         =   0   'False
          Top             =   1080
          Width           =   1275
@@ -366,7 +387,7 @@ Begin VB.Form frmFemeaApu
          Height          =   195
          Index           =   8
          Left            =   240
-         TabIndex        =   35
+         TabIndex        =   33
          Top             =   615
          Width           =   315
       End
@@ -378,7 +399,7 @@ Begin VB.Form frmFemeaApu
          Height          =   195
          Index           =   9
          Left            =   1320
-         TabIndex        =   34
+         TabIndex        =   32
          Top             =   615
          Width           =   405
       End
@@ -390,7 +411,7 @@ Begin VB.Form frmFemeaApu
          Height          =   195
          Index           =   10
          Left            =   2040
-         TabIndex        =   33
+         TabIndex        =   31
          Top             =   615
          Width           =   405
       End
@@ -402,7 +423,7 @@ Begin VB.Form frmFemeaApu
          Height          =   195
          Index           =   11
          Left            =   2760
-         TabIndex        =   32
+         TabIndex        =   30
          Top             =   600
          Width           =   405
       End
@@ -414,7 +435,7 @@ Begin VB.Form frmFemeaApu
          Height          =   195
          Index           =   12
          Left            =   3600
-         TabIndex        =   31
+         TabIndex        =   29
          Top             =   600
          Width           =   495
       End
@@ -426,7 +447,7 @@ Begin VB.Form frmFemeaApu
          Height          =   195
          Index           =   13
          Left            =   4440
-         TabIndex        =   30
+         TabIndex        =   28
          Top             =   615
          Width           =   585
       End
@@ -438,7 +459,7 @@ Begin VB.Form frmFemeaApu
          Height          =   195
          Index           =   14
          Left            =   5280
-         TabIndex        =   29
+         TabIndex        =   27
          Top             =   600
          Width           =   585
       End
@@ -450,7 +471,7 @@ Begin VB.Form frmFemeaApu
          Height          =   195
          Index           =   15
          Left            =   6120
-         TabIndex        =   28
+         TabIndex        =   26
          Top             =   600
          Width           =   360
       End
@@ -460,47 +481,38 @@ Begin VB.Form frmFemeaApu
       Height          =   315
       Index           =   0
       Left            =   5760
-      TabIndex        =   15
+      TabIndex        =   13
       Top             =   480
       Width           =   915
    End
    Begin VB.CheckBox Semestral 
       Caption         =   "Semestral"
+      ForeColor       =   &H00C00000&
       Height          =   195
       Left            =   4560
-      TabIndex        =   14
+      TabIndex        =   12
       Top             =   1020
       Width           =   1035
    End
    Begin VB.CheckBox Anual 
       Caption         =   "Anual"
+      ForeColor       =   &H00C00000&
       Height          =   195
       Left            =   4560
-      TabIndex        =   13
+      TabIndex        =   11
       Top             =   660
       Width           =   915
    End
    Begin VB.CheckBox apurado 
       Caption         =   "Apurado"
       Enabled         =   0   'False
+      ForeColor       =   &H00C00000&
       Height          =   195
       Left            =   5760
-      TabIndex        =   12
+      TabIndex        =   10
       TabStop         =   0   'False
       Top             =   120
       Width           =   915
-   End
-   Begin MSComCtl2.DTPicker DTPicker1 
-      Height          =   375
-      Left            =   2520
-      TabIndex        =   10
-      Top             =   120
-      Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   661
-      _Version        =   393216
-      Format          =   136839169
-      CurrentDate     =   38019
    End
    Begin VB.TextBox text 
       BackColor       =   &H00C0FFFF&
@@ -569,22 +581,10 @@ Begin VB.Form frmFemeaApu
       Top             =   120
       Width           =   975
    End
-   Begin MSComCtl2.DTPicker DTPicker2 
-      Height          =   375
-      Left            =   4200
-      TabIndex        =   11
-      Top             =   120
-      Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   661
-      _Version        =   393216
-      Format          =   136904705
-      CurrentDate     =   38019
-   End
    Begin XPControls.XPButton cmdClose 
       Height          =   435
       Left            =   8160
-      TabIndex        =   41
+      TabIndex        =   38
       Top             =   120
       Width           =   1155
       _ExtentX        =   2037
@@ -604,7 +604,7 @@ Begin VB.Form frmFemeaApu
    Begin VBCCR17.SpinBox mes 
       Height          =   495
       Left            =   120
-      TabIndex        =   42
+      TabIndex        =   39
       Top             =   840
       Width           =   735
       _ExtentX        =   1296
@@ -625,7 +625,7 @@ Begin VB.Form frmFemeaApu
    Begin VBCCR17.SpinBox ano 
       Height          =   495
       Left            =   1080
-      TabIndex        =   43
+      TabIndex        =   40
       Top             =   840
       Width           =   975
       _ExtentX        =   1720
@@ -797,7 +797,7 @@ Private Sub CmdApurar_Click(Index As Integer)
     lRDP = False
     dINI = DTPicker1.Value
     dFIM = DTPicker2.Value
-    nSEQ = FixInt(text(0))
+    nSEQ = FixInt(tEXT(0))
     nMES = FixInt(mes.Value)
     nANO = FixInt(ano.Value)
 
@@ -842,7 +842,7 @@ Private Sub CmdApurar_Click(Index As Integer)
         While Not oRSFEMEA.EOF
             nPF = oRSFEMEA("PF")
             nPRONUM = FixNum(oRSFEMEA("PRONUM"))
-            DIZAPU.text = nPF & "/" & nPRONUM
+            DIZAPU.tEXT = nPF & "/" & nPRONUM
             DIZAPU.Refresh
             cSQL = "SELECT PF,PRONUM FROM FEMPF WHERE PF=" & nPF & " and pronum=" & nPRONUM
             oRSFEME2.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
@@ -866,7 +866,7 @@ Private Sub CmdApurar_Click(Index As Integer)
         oRSPF.Open cSQL, oDBPF
         While Not oRSPF.EOF
             nPF = oRSPF("PF")
-            DIZAPU.text = nPF
+            DIZAPU.tEXT = nPF
             DIZAPU.Refresh
             'cSQL = "DELETE FROM FEMEA WHERE PF=" & nPF
             cSQL = "DELETE FROM FEMEAPAD WHERE PF=" & nPF
@@ -939,14 +939,14 @@ Private Sub CmdApurar_Click(Index As Integer)
     'rpn faixas
     If MDG("Apurar Femea RPN-Faixas") Then
         '        cSQL = "SELECT PF,EXCRPN FROM PF WHERE PF=" & nPF checar excprn/bloqueados melhorar selects abaixo
-        text(4) = 0
-        text(5) = 0
-        text(6) = 0
-        text(7) = 0
-        text(8) = 0
-        text(9) = 0
-        text(10) = 0
-        text(11) = 0
+        tEXT(4) = 0
+        tEXT(5) = 0
+        tEXT(6) = 0
+        tEXT(7) = 0
+        tEXT(8) = 0
+        tEXT(9) = 0
+        tEXT(10) = 0
+        tEXT(11) = 0
    
         Set oDBFEMEA = New ADODB.Connection
         Set oRSFEMEA = New ADODB.Recordset
@@ -970,42 +970,42 @@ Private Sub CmdApurar_Click(Index As Integer)
             DizerBarra "carregando femea,indices <21"
             cSQL = "SELECT count(indris) FROM " & cTabela & " where indris<21 AND NOT BLOQUEADO"
             oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-            text(4) = text(4) + FixInt(oRSFEMEA(0))
+            tEXT(4) = tEXT(4) + FixInt(oRSFEMEA(0))
             oRSFEMEA.Close
             DizerBarra "carregando femea,indices >21 <41"
             cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>21 AND indris<41 AND NOT BLOQUEADO"
             oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-            text(5) = text(5) + FixInt(oRSFEMEA(0))
+            tEXT(5) = tEXT(5) + FixInt(oRSFEMEA(0))
             oRSFEMEA.Close
             DizerBarra "carregando femea,indices >40 <61"
             cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>40 AND indris<61 AND NOT BLOQUEADO"
             oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-            text(6) = text(6) + FixInt(oRSFEMEA(0))
+            tEXT(6) = tEXT(6) + FixInt(oRSFEMEA(0))
             oRSFEMEA.Close
             DizerBarra "carregando femea,indices >60 <81"
             cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>60 AND indris<81 AND NOT BLOQUEADO"
             oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-            text(7) = text(7) + FixInt(oRSFEMEA(0))
+            tEXT(7) = tEXT(7) + FixInt(oRSFEMEA(0))
             oRSFEMEA.Close
             DizerBarra "carregando femea,indices >80 <101"
             cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>80 AND indris<101 AND NOT BLOQUEADO"
             oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-            text(8) = text(8) + FixInt(oRSFEMEA(0))
+            tEXT(8) = tEXT(8) + FixInt(oRSFEMEA(0))
             oRSFEMEA.Close
             DizerBarra "carregando femea,indices >100 <121"
             cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>100 AND indris<121  AND NOT BLOQUEADO"
             oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-            text(9) = text(9) + FixInt(oRSFEMEA(0))
+            tEXT(9) = tEXT(9) + FixInt(oRSFEMEA(0))
             oRSFEMEA.Close
             DizerBarra "carregando femea,indices >120 <141"
             cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>120 AND indris<141  AND NOT BLOQUEADO"
             oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-            text(10) = text(10) + FixInt(oRSFEMEA(0))
+            tEXT(10) = tEXT(10) + FixInt(oRSFEMEA(0))
             oRSFEMEA.Close
             DizerBarra "carregando femea,indices >140"
             cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>140  AND NOT BLOQUEADO"
             oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-            text(11) = text(11) + FixInt(oRSFEMEA(0))
+            tEXT(11) = tEXT(11) + FixInt(oRSFEMEA(0))
             oRSFEMEA.Close
             oDBFEMEA.Close
         Next X
@@ -1480,7 +1480,7 @@ Private Sub CmdApurar_Click(Index As Integer)
         oRSPF.Close
     End If
     
-    text(12) = Today()
+    tEXT(12) = Today()
     apurado = 1
     Screen.MousePointer = vbDefault
     Barra.Value = 0
@@ -1666,7 +1666,7 @@ Private Sub Command3_Click()
     nPFTMP = FixInt(GridOpe)
     GridOpe.Col = 1
     nPROTMP = FixInt(GridOpe)
-    ePASS01 = "SELECT * FROM FEMRPNO WHERE SEQ=" & FixInt(text(0)) & " AND PF=" & nPFTMP & " AND PRONUM=" & nPROTMP
+    ePASS01 = "SELECT * FROM FEMRPNO WHERE SEQ=" & FixInt(tEXT(0)) & " AND PF=" & nPFTMP & " AND PRONUM=" & nPROTMP
     FrmFEMRPNO.Show vbModal, Me
 
 End Sub
@@ -1689,7 +1689,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 
     If MDG("Gravar e Sair", "Gravando ") Then
         For nITEM = 0 To 12
-            aVAL(nITEM) = text(nITEM)
+            aVAL(nITEM) = tEXT(nITEM)
         Next nITEM
         aVAL(13) = DTPicker1
         aVAL(14) = DTPicker2
@@ -1729,12 +1729,12 @@ Private Sub Form_Load()
     aPAD = Array(0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, "", "", "", False, False, False)
     aVAL = PegSQL(cARQFEMEA, cSQLUSO, nCAMPOS, aCAM, aFOR, aPAD)
     For nITEM = 0 To 12
-        text(nITEM) = aVAL(nITEM)
+        tEXT(nITEM) = aVAL(nITEM)
     Next nITEM
     If aVAL(13) <> "" Then DTPicker1 = aVAL(13)
     If aVAL(14) <> "" Then DTPicker2 = aVAL(14)
-    mes.Value = text(1)
-    ano.Value = text(2)
+    mes.Value = tEXT(1)
+    ano.Value = tEXT(2)
     Anual = aVAL(15)
     Semestral = aVAL(16)
     apurado = aVAL(17)
@@ -1771,7 +1771,7 @@ End Sub
 Private Sub filgrid10()
     Dim cSQL As String
     DizerBarra "Carregando RPNT"
-    cSQL = "SELECT TIPOAPU, PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU,50 FROM FEMRPNT WHERE SEQ=" & FixInt(text(0)) & " ORDER BY INDRIS DESC"
+    cSQL = "SELECT TIPOAPU, PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU,50 FROM FEMRPNT WHERE SEQ=" & FixInt(tEXT(0)) & " ORDER BY INDRIS DESC"
     MontaGrid Grid10, 11, Array(400, 400, 400, 400, 400, 400, 400, 400, 300, 2500, 2500), Array("TIPOAPU", "PF", "ITEM", "RPN", "Pro", "Fal", "Efe", "Cau", "Man", "Efeito", "Causa"), Array("TIPOAPU", "PF", "ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
     DizerBarra ""
 End Sub
@@ -1779,7 +1779,7 @@ End Sub
 Private Sub filgridope()
     Dim cSQL As String
     DizerBarra "Carregando RPNO"
-    cSQL = "SELECT PF, PRONUM, TOTRPN, TOTCAU, TOTM40, MAIRPN, TOTFX01, TOTFX02, TOTFX03, TOTRPN01, TOTRPN02, TOTRPN03 FROM FEMRPNO WHERE SEQ=" & FixInt(text(0)) & " ORDER BY PF,PRONUM"
+    cSQL = "SELECT PF, PRONUM, TOTRPN, TOTCAU, TOTM40, MAIRPN, TOTFX01, TOTFX02, TOTFX03, TOTRPN01, TOTRPN02, TOTRPN03 FROM FEMRPNO WHERE SEQ=" & FixInt(tEXT(0)) & " ORDER BY PF,PRONUM"
     MontaGridUltra GridOpe, 12, Array(500, 500, 800, 500, 500, 500, 500, 500, 500, 800, 800, 800), Array("PF", "Pro", "Tot RPN", "Cau", ">40", "Maior", "<40", "40-100", ">100", "Ant", "Ant", "Ant"), Array("PF", "PRONUM", "TOTRPN", "TOTCAU", "TOTM40", "MAIRPN", "TOTFX01", "TOTFX02", "TOTFX03", "TOTRPN01", "TOTRPN02", "TOTRPN03"), cARQFEMEA, cSQL
     DizerBarra ""
 End Sub

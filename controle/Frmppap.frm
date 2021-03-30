@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmPPAP 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PPAP"
@@ -22,7 +22,7 @@ Begin VB.Form frmPPAP
       Height          =   315
       Index           =   1
       Left            =   3000
-      TabIndex        =   127
+      TabIndex        =   124
       TabStop         =   0   'False
       Top             =   840
       Width           =   495
@@ -32,7 +32,7 @@ Begin VB.Form frmPPAP
       Height          =   315
       Index           =   6
       Left            =   3600
-      TabIndex        =   125
+      TabIndex        =   122
       TabStop         =   0   'False
       Top             =   840
       Width           =   375
@@ -42,7 +42,7 @@ Begin VB.Form frmPPAP
       Height          =   315
       Index           =   2
       Left            =   2520
-      TabIndex        =   124
+      TabIndex        =   121
       TabStop         =   0   'False
       Top             =   840
       Width           =   375
@@ -61,7 +61,7 @@ Begin VB.Form frmPPAP
       Height          =   255
       Index           =   1
       Left            =   3180
-      TabIndex        =   123
+      TabIndex        =   120
       Top             =   420
       Width           =   315
    End
@@ -71,7 +71,7 @@ Begin VB.Form frmPPAP
       Height          =   285
       Index           =   32
       Left            =   4440
-      TabIndex        =   117
+      TabIndex        =   114
       Top             =   120
       Width           =   735
    End
@@ -81,7 +81,7 @@ Begin VB.Form frmPPAP
       Height          =   285
       Left            =   8040
       Locked          =   -1  'True
-      TabIndex        =   110
+      TabIndex        =   107
       TabStop         =   0   'False
       Top             =   120
       Width           =   495
@@ -94,7 +94,7 @@ Begin VB.Form frmPPAP
       Height          =   195
       Index           =   21
       Left            =   5760
-      TabIndex        =   109
+      TabIndex        =   106
       Top             =   120
       Width           =   975
    End
@@ -185,44 +185,78 @@ Begin VB.Form frmPPAP
       TabCaption(1)   =   "B"
       TabPicture(1)   =   "Frmppap.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Txtfields(14)"
-      Tab(1).Control(1)=   "Txtfields(13)"
-      Tab(1).Control(2)=   "check1(0)"
-      Tab(1).Control(3)=   "check1(1)"
-      Tab(1).Control(4)=   "check1(2)"
-      Tab(1).Control(5)=   "check1(3)"
-      Tab(1).Control(6)=   "check1(4)"
-      Tab(1).Control(7)=   "check1(5)"
-      Tab(1).Control(8)=   "check1(6)"
-      Tab(1).Control(9)=   "check1(7)"
-      Tab(1).Control(10)=   "check1(8)"
-      Tab(1).Control(11)=   "check1(9)"
-      Tab(1).Control(12)=   "check1(10)"
-      Tab(1).Control(13)=   "check1(11)"
-      Tab(1).Control(14)=   "check1(12)"
-      Tab(1).Control(15)=   "check1(13)"
-      Tab(1).Control(16)=   "check1(15)"
-      Tab(1).Control(17)=   "Txtfields(29)"
-      Tab(1).Control(18)=   "lblLabels(13)"
-      Tab(1).Control(19)=   "Label2"
+      Tab(1).Control(0)=   "Label2"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "lblLabels(13)"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).Control(2)=   "Txtfields(29)"
+      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).Control(3)=   "check1(15)"
+      Tab(1).Control(3).Enabled=   0   'False
+      Tab(1).Control(4)=   "check1(13)"
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "check1(12)"
+      Tab(1).Control(5).Enabled=   0   'False
+      Tab(1).Control(6)=   "check1(11)"
+      Tab(1).Control(6).Enabled=   0   'False
+      Tab(1).Control(7)=   "check1(10)"
+      Tab(1).Control(7).Enabled=   0   'False
+      Tab(1).Control(8)=   "check1(9)"
+      Tab(1).Control(8).Enabled=   0   'False
+      Tab(1).Control(9)=   "check1(8)"
+      Tab(1).Control(9).Enabled=   0   'False
+      Tab(1).Control(10)=   "check1(7)"
+      Tab(1).Control(10).Enabled=   0   'False
+      Tab(1).Control(11)=   "check1(6)"
+      Tab(1).Control(11).Enabled=   0   'False
+      Tab(1).Control(12)=   "check1(5)"
+      Tab(1).Control(12).Enabled=   0   'False
+      Tab(1).Control(13)=   "check1(4)"
+      Tab(1).Control(13).Enabled=   0   'False
+      Tab(1).Control(14)=   "check1(3)"
+      Tab(1).Control(14).Enabled=   0   'False
+      Tab(1).Control(15)=   "check1(2)"
+      Tab(1).Control(15).Enabled=   0   'False
+      Tab(1).Control(16)=   "check1(1)"
+      Tab(1).Control(16).Enabled=   0   'False
+      Tab(1).Control(17)=   "check1(0)"
+      Tab(1).Control(17).Enabled=   0   'False
+      Tab(1).Control(18)=   "Txtfields(13)"
+      Tab(1).Control(18).Enabled=   0   'False
+      Tab(1).Control(19)=   "Txtfields(14)"
+      Tab(1).Control(19).Enabled=   0   'False
       Tab(1).ControlCount=   20
       TabCaption(2)   =   "C"
       TabPicture(2)   =   "Frmppap.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Txtfields(30)"
-      Tab(2).Control(1)=   "Txtfields(31)"
-      Tab(2).Control(2)=   "Txtfields(8)"
-      Tab(2).Control(3)=   "Txtfields(0)"
-      Tab(2).Control(4)=   "Txtfields(17)"
-      Tab(2).Control(5)=   "Txtfields(18)"
-      Tab(2).Control(6)=   "Command2"
-      Tab(2).Control(7)=   "DTPicker1"
-      Tab(2).Control(8)=   "lblLabels(23)"
-      Tab(2).Control(9)=   "lblLabels(32)"
-      Tab(2).Control(10)=   "lblLabels(4)"
-      Tab(2).Control(11)=   "Label1"
-      Tab(2).Control(12)=   "lblLabels(2)"
-      Tab(2).Control(13)=   "lblLabels(15)"
+      Tab(2).Control(0)=   "lblLabels(15)"
+      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).Control(1)=   "lblLabels(2)"
+      Tab(2).Control(1).Enabled=   0   'False
+      Tab(2).Control(2)=   "Label1"
+      Tab(2).Control(2).Enabled=   0   'False
+      Tab(2).Control(3)=   "lblLabels(4)"
+      Tab(2).Control(3).Enabled=   0   'False
+      Tab(2).Control(4)=   "lblLabels(32)"
+      Tab(2).Control(4).Enabled=   0   'False
+      Tab(2).Control(5)=   "lblLabels(23)"
+      Tab(2).Control(5).Enabled=   0   'False
+      Tab(2).Control(6)=   "DTPicker1"
+      Tab(2).Control(6).Enabled=   0   'False
+      Tab(2).Control(7)=   "Command2"
+      Tab(2).Control(7).Enabled=   0   'False
+      Tab(2).Control(8)=   "Txtfields(18)"
+      Tab(2).Control(8).Enabled=   0   'False
+      Tab(2).Control(9)=   "Txtfields(17)"
+      Tab(2).Control(9).Enabled=   0   'False
+      Tab(2).Control(10)=   "Txtfields(0)"
+      Tab(2).Control(10).Enabled=   0   'False
+      Tab(2).Control(11)=   "Txtfields(8)"
+      Tab(2).Control(11).Enabled=   0   'False
+      Tab(2).Control(12)=   "Txtfields(31)"
+      Tab(2).Control(12).Enabled=   0   'False
+      Tab(2).Control(13)=   "Txtfields(30)"
+      Tab(2).Control(13).Enabled=   0   'False
       Tab(2).ControlCount=   14
       TabCaption(3)   =   "Ctrle Datas"
       TabPicture(3)   =   "Frmppap.frx":0054
@@ -286,7 +320,7 @@ Begin VB.Form frmPPAP
          Left            =   -69600
          Picture         =   "Frmppap.frx":00C4
          Style           =   1  'Graphical
-         TabIndex        =   126
+         TabIndex        =   123
          Top             =   1200
          Width           =   495
       End
@@ -294,7 +328,7 @@ Begin VB.Form frmPPAP
          Caption         =   "Localizar Pelo PPAP"
          Height          =   315
          Left            =   -71940
-         TabIndex        =   122
+         TabIndex        =   119
          ToolTipText     =   "Preenche programa/pedido/item com base fornecedor/codigo"
          Top             =   2220
          Width           =   1755
@@ -303,7 +337,7 @@ Begin VB.Form frmPPAP
          Caption         =   "^^"
          Height          =   375
          Left            =   -71880
-         TabIndex        =   121
+         TabIndex        =   118
          ToolTipText     =   "copia para codigo e nome "
          Top             =   720
          Width           =   375
@@ -312,7 +346,7 @@ Begin VB.Form frmPPAP
          Caption         =   "^^"
          Height          =   375
          Left            =   -70080
-         TabIndex        =   120
+         TabIndex        =   117
          ToolTipText     =   "copia para codigo e nome "
          Top             =   1200
          Width           =   375
@@ -322,7 +356,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   0
          Left            =   -66600
-         TabIndex        =   119
+         TabIndex        =   116
          Top             =   1680
          Width           =   795
       End
@@ -331,7 +365,7 @@ Begin VB.Form frmPPAP
          Height          =   615
          Index           =   0
          Left            =   -66840
-         TabIndex        =   118
+         TabIndex        =   115
          Top             =   1680
          Width           =   1155
       End
@@ -340,7 +374,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   0
          Left            =   -66480
-         TabIndex        =   115
+         TabIndex        =   112
          Top             =   1320
          Width           =   795
       End
@@ -349,7 +383,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   2
          Left            =   -66480
-         TabIndex        =   113
+         TabIndex        =   110
          Top             =   960
          Width           =   795
       End
@@ -358,7 +392,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   2
          Left            =   -66480
-         TabIndex        =   112
+         TabIndex        =   109
          Top             =   600
          Width           =   795
       End
@@ -367,7 +401,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   1
          Left            =   -66600
-         TabIndex        =   108
+         TabIndex        =   105
          Top             =   600
          Width           =   795
       End
@@ -376,7 +410,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   1
          Left            =   -66600
-         TabIndex        =   107
+         TabIndex        =   104
          Top             =   960
          Width           =   795
       End
@@ -385,7 +419,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   1
          Left            =   -66600
-         TabIndex        =   106
+         TabIndex        =   103
          Top             =   1320
          Width           =   795
       End
@@ -393,7 +427,7 @@ Begin VB.Form frmPPAP
          Caption         =   "Prg>"
          Height          =   375
          Left            =   -73500
-         TabIndex        =   104
+         TabIndex        =   101
          ToolTipText     =   "Preenche Pedido/Item com base no programa"
          Top             =   2760
          Width           =   495
@@ -402,7 +436,7 @@ Begin VB.Form frmPPAP
          Caption         =   "Localizar Pelo Produto Fornecedor"
          Height          =   315
          Left            =   -74700
-         TabIndex        =   103
+         TabIndex        =   100
          ToolTipText     =   "Preenche programa/pedido/item com base fornecedor/codigo"
          Top             =   2220
          Width           =   2715
@@ -413,7 +447,7 @@ Begin VB.Form frmPPAP
          Height          =   285
          Index           =   28
          Left            =   -71820
-         TabIndex        =   102
+         TabIndex        =   99
          Top             =   2820
          Width           =   1095
       End
@@ -423,7 +457,7 @@ Begin VB.Form frmPPAP
          Height          =   285
          Index           =   27
          Left            =   -72960
-         TabIndex        =   101
+         TabIndex        =   98
          Top             =   2820
          Width           =   1095
       End
@@ -433,7 +467,7 @@ Begin VB.Form frmPPAP
          Height          =   285
          Index           =   26
          Left            =   -74640
-         TabIndex        =   100
+         TabIndex        =   97
          Top             =   2820
          Width           =   1095
       End
@@ -444,7 +478,7 @@ Begin VB.Form frmPPAP
          Index           =   25
          Left            =   -72960
          MaxLength       =   40
-         TabIndex        =   97
+         TabIndex        =   94
          Top             =   1740
          Width           =   5115
       End
@@ -455,7 +489,7 @@ Begin VB.Form frmPPAP
          Index           =   24
          Left            =   -72960
          MaxLength       =   24
-         TabIndex        =   96
+         TabIndex        =   93
          Top             =   1260
          Width           =   1575
       End
@@ -463,7 +497,7 @@ Begin VB.Form frmPPAP
          Caption         =   "-->"
          Height          =   255
          Left            =   -70680
-         TabIndex        =   95
+         TabIndex        =   92
          Top             =   1260
          Width           =   495
       End
@@ -473,7 +507,7 @@ Begin VB.Form frmPPAP
          Left            =   -71280
          Picture         =   "Frmppap.frx":064E
          Style           =   1  'Graphical
-         TabIndex        =   94
+         TabIndex        =   91
          Top             =   1260
          Width           =   495
       End
@@ -482,7 +516,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   2
          Left            =   -74160
-         TabIndex        =   93
+         TabIndex        =   90
          Top             =   1860
          Width           =   1095
       End
@@ -491,7 +525,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   1
          Left            =   -74160
-         TabIndex        =   92
+         TabIndex        =   89
          Top             =   1560
          Width           =   1095
       End
@@ -500,7 +534,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   0
          Left            =   -74160
-         TabIndex        =   91
+         TabIndex        =   88
          Top             =   1260
          Width           =   1095
       End
@@ -512,7 +546,7 @@ Begin VB.Form frmPPAP
          Index           =   23
          Left            =   -74580
          Locked          =   -1  'True
-         TabIndex        =   90
+         TabIndex        =   87
          TabStop         =   0   'False
          Top             =   1380
          Width           =   255
@@ -523,7 +557,7 @@ Begin VB.Form frmPPAP
          Height          =   285
          Index           =   22
          Left            =   -73680
-         TabIndex        =   88
+         TabIndex        =   85
          Top             =   780
          Width           =   1095
       End
@@ -534,7 +568,7 @@ Begin VB.Form frmPPAP
          Index           =   21
          Left            =   -71400
          MaxLength       =   50
-         TabIndex        =   87
+         TabIndex        =   84
          Top             =   780
          Width           =   5715
       End
@@ -543,7 +577,7 @@ Begin VB.Form frmPPAP
          Left            =   -72480
          Picture         =   "Frmppap.frx":0BD8
          Style           =   1  'Graphical
-         TabIndex        =   86
+         TabIndex        =   83
          Top             =   600
          Width           =   495
       End
@@ -551,7 +585,7 @@ Begin VB.Form frmPPAP
          Caption         =   "-->"
          Height          =   255
          Left            =   -72480
-         TabIndex        =   85
+         TabIndex        =   82
          Top             =   900
          Width           =   495
       End
@@ -560,7 +594,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   0
          Left            =   -66660
-         TabIndex        =   84
+         TabIndex        =   81
          Top             =   1320
          Width           =   795
       End
@@ -569,7 +603,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   0
          Left            =   -66660
-         TabIndex        =   83
+         TabIndex        =   80
          Top             =   960
          Width           =   795
       End
@@ -578,14 +612,14 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   0
          Left            =   -66660
-         TabIndex        =   82
+         TabIndex        =   79
          Top             =   600
          Width           =   795
       End
       Begin MSFlexGridLib.MSFlexGrid Grid 
          Height          =   2655
          Left            =   -74760
-         TabIndex        =   81
+         TabIndex        =   78
          Top             =   480
          Width           =   7755
          _ExtentX        =   13679
@@ -599,7 +633,7 @@ Begin VB.Form frmPPAP
          Index           =   30
          Left            =   -72840
          MaxLength       =   150
-         TabIndex        =   74
+         TabIndex        =   71
          Top             =   1380
          Width           =   7095
       End
@@ -610,7 +644,7 @@ Begin VB.Form frmPPAP
          Index           =   31
          Left            =   -72840
          MaxLength       =   150
-         TabIndex        =   73
+         TabIndex        =   70
          Top             =   1680
          Width           =   7095
       End
@@ -620,7 +654,7 @@ Begin VB.Form frmPPAP
          Height          =   285
          Index           =   8
          Left            =   -72540
-         TabIndex        =   71
+         TabIndex        =   69
          Top             =   1020
          Width           =   315
       End
@@ -630,7 +664,7 @@ Begin VB.Form frmPPAP
          Height          =   315
          Index           =   0
          Left            =   -69960
-         TabIndex        =   70
+         TabIndex        =   68
          Top             =   960
          Width           =   435
       End
@@ -641,7 +675,7 @@ Begin VB.Form frmPPAP
          Index           =   17
          Left            =   -73740
          MaxLength       =   24
-         TabIndex        =   69
+         TabIndex        =   67
          Top             =   660
          Width           =   2115
       End
@@ -652,7 +686,7 @@ Begin VB.Form frmPPAP
          Index           =   18
          Left            =   -70800
          MaxLength       =   24
-         TabIndex        =   68
+         TabIndex        =   66
          Top             =   660
          Width           =   2115
       End
@@ -661,7 +695,7 @@ Begin VB.Form frmPPAP
          Left            =   -68520
          Picture         =   "Frmppap.frx":1162
          Style           =   1  'Graphical
-         TabIndex        =   67
+         TabIndex        =   65
          Top             =   660
          Width           =   495
       End
@@ -672,7 +706,7 @@ Begin VB.Form frmPPAP
          Index           =   14
          Left            =   -73140
          MaxLength       =   80
-         TabIndex        =   66
+         TabIndex        =   64
          Top             =   2940
          Width           =   7335
       End
@@ -683,7 +717,7 @@ Begin VB.Form frmPPAP
          Index           =   13
          Left            =   -73140
          MaxLength       =   80
-         TabIndex        =   65
+         TabIndex        =   63
          Top             =   2640
          Width           =   7335
       End
@@ -694,7 +728,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   0
          Left            =   -74820
-         TabIndex        =   62
+         TabIndex        =   60
          Top             =   720
          Width           =   2595
       End
@@ -705,7 +739,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   1
          Left            =   -74820
-         TabIndex        =   61
+         TabIndex        =   59
          Top             =   1020
          Width           =   2595
       End
@@ -716,7 +750,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   2
          Left            =   -74820
-         TabIndex        =   60
+         TabIndex        =   58
          Top             =   1320
          Width           =   2595
       End
@@ -727,7 +761,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   3
          Left            =   -74820
-         TabIndex        =   59
+         TabIndex        =   57
          Top             =   1620
          Width           =   2475
       End
@@ -738,7 +772,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   4
          Left            =   -74820
-         TabIndex        =   58
+         TabIndex        =   56
          Top             =   1920
          Width           =   2595
       End
@@ -749,7 +783,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   5
          Left            =   -68820
-         TabIndex        =   57
+         TabIndex        =   55
          Top             =   720
          Width           =   2955
       End
@@ -760,7 +794,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   6
          Left            =   -68820
-         TabIndex        =   56
+         TabIndex        =   54
          Top             =   1320
          Width           =   2955
       End
@@ -771,7 +805,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   7
          Left            =   -72120
-         TabIndex        =   55
+         TabIndex        =   53
          Top             =   720
          Width           =   3075
       End
@@ -782,7 +816,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   8
          Left            =   -72120
-         TabIndex        =   54
+         TabIndex        =   52
          Top             =   1020
          Width           =   3075
       End
@@ -793,7 +827,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   9
          Left            =   -72120
-         TabIndex        =   53
+         TabIndex        =   51
          Top             =   1260
          Width           =   3075
       End
@@ -804,7 +838,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   10
          Left            =   -72120
-         TabIndex        =   52
+         TabIndex        =   50
          Top             =   1500
          Width           =   3075
       End
@@ -815,7 +849,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   11
          Left            =   -68820
-         TabIndex        =   51
+         TabIndex        =   49
          Top             =   1020
          Width           =   2955
       End
@@ -826,7 +860,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   12
          Left            =   -68820
-         TabIndex        =   50
+         TabIndex        =   48
          Top             =   1620
          Width           =   2955
       End
@@ -837,7 +871,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   13
          Left            =   -74820
-         TabIndex        =   49
+         TabIndex        =   47
          Top             =   2280
          Width           =   4635
       End
@@ -848,7 +882,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   15
          Left            =   -72120
-         TabIndex        =   48
+         TabIndex        =   46
          Top             =   1800
          Width           =   3075
       End
@@ -858,7 +892,7 @@ Begin VB.Form frmPPAP
          Height          =   315
          Index           =   29
          Left            =   -69360
-         TabIndex        =   47
+         TabIndex        =   45
          Top             =   2220
          Width           =   3195
       End
@@ -1064,58 +1098,10 @@ Begin VB.Form frmPPAP
          Top             =   1860
          Width           =   2115
       End
-      Begin MSComCtl2.DTPicker DTPicker2 
-         DataField       =   "DATAALT"
-         DataSource      =   "datPrimaryRS"
-         Height          =   375
-         Left            =   3420
-         TabIndex        =   32
-         Top             =   1440
-         Width           =   1935
-         _ExtentX        =   3413
-         _ExtentY        =   661
-         _Version        =   393216
-         CheckBox        =   -1  'True
-         DateIsNull      =   -1  'True
-         Format          =   139722753
-         CurrentDate     =   36411
-      End
-      Begin MSComCtl2.DTPicker DTPicker3 
-         DataField       =   "NIVELDAT"
-         DataSource      =   "datPrimaryRS"
-         Height          =   375
-         Left            =   7560
-         TabIndex        =   33
-         Top             =   1440
-         Width           =   1935
-         _ExtentX        =   3413
-         _ExtentY        =   661
-         _Version        =   393216
-         CheckBox        =   -1  'True
-         DateIsNull      =   -1  'True
-         Format          =   139722753
-         CurrentDate     =   36411
-      End
-      Begin MSComCtl2.DTPicker DTPicker1 
-         DataField       =   "DATA"
-         DataSource      =   "datPrimaryRS"
-         Height          =   375
-         Left            =   -68700
-         TabIndex        =   72
-         Top             =   960
-         Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   661
-         _Version        =   393216
-         CheckBox        =   -1  'True
-         DateIsNull      =   -1  'True
-         Format          =   139722753
-         CurrentDate     =   36411
-      End
       Begin MSFlexGridLib.MSFlexGrid gridlay 
          Height          =   2655
          Left            =   -74640
-         TabIndex        =   105
+         TabIndex        =   102
          Top             =   480
          Width           =   7875
          _ExtentX        =   13891
@@ -1125,7 +1111,7 @@ Begin VB.Form frmPPAP
       Begin MSFlexGridLib.MSFlexGrid GridCjto 
          Height          =   2655
          Left            =   -74760
-         TabIndex        =   114
+         TabIndex        =   111
          Top             =   600
          Width           =   7755
          _ExtentX        =   13679
@@ -1135,7 +1121,7 @@ Begin VB.Form frmPPAP
       Begin XPControls.XPButton Cmdmw02 
          Height          =   435
          Left            =   -70560
-         TabIndex        =   132
+         TabIndex        =   129
          TabStop         =   0   'False
          Top             =   2640
          Width           =   1515
@@ -1153,13 +1139,49 @@ Begin VB.Form frmPPAP
             Strikethrough   =   0   'False
          EndProperty
       End
+      Begin VBCCR17.DTPicker DTPicker1 
+         Height          =   375
+         Left            =   -68760
+         TabIndex        =   130
+         Top             =   960
+         Width           =   1695
+         _ExtentX        =   2990
+         _ExtentY        =   661
+         Value           =   44285
+         CheckBox        =   -1  'True
+         AllowUserInput  =   -1  'True
+      End
+      Begin VBCCR17.DTPicker DTPicker2 
+         Height          =   375
+         Left            =   3480
+         TabIndex        =   131
+         Top             =   1440
+         Width           =   1695
+         _ExtentX        =   2990
+         _ExtentY        =   661
+         Value           =   44285
+         CheckBox        =   -1  'True
+         AllowUserInput  =   -1  'True
+      End
+      Begin VBCCR17.DTPicker DTPicker3 
+         Height          =   375
+         Left            =   7560
+         TabIndex        =   132
+         Top             =   1440
+         Width           =   1695
+         _ExtentX        =   2990
+         _ExtentY        =   661
+         Value           =   44285
+         CheckBox        =   -1  'True
+         AllowUserInput  =   -1  'True
+      End
       Begin VB.Label lblLabels 
          Caption         =   "Pedido Compras"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   19
          Left            =   -72960
-         TabIndex        =   99
+         TabIndex        =   96
          Top             =   2580
          Width           =   1875
       End
@@ -1169,7 +1191,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   18
          Left            =   -74640
-         TabIndex        =   98
+         TabIndex        =   95
          Top             =   2580
          Width           =   915
       End
@@ -1179,7 +1201,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   17
          Left            =   -74700
-         TabIndex        =   89
+         TabIndex        =   86
          Top             =   780
          Width           =   915
       End
@@ -1189,7 +1211,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   23
          Left            =   -74820
-         TabIndex        =   80
+         TabIndex        =   77
          Top             =   1500
          Width           =   1815
       End
@@ -1199,7 +1221,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   32
          Left            =   -69420
-         TabIndex        =   79
+         TabIndex        =   76
          Top             =   1020
          Width           =   615
       End
@@ -1209,7 +1231,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   4
          Left            =   -74820
-         TabIndex        =   78
+         TabIndex        =   75
          Top             =   1020
          Width           =   2235
       End
@@ -1218,7 +1240,7 @@ Begin VB.Form frmPPAP
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -72120
-         TabIndex        =   77
+         TabIndex        =   74
          Top             =   1020
          Width           =   2115
       End
@@ -1228,7 +1250,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   2
          Left            =   -74820
-         TabIndex        =   76
+         TabIndex        =   73
          Top             =   660
          Width           =   975
       End
@@ -1238,7 +1260,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   15
          Left            =   -71580
-         TabIndex        =   75
+         TabIndex        =   72
          Top             =   660
          Width           =   795
       End
@@ -1248,7 +1270,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   13
          Left            =   -74820
-         TabIndex        =   64
+         TabIndex        =   62
          Top             =   2580
          Width           =   1695
       End
@@ -1257,7 +1279,7 @@ Begin VB.Form frmPPAP
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -70080
-         TabIndex        =   63
+         TabIndex        =   61
          Top             =   2280
          Width           =   675
       End
@@ -1267,7 +1289,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   16
          Left            =   3480
-         TabIndex        =   46
+         TabIndex        =   44
          Top             =   480
          Width           =   1395
       End
@@ -1277,7 +1299,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   10
          Left            =   120
-         TabIndex        =   45
+         TabIndex        =   43
          Top             =   480
          Width           =   1095
       End
@@ -1287,7 +1309,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   14
          Left            =   3000
-         TabIndex        =   44
+         TabIndex        =   42
          Top             =   1860
          Width           =   615
       End
@@ -1297,7 +1319,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   12
          Left            =   60
-         TabIndex        =   43
+         TabIndex        =   41
          Top             =   1860
          Width           =   615
       End
@@ -1307,7 +1329,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   8
          Left            =   7560
-         TabIndex        =   42
+         TabIndex        =   40
          Top             =   1200
          Width           =   1455
       End
@@ -1317,7 +1339,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   6
          Left            =   5400
-         TabIndex        =   41
+         TabIndex        =   39
          Top             =   1200
          Width           =   1935
       End
@@ -1326,7 +1348,7 @@ Begin VB.Form frmPPAP
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   2280
-         TabIndex        =   40
+         TabIndex        =   38
          Top             =   2640
          Width           =   615
       End
@@ -1336,7 +1358,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   24
          Left            =   2280
-         TabIndex        =   39
+         TabIndex        =   37
          Top             =   2340
          Width           =   1575
       End
@@ -1346,7 +1368,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   11
          Left            =   300
-         TabIndex        =   38
+         TabIndex        =   36
          Top             =   2220
          Width           =   735
       End
@@ -1356,7 +1378,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   9
          Left            =   3420
-         TabIndex        =   37
+         TabIndex        =   35
          Top             =   1200
          Width           =   1455
       End
@@ -1366,7 +1388,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   7
          Left            =   120
-         TabIndex        =   36
+         TabIndex        =   34
          Top             =   1200
          Width           =   975
       End
@@ -1376,7 +1398,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   3
          Left            =   120
-         TabIndex        =   35
+         TabIndex        =   33
          Top             =   840
          Width           =   975
       End
@@ -1386,7 +1408,7 @@ Begin VB.Form frmPPAP
          Height          =   255
          Index           =   31
          Left            =   6000
-         TabIndex        =   34
+         TabIndex        =   32
          Top             =   1860
          Width           =   795
       End
@@ -1475,7 +1497,7 @@ Begin VB.Form frmPPAP
    Begin XPControls.XPButton Encerrar 
       Height          =   435
       Left            =   10320
-      TabIndex        =   128
+      TabIndex        =   125
       Top             =   720
       Width           =   1515
       _ExtentX        =   2672
@@ -1495,7 +1517,7 @@ Begin VB.Form frmPPAP
    Begin XPControls.XPButton cmdClose 
       Height          =   435
       Left            =   10320
-      TabIndex        =   129
+      TabIndex        =   126
       Top             =   120
       Width           =   1515
       _ExtentX        =   2672
@@ -1515,7 +1537,7 @@ Begin VB.Form frmPPAP
    Begin XPControls.XPButton Command3 
       Height          =   375
       Left            =   4080
-      TabIndex        =   130
+      TabIndex        =   127
       Top             =   840
       Width           =   375
       _ExtentX        =   661
@@ -1535,7 +1557,7 @@ Begin VB.Form frmPPAP
    Begin XPControls.XPButton Command5 
       Height          =   375
       Left            =   3480
-      TabIndex        =   131
+      TabIndex        =   128
       Top             =   0
       Width           =   375
       _ExtentX        =   661
@@ -1558,7 +1580,7 @@ Begin VB.Form frmPPAP
       Height          =   255
       Index           =   21
       Left            =   4080
-      TabIndex        =   116
+      TabIndex        =   113
       Top             =   120
       Width           =   495
    End
@@ -1568,7 +1590,7 @@ Begin VB.Form frmPPAP
       Height          =   255
       Index           =   20
       Left            =   6960
-      TabIndex        =   111
+      TabIndex        =   108
       Top             =   120
       Width           =   975
    End
@@ -1643,13 +1665,13 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To 32
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         aVAL(33) = DTPicker1.Value
         aVAL(34) = DTPicker2.Value
         aVAL(35) = DTPicker3.Value
         For iLOOP = 36 To 57
-            aVAL(iLOOP) = FixNumBol(check1(iLOOP).Value)
+            aVAL(iLOOP) = FixNumBol(Check1(iLOOP).Value)
         Next iLOOP
         GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     End If
@@ -1658,8 +1680,8 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub cmdcopcod_Click()
-    txtFields(24) = txtFields(5)
-    txtFields(25) = txtFields(6)
+    TXTFIELDS(24) = TXTFIELDS(5)
+    TXTFIELDS(25) = TXTFIELDS(6)
 End Sub
 
 Private Sub CmdEdilay_Click(Index As Integer)
@@ -1670,10 +1692,10 @@ Private Sub CmdEdilay_Click(Index As Integer)
 End Sub
 
 Private Sub CmdEditar_Click(Index As Integer)
-    eRETU02 = " Desenho:" & txtFields(5) & "-" & Replace(txtFields(6), " ", "_")
-    eRETU02 = eRETU02 & " Componente:" & txtFields(24) & "-" & Replace(txtFields(25), " ", "_")
-    eRETU02 = eRETU02 & " Fornecedor:" & txtFields(22) & "-" & Replace(txtFields(21), " ", "_")
-    eRETU02 = eRETU02 & " Cliente:" & txtFields(1) & "-" & Replace(txtFields(2), " ", "_")
+    eRETU02 = " Desenho:" & TXTFIELDS(5) & "-" & Replace(TXTFIELDS(6), " ", "_")
+    eRETU02 = eRETU02 & " Componente:" & TXTFIELDS(24) & "-" & Replace(TXTFIELDS(25), " ", "_")
+    eRETU02 = eRETU02 & " Fornecedor:" & TXTFIELDS(22) & "-" & Replace(TXTFIELDS(21), " ", "_")
+    eRETU02 = eRETU02 & " Cliente:" & TXTFIELDS(1) & "-" & Replace(TXTFIELDS(2), " ", "_")
     Grid.Col = 0
     nREVI = Grid
     frmPPAPI.Show vbModal
@@ -1747,7 +1769,7 @@ Private Sub Cmdimppf_Click(Index As Integer)
     Dim sSQL As String
     DB.ConnectionTimeout = 120
     DB.Open GeracArq(cARQPF)
-    sSQL = "SELECT CODIGO,PF FROM PF WHERE CODFINAL='" & Trim(txtFields(5)) & "' AND NOT BLOQUEADO"
+    sSQL = "SELECT CODIGO,PF FROM PF WHERE CODFINAL='" & Trim(TXTFIELDS(5)) & "' AND NOT BLOQUEADO"
     rs.Open sSQL, DB, adOpenForwardOnly, adLockReadOnly
     If Not rs.EOF Then
         While Not rs.EOF
@@ -1783,14 +1805,14 @@ End Sub
 
 Private Sub Cmdmw02_Click()
     Dim cSQL As String
-    If Not IsNumeric(txtFields(27)) Then Exit Sub
-    If Not IsNumeric(txtFields(28)) Then Exit Sub
-    If Not IsNumeric(txtFields(0)) Then Exit Sub
+    If Not IsNumeric(TXTFIELDS(27)) Then Exit Sub
+    If Not IsNumeric(TXTFIELDS(28)) Then Exit Sub
+    If Not IsNumeric(TXTFIELDS(0)) Then Exit Sub
 
     cSQL = "SELECT FROM MW02 WHERE ="
-    cSQL = cSQL & PadLeft(txtFields(27).Text, 8) + PadLeft(txtFields(28).Text, 3)
+    cSQL = cSQL & PadLeft(TXTFIELDS(27).tEXT, 8) + PadLeft(TXTFIELDS(28).tEXT, 3)
      
-    GrvSQLSDE zMANA5EMP, cSQL, 2, Array("ppap", "ppapD"), Array(txtFields(0), Date), Array("N", "D")
+    GrvSQLSDE zMANA5EMP, cSQL, 2, Array("ppap", "ppapD"), Array(TXTFIELDS(0), Date), Array("N", "D")
     ''eRETU01 = "GRVPPAP " & txtFields(27) & " " & txtFields(28) & " " & txtFields(0)
     ''Shell eRETU01, vbNormalFocus
 
@@ -1823,7 +1845,7 @@ Private Sub CmdNovoLay_Click(Index As Integer)
     Dim sSQL As String
   
     If Index = 1 Then
-        cDESENHO = InputBox("Digite o Produto", "Inclusão Produto", txtFields(5).Text)
+        cDESENHO = InputBox("Digite o Produto", "Inclusão Produto", TXTFIELDS(5).tEXT)
         dDATA = Today()
     Else
         gridlay.Row = (gridlay.Rows) - 1         ''UltimoItem
@@ -1885,14 +1907,14 @@ Private Sub Cmdped_Click()
     Dim nPE As Long
     Dim aRETU As Variant
     Dim sSQL As String
-    nPE = FixInt(txtFields(26))
+    nPE = FixInt(TXTFIELDS(26))
     cARQ = PegPath("PATH", "MANA5PCP")
     cARQ = GeraConn(cARQ, "JETFOX")
     sSQL = "SELECT PEDIDO,COMPRAS,COMITEM FROM PE WHERE PEDIDO=" & nPE
     aRETU = PegSQL(cARQ, sSQL, 2, Array("COMPRAS", "COMITEM"), Array("NI", "NI"), Array(0, 0))
     If lRETU Then
-        txtFields(27) = aRETU(0)
-        txtFields(28) = aRETU(1)
+        TXTFIELDS(27) = aRETU(0)
+        TXTFIELDS(28) = aRETU(1)
     End If
 End Sub
 
@@ -1902,16 +1924,16 @@ Private Sub Cmdprg_Click()
     Dim cCODIGO As String
     Dim aRETU As Variant
     Dim sSQL As String
-    nFORN = FixInt(txtFields(22), 0)
-    cCODIGO = FixStr(txtFields(24), "", "TRIM")
+    nFORN = FixInt(TXTFIELDS(22), 0)
+    cCODIGO = FixStr(TXTFIELDS(24), "", "TRIM")
     cARQ = PegPath("PATH", "MANA5PCP")
     cARQ = GeraConn(cARQ, "JETFOX")
     sSQL = "SELECT PEDIDO,COMPRAS,COMITEM FROM PE WHERE FORNECEDO=" & nFORN & " AND CODIGO='" & cCODIGO & "'"
     aRETU = PegSQL(cARQ, sSQL, 3, Array("PEDIDO", "COMPRAS", "COMITEM"), Array("NI", "NI", "NI"), Array(0, 0, 0))
     If lRETU Then
-        txtFields(26) = aRETU(0)
-        txtFields(27) = aRETU(1)
-        txtFields(28) = aRETU(2)
+        TXTFIELDS(26) = aRETU(0)
+        TXTFIELDS(27) = aRETU(1)
+        TXTFIELDS(28) = aRETU(2)
     Else
         Alert ("Nao achei pedido para este fornecedor/produto")
     End If
@@ -1922,8 +1944,8 @@ Private Sub Command10_Click()
     Dim aRETU As Variant
     Dim sSQL      As String
     Dim cCODIGO      As String
-    cCODIGO = FixStr(txtFields(24), "", "TRIM")
-    Select Case txtFields(23)
+    cCODIGO = FixStr(TXTFIELDS(24), "", "TRIM")
+    Select Case TXTFIELDS(23)
 
     Case "M"
         sSQL = "SELECT NOME FROM MU01 WHERE CODIGO='" & cCODIGO & "'"
@@ -1938,7 +1960,7 @@ Private Sub Command10_Click()
 
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        txtFields(25) = aRETU(0)
+        TXTFIELDS(25) = aRETU(0)
     End If
 
 End Sub
@@ -1948,41 +1970,41 @@ Private Sub Command1_Click()
     Dim aRETU As Variant
     escpffim.Show vbModal, Me
     If lRETU Then
-        txtFields(5) = eRETU02
-        txtFields(6) = eRETU03
-        txtFields(32) = eRETU04
+        TXTFIELDS(5) = eRETU02
+        TXTFIELDS(6) = eRETU03
+        TXTFIELDS(32) = eRETU04
         cSQL = "select CONPES from PF WHERE PF=" & eRETU04
         aRETU = PegSQL(cARQPF, cSQL, 1, Array("CONPES"), Array("N"), Array(0))
         If lRETU Then
-            txtFields(11) = aRETU(0)
+            TXTFIELDS(11) = aRETU(0)
         End If
     End If
 End Sub
 
 Private Sub Command11_Click()
-    txtFields(22) = txtFields(1)
-    txtFields(21) = txtFields(2)
+    TXTFIELDS(22) = TXTFIELDS(1)
+    TXTFIELDS(21) = TXTFIELDS(2)
 
 End Sub
 
 Private Sub Command12_Click()
     Dim cSQLTMP As String
     Dim aRETU As Variant
-    cSQLTMP = "SELECT PRGENT,COMPED,ITEM FROM MW02 WHERE PPAP=" & txtFields(0).Text
+    cSQLTMP = "SELECT PRGENT,COMPED,ITEM FROM MW02 WHERE PPAP=" & TXTFIELDS(0).tEXT
     aRETU = PegSQL(GeraConn(zMANA5EMP, "JETFOX"), cSQLTMP, 3, Array("PRGENT", "COMPED", "ITEM"), _
                    Array("NI", "NI", "NI"), Array(0, 0, 0))
     If lRETU Then
-        txtFields(26) = aRETU(0)
-        txtFields(27) = aRETU(1)
-        txtFields(28) = aRETU(2)
+        TXTFIELDS(26) = aRETU(0)
+        TXTFIELDS(27) = aRETU(1)
+        TXTFIELDS(28) = aRETU(2)
     End If
 End Sub
 
 Private Sub Command2_Click()
     escMP05.Show vbModal, Me
     If lRETU Then
-        txtFields(17) = eRETU01
-        txtFields(18) = eRETU02
+        TXTFIELDS(17) = eRETU01
+        TXTFIELDS(18) = eRETU02
     End If
 End Sub
 
@@ -1991,7 +2013,7 @@ Private Sub Command3_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim nNUMERO          As Long
-    nNUMERO = FixInt(txtFields(1), 0)
+    nNUMERO = FixInt(TXTFIELDS(1), 0)
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
     If iPPAP = 2 Then
@@ -1999,7 +2021,7 @@ Private Sub Command3_Click()
     End If
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        txtFields(2) = aRETU(0)
+        TXTFIELDS(2) = aRETU(0)
     End If
 End Sub
 
@@ -2008,12 +2030,12 @@ Private Sub Command4_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim cCODIGO          As String
-    cCODIGO = FixStr(txtFields(3), "", "TRIM")
+    cCODIGO = FixStr(TXTFIELDS(3), "", "TRIM")
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME FROM MC02 WHERE NUMERO='" & cCODIGO & "'"
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        txtFields(4) = aRETU(0)
+        TXTFIELDS(4) = aRETU(0)
     End If
 End Sub
 
@@ -2022,12 +2044,12 @@ Private Sub Command5_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim cCODIGO          As String
-    cCODIGO = FixStr(txtFields(5), "", "TRIM")
+    cCODIGO = FixStr(TXTFIELDS(5), "", "TRIM")
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        txtFields(6) = aRETU(0)
+        TXTFIELDS(6) = aRETU(0)
     End If
 End Sub
 
@@ -2036,12 +2058,12 @@ Private Sub Command6_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim nNUMERO          As Long
-    nNUMERO = FixInt(txtFields(22), 0)
+    nNUMERO = FixInt(TXTFIELDS(22), 0)
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME FROM MB01 WHERE NUMERO=" & nNUMERO
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        txtFields(21) = aRETU(0)
+        TXTFIELDS(21) = aRETU(0)
     End If
 End Sub
 
@@ -2053,8 +2075,8 @@ Private Sub Command7_Click()
     escNUMNOM.Show vbModal, Me
 
     If lRETU Then
-        txtFields(22) = eRETU01
-        txtFields(21) = eRETU02
+        TXTFIELDS(22) = eRETU01
+        TXTFIELDS(21) = eRETU02
     End If
 
 End Sub
@@ -2064,13 +2086,13 @@ Private Sub Command8_Click(Index As Integer)
     Select Case Index
 
     Case 0
-        txtFields(23) = "M"
+        TXTFIELDS(23) = "M"
 
     Case 1
-        txtFields(23) = "C"
+        TXTFIELDS(23) = "C"
 
     Case 2
-        txtFields(23) = "T"
+        TXTFIELDS(23) = "T"
 
     End Select
 
@@ -2080,7 +2102,7 @@ Private Sub Command9_Click(Index As Integer)
     lRETU = False
     If Index = 0 Then
         ePASS01 = "MANA5"
-        Select Case txtFields(23)
+        Select Case TXTFIELDS(23)
         Case "C"
             iMU01 = 2
         Case "T"
@@ -2094,7 +2116,7 @@ Private Sub Command9_Click(Index As Integer)
     End If
     
     If Index = 1 Then
-        Select Case txtFields(23)
+        Select Case TXTFIELDS(23)
         Case "C"
             ePASS01 = "LOGIC"
         Case "T"
@@ -2111,8 +2133,8 @@ Private Sub Command9_Click(Index As Integer)
     
     If lRETU Then
     
-        txtFields(24) = eRETU01
-        txtFields(25) = eRETU02
+        TXTFIELDS(24) = eRETU01
+        TXTFIELDS(25) = eRETU02
     
     End If
     
@@ -2152,8 +2174,8 @@ Private Sub EscMA01A_Click(Index As Integer)
     escNUMNOM.Show vbModal, Me
 
     If lRETU Then
-        frmPPAP.txtFields(1) = eRETU01
-        frmPPAP.txtFields(2) = eRETU02
+        frmPPAP.TXTFIELDS(1) = eRETU01
+        frmPPAP.TXTFIELDS(2) = eRETU02
     End If
     
     
@@ -2168,8 +2190,8 @@ Private Sub ESCMC02A_Click()
     cARQESC = "MC02"
     escNUMNOM.Show vbModal, Me
     If lRETU Then
-        frmPPAP.txtFields(3) = eRETU01
-        frmPPAP.txtFields(4) = eRETU02
+        frmPPAP.TXTFIELDS(3) = eRETU01
+        frmPPAP.TXTFIELDS(4) = eRETU02
     End If
 End Sub
 
@@ -2183,8 +2205,8 @@ Private Sub ESCMS01A_Click(Index As Integer)
     End If
     escms01.Show vbModal, Me
     If lRETU Then
-        frmPPAP.txtFields(5) = eRETU01
-        frmPPAP.txtFields(6) = eRETU02
+        frmPPAP.TXTFIELDS(5) = eRETU01
+        frmPPAP.TXTFIELDS(6) = eRETU02
     End If
 End Sub
 
@@ -2282,7 +2304,7 @@ Private Sub Form_Load()
                  "", "", "", "", "", "", "", "")
     aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To 32
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     If IsDate(aVAL(33)) Then
         DTPicker1.Value = aVAL(33)
@@ -2294,7 +2316,7 @@ Private Sub Form_Load()
         DTPicker3.Value = aVAL(35)
     End If
     For iLOOP = 36 To 57
-        check1(iLOOP - 36).Value = FixBolNum(aVAL(iLOOP))
+        Check1(iLOOP - 36).Value = FixBolNum(aVAL(iLOOP))
     Next iLOOP
     
     

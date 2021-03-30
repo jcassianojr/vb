@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form FrmPPAPC 
    Caption         =   "PPAPC"
    ClientHeight    =   3015
@@ -11,12 +11,24 @@ Begin VB.Form FrmPPAPC
    ScaleHeight     =   3015
    ScaleWidth      =   9360
    StartUpPosition =   2  'CenterScreen
+   Begin VBCCR17.DTPicker DTPicker1 
+      Height          =   375
+      Left            =   120
+      TabIndex        =   16
+      Top             =   960
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
    Begin VB.CommandButton Command1 
       Caption         =   "+3ANOS"
       Height          =   375
       Index           =   2
       Left            =   1920
-      TabIndex        =   16
+      TabIndex        =   13
       Top             =   1320
       Width           =   855
    End
@@ -25,7 +37,7 @@ Begin VB.Form FrmPPAPC
       Height          =   375
       Index           =   1
       Left            =   1920
-      TabIndex        =   15
+      TabIndex        =   12
       Top             =   600
       Width           =   855
    End
@@ -36,7 +48,7 @@ Begin VB.Form FrmPPAPC
       Index           =   1
       Left            =   2280
       Locked          =   -1  'True
-      TabIndex        =   13
+      TabIndex        =   10
       TabStop         =   0   'False
       Top             =   240
       Width           =   2655
@@ -46,7 +58,7 @@ Begin VB.Form FrmPPAPC
       Height          =   375
       Index           =   0
       Left            =   1920
-      TabIndex        =   12
+      TabIndex        =   9
       Top             =   960
       Width           =   855
    End
@@ -58,7 +70,7 @@ Begin VB.Form FrmPPAPC
       Index           =   0
       Left            =   180
       Locked          =   -1  'True
-      TabIndex        =   5
+      TabIndex        =   2
       TabStop         =   0   'False
       Top             =   240
       Width           =   975
@@ -70,7 +82,7 @@ Begin VB.Form FrmPPAPC
       Height          =   285
       Left            =   1260
       Locked          =   -1  'True
-      TabIndex        =   4
+      TabIndex        =   1
       TabStop         =   0   'False
       Top             =   240
       Width           =   975
@@ -81,56 +93,14 @@ Begin VB.Form FrmPPAPC
       Left            =   60
       MultiLine       =   -1  'True
       ScrollBars      =   2  'Vertical
-      TabIndex        =   3
+      TabIndex        =   0
       Top             =   1800
       Width           =   8835
-   End
-   Begin MSComCtl2.DTPicker DTPicker3 
-      Height          =   375
-      Left            =   4620
-      TabIndex        =   0
-      Top             =   960
-      Width           =   1695
-      _ExtentX        =   2990
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   265420801
-      CurrentDate     =   37294
-   End
-   Begin MSComCtl2.DTPicker DTPicker2 
-      Height          =   375
-      Left            =   2880
-      TabIndex        =   1
-      Top             =   960
-      Width           =   1635
-      _ExtentX        =   2884
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   265420801
-      CurrentDate     =   37294
-   End
-   Begin MSComCtl2.DTPicker DTPicker1 
-      Height          =   375
-      Left            =   120
-      TabIndex        =   2
-      Top             =   900
-      Width           =   1695
-      _ExtentX        =   2990
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   265420801
-      CurrentDate     =   37077
    End
    Begin XPControls.XPButton Encerrar 
       Height          =   435
       Left            =   7320
-      TabIndex        =   17
+      TabIndex        =   14
       Top             =   840
       Width           =   1575
       _ExtentX        =   2778
@@ -150,7 +120,7 @@ Begin VB.Form FrmPPAPC
    Begin XPControls.XPButton cmdClose 
       Height          =   435
       Left            =   7320
-      TabIndex        =   18
+      TabIndex        =   15
       Top             =   240
       Width           =   1515
       _ExtentX        =   2672
@@ -167,13 +137,37 @@ Begin VB.Form FrmPPAPC
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR17.DTPicker DTPicker2 
+      Height          =   375
+      Left            =   2880
+      TabIndex        =   17
+      Top             =   960
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
+   Begin VBCCR17.DTPicker DTPicker3 
+      Height          =   375
+      Left            =   4800
+      TabIndex        =   18
+      Top             =   960
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
    Begin VB.Label lblLabels 
       Caption         =   "Codigo"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   3
       Left            =   2340
-      TabIndex        =   14
+      TabIndex        =   11
       Top             =   0
       Width           =   975
    End
@@ -183,7 +177,7 @@ Begin VB.Form FrmPPAPC
       Height          =   255
       Index           =   0
       Left            =   240
-      TabIndex        =   11
+      TabIndex        =   8
       Top             =   0
       Width           =   975
    End
@@ -193,7 +187,7 @@ Begin VB.Form FrmPPAPC
       Height          =   255
       Index           =   1
       Left            =   1320
-      TabIndex        =   10
+      TabIndex        =   7
       Top             =   0
       Width           =   975
    End
@@ -203,7 +197,7 @@ Begin VB.Form FrmPPAPC
       Height          =   195
       Index           =   2
       Left            =   60
-      TabIndex        =   9
+      TabIndex        =   6
       Top             =   1560
       Width           =   975
    End
@@ -213,7 +207,7 @@ Begin VB.Form FrmPPAPC
       Height          =   255
       Index           =   4
       Left            =   120
-      TabIndex        =   8
+      TabIndex        =   5
       Top             =   600
       Width           =   675
    End
@@ -223,7 +217,7 @@ Begin VB.Form FrmPPAPC
       Height          =   255
       Index           =   5
       Left            =   2880
-      TabIndex        =   7
+      TabIndex        =   4
       Top             =   660
       Width           =   795
    End
@@ -232,8 +226,8 @@ Begin VB.Form FrmPPAPC
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   6
-      Left            =   4620
-      TabIndex        =   6
+      Left            =   4800
+      TabIndex        =   3
       Top             =   660
       Width           =   975
    End
@@ -257,7 +251,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To 2
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         aVAL(3) = DTPicker1
         aVAL(4) = DTPicker2
@@ -310,7 +304,7 @@ Private Sub Form_Load()
     aPAD = Array(0, "", "", Date, Date, Date)
     aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To 2
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     If IsDate(aVAL(3)) Then
         DTPicker1.Value = aVAL(3)

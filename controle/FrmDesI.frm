@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form FrmDesI 
    Caption         =   "Controle de Desenhos"
    ClientHeight    =   3735
@@ -11,19 +11,43 @@ Begin VB.Form FrmDesI
    ScaleHeight     =   3735
    ScaleWidth      =   8610
    StartUpPosition =   2  'CenterScreen
+   Begin VBCCR17.DTPicker DTPicker2 
+      Height          =   375
+      Left            =   4560
+      TabIndex        =   6
+      Top             =   1680
+      Width           =   1575
+      _ExtentX        =   2778
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
+   Begin VBCCR17.DTPicker DTPicker1 
+      Height          =   375
+      Left            =   1320
+      TabIndex        =   4
+      Top             =   1680
+      Width           =   1575
+      _ExtentX        =   2778
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
    Begin VB.TextBox txtfields 
       Height          =   285
       Index           =   7
       Left            =   720
       MaxLength       =   24
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   1740
       Width           =   495
    End
    Begin VB.TextBox txtfields 
       Height          =   285
       Index           =   3
-      Left            =   7200
+      Left            =   7320
       MaxLength       =   24
       TabIndex        =   8
       Top             =   1680
@@ -32,7 +56,7 @@ Begin VB.Form FrmDesI
    Begin VB.TextBox txtfields 
       Height          =   285
       Index           =   4
-      Left            =   6120
+      Left            =   6360
       MaxLength       =   24
       TabIndex        =   7
       Top             =   1680
@@ -49,9 +73,10 @@ Begin VB.Form FrmDesI
          LCID            =   1046
          SubFormatType   =   0
       EndProperty
+      ForeColor       =   &H00C00000&
       Height          =   375
       Left            =   3000
-      TabIndex        =   6
+      TabIndex        =   5
       Top             =   1560
       Width           =   1335
    End
@@ -62,31 +87,17 @@ Begin VB.Form FrmDesI
       MaxLength       =   24
       MultiLine       =   -1  'True
       ScrollBars      =   2  'Vertical
-      TabIndex        =   9
+      TabIndex        =   10
       Top             =   2400
       Width           =   8175
-   End
-   Begin MSComCtl2.DTPicker DTPicker1 
-      Height          =   375
-      Left            =   1320
-      TabIndex        =   5
-      Top             =   1680
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   267386881
-      CurrentDate     =   37161
    End
    Begin VB.TextBox txtfields 
       Height          =   285
       Index           =   2
       Left            =   120
       MaxLength       =   24
-      TabIndex        =   3
-      Top             =   1740
+      TabIndex        =   2
+      Top             =   1680
       Width           =   495
    End
    Begin VB.TextBox txtfields 
@@ -97,7 +108,7 @@ Begin VB.Form FrmDesI
       Left            =   120
       Locked          =   -1  'True
       MaxLength       =   24
-      TabIndex        =   1
+      TabIndex        =   9
       TabStop         =   0   'False
       Top             =   960
       Width           =   2535
@@ -107,7 +118,7 @@ Begin VB.Form FrmDesI
       Index           =   5
       Left            =   2880
       MaxLength       =   40
-      TabIndex        =   2
+      TabIndex        =   1
       TabStop         =   0   'False
       Top             =   960
       Width           =   3735
@@ -125,24 +136,11 @@ Begin VB.Form FrmDesI
       Top             =   360
       Width           =   2535
    End
-   Begin MSComCtl2.DTPicker DTPicker2 
-      Height          =   375
-      Left            =   4320
-      TabIndex        =   20
-      Top             =   1680
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   267452417
-      CurrentDate     =   37161
-   End
    Begin XPControls.XPButton Encerrar 
       Height          =   435
       Left            =   6840
-      TabIndex        =   21
+      TabIndex        =   22
+      TabStop         =   0   'False
       Top             =   840
       Width           =   1575
       _ExtentX        =   2778
@@ -162,7 +160,8 @@ Begin VB.Form FrmDesI
    Begin XPControls.XPButton cmdClose 
       Height          =   435
       Left            =   6840
-      TabIndex        =   22
+      TabIndex        =   11
+      TabStop         =   0   'False
       Top             =   240
       Width           =   1515
       _ExtentX        =   2672
@@ -185,7 +184,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   10
       Left            =   720
-      TabIndex        =   19
+      TabIndex        =   21
       Top             =   1500
       Width           =   435
    End
@@ -195,7 +194,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   9
       Left            =   120
-      TabIndex        =   18
+      TabIndex        =   20
       Top             =   1500
       Width           =   435
    End
@@ -204,8 +203,8 @@ Begin VB.Form FrmDesI
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   8
-      Left            =   7200
-      TabIndex        =   17
+      Left            =   7320
+      TabIndex        =   19
       Top             =   1440
       Width           =   975
    End
@@ -214,8 +213,8 @@ Begin VB.Form FrmDesI
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   7
-      Left            =   6120
-      TabIndex        =   16
+      Left            =   6240
+      TabIndex        =   18
       Top             =   1440
       Width           =   975
    End
@@ -225,7 +224,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   6
       Left            =   120
-      TabIndex        =   15
+      TabIndex        =   17
       Top             =   2160
       Width           =   975
    End
@@ -235,7 +234,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   4
       Left            =   1320
-      TabIndex        =   14
+      TabIndex        =   16
       Top             =   1440
       Width           =   615
    End
@@ -245,7 +244,7 @@ Begin VB.Form FrmDesI
       Height          =   195
       Index           =   1
       Left            =   120
-      TabIndex        =   13
+      TabIndex        =   15
       Top             =   1320
       Width           =   675
    End
@@ -255,7 +254,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   0
       Left            =   120
-      TabIndex        =   12
+      TabIndex        =   14
       Top             =   720
       Width           =   975
    End
@@ -265,7 +264,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   3
       Left            =   2880
-      TabIndex        =   11
+      TabIndex        =   13
       Top             =   720
       Width           =   1815
    End
@@ -275,7 +274,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   2
       Left            =   120
-      TabIndex        =   10
+      TabIndex        =   12
       Top             =   0
       Width           =   975
    End

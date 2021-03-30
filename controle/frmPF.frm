@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "tabctl32.ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmPF 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Processo de Fabricação"
@@ -21,7 +21,7 @@ Begin VB.Form frmPF
       Height          =   285
       Index           =   66
       Left            =   3960
-      TabIndex        =   201
+      TabIndex        =   198
       Top             =   1800
       Width           =   855
    End
@@ -30,7 +30,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   11
       Left            =   6840
-      TabIndex        =   199
+      TabIndex        =   196
       TabStop         =   0   'False
       ToolTipText     =   "Clique Para Trazer Nome Cliente"
       Top             =   120
@@ -41,7 +41,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   10
       Left            =   4680
-      TabIndex        =   198
+      TabIndex        =   195
       TabStop         =   0   'False
       ToolTipText     =   "Clique Para Trazer Nome Cliente"
       Top             =   120
@@ -53,7 +53,7 @@ Begin VB.Form frmPF
       Index           =   2
       Left            =   3840
       Style           =   1  'Graphical
-      TabIndex        =   197
+      TabIndex        =   194
       TabStop         =   0   'False
       Top             =   120
       Width           =   495
@@ -64,7 +64,7 @@ Begin VB.Form frmPF
       Index           =   1
       Left            =   3480
       Style           =   1  'Graphical
-      TabIndex        =   196
+      TabIndex        =   193
       TabStop         =   0   'False
       Top             =   120
       Width           =   375
@@ -73,7 +73,7 @@ Begin VB.Form frmPF
       Caption         =   "codigo_lx"
       Height          =   315
       Left            =   9360
-      TabIndex        =   195
+      TabIndex        =   192
       TabStop         =   0   'False
       Top             =   1200
       Width           =   975
@@ -82,7 +82,7 @@ Begin VB.Form frmPF
       Caption         =   "cad_des_lx"
       Height          =   255
       Left            =   1680
-      TabIndex        =   194
+      TabIndex        =   191
       TabStop         =   0   'False
       Top             =   2880
       Width           =   975
@@ -91,7 +91,7 @@ Begin VB.Form frmPF
       Caption         =   "cad_des_lx"
       Height          =   255
       Left            =   1680
-      TabIndex        =   193
+      TabIndex        =   190
       TabStop         =   0   'False
       Top             =   1560
       Width           =   975
@@ -101,7 +101,7 @@ Begin VB.Form frmPF
       Left            =   7200
       Picture         =   "frmPF.frx":0000
       Style           =   1  'Graphical
-      TabIndex        =   191
+      TabIndex        =   188
       TabStop         =   0   'False
       Top             =   1800
       Width           =   375
@@ -112,7 +112,7 @@ Begin VB.Form frmPF
       Height          =   285
       Left            =   7680
       Locked          =   -1  'True
-      TabIndex        =   190
+      TabIndex        =   187
       TabStop         =   0   'False
       Top             =   1800
       Width           =   2295
@@ -122,7 +122,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   8
       Left            =   9840
-      TabIndex        =   163
+      TabIndex        =   160
       TabStop         =   0   'False
       Top             =   2760
       Width           =   375
@@ -132,7 +132,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   7
       Left            =   9360
-      TabIndex        =   162
+      TabIndex        =   159
       TabStop         =   0   'False
       Top             =   840
       Width           =   375
@@ -142,7 +142,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   6
       Left            =   2160
-      TabIndex        =   161
+      TabIndex        =   158
       TabStop         =   0   'False
       Top             =   840
       Width           =   375
@@ -152,7 +152,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   5
       Left            =   9480
-      TabIndex        =   150
+      TabIndex        =   147
       TabStop         =   0   'False
       Top             =   2760
       Width           =   375
@@ -163,7 +163,7 @@ Begin VB.Form frmPF
       Left            =   8640
       Picture         =   "frmPF.frx":058A
       Style           =   1  'Graphical
-      TabIndex        =   149
+      TabIndex        =   146
       TabStop         =   0   'False
       Top             =   840
       Width           =   375
@@ -173,7 +173,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   3
       Left            =   9000
-      TabIndex        =   148
+      TabIndex        =   145
       TabStop         =   0   'False
       Top             =   840
       Width           =   375
@@ -183,7 +183,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   2
       Left            =   1680
-      TabIndex        =   147
+      TabIndex        =   144
       TabStop         =   0   'False
       Top             =   840
       Width           =   375
@@ -204,7 +204,7 @@ Begin VB.Form frmPF
       Left            =   9120
       Picture         =   "frmPF.frx":0B14
       Style           =   1  'Graphical
-      TabIndex        =   143
+      TabIndex        =   140
       TabStop         =   0   'False
       Top             =   2760
       Width           =   375
@@ -222,7 +222,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   1
       Left            =   6480
-      TabIndex        =   141
+      TabIndex        =   138
       TabStop         =   0   'False
       ToolTipText     =   "Clique Para Trazer Codigo Cliente"
       Top             =   120
@@ -233,7 +233,7 @@ Begin VB.Form frmPF
       Left            =   1560
       Picture         =   "frmPF.frx":109E
       Style           =   1  'Graphical
-      TabIndex        =   137
+      TabIndex        =   134
       TabStop         =   0   'False
       Top             =   120
       Width           =   375
@@ -242,7 +242,7 @@ Begin VB.Form frmPF
       Caption         =   "-->"
       Height          =   315
       Left            =   3840
-      TabIndex        =   133
+      TabIndex        =   130
       TabStop         =   0   'False
       Top             =   840
       Width           =   375
@@ -252,7 +252,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   0
       Left            =   4440
-      TabIndex        =   132
+      TabIndex        =   129
       TabStop         =   0   'False
       ToolTipText     =   "Clique Para Trazer Nome Cliente"
       Top             =   120
@@ -280,9 +280,9 @@ Begin VB.Form frmPF
    Begin VB.TextBox txtfields 
       Height          =   285
       Index           =   14
-      Left            =   8040
+      Left            =   8160
       MaxLength       =   50
-      TabIndex        =   22
+      TabIndex        =   19
       Top             =   3120
       Width           =   2655
    End
@@ -290,24 +290,10 @@ Begin VB.Form frmPF
       Caption         =   "Embalagem"
       Height          =   375
       Left            =   10440
-      TabIndex        =   105
+      TabIndex        =   102
       TabStop         =   0   'False
       Top             =   1200
       Width           =   1095
-   End
-   Begin MSComCtl2.DTPicker DTPicker1 
-      Height          =   375
-      Left            =   4920
-      TabIndex        =   11
-      Top             =   1800
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   161218561
-      CurrentDate     =   36399
    End
    Begin VB.TextBox txtfields 
       BackColor       =   &H00C0FFFF&
@@ -317,7 +303,7 @@ Begin VB.Form frmPF
       Left            =   6600
       Locked          =   -1  'True
       MaxLength       =   2
-      TabIndex        =   24
+      TabIndex        =   21
       TabStop         =   0   'False
       Top             =   1800
       Width           =   495
@@ -328,7 +314,7 @@ Begin VB.Form frmPF
       Left            =   1260
       Picture         =   "frmPF.frx":1628
       Style           =   1  'Graphical
-      TabIndex        =   84
+      TabIndex        =   81
       TabStop         =   0   'False
       Top             =   840
       Width           =   375
@@ -339,7 +325,7 @@ Begin VB.Form frmPF
       Left            =   3060
       Picture         =   "frmPF.frx":1BB2
       Style           =   1  'Graphical
-      TabIndex        =   83
+      TabIndex        =   80
       TabStop         =   0   'False
       Top             =   120
       Width           =   375
@@ -356,10 +342,10 @@ Begin VB.Form frmPF
    Begin VB.TextBox txtfields 
       Height          =   285
       Index           =   18
-      Left            =   5640
+      Left            =   5760
       MultiLine       =   -1  'True
       ScrollBars      =   2  'Vertical
-      TabIndex        =   16
+      TabIndex        =   14
       Top             =   2400
       Width           =   3735
    End
@@ -376,15 +362,15 @@ Begin VB.Form frmPF
       Height          =   285
       Index           =   17
       Left            =   10080
-      TabIndex        =   12
+      TabIndex        =   11
       Top             =   1800
       Width           =   1395
    End
    Begin VB.TextBox txtfields 
       Height          =   285
       Index           =   16
-      Left            =   6840
-      TabIndex        =   21
+      Left            =   6960
+      TabIndex        =   18
       Top             =   3120
       Width           =   1095
    End
@@ -400,8 +386,8 @@ Begin VB.Form frmPF
       EndProperty
       Height          =   285
       Index           =   15
-      Left            =   5640
-      TabIndex        =   20
+      Left            =   5760
+      TabIndex        =   17
       Top             =   3120
       Width           =   1095
    End
@@ -409,7 +395,7 @@ Begin VB.Form frmPF
       Height          =   285
       Index           =   13
       Left            =   2760
-      TabIndex        =   18
+      TabIndex        =   16
       Top             =   3120
       Width           =   1095
    End
@@ -418,7 +404,7 @@ Begin VB.Form frmPF
       Index           =   12
       Left            =   120
       MaxLength       =   24
-      TabIndex        =   17
+      TabIndex        =   15
       Top             =   3120
       Width           =   2535
    End
@@ -426,7 +412,7 @@ Begin VB.Form frmPF
       Height          =   285
       Index           =   10
       Left            =   2760
-      TabIndex        =   14
+      TabIndex        =   13
       Top             =   2400
       Width           =   1095
    End
@@ -435,7 +421,7 @@ Begin VB.Form frmPF
       Index           =   9
       Left            =   120
       MaxLength       =   24
-      TabIndex        =   13
+      TabIndex        =   12
       Top             =   2400
       Width           =   2535
    End
@@ -497,7 +483,7 @@ Begin VB.Form frmPF
       Height          =   285
       Left            =   120
       Locked          =   -1  'True
-      TabIndex        =   23
+      TabIndex        =   20
       TabStop         =   0   'False
       Top             =   480
       Width           =   915
@@ -506,7 +492,7 @@ Begin VB.Form frmPF
       Height          =   4455
       Index           =   2
       Left            =   0
-      TabIndex        =   54
+      TabIndex        =   51
       Top             =   3720
       Width           =   11775
       _ExtentX        =   20770
@@ -519,174 +505,174 @@ Begin VB.Form frmPF
       TabCaption(0)   =   "Matéria Prima 1"
       TabPicture(0)   =   "frmPF.frx":213C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "ESCpro(9)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Picture2(0)"
-      Tab(0).Control(2)=   "Picture1(0)"
-      Tab(0).Control(3)=   "CmdApagar(1)"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Command9(0)"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "txtfields(48)"
-      Tab(0).Control(6)=   "txtfields(47)"
-      Tab(0).Control(7)=   "txtfields(19)"
-      Tab(0).Control(8)=   "txtfields(36)"
-      Tab(0).Control(9)=   "txtfields(35)"
-      Tab(0).Control(10)=   "txtfields(27)"
-      Tab(0).Control(11)=   "txtfields(23)"
-      Tab(0).Control(12)=   "txtfields(20)"
-      Tab(0).Control(13)=   "escmu(1)"
-      Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "txtfields(24)"
-      Tab(0).Control(15)=   "cmdFOTO(2)"
-      Tab(0).Control(16)=   "cmdimprimir(0)"
-      Tab(0).Control(17)=   "CmdPaste(0)"
-      Tab(0).Control(18)=   "Incimg(0)"
-      Tab(0).Control(19)=   "DelImg(0)"
-      Tab(0).Control(20)=   "CmdSaveimg(0)"
-      Tab(0).Control(21)=   "VerImg(0)"
-      Tab(0).Control(22)=   "lblLabels(21)"
-      Tab(0).Control(23)=   "lblLabels(26)"
-      Tab(0).Control(24)=   "lblLabels(25)"
-      Tab(0).Control(25)=   "lblLabels(24)"
-      Tab(0).Control(26)=   "lblLabels(23)"
-      Tab(0).Control(27)=   "lblLabels(22)"
+      Tab(0).Control(0)=   "lblLabels(22)"
+      Tab(0).Control(1)=   "lblLabels(23)"
+      Tab(0).Control(2)=   "lblLabels(24)"
+      Tab(0).Control(3)=   "lblLabels(25)"
+      Tab(0).Control(4)=   "lblLabels(26)"
+      Tab(0).Control(5)=   "lblLabels(21)"
+      Tab(0).Control(6)=   "VerImg(0)"
+      Tab(0).Control(7)=   "CmdSaveimg(0)"
+      Tab(0).Control(8)=   "DelImg(0)"
+      Tab(0).Control(9)=   "Incimg(0)"
+      Tab(0).Control(10)=   "CmdPaste(0)"
+      Tab(0).Control(11)=   "cmdimprimir(0)"
+      Tab(0).Control(12)=   "cmdFOTO(2)"
+      Tab(0).Control(13)=   "txtfields(24)"
+      Tab(0).Control(14)=   "escmu(1)"
+      Tab(0).Control(14).Enabled=   0   'False
+      Tab(0).Control(15)=   "txtfields(20)"
+      Tab(0).Control(16)=   "txtfields(23)"
+      Tab(0).Control(17)=   "txtfields(27)"
+      Tab(0).Control(18)=   "txtfields(35)"
+      Tab(0).Control(19)=   "txtfields(36)"
+      Tab(0).Control(20)=   "txtfields(19)"
+      Tab(0).Control(21)=   "txtfields(47)"
+      Tab(0).Control(22)=   "txtfields(48)"
+      Tab(0).Control(23)=   "Command9(0)"
+      Tab(0).Control(23).Enabled=   0   'False
+      Tab(0).Control(24)=   "CmdApagar(1)"
+      Tab(0).Control(24).Enabled=   0   'False
+      Tab(0).Control(25)=   "Picture1(0)"
+      Tab(0).Control(26)=   "Picture2(0)"
+      Tab(0).Control(27)=   "ESCpro(9)"
+      Tab(0).Control(27).Enabled=   0   'False
       Tab(0).ControlCount=   28
       TabCaption(1)   =   "Matéria Prima 2"
       TabPicture(1)   =   "frmPF.frx":2158
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "ESCpro(10)"
-      Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "Picture2(1)"
-      Tab(1).Control(2)=   "Picture1(1)"
-      Tab(1).Control(3)=   "CmdApagar(2)"
-      Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "Command9(1)"
-      Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "txtfields(50)"
-      Tab(1).Control(6)=   "txtfields(49)"
-      Tab(1).Control(7)=   "txtfields(41)"
-      Tab(1).Control(8)=   "txtfields(40)"
-      Tab(1).Control(9)=   "txtfields(39)"
-      Tab(1).Control(10)=   "txtfields(38)"
-      Tab(1).Control(11)=   "txtfields(37)"
-      Tab(1).Control(12)=   "txtfields(21)"
-      Tab(1).Control(13)=   "escmu(2)"
-      Tab(1).Control(13).Enabled=   0   'False
-      Tab(1).Control(14)=   "txtfields(25)"
-      Tab(1).Control(15)=   "cmdFOTO(3)"
-      Tab(1).Control(16)=   "cmdimprimir(1)"
-      Tab(1).Control(17)=   "CmdPaste(1)"
-      Tab(1).Control(18)=   "Incimg(1)"
-      Tab(1).Control(19)=   "DelImg(1)"
-      Tab(1).Control(20)=   "CmdSaveimg(1)"
-      Tab(1).Control(21)=   "VerImg(1)"
-      Tab(1).Control(22)=   "lblLabels(37)"
-      Tab(1).Control(23)=   "lblLabels(31)"
-      Tab(1).Control(24)=   "lblLabels(30)"
-      Tab(1).Control(25)=   "lblLabels(29)"
-      Tab(1).Control(26)=   "lblLabels(28)"
-      Tab(1).Control(27)=   "lblLabels(27)"
+      Tab(1).Control(0)=   "lblLabels(27)"
+      Tab(1).Control(1)=   "lblLabels(28)"
+      Tab(1).Control(2)=   "lblLabels(29)"
+      Tab(1).Control(3)=   "lblLabels(30)"
+      Tab(1).Control(4)=   "lblLabels(31)"
+      Tab(1).Control(5)=   "lblLabels(37)"
+      Tab(1).Control(6)=   "VerImg(1)"
+      Tab(1).Control(7)=   "CmdSaveimg(1)"
+      Tab(1).Control(8)=   "DelImg(1)"
+      Tab(1).Control(9)=   "Incimg(1)"
+      Tab(1).Control(10)=   "CmdPaste(1)"
+      Tab(1).Control(11)=   "cmdimprimir(1)"
+      Tab(1).Control(12)=   "cmdFOTO(3)"
+      Tab(1).Control(13)=   "txtfields(25)"
+      Tab(1).Control(14)=   "escmu(2)"
+      Tab(1).Control(14).Enabled=   0   'False
+      Tab(1).Control(15)=   "txtfields(21)"
+      Tab(1).Control(16)=   "txtfields(37)"
+      Tab(1).Control(17)=   "txtfields(38)"
+      Tab(1).Control(18)=   "txtfields(39)"
+      Tab(1).Control(19)=   "txtfields(40)"
+      Tab(1).Control(20)=   "txtfields(41)"
+      Tab(1).Control(21)=   "txtfields(49)"
+      Tab(1).Control(22)=   "txtfields(50)"
+      Tab(1).Control(23)=   "Command9(1)"
+      Tab(1).Control(23).Enabled=   0   'False
+      Tab(1).Control(24)=   "CmdApagar(2)"
+      Tab(1).Control(24).Enabled=   0   'False
+      Tab(1).Control(25)=   "Picture1(1)"
+      Tab(1).Control(26)=   "Picture2(1)"
+      Tab(1).Control(27)=   "ESCpro(10)"
+      Tab(1).Control(27).Enabled=   0   'False
       Tab(1).ControlCount=   28
       TabCaption(2)   =   "Matéria Prima 3"
       TabPicture(2)   =   "frmPF.frx":2174
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "ESCpro(11)"
-      Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "Picture2(2)"
-      Tab(2).Control(2)=   "Picture1(2)"
-      Tab(2).Control(3)=   "CmdApagar(3)"
-      Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "Command9(2)"
-      Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "txtfields(62)"
-      Tab(2).Control(6)=   "txtfields(61)"
-      Tab(2).Control(7)=   "txtfields(46)"
-      Tab(2).Control(8)=   "txtfields(45)"
-      Tab(2).Control(9)=   "txtfields(44)"
-      Tab(2).Control(10)=   "txtfields(43)"
-      Tab(2).Control(11)=   "txtfields(42)"
-      Tab(2).Control(12)=   "txtfields(22)"
-      Tab(2).Control(13)=   "escmu(3)"
-      Tab(2).Control(13).Enabled=   0   'False
-      Tab(2).Control(14)=   "txtfields(26)"
-      Tab(2).Control(15)=   "cmdFOTO(4)"
-      Tab(2).Control(16)=   "cmdimprimir(2)"
-      Tab(2).Control(17)=   "CmdPaste(2)"
-      Tab(2).Control(18)=   "Incimg(2)"
-      Tab(2).Control(19)=   "DelImg(2)"
-      Tab(2).Control(20)=   "CmdSaveimg(2)"
-      Tab(2).Control(21)=   "VerImg(2)"
-      Tab(2).Control(22)=   "lblLabels(38)"
-      Tab(2).Control(23)=   "lblLabels(36)"
-      Tab(2).Control(24)=   "lblLabels(35)"
-      Tab(2).Control(25)=   "lblLabels(34)"
-      Tab(2).Control(26)=   "lblLabels(33)"
-      Tab(2).Control(27)=   "lblLabels(32)"
+      Tab(2).Control(0)=   "lblLabels(32)"
+      Tab(2).Control(1)=   "lblLabels(33)"
+      Tab(2).Control(2)=   "lblLabels(34)"
+      Tab(2).Control(3)=   "lblLabels(35)"
+      Tab(2).Control(4)=   "lblLabels(36)"
+      Tab(2).Control(5)=   "lblLabels(38)"
+      Tab(2).Control(6)=   "VerImg(2)"
+      Tab(2).Control(7)=   "CmdSaveimg(2)"
+      Tab(2).Control(8)=   "DelImg(2)"
+      Tab(2).Control(9)=   "Incimg(2)"
+      Tab(2).Control(10)=   "CmdPaste(2)"
+      Tab(2).Control(11)=   "cmdimprimir(2)"
+      Tab(2).Control(12)=   "cmdFOTO(4)"
+      Tab(2).Control(13)=   "txtfields(26)"
+      Tab(2).Control(14)=   "escmu(3)"
+      Tab(2).Control(14).Enabled=   0   'False
+      Tab(2).Control(15)=   "txtfields(22)"
+      Tab(2).Control(16)=   "txtfields(42)"
+      Tab(2).Control(17)=   "txtfields(43)"
+      Tab(2).Control(18)=   "txtfields(44)"
+      Tab(2).Control(19)=   "txtfields(45)"
+      Tab(2).Control(20)=   "txtfields(46)"
+      Tab(2).Control(21)=   "txtfields(61)"
+      Tab(2).Control(22)=   "txtfields(62)"
+      Tab(2).Control(23)=   "Command9(2)"
+      Tab(2).Control(23).Enabled=   0   'False
+      Tab(2).Control(24)=   "CmdApagar(3)"
+      Tab(2).Control(24).Enabled=   0   'False
+      Tab(2).Control(25)=   "Picture1(2)"
+      Tab(2).Control(26)=   "Picture2(2)"
+      Tab(2).Control(27)=   "ESCpro(11)"
+      Tab(2).Control(27).Enabled=   0   'False
       Tab(2).ControlCount=   28
       TabCaption(3)   =   "Composição"
       TabPicture(3)   =   "frmPF.frx":2190
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "ImpComPF"
-      Tab(3).Control(0).Enabled=   0   'False
-      Tab(3).Control(1)=   "CmdcomIMp"
-      Tab(3).Control(1).Enabled=   0   'False
-      Tab(3).Control(2)=   "GRIDCOM"
+      Tab(3).Control(0)=   "Command5"
+      Tab(3).Control(1)=   "Command4"
+      Tab(3).Control(2)=   "Command6"
       Tab(3).Control(3)=   "cmdFOTO(5)"
-      Tab(3).Control(4)=   "Command6"
-      Tab(3).Control(5)=   "Command4"
-      Tab(3).Control(6)=   "Command5"
+      Tab(3).Control(4)=   "GRIDCOM"
+      Tab(3).Control(5)=   "CmdcomIMp"
+      Tab(3).Control(5).Enabled=   0   'False
+      Tab(3).Control(6)=   "ImpComPF"
+      Tab(3).Control(6).Enabled=   0   'False
       Tab(3).ControlCount=   7
       TabCaption(4)   =   "Elab.Rev.Bloq."
       TabPicture(4)   =   "frmPF.frx":21AC
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Label1"
+      Tab(4).Control(0)=   "Command10"
       Tab(4).Control(0).Enabled=   0   'False
-      Tab(4).Control(1)=   "Label12"
+      Tab(4).Control(1)=   "txtfields(65)"
       Tab(4).Control(1).Enabled=   0   'False
-      Tab(4).Control(2)=   "Label10"
+      Tab(4).Control(2)=   "txtfields(64)"
       Tab(4).Control(2).Enabled=   0   'False
-      Tab(4).Control(3)=   "Label3"
+      Tab(4).Control(3)=   "Check2"
       Tab(4).Control(3).Enabled=   0   'False
-      Tab(4).Control(4)=   "Label4"
+      Tab(4).Control(4)=   "txtfields(63)"
       Tab(4).Control(4).Enabled=   0   'False
-      Tab(4).Control(5)=   "ComMotExc"
+      Tab(4).Control(5)=   "txtfields(29)"
       Tab(4).Control(5).Enabled=   0   'False
-      Tab(4).Control(6)=   "ComMotAlt"
+      Tab(4).Control(6)=   "CmdMotRev"
       Tab(4).Control(6).Enabled=   0   'False
-      Tab(4).Control(7)=   "ComMotInc"
+      Tab(4).Control(7)=   "NovaRev"
       Tab(4).Control(7).Enabled=   0   'False
-      Tab(4).Control(8)=   "gridrevi"
+      Tab(4).Control(8)=   "txtfields(30)"
       Tab(4).Control(8).Enabled=   0   'False
-      Tab(4).Control(9)=   "gridrev"
+      Tab(4).Control(9)=   "escmp04a"
       Tab(4).Control(9).Enabled=   0   'False
-      Tab(4).Control(10)=   "txtfields(11)"
+      Tab(4).Control(10)=   "txtfields(31)"
       Tab(4).Control(10).Enabled=   0   'False
-      Tab(4).Control(11)=   "Check1"
+      Tab(4).Control(11)=   "txtfields(8)"
       Tab(4).Control(11).Enabled=   0   'False
-      Tab(4).Control(12)=   "txtfields(8)"
+      Tab(4).Control(12)=   "Check1"
       Tab(4).Control(12).Enabled=   0   'False
-      Tab(4).Control(13)=   "txtfields(31)"
+      Tab(4).Control(13)=   "txtfields(11)"
       Tab(4).Control(13).Enabled=   0   'False
-      Tab(4).Control(14)=   "escmp04a"
+      Tab(4).Control(14)=   "gridrev"
       Tab(4).Control(14).Enabled=   0   'False
-      Tab(4).Control(15)=   "txtfields(30)"
+      Tab(4).Control(15)=   "gridrevi"
       Tab(4).Control(15).Enabled=   0   'False
-      Tab(4).Control(16)=   "NovaRev"
+      Tab(4).Control(16)=   "ComMotInc"
       Tab(4).Control(16).Enabled=   0   'False
-      Tab(4).Control(17)=   "CmdMotRev"
+      Tab(4).Control(17)=   "ComMotAlt"
       Tab(4).Control(17).Enabled=   0   'False
-      Tab(4).Control(18)=   "txtfields(29)"
+      Tab(4).Control(18)=   "ComMotExc"
       Tab(4).Control(18).Enabled=   0   'False
-      Tab(4).Control(19)=   "txtfields(63)"
+      Tab(4).Control(19)=   "Label4"
       Tab(4).Control(19).Enabled=   0   'False
-      Tab(4).Control(20)=   "Check2"
+      Tab(4).Control(20)=   "Label3"
       Tab(4).Control(20).Enabled=   0   'False
-      Tab(4).Control(21)=   "txtfields(64)"
+      Tab(4).Control(21)=   "Label10"
       Tab(4).Control(21).Enabled=   0   'False
-      Tab(4).Control(22)=   "txtfields(65)"
+      Tab(4).Control(22)=   "Label12"
       Tab(4).Control(22).Enabled=   0   'False
-      Tab(4).Control(23)=   "Command10"
+      Tab(4).Control(23)=   "Label1"
       Tab(4).Control(23).Enabled=   0   'False
       Tab(4).ControlCount=   24
       TabCaption(5)   =   "Sequencia"
@@ -710,61 +696,61 @@ Begin VB.Form frmPF
       TabCaption(6)   =   "Fluxo Mat Prima"
       TabPicture(6)   =   "frmPF.frx":21E4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "CMDSIG(10)"
-      Tab(6).Control(1)=   "CMDSIG(9)"
+      Tab(6).Control(0)=   "EscCodFlu(10)"
+      Tab(6).Control(0).Enabled=   0   'False
+      Tab(6).Control(1)=   "EscCodFlu(9)"
       Tab(6).Control(1).Enabled=   0   'False
-      Tab(6).Control(2)=   "CMDSIG(8)"
+      Tab(6).Control(2)=   "EscCodFlu(8)"
       Tab(6).Control(2).Enabled=   0   'False
-      Tab(6).Control(3)=   "CMDSIG(7)"
+      Tab(6).Control(3)=   "EscCodFlu(7)"
       Tab(6).Control(3).Enabled=   0   'False
-      Tab(6).Control(4)=   "CMDSIG(6)"
-      Tab(6).Control(4).Enabled=   0   'False
-      Tab(6).Control(5)=   "CMDSIG(5)"
-      Tab(6).Control(5).Enabled=   0   'False
-      Tab(6).Control(6)=   "CMDSIG(4)"
-      Tab(6).Control(6).Enabled=   0   'False
-      Tab(6).Control(7)=   "CMDSIG(3)"
-      Tab(6).Control(7).Enabled=   0   'False
-      Tab(6).Control(8)=   "CMDSIG(2)"
+      Tab(6).Control(4)=   "txtfields(60)"
+      Tab(6).Control(5)=   "txtfields(59)"
+      Tab(6).Control(6)=   "txtfields(58)"
+      Tab(6).Control(7)=   "txtfields(57)"
+      Tab(6).Control(8)=   "EscCodFlu(6)"
       Tab(6).Control(8).Enabled=   0   'False
-      Tab(6).Control(9)=   "CMDSIG(1)"
+      Tab(6).Control(9)=   "EscCodFlu(5)"
       Tab(6).Control(9).Enabled=   0   'False
-      Tab(6).Control(10)=   "txtfields(51)"
-      Tab(6).Control(11)=   "txtfields(52)"
-      Tab(6).Control(12)=   "txtfields(53)"
-      Tab(6).Control(13)=   "txtfields(54)"
-      Tab(6).Control(14)=   "txtfields(55)"
-      Tab(6).Control(15)=   "txtfields(56)"
-      Tab(6).Control(16)=   "EscCodFlu(1)"
-      Tab(6).Control(16).Enabled=   0   'False
-      Tab(6).Control(17)=   "EscCodFlu(2)"
-      Tab(6).Control(17).Enabled=   0   'False
-      Tab(6).Control(18)=   "EscCodFlu(3)"
-      Tab(6).Control(18).Enabled=   0   'False
-      Tab(6).Control(19)=   "EscCodFlu(4)"
-      Tab(6).Control(19).Enabled=   0   'False
-      Tab(6).Control(20)=   "EscCodFlu(5)"
+      Tab(6).Control(10)=   "EscCodFlu(4)"
+      Tab(6).Control(10).Enabled=   0   'False
+      Tab(6).Control(11)=   "EscCodFlu(3)"
+      Tab(6).Control(11).Enabled=   0   'False
+      Tab(6).Control(12)=   "EscCodFlu(2)"
+      Tab(6).Control(12).Enabled=   0   'False
+      Tab(6).Control(13)=   "EscCodFlu(1)"
+      Tab(6).Control(13).Enabled=   0   'False
+      Tab(6).Control(14)=   "txtfields(56)"
+      Tab(6).Control(15)=   "txtfields(55)"
+      Tab(6).Control(16)=   "txtfields(54)"
+      Tab(6).Control(17)=   "txtfields(53)"
+      Tab(6).Control(18)=   "txtfields(52)"
+      Tab(6).Control(19)=   "txtfields(51)"
+      Tab(6).Control(20)=   "CMDSIG(1)"
       Tab(6).Control(20).Enabled=   0   'False
-      Tab(6).Control(21)=   "EscCodFlu(6)"
+      Tab(6).Control(21)=   "CMDSIG(2)"
       Tab(6).Control(21).Enabled=   0   'False
-      Tab(6).Control(22)=   "txtfields(57)"
-      Tab(6).Control(23)=   "txtfields(58)"
-      Tab(6).Control(24)=   "txtfields(59)"
-      Tab(6).Control(25)=   "txtfields(60)"
-      Tab(6).Control(26)=   "EscCodFlu(7)"
+      Tab(6).Control(22)=   "CMDSIG(3)"
+      Tab(6).Control(22).Enabled=   0   'False
+      Tab(6).Control(23)=   "CMDSIG(4)"
+      Tab(6).Control(23).Enabled=   0   'False
+      Tab(6).Control(24)=   "CMDSIG(5)"
+      Tab(6).Control(24).Enabled=   0   'False
+      Tab(6).Control(25)=   "CMDSIG(6)"
+      Tab(6).Control(25).Enabled=   0   'False
+      Tab(6).Control(26)=   "CMDSIG(7)"
       Tab(6).Control(26).Enabled=   0   'False
-      Tab(6).Control(27)=   "EscCodFlu(8)"
+      Tab(6).Control(27)=   "CMDSIG(8)"
       Tab(6).Control(27).Enabled=   0   'False
-      Tab(6).Control(28)=   "EscCodFlu(9)"
+      Tab(6).Control(28)=   "CMDSIG(9)"
       Tab(6).Control(28).Enabled=   0   'False
-      Tab(6).Control(29)=   "EscCodFlu(10)"
-      Tab(6).Control(29).Enabled=   0   'False
+      Tab(6).Control(29)=   "CMDSIG(10)"
       Tab(6).ControlCount=   30
       Begin VB.CommandButton Command10 
          Caption         =   "Distribuicao"
          Height          =   495
          Left            =   -67320
-         TabIndex        =   189
+         TabIndex        =   186
          TabStop         =   0   'False
          Top             =   2040
          Width           =   1335
@@ -773,7 +759,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   65
          Left            =   -72000
-         TabIndex        =   186
+         TabIndex        =   183
          Top             =   960
          Width           =   1095
       End
@@ -781,7 +767,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   64
          Left            =   -73800
-         TabIndex        =   185
+         TabIndex        =   182
          Top             =   960
          Width           =   1095
       End
@@ -789,7 +775,7 @@ Begin VB.Form frmPF
          Caption         =   "Item Seguranca"
          Height          =   375
          Left            =   -70800
-         TabIndex        =   184
+         TabIndex        =   181
          Top             =   840
          Width           =   1455
       End
@@ -798,7 +784,7 @@ Begin VB.Form frmPF
          Height          =   315
          Index           =   11
          Left            =   -68280
-         TabIndex        =   183
+         TabIndex        =   180
          TabStop         =   0   'False
          Top             =   960
          Width           =   375
@@ -808,7 +794,7 @@ Begin VB.Form frmPF
          Height          =   315
          Index           =   10
          Left            =   -68400
-         TabIndex        =   182
+         TabIndex        =   179
          TabStop         =   0   'False
          Top             =   840
          Width           =   375
@@ -818,7 +804,7 @@ Begin VB.Form frmPF
          Height          =   315
          Index           =   9
          Left            =   -68400
-         TabIndex        =   181
+         TabIndex        =   178
          TabStop         =   0   'False
          Top             =   840
          Width           =   375
@@ -829,7 +815,7 @@ Begin VB.Form frmPF
          Left            =   -74760
          ScaleHeight     =   2475
          ScaleWidth      =   2835
-         TabIndex        =   180
+         TabIndex        =   177
          Top             =   600
          Width           =   2895
       End
@@ -839,7 +825,7 @@ Begin VB.Form frmPF
          Left            =   -71520
          ScaleHeight     =   195
          ScaleWidth      =   555
-         TabIndex        =   179
+         TabIndex        =   176
          Top             =   600
          Visible         =   0   'False
          Width           =   615
@@ -850,7 +836,7 @@ Begin VB.Form frmPF
          Left            =   -74760
          ScaleHeight     =   2475
          ScaleWidth      =   2835
-         TabIndex        =   178
+         TabIndex        =   175
          Top             =   480
          Width           =   2895
       End
@@ -860,7 +846,7 @@ Begin VB.Form frmPF
          Left            =   -71640
          ScaleHeight     =   195
          ScaleWidth      =   315
-         TabIndex        =   177
+         TabIndex        =   174
          Top             =   480
          Visible         =   0   'False
          Width           =   375
@@ -871,7 +857,7 @@ Begin VB.Form frmPF
          Left            =   -74760
          ScaleHeight     =   2475
          ScaleWidth      =   2835
-         TabIndex        =   176
+         TabIndex        =   173
          Top             =   480
          Width           =   2895
       End
@@ -881,7 +867,7 @@ Begin VB.Form frmPF
          Left            =   -71760
          ScaleHeight     =   195
          ScaleWidth      =   555
-         TabIndex        =   175
+         TabIndex        =   172
          Top             =   480
          Visible         =   0   'False
          Width           =   615
@@ -893,7 +879,7 @@ Begin VB.Form frmPF
          Index           =   63
          Left            =   -67080
          Locked          =   -1  'True
-         TabIndex        =   174
+         TabIndex        =   171
          TabStop         =   0   'False
          Top             =   480
          Width           =   1455
@@ -904,7 +890,7 @@ Begin VB.Form frmPF
          Left            =   -71640
          Picture         =   "frmPF.frx":2200
          Style           =   1  'Graphical
-         TabIndex        =   173
+         TabIndex        =   170
          Top             =   2880
          Width           =   255
       End
@@ -914,7 +900,7 @@ Begin VB.Form frmPF
          Left            =   -71640
          Picture         =   "frmPF.frx":278A
          Style           =   1  'Graphical
-         TabIndex        =   172
+         TabIndex        =   169
          TabStop         =   0   'False
          Top             =   2400
          Width           =   255
@@ -925,7 +911,7 @@ Begin VB.Form frmPF
          Left            =   -71640
          Picture         =   "frmPF.frx":2D14
          Style           =   1  'Graphical
-         TabIndex        =   171
+         TabIndex        =   168
          TabStop         =   0   'False
          Top             =   1920
          Width           =   255
@@ -936,7 +922,7 @@ Begin VB.Form frmPF
          Left            =   -71640
          Picture         =   "frmPF.frx":329E
          Style           =   1  'Graphical
-         TabIndex        =   170
+         TabIndex        =   167
          TabStop         =   0   'False
          Top             =   1440
          Width           =   255
@@ -947,7 +933,7 @@ Begin VB.Form frmPF
          Left            =   -71640
          Picture         =   "frmPF.frx":3828
          Style           =   1  'Graphical
-         TabIndex        =   169
+         TabIndex        =   166
          TabStop         =   0   'False
          Top             =   960
          Width           =   255
@@ -958,7 +944,7 @@ Begin VB.Form frmPF
          Left            =   -74280
          Picture         =   "frmPF.frx":3DB2
          Style           =   1  'Graphical
-         TabIndex        =   168
+         TabIndex        =   165
          TabStop         =   0   'False
          Top             =   2880
          Width           =   255
@@ -969,7 +955,7 @@ Begin VB.Form frmPF
          Left            =   -74280
          Picture         =   "frmPF.frx":433C
          Style           =   1  'Graphical
-         TabIndex        =   167
+         TabIndex        =   164
          TabStop         =   0   'False
          Top             =   2400
          Width           =   255
@@ -980,7 +966,7 @@ Begin VB.Form frmPF
          Left            =   -74280
          Picture         =   "frmPF.frx":48C6
          Style           =   1  'Graphical
-         TabIndex        =   166
+         TabIndex        =   163
          TabStop         =   0   'False
          Top             =   1920
          Width           =   255
@@ -991,7 +977,7 @@ Begin VB.Form frmPF
          Left            =   -74280
          Picture         =   "frmPF.frx":4E50
          Style           =   1  'Graphical
-         TabIndex        =   165
+         TabIndex        =   162
          TabStop         =   0   'False
          Top             =   1440
          Width           =   255
@@ -1002,7 +988,7 @@ Begin VB.Form frmPF
          Left            =   -74280
          Picture         =   "frmPF.frx":53DA
          Style           =   1  'Graphical
-         TabIndex        =   164
+         TabIndex        =   161
          TabStop         =   0   'False
          Top             =   960
          Width           =   255
@@ -1023,7 +1009,7 @@ Begin VB.Form frmPF
          Height          =   525
          Index           =   51
          Left            =   -73440
-         TabIndex        =   55
+         TabIndex        =   52
          Top             =   720
          Width           =   615
       End
@@ -1043,7 +1029,7 @@ Begin VB.Form frmPF
          Height          =   525
          Index           =   52
          Left            =   -72840
-         TabIndex        =   56
+         TabIndex        =   53
          Top             =   720
          Width           =   615
       End
@@ -1063,7 +1049,7 @@ Begin VB.Form frmPF
          Height          =   525
          Index           =   53
          Left            =   -73440
-         TabIndex        =   57
+         TabIndex        =   54
          Top             =   1200
          Width           =   615
       End
@@ -1083,7 +1069,7 @@ Begin VB.Form frmPF
          Height          =   525
          Index           =   54
          Left            =   -72840
-         TabIndex        =   58
+         TabIndex        =   55
          Top             =   1200
          Width           =   615
       End
@@ -1103,7 +1089,7 @@ Begin VB.Form frmPF
          Height          =   525
          Index           =   55
          Left            =   -73440
-         TabIndex        =   59
+         TabIndex        =   56
          Top             =   1680
          Width           =   615
       End
@@ -1122,7 +1108,7 @@ Begin VB.Form frmPF
          Height          =   525
          Index           =   56
          Left            =   -72840
-         TabIndex        =   60
+         TabIndex        =   57
          Top             =   1680
          Width           =   615
       End
@@ -1131,7 +1117,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   1
          Left            =   -74040
-         TabIndex        =   160
+         TabIndex        =   157
          TabStop         =   0   'False
          Top             =   960
          Width           =   495
@@ -1141,7 +1127,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   2
          Left            =   -72120
-         TabIndex        =   159
+         TabIndex        =   156
          TabStop         =   0   'False
          Top             =   960
          Width           =   495
@@ -1151,7 +1137,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   3
          Left            =   -74040
-         TabIndex        =   158
+         TabIndex        =   155
          TabStop         =   0   'False
          Top             =   1440
          Width           =   495
@@ -1161,7 +1147,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   4
          Left            =   -72120
-         TabIndex        =   157
+         TabIndex        =   154
          TabStop         =   0   'False
          Top             =   1440
          Width           =   495
@@ -1171,7 +1157,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   5
          Left            =   -74040
-         TabIndex        =   156
+         TabIndex        =   153
          TabStop         =   0   'False
          Top             =   1920
          Width           =   495
@@ -1181,7 +1167,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   6
          Left            =   -72120
-         TabIndex        =   155
+         TabIndex        =   152
          TabStop         =   0   'False
          Top             =   1920
          Width           =   495
@@ -1202,7 +1188,7 @@ Begin VB.Form frmPF
          Height          =   525
          Index           =   57
          Left            =   -73440
-         TabIndex        =   61
+         TabIndex        =   58
          Top             =   2160
          Width           =   615
       End
@@ -1222,7 +1208,7 @@ Begin VB.Form frmPF
          Height          =   525
          Index           =   58
          Left            =   -72840
-         TabIndex        =   62
+         TabIndex        =   59
          Top             =   2160
          Width           =   615
       End
@@ -1242,7 +1228,7 @@ Begin VB.Form frmPF
          Height          =   525
          Index           =   59
          Left            =   -73440
-         TabIndex        =   63
+         TabIndex        =   60
          Top             =   2640
          Width           =   615
       End
@@ -1262,7 +1248,7 @@ Begin VB.Form frmPF
          Height          =   525
          Index           =   60
          Left            =   -72840
-         TabIndex        =   64
+         TabIndex        =   61
          Top             =   2640
          Width           =   615
       End
@@ -1271,7 +1257,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   7
          Left            =   -74040
-         TabIndex        =   154
+         TabIndex        =   151
          TabStop         =   0   'False
          Top             =   2400
          Width           =   495
@@ -1281,7 +1267,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   8
          Left            =   -72120
-         TabIndex        =   153
+         TabIndex        =   150
          TabStop         =   0   'False
          Top             =   2400
          Width           =   495
@@ -1291,7 +1277,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   9
          Left            =   -74040
-         TabIndex        =   152
+         TabIndex        =   149
          TabStop         =   0   'False
          Top             =   2880
          Width           =   495
@@ -1301,7 +1287,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   10
          Left            =   -72120
-         TabIndex        =   151
+         TabIndex        =   148
          TabStop         =   0   'False
          Top             =   2880
          Width           =   495
@@ -1313,7 +1299,7 @@ Begin VB.Form frmPF
          Index           =   29
          Left            =   -72600
          Locked          =   -1  'True
-         TabIndex        =   146
+         TabIndex        =   143
          TabStop         =   0   'False
          Top             =   1320
          Width           =   1335
@@ -1323,7 +1309,7 @@ Begin VB.Form frmPF
          Height          =   375
          Index           =   3
          Left            =   -67080
-         TabIndex        =   140
+         TabIndex        =   137
          TabStop         =   0   'False
          Top             =   960
          Width           =   1215
@@ -1333,7 +1319,7 @@ Begin VB.Form frmPF
          Height          =   375
          Index           =   2
          Left            =   -67320
-         TabIndex        =   139
+         TabIndex        =   136
          TabStop         =   0   'False
          Top             =   840
          Width           =   1215
@@ -1343,7 +1329,7 @@ Begin VB.Form frmPF
          Height          =   375
          Index           =   1
          Left            =   -67320
-         TabIndex        =   138
+         TabIndex        =   135
          TabStop         =   0   'False
          Top             =   840
          Width           =   1215
@@ -1353,7 +1339,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   2
          Left            =   -67800
-         TabIndex        =   136
+         TabIndex        =   133
          TabStop         =   0   'False
          Top             =   1020
          Width           =   435
@@ -1363,7 +1349,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   1
          Left            =   -67800
-         TabIndex        =   135
+         TabIndex        =   132
          TabStop         =   0   'False
          Top             =   900
          Width           =   435
@@ -1373,7 +1359,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   0
          Left            =   -67800
-         TabIndex        =   134
+         TabIndex        =   131
          TabStop         =   0   'False
          Top             =   900
          Width           =   435
@@ -1382,7 +1368,7 @@ Begin VB.Form frmPF
          Caption         =   "Importar/PF"
          Height          =   255
          Left            =   -66720
-         TabIndex        =   131
+         TabIndex        =   128
          TabStop         =   0   'False
          Top             =   2880
          Width           =   1695
@@ -1391,7 +1377,7 @@ Begin VB.Form frmPF
          Caption         =   "Importar"
          Height          =   255
          Left            =   10080
-         TabIndex        =   130
+         TabIndex        =   127
          TabStop         =   0   'False
          Top             =   2040
          Width           =   975
@@ -1400,7 +1386,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   62
          Left            =   -66240
-         TabIndex        =   50
+         TabIndex        =   47
          Top             =   1980
          Width           =   375
       End
@@ -1408,7 +1394,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   61
          Left            =   -66660
-         TabIndex        =   49
+         TabIndex        =   46
          Top             =   1980
          Width           =   375
       End
@@ -1416,7 +1402,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   50
          Left            =   -65940
-         TabIndex        =   41
+         TabIndex        =   38
          Top             =   1860
          Width           =   375
       End
@@ -1424,7 +1410,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   49
          Left            =   -66360
-         TabIndex        =   40
+         TabIndex        =   37
          Top             =   1860
          Width           =   375
       End
@@ -1432,7 +1418,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   48
          Left            =   -66000
-         TabIndex        =   32
+         TabIndex        =   29
          Top             =   1860
          Width           =   375
       End
@@ -1440,7 +1426,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   47
          Left            =   -66420
-         TabIndex        =   31
+         TabIndex        =   28
          Top             =   1860
          Width           =   375
       End
@@ -1448,7 +1434,7 @@ Begin VB.Form frmPF
          Caption         =   "Motivos"
          Height          =   375
          Left            =   -67320
-         TabIndex        =   122
+         TabIndex        =   119
          TabStop         =   0   'False
          Top             =   1680
          Width           =   1335
@@ -1457,7 +1443,7 @@ Begin VB.Form frmPF
          Caption         =   "Novo"
          Height          =   255
          Left            =   10080
-         TabIndex        =   120
+         TabIndex        =   117
          TabStop         =   0   'False
          Top             =   600
          Width           =   975
@@ -1466,7 +1452,7 @@ Begin VB.Form frmPF
          Caption         =   "Excluir"
          Height          =   255
          Left            =   10080
-         TabIndex        =   119
+         TabIndex        =   116
          TabStop         =   0   'False
          Top             =   1320
          Width           =   975
@@ -1475,7 +1461,7 @@ Begin VB.Form frmPF
          Caption         =   "Editar"
          Height          =   255
          Left            =   10080
-         TabIndex        =   118
+         TabIndex        =   115
          TabStop         =   0   'False
          Top             =   1680
          Width           =   975
@@ -1484,7 +1470,7 @@ Begin VB.Form frmPF
          Caption         =   "Reordenar"
          Height          =   255
          Left            =   10080
-         TabIndex        =   117
+         TabIndex        =   114
          TabStop         =   0   'False
          Top             =   960
          Width           =   975
@@ -1493,7 +1479,7 @@ Begin VB.Form frmPF
          Caption         =   "Nova Revisão"
          Height          =   375
          Left            =   -71160
-         TabIndex        =   116
+         TabIndex        =   113
          TabStop         =   0   'False
          Top             =   1320
          Width           =   1215
@@ -1505,7 +1491,7 @@ Begin VB.Form frmPF
          Index           =   30
          Left            =   -73740
          Locked          =   -1  'True
-         TabIndex        =   112
+         TabIndex        =   109
          TabStop         =   0   'False
          Top             =   540
          Width           =   1095
@@ -1515,7 +1501,7 @@ Begin VB.Form frmPF
          Left            =   -72600
          Picture         =   "frmPF.frx":5964
          Style           =   1  'Graphical
-         TabIndex        =   111
+         TabIndex        =   108
          TabStop         =   0   'False
          Top             =   540
          Width           =   375
@@ -1527,7 +1513,7 @@ Begin VB.Form frmPF
          Index           =   31
          Left            =   -72120
          Locked          =   -1  'True
-         TabIndex        =   110
+         TabIndex        =   107
          TabStop         =   0   'False
          Top             =   540
          Width           =   4335
@@ -1539,7 +1525,7 @@ Begin VB.Form frmPF
          Index           =   8
          Left            =   -73800
          Locked          =   -1  'True
-         TabIndex        =   109
+         TabIndex        =   106
          TabStop         =   0   'False
          Top             =   1320
          Width           =   1095
@@ -1548,7 +1534,7 @@ Begin VB.Form frmPF
          Caption         =   "Bloqueado/Inativo"
          Height          =   375
          Left            =   -69000
-         TabIndex        =   52
+         TabIndex        =   49
          Top             =   840
          Width           =   1815
       End
@@ -1557,7 +1543,7 @@ Begin VB.Form frmPF
          Index           =   11
          Left            =   -67080
          MaxLength       =   50
-         TabIndex        =   53
+         TabIndex        =   50
          Top             =   960
          Width           =   2535
       End
@@ -1565,7 +1551,7 @@ Begin VB.Form frmPF
          Caption         =   "Importar/Mana5"
          Height          =   255
          Left            =   -66720
-         TabIndex        =   108
+         TabIndex        =   105
          TabStop         =   0   'False
          Top             =   2400
          Width           =   1695
@@ -1583,7 +1569,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   19
          Left            =   -68880
-         TabIndex        =   29
+         TabIndex        =   26
          Top             =   1860
          Width           =   1095
       End
@@ -1594,7 +1580,7 @@ Begin VB.Form frmPF
          MaxLength       =   130
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   51
+         TabIndex        =   48
          Top             =   2580
          Width           =   6465
       End
@@ -1602,7 +1588,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   45
          Left            =   -67800
-         TabIndex        =   48
+         TabIndex        =   45
          Top             =   1980
          Width           =   1065
       End
@@ -1619,7 +1605,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   44
          Left            =   -69000
-         TabIndex        =   47
+         TabIndex        =   44
          Top             =   1980
          Width           =   1065
       End
@@ -1627,7 +1613,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   43
          Left            =   -70200
-         TabIndex        =   46
+         TabIndex        =   43
          Top             =   1980
          Width           =   1065
       End
@@ -1635,7 +1621,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   42
          Left            =   -71400
-         TabIndex        =   45
+         TabIndex        =   42
          Top             =   1980
          Width           =   1065
       End
@@ -1646,7 +1632,7 @@ Begin VB.Form frmPF
          MaxLength       =   130
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   42
+         TabIndex        =   39
          Top             =   2460
          Width           =   6465
       End
@@ -1654,7 +1640,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   40
          Left            =   -67560
-         TabIndex        =   39
+         TabIndex        =   36
          Top             =   1860
          Width           =   1065
       End
@@ -1671,7 +1657,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   39
          Left            =   -68760
-         TabIndex        =   38
+         TabIndex        =   35
          Top             =   1860
          Width           =   1065
       End
@@ -1679,7 +1665,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   38
          Left            =   -70080
-         TabIndex        =   37
+         TabIndex        =   34
          Top             =   1860
          Width           =   1065
       End
@@ -1687,7 +1673,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   37
          Left            =   -71400
-         TabIndex        =   36
+         TabIndex        =   33
          Top             =   1860
          Width           =   1065
       End
@@ -1698,7 +1684,7 @@ Begin VB.Form frmPF
          MaxLength       =   130
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   33
+         TabIndex        =   30
          Top             =   2460
          Width           =   6465
       End
@@ -1706,7 +1692,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   35
          Left            =   -67680
-         TabIndex        =   30
+         TabIndex        =   27
          Top             =   1860
          Width           =   1065
       End
@@ -1714,7 +1700,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   27
          Left            =   -70200
-         TabIndex        =   28
+         TabIndex        =   25
          Top             =   1860
          Width           =   1065
       End
@@ -1722,7 +1708,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   23
          Left            =   -71520
-         TabIndex        =   27
+         TabIndex        =   24
          Top             =   1860
          Width           =   1065
       End
@@ -1730,7 +1716,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   20
          Left            =   -71520
-         TabIndex        =   25
+         TabIndex        =   22
          Top             =   900
          Width           =   2500
       End
@@ -1738,7 +1724,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   21
          Left            =   -71400
-         TabIndex        =   34
+         TabIndex        =   31
          Top             =   900
          Width           =   2500
       End
@@ -1746,7 +1732,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   22
          Left            =   -71400
-         TabIndex        =   43
+         TabIndex        =   40
          Top             =   1020
          Width           =   2500
       End
@@ -1756,7 +1742,7 @@ Begin VB.Form frmPF
          Left            =   -68880
          Picture         =   "frmPF.frx":5EEE
          Style           =   1  'Graphical
-         TabIndex        =   89
+         TabIndex        =   86
          TabStop         =   0   'False
          Top             =   840
          Width           =   375
@@ -1767,7 +1753,7 @@ Begin VB.Form frmPF
          Left            =   -68760
          Picture         =   "frmPF.frx":6478
          Style           =   1  'Graphical
-         TabIndex        =   88
+         TabIndex        =   85
          TabStop         =   0   'False
          Top             =   840
          Width           =   375
@@ -1778,7 +1764,7 @@ Begin VB.Form frmPF
          Left            =   -68760
          Picture         =   "frmPF.frx":6A02
          Style           =   1  'Graphical
-         TabIndex        =   87
+         TabIndex        =   84
          TabStop         =   0   'False
          Top             =   960
          Width           =   375
@@ -1787,7 +1773,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   24
          Left            =   -71520
-         TabIndex        =   26
+         TabIndex        =   23
          Top             =   1260
          Width           =   5175
       End
@@ -1795,7 +1781,7 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   25
          Left            =   -71400
-         TabIndex        =   35
+         TabIndex        =   32
          Top             =   1260
          Width           =   5175
       End
@@ -1803,14 +1789,14 @@ Begin VB.Form frmPF
          Height          =   285
          Index           =   26
          Left            =   -71400
-         TabIndex        =   44
+         TabIndex        =   41
          Top             =   1380
          Width           =   5175
       End
       Begin MSFlexGridLib.MSFlexGrid GRIDCOM 
          Height          =   3615
          Left            =   -74880
-         TabIndex        =   107
+         TabIndex        =   104
          TabStop         =   0   'False
          Top             =   480
          Width           =   8055
@@ -1821,7 +1807,7 @@ Begin VB.Form frmPF
       Begin MSFlexGridLib.MSFlexGrid GridSeq 
          Height          =   3615
          Left            =   120
-         TabIndex        =   121
+         TabIndex        =   118
          TabStop         =   0   'False
          Top             =   360
          Width           =   9795
@@ -1832,7 +1818,7 @@ Begin VB.Form frmPF
       Begin MSFlexGridLib.MSFlexGrid gridrev 
          Height          =   1095
          Left            =   -74880
-         TabIndex        =   123
+         TabIndex        =   120
          TabStop         =   0   'False
          Top             =   1680
          Width           =   7455
@@ -1843,7 +1829,7 @@ Begin VB.Form frmPF
       Begin MSFlexGridLib.MSFlexGrid gridrevi 
          Height          =   1335
          Left            =   -74880
-         TabIndex        =   124
+         TabIndex        =   121
          TabStop         =   0   'False
          Top             =   2880
          Width           =   7455
@@ -1855,7 +1841,7 @@ Begin VB.Form frmPF
          Height          =   375
          Index           =   2
          Left            =   -66000
-         TabIndex        =   206
+         TabIndex        =   203
          Top             =   840
          Width           =   1095
          _ExtentX        =   1931
@@ -1876,7 +1862,7 @@ Begin VB.Form frmPF
          Height          =   495
          Index           =   3
          Left            =   -65880
-         TabIndex        =   207
+         TabIndex        =   204
          Top             =   600
          Width           =   1095
          _ExtentX        =   1931
@@ -1897,7 +1883,7 @@ Begin VB.Form frmPF
          Height          =   495
          Index           =   4
          Left            =   -65640
-         TabIndex        =   208
+         TabIndex        =   205
          Top             =   840
          Width           =   1095
          _ExtentX        =   1931
@@ -1918,7 +1904,7 @@ Begin VB.Form frmPF
          Height          =   495
          Index           =   5
          Left            =   -66720
-         TabIndex        =   209
+         TabIndex        =   206
          TabStop         =   0   'False
          Top             =   3360
          Width           =   1095
@@ -1940,7 +1926,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   0
          Left            =   -72960
-         TabIndex        =   210
+         TabIndex        =   207
          Top             =   3120
          Width           =   1515
          _ExtentX        =   2672
@@ -1961,7 +1947,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   1
          Left            =   -71640
-         TabIndex        =   211
+         TabIndex        =   208
          Top             =   3120
          Width           =   1515
          _ExtentX        =   2672
@@ -1982,7 +1968,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   2
          Left            =   -73080
-         TabIndex        =   212
+         TabIndex        =   209
          Top             =   3720
          Width           =   1515
          _ExtentX        =   2672
@@ -2003,7 +1989,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   0
          Left            =   -71280
-         TabIndex        =   213
+         TabIndex        =   210
          Top             =   3120
          Width           =   2415
          _ExtentX        =   4260
@@ -2024,7 +2010,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   1
          Left            =   -70080
-         TabIndex        =   214
+         TabIndex        =   211
          Top             =   3120
          Width           =   2415
          _ExtentX        =   4260
@@ -2045,7 +2031,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   2
          Left            =   -71400
-         TabIndex        =   215
+         TabIndex        =   212
          Top             =   3240
          Width           =   2415
          _ExtentX        =   4260
@@ -2065,7 +2051,7 @@ Begin VB.Form frmPF
       Begin XPControls.XPButton Command6 
          Height          =   435
          Left            =   -66600
-         TabIndex        =   216
+         TabIndex        =   213
          TabStop         =   0   'False
          Top             =   600
          Width           =   1575
@@ -2086,7 +2072,7 @@ Begin VB.Form frmPF
       Begin XPControls.XPButton Command4 
          Height          =   435
          Left            =   -66600
-         TabIndex        =   217
+         TabIndex        =   214
          TabStop         =   0   'False
          Top             =   1080
          Width           =   1575
@@ -2107,7 +2093,7 @@ Begin VB.Form frmPF
       Begin XPControls.XPButton Command5 
          Height          =   435
          Left            =   -66600
-         TabIndex        =   218
+         TabIndex        =   215
          TabStop         =   0   'False
          Top             =   1680
          Width           =   1575
@@ -2128,7 +2114,7 @@ Begin VB.Form frmPF
       Begin XPControls.XPButton ComMotInc 
          Height          =   435
          Left            =   -67320
-         TabIndex        =   219
+         TabIndex        =   216
          TabStop         =   0   'False
          Top             =   2880
          Width           =   1575
@@ -2149,7 +2135,7 @@ Begin VB.Form frmPF
       Begin XPControls.XPButton ComMotAlt 
          Height          =   435
          Left            =   -67320
-         TabIndex        =   220
+         TabIndex        =   217
          TabStop         =   0   'False
          Top             =   3360
          Width           =   1575
@@ -2170,7 +2156,7 @@ Begin VB.Form frmPF
       Begin XPControls.XPButton ComMotExc 
          Height          =   435
          Left            =   -67320
-         TabIndex        =   221
+         TabIndex        =   218
          TabStop         =   0   'False
          Top             =   3840
          Width           =   1575
@@ -2192,7 +2178,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   1
          Left            =   -74760
-         TabIndex        =   222
+         TabIndex        =   219
          TabStop         =   0   'False
          Top             =   3120
          Width           =   1575
@@ -2214,7 +2200,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   0
          Left            =   -74760
-         TabIndex        =   223
+         TabIndex        =   220
          TabStop         =   0   'False
          Top             =   3120
          Width           =   1575
@@ -2236,7 +2222,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   2
          Left            =   -74760
-         TabIndex        =   224
+         TabIndex        =   221
          TabStop         =   0   'False
          Top             =   3240
          Width           =   1575
@@ -2258,7 +2244,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   1
          Left            =   -74760
-         TabIndex        =   226
+         TabIndex        =   223
          TabStop         =   0   'False
          Top             =   3600
          Width           =   1575
@@ -2280,7 +2266,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   0
          Left            =   -74760
-         TabIndex        =   227
+         TabIndex        =   224
          TabStop         =   0   'False
          Top             =   3600
          Width           =   1575
@@ -2302,7 +2288,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   2
          Left            =   -74760
-         TabIndex        =   228
+         TabIndex        =   225
          TabStop         =   0   'False
          Top             =   3720
          Width           =   1575
@@ -2324,7 +2310,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   1
          Left            =   -72960
-         TabIndex        =   229
+         TabIndex        =   226
          TabStop         =   0   'False
          Top             =   3600
          Width           =   1575
@@ -2346,7 +2332,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   0
          Left            =   -72960
-         TabIndex        =   230
+         TabIndex        =   227
          TabStop         =   0   'False
          Top             =   3600
          Width           =   1575
@@ -2368,7 +2354,7 @@ Begin VB.Form frmPF
          Height          =   435
          Index           =   2
          Left            =   -73080
-         TabIndex        =   231
+         TabIndex        =   228
          TabStop         =   0   'False
          Top             =   3240
          Width           =   1575
@@ -2390,7 +2376,7 @@ Begin VB.Form frmPF
          Height          =   495
          Index           =   1
          Left            =   -71280
-         TabIndex        =   232
+         TabIndex        =   229
          TabStop         =   0   'False
          Top             =   3600
          Width           =   2295
@@ -2412,7 +2398,7 @@ Begin VB.Form frmPF
          Height          =   375
          Index           =   0
          Left            =   -71280
-         TabIndex        =   233
+         TabIndex        =   230
          TabStop         =   0   'False
          Top             =   3600
          Width           =   2415
@@ -2434,7 +2420,7 @@ Begin VB.Form frmPF
          Height          =   495
          Index           =   2
          Left            =   -71400
-         TabIndex        =   225
+         TabIndex        =   222
          TabStop         =   0   'False
          Top             =   3720
          Width           =   2295
@@ -2456,7 +2442,7 @@ Begin VB.Form frmPF
          Caption         =   "SEQ=999 para operacao de controles"
          Height          =   255
          Left            =   240
-         TabIndex        =   192
+         TabIndex        =   189
          Top             =   3960
          Width           =   2895
       End
@@ -2465,7 +2451,7 @@ Begin VB.Form frmPF
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -72600
-         TabIndex        =   188
+         TabIndex        =   185
          Top             =   960
          Width           =   855
       End
@@ -2474,7 +2460,7 @@ Begin VB.Form frmPF
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -74880
-         TabIndex        =   187
+         TabIndex        =   184
          Top             =   960
          Width           =   855
       End
@@ -2484,7 +2470,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   38
          Left            =   -66660
-         TabIndex        =   129
+         TabIndex        =   126
          Top             =   1740
          Width           =   915
       End
@@ -2494,7 +2480,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   37
          Left            =   -66420
-         TabIndex        =   128
+         TabIndex        =   125
          Top             =   1560
          Width           =   915
       End
@@ -2504,7 +2490,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   21
          Left            =   -66480
-         TabIndex        =   127
+         TabIndex        =   124
          Top             =   1620
          Width           =   915
       End
@@ -2513,7 +2499,7 @@ Begin VB.Form frmPF
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -74880
-         TabIndex        =   115
+         TabIndex        =   112
          Top             =   540
          Width           =   855
       End
@@ -2522,7 +2508,7 @@ Begin VB.Form frmPF
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -67560
-         TabIndex        =   114
+         TabIndex        =   111
          Top             =   540
          Width           =   375
       End
@@ -2531,7 +2517,7 @@ Begin VB.Form frmPF
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -74880
-         TabIndex        =   113
+         TabIndex        =   110
          Top             =   1320
          Width           =   1095
       End
@@ -2540,7 +2526,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   36
          Left            =   -71400
-         TabIndex        =   104
+         TabIndex        =   101
          Top             =   2280
          Width           =   975
       End
@@ -2550,7 +2536,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   35
          Left            =   -67680
-         TabIndex        =   103
+         TabIndex        =   100
          Top             =   1740
          Width           =   735
       End
@@ -2560,7 +2546,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   34
          Left            =   -69000
-         TabIndex        =   102
+         TabIndex        =   99
          Top             =   1740
          Width           =   975
       End
@@ -2570,7 +2556,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   33
          Left            =   -70080
-         TabIndex        =   101
+         TabIndex        =   98
          Top             =   1740
          Width           =   735
       End
@@ -2580,7 +2566,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   32
          Left            =   -71400
-         TabIndex        =   100
+         TabIndex        =   97
          Top             =   1740
          Width           =   735
       End
@@ -2590,7 +2576,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   31
          Left            =   -71400
-         TabIndex        =   99
+         TabIndex        =   96
          Top             =   2160
          Width           =   975
       End
@@ -2600,7 +2586,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   30
          Left            =   -67320
-         TabIndex        =   98
+         TabIndex        =   95
          Top             =   1620
          Width           =   735
       End
@@ -2610,7 +2596,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   29
          Left            =   -68760
-         TabIndex        =   97
+         TabIndex        =   94
          Top             =   1620
          Width           =   975
       End
@@ -2620,7 +2606,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   28
          Left            =   -69960
-         TabIndex        =   96
+         TabIndex        =   93
          Top             =   1620
          Width           =   735
       End
@@ -2630,7 +2616,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   27
          Left            =   -71400
-         TabIndex        =   95
+         TabIndex        =   92
          Top             =   1620
          Width           =   735
       End
@@ -2640,7 +2626,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   26
          Left            =   -71520
-         TabIndex        =   94
+         TabIndex        =   91
          Top             =   2220
          Width           =   975
       End
@@ -2650,7 +2636,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   25
          Left            =   -67440
-         TabIndex        =   93
+         TabIndex        =   90
          Top             =   1620
          Width           =   735
       End
@@ -2660,7 +2646,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   24
          Left            =   -68880
-         TabIndex        =   92
+         TabIndex        =   89
          Top             =   1620
          Width           =   975
       End
@@ -2670,7 +2656,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   23
          Left            =   -70080
-         TabIndex        =   91
+         TabIndex        =   88
          Top             =   1620
          Width           =   735
       End
@@ -2680,43 +2666,15 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   22
          Left            =   -71520
-         TabIndex        =   90
+         TabIndex        =   87
          Top             =   1620
          Width           =   735
       End
    End
-   Begin MSComCtl2.DTPicker DTPicker2 
-      Height          =   375
-      Left            =   3960
-      TabIndex        =   15
-      Top             =   2400
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   183435265
-      CurrentDate     =   36399
-   End
-   Begin MSComCtl2.DTPicker DTPicker3 
-      Height          =   375
-      Left            =   3960
-      TabIndex        =   19
-      Top             =   3120
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   183435265
-      CurrentDate     =   36399
-   End
    Begin XPControls.XPButton Encerrar 
       Height          =   435
       Left            =   9960
-      TabIndex        =   202
+      TabIndex        =   199
       TabStop         =   0   'False
       Top             =   720
       Width           =   1575
@@ -2737,7 +2695,7 @@ Begin VB.Form frmPF
    Begin XPControls.XPButton cmdClose 
       Height          =   435
       Left            =   9960
-      TabIndex        =   203
+      TabIndex        =   200
       TabStop         =   0   'False
       Top             =   120
       Width           =   1515
@@ -2758,7 +2716,7 @@ Begin VB.Form frmPF
    Begin XPControls.XPButton CmdConfImp 
       Height          =   435
       Left            =   9960
-      TabIndex        =   144
+      TabIndex        =   141
       TabStop         =   0   'False
       Top             =   2160
       Width           =   1575
@@ -2780,7 +2738,7 @@ Begin VB.Form frmPF
       Height          =   375
       Index           =   0
       Left            =   2640
-      TabIndex        =   204
+      TabIndex        =   201
       TabStop         =   0   'False
       Top             =   840
       Width           =   1095
@@ -2802,9 +2760,9 @@ Begin VB.Form frmPF
       Height          =   375
       Index           =   1
       Left            =   10320
-      TabIndex        =   205
+      TabIndex        =   202
       TabStop         =   0   'False
-      Top             =   2760
+      Top             =   2640
       Width           =   1095
       _ExtentX        =   1931
       _ExtentY        =   661
@@ -2820,13 +2778,49 @@ Begin VB.Form frmPF
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR17.DTPicker DTPicker1 
+      Height          =   375
+      Left            =   4920
+      TabIndex        =   231
+      Top             =   1800
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
+   Begin VBCCR17.DTPicker DTPicker2 
+      Height          =   375
+      Left            =   3960
+      TabIndex        =   232
+      Top             =   2400
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
+   Begin VBCCR17.DTPicker DTPicker3 
+      Height          =   375
+      Left            =   3960
+      TabIndex        =   233
+      Top             =   3120
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
    Begin VB.Label lblLabels 
       Caption         =   "No.Versao"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   41
       Left            =   3960
-      TabIndex        =   200
+      TabIndex        =   197
       Top             =   1560
       Width           =   855
    End
@@ -2836,7 +2830,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   40
       Left            =   7560
-      TabIndex        =   145
+      TabIndex        =   142
       Top             =   840
       Width           =   1095
    End
@@ -2846,7 +2840,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   39
       Left            =   9240
-      TabIndex        =   142
+      TabIndex        =   139
       Top             =   240
       Width           =   615
    End
@@ -2856,7 +2850,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   20
       Left            =   7440
-      TabIndex        =   126
+      TabIndex        =   123
       Top             =   240
       Width           =   1095
    End
@@ -2865,7 +2859,7 @@ Begin VB.Form frmPF
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   8640
-      TabIndex        =   125
+      TabIndex        =   122
       Top             =   240
       Width           =   615
    End
@@ -2875,7 +2869,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   19
       Left            =   8040
-      TabIndex        =   106
+      TabIndex        =   103
       Top             =   2880
       Width           =   975
    End
@@ -2885,7 +2879,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   0
       Left            =   6600
-      TabIndex        =   86
+      TabIndex        =   83
       Top             =   1560
       Width           =   495
    End
@@ -2894,7 +2888,7 @@ Begin VB.Form frmPF
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   120
-      TabIndex        =   85
+      TabIndex        =   82
       Top             =   240
       Width           =   615
    End
@@ -2904,7 +2898,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   18
       Left            =   5640
-      TabIndex        =   82
+      TabIndex        =   79
       Top             =   2160
       Width           =   1395
    End
@@ -2914,7 +2908,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   17
       Left            =   10080
-      TabIndex        =   81
+      TabIndex        =   78
       Top             =   1560
       Width           =   915
    End
@@ -2924,7 +2918,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   16
       Left            =   6840
-      TabIndex        =   80
+      TabIndex        =   77
       Top             =   2880
       Width           =   1215
    End
@@ -2934,7 +2928,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   15
       Left            =   5640
-      TabIndex        =   79
+      TabIndex        =   76
       Top             =   2880
       Width           =   1095
    End
@@ -2944,7 +2938,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   14
       Left            =   3960
-      TabIndex        =   78
+      TabIndex        =   75
       Top             =   2880
       Width           =   1575
    End
@@ -2954,7 +2948,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   13
       Left            =   2760
-      TabIndex        =   77
+      TabIndex        =   74
       Top             =   2880
       Width           =   975
    End
@@ -2964,7 +2958,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   12
       Left            =   120
-      TabIndex        =   76
+      TabIndex        =   73
       Top             =   2880
       Width           =   1575
    End
@@ -2974,7 +2968,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   11
       Left            =   3960
-      TabIndex        =   75
+      TabIndex        =   72
       Top             =   2160
       Width           =   1575
    End
@@ -2984,7 +2978,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   10
       Left            =   2760
-      TabIndex        =   74
+      TabIndex        =   71
       Top             =   2160
       Width           =   1095
    End
@@ -2994,7 +2988,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   9
       Left            =   120
-      TabIndex        =   73
+      TabIndex        =   70
       Top             =   2160
       Width           =   1455
    End
@@ -3004,7 +2998,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   8
       Left            =   4920
-      TabIndex        =   72
+      TabIndex        =   69
       Top             =   1560
       Width           =   1575
    End
@@ -3014,7 +3008,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   7
       Left            =   2760
-      TabIndex        =   71
+      TabIndex        =   68
       Top             =   1560
       Width           =   1215
    End
@@ -3024,7 +3018,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   6
       Left            =   120
-      TabIndex        =   70
+      TabIndex        =   67
       Top             =   1560
       Width           =   1455
    End
@@ -3034,7 +3028,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   5
       Left            =   5400
-      TabIndex        =   69
+      TabIndex        =   66
       Top             =   240
       Width           =   735
    End
@@ -3044,7 +3038,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   4
       Left            =   2040
-      TabIndex        =   68
+      TabIndex        =   65
       Top             =   240
       Width           =   975
    End
@@ -3054,7 +3048,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   3
       Left            =   4320
-      TabIndex        =   67
+      TabIndex        =   64
       Top             =   840
       Width           =   1095
    End
@@ -3064,7 +3058,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   2
       Left            =   120
-      TabIndex        =   66
+      TabIndex        =   63
       Top             =   960
       Width           =   855
    End
@@ -3074,7 +3068,7 @@ Begin VB.Form frmPF
       Height          =   255
       Index           =   1
       Left            =   1200
-      TabIndex        =   65
+      TabIndex        =   62
       Top             =   240
       Width           =   375
    End
@@ -3101,48 +3095,48 @@ Dim lTROCOU As Variant
 Dim aCAMIMG As Variant
 
 Private Sub cad_cjt_lx_Click()
-    gravacaddes txtfields(12).Text, txtfields(13).Text, DTPicker3.Value
+    gravacaddes TXTFIELDS(12).tEXT, TXTFIELDS(13).tEXT, DTPicker3.Value
 End Sub
 
 Private Sub CmdApagar_Click(Index As Integer)
     Select Case Index
     Case 1
-        txtfields(20) = ""
-        txtfields(24) = ""
-        txtfields(23) = 0
-        txtfields(27) = 0
-        txtfields(19) = 0
-        txtfields(35) = 0
-        txtfields(47) = 0
-        txtfields(48) = ""
+        TXTFIELDS(20) = ""
+        TXTFIELDS(24) = ""
+        TXTFIELDS(23) = 0
+        TXTFIELDS(27) = 0
+        TXTFIELDS(19) = 0
+        TXTFIELDS(35) = 0
+        TXTFIELDS(47) = 0
+        TXTFIELDS(48) = ""
     Case 2
-        txtfields(21) = ""
-        txtfields(25) = ""
-        txtfields(37) = 0
-        txtfields(38) = 0
-        txtfields(39) = 0
-        txtfields(40) = 0
-        txtfields(49) = 0
-        txtfields(50) = 0
-        txtfields(41) = ""
+        TXTFIELDS(21) = ""
+        TXTFIELDS(25) = ""
+        TXTFIELDS(37) = 0
+        TXTFIELDS(38) = 0
+        TXTFIELDS(39) = 0
+        TXTFIELDS(40) = 0
+        TXTFIELDS(49) = 0
+        TXTFIELDS(50) = 0
+        TXTFIELDS(41) = ""
     Case 3
-        txtfields(22) = ""
-        txtfields(26) = ""
-        txtfields(42) = 0
-        txtfields(43) = 0
-        txtfields(44) = 0
-        txtfields(45) = 0
-        txtfields(61) = 0
-        txtfields(62) = 0
-        txtfields(46) = ""
+        TXTFIELDS(22) = ""
+        TXTFIELDS(26) = ""
+        TXTFIELDS(42) = 0
+        TXTFIELDS(43) = 0
+        TXTFIELDS(44) = 0
+        TXTFIELDS(45) = 0
+        TXTFIELDS(61) = 0
+        TXTFIELDS(62) = 0
+        TXTFIELDS(46) = ""
     End Select
 End Sub
 
 Private Sub cmdcaddes_Click()
-    If Len(txtfields(66).Text) > 0 Then
-        gravacaddes txtfields(6).Text, txtfields(66).Text, DTPicker1.Value
+    If Len(TXTFIELDS(66).tEXT) > 0 Then
+        gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(66).tEXT, DTPicker1.Value
     Else
-        gravacaddes txtfields(6).Text, txtfields(7).Text, DTPicker1.Value
+        gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(7).tEXT, DTPicker1.Value
     End If
 End Sub
 
@@ -3155,7 +3149,7 @@ Private Sub cmdClose_Click()
     Dim cSQLUP As String
     Dim cSQLIMG As String
 
-    If Check1 And Len(txtfields(11)) = 0 Then
+    If Check1 And Len(TXTFIELDS(11)) = 0 Then
         Alert ("Preencher Motivo do Bloqueio")
         Exit Sub
     End If
@@ -3187,7 +3181,7 @@ Private Sub cmdClose_Click()
     End If
     
     For iLOOP = 0 To nCAMPOS - 5
-        aVAL(iLOOP) = txtfields(iLOOP)
+        aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
        
@@ -3210,7 +3204,7 @@ Private Sub CmdcomIMp_Click()
     Dim PFMS03 As New ADODB.Recordset
     Dim cCODIGO, sqlMS03, sqlpfms03 As String
     Dim aCAMPOS As Variant
-    cCODIGO = frmPF.txtfields(14)
+    cCODIGO = frmPF.TXTFIELDS(14)
 
     If IsNull(cCODIGO) Then
 
@@ -3288,23 +3282,23 @@ End Sub
 Private Sub cmdFOTO_Click(Index As Integer)
     Select Case Index
     Case 0
-        zgrp = txtfields(2)
+        zgrp = TXTFIELDS(2)
         cARQRTF = PegPath("PATH", "IMGMS01")
         iImage = 2
     Case 1
-        zgrp = txtfields(14)
+        zgrp = TXTFIELDS(14)
         cARQRTF = PegPath("PATH", "IMGMS01")
         iImage = 2
     Case 2
-        zgrp = txtfields(20)
+        zgrp = TXTFIELDS(20)
         cARQRTF = PegPath("PATH", "IMGMU01")
         iImage = 7
     Case 3
-        zgrp = txtfields(21)
+        zgrp = TXTFIELDS(21)
         cARQRTF = PegPath("PATH", "IMGMU01")
         iImage = 7
     Case 4
-        zgrp = txtfields(22)
+        zgrp = TXTFIELDS(22)
         cARQRTF = PegPath("PATH", "IMGMU01")
         iImage = 7
     Case 5
@@ -3325,12 +3319,12 @@ Private Sub cmdFOTO_Click(Index As Integer)
         Exit Sub
     End If
     If Index = 0 Or Index = 1 Then
-        If Len(FixStr(txtfields(0))) > 0 Then
-            zgrp = zgrp & "|" & txtfields(0)
+        If Len(FixStr(TXTFIELDS(0))) > 0 Then
+            zgrp = zgrp & "|" & TXTFIELDS(0)
         End If
     End If
     Load frmIMAGENS
-    frmIMAGENS.txtfields(0).Enabled = False
+    frmIMAGENS.TXTFIELDS(0).Enabled = False
     frmIMAGENS.Escolher(0).Visible = False
     frmIMAGENS.Show vbModal, Me
 End Sub
@@ -3384,7 +3378,7 @@ Private Sub CMDSIG_Click(Index As Integer)
     ePASS02 = True
     frmCharacters.Show vbModal, Me
     If lRETU Then
-        txtfields(50 + Index) = eRETU01
+        TXTFIELDS(50 + Index) = eRETU01
     End If
 
 End Sub
@@ -3461,8 +3455,8 @@ Private Sub Command2_Click()
     End If
     FilRelat
     
-    eRETU02 = "PF:" & TXTPF.Text & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & txtfields(2) & Chr(13) & Chr(10)
+    eRETU02 = "PF:" & TXTPF.tEXT & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " SEQ=" & nSEQ & " SSQ=" & nSSQ
         
@@ -3550,11 +3544,11 @@ Private Sub Command7_Click(Index As Integer)
 
     
     If Index = 0 Or Index = 1 Then               '0 e 1 ma01 mana5
-        nNUMERO = FixInt(txtfields(4))
+        nNUMERO = FixInt(TXTFIELDS(4))
         cARQ = GeraConn(zMANA5EMP, "JETFOX")
         sSQL = "SELECT NOME,CODIGO FROM MA01 WHERE NUMERO=" & nNUMERO
     Else                                         '10 11  logix clientes/duns
-        nNUMERO = Trim(FixStr(txtfields(4)))
+        nNUMERO = Trim(FixStr(TXTFIELDS(4)))
         cARQ = PegPath("PATH", "LOGIXODBC")
         sSQL = " SELECT clientes.nom_cliente as nome,duns_itaesbra.num_duns as codigo  FROM clientes"
         sSQL = sSQL & " LEFT JOIN duns_itaesbra ON clientes.cod_cliente=duns_itaesbra.cod_cliente AND duns_itaesbra.cod_empresa='01'"
@@ -3563,10 +3557,10 @@ Private Sub Command7_Click(Index As Integer)
     aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGO"), Array("C", "C"), Array("", ""))
     If lRETU Then
         If Index = 0 Or Index = 10 Then          '0 10 nome e codigo cliente
-            txtfields(5) = aRETU(0)
-            txtfields(53) = aRETU(1)
+            TXTFIELDS(5) = aRETU(0)
+            TXTFIELDS(53) = aRETU(1)
         Else
-            txtfields(53) = aRETU(1)             '1,11 codigo cliente
+            TXTFIELDS(53) = aRETU(1)             '1,11 codigo cliente
         End If
     End If
     
@@ -3583,12 +3577,12 @@ Private Sub Command8_Click()
     Dim cCODIGO As String
     Dim aRETU As Variant
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    cCODIGO = FixStr(txtfields(2), "", "TRIM")
+    cCODIGO = FixStr(TXTFIELDS(2), "", "TRIM")
     sSQL = "SELECT NOME,CODIGOINT FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
     aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGOINT"), Array("C", "C"), Array("", ""))
     If lRETU Then
-        txtfields(3) = aRETU(0)
-        txtfields(0) = aRETU(1)
+        TXTFIELDS(3) = aRETU(0)
+        TXTFIELDS(0) = aRETU(1)
     End If
 End Sub
 
@@ -3602,13 +3596,13 @@ Private Sub Command9_Click(Index As Integer)
     Select Case Index
 
     Case 0
-        cCODIGO = FixStr(txtfields(20))
+        cCODIGO = FixStr(TXTFIELDS(20))
 
     Case 1
-        cCODIGO = FixStr(txtfields(21))
+        cCODIGO = FixStr(TXTFIELDS(21))
 
     Case 2
-        cCODIGO = FixStr(txtfields(22))
+        cCODIGO = FixStr(TXTFIELDS(22))
 
     End Select
 
@@ -3620,11 +3614,11 @@ Private Sub Command9_Click(Index As Integer)
     
         Select Case Index
         Case 0
-            txtfields(24) = cNOME
+            TXTFIELDS(24) = cNOME
         Case 1
-            txtfields(25) = cNOME
+            TXTFIELDS(25) = cNOME
         Case 2
-            txtfields(26) = cNOME
+            TXTFIELDS(26) = cNOME
         End Select
     End If
 End Sub
@@ -3684,15 +3678,15 @@ Private Sub DelImg_Click(Index As Integer)
 End Sub
 
 Private Sub DTPicker1_LostFocus()
-    If Len(txtfields(66).Text) > 0 Then
-        gravacaddes txtfields(6).Text, txtfields(66).Text, DTPicker1.Value
+    If Len(TXTFIELDS(66).tEXT) > 0 Then
+        gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(66).tEXT, DTPicker1.Value
     Else
-        gravacaddes txtfields(6).Text, txtfields(7).Text, DTPicker1.Value
+        gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(7).tEXT, DTPicker1.Value
     End If
 End Sub
 
 Private Sub DTPicker3_LostFocus()
-    gravacaddes txtfields(12).Text, txtfields(13).Text, DTPicker3.Value
+    gravacaddes TXTFIELDS(12).tEXT, TXTFIELDS(13).tEXT, DTPicker3.Value
 End Sub
 
 Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVal dDATACLI As Variant)
@@ -3713,12 +3707,12 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
         Exit Sub
     End If
      
-    If Len(txtfields(0)) = 0 Then
+    If Len(TXTFIELDS(0)) = 0 Then
         Alert "codigo interno logix nao preenchido"
         Exit Sub
     End If
      
-    If Len(txtfields(3)) = 0 Then
+    If Len(TXTFIELDS(3)) = 0 Then
         Alert "descricao do item nao preenchido"
         Exit Sub
     End If
@@ -3729,7 +3723,7 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
     End If
      
    
-    cCODLOGIX = Trim(txtfields(0))
+    cCODLOGIX = Trim(TXTFIELDS(0))
     If Len(cCODLOGIX) > 0 Then
         nPOS = InStr(cCODLOGIX, "/")
         If nPOS > 0 Then
@@ -3761,9 +3755,9 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
         End If
           
           
-        IncluiSQLAdo PegPath("PATH", "LOGIXODBC"), "select * from cad_des where cod_empresa='01' and cod_item='" & cCODLOGIX & "' and num_versao='" & txtfields(7) & "'", 8, _
+        IncluiSQLAdo PegPath("PATH", "LOGIXODBC"), "select * from cad_des where cod_empresa='01' and cod_item='" & cCODLOGIX & "' and num_versao='" & TXTFIELDS(7) & "'", 8, _
                                                                                                                                                                    Array("cod_empresa", "cod_item", "num_versao", "seq_versao", "cod_desen", "dat_desen", "den_desen", "cod_form_folha"), _
-                                                                                                                                                                   Array("01", cCODLOGIX, cREVCLI, 1, cDESCLI, dDATACLI, txtfields(3).Text, "''"), _
+                                                                                                                                                                   Array("01", cCODLOGIX, cREVCLI, 1, cDESCLI, dDATACLI, TXTFIELDS(3).tEXT, "''"), _
                                                                                                                                                                    True, False
 
           
@@ -3808,8 +3802,8 @@ Private Sub ESCCLI_Click(Index As Integer)
     End Select
     escNUMNOM.Show vbModal, Me
     If lRETU Then
-        frmPF.txtfields(4) = eRETU01
-        frmPF.txtfields(5) = eRETU02
+        frmPF.TXTFIELDS(4) = eRETU01
+        frmPF.TXTFIELDS(5) = eRETU02
         If Index = 0 Then
             Command7_Click (1)
         End If
@@ -3825,7 +3819,7 @@ Private Sub EscCodFlu_Click(Index As Integer)
     eRETU02 = ""
     escFLX.Show vbModal, Me
     If lRETU Then
-        txtfields(50 + Index) = eRETU01
+        TXTFIELDS(50 + Index) = eRETU01
     End If
 End Sub
 
@@ -3833,15 +3827,15 @@ Private Sub esciedx_Click()
     iMU01 = 201
     escIED.Show vbModal, Me
     If lRETU Then
-        txtfields(1) = eRETU02
+        TXTFIELDS(1) = eRETU02
     End If
 End Sub
 
 Private Sub escmp04a_Click()
     If MDG("Gravar Elaborador", "Confirme Gravação") Then
-        frmPF.txtfields(30) = zIDFOLHA
-        frmPF.txtfields(31) = zNOMEFOLHA
-        frmPF.txtfields(63) = Date
+        frmPF.TXTFIELDS(30) = zIDFOLHA
+        frmPF.TXTFIELDS(31) = zNOMEFOLHA
+        frmPF.TXTFIELDS(63) = Date
     End If
 End Sub
 
@@ -3852,14 +3846,14 @@ Private Sub escmu_Click(Index As Integer)
     If Not lRETU Then Exit Sub
     Select Case Index
     Case 1
-        frmPF.txtfields(20) = eRETU01
-        frmPF.txtfields(24) = eRETU02
+        frmPF.TXTFIELDS(20) = eRETU01
+        frmPF.TXTFIELDS(24) = eRETU02
     Case 2
-        frmPF.txtfields(21) = eRETU01
-        frmPF.txtfields(25) = eRETU02
+        frmPF.TXTFIELDS(21) = eRETU01
+        frmPF.TXTFIELDS(25) = eRETU02
     Case 3
-        frmPF.txtfields(22) = eRETU01
-        frmPF.txtfields(26) = eRETU02
+        frmPF.TXTFIELDS(22) = eRETU01
+        frmPF.TXTFIELDS(26) = eRETU02
     End Select
 End Sub
 
@@ -3885,33 +3879,33 @@ Private Sub ESCpro_Click(Index As Integer)
             escms01.Show vbModal, Me
             If lRETU Then
                 If Index = 2 Or Index = 0 Or Index = 6 Then
-                    frmPF.txtfields(2) = eRETU01
-                    frmPF.txtfields(3) = eRETU02
-                    frmPF.txtfields(0) = eRETU03
+                    frmPF.TXTFIELDS(2) = eRETU01
+                    frmPF.TXTFIELDS(3) = eRETU02
+                    frmPF.TXTFIELDS(0) = eRETU03
                 End If
                 If Index = 3 Or Index = 4 Or Index = 7 Then
-                    frmPF.txtfields(0) = eRETU03
+                    frmPF.TXTFIELDS(0) = eRETU03
                 End If
                 If Index = 9 Then
-                    frmPF.txtfields(20) = eRETU01
-                    frmPF.txtfields(24) = eRETU02
+                    frmPF.TXTFIELDS(20) = eRETU01
+                    frmPF.TXTFIELDS(24) = eRETU02
                 End If
                 If Index = 10 Then
-                    frmPF.txtfields(21) = eRETU01
-                    frmPF.txtfields(25) = eRETU02
+                    frmPF.TXTFIELDS(21) = eRETU01
+                    frmPF.TXTFIELDS(25) = eRETU02
                 End If
                 If Index = 11 Then
-                    frmPF.txtfields(22) = eRETU01
-                    frmPF.txtfields(26) = eRETU02
+                    frmPF.TXTFIELDS(22) = eRETU01
+                    frmPF.TXTFIELDS(26) = eRETU02
                 End If
                
                
             End If
         Else                                     ''1-5-8
-            cCHAVEBUS = txtfields(2)
+            cCHAVEBUS = TXTFIELDS(2)
             escms01.Show vbModal, Me
             If lRETU Then
-                frmPF.txtfields(14) = eRETU01
+                frmPF.TXTFIELDS(14) = eRETU01
             End If
         End If
     End If
@@ -3965,7 +3959,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Esctipo_Click()
-    If txtfields(28) = "P" Then
+    If TXTFIELDS(28) = "P" Then
         Alert ("Ja e producao")
         Exit Sub
     End If
@@ -3997,15 +3991,15 @@ Private Sub Esctipo_Click()
     End Select
     
     If cTIPO = "P" Then
-        If txtfields(28) = "R" Or txtfields(28) = "I" Or txtfields(28) = "L" Or txtfields(28) = "P" _
-                                                                                                Or txtfields(28) = "A" Or Len(txtfields(28)) = 0 Then
+        If TXTFIELDS(28) = "R" Or TXTFIELDS(28) = "I" Or TXTFIELDS(28) = "L" Or TXTFIELDS(28) = "P" _
+                                                                                                Or TXTFIELDS(28) = "A" Or Len(TXTFIELDS(28)) = 0 Then
             If MDG("Mudar para Producao e gerar nova revisao") Then
                 NovaRev_Click
             End If
         End If
     End If
 
-    txtfields(28) = cTIPO
+    TXTFIELDS(28) = cTIPO
     TIPOSAY
 
 End Sub
@@ -4030,7 +4024,7 @@ Private Sub Form_Load()
     cARQFEMEA = PegPath("PATH", "FEMEA")
     
     For X = 51 To 60
-        txtfields(X).Font = "isoqsymbol"
+        TXTFIELDS(X).Font = "isoqsymbol"
     Next
     
     TXTPF = nPF
@@ -4071,7 +4065,7 @@ Private Sub Form_Load()
     
     aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 6                 '
-        txtfields(iLOOP) = aVAL(iLOOP)           '
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)           '
     Next iLOOP
     
     
@@ -4117,17 +4111,17 @@ Private Sub Form_Load()
     Filgridrev
     
     If zUSER = "ADMIN" Then
-        txtfields(8).Enabled = True
-        txtfields(8).Locked = False
-        txtfields(8).Visible = True
-        txtfields(29).Enabled = True
-        txtfields(29).Locked = False
-        txtfields(29).Visible = True
+        TXTFIELDS(8).Enabled = True
+        TXTFIELDS(8).Locked = False
+        TXTFIELDS(8).Visible = True
+        TXTFIELDS(29).Enabled = True
+        TXTFIELDS(29).Locked = False
+        TXTFIELDS(29).Visible = True
     End If
     
     DizerBarra ""
     
-    If Check1 And Len(txtfields(11)) = 0 Then
+    If Check1 And Len(TXTFIELDS(11)) = 0 Then
         Alert ("Preencher Motivo do Bloqueio")
     End If
     
@@ -4179,8 +4173,8 @@ Private Sub NovaRev_Click()
 
     On Error Resume Next
     
-    If Len(txtfields(29).Text) > 0 Then          ''corrige data protheus em branco
-        If txtfields(29) > Today() Then
+    If Len(TXTFIELDS(29).tEXT) > 0 Then          ''corrige data protheus em branco
+        If TXTFIELDS(29) > Today() Then
             Alert ("Data Revisao Anterior Maior que Data do Sistema")
             Exit Sub
         End If
@@ -4188,9 +4182,9 @@ Private Sub NovaRev_Click()
 
     If MDG("Fazer Nova Revisao", "Confirme Gravação") Then
         Encerrar.Visible = False
-        nrevisao = FixInt(txtfields(8)) + 1
-        txtfields(8) = nrevisao
-        txtfields(29) = Fdata(Date)
+        nrevisao = FixInt(TXTFIELDS(8)) + 1
+        TXTFIELDS(8) = nrevisao
+        TXTFIELDS(29) = Fdata(Date)
         
         
         cSQLTMP = "select * from PF WHERE PF=" & nPF
@@ -4219,8 +4213,8 @@ Private Sub NovaRev_Click()
         Filgridrev
         
 
-        eRETU02 = "PF:" & TXTPF.Text & Chr(13) & Chr(10)
-        eRETU02 = eRETU02 & " Desenho:" & txtfields(2) & Chr(13) & Chr(10)
+        eRETU02 = "PF:" & TXTPF.tEXT & Chr(13) & Chr(10)
+        eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
         eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
         
         MAILENV "PF000001", eRETU02
@@ -4259,7 +4253,7 @@ Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Function valornum(Index As Integer)
-    valornum = Val(Replace(txtfields(Index), ",", "."))
+    valornum = Val(Replace(TXTFIELDS(Index), ",", "."))
 End Function
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -4271,7 +4265,7 @@ Private Sub TXTFIELDS_LostFocus(Index As Integer)
     Dim cCODLOGIX
     Dim nPOS
     If Index = 0 Then
-        cCODLOGIX = Trim(txtfields(0))
+        cCODLOGIX = Trim(TXTFIELDS(0))
         If Len(cCODLOGIX) > 0 Then
             nPOS = InStr(cCODLOGIX, "/")
             If nPOS > 0 Then
@@ -4294,21 +4288,21 @@ Private Sub TXTFIELDS_LostFocus(Index As Integer)
 End Sub
 
 Private Sub TIPOSAY()
-    Select Case txtfields(28)
+    Select Case TXTFIELDS(28)
     Case "P"
-        TipoDescritivo.Text = "(P)roducao"
+        TipoDescritivo.tEXT = "(P)roducao"
     Case "R"
-        TipoDescritivo.Text = "p(R)ototipo"
+        TipoDescritivo.tEXT = "p(R)ototipo"
     Case "I"
-        TipoDescritivo.Text = "p(I)loto"
+        TipoDescritivo.tEXT = "p(I)loto"
     Case "A"
-        TipoDescritivo.Text = "pre l(A)ncamento"
+        TipoDescritivo.tEXT = "pre l(A)ncamento"
     Case "L"
-        TipoDescritivo.Text = "pre (L)iminar"
+        TipoDescritivo.tEXT = "pre (L)iminar"
     Case "G"
-        TipoDescritivo.Text = "GP12 a(G)ressivo"
+        TipoDescritivo.tEXT = "GP12 a(G)ressivo"
     Case "N"
-        TipoDescritivo.Text = "GP12 pla(N)"
+        TipoDescritivo.tEXT = "GP12 pla(N)"
     End Select
 End Sub
 Private Sub VerImg_Click(Index As Integer)

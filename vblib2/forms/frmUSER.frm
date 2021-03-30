@@ -1,7 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmUSER 
    Caption         =   "Cadastro de Usuário"
    ClientHeight    =   5535
@@ -19,7 +18,7 @@ Begin VB.Form frmUSER
       Height          =   375
       Index           =   11
       Left            =   7800
-      TabIndex        =   51
+      TabIndex        =   46
       Top             =   3600
       Width           =   1155
    End
@@ -28,7 +27,7 @@ Begin VB.Form frmUSER
       Height          =   375
       Index           =   10
       Left            =   7800
-      TabIndex        =   50
+      TabIndex        =   45
       Top             =   3240
       Width           =   1155
    End
@@ -37,20 +36,50 @@ Begin VB.Form frmUSER
       Height          =   375
       Index           =   9
       Left            =   7800
-      TabIndex        =   49
+      TabIndex        =   44
       Top             =   2880
       Width           =   1155
    End
    Begin VB.Frame Frame1 
-      Height          =   5085
+      Height          =   5205
       Left            =   120
-      TabIndex        =   12
+      TabIndex        =   8
       Top             =   120
       Width           =   10275
+      Begin VBCCR17.ProgressBar Barra 
+         Height          =   375
+         Left            =   5520
+         Top             =   4680
+         Width           =   3255
+         _ExtentX        =   5741
+         _ExtentY        =   661
+      End
+      Begin VBCCR17.DTPicker DTPicker2 
+         Height          =   375
+         Left            =   240
+         TabIndex        =   55
+         Top             =   2520
+         Width           =   1695
+         _ExtentX        =   2990
+         _ExtentY        =   661
+         Value           =   44285
+      End
+      Begin VBCCR17.DTPicker DTPicker1 
+         Height          =   375
+         Left            =   1440
+         TabIndex        =   54
+         Top             =   960
+         Width           =   1815
+         _ExtentX        =   3201
+         _ExtentY        =   661
+         Value           =   44285
+         CheckBox        =   -1  'True
+         AllowUserInput  =   -1  'True
+      End
       Begin XPControls.XPButton cmdZeraSenha 
          Height          =   495
          Left            =   2280
-         TabIndex        =   58
+         TabIndex        =   53
          Top             =   3120
          Width           =   1095
          _ExtentX        =   1931
@@ -70,7 +99,7 @@ Begin VB.Form frmUSER
       Begin XPControls.XPButton cmdTroca 
          Height          =   495
          Left            =   2280
-         TabIndex        =   57
+         TabIndex        =   52
          Top             =   2520
          Width           =   1095
          _ExtentX        =   1931
@@ -91,7 +120,7 @@ Begin VB.Form frmUSER
          Caption         =   "ApagarTudo"
          Height          =   375
          Left            =   7560
-         TabIndex        =   52
+         TabIndex        =   47
          Top             =   3960
          Width           =   1215
       End
@@ -100,7 +129,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   8
          Left            =   7680
-         TabIndex        =   48
+         TabIndex        =   43
          Top             =   2400
          Width           =   1155
       End
@@ -109,7 +138,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   7
          Left            =   6360
-         TabIndex        =   46
+         TabIndex        =   41
          Top             =   3480
          Width           =   1155
       End
@@ -118,7 +147,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   6
          Left            =   5040
-         TabIndex        =   45
+         TabIndex        =   40
          Top             =   3480
          Width           =   1155
       End
@@ -127,7 +156,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   5
          Left            =   6360
-         TabIndex        =   44
+         TabIndex        =   39
          Top             =   3120
          Width           =   1155
       End
@@ -136,7 +165,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   4
          Left            =   5040
-         TabIndex        =   43
+         TabIndex        =   38
          Top             =   3120
          Width           =   1155
       End
@@ -145,7 +174,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   3
          Left            =   3720
-         TabIndex        =   39
+         TabIndex        =   34
          ToolTipText     =   "Importar Direito Documentos Outro Usuario"
          Top             =   3480
          Width           =   1155
@@ -155,7 +184,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   2
          Left            =   3720
-         TabIndex        =   38
+         TabIndex        =   33
          ToolTipText     =   "Importar Direito Documentos Outro Usuario"
          Top             =   3120
          Width           =   1155
@@ -174,7 +203,7 @@ Begin VB.Form frmUSER
          ForeColor       =   &H00C00000&
          Height          =   525
          Left            =   7500
-         TabIndex        =   37
+         TabIndex        =   32
          ToolTipText     =   "Ativo - Acessa/Bloqueia Sistema"
          Top             =   300
          Width           =   915
@@ -184,7 +213,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   0
          Left            =   3720
-         TabIndex        =   35
+         TabIndex        =   31
          ToolTipText     =   "Importar Direitos Relatorio Outro Usuario"
          Top             =   2400
          Width           =   1155
@@ -194,7 +223,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   1
          Left            =   3720
-         TabIndex        =   34
+         TabIndex        =   30
          ToolTipText     =   "Importar Direito Documentos Outro Usuario"
          Top             =   2760
          Width           =   1155
@@ -202,8 +231,8 @@ Begin VB.Form frmUSER
       Begin VB.CommandButton Cmdimpmenu 
          Caption         =   "Importar Direito Menus"
          Height          =   375
-         Left            =   1740
-         TabIndex        =   33
+         Left            =   1800
+         TabIndex        =   29
          ToolTipText     =   "Importar Direito Menus Outro Usuario"
          Top             =   3840
          Width           =   1815
@@ -211,8 +240,8 @@ Begin VB.Form frmUSER
       Begin VB.CommandButton CMDIMPBTN 
          Caption         =   "Importar Direito Botoes"
          Height          =   375
-         Left            =   1740
-         TabIndex        =   32
+         Left            =   1800
+         TabIndex        =   28
          ToolTipText     =   "Importar Direito Documentos Outro Usuario"
          Top             =   4260
          Width           =   1815
@@ -222,7 +251,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   0
          Left            =   5040
-         TabIndex        =   31
+         TabIndex        =   27
          Top             =   2400
          Width           =   1155
       End
@@ -231,7 +260,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   1
          Left            =   5040
-         TabIndex        =   30
+         TabIndex        =   26
          Top             =   2760
          Width           =   1155
       End
@@ -240,7 +269,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   2
          Left            =   6360
-         TabIndex        =   29
+         TabIndex        =   25
          Top             =   2760
          Width           =   1155
       End
@@ -249,40 +278,42 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   3
          Left            =   6360
-         TabIndex        =   28
+         TabIndex        =   24
          Top             =   2400
          Width           =   1155
       End
       Begin VB.TextBox DIZAPU 
          Enabled         =   0   'False
-         Height          =   315
-         Left            =   5040
+         Height          =   435
+         Left            =   3120
          Locked          =   -1  'True
-         TabIndex        =   27
+         TabIndex        =   23
          TabStop         =   0   'False
-         Top             =   4560
-         Width           =   1815
+         Top             =   4680
+         Width           =   2295
       End
       Begin VB.Frame Frame12 
          Caption         =   "Buscar Id Envolvidos"
+         ForeColor       =   &H00C00000&
          Height          =   1215
          Left            =   120
-         TabIndex        =   23
+         TabIndex        =   19
          Top             =   3420
          Visible         =   0   'False
-         Width           =   1335
+         Width           =   1575
          Begin VB.TextBox IdForm 
             Height          =   285
-            Left            =   90
-            TabIndex        =   24
+            Left            =   240
+            TabIndex        =   20
             Top             =   300
             Width           =   1035
          End
          Begin VB.Label Label3 
             Caption         =   "do Form"
+            ForeColor       =   &H00C00000&
             Height          =   315
-            Left            =   120
-            TabIndex        =   25
+            Left            =   240
+            TabIndex        =   21
             Top             =   660
             Width           =   975
          End
@@ -302,7 +333,7 @@ Begin VB.Form frmUSER
          Index           =   3
          Left            =   7020
          Locked          =   -1  'True
-         TabIndex        =   9
+         TabIndex        =   6
          TabStop         =   0   'False
          ToolTipText     =   "Equivalente"
          Top             =   420
@@ -323,7 +354,7 @@ Begin VB.Form frmUSER
          Height          =   285
          Index           =   5
          Left            =   1080
-         TabIndex        =   6
+         TabIndex        =   3
          Text            =   "0"
          ToolTipText     =   "Nº Folha Pagamento"
          Top             =   1740
@@ -343,7 +374,7 @@ Begin VB.Form frmUSER
          Index           =   6
          Left            =   3840
          MaxLength       =   50
-         TabIndex        =   7
+         TabIndex        =   4
          ToolTipText     =   "Nome do Usuario"
          Top             =   1680
          Width           =   3855
@@ -360,7 +391,7 @@ Begin VB.Form frmUSER
          EndProperty
          Height          =   315
          Left            =   5460
-         TabIndex        =   8
+         TabIndex        =   5
          TabStop         =   0   'False
          ToolTipText     =   "Equivalente"
          Top             =   420
@@ -380,12 +411,12 @@ Begin VB.Form frmUSER
          EndProperty
          Height          =   285
          Index           =   2
-         Left            =   1140
+         Left            =   240
          Locked          =   -1  'True
-         TabIndex        =   11
+         TabIndex        =   7
          TabStop         =   0   'False
          ToolTipText     =   "Senha"
-         Top             =   3060
+         Top             =   3000
          Visible         =   0   'False
          Width           =   975
       End
@@ -402,10 +433,10 @@ Begin VB.Form frmUSER
          EndProperty
          ForeColor       =   &H000040C0&
          Height          =   795
-         Left            =   3480
-         TabIndex        =   17
+         Left            =   3360
+         TabIndex        =   13
          Top             =   840
-         Width           =   6735
+         Width           =   6855
          Begin VB.CheckBox chkweekend 
             Caption         =   "Acesso no fim-de-semana"
             BeginProperty Font 
@@ -419,55 +450,37 @@ Begin VB.Form frmUSER
             EndProperty
             ForeColor       =   &H00C00000&
             Height          =   525
-            Left            =   4500
-            TabIndex        =   26
+            Left            =   5040
+            TabIndex        =   22
             ToolTipText     =   "Se o Usuario acesso final de semana"
             Top             =   120
-            Width           =   2130
+            Width           =   1635
          End
-         Begin MSComCtl2.DTPicker DTPicker3 
-            Height          =   330
-            Left            =   1380
-            TabIndex        =   4
-            Top             =   255
-            Width           =   885
-            _ExtentX        =   1561
-            _ExtentY        =   582
-            _Version        =   393216
-            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            CustomFormat    =   "00:00"
-            Format          =   121110530
-            CurrentDate     =   38397
-         End
-         Begin MSComCtl2.DTPicker DTPicker4 
-            Height          =   330
-            Left            =   3480
-            TabIndex        =   5
+         Begin VBCCR17.DTPicker DTPicker3 
+            Height          =   375
+            Left            =   1320
+            TabIndex        =   56
             Top             =   240
-            Width           =   900
-            _ExtentX        =   1588
-            _ExtentY        =   582
-            _Version        =   393216
-            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            CustomFormat    =   "00:00"
-            Format          =   121110530
-            CurrentDate     =   0.999988425925926
+            Width           =   1335
+            _ExtentX        =   2355
+            _ExtentY        =   661
+            Value           =   44285
+            Format          =   2
+            CheckBox        =   -1  'True
+            AllowUserInput  =   -1  'True
+         End
+         Begin VBCCR17.DTPicker DTPicker4 
+            Height          =   375
+            Left            =   3600
+            TabIndex        =   57
+            Top             =   240
+            Width           =   1335
+            _ExtentX        =   2355
+            _ExtentY        =   661
+            Value           =   44285
+            Format          =   2
+            CheckBox        =   -1  'True
+            AllowUserInput  =   -1  'True
          End
          Begin VB.Label lblLabels 
             Alignment       =   1  'Right Justify
@@ -485,9 +498,9 @@ Begin VB.Form frmUSER
             Height          =   255
             Index           =   12
             Left            =   120
-            TabIndex        =   19
+            TabIndex        =   15
             Top             =   300
-            Width           =   1215
+            Width           =   1095
          End
          Begin VB.Label lblLabels 
             Alignment       =   1  'Right Justify
@@ -504,9 +517,9 @@ Begin VB.Form frmUSER
             ForeColor       =   &H00C00000&
             Height          =   255
             Index           =   13
-            Left            =   2280
-            TabIndex        =   18
-            Top             =   300
+            Left            =   2520
+            TabIndex        =   14
+            Top             =   240
             Width           =   1125
          End
       End
@@ -573,70 +586,10 @@ Begin VB.Form frmUSER
          Top             =   435
          Width           =   1365
       End
-      Begin MSComCtl2.DTPicker DTPicker1 
-         Height          =   375
-         Left            =   1500
-         TabIndex        =   3
-         Tag             =   "Expiraçao"
-         ToolTipText     =   "Expiraçao"
-         Top             =   840
-         Width           =   1785
-         _ExtentX        =   3149
-         _ExtentY        =   661
-         _Version        =   393216
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         CheckBox        =   -1  'True
-         DateIsNull      =   -1  'True
-         Format          =   121110529
-         CurrentDate     =   36516
-      End
-      Begin MSComCtl2.DTPicker DTPicker2 
-         Height          =   375
-         Left            =   300
-         TabIndex        =   10
-         ToolTipText     =   "Data Troca Senha"
-         Top             =   2580
-         Width           =   1815
-         _ExtentX        =   3201
-         _ExtentY        =   661
-         _Version        =   393216
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         CheckBox        =   -1  'True
-         DateIsNull      =   -1  'True
-         Format          =   121110529
-         CurrentDate     =   36516
-      End
-      Begin MSComctlLib.ProgressBar Barra 
-         Height          =   375
-         Left            =   7200
-         TabIndex        =   36
-         Top             =   4560
-         Width           =   1815
-         _ExtentX        =   3201
-         _ExtentY        =   661
-         _Version        =   393216
-         Appearance      =   1
-      End
       Begin XPControls.XPButton CmdClose 
          Height          =   435
          Left            =   8520
-         TabIndex        =   53
+         TabIndex        =   48
          Top             =   360
          Width           =   1515
          _ExtentX        =   2672
@@ -657,7 +610,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   0
          Left            =   1920
-         TabIndex        =   54
+         TabIndex        =   49
          Top             =   1680
          Width           =   375
          _ExtentX        =   661
@@ -678,7 +631,7 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   1
          Left            =   2400
-         TabIndex        =   55
+         TabIndex        =   50
          Top             =   1680
          Width           =   855
          _ExtentX        =   1508
@@ -698,7 +651,7 @@ Begin VB.Form frmUSER
       Begin XPControls.XPButton Command1 
          Height          =   375
          Left            =   3360
-         TabIndex        =   56
+         TabIndex        =   51
          Top             =   1680
          Width           =   375
          _ExtentX        =   661
@@ -718,36 +671,40 @@ Begin VB.Form frmUSER
       Begin VB.Label Label5 
          Alignment       =   2  'Center
          Caption         =   "Apagar Grupo"
+         ForeColor       =   &H00C00000&
          Height          =   315
          Left            =   7680
-         TabIndex        =   47
+         TabIndex        =   42
          Top             =   2160
          Width           =   1155
       End
       Begin VB.Label Label4 
          Alignment       =   2  'Center
          Caption         =   "Liberar Todos"
+         ForeColor       =   &H00C00000&
          Height          =   315
          Left            =   6360
-         TabIndex        =   42
+         TabIndex        =   37
          Top             =   2160
          Width           =   1215
       End
       Begin VB.Label Label2 
          Alignment       =   2  'Center
          Caption         =   "Liberar Grupo"
+         ForeColor       =   &H00C00000&
          Height          =   315
          Left            =   5040
-         TabIndex        =   41
+         TabIndex        =   36
          Top             =   2160
          Width           =   1155
       End
       Begin VB.Label Label1 
          Alignment       =   2  'Center
          Caption         =   "Importar Direitos "
+         ForeColor       =   &H00C00000&
          Height          =   315
          Left            =   3780
-         TabIndex        =   40
+         TabIndex        =   35
          Top             =   2160
          Width           =   1215
       End
@@ -766,8 +723,8 @@ Begin VB.Form frmUSER
          Height          =   255
          Index           =   10
          Left            =   300
-         TabIndex        =   22
-         Top             =   1740
+         TabIndex        =   18
+         Top             =   1680
          Width           =   735
       End
       Begin VB.Label lblLabels 
@@ -786,7 +743,7 @@ Begin VB.Form frmUSER
          Height          =   255
          Index           =   5
          Left            =   5340
-         TabIndex        =   21
+         TabIndex        =   17
          Top             =   180
          Width           =   1845
       End
@@ -805,7 +762,7 @@ Begin VB.Form frmUSER
          Height          =   315
          Index           =   6
          Left            =   240
-         TabIndex        =   20
+         TabIndex        =   16
          Top             =   2280
          Width           =   2385
       End
@@ -825,7 +782,7 @@ Begin VB.Form frmUSER
          Height          =   615
          Index           =   4
          Left            =   300
-         TabIndex        =   16
+         TabIndex        =   12
          Top             =   840
          Width           =   1005
       End
@@ -844,7 +801,7 @@ Begin VB.Form frmUSER
          Height          =   255
          Index           =   0
          Left            =   120
-         TabIndex        =   15
+         TabIndex        =   11
          Top             =   180
          Width           =   1035
       End
@@ -863,7 +820,7 @@ Begin VB.Form frmUSER
          Height          =   255
          Index           =   1
          Left            =   1320
-         TabIndex        =   14
+         TabIndex        =   10
          Top             =   180
          Width           =   2265
       End
@@ -883,7 +840,7 @@ Begin VB.Form frmUSER
          Height          =   255
          Index           =   2
          Left            =   3540
-         TabIndex        =   13
+         TabIndex        =   9
          Top             =   120
          Width           =   1815
       End

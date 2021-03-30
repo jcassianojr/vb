@@ -60,7 +60,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":0000
-            TextSave        =   "12:37"
+            TextSave        =   "12:33"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -68,7 +68,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principal.frx":059A
-            TextSave        =   "29/03/2021"
+            TextSave        =   "30/03/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -104,8 +104,8 @@ Dim cARQICO As String
     Center Me
     cmdline = Trim(Command())
     
-    
-    FrmRTf.Show
+'    aDIREITOS = Array(True, True, True, True, True, True, True, True)
+'    FrmRTf.Show
    
     zgrp = ""
     ZGRPSUB = ""

@@ -1,53 +1,53 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmInsertDate 
    Caption         =   "Inserir Datas"
    ClientHeight    =   3180
    ClientLeft      =   60
    ClientTop       =   345
-   ClientWidth     =   7305
+   ClientWidth     =   7215
    Icon            =   "frmInsertDate.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3180
-   ScaleWidth      =   7305
+   ScaleWidth      =   7215
    StartUpPosition =   2  'CenterScreen
+   Begin VBCCR17.ListBoxW lstDates 
+      Height          =   2205
+      Left            =   3000
+      TabIndex        =   4
+      Top             =   120
+      Width           =   2415
+      _ExtentX        =   4260
+      _ExtentY        =   3889
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+   End
+   Begin VBCCR17.MonthView MonthView1 
+      Height          =   2325
+      Left            =   120
+      TabIndex        =   3
+      Top             =   120
+      Width           =   2685
+      _ExtentX        =   4736
+      _ExtentY        =   4101
+      Value           =   44285
+      ShowWeekNumbers =   -1  'True
+   End
    Begin VB.TextBox TxtData 
       Enabled         =   0   'False
       Height          =   375
-      Left            =   0
+      Left            =   120
       Locked          =   -1  'True
-      TabIndex        =   2
+      TabIndex        =   0
       TabStop         =   0   'False
       Top             =   2640
       Width           =   5295
    End
-   Begin MSComCtl2.MonthView MonthView1 
-      Height          =   2370
-      Left            =   0
-      TabIndex        =   1
-      Top             =   120
-      Width           =   2490
-      _ExtentX        =   4392
-      _ExtentY        =   4180
-      _Version        =   393216
-      ForeColor       =   -2147483630
-      BackColor       =   -2147483633
-      Appearance      =   1
-      StartOfWeek     =   120324097
-      CurrentDate     =   36522
-   End
-   Begin VB.ListBox lstDates 
-      Height          =   2400
-      Left            =   2760
-      TabIndex        =   0
-      Top             =   120
-      Width           =   2535
-   End
    Begin XPControls.XPButton cmdOK 
       Height          =   435
       Left            =   5520
-      TabIndex        =   3
+      TabIndex        =   1
       Top             =   240
       Width           =   1515
       _ExtentX        =   2672
@@ -67,7 +67,7 @@ Begin VB.Form frmInsertDate
    Begin XPControls.XPButton cmdCancel 
       Height          =   435
       Left            =   5520
-      TabIndex        =   4
+      TabIndex        =   2
       Top             =   840
       Width           =   1515
       _ExtentX        =   2672
@@ -204,6 +204,10 @@ Private Sub Form_Load()
     TxtData = Format(MonthView1.Value, "dddd, dd/mmmm/yyyy")
     SetDateList MonthView1.Value
     
+End Sub
+
+Private Sub lstDates_Click()
+
 End Sub
 
 Private Sub lstDates_DblClick()

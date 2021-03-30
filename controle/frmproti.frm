@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form frmproti 
    Caption         =   "Controle de Prototipos"
@@ -16,7 +16,7 @@ Begin VB.Form frmproti
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
       Left            =   6000
-      TabIndex        =   24
+      TabIndex        =   23
       Top             =   1800
       Width           =   1725
       _ExtentX        =   3043
@@ -38,7 +38,7 @@ Begin VB.Form frmproti
       Height          =   285
       Index           =   7
       Left            =   4080
-      TabIndex        =   17
+      TabIndex        =   16
       ToolTipText     =   "Valor da Cotaçao"
       Top             =   1860
       Visible         =   0   'False
@@ -48,25 +48,10 @@ Begin VB.Form frmproti
       Height          =   285
       Index           =   3
       Left            =   6960
-      TabIndex        =   15
+      TabIndex        =   14
       ToolTipText     =   "Telefone/Ramal do Engenheiro"
       Top             =   1440
       Width           =   2055
-   End
-   Begin MSComCtl2.DTPicker DTPicker1 
-      Height          =   375
-      Left            =   1440
-      TabIndex        =   13
-      ToolTipText     =   "Data da Cotaçao"
-      Top             =   1800
-      Width           =   1935
-      _ExtentX        =   3413
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   123273217
-      CurrentDate     =   37686
    End
    Begin VB.CheckBox Check1 
       Caption         =   "Cotação"
@@ -156,7 +141,7 @@ Begin VB.Form frmproti
    Begin XPControls.XPButton cmdClose 
       Height          =   435
       Left            =   8160
-      TabIndex        =   18
+      TabIndex        =   17
       Top             =   120
       Width           =   1515
       _ExtentX        =   2672
@@ -176,7 +161,7 @@ Begin VB.Form frmproti
    Begin XPControls.XPButton Encerrar 
       Height          =   435
       Left            =   8160
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   600
       Width           =   1515
       _ExtentX        =   2672
@@ -196,7 +181,7 @@ Begin VB.Form frmproti
    Begin XPControls.XPButton novo 
       Height          =   435
       Left            =   8400
-      TabIndex        =   20
+      TabIndex        =   19
       TabStop         =   0   'False
       Top             =   2280
       Width           =   1575
@@ -217,7 +202,7 @@ Begin VB.Form frmproti
    Begin XPControls.XPButton Editar 
       Height          =   435
       Left            =   8400
-      TabIndex        =   21
+      TabIndex        =   20
       TabStop         =   0   'False
       Top             =   2760
       Width           =   1575
@@ -237,7 +222,7 @@ Begin VB.Form frmproti
    Begin XPControls.XPButton excluir 
       Height          =   435
       Left            =   8400
-      TabIndex        =   22
+      TabIndex        =   21
       TabStop         =   0   'False
       Top             =   3240
       Width           =   1575
@@ -258,7 +243,7 @@ Begin VB.Form frmproti
    Begin XPControls.XPButton CmdLocalizar 
       Height          =   375
       Left            =   8400
-      TabIndex        =   23
+      TabIndex        =   22
       TabStop         =   0   'False
       Top             =   3840
       Width           =   1575
@@ -276,6 +261,18 @@ Begin VB.Form frmproti
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR17.DTPicker DTPicker1 
+      Height          =   375
+      Left            =   1440
+      TabIndex        =   24
+      Top             =   1800
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
@@ -284,7 +281,7 @@ Begin VB.Form frmproti
       Height          =   195
       Index           =   16
       Left            =   5640
-      TabIndex        =   16
+      TabIndex        =   15
       Top             =   1440
       Width           =   1200
    End
@@ -294,7 +291,7 @@ Begin VB.Form frmproti
       Height          =   255
       Index           =   3
       Left            =   3480
-      TabIndex        =   14
+      TabIndex        =   13
       Top             =   1800
       Width           =   735
    End
@@ -368,10 +365,10 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 3
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         aVAL(8) = DTPicker1
-        aVAL(9) = FixNumBol(check1)
+        aVAL(9) = FixNumBol(Check1)
         GrvSQL cARQDES, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     End If
     Screen.MousePointer = vbDefault
@@ -413,7 +410,7 @@ Private Sub excluir_Click()
     '******************************************************************
     If ApagaSQLP(cARQDES, sSQL) Then
         Filgrid
-        eRETU02 = "GP11:" & Trim(str(nPPAP)) & Chr(13) & Chr(10)
+        eRETU02 = "GP11:" & Trim(Str(nPPAP)) & Chr(13) & Chr(10)
         eRETU02 = eRETU02 & "Código:" & cDESENHO & Chr(13) & Chr(10)
         eRETU02 = eRETU02 & "SSMT" & cCONJUNTO & Chr(13) & Chr(10)
         MAILENV "PROT0002", eRETU02
@@ -445,12 +442,12 @@ Private Sub Form_Load()
     aPAD = Array("", "", "", "", 0, "", "", "", Date, False)
     aVAL = PegSQL(cARQDES, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 3
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     If IsDate(aVAL(8)) Then
         DTPicker1.Value = aVAL(8)
     End If
-    check1.Value = aVAL(9)
+    Check1.Value = aVAL(9)
     Filgrid
 End Sub
 
@@ -482,9 +479,9 @@ Private Sub Novo_Click()
         RSTAB.Open "PPAG", DB, adOpenDynamic, adLockOptimistic
         RSTAB.AddNew
         RSTAB("CODIGO") = cDESENHO
-        RSTAB("NOME") = txtFields(1)
-        RSTAB("CLIENTE") = txtFields(4)
-        RSTAB("CLINOME") = txtFields(5)
+        RSTAB("NOME") = TXTFIELDS(1)
+        RSTAB("CLIENTE") = TXTFIELDS(4)
+        RSTAB("CLINOME") = TXTFIELDS(5)
         RSTAB("SSMT") = cSSMT
         nPF = RSTAB("PPAP")
         RSTAB.Update
@@ -493,7 +490,7 @@ Private Sub Novo_Click()
     End If
     IncluiSQL cARQDES, "select * from PROTOI where partnumeber='" & cDESENHO & "' and ssmt='" & cSSMT & " and pf=" & nPF, 3, Array("PARTNUMBER", "SSMT", "PPAP"), Array(cDESENHO, cSSMT, nPF), True, False
     Filgrid
-    eRETU02 = "GP11:" & Trim(str(nPPAP)) & Chr(13) & Chr(10)
+    eRETU02 = "GP11:" & Trim(Str(nPPAP)) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & "Código:" & cDESENHO & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & "SSMT" & cSSMT & Chr(13) & Chr(10)
     MAILENV "PROT0001", eRETU02

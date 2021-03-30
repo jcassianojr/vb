@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmPFLIB 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PF"
@@ -15,13 +15,25 @@ Begin VB.Form frmPFLIB
    ScaleWidth      =   7080
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VBCCR17.DTPicker DTPicker1 
+      Height          =   495
+      Left            =   2760
+      TabIndex        =   8
+      TabStop         =   0   'False
+      Top             =   1320
+      Width           =   1455
+      _ExtentX        =   2566
+      _ExtentY        =   873
+      Enabled         =   0   'False
+      Value           =   44285
+   End
    Begin VB.TextBox TxtRev 
       BackColor       =   &H00C0FFFF&
       Enabled         =   0   'False
       Height          =   372
       Left            =   1800
       Locked          =   -1  'True
-      TabIndex        =   6
+      TabIndex        =   5
       TabStop         =   0   'False
       Top             =   120
       Width           =   732
@@ -32,26 +44,10 @@ Begin VB.Form frmPFLIB
       Height          =   372
       Left            =   960
       Locked          =   -1  'True
-      TabIndex        =   5
+      TabIndex        =   4
       TabStop         =   0   'False
       Top             =   120
       Width           =   732
-   End
-   Begin MSComCtl2.DTPicker DTPicker1 
-      Height          =   375
-      Left            =   2880
-      TabIndex        =   2
-      Top             =   1320
-      Width           =   1815
-      _ExtentX        =   3201
-      _ExtentY        =   661
-      _Version        =   393216
-      Enabled         =   0   'False
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   142016513
-      CurrentDate     =   36420
-      MinDate         =   2
    End
    Begin VB.TextBox txtFields 
       BackColor       =   &H00C0FFFF&
@@ -81,7 +77,7 @@ Begin VB.Form frmPFLIB
    Begin XPControls.XPButton Encerrar 
       Height          =   435
       Left            =   5040
-      TabIndex        =   7
+      TabIndex        =   6
       Top             =   720
       Width           =   1575
       _ExtentX        =   2778
@@ -101,7 +97,7 @@ Begin VB.Form frmPFLIB
    Begin XPControls.XPButton cmdClose 
       Height          =   435
       Left            =   5040
-      TabIndex        =   8
+      TabIndex        =   7
       Top             =   240
       Width           =   1575
       _ExtentX        =   2778
@@ -122,7 +118,7 @@ Begin VB.Form frmPFLIB
       Caption         =   " PF:"
       Height          =   375
       Left            =   240
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   120
       Width           =   615
    End
@@ -141,7 +137,7 @@ Begin VB.Form frmPFLIB
       ForeColor       =   &H000000FF&
       Height          =   375
       Left            =   120
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   1320
       Width           =   2415
    End

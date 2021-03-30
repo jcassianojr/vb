@@ -2,6 +2,7 @@ VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form FrmFemeaPad 
    Caption         =   "Femea Padrao"
    ClientHeight    =   7065
@@ -123,57 +124,80 @@ Begin VB.Form FrmFemeaPad
       Tab(0).Control(46).Enabled=   0   'False
       Tab(0).Control(47)=   "CmdEdiRevi"
       Tab(0).Control(47).Enabled=   0   'False
-      Tab(0).Control(48)=   "barra"
+      Tab(0).Control(48)=   "DIZAPU"
       Tab(0).Control(48).Enabled=   0   'False
-      Tab(0).Control(49)=   "DIZAPU"
+      Tab(0).Control(49)=   "CmdExpRPN"
       Tab(0).Control(49).Enabled=   0   'False
-      Tab(0).Control(50)=   "CmdExpRPN"
+      Tab(0).Control(50)=   "Command6"
       Tab(0).Control(50).Enabled=   0   'False
-      Tab(0).Control(51)=   "Command6"
+      Tab(0).Control(51)=   "CMDSIG(1)"
       Tab(0).Control(51).Enabled=   0   'False
-      Tab(0).Control(52)=   "CMDSIG(1)"
+      Tab(0).Control(52)=   "barra"
       Tab(0).Control(52).Enabled=   0   'False
       Tab(0).ControlCount=   53
       TabCaption(1)   =   "Pre Cadastro"
       TabPicture(1)   =   "FrmFemeaPad.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Command3"
-      Tab(1).Control(1)=   "CmdPreinc"
+      Tab(1).Control(0)=   "Gridfemprecad"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "Retornar(1)"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "CmddelPre"
+      Tab(1).Control(2)=   "cmdedipre(2)"
       Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "cmdedipre(2)"
+      Tab(1).Control(3)=   "CmddelPre"
       Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "Retornar(1)"
-      Tab(1).Control(5)=   "Gridfemprecad"
+      Tab(1).Control(4)=   "CmdPreinc"
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "Command3"
+      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).ControlCount=   6
       TabCaption(2)   =   "Processos"
       TabPicture(2)   =   "FrmFemeaPad.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "CmdExcPFtot"
-      Tab(2).Control(1)=   "CmdExcPFPad(1)"
-      Tab(2).Control(2)=   "CmdIncPf"
-      Tab(2).Control(3)=   "Command2"
-      Tab(2).Control(4)=   "CmdExcPFPad(0)"
-      Tab(2).Control(5)=   "Retornar(2)"
-      Tab(2).Control(6)=   "GridPadPF"
-      Tab(2).Control(7)=   "gridpf"
-      Tab(2).Control(8)=   "dizfal(1)"
-      Tab(2).Control(9)=   "dizpro(1)"
+      Tab(2).Control(0)=   "dizpro(1)"
+      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).Control(1)=   "dizfal(1)"
+      Tab(2).Control(1).Enabled=   0   'False
+      Tab(2).Control(2)=   "gridpf"
+      Tab(2).Control(2).Enabled=   0   'False
+      Tab(2).Control(3)=   "GridPadPF"
+      Tab(2).Control(3).Enabled=   0   'False
+      Tab(2).Control(4)=   "Retornar(2)"
+      Tab(2).Control(4).Enabled=   0   'False
+      Tab(2).Control(5)=   "CmdExcPFPad(0)"
+      Tab(2).Control(5).Enabled=   0   'False
+      Tab(2).Control(6)=   "Command2"
+      Tab(2).Control(6).Enabled=   0   'False
+      Tab(2).Control(7)=   "CmdIncPf"
+      Tab(2).Control(7).Enabled=   0   'False
+      Tab(2).Control(8)=   "CmdExcPFPad(1)"
+      Tab(2).Control(8).Enabled=   0   'False
+      Tab(2).Control(9)=   "CmdExcPFtot"
+      Tab(2).Control(9).Enabled=   0   'False
       Tab(2).ControlCount=   10
       TabCaption(3)   =   "Apuracao"
       TabPicture(3)   =   "FrmFemeaPad.frx":0054
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Toolbar1"
-      Tab(3).Control(1)=   "Grid"
+      Tab(3).Control(0)=   "Grid"
+      Tab(3).Control(0).Enabled=   0   'False
+      Tab(3).Control(1)=   "Toolbar1"
+      Tab(3).Control(1).Enabled=   0   'False
       Tab(3).ControlCount=   2
+      Begin VBCCR17.ProgressBar barra 
+         Height          =   255
+         Left            =   8400
+         Top             =   3120
+         Width           =   1335
+         _ExtentX        =   2355
+         _ExtentY        =   450
+      End
       Begin VB.CommandButton CMDSIG 
          Height          =   255
          Index           =   1
          Left            =   10440
          Picture         =   "FrmFemeaPad.frx":0070
          Style           =   1  'Graphical
-         TabIndex        =   71
+         TabIndex        =   70
          TabStop         =   0   'False
          Top             =   360
          Width           =   375
@@ -182,7 +206,7 @@ Begin VB.Form FrmFemeaPad
          Caption         =   "Revisar Todas Causas"
          Height          =   495
          Left            =   9600
-         TabIndex        =   68
+         TabIndex        =   67
          Top             =   6000
          Width           =   1215
       End
@@ -190,7 +214,7 @@ Begin VB.Form FrmFemeaPad
          Caption         =   "RPN->Mes"
          Height          =   255
          Left            =   9840
-         TabIndex        =   67
+         TabIndex        =   66
          ToolTipText     =   "Exporta os Indices RPN para Uma Competencia Ja Acumulada"
          Top             =   4560
          Width           =   975
@@ -201,21 +225,10 @@ Begin VB.Form FrmFemeaPad
          Height          =   285
          Left            =   9840
          Locked          =   -1  'True
-         TabIndex        =   66
+         TabIndex        =   65
          TabStop         =   0   'False
          Top             =   3120
          Width           =   975
-      End
-      Begin MSComctlLib.ProgressBar barra 
-         Height          =   255
-         Left            =   8400
-         TabIndex        =   65
-         Top             =   3120
-         Width           =   1335
-         _ExtentX        =   2355
-         _ExtentY        =   450
-         _Version        =   393216
-         Appearance      =   1
       End
       Begin VB.CommandButton CmdEdiRevi 
          Caption         =   "Editar"
@@ -702,7 +715,7 @@ Begin VB.Form FrmFemeaPad
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   600
          Left            =   -65640
-         TabIndex        =   69
+         TabIndex        =   68
          Top             =   480
          Width           =   1470
          _ExtentX        =   2593
@@ -716,7 +729,7 @@ Begin VB.Form FrmFemeaPad
       Begin MSFlexGridLib.MSFlexGrid Grid 
          Height          =   5595
          Left            =   -74820
-         TabIndex        =   70
+         TabIndex        =   69
          Top             =   840
          Width           =   7455
          _ExtentX        =   13150
@@ -1837,7 +1850,7 @@ End Sub
 Private Sub ALTERAFEMEA()
     Dim cSQL As String
     Dim nROWS As Integer
-    Dim X As Integer
+    Dim x As Integer
     Dim nPFTMP As Long
 
     Dim DB As ADODB.Connection
@@ -1874,10 +1887,10 @@ Private Sub ALTERAFEMEA()
         GridPadPF.Col = 0
         DB.ConnectionTimeout = 120
         DB.Open GeracArq(cARQPF)
-        For X = 0 To nROWS
-            GridPadPF.Row = X
+        For x = 0 To nROWS
+            GridPadPF.Row = x
             nPFTMP = FixInt(GridPadPF)
-            DIZAPU = nPFTMP & "- " & X & "/" & nROWS
+            DIZAPU = nPFTMP & "- " & x & "/" & nROWS
             DIZAPU.Refresh
             BARPOS
             cSQL = "select FEMMUDPAD from PF WHERE PF=" & nPFTMP
@@ -2016,15 +2029,15 @@ End Sub
 Private Sub Command6_Click()
 
     Dim nROWS
-    Dim X
+    Dim x
     Dim nNUM As Integer
 
     If Not MDG("Revisar Todas as Causas") Then
         Exit Sub
     End If
     nROWS = gridcau.Rows
-    For X = 1 To nROWS - 1
-        gridcau.Row = X
+    For x = 1 To nROWS - 1
+        gridcau.Row = x
         gridcau.Col = 3
         nNUM = FixInt(gridcau)
         If nNUM > 0 Then

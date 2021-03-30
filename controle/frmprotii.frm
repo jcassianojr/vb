@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmprotii 
    Caption         =   "Controle de Prototipos"
    ClientHeight    =   4785
@@ -20,7 +20,7 @@ Begin VB.Form frmprotii
       Index           =   1
       Left            =   4320
       Locked          =   -1  'True
-      TabIndex        =   49
+      TabIndex        =   43
       TabStop         =   0   'False
       Top             =   120
       Width           =   375
@@ -28,7 +28,7 @@ Begin VB.Form frmprotii
    Begin TabDlg.SSTab SSTab1 
       Height          =   3375
       Left            =   120
-      TabIndex        =   14
+      TabIndex        =   12
       Top             =   1200
       Width           =   9495
       _ExtentX        =   16748
@@ -48,52 +48,86 @@ Begin VB.Form frmprotii
       TabCaption(1)   =   "Pedido Entrega"
       TabPicture(1)   =   "frmprotii.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(3)"
-      Tab(1).Control(1)=   "Text1(11)"
-      Tab(1).Control(2)=   "Text1(18)"
-      Tab(1).Control(3)=   "Text1(6)"
-      Tab(1).Control(4)=   "Text1(5)"
-      Tab(1).Control(5)=   "Command1"
-      Tab(1).Control(6)=   "Command2"
-      Tab(1).Control(7)=   "Text1(10)"
-      Tab(1).Control(8)=   "Text1(2)"
+      Tab(1).Control(0)=   "lbl(9)"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "lbl(10)"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).Control(2)=   "lbl(22)"
+      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).Control(3)=   "lbl(15)"
+      Tab(1).Control(3).Enabled=   0   'False
+      Tab(1).Control(4)=   "lbl(16)"
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "lbl(17)"
+      Tab(1).Control(5).Enabled=   0   'False
+      Tab(1).Control(6)=   "lbl(19)"
+      Tab(1).Control(6).Enabled=   0   'False
+      Tab(1).Control(7)=   "lbl(23)"
+      Tab(1).Control(7).Enabled=   0   'False
+      Tab(1).Control(8)=   "lbl(24)"
       Tab(1).Control(8).Enabled=   0   'False
-      Tab(1).Control(9)=   "Text1(7)"
-      Tab(1).Control(10)=   "DTPicker5"
-      Tab(1).Control(11)=   "DTPicker6"
+      Tab(1).Control(9)=   "lbl(25)"
+      Tab(1).Control(9).Enabled=   0   'False
+      Tab(1).Control(10)=   "lbl(26)"
+      Tab(1).Control(10).Enabled=   0   'False
+      Tab(1).Control(11)=   "DTPicker8"
+      Tab(1).Control(11).Enabled=   0   'False
       Tab(1).Control(12)=   "DTPicker7"
-      Tab(1).Control(13)=   "DTPicker8"
-      Tab(1).Control(14)=   "lbl(26)"
-      Tab(1).Control(15)=   "lbl(25)"
-      Tab(1).Control(16)=   "lbl(24)"
-      Tab(1).Control(17)=   "lbl(23)"
-      Tab(1).Control(18)=   "lbl(19)"
-      Tab(1).Control(19)=   "lbl(17)"
-      Tab(1).Control(20)=   "lbl(16)"
-      Tab(1).Control(21)=   "lbl(15)"
-      Tab(1).Control(22)=   "lbl(22)"
-      Tab(1).Control(23)=   "lbl(10)"
-      Tab(1).Control(24)=   "lbl(9)"
+      Tab(1).Control(12).Enabled=   0   'False
+      Tab(1).Control(13)=   "DTPicker6"
+      Tab(1).Control(13).Enabled=   0   'False
+      Tab(1).Control(14)=   "DTPicker5"
+      Tab(1).Control(14).Enabled=   0   'False
+      Tab(1).Control(15)=   "Text1(7)"
+      Tab(1).Control(15).Enabled=   0   'False
+      Tab(1).Control(16)=   "Text1(2)"
+      Tab(1).Control(16).Enabled=   0   'False
+      Tab(1).Control(17)=   "Text1(10)"
+      Tab(1).Control(17).Enabled=   0   'False
+      Tab(1).Control(18)=   "Command2"
+      Tab(1).Control(18).Enabled=   0   'False
+      Tab(1).Control(19)=   "Command1"
+      Tab(1).Control(19).Enabled=   0   'False
+      Tab(1).Control(20)=   "Text1(5)"
+      Tab(1).Control(20).Enabled=   0   'False
+      Tab(1).Control(21)=   "Text1(6)"
+      Tab(1).Control(21).Enabled=   0   'False
+      Tab(1).Control(22)=   "Text1(18)"
+      Tab(1).Control(22).Enabled=   0   'False
+      Tab(1).Control(23)=   "Text1(11)"
+      Tab(1).Control(23).Enabled=   0   'False
+      Tab(1).Control(24)=   "Text1(3)"
+      Tab(1).Control(24).Enabled=   0   'False
       Tab(1).ControlCount=   25
       TabCaption(2)   =   "Desenho Observaçao"
       TabPicture(2)   =   "frmprotii.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Text1(15)"
-      Tab(2).Control(1)=   "Text1(14)"
-      Tab(2).Control(2)=   "Text1(13)"
-      Tab(2).Control(3)=   "Text1(12)"
-      Tab(2).Control(4)=   "Text1(17)"
-      Tab(2).Control(5)=   "Text1(16)"
-      Tab(2).Control(6)=   "Text1(9)"
-      Tab(2).Control(7)=   "lbl(21)"
-      Tab(2).Control(8)=   "lbl(20)"
-      Tab(2).Control(9)=   "lbl(18)"
+      Tab(2).Control(0)=   "lbl(18)"
+      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).Control(1)=   "lbl(20)"
+      Tab(2).Control(1).Enabled=   0   'False
+      Tab(2).Control(2)=   "lbl(21)"
+      Tab(2).Control(2).Enabled=   0   'False
+      Tab(2).Control(3)=   "Text1(9)"
+      Tab(2).Control(3).Enabled=   0   'False
+      Tab(2).Control(4)=   "Text1(16)"
+      Tab(2).Control(4).Enabled=   0   'False
+      Tab(2).Control(5)=   "Text1(17)"
+      Tab(2).Control(5).Enabled=   0   'False
+      Tab(2).Control(6)=   "Text1(12)"
+      Tab(2).Control(6).Enabled=   0   'False
+      Tab(2).Control(7)=   "Text1(13)"
+      Tab(2).Control(7).Enabled=   0   'False
+      Tab(2).Control(8)=   "Text1(14)"
+      Tab(2).Control(8).Enabled=   0   'False
+      Tab(2).Control(9)=   "Text1(15)"
+      Tab(2).Control(9).Enabled=   0   'False
       Tab(2).ControlCount=   10
       Begin VB.TextBox Text1 
          Height          =   285
          Index           =   3
          Left            =   -71640
-         TabIndex        =   54
+         TabIndex        =   48
          Top             =   1200
          Visible         =   0   'False
          Width           =   1575
@@ -102,7 +136,7 @@ Begin VB.Form frmprotii
          BackColor       =   &H00C0FFFF&
          Height          =   285
          Left            =   2040
-         TabIndex        =   53
+         TabIndex        =   47
          Top             =   120
          Width           =   855
       End
@@ -113,7 +147,7 @@ Begin VB.Form frmprotii
          Index           =   8
          Left            =   360
          Locked          =   -1  'True
-         TabIndex        =   51
+         TabIndex        =   45
          TabStop         =   0   'False
          Top             =   120
          Width           =   735
@@ -122,7 +156,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   11
          Left            =   -74160
-         TabIndex        =   39
+         TabIndex        =   35
          Top             =   720
          Width           =   2055
       End
@@ -130,7 +164,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   18
          Left            =   -74040
-         TabIndex        =   38
+         TabIndex        =   34
          Top             =   1200
          Width           =   1575
       End
@@ -138,7 +172,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   6
          Left            =   -73920
-         TabIndex        =   37
+         TabIndex        =   33
          Top             =   1560
          Width           =   2055
       End
@@ -146,7 +180,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   5
          Left            =   -70320
-         TabIndex        =   36
+         TabIndex        =   32
          Top             =   1560
          Width           =   2055
       End
@@ -154,7 +188,7 @@ Begin VB.Form frmprotii
          Caption         =   "(R)emessa"
          Height          =   255
          Left            =   -68640
-         TabIndex        =   34
+         TabIndex        =   30
          Top             =   1920
          Width           =   1095
       End
@@ -162,7 +196,7 @@ Begin VB.Form frmprotii
          Caption         =   "(M)ercantil"
          Height          =   255
          Left            =   -67560
-         TabIndex        =   33
+         TabIndex        =   29
          Top             =   1920
          Width           =   975
       End
@@ -170,7 +204,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   10
          Left            =   -73560
-         TabIndex        =   27
+         TabIndex        =   25
          Top             =   1920
          Width           =   2055
       End
@@ -181,7 +215,7 @@ Begin VB.Form frmprotii
          Index           =   2
          Left            =   -69120
          Locked          =   -1  'True
-         TabIndex        =   26
+         TabIndex        =   24
          TabStop         =   0   'False
          Top             =   1920
          Width           =   375
@@ -190,7 +224,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   7
          Left            =   -73680
-         TabIndex        =   25
+         TabIndex        =   23
          Top             =   2400
          Width           =   4335
       End
@@ -198,7 +232,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   15
          Left            =   -73560
-         TabIndex        =   22
+         TabIndex        =   20
          Top             =   600
          Width           =   1575
       End
@@ -206,7 +240,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   14
          Left            =   -71400
-         TabIndex        =   21
+         TabIndex        =   19
          Top             =   600
          Width           =   1935
       End
@@ -214,7 +248,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   13
          Left            =   -73560
-         TabIndex        =   20
+         TabIndex        =   18
          Top             =   840
          Width           =   1575
       End
@@ -222,7 +256,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   12
          Left            =   -71400
-         TabIndex        =   19
+         TabIndex        =   17
          Top             =   840
          Width           =   1935
       End
@@ -230,7 +264,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   17
          Left            =   -73560
-         TabIndex        =   18
+         TabIndex        =   16
          Top             =   1080
          Width           =   1575
       End
@@ -238,7 +272,7 @@ Begin VB.Form frmprotii
          Height          =   285
          Index           =   16
          Left            =   -71400
-         TabIndex        =   17
+         TabIndex        =   15
          Top             =   1080
          Width           =   1935
       End
@@ -248,75 +282,67 @@ Begin VB.Form frmprotii
          Left            =   -73920
          MultiLine       =   -1  'True
          ScrollBars      =   3  'Both
-         TabIndex        =   15
+         TabIndex        =   13
          Top             =   1440
          Width           =   7695
-      End
-      Begin MSComCtl2.DTPicker DTPicker5 
-         Height          =   375
-         Left            =   -70800
-         TabIndex        =   28
-         Top             =   1920
-         Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   661
-         _Version        =   393216
-         CheckBox        =   -1  'True
-         DateIsNull      =   -1  'True
-         Format          =   138739713
-         CurrentDate     =   37686
-      End
-      Begin MSComCtl2.DTPicker DTPicker6 
-         Height          =   375
-         Left            =   -68640
-         TabIndex        =   29
-         Top             =   2400
-         Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   661
-         _Version        =   393216
-         CheckBox        =   -1  'True
-         DateIsNull      =   -1  'True
-         Format          =   142082049
-         CurrentDate     =   37686
-      End
-      Begin MSComCtl2.DTPicker DTPicker7 
-         Height          =   375
-         Left            =   -71280
-         TabIndex        =   40
-         Top             =   600
-         Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   661
-         _Version        =   393216
-         CheckBox        =   -1  'True
-         DateIsNull      =   -1  'True
-         Format          =   142082049
-         CurrentDate     =   37686
-      End
-      Begin MSComCtl2.DTPicker DTPicker8 
-         Height          =   375
-         Left            =   -68640
-         TabIndex        =   41
-         Top             =   600
-         Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   661
-         _Version        =   393216
-         CheckBox        =   -1  'True
-         DateIsNull      =   -1  'True
-         Format          =   123207681
-         CurrentDate     =   37686
       End
       Begin MSFlexGridLib.MSFlexGrid Grid 
          Height          =   2655
          Left            =   240
-         TabIndex        =   52
+         TabIndex        =   46
          Top             =   480
          Width           =   8115
          _ExtentX        =   14314
          _ExtentY        =   4683
          _Version        =   393216
+      End
+      Begin VBCCR17.DTPicker DTPicker5 
+         Height          =   375
+         Left            =   -70920
+         TabIndex        =   53
+         Top             =   1800
+         Width           =   1695
+         _ExtentX        =   2990
+         _ExtentY        =   661
+         Value           =   44285
+         CheckBox        =   -1  'True
+         AllowUserInput  =   -1  'True
+      End
+      Begin VBCCR17.DTPicker DTPicker6 
+         Height          =   375
+         Left            =   -68640
+         TabIndex        =   54
+         Top             =   2400
+         Width           =   1695
+         _ExtentX        =   2990
+         _ExtentY        =   661
+         Value           =   44285
+         CheckBox        =   -1  'True
+         AllowUserInput  =   -1  'True
+      End
+      Begin VBCCR17.DTPicker DTPicker7 
+         Height          =   375
+         Left            =   -71280
+         TabIndex        =   55
+         Top             =   600
+         Width           =   1695
+         _ExtentX        =   2990
+         _ExtentY        =   661
+         Value           =   44285
+         CheckBox        =   -1  'True
+         AllowUserInput  =   -1  'True
+      End
+      Begin VBCCR17.DTPicker DTPicker8 
+         Height          =   375
+         Left            =   -68760
+         TabIndex        =   56
+         Top             =   600
+         Width           =   1695
+         _ExtentX        =   2990
+         _ExtentY        =   661
+         Value           =   44285
+         CheckBox        =   -1  'True
+         AllowUserInput  =   -1  'True
       End
       Begin VB.Label lbl 
          AutoSize        =   -1  'True
@@ -326,7 +352,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   26
          Left            =   -74760
-         TabIndex        =   48
+         TabIndex        =   42
          Top             =   720
          Width           =   630
       End
@@ -338,7 +364,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   25
          Left            =   -72000
-         TabIndex        =   47
+         TabIndex        =   41
          Top             =   600
          Width           =   555
       End
@@ -350,7 +376,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   24
          Left            =   -69480
-         TabIndex        =   46
+         TabIndex        =   40
          Top             =   600
          Width           =   555
       End
@@ -362,7 +388,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   23
          Left            =   -74760
-         TabIndex        =   45
+         TabIndex        =   39
          Top             =   1200
          Width           =   630
       End
@@ -374,7 +400,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   19
          Left            =   -72240
-         TabIndex        =   44
+         TabIndex        =   38
          Top             =   1200
          Width           =   495
       End
@@ -386,7 +412,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   17
          Left            =   -74760
-         TabIndex        =   43
+         TabIndex        =   37
          Top             =   1560
          Width           =   855
       End
@@ -398,7 +424,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   16
          Left            =   -71640
-         TabIndex        =   42
+         TabIndex        =   36
          Top             =   1560
          Width           =   1200
       End
@@ -410,7 +436,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   15
          Left            =   -71400
-         TabIndex        =   35
+         TabIndex        =   31
          Top             =   1920
          Width           =   390
       End
@@ -422,7 +448,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   22
          Left            =   -74760
-         TabIndex        =   32
+         TabIndex        =   28
          Top             =   1920
          Width           =   1065
       End
@@ -434,7 +460,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   10
          Left            =   -74760
-         TabIndex        =   31
+         TabIndex        =   27
          Top             =   2400
          Width           =   1035
       End
@@ -446,7 +472,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   9
          Left            =   -69240
-         TabIndex        =   30
+         TabIndex        =   26
          Top             =   2400
          Width           =   390
       End
@@ -458,7 +484,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   21
          Left            =   -74520
-         TabIndex        =   24
+         TabIndex        =   22
          Top             =   600
          Width           =   735
       End
@@ -470,7 +496,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   20
          Left            =   -71880
-         TabIndex        =   23
+         TabIndex        =   21
          Top             =   600
          Width           =   495
       End
@@ -482,7 +508,7 @@ Begin VB.Form frmprotii
          Height          =   195
          Index           =   18
          Left            =   -74760
-         TabIndex        =   16
+         TabIndex        =   14
          Top             =   1440
          Width           =   630
       End
@@ -491,7 +517,7 @@ Begin VB.Form frmprotii
       Caption         =   "Teste (F)uncional"
       Height          =   255
       Left            =   6360
-      TabIndex        =   13
+      TabIndex        =   11
       Top             =   240
       Width           =   1455
    End
@@ -499,7 +525,7 @@ Begin VB.Form frmprotii
       Caption         =   "(T)ry Out Solda"
       Height          =   255
       Left            =   6360
-      TabIndex        =   12
+      TabIndex        =   10
       Top             =   0
       Width           =   1455
    End
@@ -507,7 +533,7 @@ Begin VB.Form frmprotii
       Caption         =   "(M)atching"
       Height          =   255
       Left            =   5400
-      TabIndex        =   11
+      TabIndex        =   9
       Top             =   240
       Width           =   975
    End
@@ -515,7 +541,7 @@ Begin VB.Form frmprotii
       Caption         =   "(G)amma"
       Height          =   255
       Left            =   5400
-      TabIndex        =   10
+      TabIndex        =   8
       Top             =   0
       Width           =   975
    End
@@ -523,7 +549,7 @@ Begin VB.Form frmprotii
       Caption         =   "(B)eta"
       Height          =   255
       Left            =   4800
-      TabIndex        =   9
+      TabIndex        =   7
       Top             =   240
       Width           =   615
    End
@@ -531,7 +557,7 @@ Begin VB.Form frmprotii
       Caption         =   "(A)Alfa"
       Height          =   255
       Left            =   4800
-      TabIndex        =   8
+      TabIndex        =   6
       Top             =   0
       Width           =   615
    End
@@ -555,38 +581,10 @@ Begin VB.Form frmprotii
       Top             =   120
       Width           =   2415
    End
-   Begin MSComCtl2.DTPicker DTPicker3 
-      Height          =   375
-      Left            =   3840
-      TabIndex        =   6
-      Top             =   600
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   123273217
-      CurrentDate     =   37686
-   End
-   Begin MSComCtl2.DTPicker DTPicker4 
-      Height          =   375
-      Left            =   6360
-      TabIndex        =   7
-      Top             =   600
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
-      _Version        =   393216
-      CheckBox        =   -1  'True
-      DateIsNull      =   -1  'True
-      Format          =   123273217
-      CurrentDate     =   37686
-   End
    Begin XPControls.XPButton Encerrar 
       Height          =   435
       Left            =   8040
-      TabIndex        =   55
+      TabIndex        =   49
       Top             =   600
       Width           =   1515
       _ExtentX        =   2672
@@ -606,7 +604,7 @@ Begin VB.Form frmprotii
    Begin XPControls.XPButton cmdClose 
       Height          =   435
       Left            =   8040
-      TabIndex        =   56
+      TabIndex        =   50
       Top             =   120
       Width           =   1515
       _ExtentX        =   2672
@@ -623,6 +621,30 @@ Begin VB.Form frmprotii
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR17.DTPicker DTPicker3 
+      Height          =   375
+      Left            =   3720
+      TabIndex        =   51
+      Top             =   600
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
+   Begin VBCCR17.DTPicker DTPicker4 
+      Height          =   375
+      Left            =   6240
+      TabIndex        =   52
+      Top             =   600
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
@@ -631,7 +653,7 @@ Begin VB.Form frmprotii
       Height          =   195
       Index           =   1
       Left            =   3720
-      TabIndex        =   50
+      TabIndex        =   44
       Top             =   120
       Width           =   345
    End
@@ -758,7 +780,7 @@ Private Sub FilRelat()
 
     MontaGridFast Grid, 4, Array(400, 1200, 400, 2000), Array("Item", "Data", "Dispo", "obs"), _
         Array("ITEM", "C$DATA", "DISPO", "OBS"), cARQ, cSQL
-    Text3.Text = PegUltGrid(Grid, 2)
+    Text3.tEXT = PegUltGrid(Grid, 2)
 
 End Sub
 
@@ -829,6 +851,3 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 
-Private Sub SSTab1_DblClick()
-
-End Sub

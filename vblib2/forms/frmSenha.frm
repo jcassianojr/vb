@@ -1,22 +1,29 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmSENHA 
    Caption         =   "Acesso ao Sistema"
-   ClientHeight    =   2175
+   ClientHeight    =   2220
    ClientLeft      =   2610
    ClientTop       =   3825
    ClientWidth     =   4830
    Icon            =   "frmSenha.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   2175
+   ScaleHeight     =   2220
    ScaleMode       =   0  'User
    ScaleWidth      =   4830
+   Begin VBCCR17.ProgressBar barra 
+      Height          =   255
+      Left            =   840
+      Top             =   1800
+      Width           =   3735
+      _ExtentX        =   6588
+      _ExtentY        =   450
+   End
    Begin XPControls.XPButton cmdOK 
       Height          =   495
       Left            =   3480
-      TabIndex        =   12
+      TabIndex        =   11
       Top             =   120
       Width           =   1215
       _ExtentX        =   2143
@@ -41,7 +48,7 @@ Begin VB.Form frmSENHA
       Picture         =   "frmSenha.frx":0724
       ScaleHeight     =   2175
       ScaleWidth      =   405
-      TabIndex        =   5
+      TabIndex        =   4
       TabStop         =   0   'False
       Top             =   0
       Width           =   405
@@ -87,27 +94,14 @@ Begin VB.Form frmSENHA
       Top             =   60
       Width           =   1695
    End
-   Begin MSComctlLib.ProgressBar Barra 
-      Height          =   375
-      Left            =   720
-      TabIndex        =   4
-      Top             =   1800
-      Width           =   3855
-      _ExtentX        =   6800
-      _ExtentY        =   661
-      _Version        =   393216
-      Appearance      =   1
-      Max             =   60
-      Scrolling       =   1
-   End
    Begin VBCCR17.SpinBox txtempresa 
-      Height          =   615
+      Height          =   495
       Left            =   840
-      TabIndex        =   9
+      TabIndex        =   8
       Top             =   1080
       Width           =   735
       _ExtentX        =   1296
-      _ExtentY        =   1085
+      _ExtentY        =   873
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   13.5
@@ -123,13 +117,13 @@ Begin VB.Form frmSENHA
       AllowOnlyNumbers=   -1  'True
    End
    Begin VBCCR17.SpinBox mes 
-      Height          =   615
+      Height          =   495
       Left            =   2160
-      TabIndex        =   10
+      TabIndex        =   9
       Top             =   1080
       Width           =   735
       _ExtentX        =   1296
-      _ExtentY        =   1085
+      _ExtentY        =   873
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   13.5
@@ -144,13 +138,13 @@ Begin VB.Form frmSENHA
       Value           =   1
    End
    Begin VBCCR17.SpinBox ano 
-      Height          =   615
+      Height          =   495
       Left            =   3360
-      TabIndex        =   11
+      TabIndex        =   10
       Top             =   1080
       Width           =   975
       _ExtentX        =   1720
-      _ExtentY        =   1085
+      _ExtentY        =   873
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   13.5
@@ -180,7 +174,7 @@ Begin VB.Form frmSENHA
       ForeColor       =   &H00C00000&
       Height          =   300
       Left            =   660
-      TabIndex        =   8
+      TabIndex        =   7
       Top             =   60
       Width           =   810
    End
@@ -199,7 +193,7 @@ Begin VB.Form frmSENHA
       ForeColor       =   &H00C00000&
       Height          =   300
       Left            =   720
-      TabIndex        =   7
+      TabIndex        =   6
       Top             =   360
       Width           =   810
    End
@@ -218,7 +212,7 @@ Begin VB.Form frmSENHA
       ForeColor       =   &H00C00000&
       Height          =   300
       Left            =   720
-      TabIndex        =   6
+      TabIndex        =   5
       Top             =   780
       Width           =   810
    End
@@ -568,14 +562,14 @@ End Sub
 'End Sub
 
 Private Sub fixuser()
-    If UCase(txtUSUARIO.Text) = "ADMLOG" Then
-        txtUSUARIO.Text = "admin"
+    If UCase(txtUSUARIO.tEXT) = "ADMLOG" Then
+        txtUSUARIO.tEXT = "admin"
     End If
-    If UCase(txtUSUARIO.Text) = "ADMINISTRA" Then
-        txtUSUARIO.Text = "admin"
+    If UCase(txtUSUARIO.tEXT) = "ADMINISTRA" Then
+        txtUSUARIO.tEXT = "admin"
     End If
-    If UCase(txtUSUARIO.Text) = "SUPERVISOR" Then
-        txtUSUARIO.Text = "admin"
+    If UCase(txtUSUARIO.tEXT) = "SUPERVISOR" Then
+        txtUSUARIO.tEXT = "admin"
     End If
 
 End Sub

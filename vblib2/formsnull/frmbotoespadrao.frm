@@ -5,10 +5,10 @@ Begin VB.Form frmbotoespadrao
    ClientHeight    =   6420
    ClientLeft      =   60
    ClientTop       =   405
-   ClientWidth     =   8190
+   ClientWidth     =   10725
    LinkTopic       =   "Form1"
    ScaleHeight     =   6420
-   ScaleWidth      =   8190
+   ScaleWidth      =   10725
    StartUpPosition =   3  'Windows Default
    Begin XPControls.XPButton XPButton6 
       Height          =   435
