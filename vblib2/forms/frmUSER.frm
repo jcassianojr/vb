@@ -3,14 +3,14 @@ Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmUSER 
    Caption         =   "Cadastro de Usuário"
-   ClientHeight    =   5535
+   ClientHeight    =   6285
    ClientLeft      =   1110
    ClientTop       =   345
    ClientWidth     =   10515
    HelpContextID   =   12
    Icon            =   "frmUSER.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5535
+   ScaleHeight     =   6285
    ScaleWidth      =   10515
    WindowState     =   2  'Maximized
    Begin VB.CommandButton CmdLibGrp 
@@ -41,7 +41,7 @@ Begin VB.Form frmUSER
       Width           =   1155
    End
    Begin VB.Frame Frame1 
-      Height          =   5205
+      Height          =   5925
       Left            =   120
       TabIndex        =   8
       Top             =   120
@@ -418,7 +418,7 @@ Begin VB.Form frmUSER
          ToolTipText     =   "Senha"
          Top             =   3000
          Visible         =   0   'False
-         Width           =   975
+         Width           =   1695
       End
       Begin VB.Frame Frame2 
          Caption         =   "Horarios Permitidos de Uso"
@@ -535,15 +535,15 @@ Begin VB.Form frmUSER
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   285
+         Height          =   405
          Index           =   0
-         Left            =   240
+         Left            =   120
          Locked          =   -1  'True
          TabIndex        =   0
          TabStop         =   0   'False
          ToolTipText     =   "Nº Usuario"
          Top             =   420
-         Width           =   735
+         Width           =   1095
       End
       Begin VB.TextBox tEXT 
          BeginProperty Font 
@@ -667,6 +667,24 @@ Begin VB.Form frmUSER
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+      End
+      Begin VB.Label LblpostelaB 
+         BackColor       =   &H00C0FFFF&
+         Caption         =   "postelab"
+         Height          =   255
+         Left            =   3360
+         TabIndex        =   59
+         Top             =   5400
+         Width           =   2655
+      End
+      Begin VB.Label Lblpostelaa 
+         BackColor       =   &H00C0FFFF&
+         Caption         =   "postelaa"
+         Height          =   255
+         Left            =   240
+         TabIndex        =   58
+         Top             =   5400
+         Width           =   3015
       End
       Begin VB.Label Label5 
          Alignment       =   2  'Center
@@ -1354,7 +1372,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
         End If
     End If
 
-       
+       '//AVAL113 E AVAL14 POSTELAA POSTELAB nao sao gravados por isso nao sao atribuidos abaixo
     If MDG("Gravar e Sair", "Gravando Usuarios") Then
         For nITEM = 0 To 6                       'Array comeca 0
             aVAL(nITEM) = tEXT(nITEM)
@@ -1365,7 +1383,8 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
         aVAL(12) = DTPicker2
         aVAL(7) = DTPicker3.Hour & ":" & DTPicker3.Minute
         aVAL(8) = DTPicker4.Hour & ":" & DTPicker4.Minute
-      
+        'volta de 15 para 13 para nao gravar postelaa postelab
+        nCAMPOS = 13
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
         GravaLog nFORMID, 0, "Gravou Usuario"
     Else
@@ -1495,18 +1514,18 @@ Private Sub Form_Load()
     IdForm = ePASS02
     zIDTEMP = ePASS02
 
-    nCAMPOS = 13
+    nCAMPOS = 15
     aCAM = Array("IDUSUARIO", "USUARIO", "SENHA", "EQUIVALENTE", _
                  "DATAULT", "IDFOLHA", "NOMEFOLHA", "HORAINI", "HORAFIM", _
-                 "ATIVO", "WEEKEND", "DATAVAL", "TROCAR")
-    aFOR = Array("N", "C", "C", "C", "D", "N", "C", "", "", "BN", "BN", "DC", "DC")
-    aPAD = Array(0, "", "", "", "", 0, "", "07:00", "18:00", False, False, Today() + 30, Today() + 60)
+                 "ATIVO", "WEEKEND", "DATAVAL", "TROCAR", "POSTELAA", "POSTELAB")
+    aFOR = Array("N", "C", "C", "C", "D", "N", "C", "", "", "BN", "BN", "DC", "DC", "C", "C")
+    aPAD = Array(0, "", "", "", "", 0, "", Now, Now, False, False, Today() + 30, Today() + 60, "", "")
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For nITEM = 0 To 6                           '' array comeca 0
         tEXT(nITEM) = aVAL(nITEM)
     Next nITEM
-    If aVAL(7) <> "" Then DTPicker3 = aVAL(7)
-    If aVAL(8) <> "" Then DTPicker4 = aVAL(8)
+    If aVAL(7) <> "" Then DTPicker3 = Date + aVAL(7) ''Adciona date pois o datapicker nao aceita vazio
+    If aVAL(8) <> "" Then DTPicker4 = Date + aVAL(8)  ''na mascara datapicker fica so  a hora
      
     chkAtivo = FixBolNum(aVAL(9))
     chkweekend = FixBolNum(aVAL(10))
@@ -1516,8 +1535,12 @@ Private Sub Form_Load()
     If IsDate(aVAL(12)) Then
         DTPicker2 = aVAL(12)
     End If
+Lblpostelaa.Caption = aVAL(13)
+LblpostelaB.Caption = aVAL(14)
+senhapos (LblpostelaB.Caption)
     Visual
 End Sub
+
 
 Private Sub Text_GotFocus(Index As Integer)
     FocusMe

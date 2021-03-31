@@ -324,16 +324,17 @@ Private Sub cmdOK_Click()
     
 21  cSQL = "select * from USUARIO WHERE USUARIO='" & zUSER & "'"
         
-22  aRETU = PegSQL(cARQ, cSQL, 12, _
+22  aRETU = PegSQL(cARQ, cSQL, 13, _
                    Array("SENHA", "ATIVO", "DATAVAL", "WEEKEND", "HORAINI", "HORAFIM", _
-                         "EQUIVALENTE", "IDUSUARIO", "IDFOLHA", "NOMEFOLHA", "TROCAR", "ID"), _
+                         "EQUIVALENTE", "IDUSUARIO", "IDFOLHA", "NOMEFOLHA", "TROCAR", "ID", "POSTELAB"), _
                          Array("C", "BF", "DN", "BF", "", "", _
-                               "", "N", "N", "C", "DH", "N"), _
+                               "", "N", "N", "C", "DH", "N", "C"), _
                                Array(Space(8), False, NullDate(), False, Null, Null, _
-                                     "", 0, 0, "", Today(), 0))
+                                     "", 0, 0, "", Today(), 0, ""))
                 
     ' ID DO USUARIO NO SISTEMA
 23  zUSERID = aRETU(7)
+    zUSERCHV = aRETU(12)
 24  If Not lRETU Then
 25      If UCase(txtUSUARIO) = "ADMIN" Or UCase(txtUSUARIO) = "ADMINISTRADOR" Or UCase(txtUSUARIO) = "SUPERVISOR" Then
             ''cria admin caso nao exista

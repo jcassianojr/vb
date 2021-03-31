@@ -40,5 +40,5 @@ Public zEMPRESACIDADE As String
 Public blnAboveVer4 As Boolean
 Public zusalx As String
 Public zusamc As String
-
+Public zUSERCHV As String
 

@@ -34,6 +34,7 @@ Begin VB.MDIForm frmPRINCIPAL
          BeginProperty Panel1 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   1
             AutoSize        =   2
+            Enabled         =   0   'False
             Object.Width           =   1058
             MinWidth        =   1058
             TextSave        =   "CAPS"
@@ -58,7 +59,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":0000
-            TextSave        =   "12:31"
+            TextSave        =   "17:02"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -66,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":059A
-            TextSave        =   "30/03/2021"
+            TextSave        =   "31/03/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -181,7 +182,11 @@ Dim carqhelp As String
     
     Center Me
     
-    frmInsertDate.Show vbModal
+'    aDIREITOS = Array(True, True, True, True, True, True, True, True)
+'    FrmRTf.Show vbModal
+
+'   aDIREITOS = Array(True, True, True, True, True, True, True, True)
+'   frmIniEditor.Show vbModal
 
 
     If App.PrevInstance Then

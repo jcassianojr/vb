@@ -1,5 +1,24 @@
 
 
+ If Picture1.Height = 0 Then
+     Alert ("Sem Imagem")
+  Else
+     PrinterEx.ShowPrintPreview Me, "MyPrintingRoutine"
+  End If
+  
+Public Sub MyPrintingRoutine()
+On Error Resume Next
+     Printer.Print
+     Printer.PaintPicture Picture1, 0, 0
+     Printer.EndDoc
+End Sub
+Public Property Get Printer() As Printer
+    Set Printer = vbExtra.Printer2
+End Property
+Public Property Set Printer(nPrinter As Printer)
+    Set vbExtra.Printer2 = nPrinter
+End Property  
+
 PrinterEx.ShowPrintPreview Me, "MyPrintingRoutine"
 Public Sub MyPrintingRoutine()
     On Error Resume Next

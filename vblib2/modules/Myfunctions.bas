@@ -818,6 +818,22 @@ Public Function FixInt(ByVal cUSO As Variant, Optional ByVal ePAD As Variant = 0
     End If
     FixInt = Int(cUSO)
 End Function
+Public Function senhapos(cPOSTELA)
+Dim cSUBTXT As String
+Dim nCHAR As Integer
+senhapos = ""
+While Len(cPOSTELA) > 0
+    cSUBTXT = Mid(cPOSTELA, Len(cPOSTELA) - 2, 3)
+    nCHAR = FixInt(cSUBTXT)
+                nCHAR = nCHAR / 2
+            nCHAR = nCHAR - 30
+
+    senhapos = senhapos + Chr(nCHAR)
+    cPOSTELA = Mid(cPOSTELA, 1, Len(cPOSTELA) - 3)
+Wend
+''//Alert (senhapos)
+End Function
+
 
 Public Function FixNum(ByVal cUSO As Variant, Optional ByVal ePAD As Variant = 0) As Variant
     Dim nPOS01, nPOS02 As Integer
@@ -1038,16 +1054,16 @@ Public Function NullDateTime(Optional ByVal cTIPO As String = "", Optional ByVal
     End Select
 End Function
 
-Public Function PadRight(ByVal cTexto, ByVal nLEN) As String
-    cTexto = cTexto & Space(nLEN)
-    cTexto = Left(cTexto, nLEN)
-    PadRight = cTexto
+Public Function PadRight(ByVal cTEXTO, ByVal nLEN) As String
+    cTEXTO = cTEXTO & Space(nLEN)
+    cTEXTO = Left(cTEXTO, nLEN)
+    PadRight = cTEXTO
 End Function
 
-Public Function PadLeft(ByVal cTexto, ByVal nLEN) As String
-    cTexto = Space(nLEN) & cTexto
-    cTexto = Right(cTexto, nLEN)
-    PadLeft = cTexto
+Public Function PadLeft(ByVal cTEXTO, ByVal nLEN) As String
+    cTEXTO = Space(nLEN) & cTEXTO
+    cTEXTO = Right(cTEXTO, nLEN)
+    PadLeft = cTEXTO
 End Function
 
 Public Function PegCamini(ByVal cCAMINHO As String) As String
@@ -1813,7 +1829,7 @@ Public Sub FocusMe()
     End If
 End Sub
 
-Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
+Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
     Dim nLEN, nTEXTO, X, Y As Integer
     Dim aORI, aDES, aTEXTO As Variant
     If IsArray(eORI) Then
@@ -1823,7 +1839,7 @@ Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eD
         aORI = StrToArray(CStr(eORI))
         aDES = StrToArray(CStr(eDES))
     End If
-    aTEXTO = StrToArray(cTexto)
+    aTEXTO = StrToArray(cTEXTO)
     nLEN = UBound(aORI)
     nTEXTO = UBound(aTEXTO)
     For Y = 0 To nTEXTO
@@ -1841,23 +1857,23 @@ Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eD
 End Function
 
 Public Function TiraOut(ByVal eVAR As Variant) As String
-    Dim cTexto As String
-    cTexto = FixStr(eVAR)
-    TiraOut = CharConv(cTexto, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
+    Dim cTEXTO As String
+    cTEXTO = FixStr(eVAR)
+    TiraOut = CharConv(cTEXTO, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
                        Array("", "", "", "", "", "", "", "", ""))
 End Function
 
 Public Function TiraOutNum(ByVal eVAR As Variant) As String ' Mantem ', . que sao usadas nos numeros
-    Dim cTexto As String
-    cTexto = FixStr(eVAR)
-    TiraOutNum = CharConv(cTexto, Array("-", ":", "/", ";", "*", "(", ")"), _
+    Dim cTEXTO As String
+    cTEXTO = FixStr(eVAR)
+    TiraOutNum = CharConv(cTEXTO, Array("-", ":", "/", ";", "*", "(", ")"), _
                           Array("", "", "", "", "", "", ""))
 End Function
 
 Public Function TiraOutAlf(ByVal eVAR As Variant) As String
-    Dim cTexto As String
-    cTexto = FixStr(eVAR)
-    TiraOutAlf = CharConv(cTexto, Array("-", ".", ":", "/", ";", "*", "(", ")", _
+    Dim cTEXTO As String
+    cTEXTO = FixStr(eVAR)
+    TiraOutAlf = CharConv(cTEXTO, Array("-", ".", ":", "/", ";", "*", "(", ")", _
                                         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", _
                                         "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", _
                                         "U", "V", "Y", "W", "X", "Z", ","), _
@@ -1967,19 +1983,19 @@ Public Function Extenso(ByVal Valor As Double, _
     End If
 End Function
 
-Public Function Txt2Lin(ByVal cTexto As String, Optional ByVal nCOL As Integer = 80) As Variant
+Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer = 80) As Variant
     Dim nLIN, X As Integer
     Dim aRETU As Variant
-    cTexto = FixStr(cTexto)
+    cTEXTO = FixStr(cTEXTO)
     If nCOL < 1 Then nCOL = 80                   'Evita Erros Divisao
-    nLIN = Int(Len(cTexto) / nCOL)
-    If nLIN * nCOL = Len(cTexto) Then            ''Bate com o Multiplo
+    nLIN = Int(Len(cTEXTO) / nCOL)
+    If nLIN * nCOL = Len(cTEXTO) Then            ''Bate com o Multiplo
     Else
         nLIN = nLIN + 1                          ''Soma mais um pois e necesario
     End If
     ReDim aRETU(nLIN)
     For X = 1 To nLIN
-        aRETU(X - 1) = Mid(cTexto, ((X - 1) * nCOL) + 1, nCOL)
+        aRETU(X - 1) = Mid(cTEXTO, ((X - 1) * nCOL) + 1, nCOL)
     Next X
     Txt2Lin = aRETU
     eRETU01 = nLIN
@@ -2216,95 +2232,95 @@ Public Function txttoRTF(ByVal cORIGEM As String, Optional ByVal cDESTINO As Str
     Close nDESTINO
 End Function
 
-Public Function str2html(ByVal cTexto As String, Optional ByVal lAnsi As Boolean = True, Optional ByVal lTudo As Boolean = True) As String
+Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean = True, Optional ByVal lTudo As Boolean = True) As String
     If lAnsi Then
-        cTexto = Replace(cTexto, "á", "&aacute;")
-        cTexto = Replace(cTexto, "Á", "&Aacute;")
-        cTexto = Replace(cTexto, "à", "&agrave;")
-        cTexto = Replace(cTexto, "À", "&Agrave;")
-        cTexto = Replace(cTexto, "é", "&eacute;")
-        cTexto = Replace(cTexto, "É", "&Eacute;")
-        cTexto = Replace(cTexto, "è", "&egrave;")
-        cTexto = Replace(cTexto, "È", "&egrave;")
-        cTexto = Replace(cTexto, "í", "&iacute;")
-        cTexto = Replace(cTexto, "Í", "&Iacute;")
-        cTexto = Replace(cTexto, "ì", "&igrave;")
-        cTexto = Replace(cTexto, "Ì", "&Igrave;")
-        cTexto = Replace(cTexto, "ó", "&oacute;")
-        cTexto = Replace(cTexto, "Ó", "&Oacute;")
-        cTexto = Replace(cTexto, "ò", "&ograve;")
-        cTexto = Replace(cTexto, "Ò", "&Ograve;")
-        cTexto = Replace(cTexto, "ú", "&uacute;")
-        cTexto = Replace(cTexto, "Ú", "&Uacute;")
-        cTexto = Replace(cTexto, "ù", "&ugrave;")
-        cTexto = Replace(cTexto, "Ù", "&Ugrave;")
-        cTexto = Replace(cTexto, "â", "&acirc;")
-        cTexto = Replace(cTexto, "Â", "&Acirc;")
-        cTexto = Replace(cTexto, "ê", "&ecirc;")
-        cTexto = Replace(cTexto, "Ê", "&Ecirc;")
-        cTexto = Replace(cTexto, "ô", "&ocirc;")
-        cTexto = Replace(cTexto, "Ô", "&Ocirc;")
-        cTexto = Replace(cTexto, "ã", "&atilde;")
-        cTexto = Replace(cTexto, "Ã", "&Atilde;")
-        cTexto = Replace(cTexto, "õ", "&otilde;")
-        cTexto = Replace(cTexto, "Õ", "&Otilde;")
-        cTexto = Replace(cTexto, "ç", "&ccedil;")
-        cTexto = Replace(cTexto, "Ç", "&Ccedil;")
-        cTexto = Replace(cTexto, "ÿ", "&yuml;")
-        cTexto = Replace(cTexto, "ö", "&ouml;")
-        cTexto = Replace(cTexto, "Ö", "&Ouml;")
-        cTexto = Replace(cTexto, "ñ", "&ntilde;")
-        cTexto = Replace(cTexto, "Ñ", "&Ntilde;")
-        cTexto = Replace(cTexto, "ü", "&uuml;")
-        cTexto = Replace(cTexto, "Ü", "&Uuml;")
-        cTexto = Replace(cTexto, "º", "&deg;")
-        cTexto = Replace(cTexto, "°", "&deg;")
-        cTexto = Replace(cTexto, "ª", "&ordf;")
+        cTEXTO = Replace(cTEXTO, "á", "&aacute;")
+        cTEXTO = Replace(cTEXTO, "Á", "&Aacute;")
+        cTEXTO = Replace(cTEXTO, "à", "&agrave;")
+        cTEXTO = Replace(cTEXTO, "À", "&Agrave;")
+        cTEXTO = Replace(cTEXTO, "é", "&eacute;")
+        cTEXTO = Replace(cTEXTO, "É", "&Eacute;")
+        cTEXTO = Replace(cTEXTO, "è", "&egrave;")
+        cTEXTO = Replace(cTEXTO, "È", "&egrave;")
+        cTEXTO = Replace(cTEXTO, "í", "&iacute;")
+        cTEXTO = Replace(cTEXTO, "Í", "&Iacute;")
+        cTEXTO = Replace(cTEXTO, "ì", "&igrave;")
+        cTEXTO = Replace(cTEXTO, "Ì", "&Igrave;")
+        cTEXTO = Replace(cTEXTO, "ó", "&oacute;")
+        cTEXTO = Replace(cTEXTO, "Ó", "&Oacute;")
+        cTEXTO = Replace(cTEXTO, "ò", "&ograve;")
+        cTEXTO = Replace(cTEXTO, "Ò", "&Ograve;")
+        cTEXTO = Replace(cTEXTO, "ú", "&uacute;")
+        cTEXTO = Replace(cTEXTO, "Ú", "&Uacute;")
+        cTEXTO = Replace(cTEXTO, "ù", "&ugrave;")
+        cTEXTO = Replace(cTEXTO, "Ù", "&Ugrave;")
+        cTEXTO = Replace(cTEXTO, "â", "&acirc;")
+        cTEXTO = Replace(cTEXTO, "Â", "&Acirc;")
+        cTEXTO = Replace(cTEXTO, "ê", "&ecirc;")
+        cTEXTO = Replace(cTEXTO, "Ê", "&Ecirc;")
+        cTEXTO = Replace(cTEXTO, "ô", "&ocirc;")
+        cTEXTO = Replace(cTEXTO, "Ô", "&Ocirc;")
+        cTEXTO = Replace(cTEXTO, "ã", "&atilde;")
+        cTEXTO = Replace(cTEXTO, "Ã", "&Atilde;")
+        cTEXTO = Replace(cTEXTO, "õ", "&otilde;")
+        cTEXTO = Replace(cTEXTO, "Õ", "&Otilde;")
+        cTEXTO = Replace(cTEXTO, "ç", "&ccedil;")
+        cTEXTO = Replace(cTEXTO, "Ç", "&Ccedil;")
+        cTEXTO = Replace(cTEXTO, "ÿ", "&yuml;")
+        cTEXTO = Replace(cTEXTO, "ö", "&ouml;")
+        cTEXTO = Replace(cTEXTO, "Ö", "&Ouml;")
+        cTEXTO = Replace(cTEXTO, "ñ", "&ntilde;")
+        cTEXTO = Replace(cTEXTO, "Ñ", "&Ntilde;")
+        cTEXTO = Replace(cTEXTO, "ü", "&uuml;")
+        cTEXTO = Replace(cTEXTO, "Ü", "&Uuml;")
+        cTEXTO = Replace(cTEXTO, "º", "&deg;")
+        cTEXTO = Replace(cTEXTO, "°", "&deg;")
+        cTEXTO = Replace(cTEXTO, "ª", "&ordf;")
     Else
         '      cTEXTO = Replace(cTEXTO, " ", "&aacute;")
-        cTexto = Replace(cTexto, "µ", "&Aacute;")
-        cTexto = Replace(cTexto, "…", "&agrave;")
-        cTexto = Replace(cTexto, "·", "&Agrave;")
-        cTexto = Replace(cTexto, "‚", "&eacute;")
-        cTexto = Replace(cTexto, "", "&Eacute;")
-        cTexto = Replace(cTexto, "Š", "&egrave;")
-        cTexto = Replace(cTexto, "Ô", "&Egrave;")
-        cTexto = Replace(cTexto, "¡", "&iacute;")
-        cTexto = Replace(cTexto, "Ö", "&Iacute;")
-        cTexto = Replace(cTexto, "", "&igrave;")
-        cTexto = Replace(cTexto, "Þ", "&Igrave;")
-        cTexto = Replace(cTexto, "¢", "&oacute;")
-        cTexto = Replace(cTexto, "à", "&Oacute;")
-        cTexto = Replace(cTexto, "•", "&ograve;")
-        cTexto = Replace(cTexto, "ã", "&Ograve;")
-        cTexto = Replace(cTexto, "£", "&uacute;")
-        cTexto = Replace(cTexto, "é", "&Uacute;")
-        cTexto = Replace(cTexto, "—", "&ugrave;")
-        cTexto = Replace(cTexto, "ë", "&Ugrave;")
-        cTexto = Replace(cTexto, "ƒ", "&acirc;")
-        cTexto = Replace(cTexto, "¶", "&Acirc;")
-        cTexto = Replace(cTexto, "ˆ", "&ecirc;")
-        cTexto = Replace(cTexto, "Ò", "&Ecirc;")
-        cTexto = Replace(cTexto, "“", "&ocirc;")
-        cTexto = Replace(cTexto, "â", "&Ocirc;")
-        cTexto = Replace(cTexto, "Æ", "&atilde;")
-        cTexto = Replace(cTexto, "Ç", "&Atilde;")
-        cTexto = Replace(cTexto, "ä", "&otilde;")
-        cTexto = Replace(cTexto, "å", "&Otilde;")
-        cTexto = Replace(cTexto, "‡", "&ccedil;")
-        cTexto = Replace(cTexto, "€", "&Ccedil;")
-        cTexto = Replace(cTexto, "˜", "&yuml;")
-        cTexto = Replace(cTexto, "”", "&ouml;")
-        cTexto = Replace(cTexto, "™", "&Ouml;")
-        cTexto = Replace(cTexto, "¤", "&ntilde;")
-        cTexto = Replace(cTexto, "¥", "&Ntilde;")
-        cTexto = Replace(cTexto, "", "&uuml;")
-        cTexto = Replace(cTexto, "š", "&Uuml;")
-        cTexto = Replace(cTexto, "§", "&deg;")
-        cTexto = Replace(cTexto, "ø", "&deg;")
-        cTexto = Replace(cTexto, "¦", "&ordf;")
+        cTEXTO = Replace(cTEXTO, "µ", "&Aacute;")
+        cTEXTO = Replace(cTEXTO, "…", "&agrave;")
+        cTEXTO = Replace(cTEXTO, "·", "&Agrave;")
+        cTEXTO = Replace(cTEXTO, "‚", "&eacute;")
+        cTEXTO = Replace(cTEXTO, "", "&Eacute;")
+        cTEXTO = Replace(cTEXTO, "Š", "&egrave;")
+        cTEXTO = Replace(cTEXTO, "Ô", "&Egrave;")
+        cTEXTO = Replace(cTEXTO, "¡", "&iacute;")
+        cTEXTO = Replace(cTEXTO, "Ö", "&Iacute;")
+        cTEXTO = Replace(cTEXTO, "", "&igrave;")
+        cTEXTO = Replace(cTEXTO, "Þ", "&Igrave;")
+        cTEXTO = Replace(cTEXTO, "¢", "&oacute;")
+        cTEXTO = Replace(cTEXTO, "à", "&Oacute;")
+        cTEXTO = Replace(cTEXTO, "•", "&ograve;")
+        cTEXTO = Replace(cTEXTO, "ã", "&Ograve;")
+        cTEXTO = Replace(cTEXTO, "£", "&uacute;")
+        cTEXTO = Replace(cTEXTO, "é", "&Uacute;")
+        cTEXTO = Replace(cTEXTO, "—", "&ugrave;")
+        cTEXTO = Replace(cTEXTO, "ë", "&Ugrave;")
+        cTEXTO = Replace(cTEXTO, "ƒ", "&acirc;")
+        cTEXTO = Replace(cTEXTO, "¶", "&Acirc;")
+        cTEXTO = Replace(cTEXTO, "ˆ", "&ecirc;")
+        cTEXTO = Replace(cTEXTO, "Ò", "&Ecirc;")
+        cTEXTO = Replace(cTEXTO, "“", "&ocirc;")
+        cTEXTO = Replace(cTEXTO, "â", "&Ocirc;")
+        cTEXTO = Replace(cTEXTO, "Æ", "&atilde;")
+        cTEXTO = Replace(cTEXTO, "Ç", "&Atilde;")
+        cTEXTO = Replace(cTEXTO, "ä", "&otilde;")
+        cTEXTO = Replace(cTEXTO, "å", "&Otilde;")
+        cTEXTO = Replace(cTEXTO, "‡", "&ccedil;")
+        cTEXTO = Replace(cTEXTO, "€", "&Ccedil;")
+        cTEXTO = Replace(cTEXTO, "˜", "&yuml;")
+        cTEXTO = Replace(cTEXTO, "”", "&ouml;")
+        cTEXTO = Replace(cTEXTO, "™", "&Ouml;")
+        cTEXTO = Replace(cTEXTO, "¤", "&ntilde;")
+        cTEXTO = Replace(cTEXTO, "¥", "&Ntilde;")
+        cTEXTO = Replace(cTEXTO, "", "&uuml;")
+        cTEXTO = Replace(cTEXTO, "š", "&Uuml;")
+        cTEXTO = Replace(cTEXTO, "§", "&deg;")
+        cTEXTO = Replace(cTEXTO, "ø", "&deg;")
+        cTEXTO = Replace(cTEXTO, "¦", "&ordf;")
     End If
-    str2html = cTexto
+    str2html = cTEXTO
 End Function
 
 Public Function Html2Str(ByVal sHTML As String, Optional ParseSpecialChars As Boolean = True) As String
