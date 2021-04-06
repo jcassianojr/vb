@@ -28,6 +28,11 @@ Public Type OPENASINFO
     oafInFlags As OPEN_AS_INFO_FLAGS
 End Type
 
+' Esta funcao abre o openwith do windows deixando escolher qual aplicativos cadastrados para a extensao
+' nao pode ser trocada por shellexecute pois ela abre o programa padrao para a extensao
+' Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd 'escolhe o aplicativo da extensao
+' ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd 'abre o aplicativo padrao da extensao
+  
 
 Public Declare Function GetBinaryType Lib "kernel32" Alias "GetBinaryTypeW" (ByVal lpApplicationName As Long, lpBinaryType As Long) As Long
 Public Const SCS_32BIT_BINARY = 0

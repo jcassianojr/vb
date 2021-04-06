@@ -133,7 +133,7 @@ Private Sub cdmrevperiodica()
                 RSTA3!PF = RSTAB("PF")
                 RSTA3!REVISAO = nREV
                 RSTA3!TIPO = "FE"
-                RSTA3!Item = 1
+                RSTA3!item = 1
                 RSTA3!motivo = "Revisão Periodica"
                 RSTA3.Update
 
@@ -166,7 +166,8 @@ Private Sub CmdLiberar_Click()
     Grid.Col = 0
     nPF = Grid
     
-    nTMPELA = PegUltSQL(Sdb, "SELECT FEMEAEF FROM PF WHERE PF=" & nPF, "FEMEAEF", 0)
+    'nTMPELA = PegUltSQL(Sdb, "SELECT FEMEAEF FROM PF WHERE PF=" & nPF, "FEMEAEF", 0)
+    nTMPELA = PegCampoSQLADO(Sdb, "SELECT FEMEAEF FROM PF WHERE PF=" & nPF, "", 0)
     If nTMPELA = zIDFOLHA Then
         Alert ("Voce ja e o Elaborador")
         Exit Sub
@@ -217,21 +218,21 @@ Private Sub FilRelat()
         .Rows = 1
         .Row = 0
         .Col = 0
-        .Text = "PF"
+        .tEXT = "PF"
         .Col = 1
-        .Text = "PF"
+        .tEXT = "PF"
         .Col = 2
-        .Text = "PAD"
+        .tEXT = "PAD"
         .Col = 3
-        .Text = "Produto"
+        .tEXT = "Produto"
         .Col = 4
-        .Text = "Descrição"
+        .tEXT = "Descrição"
         .Col = 5
-        .Text = "Lib.PF"
+        .tEXT = "Lib.PF"
         .Col = 6
-        .Text = "Lib.Femea"
+        .tEXT = "Lib.Femea"
         .Col = 7
-        .Text = "Codigo Int"
+        .tEXT = "Codigo Int"
         .ColWidth(0) = 600
         .ColWidth(1) = 300
         .ColWidth(2) = 300

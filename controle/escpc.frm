@@ -74,7 +74,9 @@ Private Sub CmdLiberar_Click()
     Dim nTMPELA
     Grid.Col = 0
     nPF = Grid
-    nTMPELA = PegUltSQL(Sdb, "SELECT PCELANUM FROM PF WHERE PF=" & nPF, "PCELANUM", 0)
+   ' nTMPELA = PegUltSQL(Sdb, "SELECT PCELANUM FROM PF WHERE PF=" & nPF, "PCELANUM", 0)
+    nTMPELA = PegCampoSQLADO(Sdb, "SELECT PCELANUM FROM PF WHERE PF=" & nPF, "", 0)
+    
     If nTMPELA = zIDFOLHA Then
         Alert ("Voce ja e o Elaborador")
         Exit Sub

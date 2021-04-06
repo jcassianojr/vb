@@ -3302,7 +3302,7 @@ End Sub
 
 Private Sub Cmdcheckfx_Click(Index As Integer)
     Dim nROWS As Integer
-    Dim x As Integer
+    Dim X As Integer
     Dim nITEM As Integer
     Dim cSQL As String
     Dim nTMPSEQ As Integer
@@ -3330,9 +3330,9 @@ Private Sub Cmdcheckfx_Click(Index As Integer)
 
 
     nROWS = GrdQsbLep.Rows - 1
-    For x = 1 To nROWS                           ' zero e o titulo do grid comeca 1
+    For X = 1 To nROWS                           ' zero e o titulo do grid comeca 1
         nITEM = 0
-        GrdQsbLep.Row = x
+        GrdQsbLep.Row = X
         GrdQsbLep.Col = 0
         nTMPSEQ = FixInt(GrdQsbLep)
         GrdQsbLep.Col = 1
@@ -3367,7 +3367,7 @@ Private Sub Cmdcheckfx_Click(Index As Integer)
                 Command1_Click 11
             End If
         End Select
-    Next x
+    Next X
     If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Then
         FilRelat (Index)
     End If
@@ -3376,13 +3376,13 @@ End Sub
 
 Private Sub CmdcheckOp_Click(Index As Integer)
     Dim nROWS As Integer
-    Dim x As Integer
+    Dim X As Integer
     Dim nITEM As Integer
     Dim cSQL As String
     Dim nTMPSEQ As Integer
     Dim nTMPSSQ As Integer
     nROWS = gridopr.Rows - 1
-    For x = 1 To nROWS                           ' zero e o titulo do grid comeca 1
+    For X = 1 To nROWS                           ' zero e o titulo do grid comeca 1
         nITEM = 0
         gridopr.Col = 1
         nTMPSEQ = FixInt(gridopr)
@@ -3403,19 +3403,19 @@ Private Sub CmdcheckOp_Click(Index As Integer)
                 Command1_Click 3
             End If
         End If
-    Next x
+    Next X
 End Sub
 
 Private Sub cmdClose_Click()
     Dim dFEMEA As Date
     Dim dPF As Date
     On Error Resume Next
-    If IsDate(TXTFIELDS(23)) And IsDate(TXTFIELDS(17)) Then
-        dFEMEA = TXTFIELDS(23)
-        If IsDate(TXTFIELDS(25)) Then
-            dFEMEA = TXTFIELDS(25)
+    If IsDate(Txtfields(23)) And IsDate(Txtfields(17)) Then
+        dFEMEA = Txtfields(23)
+        If IsDate(Txtfields(25)) Then
+            dFEMEA = Txtfields(25)
         End If
-        dPF = TXTFIELDS(17)
+        dPF = Txtfields(17)
         If dFEMEA < dPF Then
             Alert ("Data Revisao Femea Menor que Processo Fabricacao")
         End If
@@ -3423,7 +3423,7 @@ Private Sub cmdClose_Click()
     chkfemeas
   
     For iLOOP = 0 To nCAMPOS - 8
-        aVAL(iLOOP) = TXTFIELDS(iLOOP)
+        aVAL(iLOOP) = Txtfields(iLOOP)
     Next iLOOP
     aVAL(27) = FixNumBol(Check1.Value)
     aVAL(28) = FixNumBol(Check2.Value)
@@ -3432,7 +3432,7 @@ Private Sub cmdClose_Click()
     aVAL(31) = DTPicker1.Value
     
     For iLOOP = 32 To nCAMPOS - 1
-        aVAL(iLOOP) = TXTFIELDS(iLOOP)
+        aVAL(iLOOP) = Txtfields(iLOOP)
     Next iLOOP
     
     
@@ -3884,42 +3884,27 @@ End Sub
 
 Private Sub CmdIncDef_Click()
     Dim nSAC As Long
-    'Dim cDESC01, cDESC02, cDESC03, cDESC04, cPROBLEMA, cCAM As String
-    Dim cData As Variant
     Dim cCAM As String
     Dim cTITULO As String
-    Dim SACAREA As Variant
-    Dim iRETVAL As Variant
-
+   
     cTITULO = FixStr(Busca("Digite Descricao", "Descricao", Space(50), 50), "")
     If Len(cTITULO) = 0 Then
         Alert ("Necessario Digitar Descricao")
         Exit Sub
     End If
-   
-
-    cData = Format(Date, "DD/MM/YY")
+    
     cCAM = PegPath("PATH", "MANA5TGQ")
-    sx_SetEpoch (Year(Date) - 30)
-    sx_SetDateFormat BRITISH
-    sx_SetDeleted True
-    SACAREA = sx_Use(cCAM & "msrd.dbf", "sac", READWRITE, SDEFOX)
-    iRETVAL = sx_SetOrder(1)
-    sx_GoBottom
-    nSAC = FixInt(sx_GetVariant("MSRD"))
+    
+    nSAC = PegMAXSQL(GeraConn(cCAM, "FOX"), "MSRD", "MSDR", 1)
     nSAC = nSAC + 1
-    sx_AppendBlank
-    If sx_Rlock(sx_RecNo()) Then
-        sx_PutVariant "MSRD", nSAC
-        sx_PutVariant "DATA", cData
-        sx_PutVariant "PF", FixNum(TXTFIELDS(0))
-        sx_PutVariant "CODIGO", FixStr(TXTFIELDS(2))
-        sx_PutVariant "CLIENTE", FixNum(TXTFIELDS(4))
-        sx_PutVariant "DESC01", FixStr(cTITULO)
-        sx_Commit
-    End If
-    sx_Unlock sx_RecNo()
-    sx_CloseAll
+    IncluiSQL GeraConn(cCAM, "FOX"), "SELECT * FROM MSRD WHERE MSRD=" & nSAC, 6 _
+    , Array("MSRD", "DATA", "PF", "CODIGO", "CLIENTE", "DESC01") _
+    , Array(nSAC, cData, FixNum(Txtfields(0)), FixStr(Txtfields(2)), FixNum(Txtfields(4)), FixStr(cTITULO)) _
+    , False, True
+    
+    aCAMPOS = Array("MSRD", "DATA", "PF", "CODIGO", "CLIENTE", "DESC01")
+    aVALOR = Array(nSAC, Format(Date, "DD/MM/YY"), FixNum(Txtfields(0)), FixStr(Txtfields(2)), FixNum(Txtfields(4)), FixStr(cTITULO))
+    
     filgridmsrd
 End Sub
 
@@ -3951,11 +3936,12 @@ End Sub
 Private Sub CmdLiberar_Click()
     Dim sSQL As String
     sSQL = "SELECT LIGADO FROM USUCAD WHERE FORM = 'escFEMEA' AND INDICE=3 AND IDUSUARIO=" & zUSERID
-    eRETU01 = PegUltSQL(Dbname, sSQL, "LIGADO", False)
+    'eRETU01 = PegUltSQL(Dbname, sSQL, "LIGADO", False)
+    eRETU01 = PegCampoSQLADO(Dbname, sSQL, "", False)
     If eRETU01 Then
-        TXTFIELDS(13) = zIDFOLHA
-        TXTFIELDS(14) = zNOMEFOLHA
-        TXTFIELDS(24) = Today()
+        Txtfields(13) = zIDFOLHA
+        Txtfields(14) = zNOMEFOLHA
+        Txtfields(24) = Today()
         Encerrar.Visible = False
     Else
         Alert ("Sem direito")
@@ -4026,8 +4012,8 @@ Private Sub CmdNovaREV_Click()
     End If
     
     
-    If Len(TXTFIELDS(23).tEXT) > 0 Then          'corrige erro importacao protheus data em branco
-        If TXTFIELDS(23) > Today() Then
+    If Len(Txtfields(23).text) > 0 Then          'corrige erro importacao protheus data em branco
+        If Txtfields(23) > Today() Then
             Alert ("Data Revisao Anterior Maior que Data do Sistema")
             Exit Sub
         End If
@@ -4043,18 +4029,18 @@ Private Sub CmdNovaREV_Click()
         End If
     End If
     
-    If IsNumeric(TXTFIELDS(12)) Then
-        TXTFIELDS(12) = TXTFIELDS(12) + 1
+    If IsNumeric(Txtfields(12)) Then
+        Txtfields(12) = Txtfields(12) + 1
     Else
-        TXTFIELDS(12) = 1
+        Txtfields(12) = 1
     End If
-    TXTFIELDS(20) = True
-    TXTFIELDS(13) = 0
-    TXTFIELDS(14) = ""
-    TXTFIELDS(24) = ""
-    TXTFIELDS(23) = dDATAREV
+    Txtfields(20) = True
+    Txtfields(13) = 0
+    Txtfields(14) = ""
+    Txtfields(24) = ""
+    Txtfields(23) = dDATAREV
     Check1.Value = False
-    nREV = FixInt(TXTFIELDS(12))
+    nREV = FixInt(Txtfields(12))
     IncluiSQL cARQPF, "select * from rev WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), Array(FixInt(nPF), nREV, "FE", dDATAREV), True, False
     CmdProx_Click
     Filgridrev
@@ -4064,8 +4050,8 @@ Private Sub CmdNovaREV_Click()
     
     
     
-    eRETU02 = "PF:" & TXTPF.tEXT & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
+    eRETU02 = "PF:" & txtPF.text & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Desenho:" & Txtfields(2) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " Data:" & Fdata(dDATAREV) & Chr(13) & Chr(10)
     MAILENV "FEM00001", eRETU02
     
@@ -4148,8 +4134,8 @@ End Sub
 Private Sub CmdProx_Click()
 
     If femeacrg.Value = False Then
-        If IsDate(TXTFIELDS(23)) Then
-            DTPicker1.Value = CDate(TXTFIELDS(23)) + 730
+        If IsDate(Txtfields(23)) Then
+            DTPicker1.Value = CDate(Txtfields(23)) + 730
         Else
             If IsDate(DTPicker1) Then
                 DTPicker1 = DTPicker1 + 730
@@ -4337,7 +4323,7 @@ Private Sub RevisaoFemea(ByVal Index As Integer)
         'End If
         
         If FixNum(aVAL(52)) = 0 Then             'revisao do femea checar em branco pois historio pode ter varias versoes
-            aVAL(52) = FixNum(TXTFIELDS(12).tEXT)
+            aVAL(52) = FixNum(Txtfields(12).text)
         End If
         
         
@@ -4441,10 +4427,10 @@ Private Sub CmdREvi_Click(Index As Integer)
     ePASS02 = cARQFEMEA
     
     Load frmFEMEI
-    frmFEMEI.TXTFIELDS(2).Enabled = False
-    frmFEMEI.TXTFIELDS(3).Enabled = False
-    frmFEMEI.TXTFIELDS(4).Enabled = False
-    frmFEMEI.TXTFIELDS(5).Enabled = False
+    frmFEMEI.Txtfields(2).Enabled = False
+    frmFEMEI.Txtfields(3).Enabled = False
+    frmFEMEI.Txtfields(4).Enabled = False
+    frmFEMEI.Txtfields(5).Enabled = False
     frmFEMEI.cmdClose.Enabled = False
     frmFEMEI.CmdAltman.Enabled = False
     frmFEMEI.Show vbModal, Me
@@ -4455,7 +4441,7 @@ End Sub
 
 Private Sub CmdREvisarTodas_Click(Index As Integer)
     Dim nROWS
-    Dim x
+    Dim X
     Dim nIndex
     nIndex = Index
     If GridSeq(0).Rows = 0 Then
@@ -4474,11 +4460,11 @@ Private Sub CmdREvisarTodas_Click(Index As Integer)
 
     nROWS = GridSeq(0).Rows
     nROWS = nROWS - 1
-    For x = 1 To nROWS
-        GridSeq(0).Row = x
-        DizerBarra "Gerando Revisao femea " & x & "/" & nROWS
+    For X = 1 To nROWS
+        GridSeq(0).Row = X
+        DizerBarra "Gerando Revisao femea " & X & "/" & nROWS
         RevisaoFemea nIndex
-    Next x
+    Next X
     DizerBarra ""
     FilRelat 1
     If nIndex = 16 Then
@@ -4506,7 +4492,7 @@ End Sub
 
 Private Sub CmdTotFlux_Click(Index As Integer)
     Dim nROWS As Integer
-    Dim x As Integer
+    Dim X As Integer
     If Index = 1 Then
         If GridPadPF.Rows < 2 Then
             Alert "Este Femea nao utiliza Padrao"
@@ -4528,8 +4514,8 @@ Private Sub CmdTotFlux_Click(Index As Integer)
     End If
 
     nROWS = GrdQsbLep.Rows - 1
-    For x = 1 To nROWS                           ' zero e o titulo do grid comeca 1
-        GrdQsbLep.Row = x
+    For X = 1 To nROWS                           ' zero e o titulo do grid comeca 1
+        GrdQsbLep.Row = X
         Select Case Index
         Case 0
             Command1_Click 4
@@ -4540,7 +4526,7 @@ Private Sub CmdTotFlux_Click(Index As Integer)
         Case 3
             Command1_Click 9
         End Select
-    Next x
+    Next X
 
     Select Case Index
     Case 0                                       ' Command1_Click 4
@@ -4559,16 +4545,16 @@ End Sub
 
 Private Sub CmdTotPad_Click(Index As Integer)
     Dim nROWS As Integer
-    Dim x As Integer
+    Dim X As Integer
     nROWS = gridopr.Rows - 1
-    For x = 1 To nROWS                           ' zero e o titulo do grid comeca 1
-        gridopr.Row = x
+    For X = 1 To nROWS                           ' zero e o titulo do grid comeca 1
+        gridopr.Row = X
         If Index = 0 Then
             Command1_Click 2
         Else
             Command1_Click 3
         End If
-    Next x
+    Next X
 End Sub
 
 Private Sub CmdTrocaREv_Click()
@@ -4581,10 +4567,10 @@ Private Sub CmdTrocaREv_Click()
     GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
     cSQL = "select * from revI WHERE PF=" & nPF & " AND REVISAO=" & nORI & " AND TIPO='FE'"
     GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
-    TXTFIELDS(12).Enabled = True
-    TXTFIELDS(23).Enabled = True
-    TXTFIELDS(12).Locked = False
-    TXTFIELDS(23).Locked = False
+    Txtfields(12).Enabled = True
+    Txtfields(23).Enabled = True
+    Txtfields(12).Locked = False
+    Txtfields(23).Locked = False
     Filgridrev
 End Sub
 
@@ -4593,8 +4579,8 @@ Private Sub CmdVerApu_Click()
     Dim nMES
     Dim nANO As Integer
     DizerBarra "carregando apuracoes"
-    nMES = FixInt(tEXT(1))
-    nANO = FixInt(tEXT(2))
+    nMES = FixInt(text(1))
+    nANO = FixInt(text(2))
     cSQL = "SELECT PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU FROM FEMRPNT WHERE ANO=" & nANO & " AND MES=" & nMES & " AND PF=" & nPF & " ORDER BY PF,INDRIS"
     MontaGridFast Grid10, 10, Array(400, 400, 400, 400, 400, 400, 400, 300, 2500, 2500), Array("PF", "ITEM", "RPN", "NºPro", "NºFal", "NºEfe", "NºCau", "Man", "Efeito", "Causa"), Array("PF", "ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
     DizerBarra "carregando apuracoes RPN"
@@ -4757,17 +4743,17 @@ End Sub
 
 Private Sub Command10_Click(Index As Integer)
     Dim nROWS
-    Dim x
+    Dim X
     If GridSeq(1).Rows = 0 Then
         Exit Sub
     End If
     nROWS = GridSeq(1).Rows
     nROWS = nROWS - 1
-    For x = 1 To nROWS
-        GridSeq(1).Row = x
-        DizerBarra "Movendo femea " & x & "/" & nROWS
+    For X = 1 To nROWS
+        GridSeq(1).Row = X
+        DizerBarra "Movendo femea " & X & "/" & nROWS
         CmdRevFemea_Click 14 + Index
-    Next x
+    Next X
     DizerBarra ""
     FilRelat 1
     FilRelat 2
@@ -4787,7 +4773,7 @@ End Sub
 
 Private Sub Command13_Click()
     Dim nROWS
-    Dim x
+    Dim X
     Dim cSQL As String
     If GridPadPF.Rows = 0 Then
         Exit Sub
@@ -4797,11 +4783,11 @@ Private Sub Command13_Click()
     End If
     nROWS = GridPadPF.Rows
     nROWS = nROWS - 1
-    For x = 1 To nROWS
-        DizerBarra "Movendo femea padrao" & x & "/" & nROWS
-        GridPadPF.Row = x
+    For X = 1 To nROWS
+        DizerBarra "Movendo femea padrao" & X & "/" & nROWS
+        GridPadPF.Row = X
         CmdExcPFPad_Click 2
-    Next x
+    Next X
     DizerBarra "Excluindo complementares"
     cSQL = "select * from FEMPF WHERE  PF=" & nPF
     ApagaSQL cARQFEMEA, cSQL
@@ -4825,11 +4811,11 @@ End Sub
 Private Sub Command15_Click()
     Dim cDIZ
     Encerrar.Visible = False
-    cDIZ = "PF: " & nPF & "Revisao: " & TXTFIELDS(16) & " Nao necessita revisar femea"
-    nREV = FixInt(TXTFIELDS(12))
+    cDIZ = "PF: " & nPF & "Revisao: " & Txtfields(16) & " Nao necessita revisar femea"
+    nREV = FixInt(Txtfields(12))
     XComMotInc_Click (cDIZ)
     Check1.Value = False
-    TXTFIELDS(25) = Today()
+    Txtfields(25) = Today()
     cmdClose_Click
 End Sub
 
@@ -4944,11 +4930,11 @@ End Sub
 
 Private Sub Command3_Click()
     If MDG("Gravar Elaborador", "Confirme Gravação") Then
-        frmfemea.TXTFIELDS(6) = zIDFOLHA
-        frmfemea.TXTFIELDS(9) = zNOMEFOLHA
-        TXTFIELDS(22) = Date
-        If IsNull(TXTFIELDS(23)) Or TXTFIELDS(23) = "" Then
-            TXTFIELDS(23) = Date
+        frmfemea.Txtfields(6) = zIDFOLHA
+        frmfemea.Txtfields(9) = zNOMEFOLHA
+        Txtfields(22) = Date
+        If IsNull(Txtfields(23)) Or Txtfields(23) = "" Then
+            Txtfields(23) = Date
         End If
     End If
 End Sub
@@ -5012,14 +4998,14 @@ End Sub
 Private Sub Command5_Click()
     Encerrar.Visible = False
     CmdNovaREV_Click
-    nREV = FixInt(TXTFIELDS(12))
+    nREV = FixInt(Txtfields(12))
     XComMotInc_Click ("Revisão Periodica")
     Filgridrevi (0)
     
     Command3_Click
     
     eRETU02 = "PF:" & nPF & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Desenho:" & Txtfields(2) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
     MAILENV "FEM00001", eRETU02
     
@@ -5050,7 +5036,7 @@ Private Sub Command8_Click()
     Dim cDIZ As String
     Dim nROWS
     Dim nTMPFAL
-    Dim x As Integer
+    Dim X As Integer
     On Error Resume Next
 
     If aNUM(0) = 0 Then
@@ -5070,13 +5056,13 @@ Private Sub Command8_Click()
     End If
     nROWS = GRIDFAL.Rows - 1
     GRIDFAL.Col = 1
-    For x = 0 To nROWS
-        GRIDFAL.Row = x
+    For X = 0 To nROWS
+        GRIDFAL.Row = X
         nTMPFAL = FixInt(GRIDFAL)
         If nTMPFAL > 0 Then
             GERAFEMEAPAD aNUM(0), nTMPFAL, FixInt(nPF), cDIZ
         End If
-    Next x
+    Next X
     filgridpadpf
     FILGRIdPAD
 
@@ -5142,7 +5128,7 @@ End Sub
 Private Sub EditSeq_Click(Index As Integer)
 
     ePASS03 = Index                              'Para usar com o revisao abaixo 'atualizacao de versao
-    ePASS04 = TXTFIELDS(12)                      ''REVISAO PF
+    ePASS04 = Txtfields(12)                      ''REVISAO PF
 
     If Index = 3 And (Not AcessaMenu("FemeaGP12", 1)) Then Exit Sub
     If Index = 0 And (Not AcessaMenu("FemeaPro", 1)) Then Exit Sub
@@ -5377,9 +5363,9 @@ Private Sub escidfolha_Click(Index As Integer)
     If lRETU Then
         Select Case Index
         Case 0, 10
-            TXTFIELDS(7).tEXT = TXTFIELDS(7).tEXT & " , " & Trim(MMCase(eRETU02))
+            Txtfields(7).text = Txtfields(7).text & " , " & Trim(MMCase(eRETU02))
         Case 1, 11
-            TXTFIELDS(8).tEXT = TXTFIELDS(8).tEXT & " , " & Trim(MMCase(eRETU02))
+            Txtfields(8).text = Txtfields(8).text & " , " & Trim(MMCase(eRETU02))
         End Select
     End If
 End Sub
@@ -5393,14 +5379,14 @@ Private Sub ESCprofin_Click(Index As Integer)
     If Index = 2 Then
         ePASS01 = "MICRO"
     End If
-    If Len(TXTFIELDS(61)) = 0 Then
-        cCHAVEBUS = TXTFIELDS(60)
+    If Len(Txtfields(61)) = 0 Then
+        cCHAVEBUS = Txtfields(60)
     Else
-        cCHAVEBUS = TXTFIELDS(61)
+        cCHAVEBUS = Txtfields(61)
     End If
     escms01.Show vbModal, Me
     If lRETU Then
-        TXTFIELDS(61) = eRETU01
+        Txtfields(61) = eRETU01
     End If
     cCHAVEBUS = ""
 End Sub
@@ -5411,7 +5397,7 @@ End Sub
 
 Private Sub Form_Load()
     Center Me
-    TXTPF = nPF
+    txtPF = nPF
     aNUM = Array(0, 0, 0, 0)
     aDIZ = Array("", "", "", "")
     cARQFEMEA = PegPath("PATH", "FEMEA")
@@ -5447,7 +5433,7 @@ Private Sub Form_Load()
                  "", "", "", "")
     aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 8
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
+        Txtfields(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     
     
@@ -5462,7 +5448,7 @@ Private Sub Form_Load()
     End If
     
     For iLOOP = 32 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
+        Txtfields(iLOOP) = aVAL(iLOOP)
     Next iLOOP
 
     
@@ -5475,8 +5461,8 @@ Private Sub Form_Load()
     cORDREVI = "FXSEQ,FXSSQ,FXITEM,FXITEMS,FEMEAREV"
     
     Filopr                                       'antes das relat
-    tEXT(1) = CStr(Month(Date))
-    tEXT(2) = CStr(Year(Date))
+    text(1) = CStr(Month(Date))
+    text(2) = CStr(Year(Date))
     FilQSBLEP
     FilRelat (0)
     FilRelat (1)
@@ -5492,10 +5478,10 @@ Private Sub Form_Load()
     filgridpadpf
     FILGRIdpfrev
     If zUSER = "ADMIN" Then
-        TXTFIELDS(12).Enabled = True
-        TXTFIELDS(12).Locked = False
-        TXTFIELDS(23).Enabled = True
-        TXTFIELDS(23).Locked = False
+        Txtfields(12).Enabled = True
+        Txtfields(12).Locked = False
+        Txtfields(23).Enabled = True
+        Txtfields(23).Locked = False
     Else
         CmdApaRev.Visible = False
         CmdTrocaREv.Visible = False
@@ -5672,19 +5658,19 @@ Private Sub FILGRIdPAD()
 End Sub
 
 Private Sub maisano_Click()
-    tEXT(2) = CStr(IncDec(tEXT(2), 1, 1900, 2300))
+    text(2) = CStr(IncDec(text(2), 1, 1900, 2300))
 End Sub
 
 Private Sub maismes_Click()
-    tEXT(1) = CStr(IncDec(tEXT(1), 1, 1, 12))
+    text(1) = CStr(IncDec(text(1), 1, 1, 12))
 End Sub
 
 Private Sub menosano_Click()
-    tEXT(2) = CStr(IncDec(tEXT(2), -1, 1900, 2300))
+    text(2) = CStr(IncDec(text(2), -1, 1900, 2300))
 End Sub
 
 Private Sub menosmes_Click()
-    tEXT(1) = CStr(IncDec(tEXT(1), -1, 1, 12))
+    text(1) = CStr(IncDec(text(1), -1, 1, 12))
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -5743,7 +5729,7 @@ Private Function eproducao()
         Alert "Ja Passou para producao"
         eproducao = True
     Else
-        If TXTFIELDS(26).tEXT = "P" Then
+        If Txtfields(26).text = "P" Then
             Alert "O Processo de Fabricao ja e TIPO (P) producao"
             eproducao = True
         End If

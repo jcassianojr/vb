@@ -44,7 +44,6 @@ mFileAPI = 0, 0, 0, 0, C
 Myfunctions = 38, 83, 1345, 620, C
 sqlfuncoes = 143, 85, 1285, 617, C
 SqlFuncoesAdo = 81, 33, 1319, 672, C
-sqlSde = -99, 176, 1287, 815, C
 Toolbarlib = 0, 0, 0, 0, C
 xoldTool = 0, 0, 0, 0, C
 clsCommonDialogs = 130, 130, 1276, 564, C

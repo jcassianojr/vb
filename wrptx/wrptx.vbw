@@ -39,7 +39,6 @@ Toolbarlib = 0, 0, 0, 0, C
 jpgpicture = 0, 0, 0, 0, C
 xoldTool = 0, 0, 0, 0, C
 SqlFuncoesAdo = 0, 0, 0, 0, C
-sqlSde = 0, 0, 0, 0, C
 FrmCrwENG = 0, 0, 0, 0, C, 78, 78, 1224, 512, C
 FrmCrwENGViewer = 0, 0, 0, 0, C, 104, 104, 1250, 538, C
 clsOSInfo = 182, 182, 1328, 616, C

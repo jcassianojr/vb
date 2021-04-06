@@ -9,7 +9,7 @@ Attribute VB_Name = "AdoLib"
 'const JET_ENGINETYPE abaixo
 'DoConvertMDB "C:\data\MyDB97.MDB", "C:\data\MyDB2000.MDB", Jet4x
 'Sub DoConvertMDB(SourceDB, DestDB, Format)
-    'Dim Engine
+    'Dim EngineS
 '    Set Engine = CreateObject("JRO.JetEngine")
 '    Engine.CompactDatabase "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & SourceDB, _
 '      "Provider=Microsoft.Jet.OLEDB.4.0;Jet OLEDB:Engine Type=" & Format & ";Data Source=" & DestDB
@@ -73,14 +73,15 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
         GeraConn = "[JETMDB]" & cARQ
         Exit Function
     End If
-    If cTIPO = "JETFOX" Or cTIPO = "FOX" Or cTIPO = "DBF" Then
+    If cTIPO = "JETFOX" Or cTIPO = "FOX" Or cTIPO = "DBF" Or cTIPO = "SDECDX" Or cTIPO = "SDEFOX" Then
         GeraConn = "[JETFOX]" & cARQ
         Exit Function
     End If
-    If cTIPO = "SDECDX" Or cTIPO = "SDEFOX" Then
-        GeraConn = "[SDECDX]" & cARQ
-        Exit Function
-    End If
+  ' acima usa fox
+ '   If cTIPO = "SDECDX" Or cTIPO = "SDEFOX" Then
+ '       GeraConn = "[SDECDX]" & cARQ
+ '       Exit Function
+ '   End If
     If cTIPO = "A16MDB" Or cTIPO = "A16JETMDB" Then
         GeraConn = "[A16MDB]" & cARQ
         Exit Function
@@ -118,16 +119,16 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
             GeraConn = "[JETDBFIII]" & cARQ
         Case "ADSDX"
             GeraConn = "[ADSCDX]" & cARQ
-        Case "ADSNTX"
+        Case "ADSNTX" Or "SDENTX"
             GeraConn = "[ADSNTX]" & cARQ
         Case "ADSADT"
             GeraConn = "[ADSADT]" & cARQ
         Case "ADSVFP"
             GeraConn = "[ADSVFP]" & cARQ
-        Case "SDENTX"
-            GeraConn = "[SDENTX]" & cARQ
-        Case "SDENSX"
-            GeraConn = "[SDENSX]" & cARQ
+        'Case "SDENTX" 'usa adsacima
+        '    GeraConn = "[SDENTX]" & cARQ
+        'Case "SDENSX" 'pouco uso nsx mais verificar opcoes futuramente
+        '    GeraConn = "[SDENSX]" & cARQ
         Case "PDX3"
             GeraConn = "[JETPDX3]" & cARQ
         Case "PDX4"
@@ -201,8 +202,10 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
         Exit Function                            '' encerra agilizar
     End If
     'jetfox
-    If InStr(cARQTMP, "[JETFOX]") > 0 Then
+    If InStr(cARQTMP, "[JETFOX]") > 0 Or InStr(cARQTMP, "[SDECDX]") > 0 Then
         cARQ = Replace(cARQ, "[JETFOX]", "")
+        cARQ = Replace(cARQ, "[SDECDX]", "")
+        
         ' PROVIDER=VFPOLEDB.1;Data Source=caminho
         ' ;SourceType=dbf;Deleted=Yes;Mode=ReadWrite|Share Deny None;Mode=Share Deny None
         ' ;DELETED=True;CODEPAGE=1252;MVCOUNT=16384;ENGINEBEHAVIOR=90
@@ -227,21 +230,23 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
         Exit Function
     End If
     'sde
-    If InStr(cARQTMP, "[SDE") > 0 Then
-        'sdecdx
-        If InStr(cARQTMP, "[SDECDX]") > 0 Then
-            TipoConn = Array("SDE", cARQ, "SDECDX")
-            Exit Function
-        End If
-        If InStr(cARQTMP, "[SDENTX]") > 0 Then
-            TipoConn = Array("SDE", cARQ, "SDENTX")
-            Exit Function
-        End If
-        If InStr(cARQTMP, "[SDENSX]") > 0 Then
-            TipoConn = Array("SDE", cARQ, "SDENSX")
-            Exit Function
-        End If
-    End If
+    'If InStr(cARQTMP, "[SDE") > 0 Then
+        'acima agora e jetfox
+       ' If InStr(cARQTMP, "[SDECDX]") > 0 Then
+       '     TipoConn = Array("SDE", cARQ, "SDECDX")
+       '     Exit Function
+       ' End If
+       'agora usa adsnxt
+     '   If InStr(cARQTMP, "[SDENTX]") > 0 Then
+      '      TipoConn = Array("SDE", cARQ, "SDENTX")
+      '      Exit Function
+      '  End If
+      ' pouco uso de indices nsx mas ver outra solucao ou converter via dbu
+      '  If InStr(cARQTMP, "[SDENSX]") > 0 Then
+      '      TipoConn = Array("SDE", cARQ, "SDENSX")
+      '      Exit Function
+      '  End If
+    'End If
     If InStr(cARQTMP, "[XLSDRV]") > 0 Then
         cARQ = Replace(cARQ, "[XLSDRV]", "")
         cARQ = "DRIVER=Microsoft Excel Driver (*.xls);" & "DBQ=" & cARQ
@@ -337,8 +342,8 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
           cADSTIP = "ADS_CDX"
           cADSNOM = "ADSCDX"
         End If
-        If InStr(cARQTMP, "[ADSNTX]") > 0 Then
-          cADSTIP = "ADS_CDX"
+        If InStr(cARQTMP, "[ADSNTX]") > 0 Or InStr(cARQTMP, "[SDENTX]") > 0 Then
+          cADSTIP = "ADS_NTX"
           cADSNOM = "ADSCDX"
         End If
         If InStr(cARQTMP, "[ADSADT]") > 0 Then
@@ -635,5 +640,229 @@ Public Function ADORsStatus(ByRef eSTATUS)
     End Select
 
 End Function
+
+Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String = "")
+    Dim errorObject As ADODB.error
+    For Each errorObject In oErro
+        cERRO = cERRO & " Ado Erro Numero: " & errorObject.Number & vbCrLf
+        cERRO = cERRO & " Ado Descricao  : " & errorObject.Description & vbCrLf
+        cERRO = cERRO & " Ado Fonte      : " & errorObject.Source & vbCrLf
+        cERRO = cERRO & " Ado SQL        : " & errorObject.SQLState & vbCrLf
+        cERRO = cERRO & " Ado Erro Nativo: " & errorObject.NativeError & vbCrLf
+    Next
+    SayErro cERRO, True
+End Function
+
+Public Function ADO_IsRecordsetEmpty(ByRef oRS As ADODB.Recordset) As Boolean
+    Dim cERRO As String
+    On Error GoTo trataerro
+    ADO_IsRecordsetEmpty = False
+    If Not ADO_IsOpen(oRS) Then
+        ADO_IsRecordsetEmpty = True
+        Exit Function
+    End If
+    If oRS.EOF And oRS.BOF Then
+        ADO_IsRecordsetEmpty = True
+        Exit Function
+    End If
+    If oRS.RecordCount = 0 Then
+        ADO_IsRecordsetEmpty = True
+        Exit Function
+    End If
+    Exit Function
+trataerro:
+    cERRO = "ADO_IsRecordsetEmpty"
+    cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
+    Select Case Err.Number
+    Case Else
+        ADOErro oRS.ActiveConnection.Errors, cERRO
+    End Select
+End Function
+
+Public Function ADO_FieldValueToString(ByRef FLD As ADODB.Field, Optional ByVal sNullRepresentation As String = "(null)") As String
+    'Call TraceEnters(MODULE_NAME & "::ADO_FieldValueToString")
+    'TraceDetail = "To convert the value of a field into a string"
+    On Error GoTo trataerro
+  
+  ADO_FieldValueToString = ""
+    Select Case (FLD.Type)
+        '~~~~~~
+    Case adBSTR, adChar, adVarChar, adVarWChar, adWChar, adLongVarChar, adLongVarWChar, adGUID:
+        ADO_FieldValueToString = nZ(FLD.Value, sNullRepresentation)
+        '~~~~~~
+    Case adBigInt, adCurrency, adDecimal, adDouble, adInteger, adNumeric, adSingle, adSmallInt, adTinyInt, adUnsignedBigInt, adUnsignedInt, adUnsignedSmallInt, adUnsignedTinyInt, adBoolean:
+        ADO_FieldValueToString = Format(nZ(FLD.Value, sNullRepresentation))
+        '~~~~~~
+    Case adVariant:
+        ADO_FieldValueToString = Format(nZ(FLD.Value, sNullRepresentation))
+        '~~~~~~
+    Case adDate, adDBDate, adDBTime, adDBTimeStamp:
+        ADO_FieldValueToString = Format(nZ(FLD.Value, sNullRepresentation))
+        '~~~~~~
+    Case adBinary, adVarBinary, adLongVarBinary:
+        ADO_FieldValueToString = IIf(IsNull(FLD.Value), sNullRepresentation, BytesToHexString(FLD.Value))
+        '~~~~~~
+    Case Else:
+        'Err.Raise 13, MODULE_NAME & "::ADO_FieldValueToString", "Sorry, unable to convert fields of type " & fld.Type & ", (" & ADO_DataTypeEnumToEnglish(fld.Type) & ") to string."
+    End Select
+    Exit Function
+trataerro:
+    SayErro "ADO_FieldValueToString"
+    Exit Function
+End Function
+
+Public Sub ADO_FreeRecordset(ByRef rs As ADODB.Recordset)
+    On Error Resume Next
+    If rs.State = adStateOpen Then
+        rs.Close
+    End If
+    Set rs = Nothing
+    On Error GoTo 0
+End Sub
+
+Public Function ADO_IsOpen(ByRef oADOObject As Object) As Boolean
+    ' Purpose: To determine if a connection or a recordset is open
+    ' !! Assumes/Pre: Nothing
+    ' Parameters:
+    '  oADOObject as Object  -
+    ' Returns: Boolean
+    '       Success-
+    '       Failure- Raises error on failure
+    ' Revision history:
+    '   2004-Feb-20 10:47 [Michael Johnson] Initial creation
+    'Call TraceEnters(MODULE_NAME & "::ADO_IsOpen")
+    'TraceDetail = "To determine if a connection or a recordset is open"
+    On Error GoTo trataerro
+  
+   ADO_IsOpen = False
+    If oADOObject Is Nothing Then
+        Exit Function
+    End If
+  
+    If oADOObject.State = adStateOpen Then
+        ADO_IsOpen = True
+        Exit Function
+    End If
+    Exit Function
+
+trataerro:
+    SayErro "ADO_ISOPEN"
+  
+End Function
+
+Public Function nZ( _
+       vValue As Variant, _
+       Optional vReplacementIfNull As Variant = 0 _
+       ) As Variant
+    ' Purpose: To replace a NULL with another value, if the value is Null.
+    ' Example/Note:     sResult = Nz(rs.Fields(sFieldName), "") ' See MS Access VBA for Nz documentation
+    ' !! Assumes/Pre: Nothing
+    ' Parameters:
+    '   vValue- Value to evaluate if null
+    '   vReplacementIfNull - What should replace a Null value
+    ' Returns: Variant
+    '       Success- If not null, returns the supplied value, else returns the replacement
+    '       Failure- Raises error on failure
+    ' Revision history:
+    '   Michael Johnson     2002-Mar-12 1243     Initial creation
+    '   2003-Aug-22 10:17 [Michael B. Johnson] Abreviated and changed to variants
+    '   2004-Feb-18 16:36 [Michael B. Johnson] Changed from using TypeName() to IsNull()
+    'Call TraceEnters(MODULE_NAME & "::Nz")
+    'TraceDetail = "To replace a NULL with a string, if the value is Null."
+  
+    If IsNull(vValue) Then
+        nZ = vReplacementIfNull
+    Else
+        nZ = vValue
+    End If
+  
+    Exit Function
+End Function
+
+Public Function BytesToHexString(vaBytes As Variant) As String
+    ' Purpose: To translate a Byte() Array into human readable Format
+    ' Example/Note: BytesToHexString
+    ' !! Assumes/Pre: Nothing
+    ' Parameters:
+    '   vaBytes - Variant byte array
+    ' Returns: String
+    '       Success- String with leading "0x" to denote hexadecimal format.
+    '       Failure- Raises error on failure
+    ' Dependencies: None
+    '        mod->Sub
+    ' Revision history:
+    '   Michael Johnson     2000/Aug/01 13:51     Initial creation
+    On Error GoTo trataerro
+    
+    Dim sAccumulator As String, lCtr As Long
+    Dim sHex As String, sFormatted As String
+    
+    BytesToHexString = ""
+    If Not TypeName(vaBytes) = "Byte()" Then
+        BytesToHexString = ""
+        Exit Function
+    End If
+    
+    For lCtr = 0 To UBound(vaBytes)
+        sHex = Hex(vaBytes(lCtr))
+        sFormatted = Format(sHex, "@@")
+        sAccumulator = sAccumulator & Replace(sFormatted, " ", "0")
+    Next
+    sAccumulator = "0x" & sAccumulator
+    BytesToHexString = sAccumulator
+    Exit Function
+trataerro:
+    BytesToHexString = ""
+    Exit Function
+End Function
+Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTabela As String, Optional ByVal lMES As Boolean = True) As Boolean
+    Dim oCat As ADOX.Catalog
+    Dim oTabela As ADOX.Table
+    On Error GoTo trataerro
+
+    TemTabelaADO = False
+    Set oCat = New ADOX.Catalog
+    oCat.ActiveConnection = cARQ
+
+    For Each oTabela In oCat.Tables
+        If UCase(oTabela.Name) = UCase(cTabela) Then
+            TemTabelaADO = True
+            Exit For
+        End If
+    Next
+
+    If lMES And Not TemTabelaADO Then
+        Alert ("Tabela nao Encontrada" & cTabela & Chr(13) & Chr(10) & cARQ)
+    End If
+trataerro:
+    Select Case Err.Number
+    Case Else
+        SayErro "Tem Tabela Ado :" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTabela & Chr(13) & Chr(10)
+        Exit Function
+    End Select
+
+End Function
+
+Public Function AdoNewTable(ByVal cARQORI As String, Optional ByVal lCRIA As Boolean = False, _
+                            Optional ByVal Ntipo As Integer = 5) As Boolean
+    Dim cat As New ADOX.Catalog
+    On Error GoTo trataerro
+    AdoNewTable = False
+    If Not FileExist(cARQORI, True) Then
+        If lCRIA Or MDG("Criar Arquivo " & cARQORI) Then
+            cat.Create "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & cARQORI & _
+                       ";Jet OLEDB:Engine Type=" & Ntipo & ";"
+            AdoNewTable = True
+        End If
+    End If
+    Exit Function
+trataerro:
+    Select Case Err.Number
+    Case Else
+        SayErro "ADO Novo Arquivo Access/MDB:" & Chr(13) & Chr(10) & cARQORI
+        Exit Function
+    End Select
+End Function
+
 
 

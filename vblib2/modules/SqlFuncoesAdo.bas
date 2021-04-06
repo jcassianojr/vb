@@ -1,6 +1,10 @@
 Attribute VB_Name = "SqlFuncoesAdo"
 Option Explicit
-Public Function VFPSetValues(ByRef oCON As ADODB.Connection)
+Public Function VFPSetValues(ByRef oCON As Object) As Boolean ''as ADODB.Connection as object
+ 'VFPSetValues DB
+ 'VFPSetValues ODB
+ 'VFPSetValues oCONN
+   
     Dim cCOM As String
     Dim oCOMANDO As ADODB.Command
     
@@ -22,14 +26,9 @@ Public Function VFPSetValues(ByRef oCON As ADODB.Connection)
      cCOM = "set null off"
      oCOMANDO.CommandText = cCOM
      oCOMANDO.Execute
-    
-
     VFPSetValues = True
 
 End Function
-
-
-
 Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVal cCOMANDO As String) As Boolean
     Dim cCOM As String
     Dim oCON As ADODB.Connection
@@ -58,7 +57,7 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVa
     oCOMANDO.CommandType = adCmdText
     oCOMANDO.ActiveConnection = oCON
     
-    'para pack e zap considera todos
+    'para pack e zap considera todos necessario setar aqui pois na string de conecao esta marcado delete on
     If cCOMANDO = "ZAP" Or cCOMANDO = "PACK" Then
        cCOM = "set deleted off"
        oCOMANDO.CommandText = cCOM
@@ -107,35 +106,6 @@ trataerro:
         Exit Function
     End Select
 End Function
-
-Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTabela As String, Optional ByVal lMES As Boolean = True) As Boolean
-    Dim oCat As ADOX.Catalog
-    Dim oTabela As ADOX.Table
-    On Error GoTo trataerro
-
-    TemTabelaADO = False
-    Set oCat = New ADOX.Catalog
-    oCat.ActiveConnection = cARQ
-
-    For Each oTabela In oCat.Tables
-        If UCase(oTabela.Name) = UCase(cTabela) Then
-            TemTabelaADO = True
-            Exit For
-        End If
-    Next
-
-    If lMES And Not TemTabelaADO Then
-        Alert ("Tabela nao Encontrada" & cTabela & Chr(13) & Chr(10) & cARQ)
-    End If
-trataerro:
-    Select Case Err.Number
-    Case Else
-        SayErro "Tem Tabela Ado :" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTabela & Chr(13) & Chr(10)
-        Exit Function
-    End Select
-
-End Function
-
 Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolean
     Dim aRETU As Variant
     Dim oDB As ADODB.Connection
@@ -173,28 +143,6 @@ trataerro:
         Exit Function
     End Select
 End Function
-
-Public Function AdoNewTable(ByVal cARQORI As String, Optional ByVal lCRIA As Boolean = False, _
-                            Optional ByVal Ntipo As Integer = 5) As Boolean
-    Dim cat As New ADOX.Catalog
-    On Error GoTo trataerro
-    AdoNewTable = False
-    If Not FileExist(cARQORI, True) Then
-        If lCRIA Or MDG("Criar Arquivo " & cARQORI) Then
-            cat.Create "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & cARQORI & _
-                       ";Jet OLEDB:Engine Type=" & Ntipo & ";"
-            AdoNewTable = True
-        End If
-    End If
-    Exit Function
-trataerro:
-    Select Case Err.Number
-    Case Else
-        SayErro "ADO Novo Arquivo Access/MDB:" & Chr(13) & Chr(10) & cARQORI
-        Exit Function
-    End Select
-End Function
-
 Public Function APAGASQLADO(ByVal cARQ As String, ByVal cSQL As String) As Boolean
     Dim nPOS As Integer
     Dim cNOME As String
@@ -235,7 +183,8 @@ Public Function APAGASQLADO(ByVal cARQ As String, ByVal cSQL As String) As Boole
 End Function
 
 Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM As Variant) As Variant
-
+'esta faz soma com loop
+'use pegsumsql se o loop nao for necessario
     Dim oDB              As ADODB.Connection
     Dim oRS              As ADODB.Recordset
     Dim lOPEN As Boolean
@@ -820,30 +769,50 @@ errhandler:
         PegSQLAdo = aPAD
     End Select
 End Function
-
 Public Function PegCountSQLADO(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-    Dim aRETU As Variant
-    Dim cSQL As String
-    PegCountSQLADO = eDEFAULT
-    cSQL = "SELECT count(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
-    aRETU = PegSQLAdo(cARQ, cSQL, 1, Array("CAMPO"), Array(""), Array(eDEFAULT))
-    If lRETU Then
-        PegCountSQLADO = aRETU(0)
-    End If
+    PegCountSQLADO = PegOperSQLADO(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "COUNT")
 End Function
-
+Public Function PegMINSQLADO(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    PegMINSQLADO = PegOperSQLADO(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "MIN")
+End Function
 Public Function PegMAXSQLADO(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    PegMAXSQLADO = PegOperSQLADO(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "MAX")
+End Function
+Public Function PegSUMSQLADO(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+  PegSUMSQLADO = PegOperSQLADO(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "SUM")
+End Function
+Public Function PegCampoSQLADO(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+  PegCampoSQLADO = PegOperSQLADO(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "CAMPO")
+End Function
+Public Function PegOperSQLADO(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, ByVal coper As String) As Variant
     Dim aRETU As Variant
     Dim cSQL As String
-    PegMAXSQLADO = eDEFAULT
-    cSQL = "SELECT MAX(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
-    aRETU = PegSQLAdo(cARQ, cSQL, 1, Array("CAMPO"), Array(""), Array(eDEFAULT))
+    PegOperSQLADO = eDEFAULT
+    
+    
+    If coper = "CAMPO" Then
+       If Len(cCAMPO) = 0 Then 'Passado a string ja com o campo select numero from tabela where numero=999999
+          cTABLEWHERE = UCase(cTABLEWHERE)
+          cSQL = Replace(cTABLEWHERE, " FROM ", " AS CAMPO FROM ") 'inclui as campo variavel padrao no pegsql abaixo
+       Else
+          cSQL = "SELECT " & cCAMPO & " AS CAMPO FROM " & cTABLEWHERE
+       End If
+    Else
+       cSQL = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
+    End If
+    If coper = "SUM" Or coper = "COUNT" Or coper = "MAX" Or coper = "MIN" Or IsNumeric(eDEFAULT) Then
+       aRETU = PegSQLAdo(cARQ, cSQL, 1, Array("CAMPO"), Array("N"), Array(eDEFAULT)) ''array retorno tipo N numerico
+    Else
+       aRETU = PegSQLAdo(cARQ, cSQL, 1, Array("CAMPO"), Array(""), Array(eDEFAULT))
+    End If
     If lRETU Then
-        PegMAXSQLADO = aRETU(0)
+        PegOperSQLADO = aRETU(0)
     End If
 End Function
-
 Public Function PegUltSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+' Esta usa loop
+' use a opcao pegsqlmax para a maioria dos casos
+' ou quando o campo nao e numerica
     Dim oDB              As ADODB.Connection
     Dim oRS              As ADODB.Recordset
     Dim lOPEN As Boolean
@@ -863,11 +832,6 @@ Public Function PegUltSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal c
     oDB.ConnectionTimeout = 120
     oDB.Open cARQ
     
-   'na string de conecao delete =yes
-  'If  InStr(cARQ, "VFPOLEDB")>0 Then ''delete on para foxpro nao usar registro deletados
-  ' vfpsetvalues odbe
-   'End If
-  
 
     lOPEN = True
     Set oRS = New ADODB.Recordset
@@ -1058,178 +1022,4 @@ errhandler:
         Exit Function
     End Select
 End Function
-
-Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String = "")
-    Dim errorObject As ADODB.error
-    For Each errorObject In oErro
-        cERRO = cERRO & " Ado Erro Numero: " & errorObject.Number & vbCrLf
-        cERRO = cERRO & " Ado Descricao  : " & errorObject.Description & vbCrLf
-        cERRO = cERRO & " Ado Fonte      : " & errorObject.Source & vbCrLf
-        cERRO = cERRO & " Ado SQL        : " & errorObject.SQLState & vbCrLf
-        cERRO = cERRO & " Ado Erro Nativo: " & errorObject.NativeError & vbCrLf
-    Next
-    SayErro cERRO, True
-End Function
-
-Public Function ADO_IsRecordsetEmpty(ByRef oRS As ADODB.Recordset) As Boolean
-    Dim cERRO As String
-    On Error GoTo trataerro
-    If Not ADO_IsOpen(oRS) Then
-        ADO_IsRecordsetEmpty = True
-        Exit Function
-    End If
-    If oRS.EOF And oRS.BOF Then
-        ADO_IsRecordsetEmpty = True
-        Exit Function
-    End If
-  
-    If oRS.RecordCount = 0 Then
-        ADO_IsRecordsetEmpty = True
-        Exit Function
-    End If
-    Exit Function
-trataerro:
-    cERRO = "ADO_IsRecordsetEmpty"
-    cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
-    Select Case Err.Number
-    Case Else
-        ADOErro oRS.ActiveConnection.Errors, cERRO
-    End Select
-End Function
-
-Public Function ADO_FieldValueToString(ByRef FLD As ADODB.Field, Optional ByVal sNullRepresentation As String = "(null)") As String
-    'Call TraceEnters(MODULE_NAME & "::ADO_FieldValueToString")
-    'TraceDetail = "To convert the value of a field into a string"
-    On Error GoTo trataerro
-  
-    Select Case (FLD.Type)
-        '~~~~~~
-    Case adBSTR, adChar, adVarChar, adVarWChar, adWChar, adLongVarChar, adLongVarWChar, adGUID:
-        ADO_FieldValueToString = nZ(FLD.Value, sNullRepresentation)
-        '~~~~~~
-    Case adBigInt, adCurrency, adDecimal, adDouble, adInteger, adNumeric, adSingle, adSmallInt, adTinyInt, adUnsignedBigInt, adUnsignedInt, adUnsignedSmallInt, adUnsignedTinyInt, adBoolean:
-        ADO_FieldValueToString = Format(nZ(FLD.Value, sNullRepresentation))
-        '~~~~~~
-    Case adVariant:
-        ADO_FieldValueToString = Format(nZ(FLD.Value, sNullRepresentation))
-        '~~~~~~
-    Case adDate, adDBDate, adDBTime, adDBTimeStamp:
-        ADO_FieldValueToString = Format(nZ(FLD.Value, sNullRepresentation))
-        '~~~~~~
-    Case adBinary, adVarBinary, adLongVarBinary:
-        ADO_FieldValueToString = IIf(IsNull(FLD.Value), sNullRepresentation, BytesToHexString(FLD.Value))
-        '~~~~~~
-    Case Else:
-        'Err.Raise 13, MODULE_NAME & "::ADO_FieldValueToString", "Sorry, unable to convert fields of type " & fld.Type & ", (" & ADO_DataTypeEnumToEnglish(fld.Type) & ") to string."
-    End Select
-    Exit Function
-trataerro:
-    SayErro "ADO_FieldValueToString"
-    Exit Function
-End Function
-
-Public Sub ADO_FreeRecordset(ByRef rs As ADODB.Recordset)
-    On Error Resume Next
-    If rs.State = adStateOpen Then
-        rs.Close
-    End If
-    Set rs = Nothing
-    On Error GoTo 0
-End Sub
-
-Public Function ADO_IsOpen(ByRef oADOObject As Object) As Boolean
-    ' Purpose: To determine if a connection or a recordset is open
-    ' !! Assumes/Pre: Nothing
-    ' Parameters:
-    '  oADOObject as Object  -
-    ' Returns: Boolean
-    '       Success-
-    '       Failure- Raises error on failure
-    ' Revision history:
-    '   2004-Feb-20 10:47 [Michael Johnson] Initial creation
-    'Call TraceEnters(MODULE_NAME & "::ADO_IsOpen")
-    'TraceDetail = "To determine if a connection or a recordset is open"
-    On Error GoTo trataerro
-  
-    If oADOObject Is Nothing Then
-        ' ADO_IsOpen = False ', already the default.
-        Exit Function
-    End If
-  
-    If oADOObject.State = adStateOpen Then
-        ADO_IsOpen = True
-        Exit Function
-    End If
-    Exit Function
-
-trataerro:
-    SayErro "ADO_ISOPEN"
-  
-End Function
-
-Public Function nZ( _
-       vValue As Variant, _
-       Optional vReplacementIfNull As Variant = 0 _
-       ) As Variant
-    ' Purpose: To replace a NULL with another value, if the value is Null.
-    ' Example/Note:     sResult = Nz(rs.Fields(sFieldName), "") ' See MS Access VBA for Nz documentation
-    ' !! Assumes/Pre: Nothing
-    ' Parameters:
-    '   vValue- Value to evaluate if null
-    '   vReplacementIfNull - What should replace a Null value
-    ' Returns: Variant
-    '       Success- If not null, returns the supplied value, else returns the replacement
-    '       Failure- Raises error on failure
-    ' Revision history:
-    '   Michael Johnson     2002-Mar-12 1243     Initial creation
-    '   2003-Aug-22 10:17 [Michael B. Johnson] Abreviated and changed to variants
-    '   2004-Feb-18 16:36 [Michael B. Johnson] Changed from using TypeName() to IsNull()
-    'Call TraceEnters(MODULE_NAME & "::Nz")
-    'TraceDetail = "To replace a NULL with a string, if the value is Null."
-  
-    If IsNull(vValue) Then
-        nZ = vReplacementIfNull
-    Else
-        nZ = vValue
-    End If
-  
-    Exit Function
-End Function
-
-Public Function BytesToHexString(vaBytes As Variant) As String
-    ' Purpose: To translate a Byte() Array into human readable Format
-    ' Example/Note: BytesToHexString
-    ' !! Assumes/Pre: Nothing
-    ' Parameters:
-    '   vaBytes - Variant byte array
-    ' Returns: String
-    '       Success- String with leading "0x" to denote hexadecimal format.
-    '       Failure- Raises error on failure
-    ' Dependencies: None
-    '        mod->Sub
-    ' Revision history:
-    '   Michael Johnson     2000/Aug/01 13:51     Initial creation
-    On Error GoTo trataerro
-    
-    Dim sAccumulator As String, lCtr As Long
-    Dim sHex As String, sFormatted As String
-    
-    If Not TypeName(vaBytes) = "Byte()" Then
-        BytesToHexString = ""
-        Exit Function
-    End If
-    
-    For lCtr = 0 To UBound(vaBytes)
-        sHex = Hex(vaBytes(lCtr))
-        sFormatted = Format(sHex, "@@")
-        sAccumulator = sAccumulator & Replace(sFormatted, " ", "0")
-    Next
-    sAccumulator = "0x" & sAccumulator
-    BytesToHexString = sAccumulator
-    Exit Function
-trataerro:
-    BytesToHexString = ""
-    Exit Function
-End Function
-
 

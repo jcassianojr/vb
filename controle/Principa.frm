@@ -59,7 +59,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":0000
-            TextSave        =   "12:54"
+            TextSave        =   "13:23"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -67,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":059A
-            TextSave        =   "29/03/2021"
+            TextSave        =   "05/04/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -174,10 +174,19 @@ Private Sub MDIForm_Load()
     Dim DB As New ADODB.Connection
     Dim rs As New ADODB.Recordset
     Dim carqhelp As String
+  '  Dim nPOS As Integer
     
 
     StatusBar1.Panels(5).tEXT = ""
 
+    
+'carqhelp = "SELECT FEMEAEF FROM"
+'carqhelp = UCase(carqhelp)
+'If InStr(carqhelp, "SELECT") > 0 And InStr(carqhelp, "FROM") > 0 Then
+'   carqhelp = Replace(carqhelp, "SELECT ", "")
+'   carqhelp = Mid(carqhelp, 1, InStr(carqhelp, "FROM") - 1)
+'   carqhelp = Trim(carqhelp)
+'End If
     'SayErro "abrindo"
 
     Center Me

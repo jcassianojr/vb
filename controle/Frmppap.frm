@@ -185,134 +185,134 @@ Begin VB.Form frmPPAP
       TabCaption(1)   =   "B"
       TabPicture(1)   =   "Frmppap.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label2"
+      Tab(1).Control(0)=   "Txtfields(14)"
       Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "lblLabels(13)"
+      Tab(1).Control(1)=   "Txtfields(13)"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "Txtfields(29)"
+      Tab(1).Control(2)=   "check1(0)"
       Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "check1(15)"
+      Tab(1).Control(3)=   "check1(1)"
       Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "check1(13)"
+      Tab(1).Control(4)=   "check1(2)"
       Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "check1(12)"
+      Tab(1).Control(5)=   "check1(3)"
       Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "check1(11)"
+      Tab(1).Control(6)=   "check1(4)"
       Tab(1).Control(6).Enabled=   0   'False
-      Tab(1).Control(7)=   "check1(10)"
+      Tab(1).Control(7)=   "check1(5)"
       Tab(1).Control(7).Enabled=   0   'False
-      Tab(1).Control(8)=   "check1(9)"
+      Tab(1).Control(8)=   "check1(6)"
       Tab(1).Control(8).Enabled=   0   'False
-      Tab(1).Control(9)=   "check1(8)"
+      Tab(1).Control(9)=   "check1(7)"
       Tab(1).Control(9).Enabled=   0   'False
-      Tab(1).Control(10)=   "check1(7)"
+      Tab(1).Control(10)=   "check1(8)"
       Tab(1).Control(10).Enabled=   0   'False
-      Tab(1).Control(11)=   "check1(6)"
+      Tab(1).Control(11)=   "check1(9)"
       Tab(1).Control(11).Enabled=   0   'False
-      Tab(1).Control(12)=   "check1(5)"
+      Tab(1).Control(12)=   "check1(10)"
       Tab(1).Control(12).Enabled=   0   'False
-      Tab(1).Control(13)=   "check1(4)"
+      Tab(1).Control(13)=   "check1(11)"
       Tab(1).Control(13).Enabled=   0   'False
-      Tab(1).Control(14)=   "check1(3)"
+      Tab(1).Control(14)=   "check1(12)"
       Tab(1).Control(14).Enabled=   0   'False
-      Tab(1).Control(15)=   "check1(2)"
+      Tab(1).Control(15)=   "check1(13)"
       Tab(1).Control(15).Enabled=   0   'False
-      Tab(1).Control(16)=   "check1(1)"
+      Tab(1).Control(16)=   "check1(15)"
       Tab(1).Control(16).Enabled=   0   'False
-      Tab(1).Control(17)=   "check1(0)"
+      Tab(1).Control(17)=   "Txtfields(29)"
       Tab(1).Control(17).Enabled=   0   'False
-      Tab(1).Control(18)=   "Txtfields(13)"
+      Tab(1).Control(18)=   "lblLabels(13)"
       Tab(1).Control(18).Enabled=   0   'False
-      Tab(1).Control(19)=   "Txtfields(14)"
+      Tab(1).Control(19)=   "Label2"
       Tab(1).Control(19).Enabled=   0   'False
       Tab(1).ControlCount=   20
       TabCaption(2)   =   "C"
       TabPicture(2)   =   "Frmppap.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "lblLabels(15)"
+      Tab(2).Control(0)=   "Txtfields(30)"
       Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "lblLabels(2)"
+      Tab(2).Control(1)=   "Txtfields(31)"
       Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "Label1"
+      Tab(2).Control(2)=   "Txtfields(8)"
       Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "lblLabels(4)"
+      Tab(2).Control(3)=   "Txtfields(0)"
       Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "lblLabels(32)"
+      Tab(2).Control(4)=   "Txtfields(17)"
       Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "lblLabels(23)"
+      Tab(2).Control(5)=   "Txtfields(18)"
       Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "DTPicker1"
+      Tab(2).Control(6)=   "Command2"
       Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "Command2"
+      Tab(2).Control(7)=   "DTPicker1"
       Tab(2).Control(7).Enabled=   0   'False
-      Tab(2).Control(8)=   "Txtfields(18)"
+      Tab(2).Control(8)=   "lblLabels(23)"
       Tab(2).Control(8).Enabled=   0   'False
-      Tab(2).Control(9)=   "Txtfields(17)"
+      Tab(2).Control(9)=   "lblLabels(32)"
       Tab(2).Control(9).Enabled=   0   'False
-      Tab(2).Control(10)=   "Txtfields(0)"
+      Tab(2).Control(10)=   "lblLabels(4)"
       Tab(2).Control(10).Enabled=   0   'False
-      Tab(2).Control(11)=   "Txtfields(8)"
+      Tab(2).Control(11)=   "Label1"
       Tab(2).Control(11).Enabled=   0   'False
-      Tab(2).Control(12)=   "Txtfields(31)"
+      Tab(2).Control(12)=   "lblLabels(2)"
       Tab(2).Control(12).Enabled=   0   'False
-      Tab(2).Control(13)=   "Txtfields(30)"
+      Tab(2).Control(13)=   "lblLabels(15)"
       Tab(2).Control(13).Enabled=   0   'False
       Tab(2).ControlCount=   14
       TabCaption(3)   =   "Ctrle Datas"
       TabPicture(3)   =   "Frmppap.frx":0054
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "CmdEditar(0)"
-      Tab(3).Control(1)=   "CmdExcluir(0)"
-      Tab(3).Control(2)=   "CmdNovo(0)"
-      Tab(3).Control(3)=   "Grid"
+      Tab(3).Control(0)=   "Grid"
+      Tab(3).Control(1)=   "CmdNovo(0)"
+      Tab(3).Control(2)=   "CmdExcluir(0)"
+      Tab(3).Control(3)=   "CmdEditar(0)"
       Tab(3).ControlCount=   4
       TabCaption(4)   =   "Fornecedor"
       TabPicture(4)   =   "Frmppap.frx":0070
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Command9(1)"
-      Tab(4).Control(1)=   "Command12"
-      Tab(4).Control(2)=   "Command11"
-      Tab(4).Control(3)=   "cmdcopcod"
-      Tab(4).Control(4)=   "Cmdped"
-      Tab(4).Control(5)=   "Cmdprg"
-      Tab(4).Control(6)=   "Txtfields(28)"
-      Tab(4).Control(7)=   "Txtfields(27)"
-      Tab(4).Control(8)=   "Txtfields(26)"
-      Tab(4).Control(9)=   "Txtfields(25)"
-      Tab(4).Control(10)=   "Txtfields(24)"
-      Tab(4).Control(11)=   "Command10"
+      Tab(4).Control(0)=   "lblLabels(17)"
+      Tab(4).Control(1)=   "lblLabels(18)"
+      Tab(4).Control(2)=   "lblLabels(19)"
+      Tab(4).Control(3)=   "Cmdmw02"
+      Tab(4).Control(4)=   "Command6"
+      Tab(4).Control(5)=   "Command7"
+      Tab(4).Control(6)=   "Txtfields(21)"
+      Tab(4).Control(7)=   "Txtfields(22)"
+      Tab(4).Control(8)=   "Txtfields(23)"
+      Tab(4).Control(8).Enabled=   0   'False
+      Tab(4).Control(9)=   "Command8(0)"
+      Tab(4).Control(10)=   "Command8(1)"
+      Tab(4).Control(11)=   "Command8(2)"
       Tab(4).Control(12)=   "Command9(0)"
-      Tab(4).Control(13)=   "Command8(2)"
-      Tab(4).Control(14)=   "Command8(1)"
-      Tab(4).Control(15)=   "Command8(0)"
-      Tab(4).Control(16)=   "Txtfields(23)"
-      Tab(4).Control(16).Enabled=   0   'False
-      Tab(4).Control(17)=   "Txtfields(22)"
-      Tab(4).Control(18)=   "Txtfields(21)"
-      Tab(4).Control(19)=   "Command7"
-      Tab(4).Control(20)=   "Command6"
-      Tab(4).Control(21)=   "Cmdmw02"
-      Tab(4).Control(22)=   "lblLabels(19)"
-      Tab(4).Control(23)=   "lblLabels(18)"
-      Tab(4).Control(24)=   "lblLabels(17)"
+      Tab(4).Control(13)=   "Command10"
+      Tab(4).Control(14)=   "Txtfields(24)"
+      Tab(4).Control(15)=   "Txtfields(25)"
+      Tab(4).Control(16)=   "Txtfields(26)"
+      Tab(4).Control(17)=   "Txtfields(27)"
+      Tab(4).Control(18)=   "Txtfields(28)"
+      Tab(4).Control(19)=   "Cmdprg"
+      Tab(4).Control(20)=   "Cmdped"
+      Tab(4).Control(21)=   "cmdcopcod"
+      Tab(4).Control(22)=   "Command11"
+      Tab(4).Control(23)=   "Command12"
+      Tab(4).Control(24)=   "Command9(1)"
       Tab(4).ControlCount=   25
       TabCaption(5)   =   "Cron. Layout"
       TabPicture(5)   =   "Frmppap.frx":008C
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "CmdNovoLay(0)"
-      Tab(5).Control(1)=   "CmdNovoLay(1)"
+      Tab(5).Control(0)=   "gridlay"
+      Tab(5).Control(1)=   "CmdEdilay(1)"
       Tab(5).Control(2)=   "CmdExcLay(1)"
-      Tab(5).Control(3)=   "CmdEdilay(1)"
-      Tab(5).Control(4)=   "gridlay"
+      Tab(5).Control(3)=   "CmdNovoLay(1)"
+      Tab(5).Control(4)=   "CmdNovoLay(0)"
       Tab(5).ControlCount=   5
       TabCaption(6)   =   "Cjto"
       TabPicture(6)   =   "Frmppap.frx":00A8
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "Cmdcjtcrn(0)"
-      Tab(6).Control(1)=   "Cmdimppf(0)"
+      Tab(6).Control(0)=   "GridCjto"
+      Tab(6).Control(1)=   "CmdNovCjto(2)"
       Tab(6).Control(2)=   "CmdExcjto(2)"
-      Tab(6).Control(3)=   "CmdNovCjto(2)"
-      Tab(6).Control(4)=   "GridCjto"
+      Tab(6).Control(3)=   "Cmdimppf(0)"
+      Tab(6).Control(4)=   "Cmdcjtcrn(0)"
       Tab(6).ControlCount=   5
       Begin VB.CommandButton Command9 
          Height          =   315
@@ -1665,13 +1665,13 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To 32
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
+            aVAL(iLOOP) = Txtfields(iLOOP)
         Next iLOOP
         aVAL(33) = DTPicker1.Value
         aVAL(34) = DTPicker2.Value
         aVAL(35) = DTPicker3.Value
         For iLOOP = 36 To 57
-            aVAL(iLOOP) = FixNumBol(Check1(iLOOP).Value)
+            aVAL(iLOOP) = FixNumBol(check1(iLOOP).Value)
         Next iLOOP
         GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     End If
@@ -1680,8 +1680,8 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub cmdcopcod_Click()
-    TXTFIELDS(24) = TXTFIELDS(5)
-    TXTFIELDS(25) = TXTFIELDS(6)
+    Txtfields(24) = Txtfields(5)
+    Txtfields(25) = Txtfields(6)
 End Sub
 
 Private Sub CmdEdilay_Click(Index As Integer)
@@ -1692,10 +1692,10 @@ Private Sub CmdEdilay_Click(Index As Integer)
 End Sub
 
 Private Sub CmdEditar_Click(Index As Integer)
-    eRETU02 = " Desenho:" & TXTFIELDS(5) & "-" & Replace(TXTFIELDS(6), " ", "_")
-    eRETU02 = eRETU02 & " Componente:" & TXTFIELDS(24) & "-" & Replace(TXTFIELDS(25), " ", "_")
-    eRETU02 = eRETU02 & " Fornecedor:" & TXTFIELDS(22) & "-" & Replace(TXTFIELDS(21), " ", "_")
-    eRETU02 = eRETU02 & " Cliente:" & TXTFIELDS(1) & "-" & Replace(TXTFIELDS(2), " ", "_")
+    eRETU02 = " Desenho:" & Txtfields(5) & "-" & Replace(Txtfields(6), " ", "_")
+    eRETU02 = eRETU02 & " Componente:" & Txtfields(24) & "-" & Replace(Txtfields(25), " ", "_")
+    eRETU02 = eRETU02 & " Fornecedor:" & Txtfields(22) & "-" & Replace(Txtfields(21), " ", "_")
+    eRETU02 = eRETU02 & " Cliente:" & Txtfields(1) & "-" & Replace(Txtfields(2), " ", "_")
     Grid.Col = 0
     nREVI = Grid
     frmPPAPI.Show vbModal
@@ -1769,7 +1769,7 @@ Private Sub Cmdimppf_Click(Index As Integer)
     Dim sSQL As String
     DB.ConnectionTimeout = 120
     DB.Open GeracArq(cARQPF)
-    sSQL = "SELECT CODIGO,PF FROM PF WHERE CODFINAL='" & Trim(TXTFIELDS(5)) & "' AND NOT BLOQUEADO"
+    sSQL = "SELECT CODIGO,PF FROM PF WHERE CODFINAL='" & Trim(Txtfields(5)) & "' AND NOT BLOQUEADO"
     rs.Open sSQL, DB, adOpenForwardOnly, adLockReadOnly
     If Not rs.EOF Then
         While Not rs.EOF
@@ -1805,16 +1805,15 @@ End Sub
 
 Private Sub Cmdmw02_Click()
     Dim cSQL As String
-    If Not IsNumeric(TXTFIELDS(27)) Then Exit Sub
-    If Not IsNumeric(TXTFIELDS(28)) Then Exit Sub
-    If Not IsNumeric(TXTFIELDS(0)) Then Exit Sub
+    If Not IsNumeric(Txtfields(27)) Then Exit Sub
+    If Not IsNumeric(Txtfields(28)) Then Exit Sub
+    If Not IsNumeric(Txtfields(0)) Then Exit Sub
 
     cSQL = "SELECT FROM MW02 WHERE ="
-    cSQL = cSQL & PadLeft(TXTFIELDS(27).tEXT, 8) + PadLeft(TXTFIELDS(28).tEXT, 3)
+    cSQL = cSQL & PadLeft(Txtfields(27).tEXT, 8) + PadLeft(Txtfields(28).tEXT, 3)
      
-    GrvSQLSDE zMANA5EMP, cSQL, 2, Array("ppap", "ppapD"), Array(TXTFIELDS(0), Date), Array("N", "D")
-    ''eRETU01 = "GRVPPAP " & txtFields(27) & " " & txtFields(28) & " " & txtFields(0)
-    ''Shell eRETU01, vbNormalFocus
+    GrvSQL GeraConn(zMANA5EMP, "FOX"), cSQL, 2, Array("ppap", "ppapD"), Array(Txtfields(0), Date), Array("N", "D") ''GrvSQLSDE zMANA5EMP
+ 
 
 End Sub
 
@@ -1845,7 +1844,7 @@ Private Sub CmdNovoLay_Click(Index As Integer)
     Dim sSQL As String
   
     If Index = 1 Then
-        cDESENHO = InputBox("Digite o Produto", "Inclusão Produto", TXTFIELDS(5).tEXT)
+        cDESENHO = InputBox("Digite o Produto", "Inclusão Produto", Txtfields(5).tEXT)
         dDATA = Today()
     Else
         gridlay.Row = (gridlay.Rows) - 1         ''UltimoItem
@@ -1907,14 +1906,14 @@ Private Sub Cmdped_Click()
     Dim nPE As Long
     Dim aRETU As Variant
     Dim sSQL As String
-    nPE = FixInt(TXTFIELDS(26))
+    nPE = FixInt(Txtfields(26))
     cARQ = PegPath("PATH", "MANA5PCP")
     cARQ = GeraConn(cARQ, "JETFOX")
     sSQL = "SELECT PEDIDO,COMPRAS,COMITEM FROM PE WHERE PEDIDO=" & nPE
     aRETU = PegSQL(cARQ, sSQL, 2, Array("COMPRAS", "COMITEM"), Array("NI", "NI"), Array(0, 0))
     If lRETU Then
-        TXTFIELDS(27) = aRETU(0)
-        TXTFIELDS(28) = aRETU(1)
+        Txtfields(27) = aRETU(0)
+        Txtfields(28) = aRETU(1)
     End If
 End Sub
 
@@ -1924,16 +1923,16 @@ Private Sub Cmdprg_Click()
     Dim cCODIGO As String
     Dim aRETU As Variant
     Dim sSQL As String
-    nFORN = FixInt(TXTFIELDS(22), 0)
-    cCODIGO = FixStr(TXTFIELDS(24), "", "TRIM")
+    nFORN = FixInt(Txtfields(22), 0)
+    cCODIGO = FixStr(Txtfields(24), "", "TRIM")
     cARQ = PegPath("PATH", "MANA5PCP")
     cARQ = GeraConn(cARQ, "JETFOX")
     sSQL = "SELECT PEDIDO,COMPRAS,COMITEM FROM PE WHERE FORNECEDO=" & nFORN & " AND CODIGO='" & cCODIGO & "'"
     aRETU = PegSQL(cARQ, sSQL, 3, Array("PEDIDO", "COMPRAS", "COMITEM"), Array("NI", "NI", "NI"), Array(0, 0, 0))
     If lRETU Then
-        TXTFIELDS(26) = aRETU(0)
-        TXTFIELDS(27) = aRETU(1)
-        TXTFIELDS(28) = aRETU(2)
+        Txtfields(26) = aRETU(0)
+        Txtfields(27) = aRETU(1)
+        Txtfields(28) = aRETU(2)
     Else
         Alert ("Nao achei pedido para este fornecedor/produto")
     End If
@@ -1944,8 +1943,8 @@ Private Sub Command10_Click()
     Dim aRETU As Variant
     Dim sSQL      As String
     Dim cCODIGO      As String
-    cCODIGO = FixStr(TXTFIELDS(24), "", "TRIM")
-    Select Case TXTFIELDS(23)
+    cCODIGO = FixStr(Txtfields(24), "", "TRIM")
+    Select Case Txtfields(23)
 
     Case "M"
         sSQL = "SELECT NOME FROM MU01 WHERE CODIGO='" & cCODIGO & "'"
@@ -1960,7 +1959,7 @@ Private Sub Command10_Click()
 
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        TXTFIELDS(25) = aRETU(0)
+        Txtfields(25) = aRETU(0)
     End If
 
 End Sub
@@ -1970,41 +1969,41 @@ Private Sub Command1_Click()
     Dim aRETU As Variant
     escpffim.Show vbModal, Me
     If lRETU Then
-        TXTFIELDS(5) = eRETU02
-        TXTFIELDS(6) = eRETU03
-        TXTFIELDS(32) = eRETU04
+        Txtfields(5) = eRETU02
+        Txtfields(6) = eRETU03
+        Txtfields(32) = eRETU04
         cSQL = "select CONPES from PF WHERE PF=" & eRETU04
         aRETU = PegSQL(cARQPF, cSQL, 1, Array("CONPES"), Array("N"), Array(0))
         If lRETU Then
-            TXTFIELDS(11) = aRETU(0)
+            Txtfields(11) = aRETU(0)
         End If
     End If
 End Sub
 
 Private Sub Command11_Click()
-    TXTFIELDS(22) = TXTFIELDS(1)
-    TXTFIELDS(21) = TXTFIELDS(2)
+    Txtfields(22) = Txtfields(1)
+    Txtfields(21) = Txtfields(2)
 
 End Sub
 
 Private Sub Command12_Click()
     Dim cSQLTMP As String
     Dim aRETU As Variant
-    cSQLTMP = "SELECT PRGENT,COMPED,ITEM FROM MW02 WHERE PPAP=" & TXTFIELDS(0).tEXT
+    cSQLTMP = "SELECT PRGENT,COMPED,ITEM FROM MW02 WHERE PPAP=" & Txtfields(0).tEXT
     aRETU = PegSQL(GeraConn(zMANA5EMP, "JETFOX"), cSQLTMP, 3, Array("PRGENT", "COMPED", "ITEM"), _
                    Array("NI", "NI", "NI"), Array(0, 0, 0))
     If lRETU Then
-        TXTFIELDS(26) = aRETU(0)
-        TXTFIELDS(27) = aRETU(1)
-        TXTFIELDS(28) = aRETU(2)
+        Txtfields(26) = aRETU(0)
+        Txtfields(27) = aRETU(1)
+        Txtfields(28) = aRETU(2)
     End If
 End Sub
 
 Private Sub Command2_Click()
     escMP05.Show vbModal, Me
     If lRETU Then
-        TXTFIELDS(17) = eRETU01
-        TXTFIELDS(18) = eRETU02
+        Txtfields(17) = eRETU01
+        Txtfields(18) = eRETU02
     End If
 End Sub
 
@@ -2013,7 +2012,7 @@ Private Sub Command3_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim nNUMERO          As Long
-    nNUMERO = FixInt(TXTFIELDS(1), 0)
+    nNUMERO = FixInt(Txtfields(1), 0)
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
     If iPPAP = 2 Then
@@ -2021,7 +2020,7 @@ Private Sub Command3_Click()
     End If
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        TXTFIELDS(2) = aRETU(0)
+        Txtfields(2) = aRETU(0)
     End If
 End Sub
 
@@ -2030,12 +2029,12 @@ Private Sub Command4_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim cCODIGO          As String
-    cCODIGO = FixStr(TXTFIELDS(3), "", "TRIM")
+    cCODIGO = FixStr(Txtfields(3), "", "TRIM")
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME FROM MC02 WHERE NUMERO='" & cCODIGO & "'"
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        TXTFIELDS(4) = aRETU(0)
+        Txtfields(4) = aRETU(0)
     End If
 End Sub
 
@@ -2044,12 +2043,12 @@ Private Sub Command5_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim cCODIGO          As String
-    cCODIGO = FixStr(TXTFIELDS(5), "", "TRIM")
+    cCODIGO = FixStr(Txtfields(5), "", "TRIM")
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        TXTFIELDS(6) = aRETU(0)
+        Txtfields(6) = aRETU(0)
     End If
 End Sub
 
@@ -2058,12 +2057,12 @@ Private Sub Command6_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim nNUMERO          As Long
-    nNUMERO = FixInt(TXTFIELDS(22), 0)
+    nNUMERO = FixInt(Txtfields(22), 0)
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME FROM MB01 WHERE NUMERO=" & nNUMERO
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        TXTFIELDS(21) = aRETU(0)
+        Txtfields(21) = aRETU(0)
     End If
 End Sub
 
@@ -2075,8 +2074,8 @@ Private Sub Command7_Click()
     escNUMNOM.Show vbModal, Me
 
     If lRETU Then
-        TXTFIELDS(22) = eRETU01
-        TXTFIELDS(21) = eRETU02
+        Txtfields(22) = eRETU01
+        Txtfields(21) = eRETU02
     End If
 
 End Sub
@@ -2086,13 +2085,13 @@ Private Sub Command8_Click(Index As Integer)
     Select Case Index
 
     Case 0
-        TXTFIELDS(23) = "M"
+        Txtfields(23) = "M"
 
     Case 1
-        TXTFIELDS(23) = "C"
+        Txtfields(23) = "C"
 
     Case 2
-        TXTFIELDS(23) = "T"
+        Txtfields(23) = "T"
 
     End Select
 
@@ -2102,7 +2101,7 @@ Private Sub Command9_Click(Index As Integer)
     lRETU = False
     If Index = 0 Then
         ePASS01 = "MANA5"
-        Select Case TXTFIELDS(23)
+        Select Case Txtfields(23)
         Case "C"
             iMU01 = 2
         Case "T"
@@ -2116,7 +2115,7 @@ Private Sub Command9_Click(Index As Integer)
     End If
     
     If Index = 1 Then
-        Select Case TXTFIELDS(23)
+        Select Case Txtfields(23)
         Case "C"
             ePASS01 = "LOGIC"
         Case "T"
@@ -2133,8 +2132,8 @@ Private Sub Command9_Click(Index As Integer)
     
     If lRETU Then
     
-        TXTFIELDS(24) = eRETU01
-        TXTFIELDS(25) = eRETU02
+        Txtfields(24) = eRETU01
+        Txtfields(25) = eRETU02
     
     End If
     
@@ -2174,8 +2173,8 @@ Private Sub EscMA01A_Click(Index As Integer)
     escNUMNOM.Show vbModal, Me
 
     If lRETU Then
-        frmPPAP.TXTFIELDS(1) = eRETU01
-        frmPPAP.TXTFIELDS(2) = eRETU02
+        frmPPAP.Txtfields(1) = eRETU01
+        frmPPAP.Txtfields(2) = eRETU02
     End If
     
     
@@ -2190,8 +2189,8 @@ Private Sub ESCMC02A_Click()
     cARQESC = "MC02"
     escNUMNOM.Show vbModal, Me
     If lRETU Then
-        frmPPAP.TXTFIELDS(3) = eRETU01
-        frmPPAP.TXTFIELDS(4) = eRETU02
+        frmPPAP.Txtfields(3) = eRETU01
+        frmPPAP.Txtfields(4) = eRETU02
     End If
 End Sub
 
@@ -2205,8 +2204,8 @@ Private Sub ESCMS01A_Click(Index As Integer)
     End If
     escms01.Show vbModal, Me
     If lRETU Then
-        frmPPAP.TXTFIELDS(5) = eRETU01
-        frmPPAP.TXTFIELDS(6) = eRETU02
+        frmPPAP.Txtfields(5) = eRETU01
+        frmPPAP.Txtfields(6) = eRETU02
     End If
 End Sub
 
@@ -2304,7 +2303,7 @@ Private Sub Form_Load()
                  "", "", "", "", "", "", "", "")
     aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To 32
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
+        Txtfields(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     If IsDate(aVAL(33)) Then
         DTPicker1.Value = aVAL(33)
@@ -2316,7 +2315,7 @@ Private Sub Form_Load()
         DTPicker3.Value = aVAL(35)
     End If
     For iLOOP = 36 To 57
-        Check1(iLOOP - 36).Value = FixBolNum(aVAL(iLOOP))
+        check1(iLOOP - 36).Value = FixBolNum(aVAL(iLOOP))
     Next iLOOP
     
     

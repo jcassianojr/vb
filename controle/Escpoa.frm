@@ -152,7 +152,11 @@ Private Sub NovoPF_Click()
     iMU01 = 3
     nPF = 0
     NewSeq.Show vbModal
-    nPPAP = PegUltSQL(cARQPOA, "select numero from " & zPFTIPO & " WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
+    'nPPAP = PegUltSQL(cARQPOA, "select numero from " & zPFTIPO & " WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
+    
+    nPPAP = PegCampoSQLADO(cARQPOA, "select numero from " & zPFTIPO & " WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "", 0)
+      
+    'checagem acima necessario pos checas as sequencias
     If nPPAP = 0 Then
         nPPAP = FixInt(PegMAXSQL(cARQPOA, zPFTIPO, "NUMERO", 0)) + 1
         IncluiSQL cARQPOA, "SELECT * FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, 5, Array("NUMERO", "PF", "SEQ", "SSQ", "ITEM"), Array(nPPAP, nPF, nSEQ, nSSQ, nORD)
@@ -250,7 +254,10 @@ Private Sub CmdLiberar_Click()
     Grid.Col = 3
     nSSQ = Grid
 
-    nTMPELA = PegUltSQL(Sdb, "SELECT ELANUM FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, "ELANUM", 0)
+    'nTMPELA = PegUltSQL(Sdb, "SELECT ELANUM FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, "ELANUM", 0)
+    nTMPELA = PegCampoSQLADO(Sdb, "SELECT ELANUM FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, "", 0)
+    
+    
     If nTMPELA = zIDFOLHA Then
         Alert ("Voce ja e o Elaborador")
         Exit Sub

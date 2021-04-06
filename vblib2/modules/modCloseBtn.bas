@@ -1,4 +1,8 @@
 Attribute VB_Name = "modCloseBtn"
+'usado ao pedir senha desabilita o x na barra do form
+'evitando assim que usuario feche a tela de login
+'forcando a pedir usuario e senha
+
 Option Explicit
 
 Private Const SC_CLOSE As Long = &HF060&

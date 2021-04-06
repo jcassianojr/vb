@@ -336,15 +336,15 @@ Private Sub CmdEscMs01_Click()
     ePASS01 = "MANA5"
     escms01.Show vbModal, Me
     If lRETU Then
-        tEXT(1).tEXT = eRETU01
+        Text(1).Text = eRETU01
     End If
 End Sub
 
 Private Sub CmdEscPfim_Click(Index As Integer)
     escpffim.Show vbModal, Me
     If lRETU Then
-        If Index = 0 Then tEXT(0).tEXT = eRETU01
-        If Index = 1 Then tEXT(2).tEXT = eRETU01
+        If Index = 0 Then Text(0).Text = eRETU01
+        If Index = 1 Then Text(2).Text = eRETU01
     End If
 End Sub
 
@@ -355,7 +355,7 @@ Private Sub CmdTransfer_Click()
     Dim dbPF As New ADODB.Connection
     Dim rsPF As New ADODB.Recordset
     Dim sqlPF, sqlMS03 As String
-    Dim lnrPF, x As Long
+    Dim lnrPF, X As Long
     Dim CON As ADODB.Connection
     Dim rs As ADODB.Recordset
     Dim aCAMPOS As Variant
@@ -366,17 +366,17 @@ Private Sub CmdTransfer_Click()
     
     cARQ = PegPath("PATH", "PF")
 
-    x = 0
+    X = 0
     dbPF.ConnectionTimeout = 120
     dbPF.Open GeracArq(cARQ, , False)
 
-    If tEXT(2).tEXT = "" Then
+    If Text(2).Text = "" Then
 
-        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' AND NOT BLOQUEADO ORDER BY PF"
+        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' AND NOT BLOQUEADO ORDER BY PF"
 
     Else
 
-        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' OR CODFINAL='" & Trim(tEXT(2).tEXT) & "'AND NOT BLOQUEADO ORDER BY PF"
+        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' OR CODFINAL='" & Trim(Text(2).Text) & "'AND NOT BLOQUEADO ORDER BY PF"
 
     End If
 
@@ -396,9 +396,9 @@ Private Sub CmdTransfer_Click()
 
     While Not rsPF.EOF
 
-        aPF(x) = rsPF("PF")
+        aPF(X) = rsPF("PF")
         rsPF.MoveNext
-        x = x + 1
+        X = X + 1
 
     Wend
 
@@ -410,7 +410,7 @@ Private Sub CmdTransfer_Click()
     CON.ConnectionTimeout = 120
     CON.Open "mana5emp"
 
-    sqlMS03 = "DELETE FROM MS03 where codigo='" & tEXT(1).tEXT & "'"
+    sqlMS03 = "DELETE FROM MS03 where codigo='" & Text(1).Text & "'"
     CON.Execute sqlMS03
 
     Set rs = New ADODB.Recordset
@@ -422,11 +422,11 @@ Private Sub CmdTransfer_Click()
     'aCAMPOS(0Tipoent,1Codcomp,2nomecomp,3qtdde,4preco,5total,6baixac,7bseq,8bssq,9opcao)
 
     'Materia Prima PF
-    x = 0
+    X = 0
 
-    For x = 0 To lnrPF - 1
+    For X = 0 To lnrPF - 1
 
-        sqlPF = "SELECT * FROM PF WHERE PF=" & aPF(x)
+        sqlPF = "SELECT * FROM PF WHERE PF=" & aPF(X)
         rsPF.Open sqlPF, dbPF, adOpenForwardOnly, adLockReadOnly
 
         If Not rsPF.EOF Then
@@ -466,15 +466,15 @@ Private Sub CmdTransfer_Click()
         rsPF.Close
         Set rsPF = Nothing
 
-    Next x
+    Next X
 
     'Componentes pfms03
-    x = 0
+    X = 0
 
-    For x = 0 To lnrPF - 1
+    For X = 0 To lnrPF - 1
 
-        Debug.Print aPF(x)
-        sqlPF = "SELECT * FROM PFMS03 WHERE PF=" & aPF(x) & " ORDER BY SEQ,SSQ"
+        Debug.Print aPF(X)
+        sqlPF = "SELECT * FROM PFMS03 WHERE PF=" & aPF(X) & " ORDER BY SEQ,SSQ"
         rsPF.Open sqlPF, dbPF, adOpenForwardOnly, adLockReadOnly
 
         If Not rsPF.EOF Then
@@ -493,14 +493,14 @@ Private Sub CmdTransfer_Click()
         rsPF.Close
         Set rsPF = Nothing
 
-    Next x
+    Next X
 
     'Mao de Obra Equipamento/Homem/Terceiros PFS
-    x = 0
+    X = 0
 
-    For x = 0 To lnrPF - 1
+    For X = 0 To lnrPF - 1
 
-        sqlPF = "SELECT * FROM PFS WHERE PF=" & aPF(x) & " ORDER BY SEQ,SSQ"
+        sqlPF = "SELECT * FROM PFS WHERE PF=" & aPF(X) & " ORDER BY SEQ,SSQ"
         rsPF.Open sqlPF, dbPF, adOpenForwardOnly, adLockReadOnly
 
         If Not rsPF.EOF Then
@@ -581,7 +581,7 @@ Private Sub CmdTransfer_Click()
         rsPF.Close
         Set rsPF = Nothing
 
-    Next x
+    Next X
 
     rs.Close
     Set rs = Nothing
@@ -600,7 +600,7 @@ Private Sub GRAVAMS03(aCAMPOS As Variant, rs As Variant)
     sDESCRI = Tirace(sDESCRI)
 
     rs.AddNew
-    rs("codigo") = tEXT(1).tEXT
+    rs("codigo") = Text(1).Text
     rs("TIPOENT") = aCAMPOS(0)
     rs("CODCOMP") = aCAMPOS(1)
     rs("NOMECOMP") = sDESCRI
@@ -685,24 +685,24 @@ Private Sub XPButton1_Click()
     Dim dbPF As New ADODB.Connection
     Dim rsPF As New ADODB.Recordset
     Dim sqlPF, sqlms06 As String
-    Dim lnrPF, x As Long
+    Dim lnrPF, X As Long
     Dim CON As ADODB.Connection
     Dim rs As ADODB.Recordset
     Dim sDESCRI As String
     Dim cARQ As String
     cARQ = PegPath("PATH", "PF")
 
-    x = 0
+    X = 0
     dbPF.ConnectionTimeout = 120
     dbPF.Open GeracArq(cARQ, , False)
 
-    If tEXT(2) = "" Then
+    If Text(2) = "" Then
 
-        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' AND NOT BLOQUEADO ORDER BY PF"
+        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' AND NOT BLOQUEADO ORDER BY PF"
 
     Else
 
-        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' OR CODFINAL='" & Trim(tEXT(2).tEXT) & "'AND NOT BLOQUEADO ORDER BY PF"
+        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' OR CODFINAL='" & Trim(Text(2).Text) & "'AND NOT BLOQUEADO ORDER BY PF"
 
     End If
 
@@ -727,9 +727,9 @@ Private Sub XPButton1_Click()
 
     While Not rsPF.EOF
 
-        aPF(x) = rsPF("PF")
+        aPF(X) = rsPF("PF")
         rsPF.MoveNext
-        x = x + 1
+        X = X + 1
 
     Wend
 
@@ -742,7 +742,7 @@ Private Sub XPButton1_Click()
     CON.ConnectionTimeout = 120
     CON.Open "mana5emp"
 
-    sqlms06 = "DELETE FROM MS06 where codigo='" & tEXT(1).tEXT & "'"
+    sqlms06 = "DELETE FROM MS06 where codigo='" & Text(1).Text & "'"
    
     CON.Execute sqlms06
 
@@ -752,12 +752,12 @@ Private Sub XPButton1_Click()
    
     rs.Open "MS06", CON, , , adCmdTable
    
-    x = 0
+    X = 0
 
-    For x = 0 To lnrPF - 1
+    For X = 0 To lnrPF - 1
 
-        Debug.Print aPF(x)
-        sqlPF = "SELECT * FROM PFS WHERE PF=" & aPF(x) & " ORDER BY SEQ,SSQ"
+        Debug.Print aPF(X)
+        sqlPF = "SELECT * FROM PFS WHERE PF=" & aPF(X) & " ORDER BY SEQ,SSQ"
         rsPF.Open sqlPF, dbPF, adOpenForwardOnly, adLockReadOnly
 
         If Not rsPF.EOF Then
@@ -797,7 +797,7 @@ Private Sub XPButton1_Click()
                 sDESCRI = LCase(sDESCRI)
                 sDESCRI = Left(sDESCRI, 70)
                 sDESCRI = Tirace(sDESCRI)
-                rs("codigo") = tEXT(1).tEXT
+                rs("codigo") = Text(1).Text
                 rs("SEQ") = aPFI(0)
                 rs("SSQ") = aPFI(1)
                 rs("DESCRI") = sDESCRI
@@ -829,11 +829,11 @@ Private Sub XPButton1_Click()
             Wend
 
             rs.AddNew
-            rs("codigo") = tEXT(1).tEXT
+            rs("codigo") = Text(1).Text
             rs("SEQ") = aPFI(0)
             rs("SSQ") = 99
             rs("TIPFEC") = "0"
-            rs("CODFEC") = tEXT(0).tEXT
+            rs("CODFEC") = Text(0).Text
             rs("DESCRI") = "Final"
             rs.Update
 
@@ -842,7 +842,7 @@ Private Sub XPButton1_Click()
         rsPF.Close
         Set rsPF = Nothing
 
-    Next x
+    Next X
 
     rs.Close
     Set rs = Nothing
@@ -903,13 +903,13 @@ Private Sub XPButton2_Click()
                     If Len(Trim(cCODINT)) = 14 Then
                         sSQL = "SELECT FROM MS06 WHERE ="
                         sSQL = sSQL & PadRight(cCODIGO, 24) + PadLeft(oRS("SEQ"), 3) + PadLeft(oRS("SSQ"), 3)
-                        GrvSQLSDE zMANA5EMP, sSQL, 2, Array("CODINT", "PF"), Array(cCODINT, nPF), Array("C", "N")
+                        GrvSQL GeraConn(zMANA5EMP, "FOX"), sSQL, 2, Array("CODINT", "PF"), Array(cCODINT, nPF), Array("C", "N") 'grvsqlsde
                     End If
                 End If
                 If aRETU(1) = 0 Then             'nao esta gravado o numero do pf
                     sSQL = "SELECT FROM MS06 WHERE ="
                     sSQL = sSQL & PadRight(cCODIGO, 24) + PadLeft(oRS("SEQ"), 3) + PadLeft(oRS("SSQ"), 3)
-                    GrvSQLSDE zMANA5EMP, sSQL, 1, Array("PF"), Array(nPF), Array("N")
+                    GrvSQL GeraConn(zMANA5EMP, "FOX"), sSQL, 1, Array("PF"), Array(nPF), Array("N") ''GrvSQLSDE zMANA5EMP
                 End If
             End If
         End If
@@ -965,7 +965,7 @@ Private Sub XPButton3_Click()
                 Else
                     If Len(Trim(aRETU(1))) = 0 Then 'nao tem no ms01
                         sSQL = "SELECT FROM MS01 WHERE =" & PadRight(cCODIGO, 24)
-                        GrvSQLSDE zMANA5EMP, sSQL, 1, Array("CODINT"), Array(cCODINT), Array("C")
+                        GrvSQL GeraConn(zMANA5EMP, "FOX"), sSQL, 1, Array("CODINT"), Array(cCODINT), Array("C") ''GrvSQLSDE zMANA5EMP
                     End If
                 End If
             End If
@@ -1081,7 +1081,7 @@ Private Sub XPButton6_Click()
     Dim cARQCDX As String
     Dim cALIAS As String
     Dim cARQPF As String
-    Dim x As Integer
+    Dim X As Integer
     Dim cFERRAM As String
     Dim nHANDLE
     cARQ = PegPath("PATH", "MANA5FER")
@@ -1113,8 +1113,8 @@ Private Sub XPButton6_Click()
         End If
         LblDiz.Caption = cCODIGO
         LblDiz.Refresh
-        For x = 1 To 4
-            Select Case x
+        For X = 1 To 4
+            Select Case X
             Case 1
                 cFERRAM = FixStr(oRS("FERRAMEN"))
             Case 2
@@ -1148,7 +1148,7 @@ Private Sub XPButton6_Click()
                     End If
                 End If
             End If
-        Next x
+        Next X
         oRS.MoveNext
     Wend
     oRS.Close

@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form escPPAP 
    Caption         =   "Selecione o Processo  desejado:"
    ClientHeight    =   6135
@@ -12,13 +13,13 @@ Begin VB.Form escPPAP
    ScaleWidth      =   8535
    StartUpPosition =   2  'CenterScreen
    Begin MSFlexGridLib.MSFlexGrid Grid 
-      Height          =   5535
+      Height          =   5055
       Left            =   120
       TabIndex        =   0
-      Top             =   120
+      Top             =   600
       Width           =   6855
       _ExtentX        =   12091
-      _ExtentY        =   9763
+      _ExtentY        =   8916
       _Version        =   393216
    End
    Begin MSComctlLib.Toolbar Toolbar1 
@@ -35,6 +36,26 @@ Begin VB.Form escPPAP
       Appearance      =   1
       TextAlignment   =   1
       _Version        =   393216
+   End
+   Begin vbExtra.FlexFn FlexFn1 
+      Height          =   405
+      Left            =   0
+      TabIndex        =   2
+      Top             =   0
+      Width           =   1725
+      _ExtentX        =   3043
+      _ExtentY        =   714
+      PageNumbersFormat=   ""
+      PageNumbersFormatIndex=   0
+      BeginProperty PageNumbersFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Arial"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
 End
 Attribute VB_Name = "escPPAP"
@@ -81,18 +102,19 @@ Private Sub CmdExcluir()
 End Sub
 
 Private Sub CmdNovo()
-    Dim cSQL As String
+    Dim cTABELA As String
     If iPPAP = 11 Then Exit Sub                  ''Cronograma nao inclui
     Select Case iPPAP
     Case 1, 11
-        cSQL = "PPAP"
+        cTABELA = "PPAP"
     Case 2
-        cSQL = "PPAF"
+        cTABELA = "PPAF"
     Case 3
-        cSQL = "PPAG"
+        cTABELA = "PPAG"
     End Select
-    nPPAP = PegUltSQL(cARQPF, "select numero from " & cSQL & " WHERE NUMERO=" & nPPAP, "NUMERO", 0)
-    If IncluiSQL(cARQPF, "select numero from " & cSQL & " WHERE NUMERO=" & nPPAP, 1, Array("NUMERO"), Array(nPPAP), True, False) Then
+    'nPPAP = PegUltSQL(cARQPF, "select numero from " & cSQL & " WHERE NUMERO=" & nPPAP, "NUMERO", 0)
+    nPPAP = PegMAXSQL(cARQPF, cTABELA, "NUMERO", 0) + 1
+    If IncluiSQL(cARQPF, "select numero from " & cTABELA & " WHERE NUMERO=" & nPPAP, 1, Array("NUMERO"), Array(nPPAP), True, False) Then
         FilRelat
     End If
 End Sub
