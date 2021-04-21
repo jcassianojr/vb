@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form frmIMAGENS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "IMAGENS"
@@ -354,6 +354,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Const nFORMID = 1109
+Const cFORMID = "frmimagens"
+
 'Option Explicit
 Dim cARQ As String
 Dim cSQL As String
@@ -539,7 +542,11 @@ End Sub
 Private Sub Form_Load()
     Dim nTMPNUMERO
     Dim nPOS
+    
     Center Me
+    Me.Caption = cFORMID
+    HelpContextID = nFORMID
+    
     lTROCOU = False
     If iImage = 2 Then
         Escolher(1).Visible = True

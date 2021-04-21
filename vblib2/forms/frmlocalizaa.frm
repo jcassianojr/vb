@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form frmLocalizaa 
    Caption         =   "Localizar"
    ClientHeight    =   3165
@@ -124,6 +124,9 @@ End Sub
 Private Sub Form_Load()
     Dim nLEN As Integer
     Center Me
+    Me.Caption = cFORMID
+    HelpContextID = nFORMID
+    
     'CentralizaJanela Me
     lRETU = False
     eRETU01 = ""

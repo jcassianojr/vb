@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmLocalizar 
    Caption         =   "Localizar"
@@ -165,6 +165,9 @@ End Sub
 
 Private Sub Form_Load()
     Center Me
+    Me.Caption = cFORMID
+    HelpContextID = nFORMID
+    
     lRETU = False
     'frmLocalizar.Left = (Screen.Width - frmLocalizar.Width) / 2
     'frmLocalizar.Top = (Screen.Height - frmLocalizar.Height) / 2

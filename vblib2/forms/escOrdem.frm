@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form escOrdem 
    Caption         =   "Escolha a Ordem"
    ClientHeight    =   3195
@@ -57,6 +57,9 @@ Private Sub Form_Load()
     Dim nLEN As Integer
 
     Center Me
+    Me.Caption = cFORMID
+    HelpContextID = nFORMID
+
     'CentralizaJanela Me
 
     lRETU = False
@@ -64,9 +67,9 @@ Private Sub Form_Load()
     nLEN = UBound(ePASS01)
     ''nLEN = nLEN ''aRRAY comeca 0
     List.Clear
-    For X = 0 To nLEN
-        List.AddItem ePASS01(X)
-    Next X
+    For x = 0 To nLEN
+        List.AddItem ePASS01(x)
+    Next x
     HelpContextID = nFORMID
     Me.Caption = cFORMID
 

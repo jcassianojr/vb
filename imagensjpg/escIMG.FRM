@@ -239,6 +239,10 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Const nFORMID = 1107
+Const cFORMID = "escimg"
+
+
 Option Explicit
 Dim aORDEM As Variant
 Dim aORDES As Variant
@@ -343,6 +347,8 @@ Private Sub Form_Load()
     Dim SSQL As String
     
     Center Me
+    Me.Caption = cFORMID
+    HelpContextID = nFORMID
     
     aORDEM = Array("CODIGO", "NUMERO")
     aORDES = Array("CODIGO", "NUMERO")

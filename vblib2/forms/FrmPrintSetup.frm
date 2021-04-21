@@ -175,6 +175,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Const nFORMID = 1111
+Const cFORMID = "frmprintsetup"
 Option Explicit
 Dim DLG As New clsCommonDialogs
 Dim OldDefaultPrinter As String
@@ -193,7 +195,7 @@ Private Sub cboPrinters_Click()
 Dim OUSO
     If Loaded Then
         Me.MousePointer = vbHourglass
-        OUSO = DLG.GetPrinterFromDevice(cboPrinters.tEXT)
+        OUSO = DLG.GetPrinterFromDevice(cboPrinters.Text)
        '' If DLG.SetDefaultPrinter(Byref OUSO) Then
        ''     txtDefault.tEXT = cboPrinters.tEXT
        '' End If
@@ -202,9 +204,12 @@ Dim OUSO
 End Sub
 Private Sub Form_Load()
     Center Me
+    Me.Caption = cFORMID
+    HelpContextID = nFORMID
+    
     DLG.hWnd = Me.hWnd
-    txtDefault.tEXT = DLG.GetDefaultPrinter
-    OldDefaultPrinter = txtDefault.tEXT
+    txtDefault.Text = DLG.GetDefaultPrinter
+    OldDefaultPrinter = txtDefault.Text
     DLG.LoadPrinters cboPrinters, False
     Loaded = True
 End Sub
