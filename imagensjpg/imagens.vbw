@@ -24,6 +24,6 @@ Common = 110, 104, 1255, 522, C
 centraliza = 104, 104, 1249, 522, C
 PicSave = 0, 0, 0, 0, C
 frmPicViewer = 208, 208, 1362, 659, C, 179, 41, 1176, 622, C
-clsResizer = 0, 0, 0, 0, C
+clsResizer = 156, 156, 1283, 608, 
 mBrowseFolder = 0, 0, 0, 0, C
 modGDIPlusResize = 0, 0, 0, 0, C

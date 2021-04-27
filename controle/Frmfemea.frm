@@ -279,443 +279,443 @@ Begin VB.Form frmfemea
       TabCaption(1)   =   "Grupo/Copia/Obs"
       TabPicture(1)   =   "Frmfemea.frx":10BA
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label3"
+      Tab(1).Control(0)=   "Txtfields(33)"
       Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "Label4"
+      Tab(1).Control(1)=   "Txtfields(32)"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "Label6"
+      Tab(1).Control(2)=   "escidfolha(11)"
       Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "Label13"
+      Tab(1).Control(3)=   "escidfolha(10)"
       Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "Label14"
+      Tab(1).Control(4)=   "escidfolha(1)"
       Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "Txtfields(7)"
+      Tab(1).Control(5)=   "escidfolha(0)"
       Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "Txtfields(8)"
+      Tab(1).Control(6)=   "Txtfields(18)"
       Tab(1).Control(6).Enabled=   0   'False
-      Tab(1).Control(7)=   "Txtfields(18)"
+      Tab(1).Control(7)=   "Txtfields(8)"
       Tab(1).Control(7).Enabled=   0   'False
-      Tab(1).Control(8)=   "escidfolha(0)"
+      Tab(1).Control(8)=   "Txtfields(7)"
       Tab(1).Control(8).Enabled=   0   'False
-      Tab(1).Control(9)=   "escidfolha(1)"
+      Tab(1).Control(9)=   "Label14"
       Tab(1).Control(9).Enabled=   0   'False
-      Tab(1).Control(10)=   "escidfolha(10)"
+      Tab(1).Control(10)=   "Label13"
       Tab(1).Control(10).Enabled=   0   'False
-      Tab(1).Control(11)=   "escidfolha(11)"
+      Tab(1).Control(11)=   "Label6"
       Tab(1).Control(11).Enabled=   0   'False
-      Tab(1).Control(12)=   "Txtfields(32)"
+      Tab(1).Control(12)=   "Label4"
       Tab(1).Control(12).Enabled=   0   'False
-      Tab(1).Control(13)=   "Txtfields(33)"
+      Tab(1).Control(13)=   "Label3"
       Tab(1).Control(13).Enabled=   0   'False
       Tab(1).ControlCount=   14
       TabCaption(2)   =   "Elaborador/Revisão"
       TabPicture(2)   =   "Frmfemea.frx":10D6
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label10"
+      Tab(2).Control(0)=   "DTPicker2"
       Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "Label9"
+      Tab(2).Control(1)=   "DTPicker1"
       Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "Label5"
+      Tab(2).Control(2)=   "Check2"
       Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "Label8"
+      Tab(2).Control(3)=   "Command16"
       Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "Label7"
+      Tab(2).Control(4)=   "Command1(8)"
       Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "Label12"
+      Tab(2).Control(5)=   "Txtfields(25)"
       Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "gridrevi(0)"
+      Tab(2).Control(6)=   "Command15"
       Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "gridrev"
+      Tab(2).Control(7)=   "Txtfields(24)"
       Tab(2).Control(7).Enabled=   0   'False
-      Tab(2).Control(8)=   "femeacrg"
+      Tab(2).Control(8)=   "Txtfields(23)"
       Tab(2).Control(8).Enabled=   0   'False
-      Tab(2).Control(9)=   "Command5"
+      Tab(2).Control(9)=   "Txtfields(22)"
       Tab(2).Control(9).Enabled=   0   'False
-      Tab(2).Control(10)=   "CmdProx"
+      Tab(2).Control(10)=   "CmdTrocaREv"
       Tab(2).Control(10).Enabled=   0   'False
-      Tab(2).Control(11)=   "Check1"
+      Tab(2).Control(11)=   "TxtRevNova"
       Tab(2).Control(11).Enabled=   0   'False
-      Tab(2).Control(12)=   "CmdNovaREV"
+      Tab(2).Control(12)=   "TxtRevisao"
       Tab(2).Control(12).Enabled=   0   'False
-      Tab(2).Control(13)=   "CmdMotRev"
+      Tab(2).Control(13)=   "CmdApaRev"
       Tab(2).Control(13).Enabled=   0   'False
-      Tab(2).Control(14)=   "ComMotAlt(0)"
+      Tab(2).Control(14)=   "Txtfields(13)"
       Tab(2).Control(14).Enabled=   0   'False
-      Tab(2).Control(15)=   "ComMotExc"
+      Tab(2).Control(15)=   "Txtfields(14)"
       Tab(2).Control(15).Enabled=   0   'False
-      Tab(2).Control(16)=   "ComMotInc"
+      Tab(2).Control(16)=   "CmdLiberar"
       Tab(2).Control(16).Enabled=   0   'False
-      Tab(2).Control(17)=   "Txtfields(6)"
+      Tab(2).Control(17)=   "Txtfields(12)"
       Tab(2).Control(17).Enabled=   0   'False
-      Tab(2).Control(18)=   "Txtfields(9)"
+      Tab(2).Control(18)=   "Command3"
       Tab(2).Control(18).Enabled=   0   'False
-      Tab(2).Control(19)=   "Command3"
+      Tab(2).Control(19)=   "Txtfields(9)"
       Tab(2).Control(19).Enabled=   0   'False
-      Tab(2).Control(20)=   "Txtfields(12)"
+      Tab(2).Control(20)=   "Txtfields(6)"
       Tab(2).Control(20).Enabled=   0   'False
-      Tab(2).Control(21)=   "CmdLiberar"
+      Tab(2).Control(21)=   "ComMotInc"
       Tab(2).Control(21).Enabled=   0   'False
-      Tab(2).Control(22)=   "Txtfields(14)"
+      Tab(2).Control(22)=   "ComMotExc"
       Tab(2).Control(22).Enabled=   0   'False
-      Tab(2).Control(23)=   "Txtfields(13)"
+      Tab(2).Control(23)=   "ComMotAlt(0)"
       Tab(2).Control(23).Enabled=   0   'False
-      Tab(2).Control(24)=   "CmdApaRev"
+      Tab(2).Control(24)=   "CmdMotRev"
       Tab(2).Control(24).Enabled=   0   'False
-      Tab(2).Control(25)=   "TxtRevisao"
+      Tab(2).Control(25)=   "CmdNovaREV"
       Tab(2).Control(25).Enabled=   0   'False
-      Tab(2).Control(26)=   "TxtRevNova"
+      Tab(2).Control(26)=   "Check1"
       Tab(2).Control(26).Enabled=   0   'False
-      Tab(2).Control(27)=   "CmdTrocaREv"
+      Tab(2).Control(27)=   "CmdProx"
       Tab(2).Control(27).Enabled=   0   'False
-      Tab(2).Control(28)=   "Txtfields(22)"
+      Tab(2).Control(28)=   "Command5"
       Tab(2).Control(28).Enabled=   0   'False
-      Tab(2).Control(29)=   "Txtfields(23)"
+      Tab(2).Control(29)=   "femeacrg"
       Tab(2).Control(29).Enabled=   0   'False
-      Tab(2).Control(30)=   "Txtfields(24)"
+      Tab(2).Control(30)=   "gridrev"
       Tab(2).Control(30).Enabled=   0   'False
-      Tab(2).Control(31)=   "Command15"
+      Tab(2).Control(31)=   "gridrevi(0)"
       Tab(2).Control(31).Enabled=   0   'False
-      Tab(2).Control(32)=   "Txtfields(25)"
+      Tab(2).Control(32)=   "Label12"
       Tab(2).Control(32).Enabled=   0   'False
-      Tab(2).Control(33)=   "Command1(8)"
+      Tab(2).Control(33)=   "Label7"
       Tab(2).Control(33).Enabled=   0   'False
-      Tab(2).Control(34)=   "Command16"
+      Tab(2).Control(34)=   "Label8"
       Tab(2).Control(34).Enabled=   0   'False
-      Tab(2).Control(35)=   "Check2"
+      Tab(2).Control(35)=   "Label5"
       Tab(2).Control(35).Enabled=   0   'False
-      Tab(2).Control(36)=   "DTPicker1"
+      Tab(2).Control(36)=   "Label9"
       Tab(2).Control(36).Enabled=   0   'False
-      Tab(2).Control(37)=   "DTPicker2"
+      Tab(2).Control(37)=   "Label10"
       Tab(2).Control(37).Enabled=   0   'False
       Tab(2).ControlCount=   38
       TabCaption(3)   =   "Revisões PF"
       TabPicture(3)   =   "Frmfemea.frx":10F2
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "gridrevi(1)"
+      Tab(3).Control(0)=   "CmdMarcaFemea"
       Tab(3).Control(0).Enabled=   0   'False
-      Tab(3).Control(1)=   "ComMotAlt(1)"
+      Tab(3).Control(1)=   "GridPFrev"
       Tab(3).Control(1).Enabled=   0   'False
-      Tab(3).Control(2)=   "Txtfields(16)"
+      Tab(3).Control(2)=   "Txtfields(17)"
       Tab(3).Control(2).Enabled=   0   'False
-      Tab(3).Control(3)=   "Txtfields(17)"
+      Tab(3).Control(3)=   "Txtfields(16)"
       Tab(3).Control(3).Enabled=   0   'False
-      Tab(3).Control(4)=   "GridPFrev"
+      Tab(3).Control(4)=   "ComMotAlt(1)"
       Tab(3).Control(4).Enabled=   0   'False
-      Tab(3).Control(5)=   "CmdMarcaFemea"
+      Tab(3).Control(5)=   "gridrevi(1)"
       Tab(3).Control(5).Enabled=   0   'False
       Tab(3).ControlCount=   6
       TabCaption(4)   =   "Sequencia"
       TabPicture(4)   =   "Frmfemea.frx":110E
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "gridopr"
+      Tab(4).Control(0)=   "CmdcheckOp(1)"
       Tab(4).Control(0).Enabled=   0   'False
-      Tab(4).Control(1)=   "Command1(2)"
+      Tab(4).Control(1)=   "CmdcheckOp(0)"
       Tab(4).Control(1).Enabled=   0   'False
-      Tab(4).Control(2)=   "Command1(3)"
+      Tab(4).Control(2)=   "CmdTotPad(1)"
       Tab(4).Control(2).Enabled=   0   'False
       Tab(4).Control(3)=   "CmdTotPad(0)"
       Tab(4).Control(3).Enabled=   0   'False
-      Tab(4).Control(4)=   "CmdTotPad(1)"
+      Tab(4).Control(4)=   "Command1(3)"
       Tab(4).Control(4).Enabled=   0   'False
-      Tab(4).Control(5)=   "CmdcheckOp(0)"
+      Tab(4).Control(5)=   "Command1(2)"
       Tab(4).Control(5).Enabled=   0   'False
-      Tab(4).Control(6)=   "CmdcheckOp(1)"
+      Tab(4).Control(6)=   "gridopr"
       Tab(4).Control(6).Enabled=   0   'False
       Tab(4).ControlCount=   7
       TabCaption(5)   =   "Reg Defeito"
       TabPicture(5)   =   "Frmfemea.frx":112A
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "gridmsrd"
+      Tab(5).Control(0)=   "CmdEdiDef"
       Tab(5).Control(0).Enabled=   0   'False
-      Tab(5).Control(1)=   "CmdVerDef"
+      Tab(5).Control(1)=   "CmdDelDef"
       Tab(5).Control(1).Enabled=   0   'False
       Tab(5).Control(2)=   "CmdIncDef"
       Tab(5).Control(2).Enabled=   0   'False
-      Tab(5).Control(3)=   "CmdDelDef"
+      Tab(5).Control(3)=   "CmdVerDef"
       Tab(5).Control(3).Enabled=   0   'False
-      Tab(5).Control(4)=   "CmdEdiDef"
+      Tab(5).Control(4)=   "gridmsrd"
       Tab(5).Control(4).Enabled=   0   'False
       Tab(5).ControlCount=   5
       TabCaption(6)   =   "Padrao Processo/Falha"
       TabPicture(6)   =   "Frmfemea.frx":1146
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "dizfal"
+      Tab(6).Control(0)=   "Command14"
       Tab(6).Control(0).Enabled=   0   'False
-      Tab(6).Control(1)=   "dizpro"
+      Tab(6).Control(1)=   "Command13"
       Tab(6).Control(1).Enabled=   0   'False
-      Tab(6).Control(2)=   "Label2"
+      Tab(6).Control(2)=   "CmdExcPFPad(1)"
       Tab(6).Control(2).Enabled=   0   'False
-      Tab(6).Control(3)=   "Label1"
+      Tab(6).Control(3)=   "CmdEscPro"
       Tab(6).Control(3).Enabled=   0   'False
-      Tab(6).Control(4)=   "GridPadPF"
+      Tab(6).Control(4)=   "CmdEscFal"
       Tab(6).Control(4).Enabled=   0   'False
-      Tab(6).Control(5)=   "GRIDFAL"
+      Tab(6).Control(5)=   "CmdIncPf"
       Tab(6).Control(5).Enabled=   0   'False
-      Tab(6).Control(6)=   "GridPRO"
+      Tab(6).Control(6)=   "CmdExcPFPad(0)"
       Tab(6).Control(6).Enabled=   0   'False
-      Tab(6).Control(7)=   "Cmdimp"
+      Tab(6).Control(7)=   "Command6"
       Tab(6).Control(7).Enabled=   0   'False
-      Tab(6).Control(8)=   "CmdNome"
+      Tab(6).Control(8)=   "Command8"
       Tab(6).Control(8).Enabled=   0   'False
-      Tab(6).Control(9)=   "Command8"
+      Tab(6).Control(9)=   "CmdNome"
       Tab(6).Control(9).Enabled=   0   'False
-      Tab(6).Control(10)=   "Command6"
+      Tab(6).Control(10)=   "Cmdimp"
       Tab(6).Control(10).Enabled=   0   'False
-      Tab(6).Control(11)=   "CmdExcPFPad(0)"
+      Tab(6).Control(11)=   "GridPRO"
       Tab(6).Control(11).Enabled=   0   'False
-      Tab(6).Control(12)=   "CmdIncPf"
+      Tab(6).Control(12)=   "GRIDFAL"
       Tab(6).Control(12).Enabled=   0   'False
-      Tab(6).Control(13)=   "CmdEscFal"
+      Tab(6).Control(13)=   "GridPadPF"
       Tab(6).Control(13).Enabled=   0   'False
-      Tab(6).Control(14)=   "CmdEscPro"
+      Tab(6).Control(14)=   "Label1"
       Tab(6).Control(14).Enabled=   0   'False
-      Tab(6).Control(15)=   "CmdExcPFPad(1)"
+      Tab(6).Control(15)=   "Label2"
       Tab(6).Control(15).Enabled=   0   'False
-      Tab(6).Control(16)=   "Command13"
+      Tab(6).Control(16)=   "dizpro"
       Tab(6).Control(16).Enabled=   0   'False
-      Tab(6).Control(17)=   "Command14"
+      Tab(6).Control(17)=   "dizfal"
       Tab(6).Control(17).Enabled=   0   'False
       Tab(6).ControlCount=   18
       TabCaption(7)   =   "Padrao"
       TabPicture(7)   =   "Frmfemea.frx":1162
       Tab(7).ControlEnabled=   0   'False
-      Tab(7).Control(0)=   "lblLabels(14)"
+      Tab(7).Control(0)=   "CMDSIG(1)"
       Tab(7).Control(0).Enabled=   0   'False
-      Tab(7).Control(1)=   "lblLabels(0)"
+      Tab(7).Control(1)=   "CmdEdiPad(10)"
       Tab(7).Control(1).Enabled=   0   'False
-      Tab(7).Control(2)=   "lblLabels(6)"
+      Tab(7).Control(2)=   "importar(10)"
       Tab(7).Control(2).Enabled=   0   'False
-      Tab(7).Control(3)=   "Line1(0)"
+      Tab(7).Control(3)=   "CmdOrdPad(3)"
       Tab(7).Control(3).Enabled=   0   'False
-      Tab(7).Control(4)=   "Line1(1)"
+      Tab(7).Control(4)=   "CmdApagaRPN"
       Tab(7).Control(4).Enabled=   0   'False
-      Tab(7).Control(5)=   "Line1(2)"
+      Tab(7).Control(5)=   "txtRPN"
       Tab(7).Control(5).Enabled=   0   'False
-      Tab(7).Control(6)=   "GridPad"
+      Tab(7).Control(6)=   "CmdEdiPad(0)"
       Tab(7).Control(6).Enabled=   0   'False
-      Tab(7).Control(7)=   "CmdEdiPad(9)"
+      Tab(7).Control(7)=   "CmdEdiPad(1)"
       Tab(7).Control(7).Enabled=   0   'False
-      Tab(7).Control(8)=   "CmdEdiPad(8)"
+      Tab(7).Control(8)=   "CmdEdiPad(2)"
       Tab(7).Control(8).Enabled=   0   'False
-      Tab(7).Control(9)=   "CmdEdiPad(7)"
+      Tab(7).Control(9)=   "CmdOrdPad(0)"
       Tab(7).Control(9).Enabled=   0   'False
-      Tab(7).Control(10)=   "CmdEdiPad(6)"
+      Tab(7).Control(10)=   "CmdOrdPad(1)"
       Tab(7).Control(10).Enabled=   0   'False
-      Tab(7).Control(11)=   "txtsigi"
+      Tab(7).Control(11)=   "CmdOrdPad(2)"
       Tab(7).Control(11).Enabled=   0   'False
-      Tab(7).Control(12)=   "CMDSIG(0)"
+      Tab(7).Control(12)=   "CmdEdiPad(3)"
       Tab(7).Control(12).Enabled=   0   'False
-      Tab(7).Control(13)=   "CmdEdiPad(5)"
+      Tab(7).Control(13)=   "CmdEdiPad(4)"
       Tab(7).Control(13).Enabled=   0   'False
-      Tab(7).Control(14)=   "CmdEdiPad(4)"
+      Tab(7).Control(14)=   "CmdEdiPad(5)"
       Tab(7).Control(14).Enabled=   0   'False
-      Tab(7).Control(15)=   "CmdEdiPad(3)"
+      Tab(7).Control(15)=   "CMDSIG(0)"
       Tab(7).Control(15).Enabled=   0   'False
-      Tab(7).Control(16)=   "CmdOrdPad(2)"
+      Tab(7).Control(16)=   "txtsigi"
       Tab(7).Control(16).Enabled=   0   'False
-      Tab(7).Control(17)=   "CmdOrdPad(1)"
+      Tab(7).Control(17)=   "CmdEdiPad(6)"
       Tab(7).Control(17).Enabled=   0   'False
-      Tab(7).Control(18)=   "CmdOrdPad(0)"
+      Tab(7).Control(18)=   "CmdEdiPad(7)"
       Tab(7).Control(18).Enabled=   0   'False
-      Tab(7).Control(19)=   "CmdEdiPad(2)"
+      Tab(7).Control(19)=   "CmdEdiPad(8)"
       Tab(7).Control(19).Enabled=   0   'False
-      Tab(7).Control(20)=   "CmdEdiPad(1)"
+      Tab(7).Control(20)=   "CmdEdiPad(9)"
       Tab(7).Control(20).Enabled=   0   'False
-      Tab(7).Control(21)=   "CmdEdiPad(0)"
+      Tab(7).Control(21)=   "GridPad"
       Tab(7).Control(21).Enabled=   0   'False
-      Tab(7).Control(22)=   "txtRPN"
+      Tab(7).Control(22)=   "Line1(2)"
       Tab(7).Control(22).Enabled=   0   'False
-      Tab(7).Control(23)=   "CmdApagaRPN"
+      Tab(7).Control(23)=   "Line1(1)"
       Tab(7).Control(23).Enabled=   0   'False
-      Tab(7).Control(24)=   "CmdOrdPad(3)"
+      Tab(7).Control(24)=   "Line1(0)"
       Tab(7).Control(24).Enabled=   0   'False
-      Tab(7).Control(25)=   "importar(10)"
+      Tab(7).Control(25)=   "lblLabels(6)"
       Tab(7).Control(25).Enabled=   0   'False
-      Tab(7).Control(26)=   "CmdEdiPad(10)"
+      Tab(7).Control(26)=   "lblLabels(0)"
       Tab(7).Control(26).Enabled=   0   'False
-      Tab(7).Control(27)=   "CMDSIG(1)"
+      Tab(7).Control(27)=   "lblLabels(14)"
       Tab(7).Control(27).Enabled=   0   'False
       Tab(7).ControlCount=   28
       TabCaption(8)   =   "Padrao-Complementar"
       TabPicture(8)   =   "Frmfemea.frx":117E
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "gridrevcau(1)"
+      Tab(8).Control(0)=   "Command10(1)"
       Tab(8).Control(0).Enabled=   0   'False
-      Tab(8).Control(1)=   "GridSeq(1)"
+      Tab(8).Control(1)=   "Command12"
       Tab(8).Control(1).Enabled=   0   'False
-      Tab(8).Control(2)=   "EditSeq(1)"
+      Tab(8).Control(2)=   "Command11"
       Tab(8).Control(2).Enabled=   0   'False
-      Tab(8).Control(3)=   "Command2(1)"
+      Tab(8).Control(3)=   "Command10(0)"
       Tab(8).Control(3).Enabled=   0   'False
-      Tab(8).Control(4)=   "Command1(1)"
+      Tab(8).Control(4)=   "CmdREvi(1)"
       Tab(8).Control(4).Enabled=   0   'False
-      Tab(8).Control(5)=   "importar(1)"
+      Tab(8).Control(5)=   "CmdRevFemea(1)"
       Tab(8).Control(5).Enabled=   0   'False
-      Tab(8).Control(6)=   "Command4(1)"
+      Tab(8).Control(6)=   "CmdOrdFem(3)"
       Tab(8).Control(6).Enabled=   0   'False
-      Tab(8).Control(7)=   "CmdClo(2)"
+      Tab(8).Control(7)=   "CmdOrdFem(2)"
       Tab(8).Control(7).Enabled=   0   'False
       Tab(8).Control(8)=   "CmdClo(3)"
       Tab(8).Control(8).Enabled=   0   'False
-      Tab(8).Control(9)=   "CmdOrdFem(2)"
+      Tab(8).Control(9)=   "CmdClo(2)"
       Tab(8).Control(9).Enabled=   0   'False
-      Tab(8).Control(10)=   "CmdOrdFem(3)"
+      Tab(8).Control(10)=   "Command4(1)"
       Tab(8).Control(10).Enabled=   0   'False
-      Tab(8).Control(11)=   "CmdRevFemea(1)"
+      Tab(8).Control(11)=   "importar(1)"
       Tab(8).Control(11).Enabled=   0   'False
-      Tab(8).Control(12)=   "CmdREvi(1)"
+      Tab(8).Control(12)=   "Command1(1)"
       Tab(8).Control(12).Enabled=   0   'False
-      Tab(8).Control(13)=   "Command10(0)"
+      Tab(8).Control(13)=   "Command2(1)"
       Tab(8).Control(13).Enabled=   0   'False
-      Tab(8).Control(14)=   "Command11"
+      Tab(8).Control(14)=   "EditSeq(1)"
       Tab(8).Control(14).Enabled=   0   'False
-      Tab(8).Control(15)=   "Command12"
+      Tab(8).Control(15)=   "GridSeq(1)"
       Tab(8).Control(15).Enabled=   0   'False
-      Tab(8).Control(16)=   "Command10(1)"
+      Tab(8).Control(16)=   "gridrevcau(1)"
       Tab(8).Control(16).Enabled=   0   'False
       Tab(8).ControlCount=   17
       TabCaption(9)   =   "PreCadastro"
       TabPicture(9)   =   "Frmfemea.frx":119A
       Tab(9).ControlEnabled=   0   'False
-      Tab(9).Control(0)=   "Gridfemprecad"
+      Tab(9).Control(0)=   "CmdPreinc"
       Tab(9).Control(0).Enabled=   0   'False
-      Tab(9).Control(1)=   "Command7"
+      Tab(9).Control(1)=   "CmddelPre"
       Tab(9).Control(1).Enabled=   0   'False
       Tab(9).Control(2)=   "cmdedipre(2)"
       Tab(9).Control(2).Enabled=   0   'False
-      Tab(9).Control(3)=   "CmddelPre"
+      Tab(9).Control(3)=   "Command7"
       Tab(9).Control(3).Enabled=   0   'False
-      Tab(9).Control(4)=   "CmdPreinc"
+      Tab(9).Control(4)=   "Gridfemprecad"
       Tab(9).Control(4).Enabled=   0   'False
       Tab(9).ControlCount=   5
       TabCaption(10)  =   "Apuracoes"
       TabPicture(10)  =   "Frmfemea.frx":11B6
       Tab(10).ControlEnabled=   0   'False
-      Tab(10).Control(0)=   "dizcomapu"
+      Tab(10).Control(0)=   "maisano"
       Tab(10).Control(0).Enabled=   0   'False
-      Tab(10).Control(1)=   "lbl(3)"
+      Tab(10).Control(1)=   "menosano"
       Tab(10).Control(1).Enabled=   0   'False
-      Tab(10).Control(2)=   "lbl(4)"
+      Tab(10).Control(2)=   "maismes"
       Tab(10).Control(2).Enabled=   0   'False
-      Tab(10).Control(3)=   "GridOpe"
+      Tab(10).Control(3)=   "menosmes"
       Tab(10).Control(3).Enabled=   0   'False
-      Tab(10).Control(4)=   "Grid10"
+      Tab(10).Control(4)=   "text(2)"
       Tab(10).Control(4).Enabled=   0   'False
-      Tab(10).Control(5)=   "Command9"
+      Tab(10).Control(5)=   "text(1)"
       Tab(10).Control(5).Enabled=   0   'False
-      Tab(10).Control(6)=   "Cmdeditar"
+      Tab(10).Control(6)=   "CmdVerApu"
       Tab(10).Control(6).Enabled=   0   'False
-      Tab(10).Control(7)=   "CmdVerApu"
+      Tab(10).Control(7)=   "Cmdeditar"
       Tab(10).Control(7).Enabled=   0   'False
-      Tab(10).Control(8)=   "text(1)"
+      Tab(10).Control(8)=   "Command9"
       Tab(10).Control(8).Enabled=   0   'False
-      Tab(10).Control(9)=   "text(2)"
+      Tab(10).Control(9)=   "Grid10"
       Tab(10).Control(9).Enabled=   0   'False
-      Tab(10).Control(10)=   "menosmes"
+      Tab(10).Control(10)=   "GridOpe"
       Tab(10).Control(10).Enabled=   0   'False
-      Tab(10).Control(11)=   "maismes"
+      Tab(10).Control(11)=   "lbl(4)"
       Tab(10).Control(11).Enabled=   0   'False
-      Tab(10).Control(12)=   "menosano"
+      Tab(10).Control(12)=   "lbl(3)"
       Tab(10).Control(12).Enabled=   0   'False
-      Tab(10).Control(13)=   "maisano"
+      Tab(10).Control(13)=   "dizcomapu"
       Tab(10).Control(13).Enabled=   0   'False
       Tab(10).ControlCount=   14
       TabCaption(11)  =   "Fluxo II"
       TabPicture(11)  =   "Frmfemea.frx":11D2
       Tab(11).ControlEnabled=   0   'False
-      Tab(11).Control(0)=   "GrdQsbLep"
+      Tab(11).Control(0)=   "Command1(13)"
       Tab(11).Control(0).Enabled=   0   'False
-      Tab(11).Control(1)=   "Command1(5)"
+      Tab(11).Control(1)=   "Command1(12)"
       Tab(11).Control(1).Enabled=   0   'False
-      Tab(11).Control(2)=   "Command1(4)"
+      Tab(11).Control(2)=   "Cmdcheckfx(3)"
       Tab(11).Control(2).Enabled=   0   'False
-      Tab(11).Control(3)=   "CmdTotFlux(0)"
+      Tab(11).Control(3)=   "Cmdcheckfx(2)"
       Tab(11).Control(3).Enabled=   0   'False
-      Tab(11).Control(4)=   "CmdTotFlux(1)"
+      Tab(11).Control(4)=   "CmdTotFlux(3)"
       Tab(11).Control(4).Enabled=   0   'False
-      Tab(11).Control(5)=   "Cmdcheckfx(0)"
+      Tab(11).Control(5)=   "CmdTotFlux(2)"
       Tab(11).Control(5).Enabled=   0   'False
       Tab(11).Control(6)=   "Cmdcheckfx(1)"
       Tab(11).Control(6).Enabled=   0   'False
-      Tab(11).Control(7)=   "CmdTotFlux(2)"
+      Tab(11).Control(7)=   "Cmdcheckfx(0)"
       Tab(11).Control(7).Enabled=   0   'False
-      Tab(11).Control(8)=   "CmdTotFlux(3)"
+      Tab(11).Control(8)=   "CmdTotFlux(1)"
       Tab(11).Control(8).Enabled=   0   'False
-      Tab(11).Control(9)=   "Cmdcheckfx(2)"
+      Tab(11).Control(9)=   "CmdTotFlux(0)"
       Tab(11).Control(9).Enabled=   0   'False
-      Tab(11).Control(10)=   "Cmdcheckfx(3)"
+      Tab(11).Control(10)=   "Command1(4)"
       Tab(11).Control(10).Enabled=   0   'False
-      Tab(11).Control(11)=   "Command1(12)"
+      Tab(11).Control(11)=   "Command1(5)"
       Tab(11).Control(11).Enabled=   0   'False
-      Tab(11).Control(12)=   "Command1(13)"
+      Tab(11).Control(12)=   "GrdQsbLep"
       Tab(11).Control(12).Enabled=   0   'False
       Tab(11).ControlCount=   13
       TabCaption(12)  =   "Pre"
       TabPicture(12)  =   "Frmfemea.frx":11EE
       Tab(12).ControlEnabled=   0   'False
-      Tab(12).Control(0)=   "gridrevcau(2)"
+      Tab(12).Control(0)=   "CmdClo(5)"
       Tab(12).Control(0).Enabled=   0   'False
-      Tab(12).Control(1)=   "GridSeq(2)"
+      Tab(12).Control(1)=   "CmdClo(4)"
       Tab(12).Control(1).Enabled=   0   'False
-      Tab(12).Control(2)=   "CmdREvi(2)"
+      Tab(12).Control(2)=   "Command4(2)"
       Tab(12).Control(2).Enabled=   0   'False
-      Tab(12).Control(3)=   "CmdRevFemea(2)"
+      Tab(12).Control(3)=   "importar(2)"
       Tab(12).Control(3).Enabled=   0   'False
-      Tab(12).Control(4)=   "CmdOrdFem(4)"
+      Tab(12).Control(4)=   "Command1(6)"
       Tab(12).Control(4).Enabled=   0   'False
-      Tab(12).Control(5)=   "CmdOrdFem(5)"
+      Tab(12).Control(5)=   "Command2(2)"
       Tab(12).Control(5).Enabled=   0   'False
       Tab(12).Control(6)=   "EditSeq(2)"
       Tab(12).Control(6).Enabled=   0   'False
-      Tab(12).Control(7)=   "Command2(2)"
+      Tab(12).Control(7)=   "CmdOrdFem(5)"
       Tab(12).Control(7).Enabled=   0   'False
-      Tab(12).Control(8)=   "Command1(6)"
+      Tab(12).Control(8)=   "CmdOrdFem(4)"
       Tab(12).Control(8).Enabled=   0   'False
-      Tab(12).Control(9)=   "importar(2)"
+      Tab(12).Control(9)=   "CmdRevFemea(2)"
       Tab(12).Control(9).Enabled=   0   'False
-      Tab(12).Control(10)=   "Command4(2)"
+      Tab(12).Control(10)=   "CmdREvi(2)"
       Tab(12).Control(10).Enabled=   0   'False
-      Tab(12).Control(11)=   "CmdClo(4)"
+      Tab(12).Control(11)=   "GridSeq(2)"
       Tab(12).Control(11).Enabled=   0   'False
-      Tab(12).Control(12)=   "CmdClo(5)"
+      Tab(12).Control(12)=   "gridrevcau(2)"
       Tab(12).Control(12).Enabled=   0   'False
       Tab(12).ControlCount=   13
       TabCaption(13)  =   "GP12"
       TabPicture(13)  =   "Frmfemea.frx":120A
       Tab(13).ControlEnabled=   0   'False
-      Tab(13).Control(0)=   "gridrevcau(3)"
+      Tab(13).Control(0)=   "CmdClo(7)"
       Tab(13).Control(0).Enabled=   0   'False
-      Tab(13).Control(1)=   "GridSeq(3)"
+      Tab(13).Control(1)=   "CmdClo(6)"
       Tab(13).Control(1).Enabled=   0   'False
-      Tab(13).Control(2)=   "CmdREvi(3)"
+      Tab(13).Control(2)=   "Command4(3)"
       Tab(13).Control(2).Enabled=   0   'False
-      Tab(13).Control(3)=   "CmdRevFemea(3)"
+      Tab(13).Control(3)=   "importar(3)"
       Tab(13).Control(3).Enabled=   0   'False
-      Tab(13).Control(4)=   "CmdOrdFem(6)"
+      Tab(13).Control(4)=   "Command1(7)"
       Tab(13).Control(4).Enabled=   0   'False
-      Tab(13).Control(5)=   "CmdOrdFem(7)"
+      Tab(13).Control(5)=   "Command2(3)"
       Tab(13).Control(5).Enabled=   0   'False
       Tab(13).Control(6)=   "EditSeq(3)"
       Tab(13).Control(6).Enabled=   0   'False
-      Tab(13).Control(7)=   "Command2(3)"
+      Tab(13).Control(7)=   "CmdOrdFem(7)"
       Tab(13).Control(7).Enabled=   0   'False
-      Tab(13).Control(8)=   "Command1(7)"
+      Tab(13).Control(8)=   "CmdOrdFem(6)"
       Tab(13).Control(8).Enabled=   0   'False
-      Tab(13).Control(9)=   "importar(3)"
+      Tab(13).Control(9)=   "CmdRevFemea(3)"
       Tab(13).Control(9).Enabled=   0   'False
-      Tab(13).Control(10)=   "Command4(3)"
+      Tab(13).Control(10)=   "CmdREvi(3)"
       Tab(13).Control(10).Enabled=   0   'False
-      Tab(13).Control(11)=   "CmdClo(6)"
+      Tab(13).Control(11)=   "GridSeq(3)"
       Tab(13).Control(11).Enabled=   0   'False
-      Tab(13).Control(12)=   "CmdClo(7)"
+      Tab(13).Control(12)=   "gridrevcau(3)"
       Tab(13).Control(12).Enabled=   0   'False
       Tab(13).ControlCount=   13
       TabCaption(14)  =   "Historico"
       TabPicture(14)  =   "Frmfemea.frx":1226
       Tab(14).ControlEnabled=   0   'False
-      Tab(14).Control(0)=   "GridSeq(4)"
+      Tab(14).Control(0)=   "CmdREvi(4)"
       Tab(14).Control(0).Enabled=   0   'False
-      Tab(14).Control(1)=   "CmdREvi(4)"
+      Tab(14).Control(1)=   "GridSeq(4)"
       Tab(14).Control(1).Enabled=   0   'False
       Tab(14).ControlCount=   2
       TabCaption(15)  =   "Padrao  Historico"
@@ -727,33 +727,33 @@ Begin VB.Form frmfemea
       TabCaption(16)  =   "Adcionais"
       TabPicture(16)  =   "Frmfemea.frx":125E
       Tab(16).ControlEnabled=   0   'False
-      Tab(16).Control(0)=   "gridrevcau(5)"
+      Tab(16).Control(0)=   "CmdRevFemea(5)"
       Tab(16).Control(0).Enabled=   0   'False
-      Tab(16).Control(1)=   "GridSeq(5)"
+      Tab(16).Control(1)=   "CmdREvi(5)"
       Tab(16).Control(1).Enabled=   0   'False
-      Tab(16).Control(2)=   "Command2(15)"
+      Tab(16).Control(2)=   "CmdClo(9)"
       Tab(16).Control(2).Enabled=   0   'False
-      Tab(16).Control(3)=   "CmdOrdFem(8)"
+      Tab(16).Control(3)=   "CmdClo(8)"
       Tab(16).Control(3).Enabled=   0   'False
-      Tab(16).Control(4)=   "CmdOrdFem(9)"
+      Tab(16).Control(4)=   "Command4(5)"
       Tab(16).Control(4).Enabled=   0   'False
-      Tab(16).Control(5)=   "EditSeq(5)"
+      Tab(16).Control(5)=   "importar(5)"
       Tab(16).Control(5).Enabled=   0   'False
-      Tab(16).Control(6)=   "Command2(5)"
+      Tab(16).Control(6)=   "Command1(20)"
       Tab(16).Control(6).Enabled=   0   'False
-      Tab(16).Control(7)=   "Command1(20)"
+      Tab(16).Control(7)=   "Command2(5)"
       Tab(16).Control(7).Enabled=   0   'False
-      Tab(16).Control(8)=   "importar(5)"
+      Tab(16).Control(8)=   "EditSeq(5)"
       Tab(16).Control(8).Enabled=   0   'False
-      Tab(16).Control(9)=   "Command4(5)"
+      Tab(16).Control(9)=   "CmdOrdFem(9)"
       Tab(16).Control(9).Enabled=   0   'False
-      Tab(16).Control(10)=   "CmdClo(8)"
+      Tab(16).Control(10)=   "CmdOrdFem(8)"
       Tab(16).Control(10).Enabled=   0   'False
-      Tab(16).Control(11)=   "CmdClo(9)"
+      Tab(16).Control(11)=   "Command2(15)"
       Tab(16).Control(11).Enabled=   0   'False
-      Tab(16).Control(12)=   "CmdREvi(5)"
+      Tab(16).Control(12)=   "GridSeq(5)"
       Tab(16).Control(12).Enabled=   0   'False
-      Tab(16).Control(13)=   "CmdRevFemea(5)"
+      Tab(16).Control(13)=   "gridrevcau(5)"
       Tab(16).Control(13).Enabled=   0   'False
       Tab(16).ControlCount=   14
       Begin VBCCR17.DTPicker DTPicker2 
@@ -3410,12 +3410,12 @@ Private Sub cmdClose_Click()
     Dim dFEMEA As Date
     Dim dPF As Date
     On Error Resume Next
-    If IsDate(Txtfields(23)) And IsDate(Txtfields(17)) Then
-        dFEMEA = Txtfields(23)
-        If IsDate(Txtfields(25)) Then
-            dFEMEA = Txtfields(25)
+    If IsDate(TXTFIELDS(23)) And IsDate(TXTFIELDS(17)) Then
+        dFEMEA = TXTFIELDS(23)
+        If IsDate(TXTFIELDS(25)) Then
+            dFEMEA = TXTFIELDS(25)
         End If
-        dPF = Txtfields(17)
+        dPF = TXTFIELDS(17)
         If dFEMEA < dPF Then
             Alert ("Data Revisao Femea Menor que Processo Fabricacao")
         End If
@@ -3423,7 +3423,7 @@ Private Sub cmdClose_Click()
     chkfemeas
   
     For iLOOP = 0 To nCAMPOS - 8
-        aVAL(iLOOP) = Txtfields(iLOOP)
+        aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     aVAL(27) = FixNumBol(Check1.Value)
     aVAL(28) = FixNumBol(Check2.Value)
@@ -3432,7 +3432,7 @@ Private Sub cmdClose_Click()
     aVAL(31) = DTPicker1.Value
     
     For iLOOP = 32 To nCAMPOS - 1
-        aVAL(iLOOP) = Txtfields(iLOOP)
+        aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     
     
@@ -3886,6 +3886,8 @@ Private Sub CmdIncDef_Click()
     Dim nSAC As Long
     Dim cCAM As String
     Dim cTITULO As String
+    Dim acampos
+    Dim avalor
    
     cTITULO = FixStr(Busca("Digite Descricao", "Descricao", Space(50), 50), "")
     If Len(cTITULO) = 0 Then
@@ -3897,13 +3899,15 @@ Private Sub CmdIncDef_Click()
     
     nSAC = PegMAXSQL(GeraConn(cCAM, "FOX"), "MSRD", "MSDR", 1)
     nSAC = nSAC + 1
+    
+    acampos = Array("MSRD", "DATA", "PF", "CODIGO", "CLIENTE", "DESC01")
+    avalor = Array(nSAC, Format(Date, "DD/MM/YY"), FixNum(TXTFIELDS(0)), FixStr(TXTFIELDS(2)), FixNum(TXTFIELDS(4)), FixStr(cTITULO))
+    
     IncluiSQL GeraConn(cCAM, "FOX"), "SELECT * FROM MSRD WHERE MSRD=" & nSAC, 6 _
-    , Array("MSRD", "DATA", "PF", "CODIGO", "CLIENTE", "DESC01") _
-    , Array(nSAC, cData, FixNum(Txtfields(0)), FixStr(Txtfields(2)), FixNum(Txtfields(4)), FixStr(cTITULO)) _
+    , acampos _
+    , avalor, _
     , False, True
     
-    aCAMPOS = Array("MSRD", "DATA", "PF", "CODIGO", "CLIENTE", "DESC01")
-    aVALOR = Array(nSAC, Format(Date, "DD/MM/YY"), FixNum(Txtfields(0)), FixStr(Txtfields(2)), FixNum(Txtfields(4)), FixStr(cTITULO))
     
     filgridmsrd
 End Sub
@@ -3939,9 +3943,9 @@ Private Sub CmdLiberar_Click()
     'eRETU01 = PegUltSQL(Dbname, sSQL, "LIGADO", False)
     eRETU01 = PegCampoSQLADO(Dbname, sSQL, "", False)
     If eRETU01 Then
-        Txtfields(13) = zIDFOLHA
-        Txtfields(14) = zNOMEFOLHA
-        Txtfields(24) = Today()
+        TXTFIELDS(13) = zIDFOLHA
+        TXTFIELDS(14) = zNOMEFOLHA
+        TXTFIELDS(24) = Today()
         Encerrar.Visible = False
     Else
         Alert ("Sem direito")
@@ -4012,8 +4016,8 @@ Private Sub CmdNovaREV_Click()
     End If
     
     
-    If Len(Txtfields(23).text) > 0 Then          'corrige erro importacao protheus data em branco
-        If Txtfields(23) > Today() Then
+    If Len(TXTFIELDS(23).tEXT) > 0 Then          'corrige erro importacao protheus data em branco
+        If TXTFIELDS(23) > Today() Then
             Alert ("Data Revisao Anterior Maior que Data do Sistema")
             Exit Sub
         End If
@@ -4029,18 +4033,18 @@ Private Sub CmdNovaREV_Click()
         End If
     End If
     
-    If IsNumeric(Txtfields(12)) Then
-        Txtfields(12) = Txtfields(12) + 1
+    If IsNumeric(TXTFIELDS(12)) Then
+        TXTFIELDS(12) = TXTFIELDS(12) + 1
     Else
-        Txtfields(12) = 1
+        TXTFIELDS(12) = 1
     End If
-    Txtfields(20) = True
-    Txtfields(13) = 0
-    Txtfields(14) = ""
-    Txtfields(24) = ""
-    Txtfields(23) = dDATAREV
+    TXTFIELDS(20) = True
+    TXTFIELDS(13) = 0
+    TXTFIELDS(14) = ""
+    TXTFIELDS(24) = ""
+    TXTFIELDS(23) = dDATAREV
     Check1.Value = False
-    nREV = FixInt(Txtfields(12))
+    nREV = FixInt(TXTFIELDS(12))
     IncluiSQL cARQPF, "select * from rev WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), Array(FixInt(nPF), nREV, "FE", dDATAREV), True, False
     CmdProx_Click
     Filgridrev
@@ -4050,8 +4054,8 @@ Private Sub CmdNovaREV_Click()
     
     
     
-    eRETU02 = "PF:" & txtPF.text & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & Txtfields(2) & Chr(13) & Chr(10)
+    eRETU02 = "PF:" & TXTPF.tEXT & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " Data:" & Fdata(dDATAREV) & Chr(13) & Chr(10)
     MAILENV "FEM00001", eRETU02
     
@@ -4134,8 +4138,8 @@ End Sub
 Private Sub CmdProx_Click()
 
     If femeacrg.Value = False Then
-        If IsDate(Txtfields(23)) Then
-            DTPicker1.Value = CDate(Txtfields(23)) + 730
+        If IsDate(TXTFIELDS(23)) Then
+            DTPicker1.Value = CDate(TXTFIELDS(23)) + 730
         Else
             If IsDate(DTPicker1) Then
                 DTPicker1 = DTPicker1 + 730
@@ -4323,7 +4327,7 @@ Private Sub RevisaoFemea(ByVal Index As Integer)
         'End If
         
         If FixNum(aVAL(52)) = 0 Then             'revisao do femea checar em branco pois historio pode ter varias versoes
-            aVAL(52) = FixNum(Txtfields(12).text)
+            aVAL(52) = FixNum(TXTFIELDS(12).tEXT)
         End If
         
         
@@ -4427,10 +4431,10 @@ Private Sub CmdREvi_Click(Index As Integer)
     ePASS02 = cARQFEMEA
     
     Load frmFEMEI
-    frmFEMEI.Txtfields(2).Enabled = False
-    frmFEMEI.Txtfields(3).Enabled = False
-    frmFEMEI.Txtfields(4).Enabled = False
-    frmFEMEI.Txtfields(5).Enabled = False
+    frmFEMEI.TXTFIELDS(2).Enabled = False
+    frmFEMEI.TXTFIELDS(3).Enabled = False
+    frmFEMEI.TXTFIELDS(4).Enabled = False
+    frmFEMEI.TXTFIELDS(5).Enabled = False
     frmFEMEI.cmdClose.Enabled = False
     frmFEMEI.CmdAltman.Enabled = False
     frmFEMEI.Show vbModal, Me
@@ -4567,10 +4571,10 @@ Private Sub CmdTrocaREv_Click()
     GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
     cSQL = "select * from revI WHERE PF=" & nPF & " AND REVISAO=" & nORI & " AND TIPO='FE'"
     GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
-    Txtfields(12).Enabled = True
-    Txtfields(23).Enabled = True
-    Txtfields(12).Locked = False
-    Txtfields(23).Locked = False
+    TXTFIELDS(12).Enabled = True
+    TXTFIELDS(23).Enabled = True
+    TXTFIELDS(12).Locked = False
+    TXTFIELDS(23).Locked = False
     Filgridrev
 End Sub
 
@@ -4579,8 +4583,8 @@ Private Sub CmdVerApu_Click()
     Dim nMES
     Dim nANO As Integer
     DizerBarra "carregando apuracoes"
-    nMES = FixInt(text(1))
-    nANO = FixInt(text(2))
+    nMES = FixInt(tEXT(1))
+    nANO = FixInt(tEXT(2))
     cSQL = "SELECT PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU FROM FEMRPNT WHERE ANO=" & nANO & " AND MES=" & nMES & " AND PF=" & nPF & " ORDER BY PF,INDRIS"
     MontaGridFast Grid10, 10, Array(400, 400, 400, 400, 400, 400, 400, 300, 2500, 2500), Array("PF", "ITEM", "RPN", "NºPro", "NºFal", "NºEfe", "NºCau", "Man", "Efeito", "Causa"), Array("PF", "ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
     DizerBarra "carregando apuracoes RPN"
@@ -4811,11 +4815,11 @@ End Sub
 Private Sub Command15_Click()
     Dim cDIZ
     Encerrar.Visible = False
-    cDIZ = "PF: " & nPF & "Revisao: " & Txtfields(16) & " Nao necessita revisar femea"
-    nREV = FixInt(Txtfields(12))
+    cDIZ = "PF: " & nPF & "Revisao: " & TXTFIELDS(16) & " Nao necessita revisar femea"
+    nREV = FixInt(TXTFIELDS(12))
     XComMotInc_Click (cDIZ)
     Check1.Value = False
-    Txtfields(25) = Today()
+    TXTFIELDS(25) = Today()
     cmdClose_Click
 End Sub
 
@@ -4930,11 +4934,11 @@ End Sub
 
 Private Sub Command3_Click()
     If MDG("Gravar Elaborador", "Confirme Gravação") Then
-        frmfemea.Txtfields(6) = zIDFOLHA
-        frmfemea.Txtfields(9) = zNOMEFOLHA
-        Txtfields(22) = Date
-        If IsNull(Txtfields(23)) Or Txtfields(23) = "" Then
-            Txtfields(23) = Date
+        frmfemea.TXTFIELDS(6) = zIDFOLHA
+        frmfemea.TXTFIELDS(9) = zNOMEFOLHA
+        TXTFIELDS(22) = Date
+        If IsNull(TXTFIELDS(23)) Or TXTFIELDS(23) = "" Then
+            TXTFIELDS(23) = Date
         End If
     End If
 End Sub
@@ -4998,14 +5002,14 @@ End Sub
 Private Sub Command5_Click()
     Encerrar.Visible = False
     CmdNovaREV_Click
-    nREV = FixInt(Txtfields(12))
+    nREV = FixInt(TXTFIELDS(12))
     XComMotInc_Click ("Revisão Periodica")
     Filgridrevi (0)
     
     Command3_Click
     
     eRETU02 = "PF:" & nPF & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & Txtfields(2) & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
     MAILENV "FEM00001", eRETU02
     
@@ -5128,7 +5132,7 @@ End Sub
 Private Sub EditSeq_Click(Index As Integer)
 
     ePASS03 = Index                              'Para usar com o revisao abaixo 'atualizacao de versao
-    ePASS04 = Txtfields(12)                      ''REVISAO PF
+    ePASS04 = TXTFIELDS(12)                      ''REVISAO PF
 
     If Index = 3 And (Not AcessaMenu("FemeaGP12", 1)) Then Exit Sub
     If Index = 0 And (Not AcessaMenu("FemeaPro", 1)) Then Exit Sub
@@ -5363,9 +5367,9 @@ Private Sub escidfolha_Click(Index As Integer)
     If lRETU Then
         Select Case Index
         Case 0, 10
-            Txtfields(7).text = Txtfields(7).text & " , " & Trim(MMCase(eRETU02))
+            TXTFIELDS(7).tEXT = TXTFIELDS(7).tEXT & " , " & Trim(MMCase(eRETU02))
         Case 1, 11
-            Txtfields(8).text = Txtfields(8).text & " , " & Trim(MMCase(eRETU02))
+            TXTFIELDS(8).tEXT = TXTFIELDS(8).tEXT & " , " & Trim(MMCase(eRETU02))
         End Select
     End If
 End Sub
@@ -5379,14 +5383,14 @@ Private Sub ESCprofin_Click(Index As Integer)
     If Index = 2 Then
         ePASS01 = "MICRO"
     End If
-    If Len(Txtfields(61)) = 0 Then
-        cCHAVEBUS = Txtfields(60)
+    If Len(TXTFIELDS(61)) = 0 Then
+        cCHAVEBUS = TXTFIELDS(60)
     Else
-        cCHAVEBUS = Txtfields(61)
+        cCHAVEBUS = TXTFIELDS(61)
     End If
     escms01.Show vbModal, Me
     If lRETU Then
-        Txtfields(61) = eRETU01
+        TXTFIELDS(61) = eRETU01
     End If
     cCHAVEBUS = ""
 End Sub
@@ -5397,7 +5401,7 @@ End Sub
 
 Private Sub Form_Load()
     Center Me
-    txtPF = nPF
+    TXTPF = nPF
     aNUM = Array(0, 0, 0, 0)
     aDIZ = Array("", "", "", "")
     cARQFEMEA = PegPath("PATH", "FEMEA")
@@ -5433,7 +5437,7 @@ Private Sub Form_Load()
                  "", "", "", "")
     aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 8
-        Txtfields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     
     
@@ -5448,7 +5452,7 @@ Private Sub Form_Load()
     End If
     
     For iLOOP = 32 To nCAMPOS - 1
-        Txtfields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
 
     
@@ -5461,8 +5465,8 @@ Private Sub Form_Load()
     cORDREVI = "FXSEQ,FXSSQ,FXITEM,FXITEMS,FEMEAREV"
     
     Filopr                                       'antes das relat
-    text(1) = CStr(Month(Date))
-    text(2) = CStr(Year(Date))
+    tEXT(1) = CStr(Month(Date))
+    tEXT(2) = CStr(Year(Date))
     FilQSBLEP
     FilRelat (0)
     FilRelat (1)
@@ -5478,10 +5482,10 @@ Private Sub Form_Load()
     filgridpadpf
     FILGRIdpfrev
     If zUSER = "ADMIN" Then
-        Txtfields(12).Enabled = True
-        Txtfields(12).Locked = False
-        Txtfields(23).Enabled = True
-        Txtfields(23).Locked = False
+        TXTFIELDS(12).Enabled = True
+        TXTFIELDS(12).Locked = False
+        TXTFIELDS(23).Enabled = True
+        TXTFIELDS(23).Locked = False
     Else
         CmdApaRev.Visible = False
         CmdTrocaREv.Visible = False
@@ -5658,19 +5662,19 @@ Private Sub FILGRIdPAD()
 End Sub
 
 Private Sub maisano_Click()
-    text(2) = CStr(IncDec(text(2), 1, 1900, 2300))
+    tEXT(2) = CStr(IncDec(tEXT(2), 1, 1900, 2300))
 End Sub
 
 Private Sub maismes_Click()
-    text(1) = CStr(IncDec(text(1), 1, 1, 12))
+    tEXT(1) = CStr(IncDec(tEXT(1), 1, 1, 12))
 End Sub
 
 Private Sub menosano_Click()
-    text(2) = CStr(IncDec(text(2), -1, 1900, 2300))
+    tEXT(2) = CStr(IncDec(tEXT(2), -1, 1900, 2300))
 End Sub
 
 Private Sub menosmes_Click()
-    text(1) = CStr(IncDec(text(1), -1, 1, 12))
+    tEXT(1) = CStr(IncDec(tEXT(1), -1, 1, 12))
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -5729,7 +5733,7 @@ Private Function eproducao()
         Alert "Ja Passou para producao"
         eproducao = True
     Else
-        If Txtfields(26).text = "P" Then
+        If TXTFIELDS(26).tEXT = "P" Then
             Alert "O Processo de Fabricao ja e TIPO (P) producao"
             eproducao = True
         End If
