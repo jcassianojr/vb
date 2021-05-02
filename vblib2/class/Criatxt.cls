@@ -108,13 +108,13 @@ Public Sub destini(ByVal cGRUPO As String, ByVal cCHAVE As String)
 End Sub
 
 Public Sub gravafolha()
-    Dim i As Integer
-    For i = 0 To mvarnROW - 1
+    Dim I As Integer
+    For I = 0 To mvarnROW - 1
         Select Case mvarDESTINO
         Case "PRINTER"
-            Printer.Print mvaraLINHAS(i)
+            Printer.Print mvaraLINHAS(I)
         Case "LPT1", "LPT2", "LPT3", "IMPNET", "COM1", "COM2", "ARQ"
-            Print #mvarhandle, mvaraLINHAS(i)
+            Print #mvarhandle, mvaraLINHAS(I)
         End Select
     Next
     If mvarDESTINO = "PRINTER" Then
@@ -141,8 +141,13 @@ Public Sub fechar()
         ''Printer.EndDoc
     End Select
 End Sub
-
 Public Sub arqview()
+    cARQRTF = mvarArquivo
+    If FileExist(cARQRTF, True) Then
+        PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
+    End If
+End Sub
+Public Sub ArqEdit()
     cARQRTF = mvarArquivo
 ' 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
             ' 4-Editar,5-Visualizar,6-Imprimir,7-Exportar
@@ -150,20 +155,20 @@ Public Sub arqview()
     FrmRTf.Show vbModal
 End Sub
 
-Public Sub gravahtml(Optional cDESTINO As String = "", Optional cTITULO As String = "", Optional cAUTOR As String = "")
+Public Sub GravaHtml(Optional cDESTINO As String = "", Optional cTITULO As String = "", Optional cAUTOR As String = "")
     If cDESTINO = "" Then
        cDESTINO = TrocaExt(mvarArquivo, "html")
     End If
     txttohtml mvarArquivo, cDESTINO, cTITULO, cAUTOR
 End Sub
 
-Public Sub gravartf(Optional cDESTINO As String = "")
+Public Sub GravaRTF(Optional cDESTINO As String = "")
     If cDESTINO = "" Then
        cDESTINO = TrocaExt(mvarArquivo, "rtf")
     End If
     txttoRTF mvarArquivo, cDESTINO
 End Sub
-Public Sub gravapdf(Optional cDESTINO As String = "")
+Public Sub GravaPDF(Optional cDESTINO As String = "")
    'If cDESTINO = "" Then
    '    cDESTINO = TrocaExt(mvarArquivo, "pdf") 'no formConvertToPDF ja tem trocaext
    ' End If
@@ -274,4 +279,24 @@ End Property
 Public Property Get nCOL() As Integer
     nCOL = mvarnCOL
 End Property
+
+Public Property Get Printer() As Printer
+    Set Printer = vbExtra.Printer2
+End Property
+Public Property Set Printer(nPrinter As Printer)
+    Set vbExtra.Printer2 = nPrinter
+End Property
+Public Sub MyPrintingTXT()
+    Dim fileFile As Integer
+    Dim STRBUFFER As String
+    fileFile = FreeFile
+    Open cARQRTF For Input As #fileFile
+    Do While Not EOF(fileFile)
+        'read line
+        Input #fileFile, STRBUFFER
+        Printer.Print STRBUFFER
+    Loop
+    Close fileFile
+    Printer.EndDoc
+End Sub
 

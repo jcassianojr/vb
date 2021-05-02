@@ -186,9 +186,9 @@ Public Function ComboLostFocus(ByRef Combo1)
         If Len(.Text) Then
             'Procura pelo texto digitado
             strPartial = .Text
-            i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
+            I = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
             'Se não achou, retorna      o focus para o Combo
-            If i = CB_ERR Then .SetFocus
+            If I = CB_ERR Then .SetFocus
         End If
     End With
 End Function
@@ -197,24 +197,24 @@ Public Function ComboChange(ByRef Combo1)
     With Combo1
         'Procura pelo texto já digitado
         strPartial = .Text
-        i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
+        I = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                         ByVal strPartial)
 
         'Se achou, adiciona o resto do Texto
-        If i <> CB_ERR Then
+        If I <> CB_ERR Then
             'Pega o texto inteiro
-            strTotal = .List(i)
+            strTotal = .List(I)
 
             'Compute number of unmatched characters
-            j = Len(strTotal) - Len(strPartial)
-            If j <> 0 Then
+            J = Len(strTotal) - Len(strPartial)
+            If J <> 0 Then
                 'Adiciona o resto da string encontrada
                 m_bEditFromCode = True
-                .SelText = Right$(strTotal, j)
+                .SelText = Right$(strTotal, J)
 
                 'Marca os caracteres adicionados
                 .SelStart = Len(strPartial)
-                .SelLength = j
+                .SelLength = J
             End If
         End If
     End With
@@ -228,53 +228,14 @@ Public Sub MoveObject(ByRef obj As Control)
 End Sub
 
 Public Function funNumeroPuro(ByVal pNumero) As String
-    Dim i As Integer
+    Dim I As Integer
     pNumero = FixStr(pNumero)
     funNumeroPuro = ""
-    For i = 1 To Len(pNumero)
-        If InStr("0123456789", Mid(pNumero, i, 1)) > 0 Then
-            funNumeroPuro = funNumeroPuro & Mid(pNumero, i, 1)
+    For I = 1 To Len(pNumero)
+        If InStr("0123456789", Mid(pNumero, I, 1)) > 0 Then
+            funNumeroPuro = funNumeroPuro & Mid(pNumero, I, 1)
         End If
     Next
-End Function
-
-Public Function TrocaSQLOrder(ByVal cSQL As String, ByVal cSUBORDER As String) As String
-    Dim nPOS As Long
-    Dim cSELECT As String
-    cSELECT = cSQL
-    nPOS = InStr(UCase(cSQL), "ORDER BY")
-    If nPOS > 0 Then
-        cSELECT = Mid(cSQL, 1, nPOS - 1)
-    End If
-    TrocaSQLOrder = cSELECT & " Order By " & cSUBORDER
-End Function
-
-Public Function TrocaSqlWhere(ByVal cSQL As String, ByVal cSUBWHERE As String) As String
-    Dim nPOS As Long
-    Dim nPOS2 As Long
-    Dim cSELECT As String
-    Dim cORDER As String
-    cSELECT = ""
-    cORDER = ""
-    nPOS = InStr(UCase(cSQL), "WHERE")
-    nPOS2 = InStr(UCase(cSQL), "ORDER BY")
-    If nPOS > 0 Then
-        cSELECT = Mid(cSQL, 1, nPOS - 1)
-    End If
-    If nPOS2 > 0 Then
-        cORDER = Mid(cSQL, nPOS2 - 1)
-        If nPOS = 0 Then
-            cSELECT = Mid(cSQL, 1, nPOS2 - 1)
-        End If
-    End If
-    If nPOS = 0 And nPOS2 = 0 Then
-        cSELECT = cSQL
-    End If
-    If Len(cSUBWHERE) > 0 Then
-        TrocaSqlWhere = Trim(cSELECT) & " WHERE " & cSUBWHERE & cORDER
-    Else
-        TrocaSqlWhere = Trim(cSELECT) & " " & cORDER
-    End If
 End Function
 
 Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "", Optional ByVal ePAD As Variant)
@@ -351,7 +312,7 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
             FVar = Mid(eVAR, 1, 2) & "." & Mid(eVAR, 3, 3) & "." & _
                                                            Mid(eVAR, 6, 3) & "/" & Mid(eVAR, 9, 4) & "-" & Mid(eVAR, 13, 2)
         Case "RG"
-            FVar = formatarg(eVAR)
+            FVar = FormataRG(eVAR)
             '            Case "IE" Precisa estado
             '                FVar = FormataIE(eVAR)
         Case "CHAPA"
@@ -418,28 +379,6 @@ Public Function DataBranco(ByVal eVAR As Variant) As Boolean
     End If
 End Function
 
-Public Function NomeTableSql(ByVal cSQL As String, Optional ByVal cEXTENSAO As String = "") As String
-    Dim nPOS As Integer
-    Dim cNOME As String
-    NomeTableSql = ""
-    cSQL = UCase(cSQL)
-    cSQL = Replace(cSQL, Chr(13), " ")
-    cSQL = Replace(cSQL, Chr(10), " ")
-    nPOS = InStr(cSQL, "FROM")
-    If nPOS > 0 Then
-        cNOME = Mid(cSQL, nPOS + 5)
-        nPOS = InStr(cNOME, " ")
-        If nPOS > 0 Then
-            cNOME = Mid(cNOME, 1, nPOS - 1)
-        End If
-        cNOME = cNOME + cEXTENSAO
-        NomeTableSql = cNOME
-    Else
-        If cEXTENSAO = ".DBF" Then               ''passado no sql o nome da tabela direto exemplo bcofgts
-            NomeTableSql = cSQL + cEXTENSAO
-        End If
-    End If
-End Function
 
 Public Function SepSqlOpe(ByVal eEXP As String) As Variant
     Dim aRETU As Variant
@@ -2003,11 +1942,11 @@ End Function
 
 Public Function TrimNull(ByVal sTxt As String) As String
 
-    Dim arr() As String
+    Dim Arr() As String
    
-    arr() = Split(sTxt, Chr$(0))
-    If UBound(arr) >= 0 Then
-        TrimNull = arr(0)
+    Arr() = Split(sTxt, Chr$(0))
+    If UBound(Arr) >= 0 Then
+        TrimNull = Arr(0)
     Else
         TrimNull = sTxt
     End If
@@ -2454,11 +2393,11 @@ Function TiraEspaco(sNome As String) As String
     Dim CaracAtual As String
     Dim NomeVerificado As String
     Dim NomeSemEspaco As String
-    Dim i As Integer
+    Dim I As Integer
 
-    For i = 1 To Len(sNome)
-        NomeVerificado = Mid(sNome, 1, i)
-        CaracAtual = Mid(NomeVerificado, i, 1)   'verificando os caracteres de dois em dois
+    For I = 1 To Len(sNome)
+        NomeVerificado = Mid(sNome, 1, I)
+        CaracAtual = Mid(NomeVerificado, I, 1)   'verificando os caracteres de dois em dois
         If CaracAtual = sEspaco Then
             NomeSemEspaco = Trim$(NomeSemEspaco) & sEspaco
         Else
@@ -2469,17 +2408,17 @@ Function TiraEspaco(sNome As String) As String
 End Function
 
 Function FastArraySearch(SearchArray As Variant, SearchPhrase As String) As Long 'String
-    Dim Pos As Long, i As Long, NumCharsProcessed As Long, TXT As String
+    Dim Pos As Long, I As Long, NumCharsProcessed As Long, TXT As String
     FastArraySearch = -1
     Pos = InStr(Join(SearchArray, "§"), SearchPhrase)
     If Pos > 0 Then
-        For i = LBound(SearchArray) To UBound(SearchArray)
-            NumCharsProcessed = NumCharsProcessed + Len(SearchArray(i)) + 1
+        For I = LBound(SearchArray) To UBound(SearchArray)
+            NumCharsProcessed = NumCharsProcessed + Len(SearchArray(I)) + 1
             If NumCharsProcessed >= Pos Then
-                FastArraySearch = i              ''SearchArray(i)
+                FastArraySearch = I              ''SearchArray(i)
                 Exit Function
             End If
-        Next i
+        Next I
     End If
 End Function
 
@@ -2531,7 +2470,7 @@ End Function
 
 Public Function NetworkUserName() As String
     Dim iStringLength    As Long
-    Dim i As Long
+    Dim I As Long
     Dim sString          As String
 
     sString = String(255, 0)
@@ -2541,9 +2480,9 @@ Public Function NetworkUserName() As String
 
     If WinAPI_GetUserName(sString, iStringLength) Then
 
-        i = InStr(sString, Chr(0))
-        If i Then
-            sString = Left(sString, i - 1)
+        I = InStr(sString, Chr(0))
+        If I Then
+            sString = Left(sString, I - 1)
         End If
         NetworkUserName = Trim(Left$(sString, iStringLength))
     Else
@@ -2555,11 +2494,11 @@ End Function
 Public Function WordLen(ByRef Text As String) As Long
     'tamanho somente dos caracteres normal 65 a 90
     Dim Bytes() As Byte
-    Dim i As Long
+    Dim I As Long
 
     Bytes = StrConv(UCase$(Text), vbFromUnicode)
-    For i = 0 To UBound(Bytes)
-        If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
+    For I = 0 To UBound(Bytes)
+        If 65 <= Bytes(I) And Bytes(I) <= 90 Then WordLen = WordLen + 1
     Next
 End Function
 
@@ -2569,20 +2508,20 @@ Public Function SameWords(ByRef Text1 As String, ByRef Text2 As String) As Boole
     Dim LetterCounts() As Byte
     Dim LetterCountsS1 As String
     Dim LetterCountsS2 As String
-    Dim i As Long
+    Dim I As Long
 
     ReDim LetterCounts(65 To 90)
     Bytes = StrConv(UCase$(Text1), vbFromUnicode)
-    For i = 0 To UBound(Bytes)
-        LetterCounts(Bytes(i)) = LetterCounts(Bytes(i)) + 1
+    For I = 0 To UBound(Bytes)
+        LetterCounts(Bytes(I)) = LetterCounts(Bytes(I)) + 1
     Next
     LetterCountsS1 = LetterCounts
 
     ReDim LetterCounts(65 To 90)
     Bytes = StrConv(UCase$(Text2), vbFromUnicode)
-    For i = 0 To UBound(Bytes)
-        If 65 <= Bytes(i) And Bytes(i) <= 90 Then
-            LetterCounts(Bytes(i)) = LetterCounts(Bytes(i)) + 1
+    For I = 0 To UBound(Bytes)
+        If 65 <= Bytes(I) And Bytes(I) <= 90 Then
+            LetterCounts(Bytes(I)) = LetterCounts(Bytes(I)) + 1
         End If
     Next
     LetterCountsS2 = LetterCounts
@@ -2591,12 +2530,12 @@ Public Function SameWords(ByRef Text1 As String, ByRef Text2 As String) As Boole
 End Function
 
 Public Function FolderExists(sDir As String) As Boolean
-    Dim s As String
-    s = sDir
-    If Right$(s, 1) = "\" Then s = Left$(s, Len(s) - 1)
+    Dim S As String
+    S = sDir
+    If Right$(S, 1) = "\" Then S = Left$(S, Len(S) - 1)
     On Error GoTo FileExistsError
     ' If no error then something existed.
-    bFolderExists = ((GetAttr(s) And vbDirectory) = vbDirectory)
+    bFolderExists = ((GetAttr(S) And vbDirectory) = vbDirectory)
     Exit Function
 FileExistsError:
     bFolderExists = False

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form NewSeq 
    Caption         =   "Incluindo Nova Sequenica"
@@ -171,11 +171,13 @@ Option Explicit
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
     TeclaEnter KeyCode
+
+
 End Sub
 
 Private Sub Form_Load()
     Center Me
-    PF.Text = nPF
+    PF.tEXT = nPF
     If FixInt(nPF) = 0 Then
         PF.Enabled = True
         PF.Locked = False
@@ -187,8 +189,8 @@ Private Sub Form_Load()
         item.Locked = True
     End If
     If iMU01 = 4 Then
-        NewSeq.seq.Value = nSEQ
-        NewSeq.Ssq.Value = nSSQ
+        NewSeq.SEQ.Value = nSEQ
+        NewSeq.SSQ.Value = nSSQ
         NewSeq.item.Value = nORD
     End If
    
@@ -197,8 +199,8 @@ End Sub
 Private Sub Gravar_Click()
     Dim sSQL As String
     If iMU01 = 1 Then
-        nSEQ = FixInt(NewSeq.seq)
-        nSSQ = FixInt(NewSeq.Ssq)
+        nSEQ = FixInt(NewSeq.SEQ)
+        nSSQ = FixInt(NewSeq.SSQ)
         sSQL = "select pf,seq,ssq from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
         IncluiSQL Sdb, sSQL, 3, Array("PF", "SEQ", "SSQ"), _
         Array(nPF, nSEQ, nSSQ), True, True
@@ -227,9 +229,9 @@ Private Sub Gravar_Click()
     End If
     
     If iMU01 = 3 Then
-        nSEQ = FixInt(NewSeq.seq.Value)
-        nSSQ = FixInt(NewSeq.Ssq.Value)
-        nPF = FixInt(NewSeq.PF.Text)
+        nSEQ = FixInt(NewSeq.SEQ.Value)
+        nSSQ = FixInt(NewSeq.SSQ.Value)
+        nPF = FixInt(NewSeq.PF.tEXT)
         nORD = FixInt(NewSeq.item.Value)
         If nPF = 0 Then
             Alert ("PF Nao preenchido")
@@ -242,8 +244,8 @@ Private Sub Gravar_Click()
     End If
     
     If iMU01 = 4 Then
-        nSEQ = FixInt(NewSeq.seq.Value)
-        nSSQ = FixInt(NewSeq.Ssq.Value)
+        nSEQ = FixInt(NewSeq.SEQ.Value)
+        nSSQ = FixInt(NewSeq.SSQ.Value)
         nORD = FixInt(NewSeq.item.Value)
         sSQL = "select * from poKa WHERE numero=" & nPPAP
         REORDER sSQL, "POKA"
@@ -253,7 +255,7 @@ Private Sub Gravar_Click()
     
     If iMU01 = 1 Then
         eRETU02 = "PF:" & nPF & Chr(13) & Chr(10)
-        eRETU02 = eRETU02 & " Desenho:" & frmPF.txtFields(2) & Chr(13) & Chr(10)
+        eRETU02 = eRETU02 & " Desenho:" & frmPF.TXTFIELDS(2) & Chr(13) & Chr(10)
         eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
         eRETU02 = eRETU02 & " SEQ=" & nSEQ & " SSQ=" & nSSQ
         MAILENV "PFS00001", eRETU02
@@ -283,8 +285,8 @@ Private Sub REORDER(sSQL As Variant, Optional ByVal cARQ As String = "")
     DB.Open cARQ
     RSTAB.Open sSQL, DB, adOpenDynamic, adLockOptimistic
     Do While Not RSTAB.EOF
-        RSTAB("SEQ") = FixInt(NewSeq.seq)
-        RSTAB("SSQ") = FixInt(NewSeq.Ssq)
+        RSTAB("SEQ") = FixInt(NewSeq.SEQ)
+        RSTAB("SSQ") = FixInt(NewSeq.SSQ)
         If iMU01 = 4 Then
             RSTAB("ITEM") = FixInt(NewSeq.item)
         End If

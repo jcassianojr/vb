@@ -59,7 +59,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":0000
-            TextSave        =   "13:23"
+            TextSave        =   "12:14"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -67,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":059A
-            TextSave        =   "05/04/2021"
+            TextSave        =   "01/05/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -462,7 +462,7 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
     If Not AcessaMenu("mnuSUBMENU4", Index) Then Exit Sub
     Select Case Index
     Case 1
-        cARQRTF = PegPath("HELP", "CAMINHO") + "controle.txt"
+        cARQRTF = PegPath("HELP", "HELPTXT") '+ "controle.txt"
         If FileExist(cARQRTF, True) Then
             ' 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
             ' 4-Editar,5-Visualizar,6-Imprimir,7-Exportar

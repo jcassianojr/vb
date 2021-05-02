@@ -1,5 +1,66 @@
 Attribute VB_Name = "sqlfuncoes"
 Option Explicit
+Public Function TrocaSQLOrder(ByVal cSQL As String, ByVal cSUBORDER As String) As String
+    Dim nPOS As Long
+    Dim cSELECT As String
+    cSELECT = cSQL
+    nPOS = InStr(UCase(cSQL), "ORDER BY")
+    If nPOS > 0 Then
+        cSELECT = Mid(cSQL, 1, nPOS - 1)
+    End If
+    TrocaSQLOrder = cSELECT & " Order By " & cSUBORDER
+End Function
+
+Public Function TrocaSqlWhere(ByVal cSQL As String, ByVal cSUBWHERE As String) As String
+    Dim nPOS As Long
+    Dim nPOS2 As Long
+    Dim cSELECT As String
+    Dim cORDER As String
+    cSELECT = ""
+    cORDER = ""
+    nPOS = InStr(UCase(cSQL), "WHERE")
+    nPOS2 = InStr(UCase(cSQL), "ORDER BY")
+    If nPOS > 0 Then
+        cSELECT = Mid(cSQL, 1, nPOS - 1)
+    End If
+    If nPOS2 > 0 Then
+        cORDER = Mid(cSQL, nPOS2 - 1)
+        If nPOS = 0 Then
+            cSELECT = Mid(cSQL, 1, nPOS2 - 1)
+        End If
+    End If
+    If nPOS = 0 And nPOS2 = 0 Then
+        cSELECT = cSQL
+    End If
+    If Len(cSUBWHERE) > 0 Then
+        TrocaSqlWhere = Trim(cSELECT) & " WHERE " & cSUBWHERE & cORDER
+    Else
+        TrocaSqlWhere = Trim(cSELECT) & " " & cORDER
+    End If
+End Function
+
+Public Function NomeTableSql(ByVal cSQL As String, Optional ByVal cEXTENSAO As String = "") As String
+    Dim nPOS As Integer
+    Dim cNOME As String
+    NomeTableSql = ""
+    cSQL = UCase(cSQL)
+    cSQL = Replace(cSQL, Chr(13), " ")
+    cSQL = Replace(cSQL, Chr(10), " ")
+    nPOS = InStr(cSQL, "FROM")
+    If nPOS > 0 Then
+        cNOME = Mid(cSQL, nPOS + 5)
+        nPOS = InStr(cNOME, " ")
+        If nPOS > 0 Then
+            cNOME = Mid(cNOME, 1, nPOS - 1)
+        End If
+        cNOME = cNOME + cEXTENSAO
+        NomeTableSql = cNOME
+    Else
+        If cEXTENSAO = ".DBF" Then               ''passado no sql o nome da tabela direto exemplo bcofgts
+            NomeTableSql = cSQL + cEXTENSAO
+        End If
+    End If
+End Function
 
 Public Function MontaFiltro(ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal eBUSCA As Variant, ByVal nIndex As Integer)
     nIndex = nIndex - 1
