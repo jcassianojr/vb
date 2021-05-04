@@ -2,7 +2,7 @@
 	&Novo\21\mnunew|&Novo|#new|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0){^N}
 	&Abrir\22\mnuOpen|&Abrir|#open|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0){^A}
 	&Salvar\29\mnusave|&Salvar|#salvar|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0){^S}
-	Salvar Como &TXT\43\mnusaveastxt|Salvar Como &TXT|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
+	Salvar Como &TXT\***\mnusaveastxt|Salvar Como &TXT|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 	Salvar Como &RTF\43\mnusaveasrtf|Salvar Como &RTF|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 	&Imprimir\26\mnuprint|&Imprimir|#printer|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0){^P}
 	&Configurar Impressora\27\mnuprintcfg|&Configurar Impressora|#printcfg|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
@@ -23,7 +23,7 @@
 	-\43\tr03|-|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 	Locali&zar\30\mnufind|Locali&zar|#busca|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0){^F}
 	Localizar Pro&xima\31\mnufindNext|Localizar Pro&xima|#proximabusca|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0){{F3}}
-	Localizar e Substituir\43\mnufindrep|Localizar e Substituir|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
+	Localizar e Substituir\***\mnufindrep|Localizar e Substituir|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 	-\43\tr04|-|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 	Inserir Data\8\mnuinsdate|Inserir Data|#diahora|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 	Inserir Imagem\17\mnuinsimg|Inserir Imagem|#imagem|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
@@ -53,7 +53,7 @@ Format\43\mnuformat(3)|Format|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 	Converter \43\mnucnv|Converter |(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 		Maisculas\38\mnuUpper|Maisculas|#maisculas|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 		Minusculas\37\mnuDown|Minusculas|#minusculas|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
-		Capitalizar\43\mnucapitalizar|Capitalizar|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
+		Capitalizar\***\mnucapitalizar|Capitalizar|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 		Tira Acentuaçao\43\mnutirace|Tira Acentuaçao|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 		Converter Ansi(Windows)-> Oem(DOS)\43\mnucnvoem|Converter Ansi(Windows)-> Oem(DOS)|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)
 		Converter Ansi(Windows)-> Oem(DOS)Padrao2\43\mnucnvoem2|Converter Ansi(Windows)-> Oem(DOS)Padrao2|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)

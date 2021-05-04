@@ -77,7 +77,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "11:04"
+            TextSave        =   "18:18"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -97,81 +97,302 @@ Begin VB.MDIForm frmPRINCIPAL
          EndProperty
       EndProperty
    End
-   Begin VB.Menu mnuMENU 
+   Begin MSComctlLib.ImageList ImgMenu 
+      Left            =   5850
+      Top             =   180
+      _ExtentX        =   1005
+      _ExtentY        =   1005
+      BackColor       =   -2147483643
+      ImageWidth      =   16
+      ImageHeight     =   16
+      MaskColor       =   12632256
+      _Version        =   393216
+      BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
+         NumListImages   =   49
+         BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":1458
+            Key             =   "center"
+         EndProperty
+         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":17F2
+            Key             =   "justificado"
+         EndProperty
+         BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":1B8C
+            Key             =   "left"
+         EndProperty
+         BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":1F26
+            Key             =   "right"
+         EndProperty
+         BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":22C0
+            Key             =   "Bold"
+         EndProperty
+         BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":265A
+            Key             =   "copy"
+         EndProperty
+         BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":2BF4
+            Key             =   "cut"
+         EndProperty
+         BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":2F8E
+            Key             =   "diahora"
+         EndProperty
+         BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":3328
+            Key             =   "editor"
+         EndProperty
+         BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":38C2
+            Key             =   "find"
+         EndProperty
+         BeginProperty ListImage11 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":3C5C
+            Key             =   "marcado"
+         EndProperty
+         BeginProperty ListImage12 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":3DB6
+            Key             =   "letra01"
+         EndProperty
+         BeginProperty ListImage13 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":4150
+            Key             =   "tamanho"
+         EndProperty
+         BeginProperty ListImage14 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":44EA
+            Key             =   "paragro"
+         EndProperty
+         BeginProperty ListImage15 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":4884
+            Key             =   "decrese"
+         EndProperty
+         BeginProperty ListImage16 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":4C1E
+            Key             =   "incrise"
+         EndProperty
+         BeginProperty ListImage17 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":4FB8
+            Key             =   "imagem"
+         EndProperty
+         BeginProperty ListImage18 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":5352
+            Key             =   "italico"
+         EndProperty
+         BeginProperty ListImage19 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":56EC
+            Key             =   "s_Key19"
+         EndProperty
+         BeginProperty ListImage20 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":5A86
+            Key             =   "mail"
+         EndProperty
+         BeginProperty ListImage21 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":6020
+            Key             =   "new"
+         EndProperty
+         BeginProperty ListImage22 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":63BA
+            Key             =   "open"
+         EndProperty
+         BeginProperty ListImage23 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":6954
+            Key             =   "xxx"
+         EndProperty
+         BeginProperty ListImage24 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":6CEE
+            Key             =   "imagem2"
+         EndProperty
+         BeginProperty ListImage25 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":7088
+            Key             =   "colar"
+         EndProperty
+         BeginProperty ListImage26 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":7622
+            Key             =   "printer"
+         EndProperty
+         BeginProperty ListImage27 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":7BBC
+            Key             =   "printcfg"
+         EndProperty
+         BeginProperty ListImage28 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":7F56
+            Key             =   "sair"
+         EndProperty
+         BeginProperty ListImage29 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":82F0
+            Key             =   "salvar"
+         EndProperty
+         BeginProperty ListImage30 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":868A
+            Key             =   "busca"
+         EndProperty
+         BeginProperty ListImage31 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":8A24
+            Key             =   "proximabusca"
+         EndProperty
+         BeginProperty ListImage32 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":8DBE
+            Key             =   "letra"
+         EndProperty
+         BeginProperty ListImage33 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":9158
+            Key             =   "abc"
+         EndProperty
+         BeginProperty ListImage34 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":94F2
+            Key             =   "riscado"
+         EndProperty
+         BeginProperty ListImage35 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":988C
+            Key             =   "sub"
+         EndProperty
+         BeginProperty ListImage36 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":9C26
+            Key             =   "sob"
+         EndProperty
+         BeginProperty ListImage37 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":9FC0
+            Key             =   "minusculas"
+         EndProperty
+         BeginProperty ListImage38 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":A35A
+            Key             =   "maisculas"
+         EndProperty
+         BeginProperty ListImage39 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":A6F4
+            Key             =   "underline"
+         EndProperty
+         BeginProperty ListImage40 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":AA8E
+            Key             =   "refazer"
+         EndProperty
+         BeginProperty ListImage41 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":AE28
+            Key             =   "info"
+         EndProperty
+         BeginProperty ListImage42 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":B3C2
+            Key             =   "exit"
+         EndProperty
+         BeginProperty ListImage43 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":B95C
+            Key             =   "calc"
+         EndProperty
+         BeginProperty ListImage44 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":BEF6
+            Key             =   "menusa"
+         EndProperty
+         BeginProperty ListImage45 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":C290
+            Key             =   "usuerchave"
+         EndProperty
+         BeginProperty ListImage46 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":C62A
+            Key             =   "odbcinfo"
+         EndProperty
+         BeginProperty ListImage47 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":C784
+            Key             =   "todo"
+         EndProperty
+         BeginProperty ListImage48 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":CC1E
+            Key             =   "lampada"
+         EndProperty
+         BeginProperty ListImage49 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":D0B8
+            Key             =   "user"
+         EndProperty
+      EndProperty
+   End
+   Begin VB.Menu Menu1 
       Caption         =   "&Gerador"
-      Index           =   0
+      Tag             =   "&Gerador|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       Begin VB.Menu mnuSUBMENU1 
          Caption         =   "Especificos"
          Index           =   0
+         Tag             =   "Especificos|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnuSUBMENU1 
          Caption         =   "Padrao"
          Index           =   1
+         Tag             =   "Padrao|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
    End
-   Begin VB.Menu mnuMENU 
+   Begin VB.Menu Menu2 
       Caption         =   "&Relatórios"
-      Index           =   2
+      Tag             =   "&Relatórios|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
    End
-   Begin VB.Menu mnuMENU 
+   Begin VB.Menu Menu3 
       Caption         =   "&Documentos/Manuais"
-      Index           =   3
+      Tag             =   "&Documentos/Manuais|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
    End
-   Begin VB.Menu mnuMENU 
+   Begin VB.Menu Menu4 
       Caption         =   "&Folha/Pto/RH"
-      Index           =   4
+      Tag             =   "&Folha/Pto/RH|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
    End
-   Begin VB.Menu mnuMENU 
+   Begin VB.Menu Menu5 
       Caption         =   "&Integrados"
-      Index           =   5
+      Tag             =   "&Integrados|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
    End
-   Begin VB.Menu mnuMENU 
+   Begin VB.Menu Menu6 
       Caption         =   "&Lst(Logix)"
-      Index           =   6
+      Tag             =   "&Lst(Logix)|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
    End
-   Begin VB.Menu mnuMENU 
+   Begin VB.Menu Menu7 
       Caption         =   "&Configurações"
-      Index           =   7
+      Tag             =   "&Configurações|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       Begin VB.Menu mnuSUBMENU4 
          Caption         =   "Impressoras"
          Index           =   0
+         Tag             =   "Impressoras|#printcfg|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnuSUBMENU4 
          Caption         =   "Alteracoes"
          Index           =   1
+         Tag             =   "Alteracoes|#info|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnuSUBMENU4 
          Caption         =   "Usuarios"
          Index           =   2
+         Tag             =   "Usuarios|#user|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnuSUBMENU4 
          Caption         =   "Menus"
          Index           =   3
+         Tag             =   "Menus|#menusa|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnuSUBMENU4 
          Caption         =   "Botoes"
          Index           =   4
+         Tag             =   "Botoes|#todo|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnuSUBMENU4 
          Caption         =   "Configurar ODBC"
          Index           =   5
+         Tag             =   "Configurar ODBC|#odbcinfo|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnuSUBMENU4 
          Caption         =   "Troca Senha"
          Index           =   6
+         Tag             =   "Troca Senha|#usuerchave|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnuSUBMENU4 
          Caption         =   "Frase do Dia"
          Index           =   7
+         Tag             =   "Frase do Dia|#lampada|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnuSUBMENU4 
          Caption         =   "Calculadora"
          Index           =   8
+         Tag             =   "Calculadora|#calc|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
    End
-   Begin VB.Menu mnuMENU 
+   Begin VB.Menu Menu8 
       Caption         =   "&Sair"
-      Index           =   8
+      Tag             =   "&Sair|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
    End
 End
 Attribute VB_Name = "frmPRINCIPAL"
@@ -180,7 +401,16 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Private WithEvents MenuEvents As CEvents
+Attribute MenuEvents.VB_VarHelpID = -1
 Private Sub MDIForm_Load()
+
+
+    '/ If gbSubClassMenu is False, the menu is not subclassed
+    gbSubClassMenu = True
+
+    If gbSubClassMenu Then SubClassMenuXP
+
 Dim CLINHA As String
 Dim pICONES          As String
 Dim nRETU
@@ -346,7 +576,7 @@ Dim carqhelp As String
     
         
        
-    StatusBar1.Panels(6).tEXT = zUSER
+    StatusBar1.Panels(6).Text = zUSER
     If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
        frmDica.Show
     End If
@@ -383,34 +613,50 @@ ErrorHandler:
 End Sub
 Private Sub MDIForm_Unload(Cancel As Integer)
 
+
+    If gbSubClassMenu Then
+        '/ prevent error if the menu is not subclassed
+        On Error Resume Next
+        '/ release object
+        Call objMenuEx.Uninstall(Me.hWnd, ImgMenu, MenuEvents)
+        Set MenuEvents = Nothing
+        Set objMenuEx = Nothing
+    End If
+
+
     Unload Me
     End
 End Sub
-Private Sub mnuMENU_Click(Index As Integer)
-Dim MenuClick        As String
-    MenuClick = Left(UCase(Replace(mnuMENU(Index).Caption, "&", "")), 4)
-    Select Case MenuClick
-        Case "LST("
-           FrmLstView.Show
-        Case "SAIR"
-            Unload Me
-        Case "DOCU"
-            cTIPORPT = "D"
-            zRPTARQ = PegPath("PATH", "RTF") + "RTF.MDB"
-            escRPTGRP.Show vbModal, Me
-        Case "RELA"
-            cTIPORPT = "R"
+Private Sub Menu2_Click()
+     cTIPORPT = "R"
             zRPTARQ = PegPath("PATH", "RPT") + "RPT.MDB"
             escRPTGRP.Show vbModal, Me
-        Case "INTE"
+End Sub
+
+Private Sub Menu3_Click()
+         cTIPORPT = "D"
+            zRPTARQ = PegPath("PATH", "RTF") + "RTF.MDB"
+            escRPTGRP.Show vbModal, Me
+End Sub
+
+Private Sub Menu4_Click()
+        cTIPORPT = "F"
+            zRPTARQ = PegPath("PATH", "FOL") + "RPTFOL.MDB"
+            escRPTGRP.Show vbModal, Me
+End Sub
+
+Private Sub Menu5_Click()
             cTIPORPT = "I"
             zRPTARQ = PegPath("PATH", "INT") + "RPTINT.MDB"
             escRPTGRP.Show vbModal, Me
-        Case "FOLH"
-            cTIPORPT = "F"
-            zRPTARQ = PegPath("PATH", "FOL") + "RPTFOL.MDB"
-            escRPTGRP.Show vbModal, Me
-    End Select
+End Sub
+
+Private Sub Menu6_Click()
+        FrmLstView.Show
+End Sub
+
+Private Sub Menu8_Click()
+Unload Me
 End Sub
 
 Private Sub mnuSUBMENU1_Click(Index As Integer)
@@ -491,3 +737,51 @@ Wend
 
 End Sub
 
+
+Private Sub MenuEvents_MenuHelp(ByVal MenuText As String, ByVal MenuHelp As String, ByVal Enabled As Boolean)
+    If gbSubClassMenu Then
+        '/ this event show Decription menu-item to a StatusBar control
+        '/ customize for your project, if you need this.
+        '/ Note: MenuText contain the menu Caption.
+        '/       MenuHelp contain the Description string.
+        '/ example: sbStatusBar.Panels(1).text = MenuHelp
+        '/          lblMenuHelp.Caption = MenuHelp
+    End If
+End Sub
+Public Sub SubClassMenuXP()
+
+    '/ this code is made by MenuCreator add-in
+
+    '/ prepare the caption for subclassing. Warning! Don't remove this comment!!!
+    Menu1.Caption = "&Gerador"
+          mnuSUBMENU1(0).Caption = "Especificos"
+          mnuSUBMENU1(1).Caption = "Padrao"
+    Menu2.Caption = "&Relatórios"
+    Menu3.Caption = "&Documentos/Manuais"
+    Menu4.Caption = "&Folha/Pto/RH"
+    Menu5.Caption = "&Integrados"
+    Menu6.Caption = "&Lst(Logix)"
+    Menu7.Caption = "&Configurações"
+          mnuSUBMENU4(0).Caption = "Impressoras|#printcfg"
+          mnuSUBMENU4(1).Caption = "Alteracoes|#info"
+          mnuSUBMENU4(2).Caption = "Usuarios|#user"
+          mnuSUBMENU4(3).Caption = "Menus|#menusa"
+          mnuSUBMENU4(4).Caption = "Botoes|#todo"
+          mnuSUBMENU4(5).Caption = "Configurar ODBC|#odbcinfo"
+          mnuSUBMENU4(6).Caption = "Troca Senha|#usuerchave"
+          mnuSUBMENU4(7).Caption = "Frase do Dia|#lampada"
+          mnuSUBMENU4(8).Caption = "Calculadora|#calc"
+    Menu8.Caption = "&Sair"
+
+    '/ Subclassing menu. Warning! Don't remove this comment!!!
+
+    Set MenuEvents = New CEvents
+    Set objMenuEx = New cMenuEx
+    Call objMenuEx.Install(Me.hWnd, App.Path & "\" & Me.Name, ImgMenu, 2, MenuEvents)
+
+End Sub
+
+Public Sub MenuDesigner()
+    '/ Open Menu Designer tool
+    objMenuEx.MenuDesigner Me.hWnd
+End Sub

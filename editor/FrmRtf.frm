@@ -101,7 +101,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "FrmRtf.frx":10D2
-            TextSave        =   "11:11"
+            TextSave        =   "16:55"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -122,7 +122,7 @@ Begin VB.Form FrmRTf
       EndProperty
    End
    Begin MSComctlLib.ImageList ImgMenu 
-      Left            =   11160
+      Left            =   11190
       Top             =   1020
       _ExtentX        =   1005
       _ExtentY        =   1005
@@ -689,6 +689,7 @@ Begin VB.Form FrmRTf
       _ExtentX        =   19923
       _ExtentY        =   10610
       _Version        =   393217
+      Enabled         =   -1  'True
       ScrollBars      =   3
       TextRTF         =   $"FrmRtf.frx":146B8
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1100,7 +1101,7 @@ End Sub
 '***************************************************************************
 
 Private Sub cmbFontSize_Click()
-    RichTextbox1.SelFontSize = cmbFontSize.tEXT
+    RichTextbox1.SelFontSize = cmbFontSize.Text
     ''RichTextbox1.SetFocus
 End Sub
 
@@ -1479,7 +1480,7 @@ Private Sub Command9_Click()
 End Sub
 
 Private Sub FontCombo1_Click()
-    RichTextbox1.SelFontName = FontCombo1.tEXT
+    RichTextbox1.SelFontName = FontCombo1.Text
     RichTextbox1.SetFocus
     
     
@@ -1559,9 +1560,9 @@ Private Sub Form_Load()
         '* increments of 2.
         '******************************************************************
 
-        For I = 8 To 72 Step 2
-            .AddItem I
-        Next I
+        For i = 8 To 72 Step 2
+            .AddItem i
+        Next i
 
         '******************************************************************
         '* Set ListIndex to 0
@@ -1617,7 +1618,7 @@ Private Sub Form_Load()
     ''Abre o Arquivo se passado cARQRTF
     ABRIR
     
-    StatusBar1.Panels(6).tEXT = zUSER
+    StatusBar1.Panels(6).Text = zUSER
     
    ' cmbfontname.tEXT = RichTextbox1.SelFontName
     
@@ -1639,10 +1640,10 @@ End Sub
 
 Private Sub Form_Resize()
     Dim w As Integer
-    Dim H As Integer
+    Dim h As Integer
 
     w = 10695
-    H = 6855
+    h = 6855
 
     If FrmRTf.WindowState = vbMaximized Then
         RichTextbox1.Width = (FrmRTf.Width - 300)
@@ -1652,7 +1653,7 @@ Private Sub Form_Resize()
 
     If FrmRTf.WindowState = vbNormal Then
         RichTextbox1.Width = w
-        RichTextbox1.Height = H
+        RichTextbox1.Height = h
 
     End If
 
@@ -1811,7 +1812,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 End Sub
 
 Private Sub mnuEditarInserirCaracter_Click()
-    ePASS01 = FontCombo1.tEXT     'cmbfontname.text
+    ePASS01 = FontCombo1.Text     'cmbfontname.text
     ePASS02 = True
     frmCharacters.Show vbModal, Me
     'FrmAscII.Show vbModal, Me
@@ -1934,7 +1935,7 @@ End Sub
 '***************************************************************************
 
 Private Sub mnunew_Click()
-    RichTextbox1.tEXT = ""
+    RichTextbox1.Text = ""
     RichTextbox1.SetFocus
 End Sub
 
@@ -2175,7 +2176,7 @@ End Sub
 
 Private Sub mnuselectall_Click()
     RichTextbox1.SelStart = 0
-    RichTextbox1.SelLength = Len(RichTextbox1.tEXT)
+    RichTextbox1.SelLength = Len(RichTextbox1.Text)
     RichTextbox1.SetFocus
 End Sub
 
@@ -2299,7 +2300,7 @@ Private Sub RichTextBox1_SelChange()
     '******************************************************************
 
     If Not IsNull(RichTextbox1.SelFontSize) Then
-        cmbFontSize.tEXT = RichTextbox1.SelFontSize
+        cmbFontSize.Text = RichTextbox1.SelFontSize
     End If
 
     '* Show Font name in the ComboBox.

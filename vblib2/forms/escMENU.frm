@@ -109,7 +109,7 @@ Private Sub Edit_Click()
     Grid.Col = 0
     cMENU = Grid
     Grid.Col = 1
-    iMENU = Grid
+    iMENU = FixInt(Grid)
     frmMENU.Show vbModal
     FilRelat
 
