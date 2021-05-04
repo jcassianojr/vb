@@ -6,6 +6,7 @@ Begin VB.Form FrmMsrd
    ClientLeft      =   150
    ClientTop       =   510
    ClientWidth     =   8325
+   Icon            =   "FrmMsrd.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3090
    ScaleWidth      =   8325
@@ -66,7 +67,7 @@ Begin VB.Form FrmMsrd
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmMsrd.frx":0000
+      Picture         =   "FrmMsrd.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -86,7 +87,7 @@ Begin VB.Form FrmMsrd
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmMsrd.frx":059A
+      Picture         =   "FrmMsrd.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -158,7 +159,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
-            aVAL(iLOOP) = txtFIELDS(iLOOP)       ''vb matriz zero
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     End If
@@ -179,7 +180,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = PegPath("PATH", "MANA5TGQ")
     cARQ = GeraConn(cARQ, "SDECDX")
     cSQL = "select * from MSRD WHERE MSRD=" & ePASS01
@@ -189,7 +190,7 @@ Private Sub Form_Load()
     aPAD = Array("", "", "", "", "", "")
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFIELDS(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
 End Sub
 

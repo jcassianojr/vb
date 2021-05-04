@@ -7,6 +7,7 @@ Begin VB.Form frmCFLX
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   8400
+   Icon            =   "frmCFLX.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -29,7 +30,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -48,7 +49,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -67,7 +68,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -86,7 +87,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -105,7 +106,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -124,7 +125,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -143,7 +144,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -162,7 +163,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -181,7 +182,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -200,7 +201,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -219,7 +220,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -238,7 +239,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -257,7 +258,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -276,7 +277,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -295,7 +296,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -314,7 +315,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -333,7 +334,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -352,7 +353,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -371,7 +372,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -390,7 +391,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -409,7 +410,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -428,7 +429,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -447,7 +448,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -466,7 +467,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -485,7 +486,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -504,7 +505,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -523,7 +524,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -542,7 +543,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -561,7 +562,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -580,7 +581,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -599,7 +600,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -618,7 +619,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -637,7 +638,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -656,7 +657,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -675,7 +676,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -694,7 +695,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -713,7 +714,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -732,7 +733,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -751,7 +752,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -770,7 +771,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -789,7 +790,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -808,7 +809,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -827,7 +828,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -846,7 +847,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -865,7 +866,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -884,7 +885,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -903,7 +904,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -922,7 +923,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -941,7 +942,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -960,7 +961,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -979,7 +980,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -998,7 +999,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1017,7 +1018,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1036,7 +1037,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1055,7 +1056,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1074,7 +1075,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1093,7 +1094,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1112,7 +1113,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1131,7 +1132,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1150,7 +1151,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1169,7 +1170,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1188,7 +1189,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1207,7 +1208,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1226,7 +1227,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1245,7 +1246,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1264,7 +1265,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1283,7 +1284,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1302,7 +1303,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1321,7 +1322,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1340,7 +1341,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1359,7 +1360,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1378,7 +1379,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1397,7 +1398,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1416,7 +1417,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1435,7 +1436,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1454,7 +1455,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1473,7 +1474,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1492,7 +1493,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1511,7 +1512,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1530,7 +1531,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1549,7 +1550,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1568,7 +1569,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1587,7 +1588,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1606,7 +1607,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1625,7 +1626,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1644,7 +1645,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1663,7 +1664,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1682,7 +1683,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1701,7 +1702,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1720,7 +1721,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1739,7 +1740,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1758,7 +1759,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1777,7 +1778,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1796,7 +1797,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1815,7 +1816,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1834,7 +1835,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1853,7 +1854,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1872,7 +1873,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1891,7 +1892,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1910,7 +1911,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1929,7 +1930,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1948,7 +1949,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1967,7 +1968,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -1986,7 +1987,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2005,7 +2006,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2024,7 +2025,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2043,7 +2044,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2062,7 +2063,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2081,7 +2082,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2100,7 +2101,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2119,7 +2120,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2138,7 +2139,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2157,7 +2158,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2176,7 +2177,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2195,7 +2196,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2214,7 +2215,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2233,7 +2234,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2252,7 +2253,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2271,7 +2272,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2290,7 +2291,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2309,7 +2310,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2328,7 +2329,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2347,7 +2348,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2366,7 +2367,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2385,7 +2386,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2404,7 +2405,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2423,7 +2424,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2442,7 +2443,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2461,7 +2462,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2480,7 +2481,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2499,7 +2500,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2518,7 +2519,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2537,7 +2538,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2556,7 +2557,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2575,7 +2576,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2594,7 +2595,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2613,7 +2614,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2632,7 +2633,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2651,7 +2652,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2670,7 +2671,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2689,7 +2690,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2708,7 +2709,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2727,7 +2728,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2746,7 +2747,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2765,7 +2766,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2784,7 +2785,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2803,7 +2804,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2822,7 +2823,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2841,7 +2842,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2860,7 +2861,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2879,7 +2880,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2898,7 +2899,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2917,7 +2918,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2936,7 +2937,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2955,7 +2956,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2974,7 +2975,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -2993,7 +2994,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3012,7 +3013,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3031,7 +3032,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3050,7 +3051,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3069,7 +3070,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3088,7 +3089,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3107,7 +3108,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3126,7 +3127,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3145,7 +3146,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3164,7 +3165,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3183,7 +3184,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3202,7 +3203,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3221,7 +3222,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3240,7 +3241,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3259,7 +3260,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3278,7 +3279,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3297,7 +3298,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3316,7 +3317,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3335,7 +3336,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3354,7 +3355,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3373,7 +3374,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3392,7 +3393,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3411,7 +3412,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3430,7 +3431,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3449,7 +3450,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3468,7 +3469,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3487,7 +3488,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3506,7 +3507,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3525,7 +3526,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3544,7 +3545,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3563,7 +3564,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3582,7 +3583,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3601,7 +3602,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3620,7 +3621,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3639,7 +3640,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3658,7 +3659,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3677,7 +3678,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3696,7 +3697,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3715,7 +3716,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3734,7 +3735,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3753,7 +3754,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3772,7 +3773,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3791,7 +3792,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3810,7 +3811,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3829,7 +3830,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3848,7 +3849,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3867,7 +3868,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3886,7 +3887,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3905,7 +3906,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3924,7 +3925,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3943,7 +3944,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3962,7 +3963,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -3981,7 +3982,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4000,7 +4001,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4019,7 +4020,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4038,7 +4039,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4057,7 +4058,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4076,7 +4077,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4095,7 +4096,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4114,7 +4115,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4133,7 +4134,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4152,7 +4153,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4171,7 +4172,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4190,7 +4191,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4209,7 +4210,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4228,7 +4229,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4247,7 +4248,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4266,7 +4267,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4285,7 +4286,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4304,7 +4305,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4323,7 +4324,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4342,7 +4343,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4361,7 +4362,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4380,7 +4381,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4399,7 +4400,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4418,7 +4419,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4437,7 +4438,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4456,7 +4457,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4475,7 +4476,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4494,7 +4495,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4513,7 +4514,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4532,7 +4533,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4551,7 +4552,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4570,7 +4571,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4589,7 +4590,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4608,7 +4609,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4627,7 +4628,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4646,7 +4647,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4665,7 +4666,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4684,7 +4685,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4703,7 +4704,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4722,7 +4723,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4741,7 +4742,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4760,7 +4761,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4779,7 +4780,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4798,7 +4799,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4817,7 +4818,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4836,7 +4837,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4855,7 +4856,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4874,7 +4875,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox letra 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4902,7 +4903,7 @@ Begin VB.Form frmCFLX
    Begin VB.TextBox txtFields 
       BackColor       =   &H00C0FFFF&
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -4928,7 +4929,7 @@ Begin VB.Form frmCFLX
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmCFLX.frx":0000
+      Picture         =   "frmCFLX.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -4948,7 +4949,7 @@ Begin VB.Form frmCFLX
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmCFLX.frx":059A
+      Picture         =   "frmCFLX.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -5000,7 +5001,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     End If
@@ -5021,7 +5022,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = PegPath("PATH", "PF")
     cSQL = "select * frOm cflx where NUMERO=" & ePASS01
     nCAMPOS = 3
@@ -5030,9 +5031,9 @@ Private Sub Form_Load()
     aPAD = Array("", "", 32)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
-    txtFields(0).Font = "isoqsymbol"
+    TXTFIELDS(0).Font = "isoqsymbol"
     For iLOOP = 0 To 255
         letra(iLOOP).Font = "isoqsymbol"
         letra(iLOOP).tEXT = Chr(iLOOP)
@@ -5050,8 +5051,8 @@ Private Sub letra_Click(Index As Integer)
 End Sub
 
 Private Sub TXTFIELDS_Change(Index As Integer)
-    If Len(txtFields(0).tEXT) > 0 Then
-        txtFields(2).tEXT = Asc(txtFields(0).tEXT)
+    If Len(TXTFIELDS(0).tEXT) > 0 Then
+        TXTFIELDS(2).tEXT = Asc(TXTFIELDS(0).tEXT)
     End If
 End Sub
 

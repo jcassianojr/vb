@@ -8,6 +8,7 @@ Begin VB.Form escIED
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   8925
+   Icon            =   "Escied.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   8925
@@ -190,7 +191,7 @@ End Sub
 
 Private Sub Form_Load()
     '    CentralizaJanela Me
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("TIPO", "DESCRITIVO", "VALOR")
     aORDES = Array("Tipo", "Descriçao", "Valor")
     cORDEM = "TIPO"

@@ -7,6 +7,7 @@ Begin VB.Form FrmPPAPC
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   9360
+   Icon            =   "FrmPPAPC.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3015
    ScaleWidth      =   9360
@@ -105,7 +106,7 @@ Begin VB.Form FrmPPAPC
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "FrmPPAPC.frx":0000
+      Picture         =   "FrmPPAPC.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -125,7 +126,7 @@ Begin VB.Form FrmPPAPC
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmPPAPC.frx":059A
+      Picture         =   "FrmPPAPC.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -286,7 +287,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQPF = PegPath("PATH", "PPAP")
     Select Case iPPAP
     Case 1, 11

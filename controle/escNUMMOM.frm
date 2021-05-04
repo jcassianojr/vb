@@ -8,6 +8,7 @@ Begin VB.Form escNUMNOM
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   9270
+   Icon            =   "escNUMMOM.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   9270
@@ -122,7 +123,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("NUMERO", "NOME", "COGNOME")
     aORDES = Array("Codigo", "Razao Social", "Cognome")
     cORDEM = "NUMERO"
@@ -284,7 +285,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Select Case cARQESC
 
         Case "MA01"
-            zgrp = Trim(str(zgrp))
+            zgrp = Trim(Str(zgrp))
             zgrp = String(8 - Len(zgrp), "0") & zgrp
             iImage = 1
             cARQRTF = PegPath("PATH", "LOGOMA01") & "IMGMA01.MDB"
@@ -298,7 +299,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         If cARQESC <> "MC02" Then
 
             Load frmIMAGENS
-            frmIMAGENS.txtFields(0).Enabled = False
+            frmIMAGENS.TXTFIELDS(0).Enabled = False
             frmIMAGENS.Escolher(0).Visible = False
             frmIMAGENS.Show vbModal, Me
 

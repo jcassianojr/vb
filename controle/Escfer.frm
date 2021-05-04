@@ -8,6 +8,7 @@ Begin VB.Form escFER
    ClientLeft      =   2850
    ClientTop       =   1605
    ClientWidth     =   9735
+   Icon            =   "Escfer.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   9735
@@ -97,7 +98,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQFER = PegPath("PATH", "MANA5FER")
     cARQFER = GeraConn(cARQFER, "JETFOX")
     aORDEM = Array("FERRAM", "Nome")
@@ -190,7 +191,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         iImage = 3
         cARQRTF = PegPath("PATH", "LOGOFER") & "IMGFER.MDB"
         Load frmIMAGENS
-        frmIMAGENS.txtFields(0).Enabled = False
+        frmIMAGENS.TXTFIELDS(0).Enabled = False
         frmIMAGENS.Escolher(0).Visible = False
         frmIMAGENS.Show vbModal, Me
 

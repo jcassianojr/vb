@@ -8,6 +8,7 @@ Begin VB.Form escFLX
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   8190
+   Icon            =   "Escflx.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   8190
@@ -145,7 +146,7 @@ End Sub
 Private Sub Form_Load()
     'Dim X As Integer
     'Dim cLETRA As String
-    Center Me
+    CenterFormToScreen Me
     cARQPF = PegPath("PATH", "PF")
     aORDEM = Array("NUMERO", "Descricao")
     aORDES = Array("Letra", "Descricao")
@@ -153,7 +154,7 @@ Private Sub Form_Load()
     cSUBWHERE = ""
     xmontatoolbar Me.Toolbar1, "escFLX", True
     FilRelat
-    txtFields(0).Font = "isoqsymbol"
+    TXTFIELDS(0).Font = "isoqsymbol"
     lRETU = False
     '    For X = 32 To 96
     '      cLETRA = Chr(X)
@@ -163,7 +164,7 @@ End Sub
 
 Private Sub grid_Click()
     Grid.Col = 0
-    txtFields(0).Text = Grid
+    TXTFIELDS(0).tEXT = Grid
 End Sub
 
 Private Sub Grid_DblClick()

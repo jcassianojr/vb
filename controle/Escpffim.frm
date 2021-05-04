@@ -8,6 +8,7 @@ Begin VB.Form escpffim
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   8880
+   Icon            =   "Escpffim.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5775
    ScaleWidth      =   8880
@@ -101,7 +102,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("CODFINAL", "CODIGO", "DESCR", "PF ")
     aORDES = Array("Codigo Final", "Codigo", "Descricao", "PF")
     cORDEM = "CODFINAL"

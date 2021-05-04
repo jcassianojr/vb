@@ -8,6 +8,7 @@ Begin VB.Form escmp
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   8970
+   Icon            =   "Escmp.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   8970
@@ -132,7 +133,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("CODIGO", "NOME")
     aORDES = Array("CODIGO", "NOME")
     cORDEM = "CODIGO"

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form FrmLstView 
    Caption         =   "Visualizador de LST"
@@ -8,6 +8,7 @@ Begin VB.Form FrmLstView
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   10365
+   Icon            =   "FrmLstView.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7560
    ScaleWidth      =   10365
@@ -76,7 +77,7 @@ Begin VB.Form FrmLstView
       Caption         =   "ZIP"
       Height          =   555
       Left            =   9600
-      Picture         =   "FrmLstView.frx":0000
+      Picture         =   "FrmLstView.frx":058A
       Style           =   1  'Graphical
       TabIndex        =   4
       Top             =   6600
@@ -125,7 +126,7 @@ Begin VB.Form FrmLstView
       Width           =   2175
       _ExtentX        =   3836
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":038A
+      Picture         =   "FrmLstView.frx":0914
       Caption         =   "Configurar Impressora"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -145,7 +146,7 @@ Begin VB.Form FrmLstView
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":0924
+      Picture         =   "FrmLstView.frx":0EAE
       Caption         =   "Visualizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -165,7 +166,7 @@ Begin VB.Form FrmLstView
       Width           =   2175
       _ExtentX        =   3836
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":0EBE
+      Picture         =   "FrmLstView.frx":1448
       Caption         =   "EnviarEmail"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -185,7 +186,7 @@ Begin VB.Form FrmLstView
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":1458
+      Picture         =   "FrmLstView.frx":19E2
       Caption         =   "Localizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -205,7 +206,7 @@ Begin VB.Form FrmLstView
       Width           =   2175
       _ExtentX        =   3836
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":19F2
+      Picture         =   "FrmLstView.frx":1F7C
       Caption         =   "Imprimir na porta"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -226,7 +227,7 @@ Begin VB.Form FrmLstView
       Width           =   855
       _ExtentX        =   1508
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":1F8C
+      Picture         =   "FrmLstView.frx":2516
       Caption         =   "Html"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -247,7 +248,7 @@ Begin VB.Form FrmLstView
       Width           =   795
       _ExtentX        =   1402
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":2526
+      Picture         =   "FrmLstView.frx":2AB0
       Caption         =   "PDF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -268,7 +269,7 @@ Begin VB.Form FrmLstView
       Width           =   795
       _ExtentX        =   1402
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":28C0
+      Picture         =   "FrmLstView.frx":2E4A
       Caption         =   "RTF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -289,7 +290,7 @@ Begin VB.Form FrmLstView
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":2C5A
+      Picture         =   "FrmLstView.frx":31E4
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -310,7 +311,7 @@ Begin VB.Form FrmLstView
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":31F4
+      Picture         =   "FrmLstView.frx":377E
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -331,7 +332,7 @@ Begin VB.Form FrmLstView
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   767
-      Picture         =   "FrmLstView.frx":378E
+      Picture         =   "FrmLstView.frx":3D18
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -352,7 +353,7 @@ Begin VB.Form FrmLstView
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":3D28
+      Picture         =   "FrmLstView.frx":42B2
       Caption         =   "Ver Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -373,7 +374,7 @@ Begin VB.Form FrmLstView
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":42C2
+      Picture         =   "FrmLstView.frx":484C
       Caption         =   "Buscar Pasta"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -394,7 +395,7 @@ Begin VB.Form FrmLstView
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":485C
+      Picture         =   "FrmLstView.frx":4DE6
       Caption         =   "Atualizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -415,7 +416,7 @@ Begin VB.Form FrmLstView
       Width           =   675
       _ExtentX        =   1191
       _ExtentY        =   1191
-      Picture         =   "FrmLstView.frx":4DF6
+      Picture         =   "FrmLstView.frx":5380
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -437,7 +438,7 @@ Begin VB.Form FrmLstView
       Width           =   675
       _ExtentX        =   1191
       _ExtentY        =   1191
-      Picture         =   "FrmLstView.frx":5390
+      Picture         =   "FrmLstView.frx":591A
       Caption         =   "Dia"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -459,7 +460,7 @@ Begin VB.Form FrmLstView
       Width           =   675
       _ExtentX        =   1191
       _ExtentY        =   1191
-      Picture         =   "FrmLstView.frx":572A
+      Picture         =   "FrmLstView.frx":5CB4
       Caption         =   "limpar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -487,11 +488,11 @@ Dim cSUBWHERE As String
 Dim nSUBWHERE As Long
 
 Private Sub btnOpen_Click()
-    TxtExecutar.TEXT = OpenArqExt(Me, TxtExecutar.TEXT, "*", "Executarcom")
+    TxtExecutar.tEXT = OpenArqExt(Me, TxtExecutar.tEXT, "*", "Executarcom")
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-cARQRTF = Txtcaminho.TEXT & Trim(Grid)
+cARQRTF = Txtcaminho.tEXT & Trim(Grid)
    If FileExist(cARQRTF, True) Then
        Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
    End If
@@ -506,7 +507,7 @@ Private Sub CmdExcluir_Click()
     Grid.Col = 0
     cARQUIVO = Grid
     If Len(cARQUIVO) > 0 Then
-        cARQUIVO = Txtcaminho.TEXT & Grid
+        cARQUIVO = Txtcaminho.tEXT & Grid
         If MDG("Excluir " & cARQUIVO) Then
             Kill cARQUIVO
             Command1_Click
@@ -543,13 +544,13 @@ Private Sub CmdIni_Click(Index As Integer)
     Case 3
         cCHAVE = "USO02"
     End Select
-    Txtcaminho.TEXT = PegPath(cCHAVE, UCase(cNOMEFOLHA), " ")
-    If Len(Trim(Txtcaminho.TEXT)) = 0 Then
-        Txtcaminho.TEXT = PegPath(cCHAVE, "CAMINHO", "C:\TEMP")
+    Txtcaminho.tEXT = PegPath(cCHAVE, UCase(cNOMEFOLHA), " ")
+    If Len(Trim(Txtcaminho.tEXT)) = 0 Then
+        Txtcaminho.tEXT = PegPath(cCHAVE, "CAMINHO", "C:\TEMP")
     End If
 
-    If InStr(Txtcaminho.TEXT, "%USUARIO%") > 0 Then
-        Txtcaminho.TEXT = Replace(Txtcaminho.TEXT, "%USUARIO%", cNOMEFOLHA)
+    If InStr(Txtcaminho.tEXT, "%USUARIO%") > 0 Then
+        Txtcaminho.tEXT = Replace(Txtcaminho.tEXT, "%USUARIO%", cNOMEFOLHA)
     End If
     Command1_Click
 End Sub
@@ -564,7 +565,7 @@ End Sub
 
 Private Sub CmdPrinterPort_Click()
     Grid.Col = 0
-    cARQRTF = Txtcaminho.TEXT & Trim(Grid)
+    cARQRTF = Txtcaminho.tEXT & Trim(Grid)
     If Right(UCase(cARQRTF), 4) = ".PSR" Or Right(UCase(cARQRTF), 4) = ".QRP" Then
         Alert "Somente LST/TXT"
         Exit Sub
@@ -602,7 +603,7 @@ End Sub
 Private Sub CmdSendMail_Click()
     Dim cARQUIVO As String
     Grid.Col = 0
-    cARQUIVO = Txtcaminho.TEXT & Trim(Grid)
+    cARQUIVO = Txtcaminho.tEXT & Trim(Grid)
     'servidor,porta,from,to,assunto,anexos,mensagem,enviar e sair
     ePASS01 = Array("", _
                     "", _
@@ -631,9 +632,9 @@ Private Sub Command1_Click()
     Dim lINCLUI As Boolean
     On Error Resume Next
 
-    cDRIVE = Left(Txtcaminho.TEXT, 1)
+    cDRIVE = Left(Txtcaminho.tEXT, 1)
     ChDrive (cDRIVE)
-    cDIRER = Mid(Txtcaminho.TEXT, 3)
+    cDIRER = Mid(Txtcaminho.tEXT, 3)
     ChDir cDIRER
 
     Grid.Clear
@@ -641,10 +642,10 @@ Private Sub Command1_Click()
     Grid.ColWidth(0) = 3000
     Grid.ColWidth(1) = 2000
     Grid.ColAlignment(0) = flexAlignLeftCenter
-    If Right(Txtcaminho.TEXT, 1) <> "\" Then
-        Txtcaminho.TEXT = Txtcaminho.TEXT + "\"
+    If Right(Txtcaminho.tEXT, 1) <> "\" Then
+        Txtcaminho.tEXT = Txtcaminho.tEXT + "\"
     End If
-    Set thisFolder = FS.GetFolder(Txtcaminho.TEXT)
+    Set thisFolder = FS.GetFolder(Txtcaminho.tEXT)
     Set allfiles = thisFolder.Files
     For Each thisFile In allfiles
         cFILENAME = UCase(thisFile.Name)
@@ -677,7 +678,7 @@ Private Sub Command10_Click()
     Dim cORIGEM As String
     Grid.Col = 0
     cNOME = Trim(Grid)
-    cORIGEM = Txtcaminho.TEXT & cNOME
+    cORIGEM = Txtcaminho.tEXT & cNOME
     If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
         txttoRTF (cORIGEM)
         Command1_Click
@@ -693,8 +694,8 @@ Private Sub Command2_Click()
     Dim nRETU As Integer
     Grid.Col = 0
     cNOME = Trim(Grid)
-    cORIGEM = Txtcaminho.TEXT & cNOME
-    cDESTINO = Txtcaminho.TEXT & NomeArq(cNOME, True) & ".txt"
+    cORIGEM = Txtcaminho.tEXT & cNOME
+    cDESTINO = Txtcaminho.tEXT & NomeArq(cNOME, True) & ".txt"
     nRETU = CopyFileWindowsWay(cORIGEM, cDESTINO)
     If nRETU = 0 And MDG("Apagar arquivo lst") Then
         Kill cORIGEM
@@ -707,7 +708,7 @@ Private Sub Command3_Click()
     DLG.BrowseFolder "Escolha uma Pasta", Pastas, False
     If DLG.Cancel = True Then Exit Sub
     ' Mostra o caminho escolhido
-    Txtcaminho.TEXT = DLG.Path & "\"
+    Txtcaminho.tEXT = DLG.Path & "\"
     Command1_Click
 End Sub
 
@@ -715,7 +716,7 @@ Private Sub Command4_Click()
     ''Dim carq As String
     Dim cNOME As String
     Grid.Col = 0
-    cNOME = Txtcaminho.TEXT & Trim(Grid)
+    cNOME = Txtcaminho.tEXT & Trim(Grid)
     ShellEx cNOME, essSW_SHOWDEFAULT, , , , Me.hWnd
 End Sub
 
@@ -724,7 +725,7 @@ Private Sub Command5_Click()
     Dim cORIGEM As String
     Grid.Col = 0
     cNOME = Trim(Grid)
-    cORIGEM = Txtcaminho.TEXT & cNOME
+    cORIGEM = Txtcaminho.tEXT & cNOME
     If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
         txttohtml (cORIGEM)
         Command1_Click
@@ -738,7 +739,7 @@ Private Sub Command6_Click()
     Grid.Col = 0
     cNOME = Trim(Grid)
     If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
-        ePASS01 = Txtcaminho.TEXT & cNOME
+        ePASS01 = Txtcaminho.tEXT & cNOME
         formConvertToPDF.Show vbModal, Me
         Command1_Click
     Else
@@ -767,7 +768,7 @@ Private Sub Command9_Click()
     'Dim oZIP As cZip
     Grid.Col = 0
     cNOME = Trim(Grid)
-    cORIGEM = Txtcaminho.TEXT & cNOME
+    cORIGEM = Txtcaminho.tEXT & cNOME
     If InStr(UCase(cNOME), ".ZIP") > 0 Then
         Alert ("Ja e um zip")
     Else
@@ -783,11 +784,11 @@ End Sub
 
 Private Sub Form_Load()
     'Call systray(TrayAdd, Me.Hwnd, Me.Caption, Me.Icon)
-    Center Me
+    CenterFormToScreen Me
     aORDES = Array("Relatório", "Data")
     cSUBWHERE = ""
     cNOMEFOLHA = NetworkUserName()
-    TxtExecutar.TEXT = PegPath("LSTVIEW", "VIEW", "C:\plugin\lstview\log0290.exe")
+    TxtExecutar.tEXT = PegPath("LSTVIEW", "VIEW", "C:\plugin\lstview\log0290.exe")
     CmdIni_Click 0
 End Sub
 
@@ -804,20 +805,20 @@ Private Sub Grid_DblClick()
         Exit Sub
     End If
     If InStr(cCOMP, ".PSR") > 0 Then
-        cARQ = "rptview " & Txtcaminho.TEXT & cNOME
+        cARQ = "rptview " & Txtcaminho.tEXT & cNOME
         Shell cARQ, vbMaximizedFocus
     Else
         If InStr(cCOMP, ".QRP") > 0 Then
-            cARQ = "qrpview " & Txtcaminho.TEXT & cNOME
+            cARQ = "qrpview " & Txtcaminho.tEXT & cNOME
             Shell cARQ, vbMaximizedFocus
             'ShellEx cNOME, essSW_SHOWDEFAULT, , , , Me.hwnd
         Else
             If InStr(cCOMP, ".PDF") > 0 Or InStr(cCOMP, ".HTM") > 0 Or InStr(cCOMP, ".RTF") > 0 Then
-                cARQ = Txtcaminho.TEXT & cNOME
+                cARQ = Txtcaminho.tEXT & cNOME
                 ShellEx cARQ, essSW_SHOWDEFAULT, , , , Me.hWnd
             Else
                 'carq = "log0290 " & Txtcaminho.Text & cNOME
-                cARQ = Trim(TxtExecutar.TEXT) & " " & Txtcaminho.TEXT & cNOME
+                cARQ = Trim(TxtExecutar.tEXT) & " " & Txtcaminho.tEXT & cNOME
                 Shell cARQ, vbMaximizedFocus
             End If
         End If

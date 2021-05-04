@@ -8,6 +8,7 @@ Begin VB.Form FrmTxl
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   10425
+   Icon            =   "FrmTxl.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7380
    ScaleWidth      =   10425
@@ -142,7 +143,7 @@ Begin VB.Form FrmTxl
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":0000
+         Picture         =   "FrmTxl.frx":058A
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -162,7 +163,7 @@ Begin VB.Form FrmTxl
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":059A
+         Picture         =   "FrmTxl.frx":0B24
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -183,7 +184,7 @@ Begin VB.Form FrmTxl
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":0B34
+         Picture         =   "FrmTxl.frx":10BE
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -203,7 +204,7 @@ Begin VB.Form FrmTxl
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":10CE
+         Picture         =   "FrmTxl.frx":1658
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -234,7 +235,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":1668
+         Picture         =   "FrmTxl.frx":1BF2
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -256,7 +257,7 @@ Begin VB.Form FrmTxl
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":1A02
+         Picture         =   "FrmTxl.frx":1F8C
          Caption         =   "Html"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -278,7 +279,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":1F9C
+         Picture         =   "FrmTxl.frx":2526
          Caption         =   "PDF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -300,7 +301,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":2336
+         Picture         =   "FrmTxl.frx":28C0
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -348,7 +349,7 @@ Begin VB.Form FrmTxl
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   767
-      Picture         =   "FrmTxl.frx":26D0
+      Picture         =   "FrmTxl.frx":2C5A
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -368,7 +369,7 @@ Begin VB.Form FrmTxl
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "FrmTxl.frx":2C6A
+      Picture         =   "FrmTxl.frx":31F4
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -391,7 +392,7 @@ Begin VB.Form FrmTxl
       _ExtentY        =   344
       _Version        =   393217
       ScrollBars      =   3
-      TextRTF         =   $"FrmTxl.frx":3204
+      TextRTF         =   $"FrmTxl.frx":378E
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   12
@@ -411,7 +412,7 @@ Begin VB.Form FrmTxl
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   556
-      Picture         =   "FrmTxl.frx":3286
+      Picture         =   "FrmTxl.frx":3810
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -432,7 +433,7 @@ Begin VB.Form FrmTxl
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   556
-      Picture         =   "FrmTxl.frx":3820
+      Picture         =   "FrmTxl.frx":3DAA
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -534,7 +535,7 @@ Private Sub gerar(ByVal cOPE As String)
         oTXT.arquivo = TxtArquivo
     End If
     If cDESTINO = "IMPNET" Then
-        oTXT.caminho = TxtCaminho
+        oTXT.caminho = Txtcaminho
     End If
     If cSETUP <> "" Then
         oTXT.impsetup cSETUP
@@ -613,11 +614,11 @@ Private Sub CmdFiltro_Click()
     If aRELCFG(11) Then
         ePASS01 = ""
         FrmFiltro.Show vbModal, Me
-        filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
+        FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
     End If
-    cFILTRO = FixStr(filtro)
+    cFILTRO = FixStr(FILTRO)
     If Len(aRELCFG(15)) > 0 Then
-        cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+        cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
         Lblsql = cSQL
     End If
     
@@ -663,7 +664,7 @@ Private Sub imptxt()
     oTXT.Destino = cDESTINO
     oTXT.ABRIR
     If cDESTINO = "IMPNET" Then
-        oTXT.caminho = TxtCaminho
+        oTXT.caminho = Txtcaminho
     End If
     If cSETUP <> "" Then
         oTXT.impsetup cSETUP
@@ -754,10 +755,10 @@ End Sub
 Private Sub Form_Load()
     Dim X As Long
     Dim cTMP As String
-    Center Me
-    filtro = ""
-    TxtCaminho = ""
-    TxtCaminho.Enabled = False
+    CenterFormToScreen Me
+    FILTRO = ""
+    Txtcaminho = ""
+    Txtcaminho.Enabled = False
     OptDestino(6).Value = True
     montaimp
   
@@ -784,7 +785,7 @@ Private Sub Form_Load()
         nCOLUNAS = oIni.GetSetting("CONFIGURACAO", "COLUNAS", 80)
         nLINHAS = oIni.GetSetting("CONFIGURACAO", "LINHAS", 60)
         cDESTINO = oIni.GetSetting("CONFIGURACAO", "DESTINO", "ARQ")
-        TxtCaminho = oIni.GetSetting("CONFIGURACAO", "CAMINHO", "LPT1")
+        Txtcaminho = oIni.GetSetting("CONFIGURACAO", "CAMINHO", "LPT1")
   
         Select Case cDESTINO
         Case "LPT1"
@@ -803,7 +804,7 @@ Private Sub Form_Load()
             OptDestino(6).Value = True
         Case "IMPNET"
             OptDestino(7).Value = True
-            TxtCaminho.Enabled = True
+            Txtcaminho.Enabled = True
         End Select
 
   
@@ -812,7 +813,7 @@ Private Sub Form_Load()
         If aRELCFG(14) = "" Then
             aRELCFG(14) = oIni.GetSetting("CONFIGURACAO", "FILTRO", 1)
         End If
-        filtro = aRELCFG(14)
+        FILTRO = aRELCFG(14)
         If aRELCFG(15) = "" Then
             aRELCFG(15) = oIni.GetSetting("CONFIGURACAO", "SQL", 1)
         End If
@@ -863,10 +864,10 @@ Private Sub Form_Load()
     If Not aDIREITOS(6) Then cmdimp.Visible = False
     If Not aDIREITOS(6) Then CmdConfImp.Visible = False
     If Not aDIREITOS(5) Then CmdVisua.Visible = False
-    If Not aDIREITOS(7) Then Salvar(0).Visible = False
+    If Not aDIREITOS(7) Then salvar(0).Visible = False
     If Not aDIREITOS(7) Then CmdEmail.Visible = False
     If Not aRELCFG(11) Then CmdFiltro.Visible = False
-    If Not aRELCFG(11) Then filtro.Visible = False
+    If Not aRELCFG(11) Then FILTRO.Visible = False
      
     If Not aDIREITOS(4) Then CmdEditar.Visible = False
     If Not aDIREITOS(4) Then CmdShell.Visible = False
@@ -879,7 +880,7 @@ Private Sub Form_Load()
         End If
     End If
     If Len(aRELCFG(15)) > 0 Then
-        cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+        cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
     End If
     
     Lblsql = cSQL
@@ -910,7 +911,7 @@ Private Sub Listview1_Click()
 End Sub
 
 Private Sub OptDestino_Click(Index As Integer)
-    TxtCaminho.Enabled = False
+    Txtcaminho.Enabled = False
     Select Case Index
     Case 0
         cDESTINO = "LPT1"
@@ -928,7 +929,7 @@ Private Sub OptDestino_Click(Index As Integer)
         cDESTINO = "PRINTER"
     Case 7
         cDESTINO = "IMPNET"
-        TxtCaminho.Enabled = True
+        Txtcaminho.Enabled = True
     End Select
 End Sub
 

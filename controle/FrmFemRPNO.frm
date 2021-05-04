@@ -6,6 +6,7 @@ Begin VB.Form FrmFEMRPNO
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   8430
+   Icon            =   "FrmFemRPNO.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   2220
    ScaleWidth      =   8430
@@ -188,7 +189,7 @@ Begin VB.Form FrmFEMRPNO
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmFemRPNO.frx":0000
+      Picture         =   "FrmFemRPNO.frx":058A
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -208,7 +209,7 @@ Begin VB.Form FrmFEMRPNO
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "FrmFemRPNO.frx":059A
+      Picture         =   "FrmFemRPNO.frx":0B24
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -417,7 +418,7 @@ End Sub
 
 Private Sub Form_Load()
   
-    Center Me
+    CenterFormToScreen Me
     ''Configura Help
     Me.Caption = cFORMID
     ''HelpContextID = nFORMID

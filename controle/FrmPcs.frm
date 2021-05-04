@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form frmPCS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFS"
@@ -9,6 +9,7 @@ Begin VB.Form frmPCS
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   10920
+   Icon            =   "FrmPcs.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -106,7 +107,7 @@ Begin VB.Form frmPCS
       TabsPerRow      =   4
       TabHeight       =   520
       TabCaption(0)   =   "Plano Controle"
-      TabPicture(0)   =   "FrmPcs.frx":0000
+      TabPicture(0)   =   "FrmPcs.frx":058A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "GridPla(0)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -140,7 +141,7 @@ Begin VB.Form frmPCS
       Tab(0).Control(14).Enabled=   0   'False
       Tab(0).ControlCount=   15
       TabCaption(1)   =   "Croqui"
-      TabPicture(1)   =   "FrmPcs.frx":001C
+      TabPicture(1)   =   "FrmPcs.frx":05A6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Picture1(0)"
       Tab(1).Control(1)=   "Picture2(0)"
@@ -152,7 +153,7 @@ Begin VB.Form frmPCS
       Tab(1).Control(7)=   "VerImg(0)"
       Tab(1).ControlCount=   8
       TabCaption(2)   =   "Controle Dispositivo"
-      TabPicture(2)   =   "FrmPcs.frx":0038
+      TabPicture(2)   =   "FrmPcs.frx":05C2
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Duplicar(13)"
       Tab(2).Control(1)=   "Duplicar(3)"
@@ -162,7 +163,7 @@ Begin VB.Form frmPCS
       Tab(2).Control(5)=   "GridPla(3)"
       Tab(2).ControlCount=   6
       TabCaption(3)   =   "On the Job"
-      TabPicture(3)   =   "FrmPcs.frx":0054
+      TabPicture(3)   =   "FrmPcs.frx":05DE
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Duplicar(12)"
       Tab(3).Control(1)=   "Duplicar(2)"
@@ -172,7 +173,7 @@ Begin VB.Form frmPCS
       Tab(3).Control(5)=   "GridPla(2)"
       Tab(3).ControlCount=   6
       TabCaption(4)   =   "Checklist"
-      TabPicture(4)   =   "FrmPcs.frx":0070
+      TabPicture(4)   =   "FrmPcs.frx":05FA
       Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "Duplicar(11)"
       Tab(4).Control(1)=   "Duplicar(1)"
@@ -182,7 +183,7 @@ Begin VB.Form frmPCS
       Tab(4).Control(5)=   "GridPla(1)"
       Tab(4).ControlCount=   6
       TabCaption(5)   =   "Alerta"
-      TabPicture(5)   =   "FrmPcs.frx":008C
+      TabPicture(5)   =   "FrmPcs.frx":0616
       Tab(5).ControlEnabled=   0   'False
       Tab(5).Control(0)=   "Picture1(1)"
       Tab(5).Control(1)=   "Picture2(1)"
@@ -550,7 +551,7 @@ Begin VB.Form frmPCS
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   661
-         Picture         =   "FrmPcs.frx":00A8
+         Picture         =   "FrmPcs.frx":0632
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -571,7 +572,7 @@ Begin VB.Form frmPCS
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   661
-         Picture         =   "FrmPcs.frx":0642
+         Picture         =   "FrmPcs.frx":0BCC
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -592,7 +593,7 @@ Begin VB.Form frmPCS
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   661
-         Picture         =   "FrmPcs.frx":0BDC
+         Picture         =   "FrmPcs.frx":1166
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -613,7 +614,7 @@ Begin VB.Form frmPCS
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   661
-         Picture         =   "FrmPcs.frx":1176
+         Picture         =   "FrmPcs.frx":1700
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -635,7 +636,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":1710
+         Picture         =   "FrmPcs.frx":1C9A
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -657,7 +658,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":1BAA
+         Picture         =   "FrmPcs.frx":2134
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -679,7 +680,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":2044
+         Picture         =   "FrmPcs.frx":25CE
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -701,7 +702,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":24DE
+         Picture         =   "FrmPcs.frx":2A68
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -723,7 +724,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":2978
+         Picture         =   "FrmPcs.frx":2F02
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -745,7 +746,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":2E12
+         Picture         =   "FrmPcs.frx":339C
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -767,7 +768,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "FrmPcs.frx":32AC
+         Picture         =   "FrmPcs.frx":3836
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -789,7 +790,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "FrmPcs.frx":3746
+         Picture         =   "FrmPcs.frx":3CD0
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -810,7 +811,7 @@ Begin VB.Form frmPCS
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmPcs.frx":3BE0
+      Picture         =   "FrmPcs.frx":416A
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -830,7 +831,7 @@ Begin VB.Form frmPCS
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmPcs.frx":417A
+      Picture         =   "FrmPcs.frx":4704
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -850,7 +851,7 @@ Begin VB.Form frmPCS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "FrmPcs.frx":4714
+      Picture         =   "FrmPcs.frx":4C9E
       Caption         =   "Configurar Impressora"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -925,7 +926,7 @@ Private Sub cmdClose_Click()
     Dim cSQLIMG As String
     Dim cCAMIMG As String
     On Error Resume Next
-    TXTFIELDS(1).Text = Replace(TXTFIELDS(1).Text, "/", "-") 'chave apresentando erro de gravacao
+    TXTFIELDS(1).tEXT = Replace(TXTFIELDS(1).tEXT, "/", "-") 'chave apresentando erro de gravacao
     
     If MDG("Gravar alteraçôes") Then
         'campos
@@ -1084,7 +1085,7 @@ Private Sub Command6_Click()
     End If
     
     cARQPOKA = PegPath("PATH", "POKA")
-    nORD = txtItem.Text
+    nORD = txtItem.tEXT
     nPPAP = PegUltSQL(cARQPOKA, "select numero from POKA WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
     If nPPAP = 0 Then
         nPPAP = FixInt(PegMAXSQL(cARQPOKA, "POKA", "NUMERO", 0)) + 1
@@ -1293,11 +1294,11 @@ End Sub
 Private Sub Form_Load()
     Dim cCAMIMG As String
     Dim cSQLIMG As String
-    Center Me
+    CenterFormToScreen Me
     
-    TXTPF.Text = nPF
-    TXTSEQ.Text = nSEQ
-    TXTSSQ.Text = nSSQ
+    TXTPF.tEXT = nPF
+    TXTSEQ.tEXT = nSEQ
+    TXTSSQ.tEXT = nSSQ
     
     
     lTROCOU = Array(False, False, False, False, False)
@@ -1314,7 +1315,7 @@ Private Sub Form_Load()
         End If
     End If
     If nARQPCS = 2 Then
-        TxtCodComp.Text = Ccodcomp
+        TxtCodComp.tEXT = Ccodcomp
     Else
         TxtCodComp.Visible = False
         Label4.Visible = False
@@ -1364,7 +1365,7 @@ Private Sub Form_Load()
     FilRelat (2)                                 'on the job
     FilRelat (3)                                 'dispositivo
     
-    TXTFIELDS(1).Text = Replace(TXTFIELDS(1).Text, "/", "-") 'chave apresentando erro de gravacao
+    TXTFIELDS(1).tEXT = Replace(TXTFIELDS(1).tEXT, "/", "-") 'chave apresentando erro de gravacao
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)

@@ -7,6 +7,7 @@ Begin VB.Form frmPFD
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   6330
+   Icon            =   "frmpfd.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -86,7 +87,7 @@ Begin VB.Form frmPFD
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmpfd.frx":0000
+      Picture         =   "frmpfd.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -106,7 +107,7 @@ Begin VB.Form frmPFD
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmpfd.frx":059A
+      Picture         =   "frmpfd.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -168,7 +169,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     End If
@@ -189,7 +190,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = PegPath("PATH", "PF")
     cSQL = "SELECT * FROM PFD WHERE ID=" & ePASS01
     nCAMPOS = 3
@@ -198,7 +199,7 @@ Private Sub Form_Load()
     aPAD = Array("", "", "")
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
 End Sub
 
@@ -207,16 +208,16 @@ Private Sub Setor_Click(Index As Integer)
     Select Case Index
 
     Case 0
-        Me.txtFields(2) = "P"
+        Me.TXTFIELDS(2) = "P"
 
     Case 1
-        Me.txtFields(2) = "O"
+        Me.TXTFIELDS(2) = "O"
 
     Case 2
-        Me.txtFields(2) = "L"
+        Me.TXTFIELDS(2) = "L"
 
     Case 3
-        Me.txtFields(2) = "R"
+        Me.TXTFIELDS(2) = "R"
 
     End Select
 

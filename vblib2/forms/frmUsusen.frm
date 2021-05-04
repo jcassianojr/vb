@@ -1,5 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form frmUSUSENHA 
    Caption         =   "Troca de Senha"
    ClientHeight    =   1800
@@ -11,6 +12,14 @@ Begin VB.Form frmUSUSENHA
    ScaleHeight     =   1800
    ScaleWidth      =   4980
    StartUpPosition =   2  'CenterScreen
+   Begin vbExtra.SizeGrip SizeGrip1 
+      Height          =   285
+      Left            =   4695
+      Top             =   1515
+      Width           =   285
+      _ExtentX        =   503
+      _ExtentY        =   503
+   End
    Begin VB.PictureBox Picture1 
       BorderStyle     =   0  'None
       Height          =   375
@@ -268,7 +277,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     
     Label4 = zIDTEMP
 

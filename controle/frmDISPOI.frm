@@ -8,6 +8,7 @@ Begin VB.Form frmDISPOI
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   10395
+   Icon            =   "frmDISPOI.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -27,7 +28,7 @@ Begin VB.Form frmDISPOI
       Tabs            =   1
       TabHeight       =   520
       TabCaption(0)   =   "Item"
-      TabPicture(0)   =   "frmDISPOI.frx":0000
+      TabPicture(0)   =   "frmDISPOI.frx":058A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Command4"
       Tab(0).Control(0).Enabled=   0   'False
@@ -75,7 +76,7 @@ Begin VB.Form frmDISPOI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmDISPOI.frx":001C
+         Picture         =   "frmDISPOI.frx":05A6
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -95,7 +96,7 @@ Begin VB.Form frmDISPOI
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmDISPOI.frx":05B6
+         Picture         =   "frmDISPOI.frx":0B40
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -115,7 +116,7 @@ Begin VB.Form frmDISPOI
          Width           =   1335
          _ExtentX        =   2355
          _ExtentY        =   767
-         Picture         =   "frmDISPOI.frx":0B50
+         Picture         =   "frmDISPOI.frx":10DA
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -136,7 +137,7 @@ Begin VB.Form frmDISPOI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmDISPOI.frx":10EA
+         Picture         =   "frmDISPOI.frx":1674
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -157,7 +158,7 @@ Begin VB.Form frmDISPOI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmDISPOI.frx":1584
+         Picture         =   "frmDISPOI.frx":1B0E
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -178,7 +179,7 @@ Begin VB.Form frmDISPOI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmDISPOI.frx":1A1E
+         Picture         =   "frmDISPOI.frx":1FA8
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -199,7 +200,7 @@ Begin VB.Form frmDISPOI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmDISPOI.frx":1EB8
+         Picture         =   "frmDISPOI.frx":2442
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -243,7 +244,7 @@ Begin VB.Form frmDISPOI
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmDISPOI.frx":2352
+      Picture         =   "frmDISPOI.frx":28DC
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -263,7 +264,7 @@ Begin VB.Form frmDISPOI
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmDISPOI.frx":28EC
+      Picture         =   "frmDISPOI.frx":2E76
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -316,7 +317,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
        
@@ -361,7 +362,7 @@ Private Sub cmdpeg_Click(Index As Integer)
     eRETU02 = ""                                 'Evita Cancelamento Escolha
     escIED.Show vbModal, Me
     If lRETU Then
-        txtFields(Index) = Mid(eRETU02, 1, 1)
+        TXTFIELDS(Index) = Mid(eRETU02, 1, 1)
     End If
 End Sub
 
@@ -389,7 +390,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = PegPath("PATH", "DISPO")
     cSQL = "select * from DISPOI WHERE NUMERO=" & nPPAP & " AND Item = " & nORD
     nCAMPOS = 2
@@ -398,7 +399,7 @@ Private Sub Form_Load()
     aPAD = Array(0, "")
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     If ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
         StretchSourcePictureFromPicture Picture1, Picture2

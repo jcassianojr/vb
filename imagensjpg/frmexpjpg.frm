@@ -384,7 +384,7 @@ Private Sub Cmdiniciar_Click()
     Alert ("Exportaçao Concluida")
 End Sub
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     Me.Caption = cFORMID
     HelpContextID = nFORMID
     

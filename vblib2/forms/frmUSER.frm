@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form frmUSER 
    Caption         =   "Cadastro de Usuário"
    ClientHeight    =   6285
@@ -13,6 +14,14 @@ Begin VB.Form frmUSER
    ScaleHeight     =   6285
    ScaleWidth      =   10515
    WindowState     =   2  'Maximized
+   Begin vbExtra.SizeGrip SizeGrip1 
+      Height          =   285
+      Left            =   10230
+      Top             =   6000
+      Width           =   285
+      _ExtentX        =   503
+      _ExtentY        =   503
+   End
    Begin VB.CommandButton CmdLibGrp 
       Caption         =   "Integrados"
       Height          =   375
@@ -1473,7 +1482,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     If Left(UCase(CStr(App.EXEName)), 4) <> "WRPT" Then
         Cmdimpwrpt(0).Enabled = False
         Cmdimpwrpt(1).Enabled = False

@@ -8,6 +8,7 @@ Begin VB.Form escMD02
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   8760
+   Icon            =   "Escmd02.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   8760
@@ -98,7 +99,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQMD = zMANA5EMP
     cARQMD = GeraConn(cARQMD, "JETFOX")
     aORDEM = Array("CODIGO1", "DESCRICAO")

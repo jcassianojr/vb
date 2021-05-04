@@ -8,6 +8,7 @@ Begin VB.Form escPPAP
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   8535
+   Icon            =   "Escppap.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6135
    ScaleWidth      =   8535
@@ -102,19 +103,19 @@ Private Sub CmdExcluir()
 End Sub
 
 Private Sub CmdNovo()
-    Dim cTABELA As String
+    Dim cTabela As String
     If iPPAP = 11 Then Exit Sub                  ''Cronograma nao inclui
     Select Case iPPAP
     Case 1, 11
-        cTABELA = "PPAP"
+        cTabela = "PPAP"
     Case 2
-        cTABELA = "PPAF"
+        cTabela = "PPAF"
     Case 3
-        cTABELA = "PPAG"
+        cTabela = "PPAG"
     End Select
     'nPPAP = PegUltSQL(cARQPF, "select numero from " & cSQL & " WHERE NUMERO=" & nPPAP, "NUMERO", 0)
-    nPPAP = PegMAXSQL(cARQPF, cTABELA, "NUMERO", 0) + 1
-    If IncluiSQL(cARQPF, "select numero from " & cTABELA & " WHERE NUMERO=" & nPPAP, 1, Array("NUMERO"), Array(nPPAP), True, False) Then
+    nPPAP = PegMAXSQL(cARQPF, cTabela, "NUMERO", 0) + 1
+    If IncluiSQL(cARQPF, "select numero from " & cTabela & " WHERE NUMERO=" & nPPAP, 1, Array("NUMERO"), Array(nPPAP), True, False) Then
         FilRelat
     End If
 End Sub
@@ -156,7 +157,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     If iPPAP = 3 Then
         aORDES = Array("Nº", "Produto", "Descrição", "SSMT")
         aORDEM = Array("PPAP", "CODIGO", "NOME", "SSMT")

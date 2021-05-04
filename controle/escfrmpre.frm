@@ -8,6 +8,7 @@ Begin VB.Form escfrmpre
    ClientLeft      =   2850
    ClientTop       =   1605
    ClientWidth     =   8715
+   Icon            =   "escfrmpre.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   8715
@@ -109,7 +110,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQPF = PegPath("PATH", "PF")
     cARQFEMEA = PegPath("PATH", "FEMEA")
     aORDEM = Array("SEGGRA", "TITULO")

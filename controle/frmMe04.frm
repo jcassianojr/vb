@@ -7,6 +7,7 @@ Begin VB.Form frmMe04
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   11775
+   Icon            =   "frmMe04.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Me04"
    MaxButton       =   0   'False
@@ -18,7 +19,7 @@ Begin VB.Form frmMe04
    Begin VB.CommandButton escCodInt 
       Height          =   315
       Left            =   11160
-      Picture         =   "frmMe04.frx":0000
+      Picture         =   "frmMe04.frx":058A
       Style           =   1  'Graphical
       TabIndex        =   82
       TabStop         =   0   'False
@@ -36,7 +37,7 @@ Begin VB.Form frmMe04
    Begin VB.CommandButton EscPFx 
       Height          =   315
       Left            =   10800
-      Picture         =   "frmMe04.frx":058A
+      Picture         =   "frmMe04.frx":0B14
       Style           =   1  'Graphical
       TabIndex        =   79
       TabStop         =   0   'False
@@ -47,7 +48,7 @@ Begin VB.Form frmMe04
       Height          =   315
       Index           =   2
       Left            =   5820
-      Picture         =   "frmMe04.frx":0B14
+      Picture         =   "frmMe04.frx":109E
       Style           =   1  'Graphical
       TabIndex        =   78
       TabStop         =   0   'False
@@ -58,7 +59,7 @@ Begin VB.Form frmMe04
       Height          =   315
       Index           =   1
       Left            =   11040
-      Picture         =   "frmMe04.frx":109E
+      Picture         =   "frmMe04.frx":1628
       Style           =   1  'Graphical
       TabIndex        =   77
       TabStop         =   0   'False
@@ -197,7 +198,7 @@ Begin VB.Form frmMe04
    Begin VB.CommandButton Command7 
       Height          =   315
       Left            =   960
-      Picture         =   "frmMe04.frx":1628
+      Picture         =   "frmMe04.frx":1BB2
       Style           =   1  'Graphical
       TabIndex        =   63
       TabStop         =   0   'False
@@ -228,7 +229,7 @@ Begin VB.Form frmMe04
       Height          =   315
       Index           =   0
       Left            =   1500
-      Picture         =   "frmMe04.frx":1BB2
+      Picture         =   "frmMe04.frx":213C
       Style           =   1  'Graphical
       TabIndex        =   60
       TabStop         =   0   'False
@@ -528,7 +529,7 @@ Begin VB.Form frmMe04
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmMe04.frx":213C
+      Picture         =   "frmMe04.frx":26C6
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -548,7 +549,7 @@ Begin VB.Form frmMe04
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmMe04.frx":26D6
+      Picture         =   "frmMe04.frx":2C60
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -568,7 +569,7 @@ Begin VB.Form frmMe04
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmMe04.frx":2C70
+      Picture         =   "frmMe04.frx":31FA
       Caption         =   "Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -969,7 +970,7 @@ Private Sub cmdFOTO_Click()
     cSQL = "select codigo from IMAGENS WHERE CODIGO='" & zgrp & "'"
     IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(zgrp), True, False
     Load frmIMAGENS
-    frmIMAGENS.txtFields(0).Enabled = False
+    frmIMAGENS.TXTFIELDS(0).Enabled = False
     frmIMAGENS.Escolher(0).Visible = False
     frmIMAGENS.Show vbModal, Me
 End Sub
@@ -1092,7 +1093,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cmdgrvdata.Visible = False
     cARQ = PegPath("PATH", "MANA5INS")
     cARQ = GeraConn(cARQ, "SDECDX")

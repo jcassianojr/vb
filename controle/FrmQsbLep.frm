@@ -1,11 +1,12 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form FrmQsbLep 
    Caption         =   "QSBLEP"
    ClientHeight    =   4365
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   8370
+   Icon            =   "FrmQsbLep.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   4365
    ScaleWidth      =   8370
@@ -14,7 +15,7 @@ Begin VB.Form FrmQsbLep
       Height          =   315
       Index           =   403
       Left            =   7920
-      Picture         =   "FrmQsbLep.frx":0000
+      Picture         =   "FrmQsbLep.frx":058A
       Style           =   1  'Graphical
       TabIndex        =   73
       TabStop         =   0   'False
@@ -25,7 +26,7 @@ Begin VB.Form FrmQsbLep
       Height          =   315
       Index           =   402
       Left            =   7920
-      Picture         =   "FrmQsbLep.frx":058A
+      Picture         =   "FrmQsbLep.frx":0B14
       Style           =   1  'Graphical
       TabIndex        =   72
       TabStop         =   0   'False
@@ -36,7 +37,7 @@ Begin VB.Form FrmQsbLep
       Height          =   315
       Index           =   401
       Left            =   7920
-      Picture         =   "FrmQsbLep.frx":0B14
+      Picture         =   "FrmQsbLep.frx":109E
       Style           =   1  'Graphical
       TabIndex        =   71
       TabStop         =   0   'False
@@ -47,7 +48,7 @@ Begin VB.Form FrmQsbLep
       Height          =   315
       Index           =   5
       Left            =   6360
-      Picture         =   "FrmQsbLep.frx":109E
+      Picture         =   "FrmQsbLep.frx":1628
       Style           =   1  'Graphical
       TabIndex        =   68
       TabStop         =   0   'False
@@ -58,7 +59,7 @@ Begin VB.Form FrmQsbLep
       Height          =   315
       Index           =   4
       Left            =   6360
-      Picture         =   "FrmQsbLep.frx":1628
+      Picture         =   "FrmQsbLep.frx":1BB2
       Style           =   1  'Graphical
       TabIndex        =   67
       TabStop         =   0   'False
@@ -69,7 +70,7 @@ Begin VB.Form FrmQsbLep
       Height          =   315
       Index           =   3
       Left            =   5280
-      Picture         =   "FrmQsbLep.frx":1BB2
+      Picture         =   "FrmQsbLep.frx":213C
       Style           =   1  'Graphical
       TabIndex        =   66
       TabStop         =   0   'False
@@ -80,7 +81,7 @@ Begin VB.Form FrmQsbLep
       Height          =   315
       Index           =   2
       Left            =   5280
-      Picture         =   "FrmQsbLep.frx":213C
+      Picture         =   "FrmQsbLep.frx":26C6
       Style           =   1  'Graphical
       TabIndex        =   65
       TabStop         =   0   'False
@@ -133,7 +134,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   1
       Left            =   2160
-      Picture         =   "FrmQsbLep.frx":26C6
+      Picture         =   "FrmQsbLep.frx":2C50
       Style           =   1  'Graphical
       TabIndex        =   62
       TabStop         =   0   'False
@@ -144,7 +145,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   2
       Left            =   2760
-      Picture         =   "FrmQsbLep.frx":2C50
+      Picture         =   "FrmQsbLep.frx":31DA
       Style           =   1  'Graphical
       TabIndex        =   61
       TabStop         =   0   'False
@@ -155,7 +156,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   3
       Left            =   3360
-      Picture         =   "FrmQsbLep.frx":31DA
+      Picture         =   "FrmQsbLep.frx":3764
       Style           =   1  'Graphical
       TabIndex        =   60
       TabStop         =   0   'False
@@ -166,7 +167,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   4
       Left            =   3960
-      Picture         =   "FrmQsbLep.frx":3764
+      Picture         =   "FrmQsbLep.frx":3CEE
       Style           =   1  'Graphical
       TabIndex        =   59
       TabStop         =   0   'False
@@ -177,7 +178,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   5
       Left            =   4560
-      Picture         =   "FrmQsbLep.frx":3CEE
+      Picture         =   "FrmQsbLep.frx":4278
       Style           =   1  'Graphical
       TabIndex        =   58
       TabStop         =   0   'False
@@ -188,7 +189,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   6
       Left            =   5160
-      Picture         =   "FrmQsbLep.frx":4278
+      Picture         =   "FrmQsbLep.frx":4802
       Style           =   1  'Graphical
       TabIndex        =   57
       TabStop         =   0   'False
@@ -199,7 +200,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   7
       Left            =   5760
-      Picture         =   "FrmQsbLep.frx":4802
+      Picture         =   "FrmQsbLep.frx":4D8C
       Style           =   1  'Graphical
       TabIndex        =   56
       TabStop         =   0   'False
@@ -210,7 +211,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   8
       Left            =   6360
-      Picture         =   "FrmQsbLep.frx":4D8C
+      Picture         =   "FrmQsbLep.frx":5316
       Style           =   1  'Graphical
       TabIndex        =   55
       TabStop         =   0   'False
@@ -265,7 +266,7 @@ Begin VB.Form FrmQsbLep
       Height          =   315
       Index           =   0
       Left            =   4200
-      Picture         =   "FrmQsbLep.frx":5316
+      Picture         =   "FrmQsbLep.frx":58A0
       Style           =   1  'Graphical
       TabIndex        =   49
       TabStop         =   0   'False
@@ -551,7 +552,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   7
       Left            =   6120
-      Picture         =   "FrmQsbLep.frx":58A0
+      Picture         =   "FrmQsbLep.frx":5E2A
       TabIndex        =   27
       TabStop         =   0   'False
       Top             =   600
@@ -562,7 +563,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   6
       Left            =   5520
-      Picture         =   "FrmQsbLep.frx":5E2A
+      Picture         =   "FrmQsbLep.frx":63B4
       TabIndex        =   26
       TabStop         =   0   'False
       Top             =   600
@@ -573,7 +574,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   5
       Left            =   4920
-      Picture         =   "FrmQsbLep.frx":63B4
+      Picture         =   "FrmQsbLep.frx":693E
       TabIndex        =   25
       TabStop         =   0   'False
       Top             =   600
@@ -584,7 +585,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   4
       Left            =   4320
-      Picture         =   "FrmQsbLep.frx":693E
+      Picture         =   "FrmQsbLep.frx":6EC8
       TabIndex        =   24
       TabStop         =   0   'False
       Top             =   600
@@ -595,7 +596,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   3
       Left            =   3720
-      Picture         =   "FrmQsbLep.frx":6EC8
+      Picture         =   "FrmQsbLep.frx":7452
       TabIndex        =   23
       TabStop         =   0   'False
       Top             =   600
@@ -606,7 +607,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   2
       Left            =   3120
-      Picture         =   "FrmQsbLep.frx":7452
+      Picture         =   "FrmQsbLep.frx":79DC
       TabIndex        =   22
       TabStop         =   0   'False
       Top             =   600
@@ -617,7 +618,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   1
       Left            =   2520
-      Picture         =   "FrmQsbLep.frx":79DC
+      Picture         =   "FrmQsbLep.frx":7F66
       TabIndex        =   21
       TabStop         =   0   'False
       Top             =   600
@@ -628,7 +629,7 @@ Begin VB.Form FrmQsbLep
       Height          =   255
       Index           =   0
       Left            =   1920
-      Picture         =   "FrmQsbLep.frx":7F66
+      Picture         =   "FrmQsbLep.frx":84F0
       TabIndex        =   20
       TabStop         =   0   'False
       Top             =   600
@@ -710,7 +711,7 @@ Begin VB.Form FrmQsbLep
       Height          =   315
       Index           =   1
       Left            =   4200
-      Picture         =   "FrmQsbLep.frx":84F0
+      Picture         =   "FrmQsbLep.frx":8A7A
       Style           =   1  'Graphical
       TabIndex        =   11
       TabStop         =   0   'False
@@ -793,7 +794,7 @@ Begin VB.Form FrmQsbLep
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmQsbLep.frx":8A7A
+      Picture         =   "FrmQsbLep.frx":9004
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -813,7 +814,7 @@ Begin VB.Form FrmQsbLep
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmQsbLep.frx":9014
+      Picture         =   "FrmQsbLep.frx":959E
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1041,10 +1042,10 @@ End Sub
 
 Private Sub Form_Load()
     Dim X As Integer
-    Center Me
+    CenterFormToScreen Me
     'cARQ = PegPath("PATH", "PF")
     cARQ = Sdb                                   ''Agora sdb pois pode ser pf pfp pfg
-    txtItem.Text = nORD
+    txtItem.tEXT = nORD
     cSQL = "select * from PFQSBLEP WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
     nCAMPOS = 17
     aCAM = Array("MUD", "DESCRICAO", "CLASS01", "CLASS02", "CARAC", "REQUER", _

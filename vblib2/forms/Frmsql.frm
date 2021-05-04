@@ -7,6 +7,7 @@ Begin VB.Form FrmSql
    ClientLeft      =   60
    ClientTop       =   420
    ClientWidth     =   10365
+   Icon            =   "Frmsql.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6045
    ScaleWidth      =   10365
@@ -35,7 +36,7 @@ Begin VB.Form FrmSql
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":0000
+         Picture         =   "Frmsql.frx":058A
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -55,7 +56,7 @@ Begin VB.Form FrmSql
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":059A
+         Picture         =   "Frmsql.frx":0B24
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -75,7 +76,7 @@ Begin VB.Form FrmSql
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":0B34
+         Picture         =   "Frmsql.frx":10BE
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -95,7 +96,7 @@ Begin VB.Form FrmSql
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":10CE
+         Picture         =   "Frmsql.frx":1658
          Caption         =   "Propriedades"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -125,7 +126,7 @@ Begin VB.Form FrmSql
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":1668
+         Picture         =   "Frmsql.frx":1BF2
          Caption         =   "xml"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -146,7 +147,7 @@ Begin VB.Form FrmSql
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":1C02
+         Picture         =   "Frmsql.frx":218C
          Caption         =   "xls(TAB)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -207,7 +208,7 @@ Begin VB.Form FrmSql
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":219C
+         Picture         =   "Frmsql.frx":2726
          Caption         =   "Html"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -228,7 +229,7 @@ Begin VB.Form FrmSql
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":2736
+         Picture         =   "Frmsql.frx":2CC0
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -249,7 +250,7 @@ Begin VB.Form FrmSql
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":2AD0
+         Picture         =   "Frmsql.frx":305A
          Caption         =   "PDF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -371,7 +372,7 @@ Begin VB.Form FrmSql
          Width           =   495
          _ExtentX        =   873
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":2E6A
+         Picture         =   "Frmsql.frx":33F4
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -393,7 +394,7 @@ Begin VB.Form FrmSql
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":3204
+         Picture         =   "Frmsql.frx":378E
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -414,7 +415,7 @@ Begin VB.Form FrmSql
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":359E
+         Picture         =   "Frmsql.frx":3B28
          Caption         =   "xls(TR)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -557,7 +558,7 @@ Begin VB.Form FrmSql
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "Frmsql.frx":3B38
+      Picture         =   "Frmsql.frx":40C2
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -577,7 +578,7 @@ Begin VB.Form FrmSql
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "Frmsql.frx":40D2
+      Picture         =   "Frmsql.frx":465C
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -600,7 +601,7 @@ Begin VB.Form FrmSql
       _ExtentY        =   344
       _Version        =   393217
       ScrollBars      =   3
-      TextRTF         =   $"Frmsql.frx":466C
+      TextRTF         =   $"Frmsql.frx":4BF6
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   12
@@ -620,7 +621,7 @@ Begin VB.Form FrmSql
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   556
-      Picture         =   "Frmsql.frx":46EE
+      Picture         =   "Frmsql.frx":4C78
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -641,7 +642,7 @@ Begin VB.Form FrmSql
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   556
-      Picture         =   "Frmsql.frx":4C88
+      Picture         =   "Frmsql.frx":5212
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -690,7 +691,7 @@ Attribute VB_Exposed = False
 Const nFORMID = 1180
 Const cFORMID = "Imprimir Relatorios sql"
 Private Sub CmdAbrirCom_Click()
-   cARQRTF = TxtArquivo.Text
+   cARQRTF = TxtArquivo.tEXT
    If FileExist(cARQRTF, True) Then
        Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
    End If
@@ -703,19 +704,19 @@ End Sub
 Private Sub cmdDeli_Click(Index As Integer)
     Select Case Index
     Case 0
-        TxtDeli.Text = " "
+        TxtDeli.tEXT = " "
     Case 1
-        TxtDeli.Text = "|"
+        TxtDeli.tEXT = "|"
     Case 2
-        TxtDeli.Text = ","
+        TxtDeli.tEXT = ","
     Case 3
-        TxtDeli.Text = ";"
+        TxtDeli.tEXT = ";"
     Case 4
-        TxtDeli.Text = "#"
+        TxtDeli.tEXT = "#"
     Case 5
-        TxtDeli.Text = "~"
+        TxtDeli.tEXT = "~"
     Case 5
-        TxtDeli.Text = "<tab>"
+        TxtDeli.tEXT = "<tab>"
     
     End Select
 End Sub
@@ -730,7 +731,7 @@ Private Sub CmdEditar_Click()
         cEXTENSAO = Mid(TxtArquivo, nPOS + 1)
     End If
     If cEXTENSAO = "RTF" Or cEXTENSAO = "TXT" Then
-        cARQRTF = TxtArquivo.Text
+        cARQRTF = TxtArquivo.tEXT
         FrmRTf.Show vbModal, Me
     End If
 
@@ -749,14 +750,14 @@ Private Sub cmdexportar_Click(Index As Integer)
     cLIN = Chr(13) + Chr(10)
 
 
-    cARQUIVO = tabela.Text
-    gsRecordSource = tabela.Text
+    cARQUIVO = tabela.tEXT
+    gsRecordSource = tabela.tEXT
     cEXT = "TXT"
     If Len(cARQUIVO) = 0 Then
         Alert ("Escolha Uma Tabela Antes")
         Exit Sub
     End If
-    cSQL = CStr(sql.Text)
+    cSQL = CStr(sql.tEXT)
     Select Case Index
     Case 0                                       'ok
         cEXT = "XML"
@@ -775,7 +776,7 @@ Private Sub cmdexportar_Click(Index As Integer)
 
     sFILTER = "Formato (*." & cEXT & ")" & vbNullChar & "*." & cEXT
     cARQUIVO = FileSave(Me, sFILTER, 1, cEXT, , App.Path, "Salvar " & cEXT & " Como")
-    TxtArquivo.Text = cARQUIVO
+    TxtArquivo.tEXT = cARQUIVO
 
     If Len(cARQUIVO) = 0 Then
         Alert ("Nome Nao Definido")
@@ -784,7 +785,7 @@ Private Sub cmdexportar_Click(Index As Integer)
 
 
 
-    cCONN = GeracArq(arquivo.Text, , False)
+    cCONN = GeracArq(arquivo.tEXT, , False)
 
 
     Set DBEXP = New ADODB.Connection
@@ -824,11 +825,11 @@ Private Sub cmdexportar_Click(Index As Integer)
         If Index = 1 Then
             Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
         Else
-            If TxtDeli.Text = "<tab>" Then
+            If TxtDeli.tEXT = "<tab>" Then
                Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
             Else
                ''o usuario pode digitar o campo txtdeli fixstr ajustas para espaco em caso de vazio
-               Print #nDESTINO, RsExp.GetString(adClipString, -1, FixStr(TxtDeli.Text, " "), Chr(13) + Chr(10), vbNullString)
+               Print #nDESTINO, RsExp.GetString(adClipString, -1, FixStr(TxtDeli.tEXT, " "), Chr(13) + Chr(10), vbNullString)
             End If
         End If
         
@@ -873,19 +874,19 @@ Private Sub CmdFiltro_Click()
     On Error GoTo errhandler
     Dim cFILTRO As String
     
-    cFILTRO = FixStr(filtro)
+    cFILTRO = FixStr(FILTRO)
     If aRELCFG(11) Then
         ePASS01 = ""
         FrmFiltro.Show vbModal, Me
-        filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
+        FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
         If lRETU And Len(aRELCFG(15)) > 0 Then
-            aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
-            sql.Text = aRELCFG(15)
+            aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
+            sql.tEXT = aRELCFG(15)
         End If
     End If
     If Len(aRELCFG(15)) > 0 Then
         'aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
-        sql.Text = aRELCFG(15)
+        sql.tEXT = aRELCFG(15)
     End If
     
     Exit Sub
@@ -903,7 +904,7 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-    If Extensao(TxtArquivo.Text, "TXT") Or Extensao(TxtArquivo.Text, "PDF") Or Extensao(TxtArquivo.Text, "HTML") Or Extensao(TxtArquivo.Text, "RTF") Then
+    If Extensao(TxtArquivo.tEXT, "TXT") Or Extensao(TxtArquivo.tEXT, "PDF") Or Extensao(TxtArquivo.tEXT, "HTML") Or Extensao(TxtArquivo.tEXT, "RTF") Then
         CmdVisua_Click
     Else
     
@@ -916,7 +917,7 @@ Private Sub CmdOrdem_Click()
     EscArqOrdem.Show vbModal, Me
     If lRETU Then
         aRELCFG(15) = TrocaSQLOrder(aRELCFG(15), FixStr(eRETU01))
-        sql.Text = aRELCFG(15)
+        sql.tEXT = aRELCFG(15)
     End If
 End Sub
 
@@ -927,25 +928,25 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-   cARQRTF = TxtArquivo.Text
+   cARQRTF = TxtArquivo.tEXT
    If Not FileExist(cARQRTF, True) Then
       Exit Sub
    End If
-    If Extensao(TxtArquivo.Text, "TXT") Then
+    If Extensao(TxtArquivo.tEXT, "TXT") Then
         PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
     End If
-    If Extensao(TxtArquivo.Text, "PDF") Then
+    If Extensao(TxtArquivo.tEXT, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
     End If
-    If Extensao(TxtArquivo.Text, "HTML") Then
+    If Extensao(TxtArquivo.tEXT, "HTML") Then
        ePASS01 = cARQRTF
        FrmPreview.Show vbModal, Me
     End If
-    If Extensao(TxtArquivo.Text, "RTF") Then
-        cARQRTF = TxtArquivo.Text
+    If Extensao(TxtArquivo.tEXT, "RTF") Then
+        cARQRTF = TxtArquivo.tEXT
         RichTextbox1.LoadFile cARQRTF, rtfRTF
         PrinterEx.ShowPrintPreview Me, "MyPrintingRTF"
-        RichTextbox1.Text = ""
+        RichTextbox1.tEXT = ""
     End If
 End Sub
 Public Property Get Printer() As Printer
@@ -987,11 +988,11 @@ Private Sub Form_Load()
 
     Dim nARQUIVOS As Integer
     TxtArquivo = zUSER & Format(Now, "_DDMMYYYY_HHMMSS") & ".TXT"
-    Center Me
+    CenterFormToScreen Me
     ''Configura Help
     Me.Caption = cFORMID
     HelpContextID = nFORMID
-    filtro = ""
+    FILTRO = ""
       
     Label1 = aRELCFG(6)
     
@@ -1007,7 +1008,7 @@ Private Sub Form_Load()
     'If Not aDIREITOS(7) Then Salvar(1).Visible = False
     If Not aDIREITOS(7) Then CmdEmail.Visible = False
     If Not aRELCFG(11) Then CmdFiltro.Visible = False
-    If Not aRELCFG(11) Then filtro.Visible = False
+    If Not aRELCFG(11) Then FILTRO.Visible = False
     
     If Not aDIREITOS(4) Then CmdEditar.Visible = False
     If Not aDIREITOS(4) Then CmdShell.Visible = False
@@ -1017,42 +1018,38 @@ Private Sub Form_Load()
     If nARQUIVOS > 0 Then
         If Len(aARQUIVOS(0)) > 0 Then
             If FileExist(aARQUIVOS(0), True, True, aRELCFG(15)) Then
-                arquivo.Text = aARQUIVOS(0)
+                arquivo.tEXT = aARQUIVOS(0)
             End If
         End If
     End If
     aRELCFG(14) = FixStr(aRELCFG(14))
     If Len(aRELCFG(14)) > 0 Then
         cFILTRO = aRELCFG(14)
-        filtro = cFILTRO
+        FILTRO = cFILTRO
     Else
         If aRELCFG(11) Then
             CmdFiltro_Click
         End If
     End If
     If Len(aRELCFG(15)) > 0 Then
-        If Len(filtro) > 0 Then
-            aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+        If Len(FILTRO) > 0 Then
+            aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
         End If
-        sql.Text = aRELCFG(15)
+        sql.tEXT = aRELCFG(15)
     End If
     
     
     If aRELCFG(13) = "" Then                     'nome tabela nao preenchido pega do sql
         aRELCFG(13) = NomeTableSql(aRELCFG(15))
     End If
-    tabela.Text = aRELCFG(13)
+    tabela.tEXT = aRELCFG(13)
      
-End Sub
-
-Private Sub Frame2_DragDrop(Source As Control, X As Single, Y As Single)
-
 End Sub
 
 Private Sub XPButton1_Click()
     frmCharacters.Show vbModal, Me
     If lRETU Then
-        TxtDeli.Text = eRETU01
+        TxtDeli.tEXT = eRETU01
     End If
 End Sub
 

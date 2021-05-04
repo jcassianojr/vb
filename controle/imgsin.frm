@@ -1,16 +1,26 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form imgsin 
    Caption         =   "Sincronizar Arquivos de Imagens"
    ClientHeight    =   7395
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   8370
+   Icon            =   "imgsin.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7395
    ScaleWidth      =   8370
    StartUpPosition =   2  'CenterScreen
+   Begin vbExtra.SizeGrip SizeGrip1 
+      Height          =   285
+      Left            =   8085
+      Top             =   7110
+      Width           =   285
+      _ExtentX        =   503
+      _ExtentY        =   503
+   End
    Begin VB.PictureBox Picture1 
       Height          =   495
       Left            =   3840
@@ -182,7 +192,7 @@ Begin VB.Form imgsin
       Width           =   2115
       _ExtentX        =   3731
       _ExtentY        =   661
-      Picture         =   "imgsin.frx":0000
+      Picture         =   "imgsin.frx":058A
       Caption         =   "Sincronizar Arquivos"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -203,7 +213,7 @@ Begin VB.Form imgsin
       Width           =   2115
       _ExtentX        =   3731
       _ExtentY        =   661
-      Picture         =   "imgsin.frx":059A
+      Picture         =   "imgsin.frx":0B24
       Caption         =   "Cancelar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -310,7 +320,7 @@ Private Sub CmdTransfer_Click()
 
     If Chkmp04.Value = Checked Then
 
-        transfer "IMGMP04" + StrZero(txtempresa.Value, 1), "MANA5EMZ", "SELECT TECNICO FROM MP04 ", "TECNICO", True
+        transfer "IMGMP04" + StrZero(TxtEmpresa.Value, 1), "MANA5EMZ", "SELECT TECNICO FROM MP04 ", "TECNICO", True
 
     End If
 
@@ -377,7 +387,7 @@ Private Sub transfer(cLOGOARQ As String, cARQCAM As String, cCONSQL As String, c
 
     Else
         If cARQCAM = "MANA5EMZ" Then
-            cCAMINHO = Caminex(cCAMINHO, 0, 0, txtempresa.Value)
+            cCAMINHO = Caminex(cCAMINHO, 0, 0, TxtEmpresa.Value)
         End If
         cARQTMP = GeraConn(cCAMINHO, "JETFOX")
         aRETU = TipoConn(cARQTMP)
@@ -393,7 +403,7 @@ Private Sub transfer(cLOGOARQ As String, cARQCAM As String, cCONSQL As String, c
         If lCONV Then
 
             nNUMERO = RSTAB(cVARNAME)
-            cCODIGO = Trim(str(nNUMERO))
+            cCODIGO = Trim(Str(nNUMERO))
             cCODIGO = String(8 - Len(cCODIGO), "0") & cCODIGO
 
         Else
@@ -413,8 +423,8 @@ Private Sub transfer(cLOGOARQ As String, cARQCAM As String, cCONSQL As String, c
         DizerBarra cCODIGO
         If Len(cCODIGO) > 0 Then
 
-            LABEL.Caption = cCODIGO
-            LABEL.Refresh
+            Label.Caption = cCODIGO
+            Label.Refresh
             
             If RSTA2.RecordCount > 0 Then
                 RSTA2.MoveFirst
@@ -450,7 +460,7 @@ Private Sub transfer(cLOGOARQ As String, cARQCAM As String, cCONSQL As String, c
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -559,8 +569,8 @@ Private Function limpafoto(cSQL As String, cCAMPO As String, cTabela)
             cARQPF = PegPath("PATH", "PFP")
             cDIZARQ = "PFP"
         End Select
-        LABEL.Caption = cDIZARQ & "_" & cCAMPO
-        LABEL.Refresh
+        Label.Caption = cDIZARQ & "_" & cCAMPO
+        Label.Refresh
         cARQ = GeracArq(cARQPF)
         Set oDB = New ADODB.Connection
         oDB.CursorLocation = adUseClient
@@ -586,11 +596,11 @@ Private Function limpafoto(cSQL As String, cCAMPO As String, cTabela)
             Case "PFI"
                 sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
             End Select
-            LABEL.Caption = cDIZARQ & "_" & cCAMPO
-            LABEL.Refresh
+            Label.Caption = cDIZARQ & "_" & cCAMPO
+            Label.Refresh
             If sTEMPFILE <> "" Then
-                LABEL.Caption = sTEMPFILE
-                LABEL.Refresh
+                Label.Caption = sTEMPFILE
+                Label.Refresh
                 lFileLength = LenB(oRS(cCAMPO))
                 iFileNum = FreeFile
                 Open sTEMPFILE For Binary As #iFileNum

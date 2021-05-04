@@ -8,6 +8,7 @@ Begin VB.Form FrmSplash
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    HelpContextID   =   2
+   Icon            =   "frmSplash.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False

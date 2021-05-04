@@ -6,6 +6,7 @@ Begin VB.Form FrmRev
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   7815
+   Icon            =   "FrmRev.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3375
    ScaleWidth      =   7815
@@ -153,7 +154,7 @@ Begin VB.Form FrmRev
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmRev.frx":0000
+      Picture         =   "FrmRev.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -173,7 +174,7 @@ Begin VB.Form FrmRev
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmRev.frx":059A
+      Picture         =   "FrmRev.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -299,13 +300,13 @@ Dim aFOR As Variant
 Dim aCAM As Variant
 Dim aPAD As Variant
 Dim nCAMPOS As Integer
-Dim i As Integer
+Dim I As Integer
 
 Private Sub cmdClose_Click()
     On Error Resume Next
-    For i = 0 To nCAMPOS - 1
-        aVAL(i) = txtFields(i)
-    Next i
+    For I = 0 To nCAMPOS - 1
+        aVAL(I) = TXTFIELDS(I)
+    Next I
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     Screen.MousePointer = vbDefault
     Unload Me
@@ -321,7 +322,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = PegPath("PATH", "PF")
     nREV = FixInt(nREV, 0)
     nREVI = FixInt(nREVI, 0)
@@ -332,15 +333,15 @@ Private Sub Form_Load()
     aFOR = Array("NI", "NI", "CU", "D", "C", "C", "C", "NI", "NI", "NI", "C", "D")
     aPAD = Array(0, 0, "", "", "", "", "", 0, 0, 0, "", "")
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For i = 0 To nCAMPOS - 1
-        txtFields(i) = aVAL(i)
-    Next i
-    If FixNum(txtFields(6)) > 0 Then
-        txtFields(4).Enabled = False
-        txtFields(10).Enabled = False
-        txtFields(7).Enabled = False
-        txtFields(8).Enabled = False
-        txtFields(9).Enabled = False
+    For I = 0 To nCAMPOS - 1
+        TXTFIELDS(I) = aVAL(I)
+    Next I
+    If FixNum(TXTFIELDS(6)) > 0 Then
+        TXTFIELDS(4).Enabled = False
+        TXTFIELDS(10).Enabled = False
+        TXTFIELDS(7).Enabled = False
+        TXTFIELDS(8).Enabled = False
+        TXTFIELDS(9).Enabled = False
     End If
 End Sub
 

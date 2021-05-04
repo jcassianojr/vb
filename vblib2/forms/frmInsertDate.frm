@@ -192,7 +192,7 @@ Private Sub cmdOK_Click()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     lRETU = False
     eRETU01 = Date
     eRETU02 = ""
@@ -204,10 +204,6 @@ Private Sub Form_Load()
     TxtData = Format(MonthView1.Value, "dddd, dd/mmmm/yyyy")
     SetDateList MonthView1.Value
     
-End Sub
-
-Private Sub lstDates_Click()
-
 End Sub
 
 Private Sub lstDates_DblClick()

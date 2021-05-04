@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form FrmFiltro 
    Caption         =   "Filtro"
    ClientHeight    =   5895
@@ -444,7 +444,7 @@ Private Sub CmdGera_Click()
     Dim strtipo As String
     Dim strsize As String
     Dim strdec As String
-    Dim X As Integer
+    Dim x As Integer
     Dim RstCampos
 
     If Len(FixStr(arquivo)) = 0 Then
@@ -463,11 +463,11 @@ Private Sub CmdGera_Click()
 
 
     cSQL = tabela.Text
-    Grid.Clear
+    grid.Clear
     
     
     
-    With Grid
+    With grid
         .Clear
         .Cols = 4
         .FixedCols = 0
@@ -508,7 +508,7 @@ Private Sub CmdGera_Click()
                 strsize = FixStr(RstCampos!NUMERIC_PRECISION) & "." & strdec
             End If
         End If
-        Grid.AddItem STRCAMPO & vbTab & TipoDado2(RstCampos!DATA_TYPE) & vbTab & strtipo & vbTab & strsize
+        grid.AddItem STRCAMPO & vbTab & TipoDado2(RstCampos!DATA_TYPE) & vbTab & strtipo & vbTab & strsize
         RstCampos.MoveNext
     Loop
     DB.Close
@@ -527,10 +527,10 @@ monta02:
     ''     RstCampos.Close
     Set rs = New ADODB.Recordset
     rs.Open cSQL, DB, adOpenForwardOnly, adLockReadOnly
-    For X = 0 To rs.Fields.Count - 1
-        STRCAMPO = rs.Fields(X).Name
-        Grid.AddItem STRCAMPO & vbTab & TipoDado2(rs.Fields(X).Type) & vbTab & TipoDados(rs.Fields(X).Type) & vbTab & rs.Fields(X).DefinedSize
-    Next X
+    For x = 0 To rs.Fields.Count - 1
+        STRCAMPO = rs.Fields(x).Name
+        grid.AddItem STRCAMPO & vbTab & TipoDado2(rs.Fields(x).Type) & vbTab & TipoDados(rs.Fields(x).Type) & vbTab & rs.Fields(x).DefinedSize
+    Next x
     rs.Close
     DB.Close
     Screen.MousePointer = vbDefault
@@ -560,7 +560,7 @@ Private Sub Form_Load()
   
     'CentralizaJanela Me
 
-    Center Me
+    CenterFormToScreen Me
     ''Configura Help
     Me.Caption = cFORMID
     HelpContextID = nFORMID
@@ -642,10 +642,10 @@ Private Sub grid_Click()
     Vazio.Value = vbUnchecked
  
    
-    Grid.Col = 0
-    campo = Grid
-    Grid.Col = 1
-    camtip = Grid
+    grid.Col = 0
+    campo = grid
+    grid.Col = 1
+    camtip = grid
     Select Case camtip
     Case "N"
         ValINI = "0.00000"
@@ -663,21 +663,21 @@ Private Sub grid_Click()
 End Sub
 
 Private Sub ok_Click()
-    Dim X As Long
+    Dim x As Long
     Dim nVEZ As Long
     Dim aUSO As Variant
     If InStr(ValINI, ";") > 0 Then
         aUSO = Split(ValINI, ";")
         ValFim = ""
         nVEZ = UBound(aUSO)
-        For X = 0 To nVEZ
-            ValINI = aUSO(X)
-            If X = nVEZ Then
+        For x = 0 To nVEZ
+            ValINI = aUSO(x)
+            If x = nVEZ Then
                 ok_ClickX (True)
             Else
                 ok_ClickX (False)
             End If
-        Next X
+        Next x
     Else
         ok_ClickX (True)
     End If
@@ -724,10 +724,10 @@ Private Sub ok_ClickX(lZERA As Boolean)
         nVALINI = Val(ValINI)
         nVALFIM = Val(ValFim)
         If nVALINI > 0 Then
-            cVALINI = str(nVALINI)
+            cVALINI = Str(nVALINI)
         End If
         If nVALFIM > 0 Then
-            cVALFIM = str(nVALFIM)
+            cVALFIM = Str(nVALFIM)
             If nVALINI = 0 Then cVALINI = "0"
         End If
     Case "S"

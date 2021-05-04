@@ -5,6 +5,7 @@ Begin VB.Form FrmPegdb
    ClientLeft      =   60
    ClientTop       =   420
    ClientWidth     =   4680
+   Icon            =   "FrmPegdb.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3120
    ScaleWidth      =   4680
@@ -16,7 +17,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     ''formulario vazio em outro modulos frmpegdb padrao
 End Sub
 

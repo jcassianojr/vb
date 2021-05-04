@@ -64,7 +64,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Sub XPList1_Click()
+Private Sub Form_Load()
+CenterFormToScreen Me
 
 End Sub
-

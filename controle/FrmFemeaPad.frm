@@ -9,6 +9,7 @@ Begin VB.Form FrmFemeaPad
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   11100
+   Icon            =   "FrmFemeaPad.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7065
    ScaleWidth      =   11100
@@ -26,7 +27,7 @@ Begin VB.Form FrmFemeaPad
       TabsPerRow      =   4
       TabHeight       =   520
       TabCaption(0)   =   "Padrao"
-      TabPicture(0)   =   "FrmFemeaPad.frx":0000
+      TabPicture(0)   =   "FrmFemeaPad.frx":058A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "dizcau"
       Tab(0).Control(0).Enabled=   0   'False
@@ -136,7 +137,7 @@ Begin VB.Form FrmFemeaPad
       Tab(0).Control(52).Enabled=   0   'False
       Tab(0).ControlCount=   53
       TabCaption(1)   =   "Pre Cadastro"
-      TabPicture(1)   =   "FrmFemeaPad.frx":001C
+      TabPicture(1)   =   "FrmFemeaPad.frx":05A6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Gridfemprecad"
       Tab(1).Control(0).Enabled=   0   'False
@@ -152,7 +153,7 @@ Begin VB.Form FrmFemeaPad
       Tab(1).Control(5).Enabled=   0   'False
       Tab(1).ControlCount=   6
       TabCaption(2)   =   "Processos"
-      TabPicture(2)   =   "FrmFemeaPad.frx":0038
+      TabPicture(2)   =   "FrmFemeaPad.frx":05C2
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "dizpro(1)"
       Tab(2).Control(0).Enabled=   0   'False
@@ -176,7 +177,7 @@ Begin VB.Form FrmFemeaPad
       Tab(2).Control(9).Enabled=   0   'False
       Tab(2).ControlCount=   10
       TabCaption(3)   =   "Apuracao"
-      TabPicture(3)   =   "FrmFemeaPad.frx":0054
+      TabPicture(3)   =   "FrmFemeaPad.frx":05DE
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Grid"
       Tab(3).Control(0).Enabled=   0   'False
@@ -195,7 +196,7 @@ Begin VB.Form FrmFemeaPad
          Height          =   255
          Index           =   1
          Left            =   10440
-         Picture         =   "FrmFemeaPad.frx":0070
+         Picture         =   "FrmFemeaPad.frx":05FA
          Style           =   1  'Graphical
          TabIndex        =   70
          TabStop         =   0   'False
@@ -302,7 +303,7 @@ Begin VB.Form FrmFemeaPad
          Height          =   255
          Index           =   0
          Left            =   10080
-         Picture         =   "FrmFemeaPad.frx":05FA
+         Picture         =   "FrmFemeaPad.frx":0B84
          Style           =   1  'Graphical
          TabIndex        =   52
          TabStop         =   0   'False
@@ -1850,7 +1851,7 @@ End Sub
 Private Sub ALTERAFEMEA()
     Dim cSQL As String
     Dim nROWS As Integer
-    Dim x As Integer
+    Dim X As Integer
     Dim nPFTMP As Long
 
     Dim DB As ADODB.Connection
@@ -1887,10 +1888,10 @@ Private Sub ALTERAFEMEA()
         GridPadPF.Col = 0
         DB.ConnectionTimeout = 120
         DB.Open GeracArq(cARQPF)
-        For x = 0 To nROWS
-            GridPadPF.Row = x
+        For X = 0 To nROWS
+            GridPadPF.Row = X
             nPFTMP = FixInt(GridPadPF)
-            DIZAPU = nPFTMP & "- " & x & "/" & nROWS
+            DIZAPU = nPFTMP & "- " & X & "/" & nROWS
             DIZAPU.Refresh
             BARPOS
             cSQL = "select FEMMUDPAD from PF WHERE PF=" & nPFTMP
@@ -2029,15 +2030,15 @@ End Sub
 Private Sub Command6_Click()
 
     Dim nROWS
-    Dim x
+    Dim X
     Dim nNUM As Integer
 
     If Not MDG("Revisar Todas as Causas") Then
         Exit Sub
     End If
     nROWS = gridcau.Rows
-    For x = 1 To nROWS - 1
-        gridcau.Row = x
+    For X = 1 To nROWS - 1
+        gridcau.Row = X
         gridcau.Col = 3
         nNUM = FixInt(gridcau)
         If nNUM > 0 Then
@@ -2065,7 +2066,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aNUM = Array(0, 0, 0, 0)
     aDIZ = Array("", "", "", "")
     cARQFEMEA = PegPath("PATH", "FEMEA")

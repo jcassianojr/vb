@@ -8,6 +8,7 @@ Begin VB.Form escpf
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   11640
+   Icon            =   "Escpf.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7920
    ScaleWidth      =   11640
@@ -285,7 +286,7 @@ Private Sub Form_Load()
     'fazcodint 'Atualizar codigo logix
     'fazcodint2 'atualiza codigo logix seq
     'fazcodcli
-    Center Me
+    CenterFormToScreen Me
     cARQPF = PegPath("PATH", "PF")
     cARQFEMEA = PegPath("PATH", "FEMEA")
     cARQPFP = PegPath("PATH", "PFP")

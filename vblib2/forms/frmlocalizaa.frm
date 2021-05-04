@@ -123,7 +123,7 @@ End Sub
 
 Private Sub Form_Load()
     Dim nLEN As Integer
-    Center Me
+    CenterFormToScreen Me
     Me.Caption = cFORMID
     HelpContextID = nFORMID
     

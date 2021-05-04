@@ -452,7 +452,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     txt_status.tEXT = "Pronto." & vbCrLf
     txt_smtp_server.tEXT = ePASS01(0)
     Txt_Porta.tEXT = ePASS01(1)

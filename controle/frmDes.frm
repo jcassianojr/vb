@@ -407,7 +407,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         GrvSQL cARQDES, cSQLDES, nCAMPOS, aCAM, aVAL, aFOR
     End If
@@ -420,12 +420,12 @@ Private Sub Command7_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim nNUMERO          As Long
-    nNUMERO = FixInt(txtFields(2), 0)
+    nNUMERO = FixInt(TXTFIELDS(2), 0)
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        txtFields(3) = aRETU(0)
+        TXTFIELDS(3) = aRETU(0)
     End If
 End Sub
 
@@ -461,8 +461,8 @@ Private Sub ESCCLI_Click(Index As Integer)
     
     escNUMNOM.Show vbModal, Me
     If lRETU Then
-        txtFields(2) = eRETU01
-        txtFields(3) = eRETU02
+        TXTFIELDS(2) = eRETU01
+        TXTFIELDS(3) = eRETU02
     End If
 End Sub
 
@@ -487,7 +487,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQDES = PegPath("PATH", "DESENHO")
     cSQLDES = "select * from conjunto WHERE conjunto='" & cCONJUNTO & "'"
     nCAMPOS = 4
@@ -496,7 +496,7 @@ Private Sub Form_Load()
     aPAD = Array("", "", 0, "")
     aVAL = PegSQL(cARQDES, cSQLDES, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     Filgrid "atual", GridAtual
     Filgrid "baixado", GridArq

@@ -8,6 +8,7 @@ Begin VB.Form frmPOA
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   11760
+   Icon            =   "frmPOA.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -27,7 +28,7 @@ Begin VB.Form frmPOA
       Tabs            =   2
       TabHeight       =   520
       TabCaption(0)   =   "Colaborador Elabarador"
-      TabPicture(0)   =   "frmPOA.frx":0000
+      TabPicture(0)   =   "frmPOA.frx":058A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "lbl(4)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -55,7 +56,7 @@ Begin VB.Form frmPOA
       Tab(0).Control(11).Enabled=   0   'False
       Tab(0).ControlCount=   12
       TabCaption(1)   =   "Imagem"
-      TabPicture(1)   =   "frmPOA.frx":001C
+      TabPicture(1)   =   "frmPOA.frx":05A6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Picture1"
       Tab(1).Control(0).Enabled=   0   'False
@@ -151,7 +152,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":0038
+         Picture         =   "frmPOA.frx":05C2
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -172,7 +173,7 @@ Begin VB.Form frmPOA
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":05D2
+         Picture         =   "frmPOA.frx":0B5C
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -194,7 +195,7 @@ Begin VB.Form frmPOA
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":0B6C
+         Picture         =   "frmPOA.frx":10F6
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -216,7 +217,7 @@ Begin VB.Form frmPOA
          Width           =   735
          _ExtentX        =   1296
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":1106
+         Picture         =   "frmPOA.frx":1690
          Caption         =   "LX"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -237,7 +238,7 @@ Begin VB.Form frmPOA
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":16A0
+         Picture         =   "frmPOA.frx":1C2A
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -258,7 +259,7 @@ Begin VB.Form frmPOA
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":1C3A
+         Picture         =   "frmPOA.frx":21C4
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -279,7 +280,7 @@ Begin VB.Form frmPOA
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":21D4
+         Picture         =   "frmPOA.frx":275E
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -299,7 +300,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":276E
+         Picture         =   "frmPOA.frx":2CF8
          Caption         =   "Incluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -319,7 +320,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":2C08
+         Picture         =   "frmPOA.frx":3192
          Caption         =   "Excluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -339,7 +340,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPOA.frx":30A2
+         Picture         =   "frmPOA.frx":362C
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -359,7 +360,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":353C
+         Picture         =   "frmPOA.frx":3AC6
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -541,7 +542,7 @@ Begin VB.Form frmPOA
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPOA.frx":39D6
+      Picture         =   "frmPOA.frx":3F60
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -562,7 +563,7 @@ Begin VB.Form frmPOA
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPOA.frx":3F70
+      Picture         =   "frmPOA.frx":44FA
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -582,7 +583,7 @@ Begin VB.Form frmPOA
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":450A
+      Picture         =   "frmPOA.frx":4A94
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -604,7 +605,7 @@ Begin VB.Form frmPOA
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":4AA4
+      Picture         =   "frmPOA.frx":502E
       Caption         =   "mana5"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -625,7 +626,7 @@ Begin VB.Form frmPOA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":503E
+      Picture         =   "frmPOA.frx":55C8
       Caption         =   "PF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -647,7 +648,7 @@ Begin VB.Form frmPOA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":55D8
+      Picture         =   "frmPOA.frx":5B62
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -669,7 +670,7 @@ Begin VB.Form frmPOA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":5B72
+      Picture         =   "frmPOA.frx":60FC
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1027,10 +1028,10 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    PF.Text = nPF
-    seq.Text = nSEQ
-    Ssq.Text = nSSQ
-    Center Me
+    PF.tEXT = nPF
+    SEQ.tEXT = nSEQ
+    SSQ.tEXT = nSSQ
+    CenterFormToScreen Me
     
     lTROCOU = False
     cARQ = PegPath("PATH", "POA")

@@ -9,6 +9,7 @@ Begin VB.Form frmIE
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   11445
+   Icon            =   "frmIE.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -46,7 +47,7 @@ Begin VB.Form frmIE
       TabsPerRow      =   4
       TabHeight       =   520
       TabCaption(0)   =   "Dizeres"
-      TabPicture(0)   =   "frmIE.frx":0000
+      TabPicture(0)   =   "frmIE.frx":058A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "lblLabels(1)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -88,7 +89,7 @@ Begin VB.Form frmIE
       Tab(0).Control(18).Enabled=   0   'False
       Tab(0).ControlCount=   19
       TabCaption(1)   =   "Revisao"
-      TabPicture(1)   =   "frmIE.frx":001C
+      TabPicture(1)   =   "frmIE.frx":05A6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Command1"
       Tab(1).Control(1)=   "TXTFIELDS(26)"
@@ -109,7 +110,7 @@ Begin VB.Form frmIE
       Tab(1).Control(11)=   "ComMotExc"
       Tab(1).ControlCount=   12
       TabCaption(2)   =   "Imagens"
-      TabPicture(2)   =   "frmIE.frx":0038
+      TabPicture(2)   =   "frmIE.frx":05C2
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Picture1(2)"
       Tab(2).Control(1)=   "Picture2(2)"
@@ -140,7 +141,7 @@ Begin VB.Form frmIE
       Tab(2).Control(26)=   "VerImg(2)"
       Tab(2).ControlCount=   27
       TabCaption(3)   =   "Qtde/Obs"
-      TabPicture(3)   =   "frmIE.frx":0054
+      TabPicture(3)   =   "frmIE.frx":05DE
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "TXTFIELDS(14)"
       Tab(3).Control(0).Enabled=   0   'False
@@ -567,7 +568,7 @@ Begin VB.Form frmIE
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":0070
+         Picture         =   "frmIE.frx":05FA
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -588,7 +589,7 @@ Begin VB.Form frmIE
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":060A
+         Picture         =   "frmIE.frx":0B94
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -609,7 +610,7 @@ Begin VB.Form frmIE
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":0BA4
+         Picture         =   "frmIE.frx":112E
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -630,7 +631,7 @@ Begin VB.Form frmIE
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":113E
+         Picture         =   "frmIE.frx":16C8
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -651,7 +652,7 @@ Begin VB.Form frmIE
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":16D8
+         Picture         =   "frmIE.frx":1C62
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -672,7 +673,7 @@ Begin VB.Form frmIE
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":1C72
+         Picture         =   "frmIE.frx":21FC
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -692,7 +693,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":220C
+         Picture         =   "frmIE.frx":2796
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -713,7 +714,7 @@ Begin VB.Form frmIE
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":27A6
+         Picture         =   "frmIE.frx":2D30
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -734,7 +735,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":2D40
+         Picture         =   "frmIE.frx":32CA
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -755,7 +756,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":32DA
+         Picture         =   "frmIE.frx":3864
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -776,7 +777,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":3874
+         Picture         =   "frmIE.frx":3DFE
          Caption         =   "Apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -798,7 +799,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":3E0E
+         Picture         =   "frmIE.frx":4398
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -820,7 +821,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":42A8
+         Picture         =   "frmIE.frx":4832
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -842,7 +843,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":4742
+         Picture         =   "frmIE.frx":4CCC
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -864,7 +865,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":4BDC
+         Picture         =   "frmIE.frx":5166
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -886,7 +887,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":5076
+         Picture         =   "frmIE.frx":5600
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -908,7 +909,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":5510
+         Picture         =   "frmIE.frx":5A9A
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -930,7 +931,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":59AA
+         Picture         =   "frmIE.frx":5F34
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -952,7 +953,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":5E44
+         Picture         =   "frmIE.frx":63CE
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -974,7 +975,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":62DE
+         Picture         =   "frmIE.frx":6868
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -996,7 +997,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmIE.frx":6778
+         Picture         =   "frmIE.frx":6D02
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1018,7 +1019,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmIE.frx":6C12
+         Picture         =   "frmIE.frx":719C
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1040,7 +1041,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmIE.frx":70AC
+         Picture         =   "frmIE.frx":7636
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1277,7 +1278,7 @@ Begin VB.Form frmIE
       Width           =   1155
       _ExtentX        =   2037
       _ExtentY        =   767
-      Picture         =   "frmIE.frx":7546
+      Picture         =   "frmIE.frx":7AD0
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1297,7 +1298,7 @@ Begin VB.Form frmIE
       Width           =   1155
       _ExtentX        =   2037
       _ExtentY        =   767
-      Picture         =   "frmIE.frx":7AE0
+      Picture         =   "frmIE.frx":806A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1318,7 +1319,7 @@ Begin VB.Form frmIE
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":807A
+      Picture         =   "frmIE.frx":8604
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1339,7 +1340,7 @@ Begin VB.Form frmIE
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":8614
+      Picture         =   "frmIE.frx":8B9E
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1361,7 +1362,7 @@ Begin VB.Form frmIE
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":8BAE
+      Picture         =   "frmIE.frx":9138
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1383,7 +1384,7 @@ Begin VB.Form frmIE
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":9148
+      Picture         =   "frmIE.frx":96D2
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1405,7 +1406,7 @@ Begin VB.Form frmIE
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":96E2
+      Picture         =   "frmIE.frx":9C6C
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1427,7 +1428,7 @@ Begin VB.Form frmIE
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":9C7C
+      Picture         =   "frmIE.frx":A206
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1449,7 +1450,7 @@ Begin VB.Form frmIE
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":A216
+      Picture         =   "frmIE.frx":A7A0
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1471,7 +1472,7 @@ Begin VB.Form frmIE
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":A7B0
+      Picture         =   "frmIE.frx":AD3A
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1493,7 +1494,7 @@ Begin VB.Form frmIE
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":AD4A
+      Picture         =   "frmIE.frx":B2D4
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1586,13 +1587,13 @@ Dim aCAMIMG As Variant
 Private Sub Cmdbusmr_Click()
     Dim aRETU As Variant
     Dim cARQ, cSQL, cCODIGO As String
-    cCODIGO = FixStr(txtFields(19))
+    cCODIGO = FixStr(TXTFIELDS(19))
     If Len(cCODIGO) > 0 Then
         cARQ = GeraConn(zMANA5EMP, "JETFOX")
         cSQL = "SELECT NOME,NOM2 FROM mR01 WHERE CODIGO='" & cCODIGO & "'"
         aRETU = PegSQL(cARQ, cSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
         If lRETU Then
-            txtFields(20) = aRETU(0) + " " + aRETU(1)
+            TXTFIELDS(20) = aRETU(0) + " " + aRETU(1)
         End If
     End If
 End Sub
@@ -1600,31 +1601,31 @@ End Sub
 Private Sub cmdClose_Click()
     On Error Resume Next
     ''Data Revisao em Branco
-    If IsNull(txtFields(21)) Or Len(txtFields(21)) = 0 Then
+    If IsNull(TXTFIELDS(21)) Or Len(TXTFIELDS(21)) = 0 Then
         If gridrev.Rows > 1 Then
             gridrev.Row = gridrev.Rows - 1
             gridrev.Col = 3
-            txtFields(21).Text = gridrev
+            TXTFIELDS(21).tEXT = gridrev
         Else
-            txtFields(21) = txtFields(24)
+            TXTFIELDS(21) = TXTFIELDS(24)
         End If
     End If
    
     'Corrige revisao 1 qdo devia ser zero
     If gridrev.Rows = 1 Then
-        If FixNum(txtFields(17)) > 0 Then
-            txtFields(17) = 0
+        If FixNum(TXTFIELDS(17)) > 0 Then
+            TXTFIELDS(17) = 0
         End If
     End If
     
     'Qdto rev=0 data da revisao = elaboracao
-    If FixNum(txtFields(17)) = 0 Then
-        txtFields(21) = Fdata(txtFields(24))
+    If FixNum(TXTFIELDS(17)) = 0 Then
+        TXTFIELDS(21) = Fdata(TXTFIELDS(24))
     End If
 
     '    If MDG("Gravar alteraçôes") Then 'sempre gravar por causa revisao
     For iLOOP = 0 To nCAMPOS - 1
-        aVAL(iLOOP) = txtFields(iLOOP)
+        aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     GrvSQL cARQIE, cSQL, nCAMPOS, aCAM, aVAL, aFOR
        
@@ -1661,15 +1662,15 @@ Private Sub cmdescIED_Click(Index As Integer)
     If lRETU Then
         Select Case Index
         Case 1
-            txtFields(2) = txtFields(2) & " " & eRETU02
+            TXTFIELDS(2) = TXTFIELDS(2) & " " & eRETU02
         Case 2
-            txtFields(3) = txtFields(3) & " " & eRETU02
+            TXTFIELDS(3) = TXTFIELDS(3) & " " & eRETU02
         Case 3
-            txtFields(5) = txtFields(5) & " " & eRETU02
+            TXTFIELDS(5) = TXTFIELDS(5) & " " & eRETU02
         Case 4
-            txtFields(6) = txtFields(6) & " " & eRETU02
+            TXTFIELDS(6) = TXTFIELDS(6) & " " & eRETU02
         Case 5
-            txtFields(18) = txtFields(18) & " " & eRETU02
+            TXTFIELDS(18) = TXTFIELDS(18) & " " & eRETU02
         End Select
     End If
 End Sub
@@ -1678,8 +1679,8 @@ Private Sub Cmdescmr_Click()
     iMU01 = 4
     escmu01.Show vbModal, Me
     If lRETU Then
-        txtFields(19) = eRETU01
-        txtFields(20) = eRETU02
+        TXTFIELDS(19) = eRETU01
+        TXTFIELDS(20) = eRETU02
     End If
 End Sub
 
@@ -1813,21 +1814,21 @@ Private Sub ESCpro_Click(Index As Integer)
     escms01.Show vbModal, Me
     If lRETU Then
         If Index = 0 Or Index = 6 Then
-            frmIE.txtFields(25) = eRETU01
-            frmIE.txtFields(20) = eRETU02
-            frmIE.txtFields(24) = eRETU03
+            frmIE.TXTFIELDS(25) = eRETU01
+            frmIE.TXTFIELDS(20) = eRETU02
+            frmIE.TXTFIELDS(24) = eRETU03
         End If
         If Index = 2 Or Index = 3 Then
-            frmIE.txtFields(25) = eRETU01
-            frmIE.txtFields(20) = eRETU02
-            frmIE.txtFields(4) = eRETU03
+            frmIE.TXTFIELDS(25) = eRETU01
+            frmIE.TXTFIELDS(20) = eRETU02
+            frmIE.TXTFIELDS(4) = eRETU03
         End If
         If Index = 4 Or Index = 7 Then
-            frmIE.txtFields(4) = eRETU03
+            frmIE.TXTFIELDS(4) = eRETU03
         End If
         If Index = 1 Then
-            frmIE.txtFields(19) = eRETU01
-            frmIE.txtFields(20) = eRETU02
+            frmIE.TXTFIELDS(19) = eRETU01
+            frmIE.TXTFIELDS(20) = eRETU02
         End If
     End If
 End Sub
@@ -1838,8 +1839,8 @@ End Sub
 
 Private Sub Form_Load()
     
-    Center Me
-    TXTPF.Text = nPF
+    CenterFormToScreen Me
+    TXTPF.tEXT = nPF
     lTROCOU = Array(False, False, False)
     aCAMIMG = Array("IMAGEM", "FOTOESQ", "FOTODIR")
     
@@ -1869,7 +1870,7 @@ Private Sub Form_Load()
     
     aVAL = PegSQL(cARQIE, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)           '
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)           '
     Next iLOOP
     TXTFIELDS_Change 10                          'atualiza calculo
     
@@ -1904,11 +1905,11 @@ Private Sub imgsave_Click(Index As Integer)
     Dim cARQ As String
     Select Case Index
     Case 0
-        cARQ = "IE" & StrZero(FixInt(txtFields(0)), 6)
+        cARQ = "IE" & StrZero(FixInt(TXTFIELDS(0)), 6)
     Case 1
-        cARQ = TiraOut(txtFields(22))
+        cARQ = TiraOut(TXTFIELDS(22))
     Case 2
-        cARQ = TiraOut(txtFields(23))
+        cARQ = TiraOut(TXTFIELDS(23))
     End Select
     salvarpict Me, Picture1(Index), cARQ
 
@@ -1924,39 +1925,35 @@ End Sub
 
 Private Sub NovaRev_Click()
     Dim nREV As Integer
-    If txtFields(21) > Today() Then
+    If TXTFIELDS(21) > Today() Then
         Alert ("Data Revisao Anterior Maior que Data do Sistema")
         Exit Sub
     End If
     If MDG("Fazer Nova Revisao") Then
-        nREV = FixNum(txtFields(17)) + 1
+        nREV = FixNum(TXTFIELDS(17)) + 1
         IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & " and tipo='IE' and revisao=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), _
         Array(nPF, nREV, "IE", Today()), True, False
-        txtFields(17) = nREV
-        txtFields(21) = Date
-        txtFields(26) = zNOMEFOLHA
+        TXTFIELDS(17) = nREV
+        TXTFIELDS(21) = Date
+        TXTFIELDS(26) = zNOMEFOLHA
         cmdClose_Click
         'Filgridrev
     End If
 End Sub
 
 Private Sub pegelaborador_Click()
-    If txtFields(26) = "" Then
-        txtFields(26) = zNOMEFOLHA
+    If TXTFIELDS(26) = "" Then
+        TXTFIELDS(26) = zNOMEFOLHA
     End If
-End Sub
-
-Private Sub SSTab1_DblClick()
-
 End Sub
 
 Private Sub TXTFIELDS_Change(Index As Integer)
     Select Case Index
     Case 10, 11, 12, 13
         'Peso Liquido=Peso Unitario * N Peca por Embalagem
-        txtFields(12).Text = CDbl(FixNum(txtFields(10))) * CDbl(FixNum(txtFields(11)))
+        TXTFIELDS(12).tEXT = CDbl(FixNum(TXTFIELDS(10))) * CDbl(FixNum(TXTFIELDS(11)))
         'Peso Bruto Peso Liquido + Tara
-        txtFields(14).Text = CDbl(FixNum(txtFields(12))) + CDbl(FixNum(txtFields(13)))
+        TXTFIELDS(14).tEXT = CDbl(FixNum(TXTFIELDS(12))) + CDbl(FixNum(TXTFIELDS(13)))
     End Select
 End Sub
 

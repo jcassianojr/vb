@@ -9,6 +9,7 @@ Begin VB.Form frmPOKA
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   11760
+   Icon            =   "frmPOKA.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -49,7 +50,7 @@ Begin VB.Form frmPOKA
       Tab             =   5
       TabHeight       =   520
       TabCaption(0)   =   "Colaborador Elabarador"
-      TabPicture(0)   =   "frmPOKA.frx":0000
+      TabPicture(0)   =   "frmPOKA.frx":058A
       Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "Command2(2)"
       Tab(0).Control(1)=   "Command2(1)"
@@ -75,7 +76,7 @@ Begin VB.Form frmPOKA
       Tab(0).Control(18)=   "Label10"
       Tab(0).ControlCount=   19
       TabCaption(1)   =   "passo 01"
-      TabPicture(1)   =   "frmPOKA.frx":001C
+      TabPicture(1)   =   "frmPOKA.frx":05A6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "TXT(10)"
       Tab(1).Control(1)=   "Picture1(0)"
@@ -88,7 +89,7 @@ Begin VB.Form frmPOKA
       Tab(1).Control(8)=   "VerImg(0)"
       Tab(1).ControlCount=   9
       TabCaption(2)   =   "passo 02"
-      TabPicture(2)   =   "frmPOKA.frx":0038
+      TabPicture(2)   =   "frmPOKA.frx":05C2
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Picture1(1)"
       Tab(2).Control(1)=   "Picture2(1)"
@@ -101,7 +102,7 @@ Begin VB.Form frmPOKA
       Tab(2).Control(8)=   "VerImg(1)"
       Tab(2).ControlCount=   9
       TabCaption(3)   =   "passo 03"
-      TabPicture(3)   =   "frmPOKA.frx":0054
+      TabPicture(3)   =   "frmPOKA.frx":05DE
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Picture1(2)"
       Tab(3).Control(1)=   "Picture2(2)"
@@ -114,7 +115,7 @@ Begin VB.Form frmPOKA
       Tab(3).Control(8)=   "VerImg(2)"
       Tab(3).ControlCount=   9
       TabCaption(4)   =   "passo 04"
-      TabPicture(4)   =   "frmPOKA.frx":0070
+      TabPicture(4)   =   "frmPOKA.frx":05FA
       Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "Picture1(3)"
       Tab(4).Control(1)=   "Picture2(3)"
@@ -127,7 +128,7 @@ Begin VB.Form frmPOKA
       Tab(4).Control(8)=   "VerImg(3)"
       Tab(4).ControlCount=   9
       TabCaption(5)   =   "Revisao"
-      TabPicture(5)   =   "frmPOKA.frx":008C
+      TabPicture(5)   =   "frmPOKA.frx":0616
       Tab(5).ControlEnabled=   -1  'True
       Tab(5).Control(0)=   "gridrevi"
       Tab(5).Control(0).Enabled=   0   'False
@@ -513,7 +514,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":00A8
+         Picture         =   "frmPOKA.frx":0632
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -535,7 +536,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":0542
+         Picture         =   "frmPOKA.frx":0ACC
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -557,7 +558,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":09DC
+         Picture         =   "frmPOKA.frx":0F66
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -579,7 +580,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":0E76
+         Picture         =   "frmPOKA.frx":1400
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -601,7 +602,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":1310
+         Picture         =   "frmPOKA.frx":189A
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -623,7 +624,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":17AA
+         Picture         =   "frmPOKA.frx":1D34
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -645,7 +646,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":1C44
+         Picture         =   "frmPOKA.frx":21CE
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -667,7 +668,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":20DE
+         Picture         =   "frmPOKA.frx":2668
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -689,7 +690,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":2578
+         Picture         =   "frmPOKA.frx":2B02
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -711,7 +712,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":2A12
+         Picture         =   "frmPOKA.frx":2F9C
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -733,7 +734,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":2EAC
+         Picture         =   "frmPOKA.frx":3436
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -755,7 +756,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":3346
+         Picture         =   "frmPOKA.frx":38D0
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -777,7 +778,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":37E0
+         Picture         =   "frmPOKA.frx":3D6A
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -799,7 +800,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":3D7A
+         Picture         =   "frmPOKA.frx":4304
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -821,7 +822,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":4314
+         Picture         =   "frmPOKA.frx":489E
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -843,7 +844,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":48AE
+         Picture         =   "frmPOKA.frx":4E38
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -865,7 +866,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":4E48
+         Picture         =   "frmPOKA.frx":53D2
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -887,7 +888,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":53E2
+         Picture         =   "frmPOKA.frx":596C
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -909,7 +910,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":597C
+         Picture         =   "frmPOKA.frx":5F06
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -931,7 +932,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":5F16
+         Picture         =   "frmPOKA.frx":64A0
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -953,7 +954,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPOKA.frx":64B0
+         Picture         =   "frmPOKA.frx":6A3A
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -975,7 +976,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPOKA.frx":694A
+         Picture         =   "frmPOKA.frx":6ED4
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -997,7 +998,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPOKA.frx":6DE4
+         Picture         =   "frmPOKA.frx":736E
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1019,7 +1020,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPOKA.frx":727E
+         Picture         =   "frmPOKA.frx":7808
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1166,7 +1167,7 @@ Begin VB.Form frmPOKA
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPOKA.frx":7718
+      Picture         =   "frmPOKA.frx":7CA2
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1186,7 +1187,7 @@ Begin VB.Form frmPOKA
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPOKA.frx":7CB2
+      Picture         =   "frmPOKA.frx":823C
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1206,7 +1207,7 @@ Begin VB.Form frmPOKA
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPOKA.frx":824C
+      Picture         =   "frmPOKA.frx":87D6
       Caption         =   "Configurar Impressora"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1226,7 +1227,7 @@ Begin VB.Form frmPOKA
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmPOKA.frx":87E6
+      Picture         =   "frmPOKA.frx":8D70
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1248,7 +1249,7 @@ Begin VB.Form frmPOKA
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   661
-      Picture         =   "frmPOKA.frx":8D80
+      Picture         =   "frmPOKA.frx":930A
       Caption         =   "mana5"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1269,7 +1270,7 @@ Begin VB.Form frmPOKA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOKA.frx":931A
+      Picture         =   "frmPOKA.frx":98A4
       Caption         =   "PF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1291,7 +1292,7 @@ Begin VB.Form frmPOKA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOKA.frx":98B4
+      Picture         =   "frmPOKA.frx":9E3E
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1313,7 +1314,7 @@ Begin VB.Form frmPOKA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOKA.frx":9E4E
+      Picture         =   "frmPOKA.frx":A3D8
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1405,7 +1406,7 @@ Dim lTROCOU As Variant
 
 Private Sub cmdClose_Click()
     On Error Resume Next
-    Dim i As Integer
+    Dim I As Integer
 
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1
@@ -1413,11 +1414,11 @@ Private Sub cmdClose_Click()
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
        
-        For i = 0 To 3
-            If lTROCOU(i) Then
-                ADOGrvBlob cARQ, cSQL, Picture1(i), "FOTOPASSO0" + StrZero(i + 1, 1)
+        For I = 0 To 3
+            If lTROCOU(I) Then
+                ADOGrvBlob cARQ, cSQL, Picture1(I), "FOTOPASSO0" + StrZero(I + 1, 1)
             End If
-        Next i
+        Next I
        
     End If
     Screen.MousePointer = vbDefault
@@ -1458,9 +1459,9 @@ End Sub
 Private Sub CmdTrocaSequencia_Click()
     iMU01 = 4
     NewSeq.Show vbModal
-    seq.Text = nSEQ
-    Ssq.Text = nSSQ
-    Item.Text = nORD
+    SEQ.tEXT = nSEQ
+    SSQ.tEXT = nSSQ
+    item.tEXT = nORD
 End Sub
 
 Private Sub Command1_Click()
@@ -1474,11 +1475,11 @@ End Sub
 Private Sub Command2_Click(Index As Integer)
     Select Case Index
     Case 0
-        TXT(11).Text = "SIMULAR AS FALHAS COM PEÇAS"
+        TXT(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS"
     Case 1
-        TXT(11).Text = "SIMULAR AS FALHAS COM PEÇAS DA PRODUÇÃO"
+        TXT(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS DA PRODUÇÃO"
     Case 2
-        TXT(11).Text = "SIMULAR AS FALHAS COM PEÇAS COELHO"
+        TXT(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS COELHO"
     End Select
 End Sub
 
@@ -1629,14 +1630,14 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Dim i As Integer
+    Dim I As Integer
 
-    Center Me
+    CenterFormToScreen Me
 
-    PF.Text = nPF
-    seq.Text = nSEQ
-    Ssq.Text = nSSQ
-    Item.Text = nORD
+    PF.tEXT = nPF
+    SEQ.tEXT = nSEQ
+    SSQ.tEXT = nSSQ
+    item.tEXT = nORD
     
     lTROCOU = Array(False, False, False, False)
     
@@ -1653,27 +1654,27 @@ Private Sub Form_Load()
     For iLOOP = 0 To nCAMPOS - 1
         TXT(iLOOP) = aVAL(iLOOP)
     Next iLOOP
-    For i = 0 To 3
-        If ADOPegBlob(cARQ, cSQL, Picture1(i), "FOTOPASSO0" + StrZero(i + 1, 1)) Then
-            StretchSourcePictureFromPicture Picture1(i), Picture2(i)
+    For I = 0 To 3
+        If ADOPegBlob(cARQ, cSQL, Picture1(I), "FOTOPASSO0" + StrZero(I + 1, 1)) Then
+            StretchSourcePictureFromPicture Picture1(I), Picture2(I)
            
              
             If FixNum(eRETU01) > 500000 Then
                 Alert ("Imagem Muito Grande,Ajuste o tamanho")
                
-                salvarpict Me, Picture1(i), "FOTOPASSO0" & StrZero(i + 1, 1) & "_PF_" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3)
+                salvarpict Me, Picture1(I), "FOTOPASSO0" & StrZero(I + 1, 1) & "_PF_" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3)
                
                
-                Set Picture1(i).Picture = Nothing
-                Set Picture2(i).Picture = Nothing
-                lTROCOU(i) = True
+                Set Picture1(I).Picture = Nothing
+                Set Picture2(I).Picture = Nothing
+                lTROCOU(I) = True
             End If
            
         Else
-            Set Picture1(i).Picture = Nothing
-            Set Picture2(i).Picture = Nothing
+            Set Picture1(I).Picture = Nothing
+            Set Picture2(I).Picture = Nothing
         End If
-    Next i
+    Next I
     If nPF > 0 Then
         PegCodigoDescricaoPf
     End If

@@ -250,7 +250,7 @@ Private Sub filusr()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     filusr
     filrptusr
 

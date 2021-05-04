@@ -8,6 +8,7 @@ Begin VB.Form escRPTGRP
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   9345
+   Icon            =   "Escrptgr.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6135
    ScaleWidth      =   9345
@@ -118,7 +119,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     zgrp = ""
     ZGRPSUB = ""
     eLOCALIZA = ""

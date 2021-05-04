@@ -7,6 +7,7 @@ Begin VB.Form NewSeq
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   6060
+   Icon            =   "NewSeq.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   1815
    ScaleWidth      =   6060
@@ -40,7 +41,7 @@ Begin VB.Form NewSeq
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   873
-      Picture         =   "NewSeq.frx":0000
+      Picture         =   "NewSeq.frx":058A
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -176,7 +177,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     PF.tEXT = nPF
     If FixInt(nPF) = 0 Then
         PF.Enabled = True

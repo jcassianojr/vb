@@ -543,7 +543,7 @@ Private Sub Form_Load()
     Dim nTMPNUMERO
     Dim nPOS
     
-    Center Me
+    CenterFormToScreen Me
     Me.Caption = cFORMID
     HelpContextID = nFORMID
     

@@ -8,6 +8,7 @@ Begin VB.Form frmCLI
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   10200
+   Icon            =   "frmCLI.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3840
    ScaleWidth      =   10200
@@ -78,7 +79,7 @@ Begin VB.Form frmCLI
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmCLI.frx":0000
+      Picture         =   "frmCLI.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -99,7 +100,7 @@ Begin VB.Form frmCLI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmCLI.frx":059A
+      Picture         =   "frmCLI.frx":0B24
       Caption         =   "Novo"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -120,7 +121,7 @@ Begin VB.Form frmCLI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmCLI.frx":0B34
+      Picture         =   "frmCLI.frx":10BE
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -141,7 +142,7 @@ Begin VB.Form frmCLI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmCLI.frx":10CE
+      Picture         =   "frmCLI.frx":1658
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -238,14 +239,14 @@ End Sub
 Private Sub Form_Load()
     cARQDES = PegPath("PATH", "DESENHO")
     cSQLDES = "select * from cliente WHERE cliente=" & nPF
-    Center Me
+    CenterFormToScreen Me
     nCAMPOS = 2
     aCAM = Array("CLIENTE", "CLINOME")
     aFOR = Array("NI", "C")
     aPAD = Array(0, "")
     aVAL = PegSQL(cARQDES, cSQLDES, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     Filgrid
 End Sub

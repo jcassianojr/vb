@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form dCompare 
    Caption         =   "Database Comparador/Corretor"
@@ -287,13 +287,13 @@ Dim NewTable As DAO.TableDef
 Dim oTableDef  As DAO.TableDef
 Dim fldTemp As DAO.Field
 Dim NewFld As DAO.Field
-Dim n, m As Integer
+Dim N, m As Integer
 Dim cTabela As String
 Dim T_Ime, R_Ime, nekej, r_type, R_size As Variant
 Dim oFieldDef     As Variant
 
 
-Dim i As Integer
+Dim I As Integer
 Dim X As Integer
 Dim cARQ As String
 
@@ -303,11 +303,11 @@ On Error GoTo errhandler
    Set Baza2 = WrkSpace.OpenDatabase(Text2.Text)
    ''On Error Resume Next
    Text3.Text = ""
-   For n = 0 To Baza1.TableDefs.Count - 1
-      If Baza1.TableDefs(n).Properties(5) = 0 Then
+   For N = 0 To Baza1.TableDefs.Count - 1
+      If Baza1.TableDefs(N).Properties(5) = 0 Then
          nERRO = 0
          DoEvents
-         T_Ime = Baza1.TableDefs(n).Name
+         T_Ime = Baza1.TableDefs(N).Name
          Set rec1 = Baza1.OpenRecordset(T_Ime)
          Set rec2 = Baza2.OpenRecordset(T_Ime)
          If nERRO = 3078 Then
@@ -354,7 +354,7 @@ On Error GoTo errhandler
             Next m
          End If
       End If
-   Next n
+   Next N
    If lGRAVA Then
       rec2.Close
       rec1.Close
@@ -399,5 +399,6 @@ Private Sub Encerrar_Click()
 End Sub
 
 Private Sub Form_Load()
-  Center Me
+  'Center Me
+  CenterFormToScreen Me
 End Sub

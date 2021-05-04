@@ -8,6 +8,7 @@ Begin VB.Form escPFD
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   8190
+   Icon            =   "escpfd.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   8190
@@ -95,7 +96,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("Quantidade", "Frequencia")
     aORDES = Array("Cqtde", "freq")
     cORDEM = "CQTDE"

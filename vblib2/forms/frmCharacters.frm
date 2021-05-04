@@ -19,7 +19,7 @@ Begin VB.Form frmCharacters
       Appearance      =   0  'Flat
       Columns         =   7
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   36
          Charset         =   2
          Weight          =   400
@@ -27,7 +27,7 @@ Begin VB.Form frmCharacters
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   3630
+      Height          =   3210
       Left            =   120
       TabIndex        =   0
       Top             =   120
@@ -40,7 +40,7 @@ Begin VB.Form frmCharacters
       BorderStyle     =   1  'Fixed Single
       Caption         =   "0"
       BeginProperty Font 
-         Name            =   "isoqsymbol"
+         Name            =   "Wingdings"
          Size            =   14.25
          Charset         =   2
          Weight          =   700
@@ -99,7 +99,7 @@ Option Explicit
 Public lCLOSE As Boolean
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     On Error GoTo 5
     lRETU = False
     eRETU01 = ""
@@ -110,9 +110,9 @@ Private Sub Form_Load()
     End If
     Lblchr.FontSize = 36                         '20
     lCLOSE = ePASS02
-    Dim i As Integer
-    For i = 1 To 255
-        lstList.AddItem Chr$(i)
+    Dim I As Integer
+    For I = 1 To 255
+        lstList.AddItem Chr$(I)
     Next
     lstList.ListIndex = 0
 5:

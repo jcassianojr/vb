@@ -1,12 +1,13 @@
-VERSION 5.00ma
+VERSION 5.00
 Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form FrmCrwENG 
    Caption         =   "Crystal Report Relatorio"
    ClientHeight    =   5955
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   11430
+   Icon            =   "FrmCrwEng.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5955
    ScaleWidth      =   11430
@@ -131,7 +132,7 @@ Begin VB.Form FrmCrwENG
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmCrwEng.frx":0000
+         Picture         =   "FrmCrwEng.frx":058A
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -153,7 +154,7 @@ Begin VB.Form FrmCrwENG
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmCrwEng.frx":039A
+         Picture         =   "FrmCrwEng.frx":0924
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -175,7 +176,7 @@ Begin VB.Form FrmCrwENG
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmCrwEng.frx":0734
+         Picture         =   "FrmCrwEng.frx":0CBE
          Caption         =   "doc"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -197,7 +198,7 @@ Begin VB.Form FrmCrwENG
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmCrwEng.frx":0CCE
+         Picture         =   "FrmCrwEng.frx":1258
          Caption         =   "xls"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -219,7 +220,7 @@ Begin VB.Form FrmCrwENG
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmCrwEng.frx":1268
+         Picture         =   "FrmCrwEng.frx":17F2
          Caption         =   "PDF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -247,7 +248,7 @@ Begin VB.Form FrmCrwENG
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "FrmCrwEng.frx":1602
+         Picture         =   "FrmCrwEng.frx":1B8C
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -267,7 +268,7 @@ Begin VB.Form FrmCrwENG
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "FrmCrwEng.frx":1B9C
+         Picture         =   "FrmCrwEng.frx":2126
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -287,7 +288,7 @@ Begin VB.Form FrmCrwENG
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmCrwEng.frx":2136
+         Picture         =   "FrmCrwEng.frx":26C0
          Caption         =   "Propriedades"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -307,7 +308,7 @@ Begin VB.Form FrmCrwENG
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmCrwEng.frx":26D0
+         Picture         =   "FrmCrwEng.frx":2C5A
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -350,7 +351,7 @@ Begin VB.Form FrmCrwENG
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "FrmCrwEng.frx":2C6A
+      Picture         =   "FrmCrwEng.frx":31F4
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -374,7 +375,7 @@ Begin VB.Form FrmCrwENG
       _Version        =   393217
       Enabled         =   -1  'True
       ScrollBars      =   3
-      TextRTF         =   $"FrmCrwEng.frx":3204
+      TextRTF         =   $"FrmCrwEng.frx":378E
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   12
@@ -394,7 +395,7 @@ Begin VB.Form FrmCrwENG
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   556
-      Picture         =   "FrmCrwEng.frx":3286
+      Picture         =   "FrmCrwEng.frx":3810
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -415,7 +416,7 @@ Begin VB.Form FrmCrwENG
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   556
-      Picture         =   "FrmCrwEng.frx":3820
+      Picture         =   "FrmCrwEng.frx":3DAA
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -455,7 +456,7 @@ Begin VB.Form FrmCrwENG
       Width           =   1155
       _ExtentX        =   2037
       _ExtentY        =   556
-      Picture         =   "FrmCrwEng.frx":3DBA
+      Picture         =   "FrmCrwEng.frx":4344
       Caption         =   "Visualizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -476,7 +477,7 @@ Begin VB.Form FrmCrwENG
       Width           =   1755
       _ExtentX        =   3096
       _ExtentY        =   661
-      Picture         =   "FrmCrwEng.frx":4354
+      Picture         =   "FrmCrwEng.frx":48DE
       Caption         =   "Competência "
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -533,7 +534,7 @@ Const nFORMID = 1069
 Const cFORMID = "Imprimir Relatorios Crystal-Engine 10"
 
 Private Sub CmdAbrirCom_Click()
-cARQRTF = TxtArquivo.Text
+cARQRTF = TxtArquivo.tEXT
    If FileExist(cARQRTF, True) Then
        Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
    End If
@@ -602,7 +603,7 @@ Private Sub CmdFiltro_Click()
         FrmFiltro.Show vbModal, Me
         FILTRO = eRETU01
     End If
-    cFILTRO = CStr(FILTRO.Text)
+    cFILTRO = CStr(FILTRO.tEXT)
     
     If Len(cFILTRO) > 0 Then
         CrystalReport.RecordSelectionFormula = cFILTRO
@@ -644,25 +645,25 @@ Private Sub CmdMudaFec_Click()
 End Sub
 
 Private Sub CmdPreview_Click()
-   cARQRTF = TxtArquivo.Text
+   cARQRTF = TxtArquivo.tEXT
    If Not FileExist(cARQRTF, True) Then
       Exit Sub
    End If
-    If Extensao(TxtArquivo.Text, "TXT") Then
+    If Extensao(TxtArquivo.tEXT, "TXT") Then
         PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
     End If
-    If Extensao(TxtArquivo.Text, "PDF") Then
+    If Extensao(TxtArquivo.tEXT, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
     End If
-    If Extensao(TxtArquivo.Text, "HTML") Then
+    If Extensao(TxtArquivo.tEXT, "HTML") Then
        ePASS01 = cARQRTF
        FrmPreview.Show vbModal, Me
     End If
-    If Extensao(TxtArquivo.Text, "RTF") Then
-        cARQRTF = TxtArquivo.Text
+    If Extensao(TxtArquivo.tEXT, "RTF") Then
+        cARQRTF = TxtArquivo.tEXT
         RichTextbox1.LoadFile cARQRTF, rtfRTF
         PrinterEx.ShowPrintPreview Me, "MyPrintingRTF"
-        RichTextbox1.Text = ""
+        RichTextbox1.tEXT = ""
     End If
 End Sub
 Public Property Get Printer() As Printer
@@ -721,7 +722,7 @@ End Sub
 Private Sub Form_Load()
     Dim X, nARQUIVOS As Integer
     Dim cFILTRO
-    Center Me
+    CenterFormToScreen Me
     TxtArquivo = zUSER & Format(Now, "_DDMMYYYY_HHMMSS") & ".TXT"
     ''Configura Help
     Me.Caption = cFORMID
@@ -736,7 +737,7 @@ Private Sub Form_Load()
         TxtComp.Visible = True
         CmdMudaFec.Visible = True
         CmdMudaFec.Enabled = True
-        TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
+        TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
     End If
     
     If Len(aRELCFG(6)) = 0 Then
@@ -751,10 +752,10 @@ Private Sub Form_Load()
     If Not aDIREITOS(6) Then cmdimp.Visible = False
     If Not aDIREITOS(6) Then CmdConfImp.Visible = False
     If Not aDIREITOS(5) Then CmdVisua.Visible = False
-    If Not aDIREITOS(7) Then Salvar(2).Visible = False
-    If Not aDIREITOS(7) Then Salvar(3).Visible = False
-    If Not aDIREITOS(7) Then Salvar(0).Visible = False
-    If Not aDIREITOS(7) Then Salvar(1).Visible = False
+    If Not aDIREITOS(7) Then salvar(2).Visible = False
+    If Not aDIREITOS(7) Then salvar(3).Visible = False
+    If Not aDIREITOS(7) Then salvar(0).Visible = False
+    If Not aDIREITOS(7) Then salvar(1).Visible = False
     If Not aRELCFG(11) Then CmdFiltro.Visible = False
     If Not aRELCFG(11) Then FILTRO.Visible = False
     
@@ -869,7 +870,7 @@ Private Sub Salvar_Click(Index As Integer)
     
   
     sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
+    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
           
         
       

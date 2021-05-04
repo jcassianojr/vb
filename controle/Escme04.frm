@@ -8,6 +8,7 @@ Begin VB.Form escME04
    ClientLeft      =   2850
    ClientTop       =   1605
    ClientWidth     =   9105
+   Icon            =   "Escme04.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   9105
@@ -103,7 +104,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQME = PegPath("PATH", "MANA5INS")
     cARQME = GeraConn(cARQME, "JETFOX")
     aORDEM = Array("CODIGO", "TIPO", "CODTIPO", "APLICACAO", "PF")
@@ -205,7 +206,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         iImage = 5
         cARQRTF = PegPath("PATH", "IMGME04")
         Load frmIMAGENS
-        frmIMAGENS.txtFields(0).Enabled = False
+        frmIMAGENS.TXTFIELDS(0).Enabled = False
         frmIMAGENS.Escolher(0).Visible = False
         frmIMAGENS.Show vbModal, Me
     Case "ESC"

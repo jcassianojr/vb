@@ -7,6 +7,7 @@ Begin VB.Form FrmDesI
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   8610
+   Icon            =   "FrmDesI.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3735
    ScaleWidth      =   8610
@@ -145,7 +146,7 @@ Begin VB.Form FrmDesI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "FrmDesI.frx":0000
+      Picture         =   "FrmDesI.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -166,7 +167,7 @@ Begin VB.Form FrmDesI
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmDesI.frx":059A
+      Picture         =   "FrmDesI.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -298,7 +299,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 4
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         aVAL(8) = DTPicker1.Value
         aVAL(9) = DTPicker2.Value
@@ -322,7 +323,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = PegPath("PATH", "DESENHO")
     cSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'"
     nCAMPOS = 11
@@ -331,7 +332,7 @@ Private Sub Form_Load()
     aPAD = Array(cCONJUNTO, cDESENHO, 0, 0, 0, "", "", "", Date, Date, True)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 4
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     If IsDate(aVAL(8)) Then
         DTPicker1.Value = aVAL(8)

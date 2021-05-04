@@ -8,6 +8,7 @@ Begin VB.Form frmMENU
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   8145
+   Icon            =   "frmMENU.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -110,7 +111,7 @@ Begin VB.Form frmMENU
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmMENU.frx":0000
+      Picture         =   "frmMENU.frx":058A
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -130,7 +131,7 @@ Begin VB.Form frmMENU
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmMENU.frx":059A
+      Picture         =   "frmMENU.frx":0B24
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -241,11 +242,11 @@ Dim iLOOP As Integer
 Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
-        TXTFIELDS(2) = indice.Value
-        TXTFIELDS(3) = Cadastro.Value
+        txtFields(2) = indice.Value
+        txtFields(3) = Cadastro.Value
         
         For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
+            aVAL(iLOOP) = txtFields(iLOOP)
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     End If
@@ -266,7 +267,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = Dbname
     cSQL = "select * from MENU WHERE MENU='" & cMENU & "' AND INDICE=" & iMENU
     
@@ -276,11 +277,11 @@ Private Sub Form_Load()
     aPAD = Array("", "", 0, 0)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
+        txtFields(iLOOP) = aVAL(iLOOP)
     Next iLOOP
  'ajustar depois para nao precisar txtfiels 3 4
-    indice.Value = TXTFIELDS(2)
-    Cadastro.Value = TXTFIELDS(3)
+    indice.Value = txtFields(2)
+    Cadastro.Value = txtFields(3)
     
 
 End Sub

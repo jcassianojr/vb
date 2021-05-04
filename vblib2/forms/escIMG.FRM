@@ -106,7 +106,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("CODIGO", "NUMERO")
     aORDES = Array("CODIGO", "NUMERO")
     cORDEM = "CODIGO"

@@ -7,7 +7,7 @@ Begin VB.Form frmcomp
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   5100
-   Icon            =   "frmcomp.frx":0000
+   Icon            =   "FRMCOMP.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3210
    ScaleWidth      =   5100
@@ -107,7 +107,7 @@ Begin VB.Form frmcomp
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmcomp.frx":038A
+      Picture         =   "FRMCOMP.frx":038A
       Caption         =   "Confirmar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -232,7 +232,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     'frmcomp.Left = (Screen.Width - frmcomp.Width) / 2
     'frmcomp.Top = (Screen.Height - frmcomp.Height) / 2
     Me.Caption = cFORMID

@@ -8,6 +8,7 @@ Begin VB.Form escms01
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   9375
+   Icon            =   "Escms01.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   9375
@@ -185,7 +186,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     'Montatoolbar trata os tipos  LOGIX LOGIC LOGIE ... recebido epass01 para carqori
     cARQORI = ePASS01
     aORDEM = Array("CODIGO", "NOME", "CODIGOINT")
@@ -286,7 +287,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         iImage = 2
         cARQRTF = PegPath("PATH", "LOGOMS01") & "IMAGEM.MDB"
         Load frmIMAGENS
-        frmIMAGENS.txtFields(0).Enabled = False
+        frmIMAGENS.TXTFIELDS(0).Enabled = False
         frmIMAGENS.Escolher(0).Visible = False
         frmIMAGENS.Show vbModal, Me
 

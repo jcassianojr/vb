@@ -8,6 +8,7 @@ Begin VB.Form frmETI
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   10170
+   Icon            =   "frmETI.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6285
    ScaleWidth      =   10170
@@ -158,7 +159,7 @@ Begin VB.Form frmETI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmETI.frx":0000
+      Picture         =   "frmETI.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -178,7 +179,7 @@ Begin VB.Form frmETI
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmETI.frx":059A
+      Picture         =   "frmETI.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -199,7 +200,7 @@ Begin VB.Form frmETI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmETI.frx":0B34
+      Picture         =   "frmETI.frx":10BE
       Caption         =   "Novo"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -220,7 +221,7 @@ Begin VB.Form frmETI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmETI.frx":10CE
+      Picture         =   "frmETI.frx":1658
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -241,7 +242,7 @@ Begin VB.Form frmETI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmETI.frx":1668
+      Picture         =   "frmETI.frx":1BF2
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -466,7 +467,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQPF = PegPath("PATH", "PF")
     cARQ = GeraConn(zMANA5EMP, "SDECDX")
     cSQL = "select * from ETI WHERE CODIGO='" & Trim(ePASS01) & "'"

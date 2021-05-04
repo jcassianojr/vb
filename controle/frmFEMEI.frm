@@ -9,6 +9,7 @@ Begin VB.Form frmFEMEI
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   12945
+   Icon            =   "frmFEMEI.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -32,7 +33,7 @@ Begin VB.Form frmFEMEI
       Height          =   360
       Index           =   44
       Left            =   10560
-      Picture         =   "frmFEMEI.frx":0000
+      Picture         =   "frmFEMEI.frx":058A
       Style           =   1  'Graphical
       TabIndex        =   85
       TabStop         =   0   'False
@@ -226,7 +227,7 @@ Begin VB.Form frmFEMEI
       Tabs            =   6
       TabHeight       =   520
       TabCaption(0)   =   "Passo 2"
-      TabPicture(0)   =   "frmFEMEI.frx":058A
+      TabPicture(0)   =   "frmFEMEI.frx":0B14
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "lblLabels(23)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -242,7 +243,7 @@ Begin VB.Form frmFEMEI
       Tab(0).Control(5).Enabled=   0   'False
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "Passo 3"
-      TabPicture(1)   =   "frmFEMEI.frx":05A6
+      TabPicture(1)   =   "frmFEMEI.frx":0B30
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "lblLabels(26)"
       Tab(1).Control(0).Enabled=   0   'False
@@ -258,7 +259,7 @@ Begin VB.Form frmFEMEI
       Tab(1).Control(5).Enabled=   0   'False
       Tab(1).ControlCount=   6
       TabCaption(2)   =   "Passo 4 5"
-      TabPicture(2)   =   "frmFEMEI.frx":05C2
+      TabPicture(2)   =   "frmFEMEI.frx":0B4C
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "lblLabels(2)"
       Tab(2).Control(0).Enabled=   0   'False
@@ -382,15 +383,15 @@ Begin VB.Form frmFEMEI
       Tab(2).Control(59).Enabled=   0   'False
       Tab(2).ControlCount=   60
       TabCaption(3)   =   "Tab 3"
-      TabPicture(3)   =   "frmFEMEI.frx":05DE
+      TabPicture(3)   =   "frmFEMEI.frx":0B68
       Tab(3).ControlEnabled=   0   'False
       Tab(3).ControlCount=   0
       TabCaption(4)   =   "Tab 4"
-      TabPicture(4)   =   "frmFEMEI.frx":05FA
+      TabPicture(4)   =   "frmFEMEI.frx":0B84
       Tab(4).ControlEnabled=   0   'False
       Tab(4).ControlCount=   0
       TabCaption(5)   =   "Passo 6"
-      TabPicture(5)   =   "frmFEMEI.frx":0616
+      TabPicture(5)   =   "frmFEMEI.frx":0BA0
       Tab(5).ControlEnabled=   0   'False
       Tab(5).Control(0)=   "lblLabels(15)"
       Tab(5).Control(0).Enabled=   0   'False
@@ -749,7 +750,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   6
          Left            =   -70080
-         Picture         =   "frmFEMEI.frx":0632
+         Picture         =   "frmFEMEI.frx":0BBC
          Style           =   1  'Graphical
          TabIndex        =   131
          TabStop         =   0   'False
@@ -790,7 +791,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   4
          Left            =   -71520
-         Picture         =   "frmFEMEI.frx":0BBC
+         Picture         =   "frmFEMEI.frx":1146
          Style           =   1  'Graphical
          TabIndex        =   127
          TabStop         =   0   'False
@@ -831,7 +832,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   5
          Left            =   -72960
-         Picture         =   "frmFEMEI.frx":1146
+         Picture         =   "frmFEMEI.frx":16D0
          Style           =   1  'Graphical
          TabIndex        =   123
          TabStop         =   0   'False
@@ -960,7 +961,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   12
          Left            =   -73200
-         Picture         =   "frmFEMEI.frx":16D0
+         Picture         =   "frmFEMEI.frx":1C5A
          Style           =   1  'Graphical
          TabIndex        =   111
          TabStop         =   0   'False
@@ -972,7 +973,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   11
          Left            =   -73200
-         Picture         =   "frmFEMEI.frx":1C5A
+         Picture         =   "frmFEMEI.frx":21E4
          Style           =   1  'Graphical
          TabIndex        =   110
          TabStop         =   0   'False
@@ -984,7 +985,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   10
          Left            =   -73200
-         Picture         =   "frmFEMEI.frx":21E4
+         Picture         =   "frmFEMEI.frx":276E
          Style           =   1  'Graphical
          TabIndex        =   109
          TabStop         =   0   'False
@@ -995,7 +996,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   2
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":276E
+         Picture         =   "frmFEMEI.frx":2CF8
          Style           =   1  'Graphical
          TabIndex        =   108
          TabStop         =   0   'False
@@ -1006,7 +1007,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   1
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":2CF8
+         Picture         =   "frmFEMEI.frx":3282
          Style           =   1  'Graphical
          TabIndex        =   107
          TabStop         =   0   'False
@@ -1017,7 +1018,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   0
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":3282
+         Picture         =   "frmFEMEI.frx":380C
          Style           =   1  'Graphical
          TabIndex        =   106
          TabStop         =   0   'False
@@ -1126,7 +1127,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   5
          Left            =   -65520
-         Picture         =   "frmFEMEI.frx":380C
+         Picture         =   "frmFEMEI.frx":3D96
          Style           =   1  'Graphical
          TabIndex        =   97
          TabStop         =   0   'False
@@ -1137,7 +1138,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   4
          Left            =   -65520
-         Picture         =   "frmFEMEI.frx":3D96
+         Picture         =   "frmFEMEI.frx":4320
          Style           =   1  'Graphical
          TabIndex        =   96
          TabStop         =   0   'False
@@ -1168,7 +1169,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   3
          Left            =   -66600
-         Picture         =   "frmFEMEI.frx":4320
+         Picture         =   "frmFEMEI.frx":48AA
          Style           =   1  'Graphical
          TabIndex        =   94
          TabStop         =   0   'False
@@ -1179,7 +1180,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   2
          Left            =   -66600
-         Picture         =   "frmFEMEI.frx":48AA
+         Picture         =   "frmFEMEI.frx":4E34
          Style           =   1  'Graphical
          TabIndex        =   93
          TabStop         =   0   'False
@@ -1210,7 +1211,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   1
          Left            =   -67560
-         Picture         =   "frmFEMEI.frx":4E34
+         Picture         =   "frmFEMEI.frx":53BE
          Style           =   1  'Graphical
          TabIndex        =   91
          TabStop         =   0   'False
@@ -1221,7 +1222,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   0
          Left            =   -67560
-         Picture         =   "frmFEMEI.frx":53BE
+         Picture         =   "frmFEMEI.frx":5948
          Style           =   1  'Graphical
          TabIndex        =   90
          TabStop         =   0   'False
@@ -1265,7 +1266,7 @@ Begin VB.Form frmFEMEI
          HelpContextID   =   3
          Index           =   3
          Left            =   -70680
-         Picture         =   "frmFEMEI.frx":5948
+         Picture         =   "frmFEMEI.frx":5ED2
          Style           =   1  'Graphical
          TabIndex        =   80
          TabStop         =   0   'False
@@ -1306,7 +1307,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   1
          Left            =   -72120
-         Picture         =   "frmFEMEI.frx":5ED2
+         Picture         =   "frmFEMEI.frx":645C
          Style           =   1  'Graphical
          TabIndex        =   76
          TabStop         =   0   'False
@@ -1347,7 +1348,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   2
          Left            =   -73560
-         Picture         =   "frmFEMEI.frx":645C
+         Picture         =   "frmFEMEI.frx":69E6
          Style           =   1  'Graphical
          TabIndex        =   72
          TabStop         =   0   'False
@@ -1398,7 +1399,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   6
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":69E6
+         Picture         =   "frmFEMEI.frx":6F70
          Style           =   1  'Graphical
          TabIndex        =   67
          TabStop         =   0   'False
@@ -1419,7 +1420,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   25
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":6F70
+         Picture         =   "frmFEMEI.frx":74FA
          Style           =   1  'Graphical
          TabIndex        =   66
          TabStop         =   0   'False
@@ -1440,7 +1441,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   3
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":74FA
+         Picture         =   "frmFEMEI.frx":7A84
          Style           =   1  'Graphical
          TabIndex        =   63
          TabStop         =   0   'False
@@ -1473,7 +1474,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   2
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":7A84
+         Picture         =   "frmFEMEI.frx":800E
          Style           =   1  'Graphical
          TabIndex        =   60
          TabStop         =   0   'False
@@ -1506,7 +1507,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   1
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":800E
+         Picture         =   "frmFEMEI.frx":8598
          Style           =   1  'Graphical
          TabIndex        =   57
          TabStop         =   0   'False
@@ -1539,7 +1540,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   0
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":8598
+         Picture         =   "frmFEMEI.frx":8B22
          Style           =   1  'Graphical
          TabIndex        =   54
          TabStop         =   0   'False
@@ -1921,7 +1922,7 @@ Begin VB.Form frmFEMEI
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   767
-      Picture         =   "frmFEMEI.frx":8B22
+      Picture         =   "frmFEMEI.frx":90AC
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1942,7 +1943,7 @@ Begin VB.Form frmFEMEI
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   767
-      Picture         =   "frmFEMEI.frx":90BC
+      Picture         =   "frmFEMEI.frx":9646
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -2444,7 +2445,7 @@ End Sub
 
 Private Sub Form_Load()
     Encerrar.Enabled = True
-    Center Me
+    CenterFormToScreen Me
     cARQPF = PegPath("PATH", "PF")
     cARQFEMEA = PegPath("PATH", "FEMEA")
     cARQFEMEAPF = PegPath("PATH", "FEMEAPF")
@@ -2549,15 +2550,15 @@ End Sub
 Private Sub acaocampos()
 
     Dim lENABLE As Boolean
-    Dim x As Integer
+    Dim X As Integer
     lENABLE = False
 
     If Check1.Value = Checked Then
         lENABLE = True
     End If
-    For x = 11 To 22
-        TXTFIELDS(x).Enabled = lENABLE
-    Next x
+    For X = 11 To 22
+        TXTFIELDS(X).Enabled = lENABLE
+    Next X
     DTPicker1.Enabled = lENABLE
     DTPicker4.Enabled = lENABLE
     DTPicker2.Enabled = lENABLE
@@ -2565,23 +2566,23 @@ Private Sub acaocampos()
     Command4(0).Enabled = lENABLE
     Command4(1).Enabled = lENABLE
     Command4(2).Enabled = lENABLE
-    For x = 0 To 5
-        Command1(x).Enabled = lENABLE
-    Next x
-    For x = 17 To 19
-        cmdmais(x).Enabled = lENABLE
-        cmdmenos(x).Enabled = lENABLE
+    For X = 0 To 5
+        Command1(X).Enabled = lENABLE
+    Next X
+    For X = 17 To 19
+        cmdmais(X).Enabled = lENABLE
+        cmdmenos(X).Enabled = lENABLE
     Next
     pfcescid(4).Enabled = lENABLE
     pfcescid(5).Enabled = lENABLE
     pfcescid(6).Enabled = lENABLE
-    For x = 42 To 45
-        TXTFIELDS(x).Enabled = lENABLE
-    Next x
+    For X = 42 To 45
+        TXTFIELDS(X).Enabled = lENABLE
+    Next X
     ''46 Revisao sempre travado
-    For x = 47 To 59
-        TXTFIELDS(x).Enabled = lENABLE
-    Next x
+    For X = 47 To 59
+        TXTFIELDS(X).Enabled = lENABLE
+    Next X
     CmdRetornaAcao(0).Enabled = lENABLE
     CmdRetornaAcao(1).Enabled = lENABLE
 End Sub

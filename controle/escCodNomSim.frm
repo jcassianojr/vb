@@ -9,6 +9,7 @@ Begin VB.Form EscCodNomSim
    ClientTop       =   210
    ClientWidth     =   8265
    HelpContextID   =   6
+   Icon            =   "escCodNomSim.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7680
    ScaleWidth      =   8265
@@ -99,7 +100,7 @@ End Sub
 
 Private Sub Form_Load()
     '    CentralizaJanela Me
-    Center Me
+    CenterFormToScreen Me
     cARQ = GeracArq(PegPath("PATH", ePASS01))
     cSQL = ePASS02
     aORDEM = ePASS03

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form frmPassword 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "MDB Repair Tool"
@@ -21,7 +21,7 @@ Begin VB.Form frmPassword
       BorderStyle     =   0  'None
       Height          =   1815
       Left            =   0
-      Picture         =   "frmPassword.frx":058A
+      Picture         =   "frmPassword.frx":048A
       ScaleHeight     =   1815
       ScaleWidth      =   405
       TabIndex        =   2
@@ -48,7 +48,7 @@ Begin VB.Form frmPassword
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPassword.frx":22CE
+      Picture         =   "frmPassword.frx":21CE
       Caption         =   "Confirmar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -89,6 +89,11 @@ Option Explicit
 Private Sub Command1_Click()
 sDBpassword = txtPassword.Text
 Unload Me
+End Sub
+
+Private Sub Form_Load()
+CenterFormToScreen Me
+
 End Sub
 
 Private Sub txtPassword_KeyPress(KeyAscii As Integer)

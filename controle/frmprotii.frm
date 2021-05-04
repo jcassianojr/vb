@@ -9,6 +9,7 @@ Begin VB.Form frmprotii
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   9720
+   Icon            =   "frmprotii.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   4785
    ScaleWidth      =   9720
@@ -36,7 +37,7 @@ Begin VB.Form frmprotii
       _Version        =   393216
       TabHeight       =   520
       TabCaption(0)   =   "GP11"
-      TabPicture(0)   =   "frmprotii.frx":0000
+      TabPicture(0)   =   "frmprotii.frx":058A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Grid"
       Tab(0).Control(0).Enabled=   0   'False
@@ -46,7 +47,7 @@ Begin VB.Form frmprotii
       Tab(0).Control(2).Enabled=   0   'False
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Pedido Entrega"
-      TabPicture(1)   =   "frmprotii.frx":001C
+      TabPicture(1)   =   "frmprotii.frx":05A6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "lbl(9)"
       Tab(1).Control(0).Enabled=   0   'False
@@ -100,7 +101,7 @@ Begin VB.Form frmprotii
       Tab(1).Control(24).Enabled=   0   'False
       Tab(1).ControlCount=   25
       TabCaption(2)   =   "Desenho Observaçao"
-      TabPicture(2)   =   "frmprotii.frx":0038
+      TabPicture(2)   =   "frmprotii.frx":05C2
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "lbl(18)"
       Tab(2).Control(0).Enabled=   0   'False
@@ -589,7 +590,7 @@ Begin VB.Form frmprotii
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmprotii.frx":0054
+      Picture         =   "frmprotii.frx":05DE
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -609,7 +610,7 @@ Begin VB.Form frmprotii
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmprotii.frx":05EE
+      Picture         =   "frmprotii.frx":0B78
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -797,7 +798,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     nCAMPOS = 25
     cARQDES = PegPath("PATH", "DESENHO")
     aCAM = Array("PARTNUMBER", "FASE", "NFTIPO", "VALOR", "SSMT", _

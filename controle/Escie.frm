@@ -8,6 +8,7 @@ Begin VB.Form escIE
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   11010
+   Icon            =   "Escie.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5775
    ScaleWidth      =   11010
@@ -96,7 +97,7 @@ End Sub
 Private Sub Form_Load()
     cARQIE = PegPath("PATH", "IE")
     cARQPF = PegPath("PATH", "PF")
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("PF", "CODIGO", "DESCR", "RESDAT", "CODIGOINT")
     aORDES = Array("PF", "Codigo", "Descricao", "Data Liberacao", "Codigo Int")
     cORDEM = "PF"

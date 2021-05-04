@@ -7,6 +7,7 @@ Begin VB.Form frmRPTGRP
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   6645
+   Icon            =   "frmRPTGRP.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -43,7 +44,7 @@ Begin VB.Form frmRPTGRP
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmRPTGRP.frx":0000
+      Picture         =   "frmRPTGRP.frx":058A
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -63,7 +64,7 @@ Begin VB.Form frmRPTGRP
       Width           =   1455
       _ExtentX        =   2566
       _ExtentY        =   767
-      Picture         =   "frmRPTGRP.frx":059A
+      Picture         =   "frmRPTGRP.frx":0B24
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -136,7 +137,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = zRPTARQ
     cSQL = "select * from RPTGRP WHERE GRP='" & zgrp & "'"
         

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form frmPFC 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFC"
@@ -8,6 +8,7 @@ Begin VB.Form frmPFC
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   9600
+   Icon            =   "frmPFC.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -73,7 +74,7 @@ Begin VB.Form frmPFC
       TabsPerRow      =   4
       TabHeight       =   520
       TabCaption(0)   =   "Caracteristicas"
-      TabPicture(0)   =   "frmPFC.frx":0000
+      TabPicture(0)   =   "frmPFC.frx":058A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "lblLabels(3)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -139,7 +140,7 @@ Begin VB.Form frmPFC
       Tab(0).Control(30).Enabled=   0   'False
       Tab(0).ControlCount=   31
       TabCaption(1)   =   "Simbologia Instrumentos"
-      TabPicture(1)   =   "frmPFC.frx":001C
+      TabPicture(1)   =   "frmPFC.frx":05A6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "txtFields(20)"
       Tab(1).Control(0).Enabled=   0   'False
@@ -191,7 +192,7 @@ Begin VB.Form frmPFC
       Tab(1).Control(31)=   "lblLabels(5)"
       Tab(1).ControlCount=   32
       TabCaption(2)   =   "figura"
-      TabPicture(2)   =   "frmPFC.frx":0038
+      TabPicture(2)   =   "frmPFC.frx":05C2
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Picture1"
       Tab(2).Control(1)=   "Picture2"
@@ -204,7 +205,7 @@ Begin VB.Form frmPFC
       Tab(2).Control(8)=   "CmdSalvaImagem"
       Tab(2).ControlCount=   9
       TabCaption(3)   =   "Ensaios"
-      TabPicture(3)   =   "frmPFC.frx":0054
+      TabPicture(3)   =   "frmPFC.frx":05DE
       Tab(3).ControlEnabled=   0   'False
       Tab(3).ControlCount=   0
       Begin VB.PictureBox Picture1 
@@ -242,7 +243,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   1
          Left            =   -71880
-         Picture         =   "frmPFC.frx":0070
+         Picture         =   "frmPFC.frx":05FA
          Style           =   1  'Graphical
          TabIndex        =   75
          TabStop         =   0   'False
@@ -274,7 +275,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   0
          Left            =   -71880
-         Picture         =   "frmPFC.frx":05FA
+         Picture         =   "frmPFC.frx":0B84
          Style           =   1  'Graphical
          TabIndex        =   72
          TabStop         =   0   'False
@@ -306,7 +307,7 @@ Begin VB.Form frmPFC
          Height          =   375
          Index           =   1
          Left            =   -73200
-         Picture         =   "frmPFC.frx":0B84
+         Picture         =   "frmPFC.frx":110E
          Style           =   1  'Graphical
          TabIndex        =   69
          TabStop         =   0   'False
@@ -366,7 +367,7 @@ Begin VB.Form frmPFC
          Height          =   375
          Index           =   0
          Left            =   -73200
-         Picture         =   "frmPFC.frx":110E
+         Picture         =   "frmPFC.frx":1698
          Style           =   1  'Graphical
          TabIndex        =   63
          TabStop         =   0   'False
@@ -433,7 +434,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   5
          Left            =   -71880
-         Picture         =   "frmPFC.frx":1698
+         Picture         =   "frmPFC.frx":1C22
          Style           =   1  'Graphical
          TabIndex        =   55
          TabStop         =   0   'False
@@ -444,7 +445,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   4
          Left            =   -71880
-         Picture         =   "frmPFC.frx":1C22
+         Picture         =   "frmPFC.frx":21AC
          Style           =   1  'Graphical
          TabIndex        =   54
          TabStop         =   0   'False
@@ -474,7 +475,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   3
          Left            =   -72960
-         Picture         =   "frmPFC.frx":21AC
+         Picture         =   "frmPFC.frx":2736
          Style           =   1  'Graphical
          TabIndex        =   52
          TabStop         =   0   'False
@@ -485,7 +486,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   2
          Left            =   -72960
-         Picture         =   "frmPFC.frx":2736
+         Picture         =   "frmPFC.frx":2CC0
          Style           =   1  'Graphical
          TabIndex        =   51
          TabStop         =   0   'False
@@ -496,7 +497,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   1
          Left            =   -74040
-         Picture         =   "frmPFC.frx":2CC0
+         Picture         =   "frmPFC.frx":324A
          Style           =   1  'Graphical
          TabIndex        =   50
          TabStop         =   0   'False
@@ -507,7 +508,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   0
          Left            =   -74040
-         Picture         =   "frmPFC.frx":324A
+         Picture         =   "frmPFC.frx":37D4
          Style           =   1  'Graphical
          TabIndex        =   49
          TabStop         =   0   'False
@@ -561,7 +562,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   6
          Left            =   1800
-         Picture         =   "frmPFC.frx":37D4
+         Picture         =   "frmPFC.frx":3D5E
          Style           =   1  'Graphical
          TabIndex        =   43
          TabStop         =   0   'False
@@ -589,7 +590,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   7
          Left            =   1800
-         Picture         =   "frmPFC.frx":3D5E
+         Picture         =   "frmPFC.frx":42E8
          Style           =   1  'Graphical
          TabIndex        =   39
          TabStop         =   0   'False
@@ -608,7 +609,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   5
          Left            =   6120
-         Picture         =   "frmPFC.frx":42E8
+         Picture         =   "frmPFC.frx":4872
          Style           =   1  'Graphical
          TabIndex        =   36
          TabStop         =   0   'False
@@ -626,7 +627,7 @@ Begin VB.Form frmPFC
       Begin VB.CommandButton cmdescpfd 
          Height          =   315
          Left            =   3120
-         Picture         =   "frmPFC.frx":4872
+         Picture         =   "frmPFC.frx":4DFC
          Style           =   1  'Graphical
          TabIndex        =   33
          TabStop         =   0   'False
@@ -637,7 +638,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   4
          Left            =   1800
-         Picture         =   "frmPFC.frx":4DFC
+         Picture         =   "frmPFC.frx":5386
          Style           =   1  'Graphical
          TabIndex        =   31
          TabStop         =   0   'False
@@ -648,7 +649,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   3
          Left            =   960
-         Picture         =   "frmPFC.frx":5386
+         Picture         =   "frmPFC.frx":5910
          Style           =   1  'Graphical
          TabIndex        =   29
          TabStop         =   0   'False
@@ -692,7 +693,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   8
          Left            =   1320
-         Picture         =   "frmPFC.frx":5910
+         Picture         =   "frmPFC.frx":5E9A
          Style           =   1  'Graphical
          TabIndex        =   23
          TabStop         =   0   'False
@@ -703,7 +704,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   1
          Left            =   1320
-         Picture         =   "frmPFC.frx":5E9A
+         Picture         =   "frmPFC.frx":6424
          Style           =   1  'Graphical
          TabIndex        =   20
          TabStop         =   0   'False
@@ -714,7 +715,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   2
          Left            =   1320
-         Picture         =   "frmPFC.frx":6424
+         Picture         =   "frmPFC.frx":69AE
          Style           =   1  'Graphical
          TabIndex        =   18
          TabStop         =   0   'False
@@ -730,7 +731,7 @@ Begin VB.Form frmPFC
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":69AE
+         Picture         =   "frmPFC.frx":6F38
          Caption         =   "Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -751,7 +752,7 @@ Begin VB.Form frmPFC
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":6F48
+         Picture         =   "frmPFC.frx":74D2
          Caption         =   "Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -771,7 +772,7 @@ Begin VB.Form frmPFC
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":74E2
+         Picture         =   "frmPFC.frx":7A6C
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -791,7 +792,7 @@ Begin VB.Form frmPFC
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":7A7C
+         Picture         =   "frmPFC.frx":8006
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -811,7 +812,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":8016
+         Picture         =   "frmPFC.frx":85A0
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -831,7 +832,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":85B0
+         Picture         =   "frmPFC.frx":8B3A
          Caption         =   "Incluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -851,7 +852,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":8A4A
+         Picture         =   "frmPFC.frx":8FD4
          Caption         =   "Excluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -871,7 +872,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPFC.frx":8EE4
+         Picture         =   "frmPFC.frx":946E
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -891,7 +892,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":937E
+         Picture         =   "frmPFC.frx":9908
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -912,7 +913,7 @@ Begin VB.Form frmPFC
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFC.frx":9818
+         Picture         =   "frmPFC.frx":9DA2
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1169,7 +1170,7 @@ Begin VB.Form frmPFC
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPFC.frx":9DB2
+      Picture         =   "frmPFC.frx":A33C
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1189,7 +1190,7 @@ Begin VB.Form frmPFC
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPFC.frx":A34C
+      Picture         =   "frmPFC.frx":A8D6
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1587,29 +1588,29 @@ Private Sub Form_Load()
     '  EscTipIns(0).Enabled = False
     '  EscTipIns(1).Enabled = False
 
-    Center Me
+    CenterFormToScreen Me
     txtItem = nORD
    
     If nPF > 0 Then
-        TXTPF.Text = nPF
+        TXTPF.tEXT = nPF
     Else
         TXTPF.Visible = False
         Label1.Visible = False
     End If
     If nSEQ > 0 Then
-        TXTSEQ.Text = nSEQ
+        TXTSEQ.tEXT = nSEQ
     Else
         TXTSEQ.Visible = False
         Label1.Visible = False
     End If
     If nSSQ > 0 Then
-        TXTSSQ.Text = nSSQ
+        TXTSSQ.tEXT = nSSQ
     Else
         TXTSSQ.Visible = False
         Label2.Visible = False
     End If
     If nARQPCS = 2 Then
-        TxtCodComp.Text = Ccodcomp
+        TxtCodComp.tEXT = Ccodcomp
     Else
         TxtCodComp.Visible = False
         Label3.Visible = False

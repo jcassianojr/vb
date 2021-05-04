@@ -95,7 +95,7 @@ Private Sub Form_Load()
     Dim oCONN As New ADODB.Connection
 
     '  CentralizaJanela Me
-    Center Me
+    CenterFormToScreen Me
     lRETU = False
     TxtOrdem = ""
     eRETU01 = ""
@@ -106,9 +106,9 @@ Private Sub Form_Load()
     oCONN.Open cARQ
     oRS.Open cSQL, oCONN, adOpenForwardOnly, adLockReadOnly
     List.Clear
-    For x = 0 To oRS.Fields.Count - 1
-        List.AddItem oRS.Fields(x).Name
-    Next x
+    For X = 0 To oRS.Fields.Count - 1
+        List.AddItem oRS.Fields(X).Name
+    Next X
     HelpContextID = nFORMID
     Me.Caption = cFORMID
 End Sub

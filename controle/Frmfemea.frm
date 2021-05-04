@@ -10,6 +10,7 @@ Begin VB.Form frmfemea
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   12765
+   Icon            =   "Frmfemea.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -34,7 +35,7 @@ Begin VB.Form frmfemea
       Height          =   315
       Index           =   2
       Left            =   3540
-      Picture         =   "Frmfemea.frx":0000
+      Picture         =   "Frmfemea.frx":058A
       TabIndex        =   141
       TabStop         =   0   'False
       Top             =   1320
@@ -45,7 +46,7 @@ Begin VB.Form frmfemea
       Height          =   315
       Index           =   1
       Left            =   3180
-      Picture         =   "Frmfemea.frx":058A
+      Picture         =   "Frmfemea.frx":0B14
       TabIndex        =   138
       TabStop         =   0   'False
       Top             =   1320
@@ -90,7 +91,7 @@ Begin VB.Form frmfemea
       Height          =   315
       Index           =   0
       Left            =   2820
-      Picture         =   "Frmfemea.frx":0B14
+      Picture         =   "Frmfemea.frx":109E
       Style           =   1  'Graphical
       TabIndex        =   25
       TabStop         =   0   'False
@@ -235,7 +236,7 @@ Begin VB.Form frmfemea
       TabsPerRow      =   6
       TabHeight       =   529
       TabCaption(0)   =   "Producao"
-      TabPicture(0)   =   "Frmfemea.frx":109E
+      TabPicture(0)   =   "Frmfemea.frx":1628
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "gridrevcau(0)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -277,7 +278,7 @@ Begin VB.Form frmfemea
       Tab(0).Control(18).Enabled=   0   'False
       Tab(0).ControlCount=   19
       TabCaption(1)   =   "Grupo/Copia/Obs"
-      TabPicture(1)   =   "Frmfemea.frx":10BA
+      TabPicture(1)   =   "Frmfemea.frx":1644
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Txtfields(33)"
       Tab(1).Control(0).Enabled=   0   'False
@@ -309,7 +310,7 @@ Begin VB.Form frmfemea
       Tab(1).Control(13).Enabled=   0   'False
       Tab(1).ControlCount=   14
       TabCaption(2)   =   "Elaborador/Revisão"
-      TabPicture(2)   =   "Frmfemea.frx":10D6
+      TabPicture(2)   =   "Frmfemea.frx":1660
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "DTPicker2"
       Tab(2).Control(0).Enabled=   0   'False
@@ -389,7 +390,7 @@ Begin VB.Form frmfemea
       Tab(2).Control(37).Enabled=   0   'False
       Tab(2).ControlCount=   38
       TabCaption(3)   =   "Revisões PF"
-      TabPicture(3)   =   "Frmfemea.frx":10F2
+      TabPicture(3)   =   "Frmfemea.frx":167C
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "CmdMarcaFemea"
       Tab(3).Control(0).Enabled=   0   'False
@@ -405,7 +406,7 @@ Begin VB.Form frmfemea
       Tab(3).Control(5).Enabled=   0   'False
       Tab(3).ControlCount=   6
       TabCaption(4)   =   "Sequencia"
-      TabPicture(4)   =   "Frmfemea.frx":110E
+      TabPicture(4)   =   "Frmfemea.frx":1698
       Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "CmdcheckOp(1)"
       Tab(4).Control(0).Enabled=   0   'False
@@ -423,7 +424,7 @@ Begin VB.Form frmfemea
       Tab(4).Control(6).Enabled=   0   'False
       Tab(4).ControlCount=   7
       TabCaption(5)   =   "Reg Defeito"
-      TabPicture(5)   =   "Frmfemea.frx":112A
+      TabPicture(5)   =   "Frmfemea.frx":16B4
       Tab(5).ControlEnabled=   0   'False
       Tab(5).Control(0)=   "CmdEdiDef"
       Tab(5).Control(0).Enabled=   0   'False
@@ -437,7 +438,7 @@ Begin VB.Form frmfemea
       Tab(5).Control(4).Enabled=   0   'False
       Tab(5).ControlCount=   5
       TabCaption(6)   =   "Padrao Processo/Falha"
-      TabPicture(6)   =   "Frmfemea.frx":1146
+      TabPicture(6)   =   "Frmfemea.frx":16D0
       Tab(6).ControlEnabled=   0   'False
       Tab(6).Control(0)=   "Command14"
       Tab(6).Control(0).Enabled=   0   'False
@@ -477,7 +478,7 @@ Begin VB.Form frmfemea
       Tab(6).Control(17).Enabled=   0   'False
       Tab(6).ControlCount=   18
       TabCaption(7)   =   "Padrao"
-      TabPicture(7)   =   "Frmfemea.frx":1162
+      TabPicture(7)   =   "Frmfemea.frx":16EC
       Tab(7).ControlEnabled=   0   'False
       Tab(7).Control(0)=   "CMDSIG(1)"
       Tab(7).Control(0).Enabled=   0   'False
@@ -537,7 +538,7 @@ Begin VB.Form frmfemea
       Tab(7).Control(27).Enabled=   0   'False
       Tab(7).ControlCount=   28
       TabCaption(8)   =   "Padrao-Complementar"
-      TabPicture(8)   =   "Frmfemea.frx":117E
+      TabPicture(8)   =   "Frmfemea.frx":1708
       Tab(8).ControlEnabled=   0   'False
       Tab(8).Control(0)=   "Command10(1)"
       Tab(8).Control(0).Enabled=   0   'False
@@ -575,7 +576,7 @@ Begin VB.Form frmfemea
       Tab(8).Control(16).Enabled=   0   'False
       Tab(8).ControlCount=   17
       TabCaption(9)   =   "PreCadastro"
-      TabPicture(9)   =   "Frmfemea.frx":119A
+      TabPicture(9)   =   "Frmfemea.frx":1724
       Tab(9).ControlEnabled=   0   'False
       Tab(9).Control(0)=   "CmdPreinc"
       Tab(9).Control(0).Enabled=   0   'False
@@ -589,7 +590,7 @@ Begin VB.Form frmfemea
       Tab(9).Control(4).Enabled=   0   'False
       Tab(9).ControlCount=   5
       TabCaption(10)  =   "Apuracoes"
-      TabPicture(10)  =   "Frmfemea.frx":11B6
+      TabPicture(10)  =   "Frmfemea.frx":1740
       Tab(10).ControlEnabled=   0   'False
       Tab(10).Control(0)=   "maisano"
       Tab(10).Control(0).Enabled=   0   'False
@@ -621,7 +622,7 @@ Begin VB.Form frmfemea
       Tab(10).Control(13).Enabled=   0   'False
       Tab(10).ControlCount=   14
       TabCaption(11)  =   "Fluxo II"
-      TabPicture(11)  =   "Frmfemea.frx":11D2
+      TabPicture(11)  =   "Frmfemea.frx":175C
       Tab(11).ControlEnabled=   0   'False
       Tab(11).Control(0)=   "Command1(13)"
       Tab(11).Control(0).Enabled=   0   'False
@@ -651,7 +652,7 @@ Begin VB.Form frmfemea
       Tab(11).Control(12).Enabled=   0   'False
       Tab(11).ControlCount=   13
       TabCaption(12)  =   "Pre"
-      TabPicture(12)  =   "Frmfemea.frx":11EE
+      TabPicture(12)  =   "Frmfemea.frx":1778
       Tab(12).ControlEnabled=   0   'False
       Tab(12).Control(0)=   "CmdClo(5)"
       Tab(12).Control(0).Enabled=   0   'False
@@ -681,7 +682,7 @@ Begin VB.Form frmfemea
       Tab(12).Control(12).Enabled=   0   'False
       Tab(12).ControlCount=   13
       TabCaption(13)  =   "GP12"
-      TabPicture(13)  =   "Frmfemea.frx":120A
+      TabPicture(13)  =   "Frmfemea.frx":1794
       Tab(13).ControlEnabled=   0   'False
       Tab(13).Control(0)=   "CmdClo(7)"
       Tab(13).Control(0).Enabled=   0   'False
@@ -711,7 +712,7 @@ Begin VB.Form frmfemea
       Tab(13).Control(12).Enabled=   0   'False
       Tab(13).ControlCount=   13
       TabCaption(14)  =   "Historico"
-      TabPicture(14)  =   "Frmfemea.frx":1226
+      TabPicture(14)  =   "Frmfemea.frx":17B0
       Tab(14).ControlEnabled=   0   'False
       Tab(14).Control(0)=   "CmdREvi(4)"
       Tab(14).Control(0).Enabled=   0   'False
@@ -719,13 +720,13 @@ Begin VB.Form frmfemea
       Tab(14).Control(1).Enabled=   0   'False
       Tab(14).ControlCount=   2
       TabCaption(15)  =   "Padrao  Historico"
-      TabPicture(15)  =   "Frmfemea.frx":1242
+      TabPicture(15)  =   "Frmfemea.frx":17CC
       Tab(15).ControlEnabled=   0   'False
       Tab(15).Control(0)=   "gridpfpadhist"
       Tab(15).Control(0).Enabled=   0   'False
       Tab(15).ControlCount=   1
       TabCaption(16)  =   "Adcionais"
-      TabPicture(16)  =   "Frmfemea.frx":125E
+      TabPicture(16)  =   "Frmfemea.frx":17E8
       Tab(16).ControlEnabled=   0   'False
       Tab(16).Control(0)=   "CmdRevFemea(5)"
       Tab(16).Control(0).Enabled=   0   'False
@@ -812,7 +813,7 @@ Begin VB.Form frmfemea
          Height          =   495
          Index           =   11
          Left            =   -65040
-         Picture         =   "Frmfemea.frx":127A
+         Picture         =   "Frmfemea.frx":1804
          Style           =   1  'Graphical
          TabIndex        =   247
          TabStop         =   0   'False
@@ -825,7 +826,7 @@ Begin VB.Form frmfemea
          Height          =   495
          Index           =   10
          Left            =   -65040
-         Picture         =   "Frmfemea.frx":1804
+         Picture         =   "Frmfemea.frx":1D8E
          Style           =   1  'Graphical
          TabIndex        =   246
          TabStop         =   0   'False
@@ -1509,7 +1510,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Index           =   1
          Left            =   -70680
-         Picture         =   "Frmfemea.frx":1D8E
+         Picture         =   "Frmfemea.frx":2318
          Style           =   1  'Graphical
          TabIndex        =   164
          TabStop         =   0   'False
@@ -1709,7 +1710,7 @@ Begin VB.Form frmfemea
          Height          =   495
          Index           =   1
          Left            =   -65640
-         Picture         =   "Frmfemea.frx":2318
+         Picture         =   "Frmfemea.frx":28A2
          Style           =   1  'Graphical
          TabIndex        =   143
          TabStop         =   0   'False
@@ -1721,7 +1722,7 @@ Begin VB.Form frmfemea
          Height          =   495
          Index           =   0
          Left            =   -65640
-         Picture         =   "Frmfemea.frx":28A2
+         Picture         =   "Frmfemea.frx":2E2C
          Style           =   1  'Graphical
          TabIndex        =   142
          TabStop         =   0   'False
@@ -1961,7 +1962,7 @@ Begin VB.Form frmfemea
       Begin VB.CommandButton Command3 
          Height          =   255
          Left            =   -73080
-         Picture         =   "Frmfemea.frx":2E2C
+         Picture         =   "Frmfemea.frx":33B6
          Style           =   1  'Graphical
          TabIndex        =   86
          TabStop         =   0   'False
@@ -2500,7 +2501,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Index           =   0
          Left            =   -71040
-         Picture         =   "Frmfemea.frx":33B6
+         Picture         =   "Frmfemea.frx":3940
          Style           =   1  'Graphical
          TabIndex        =   34
          TabStop         =   0   'False
@@ -3084,7 +3085,7 @@ Begin VB.Form frmfemea
       Width           =   1455
       _ExtentX        =   2566
       _ExtentY        =   767
-      Picture         =   "Frmfemea.frx":3940
+      Picture         =   "Frmfemea.frx":3ECA
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -3105,7 +3106,7 @@ Begin VB.Form frmfemea
       Width           =   1395
       _ExtentX        =   2461
       _ExtentY        =   767
-      Picture         =   "Frmfemea.frx":3EDA
+      Picture         =   "Frmfemea.frx":4464
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -3886,7 +3887,7 @@ Private Sub CmdIncDef_Click()
     Dim nSAC As Long
     Dim cCAM As String
     Dim cTITULO As String
-    Dim acampos
+    Dim aCAMPOS
     Dim avalor
    
     cTITULO = FixStr(Busca("Digite Descricao", "Descricao", Space(50), 50), "")
@@ -3900,11 +3901,11 @@ Private Sub CmdIncDef_Click()
     nSAC = PegMAXSQL(GeraConn(cCAM, "FOX"), "MSRD", "MSDR", 1)
     nSAC = nSAC + 1
     
-    acampos = Array("MSRD", "DATA", "PF", "CODIGO", "CLIENTE", "DESC01")
+    aCAMPOS = Array("MSRD", "DATA", "PF", "CODIGO", "CLIENTE", "DESC01")
     avalor = Array(nSAC, Format(Date, "DD/MM/YY"), FixNum(TXTFIELDS(0)), FixStr(TXTFIELDS(2)), FixNum(TXTFIELDS(4)), FixStr(cTITULO))
     
     IncluiSQL GeraConn(cCAM, "FOX"), "SELECT * FROM MSRD WHERE MSRD=" & nSAC, 6 _
-    , acampos _
+    , aCAMPOS _
     , avalor, _
     , False, True
     
@@ -5229,7 +5230,7 @@ End Sub
 Private Sub FilRelat(Index As Integer)
     Dim cSQL As String
     Dim cARQ As String
-    Dim i
+    Dim I
     Dim nROWS
     Dim lTEM
     Dim nTMPSEQ
@@ -5239,7 +5240,7 @@ Private Sub FilRelat(Index As Integer)
     Dim nTMPSEQQ
     Dim nTMPSSQQ
     Dim nTMPITEMQ
-    Dim j
+    Dim J
 
     lRETU = True
 
@@ -5277,8 +5278,8 @@ Private Sub FilRelat(Index As Integer)
     nROWSQ = gridopr.Rows - 1
     nROWS = GridSeq(Index).Rows
     nROWS = nROWS - 1
-    For i = 1 To nROWS                           'ROW 0 = Cabecario
-        GridSeq(Index).Row = i
+    For I = 1 To nROWS                           'ROW 0 = Cabecario
+        GridSeq(Index).Row = I
         GridSeq(Index).Col = 2
         nTMPSEQ = FixInt(GridSeq(Index))
         GridSeq(Index).Col = 3
@@ -5287,9 +5288,9 @@ Private Sub FilRelat(Index As Integer)
         nTMPITEM = FixInt(GridSeq(Index))
         lTEM = False
        
-        For j = 1 To nROWSQ                      ' zero e o titulo do grid comeca 1
+        For J = 1 To nROWSQ                      ' zero e o titulo do grid comeca 1
 
-            gridopr.Row = j
+            gridopr.Row = J
             gridopr.Col = 1
             nTMPSEQQ = FixInt(gridopr)
             gridopr.Col = 2
@@ -5299,7 +5300,7 @@ Private Sub FilRelat(Index As Integer)
             End If
      
      
-        Next j
+        Next J
         If Not lTEM Then
             GridSeq(Index).Col = 2
             GridSeq(Index).CellBackColor = vbRed
@@ -5339,7 +5340,7 @@ Private Sub FilRelat(Index As Integer)
                 lRETU = False
             End If
         End If
-    Next i
+    Next I
      
     If Index = 0 And Not lRETU Then
         Alert ("Existes operacao ou itens nao preenchidos")
@@ -5400,7 +5401,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     TXTPF = nPF
     aNUM = Array(0, 0, 0, 0)
     aDIZ = Array("", "", "", "")

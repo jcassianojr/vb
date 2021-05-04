@@ -2,11 +2,12 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000C&
-   Caption         =   "MDIForm1"
+   Caption         =   "Menu Inicial"
    ClientHeight    =   7950
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   12180
+   Icon            =   "Principal.frx":0000
    LinkTopic       =   "MDIForm1"
    StartUpPosition =   3  'Windows Default
    Begin MSComctlLib.ImageList ImageList1 
@@ -59,20 +60,20 @@ Begin VB.MDIForm frmPRINCIPAL
             AutoSize        =   2
             Object.Width           =   1588
             MinWidth        =   1587
-            Picture         =   "Principal.frx":0000
-            TextSave        =   "12:33"
+            Picture         =   "Principal.frx":058A
+            TextSave        =   "11:14"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
             AutoSize        =   2
             Object.Width           =   2302
             MinWidth        =   2293
-            Picture         =   "Principal.frx":059A
-            TextSave        =   "30/03/2021"
+            Picture         =   "Principal.frx":0B24
+            TextSave        =   "04/05/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
-            Picture         =   "Principal.frx":0B34
+            Picture         =   "Principal.frx":10BE
          EndProperty
          BeginProperty Panel7 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
@@ -101,7 +102,7 @@ Dim aRETU As Variant
 Dim cARQ As String
 Dim cARQICO As String
    
-    Center Me
+    CenterFormToScreen Me
     cmdline = Trim(Command())
     
 '    aDIREITOS = Array(True, True, True, True, True, True, True, True)

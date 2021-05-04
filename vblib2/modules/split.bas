@@ -48,7 +48,7 @@ Private Property Let Procedure(ByVal AddressOfDest As Long, ByVal AddressOfSrc A
     End If
 End Property
 
-Public Function Split(Expression, Optional Delimiter As String = " ", Optional ByVal Limit As Long = -1, Optional ByVal Compare As SplitCompareMethod) As String()
+Public Function Split(ByVal Expression, Optional Delimiter As String = " ", Optional ByVal Limit As Long = -1, Optional ByVal Compare As SplitCompareMethod) As String()
     'expression as string deixado so expression pois recebee as vezes matrizes exemplo auso(2)
     ' general variables that we need
     Dim D() As Integer, E() As Integer, H() As Long, HE() As Long, HS() As Long, P() As Long, R() As String, S() As Long

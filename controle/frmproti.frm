@@ -9,6 +9,7 @@ Begin VB.Form frmproti
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   10170
+   Icon            =   "frmproti.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   4515
    ScaleWidth      =   10170
@@ -146,7 +147,7 @@ Begin VB.Form frmproti
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmproti.frx":0000
+      Picture         =   "frmproti.frx":058A
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -166,7 +167,7 @@ Begin VB.Form frmproti
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmproti.frx":059A
+      Picture         =   "frmproti.frx":0B24
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -187,7 +188,7 @@ Begin VB.Form frmproti
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmproti.frx":0B34
+      Picture         =   "frmproti.frx":10BE
       Caption         =   "Novo"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -208,7 +209,7 @@ Begin VB.Form frmproti
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmproti.frx":10CE
+      Picture         =   "frmproti.frx":1658
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -228,7 +229,7 @@ Begin VB.Form frmproti
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmproti.frx":1668
+      Picture         =   "frmproti.frx":1BF2
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -249,7 +250,7 @@ Begin VB.Form frmproti
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   661
-      Picture         =   "frmproti.frx":1C02
+      Picture         =   "frmproti.frx":218C
       Caption         =   "Localizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -433,7 +434,7 @@ End Sub
 
 Private Sub Form_Load()
     'Dim aRETU As Variant
-    Center Me
+    CenterFormToScreen Me
     cARQDES = PegPath("PATH", "DESENHO")
     cSQL = "select * from PROTO WHERE PARTNUMBER='" & cDESENHO & "'"
     nCAMPOS = 10

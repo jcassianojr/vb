@@ -6,6 +6,7 @@ Begin VB.Form FrmClii
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   8430
+   Icon            =   "FrmClii.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   2085
    ScaleWidth      =   8430
@@ -73,7 +74,7 @@ Begin VB.Form FrmClii
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "FrmClii.frx":0000
+      Picture         =   "FrmClii.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -93,7 +94,7 @@ Begin VB.Form FrmClii
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmClii.frx":059A
+      Picture         =   "FrmClii.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -153,7 +154,7 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
     For iLOOP = 0 To nCAMPOS - 2
-        aVAL(iLOOP) = txtFields(iLOOP)
+        aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     aVAL(4) = FixNumBol(inativo.Value)
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
@@ -175,7 +176,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = PegPath("PATH", "DESENHO")
     cSQL = "select * from PRODUTO WHERE CLIENTE=" & nPF & " and ITEM=" & nREVI
     nCAMPOS = 5
@@ -184,7 +185,7 @@ Private Sub Form_Load()
     aPAD = Array(0, 0, "", "", False)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 2
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     inativo.Value = aVAL(4)
 End Sub

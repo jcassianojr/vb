@@ -9,6 +9,7 @@ Begin VB.Form frmFemeaApu
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   9615
+   Icon            =   "frmFemeaApu.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6630
    ScaleWidth      =   9615
@@ -74,7 +75,7 @@ Begin VB.Form frmFemeaApu
       _Version        =   393216
       TabHeight       =   520
       TabCaption(0)   =   "SAC RDP FAIXAS"
-      TabPicture(0)   =   "frmFemeaApu.frx":0000
+      TabPicture(0)   =   "frmFemeaApu.frx":058A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "lbl(15)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -122,7 +123,7 @@ Begin VB.Form frmFemeaApu
       Tab(0).Control(21).Enabled=   0   'False
       Tab(0).ControlCount=   22
       TabCaption(1)   =   "10 Maiores"
-      TabPicture(1)   =   "frmFemeaApu.frx":001C
+      TabPicture(1)   =   "frmFemeaApu.frx":05A6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Cmdeditar"
       Tab(1).Control(0).Enabled=   0   'False
@@ -130,7 +131,7 @@ Begin VB.Form frmFemeaApu
       Tab(1).Control(1).Enabled=   0   'False
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Resumo Operacoes"
-      TabPicture(2)   =   "frmFemeaApu.frx":0038
+      TabPicture(2)   =   "frmFemeaApu.frx":05C2
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Command3"
       Tab(2).Control(0).Enabled=   0   'False
@@ -283,7 +284,7 @@ Begin VB.Form frmFemeaApu
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "frmFemeaApu.frx":0054
+         Picture         =   "frmFemeaApu.frx":05DE
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -304,7 +305,7 @@ Begin VB.Form frmFemeaApu
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "frmFemeaApu.frx":05EE
+         Picture         =   "frmFemeaApu.frx":0B78
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -325,7 +326,7 @@ Begin VB.Form frmFemeaApu
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "frmFemeaApu.frx":0B88
+         Picture         =   "frmFemeaApu.frx":1112
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -346,7 +347,7 @@ Begin VB.Form frmFemeaApu
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "frmFemeaApu.frx":1122
+         Picture         =   "frmFemeaApu.frx":16AC
          Caption         =   "Apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -367,7 +368,7 @@ Begin VB.Form frmFemeaApu
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "frmFemeaApu.frx":16BC
+         Picture         =   "frmFemeaApu.frx":1C46
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -589,7 +590,7 @@ Begin VB.Form frmFemeaApu
       Width           =   1155
       _ExtentX        =   2037
       _ExtentY        =   767
-      Picture         =   "frmFemeaApu.frx":1C56
+      Picture         =   "frmFemeaApu.frx":21E0
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1711,7 +1712,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     ''Configura Help
     Me.Caption = cFORMID
     ''HelpContextID = nFORMID

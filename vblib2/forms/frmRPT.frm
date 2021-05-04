@@ -9,6 +9,7 @@ Begin VB.Form FrmRpt
    ClientTop       =   330
    ClientWidth     =   11325
    HelpContextID   =   7
+   Icon            =   "frmRPT.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -110,7 +111,7 @@ Begin VB.Form FrmRpt
       EndProperty
       TabOrientation  =   1
       TabHeight       =   732
-      TabPic16(0)     =   "frmRPT.frx":0000
+      TabPic16(0)     =   "frmRPT.frx":058A
       TabCaption(0)   =   "Configuracao"
       Tab(0).ControlCount=   19
       Tab(0).Control(0)=   "Command2"
@@ -132,7 +133,7 @@ Begin VB.Form FrmRpt
       Tab(0).Control(16)=   "lblLabels(18)"
       Tab(0).Control(17)=   "lblLabels(3)"
       Tab(0).Control(18)=   "lblLabels(5)"
-      TabPic16(1)     =   "frmRPT.frx":0352
+      TabPic16(1)     =   "frmRPT.frx":08DC
       TabCaption(1)   =   "Arquivos"
       Tab(1).ControlCount=   21
       Tab(1).Control(0)=   "text(14)"
@@ -156,7 +157,7 @@ Begin VB.Form FrmRpt
       Tab(1).Control(18)=   "lblLabels(13)"
       Tab(1).Control(19)=   "lblLabels(19)"
       Tab(1).Control(20)=   "lblLabels(11)"
-      TabPic16(2)     =   "frmRPT.frx":06A4
+      TabPic16(2)     =   "frmRPT.frx":0C2E
       TabCaption(2)   =   "Filtro Sql"
       Tab(2).ControlCount=   4
       Tab(2).Control(0)=   "text(23)"
@@ -400,7 +401,7 @@ Begin VB.Form FrmRpt
          Width           =   735
          _ExtentX        =   1296
          _ExtentY        =   556
-         Picture         =   "frmRPT.frx":09F6
+         Picture         =   "frmRPT.frx":0F80
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -422,7 +423,7 @@ Begin VB.Form FrmRpt
          Width           =   735
          _ExtentX        =   1296
          _ExtentY        =   556
-         Picture         =   "frmRPT.frx":0F90
+         Picture         =   "frmRPT.frx":151A
          Caption         =   "E.."
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -444,7 +445,7 @@ Begin VB.Form FrmRpt
          Width           =   735
          _ExtentX        =   1296
          _ExtentY        =   556
-         Picture         =   "frmRPT.frx":152A
+         Picture         =   "frmRPT.frx":1AB4
          Caption         =   "E.."
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -466,7 +467,7 @@ Begin VB.Form FrmRpt
          Width           =   495
          _ExtentX        =   873
          _ExtentY        =   556
-         Picture         =   "frmRPT.frx":1AC4
+         Picture         =   "frmRPT.frx":204E
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -488,7 +489,7 @@ Begin VB.Form FrmRpt
          Width           =   495
          _ExtentX        =   873
          _ExtentY        =   556
-         Picture         =   "frmRPT.frx":205E
+         Picture         =   "frmRPT.frx":25E8
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -510,7 +511,7 @@ Begin VB.Form FrmRpt
          Width           =   495
          _ExtentX        =   873
          _ExtentY        =   556
-         Picture         =   "frmRPT.frx":25F8
+         Picture         =   "frmRPT.frx":2B82
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -532,7 +533,7 @@ Begin VB.Form FrmRpt
          Width           =   495
          _ExtentX        =   873
          _ExtentY        =   556
-         Picture         =   "frmRPT.frx":2B92
+         Picture         =   "frmRPT.frx":311C
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -820,7 +821,7 @@ Begin VB.Form FrmRpt
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmRPT.frx":312C
+      Picture         =   "frmRPT.frx":36B6
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -840,7 +841,7 @@ Begin VB.Form FrmRpt
       Width           =   1095
       _ExtentX        =   1931
       _ExtentY        =   661
-      Picture         =   "frmRPT.frx":36C6
+      Picture         =   "frmRPT.frx":3C50
       Caption         =   "Liberar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1020,14 +1021,14 @@ Private Sub CmdAbrirCom_Click(Index As Integer)
     'Dim cEXTENSAO As String
     'Dim nPOS As Long
 
-    eLOCALIZA = text(5)
+    eLOCALIZA = tEXT(5)
     ePASS01 = ""
     If Index = 0 Then
-        ePASS01 = NomeEXT(FixStr(text(4).text))
+        ePASS01 = NomeEXT(FixStr(tEXT(4).tEXT))
     End If
     EscRptExec.Show vbModal, Me
     If lRETU Then
-        text(5).text = eRETU02
+        tEXT(5).tEXT = eRETU02
     End If
     
 End Sub
@@ -1039,9 +1040,9 @@ End Sub
 Private Sub CmdEDIT_Click(Index As Integer)
     Dim cEXTENSAO As String
     Dim nPOS As Long
-    eLOCALIZA = text(5)
+    eLOCALIZA = tEXT(5)
     If Index = 0 Then
-        cARQRTF = text(4)
+        cARQRTF = tEXT(4)
         nPOS = InStrRev(cARQRTF, ".")
         If nPOS > 0 Then
             cEXTENSAO = Mid(cARQRTF, nPOS + 1)
@@ -1065,22 +1066,22 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub Command2_Click()
-    text(5).text = ""
+    tEXT(5).tEXT = ""
 End Sub
 
 Private Sub escarq_Click(Index As Integer)
     Index = Index + 18
-    ePASS01 = text(Index)
+    ePASS01 = tEXT(Index)
     FrmPegdb.Show vbModal, Me
     If lRETU Then
-        text(Index) = eRETU01
+        tEXT(Index) = eRETU01
     End If
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     If MDG("Gravar e Sair", "Gravando ") Then
         For nITEM = 0 To 23
-            aVAL(nITEM) = text(nITEM)
+            aVAL(nITEM) = tEXT(nITEM)
         Next nITEM
         For nITEM = 24 To 26
             aVAL(nITEM) = FixNumBol(chkFields(nITEM).Value)
@@ -1137,7 +1138,7 @@ Private Sub escolherrpt_Click()
             sPath = Caminex(zRPTCAM)
         End If
     End If
-    text(4).text = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
+    tEXT(4).tEXT = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
 
 End Sub
 
@@ -1147,7 +1148,7 @@ End Sub
 
 Private Sub Form_Load()
    
-    Center Me
+    CenterFormToScreen Me
     ''Configura Help
     Me.Caption = cFORMID
     HelpContextID = nFORMID
@@ -1181,7 +1182,7 @@ Private Sub Form_Load()
                  "", "", "", "", False, False, False)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For nITEM = 0 To 23
-        text(nITEM) = aVAL(nITEM)
+        tEXT(nITEM) = aVAL(nITEM)
     Next nITEM
     For nITEM = 24 To 26
         chkFields(nITEM) = aVAL(nITEM)

@@ -52,7 +52,7 @@ Begin VB.Form frmIniEditor
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "frmIniEditor.frx":058A
-            TextSave        =   "17:02"
+            TextSave        =   "11:11"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -60,7 +60,7 @@ Begin VB.Form frmIniEditor
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "frmIniEditor.frx":0B24
-            TextSave        =   "31/03/2021"
+            TextSave        =   "04/05/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -545,11 +545,11 @@ Private Sub ChangeKey(Node As MSComctlLib.Node)
     Const sTitle = "Alterando Chave"
     Dim A$
     Dim nodx As Node
-    Dim arr() As String
+    Dim Arr() As String
 
-    arr = Split(Node.tEXT, "=")
+    Arr = Split(Node.tEXT, "=")
     
-    A$ = InputBox("Digite o Nome da Chave:", sTitle, arr(0))
+    A$ = InputBox("Digite o Nome da Chave:", sTitle, Arr(0))
     If Len(A$) = 0 Then
         Exit Sub
     End If
@@ -565,13 +565,13 @@ Private Sub ChangeKey(Node As MSComctlLib.Node)
         Set nodx = nodx.Next
     Loop
         
-    arr(0) = A$
+    Arr(0) = A$
     
-    If UBound(arr) = 0 Then
-        arr(0) = arr(0) & "="
+    If UBound(Arr) = 0 Then
+        Arr(0) = Arr(0) & "="
     End If
     
-    Node.tEXT = Join(arr, "=")
+    Node.tEXT = Join(Arr, "=")
     Node.Selected = True
     Node.EnsureVisible
     
@@ -868,7 +868,7 @@ Private Sub Encerrar_Click()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     ''Configura Help
     Me.Caption = cFORMID
     HelpContextID = nFORMID
@@ -954,14 +954,14 @@ End Sub
 
 Private Function GetFilePath(sFILENAME As String) As String
 
-    Dim arr() As String
+    Dim Arr() As String
     ''Dim i As Long
 
 
-    arr = Split(sFILENAME, "\")
+    Arr = Split(sFILENAME, "\")
     
-    ReDim Preserve arr(UBound(arr) - 1)
-    GetFilePath = Join(arr, "\")
+    ReDim Preserve Arr(UBound(Arr) - 1)
+    GetFilePath = Join(Arr, "\")
     
 End Function
 
@@ -970,17 +970,17 @@ Private Sub KeyValue(Node As MSComctlLib.Node, Optional ByVal A As String = "")
     Const sTitle = "Valor da Chave"
 
     ''Dim nodx As Node
-    Dim arr() As String
+    Dim Arr() As String
     Dim sTxt As String
 
 
-    arr = Split(Node.tEXT, "=")
-    If UBound(arr) > 0 Then
-        sTxt = arr(1)
+    Arr = Split(Node.tEXT, "=")
+    If UBound(Arr) > 0 Then
+        sTxt = Arr(1)
     End If
     ''Se nao Passou pega
     If Len(A) = 0 Then
-        A = InputBox("Digite Valor para Chave " & arr(0) & ":" & vbCr & "Tecle 'DEL' para apagar este Valor.", sTitle, sTxt)
+        A = InputBox("Digite Valor para Chave " & Arr(0) & ":" & vbCr & "Tecle 'DEL' para apagar este Valor.", sTitle, sTxt)
     End If
     ''Se vzio nao continua
     If Len(A) = 0 Then
@@ -988,12 +988,12 @@ Private Sub KeyValue(Node As MSComctlLib.Node, Optional ByVal A As String = "")
     End If
     
     If A = "DEL" Then
-        arr(1) = ""
+        Arr(1) = ""
     Else
-        arr(1) = A
+        Arr(1) = A
     End If
     
-    Node.tEXT = Join(arr, "=")
+    Node.tEXT = Join(Arr, "=")
     Node.Selected = True
     Node.EnsureVisible
     
@@ -1005,8 +1005,8 @@ Private Sub SaveIni()
 
     Const sTitle = "Save Ini File"
     Dim nodx As Node
-    Dim arr As Variant
-    Dim i As Long
+    Dim Arr As Variant
+    Dim I As Long
     Dim sSection As String
     Dim sKey As String
     Dim sValue As String
@@ -1015,10 +1015,10 @@ Private Sub SaveIni()
         Exit Sub
     End If
     
-    arr = oIni.GetAllSections()
-    If Not IsEmpty(arr) Then
-        For i = 0 To UBound(arr)
-            sSection = arr(i)
+    Arr = oIni.GetAllSections()
+    If Not IsEmpty(Arr) Then
+        For I = 0 To UBound(Arr)
+            sSection = Arr(I)
             
             oIni.DeleteSetting sSection
         Next
@@ -1030,10 +1030,10 @@ Private Sub SaveIni()
             oIni.SaveSetting nodx.tEXT, "~TEMPORARY", "~TEMPORARY"
             oIni.DeleteSetting nodx.tEXT, "~TEMPORARY" 'Leave empty section
         Else
-            arr = Split(nodx.tEXT, "=")
-            sKey = arr(0)
-            If UBound(arr) > 0 Then
-                sValue = arr(1)
+            Arr = Split(nodx.tEXT, "=")
+            sKey = Arr(0)
+            If UBound(Arr) > 0 Then
+                sValue = Arr(1)
             Else
                 sValue = ""
             End If
@@ -1050,8 +1050,8 @@ Private Sub ShowIniData()
 
     Dim arrSections As Variant
     Dim arrKeys As Variant
-    Dim i As Long
-    Dim j As Long
+    Dim I As Long
+    Dim J As Long
     Dim sSection As String
     Dim sKey As String
     Dim sValue As String
@@ -1068,15 +1068,15 @@ Private Sub ShowIniData()
     
     arrSections = oIni.GetAllSections()
     If Not IsEmpty(arrSections) Then
-        For i = 0 To UBound(arrSections)
-            sSection = arrSections(i)
+        For I = 0 To UBound(arrSections)
+            sSection = arrSections(I)
             Set nodx = TreeView1.Nodes.Add(, , , sSection)
             
             arrKeys = oIni.GetAllSettings(sSection)
             If Not IsEmpty(arrKeys) Then
-                For j = 0 To UBound(arrKeys)
-                    sKey = arrKeys(j, 0)
-                    sValue = arrKeys(j, 1)
+                For J = 0 To UBound(arrKeys)
+                    sKey = arrKeys(J, 0)
+                    sValue = arrKeys(J, 1)
                     
                     TreeView1.Nodes.Add nodx.Index, tvwChild, , sKey & "=" & sValue
                 Next

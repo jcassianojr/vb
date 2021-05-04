@@ -7,6 +7,7 @@ Begin VB.Form frmFER
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   9900
+   Icon            =   "frmFER.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5790
    ScaleWidth      =   9900
@@ -35,11 +36,11 @@ Begin VB.Form frmFER
       TabsPerRow      =   5
       TabHeight       =   794
       TabCaption(0)   =   "Basica"
-      TabPicture(0)   =   "frmFER.frx":0000
+      TabPicture(0)   =   "frmFER.frx":058A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).ControlCount=   0
       TabCaption(1)   =   "Preventiva Vida Util"
-      TabPicture(1)   =   "frmFER.frx":001C
+      TabPicture(1)   =   "frmFER.frx":05A6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "TXTFIELDS(3)"
       Tab(1).Control(1)=   "TXTFIELDS(2)"
@@ -51,15 +52,15 @@ Begin VB.Form frmFER
       Tab(1).Control(7)=   "Label(2)"
       Tab(1).ControlCount=   8
       TabCaption(2)   =   "Dimensoes Elaborador"
-      TabPicture(2)   =   "frmFER.frx":0038
+      TabPicture(2)   =   "frmFER.frx":05C2
       Tab(2).ControlEnabled=   0   'False
       Tab(2).ControlCount=   0
       TabCaption(3)   =   "Tecnicas I"
-      TabPicture(3)   =   "frmFER.frx":0054
+      TabPicture(3)   =   "frmFER.frx":05DE
       Tab(3).ControlEnabled=   0   'False
       Tab(3).ControlCount=   0
       TabCaption(4)   =   "Tecnicas II"
-      TabPicture(4)   =   "frmFER.frx":0070
+      TabPicture(4)   =   "frmFER.frx":05FA
       Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "TXTFIELDS(10)"
       Tab(4).Control(1)=   "TXTFIELDS(9)"
@@ -1682,7 +1683,7 @@ Begin VB.Form frmFER
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmFER.frx":008C
+      Picture         =   "frmFER.frx":0616
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1702,7 +1703,7 @@ Begin VB.Form frmFER
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmFER.frx":0626
+      Picture         =   "frmFER.frx":0BB0
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1722,7 +1723,7 @@ Begin VB.Form frmFER
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   873
-      Picture         =   "frmFER.frx":0BC0
+      Picture         =   "frmFER.frx":114A
       Caption         =   "Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1743,7 +1744,7 @@ Begin VB.Form frmFER
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmFER.frx":115A
+      Picture         =   "frmFER.frx":16E4
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1765,7 +1766,7 @@ Begin VB.Form frmFER
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmFER.frx":16F4
+      Picture         =   "frmFER.frx":1C7E
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1787,7 +1788,7 @@ Begin VB.Form frmFER
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmFER.frx":1C8E
+      Picture         =   "frmFER.frx":2218
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1809,7 +1810,7 @@ Begin VB.Form frmFER
       Width           =   855
       _ExtentX        =   1508
       _ExtentY        =   661
-      Picture         =   "frmFER.frx":2228
+      Picture         =   "frmFER.frx":27B2
       Caption         =   "LX2"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1891,7 +1892,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     End If
@@ -1900,11 +1901,11 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub cmdFOTO_Click()
-    zgrp = TxtCodigo.text
+    zgrp = TxtCodigo.tEXT
     iImage = 3
     cARQRTF = PegPath("PATH", "IMGFER")
     Load frmIMAGENS
-    frmIMAGENS.txtFields(0).Enabled = False
+    frmIMAGENS.TXTFIELDS(0).Enabled = False
     frmIMAGENS.Escolher(0).Visible = False
     frmIMAGENS.Show vbModal, Me
 End Sub
@@ -1915,13 +1916,13 @@ Private Sub Command20_Click()
     If Not MDG("Trocar Tipo Almofada") Then
         Exit Sub
     End If
-    If txtFields(6).text = "6" Then
-        txtFields(6).text = "8"
+    If TXTFIELDS(6).tEXT = "6" Then
+        TXTFIELDS(6).tEXT = "8"
     Else
-        txtFields(6).text = "6"
+        TXTFIELDS(6).tEXT = "6"
     End If
     For X = 1 To 8
-        If txtFields(6).text = "6" Then
+        If TXTFIELDS(6).tEXT = "6" Then
             cTEMP = String(6, "¡") + Space(2)
             If X >= 5 Then
                 cTEMP = Space(8)
@@ -1929,7 +1930,7 @@ Private Sub Command20_Click()
         Else
             cTEMP = String(8, "¡")
         End If
-        txtFields(10 + X).text = cTEMP
+        TXTFIELDS(10 + X).tEXT = cTEMP
     Next
 End Sub
 
@@ -1938,12 +1939,12 @@ Private Sub Command4_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim nNUMERO          As Long
-    nNUMERO = FixInt(txtFields(7), 0)
+    nNUMERO = FixInt(TXTFIELDS(7), 0)
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        txtFields(8) = aRETU(0)
+        TXTFIELDS(8) = aRETU(0)
     End If
 End Sub
 
@@ -1965,15 +1966,15 @@ Private Sub esc1_Click(Index As Integer)
     coluna = (Index + 8) - (linha * 8)
     'Alert coluna
     'ALERT LINHA
-    If txtFields(6).text = "6" And linha > 4 Then
+    If TXTFIELDS(6).tEXT = "6" And linha > 4 Then
         Alert ("Linha Incorreta para Formato 4x6")
         Exit Sub
     End If
-    If txtFields(6).text = "6" And coluna > 6 Then
+    If TXTFIELDS(6).tEXT = "6" And coluna > 6 Then
         Alert ("Coluna Incorreta para Formato 4x6")
         Exit Sub
     End If
-    cTEMP = txtFields(10 + linha).text
+    cTEMP = TXTFIELDS(10 + linha).tEXT
     cDIG = Mid(cTEMP, coluna, 1)
     If cDIG = "l" Then
         cDIG = "¡"
@@ -1988,8 +1989,8 @@ Private Sub esc1_Click(Index As Integer)
     Case Else
         cGRV = Mid(cTEMP, 1, coluna - 1) + cDIG + Mid(cTEMP, coluna + 1)
     End Select
-    txtFields(10 + linha).text = cGRV
-    txtFields(10 + linha).Refresh
+    TXTFIELDS(10 + linha).tEXT = cGRV
+    TXTFIELDS(10 + linha).Refresh
 End Sub
 
 Private Sub ESCCLI_Click(Index As Integer)
@@ -2012,8 +2013,8 @@ Private Sub ESCCLI_Click(Index As Integer)
 
     If lRETU Then
 
-        txtFields(7) = eRETU01
-        txtFields(6) = eRETU03
+        TXTFIELDS(7) = eRETU01
+        TXTFIELDS(6) = eRETU03
 
     End If
 
@@ -2024,12 +2025,12 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = GeraConn(PegPath("PATH", "MANA5FER"), "SDECDX")
     cSQL = "select * from FERRAM WHERE FERRAM='" & LTrim(RTrim(ePASS01)) & "'"
-    TxtCodigo.text = ePASS01
-    TxtNumero.text = ePASS02
-    TxtNome.text = ePASS03
+    TxtCodigo.tEXT = ePASS01
+    TxtNumero.tEXT = ePASS02
+    TxtNome.tEXT = ePASS03
     nCAMPOS = 18
     aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "COGCLI", "CLIENTE", "ESQTIP", "USADEMI", "USADISP", "PRATILE", "OBST01", _
                  "ESQL01", "ESQL02", "ESQL03", "ESQL04", "ESQL05", "ESQL06", "ESQL07", "ESQL08")
@@ -2039,7 +2040,7 @@ Private Sub Form_Load()
                  "", "", "", "", "", "", "", "")
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
 End Sub
 

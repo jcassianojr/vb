@@ -8,6 +8,7 @@ Begin VB.Form escfemea
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   11535
+   Icon            =   "Escfemea.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5775
    ScaleWidth      =   11535
@@ -294,7 +295,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("PF", "STPFFE", "FEMUDPAD", "CODIGO", "DESCR", "RESDAT", "FEMEAD", "CODIGOINT")
     aORDES = Array("Nº PF", "Alterado PF", "Alterado Femea Padrao", "Codigo", "Descricao", "Data Liberacao Processo", "Data Liberacao Femea", "Codigo INT")
     cORDEM = "PF"

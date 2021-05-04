@@ -8,6 +8,7 @@ Begin VB.Form escPRO
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   8880
+   Icon            =   "escpro.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5655
    ScaleWidth      =   8880
@@ -118,7 +119,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("TIPO,NUMERO", "PRODUTO,TIPO,NUMERO")
     aORDES = Array("Nº", "Produto")
     cORDEM = "PRODUTO,TIPO,NUMERO"

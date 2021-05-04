@@ -8,6 +8,7 @@ Begin VB.Form escRPT
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   10785
+   Icon            =   "escrpt.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6675
    ScaleWidth      =   10785
@@ -108,7 +109,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("RPT,COGNOME", "COGNOME,RPT", "NOME", "SUBGRP,RPT,COGNOME", "SUBGRP,COGNOME,RPT")
     aORDES = Array("Codigo", "Cod.Int.", "Descricao", "Sub-Codigo", "Sub-Cod.Int.")
     cORDEM = "RPT,COGNOME"

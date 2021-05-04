@@ -8,6 +8,7 @@ Begin VB.Form frmPFLIB
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   7080
+   Icon            =   "frmPFLIB.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -82,7 +83,7 @@ Begin VB.Form frmPFLIB
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPFLIB.frx":0000
+      Picture         =   "frmPFLIB.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -102,7 +103,7 @@ Begin VB.Form frmPFLIB
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPFLIB.frx":059A
+      Picture         =   "frmPFLIB.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -156,7 +157,7 @@ Private Sub cmdClose_Click()
     Dim aVAL
     Dim aCAM
     aFOR = Array("NI", "C", "D")
-    aVAL = Array(txtFields(0), txtFields(1), DTPicker1)
+    aVAL = Array(TXTFIELDS(0), TXTFIELDS(1), DTPicker1)
     cSQL = "select PF,CODIGO,FEMEAF,FEMEAR,FEMEAD,PCLIBNUM,PCLIBNOM,PCLIBDATE,RESNUM,RESNOM,RESDAT,ELANUM,FEMEAEF,PCELANUM,PRDNUM,PRDNOM,PRDDAT,SEGNUM,SEGNOM,SEGDAT from PF WHERE PF=" & nPF
     If cTIPO = "PF" Then
         cSQL = "select PF,RESNUM,RESNOM,RESDAT from PF WHERE PF=" & nPF
@@ -206,7 +207,7 @@ Private Sub Encerrar_Click()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cTIPO = ePASS01
     CABECARIO.Caption = ""
     If InStr(Sdb, "PFP.MDB") Then
@@ -217,10 +218,10 @@ Private Sub Form_Load()
         ''Cabeçario
         CABECARIO.Caption = "GP12"
     End If
-    frmPFLIB.txtFields(0) = zIDFOLHA
-    frmPFLIB.txtFields(1) = zNOMEFOLHA
+    frmPFLIB.TXTFIELDS(0) = zIDFOLHA
+    frmPFLIB.TXTFIELDS(1) = zNOMEFOLHA
     DTPicker1.Value = Date
-    TXTPF.Text = nPF
+    TXTPF.tEXT = nPF
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)

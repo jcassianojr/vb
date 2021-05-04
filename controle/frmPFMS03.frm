@@ -7,6 +7,7 @@ Begin VB.Form frmPFMS03
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   8520
+   Icon            =   "frmPFMS03.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -155,7 +156,7 @@ Begin VB.Form frmPFMS03
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPFMS03.frx":0000
+      Picture         =   "frmPFMS03.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -176,7 +177,7 @@ Begin VB.Form frmPFMS03
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPFMS03.frx":059A
+      Picture         =   "frmPFMS03.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -197,7 +198,7 @@ Begin VB.Form frmPFMS03
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmPFMS03.frx":0B34
+      Picture         =   "frmPFMS03.frx":10BE
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -218,7 +219,7 @@ Begin VB.Form frmPFMS03
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmPFMS03.frx":10CE
+      Picture         =   "frmPFMS03.frx":1658
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -239,7 +240,7 @@ Begin VB.Form frmPFMS03
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   661
-      Picture         =   "frmPFMS03.frx":1668
+      Picture         =   "frmPFMS03.frx":1BF2
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -260,7 +261,7 @@ Begin VB.Form frmPFMS03
       Width           =   855
       _ExtentX        =   1508
       _ExtentY        =   661
-      Picture         =   "frmPFMS03.frx":1C02
+      Picture         =   "frmPFMS03.frx":218C
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -433,7 +434,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     End If
@@ -442,8 +443,8 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-    ePASS01 = txtFields(2).tEXT
-    Select Case txtFields(1).tEXT
+    ePASS01 = TXTFIELDS(2).tEXT
+    Select Case TXTFIELDS(1).tEXT
     Case "T"
         FrmMP03.Show vbModal, Me
     Case Else
@@ -454,9 +455,9 @@ End Sub
 Private Sub CmdPrd_Click(Index As Integer)
     Select Case Index
     Case 0
-        txtFields(11) = "Int"
+        TXTFIELDS(11) = "Int"
     Case 1
-        txtFields(11) = "Ext"
+        TXTFIELDS(11) = "Ext"
     End Select
 End Sub
 
@@ -468,13 +469,13 @@ Private Sub Command1_Click()
     Dim aRETU As Variant
 
 
-    cCODIGO = FixStr(txtFields(2), "", "TRIM")
+    cCODIGO = FixStr(TXTFIELDS(2), "", "TRIM")
     
     
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
 
     
-    Select Case txtFields(1)
+    Select Case TXTFIELDS(1)
     Case "C"
         sSQL = "SELECT NOME,NOM2 FROM MT01 WHERE CODIGO='" & cCODIGO & "'"
         aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
@@ -508,7 +509,7 @@ Private Sub Command1_Click()
             End If
         End If
     End Select
-    txtFields(3) = FixStr(cNOME)
+    TXTFIELDS(3) = FixStr(cNOME)
 End Sub
 
 Private Sub Encerrar_Click()
@@ -522,7 +523,7 @@ End Sub
 Private Sub escmu_Click()
 
     iMU01 = 0
-    Select Case txtFields(1)
+    Select Case TXTFIELDS(1)
     Case "M"
         iMU01 = 1
     Case "C"
@@ -535,7 +536,7 @@ Private Sub escmu_Click()
     If iMU01 > 0 Then
         escmu01.Show vbModal, Me
         If Not lRETU Then Exit Sub
-        frmPFMS03.txtFields(2) = eRETU01
+        frmPFMS03.TXTFIELDS(2) = eRETU01
         Command1_Click
     End If
    
@@ -548,8 +549,8 @@ Private Sub ESCpro_Click()
     ePASS01 = "LOGIC"                            ''
     escms01.Show vbModal, Me
     If lRETU Then
-        txtFields(2) = eRETU01
-        txtFields(3) = eRETU02
+        TXTFIELDS(2) = eRETU01
+        TXTFIELDS(3) = eRETU02
     End If
     cCHAVEBUS = ""
 End Sub
@@ -559,7 +560,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQPF = PegPath("PATH", "PF")
     cSQL = "select * from PFMS03 WHERE PF=" & nPF & " AND TIPOENT='" & Ctipoent & "' AND CODCOMP='" & Ccodcomp & "' and seq=" & FixInt(nSEQ) & " and ssq=" & FixInt(nSSQ)
     nCAMPOS = 12
@@ -575,7 +576,7 @@ Private Sub Form_Load()
                  
     aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
 
 
@@ -584,7 +585,7 @@ End Sub
 Private Sub TXTFIELDS_Change(Index As Integer)
     Select Case Index
     Case 4, 5
-        txtFields(6) = FixNum(txtFields(4)) * FixNum(txtFields(5))
+        TXTFIELDS(6) = FixNum(TXTFIELDS(4)) * FixNum(TXTFIELDS(5))
     End Select
 End Sub
 

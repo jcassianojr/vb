@@ -385,7 +385,7 @@ End Sub
 Private Sub Form_Load()
   
     '  CentralizaJanela Me
-    Center Me
+    CenterFormToScreen Me
 '    txtCreator.tEXT = AppName
     cmbFont.ListIndex = 1                        ' 10 pt
     cmbFontSize.ListIndex = 0

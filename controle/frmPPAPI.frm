@@ -7,6 +7,7 @@ Begin VB.Form frmPPAPI
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   9105
+   Icon            =   "frmPPAPI.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3390
    ScaleWidth      =   9105
@@ -140,7 +141,7 @@ Begin VB.Form frmPPAPI
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPPAPI.frx":0000
+      Picture         =   "frmPPAPI.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -160,7 +161,7 @@ Begin VB.Form frmPPAPI
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPPAPI.frx":059A
+      Picture         =   "frmPPAPI.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -328,7 +329,7 @@ End Sub
 
 Private Sub Form_Load()
 
-    Center Me
+    CenterFormToScreen Me
     cARQPF = PegPath("PATH", "PPAP")
     
     

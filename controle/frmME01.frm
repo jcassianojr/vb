@@ -8,6 +8,7 @@ Begin VB.Form frmME01
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   11280
+   Icon            =   "frmME01.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6915
    ScaleWidth      =   11280
@@ -25,7 +26,7 @@ Begin VB.Form frmME01
       Tabs            =   2
       TabHeight       =   520
       TabCaption(0)   =   "Preventiva"
-      TabPicture(0)   =   "frmME01.frx":0000
+      TabPicture(0)   =   "frmME01.frx":058A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label(5)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -81,7 +82,7 @@ Begin VB.Form frmME01
       Tab(0).Control(25).Enabled=   0   'False
       Tab(0).ControlCount=   26
       TabCaption(1)   =   "Femea"
-      TabPicture(1)   =   "frmME01.frx":001C
+      TabPicture(1)   =   "frmME01.frx":05A6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "CmdOrdFem(1)"
       Tab(1).Control(1)=   "Command2(15)"
@@ -162,7 +163,7 @@ Begin VB.Form frmME01
          Height          =   315
          Index           =   1
          Left            =   3120
-         Picture         =   "frmME01.frx":0038
+         Picture         =   "frmME01.frx":05C2
          Style           =   1  'Graphical
          TabIndex        =   32
          TabStop         =   0   'False
@@ -173,7 +174,7 @@ Begin VB.Form frmME01
          Height          =   315
          Index           =   0
          Left            =   1800
-         Picture         =   "frmME01.frx":05C2
+         Picture         =   "frmME01.frx":0B4C
          Style           =   1  'Graphical
          TabIndex        =   31
          TabStop         =   0   'False
@@ -525,7 +526,7 @@ Begin VB.Form frmME01
       Width           =   1155
       _ExtentX        =   2037
       _ExtentY        =   767
-      Picture         =   "frmME01.frx":0B4C
+      Picture         =   "frmME01.frx":10D6
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -545,7 +546,7 @@ Begin VB.Form frmME01
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   767
-      Picture         =   "frmME01.frx":10E6
+      Picture         =   "frmME01.frx":1670
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -565,7 +566,7 @@ Begin VB.Form frmME01
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   767
-      Picture         =   "frmME01.frx":1680
+      Picture         =   "frmME01.frx":1C0A
       Caption         =   "Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -676,7 +677,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
-            aVAL(iLOOP) = txtFields(iLOOP)       ''vb matriz zero
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     End If
@@ -702,14 +703,14 @@ End Sub
 
 Private Sub cmdFOTO_Click()
     Dim cSQL As String
-    zgrp = TxtCodigo.Text
+    zgrp = TxtCodigo.tEXT
     iImage = 4
     cARQRTF = PegPath("PATH", "IMGME01")
     cSQL = "select * from IMAGENS WHERE CODIGO='" & zgrp & "'"
     IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(zgrp), True, False
     
     Load frmIMAGENS
-    frmIMAGENS.txtFields(0).Enabled = False
+    frmIMAGENS.TXTFIELDS(0).Enabled = False
     frmIMAGENS.Escolher(0).Visible = False
     frmIMAGENS.Show vbModal, Me
 
@@ -847,10 +848,10 @@ Private Sub CmdREvi_Click()
     ePASS02 = cARQFEMEA
     
     Load frmFEMEI
-    frmFEMEI.txtFields(2).Enabled = False
-    frmFEMEI.txtFields(3).Enabled = False
-    frmFEMEI.txtFields(4).Enabled = False
-    frmFEMEI.txtFields(5).Enabled = False
+    frmFEMEI.TXTFIELDS(2).Enabled = False
+    frmFEMEI.TXTFIELDS(3).Enabled = False
+    frmFEMEI.TXTFIELDS(4).Enabled = False
+    frmFEMEI.TXTFIELDS(5).Enabled = False
     frmFEMEI.cmdClose.Enabled = False
     frmFEMEI.CmdAltman.Enabled = False
     frmFEMEI.Show vbModal, Me
@@ -901,11 +902,11 @@ Private Sub EscTipIns_Click(Index As Integer)
     If lRETU Then
         Select Case Index
         Case 0
-            txtFields(4).Text = eRETU01
-            txtFields(6).Text = eRETU03
+            TXTFIELDS(4).tEXT = eRETU01
+            TXTFIELDS(6).tEXT = eRETU03
             '                txt(5).Text = eRETU02
         Case 1
-            txtFields(5).Text = eRETU01
+            TXTFIELDS(5).tEXT = eRETU01
         End Select
     End If
 End Sub
@@ -924,26 +925,26 @@ End Sub
 
 Private Sub Form_Load()
     Dim nTMPNUMERO
-    Center Me
+    CenterFormToScreen Me
     cARQ = GeraConn(zMANA5EMP, "SDECDX")
     cSQL = "select * from ME01 WHERE NUMERO='" & Trim(ePASS01) & "'"
     cARQFEMEA = PegPath("PATH", "FEMEA")
     
     
-    TxtCodigo.Text = ePASS01
-    TxtNome.Text = ePASS02
+    TxtCodigo.tEXT = ePASS01
+    TxtNome.tEXT = ePASS02
     nCAMPOS = 12
     aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "GRUPO", "TIPO", "FEMEA", "CONTABIL", "FABRICANTE", "MODELO", "NUMFAB", "ANO")
     aFOR = Array("N", "N", "N", "N", "C", "C", "N", "C", "C", "C", "C", "N")
     aPAD = Array(0, 0, 0, 0, "", "", 0, "", "", "", "", 0)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     
     cORDFEMUSO = "ITEM"
     
-    nFEMMAQ = Val(txtFields(6))
+    nFEMMAQ = Val(TXTFIELDS(6))
     
     
     FilRelat
@@ -980,7 +981,7 @@ End Sub
 
 Private Sub TXTFIELDS_LostFocus(Index As Integer)
     If Index = 6 Then
-        nFEMMAQ = Val(txtFields(6))
+        nFEMMAQ = Val(TXTFIELDS(6))
     End If
 End Sub
 

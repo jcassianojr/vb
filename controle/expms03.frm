@@ -6,6 +6,7 @@ Begin VB.Form ExpMS03
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   6735
+   Icon            =   "expms03.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   4200
    ScaleWidth      =   6735
@@ -38,7 +39,7 @@ Begin VB.Form ExpMS03
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "expms03.frx":0000
+      Picture         =   "expms03.frx":058A
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -58,7 +59,7 @@ Begin VB.Form ExpMS03
       Width           =   2115
       _ExtentX        =   3731
       _ExtentY        =   661
-      Picture         =   "expms03.frx":059A
+      Picture         =   "expms03.frx":0B24
       Caption         =   "Transferir Composição"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -78,7 +79,7 @@ Begin VB.Form ExpMS03
       Width           =   1455
       _ExtentX        =   2566
       _ExtentY        =   767
-      Picture         =   "expms03.frx":0B34
+      Picture         =   "expms03.frx":10BE
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -99,7 +100,7 @@ Begin VB.Form ExpMS03
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "expms03.frx":10CE
+      Picture         =   "expms03.frx":1658
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -120,7 +121,7 @@ Begin VB.Form ExpMS03
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "expms03.frx":1668
+      Picture         =   "expms03.frx":1BF2
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -180,7 +181,7 @@ Begin VB.Form ExpMS03
       Width           =   2115
       _ExtentX        =   3731
       _ExtentY        =   661
-      Picture         =   "expms03.frx":1C02
+      Picture         =   "expms03.frx":218C
       Caption         =   "Transferir Sequencia"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -200,7 +201,7 @@ Begin VB.Form ExpMS03
       Width           =   3195
       _ExtentX        =   5636
       _ExtentY        =   661
-      Picture         =   "expms03.frx":219C
+      Picture         =   "expms03.frx":2726
       Caption         =   "Sincronizar Cod.Interno PFS-->MS06"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -220,7 +221,7 @@ Begin VB.Form ExpMS03
       Width           =   3195
       _ExtentX        =   5636
       _ExtentY        =   661
-      Picture         =   "expms03.frx":2736
+      Picture         =   "expms03.frx":2CC0
       Caption         =   "Sincronizar Cod.Interno PF-->MS01"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -240,7 +241,7 @@ Begin VB.Form ExpMS03
       Width           =   3195
       _ExtentX        =   5636
       _ExtentY        =   661
-      Picture         =   "expms03.frx":2CD0
+      Picture         =   "expms03.frx":325A
       Caption         =   "Sincronizar Cod.Cliente MA01-->PF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -260,7 +261,7 @@ Begin VB.Form ExpMS03
       Width           =   3195
       _ExtentX        =   5636
       _ExtentY        =   661
-      Picture         =   "expms03.frx":326A
+      Picture         =   "expms03.frx":37F4
       Caption         =   "Sincronizar Pesos PF-->MS01"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -280,7 +281,7 @@ Begin VB.Form ExpMS03
       Width           =   3195
       _ExtentX        =   5636
       _ExtentY        =   661
-      Picture         =   "expms03.frx":3804
+      Picture         =   "expms03.frx":3D8E
       Caption         =   "Sincronizar  PFS-->Ferramenta"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -336,15 +337,15 @@ Private Sub CmdEscMs01_Click()
     ePASS01 = "MANA5"
     escms01.Show vbModal, Me
     If lRETU Then
-        Text(1).Text = eRETU01
+        tEXT(1).tEXT = eRETU01
     End If
 End Sub
 
 Private Sub CmdEscPfim_Click(Index As Integer)
     escpffim.Show vbModal, Me
     If lRETU Then
-        If Index = 0 Then Text(0).Text = eRETU01
-        If Index = 1 Then Text(2).Text = eRETU01
+        If Index = 0 Then tEXT(0).tEXT = eRETU01
+        If Index = 1 Then tEXT(2).tEXT = eRETU01
     End If
 End Sub
 
@@ -370,13 +371,13 @@ Private Sub CmdTransfer_Click()
     dbPF.ConnectionTimeout = 120
     dbPF.Open GeracArq(cARQ, , False)
 
-    If Text(2).Text = "" Then
+    If tEXT(2).tEXT = "" Then
 
-        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' AND NOT BLOQUEADO ORDER BY PF"
+        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' AND NOT BLOQUEADO ORDER BY PF"
 
     Else
 
-        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' OR CODFINAL='" & Trim(Text(2).Text) & "'AND NOT BLOQUEADO ORDER BY PF"
+        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' OR CODFINAL='" & Trim(tEXT(2).tEXT) & "'AND NOT BLOQUEADO ORDER BY PF"
 
     End If
 
@@ -410,7 +411,7 @@ Private Sub CmdTransfer_Click()
     CON.ConnectionTimeout = 120
     CON.Open "mana5emp"
 
-    sqlMS03 = "DELETE FROM MS03 where codigo='" & Text(1).Text & "'"
+    sqlMS03 = "DELETE FROM MS03 where codigo='" & tEXT(1).tEXT & "'"
     CON.Execute sqlMS03
 
     Set rs = New ADODB.Recordset
@@ -600,7 +601,7 @@ Private Sub GRAVAMS03(aCAMPOS As Variant, rs As Variant)
     sDESCRI = Tirace(sDESCRI)
 
     rs.AddNew
-    rs("codigo") = Text(1).Text
+    rs("codigo") = tEXT(1).tEXT
     rs("TIPOENT") = aCAMPOS(0)
     rs("CODCOMP") = aCAMPOS(1)
     rs("NOMECOMP") = sDESCRI
@@ -663,7 +664,7 @@ Private Sub PEGDADOS(cTIP As String, cCODIGO As String)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     'CentralizaJanela Me
 End Sub
 
@@ -696,13 +697,13 @@ Private Sub XPButton1_Click()
     dbPF.ConnectionTimeout = 120
     dbPF.Open GeracArq(cARQ, , False)
 
-    If Text(2) = "" Then
+    If tEXT(2) = "" Then
 
-        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' AND NOT BLOQUEADO ORDER BY PF"
+        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' AND NOT BLOQUEADO ORDER BY PF"
 
     Else
 
-        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' OR CODFINAL='" & Trim(Text(2).Text) & "'AND NOT BLOQUEADO ORDER BY PF"
+        sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' OR CODFINAL='" & Trim(tEXT(2).tEXT) & "'AND NOT BLOQUEADO ORDER BY PF"
 
     End If
 
@@ -742,7 +743,7 @@ Private Sub XPButton1_Click()
     CON.ConnectionTimeout = 120
     CON.Open "mana5emp"
 
-    sqlms06 = "DELETE FROM MS06 where codigo='" & Text(1).Text & "'"
+    sqlms06 = "DELETE FROM MS06 where codigo='" & tEXT(1).tEXT & "'"
    
     CON.Execute sqlms06
 
@@ -797,7 +798,7 @@ Private Sub XPButton1_Click()
                 sDESCRI = LCase(sDESCRI)
                 sDESCRI = Left(sDESCRI, 70)
                 sDESCRI = Tirace(sDESCRI)
-                rs("codigo") = Text(1).Text
+                rs("codigo") = tEXT(1).tEXT
                 rs("SEQ") = aPFI(0)
                 rs("SSQ") = aPFI(1)
                 rs("DESCRI") = sDESCRI
@@ -829,11 +830,11 @@ Private Sub XPButton1_Click()
             Wend
 
             rs.AddNew
-            rs("codigo") = Text(1).Text
+            rs("codigo") = tEXT(1).tEXT
             rs("SEQ") = aPFI(0)
             rs("SSQ") = 99
             rs("TIPFEC") = "0"
-            rs("CODFEC") = Text(0).Text
+            rs("CODFEC") = tEXT(0).tEXT
             rs("DESCRI") = "Final"
             rs.Update
 

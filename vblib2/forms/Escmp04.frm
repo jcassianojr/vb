@@ -8,6 +8,7 @@ Begin VB.Form escMP04
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   8265
+   Icon            =   "Escmp04.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   8265
@@ -109,7 +110,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     If ePASS01 = "LOGIX" Then
         aORDEM = Array("num_matricula", "nom_completo")
     Else

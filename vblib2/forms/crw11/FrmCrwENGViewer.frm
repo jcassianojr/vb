@@ -6,6 +6,7 @@ Begin VB.Form FrmCrwENGViewer
    ClientLeft      =   60
    ClientTop       =   405
    ClientWidth     =   14700
+   Icon            =   "FrmCrwENGViewer.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5415
    ScaleWidth      =   14700

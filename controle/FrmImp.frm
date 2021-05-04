@@ -7,6 +7,7 @@ Begin VB.Form FrmImp
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   6870
+   Icon            =   "FrmImp.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3945
    ScaleWidth      =   6870
@@ -141,7 +142,7 @@ Begin VB.Form FrmImp
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmImp.frx":0000
+      Picture         =   "FrmImp.frx":058A
       Caption         =   "Cancelar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -161,7 +162,7 @@ Begin VB.Form FrmImp
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmImp.frx":059A
+      Picture         =   "FrmImp.frx":0B24
       Caption         =   "Confirmar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -181,7 +182,7 @@ Begin VB.Form FrmImp
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "FrmImp.frx":0B34
+      Picture         =   "FrmImp.frx":10BE
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -265,7 +266,7 @@ Private Sub impX()
     Dim cDESARQ As String
     Dim cDESSQL As String
 
-    nPFORI = Val(Text)
+    nPFORI = Val(tEXT)
     lRETU = True
     eRETU01 = nPFORI
     
@@ -373,7 +374,7 @@ End Sub
 Private Sub CmdescPF_Click()
     escpf.Show vbModal, Me
     If lRETU Then
-        Text.Text = eRETU01
+        tEXT.tEXT = eRETU01
     End If
 End Sub
 
@@ -417,7 +418,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQFEMEA = PegPath("PATH", "FEMEA")
     cARQFEMEAPF = PegPath("PATH", "FEMEAPF")
     cARQPF = PegPath("PATH", "PF")

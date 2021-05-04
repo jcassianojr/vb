@@ -23,13 +23,35 @@ Attribute VB_Name = "Myfunctions"
 'FILECOPY COPIAR ARQUIVOS
 'CompactAndRepairDB Compactar e Repar dbf
 
-'Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
-'Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
 Private Declare Function SetTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
 Private Declare Function KillTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long) As Long
-'Private Const WM_CLOSE      As Long = 16 'abaixo como hexa 10
 Private CurMBTitle          As String
 
+'constantes para syscolors
+'Dim lngReturn As Long
+'lngReturn = SetSysColors(1, COLOR_ACTIVECAPTION ,RGB(255 0 0))
+Declare Function SetSysColors Lib "user32" (ByVal nChanges As Long, lpSysColor As Long, lpColorValues As Long) As Long
+Public Const COLOR_SCROLLBAR = 0 'The Scrollbar color
+Public Const COLOR_BACKGROUND = 1 'Colour of the background with no wallpaper
+Public Const COLOR_ACTIVECAPTION = 2 'Caption of Active Window
+Public Const COLOR_INACTIVECAPTION = 3 'Caption of Inactive window
+Public Const COLOR_MENU = 4 'Menu
+Public Const COLOR_WINDOW = 5 'Windows background
+Public Const COLOR_WINDOWFRAME = 6 'Window frame
+Public Const COLOR_MENUTEXT = 7 'Window Text
+Public Const COLOR_WINDOWTEXT = 8 '3D dark shadow (Win95)
+Public Const COLOR_CAPTIONTEXT = 9 'Text in window caption
+Public Const COLOR_ACTIVEBORDER = 10 'Border of active window
+Public Const COLOR_INACTIVEBORDER = 11 'Border of inactive window
+Public Const COLOR_APPWORKSPACE = 12 'Background of MDI desktop
+Public Const COLOR_HIGHLIGHT = 13 'Selected item background
+Public Const COLOR_HIGHLIGHTTEXT = 14 'Selected menu item
+Public Const COLOR_BTNFACE = 15 'Button
+Public Const COLOR_BTNSHADOW = 16 '3D shading of button
+Public Const COLOR_GRAYTEXT = 17 'Grey text of zero if dithering is used.
+Public Const COLOR_BTNTEXT = 18 'Button text
+Public Const COLOR_INACTIVECAPTIONTEXT = 19 'Text of inactive window
+Public Const COLOR_BTNHIGHLIGHT = 20 '3D highlight of button
 
 'Constante para pegar formato data hora do sistema
 Public Const LOCALE_SDECIMAL = &HE               '---------------------------------- AGRUPAMENTO DE DIGITOS NORMAL
@@ -48,10 +70,7 @@ Private Const CONNECT_CONFIGURED As Long = &H40
 Public Const WM_CLOSE = &H10
 Public Const WM_UNDO = &H304
 Public Const WM_PASTE = &H302
-'Public Const HH_DISPLAY_TOPIC = &H0              '  WinHelp equivalent na clscommondialog ja em enum
-'Public Const HH_DISPLAY_TOC = &H1                '  WinHelp equivalent na clscommondialog
-'Public Const HH_DISPLAY_INDEX = &H2              '  WinHelp equivalent na clscommondialog
-'Public Const HH_DISPLAY_SEARCH = &H3             '  WinHelp equivalent na clscommondialog
+
 Private Const FO_COPY = &H2
 Private Const FOF_ALLOWUNDO = &H40
 Public Const HTCAPTION = 2
@@ -183,9 +202,9 @@ End Function
 
 Public Function ComboLostFocus(ByRef Combo1)
     With Combo1
-        If Len(.Text) Then
+        If Len(.tEXT) Then
             'Procura pelo texto digitado
-            strPartial = .Text
+            strPartial = .tEXT
             I = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
             'Se não achou, retorna      o focus para o Combo
             If I = CB_ERR Then .SetFocus
@@ -196,7 +215,7 @@ End Function
 Public Function ComboChange(ByRef Combo1)
     With Combo1
         'Procura pelo texto já digitado
-        strPartial = .Text
+        strPartial = .tEXT
         I = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                         ByVal strPartial)
 
@@ -1764,7 +1783,7 @@ Public Sub FocusMe()
        Or TypeOf Screen.ActiveControl Is ComboBox _
        Or TypeOf Screen.ActiveControl Is XPText Then
         Screen.ActiveControl.SelStart = 0
-        Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
+        Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
     End If
 End Sub
 
@@ -2491,12 +2510,12 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef Text As String) As Long
+Public Function WordLen(ByRef tEXT As String) As Long
     'tamanho somente dos caracteres normal 65 a 90
     Dim Bytes() As Byte
     Dim I As Long
 
-    Bytes = StrConv(UCase$(Text), vbFromUnicode)
+    Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
     For I = 0 To UBound(Bytes)
         If 65 <= Bytes(I) And Bytes(I) <= 90 Then WordLen = WordLen + 1
     Next

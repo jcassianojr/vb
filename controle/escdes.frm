@@ -8,6 +8,7 @@ Begin VB.Form escDes
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   8880
+   Icon            =   "escdes.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6390
    ScaleWidth      =   8880
@@ -125,7 +126,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("Conjunto", "Descricao", "Cliente", "Nome")
     aORDES = Array("CONJUNTO", "DESCRICAO", "CLIENTE", "CLINOME")
     cORDEM = "CONJUNTO"

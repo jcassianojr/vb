@@ -1,11 +1,12 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form FrmMP03 
    Caption         =   "Tratamentos"
    ClientHeight    =   3285
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   10275
+   Icon            =   "FrmMP03.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3285
    ScaleWidth      =   10275
@@ -140,7 +141,7 @@ Begin VB.Form FrmMP03
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmMP03.frx":0000
+      Picture         =   "FrmMP03.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -160,7 +161,7 @@ Begin VB.Form FrmMP03
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmMP03.frx":059A
+      Picture         =   "FrmMP03.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -181,7 +182,7 @@ Begin VB.Form FrmMP03
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "FrmMP03.frx":0B34
+      Picture         =   "FrmMP03.frx":10BE
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -314,11 +315,11 @@ End Sub
 Private Sub Command1_Click(Index As Integer)
     Select Case Index
     Case 0
-        TXTFIELDS(9).Text = "S"
+        TXTFIELDS(9).tEXT = "S"
     Case 1
-        TXTFIELDS(9).Text = "T"
+        TXTFIELDS(9).tEXT = "T"
     Case 2
-        TXTFIELDS(9).Text = "O"
+        TXTFIELDS(9).tEXT = "O"
     End Select
 End Sub
 
@@ -345,7 +346,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = GeraConn(zMANA5EMP, "SDECDX")
     cSQL = "select * from MP03 WHERE CODIGO='" & Trim(ePASS01) & "'"
     TxtCodigo = ePASS01

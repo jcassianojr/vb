@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form frmIMP4 
    Caption         =   "Importando Dados"
@@ -7,6 +7,7 @@ Begin VB.Form frmIMP4
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   6465
+   Icon            =   "FrmImp4.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   4125
    ScaleWidth      =   6465
@@ -140,7 +141,7 @@ Begin VB.Form frmIMP4
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "FrmImp4.frx":0000
+      Picture         =   "FrmImp4.frx":058A
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -160,7 +161,7 @@ Begin VB.Form frmIMP4
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmImp4.frx":059A
+      Picture         =   "FrmImp4.frx":0B24
       Caption         =   "Confirmar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -180,7 +181,7 @@ Begin VB.Form frmIMP4
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmImp4.frx":0B34
+      Picture         =   "FrmImp4.frx":10BE
       Caption         =   "Cancelar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -200,7 +201,7 @@ Begin VB.Form frmIMP4
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "FrmImp4.frx":10CE
+      Picture         =   "FrmImp4.frx":1658
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -298,14 +299,14 @@ Private Sub importar()
 
     On Error Resume Next
     
-    nPFORI = Val(TEXT(0))
+    nPFORI = Val(tEXT(0))
     
     'Sequencia Duplicaçao
     cDUPSQL = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
     
 
     'sql Arquivo Origem
-    sSQL = "select * from PFCMS03 WHERE PF=" & nPFORI & " AND CODCOMP='" & TEXT(1) & "'"
+    sSQL = "select * from PFCMS03 WHERE PF=" & nPFORI & " AND CODCOMP='" & tEXT(1) & "'"
     
     If Recebimento.Value = Checked Then
         Select Case mes
@@ -350,30 +351,30 @@ End Sub
 Private Sub CmdescPF_Click()
     escpf.Show vbModal, Me
     If lRETU Then
-        TEXT(0).TEXT = eRETU01
+        tEXT(0).tEXT = eRETU01
     End If
 
 End Sub
 
 Private Sub Command1_Click()
-    txtFields(1) = "M"
+    TXTFIELDS(1) = "M"
 End Sub
 
 Private Sub Command2_Click()
-    txtFields(1) = "C"
+    TXTFIELDS(1) = "C"
 End Sub
 
 Private Sub Command3_Click()
-    txtFields(1) = "T"
+    TXTFIELDS(1) = "T"
 End Sub
 
 Private Sub Command4_Click()
-    txtFields(1) = "S"
+    TXTFIELDS(1) = "S"
 End Sub
 
 Private Sub escmu_Click()
     iMU01 = 0
-    Select Case txtFields(1)
+    Select Case TXTFIELDS(1)
     Case "M"
         iMU01 = 1
     Case "C"
@@ -386,7 +387,7 @@ Private Sub escmu_Click()
     If iMU01 > 0 Then
         escmu01.Show vbModal, Me
         If Not lRETU Then Exit Sub
-        frmPFMS03.txtFields(2) = eRETU01
+        frmPFMS03.TXTFIELDS(2) = eRETU01
         Command1_Click
     End If
 
@@ -407,12 +408,12 @@ Private Sub laboratorio_Click()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQFEMEA = PegPath("PATH", "FEMEA")
     cARQPF = PegPath("PATH", "PF")
     cARQPFP = PegPath("PATH", "PFP")
     cARQPFG = PegPath("PATH", "PFG")
-    txtFields(1) = "M"
+    TXTFIELDS(1) = "M"
 End Sub
 
 

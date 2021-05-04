@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form frmprot 
    Caption         =   "Controle de Prototipos"
@@ -8,6 +8,7 @@ Begin VB.Form frmprot
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   10425
+   Icon            =   "frmprot.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   4035
    ScaleWidth      =   10425
@@ -78,7 +79,7 @@ Begin VB.Form frmprot
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmprot.frx":0000
+      Picture         =   "frmprot.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -99,7 +100,7 @@ Begin VB.Form frmprot
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmprot.frx":059A
+      Picture         =   "frmprot.frx":0B24
       Caption         =   "Novo"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -120,7 +121,7 @@ Begin VB.Form frmprot
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmprot.frx":0B34
+      Picture         =   "frmprot.frx":10BE
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -140,7 +141,7 @@ Begin VB.Form frmprot
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmprot.frx":10CE
+      Picture         =   "frmprot.frx":1658
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -161,7 +162,7 @@ Begin VB.Form frmprot
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   661
-      Picture         =   "frmprot.frx":1668
+      Picture         =   "frmprot.frx":1BF2
       Caption         =   "Localizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -251,7 +252,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQDES = PegPath("PATH", "DESENHO")
     cSQL = "select * from cliente WHERE cliente=" & nPF
     nCAMPOS = 2

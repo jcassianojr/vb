@@ -7,6 +7,7 @@ Begin VB.Form FrmPreview
    ClientLeft      =   60
    ClientTop       =   420
    ClientWidth     =   8520
+   Icon            =   "FrmPreviewIe.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6240
    ScaleWidth      =   8520
@@ -44,7 +45,7 @@ Begin VB.Form FrmPreview
       Width           =   435
       _ExtentX        =   767
       _ExtentY        =   767
-      Picture         =   "FrmPreviewIe.frx":0000
+      Picture         =   "FrmPreviewIe.frx":058A
       Caption         =   "XPButton1"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -64,7 +65,7 @@ Begin VB.Form FrmPreview
       Width           =   435
       _ExtentX        =   767
       _ExtentY        =   767
-      Picture         =   "FrmPreviewIe.frx":059A
+      Picture         =   "FrmPreviewIe.frx":0B24
       Caption         =   "XPButton1"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -85,7 +86,7 @@ Begin VB.Form FrmPreview
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "FrmPreviewIe.frx":0B34
+      Picture         =   "FrmPreviewIe.frx":10BE
       Caption         =   "Salvar &TXT"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -105,7 +106,7 @@ Begin VB.Form FrmPreview
       Width           =   435
       _ExtentX        =   767
       _ExtentY        =   767
-      Picture         =   "FrmPreviewIe.frx":0ECE
+      Picture         =   "FrmPreviewIe.frx":1458
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -126,7 +127,7 @@ Begin VB.Form FrmPreview
       Width           =   435
       _ExtentX        =   767
       _ExtentY        =   767
-      Picture         =   "FrmPreviewIe.frx":1468
+      Picture         =   "FrmPreviewIe.frx":19F2
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -147,7 +148,7 @@ Begin VB.Form FrmPreview
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "FrmPreviewIe.frx":1A02
+      Picture         =   "FrmPreviewIe.frx":1F8C
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"

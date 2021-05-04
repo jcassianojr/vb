@@ -210,7 +210,7 @@ Private Sub cmdCreate_Click()
       End If
    End If
    
-   Dim s As String
+   Dim S As String
    Dim sPath As String
    
    On Error Resume Next
@@ -219,8 +219,8 @@ Private Sub cmdCreate_Click()
    
         bFix = False
         
-        s = Text1.Text
-        s = Replace(s, ".mdb", "_Schema.mdb", 1, 1, vbTextCompare)
+        S = Text1.Text
+        S = Replace(S, ".mdb", "_Schema.mdb", 1, 1, vbTextCompare)
         
         sPath = Text1.Text
         sPath = Left(sPath, InStrRev(sPath, "\") - 1)
@@ -229,7 +229,7 @@ Private Sub cmdCreate_Click()
         CDL1.DefaultExt = "mdb"
         CDL1.InitDir = sPath
         CDL1.Filter = "Microsoft Access (*.mdb)|*.mdb|All Files (*.*)|*.*"
-        CDL1.FileName = s
+        CDL1.FileName = S
         CDL1.CancelError = True
         CDL1.ShowSave
         If Err.Number Then 'Cancel selected
@@ -288,43 +288,43 @@ Private Sub cmdCreate_Click()
    On Error GoTo ErrProc
       
    putText "Creating TABLE and INDEX definitions..."
-   Dim i%, j%, k%
+   Dim I%, J%, K%
    
-   For i = 0 To dbx.TableDefs.Count - 1
+   For I = 0 To dbx.TableDefs.Count - 1
    
-      If dbx.TableDefs(i).Updatable Then 'Ignore linked tables
+      If dbx.TableDefs(I).Updatable Then 'Ignore linked tables
    
       'If UCase(Mid(dbx.TableDefs(i).Name, 1, 2)) = "TB" Or UCase(Mid(dbx.TableDefs(i).Name, 1, 2)) = "LO" Then
-      If LCase(Left(dbx.TableDefs(i).Name, 4)) <> "msys" Then
-         With dbx.TableDefs(i)
-         For j = 0 To .Fields.Count - 1
+      If LCase(Left(dbx.TableDefs(I).Name, 4)) <> "msys" Then
+         With dbx.TableDefs(I)
+         For J = 0 To .Fields.Count - 1
 
             rsloTb.AddNew
             rsloTb("TableName") = .Name
-            rsloTb("SeqNum") = .Fields(j).OrdinalPosition
-            rsloTb("FieldName") = .Fields(j).Name
-            rsloTb("FieldType") = .Fields(j).Type
-            rsloTb("Attributes") = .Fields(j).Attributes
-            rsloTb("Required") = .Fields(j).Required
-            rsloTb("Size") = .Fields(j).Size
-            rsloTb("AllowZeroLength") = .Fields(j).AllowZeroLength
+            rsloTb("SeqNum") = .Fields(J).OrdinalPosition
+            rsloTb("FieldName") = .Fields(J).Name
+            rsloTb("FieldType") = .Fields(J).Type
+            rsloTb("Attributes") = .Fields(J).Attributes
+            rsloTb("Required") = .Fields(J).Required
+            rsloTb("Size") = .Fields(J).Size
+            rsloTb("AllowZeroLength") = .Fields(J).AllowZeroLength
             
-            If .Fields(j).Type = 1 Or .Fields(j).Type = 4 Or .Fields(j).Type = 5 Then
+            If .Fields(J).Type = 1 Or .Fields(J).Type = 4 Or .Fields(J).Type = 5 Then
                ' yes/no, number, currency
                rsloTb("DefaultValue") = 0
-            ElseIf .Fields(j).Type = 10 Then
+            ElseIf .Fields(J).Type = 10 Then
                ' Text
-               rsloTb("DefaultValue") = .Fields(j).DefaultValue
+               rsloTb("DefaultValue") = .Fields(J).DefaultValue
             End If
             rsloTb.Update
          Next 'j
-         For j = 0 To dbx.TableDefs(i).Indexes.Count - 1
+         For J = 0 To dbx.TableDefs(I).Indexes.Count - 1
             rsloIx.AddNew
             rsloIx("TableName") = .Name
-            rsloIx("IndexName") = .Indexes(j).Name
-            rsloIx("Fields") = .Indexes(j).Fields
-            rsloIx("Primary") = .Indexes(j).Primary
-            rsloIx("Unique") = .Indexes(j).Unique
+            rsloIx("IndexName") = .Indexes(J).Name
+            rsloIx("Fields") = .Indexes(J).Fields
+            rsloIx("Primary") = .Indexes(J).Primary
+            rsloIx("Unique") = .Indexes(J).Unique
             rsloIx.Update
 Jump:
          Next 'j
@@ -338,13 +338,13 @@ Jump:
    putText "Finished."
    
    putText "Creating QUERY definitions..."
-   For i = 0 To dbx.QueryDefs.Count - 1
+   For I = 0 To dbx.QueryDefs.Count - 1
       
-      If dbx.QueryDefs(i).Updatable Then  'Ignore linked tables
+      If dbx.QueryDefs(I).Updatable Then  'Ignore linked tables
    
          rsloQy.AddNew
-         rsloQy!QueryName = dbx.QueryDefs(i).Name
-         rsloQy!QueryDef = dbx.QueryDefs(i).SQL
+         rsloQy!QueryName = dbx.QueryDefs(I).Name
+         rsloQy!QueryDef = dbx.QueryDefs(I).SQL
          rsloQy.Update
       
       End If
@@ -370,7 +370,7 @@ ErrProc:
    If iMode = 1 Then
       WriteErrLog Err.Number & " : " & Err.Description
    Else
-      MsgBox Err.Description, vbExclamation, dbx.TableDefs(i).Name
+      MsgBox Err.Description, vbExclamation, dbx.TableDefs(I).Name
    End If
    Resume Jump
 End Sub
@@ -478,21 +478,21 @@ Private Function UpdNewStat(oldstat As String, At_Digit As Integer)
    UpdNewStat = Mid(oldstat, 1, At_Digit - 1) & "U" & Mid(oldstat, At_Digit + 1)
 End Function
 
-Private Sub CreateLocalTable(s As String)
+Private Sub CreateLocalTable(S As String)
    Dim NewTable As TableDef
    Dim NewField As Field
    Dim db As String
    
    On Error Resume Next
    
-   db = Mid(s, InStrRev(s, "\") + 1)
+   db = Mid(S, InStrRev(S, "\") + 1)
       
    ' if dbFixTmp already exist, delete it
-   If StrComp(Dir(s), db, vbTextCompare) = 0 Then
-      Kill s
+   If StrComp(Dir(S), db, vbTextCompare) = 0 Then
+      Kill S
    End If
    
-   Set dbTemp = CreateDatabase(s, dbLangGeneral)
+   Set dbTemp = CreateDatabase(S, dbLangGeneral)
    Set NewTable = Nothing
    Set NewTable = dbTemp.CreateTableDef("myTABLE")
          Set NewField = Nothing
@@ -591,7 +591,7 @@ Private Sub CreateLocalTable(s As String)
    
 End Sub
 
-Private Function OpenAllDB(s As String, Optional bExclusive As Boolean, Optional bReadOnly As Boolean) As Boolean
+Private Function OpenAllDB(S As String, Optional bExclusive As Boolean, Optional bReadOnly As Boolean) As Boolean
    On Error Resume Next
    dbx.Close
    Set dbx = Nothing
@@ -605,7 +605,7 @@ Private Function OpenAllDB(s As String, Optional bExclusive As Boolean, Optional
    Else
       Set dbx = OpenDatabase(Text1.Text, bExclusive, bReadOnly, ";pwd=" & sDBpassword)
    End If
-   Set dbTemp = OpenDatabase(s, True, False)
+   Set dbTemp = OpenDatabase(S, True, False)
    OpenAllDB = True
    
    Exit Function
@@ -654,7 +654,7 @@ Private Sub cmdCompare_Click()
       End If
    End If
    
-   Dim s As String
+   Dim S As String
    Dim sPath As String
    
    On Error Resume Next
@@ -662,8 +662,8 @@ Private Sub cmdCompare_Click()
    If iMode = 0 Then
    
        If bFix = False Then
-          s = Text1.Text
-          s = Replace(s, ".mdb", "_Schema.mdb", 1, 1, vbTextCompare)
+          S = Text1.Text
+          S = Replace(S, ".mdb", "_Schema.mdb", 1, 1, vbTextCompare)
        End If
        
        bFix = False
@@ -675,7 +675,7 @@ Private Sub cmdCompare_Click()
        CDL1.DefaultExt = "mdb"
        CDL1.InitDir = sPath
        CDL1.Filter = "Microsoft Access (*.mdb)|*.mdb|All Files (*.*)|*.*"
-       CDL1.FileName = s
+       CDL1.FileName = S
       
       CDL1.ShowOpen
    
@@ -763,38 +763,38 @@ Private Sub cmdCompare_Click()
    Set rsloQy = dbTemp.OpenRecordset("select * from myQUERY")
    Set rsloIx = dbTemp.OpenRecordset("select * from myINDEX")
    
-   Dim i%, j%, k%, l%, mPB1%, mPB2%
+   Dim I%, J%, K%, l%, mPB1%, mPB2%
    DoEvents
    putText "Checking..."
    
    ' Checking index and TableDef
-   For i = 0 To dbx.TableDefs.Count - 1
+   For I = 0 To dbx.TableDefs.Count - 1
            
-      PB1.Value = i / dbx.TableDefs.Count * 40
+      PB1.Value = I / dbx.TableDefs.Count * 40
       DoEvents
             
-      If dbx.TableDefs(i).Updatable = False Then 'this causes linked tables to be ignored
-         putText dbx.TableDefs(i).Name & " is not updateable thus is ignored. May be a linked table."
-         srIgnore = srIgnore & " " & dbx.TableDefs(i).Name
+      If dbx.TableDefs(I).Updatable = False Then 'this causes linked tables to be ignored
+         putText dbx.TableDefs(I).Name & " is not updateable thus is ignored. May be a linked table."
+         srIgnore = srIgnore & " " & dbx.TableDefs(I).Name
       Else
             
       'MsgBox dbx.TableDefs(i).Updatable, vbOKOnly, dbx.TableDefs(i).Name
         
         'Ignore system files
-        If LCase(Mid(dbx.TableDefs(i).Name, 1, 4)) <> "msys" Then
+        If LCase(Mid(dbx.TableDefs(I).Name, 1, 4)) <> "msys" Then
            If rsloTb.RecordCount > 0 Then
-              For j = 0 To dbx.TableDefs(i).Fields.Count - 1
+              For J = 0 To dbx.TableDefs(I).Fields.Count - 1
                  rsloTb.FindFirst _
-                 " [TableName] = '" & dbx.TableDefs(i).Name & "' and " & _
-                 " [FieldName] = '" & dbx.TableDefs(i).Fields(j).Name & "'"
+                 " [TableName] = '" & dbx.TableDefs(I).Name & "' and " & _
+                 " [FieldName] = '" & dbx.TableDefs(I).Fields(J).Name & "'"
                  rsloTb.Edit
                  If Not rsloTb.NoMatch Then
                      NewStat = "-----"
-                     If rsloTb("FieldType") <> dbx.TableDefs(i).Fields(j).Type Then NewStat = UpdNewStat(NewStat, 1)
-                     If rsloTb("Attributes") <> dbx.TableDefs(i).Fields(j).Attributes Then NewStat = UpdNewStat(NewStat, 2)
+                     If rsloTb("FieldType") <> dbx.TableDefs(I).Fields(J).Type Then NewStat = UpdNewStat(NewStat, 1)
+                     If rsloTb("Attributes") <> dbx.TableDefs(I).Fields(J).Attributes Then NewStat = UpdNewStat(NewStat, 2)
                     'If rsloTb("Required") <> dbx.TableDefs(i).Fields(j).Required Then NewStat = UpdNewStat(NewStat, 3)
-                     If rsloTb("Size") <> dbx.TableDefs(i).Fields(j).Size Then NewStat = UpdNewStat(NewStat, 4)
-                     If rsloTb("AllowZeroLength") <> dbx.TableDefs(i).Fields(j).AllowZeroLength Then NewStat = UpdNewStat(NewStat, 5)
+                     If rsloTb("Size") <> dbx.TableDefs(I).Fields(J).Size Then NewStat = UpdNewStat(NewStat, 4)
+                     If rsloTb("AllowZeroLength") <> dbx.TableDefs(I).Fields(J).AllowZeroLength Then NewStat = UpdNewStat(NewStat, 5)
                      rsloTb("Status") = NewStat
                   End If
                   rsloTb.Update
@@ -802,19 +802,19 @@ Private Sub cmdCompare_Click()
            End If
            
            If rsloIx.RecordCount > 0 Then
-              For j = 0 To dbx.TableDefs(i).Indexes.Count - 1
+              For J = 0 To dbx.TableDefs(I).Indexes.Count - 1
                  rsloIx.FindFirst _
-                 " [TableName] = '" & dbx.TableDefs(i).Name & "' and " & _
-                 " [IndexName] = '" & dbx.TableDefs(i).Indexes(j).Name & "'"
+                 " [TableName] = '" & dbx.TableDefs(I).Name & "' and " & _
+                 " [IndexName] = '" & dbx.TableDefs(I).Indexes(J).Name & "'"
                  rsloIx.Edit
                  'If dbx.TableDefs(i).Indexes(j).Name = "Doc Id" Then
                     'Debug.Print "Sa"
                  'End If
                  If Not rsloIx.NoMatch Then
                     NewStat = "-----"
-                    If UCase(rsloIx("Fields")) <> UCase(dbx.TableDefs(i).Indexes(j).Fields) Then NewStat = UpdNewStat(NewStat, 1)
-                    If rsloIx("Primary") <> dbx.TableDefs(i).Indexes(j).Primary Then NewStat = UpdNewStat(NewStat, 2)
-                    If rsloIx("Unique") <> dbx.TableDefs(i).Indexes(j).Unique Then NewStat = UpdNewStat(NewStat, 3)
+                    If UCase(rsloIx("Fields")) <> UCase(dbx.TableDefs(I).Indexes(J).Fields) Then NewStat = UpdNewStat(NewStat, 1)
+                    If rsloIx("Primary") <> dbx.TableDefs(I).Indexes(J).Primary Then NewStat = UpdNewStat(NewStat, 2)
+                    If rsloIx("Unique") <> dbx.TableDefs(I).Indexes(J).Unique Then NewStat = UpdNewStat(NewStat, 3)
                     rsloIx("Status") = NewStat
                  End If
                  rsloIx.Update
@@ -824,20 +824,20 @@ Private Sub cmdCompare_Click()
       
       End If
       
-   Next i
+   Next I
    
    ' 10%
    If rsloQy.RecordCount > 0 Then
-      For i = 0 To dbx.QueryDefs.Count - 1
-         PB1.Value = i / dbx.QueryDefs.Count * 10 + 40
+      For I = 0 To dbx.QueryDefs.Count - 1
+         PB1.Value = I / dbx.QueryDefs.Count * 10 + 40
          DoEvents
          rsloQy.FindFirst _
-         " [QueryName] = '" & dbx.QueryDefs(i).Name & "'"
+         " [QueryName] = '" & dbx.QueryDefs(I).Name & "'"
          rsloQy.Edit
                   
          If Not rsloQy.NoMatch Then
             NewStat = "-----"
-            If rsloQy!QueryDef <> dbx.QueryDefs(i).SQL Then NewStat = "U"
+            If rsloQy!QueryDef <> dbx.QueryDefs(I).SQL Then NewStat = "U"
             rsloQy("Status") = NewStat
          End If
          rsloQy.Update
@@ -864,8 +864,8 @@ Private Sub cmdCompare_Click()
          If rsloTb("Status") = "NEW" Then
             ' New field or new Table
             isNewTable = True
-            For i = 0 To dbx.TableDefs.Count - 1
-               If dbx.TableDefs(i).Name = rsloTb!TableName Then isNewTable = False
+            For I = 0 To dbx.TableDefs.Count - 1
+               If dbx.TableDefs(I).Name = rsloTb!TableName Then isNewTable = False
             Next
             
                  
@@ -1118,14 +1118,14 @@ Private Sub cmdCompare_Click()
       'dbx.Execute "DELETE FROM MSysRelationships"
    
       'For i = 0 To UBound(oRels)
-      For i = 0 To UBound(RelData)
+      For I = 0 To UBound(RelData)
                     
           'Set oRel = dbx.CreateRelation()
           'oRel.Name = "CategoriesProducts"
           'oRel.Table = "Categories"
           'oRel.ForeignTable = "Products"
           
-          Set oRel = dbx.CreateRelation(RelData(i).sRelation & SQL, RelData(i).sTable, RelData(i).sFTable, RelData(i).lAttr)
+          Set oRel = dbx.CreateRelation(RelData(I).sRelation & SQL, RelData(I).sTable, RelData(I).sFTable, RelData(I).lAttr)
           'Set oRel = dbx.CreateRelation(sRelation(i) & Format(Now, "hhmmss"), sTable(i), sFTable(i), lAttr(i))
 
           'Get error "Index already exists" with code below
@@ -1133,9 +1133,9 @@ Private Sub cmdCompare_Click()
           'oRel.Attributes = dbRelationDontEnforce
           
           'append fields
-          For j = 0 To UBound(RelData(i).sField)
-              Set fld = oRel.CreateField(RelData(i).sField(j))
-              fld.ForeignName = RelData(i).sFField(j)
+          For J = 0 To UBound(RelData(I).sField)
+              Set fld = oRel.CreateField(RelData(I).sField(J))
+              fld.ForeignName = RelData(I).sFField(J)
               oRel.Fields.Append fld
           Next
           
@@ -1165,14 +1165,14 @@ Private Sub cmdCompare_Click()
    lblStatus.Caption = "Database compared to master schema database"
    
    If bCorrupt Then
-      i = FreeFile
+      I = FreeFile
       NewStat = sAppPath & "results.txt"
-      Open NewStat For Output As #i
-      Print #i, Format(Now, "mm/dd/yyyy hh:mm:ss am/pm")
-      Print #i, "Database: " & Text1.Text
-      Print #i, "Schema: " & sSchemaDB
-      Print #i, Text2.Text
-      Close #i
+      Open NewStat For Output As #I
+      Print #I, Format(Now, "mm/dd/yyyy hh:mm:ss am/pm")
+      Print #I, "Database: " & Text1.Text
+      Print #I, "Schema: " & sSchemaDB
+      Print #I, Text2.Text
+      Close #I
    End If
       
    EnableControls
@@ -1215,8 +1215,8 @@ If MsgBox("Before running this feature you should have a master schema database 
    Exit Sub
 End If
 
-Dim i As Integer
-Dim k As Integer
+Dim I As Integer
+Dim K As Integer
 Dim FreeSpace As Currency
 Dim strNew As String
 Dim SQL As String
@@ -1356,8 +1356,8 @@ Else
    Load frmProgress
    frmProgress.ListView1.ColumnHeaders.Add , , "Table Name", 5000, lvwColumnLeft
    'populate list
-   For i = 0 To dbTemp.TableDefs.Count - 1
-        strTable = dbTemp.TableDefs(i).Name
+   For I = 0 To dbTemp.TableDefs.Count - 1
+        strTable = dbTemp.TableDefs(I).Name
         If LCase(Left(strTable, 4)) <> "msys" Then
            'MsgBox strTable
            Set lItem = frmProgress.ListView1.ListItems.Add(, , strTable)
@@ -1374,17 +1374,17 @@ Else
     
     If dbTemp.Relations.Count > 0 Then
        bRel = True
-       i = 0
+       I = 0
        'store relation data
        ReDim RelData(dbTemp.Relations.Count - 1)
         For Each oRel In dbTemp.Relations
-            Set oRel = dbTemp.Relations(i)
+            Set oRel = dbTemp.Relations(I)
             'ReDim Preserve RelData(i)
-            Set RelData(i).oRels = oRel
-            RelData(i).sRelation = oRel.Name
-            RelData(i).sTable = oRel.Table
-            RelData(i).sFTable = oRel.ForeignTable
-            RelData(i).lAttr = oRel.Attributes
+            Set RelData(I).oRels = oRel
+            RelData(I).sRelation = oRel.Name
+            RelData(I).sTable = oRel.Table
+            RelData(I).sFTable = oRel.ForeignTable
+            RelData(I).lAttr = oRel.Attributes
             'ReDim Preserve oRels(i)
             'ReDim Preserve sRelation(i)
             'ReDim Preserve sTable(i)
@@ -1397,9 +1397,9 @@ Else
             'lAttr(i) = oRel.Attributes
             Set flds = oRel.Fields
             'MsgBox flds.Count
-            k = 0
-            ReDim RelData(i).sField(flds.Count - 1)
-            ReDim RelData(i).sFField(flds.Count - 1)
+            K = 0
+            ReDim RelData(I).sField(flds.Count - 1)
+            ReDim RelData(I).sFField(flds.Count - 1)
             For Each fld In flds
                 'ReDim Preserve sField(i)
                 'ReDim Preserve sFField(i)
@@ -1407,20 +1407,20 @@ Else
                 'ReDim Preserve RelData(i).sFField(k)
                 'sField(i) = fld.Name
                 'sFField(i) = fld.ForeignName
-                RelData(i).sField(k) = fld.Name
-                RelData(i).sFField(k) = fld.ForeignName
-                k = k + 1
+                RelData(I).sField(K) = fld.Name
+                RelData(I).sFField(K) = fld.ForeignName
+                K = K + 1
             Next
-            i = i + 1
+            I = I + 1
         Next
     
         'then delete them
         'For i = 0 To UBound(oRels)
-        For i = 0 To UBound(RelData)
+        For I = 0 To UBound(RelData)
             'Set oRel = oRels(i)
             'MsgBox oRel.Name
             'oRel.Fields.Delete sField(i)
-            dbTemp.Relations.Delete RelData(i).sRelation
+            dbTemp.Relations.Delete RelData(I).sRelation
             'dbTemp.Relations.Delete oRel.Name
         Next
         'dbTemp.Relations.Refresh
@@ -1438,21 +1438,21 @@ Else
     'Next
     
     'delete all tables in new database
-    k = 1
+    K = 1
     frmProgress.Label1.Caption = "Deleting Tables in New MDB..."
     frmProgress.Label1.Refresh
-    For i = 0 To dbTemp.TableDefs.Count - 1
-        strTable = dbTemp.TableDefs(i).Name
+    For I = 0 To dbTemp.TableDefs.Count - 1
+        strTable = dbTemp.TableDefs(I).Name
         If LCase(Left(strTable, 4)) <> "msys" Then
            'MsgBox strTable
-           Set lItem = frmProgress.ListView1.ListItems.Item(k)
+           Set lItem = frmProgress.ListView1.ListItems.Item(K)
            lItem.Checked = True
            lItem.EnsureVisible
            frmProgress.Refresh
-           frmProgress.Label1.Caption = "Deleting Table " & CStr(k) & " of " & frmProgress.ListView1.ListItems.Count & " Tables..."
+           frmProgress.Label1.Caption = "Deleting Table " & CStr(K) & " of " & frmProgress.ListView1.ListItems.Count & " Tables..."
            frmProgress.Label1.Refresh
            frmProgress.ListView1.Refresh
-           k = k + 1
+           K = K + 1
            'Sleep 1000 'testing
            SQL = "DROP TABLE [" & strTable & "]"
            lblStatus.Caption = "Deleting table " & strTable & " in new database..."
@@ -1476,26 +1476,26 @@ Else
        Err.Clear
     Else
        'uncheck all items in ListView
-       For k = 1 To frmProgress.ListView1.ListItems.Count
-           Set lItem = frmProgress.ListView1.ListItems.Item(k)
+       For K = 1 To frmProgress.ListView1.ListItems.Count
+           Set lItem = frmProgress.ListView1.ListItems.Item(K)
            lItem.Checked = False
        Next
        'create tables in new database from corrupt database
        frmProgress.Label1.Caption = "Creating Tables in New MDB..."
        frmProgress.Label1.Refresh
-       k = 1
-       For i = 0 To dbx.TableDefs.Count - 1
-           strTable = dbx.TableDefs(i).Name
+       K = 1
+       For I = 0 To dbx.TableDefs.Count - 1
+           strTable = dbx.TableDefs(I).Name
            If LCase(Left(strTable, 4)) <> "msys" Then
               'MsgBox strTable
-              Set lItem = frmProgress.ListView1.ListItems.Item(k)
+              Set lItem = frmProgress.ListView1.ListItems.Item(K)
               lItem.Checked = True
               lItem.EnsureVisible
               frmProgress.Refresh
-              frmProgress.Label1.Caption = "Creating Table " & CStr(k) & " of " & frmProgress.ListView1.ListItems.Count & " Tables..."
+              frmProgress.Label1.Caption = "Creating Table " & CStr(K) & " of " & frmProgress.ListView1.ListItems.Count & " Tables..."
               frmProgress.Label1.Refresh
               frmProgress.ListView1.Refresh
-              k = k + 1
+              K = K + 1
               'Sleep 1000 'testing
               SQL = "SELECT [" & strTable & "].* INTO [" & strTable & "] IN '" & strNew & _
               "' FROM [" & strTable & "]"
@@ -1547,9 +1547,10 @@ End Sub
 Private Sub Form_Load()
 
 'TODO: Accept command line values
-Dim i As Integer
+Dim I As Integer
 
 On Error Resume Next
+CenterFormToScreen Me
 
 Me.Caption = App.Title & " " & App.Major & "." & App.Minor & "." & App.Revision
 Text1.Text = ""
@@ -1573,15 +1574,15 @@ Else
    #End If
 End If
 
-Dim s As String
+Dim S As String
 
-s = Command$
+S = Command$
 
-If s = "/p" Or s = "" Then
+If S = "/p" Or S = "" Then
    'MsgBox "interpretive mode"
 Else
    Dim a As Variant
-   a = Split(s, "-")
+   a = Split(S, "-")
    'For i = 0 To UBound(a)
    '    MsgBox a(i)
    'Next
@@ -1599,13 +1600,13 @@ Else
    'Create Master Schema
    '"C:\Program Files\MDB Repair Tool\mdbrt.exe" -C:\Program Files\MDB Repair Tool\northwind.mdb -C:\Program Files\MDB Repair Tool\northwind_schema.mdb -3
    
-   i = UBound(a)
+   I = UBound(a)
    
-   If i = 3 Then 'no database password passed
+   If I = 3 Then 'no database password passed
       Text1.Text = Trim(a(1))
       sSchemaDB = Trim(a(2))
       iMode = CInt(a(3))
-   ElseIf i = 4 Then 'database password passed
+   ElseIf I = 4 Then 'database password passed
       Text1.Text = Trim(a(1))
       sSchemaDB = Trim(a(2))
       iMode = CInt(a(3))
@@ -1645,15 +1646,15 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
     Dim strSQL As String
     'Dim varBookmark As Variant
     Dim B As Boolean
-    Dim s As String
+    Dim S As String
         
     On Error GoTo ErrProc
     
-    s = LCase(strTableName)
+    S = LCase(strTableName)
     
     Text2.Text = ""
     
-    Select Case s
+    Select Case S
       Case "offense"
         strSQL = "SELECT Case_R_ID,SequenceNumber FROM Offense GROUP BY Case_R_ID,SequenceNumber HAVING COUNT(*) > 1;"
       Case "case"
@@ -1674,7 +1675,7 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
     
     If rst.RecordCount > 0 Then
         'Delete the duplicates!
-        Select Case s
+        Select Case S
          Case "offense"
            strSQL = "SELECT * FROM Offense WHERE Case_R_ID = " & rst.Fields("Case_R_ID").Value & " AND SequenceNumber = '" & rst.Fields("SequenceNumber").Value & "' ORDER BY R_ID"
          Case "case"
@@ -1696,7 +1697,7 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
         
         If rst.RecordCount > 1 Then
            
-           Select Case s
+           Select Case S
                 Case "offense"
                   Text2.Text = "Duplicates found in Offense Table" & vbCrLf
                 Case "case"
@@ -1711,7 +1712,7 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
            
               rst.MoveNext 'Important! Do not delete the first record!
               Do While Not rst.EOF
-                 Select Case s
+                 Select Case S
                     Case "offense"
                       Text2.Text = Text2.Text & "R_ID = " & rst.Fields("R_ID").Value & ", Case_R_ID = " & rst.Fields("Case_R_ID").Value & ", SequenceNumber = '" & rst.Fields("SequenceNumber").Value & "'" & vbCrLf
                     Case "case"
@@ -1730,13 +1731,13 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
                  rst.MoveNext
               Loop
               If chkNoMods.Value Then
-                 Dim i As Integer
+                 Dim I As Integer
                  Dim NewStat As String
-                 i = FreeFile
+                 I = FreeFile
                  NewStat = sAppPath & "results.txt"
-                 Open NewStat For Output As #i
-                 Print #i, Text2.Text
-                 Close #i
+                 Open NewStat For Output As #I
+                 Print #I, Text2.Text
+                 Close #I
                  Shell "notepad.exe " & NewStat, vbNormalFocus
               End If
         End If
@@ -1807,7 +1808,7 @@ End Function
 Function GetDiskSpaceFree(drive As String) As Currency
     
     Dim dl As Long
-    Dim s$
+    Dim S$
     Dim SectersPerCluster&
     Dim BytesPerSector&
     Dim NumFreeClusters&
@@ -1822,9 +1823,9 @@ Function GetDiskSpaceFree(drive As String) As Currency
     
     On Error GoTo GetDiskSpaceFreeExError
     
-    s$ = drive
+    S$ = drive
 
-    Status = GetDiskFreeSpaceEx(s$, BytesAvailableToCaller, TotalBytes, FreeBytes)
+    Status = GetDiskFreeSpaceEx(S$, BytesAvailableToCaller, TotalBytes, FreeBytes)
     If Status <> 0 Then
         GetDiskSpaceFree = FreeBytes * 10000
     Else
@@ -1835,7 +1836,7 @@ Function GetDiskSpaceFree(drive As String) As Currency
 GetDiskSpaceFreeExError:
     If Err = 453 Then ' specified dll not found (early versions of Windows 95)
         On Error GoTo GetDiskSpaceFreeError
-        dl = GetDiskFreeSpace(s$, SectersPerCluster, BytesPerSector, NumFreeClusters, TotNumofClusters)
+        dl = GetDiskFreeSpace(S$, SectersPerCluster, BytesPerSector, NumFreeClusters, TotNumofClusters)
         BytesPerCluster = SectersPerCluster * BytesPerSector
         NumFreeBytes = BytesPerCluster * NumFreeClusters
         GetDiskSpaceFree = NumFreeBytes
@@ -1875,12 +1876,12 @@ For Each ctl In Controls
 Next
 End Sub
 
-Private Sub WriteErrLog(s As String)
-Dim i As Integer
+Private Sub WriteErrLog(S As String)
+Dim I As Integer
 On Error Resume Next
-i = FreeFile
-Open App.Path & "\errors.txt" For Append As #i
-Print #i, Format(Now, "mm/dd/yy hh:mm:ss am/pm") & vbTab & s
-Close #i
+I = FreeFile
+Open App.Path & "\errors.txt" For Append As #I
+Print #I, Format(Now, "mm/dd/yy hh:mm:ss am/pm") & vbTab & S
+Close #I
 End Sub
 

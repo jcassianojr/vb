@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Begin VB.Form NewOrd 
    Caption         =   "Incluindo Nova Ordem"
@@ -7,6 +7,7 @@ Begin VB.Form NewOrd
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   3120
+   Icon            =   "NewOrd.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   1365
    ScaleWidth      =   3120
@@ -20,7 +21,7 @@ Begin VB.Form NewOrd
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "NewOrd.frx":0000
+      Picture         =   "NewOrd.frx":058A
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -75,7 +76,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     ord.Value = nNOVAPOS
 End Sub
 

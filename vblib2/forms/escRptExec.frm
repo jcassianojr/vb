@@ -9,6 +9,7 @@ Begin VB.Form EscRptExec
    ClientTop       =   345
    ClientWidth     =   9105
    HelpContextID   =   6
+   Icon            =   "escRptExec.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5775
    ScaleWidth      =   9105
@@ -114,7 +115,7 @@ Private Sub Filgrid()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     If AcessaForm(nFORMID) Then
         MontaToolbar Me.Toolbar1, nFORMID
         
@@ -157,7 +158,7 @@ Private Sub incluir()
     
     cARQ = PegPath("PATH", "SYSCONF")
     nNUMERO = FixInt(PegMAXSQL(cARQ, "RPTEXEC", "NUMERO", 0)) + 1
-    nNUMERO = FixNum(Val(Busca("Nº NUMERO", "Incluindo NUMERO", str(nNUMERO), 3)))
+    nNUMERO = FixNum(Val(Busca("Nº NUMERO", "Incluindo NUMERO", Str(nNUMERO), 3)))
     ePASS01 = "select * from RPTEXEC WHERE NUMERO=" & nNUMERO
     IncluiSQL cARQ, ePASS01, 1, Array("NUMERO"), Array(nNUMERO), True
     frmRptExec.Show vbModal

@@ -8,6 +8,7 @@ Begin VB.Form escPOA
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   11400
+   Icon            =   "Escpoa.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7260
    ScaleWidth      =   11400
@@ -122,7 +123,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("PF,SEQ,SSQ", "NUMERO", "CODIGO", "NOME", "ELADAT")
     aORDES = Array("PF", "Nº", "Produto", "Descricao", "Elaboracao")
     cORDEM = "PF,SEQ,SSQ"

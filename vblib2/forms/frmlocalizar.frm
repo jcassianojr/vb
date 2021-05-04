@@ -164,7 +164,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     Me.Caption = cFORMID
     HelpContextID = nFORMID
     

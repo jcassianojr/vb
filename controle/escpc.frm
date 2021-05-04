@@ -8,6 +8,7 @@ Begin VB.Form escpc
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   11445
+   Icon            =   "escpc.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5775
    ScaleWidth      =   11445
@@ -110,7 +111,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQPC = PegPath("PATH", "PF")
     aORDEM = Array("PF", "STPFPC", "STFEPC", "CODIGO", "DESCR", "RESDAT", "FEMEAD", "PCLIBDATE", "CODIGOINT")
     aORDES = Array("Nº PF", "Alterado PC", "Alterado PF", "Codigo", "Descricao", "Data liberacao Processo fabricacao", "data liberacao femea", "data liberacao plano de controle", "Codigo Integrado")

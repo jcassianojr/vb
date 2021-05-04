@@ -8,6 +8,7 @@ Begin VB.Form frmDica
    ClientTop       =   420
    ClientWidth     =   5820
    ControlBox      =   0   'False
+   Icon            =   "frmDica.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -21,7 +22,7 @@ Begin VB.Form frmDica
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   873
-      Picture         =   "frmDica.frx":0000
+      Picture         =   "frmDica.frx":058A
       Caption         =   "Proxima"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -39,7 +40,7 @@ Begin VB.Form frmDica
       ForeColor       =   &H80000008&
       Height          =   3015
       Left            =   120
-      Picture         =   "frmDica.frx":059A
+      Picture         =   "frmDica.frx":0B24
       ScaleHeight     =   2985
       ScaleWidth      =   705
       TabIndex        =   1
@@ -71,7 +72,7 @@ Begin VB.Form frmDica
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmDica.frx":06B4
+      Picture         =   "frmDica.frx":0C3E
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -162,7 +163,7 @@ Option Explicit
 Dim sExibir As String * 255
 Dim nTOTREG As Long
 Dim cARQ As String
-Dim x As Long
+Dim X As Long
 
 Private Sub cmdProxima_Click()
     PegMensagem
@@ -170,7 +171,7 @@ End Sub
 
 Private Sub cmdOK_Click()
     sExibir = IIf(chkExibir = vbChecked, "S", "N")
-    x = WritePrivateProfileString("CITACAO", zUSER, sExibir, App.Path + "\" & App.EXEName & ".INI")
+    X = WritePrivateProfileString("CITACAO", zUSER, sExibir, App.Path + "\" & App.EXEName & ".INI")
     'X = WritePrivateProfileString(zUSER, "EXIBIR", sExibir, App.Path & "\CITACAO.INI")
     Unload Me
 End Sub
@@ -198,7 +199,7 @@ Private Sub Form_Load()
     sExibir = Trim(PegPath("CITACAO", zUSER, "S"))
     If Left(sExibir, 1) = "S" And FileExist(cARQ, True) Then
         chkExibir = vbChecked
-        Center Me
+        CenterFormToScreen Me
         'CentralizaJanela Me
         nTOTREG = PegCountSQL(cARQ, "tblcitacao", "codcitacao", 1)
         PegMensagem

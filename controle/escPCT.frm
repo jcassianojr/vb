@@ -8,6 +8,7 @@ Begin VB.Form escPCT
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   8880
+   Icon            =   "escPCT.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   8880
@@ -102,7 +103,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("IDtipo", "Descricao")
     aORDES = Array("Nº", "Descricao")
     cORDEM = "IDTIPO"

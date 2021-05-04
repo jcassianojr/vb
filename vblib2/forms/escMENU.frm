@@ -8,6 +8,7 @@ Begin VB.Form escMENU
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   8880
+   Icon            =   "escMENU.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5775
    ScaleWidth      =   8880
@@ -125,7 +126,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     FilRelat
     If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
     xmontatoolbar Me.Toolbar1, "escMENU", True

@@ -7,6 +7,7 @@ Begin VB.Form frmREVI
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   8340
+   Icon            =   "frmREVI.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -80,7 +81,7 @@ Begin VB.Form frmREVI
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmREVI.frx":0000
+      Picture         =   "frmREVI.frx":058A
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -100,7 +101,7 @@ Begin VB.Form frmREVI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmREVI.frx":059A
+      Picture         =   "frmREVI.frx":0B24
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -176,13 +177,13 @@ Dim aFOR As Variant
 Dim aCAM As Variant
 Dim aPAD As Variant
 Dim nCAMPOS As Integer
-Dim i As Integer
+Dim I As Integer
 
 Private Sub cmdClose_Click()
     On Error Resume Next
-    For i = 0 To nCAMPOS - 1
-        aVAL(i) = txtFields(i)
-    Next i
+    For I = 0 To nCAMPOS - 1
+        aVAL(I) = TXTFIELDS(I)
+    Next I
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     Screen.MousePointer = vbDefault
     Unload Me
@@ -198,7 +199,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = PegPath("PATH", "PF")
     nREV = FixInt(nREV, 0)
     nREVI = FixInt(nREVI, 0)
@@ -212,14 +213,14 @@ Private Sub Form_Load()
         aFOR = Array("NI", "NI", "CU", "NI", "C")
         aPAD = Array(0, 0, "", 0, "")
         aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-        For i = 0 To nCAMPOS - 1
-            txtFields(i) = aVAL(i)
-        Next i
+        For I = 0 To nCAMPOS - 1
+            TXTFIELDS(I) = aVAL(I)
+        Next I
     End If
     If Not lEDITAR Then
-        txtFields(4).TabStop = False
-        txtFields(4).Locked = True
-        txtFields(4).Enabled = False
+        TXTFIELDS(4).TabStop = False
+        TXTFIELDS(4).Locked = True
+        TXTFIELDS(4).Enabled = False
         cmdClose.Enabled = False
     End If
 End Sub

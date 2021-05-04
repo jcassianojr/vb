@@ -8,6 +8,7 @@ Begin VB.Form escmu01
    ClientLeft      =   165
    ClientTop       =   450
    ClientWidth     =   9690
+   Icon            =   "Escmu01.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6090
    ScaleWidth      =   9690
@@ -106,7 +107,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     aORDEM = Array("CODIGO", "NOME")
     aORDES = Array("CODIGO", "NOME")
     cORDEM = "CODIGO"
@@ -284,7 +285,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
         End Select
         Load frmIMAGENS
-        frmIMAGENS.txtFields(0).Enabled = False
+        frmIMAGENS.TXTFIELDS(0).Enabled = False
         frmIMAGENS.Escolher(0).Visible = False
         frmIMAGENS.Show vbModal, Me
     Case "ESC"

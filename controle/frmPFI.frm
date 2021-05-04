@@ -8,6 +8,7 @@ Begin VB.Form frmPFI
    ClientLeft      =   1095
    ClientTop       =   330
    ClientWidth     =   10170
+   Icon            =   "frmPFI.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -57,7 +58,7 @@ Begin VB.Form frmPFI
       Tabs            =   2
       TabHeight       =   520
       TabCaption(0)   =   "Item"
-      TabPicture(0)   =   "frmPFI.frx":0000
+      TabPicture(0)   =   "frmPFI.frx":058A
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "lblLabels(3)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -129,7 +130,7 @@ Begin VB.Form frmPFI
       Tab(0).Control(33).Enabled=   0   'False
       Tab(0).ControlCount=   34
       TabCaption(1)   =   "Figura"
-      TabPicture(1)   =   "frmPFI.frx":001C
+      TabPicture(1)   =   "frmPFI.frx":05A6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Picture1"
       Tab(1).Control(0).Enabled=   0   'False
@@ -338,7 +339,7 @@ Begin VB.Form frmPFI
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":0038
+         Picture         =   "frmPFI.frx":05C2
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -359,7 +360,7 @@ Begin VB.Form frmPFI
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":05D2
+         Picture         =   "frmPFI.frx":0B5C
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -380,7 +381,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":0B6C
+         Picture         =   "frmPFI.frx":10F6
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -401,7 +402,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":1106
+         Picture         =   "frmPFI.frx":1690
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -423,7 +424,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":16A0
+         Picture         =   "frmPFI.frx":1C2A
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -445,7 +446,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":1C3A
+         Picture         =   "frmPFI.frx":21C4
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -467,7 +468,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":21D4
+         Picture         =   "frmPFI.frx":275E
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -488,7 +489,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":276E
+         Picture         =   "frmPFI.frx":2CF8
          Caption         =   "Incluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -509,7 +510,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":2C08
+         Picture         =   "frmPFI.frx":3192
          Caption         =   "Excluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -530,7 +531,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPFI.frx":30A2
+         Picture         =   "frmPFI.frx":362C
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -551,7 +552,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":353C
+         Picture         =   "frmPFI.frx":3AC6
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -573,7 +574,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":39D6
+         Picture         =   "frmPFI.frx":3F60
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -595,7 +596,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":3F70
+         Picture         =   "frmPFI.frx":44FA
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -750,7 +751,7 @@ Begin VB.Form frmPFI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPFI.frx":450A
+      Picture         =   "frmPFI.frx":4A94
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -771,7 +772,7 @@ Begin VB.Form frmPFI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPFI.frx":4AA4
+      Picture         =   "frmPFI.frx":502E
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -854,7 +855,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
        
@@ -897,7 +898,7 @@ Private Sub cmdpeg_Click(Index As Integer)
     eRETU02 = ""                                 'Evita Cancelamento Escolha
     escIED.Show vbModal, Me
     If lRETU Then
-        txtFields(Index) = Mid(eRETU02, 1, 1)
+        TXTFIELDS(Index) = Mid(eRETU02, 1, 1)
     End If
 End Sub
 
@@ -925,12 +926,12 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     cARQ = Sdb                                   'agora sdb pois pode ser pf pfp pfg
     
-    TXTPF.Text = nPF
-    TXTSEQ.Text = nSEQ
-    TXTSSQ.Text = nSSQ
+    TXTPF.tEXT = nPF
+    TXTSEQ.tEXT = nSEQ
+    TXTSSQ.tEXT = nSSQ
     
     cSQL = "select * from PFI WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
     
@@ -941,7 +942,7 @@ Private Sub Form_Load()
     aPAD = Array(0, "", "", "", "", 0, 0, 0, 0, 0, "", "", "", "", "", "", "", "", "")
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     
     

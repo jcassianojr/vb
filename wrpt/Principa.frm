@@ -1,13 +1,31 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{7B4BC5ED-76A0-4FFB-9D26-6EE54C082750}#2.5#0"; "CoolXPMenu.ocx"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
-   Caption         =   " "
+   Caption         =   " Menu Inicial"
    ClientHeight    =   3990
    ClientLeft      =   1575
    ClientTop       =   1890
    ClientWidth     =   10530
+   Icon            =   "Principa.frx":0000
    WindowState     =   2  'Maximized
+   Begin CoolXPMenu.xpMenu xpMenu1 
+      Left            =   3240
+      Top             =   1290
+      _ExtentX        =   900
+      _ExtentY        =   900
+      BmpCount        =   0
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
    Begin MSComctlLib.ImageList ImageList1 
       Left            =   780
       Top             =   180
@@ -58,20 +76,20 @@ Begin VB.MDIForm frmPRINCIPAL
             AutoSize        =   2
             Object.Width           =   1588
             MinWidth        =   1587
-            Picture         =   "Principa.frx":0000
-            TextSave        =   "17:02"
+            Picture         =   "Principa.frx":058A
+            TextSave        =   "11:04"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
             AutoSize        =   2
             Object.Width           =   2302
             MinWidth        =   2293
-            Picture         =   "Principa.frx":059A
-            TextSave        =   "31/03/2021"
+            Picture         =   "Principa.frx":0B24
+            TextSave        =   "04/05/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
-            Picture         =   "Principa.frx":0B34
+            Picture         =   "Principa.frx":10BE
          EndProperty
          BeginProperty Panel7 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
@@ -180,7 +198,7 @@ Dim carqhelp As String
 
     On Error GoTo ErrorHandler
     
-    Center Me
+    CenterFormToScreen Me
     
 '    aDIREITOS = Array(True, True, True, True, True, True, True, True)
 '    FrmRTf.Show vbModal
@@ -249,14 +267,14 @@ Dim carqhelp As String
         End If
     End If
     
-   
+
     zEMPRESA = 1
     zMES = Month(Date)
     zANO = Year(Date)
    
     ZGRPSUB = ""
 
-    FrmSplash.Show vbModal
+    'FrmSplash.Show vbModal
 
     cmdline = Trim(Command())
     bACESSO = False

@@ -8,6 +8,7 @@ Begin VB.Form frmRptExec
    ClientTop       =   330
    ClientWidth     =   8235
    HelpContextID   =   7
+   Icon            =   "frmRptExec.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -104,7 +105,7 @@ Begin VB.Form frmRptExec
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmRptExec.frx":0000
+      Picture         =   "frmRptExec.frx":058A
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -124,7 +125,7 @@ Begin VB.Form frmRptExec
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmRptExec.frx":059A
+      Picture         =   "frmRptExec.frx":0B24
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -256,7 +257,7 @@ End Sub
 
 Private Sub Form_Load()
    
-    Center Me
+    CenterFormToScreen Me
     ''Configura Help
     Me.Caption = cFORMID
     HelpContextID = nFORMID

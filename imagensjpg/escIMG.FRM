@@ -346,7 +346,7 @@ Private Sub Form_Load()
     Dim cARQHELP As String
     Dim SSQL As String
     
-    Center Me
+    CenterFormToScreen Me
     Me.Caption = cFORMID
     HelpContextID = nFORMID
     

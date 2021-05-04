@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{6BF52A50-394A-11D3-B153-00C04F79FAA6}#1.0#0"; "wmp.dll"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form FrmVid 
    Caption         =   "Media View"
    ClientHeight    =   4095
@@ -12,6 +13,14 @@ Begin VB.Form FrmVid
    ScaleHeight     =   4095
    ScaleWidth      =   5655
    StartUpPosition =   3  'Windows Default
+   Begin vbExtra.SizeGrip SizeGrip1 
+      Height          =   285
+      Left            =   5370
+      Top             =   3810
+      Width           =   285
+      _ExtentX        =   503
+      _ExtentY        =   503
+   End
    Begin XPControls.XPButton encerrar 
       Height          =   495
       Left            =   4440
@@ -80,7 +89,7 @@ Private Sub Encerrar_Click()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     If FileExist(cARQRTF, True) Then
         Player.URL = cARQRTF
          

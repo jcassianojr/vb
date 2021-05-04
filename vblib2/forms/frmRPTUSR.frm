@@ -311,7 +311,7 @@ End Sub
 
 Private Sub Form_Load()
 
-    Center Me
+    CenterFormToScreen Me
 
     cSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "' AND IDUSUARIO=" & zIDRPTUSR
     txtFields(0) = zIDRPTUSR

@@ -57,6 +57,14 @@ Begin VB.Form escuser
       Appearance      =   1
       TextAlignment   =   1
       _Version        =   393216
+      Begin vbExtra.SizeGrip SizeGrip1 
+         Height          =   285
+         Left            =   1185
+         Top             =   5790
+         Width           =   285
+         _ExtentX        =   503
+         _ExtentY        =   503
+      End
    End
 End
 Attribute VB_Name = "escuser"
@@ -143,7 +151,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
     FilRelat
     If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
     xmontatoolbar Me.Toolbar1, "escUSER", True

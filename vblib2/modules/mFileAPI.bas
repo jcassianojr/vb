@@ -40,7 +40,7 @@ Or OFN_HIDEREADONLY
 
 Public Type OPENFILENAME
     nStructSize       As Long
-    hwndOwner         As Long
+    hWndOwner         As Long
     hInstance         As Long
     sFILTER           As String
     sCustomFilter     As String
@@ -142,7 +142,7 @@ Public Function FileOpen(frmOwner As Form, _
  
     With OFN
         .nStructSize = Len(OFN)
-        .hwndOwner = frmOwner.hWnd
+        .hWndOwner = frmOwner.hWnd
         .sFILTER = sFilters & vbNullChar & vbNullChar
         .nFilterIndex = nFilterIndex
         .sFile = sDefaultFileName & Space$(1024) & vbNullChar & vbNullChar
@@ -177,7 +177,7 @@ Public Function FileSave(frmOwner As Form, _
     With OFN
         
         .nStructSize = Len(OFN)
-        .hwndOwner = frmOwner.hWnd
+        .hWndOwner = frmOwner.hWnd
         .sFILTER = sFilters & vbNullChar & vbNullChar
         .nFilterIndex = nFilterIndex
         .sFile = sDefaultFileName & Space$(1024) & _
@@ -283,20 +283,20 @@ Public Function ImgFILTER2() As String
 End Function
 
 Public Function parsefile(ByVal archivo As String, ByVal parte As String) As String
-    Dim PosSlash, PosPunto, PosColon, LastSlash, i As Long
-    Dim c As String
+    Dim PosSlash, PosPunto, PosColon, LastSlash, I As Long
+    Dim C As String
     PosSlash = 0
     LastSlash = 0                                'un slash antes del ultimo
     PosPunto = 0
     PosColon = 0
-    For i = 1 To Len(archivo)
-        c = Mid(archivo, i, 1)
-        If c = "." Then PosPunto = i             'Posicion del ULTIMO punto
-        If c = "\" Then
+    For I = 1 To Len(archivo)
+        C = Mid(archivo, I, 1)
+        If C = "." Then PosPunto = I             'Posicion del ULTIMO punto
+        If C = "\" Then
             LastSlash = PosSlash
-            PosSlash = i                         'Posicion del ULTIMO backslash
+            PosSlash = I                         'Posicion del ULTIMO backslash
         End If
-        If c = ":" Then PosColon = i             'Posicion del :
+        If C = ":" Then PosColon = I             'Posicion del :
     Next
     Select Case UCase(parte)
     Case "D"                                     'drive
@@ -441,7 +441,8 @@ OpenErrors:
         OpenStreamFile = 0                       'Unrecoverable ERROR-reports error, exits function with error code
         Exit Function
     Case Else
-        MsgBox Error$(Err) + vbCrLf + "After line " + CStr(Erl) + vbCrLf + "Program will TERMINATE!"
+        'MsgBox error$(Err) + vbCrLf + "After line " + CStr(Erl) + vbCrLf + "Program will TERMINATE!"
+        
         'Unrecognized ERROR-reports error and terminates.
         'End
     End Select

@@ -1,11 +1,12 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "xpcontrols.ocx"
+Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form FrmImp2 
    Caption         =   "Importando Dados"
    ClientHeight    =   1755
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   6525
+   Icon            =   "FrmImp2.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   1755
    ScaleWidth      =   6525
@@ -74,7 +75,7 @@ Begin VB.Form FrmImp2
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmImp2.frx":0000
+      Picture         =   "FrmImp2.frx":058A
       Caption         =   "Confirmar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -94,7 +95,7 @@ Begin VB.Form FrmImp2
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmImp2.frx":059A
+      Picture         =   "FrmImp2.frx":0B24
       Caption         =   "Cancelar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -114,7 +115,7 @@ Begin VB.Form FrmImp2
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "FrmImp2.frx":0B34
+      Picture         =   "FrmImp2.frx":10BE
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -134,7 +135,7 @@ Begin VB.Form FrmImp2
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "FrmImp2.frx":10CE
+      Picture         =   "FrmImp2.frx":1658
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -190,14 +191,14 @@ End Sub
 Private Sub CmdescPF_Click()
     escpf.Show vbModal, Me
     If lRETU Then
-        Text(0).Text = eRETU01
+        tEXT(0).tEXT = eRETU01
     End If
 End Sub
 
 Private Sub Command1_Click()
     escpf.Show vbModal, Me
     If lRETU Then
-        Text(1).Text = eRETU01
+        tEXT(1).tEXT = eRETU01
     End If
 End Sub
 
@@ -206,7 +207,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
+    CenterFormToScreen Me
 End Sub
 
 Private Sub ok_Click()
@@ -218,8 +219,8 @@ Private Sub ok_Click()
         cARQ = PegPath("PATH", "IE")
     End If
     
-    nPF = Val(Text(1))
-    nPFORI = Val(Text(0))
+    nPF = Val(tEXT(1))
+    nPFORI = Val(tEXT(0))
     cSQL1 = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
     cSQL2 = "select * from " & cARQIMP & " WHERE pf=" & nPF
     cSQL3 = "select * from " & cARQIMP & " WHERE pf=" & nPFORI

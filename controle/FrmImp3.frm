@@ -7,6 +7,7 @@ Begin VB.Form FrmImp3
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   7350
+   Icon            =   "FrmImp3.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   4590
    ScaleWidth      =   7350
@@ -86,7 +87,7 @@ Begin VB.Form FrmImp3
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "FrmImp3.frx":0000
+      Picture         =   "FrmImp3.frx":058A
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -106,7 +107,7 @@ Begin VB.Form FrmImp3
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmImp3.frx":059A
+      Picture         =   "FrmImp3.frx":0B24
       Caption         =   "Confirmar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -126,7 +127,7 @@ Begin VB.Form FrmImp3
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmImp3.frx":0B34
+      Picture         =   "FrmImp3.frx":10BE
       Caption         =   "Cancelar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -261,7 +262,7 @@ End Sub
 Private Sub CmdescPF_Click()
     escpf.Show vbModal, Me
     If lRETU Then
-        Text(0).Text = eRETU01
+        tEXT(0).tEXT = eRETU01
     End If
 End Sub
 
@@ -275,9 +276,9 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Center Me
-    seq.Value = str(nSEQ)
-    Ssq.Value = str(nSSQ)
+    CenterFormToScreen Me
+    SEQ.Value = Str(nSEQ)
+    SSQ.Value = Str(nSSQ)
     cARQFEMEA = PegPath("PATH", "FEMEA")
     cARQPF = PegPath("PATH", "PF")
     cARQPFP = PegPath("PATH", "PFP")
@@ -298,9 +299,9 @@ Private Sub importar()
     Dim sSQL As String
     Dim cDUPSQL As String
 
-    nPFORI = Val(Text(0))
-    nSEQORI = Val(seq.Value)
-    nSSQORI = Val(Ssq.Value)
+    nPFORI = Val(tEXT(0))
+    nSEQORI = Val(SEQ.Value)
+    nSSQORI = Val(SSQ.Value)
     
     cDUPSQL = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
     
