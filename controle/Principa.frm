@@ -1,6 +1,5 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
-Object = "{7B4BC5ED-76A0-4FFB-9D26-6EE54C082750}#2.5#0"; "CoolXPMenu.ocx"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
    Caption         =   " "
@@ -11,22 +10,6 @@ Begin VB.MDIForm frmPRINCIPAL
    Icon            =   "Principa.frx":0000
    StartUpPosition =   2  'CenterScreen
    WindowState     =   2  'Maximized
-   Begin CoolXPMenu.xpMenu xpMenu1 
-      Left            =   4200
-      Top             =   2340
-      _ExtentX        =   900
-      _ExtentY        =   900
-      BmpCount        =   0
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Tahoma"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin MSComctlLib.ImageList ImageList1 
       Left            =   780
       Top             =   60
@@ -77,7 +60,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "11:10"
+            TextSave        =   "14:41"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -85,7 +68,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":0B24
-            TextSave        =   "04/05/2021"
+            TextSave        =   "05/05/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -455,12 +438,19 @@ End Sub
 Private Sub mnuSUBMENU4_Click(Index As Integer)
     Dim CLINHA As String
     
-    ''nao verifica acesso todos entram
-    ''os que necessitam case abaixo
-    Select Case Index
+    ''todos usurios aceeos
+    ''os que necessitam permissao case abaixo apos o check
+Select Case Index
     
     Case 0
         FrmPrintSetup.Show vbModal
+        Exit Sub
+        
+    Case 1
+        cARQRTF = PegPath("HELP", "HELPTXT")
+        If FileExist(cARQRTF, True) Then
+             PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
+        End If
         Exit Sub
     Case 6
         zIDTEMP = zUSERID
@@ -471,28 +461,18 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
         frmDica.Show
         Exit Sub
     Case 8
-        'Calculadora.Show
         ShellEx "calc"
         Exit Sub
     Case 9
-        ''CLINHA = "MAIL $" & UCase(zUSER)
-        ''Shell CLINHA, vbNormalFocus
-        ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hWnd
+        ShellEx "emailprg.exe", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hWnd
         Exit Sub
-    End Select
+End Select
     
 
-    If Not AcessaMenu("mnuSUBMENU4", Index) Then Exit Sub
-    Select Case Index
-    Case 1
-        cARQRTF = PegPath("HELP", "HELPTXT") '+ "controle.txt"
-        If FileExist(cARQRTF, True) Then
-            ' 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
-            ' 4-Editar,5-Visualizar,6-Imprimir,7-Exportar
-'            aDIREITOS = Array(False, False, False, False, True, True, True, False)
-'            FrmRTf.Show
-             PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
-        End If
+If Not AcessaMenu("mnuSUBMENU4", Index) Then
+    Exit Sub
+End If
+Select Case Index
     Case 2
         escuser.Show vbModal
     Case 3
@@ -501,9 +481,7 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
         escBTN.Show vbModal
     Case 5
         configuraodbc
-    End Select
-
-
+End Select
 End Sub
 
 Private Sub mnuSUBMENU5_Click(Index As Integer)

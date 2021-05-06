@@ -2,7 +2,6 @@ VERSION 5.00
 Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
-Object = "{7B4BC5ED-76A0-4FFB-9D26-6EE54C082750}#2.5#0"; "CoolXPMenu.ocx"
 Begin VB.Form FrmRTf 
    Caption         =   "Editor Textos"
    ClientHeight    =   7245
@@ -14,22 +13,6 @@ Begin VB.Form FrmRTf
    ScaleHeight     =   7245
    ScaleWidth      =   11715
    StartUpPosition =   2  'CenterScreen
-   Begin CoolXPMenu.xpMenu xpMenu1 
-      Left            =   11190
-      Top             =   660
-      _ExtentX        =   900
-      _ExtentY        =   900
-      BmpCount        =   0
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Tahoma"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin VBCCR17.FontCombo FontCombo1 
       Height          =   315
       Left            =   2400
@@ -101,7 +84,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "FrmRtf.frx":10D2
-            TextSave        =   "16:55"
+            TextSave        =   "14:37"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -109,7 +92,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "FrmRtf.frx":166C
-            TextSave        =   "04/05/2021"
+            TextSave        =   "05/05/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -689,7 +672,6 @@ Begin VB.Form FrmRTf
       _ExtentX        =   19923
       _ExtentY        =   10610
       _Version        =   393217
-      Enabled         =   -1  'True
       ScrollBars      =   3
       TextRTF         =   $"FrmRtf.frx":146B8
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1101,7 +1083,7 @@ End Sub
 '***************************************************************************
 
 Private Sub cmbFontSize_Click()
-    RichTextbox1.SelFontSize = cmbFontSize.Text
+    RichTextbox1.SelFontSize = cmbFontSize.tEXT
     ''RichTextbox1.SetFocus
 End Sub
 
@@ -1480,7 +1462,7 @@ Private Sub Command9_Click()
 End Sub
 
 Private Sub FontCombo1_Click()
-    RichTextbox1.SelFontName = FontCombo1.Text
+    RichTextbox1.SelFontName = FontCombo1.tEXT
     RichTextbox1.SetFocus
     
     
@@ -1618,7 +1600,7 @@ Private Sub Form_Load()
     ''Abre o Arquivo se passado cARQRTF
     ABRIR
     
-    StatusBar1.Panels(6).Text = zUSER
+    StatusBar1.Panels(6).tEXT = zUSER
     
    ' cmbfontname.tEXT = RichTextbox1.SelFontName
     
@@ -1812,7 +1794,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 End Sub
 
 Private Sub mnuEditarInserirCaracter_Click()
-    ePASS01 = FontCombo1.Text     'cmbfontname.text
+    ePASS01 = FontCombo1.tEXT     'cmbfontname.text
     ePASS02 = True
     frmCharacters.Show vbModal, Me
     'FrmAscII.Show vbModal, Me
@@ -1935,7 +1917,7 @@ End Sub
 '***************************************************************************
 
 Private Sub mnunew_Click()
-    RichTextbox1.Text = ""
+    RichTextbox1.tEXT = ""
     RichTextbox1.SetFocus
 End Sub
 
@@ -2176,7 +2158,7 @@ End Sub
 
 Private Sub mnuselectall_Click()
     RichTextbox1.SelStart = 0
-    RichTextbox1.SelLength = Len(RichTextbox1.Text)
+    RichTextbox1.SelLength = Len(RichTextbox1.tEXT)
     RichTextbox1.SetFocus
 End Sub
 
@@ -2300,7 +2282,7 @@ Private Sub RichTextBox1_SelChange()
     '******************************************************************
 
     If Not IsNull(RichTextbox1.SelFontSize) Then
-        cmbFontSize.Text = RichTextbox1.SelFontSize
+        cmbFontSize.tEXT = RichTextbox1.SelFontSize
     End If
 
     '* Show Font name in the ComboBox.

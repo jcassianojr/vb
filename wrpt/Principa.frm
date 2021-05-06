@@ -1,6 +1,5 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
-Object = "{7B4BC5ED-76A0-4FFB-9D26-6EE54C082750}#2.5#0"; "CoolXPMenu.ocx"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
    Caption         =   " Menu Inicial"
@@ -10,22 +9,6 @@ Begin VB.MDIForm frmPRINCIPAL
    ClientWidth     =   10530
    Icon            =   "Principa.frx":0000
    WindowState     =   2  'Maximized
-   Begin CoolXPMenu.xpMenu xpMenu1 
-      Left            =   3240
-      Top             =   1290
-      _ExtentX        =   900
-      _ExtentY        =   900
-      BmpCount        =   0
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Tahoma"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin MSComctlLib.ImageList ImageList1 
       Left            =   780
       Top             =   180
@@ -77,7 +60,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "18:18"
+            TextSave        =   "14:37"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -85,7 +68,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":0B24
-            TextSave        =   "04/05/2021"
+            TextSave        =   "05/05/2021"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -576,7 +559,7 @@ Dim carqhelp As String
     
         
        
-    StatusBar1.Panels(6).Text = zUSER
+    StatusBar1.Panels(6).tEXT = zUSER
     If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
        frmDica.Show
     End If
