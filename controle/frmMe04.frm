@@ -960,7 +960,7 @@ End Sub
 
 Private Sub cmdFOTO_Click()
     Dim cSQL As String
-    zgrp = FixStr(TxtCodigo.tEXT)
+    zgrp = FixStr(txtcodigo.tEXT)
     If Len(zgrp) = 0 Then
         Alert "Codigo nao preenchido"
         Exit Sub
@@ -970,7 +970,7 @@ Private Sub cmdFOTO_Click()
     cSQL = "select codigo from IMAGENS WHERE CODIGO='" & zgrp & "'"
     IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(zgrp), True, False
     Load frmIMAGENS
-    frmIMAGENS.TXTFIELDS(0).Enabled = False
+    frmIMAGENS.txtFields(0).Enabled = False
     frmIMAGENS.Escolher(0).Visible = False
     frmIMAGENS.Show vbModal, Me
 End Sub
@@ -1097,8 +1097,15 @@ Private Sub Form_Load()
     cmdgrvdata.Visible = False
     cARQ = PegPath("PATH", "MANA5INS")
     cARQ = GeraConn(cARQ, "SDECDX")
-    cSQL = "select * from ME04 WHERE CODIGO='" & Trim(ePASS01) & "'"
-    TxtCodigo.tEXT = ePASS01
+    cSQL = "select CODIGO, "
+    cSQL = cSQL & " CADTIP , NOMTIPO, APLICACAO, PF, CODTIPO,"
+    cSQL = cSQL & " TIPO , DESENHO, APLIC, NORMA, MODELO,"
+    cSQL = cSQL & " MARCA, CAPACI, DIVI, ERROADM, CODFOR,"
+    cSQL = cSQL & " COGFOR , COMPRA, Valor, ATIVO, SITUACAO,"
+    cSQL = cSQL & " DATAUSO , DATAFIM, TIPCAL, CALIBRAR, CALULT,"
+    cSQL = cSQL & " CALPRO , DATAEXT, OBS01, OBS02, OBS03, PRECO, CODIGOINT "
+    cSQL = cSQL & " FROM ME04 WHERE CODIGO='" & Trim(ePASS01) & "'"
+    txtcodigo.tEXT = ePASS01
     nCAMPOS = 32
     aCAM = Array("CADTIP", "NOMTIPO", "APLICACAO", "PF", "CODTIPO", _
                  "TIPO", "DESENHO", "APLIC", "NORMA", "MODELO", _

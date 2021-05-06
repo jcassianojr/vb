@@ -1,15 +1,15 @@
 VERSION 5.00
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
 Begin VB.Form frmFER 
    Caption         =   "Cadastro Ferramenta"
-   ClientHeight    =   5790
+   ClientHeight    =   6405
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   9900
    Icon            =   "frmFER.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5790
+   ScaleHeight     =   6405
    ScaleWidth      =   9900
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox TxtNumero 
@@ -23,7 +23,7 @@ Begin VB.Form frmFER
       Top             =   1080
       Width           =   1335
    End
-   Begin TabDlg.SSTab SSTab1 
+   Begin TabExCtl.SSTabEx SSTab1 
       Height          =   4215
       Left            =   120
       TabIndex        =   8
@@ -31,17 +31,22 @@ Begin VB.Form frmFER
       Width           =   7935
       _ExtentX        =   13996
       _ExtentY        =   7435
-      _Version        =   393216
       Tabs            =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       TabsPerRow      =   5
       TabHeight       =   794
       TabCaption(0)   =   "Basica"
-      TabPicture(0)   =   "frmFER.frx":058A
-      Tab(0).ControlEnabled=   -1  'True
       Tab(0).ControlCount=   0
       TabCaption(1)   =   "Preventiva Vida Util"
-      TabPicture(1)   =   "frmFER.frx":05A6
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlCount=   8
       Tab(1).Control(0)=   "TXTFIELDS(3)"
       Tab(1).Control(1)=   "TXTFIELDS(2)"
       Tab(1).Control(2)=   "TXTFIELDS(1)"
@@ -50,26 +55,17 @@ Begin VB.Form frmFER
       Tab(1).Control(5)=   "Label(4)"
       Tab(1).Control(6)=   "Label(3)"
       Tab(1).Control(7)=   "Label(2)"
-      Tab(1).ControlCount=   8
       TabCaption(2)   =   "Dimensoes Elaborador"
-      TabPicture(2)   =   "frmFER.frx":05C2
-      Tab(2).ControlEnabled=   0   'False
       Tab(2).ControlCount=   0
       TabCaption(3)   =   "Tecnicas I"
-      TabPicture(3)   =   "frmFER.frx":05DE
-      Tab(3).ControlEnabled=   0   'False
       Tab(3).ControlCount=   0
       TabCaption(4)   =   "Tecnicas II"
-      TabPicture(4)   =   "frmFER.frx":05FA
-      Tab(4).ControlEnabled=   0   'False
+      Tab(4).ControlCount=   82
       Tab(4).Control(0)=   "TXTFIELDS(10)"
       Tab(4).Control(1)=   "TXTFIELDS(9)"
       Tab(4).Control(2)=   "TXTFIELDS(8)"
-      Tab(4).Control(2).Enabled=   0   'False
       Tab(4).Control(3)=   "TXTFIELDS(7)"
-      Tab(4).Control(3).Enabled=   0   'False
       Tab(4).Control(4)=   "TXTFIELDS(6)"
-      Tab(4).Control(4).Enabled=   0   'False
       Tab(4).Control(5)=   "Command20"
       Tab(4).Control(6)=   "TXTFIELDS(11)"
       Tab(4).Control(7)=   "TXTFIELDS(12)"
@@ -147,7 +143,6 @@ Begin VB.Form frmFER
       Tab(4).Control(79)=   "Label3"
       Tab(4).Control(80)=   "Label2"
       Tab(4).Control(81)=   "Label1"
-      Tab(4).ControlCount=   82
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
@@ -1683,7 +1678,7 @@ Begin VB.Form frmFER
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmFER.frx":0616
+      Picture         =   "frmFER.frx":058A
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1703,7 +1698,7 @@ Begin VB.Form frmFER
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmFER.frx":0BB0
+      Picture         =   "frmFER.frx":0B24
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1723,7 +1718,7 @@ Begin VB.Form frmFER
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   873
-      Picture         =   "frmFER.frx":114A
+      Picture         =   "frmFER.frx":10BE
       Caption         =   "Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1744,7 +1739,7 @@ Begin VB.Form frmFER
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmFER.frx":16E4
+      Picture         =   "frmFER.frx":1658
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1766,7 +1761,7 @@ Begin VB.Form frmFER
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmFER.frx":1C7E
+      Picture         =   "frmFER.frx":1BF2
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1788,7 +1783,7 @@ Begin VB.Form frmFER
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmFER.frx":2218
+      Picture         =   "frmFER.frx":218C
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1810,7 +1805,7 @@ Begin VB.Form frmFER
       Width           =   855
       _ExtentX        =   1508
       _ExtentY        =   661
-      Picture         =   "frmFER.frx":27B2
+      Picture         =   "frmFER.frx":2726
       Caption         =   "LX2"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1901,7 +1896,7 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub cmdFOTO_Click()
-    zgrp = TxtCodigo.tEXT
+    zgrp = txtCodigo.Text
     iImage = 3
     cARQRTF = PegPath("PATH", "IMGFER")
     Load frmIMAGENS
@@ -1916,13 +1911,13 @@ Private Sub Command20_Click()
     If Not MDG("Trocar Tipo Almofada") Then
         Exit Sub
     End If
-    If TXTFIELDS(6).tEXT = "6" Then
-        TXTFIELDS(6).tEXT = "8"
+    If TXTFIELDS(6).Text = "6" Then
+        TXTFIELDS(6).Text = "8"
     Else
-        TXTFIELDS(6).tEXT = "6"
+        TXTFIELDS(6).Text = "6"
     End If
     For X = 1 To 8
-        If TXTFIELDS(6).tEXT = "6" Then
+        If TXTFIELDS(6).Text = "6" Then
             cTEMP = String(6, "¡") + Space(2)
             If X >= 5 Then
                 cTEMP = Space(8)
@@ -1930,7 +1925,7 @@ Private Sub Command20_Click()
         Else
             cTEMP = String(8, "¡")
         End If
-        TXTFIELDS(10 + X).tEXT = cTEMP
+        TXTFIELDS(10 + X).Text = cTEMP
     Next
 End Sub
 
@@ -1966,15 +1961,15 @@ Private Sub esc1_Click(Index As Integer)
     coluna = (Index + 8) - (linha * 8)
     'Alert coluna
     'ALERT LINHA
-    If TXTFIELDS(6).tEXT = "6" And linha > 4 Then
+    If TXTFIELDS(6).Text = "6" And linha > 4 Then
         Alert ("Linha Incorreta para Formato 4x6")
         Exit Sub
     End If
-    If TXTFIELDS(6).tEXT = "6" And coluna > 6 Then
+    If TXTFIELDS(6).Text = "6" And coluna > 6 Then
         Alert ("Coluna Incorreta para Formato 4x6")
         Exit Sub
     End If
-    cTEMP = TXTFIELDS(10 + linha).tEXT
+    cTEMP = TXTFIELDS(10 + linha).Text
     cDIG = Mid(cTEMP, coluna, 1)
     If cDIG = "l" Then
         cDIG = "¡"
@@ -1989,7 +1984,7 @@ Private Sub esc1_Click(Index As Integer)
     Case Else
         cGRV = Mid(cTEMP, 1, coluna - 1) + cDIG + Mid(cTEMP, coluna + 1)
     End Select
-    TXTFIELDS(10 + linha).tEXT = cGRV
+    TXTFIELDS(10 + linha).Text = cGRV
     TXTFIELDS(10 + linha).Refresh
 End Sub
 
@@ -2027,10 +2022,13 @@ End Sub
 Private Sub Form_Load()
     CenterFormToScreen Me
     cARQ = GeraConn(PegPath("PATH", "MANA5FER"), "SDECDX")
-    cSQL = "select * from FERRAM WHERE FERRAM='" & LTrim(RTrim(ePASS01)) & "'"
-    TxtCodigo.tEXT = ePASS01
-    TxtNumero.tEXT = ePASS02
-    TxtNome.tEXT = ePASS03
+    cSQL = "select "
+    cSQL = cSQL & " FERRAM , QTDEBASE, HRBAS, VDBAS, VDHBAS, COGCLI, CLIENTE, ESQTIP, USADEMI, USADISP, PRATILE, OBST01,"
+    cSQL = cSQL & " ESQL01 , ESQL02, ESQL03, ESQL04, ESQL05, ESQL06, ESQL07, ESQL08"
+    cSQL = cSQL & " FROM FERRAM WHERE FERRAM='" & LTrim(RTrim(ePASS01)) & "'"
+    txtCodigo.Text = ePASS01
+    TxtNumero.Text = ePASS02
+    txtNome.Text = ePASS03
     nCAMPOS = 18
     aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "COGCLI", "CLIENTE", "ESQTIP", "USADEMI", "USADISP", "PRATILE", "OBST01", _
                  "ESQL01", "ESQL02", "ESQL03", "ESQL04", "ESQL05", "ESQL06", "ESQL07", "ESQL08")

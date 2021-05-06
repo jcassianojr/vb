@@ -50,8 +50,8 @@ Private Declare Function SetStretchBltMode _
 
 Private Declare Function StretchBlt _
                          Lib "gdi32" (ByVal hDC As Long, _
-                                      ByVal x As Long, _
-                                      ByVal y As Long, _
+                                      ByVal X As Long, _
+                                      ByVal Y As Long, _
                                       ByVal nWidth As Long, _
                                       ByVal nHeight As Long, _
                                       ByVal hSrcDC As Long, _
@@ -184,7 +184,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cSQL As String, _
     lOPEN = True
     
     Set oRS = New ADODB.Recordset
-    oRS.Open cSQL, oDB, adOpenStatic, adLockOptimistic
+    oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic ''adOpenStatic
     
     
     lRSOP = True

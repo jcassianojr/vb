@@ -168,59 +168,49 @@ Private Sub cmdOK_Click()
     Dim sSQL As String
    
     lRETU = True
-    txtFields(0) = Trim(txtFields(0))
-    txtFields(1) = Trim(txtFields(1))
-    txtFields(2) = Trim(txtFields(2))
+    TXTFIELDS(0) = Trim(TXTFIELDS(0))
+    TXTFIELDS(1) = Trim(TXTFIELDS(1))
+    TXTFIELDS(2) = Trim(TXTFIELDS(2))
 
-    If Len(txtFields(1)) > 8 Then
-
+    If Len(TXTFIELDS(1)) > 8 Then
         Alert "Máximo 8 digitos para a Senha", "Senha Invalida"
-        txtFields(1).tEXT = ""
-        txtFields(1).SetFocus
+        TXTFIELDS(1).tEXT = ""
+        TXTFIELDS(1).SetFocus
         lRETU = False
         Exit Sub
-
     End If
 
-    If Len(txtFields(2)) > 8 Then
-
+    If Len(TXTFIELDS(2)) > 8 Then
         Alert "Máximo 8 digitos para a Senha", "Senha Invalida"
-        txtFields(2).tEXT = ""
-        txtFields(2).SetFocus
+        TXTFIELDS(2).tEXT = ""
+        TXTFIELDS(2).SetFocus
         lRETU = False
         Exit Sub
-
     End If
 
-    If Len(txtFields(1)) < 8 Then
-
+    If Len(TXTFIELDS(1)) < 8 Then
         Alert "Necessário 8 digitos para a Senha", "Senha Invalida"
-        txtFields(1).tEXT = ""
-        txtFields(1).SetFocus
+        TXTFIELDS(1).tEXT = ""
+        TXTFIELDS(1).SetFocus
         lRETU = False
         Exit Sub
-
     End If
 
-    If Len(txtFields(2)) < 8 Then
-
+    If Len(TXTFIELDS(2)) < 8 Then
         Alert "Necessário 8 digitos para a Senha", "Senha Invalida"
-        txtFields(2).tEXT = ""
-        txtFields(2).SetFocus
+        TXTFIELDS(2).tEXT = ""
+        TXTFIELDS(2).SetFocus
         lRETU = False
         Exit Sub
-
     End If
 
-    If txtFields(0) = txtFields(1) Then
-
+    If TXTFIELDS(0) = TXTFIELDS(1) Then
         Alert "Senha Precisa ser Diferente da Anterior", "Senha Invalida"
-        txtFields(1).tEXT = ""
-        txtFields(2).tEXT = ""
-        txtFields(1).SetFocus
+        TXTFIELDS(1).tEXT = ""
+        TXTFIELDS(2).tEXT = ""
+        TXTFIELDS(1).SetFocus
         lRETU = False
         Exit Sub
-
     End If
     
     Set DB = New ADODB.Connection
@@ -228,58 +218,36 @@ Private Sub cmdOK_Click()
 
     DB.ConnectionTimeout = 120
     DB.Open GeracArq(dbuser)
-
     
     sSQL = "select * from USUARIO WHERE IDUSUARIO=" & zIDTEMP
-    RSSENHA.Open sSQL, DB, adOpenStatic, adLockOptimistic
-    
+    RSSENHA.Open sSQL, DB, adOpenKeyset, adLockOptimistic 'adOpenStatic
 
     With RSSENHA
-
         If Not .EOF Then
-
-            strEncryptedText = XOREncryption(strCodeKey, txtFields(0))
-
+            strEncryptedText = XOREncryption(strCodeKey, TXTFIELDS(0))
             If strEncryptedText = "" & !senha Then
-
-                If txtFields(1) = txtFields(2) Then
-
-                    '                    .Edit
-                    strEncryptedText = XOREncryption(strCodeKey, txtFields(1))
+                If TXTFIELDS(1) = TXTFIELDS(2) Then
+                    strEncryptedText = XOREncryption(strCodeKey, TXTFIELDS(1))
                     RSSENHA("SENHA") = strEncryptedText
                     RSSENHA("TROCAR") = Date + 60
                     .Update
-
                 Else
                     Alert "Confirmação não confere! A Senha não foi alterada.", "Alteração de senha"
-
                 End If
-
             Else
-
                 Alert "Senha não confere! A Senha não foi alterada.", "Alteração de senha"
-
             End If
-
         End If
-
         .Close
-
     End With
     DB.Close
-
     Unload Me
-
 End Sub
-
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
     TeclaEnter KeyCode
 End Sub
-
 Private Sub Form_Load()
     CenterFormToScreen Me
-    
     Label4 = zIDTEMP
-
 End Sub
 

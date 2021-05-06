@@ -220,9 +220,9 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     lOPEN = True
     
     'na string de conecao delete =yes
-    'If  InStr(ucase(cARQ), "VFPOLEDB")>0 Then ''delete on para foxpro nao usar registro deletados
-    '     vfpsetvalues ODB
-    'End If
+    If InStr(UCase(cARQ), "VFPOLEDB") > 0 Then ''delete on para foxpro nao usar registro deletados
+         VFPSetValues oDB
+    End If
     
     
     Set oRS = New ADODB.Recordset
@@ -306,9 +306,9 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
     oDB.Open cARQ
     
     'na string de conecao delete =yes
-    'If InStr(cARQ, "VFPOLEDB")>0 Then ''delete on para foxpro nao usar registro deletados
-    '  vfpsetvalues ODB
-    'End If
+    If InStr(cARQ, "VFPOLEDB") > 0 Then ''delete on para foxpro nao usar registro deletados
+      VFPSetValues oDB
+    End If
   
 
     lOPEN = True
@@ -402,18 +402,19 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     
  'Set null off permitido deixar campos em branco set deleted on ja esta na string de conecao
     If InStr(cARQ, "VFPOLEDB") Then
-    'vfpsetvalues ODB 'Testar funcao para precisar das linhas abaixo
-        Set oCOMANDO = New ADODB.Command
-        oCOMANDO.ActiveConnection = oDB
-        oCOMANDO.CommandType = adCmdText
-        cCOM = "Set null off"
-        oCOMANDO.CommandText = cCOM
-        oCOMANDO.Execute
+       VFPSetValues oDB
+       'vfpsetvalues ODB 'Testar funcao para precisar das linhas abaixo
+       ' Set oCOMANDO = New ADODB.Command
+       ' oCOMANDO.ActiveConnection = oDB
+       ' oCOMANDO.CommandType = adCmdText
+       ' cCOM = "Set null off"
+       ' oCOMANDO.CommandText = cCOM
+       ' oCOMANDO.Execute
     End If
 
     lOPEN = True
     Set oRS = New ADODB.Recordset
-    oRS.Open cSQL, oDB, adOpenStatic, adLockOptimistic
+    oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic 'adOpenStatic
 
     lRSOP = True
     
@@ -424,22 +425,14 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         Set oDB = Nothing
         Exit Function
     End If
-    
-
 
     While Not oRS.EOF
-
         For X = 0 To nITEM - 1                   ''Matriz Vb comeca 0
-       
             Set oFIELD = oRS(aCAM(X))
             ''nLENCAM = oRS(aCAM(x)).DefinedSize
             ''cTIPO = TipoDado2(oRS(aCAM(x)).type)
-        
-        
             cTIPO = TipoDado2(oFIELD.Type)
             lGRAVA = True
-       
-        
             ''Evita Gravar Campos nullos correcao data nula abaixo
             If IsNull(aVAL(X)) Then
                 lGRAVA = False
@@ -452,9 +445,6 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
                     eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
                 End If
             End If
-            '
-        
-      
             ''Evitar Gravar String Vazias Campos Textos
             If VarType(eVAL) = vbString And cTIPO = "S" Then
                 If eVAL = "" Then
@@ -469,15 +459,10 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
                         End If
                     End If
                 End If
-                
                 If oFIELD.Type = adLongVarWChar And eVAL = "" Then ''Nao saida '' ou null
                    eVAL = "_"
                 End If
-                
-                
             End If
-      
-      
             ''Evitar Gravar String Vazias Campos DAta
             If cTIPO = "D" Then
                 If DataBranco(eVAL) Then
@@ -490,24 +475,18 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
                     End If
                 End If
             End If
-        
             If cTIPO = "B" Then
                 aFOR(X) = ""
             End If
-            
-      
             ''Efetua a Gravaçao
             If lGRAVA Then
                 oRS(aCAM(X)) = FVar(eVAL, aFOR(X), eVAZIO)
                 'oFIELD = FVar(eVAL, aFOR(X), eVAZIO)
             End If
- 
         Next X
         oRS.Update
         oRS.MoveNext
-      
     Wend
-    
     oRS.Close
     oDB.Close
     Set oRS = Nothing
@@ -525,6 +504,9 @@ errhandler:
         cERRO = cERRO & "Campo:" & aCAM(X) & Chr(13) & Chr(10)
         ADOErro oRS.ActiveConnection.Errors, cERRO
         Resume Next
+    Case -2147217887
+        GrvSQLado = True
+        Exit Function
     Case -2147217864 '', -2147467259                 'Update Mysql/informix
         ''      oRS.Close
         ''     oDB.Close
@@ -583,17 +565,18 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     
     'Set null off permitido deixar campos em branco set deleted on ja esta na string de conecao
     If InStr(cARQ1, "VFPOLEDB") Then
+        VFPSetValues oDB
        'vfpsetvalues odb 'testar funcao para nao precisar das linhas abaixo
-        Set oCOMANDO = New ADODB.Command
-        oCOMANDO.ActiveConnection = oDB
-        oCOMANDO.CommandType = adCmdText
-        cCOM = "Set null off"
-        oCOMANDO.CommandText = cCOM
-        oCOMANDO.Execute
+        'Set oCOMANDO = New ADODB.Command
+        'oCOMANDO.ActiveConnection = oDB
+        'oCOMANDO.CommandType = adCmdText
+        'cCOM = "Set null off"
+        'oCOMANDO.CommandText = cCOM
+        'oCOMANDO.Execute
     End If
  
     Set oRS = New ADODB.Recordset
-    oRS.Open cSQL, oDB, adOpenStatic, adLockOptimistic
+    oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic 'adOpenStatic
 
     lRSOP = True
 
@@ -710,10 +693,10 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     oDB.ConnectionTimeout = 120
     oDB.Open cARQ
 
-'na string de conecao delete =yes
-'If  InStr(cARQ, "VFPOLEDB")>0 Then ''delete on para foxpro nao usar registro deletados
-'   vfpsetvalues odb
-'End If
+    'na string de conecao delete =yes
+    If InStr(cARQ, "VFPOLEDB") > 0 Then ''delete on para foxpro nao usar registro deletados
+       VFPSetValues oDB
+    End If
 
     lOPEN = True
     Set oRS = New ADODB.Recordset
@@ -923,26 +906,30 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
     oDBDES.ConnectionTimeout = 120
     oDBDES.Open cARQDES1
     
+    'If InStr(cARQORI1, "VFPOLEDB") Then
+    '   VFPSetValues oDB
+    'End If
 
    'Set null off permitido deixar campos em branco set deleted on ja esta na string de conecao
     If InStr(cARQDES1, "VFPOLEDB") Then
+       VFPSetValues oDBDES
         'vfpsetvalues odbdes 'testar funcao para na precisar das linhas abaixo
-        Set OCOMANDO2 = New ADODB.Command
-        OCOMANDO2.ActiveConnection = oDBDES
-        OCOMANDO2.CommandType = adCmdText
-        cCOM = "Set null off"
-        OCOMANDO2.CommandText = cCOM
-        OCOMANDO2.Execute
+      '  Set OCOMANDO2 = New ADODB.Command
+      '  OCOMANDO2.ActiveConnection = oDBDES
+      '  OCOMANDO2.CommandType = adCmdText
+      '  cCOM = "Set null off"
+      '  OCOMANDO2.CommandText = cCOM
+      '  OCOMANDO2.Execute
     End If
     
     lOPEN = True
   
     Set oRS = New ADODB.Recordset
-    oRS.Open cSQLORI, oDB, adOpenStatic, adLockOptimistic
+    oRS.Open cSQLORI, oDB, adOpenKeyset, adLockOptimistic 'adOpenStatic
     
   
     Set oRSDES = New ADODB.Recordset
-    oRSDES.Open cSQLDES, oDBDES, adOpenStatic, adLockOptimistic
+    oRSDES.Open cSQLDES, oDBDES, adOpenKeyset, adLockOptimistic 'adOpenStatic
   
     lRSOP = True
     

@@ -54,7 +54,7 @@ If lEMAILINT Then
     cCONSQL = "select * from mailerro WHERE erro='" & cCODIGO & "'"
     oMAILERRO.Open cCONSQL, DB, adOpenForwardOnly, adLockReadOnly
     cCONSQL = "select * from mail  WHERE NUMERO=-1" 'usa numero-1 apenas para abrir pois abrir como table demora muito
-    oMAIL.Open cCONSQL, DB, adOpenStatic, adLockOptimistic
+    oMAIL.Open cCONSQL, DB, adOpenKeyset, adLockOptimistic 'adOpenStatic
     
     
    

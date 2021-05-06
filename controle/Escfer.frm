@@ -175,16 +175,15 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         escRPT.Show vbModal, Me
 
     Case "EDI"
-        Grid.Col = 0
-        ePASS01 = Grid
-        Grid.Col = 1
-        ePASS02 = Grid
-        Grid.Col = 2
-        ePASS03 = Grid
-
-            
-        frmFER.Show vbModal, Me
-
+         If Grid.Row > 0 Then
+            Grid.Col = 0
+            ePASS01 = Grid
+            Grid.Col = 1
+            ePASS02 = Grid
+            Grid.Col = 2
+            ePASS03 = Grid
+            frmFER.Show vbModal, Me
+        End If
     Case "FOT"
         Grid.Col = 0
         zgrp = Grid
@@ -206,14 +205,10 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         End If
     Case "SAI"
         cmdSair
-
     End Select
-
 End Sub
-
 Private Sub Form_Unload(Cancel As Integer)
     Screen.MousePointer = vbDefault
-
 End Sub
 
 

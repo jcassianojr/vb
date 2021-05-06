@@ -28,7 +28,7 @@ Public Sub MontaToolbar(vFormtool As Variant, ByVal nFORM As Long)
     oDB.Open cCAM
 
     Set oRS = New ADODB.Recordset
-    oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly ', adLockOptimistic
+    oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly ', adLockOptimistic ''adOpenStatic
     
     
     

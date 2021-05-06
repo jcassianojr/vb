@@ -1141,7 +1141,7 @@ Private Sub Cmdimpwrpt_Click(Index As Integer)
             DIZAPU = cGRP & "/" & cRPT
             BARPOS
             cSQLDES = "select * from " & cTabela & " WHERE GRP='" & cGRP & "' AND RPT='" & cRPT & "' AND IDUSUARIO=" & nDESTINO
-            oRSDES.Open cSQLDES, oDBORI, adOpenStatic, adLockOptimistic
+            oRSDES.Open cSQLDES, oDBORI, adOpenKeyset, adLockOptimistic ' adOpenStatic
             If oRSDES.EOF Then
                 oRSDES.AddNew
                 oRSDES("IDUSUARIO") = nDESTINO
@@ -1266,7 +1266,7 @@ Private Sub CmdLibGrp_Click(Index As Integer)
             BARPOS
             cSQLDES = "select * from " & cTabela & " WHERE GRP='" & cGRP & "' AND RPT='" & cRPT & "' AND IDUSUARIO=" & nDESTINO
 
-            oRSDES.Open cSQLDES, oDBDES, adOpenStatic, adLockOptimistic
+            oRSDES.Open cSQLDES, oDBDES, adOpenKeyset, adLockOptimistic 'adOpenStatic
             If oRSDES.EOF Then
                 oRSDES.AddNew
                 oRSDES("IDUSUARIO") = nDESTINO

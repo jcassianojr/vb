@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
 Begin VB.Form frmME01 
    Caption         =   "Equipamento"
    ClientHeight    =   6915
@@ -13,7 +13,7 @@ Begin VB.Form frmME01
    ScaleHeight     =   6915
    ScaleWidth      =   11280
    StartUpPosition =   2  'CenterScreen
-   Begin TabDlg.SSTab SSTab1 
+   Begin TabExCtl.SSTabEx SSTab1 
       Height          =   5895
       Index           =   0
       Left            =   120
@@ -22,91 +22,61 @@ Begin VB.Form frmME01
       Width           =   10935
       _ExtentX        =   19288
       _ExtentY        =   10398
-      _Version        =   393216
       Tabs            =   2
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       TabHeight       =   520
       TabCaption(0)   =   "Preventiva"
-      TabPicture(0)   =   "frmME01.frx":058A
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label(5)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label(4)"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "Label(3)"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Label(2)"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Label(6)"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Label(7)"
-      Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "Label(8)"
-      Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "Label(9)"
-      Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "Label(10)"
-      Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "Label(11)"
-      Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Label(12)"
-      Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "Label(13)"
-      Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "txtFields(3)"
-      Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "txtFields(2)"
-      Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "txtFields(1)"
-      Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "txtFields(0)"
-      Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "txtFields(4)"
-      Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "txtFields(5)"
-      Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "EscTipIns(0)"
-      Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "EscTipIns(1)"
-      Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "txtFields(6)"
-      Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "txtFields(7)"
-      Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "txtFields(8)"
-      Tab(0).Control(22).Enabled=   0   'False
-      Tab(0).Control(23)=   "txtFields(9)"
-      Tab(0).Control(23).Enabled=   0   'False
-      Tab(0).Control(24)=   "txtFields(10)"
-      Tab(0).Control(24).Enabled=   0   'False
-      Tab(0).Control(25)=   "txtFields(11)"
-      Tab(0).Control(25).Enabled=   0   'False
       Tab(0).ControlCount=   26
+      Tab(0).Control(0)=   "txtFields(11)"
+      Tab(0).Control(1)=   "txtFields(10)"
+      Tab(0).Control(2)=   "txtFields(9)"
+      Tab(0).Control(3)=   "txtFields(8)"
+      Tab(0).Control(4)=   "txtFields(7)"
+      Tab(0).Control(5)=   "txtFields(6)"
+      Tab(0).Control(6)=   "EscTipIns(1)"
+      Tab(0).Control(7)=   "EscTipIns(0)"
+      Tab(0).Control(8)=   "txtFields(5)"
+      Tab(0).Control(9)=   "txtFields(4)"
+      Tab(0).Control(10)=   "txtFields(0)"
+      Tab(0).Control(11)=   "txtFields(1)"
+      Tab(0).Control(12)=   "txtFields(2)"
+      Tab(0).Control(13)=   "txtFields(3)"
+      Tab(0).Control(14)=   "Label(13)"
+      Tab(0).Control(15)=   "Label(12)"
+      Tab(0).Control(16)=   "Label(11)"
+      Tab(0).Control(17)=   "Label(10)"
+      Tab(0).Control(18)=   "Label(9)"
+      Tab(0).Control(19)=   "Label(8)"
+      Tab(0).Control(20)=   "Label(7)"
+      Tab(0).Control(21)=   "Label(6)"
+      Tab(0).Control(22)=   "Label(2)"
+      Tab(0).Control(23)=   "Label(3)"
+      Tab(0).Control(24)=   "Label(4)"
+      Tab(0).Control(25)=   "Label(5)"
       TabCaption(1)   =   "Femea"
-      TabPicture(1)   =   "frmME01.frx":05A6
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlCount=   14
       Tab(1).Control(0)=   "CmdOrdFem(1)"
       Tab(1).Control(1)=   "Command2(15)"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "EditSeq"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "CmdExcluir"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "CMdnovo"
-      Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "importar"
-      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).Control(6)=   "CmdRenumerar"
-      Tab(1).Control(6).Enabled=   0   'False
       Tab(1).Control(7)=   "CmdClo(0)"
-      Tab(1).Control(7).Enabled=   0   'False
       Tab(1).Control(8)=   "CmdClo(1)"
-      Tab(1).Control(8).Enabled=   0   'False
       Tab(1).Control(9)=   "CmdREvi"
       Tab(1).Control(10)=   "CmdRevFemea"
       Tab(1).Control(11)=   "CmdOrdFem(0)"
       Tab(1).Control(12)=   "GridSeq"
       Tab(1).Control(13)=   "gridrevcau"
-      Tab(1).ControlCount=   14
       Begin VB.TextBox txtFields 
          Alignment       =   1  'Right Justify
          Height          =   285
@@ -163,7 +133,7 @@ Begin VB.Form frmME01
          Height          =   315
          Index           =   1
          Left            =   3120
-         Picture         =   "frmME01.frx":05C2
+         Picture         =   "frmME01.frx":058A
          Style           =   1  'Graphical
          TabIndex        =   32
          TabStop         =   0   'False
@@ -174,7 +144,7 @@ Begin VB.Form frmME01
          Height          =   315
          Index           =   0
          Left            =   1800
-         Picture         =   "frmME01.frx":0B4C
+         Picture         =   "frmME01.frx":0B14
          Style           =   1  'Graphical
          TabIndex        =   31
          TabStop         =   0   'False
@@ -526,7 +496,7 @@ Begin VB.Form frmME01
       Width           =   1155
       _ExtentX        =   2037
       _ExtentY        =   767
-      Picture         =   "frmME01.frx":10D6
+      Picture         =   "frmME01.frx":109E
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -546,7 +516,7 @@ Begin VB.Form frmME01
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   767
-      Picture         =   "frmME01.frx":1670
+      Picture         =   "frmME01.frx":1638
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -566,7 +536,7 @@ Begin VB.Form frmME01
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   767
-      Picture         =   "frmME01.frx":1C0A
+      Picture         =   "frmME01.frx":1BD2
       Caption         =   "Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -677,7 +647,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
+            aVAL(iLOOP) = txtFields(iLOOP)       ''vb matriz zero
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     End If
@@ -703,14 +673,14 @@ End Sub
 
 Private Sub cmdFOTO_Click()
     Dim cSQL As String
-    zgrp = TxtCodigo.tEXT
+    zgrp = txtcodigo.tEXT
     iImage = 4
     cARQRTF = PegPath("PATH", "IMGME01")
     cSQL = "select * from IMAGENS WHERE CODIGO='" & zgrp & "'"
     IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(zgrp), True, False
     
     Load frmIMAGENS
-    frmIMAGENS.TXTFIELDS(0).Enabled = False
+    frmIMAGENS.txtFields(0).Enabled = False
     frmIMAGENS.Escolher(0).Visible = False
     frmIMAGENS.Show vbModal, Me
 
@@ -848,10 +818,10 @@ Private Sub CmdREvi_Click()
     ePASS02 = cARQFEMEA
     
     Load frmFEMEI
-    frmFEMEI.TXTFIELDS(2).Enabled = False
-    frmFEMEI.TXTFIELDS(3).Enabled = False
-    frmFEMEI.TXTFIELDS(4).Enabled = False
-    frmFEMEI.TXTFIELDS(5).Enabled = False
+    frmFEMEI.txtFields(2).Enabled = False
+    frmFEMEI.txtFields(3).Enabled = False
+    frmFEMEI.txtFields(4).Enabled = False
+    frmFEMEI.txtFields(5).Enabled = False
     frmFEMEI.cmdClose.Enabled = False
     frmFEMEI.CmdAltman.Enabled = False
     frmFEMEI.Show vbModal, Me
@@ -902,11 +872,11 @@ Private Sub EscTipIns_Click(Index As Integer)
     If lRETU Then
         Select Case Index
         Case 0
-            TXTFIELDS(4).tEXT = eRETU01
-            TXTFIELDS(6).tEXT = eRETU03
+            txtFields(4).tEXT = eRETU01
+            txtFields(6).tEXT = eRETU03
             '                txt(5).Text = eRETU02
         Case 1
-            TXTFIELDS(5).tEXT = eRETU01
+            txtFields(5).tEXT = eRETU01
         End Select
     End If
 End Sub
@@ -927,24 +897,24 @@ Private Sub Form_Load()
     Dim nTMPNUMERO
     CenterFormToScreen Me
     cARQ = GeraConn(zMANA5EMP, "SDECDX")
-    cSQL = "select * from ME01 WHERE NUMERO='" & Trim(ePASS01) & "'"
+    cSQL = "select NUMERO,QTDEBASE,HRBAS,VDBAS,VDHBAS,GRUPO,TIPO,FEMEA,CONTABIL,FABRICANTE,MODELO,NUMFAB,ANO "
+    cSQL = cSQL & " FROM ME01 WHERE NUMERO='" & Trim(ePASS01) & "'"
     cARQFEMEA = PegPath("PATH", "FEMEA")
     
-    
-    TxtCodigo.tEXT = ePASS01
-    TxtNome.tEXT = ePASS02
+    txtcodigo.tEXT = ePASS01
+    txtNome.tEXT = ePASS02
     nCAMPOS = 12
     aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "GRUPO", "TIPO", "FEMEA", "CONTABIL", "FABRICANTE", "MODELO", "NUMFAB", "ANO")
     aFOR = Array("N", "N", "N", "N", "C", "C", "N", "C", "C", "C", "C", "N")
     aPAD = Array(0, 0, 0, 0, "", "", 0, "", "", "", "", 0)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
+        txtFields(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     
     cORDFEMUSO = "ITEM"
     
-    nFEMMAQ = Val(TXTFIELDS(6))
+    nFEMMAQ = Val(txtFields(6))
     
     
     FilRelat
@@ -960,7 +930,6 @@ Private Sub importar_Click()
     FrmImp.Show vbModal, Me
     FilRelat
 End Sub
-
 Private Sub txtFields_GotFocus(Index As Integer)
     FocusMe
 End Sub
@@ -981,7 +950,7 @@ End Sub
 
 Private Sub TXTFIELDS_LostFocus(Index As Integer)
     If Index = 6 Then
-        nFEMMAQ = Val(TXTFIELDS(6))
+        nFEMMAQ = Val(txtFields(6))
     End If
 End Sub
 

@@ -542,6 +542,7 @@ Private Function limpafoto(cSQL As String, cCAMPO As String, cTabela)
     Dim lFileLength As Long
     Dim abBytes() As Byte
 
+    'ajustas fotos grandes
     nFIM = 3
     If cTabela = "IMGMS01" Then
         nFIM = 1
@@ -577,28 +578,28 @@ Private Function limpafoto(cSQL As String, cCAMPO As String, cTabela)
         oDB.ConnectionTimeout = 120
         oDB.Open cARQ
         Set oRS = New ADODB.Recordset
-        oRS.Open cSQL, oDB, adOpenStatic, adLockOptimistic
+        oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic 'adOpenStatic
         While Not oRS.EOF
             sTEMPFILE = ""
             Select Case cTabela
-            Case "IMGMS01"
-                sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PF_" & oRS("codigo") & "_" & cCAMPO & ".JPG"
-            Case "PF"
-                sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PF_" & StrZero(oRS("PF"), 6) & "_" & cCAMPO & ".JPG"
-            Case "PFS"
-                sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFS_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & cCAMPO & ".JPG"
-            Case "PFMS03"
-                sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) & "_" & cCAMPO & ".JPG"
-            Case "PFCO"
-                sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
-            Case "PFC"
-                sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
-            Case "PFI"
-                sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
+                Case "IMGMS01"
+                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PF_" & oRS("codigo") & "_" & cCAMPO & ".JPG"
+                Case "PF"
+                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PF_" & StrZero(oRS("PF"), 6) & "_" & cCAMPO & ".JPG"
+                Case "PFS"
+                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFS_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & cCAMPO & ".JPG"
+                Case "PFMS03"
+                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) & "_" & cCAMPO & ".JPG"
+                Case "PFCO"
+                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
+                Case "PFC"
+                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
+                Case "PFI"
+                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
             End Select
             Label.Caption = cDIZARQ & "_" & cCAMPO
             Label.Refresh
-            If sTEMPFILE <> "" Then
+            If sTEMPFILE <> "" Then 'salva a imagem antes de zerar o campo
                 Label.Caption = sTEMPFILE
                 Label.Refresh
                 lFileLength = LenB(oRS(cCAMPO))

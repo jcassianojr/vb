@@ -600,6 +600,7 @@ Begin VB.Form FrmSql
       _ExtentX        =   1614
       _ExtentY        =   344
       _Version        =   393217
+      Enabled         =   -1  'True
       ScrollBars      =   3
       TextRTF         =   $"Frmsql.frx":4BF6
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -759,18 +760,18 @@ Private Sub cmdexportar_Click(Index As Integer)
     End If
     cSQL = CStr(sql.tEXT)
     Select Case Index
-    Case 0                                       'ok
-        cEXT = "XML"
-    Case 1, 6
-        cEXT = "XLS"
-    Case 2
-        cEXT = "HTML"
-    Case 3
-        cEXT = "TXT"
-    Case 4
-        cEXT = "PDF"
-    Case 5
-        cEXT = "RTF"
+            Case 0                                       'ok
+                cEXT = "XML"
+            Case 1, 6
+                cEXT = "XLS"
+            Case 2
+                cEXT = "HTML"
+            Case 3
+                cEXT = "TXT"
+            Case 4
+                cEXT = "PDF"
+            Case 5
+                cEXT = "RTF"
     End Select
 
 
@@ -795,62 +796,62 @@ Private Sub cmdexportar_Click(Index As Integer)
     DBEXP.Open cCONN
     RsExp.Open cSQL, DBEXP, adOpenStatic, adLockReadOnly
     Select Case Index
-    Case 0
-        RsExp.Save cARQUIVO, adPersistXML
-        'Case 1
-        '     tSQL = "SELECT " & cCAMPOS & " INTO [" & gsRecordSource & "] IN '" & cARQUIVO & "' 'Excel 5.0;' FROM " & tabela.tEXT
-        '     DBEXP.Execute tSQL, RA, adExecuteNoRecords
-    Case 1, 2, 3, 4, 5, 6
-        If Index = 1 Or Index = 3 Then
-            cARQTMP = cARQUIVO
-        Else
-            cARQTMP = TrocaExt(cARQUIVO, "TMP")
-        End If
-        nDESTINO = FreeFile + 1
-        Open cARQTMP For Output As #nDESTINO
-        If Index = 6 Then
-            Print #nDESTINO, "<html>" & cLIN
-            Print #nDESTINO, "<body>" & cLIN
-            Print #nDESTINO, "<table border=" & Chr(34) & "1" & Chr(34) & ">" & cLIN
-            Print #nDESTINO, "<!-- cabecalho com os nomes dos campos da tabela -->" & cLIN
-            Print #nDESTINO, "<tr>" & cLIN
-            ''CAMPOS
-            Print #nDESTINO, "</tr>" & cLIN
-            While Not RsExp.EOF
+            Case 0
+                RsExp.Save cARQUIVO, adPersistXML
+                'Case 1
+                '     tSQL = "SELECT " & cCAMPOS & " INTO [" & gsRecordSource & "] IN '" & cARQUIVO & "' 'Excel 5.0;' FROM " & tabela.tEXT
+                '     DBEXP.Execute tSQL, RA, adExecuteNoRecords
+            Case 1, 2, 3, 4, 5, 6
+                If Index = 1 Or Index = 3 Then
+                    cARQTMP = cARQUIVO
+                Else
+                    cARQTMP = TrocaExt(cARQUIVO, "TMP")
+                End If
+                nDESTINO = FreeFile + 1
+                Open cARQTMP For Output As #nDESTINO
+                If Index = 6 Then
+                    Print #nDESTINO, "<html>" & cLIN
+                    Print #nDESTINO, "<body>" & cLIN
+                    Print #nDESTINO, "<table border=" & Chr(34) & "1" & Chr(34) & ">" & cLIN
+                    Print #nDESTINO, "<!-- cabecalho com os nomes dos campos da tabela -->" & cLIN
+                    Print #nDESTINO, "<tr>" & cLIN
+                    ''CAMPOS
+                    Print #nDESTINO, "</tr>" & cLIN
+                    While Not RsExp.EOF
+                        
+                        RsExp.MoveNext
+                    Wend
+                End If
                 
-                RsExp.MoveNext
-            Wend
-        End If
-        
-        If Index = 1 Then
-            Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
-        Else
-            If TxtDeli.tEXT = "<tab>" Then
-               Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
-            Else
-               ''o usuario pode digitar o campo txtdeli fixstr ajustas para espaco em caso de vazio
-               Print #nDESTINO, RsExp.GetString(adClipString, -1, FixStr(TxtDeli.tEXT, " "), Chr(13) + Chr(10), vbNullString)
-            End If
-        End If
-        
-        If Index = 6 Then
-            Print #nDESTINO, "</table>" + cLIN
-            Print #nDESTINO, "</body>" + cLIN
-            Print #nDESTINO, "</html>" + cLIN
-        End If
-        
-        Close nDESTINO
-        If Index = 2 Then
-            txttohtml cARQTMP, cARQUIVO
-            Kill cARQTMP
-        End If
-        If Index = 4 Then
-            ePASS01 = cARQTMP
-            formConvertToPDF.Show
-        End If
-        If Index = 5 Then
-            txttoRTF cARQTMP, cARQUIVO
-        End If
+                If Index = 1 Then
+                    Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
+                Else
+                    If TxtDeli.tEXT = "<tab>" Then
+                       Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
+                    Else
+                       ''o usuario pode digitar o campo txtdeli fixstr ajustas para espaco em caso de vazio
+                       Print #nDESTINO, RsExp.GetString(adClipString, -1, FixStr(TxtDeli.tEXT, " "), Chr(13) + Chr(10), vbNullString)
+                    End If
+                End If
+                
+                If Index = 6 Then
+                    Print #nDESTINO, "</table>" + cLIN
+                    Print #nDESTINO, "</body>" + cLIN
+                    Print #nDESTINO, "</html>" + cLIN
+                End If
+                
+                Close nDESTINO
+                If Index = 2 Then
+                    txttohtml cARQTMP, cARQUIVO
+                    Kill cARQTMP
+                End If
+                If Index = 4 Then
+                    ePASS01 = cARQTMP
+                    formConvertToPDF.Show
+                End If
+                If Index = 5 Then
+                    txttoRTF cARQTMP, cARQUIVO
+                End If
     End Select
     RsExp.Close
     DBEXP.Close

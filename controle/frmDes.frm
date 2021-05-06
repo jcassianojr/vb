@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
 Begin VB.Form frmDes 
    Caption         =   "Controle de Desenho"
    ClientHeight    =   6135
@@ -13,7 +13,7 @@ Begin VB.Form frmDes
    ScaleHeight     =   6135
    ScaleWidth      =   10965
    StartUpPosition =   2  'CenterScreen
-   Begin TabDlg.SSTab SSTab1 
+   Begin TabExCtl.SSTabEx SSTab1 
       Height          =   4095
       Left            =   120
       TabIndex        =   8
@@ -21,31 +21,29 @@ Begin VB.Form frmDes
       Width           =   10455
       _ExtentX        =   18441
       _ExtentY        =   7223
-      _Version        =   393216
       Tabs            =   2
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       TabsPerRow      =   2
       TabHeight       =   520
       TabCaption(0)   =   "Atual"
-      TabPicture(0)   =   "frmDes.frx":058A
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "excluir"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "editar"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "novo"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "GridAtual"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "NovaREv"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "arquivar"
-      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).ControlCount=   6
+      Tab(0).Control(0)=   "arquivar"
+      Tab(0).Control(1)=   "NovaREv"
+      Tab(0).Control(2)=   "GridAtual"
+      Tab(0).Control(3)=   "novo"
+      Tab(0).Control(4)=   "editar"
+      Tab(0).Control(5)=   "excluir"
       TabCaption(1)   =   "Arquivadas"
-      TabPicture(1)   =   "frmDes.frx":05A6
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "GridArq"
       Tab(1).ControlCount=   1
+      Tab(1).Control(0)=   "GridArq"
       Begin XPControls.XPButton arquivar 
          Height          =   375
          Left            =   8520
@@ -54,7 +52,7 @@ Begin VB.Form frmDes
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   661
-         Picture         =   "frmDes.frx":05C2
+         Picture         =   "frmDes.frx":058A
          Caption         =   "Arquivar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -106,7 +104,7 @@ Begin VB.Form frmDes
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmDes.frx":0B5C
+         Picture         =   "frmDes.frx":0B24
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -127,7 +125,7 @@ Begin VB.Form frmDes
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmDes.frx":10F6
+         Picture         =   "frmDes.frx":10BE
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -148,7 +146,7 @@ Begin VB.Form frmDes
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmDes.frx":1690
+         Picture         =   "frmDes.frx":1658
          Caption         =   "Apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -210,7 +208,7 @@ Begin VB.Form frmDes
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   741
-      Picture         =   "frmDes.frx":1C2A
+      Picture         =   "frmDes.frx":1BF2
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -231,7 +229,7 @@ Begin VB.Form frmDes
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   741
-      Picture         =   "frmDes.frx":21C4
+      Picture         =   "frmDes.frx":218C
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -253,7 +251,7 @@ Begin VB.Form frmDes
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmDes.frx":275E
+      Picture         =   "frmDes.frx":2726
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -275,7 +273,7 @@ Begin VB.Form frmDes
       Width           =   1095
       _ExtentX        =   1931
       _ExtentY        =   661
-      Picture         =   "frmDes.frx":2CF8
+      Picture         =   "frmDes.frx":2CC0
       Caption         =   "LX Cli"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -297,7 +295,7 @@ Begin VB.Form frmDes
       Width           =   1095
       _ExtentX        =   1931
       _ExtentY        =   661
-      Picture         =   "frmDes.frx":3292
+      Picture         =   "frmDes.frx":325A
       Caption         =   "LX 2dig"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -318,7 +316,7 @@ Begin VB.Form frmDes
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmDes.frx":382C
+      Picture         =   "frmDes.frx":37F4
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
