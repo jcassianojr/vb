@@ -14,7 +14,7 @@ Begin VB.Form FrmFemeaPad
    ScaleHeight     =   7065
    ScaleWidth      =   11100
    StartUpPosition =   2  'CenterScreen
-   Begin TabDlg.SSTab SSTab1 
+   Begin TabExCtl.SSTabEx SSTab1 
       Height          =   7095
       Left            =   120
       TabIndex        =   0

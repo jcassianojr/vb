@@ -16,7 +16,7 @@ Begin VB.Form frmDISPOI
    ScaleWidth      =   10395
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin TabDlg.SSTab SSTab1 
+   Begin TabExCtl.SSTabEx SSTab1 
       Height          =   4815
       Left            =   120
       TabIndex        =   4

@@ -29,7 +29,7 @@ Public Function VFPSetValues(ByRef oCON As Object) As Boolean ''as ADODB.Connect
     VFPSetValues = True
 
 End Function
-Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVal cCOMANDO As String) As Boolean
+Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVal CCOMANDO As String) As Boolean
     Dim cCOM As String
     Dim oCON As ADODB.Connection
     Dim oCOMANDO As ADODB.Command
@@ -41,7 +41,7 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVa
     
     'Passado "" pega o da string
     If Len(cTABLE) = 0 Then
-       cTABLE = NomeTableSql(cCOMANDO)
+       cTABLE = NomeTableSql(CCOMANDO)
     End If
     'atribui os valores iniciais
     AdoComandodbf = False
@@ -58,7 +58,7 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVa
     oCOMANDO.ActiveConnection = oCON
     
     'para pack e zap considera todos necessario setar aqui pois na string de conecao esta marcado delete on
-    If cCOMANDO = "ZAP" Or cCOMANDO = "PACK" Then
+    If CCOMANDO = "ZAP" Or CCOMANDO = "PACK" Then
        cCOM = "set deleted off"
        oCOMANDO.CommandText = cCOM
        oCOMANDO.Execute
@@ -73,23 +73,25 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVa
      oCOMANDO.Execute
     
     'abre a tabela
-    cCOM = "use " & cTABLE
-    oCOMANDO.CommandText = cCOM
-    oCOMANDO.ActiveConnection = oCON
-    oCOMANDO.Execute
-    
+    If Len(cTABLE) > 0 Then
+        cCOM = "use " & cTABLE
+        oCOMANDO.CommandText = cCOM
+        oCOMANDO.ActiveConnection = oCON
+        oCOMANDO.Execute
+    End If
+        
     'executa o comando
-    If cCOMANDO = "ZAP" Then
+    If CCOMANDO = "ZAP" Then
         cCOM = "DELETE FROM " & cTABLE & " WHERE 1=1"
         oCOMANDO.CommandText = cCOM
         oCOMANDO.Execute
     End If
-    If cCOMANDO = "ZAP" Or cCOMANDO = "PACK" Then
+    If CCOMANDO = "ZAP" Or CCOMANDO = "PACK" Then
         cCOM = "PACK"
         oCOMANDO.CommandText = cCOM
         oCOMANDO.Execute
     Else
-        cCOM = cCOMANDO
+        cCOM = CCOMANDO
         oCOMANDO.CommandText = cCOM
         oCOMANDO.Execute
     End If
@@ -100,6 +102,7 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVa
     
     Exit Function
 trataerro:
+    On Error Resume Next
     Select Case Err.Number
     Case Else
         SayErro "ADO Comando DBF:" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTABLE & Chr(13) & Chr(10) & cCOM & Chr(13) & Chr(10)
@@ -189,7 +192,7 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     Dim oRS              As ADODB.Recordset
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
-    Dim X, nCAMPOS As Integer
+    Dim x, nCAMPOS As Integer
     Dim aRETU, aOPE, eVAL As Variant
     Dim cERRO As String
      Dim oCOMANDO As ADODB.Command
@@ -201,9 +204,9 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     lRSOP = False
     nCAMPOS = UBound(aCAM) + 1
     ReDim aRETU(nCAMPOS)
-    For X = 0 To nCAMPOS - 1
-        aRETU(X) = 0
-    Next X
+    For x = 0 To nCAMPOS - 1
+        aRETU(x) = 0
+    Next x
     
     If Not FileExist(SomaExt(cARQ), True) Then
         SomaSQLAdo = aRETU
@@ -234,15 +237,15 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     If Not oRS.EOF Then
         oRS.MoveFirst
         While Not oRS.EOF
-            For X = 0 To nCAMPOS - 1
-                aOPE = SepSqlOpe(aCAM(X))
+            For x = 0 To nCAMPOS - 1
+                aOPE = SepSqlOpe(aCAM(x))
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then ''Sem Operacoes
-                    eVAL = oRS(aCAM(X))
+                    eVAL = oRS(aCAM(x))
                 Else
                     eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
                 End If
-                aRETU(X) = aRETU(X) + eVAL
-            Next X
+                aRETU(x) = aRETU(x) + eVAL
+            Next x
             oRS.MoveNext
         Wend
     End If
@@ -274,7 +277,7 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
 
     Dim oDB              As ADODB.Connection
     Dim oRS              As ADODB.Recordset
-    Dim X, nCAMPOS As Integer
+    Dim x, nCAMPOS As Integer
     Dim aRETU, aOPE, eVAL As Variant
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
@@ -288,9 +291,9 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
     lRSOP = False
     nCAMPOS = UBound(aCAM) + 1
     ReDim aRETU(nCAMPOS)
-    For X = 0 To nCAMPOS - 1
-        aRETU(X) = ""
-    Next X
+    For x = 0 To nCAMPOS - 1
+        aRETU(x) = ""
+    Next x
     
     If Not FileExist(SomaExt(cARQ), True) Then
         PegSQLDeliAdo = aRETU
@@ -321,20 +324,20 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
     If Not oRS.EOF Then
         oRS.MoveFirst
         While Not oRS.EOF
-            For X = 0 To nCAMPOS - 1
-                aOPE = SepSqlOpe(aCAM(X))
+            For x = 0 To nCAMPOS - 1
+                aOPE = SepSqlOpe(aCAM(x))
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then ''Sem Operacoes
-                    eVAL = oRS(aCAM(X))
+                    eVAL = oRS(aCAM(x))
                 Else
                     eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
                 End If
-                aRETU(X) = aRETU(X) & FixStr(eVAL)
-            Next X
+                aRETU(x) = aRETU(x) & FixStr(eVAL)
+            Next x
             oRS.MoveNext
             If Not oRS.EOF Then
-                For X = 0 To nCAMPOS - 1
-                    aRETU(X) = aRETU(X) & cDELI
-                Next X
+                For x = 0 To nCAMPOS - 1
+                    aRETU(x) = aRETU(x) & cDELI
+                Next x
             End If
 
         Wend
@@ -373,7 +376,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Dim oDB              As ADODB.Connection
     Dim oRS              As ADODB.Recordset
     Dim eVAL, aOPE  As Variant
-    Dim X, nLENVAR, nLENCAM As Long
+    Dim x, nLENVAR, nLENCAM As Long
     'Dim nPOS As Long
     Dim lGRAVA           As Boolean
     Dim cTabela          As String
@@ -427,20 +430,20 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     End If
 
     While Not oRS.EOF
-        For X = 0 To nITEM - 1                   ''Matriz Vb comeca 0
-            Set oFIELD = oRS(aCAM(X))
+        For x = 0 To nITEM - 1                   ''Matriz Vb comeca 0
+            Set oFIELD = oRS(aCAM(x))
             ''nLENCAM = oRS(aCAM(x)).DefinedSize
             ''cTIPO = TipoDado2(oRS(aCAM(x)).type)
             cTIPO = TipoDado2(oFIELD.Type)
             lGRAVA = True
             ''Evita Gravar Campos nullos correcao data nula abaixo
-            If IsNull(aVAL(X)) Then
+            If IsNull(aVAL(x)) Then
                 lGRAVA = False
-                eVAL = aVAL(X)
+                eVAL = aVAL(x)
             Else
-                aOPE = SepSqlOpe(aCAM(X))
+                aOPE = SepSqlOpe(aCAM(x))
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then ''Operacao com Campos
-                    eVAL = aVAL(X)               ''Grava o Valor Default
+                    eVAL = aVAL(x)               ''Grava o Valor Default
                 Else
                     eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
                 End If
@@ -469,21 +472,21 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
                     If aRETU(2) = "MDB" Or aRETU(2) = "MYSQL" Then
                         eVAL = NullDate(aRETU(2))
                         lGRAVA = True
-                        aFOR(X) = ""
+                        aFOR(x) = ""
                     Else
                         lGRAVA = False
                     End If
                 End If
             End If
             If cTIPO = "B" Then
-                aFOR(X) = ""
+                aFOR(x) = ""
             End If
             ''Efetua a Gravaçao
             If lGRAVA Then
-                oRS(aCAM(X)) = FVar(eVAL, aFOR(X), eVAZIO)
+                oRS(aCAM(x)) = FVar(eVAL, aFOR(x), eVAZIO)
                 'oFIELD = FVar(eVAL, aFOR(X), eVAZIO)
             End If
-        Next X
+        Next x
         oRS.Update
         oRS.MoveNext
     Wend
@@ -501,7 +504,7 @@ errhandler:
     End If
     Select Case Err.Number
     Case 3265, 3421, 94
-        cERRO = cERRO & "Campo:" & aCAM(X) & Chr(13) & Chr(10)
+        cERRO = cERRO & "Campo:" & aCAM(x) & Chr(13) & Chr(10)
         ADOErro oRS.ActiveConnection.Errors, cERRO
         Resume Next
     Case -2147217887
@@ -532,7 +535,7 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
                              Optional ByVal aIDDES As Variant = 0) As Boolean
     Dim oDB              As ADODB.Connection
     Dim oRS              As ADODB.Recordset
-    Dim X As Long
+    Dim x As Long
     Dim nCAMPOS               As Long
     Dim lTEM As Boolean
     Dim lGRAVA            As Boolean
@@ -589,14 +592,14 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     If Not lTEM Then
         
         oRS.AddNew
-        For X = 0 To nITEM - 1                   ''Matriz Vb comeca 0
+        For x = 0 To nITEM - 1                   ''Matriz Vb comeca 0
             lGRAVA = True
             ''Evita Gravar Campos nullos
-            If IsNull(aVAL(X)) Then
+            If IsNull(aVAL(x)) Then
                 lGRAVA = False
             End If
             If lGRAVA Then
-                oRS(aCAM(X)) = aVAL(X)
+                oRS(aCAM(x)) = aVAL(x)
             End If
         Next
         
@@ -608,9 +611,9 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
         If Not IsNumeric(aIDDES) Then            ''Se for numerico nao e matriz
             nCAMPOS = UBound(aIDDES)
             ReDim aRETUID(nCAMPOS + 1)
-            For X = 0 To nCAMPOS
-                aRETUID(X) = oRS(aIDDES(X))
-            Next X
+            For x = 0 To nCAMPOS
+                aRETUID(x) = oRS(aIDDES(x))
+            Next x
             eRETU01 = aRETUID
         End If
         Select Case aRETU(2)
@@ -641,17 +644,17 @@ errhandler:
     End If
     Select Case Err.Number
     Case 3265                                    ''Campo Diferente
-        cERRO = cERRO & "Campo Diferente:" & aCAM(X) & Chr(13) & Chr(10)
+        cERRO = cERRO & "Campo Diferente:" & aCAM(x) & Chr(13) & Chr(10)
         ADOErro oRS.ActiveConnection.Errors, cERRO
         Resume Next
     Case 3315, 94                                'Campo null
         Resume Next
     Case 424                                     ''Campo Inexistente
-        cERRO = cERRO & "Campo Inexistente:" & aCAM(X) & Chr(13) & Chr(10)
+        cERRO = cERRO & "Campo Inexistente:" & aCAM(x) & Chr(13) & Chr(10)
         ADOErro oRS.ActiveConnection.Errors, cERRO
         Resume Next
     Case 3163                                    ''Valor Maior que o Campo
-        cERRO = cERRO & "Valor Maior que o Campo:" & aCAM(X) & Chr(13) & Chr(10)
+        cERRO = cERRO & "Valor Maior que o Campo:" & aCAM(x) & Chr(13) & Chr(10)
         ADOErro oRS.ActiveConnection.Errors, cERRO
         Resume Next
     Case 3219                                    ''close jetfox
@@ -672,7 +675,7 @@ End Function
 Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim oDB         As ADODB.Connection
     Dim oRS         As ADODB.Recordset
-    Dim X           As Long
+    Dim x           As Long
     Dim aRETU       As Variant
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
@@ -707,15 +710,15 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
 
     If Not oRS.EOF Then
         lRETU = True
-        For X = 0 To nITEM - 1                   ''Matriz Vb comeca 0
-            aOPE = SepSqlOpe(aCAM(X))
+        For x = 0 To nITEM - 1                   ''Matriz Vb comeca 0
+            aOPE = SepSqlOpe(aCAM(x))
             If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then ''Sem Operacoes
-                eVAL = oRS(aCAM(X))
+                eVAL = oRS(aCAM(x))
             Else
                 eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
             End If
               
-            aRETU(X) = FVar(eVAL, aFOR(X), aPAD(X))
+            aRETU(x) = FVar(eVAL, aFOR(x), aPAD(x))
         Next
     Else
         lRETU = False
@@ -735,13 +738,13 @@ errhandler:
     End If
     Select Case Err.Number
     Case 3265, 5
-        aRETU(X) = aPAD(X)
-        cERRO = cERRO & "Campo:" & aCAM(X) & Chr(13) & Chr(10)
+        aRETU(x) = aPAD(x)
+        cERRO = cERRO & "Campo:" & aCAM(x) & Chr(13) & Chr(10)
         ADOErro oRS.ActiveConnection.Errors, cERRO
         Resume Next
     Case 94                                      ''Campo Esta com Null Pega Padrao
         ''SayErro (" PEGSQL Campo:" & aCAM(x))
-        aRETU(X) = aPAD(X)
+        aRETU(x) = aPAD(x)
         Resume Next
     Case Else
         If lOPEN Then
@@ -868,7 +871,7 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
     Dim cARQORI1 As String
     Dim cARQDES1 As String
     Dim aRETU As Variant
-    Dim X As Integer
+    Dim x As Integer
     Dim nCAMPOS As Integer
     Dim aVALORI As Variant
     Dim aRETUID As Variant
@@ -939,9 +942,9 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
             If Not IsNumeric(aCAMORI) Then       ''Se for numerico nao e matriz
                 nCAMPOS = UBound(aCAMORI)
                 ReDim aVALORI(nCAMPOS + 1)
-                For X = 0 To nCAMPOS
-                    aVALORI(X) = oRS(aCAMORI(X))
-                Next X
+                For x = 0 To nCAMPOS
+                    aVALORI(x) = oRS(aCAMORI(x))
+                Next x
             End If
             If InStr(cOPEORI, "DEL") > 0 Then
                 oRS.Delete
@@ -954,15 +957,15 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
             
             If Not IsNumeric(aCAMDES) Then       ''Se for numerico nao e matriz
                 nCAMPOS = UBound(aCAMDES)
-                For X = 0 To nCAMPOS
-                    oRSDES(aCAMDES(X)) = aVALORI(X)
-                Next X
+                For x = 0 To nCAMPOS
+                    oRSDES(aCAMDES(x)) = aVALORI(x)
+                Next x
             End If
             If Not IsNumeric(aOUTDES) Then       ''Se for numerico nao e matriz
                 nCAMPOS = UBound(aOUTDES)
-                For X = 0 To nCAMPOS
-                    oRSDES(aOUTDES(X)) = aOUTORI(X)
-                Next X
+                For x = 0 To nCAMPOS
+                    oRSDES(aOUTDES(x)) = aOUTORI(x)
+                Next x
             End If
             Select Case aRETU(2)
             Case "SQLSERVER", "MDB", "MYSQL"
@@ -973,9 +976,9 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
             If Not IsNumeric(aIDDES) Then        ''Se for numerico nao e matriz
                 nCAMPOS = UBound(aIDDES)
                 ReDim aRETUID(nCAMPOS + 1)
-                For X = 0 To nCAMPOS
-                    aRETUID(X) = oRSDES(aIDDES(X))
-                Next X
+                For x = 0 To nCAMPOS
+                    aRETUID(x) = oRSDES(aIDDES(x))
+                Next x
                 eRETU01 = aRETUID
             End If
             Select Case aRETU(2)

@@ -26,7 +26,7 @@ Begin VB.Form frmprotii
       Top             =   120
       Width           =   375
    End
-   Begin TabDlg.SSTab SSTab1 
+   Begin TabExCtl.SSTabEx SSTab1 
       Height          =   3375
       Left            =   120
       TabIndex        =   12

@@ -46,7 +46,7 @@ Begin VB.Form frmPFI
       Top             =   120
       Width           =   855
    End
-   Begin TabDlg.SSTab SSTab1 
+   Begin TabExCtl.SSTabEx SSTab1 
       Height          =   5535
       Left            =   120
       TabIndex        =   21

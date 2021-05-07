@@ -12,6 +12,13 @@ Dim nNUMERO As Integer
     zMES = Month(Date)
     zANO = Year(Date)
     zEMPRESA = 1
+    
+    ' AdoComandodbf GeracArq("c:\develop\modelos\banco\", "JETFOX"), "BA01", "SET DATE DD/MM/YY"
+    
+    
+    'AdoComandodbf GeracArq("c:\develop\modelos\banco\", "JETFOX"), "BA01", "SET DATE BRITISH"
+    
+     'SET DATE BRITISH'
  
     
    ' CCOMANDO = "insert into mail (numero,erro,data,hora,de,destino,assunto,texto) values (1,'erro','','12:00','de','destino','assunto','texto')"
