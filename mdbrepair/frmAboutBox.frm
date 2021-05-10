@@ -39,7 +39,7 @@ Begin VB.Form frmAboutBox
       Visible         =   0   'False
       Width           =   495
    End
-   Begin VB.CommandButton Command1 
+   Begin XPControls.XPButton Command1 
       Caption         =   "&OK"
       Default         =   -1  'True
       Height          =   495

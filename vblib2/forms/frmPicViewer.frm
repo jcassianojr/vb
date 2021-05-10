@@ -11,7 +11,7 @@ Begin VB.Form frmPicViewer
    ScaleHeight     =   7920
    ScaleWidth      =   12975
    StartUpPosition =   1  'CenterOwner
-   Begin VB.CommandButton CmdFechar 
+   Begin XPControls.XPButton CmdFechar 
       Caption         =   "retornar"
       Height          =   345
       Left            =   12000
@@ -28,7 +28,7 @@ Begin VB.Form frmPicViewer
       Top             =   3570
       Visible         =   0   'False
       Width           =   4965
-      Begin VB.CommandButton cmdCloseDialog 
+      Begin XPControls.XPButton cmdCloseDialog 
          Caption         =   "Close"
          Height          =   315
          Left            =   3750
@@ -138,7 +138,7 @@ Begin VB.Form frmPicViewer
             Width           =   1320
          End
       End
-      Begin VB.CommandButton cmdPrintDialog 
+      Begin XPControls.XPButton cmdPrintDialog 
          Caption         =   "Print"
          Enabled         =   0   'False
          Height          =   315
@@ -148,7 +148,7 @@ Begin VB.Form frmPicViewer
          Width           =   1095
       End
    End
-   Begin VB.CommandButton cmdPrint 
+   Begin XPControls.XPButton cmdPrint 
       Caption         =   "Print..."
       Height          =   345
       Left            =   11010
@@ -156,7 +156,7 @@ Begin VB.Form frmPicViewer
       Top             =   7065
       Width           =   765
    End
-   Begin VB.CommandButton cmdStopSlideShow 
+   Begin XPControls.XPButton cmdStopSlideShow 
       Caption         =   "Stop Slide Show"
       Height          =   345
       Left            =   7410
@@ -278,7 +278,7 @@ Begin VB.Form frmPicViewer
          Width           =   2100
       End
    End
-   Begin VB.CommandButton cmdLast 
+   Begin XPControls.XPButton cmdLast 
       Caption         =   ">>"
       Height          =   345
       Left            =   9870
@@ -286,7 +286,7 @@ Begin VB.Form frmPicViewer
       Top             =   7065
       Width           =   345
    End
-   Begin VB.CommandButton cmdNext 
+   Begin XPControls.XPButton cmdNext 
       Caption         =   ">"
       Height          =   345
       Left            =   9510
@@ -294,7 +294,7 @@ Begin VB.Form frmPicViewer
       Top             =   7065
       Width           =   345
    End
-   Begin VB.CommandButton cmdPrevious 
+   Begin XPControls.XPButton cmdPrevious 
       Caption         =   "<"
       Height          =   345
       Left            =   9150
@@ -302,7 +302,7 @@ Begin VB.Form frmPicViewer
       Top             =   7065
       Width           =   345
    End
-   Begin VB.CommandButton cmdFirst 
+   Begin XPControls.XPButton cmdFirst 
       Caption         =   "<<"
       Height          =   345
       Left            =   8790
@@ -310,7 +310,7 @@ Begin VB.Form frmPicViewer
       Top             =   7065
       Width           =   345
    End
-   Begin VB.CommandButton cmdMenu 
+   Begin XPControls.XPButton cmdMenu 
       Caption         =   "Menu..."
       Height          =   345
       Left            =   10245

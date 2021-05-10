@@ -14,7 +14,7 @@ Begin VB.Form frmRPTUSR
    ScaleHeight     =   2205
    ScaleWidth      =   8340
    ShowInTaskbar   =   0   'False
-   Begin VB.CommandButton CmdLibTudo 
+   Begin XPControls.XPButton CmdLibTudo 
       Caption         =   "Liberar Tudo"
       Height          =   315
       Left            =   6000
@@ -22,7 +22,7 @@ Begin VB.Form frmRPTUSR
       Top             =   1080
       Width           =   1095
    End
-   Begin VB.CommandButton CmdAbrirCom 
+   Begin XPControls.XPButton CmdAbrirCom 
       Caption         =   "Ext..."
       Height          =   375
       Index           =   0
@@ -33,7 +33,7 @@ Begin VB.Form frmRPTUSR
       Top             =   1440
       Width           =   495
    End
-   Begin VB.CommandButton CmdAbrirCom 
+   Begin XPControls.XPButton CmdAbrirCom 
       Caption         =   "*..."
       Height          =   375
       Index           =   1

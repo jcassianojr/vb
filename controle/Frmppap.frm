@@ -2251,8 +2251,7 @@ Private Sub Form_Load()
     If iPPAP = 11 Then
         EnableControls Me, False
         SSTab1.Enabled = True
-       ' SSTab1.Tab = 5
-       ' sstab1.
+        'SSTab1.Tab = 5
         cmdClose.Enabled = True
         gridlay.Enabled = True
         CmdNovoLay(1).Enabled = True

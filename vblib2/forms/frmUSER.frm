@@ -22,7 +22,7 @@ Begin VB.Form frmUSER
       _ExtentX        =   503
       _ExtentY        =   503
    End
-   Begin VB.CommandButton CmdLibGrp 
+   Begin XPControls.XPButton CmdLibGrp 
       Caption         =   "Integrados"
       Height          =   375
       Index           =   11
@@ -31,7 +31,7 @@ Begin VB.Form frmUSER
       Top             =   3600
       Width           =   1155
    End
-   Begin VB.CommandButton CmdLibGrp 
+   Begin XPControls.XPButton CmdLibGrp 
       Caption         =   "Folha"
       Height          =   375
       Index           =   10
@@ -40,7 +40,7 @@ Begin VB.Form frmUSER
       Top             =   3240
       Width           =   1155
    End
-   Begin VB.CommandButton CmdLibGrp 
+   Begin XPControls.XPButton CmdLibGrp 
       Caption         =   "Documentos"
       Height          =   375
       Index           =   9
@@ -125,7 +125,7 @@ Begin VB.Form frmUSER
             Strikethrough   =   0   'False
          EndProperty
       End
-      Begin VB.CommandButton CmdApaAll 
+      Begin XPControls.XPButton CmdApaAll 
          Caption         =   "ApagarTudo"
          Height          =   375
          Left            =   7560
@@ -133,7 +133,7 @@ Begin VB.Form frmUSER
          Top             =   3960
          Width           =   1215
       End
-      Begin VB.CommandButton CmdLibGrp 
+      Begin XPControls.XPButton CmdLibGrp 
          Caption         =   "Relatorios"
          Height          =   375
          Index           =   8
@@ -142,7 +142,7 @@ Begin VB.Form frmUSER
          Top             =   2400
          Width           =   1155
       End
-      Begin VB.CommandButton CmdLibGrp 
+      Begin XPControls.XPButton CmdLibGrp 
          Caption         =   "Integrados"
          Height          =   375
          Index           =   7
@@ -151,7 +151,7 @@ Begin VB.Form frmUSER
          Top             =   3480
          Width           =   1155
       End
-      Begin VB.CommandButton CmdLibGrp 
+      Begin XPControls.XPButton CmdLibGrp 
          Caption         =   "Integrados"
          Height          =   375
          Index           =   6
@@ -160,7 +160,7 @@ Begin VB.Form frmUSER
          Top             =   3480
          Width           =   1155
       End
-      Begin VB.CommandButton CmdLibGrp 
+      Begin XPControls.XPButton CmdLibGrp 
          Caption         =   "Folha"
          Height          =   375
          Index           =   5
@@ -169,7 +169,7 @@ Begin VB.Form frmUSER
          Top             =   3120
          Width           =   1155
       End
-      Begin VB.CommandButton CmdLibGrp 
+      Begin XPControls.XPButton CmdLibGrp 
          Caption         =   "Folha"
          Height          =   375
          Index           =   4
@@ -178,7 +178,7 @@ Begin VB.Form frmUSER
          Top             =   3120
          Width           =   1155
       End
-      Begin VB.CommandButton Cmdimpwrpt 
+      Begin XPControls.XPButton Cmdimpwrpt 
          Caption         =   "Integrados"
          Height          =   375
          Index           =   3
@@ -188,7 +188,7 @@ Begin VB.Form frmUSER
          Top             =   3480
          Width           =   1155
       End
-      Begin VB.CommandButton Cmdimpwrpt 
+      Begin XPControls.XPButton Cmdimpwrpt 
          Caption         =   "Folha"
          Height          =   375
          Index           =   2
@@ -217,7 +217,7 @@ Begin VB.Form frmUSER
          Top             =   300
          Width           =   915
       End
-      Begin VB.CommandButton Cmdimpwrpt 
+      Begin XPControls.XPButton Cmdimpwrpt 
          Caption         =   "Relatorios"
          Height          =   375
          Index           =   0
@@ -227,7 +227,7 @@ Begin VB.Form frmUSER
          Top             =   2400
          Width           =   1155
       End
-      Begin VB.CommandButton Cmdimpwrpt 
+      Begin XPControls.XPButton Cmdimpwrpt 
          Caption         =   "Documentos"
          Height          =   375
          Index           =   1
@@ -237,7 +237,7 @@ Begin VB.Form frmUSER
          Top             =   2760
          Width           =   1155
       End
-      Begin VB.CommandButton Cmdimpmenu 
+      Begin XPControls.XPButton Cmdimpmenu 
          Caption         =   "Importar Direito Menus"
          Height          =   375
          Left            =   1800
@@ -246,7 +246,7 @@ Begin VB.Form frmUSER
          Top             =   3840
          Width           =   1815
       End
-      Begin VB.CommandButton CMDIMPBTN 
+      Begin XPControls.XPButton CMDIMPBTN 
          Caption         =   "Importar Direito Botoes"
          Height          =   375
          Left            =   1800
@@ -255,7 +255,7 @@ Begin VB.Form frmUSER
          Top             =   4260
          Width           =   1815
       End
-      Begin VB.CommandButton CmdLibGrp 
+      Begin XPControls.XPButton CmdLibGrp 
          Caption         =   "Relatorios"
          Height          =   375
          Index           =   0
@@ -264,7 +264,7 @@ Begin VB.Form frmUSER
          Top             =   2400
          Width           =   1155
       End
-      Begin VB.CommandButton CmdLibGrp 
+      Begin XPControls.XPButton CmdLibGrp 
          Caption         =   "Documentos"
          Height          =   375
          Index           =   1
@@ -273,7 +273,7 @@ Begin VB.Form frmUSER
          Top             =   2760
          Width           =   1155
       End
-      Begin VB.CommandButton CmdLibGrp 
+      Begin XPControls.XPButton CmdLibGrp 
          Caption         =   "Documentos"
          Height          =   375
          Index           =   2
@@ -282,7 +282,7 @@ Begin VB.Form frmUSER
          Top             =   2760
          Width           =   1155
       End
-      Begin VB.CommandButton CmdLibGrp 
+      Begin XPControls.XPButton CmdLibGrp 
          Caption         =   "Relatorios"
          Height          =   375
          Index           =   3

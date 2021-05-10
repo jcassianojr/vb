@@ -241,8 +241,8 @@ Begin VB.Form frmfemea
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      TabsPerRow      =   9
-      TabHeight       =   564
+      TabsPerRow      =   6
+      TabHeight       =   529
       TabCaption(0)   =   "Producao"
       Tab(0).ControlCount=   19
       Tab(0).Control(0)=   "CmdOrdFem(11)"
@@ -266,249 +266,249 @@ Begin VB.Form frmfemea
       Tab(0).Control(18)=   "gridrevcau(0)"
       TabCaption(1)   =   "Grupo/Copia/Obs"
       Tab(1).ControlCount=   14
-      Tab(1).Control(0)=   "Txtfields(33)"
-      Tab(1).Control(1)=   "Txtfields(32)"
-      Tab(1).Control(2)=   "escidfolha(11)"
-      Tab(1).Control(3)=   "escidfolha(10)"
-      Tab(1).Control(4)=   "escidfolha(1)"
-      Tab(1).Control(5)=   "escidfolha(0)"
-      Tab(1).Control(6)=   "Txtfields(18)"
-      Tab(1).Control(7)=   "Txtfields(8)"
-      Tab(1).Control(8)=   "Txtfields(7)"
-      Tab(1).Control(9)=   "Label14"
-      Tab(1).Control(10)=   "Label13"
-      Tab(1).Control(11)=   "Label6"
-      Tab(1).Control(12)=   "Label4"
-      Tab(1).Control(13)=   "Label3"
+      Tab(1).Control(0)=   "Label3"
+      Tab(1).Control(1)=   "Label4"
+      Tab(1).Control(2)=   "Label6"
+      Tab(1).Control(3)=   "Label13"
+      Tab(1).Control(4)=   "Label14"
+      Tab(1).Control(5)=   "Txtfields(7)"
+      Tab(1).Control(6)=   "Txtfields(8)"
+      Tab(1).Control(7)=   "Txtfields(18)"
+      Tab(1).Control(8)=   "escidfolha(0)"
+      Tab(1).Control(9)=   "escidfolha(1)"
+      Tab(1).Control(10)=   "escidfolha(10)"
+      Tab(1).Control(11)=   "escidfolha(11)"
+      Tab(1).Control(12)=   "Txtfields(32)"
+      Tab(1).Control(13)=   "Txtfields(33)"
       TabCaption(2)   =   "Elaborador/Revisão"
       Tab(2).ControlCount=   38
-      Tab(2).Control(0)=   "DTPicker2"
-      Tab(2).Control(1)=   "DTPicker1"
-      Tab(2).Control(2)=   "Check2"
-      Tab(2).Control(3)=   "Command16"
-      Tab(2).Control(4)=   "Command1(8)"
-      Tab(2).Control(5)=   "Txtfields(25)"
-      Tab(2).Control(6)=   "Command15"
-      Tab(2).Control(7)=   "Txtfields(24)"
-      Tab(2).Control(8)=   "Txtfields(23)"
-      Tab(2).Control(9)=   "Txtfields(22)"
-      Tab(2).Control(10)=   "CmdTrocaREv"
-      Tab(2).Control(11)=   "TxtRevNova"
-      Tab(2).Control(12)=   "TxtRevisao"
-      Tab(2).Control(13)=   "CmdApaRev"
-      Tab(2).Control(14)=   "Txtfields(13)"
-      Tab(2).Control(15)=   "Txtfields(14)"
-      Tab(2).Control(16)=   "CmdLiberar"
-      Tab(2).Control(17)=   "Txtfields(12)"
-      Tab(2).Control(18)=   "Command3"
-      Tab(2).Control(19)=   "Txtfields(9)"
-      Tab(2).Control(20)=   "Txtfields(6)"
-      Tab(2).Control(21)=   "ComMotInc"
-      Tab(2).Control(22)=   "ComMotExc"
-      Tab(2).Control(23)=   "ComMotAlt(0)"
-      Tab(2).Control(24)=   "CmdMotRev"
-      Tab(2).Control(25)=   "CmdNovaREV"
-      Tab(2).Control(26)=   "Check1"
-      Tab(2).Control(27)=   "CmdProx"
-      Tab(2).Control(28)=   "Command5"
-      Tab(2).Control(29)=   "femeacrg"
-      Tab(2).Control(30)=   "gridrev"
-      Tab(2).Control(31)=   "gridrevi(0)"
-      Tab(2).Control(32)=   "Label12"
-      Tab(2).Control(33)=   "Label7"
-      Tab(2).Control(34)=   "Label8"
-      Tab(2).Control(35)=   "Label5"
-      Tab(2).Control(36)=   "Label9"
-      Tab(2).Control(37)=   "Label10"
+      Tab(2).Control(0)=   "Label10"
+      Tab(2).Control(1)=   "Label9"
+      Tab(2).Control(2)=   "Label5"
+      Tab(2).Control(3)=   "Label8"
+      Tab(2).Control(4)=   "Label7"
+      Tab(2).Control(5)=   "Label12"
+      Tab(2).Control(6)=   "gridrevi(0)"
+      Tab(2).Control(7)=   "gridrev"
+      Tab(2).Control(8)=   "femeacrg"
+      Tab(2).Control(9)=   "Command5"
+      Tab(2).Control(10)=   "CmdProx"
+      Tab(2).Control(11)=   "Check1"
+      Tab(2).Control(12)=   "CmdNovaREV"
+      Tab(2).Control(13)=   "CmdMotRev"
+      Tab(2).Control(14)=   "ComMotAlt(0)"
+      Tab(2).Control(15)=   "ComMotExc"
+      Tab(2).Control(16)=   "ComMotInc"
+      Tab(2).Control(17)=   "Txtfields(6)"
+      Tab(2).Control(18)=   "Txtfields(9)"
+      Tab(2).Control(19)=   "Command3"
+      Tab(2).Control(20)=   "Txtfields(12)"
+      Tab(2).Control(21)=   "CmdLiberar"
+      Tab(2).Control(22)=   "Txtfields(14)"
+      Tab(2).Control(23)=   "Txtfields(13)"
+      Tab(2).Control(24)=   "CmdApaRev"
+      Tab(2).Control(25)=   "TxtRevisao"
+      Tab(2).Control(26)=   "TxtRevNova"
+      Tab(2).Control(27)=   "CmdTrocaREv"
+      Tab(2).Control(28)=   "Txtfields(22)"
+      Tab(2).Control(29)=   "Txtfields(23)"
+      Tab(2).Control(30)=   "Txtfields(24)"
+      Tab(2).Control(31)=   "Command15"
+      Tab(2).Control(32)=   "Txtfields(25)"
+      Tab(2).Control(33)=   "Command1(8)"
+      Tab(2).Control(34)=   "Command16"
+      Tab(2).Control(35)=   "Check2"
+      Tab(2).Control(36)=   "DTPicker1"
+      Tab(2).Control(37)=   "DTPicker2"
       TabCaption(3)   =   "Revisões PF"
       Tab(3).ControlCount=   6
-      Tab(3).Control(0)=   "CmdMarcaFemea"
-      Tab(3).Control(1)=   "GridPFrev"
-      Tab(3).Control(2)=   "Txtfields(17)"
-      Tab(3).Control(3)=   "Txtfields(16)"
-      Tab(3).Control(4)=   "ComMotAlt(1)"
-      Tab(3).Control(5)=   "gridrevi(1)"
+      Tab(3).Control(0)=   "gridrevi(1)"
+      Tab(3).Control(1)=   "ComMotAlt(1)"
+      Tab(3).Control(2)=   "Txtfields(16)"
+      Tab(3).Control(3)=   "Txtfields(17)"
+      Tab(3).Control(4)=   "GridPFrev"
+      Tab(3).Control(5)=   "CmdMarcaFemea"
       TabCaption(4)   =   "Sequencia"
       Tab(4).ControlCount=   7
-      Tab(4).Control(0)=   "CmdcheckOp(1)"
-      Tab(4).Control(1)=   "CmdcheckOp(0)"
-      Tab(4).Control(2)=   "CmdTotPad(1)"
+      Tab(4).Control(0)=   "gridopr"
+      Tab(4).Control(1)=   "Command1(2)"
+      Tab(4).Control(2)=   "Command1(3)"
       Tab(4).Control(3)=   "CmdTotPad(0)"
-      Tab(4).Control(4)=   "Command1(3)"
-      Tab(4).Control(5)=   "Command1(2)"
-      Tab(4).Control(6)=   "gridopr"
+      Tab(4).Control(4)=   "CmdTotPad(1)"
+      Tab(4).Control(5)=   "CmdcheckOp(0)"
+      Tab(4).Control(6)=   "CmdcheckOp(1)"
       TabCaption(5)   =   "Reg Defeito"
       Tab(5).ControlCount=   5
-      Tab(5).Control(0)=   "CmdEdiDef"
-      Tab(5).Control(1)=   "CmdDelDef"
+      Tab(5).Control(0)=   "gridmsrd"
+      Tab(5).Control(1)=   "CmdVerDef"
       Tab(5).Control(2)=   "CmdIncDef"
-      Tab(5).Control(3)=   "CmdVerDef"
-      Tab(5).Control(4)=   "gridmsrd"
+      Tab(5).Control(3)=   "CmdDelDef"
+      Tab(5).Control(4)=   "CmdEdiDef"
       TabCaption(6)   =   "Padrao Processo/Falha"
       Tab(6).ControlCount=   18
-      Tab(6).Control(0)=   "Command14"
-      Tab(6).Control(1)=   "Command13"
-      Tab(6).Control(2)=   "CmdExcPFPad(1)"
-      Tab(6).Control(3)=   "CmdEscPro"
-      Tab(6).Control(4)=   "CmdEscFal"
-      Tab(6).Control(5)=   "CmdIncPf"
-      Tab(6).Control(6)=   "CmdExcPFPad(0)"
-      Tab(6).Control(7)=   "Command6"
-      Tab(6).Control(8)=   "Command8"
-      Tab(6).Control(9)=   "CmdNome"
-      Tab(6).Control(10)=   "Cmdimp"
-      Tab(6).Control(11)=   "GridPRO"
-      Tab(6).Control(12)=   "GRIDFAL"
-      Tab(6).Control(13)=   "GridPadPF"
-      Tab(6).Control(14)=   "Label1"
-      Tab(6).Control(15)=   "Label2"
-      Tab(6).Control(16)=   "dizpro"
-      Tab(6).Control(17)=   "dizfal"
+      Tab(6).Control(0)=   "dizfal"
+      Tab(6).Control(1)=   "dizpro"
+      Tab(6).Control(2)=   "Label2"
+      Tab(6).Control(3)=   "Label1"
+      Tab(6).Control(4)=   "GridPadPF"
+      Tab(6).Control(5)=   "GRIDFAL"
+      Tab(6).Control(6)=   "GridPRO"
+      Tab(6).Control(7)=   "Cmdimp"
+      Tab(6).Control(8)=   "CmdNome"
+      Tab(6).Control(9)=   "Command8"
+      Tab(6).Control(10)=   "Command6"
+      Tab(6).Control(11)=   "CmdExcPFPad(0)"
+      Tab(6).Control(12)=   "CmdIncPf"
+      Tab(6).Control(13)=   "CmdEscFal"
+      Tab(6).Control(14)=   "CmdEscPro"
+      Tab(6).Control(15)=   "CmdExcPFPad(1)"
+      Tab(6).Control(16)=   "Command13"
+      Tab(6).Control(17)=   "Command14"
       TabCaption(7)   =   "Padrao"
       Tab(7).ControlCount=   28
-      Tab(7).Control(0)=   "CMDSIG(1)"
-      Tab(7).Control(1)=   "CmdEdiPad(10)"
-      Tab(7).Control(2)=   "importar(10)"
-      Tab(7).Control(3)=   "CmdOrdPad(3)"
-      Tab(7).Control(4)=   "CmdApagaRPN"
-      Tab(7).Control(5)=   "txtRPN"
-      Tab(7).Control(6)=   "CmdEdiPad(0)"
-      Tab(7).Control(7)=   "CmdEdiPad(1)"
-      Tab(7).Control(8)=   "CmdEdiPad(2)"
-      Tab(7).Control(9)=   "CmdOrdPad(0)"
-      Tab(7).Control(10)=   "CmdOrdPad(1)"
-      Tab(7).Control(11)=   "CmdOrdPad(2)"
-      Tab(7).Control(12)=   "CmdEdiPad(3)"
-      Tab(7).Control(13)=   "CmdEdiPad(4)"
-      Tab(7).Control(14)=   "CmdEdiPad(5)"
-      Tab(7).Control(15)=   "CMDSIG(0)"
-      Tab(7).Control(16)=   "txtsigi"
-      Tab(7).Control(17)=   "CmdEdiPad(6)"
-      Tab(7).Control(18)=   "CmdEdiPad(7)"
-      Tab(7).Control(19)=   "CmdEdiPad(8)"
-      Tab(7).Control(20)=   "CmdEdiPad(9)"
-      Tab(7).Control(21)=   "GridPad"
-      Tab(7).Control(22)=   "Line1(2)"
-      Tab(7).Control(23)=   "Line1(1)"
-      Tab(7).Control(24)=   "Line1(0)"
-      Tab(7).Control(25)=   "lblLabels(6)"
-      Tab(7).Control(26)=   "lblLabels(0)"
-      Tab(7).Control(27)=   "lblLabels(14)"
+      Tab(7).Control(0)=   "lblLabels(14)"
+      Tab(7).Control(1)=   "lblLabels(0)"
+      Tab(7).Control(2)=   "lblLabels(6)"
+      Tab(7).Control(3)=   "Line1(0)"
+      Tab(7).Control(4)=   "Line1(1)"
+      Tab(7).Control(5)=   "Line1(2)"
+      Tab(7).Control(6)=   "GridPad"
+      Tab(7).Control(7)=   "CmdEdiPad(9)"
+      Tab(7).Control(8)=   "CmdEdiPad(8)"
+      Tab(7).Control(9)=   "CmdEdiPad(7)"
+      Tab(7).Control(10)=   "CmdEdiPad(6)"
+      Tab(7).Control(11)=   "txtsigi"
+      Tab(7).Control(12)=   "CMDSIG(0)"
+      Tab(7).Control(13)=   "CmdEdiPad(5)"
+      Tab(7).Control(14)=   "CmdEdiPad(4)"
+      Tab(7).Control(15)=   "CmdEdiPad(3)"
+      Tab(7).Control(16)=   "CmdOrdPad(2)"
+      Tab(7).Control(17)=   "CmdOrdPad(1)"
+      Tab(7).Control(18)=   "CmdOrdPad(0)"
+      Tab(7).Control(19)=   "CmdEdiPad(2)"
+      Tab(7).Control(20)=   "CmdEdiPad(1)"
+      Tab(7).Control(21)=   "CmdEdiPad(0)"
+      Tab(7).Control(22)=   "txtRPN"
+      Tab(7).Control(23)=   "CmdApagaRPN"
+      Tab(7).Control(24)=   "CmdOrdPad(3)"
+      Tab(7).Control(25)=   "importar(10)"
+      Tab(7).Control(26)=   "CmdEdiPad(10)"
+      Tab(7).Control(27)=   "CMDSIG(1)"
       TabCaption(8)   =   "Padrao-Complementar"
       Tab(8).ControlCount=   17
-      Tab(8).Control(0)=   "Command10(1)"
-      Tab(8).Control(1)=   "Command12"
-      Tab(8).Control(2)=   "Command11"
-      Tab(8).Control(3)=   "Command10(0)"
-      Tab(8).Control(4)=   "CmdREvi(1)"
-      Tab(8).Control(5)=   "CmdRevFemea(1)"
-      Tab(8).Control(6)=   "CmdOrdFem(3)"
-      Tab(8).Control(7)=   "CmdOrdFem(2)"
+      Tab(8).Control(0)=   "gridrevcau(1)"
+      Tab(8).Control(1)=   "GridSeq(1)"
+      Tab(8).Control(2)=   "EditSeq(1)"
+      Tab(8).Control(3)=   "Command2(1)"
+      Tab(8).Control(4)=   "Command1(1)"
+      Tab(8).Control(5)=   "importar(1)"
+      Tab(8).Control(6)=   "Command4(1)"
+      Tab(8).Control(7)=   "CmdClo(2)"
       Tab(8).Control(8)=   "CmdClo(3)"
-      Tab(8).Control(9)=   "CmdClo(2)"
-      Tab(8).Control(10)=   "Command4(1)"
-      Tab(8).Control(11)=   "importar(1)"
-      Tab(8).Control(12)=   "Command1(1)"
-      Tab(8).Control(13)=   "Command2(1)"
-      Tab(8).Control(14)=   "EditSeq(1)"
-      Tab(8).Control(15)=   "GridSeq(1)"
-      Tab(8).Control(16)=   "gridrevcau(1)"
+      Tab(8).Control(9)=   "CmdOrdFem(2)"
+      Tab(8).Control(10)=   "CmdOrdFem(3)"
+      Tab(8).Control(11)=   "CmdRevFemea(1)"
+      Tab(8).Control(12)=   "CmdREvi(1)"
+      Tab(8).Control(13)=   "Command10(0)"
+      Tab(8).Control(14)=   "Command11"
+      Tab(8).Control(15)=   "Command12"
+      Tab(8).Control(16)=   "Command10(1)"
       TabCaption(9)   =   "PreCadastro"
       Tab(9).ControlCount=   5
-      Tab(9).Control(0)=   "CmdPreinc"
-      Tab(9).Control(1)=   "CmddelPre"
+      Tab(9).Control(0)=   "Gridfemprecad"
+      Tab(9).Control(1)=   "Command7"
       Tab(9).Control(2)=   "cmdedipre(2)"
-      Tab(9).Control(3)=   "Command7"
-      Tab(9).Control(4)=   "Gridfemprecad"
+      Tab(9).Control(3)=   "CmddelPre"
+      Tab(9).Control(4)=   "CmdPreinc"
       TabCaption(10)  =   "Apuracoes"
       Tab(10).ControlCount=   14
-      Tab(10).Control(0)=   "maisano"
-      Tab(10).Control(1)=   "menosano"
-      Tab(10).Control(2)=   "maismes"
-      Tab(10).Control(3)=   "menosmes"
-      Tab(10).Control(4)=   "text(2)"
-      Tab(10).Control(5)=   "text(1)"
-      Tab(10).Control(6)=   "CmdVerApu"
-      Tab(10).Control(7)=   "Cmdeditar"
-      Tab(10).Control(8)=   "Command9"
-      Tab(10).Control(9)=   "Grid10"
-      Tab(10).Control(10)=   "GridOpe"
-      Tab(10).Control(11)=   "lbl(4)"
-      Tab(10).Control(12)=   "lbl(3)"
-      Tab(10).Control(13)=   "dizcomapu"
+      Tab(10).Control(0)=   "dizcomapu"
+      Tab(10).Control(1)=   "lbl(3)"
+      Tab(10).Control(2)=   "lbl(4)"
+      Tab(10).Control(3)=   "GridOpe"
+      Tab(10).Control(4)=   "Grid10"
+      Tab(10).Control(5)=   "Command9"
+      Tab(10).Control(6)=   "Cmdeditar"
+      Tab(10).Control(7)=   "CmdVerApu"
+      Tab(10).Control(8)=   "text(1)"
+      Tab(10).Control(9)=   "text(2)"
+      Tab(10).Control(10)=   "menosmes"
+      Tab(10).Control(11)=   "maismes"
+      Tab(10).Control(12)=   "menosano"
+      Tab(10).Control(13)=   "maisano"
       TabCaption(11)  =   "Fluxo II"
       Tab(11).ControlCount=   13
-      Tab(11).Control(0)=   "Command1(13)"
-      Tab(11).Control(1)=   "Command1(12)"
-      Tab(11).Control(2)=   "Cmdcheckfx(3)"
-      Tab(11).Control(3)=   "Cmdcheckfx(2)"
-      Tab(11).Control(4)=   "CmdTotFlux(3)"
-      Tab(11).Control(5)=   "CmdTotFlux(2)"
+      Tab(11).Control(0)=   "GrdQsbLep"
+      Tab(11).Control(1)=   "Command1(5)"
+      Tab(11).Control(2)=   "Command1(4)"
+      Tab(11).Control(3)=   "CmdTotFlux(0)"
+      Tab(11).Control(4)=   "CmdTotFlux(1)"
+      Tab(11).Control(5)=   "Cmdcheckfx(0)"
       Tab(11).Control(6)=   "Cmdcheckfx(1)"
-      Tab(11).Control(7)=   "Cmdcheckfx(0)"
-      Tab(11).Control(8)=   "CmdTotFlux(1)"
-      Tab(11).Control(9)=   "CmdTotFlux(0)"
-      Tab(11).Control(10)=   "Command1(4)"
-      Tab(11).Control(11)=   "Command1(5)"
-      Tab(11).Control(12)=   "GrdQsbLep"
+      Tab(11).Control(7)=   "CmdTotFlux(2)"
+      Tab(11).Control(8)=   "CmdTotFlux(3)"
+      Tab(11).Control(9)=   "Cmdcheckfx(2)"
+      Tab(11).Control(10)=   "Cmdcheckfx(3)"
+      Tab(11).Control(11)=   "Command1(12)"
+      Tab(11).Control(12)=   "Command1(13)"
       TabCaption(12)  =   "Pre"
       Tab(12).ControlCount=   13
-      Tab(12).Control(0)=   "CmdClo(5)"
-      Tab(12).Control(1)=   "CmdClo(4)"
-      Tab(12).Control(2)=   "Command4(2)"
-      Tab(12).Control(3)=   "importar(2)"
-      Tab(12).Control(4)=   "Command1(6)"
-      Tab(12).Control(5)=   "Command2(2)"
+      Tab(12).Control(0)=   "gridrevcau(2)"
+      Tab(12).Control(1)=   "GridSeq(2)"
+      Tab(12).Control(2)=   "CmdREvi(2)"
+      Tab(12).Control(3)=   "CmdRevFemea(2)"
+      Tab(12).Control(4)=   "CmdOrdFem(4)"
+      Tab(12).Control(5)=   "CmdOrdFem(5)"
       Tab(12).Control(6)=   "EditSeq(2)"
-      Tab(12).Control(7)=   "CmdOrdFem(5)"
-      Tab(12).Control(8)=   "CmdOrdFem(4)"
-      Tab(12).Control(9)=   "CmdRevFemea(2)"
-      Tab(12).Control(10)=   "CmdREvi(2)"
-      Tab(12).Control(11)=   "GridSeq(2)"
-      Tab(12).Control(12)=   "gridrevcau(2)"
+      Tab(12).Control(7)=   "Command2(2)"
+      Tab(12).Control(8)=   "Command1(6)"
+      Tab(12).Control(9)=   "importar(2)"
+      Tab(12).Control(10)=   "Command4(2)"
+      Tab(12).Control(11)=   "CmdClo(4)"
+      Tab(12).Control(12)=   "CmdClo(5)"
       TabCaption(13)  =   "GP12"
       Tab(13).ControlCount=   13
-      Tab(13).Control(0)=   "CmdClo(7)"
-      Tab(13).Control(1)=   "CmdClo(6)"
-      Tab(13).Control(2)=   "Command4(3)"
-      Tab(13).Control(3)=   "importar(3)"
-      Tab(13).Control(4)=   "Command1(7)"
-      Tab(13).Control(5)=   "Command2(3)"
+      Tab(13).Control(0)=   "gridrevcau(3)"
+      Tab(13).Control(1)=   "GridSeq(3)"
+      Tab(13).Control(2)=   "CmdREvi(3)"
+      Tab(13).Control(3)=   "CmdRevFemea(3)"
+      Tab(13).Control(4)=   "CmdOrdFem(6)"
+      Tab(13).Control(5)=   "CmdOrdFem(7)"
       Tab(13).Control(6)=   "EditSeq(3)"
-      Tab(13).Control(7)=   "CmdOrdFem(7)"
-      Tab(13).Control(8)=   "CmdOrdFem(6)"
-      Tab(13).Control(9)=   "CmdRevFemea(3)"
-      Tab(13).Control(10)=   "CmdREvi(3)"
-      Tab(13).Control(11)=   "GridSeq(3)"
-      Tab(13).Control(12)=   "gridrevcau(3)"
+      Tab(13).Control(7)=   "Command2(3)"
+      Tab(13).Control(8)=   "Command1(7)"
+      Tab(13).Control(9)=   "importar(3)"
+      Tab(13).Control(10)=   "Command4(3)"
+      Tab(13).Control(11)=   "CmdClo(6)"
+      Tab(13).Control(12)=   "CmdClo(7)"
       TabCaption(14)  =   "Historico"
       Tab(14).ControlCount=   2
-      Tab(14).Control(0)=   "CmdREvi(4)"
-      Tab(14).Control(1)=   "GridSeq(4)"
+      Tab(14).Control(0)=   "GridSeq(4)"
+      Tab(14).Control(1)=   "CmdREvi(4)"
       TabCaption(15)  =   "Padrao  Historico"
       Tab(15).ControlCount=   1
       Tab(15).Control(0)=   "gridpfpadhist"
       TabCaption(16)  =   "Adcionais"
       Tab(16).ControlCount=   14
-      Tab(16).Control(0)=   "CmdRevFemea(5)"
-      Tab(16).Control(1)=   "CmdREvi(5)"
-      Tab(16).Control(2)=   "CmdClo(9)"
-      Tab(16).Control(3)=   "CmdClo(8)"
-      Tab(16).Control(4)=   "Command4(5)"
-      Tab(16).Control(5)=   "importar(5)"
-      Tab(16).Control(6)=   "Command1(20)"
-      Tab(16).Control(7)=   "Command2(5)"
-      Tab(16).Control(8)=   "EditSeq(5)"
-      Tab(16).Control(9)=   "CmdOrdFem(9)"
-      Tab(16).Control(10)=   "CmdOrdFem(8)"
-      Tab(16).Control(11)=   "Command2(15)"
-      Tab(16).Control(12)=   "GridSeq(5)"
-      Tab(16).Control(13)=   "gridrevcau(5)"
+      Tab(16).Control(0)=   "gridrevcau(5)"
+      Tab(16).Control(1)=   "GridSeq(5)"
+      Tab(16).Control(2)=   "Command2(15)"
+      Tab(16).Control(3)=   "CmdOrdFem(8)"
+      Tab(16).Control(4)=   "CmdOrdFem(9)"
+      Tab(16).Control(5)=   "EditSeq(5)"
+      Tab(16).Control(6)=   "Command2(5)"
+      Tab(16).Control(7)=   "Command1(20)"
+      Tab(16).Control(8)=   "importar(5)"
+      Tab(16).Control(9)=   "Command4(5)"
+      Tab(16).Control(10)=   "CmdClo(8)"
+      Tab(16).Control(11)=   "CmdClo(9)"
+      Tab(16).Control(12)=   "CmdREvi(5)"
+      Tab(16).Control(13)=   "CmdRevFemea(5)"
       Begin VBCCR17.DTPicker DTPicker2 
          Height          =   375
          Left            =   -72960
          TabIndex        =   256
-         Top             =   2130
+         Top             =   2400
          Width           =   1695
          _ExtentX        =   2990
          _ExtentY        =   661
@@ -520,7 +520,7 @@ Begin VB.Form frmfemea
          Height          =   375
          Left            =   -68880
          TabIndex        =   255
-         Top             =   1650
+         Top             =   1920
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   661
@@ -534,7 +534,7 @@ Begin VB.Form frmfemea
          Left            =   -73800
          MaxLength       =   100
          TabIndex        =   252
-         Top             =   3570
+         Top             =   3840
          Width           =   8055
       End
       Begin VB.TextBox Txtfields 
@@ -543,7 +543,7 @@ Begin VB.Form frmfemea
          Left            =   -73800
          MaxLength       =   100
          TabIndex        =   251
-         Top             =   3090
+         Top             =   3360
          Width           =   2415
       End
       Begin VB.CheckBox Check2 
@@ -552,7 +552,7 @@ Begin VB.Form frmfemea
          Left            =   -67080
          TabIndex        =   250
          TabStop         =   0   'False
-         Top             =   2490
+         Top             =   2760
          Width           =   2475
       End
       Begin VB.CommandButton escidfolha 
@@ -565,7 +565,7 @@ Begin VB.Form frmfemea
          TabIndex        =   247
          TabStop         =   0   'False
          ToolTipText     =   "Escolher Nº Folha"
-         Top             =   1770
+         Top             =   2040
          Width           =   615
       End
       Begin VB.CommandButton escidfolha 
@@ -578,7 +578,7 @@ Begin VB.Form frmfemea
          TabIndex        =   246
          TabStop         =   0   'False
          ToolTipText     =   "Escolher Nº Folha"
-         Top             =   1050
+         Top             =   1320
          Width           =   615
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -588,7 +588,7 @@ Begin VB.Form frmfemea
          Left            =   1920
          TabIndex        =   245
          TabStop         =   0   'False
-         Top             =   4410
+         Top             =   4680
          Width           =   1935
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -598,7 +598,7 @@ Begin VB.Form frmfemea
          Left            =   240
          TabIndex        =   244
          TabStop         =   0   'False
-         Top             =   4410
+         Top             =   4680
          Width           =   1575
       End
       Begin VB.CommandButton CmdREvisarTodas 
@@ -609,7 +609,7 @@ Begin VB.Form frmfemea
          TabIndex        =   241
          TabStop         =   0   'False
          ToolTipText     =   "Revisa todos os itens e gerar um revisao mantendo os indicadores"
-         Top             =   5970
+         Top             =   6240
          Width           =   1335
       End
       Begin VB.CommandButton CmdRevFemea 
@@ -620,7 +620,7 @@ Begin VB.Form frmfemea
          TabIndex        =   240
          TabStop         =   0   'False
          ToolTipText     =   "Gera nova revisao do item  mantendo os indicadore"
-         Top             =   5250
+         Top             =   5520
          Width           =   1335
       End
       Begin VB.CommandButton CmdREvisarTodas 
@@ -631,7 +631,7 @@ Begin VB.Form frmfemea
          TabIndex        =   239
          TabStop         =   0   'False
          ToolTipText     =   "Revisa todos os itens e gerar um revisao trocando os indicadores"
-         Top             =   5610
+         Top             =   5880
          Width           =   1335
       End
       Begin VB.CommandButton Command16 
@@ -640,7 +640,7 @@ Begin VB.Form frmfemea
          Left            =   -71160
          TabIndex        =   238
          TabStop         =   0   'False
-         Top             =   2130
+         Top             =   2400
          Width           =   1575
       End
       Begin VB.CommandButton CmdRevFemea 
@@ -649,7 +649,7 @@ Begin VB.Form frmfemea
          Index           =   5
          Left            =   -65520
          TabIndex        =   235
-         Top             =   4530
+         Top             =   4800
          Width           =   1095
       End
       Begin VB.CommandButton CmdREvi 
@@ -658,7 +658,7 @@ Begin VB.Form frmfemea
          Index           =   5
          Left            =   -65520
          TabIndex        =   234
-         Top             =   4890
+         Top             =   5160
          Width           =   1095
       End
       Begin VB.CommandButton CmdClo 
@@ -668,7 +668,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   232
          TabStop         =   0   'False
-         Top             =   3210
+         Top             =   3480
          Width           =   1095
       End
       Begin VB.CommandButton CmdClo 
@@ -678,7 +678,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   231
          TabStop         =   0   'False
-         Top             =   2850
+         Top             =   3120
          Width           =   1095
       End
       Begin VB.CommandButton Command4 
@@ -688,7 +688,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   230
          TabStop         =   0   'False
-         Top             =   2490
+         Top             =   2760
          Width           =   1095
       End
       Begin VB.CommandButton importar 
@@ -698,7 +698,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   229
          TabStop         =   0   'False
-         Top             =   2130
+         Top             =   2400
          Width           =   1095
       End
       Begin VB.CommandButton Command1 
@@ -708,7 +708,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   228
          TabStop         =   0   'False
-         Top             =   1050
+         Top             =   1320
          Width           =   1095
       End
       Begin VB.CommandButton Command2 
@@ -718,7 +718,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   227
          TabStop         =   0   'False
-         Top             =   1410
+         Top             =   1680
          Width           =   1095
       End
       Begin VB.CommandButton EditSeq 
@@ -728,7 +728,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   226
          TabStop         =   0   'False
-         Top             =   1770
+         Top             =   2040
          Width           =   1095
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -738,7 +738,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   225
          TabStop         =   0   'False
-         Top             =   810
+         Top             =   1080
          Width           =   1575
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -748,7 +748,7 @@ Begin VB.Form frmfemea
          Left            =   -73200
          TabIndex        =   224
          TabStop         =   0   'False
-         Top             =   810
+         Top             =   1080
          Width           =   1935
       End
       Begin VB.CommandButton Command2 
@@ -758,7 +758,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   223
          TabStop         =   0   'False
-         Top             =   3810
+         Top             =   4080
          Width           =   1095
       End
       Begin VB.CommandButton Command1 
@@ -768,7 +768,7 @@ Begin VB.Form frmfemea
          Left            =   -67440
          TabIndex        =   222
          TabStop         =   0   'False
-         Top             =   3330
+         Top             =   3600
          Width           =   1095
       End
       Begin VB.CommandButton Command2 
@@ -778,7 +778,7 @@ Begin VB.Form frmfemea
          Left            =   9480
          TabIndex        =   221
          TabStop         =   0   'False
-         Top             =   3570
+         Top             =   3840
          Width           =   1095
       End
       Begin VB.TextBox Txtfields 
@@ -790,7 +790,7 @@ Begin VB.Form frmfemea
          Locked          =   -1  'True
          TabIndex        =   220
          TabStop         =   0   'False
-         Top             =   1710
+         Top             =   1980
          Width           =   1215
       End
       Begin VB.CommandButton Command15 
@@ -800,7 +800,7 @@ Begin VB.Form frmfemea
          TabIndex        =   219
          TabStop         =   0   'False
          ToolTipText     =   "Revisao do PF nao Gera Revisao Femea"
-         Top             =   2730
+         Top             =   3000
          Width           =   1575
       End
       Begin VB.CommandButton Command14 
@@ -809,7 +809,7 @@ Begin VB.Form frmfemea
          Left            =   -66120
          TabIndex        =   217
          TabStop         =   0   'False
-         Top             =   2070
+         Top             =   2340
          Width           =   1455
       End
       Begin VB.CommandButton Command13 
@@ -818,7 +818,7 @@ Begin VB.Form frmfemea
          Left            =   -66120
          TabIndex        =   216
          TabStop         =   0   'False
-         Top             =   2670
+         Top             =   2940
          Width           =   1455
       End
       Begin VB.CommandButton Command10 
@@ -828,7 +828,7 @@ Begin VB.Form frmfemea
          Left            =   -67440
          TabIndex        =   215
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1575
       End
       Begin VB.CommandButton Command12 
@@ -837,7 +837,7 @@ Begin VB.Form frmfemea
          Left            =   -68400
          TabIndex        =   214
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   975
       End
       Begin VB.CommandButton Command11 
@@ -846,7 +846,7 @@ Begin VB.Form frmfemea
          Left            =   -71520
          TabIndex        =   213
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1335
       End
       Begin VB.CommandButton Command10 
@@ -856,7 +856,7 @@ Begin VB.Form frmfemea
          Left            =   -70200
          TabIndex        =   212
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1815
       End
       Begin VB.CommandButton CmdREvi 
@@ -866,7 +866,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   210
          TabStop         =   0   'False
-         Top             =   1110
+         Top             =   1380
          Width           =   1095
       End
       Begin VB.TextBox Txtfields 
@@ -878,7 +878,7 @@ Begin VB.Form frmfemea
          Locked          =   -1  'True
          TabIndex        =   209
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   1215
       End
       Begin VB.TextBox Txtfields 
@@ -890,7 +890,7 @@ Begin VB.Form frmfemea
          Locked          =   -1  'True
          TabIndex        =   208
          TabStop         =   0   'False
-         Top             =   1710
+         Top             =   1980
          Width           =   1215
       End
       Begin VB.TextBox Txtfields 
@@ -902,7 +902,7 @@ Begin VB.Form frmfemea
          Locked          =   -1  'True
          TabIndex        =   207
          TabStop         =   0   'False
-         Top             =   870
+         Top             =   1140
          Width           =   1215
       End
       Begin VB.CommandButton Command1 
@@ -912,7 +912,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   205
          TabStop         =   0   'False
-         Top             =   1710
+         Top             =   1980
          Width           =   1455
       End
       Begin VB.CommandButton Command1 
@@ -922,7 +922,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   204
          TabStop         =   0   'False
-         Top             =   1470
+         Top             =   1740
          Width           =   1455
       End
       Begin VB.CommandButton Cmdcheckfx 
@@ -932,7 +932,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   203
          TabStop         =   0   'False
-         Top             =   5190
+         Top             =   5460
          Width           =   1455
       End
       Begin VB.CommandButton Cmdcheckfx 
@@ -942,7 +942,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   202
          TabStop         =   0   'False
-         Top             =   4830
+         Top             =   5100
          Width           =   1455
       End
       Begin VB.CommandButton CmdTotFlux 
@@ -952,7 +952,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   201
          TabStop         =   0   'False
-         Top             =   3270
+         Top             =   3540
          Width           =   1455
       End
       Begin VB.CommandButton CmdTotFlux 
@@ -962,7 +962,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   200
          TabStop         =   0   'False
-         Top             =   2910
+         Top             =   3180
          Width           =   1455
       End
       Begin VB.CommandButton CmdClo 
@@ -972,7 +972,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   197
          TabStop         =   0   'False
-         Top             =   3150
+         Top             =   3420
          Width           =   1095
       End
       Begin VB.CommandButton CmdClo 
@@ -982,7 +982,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   196
          TabStop         =   0   'False
-         Top             =   2790
+         Top             =   3060
          Width           =   1095
       End
       Begin VB.CommandButton Command4 
@@ -992,7 +992,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   195
          TabStop         =   0   'False
-         Top             =   2430
+         Top             =   2700
          Width           =   1095
       End
       Begin VB.CommandButton importar 
@@ -1002,7 +1002,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   194
          TabStop         =   0   'False
-         Top             =   2070
+         Top             =   2340
          Width           =   1095
       End
       Begin VB.CommandButton Command1 
@@ -1012,7 +1012,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   193
          TabStop         =   0   'False
-         Top             =   990
+         Top             =   1260
          Width           =   1095
       End
       Begin VB.CommandButton Command2 
@@ -1022,7 +1022,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   192
          TabStop         =   0   'False
-         Top             =   1350
+         Top             =   1620
          Width           =   1095
       End
       Begin VB.CommandButton EditSeq 
@@ -1032,7 +1032,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   191
          TabStop         =   0   'False
-         Top             =   1710
+         Top             =   1980
          Width           =   1095
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -1042,7 +1042,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   190
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1575
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -1052,7 +1052,7 @@ Begin VB.Form frmfemea
          Left            =   -73200
          TabIndex        =   189
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1935
       End
       Begin VB.CommandButton CmdRevFemea 
@@ -1062,7 +1062,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   188
          TabStop         =   0   'False
-         Top             =   4470
+         Top             =   4740
          Width           =   1095
       End
       Begin VB.CommandButton CmdREvi 
@@ -1072,7 +1072,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   187
          TabStop         =   0   'False
-         Top             =   4830
+         Top             =   5100
          Width           =   1095
       End
       Begin VB.CommandButton CmdClo 
@@ -1082,7 +1082,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   184
          TabStop         =   0   'False
-         Top             =   3150
+         Top             =   3420
          Width           =   1095
       End
       Begin VB.CommandButton CmdClo 
@@ -1092,7 +1092,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   183
          TabStop         =   0   'False
-         Top             =   2790
+         Top             =   3060
          Width           =   1095
       End
       Begin VB.CommandButton Command4 
@@ -1102,7 +1102,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   182
          TabStop         =   0   'False
-         Top             =   2430
+         Top             =   2700
          Width           =   1095
       End
       Begin VB.CommandButton importar 
@@ -1112,7 +1112,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   181
          TabStop         =   0   'False
-         Top             =   2070
+         Top             =   2340
          Width           =   1095
       End
       Begin VB.CommandButton Command1 
@@ -1122,7 +1122,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   180
          TabStop         =   0   'False
-         Top             =   990
+         Top             =   1260
          Width           =   1095
       End
       Begin VB.CommandButton Command2 
@@ -1132,7 +1132,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   179
          TabStop         =   0   'False
-         Top             =   1350
+         Top             =   1620
          Width           =   1095
       End
       Begin VB.CommandButton EditSeq 
@@ -1142,7 +1142,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   178
          TabStop         =   0   'False
-         Top             =   1710
+         Top             =   1980
          Width           =   1095
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -1152,7 +1152,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   177
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1575
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -1162,7 +1162,7 @@ Begin VB.Form frmfemea
          Left            =   -73200
          TabIndex        =   176
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1935
       End
       Begin VB.CommandButton CmdRevFemea 
@@ -1172,7 +1172,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   175
          TabStop         =   0   'False
-         Top             =   4470
+         Top             =   4740
          Width           =   1095
       End
       Begin VB.CommandButton CmdREvi 
@@ -1182,7 +1182,7 @@ Begin VB.Form frmfemea
          Left            =   -65520
          TabIndex        =   174
          TabStop         =   0   'False
-         Top             =   4830
+         Top             =   5100
          Width           =   1095
       End
       Begin VB.CommandButton CmdREvi 
@@ -1192,7 +1192,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   173
          TabStop         =   0   'False
-         Top             =   4830
+         Top             =   5100
          Width           =   1095
       End
       Begin VB.CommandButton CmdREvi 
@@ -1202,7 +1202,7 @@ Begin VB.Form frmfemea
          Left            =   9360
          TabIndex        =   172
          TabStop         =   0   'False
-         Top             =   4770
+         Top             =   5040
          Width           =   1335
       End
       Begin VB.CommandButton CmdRevFemea 
@@ -1212,7 +1212,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   171
          TabStop         =   0   'False
-         Top             =   4470
+         Top             =   4740
          Width           =   1095
       End
       Begin VB.CommandButton CmdRevFemea 
@@ -1223,7 +1223,7 @@ Begin VB.Form frmfemea
          TabIndex        =   170
          TabStop         =   0   'False
          ToolTipText     =   "Gera Revisao do itens com os novos indicadores"
-         Top             =   5010
+         Top             =   5280
          Width           =   1335
       End
       Begin VB.CommandButton CmdEdiDef 
@@ -1232,7 +1232,7 @@ Begin VB.Form frmfemea
          Left            =   -66000
          TabIndex        =   167
          TabStop         =   0   'False
-         Top             =   2430
+         Top             =   2700
          Width           =   1335
       End
       Begin VB.CommandButton CmdDelDef 
@@ -1241,7 +1241,7 @@ Begin VB.Form frmfemea
          Left            =   -66000
          TabIndex        =   166
          TabStop         =   0   'False
-         Top             =   1950
+         Top             =   2220
          Width           =   1335
       End
       Begin VB.CommandButton CmdIncDef 
@@ -1250,7 +1250,7 @@ Begin VB.Form frmfemea
          Left            =   -66000
          TabIndex        =   165
          TabStop         =   0   'False
-         Top             =   1470
+         Top             =   1740
          Width           =   1335
       End
       Begin VB.CommandButton CMDSIG 
@@ -1261,7 +1261,7 @@ Begin VB.Form frmfemea
          Style           =   1  'Graphical
          TabIndex        =   164
          TabStop         =   0   'False
-         Top             =   990
+         Top             =   1260
          Width           =   375
       End
       Begin VB.CommandButton CmdcheckOp 
@@ -1271,7 +1271,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   163
          TabStop         =   0   'False
-         Top             =   3150
+         Top             =   3420
          Width           =   1455
       End
       Begin VB.CommandButton CmdcheckOp 
@@ -1281,7 +1281,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   162
          TabStop         =   0   'False
-         Top             =   2670
+         Top             =   2940
          Width           =   1455
       End
       Begin VB.CommandButton Cmdcheckfx 
@@ -1291,7 +1291,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   161
          TabStop         =   0   'False
-         Top             =   4470
+         Top             =   4740
          Width           =   1455
       End
       Begin VB.CommandButton Cmdcheckfx 
@@ -1301,7 +1301,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   160
          TabStop         =   0   'False
-         Top             =   4110
+         Top             =   4380
          Width           =   1455
       End
       Begin VB.CommandButton CmdTotFlux 
@@ -1311,7 +1311,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   159
          TabStop         =   0   'False
-         Top             =   2550
+         Top             =   2820
          Width           =   1455
       End
       Begin VB.CommandButton CmdTotFlux 
@@ -1321,7 +1321,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   158
          TabStop         =   0   'False
-         Top             =   2190
+         Top             =   2460
          Width           =   1455
       End
       Begin VB.CommandButton Command1 
@@ -1331,7 +1331,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   157
          TabStop         =   0   'False
-         Top             =   990
+         Top             =   1260
          Width           =   1455
       End
       Begin VB.CommandButton Command1 
@@ -1341,7 +1341,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   156
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   1455
       End
       Begin VB.CommandButton CmdTotPad 
@@ -1351,7 +1351,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   154
          TabStop         =   0   'False
-         Top             =   2190
+         Top             =   2460
          Width           =   1455
       End
       Begin VB.CommandButton CmdTotPad 
@@ -1361,7 +1361,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   153
          TabStop         =   0   'False
-         Top             =   1710
+         Top             =   1980
          Width           =   1455
       End
       Begin VB.CommandButton Command1 
@@ -1371,7 +1371,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   152
          TabStop         =   0   'False
-         Top             =   1350
+         Top             =   1620
          Width           =   1455
       End
       Begin VB.CommandButton Command1 
@@ -1381,7 +1381,7 @@ Begin VB.Form frmfemea
          Left            =   -65760
          TabIndex        =   151
          TabStop         =   0   'False
-         Top             =   990
+         Top             =   1260
          Width           =   1455
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -1391,7 +1391,7 @@ Begin VB.Form frmfemea
          Left            =   -73680
          TabIndex        =   150
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1935
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -1401,7 +1401,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   149
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1215
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -1411,7 +1411,7 @@ Begin VB.Form frmfemea
          Left            =   1800
          TabIndex        =   148
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1935
       End
       Begin VB.CommandButton CmdOrdFem 
@@ -1421,7 +1421,7 @@ Begin VB.Form frmfemea
          Left            =   120
          TabIndex        =   147
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1575
       End
       Begin VB.CommandButton CmdVerDef 
@@ -1430,7 +1430,7 @@ Begin VB.Form frmfemea
          Left            =   -66000
          TabIndex        =   146
          TabStop         =   0   'False
-         Top             =   990
+         Top             =   1260
          Width           =   1335
       End
       Begin VB.CommandButton CmdMarcaFemea 
@@ -1439,7 +1439,7 @@ Begin VB.Form frmfemea
          Left            =   -66000
          TabIndex        =   145
          TabStop         =   0   'False
-         Top             =   3150
+         Top             =   3420
          Width           =   1455
       End
       Begin MSFlexGridLib.MSFlexGrid GridPFrev 
@@ -1447,7 +1447,7 @@ Begin VB.Form frmfemea
          Left            =   -74760
          TabIndex        =   144
          TabStop         =   0   'False
-         Top             =   3150
+         Top             =   3420
          Width           =   8655
          _ExtentX        =   15266
          _ExtentY        =   2143
@@ -1462,7 +1462,7 @@ Begin VB.Form frmfemea
          TabIndex        =   143
          TabStop         =   0   'False
          ToolTipText     =   "Escolher Nº Folha"
-         Top             =   1830
+         Top             =   2100
          Width           =   495
       End
       Begin VB.CommandButton escidfolha 
@@ -1474,7 +1474,7 @@ Begin VB.Form frmfemea
          TabIndex        =   142
          TabStop         =   0   'False
          ToolTipText     =   "Escolher Nº Folha"
-         Top             =   1110
+         Top             =   1380
          Width           =   495
       End
       Begin VB.TextBox Txtfields 
@@ -1486,7 +1486,7 @@ Begin VB.Form frmfemea
          Locked          =   -1  'True
          TabIndex        =   140
          TabStop         =   0   'False
-         Top             =   1350
+         Top             =   1620
          Width           =   975
       End
       Begin VB.TextBox Txtfields 
@@ -1498,7 +1498,7 @@ Begin VB.Form frmfemea
          Locked          =   -1  'True
          TabIndex        =   139
          TabStop         =   0   'False
-         Top             =   1350
+         Top             =   1620
          Width           =   615
       End
       Begin VB.CommandButton CmdEdiPad 
@@ -1508,7 +1508,7 @@ Begin VB.Form frmfemea
          Left            =   -65100
          TabIndex        =   137
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   855
       End
       Begin VB.CommandButton importar 
@@ -1518,7 +1518,7 @@ Begin VB.Form frmfemea
          Left            =   -69240
          TabIndex        =   136
          TabStop         =   0   'False
-         Top             =   1290
+         Top             =   1560
          Width           =   1095
       End
       Begin VB.CommandButton CmdOrdPad 
@@ -1528,7 +1528,7 @@ Begin VB.Form frmfemea
          Left            =   -72360
          TabIndex        =   133
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   615
       End
       Begin VB.CommandButton CmdApagaRPN 
@@ -1537,7 +1537,7 @@ Begin VB.Form frmfemea
          Left            =   -65040
          TabIndex        =   132
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   735
       End
       Begin VB.TextBox txtRPN 
@@ -1554,7 +1554,7 @@ Begin VB.Form frmfemea
          Left            =   -65640
          MaxLength       =   1
          TabIndex        =   131
-         Top             =   750
+         Top             =   1020
          Width           =   615
       End
       Begin VB.CommandButton CmdTrocaREv 
@@ -1563,7 +1563,7 @@ Begin VB.Form frmfemea
          Left            =   -66240
          TabIndex        =   130
          TabStop         =   0   'False
-         Top             =   3390
+         Top             =   3660
          Width           =   1335
       End
       Begin VB.TextBox TxtRevNova 
@@ -1571,7 +1571,7 @@ Begin VB.Form frmfemea
          Left            =   -64920
          TabIndex        =   129
          TabStop         =   0   'False
-         Top             =   3390
+         Top             =   3660
          Width           =   615
       End
       Begin VB.TextBox TxtRevisao 
@@ -1579,7 +1579,7 @@ Begin VB.Form frmfemea
          Left            =   -64920
          TabIndex        =   128
          TabStop         =   0   'False
-         Top             =   3030
+         Top             =   3300
          Width           =   615
       End
       Begin VB.CommandButton CmdApaRev 
@@ -1588,7 +1588,7 @@ Begin VB.Form frmfemea
          Left            =   -66240
          TabIndex        =   127
          TabStop         =   0   'False
-         Top             =   3030
+         Top             =   3300
          Width           =   1335
       End
       Begin VB.TextBox Txtfields 
@@ -1600,7 +1600,7 @@ Begin VB.Form frmfemea
          Locked          =   -1  'True
          TabIndex        =   126
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   735
       End
       Begin VB.TextBox Txtfields 
@@ -1612,7 +1612,7 @@ Begin VB.Form frmfemea
          Locked          =   -1  'True
          TabIndex        =   125
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   4335
       End
       Begin VB.CommandButton CmdLiberar 
@@ -1621,7 +1621,7 @@ Begin VB.Form frmfemea
          Left            =   -65880
          TabIndex        =   124
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   1095
       End
       Begin VB.CommandButton CmdExcPFPad 
@@ -1631,7 +1631,7 @@ Begin VB.Form frmfemea
          Left            =   -66120
          TabIndex        =   123
          TabStop         =   0   'False
-         Top             =   1110
+         Top             =   1380
          Width           =   1455
       End
       Begin VB.CommandButton EditSeq 
@@ -1641,7 +1641,7 @@ Begin VB.Form frmfemea
          Left            =   9480
          TabIndex        =   90
          TabStop         =   0   'False
-         Top             =   1650
+         Top             =   1920
          Width           =   1095
       End
       Begin VB.CommandButton Command2 
@@ -1651,7 +1651,7 @@ Begin VB.Form frmfemea
          Left            =   9480
          TabIndex        =   89
          TabStop         =   0   'False
-         Top             =   1290
+         Top             =   1560
          Width           =   1095
       End
       Begin VB.CommandButton Command1 
@@ -1661,7 +1661,7 @@ Begin VB.Form frmfemea
          Left            =   9480
          TabIndex        =   88
          TabStop         =   0   'False
-         Top             =   990
+         Top             =   1260
          Width           =   1095
       End
       Begin VB.TextBox Txtfields 
@@ -1670,7 +1670,7 @@ Begin VB.Form frmfemea
          Left            =   -73800
          MaxLength       =   100
          TabIndex        =   6
-         Top             =   2610
+         Top             =   2880
          Width           =   8055
       End
       Begin VB.TextBox Txtfields 
@@ -1680,7 +1680,7 @@ Begin VB.Form frmfemea
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   3
-         Top             =   1890
+         Top             =   2160
          Width           =   8055
       End
       Begin VB.TextBox Txtfields 
@@ -1690,7 +1690,7 @@ Begin VB.Form frmfemea
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   2
-         Top             =   1170
+         Top             =   1440
          Width           =   8055
       End
       Begin VB.TextBox Txtfields 
@@ -1703,7 +1703,7 @@ Begin VB.Form frmfemea
          Locked          =   -1  'True
          TabIndex        =   87
          TabStop         =   0   'False
-         Top             =   1710
+         Top             =   1980
          Width           =   735
       End
       Begin VB.CommandButton Command3 
@@ -1713,7 +1713,7 @@ Begin VB.Form frmfemea
          Style           =   1  'Graphical
          TabIndex        =   86
          TabStop         =   0   'False
-         Top             =   810
+         Top             =   1080
          Width           =   375
       End
       Begin VB.TextBox Txtfields 
@@ -1725,7 +1725,7 @@ Begin VB.Form frmfemea
          Locked          =   -1  'True
          TabIndex        =   85
          TabStop         =   0   'False
-         Top             =   810
+         Top             =   1080
          Width           =   4335
       End
       Begin VB.TextBox Txtfields 
@@ -1737,7 +1737,7 @@ Begin VB.Form frmfemea
          Locked          =   -1  'True
          TabIndex        =   84
          TabStop         =   0   'False
-         Top             =   810
+         Top             =   1080
          Width           =   735
       End
       Begin VB.CommandButton ComMotInc 
@@ -1746,7 +1746,7 @@ Begin VB.Form frmfemea
          Left            =   -67440
          TabIndex        =   83
          TabStop         =   0   'False
-         Top             =   4530
+         Top             =   4800
          Width           =   1335
       End
       Begin VB.CommandButton ComMotExc 
@@ -1755,7 +1755,7 @@ Begin VB.Form frmfemea
          Left            =   -67440
          TabIndex        =   82
          TabStop         =   0   'False
-         Top             =   5010
+         Top             =   5280
          Width           =   1335
       End
       Begin VB.CommandButton ComMotAlt 
@@ -1765,7 +1765,7 @@ Begin VB.Form frmfemea
          Left            =   -67440
          TabIndex        =   81
          TabStop         =   0   'False
-         Top             =   4170
+         Top             =   4440
          Width           =   1335
       End
       Begin VB.CommandButton CmdMotRev 
@@ -1774,7 +1774,7 @@ Begin VB.Form frmfemea
          Left            =   -67440
          TabIndex        =   80
          TabStop         =   0   'False
-         Top             =   2970
+         Top             =   3240
          Width           =   1095
       End
       Begin VB.CommandButton CmdNovaREV 
@@ -1783,7 +1783,7 @@ Begin VB.Form frmfemea
          Left            =   -74760
          TabIndex        =   79
          TabStop         =   0   'False
-         Top             =   2730
+         Top             =   3000
          Width           =   1695
       End
       Begin VB.CheckBox Check1 
@@ -1792,7 +1792,7 @@ Begin VB.Form frmfemea
          Left            =   -67080
          TabIndex        =   5
          TabStop         =   0   'False
-         Top             =   2130
+         Top             =   2400
          Width           =   1935
       End
       Begin VB.CommandButton importar 
@@ -1802,7 +1802,7 @@ Begin VB.Form frmfemea
          Left            =   9480
          TabIndex        =   78
          TabStop         =   0   'False
-         Top             =   2010
+         Top             =   2280
          Width           =   1095
       End
       Begin VB.CommandButton Command4 
@@ -1812,7 +1812,7 @@ Begin VB.Form frmfemea
          Left            =   9480
          TabIndex        =   77
          TabStop         =   0   'False
-         Top             =   2370
+         Top             =   2640
          Width           =   1095
       End
       Begin VB.CommandButton ComMotAlt 
@@ -1822,7 +1822,7 @@ Begin VB.Form frmfemea
          Left            =   -66000
          TabIndex        =   76
          TabStop         =   0   'False
-         Top             =   870
+         Top             =   1140
          Width           =   555
       End
       Begin VB.CommandButton CmdClo 
@@ -1832,7 +1832,7 @@ Begin VB.Form frmfemea
          Left            =   9480
          TabIndex        =   75
          TabStop         =   0   'False
-         Top             =   2730
+         Top             =   3000
          Width           =   1095
       End
       Begin VB.CommandButton CmdClo 
@@ -1842,7 +1842,7 @@ Begin VB.Form frmfemea
          Left            =   9480
          TabIndex        =   74
          TabStop         =   0   'False
-         Top             =   3090
+         Top             =   3360
          Width           =   1095
       End
       Begin VB.CommandButton CmdProx 
@@ -1851,7 +1851,7 @@ Begin VB.Form frmfemea
          Left            =   -70200
          TabIndex        =   73
          TabStop         =   0   'False
-         Top             =   1710
+         Top             =   1980
          Width           =   495
       End
       Begin VB.CommandButton Command5 
@@ -1860,7 +1860,7 @@ Begin VB.Form frmfemea
          Left            =   -70920
          TabIndex        =   72
          TabStop         =   0   'False
-         Top             =   2730
+         Top             =   3000
          Width           =   2175
       End
       Begin VB.CheckBox femeacrg 
@@ -1869,7 +1869,7 @@ Begin VB.Form frmfemea
          Left            =   -67080
          TabIndex        =   4
          TabStop         =   0   'False
-         Top             =   1710
+         Top             =   1980
          Width           =   2295
       End
       Begin VB.CommandButton CmdEscPro 
@@ -1878,7 +1878,7 @@ Begin VB.Form frmfemea
          Left            =   -69840
          TabIndex        =   71
          TabStop         =   0   'False
-         Top             =   1110
+         Top             =   1380
          Width           =   735
       End
       Begin VB.CommandButton CmdEscFal 
@@ -1887,7 +1887,7 @@ Begin VB.Form frmfemea
          Left            =   -69840
          TabIndex        =   70
          TabStop         =   0   'False
-         Top             =   2790
+         Top             =   3060
          Width           =   735
       End
       Begin VB.CommandButton CmdIncPf 
@@ -1896,7 +1896,7 @@ Begin VB.Form frmfemea
          Left            =   -69840
          TabIndex        =   69
          TabStop         =   0   'False
-         Top             =   2190
+         Top             =   2460
          Width           =   735
       End
       Begin VB.CommandButton CmdExcPFPad 
@@ -1906,7 +1906,7 @@ Begin VB.Form frmfemea
          Left            =   -66120
          TabIndex        =   68
          TabStop         =   0   'False
-         Top             =   1590
+         Top             =   1860
          Width           =   1455
       End
       Begin VB.CommandButton CmdClo 
@@ -1916,7 +1916,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   67
          TabStop         =   0   'False
-         Top             =   2790
+         Top             =   3060
          Width           =   1095
       End
       Begin VB.CommandButton CmdClo 
@@ -1926,7 +1926,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   66
          TabStop         =   0   'False
-         Top             =   2550
+         Top             =   2820
          Width           =   1095
       End
       Begin VB.CommandButton Command4 
@@ -1936,7 +1936,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   65
          TabStop         =   0   'False
-         Top             =   2190
+         Top             =   2460
          Width           =   1095
       End
       Begin VB.CommandButton importar 
@@ -1946,7 +1946,7 @@ Begin VB.Form frmfemea
          Left            =   -65400
          TabIndex        =   64
          TabStop         =   0   'False
-         Top             =   1950
+         Top             =   2220
          Width           =   1095
       End
       Begin VB.CommandButton Command1 
@@ -1955,7 +1955,7 @@ Begin VB.Form frmfemea
          Index           =   1
          Left            =   -65400
          TabIndex        =   63
-         Top             =   870
+         Top             =   1140
          Width           =   1095
       End
       Begin VB.CommandButton Command2 
@@ -1964,7 +1964,7 @@ Begin VB.Form frmfemea
          Index           =   1
          Left            =   -65400
          TabIndex        =   62
-         Top             =   1590
+         Top             =   1860
          Width           =   1095
       End
       Begin VB.CommandButton EditSeq 
@@ -1973,7 +1973,7 @@ Begin VB.Form frmfemea
          Index           =   1
          Left            =   -65400
          TabIndex        =   61
-         Top             =   1230
+         Top             =   1500
          Width           =   1095
       End
       Begin VB.CommandButton Command6 
@@ -1982,7 +1982,7 @@ Begin VB.Form frmfemea
          Left            =   -69960
          TabIndex        =   60
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1695
       End
       Begin VB.CommandButton CmdPreinc 
@@ -1991,7 +1991,7 @@ Begin VB.Form frmfemea
          Left            =   -66480
          TabIndex        =   59
          TabStop         =   0   'False
-         Top             =   990
+         Top             =   1260
          Width           =   1095
       End
       Begin VB.CommandButton CmddelPre 
@@ -2000,7 +2000,7 @@ Begin VB.Form frmfemea
          Left            =   -66480
          TabIndex        =   58
          TabStop         =   0   'False
-         Top             =   1350
+         Top             =   1620
          Width           =   1095
       End
       Begin VB.CommandButton cmdedipre 
@@ -2010,7 +2010,7 @@ Begin VB.Form frmfemea
          Left            =   -66480
          TabIndex        =   57
          TabStop         =   0   'False
-         Top             =   1710
+         Top             =   1980
          Width           =   1095
       End
       Begin VB.CommandButton CmdEdiPad 
@@ -2020,7 +2020,7 @@ Begin VB.Form frmfemea
          Left            =   -69240
          TabIndex        =   56
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   735
       End
       Begin VB.CommandButton Command7 
@@ -2029,7 +2029,7 @@ Begin VB.Form frmfemea
          Left            =   -66480
          TabIndex        =   55
          TabStop         =   0   'False
-         Top             =   2070
+         Top             =   2340
          Width           =   1095
       End
       Begin VB.CommandButton CmdEdiPad 
@@ -2039,7 +2039,7 @@ Begin VB.Form frmfemea
          Left            =   -68400
          TabIndex        =   54
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   735
       End
       Begin VB.CommandButton Command8 
@@ -2048,7 +2048,7 @@ Begin VB.Form frmfemea
          Left            =   -69840
          TabIndex        =   53
          TabStop         =   0   'False
-         Top             =   1590
+         Top             =   1860
          Width           =   735
       End
       Begin VB.CommandButton CmdNome 
@@ -2057,7 +2057,7 @@ Begin VB.Form frmfemea
          Left            =   -69120
          TabIndex        =   52
          TabStop         =   0   'False
-         Top             =   1590
+         Top             =   1860
          Width           =   855
       End
       Begin VB.CommandButton Cmdimp 
@@ -2066,7 +2066,7 @@ Begin VB.Form frmfemea
          Left            =   -68160
          TabIndex        =   51
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   735
       End
       Begin VB.CommandButton CmdEdiPad 
@@ -2085,7 +2085,7 @@ Begin VB.Form frmfemea
          Left            =   -66480
          TabIndex        =   50
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   1335
       End
       Begin VB.CommandButton CmdOrdPad 
@@ -2095,7 +2095,7 @@ Begin VB.Form frmfemea
          Left            =   -73800
          TabIndex        =   49
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   855
       End
       Begin VB.CommandButton CmdOrdPad 
@@ -2105,7 +2105,7 @@ Begin VB.Form frmfemea
          Left            =   -74280
          TabIndex        =   48
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   495
       End
       Begin VB.CommandButton CmdOrdPad 
@@ -2115,7 +2115,7 @@ Begin VB.Form frmfemea
          Left            =   -72960
          TabIndex        =   47
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   615
       End
       Begin VB.CommandButton CmdEdiPad 
@@ -2125,7 +2125,7 @@ Begin VB.Form frmfemea
          Left            =   -72960
          TabIndex        =   46
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   975
       End
       Begin VB.CommandButton maisano 
@@ -2135,7 +2135,7 @@ Begin VB.Form frmfemea
          TabIndex        =   45
          TabStop         =   0   'False
          ToolTipText     =   "Aumenta um Ano"
-         Top             =   750
+         Top             =   1020
          Width           =   330
       End
       Begin VB.CommandButton menosano 
@@ -2145,7 +2145,7 @@ Begin VB.Form frmfemea
          TabIndex        =   44
          TabStop         =   0   'False
          ToolTipText     =   "Diminui um Ano"
-         Top             =   750
+         Top             =   1020
          Width           =   330
       End
       Begin VB.CommandButton maismes 
@@ -2155,7 +2155,7 @@ Begin VB.Form frmfemea
          TabIndex        =   43
          TabStop         =   0   'False
          ToolTipText     =   "Aumenta um mes"
-         Top             =   750
+         Top             =   1020
          Width           =   330
       End
       Begin VB.CommandButton menosmes 
@@ -2165,7 +2165,7 @@ Begin VB.Form frmfemea
          TabIndex        =   42
          TabStop         =   0   'False
          ToolTipText     =   "Diminui um mes"
-         Top             =   750
+         Top             =   1020
          Width           =   330
       End
       Begin VB.TextBox text 
@@ -2175,7 +2175,7 @@ Begin VB.Form frmfemea
          Left            =   -72240
          TabIndex        =   41
          Text            =   "2006"
-         Top             =   750
+         Top             =   1020
          Width           =   810
       End
       Begin VB.TextBox text 
@@ -2185,7 +2185,7 @@ Begin VB.Form frmfemea
          Left            =   -74160
          TabIndex        =   40
          Text            =   "1"
-         Top             =   750
+         Top             =   1020
          Width           =   690
       End
       Begin VB.CommandButton CmdVerApu 
@@ -2194,7 +2194,7 @@ Begin VB.Form frmfemea
          Left            =   -70440
          TabIndex        =   39
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   1335
       End
       Begin VB.CommandButton Cmdeditar 
@@ -2203,7 +2203,7 @@ Begin VB.Form frmfemea
          Left            =   -65880
          TabIndex        =   38
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   1215
       End
       Begin VB.CommandButton Command9 
@@ -2212,7 +2212,7 @@ Begin VB.Form frmfemea
          Left            =   -65880
          TabIndex        =   37
          TabStop         =   0   'False
-         Top             =   3030
+         Top             =   3300
          Width           =   1215
       End
       Begin VB.CommandButton CmdEdiPad 
@@ -2222,7 +2222,7 @@ Begin VB.Form frmfemea
          Left            =   -67440
          TabIndex        =   36
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   855
       End
       Begin VB.CommandButton CmdEdiPad 
@@ -2232,7 +2232,7 @@ Begin VB.Form frmfemea
          Left            =   -66840
          TabIndex        =   35
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   975
       End
       Begin VB.CommandButton CMDSIG 
@@ -2252,7 +2252,7 @@ Begin VB.Form frmfemea
          Style           =   1  'Graphical
          TabIndex        =   34
          TabStop         =   0   'False
-         Top             =   990
+         Top             =   1260
          Width           =   375
       End
       Begin VB.TextBox txtsigi 
@@ -2271,7 +2271,7 @@ Begin VB.Form frmfemea
          MaxLength       =   1
          TabIndex        =   33
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   495
       End
       Begin VB.CommandButton CmdEdiPad 
@@ -2282,7 +2282,7 @@ Begin VB.Form frmfemea
          TabIndex        =   32
          TabStop         =   0   'False
          ToolTipText     =   "Marca Siginificativa todos os Efeitos"
-         Top             =   1350
+         Top             =   1620
          Width           =   855
       End
       Begin VB.CommandButton CmdEdiPad 
@@ -2293,7 +2293,7 @@ Begin VB.Form frmfemea
          TabIndex        =   31
          TabStop         =   0   'False
          ToolTipText     =   "Marca Siginificativa todos as Falhas"
-         Top             =   1350
+         Top             =   1620
          Width           =   855
       End
       Begin VB.CommandButton CmdEdiPad 
@@ -2304,7 +2304,7 @@ Begin VB.Form frmfemea
          TabIndex        =   30
          TabStop         =   0   'False
          ToolTipText     =   "Marca Siginificativa todos os Processos"
-         Top             =   990
+         Top             =   1260
          Width           =   855
       End
       Begin VB.CommandButton CmdEdiPad 
@@ -2314,7 +2314,7 @@ Begin VB.Form frmfemea
          Left            =   -73920
          TabIndex        =   29
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   855
       End
       Begin MSFlexGridLib.MSFlexGrid GridSeq 
@@ -2323,7 +2323,7 @@ Begin VB.Form frmfemea
          Left            =   120
          TabIndex        =   91
          TabStop         =   0   'False
-         Top             =   1110
+         Top             =   1380
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   5741
@@ -2335,7 +2335,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   92
          TabStop         =   0   'False
-         Top             =   3090
+         Top             =   3360
          Width           =   7455
          _ExtentX        =   13150
          _ExtentY        =   2355
@@ -2347,7 +2347,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   93
          TabStop         =   0   'False
-         Top             =   4410
+         Top             =   4680
          Width           =   7455
          _ExtentX        =   13150
          _ExtentY        =   1931
@@ -2358,7 +2358,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   94
          TabStop         =   0   'False
-         Top             =   870
+         Top             =   1140
          Width           =   9075
          _ExtentX        =   16007
          _ExtentY        =   5212
@@ -2370,7 +2370,7 @@ Begin VB.Form frmfemea
          Left            =   -74820
          TabIndex        =   95
          TabStop         =   0   'False
-         Top             =   870
+         Top             =   1140
          Width           =   8655
          _ExtentX        =   15266
          _ExtentY        =   3731
@@ -2381,7 +2381,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   96
          TabStop         =   0   'False
-         Top             =   930
+         Top             =   1200
          Width           =   8715
          _ExtentX        =   15372
          _ExtentY        =   5212
@@ -2392,7 +2392,7 @@ Begin VB.Form frmfemea
          Left            =   -74760
          TabIndex        =   97
          TabStop         =   0   'False
-         Top             =   1110
+         Top             =   1380
          Width           =   4875
          _ExtentX        =   8599
          _ExtentY        =   2037
@@ -2403,7 +2403,7 @@ Begin VB.Form frmfemea
          Left            =   -74760
          TabIndex        =   98
          TabStop         =   0   'False
-         Top             =   2550
+         Top             =   2820
          Width           =   4875
          _ExtentX        =   8599
          _ExtentY        =   2037
@@ -2414,7 +2414,7 @@ Begin VB.Form frmfemea
          Left            =   -68280
          TabIndex        =   99
          TabStop         =   0   'False
-         Top             =   1110
+         Top             =   1380
          Width           =   2115
          _ExtentX        =   3731
          _ExtentY        =   4789
@@ -2426,7 +2426,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   100
          TabStop         =   0   'False
-         Top             =   1110
+         Top             =   1380
          Width           =   9375
          _ExtentX        =   16536
          _ExtentY        =   5953
@@ -2437,7 +2437,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   101
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   8175
          _ExtentX        =   14420
          _ExtentY        =   7223
@@ -2448,7 +2448,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   102
          TabStop         =   0   'False
-         Top             =   1710
+         Top             =   1980
          Width           =   10575
          _ExtentX        =   18653
          _ExtentY        =   7223
@@ -2459,7 +2459,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   103
          TabStop         =   0   'False
-         Top             =   1230
+         Top             =   1500
          Width           =   8835
          _ExtentX        =   15584
          _ExtentY        =   2990
@@ -2470,7 +2470,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   104
          TabStop         =   0   'False
-         Top             =   3150
+         Top             =   3420
          Width           =   8835
          _ExtentX        =   15584
          _ExtentY        =   2990
@@ -2481,7 +2481,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   155
          TabStop         =   0   'False
-         Top             =   750
+         Top             =   1020
          Width           =   8955
          _ExtentX        =   15796
          _ExtentY        =   9022
@@ -2493,7 +2493,7 @@ Begin VB.Form frmfemea
          Left            =   120
          TabIndex        =   168
          TabStop         =   0   'False
-         Top             =   4770
+         Top             =   5040
          Width           =   9195
          _ExtentX        =   16219
          _ExtentY        =   3519
@@ -2505,7 +2505,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   169
          TabStop         =   0   'False
-         Top             =   4470
+         Top             =   4740
          Width           =   9315
          _ExtentX        =   16431
          _ExtentY        =   2672
@@ -2517,7 +2517,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   185
          TabStop         =   0   'False
-         Top             =   1110
+         Top             =   1380
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   5741
@@ -2529,7 +2529,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   186
          TabStop         =   0   'False
-         Top             =   4350
+         Top             =   4620
          Width           =   9315
          _ExtentX        =   16431
          _ExtentY        =   2884
@@ -2541,7 +2541,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   198
          TabStop         =   0   'False
-         Top             =   1110
+         Top             =   1380
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   5741
@@ -2553,7 +2553,7 @@ Begin VB.Form frmfemea
          Left            =   -74880
          TabIndex        =   199
          TabStop         =   0   'False
-         Top             =   4350
+         Top             =   4620
          Width           =   9315
          _ExtentX        =   16431
          _ExtentY        =   2884
@@ -2565,7 +2565,7 @@ Begin VB.Form frmfemea
          Left            =   -74760
          TabIndex        =   211
          TabStop         =   0   'False
-         Top             =   870
+         Top             =   1140
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   5741
@@ -2576,7 +2576,7 @@ Begin VB.Form frmfemea
          Left            =   -74640
          TabIndex        =   218
          TabStop         =   0   'False
-         Top             =   870
+         Top             =   1140
          Width           =   2115
          _ExtentX        =   3731
          _ExtentY        =   4789
@@ -2587,7 +2587,7 @@ Begin VB.Form frmfemea
          Index           =   5
          Left            =   -74880
          TabIndex        =   233
-         Top             =   1170
+         Top             =   1440
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   5741
@@ -2598,7 +2598,7 @@ Begin VB.Form frmfemea
          Index           =   5
          Left            =   -74880
          TabIndex        =   236
-         Top             =   4530
+         Top             =   4800
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   2672
@@ -2610,7 +2610,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -74880
          TabIndex        =   254
-         Top             =   3570
+         Top             =   3840
          Width           =   855
       End
       Begin VB.Label Label13 
@@ -2619,7 +2619,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -74880
          TabIndex        =   253
-         Top             =   3090
+         Top             =   3360
          Width           =   855
       End
       Begin VB.Label Label12 
@@ -2628,7 +2628,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -74760
          TabIndex        =   237
-         Top             =   2130
+         Top             =   2400
          Width           =   1455
       End
       Begin VB.Line Line1 
@@ -2636,24 +2636,24 @@ Begin VB.Form frmfemea
          Index           =   2
          X1              =   -67560
          X2              =   -67560
-         Y1              =   630
-         Y2              =   1710
+         Y1              =   900
+         Y2              =   1980
       End
       Begin VB.Line Line1 
          BorderWidth     =   2
          Index           =   1
          X1              =   -69360
          X2              =   -69360
-         Y1              =   630
-         Y2              =   1710
+         Y1              =   900
+         Y2              =   1980
       End
       Begin VB.Line Line1 
          BorderWidth     =   2
          Index           =   0
          X1              =   -71640
          X2              =   -71640
-         Y1              =   630
-         Y2              =   1710
+         Y1              =   900
+         Y2              =   1980
       End
       Begin VB.Label lblLabels 
          Caption         =   "Excluir todos"
@@ -2662,7 +2662,7 @@ Begin VB.Form frmfemea
          Index           =   6
          Left            =   -67440
          TabIndex        =   122
-         Top             =   750
+         Top             =   1020
          Width           =   855
       End
       Begin VB.Label lblLabels 
@@ -2672,7 +2672,7 @@ Begin VB.Form frmfemea
          Index           =   0
          Left            =   -74880
          TabIndex        =   121
-         Top             =   750
+         Top             =   1020
          Width           =   615
       End
       Begin VB.Label Label6 
@@ -2681,7 +2681,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -74880
          TabIndex        =   120
-         Top             =   2610
+         Top             =   2880
          Width           =   855
       End
       Begin VB.Label Label4 
@@ -2690,7 +2690,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -74880
          TabIndex        =   119
-         Top             =   1890
+         Top             =   2160
          Width           =   855
       End
       Begin VB.Label Label3 
@@ -2699,7 +2699,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -74880
          TabIndex        =   118
-         Top             =   1290
+         Top             =   1560
          Width           =   615
       End
       Begin VB.Label Label7 
@@ -2708,7 +2708,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -74880
          TabIndex        =   117
-         Top             =   1710
+         Top             =   1980
          Width           =   735
       End
       Begin VB.Label Label8 
@@ -2717,7 +2717,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -74880
          TabIndex        =   116
-         Top             =   810
+         Top             =   1080
          Width           =   855
       End
       Begin VB.Label Label5 
@@ -2726,7 +2726,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -68040
          TabIndex        =   115
-         Top             =   1230
+         Top             =   1500
          Width           =   735
       End
       Begin VB.Label Label9 
@@ -2735,7 +2735,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -68040
          TabIndex        =   114
-         Top             =   810
+         Top             =   1080
          Width           =   735
       End
       Begin VB.Label Label10 
@@ -2744,7 +2744,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -69600
          TabIndex        =   113
-         Top             =   1710
+         Top             =   1980
          Width           =   615
       End
       Begin VB.Label Label1 
@@ -2753,7 +2753,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -74760
          TabIndex        =   112
-         Top             =   870
+         Top             =   1140
          Width           =   2415
       End
       Begin VB.Label Label2 
@@ -2762,7 +2762,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -74760
          TabIndex        =   111
-         Top             =   2310
+         Top             =   2580
          Width           =   2055
       End
       Begin VB.Label dizpro 
@@ -2770,7 +2770,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -72360
          TabIndex        =   110
-         Top             =   750
+         Top             =   1020
          Width           =   3255
       End
       Begin VB.Label dizfal 
@@ -2778,7 +2778,7 @@ Begin VB.Form frmfemea
          Height          =   255
          Left            =   -72480
          TabIndex        =   109
-         Top             =   2190
+         Top             =   2460
          Width           =   3375
       End
       Begin VB.Label lbl 
@@ -2790,7 +2790,7 @@ Begin VB.Form frmfemea
          Index           =   4
          Left            =   -72660
          TabIndex        =   108
-         Top             =   810
+         Top             =   1080
          Width           =   270
       End
       Begin VB.Label lbl 
@@ -2802,14 +2802,14 @@ Begin VB.Form frmfemea
          Index           =   3
          Left            =   -74640
          TabIndex        =   107
-         Top             =   810
+         Top             =   1080
          Width           =   390
       End
       Begin VB.Label dizcomapu 
          Height          =   375
          Left            =   -68880
          TabIndex        =   106
-         Top             =   750
+         Top             =   1020
          Width           =   1455
       End
       Begin VB.Label lblLabels 
@@ -2819,7 +2819,7 @@ Begin VB.Form frmfemea
          Index           =   14
          Left            =   -70920
          TabIndex        =   105
-         Top             =   750
+         Top             =   1020
          Width           =   975
       End
    End
@@ -3158,12 +3158,12 @@ Private Sub cmdClose_Click()
     Dim dFEMEA As Date
     Dim dPF As Date
     On Error Resume Next
-    If IsDate(txtFields(23)) And IsDate(txtFields(17)) Then
-        dFEMEA = txtFields(23)
-        If IsDate(txtFields(25)) Then
-            dFEMEA = txtFields(25)
+    If IsDate(TXTFIELDS(23)) And IsDate(TXTFIELDS(17)) Then
+        dFEMEA = TXTFIELDS(23)
+        If IsDate(TXTFIELDS(25)) Then
+            dFEMEA = TXTFIELDS(25)
         End If
-        dPF = txtFields(17)
+        dPF = TXTFIELDS(17)
         If dFEMEA < dPF Then
             Alert ("Data Revisao Femea Menor que Processo Fabricacao")
         End If
@@ -3171,7 +3171,7 @@ Private Sub cmdClose_Click()
     chkfemeas
   
     For iLOOP = 0 To nCAMPOS - 8
-        aVAL(iLOOP) = txtFields(iLOOP)
+        aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     aVAL(27) = FixNumBol(Check1.Value)
     aVAL(28) = FixNumBol(Check2.Value)
@@ -3180,7 +3180,7 @@ Private Sub cmdClose_Click()
     aVAL(31) = DTPicker1.Value
     
     For iLOOP = 32 To nCAMPOS - 1
-        aVAL(iLOOP) = txtFields(iLOOP)
+        aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     
     
@@ -3649,7 +3649,7 @@ Private Sub CmdIncDef_Click()
     nSAC = nSAC + 1
     
     aCAMPOS = Array("MSRD", "DATA", "PF", "CODIGO", "CLIENTE", "DESC01")
-    avalor = Array(nSAC, Format(Date, "DD/MM/YY"), FixNum(txtFields(0)), FixStr(txtFields(2)), FixNum(txtFields(4)), FixStr(cTITULO))
+    avalor = Array(nSAC, Format(Date, "DD/MM/YY"), FixNum(TXTFIELDS(0)), FixStr(TXTFIELDS(2)), FixNum(TXTFIELDS(4)), FixStr(cTITULO))
     
     IncluiSQL GeraConn(cCAM, "FOX"), "SELECT * FROM MSRD WHERE MSRD=" & nSAC, 6 _
     , aCAMPOS _
@@ -3691,9 +3691,9 @@ Private Sub CmdLiberar_Click()
     'eRETU01 = PegUltSQL(Dbname, sSQL, "LIGADO", False)
     eRETU01 = PegCampoSQLADO(Dbname, sSQL, "", False)
     If eRETU01 Then
-        txtFields(13) = zIDFOLHA
-        txtFields(14) = zNOMEFOLHA
-        txtFields(24) = Today()
+        TXTFIELDS(13) = zIDFOLHA
+        TXTFIELDS(14) = zNOMEFOLHA
+        TXTFIELDS(24) = Today()
         Encerrar.Visible = False
     Else
         Alert ("Sem direito")
@@ -3764,8 +3764,8 @@ Private Sub CmdNovaREV_Click()
     End If
     
     
-    If Len(txtFields(23).Text) > 0 Then          'corrige erro importacao protheus data em branco
-        If txtFields(23) > Today() Then
+    If Len(TXTFIELDS(23).Text) > 0 Then          'corrige erro importacao protheus data em branco
+        If TXTFIELDS(23) > Today() Then
             Alert ("Data Revisao Anterior Maior que Data do Sistema")
             Exit Sub
         End If
@@ -3781,18 +3781,18 @@ Private Sub CmdNovaREV_Click()
         End If
     End If
     
-    If IsNumeric(txtFields(12)) Then
-        txtFields(12) = txtFields(12) + 1
+    If IsNumeric(TXTFIELDS(12)) Then
+        TXTFIELDS(12) = TXTFIELDS(12) + 1
     Else
-        txtFields(12) = 1
+        TXTFIELDS(12) = 1
     End If
-    txtFields(20) = True
-    txtFields(13) = 0
-    txtFields(14) = ""
-    txtFields(24) = ""
-    txtFields(23) = dDATAREV
+    TXTFIELDS(20) = True
+    TXTFIELDS(13) = 0
+    TXTFIELDS(14) = ""
+    TXTFIELDS(24) = ""
+    TXTFIELDS(23) = dDATAREV
     Check1.Value = False
-    nREV = FixInt(txtFields(12))
+    nREV = FixInt(TXTFIELDS(12))
     IncluiSQL cARQPF, "select * from rev WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), Array(FixInt(nPF), nREV, "FE", dDATAREV), True, False
     CmdProx_Click
     Filgridrev
@@ -3803,7 +3803,7 @@ Private Sub CmdNovaREV_Click()
     
     
     eRETU02 = "PF:" & TXTPF.Text & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & txtFields(2) & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " Data:" & Fdata(dDATAREV) & Chr(13) & Chr(10)
     MAILENV "FEM00001", eRETU02
     
@@ -3886,8 +3886,8 @@ End Sub
 Private Sub CmdProx_Click()
 
     If femeacrg.Value = False Then
-        If IsDate(txtFields(23)) Then
-            DTPicker1.Value = CDate(txtFields(23)) + 730
+        If IsDate(TXTFIELDS(23)) Then
+            DTPicker1.Value = CDate(TXTFIELDS(23)) + 730
         Else
             If IsDate(DTPicker1) Then
                 DTPicker1 = DTPicker1 + 730
@@ -4075,7 +4075,7 @@ Private Sub RevisaoFemea(ByVal Index As Integer)
         'End If
         
         If FixNum(aVAL(52)) = 0 Then             'revisao do femea checar em branco pois historio pode ter varias versoes
-            aVAL(52) = FixNum(txtFields(12).Text)
+            aVAL(52) = FixNum(TXTFIELDS(12).Text)
         End If
         
         
@@ -4179,10 +4179,10 @@ Private Sub CmdREvi_Click(Index As Integer)
     ePASS02 = cARQFEMEA
     
     Load frmFEMEI
-    frmFEMEI.txtFields(2).Enabled = False
-    frmFEMEI.txtFields(3).Enabled = False
-    frmFEMEI.txtFields(4).Enabled = False
-    frmFEMEI.txtFields(5).Enabled = False
+    frmFEMEI.TXTFIELDS(2).Enabled = False
+    frmFEMEI.TXTFIELDS(3).Enabled = False
+    frmFEMEI.TXTFIELDS(4).Enabled = False
+    frmFEMEI.TXTFIELDS(5).Enabled = False
     frmFEMEI.cmdClose.Enabled = False
     frmFEMEI.CmdAltman.Enabled = False
     frmFEMEI.Show vbModal, Me
@@ -4319,10 +4319,10 @@ Private Sub CmdTrocaREv_Click()
     GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
     cSQL = "select * from revI WHERE PF=" & nPF & " AND REVISAO=" & nORI & " AND TIPO='FE'"
     GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
-    txtFields(12).Enabled = True
-    txtFields(23).Enabled = True
-    txtFields(12).Locked = False
-    txtFields(23).Locked = False
+    TXTFIELDS(12).Enabled = True
+    TXTFIELDS(23).Enabled = True
+    TXTFIELDS(12).Locked = False
+    TXTFIELDS(23).Locked = False
     Filgridrev
 End Sub
 
@@ -4563,11 +4563,11 @@ End Sub
 Private Sub Command15_Click()
     Dim cDIZ
     Encerrar.Visible = False
-    cDIZ = "PF: " & nPF & "Revisao: " & txtFields(16) & " Nao necessita revisar femea"
-    nREV = FixInt(txtFields(12))
+    cDIZ = "PF: " & nPF & "Revisao: " & TXTFIELDS(16) & " Nao necessita revisar femea"
+    nREV = FixInt(TXTFIELDS(12))
     XComMotInc_Click (cDIZ)
     Check1.Value = False
-    txtFields(25) = Today()
+    TXTFIELDS(25) = Today()
     cmdClose_Click
 End Sub
 
@@ -4682,11 +4682,11 @@ End Sub
 
 Private Sub Command3_Click()
     If MDG("Gravar Elaborador", "Confirme Gravação") Then
-        frmfemea.txtFields(6) = zIDFOLHA
-        frmfemea.txtFields(9) = zNOMEFOLHA
-        txtFields(22) = Date
-        If IsNull(txtFields(23)) Or txtFields(23) = "" Then
-            txtFields(23) = Date
+        frmfemea.TXTFIELDS(6) = zIDFOLHA
+        frmfemea.TXTFIELDS(9) = zNOMEFOLHA
+        TXTFIELDS(22) = Date
+        If IsNull(TXTFIELDS(23)) Or TXTFIELDS(23) = "" Then
+            TXTFIELDS(23) = Date
         End If
     End If
 End Sub
@@ -4750,14 +4750,14 @@ End Sub
 Private Sub Command5_Click()
     Encerrar.Visible = False
     CmdNovaREV_Click
-    nREV = FixInt(txtFields(12))
+    nREV = FixInt(TXTFIELDS(12))
     XComMotInc_Click ("Revisão Periodica")
     Filgridrevi (0)
     
     Command3_Click
     
     eRETU02 = "PF:" & nPF & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & txtFields(2) & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
     MAILENV "FEM00001", eRETU02
     
@@ -4880,7 +4880,7 @@ End Sub
 Private Sub EditSeq_Click(Index As Integer)
 
     ePASS03 = Index                              'Para usar com o revisao abaixo 'atualizacao de versao
-    ePASS04 = txtFields(12)                      ''REVISAO PF
+    ePASS04 = TXTFIELDS(12)                      ''REVISAO PF
 
     If Index = 3 And (Not AcessaMenu("FemeaGP12", 1)) Then Exit Sub
     If Index = 0 And (Not AcessaMenu("FemeaPro", 1)) Then Exit Sub
@@ -5115,9 +5115,9 @@ Private Sub escidfolha_Click(Index As Integer)
     If lRETU Then
         Select Case Index
         Case 0, 10
-            txtFields(7).Text = txtFields(7).Text & " , " & Trim(MMCase(eRETU02))
+            TXTFIELDS(7).Text = TXTFIELDS(7).Text & " , " & Trim(MMCase(eRETU02))
         Case 1, 11
-            txtFields(8).Text = txtFields(8).Text & " , " & Trim(MMCase(eRETU02))
+            TXTFIELDS(8).Text = TXTFIELDS(8).Text & " , " & Trim(MMCase(eRETU02))
         End Select
     End If
 End Sub
@@ -5131,14 +5131,14 @@ Private Sub ESCprofin_Click(Index As Integer)
     If Index = 2 Then
         ePASS01 = "MICRO"
     End If
-    If Len(txtFields(61)) = 0 Then
-        cCHAVEBUS = txtFields(60)
+    If Len(TXTFIELDS(61)) = 0 Then
+        cCHAVEBUS = TXTFIELDS(60)
     Else
-        cCHAVEBUS = txtFields(61)
+        cCHAVEBUS = TXTFIELDS(61)
     End If
     escms01.Show vbModal, Me
     If lRETU Then
-        txtFields(61) = eRETU01
+        TXTFIELDS(61) = eRETU01
     End If
     cCHAVEBUS = ""
 End Sub
@@ -5185,7 +5185,7 @@ Private Sub Form_Load()
                  "", "", "", "")
     aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 8
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     
     
@@ -5200,7 +5200,7 @@ Private Sub Form_Load()
     End If
     
     For iLOOP = 32 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
 
     
@@ -5230,10 +5230,10 @@ Private Sub Form_Load()
     filgridpadpf
     FILGRIdpfrev
     If zUSER = "ADMIN" Then
-        txtFields(12).Enabled = True
-        txtFields(12).Locked = False
-        txtFields(23).Enabled = True
-        txtFields(23).Locked = False
+        TXTFIELDS(12).Enabled = True
+        TXTFIELDS(12).Locked = False
+        TXTFIELDS(23).Enabled = True
+        TXTFIELDS(23).Locked = False
     Else
         CmdApaRev.Visible = False
         CmdTrocaREv.Visible = False
@@ -5481,7 +5481,7 @@ Private Function eproducao()
         Alert "Ja Passou para producao"
         eproducao = True
     Else
-        If txtFields(26).Text = "P" Then
+        If TXTFIELDS(26).Text = "P" Then
             Alert "O Processo de Fabricao ja e TIPO (P) producao"
             eproducao = True
         End If

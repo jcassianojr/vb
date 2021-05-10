@@ -92,40 +92,84 @@ Begin VB.Form frmDISPO
       Tab(1).Control(7)=   "ComMotInc"
       Tab(1).Control(8)=   "ComMotAlt"
       Tab(1).Control(9)=   "ComMotExc"
-      Begin VB.CommandButton Duplicar 
-         Caption         =   "Reordenar"
+      Begin XPControls.XPButton Duplicar 
          Height          =   375
          Index           =   13
          Left            =   8160
          TabIndex        =   29
          Top             =   3480
          Width           =   1095
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Reordenar"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
-      Begin VB.CommandButton Duplicar 
-         Caption         =   "Duplicar"
+      Begin XPControls.XPButton Duplicar 
          Height          =   375
          Index           =   3
          Left            =   8160
          TabIndex        =   28
          Top             =   3000
          Width           =   1095
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Duplicar"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
-      Begin VB.CommandButton Command6 
-         Caption         =   "Distribuicao"
+      Begin XPControls.XPButton Command6 
          Height          =   495
          Left            =   -67200
          TabIndex        =   22
          Top             =   1620
          Width           =   1335
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Distribuicao"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
-      Begin VB.CommandButton CmdMotRev 
-         Caption         =   "Motivos"
+      Begin XPControls.XPButton CmdMotRev 
          Height          =   375
          Left            =   -67200
          TabIndex        =   21
          TabStop         =   0   'False
          Top             =   1140
          Width           =   1335
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Motivos"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin VB.TextBox TXT 
          BackColor       =   &H00C0FFFF&
@@ -151,14 +195,25 @@ Begin VB.Form frmDISPO
          Top             =   540
          Width           =   1095
       End
-      Begin VB.CommandButton NovaRev 
-         Caption         =   "Nova Revisão"
+      Begin XPControls.XPButton NovaRev 
          Height          =   375
          Left            =   -74880
          TabIndex        =   17
          TabStop         =   0   'False
          Top             =   540
          Width           =   1215
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Nova Revisão"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin VB.TextBox TXT 
          BackColor       =   &H00C0FFFF&

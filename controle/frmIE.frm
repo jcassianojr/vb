@@ -140,16 +140,26 @@ Begin VB.Form frmIE
       Tab(3).Control(17)=   "lblLabels(7)"
       Tab(3).Control(18)=   "lblLabels(4)"
       Tab(3).Control(19)=   "lblLabels(16)"
-      Begin VB.CommandButton Command1 
-         Caption         =   "Distribuicao"
+      Begin XPControls.XPButton Command1 
          Height          =   495
          Left            =   -67080
          TabIndex        =   67
          Top             =   1680
          Width           =   1335
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Distribuicao"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
-      Begin VB.CommandButton cmdescIED 
-         Caption         =   "..."
+      Begin XPControls.XPButton cmdescIED 
          Height          =   195
          Index           =   5
          Left            =   1680
@@ -157,6 +167,18 @@ Begin VB.Form frmIE
          TabStop         =   0   'False
          Top             =   6120
          Width           =   1095
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "..."
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin VB.TextBox TXTFIELDS 
          BackColor       =   &H00C0FFFF&
@@ -371,23 +393,45 @@ Begin VB.Form frmIE
          Top             =   600
          Width           =   1275
       End
-      Begin VB.CommandButton NovaRev 
-         Caption         =   "Nova Revisão"
+      Begin XPControls.XPButton NovaRev 
          Height          =   375
          Left            =   -74400
          TabIndex        =   30
          TabStop         =   0   'False
          Top             =   600
          Width           =   1215
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Nova Revisão"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
-      Begin VB.CommandButton CmdMotRev 
-         Caption         =   "Motivos"
+      Begin XPControls.XPButton CmdMotRev 
          Height          =   375
          Left            =   -67080
          TabIndex        =   29
          TabStop         =   0   'False
          Top             =   1200
          Width           =   1335
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Motivos"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin VB.TextBox TXTFIELDS 
          BackColor       =   &H00C0FFFF&
@@ -401,8 +445,7 @@ Begin VB.Form frmIE
          Top             =   600
          Width           =   375
       End
-      Begin VB.CommandButton cmdescIED 
-         Caption         =   "..."
+      Begin XPControls.XPButton cmdescIED 
          Height          =   195
          Index           =   4
          Left            =   1800
@@ -410,9 +453,20 @@ Begin VB.Form frmIE
          TabStop         =   0   'False
          Top             =   4200
          Width           =   1095
-      End
-      Begin VB.CommandButton cmdescIED 
+         _ExtentX        =   0
+         _ExtentY        =   0
          Caption         =   "..."
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton cmdescIED 
          Height          =   195
          Index           =   3
          Left            =   1800
@@ -420,9 +474,20 @@ Begin VB.Form frmIE
          TabStop         =   0   'False
          Top             =   3240
          Width           =   1095
-      End
-      Begin VB.CommandButton cmdescIED 
+         _ExtentX        =   0
+         _ExtentY        =   0
          Caption         =   "..."
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton cmdescIED 
          Height          =   195
          Index           =   2
          Left            =   1800
@@ -430,9 +495,20 @@ Begin VB.Form frmIE
          TabStop         =   0   'False
          Top             =   2280
          Width           =   1095
-      End
-      Begin VB.CommandButton cmdescIED 
+         _ExtentX        =   0
+         _ExtentY        =   0
          Caption         =   "..."
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton cmdescIED 
          Height          =   195
          Index           =   1
          Left            =   1800
@@ -440,6 +516,18 @@ Begin VB.Form frmIE
          TabStop         =   0   'False
          Top             =   1320
          Width           =   1095
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "..."
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin VB.TextBox TXTFIELDS 
          Height          =   615
@@ -1561,13 +1649,13 @@ Dim aCAMIMG As Variant
 Private Sub Cmdbusmr_Click()
     Dim aRETU As Variant
     Dim cARQ, cSQL, cCODIGO As String
-    cCODIGO = FixStr(txtFields(19))
+    cCODIGO = FixStr(TXTFIELDS(19))
     If Len(cCODIGO) > 0 Then
         cARQ = GeraConn(zMANA5EMP, "JETFOX")
         cSQL = "SELECT NOME,NOM2 FROM mR01 WHERE CODIGO='" & cCODIGO & "'"
         aRETU = PegSQL(cARQ, cSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
         If lRETU Then
-            txtFields(20) = aRETU(0) + " " + aRETU(1)
+            TXTFIELDS(20) = aRETU(0) + " " + aRETU(1)
         End If
     End If
 End Sub
@@ -1575,31 +1663,31 @@ End Sub
 Private Sub cmdClose_Click()
     On Error Resume Next
     ''Data Revisao em Branco
-    If IsNull(txtFields(21)) Or Len(txtFields(21)) = 0 Then
+    If IsNull(TXTFIELDS(21)) Or Len(TXTFIELDS(21)) = 0 Then
         If gridrev.Rows > 1 Then
             gridrev.Row = gridrev.Rows - 1
             gridrev.Col = 3
-            txtFields(21).Text = gridrev
+            TXTFIELDS(21).Text = gridrev
         Else
-            txtFields(21) = txtFields(24)
+            TXTFIELDS(21) = TXTFIELDS(24)
         End If
     End If
    
     'Corrige revisao 1 qdo devia ser zero
     If gridrev.Rows = 1 Then
-        If FixNum(txtFields(17)) > 0 Then
-            txtFields(17) = 0
+        If FixNum(TXTFIELDS(17)) > 0 Then
+            TXTFIELDS(17) = 0
         End If
     End If
     
     'Qdto rev=0 data da revisao = elaboracao
-    If FixNum(txtFields(17)) = 0 Then
-        txtFields(21) = Fdata(txtFields(24))
+    If FixNum(TXTFIELDS(17)) = 0 Then
+        TXTFIELDS(21) = Fdata(TXTFIELDS(24))
     End If
 
     '    If MDG("Gravar alteraçôes") Then 'sempre gravar por causa revisao
     For iLOOP = 0 To nCAMPOS - 1
-        aVAL(iLOOP) = txtFields(iLOOP)
+        aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     GrvSQL cARQIE, cSQL, nCAMPOS, aCAM, aVAL, aFOR
        
@@ -1636,15 +1724,15 @@ Private Sub cmdescIED_Click(Index As Integer)
     If lRETU Then
         Select Case Index
         Case 1
-            txtFields(2) = txtFields(2) & " " & eRETU02
+            TXTFIELDS(2) = TXTFIELDS(2) & " " & eRETU02
         Case 2
-            txtFields(3) = txtFields(3) & " " & eRETU02
+            TXTFIELDS(3) = TXTFIELDS(3) & " " & eRETU02
         Case 3
-            txtFields(5) = txtFields(5) & " " & eRETU02
+            TXTFIELDS(5) = TXTFIELDS(5) & " " & eRETU02
         Case 4
-            txtFields(6) = txtFields(6) & " " & eRETU02
+            TXTFIELDS(6) = TXTFIELDS(6) & " " & eRETU02
         Case 5
-            txtFields(18) = txtFields(18) & " " & eRETU02
+            TXTFIELDS(18) = TXTFIELDS(18) & " " & eRETU02
         End Select
     End If
 End Sub
@@ -1653,8 +1741,8 @@ Private Sub Cmdescmr_Click()
     iMU01 = 4
     escmu01.Show vbModal, Me
     If lRETU Then
-        txtFields(19) = eRETU01
-        txtFields(20) = eRETU02
+        TXTFIELDS(19) = eRETU01
+        TXTFIELDS(20) = eRETU02
     End If
 End Sub
 
@@ -1788,21 +1876,21 @@ Private Sub ESCpro_Click(Index As Integer)
     escms01.Show vbModal, Me
     If lRETU Then
         If Index = 0 Or Index = 6 Then
-            frmIE.txtFields(25) = eRETU01
-            frmIE.txtFields(20) = eRETU02
-            frmIE.txtFields(24) = eRETU03
+            frmIE.TXTFIELDS(25) = eRETU01
+            frmIE.TXTFIELDS(20) = eRETU02
+            frmIE.TXTFIELDS(24) = eRETU03
         End If
         If Index = 2 Or Index = 3 Then
-            frmIE.txtFields(25) = eRETU01
-            frmIE.txtFields(20) = eRETU02
-            frmIE.txtFields(4) = eRETU03
+            frmIE.TXTFIELDS(25) = eRETU01
+            frmIE.TXTFIELDS(20) = eRETU02
+            frmIE.TXTFIELDS(4) = eRETU03
         End If
         If Index = 4 Or Index = 7 Then
-            frmIE.txtFields(4) = eRETU03
+            frmIE.TXTFIELDS(4) = eRETU03
         End If
         If Index = 1 Then
-            frmIE.txtFields(19) = eRETU01
-            frmIE.txtFields(20) = eRETU02
+            frmIE.TXTFIELDS(19) = eRETU01
+            frmIE.TXTFIELDS(20) = eRETU02
         End If
     End If
 End Sub
@@ -1844,7 +1932,7 @@ Private Sub Form_Load()
     
     aVAL = PegSQL(cARQIE, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)           '
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)           '
     Next iLOOP
     TXTFIELDS_Change 10                          'atualiza calculo
     
@@ -1879,11 +1967,11 @@ Private Sub imgsave_Click(Index As Integer)
     Dim cARQ As String
     Select Case Index
     Case 0
-        cARQ = "IE" & StrZero(FixInt(txtFields(0)), 6)
+        cARQ = "IE" & StrZero(FixInt(TXTFIELDS(0)), 6)
     Case 1
-        cARQ = TiraOut(txtFields(22))
+        cARQ = TiraOut(TXTFIELDS(22))
     Case 2
-        cARQ = TiraOut(txtFields(23))
+        cARQ = TiraOut(TXTFIELDS(23))
     End Select
     salvarpict Me, Picture1(Index), cARQ
 
@@ -1899,25 +1987,25 @@ End Sub
 
 Private Sub NovaRev_Click()
     Dim nREV As Integer
-    If txtFields(21) > Today() Then
+    If TXTFIELDS(21) > Today() Then
         Alert ("Data Revisao Anterior Maior que Data do Sistema")
         Exit Sub
     End If
     If MDG("Fazer Nova Revisao") Then
-        nREV = FixNum(txtFields(17)) + 1
+        nREV = FixNum(TXTFIELDS(17)) + 1
         IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & " and tipo='IE' and revisao=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), _
         Array(nPF, nREV, "IE", Today()), True, False
-        txtFields(17) = nREV
-        txtFields(21) = Date
-        txtFields(26) = zNOMEFOLHA
+        TXTFIELDS(17) = nREV
+        TXTFIELDS(21) = Date
+        TXTFIELDS(26) = zNOMEFOLHA
         cmdClose_Click
         'Filgridrev
     End If
 End Sub
 
 Private Sub pegelaborador_Click()
-    If txtFields(26) = "" Then
-        txtFields(26) = zNOMEFOLHA
+    If TXTFIELDS(26) = "" Then
+        TXTFIELDS(26) = zNOMEFOLHA
     End If
 End Sub
 
@@ -1925,9 +2013,9 @@ Private Sub TXTFIELDS_Change(Index As Integer)
     Select Case Index
     Case 10, 11, 12, 13
         'Peso Liquido=Peso Unitario * N Peca por Embalagem
-        txtFields(12).Text = CDbl(FixNum(txtFields(10))) * CDbl(FixNum(txtFields(11)))
+        TXTFIELDS(12).Text = CDbl(FixNum(TXTFIELDS(10))) * CDbl(FixNum(TXTFIELDS(11)))
         'Peso Bruto Peso Liquido + Tara
-        txtFields(14).Text = CDbl(FixNum(txtFields(12))) + CDbl(FixNum(txtFields(13)))
+        TXTFIELDS(14).Text = CDbl(FixNum(TXTFIELDS(12))) + CDbl(FixNum(TXTFIELDS(13)))
     End Select
 End Sub
 

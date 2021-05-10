@@ -34,7 +34,7 @@ Begin VB.Form escIMG
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VB.CommandButton Cmdexpall 
+   Begin XPControls.XPButton Cmdexpall 
       Caption         =   "Exportar Todas Imagens jpg"
       Height          =   615
       Left            =   8040

@@ -11,7 +11,7 @@ Begin VB.Form EscArqOrdem
    ScaleHeight     =   3480
    ScaleWidth      =   6525
    StartUpPosition =   3  'Windows Default
-   Begin VB.CommandButton CmdEscolher 
+   Begin XPControls.XPButton CmdEscolher 
       Caption         =   "Escolher Ordem"
       Height          =   495
       Left            =   5040
@@ -19,7 +19,7 @@ Begin VB.Form EscArqOrdem
       Top             =   120
       Width           =   1335
    End
-   Begin VB.CommandButton CmdZerar 
+   Begin XPControls.XPButton CmdZerar 
       Caption         =   "Apagar Ordem"
       Height          =   495
       Left            =   5040

@@ -12,7 +12,7 @@ Begin VB.Form FrmFiltro
    ScaleHeight     =   5895
    ScaleWidth      =   9360
    StartUpPosition =   3  'Windows Default
-   Begin VB.CommandButton oper 
+   Begin XPControls.XPButton oper 
       Caption         =   ">="
       Height          =   375
       Index           =   0
@@ -21,7 +21,7 @@ Begin VB.Form FrmFiltro
       Top             =   2880
       Width           =   495
    End
-   Begin VB.CommandButton oper 
+   Begin XPControls.XPButton oper 
       Caption         =   "LIKE"
       Height          =   375
       Index           =   6
@@ -41,7 +41,7 @@ Begin VB.Form FrmFiltro
       Top             =   540
       Width           =   1455
    End
-   Begin VB.CommandButton TIPOFIL 
+   Begin XPControls.XPButton TIPOFIL 
       Caption         =   "OU"
       Height          =   285
       Index           =   2
@@ -50,7 +50,7 @@ Begin VB.Form FrmFiltro
       Top             =   2940
       Width           =   420
    End
-   Begin VB.CommandButton TIPOFIL 
+   Begin XPControls.XPButton TIPOFIL 
       Caption         =   "E"
       Height          =   285
       Index           =   3
@@ -70,7 +70,7 @@ Begin VB.Form FrmFiltro
       Top             =   2940
       Width           =   420
    End
-   Begin VB.CommandButton oper 
+   Begin XPControls.XPButton oper 
       Caption         =   "<>"
       Height          =   375
       Index           =   5
@@ -79,7 +79,7 @@ Begin VB.Form FrmFiltro
       Top             =   2880
       Width           =   495
    End
-   Begin VB.CommandButton oper 
+   Begin XPControls.XPButton oper 
       Caption         =   "="
       Height          =   375
       Index           =   4
@@ -88,7 +88,7 @@ Begin VB.Form FrmFiltro
       Top             =   2880
       Width           =   495
    End
-   Begin VB.CommandButton oper 
+   Begin XPControls.XPButton oper 
       Caption         =   "<"
       Height          =   375
       Index           =   3
@@ -97,7 +97,7 @@ Begin VB.Form FrmFiltro
       Top             =   2880
       Width           =   495
    End
-   Begin VB.CommandButton oper 
+   Begin XPControls.XPButton oper 
       Caption         =   ">"
       Height          =   375
       Index           =   2
@@ -106,7 +106,7 @@ Begin VB.Form FrmFiltro
       Top             =   2880
       Width           =   495
    End
-   Begin VB.CommandButton oper 
+   Begin XPControls.XPButton oper 
       Caption         =   "<="
       Height          =   375
       Index           =   1

@@ -24,23 +24,45 @@ Begin VB.Form frmRptExec
       Top             =   720
       Width           =   975
    End
-   Begin VB.CommandButton CmdEscform 
-      Caption         =   "Formulario"
+   Begin XPControls.XPButton CmdEscform 
       Height          =   375
       Left            =   1080
       TabIndex        =   11
       ToolTipText     =   "Escolher um Formulario Para Execuçao"
       Top             =   720
       Width           =   975
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "Formulario"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
-   Begin VB.CommandButton CmdShell 
-      Caption         =   "Conf.Sis.Opr."
+   Begin XPControls.XPButton CmdShell 
       Height          =   375
       Left            =   2160
       TabIndex        =   10
       ToolTipText     =   "Utiliza Configurado Sistema Operacional"
       Top             =   720
       Width           =   1215
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "Conf.Sis.Opr."
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
    Begin VB.TextBox Text 
       Height          =   285
@@ -119,7 +141,7 @@ Begin VB.Form frmRptExec
    End
    Begin XPControls.XPButton CmdEscExt 
       Height          =   375
-      Left            =   6120
+      Left            =   6180
       TabIndex        =   14
       Top             =   240
       Width           =   375
@@ -206,7 +228,7 @@ End Sub
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     If MDG("Gravar e Sair", "Gravando ") Then
         For nITEM = 0 To nCAMPOS - 1
-            aVAL(nITEM) = tEXT(nITEM)
+            aVAL(nITEM) = Text(nITEM)
         Next nITEM
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
         GravaLog nFORMID, 0, "Gravou "
@@ -218,36 +240,36 @@ End Sub
 
 Private Sub cmdescexe_Click()
     Dim sRECENTFILE, sPath, sFILTER, sFILENAME As String
-    sRECENTFILE = tEXT(2)
-    sPath = tEXT(2)
+    sRECENTFILE = Text(2)
+    sPath = Text(2)
     sFILTER = "Executáveis" & vbNullChar & "*.exe" & vbNullChar & "Todos os Arquivos" & vbNullChar & "*.*"
     sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
     If Not Len(sFILENAME) = 0 Then
-        tEXT(2) = NomeArq(sFILENAME)
+        Text(2) = NomeArq(sFILENAME)
     End If
 End Sub
 
 Private Sub CmdEscExt_Click()
-    eLOCALIZA = tEXT(3)
+    eLOCALIZA = Text(3)
     aTABELA = Array(1061, "Tipos Arquivos (Extensões)", "TIPOSARQ", 8, 1062, "SYSCONF")
     EscCodNome.Show vbModal, Me
     If lRETU Then
-        tEXT(3) = eRETU02
+        Text(3) = eRETU02
     End If
 End Sub
 
 Private Sub CmdEscform_Click()
-    eLOCALIZA = tEXT(2)
+    eLOCALIZA = Text(2)
     ePASS01 = 0
     EscForm.Show vbModal, Me
     If lRETU Then
-        tEXT(2) = FixStr(eRETU04)
+        Text(2) = FixStr(eRETU04)
     End If
 
 End Sub
 
 Private Sub CmdShell_Click()
-    tEXT(2) = "SHELL"
+    Text(2) = "SHELL"
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
@@ -276,7 +298,7 @@ Private Sub Form_Load()
     aPAD = Array(0, "", "", "", "")
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For nITEM = 0 To nCAMPOS - 1
-        tEXT(nITEM) = aVAL(nITEM)
+        Text(nITEM) = aVAL(nITEM)
     Next nITEM
 
 End Sub

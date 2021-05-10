@@ -33,7 +33,7 @@ Begin VB.Form FrmLstView
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VB.CommandButton CmdIni 
+   Begin XPControls.XPButton CmdIni 
       Caption         =   "C2"
       Height          =   255
       Index           =   3
@@ -43,7 +43,7 @@ Begin VB.Form FrmLstView
       Top             =   300
       Width           =   375
    End
-   Begin VB.CommandButton CmdIni 
+   Begin XPControls.XPButton CmdIni 
       Caption         =   "C1"
       Height          =   255
       Index           =   2
@@ -53,7 +53,7 @@ Begin VB.Form FrmLstView
       Top             =   60
       Width           =   375
    End
-   Begin VB.CommandButton CmdIni 
+   Begin XPControls.XPButton CmdIni 
       Caption         =   "CI"
       Height          =   255
       Index           =   0
@@ -63,7 +63,7 @@ Begin VB.Form FrmLstView
       Top             =   60
       Width           =   375
    End
-   Begin VB.CommandButton CmdIni 
+   Begin XPControls.XPButton CmdIni 
       Caption         =   "CS"
       Height          =   255
       Index           =   1
@@ -91,7 +91,7 @@ Begin VB.Form FrmLstView
       Top             =   600
       Width           =   7515
    End
-   Begin VB.CommandButton Command2 
+   Begin XPControls.XPButton Command2 
       Caption         =   ".LST -> .TXT"
       Height          =   315
       Left            =   8040

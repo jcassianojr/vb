@@ -142,7 +142,7 @@ Begin VB.Form FrmSendMail
       Top             =   6240
       Width           =   855
    End
-   Begin VB.CommandButton CmdLimpa 
+   Begin XPControls.XPButton CmdLimpa 
       Caption         =   "Limpar Informaçoes"
       Height          =   615
       Left            =   7680

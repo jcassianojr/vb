@@ -164,7 +164,7 @@ Begin VB.Form FrmRpt
       Tab(2).Control(1)=   "text(22)"
       Tab(2).Control(2)=   "lblLabels(21)"
       Tab(2).Control(3)=   "lblLabels(0)"
-      Begin VB.CommandButton Command2 
+      Begin XPControls.XPButton Command2 
          Caption         =   "Limpar"
          Height          =   375
          Left            =   3600
@@ -214,7 +214,7 @@ Begin VB.Form FrmRpt
          Top             =   2160
          Width           =   7575
       End
-      Begin VB.CommandButton CmdAbrirCom 
+      Begin XPControls.XPButton CmdAbrirCom 
          Caption         =   "*..."
          Height          =   375
          Index           =   1
@@ -225,7 +225,7 @@ Begin VB.Form FrmRpt
          Top             =   600
          Width           =   375
       End
-      Begin VB.CommandButton CmdAbrirCom 
+      Begin XPControls.XPButton CmdAbrirCom 
          Caption         =   "Ext..."
          Height          =   375
          Index           =   0

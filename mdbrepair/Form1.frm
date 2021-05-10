@@ -24,7 +24,7 @@ Begin VB.Form Form1
    ScaleHeight     =   4710
    ScaleWidth      =   9420
    StartUpPosition =   2  'CenterScreen
-   Begin VB.CommandButton cmdCompare 
+   Begin XPControls.XPButton cmdCompare 
       Caption         =   "Compare &Database with Schema"
       Height          =   375
       Left            =   5520
@@ -32,7 +32,7 @@ Begin VB.Form Form1
       Top             =   1920
       Width           =   3375
    End
-   Begin VB.CommandButton cmdCreate 
+   Begin XPControls.XPButton cmdCreate 
       Caption         =   "&Create Master Schema Database"
       Height          =   375
       Left            =   5520
@@ -40,7 +40,7 @@ Begin VB.Form Form1
       Top             =   1440
       Width           =   3375
    End
-   Begin VB.CommandButton Command2 
+   Begin XPControls.XPButton Command2 
       Caption         =   "&Fix Corrupt Database"
       Height          =   375
       Left            =   5520
