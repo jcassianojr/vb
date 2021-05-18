@@ -202,9 +202,9 @@ End Function
 
 Public Function ComboLostFocus(ByRef Combo1)
     With Combo1
-        If Len(.tEXT) Then
+        If Len(.Text) Then
             'Procura pelo texto digitado
-            strPartial = .tEXT
+            strPartial = .Text
             I = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
             'Se não achou, retorna      o focus para o Combo
             If I = CB_ERR Then .SetFocus
@@ -215,7 +215,7 @@ End Function
 Public Function ComboChange(ByRef Combo1)
     With Combo1
         'Procura pelo texto já digitado
-        strPartial = .tEXT
+        strPartial = .Text
         I = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                         ByVal strPartial)
 
@@ -1783,7 +1783,7 @@ Public Sub FocusMe()
        Or TypeOf Screen.ActiveControl Is ComboBox _
        Or TypeOf Screen.ActiveControl Is XPText Then
         Screen.ActiveControl.SelStart = 0
-        Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
+        Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
     End If
 End Sub
 
@@ -2510,15 +2510,29 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef tEXT As String) As Long
+Public Function WordLen(ByRef Text As String) As Long
     'tamanho somente dos caracteres normal 65 a 90
     Dim Bytes() As Byte
     Dim I As Long
 
-    Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
+    Bytes = StrConv(UCase$(Text), vbFromUnicode)
     For I = 0 To UBound(Bytes)
         If 65 <= Bytes(I) And Bytes(I) <= 90 Then WordLen = WordLen + 1
     Next
+End Function
+
+Private Function ExactlyIn(ByRef Searched As String, ByRef Pattern As String, Optional ByRef Bracket As String = vbNullChar) As Boolean
+    'Bracket is some character that never occurs in the other arguments.
+    'pesquisa se tem a string com a mesma quantidade de caracteres da busca
+'    MyString = "aaaareeeezzzzz"
+'    Print ExactlyIn(MyString, "zz")
+'    Print ExactlyIn(MyString, "zzzz")
+'    Print ExactlyIn(MyString, "zzzzz")
+'    Print ExactlyIn(MyString, "zzzzzz")
+    ExactlyIn = Bracket & Searched & Bracket _
+           Like "*[!" & Left$(Pattern, 1) & "]" _
+              & Pattern _
+              & "[!" & Right$(Pattern, 1) & "]*"
 End Function
 
 Public Function SameWords(ByRef Text1 As String, ByRef Text2 As String) As Boolean
