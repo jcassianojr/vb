@@ -89,9 +89,15 @@ Public Function FormataRG(ByVal Valor)
     Dim cDAC As String
     FormataRG = FixStr(Valor)
     cDAC = ""
-    If Valor = "ISENTO" Then
-        Exit Function
-    End If
+    if InStr(UCASE(Valor), "ISENT")>0 or InStr(UCASE(Valor), "RIC")>0 or InStr(UCASE(Valor), "RNE")>0
+       exit function
+    ENDIF
+    if InStr(UCASE(Valor), "CPF")>0  
+       VALOR =REPLACE(VALOR,"CPF","")
+    ENDIF    
+    IF CHECKCPF(VALOR, FALSE)
+       EXIT FUNCTION
+    ENDIF
     Valor = Trim(Valor)
     nPOS = InStr(Valor, "-")
     If nPOS = 0 Then
@@ -600,13 +606,16 @@ Public Function CheckRG(ByVal Valor, Optional ByVal lMES As Boolean = True) As B
     ZNERRO = 0
 
     CheckRG = True
-    Valor = Replace(Valor, ".", "")              'tiraout tambem tira - nao pode ser usada
-    If Valor = "ISENTO" Or InStr(Valor, "RNE") > 0 Then 'isento ou registro nacional de estrangeiro
+    If Valor = "ISENT" Or InStr(Valor, "RNE") Or InStr(Valor, "RIC")> 0 Then 'isento ou registro nacional de estrangeiro RIC(outra formula checagem)
         Exit Function
     End If
     If Len(Valor) = 0 Then
         Exit Function
     End If
+    IF CHECKCPF(VALOR, FALSE)
+       EXIT FUNCTION
+    END IF
+    Valor = Replace(Valor, ".", "") 'tiraout tambem tira - nao pode ser usada
     nPOS = InStr(Valor, "-")
     If nPOS = 0 Then
         cDAC = " "
