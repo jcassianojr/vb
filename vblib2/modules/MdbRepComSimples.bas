@@ -50,9 +50,9 @@ Public Function CompactAccess(xDatabaseLocation As String, _
 36    End If
 
 38    JRO.CompactDatabase SourceCon1, SourceCon2
-40    Kill SourcePath
+40    DeleteFile SourcePath'' kill SourcePath
 42    CopyFileWindowsWay DesPath, SourcePath  'FileCopy DesPath, SourcePath
-44    Kill DesPath
+44    DeleteFile DesPath '' Kill DesPath
    
 46    Set JRO = Nothing
 48    CompactAccess = True

@@ -116,7 +116,7 @@ Public Function ADOPegBlob(ByVal cARQ As String, ByVal cSQL As String, _
                     eRETU01 = FileLen(sTEMPFILE)
                     ADOPegBlob = True
                 End If
-                Kill sTEMPFILE
+                DeleteFile sTEMPFILE 'Kill sTEMPFILE
             End If
 
            
@@ -213,7 +213,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cSQL As String, _
                 ADOGrvBlob = True
             End If
             'sTEMPFILE = sTEMPFILE & ".jpg"
-            Kill sTEMPFILE
+            DeleteFile sTEMPFILE 'Kill sTEMPFILE
         End If
     End If
     
@@ -455,7 +455,7 @@ Public Function salvarpict(oFORM As Form, ByVal Picture1 As Variant, _
     End If
     If FileExist(sFILENAME, False) Then
         If MDG("Arquivo de Destino Ja existe Sobrepor") Then
-            Kill sFILENAME
+           DeleteFile sFILENAME 'Kill sFILENAME
         Else
             Exit Function
         End If

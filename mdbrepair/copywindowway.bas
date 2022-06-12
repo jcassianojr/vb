@@ -17,7 +17,7 @@ Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal Destination
     Dim typFileOperation As SHFILEOPSTRUCT
     If lAPAGA Then
         If FileExists(DestinationFile) Then
-            Kill DestinationFile
+            DeleteFile DestinationFile 'Kill DestinationFile
         Else
             MsgBox "ja existe arquivo destino" & DestinationFile
         End If

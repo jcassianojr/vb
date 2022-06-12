@@ -163,7 +163,7 @@ Option Explicit
 Dim sExibir As String * 255
 Dim nTOTREG As Long
 Dim cARQ As String
-Dim X As Long
+Dim x As Long
 
 Private Sub cmdProxima_Click()
     PegMensagem
@@ -171,7 +171,7 @@ End Sub
 
 Private Sub cmdOK_Click()
     sExibir = IIf(chkExibir = vbChecked, "S", "N")
-    X = WritePrivateProfileString("CITACAO", zUSER, sExibir, App.Path + "\" & App.EXEName & ".INI")
+    x = WritePrivateProfileString("CITACAO", zUSER, sExibir, App.Path + "\" & App.EXEName & ".INI")
     'X = WritePrivateProfileString(zUSER, "EXIBIR", sExibir, App.Path & "\CITACAO.INI")
     Unload Me
 End Sub
@@ -204,6 +204,7 @@ Private Sub Form_Load()
         nTOTREG = PegCountSQL(cARQ, "tblcitacao", "codcitacao", 1)
         PegMensagem
     End If
+    
 End Sub
 
 Function RandomNumber(intHighestNumber)

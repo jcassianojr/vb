@@ -82,7 +82,6 @@ Public Const WS_MINIMIZEBOX As Long = &H20000
 Public Const WS_MAXIMIZEBOX As Long = &H10000
 Public Const GWL_STYLE As Long = (-16)
 
-
 Private Type SHFILEOPSTRUCT
     hWnd As Long
     wFunc As Long
@@ -560,7 +559,7 @@ Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal Destination
     Dim typFileOperation As SHFILEOPSTRUCT
     If lAPAGA Then
         If FileExist(DestinationFile, False) Then
-            Kill DestinationFile
+            DeleteFile DestinationFile 'Kill DestinationFile
         End If
     End If
     With typFileOperation

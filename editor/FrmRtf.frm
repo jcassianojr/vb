@@ -2047,7 +2047,7 @@ Private Sub mnusaveasHTML_Click()
     If Not Len(sFILENAME) = 0 Then
         If FileExist(sFILENAME) Then
             If MDG("Arquivo ja Existe Sobrepor") Then
-                Kill sFILENAME
+                DeleteFile sFILENAME 'Kill sFILENAME
                 Exit Sub
             End If
         End If
@@ -2055,7 +2055,7 @@ Private Sub mnusaveasHTML_Click()
         RichTextbox1.SaveFile stmp, rtfText
         ePASS01 = stmp
         txttohtml stmp, sFILENAME
-        Kill stmp
+        DeleteFile stmp 'Kill stmp
     End If
 End Sub
 
@@ -2069,7 +2069,7 @@ Private Sub mnusaveasPDF_Click()
         RichTextbox1.SaveFile stmp, rtfText
         ePASS01 = stmp
         formConvertToPDF.Show vbModal, Me
-        Kill stmp
+        DeleteFile stmp 'Kill stmp
     End If
 End Sub
 

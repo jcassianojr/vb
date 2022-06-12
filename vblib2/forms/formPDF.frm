@@ -504,7 +504,7 @@ Public Function ConvertToPDF(FileName As String, outputfile As String, _
         Exit Function
     ElseIf FileExist(outputfile) Then
         If MDG("Arquivo Ja Existente" & outputfile, "Confirma Exclusao") Then
-            Kill outputfile
+            DeleteFile outputfile 'Kill outputfile
         End If
     End If
   

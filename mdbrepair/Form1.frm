@@ -434,7 +434,7 @@ Private Sub Command1_Click()
          Err.Clear
          sGood = sDir & "\good_" & Format(Date, "mmddyy") & ".mdb"
          If FileExists(sGood) Then
-            Kill sGood
+             DeleteFile sGood 'Kill sGood
          End If
          Screen.MousePointer = vbHourglass
          CompactDatabase Text1.Text, sGood
@@ -489,7 +489,7 @@ Private Sub CreateLocalTable(S As String)
       
    ' if dbFixTmp already exist, delete it
    If StrComp(Dir(S), db, vbTextCompare) = 0 Then
-      Kill S
+      DeleteFile s 'Kill S
    End If
    
    Set dbTemp = CreateDatabase(S, dbLangGeneral)
@@ -1267,7 +1267,7 @@ strPath = Left(strNew, InStrRev(strNew, "\"))
 strNew = strPath & "new.mdb"
 
 If FileExists(strNew) Then
-   Kill strPath & "new.?db"
+   DeleteFile strPath & "new.?db" 'Kill strPath & "new.?db"
    If Err.Number Then
       lblStatus.Caption = "Unable to delete " & strPath & "new.?db"
       Exit Sub
@@ -1275,7 +1275,7 @@ If FileExists(strNew) Then
 End If
 
 If FileExists(strPath & "repaired.mdb") Then
-   Kill strPath & "repaired.?db"
+   DeleteFile strPath & "repaired.?db" 'Kill strPath & "repaired.?db"
    If Err.Number Then
       lblStatus.Caption = "Unable to delete " & strPath & "repaired.?db"
       Exit Sub
@@ -1523,7 +1523,7 @@ Else
     lblStatus.Caption = "Compacting and repairing new database...done."
     lblStatus.Refresh
     
-    Kill strNew
+    DeleteFile strNew 'Kill strNew
     Text1.Enabled = True
     Text1.Text = strPath & "repaired.mdb"
     chkNoMods.Enabled = True

@@ -509,7 +509,7 @@ Private Sub CmdExcluir_Click()
     If Len(cARQUIVO) > 0 Then
         cARQUIVO = Txtcaminho.tEXT & Grid
         If MDG("Excluir " & cARQUIVO) Then
-            Kill cARQUIVO
+            DeleteFile cARQUIVO 'Kill cARQUIVO
             Command1_Click
         End If
     End If
@@ -698,7 +698,7 @@ Private Sub Command2_Click()
     cDESTINO = Txtcaminho.tEXT & NomeArq(cNOME, True) & ".txt"
     nRETU = CopyFileWindowsWay(cORIGEM, cDESTINO)
     If nRETU = 0 And MDG("Apagar arquivo lst") Then
-        Kill cORIGEM
+        DeleteFile cORIGEM 'Kill cORIGEM
     End If
     Command1_Click
 End Sub

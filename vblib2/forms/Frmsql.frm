@@ -843,7 +843,7 @@ Private Sub cmdexportar_Click(Index As Integer)
                 Close nDESTINO
                 If Index = 2 Then
                     txttohtml cARQTMP, cARQUIVO
-                    Kill cARQTMP
+                    DeleteFile cARQTMP 'Kill cARQTMP
                 End If
                 If Index = 4 Then
                     ePASS01 = cARQTMP

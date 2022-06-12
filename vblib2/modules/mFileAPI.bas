@@ -38,6 +38,9 @@ Or OFN_LONGNAMES _
 Or OFN_OVERWRITEPROMPT _
 Or OFN_HIDEREADONLY
 
+ Private Const FO_DELETE = &H3
+    Private Const FOF_ALLOWUNDO = &H40
+
 Public Type OPENFILENAME
     nStructSize       As Long
     hWndOwner         As Long
@@ -67,6 +70,17 @@ Private Type SECURITY_ATTRIBUTES
     bInheritHandle As Long
 End Type
 
+  Private Type SHFILEOPSTRUCT
+        hwnd As Long
+        wFunc As Long
+        pFrom As String
+        pTo As String
+        fFlags As Integer
+        fAborted As Boolean
+        hNameMaps As Long
+        sProgress As String
+    End Type
+         
 Public OFN As OPENFILENAME
 
 Public Declare Function GetOpenFileName Lib "comdlg32.dll" _
@@ -83,7 +97,11 @@ Public Declare Function GetShortPathName Lib "kernel32" _
                          ByVal lpszShortPath As String, _
                          ByVal cchBuffer As Long) As Long
         
-        
+  Private Declare Function SHFileOperation _
+         Lib "shell32.dll" Alias "SHFileOperationA" ( _
+            lpFileOp As SHFILEOPSTRUCT _
+        ) As Long
+                
 Public Declare Function CreateDirectory Lib "kernel32" Alias "CreateDirectoryA" (ByVal lpPathName As String, lpSecurityAttributes As SECURITY_ATTRIBUTES) As Long
 Public Declare Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As Long, ByVal lpBuffer As String) As Long
 Private Declare Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As Long, ByVal lpszShortPath As Long, ByVal cchBuffer As Long) As Long
@@ -142,7 +160,7 @@ Public Function FileOpen(frmOwner As Form, _
  
     With OFN
         .nStructSize = Len(OFN)
-        .hWndOwner = frmOwner.hWnd
+        .hWndOwner = frmOwner.hwnd
         .sFILTER = sFilters & vbNullChar & vbNullChar
         .nFilterIndex = nFilterIndex
         .sFile = sDefaultFileName & Space$(1024) & vbNullChar & vbNullChar
@@ -177,7 +195,7 @@ Public Function FileSave(frmOwner As Form, _
     With OFN
         
         .nStructSize = Len(OFN)
-        .hWndOwner = frmOwner.hWnd
+        .hWndOwner = frmOwner.hwnd
         .sFILTER = sFilters & vbNullChar & vbNullChar
         .nFilterIndex = nFilterIndex
         .sFile = sDefaultFileName & Space$(1024) & _
@@ -200,7 +218,7 @@ Public Function FileSave(frmOwner As Form, _
 End Function
 
 Function OpenArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, ByVal cTITULO As String) As String
-    Dim sFILENAME As String
+    Dim sFileName As String
     Dim sPath As String
     Dim sRECENTFILE As String
     Dim sFILTER As String
@@ -211,17 +229,17 @@ Function OpenArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
         sPath = App.Path
     End If
     sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
-    sFILENAME = FileOpen(oFORM, sFILTER, 1, sRECENTFILE, cEXT, sPath, "Escolher " & cTITULO)
-    If Len(sFILENAME) = 0 Then
+    sFileName = FileOpen(oFORM, sFILTER, 1, sRECENTFILE, cEXT, sPath, "Escolher " & cTITULO)
+    If Len(sFileName) = 0 Then
         lRETU = False
         Exit Function
     End If
     lRETU = True
-    OpenArqExt = sFILENAME
+    OpenArqExt = sFileName
 End Function
 
 Function SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, ByVal cTITULO As String) As String
-    Dim sFILENAME As String
+    Dim sFileName As String
     Dim sPath As String
     Dim sRECENTFILE As String
     Dim sFILTER As String
@@ -232,13 +250,13 @@ Function SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
         sPath = App.Path
     End If
     sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
-    sFILENAME = FileSave(oFORM, sFILTER, 1, cEXT, "Novo", sPath, cTITULO)
-    If Len(sFILENAME) = 0 Then
+    sFileName = FileSave(oFORM, sFILTER, 1, cEXT, "Novo", sPath, cTITULO)
+    If Len(sFileName) = 0 Then
         lRETU = False
         Exit Function
     End If
     lRETU = True
-    SaveArqExt = sFILENAME
+    SaveArqExt = sFileName
 End Function
 
 Public Function ImgFILTER() As String
@@ -336,7 +354,7 @@ Public Function ShortSpec(ByVal sFileSpec As String) As String
     ' This works with drive assignments or UNC paths.
     ' If it fails, an empty string is returned.
     ' Not designed to work with "relative" or "partial" paths.
-    Dim lret As Long
+    Dim lRet As Long
     Dim bUnc As Boolean
     '
     If Left$(sFileSpec, 2) = "\\" Then
@@ -345,11 +363,11 @@ Public Function ShortSpec(ByVal sFileSpec As String) As String
     Else
         sFileSpec = "\\?\" & sFileSpec
     End If
-    lret = GetShortPathNameW(StrPtr(sFileSpec), 0, 0)
-    If lret Then
-        ShortSpec = Space$(lret - 1)
-        lret = GetShortPathNameW(StrPtr(sFileSpec), StrPtr(ShortSpec), lret)
-        If lret Then
+    lRet = GetShortPathNameW(StrPtr(sFileSpec), 0, 0)
+    If lRet Then
+        ShortSpec = Space$(lRet - 1)
+        lRet = GetShortPathNameW(StrPtr(sFileSpec), StrPtr(ShortSpec), lRet)
+        If lRet Then
             If bUnc Then
                 ShortSpec = "\\" & Mid$(ShortSpec, 9) ' Strip the "\\?\UNC\".
             Else
@@ -503,3 +521,15 @@ Private Function FileErrors(ErrVal As Integer) As Integer
 End Function
 
 
+Public Function DeleteFile(ByVal sFileName As String, Optional vRecycleBin As Boolean) As Boolean
+        Dim fo As SHFILEOPSTRUCT
+        
+        With fo
+            .pFrom = sFileName & vbNullChar
+            .wFunc = FO_DELETE
+            If vRecycleBin Then .fFlags = FOF_ALLOWUNDO    ' Send to RecycleBin
+        End With
+        
+        Call SHFileOperation(fo)
+        DeleteFile = Abs(fo.fAborted) - 1
+    End Function

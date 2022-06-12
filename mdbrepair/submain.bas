@@ -60,7 +60,7 @@ Private Declare Function FindExecutable Lib "shell32.dll" Alias _
 '      MsgBox "Unable to open web page.", vbExclamation, App.Title
 '   End If
 'End If
-'Kill fileName                   'delete temp HTML file
+'DeleteFile Kill fileName                   'delete temp HTML file
 'End Sub
 
 Sub Main()
