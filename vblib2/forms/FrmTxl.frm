@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
 Begin VB.Form FrmTxl 
    Caption         =   "Gerador Relatorios Texto"
    ClientHeight    =   7380
@@ -13,6 +13,19 @@ Begin VB.Form FrmTxl
    ScaleHeight     =   7380
    ScaleWidth      =   10425
    StartUpPosition =   3  'Windows Default
+   Begin VBCCR17.RichTextBox RichTextBox1 
+      Height          =   255
+      Left            =   8880
+      TabIndex        =   33
+      TabStop         =   0   'False
+      Top             =   3240
+      Visible         =   0   'False
+      Width           =   1095
+      _ExtentX        =   1931
+      _ExtentY        =   450
+      MultiLine       =   -1  'True
+      TextRTF         =   "FrmTxl.frx":058A
+   End
    Begin MSFlexGridLib.MSFlexGrid Listview1 
       Height          =   1335
       Left            =   120
@@ -143,7 +156,7 @@ Begin VB.Form FrmTxl
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":058A
+         Picture         =   "FrmTxl.frx":06F0
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -163,7 +176,7 @@ Begin VB.Form FrmTxl
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":0B24
+         Picture         =   "FrmTxl.frx":0C8A
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -184,7 +197,7 @@ Begin VB.Form FrmTxl
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":10BE
+         Picture         =   "FrmTxl.frx":1224
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -204,7 +217,7 @@ Begin VB.Form FrmTxl
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":1658
+         Picture         =   "FrmTxl.frx":17BE
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -235,7 +248,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":1BF2
+         Picture         =   "FrmTxl.frx":1D58
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -257,7 +270,7 @@ Begin VB.Form FrmTxl
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":1F8C
+         Picture         =   "FrmTxl.frx":20F2
          Caption         =   "Html"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -279,7 +292,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":2526
+         Picture         =   "FrmTxl.frx":268C
          Caption         =   "PDF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -301,7 +314,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":28C0
+         Picture         =   "FrmTxl.frx":2A26
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -349,7 +362,7 @@ Begin VB.Form FrmTxl
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   767
-      Picture         =   "FrmTxl.frx":2C5A
+      Picture         =   "FrmTxl.frx":2DC0
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -369,7 +382,7 @@ Begin VB.Form FrmTxl
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "FrmTxl.frx":31F4
+      Picture         =   "FrmTxl.frx":335A
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -381,38 +394,16 @@ Begin VB.Form FrmTxl
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin RichTextLib.RichTextBox RichTextbox1 
-      Height          =   195
-      Left            =   8880
-      TabIndex        =   30
-      Top             =   3240
-      Visible         =   0   'False
-      Width           =   915
-      _ExtentX        =   1614
-      _ExtentY        =   344
-      _Version        =   393217
-      ScrollBars      =   3
-      TextRTF         =   $"FrmTxl.frx":378E
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   12
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton CmdEditar 
       Height          =   315
       Left            =   960
-      TabIndex        =   32
+      TabIndex        =   31
       TabStop         =   0   'False
       Top             =   2040
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   556
-      Picture         =   "FrmTxl.frx":3810
+      Picture         =   "FrmTxl.frx":38F4
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -427,13 +418,13 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   315
       Left            =   2040
-      TabIndex        =   31
+      TabIndex        =   30
       TabStop         =   0   'False
       Top             =   2040
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   556
-      Picture         =   "FrmTxl.frx":3DAA
+      Picture         =   "FrmTxl.frx":3E8E
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -448,7 +439,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdShell 
       Height          =   315
       Left            =   3480
-      TabIndex        =   33
+      TabIndex        =   32
       Top             =   2040
       Width           =   375
       _ExtentX        =   661
@@ -535,7 +526,7 @@ Private Sub gerar(ByVal cOPE As String)
         oTXT.arquivo = TxtArquivo
     End If
     If cDESTINO = "IMPNET" Then
-        oTXT.caminho = Txtcaminho
+        oTXT.caminho = TxtCaminho
     End If
     If cSETUP <> "" Then
         oTXT.impsetup cSETUP
@@ -582,7 +573,7 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-cARQRTF = TxtArquivo.tEXT
+cARQRTF = TxtArquivo.Text
    If FileExist(cARQRTF, True) Then
        Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
    End If
@@ -636,11 +627,11 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-   If Extensao(TxtArquivo.tEXT, "TXT") Then
+   If Extensao(TxtArquivo.Text, "TXT") Then
       imptxt
       Exit Sub
    End If
-   If Extensao(TxtArquivo.tEXT, "PDF") Or Extensao(TxtArquivo.tEXT, "HTML") Or Extensao(TxtArquivo.tEXT, "RTF") Then
+   If Extensao(TxtArquivo.Text, "PDF") Or Extensao(TxtArquivo.Text, "HTML") Or Extensao(TxtArquivo.Text, "RTF") Then
        CmdVisua_Click
        Exit Sub
    End If
@@ -664,7 +655,7 @@ Private Sub imptxt()
     oTXT.Destino = cDESTINO
     oTXT.ABRIR
     If cDESTINO = "IMPNET" Then
-        oTXT.caminho = Txtcaminho
+        oTXT.caminho = TxtCaminho
     End If
     If cSETUP <> "" Then
         oTXT.impsetup cSETUP
@@ -697,25 +688,25 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-   cARQRTF = TxtArquivo.tEXT
+   cARQRTF = TxtArquivo.Text
    If Not FileExist(cARQRTF, True) Then
       Exit Sub
    End If
-    If Extensao(TxtArquivo.tEXT, "TXT") Then
+    If Extensao(TxtArquivo.Text, "TXT") Then
         PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
     End If
-    If Extensao(TxtArquivo.tEXT, "PDF") Then
+    If Extensao(TxtArquivo.Text, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
     End If
-    If Extensao(TxtArquivo.tEXT, "HTML") Then
+    If Extensao(TxtArquivo.Text, "HTML") Then
        ePASS01 = cARQRTF
        FrmPreview.Show vbModal, Me
     End If
-    If Extensao(TxtArquivo.tEXT, "RTF") Then
-        cARQRTF = TxtArquivo.tEXT
+    If Extensao(TxtArquivo.Text, "RTF") Then
+        cARQRTF = TxtArquivo.Text
         RichTextbox1.LoadFile cARQRTF, rtfRTF
         PrinterEx.ShowPrintPreview Me, "MyPrintingRTF"
-        RichTextbox1.tEXT = ""
+        RichTextbox1.Text = ""
     End If
 End Sub
 Public Property Get Printer() As Printer
@@ -757,8 +748,8 @@ Private Sub Form_Load()
     Dim cTMP As String
     CenterFormToScreen Me
     FILTRO = ""
-    Txtcaminho = ""
-    Txtcaminho.Enabled = False
+    TxtCaminho = ""
+    TxtCaminho.Enabled = False
     OptDestino(6).Value = True
     montaimp
   
@@ -785,7 +776,7 @@ Private Sub Form_Load()
         nCOLUNAS = oIni.GetSetting("CONFIGURACAO", "COLUNAS", 80)
         nLINHAS = oIni.GetSetting("CONFIGURACAO", "LINHAS", 60)
         cDESTINO = oIni.GetSetting("CONFIGURACAO", "DESTINO", "ARQ")
-        Txtcaminho = oIni.GetSetting("CONFIGURACAO", "CAMINHO", "LPT1")
+        TxtCaminho = oIni.GetSetting("CONFIGURACAO", "CAMINHO", "LPT1")
   
         Select Case cDESTINO
         Case "LPT1"
@@ -804,7 +795,7 @@ Private Sub Form_Load()
             OptDestino(6).Value = True
         Case "IMPNET"
             OptDestino(7).Value = True
-            Txtcaminho.Enabled = True
+            TxtCaminho.Enabled = True
         End Select
 
   
@@ -911,7 +902,7 @@ Private Sub Listview1_Click()
 End Sub
 
 Private Sub OptDestino_Click(Index As Integer)
-    Txtcaminho.Enabled = False
+    TxtCaminho.Enabled = False
     Select Case Index
     Case 0
         cDESTINO = "LPT1"
@@ -929,7 +920,7 @@ Private Sub OptDestino_Click(Index As Integer)
         cDESTINO = "PRINTER"
     Case 7
         cDESTINO = "IMPNET"
-        Txtcaminho.Enabled = True
+        TxtCaminho.Enabled = True
     End Select
 End Sub
 
@@ -955,7 +946,7 @@ Private Sub Salvar_Click(Index As Integer)
         End Select
     
         sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-        cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
+        cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
     
         If InStr(cARQUIVO, ".") > 0 Then
             cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO
