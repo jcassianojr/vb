@@ -1,7 +1,7 @@
 VERSION 5.00
+Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
 Begin VB.Form FrmTxl 
    Caption         =   "Gerador Relatorios Texto"
    ClientHeight    =   7380
@@ -13,19 +13,6 @@ Begin VB.Form FrmTxl
    ScaleHeight     =   7380
    ScaleWidth      =   10425
    StartUpPosition =   3  'Windows Default
-   Begin VBCCR17.RichTextBox RichTextBox1 
-      Height          =   255
-      Left            =   8880
-      TabIndex        =   33
-      TabStop         =   0   'False
-      Top             =   3240
-      Visible         =   0   'False
-      Width           =   1095
-      _ExtentX        =   1931
-      _ExtentY        =   450
-      MultiLine       =   -1  'True
-      TextRTF         =   "FrmTxl.frx":058A
-   End
    Begin MSFlexGridLib.MSFlexGrid Listview1 
       Height          =   1335
       Left            =   120
@@ -156,7 +143,7 @@ Begin VB.Form FrmTxl
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":06F0
+         Picture         =   "FrmTxl.frx":058A
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -176,7 +163,7 @@ Begin VB.Form FrmTxl
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":0C8A
+         Picture         =   "FrmTxl.frx":0B24
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -197,7 +184,7 @@ Begin VB.Form FrmTxl
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":1224
+         Picture         =   "FrmTxl.frx":10BE
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -217,7 +204,7 @@ Begin VB.Form FrmTxl
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":17BE
+         Picture         =   "FrmTxl.frx":1658
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -248,7 +235,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":1D58
+         Picture         =   "FrmTxl.frx":1BF2
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -270,7 +257,7 @@ Begin VB.Form FrmTxl
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":20F2
+         Picture         =   "FrmTxl.frx":1F8C
          Caption         =   "Html"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -292,7 +279,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":268C
+         Picture         =   "FrmTxl.frx":2526
          Caption         =   "PDF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -314,7 +301,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":2A26
+         Picture         =   "FrmTxl.frx":28C0
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -362,7 +349,7 @@ Begin VB.Form FrmTxl
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   767
-      Picture         =   "FrmTxl.frx":2DC0
+      Picture         =   "FrmTxl.frx":2C5A
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -382,7 +369,7 @@ Begin VB.Form FrmTxl
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "FrmTxl.frx":335A
+      Picture         =   "FrmTxl.frx":31F4
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -394,16 +381,39 @@ Begin VB.Form FrmTxl
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin RichTextLib.RichTextBox RichTextbox1 
+      Height          =   195
+      Left            =   9000
+      TabIndex        =   30
+      Top             =   3240
+      Visible         =   0   'False
+      Width           =   915
+      _ExtentX        =   1614
+      _ExtentY        =   344
+      _Version        =   393217
+      Enabled         =   -1  'True
+      ScrollBars      =   3
+      TextRTF         =   $"FrmTxl.frx":378E
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
    Begin XPControls.XPButton CmdEditar 
       Height          =   315
       Left            =   960
-      TabIndex        =   31
+      TabIndex        =   32
       TabStop         =   0   'False
       Top             =   2040
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   556
-      Picture         =   "FrmTxl.frx":38F4
+      Picture         =   "FrmTxl.frx":3810
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -418,13 +428,13 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   315
       Left            =   2040
-      TabIndex        =   30
+      TabIndex        =   31
       TabStop         =   0   'False
       Top             =   2040
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   556
-      Picture         =   "FrmTxl.frx":3E8E
+      Picture         =   "FrmTxl.frx":3DAA
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -439,7 +449,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdShell 
       Height          =   315
       Left            =   3480
-      TabIndex        =   32
+      TabIndex        =   33
       Top             =   2040
       Width           =   375
       _ExtentX        =   661

@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
 Begin VB.Form frmPPAP 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PPAP"
@@ -2251,7 +2251,7 @@ Private Sub Form_Load()
     If iPPAP = 11 Then
         EnableControls Me, False
         SSTab1.Enabled = True
-        'SSTab1.Tab = 5
+    '    SSTab1.Tab = 5
         cmdClose.Enabled = True
         gridlay.Enabled = True
         CmdNovoLay(1).Enabled = True

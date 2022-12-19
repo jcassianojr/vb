@@ -1,6 +1,6 @@
 VERSION 5.00
+Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
 Begin VB.Form FrmSql 
    Caption         =   "Exportador de Sql"
    ClientHeight    =   6045
@@ -12,19 +12,6 @@ Begin VB.Form FrmSql
    ScaleHeight     =   6045
    ScaleWidth      =   10365
    StartUpPosition =   3  'Windows Default
-   Begin VBCCR17.RichTextBox RichTextBox1 
-      Height          =   255
-      Left            =   2760
-      TabIndex        =   36
-      TabStop         =   0   'False
-      Top             =   5400
-      Visible         =   0   'False
-      Width           =   975
-      _ExtentX        =   1720
-      _ExtentY        =   450
-      MultiLine       =   -1  'True
-      TextRTF         =   "Frmsql.frx":058A
-   End
    Begin VB.CheckBox CmdEmail 
       BackColor       =   &H00C0E0FF&
       Caption         =   "Enviar Email"
@@ -49,7 +36,7 @@ Begin VB.Form FrmSql
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":06F0
+         Picture         =   "Frmsql.frx":058A
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -69,7 +56,7 @@ Begin VB.Form FrmSql
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":0C8A
+         Picture         =   "Frmsql.frx":0B24
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -89,7 +76,7 @@ Begin VB.Form FrmSql
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":1224
+         Picture         =   "Frmsql.frx":10BE
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -109,7 +96,7 @@ Begin VB.Form FrmSql
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":17BE
+         Picture         =   "Frmsql.frx":1658
          Caption         =   "Propriedades"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -139,7 +126,7 @@ Begin VB.Form FrmSql
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":1D58
+         Picture         =   "Frmsql.frx":1BF2
          Caption         =   "xml"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -160,7 +147,7 @@ Begin VB.Form FrmSql
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":22F2
+         Picture         =   "Frmsql.frx":218C
          Caption         =   "xls(TAB)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -221,7 +208,7 @@ Begin VB.Form FrmSql
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":288C
+         Picture         =   "Frmsql.frx":2726
          Caption         =   "Html"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -242,7 +229,7 @@ Begin VB.Form FrmSql
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":2E26
+         Picture         =   "Frmsql.frx":2CC0
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -263,7 +250,7 @@ Begin VB.Form FrmSql
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":31C0
+         Picture         =   "Frmsql.frx":305A
          Caption         =   "PDF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -385,7 +372,7 @@ Begin VB.Form FrmSql
          Width           =   495
          _ExtentX        =   873
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":355A
+         Picture         =   "Frmsql.frx":33F4
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -407,7 +394,7 @@ Begin VB.Form FrmSql
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":38F4
+         Picture         =   "Frmsql.frx":378E
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -428,7 +415,7 @@ Begin VB.Form FrmSql
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":3C8E
+         Picture         =   "Frmsql.frx":3B28
          Caption         =   "xls(TR)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -444,7 +431,7 @@ Begin VB.Form FrmSql
          Height          =   375
          Index           =   6
          Left            =   5160
-         TabIndex        =   35
+         TabIndex        =   36
          Top             =   240
          Width           =   555
          _ExtentX        =   979
@@ -571,7 +558,7 @@ Begin VB.Form FrmSql
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "Frmsql.frx":4228
+      Picture         =   "Frmsql.frx":40C2
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -591,7 +578,7 @@ Begin VB.Form FrmSql
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "Frmsql.frx":47C2
+      Picture         =   "Frmsql.frx":465C
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -603,16 +590,38 @@ Begin VB.Form FrmSql
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin RichTextLib.RichTextBox RichTextbox1 
+      Height          =   195
+      Left            =   2760
+      TabIndex        =   32
+      Top             =   5520
+      Visible         =   0   'False
+      Width           =   915
+      _ExtentX        =   1614
+      _ExtentY        =   344
+      _Version        =   393217
+      ScrollBars      =   3
+      TextRTF         =   $"Frmsql.frx":4BF6
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
    Begin XPControls.XPButton CmdEditar 
       Height          =   315
       Left            =   120
-      TabIndex        =   33
+      TabIndex        =   34
       TabStop         =   0   'False
       Top             =   2280
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   556
-      Picture         =   "Frmsql.frx":4D5C
+      Picture         =   "Frmsql.frx":4C78
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -627,13 +636,13 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   315
       Left            =   1200
-      TabIndex        =   32
+      TabIndex        =   33
       TabStop         =   0   'False
       Top             =   2280
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   556
-      Picture         =   "Frmsql.frx":52F6
+      Picture         =   "Frmsql.frx":5212
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -648,7 +657,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdShell 
       Height          =   315
       Left            =   2640
-      TabIndex        =   34
+      TabIndex        =   35
       Top             =   2280
       Width           =   375
       _ExtentX        =   661

@@ -354,14 +354,14 @@ Dim cache As String
 Const AppName = "Text-PDF v1.0"
 
 Private Sub CmdAbrirCom_Click()
-   If FileExist(txtFilename.tEXT, True) Then
-       Call OpenWith(txtFilename.tEXT, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
+   If FileExist(txtFilename.Text, True) Then
+       Call OpenWith(txtFilename.Text, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
    End If
 End Sub
 
 Private Sub CmdSendMail_Click()
     Dim cARQUIVO As String
-    cARQUIVO = FixStr(txtOutputFile.tEXT)
+    cARQUIVO = FixStr(txtOutputFile.Text)
     'servidor,porta,from,to,assunto,anexos,mensagem,enviar e sair
     ePASS01 = Array("", _
                     "", _
@@ -376,7 +376,7 @@ End Sub
 
 Private Sub CmdVisua_Click()
     Dim cARQSHELL  As String
-    cARQSHELL = FixStr(txtOutputFile.tEXT)
+    cARQSHELL = FixStr(txtOutputFile.Text)
     If FileExist(cARQSHELL) Then
         ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , Me.hWnd
     End If
@@ -392,15 +392,15 @@ Private Sub Form_Load()
     cmbRotation.ListIndex = 0
     cmbPageSize.ListIndex = 0
   
-    txtCreator.tEXT = zNOMEFOLHA
+    txtCreator.Text = zNOMEFOLHA
   
 
 
     If Len(ePASS01) > 0 Then
         If FileExist(ePASS01) Then
-            txtTitle.tEXT = NomeArq(ePASS01, True)
-            txtFilename.tEXT = ePASS01
-            txtOutputFile.tEXT = TrocaExt(ePASS01, "PDF")
+            txtTitle.Text = NomeArq(ePASS01, True)
+            txtFilename.Text = ePASS01
+            txtOutputFile.Text = TrocaExt(ePASS01, "PDF")
             btnOpen.Enabled = False
             txtFilename.Enabled = False
             '        btnConvert_Click
@@ -410,37 +410,37 @@ End Sub
 
 Private Sub txtAuthor_GotFocus()
     txtAuthor.SelStart = 0
-    txtAuthor.SelLength = Len(txtAuthor.tEXT)
+    txtAuthor.SelLength = Len(txtAuthor.Text)
 End Sub
 
 Private Sub txtCreator_GotFocus()
     txtCreator.SelStart = 0
-    txtCreator.SelLength = Len(txtCreator.tEXT)
+    txtCreator.SelLength = Len(txtCreator.Text)
 End Sub
 
 Private Sub txtSubject_GotFocus()
     txtSubject.SelStart = 0
-    txtSubject.SelLength = Len(txtSubject.tEXT)
+    txtSubject.SelLength = Len(txtSubject.Text)
 End Sub
 
 Private Sub txtTitle_GotFocus()
     txtTitle.SelStart = 0
-    txtTitle.SelLength = Len(txtTitle.tEXT)
+    txtTitle.SelLength = Len(txtTitle.Text)
 End Sub
 
 Private Sub txtKeywords_GotFocus()
     txtKeywords.SelStart = 0
-    txtKeywords.SelLength = Len(txtKeywords.tEXT)
+    txtKeywords.SelLength = Len(txtKeywords.Text)
 End Sub
 
 Private Sub txtFilename_GotFocus()
     txtFilename.SelStart = 0
-    txtFilename.SelLength = Len(txtFilename.tEXT)
+    txtFilename.SelLength = Len(txtFilename.Text)
 End Sub
 
 Private Sub txtOutputFile_GotFocus()
     txtOutputFile.SelStart = 0
-    txtOutputFile.SelLength = Len(txtOutputFile.tEXT)
+    txtOutputFile.SelLength = Len(txtOutputFile.Text)
 End Sub
 
 Private Sub btnClose_Click()
@@ -451,10 +451,10 @@ Private Sub btnOpen_Click()
     On Local Error Resume Next
 
     
-    txtFilename.tEXT = OpenArqExt(Me, txtFilename.tEXT, "txt", "Arquivos txt")
+    txtFilename.Text = OpenArqExt(Me, txtFilename.Text, "txt", "Arquivos txt")
     
-    If Not Len(txtFilename.tEXT) = 0 Then
-        txtOutputFile.tEXT = Left(txtFilename.tEXT, Len(txtFilename.tEXT) - 3) & "pdf"
+    If Not Len(txtFilename.Text) = 0 Then
+        txtOutputFile.Text = Left(txtFilename.Text, Len(txtFilename.Text) - 3) & "pdf"
     End If
 
 
@@ -465,7 +465,7 @@ Private Sub btnSave_Click()
     sFILTER = "Arquivos PDF (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
     FileName = FileSave(Me, sFILTER, 1, "TXT", cARQRTF, cARQRTF, "Salvar PDF")
     If Not Len(FileName) = 0 Then
-        txtOutputFile.tEXT = FileName
+        txtOutputFile.Text = FileName
     End If
 End Sub
 
@@ -474,13 +474,13 @@ Private Sub btnSource_Click()
 End Sub
 
 Private Sub btnConvert_Click()
-    If txtFilename.tEXT <> "" And txtOutputFile.tEXT <> "" Then
-        ConvertToPDF txtFilename.tEXT, txtOutputFile.tEXT, _
-                     txtAuthor.tEXT, txtCreator.tEXT, txtKeywords.tEXT, _
-                     txtSubject.tEXT, txtTitle.tEXT, _
-                     cmbFont.tEXT, Val(cmbFontSize.tEXT), Val(cmbRotation.tEXT), _
-                     Val(cmbPageSize.tEXT), Val(Right(cmbPageSize.tEXT, 3)), ChkPaisagem.Value
-        If FileExist(txtOutputFile.tEXT) Then
+    If txtFilename.Text <> "" And txtOutputFile.Text <> "" Then
+        ConvertToPDF txtFilename.Text, txtOutputFile.Text, _
+                     txtAuthor.Text, txtCreator.Text, txtKeywords.Text, _
+                     txtSubject.Text, txtTitle.Text, _
+                     cmbFont.Text, Val(cmbFontSize.Text), Val(cmbRotation.Text), _
+                     Val(cmbPageSize.Text), Val(Right(cmbPageSize.Text, 3)), ChkPaisagem.Value
+        If FileExist(txtOutputFile.Text) Then
             Alert "Conversao Concluida"
         End If
  
@@ -639,7 +639,7 @@ er:
 End Sub
 
 Private Sub WritePages()
-    Dim i As Integer
+    Dim I As Integer
     Dim line As String, tmpline As String, beginstream As String
     On Error GoTo er
     Open filetxt For Input As #2
@@ -666,9 +666,9 @@ Private Sub WritePages()
             'quebra de linha
             Do While Len(line) > linelen
                 tmpline = Left(line, linelen)
-                For i = Len(tmpline) To Len(tmpline) \ 2 Step -1
-                    If InStr("*&^%$#,. ;<=>[])}!""", Mid(tmpline, i, 1)) Then
-                        tmpline = Left(tmpline, i)
+                For I = Len(tmpline) To Len(tmpline) \ 2 Step -1
+                    If InStr("*&^%$#,. ;<=>[])}!""", Mid(tmpline, I, 1)) Then
+                        tmpline = Left(tmpline, I)
                         Exit For
                     End If
                 Next
@@ -763,7 +763,7 @@ er:
 End Function
 
 Sub endpdf()
-    Dim ty As String, i As Integer, xreF As Long
+    Dim ty As String, I As Integer, xreF As Long
     On Error GoTo er
     location(root) = Position
     writepdf (root & " 0 obj")
@@ -779,9 +779,9 @@ Sub endpdf()
     writepdf ("/Count " & pageNo)
     writepdf ("/MediaBox [ 0 0 " & pageWidth & " " & pageHeight & " ]")
     ty = ("/Kids [ ")
-    For i = 1 To pageNo
-        ty = ty & pageObj(i) & " 0 R "
-    Next i
+    For I = 1 To pageNo
+        ty = ty & pageObj(I) & " 0 R "
+    Next I
     ty = ty & "]"
     writepdf (ty)
     writepdf (">>")
@@ -789,9 +789,9 @@ Sub endpdf()
     xreF = Position
     writepdf ("0 " & obj + 1)
     writepdf ("0000000000 65535 f ")
-    For i = 1 To obj
-        writepdf (Format(location(i), "0000000000") & " 00000 n ")
-    Next i
+    For I = 1 To obj
+        writepdf (Format(location(I), "0000000000") & " 00000 n ")
+    Next I
     writepdf ("trailer")
     writepdf ("<<")
     writepdf ("/Size " & obj + 1)
@@ -806,9 +806,9 @@ er:
     MsgBox Err.Description
 End Sub
 
-Public Function ReplaceText(tEXT As String, TextToReplace As String, NewText As String) As String
+Public Function ReplaceText(Text As String, TextToReplace As String, NewText As String) As String
     Dim mtext As String, SpacePos As Long
-    mtext = tEXT
+    mtext = Text
     SpacePos = InStr(mtext, TextToReplace)
     Do While SpacePos
         mtext = Left(mtext, SpacePos - 1) & NewText & Mid(mtext, SpacePos + Len(TextToReplace))
