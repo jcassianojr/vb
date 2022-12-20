@@ -506,7 +506,7 @@ Dim cSETUP As String
 Dim lARQTXT As Boolean
 
 Private Sub gerar(ByVal cOPE As String)
-    Dim X As Long
+    Dim x As Long
     Dim CLINHA As String
     Dim aUSO As Variant
     Dim aREG As Variant
@@ -526,7 +526,7 @@ Private Sub gerar(ByVal cOPE As String)
         oTXT.arquivo = TxtArquivo
     End If
     If cDESTINO = "IMPNET" Then
-        oTXT.caminho = Txtcaminho
+        oTXT.caminho = TxtCaminho
     End If
     If cSETUP <> "" Then
         oTXT.impsetup cSETUP
@@ -537,8 +537,8 @@ Private Sub gerar(ByVal cOPE As String)
     oCONN.Open cARQ
     oRS.Open cSQL, oCONN, adOpenForwardOnly, adLockReadOnly
     While Not oRS.EOF
-        For X = 1 To nQTDELAY
-            CLINHA = aLAY(X)
+        For x = 1 To nQTDELAY
+            CLINHA = aLAY(x)
             Select Case CLINHA
             Case "[NF]"
                 oTXT.novafolha
@@ -565,7 +565,7 @@ Private Sub gerar(ByVal cOPE As String)
                 End If
                 oTXT.gravalincon aUSO(2), aUSO(0), aUSO(1)
             End Select
-        Next X
+        Next x
     Wend
     oTXT.fechar
     oRS.Close
@@ -573,7 +573,7 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-cARQRTF = TxtArquivo.Text
+cARQRTF = TxtArquivo.tEXT
    If FileExist(cARQRTF, True) Then
        Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
    End If
@@ -605,11 +605,11 @@ Private Sub CmdFiltro_Click()
     If aRELCFG(11) Then
         ePASS01 = ""
         FrmFiltro.Show vbModal, Me
-        FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
+        filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
     End If
-    cFILTRO = FixStr(FILTRO)
+    cFILTRO = FixStr(filtro)
     If Len(aRELCFG(15)) > 0 Then
-        cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
+        cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
         Lblsql = cSQL
     End If
     
@@ -627,11 +627,11 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-   If Extensao(TxtArquivo.Text, "TXT") Then
+   If Extensao(TxtArquivo.tEXT, "TXT") Then
       imptxt
       Exit Sub
    End If
-   If Extensao(TxtArquivo.Text, "PDF") Or Extensao(TxtArquivo.Text, "HTML") Or Extensao(TxtArquivo.Text, "RTF") Then
+   If Extensao(TxtArquivo.tEXT, "PDF") Or Extensao(TxtArquivo.tEXT, "HTML") Or Extensao(TxtArquivo.tEXT, "RTF") Then
        CmdVisua_Click
        Exit Sub
    End If
@@ -655,7 +655,7 @@ Private Sub imptxt()
     oTXT.Destino = cDESTINO
     oTXT.ABRIR
     If cDESTINO = "IMPNET" Then
-        oTXT.caminho = Txtcaminho
+        oTXT.caminho = TxtCaminho
     End If
     If cSETUP <> "" Then
         oTXT.impsetup cSETUP
@@ -688,25 +688,25 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-   cARQRTF = TxtArquivo.Text
+   cARQRTF = TxtArquivo.tEXT
    If Not FileExist(cARQRTF, True) Then
       Exit Sub
    End If
-    If Extensao(TxtArquivo.Text, "TXT") Then
+    If Extensao(TxtArquivo.tEXT, "TXT") Then
         PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
     End If
-    If Extensao(TxtArquivo.Text, "PDF") Then
+    If Extensao(TxtArquivo.tEXT, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
     End If
-    If Extensao(TxtArquivo.Text, "HTML") Then
+    If Extensao(TxtArquivo.tEXT, "HTML") Then
        ePASS01 = cARQRTF
        FrmPreview.Show vbModal, Me
     End If
-    If Extensao(TxtArquivo.Text, "RTF") Then
-        cARQRTF = TxtArquivo.Text
-        RichTextbox1.LoadFile cARQRTF, rtfRTF
+    If Extensao(TxtArquivo.tEXT, "RTF") Then
+        cARQRTF = TxtArquivo.tEXT
+        RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF 'rtfRTF
         PrinterEx.ShowPrintPreview Me, "MyPrintingRTF"
-        RichTextbox1.Text = ""
+        RichTextBox1.tEXT = ""
     End If
 End Sub
 Public Property Get Printer() As Printer
@@ -716,7 +716,7 @@ Public Property Set Printer(nPrinter As Printer)
     Set vbExtra.Printer2 = nPrinter
 End Property
 Public Sub MyPrintingRTF()
-    PrinterEx.PrintRichTextBox RichTextbox1
+    PrinterEx.PrintRichTextBox RichTextBox1
     Printer.EndDoc
 End Sub
 Public Sub MyPrintingTXT()
@@ -744,12 +744,12 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Dim X As Long
+    Dim x As Long
     Dim cTMP As String
     CenterFormToScreen Me
-    FILTRO = ""
-    Txtcaminho = ""
-    Txtcaminho.Enabled = False
+    filtro = ""
+    TxtCaminho = ""
+    TxtCaminho.Enabled = False
     OptDestino(6).Value = True
     montaimp
   
@@ -770,13 +770,13 @@ Private Sub Form_Load()
         oIni.Path = cARQRTF
         nQTDELAY = oIni.GetSetting("CONFIGURACAO", "QTDELAY", 1)
         ReDim aLAY(nQTDELAY + 1)
-        For X = 1 To nQTDELAY
-            aLAY(X) = oIni.GetSetting("LAYOUT", StrZero(X, 3), "")
-        Next X
+        For x = 1 To nQTDELAY
+            aLAY(x) = oIni.GetSetting("LAYOUT", StrZero(x, 3), "")
+        Next x
         nCOLUNAS = oIni.GetSetting("CONFIGURACAO", "COLUNAS", 80)
         nLINHAS = oIni.GetSetting("CONFIGURACAO", "LINHAS", 60)
         cDESTINO = oIni.GetSetting("CONFIGURACAO", "DESTINO", "ARQ")
-        Txtcaminho = oIni.GetSetting("CONFIGURACAO", "CAMINHO", "LPT1")
+        TxtCaminho = oIni.GetSetting("CONFIGURACAO", "CAMINHO", "LPT1")
   
         Select Case cDESTINO
         Case "LPT1"
@@ -795,7 +795,7 @@ Private Sub Form_Load()
             OptDestino(6).Value = True
         Case "IMPNET"
             OptDestino(7).Value = True
-            Txtcaminho.Enabled = True
+            TxtCaminho.Enabled = True
         End Select
 
   
@@ -804,7 +804,7 @@ Private Sub Form_Load()
         If aRELCFG(14) = "" Then
             aRELCFG(14) = oIni.GetSetting("CONFIGURACAO", "FILTRO", 1)
         End If
-        FILTRO = aRELCFG(14)
+        filtro = aRELCFG(14)
         If aRELCFG(15) = "" Then
             aRELCFG(15) = oIni.GetSetting("CONFIGURACAO", "SQL", 1)
         End If
@@ -858,7 +858,7 @@ Private Sub Form_Load()
     If Not aDIREITOS(7) Then Salvar(0).Visible = False
     If Not aDIREITOS(7) Then CmdEmail.Visible = False
     If Not aRELCFG(11) Then CmdFiltro.Visible = False
-    If Not aRELCFG(11) Then FILTRO.Visible = False
+    If Not aRELCFG(11) Then filtro.Visible = False
      
     If Not aDIREITOS(4) Then CmdEditar.Visible = False
     If Not aDIREITOS(4) Then CmdShell.Visible = False
@@ -871,7 +871,7 @@ Private Sub Form_Load()
         End If
     End If
     If Len(aRELCFG(15)) > 0 Then
-        cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
+        cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
     End If
     
     Lblsql = cSQL
@@ -902,7 +902,7 @@ Private Sub Listview1_Click()
 End Sub
 
 Private Sub OptDestino_Click(Index As Integer)
-    Txtcaminho.Enabled = False
+    TxtCaminho.Enabled = False
     Select Case Index
     Case 0
         cDESTINO = "LPT1"
@@ -920,7 +920,7 @@ Private Sub OptDestino_Click(Index As Integer)
         cDESTINO = "PRINTER"
     Case 7
         cDESTINO = "IMPNET"
-        Txtcaminho.Enabled = True
+        TxtCaminho.Enabled = True
     End Select
 End Sub
 
@@ -946,7 +946,7 @@ Private Sub Salvar_Click(Index As Integer)
         End Select
     
         sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-        cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
+        cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
     
         If InStr(cARQUIVO, ".") > 0 Then
             cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO
@@ -1047,13 +1047,13 @@ Private Sub montaimp()
 End Sub
 
 Private Function SelectPrinter(ByVal Nome As String) As Boolean
-    Dim X As Printer
+    Dim x As Printer
     Dim nLEN As Long
     Nome = UCase(Trim(Nome))
     nLEN = Len(Nome)
-    For Each X In Printers
-        If UCase(Mid(X.DeviceName, 1, nLEN)) = Nome Then
-            Set Printer = X
+    For Each x In Printers
+        If UCase(Mid(x.DeviceName, 1, nLEN)) = Nome Then
+            Set Printer = x
             SelectPrinter = True
             Exit For
         End If
