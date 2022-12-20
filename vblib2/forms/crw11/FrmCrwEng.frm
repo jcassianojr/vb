@@ -12,6 +12,20 @@ Begin VB.Form FrmCrwENG
    ScaleHeight     =   5955
    ScaleWidth      =   11430
    WindowState     =   2  'Maximized
+   Begin VBCCR17.RichTextBox RichTextBox1 
+      Height          =   375
+      Left            =   10080
+      TabIndex        =   31
+      TabStop         =   0   'False
+      Top             =   2760
+      Visible         =   0   'False
+      Width           =   1095
+      _ExtentX        =   1931
+      _ExtentY        =   661
+      MultiLine       =   -1  'True
+      Text            =   "FrmCrwEng.frx":058A
+      TextRTF         =   "FrmCrwEng.frx":05C2
+   End
    Begin VB.TextBox TxtArquivo 
       Height          =   285
       Left            =   120
@@ -132,7 +146,7 @@ Begin VB.Form FrmCrwENG
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmCrwEng.frx":058A
+         Picture         =   "FrmCrwEng.frx":0742
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -154,7 +168,7 @@ Begin VB.Form FrmCrwENG
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmCrwEng.frx":0924
+         Picture         =   "FrmCrwEng.frx":0ADC
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -176,7 +190,7 @@ Begin VB.Form FrmCrwENG
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmCrwEng.frx":0CBE
+         Picture         =   "FrmCrwEng.frx":0E76
          Caption         =   "doc"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -198,7 +212,7 @@ Begin VB.Form FrmCrwENG
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmCrwEng.frx":1258
+         Picture         =   "FrmCrwEng.frx":1410
          Caption         =   "xls"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -220,7 +234,7 @@ Begin VB.Form FrmCrwENG
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmCrwEng.frx":17F2
+         Picture         =   "FrmCrwEng.frx":19AA
          Caption         =   "PDF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -248,7 +262,7 @@ Begin VB.Form FrmCrwENG
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "FrmCrwEng.frx":1B8C
+         Picture         =   "FrmCrwEng.frx":1D44
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -268,7 +282,7 @@ Begin VB.Form FrmCrwENG
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "FrmCrwEng.frx":2126
+         Picture         =   "FrmCrwEng.frx":22DE
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -288,7 +302,7 @@ Begin VB.Form FrmCrwENG
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmCrwEng.frx":26C0
+         Picture         =   "FrmCrwEng.frx":2878
          Caption         =   "Propriedades"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -308,7 +322,7 @@ Begin VB.Form FrmCrwENG
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmCrwEng.frx":2C5A
+         Picture         =   "FrmCrwEng.frx":2E12
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -351,7 +365,7 @@ Begin VB.Form FrmCrwENG
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "FrmCrwEng.frx":31F4
+      Picture         =   "FrmCrwEng.frx":33AC
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -372,7 +386,7 @@ Begin VB.Form FrmCrwENG
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   556
-      Picture         =   "FrmCrwEng.frx":378E
+      Picture         =   "FrmCrwEng.frx":3946
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -393,7 +407,7 @@ Begin VB.Form FrmCrwENG
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   556
-      Picture         =   "FrmCrwEng.frx":3D28
+      Picture         =   "FrmCrwEng.frx":3EE0
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -433,7 +447,7 @@ Begin VB.Form FrmCrwENG
       Width           =   1155
       _ExtentX        =   2037
       _ExtentY        =   556
-      Picture         =   "FrmCrwEng.frx":42C2
+      Picture         =   "FrmCrwEng.frx":447A
       Caption         =   "Visualizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -454,7 +468,7 @@ Begin VB.Form FrmCrwENG
       Width           =   1755
       _ExtentX        =   3096
       _ExtentY        =   661
-      Picture         =   "FrmCrwEng.frx":485C
+      Picture         =   "FrmCrwEng.frx":4A14
       Caption         =   "Competência "
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -465,19 +479,6 @@ Begin VB.Form FrmCrwENG
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-   End
-   Begin VBCCR17.RichTextBox RichTextBox1 
-      Height          =   255
-      Left            =   10200
-      TabIndex        =   31
-      TabStop         =   0   'False
-      Top             =   2400
-      Visible         =   0   'False
-      Width           =   975
-      _ExtentX        =   1720
-      _ExtentY        =   450
-      MultiLine       =   -1  'True
-      TextRTF         =   "FrmCrwEng.frx":4BF6
    End
    Begin VB.Label Label2 
       Caption         =   "Assunto"
