@@ -44,6 +44,9 @@ Private Const CALG_SHA_384    As Long = (ALG_CLASS_HASH Or ALG_TYPE_ANY Or ALG_S
 Private Const CALG_SHA_512    As Long = (ALG_CLASS_HASH Or ALG_TYPE_ANY Or ALG_SID_SHA_512)
 ' cARQ = CreateSHA256HashString("arroz e feijao")
 ' Create Hash
+' https://khoiriyyah.blogspot.com/2012/06/vb6-hash-class-md5-sha-1-sha-256-sha.html
+' https://www.experts-exchange.com/questions/29116296/help-with-sha512-key-Implementation-in-VB6.html
+
 Private Function CreateHash(abytData() As Byte, ByVal lngAlgID As Long) As String
     Dim hProv As Long, hHash As Long
     Dim abytHash(0 To 63) As Byte
