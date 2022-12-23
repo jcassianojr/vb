@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
 Begin VB.Form frmSENHA 
    Caption         =   "Acesso ao Sistema"
    ClientHeight    =   2220
@@ -296,7 +296,7 @@ Private Sub cmdOK_Click()
     
     
     ''Armazena Codigo empresa
-1   zEMPRESA = FixInt(TxtEmpresa.Value)
+1   zEMPRESA = FixInt(txtempresa.Value)
 2   If zEMPRESA < 0 Then zEMPRESA = 1
     
     
@@ -324,17 +324,19 @@ Private Sub cmdOK_Click()
     
 21  cSQL = "select * from USUARIO WHERE USUARIO='" & zUSER & "'"
         
-22  aRETU = PegSQL(cARQ, cSQL, 13, _
+22  aRETU = PegSQL(cARQ, cSQL, 15, _
                    Array("SENHA", "ATIVO", "DATAVAL", "WEEKEND", "HORAINI", "HORAFIM", _
-                         "EQUIVALENTE", "IDUSUARIO", "IDFOLHA", "NOMEFOLHA", "TROCAR", "ID", "POSTELAB"), _
-                         Array("C", "BF", "DN", "BF", "", "", _
-                               "", "N", "N", "C", "DH", "N", "C"), _
-                               Array(Space(8), False, NullDate(), False, Null, Null, _
-                                     "", 0, 0, "", Today(), 0, ""))
+                         "EQUIVALENTE", "IDUSUARIO", "IDFOLHA", "NOMEFOLHA", "TROCAR", "ID", "POSTELAB", "CHAVEH", "CHAVEV"), _
+                   Array("C", "BF", "DN", "BF", "", "", _
+                          "", "N", "N", "C", "DH", "N", "C", "C", "C"), _
+                   Array(Space(8), False, NullDate(), False, Null, Null, _
+                          "", 0, 0, "", Today(), 0, "", "", ""))
                 
     ' ID DO USUARIO NO SISTEMA
 23  zUSERID = aRETU(7)
     zUSERCHV = aRETU(12)
+    
+    
 24  If Not lRETU Then
 25      If UCase(txtUSUARIO) = "ADMIN" Or UCase(txtUSUARIO) = "ADMINISTRADOR" Or UCase(txtUSUARIO) = "SUPERVISOR" Then
             ''cria admin caso nao exista
@@ -449,7 +451,7 @@ End Sub
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     zMES = mes.Value
     zANO = ano.Value
-    zEMPRESA = TxtEmpresa.Value
+    zEMPRESA = txtempresa.Value
 End Sub
 
 'Private Sub maisemp_Click()
@@ -466,7 +468,7 @@ Private Sub Form_Load()
     EnableCloseButton Me.hWnd, False
     txtUSUARIO = NetworkUserName()
     nTENTA = 0
-    TxtEmpresa.Value = 1
+    txtempresa.Value = 1
     mes.Value = Month(Date)
     ano.Value = Year(Date)
     nTEMPO = 0

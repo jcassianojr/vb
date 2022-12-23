@@ -166,49 +166,52 @@ Private Sub cmdOK_Click()
     Dim RSSENHA As ADODB.Recordset
     Dim strEncryptedText As String
     Dim sSQL As String
-   
+    eRETU01 = ""
+    eRETU02 = ""
+    eRETU03 = ""
+    
     lRETU = True
-    TXTFIELDS(0) = Trim(TXTFIELDS(0))
-    TXTFIELDS(1) = Trim(TXTFIELDS(1))
-    TXTFIELDS(2) = Trim(TXTFIELDS(2))
+    txtFields(0) = Trim(txtFields(0))
+    txtFields(1) = Trim(txtFields(1))
+    txtFields(2) = Trim(txtFields(2))
 
-    If Len(TXTFIELDS(1)) > 8 Then
+    If Len(txtFields(1)) > 8 Then
         Alert "Máximo 8 digitos para a Senha", "Senha Invalida"
-        TXTFIELDS(1).tEXT = ""
-        TXTFIELDS(1).SetFocus
+        txtFields(1).tEXT = ""
+        txtFields(1).SetFocus
         lRETU = False
         Exit Sub
     End If
 
-    If Len(TXTFIELDS(2)) > 8 Then
+    If Len(txtFields(2)) > 8 Then
         Alert "Máximo 8 digitos para a Senha", "Senha Invalida"
-        TXTFIELDS(2).tEXT = ""
-        TXTFIELDS(2).SetFocus
+        txtFields(2).tEXT = ""
+        txtFields(2).SetFocus
         lRETU = False
         Exit Sub
     End If
 
-    If Len(TXTFIELDS(1)) < 8 Then
+    If Len(txtFields(1)) < 8 Then
         Alert "Necessário 8 digitos para a Senha", "Senha Invalida"
-        TXTFIELDS(1).tEXT = ""
-        TXTFIELDS(1).SetFocus
+        txtFields(1).tEXT = ""
+        txtFields(1).SetFocus
         lRETU = False
         Exit Sub
     End If
 
-    If Len(TXTFIELDS(2)) < 8 Then
+    If Len(txtFields(2)) < 8 Then
         Alert "Necessário 8 digitos para a Senha", "Senha Invalida"
-        TXTFIELDS(2).tEXT = ""
-        TXTFIELDS(2).SetFocus
+        txtFields(2).tEXT = ""
+        txtFields(2).SetFocus
         lRETU = False
         Exit Sub
     End If
 
-    If TXTFIELDS(0) = TXTFIELDS(1) Then
+    If txtFields(0) = txtFields(1) Then
         Alert "Senha Precisa ser Diferente da Anterior", "Senha Invalida"
-        TXTFIELDS(1).tEXT = ""
-        TXTFIELDS(2).tEXT = ""
-        TXTFIELDS(1).SetFocus
+        txtFields(1).tEXT = ""
+        txtFields(2).tEXT = ""
+        txtFields(1).SetFocus
         lRETU = False
         Exit Sub
     End If
@@ -224,13 +227,15 @@ Private Sub cmdOK_Click()
 
     With RSSENHA
         If Not .EOF Then
-            strEncryptedText = XOREncryption(strCodeKey, TXTFIELDS(0))
+            strEncryptedText = XOREncryption(strCodeKey, txtFields(0))
             If strEncryptedText = "" & !senha Then
-                If TXTFIELDS(1) = TXTFIELDS(2) Then
-                    strEncryptedText = XOREncryption(strCodeKey, TXTFIELDS(1))
+                If txtFields(1) = txtFields(2) Then
+                    strEncryptedText = XOREncryption(strCodeKey, txtFields(1))
                     RSSENHA("SENHA") = strEncryptedText
                     RSSENHA("TROCAR") = Date + 60
                     .Update
+                    eRETU01 = strEncryptedText
+                    eRETU02 = txtFields(1)
                 Else
                     Alert "Confirmação não confere! A Senha não foi alterada.", "Alteração de senha"
                 End If

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form escuser 
    Caption         =   "Selecione o Usuario Desejado"
@@ -117,7 +117,7 @@ Private Sub EditPf_Click()
     Dim sSQL As String
     Dim cARQ As String
     Dim aRETU As Variant
-    Dim X As Integer
+    Dim x As Integer
  
 
     Grid.Col = 0
@@ -178,7 +178,7 @@ End Sub
 
 Private Sub NovoPF_Click()
     zIDTEMP = FixInt(PegMAXSQL(dbuser, "usuario", "idusuario", 0)) + 1
-    IncluiSQL dbuser, "SELECT * FROM USUARIO WHERE IDUSUARIO=" * zIDTEMP, 2, Array("IDUSUARIO", "USUARIO"), _
+    IncluiSQL dbuser, "SELECT * FROM USUARIO WHERE IDUSUARIO=" & zIDTEMP, 2, Array("IDUSUARIO", "USUARIO"), _
         Array(zIDTEMP, CStr(zIDTEMP)), False, False
     FilRelat
 End Sub

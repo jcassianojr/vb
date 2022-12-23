@@ -108,7 +108,6 @@ Begin VB.Form frmUSER
          TabStop         =   0   'False
          ToolTipText     =   "Senha"
          Top             =   6360
-         Visible         =   0   'False
          Width           =   9615
       End
       Begin VBCCR17.ProgressBar Barra 
@@ -1618,12 +1617,12 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
             frmUSUSENHA.Show vbModal, Me
             If lRETU Then
                 tEXT(2) = eRETU01
-                DTPicker2.Value = eRETU02
+                DTPicker2.Value = Date + 60
             End If
         End If
     End If
 
-       '//AVAL113 E AVAL14 POSTELAA POSTELAB nao sao gravados por isso nao sao atribuidos abaixo
+       ' CHAVEH POSTELAA POSTELAB nao sao gravados por isso nao sao atribuidos abaixo
     If MDG("Gravar e Sair", "Gravando Usuarios") Then
         For nITEM = 0 To 6                       'Array comeca 0
             aVAL(nITEM) = tEXT(nITEM)
@@ -1690,13 +1689,15 @@ Private Sub cmdTroca_Click()
     frmUSUSENHA.Show vbModal, Me
     If lRETU Then
         tEXT(2) = eRETU01
-        DTPicker2.Value = eRETU02
+        DTPicker2.Value = Date + 60
+        tEXT(13) = UCase(CreateSHA256HashString(UCase(Trim(tEXT(1))) + UCase(Trim(eRETU02))))
     End If
     
 End Sub
 
 Private Sub cmdZeraSenha_Click()
     tEXT(2) = " "
+    tEXT(13) = " "
     cmdClose_Click
 End Sub
 
@@ -1794,12 +1795,9 @@ Lblchaveh.Caption = aVAL(16)
 senhapos (LblpostelaB.Caption)
     Visual
 End Sub
-
-
 Private Sub Text_GotFocus(Index As Integer)
     FocusMe
 End Sub
-
 Private Sub tEXT_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 5 Then
         KeyAscii = ValiText(KeyAscii, "#NI")
