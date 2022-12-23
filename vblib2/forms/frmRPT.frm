@@ -165,12 +165,23 @@ Begin VB.Form FrmRpt
       Tab(2).Control(2)=   "lblLabels(21)"
       Tab(2).Control(3)=   "lblLabels(0)"
       Begin XPControls.XPButton Command2 
-         Caption         =   "Limpar"
          Height          =   375
          Left            =   3600
          TabIndex        =   52
          Top             =   600
          Width           =   615
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Limpar"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin VB.TextBox text 
          Height          =   795
@@ -215,7 +226,6 @@ Begin VB.Form FrmRpt
          Width           =   7575
       End
       Begin XPControls.XPButton CmdAbrirCom 
-         Caption         =   "*..."
          Height          =   375
          Index           =   1
          Left            =   3120
@@ -224,9 +234,20 @@ Begin VB.Form FrmRpt
          ToolTipText     =   "Abrir Com Todas Extensoes"
          Top             =   600
          Width           =   375
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "*..."
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton CmdAbrirCom 
-         Caption         =   "Ext..."
          Height          =   375
          Index           =   0
          Left            =   2520
@@ -235,6 +256,18 @@ Begin VB.Form FrmRpt
          ToolTipText     =   "Abrir com Somente da Extencao"
          Top             =   600
          Width           =   495
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Ext..."
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin VB.TextBox text 
          BackColor       =   &H00C0FFFF&
@@ -1021,14 +1054,14 @@ Private Sub CmdAbrirCom_Click(Index As Integer)
     'Dim cEXTENSAO As String
     'Dim nPOS As Long
 
-    eLOCALIZA = tEXT(5)
+    eLOCALIZA = Text(5)
     ePASS01 = ""
     If Index = 0 Then
-        ePASS01 = NomeEXT(FixStr(tEXT(4).tEXT))
+        ePASS01 = NomeEXT(FixStr(Text(4).Text))
     End If
     EscRptExec.Show vbModal, Me
     If lRETU Then
-        tEXT(5).tEXT = eRETU02
+        Text(5).Text = eRETU02
     End If
     
 End Sub
@@ -1040,9 +1073,9 @@ End Sub
 Private Sub CmdEDIT_Click(Index As Integer)
     Dim cEXTENSAO As String
     Dim nPOS As Long
-    eLOCALIZA = tEXT(5)
+    eLOCALIZA = Text(5)
     If Index = 0 Then
-        cARQRTF = tEXT(4)
+        cARQRTF = Text(4)
         nPOS = InStrRev(cARQRTF, ".")
         If nPOS > 0 Then
             cEXTENSAO = Mid(cARQRTF, nPOS + 1)
@@ -1066,22 +1099,22 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub Command2_Click()
-    tEXT(5).tEXT = ""
+    Text(5).Text = ""
 End Sub
 
 Private Sub escarq_Click(Index As Integer)
     Index = Index + 18
-    ePASS01 = tEXT(Index)
+    ePASS01 = Text(Index)
     FrmPegdb.Show vbModal, Me
     If lRETU Then
-        tEXT(Index) = eRETU01
+        Text(Index) = eRETU01
     End If
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     If MDG("Gravar e Sair", "Gravando ") Then
         For nITEM = 0 To 23
-            aVAL(nITEM) = tEXT(nITEM)
+            aVAL(nITEM) = Text(nITEM)
         Next nITEM
         For nITEM = 24 To 26
             aVAL(nITEM) = FixNumBol(chkFields(nITEM).Value)
@@ -1138,7 +1171,7 @@ Private Sub escolherrpt_Click()
             sPath = Caminex(zRPTCAM)
         End If
     End If
-    tEXT(4).tEXT = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
+    Text(4).Text = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
 
 End Sub
 
@@ -1182,7 +1215,7 @@ Private Sub Form_Load()
                  "", "", "", "", False, False, False)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For nITEM = 0 To 23
-        tEXT(nITEM) = aVAL(nITEM)
+        Text(nITEM) = aVAL(nITEM)
     Next nITEM
     For nITEM = 24 To 26
         chkFields(nITEM) = aVAL(nITEM)

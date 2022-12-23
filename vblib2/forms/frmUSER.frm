@@ -1,60 +1,116 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form frmUSER 
    Caption         =   "Cadastro de Usuário"
-   ClientHeight    =   6285
+   ClientHeight    =   7500
    ClientLeft      =   1110
    ClientTop       =   345
    ClientWidth     =   10515
    HelpContextID   =   12
    Icon            =   "frmUSER.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6285
+   ScaleHeight     =   7500
    ScaleWidth      =   10515
    WindowState     =   2  'Maximized
    Begin vbExtra.SizeGrip SizeGrip1 
       Height          =   285
       Left            =   10230
-      Top             =   6000
+      Top             =   7215
       Width           =   285
       _ExtentX        =   503
       _ExtentY        =   503
    End
    Begin XPControls.XPButton CmdLibGrp 
-      Caption         =   "Integrados"
       Height          =   375
       Index           =   11
       Left            =   7800
       TabIndex        =   46
       Top             =   3600
       Width           =   1155
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "Integrados"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
    Begin XPControls.XPButton CmdLibGrp 
-      Caption         =   "Folha"
       Height          =   375
       Index           =   10
       Left            =   7800
       TabIndex        =   45
       Top             =   3240
       Width           =   1155
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "Folha"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
    Begin XPControls.XPButton CmdLibGrp 
-      Caption         =   "Documentos"
       Height          =   375
       Index           =   9
       Left            =   7800
       TabIndex        =   44
       Top             =   2880
       Width           =   1155
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "Documentos"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
    Begin VB.Frame Frame1 
-      Height          =   5925
+      Height          =   7005
       Left            =   120
       TabIndex        =   8
       Top             =   120
       Width           =   10275
+      Begin VB.TextBox tEXT 
+         BackColor       =   &H00C0FFFF&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   13
+         Left            =   240
+         Locked          =   -1  'True
+         TabIndex        =   61
+         TabStop         =   0   'False
+         ToolTipText     =   "Senha"
+         Top             =   6360
+         Visible         =   0   'False
+         Width           =   9615
+      End
       Begin VBCCR17.ProgressBar Barra 
          Height          =   375
          Left            =   5520
@@ -126,60 +182,125 @@ Begin VB.Form frmUSER
          EndProperty
       End
       Begin XPControls.XPButton CmdApaAll 
-         Caption         =   "ApagarTudo"
          Height          =   375
          Left            =   7560
          TabIndex        =   47
          Top             =   3960
          Width           =   1215
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "ApagarTudo"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton CmdLibGrp 
-         Caption         =   "Relatorios"
          Height          =   375
          Index           =   8
          Left            =   7680
          TabIndex        =   43
          Top             =   2400
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Relatorios"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton CmdLibGrp 
-         Caption         =   "Integrados"
          Height          =   375
          Index           =   7
          Left            =   6360
          TabIndex        =   41
          Top             =   3480
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Integrados"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton CmdLibGrp 
-         Caption         =   "Integrados"
          Height          =   375
          Index           =   6
          Left            =   5040
          TabIndex        =   40
          Top             =   3480
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Integrados"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton CmdLibGrp 
-         Caption         =   "Folha"
          Height          =   375
          Index           =   5
          Left            =   6360
          TabIndex        =   39
          Top             =   3120
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Folha"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton CmdLibGrp 
-         Caption         =   "Folha"
          Height          =   375
          Index           =   4
          Left            =   5040
          TabIndex        =   38
          Top             =   3120
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Folha"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton Cmdimpwrpt 
-         Caption         =   "Integrados"
          Height          =   375
          Index           =   3
          Left            =   3720
@@ -187,9 +308,20 @@ Begin VB.Form frmUSER
          ToolTipText     =   "Importar Direito Documentos Outro Usuario"
          Top             =   3480
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Integrados"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton Cmdimpwrpt 
-         Caption         =   "Folha"
          Height          =   375
          Index           =   2
          Left            =   3720
@@ -197,6 +329,18 @@ Begin VB.Form frmUSER
          ToolTipText     =   "Importar Direito Documentos Outro Usuario"
          Top             =   3120
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Folha"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin VB.CheckBox chkAtivo 
          Caption         =   "Ativo"
@@ -218,7 +362,6 @@ Begin VB.Form frmUSER
          Width           =   915
       End
       Begin XPControls.XPButton Cmdimpwrpt 
-         Caption         =   "Relatorios"
          Height          =   375
          Index           =   0
          Left            =   3720
@@ -226,9 +369,20 @@ Begin VB.Form frmUSER
          ToolTipText     =   "Importar Direitos Relatorio Outro Usuario"
          Top             =   2400
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Relatorios"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton Cmdimpwrpt 
-         Caption         =   "Documentos"
          Height          =   375
          Index           =   1
          Left            =   3720
@@ -236,63 +390,142 @@ Begin VB.Form frmUSER
          ToolTipText     =   "Importar Direito Documentos Outro Usuario"
          Top             =   2760
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Documentos"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton Cmdimpmenu 
-         Caption         =   "Importar Direito Menus"
          Height          =   375
          Left            =   1800
          TabIndex        =   29
          ToolTipText     =   "Importar Direito Menus Outro Usuario"
          Top             =   3840
          Width           =   1815
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Importar Direito Menus"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton CMDIMPBTN 
-         Caption         =   "Importar Direito Botoes"
          Height          =   375
          Left            =   1800
          TabIndex        =   28
          ToolTipText     =   "Importar Direito Documentos Outro Usuario"
          Top             =   4260
          Width           =   1815
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Importar Direito Botoes"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton CmdLibGrp 
-         Caption         =   "Relatorios"
          Height          =   375
          Index           =   0
          Left            =   5040
          TabIndex        =   27
          Top             =   2400
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Relatorios"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton CmdLibGrp 
-         Caption         =   "Documentos"
          Height          =   375
          Index           =   1
          Left            =   5040
          TabIndex        =   26
          Top             =   2760
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Documentos"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton CmdLibGrp 
-         Caption         =   "Documentos"
          Height          =   375
          Index           =   2
          Left            =   6360
          TabIndex        =   25
          Top             =   2760
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Documentos"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin XPControls.XPButton CmdLibGrp 
-         Caption         =   "Relatorios"
          Height          =   375
          Index           =   3
          Left            =   6360
          TabIndex        =   24
          Top             =   2400
          Width           =   1155
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Caption         =   "Relatorios"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
       End
       Begin VB.TextBox DIZAPU 
          Enabled         =   0   'False
+         ForeColor       =   &H8000000D&
          Height          =   435
          Left            =   3120
          Locked          =   -1  'True
@@ -677,13 +910,22 @@ Begin VB.Form frmUSER
             Strikethrough   =   0   'False
          EndProperty
       End
+      Begin VB.Label Lblchaveh 
+         BackColor       =   &H00C0FFFF&
+         Caption         =   "chaveh"
+         Height          =   255
+         Left            =   240
+         TabIndex        =   60
+         Top             =   6000
+         Width           =   9615
+      End
       Begin VB.Label LblpostelaB 
          BackColor       =   &H00C0FFFF&
          Caption         =   "postelab"
          Height          =   255
          Left            =   3360
          TabIndex        =   59
-         Top             =   5400
+         Top             =   5640
          Width           =   2655
       End
       Begin VB.Label Lblpostelaa 
@@ -692,7 +934,7 @@ Begin VB.Form frmUSER
          Height          =   255
          Left            =   240
          TabIndex        =   58
-         Top             =   5400
+         Top             =   5640
          Width           =   3015
       End
       Begin VB.Label Label5 
@@ -1392,8 +1634,9 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
         aVAL(12) = DTPicker2
         aVAL(7) = DTPicker3.Hour & ":" & DTPicker3.Minute
         aVAL(8) = DTPicker4.Hour & ":" & DTPicker4.Minute
-        'volta de 15 para 13 para nao gravar postelaa postelab
-        nCAMPOS = 13
+        aVAL(13) = tEXT(13) ' CHAVEV
+        'volta para 14 para nao gravar postelaa postelab chaveh estao apenas para exibir no label
+        nCAMPOS = 14
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
         GravaLog nFORMID, 0, "Gravou Usuario"
     Else
@@ -1523,12 +1766,12 @@ Private Sub Form_Load()
     IdForm = ePASS02
     zIDTEMP = ePASS02
 
-    nCAMPOS = 15
+    nCAMPOS = 17
     aCAM = Array("IDUSUARIO", "USUARIO", "SENHA", "EQUIVALENTE", _
                  "DATAULT", "IDFOLHA", "NOMEFOLHA", "HORAINI", "HORAFIM", _
-                 "ATIVO", "WEEKEND", "DATAVAL", "TROCAR", "POSTELAA", "POSTELAB")
-    aFOR = Array("N", "C", "C", "C", "D", "N", "C", "", "", "BN", "BN", "DC", "DC", "C", "C")
-    aPAD = Array(0, "", "", "", "", 0, "", Now, Now, False, False, Today() + 30, Today() + 60, "", "")
+                 "ATIVO", "WEEKEND", "DATAVAL", "TROCAR", "chavev", "POSTELAA", "POSTELAB", "CHAVEH")
+    aFOR = Array("N", "C", "C", "C", "D", "N", "C", "", "", "BN", "BN", "DC", "DC", "C", "C", "C", "C")
+    aPAD = Array(0, "", "", "", "", 0, "", Now, Now, False, False, Today() + 30, Today() + 60, "", "", "", "")
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For nITEM = 0 To 6                           '' array comeca 0
         tEXT(nITEM) = aVAL(nITEM)
@@ -1544,8 +1787,10 @@ Private Sub Form_Load()
     If IsDate(aVAL(12)) Then
         DTPicker2 = aVAL(12)
     End If
-Lblpostelaa.Caption = aVAL(13)
-LblpostelaB.Caption = aVAL(14)
+    tEXT(13) = aVAL(13)
+Lblpostelaa.Caption = aVAL(14)
+LblpostelaB.Caption = aVAL(15)
+Lblchaveh.Caption = aVAL(16)
 senhapos (LblpostelaB.Caption)
     Visual
 End Sub
