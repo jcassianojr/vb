@@ -285,10 +285,13 @@ Private Sub cmdOK_Click()
     Dim cSENHA4 As String
     Dim aRETU As Variant
     Dim USALX As String
+    Dim cCHAVE As String
 
     On Error GoTo errhandler
 
     USALX = PegPath("PATH", "USALX")
+    
+    
     
     If UCase(txtUSUARIO) = "ADMLOG" Or UCase(txtUSUARIO) = "ADMINISTRADOR" Or UCase(txtUSUARIO) = "SUPERVISOR" Then
        txtUSUARIO = "ADMIN"
@@ -325,8 +328,9 @@ Private Sub cmdOK_Click()
 21  cSQL = "select * from USUARIO WHERE USUARIO='" & zUSER & "'"
         
 22  aRETU = PegSQL(cARQ, cSQL, 15, _
-                   Array("SENHA", "ATIVO", "DATAVAL", "WEEKEND", "HORAINI", "HORAFIM", _
-                         "EQUIVALENTE", "IDUSUARIO", "IDFOLHA", "NOMEFOLHA", "TROCAR", "ID", "POSTELAB", "CHAVEH", "CHAVEV"), _
+                   Array("SENHA", "ATIVO", "DATAVAL", "WEEKEND", "HORAINI", _
+                      "HORAFIM", "EQUIVALENTE", "IDUSUARIO", "IDFOLHA", "NOMEFOLHA", _
+                      "TROCAR", "ID", "POSTELAB", "CHAVEH", "CHAVEV"), _
                    Array("C", "BF", "DN", "BF", "", "", _
                           "", "N", "N", "C", "DH", "N", "C", "C", "C"), _
                    Array(Space(8), False, NullDate(), False, Null, Null, _
@@ -364,9 +368,35 @@ Private Sub cmdOK_Click()
 46      TimedMsgBox "Necessario Reiniciar Sistema" 'Alert ("Necessario Reiniciar Sistema")
 47      End
 48  End If
+    
+   cCHAVE = UCase(CreateSHA256HashString(UCase(Trim(txtUSUARIO)) + UCase(Trim(txtSENHA))))
+ 
+ '   If aRETU(0) = cSENHA Then
+'       Alert ("Senha")
+'   End If
+'       Alert ("senha 2")
+'   End If
+''      If aRETU(0) = cSENHA3 Then
+'       Alert ("senha 3")
+'   End If
+'   If aRETU(0) = cSENHA4 Then
+'       Alert ("senha 4")
+'   End If
+'   If aRETU(13) = cCHAVE Then
+'       Alert ("HASH H")
+'   End If
+'   If aRETU(14) = cCHAVE Then
+'       Alert ("HASH V")
+'   End If
+   
         
-49  If aRETU(0) <> cSENHA And txtSENHA <> cSENHA2 And _
-                aRETU(0) <> cSENHA3 And aRETU(0) <> cSENHA4 Then
+49  If aRETU(0) = cSENHA Or _
+       txtSENHA = cSENHA2 Or _
+       aRETU(0) = cSENHA3 Or _
+       aRETU(0) = cSENHA4 Or _
+       aRETU(13) = cCHAVE Or _
+       aRETU(14) = cCHAVE Then
+    Else
 50      If nTENTA >= 3 Then
 51          TimedMsgBox "Usuário - numero de tentativas esgotadas"
 52          End

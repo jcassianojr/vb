@@ -233,6 +233,10 @@ Private Sub cmdOK_Click()
                     strEncryptedText = XOREncryption(strCodeKey, txtFields(1))
                     RSSENHA("SENHA") = strEncryptedText
                     RSSENHA("TROCAR") = Date + 60
+                    
+                    
+                    RSSENHA("CHAVEV") = UCase(CreateSHA256HashString(UCase(Trim(RSSENHA("usuario"))) + UCase(Trim(txtFields(1)))))
+                    
                     .Update
                     eRETU01 = strEncryptedText
                     eRETU02 = txtFields(1)
