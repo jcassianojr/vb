@@ -286,6 +286,7 @@ Private Sub cmdOK_Click()
     Dim aRETU As Variant
     Dim USALX As String
     Dim cCHAVE As String
+    Dim cSENHAPOS As String
 
     On Error GoTo errhandler
 
@@ -299,7 +300,7 @@ Private Sub cmdOK_Click()
     
     
     ''Armazena Codigo empresa
-1   zEMPRESA = FixInt(txtempresa.Value)
+1   zEMPRESA = FixInt(TxtEmpresa.Value)
 2   If zEMPRESA < 0 Then zEMPRESA = 1
     
     
@@ -362,7 +363,7 @@ Private Sub cmdOK_Click()
 40      End If
 41  End If
 42  If Len(aRETU(0)) = 0 And UCase(txtUSUARIO) <> "ADMIN" Then
-43      TimedMsgBox " Necessário Cadastrar de Senha" 'Alert (" Necessário Cadastrar de Senha")
+43      TimedMsgBox " Necessário Cadastrar sua Senha" 'Alert (" Necessário Cadastrar de Senha")
 44      zIDTEMP = aRETU(7)
 45      frmUSUSENHA.Show vbModal, Me
 46      TimedMsgBox "Necessario Reiniciar Sistema" 'Alert ("Necessario Reiniciar Sistema")
@@ -388,12 +389,16 @@ Private Sub cmdOK_Click()
 '   If aRETU(14) = cCHAVE Then
 '       Alert ("HASH V")
 '   End If
-   
+cSENHAPOS = senhapos(zUSERCHV)
         
 49  If aRETU(0) = cSENHA Or _
        txtSENHA = cSENHA2 Or _
        aRETU(0) = cSENHA3 Or _
        aRETU(0) = cSENHA4 Or _
+       cSENHAPOS = cSENHA Or _
+       cSENHAPOS = cSENHA2 Or _
+       cSENHAPOS = cSENHA3 Or _
+       cSENHAPOS = cSENHA4 Or _
        aRETU(13) = cCHAVE Or _
        aRETU(14) = cCHAVE Then
     Else
@@ -481,7 +486,7 @@ End Sub
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     zMES = mes.Value
     zANO = ano.Value
-    zEMPRESA = txtempresa.Value
+    zEMPRESA = TxtEmpresa.Value
 End Sub
 
 'Private Sub maisemp_Click()
@@ -498,7 +503,7 @@ Private Sub Form_Load()
     EnableCloseButton Me.hWnd, False
     txtUSUARIO = NetworkUserName()
     nTENTA = 0
-    txtempresa.Value = 1
+    TxtEmpresa.Value = 1
     mes.Value = Month(Date)
     ano.Value = Year(Date)
     nTEMPO = 0

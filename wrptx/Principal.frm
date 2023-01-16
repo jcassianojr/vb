@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":058A
-            TextSave        =   "15:17"
+            TextSave        =   "16:42"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -69,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principal.frx":0B24
-            TextSave        =   "22/12/2022"
+            TextSave        =   "15/01/2023"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -105,6 +105,11 @@ Dim cARQICO As String
     CenterFormToScreen Me
     cmdline = Trim(Command())
     
+'   CheckPass "Teste1#z", True
+'CheckPass "Teste#z", True
+'CheckPass "Teste1z", True
+'CheckPass "este1#z", True
+'CheckPass "TESTE1#Z", True
     
    ' cARQ = CreateSHA256HashString("arroz e feijao")
     

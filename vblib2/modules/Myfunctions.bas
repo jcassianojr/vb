@@ -163,7 +163,8 @@ Declare Function SetLocaleInfo Lib "kernel32" Alias _
 
 Declare Function GetUserDefaultLCID% Lib "kernel32" ()
 Declare Function GetSystemDefaultLCID Lib "kernel32" () As Long
-
+Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
 Public Function tocar(cARQ)
     PlaySound (cARQ), ByVal 0&, SND_FILENAME Or SND_ASYNC
 End Function
@@ -201,9 +202,9 @@ End Function
 
 Public Function ComboLostFocus(ByRef Combo1)
     With Combo1
-        If Len(.tEXT) Then
+        If Len(.Text) Then
             'Procura pelo texto digitado
-            strPartial = .tEXT
+            strPartial = .Text
             i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
             'Se não achou, retorna      o focus para o Combo
             If i = CB_ERR Then .SetFocus
@@ -214,7 +215,7 @@ End Function
 Public Function ComboChange(ByRef Combo1)
     With Combo1
         'Procura pelo texto já digitado
-        strPartial = .tEXT
+        strPartial = .Text
         i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                         ByVal strPartial)
 
@@ -367,12 +368,12 @@ Public Function GeraSplit(ByVal aVAR As Variant, Optional ByVal cINI As String =
                           Optional ByVal cMID As String = "", _
                           Optional ByVal cFIM As String = "") As String
     Dim nUSO As Long
-    Dim x As Long
+    Dim X As Long
     nUSO = UBound(aVAR) - 1
     GeraSplit = cINI & aVAR(0) & cMID
-    For x = 1 To nUSO
-        GeraSplit = GeraSplit & aVAR(x) & cMID
-    Next x
+    For X = 1 To nUSO
+        GeraSplit = GeraSplit & aVAR(X) & cMID
+    Next X
     GeraSplit = GeraSplit & aVAR(nUSO + 1)
     GeraSplit = GeraSplit & cFIM
 End Function
@@ -1591,11 +1592,11 @@ Public Function ShellEx( _
 End Function
 
 Public Function SomaArr(ByVal aARRAY As Variant, ByVal nITEM As Integer)
-    Dim x                As Integer
+    Dim X                As Integer
     SomaArr = 0
-    For x = 0 To nITEM - 1
-        SomaArr = SomaArr + FixNum(aARRAY(x))
-    Next x
+    For X = 0 To nITEM - 1
+        SomaArr = SomaArr + FixNum(aARRAY(X))
+    Next X
 End Function
 
 Public Function SomaExt(ByVal cARQ As String, Optional ByVal cEXT As String = ".MDB") As String
@@ -1615,130 +1616,362 @@ Public Function StrZero(ByVal nNUM, Optional ByVal nLEN As Integer = 0)
     StrZero = Right(String(nLEN, "0") & CStr(nNUM), nLEN)
 End Function
 
+Function Convert2ansi(ByVal in_string As String) As String
+Dim Out_String As String * 256
+Dim t As String
+t = OemToChar(in_string, Out_String)
+Convert2ansi = Out_String
+End Function
+Function Convert2oem(ByVal in_string As String) As String
+Dim Out_String As String * 256
+Dim t As String
+t = CharToOem(in_string, Out_String)
+Convert2oem = Out_String
+End Function
 Public Function ConvOEM(ByVal texto As String) As String
-    ConvOEM = CharConv(texto, "ANSI", "OEM")
+    ConvOEM = Convert2oem(cTexto) 'CharConv(texto, "ANSI", "OEM")
 End Function
 
 Public Function ConvOEM2(ByVal texto As String) As String
-    ConvOEM2 = CharConv(texto, "MEUANSI", "MEUOEM")
+    ConvOEM2 = Convert2oem(cTexto)  ' CharConv(texto, "MEUANSI", "MEUOEM")
 End Function
 
 Public Function ConvAnsi2(ByVal texto As String) As String
-    ConvAnsi2 = CharConv(texto, "MEUOEM", "MEUANSI")
+    ConvAnsi2 = Convert2ansi(texto) 'CharConv(texto, "MEUOEM", "MEUANSI")
 End Function
 
 Public Function ConvAnsi(ByVal texto As String) As String
-    ConvAnsi = CharConv(texto, "OEM", "ANSI")
+    ConvAnsi = Convert2ansi(texto)  ' CharConv(texto, "OEM", "ANSI")
 End Function
 
 Public Function Tirace(ByVal texto As String) As String
-    texto = CharConv(texto, "UACENTO", "UACETIR")
-    texto = CharConv(texto, "LACENTO", "LACETIR")
-    Tirace = texto
+   ' texto = CharConv(texto, "UACENTO", "UACETIR")
+   ' texto = CharConv(texto, "LACENTO", "LACETIR")
+    Tirace = tirace2(texto)
 End Function
-
 Public Function StrToArray(ByVal cGRUPO As String) As Variant
-    Dim x, nLEN As Integer
+    Dim X, nLEN As Integer
     Dim aUSO As Variant
     Dim cCHAR, eCNV As String
+    ' utilizando agora Convert2ansi Convert2oem tirace2
     Select Case cGRUPO
-    Case "OEM"
-        eCNV = "€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ ¡¢£¤¥¦§¨©ª«¬­®¯àáâãäåæçèéêëìíîïðñòóôõö÷øù³Å¿ÄØ"
-    Case "ANSI"
-        eCNV = "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ¨¸¥´ªº²³¯¿¦†¬­‡"
-    Case "MEUANSI"
-        eCNV = "ªºÇçÅåÀàÈèÌìÒòÙùÄäËëÏïÖöÜüÂâÊêÎîÔôÛûÁáÉéÍíÓóÚúÝýÃãÕõÑñ|"
-    Case "MEUOEM"
-        ''Numeral
-        eCNV = "¦§"
-        ''Cidilha
-        eCNV = eCNV & "€‡"
-        ''Grau
-        eCNV = eCNV & "†"
-        ''Crase
-        eCNV = eCNV & "·…ÔŠÞã•ë—"
-        ''Trema
-        eCNV = eCNV & "Ž„Ó‰Ø‹™”š"
-        ''cIRCUNFLEXO
-        eCNV = eCNV & "¶ƒÒˆ×Œâ“ê–"
-        ''Agudo
-        eCNV = eCNV & "µ ‚Ö¡à¢é£íì"
-        '''Til
-        eCNV = eCNV & "ÇÆåä¥¤"
-        ''Tracos quadro
-        eCNV = eCNV & "Ý"
-           
-        ''"_" Caracter so maiscula ou minuscula usado "_" manter tamanho array
-    Case "UACENTO"
-        eCNV = "ÇÁÉÍÓÚÀÃÕÂÊÔÄÖÜªº__Å"
-    Case "LACENTO"
-        eCNV = "çáéíóúàãõâêôäöüªºòù_"
-    Case "LACETIR"
-        eCNV = "caeiouaaoaeoaouaoou_"
-    Case "UACETIR"
-        eCNV = "CAEIOUAAOAEOAOUao__A"
-    Case Else
-        eCNV = cGRUPO
+'        Case "OEM"
+'            eCNV = "€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ ¡¢£¤¥¦§¨©ª«¬­®¯àáâãäåæçèéêëìíîïðñòóôõö÷øù³Å¿ÄØ"
+'        Case "ANSI"
+'            eCNV = "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ¨¸¥´ªº²³¯¿¦†¬­‡"
+'        Case "MEUANSI"
+'            eCNV = "ªºÇçÅåÀàÈèÌìÒòÙùÄäËëÏïÖöÜüÂâÊêÎîÔôÛûÁáÉéÍíÓóÚúÝýÃãÕõÑñ|"
+'        Case "MEUOEM"
+'            ''Numeral
+'            eCNV = "¦§"
+'            ''Cidilha
+'            eCNV = eCNV & "€‡"
+'            ''Grau
+'            eCNV = eCNV & "†"
+'            ''Crase
+'            eCNV = eCNV & "·…ÔŠÞã•ë—"
+'            ''Trema
+'            eCNV = eCNV & "Ž„Ó‰Ø‹™”š"
+'            ''cIRCUNFLEXO
+'            eCNV = eCNV & "¶ƒÒˆ×Œâ“ê–"
+'            ''Agudo
+'            eCNV = eCNV & "µ ‚Ö¡à¢é£íì"
+'            '''Til
+'            eCNV = eCNV & "ÇÆåä¥¤"
+'            ''Tracos quadro
+'            eCNV = eCNV & "Ý"
+'            ''"_" Caracter so maiscula ou minuscula usado "_" manter tamanho array
+'        Case "UACENTO"
+'            eCNV = "ÇÁÉÍÓÚÀÃÕÂÊÔÄÖÜªº__Å"
+ '       Case "LACENTO"
+ '           eCNV = "çáéíóúàãõâêôäöüªºòù_"
+ '       Case "LACETIR"
+ '           eCNV = "caeiouaaoaeoaouaoou_"
+ '       Case "UACETIR"
+ '           eCNV = "CAEIOUAAOAEOAOUao__A"
+        Case Else
+            eCNV = cGRUPO
     End Select
 
     nLEN = Len(eCNV)
     ReDim aUSO(nLEN)
-    For x = 1 To nLEN
-        cCHAR = Mid(eCNV, x, 1)
+    For X = 1 To nLEN
+        cCHAR = Mid(eCNV, X, 1)
         Select Case cCHAR
         Case "ª"
-            aUSO(x - 1) = "a."
+            aUSO(X - 1) = "a."
 
         Case "º"
-            aUSO(x - 1) = "o."
+            aUSO(X - 1) = "o."
 
         Case Else
-            aUSO(x - 1) = cCHAR
+            aUSO(X - 1) = cCHAR
 
         End Select
-    Next x
+    Next X
     StrToArray = aUSO
 End Function
 
 Public Function TiraSin(ByVal texto As String)
-    For x = 0 To 31
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 33 To 38
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 39 To 47
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 58 To 64
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 91 To 96
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 123 To 127
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 155 To 159
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 168 To 180
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 184 To 197
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 200 To 209
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 217 To 223
-        texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 238 To 255
-        texto = Replace(texto, Chr(x), "")
-    Next x
+    For X = 0 To 31
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 33 To 38
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 39 To 47
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 58 To 64
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 91 To 96
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 123 To 127
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 155 To 159
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 168 To 180
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 184 To 197
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 200 To 209
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 217 To 223
+        texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 238 To 255
+        texto = Replace(texto, Chr(X), "")
+    Next X
     TiraSin = texto
 End Function
+Function CheckPass(ByVal cTexto As String, Optional ByVal lMES As Boolean = True) As Boolean
+
+Dim lMAIS, lMINUS, lDIG, lSYMBOL, l8DIG As Boolean
+Dim i As Integer
+
+CheckPass = False
+lMAIS = False
+lMINUS = False
+lDIG = False
+lSYMBOL = False
+l8DIG = False
+
+
+For i = 1 To Len(cTexto)
+    If InStr("0123456789", Mid(cTexto, i, 1)) > 0 Then
+       lDIG = True
+    End If
+    If InStr("abcdefghijklmnopqrstuvwxyz", Mid(cTexto, i, 1)) > 0 Then
+       lMINUS = True
+    End If
+    If InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", Mid(cTexto, i, 1)) > 0 Then
+       lMAIS = True
+    End If
+    If InStr("-+_!@#$%^&*., ?", Mid(cTexto, i, 1)) > 0 Then
+       lSYMBOL = True
+    End If
+Next
+
+If Len(Trim(cTexto)) >= 8 Then
+    l8DIG = True
+End If
+
+
+If lMAIS And lMINUS And lDIG And lSYMBOL And l8DIG Then
+   CheckPass = True
+Else
+   If lMES Then
+       If Not lMAIS Then
+         Alert (" Sem maisculas")
+       End If
+       If Not lMINUS Then
+         Alert (" Sem minusclas")
+       End If
+        If Not lDIG Then
+         Alert (" Sem numeros")
+       End If
+        If Not lSYMBOL Then
+          Alert (" Sem simbulos")
+       End If
+       If Not l8DIG Then
+          Alert ("Minimo 8 Digitos")
+       End If
+   End If
+End If
+
+End Function
+Public Function tirace2(ByVal cXml As String) As String
+ '  dim cRemoveTag AS STRING
+ '  DIM nPos AS INTEGER
+   Dim nAscii As Integer
+   Dim ltroca As Boolean
+   Dim nCont As Integer
+   Dim cLETRA As String
+
+  '' cRemoveTag := { ;
+  ''    [<?xml version="1.0" encoding="utf-8"?>], ; // Petrobras inventou de usar assim
+  ''    [<?xml version="1.0" encoding="ISO-8859-1"?>], ; // Petrobras agora assim
+  ''    [<?xml version="1.0" encoding="UTF-8"?>], ; // o mais correto
+  ''    [<?xml version="1.00"?>], ;
+  ''    [<?xml version="1.0"?>] }''
+
+    ''  cXml := StrTran( cXml, , "" )
+      
+ ''  IF ! ["] $ cXml // Pode ser usado aspas simples
+ ''     cXml := replace( cXml, ['], ["] )
+ ''  ENDIF
+ ''  IF Chr(195) $ cXml
+ ''     nPos := At( Chr(195), cXml )
+ ''     IF Asc( Substr( cXml, nPos + 1 ) ) > 122
+ ''        cXml := hb_Utf8ToStr( cXml )
+ ''     ENDIF
+ ''  ENDIF
+ 
+   For nCont = 1 To 2
+      cXml = Replace(cXml, Chr(26), "")
+      cXml = Replace(cXml, Chr(13), "")
+      cXml = Replace(cXml, Chr(10), "")
+      If InStr(Chr(239) + Chr(187) + Chr(191), Mid(cXml, 1, 1)) Then
+         cXml = Mid(cXml, 2)
+      End If
+      cXml = Replace(cXml, " />", "/>")
+      cXml = Replace(cXml, Chr(195) + Chr(173), "i")
+      cXml = Replace(cXml, Chr(195) + Chr(135), "C")
+      cXml = Replace(cXml, Chr(195) + Chr(141), "I")
+      cXml = Replace(cXml, Chr(195) + Chr(163), "a")
+      cXml = Replace(cXml, Chr(195) + Chr(167), "c")
+      cXml = Replace(cXml, Chr(195) + Chr(161), "a")
+      cXml = Replace(cXml, Chr(195) + Chr(131), "A")
+      cXml = Replace(cXml, Chr(194) + Chr(186), "o.")
+      cXml = Replace(cXml, Chr(195) + Chr(162), "a")
+      cXml = Replace(cXml, Chr(195) + Chr(161), "a")
+      cXml = Replace(cXml, Chr(195) + Chr(163), "a")
+      cXml = Replace(cXml, Chr(195) + Chr(173), "i")
+      cXml = Replace(cXml, Chr(195) + Chr(179), "o")
+      cXml = Replace(cXml, Chr(195) + Chr(167), "c")
+      cXml = Replace(cXml, Chr(195) + Chr(169), "e")
+      cXml = Replace(cXml, Chr(195) + Chr(170), "e")
+      cXml = Replace(cXml, Chr(195) + Chr(181), "o")
+      cXml = Replace(cXml, Chr(195) + Chr(160), "o")
+      cXml = Replace(cXml, Chr(195) + Chr(181), "o")
+      cXml = Replace(cXml, Chr(195) + Chr(129), "A")
+      cXml = Replace(cXml, Chr(226) + Chr(128) + Chr(156), "*")   '// aspas de destaque "cames"
+      cXml = Replace(cXml, Chr(226) + Chr(128) + Chr(157), "*")   '// aspas de destaque "cames"
+      cXml = Replace(cXml, Chr(195) + Chr(180), "o")
+      cXml = Replace(cXml, Chr(195) + Chr(186), "u")
+      cXml = Replace(cXml, Chr(195) + Chr(147), "O")
+      cXml = Replace(cXml, Chr(226) + Chr(128) + Chr(153), " ")   ' // caixa d'agua
+      cXml = Replace(cXml, Chr(226) + Chr(128) + Chr(147), "-")   '// - mesmo
+      cXml = Replace(cXml, Chr(194) + Chr(179), "3")   '// m3
+      '// so pra corrigir no MySql
+      cXml = Replace(cXml, "+" + Chr(129), "A")
+      cXml = Replace(cXml, "+" + Chr(137), "E")
+      cXml = Replace(cXml, "+" + Chr(131), "A")
+      cXml = Replace(cXml, "+" + Chr(135), "C")
+      cXml = Replace(cXml, "?" + Chr(167), "c")
+      cXml = Replace(cXml, "?" + Chr(163), "a")
+      cXml = Replace(cXml, "?" + Chr(173), "i")
+      cXml = Replace(cXml, "?" + Chr(131), "A")
+      cXml = Replace(cXml, "?" + Chr(161), "a")
+      cXml = Replace(cXml, "?" + Chr(141), "I")
+      cXml = Replace(cXml, "?" + Chr(135), "C")
+      cXml = Replace(cXml, Chr(195) + Chr(156), "a")
+      cXml = Replace(cXml, Chr(195) + Chr(159), "A")
+      cXml = Replace(cXml, "?" + Chr(129), "A")
+      cXml = Replace(cXml, "?" + Chr(137), "E")
+      cXml = Replace(cXml, Chr(195) + "?", "C")
+      cXml = Replace(cXml, "?" + Chr(149), "O")
+      cXml = Replace(cXml, "?" + Chr(154), "U")
+      cXml = Replace(cXml, "+" + Chr(170), "o")
+      cXml = Replace(cXml, "?" + Chr(128), "A")
+      cXml = Replace(cXml, Chr(195) + Chr(166), "e")
+      cXml = Replace(cXml, Chr(135) + Chr(227), "ca")
+      cXml = Replace(cXml, "n" + Chr(227), "na")
+      cXml = Replace(cXml, Chr(162), "o")
+      cXml = Replace(cXml, " " + Chr(241) + " ", " ")
+      cXml = Replace(cXml, Chr(176), "")   ' graus
+      cXml = Replace(cXml, Chr(186), "o")   ' numero
+      cXml = Replace(cXml, Chr(220), "U")   ' u com trema
+      cXml = Replace(cXml, Chr(170), "")   ' desconhecido
+   Next
+   For nCont = 1 To Len(cXml)
+       cLETRA = Mid(cXml, nCont, 1)
+       nAscii = Asc(cLETRA)
+       ltroca = True
+       If InStr("0123456789", cLETRA) > 0 Then
+          ltroca = False
+       End If
+       If InStr("abcdefghijklmnopqrstuvwxyz", cLETRA) > 0 Then
+          ltroca = False
+       End If
+       If InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", cLETRA) > 0 Then
+          ltroca = False
+       End If
+       If InStr(",.:/;%*$@?<>()+-#=:_", cLETRA) > 0 Then
+         ltroca = False
+       End If
+       If nAscii = 231 Then
+          cLETRA = "c"
+       End If
+       If nAscii = 199 Then
+          cLETRA = "C"
+       End If
+       If nAscii = 193 Or nAscii = 194 Or nAscii = 195 Or nAscii = 192 Then
+           cLETRA = "A"
+       End If
+       If nAscii = 224 Or nAscii = 225 Or nAscii = 226 Or nAscii = 227 Or nAscii = 228 Or nAscii = 229 Then
+          cLETRA = "a"
+       End If
+       If nAscii = 242 Or nAscii = 243 Or nAscii = 244 Or nAscii = 245 Or nAscii = 246 Then
+          cLETRA = "o"
+       End If
+       If nAscii = 210 Or nAscii = 211 Or nAscii = 212 Or nAscii = 213 Or nAscii = 214 Then
+          cLETRA = "O"
+       End If
+       If nAscii = 200 Or nAscii = 201 Or nAscii = 202 Or nAscii = 203 Then
+          cLETRA = "E"
+       End If
+       If nAscii = 232 Or nAscii = 233 Or nAscii = 234 Or nAscii = 235 Then
+          cLETRA = "e"
+       End If
+       If nAscii = 236 Or nAscii = 237 Or nAscii = 238 Or nAscii = 239 Then
+          cLETRA = "i"
+       End If
+       If nAscii = 204 Or nAscii = 205 Or nAscii = 206 Or nAscii = 207 Then
+           cLETRA = "I"
+       End If
+       If nAscii = 249 Or nAscii = 250 Or nAscii = 251 Or nAscii = 252 Then
+          cLETRA = "u"
+       End If
+       If nAscii = 217 Or nAscii = 218 Or nAscii = 219 Then
+          cLETRA = "U"
+       End If
+       If nAscii = 128 Then
+          cLETRA = "C"
+       End If
+       If nAscii = 144 Then
+          cLETRA = "E"
+       End If
+       If nAscii = 248 Then
+          cLETRA = ""
+       End If
+       If nAscii = 167 Then
+          cLETRA = "o"
+       End If
+       If ltroca Then
+          cXml = Mid(cXml, 1, nCont - 1) + cLETRA + Mid(cXml, nCont + 1)
+       End If
+   Next
+   tirace2 = cXml
+   End Function
+
 
 Public Function Today() As Date
     Today = Format(Date, "dd/mm/yyyy")
@@ -1782,12 +2015,12 @@ Public Sub FocusMe()
        Or TypeOf Screen.ActiveControl Is ComboBox _
        Or TypeOf Screen.ActiveControl Is XPText Then
         Screen.ActiveControl.SelStart = 0
-        Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
+        Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
     End If
 End Sub
 
 Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
-    Dim nLEN, nTEXTO, x, Y As Integer
+    Dim nLEN, nTEXTO, X, Y As Integer
     Dim aORI, aDES, aTEXTO As Variant
     If IsArray(eORI) Then
         aORI = eORI
@@ -1800,9 +2033,9 @@ Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eD
     nLEN = UBound(aORI)
     nTEXTO = UBound(aTEXTO)
     For Y = 0 To nTEXTO
-        For x = 0 To nLEN
-            If aTEXTO(Y) = aORI(x) Then          ''Encerra Analise Para Evitar
-                aTEXTO(Y) = aDES(x)              ''Loop de Troca
+        For X = 0 To nLEN
+            If aTEXTO(Y) = aORI(X) Then          ''Encerra Analise Para Evitar
+                aTEXTO(Y) = aDES(X)              ''Loop de Troca
                 Exit For
             End If
         Next
@@ -1941,7 +2174,7 @@ Public Function Extenso(ByVal Valor As Double, _
 End Function
 
 Public Function Txt2Lin(ByVal cTexto As String, Optional ByVal nCOL As Integer = 80) As Variant
-    Dim nLIN, x As Integer
+    Dim nLIN, X As Integer
     Dim aRETU As Variant
     cTexto = FixStr(cTexto)
     If nCOL < 1 Then nCOL = 80                   'Evita Erros Divisao
@@ -1951,9 +2184,9 @@ Public Function Txt2Lin(ByVal cTexto As String, Optional ByVal nCOL As Integer =
         nLIN = nLIN + 1                          ''Soma mais um pois e necesario
     End If
     ReDim aRETU(nLIN)
-    For x = 1 To nLIN
-        aRETU(x - 1) = Mid(cTexto, ((x - 1) * nCOL) + 1, nCOL)
-    Next x
+    For X = 1 To nLIN
+        aRETU(X - 1) = Mid(cTexto, ((X - 1) * nCOL) + 1, nCOL)
+    Next X
     Txt2Lin = aRETU
     eRETU01 = nLIN
 End Function
@@ -2509,12 +2742,12 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef tEXT As String) As Long
+Public Function WordLen(ByRef Text As String) As Long
     'tamanho somente dos caracteres normal 65 a 90
     Dim Bytes() As Byte
     Dim i As Long
 
-    Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
+    Bytes = StrConv(UCase$(Text), vbFromUnicode)
     For i = 0 To UBound(Bytes)
         If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
     Next
