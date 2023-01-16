@@ -156,11 +156,9 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-
 Private Sub CmdCancelar_Click()
     Unload Me
 End Sub
-
 Private Sub cmdOK_Click()
     Dim DB As ADODB.Connection
     Dim RSSENHA As ADODB.Recordset
@@ -174,41 +172,10 @@ Private Sub cmdOK_Click()
     txtFields(0) = Trim(txtFields(0))
     txtFields(1) = Trim(txtFields(1))
     txtFields(2) = Trim(txtFields(2))
-
-    If Len(txtFields(1)) > 8 Then
-        Alert "Máximo 8 digitos para a Senha", "Senha Invalida"
-        txtFields(1).tEXT = ""
-        txtFields(1).SetFocus
-        lRETU = False
-        Exit Sub
-    End If
-
-    If Len(txtFields(2)) > 8 Then
-        Alert "Máximo 8 digitos para a Senha", "Senha Invalida"
-        txtFields(2).tEXT = ""
-        txtFields(2).SetFocus
-        lRETU = False
-        Exit Sub
-    End If
-
-    If Len(txtFields(1)) < 8 Then
-        Alert "Necessário 8 digitos para a Senha", "Senha Invalida"
-        txtFields(1).tEXT = ""
-        txtFields(1).SetFocus
-        lRETU = False
-        Exit Sub
-    End If
-
-    If Len(txtFields(2)) < 8 Then
-        Alert "Necessário 8 digitos para a Senha", "Senha Invalida"
-        txtFields(2).tEXT = ""
-        txtFields(2).SetFocus
-        lRETU = False
-        Exit Sub
-    End If
-
-    If txtFields(0) = txtFields(1) Then
-        Alert "Senha Precisa ser Diferente da Anterior", "Senha Invalida"
+    
+    
+     If txtFields(0) = txtFields(1) Then
+        Alert "Senha Precisa ser Diferente da Anterior"
         txtFields(1).tEXT = ""
         txtFields(2).tEXT = ""
         txtFields(1).SetFocus
@@ -216,6 +183,35 @@ Private Sub cmdOK_Click()
         Exit Sub
     End If
     
+    If Len(txtFields(1)) <> 8 Then
+        Alert "8 digitos para a Senha"
+        txtFields(1).tEXT = ""
+        txtFields(2).tEXT = ""
+        txtFields(1).SetFocus
+        lRETU = False
+        Exit Sub
+    End If
+    
+    If Len(txtFields(1)) <> Len(txtFields(2)) Then
+        Alert "Senha diferente da de confirmacao"
+        txtFields(1).tEXT = ""
+        txtFields(2).tEXT = ""
+        txtFields(1).SetFocus
+        lRETU = False
+        Exit Sub
+    End If
+     
+    'faze inicial acostumar os usuarios
+    If Not CheckPass(txtFields(1)) Then
+       If Not MDG("Senha Fraca , gravar mesmo assim") Then
+           txtFields(1).tEXT = ""
+           txtFields(2).tEXT = ""
+           txtFields(1).SetFocus
+           lRETU = False
+           Exit Sub
+       End If
+    End If
+
     Set DB = New ADODB.Connection
     Set RSSENHA = New ADODB.Recordset
 
@@ -228,14 +224,14 @@ Private Sub cmdOK_Click()
     With RSSENHA
         If Not .EOF Then
             strEncryptedText = XOREncryption(strCodeKey, txtFields(0))
-            If strEncryptedText = "" & !senha Then
+            If strEncryptedText = "" & !Senha Then
                 If txtFields(1) = txtFields(2) Then
                     strEncryptedText = XOREncryption(strCodeKey, txtFields(1))
                     RSSENHA("SENHA") = strEncryptedText
-                    RSSENHA("TROCAR") = Date + 60
+                    RSSENHA("TROCAR") = Date + 90
                     
                     
-                    RSSENHA("CHAVEV") = UCase(CreateSHA256HashString(UCase(Trim(RSSENHA("usuario"))) + UCase(Trim(txtFields(1)))))
+                    RSSENHA("CHAVEV") = UCase(CreateSHA256HashString(UCase(Trim(RSSENHA("usuario"))) + Trim(txtFields(1))))
                     
                     .Update
                     eRETU01 = strEncryptedText
