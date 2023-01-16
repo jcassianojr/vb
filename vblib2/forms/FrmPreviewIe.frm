@@ -194,8 +194,8 @@ Private Sub Form_Load()
        XPButton10.Visible = False
     End If
       If Not aDIREITOS(2) Then
-       Salvar(1).Enabled = False
-       Salvar(1).Visible = False
+       salvar(1).Enabled = False
+       salvar(1).Visible = False
     End If
     
     WebBrowser1.Navigate ePASS01
@@ -206,7 +206,7 @@ Private Sub Salvar_Click(Index As Integer)
     Dim nHANDLE
     eRETU01 = WebBrowser1.Document.Body.innerText
     CLINHA = WebBrowser1.Document.Body.innerText
-    CLINHA = Html2Str(CStr(CLINHA), True)
+    CLINHA = Html2Str(CStr(CLINHA))
     sFILTER = "TXT (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
     sFILENAME = FileSave(Me, sFILTER, 1, "TXT", "", "", "Salvar TXT Como")
     If Len(sFILENAME) = 0 Then

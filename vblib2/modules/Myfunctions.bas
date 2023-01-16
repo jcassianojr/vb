@@ -397,8 +397,6 @@ Public Function DataBranco(ByVal eVAR As Variant) As Boolean
         End If
     End If
 End Function
-
-
 Public Function SepSqlOpe(ByVal eEXP As String) As Variant
     Dim aRETU As Variant
     aRETU = Array("", "", "")
@@ -407,7 +405,6 @@ Public Function SepSqlOpe(ByVal eEXP As String) As Variant
     End If
     SepSqlOpe = aRETU
 End Function
-
 Public Function CharToLit(aVAL As Variant, Optional ByVal cTIPO As String = "", Optional ByVal cARQ As String = "") As String
     If Len(cARQ) > 0 Then
         cARQ = GeraConn(cARQ, cTIPO)
@@ -780,7 +777,7 @@ Public Function senhapos(cPOSTELA)
 Dim cSUBTXT As String
 Dim nCHAR As Integer
 senhapos = ""
-While Len(cPOSTELA) > 2
+While Len(cPOSTELA) > 2 'no fim pois postela  usa reverse string
     cSUBTXT = Mid(cPOSTELA, Len(cPOSTELA) - 2, 3)
     nCHAR = FixInt(cSUBTXT)
                 nCHAR = nCHAR / 2
@@ -1012,16 +1009,16 @@ Public Function NullDateTime(Optional ByVal cTIPO As String = "", Optional ByVal
     End Select
 End Function
 
-Public Function PadRight(ByVal cTexto, ByVal nLEN) As String
-    cTexto = cTexto & Space(nLEN)
-    cTexto = Left(cTexto, nLEN)
-    PadRight = cTexto
+Public Function PadRight(ByVal cTEXTO, ByVal nLEN) As String
+    cTEXTO = cTEXTO & Space(nLEN)
+    cTEXTO = Left(cTEXTO, nLEN)
+    PadRight = cTEXTO
 End Function
 
-Public Function PadLeft(ByVal cTexto, ByVal nLEN) As String
-    cTexto = Space(nLEN) & cTexto
-    cTexto = Right(cTexto, nLEN)
-    PadLeft = cTexto
+Public Function PadLeft(ByVal cTEXTO, ByVal nLEN) As String
+    cTEXTO = Space(nLEN) & cTEXTO
+    cTEXTO = Right(cTEXTO, nLEN)
+    PadLeft = cTEXTO
 End Function
 
 Public Function PegCamini(ByVal cCAMINHO As String) As String
@@ -1629,11 +1626,11 @@ t = CharToOem(in_string, Out_String)
 Convert2oem = Out_String
 End Function
 Public Function ConvOEM(ByVal texto As String) As String
-    ConvOEM = Convert2oem(cTexto) 'CharConv(texto, "ANSI", "OEM")
+    ConvOEM = Convert2oem(cTEXTO) 'CharConv(texto, "ANSI", "OEM")
 End Function
 
 Public Function ConvOEM2(ByVal texto As String) As String
-    ConvOEM2 = Convert2oem(cTexto)  ' CharConv(texto, "MEUANSI", "MEUOEM")
+    ConvOEM2 = Convert2oem(cTEXTO)  ' CharConv(texto, "MEUANSI", "MEUOEM")
 End Function
 
 Public Function ConvAnsi2(ByVal texto As String) As String
@@ -1655,40 +1652,6 @@ Public Function StrToArray(ByVal cGRUPO As String) As Variant
     Dim cCHAR, eCNV As String
     ' utilizando agora Convert2ansi Convert2oem tirace2
     Select Case cGRUPO
-'        Case "OEM"
-'            eCNV = "ÄÅÇÉÑÖÜáàâäãåçéèêëíìîïñóòôöõúùûü†°¢£§•¶ß®©™´¨≠ÆØ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘≥≈øƒÿ"
-'        Case "ANSI"
-'            eCNV = "¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ®∏•¥™∫≤≥Øø¶Ü¨≠á"
-'        Case "MEUANSI"
-'            eCNV = "™∫«Á≈Â¿‡»ËÃÏ“ÚŸ˘ƒ‰ÀÎœÔ÷ˆ‹¸¬‚ ÍŒÓ‘Ù€˚¡·…ÈÕÌ”Û⁄˙›˝√„’ı—Ò|"
-'        Case "MEUOEM"
-'            ''Numeral
-'            eCNV = "¶ß"
-'            ''Cidilha
-'            eCNV = eCNV & "Äá"
-'            ''Grau
-'            eCNV = eCNV & "èÜ"
-'            ''Crase
-'            eCNV = eCNV & "∑Ö‘äﬁç„ïÎó"
-'            ''Trema
-'            eCNV = eCNV & "éÑ”âÿãôîöÅ"
-'            ''cIRCUNFLEXO
-'            eCNV = eCNV & "∂É“à◊å‚ìÍñ"
-'            ''Agudo
-'            eCNV = eCNV & "µ†êÇ÷°‡¢È£ÌÏ"
-'            '''Til
-'            eCNV = eCNV & "«∆Â‰•§"
-'            ''Tracos quadro
-'            eCNV = eCNV & "›"
-'            ''"_" Caracter so maiscula ou minuscula usado "_" manter tamanho array
-'        Case "UACENTO"
-'            eCNV = "«¡…Õ”⁄¿√’¬ ‘ƒ÷‹™∫__≈"
- '       Case "LACENTO"
- '           eCNV = "Á·ÈÌÛ˙‡„ı‚ÍÙ‰ˆ¸™∫Ú˘_"
- '       Case "LACETIR"
- '           eCNV = "caeiouaaoaeoaouaoou_"
- '       Case "UACETIR"
- '           eCNV = "CAEIOUAAOAEOAOUao__A"
         Case Else
             eCNV = cGRUPO
     End Select
@@ -1751,7 +1714,7 @@ Public Function TiraSin(ByVal texto As String)
     Next X
     TiraSin = texto
 End Function
-Function CheckPass(ByVal cTexto As String, Optional ByVal lMES As Boolean = True) As Boolean
+Function CheckPass(ByVal cTEXTO As String, Optional ByVal lMES As Boolean = True) As Boolean
 
 Dim lMAIS, lMINUS, lDIG, lSYMBOL, l8DIG As Boolean
 Dim i As Integer
@@ -1764,22 +1727,22 @@ lSYMBOL = False
 l8DIG = False
 
 
-For i = 1 To Len(cTexto)
-    If InStr("0123456789", Mid(cTexto, i, 1)) > 0 Then
+For i = 1 To Len(cTEXTO)
+    If InStr("0123456789", Mid(cTEXTO, i, 1)) > 0 Then
        lDIG = True
     End If
-    If InStr("abcdefghijklmnopqrstuvwxyz", Mid(cTexto, i, 1)) > 0 Then
+    If InStr("abcdefghijklmnopqrstuvwxyz", Mid(cTEXTO, i, 1)) > 0 Then
        lMINUS = True
     End If
-    If InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", Mid(cTexto, i, 1)) > 0 Then
+    If InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", Mid(cTEXTO, i, 1)) > 0 Then
        lMAIS = True
     End If
-    If InStr("-+_!@#$%^&*., ?", Mid(cTexto, i, 1)) > 0 Then
+    If InStr("-+_!@#$%^&*., ?", Mid(cTEXTO, i, 1)) > 0 Then
        lSYMBOL = True
     End If
 Next
 
-If Len(Trim(cTexto)) >= 8 Then
+If Len(Trim(cTEXTO)) >= 8 Then
     l8DIG = True
 End If
 
@@ -2019,7 +1982,7 @@ Public Sub FocusMe()
     End If
 End Sub
 
-Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
+Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
     Dim nLEN, nTEXTO, X, Y As Integer
     Dim aORI, aDES, aTEXTO As Variant
     If IsArray(eORI) Then
@@ -2029,7 +1992,7 @@ Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eD
         aORI = StrToArray(CStr(eORI))
         aDES = StrToArray(CStr(eDES))
     End If
-    aTEXTO = StrToArray(cTexto)
+    aTEXTO = StrToArray(cTEXTO)
     nLEN = UBound(aORI)
     nTEXTO = UBound(aTEXTO)
     For Y = 0 To nTEXTO
@@ -2047,23 +2010,23 @@ Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eD
 End Function
 
 Public Function TiraOut(ByVal eVAR As Variant) As String
-    Dim cTexto As String
-    cTexto = FixStr(eVAR)
-    TiraOut = CharConv(cTexto, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
+    Dim cTEXTO As String
+    cTEXTO = FixStr(eVAR)
+    TiraOut = CharConv(cTEXTO, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
                        Array("", "", "", "", "", "", "", "", ""))
 End Function
 
 Public Function TiraOutNum(ByVal eVAR As Variant) As String ' Mantem ', . que sao usadas nos numeros
-    Dim cTexto As String
-    cTexto = FixStr(eVAR)
-    TiraOutNum = CharConv(cTexto, Array("-", ":", "/", ";", "*", "(", ")"), _
+    Dim cTEXTO As String
+    cTEXTO = FixStr(eVAR)
+    TiraOutNum = CharConv(cTEXTO, Array("-", ":", "/", ";", "*", "(", ")"), _
                           Array("", "", "", "", "", "", ""))
 End Function
 
 Public Function TiraOutAlf(ByVal eVAR As Variant) As String
-    Dim cTexto As String
-    cTexto = FixStr(eVAR)
-    TiraOutAlf = CharConv(cTexto, Array("-", ".", ":", "/", ";", "*", "(", ")", _
+    Dim cTEXTO As String
+    cTEXTO = FixStr(eVAR)
+    TiraOutAlf = CharConv(cTEXTO, Array("-", ".", ":", "/", ";", "*", "(", ")", _
                                         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", _
                                         "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", _
                                         "U", "V", "Y", "W", "X", "Z", ","), _
@@ -2173,46 +2136,35 @@ Public Function Extenso(ByVal Valor As Double, _
     End If
 End Function
 
-Public Function Txt2Lin(ByVal cTexto As String, Optional ByVal nCOL As Integer = 80) As Variant
+Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer = 80) As Variant
     Dim nLIN, X As Integer
     Dim aRETU As Variant
-    cTexto = FixStr(cTexto)
+    cTEXTO = FixStr(cTEXTO)
     If nCOL < 1 Then nCOL = 80                   'Evita Erros Divisao
-    nLIN = Int(Len(cTexto) / nCOL)
-    If nLIN * nCOL = Len(cTexto) Then            ''Bate com o Multiplo
+    nLIN = Int(Len(cTEXTO) / nCOL)
+    If nLIN * nCOL = Len(cTEXTO) Then            ''Bate com o Multiplo
     Else
         nLIN = nLIN + 1                          ''Soma mais um pois e necesario
     End If
     ReDim aRETU(nLIN)
     For X = 1 To nLIN
-        aRETU(X - 1) = Mid(cTexto, ((X - 1) * nCOL) + 1, nCOL)
+        aRETU(X - 1) = Mid(cTEXTO, ((X - 1) * nCOL) + 1, nCOL)
     Next X
     Txt2Lin = aRETU
     eRETU01 = nLIN
 End Function
 
 Public Function TrimNull(ByVal sTxt As String) As String
-
     Dim Arr() As String
-   
     Arr() = Split(sTxt, Chr$(0))
     If UBound(Arr) >= 0 Then
         TrimNull = Arr(0)
     Else
         TrimNull = sTxt
     End If
-  
 End Function
-
-'Public Sub CentralizaJanela(ByRef Form As Form)
-'    Form.Top = (Screen.Height - Form.Height) / 2
-'    Form.Left = (Screen.Width - Form.Width) / 2
-'End Sub
-
 Public Sub EnableControls(ByVal frm As Form, ByVal enabled_state As Boolean)
-
     Dim ctl As Control
-
     ' Examine every control.
     For Each ctl In frm.Controls
         On Error Resume Next
@@ -2294,10 +2246,6 @@ End Function
 Public Sub OpenUrl(ByVal strURL As String)
     ShellExecute 0, "Open", strURL, 0&, 0&, SW_SHOWNORMAL
 End Sub
-
-
-
-
 Public Function txttohtml(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "")
     Dim nORIGEM, nDESTINO, STRBUFFER, CLINHA
     If Not FileExist(cORIGEM, True) Then
@@ -2366,259 +2314,30 @@ Public Function txttoRTF(ByVal cORIGEM As String, Optional ByVal cDESTINO As Str
     Close nORIGEM
     Close nDESTINO
 End Function
+Public Function CharCodesToHTML(ByVal iString As String) As String
+Dim iXml As New MSXML2.DOMDocument60
 
-Public Function str2html(ByVal cTexto As String, Optional ByVal lAnsi As Boolean = True, Optional ByVal lTudo As Boolean = True) As String
+    With iXml.createTextNode(iString)
+        CharCodesToHTML = .Xml
+    End With
+End Function
+
+Public Function HTMLToCharCodes(ByVal iString As String) As String
+    With New MSXML2.DOMDocument60
+        .loadXML "<p>" & iString & "</p>"
+        HTMLToCharCodes = .selectSingleNode("p").nodeTypedValue
+    End With
+End Function
+Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean = False) As String
     If lAnsi Then
-        cTexto = Replace(cTexto, "·", "&aacute;")
-        cTexto = Replace(cTexto, "¡", "&Aacute;")
-        cTexto = Replace(cTexto, "‡", "&agrave;")
-        cTexto = Replace(cTexto, "¿", "&Agrave;")
-        cTexto = Replace(cTexto, "È", "&eacute;")
-        cTexto = Replace(cTexto, "…", "&Eacute;")
-        cTexto = Replace(cTexto, "Ë", "&egrave;")
-        cTexto = Replace(cTexto, "»", "&egrave;")
-        cTexto = Replace(cTexto, "Ì", "&iacute;")
-        cTexto = Replace(cTexto, "Õ", "&Iacute;")
-        cTexto = Replace(cTexto, "Ï", "&igrave;")
-        cTexto = Replace(cTexto, "Ã", "&Igrave;")
-        cTexto = Replace(cTexto, "Û", "&oacute;")
-        cTexto = Replace(cTexto, "”", "&Oacute;")
-        cTexto = Replace(cTexto, "Ú", "&ograve;")
-        cTexto = Replace(cTexto, "“", "&Ograve;")
-        cTexto = Replace(cTexto, "˙", "&uacute;")
-        cTexto = Replace(cTexto, "⁄", "&Uacute;")
-        cTexto = Replace(cTexto, "˘", "&ugrave;")
-        cTexto = Replace(cTexto, "Ÿ", "&Ugrave;")
-        cTexto = Replace(cTexto, "‚", "&acirc;")
-        cTexto = Replace(cTexto, "¬", "&Acirc;")
-        cTexto = Replace(cTexto, "Í", "&ecirc;")
-        cTexto = Replace(cTexto, " ", "&Ecirc;")
-        cTexto = Replace(cTexto, "Ù", "&ocirc;")
-        cTexto = Replace(cTexto, "‘", "&Ocirc;")
-        cTexto = Replace(cTexto, "„", "&atilde;")
-        cTexto = Replace(cTexto, "√", "&Atilde;")
-        cTexto = Replace(cTexto, "ı", "&otilde;")
-        cTexto = Replace(cTexto, "’", "&Otilde;")
-        cTexto = Replace(cTexto, "Á", "&ccedil;")
-        cTexto = Replace(cTexto, "«", "&Ccedil;")
-        cTexto = Replace(cTexto, "ˇ", "&yuml;")
-        cTexto = Replace(cTexto, "ˆ", "&ouml;")
-        cTexto = Replace(cTexto, "÷", "&Ouml;")
-        cTexto = Replace(cTexto, "Ò", "&ntilde;")
-        cTexto = Replace(cTexto, "—", "&Ntilde;")
-        cTexto = Replace(cTexto, "¸", "&uuml;")
-        cTexto = Replace(cTexto, "‹", "&Uuml;")
-        cTexto = Replace(cTexto, "∫", "&deg;")
-        cTexto = Replace(cTexto, "∞", "&deg;")
-        cTexto = Replace(cTexto, "™", "&ordf;")
-    Else
-        '      cTEXTO = Replace(cTEXTO, "†", "&aacute;")
-        cTexto = Replace(cTexto, "µ", "&Aacute;")
-        cTexto = Replace(cTexto, "Ö", "&agrave;")
-        cTexto = Replace(cTexto, "∑", "&Agrave;")
-        cTexto = Replace(cTexto, "Ç", "&eacute;")
-        cTexto = Replace(cTexto, "ê", "&Eacute;")
-        cTexto = Replace(cTexto, "ä", "&egrave;")
-        cTexto = Replace(cTexto, "‘", "&Egrave;")
-        cTexto = Replace(cTexto, "°", "&iacute;")
-        cTexto = Replace(cTexto, "÷", "&Iacute;")
-        cTexto = Replace(cTexto, "ç", "&igrave;")
-        cTexto = Replace(cTexto, "ﬁ", "&Igrave;")
-        cTexto = Replace(cTexto, "¢", "&oacute;")
-        cTexto = Replace(cTexto, "‡", "&Oacute;")
-        cTexto = Replace(cTexto, "ï", "&ograve;")
-        cTexto = Replace(cTexto, "„", "&Ograve;")
-        cTexto = Replace(cTexto, "£", "&uacute;")
-        cTexto = Replace(cTexto, "È", "&Uacute;")
-        cTexto = Replace(cTexto, "ó", "&ugrave;")
-        cTexto = Replace(cTexto, "Î", "&Ugrave;")
-        cTexto = Replace(cTexto, "É", "&acirc;")
-        cTexto = Replace(cTexto, "∂", "&Acirc;")
-        cTexto = Replace(cTexto, "à", "&ecirc;")
-        cTexto = Replace(cTexto, "“", "&Ecirc;")
-        cTexto = Replace(cTexto, "ì", "&ocirc;")
-        cTexto = Replace(cTexto, "‚", "&Ocirc;")
-        cTexto = Replace(cTexto, "∆", "&atilde;")
-        cTexto = Replace(cTexto, "«", "&Atilde;")
-        cTexto = Replace(cTexto, "‰", "&otilde;")
-        cTexto = Replace(cTexto, "Â", "&Otilde;")
-        cTexto = Replace(cTexto, "á", "&ccedil;")
-        cTexto = Replace(cTexto, "Ä", "&Ccedil;")
-        cTexto = Replace(cTexto, "ò", "&yuml;")
-        cTexto = Replace(cTexto, "î", "&ouml;")
-        cTexto = Replace(cTexto, "ô", "&Ouml;")
-        cTexto = Replace(cTexto, "§", "&ntilde;")
-        cTexto = Replace(cTexto, "•", "&Ntilde;")
-        cTexto = Replace(cTexto, "Å", "&uuml;")
-        cTexto = Replace(cTexto, "ö", "&Uuml;")
-        cTexto = Replace(cTexto, "ß", "&deg;")
-        cTexto = Replace(cTexto, "¯", "&deg;")
-        cTexto = Replace(cTexto, "¶", "&ordf;")
+       Convert2ansi (cTEXTO)
     End If
-    str2html = cTexto
+    cTEXTO = CharCodesToHTML(cTEXTO)
+    str2html = cTEXTO
 End Function
 
-Public Function Html2Str(ByVal sHTML As String, Optional ParseSpecialChars As Boolean = True) As String
-    'Purpose: To remove sHTML markup from a string, and convert it to plain
-    ' ASCII text string
-    ' Author: Oliver White, Copyright 2001 - GNU GPL license (see gnu.org for details)
-    Dim lCtr As Integer
-    Dim sBuffer As String
-    Dim bIsText As Boolean
-    Dim sPlainText As String
-
-    'Check input variables
-    If sHTML = "" Then
-        Exit Function
-    End If
-
-    'Initialise local variables
-    bIsText = True
-    sPlainText = ""
-
-    'Loop through input
-    For lCtr = 1 To Len(sHTML)
-
-        'Get next character
-        sBuffer = Mid(sHTML, lCtr, 1)
-
-        'Decide whether we are in a <tag>
-        bIsText = (sBuffer = ">") Or (bIsText And (Not (sBuffer = "<")))
-
-        'If not in a tag, or at the start or end of one
-        If (bIsText = True) And (Not (sBuffer = ">" Or sBuffer = ">")) Then
-
-            'Remove whitespace
-            If Not (sBuffer = " " And Right(sPlainText, 1) = " ") Then
-
-                'Add character to output
-                sPlainText = sPlainText & sBuffer
-
-            End If
-        End If
-
-    Next lCtr                                    'next character
-  
-
-    'Return value
-    Html2Str = HTML_UnencodeSpecialChars(sPlainText)
-  
-End Function
-
-Public Function HTML_UnencodeSpecialChars(ByVal sHTML As String) As String
-    'Purpose: To search and replace all special characters, and exit sub when they are all found
-    'Note: the &amp; symbol must be checked last!)
-    ' Author: Oliver White, Copyright 2001 - GNU GPL license (see gnu.org for details)
-  
-    HTML_UnencodeSpecialChars = Replace(sHTML, "&quot;", DOUBLE_QUOTE)
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&lt;", "<")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&gt;", ">")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&nbsp;", "")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&iexcl;", "°")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&cent;", "¢")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&pound;", "£")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&curren;", "§")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&yen;", "•")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&brvbar;", "¶")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&sect;", "ß")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&uml;", "®")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&copy;", "©")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&ordf;", "™")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&laquo;", "")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&not;", "")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "hy;", "")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&reg;", "Æ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&macr;", "Ø")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&deg;", "∞")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&plusmn;", "±")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&sup2;", "≤")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&sup3;", "≥")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&acute;", "¥")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&micro;", "µ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&para;", "")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&middot;", "∑")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&cedil;", "∏")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&sup1;", "π")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&ordm;", "∫")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&raquo;", "") '<<
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&frac14;", "º")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&frac12;", "Ω")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&frac34;", "æ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&iquest;", "ø")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Agrave;", "¿")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Aacute;", "¡")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Acirc;", "¬")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Atilde;", "√")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Auml;", "ƒ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Aring;", "≈")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&AElig;", "∆")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Ccedil;", "«")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Egrave;", "»")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Eacute;", "…")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Ecirc;", " ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Euml;", "À")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Igrave;", "Ã")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Iacute;", "Õ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Icirc;", "Œ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Iuml;", "œ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&ETH;", "–")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Dstrok;", "D")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Ntilde;", "—")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Ograve;", "“")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Oacute;", "”")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Ocirc;", "‘")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Otilde;", "’")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Ouml;", "÷")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&times;", "◊")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Oslash;", "ÿ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Ugrave;", "Ÿ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Uacute;", "⁄")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Ucirc;", "€")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Uuml;", "‹")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&Yacute;", "›")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&THORN;", "ﬁ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&szlig;", "ﬂ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&agrave;", "‡")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&aacute;", "·")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&acirc;", "‚")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&atilde;", "„")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&auml;", "‰")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&aring;", "Â")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&aelig;", "Ê")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&ccedil;", "Á")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&egrave;", "Ë")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&eacute;", "È")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&ecirc;", "Í")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&euml;", "Î")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&igrave;", "Ï")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&iacute;", "Ì")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&icirc;", "Ó")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&iuml;", "Ô")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&eth;", "")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&ntilde;", "Ò")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&ograve;", "Ú")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&oacute;", "Û")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&ocirc;", "Ù")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&otilde;", "ı")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&ouml;", "ˆ")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&divide;", "˜")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&oslash;", "¯")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&ugrave;", "˘")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&uacute;", "˙")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&ucirc;", "˚")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&uuml;", "¸")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&yacute;", "˝")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&thorn;", "˛")
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&yuml;", "ˇ")
-
-    '' I'm going to ignore &#999 numbers, because this logic might incorrectly replace semi-colons... 2004-Jun-17 17:11 [MBJ]
-    '  'Replace &#383; with [383] (notation for numerical characters)
-    '  HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&#", "[")
-  
-    'Replace &amp; with & (note: after this, we can no longer check for &...)
-    HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, "&amp;", "&")
-  
-    '  HTML_UnencodeSpecialChars = Replace(HTML_UnencodeSpecialChars, ";", "]")
+Public Function Html2Str(ByVal cTEXTO As String) As String
+    Html2Str = HTMLToCharCodes(cTEXTO)
 End Function
 
 Public Function FindInList(ByRef cList As ListBox, sSearch As String) As Long
