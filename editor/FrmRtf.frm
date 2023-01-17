@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form FrmRTf 
    Caption         =   "Editor Textos"
    ClientHeight    =   7245
@@ -12,6 +13,15 @@ Begin VB.Form FrmRTf
    ScaleHeight     =   7245
    ScaleWidth      =   11715
    StartUpPosition =   2  'CenterScreen
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   11160
+      Top             =   2040
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"FrmRtf.frx":058A
+   End
    Begin VBCCR17.RichTextBox RichTextbox1 
       Height          =   6015
       Left            =   0
@@ -21,7 +31,7 @@ Begin VB.Form FrmRTf
       _ExtentX        =   20135
       _ExtentY        =   10610
       MultiLine       =   -1  'True
-      TextRTF         =   "FrmRtf.frx":058A
+      TextRTF         =   "FrmRtf.frx":062A
    End
    Begin VBCCR17.FontCombo FontCombo1 
       Height          =   315
@@ -31,13 +41,13 @@ Begin VB.Form FrmRTf
       Width           =   2295
       _ExtentX        =   4048
       _ExtentY        =   556
-      Text            =   "FrmRtf.frx":06F0
+      Text            =   "FrmRtf.frx":0790
       ExtendedUI      =   -1  'True
    End
    Begin VB.CommandButton CmdExpHtml 
       Height          =   315
       Left            =   1620
-      Picture         =   "FrmRtf.frx":0724
+      Picture         =   "FrmRtf.frx":07C4
       Style           =   1  'Graphical
       TabIndex        =   40
       ToolTipText     =   "Exportar Documento como HTML"
@@ -47,7 +57,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton CmdExpPdf 
       Height          =   315
       Left            =   1320
-      Picture         =   "FrmRtf.frx":0CAE
+      Picture         =   "FrmRtf.frx":0D4E
       Style           =   1  'Graphical
       TabIndex        =   39
       ToolTipText     =   "Exportar Documento como PDF"
@@ -94,20 +104,20 @@ Begin VB.Form FrmRTf
             AutoSize        =   2
             Object.Width           =   1588
             MinWidth        =   1587
-            Picture         =   "FrmRtf.frx":1238
-            TextSave        =   "11:52"
+            Picture         =   "FrmRtf.frx":12D8
+            TextSave        =   "14:49"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
             AutoSize        =   2
             Object.Width           =   2302
             MinWidth        =   2293
-            Picture         =   "FrmRtf.frx":17D2
-            TextSave        =   "17/12/2022"
+            Picture         =   "FrmRtf.frx":1872
+            TextSave        =   "17/01/2023"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
-            Picture         =   "FrmRtf.frx":1D6C
+            Picture         =   "FrmRtf.frx":1E0C
          EndProperty
          BeginProperty Panel7 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
@@ -128,171 +138,171 @@ Begin VB.Form FrmRTf
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   42
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":2106
+            Picture         =   "FrmRtf.frx":21A6
             Key             =   "center"
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":24A0
+            Picture         =   "FrmRtf.frx":2540
             Key             =   "justificado"
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":283A
+            Picture         =   "FrmRtf.frx":28DA
             Key             =   "left"
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":2BD4
+            Picture         =   "FrmRtf.frx":2C74
             Key             =   "right"
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":2F6E
+            Picture         =   "FrmRtf.frx":300E
             Key             =   "Bold"
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":3308
+            Picture         =   "FrmRtf.frx":33A8
             Key             =   "copy"
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":38A2
+            Picture         =   "FrmRtf.frx":3942
             Key             =   "cut"
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":3C3C
+            Picture         =   "FrmRtf.frx":3CDC
             Key             =   "diahora"
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":3FD6
+            Picture         =   "FrmRtf.frx":4076
             Key             =   "editor"
          EndProperty
          BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":4570
+            Picture         =   "FrmRtf.frx":4610
             Key             =   "find"
          EndProperty
          BeginProperty ListImage11 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":490A
+            Picture         =   "FrmRtf.frx":49AA
             Key             =   "marcado"
          EndProperty
          BeginProperty ListImage12 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":4A64
+            Picture         =   "FrmRtf.frx":4B04
             Key             =   "letra01"
          EndProperty
          BeginProperty ListImage13 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":4DFE
+            Picture         =   "FrmRtf.frx":4E9E
             Key             =   "tamanho"
          EndProperty
          BeginProperty ListImage14 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":5198
+            Picture         =   "FrmRtf.frx":5238
             Key             =   "paragro"
          EndProperty
          BeginProperty ListImage15 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":5532
+            Picture         =   "FrmRtf.frx":55D2
             Key             =   "decrese"
          EndProperty
          BeginProperty ListImage16 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":58CC
+            Picture         =   "FrmRtf.frx":596C
             Key             =   "incrise"
          EndProperty
          BeginProperty ListImage17 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":5C66
+            Picture         =   "FrmRtf.frx":5D06
             Key             =   "imagem"
          EndProperty
          BeginProperty ListImage18 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":6000
+            Picture         =   "FrmRtf.frx":60A0
             Key             =   "italico"
          EndProperty
          BeginProperty ListImage19 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":639A
+            Picture         =   "FrmRtf.frx":643A
             Key             =   "s_Key19"
          EndProperty
          BeginProperty ListImage20 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":6734
+            Picture         =   "FrmRtf.frx":67D4
             Key             =   "mail"
          EndProperty
          BeginProperty ListImage21 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":6CCE
+            Picture         =   "FrmRtf.frx":6D6E
             Key             =   "new"
          EndProperty
          BeginProperty ListImage22 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":7068
+            Picture         =   "FrmRtf.frx":7108
             Key             =   "open"
          EndProperty
          BeginProperty ListImage23 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":7602
+            Picture         =   "FrmRtf.frx":76A2
             Key             =   "xxx"
          EndProperty
          BeginProperty ListImage24 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":799C
+            Picture         =   "FrmRtf.frx":7A3C
             Key             =   "imagem2"
          EndProperty
          BeginProperty ListImage25 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":7D36
+            Picture         =   "FrmRtf.frx":7DD6
             Key             =   "colar"
          EndProperty
          BeginProperty ListImage26 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":82D0
+            Picture         =   "FrmRtf.frx":8370
             Key             =   "printer"
          EndProperty
          BeginProperty ListImage27 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":886A
+            Picture         =   "FrmRtf.frx":890A
             Key             =   "printcfg"
          EndProperty
          BeginProperty ListImage28 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":8C04
+            Picture         =   "FrmRtf.frx":8CA4
             Key             =   "sair"
          EndProperty
          BeginProperty ListImage29 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":8F9E
+            Picture         =   "FrmRtf.frx":903E
             Key             =   "salvar"
          EndProperty
          BeginProperty ListImage30 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":9338
+            Picture         =   "FrmRtf.frx":93D8
             Key             =   "busca"
          EndProperty
          BeginProperty ListImage31 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":96D2
+            Picture         =   "FrmRtf.frx":9772
             Key             =   "proximabusca"
          EndProperty
          BeginProperty ListImage32 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":9A6C
+            Picture         =   "FrmRtf.frx":9B0C
             Key             =   "letra"
          EndProperty
          BeginProperty ListImage33 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":9E06
+            Picture         =   "FrmRtf.frx":9EA6
             Key             =   "abc"
          EndProperty
          BeginProperty ListImage34 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":A1A0
+            Picture         =   "FrmRtf.frx":A240
             Key             =   "riscado"
          EndProperty
          BeginProperty ListImage35 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":A53A
+            Picture         =   "FrmRtf.frx":A5DA
             Key             =   "sub"
          EndProperty
          BeginProperty ListImage36 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":A8D4
+            Picture         =   "FrmRtf.frx":A974
             Key             =   "sob"
          EndProperty
          BeginProperty ListImage37 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":AC6E
+            Picture         =   "FrmRtf.frx":AD0E
             Key             =   "minusculas"
          EndProperty
          BeginProperty ListImage38 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":B008
+            Picture         =   "FrmRtf.frx":B0A8
             Key             =   "maisculas"
          EndProperty
          BeginProperty ListImage39 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":B3A2
+            Picture         =   "FrmRtf.frx":B442
             Key             =   "underline"
          EndProperty
          BeginProperty ListImage40 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":B73C
+            Picture         =   "FrmRtf.frx":B7DC
             Key             =   "refazer"
          EndProperty
          BeginProperty ListImage41 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":BAD6
+            Picture         =   "FrmRtf.frx":BB76
             Key             =   "info"
          EndProperty
          BeginProperty ListImage42 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "FrmRtf.frx":C070
+            Picture         =   "FrmRtf.frx":C110
             Key             =   "exit"
          EndProperty
       EndProperty
@@ -300,7 +310,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command34 
       Height          =   315
       Left            =   8760
-      Picture         =   "FrmRtf.frx":C60A
+      Picture         =   "FrmRtf.frx":C6AA
       Style           =   1  'Graphical
       TabIndex        =   37
       ToolTipText     =   "Capitalizar"
@@ -310,7 +320,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command33 
       Height          =   315
       Left            =   3120
-      Picture         =   "FrmRtf.frx":C994
+      Picture         =   "FrmRtf.frx":CA34
       Style           =   1  'Graphical
       TabIndex        =   36
       ToolTipText     =   "Enviar Email  Documento Atual"
@@ -320,7 +330,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command32 
       Height          =   315
       Left            =   10320
-      Picture         =   "FrmRtf.frx":CF1E
+      Picture         =   "FrmRtf.frx":CFBE
       Style           =   1  'Graphical
       TabIndex        =   35
       ToolTipText     =   "Inserir Data"
@@ -330,7 +340,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command31 
       Height          =   315
       Left            =   9960
-      Picture         =   "FrmRtf.frx":D2A8
+      Picture         =   "FrmRtf.frx":D348
       Style           =   1  'Graphical
       TabIndex        =   34
       ToolTipText     =   "Incluir Imagens"
@@ -340,7 +350,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command30 
       Height          =   315
       Left            =   4560
-      Picture         =   "FrmRtf.frx":D632
+      Picture         =   "FrmRtf.frx":D6D2
       Style           =   1  'Graphical
       TabIndex        =   33
       ToolTipText     =   "Selecionar Todo o Texto"
@@ -350,7 +360,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command29 
       Height          =   315
       Left            =   9120
-      Picture         =   "FrmRtf.frx":D9BC
+      Picture         =   "FrmRtf.frx":DA5C
       Style           =   1  'Graphical
       TabIndex        =   32
       ToolTipText     =   "Mudar Letra Escrita Inferiores"
@@ -360,7 +370,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command28 
       Height          =   315
       Left            =   9600
-      Picture         =   "FrmRtf.frx":DD46
+      Picture         =   "FrmRtf.frx":DDE6
       Style           =   1  'Graphical
       TabIndex        =   31
       ToolTipText     =   "Mudar Letra Escrita Superiores"
@@ -370,7 +380,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command27 
       Height          =   315
       Left            =   8400
-      Picture         =   "FrmRtf.frx":E0D0
+      Picture         =   "FrmRtf.frx":E170
       Style           =   1  'Graphical
       TabIndex        =   30
       ToolTipText     =   "Converter Maisculas"
@@ -380,7 +390,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command26 
       Height          =   315
       Left            =   8040
-      Picture         =   "FrmRtf.frx":E45A
+      Picture         =   "FrmRtf.frx":E4FA
       Style           =   1  'Graphical
       TabIndex        =   29
       ToolTipText     =   "Converter Minusculas"
@@ -390,7 +400,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command25 
       Height          =   315
       Left            =   9120
-      Picture         =   "FrmRtf.frx":E7E4
+      Picture         =   "FrmRtf.frx":E884
       Style           =   1  'Graphical
       TabIndex        =   28
       ToolTipText     =   "Diminuir Recuo"
@@ -400,7 +410,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command24 
       Height          =   315
       Left            =   8760
-      Picture         =   "FrmRtf.frx":EB6E
+      Picture         =   "FrmRtf.frx":EC0E
       Style           =   1  'Graphical
       TabIndex        =   27
       ToolTipText     =   "Aumentar Recuo"
@@ -410,7 +420,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command23 
       Height          =   315
       Left            =   8400
-      Picture         =   "FrmRtf.frx":EEF8
+      Picture         =   "FrmRtf.frx":EF98
       Style           =   1  'Graphical
       TabIndex        =   26
       ToolTipText     =   "Marcadores"
@@ -420,7 +430,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command22 
       Height          =   315
       Left            =   1920
-      Picture         =   "FrmRtf.frx":F282
+      Picture         =   "FrmRtf.frx":F322
       Style           =   1  'Graphical
       TabIndex        =   25
       ToolTipText     =   "Selecionar Fonte"
@@ -430,7 +440,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command21 
       Height          =   315
       Left            =   1560
-      Picture         =   "FrmRtf.frx":F3CC
+      Picture         =   "FrmRtf.frx":F46C
       Style           =   1  'Graphical
       TabIndex        =   24
       ToolTipText     =   "Cortado"
@@ -440,7 +450,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command20 
       Height          =   315
       Left            =   7800
-      Picture         =   "FrmRtf.frx":F756
+      Picture         =   "FrmRtf.frx":F7F6
       Style           =   1  'Graphical
       TabIndex        =   23
       ToolTipText     =   "Localizar Proxima"
@@ -459,7 +469,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command19 
       Height          =   315
       Left            =   7440
-      Picture         =   "FrmRtf.frx":FAE0
+      Picture         =   "FrmRtf.frx":FB80
       Style           =   1  'Graphical
       TabIndex        =   21
       ToolTipText     =   "Localizar"
@@ -469,7 +479,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command18 
       Height          =   315
       Left            =   3840
-      Picture         =   "FrmRtf.frx":FE6A
+      Picture         =   "FrmRtf.frx":FF0A
       Style           =   1  'Graphical
       TabIndex        =   20
       ToolTipText     =   "Copiar Texto Selecionado"
@@ -479,7 +489,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command17 
       Height          =   315
       Left            =   3480
-      Picture         =   "FrmRtf.frx":103F4
+      Picture         =   "FrmRtf.frx":10494
       Style           =   1  'Graphical
       TabIndex        =   19
       ToolTipText     =   "Recortar Texto Selecionado"
@@ -489,7 +499,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command16 
       Height          =   315
       Left            =   4200
-      Picture         =   "FrmRtf.frx":1077E
+      Picture         =   "FrmRtf.frx":1081E
       Style           =   1  'Graphical
       TabIndex        =   18
       ToolTipText     =   "Colar Texto "
@@ -499,7 +509,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command15 
       Height          =   315
       Left            =   7560
-      Picture         =   "FrmRtf.frx":10D08
+      Picture         =   "FrmRtf.frx":10DA8
       Style           =   1  'Graphical
       TabIndex        =   17
       ToolTipText     =   "Escolher Cor"
@@ -509,7 +519,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command14 
       Height          =   315
       Left            =   11160
-      Picture         =   "FrmRtf.frx":11092
+      Picture         =   "FrmRtf.frx":11132
       Style           =   1  'Graphical
       TabIndex        =   16
       ToolTipText     =   "Sair"
@@ -519,7 +529,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command13 
       Height          =   315
       Left            =   2760
-      Picture         =   "FrmRtf.frx":1161C
+      Picture         =   "FrmRtf.frx":116BC
       Style           =   1  'Graphical
       TabIndex        =   15
       ToolTipText     =   "Configurar Impressoras"
@@ -529,7 +539,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command12 
       Height          =   315
       Left            =   10320
-      Picture         =   "FrmRtf.frx":119A6
+      Picture         =   "FrmRtf.frx":11A46
       Style           =   1  'Graphical
       TabIndex        =   14
       ToolTipText     =   "Alinhar a Direita"
@@ -539,7 +549,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command11 
       Height          =   315
       Left            =   9960
-      Picture         =   "FrmRtf.frx":11D30
+      Picture         =   "FrmRtf.frx":11DD0
       Style           =   1  'Graphical
       TabIndex        =   13
       ToolTipText     =   "Centralizar"
@@ -549,7 +559,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command10 
       Height          =   315
       Left            =   9600
-      Picture         =   "FrmRtf.frx":120BA
+      Picture         =   "FrmRtf.frx":1215A
       Style           =   1  'Graphical
       TabIndex        =   12
       ToolTipText     =   "Alinhar a Esquerda"
@@ -559,7 +569,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command9 
       Height          =   315
       Left            =   1200
-      Picture         =   "FrmRtf.frx":12444
+      Picture         =   "FrmRtf.frx":124E4
       Style           =   1  'Graphical
       TabIndex        =   11
       ToolTipText     =   "Sublinhado"
@@ -569,7 +579,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command8 
       Height          =   315
       Left            =   840
-      Picture         =   "FrmRtf.frx":127CE
+      Picture         =   "FrmRtf.frx":1286E
       Style           =   1  'Graphical
       TabIndex        =   10
       ToolTipText     =   "Italico"
@@ -579,7 +589,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command7 
       Height          =   315
       Left            =   480
-      Picture         =   "FrmRtf.frx":12B58
+      Picture         =   "FrmRtf.frx":12BF8
       Style           =   1  'Graphical
       TabIndex        =   9
       ToolTipText     =   "Negrito/Bold"
@@ -589,7 +599,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command6 
       Height          =   315
       Left            =   0
-      Picture         =   "FrmRtf.frx":12EE2
+      Picture         =   "FrmRtf.frx":12F82
       Style           =   1  'Graphical
       TabIndex        =   8
       ToolTipText     =   "Checar Ortografia"
@@ -599,7 +609,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command5 
       Height          =   315
       Left            =   4920
-      Picture         =   "FrmRtf.frx":1326C
+      Picture         =   "FrmRtf.frx":1330C
       Style           =   1  'Graphical
       TabIndex        =   7
       ToolTipText     =   "Desfazer"
@@ -609,7 +619,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command4 
       Height          =   315
       Left            =   2100
-      Picture         =   "FrmRtf.frx":135F6
+      Picture         =   "FrmRtf.frx":13696
       Style           =   1  'Graphical
       TabIndex        =   6
       ToolTipText     =   "Imprimir Documento Atual"
@@ -619,7 +629,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command3 
       Height          =   315
       Left            =   960
-      Picture         =   "FrmRtf.frx":13B80
+      Picture         =   "FrmRtf.frx":13C20
       Style           =   1  'Graphical
       TabIndex        =   5
       ToolTipText     =   "Salvar Documento Atual"
@@ -629,7 +639,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command2 
       Height          =   315
       Left            =   480
-      Picture         =   "FrmRtf.frx":13F0A
+      Picture         =   "FrmRtf.frx":13FAA
       Style           =   1  'Graphical
       TabIndex        =   4
       ToolTipText     =   "Abrir Documento Existente"
@@ -639,7 +649,7 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command1 
       Height          =   315
       Left            =   0
-      Picture         =   "FrmRtf.frx":14494
+      Picture         =   "FrmRtf.frx":14534
       Style           =   1  'Graphical
       TabIndex        =   3
       ToolTipText     =   "Iniciar Documento Em Branco"
@@ -1253,8 +1263,8 @@ End Sub
 '***************************************************************************
 
 Private Sub Command21_Click()
-    RichTextbox1.SelStrikeThru = Not RichTextbox1.SelStrikeThru
-    If RichTextbox1.SelStrikeThru Then
+    RichTextbox1.SelStrikethru = Not RichTextbox1.SelStrikethru
+    If RichTextbox1.SelStrikethru Then
         Command21.Appearance = 0
     Else
         Command21.Appearance = 1
@@ -1290,7 +1300,7 @@ Private Sub Command22_Click()
         .SelFontSize = oDLG.FontSize
         .SelBold = oDLG.FontBold
         .SelItalic = oDLG.FontItalic
-        .SelStrikeThru = oDLG.FontStrikeThru
+        .SelStrikethru = oDLG.FontStrikeThru
         .SelUnderline = oDLG.FontUnderline
         .SelColor = oDLG.Color
     End With
@@ -1521,16 +1531,16 @@ Private Sub Form_Load()
     '    .ListIndex = 0
    ' End With
 
-    With cmbFontSize
+    With cmbfontsize
 
         '******************************************************************
         '* Populate the combo with sizes in
         '* increments of 2.
         '******************************************************************
 
-        For I = 8 To 72 Step 2
-            .AddItem I
-        Next I
+        For i = 8 To 72 Step 2
+            .AddItem i
+        Next i
 
         '******************************************************************
         '* Set ListIndex to 0
@@ -1982,42 +1992,13 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuprint_Click()
-    'Dim DLG As New clsCommonDialogs
-    'DLG.PrinterFlags = CdlPDReturnDC + CdlPDNoPageNums
-    'If RichTextbox1.SelLength = 0 Then
-    '    DLG.PrinterFlags = DLG.PrinterFlags + CdlPDAllPages
-    'Else
-    '    DLG.PrinterFlags = DLG.PrinterFlags + CdlPDSelection
-    'End If
-    'DLG.DialogPrint
-    'Printer.Print ""                             'Inicializa Impressora Necessario
-    'RichTextbox1.SelPrint Printer.hDC
-    PrinterEx.ShowPrintPreview Me, "MyPrintingRTF"
+    PrintPreview1.ShowPreview
     RichTextbox1.SetFocus
 End Sub
-Public Property Get Printer() As Printer
-    Set Printer = vbExtra.Printer2
-End Property
-Public Property Set Printer(nPrinter As Printer)
-    Set vbExtra.Printer2 = nPrinter
-End Property
-Public Sub MyPrintingRTF()
-'    Printer.FontName = "Arial"
-'    Printer.FontSize = 12
-    PrinterEx.PrintRichTextBox RichTextbox1
+Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+    PrintPreview1.PrintRichTextBox RichTextbox1
     Printer.EndDoc
 End Sub
-
-
-'***************************************************************************
-'*  Name         : mnuright_Click
-'*  Description  :
-'*  Parameters   : None
-'*  Returns      : Nothing
-'*  Author       :
-'*  Date         : 20 dez 2003
-'***************************************************************************
-
 Private Sub mnuright_Click()
     If RichTextbox1.SelLength > 0 Then
         RichTextbox1.SelAlignment = 1

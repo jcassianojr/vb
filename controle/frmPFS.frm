@@ -1,7 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form frmPFS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFS"
@@ -17,11 +18,20 @@ Begin VB.Form frmPFS
    ScaleWidth      =   12180
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   9240
+      Top             =   120
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"frmPFS.frx":058A
+   End
    Begin VB.CommandButton cmdpeg 
       Height          =   360
       Index           =   0
       Left            =   8160
-      Picture         =   "frmPFS.frx":058A
+      Picture         =   "frmPFS.frx":062A
       Style           =   1  'Graphical
       TabIndex        =   319
       TabStop         =   0   'False
@@ -68,14 +78,21 @@ Begin VB.Form frmPFS
       Width           =   10455
       _ExtentX        =   18441
       _ExtentY        =   9128
-      _Version        =   393216
       Tabs            =   11
-      Tab             =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       TabsPerRow      =   6
+      Tab             =   5
       TabHeight       =   706
       TabCaption(0)   =   "Mao de Obra"
-      TabPicture(0)   =   "frmPFS.frx":0B14
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlCount=   63
       Tab(0).Control(0)=   "escArranjo(2)"
       Tab(0).Control(1)=   "CmdEscMe01"
       Tab(0).Control(2)=   "escArranjo(1)"
@@ -112,9 +129,7 @@ Begin VB.Form frmPFS
       Tab(0).Control(33)=   "Command7(0)"
       Tab(0).Control(34)=   "Command7(1)"
       Tab(0).Control(35)=   "TXTFIELDS(31)"
-      Tab(0).Control(35).Enabled=   0   'False
       Tab(0).Control(36)=   "Command8"
-      Tab(0).Control(36).Enabled=   0   'False
       Tab(0).Control(37)=   "TXTFIELDS(32)"
       Tab(0).Control(38)=   "TXTFIELDS(33)"
       Tab(0).Control(39)=   "escsetref"
@@ -141,10 +156,8 @@ Begin VB.Form frmPFS
       Tab(0).Control(60)=   "lblLabels(16)"
       Tab(0).Control(61)=   "lblLabels(17)"
       Tab(0).Control(62)=   "lblLabels(18)"
-      Tab(0).ControlCount=   63
       TabCaption(1)   =   "FiguraProcesso"
-      TabPicture(1)   =   "frmPFS.frx":0B30
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlCount=   8
       Tab(1).Control(0)=   "Picture2(0)"
       Tab(1).Control(1)=   "Picture1(0)"
       Tab(1).Control(2)=   "Incimg(0)"
@@ -153,19 +166,15 @@ Begin VB.Form frmPFS
       Tab(1).Control(5)=   "cmdimprimir(0)"
       Tab(1).Control(6)=   "CmdPaste(0)"
       Tab(1).Control(7)=   "VerImg(0)"
-      Tab(1).ControlCount=   8
       TabCaption(2)   =   "Ferramenta Fluxo"
-      TabPicture(2)   =   "frmPFS.frx":0B4C
-      Tab(2).ControlEnabled=   0   'False
+      Tab(2).ControlCount=   75
       Tab(2).Control(0)=   "TXTFIELDS(65)"
       Tab(2).Control(1)=   "TXTFIELDS(12)"
       Tab(2).Control(2)=   "TXTFIELDS(66)"
       Tab(2).Control(3)=   "EscCodFlu(13)"
       Tab(2).Control(4)=   "CMDSIG(13)"
-      Tab(2).Control(4).Enabled=   0   'False
       Tab(2).Control(5)=   "EscCodFlu(12)"
       Tab(2).Control(6)=   "CMDSIG(12)"
-      Tab(2).Control(6).Enabled=   0   'False
       Tab(2).Control(7)=   "TXTFIELDS(63)"
       Tab(2).Control(8)=   "TXTFIELDS(62)"
       Tab(2).Control(9)=   "TXTFIELDS(13)"
@@ -211,27 +220,16 @@ Begin VB.Form frmPFS
       Tab(2).Control(49)=   "CmdForFer(2)"
       Tab(2).Control(50)=   "CmdForFer(3)"
       Tab(2).Control(51)=   "CMDSIG(1)"
-      Tab(2).Control(51).Enabled=   0   'False
       Tab(2).Control(52)=   "CMDSIG(2)"
-      Tab(2).Control(52).Enabled=   0   'False
       Tab(2).Control(53)=   "CMDSIG(3)"
-      Tab(2).Control(53).Enabled=   0   'False
       Tab(2).Control(54)=   "CMDSIG(4)"
-      Tab(2).Control(54).Enabled=   0   'False
       Tab(2).Control(55)=   "CMDSIG(5)"
-      Tab(2).Control(55).Enabled=   0   'False
       Tab(2).Control(56)=   "CMDSIG(6)"
-      Tab(2).Control(56).Enabled=   0   'False
       Tab(2).Control(57)=   "CMDSIG(7)"
-      Tab(2).Control(57).Enabled=   0   'False
       Tab(2).Control(58)=   "CMDSIG(8)"
-      Tab(2).Control(58).Enabled=   0   'False
       Tab(2).Control(59)=   "CMDSIG(9)"
-      Tab(2).Control(59).Enabled=   0   'False
       Tab(2).Control(60)=   "CMDSIG(10)"
-      Tab(2).Control(60).Enabled=   0   'False
       Tab(2).Control(61)=   "CMDSIG(11)"
-      Tab(2).Control(61).Enabled=   0   'False
       Tab(2).Control(62)=   "EscCodFlu(11)"
       Tab(2).Control(63)=   "TXTFIELDS(61)"
       Tab(2).Control(64)=   "TXTFIELDS(19)"
@@ -245,10 +243,8 @@ Begin VB.Form frmPFS
       Tab(2).Control(72)=   "lblLabels(10)"
       Tab(2).Control(73)=   "Label13"
       Tab(2).Control(74)=   "lblLabels(19)"
-      Tab(2).ControlCount=   75
       TabCaption(3)   =   "EPI/Observações"
-      TabPicture(3)   =   "frmPFS.frx":0B68
-      Tab(3).ControlEnabled=   0   'False
+      Tab(3).ControlCount=   14
       Tab(3).Control(0)=   "EPI07"
       Tab(3).Control(1)=   "EPI06"
       Tab(3).Control(2)=   "EPI05"
@@ -263,10 +259,8 @@ Begin VB.Form frmPFS
       Tab(3).Control(11)=   "Command10"
       Tab(3).Control(12)=   "Label1"
       Tab(3).Control(13)=   "Label3"
-      Tab(3).ControlCount=   14
       TabCaption(4)   =   "Instrucoes"
-      TabPicture(4)   =   "frmPFS.frx":0B84
-      Tab(4).ControlEnabled=   0   'False
+      Tab(4).ControlCount=   8
       Tab(4).Control(0)=   "CmdRenumera"
       Tab(4).Control(1)=   "InsEdit"
       Tab(4).Control(2)=   "Command3"
@@ -275,24 +269,15 @@ Begin VB.Form frmPFS
       Tab(4).Control(5)=   "GridIns"
       Tab(4).Control(6)=   "txttaktat"
       Tab(4).Control(7)=   "txttak"
-      Tab(4).ControlCount=   8
       TabCaption(5)   =   "Fluxo 2"
-      TabPicture(5)   =   "frmPFS.frx":0BA0
-      Tab(5).ControlEnabled=   -1  'True
-      Tab(5).Control(0)=   "GrdQsbLep"
-      Tab(5).Control(0).Enabled=   0   'False
-      Tab(5).Control(1)=   "Command16"
-      Tab(5).Control(1).Enabled=   0   'False
-      Tab(5).Control(2)=   "Command15"
-      Tab(5).Control(2).Enabled=   0   'False
-      Tab(5).Control(3)=   "Command14"
-      Tab(5).Control(3).Enabled=   0   'False
-      Tab(5).Control(4)=   "Command13"
-      Tab(5).Control(4).Enabled=   0   'False
       Tab(5).ControlCount=   5
+      Tab(5).Control(0)=   "Command13"
+      Tab(5).Control(1)=   "Command14"
+      Tab(5).Control(2)=   "Command15"
+      Tab(5).Control(3)=   "Command16"
+      Tab(5).Control(4)=   "GrdQsbLep"
       TabCaption(6)   =   "Almofada"
-      TabPicture(6)   =   "frmPFS.frx":0BBC
-      Tab(6).ControlEnabled=   0   'False
+      Tab(6).ControlCount=   98
       Tab(6).Control(0)=   "TXTFIELDS(84)"
       Tab(6).Control(1)=   "TXTFIELDS(83)"
       Tab(6).Control(2)=   "TXTFIELDS(82)"
@@ -306,7 +291,6 @@ Begin VB.Form frmPFS
       Tab(6).Control(10)=   "TXTFIELDS(47)"
       Tab(6).Control(11)=   "TXTFIELDS(48)"
       Tab(6).Control(12)=   "TXTFIELDS(36)"
-      Tab(6).Control(12).Enabled=   0   'False
       Tab(6).Control(13)=   "Command20"
       Tab(6).Control(14)=   "esc1(1)"
       Tab(6).Control(15)=   "esc1(2)"
@@ -392,10 +376,8 @@ Begin VB.Form frmPFS
       Tab(6).Control(95)=   "Label10"
       Tab(6).Control(96)=   "Label11"
       Tab(6).Control(97)=   "Label12"
-      Tab(6).ControlCount=   98
       TabCaption(7)   =   "Figura Ferramenta"
-      TabPicture(7)   =   "frmPFS.frx":0BD8
-      Tab(7).ControlEnabled=   0   'False
+      Tab(7).ControlCount=   16
       Tab(7).Control(0)=   "Picture1(3)"
       Tab(7).Control(1)=   "Picture2(3)"
       Tab(7).Control(2)=   "Picture2(1)"
@@ -412,16 +394,11 @@ Begin VB.Form frmPFS
       Tab(7).Control(13)=   "CmdPaste(3)"
       Tab(7).Control(14)=   "VerImg(1)"
       Tab(7).Control(15)=   "VerImg(3)"
-      Tab(7).ControlCount=   16
       TabCaption(8)   =   "Embalagem"
-      TabPicture(8)   =   "frmPFS.frx":0BF4
-      Tab(8).ControlEnabled=   0   'False
+      Tab(8).ControlCount=   18
       Tab(8).Control(0)=   "ESCpro(1)"
-      Tab(8).Control(0).Enabled=   0   'False
       Tab(8).Control(1)=   "Cmdbusmr"
-      Tab(8).Control(1).Enabled=   0   'False
       Tab(8).Control(2)=   "Cmdescmr"
-      Tab(8).Control(2).Enabled=   0   'False
       Tab(8).Control(3)=   "TXTFIELDS(71)"
       Tab(8).Control(4)=   "TXTFIELDS(70)"
       Tab(8).Control(5)=   "TXTFIELDS(69)"
@@ -437,14 +414,10 @@ Begin VB.Form frmPFS
       Tab(8).Control(15)=   "lblLabels(25)"
       Tab(8).Control(16)=   "lblLabels(24)"
       Tab(8).Control(17)=   "lblLabels(22)"
-      Tab(8).ControlCount=   18
       TabCaption(9)   =   "..."
-      TabPicture(9)   =   "frmPFS.frx":0C10
-      Tab(9).ControlEnabled=   0   'False
       Tab(9).ControlCount=   0
       TabCaption(10)  =   "Vista Explodida"
-      TabPicture(10)  =   "frmPFS.frx":0C2C
-      Tab(10).ControlEnabled=   0   'False
+      Tab(10).ControlCount=   38
       Tab(10).Control(0)=   "TXTFIELDS(95)"
       Tab(10).Control(1)=   "TXTFIELDS(94)"
       Tab(10).Control(2)=   "TXTFIELDS(93)"
@@ -483,7 +456,6 @@ Begin VB.Form frmPFS
       Tab(10).Control(35)=   "lblLabels(27)"
       Tab(10).Control(36)=   "lblLabels(26)"
       Tab(10).Control(37)=   "lblLabels(23)"
-      Tab(10).ControlCount=   38
       Begin VB.TextBox TXTFIELDS 
          Height          =   285
          Index           =   95
@@ -721,7 +693,7 @@ Begin VB.Form frmPFS
       Begin VB.CommandButton Cmdescmr 
          Height          =   375
          Left            =   -66960
-         Picture         =   "frmPFS.frx":0C48
+         Picture         =   "frmPFS.frx":0BB4
          Style           =   1  'Graphical
          TabIndex        =   296
          TabStop         =   0   'False
@@ -1074,7 +1046,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   13
          Left            =   -66720
-         Picture         =   "frmPFS.frx":11D2
+         Picture         =   "frmPFS.frx":113E
          Style           =   1  'Graphical
          TabIndex        =   239
          TabStop         =   0   'False
@@ -1094,7 +1066,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   12
          Left            =   -66720
-         Picture         =   "frmPFS.frx":175C
+         Picture         =   "frmPFS.frx":16C8
          Style           =   1  'Graphical
          TabIndex        =   237
          TabStop         =   0   'False
@@ -3250,7 +3222,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   1
          Left            =   -74880
-         Picture         =   "frmPFS.frx":1CE6
+         Picture         =   "frmPFS.frx":1C52
          Style           =   1  'Graphical
          TabIndex        =   73
          TabStop         =   0   'False
@@ -3261,7 +3233,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   2
          Left            =   -72480
-         Picture         =   "frmPFS.frx":2270
+         Picture         =   "frmPFS.frx":21DC
          Style           =   1  'Graphical
          TabIndex        =   72
          TabStop         =   0   'False
@@ -3272,7 +3244,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   3
          Left            =   -74880
-         Picture         =   "frmPFS.frx":27FA
+         Picture         =   "frmPFS.frx":2766
          Style           =   1  'Graphical
          TabIndex        =   71
          TabStop         =   0   'False
@@ -3283,7 +3255,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   4
          Left            =   -72480
-         Picture         =   "frmPFS.frx":2D84
+         Picture         =   "frmPFS.frx":2CF0
          Style           =   1  'Graphical
          TabIndex        =   70
          TabStop         =   0   'False
@@ -3294,7 +3266,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   5
          Left            =   -74880
-         Picture         =   "frmPFS.frx":330E
+         Picture         =   "frmPFS.frx":327A
          Style           =   1  'Graphical
          TabIndex        =   69
          TabStop         =   0   'False
@@ -3305,7 +3277,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   6
          Left            =   -72480
-         Picture         =   "frmPFS.frx":3898
+         Picture         =   "frmPFS.frx":3804
          Style           =   1  'Graphical
          TabIndex        =   68
          TabStop         =   0   'False
@@ -3316,7 +3288,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   7
          Left            =   -74880
-         Picture         =   "frmPFS.frx":3E22
+         Picture         =   "frmPFS.frx":3D8E
          Style           =   1  'Graphical
          TabIndex        =   67
          TabStop         =   0   'False
@@ -3327,7 +3299,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   8
          Left            =   -72480
-         Picture         =   "frmPFS.frx":43AC
+         Picture         =   "frmPFS.frx":4318
          Style           =   1  'Graphical
          TabIndex        =   66
          TabStop         =   0   'False
@@ -3338,7 +3310,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   9
          Left            =   -74880
-         Picture         =   "frmPFS.frx":4936
+         Picture         =   "frmPFS.frx":48A2
          Style           =   1  'Graphical
          TabIndex        =   65
          TabStop         =   0   'False
@@ -3349,7 +3321,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   10
          Left            =   -72480
-         Picture         =   "frmPFS.frx":4EC0
+         Picture         =   "frmPFS.frx":4E2C
          Style           =   1  'Graphical
          TabIndex        =   64
          TabStop         =   0   'False
@@ -3360,7 +3332,7 @@ Begin VB.Form frmPFS
          Height          =   255
          Index           =   11
          Left            =   -66720
-         Picture         =   "frmPFS.frx":544A
+         Picture         =   "frmPFS.frx":53B6
          Style           =   1  'Graphical
          TabIndex        =   63
          TabStop         =   0   'False
@@ -3767,7 +3739,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":59D4
+         Picture         =   "frmPFS.frx":5940
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -3789,7 +3761,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":5E6E
+         Picture         =   "frmPFS.frx":5DDA
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -3811,7 +3783,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":6308
+         Picture         =   "frmPFS.frx":6274
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -3833,7 +3805,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":67A2
+         Picture         =   "frmPFS.frx":670E
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -3855,7 +3827,7 @@ Begin VB.Form frmPFS
          Width           =   1335
          _ExtentX        =   2355
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":6C3C
+         Picture         =   "frmPFS.frx":6BA8
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -3877,7 +3849,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":70D6
+         Picture         =   "frmPFS.frx":7042
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -3899,7 +3871,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":7570
+         Picture         =   "frmPFS.frx":74DC
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -3921,7 +3893,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":7A0A
+         Picture         =   "frmPFS.frx":7976
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -3943,7 +3915,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":7EA4
+         Picture         =   "frmPFS.frx":7E10
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -3965,7 +3937,7 @@ Begin VB.Form frmPFS
          Width           =   1335
          _ExtentX        =   2355
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":833E
+         Picture         =   "frmPFS.frx":82AA
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -3987,7 +3959,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":87D8
+         Picture         =   "frmPFS.frx":8744
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4009,7 +3981,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":8C72
+         Picture         =   "frmPFS.frx":8BDE
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4031,7 +4003,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":910C
+         Picture         =   "frmPFS.frx":9078
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4053,7 +4025,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":95A6
+         Picture         =   "frmPFS.frx":9512
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4075,7 +4047,7 @@ Begin VB.Form frmPFS
          Width           =   1335
          _ExtentX        =   2355
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":9A40
+         Picture         =   "frmPFS.frx":99AC
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4097,7 +4069,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":9EDA
+         Picture         =   "frmPFS.frx":9E46
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4119,7 +4091,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":A474
+         Picture         =   "frmPFS.frx":A3E0
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4141,7 +4113,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":AA0E
+         Picture         =   "frmPFS.frx":A97A
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4163,7 +4135,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":AFA8
+         Picture         =   "frmPFS.frx":AF14
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4185,7 +4157,7 @@ Begin VB.Form frmPFS
          Width           =   1335
          _ExtentX        =   2355
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":B542
+         Picture         =   "frmPFS.frx":B4AE
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4207,7 +4179,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":BADC
+         Picture         =   "frmPFS.frx":BA48
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4229,7 +4201,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":C076
+         Picture         =   "frmPFS.frx":BFE2
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4251,7 +4223,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":C610
+         Picture         =   "frmPFS.frx":C57C
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4273,7 +4245,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":CBAA
+         Picture         =   "frmPFS.frx":CB16
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4295,7 +4267,7 @@ Begin VB.Form frmPFS
          Width           =   1335
          _ExtentX        =   2355
          _ExtentY        =   767
-         Picture         =   "frmPFS.frx":D144
+         Picture         =   "frmPFS.frx":D0B0
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4317,7 +4289,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPFS.frx":D6DE
+         Picture         =   "frmPFS.frx":D64A
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4339,7 +4311,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPFS.frx":DB78
+         Picture         =   "frmPFS.frx":DAE4
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4361,7 +4333,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPFS.frx":E012
+         Picture         =   "frmPFS.frx":DF7E
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4383,7 +4355,7 @@ Begin VB.Form frmPFS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPFS.frx":E4AC
+         Picture         =   "frmPFS.frx":E418
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4405,7 +4377,7 @@ Begin VB.Form frmPFS
          Width           =   1335
          _ExtentX        =   2355
          _ExtentY        =   873
-         Picture         =   "frmPFS.frx":E946
+         Picture         =   "frmPFS.frx":E8B2
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -4992,7 +4964,7 @@ Begin VB.Form frmPFS
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPFS.frx":EDE0
+      Picture         =   "frmPFS.frx":ED4C
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -5012,7 +4984,7 @@ Begin VB.Form frmPFS
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPFS.frx":F37A
+      Picture         =   "frmPFS.frx":F2E6
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -5032,7 +5004,7 @@ Begin VB.Form frmPFS
       Width           =   1455
       _ExtentX        =   2566
       _ExtentY        =   1296
-      Picture         =   "frmPFS.frx":F914
+      Picture         =   "frmPFS.frx":F880
       Caption         =   "Configurar Impressora"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -5279,7 +5251,7 @@ Private Sub CmdImprimir_Click(Index As Integer)
         Alert ("Sem Imagem")
     Else
         ePASS01 = Index
-        PrinterEx.ShowPrintPreview Me, "MyPrintingRoutine"
+        PrintPreview1.ShowPreview
     End If
 End Sub
 
@@ -5428,13 +5400,13 @@ Private Sub Command20_Click()
     If Not MDG("Trocar Tipo Almofada") Then
         Exit Sub
     End If
-    If TXTFIELDS(36).tEXT = "6" Then
-        TXTFIELDS(36).tEXT = "8"
+    If TXTFIELDS(36).Text = "6" Then
+        TXTFIELDS(36).Text = "8"
     Else
-        TXTFIELDS(36).tEXT = "6"
+        TXTFIELDS(36).Text = "6"
     End If
     For X = 1 To 8
-        If TXTFIELDS(36).tEXT = "6" Then
+        If TXTFIELDS(36).Text = "6" Then
             cTEMP = String(6, "¡") + Space(2)
             If X >= 5 Then
                 cTEMP = Space(8)
@@ -5442,7 +5414,7 @@ Private Sub Command20_Click()
         Else
             cTEMP = String(8, "¡")
         End If
-        TXTFIELDS(40 + X).tEXT = cTEMP
+        TXTFIELDS(40 + X).Text = cTEMP
     Next
 End Sub
 Private Sub Command3_Click()
@@ -5618,11 +5590,11 @@ Private Sub CommandX_Click(Index As Integer)
     End Select
 
     cARQ = cARQ & "_PF_"
-    cARQ = cARQ & StrZero(FixInt(TXTPF.tEXT), 6)
+    cARQ = cARQ & StrZero(FixInt(TXTPF.Text), 6)
     cARQ = cARQ & "_SEQ_"
-    cARQ = cARQ & StrZero(FixInt(TXTSEQ.tEXT), 3)
+    cARQ = cARQ & StrZero(FixInt(TXTSEQ.Text), 3)
     cARQ = cARQ & "_SSQ_"
-    cARQ = cARQ & StrZero(FixInt(TXTSSQ.tEXT), 3)
+    cARQ = cARQ & StrZero(FixInt(TXTSSQ.Text), 3)
     salvarpict Me, Picture1(Index), cARQ
 
 End Sub
@@ -5672,15 +5644,15 @@ Private Sub esc1_Click(Index As Integer)
     Dim cGRV As String
     linha = (Int((Index - 1) / 8)) + 1
     coluna = (Index + 8) - (linha * 8)
-    If TXTFIELDS(36).tEXT = "6" And linha > 4 Then
+    If TXTFIELDS(36).Text = "6" And linha > 4 Then
         Alert ("Linha Incorreta para Formato 4x6")
         Exit Sub
     End If
-    If TXTFIELDS(36).tEXT = "6" And coluna > 6 Then
+    If TXTFIELDS(36).Text = "6" And coluna > 6 Then
         Alert ("Coluna Incorreta para Formato 4x6")
         Exit Sub
     End If
-    cTEMP = TXTFIELDS(40 + linha).tEXT
+    cTEMP = TXTFIELDS(40 + linha).Text
     cDIG = Mid(cTEMP, coluna, 1)
     If cDIG = "l" Then
         cDIG = "¡"
@@ -5695,7 +5667,7 @@ Private Sub esc1_Click(Index As Integer)
     Case Else
         cGRV = Mid(cTEMP, 1, coluna - 1) + cDIG + Mid(cTEMP, coluna + 1)
     End Select
-    TXTFIELDS(40 + linha).tEXT = cGRV
+    TXTFIELDS(40 + linha).Text = cGRV
     TXTFIELDS(40 + linha).Refresh
 End Sub
 
@@ -5855,9 +5827,9 @@ Private Sub Form_Load()
     Dim X
     CenterFormToScreen Me
     lTROCOU = Array(False, False, False, False, False)
-    TXTPF.tEXT = nPF
-    TXTSEQ.tEXT = nSEQ
-    TXTSSQ.tEXT = nSSQ
+    TXTPF.Text = nPF
+    TXTSEQ.Text = nSEQ
+    TXTSSQ.Text = nSSQ
     cARQPF = Sdb        'agora tem que usar sdb pois pode ser pf pfp pfg
     
 'Usando 2 matrizes pois estava com erro string complex
@@ -6048,16 +6020,10 @@ Private Sub VerImg_Click(Index As Integer)
         End If
     End If
 End Sub
-Public Sub MyPrintingRoutine()
+Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
     On Error Resume Next
     Printer.Print
     Printer.PaintPicture Picture1(ePASS01), 0, 0
     Printer.EndDoc
 End Sub
-Public Property Get Printer() As Printer
-    Set Printer = vbExtra.Printer2
-End Property
-Public Property Set Printer(nPrinter As Printer)
-    Set vbExtra.Printer2 = nPrinter
-End Property
 

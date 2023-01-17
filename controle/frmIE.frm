@@ -1,7 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form frmIE 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "IE"
@@ -17,6 +18,15 @@ Begin VB.Form frmIE
    ScaleWidth      =   11445
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   7920
+      Top             =   960
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"frmIE.frx":058A
+   End
    Begin VB.TextBox TXTFIELDS 
       Height          =   375
       Index           =   25
@@ -630,7 +640,7 @@ Begin VB.Form frmIE
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":058A
+         Picture         =   "frmIE.frx":062A
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -651,7 +661,7 @@ Begin VB.Form frmIE
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":0B24
+         Picture         =   "frmIE.frx":0BC4
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -672,7 +682,7 @@ Begin VB.Form frmIE
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":10BE
+         Picture         =   "frmIE.frx":115E
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -693,7 +703,7 @@ Begin VB.Form frmIE
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":1658
+         Picture         =   "frmIE.frx":16F8
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -714,7 +724,7 @@ Begin VB.Form frmIE
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":1BF2
+         Picture         =   "frmIE.frx":1C92
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -735,7 +745,7 @@ Begin VB.Form frmIE
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":218C
+         Picture         =   "frmIE.frx":222C
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -755,7 +765,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":2726
+         Picture         =   "frmIE.frx":27C6
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -776,7 +786,7 @@ Begin VB.Form frmIE
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmIE.frx":2CC0
+         Picture         =   "frmIE.frx":2D60
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -797,7 +807,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":325A
+         Picture         =   "frmIE.frx":32FA
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -818,7 +828,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":37F4
+         Picture         =   "frmIE.frx":3894
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -839,7 +849,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":3D8E
+         Picture         =   "frmIE.frx":3E2E
          Caption         =   "Apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -861,7 +871,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":4328
+         Picture         =   "frmIE.frx":43C8
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -883,7 +893,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":47C2
+         Picture         =   "frmIE.frx":4862
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -905,7 +915,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":4C5C
+         Picture         =   "frmIE.frx":4CFC
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -927,7 +937,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":50F6
+         Picture         =   "frmIE.frx":5196
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -949,7 +959,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":5590
+         Picture         =   "frmIE.frx":5630
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -971,7 +981,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":5A2A
+         Picture         =   "frmIE.frx":5ACA
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -993,7 +1003,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":5EC4
+         Picture         =   "frmIE.frx":5F64
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1015,7 +1025,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":635E
+         Picture         =   "frmIE.frx":63FE
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1037,7 +1047,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmIE.frx":67F8
+         Picture         =   "frmIE.frx":6898
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1059,7 +1069,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmIE.frx":6C92
+         Picture         =   "frmIE.frx":6D32
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1081,7 +1091,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmIE.frx":712C
+         Picture         =   "frmIE.frx":71CC
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1103,7 +1113,7 @@ Begin VB.Form frmIE
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmIE.frx":75C6
+         Picture         =   "frmIE.frx":7666
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1340,7 +1350,7 @@ Begin VB.Form frmIE
       Width           =   1155
       _ExtentX        =   2037
       _ExtentY        =   767
-      Picture         =   "frmIE.frx":7A60
+      Picture         =   "frmIE.frx":7B00
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1360,7 +1370,7 @@ Begin VB.Form frmIE
       Width           =   1155
       _ExtentX        =   2037
       _ExtentY        =   767
-      Picture         =   "frmIE.frx":7FFA
+      Picture         =   "frmIE.frx":809A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1381,7 +1391,7 @@ Begin VB.Form frmIE
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":8594
+      Picture         =   "frmIE.frx":8634
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1402,7 +1412,7 @@ Begin VB.Form frmIE
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":8B2E
+      Picture         =   "frmIE.frx":8BCE
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1424,7 +1434,7 @@ Begin VB.Form frmIE
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":90C8
+      Picture         =   "frmIE.frx":9168
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1446,7 +1456,7 @@ Begin VB.Form frmIE
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":9662
+      Picture         =   "frmIE.frx":9702
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1468,7 +1478,7 @@ Begin VB.Form frmIE
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":9BFC
+      Picture         =   "frmIE.frx":9C9C
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1490,7 +1500,7 @@ Begin VB.Form frmIE
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":A196
+      Picture         =   "frmIE.frx":A236
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1512,7 +1522,7 @@ Begin VB.Form frmIE
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":A730
+      Picture         =   "frmIE.frx":A7D0
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1534,7 +1544,7 @@ Begin VB.Form frmIE
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":ACCA
+      Picture         =   "frmIE.frx":AD6A
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1556,7 +1566,7 @@ Begin VB.Form frmIE
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmIE.frx":B264
+      Picture         =   "frmIE.frx":B304
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1745,13 +1755,16 @@ Private Sub Cmdescmr_Click()
         TXTFIELDS(20) = eRETU02
     End If
 End Sub
-
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+   Printer.PaintPicture Picture1(ePASS02), 0, 0
+   Printer.EndDoc
+End Sub
 Private Sub CmdImprimir_Click(Index As Integer)
     If Picture1(Index).Height = 0 Then
         Alert ("Sem Imagem")
     Else
-        Printer.PaintPicture Picture1(Index), 0, 0
-        Printer.EndDoc
+        ePASS02 = Index
+        PrintPreview1.ShowPreview
     End If
 
 End Sub

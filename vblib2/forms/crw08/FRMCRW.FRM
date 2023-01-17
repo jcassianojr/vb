@@ -2,6 +2,7 @@ VERSION 5.00
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "crystl32.ocx"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form FrmCrw 
    Caption         =   "Crystal Report Relatorio"
    ClientHeight    =   6000
@@ -13,6 +14,15 @@ Begin VB.Form FrmCrw
    ScaleHeight     =   6000
    ScaleWidth      =   11865
    WindowState     =   2  'Maximized
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   10080
+      Top             =   2520
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"FRMCRW.frx":058A
+   End
    Begin VBCCR17.RichTextBox RichTextBox1 
       Height          =   375
       Left            =   10200
@@ -24,8 +34,8 @@ Begin VB.Form FrmCrw
       _ExtentX        =   2355
       _ExtentY        =   661
       MultiLine       =   -1  'True
-      Text            =   "FRMCRW.frx":058A
-      TextRTF         =   "FRMCRW.frx":05C2
+      Text            =   "FRMCRW.frx":062A
+      TextRTF         =   "FRMCRW.frx":0662
    End
    Begin XPControls.XPButton CmdShell 
       Height          =   315
@@ -167,7 +177,7 @@ Begin VB.Form FrmCrw
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FRMCRW.frx":0742
+         Picture         =   "FRMCRW.frx":07E2
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -189,7 +199,7 @@ Begin VB.Form FrmCrw
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FRMCRW.frx":0ADC
+         Picture         =   "FRMCRW.frx":0B7C
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -211,7 +221,7 @@ Begin VB.Form FrmCrw
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FRMCRW.frx":0E76
+         Picture         =   "FRMCRW.frx":0F16
          Caption         =   "doc"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -233,7 +243,7 @@ Begin VB.Form FrmCrw
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FRMCRW.frx":1410
+         Picture         =   "FRMCRW.frx":14B0
          Caption         =   "xls"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -261,7 +271,7 @@ Begin VB.Form FrmCrw
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "FRMCRW.frx":19AA
+         Picture         =   "FRMCRW.frx":1A4A
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -281,7 +291,7 @@ Begin VB.Form FrmCrw
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "FRMCRW.frx":1F44
+         Picture         =   "FRMCRW.frx":1FE4
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -301,7 +311,7 @@ Begin VB.Form FrmCrw
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FRMCRW.frx":24DE
+         Picture         =   "FRMCRW.frx":257E
          Caption         =   "Propriedades"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -321,7 +331,7 @@ Begin VB.Form FrmCrw
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FRMCRW.frx":2A78
+         Picture         =   "FRMCRW.frx":2B18
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -342,7 +352,7 @@ Begin VB.Form FrmCrw
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "FRMCRW.frx":3012
+         Picture         =   "FRMCRW.frx":30B2
          Caption         =   "selecionar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -397,7 +407,7 @@ Begin VB.Form FrmCrw
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FRMCRW.frx":35AC
+      Picture         =   "FRMCRW.frx":364C
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -418,7 +428,7 @@ Begin VB.Form FrmCrw
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   556
-      Picture         =   "FRMCRW.frx":3B46
+      Picture         =   "FRMCRW.frx":3BE6
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -439,7 +449,7 @@ Begin VB.Form FrmCrw
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   556
-      Picture         =   "FRMCRW.frx":40E0
+      Picture         =   "FRMCRW.frx":4180
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -460,7 +470,7 @@ Begin VB.Form FrmCrw
       Width           =   1755
       _ExtentX        =   3096
       _ExtentY        =   873
-      Picture         =   "FRMCRW.frx":467A
+      Picture         =   "FRMCRW.frx":471A
       Caption         =   "Competência "
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -481,7 +491,7 @@ Begin VB.Form FrmCrw
       Width           =   1155
       _ExtentX        =   2037
       _ExtentY        =   556
-      Picture         =   "FRMCRW.frx":4A14
+      Picture         =   "FRMCRW.frx":4AB4
       Caption         =   "Visualizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -639,7 +649,8 @@ Private Sub CmdPreview_Click()
       Exit Sub
    End If
     If Extensao(TxtArquivo.tEXT, "TXT") Then
-        PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
+        ePASS02 = 1
+        PrintPreview1.ShowPreview
     End If
     If Extensao(TxtArquivo.tEXT, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
@@ -651,17 +662,20 @@ Private Sub CmdPreview_Click()
     If Extensao(TxtArquivo.tEXT, "RTF") Then
         cARQRTF = TxtArquivo.tEXT
         RichTextBox1.LoadFile cARQRTF, rtfRTF
-        PrinterEx.ShowPrintPreview Me, "MyPrintingRTF"
+        ePASS02 = 2
+        PrintPreview1.ShowPreview
         RichTextBox1.tEXT = ""
     End If
-
 End Sub
-Public Property Get Printer() As Printer
-    Set Printer = vbExtra.Printer2
-End Property
-Public Property Set Printer(nPrinter As Printer)
-    Set vbExtra.Printer2 = nPrinter
-End Property
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+   If ePASS02 = 1 Then
+       MyPrintingTXT
+   End If
+   If ePASS02 = 2 Then
+      MyPrintingRTF
+   End If
+End Sub
+
 Public Sub MyPrintingRTF()
     PrinterEx.PrintRichTextBox RichTextBox1
     Printer.EndDoc

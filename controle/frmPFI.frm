@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form frmPFI 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFI"
@@ -16,6 +17,15 @@ Begin VB.Form frmPFI
    ScaleWidth      =   10170
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   6960
+      Top             =   120
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"frmPFI.frx":058A
+   End
    Begin VB.TextBox TXTSSQ 
       BackColor       =   &H00C0FFFF&
       Height          =   405
@@ -54,88 +64,57 @@ Begin VB.Form frmPFI
       Width           =   9975
       _ExtentX        =   17595
       _ExtentY        =   9763
-      _Version        =   393216
       Tabs            =   2
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       TabHeight       =   520
       TabCaption(0)   =   "Item"
-      TabPicture(0)   =   "frmPFI.frx":058A
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "lblLabels(3)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "lblLabels(2)"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "lblLabels(4)"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "lblLabels(8)"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "lblLabels(6)"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "lblLabels(11)"
-      Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "lblLabels(5)"
-      Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "lblLabels(7)"
-      Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "lblLabels(9)"
-      Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "lblLabels(10)"
-      Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "lblLabels(12)"
-      Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "cmdpeg(18)"
-      Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "cmdpeg(17)"
-      Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "cmdpeg(16)"
-      Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "cmdpeg(14)"
-      Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "cmdpeg(15)"
-      Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "cmdpeg(13)"
-      Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "TXTFIELDS(3)"
-      Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "TXTFIELDS(2)"
-      Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "TXTFIELDS(4)"
-      Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "TXTFIELDS(5)"
-      Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "TXTFIELDS(8)"
-      Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "TXTFIELDS(6)"
-      Tab(0).Control(22).Enabled=   0   'False
-      Tab(0).Control(23)=   "TXTFIELDS(9)"
-      Tab(0).Control(23).Enabled=   0   'False
-      Tab(0).Control(24)=   "TXTFIELDS(13)"
-      Tab(0).Control(24).Enabled=   0   'False
-      Tab(0).Control(25)=   "TXTFIELDS(14)"
-      Tab(0).Control(25).Enabled=   0   'False
-      Tab(0).Control(26)=   "TXTFIELDS(15)"
-      Tab(0).Control(26).Enabled=   0   'False
-      Tab(0).Control(27)=   "TXTFIELDS(16)"
-      Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).Control(28)=   "TXTFIELDS(7)"
-      Tab(0).Control(28).Enabled=   0   'False
-      Tab(0).Control(29)=   "TXTFIELDS(10)"
-      Tab(0).Control(29).Enabled=   0   'False
-      Tab(0).Control(30)=   "TXTFIELDS(11)"
-      Tab(0).Control(30).Enabled=   0   'False
-      Tab(0).Control(31)=   "TXTFIELDS(12)"
-      Tab(0).Control(31).Enabled=   0   'False
-      Tab(0).Control(32)=   "TXTFIELDS(17)"
-      Tab(0).Control(32).Enabled=   0   'False
-      Tab(0).Control(33)=   "TXTFIELDS(18)"
-      Tab(0).Control(33).Enabled=   0   'False
       Tab(0).ControlCount=   34
+      Tab(0).Control(0)=   "TXTFIELDS(18)"
+      Tab(0).Control(1)=   "TXTFIELDS(17)"
+      Tab(0).Control(2)=   "TXTFIELDS(12)"
+      Tab(0).Control(3)=   "TXTFIELDS(11)"
+      Tab(0).Control(4)=   "TXTFIELDS(10)"
+      Tab(0).Control(5)=   "TXTFIELDS(7)"
+      Tab(0).Control(6)=   "TXTFIELDS(16)"
+      Tab(0).Control(7)=   "TXTFIELDS(15)"
+      Tab(0).Control(8)=   "TXTFIELDS(14)"
+      Tab(0).Control(9)=   "TXTFIELDS(13)"
+      Tab(0).Control(10)=   "TXTFIELDS(9)"
+      Tab(0).Control(11)=   "TXTFIELDS(6)"
+      Tab(0).Control(12)=   "TXTFIELDS(8)"
+      Tab(0).Control(13)=   "TXTFIELDS(5)"
+      Tab(0).Control(14)=   "TXTFIELDS(4)"
+      Tab(0).Control(15)=   "TXTFIELDS(2)"
+      Tab(0).Control(16)=   "TXTFIELDS(3)"
+      Tab(0).Control(17)=   "cmdpeg(13)"
+      Tab(0).Control(18)=   "cmdpeg(15)"
+      Tab(0).Control(19)=   "cmdpeg(14)"
+      Tab(0).Control(20)=   "cmdpeg(16)"
+      Tab(0).Control(21)=   "cmdpeg(17)"
+      Tab(0).Control(22)=   "cmdpeg(18)"
+      Tab(0).Control(23)=   "lblLabels(12)"
+      Tab(0).Control(24)=   "lblLabels(10)"
+      Tab(0).Control(25)=   "lblLabels(9)"
+      Tab(0).Control(26)=   "lblLabels(7)"
+      Tab(0).Control(27)=   "lblLabels(5)"
+      Tab(0).Control(28)=   "lblLabels(11)"
+      Tab(0).Control(29)=   "lblLabels(6)"
+      Tab(0).Control(30)=   "lblLabels(8)"
+      Tab(0).Control(31)=   "lblLabels(4)"
+      Tab(0).Control(32)=   "lblLabels(2)"
+      Tab(0).Control(33)=   "lblLabels(3)"
       TabCaption(1)   =   "Figura"
-      TabPicture(1)   =   "frmPFI.frx":05A6
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlCount=   9
       Tab(1).Control(0)=   "Picture1"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Picture2"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "cmdimprimir"
       Tab(1).Control(3)=   "CmdPaste"
       Tab(1).Control(4)=   "CmdConfImp"
@@ -143,7 +122,6 @@ Begin VB.Form frmPFI
       Tab(1).Control(6)=   "DelImg"
       Tab(1).Control(7)=   "VerImg"
       Tab(1).Control(8)=   "Command4"
-      Tab(1).ControlCount=   9
       Begin VB.TextBox TXTFIELDS 
          Height          =   375
          Index           =   18
@@ -339,7 +317,7 @@ Begin VB.Form frmPFI
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":05C2
+         Picture         =   "frmPFI.frx":062A
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -360,7 +338,7 @@ Begin VB.Form frmPFI
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":0B5C
+         Picture         =   "frmPFI.frx":0BC4
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -381,7 +359,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":10F6
+         Picture         =   "frmPFI.frx":115E
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -402,7 +380,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":1690
+         Picture         =   "frmPFI.frx":16F8
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -424,7 +402,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":1C2A
+         Picture         =   "frmPFI.frx":1C92
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -446,7 +424,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":21C4
+         Picture         =   "frmPFI.frx":222C
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -468,7 +446,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":275E
+         Picture         =   "frmPFI.frx":27C6
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -489,7 +467,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":2CF8
+         Picture         =   "frmPFI.frx":2D60
          Caption         =   "Incluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -510,7 +488,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":3192
+         Picture         =   "frmPFI.frx":31FA
          Caption         =   "Excluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -531,7 +509,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPFI.frx":362C
+         Picture         =   "frmPFI.frx":3694
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -552,7 +530,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":3AC6
+         Picture         =   "frmPFI.frx":3B2E
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -574,7 +552,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":3F60
+         Picture         =   "frmPFI.frx":3FC8
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -596,7 +574,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":44FA
+         Picture         =   "frmPFI.frx":4562
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -751,7 +729,7 @@ Begin VB.Form frmPFI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPFI.frx":4A94
+      Picture         =   "frmPFI.frx":4AFC
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -772,7 +750,7 @@ Begin VB.Form frmPFI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPFI.frx":502E
+      Picture         =   "frmPFI.frx":5096
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -877,7 +855,7 @@ Private Sub CmdImprimir_Click()
      If Picture1.Height = 0 Then
         Alert ("Sem Imagem")
     Else
-        PrinterEx.ShowPrintPreview Me, "MyPrintingRoutine"
+        PrintPreview1.ShowPreview
     End If
 End Sub
 
@@ -929,9 +907,9 @@ Private Sub Form_Load()
     CenterFormToScreen Me
     cARQ = Sdb                                   'agora sdb pois pode ser pf pfp pfg
     
-    TXTPF.tEXT = nPF
-    TXTSEQ.tEXT = nSEQ
-    TXTSSQ.tEXT = nSSQ
+    TXTPF.Text = nPF
+    TXTSEQ.Text = nSEQ
+    TXTSSQ.Text = nSSQ
     
     cSQL = "select * from PFI WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
     
@@ -990,16 +968,10 @@ Private Sub VerImg_Click()
         End If
     End If
 End Sub
-Public Sub MyPrintingRoutine()
+Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
     On Error Resume Next
     Printer.Print
     Printer.PaintPicture Picture1, 0, 0
     Printer.EndDoc
 End Sub
-Public Property Get Printer() As Printer
-    Set Printer = vbExtra.Printer2
-End Property
-Public Property Set Printer(nPrinter As Printer)
-    Set vbExtra.Printer2 = nPrinter
-End Property
 

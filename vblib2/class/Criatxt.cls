@@ -108,13 +108,13 @@ Public Sub destini(ByVal cGRUPO As String, ByVal cCHAVE As String)
 End Sub
 
 Public Sub gravafolha()
-    Dim I As Integer
-    For I = 0 To mvarnROW - 1
+    Dim i As Integer
+    For i = 0 To mvarnROW - 1
         Select Case mvarDESTINO
         Case "PRINTER"
-            Printer.Print mvaraLINHAS(I)
+            Printer.Print mvaraLINHAS(i)
         Case "LPT1", "LPT2", "LPT3", "IMPNET", "COM1", "COM2", "ARQ"
-            Print #mvarhandle, mvaraLINHAS(I)
+            Print #mvarhandle, mvaraLINHAS(i)
         End Select
     Next
     If mvarDESTINO = "PRINTER" Then
@@ -279,11 +279,10 @@ End Property
 Public Property Get nCOL() As Integer
     nCOL = mvarnCOL
 End Property
-
-Public Property Get Printer() As Printer
+Private Property Get Printer() As Printer
     Set Printer = vbExtra.Printer2
 End Property
-Public Property Set Printer(nPrinter As Printer)
+Private Property Set Printer(nPrinter As Printer)
     Set vbExtra.Printer2 = nPrinter
 End Property
 Public Sub MyPrintingTXT()

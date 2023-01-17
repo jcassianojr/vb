@@ -1,5 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form frmIMAGENS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "IMAGENS"
@@ -16,6 +17,15 @@ Begin VB.Form frmIMAGENS
    ScaleWidth      =   6960
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   4440
+      Top             =   1200
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"Frmpecasjpg.frx":038A
+   End
    Begin XPControls.XPButton ximgsave 
       Height          =   435
       Left            =   5160
@@ -25,7 +35,7 @@ Begin VB.Form frmIMAGENS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":038A
+      Picture         =   "Frmpecasjpg.frx":042A
       Caption         =   "Salvar Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -46,7 +56,7 @@ Begin VB.Form frmIMAGENS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":0824
+      Picture         =   "Frmpecasjpg.frx":08C4
       Caption         =   "Excluir Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -67,7 +77,7 @@ Begin VB.Form frmIMAGENS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":0CBE
+      Picture         =   "Frmpecasjpg.frx":0D5E
       Caption         =   "Incluir Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -88,7 +98,7 @@ Begin VB.Form frmIMAGENS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   873
-      Picture         =   "Frmpecasjpg.frx":1158
+      Picture         =   "Frmpecasjpg.frx":11F8
       Caption         =   "Navegar Imagens"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -150,7 +160,7 @@ Begin VB.Form frmIMAGENS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":15F2
+      Picture         =   "Frmpecasjpg.frx":1692
       Caption         =   "Propriedades"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -171,7 +181,7 @@ Begin VB.Form frmIMAGENS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":1B8C
+      Picture         =   "Frmpecasjpg.frx":1C2C
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -192,7 +202,7 @@ Begin VB.Form frmIMAGENS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":2126
+      Picture         =   "Frmpecasjpg.frx":21C6
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -213,7 +223,7 @@ Begin VB.Form frmIMAGENS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":26C0
+      Picture         =   "Frmpecasjpg.frx":2760
       Caption         =   "Copia"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -234,7 +244,7 @@ Begin VB.Form frmIMAGENS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":2C5A
+      Picture         =   "Frmpecasjpg.frx":2CFA
       Caption         =   "Imprimir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -255,7 +265,7 @@ Begin VB.Form frmIMAGENS
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "Frmpecasjpg.frx":31F4
+      Picture         =   "Frmpecasjpg.frx":3294
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -276,7 +286,7 @@ Begin VB.Form frmIMAGENS
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "Frmpecasjpg.frx":378E
+      Picture         =   "Frmpecasjpg.frx":382E
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -297,7 +307,7 @@ Begin VB.Form frmIMAGENS
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "Frmpecasjpg.frx":3D28
+      Picture         =   "Frmpecasjpg.frx":3DC8
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -318,7 +328,7 @@ Begin VB.Form frmIMAGENS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":42C2
+      Picture         =   "Frmpecasjpg.frx":4362
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -392,7 +402,7 @@ Private Sub cmdClose_Click()
             Next iLOOP
             GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
             If lTROCOU Then
-                CSQLI = "select * from imagens  WHERE CODIGO='" & ZGRP & "'"
+                CSQLI = "select * from imagens  WHERE CODIGO='" & zgrp & "'"
                 ADOGrvBlob cARQ, CSQLI, Picture1
             End If
         End If
@@ -410,7 +420,7 @@ Private Sub CmdImprimir_Click()
     If Picture1.Height = 0 Then
         Alert ("Sem Imagem")
     Else
-        PrinterEx.ShowPrintPreview Me, "MyPrintingRoutine"
+        PrintPreview1.ShowPreview
     End If
 End Sub
 
@@ -573,28 +583,28 @@ Private Sub Form_Load()
     End If
     
 
-    ZGRP = FixStr(ZGRP, "")
-    If Len(ZGRP) = 0 Then
+    zgrp = FixStr(zgrp, "")
+    If Len(zgrp) = 0 Then
         Alert ("Codigo em Branco")
         lABRE = False
     End If
 
     If lABRE Then
         cARQ = cARQRTF
-        nPOS = InStr(ZGRP, "|")
+        nPOS = InStr(zgrp, "|")
         If nPOS > 0 Then
-            nTMPNUMERO = Mid(ZGRP, nPOS + 1)
-            ZGRP = Mid(ZGRP, 1, nPOS - 1)
+            nTMPNUMERO = Mid(zgrp, nPOS + 1)
+            zgrp = Mid(zgrp, 1, nPOS - 1)
         Else
-            nTMPNUMERO = ZGRP
+            nTMPNUMERO = zgrp
         End If
         nTMPNUMERO = funNumeroPuro(nTMPNUMERO)
         nTMPNUMERO = Val(nTMPNUMERO)
 
 
-        cSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & ZGRP & "'"
+        cSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & zgrp & "'"
         If cBASEDADOS = "LOGIX" Then 'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
-            cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto  WHERE MATRICULA='" & ZGRP & "'"
+            cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto  WHERE MATRICULA='" & zgrp & "'"
             cSQL = cSQL & " and empresa=" & StrZero(zEMPRESA, 2)
         End If
         
@@ -605,14 +615,14 @@ Private Sub Form_Load()
             cSQL = cSQL & " FROM gip.fotos AS gip"
             cSQL = cSQL & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
             cSQL = cSQL & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
-            cSQL = cSQL & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(ZGRP, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(ZGRP, 8)
+            cSQL = cSQL & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(zgrp, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(zgrp, 8)
         End If
 
         
                 
         If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
         Else
-            IncluiSQL cARQ, cSQL, 2, Array("CODIGO", "NUMERO"), Array(ZGRP, nTMPNUMERO), True, False
+            IncluiSQL cARQ, cSQL, 2, Array("CODIGO", "NUMERO"), Array(zgrp, nTMPNUMERO), True, False
         End If
         
         
@@ -627,9 +637,9 @@ Private Sub Form_Load()
         If iImage = 2 And nPOS > 0 Then
             txtFields(1) = nTMPNUMERO
         End If
-        CSQLI = "select IMAGEM from imagens  WHERE CODIGO='" & ZGRP & "'"
+        CSQLI = "select IMAGEM from imagens  WHERE CODIGO='" & zgrp & "'"
         If cBASEDADOS = "LOGIX" Then 'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
-            CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & ZGRP
+            CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & zgrp
             CSQLI = CSQLI & " and empresa=" & StrZero(zEMPRESA, 2)
         End If
         If cBASEDADOS = "DATAMACE" Then
@@ -638,7 +648,7 @@ Private Sub Form_Load()
             CSQLI = CSQLI & " FROM gip.fotos AS gip"
             CSQLI = CSQLI & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
             CSQLI = CSQLI & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
-            CSQLI = CSQLI & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(ZGRP, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(ZGRP, 8)
+            CSQLI = CSQLI & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(zgrp, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(zgrp, 8)
         End If
         
         
@@ -646,7 +656,7 @@ Private Sub Form_Load()
             StretchSourcePictureFromPicture Picture1, Picture2
             If FixNum(eRETU01) > 500000 Then
                 Alert ("Imagem Muito Grande,Ajuste o tamanho")
-                salvarpict Me, Picture1, "Imagem_" & ZGRP
+                salvarpict Me, Picture1, "Imagem_" & zgrp
                 Set Picture1.Picture = Nothing
                 Set Picture2.Picture = Nothing
                 lTROCOU = True
@@ -697,21 +707,12 @@ Private Sub VerImg_Click()
         End If
     End If
 End Sub
-
-Public Sub MyPrintingRoutine()
+Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
     On Error Resume Next
     Printer.Print
     Printer.PaintPicture Picture1, 0, 0
     Printer.EndDoc
 End Sub
-
-Public Property Get Printer() As Printer
-    Set Printer = vbExtra.Printer2
-End Property
-
-Public Property Set Printer(nPrinter As Printer)
-    Set vbExtra.Printer2 = nPrinter
-End Property
 
 Private Sub ximgsave_Click()
     If Picture1.Height = 0 Then

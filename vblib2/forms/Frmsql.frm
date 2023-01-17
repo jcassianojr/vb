@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form FrmSql 
    Caption         =   "Exportador de Sql"
    ClientHeight    =   6045
@@ -12,6 +13,15 @@ Begin VB.Form FrmSql
    ScaleHeight     =   6045
    ScaleWidth      =   10365
    StartUpPosition =   3  'Windows Default
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   9360
+      Top             =   2160
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"Frmsql.frx":058A
+   End
    Begin VBCCR17.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   3960
@@ -23,8 +33,8 @@ Begin VB.Form FrmSql
       _ExtentX        =   2355
       _ExtentY        =   450
       MultiLine       =   -1  'True
-      Text            =   "Frmsql.frx":058A
-      TextRTF         =   "Frmsql.frx":05C2
+      Text            =   "Frmsql.frx":062A
+      TextRTF         =   "Frmsql.frx":0662
    End
    Begin VB.CheckBox CmdEmail 
       BackColor       =   &H00C0E0FF&
@@ -50,7 +60,7 @@ Begin VB.Form FrmSql
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":0742
+         Picture         =   "Frmsql.frx":07E2
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -70,7 +80,7 @@ Begin VB.Form FrmSql
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":0CDC
+         Picture         =   "Frmsql.frx":0D7C
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -90,7 +100,7 @@ Begin VB.Form FrmSql
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":1276
+         Picture         =   "Frmsql.frx":1316
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -110,7 +120,7 @@ Begin VB.Form FrmSql
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   767
-         Picture         =   "Frmsql.frx":1810
+         Picture         =   "Frmsql.frx":18B0
          Caption         =   "Propriedades"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -140,7 +150,7 @@ Begin VB.Form FrmSql
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":1DAA
+         Picture         =   "Frmsql.frx":1E4A
          Caption         =   "xml"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -161,7 +171,7 @@ Begin VB.Form FrmSql
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":2344
+         Picture         =   "Frmsql.frx":23E4
          Caption         =   "xls(TAB)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -222,7 +232,7 @@ Begin VB.Form FrmSql
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":28DE
+         Picture         =   "Frmsql.frx":297E
          Caption         =   "Html"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -243,7 +253,7 @@ Begin VB.Form FrmSql
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":2E78
+         Picture         =   "Frmsql.frx":2F18
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -264,7 +274,7 @@ Begin VB.Form FrmSql
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":3212
+         Picture         =   "Frmsql.frx":32B2
          Caption         =   "PDF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -386,7 +396,7 @@ Begin VB.Form FrmSql
          Width           =   495
          _ExtentX        =   873
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":35AC
+         Picture         =   "Frmsql.frx":364C
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -408,7 +418,7 @@ Begin VB.Form FrmSql
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":3946
+         Picture         =   "Frmsql.frx":39E6
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -429,7 +439,7 @@ Begin VB.Form FrmSql
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":3CE0
+         Picture         =   "Frmsql.frx":3D80
          Caption         =   "xls(TR)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -572,7 +582,7 @@ Begin VB.Form FrmSql
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "Frmsql.frx":427A
+      Picture         =   "Frmsql.frx":431A
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -592,7 +602,7 @@ Begin VB.Form FrmSql
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "Frmsql.frx":4814
+      Picture         =   "Frmsql.frx":48B4
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -613,7 +623,7 @@ Begin VB.Form FrmSql
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   556
-      Picture         =   "Frmsql.frx":4DAE
+      Picture         =   "Frmsql.frx":4E4E
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -634,7 +644,7 @@ Begin VB.Form FrmSql
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   556
-      Picture         =   "Frmsql.frx":5348
+      Picture         =   "Frmsql.frx":53E8
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -866,13 +876,13 @@ Private Sub CmdFiltro_Click()
     On Error GoTo errhandler
     Dim cFILTRO As String
     
-    cFILTRO = FixStr(FILTRO)
+    cFILTRO = FixStr(filtro)
     If aRELCFG(11) Then
         ePASS01 = ""
         FrmFiltro.Show vbModal, Me
-        FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
+        filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
         If lRETU And Len(aRELCFG(15)) > 0 Then
-            aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
+            aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
             sql.tEXT = aRELCFG(15)
         End If
     End If
@@ -925,7 +935,8 @@ Private Sub CmdVisua_Click()
       Exit Sub
    End If
     If Extensao(TxtArquivo.tEXT, "TXT") Then
-        PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
+        ePASS03 = 1
+        PrintPreview1.ShowPreview
     End If
     If Extensao(TxtArquivo.tEXT, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
@@ -937,16 +948,19 @@ Private Sub CmdVisua_Click()
     If Extensao(TxtArquivo.tEXT, "RTF") Then
         cARQRTF = TxtArquivo.tEXT
         RichTextBox1.LoadFile cARQRTF, rtfRTF
-        PrinterEx.ShowPrintPreview Me, "MyPrintingRTF"
+        ePASS02 = 3
+        PrintPreview1.ShowPreview
         RichTextBox1.tEXT = ""
     End If
 End Sub
-Public Property Get Printer() As Printer
-    Set Printer = vbExtra.Printer2
-End Property
-Public Property Set Printer(nPrinter As Printer)
-    Set vbExtra.Printer2 = nPrinter
-End Property
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+   If ePASS03 = 1 Then
+       MyPrintingTXT
+   End If
+   If ePASS03 = 2 Then
+      MyPrintingRTF
+   End If
+End Sub
 Public Sub MyPrintingRTF()
     PrinterEx.PrintRichTextBox RichTextBox1
     Printer.EndDoc
@@ -984,7 +998,7 @@ Private Sub Form_Load()
     ''Configura Help
     Me.Caption = cFORMID
     HelpContextID = nFORMID
-    FILTRO = ""
+    filtro = ""
       
     Label1 = aRELCFG(6)
     
@@ -1000,7 +1014,7 @@ Private Sub Form_Load()
     'If Not aDIREITOS(7) Then Salvar(1).Visible = False
     If Not aDIREITOS(7) Then CmdEmail.Visible = False
     If Not aRELCFG(11) Then CmdFiltro.Visible = False
-    If Not aRELCFG(11) Then FILTRO.Visible = False
+    If Not aRELCFG(11) Then filtro.Visible = False
     
     If Not aDIREITOS(4) Then CmdEditar.Visible = False
     If Not aDIREITOS(4) Then CmdShell.Visible = False
@@ -1017,15 +1031,15 @@ Private Sub Form_Load()
     aRELCFG(14) = FixStr(aRELCFG(14))
     If Len(aRELCFG(14)) > 0 Then
         cFILTRO = aRELCFG(14)
-        FILTRO = cFILTRO
+        filtro = cFILTRO
     Else
         If aRELCFG(11) Then
             CmdFiltro_Click
         End If
     End If
     If Len(aRELCFG(15)) > 0 Then
-        If Len(FILTRO) > 0 Then
-            aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
+        If Len(filtro) > 0 Then
+            aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
         End If
         sql.tEXT = aRELCFG(15)
     End If

@@ -2,6 +2,7 @@ VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form FrmTxl 
    Caption         =   "Gerador Relatorios Texto"
    ClientHeight    =   7380
@@ -13,6 +14,15 @@ Begin VB.Form FrmTxl
    ScaleHeight     =   7380
    ScaleWidth      =   10425
    StartUpPosition =   3  'Windows Default
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   9240
+      Top             =   2160
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"FrmTxl.frx":058A
+   End
    Begin VBCCR17.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   9240
@@ -24,7 +34,7 @@ Begin VB.Form FrmTxl
       _ExtentX        =   1085
       _ExtentY        =   450
       MultiLine       =   -1  'True
-      TextRTF         =   "FrmTxl.frx":058A
+      TextRTF         =   "FrmTxl.frx":062A
    End
    Begin MSFlexGridLib.MSFlexGrid Listview1 
       Height          =   1335
@@ -156,7 +166,7 @@ Begin VB.Form FrmTxl
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":06F0
+         Picture         =   "FrmTxl.frx":0790
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -176,7 +186,7 @@ Begin VB.Form FrmTxl
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":0C8A
+         Picture         =   "FrmTxl.frx":0D2A
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -197,7 +207,7 @@ Begin VB.Form FrmTxl
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":1224
+         Picture         =   "FrmTxl.frx":12C4
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -217,7 +227,7 @@ Begin VB.Form FrmTxl
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   979
-         Picture         =   "FrmTxl.frx":17BE
+         Picture         =   "FrmTxl.frx":185E
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -248,7 +258,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":1D58
+         Picture         =   "FrmTxl.frx":1DF8
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -270,7 +280,7 @@ Begin VB.Form FrmTxl
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":20F2
+         Picture         =   "FrmTxl.frx":2192
          Caption         =   "Html"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -292,7 +302,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":268C
+         Picture         =   "FrmTxl.frx":272C
          Caption         =   "PDF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -314,7 +324,7 @@ Begin VB.Form FrmTxl
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "FrmTxl.frx":2A26
+         Picture         =   "FrmTxl.frx":2AC6
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -362,7 +372,7 @@ Begin VB.Form FrmTxl
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   767
-      Picture         =   "FrmTxl.frx":2DC0
+      Picture         =   "FrmTxl.frx":2E60
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -382,7 +392,7 @@ Begin VB.Form FrmTxl
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "FrmTxl.frx":335A
+      Picture         =   "FrmTxl.frx":33FA
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -403,7 +413,7 @@ Begin VB.Form FrmTxl
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   556
-      Picture         =   "FrmTxl.frx":38F4
+      Picture         =   "FrmTxl.frx":3994
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -424,7 +434,7 @@ Begin VB.Form FrmTxl
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   556
-      Picture         =   "FrmTxl.frx":3E8E
+      Picture         =   "FrmTxl.frx":3F2E
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -506,7 +516,7 @@ Dim cSETUP As String
 Dim lARQTXT As Boolean
 
 Private Sub gerar(ByVal cOPE As String)
-    Dim x As Long
+    Dim X As Long
     Dim CLINHA As String
     Dim aUSO As Variant
     Dim aREG As Variant
@@ -537,8 +547,8 @@ Private Sub gerar(ByVal cOPE As String)
     oCONN.Open cARQ
     oRS.Open cSQL, oCONN, adOpenForwardOnly, adLockReadOnly
     While Not oRS.EOF
-        For x = 1 To nQTDELAY
-            CLINHA = aLAY(x)
+        For X = 1 To nQTDELAY
+            CLINHA = aLAY(X)
             Select Case CLINHA
             Case "[NF]"
                 oTXT.novafolha
@@ -565,7 +575,7 @@ Private Sub gerar(ByVal cOPE As String)
                 End If
                 oTXT.gravalincon aUSO(2), aUSO(0), aUSO(1)
             End Select
-        Next x
+        Next X
     Wend
     oTXT.fechar
     oRS.Close
@@ -693,7 +703,8 @@ Private Sub CmdVisua_Click()
       Exit Sub
    End If
     If Extensao(TxtArquivo.tEXT, "TXT") Then
-        PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
+        ePASS03 = 1
+        PrintPreview1.ShowPreview
     End If
     If Extensao(TxtArquivo.tEXT, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
@@ -705,16 +716,19 @@ Private Sub CmdVisua_Click()
     If Extensao(TxtArquivo.tEXT, "RTF") Then
         cARQRTF = TxtArquivo.tEXT
         RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF 'rtfRTF
-        PrinterEx.ShowPrintPreview Me, "MyPrintingRTF"
+        ePASS03 = 2
+        PrintPreview1.ShowPreview
         RichTextBox1.tEXT = ""
     End If
 End Sub
-Public Property Get Printer() As Printer
-    Set Printer = vbExtra.Printer2
-End Property
-Public Property Set Printer(nPrinter As Printer)
-    Set vbExtra.Printer2 = nPrinter
-End Property
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+   If ePASS03 = 1 Then
+       MyPrintingTXT
+   End If
+   If ePASS03 = 2 Then
+      MyPrintingRTF
+   End If
+End Sub
 Public Sub MyPrintingRTF()
     PrinterEx.PrintRichTextBox RichTextBox1
     Printer.EndDoc
@@ -744,7 +758,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Dim x As Long
+    Dim X As Long
     Dim cTMP As String
     CenterFormToScreen Me
     filtro = ""
@@ -770,9 +784,9 @@ Private Sub Form_Load()
         oIni.Path = cARQRTF
         nQTDELAY = oIni.GetSetting("CONFIGURACAO", "QTDELAY", 1)
         ReDim aLAY(nQTDELAY + 1)
-        For x = 1 To nQTDELAY
-            aLAY(x) = oIni.GetSetting("LAYOUT", StrZero(x, 3), "")
-        Next x
+        For X = 1 To nQTDELAY
+            aLAY(X) = oIni.GetSetting("LAYOUT", StrZero(X, 3), "")
+        Next X
         nCOLUNAS = oIni.GetSetting("CONFIGURACAO", "COLUNAS", 80)
         nLINHAS = oIni.GetSetting("CONFIGURACAO", "LINHAS", 60)
         cDESTINO = oIni.GetSetting("CONFIGURACAO", "DESTINO", "ARQ")
@@ -1047,13 +1061,13 @@ Private Sub montaimp()
 End Sub
 
 Private Function SelectPrinter(ByVal Nome As String) As Boolean
-    Dim x As Printer
+    Dim X As Printer
     Dim nLEN As Long
     Nome = UCase(Trim(Nome))
     nLEN = Len(Nome)
-    For Each x In Printers
-        If UCase(Mid(x.DeviceName, 1, nLEN)) = Nome Then
-            Set Printer = x
+    For Each X In Printers
+        If UCase(Mid(X.DeviceName, 1, nLEN)) = Nome Then
+            Set Printer = X
             SelectPrinter = True
             Exit For
         End If

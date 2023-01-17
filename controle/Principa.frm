@@ -1,5 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
    Caption         =   " "
@@ -10,6 +11,15 @@ Begin VB.MDIForm frmPRINCIPAL
    Icon            =   "Principa.frx":0000
    StartUpPosition =   2  'CenterScreen
    WindowState     =   2  'Maximized
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   480
+      Top             =   960
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"Principa.frx":058A
+   End
    Begin MSComctlLib.ImageList ImageList1 
       Left            =   780
       Top             =   60
@@ -59,20 +69,20 @@ Begin VB.MDIForm frmPRINCIPAL
             AutoSize        =   2
             Object.Width           =   1588
             MinWidth        =   1587
-            Picture         =   "Principa.frx":058A
-            TextSave        =   "14:41"
+            Picture         =   "Principa.frx":062A
+            TextSave        =   "14:40"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
             AutoSize        =   2
             Object.Width           =   2302
             MinWidth        =   2293
-            Picture         =   "Principa.frx":0B24
-            TextSave        =   "05/05/2021"
+            Picture         =   "Principa.frx":0BC4
+            TextSave        =   "17/01/2023"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
-            Picture         =   "Principa.frx":10BE
+            Picture         =   "Principa.frx":115E
          EndProperty
          BeginProperty Panel7 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
@@ -183,7 +193,7 @@ Private Sub MDIForm_Load()
       
       
       
-    StatusBar1.Panels(5).tEXT = ""
+    StatusBar1.Panels(5).Text = ""
 
     
 'carqhelp = "SELECT FEMEAEF FROM"
@@ -323,7 +333,7 @@ Private Sub MDIForm_Load()
     rs.Close
     DB.Close
     
-    StatusBar1.Panels(6).tEXT = zUSER
+    StatusBar1.Panels(6).Text = zUSER
     If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
         frmDica.Show
     End If
@@ -449,7 +459,7 @@ Select Case Index
     Case 1
         cARQRTF = PegPath("HELP", "HELPTXT")
         If FileExist(cARQRTF, True) Then
-             PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
+           PrintPreview1.ShowPreview
         End If
         Exit Sub
     Case 6
@@ -697,13 +707,7 @@ Private Sub configuraodbc()
         X = X + 1
     Wend
 End Sub
-Public Property Get Printer() As Printer
-    Set Printer = vbExtra.Printer2
-End Property
-Public Property Set Printer(nPrinter As Printer)
-    Set vbExtra.Printer2 = nPrinter
-End Property
-Public Sub MyPrintingTXT()
+Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
     Dim fileFile As Integer
     Dim STRBUFFER As String
     fileFile = FreeFile

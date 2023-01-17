@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form frmPFC 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFC"
@@ -17,6 +18,15 @@ Begin VB.Form frmPFC
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   5520
+      Top             =   960
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"frmPFC.frx":058A
+   End
    Begin VB.TextBox TxtCodComp 
       BackColor       =   &H00C0FFFF&
       Enabled         =   0   'False
@@ -69,131 +79,87 @@ Begin VB.Form frmPFC
       Width           =   9375
       _ExtentX        =   16536
       _ExtentY        =   8281
-      _Version        =   393216
       Tabs            =   4
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       TabsPerRow      =   4
       TabHeight       =   520
       TabCaption(0)   =   "Caracteristicas"
-      TabPicture(0)   =   "frmPFC.frx":058A
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "lblLabels(3)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "lblLabels(2)"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "lblLabels(15)"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "lblLabels(4)"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "lblLabels(12)"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "lblLabels(9)"
-      Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "lblLabels(6)"
-      Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "lblLabels(13)"
-      Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "lblLabels(7)"
-      Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "lblLabels(10)"
-      Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "CmdPegRel"
-      Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "pfcescid(2)"
-      Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "pfcescid(1)"
-      Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "pfcescid(8)"
-      Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "txtFields(2)"
-      Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "txtFields(1)"
-      Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "txtFields(15)"
-      Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "txtFields(5)"
-      Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "pfcescid(3)"
-      Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "pfcescid(4)"
-      Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "cmdescpfd"
-      Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "txtFields(6)"
-      Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "pfcescid(5)"
-      Tab(0).Control(22).Enabled=   0   'False
-      Tab(0).Control(23)=   "txtFields(13)"
-      Tab(0).Control(23).Enabled=   0   'False
-      Tab(0).Control(24)=   "pfcescid(7)"
-      Tab(0).Control(24).Enabled=   0   'False
-      Tab(0).Control(25)=   "txtFields(7)"
-      Tab(0).Control(25).Enabled=   0   'False
-      Tab(0).Control(26)=   "Check1"
-      Tab(0).Control(26).Enabled=   0   'False
-      Tab(0).Control(27)=   "pfcescid(6)"
-      Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).Control(28)=   "txtFields(11)"
-      Tab(0).Control(28).Enabled=   0   'False
-      Tab(0).Control(29)=   "txtFields(4)"
-      Tab(0).Control(29).Enabled=   0   'False
-      Tab(0).Control(30)=   "txtFields(10)"
-      Tab(0).Control(30).Enabled=   0   'False
       Tab(0).ControlCount=   31
+      Tab(0).Control(0)=   "txtFields(10)"
+      Tab(0).Control(1)=   "txtFields(4)"
+      Tab(0).Control(2)=   "txtFields(11)"
+      Tab(0).Control(3)=   "pfcescid(6)"
+      Tab(0).Control(4)=   "Check1"
+      Tab(0).Control(5)=   "txtFields(7)"
+      Tab(0).Control(6)=   "pfcescid(7)"
+      Tab(0).Control(7)=   "txtFields(13)"
+      Tab(0).Control(8)=   "pfcescid(5)"
+      Tab(0).Control(9)=   "txtFields(6)"
+      Tab(0).Control(10)=   "cmdescpfd"
+      Tab(0).Control(11)=   "pfcescid(4)"
+      Tab(0).Control(12)=   "pfcescid(3)"
+      Tab(0).Control(13)=   "txtFields(5)"
+      Tab(0).Control(14)=   "txtFields(15)"
+      Tab(0).Control(15)=   "txtFields(1)"
+      Tab(0).Control(16)=   "txtFields(2)"
+      Tab(0).Control(17)=   "pfcescid(8)"
+      Tab(0).Control(18)=   "pfcescid(1)"
+      Tab(0).Control(19)=   "pfcescid(2)"
+      Tab(0).Control(20)=   "CmdPegRel"
+      Tab(0).Control(21)=   "lblLabels(10)"
+      Tab(0).Control(22)=   "lblLabels(7)"
+      Tab(0).Control(23)=   "lblLabels(13)"
+      Tab(0).Control(24)=   "lblLabels(6)"
+      Tab(0).Control(25)=   "lblLabels(9)"
+      Tab(0).Control(26)=   "lblLabels(12)"
+      Tab(0).Control(27)=   "lblLabels(4)"
+      Tab(0).Control(28)=   "lblLabels(15)"
+      Tab(0).Control(29)=   "lblLabels(2)"
+      Tab(0).Control(30)=   "lblLabels(3)"
       TabCaption(1)   =   "Simbologia Instrumentos"
-      TabPicture(1)   =   "frmPFC.frx":05A6
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlCount=   32
       Tab(1).Control(0)=   "txtFields(20)"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "EscTipIns(1)"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "Command4(1)"
       Tab(1).Control(3)=   "txtFields(9)"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "EscTipIns(0)"
-      Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "Command4(0)"
       Tab(1).Control(6)=   "txtFields(19)"
-      Tab(1).Control(6).Enabled=   0   'False
       Tab(1).Control(7)=   "Command2(1)"
-      Tab(1).Control(7).Enabled=   0   'False
       Tab(1).Control(8)=   "CmdEditMe04(1)"
-      Tab(1).Control(8).Enabled=   0   'False
       Tab(1).Control(9)=   "Command3(1)"
       Tab(1).Control(10)=   "ESCMS01A(1)"
       Tab(1).Control(11)=   "txtFields(8)"
-      Tab(1).Control(11).Enabled=   0   'False
       Tab(1).Control(12)=   "txtFields(17)"
       Tab(1).Control(13)=   "Command2(0)"
-      Tab(1).Control(13).Enabled=   0   'False
       Tab(1).Control(14)=   "CmdEditMe04(0)"
-      Tab(1).Control(14).Enabled=   0   'False
       Tab(1).Control(15)=   "Command3(0)"
       Tab(1).Control(16)=   "ESCMS01A(0)"
       Tab(1).Control(17)=   "txtFields(16)"
       Tab(1).Control(18)=   "txtFields(22)"
       Tab(1).Control(19)=   "Command1(5)"
-      Tab(1).Control(19).Enabled=   0   'False
       Tab(1).Control(20)=   "Command1(4)"
-      Tab(1).Control(20).Enabled=   0   'False
       Tab(1).Control(21)=   "txtFields(21)"
       Tab(1).Control(22)=   "Command1(3)"
-      Tab(1).Control(22).Enabled=   0   'False
       Tab(1).Control(23)=   "Command1(2)"
-      Tab(1).Control(23).Enabled=   0   'False
       Tab(1).Control(24)=   "Command1(1)"
-      Tab(1).Control(24).Enabled=   0   'False
       Tab(1).Control(25)=   "Command1(0)"
-      Tab(1).Control(25).Enabled=   0   'False
       Tab(1).Control(26)=   "txtFields(3)"
       Tab(1).Control(27)=   "cmdFOTO(0)"
       Tab(1).Control(28)=   "cmdFOTO(1)"
       Tab(1).Control(29)=   "lblLabels(16)"
       Tab(1).Control(30)=   "lblLabels(8)"
       Tab(1).Control(31)=   "lblLabels(5)"
-      Tab(1).ControlCount=   32
       TabCaption(2)   =   "figura"
-      TabPicture(2)   =   "frmPFC.frx":05C2
-      Tab(2).ControlEnabled=   0   'False
+      Tab(2).ControlCount=   9
       Tab(2).Control(0)=   "Picture1"
       Tab(2).Control(1)=   "Picture2"
       Tab(2).Control(2)=   "cmdimprimir"
@@ -203,10 +169,7 @@ Begin VB.Form frmPFC
       Tab(2).Control(6)=   "DelImg"
       Tab(2).Control(7)=   "VerImg"
       Tab(2).Control(8)=   "CmdSalvaImagem"
-      Tab(2).ControlCount=   9
       TabCaption(3)   =   "Ensaios"
-      TabPicture(3)   =   "frmPFC.frx":05DE
-      Tab(3).ControlEnabled=   0   'False
       Tab(3).ControlCount=   0
       Begin VB.PictureBox Picture1 
          Height          =   495
@@ -243,7 +206,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   1
          Left            =   -71880
-         Picture         =   "frmPFC.frx":05FA
+         Picture         =   "frmPFC.frx":062A
          Style           =   1  'Graphical
          TabIndex        =   75
          TabStop         =   0   'False
@@ -275,7 +238,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   0
          Left            =   -71880
-         Picture         =   "frmPFC.frx":0B84
+         Picture         =   "frmPFC.frx":0BB4
          Style           =   1  'Graphical
          TabIndex        =   72
          TabStop         =   0   'False
@@ -307,7 +270,7 @@ Begin VB.Form frmPFC
          Height          =   375
          Index           =   1
          Left            =   -73200
-         Picture         =   "frmPFC.frx":110E
+         Picture         =   "frmPFC.frx":113E
          Style           =   1  'Graphical
          TabIndex        =   69
          TabStop         =   0   'False
@@ -367,7 +330,7 @@ Begin VB.Form frmPFC
          Height          =   375
          Index           =   0
          Left            =   -73200
-         Picture         =   "frmPFC.frx":1698
+         Picture         =   "frmPFC.frx":16C8
          Style           =   1  'Graphical
          TabIndex        =   63
          TabStop         =   0   'False
@@ -434,7 +397,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   5
          Left            =   -71880
-         Picture         =   "frmPFC.frx":1C22
+         Picture         =   "frmPFC.frx":1C52
          Style           =   1  'Graphical
          TabIndex        =   55
          TabStop         =   0   'False
@@ -445,7 +408,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   4
          Left            =   -71880
-         Picture         =   "frmPFC.frx":21AC
+         Picture         =   "frmPFC.frx":21DC
          Style           =   1  'Graphical
          TabIndex        =   54
          TabStop         =   0   'False
@@ -475,7 +438,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   3
          Left            =   -72960
-         Picture         =   "frmPFC.frx":2736
+         Picture         =   "frmPFC.frx":2766
          Style           =   1  'Graphical
          TabIndex        =   52
          TabStop         =   0   'False
@@ -486,7 +449,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   2
          Left            =   -72960
-         Picture         =   "frmPFC.frx":2CC0
+         Picture         =   "frmPFC.frx":2CF0
          Style           =   1  'Graphical
          TabIndex        =   51
          TabStop         =   0   'False
@@ -497,7 +460,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   1
          Left            =   -74040
-         Picture         =   "frmPFC.frx":324A
+         Picture         =   "frmPFC.frx":327A
          Style           =   1  'Graphical
          TabIndex        =   50
          TabStop         =   0   'False
@@ -508,7 +471,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   0
          Left            =   -74040
-         Picture         =   "frmPFC.frx":37D4
+         Picture         =   "frmPFC.frx":3804
          Style           =   1  'Graphical
          TabIndex        =   49
          TabStop         =   0   'False
@@ -562,7 +525,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   6
          Left            =   1800
-         Picture         =   "frmPFC.frx":3D5E
+         Picture         =   "frmPFC.frx":3D8E
          Style           =   1  'Graphical
          TabIndex        =   43
          TabStop         =   0   'False
@@ -590,7 +553,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   7
          Left            =   1800
-         Picture         =   "frmPFC.frx":42E8
+         Picture         =   "frmPFC.frx":4318
          Style           =   1  'Graphical
          TabIndex        =   39
          TabStop         =   0   'False
@@ -609,7 +572,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   5
          Left            =   6120
-         Picture         =   "frmPFC.frx":4872
+         Picture         =   "frmPFC.frx":48A2
          Style           =   1  'Graphical
          TabIndex        =   36
          TabStop         =   0   'False
@@ -627,7 +590,7 @@ Begin VB.Form frmPFC
       Begin VB.CommandButton cmdescpfd 
          Height          =   315
          Left            =   3120
-         Picture         =   "frmPFC.frx":4DFC
+         Picture         =   "frmPFC.frx":4E2C
          Style           =   1  'Graphical
          TabIndex        =   33
          TabStop         =   0   'False
@@ -638,7 +601,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   4
          Left            =   1800
-         Picture         =   "frmPFC.frx":5386
+         Picture         =   "frmPFC.frx":53B6
          Style           =   1  'Graphical
          TabIndex        =   31
          TabStop         =   0   'False
@@ -649,7 +612,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   3
          Left            =   960
-         Picture         =   "frmPFC.frx":5910
+         Picture         =   "frmPFC.frx":5940
          Style           =   1  'Graphical
          TabIndex        =   29
          TabStop         =   0   'False
@@ -693,7 +656,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   8
          Left            =   1320
-         Picture         =   "frmPFC.frx":5E9A
+         Picture         =   "frmPFC.frx":5ECA
          Style           =   1  'Graphical
          TabIndex        =   23
          TabStop         =   0   'False
@@ -704,7 +667,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   1
          Left            =   1320
-         Picture         =   "frmPFC.frx":6424
+         Picture         =   "frmPFC.frx":6454
          Style           =   1  'Graphical
          TabIndex        =   20
          TabStop         =   0   'False
@@ -715,7 +678,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   2
          Left            =   1320
-         Picture         =   "frmPFC.frx":69AE
+         Picture         =   "frmPFC.frx":69DE
          Style           =   1  'Graphical
          TabIndex        =   18
          TabStop         =   0   'False
@@ -731,7 +694,7 @@ Begin VB.Form frmPFC
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":6F38
+         Picture         =   "frmPFC.frx":6F68
          Caption         =   "Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -752,7 +715,7 @@ Begin VB.Form frmPFC
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":74D2
+         Picture         =   "frmPFC.frx":7502
          Caption         =   "Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -772,7 +735,7 @@ Begin VB.Form frmPFC
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":7A6C
+         Picture         =   "frmPFC.frx":7A9C
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -792,7 +755,7 @@ Begin VB.Form frmPFC
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":8006
+         Picture         =   "frmPFC.frx":8036
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -812,7 +775,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":85A0
+         Picture         =   "frmPFC.frx":85D0
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -832,7 +795,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":8B3A
+         Picture         =   "frmPFC.frx":8B6A
          Caption         =   "Incluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -852,7 +815,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":8FD4
+         Picture         =   "frmPFC.frx":9004
          Caption         =   "Excluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -872,7 +835,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPFC.frx":946E
+         Picture         =   "frmPFC.frx":949E
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -892,7 +855,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":9908
+         Picture         =   "frmPFC.frx":9938
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -913,7 +876,7 @@ Begin VB.Form frmPFC
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFC.frx":9DA2
+         Picture         =   "frmPFC.frx":9DD2
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1170,7 +1133,7 @@ Begin VB.Form frmPFC
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPFC.frx":A33C
+      Picture         =   "frmPFC.frx":A36C
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1190,7 +1153,7 @@ Begin VB.Form frmPFC
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPFC.frx":A8D6
+      Picture         =   "frmPFC.frx":A906
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1318,7 +1281,7 @@ Private Sub cmdClose_Click()
     
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 4
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
+            aVAL(iLOOP) = txtFields(iLOOP)
         Next iLOOP
         aVAL(23) = FixNumBol(Check1.Value)
         aVAL(24) = FixNumBol(Check2.Value)
@@ -1349,14 +1312,14 @@ End Sub
 
 Private Sub cmdescpfd_Click()
 
-    If Me.TXTFIELDS(12) = "" Then
+    If Me.txtFields(12) = "" Then
 
         Alert "Setor em Branco"
         Exit Sub
 
     End If
 
-    Zsetor = Me.TXTFIELDS(12)
+    Zsetor = Me.txtFields(12)
     lRETU = False
     eRETU01 = ""
     eRETU02 = ""
@@ -1364,8 +1327,8 @@ Private Sub cmdescpfd_Click()
 
     If lRETU Then
 
-        Me.TXTFIELDS(6) = eRETU01
-        Me.TXTFIELDS(7) = eRETU02
+        Me.txtFields(6) = eRETU01
+        Me.txtFields(7) = eRETU02
 
     End If
 
@@ -1377,9 +1340,9 @@ Private Sub cmdFOTO_Click(Index As Integer)
 
    
     If Index = 0 Then
-        cCODIGO = FixStr(TXTFIELDS(16))
+        cCODIGO = FixStr(txtFields(16))
     Else
-        cCODIGO = FixStr(TXTFIELDS(17))
+        cCODIGO = FixStr(txtFields(17))
     End If
     If Len(cCODIGO) = 0 Then
         Alert "Codigo nao preenchido"
@@ -1391,7 +1354,7 @@ Private Sub cmdFOTO_Click(Index As Integer)
     IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(cCODIGO), True, False
     zgrp = cCODIGO                               ''zGRP Interno frm imagens
     Load frmIMAGENS
-    frmIMAGENS.TXTFIELDS(0).Enabled = False
+    frmIMAGENS.txtFields(0).Enabled = False
     frmIMAGENS.Escolher(0).Visible = False
     frmIMAGENS.Show vbModal, Me
 End Sub
@@ -1400,7 +1363,7 @@ Private Sub CmdImprimir_Click()
      If Picture1.Height = 0 Then
         Alert ("Sem Imagem")
     Else
-        PrinterEx.ShowPrintPreview Me, "MyPrintingRoutine"
+        PrintPreview1.ShowPreview
     End If
 End Sub
 
@@ -1423,7 +1386,7 @@ Private Sub CmdPegRel_Click()
     cARQ = PegPath("PATH", "PF")
     sSQL = "select regular from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
     aRETU = PegSQL(cARQ, sSQL, 1, Array("REGULAR"), Array(""), Array(""))
-    TXTFIELDS(15) = aRETU(0)
+    txtFields(15) = aRETU(0)
 End Sub
 
 Private Sub CmdSalvaImagem_Click()
@@ -1444,13 +1407,13 @@ Private Sub Command1_Click(Index As Integer)
     End If
     If lRETU Then
         If Index = 0 Or Index = 1 Then
-            Me.TXTFIELDS(3) = eRETU01
+            Me.txtFields(3) = eRETU01
         End If
         If Index = 2 Or Index = 3 Then
-            Me.TXTFIELDS(21) = eRETU01
+            Me.txtFields(21) = eRETU01
         End If
         If Index = 4 Or Index = 5 Then
-            Me.TXTFIELDS(22) = eRETU01
+            Me.txtFields(22) = eRETU01
         End If
         
     End If
@@ -1460,9 +1423,9 @@ End Sub
 Private Sub Command2_Click(Index As Integer)
     lRETU = False
     If Index = 0 Then
-        eRETU01 = TXTFIELDS(8)
+        eRETU01 = txtFields(8)
     Else
-        eRETU01 = TXTFIELDS(19)
+        eRETU01 = txtFields(19)
     End If
     eRETU02 = ""
     eRETU03 = ""
@@ -1471,13 +1434,13 @@ Private Sub Command2_Click(Index As Integer)
     
     If lRETU Then
         If Index = 0 Then
-            TXTFIELDS(16) = eRETU01
-            TXTFIELDS(8) = eRETU02
-            TXTFIELDS(9) = eRETU03
+            txtFields(16) = eRETU01
+            txtFields(8) = eRETU02
+            txtFields(9) = eRETU03
         Else
-            TXTFIELDS(17) = eRETU01
-            TXTFIELDS(19) = eRETU02
-            TXTFIELDS(20) = eRETU03
+            txtFields(17) = eRETU01
+            txtFields(19) = eRETU02
+            txtFields(20) = eRETU03
         End If
     End If
     
@@ -1494,11 +1457,11 @@ Private Sub Command3_Click(Index As Integer)
     EscCodNomSim.Show vbModal, Me
     If lRETU Then
         If Index = 0 Then
-            TXTFIELDS(16) = eRETU01
-            TXTFIELDS(9) = eRETU02
+            txtFields(16) = eRETU01
+            txtFields(9) = eRETU02
         Else
-            TXTFIELDS(17) = eRETU01
-            TXTFIELDS(20) = eRETU02
+            txtFields(17) = eRETU01
+            txtFields(20) = eRETU02
         End If
 
         cARQTMP = PegPath("PATH", "MICROSIGAODBC")
@@ -1507,9 +1470,9 @@ Private Sub Command3_Click(Index As Integer)
         eRETU01 = PegSQL(cARQTMP, cSQLTMP, 1, Array("qm2_tipo"), Array("C"), Array(""))
         If lRETU Then
             If Index = 0 Then
-                TXTFIELDS(8) = Mid(eRETU01(0), 1, 3)
+                txtFields(8) = Mid(eRETU01(0), 1, 3)
             Else
-                TXTFIELDS(19) = Mid(eRETU01(0), 1, 3)
+                txtFields(19) = Mid(eRETU01(0), 1, 3)
             End If
         End If
     End If
@@ -1525,11 +1488,11 @@ Private Sub Command4_Click(Index As Integer)
     If lRETU Then
         If lRETU Then
             If Index = 0 Then
-                TXTFIELDS(8) = eRETU01
-                TXTFIELDS(9) = eRETU02
+                txtFields(8) = eRETU01
+                txtFields(9) = eRETU02
             Else
-                TXTFIELDS(19) = eRETU01
-                TXTFIELDS(20) = eRETU02
+                txtFields(19) = eRETU01
+                txtFields(20) = eRETU02
             End If
         End If
     End If
@@ -1556,9 +1519,9 @@ Private Sub ESCMS01A_Click(Index As Integer)
     If lRETU Then
         Select Case Index
         Case 0
-            TXTFIELDS(16) = eRETU01
+            txtFields(16) = eRETU01
         Case 1
-            TXTFIELDS(17) = eRETU01
+            txtFields(17) = eRETU01
         End Select
     End If
 
@@ -1569,11 +1532,11 @@ Private Sub EscTipIns_Click(Index As Integer)
     escMD02.Show vbModal, Me
     If lRETU Then
         If Index = 0 Then
-            TXTFIELDS(8) = eRETU01
-            TXTFIELDS(9) = eRETU02
+            txtFields(8) = eRETU01
+            txtFields(9) = eRETU02
         Else
-            TXTFIELDS(19) = eRETU01
-            TXTFIELDS(20) = eRETU02
+            txtFields(19) = eRETU01
+            txtFields(20) = eRETU02
         End If
     End If
 
@@ -1592,25 +1555,25 @@ Private Sub Form_Load()
     txtItem = nORD
    
     If nPF > 0 Then
-        TXTPF.tEXT = nPF
+        txtPF.Text = nPF
     Else
-        TXTPF.Visible = False
+        txtPF.Visible = False
         Label1.Visible = False
     End If
     If nSEQ > 0 Then
-        TXTSEQ.tEXT = nSEQ
+        Txtseq.Text = nSEQ
     Else
-        TXTSEQ.Visible = False
+        Txtseq.Visible = False
         Label1.Visible = False
     End If
     If nSSQ > 0 Then
-        TXTSSQ.tEXT = nSSQ
+        Txtssq.Text = nSSQ
     Else
-        TXTSSQ.Visible = False
+        Txtssq.Visible = False
         Label2.Visible = False
     End If
     If nARQPCS = 2 Then
-        TxtCodComp.tEXT = Ccodcomp
+        TxtCodComp.Text = Ccodcomp
     Else
         TxtCodComp.Visible = False
         Label3.Visible = False
@@ -1650,15 +1613,15 @@ Private Sub Form_Load()
     nCAMPOS = 26
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 4
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
+        txtFields(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     Check1.Value = aVAL(23)
     Check2.Value = aVAL(24)
     Check3.Value = aVAL(25)
 
-    TXTFIELDS(3).Font = "isoqsymbol"
-    TXTFIELDS(21).Font = "isoqsymbol"
-    TXTFIELDS(22).Font = "isoqsymbol"
+    txtFields(3).Font = "isoqsymbol"
+    txtFields(21).Font = "isoqsymbol"
+    txtFields(22).Font = "isoqsymbol"
 
     If ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
         StretchSourcePictureFromPicture Picture1, Picture2
@@ -1696,30 +1659,30 @@ Private Sub pfcescid_Click(Index As Integer)
         Select Case iMU01
 
         Case 101
-            TXTFIELDS(1) = eRETU02
+            txtFields(1) = eRETU02
 
         Case 102
-            TXTFIELDS(2) = eRETU02
+            txtFields(2) = eRETU02
 
         Case 103
-            TXTFIELDS(5) = eRETU02
+            txtFields(5) = eRETU02
 
         Case 104
-            TXTFIELDS(10) = eRETU02
+            txtFields(10) = eRETU02
 
         Case 105
-            TXTFIELDS(13) = eRETU02
+            txtFields(13) = eRETU02
 
         Case 106
                 
-            TXTFIELDS(11) = eRETU02
+            txtFields(11) = eRETU02
                 
         Case 107
                 
-            TXTFIELDS(7) = eRETU02
+            txtFields(7) = eRETU02
         Case 108
                 
-            TXTFIELDS(4) = eRETU02
+            txtFields(4) = eRETU02
                 
 
         End Select
@@ -1733,16 +1696,16 @@ Private Sub Setor_Click(Index As Integer)
     Select Case Index
 
     Case 0
-        Me.TXTFIELDS(12) = "P"
+        Me.txtFields(12) = "P"
 
     Case 1
-        Me.TXTFIELDS(12) = "O"
+        Me.txtFields(12) = "O"
 
     Case 2
-        Me.TXTFIELDS(12) = "L"
+        Me.txtFields(12) = "L"
 
     Case 3
-        Me.TXTFIELDS(12) = "R"
+        Me.txtFields(12) = "R"
 
     End Select
 
@@ -1785,20 +1748,20 @@ Private Sub CmdEditMe04_Click(Index As Integer)
     Dim lTEM As Boolean
     On Error GoTo errhandler
     If Index = 0 Then
-        cCODIGO = FixStr(TXTFIELDS(16))
-        cCODTIP = FixStr(TXTFIELDS(8))
-        cTIPO = FixStr(TXTFIELDS(9))
+        cCODIGO = FixStr(txtFields(16))
+        cCODTIP = FixStr(txtFields(8))
+        cTIPO = FixStr(txtFields(9))
     Else
-        cCODIGO = FixStr(TXTFIELDS(17))
-        cCODTIP = FixStr(TXTFIELDS(19))
-        cTIPO = FixStr(TXTFIELDS(20))
+        cCODIGO = FixStr(txtFields(17))
+        cCODTIP = FixStr(txtFields(19))
+        cTIPO = FixStr(txtFields(20))
     End If
     If Len(cCODIGO) = 0 Then
         Exit Sub
     End If
 
-    cAPLICACAO = FixStr(frmPCX.TXTPF(12))
-    cCAPACIDADE = FixStr(TXTFIELDS(4)) & FixStr(TXTFIELDS(5))
+    cAPLICACAO = FixStr(frmPCX.txtPF(12))
+    cCAPACIDADE = FixStr(txtFields(4)) & FixStr(txtFields(5))
 
     cARQ = PegPath("PATH", "MANA5INS")
     sx_SetEpoch (Year(Date) - 30)
@@ -1885,9 +1848,9 @@ Function CHECKME04()
     CHECKME04 = True
     For X = 1 To 2
         If X = 1 Then
-            cCODIGO = FixStr(TXTFIELDS(16))
+            cCODIGO = FixStr(txtFields(16))
         Else
-            cCODIGO = FixStr(TXTFIELDS(17))
+            cCODIGO = FixStr(txtFields(17))
         End If
         cCODIGO = Trim(cCODIGO)
         If Len(cCODIGO) > 0 Then
@@ -1940,16 +1903,10 @@ Private Sub VerImg_Click()
         End If
     End If
 End Sub
-Public Sub MyPrintingRoutine()
+Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
     On Error Resume Next
     Printer.Print
     Printer.PaintPicture Picture1, 0, 0
     Printer.EndDoc
 End Sub
-Public Property Get Printer() As Printer
-    Set Printer = vbExtra.Printer2
-End Property
-Public Property Set Printer(nPrinter As Printer)
-    Set vbExtra.Printer2 = nPrinter
-End Property
 

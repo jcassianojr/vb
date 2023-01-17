@@ -1,0 +1,79 @@
+Public Property Get Printer() As Printer
+ Set Printer = PrinterReplacement
+End Property
+Public Property Set Printer(nPrinter As Printer)
+ Set PrinterReplacement = nPrinter
+End Property
+
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+ Printer.Print "Hello World."
+ ' more printing code
+ '
+End Sub 
+
+
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+   Printer.PaintPicture Picture1, 0, 0
+   Printer.EndDoc
+End Sub
+
+Private Sub CmdImprimir_Click()
+    If Picture1.Height = 0 Then
+        Alert ("Sem Imagem")
+    Else
+        PrintPreview1.ShowPreview
+    End If
+End Sub
+
+PrintPreview1.ShowPreview 
+
+
+
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+    ' the following is the only line needed to print the RichTextBox control
+    PrintPreview1.PrintRichTextBox RichTextBox1
+   ' Printer.EndDoc
+End Sub
+
+
+
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+' Left top
+    Printer.PaintPicture Picture1.Picture, 0, 0
+
+    
+    ' Right top
+    Printer.PaintPicture Picture1.Picture, Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode), 0
+
+    ' Left Bottom
+    Printer.PaintPicture Picture1.Picture, 0, Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)
+
+    ' Right Bottom
+    Printer.PaintPicture Picture1.Picture, Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode), Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)
+
+    ' Centered in page
+    Printer.PaintPicture Picture1.Picture, (Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode)) / 2, (Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)) / 2
+
+'   Printer.EndDoc
+ End Sub
+
+incluir pdf?
+
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+    ' Title
+    Printer.FontSize = 18
+    Printer.FontBold = True
+    Printer.Print lblTitle.Caption
+    Printer.FontSize = 12
+    Printer.Print lblTitle2.Caption
+    Printer.Print
+    Printer.FontBold = False
+    
+    ' Print the grid
+    PrintPreview1.PrintGrid MSHFlexGrid1 ' (this is the only code line needed for printing the grid)
+    
+    Printer.Print
+    Printer.Print "Data published by United Nations"
+    Printer.FontSize = 10
+    Printer.Print "https://population.un.org/wpp/Download/Standard/Population/"
+End Sub

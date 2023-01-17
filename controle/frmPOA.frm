@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form frmPOA 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MENU"
@@ -16,6 +17,15 @@ Begin VB.Form frmPOA
    ScaleWidth      =   11760
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   8160
+      Top             =   360
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"frmPOA.frx":058A
+   End
    Begin TabExCtl.SSTabEx SSTab1 
       Height          =   5175
       Left            =   120
@@ -24,44 +34,35 @@ Begin VB.Form frmPOA
       Width           =   11535
       _ExtentX        =   20346
       _ExtentY        =   9128
-      _Version        =   393216
       Tabs            =   2
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       TabHeight       =   520
       TabCaption(0)   =   "Colaborador Elabarador"
-      TabPicture(0)   =   "frmPOA.frx":058A
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "lbl(4)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label10"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "Label12"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Command7"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Command6"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "escidfolha(1)"
-      Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "escidfolha(0)"
-      Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "txt(4)"
-      Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "txt(5)"
-      Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "txt(10)"
-      Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "txt(11)"
-      Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "txt(12)"
-      Tab(0).Control(11).Enabled=   0   'False
       Tab(0).ControlCount=   12
+      Tab(0).Control(0)=   "txt(12)"
+      Tab(0).Control(1)=   "txt(11)"
+      Tab(0).Control(2)=   "txt(10)"
+      Tab(0).Control(3)=   "txt(5)"
+      Tab(0).Control(4)=   "txt(4)"
+      Tab(0).Control(5)=   "escidfolha(0)"
+      Tab(0).Control(6)=   "escidfolha(1)"
+      Tab(0).Control(7)=   "Command6"
+      Tab(0).Control(8)=   "Command7"
+      Tab(0).Control(9)=   "Label12"
+      Tab(0).Control(10)=   "Label10"
+      Tab(0).Control(11)=   "lbl(4)"
       TabCaption(1)   =   "Imagem"
-      TabPicture(1)   =   "frmPOA.frx":05A6
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlCount=   9
       Tab(1).Control(0)=   "Picture1"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Picture2"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "CmdConfImp"
       Tab(1).Control(3)=   "CmdImprimir"
       Tab(1).Control(4)=   "CmdPaste"
@@ -69,7 +70,6 @@ Begin VB.Form frmPOA
       Tab(1).Control(6)=   "DelImg"
       Tab(1).Control(7)=   "VerImg"
       Tab(1).Control(8)=   "Command4"
-      Tab(1).ControlCount=   9
       Begin VB.TextBox txt 
          BackColor       =   &H00C0FFFF&
          Enabled         =   0   'False
@@ -152,7 +152,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":05C2
+         Picture         =   "frmPOA.frx":062A
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -173,7 +173,7 @@ Begin VB.Form frmPOA
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":0B5C
+         Picture         =   "frmPOA.frx":0BC4
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -195,7 +195,7 @@ Begin VB.Form frmPOA
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":10F6
+         Picture         =   "frmPOA.frx":115E
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -217,7 +217,7 @@ Begin VB.Form frmPOA
          Width           =   735
          _ExtentX        =   1296
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":1690
+         Picture         =   "frmPOA.frx":16F8
          Caption         =   "LX"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -238,7 +238,7 @@ Begin VB.Form frmPOA
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":1C2A
+         Picture         =   "frmPOA.frx":1C92
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -259,7 +259,7 @@ Begin VB.Form frmPOA
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":21C4
+         Picture         =   "frmPOA.frx":222C
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -280,7 +280,7 @@ Begin VB.Form frmPOA
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":275E
+         Picture         =   "frmPOA.frx":27C6
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -300,7 +300,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":2CF8
+         Picture         =   "frmPOA.frx":2D60
          Caption         =   "Incluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -320,7 +320,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":3192
+         Picture         =   "frmPOA.frx":31FA
          Caption         =   "Excluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -340,7 +340,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPOA.frx":362C
+         Picture         =   "frmPOA.frx":3694
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -360,7 +360,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":3AC6
+         Picture         =   "frmPOA.frx":3B2E
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -542,7 +542,7 @@ Begin VB.Form frmPOA
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPOA.frx":3F60
+      Picture         =   "frmPOA.frx":3FC8
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -563,7 +563,7 @@ Begin VB.Form frmPOA
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPOA.frx":44FA
+      Picture         =   "frmPOA.frx":4562
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -583,7 +583,7 @@ Begin VB.Form frmPOA
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":4A94
+      Picture         =   "frmPOA.frx":4AFC
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -605,7 +605,7 @@ Begin VB.Form frmPOA
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":502E
+      Picture         =   "frmPOA.frx":5096
       Caption         =   "mana5"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -626,7 +626,7 @@ Begin VB.Form frmPOA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":55C8
+      Picture         =   "frmPOA.frx":5630
       Caption         =   "PF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -648,7 +648,7 @@ Begin VB.Form frmPOA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":5B62
+      Picture         =   "frmPOA.frx":5BCA
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -670,7 +670,7 @@ Begin VB.Form frmPOA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":60FC
+      Picture         =   "frmPOA.frx":6164
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -790,7 +790,7 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     If MDG("Gravar alteraçôes") Then
         For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXT(iLOOP)
+            aVAL(iLOOP) = txt(iLOOP)
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
         If lTROCOU Then
@@ -804,15 +804,16 @@ End Sub
 Private Sub CmdConfImp_Click()
     FrmPrintSetup.Show vbModal, Me
 End Sub
-
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+   Printer.PaintPicture Picture1, 0, 0
+   Printer.EndDoc
+End Sub
 Private Sub CmdImprimir_Click()
     If Picture1.Height = 0 Then
         Alert ("Sem Imagem")
     Else
-        Printer.PaintPicture Picture1, 0, 0
-        Printer.EndDoc
+       PrintPreview1.ShowPreview
     End If
-
 End Sub
 
 Private Sub CmdPaste_Click()
@@ -827,8 +828,8 @@ End Sub
 Private Sub Command1_Click()
     escpffim.Show vbModal, Me
     If lRETU Then
-        TXT(1) = eRETU02
-        TXT(2) = eRETU03
+        txt(1) = eRETU02
+        txt(2) = eRETU03
     End If
 End Sub
 
@@ -837,7 +838,7 @@ Private Sub Command2_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim nNUMERO          As Long
-    nNUMERO = FixInt(TXT(4), 0)
+    nNUMERO = FixInt(txt(4), 0)
     
     cARQ = PegPath("PATH", "LOGIXODBC")
     sSQL = "SELECT nom_completo as NOMTEC FROM funcionario WHERE cod_empresa='01' and num_matricula=" & nNUMERO
@@ -849,7 +850,7 @@ Private Sub Command2_Click()
         aRETU = PegSQL(cARQ, sSQL, 1, Array("NOMTEC"), Array("C"), Array(""))
     End If
     If lRETU Then
-        TXT(5) = aRETU(0)
+        txt(5) = aRETU(0)
     End If
 End Sub
 
@@ -860,25 +861,25 @@ Private Sub Command3_Click()
     Dim SACAREA As Variant
     Dim iRETVAL As Variant
    
-    If TXT(8) = "N" Then
+    If txt(8) = "N" Then
         Alert ("Ja respondida")
         Exit Sub
     End If
   
-    If TXT(8) = "S" And FixNum(TXT(7)) > 0 Then
+    If txt(8) = "S" And FixNum(txt(7)) > 0 Then
         Alert ("Ja respondida")
         Exit Sub
     End If
   
     If Not MDG("Gerar Sac") Then
-        TXT(8) = "N"
-        TXT(9) = Today()
+        txt(8) = "N"
+        txt(9) = Today()
         Exit Sub
     End If
-    TXT(8) = "S"
-    TXT(9) = Today()
+    txt(8) = "S"
+    txt(9) = Today()
 
-    cPROBLEMA = FixStr(TXT(3))
+    cPROBLEMA = FixStr(txt(3))
     nLEN = Len(cPROBLEMA)
 
     cDESC01 = Mid(cPROBLEMA, 1, 100)
@@ -906,9 +907,9 @@ Private Sub Command3_Click()
     If sx_Rlock(sx_RecNo()) Then
         sx_PutVariant "SAC", nSAC
         sx_PutVariant "INCUSER", zUSER
-        sx_PutVariant "POA", FixNum(TXT(0))
-        sx_PutVariant "CODIGO", FixStr(TXT(1))
-        sx_PutVariant "NOME", FixStr(TXT(2))
+        sx_PutVariant "POA", FixNum(txt(0))
+        sx_PutVariant "CODIGO", FixStr(txt(1))
+        sx_PutVariant "NOME", FixStr(txt(2))
         sx_PutVariant "DESC01", FixStr(cDESC01)
         sx_PutVariant "DESC02", FixStr(cDESC02)
         sx_PutVariant "DESC03", FixStr(cDESC03)
@@ -920,13 +921,13 @@ Private Sub Command3_Click()
     End If
     sx_Unlock sx_RecNo()
     sx_CloseAll
-    TXT(7) = nSAC
+    txt(7) = nSAC
 
 
 End Sub
 
 Private Sub Command4_Click()
-    salvarpict Me, Picture1, StrZero(TXT(0), 8)
+    salvarpict Me, Picture1, StrZero(txt(0), 8)
 End Sub
 
 Private Sub Command5_Click()
@@ -934,24 +935,24 @@ Private Sub Command5_Click()
     Dim aRETU As Variant
     Dim sSQL             As String
     Dim cCODIGO          As String
-    cCODIGO = FixStr(TXT(1), "", "TRIM")
+    cCODIGO = FixStr(txt(1), "", "TRIM")
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
     If lRETU Then
-        TXT(2) = aRETU(0)
+        txt(2) = aRETU(0)
     End If
 End Sub
 
 Private Sub Command6_Click()
-    TXT(4) = zIDFOLHA
-    TXT(5) = zNOMEFOLHA
+    txt(4) = zIDFOLHA
+    txt(5) = zNOMEFOLHA
 End Sub
 
 Private Sub Command7_Click()
-    TXT(10) = zIDFOLHA
-    TXT(11) = zNOMEFOLHA
-    TXT(12) = Date
+    txt(10) = zIDFOLHA
+    txt(11) = zNOMEFOLHA
+    txt(12) = Date
 End Sub
 
 Private Sub PegCodigoDescricaoPf()
@@ -960,12 +961,12 @@ Private Sub PegCodigoDescricaoPf()
     sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
     aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
     If lRETU Then
-        TXT(1) = aRETU(0)
-        TXT(2) = aRETU(1)
-        TXT(1).Enabled = False
-        TXT(2).Enabled = False
-        TXT(1).Locked = True
-        TXT(2).Locked = True
+        txt(1) = aRETU(0)
+        txt(2) = aRETU(1)
+        txt(1).Enabled = False
+        txt(2).Enabled = False
+        txt(1).Locked = True
+        txt(2).Locked = True
         ESCMS01A(0).Enabled = False
         ESCMS01A(0).Visible = False
         ESCMS01A(1).Enabled = False
@@ -1001,14 +1002,14 @@ Private Sub escidfolha_Click(Index As Integer)
     escMP04.Show vbModal, Me
     
     If lRETU Then
-        TXT(4) = eRETU01
-        TXT(5) = eRETU02
+        txt(4) = eRETU01
+        txt(5) = eRETU02
     End If
 End Sub
 
 Private Sub ESCMS01A_Click(Index As Integer)
     Dim cCHAVEBUS As String
-    cCHAVEBUS = TXT(1)
+    cCHAVEBUS = txt(1)
     ePASS01 = "MANA5"
     If Index = 1 Then
         ePASS01 = "LOGIX"
@@ -1018,8 +1019,8 @@ Private Sub ESCMS01A_Click(Index As Integer)
     End If
     escms01.Show vbModal, Me
     If lRETU Then
-        TXT(1) = eRETU01
-        TXT(2) = eRETU02
+        txt(1) = eRETU01
+        txt(2) = eRETU02
     End If
 End Sub
 
@@ -1028,9 +1029,9 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    PF.tEXT = nPF
-    SEQ.tEXT = nSEQ
-    SSQ.tEXT = nSSQ
+    PF.Text = nPF
+    SEQ.Text = nSEQ
+    SSQ.Text = nSSQ
     CenterFormToScreen Me
     
     lTROCOU = False
@@ -1042,7 +1043,7 @@ Private Sub Form_Load()
     aPAD = Array(0, "", "", "", 0, "", "", 0, "", "", 0, "", "")
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        TXT(iLOOP) = aVAL(iLOOP)
+        txt(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     If ADOPegBlob(cARQ, cSQL, Picture1, "FOTO") Then
         StretchSourcePictureFromPicture Picture1, Picture2

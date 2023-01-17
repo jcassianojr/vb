@@ -1,8 +1,9 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form frmPF 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Processo de Fabricação"
@@ -18,6 +19,15 @@ Begin VB.Form frmPF
    ScaleWidth      =   12015
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   11160
+      Top             =   3000
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"frmPF.frx":058A
+   End
    Begin VB.TextBox txtfields 
       Height          =   285
       Index           =   66
@@ -100,7 +110,7 @@ Begin VB.Form frmPF
    Begin VB.CommandButton Esctipo 
       Height          =   315
       Left            =   7200
-      Picture         =   "frmPF.frx":058A
+      Picture         =   "frmPF.frx":062A
       Style           =   1  'Graphical
       TabIndex        =   188
       TabStop         =   0   'False
@@ -162,7 +172,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   4
       Left            =   8640
-      Picture         =   "frmPF.frx":0B14
+      Picture         =   "frmPF.frx":0BB4
       Style           =   1  'Graphical
       TabIndex        =   146
       TabStop         =   0   'False
@@ -203,7 +213,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   1
       Left            =   9120
-      Picture         =   "frmPF.frx":109E
+      Picture         =   "frmPF.frx":113E
       Style           =   1  'Graphical
       TabIndex        =   140
       TabStop         =   0   'False
@@ -232,7 +242,7 @@ Begin VB.Form frmPF
    Begin VB.CommandButton esciedx 
       Height          =   315
       Left            =   1560
-      Picture         =   "frmPF.frx":1628
+      Picture         =   "frmPF.frx":16C8
       Style           =   1  'Graphical
       TabIndex        =   134
       TabStop         =   0   'False
@@ -313,7 +323,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   0
       Left            =   1260
-      Picture         =   "frmPF.frx":1BB2
+      Picture         =   "frmPF.frx":1C52
       Style           =   1  'Graphical
       TabIndex        =   81
       TabStop         =   0   'False
@@ -324,7 +334,7 @@ Begin VB.Form frmPF
       Height          =   315
       Index           =   0
       Left            =   3060
-      Picture         =   "frmPF.frx":213C
+      Picture         =   "frmPF.frx":21DC
       Style           =   1  'Graphical
       TabIndex        =   80
       TabStop         =   0   'False
@@ -498,14 +508,21 @@ Begin VB.Form frmPF
       Width           =   11775
       _ExtentX        =   20770
       _ExtentY        =   7858
-      _Version        =   393216
       Tabs            =   7
-      Tab             =   5
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       TabsPerRow      =   7
+      Tab             =   5
       TabHeight       =   520
       TabCaption(0)   =   "Matéria Prima 1"
-      TabPicture(0)   =   "frmPF.frx":26C6
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlCount=   28
       Tab(0).Control(0)=   "lblLabels(22)"
       Tab(0).Control(1)=   "lblLabels(23)"
       Tab(0).Control(2)=   "lblLabels(24)"
@@ -521,7 +538,6 @@ Begin VB.Form frmPF
       Tab(0).Control(12)=   "cmdFOTO(2)"
       Tab(0).Control(13)=   "txtfields(24)"
       Tab(0).Control(14)=   "escmu(1)"
-      Tab(0).Control(14).Enabled=   0   'False
       Tab(0).Control(15)=   "txtfields(20)"
       Tab(0).Control(16)=   "txtfields(23)"
       Tab(0).Control(17)=   "txtfields(27)"
@@ -531,17 +547,12 @@ Begin VB.Form frmPF
       Tab(0).Control(21)=   "txtfields(47)"
       Tab(0).Control(22)=   "txtfields(48)"
       Tab(0).Control(23)=   "Command9(0)"
-      Tab(0).Control(23).Enabled=   0   'False
       Tab(0).Control(24)=   "CmdApagar(1)"
-      Tab(0).Control(24).Enabled=   0   'False
       Tab(0).Control(25)=   "Picture1(0)"
       Tab(0).Control(26)=   "Picture2(0)"
       Tab(0).Control(27)=   "ESCpro(9)"
-      Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).ControlCount=   28
       TabCaption(1)   =   "Matéria Prima 2"
-      TabPicture(1)   =   "frmPF.frx":26E2
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlCount=   28
       Tab(1).Control(0)=   "lblLabels(27)"
       Tab(1).Control(1)=   "lblLabels(28)"
       Tab(1).Control(2)=   "lblLabels(29)"
@@ -557,7 +568,6 @@ Begin VB.Form frmPF
       Tab(1).Control(12)=   "cmdFOTO(3)"
       Tab(1).Control(13)=   "txtfields(25)"
       Tab(1).Control(14)=   "escmu(2)"
-      Tab(1).Control(14).Enabled=   0   'False
       Tab(1).Control(15)=   "txtfields(21)"
       Tab(1).Control(16)=   "txtfields(37)"
       Tab(1).Control(17)=   "txtfields(38)"
@@ -566,18 +576,13 @@ Begin VB.Form frmPF
       Tab(1).Control(20)=   "txtfields(41)"
       Tab(1).Control(21)=   "txtfields(49)"
       Tab(1).Control(22)=   "txtfields(50)"
-      Tab(1).Control(23)=   "Command9(1)"
-      Tab(1).Control(23).Enabled=   0   'False
-      Tab(1).Control(24)=   "CmdApagar(2)"
-      Tab(1).Control(24).Enabled=   0   'False
+      Tab(1).Control(23)=   "Command9(0)"
+      Tab(1).Control(24)=   "CmdApagar(1)"
       Tab(1).Control(25)=   "Picture1(1)"
-      Tab(1).Control(26)=   "Picture2(1)"
-      Tab(1).Control(27)=   "ESCpro(10)"
-      Tab(1).Control(27).Enabled=   0   'False
-      Tab(1).ControlCount=   28
+      Tab(1).Control(26)=   "Picture2(0)"
+      Tab(1).Control(27)=   "ESCpro(9)"
       TabCaption(2)   =   "Matéria Prima 3"
-      TabPicture(2)   =   "frmPF.frx":26FE
-      Tab(2).ControlEnabled=   0   'False
+      Tab(2).ControlCount=   28
       Tab(2).Control(0)=   "lblLabels(32)"
       Tab(2).Control(1)=   "lblLabels(33)"
       Tab(2).Control(2)=   "lblLabels(34)"
@@ -593,7 +598,6 @@ Begin VB.Form frmPF
       Tab(2).Control(12)=   "cmdFOTO(4)"
       Tab(2).Control(13)=   "txtfields(26)"
       Tab(2).Control(14)=   "escmu(3)"
-      Tab(2).Control(14).Enabled=   0   'False
       Tab(2).Control(15)=   "txtfields(22)"
       Tab(2).Control(16)=   "txtfields(42)"
       Tab(2).Control(17)=   "txtfields(43)"
@@ -603,124 +607,74 @@ Begin VB.Form frmPF
       Tab(2).Control(21)=   "txtfields(61)"
       Tab(2).Control(22)=   "txtfields(62)"
       Tab(2).Control(23)=   "Command9(2)"
-      Tab(2).Control(23).Enabled=   0   'False
       Tab(2).Control(24)=   "CmdApagar(3)"
-      Tab(2).Control(24).Enabled=   0   'False
       Tab(2).Control(25)=   "Picture1(2)"
       Tab(2).Control(26)=   "Picture2(2)"
       Tab(2).Control(27)=   "ESCpro(11)"
-      Tab(2).Control(27).Enabled=   0   'False
-      Tab(2).ControlCount=   28
       TabCaption(3)   =   "Composição"
-      TabPicture(3)   =   "frmPF.frx":271A
-      Tab(3).ControlEnabled=   0   'False
+      Tab(3).ControlCount=   7
       Tab(3).Control(0)=   "Command5"
       Tab(3).Control(1)=   "Command4"
       Tab(3).Control(2)=   "Command6"
       Tab(3).Control(3)=   "cmdFOTO(5)"
       Tab(3).Control(4)=   "GRIDCOM"
       Tab(3).Control(5)=   "CmdcomIMp"
-      Tab(3).Control(5).Enabled=   0   'False
       Tab(3).Control(6)=   "ImpComPF"
-      Tab(3).Control(6).Enabled=   0   'False
-      Tab(3).ControlCount=   7
       TabCaption(4)   =   "Elab.Rev.Bloq."
-      TabPicture(4)   =   "frmPF.frx":2736
-      Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Command10"
-      Tab(4).Control(0).Enabled=   0   'False
-      Tab(4).Control(1)=   "txtfields(65)"
-      Tab(4).Control(1).Enabled=   0   'False
-      Tab(4).Control(2)=   "txtfields(64)"
-      Tab(4).Control(2).Enabled=   0   'False
-      Tab(4).Control(3)=   "Check2"
-      Tab(4).Control(3).Enabled=   0   'False
-      Tab(4).Control(4)=   "txtfields(63)"
-      Tab(4).Control(4).Enabled=   0   'False
-      Tab(4).Control(5)=   "txtfields(29)"
-      Tab(4).Control(5).Enabled=   0   'False
-      Tab(4).Control(6)=   "CmdMotRev"
-      Tab(4).Control(6).Enabled=   0   'False
-      Tab(4).Control(7)=   "NovaRev"
-      Tab(4).Control(7).Enabled=   0   'False
-      Tab(4).Control(8)=   "txtfields(30)"
-      Tab(4).Control(8).Enabled=   0   'False
-      Tab(4).Control(9)=   "escmp04a"
-      Tab(4).Control(9).Enabled=   0   'False
-      Tab(4).Control(10)=   "txtfields(31)"
-      Tab(4).Control(10).Enabled=   0   'False
-      Tab(4).Control(11)=   "txtfields(8)"
-      Tab(4).Control(11).Enabled=   0   'False
-      Tab(4).Control(12)=   "Check1"
-      Tab(4).Control(12).Enabled=   0   'False
-      Tab(4).Control(13)=   "txtfields(11)"
-      Tab(4).Control(13).Enabled=   0   'False
-      Tab(4).Control(14)=   "gridrev"
-      Tab(4).Control(14).Enabled=   0   'False
-      Tab(4).Control(15)=   "gridrevi"
-      Tab(4).Control(15).Enabled=   0   'False
-      Tab(4).Control(16)=   "ComMotInc"
-      Tab(4).Control(16).Enabled=   0   'False
-      Tab(4).Control(17)=   "ComMotAlt"
-      Tab(4).Control(17).Enabled=   0   'False
-      Tab(4).Control(18)=   "ComMotExc"
-      Tab(4).Control(18).Enabled=   0   'False
-      Tab(4).Control(19)=   "Label4"
-      Tab(4).Control(19).Enabled=   0   'False
-      Tab(4).Control(20)=   "Label3"
-      Tab(4).Control(20).Enabled=   0   'False
-      Tab(4).Control(21)=   "Label10"
-      Tab(4).Control(21).Enabled=   0   'False
-      Tab(4).Control(22)=   "Label12"
-      Tab(4).Control(22).Enabled=   0   'False
-      Tab(4).Control(23)=   "Label1"
-      Tab(4).Control(23).Enabled=   0   'False
       Tab(4).ControlCount=   24
+      Tab(4).Control(0)=   "Command10"
+      Tab(4).Control(1)=   "txtfields(65)"
+      Tab(4).Control(2)=   "txtfields(64)"
+      Tab(4).Control(3)=   "Check2"
+      Tab(4).Control(4)=   "txtfields(63)"
+      Tab(4).Control(5)=   "txtfields(29)"
+      Tab(4).Control(6)=   "CmdMotRev"
+      Tab(4).Control(7)=   "NovaRev"
+      Tab(4).Control(8)=   "txtfields(30)"
+      Tab(4).Control(9)=   "escmp04a"
+      Tab(4).Control(10)=   "txtfields(31)"
+      Tab(4).Control(11)=   "txtfields(8)"
+      Tab(4).Control(12)=   "Check1"
+      Tab(4).Control(13)=   "txtfields(11)"
+      Tab(4).Control(14)=   "gridrev"
+      Tab(4).Control(15)=   "gridrevi"
+      Tab(4).Control(16)=   "ComMotInc"
+      Tab(4).Control(17)=   "ComMotAlt"
+      Tab(4).Control(18)=   "ComMotExc"
+      Tab(4).Control(19)=   "Label4"
+      Tab(4).Control(20)=   "Label3"
+      Tab(4).Control(21)=   "Label10"
+      Tab(4).Control(22)=   "Label12"
+      Tab(4).Control(23)=   "Label1"
       TabCaption(5)   =   "Sequencia"
-      TabPicture(5)   =   "frmPF.frx":2752
-      Tab(5).ControlEnabled=   -1  'True
-      Tab(5).Control(0)=   "Label5"
-      Tab(5).Control(0).Enabled=   0   'False
-      Tab(5).Control(1)=   "GridSeq"
-      Tab(5).Control(1).Enabled=   0   'False
-      Tab(5).Control(2)=   "seqreo"
-      Tab(5).Control(2).Enabled=   0   'False
-      Tab(5).Control(3)=   "EditSeq"
-      Tab(5).Control(3).Enabled=   0   'False
-      Tab(5).Control(4)=   "Command2"
-      Tab(5).Control(4).Enabled=   0   'False
+      Tab(5).ControlCount=   11
+      Tab(5).Control(0)=   "ESCpro(10)"
+      Tab(5).Control(1)=   "Picture2(1)"
+      Tab(5).Control(2)=   "CmdApagar(2)"
+      Tab(5).Control(3)=   "Command9(1)"
+      Tab(5).Control(4)=   "IMPSEQ"
       Tab(5).Control(5)=   "Command1"
-      Tab(5).Control(5).Enabled=   0   'False
-      Tab(5).Control(6)=   "IMPSEQ"
-      Tab(5).Control(6).Enabled=   0   'False
-      Tab(5).ControlCount=   7
+      Tab(5).Control(6)=   "Command2"
+      Tab(5).Control(7)=   "EditSeq"
+      Tab(5).Control(8)=   "seqreo"
+      Tab(5).Control(9)=   "GridSeq"
+      Tab(5).Control(10)=   "Label5"
       TabCaption(6)   =   "Fluxo Mat Prima"
-      TabPicture(6)   =   "frmPF.frx":276E
-      Tab(6).ControlEnabled=   0   'False
+      Tab(6).ControlCount=   30
       Tab(6).Control(0)=   "EscCodFlu(10)"
-      Tab(6).Control(0).Enabled=   0   'False
       Tab(6).Control(1)=   "EscCodFlu(9)"
-      Tab(6).Control(1).Enabled=   0   'False
       Tab(6).Control(2)=   "EscCodFlu(8)"
-      Tab(6).Control(2).Enabled=   0   'False
       Tab(6).Control(3)=   "EscCodFlu(7)"
-      Tab(6).Control(3).Enabled=   0   'False
       Tab(6).Control(4)=   "txtfields(60)"
       Tab(6).Control(5)=   "txtfields(59)"
       Tab(6).Control(6)=   "txtfields(58)"
       Tab(6).Control(7)=   "txtfields(57)"
       Tab(6).Control(8)=   "EscCodFlu(6)"
-      Tab(6).Control(8).Enabled=   0   'False
       Tab(6).Control(9)=   "EscCodFlu(5)"
-      Tab(6).Control(9).Enabled=   0   'False
       Tab(6).Control(10)=   "EscCodFlu(4)"
-      Tab(6).Control(10).Enabled=   0   'False
       Tab(6).Control(11)=   "EscCodFlu(3)"
-      Tab(6).Control(11).Enabled=   0   'False
       Tab(6).Control(12)=   "EscCodFlu(2)"
-      Tab(6).Control(12).Enabled=   0   'False
       Tab(6).Control(13)=   "EscCodFlu(1)"
-      Tab(6).Control(13).Enabled=   0   'False
       Tab(6).Control(14)=   "txtfields(56)"
       Tab(6).Control(15)=   "txtfields(55)"
       Tab(6).Control(16)=   "txtfields(54)"
@@ -728,25 +682,15 @@ Begin VB.Form frmPF
       Tab(6).Control(18)=   "txtfields(52)"
       Tab(6).Control(19)=   "txtfields(51)"
       Tab(6).Control(20)=   "CMDSIG(1)"
-      Tab(6).Control(20).Enabled=   0   'False
       Tab(6).Control(21)=   "CMDSIG(2)"
-      Tab(6).Control(21).Enabled=   0   'False
       Tab(6).Control(22)=   "CMDSIG(3)"
-      Tab(6).Control(22).Enabled=   0   'False
       Tab(6).Control(23)=   "CMDSIG(4)"
-      Tab(6).Control(23).Enabled=   0   'False
       Tab(6).Control(24)=   "CMDSIG(5)"
-      Tab(6).Control(24).Enabled=   0   'False
       Tab(6).Control(25)=   "CMDSIG(6)"
-      Tab(6).Control(25).Enabled=   0   'False
       Tab(6).Control(26)=   "CMDSIG(7)"
-      Tab(6).Control(26).Enabled=   0   'False
       Tab(6).Control(27)=   "CMDSIG(8)"
-      Tab(6).Control(27).Enabled=   0   'False
       Tab(6).Control(28)=   "CMDSIG(9)"
-      Tab(6).Control(28).Enabled=   0   'False
       Tab(6).Control(29)=   "CMDSIG(10)"
-      Tab(6).ControlCount=   30
       Begin VB.CommandButton Command10 
          Caption         =   "Distribuicao"
          Height          =   495
@@ -794,7 +738,7 @@ Begin VB.Form frmPF
          Caption         =   "LX"
          Height          =   315
          Index           =   10
-         Left            =   -68400
+         Left            =   6600
          TabIndex        =   179
          TabStop         =   0   'False
          Top             =   840
@@ -834,7 +778,7 @@ Begin VB.Form frmPF
       Begin VB.PictureBox Picture2 
          Height          =   2535
          Index           =   1
-         Left            =   -74760
+         Left            =   240
          ScaleHeight     =   2475
          ScaleWidth      =   2835
          TabIndex        =   175
@@ -889,7 +833,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   10
          Left            =   -71640
-         Picture         =   "frmPF.frx":278A
+         Picture         =   "frmPF.frx":2766
          Style           =   1  'Graphical
          TabIndex        =   170
          Top             =   2880
@@ -899,7 +843,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   9
          Left            =   -71640
-         Picture         =   "frmPF.frx":2D14
+         Picture         =   "frmPF.frx":2CF0
          Style           =   1  'Graphical
          TabIndex        =   169
          TabStop         =   0   'False
@@ -910,7 +854,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   8
          Left            =   -71640
-         Picture         =   "frmPF.frx":329E
+         Picture         =   "frmPF.frx":327A
          Style           =   1  'Graphical
          TabIndex        =   168
          TabStop         =   0   'False
@@ -921,7 +865,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   7
          Left            =   -71640
-         Picture         =   "frmPF.frx":3828
+         Picture         =   "frmPF.frx":3804
          Style           =   1  'Graphical
          TabIndex        =   167
          TabStop         =   0   'False
@@ -932,7 +876,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   6
          Left            =   -71640
-         Picture         =   "frmPF.frx":3DB2
+         Picture         =   "frmPF.frx":3D8E
          Style           =   1  'Graphical
          TabIndex        =   166
          TabStop         =   0   'False
@@ -943,7 +887,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   5
          Left            =   -74280
-         Picture         =   "frmPF.frx":433C
+         Picture         =   "frmPF.frx":4318
          Style           =   1  'Graphical
          TabIndex        =   165
          TabStop         =   0   'False
@@ -954,7 +898,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   4
          Left            =   -74280
-         Picture         =   "frmPF.frx":48C6
+         Picture         =   "frmPF.frx":48A2
          Style           =   1  'Graphical
          TabIndex        =   164
          TabStop         =   0   'False
@@ -965,7 +909,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   3
          Left            =   -74280
-         Picture         =   "frmPF.frx":4E50
+         Picture         =   "frmPF.frx":4E2C
          Style           =   1  'Graphical
          TabIndex        =   163
          TabStop         =   0   'False
@@ -976,7 +920,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   2
          Left            =   -74280
-         Picture         =   "frmPF.frx":53DA
+         Picture         =   "frmPF.frx":53B6
          Style           =   1  'Graphical
          TabIndex        =   162
          TabStop         =   0   'False
@@ -987,7 +931,7 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   1
          Left            =   -74280
-         Picture         =   "frmPF.frx":5964
+         Picture         =   "frmPF.frx":5940
          Style           =   1  'Graphical
          TabIndex        =   161
          TabStop         =   0   'False
@@ -1319,7 +1263,7 @@ Begin VB.Form frmPF
          Caption         =   "Apagar"
          Height          =   375
          Index           =   2
-         Left            =   -67320
+         Left            =   7680
          TabIndex        =   136
          TabStop         =   0   'False
          Top             =   840
@@ -1349,7 +1293,7 @@ Begin VB.Form frmPF
          Caption         =   "-->"
          Height          =   255
          Index           =   1
-         Left            =   -67800
+         Left            =   7200
          TabIndex        =   132
          TabStop         =   0   'False
          Top             =   900
@@ -1500,7 +1444,7 @@ Begin VB.Form frmPF
       Begin VB.CommandButton escmp04a 
          Height          =   315
          Left            =   -72600
-         Picture         =   "frmPF.frx":5EEE
+         Picture         =   "frmPF.frx":5ECA
          Style           =   1  'Graphical
          TabIndex        =   108
          TabStop         =   0   'False
@@ -1741,7 +1685,7 @@ Begin VB.Form frmPF
          Height          =   315
          Index           =   1
          Left            =   -68880
-         Picture         =   "frmPF.frx":6478
+         Picture         =   "frmPF.frx":6454
          Style           =   1  'Graphical
          TabIndex        =   86
          TabStop         =   0   'False
@@ -1752,7 +1696,7 @@ Begin VB.Form frmPF
          Height          =   315
          Index           =   2
          Left            =   -68760
-         Picture         =   "frmPF.frx":6A02
+         Picture         =   "frmPF.frx":69DE
          Style           =   1  'Graphical
          TabIndex        =   85
          TabStop         =   0   'False
@@ -1763,7 +1707,7 @@ Begin VB.Form frmPF
          Height          =   315
          Index           =   3
          Left            =   -68760
-         Picture         =   "frmPF.frx":6F8C
+         Picture         =   "frmPF.frx":6F68
          Style           =   1  'Graphical
          TabIndex        =   84
          TabStop         =   0   'False
@@ -1847,7 +1791,7 @@ Begin VB.Form frmPF
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   661
-         Picture         =   "frmPF.frx":7516
+         Picture         =   "frmPF.frx":74F2
          Caption         =   "Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1868,7 +1812,7 @@ Begin VB.Form frmPF
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   873
-         Picture         =   "frmPF.frx":7AB0
+         Picture         =   "frmPF.frx":7A8C
          Caption         =   "Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1889,7 +1833,7 @@ Begin VB.Form frmPF
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   873
-         Picture         =   "frmPF.frx":804A
+         Picture         =   "frmPF.frx":8026
          Caption         =   "Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1911,7 +1855,7 @@ Begin VB.Form frmPF
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   873
-         Picture         =   "frmPF.frx":85E4
+         Picture         =   "frmPF.frx":85C0
          Caption         =   "Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1932,7 +1876,7 @@ Begin VB.Form frmPF
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":8B7E
+         Picture         =   "frmPF.frx":8B5A
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1953,7 +1897,7 @@ Begin VB.Form frmPF
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":9118
+         Picture         =   "frmPF.frx":90F4
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1974,7 +1918,7 @@ Begin VB.Form frmPF
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":96B2
+         Picture         =   "frmPF.frx":968E
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1995,7 +1939,7 @@ Begin VB.Form frmPF
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":9C4C
+         Picture         =   "frmPF.frx":9C28
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2016,7 +1960,7 @@ Begin VB.Form frmPF
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":A1E6
+         Picture         =   "frmPF.frx":A1C2
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2037,7 +1981,7 @@ Begin VB.Form frmPF
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":A780
+         Picture         =   "frmPF.frx":A75C
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2058,7 +2002,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":AD1A
+         Picture         =   "frmPF.frx":ACF6
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2079,7 +2023,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":B2B4
+         Picture         =   "frmPF.frx":B290
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2100,7 +2044,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":B84E
+         Picture         =   "frmPF.frx":B82A
          Caption         =   "Excluir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2121,7 +2065,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":BDE8
+         Picture         =   "frmPF.frx":BDC4
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2142,7 +2086,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":C382
+         Picture         =   "frmPF.frx":C35E
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2163,7 +2107,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":C91C
+         Picture         =   "frmPF.frx":C8F8
          Caption         =   "Apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2185,7 +2129,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":CEB6
+         Picture         =   "frmPF.frx":CE92
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2207,7 +2151,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":D350
+         Picture         =   "frmPF.frx":D32C
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2229,7 +2173,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":D7EA
+         Picture         =   "frmPF.frx":D7C6
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2251,7 +2195,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":DC84
+         Picture         =   "frmPF.frx":DC60
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2273,7 +2217,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":E11E
+         Picture         =   "frmPF.frx":E0FA
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2295,7 +2239,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":E5B8
+         Picture         =   "frmPF.frx":E594
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2317,7 +2261,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":EA52
+         Picture         =   "frmPF.frx":EA2E
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2339,7 +2283,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":EEEC
+         Picture         =   "frmPF.frx":EEC8
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2361,7 +2305,7 @@ Begin VB.Form frmPF
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPF.frx":F386
+         Picture         =   "frmPF.frx":F362
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2383,7 +2327,7 @@ Begin VB.Form frmPF
          Width           =   2295
          _ExtentX        =   4048
          _ExtentY        =   873
-         Picture         =   "frmPF.frx":F820
+         Picture         =   "frmPF.frx":F7FC
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2405,7 +2349,7 @@ Begin VB.Form frmPF
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   661
-         Picture         =   "frmPF.frx":FCBA
+         Picture         =   "frmPF.frx":FC96
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2427,7 +2371,7 @@ Begin VB.Form frmPF
          Width           =   2295
          _ExtentX        =   4048
          _ExtentY        =   873
-         Picture         =   "frmPF.frx":10154
+         Picture         =   "frmPF.frx":10130
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -2681,7 +2625,7 @@ Begin VB.Form frmPF
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPF.frx":105EE
+      Picture         =   "frmPF.frx":105CA
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -2702,7 +2646,7 @@ Begin VB.Form frmPF
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPF.frx":10B88
+      Picture         =   "frmPF.frx":10B64
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -2723,7 +2667,7 @@ Begin VB.Form frmPF
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPF.frx":11122
+      Picture         =   "frmPF.frx":110FE
       Caption         =   "Configurar Impressora"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -2745,7 +2689,7 @@ Begin VB.Form frmPF
       Width           =   1095
       _ExtentX        =   1931
       _ExtentY        =   661
-      Picture         =   "frmPF.frx":116BC
+      Picture         =   "frmPF.frx":11698
       Caption         =   "Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -2767,7 +2711,7 @@ Begin VB.Form frmPF
       Width           =   1095
       _ExtentX        =   1931
       _ExtentY        =   661
-      Picture         =   "frmPF.frx":11C56
+      Picture         =   "frmPF.frx":11C32
       Caption         =   "Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -3096,48 +3040,48 @@ Dim lTROCOU As Variant
 Dim aCAMIMG As Variant
 
 Private Sub cad_cjt_lx_Click()
-    gravacaddes TXTFIELDS(12).tEXT, TXTFIELDS(13).tEXT, DTPicker3.Value
+    gravacaddes txtFields(12).Text, txtFields(13).Text, DTPicker3.Value
 End Sub
 
 Private Sub CmdApagar_Click(Index As Integer)
     Select Case Index
     Case 1
-        TXTFIELDS(20) = ""
-        TXTFIELDS(24) = ""
-        TXTFIELDS(23) = 0
-        TXTFIELDS(27) = 0
-        TXTFIELDS(19) = 0
-        TXTFIELDS(35) = 0
-        TXTFIELDS(47) = 0
-        TXTFIELDS(48) = ""
+        txtFields(20) = ""
+        txtFields(24) = ""
+        txtFields(23) = 0
+        txtFields(27) = 0
+        txtFields(19) = 0
+        txtFields(35) = 0
+        txtFields(47) = 0
+        txtFields(48) = ""
     Case 2
-        TXTFIELDS(21) = ""
-        TXTFIELDS(25) = ""
-        TXTFIELDS(37) = 0
-        TXTFIELDS(38) = 0
-        TXTFIELDS(39) = 0
-        TXTFIELDS(40) = 0
-        TXTFIELDS(49) = 0
-        TXTFIELDS(50) = 0
-        TXTFIELDS(41) = ""
+        txtFields(21) = ""
+        txtFields(25) = ""
+        txtFields(37) = 0
+        txtFields(38) = 0
+        txtFields(39) = 0
+        txtFields(40) = 0
+        txtFields(49) = 0
+        txtFields(50) = 0
+        txtFields(41) = ""
     Case 3
-        TXTFIELDS(22) = ""
-        TXTFIELDS(26) = ""
-        TXTFIELDS(42) = 0
-        TXTFIELDS(43) = 0
-        TXTFIELDS(44) = 0
-        TXTFIELDS(45) = 0
-        TXTFIELDS(61) = 0
-        TXTFIELDS(62) = 0
-        TXTFIELDS(46) = ""
+        txtFields(22) = ""
+        txtFields(26) = ""
+        txtFields(42) = 0
+        txtFields(43) = 0
+        txtFields(44) = 0
+        txtFields(45) = 0
+        txtFields(61) = 0
+        txtFields(62) = 0
+        txtFields(46) = ""
     End Select
 End Sub
 
 Private Sub cmdcaddes_Click()
-    If Len(TXTFIELDS(66).tEXT) > 0 Then
-        gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(66).tEXT, DTPicker1.Value
+    If Len(txtFields(66).Text) > 0 Then
+        gravacaddes txtFields(6).Text, txtFields(66).Text, DTPicker1.Value
     Else
-        gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(7).tEXT, DTPicker1.Value
+        gravacaddes txtFields(6).Text, txtFields(7).Text, DTPicker1.Value
     End If
 End Sub
 
@@ -3150,7 +3094,7 @@ Private Sub cmdClose_Click()
     Dim cSQLUP As String
     Dim cSQLIMG As String
 
-    If Check1 And Len(TXTFIELDS(11)) = 0 Then
+    If Check1 And Len(txtFields(11)) = 0 Then
         Alert ("Preencher Motivo do Bloqueio")
         Exit Sub
     End If
@@ -3182,7 +3126,7 @@ Private Sub cmdClose_Click()
     End If
     
     For iLOOP = 0 To nCAMPOS - 5
-        aVAL(iLOOP) = TXTFIELDS(iLOOP)
+        aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP
     GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
        
@@ -3205,7 +3149,7 @@ Private Sub CmdcomIMp_Click()
     Dim PFMS03 As New ADODB.Recordset
     Dim cCODIGO, sqlMS03, sqlpfms03 As String
     Dim aCAMPOS As Variant
-    cCODIGO = frmPF.TXTFIELDS(14)
+    cCODIGO = frmPF.txtFields(14)
 
     If IsNull(cCODIGO) Then
 
@@ -3283,23 +3227,23 @@ End Sub
 Private Sub cmdFOTO_Click(Index As Integer)
     Select Case Index
     Case 0
-        zgrp = TXTFIELDS(2)
+        zgrp = txtFields(2)
         cARQRTF = PegPath("PATH", "IMGMS01")
         iImage = 2
     Case 1
-        zgrp = TXTFIELDS(14)
+        zgrp = txtFields(14)
         cARQRTF = PegPath("PATH", "IMGMS01")
         iImage = 2
     Case 2
-        zgrp = TXTFIELDS(20)
+        zgrp = txtFields(20)
         cARQRTF = PegPath("PATH", "IMGMU01")
         iImage = 7
     Case 3
-        zgrp = TXTFIELDS(21)
+        zgrp = txtFields(21)
         cARQRTF = PegPath("PATH", "IMGMU01")
         iImage = 7
     Case 4
-        zgrp = TXTFIELDS(22)
+        zgrp = txtFields(22)
         cARQRTF = PegPath("PATH", "IMGMU01")
         iImage = 7
     Case 5
@@ -3320,12 +3264,12 @@ Private Sub cmdFOTO_Click(Index As Integer)
         Exit Sub
     End If
     If Index = 0 Or Index = 1 Then
-        If Len(FixStr(TXTFIELDS(0))) > 0 Then
-            zgrp = zgrp & "|" & TXTFIELDS(0)
+        If Len(FixStr(txtFields(0))) > 0 Then
+            zgrp = zgrp & "|" & txtFields(0)
         End If
     End If
     Load frmIMAGENS
-    frmIMAGENS.TXTFIELDS(0).Enabled = False
+    frmIMAGENS.txtFields(0).Enabled = False
     frmIMAGENS.Escolher(0).Visible = False
     frmIMAGENS.Show vbModal, Me
 End Sub
@@ -3335,7 +3279,7 @@ Private Sub CmdImprimir_Click(Index As Integer)
         Alert ("Sem Imagem")
     Else
         ePASS01 = Index
-        PrinterEx.ShowPrintPreview Me, "MyPrintingRoutine"
+        PrintPreview1.ShowPreview
     End If
 End Sub
 
@@ -3379,7 +3323,7 @@ Private Sub CMDSIG_Click(Index As Integer)
     ePASS02 = True
     frmCharacters.Show vbModal, Me
     If lRETU Then
-        TXTFIELDS(50 + Index) = eRETU01
+        txtFields(50 + Index) = eRETU01
     End If
 
 End Sub
@@ -3456,8 +3400,8 @@ Private Sub Command2_Click()
     End If
     FilRelat
     
-    eRETU02 = "PF:" & TXTPF.tEXT & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
+    eRETU02 = "PF:" & TXTPF.Text & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Desenho:" & txtFields(2) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " SEQ=" & nSEQ & " SSQ=" & nSSQ
         
@@ -3545,11 +3489,11 @@ Private Sub Command7_Click(Index As Integer)
 
     
     If Index = 0 Or Index = 1 Then               '0 e 1 ma01 mana5
-        nNUMERO = FixInt(TXTFIELDS(4))
+        nNUMERO = FixInt(txtFields(4))
         cARQ = GeraConn(zMANA5EMP, "JETFOX")
         sSQL = "SELECT NOME,CODIGO FROM MA01 WHERE NUMERO=" & nNUMERO
     Else                                         '10 11  logix clientes/duns
-        nNUMERO = Trim(FixStr(TXTFIELDS(4)))
+        nNUMERO = Trim(FixStr(txtFields(4)))
         cARQ = PegPath("PATH", "LOGIXODBC")
         sSQL = " SELECT clientes.nom_cliente as nome,duns_itaesbra.num_duns as codigo  FROM clientes"
         sSQL = sSQL & " LEFT JOIN duns_itaesbra ON clientes.cod_cliente=duns_itaesbra.cod_cliente AND duns_itaesbra.cod_empresa='01'"
@@ -3558,10 +3502,10 @@ Private Sub Command7_Click(Index As Integer)
     aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGO"), Array("C", "C"), Array("", ""))
     If lRETU Then
         If Index = 0 Or Index = 10 Then          '0 10 nome e codigo cliente
-            TXTFIELDS(5) = aRETU(0)
-            TXTFIELDS(53) = aRETU(1)
+            txtFields(5) = aRETU(0)
+            txtFields(53) = aRETU(1)
         Else
-            TXTFIELDS(53) = aRETU(1)             '1,11 codigo cliente
+            txtFields(53) = aRETU(1)             '1,11 codigo cliente
         End If
     End If
     
@@ -3578,12 +3522,12 @@ Private Sub Command8_Click()
     Dim cCODIGO As String
     Dim aRETU As Variant
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    cCODIGO = FixStr(TXTFIELDS(2), "", "TRIM")
+    cCODIGO = FixStr(txtFields(2), "", "TRIM")
     sSQL = "SELECT NOME,CODIGOINT FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
     aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGOINT"), Array("C", "C"), Array("", ""))
     If lRETU Then
-        TXTFIELDS(3) = aRETU(0)
-        TXTFIELDS(0) = aRETU(1)
+        txtFields(3) = aRETU(0)
+        txtFields(0) = aRETU(1)
     End If
 End Sub
 
@@ -3597,13 +3541,13 @@ Private Sub Command9_Click(Index As Integer)
     Select Case Index
 
     Case 0
-        cCODIGO = FixStr(TXTFIELDS(20))
+        cCODIGO = FixStr(txtFields(20))
 
     Case 1
-        cCODIGO = FixStr(TXTFIELDS(21))
+        cCODIGO = FixStr(txtFields(21))
 
     Case 2
-        cCODIGO = FixStr(TXTFIELDS(22))
+        cCODIGO = FixStr(txtFields(22))
 
     End Select
 
@@ -3615,11 +3559,11 @@ Private Sub Command9_Click(Index As Integer)
     
         Select Case Index
         Case 0
-            TXTFIELDS(24) = cNOME
+            txtFields(24) = cNOME
         Case 1
-            TXTFIELDS(25) = cNOME
+            txtFields(25) = cNOME
         Case 2
-            TXTFIELDS(26) = cNOME
+            txtFields(26) = cNOME
         End Select
     End If
 End Sub
@@ -3679,15 +3623,15 @@ Private Sub DelImg_Click(Index As Integer)
 End Sub
 
 Private Sub DTPicker1_LostFocus()
-    If Len(TXTFIELDS(66).tEXT) > 0 Then
-        gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(66).tEXT, DTPicker1.Value
+    If Len(txtFields(66).Text) > 0 Then
+        gravacaddes txtFields(6).Text, txtFields(66).Text, DTPicker1.Value
     Else
-        gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(7).tEXT, DTPicker1.Value
+        gravacaddes txtFields(6).Text, txtFields(7).Text, DTPicker1.Value
     End If
 End Sub
 
 Private Sub DTPicker3_LostFocus()
-    gravacaddes TXTFIELDS(12).tEXT, TXTFIELDS(13).tEXT, DTPicker3.Value
+    gravacaddes txtFields(12).Text, txtFields(13).Text, DTPicker3.Value
 End Sub
 
 Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVal dDATACLI As Variant)
@@ -3708,12 +3652,12 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
         Exit Sub
     End If
      
-    If Len(TXTFIELDS(0)) = 0 Then
+    If Len(txtFields(0)) = 0 Then
         Alert "codigo interno logix nao preenchido"
         Exit Sub
     End If
      
-    If Len(TXTFIELDS(3)) = 0 Then
+    If Len(txtFields(3)) = 0 Then
         Alert "descricao do item nao preenchido"
         Exit Sub
     End If
@@ -3724,7 +3668,7 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
     End If
      
    
-    cCODLOGIX = Trim(TXTFIELDS(0))
+    cCODLOGIX = Trim(txtFields(0))
     If Len(cCODLOGIX) > 0 Then
         nPOS = InStr(cCODLOGIX, "/")
         If nPOS > 0 Then
@@ -3756,9 +3700,9 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
         End If
           
           
-        IncluiSQLAdo PegPath("PATH", "LOGIXODBC"), "select * from cad_des where cod_empresa='01' and cod_item='" & cCODLOGIX & "' and num_versao='" & TXTFIELDS(7) & "'", 8, _
+        IncluiSQLAdo PegPath("PATH", "LOGIXODBC"), "select * from cad_des where cod_empresa='01' and cod_item='" & cCODLOGIX & "' and num_versao='" & txtFields(7) & "'", 8, _
                                                                                                                                                                    Array("cod_empresa", "cod_item", "num_versao", "seq_versao", "cod_desen", "dat_desen", "den_desen", "cod_form_folha"), _
-                                                                                                                                                                   Array("01", cCODLOGIX, cREVCLI, 1, cDESCLI, dDATACLI, TXTFIELDS(3).tEXT, "''"), _
+                                                                                                                                                                   Array("01", cCODLOGIX, cREVCLI, 1, cDESCLI, dDATACLI, txtFields(3).Text, "''"), _
                                                                                                                                                                    True, False
 
           
@@ -3803,8 +3747,8 @@ Private Sub ESCCLI_Click(Index As Integer)
     End Select
     escNUMNOM.Show vbModal, Me
     If lRETU Then
-        frmPF.TXTFIELDS(4) = eRETU01
-        frmPF.TXTFIELDS(5) = eRETU02
+        frmPF.txtFields(4) = eRETU01
+        frmPF.txtFields(5) = eRETU02
         If Index = 0 Then
             Command7_Click (1)
         End If
@@ -3820,7 +3764,7 @@ Private Sub EscCodFlu_Click(Index As Integer)
     eRETU02 = ""
     escFLX.Show vbModal, Me
     If lRETU Then
-        TXTFIELDS(50 + Index) = eRETU01
+        txtFields(50 + Index) = eRETU01
     End If
 End Sub
 
@@ -3828,15 +3772,15 @@ Private Sub esciedx_Click()
     iMU01 = 201
     escIED.Show vbModal, Me
     If lRETU Then
-        TXTFIELDS(1) = eRETU02
+        txtFields(1) = eRETU02
     End If
 End Sub
 
 Private Sub escmp04a_Click()
     If MDG("Gravar Elaborador", "Confirme Gravação") Then
-        frmPF.TXTFIELDS(30) = zIDFOLHA
-        frmPF.TXTFIELDS(31) = zNOMEFOLHA
-        frmPF.TXTFIELDS(63) = Date
+        frmPF.txtFields(30) = zIDFOLHA
+        frmPF.txtFields(31) = zNOMEFOLHA
+        frmPF.txtFields(63) = Date
     End If
 End Sub
 
@@ -3847,14 +3791,14 @@ Private Sub escmu_Click(Index As Integer)
     If Not lRETU Then Exit Sub
     Select Case Index
     Case 1
-        frmPF.TXTFIELDS(20) = eRETU01
-        frmPF.TXTFIELDS(24) = eRETU02
+        frmPF.txtFields(20) = eRETU01
+        frmPF.txtFields(24) = eRETU02
     Case 2
-        frmPF.TXTFIELDS(21) = eRETU01
-        frmPF.TXTFIELDS(25) = eRETU02
+        frmPF.txtFields(21) = eRETU01
+        frmPF.txtFields(25) = eRETU02
     Case 3
-        frmPF.TXTFIELDS(22) = eRETU01
-        frmPF.TXTFIELDS(26) = eRETU02
+        frmPF.txtFields(22) = eRETU01
+        frmPF.txtFields(26) = eRETU02
     End Select
 End Sub
 
@@ -3880,33 +3824,33 @@ Private Sub ESCpro_Click(Index As Integer)
             escms01.Show vbModal, Me
             If lRETU Then
                 If Index = 2 Or Index = 0 Or Index = 6 Then
-                    frmPF.TXTFIELDS(2) = eRETU01
-                    frmPF.TXTFIELDS(3) = eRETU02
-                    frmPF.TXTFIELDS(0) = eRETU03
+                    frmPF.txtFields(2) = eRETU01
+                    frmPF.txtFields(3) = eRETU02
+                    frmPF.txtFields(0) = eRETU03
                 End If
                 If Index = 3 Or Index = 4 Or Index = 7 Then
-                    frmPF.TXTFIELDS(0) = eRETU03
+                    frmPF.txtFields(0) = eRETU03
                 End If
                 If Index = 9 Then
-                    frmPF.TXTFIELDS(20) = eRETU01
-                    frmPF.TXTFIELDS(24) = eRETU02
+                    frmPF.txtFields(20) = eRETU01
+                    frmPF.txtFields(24) = eRETU02
                 End If
                 If Index = 10 Then
-                    frmPF.TXTFIELDS(21) = eRETU01
-                    frmPF.TXTFIELDS(25) = eRETU02
+                    frmPF.txtFields(21) = eRETU01
+                    frmPF.txtFields(25) = eRETU02
                 End If
                 If Index = 11 Then
-                    frmPF.TXTFIELDS(22) = eRETU01
-                    frmPF.TXTFIELDS(26) = eRETU02
+                    frmPF.txtFields(22) = eRETU01
+                    frmPF.txtFields(26) = eRETU02
                 End If
                
                
             End If
         Else                                     ''1-5-8
-            cCHAVEBUS = TXTFIELDS(2)
+            cCHAVEBUS = txtFields(2)
             escms01.Show vbModal, Me
             If lRETU Then
-                frmPF.TXTFIELDS(14) = eRETU01
+                frmPF.txtFields(14) = eRETU01
             End If
         End If
     End If
@@ -3960,7 +3904,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Esctipo_Click()
-    If TXTFIELDS(28) = "P" Then
+    If txtFields(28) = "P" Then
         Alert ("Ja e producao")
         Exit Sub
     End If
@@ -3992,15 +3936,15 @@ Private Sub Esctipo_Click()
     End Select
     
     If cTIPO = "P" Then
-        If TXTFIELDS(28) = "R" Or TXTFIELDS(28) = "I" Or TXTFIELDS(28) = "L" Or TXTFIELDS(28) = "P" _
-                                                                                                Or TXTFIELDS(28) = "A" Or Len(TXTFIELDS(28)) = 0 Then
+        If txtFields(28) = "R" Or txtFields(28) = "I" Or txtFields(28) = "L" Or txtFields(28) = "P" _
+                                                                                                Or txtFields(28) = "A" Or Len(txtFields(28)) = 0 Then
             If MDG("Mudar para Producao e gerar nova revisao") Then
                 NovaRev_Click
             End If
         End If
     End If
 
-    TXTFIELDS(28) = cTIPO
+    txtFields(28) = cTIPO
     TIPOSAY
 
 End Sub
@@ -4025,7 +3969,7 @@ Private Sub Form_Load()
     cARQFEMEA = PegPath("PATH", "FEMEA")
     
     For X = 51 To 60
-        TXTFIELDS(X).Font = "isoqsymbol"
+        txtFields(X).Font = "isoqsymbol"
     Next
     
     TXTPF = nPF
@@ -4066,7 +4010,7 @@ Private Sub Form_Load()
     
     aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 6                 '
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)           '
+        txtFields(iLOOP) = aVAL(iLOOP)           '
     Next iLOOP
     
     
@@ -4112,17 +4056,17 @@ Private Sub Form_Load()
     Filgridrev
     
     If zUSER = "ADMIN" Then
-        TXTFIELDS(8).Enabled = True
-        TXTFIELDS(8).Locked = False
-        TXTFIELDS(8).Visible = True
-        TXTFIELDS(29).Enabled = True
-        TXTFIELDS(29).Locked = False
-        TXTFIELDS(29).Visible = True
+        txtFields(8).Enabled = True
+        txtFields(8).Locked = False
+        txtFields(8).Visible = True
+        txtFields(29).Enabled = True
+        txtFields(29).Locked = False
+        txtFields(29).Visible = True
     End If
     
     DizerBarra ""
     
-    If Check1 And Len(TXTFIELDS(11)) = 0 Then
+    If Check1 And Len(txtFields(11)) = 0 Then
         Alert ("Preencher Motivo do Bloqueio")
     End If
     
@@ -4174,8 +4118,8 @@ Private Sub NovaRev_Click()
 
     On Error Resume Next
     
-    If Len(TXTFIELDS(29).tEXT) > 0 Then          ''corrige data protheus em branco
-        If TXTFIELDS(29) > Today() Then
+    If Len(txtFields(29).Text) > 0 Then          ''corrige data protheus em branco
+        If txtFields(29) > Today() Then
             Alert ("Data Revisao Anterior Maior que Data do Sistema")
             Exit Sub
         End If
@@ -4183,9 +4127,9 @@ Private Sub NovaRev_Click()
 
     If MDG("Fazer Nova Revisao", "Confirme Gravação") Then
         Encerrar.Visible = False
-        nrevisao = FixInt(TXTFIELDS(8)) + 1
-        TXTFIELDS(8) = nrevisao
-        TXTFIELDS(29) = Fdata(Date)
+        nrevisao = FixInt(txtFields(8)) + 1
+        txtFields(8) = nrevisao
+        txtFields(29) = Fdata(Date)
         
         
         cSQLTMP = "select * from PF WHERE PF=" & nPF
@@ -4214,8 +4158,8 @@ Private Sub NovaRev_Click()
         Filgridrev
         
 
-        eRETU02 = "PF:" & TXTPF.tEXT & Chr(13) & Chr(10)
-        eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
+        eRETU02 = "PF:" & TXTPF.Text & Chr(13) & Chr(10)
+        eRETU02 = eRETU02 & " Desenho:" & txtFields(2) & Chr(13) & Chr(10)
         eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
         
         MAILENV "PF000001", eRETU02
@@ -4254,7 +4198,7 @@ Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Function valornum(Index As Integer)
-    valornum = Val(Replace(TXTFIELDS(Index), ",", "."))
+    valornum = Val(Replace(txtFields(Index), ",", "."))
 End Function
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -4266,7 +4210,7 @@ Private Sub TXTFIELDS_LostFocus(Index As Integer)
     Dim cCODLOGIX
     Dim nPOS
     If Index = 0 Then
-        cCODLOGIX = Trim(TXTFIELDS(0))
+        cCODLOGIX = Trim(txtFields(0))
         If Len(cCODLOGIX) > 0 Then
             nPOS = InStr(cCODLOGIX, "/")
             If nPOS > 0 Then
@@ -4289,21 +4233,21 @@ Private Sub TXTFIELDS_LostFocus(Index As Integer)
 End Sub
 
 Private Sub TIPOSAY()
-    Select Case TXTFIELDS(28)
+    Select Case txtFields(28)
     Case "P"
-        TipoDescritivo.tEXT = "(P)roducao"
+        TipoDescritivo.Text = "(P)roducao"
     Case "R"
-        TipoDescritivo.tEXT = "p(R)ototipo"
+        TipoDescritivo.Text = "p(R)ototipo"
     Case "I"
-        TipoDescritivo.tEXT = "p(I)loto"
+        TipoDescritivo.Text = "p(I)loto"
     Case "A"
-        TipoDescritivo.tEXT = "pre l(A)ncamento"
+        TipoDescritivo.Text = "pre l(A)ncamento"
     Case "L"
-        TipoDescritivo.tEXT = "pre (L)iminar"
+        TipoDescritivo.Text = "pre (L)iminar"
     Case "G"
-        TipoDescritivo.tEXT = "GP12 a(G)ressivo"
+        TipoDescritivo.Text = "GP12 a(G)ressivo"
     Case "N"
-        TipoDescritivo.tEXT = "GP12 pla(N)"
+        TipoDescritivo.Text = "GP12 pla(N)"
     End Select
 End Sub
 Private Sub VerImg_Click(Index As Integer)
@@ -4314,15 +4258,9 @@ Private Sub VerImg_Click(Index As Integer)
         End If
     End If
 End Sub
-Public Sub MyPrintingRoutine()
+Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
     On Error Resume Next
     Printer.Print
     Printer.PaintPicture Picture1(ePASS01), 0, 0
     Printer.EndDoc
 End Sub
-Public Property Get Printer() As Printer
-    Set Printer = vbExtra.Printer2
-End Property
-Public Property Set Printer(nPrinter As Printer)
-    Set vbExtra.Printer2 = nPrinter
-End Property
