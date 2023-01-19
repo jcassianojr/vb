@@ -111,27 +111,23 @@ Begin VB.Form frmPOKA
       Tab(2).Control(7)=   "CmdPaste(1)"
       Tab(2).Control(8)=   "VerImg(1)"
       TabCaption(3)   =   "passo 03"
-      Tab(3).ControlCount=   9
-      Tab(3).Control(0)=   "Picture1(0)"
-      Tab(3).Control(1)=   "Picture2(1)"
-      Tab(3).Control(2)=   "TXT(10)"
-      Tab(3).Control(3)=   "Incluirimagem(2)"
-      Tab(3).Control(4)=   "DelImg(2)"
-      Tab(3).Control(5)=   "ximgsave(2)"
-      Tab(3).Control(6)=   "cmdimprimir(2)"
-      Tab(3).Control(7)=   "CmdPaste(2)"
-      Tab(3).Control(8)=   "VerImg(2)"
+      Tab(3).ControlCount=   6
+      Tab(3).Control(0)=   "Incluirimagem(2)"
+      Tab(3).Control(1)=   "DelImg(2)"
+      Tab(3).Control(2)=   "ximgsave(2)"
+      Tab(3).Control(3)=   "cmdimprimir(2)"
+      Tab(3).Control(4)=   "CmdPaste(2)"
+      Tab(3).Control(5)=   "VerImg(2)"
       TabCaption(4)   =   "passo 04"
-      Tab(4).ControlCount=   9
-      Tab(4).Control(0)=   "Picture1(1)"
-      Tab(4).Control(1)=   "Picture2(3)"
-      Tab(4).Control(2)=   "TXT(16)"
-      Tab(4).Control(3)=   "Incluirimagem(3)"
-      Tab(4).Control(4)=   "DelImg(3)"
-      Tab(4).Control(5)=   "ximgsave(3)"
-      Tab(4).Control(6)=   "cmdimprimir(3)"
-      Tab(4).Control(7)=   "CmdPaste(3)"
-      Tab(4).Control(8)=   "VerImg(3)"
+      Tab(4).ControlCount=   8
+      Tab(4).Control(0)=   "Picture2(3)"
+      Tab(4).Control(1)=   "TXT(16)"
+      Tab(4).Control(2)=   "Incluirimagem(3)"
+      Tab(4).Control(3)=   "DelImg(3)"
+      Tab(4).Control(4)=   "ximgsave(3)"
+      Tab(4).Control(5)=   "cmdimprimir(3)"
+      Tab(4).Control(6)=   "CmdPaste(3)"
+      Tab(4).Control(7)=   "VerImg(3)"
       TabCaption(5)   =   "Revisao"
       Tab(5).ControlCount=   14
       Tab(5).Control(0)=   "ComMotExc"
@@ -1427,7 +1423,6 @@ Private Sub CmdConfImp_Click()
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
    Printer.PaintPicture Picture1(ePASS02), 0, 0
-   Printer.EndDoc
 End Sub
 
 Private Sub CmdImprimir_Click(Index As Integer)

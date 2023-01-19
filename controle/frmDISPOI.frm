@@ -344,7 +344,6 @@ End Sub
 
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
    Printer.PaintPicture Picture1, 0, 0
-   Printer.EndDoc
 End Sub
 Private Sub CmdImprimir_Click()
     If Picture1.Height = 0 Then

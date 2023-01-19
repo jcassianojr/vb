@@ -14,7 +14,6 @@ End Sub
 
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
    Printer.PaintPicture Picture1, 0, 0
-   Printer.EndDoc
 End Sub
 
 Private Sub CmdImprimir_Click()
@@ -32,7 +31,6 @@ PrintPreview1.ShowPreview
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
     ' the following is the only line needed to print the RichTextBox control
     PrintPreview1.PrintRichTextBox RichTextBox1
-   ' Printer.EndDoc
 End Sub
 
 
@@ -54,7 +52,6 @@ Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
     ' Centered in page
     Printer.PaintPicture Picture1.Picture, (Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode)) / 2, (Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)) / 2
 
-'   Printer.EndDoc
  End Sub
 
 incluir pdf?

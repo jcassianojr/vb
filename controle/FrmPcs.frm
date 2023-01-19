@@ -917,12 +917,12 @@ Private Sub cmdClose_Click()
     Dim cSQLIMG As String
     Dim cCAMIMG As String
     On Error Resume Next
-    txtFields(1).Text = Replace(txtFields(1).Text, "/", "-") 'chave apresentando erro de gravacao
+    TXTFIELDS(1).Text = Replace(TXTFIELDS(1).Text, "/", "-") 'chave apresentando erro de gravacao
     
     If MDG("Gravar alteraçôes") Then
         'campos
         For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txtFields(iLOOP)
+            aVAL(iLOOP) = TXTFIELDS(iLOOP)
         Next iLOOP
         GrvSQL cARQUSO, cSQL, nCAMPOS, aCAM, aVAL, aFOR
         'imagens
@@ -1001,7 +1001,7 @@ Private Sub Command1_Click()
     eRETU02 = ""
     ESCPCT.Show vbModal, Me
     If lRETU Then
-        FRMPCS.txtFields(1) = eRETU02
+        FRMPCS.TXTFIELDS(1) = eRETU02
     End If
 End Sub
 
@@ -1072,7 +1072,7 @@ Private Sub Command6_Click()
     End If
     
     cARQPOKA = PegPath("PATH", "POKA")
-    nORD = TxtItem.Text
+    nORD = txtItem.Text
     nPPAP = PegUltSQL(cARQPOKA, "select numero from POKA WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
     If nPPAP = 0 Then
         nPPAP = FixInt(PegMAXSQL(cARQPOKA, "POKA", "NUMERO", 0)) + 1
@@ -1322,7 +1322,7 @@ Private Sub Form_Load()
     aPAD = Array("", "", "", "")
     aVAL = PegSQL(cARQUSO, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
+        TXTFIELDS(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     For iLOOP = 0 To 1
         Select Case iLOOP
@@ -1352,7 +1352,7 @@ Private Sub Form_Load()
     FilRelat (2)                                 'on the job
     FilRelat (3)                                 'dispositivo
     
-    txtFields(1).Text = Replace(txtFields(1).Text, "/", "-") 'chave apresentando erro de gravacao
+    TXTFIELDS(1).Text = Replace(TXTFIELDS(1).Text, "/", "-") 'chave apresentando erro de gravacao
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -1389,6 +1389,5 @@ Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
     On Error Resume Next
     Printer.Print
     Printer.PaintPicture Picture1(ePASS01), 0, 0
-    Printer.EndDoc
 End Sub
 

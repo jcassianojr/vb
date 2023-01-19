@@ -535,7 +535,7 @@ Const nFORMID = 1069
 Const cFORMID = "Imprimir Relatorios Crystal-Engine 10"
 
 Private Sub CmdAbrirCom_Click()
-cARQRTF = TxtArquivo.tEXT
+cARQRTF = TxtArquivo.Text
    If FileExist(cARQRTF, True) Then
        Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
    End If
@@ -602,9 +602,9 @@ Private Sub CmdFiltro_Click()
     If aRELCFG(11) Then
         ePASS01 = "CRYSTAL"
         FrmFiltro.Show vbModal, Me
-        FILTRO = eRETU01
+        filtro = eRETU01
     End If
-    cFILTRO = CStr(FILTRO.tEXT)
+    cFILTRO = CStr(filtro.Text)
     
     If Len(cFILTRO) > 0 Then
         CrystalReport.RecordSelectionFormula = cFILTRO
@@ -646,27 +646,27 @@ Private Sub CmdMudaFec_Click()
 End Sub
 
 Private Sub CmdPreview_Click()
-   cARQRTF = TxtArquivo.tEXT
+   cARQRTF = TxtArquivo.Text
    If Not FileExist(cARQRTF, True) Then
       Exit Sub
    End If
-    If Extensao(TxtArquivo.tEXT, "TXT") Then
+    If Extensao(TxtArquivo.Text, "TXT") Then
        ePASS02 = 1
        PrintPreview1.ShowPreview
     End If
-    If Extensao(TxtArquivo.tEXT, "PDF") Then
+    If Extensao(TxtArquivo.Text, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
     End If
-    If Extensao(TxtArquivo.tEXT, "HTML") Then
+    If Extensao(TxtArquivo.Text, "HTML") Then
        ePASS01 = cARQRTF
        FrmPreview.Show vbModal, Me
     End If
-    If Extensao(TxtArquivo.tEXT, "RTF") Then
-        cARQRTF = TxtArquivo.tEXT
+    If Extensao(TxtArquivo.Text, "RTF") Then
+        cARQRTF = TxtArquivo.Text
         RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF '/ rtfRTF
         ePASS02 = 2
         PrintPreview1.ShowPreview
-        RichTextBox1.tEXT = ""
+        RichTextBox1.Text = ""
     End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -679,7 +679,6 @@ Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
 End Sub
 Public Sub MyPrintingRTF()
     PrinterEx.PrintRichTextBox RichTextBox1
-    Printer.EndDoc
 End Sub
 Public Sub MyPrintingTXT()
     Dim fileFile As Integer
@@ -695,7 +694,6 @@ Public Sub MyPrintingTXT()
         Printer.Print STRBUFFER
     Loop
     Close fileFile
-    Printer.EndDoc
 End Sub
 Private Sub CmdShell_Click()
     Dim cARQSHELL  As String
@@ -742,7 +740,7 @@ Private Sub Form_Load()
         TxtComp.Visible = True
         CmdMudaFec.Visible = True
         CmdMudaFec.Enabled = True
-        TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
+        TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
     End If
     
     If Len(aRELCFG(6)) = 0 Then
@@ -757,12 +755,12 @@ Private Sub Form_Load()
     If Not aDIREITOS(6) Then cmdimp.Visible = False
     If Not aDIREITOS(6) Then CmdConfImp.Visible = False
     If Not aDIREITOS(5) Then CmdVisua.Visible = False
-    If Not aDIREITOS(7) Then salvar(2).Visible = False
-    If Not aDIREITOS(7) Then salvar(3).Visible = False
-    If Not aDIREITOS(7) Then salvar(0).Visible = False
-    If Not aDIREITOS(7) Then salvar(1).Visible = False
+    If Not aDIREITOS(7) Then Salvar(2).Visible = False
+    If Not aDIREITOS(7) Then Salvar(3).Visible = False
+    If Not aDIREITOS(7) Then Salvar(0).Visible = False
+    If Not aDIREITOS(7) Then Salvar(1).Visible = False
     If Not aRELCFG(11) Then CmdFiltro.Visible = False
-    If Not aRELCFG(11) Then FILTRO.Visible = False
+    If Not aRELCFG(11) Then filtro.Visible = False
     
     If Not aDIREITOS(7) Then CmdEmail.Visible = False
     If Not aDIREITOS(7) Then CmdEmail1.Visible = False
@@ -829,7 +827,7 @@ Private Sub Form_Load()
     aRELCFG(14) = FixStr(aRELCFG(14))
     If Len(aRELCFG(14)) > 0 Then
         cFILTRO = aRELCFG(14)
-        FILTRO = cFILTRO
+        filtro = cFILTRO
         CrystalReport.RecordSelectionFormula = cFILTRO
     Else
         If aRELCFG(11) Then
@@ -877,7 +875,7 @@ Private Sub Salvar_Click(Index As Integer)
     
   
     sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
+    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
           
         
       

@@ -105,7 +105,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "FrmRtf.frx":12D8
-            TextSave        =   "14:49"
+            TextSave        =   "21:06"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -1997,7 +1997,6 @@ Private Sub mnuprint_Click()
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
     PrintPreview1.PrintRichTextBox RichTextbox1
-    Printer.EndDoc
 End Sub
 Private Sub mnuright_Click()
     If RichTextbox1.SelLength > 0 Then

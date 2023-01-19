@@ -583,7 +583,7 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-cARQRTF = TxtArquivo.tEXT
+cARQRTF = TxtArquivo.Text
    If FileExist(cARQRTF, True) Then
        Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
    End If
@@ -637,11 +637,11 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-   If Extensao(TxtArquivo.tEXT, "TXT") Then
+   If Extensao(TxtArquivo.Text, "TXT") Then
       imptxt
       Exit Sub
    End If
-   If Extensao(TxtArquivo.tEXT, "PDF") Or Extensao(TxtArquivo.tEXT, "HTML") Or Extensao(TxtArquivo.tEXT, "RTF") Then
+   If Extensao(TxtArquivo.Text, "PDF") Or Extensao(TxtArquivo.Text, "HTML") Or Extensao(TxtArquivo.Text, "RTF") Then
        CmdVisua_Click
        Exit Sub
    End If
@@ -698,27 +698,27 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-   cARQRTF = TxtArquivo.tEXT
+   cARQRTF = TxtArquivo.Text
    If Not FileExist(cARQRTF, True) Then
       Exit Sub
    End If
-    If Extensao(TxtArquivo.tEXT, "TXT") Then
+    If Extensao(TxtArquivo.Text, "TXT") Then
         ePASS03 = 1
         PrintPreview1.ShowPreview
     End If
-    If Extensao(TxtArquivo.tEXT, "PDF") Then
+    If Extensao(TxtArquivo.Text, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
     End If
-    If Extensao(TxtArquivo.tEXT, "HTML") Then
+    If Extensao(TxtArquivo.Text, "HTML") Then
        ePASS01 = cARQRTF
        FrmPreview.Show vbModal, Me
     End If
-    If Extensao(TxtArquivo.tEXT, "RTF") Then
-        cARQRTF = TxtArquivo.tEXT
+    If Extensao(TxtArquivo.Text, "RTF") Then
+        cARQRTF = TxtArquivo.Text
         RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF 'rtfRTF
         ePASS03 = 2
         PrintPreview1.ShowPreview
-        RichTextBox1.tEXT = ""
+        RichTextBox1.Text = ""
     End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -731,7 +731,6 @@ Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
 End Sub
 Public Sub MyPrintingRTF()
     PrinterEx.PrintRichTextBox RichTextBox1
-    Printer.EndDoc
 End Sub
 Public Sub MyPrintingTXT()
     Dim fileFile As Integer
@@ -747,7 +746,6 @@ Public Sub MyPrintingTXT()
         Printer.Print STRBUFFER
     Loop
     Close fileFile
-    Printer.EndDoc
 End Sub
 Private Sub Encerrar_Click()
     Unload Me
@@ -960,7 +958,7 @@ Private Sub Salvar_Click(Index As Integer)
         End Select
     
         sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-        cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
+        cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
     
         If InStr(cARQUIVO, ".") > 0 Then
             cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO

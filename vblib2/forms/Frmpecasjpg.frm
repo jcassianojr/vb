@@ -711,7 +711,6 @@ Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
     On Error Resume Next
     Printer.Print
     Printer.PaintPicture Picture1, 0, 0
-    Printer.EndDoc
 End Sub
 
 Private Sub ximgsave_Click()
