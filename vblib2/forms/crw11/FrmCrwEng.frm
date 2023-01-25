@@ -650,32 +650,57 @@ Private Sub CmdPreview_Click()
    If Not FileExist(cARQRTF, True) Then
       Exit Sub
    End If
-    If Extensao(TxtArquivo.Text, "TXT") Then
-       ePASS02 = 1
+    If Extensao(cARQRTF, "TXT") Then
+       ePASS03 = 1
        PrintPreview1.ShowPreview
     End If
-    If Extensao(TxtArquivo.Text, "PDF") Then
+    If Extensao(cARQRTF, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
     End If
     If Extensao(TxtArquivo.Text, "HTML") Then
-       ePASS01 = cARQRTF
-       FrmPreview.Show vbModal, Me
+   'FrmPreview.Show vbModal, Me
+        If MDG("Sim->Navegador Nao->Visualizador Interno") Then
+           OpenUrl (cARQRTF)
+        Else
+            ePASS03 = 3
+            PrintPreview1.ShowPreview
+        End If
     End If
-    If Extensao(TxtArquivo.Text, "RTF") Then
-        cARQRTF = TxtArquivo.Text
+    If Extensao(cARQRTF, "RTF") Then
         RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF '/ rtfRTF
-        ePASS02 = 2
+        ePASS03 = 2
         PrintPreview1.ShowPreview
         RichTextBox1.Text = ""
     End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-   If ePASS02 = 1 Then
+   If ePASS03 = 1 Then 'TXT
        MyPrintingTXT
    End If
-   If ePASS02 = 2 Then
+   If ePASS03 = 2 Then 'rtf
       MyPrintingRTF
    End If
+   If ePASS03 = 3 Then 'HTML
+      MyPrintinghtml
+   End If
+End Sub
+Public Sub MyPrintinghtml()
+    Dim cTEXTO As String
+    Dim cLINHA As String
+    Dim LINES() As String
+    Dim i As Integer
+
+   ' If Not FileExist(cARQRTF, True) Then 'ja checado cmdvisualclick
+   '     Exit Sub
+   ' End If
+    cTEXTO = FileText(cARQRTF)
+    cTEXTO = HtmlToText(cTEXTO)
+
+    LINES = Split(cLINHA, vbCrLf)
+
+    For i = 0 To UBound(LINES)
+        Printer.Print LINES(i)
+    Next
 End Sub
 Public Sub MyPrintingRTF()
     PrinterEx.PrintRichTextBox RichTextBox1
@@ -683,9 +708,9 @@ End Sub
 Public Sub MyPrintingTXT()
     Dim fileFile As Integer
     Dim STRBUFFER As String
-    If FileExist(cARQRTF, True) Then
-        Exit Sub
-    End If
+ '   If FileExist(cARQRTF, True) Then
+ '       Exit Sub
+ '   End If
     fileFile = FreeFile
     Open cARQRTF For Input As #fileFile
     Do While Not EOF(fileFile)

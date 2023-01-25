@@ -600,9 +600,9 @@ Private Sub CmdFiltro_Click()
     If aRELCFG(11) Then
         ePASS01 = "CRYSTAL"
         FrmFiltro.Show vbModal, Me
-        FILTRO = eRETU01
+        filtro = eRETU01
     End If
-    cFILTRO = CStr(FILTRO.Text)
+    cFILTRO = CStr(filtro.Text)
     
     If Len(cFILTRO) > 0 Then
         RPT.ReplaceSelectionFormula (cFILTRO)
@@ -648,31 +648,57 @@ Private Sub CmdPreview_Click()
    If Not FileExist(cARQRTF, True) Then
       Exit Sub
    End If
-    If Extensao(TxtArquivo.Text, "TXT") Then
-        ePASS02 = 1
+    If Extensao(cARQRTF, "TXT") Then
+        ePASS03 = 1
         PrintPreview1.ShowPreview
     End If
-    If Extensao(TxtArquivo.Text, "PDF") Then
+    If Extensao(cARQRTF, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
     End If
-    If Extensao(TxtArquivo.Text, "HTML") Then
-       ePASS01 = cARQRTF
-       FrmPreview.Show vbModal, Me
+    If Extensao(cARQRTF, "HTML") Then
+   'FrmPreview.Show vbModal, Me
+        If MDG("Sim->Navegador Nao->Visualizador Interno") Then
+           OpenUrl (cARQRTF)
+        Else
+            ePASS03 = 3
+            PrintPreview1.ShowPreview
+        End If
     End If
-    If Extensao(TxtArquivo.Text, "RTF") Then
+    If Extensao(cARQRTF, "RTF") Then
         cARQRTF = TxtArquivo.Text
         RichTextBox1.LoadFile cARQRTF, rtfRTF
-        ePASS02 = 2
+        ePASS03 = 2
         PrintPreview1.ShowPreview
         RichTextBox1.Text = ""
     End If
 End Sub
+Public Sub MyPrintinghtml()
+    Dim cTEXTO As String
+    Dim cLINHA As String
+    Dim LINES() As String
+    Dim i As Integer
+
+   ' If Not FileExist(cARQRTF, True) Then 'ja checado cmdvisualclick
+   '     Exit Sub
+   ' End If
+    cTEXTO = FileText(cARQRTF)
+    cTEXTO = HtmlToText(cTEXTO)
+
+    LINES = Split(cLINHA, vbCrLf)
+
+    For i = 0 To UBound(LINES)
+        Printer.Print LINES(i)
+    Next
+End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-   If ePASS02 = 1 Then
+    If ePASS03 = 1 Then 'TXT
        MyPrintingTXT
    End If
-   If ePASS02 = 2 Then
+   If ePASS03 = 2 Then 'rtf
       MyPrintingRTF
+   End If
+   If ePASS03 = 3 Then 'HTML
+      MyPrintinghtml
    End If
 End Sub
 
@@ -682,9 +708,9 @@ End Sub
 Public Sub MyPrintingTXT()
     Dim fileFile As Integer
     Dim STRBUFFER As String
-    If FileExist(cARQRTF, True) Then
-        Exit Sub
-    End If
+    'If FileExist(cARQRTF, True) Then 'ja checado cmdvisualclick
+    '    Exit Sub
+    'End If
     fileFile = FreeFile
     Open cARQRTF For Input As #fileFile
     Do While Not EOF(fileFile)
@@ -756,10 +782,10 @@ Private Sub Form_Load()
     If Not aDIREITOS(6) Then cmdimp.Visible = False
     If Not aDIREITOS(6) Then CmdConfImp.Visible = False
     If Not aDIREITOS(5) Then CmdVisua.Visible = False
-    If Not aDIREITOS(7) Then salvar(2).Visible = False
-    If Not aDIREITOS(7) Then salvar(3).Visible = False
-    If Not aDIREITOS(7) Then salvar(0).Visible = False
-    If Not aDIREITOS(7) Then salvar(1).Visible = False
+    If Not aDIREITOS(7) Then Salvar(2).Visible = False
+    If Not aDIREITOS(7) Then Salvar(3).Visible = False
+    If Not aDIREITOS(7) Then Salvar(0).Visible = False
+    If Not aDIREITOS(7) Then Salvar(1).Visible = False
     If Not aDIREITOS(7) Then CmdExport.Visible = False
     
     If Not aDIREITOS(7) Then CmdEmail1.Visible = False
@@ -778,7 +804,7 @@ Private Sub Form_Load()
     CmdEmail_Click
     
     If Not aRELCFG(11) Then CmdFiltro.Visible = False
-    If Not aRELCFG(11) Then FILTRO.Visible = False
+    If Not aRELCFG(11) Then filtro.Visible = False
     
   
   
@@ -812,7 +838,7 @@ Private Sub Form_Load()
     aRELCFG(14) = FixStr(aRELCFG(14))
     If Len(aRELCFG(14)) > 0 Then
         cFILTRO = aRELCFG(14)
-        FILTRO = cFILTRO
+        filtro = cFILTRO
         
         RPT.ReplaceSelectionFormula (cFILTRO)
     Else

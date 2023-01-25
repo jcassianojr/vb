@@ -25,13 +25,13 @@ Begin VB.Form FrmTxl
    End
    Begin VBCCR17.RichTextBox RichTextBox1 
       Height          =   255
-      Left            =   9240
+      Left            =   9000
       TabIndex        =   33
       TabStop         =   0   'False
       Top             =   4200
       Visible         =   0   'False
-      Width           =   615
-      _ExtentX        =   1085
+      Width           =   855
+      _ExtentX        =   1508
       _ExtentY        =   450
       MultiLine       =   -1  'True
       TextRTF         =   "FrmTxl.frx":062A
@@ -517,13 +517,13 @@ Dim lARQTXT As Boolean
 
 Private Sub gerar(ByVal cOPE As String)
     Dim X As Long
-    Dim CLINHA As String
+    Dim cLINHA As String
     Dim aUSO As Variant
     Dim aREG As Variant
     Dim cVAL As String
     'Dim oREG As Variant
     Dim cREG As String
-    CLINHA = ""
+    cLINHA = ""
   
     oTXT.nCOL = nCOLUNAS
     oTXT.nROW = nLINHAS
@@ -548,8 +548,8 @@ Private Sub gerar(ByVal cOPE As String)
     oRS.Open cSQL, oCONN, adOpenForwardOnly, adLockReadOnly
     While Not oRS.EOF
         For X = 1 To nQTDELAY
-            CLINHA = aLAY(X)
-            Select Case CLINHA
+            cLINHA = aLAY(X)
+            Select Case cLINHA
             Case "[NF]"
                 oTXT.novafolha
             Case "[GF]"
@@ -560,7 +560,7 @@ Private Sub gerar(ByVal cOPE As String)
                 End If
             Case ""                              ''EM BRANCO NADA FAZ
             Case Else
-                aUSO = Split(CLINHA, "|")
+                aUSO = Split(cLINHA, "|")
                 If Left(aUSO(2), 1) = "{" Then
                     If Not oRS.EOF Then
                         aUSO(2) = Mid(aUSO(2), 2, Len(aUSO(2)) - 2)
@@ -638,29 +638,24 @@ End Sub
 
 Private Sub cmdimp_Click()
    If Extensao(TxtArquivo.Text, "TXT") Then
-      imptxt
+      imptxt 'Aqui e direct print com1 lpt1 no pode ser usado preview aqui
       Exit Sub
    End If
    If Extensao(TxtArquivo.Text, "PDF") Or Extensao(TxtArquivo.Text, "HTML") Or Extensao(TxtArquivo.Text, "RTF") Then
        CmdVisua_Click
        Exit Sub
    End If
-    'If lARQTXT Then
-    '    imptxt
-    'Else
-    '    gerar "I"
-    'End If
 End Sub
 
-Private Sub imptxt()
-    Dim CLINHA As String
+Private Sub imptxt() 'Aqui e direct print com1 lpt1 no pode ser usado preview aqui
+    Dim cLINHA As String
     Dim fileFile As Integer
     Dim STRBUFFER As String
        
     If Not FileExist(cARQRTF, True) Then
         Exit Sub
     End If
-    CLINHA = ""
+    cLINHA = ""
     fileFile = FreeFile + 1
     oTXT.Destino = cDESTINO
     oTXT.ABRIR
@@ -673,8 +668,8 @@ Private Sub imptxt()
     Open cARQRTF For Input As #fileFile
     Do While Not EOF(fileFile)
         Input #fileFile, STRBUFFER
-        CLINHA = STRBUFFER
-        oTXT.implinha (CLINHA)
+        cLINHA = STRBUFFER
+        oTXT.implinha (cLINHA)
     Loop
     oTXT.fechar
     Close fileFile
@@ -702,19 +697,23 @@ Private Sub CmdVisua_Click()
    If Not FileExist(cARQRTF, True) Then
       Exit Sub
    End If
-    If Extensao(TxtArquivo.Text, "TXT") Then
+    If Extensao(cARQRTF, "TXT") Then
         ePASS03 = 1
         PrintPreview1.ShowPreview
     End If
-    If Extensao(TxtArquivo.Text, "PDF") Then
+    If Extensao(cARQRTF, "PDF") Then
         ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
     End If
-    If Extensao(TxtArquivo.Text, "HTML") Then
-       ePASS01 = cARQRTF
-       FrmPreview.Show vbModal, Me
+    If Extensao(cARQRTF, "HTML") Then
+       'FrmPreview.Show vbModal, Me
+        If MDG("Sim->Navegador Nao->Visualizador Interno") Then
+           OpenUrl (cARQRTF)
+        Else
+            ePASS03 = 3
+            PrintPreview1.ShowPreview
+        End If
     End If
-    If Extensao(TxtArquivo.Text, "RTF") Then
-        cARQRTF = TxtArquivo.Text
+    If Extensao(cARQRTF, "RTF") Then
         RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF 'rtfRTF
         ePASS03 = 2
         PrintPreview1.ShowPreview
@@ -722,12 +721,34 @@ Private Sub CmdVisua_Click()
     End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-   If ePASS03 = 1 Then
+   If ePASS03 = 1 Then 'TXT
        MyPrintingTXT
    End If
-   If ePASS03 = 2 Then
+   If ePASS03 = 2 Then 'rtf
       MyPrintingRTF
    End If
+   If ePASS03 = 3 Then 'HTML
+      MyPrintinghtml
+   End If
+End Sub
+
+Public Sub MyPrintinghtml()
+    Dim cTEXTO As String
+    Dim cLINHA As String
+    Dim LINES() As String
+    Dim i As Integer
+
+   ' If Not FileExist(cARQRTF, True) Then 'ja checado cmdvisualclick
+   '     Exit Sub
+   ' End If
+    cTEXTO = FileText(cARQRTF)
+    cTEXTO = HtmlToText(cTEXTO)
+
+    LINES = Split(cLINHA, vbCrLf)
+
+    For i = 0 To UBound(LINES)
+        Printer.Print LINES(i)
+    Next
 End Sub
 Public Sub MyPrintingRTF()
     PrinterEx.PrintRichTextBox RichTextBox1
@@ -735,9 +756,9 @@ End Sub
 Public Sub MyPrintingTXT()
     Dim fileFile As Integer
     Dim STRBUFFER As String
-    If Not FileExist(cARQRTF, True) Then
-        Exit Sub
-    End If
+    'If Not FileExist(cARQRTF, True) Then 'ja checado na cmdvisual click
+    '    Exit Sub
+   ' End If
     fileFile = FreeFile
     Open cARQRTF For Input As #fileFile
     Do While Not EOF(fileFile)
@@ -1026,9 +1047,9 @@ Private Sub montaimp()
 
     Listview1.Clear
     Listview1.FixedCols = 0
-    Listview1.Rows = 1
+    Listview1.rows = 1
     Listview1.Row = 0
-    Listview1.Cols = 3
+    Listview1.cols = 3
     Listview1.ColWidth(0) = 3000
     Listview1.ColWidth(1) = 3000
     Listview1.ColWidth(2) = 3000

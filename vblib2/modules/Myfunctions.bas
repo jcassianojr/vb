@@ -1009,16 +1009,16 @@ Public Function NullDateTime(Optional ByVal cTIPO As String = "", Optional ByVal
     End Select
 End Function
 
-Public Function PadRight(ByVal cTEXTO, ByVal nLEN) As String
-    cTEXTO = cTEXTO & Space(nLEN)
-    cTEXTO = Left(cTEXTO, nLEN)
-    PadRight = cTEXTO
+Public Function PadRight(ByVal cTexto, ByVal nLEN) As String
+    cTexto = cTexto & Space(nLEN)
+    cTexto = Left(cTexto, nLEN)
+    PadRight = cTexto
 End Function
 
-Public Function PadLeft(ByVal cTEXTO, ByVal nLEN) As String
-    cTEXTO = Space(nLEN) & cTEXTO
-    cTEXTO = Right(cTEXTO, nLEN)
-    PadLeft = cTEXTO
+Public Function PadLeft(ByVal cTexto, ByVal nLEN) As String
+    cTexto = Space(nLEN) & cTexto
+    cTexto = Right(cTexto, nLEN)
+    PadLeft = cTexto
 End Function
 
 Public Function PegCamini(ByVal cCAMINHO As String) As String
@@ -1626,11 +1626,11 @@ t = CharToOem(in_string, Out_String)
 Convert2oem = Out_String
 End Function
 Public Function ConvOEM(ByVal texto As String) As String
-    ConvOEM = Convert2oem(cTEXTO) 'CharConv(texto, "ANSI", "OEM")
+    ConvOEM = Convert2oem(cTexto) 'CharConv(texto, "ANSI", "OEM")
 End Function
 
 Public Function ConvOEM2(ByVal texto As String) As String
-    ConvOEM2 = Convert2oem(cTEXTO)  ' CharConv(texto, "MEUANSI", "MEUOEM")
+    ConvOEM2 = Convert2oem(cTexto)  ' CharConv(texto, "MEUANSI", "MEUOEM")
 End Function
 
 Public Function ConvAnsi2(ByVal texto As String) As String
@@ -1714,7 +1714,7 @@ Public Function TiraSin(ByVal texto As String)
     Next X
     TiraSin = texto
 End Function
-Function CheckPass(ByVal cTEXTO As String, Optional ByVal lMES As Boolean = True) As Boolean
+Function CheckPass(ByVal cTexto As String, Optional ByVal lMES As Boolean = True) As Boolean
 
 Dim lMAIS, lMINUS, lDIG, lSYMBOL, l8DIG As Boolean
 Dim i As Integer
@@ -1727,22 +1727,22 @@ lSYMBOL = False
 l8DIG = False
 
 
-For i = 1 To Len(cTEXTO)
-    If InStr("0123456789", Mid(cTEXTO, i, 1)) > 0 Then
+For i = 1 To Len(cTexto)
+    If InStr("0123456789", Mid(cTexto, i, 1)) > 0 Then
        lDIG = True
     End If
-    If InStr("abcdefghijklmnopqrstuvwxyz", Mid(cTEXTO, i, 1)) > 0 Then
+    If InStr("abcdefghijklmnopqrstuvwxyz", Mid(cTexto, i, 1)) > 0 Then
        lMINUS = True
     End If
-    If InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", Mid(cTEXTO, i, 1)) > 0 Then
+    If InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", Mid(cTexto, i, 1)) > 0 Then
        lMAIS = True
     End If
-    If InStr("-+_!@#$%^&*., ?", Mid(cTEXTO, i, 1)) > 0 Then
+    If InStr("-+_!@#$%^&*., ?", Mid(cTexto, i, 1)) > 0 Then
        lSYMBOL = True
     End If
 Next
 
-If Len(Trim(cTEXTO)) >= 8 Then
+If Len(Trim(cTexto)) >= 8 Then
     l8DIG = True
 End If
 
@@ -1982,7 +1982,7 @@ Public Sub FocusMe()
     End If
 End Sub
 
-Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
+Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
     Dim nLEN, nTEXTO, X, Y As Integer
     Dim aORI, aDES, aTEXTO As Variant
     If IsArray(eORI) Then
@@ -1992,7 +1992,7 @@ Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eD
         aORI = StrToArray(CStr(eORI))
         aDES = StrToArray(CStr(eDES))
     End If
-    aTEXTO = StrToArray(cTEXTO)
+    aTEXTO = StrToArray(cTexto)
     nLEN = UBound(aORI)
     nTEXTO = UBound(aTEXTO)
     For Y = 0 To nTEXTO
@@ -2010,23 +2010,23 @@ Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eD
 End Function
 
 Public Function TiraOut(ByVal eVAR As Variant) As String
-    Dim cTEXTO As String
-    cTEXTO = FixStr(eVAR)
-    TiraOut = CharConv(cTEXTO, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
+    Dim cTexto As String
+    cTexto = FixStr(eVAR)
+    TiraOut = CharConv(cTexto, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
                        Array("", "", "", "", "", "", "", "", ""))
 End Function
 
 Public Function TiraOutNum(ByVal eVAR As Variant) As String ' Mantem ', . que sao usadas nos numeros
-    Dim cTEXTO As String
-    cTEXTO = FixStr(eVAR)
-    TiraOutNum = CharConv(cTEXTO, Array("-", ":", "/", ";", "*", "(", ")"), _
+    Dim cTexto As String
+    cTexto = FixStr(eVAR)
+    TiraOutNum = CharConv(cTexto, Array("-", ":", "/", ";", "*", "(", ")"), _
                           Array("", "", "", "", "", "", ""))
 End Function
 
 Public Function TiraOutAlf(ByVal eVAR As Variant) As String
-    Dim cTEXTO As String
-    cTEXTO = FixStr(eVAR)
-    TiraOutAlf = CharConv(cTEXTO, Array("-", ".", ":", "/", ";", "*", "(", ")", _
+    Dim cTexto As String
+    cTexto = FixStr(eVAR)
+    TiraOutAlf = CharConv(cTexto, Array("-", ".", ":", "/", ";", "*", "(", ")", _
                                         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", _
                                         "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", _
                                         "U", "V", "Y", "W", "X", "Z", ","), _
@@ -2136,19 +2136,19 @@ Public Function Extenso(ByVal Valor As Double, _
     End If
 End Function
 
-Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer = 80) As Variant
+Public Function Txt2Lin(ByVal cTexto As String, Optional ByVal nCOL As Integer = 80) As Variant
     Dim nLIN, X As Integer
     Dim aRETU As Variant
-    cTEXTO = FixStr(cTEXTO)
+    cTexto = FixStr(cTexto)
     If nCOL < 1 Then nCOL = 80                   'Evita Erros Divisao
-    nLIN = Int(Len(cTEXTO) / nCOL)
-    If nLIN * nCOL = Len(cTEXTO) Then            ''Bate com o Multiplo
+    nLIN = Int(Len(cTexto) / nCOL)
+    If nLIN * nCOL = Len(cTexto) Then            ''Bate com o Multiplo
     Else
         nLIN = nLIN + 1                          ''Soma mais um pois e necesario
     End If
     ReDim aRETU(nLIN)
     For X = 1 To nLIN
-        aRETU(X - 1) = Mid(cTEXTO, ((X - 1) * nCOL) + 1, nCOL)
+        aRETU(X - 1) = Mid(cTexto, ((X - 1) * nCOL) + 1, nCOL)
     Next X
     Txt2Lin = aRETU
     eRETU01 = nLIN
@@ -2328,18 +2328,29 @@ Public Function HTMLToCharCodes(ByVal iString As String) As String
         HTMLToCharCodes = .selectSingleNode("p").nodeTypedValue
     End With
 End Function
-Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean = False) As String
+Public Function str2html(ByVal cTexto As String, Optional ByVal lAnsi As Boolean = False) As String
     If lAnsi Then
-       Convert2ansi (cTEXTO)
+       Convert2ansi (cTexto)
     End If
-    cTEXTO = CharCodesToHTML(cTEXTO)
-    str2html = cTEXTO
+    cTexto = CharCodesToHTML(cTexto)
+    str2html = cTexto
 End Function
-
-Public Function Html2Str(ByVal cTEXTO As String) As String
-    Html2Str = HTMLToCharCodes(cTEXTO)
+Function FileText(ByVal filename As String) As String
+    Dim handle As Integer
+    handle = FreeFile
+    Open filename$ For Input As #handle
+    FileText = Input$(LOF(handle), handle)
+    Close #handle
 End Function
-
+Public Function Html2Str(ByVal cTexto As String) As String
+    Html2Str = HtmlToText(cTexto) 'HTMLToCharCodes(cTexto)
+End Function
+Public Function HtmlToText(sHTML) As String
+  Dim oDoc As HTMLDocument
+  Set oDoc = New HTMLDocument
+  oDoc.Body.innerHTML = sHTML
+  HtmlToText = oDoc.Body.innerText
+End Function
 Public Function FindInList(ByRef cList As ListBox, sSearch As String) As Long
     Dim sString As String
     Dim id As Integer

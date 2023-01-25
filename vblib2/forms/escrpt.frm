@@ -1,7 +1,9 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form escRPT 
    Caption         =   "Escolha o grupo de Relatorio"
    ClientHeight    =   6675
@@ -13,6 +15,15 @@ Begin VB.Form escRPT
    ScaleHeight     =   6675
    ScaleWidth      =   10785
    StartUpPosition =   2  'CenterScreen
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   3840
+      Top             =   0
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
+      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
+      AmbientBb       =   $"escrpt.frx":058A
+   End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
       Height          =   6675
@@ -58,6 +69,19 @@ Begin VB.Form escRPT
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR17.RichTextBox RichTextBox1 
+      Height          =   255
+      Left            =   5160
+      TabIndex        =   3
+      TabStop         =   0   'False
+      Top             =   120
+      Visible         =   0   'False
+      Width           =   1335
+      _ExtentX        =   2355
+      _ExtentY        =   450
+      MultiLine       =   -1  'True
+      TextRTF         =   "escrpt.frx":062A
+   End
 End
 Attribute VB_Name = "escRPT"
 Attribute VB_GlobalNameSpace = False
@@ -73,7 +97,7 @@ Private Sub Apaga_Click()
     Dim sSQL As String
     If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
         Grid.Col = 2
-        zRPT = Grid.tEXT
+        zRPT = Grid.Text
         sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
         If ApagaSQLP(zRPTARQ, sSQL) Then
             FilRelat
@@ -89,7 +113,7 @@ End Sub
 Private Sub Edit_Click()
 If Grid.Row > 0 Then 'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -154,7 +178,7 @@ Private Sub imprima_click()
     Dim eRUN As String
          Dim fileFile As Integer
     Dim STRBUFFER As String
-    Dim CLINHA As String
+    Dim cLINHA As String
     
     
     On Error Resume Next
@@ -164,7 +188,7 @@ Private Sub imprima_click()
     End If
     ''Pega Nome Relatorio
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     
     cARQ = zRPTARQ
     cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -325,19 +349,33 @@ Private Sub imprima_click()
         Case "INI"
             aRELCFG(1) = "FRMINIEDITOR"
         Case "TXT", "MAN"
-            ePASS01 = Array("Editor Interno", "Imprimir Direto Impressora")
+            ePASS01 = Array("Editor Interno", "Imprimir Direto Impressora", "Preview Interno")
             escOrdem.Show vbModal, Me
             eRETU01 = FixInt(eRETU01, 0)
             Select Case eRETU01
-            Case 0
-                aRELCFG(1) = "FRMRTF"
-            Case 1
-                aRELCFG(1) = "FRMTXL"
+                Case 0
+                    aRELCFG(1) = "FRMRTF"
+                Case 1
+                    aRELCFG(1) = "FRMTXL"
+                Case 2
+                     ePASS03 = 1
+                     PrintPreview1.ShowPreview
+                     Exit Sub
             End Select
         'Case "QRP"
          '   aRELCFG(1) = "qrpVIEW.EXE"
         Case "RTF"
-            aRELCFG(1) = "FRMRTF"
+            ePASS01 = Array("Editor Interno", "Preview Interno")
+            escOrdem.Show vbModal, Me
+            eRETU01 = FixInt(eRETU01, 0)
+            Select Case eRETU01
+                Case 0
+                    aRELCFG(1) = "FRMRTF"
+                Case 2
+                     ePASS03 = 1
+                     PrintPreview1.ShowPreview
+                     Exit Sub
+            End Select
         'Case "DWF"
         '    aRELCFG(1) = "FRMDWF"
         'Case "DWG", "DXF", "RML", "IPT", "IAM", "IDW"
@@ -435,24 +473,35 @@ Private Sub imprima_click()
         '    ePASS02 = ""
         '    Frmimg.Show vbModal, Me
      Case "FRMPREVIEW"
-        ePASS01 = cARQRTF
-           If cEXTENSAO = "ZPL" Then
-           fileFile = FreeFile
-           Open cARQRTF For Input As #fileFile
-            Do While Not EOF(fileFile)
-                'read line
-                Input #fileFile, STRBUFFER
-                CLINHA = CLINHA + STRBUFFER
-            Loop
-            Close fileFile
-            CLINHA = Replace(CLINHA, Chr(13), "")
-            CLINHA = Replace(CLINHA, Chr(10), "")
-            ePASS01 = "http://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/"
-            ePASS01 = ePASS01 + Chr(34) + CLINHA + Chr(34)
-        End If
+            If cEXTENSAO = "ZPL" Then
+               fileFile = FreeFile
+               Open cARQRTF For Input As #fileFile
+                Do While Not EOF(fileFile)
+                    'read line
+                    Input #fileFile, STRBUFFER
+                    cLINHA = cLINHA + STRBUFFER
+                Loop
+                Close fileFile
+                cLINHA = Replace(cLINHA, Chr(13), "")
+                cLINHA = Replace(cLINHA, Chr(10), "")
+                ePASS02 = "http://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/"
+                ePASS02 = ePASS02 + Chr(34) + cLINHA + Chr(34)
+                OpenUrl (ePASS02)
+                Exit Sub
+            End If
+            
+           ePASS01 = Array("Navegador", "Preview Interno")
+           escOrdem.Show vbModal, Me
+           eRETU01 = FixInt(eRETU01, 0)
+           Select Case eRETU01
+                Case 0
+                    OpenUrl (cARQRTF)
+                Case 1
+                    ePASS03 = 3
+                     PrintPreview1.ShowPreview
+                     Exit Sub
+            End Select
         
-        FrmPreview.Show vbModal, Me
-       
     Case "FRMVID"
         FrmVid.Show vbModal, Me
         ''Encerra Para Evitar Nova Abertura Sistema Novo
@@ -488,7 +537,7 @@ End Sub
 Private Sub liberar_click()
 If Grid.Row > 0 Then 'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     escrptusr.Show vbModal
 End If
 End Sub
@@ -552,6 +601,56 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         CmdSair_Click
     End Select
 
+End Sub
+
+
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+   If ePASS03 = 1 Then 'TXT
+       MyPrintingTXT
+   End If
+   If ePASS03 = 2 Then 'rtf
+      MyPrintingRTF
+   End If
+   If ePASS03 = 3 Then 'HTML
+      MyPrintinghtml
+   End If
+End Sub
+
+Public Sub MyPrintinghtml()
+    Dim cTEXTO As String
+    Dim cLINHA As String
+    Dim LINES() As String
+    Dim i As Integer
+
+   ' If Not FileExist(cARQRTF, True) Then 'ja checado cmdvisualclick
+   '     Exit Sub
+   ' End If
+    cTEXTO = FileText(cARQRTF)
+    cTEXTO = HtmlToText(cTEXTO)
+
+    LINES = Split(cLINHA, vbCrLf)
+
+    For i = 0 To UBound(LINES)
+        Printer.Print LINES(i)
+    Next
+End Sub
+Public Sub MyPrintingRTF()
+    PrinterEx.PrintRichTextBox RichTextBox1
+End Sub
+Public Sub MyPrintingTXT()
+    Dim fileFile As Integer
+    Dim STRBUFFER As String
+    'If Not FileExist(cARQRTF, True) Then 'ja checado na cmdvisual click
+    '    Exit Sub
+   ' End If
+    fileFile = FreeFile
+    Open cARQRTF For Input As #fileFile
+    Do While Not EOF(fileFile)
+        'read line
+        Input #fileFile, STRBUFFER
+        Printer.Print STRBUFFER
+    Loop
+    Close fileFile
 End Sub
 
 
