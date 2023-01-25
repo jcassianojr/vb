@@ -967,7 +967,7 @@ End Sub
 Public Sub MyPrintingTXT()
     Dim fileFile As Integer
     Dim STRBUFFER As String
-    If FileExist(cARQRTF, True) Then
+    If Not FileExist(cARQRTF, True) Then
         Exit Sub
     End If
     fileFile = FreeFile
@@ -1047,9 +1047,14 @@ Private Sub Form_Load()
         aRELCFG(13) = NomeTableSql(aRELCFG(15))
     End If
     tabela.Text = aRELCFG(13)
+     PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
      
 End Sub
-
+Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
+    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+End Sub
 Private Sub XPButton1_Click()
     frmCharacters.Show vbModal, Me
     If lRETU Then

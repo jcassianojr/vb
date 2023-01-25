@@ -402,7 +402,7 @@ Private Sub cmdClose_Click()
             Next iLOOP
             GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
             If lTROCOU Then
-                CSQLI = "select * from imagens  WHERE CODIGO='" & zgrp & "'"
+                CSQLI = "select * from imagens  WHERE CODIGO='" & ZGRP & "'"
                 ADOGrvBlob cARQ, CSQLI, Picture1
             End If
         End If
@@ -583,28 +583,28 @@ Private Sub Form_Load()
     End If
     
 
-    zgrp = FixStr(zgrp, "")
-    If Len(zgrp) = 0 Then
+    ZGRP = FixStr(ZGRP, "")
+    If Len(ZGRP) = 0 Then
         Alert ("Codigo em Branco")
         lABRE = False
     End If
 
     If lABRE Then
         cARQ = cARQRTF
-        nPOS = InStr(zgrp, "|")
+        nPOS = InStr(ZGRP, "|")
         If nPOS > 0 Then
-            nTMPNUMERO = Mid(zgrp, nPOS + 1)
-            zgrp = Mid(zgrp, 1, nPOS - 1)
+            nTMPNUMERO = Mid(ZGRP, nPOS + 1)
+            ZGRP = Mid(ZGRP, 1, nPOS - 1)
         Else
-            nTMPNUMERO = zgrp
+            nTMPNUMERO = ZGRP
         End If
         nTMPNUMERO = funNumeroPuro(nTMPNUMERO)
         nTMPNUMERO = Val(nTMPNUMERO)
 
 
-        cSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & zgrp & "'"
+        cSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & ZGRP & "'"
         If cBASEDADOS = "LOGIX" Then 'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
-            cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto  WHERE MATRICULA='" & zgrp & "'"
+            cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto  WHERE MATRICULA='" & ZGRP & "'"
             cSQL = cSQL & " and empresa=" & StrZero(zEMPRESA, 2)
         End If
         
@@ -615,14 +615,14 @@ Private Sub Form_Load()
             cSQL = cSQL & " FROM gip.fotos AS gip"
             cSQL = cSQL & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
             cSQL = cSQL & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
-            cSQL = cSQL & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(zgrp, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(zgrp, 8)
+            cSQL = cSQL & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(ZGRP, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(ZGRP, 8)
         End If
 
         
                 
         If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
         Else
-            IncluiSQL cARQ, cSQL, 2, Array("CODIGO", "NUMERO"), Array(zgrp, nTMPNUMERO), True, False
+            IncluiSQL cARQ, cSQL, 2, Array("CODIGO", "NUMERO"), Array(ZGRP, nTMPNUMERO), True, False
         End If
         
         
@@ -637,9 +637,9 @@ Private Sub Form_Load()
         If iImage = 2 And nPOS > 0 Then
             txtFields(1) = nTMPNUMERO
         End If
-        CSQLI = "select IMAGEM from imagens  WHERE CODIGO='" & zgrp & "'"
+        CSQLI = "select IMAGEM from imagens  WHERE CODIGO='" & ZGRP & "'"
         If cBASEDADOS = "LOGIX" Then 'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
-            CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & zgrp
+            CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & ZGRP
             CSQLI = CSQLI & " and empresa=" & StrZero(zEMPRESA, 2)
         End If
         If cBASEDADOS = "DATAMACE" Then
@@ -648,7 +648,7 @@ Private Sub Form_Load()
             CSQLI = CSQLI & " FROM gip.fotos AS gip"
             CSQLI = CSQLI & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
             CSQLI = CSQLI & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
-            CSQLI = CSQLI & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(zgrp, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(zgrp, 8)
+            CSQLI = CSQLI & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(ZGRP, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(ZGRP, 8)
         End If
         
         
@@ -656,7 +656,7 @@ Private Sub Form_Load()
             StretchSourcePictureFromPicture Picture1, Picture2
             If FixNum(eRETU01) > 500000 Then
                 Alert ("Imagem Muito Grande,Ajuste o tamanho")
-                salvarpict Me, Picture1, "Imagem_" & zgrp
+                salvarpict Me, Picture1, "Imagem_" & ZGRP
                 Set Picture1.Picture = Nothing
                 Set Picture2.Picture = Nothing
                 lTROCOU = True
@@ -677,6 +677,13 @@ Private Sub Form_Load()
     Else
         ''
     End If
+    PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
+    
+End Sub
+Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
+    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
 
 Private Sub IncImg_Click()

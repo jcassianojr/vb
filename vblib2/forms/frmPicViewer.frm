@@ -481,36 +481,16 @@ Begin VB.Form frmPicViewer
          Width           =   1095
       End
    End
-   Begin XPControls.XPButton CmdVisua 
-      Height          =   555
-      Left            =   12000
-      TabIndex        =   35
-      Top             =   1320
-      Width           =   1275
-      _ExtentX        =   2249
-      _ExtentY        =   979
-      Picture         =   "frmPicViewer.frx":7040
-      Caption         =   "Visualizar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton CmdFechar 
       Height          =   555
       Left            =   12000
-      TabIndex        =   36
+      TabIndex        =   35
       TabStop         =   0   'False
       Top             =   720
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   979
-      Picture         =   "frmPicViewer.frx":75DA
+      Picture         =   "frmPicViewer.frx":7040
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -676,8 +656,8 @@ Private Const DC_PAPERNAMES = 16
 Private Const DC_ENUMRESOLUTIONS = 13
 Private Const DC_ORIENTATION = 17
 Private Type POINT
-    X As Long
-    Y As Long
+    x As Long
+    y As Long
 End Type
 
 Private Declare Function DeviceCapabilities Lib "winspool.drv" Alias "DeviceCapabilitiesW" (ByVal lpDeviceName As Long, ByVal lpPort As Long, ByVal iIndex As Long, ByVal lpOutput As Long, ByVal lpDevMode As Long) As Long
@@ -758,16 +738,18 @@ End Sub
 Private Sub CmdFEchar_Click()
     lRETU = False
     eRETU = ""
-    If FileExists(txtAddress.tEXT) Then
+    If FileExists(txtAddress.Text) Then
         lRETU = True
-        eRETU01 = txtAddress.tEXT
+        eRETU01 = txtAddress.Text
     End If
     Unload Me
 End Sub
 
-Private Sub CmdVisua_Click()
-PrintPreview1.ShowPreview
+Private Sub cmdPrintDialog_Click()
+  PrintPreview1.ShowPreview
 End Sub
+
+
 
 Private Sub Form_Load()
     lRETU = False
@@ -811,8 +793,14 @@ Private Sub Form_Load()
     VarImage1HeightZoom = imgViewer.Height
     VarImage1WidthZoom = imgViewer.Width
     lblTotalFile.Caption = "Total : " & lstViewer.ListCount & " file(s)"
+    
+    PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 End Sub
-
+Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
+    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+End Sub
 Private Sub Form_Activate()
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
@@ -864,12 +852,12 @@ Private Sub imgViewer_DblClick()
     End If
 End Sub
 
-Private Sub imgViewer_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgViewer_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
     If Button = 1 Then
         'KAX = Initial coordinates of the X axis (Koordinat Awal sb. X)
         'KAY = Initial coordinates of the Y axis (Koordinat Awal sb. Y)
-        KAX = X
-        KAY = Y
+        KAX = x
+        KAY = y
         If imgViewer.Width > picViewer.Width Or imgViewer.Height > picViewer.Height Then
             'If Dir(App.Path + "\Mouse.ico") <> vbNullString Then
             '    MouseIcon = LoadPicture(App.Path + "\Mouse.ico")
@@ -883,35 +871,35 @@ Private Sub imgViewer_MouseDown(Button As Integer, Shift As Integer, X As Single
     End If
 End Sub
 
-Private Sub imgViewer_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgViewer_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
     If Button = 1 Then
         AturScrollbar
         'X = VB by default stating the coordinates of the X axis (VB secara default menyatakan koordinat sb. X saat itu)
         'Y = VB by default stating the coordinates of the Y axis (VB secara default menyatakan koordinat sb. Y saat itu)
-        lblCoordinate.Caption = "(" & X & "," & Y & ")"
+        lblCoordinate.Caption = "(" & x & "," & y & ")"
         'Horizontal
         If imgViewer.Width > picViewer.Width Then
-            If imgViewer.Left >= 0 And X - KAX > 0 Then
+            If imgViewer.Left >= 0 And x - KAX > 0 Then
                 imgViewer.Left = 0
                 Exit Sub
-            ElseIf imgViewer.Left <= picViewer.Width - imgViewer.Width And X - KAX < 0 Then
+            ElseIf imgViewer.Left <= picViewer.Width - imgViewer.Width And x - KAX < 0 Then
                 imgViewer.Left = picViewer.Width - imgViewer.Width
                 Exit Sub
             Else
-                imgViewer.Left = imgViewer.Left + X - KAX
+                imgViewer.Left = imgViewer.Left + x - KAX
             End If
         End If
         'Vertical
         If imgViewer.Height > picViewer.Height Or imgViewer.Height > picViewer.Height Then
-            If imgViewer.Top >= 0 And Y - KAY > 0 Then
+            If imgViewer.Top >= 0 And y - KAY > 0 Then
                 imgViewer.Top = 0
                 Exit Sub
-            ElseIf imgViewer.Top <= picViewer.Height - imgViewer.Height And Y - KAY < 0 Then
+            ElseIf imgViewer.Top <= picViewer.Height - imgViewer.Height And y - KAY < 0 Then
                 imgViewer.Top = picViewer.Height - imgViewer.Height
                 Exit Sub
             Else
-                imgViewer.Top = imgViewer.Top + Y - KAY
+                imgViewer.Top = imgViewer.Top + y - KAY
             End If
         End If
     Else
@@ -924,7 +912,7 @@ Private Sub imgViewer_MouseMove(Button As Integer, Shift As Integer, X As Single
     End If
 End Sub
 
-Private Sub imgViewer_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgViewer_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
     If imgViewer.Width > picViewer.Width Or imgViewer.Height > picViewer.Height Then
         MouseIcon = imgViewerUp.MouseIcon
         MousePointer = 99
@@ -958,7 +946,7 @@ Private Sub lstViewer_Click()
     VarImage1HeightZoom = imgViewer.Height
     VarImage1WidthZoom = imgViewer.Width
     AturScrollbar
-    txtAddress.tEXT = FileTerpilih
+    txtAddress.Text = FileTerpilih
     lblTotalFile.Caption = "Total : " & lstViewer.ListCount & " file(s)"
     lblCoordinate.Caption = ""
     FileSize = Int(FileLen(FileTerpilih) / 1024 + 1)
@@ -1007,11 +995,6 @@ End Sub
 Private Sub HScrollViewer_Change()
     imgViewer.Left = -HScrollViewer.Value
 End Sub
-
-Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-   Printer.PaintPicture Pic, 0, 0
-End Sub
-
 Private Sub VScrollViewer_Change()
     imgViewer.Top = -VScrollViewer.Value
 End Sub
@@ -1280,7 +1263,7 @@ Private Sub mnuPopUp1Properties_Click()
     txtProperties.Top = 600
     tmrProperties.Enabled = True
     
-    txtProperties.tEXT = "File : " & FileTerpilih + vbCrLf _
+    txtProperties.Text = "File : " & FileTerpilih + vbCrLf _
                        + lblDimension.Caption + vbCrLf _
                        + lblSize.Caption
 End Sub
@@ -1311,71 +1294,71 @@ Private Sub mnuPopUp1CopyToClipboard_Click()
     Clipboard.SetData imgViewer, 2               'Copy image direct from the image object (Copy gambar langsung dari object imgage)
 End Sub
 
-Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     MousePointer = 0
 End Sub
 
-Private Sub cmdBrowseFolder_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub cmdBrowseFolder_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     MousePointer = 0
 End Sub
 
-Private Sub lstViewer_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lstViewer_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     MousePointer = 0
 End Sub
 
-Private Sub picPrint_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picPrint_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     MousePointer = 0
 End Sub
 
-Private Sub fraPrint_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub fraPrint_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     MousePointer = 0
 End Sub
 
-Private Sub picViewer_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picViewer_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
-Private Sub picFolderFile_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picFolderFile_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
-Private Sub picInfo_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picInfo_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
-Private Sub cmdStopSlideShow_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub cmdStopSlideShow_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
-Private Sub cmdFirst_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub cmdFirst_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
-Private Sub cmdPrevious_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub cmdPrevious_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
-Private Sub cmdNext_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub cmdNext_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
-Private Sub cmdLast_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub cmdLast_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
-Private Sub cmdMenu_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub cmdMenu_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
-Private Sub cmdPrint_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub cmdPrint_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
-Private Sub cmdCloseDialog_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub cmdCloseDialog_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
-Private Sub txtAddress_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub txtAddress_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
@@ -1404,7 +1387,7 @@ Private Sub cmbPrinters_Click()
     
     Dim PaperCount As Long
     Dim strPaperNames As String
-    Dim i As Long
+    Dim I As Long
     Dim strPaperName As String
     Dim ActualLength As Long
     Dim ResolutionCount As Long
@@ -1449,14 +1432,14 @@ Private Sub cmbPrinters_Click()
                                     VarPtr(ptPaperSizes(0)), _
                                     0)
     cmbPapers.Clear
-    For i = 0 To PaperCount - 1
-        strPaperName = Mid$(strPaperNames, 64 * i + 1, 64)
+    For I = 0 To PaperCount - 1
+        strPaperName = Mid$(strPaperNames, 64 * I + 1, 64)
         ActualLength = InStr(strPaperName, vbNullChar) - 1
         If ActualLength > 1 Then strPaperName = Left$(strPaperName, ActualLength)
-        cmbPapers.AddItem CStr(intPaperIds(i)) _
+        cmbPapers.AddItem CStr(intPaperIds(I)) _
       & ": " & strPaperName _
-      & " (" & CStr(ptPaperSizes(i).X) / 10 _
-      & ", " & CStr(ptPaperSizes(i).Y) / 10 & ")"
+      & " (" & CStr(ptPaperSizes(I).x) / 10 _
+      & ", " & CStr(ptPaperSizes(I).y) / 10 & ")"
     Next
     cmbPapers.Enabled = True
     
@@ -1473,9 +1456,9 @@ Private Sub cmbPrinters_Click()
                                          VarPtr(lngResolutions(0)), _
                                          0)
     cmbResolutions.Clear
-    For i = 0 To ResolutionCount - 1
-        cmbResolutions.AddItem "(" & CStr(lngResolutions(2 * i)) _
-      & ", " & CStr(lngResolutions(2 * i + 1)) & ")"
+    For I = 0 To ResolutionCount - 1
+        cmbResolutions.AddItem "(" & CStr(lngResolutions(2 * I)) _
+      & ", " & CStr(lngResolutions(2 * I + 1)) & ")"
     Next
     cmbResolutions.Enabled = True
     
@@ -1504,14 +1487,15 @@ ErrorHandle:
 End Sub
 
 Private Sub cmbPapers_Click()
-    If Len(cmbPapers.tEXT) > 0 And Len(cmbResolutions.tEXT) > 0 Then cmdPrintDialog.Enabled = True
+    If Len(cmbPapers.Text) > 0 And Len(cmbResolutions.Text) > 0 Then cmdPrintDialog.Enabled = True
 End Sub
 
 Private Sub cmbResolutions_Click()
-    If Len(cmbPapers.tEXT) > 0 And Len(cmbResolutions.tEXT) > 0 Then cmdPrintDialog.Enabled = True
+    If Len(cmbPapers.Text) > 0 And Len(cmbResolutions.Text) > 0 Then cmdPrintDialog.Enabled = True
 End Sub
 
-Private Sub cmdPrintDialog_Click()
+
+Private Sub xcmdPrintDialog_Click()
     If UCase(Right(FileTerpilih, 4)) = ".PNG" Then
         Token = InitGDIPlus
         Set Pic = LoadPictureGDIPlus(FileTerpilih, , , vbWhite)
@@ -1567,8 +1551,12 @@ Private Sub cmdPrintDialog_Click()
                       ScaledWidth, _
                       ScaledHeight
         .NewPage
-        .EndDoc
+      '  .EndDoc
     End With
+End Sub
+
+Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+    xcmdPrintDialog_Click
 End Sub
 
 Private Sub cmdCloseDialog_Click()
