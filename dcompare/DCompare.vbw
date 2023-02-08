@@ -1,5 +1,5 @@
 dCompare = 6, 110, 1152, 544, C, 267, 69, 1213, 503, C
-Myfunctions = 78, 78, 1024, 512, C
+Myfunctions = 78, 78, 1024, 512, 
 AdoLib = 156, 156, 1283, 608, C
 mFileAPI = 156, 156, 1302, 590, C
 dcompareMain = 0, 0, 0, 0, C
