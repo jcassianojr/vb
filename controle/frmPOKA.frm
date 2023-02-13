@@ -1579,8 +1579,8 @@ Private Sub ComMotInc_Click()
         Exit Sub
     End If
     nITEM = 1
-    If gridrevi.Rows > 1 Then
-        gridrevi.Row = gridrevi.Rows - 1         ''//Posicao comeca com zero
+    If gridrevi.rows > 1 Then
+        gridrevi.Row = gridrevi.rows - 1         ''//Posicao comeca com zero
         gridrevi.Col = 3
         nITEM = FixInt(gridrevi) + 1
     End If
@@ -1680,14 +1680,18 @@ Private Sub Form_Load()
     Filgridrev
     
     
-    If gridrev.Rows > 1 Then
-        gridrev.Row = gridrev.Rows - 1
+    If gridrev.rows > 1 Then
+        gridrev.Row = gridrev.rows - 1
         CmdMotRev_Click
     End If
-        
+    PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
     
 End Sub
-
+Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
+    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+End Sub
 Private Sub Incluirimagem_Click(Index As Integer)
     Dim STMPFILE
     STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")

@@ -1675,8 +1675,8 @@ Private Sub cmdClose_Click()
     On Error Resume Next
     ''Data Revisao em Branco
     If IsNull(TXTFIELDS(21)) Or Len(TXTFIELDS(21)) = 0 Then
-        If gridrev.Rows > 1 Then
-            gridrev.Row = gridrev.Rows - 1
+        If gridrev.rows > 1 Then
+            gridrev.Row = gridrev.rows - 1
             gridrev.Col = 3
             TXTFIELDS(21).Text = gridrev
         Else
@@ -1685,7 +1685,7 @@ Private Sub cmdClose_Click()
     End If
    
     'Corrige revisao 1 qdo devia ser zero
-    If gridrev.Rows = 1 Then
+    If gridrev.rows = 1 Then
         If FixNum(TXTFIELDS(17)) > 0 Then
             TXTFIELDS(17) = 0
         End If
@@ -1837,8 +1837,8 @@ Private Sub ComMotInc_Click()
         Exit Sub
     End If
     nITEM = 1
-    If gridrevi.Rows > 1 Then
-        gridrevi.Row = gridrevi.Rows - 1         ''//Posicao comeca com zero
+    If gridrevi.rows > 1 Then
+        gridrevi.Row = gridrevi.rows - 1         ''//Posicao comeca com zero
         gridrevi.Col = 3
         nITEM = FixInt(gridrevi) + 1
     End If
@@ -1969,13 +1969,18 @@ Private Sub Form_Load()
     Filgridrev
     
     
-    If gridrev.Rows > 1 Then
-        gridrev.Row = gridrev.Rows - 1
+    If gridrev.rows > 1 Then
+        gridrev.Row = gridrev.rows - 1
         CmdMotRev_Click
     End If
+     PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
     
 End Sub
-
+Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
+    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+End Sub
 Private Sub imgsave_Click(Index As Integer)
     Dim cARQ As String
     Select Case Index

@@ -70,7 +70,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":062A
-            TextSave        =   "21:07"
+            TextSave        =   "10:03"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -78,7 +78,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":0BC4
-            TextSave        =   "17/01/2023"
+            TextSave        =   "13/02/2023"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -173,7 +173,7 @@ Option Explicit
 Private Sub MDIForm_Load()
 
     Dim pICONES As String
-    Dim CLINHA As String
+    Dim cLINHA As String
     Dim nRETU As Variant
     Dim zMDBPATH As String
     Dim cmdline As String
@@ -193,7 +193,7 @@ Private Sub MDIForm_Load()
       
       
       
-    StatusBar1.Panels(5).Text = ""
+    StatusBar1.Panels(5).tEXT = ""
 
     
 'carqhelp = "SELECT FEMEAEF FROM"
@@ -333,11 +333,12 @@ Private Sub MDIForm_Load()
     rs.Close
     DB.Close
     
-    StatusBar1.Panels(6).Text = zUSER
+    StatusBar1.Panels(6).tEXT = zUSER
     If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
         frmDica.Show
     End If
-    
+   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
     Exit Sub
 ErrorHandler:
     'Alert error$ & " - " & Str$(Err)
@@ -353,6 +354,10 @@ ErrorHandler:
     End Select
     Resume Next
 
+End Sub
+Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
+    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
 
 Private Sub MDIForm_Unload(Cancel As Integer)
@@ -399,15 +404,15 @@ Private Sub mnuSUBMENU2_Click(Index As Integer)
         escDes.Show vbModal
     Case 7
         ZENGTIP = "DES"
-        escCLI.Show vbModal
+        ESCCLI.Show vbModal
     Case 8
-        escPRO.Show vbModal
+        ESCpro.Show vbModal
     Case 9
         iPPAP = 3
         escPPAP.Show vbModal
     Case 10
         ZENGTIP = "PRO"
-        escCLI.Show vbModal
+        ESCCLI.Show vbModal
     Case 11
         zPFTIPO = "POA"
         Sdb = PegPath("PATH", "POA")
@@ -446,7 +451,7 @@ Private Sub mnuSUBMENU3_Click(Index As Integer)
 End Sub
 
 Private Sub mnuSUBMENU4_Click(Index As Integer)
-    Dim CLINHA As String
+    Dim cLINHA As String
     
     ''todos usurios aceeos
     ''os que necessitam permissao case abaixo apos o check

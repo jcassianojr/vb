@@ -3036,48 +3036,48 @@ Dim lTROCOU As Variant
 Dim aCAMIMG As Variant
 
 Private Sub cad_cjt_lx_Click()
-    gravacaddes TXTFIELDS(12).Text, TXTFIELDS(13).Text, DTPicker3.Value
+    gravacaddes txtfields(12).Text, txtfields(13).Text, DTPicker3.Value
 End Sub
 
 Private Sub CmdApagar_Click(Index As Integer)
     Select Case Index
     Case 1
-        TXTFIELDS(20) = ""
-        TXTFIELDS(24) = ""
-        TXTFIELDS(23) = 0
-        TXTFIELDS(27) = 0
-        TXTFIELDS(19) = 0
-        TXTFIELDS(35) = 0
-        TXTFIELDS(47) = 0
-        TXTFIELDS(48) = ""
+        txtfields(20) = ""
+        txtfields(24) = ""
+        txtfields(23) = 0
+        txtfields(27) = 0
+        txtfields(19) = 0
+        txtfields(35) = 0
+        txtfields(47) = 0
+        txtfields(48) = ""
     Case 2
-        TXTFIELDS(21) = ""
-        TXTFIELDS(25) = ""
-        TXTFIELDS(37) = 0
-        TXTFIELDS(38) = 0
-        TXTFIELDS(39) = 0
-        TXTFIELDS(40) = 0
-        TXTFIELDS(49) = 0
-        TXTFIELDS(50) = 0
-        TXTFIELDS(41) = ""
+        txtfields(21) = ""
+        txtfields(25) = ""
+        txtfields(37) = 0
+        txtfields(38) = 0
+        txtfields(39) = 0
+        txtfields(40) = 0
+        txtfields(49) = 0
+        txtfields(50) = 0
+        txtfields(41) = ""
     Case 3
-        TXTFIELDS(22) = ""
-        TXTFIELDS(26) = ""
-        TXTFIELDS(42) = 0
-        TXTFIELDS(43) = 0
-        TXTFIELDS(44) = 0
-        TXTFIELDS(45) = 0
-        TXTFIELDS(61) = 0
-        TXTFIELDS(62) = 0
-        TXTFIELDS(46) = ""
+        txtfields(22) = ""
+        txtfields(26) = ""
+        txtfields(42) = 0
+        txtfields(43) = 0
+        txtfields(44) = 0
+        txtfields(45) = 0
+        txtfields(61) = 0
+        txtfields(62) = 0
+        txtfields(46) = ""
     End Select
 End Sub
 
 Private Sub cmdcaddes_Click()
-    If Len(TXTFIELDS(66).Text) > 0 Then
-        gravacaddes TXTFIELDS(6).Text, TXTFIELDS(66).Text, DTPicker1.Value
+    If Len(txtfields(66).Text) > 0 Then
+        gravacaddes txtfields(6).Text, txtfields(66).Text, DTPicker1.Value
     Else
-        gravacaddes TXTFIELDS(6).Text, TXTFIELDS(7).Text, DTPicker1.Value
+        gravacaddes txtfields(6).Text, txtfields(7).Text, DTPicker1.Value
     End If
 End Sub
 
@@ -3090,7 +3090,7 @@ Private Sub cmdClose_Click()
     Dim cSQLUP As String
     Dim cSQLIMG As String
 
-    If Check1 And Len(TXTFIELDS(11)) = 0 Then
+    If Check1 And Len(txtfields(11)) = 0 Then
         Alert ("Preencher Motivo do Bloqueio")
         Exit Sub
     End If
@@ -3122,7 +3122,7 @@ Private Sub cmdClose_Click()
     End If
     
     For iLOOP = 0 To nCAMPOS - 5
-        aVAL(iLOOP) = TXTFIELDS(iLOOP)
+        aVAL(iLOOP) = txtfields(iLOOP)
     Next iLOOP
     GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
        
@@ -3145,7 +3145,7 @@ Private Sub CmdcomIMp_Click()
     Dim PFMS03 As New ADODB.Recordset
     Dim cCODIGO, sqlMS03, sqlpfms03 As String
     Dim aCAMPOS As Variant
-    cCODIGO = frmPF.TXTFIELDS(14)
+    cCODIGO = frmPF.txtfields(14)
 
     If IsNull(cCODIGO) Then
 
@@ -3223,23 +3223,23 @@ End Sub
 Private Sub cmdFOTO_Click(Index As Integer)
     Select Case Index
     Case 0
-        zgrp = TXTFIELDS(2)
+        zgrp = txtfields(2)
         cARQRTF = PegPath("PATH", "IMGMS01")
         iImage = 2
     Case 1
-        zgrp = TXTFIELDS(14)
+        zgrp = txtfields(14)
         cARQRTF = PegPath("PATH", "IMGMS01")
         iImage = 2
     Case 2
-        zgrp = TXTFIELDS(20)
+        zgrp = txtfields(20)
         cARQRTF = PegPath("PATH", "IMGMU01")
         iImage = 7
     Case 3
-        zgrp = TXTFIELDS(21)
+        zgrp = txtfields(21)
         cARQRTF = PegPath("PATH", "IMGMU01")
         iImage = 7
     Case 4
-        zgrp = TXTFIELDS(22)
+        zgrp = txtfields(22)
         cARQRTF = PegPath("PATH", "IMGMU01")
         iImage = 7
     Case 5
@@ -3260,12 +3260,12 @@ Private Sub cmdFOTO_Click(Index As Integer)
         Exit Sub
     End If
     If Index = 0 Or Index = 1 Then
-        If Len(FixStr(TXTFIELDS(0))) > 0 Then
-            zgrp = zgrp & "|" & TXTFIELDS(0)
+        If Len(FixStr(txtfields(0))) > 0 Then
+            zgrp = zgrp & "|" & txtfields(0)
         End If
     End If
     Load frmIMAGENS
-    frmIMAGENS.TXTFIELDS(0).Enabled = False
+    frmIMAGENS.txtfields(0).Enabled = False
     frmIMAGENS.Escolher(0).Visible = False
     frmIMAGENS.Show vbModal, Me
 End Sub
@@ -3319,7 +3319,7 @@ Private Sub CMDSIG_Click(Index As Integer)
     ePASS02 = True
     frmCharacters.Show vbModal, Me
     If lRETU Then
-        TXTFIELDS(50 + Index) = eRETU01
+        txtfields(50 + Index) = eRETU01
     End If
 
 End Sub
@@ -3397,7 +3397,7 @@ Private Sub Command2_Click()
     FilRelat
     
     eRETU02 = "PF:" & TXTPF.Text & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Desenho:" & txtfields(2) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " SEQ=" & nSEQ & " SSQ=" & nSSQ
         
@@ -3485,11 +3485,11 @@ Private Sub Command7_Click(Index As Integer)
 
     
     If Index = 0 Or Index = 1 Then               '0 e 1 ma01 mana5
-        nNUMERO = FixInt(TXTFIELDS(4))
+        nNUMERO = FixInt(txtfields(4))
         cARQ = GeraConn(zMANA5EMP, "JETFOX")
         sSQL = "SELECT NOME,CODIGO FROM MA01 WHERE NUMERO=" & nNUMERO
     Else                                         '10 11  logix clientes/duns
-        nNUMERO = Trim(FixStr(TXTFIELDS(4)))
+        nNUMERO = Trim(FixStr(txtfields(4)))
         cARQ = PegPath("PATH", "LOGIXODBC")
         sSQL = " SELECT clientes.nom_cliente as nome,duns_itaesbra.num_duns as codigo  FROM clientes"
         sSQL = sSQL & " LEFT JOIN duns_itaesbra ON clientes.cod_cliente=duns_itaesbra.cod_cliente AND duns_itaesbra.cod_empresa='01'"
@@ -3498,10 +3498,10 @@ Private Sub Command7_Click(Index As Integer)
     aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGO"), Array("C", "C"), Array("", ""))
     If lRETU Then
         If Index = 0 Or Index = 10 Then          '0 10 nome e codigo cliente
-            TXTFIELDS(5) = aRETU(0)
-            TXTFIELDS(53) = aRETU(1)
+            txtfields(5) = aRETU(0)
+            txtfields(53) = aRETU(1)
         Else
-            TXTFIELDS(53) = aRETU(1)             '1,11 codigo cliente
+            txtfields(53) = aRETU(1)             '1,11 codigo cliente
         End If
     End If
     
@@ -3518,12 +3518,12 @@ Private Sub Command8_Click()
     Dim cCODIGO As String
     Dim aRETU As Variant
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    cCODIGO = FixStr(TXTFIELDS(2), "", "TRIM")
+    cCODIGO = FixStr(txtfields(2), "", "TRIM")
     sSQL = "SELECT NOME,CODIGOINT FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
     aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGOINT"), Array("C", "C"), Array("", ""))
     If lRETU Then
-        TXTFIELDS(3) = aRETU(0)
-        TXTFIELDS(0) = aRETU(1)
+        txtfields(3) = aRETU(0)
+        txtfields(0) = aRETU(1)
     End If
 End Sub
 
@@ -3537,13 +3537,13 @@ Private Sub Command9_Click(Index As Integer)
     Select Case Index
 
     Case 0
-        cCODIGO = FixStr(TXTFIELDS(20))
+        cCODIGO = FixStr(txtfields(20))
 
     Case 1
-        cCODIGO = FixStr(TXTFIELDS(21))
+        cCODIGO = FixStr(txtfields(21))
 
     Case 2
-        cCODIGO = FixStr(TXTFIELDS(22))
+        cCODIGO = FixStr(txtfields(22))
 
     End Select
 
@@ -3555,11 +3555,11 @@ Private Sub Command9_Click(Index As Integer)
     
         Select Case Index
         Case 0
-            TXTFIELDS(24) = cNOME
+            txtfields(24) = cNOME
         Case 1
-            TXTFIELDS(25) = cNOME
+            txtfields(25) = cNOME
         Case 2
-            TXTFIELDS(26) = cNOME
+            txtfields(26) = cNOME
         End Select
     End If
 End Sub
@@ -3619,15 +3619,15 @@ Private Sub DelImg_Click(Index As Integer)
 End Sub
 
 Private Sub DTPicker1_LostFocus()
-    If Len(TXTFIELDS(66).Text) > 0 Then
-        gravacaddes TXTFIELDS(6).Text, TXTFIELDS(66).Text, DTPicker1.Value
+    If Len(txtfields(66).Text) > 0 Then
+        gravacaddes txtfields(6).Text, txtfields(66).Text, DTPicker1.Value
     Else
-        gravacaddes TXTFIELDS(6).Text, TXTFIELDS(7).Text, DTPicker1.Value
+        gravacaddes txtfields(6).Text, txtfields(7).Text, DTPicker1.Value
     End If
 End Sub
 
 Private Sub DTPicker3_LostFocus()
-    gravacaddes TXTFIELDS(12).Text, TXTFIELDS(13).Text, DTPicker3.Value
+    gravacaddes txtfields(12).Text, txtfields(13).Text, DTPicker3.Value
 End Sub
 
 Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVal dDATACLI As Variant)
@@ -3648,12 +3648,12 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
         Exit Sub
     End If
      
-    If Len(TXTFIELDS(0)) = 0 Then
+    If Len(txtfields(0)) = 0 Then
         Alert "codigo interno logix nao preenchido"
         Exit Sub
     End If
      
-    If Len(TXTFIELDS(3)) = 0 Then
+    If Len(txtfields(3)) = 0 Then
         Alert "descricao do item nao preenchido"
         Exit Sub
     End If
@@ -3664,7 +3664,7 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
     End If
      
    
-    cCODLOGIX = Trim(TXTFIELDS(0))
+    cCODLOGIX = Trim(txtfields(0))
     If Len(cCODLOGIX) > 0 Then
         nPOS = InStr(cCODLOGIX, "/")
         If nPOS > 0 Then
@@ -3696,9 +3696,9 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
         End If
           
           
-        IncluiSQLAdo PegPath("PATH", "LOGIXODBC"), "select * from cad_des where cod_empresa='01' and cod_item='" & cCODLOGIX & "' and num_versao='" & TXTFIELDS(7) & "'", 8, _
+        IncluiSQLAdo PegPath("PATH", "LOGIXODBC"), "select * from cad_des where cod_empresa='01' and cod_item='" & cCODLOGIX & "' and num_versao='" & txtfields(7) & "'", 8, _
                                                                                                                                                                    Array("cod_empresa", "cod_item", "num_versao", "seq_versao", "cod_desen", "dat_desen", "den_desen", "cod_form_folha"), _
-                                                                                                                                                                   Array("01", cCODLOGIX, cREVCLI, 1, cDESCLI, dDATACLI, TXTFIELDS(3).Text, "''"), _
+                                                                                                                                                                   Array("01", cCODLOGIX, cREVCLI, 1, cDESCLI, dDATACLI, txtfields(3).Text, "''"), _
                                                                                                                                                                    True, False
 
           
@@ -3743,8 +3743,8 @@ Private Sub ESCCLI_Click(Index As Integer)
     End Select
     escNUMNOM.Show vbModal, Me
     If lRETU Then
-        frmPF.TXTFIELDS(4) = eRETU01
-        frmPF.TXTFIELDS(5) = eRETU02
+        frmPF.txtfields(4) = eRETU01
+        frmPF.txtfields(5) = eRETU02
         If Index = 0 Then
             Command7_Click (1)
         End If
@@ -3760,7 +3760,7 @@ Private Sub EscCodFlu_Click(Index As Integer)
     eRETU02 = ""
     escFLX.Show vbModal, Me
     If lRETU Then
-        TXTFIELDS(50 + Index) = eRETU01
+        txtfields(50 + Index) = eRETU01
     End If
 End Sub
 
@@ -3768,15 +3768,15 @@ Private Sub esciedx_Click()
     iMU01 = 201
     escIED.Show vbModal, Me
     If lRETU Then
-        TXTFIELDS(1) = eRETU02
+        txtfields(1) = eRETU02
     End If
 End Sub
 
 Private Sub escmp04a_Click()
     If MDG("Gravar Elaborador", "Confirme Gravação") Then
-        frmPF.TXTFIELDS(30) = zIDFOLHA
-        frmPF.TXTFIELDS(31) = zNOMEFOLHA
-        frmPF.TXTFIELDS(63) = Date
+        frmPF.txtfields(30) = zIDFOLHA
+        frmPF.txtfields(31) = zNOMEFOLHA
+        frmPF.txtfields(63) = Date
     End If
 End Sub
 
@@ -3787,14 +3787,14 @@ Private Sub escmu_Click(Index As Integer)
     If Not lRETU Then Exit Sub
     Select Case Index
     Case 1
-        frmPF.TXTFIELDS(20) = eRETU01
-        frmPF.TXTFIELDS(24) = eRETU02
+        frmPF.txtfields(20) = eRETU01
+        frmPF.txtfields(24) = eRETU02
     Case 2
-        frmPF.TXTFIELDS(21) = eRETU01
-        frmPF.TXTFIELDS(25) = eRETU02
+        frmPF.txtfields(21) = eRETU01
+        frmPF.txtfields(25) = eRETU02
     Case 3
-        frmPF.TXTFIELDS(22) = eRETU01
-        frmPF.TXTFIELDS(26) = eRETU02
+        frmPF.txtfields(22) = eRETU01
+        frmPF.txtfields(26) = eRETU02
     End Select
 End Sub
 
@@ -3820,33 +3820,33 @@ Private Sub ESCpro_Click(Index As Integer)
             escms01.Show vbModal, Me
             If lRETU Then
                 If Index = 2 Or Index = 0 Or Index = 6 Then
-                    frmPF.TXTFIELDS(2) = eRETU01
-                    frmPF.TXTFIELDS(3) = eRETU02
-                    frmPF.TXTFIELDS(0) = eRETU03
+                    frmPF.txtfields(2) = eRETU01
+                    frmPF.txtfields(3) = eRETU02
+                    frmPF.txtfields(0) = eRETU03
                 End If
                 If Index = 3 Or Index = 4 Or Index = 7 Then
-                    frmPF.TXTFIELDS(0) = eRETU03
+                    frmPF.txtfields(0) = eRETU03
                 End If
                 If Index = 9 Then
-                    frmPF.TXTFIELDS(20) = eRETU01
-                    frmPF.TXTFIELDS(24) = eRETU02
+                    frmPF.txtfields(20) = eRETU01
+                    frmPF.txtfields(24) = eRETU02
                 End If
                 If Index = 10 Then
-                    frmPF.TXTFIELDS(21) = eRETU01
-                    frmPF.TXTFIELDS(25) = eRETU02
+                    frmPF.txtfields(21) = eRETU01
+                    frmPF.txtfields(25) = eRETU02
                 End If
                 If Index = 11 Then
-                    frmPF.TXTFIELDS(22) = eRETU01
-                    frmPF.TXTFIELDS(26) = eRETU02
+                    frmPF.txtfields(22) = eRETU01
+                    frmPF.txtfields(26) = eRETU02
                 End If
                
                
             End If
         Else                                     ''1-5-8
-            cCHAVEBUS = TXTFIELDS(2)
+            cCHAVEBUS = txtfields(2)
             escms01.Show vbModal, Me
             If lRETU Then
-                frmPF.TXTFIELDS(14) = eRETU01
+                frmPF.txtfields(14) = eRETU01
             End If
         End If
     End If
@@ -3900,7 +3900,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Esctipo_Click()
-    If TXTFIELDS(28) = "P" Then
+    If txtfields(28) = "P" Then
         Alert ("Ja e producao")
         Exit Sub
     End If
@@ -3932,15 +3932,15 @@ Private Sub Esctipo_Click()
     End Select
     
     If cTIPO = "P" Then
-        If TXTFIELDS(28) = "R" Or TXTFIELDS(28) = "I" Or TXTFIELDS(28) = "L" Or TXTFIELDS(28) = "P" _
-                                                                                                Or TXTFIELDS(28) = "A" Or Len(TXTFIELDS(28)) = 0 Then
+        If txtfields(28) = "R" Or txtfields(28) = "I" Or txtfields(28) = "L" Or txtfields(28) = "P" _
+                                                                                                Or txtfields(28) = "A" Or Len(txtfields(28)) = 0 Then
             If MDG("Mudar para Producao e gerar nova revisao") Then
                 NovaRev_Click
             End If
         End If
     End If
 
-    TXTFIELDS(28) = cTIPO
+    txtfields(28) = cTIPO
     TIPOSAY
 
 End Sub
@@ -3965,7 +3965,7 @@ Private Sub Form_Load()
     cARQFEMEA = PegPath("PATH", "FEMEA")
     
     For X = 51 To 60
-        TXTFIELDS(X).Font = "isoqsymbol"
+        txtfields(X).Font = "isoqsymbol"
     Next
     
     TXTPF = nPF
@@ -4006,7 +4006,7 @@ Private Sub Form_Load()
     
     aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 6                 '
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)           '
+        txtfields(iLOOP) = aVAL(iLOOP)           '
     Next iLOOP
     
     
@@ -4052,24 +4052,31 @@ Private Sub Form_Load()
     Filgridrev
     
     If zUSER = "ADMIN" Then
-        TXTFIELDS(8).Enabled = True
-        TXTFIELDS(8).Locked = False
-        TXTFIELDS(8).Visible = True
-        TXTFIELDS(29).Enabled = True
-        TXTFIELDS(29).Locked = False
-        TXTFIELDS(29).Visible = True
+        txtfields(8).Enabled = True
+        txtfields(8).Locked = False
+        txtfields(8).Visible = True
+        txtfields(29).Enabled = True
+        txtfields(29).Locked = False
+        txtfields(29).Visible = True
     End If
     
     DizerBarra ""
     
-    If Check1 And Len(TXTFIELDS(11)) = 0 Then
+    If Check1 And Len(txtfields(11)) = 0 Then
         Alert ("Preencher Motivo do Bloqueio")
     End If
     
     TIPOSAY
     
+     PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
+    
+    
 End Sub
-
+Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
+    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+End Sub
 Private Sub ImpComPF_Click()
     cARQIMP = "PFMS03"
     FrmImp.Show vbModal, Me
@@ -4077,7 +4084,7 @@ Private Sub ImpComPF_Click()
 End Sub
 
 Private Sub IMPSEQ_Click()
-    If GridSeq.Rows > 1 Then                     'importacao nao precisa ter um item
+    If GridSeq.rows > 1 Then                     'importacao nao precisa ter um item
         Alert ("Ja existem operacoes para este pf utilize a importacao dentro da sequencias")
         Exit Sub
     End If
@@ -4114,8 +4121,8 @@ Private Sub NovaRev_Click()
 
     On Error Resume Next
     
-    If Len(TXTFIELDS(29).Text) > 0 Then          ''corrige data protheus em branco
-        If TXTFIELDS(29) > Today() Then
+    If Len(txtfields(29).Text) > 0 Then          ''corrige data protheus em branco
+        If txtfields(29) > Today() Then
             Alert ("Data Revisao Anterior Maior que Data do Sistema")
             Exit Sub
         End If
@@ -4123,9 +4130,9 @@ Private Sub NovaRev_Click()
 
     If MDG("Fazer Nova Revisao", "Confirme Gravação") Then
         Encerrar.Visible = False
-        nrevisao = FixInt(TXTFIELDS(8)) + 1
-        TXTFIELDS(8) = nrevisao
-        TXTFIELDS(29) = Fdata(Date)
+        nrevisao = FixInt(txtfields(8)) + 1
+        txtfields(8) = nrevisao
+        txtfields(29) = Fdata(Date)
         
         
         cSQLTMP = "select * from PF WHERE PF=" & nPF
@@ -4155,7 +4162,7 @@ Private Sub NovaRev_Click()
         
 
         eRETU02 = "PF:" & TXTPF.Text & Chr(13) & Chr(10)
-        eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
+        eRETU02 = eRETU02 & " Desenho:" & txtfields(2) & Chr(13) & Chr(10)
         eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
         
         MAILENV "PF000001", eRETU02
@@ -4194,7 +4201,7 @@ Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Function valornum(Index As Integer)
-    valornum = Val(Replace(TXTFIELDS(Index), ",", "."))
+    valornum = Val(Replace(txtfields(Index), ",", "."))
 End Function
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -4206,7 +4213,7 @@ Private Sub TXTFIELDS_LostFocus(Index As Integer)
     Dim cCODLOGIX
     Dim nPOS
     If Index = 0 Then
-        cCODLOGIX = Trim(TXTFIELDS(0))
+        cCODLOGIX = Trim(txtfields(0))
         If Len(cCODLOGIX) > 0 Then
             nPOS = InStr(cCODLOGIX, "/")
             If nPOS > 0 Then
@@ -4229,7 +4236,7 @@ Private Sub TXTFIELDS_LostFocus(Index As Integer)
 End Sub
 
 Private Sub TIPOSAY()
-    Select Case TXTFIELDS(28)
+    Select Case txtfields(28)
     Case "P"
         TipoDescritivo.Text = "(P)roducao"
     Case "R"

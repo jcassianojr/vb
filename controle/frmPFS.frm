@@ -270,12 +270,13 @@ Begin VB.Form frmPFS
       Tab(4).Control(6)=   "txttaktat"
       Tab(4).Control(7)=   "txttak"
       TabCaption(5)   =   "Fluxo 2"
-      Tab(5).ControlCount=   5
-      Tab(5).Control(0)=   "Command13"
-      Tab(5).Control(1)=   "Command14"
-      Tab(5).Control(2)=   "Command15"
-      Tab(5).Control(3)=   "Command16"
-      Tab(5).Control(4)=   "GrdQsbLep"
+      Tab(5).ControlCount=   6
+      Tab(5).Control(0)=   "Picture2(4)"
+      Tab(5).Control(1)=   "Command13"
+      Tab(5).Control(2)=   "Command14"
+      Tab(5).Control(3)=   "Command15"
+      Tab(5).Control(4)=   "Command16"
+      Tab(5).Control(5)=   "GrdQsbLep"
       TabCaption(6)   =   "Almofada"
       Tab(6).ControlCount=   98
       Tab(6).Control(0)=   "TXTFIELDS(84)"
@@ -417,7 +418,7 @@ Begin VB.Form frmPFS
       TabCaption(9)   =   "..."
       Tab(9).ControlCount=   0
       TabCaption(10)  =   "Vista Explodida"
-      Tab(10).ControlCount=   38
+      Tab(10).ControlCount=   37
       Tab(10).Control(0)=   "TXTFIELDS(95)"
       Tab(10).Control(1)=   "TXTFIELDS(94)"
       Tab(10).Control(2)=   "TXTFIELDS(93)"
@@ -434,28 +435,27 @@ Begin VB.Form frmPFS
       Tab(10).Control(13)=   "TXTFIELDS(73)"
       Tab(10).Control(14)=   "TXTFIELDS(72)"
       Tab(10).Control(15)=   "Picture1(4)"
-      Tab(10).Control(16)=   "Picture2(4)"
-      Tab(10).Control(17)=   "Incimg(4)"
-      Tab(10).Control(18)=   "DelImg(4)"
-      Tab(10).Control(19)=   "commandx(4)"
-      Tab(10).Control(20)=   "cmdimprimir(4)"
-      Tab(10).Control(21)=   "CmdPaste(4)"
-      Tab(10).Control(22)=   "VerImg(4)"
-      Tab(10).Control(23)=   "lblLabels(41)"
-      Tab(10).Control(24)=   "lblLabels(38)"
-      Tab(10).Control(25)=   "lblLabels(37)"
-      Tab(10).Control(26)=   "lblLabels(36)"
-      Tab(10).Control(27)=   "lblLabels(35)"
-      Tab(10).Control(28)=   "lblLabels(34)"
-      Tab(10).Control(29)=   "lblLabels(33)"
-      Tab(10).Control(30)=   "lblLabels(32)"
-      Tab(10).Control(31)=   "lblLabels(31)"
-      Tab(10).Control(32)=   "lblLabels(30)"
-      Tab(10).Control(33)=   "lblLabels(29)"
-      Tab(10).Control(34)=   "lblLabels(28)"
-      Tab(10).Control(35)=   "lblLabels(27)"
-      Tab(10).Control(36)=   "lblLabels(26)"
-      Tab(10).Control(37)=   "lblLabels(23)"
+      Tab(10).Control(16)=   "Incimg(4)"
+      Tab(10).Control(17)=   "DelImg(4)"
+      Tab(10).Control(18)=   "commandx(4)"
+      Tab(10).Control(19)=   "cmdimprimir(4)"
+      Tab(10).Control(20)=   "CmdPaste(4)"
+      Tab(10).Control(21)=   "VerImg(4)"
+      Tab(10).Control(22)=   "lblLabels(41)"
+      Tab(10).Control(23)=   "lblLabels(38)"
+      Tab(10).Control(24)=   "lblLabels(37)"
+      Tab(10).Control(25)=   "lblLabels(36)"
+      Tab(10).Control(26)=   "lblLabels(35)"
+      Tab(10).Control(27)=   "lblLabels(34)"
+      Tab(10).Control(28)=   "lblLabels(33)"
+      Tab(10).Control(29)=   "lblLabels(32)"
+      Tab(10).Control(30)=   "lblLabels(31)"
+      Tab(10).Control(31)=   "lblLabels(30)"
+      Tab(10).Control(32)=   "lblLabels(29)"
+      Tab(10).Control(33)=   "lblLabels(28)"
+      Tab(10).Control(34)=   "lblLabels(27)"
+      Tab(10).Control(35)=   "lblLabels(26)"
+      Tab(10).Control(36)=   "lblLabels(23)"
       Begin VB.TextBox TXTFIELDS 
          Height          =   285
          Index           =   95
@@ -936,7 +936,7 @@ Begin VB.Form frmPFS
       Begin VB.PictureBox Picture2 
          Height          =   2535
          Index           =   4
-         Left            =   -74880
+         Left            =   120
          ScaleHeight     =   2475
          ScaleWidth      =   2835
          TabIndex        =   259
@@ -5948,7 +5948,15 @@ cSQL = cSQL & " from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & n
         TXTFIELDS(X).Font = "isoqsymbol"
     Next
     CONTAHOMEM
+    
+     PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 End Sub
+Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
+    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+End Sub
+
 
 Private Sub Form_Unload(Cancel As Integer)
     Screen.MousePointer = vbDefault
