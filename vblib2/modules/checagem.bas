@@ -3,7 +3,7 @@ Option Explicit
 
 Public Function IsValidIP(Test As String) As Boolean
     Dim SubNets() As String
-    Dim I As Integer
+    Dim i As Integer
     If LCase(Test) = "localhost" Then
         IsValidIP = True
         Exit Function
@@ -17,8 +17,8 @@ Public Function IsValidIP(Test As String) As Boolean
         IsValidIP = False
         Exit Function
     End If
-    For I = 0 To 3
-        If Not IsNumeric(SubNets(I)) Or SubNets(I) < 0 Or SubNets(I) > 255 Then
+    For i = 0 To 3
+        If Not IsNumeric(SubNets(i)) Or SubNets(i) < 0 Or SubNets(i) > 255 Then
             IsValidIP = False
             Exit Function
         End If
@@ -181,7 +181,7 @@ Public Function CheckPIS(ByVal ePIS As Variant, Optional lMES As Boolean = True)
     Dim cPIS As String
     Dim ftap As String
     Dim total As String
-    Dim I As Integer
+    Dim i As Integer
     Dim resto As Integer
     
     
@@ -208,9 +208,9 @@ Public Function CheckPIS(ByVal ePIS As Variant, Optional lMES As Boolean = True)
     ftap = "3298765432"
     total = 0
 
-    For I = 1 To 10
-        total = total + Val(Mid(cPIS, I, 1)) * Val(Mid(ftap, I, 1))
-    Next I
+    For i = 1 To 10
+        total = total + Val(Mid(cPIS, i, 1)) * Val(Mid(ftap, i, 1))
+    Next i
 
     resto = Int(total Mod 11)
 
@@ -248,7 +248,7 @@ End Function
 
 Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optional lMES As Boolean = True, Optional cUF As String = "") As Boolean
     ''cTIPO= M-Matriz F-Filial X-Nao Checar
-    Dim x As Integer
+    Dim X As Integer
     Dim aUF As Variant
 
     CheckCNPJ = False
@@ -279,12 +279,12 @@ Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optio
     End If
 
 
-    For x = 0 To 14
-        If cCGC = String(14, CStr(x)) Then
-            If lMES Then Alert ("CNPJ Invalido - Sequencia Repetitiva de " + Str(x))
+    For X = 0 To 14
+        If cCGC = String(14, CStr(X)) Then
+            If lMES Then Alert ("CNPJ Invalido - Sequencia Repetitiva de " + Str(X))
             Exit Function
         End If
-    Next x
+    Next X
 
 
     If Left(funNumeroPuro(cCGC), 8) = "99999997" Then
@@ -358,12 +358,12 @@ Public Function Mod11(ByVal campo, ByVal posdv, ByVal pesomax) As Boolean
 End Function
 
 Function FormataCGC(ByVal pCGC As String) As String
-    Dim I As Integer
+    Dim i As Integer
     Dim wCGC As String
     wCGC = ""
-    For I = 1 To Len(pCGC)
-        If InStr("0123456789", Mid(pCGC, I, 1)) > 0 Then
-            wCGC = wCGC & Mid(pCGC, I, 1)
+    For i = 1 To Len(pCGC)
+        If InStr("0123456789", Mid(pCGC, i, 1)) > 0 Then
+            wCGC = wCGC & Mid(pCGC, i, 1)
         End If
     Next
     If Len(wCGC) = 14 Then
@@ -417,12 +417,12 @@ Public Function CheckCNPJIE(ByVal cPESSOA, ByVal CCNPJ, ByVal cIE, ByVal cUF, Op
 End Function
 
 Function FormataCPF(ByVal pCPF As String) As String
-    Dim I As Integer
+    Dim i As Integer
     Dim wCPF As String
     wCPF = ""
-    For I = 1 To Len(pCPF)
-        If InStr("0123456789", Mid(pCPF, I, 1)) > 0 Then
-            wCPF = wCPF & Mid(pCPF, I, 1)
+    For i = 1 To Len(pCPF)
+        If InStr("0123456789", Mid(pCPF, i, 1)) > 0 Then
+            wCPF = wCPF & Mid(pCPF, i, 1)
         End If
     Next
     If Len(wCPF) = 11 Then
@@ -434,7 +434,7 @@ Function FormataCPF(ByVal pCPF As String) As String
 End Function
 
 Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean = True) As Boolean
-    Dim x As Integer
+    Dim X As Integer
     Dim P1 As String
     CheckCPF = False
     P1 = Trim(TiraOut(xCPF))
@@ -451,12 +451,12 @@ Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean =
         Exit Function
     End If
 
-    For x = 0 To 9
-        If P1 = String(11, CStr(x)) Then
-            If lMES Then Alert ("CPF Invalido - Sequencia Repetitiva de " + Str(x))
+    For X = 0 To 9
+        If P1 = String(11, CStr(X)) Then
+            If lMES Then Alert ("CPF Invalido - Sequencia Repetitiva de " + Str(X))
             Exit Function
         End If
-    Next x
+    Next X
     If Mod11(P1, 10, 10) Then
         If Mod11(P1, 11, 11) Then
             CheckCPF = True
@@ -473,7 +473,7 @@ Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean =
 End Function
 
 Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As Boolean
-    Dim dv_d3, tam_chave, xrdig, y1, dv_base, x, y2, dv_p2
+    Dim dv_d3, tam_chave, xrdig, y1, dv_base, X, y2, dv_p2
     CheckRena = False
     dv_p1 = TiraOut(dv_p1)
     If Len(dv_p1) = 0 Then
@@ -491,9 +491,9 @@ Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As
     y1 = 0
     dv_base = "8923456789"
     y1 = 0
-    For x = 1 To tam_chave
-        dv_d3 = Val(Mid(dv_p1, x, 1))
-        y1 = y1 + (dv_d3 * Val(Mid(dv_base, x, 1)))
+    For X = 1 To tam_chave
+        dv_d3 = Val(Mid(dv_p1, X, 1))
+        y1 = y1 + (dv_d3 * Val(Mid(dv_base, X, 1)))
         ''y2 = mod(y1,11)
         y2 = y1 Mod 11
     Next
@@ -837,12 +837,12 @@ Public Function ChecaSimNao(ByVal nText As Variant)
 End Function
 
 Function FormataCEP(ByVal pCEP As String) As String
-    Dim I As Integer
+    Dim i As Integer
     Dim wCEP As String
     wCEP = ""
-    For I = 1 To Len(pCEP)
-        If InStr("0123456789", Mid(pCEP, I, 1)) > 0 Then
-            wCEP = wCEP & Mid(pCEP, I, 1)
+    For i = 1 To Len(pCEP)
+        If InStr("0123456789", Mid(pCEP, i, 1)) > 0 Then
+            wCEP = wCEP & Mid(pCEP, i, 1)
         End If
     Next
     If Len(wCEP) > 8 Then
@@ -922,7 +922,7 @@ Public Function CheckCTA(ByVal cBANCO, ByVal cAGENCIA, ByVal cCONTA) As Boolean
     Dim eTOt As Long
     Dim nFIM As Integer
     Dim nINI As Integer
-    Dim x As Integer
+    Dim X As Integer
     Dim nRES
     eTOt = 0
     cBANCO = StrZero(FixInt(cBANCO), 3)
@@ -972,10 +972,10 @@ Public Function CheckCTA(ByVal cBANCO, ByVal cAGENCIA, ByVal cCONTA) As Boolean
         nFIM = Len(cCONTA)
         nINI = nFIM
         nFIM = nFIM - 1
-        For x = 1 To nFIM
-            eTOt = eTOt + nINI * Val(Mid(cCONTA, x, 1))
+        For X = 1 To nFIM
+            eTOt = eTOt + nINI * Val(Mid(cCONTA, X, 1))
             nINI = nINI - 1
-        Next x
+        Next X
         nRES = eTOt Mod 11
         nRES = 11 - nRES
         nRES = IIf(nRES = 10, "P", StrZero(nRES, 1))
@@ -1003,17 +1003,17 @@ Public Function DAC10(ByVal Arg1)
     Dim ninicio
     Dim ntotal
     Dim ccpoaux
-    Dim x
+    Dim X
     ninicio = Len(Trim(Arg1)) + 1
     ntotal = 0
     If (ninicio < 2) Then
         ninicio = 2
     End If
     ccpoaux = "0" + Trim(Arg1)
-    For x = ninicio To 1 Step -2
-        cNUMERO = Mid(ccpoaux, x, 1)
+    For X = ninicio To 1 Step -2
+        cNUMERO = Mid(ccpoaux, X, 1)
         ntotal = ntotal + InStr("516273849", cNUMERO)
-        ntotal = ntotal + Val(Mid(ccpoaux, x - 1, 1))
+        ntotal = ntotal + Val(Mid(ccpoaux, X - 1, 1))
     Next
     DAC10 = Trim(Str(InStr("987654321", Mid(StrZero(ntotal, 3), 3, 1))))
 End Function
@@ -1097,7 +1097,7 @@ End Function
 Public Function CheckTitulo(ByVal S As String, Optional ByVal lMES As Boolean = True) As Boolean
     Dim DV1 As Integer
     Dim DV2 As Integer
-    Dim I As Integer
+    Dim i As Integer
     'Dim total As Integer
     Dim resto As Integer
     Dim Resto2 As Integer
@@ -1105,7 +1105,7 @@ Public Function CheckTitulo(ByVal S As String, Optional ByVal lMES As Boolean = 
     
     Numero = ""
     
-    For I = Len(S) To 12
+    For i = Len(S) To 12
         Numero = Numero + "0"
     Next
     
@@ -1188,7 +1188,7 @@ Public Function CheckEmail(ByVal cEMAIL As String, _
         Exit Function
     End If
     
-    ''nao possue // nao tem
+    ''nao possue // nao tem //erro digitacao
     If Left(UCase(cEMAIL), 3) = "NAO" Then
         CheckEmail = True
         Exit Function
@@ -1445,14 +1445,14 @@ Public Function FeriadoMovel(pdatPesquisa As Date) As Boolean
     Dim datData As Date
     Dim ano As Integer
     Dim A As Integer
-    Dim B As Integer
+    Dim b As Integer
     Dim C As Integer
     Dim D As Integer
     Dim E As Integer
     Dim F As Integer
     Dim G As Integer
     Dim H As Integer
-    Dim I As Integer
+    Dim i As Integer
     Dim K As Integer
     Dim L As Integer
     Dim m As Integer
@@ -1461,16 +1461,16 @@ Public Function FeriadoMovel(pdatPesquisa As Date) As Boolean
     FeriadoMovel = False
     ano = Year(pdatPesquisa)
     A = (ano Mod 19)
-    B = Int(ano / 100)
+    b = Int(ano / 100)
     C = (ano Mod 100)
-    D = Int(B / 4)
-    E = (B Mod 4)
-    F = Int((B + 8) / 25)
-    G = Int((B - F + 1) / 3)
-    H = ((19 * A + B - D - G + 15) Mod 30)
-    I = Int(C / 4)
+    D = Int(b / 4)
+    E = (b Mod 4)
+    F = Int((b + 8) / 25)
+    G = Int((b - F + 1) / 3)
+    H = ((19 * A + b - D - G + 15) Mod 30)
+    i = Int(C / 4)
     K = (C Mod 4)
-    L = ((32 + 2 * E + 2 * I - H - K) Mod 7)
+    L = ((32 + 2 * E + 2 * i - H - K) Mod 7)
     m = Int((A + 11 * H + 22 * L) / 451)
     P = Int((H + L - 7 * m + 114) / 31)
     Q = ((H + L - 7 * m + 114) Mod 31)
@@ -1596,7 +1596,7 @@ Function checkCEI(ByVal pCEI As String) As Boolean
     Dim nTot     As Byte
     Dim cAux     As String
     Dim lRet     As Boolean
-    Dim I        As Byte
+    Dim i        As Byte
     Dim pNu_cei  As String
 
     checkCEI = False
@@ -1606,7 +1606,7 @@ Function checkCEI(ByVal pCEI As String) As Boolean
     nTot = 0
     cAux = ""
     lRet = True
-    I = 0
+    i = 0
     pNu_cei = ""
 
     pNu_cei = Trim$(pCEI)
@@ -1615,8 +1615,8 @@ Function checkCEI(ByVal pCEI As String) As Boolean
         Exit Function
     End If
 
-    For I = 1 To 11
-        nTot = nTot + Val(Mid$(pNu_cei, I, 1)) * Val(Mid$("74185216374", I, 1))
+    For i = 1 To 11
+        nTot = nTot + Val(Mid$(pNu_cei, i, 1)) * Val(Mid$("74185216374", i, 1))
     Next
 
     cAux = Right$(Str(nTot), 2)
