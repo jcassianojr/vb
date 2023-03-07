@@ -1009,16 +1009,16 @@ Public Function NullDateTime(Optional ByVal cTIPO As String = "", Optional ByVal
     End Select
 End Function
 
-Public Function PadRight(ByVal cTexto, ByVal nLEN) As String
-    cTexto = cTexto & Space(nLEN)
-    cTexto = Left(cTexto, nLEN)
-    PadRight = cTexto
+Public Function PadRight(ByVal cTEXTO, ByVal nLEN) As String
+    cTEXTO = cTEXTO & Space(nLEN)
+    cTEXTO = Left(cTEXTO, nLEN)
+    PadRight = cTEXTO
 End Function
 
-Public Function PadLeft(ByVal cTexto, ByVal nLEN) As String
-    cTexto = Space(nLEN) & cTexto
-    cTexto = Right(cTexto, nLEN)
-    PadLeft = cTexto
+Public Function PadLeft(ByVal cTEXTO, ByVal nLEN) As String
+    cTEXTO = Space(nLEN) & cTEXTO
+    cTEXTO = Right(cTEXTO, nLEN)
+    PadLeft = cTEXTO
 End Function
 
 Public Function PegCamini(ByVal cCAMINHO As String) As String
@@ -1626,11 +1626,11 @@ t = CharToOem(in_string, Out_String)
 Convert2oem = Out_String
 End Function
 Public Function ConvOEM(ByVal texto As String) As String
-    ConvOEM = Convert2oem(cTexto) 'CharConv(texto, "ANSI", "OEM")
+    ConvOEM = Convert2oem(cTEXTO) 'CharConv(texto, "ANSI", "OEM")
 End Function
 
 Public Function ConvOEM2(ByVal texto As String) As String
-    ConvOEM2 = Convert2oem(cTexto)  ' CharConv(texto, "MEUANSI", "MEUOEM")
+    ConvOEM2 = Convert2oem(cTEXTO)  ' CharConv(texto, "MEUANSI", "MEUOEM")
 End Function
 
 Public Function ConvAnsi2(ByVal texto As String) As String
@@ -1714,7 +1714,7 @@ Public Function TiraSin(ByVal texto As String)
     Next X
     TiraSin = texto
 End Function
-Function CheckPass(ByVal cTexto As String, Optional ByVal lMES As Boolean = True) As Boolean
+Function CheckPass(ByVal cTEXTO As String, Optional ByVal lMES As Boolean = True) As Boolean
 
 Dim lMAIS, lMINUS, lDIG, lSYMBOL, l8DIG As Boolean
 Dim i As Integer
@@ -1727,22 +1727,22 @@ lSYMBOL = False
 l8DIG = False
 
 
-For i = 1 To Len(cTexto)
-    If InStr("0123456789", Mid(cTexto, i, 1)) > 0 Then
+For i = 1 To Len(cTEXTO)
+    If InStr("0123456789", Mid(cTEXTO, i, 1)) > 0 Then
        lDIG = True
     End If
-    If InStr("abcdefghijklmnopqrstuvwxyz", Mid(cTexto, i, 1)) > 0 Then
+    If InStr("abcdefghijklmnopqrstuvwxyz", Mid(cTEXTO, i, 1)) > 0 Then
        lMINUS = True
     End If
-    If InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", Mid(cTexto, i, 1)) > 0 Then
+    If InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", Mid(cTEXTO, i, 1)) > 0 Then
        lMAIS = True
     End If
-    If InStr("-+_!@#$%^&*., ?", Mid(cTexto, i, 1)) > 0 Then
+    If InStr("-+_!@#$%^&*., ?", Mid(cTEXTO, i, 1)) > 0 Then
        lSYMBOL = True
     End If
 Next
 
-If Len(Trim(cTexto)) >= 8 Then
+If Len(Trim(cTEXTO)) >= 8 Then
     l8DIG = True
 End If
 
@@ -1982,7 +1982,7 @@ Public Sub FocusMe()
     End If
 End Sub
 
-Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
+Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
     Dim nLEN, nTEXTO, X, Y As Integer
     Dim aORI, aDES, aTEXTO As Variant
     If IsArray(eORI) Then
@@ -1992,7 +1992,7 @@ Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eD
         aORI = StrToArray(CStr(eORI))
         aDES = StrToArray(CStr(eDES))
     End If
-    aTEXTO = StrToArray(cTexto)
+    aTEXTO = StrToArray(cTEXTO)
     nLEN = UBound(aORI)
     nTEXTO = UBound(aTEXTO)
     For Y = 0 To nTEXTO
@@ -2010,23 +2010,23 @@ Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eD
 End Function
 
 Public Function TiraOut(ByVal eVAR As Variant) As String
-    Dim cTexto As String
-    cTexto = FixStr(eVAR)
-    TiraOut = CharConv(cTexto, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
+    Dim cTEXTO As String
+    cTEXTO = FixStr(eVAR)
+    TiraOut = CharConv(cTEXTO, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
                        Array("", "", "", "", "", "", "", "", ""))
 End Function
 
 Public Function TiraOutNum(ByVal eVAR As Variant) As String ' Mantem ', . que sao usadas nos numeros
-    Dim cTexto As String
-    cTexto = FixStr(eVAR)
-    TiraOutNum = CharConv(cTexto, Array("-", ":", "/", ";", "*", "(", ")"), _
+    Dim cTEXTO As String
+    cTEXTO = FixStr(eVAR)
+    TiraOutNum = CharConv(cTEXTO, Array("-", ":", "/", ";", "*", "(", ")"), _
                           Array("", "", "", "", "", "", ""))
 End Function
 
 Public Function TiraOutAlf(ByVal eVAR As Variant) As String
-    Dim cTexto As String
-    cTexto = FixStr(eVAR)
-    TiraOutAlf = CharConv(cTexto, Array("-", ".", ":", "/", ";", "*", "(", ")", _
+    Dim cTEXTO As String
+    cTEXTO = FixStr(eVAR)
+    TiraOutAlf = CharConv(cTEXTO, Array("-", ".", ":", "/", ";", "*", "(", ")", _
                                         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", _
                                         "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", _
                                         "U", "V", "Y", "W", "X", "Z", ","), _
@@ -2036,7 +2036,7 @@ Public Function TiraOutAlf(ByVal eVAR As Variant) As String
                                               "", "", "", "", "", "", ""))
 End Function
 
-Public Function Extenso(ByVal Valor As Double, _
+Public Function Extenso(ByVal valor As Double, _
                         Optional ByVal MoedaPlural As String = "Reais", _
                         Optional ByVal MoedaSingular As String = "Real") As String
     Dim StrValor As String, Negativo As Boolean
@@ -2045,9 +2045,9 @@ Public Function Extenso(ByVal Valor As Double, _
     Dim Dezenas, Centenas, PotenciasSingular
     Dim PotenciasPlural
 
-    Negativo = (Valor < 0)
-    Valor = Abs(CDec(Valor))
-    If Valor Then
+    Negativo = (valor < 0)
+    valor = Abs(CDec(valor))
+    If valor Then
         Unidades = Array(vbNullString, "Um", "Dois", _
                          "Três", "Quatro", "Cinco", _
                          "Seis", "Sete", "Oito", "Nove", _
@@ -2070,7 +2070,7 @@ Public Function Extenso(ByVal Valor As Double, _
                                 " Milhões", " Bilhões", _
                                 " Trilhões", " Quatrilhões")
 
-        StrValor = Left(Format(Valor, String(18, "0") & _
+        StrValor = Left(Format(valor, String(18, "0") & _
                                ".000"), 18)
         For Posicao = 1 To 18 Step 3
             Parcial = Val(Mid(StrValor, Posicao, 3))
@@ -2117,13 +2117,13 @@ Public Function Extenso(ByVal Valor As Double, _
             If Negativo Then
                 Extenso = "Menos " & Extenso
             End If
-            If Int(Valor) = 1 Then
+            If Int(valor) = 1 Then
                 Extenso = Extenso & " " & MoedaSingular
             Else
                 Extenso = Extenso & " " & MoedaPlural
             End If
         End If
-        Parcial = Int((Valor - Int(Valor)) * _
+        Parcial = Int((valor - Int(valor)) * _
                       100 + 0.1)
         If Parcial Then
             buf = Extenso(Parcial, "Centavos", _
@@ -2136,19 +2136,19 @@ Public Function Extenso(ByVal Valor As Double, _
     End If
 End Function
 
-Public Function Txt2Lin(ByVal cTexto As String, Optional ByVal nCOL As Integer = 80) As Variant
+Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer = 80) As Variant
     Dim nLIN, X As Integer
     Dim aRETU As Variant
-    cTexto = FixStr(cTexto)
+    cTEXTO = FixStr(cTEXTO)
     If nCOL < 1 Then nCOL = 80                   'Evita Erros Divisao
-    nLIN = Int(Len(cTexto) / nCOL)
-    If nLIN * nCOL = Len(cTexto) Then            ''Bate com o Multiplo
+    nLIN = Int(Len(cTEXTO) / nCOL)
+    If nLIN * nCOL = Len(cTEXTO) Then            ''Bate com o Multiplo
     Else
         nLIN = nLIN + 1                          ''Soma mais um pois e necesario
     End If
     ReDim aRETU(nLIN)
     For X = 1 To nLIN
-        aRETU(X - 1) = Mid(cTexto, ((X - 1) * nCOL) + 1, nCOL)
+        aRETU(X - 1) = Mid(cTEXTO, ((X - 1) * nCOL) + 1, nCOL)
     Next X
     Txt2Lin = aRETU
     eRETU01 = nLIN
@@ -2247,7 +2247,7 @@ Public Sub OpenUrl(ByVal strURL As String)
     ShellExecute 0, "Open", strURL, 0&, 0&, SW_SHOWNORMAL
 End Sub
 Public Function txttohtml(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "")
-    Dim nORIGEM, nDESTINO, STRBUFFER, CLINHA
+    Dim nORIGEM, nDESTINO, STRBUFFER, cLINHA
     If Not FileExist(cORIGEM, True) Then
         Exit Function
     End If
@@ -2278,9 +2278,9 @@ Public Function txttohtml(ByVal cORIGEM As String, Optional ByVal cDESTINO As St
     Print #nDESTINO, "<body>" & Chr(13) & Chr(10)
     Do While Not EOF(nORIGEM)
         Input #nORIGEM, STRBUFFER
-        CLINHA = STRBUFFER
-        CLINHA = str2html(CLINHA)
-        Print #nDESTINO, CLINHA & "<BR>"
+        cLINHA = STRBUFFER
+        cLINHA = str2html(cLINHA)
+        Print #nDESTINO, cLINHA & "<BR>"
     Loop
     Print #nDESTINO, "</body>" & Chr(13) & Chr(10) & "</html>" & Chr(13) & Chr(10)
     Close nORIGEM
@@ -2288,7 +2288,7 @@ Public Function txttohtml(ByVal cORIGEM As String, Optional ByVal cDESTINO As St
 End Function
 
 Public Function txttoRTF(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "")
-    Dim nORIGEM, nDESTINO, STRBUFFER, CLINHA
+    Dim nORIGEM, nDESTINO, STRBUFFER, cLINHA
     If Not FileExist(cORIGEM, True) Then
         Exit Function
     End If
@@ -2307,8 +2307,8 @@ Public Function txttoRTF(ByVal cORIGEM As String, Optional ByVal cDESTINO As Str
     Print #nDESTINO, "Arial;}}\viewkind4\uc1\pard\f0\fs20 "
     Do While Not EOF(nORIGEM)
         Input #nORIGEM, STRBUFFER
-        CLINHA = STRBUFFER
-        Print #nDESTINO, CLINHA & "\par" & Chr(13)
+        cLINHA = STRBUFFER
+        Print #nDESTINO, cLINHA & "\par" & Chr(13)
     Loop
     Print #nDESTINO, "\par}"
     Close nORIGEM
@@ -2328,22 +2328,22 @@ Public Function HTMLToCharCodes(ByVal iString As String) As String
         HTMLToCharCodes = .selectSingleNode("p").nodeTypedValue
     End With
 End Function
-Public Function str2html(ByVal cTexto As String, Optional ByVal lAnsi As Boolean = False) As String
+Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean = False) As String
     If lAnsi Then
-       Convert2ansi (cTexto)
+       Convert2ansi (cTEXTO)
     End If
-    cTexto = CharCodesToHTML(cTexto)
-    str2html = cTexto
+    cTEXTO = CharCodesToHTML(cTEXTO)
+    str2html = cTEXTO
 End Function
-Function FileText(ByVal filename As String) As String
-    Dim handle As Integer
-    handle = FreeFile
-    Open filename$ For Input As #handle
-    FileText = Input$(LOF(handle), handle)
-    Close #handle
+Function FileText(ByVal FileName As String) As String
+    Dim Handle As Integer
+    Handle = FreeFile
+    Open FileName$ For Input As #Handle
+    FileText = Input$(LOF(Handle), Handle)
+    Close #Handle
 End Function
-Public Function Html2Str(ByVal cTexto As String) As String
-    Html2Str = HtmlToText(cTexto) 'HTMLToCharCodes(cTexto)
+Public Function Html2Str(ByVal cTEXTO As String) As String
+    Html2Str = HtmlToText(cTEXTO) 'HTMLToCharCodes(cTexto)
 End Function
 Public Function HtmlToText(sHTML) As String
   Dim oDoc As HTMLDocument
@@ -2561,5 +2561,46 @@ Private Sub TimeOutMB(hWnd As Long, uMsg As Long, idEvent As Long, dwTime As Lon
     SendMessage FindWindow(vbNullString, CurMBTitle), WM_CLOSE, 0&, 0&
  
 End Sub
+Function CheckRegEx(texto As String, padrao As String)
+
+Dim objRegExp As RegExp
+Dim objMatch As Match
+Dim colMatch As MatchCollection
+
+Dim valor As String
+
+'cria um objeto expressão regular
+Set objRegExp = New RegExp
+
+'define o padrão - Pattern
+objRegExp.Pattern = padrao
+
+'define IgnoreCase
+objRegExp.IgnoreCase = True
+
+'define a propriedade global
+objRegExp.Global = True
+
+'verifica se a string pode ser comparada
+CheckRegEx = False
+If (objRegExp.Test(texto) = True) Then
+   CheckRegEx = True
+  
+   'obtem as coincidencias
+  '' Set colMatch = objRegExp.Execute(texto)   'executa a busca
+   
+
+   'For Each objMatch In colMatch
+   ''   valor = valor & " padrao encontrado na posição "
+   ''   valor = valor & objMatch.FirstIndex & ". o valor é '"
+   ''   valor = valor & objMatch.Value & " '." & vbCrLf
+   'Next
+Else
+    ' valor = "Comparação falhou !"
+End If
+
+        
+
+End Function
 
 

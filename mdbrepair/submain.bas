@@ -28,41 +28,6 @@ Private Declare Function FindExecutable Lib "shell32.dll" Alias _
         "FindExecutableA" (ByVal lpFile As String, ByVal lpDirectory As _
         String, ByVal lpResult As String) As Long
         
-'Public Sub Buy(frm As Form, i As Integer)
-'Dim lngRet As Long
-'Dim fileName As String
-'Dim Dummy As String
-'Dim BrowserExec As String * 255
-'Dim FileNumber As Integer
-'Dim strURL As String
-'On Error Resume Next
-'If i = 1 Then
-'   strURL = "https://www.regnow.com/softsell/nph-softsell.cgi?item=4459-57"
-'Else
-'   strURL = "https://www.regnow.com/softsell/nph-softsell.cgi?item=4459-58"
-'End If
-'Create a known, temporary HTML file
-'BrowserExec = Space(255)
-'fileName = "C:\temphtm.HTM"
-'FileNumber = FreeFile                    'Get unused file number
-'Open fileName For Output As #FileNumber  'Create temp HTML file
-'Write #FileNumber, "<HTML> <\HTML>"      'Output text
-'Close #FileNumber                        'Close file
-'Then find the application associated with it
-'lngRet = FindExecutable(fileName, Dummy, BrowserExec)
-'BrowserExec = Trim(BrowserExec)
-'If an application is found, launch it!
-'If lngRet <= 32 Or IsEmpty(BrowserExec) Then 'Error
-'   MsgBox "Unable to find associated browser.", vbExclamation, App.Title
-'Else
-'   lngRet = ShellExecute(frm.hwnd, "open", BrowserExec, strURL, Dummy, 1)
-'   If lngRet <= 32 Then        'Error
-'      MsgBox "Unable to open web page.", vbExclamation, App.Title
-'   End If
-'End If
-'DeleteFile Kill fileName                   'delete temp HTML file
-'End Sub
-
 Sub Main()
         
     DAO.DBEngine.SetOption dbExclusiveAsyncDelay, 2000
@@ -86,11 +51,11 @@ End Sub
 
 Public Function TrimNull(ByVal sTxt As String) As String
 
-    Dim arr() As String
+    Dim Arr() As String
    
-    arr() = Split(sTxt, Chr$(0))
-    If UBound(arr) >= 0 Then
-        TrimNull = arr(0)
+    Arr() = Split(sTxt, Chr$(0))
+    If UBound(Arr) >= 0 Then
+        TrimNull = Arr(0)
     Else
         TrimNull = sTxt
     End If
