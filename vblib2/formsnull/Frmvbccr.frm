@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{3E5D9624-07F7-4D22-90F8-1314327F7BAC}#1.0#0"; "VBFLXGRD15.OCX"
+Object = "{3E5D9624-07F7-4D22-90F8-1314327F7BAC}#1.0#0"; "VBFLXGRD16.OCX"
 Begin VB.Form Frmvbccr 
    Caption         =   "Form1"
    ClientHeight    =   7335
@@ -283,7 +283,7 @@ Begin VB.Form Frmvbccr
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VBFLXGRD15.VBFlexGrid VBFlexGrid1 
+   Begin VBFLXGRD16.VBFlexGrid VBFlexGrid1 
       Height          =   6855
       Left            =   7560
       TabIndex        =   19
