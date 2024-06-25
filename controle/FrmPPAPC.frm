@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Begin VB.Form FrmPPAPC 
    Caption         =   "PPAPC"
    ClientHeight    =   3015
@@ -12,7 +12,7 @@ Begin VB.Form FrmPPAPC
    ScaleHeight     =   3015
    ScaleWidth      =   9360
    StartUpPosition =   2  'CenterScreen
-   Begin VBCCR17.DTPicker DTPicker1 
+   Begin vbccr18.DTPicker DTPicker1 
       Height          =   375
       Left            =   120
       TabIndex        =   16
@@ -138,7 +138,7 @@ Begin VB.Form FrmPPAPC
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VBCCR17.DTPicker DTPicker2 
+   Begin vbccr18.DTPicker DTPicker2 
       Height          =   375
       Left            =   2880
       TabIndex        =   17
@@ -150,7 +150,7 @@ Begin VB.Form FrmPPAPC
       CheckBox        =   -1  'True
       AllowUserInput  =   -1  'True
    End
-   Begin VBCCR17.DTPicker DTPicker3 
+   Begin vbccr18.DTPicker DTPicker3 
       Height          =   375
       Left            =   4800
       TabIndex        =   18

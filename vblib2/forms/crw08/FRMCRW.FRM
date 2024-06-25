@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "crystl32.ocx"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr18.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form FrmCrw 
    Caption         =   "Crystal Report Relatorio"
@@ -23,7 +23,7 @@ Begin VB.Form FrmCrw
       LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
       AmbientBb       =   $"FRMCRW.frx":058A
    End
-   Begin VBCCR17.RichTextBox RichTextBox1 
+   Begin vbccr18.RichTextBox RichTextBox1 
       Height          =   375
       Left            =   10200
       TabIndex        =   31

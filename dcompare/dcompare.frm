@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form dCompare 
    Caption         =   "Database Comparador/Corretor"
    ClientHeight    =   5805
@@ -12,7 +12,7 @@ Begin VB.Form dCompare
    ScaleHeight     =   5805
    ScaleWidth      =   8955
    StartUpPosition =   3  'Windows Default
-   Begin VBCCR17.TextBoxW Text3 
+   Begin vbccr18.TextBoxW Text3 
       Height          =   2895
       Left            =   120
       TabIndex        =   10
@@ -25,7 +25,7 @@ Begin VB.Form dCompare
       MultiLine       =   -1  'True
       ScrollBars      =   2
    End
-   Begin VBCCR17.TextBoxW Text2 
+   Begin vbccr18.TextBoxW Text2 
       Height          =   375
       Left            =   960
       TabIndex        =   9
@@ -34,7 +34,7 @@ Begin VB.Form dCompare
       _ExtentX        =   13150
       _ExtentY        =   661
    End
-   Begin VBCCR17.TextBoxW Text1 
+   Begin vbccr18.TextBoxW Text1 
       Height          =   375
       Left            =   960
       TabIndex        =   8

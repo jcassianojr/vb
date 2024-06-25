@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
 Begin VB.Form FrmFemeaPad 
    Caption         =   "Femea Padrao"
@@ -184,7 +184,7 @@ Begin VB.Form FrmFemeaPad
       Tab(3).Control(1)=   "Toolbar1"
       Tab(3).Control(1).Enabled=   0   'False
       Tab(3).ControlCount=   2
-      Begin VBCCR17.ProgressBar barra 
+      Begin vbccr18.ProgressBar barra 
          Height          =   255
          Left            =   8400
          Top             =   3120

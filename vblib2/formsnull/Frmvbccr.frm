@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{3E5D9624-07F7-4D22-90F8-1314327F7BAC}#1.0#0"; "VBFLXGRD16.OCX"
 Begin VB.Form Frmvbccr 
@@ -12,7 +12,7 @@ Begin VB.Form Frmvbccr
    ScaleHeight     =   7335
    ScaleWidth      =   15675
    StartUpPosition =   3  'Windows Default
-   Begin VBCCR17.SpinBox SpinBox1 
+   Begin vbccr18.SpinBox SpinBox1 
       Height          =   495
       Left            =   6840
       TabIndex        =   32
@@ -21,7 +21,7 @@ Begin VB.Form Frmvbccr
       _ExtentX        =   1085
       _ExtentY        =   873
    End
-   Begin VBCCR17.TabStrip TabStrip1 
+   Begin vbccr18.TabStrip TabStrip1 
       Height          =   615
       Left            =   6600
       TabIndex        =   31
@@ -31,7 +31,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   1085
       InitTabs        =   "Frmvbccr.frx":0000
    End
-   Begin VBCCR17.StatusBar StatusBar1 
+   Begin vbccr18.StatusBar StatusBar1 
       Align           =   2  'Align Bottom
       Height          =   375
       Left            =   0
@@ -41,13 +41,13 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   661
       InitPanels      =   "Frmvbccr.frx":0054
    End
-   Begin VBCCR17.SysInfo SysInfo1 
+   Begin vbccr18.SysInfo SysInfo1 
       Left            =   6600
       Top             =   4800
       _ExtentX        =   1005
       _ExtentY        =   1005
    End
-   Begin VBCCR17.TreeView TreeView1 
+   Begin vbccr18.TreeView TreeView1 
       Height          =   975
       Left            =   5400
       TabIndex        =   30
@@ -292,7 +292,7 @@ Begin VB.Form Frmvbccr
       _ExtentX        =   2355
       _ExtentY        =   12091
    End
-   Begin VBCCR17.ToolBar ToolBar1 
+   Begin vbccr18.ToolBar ToolBar1 
       Align           =   3  'Align Left
       Height          =   6960
       Left            =   0
@@ -305,7 +305,7 @@ Begin VB.Form Frmvbccr
       ButtonWidth     =   33
       InitButtons     =   "Frmvbccr.frx":00E4
    End
-   Begin VBCCR17.FontCombo FontCombo1 
+   Begin vbccr18.FontCombo FontCombo1 
       Height          =   315
       Left            =   840
       TabIndex        =   18
@@ -315,7 +315,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   556
       Text            =   "Frmvbccr.frx":0104
    End
-   Begin VBCCR17.CommandLink CommandLink1 
+   Begin vbccr18.CommandLink CommandLink1 
       Height          =   615
       Left            =   4080
       TabIndex        =   17
@@ -325,7 +325,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   1085
       Caption         =   "Frmvbccr.frx":0138
    End
-   Begin VBCCR17.LinkLabel LinkLabel1 
+   Begin vbccr18.LinkLabel LinkLabel1 
       Height          =   495
       Left            =   2640
       TabIndex        =   16
@@ -335,7 +335,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   873
       Caption         =   "Frmvbccr.frx":0170
    End
-   Begin VBCCR17.Animation Animation1 
+   Begin vbccr18.Animation Animation1 
       Height          =   615
       Left            =   720
       TabIndex        =   15
@@ -344,7 +344,7 @@ Begin VB.Form Frmvbccr
       _ExtentX        =   3201
       _ExtentY        =   1085
    End
-   Begin VBCCR17.CheckBoxW CheckBoxW1 
+   Begin vbccr18.CheckBoxW CheckBoxW1 
       Height          =   495
       Left            =   840
       TabIndex        =   14
@@ -354,7 +354,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   873
       Caption         =   "CheckBoxW1"
    End
-   Begin VBCCR17.ComboBoxW ComboBoxW1 
+   Begin vbccr18.ComboBoxW ComboBoxW1 
       Height          =   315
       Left            =   720
       TabIndex        =   13
@@ -364,7 +364,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   556
       Text            =   "Frmvbccr.frx":01B2
    End
-   Begin VBCCR17.CommandButtonW CommandButtonW1 
+   Begin vbccr18.CommandButtonW CommandButtonW1 
       Height          =   735
       Left            =   4800
       TabIndex        =   12
@@ -374,7 +374,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   1296
       Caption         =   "CommandButtonW1"
    End
-   Begin VBCCR17.CoolBar CoolBar1 
+   Begin vbccr18.CoolBar CoolBar1 
       Height          =   810
       Left            =   2640
       Top             =   2880
@@ -383,7 +383,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   1429
       InitBands       =   "Frmvbccr.frx":01E6
    End
-   Begin VBCCR17.DTPicker DTPicker1 
+   Begin vbccr18.DTPicker DTPicker1 
       Height          =   375
       Left            =   720
       TabIndex        =   11
@@ -393,7 +393,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   661
       Value           =   43455
    End
-   Begin VBCCR17.FrameW FrameW1 
+   Begin vbccr18.FrameW FrameW1 
       Height          =   615
       Left            =   840
       TabIndex        =   33
@@ -403,7 +403,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   1085
       Caption         =   "FrameW1"
    End
-   Begin VBCCR17.HotKey HotKey1 
+   Begin vbccr18.HotKey HotKey1 
       Height          =   615
       Left            =   5520
       TabIndex        =   10
@@ -412,7 +412,7 @@ Begin VB.Form Frmvbccr
       _ExtentX        =   2355
       _ExtentY        =   1085
    End
-   Begin VBCCR17.ImageCombo ImageCombo1 
+   Begin vbccr18.ImageCombo ImageCombo1 
       Height          =   330
       Left            =   2520
       TabIndex        =   9
@@ -422,14 +422,14 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   582
       Text            =   "Frmvbccr.frx":03BA
    End
-   Begin VBCCR17.ImageList ImageList1 
+   Begin vbccr18.ImageList ImageList1 
       Left            =   5760
       Top             =   4680
       _ExtentX        =   1005
       _ExtentY        =   1005
       InitListImages  =   "Frmvbccr.frx":03F0
    End
-   Begin VBCCR17.IPAddress IPAddress1 
+   Begin vbccr18.IPAddress IPAddress1 
       Height          =   495
       Left            =   720
       TabIndex        =   8
@@ -438,7 +438,7 @@ Begin VB.Form Frmvbccr
       _ExtentX        =   2778
       _ExtentY        =   873
    End
-   Begin VBCCR17.ListBoxW ListBoxW1 
+   Begin vbccr18.ListBoxW ListBoxW1 
       Height          =   840
       Left            =   5040
       TabIndex        =   6
@@ -449,7 +449,7 @@ Begin VB.Form Frmvbccr
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
    End
-   Begin VBCCR17.ListView ListView1 
+   Begin vbccr18.ListView ListView1 
       Height          =   855
       Left            =   3240
       TabIndex        =   5
@@ -458,7 +458,7 @@ Begin VB.Form Frmvbccr
       _ExtentX        =   2566
       _ExtentY        =   1508
    End
-   Begin VBCCR17.MCIWnd MCIWnd1 
+   Begin vbccr18.MCIWnd MCIWnd1 
       Height          =   735
       Left            =   720
       TabIndex        =   4
@@ -467,7 +467,7 @@ Begin VB.Form Frmvbccr
       _ExtentX        =   4048
       _ExtentY        =   1296
    End
-   Begin VBCCR17.MonthView MonthView1 
+   Begin vbccr18.MonthView MonthView1 
       Height          =   2325
       Left            =   2640
       TabIndex        =   3
@@ -477,7 +477,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   4075
       Value           =   43455
    End
-   Begin VBCCR17.OptionButtonW OptionButtonW1 
+   Begin vbccr18.OptionButtonW OptionButtonW1 
       Height          =   375
       Left            =   5760
       TabIndex        =   2
@@ -487,7 +487,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   661
       Caption         =   "OptionButtonW1"
    End
-   Begin VBCCR17.Pager Pager1 
+   Begin vbccr18.Pager Pager1 
       Height          =   615
       Left            =   6840
       Top             =   600
@@ -495,7 +495,7 @@ Begin VB.Form Frmvbccr
       _ExtentX        =   1085
       _ExtentY        =   1085
    End
-   Begin VBCCR17.ProgressBar ProgressBar1 
+   Begin vbccr18.ProgressBar ProgressBar1 
       Height          =   255
       Left            =   3720
       Top             =   240
@@ -504,7 +504,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   450
       Step            =   10
    End
-   Begin VBCCR17.RichTextBox RichTextBox1 
+   Begin vbccr18.RichTextBox RichTextBox1 
       Height          =   975
       Left            =   2160
       TabIndex        =   1
@@ -516,7 +516,7 @@ Begin VB.Form Frmvbccr
       Text            =   "Frmvbccr.frx":0410
       TextRTF         =   "Frmvbccr.frx":0448
    End
-   Begin VBCCR17.Slider Slider1 
+   Begin vbccr18.Slider Slider1 
       Height          =   615
       Left            =   1080
       TabIndex        =   0
@@ -525,7 +525,7 @@ Begin VB.Form Frmvbccr
       _ExtentX        =   1720
       _ExtentY        =   1085
    End
-   Begin VBCCR17.UpDown UpDown1 
+   Begin vbccr18.UpDown UpDown1 
       Height          =   375
       Left            =   5640
       Top             =   5400
@@ -534,7 +534,7 @@ Begin VB.Form Frmvbccr
       _ExtentY        =   661
       Value           =   1
    End
-   Begin VBCCR17.LabelW LabelW1 
+   Begin vbccr18.LabelW LabelW1 
       Height          =   375
       Left            =   3840
       TabIndex        =   7

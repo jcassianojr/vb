@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr18.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form frmUSER 
    Caption         =   "Cadastro de Usuário"
@@ -110,7 +110,7 @@ Begin VB.Form frmUSER
          Top             =   6360
          Width           =   9615
       End
-      Begin VBCCR17.ProgressBar Barra 
+      Begin vbccr18.ProgressBar Barra 
          Height          =   375
          Left            =   5520
          Top             =   4680
@@ -118,7 +118,7 @@ Begin VB.Form frmUSER
          _ExtentX        =   5741
          _ExtentY        =   661
       End
-      Begin VBCCR17.DTPicker DTPicker2 
+      Begin vbccr18.DTPicker DTPicker2 
          Height          =   375
          Left            =   240
          TabIndex        =   55
@@ -128,7 +128,7 @@ Begin VB.Form frmUSER
          _ExtentY        =   661
          Value           =   44285
       End
-      Begin VBCCR17.DTPicker DTPicker1 
+      Begin vbccr18.DTPicker DTPicker1 
          Height          =   375
          Left            =   1440
          TabIndex        =   54
@@ -697,7 +697,7 @@ Begin VB.Form frmUSER
             Top             =   120
             Width           =   1635
          End
-         Begin VBCCR17.DTPicker DTPicker3 
+         Begin vbccr18.DTPicker DTPicker3 
             Height          =   375
             Left            =   1320
             TabIndex        =   56
@@ -710,7 +710,7 @@ Begin VB.Form frmUSER
             CheckBox        =   -1  'True
             AllowUserInput  =   -1  'True
          End
-         Begin VBCCR17.DTPicker DTPicker4 
+         Begin vbccr18.DTPicker DTPicker4 
             Height          =   375
             Left            =   3600
             TabIndex        =   57

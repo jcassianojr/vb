@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Begin VB.Form Frmexpjpg 
    Caption         =   "Exportando "
    ClientHeight    =   5955
@@ -23,7 +23,7 @@ Begin VB.Form Frmexpjpg
       Visible         =   0   'False
       Width           =   1575
    End
-   Begin VBCCR17.SpinBox QtdeDigitos 
+   Begin vbccr18.SpinBox QtdeDigitos 
       Height          =   375
       Left            =   3000
       TabIndex        =   6
@@ -36,7 +36,7 @@ Begin VB.Form Frmexpjpg
       Value           =   8
       TextAlignment   =   1
    End
-   Begin VBCCR17.FrameW FrameW1 
+   Begin vbccr18.FrameW FrameW1 
       Height          =   2055
       Left            =   240
       TabIndex        =   12
@@ -53,7 +53,7 @@ Begin VB.Form Frmexpjpg
          Top             =   1320
          Width           =   2295
       End
-      Begin VBCCR17.CheckBoxW TiraCaracter 
+      Begin vbccr18.CheckBoxW TiraCaracter 
          Height          =   375
          Left            =   240
          TabIndex        =   7
@@ -64,7 +64,7 @@ Begin VB.Form Frmexpjpg
          Value           =   1
          Caption         =   "Tira Caracters Pontuacao"
       End
-      Begin VBCCR17.OptionButtonW PorNumero 
+      Begin vbccr18.OptionButtonW PorNumero 
          Height          =   375
          Left            =   1560
          TabIndex        =   5
@@ -74,7 +74,7 @@ Begin VB.Form Frmexpjpg
          _ExtentY        =   661
          Caption         =   "Numero"
       End
-      Begin VBCCR17.OptionButtonW PorCodigo 
+      Begin vbccr18.OptionButtonW PorCodigo 
          Height          =   375
          Left            =   240
          TabIndex        =   4

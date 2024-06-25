@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr18.ocx"
 Begin VB.Form frmSENHA 
    Caption         =   "Acesso ao Sistema"
    ClientHeight    =   2220
@@ -12,7 +12,7 @@ Begin VB.Form frmSENHA
    ScaleHeight     =   2220
    ScaleMode       =   0  'User
    ScaleWidth      =   4830
-   Begin VBCCR17.ProgressBar barra 
+   Begin vbccr18.ProgressBar barra 
       Height          =   255
       Left            =   840
       Top             =   1800
@@ -94,7 +94,7 @@ Begin VB.Form frmSENHA
       Top             =   60
       Width           =   1695
    End
-   Begin VBCCR17.SpinBox txtempresa 
+   Begin vbccr18.SpinBox txtempresa 
       Height          =   495
       Left            =   840
       TabIndex        =   8
@@ -116,7 +116,7 @@ Begin VB.Form frmSENHA
       Value           =   1
       AllowOnlyNumbers=   -1  'True
    End
-   Begin VBCCR17.SpinBox mes 
+   Begin vbccr18.SpinBox mes 
       Height          =   495
       Left            =   2160
       TabIndex        =   9
@@ -137,7 +137,7 @@ Begin VB.Form frmSENHA
       Max             =   12
       Value           =   1
    End
-   Begin VBCCR17.SpinBox ano 
+   Begin vbccr18.SpinBox ano 
       Height          =   495
       Left            =   3360
       TabIndex        =   10

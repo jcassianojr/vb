@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form frmproti 
    Caption         =   "Controle de Prototipos"
@@ -262,7 +262,7 @@ Begin VB.Form frmproti
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VBCCR17.DTPicker DTPicker1 
+   Begin vbccr18.DTPicker DTPicker1 
       Height          =   375
       Left            =   1440
       TabIndex        =   24

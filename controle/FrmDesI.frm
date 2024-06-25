@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Begin VB.Form FrmDesI 
    Caption         =   "Controle de Desenhos"
    ClientHeight    =   3735
@@ -12,7 +12,7 @@ Begin VB.Form FrmDesI
    ScaleHeight     =   3735
    ScaleWidth      =   8610
    StartUpPosition =   2  'CenterScreen
-   Begin VBCCR17.DTPicker DTPicker2 
+   Begin vbccr18.DTPicker DTPicker2 
       Height          =   375
       Left            =   4560
       TabIndex        =   6
@@ -24,7 +24,7 @@ Begin VB.Form FrmDesI
       CheckBox        =   -1  'True
       AllowUserInput  =   -1  'True
    End
-   Begin VBCCR17.DTPicker DTPicker1 
+   Begin vbccr18.DTPicker DTPicker1 
       Height          =   375
       Left            =   1320
       TabIndex        =   4

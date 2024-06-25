@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Begin VB.Form NewSeq 
    Caption         =   "Incluindo Nova Sequenica"
    ClientHeight    =   1815
@@ -53,7 +53,7 @@ Begin VB.Form NewSeq
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VBCCR17.SpinBox seq 
+   Begin vbccr18.SpinBox seq 
       Height          =   495
       Left            =   1440
       TabIndex        =   7
@@ -75,7 +75,7 @@ Begin VB.Form NewSeq
       Value           =   10
       Increment       =   5
    End
-   Begin VBCCR17.SpinBox Ssq 
+   Begin vbccr18.SpinBox Ssq 
       Height          =   495
       Left            =   2400
       TabIndex        =   8
@@ -97,7 +97,7 @@ Begin VB.Form NewSeq
       Value           =   10
       Increment       =   5
    End
-   Begin VBCCR17.SpinBox item 
+   Begin vbccr18.SpinBox item 
       Height          =   495
       Left            =   3360
       TabIndex        =   9

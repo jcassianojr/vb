@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Begin VB.Form frmInsertDate 
    Caption         =   "Inserir Datas"
    ClientHeight    =   3180
@@ -12,7 +12,7 @@ Begin VB.Form frmInsertDate
    ScaleHeight     =   3180
    ScaleWidth      =   7215
    StartUpPosition =   2  'CenterScreen
-   Begin VBCCR17.ListBoxW lstDates 
+   Begin vbccr18.ListBoxW lstDates 
       Height          =   2205
       Left            =   3000
       TabIndex        =   4
@@ -23,7 +23,7 @@ Begin VB.Form frmInsertDate
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
    End
-   Begin VBCCR17.MonthView MonthView1 
+   Begin vbccr18.MonthView MonthView1 
       Height          =   2325
       Left            =   120
       TabIndex        =   3

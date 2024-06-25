@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Begin VB.Form frmcomp 
    Caption         =   "Competencia"
    ClientHeight    =   3210
@@ -12,7 +12,7 @@ Begin VB.Form frmcomp
    ScaleHeight     =   3210
    ScaleWidth      =   5100
    StartUpPosition =   3  'Windows Default
-   Begin VBCCR17.SpinBox mes 
+   Begin vbccr18.SpinBox mes 
       Height          =   615
       Left            =   1560
       TabIndex        =   4
@@ -33,7 +33,7 @@ Begin VB.Form frmcomp
       Max             =   12
       Value           =   1
    End
-   Begin VBCCR17.SpinBox ano 
+   Begin vbccr18.SpinBox ano 
       Height          =   615
       Left            =   1320
       TabIndex        =   5
@@ -55,7 +55,7 @@ Begin VB.Form frmcomp
       Value           =   1950
       ThousandsSeparator=   0   'False
    End
-   Begin VBCCR17.SpinBox empresa 
+   Begin vbccr18.SpinBox empresa 
       Height          =   615
       Left            =   1560
       TabIndex        =   6
@@ -77,7 +77,7 @@ Begin VB.Form frmcomp
       Value           =   1
       AllowOnlyNumbers=   -1  'True
    End
-   Begin VBCCR17.SpinBox quinzena 
+   Begin vbccr18.SpinBox quinzena 
       Height          =   615
       Left            =   1560
       TabIndex        =   7

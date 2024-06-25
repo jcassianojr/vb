@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
 Begin VB.Form frmPCX 
    BorderStyle     =   3  'Fixed Dialog
@@ -825,7 +825,7 @@ Begin VB.Form frmPCX
       Tab(22).Control(6)=   "lblLabels(20)"
       Tab(22).Control(7)=   "lblLabels(35)"
       Tab(22).ControlCount=   8
-      Begin VBCCR17.DTPicker PCDinigp12 
+      Begin vbccr18.DTPicker PCDinigp12 
          Height          =   375
          Left            =   1320
          TabIndex        =   404
@@ -837,7 +837,7 @@ Begin VB.Form frmPCX
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
       End
-      Begin VBCCR17.DTPicker PCDinipre 
+      Begin vbccr18.DTPicker PCDinipre 
          Height          =   375
          Left            =   -73680
          TabIndex        =   403
@@ -847,7 +847,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   661
          Value           =   44285
       End
-      Begin VBCCR17.DTPicker PCDinipc 
+      Begin vbccr18.DTPicker PCDinipc 
          Height          =   375
          Left            =   -73680
          TabIndex        =   402

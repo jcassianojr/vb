@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
 Begin VB.Form frmFemeaApu 
    Caption         =   "Apuracao Femea"
@@ -14,7 +14,7 @@ Begin VB.Form frmFemeaApu
    ScaleHeight     =   6630
    ScaleWidth      =   9615
    StartUpPosition =   2  'CenterScreen
-   Begin VBCCR17.DTPicker DTPicker2 
+   Begin vbccr18.DTPicker DTPicker2 
       Height          =   375
       Left            =   4200
       TabIndex        =   47
@@ -25,7 +25,7 @@ Begin VB.Form frmFemeaApu
       Value           =   44285
       AllowUserInput  =   -1  'True
    End
-   Begin VBCCR17.DTPicker DTPicker1 
+   Begin vbccr18.DTPicker DTPicker1 
       Height          =   375
       Left            =   2520
       TabIndex        =   46
@@ -36,7 +36,7 @@ Begin VB.Form frmFemeaApu
       Value           =   44285
       AllowUserInput  =   -1  'True
    End
-   Begin VBCCR17.ProgressBar barra 
+   Begin vbccr18.ProgressBar barra 
       Height          =   255
       Left            =   5760
       Top             =   960
@@ -602,7 +602,7 @@ Begin VB.Form frmFemeaApu
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VBCCR17.SpinBox mes 
+   Begin vbccr18.SpinBox mes 
       Height          =   495
       Left            =   120
       TabIndex        =   39
@@ -623,7 +623,7 @@ Begin VB.Form frmFemeaApu
       Max             =   12
       Value           =   1
    End
-   Begin VBCCR17.SpinBox ano 
+   Begin vbccr18.SpinBox ano 
       Height          =   495
       Left            =   1080
       TabIndex        =   40

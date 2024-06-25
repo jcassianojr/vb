@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Begin VB.Form frmBTN 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Botoes"
@@ -133,7 +133,7 @@ Begin VB.Form frmBTN
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VBCCR17.SpinBox indice 
+   Begin vbccr18.SpinBox indice 
       Height          =   495
       Left            =   3480
       TabIndex        =   15
@@ -154,7 +154,7 @@ Begin VB.Form frmBTN
       Max             =   999
       Value           =   1
    End
-   Begin VBCCR17.SpinBox icone 
+   Begin vbccr18.SpinBox icone 
       Height          =   495
       Left            =   4560
       TabIndex        =   16

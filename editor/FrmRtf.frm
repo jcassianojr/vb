@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr18.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form FrmRTf 
    Caption         =   "Editor Textos"
@@ -22,7 +22,7 @@ Begin VB.Form FrmRTf
       LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
       AmbientBb       =   $"FrmRtf.frx":058A
    End
-   Begin VBCCR17.RichTextBox RichTextbox1 
+   Begin vbccr18.RichTextBox RichTextbox1 
       Height          =   6015
       Left            =   0
       TabIndex        =   42
@@ -33,7 +33,7 @@ Begin VB.Form FrmRTf
       MultiLine       =   -1  'True
       TextRTF         =   "FrmRtf.frx":062A
    End
-   Begin VBCCR17.FontCombo FontCombo1 
+   Begin vbccr18.FontCombo FontCombo1 
       Height          =   315
       Left            =   2400
       TabIndex        =   41

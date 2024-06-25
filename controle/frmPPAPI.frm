@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Begin VB.Form frmPPAPI 
    Caption         =   "Itens PPAP"
    ClientHeight    =   3390
@@ -173,7 +173,7 @@ Begin VB.Form frmPPAPI
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VBCCR17.DTPicker DTPicker1 
+   Begin vbccr18.DTPicker DTPicker1 
       Height          =   375
       Left            =   1080
       TabIndex        =   20
@@ -185,7 +185,7 @@ Begin VB.Form frmPPAPI
       CheckBox        =   -1  'True
       AllowUserInput  =   -1  'True
    End
-   Begin VBCCR17.DTPicker DTPicker2 
+   Begin vbccr18.DTPicker DTPicker2 
       Height          =   375
       Left            =   3840
       TabIndex        =   21
@@ -197,7 +197,7 @@ Begin VB.Form frmPPAPI
       CheckBox        =   -1  'True
       AllowUserInput  =   -1  'True
    End
-   Begin VBCCR17.DTPicker DTPicker3 
+   Begin vbccr18.DTPicker DTPicker3 
       Height          =   375
       Left            =   6360
       TabIndex        =   22

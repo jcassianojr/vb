@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Begin VB.Form FrmImp3 
    Caption         =   "Importando Dados"
    ClientHeight    =   4590
@@ -139,7 +139,7 @@ Begin VB.Form FrmImp3
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VBCCR17.SpinBox mes 
+   Begin vbccr18.SpinBox mes 
       Height          =   615
       Left            =   2760
       TabIndex        =   14
@@ -163,7 +163,7 @@ Begin VB.Form FrmImp3
       Max             =   3
       Value           =   1
    End
-   Begin VBCCR17.SpinBox seq 
+   Begin vbccr18.SpinBox seq 
       Height          =   495
       Left            =   840
       TabIndex        =   15
@@ -185,7 +185,7 @@ Begin VB.Form FrmImp3
       Value           =   10
       Increment       =   5
    End
-   Begin VBCCR17.SpinBox Ssq 
+   Begin vbccr18.SpinBox Ssq 
       Height          =   495
       Left            =   2160
       TabIndex        =   16

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.2#0"; "vbccr18.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
 Begin VB.Form FrmTxl 
    Caption         =   "Gerador Relatorios Texto"
@@ -23,7 +23,7 @@ Begin VB.Form FrmTxl
       LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
       AmbientBb       =   $"FrmTxl.frx":058A
    End
-   Begin VBCCR17.RichTextBox RichTextBox1 
+   Begin vbccr18.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   9000
       TabIndex        =   33

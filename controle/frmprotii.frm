@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
 Begin VB.Form frmprotii 
    Caption         =   "Controle de Prototipos"
@@ -297,7 +297,7 @@ Begin VB.Form frmprotii
          _ExtentY        =   4683
          _Version        =   393216
       End
-      Begin VBCCR17.DTPicker DTPicker5 
+      Begin vbccr18.DTPicker DTPicker5 
          Height          =   375
          Left            =   -70920
          TabIndex        =   53
@@ -309,7 +309,7 @@ Begin VB.Form frmprotii
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
       End
-      Begin VBCCR17.DTPicker DTPicker6 
+      Begin vbccr18.DTPicker DTPicker6 
          Height          =   375
          Left            =   -68640
          TabIndex        =   54
@@ -321,7 +321,7 @@ Begin VB.Form frmprotii
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
       End
-      Begin VBCCR17.DTPicker DTPicker7 
+      Begin vbccr18.DTPicker DTPicker7 
          Height          =   375
          Left            =   -71280
          TabIndex        =   55
@@ -333,7 +333,7 @@ Begin VB.Form frmprotii
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
       End
-      Begin VBCCR17.DTPicker DTPicker8 
+      Begin vbccr18.DTPicker DTPicker8 
          Height          =   375
          Left            =   -68760
          TabIndex        =   56
@@ -622,7 +622,7 @@ Begin VB.Form frmprotii
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VBCCR17.DTPicker DTPicker3 
+   Begin vbccr18.DTPicker DTPicker3 
       Height          =   375
       Left            =   3720
       TabIndex        =   51
@@ -634,7 +634,7 @@ Begin VB.Form frmprotii
       CheckBox        =   -1  'True
       AllowUserInput  =   -1  'True
    End
-   Begin VBCCR17.DTPicker DTPicker4 
+   Begin vbccr18.DTPicker DTPicker4 
       Height          =   375
       Left            =   6240
       TabIndex        =   52

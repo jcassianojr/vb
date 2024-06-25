@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr17.ocx"
+Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form imgsin 
    Caption         =   "Sincronizar Arquivos de Imagens"
@@ -59,7 +59,7 @@ Begin VB.Form imgsin
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VBCCR17.SpinBox TxtEmpresa 
+   Begin vbccr18.SpinBox TxtEmpresa 
       Height          =   375
       Left            =   5040
       TabIndex        =   17
