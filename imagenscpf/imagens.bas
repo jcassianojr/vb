@@ -6,7 +6,7 @@ Sub Main()
     Cmdiniciar_Click
 End Sub
 Public Sub Cmdiniciar_Click()
-'DBCONNSTR = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=P:\NOVELL\ITAESBRA\PECAS\FMP04CPF.MDB;Mode=Share Deny None"
+'DBCONNSTR = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=d:\modelos\PECAS\FMP04CPF.MDB;Mode=Share Deny None"
 Dim OBJCONN As ADODB.Connection
 Dim OBJRSGLOB As ADODB.Recordset
 Dim strSQL As String
@@ -29,8 +29,8 @@ Set OBJRSGLOB = New ADODB.Recordset
 
 
 cCAMPO = "IMAGEM"
-DBCONNSTR = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=P:\NOVELL\ITAESBRA\PECAS\FMP04CPF.MDB;Mode=Share Deny None"
-cCAMJPG = "p:\novell\itaesbra\rh\fotoscpf\"
+DBCONNSTR = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=d:\modelos\PECAS\FMP04CPF.MDB;Mode=Share Deny None"
+cCAMJPG = "d:\modelos\rh\fotoscpf\"
 OBJCONN.Open DBCONNSTR
 strSQL = "SELECT * FROM imagens where numero>0"
 OBJRSGLOB.Open strSQL, OBJCONN, adOpenForwardOnly, adLockOptimistic
@@ -66,7 +66,7 @@ End If
 
 End Sub
 Public Function StrToArray(ByVal cGRUPO As String) As Variant
-Dim x, nLEN As Integer
+Dim X, nLEN As Integer
 Dim aUSO As Variant
 Dim cCHAR, eCNV As String
    Select Case cGRUPO
@@ -111,25 +111,25 @@ Dim cCHAR, eCNV As String
 
 nLEN = Len(eCNV)
 ReDim aUSO(nLEN)
-For x = 1 To nLEN
-    cCHAR = Mid(eCNV, x, 1)
+For X = 1 To nLEN
+    cCHAR = Mid(eCNV, X, 1)
     Select Case cCHAR
            Case "ª"
-                aUSO(x - 1) = "a."
+                aUSO(X - 1) = "a."
 
          Case "º"
-                aUSO(x - 1) = "o."
+                aUSO(X - 1) = "o."
 
            Case Else
-                aUSO(x - 1) = cCHAR
+                aUSO(X - 1) = cCHAR
 
     End Select
-Next x
+Next X
 StrToArray = aUSO
 End Function
 
 Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
-Dim nLEN, nTEXTO, x, y As Integer
+Dim nLEN, nTEXTO, X, Y As Integer
 Dim aORI, aDES, aTEXTO As Variant
 If IsArray(eORI) Then
    aORI = eORI
@@ -141,18 +141,18 @@ End If
 aTEXTO = StrToArray(cTexto)
 nLEN = UBound(aORI)
 nTEXTO = UBound(aTEXTO)
-For y = 0 To nTEXTO
-   For x = 0 To nLEN
-       If aTEXTO(y) = aORI(x) Then ''Encerra Analise Para Evitar
-          aTEXTO(y) = aDES(x)       ''Loop de Troca
+For Y = 0 To nTEXTO
+   For X = 0 To nLEN
+       If aTEXTO(Y) = aORI(X) Then ''Encerra Analise Para Evitar
+          aTEXTO(Y) = aDES(X)       ''Loop de Troca
           Exit For
        End If
    Next
 Next
 CharConv = ""
-For y = 0 To nTEXTO
-   CharConv = CharConv & aTEXTO(y)
-Next y
+For Y = 0 To nTEXTO
+   CharConv = CharConv & aTEXTO(Y)
+Next Y
 End Function
 Public Function TiraOut(ByVal eVAR As Variant) As String
 Dim cTexto As String

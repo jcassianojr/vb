@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
    Caption         =   " "
@@ -16,9 +16,6 @@ Begin VB.MDIForm frmPRINCIPAL
       Top             =   960
       _ExtentX        =   1191
       _ExtentY        =   1191
-      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
-      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
-      AmbientBb       =   $"Principa.frx":058A
    End
    Begin MSComctlLib.ImageList ImageList1 
       Left            =   780
@@ -69,20 +66,20 @@ Begin VB.MDIForm frmPRINCIPAL
             AutoSize        =   2
             Object.Width           =   1588
             MinWidth        =   1587
-            Picture         =   "Principa.frx":062A
-            TextSave        =   "10:03"
+            Picture         =   "Principa.frx":058A
+            TextSave        =   "21:35"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
             AutoSize        =   2
             Object.Width           =   2302
             MinWidth        =   2293
-            Picture         =   "Principa.frx":0BC4
-            TextSave        =   "13/02/2023"
+            Picture         =   "Principa.frx":0B24
+            TextSave        =   "06/07/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
-            Picture         =   "Principa.frx":115E
+            Picture         =   "Principa.frx":10BE
          EndProperty
          BeginProperty Panel7 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
@@ -193,7 +190,7 @@ Private Sub MDIForm_Load()
       
       
       
-    StatusBar1.Panels(5).tEXT = ""
+    StatusBar1.Panels(5).Text = ""
 
     
 'carqhelp = "SELECT FEMEAEF FROM"
@@ -333,7 +330,7 @@ Private Sub MDIForm_Load()
     rs.Close
     DB.Close
     
-    StatusBar1.Panels(6).tEXT = zUSER
+    StatusBar1.Panels(6).Text = zUSER
     If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
         frmDica.Show
     End If
@@ -530,8 +527,8 @@ Private Sub ImportaWrptUser()
     aCAM = Array("EQUIVALENTE", "DATAULT", "IDFOLHA", "NOMEFOLHA", "HORAINI", "HORAFIM", _
                  "ATIVO", "WEEKEND", "DATAVAL", "TROCAR", "USUARIO")
 
-    cARQORI = PegPath("PATH", "WRPT")            '"p:\novell\ITAESBRA\WRPT\WRPT.MDB"
-    cARQDES = PegPath("PATH", "CONTROLE")        '"p:\novell\ITAESBRA\CONTROLE\CONTROLE.MDB"
+    cARQORI = PegPath("PATH", "WRPT")
+    cARQDES = PegPath("PATH", "CONTROLE")
     cARQORI = GeracArq(cARQORI, , False)
     cARQDES = GeracArq(cARQDES, , True)
     Set oDBORI = New ADODB.Connection

@@ -110,7 +110,6 @@ MinorVer=8
 RevisionVer=228
 AutoIncrementVer=1
 ServerSupportFiles=0
-VersionCompanyName="jc"
 VersionFileDescription="Gerador de Relatorios"
 VersionLegalCopyright="jc 2023"
 VersionLegalTrademarks="jc 2023"
