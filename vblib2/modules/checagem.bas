@@ -83,46 +83,46 @@ Public Function FormataTelfon2(ByVal cNUMERO) As String
     End If
 End Function
 
-Public Function FormataRG(ByVal Valor)
+Public Function FormataRG(ByVal valor)
     'Dim cRETU As String
     Dim nPOS As String
     Dim cDAC As String
-    FormataRG = FixStr(Valor)
+    FormataRG = FixStr(valor)
     cDAC = ""
-    If InStr(UCase(Valor), "ISENT") > 0 Or InStr(UCase(Valor), "RIC") > 0 Or InStr(UCase(Valor), "RNE") > 0 Then
+    If InStr(UCase(valor), "ISENT") > 0 Or InStr(UCase(valor), "RIC") > 0 Or InStr(UCase(valor), "RNE") > 0 Then
        Exit Function
     End If
-    If InStr(UCase(Valor), "CPF") > 0 Then
-       Valor = Replace(Valor, "CPF", "")
+    If InStr(UCase(valor), "CPF") > 0 Then
+       valor = Replace(valor, "CPF", "")
     End If
-    If CheckCPF(Valor, False) Then
+    If CheckCPF(valor, False) Then
        Exit Function
     End If
-    Valor = Trim(Valor)
-    nPOS = InStr(Valor, "-")
+    valor = Trim(valor)
+    nPOS = InStr(valor, "-")
     If nPOS = 0 Then
-        Valor = TiraOut(Valor)
-        Valor = Trim(Valor)
-        If Len(Valor) >= 9 Then
-            cDAC = Mid(Valor, 9, 1)
+        valor = TiraOut(valor)
+        valor = Trim(valor)
+        If Len(valor) >= 9 Then
+            cDAC = Mid(valor, 9, 1)
         End If
     Else
-        cDAC = Mid(Valor, nPOS + 1, 1)
-        Valor = Mid(Valor, 1, nPOS - 1)
+        cDAC = Mid(valor, nPOS + 1, 1)
+        valor = Mid(valor, 1, nPOS - 1)
         If cDAC = "x" Then cDAC = "X"
         If cDAC <> "X" Then                      ''evita erros como -- -. -/ caracter inves de numero no dac
             cDAC = funNumeroPuro(cDAC)
         End If
     End If
-    Valor = funNumeroPuro(Valor)
-    Select Case Len(Valor)
+    valor = funNumeroPuro(valor)
+    Select Case Len(valor)
         ''Case Is >= 8 ric=11
     Case 8
-        FormataRG = Trim(Mid(Valor, 1, 2) + "." + Mid(Valor, 3, 3) + "." + Mid(Valor, 6))
+        FormataRG = Trim(Mid(valor, 1, 2) + "." + Mid(valor, 3, 3) + "." + Mid(valor, 6))
     Case 7
-        FormataRG = Trim(Mid(Valor, 1, 1) + "." + Mid(Valor, 2, 3) + "." + Mid(Valor, 5))
+        FormataRG = Trim(Mid(valor, 1, 1) + "." + Mid(valor, 2, 3) + "." + Mid(valor, 5))
     Case Else
-        FormataRG = Valor
+        FormataRG = valor
     End Select
     If cDAC <> "" Then
         FormataRG = FormataRG & "-" & cDAC
@@ -247,7 +247,7 @@ Public Function CheckIE(cIE As Variant, cUF As Variant, Optional lMES As Boolean
 End Function
 
 Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optional lMES As Boolean = True, Optional cUF As String = "") As Boolean
-    ''cTIPO= M-Matriz F-Filial X-Nao Checar
+    ''cTIPO= M-Matriz F-Filial X-Nao Checar nao mais usado a matriz pode ser diferente 0001 agora
     Dim X As Integer
     Dim aUF As Variant
 
@@ -255,7 +255,7 @@ Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optio
     cCGC = Trim(TiraOut(cCGC))
     If Len(cCGC) = 0 Then
         If lMES Then
-            Alert ("CPNJ Numero Não Informado Em Branco")
+            Alert ("CPNJ Numero Nao Informado Em Branco")
         End If
         Exit Function
     End If
@@ -300,15 +300,15 @@ Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optio
         Exit Function
     End If
 
-
-    If cTIPO = "M" Then
-        If Mid(cTIPO, 9, 4) <> "0001" Then
-            If lMES Then
-                Alert ("CNPJ Invalido-Nao e Matriz")
-            End If
-            Exit Function
-        End If
-    End If
+'   a matriz nao precisa ser mais 0001
+ '   If cTIPO = "M" Then
+ '       If Mid(cTIPO, 9, 4) <> "0001" Then
+ '           If lMES Then
+ '               Alert ("CNPJ Invalido-Nao e Matriz")
+ '           End If
+ '           Exit Function
+ '       End If
+ '   End If
    
     If Len(cUF) > 0 Then
         aUF = Array("AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO", "EX", "XX")
@@ -590,7 +590,7 @@ Function ValiText(KeyIN As Integer, Optional ByVal eTipo As String = "#N", _
     ValiText = KeyOut
 End Function
 
-Public Function CheckRG(ByVal Valor, Optional ByVal lMES As Boolean = True) As Boolean
+Public Function CheckRG(ByVal valor, Optional ByVal lMES As Boolean = True) As Boolean
     Dim n1, n2, n3, n4, n5, n6, n7, n8, D
     Dim soma
     Dim nPOS
@@ -606,25 +606,25 @@ Public Function CheckRG(ByVal Valor, Optional ByVal lMES As Boolean = True) As B
     ZNERRO = 0
 
     CheckRG = True
-    If Valor = "ISENT" Or InStr(Valor, "RNE") Or InStr(Valor, "RIC") > 0 Then 'isento ou registro nacional de estrangeiro RIC(outra formula checagem)
+    If valor = "ISENT" Or InStr(valor, "RNE") Or InStr(valor, "RIC") > 0 Then 'isento ou registro nacional de estrangeiro RIC(outra formula checagem)
         Exit Function
     End If
-    If Len(Valor) = 0 Then
+    If Len(valor) = 0 Then
         Exit Function
     End If
-    If CheckCPF(Valor, False) Then
+    If CheckCPF(valor, False) Then
        Exit Function
     End If
-    Valor = Replace(Valor, ".", "") 'tiraout tambem tira - nao pode ser usada
-    nPOS = InStr(Valor, "-")
+    valor = Replace(valor, ".", "") 'tiraout tambem tira - nao pode ser usada
+    nPOS = InStr(valor, "-")
     If nPOS = 0 Then
         cDAC = " "
     Else
-        cDAC = Mid(Valor, nPOS + 1, 1)
-        Valor = Mid(Valor, 1, nPOS - 1)
+        cDAC = Mid(valor, nPOS + 1, 1)
+        valor = Mid(valor, 1, nPOS - 1)
     End If
-    Valor = Str(Val(Valor))
-    If Len(Trim(Valor)) <= 7 Then
+    valor = Str(Val(valor))
+    If Len(Trim(valor)) <= 7 Then
         CheckRG = False
         ZERRO = "RG com Menos de 7 Digitos"
         ZNERRO = 3
@@ -633,15 +633,15 @@ Public Function CheckRG(ByVal Valor, Optional ByVal lMES As Boolean = True) As B
         End If
         Exit Function
     End If
-    Valor = StrZero(Val(Valor), 8)
-    n1 = Val(Mid(Valor, 1, 1)) * 9
-    n2 = Val(Mid(Valor, 2, 1)) * 8
-    n3 = Val(Mid(Valor, 3, 1)) * 7
-    n4 = Val(Mid(Valor, 4, 1)) * 6
-    n5 = Val(Mid(Valor, 5, 1)) * 5
-    n6 = Val(Mid(Valor, 6, 1)) * 4
-    n7 = Val(Mid(Valor, 7, 1)) * 3
-    n8 = Val(Mid(Valor, 8, 1)) * 2
+    valor = StrZero(Val(valor), 8)
+    n1 = Val(Mid(valor, 1, 1)) * 9
+    n2 = Val(Mid(valor, 2, 1)) * 8
+    n3 = Val(Mid(valor, 3, 1)) * 7
+    n4 = Val(Mid(valor, 4, 1)) * 6
+    n5 = Val(Mid(valor, 5, 1)) * 5
+    n6 = Val(Mid(valor, 6, 1)) * 4
+    n7 = Val(Mid(valor, 7, 1)) * 3
+    n8 = Val(Mid(valor, 8, 1)) * 2
     soma = n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8
     D = soma Mod 11
     If cDAC = "X" Or cDAC = "x" Or cDAC = " " Then
@@ -1356,18 +1356,18 @@ Public Function checkcep(ByVal cCEP As String, Optional ByVal lMES As Boolean = 
     checkcep = True
 End Function
 
-Public Function FormataIE(ByVal Valor, ByVal cUF, Optional ByVal cPESSOA As String = "J") As String
+Public Function FormataIE(ByVal valor, ByVal cUF, Optional ByVal cPESSOA As String = "J") As String
     Dim cMASK As String
-    Valor = FixStr(Valor, "")
-    FormataIE = Valor
+    valor = FixStr(valor, "")
+    FormataIE = valor
     cMASK = ""
-    If Valor = "ISENTO" Or Valor = "00000000000000" Then
+    If valor = "ISENTO" Or valor = "00000000000000" Then
         Exit Function
     End If
     If cPESSOA = "F" Then
         Exit Function
     End If
-    If Len(Valor) = 0 Then
+    If Len(valor) = 0 Then
         Exit Function
     End If
     If cUF = "EX" Or cUF = "XX" Then
@@ -1435,9 +1435,9 @@ Public Function FormataIE(ByVal Valor, ByVal cUF, Optional ByVal cPESSOA As Stri
 
 
     If Len(cMASK) > 0 Then
-        Valor = funNumeroPuro(Valor)
-        Valor = Format(Valor, cMASK)
-        FormataIE = Replace(Valor, "|", ".")
+        valor = funNumeroPuro(valor)
+        valor = Format(valor, cMASK)
+        FormataIE = Replace(valor, "|", ".")
     End If
 End Function
 
