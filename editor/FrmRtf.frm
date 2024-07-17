@@ -103,7 +103,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "FrmRtf.frx":1204
-            TextSave        =   "22:14"
+            TextSave        =   "14:02"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -111,7 +111,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "FrmRtf.frx":179E
-            TextSave        =   "06/07/2024"
+            TextSave        =   "17/07/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -981,21 +981,21 @@ Attribute MenuEvents.VB_VarHelpID = -1
 '***************************************************************************
 
 Private Sub ABRIR()
-    On Error Resume Next
-    If Len(cARQRTF) = 0 Then
-        Exit Sub
-    End If
-    If Not FileExist(cARQRTF, True) Then
-        Exit Sub
-    End If
-    If InStr(cARQRTF, "RTF") > 0 Then
-        cARQTIPO = "RTF"
-        RichTextBox1.LoadFile cARQRTF, rtfRTF
-    Else
-        cARQTIPO = "TXT"
-        RichTextBox1.LoadFile cARQRTF, rtfText
-    End If
-    RichTextBox1.SetFocus
+  On Error Resume Next
+  If Len(cARQRTF) = 0 Then
+    Exit Sub
+  End If
+  If Not FileExist(cARQRTF, True) Then
+    Exit Sub
+  End If
+  If InStr(cARQRTF, "RTF") > 0 Then
+    cARQTIPO = "RTF"
+    RichTextBox1.LoadFile cARQRTF, rtfRTF
+  Else
+    cARQTIPO = "TXT"
+    RichTextBox1.LoadFile cARQRTF, rtfText
+  End If
+  RichTextBox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1008,14 +1008,14 @@ End Sub
 '***************************************************************************
 
 Private Sub achartf(nPOS)
-    Dim textfound As Long
-    ''    RichTextbox1.Find (RichTextbox1.Text)
-    RichTextBox1.SetFocus
-    textfound = RichTextBox1.Find(texto, nPOS, , rtfWholeWord)
-    If textfound = -1 Then
-        Alert vbCr & "Texto Não Foi Encontrado"
-    End If
-    RichTextBox1.SetFocus
+  Dim textfound As Long
+  ''    RichTextbox1.Find (RichTextbox1.Text)
+  RichTextBox1.SetFocus
+  textfound = RichTextBox1.Find(texto, nPOS, , rtfWholeWord)
+  If textfound = -1 Then
+    Alert vbCr & "Texto Não Foi Encontrado"
+  End If
+  RichTextBox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1029,31 +1029,31 @@ End Sub
 
 Private Sub cmbFontColor_Click()
 
-    '******************************************************************
-    '* Change font colors of text using the
-    '* Select Case statement with the ListIndex of the
-    '* ComboBox control. Set the colors with
-    '* the intrinsic constants for color.
-    ''*   Me.Show
-    '******************************************************************
+'******************************************************************
+'* Change font colors of text using the
+'* Select Case statement with the ListIndex of the
+'* ComboBox control. Set the colors with
+'* the intrinsic constants for color.
+''*   Me.Show
+'******************************************************************
 
-    With RichTextBox1
-        Select Case cmbfontcolor.ListIndex
-        Case 0
-            .SelColor = vbBlack
-        Case 1
-            .SelColor = vbBlue
-        Case 2
-            .SelColor = vbRed
-        Case 3
-            .SelColor = vbGreen
-        End Select
-    End With
+  With RichTextBox1
+    Select Case cmbfontcolor.ListIndex
+    Case 0
+      .SelColor = vbBlack
+    Case 1
+      .SelColor = vbBlue
+    Case 2
+      .SelColor = vbRed
+    Case 3
+      .SelColor = vbGreen
+    End Select
+  End With
 
-    '******************************************************************
-    '* Return focus to the RichTextbox control.
-    ''*   RichTextbox1.SetFocus
-    '******************************************************************
+  '******************************************************************
+  '* Return focus to the RichTextbox control.
+  ''*   RichTextbox1.SetFocus
+  '******************************************************************
 
 End Sub
 
@@ -1068,7 +1068,7 @@ End Sub
 
 'Private Sub cmbfontname_Click()
 '    RichTextbox1.SelFontName = cmbfontname
-    ''RichTextbox1.SetFocus
+''RichTextbox1.SetFocus
 'End Sub
 
 '***************************************************************************
@@ -1081,17 +1081,17 @@ End Sub
 '***************************************************************************
 
 Private Sub cmbFontSize_Click()
- '  RichTextbox1.SelFontSize = FontCombo1
-  '  RichTextbox1.SetFocus
-    
+'  RichTextbox1.SelFontSize = FontCombo1
+'  RichTextbox1.SetFocus
+
 End Sub
 
 Private Sub CmdExpHtml_Click()
-    mnusaveasHTML_Click
+  mnusaveasHTML_Click
 End Sub
 
 Private Sub CmdExpPdf_Click()
-    mnusaveasPDF_Click
+  mnusaveasPDF_Click
 End Sub
 
 '***************************************************************************
@@ -1104,7 +1104,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command10_Click()
-    mnuleft_Click
+  mnuleft_Click
 End Sub
 
 '***************************************************************************
@@ -1117,7 +1117,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command11_Click()
-    mnucenter_Click
+  mnucenter_Click
 End Sub
 
 '***************************************************************************
@@ -1130,7 +1130,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command12_Click()
-    mnuright_Click
+  mnuright_Click
 End Sub
 
 '***************************************************************************
@@ -1143,7 +1143,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command13_Click()
-    mnuprintcfg_Click
+  mnuprintcfg_Click
 End Sub
 
 '***************************************************************************
@@ -1156,7 +1156,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command14_Click()
-    mnuexit_Click
+  mnuexit_Click
 End Sub
 
 '***************************************************************************
@@ -1169,7 +1169,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command15_Click()
-    mnucustomcolors_Click
+  mnucustomcolors_Click
 End Sub
 
 '***************************************************************************
@@ -1182,7 +1182,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command16_Click()
-    mnupaste_Click
+  mnupaste_Click
 End Sub
 
 '***************************************************************************
@@ -1195,7 +1195,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command17_Click()
-    mnucut_Click
+  mnucut_Click
 End Sub
 
 '***************************************************************************
@@ -1208,7 +1208,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command18_Click()
-    mnucopy_Click
+  mnucopy_Click
 End Sub
 
 '***************************************************************************
@@ -1221,7 +1221,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command19_Click()
-    achartf (0)
+  achartf (0)
 End Sub
 
 '***************************************************************************
@@ -1234,7 +1234,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command1_Click()
-    mnunew_Click
+  mnunew_Click
 End Sub
 
 '***************************************************************************
@@ -1247,8 +1247,8 @@ End Sub
 '***************************************************************************
 
 Private Sub Command20_Click()
-    RichTextBox1.SetFocus
-    achartf (RichTextBox1.SelStart + 1)
+  RichTextBox1.SetFocus
+  achartf (RichTextBox1.SelStart + 1)
 End Sub
 
 '***************************************************************************
@@ -1261,12 +1261,12 @@ End Sub
 '***************************************************************************
 
 Private Sub Command21_Click()
-    RichTextBox1.SelStrikethru = Not RichTextBox1.SelStrikethru
-    If RichTextBox1.SelStrikethru Then
-        Command21.Appearance = 0
-    Else
-        Command21.Appearance = 1
-    End If
+  RichTextBox1.SelStrikethru = Not RichTextBox1.SelStrikethru
+  If RichTextBox1.SelStrikethru Then
+    Command21.Appearance = 0
+  Else
+    Command21.Appearance = 1
+  End If
 End Sub
 
 '***************************************************************************
@@ -1279,42 +1279,42 @@ End Sub
 '***************************************************************************
 
 Private Sub Command22_Click()
-    Dim oDLG As New clsCommonDialogs
-    oDLG.FontFlags = BOTH + EFFECTS
-    
-    oDLG.Font = richtextbox1SelFontName
-    oDLG.FontSize = richtextbox1SelFontSize
-    ''oDLG.FontStrikeThru = richtextbox1SelStrikeThru
-    ''oDLG.FontUnderline = richtextbox1SelUnderline
-    oDLG.Color = richtextbox1SelColor
-    oDLG.FontBold = richtextbox1SelBold
-    oDLG.FontItalic = richtextbox1SelItalic
-    oDLG.DialogFont
-    
-    
-    
-    With RichTextBox1
-        .SelFontName = oDLG.Font
-        .SelFontSize = oDLG.FontSize
-        .SelBold = oDLG.FontBold
-        .SelItalic = oDLG.FontItalic
-        .SelStrikethru = oDLG.FontStrikeThru
-        .SelUnderline = oDLG.FontUnderline
-        .SelColor = oDLG.Color
-    End With
+  Dim oDLG As New clsCommonDialogs
+  oDLG.FontFlags = BOTH + EFFECTS
+
+  oDLG.Font = richtextbox1SelFontName
+  oDLG.FontSize = richtextbox1SelFontSize
+  ''oDLG.FontStrikeThru = richtextbox1SelStrikeThru
+  ''oDLG.FontUnderline = richtextbox1SelUnderline
+  oDLG.Color = richtextbox1SelColor
+  oDLG.FontBold = richtextbox1SelBold
+  oDLG.FontItalic = richtextbox1SelItalic
+  oDLG.DialogFont
+
+
+
+  With RichTextBox1
+    .SelFontName = oDLG.Font
+    .SelFontSize = oDLG.FontSize
+    .SelBold = oDLG.FontBold
+    .SelItalic = oDLG.FontItalic
+    .SelStrikethru = oDLG.FontStrikeThru
+    .SelUnderline = oDLG.FontUnderline
+    .SelColor = oDLG.Color
+  End With
 
 End Sub
 
 Private Sub Command23_Click()
-    mnubullet_Click
+  mnubullet_Click
 End Sub
 
 Private Sub Command24_Click()
-    RichTextBox1.SelIndent = IncDec(RichTextBox1.SelIndent, 1, 0, 99)
+  RichTextBox1.SelIndent = IncDec(RichTextBox1.SelIndent, 1, 0, 99)
 End Sub
 
 Private Sub Command25_Click()
-    RichTextBox1.SelIndent = IncDec(RichTextBox1.SelIndent, -1, 0, 99)
+  RichTextBox1.SelIndent = IncDec(RichTextBox1.SelIndent, -1, 0, 99)
 End Sub
 
 '***************************************************************************
@@ -1327,23 +1327,23 @@ End Sub
 '***************************************************************************
 
 Private Sub Command2_Click()
-    mnuOpen_Click
+  mnuOpen_Click
 End Sub
 
 Private Sub Command26_Click()
-    RichTextBox1.SelText = LCase(RichTextBox1.SelText)
+  RichTextBox1.SelText = LCase(RichTextBox1.SelText)
 End Sub
 
 Private Sub Command27_Click()
-    RichTextBox1.SelText = UCase(RichTextBox1.SelText)
+  RichTextBox1.SelText = UCase(RichTextBox1.SelText)
 End Sub
 
 Private Sub Command28_Click()
-    mnuscrsup_Click
+  mnuscrsup_Click
 End Sub
 
 Private Sub Command29_Click()
-    mnuscrinf_Click
+  mnuscrinf_Click
 End Sub
 
 '***************************************************************************
@@ -1356,27 +1356,27 @@ End Sub
 '***************************************************************************
 
 Private Sub Command3_Click()
-    mnusave_Click
+  mnusave_Click
 End Sub
 
 Private Sub Command30_Click()
-    mnuselectall_Click
+  mnuselectall_Click
 End Sub
 
 Private Sub Command31_Click()
-    mnuinsimg_Click
+  mnuinsimg_Click
 End Sub
 
 Private Sub Command32_Click()
-    mnuinsdate_Click
+  mnuinsdate_Click
 End Sub
 
 Private Sub Command33_Click()
-    mnusendmail_Click
+  mnusendmail_Click
 End Sub
 
 Private Sub Command34_Click()
-    mnucapitalizar_Click
+  mnucapitalizar_Click
 End Sub
 
 '***************************************************************************
@@ -1389,7 +1389,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command4_Click()
-    mnuprint_Click
+  mnuprint_Click
 End Sub
 
 '***************************************************************************
@@ -1402,7 +1402,7 @@ End Sub
 '***************************************************************************
 
 Private Sub Command5_Click()
-    mnuundo_Click
+  mnuundo_Click
 End Sub
 
 '***************************************************************************
@@ -1415,13 +1415,13 @@ End Sub
 '***************************************************************************
 
 Private Sub Command7_Click()
-    RichTextBox1.SelBold = Not RichTextBox1.SelBold
-    If RichTextBox1.SelBold Then
-        Command7.Appearance = 0
-    Else
-        Command7.Appearance = 1
-    End If
-    RichTextBox1.SetFocus
+  RichTextBox1.SelBold = Not RichTextBox1.SelBold
+  If RichTextBox1.SelBold Then
+    Command7.Appearance = 0
+  Else
+    Command7.Appearance = 1
+  End If
+  RichTextBox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1434,12 +1434,12 @@ End Sub
 '***************************************************************************
 
 Private Sub Command8_Click()
-    RichTextBox1.SelItalic = Not RichTextBox1.SelItalic
-    If RichTextBox1.SelItalic Then
-        Command8.Appearance = 0
-    Else
-        Command8.Appearance = 1
-    End If
+  RichTextBox1.SelItalic = Not RichTextBox1.SelItalic
+  If RichTextBox1.SelItalic Then
+    Command8.Appearance = 0
+  Else
+    Command8.Appearance = 1
+  End If
 End Sub
 
 '***************************************************************************
@@ -1452,16 +1452,16 @@ End Sub
 '***************************************************************************
 
 Private Sub Command9_Click()
-    RichTextBox1.SelUnderline = Not RichTextBox1.SelUnderline
-    If RichTextBox1.SelUnderline = False Then
-        Command9.Appearance = 0
-    Else
-        Command9.Appearance = 1
-    End If
+  RichTextBox1.SelUnderline = Not RichTextBox1.SelUnderline
+  If RichTextBox1.SelUnderline = False Then
+    Command9.Appearance = 0
+  Else
+    Command9.Appearance = 1
+  End If
 End Sub
 
 Private Sub FontCombo1_Click()
-    RichTextBox1.SelFontName = FontCombo1.Text
+  RichTextBox1.SelFontName = FontCombo1.tEXT
 End Sub
 
 
@@ -1476,141 +1476,141 @@ End Sub
 
 
 Private Sub Form_Load()
-    '     CentralizaJanela Me
-    CenterFormToScreen Me
+'     CentralizaJanela Me
+  CenterFormToScreen Me
 
-'CommonDialogEx1.ShowColor
+  'CommonDialogEx1.ShowColor
 
-'CommonDialogEx1.ShowFolder
+  'CommonDialogEx1.ShowFolder
 
-'CommonDialogEx1.ShowFont
+  'CommonDialogEx1.ShowFont
 
-'CommonDialogEx1.ShowHelp
+  'CommonDialogEx1.ShowHelp
 
-'CommonDialogEx1.ShowOpen
+  'CommonDialogEx1.ShowOpen
 
-'CommonDialogEx1.ShowPageSetup
+  'CommonDialogEx1.ShowPageSetup
 
-'CommonDialogEx1.ShowPrinter'
+  'CommonDialogEx1.ShowPrinter'
 
-'CommonDialogEx1.ShowSave
+  'CommonDialogEx1.ShowSave
 
 
-    '/ If gbSubClassMenu is False, the menu is not subclassed
-    gbSubClassMenu = True
+  '/ If gbSubClassMenu is False, the menu is not subclassed
+  gbSubClassMenu = True
 
-    If gbSubClassMenu Then SubClassMenuXP
+  If gbSubClassMenu Then SubClassMenuXP
 
-    ''Configura Help
-    Me.Caption = cFORMID
-    HelpContextID = nFORMID
-   
-    '* Add colors to cmbFontColor.
-    cARQTIPO = "RTF"
-    With cmbfontcolor
-        .AddItem "Black"
-        .AddItem "Blue"
-        .AddItem "Red"
-        .AddItem "Green"
-        .ListIndex = 0
-    End With
-   
+  ''Configura Help
+  Me.Caption = cFORMID
+  HelpContextID = nFORMID
+
+  '* Add colors to cmbFontColor.
+  cARQTIPO = "RTF"
+  With cmbfontcolor
+    .AddItem "Black"
+    .AddItem "Blue"
+    .AddItem "Red"
+    .AddItem "Green"
+    .ListIndex = 0
+  End With
+
   '  Dim i As Integer
   '  With cmbfontname
   '      For i = 0 To Screen.FontCount - 1
   '          .AddItem Screen.Fonts(i)
-            '.Font Screen.Fonts(i)
-            '.FontName = Screen.Fonts(i)
-            '.FontSize = 18
-            '.Width = 150
-            '.Height = 150
-   '     Next i
-        '* Set ListIndex to 0.
-    '    .ListIndex = 0
-   ' End With
+  '.Font Screen.Fonts(i)
+  '.FontName = Screen.Fonts(i)
+  '.FontSize = 18
+  '.Width = 150
+  '.Height = 150
+  '     Next i
+  '* Set ListIndex to 0.
+  '    .ListIndex = 0
+  ' End With
 
-    With cmbFontSize
+  With cmbFontSize
 
-        '******************************************************************
-        '* Populate the combo with sizes in
-        '* increments of 2.
-        '******************************************************************
-
-        For i = 8 To 72 Step 2
-            .AddItem i
-        Next i
-
-        '******************************************************************
-        '* Set ListIndex to 0
-        .ListIndex = 1                           '* size 10.
-        '******************************************************************
-
-    End With
-    RichTextBox1.Width = Me.Width - 30           ''10695
-    RichTextBox1.Height = Me.Height - 2225       ''6855
-   
     '******************************************************************
-    '* 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
-    '* 4-Editar,5-Visualizar,6-Imprimir,7-Exportar
+    '* Populate the combo with sizes in
+    '* increments of 2.
     '******************************************************************
-   
-    ''Novo
-    If Not aDIREITOS(0) Then
-        mnunew.Enabled = False
-        Command1.Enabled = False
-    End If
-    ''Abrir
-    If Not aDIREITOS(1) Then
-        mnuOpen.Enabled = False
-        Command2.Enabled = False
-    End If
-    ''Salvar
-    If Not aDIREITOS(2) Then
-        mnusave.Enabled = False
-        Command3.Enabled = False
-    End If
-    ''Salvar Como
-    If Not aDIREITOS(3) Then
-        mnusaveastxt.Enabled = False
-        mnusaveasrtf.Enabled = False
-    End If
-    ''Editor Precisa estar Abilitado Barra Rolagen Funcionar
-    If Not aDIREITOS(4) Then
-    End If
-    ''Visualizaçao Ainda nao Criada
-    If Not aDIREITOS(5) Then
-    End If
-    ''Impressao e Configuraçao Impressao
-    If Not aDIREITOS(6) Then
-        mnuprint.Enabled = False
-        mnuprintcfg.Enabled = False
-        Command4.Enabled = False
-        Command13.Enabled = False
-    End If
-    ''Exportaçao Ainda Nao Criada
-    If Not aDIREITOS(7) Then
-    End If
-             
-    ''Abre o Arquivo se passado cARQRTF
-    ABRIR
-    
-    StatusBar1.Panels(6).Text = zUSER
-    
-   ' cmbfontname.tEXT = RichTextbox1.SelFontName
-    
+
+    For i = 8 To 72 Step 2
+      .AddItem i
+    Next i
+
+    '******************************************************************
+    '* Set ListIndex to 0
+    .ListIndex = 1                           '* size 10.
+    '******************************************************************
+
+  End With
+  RichTextBox1.Width = Me.Width - 30           ''10695
+  RichTextBox1.Height = Me.Height - 2225       ''6855
+
+  '******************************************************************
+  '* 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
+  '* 4-Editar,5-Visualizar,6-Imprimir,7-Exportar
+  '******************************************************************
+
+  ''Novo
+  If Not aDIREITOS(0) Then
+    mnunew.Enabled = False
+    Command1.Enabled = False
+  End If
+  ''Abrir
+  If Not aDIREITOS(1) Then
+    mnuOpen.Enabled = False
+    Command2.Enabled = False
+  End If
+  ''Salvar
+  If Not aDIREITOS(2) Then
+    mnusave.Enabled = False
+    Command3.Enabled = False
+  End If
+  ''Salvar Como
+  If Not aDIREITOS(3) Then
+    mnusaveastxt.Enabled = False
+    mnusaveasrtf.Enabled = False
+  End If
+  ''Editor Precisa estar Abilitado Barra Rolagen Funcionar
+  If Not aDIREITOS(4) Then
+  End If
+  ''Visualizaçao Ainda nao Criada
+  If Not aDIREITOS(5) Then
+  End If
+  ''Impressao e Configuraçao Impressao
+  If Not aDIREITOS(6) Then
+    mnuprint.Enabled = False
+    mnuprintcfg.Enabled = False
+    Command4.Enabled = False
+    Command13.Enabled = False
+  End If
+  ''Exportaçao Ainda Nao Criada
+  If Not aDIREITOS(7) Then
+  End If
+
+  ''Abre o Arquivo se passado cARQRTF
+  ABRIR
+
+  StatusBar1.Panels(6).tEXT = zUSER
+
+  ' cmbfontname.tEXT = RichTextbox1.SelFontName
+
   '  FontCombo1.tEXT = RichTextbox1.SelFontName
   '  FontCombo1.SelFontName = RichTextbox1.SelFontName
-    
+
   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
-    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
-    
-   ' RichTextbox1.
-   ' richTest1.SpellChecking("en-US") = True
-   
+  PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
+
+  ' RichTextbox1.
+  ' richTest1.SpellChecking("en-US") = True
+
 End Sub
 Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
-    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
-    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+  PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+  UpdateReport = False  ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
 '***************************************************************************
 '*  Name         : Form_Resize
@@ -1622,23 +1622,23 @@ End Sub
 '***************************************************************************
 
 Private Sub Form_Resize()
-    Dim w As Integer
-    Dim H As Integer
+  Dim w As Integer
+  Dim H As Integer
 
-    w = 10695
-    H = 6855
+  w = 10695
+  H = 6855
 
-    If FrmRTf.WindowState = vbMaximized Then
-        RichTextBox1.Width = (FrmRTf.Width - 300)
-        RichTextBox1.Height = (FrmRTf.Height - 800)
+  If FrmRTf.WindowState = vbMaximized Then
+    RichTextBox1.Width = (FrmRTf.Width - 300)
+    RichTextBox1.Height = (FrmRTf.Height - 800)
 
-    End If
+  End If
 
-    If FrmRTf.WindowState = vbNormal Then
-        RichTextBox1.Width = w
-        RichTextBox1.Height = H
+  If FrmRTf.WindowState = vbNormal Then
+    RichTextBox1.Width = w
+    RichTextBox1.Height = H
 
-    End If
+  End If
 
 End Sub
 
@@ -1652,7 +1652,7 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuabout_Click()
-    frmAbout.Show vbModal, Me
+  frmAbout.Show vbModal, Me
 End Sub
 
 '***************************************************************************
@@ -1665,22 +1665,22 @@ End Sub
 '***************************************************************************
 
 Private Sub mnubold_Click()
-    Command7_Click
+  Command7_Click
 End Sub
 
 Private Sub mnubullet_Click()
-    RichTextBox1.SelBullet = Not RichTextBox1.SelBullet
-    If RichTextBox1.SelBullet Then
-        Command23.Appearance = 0
-    Else
-        Command23.Appearance = 1
-    End If
-    RichTextBox1.SetFocus
+  RichTextBox1.SelBullet = Not RichTextBox1.SelBullet
+  If RichTextBox1.SelBullet Then
+    Command23.Appearance = 0
+  Else
+    Command23.Appearance = 1
+  End If
+  RichTextBox1.SetFocus
 
 End Sub
 
 Private Sub mnucapitalizar_Click()
-    RichTextBox1.SelText = MMCase(RichTextBox1.SelText)
+  RichTextBox1.SelText = MMCase(RichTextBox1.SelText)
 End Sub
 
 '***************************************************************************
@@ -1693,26 +1693,26 @@ End Sub
 '***************************************************************************
 
 Private Sub mnucenter_Click()
-    If RichTextBox1.SelLength > 0 Then
-        RichTextBox1.SelAlignment = 2
-    End If
-    RichTextBox1.SetFocus
+  If RichTextBox1.SelLength > 0 Then
+    RichTextBox1.SelAlignment = 2
+  End If
+  RichTextBox1.SetFocus
 End Sub
 
 Private Sub mnucnvansi_Click()
-    RichTextBox1.SelText = ConvAnsi(RichTextBox1.SelText)
+  RichTextBox1.SelText = ConvAnsi(RichTextBox1.SelText)
 End Sub
 
 Private Sub mnucnvoem_Click()
-    RichTextBox1.SelText = ConvOEM(RichTextBox1.SelText)
+  RichTextBox1.SelText = ConvOEM(RichTextBox1.SelText)
 End Sub
 
 Private Sub mnucnvansi2_Click()
-    RichTextBox1.SelText = ConvAnsi2(RichTextBox1.SelText)
+  RichTextBox1.SelText = ConvAnsi2(RichTextBox1.SelText)
 End Sub
 
 Private Sub mnucnvoem2_Click()
-    RichTextBox1.SelText = ConvOEM2(RichTextBox1.SelText)
+  RichTextBox1.SelText = ConvOEM2(RichTextBox1.SelText)
 End Sub
 
 '***************************************************************************
@@ -1725,8 +1725,8 @@ End Sub
 '***************************************************************************
 
 Private Sub mnucopy_Click()
-    Clipboard.SetText RichTextBox1.SelText
-    RichTextBox1.SetFocus
+  Clipboard.SetText RichTextBox1.SelText
+  RichTextBox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1739,13 +1739,13 @@ End Sub
 '***************************************************************************
 
 Private Sub mnucustomcolors_Click()
-    Dim DLG As New clsCommonDialogs
-    DLG.DialogColor Complete
-    If DLG.Cancel = True Then
-        Exit Sub
-    End If
-    RichTextBox1.SelColor = DLG.Color
-    RichTextBox1.SetFocus
+  Dim DLG As New clsCommonDialogs
+  DLG.DialogColor Complete
+  If DLG.Cancel = True Then
+    Exit Sub
+  End If
+  RichTextBox1.SelColor = DLG.Color
+  RichTextBox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1758,24 +1758,24 @@ End Sub
 '***************************************************************************
 
 Private Sub mnucut_Click()
-    Clipboard.SetText RichTextBox1.SelText
-    RichTextBox1.SelText = ""
-    RichTextBox1.SetFocus
+  Clipboard.SetText RichTextBox1.SelText
+  RichTextBox1.SelText = ""
+  RichTextBox1.SetFocus
 End Sub
 
 Private Sub mnudecInd_Click()
-    Command25_Click
+  Command25_Click
 End Sub
 
 Private Sub mnuDelSel_Click()
-    If MDG("Apagar Seleçao") Then
-        RichTextBox1.SelText = ""
-    End If
- 
+  If MDG("Apagar Seleçao") Then
+    RichTextBox1.SelText = ""
+  End If
+
 End Sub
 
 Private Sub mnuDown_Click()
-    RichTextBox1.SelText = LCase(RichTextBox1.SelText)
+  RichTextBox1.SelText = LCase(RichTextBox1.SelText)
 End Sub
 
 '***************************************************************************
@@ -1787,27 +1787,27 @@ End Sub
 '*  Date         : 20 dez 2003
 '***************************************************************************
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-    If aDIREITOS(2) Then
-        If MDG("Salvar Documento") Then
-            mnusave_Click
-        End If
+  If aDIREITOS(2) Then
+    If MDG("Salvar Documento") Then
+      mnusave_Click
     End If
+  End If
 End Sub
 
 Private Sub mnuEditarInserirCaracter_Click()
-    ePASS01 = FontCombo1.Text     'cmbfontname.text
-    ePASS02 = True
-    frmCharacters.Show vbModal, Me
-    'FrmAscII.Show vbModal, Me
-    If lRETU Then
-        '      FrmRTf.RichTextbox1.SelFontName = eRETU02
-        FrmRTf.RichTextBox1.SelText = eRETU01
-        '      cmbfontname = eRETU02
-    End If
+  ePASS01 = FontCombo1.tEXT     'cmbfontname.text
+  ePASS02 = True
+  frmCharacters.Show vbModal, Me
+  'FrmAscII.Show vbModal, Me
+  If lRETU Then
+    '      FrmRTf.RichTextbox1.SelFontName = eRETU02
+    FrmRTf.RichTextBox1.SelText = eRETU01
+    '      cmbfontname = eRETU02
+  End If
 End Sub
 
 Private Sub mnuexit_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 '***************************************************************************
@@ -1820,12 +1820,12 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuFindNext_Click()
-    RichTextBox1.SetFocus
-    achartf (RichTextBox1.SelStart + 1)
+  RichTextBox1.SetFocus
+  achartf (RichTextBox1.SelStart + 1)
 End Sub
 
 Private Sub mnufindrep_Click()
-    'frmFindReplace.Show vbModal, Me
+'frmFindReplace.Show vbModal, Me
 End Sub
 
 '***************************************************************************
@@ -1838,7 +1838,7 @@ End Sub
 '***************************************************************************
 
 Private Sub mnufind_Click()
-    achartf (0)
+  achartf (0)
 End Sub
 
 '***************************************************************************
@@ -1851,32 +1851,32 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuFntesc_Click()
-    Command22_Click
+  Command22_Click
 End Sub
 
 Private Sub mnuIncInd_Click()
-    Command24_Click
+  Command24_Click
 End Sub
 
 Private Sub mnuinsdate_Click()
-    frmInsertDate.Show vbModal
-    If lRETU Then
-        FrmRTf.RichTextBox1.SelText = eRETU02
-    End If
+  frmInsertDate.Show vbModal
+  If lRETU Then
+    FrmRTf.RichTextBox1.SelText = eRETU02
+  End If
 End Sub
 
 Private Sub mnuinsimg_Click()
-    Dim sFILTER, sFILENAME As String
-    On Error Resume Next
-    Clipboard.Clear
-    sFILTER = ImgFILTER()
-    sFILENAME = FileOpen(Me, sFILTER, 1, , , , "Abrir arquivo Imagens")
-    If Not Len(sFILENAME) = 0 Then
-        'Image1.Picture = LoadPictureEx(sFILENAME)
-        Image1.Picture = LoadPicture(sFILENAME)
-        Clipboard.SetData Image1.Picture
-        SendMessage RichTextBox1.hWnd, WM_PASTE, 0, 0
-    End If
+  Dim sFILTER, sFILENAME As String
+  On Error Resume Next
+  Clipboard.Clear
+  sFILTER = ImgFILTER()
+  sFILENAME = FileOpen(Me, sFILTER, 1, , , , "Abrir arquivo Imagens")
+  If Not Len(sFILENAME) = 0 Then
+    'Image1.Picture = LoadPictureEx(sFILENAME)
+    Image1.Picture = LoadPicture(sFILENAME)
+    Clipboard.SetData Image1.Picture
+    SendMessage RichTextBox1.hWnd, WM_PASTE, 0, 0
+  End If
 End Sub
 
 '***************************************************************************
@@ -1889,7 +1889,7 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuitalico_Click()
-    Command8_Click
+  Command8_Click
 End Sub
 
 '***************************************************************************
@@ -1902,10 +1902,10 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuleft_Click()
-    If RichTextBox1.SelLength > 0 Then
-        RichTextBox1.SelAlignment = 0
-    End If
-    RichTextBox1.SetFocus
+  If RichTextBox1.SelLength > 0 Then
+    RichTextBox1.SelAlignment = 0
+  End If
+  RichTextBox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1918,8 +1918,8 @@ End Sub
 '***************************************************************************
 
 Private Sub mnunew_Click()
-    RichTextBox1.Text = ""
-    RichTextBox1.SetFocus
+  RichTextBox1.tEXT = ""
+  RichTextBox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1932,29 +1932,29 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuOpen_Click()
-    Dim sRECENTFILE, sPath, sFILTER, sFILENAME As String
-    sRECENTFILE = origem
-    sPath = origem
-    sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar _
-            & "Rich Text Arquivos (*.RTF)" & vbNullChar & "*.RTF" & vbNullChar _
-            & "Todos os Arquivos" & vbNullChar & "*.*"
-    sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "prn", sPath, "Abrir arquivo TXT RTF")
-    If Not Len(sFILENAME) = 0 Then
-        cARQRTF = NomeArq(sFILENAME)
-        ABRIR
-    End If
+  Dim sRECENTFILE, sPath, sFILTER, sFILENAME As String
+  sRECENTFILE = origem
+  sPath = origem
+  sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar _
+          & "Rich Text Arquivos (*.RTF)" & vbNullChar & "*.RTF" & vbNullChar _
+          & "Todos os Arquivos" & vbNullChar & "*.*"
+  sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "prn", sPath, "Abrir arquivo TXT RTF")
+  If Not Len(sFILENAME) = 0 Then
+    cARQRTF = NomeArq(sFILENAME)
+    ABRIR
+  End If
 
 
-    '******************************************************************
-    'Read in the text file cARQRTF
-    'into the txtNotepad text box
-    '******************************************************************
+  '******************************************************************
+  'Read in the text file cARQRTF
+  'into the txtNotepad text box
+  '******************************************************************
 
-    '******************************************************************
-    ''Open cARQRTF For Input As #1
-    ''RichTextbox1 = Input(LOF(1), 1)
-    ''Close #1
-    '******************************************************************
+  '******************************************************************
+  ''Open cARQRTF For Input As #1
+  ''RichTextbox1 = Input(LOF(1), 1)
+  ''Close #1
+  '******************************************************************
 
 End Sub
 
@@ -1969,8 +1969,8 @@ End Sub
 
 
 Private Sub mnupaste_Click()
-    RichTextBox1.SelText = Clipboard.GetText
-    RichTextBox1.SetFocus
+  RichTextBox1.SelText = Clipboard.GetText
+  RichTextBox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1983,8 +1983,8 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuprintcfg_Click()
-    FrmPrintSetup.Show vbModal, Me
-    RichTextBox1.SetFocus
+  FrmPrintSetup.Show vbModal, Me
+  RichTextBox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1997,72 +1997,72 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuprint_Click()
-    PrintPreview1.ShowPreview
-    RichTextBox1.SetFocus
+  PrintPreview1.ShowPreview
+  RichTextBox1.SetFocus
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-    PrintPreview1.PrintRichTextBox RichTextBox1
+  PrintPreview1.PrintRichTextBox RichTextBox1
 End Sub
 Private Sub mnuright_Click()
-    If RichTextBox1.SelLength > 0 Then
-        RichTextBox1.SelAlignment = 1
-    End If
-    RichTextBox1.SetFocus
+  If RichTextBox1.SelLength > 0 Then
+    RichTextBox1.SelAlignment = 1
+  End If
+  RichTextBox1.SetFocus
 End Sub
 
 Private Sub mnusaveasHTML_Click()
-    Dim sFILTER, sFILENAME, stmp As String
-    stmp = TrocaExt(cARQRTF, "HTML")
-    sFILTER = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-    sFILENAME = FileSave(Me, sFILTER, 1, "HTML", stmp, stmp, "Salvar HTML Como")
-    If Not Len(sFILENAME) = 0 Then
-        If FileExist(sFILENAME) Then
-            If MDG("Arquivo ja Existe Sobrepor") Then
-                DeleteFile sFILENAME 'Kill sFILENAME
-                Exit Sub
-            End If
-        End If
-        stmp = TrocaExt(sFILENAME, "TMP")
-        RichTextBox1.SaveFile stmp, rtfText
-        ePASS01 = stmp
-        txttohtml stmp, sFILENAME
-        DeleteFile stmp 'Kill stmp
+  Dim sFILTER, sFILENAME, stmp As String
+  stmp = TrocaExt(cARQRTF, "HTML")
+  sFILTER = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFILENAME = FileSave(Me, sFILTER, 1, "HTML", stmp, stmp, "Salvar HTML Como")
+  If Not Len(sFILENAME) = 0 Then
+    If FileExist(sFILENAME) Then
+      If MDG("Arquivo ja Existe Sobrepor") Then
+        DeleteFile sFILENAME  'Kill sFILENAME
+        Exit Sub
+      End If
     End If
+    stmp = TrocaExt(sFILENAME, "TMP")
+    RichTextBox1.SaveFile stmp, rtfText
+    ePASS01 = stmp
+    txttohtml stmp, sFILENAME
+    DeleteFile stmp  'Kill stmp
+  End If
 End Sub
 
 Private Sub mnusaveasPDF_Click()
-    Dim sFILTER, sFILENAME, stmp As String
-    stmp = TrocaExt(cARQRTF, "PDF")
-    sFILTER = "Arquivos de Textos (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-    sFILENAME = FileSave(Me, sFILTER, 1, "PDF", stmp, stmp, "Salvar PDF Como")
-    If Not Len(sFILENAME) = 0 Then
-        stmp = TrocaExt(sFILENAME, "TMP")
-        RichTextBox1.SaveFile stmp, rtfText
-        ePASS01 = stmp
-        formConvertToPDF.Show vbModal, Me
-        DeleteFile stmp 'Kill stmp
-    End If
+  Dim sFILTER, sFILENAME, stmp As String
+  stmp = TrocaExt(cARQRTF, "PDF")
+  sFILTER = "Arquivos de Textos (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFILENAME = FileSave(Me, sFILTER, 1, "PDF", stmp, stmp, "Salvar PDF Como")
+  If Not Len(sFILENAME) = 0 Then
+    stmp = TrocaExt(sFILENAME, "TMP")
+    RichTextBox1.SaveFile stmp, rtfText
+    ePASS01 = stmp
+    formConvertToPDF.Show vbModal, Me
+    DeleteFile stmp  'Kill stmp
+  End If
 End Sub
 
 Private Sub mnusaveasrtf_Click()
-    '***************************************************************************
-    '*  Name         : mnusaveasrtf_Click
-    '*  Description  :
-    '*  Parameters   : None
-    '*  Returns      : Nothing
-    '*  Author       :
-    '*  Date         : 20 dez 2003
-    '***************************************************************************
+'***************************************************************************
+'*  Name         : mnusaveasrtf_Click
+'*  Description  :
+'*  Parameters   : None
+'*  Returns      : Nothing
+'*  Author       :
+'*  Date         : 20 dez 2003
+'***************************************************************************
 
-    Dim sFILTER, sFILENAME As String
-    sFILTER = "Arquivos de Textos (*.RTF)" & vbNullChar & "*.RTF" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-    sFILENAME = FileSave(Me, sFILTER, 1, "RTF", cARQRTF, cARQRTF, "Salvar RTF Como")
-    If Not Len(sFILENAME) = 0 Then
-        cARQRTF = sFILENAME
-        cARQTIPO = "RTF"
-        RichTextBox1.SaveFile sFILENAME, rtfRTF
-        RichTextBox1.SetFocus
-    End If
+  Dim sFILTER, sFILENAME As String
+  sFILTER = "Arquivos de Textos (*.RTF)" & vbNullChar & "*.RTF" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFILENAME = FileSave(Me, sFILTER, 1, "RTF", cARQRTF, cARQRTF, "Salvar RTF Como")
+  If Not Len(sFILENAME) = 0 Then
+    cARQRTF = sFILENAME
+    cARQTIPO = "RTF"
+    RichTextBox1.SaveFile sFILENAME, rtfRTF
+    RichTextBox1.SetFocus
+  End If
 End Sub
 
 '***************************************************************************
@@ -2075,16 +2075,16 @@ End Sub
 '***************************************************************************
 
 Private Sub mnusaveastxt_Click()
-    Dim sFILTER, sFILENAME As String
-    sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-    sFILENAME = FileSave(Me, sFILTER, 1, "TXT", cARQRTF, cARQRTF, "Salvar TXT Como")
-    If Not Len(sFILENAME) = 0 Then
-        cARQRTF = sFILENAME
-        cARQTIPO = "TXT"
-        RichTextBox1.SaveFile sFILENAME, rtfText
-        RichTextBox1.SetFocus
-    End If
-    
+  Dim sFILTER, sFILENAME As String
+  sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFILENAME = FileSave(Me, sFILTER, 1, "TXT", cARQRTF, cARQRTF, "Salvar TXT Como")
+  If Not Len(sFILENAME) = 0 Then
+    cARQRTF = sFILENAME
+    cARQTIPO = "TXT"
+    RichTextBox1.SaveFile sFILENAME, rtfText
+    RichTextBox1.SetFocus
+  End If
+
 End Sub
 
 '***************************************************************************
@@ -2097,24 +2097,24 @@ End Sub
 '***************************************************************************
 
 Private Sub mnusave_Click()
-    If cARQTIPO = "RTF" Then
-        RichTextBox1.SaveFile cARQRTF, rtfRTF
-    Else
-        RichTextBox1.SaveFile cARQRTF, rtfText
-    End If
-    RichTextBox1.SetFocus
+  If cARQTIPO = "RTF" Then
+    RichTextBox1.SaveFile cARQRTF, rtfRTF
+  Else
+    RichTextBox1.SaveFile cARQRTF, rtfText
+  End If
+  RichTextBox1.SetFocus
 End Sub
 
 Private Sub mnuscrinf_Click()
-    RichTextBox1.SelCharOffset = -55
+  RichTextBox1.SelCharOffset = -55
 End Sub
 
 Private Sub mnuscrnor_Click()
-    RichTextBox1.SelCharOffset = 0
+  RichTextBox1.SelCharOffset = 0
 End Sub
 
 Private Sub mnuscrsup_Click()
-    RichTextBox1.SelCharOffset = 55
+  RichTextBox1.SelCharOffset = 55
 End Sub
 
 '***************************************************************************
@@ -2128,39 +2128,39 @@ End Sub
 
 
 Private Sub mnuselectall_Click()
-    RichTextBox1.SelStart = 0
-    RichTextBox1.SelLength = Len(RichTextBox1.Text)
-    RichTextBox1.SetFocus
+  RichTextBox1.SelStart = 0
+  RichTextBox1.SelLength = Len(RichTextBox1.tEXT)
+  RichTextBox1.SetFocus
 End Sub
 
 Private Sub mnuselectline_Click()
-    SendKeys "{HOME}"
-    SendKeys "+{END}"
+  SendKeys "{HOME}"
+  SendKeys "+{END}"
 End Sub
 
 Private Sub mnuselsen_Click()
-    With RichTextBox1
-     '   .Span ".?!:", True, True
-        .SelLength = .SelLength + 1
-    End With
+  With RichTextBox1
+    '   .Span ".?!:", True, True
+    .SelLength = .SelLength + 1
+  End With
 End Sub
 
 Private Sub mnuselword_Click()
-   'RichTextbox1.S
-   ' RichTextbox1.Span " ,;:.?!", True, True
+'RichTextbox1.S
+' RichTextbox1.Span " ,;:.?!", True, True
 End Sub
 
 Private Sub mnusendmail_Click()
-    mnusave_Click                                ''salva antes de enviar
-    ePASS01 = Array("", _
-                    "", _
-                    "", _
-                    "", _
-                    "", _
-                    cARQRTF, _
-                    "", _
-                    False)
-    FrmSendMail.Show vbModal, Me
+  mnusave_Click                                ''salva antes de enviar
+  ePASS01 = Array("", _
+                  "", _
+                  "", _
+                  "", _
+                  "", _
+                  cARQRTF, _
+                  "", _
+                  False)
+  FrmSendMail.Show vbModal, Me
 End Sub
 
 '***************************************************************************
@@ -2173,11 +2173,11 @@ End Sub
 '***************************************************************************
 
 Private Sub mnustrik_Click()
-    Command21_Click
+  Command21_Click
 End Sub
 
 Private Sub mnutirace_Click()
-    RichTextBox1.SelText = Tirace(RichTextBox1.SelText)
+  RichTextBox1.SelText = Tirace(RichTextBox1.SelText)
 End Sub
 
 '***************************************************************************
@@ -2190,7 +2190,7 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuunder_Click()
-    Command9_Click
+  Command9_Click
 End Sub
 
 '***************************************************************************
@@ -2203,120 +2203,120 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuundo_Click()
-    Dim Success
-    Success = SendMessage(RichTextBox1.hWnd, WM_UNDO, 0&, 0&)
-    RichTextBox1.SetFocus
+  Dim Success
+  Success = SendMessage(RichTextBox1.hWnd, WM_UNDO, 0&, 0&)
+  RichTextBox1.SetFocus
 End Sub
 
 Private Sub mnuUpper_Click()
-    RichTextBox1.SelText = UCase(RichTextBox1.SelText)
+  RichTextBox1.SelText = UCase(RichTextBox1.SelText)
 End Sub
 
 
 Private Sub MenuEvents_MenuHelp(ByVal MenuText As String, ByVal MenuHelp As String, ByVal Enabled As Boolean)
-    If gbSubClassMenu Then
-        '/ this event show Decription menu-item to a StatusBar control
-        '/ customize for your project, if you need this.
-        '/ Note: MenuText contain the menu Caption.
-        '/       MenuHelp contain the Description string.
-        '/ example: sbStatusBar.Panels(1).text = MenuHelp
-        '/          lblMenuHelp.Caption = MenuHelp
-    End If
+  If gbSubClassMenu Then
+    '/ this event show Decription menu-item to a StatusBar control
+    '/ customize for your project, if you need this.
+    '/ Note: MenuText contain the menu Caption.
+    '/       MenuHelp contain the Description string.
+    '/ example: sbStatusBar.Panels(1).text = MenuHelp
+    '/          lblMenuHelp.Caption = MenuHelp
+  End If
 End Sub
 
 Public Sub SubClassMenuXP()
 
-    '/ this code is made by MenuCreator add-in
+'/ this code is made by MenuCreator add-in
 
-    '/ prepare the caption for subclassing. Warning! Don't remove this comment!!!
-    Menu1.Caption = "&Arquivo"
-    mnunew.Caption = "&Novo|#new"
-    mnuOpen.Caption = "&Abrir|#open"
-    mnusave.Caption = "&Salvar|#salvar"
-    mnusaveastxt.Caption = "Salvar Como &TXT"
-    mnusaveasrtf.Caption = "Salvar Como &RTF"
-    mnuprint.Caption = "&Imprimir|#printer"
-    mnuprintcfg.Caption = "&Configurar Impressora|#printcfg"
-    mnusendmail.Caption = "&Enviar Email|#mail"
-    mnuexit.Caption = "Sa&ir|#exit"
-    Menu2.Caption = "&Editar"
-    mnuundo.Caption = "&Desfazer|#refazer"
-    tr01.Caption = "-"
-    mnuselectall.Caption = "Selecionar &Tudo"
-    mnuselectline.Caption = "Selecionar Linha"
-    mnuselword.Caption = "Selecionar Palavra"
-    mnuselsen.Caption = "Selecionar Sentençao"
-    mnuDelSel.Caption = "Deletar Seleçao"
-    tr02.Caption = "-"
-    mnucopy.Caption = "&Copiar|#copy"
-    mnupaste.Caption = "Co&lar|#colar"
-    mnucut.Caption = "&Recortar|#cut"
-    tr03.Caption = "-"
-    mnufind.Caption = "Locali&zar|#busca"
-    mnufindNext.Caption = "Localizar Pro&xima|#proximabusca"
-    mnufindrep.Caption = "Localizar e Substituir"
-    tr04.Caption = "-"
-    mnuinsdate.Caption = "Inserir Data|#diahora"
-    mnuinsimg.Caption = "Inserir Imagem|#imagem"
-    mnuEditarInserirCaracter.Caption = "Inserir Caracter"
-    Menu3.Caption = "Format"
-    mnutext.Caption = "Alinhamento"
-    mnuleft.Caption = "Esquerada|#left"
-    mnuright.Caption = "Direita|#right"
-    mnucenter.Caption = "Centralizado|#center"
-    mnufonte.Caption = "Fontes Letra"
-    mnucustomcolors.Caption = "Escolher Cor|#imagem2"
-    mnucolor.Caption = "Cores"
-    mnuFntesc.Caption = "Fonte de Letra|#letra"
-    mnubold.Caption = "Negrito|#Bold"
-    mnuitalico.Caption = "Italico|#italico"
-    mnuunder.Caption = "Sublilhado|#underline"
-    mnustrik.Caption = "Riscado|#riscado"
-    mnuVerFontes.Caption = "Ver Fontes|#find"
-    xxx.Caption = "Identicaçao"
-    mnuIncInd.Caption = "Aumentar Posiçao|#imagem"
-    mnudecInd.Caption = "Diminuir Posiçao|#decrese"
-    yyy.Caption = "Escrita"
-    mnuscrsup.Caption = "Escrita Superior|#sob"
-    mnuscrinf.Caption = "Escrita Inferior|#sub"
-    mnuscrnor.Caption = "Escrita Normal"
-    mnubullet.Caption = "Marcador|#xxx"
-    mnucnv.Caption = "Converter "
-    mnuUpper.Caption = "Maisculas|#maisculas"
-    mnuDown.Caption = "Minusculas|#minusculas"
-    mnucapitalizar.Caption = "Capitalizar"
-    mnutirace.Caption = "Tira Acentuaçao"
-    mnucnvoem.Caption = "Converter Ansi(Windows)-> Oem(DOS)"
-    mnucnvoem2.Caption = "Converter Ansi(Windows)-> Oem(DOS)Padrao2"
-    mnucnvansi.Caption = "Converter Oem(DOS)->Ansi(Windows)"
-    mnucnvansi2.Caption = "Converter Oem(DOS)->Ansi(Windows)Padrao2"
-    Menu4.Caption = "Aj&uda"
-    mnuabout.Caption = "&Sobre|#info"
+'/ prepare the caption for subclassing. Warning! Don't remove this comment!!!
+  Menu1.Caption = "&Arquivo"
+  mnunew.Caption = "&Novo|#new"
+  mnuOpen.Caption = "&Abrir|#open"
+  mnusave.Caption = "&Salvar|#salvar"
+  mnusaveastxt.Caption = "Salvar Como &TXT"
+  mnusaveasrtf.Caption = "Salvar Como &RTF"
+  mnuprint.Caption = "&Imprimir|#printer"
+  mnuprintcfg.Caption = "&Configurar Impressora|#printcfg"
+  mnusendmail.Caption = "&Enviar Email|#mail"
+  mnuexit.Caption = "Sa&ir|#exit"
+  Menu2.Caption = "&Editar"
+  mnuundo.Caption = "&Desfazer|#refazer"
+  tr01.Caption = "-"
+  mnuselectall.Caption = "Selecionar &Tudo"
+  mnuselectline.Caption = "Selecionar Linha"
+  mnuselword.Caption = "Selecionar Palavra"
+  mnuselsen.Caption = "Selecionar Sentençao"
+  mnuDelSel.Caption = "Deletar Seleçao"
+  tr02.Caption = "-"
+  mnucopy.Caption = "&Copiar|#copy"
+  mnupaste.Caption = "Co&lar|#colar"
+  mnucut.Caption = "&Recortar|#cut"
+  tr03.Caption = "-"
+  mnufind.Caption = "Locali&zar|#busca"
+  mnufindNext.Caption = "Localizar Pro&xima|#proximabusca"
+  mnufindrep.Caption = "Localizar e Substituir"
+  tr04.Caption = "-"
+  mnuinsdate.Caption = "Inserir Data|#diahora"
+  mnuinsimg.Caption = "Inserir Imagem|#imagem"
+  mnuEditarInserirCaracter.Caption = "Inserir Caracter"
+  Menu3.Caption = "Format"
+  mnutext.Caption = "Alinhamento"
+  mnuleft.Caption = "Esquerada|#left"
+  mnuright.Caption = "Direita|#right"
+  mnucenter.Caption = "Centralizado|#center"
+  mnufonte.Caption = "Fontes Letra"
+  mnucustomcolors.Caption = "Escolher Cor|#imagem2"
+  mnucolor.Caption = "Cores"
+  mnuFntesc.Caption = "Fonte de Letra|#letra"
+  mnubold.Caption = "Negrito|#Bold"
+  mnuitalico.Caption = "Italico|#italico"
+  mnuunder.Caption = "Sublilhado|#underline"
+  mnustrik.Caption = "Riscado|#riscado"
+  mnuVerFontes.Caption = "Ver Fontes|#find"
+  xxx.Caption = "Identicaçao"
+  mnuIncInd.Caption = "Aumentar Posiçao|#imagem"
+  mnudecInd.Caption = "Diminuir Posiçao|#decrese"
+  yyy.Caption = "Escrita"
+  mnuscrsup.Caption = "Escrita Superior|#sob"
+  mnuscrinf.Caption = "Escrita Inferior|#sub"
+  mnuscrnor.Caption = "Escrita Normal"
+  mnubullet.Caption = "Marcador|#xxx"
+  mnucnv.Caption = "Converter "
+  mnuUpper.Caption = "Maisculas|#maisculas"
+  mnuDown.Caption = "Minusculas|#minusculas"
+  mnucapitalizar.Caption = "Capitalizar"
+  mnutirace.Caption = "Tira Acentuaçao"
+  mnucnvoem.Caption = "Converter Ansi(Windows)-> Oem(DOS)"
+  mnucnvoem2.Caption = "Converter Ansi(Windows)-> Oem(DOS)Padrao2"
+  mnucnvansi.Caption = "Converter Oem(DOS)->Ansi(Windows)"
+  mnucnvansi2.Caption = "Converter Oem(DOS)->Ansi(Windows)Padrao2"
+  Menu4.Caption = "Aj&uda"
+  mnuabout.Caption = "&Sobre|#info"
 
-    '/ Subclassing menu. Warning! Don't remove this comment!!!
+  '/ Subclassing menu. Warning! Don't remove this comment!!!
 
-    Set MenuEvents = New CEvents
-    Set objMenuEx = New cMenuEx
-    Call objMenuEx.Install(Me.hWnd, App.Path & "\" & Me.Name, ImgMenu, 2, MenuEvents)
+  Set MenuEvents = New CEvents
+  Set objMenuEx = New cMenuEx
+  Call objMenuEx.Install(Me.hWnd, App.Path & "\" & Me.Name, ImgMenu, 2, MenuEvents)
 
 End Sub
 
 Public Sub MenuDesigner()
-    '/ Open Menu Designer tool
-    objMenuEx.MenuDesigner Me.hWnd
+'/ Open Menu Designer tool
+  objMenuEx.MenuDesigner Me.hWnd
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    '/ This Form_UnLoad is add by MenuCreator
+'/ This Form_UnLoad is add by MenuCreator
 
-    If gbSubClassMenu Then
-        '/ prevent error if the menu is not subclassed
-        On Error Resume Next
-        '/ release object
-        Call objMenuEx.Uninstall(Me.hWnd, ImgMenu, MenuEvents)
-        Set MenuEvents = Nothing
-        Set objMenuEx = Nothing
-    End If
+  If gbSubClassMenu Then
+    '/ prevent error if the menu is not subclassed
+    On Error Resume Next
+    '/ release object
+    Call objMenuEx.Uninstall(Me.hWnd, ImgMenu, MenuEvents)
+    Set MenuEvents = Nothing
+    Set objMenuEx = Nothing
+  End If
 
 End Sub
 

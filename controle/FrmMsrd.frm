@@ -156,49 +156,49 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = PegPath("PATH", "MANA5TGQ")
-    cARQ = GeraConn(cARQ, "SDECDX")
-    cSQL = "select * from MSRD WHERE MSRD=" & ePASS01
-    nCAMPOS = 6
-    aCAM = Array("DATA", "OCORREU", "DESC01", "DESC02", "INV01", "ACA01")
-    aFOR = Array("D", "C", "C", "C", "C", "C")
-    aPAD = Array("", "", "", "", "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
+  CenterFormToScreen Me
+  cARQ = PegPath("PATH", "MANA5TGQ")
+  cARQ = GeraConn(cARQ, "SDECDX")
+  cSQL = "select * from MSRD WHERE MSRD=" & ePASS01
+  nCAMPOS = 6
+  aCAM = Array("DATA", "OCORREU", "DESC01", "DESC02", "INV01", "ACA01")
+  aFOR = Array("D", "C", "C", "C", "C", "C")
+  aPAD = Array("", "", "", "", "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub txtFields_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 

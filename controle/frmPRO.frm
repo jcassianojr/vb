@@ -188,53 +188,53 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub esciedx_Click()
-    iMU01 = 201
-    escIED.Show vbModal, Me
-    If lRETU Then
-        TXTFIELDS(0) = eRETU02
-    End If
+  iMU01 = 201
+  escIED.Show vbModal, Me
+  If lRETU Then
+    TXTFIELDS(0) = eRETU02
+  End If
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = PegPath("PATH", "DESENHO")
-    cSQL = "select * from PRODENG WHERE NUMERO=" & nPF & " AND TIPO='" & cCONJUNTO & "'"
-    nCAMPOS = 5
-    aCAM = Array("RESCLI", "TIPO", "NUMERO", "PRODUTO", "NOME")
-    aFOR = Array("C", "C", "NI", "C", "C")
-    aPAD = Array("", "", 0, "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
+  CenterFormToScreen Me
+  cARQ = PegPath("PATH", "DESENHO")
+  cSQL = "select * from PRODENG WHERE NUMERO=" & nPF & " AND TIPO='" & cCONJUNTO & "'"
+  nCAMPOS = 5
+  aCAM = Array("RESCLI", "TIPO", "NUMERO", "PRODUTO", "NOME")
+  aFOR = Array("C", "C", "NI", "C", "C")
+  aPAD = Array("", "", 0, "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
 
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 

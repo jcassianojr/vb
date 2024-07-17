@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmLocalizar 
    Caption         =   "Localizar"
    ClientHeight    =   2025
@@ -49,7 +49,7 @@ Begin VB.Form frmLocalizar
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin vbccr18.SpinBox nIND 
+   Begin VBCCR18.SpinBox nIND 
       Height          =   615
       Left            =   2160
       TabIndex        =   4
@@ -137,69 +137,69 @@ Const nFORMID = 1072
 Const cFORMID = "Dialogo de Busca"
 
 Private Sub cBUSCA_GotFocus()
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub cBUSCA_KeyUp(KeyCode As Integer, Shift As Integer)
-    If KeyCode = 13 Or KeyCode = 40 Then
-        SendKeys Chr(9)
-    End If
-    If KeyCode = 38 Then
-        SendKeys "+" + Chr(9)
-    End If
+  If KeyCode = 13 Or KeyCode = 40 Then
+    SendKeys Chr(9)
+  End If
+  If KeyCode = 38 Then
+    SendKeys "+" + Chr(9)
+  End If
 End Sub
 
 Private Sub Command1_Click()
-    lRETU = True
-    Unload Me
+  lRETU = True
+  Unload Me
 End Sub
 
 Private Sub Command2_Click()
-    lRETU = False
-    Unload Me
+  lRETU = False
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    Me.Caption = cFORMID
-    HelpContextID = nFORMID
-    
-    lRETU = False
-    'frmLocalizar.Left = (Screen.Width - frmLocalizar.Width) / 2
-    'frmLocalizar.Top = (Screen.Height - frmLocalizar.Height) / 2
+  CenterFormToScreen Me
+  Me.Caption = cFORMID
+  HelpContextID = nFORMID
+
+  lRETU = False
+  'frmLocalizar.Left = (Screen.Width - frmLocalizar.Width) / 2
+  'frmLocalizar.Top = (Screen.Height - frmLocalizar.Height) / 2
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-    eRETU01 = cBUSCA
-    eRETU02 = nIND
+  eRETU01 = cBUSCA
+  eRETU02 = nIND
 End Sub
 
 Private Sub mais_Click()
-    nIND = CStr(IncDec(nIND, 1, 1, 99))
+  nIND = CStr(IncDec(nIND, 1, 1, 99))
 End Sub
 
 Private Sub menos_Click()
-    nIND = CStr(IncDec(nIND, -1, 1, 99))
+  nIND = CStr(IncDec(nIND, -1, 1, 99))
 End Sub
 
 Private Sub nIND_GotFocus()
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub nIND_KeyPress(KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub nIND_KeyUp(KeyCode As Integer, Shift As Integer)
-    If KeyCode = 13 Or KeyCode = 40 Then
-        SendKeys Chr(9)
-    End If
-    If KeyCode = 38 Then
-        SendKeys "+" + Chr(9)
-    End If
+  If KeyCode = 13 Or KeyCode = 40 Then
+    SendKeys Chr(9)
+  End If
+  If KeyCode = 38 Then
+    SendKeys "+" + Chr(9)
+  End If
 End Sub
 

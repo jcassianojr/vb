@@ -166,64 +166,64 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = PegPath("PATH", "PF")
-    cSQL = "SELECT * FROM PFD WHERE ID=" & ePASS01
-    nCAMPOS = 3
-    aCAM = Array("CQTDE", "FREQ", "SETOR")
-    aFOR = Array("C", "C", "C")
-    aPAD = Array("", "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
+  CenterFormToScreen Me
+  cARQ = PegPath("PATH", "PF")
+  cSQL = "SELECT * FROM PFD WHERE ID=" & ePASS01
+  nCAMPOS = 3
+  aCAM = Array("CQTDE", "FREQ", "SETOR")
+  aFOR = Array("C", "C", "C")
+  aPAD = Array("", "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
 End Sub
 
 Private Sub Setor_Click(Index As Integer)
 
-    Select Case Index
+  Select Case Index
 
-    Case 0
-        Me.TXTFIELDS(2) = "P"
+  Case 0
+    Me.TXTFIELDS(2) = "P"
 
-    Case 1
-        Me.TXTFIELDS(2) = "O"
+  Case 1
+    Me.TXTFIELDS(2) = "O"
 
-    Case 2
-        Me.TXTFIELDS(2) = "L"
+  Case 2
+    Me.TXTFIELDS(2) = "L"
 
-    Case 3
-        Me.TXTFIELDS(2) = "R"
+  Case 3
+    Me.TXTFIELDS(2) = "R"
 
-    End Select
+  End Select
 
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 

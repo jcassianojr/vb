@@ -386,78 +386,86 @@ Attribute VB_Exposed = False
 Option Explicit
 Const cFORMID = "Apurado Femea Operacoes"
 Dim aCAM, aFOR, aVAL, aPAD As Variant
+Attribute aFOR.VB_VarUserMemId = 1073938432
+Attribute aVAL.VB_VarUserMemId = 1073938432
+Attribute aPAD.VB_VarUserMemId = 1073938432
 Dim cARQFEMEA, cARQPF, cSQLUSO As String
+Attribute cARQFEMEA.VB_VarUserMemId = 1073938436
+Attribute cARQPF.VB_VarUserMemId = 1073938436
+Attribute cSQLUSO.VB_VarUserMemId = 1073938436
 Dim nITEM, nCAMPOS As Long
+Attribute nITEM.VB_VarUserMemId = 1073938439
+Attribute nCAMPOS.VB_VarUserMemId = 1073938439
 
 Private Sub cmdClose_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-    If MDG("Gravar e Sair", "Gravando ") Then
-        For nITEM = 0 To nCAMPOS - 1
-            aVAL(nITEM) = tEXT(nITEM)
-        Next nITEM
-        GrvSQL cARQFEMEA, cSQLUSO, nCAMPOS, aCAM, aVAL, aFOR
-        GravaLog 999, 0, "Gravou "
-    Else
-        GravaLog 999, 0, "Nao Gravou "
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If MDG("Gravar e Sair", "Gravando ") Then
+    For nITEM = 0 To nCAMPOS - 1
+      aVAL(nITEM) = tEXT(nITEM)
+    Next nITEM
+    GrvSQL cARQFEMEA, cSQLUSO, nCAMPOS, aCAM, aVAL, aFOR
+    GravaLog 999, 0, "Gravou "
+  Else
+    GravaLog 999, 0, "Nao Gravou "
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-  
-    CenterFormToScreen Me
-    ''Configura Help
-    Me.Caption = cFORMID
-    ''HelpContextID = nFORMID
-   
-    ''Arquivo
-    cARQPF = PegPath("PATH", "PF")
-    cARQFEMEA = PegPath("PATH", "FEMEA")
-    If Not FileExist(cARQFEMEA, True) Then
-        End
-    End If
-   
-    'Variaveis sql
-    cSQLUSO = ePASS01
-    nCAMPOS = 15
-    aCAM = Array("SEQ", "PF", "MES", "ANO", "PRONUM", _
-                 "TOTCAU", "TOTRPN", "TOTM40", "MAIRPN", "TOTFX01", _
-                 "TOTFX02", "TOTFX03", "TOTRPN01", "TOTRPN02", "TOTRPN03")
-    aFOR = Array("NI", "NI", "NI", "NI", "NI", _
-                 "NI", "NI", "NI", "NI", "NI", _
-                 "NI", "NI", "NI", "NI", "NI")
-    aPAD = Array(0, 0, 0, 0, 0, _
-                 0, 0, 0, 0, 0, _
-                 0, 0, 0, 0, 0)
-    aVAL = PegSQL(cARQFEMEA, cSQLUSO, nCAMPOS, aCAM, aFOR, aPAD)
-    For nITEM = 0 To nCAMPOS - 1
-        tEXT(nITEM) = aVAL(nITEM)
-    Next nITEM
+
+  CenterFormToScreen Me
+  ''Configura Help
+  Me.Caption = cFORMID
+  ''HelpContextID = nFORMID
+
+  ''Arquivo
+  cARQPF = PegPath("PATH", "PF")
+  cARQFEMEA = PegPath("PATH", "FEMEA")
+  If Not FileExist(cARQFEMEA, True) Then
+    End
+  End If
+
+  'Variaveis sql
+  cSQLUSO = ePASS01
+  nCAMPOS = 15
+  aCAM = Array("SEQ", "PF", "MES", "ANO", "PRONUM", _
+               "TOTCAU", "TOTRPN", "TOTM40", "MAIRPN", "TOTFX01", _
+               "TOTFX02", "TOTFX03", "TOTRPN01", "TOTRPN02", "TOTRPN03")
+  aFOR = Array("NI", "NI", "NI", "NI", "NI", _
+               "NI", "NI", "NI", "NI", "NI", _
+               "NI", "NI", "NI", "NI", "NI")
+  aPAD = Array(0, 0, 0, 0, 0, _
+               0, 0, 0, 0, 0, _
+               0, 0, 0, 0, 0)
+  aVAL = PegSQL(cARQFEMEA, cSQLUSO, nCAMPOS, aCAM, aFOR, aPAD)
+  For nITEM = 0 To nCAMPOS - 1
+    tEXT(nITEM) = aVAL(nITEM)
+  Next nITEM
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Text_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub tEXT_KeyPress(Index As Integer, KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 

@@ -113,42 +113,42 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txtFields(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = txtFields(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = zRPTARQ
-    cSQL = "select * from RPTGRP WHERE GRP='" & zgrp & "'"
-        
-    nCAMPOS = 2
-    aCAM = Array("GRP", "NOME")
-    aFOR = Array("C", "C")
-    aPAD = Array("", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
+  CenterFormToScreen Me
+  cARQ = zRPTARQ
+  cSQL = "select * from RPTGRP WHERE GRP='" & zgrp & "'"
+
+  nCAMPOS = 2
+  aCAM = Array("GRP", "NOME")
+  aFOR = Array("C", "C")
+  aPAD = Array("", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    txtFields(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
 
 End Sub
 

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmIMP4 
    Caption         =   "Importando Dados"
    ClientHeight    =   4125
@@ -213,7 +213,7 @@ Begin VB.Form frmIMP4
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin vbccr18.SpinBox mes 
+   Begin VBCCR18.SpinBox mes 
       Height          =   615
       Left            =   2760
       TabIndex        =   21
@@ -288,132 +288,132 @@ Dim cARQPFG As String
 Dim cARQFEMEA As String
 
 Private Sub Cancle_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 Private Sub importar()
-    Dim nPFORI As Long
-    Dim sSQL As String
-    Dim cORIGEM As String
-    Dim cDUPSQL As String
+  Dim nPFORI As Long
+  Dim sSQL As String
+  Dim cORIGEM As String
+  Dim cDUPSQL As String
 
-    On Error Resume Next
-    
-    nPFORI = Val(tEXT(0))
-    
-    'Sequencia Duplicaçao
-    cDUPSQL = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
-    
+  On Error Resume Next
 
-    'sql Arquivo Origem
-    sSQL = "select * from PFCMS03 WHERE PF=" & nPFORI & " AND CODCOMP='" & tEXT(1) & "'"
-    
-    If Recebimento.Value = Checked Then
-        Select Case mes
-        Case 1
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=10"
-        Case 2
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=10"
-        Case 3
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=10"
-        End Select
-    End If
-    If laboratorio.Value = Checked Then
-        Select Case mes
-        Case 1
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=20"
-        Case 2
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=20"
-        Case 3
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=20"
-        End Select
-    End If
-    If Final.Value = Checked Then
-        sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=99 AND SSQ=99"
-    End If
-    
-    
+  nPFORI = Val(tEXT(0))
 
-    'Arquivo de origem
-    cORIGEM = cARQPF                             'NORMAL
-    If preliminar.Value = Checked Then
-        cORIGEM = cARQPFP
-    End If
-    If gp12.Value = Checked Then
-        cORIGEM = cARQPFG
-    End If
-    
-    importa2 cARQPF, cDUPSQL, cORIGEM, sSQL, Sdb, cARQIMP, "PFCO"
-    
+  'Sequencia Duplicaçao
+  cDUPSQL = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
+
+
+  'sql Arquivo Origem
+  sSQL = "select * from PFCMS03 WHERE PF=" & nPFORI & " AND CODCOMP='" & tEXT(1) & "'"
+
+  If Recebimento.Value = Checked Then
+    Select Case mes
+    Case 1
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=10"
+    Case 2
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=10"
+    Case 3
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=10"
+    End Select
+  End If
+  If laboratorio.Value = Checked Then
+    Select Case mes
+    Case 1
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=20"
+    Case 2
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=20"
+    Case 3
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=20"
+    End Select
+  End If
+  If Final.Value = Checked Then
+    sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=99 AND SSQ=99"
+  End If
+
+
+
+  'Arquivo de origem
+  cORIGEM = cARQPF                             'NORMAL
+  If preliminar.Value = Checked Then
+    cORIGEM = cARQPFP
+  End If
+  If gp12.Value = Checked Then
+    cORIGEM = cARQPFG
+  End If
+
+  importa2 cARQPF, cDUPSQL, cORIGEM, sSQL, Sdb, cARQIMP, "PFCO"
+
 
 End Sub
 
 Private Sub CmdescPF_Click()
-    escpf.Show vbModal, Me
-    If lRETU Then
-        tEXT(0).tEXT = eRETU01
-    End If
+  escpf.Show vbModal, Me
+  If lRETU Then
+    tEXT(0).tEXT = eRETU01
+  End If
 
 End Sub
 
 Private Sub Command1_Click()
-    TXTFIELDS(1) = "M"
+  TXTFIELDS(1) = "M"
 End Sub
 
 Private Sub Command2_Click()
-    TXTFIELDS(1) = "C"
+  TXTFIELDS(1) = "C"
 End Sub
 
 Private Sub Command3_Click()
-    TXTFIELDS(1) = "T"
+  TXTFIELDS(1) = "T"
 End Sub
 
 Private Sub Command4_Click()
-    TXTFIELDS(1) = "S"
+  TXTFIELDS(1) = "S"
 End Sub
 
 Private Sub escmu_Click()
-    iMU01 = 0
-    Select Case TXTFIELDS(1)
-    Case "M"
-        iMU01 = 1
-    Case "C"
-        iMU01 = 2
-    Case "T"
-        iMU01 = 5
-    Case "S"
-        iMU01 = 7
-    End Select
-    If iMU01 > 0 Then
-        escmu01.Show vbModal, Me
-        If Not lRETU Then Exit Sub
-        frmPFMS03.TXTFIELDS(2) = eRETU01
-        Command1_Click
-    End If
+  iMU01 = 0
+  Select Case TXTFIELDS(1)
+  Case "M"
+    iMU01 = 1
+  Case "C"
+    iMU01 = 2
+  Case "T"
+    iMU01 = 5
+  Case "S"
+    iMU01 = 7
+  End Select
+  If iMU01 > 0 Then
+    escmu01.Show vbModal, Me
+    If Not lRETU Then Exit Sub
+    frmPFMS03.TXTFIELDS(2) = eRETU01
+    Command1_Click
+  End If
 
 End Sub
 
 Private Sub Final_Click()
-    laboratorio.Value = False
-    Recebimento.Value = False
+  laboratorio.Value = False
+  Recebimento.Value = False
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub laboratorio_Click()
-    Recebimento.Value = False
-    Final.Value = False
+  Recebimento.Value = False
+  Final.Value = False
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQFEMEA = PegPath("PATH", "FEMEA")
-    cARQPF = PegPath("PATH", "PF")
-    cARQPFP = PegPath("PATH", "PFP")
-    cARQPFG = PegPath("PATH", "PFG")
-    TXTFIELDS(1) = "M"
+  CenterFormToScreen Me
+  cARQFEMEA = PegPath("PATH", "FEMEA")
+  cARQPF = PegPath("PATH", "PF")
+  cARQPFP = PegPath("PATH", "PFP")
+  cARQPFG = PegPath("PATH", "PFG")
+  TXTFIELDS(1) = "M"
 End Sub
 
 
@@ -427,49 +427,49 @@ End Sub
 'End Sub
 
 Private Sub mes_GotFocus()
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub mes_KeyPress(KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub ok_Click()
-    importar
-    Unload Me
+  importar
+  Unload Me
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Recebimento_Click()
-    laboratorio.Value = False
-    Final.Value = False
+  laboratorio.Value = False
+  Final.Value = False
 End Sub
 
 Private Sub Text_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub tEXT_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index = 0 Then
-        KeyAscii = ValiText(KeyAscii, "#NI")
-    End If
+  If Index = 0 Then
+    KeyAscii = ValiText(KeyAscii, "#NI")
+  End If
 End Sub
 
 Private Sub gp12_Click()
-    Normal.Value = False
-    preliminar.Value = False
+  Normal.Value = False
+  preliminar.Value = False
 End Sub
 
 Private Sub preliminar_Click()
-    gp12.Value = False
-    Normal.Value = False
+  gp12.Value = False
+  Normal.Value = False
 End Sub
 
 Private Sub Normal_Click()
-    gp12.Value = False
-    preliminar.Value = False
+  gp12.Value = False
+  preliminar.Value = False
 End Sub
 

@@ -182,40 +182,40 @@ Dim DLG As New clsCommonDialogs
 Dim OldDefaultPrinter As String
 Dim Loaded As Boolean
 Private Sub Command6_Click()
-    DLG.DialogConnectToPrinter
+  DLG.DialogConnectToPrinter
 End Sub
 Private Sub Command9_Click()
-    DLG.DialogPrint
-    
+  DLG.DialogPrint
+
 End Sub
 Private Sub Encerrar_Click()
-    Unload Me
+  Unload Me
 End Sub
 Private Sub cboPrinters_Click()
-Dim OUSO
-    If Loaded Then
-        Me.MousePointer = vbHourglass
-        OUSO = DLG.GetPrinterFromDevice(cboPrinters.Text)
-       '' If DLG.SetDefaultPrinter(Byref OUSO) Then
-       ''     txtDefault.tEXT = cboPrinters.tEXT
-       '' End If
-        Me.MousePointer = vbNormal
-    End If
+  Dim OUSO
+  If Loaded Then
+    Me.MousePointer = vbHourglass
+    OUSO = DLG.GetPrinterFromDevice(cboPrinters.tEXT)
+    '' If DLG.SetDefaultPrinter(Byref OUSO) Then
+    ''     txtDefault.tEXT = cboPrinters.tEXT
+    '' End If
+    Me.MousePointer = vbNormal
+  End If
 End Sub
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    Me.Caption = cFORMID
-    HelpContextID = nFORMID
-    
-    DLG.hWnd = Me.hWnd
-    txtDefault.Text = DLG.GetDefaultPrinter
-    OldDefaultPrinter = txtDefault.Text
-    DLG.LoadPrinters cboPrinters, False
-    Loaded = True
+  CenterFormToScreen Me
+  Me.Caption = cFORMID
+  HelpContextID = nFORMID
+
+  DLG.hWnd = Me.hWnd
+  txtDefault.tEXT = DLG.GetDefaultPrinter
+  OldDefaultPrinter = txtDefault.tEXT
+  DLG.LoadPrinters cboPrinters, False
+  Loaded = True
 End Sub
 
 
 
 Private Sub XPButton1_Click()
-DLG.DialogPrintSetup
+  DLG.DialogPrintSetup
 End Sub

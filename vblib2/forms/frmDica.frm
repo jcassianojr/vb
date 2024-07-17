@@ -166,50 +166,50 @@ Dim cARQ As String
 Dim x As Long
 
 Private Sub cmdProxima_Click()
-    PegMensagem
+  PegMensagem
 End Sub
 
 Private Sub cmdOK_Click()
-    sExibir = IIf(chkExibir = vbChecked, "S", "N")
-    x = WritePrivateProfileString("CITACAO", zUSER, sExibir, App.Path + "\" & App.EXEName & ".INI")
-    'X = WritePrivateProfileString(zUSER, "EXIBIR", sExibir, App.Path & "\CITACAO.INI")
-    Unload Me
+  sExibir = IIf(chkExibir = vbChecked, "S", "N")
+  x = WritePrivateProfileString("CITACAO", zUSER, sExibir, App.Path + "\" & App.EXEName & ".INI")
+  'X = WritePrivateProfileString(zUSER, "EXIBIR", sExibir, App.Path & "\CITACAO.INI")
+  Unload Me
 End Sub
 
 Private Sub PegMensagem()
-    Dim cSQL As String
-    Dim aRETU As Variant
-    lRETU = False
-    While Not lRETU
-        cSQL = "SELECT tblCitacao.Titulo, tblCitacao.Citacao, tblCitacao.Titulo, tblAutor.Nome as Autor, " & _
-               "tblAutor.Nacionalidade, tblOcupacao.Nome As Ocupacao FROM (tblAutor LEFT JOIN tblOcupacao " & _
-               "ON tblAutor.codOcupacao = tblOcupacao.codOcupacao) RIGHT JOIN tblCitacao ON tblAutor.codAutor = " & _
-               "tblCitacao.codAutor Where Not tblCitacao.Ocultar and codcitacao=" & RandomNumber(nTOTREG)
-        aRETU = PegSQL(cARQ, cSQL, 5, Array("titulo", "citacao", "autor", "ocupacao", "nacionalidade"), _
-                       Array("CC", "CC", "CC", "CC", "CC"), _
-                       Array("", "", "", "", ""))
-        lblTitulo = FixStr(aRETU(0))
-        lblMensagem = FixStr(aRETU(1))
-        lblAutor = FixStr(aRETU(2), "") & ", " & FixStr(aRETU(3), "") & ", " & FixStr(aRETU(4))
-    Wend
+  Dim cSQL As String
+  Dim aRETU As Variant
+  lRETU = False
+  While Not lRETU
+    cSQL = "SELECT tblCitacao.Titulo, tblCitacao.Citacao, tblCitacao.Titulo, tblAutor.Nome as Autor, " & _
+           "tblAutor.Nacionalidade, tblOcupacao.Nome As Ocupacao FROM (tblAutor LEFT JOIN tblOcupacao " & _
+           "ON tblAutor.codOcupacao = tblOcupacao.codOcupacao) RIGHT JOIN tblCitacao ON tblAutor.codAutor = " & _
+           "tblCitacao.codAutor Where Not tblCitacao.Ocultar and codcitacao=" & RandomNumber(nTOTREG)
+    aRETU = PegSQL(cARQ, cSQL, 5, Array("titulo", "citacao", "autor", "ocupacao", "nacionalidade"), _
+                   Array("CC", "CC", "CC", "CC", "CC"), _
+                   Array("", "", "", "", ""))
+    lblTitulo = FixStr(aRETU(0))
+    lblMensagem = FixStr(aRETU(1))
+    lblAutor = FixStr(aRETU(2), "") & ", " & FixStr(aRETU(3), "") & ", " & FixStr(aRETU(4))
+  Wend
 End Sub
 
 Private Sub Form_Load()
-    cARQ = PegPath("PATH", "CITACAO")
-    sExibir = Trim(PegPath("CITACAO", zUSER, "S"))
-    If Left(sExibir, 1) = "S" And FileExist(cARQ, True) Then
-        chkExibir = vbChecked
-        CenterFormToScreen Me
-        'CentralizaJanela Me
-        nTOTREG = PegCountSQL(cARQ, "tblcitacao", "codcitacao", 1)
-        PegMensagem
-    End If
-    
+  cARQ = PegPath("PATH", "CITACAO")
+  sExibir = Trim(PegPath("CITACAO", zUSER, "S"))
+  If Left(sExibir, 1) = "S" And FileExist(cARQ, True) Then
+    chkExibir = vbChecked
+    CenterFormToScreen Me
+    'CentralizaJanela Me
+    nTOTREG = PegCountSQL(cARQ, "tblcitacao", "codcitacao", 1)
+    PegMensagem
+  End If
+
 End Sub
 
 Function RandomNumber(intHighestNumber)
-    Randomize
-    RandomNumber = Int(intHighestNumber * Rnd) + 1
+  Randomize
+  RandomNumber = Int(intHighestNumber * Rnd) + 1
 End Function
 
 

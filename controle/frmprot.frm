@@ -212,75 +212,75 @@ Dim iLOOP As Integer
 Dim cARQDES As String
 
 Private Sub CmdLocalizar_Click()
-    LocalizaGri1 GridAtual
+  LocalizaGri1 GridAtual
 End Sub
 
 Private Sub Editar_Click()
-    GridAtual.Col = 0
-    cDESENHO = FixStr(GridAtual)
-    frmproti.Show vbModal, Me
-    Filgrid
+  GridAtual.Col = 0
+  cDESENHO = FixStr(GridAtual)
+  frmproti.Show vbModal, Me
+  Filgrid
 End Sub
 
 Private Sub Encerrar_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub excluir_Click()
-    Dim sSQL As String
-    GridAtual.Col = 0
-    cDESENHO = FixStr(GridAtual)
-    '******************************************************************
-    'Conjunto
-    sSQL = "select * from PROTO WHERE PARTNUMBER='" & cDESENHO & "'"
-    '******************************************************************
-    If ApagaSQLP(cARQDES, sSQL) Then
-        Filgrid
-    End If
+  Dim sSQL As String
+  GridAtual.Col = 0
+  cDESENHO = FixStr(GridAtual)
+  '******************************************************************
+  'Conjunto
+  sSQL = "select * from PROTO WHERE PARTNUMBER='" & cDESENHO & "'"
+  '******************************************************************
+  If ApagaSQLP(cARQDES, sSQL) Then
+    Filgrid
+  End If
 End Sub
 
 Private Sub Filgrid()
-    Dim cSQL As String
-    cSQL = "SELECT PARTNUMBER,NOME,PROJETO FROM PROTO WHERE CLIENTE=" & nPF
-    MontaGridFast GridAtual, 3, Array(2000, 4000, 2000), Array("Produto", "Descrição", "Projeto"), _
-        Array("L$PARTNUMBER", "NOME", "PROJETO"), cARQDES, cSQL
+  Dim cSQL As String
+  cSQL = "SELECT PARTNUMBER,NOME,PROJETO FROM PROTO WHERE CLIENTE=" & nPF
+  MontaGridFast GridAtual, 3, Array(2000, 4000, 2000), Array("Produto", "Descrição", "Projeto"), _
+                Array("L$PARTNUMBER", "NOME", "PROJETO"), cARQDES, cSQL
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQDES = PegPath("PATH", "DESENHO")
-    cSQL = "select * from cliente WHERE cliente=" & nPF
-    nCAMPOS = 2
-    aCAM = Array("cliente", "clinome")
-    aFOR = Array("NI", "C")
-    aPAD = Array(0, "")
-    aVAL = PegSQL(cARQDES, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    Filgrid
+  CenterFormToScreen Me
+  cARQDES = PegPath("PATH", "DESENHO")
+  cSQL = "select * from cliente WHERE cliente=" & nPF
+  nCAMPOS = 2
+  aCAM = Array("cliente", "clinome")
+  aFOR = Array("NI", "C")
+  aPAD = Array(0, "")
+  aVAL = PegSQL(cARQDES, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  Filgrid
 End Sub
 
 Private Sub Novo_Click()
-    Dim cDESENHO As String
-    Dim sSQL As String
+  Dim cDESENHO As String
+  Dim sSQL As String
 
-    cDESENHO = InputBox("Digite o Produto", "Inclusão Produto", "__")
-    sSQL = "SELECT * FROM PROTO WHERE PARTNUMBER='" & cDESENHO & "'"
-    If IncluiSQL(cARQDES, sSQL, 3, Array("PARTNUMBER", "CLIENTE", "CLINOME"), _
-                 Array(cDESENHO, nPF, cCLINOME), True, True) Then
-                             
-        Filgrid
-    End If
+  cDESENHO = InputBox("Digite o Produto", "Inclusão Produto", "__")
+  sSQL = "SELECT * FROM PROTO WHERE PARTNUMBER='" & cDESENHO & "'"
+  If IncluiSQL(cARQDES, sSQL, 3, Array("PARTNUMBER", "CLIENTE", "CLINOME"), _
+               Array(cDESENHO, nPF, cCLINOME), True, True) Then
+
+    Filgrid
+  End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 
 End Sub
 

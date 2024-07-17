@@ -72,172 +72,172 @@ Dim cORDEM As String
 Dim cSUBWHERE As String
 
 Private Sub Apagar_Click()
-    Dim sSQL As String
-    Grid.Col = 0
-    cCONJUNTO = FixStr(Grid)
-    Grid.Col = 1
-    nPF = FixInt(Grid)
-    '******************************************************************
-    'Produtos
-    sSQL = "select * from PRODENG WHERE NUMERO=" & nPF & " AND TIPO='" & cCONJUNTO & "'"
-    '******************************************************************
-    If ApagaSQLP(cARQDES, sSQL) Then
-        FilRelat
-    End If
+  Dim sSQL As String
+  Grid.Col = 0
+  cCONJUNTO = FixStr(Grid)
+  Grid.Col = 1
+  nPF = FixInt(Grid)
+  '******************************************************************
+  'Produtos
+  sSQL = "select * from PRODENG WHERE NUMERO=" & nPF & " AND TIPO='" & cCONJUNTO & "'"
+  '******************************************************************
+  If ApagaSQLP(cARQDES, sSQL) Then
+    FilRelat
+  End If
 End Sub
 
 Private Sub CmdSair_Click()
-    
-    Screen.MousePointer = vbDefault
-    Unload Me
-    
+
+  Screen.MousePointer = vbDefault
+  Unload Me
+
 End Sub
 
 Private Sub Editar_Click()
-    
-    Grid.Col = 0
-    cCONJUNTO = FixStr(Grid)
-    Grid.Col = 1
-    nPF = FixInt(Grid)
-    
-    frmPro.Show vbModal
-    FilRelat
-    
+
+  Grid.Col = 0
+  cCONJUNTO = FixStr(Grid)
+  Grid.Col = 1
+  nPF = FixInt(Grid)
+
+  frmPro.Show vbModal
+  FilRelat
+
 End Sub
 
 Private Sub FilRelat()
-    Dim cSQL As String
+  Dim cSQL As String
 
-    If Len(cSUBWHERE) > 0 Then
-        cSQL = "SELECT * FROM PRODENG WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
-    Else
-        cSQL = "SELECT * FROM PRODENG ORDER BY PRODUTO,TIPO,NUMERO"
-    End If
-    
-    MontaGridFast Grid, 5, Array(400, 1200, 2000, 1200, 800), Array("T", "Número", "Descrição", "Ref Cliente", "Cliente"), _
-        Array("TIPO", "NUMERO", "NOME", "L$PRODUTO", "RESCLI"), cARQDES, cSQL
+  If Len(cSUBWHERE) > 0 Then
+    cSQL = "SELECT * FROM PRODENG WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
+  Else
+    cSQL = "SELECT * FROM PRODENG ORDER BY PRODUTO,TIPO,NUMERO"
+  End If
+
+  MontaGridFast Grid, 5, Array(400, 1200, 2000, 1200, 800), Array("T", "Número", "Descrição", "Ref Cliente", "Cliente"), _
+                Array("TIPO", "NUMERO", "NOME", "L$PRODUTO", "RESCLI"), cARQDES, cSQL
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    aORDEM = Array("TIPO,NUMERO", "PRODUTO,TIPO,NUMERO")
-    aORDES = Array("Nº", "Produto")
-    cORDEM = "PRODUTO,TIPO,NUMERO"
-    cSUBWHERE = ""
-    cARQDES = PegPath("PATH", "DESENHO")
-    xmontatoolbar Me.Toolbar1, "escPRO", True
-    FilRelat
+  CenterFormToScreen Me
+  aORDEM = Array("TIPO,NUMERO", "PRODUTO,TIPO,NUMERO")
+  aORDES = Array("Nº", "Produto")
+  cORDEM = "PRODUTO,TIPO,NUMERO"
+  cSUBWHERE = ""
+  cARQDES = PegPath("PATH", "DESENHO")
+  xmontatoolbar Me.Toolbar1, "escPRO", True
+  FilRelat
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
 
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 
 End Sub
 
 'Private Sub Grid_SelChange()
 '    With Grid
- '       If .Rows > 2 Then
-  '          .Col = .Cols - 1
-   '         .ColSel = 0
-    '        .TopRow = .Row
-     '   End If
-   ' End With
+'       If .Rows > 2 Then
+'          .Col = .Cols - 1
+'         .ColSel = 0
+'        .TopRow = .Row
+'   End If
+' End With
 
 'End Sub
 
 Private Sub incluir_Click()
-    Dim sSQL As String
-    cCONJUNTO = InputBox("(F)err/Disp (C)DispCrl/Calib (P)ro/Comp", "Digite o Tipo", "F")
-    cCONJUNTO = UCase(Left(cCONJUNTO, 1))
-    Select Case cCONJUNTO
-    Case "F"
-    Case "C"
-    Case "P"
-    Case Else
-        Exit Sub
-    End Select
-    sSQL = "PRODENG WHERE TIPO='" & cCONJUNTO & "' ORDER BY NUMERO"
-    nPF = FixInt(PegMAXSQL(cARQDES, sSQL, "PRODENG", 0)) + 1
-    If IncluiSQL(cARQDES, "SELECT * FROM PRODENG WHERE NUMERO=" & nPF & " AND TIPO='" & cCONJUNTO & "' ", 2, Array("NUMERO", "TIPO"), Array(nPF, cCONJUNTO), True, False) Then
-        FilRelat
-    End If
+  Dim sSQL As String
+  cCONJUNTO = InputBox("(F)err/Disp (C)DispCrl/Calib (P)ro/Comp", "Digite o Tipo", "F")
+  cCONJUNTO = UCase(Left(cCONJUNTO, 1))
+  Select Case cCONJUNTO
+  Case "F"
+  Case "C"
+  Case "P"
+  Case Else
+    Exit Sub
+  End Select
+  sSQL = "PRODENG WHERE TIPO='" & cCONJUNTO & "' ORDER BY NUMERO"
+  nPF = FixInt(PegMAXSQL(cARQDES, sSQL, "PRODENG", 0)) + 1
+  If IncluiSQL(cARQDES, "SELECT * FROM PRODENG WHERE NUMERO=" & nPF & " AND TIPO='" & cCONJUNTO & "' ", 2, Array("NUMERO", "TIPO"), Array(nPF, cCONJUNTO), True, False) Then
+    FilRelat
+  End If
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Dim sButton As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
 
-    If Not AcessaBtnOld("escPRO", Button.Index) Then
-        Exit Sub
+  If Not AcessaBtnOld("escPRO", Button.Index) Then
+    Exit Sub
+  End If
+  GravaLog 0, Button.Index, sButton, "escPRO"
+
+  Select Case sButton
+
+
+  Case "ORD"
+    ePASS01 = aORDES
+    escOrdem.Show vbModal, Me
+    If lRETU Then
+      cORDEM = aORDEM(eRETU01)
+      FilRelat
     End If
-    GravaLog 0, Button.Index, sButton, "escPRO"
-    
-    Select Case sButton
-    
-    
-    Case "ORD"
-        ePASS01 = aORDES
-        escOrdem.Show vbModal, Me
-        If lRETU Then
-            cORDEM = aORDEM(eRETU01)
-            FilRelat
-        End If
-    Case "FIL"
-        cSUBWHERE = ""
-        If MDG("Usar Filtro Avancado") Then
-            aARQUIVOS = Array(cARQDES)
-            ''Posicao 12 Nome da Tabela
-            ''Posicao 13 Nome da Tabela
-            aRELCFG = Array("", "", "", 0, False, _
-                            False, "", "", "", "", "", _
-                            False, "PRODENG", "PRODENG", "", "")
-            FrmFiltro.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-            End If
-        Else
-            ePASS01 = aORDES
-            frmLocalizaa.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "=", "L%", "L%", "L%"), eRETU01, eRETU02)
-            End If
-        End If
-        FilRelat
-    Case "IMP"
-        cTIPO = "R"
-        zgrp = "EN"
-        escRPT.Show vbModal, Me
+  Case "FIL"
+    cSUBWHERE = ""
+    If MDG("Usar Filtro Avancado") Then
+      aARQUIVOS = Array(cARQDES)
+      ''Posicao 12 Nome da Tabela
+      ''Posicao 13 Nome da Tabela
+      aRELCFG = Array("", "", "", 0, False, _
+                      False, "", "", "", "", "", _
+                      False, "PRODENG", "PRODENG", "", "")
+      FrmFiltro.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
+      End If
+    Else
+      ePASS01 = aORDES
+      frmLocalizaa.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "=", "L%", "L%", "L%"), eRETU01, eRETU02)
+      End If
+    End If
+    FilRelat
+  Case "IMP"
+    cTIPO = "R"
+    zgrp = "EN"
+    escRPT.Show vbModal, Me
 
-    Case "NOV"
-        incluir_Click
+  Case "NOV"
+    incluir_Click
 
-    Case "EDI"
-        Editar_Click
+  Case "EDI"
+    Editar_Click
 
-    Case "EXC"
-        Apagar_Click
+  Case "EXC"
+    Apagar_Click
 
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02, , 1
-        End If
-    Case "SAI"
-        CmdSair_Click
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02, , 1
+    End If
+  Case "SAI"
+    CmdSair_Click
 
-    End Select
+  End Select
 
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 
 End Sub
 

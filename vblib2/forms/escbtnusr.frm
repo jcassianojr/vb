@@ -157,103 +157,103 @@ Option Explicit
 
 Private Sub CmdSair_Click()
 
-    Unload Me
+  Unload Me
 
 End Sub
 
 Private Sub excrptusr_Click()
-    Dim sSQL As String
-    gridrptusr.Col = 0
-    zIDRPTUSR = FixInt(gridrptusr)
-    sSQL = "select * from USUCAD WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU & " AND IDUSUARIO=" & zIDRPTUSR
-    If ApagaSQLP(Dbname, sSQL, "Eliminar Acesso ao menu") Then
-        filrptusr
-    End If
+  Dim sSQL As String
+  gridrptusr.Col = 0
+  zIDRPTUSR = FixInt(gridrptusr)
+  sSQL = "select * from USUCAD WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU & " AND IDUSUARIO=" & zIDRPTUSR
+  If ApagaSQLP(Dbname, sSQL, "Eliminar Acesso ao menu") Then
+    filrptusr
+  End If
 End Sub
 
 Private Sub filrptusr()
-    Dim cNOME As String
-    Dim DAODB As ADODB.Connection
-    Dim daodb2 As ADODB.Connection
-    Dim daors2 As ADODB.Recordset
-    Dim DAORS As ADODB.Recordset
-    Dim sSQL As String
-   
-    Set DAODB = New ADODB.Connection
-    DAODB.CursorLocation = adUseClient
-    DAODB.ConnectionTimeout = 120
-    DAODB.Open GeracArq(dbuser, , False)
+  Dim cNOME As String
+  Dim DAODB As ADODB.Connection
+  Dim daodb2 As ADODB.Connection
+  Dim daors2 As ADODB.Recordset
+  Dim DAORS As ADODB.Recordset
+  Dim sSQL As String
 
-    Set daodb2 = New ADODB.Connection
-    daodb2.CursorLocation = adUseClient
-    daodb2.ConnectionTimeout = 120
-    daodb2.Open GeracArq(Dbname, , False)
+  Set DAODB = New ADODB.Connection
+  DAODB.CursorLocation = adUseClient
+  DAODB.ConnectionTimeout = 120
+  DAODB.Open GeracArq(dbuser, , False)
+
+  Set daodb2 = New ADODB.Connection
+  daodb2.CursorLocation = adUseClient
+  daodb2.ConnectionTimeout = 120
+  daodb2.Open GeracArq(Dbname, , False)
 
 
-    Set DAORS = New ADODB.Recordset
-    Set daors2 = New ADODB.Recordset
+  Set DAORS = New ADODB.Recordset
+  Set daors2 = New ADODB.Recordset
 
-   
-    
-    sSQL = "select * from USUCAD WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU
-    daors2.Open sSQL, daodb2, adOpenForwardOnly, adLockReadOnly
-   
-    With gridrptusr
-        .Cols = 2
-        .FixedCols = 0
-        .Rows = 1
-        .Row = 0
-        .Col = 0
-        .tEXT = "ID"
-        .ColWidth(0) = 500
-        .Col = 1
-        .tEXT = "Nome"
-        .ColWidth(1) = 2000
-        If Not daors2.EOF Then
-            daors2.MoveFirst
-            While Not daors2.EOF
-                cNOME = ""
-                sSQL = "select USUARIO from USUARIO WHERE IDUSUARIO=" & daors2("IDUSUARIO")
-                DAORS.Open sSQL, DAODB, adOpenForwardOnly, adLockReadOnly
-                If Not DAORS.EOF Then
-                    cNOME = DAORS("USUARIO")
-                End If
-                DAORS.Close
-                .AddItem daors2("IDUSUARIO") & vbTab & cNOME
-                daors2.MoveNext
-            Wend
+
+
+  sSQL = "select * from USUCAD WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU
+  daors2.Open sSQL, daodb2, adOpenForwardOnly, adLockReadOnly
+
+  With gridrptusr
+    .cols = 2
+    .FixedCols = 0
+    .Rows = 1
+    .Row = 0
+    .Col = 0
+    .tEXT = "ID"
+    .ColWidth(0) = 500
+    .Col = 1
+    .tEXT = "Nome"
+    .ColWidth(1) = 2000
+    If Not daors2.EOF Then
+      daors2.MoveFirst
+      While Not daors2.EOF
+        cNOME = ""
+        sSQL = "select USUARIO from USUARIO WHERE IDUSUARIO=" & daors2("IDUSUARIO")
+        DAORS.Open sSQL, DAODB, adOpenForwardOnly, adLockReadOnly
+        If Not DAORS.EOF Then
+          cNOME = DAORS("USUARIO")
         End If
-    End With
-    daors2.Close
-    DAODB.Close
-    daodb2.Close
+        DAORS.Close
+        .AddItem daors2("IDUSUARIO") & vbTab & cNOME
+        daors2.MoveNext
+      Wend
+    End If
+  End With
+  daors2.Close
+  DAODB.Close
+  daodb2.Close
 
 
 End Sub
 
 Private Sub filusr()
 
-    Dim cARQ As String
-    Dim cSQL As String
-    cARQ = dbuser
-    cSQL = "SELECT IDUSUARIO,USUARIO FROM USUARIO ORDER BY USUARIO"
-    MontaGridUltra gridusr, 2, Array(500, 2000), Array("ID", "Nome"), _
-        Array("IDUSUARIO", "L$USUARIO"), cARQ, cSQL
+  Dim cARQ As String
+  Dim cSQL As String
+  cARQ = dbuser
+  cSQL = "SELECT IDUSUARIO,USUARIO FROM USUARIO ORDER BY USUARIO"
+  MontaGridUltra gridusr, 2, Array(500, 2000), Array("ID", "Nome"), _
+                 Array("IDUSUARIO", "L$USUARIO"), cARQ, cSQL
 
 
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    filusr
-    filrptusr
+  CenterFormToScreen Me
+  filusr
+  filrptusr
 
 End Sub
 
 Private Sub gridrptusr_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid gridrptusr, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid gridrptusr, Chr(KeyAscii), 1, False
+  End If
 End Sub
 
 'Private Sub gridrptusr_SelChange()
@@ -267,9 +267,9 @@ End Sub
 'End Sub
 
 Private Sub gridusr_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid gridusr, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid gridusr, Chr(KeyAscii), 1, False
+  End If
 
 End Sub
 
@@ -284,13 +284,13 @@ End Sub
 'End Sub
 
 Private Sub incusrrpt_Click()
-    Dim sSQL As String
-    gridusr.Col = 0
-    zIDRPTUSR = FixInt(gridusr)
-    sSQL = "select * from USUCAD WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU & " AND IDUSUARIO=" & zIDRPTUSR
-    IncluiSQL Dbname, sSQL, 6, Array("FORM", "CONTROLE", "INDICE", "IDUSUARIO", "LIGADO", "ATUALIZADO"), _
-        Array(cMENU, cTIPO, iMENU, zIDRPTUSR, True, True), True, True
-    filrptusr
+  Dim sSQL As String
+  gridusr.Col = 0
+  zIDRPTUSR = FixInt(gridusr)
+  sSQL = "select * from USUCAD WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU & " AND IDUSUARIO=" & zIDRPTUSR
+  IncluiSQL Dbname, sSQL, 6, Array("FORM", "CONTROLE", "INDICE", "IDUSUARIO", "LIGADO", "ATUALIZADO"), _
+            Array(cMENU, cTIPO, iMENU, zIDRPTUSR, True, True), True, True
+  filrptusr
 End Sub
 
 

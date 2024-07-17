@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmfemea 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PF/FMEA"
@@ -504,7 +504,7 @@ Begin VB.Form frmfemea
       Tab(16).Control(11)=   "CmdClo(9)"
       Tab(16).Control(12)=   "CmdREvi(5)"
       Tab(16).Control(13)=   "CmdRevFemea(5)"
-      Begin vbccr18.DTPicker DTPicker2 
+      Begin VBCCR18.DTPicker DTPicker2 
          Height          =   375
          Left            =   -72960
          TabIndex        =   256
@@ -516,7 +516,7 @@ Begin VB.Form frmfemea
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
       End
-      Begin vbccr18.DTPicker DTPicker1 
+      Begin VBCCR18.DTPicker DTPicker1 
          Height          =   375
          Left            =   -68880
          TabIndex        =   255
@@ -3013,8 +3013,8 @@ Private cORDFEMUSO As String
 Private cORDFEMAVU As String
 Private cORDFEMPRE As String
 Private cORDFEMGP12 As String
-Private cORDFEMADC  As String
-Private cORDREVI   As String
+Private cORDFEMADC As String
+Private cORDREVI As String
 Dim cSQL As String
 Dim aVAL As Variant
 Dim aFOR As Variant
@@ -3024,2468 +3024,2468 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub CmdApagaRPN_Click()
-    Dim cSQL As String
-    Dim nRPN As Long
-    nRPN = FixInt(txtRPN)
-    If nRPN > 0 Then
-        If MDG("Apagar RPN =" & nRPN) Then
-            'cSQL = "select * from FEMEA WHERE INDRIS=" & nRPN & " AND PF=" & nPF
-            cSQL = "select * from FEMEAPAD WHERE INDRIS=" & nRPN & " AND PF=" & nPF
-            ApagaSQLP cARQFEMEA, cSQL, "Apagar RPN =" & nRPN
-        End If
+  Dim cSQL As String
+  Dim nRPN As Long
+  nRPN = FixInt(txtRPN)
+  If nRPN > 0 Then
+    If MDG("Apagar RPN =" & nRPN) Then
+      'cSQL = "select * from FEMEA WHERE INDRIS=" & nRPN & " AND PF=" & nPF
+      cSQL = "select * from FEMEAPAD WHERE INDRIS=" & nRPN & " AND PF=" & nPF
+      ApagaSQLP cARQFEMEA, cSQL, "Apagar RPN =" & nRPN
     End If
+  End If
 End Sub
 
 Private Sub CmdApagaRPN_KeyPress(KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub CmdApaRev_Click()
-    Dim nTMP
-    nTMP = FixInt(TxtRevisao, 0)
-    ApagaSQL cARQPF, "select * from rev WHERE PF=" & nPF & " AND REVISAO=" & nTMP & " AND TIPO='FE'"
-    ApagaSQL cARQPF, "select * from revI WHERE PF=" & nPF & " AND REVISAO=" & nTMP & " AND TIPO='FE'"
-    Filgridrev
+  Dim nTMP
+  nTMP = FixInt(TxtRevisao, 0)
+  ApagaSQL cARQPF, "select * from rev WHERE PF=" & nPF & " AND REVISAO=" & nTMP & " AND TIPO='FE'"
+  ApagaSQL cARQPF, "select * from revI WHERE PF=" & nPF & " AND REVISAO=" & nTMP & " AND TIPO='FE'"
+  Filgridrev
 End Sub
 
 Private Sub Cmdcheckfx_Click(Index As Integer)
-    Dim nROWS As Integer
-    Dim X As Integer
-    Dim nITEM As Integer
-    Dim cSQL As String
-    Dim nTMPSEQ As Integer
-    Dim nTMPSSQ As Integer
-    Dim nTMPITEM As Integer
-    If Index = 1 Then
-        If GridPadPF.Rows < 2 Then
-            Alert "Este Femea nao utiliza Padrao"
-            Exit Sub
-        End If
+  Dim nROWS As Integer
+  Dim x As Integer
+  Dim nITEM As Integer
+  Dim cSQL As String
+  Dim nTMPSEQ As Integer
+  Dim nTMPSSQ As Integer
+  Dim nTMPITEM As Integer
+  If Index = 1 Then
+    If GridPadPF.Rows < 2 Then
+      Alert "Este Femea nao utiliza Padrao"
+      Exit Sub
     End If
-    If Index = 0 Then                            'normal com complementar
-        If GridSeq(1).Rows > 1 Then
-            Alert "Femea com complemetar nao pode usar normal"
-            Exit Sub
-        End If
+  End If
+  If Index = 0 Then                            'normal com complementar
+    If GridSeq(1).Rows > 1 Then
+      Alert "Femea com complemetar nao pode usar normal"
+      Exit Sub
     End If
-    If Index = 0 Then                            'normal com padrao
-        If GridPadPF.Rows > 1 Then
-            Alert "Femea com Padrao nao pode usar normal"
-            Exit Sub
-        End If
+  End If
+  If Index = 0 Then                            'normal com padrao
+    If GridPadPF.Rows > 1 Then
+      Alert "Femea com Padrao nao pode usar normal"
+      Exit Sub
     End If
+  End If
 
 
 
-    nROWS = GrdQsbLep.Rows - 1
-    For X = 1 To nROWS                           ' zero e o titulo do grid comeca 1
-        nITEM = 0
-        GrdQsbLep.Row = X
-        GrdQsbLep.Col = 0
-        nTMPSEQ = FixInt(GrdQsbLep)
-        GrdQsbLep.Col = 1
-        nTMPSSQ = FixInt(GrdQsbLep)
-        GrdQsbLep.Col = 2
-        nTMPITEM = FixInt(GrdQsbLep)
-        GrdQsbLep.Col = 3
-        DizerBarra "verificando sequencia" & StrZero(nTMPSEQ, 2) & "/" & StrZero(nTMPSSQ, 2) & "/" & StrZero(nTMPITEM, 2)
-        Select Case Index
-        Case 0
-            cSQL = "SELECT ITEM FROM FEMEA WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ & " AND FXITEM=" & nTMPITEM
-            nITEM = PegUltSQL(cARQFEMEAPF, cSQL, "ITEM", 0)
-            If nITEM = 0 Then
-                Command1_Click 4
-            End If
-        Case 1
-            cSQL = "SELECT ITEM FROM FEMAVU WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ & " AND FXITEM=" & nTMPITEM
-            nITEM = PegUltSQL(cARQFEMEA, cSQL, "ITEM", 0)
-            If nITEM = 0 Then
-                Command1_Click 5
-            End If
-        Case 2
-            cSQL = "SELECT ITEM FROM FEMEA WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ & " AND FXITEM=" & nTMPITEM
-            nITEM = PegUltSQL(cARQPFP, cSQL, "ITEM", 0)
-            If nITEM = 0 Then
-                Command1_Click 10
-            End If
-        Case 3
-            cSQL = "SELECT ITEM FROM FEMEA WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ & " AND FXITEM=" & nTMPITEM
-            nITEM = PegUltSQL(cARQPFG, cSQL, "ITEM", 0)
-            If nITEM = 0 Then
-                Command1_Click 11
-            End If
-        End Select
-    Next X
-    If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Then
-        FilRelat (Index)
-    End If
-    DizerBarra ""
+  nROWS = GrdQsbLep.Rows - 1
+  For x = 1 To nROWS                           ' zero e o titulo do grid comeca 1
+    nITEM = 0
+    GrdQsbLep.Row = x
+    GrdQsbLep.Col = 0
+    nTMPSEQ = FixInt(GrdQsbLep)
+    GrdQsbLep.Col = 1
+    nTMPSSQ = FixInt(GrdQsbLep)
+    GrdQsbLep.Col = 2
+    nTMPITEM = FixInt(GrdQsbLep)
+    GrdQsbLep.Col = 3
+    DizerBarra "verificando sequencia" & StrZero(nTMPSEQ, 2) & "/" & StrZero(nTMPSSQ, 2) & "/" & StrZero(nTMPITEM, 2)
+    Select Case Index
+    Case 0
+      cSQL = "SELECT ITEM FROM FEMEA WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ & " AND FXITEM=" & nTMPITEM
+      nITEM = PegUltSQL(cARQFEMEAPF, cSQL, "ITEM", 0)
+      If nITEM = 0 Then
+        Command1_Click 4
+      End If
+    Case 1
+      cSQL = "SELECT ITEM FROM FEMAVU WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ & " AND FXITEM=" & nTMPITEM
+      nITEM = PegUltSQL(cARQFEMEA, cSQL, "ITEM", 0)
+      If nITEM = 0 Then
+        Command1_Click 5
+      End If
+    Case 2
+      cSQL = "SELECT ITEM FROM FEMEA WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ & " AND FXITEM=" & nTMPITEM
+      nITEM = PegUltSQL(cARQPFP, cSQL, "ITEM", 0)
+      If nITEM = 0 Then
+        Command1_Click 10
+      End If
+    Case 3
+      cSQL = "SELECT ITEM FROM FEMEA WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ & " AND FXITEM=" & nTMPITEM
+      nITEM = PegUltSQL(cARQPFG, cSQL, "ITEM", 0)
+      If nITEM = 0 Then
+        Command1_Click 11
+      End If
+    End Select
+  Next x
+  If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Then
+    FilRelat (Index)
+  End If
+  DizerBarra ""
 End Sub
 
 Private Sub CmdcheckOp_Click(Index As Integer)
-    Dim nROWS As Integer
-    Dim X As Integer
-    Dim nITEM As Integer
-    Dim cSQL As String
-    Dim nTMPSEQ As Integer
-    Dim nTMPSSQ As Integer
-    nROWS = gridopr.Rows - 1
-    For X = 1 To nROWS                           ' zero e o titulo do grid comeca 1
-        nITEM = 0
-        gridopr.Col = 1
-        nTMPSEQ = FixInt(gridopr)
-        gridopr.Col = 2
-        nTMPSSQ = FixInt(gridopr)
-        If Index = 0 Then
-            cSQL = "SELECT ITEM FROM FEMEA WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ
-            nITEM = PegUltSQL(cARQFEMEAPF, cSQL, "ITEM", 0)
-        End If
-        If Index = 1 Then
-            cSQL = "SELECT ITEM FROM FEMAVU WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ
-            nITEM = PegUltSQL(cARQFEMEA, cSQL, "ITEM", 0)
-        End If
-        If nITEM = 0 Then
-            If Index = 0 Then
-                Command1_Click 2
-            Else
-                Command1_Click 3
-            End If
-        End If
-    Next X
+  Dim nROWS As Integer
+  Dim x As Integer
+  Dim nITEM As Integer
+  Dim cSQL As String
+  Dim nTMPSEQ As Integer
+  Dim nTMPSSQ As Integer
+  nROWS = gridopr.Rows - 1
+  For x = 1 To nROWS                           ' zero e o titulo do grid comeca 1
+    nITEM = 0
+    gridopr.Col = 1
+    nTMPSEQ = FixInt(gridopr)
+    gridopr.Col = 2
+    nTMPSSQ = FixInt(gridopr)
+    If Index = 0 Then
+      cSQL = "SELECT ITEM FROM FEMEA WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ
+      nITEM = PegUltSQL(cARQFEMEAPF, cSQL, "ITEM", 0)
+    End If
+    If Index = 1 Then
+      cSQL = "SELECT ITEM FROM FEMAVU WHERE PF=" & nPF & " AND FXSEQ=" & nTMPSEQ & " AND FXSSQ=" & nTMPSSQ
+      nITEM = PegUltSQL(cARQFEMEA, cSQL, "ITEM", 0)
+    End If
+    If nITEM = 0 Then
+      If Index = 0 Then
+        Command1_Click 2
+      Else
+        Command1_Click 3
+      End If
+    End If
+  Next x
 End Sub
 
 Private Sub cmdClose_Click()
-    Dim dFEMEA As Date
-    Dim dPF As Date
-    On Error Resume Next
-    If IsDate(TXTFIELDS(23)) And IsDate(TXTFIELDS(17)) Then
-        dFEMEA = TXTFIELDS(23)
-        If IsDate(TXTFIELDS(25)) Then
-            dFEMEA = TXTFIELDS(25)
-        End If
-        dPF = TXTFIELDS(17)
-        If dFEMEA < dPF Then
-            Alert ("Data Revisao Femea Menor que Processo Fabricacao")
-        End If
+  Dim dFEMEA As Date
+  Dim dPF As Date
+  On Error Resume Next
+  If IsDate(TXTFIELDS(23)) And IsDate(TXTFIELDS(17)) Then
+    dFEMEA = TXTFIELDS(23)
+    If IsDate(TXTFIELDS(25)) Then
+      dFEMEA = TXTFIELDS(25)
     End If
-    chkfemeas
-  
-    For iLOOP = 0 To nCAMPOS - 8
-        aVAL(iLOOP) = TXTFIELDS(iLOOP)
-    Next iLOOP
-    aVAL(27) = FixNumBol(Check1.Value)
-    aVAL(28) = FixNumBol(Check2.Value)
-    aVAL(29) = FixNumBol(femeacrg.Value)
-    aVAL(30) = DTPicker2.Value
-    aVAL(31) = DTPicker1.Value
-    
-    For iLOOP = 32 To nCAMPOS - 1
-        aVAL(iLOOP) = TXTFIELDS(iLOOP)
-    Next iLOOP
-    
-    
-    GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    ATUPFPG
-  
-    Screen.MousePointer = vbDefault
-    Unload Me
-    
+    dPF = TXTFIELDS(17)
+    If dFEMEA < dPF Then
+      Alert ("Data Revisao Femea Menor que Processo Fabricacao")
+    End If
+  End If
+  chkfemeas
+
+  For iLOOP = 0 To nCAMPOS - 8
+    aVAL(iLOOP) = TXTFIELDS(iLOOP)
+  Next iLOOP
+  aVAL(27) = FixNumBol(Check1.Value)
+  aVAL(28) = FixNumBol(Check2.Value)
+  aVAL(29) = FixNumBol(femeacrg.Value)
+  aVAL(30) = DTPicker2.Value
+  aVAL(31) = DTPicker1.Value
+
+  For iLOOP = 32 To nCAMPOS - 1
+    aVAL(iLOOP) = TXTFIELDS(iLOOP)
+  Next iLOOP
+
+
+  GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  ATUPFPG
+
+  Screen.MousePointer = vbDefault
+  Unload Me
+
 End Sub
 
 Private Sub CmdClo_Click(Index As Integer)
-    Dim dDATE As Date
-    Dim DB As New ADODB.Connection
-    Dim RSTAB As New ADODB.Recordset
-    Dim sSQL As String
-    dDATE = Date
-    
-    If Index = 0 And Not AcessaMenu("FemeaPro", 1) Then Exit Sub
-    If Index = 1 And Not AcessaMenu("FemeaPro", 1) Then Exit Sub
-    
-    If Index = 6 And Not AcessaMenu("FemeaGP12", 1) Then Exit Sub
-    If Index = 7 And Not AcessaMenu("FemeaGP12", 1) Then Exit Sub
-    
-    If Index = 4 Or Index = 5 Then
-        If Not AcessaMenu("FemeaPre", 1) Then
-            Exit Sub
+  Dim dDATE As Date
+  Dim DB As New ADODB.Connection
+  Dim RSTAB As New ADODB.Recordset
+  Dim sSQL As String
+  dDATE = Date
+
+  If Index = 0 And Not AcessaMenu("FemeaPro", 1) Then Exit Sub
+  If Index = 1 And Not AcessaMenu("FemeaPro", 1) Then Exit Sub
+
+  If Index = 6 And Not AcessaMenu("FemeaGP12", 1) Then Exit Sub
+  If Index = 7 And Not AcessaMenu("FemeaGP12", 1) Then Exit Sub
+
+  If Index = 4 Or Index = 5 Then
+    If Not AcessaMenu("FemeaPre", 1) Then
+      Exit Sub
+    End If
+    If eproducao Then
+      Exit Sub
+    End If
+  End If
+
+  If GridSeq(Index).Row = 0 Then
+    Exit Sub
+  End If
+
+  DB.ConnectionTimeout = 120
+  If Index = 0 Or Index = 1 Then
+    DB.Open GeracArq(cARQFEMEAPF)            'CARQPF
+  End If
+  If Index = 2 Or Index = 3 Or Index = 8 Or Index = 9 Then
+    DB.Open GeracArq(cARQFEMEA)
+  End If
+  If Index = 4 Or Index = 5 Then
+    DB.Open GeracArq(cARQPFP)
+  End If
+  If Index = 6 Or Index = 7 Then
+    DB.Open GeracArq(cARQPFG)
+  End If
+
+  Select Case Index
+  Case 1, 5, 7
+    sSQL = "select * from FEMEA WHERE PF=" & nPF & " ORDER BY ITEM"
+  Case 3
+    sSQL = "select * from FEMAVU WHERE PF=" & nPF & " ORDER BY ITEM"
+  Case 9
+    sSQL = "select * from FEMADC WHERE PF=" & nPF & " ORDER BY ITEM"
+  Case 0, 4, 6
+    GridSeq(0).Col = 1
+    nSEQ = GridSeq(0)
+    sSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+  Case 2
+    GridSeq(1).Col = 1
+    nSEQ = GridSeq(1)
+    sSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+  Case 8
+    GridSeq(5).Col = 1
+    nSEQ = GridSeq(5)
+    sSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+  End Select
+
+
+
+  RSTAB.Open sSQL, DB, adOpenDynamic, adLockOptimistic
+  While Not RSTAB.EOF
+    If RSTAB("ACAO") Then
+      If IsDate(RSTAB("RESDAT")) Then
+        dDATE = RSTAB("RESDAT")
+      End If
+      If IsDate(RSTAB("RESDAT2")) Then
+        If dDATE < RSTAB("RESDAT2") Then
+          dDATE = RSTAB("RESDAT2")
         End If
-        If eproducao Then
-            Exit Sub
+      End If
+      If IsDate(RSTAB("RESDAT3")) Then
+        If dDATE < RSTAB("RESDAT3") Then
+          dDATE = RSTAB("RESDAT3")
         End If
+      End If
+      RSTAB("ACATOM") = "Concluida"
+      RSTAB("ACADAT") = dDATE + 2
+      RSTAB.Update
     End If
-    
-    If GridSeq(Index).Row = 0 Then
-        Exit Sub
-    End If
-
-    DB.ConnectionTimeout = 120
-    If Index = 0 Or Index = 1 Then
-        DB.Open GeracArq(cARQFEMEAPF)            'CARQPF
-    End If
-    If Index = 2 Or Index = 3 Or Index = 8 Or Index = 9 Then
-        DB.Open GeracArq(cARQFEMEA)
-    End If
-    If Index = 4 Or Index = 5 Then
-        DB.Open GeracArq(cARQPFP)
-    End If
-    If Index = 6 Or Index = 7 Then
-        DB.Open GeracArq(cARQPFG)
-    End If
-
-    Select Case Index
-    Case 1, 5, 7
-        sSQL = "select * from FEMEA WHERE PF=" & nPF & " ORDER BY ITEM"
-    Case 3
-        sSQL = "select * from FEMAVU WHERE PF=" & nPF & " ORDER BY ITEM"
-    Case 9
-        sSQL = "select * from FEMADC WHERE PF=" & nPF & " ORDER BY ITEM"
-    Case 0, 4, 6
-        GridSeq(0).Col = 1
-        nSEQ = GridSeq(0)
-        sSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-    Case 2
-        GridSeq(1).Col = 1
-        nSEQ = GridSeq(1)
-        sSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-    Case 8
-        GridSeq(5).Col = 1
-        nSEQ = GridSeq(5)
-        sSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-    End Select
-    
-
-
-    RSTAB.Open sSQL, DB, adOpenDynamic, adLockOptimistic
-    While Not RSTAB.EOF
-        If RSTAB("ACAO") Then
-            If IsDate(RSTAB("RESDAT")) Then
-                dDATE = RSTAB("RESDAT")
-            End If
-            If IsDate(RSTAB("RESDAT2")) Then
-                If dDATE < RSTAB("RESDAT2") Then
-                    dDATE = RSTAB("RESDAT2")
-                End If
-            End If
-            If IsDate(RSTAB("RESDAT3")) Then
-                If dDATE < RSTAB("RESDAT3") Then
-                    dDATE = RSTAB("RESDAT3")
-                End If
-            End If
-            RSTAB("ACATOM") = "Concluida"
-            RSTAB("ACADAT") = dDATE + 2
-            RSTAB.Update
-        End If
-        RSTAB.MoveNext
-    Wend
-    RSTAB.Close
-    DB.Close
+    RSTAB.MoveNext
+  Wend
+  RSTAB.Close
+  DB.Close
 
 End Sub
 
 Private Sub CmdDelDef_Click()
-    Dim cARQTMP As String
-    Dim sSQL As String
-    cARQTMP = PegPath("PATH", "MANA5TGQ")
-    cARQTMP = GeraConn(cARQTMP, "SDECDX")
-    gridmsrd.Col = 0
-    sSQL = "select NUMERO from MSRD WHERE MSRD=" & gridmsrd
-    If ApagaSQLP(cARQTMP, sSQL) Then
-        filgridmsrd
-    End If
+  Dim cARQTMP As String
+  Dim sSQL As String
+  cARQTMP = PegPath("PATH", "MANA5TGQ")
+  cARQTMP = GeraConn(cARQTMP, "SDECDX")
+  gridmsrd.Col = 0
+  sSQL = "select NUMERO from MSRD WHERE MSRD=" & gridmsrd
+  If ApagaSQLP(cARQTMP, sSQL) Then
+    filgridmsrd
+  End If
 
 End Sub
 
 Private Sub CmddelPre_Click()
-    Dim nSEQ As Integer
-    Dim cSQL As String
-    If Gridfemprecad.Row > 0 Then
-        Gridfemprecad.Col = 0
-        nSEQ = Gridfemprecad
-        cSQL = "select * from FEMPRE WHERE SEGGRA=" & nSEQ
-        If ApagaSQLP(cARQFEMEA, cSQL) Then
-            FILGRIdfemprecad
-        End If
+  Dim nSEQ As Integer
+  Dim cSQL As String
+  If Gridfemprecad.Row > 0 Then
+    Gridfemprecad.Col = 0
+    nSEQ = Gridfemprecad
+    cSQL = "select * from FEMPRE WHERE SEGGRA=" & nSEQ
+    If ApagaSQLP(cARQFEMEA, cSQL) Then
+      FILGRIdfemprecad
     End If
+  End If
 End Sub
 
 Private Sub CmdEdiDef_Click()
-    gridmsrd.Col = 0
-    ePASS01 = gridmsrd
-    FrmMsrd.Show vbModal, Me
+  gridmsrd.Col = 0
+  ePASS01 = gridmsrd
+  FrmMsrd.Show vbModal, Me
 End Sub
 
 Private Sub CmdEdiPad_Click(Index As Integer)
 
-    Dim aVAL As Variant
-    Dim nNUM As Integer
-    Dim nROW As Integer
-    Dim cSIG
-    Dim cDIZ As String
+  Dim aVAL As Variant
+  Dim nNUM As Integer
+  Dim nROW As Integer
+  Dim cSIG
+  Dim cDIZ As String
 
-    If Index = 6 Or Index = 7 Or Index = 8 Then
-        cSIG = txtsigi
-        If Len(cSIG) = 0 Then
-            Alert ("Siginificativa Nao Escolhida")
-            Exit Sub
-        End If
+  If Index = 6 Or Index = 7 Or Index = 8 Then
+    cSIG = txtsigi
+    If Len(cSIG) = 0 Then
+      Alert ("Siginificativa Nao Escolhida")
+      Exit Sub
     End If
-    aVAL = Array(0, 0, 0, 0)
-    If Index <> 10 Then
-        GridPad.Col = 2
-        aVAL(0) = GridPad
-        GridPad.Col = 3
-        aVAL(1) = GridPad
-        GridPad.Col = 4
-        aVAL(2) = GridPad
-        GridPad.Col = 5
-        aVAL(3) = GridPad
-        ePASS01 = "select * from FEMEA WHERE PRONUM=" & FixNum(aVAL(0)) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND CAUNUM=" & aVAL(3) & " AND PF=" & nPF
+  End If
+  aVAL = Array(0, 0, 0, 0)
+  If Index <> 10 Then
+    GridPad.Col = 2
+    aVAL(0) = GridPad
+    GridPad.Col = 3
+    aVAL(1) = GridPad
+    GridPad.Col = 4
+    aVAL(2) = GridPad
+    GridPad.Col = 5
+    aVAL(3) = GridPad
+    ePASS01 = "select * from FEMEA WHERE PRONUM=" & FixNum(aVAL(0)) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND CAUNUM=" & aVAL(3) & " AND PF=" & nPF
+  End If
+  ePASS02 = cARQFEMEA
+  nROW = GridPad.Row
+  Select Case Index
+  Case 0
+    ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & FixNum(aVAL(0)) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND CAUNUM=" & aVAL(3) & " AND PF=" & nPF
+    frmFEMEI.Show vbModal, Me
+  Case 1
+    If ApagaSQLP(cARQFEMEA, ePASS01) Then
+      ePASS01 = "select * from FEMRPNT WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND CAUNUM=" & aVAL(3) & " AND PF=" & nPF
+      ApagaSQL cARQFEMEA, ePASS01
     End If
-    ePASS02 = cARQFEMEA
-    nROW = GridPad.Row
-    Select Case Index
-    Case 0
-        ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & FixNum(aVAL(0)) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND CAUNUM=" & aVAL(3) & " AND PF=" & nPF
-        frmFEMEI.Show vbModal, Me
-    Case 1
-        If ApagaSQLP(cARQFEMEA, ePASS01) Then
-            ePASS01 = "select * from FEMRPNT WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND CAUNUM=" & aVAL(3) & " AND PF=" & nPF
-            ApagaSQL cARQFEMEA, ePASS01
-        End If
-    Case 2
-        If MDG("Apagar Todos os Efeitos " & CStr(aVAL(2))) Then
-            'ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND PF=" & nPF
-            ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND PF=" & nPF
-            If ApagaSQLP(cARQFEMEA, ePASS01) Then
-                ePASS01 = "select * from FEMRPNT WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND PF=" & nPF
-                ApagaSQL cARQFEMEA, ePASS01
-            End If
-        End If
-    Case 3
-        nNUM = 0
-        nNUM = FixInt(Val(Busca("Nº Item", "Atribuindo", CStr(nNUM), 8)))
-        If nNUM = 0 Then
-            Alert ("Nº ITEM em Branco")
-            Exit Sub
-        End If
-        If MDG("Atribuir Item " & CStr(nNUM) & "Para Processo " & CStr(aVAL(0))) Then
-            '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
-            ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
-            GrvSQL cARQFEMEA, ePASS01, 1, Array("ITEM"), Array(nNUM), Array("NI")
-        End If
-    Case 4
-        If MDG("Apagar Todos as Falhas " & CStr(aVAL(1))) Then
-            '            ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
-            ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
-            If ApagaSQLP(cARQFEMEA, ePASS01) Then
-                ePASS01 = "select * from FEMPF WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
-                ApagaSQL cARQFEMEA, ePASS01
-                ePASS01 = "select * from FEMRPNT WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
-                ApagaSQL cARQFEMEA, ePASS01
-                filgridpadpf
-            End If
-        End If
-    Case 5
-        If MDG("Apagar Todos os Processos " & CStr(aVAL(0))) Then
-            '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & FixInt(aVAL(0)) & " AND PF=" & nPF
-            ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & FixInt(aVAL(0)) & " AND PF=" & nPF
-            If ApagaSQLP(cARQFEMEA, ePASS01) Then
-                ePASS01 = "select * from FEMPF WHERE PRONUM=" & FixInt(aVAL(0)) & " AND PF=" & nPF
-                ApagaSQL cARQFEMEA, ePASS01
-                ePASS01 = "select * from FEMRPNO WHERE PRONUM=" & FixInt(aVAL(0)) & " AND PF=" & nPF
-                ApagaSQL cARQFEMEA, ePASS01
-                ePASS01 = "select * from FEMRPNT WHERE PRONUM=" & FixInt(aVAL(0)) & " AND PF=" & nPF
-                ApagaSQL cARQFEMEA, ePASS01
-                filgridpadpf
-            End If
-        End If
-    Case 6
-        If MDG("Atribuir Todos os Efeitos " & CStr(aVAL(2))) Then
-            '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND PF=" & nPF
-            ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND PF=" & nPF
-            GrvSQL cARQFEMEA, ePASS01, 1, Array("SIGI"), Array(cSIG), Array("C")
-        End If
-    Case 7
-        If MDG("Atribuir Todos as Falhas " & CStr(aVAL(1))) Then
-            '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
-            ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
-            GrvSQL cARQFEMEA, ePASS01, 1, Array("SIGI"), Array(cSIG), Array("C")
-        End If
-    Case 8
-        If MDG("Atribuir Todos os Processos " & CStr(aVAL(0))) Then
-            '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
-            ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
-            GrvSQL cARQFEMEA, ePASS01, 1, Array("SIGI"), Array(cSIG), Array("C")
-        End If
-    Case 9
-        cDIZ = pegdizseqssq("", cARQPF)
-        If Len(cDIZ) = 0 Then
-            Alert ("Descricao Nao Especificada")
-            Exit Sub
-        End If
-        If MDG("Renomear Processos " & CStr(aVAL(0))) Then
-            '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
-            ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
-            GrvSQL cARQFEMEA, ePASS01, 1, Array("PROCESSO"), Array(cDIZ), Array("C")
-        End If
-    Case 10
-        If MDG("Apagar Todos Femea Padrao ") Then
-            ePASS01 = "select * from FEMEAPAD WHERE PF=" & nPF
-            '                ePASS01 = "select * from FEMEA WHERE PF=" & nPF
-            If ApagaSQLP(cARQFEMEA, ePASS01) Then
-                ePASS01 = "select * from FEMPF WHERE PF=" & nPF
-                ApagaSQL cARQFEMEA, ePASS01
-                ePASS01 = "select * from FEMRPNO WHERE PF=" & nPF
-                ApagaSQL cARQFEMEA, ePASS01
-                ePASS01 = "select * from FEMRPNT WHERE PF=" & nPF
-                ApagaSQL cARQFEMEA, ePASS01
-                filgridpadpf
-            End If
-        End If
+  Case 2
+    If MDG("Apagar Todos os Efeitos " & CStr(aVAL(2))) Then
+      'ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND PF=" & nPF
+      ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND PF=" & nPF
+      If ApagaSQLP(cARQFEMEA, ePASS01) Then
+        ePASS01 = "select * from FEMRPNT WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND PF=" & nPF
+        ApagaSQL cARQFEMEA, ePASS01
+      End If
+    End If
+  Case 3
+    nNUM = 0
+    nNUM = FixInt(Val(Busca("Nº Item", "Atribuindo", CStr(nNUM), 8)))
+    If nNUM = 0 Then
+      Alert ("Nº ITEM em Branco")
+      Exit Sub
+    End If
+    If MDG("Atribuir Item " & CStr(nNUM) & "Para Processo " & CStr(aVAL(0))) Then
+      '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
+      ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
+      GrvSQL cARQFEMEA, ePASS01, 1, Array("ITEM"), Array(nNUM), Array("NI")
+    End If
+  Case 4
+    If MDG("Apagar Todos as Falhas " & CStr(aVAL(1))) Then
+      '            ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
+      ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
+      If ApagaSQLP(cARQFEMEA, ePASS01) Then
+        ePASS01 = "select * from FEMPF WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
+        ApagaSQL cARQFEMEA, ePASS01
+        ePASS01 = "select * from FEMRPNT WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
+        ApagaSQL cARQFEMEA, ePASS01
+        filgridpadpf
+      End If
+    End If
+  Case 5
+    If MDG("Apagar Todos os Processos " & CStr(aVAL(0))) Then
+      '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & FixInt(aVAL(0)) & " AND PF=" & nPF
+      ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & FixInt(aVAL(0)) & " AND PF=" & nPF
+      If ApagaSQLP(cARQFEMEA, ePASS01) Then
+        ePASS01 = "select * from FEMPF WHERE PRONUM=" & FixInt(aVAL(0)) & " AND PF=" & nPF
+        ApagaSQL cARQFEMEA, ePASS01
+        ePASS01 = "select * from FEMRPNO WHERE PRONUM=" & FixInt(aVAL(0)) & " AND PF=" & nPF
+        ApagaSQL cARQFEMEA, ePASS01
+        ePASS01 = "select * from FEMRPNT WHERE PRONUM=" & FixInt(aVAL(0)) & " AND PF=" & nPF
+        ApagaSQL cARQFEMEA, ePASS01
+        filgridpadpf
+      End If
+    End If
+  Case 6
+    If MDG("Atribuir Todos os Efeitos " & CStr(aVAL(2))) Then
+      '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND PF=" & nPF
+      ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND PF=" & nPF
+      GrvSQL cARQFEMEA, ePASS01, 1, Array("SIGI"), Array(cSIG), Array("C")
+    End If
+  Case 7
+    If MDG("Atribuir Todos as Falhas " & CStr(aVAL(1))) Then
+      '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
+      ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND PF=" & nPF
+      GrvSQL cARQFEMEA, ePASS01, 1, Array("SIGI"), Array(cSIG), Array("C")
+    End If
+  Case 8
+    If MDG("Atribuir Todos os Processos " & CStr(aVAL(0))) Then
+      '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
+      ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
+      GrvSQL cARQFEMEA, ePASS01, 1, Array("SIGI"), Array(cSIG), Array("C")
+    End If
+  Case 9
+    cDIZ = pegdizseqssq("", cARQPF)
+    If Len(cDIZ) = 0 Then
+      Alert ("Descricao Nao Especificada")
+      Exit Sub
+    End If
+    If MDG("Renomear Processos " & CStr(aVAL(0))) Then
+      '                ePASS01 = "select * from FEMEA WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
+      ePASS01 = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(0) & " AND PF=" & nPF
+      GrvSQL cARQFEMEA, ePASS01, 1, Array("PROCESSO"), Array(cDIZ), Array("C")
+    End If
+  Case 10
+    If MDG("Apagar Todos Femea Padrao ") Then
+      ePASS01 = "select * from FEMEAPAD WHERE PF=" & nPF
+      '                ePASS01 = "select * from FEMEA WHERE PF=" & nPF
+      If ApagaSQLP(cARQFEMEA, ePASS01) Then
+        ePASS01 = "select * from FEMPF WHERE PF=" & nPF
+        ApagaSQL cARQFEMEA, ePASS01
+        ePASS01 = "select * from FEMRPNO WHERE PF=" & nPF
+        ApagaSQL cARQFEMEA, ePASS01
+        ePASS01 = "select * from FEMRPNT WHERE PF=" & nPF
+        ApagaSQL cARQFEMEA, ePASS01
+        filgridpadpf
+      End If
+    End If
 
-    End Select
-    FILGRIdPAD
-    If nROW > 0 And nROW < GridPad.Rows - 1 Then
-        GridPad.Row = nROW
-        GridPad.TopRow = nROW
-    End If
+  End Select
+  FILGRIdPAD
+  If nROW > 0 And nROW < GridPad.Rows - 1 Then
+    GridPad.Row = nROW
+    GridPad.TopRow = nROW
+  End If
 
 End Sub
 
 Private Sub cmdedipre_Click(Index As Integer)
 
-    Dim nSEQ As Integer
-    If Gridfemprecad.Row > 0 Then
-        Gridfemprecad.Col = 0
-        nSEQ = Gridfemprecad
-        ePASS01 = "select * from FEMPRE WHERE SEGGRA=" & nSEQ
-        ePASS02 = cARQFEMEA
-        frmFEMEI.Show vbModal, Me
-        FILGRIdfemprecad
-    End If
+  Dim nSEQ As Integer
+  If Gridfemprecad.Row > 0 Then
+    Gridfemprecad.Col = 0
+    nSEQ = Gridfemprecad
+    ePASS01 = "select * from FEMPRE WHERE SEGGRA=" & nSEQ
+    ePASS02 = cARQFEMEA
+    frmFEMEI.Show vbModal, Me
+    FILGRIdfemprecad
+  End If
 End Sub
 
 Private Sub CmdEditar_Click()
 
-    Dim aVAL As Variant
-    aVAL = Array(0, 0, 0, 0, 0)
+  Dim aVAL As Variant
+  aVAL = Array(0, 0, 0, 0, 0)
 
-    Grid10.Col = 3
-    aVAL(0) = Grid10
-    Grid10.Col = 4
-    aVAL(1) = Grid10
-    Grid10.Col = 5
-    aVAL(2) = Grid10
-    Grid10.Col = 6
-    aVAL(3) = Grid10
-    Grid10.Col = 0
-    aVAL(4) = Grid10
-    ePASS01 = "select * from FEMRPNT WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND CAUNUM=" & aVAL(3) & " AND PF=" & aVAL(4)
-    ePASS02 = cARQFEMEA
-    frmFEMEI.Show vbModal, Me
+  Grid10.Col = 3
+  aVAL(0) = Grid10
+  Grid10.Col = 4
+  aVAL(1) = Grid10
+  Grid10.Col = 5
+  aVAL(2) = Grid10
+  Grid10.Col = 6
+  aVAL(3) = Grid10
+  Grid10.Col = 0
+  aVAL(4) = Grid10
+  ePASS01 = "select * from FEMRPNT WHERE PRONUM=" & aVAL(0) & " AND FALNUM=" & aVAL(1) & " AND EFENUM=" & aVAL(2) & " AND CAUNUM=" & aVAL(3) & " AND PF=" & aVAL(4)
+  ePASS02 = cARQFEMEA
+  frmFEMEI.Show vbModal, Me
 
 End Sub
 
 Private Sub CmdEscFal_Click()
 
-    Dim nNUM As Integer
-    Dim cDIZ As String
-    GRIDFAL.Col = 1
+  Dim nNUM As Integer
+  Dim cDIZ As String
+  GRIDFAL.Col = 1
 
-    nNUM = FixInt(GRIDFAL)
-    aNUM(1) = nNUM
-    GRIDFAL.Col = 2
-    cDIZ = FixStr(GRIDFAL)
-    aDIZ(1) = cDIZ
-    dizfal.Caption = CStr(nNUM) & " - " & cDIZ
-    LocalizaGrid GRIDFAL, aNUM(1), 2, False, 0
+  nNUM = FixInt(GRIDFAL)
+  aNUM(1) = nNUM
+  GRIDFAL.Col = 2
+  cDIZ = FixStr(GRIDFAL)
+  aDIZ(1) = cDIZ
+  dizfal.Caption = CStr(nNUM) & " - " & cDIZ
+  LocalizaGrid GRIDFAL, aNUM(1), 2, False, 0
 
 End Sub
 
 Private Sub CmdEscPro_Click()
 
-    Dim nNUM As Integer
-    Dim cDIZ As String
-    GridPRO.Col = 0
+  Dim nNUM As Integer
+  Dim cDIZ As String
+  GridPRO.Col = 0
 
-    nNUM = FixInt(GridPRO)
-    aNUM(0) = nNUM
-    aNUM(1) = 0
-    GridPRO.Col = 1
-    cDIZ = FixStr(GridPRO)
-    aDIZ(0) = cDIZ
-    FILGRIdFAL
-    dizpro.Caption = CStr(nNUM) & " - " & cDIZ
-    LocalizaGrid GridPRO, aNUM(0), 1, False, 0
+  nNUM = FixInt(GridPRO)
+  aNUM(0) = nNUM
+  aNUM(1) = 0
+  GridPRO.Col = 1
+  cDIZ = FixStr(GridPRO)
+  aDIZ(0) = cDIZ
+  FILGRIdFAL
+  dizpro.Caption = CStr(nNUM) & " - " & cDIZ
+  LocalizaGrid GridPRO, aNUM(0), 1, False, 0
 
 End Sub
 
 Private Sub CmdExcPFPad_Click(Index As Integer)
 
-    Dim aVAL As Variant
-    Dim cSQL As String
-    Dim lAPAGA As Boolean
+  Dim aVAL As Variant
+  Dim cSQL As String
+  Dim lAPAGA As Boolean
 
 
 
 
 
-    aVAL = Array(0, 0, 0)
+  aVAL = Array(0, 0, 0)
 
-    GridPadPF.Col = 1
-    aVAL(1) = FixInt(GridPadPF)
-    GridPadPF.Col = 2
-    aVAL(2) = FixInt(GridPadPF)
-    If Index = 1 Then                            ''Processo
-        cSQL = "select * from FEMPF WHERE PRONUM=" & aVAL(1) & " AND PF=" & nPF
-        If ApagaSQLP(cARQFEMEA, cSQL) Then
-            cSQL = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(1) & " AND PF=" & nPF 'FEMEAPAD
-            ApagaSQL cARQFEMEA, cSQL
-            cSQL = "select * from FEMRPNO WHERE PRONUM=" & aVAL(1) & " AND PF=" & nPF
-            ApagaSQL cARQFEMEA, cSQL
-            cSQL = "select * from FEMRPNT WHERE PRONUM=" & aVAL(1) & " And PF = " & nPF
-            ApagaSQL cARQFEMEA, cSQL
-        End If
+  GridPadPF.Col = 1
+  aVAL(1) = FixInt(GridPadPF)
+  GridPadPF.Col = 2
+  aVAL(2) = FixInt(GridPadPF)
+  If Index = 1 Then                            ''Processo
+    cSQL = "select * from FEMPF WHERE PRONUM=" & aVAL(1) & " AND PF=" & nPF
+    If ApagaSQLP(cARQFEMEA, cSQL) Then
+      cSQL = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(1) & " AND PF=" & nPF  'FEMEAPAD
+      ApagaSQL cARQFEMEA, cSQL
+      cSQL = "select * from FEMRPNO WHERE PRONUM=" & aVAL(1) & " AND PF=" & nPF
+      ApagaSQL cARQFEMEA, cSQL
+      cSQL = "select * from FEMRPNT WHERE PRONUM=" & aVAL(1) & " And PF = " & nPF
+      ApagaSQL cARQFEMEA, cSQL
     End If
-    If Index = 0 Or Index = 2 Then               ''Efeito
-        lAPAGA = False
-        cSQL = "select * from FEMPF WHERE PRONUM=" & aVAL(1) & " AND FALNUM=" & aVAL(2) & " AND PF=" & nPF
-        DizerBarra "Excluindo Femea Padrao-PF"
-        If Index = 0 Then
-            lAPAGA = ApagaSQLP(cARQFEMEA, cSQL)
-        End If
-        If Index = 2 Then
-            ApagaSQL cARQFEMEA, cSQL
-            lAPAGA = True
-        End If
-        If lAPAGA Then
-            DizerBarra "Excluindo Femea Padrao_Itens"
-            cSQL = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(1) & " AND FALNUM=" & aVAL(2) & " AND PF=" & nPF
-            ApagaSQL cARQFEMEA, cSQL
-            DizerBarra "Excluindo Femea Padrao Apuracao RPN"
-            cSQL = "select * from FEMRPNT WHERE PRONUM=" & aVAL(1) & " AND FALNUM=" & aVAL(2) & " AND PF=" & nPF
-            ApagaSQL cARQFEMEA, cSQL
-            If Index = 2 Then
-                DizerBarra "Gravando Padrao-PF Historico"
-                cSQL = "select * from FEMPFHIS WHERE PRONUM=" & aVAL(1) & " AND FALNUM=" & aVAL(2) & " AND PF=" & nPF
-                IncluiSQL cARQFEMEA, cSQL, 3, Array("PF", "PRONUM", "FALNUM"), Array(nPF, aVAL(1), aVAL(2)), True, False
-                Exit Sub
-            End If
-        End If
-        DizerBarra ""
+  End If
+  If Index = 0 Or Index = 2 Then               ''Efeito
+    lAPAGA = False
+    cSQL = "select * from FEMPF WHERE PRONUM=" & aVAL(1) & " AND FALNUM=" & aVAL(2) & " AND PF=" & nPF
+    DizerBarra "Excluindo Femea Padrao-PF"
+    If Index = 0 Then
+      lAPAGA = ApagaSQLP(cARQFEMEA, cSQL)
     End If
-    filgridpadpf
-    FILGRIdPAD
+    If Index = 2 Then
+      ApagaSQL cARQFEMEA, cSQL
+      lAPAGA = True
+    End If
+    If lAPAGA Then
+      DizerBarra "Excluindo Femea Padrao_Itens"
+      cSQL = "select * from FEMEAPAD WHERE PRONUM=" & aVAL(1) & " AND FALNUM=" & aVAL(2) & " AND PF=" & nPF
+      ApagaSQL cARQFEMEA, cSQL
+      DizerBarra "Excluindo Femea Padrao Apuracao RPN"
+      cSQL = "select * from FEMRPNT WHERE PRONUM=" & aVAL(1) & " AND FALNUM=" & aVAL(2) & " AND PF=" & nPF
+      ApagaSQL cARQFEMEA, cSQL
+      If Index = 2 Then
+        DizerBarra "Gravando Padrao-PF Historico"
+        cSQL = "select * from FEMPFHIS WHERE PRONUM=" & aVAL(1) & " AND FALNUM=" & aVAL(2) & " AND PF=" & nPF
+        IncluiSQL cARQFEMEA, cSQL, 3, Array("PF", "PRONUM", "FALNUM"), Array(nPF, aVAL(1), aVAL(2)), True, False
+        Exit Sub
+      End If
+    End If
+    DizerBarra ""
+  End If
+  filgridpadpf
+  FILGRIdPAD
 
 End Sub
 
 Private Sub cmdimp_Click()
-    Xcmdimp_Click 0
+  Xcmdimp_Click 0
 End Sub
 
 Private Sub Xcmdimp_Click(nPFTMP)
-    Dim cSQL As String
-    Dim oDB As New ADODB.Connection
-    Dim oRS As New ADODB.Recordset
-    Dim oRSDES As New ADODB.Recordset
-    Dim nFALTMP
-    Dim nPROTMP As Integer
-    Dim lGRAVA As Boolean
-    lGRAVA = False
-    On Error Resume Next
+  Dim cSQL As String
+  Dim oDB As New ADODB.Connection
+  Dim oRS As New ADODB.Recordset
+  Dim oRSDES As New ADODB.Recordset
+  Dim nFALTMP
+  Dim nPROTMP As Integer
+  Dim lGRAVA As Boolean
+  lGRAVA = False
+  On Error Resume Next
+  If nPFTMP = 0 Then
+    nPFTMP = FixInt(Val(Busca("Nº PF", "Importando", CStr(nPFTMP), 8)))
     If nPFTMP = 0 Then
-        nPFTMP = FixInt(Val(Busca("Nº PF", "Importando", CStr(nPFTMP), 8)))
-        If nPFTMP = 0 Then
-            Alert ("Nº PF Nao Especificado")
-            Exit Sub
-        End If
-        lGRAVA = True
+      Alert ("Nº PF Nao Especificado")
+      Exit Sub
     End If
-    cSQL = "SELECT * FROM FEMPF WHERE PF=" & nPFTMP & " ORDER BY PRONUM,FALNUM"
-    oDB.ConnectionTimeout = 120
-    oDB.Open GeracArq(cARQFEMEA)
-    oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
-    Do While Not oRS.EOF
-        nPROTMP = FixInt(oRS("PRONUM"))
-        nFALTMP = FixInt(oRS("FALNUM"))
-        If lGRAVA Then
-            GERAFEMEAPAD nPROTMP, nFALTMP, FixInt(nPF) ''pf e atual pftmp para sql
-        Else
-            cSQL = "select * from FEMPF WHERE PRONUM=" & oRS("PRONUM") & " AND FALNUM=" & oRS("FALNUM") & " AND PF=" & nPF
-            oRSDES.Open cSQL, oDB, adOpenDynamic, adLockOptimistic
-            If oRSDES.EOF Then
-                oRSDES.AddNew
-                oRSDES("PRONUM") = oRS("PRONUM")
-                oRSDES("FALNUM") = oRS("FALNUM")
-                oRSDES("PF") = nPF
-                oRSDES.Update
-            End If
-            oRSDES.Close
-        End If
-        oRS.MoveNext
-    Loop
-    oRS.Close
-    oDB.Close
-    filgridpadpf
-    FILGRIdPAD
+    lGRAVA = True
+  End If
+  cSQL = "SELECT * FROM FEMPF WHERE PF=" & nPFTMP & " ORDER BY PRONUM,FALNUM"
+  oDB.ConnectionTimeout = 120
+  oDB.Open GeracArq(cARQFEMEA)
+  oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+  Do While Not oRS.EOF
+    nPROTMP = FixInt(oRS("PRONUM"))
+    nFALTMP = FixInt(oRS("FALNUM"))
+    If lGRAVA Then
+      GERAFEMEAPAD nPROTMP, nFALTMP, FixInt(nPF)  ''pf e atual pftmp para sql
+    Else
+      cSQL = "select * from FEMPF WHERE PRONUM=" & oRS("PRONUM") & " AND FALNUM=" & oRS("FALNUM") & " AND PF=" & nPF
+      oRSDES.Open cSQL, oDB, adOpenDynamic, adLockOptimistic
+      If oRSDES.EOF Then
+        oRSDES.AddNew
+        oRSDES("PRONUM") = oRS("PRONUM")
+        oRSDES("FALNUM") = oRS("FALNUM")
+        oRSDES("PF") = nPF
+        oRSDES.Update
+      End If
+      oRSDES.Close
+    End If
+    oRS.MoveNext
+  Loop
+  oRS.Close
+  oDB.Close
+  filgridpadpf
+  FILGRIdPAD
 End Sub
 
 Private Sub CmdIncDef_Click()
-    Dim nSAC As Long
-    Dim cCAM As String
-    Dim cTITULO As String
-    Dim aCAMPOS
-    Dim avalor
-   
-    cTITULO = FixStr(Busca("Digite Descricao", "Descricao", Space(50), 50), "")
-    If Len(cTITULO) = 0 Then
-        Alert ("Necessario Digitar Descricao")
-        Exit Sub
-    End If
-    
-    cCAM = PegPath("PATH", "MANA5TGQ")
-    
-    nSAC = PegMAXSQL(GeraConn(cCAM, "FOX"), "MSRD", "MSDR", 1)
-    nSAC = nSAC + 1
-    
-    aCAMPOS = Array("MSRD", "DATA", "PF", "CODIGO", "CLIENTE", "DESC01")
-    avalor = Array(nSAC, Format(Date, "DD/MM/YY"), FixNum(TXTFIELDS(0)), FixStr(TXTFIELDS(2)), FixNum(TXTFIELDS(4)), FixStr(cTITULO))
-    
-    IncluiSQL GeraConn(cCAM, "FOX"), "SELECT * FROM MSRD WHERE MSRD=" & nSAC, 6 _
-    , aCAMPOS _
-    , avalor, _
-    , False, True
-    
-    
-    filgridmsrd
+  Dim nSAC As Long
+  Dim cCAM As String
+  Dim cTITULO As String
+  Dim aCAMPOS
+  Dim avalor
+
+  cTITULO = FixStr(Busca("Digite Descricao", "Descricao", Space(50), 50), "")
+  If Len(cTITULO) = 0 Then
+    Alert ("Necessario Digitar Descricao")
+    Exit Sub
+  End If
+
+  cCAM = PegPath("PATH", "MANA5TGQ")
+
+  nSAC = PegMAXSQL(GeraConn(cCAM, "FOX"), "MSRD", "MSDR", 1)
+  nSAC = nSAC + 1
+
+  aCAMPOS = Array("MSRD", "DATA", "PF", "CODIGO", "CLIENTE", "DESC01")
+  avalor = Array(nSAC, Format(Date, "DD/MM/YY"), FixNum(TXTFIELDS(0)), FixStr(TXTFIELDS(2)), FixNum(TXTFIELDS(4)), FixStr(cTITULO))
+
+  IncluiSQL GeraConn(cCAM, "FOX"), "SELECT * FROM MSRD WHERE MSRD=" & nSAC, 6 _
+          , aCAMPOS _
+          , avalor, _
+          , False, True
+
+
+  filgridmsrd
 End Sub
 
 Private Sub CmdIncPf_Click()
-    Dim cDIZ As String
-    On Error Resume Next
-    If aNUM(0) = 0 Then
-        Alert ("Processo Nao Escolhido")
-        Exit Sub
-    End If
-    If aNUM(1) = 0 Then
-        Alert ("Falha Nao Escolhido")
-        Exit Sub
-    End If
-    cDIZ = pegdizseqssq(dizpro, cARQPF)
-    If Len(cDIZ) = 0 Then
-        Alert ("Descricao Nao Especificada")
-        Exit Sub
-    End If
-    If Not MDG(cDIZ, "Incluir") Then
-        Exit Sub
-    End If
-    GERAFEMEAPAD aNUM(0), aNUM(1), FixInt(nPF), cDIZ
-    filgridpadpf
-    FILGRIdPAD
+  Dim cDIZ As String
+  On Error Resume Next
+  If aNUM(0) = 0 Then
+    Alert ("Processo Nao Escolhido")
+    Exit Sub
+  End If
+  If aNUM(1) = 0 Then
+    Alert ("Falha Nao Escolhido")
+    Exit Sub
+  End If
+  cDIZ = pegdizseqssq(dizpro, cARQPF)
+  If Len(cDIZ) = 0 Then
+    Alert ("Descricao Nao Especificada")
+    Exit Sub
+  End If
+  If Not MDG(cDIZ, "Incluir") Then
+    Exit Sub
+  End If
+  GERAFEMEAPAD aNUM(0), aNUM(1), FixInt(nPF), cDIZ
+  filgridpadpf
+  FILGRIdPAD
 
 End Sub
 
 Private Sub CmdLiberar_Click()
-    Dim sSQL As String
-    sSQL = "SELECT LIGADO FROM USUCAD WHERE FORM = 'escFEMEA' AND INDICE=3 AND IDUSUARIO=" & zUSERID
-    'eRETU01 = PegUltSQL(Dbname, sSQL, "LIGADO", False)
-    eRETU01 = PegCampoSQLADO(Dbname, sSQL, "", False)
-    If eRETU01 Then
-        TXTFIELDS(13) = zIDFOLHA
-        TXTFIELDS(14) = zNOMEFOLHA
-        TXTFIELDS(24) = Today()
-        Encerrar.Visible = False
-    Else
-        Alert ("Sem direito")
-    End If
+  Dim sSQL As String
+  sSQL = "SELECT LIGADO FROM USUCAD WHERE FORM = 'escFEMEA' AND INDICE=3 AND IDUSUARIO=" & zUSERID
+  'eRETU01 = PegUltSQL(Dbname, sSQL, "LIGADO", False)
+  eRETU01 = PegCampoSQLADO(Dbname, sSQL, "", False)
+  If eRETU01 Then
+    TXTFIELDS(13) = zIDFOLHA
+    TXTFIELDS(14) = zNOMEFOLHA
+    TXTFIELDS(24) = Today()
+    Encerrar.Visible = False
+  Else
+    Alert ("Sem direito")
+  End If
 End Sub
 
 Private Sub CmdMarcaFemea_Click()
-    Dim cSQLTMP As String
-    If GridPFrev.Row = 0 Then
-        Exit Sub
-    End If
-    GridPFrev.Col = 3
-    If Len(GridPFrev) > 0 Then
-        Alert ("Ja Verificado")
-        Exit Sub
-    End If
-    GridPFrev.Col = 1
-    cSQLTMP = "select * from PFrev WHERE PF=" & nPF & " AND REV=" & FixInt(GridPFrev)
-    GrvSQL cARQPF, cSQLTMP, 2, Array("FEMEAD", "FEMEAN"), Array(Date, zNOMEFOLHA), Array("D", "C")
-    FILGRIdpfrev
+  Dim cSQLTMP As String
+  If GridPFrev.Row = 0 Then
+    Exit Sub
+  End If
+  GridPFrev.Col = 3
+  If Len(GridPFrev) > 0 Then
+    Alert ("Ja Verificado")
+    Exit Sub
+  End If
+  GridPFrev.Col = 1
+  cSQLTMP = "select * from PFrev WHERE PF=" & nPF & " AND REV=" & FixInt(GridPFrev)
+  GrvSQL cARQPF, cSQLTMP, 2, Array("FEMEAD", "FEMEAN"), Array(Date, zNOMEFOLHA), Array("D", "C")
+  FILGRIdpfrev
 End Sub
 
 Private Sub CmdMotRev_Click()
-    If gridrev.Row = 0 Then
-        Exit Sub
-    End If
+  If gridrev.Row = 0 Then
+    Exit Sub
+  End If
 
-    gridrev.Col = 1
-    nREV = gridrev
-    ComMotAlt(0).Enabled = True
-    ComMotExc.Enabled = True
-    ComMotInc.Enabled = True
-    Filgridrevi (0)
+  gridrev.Col = 1
+  nREV = gridrev
+  ComMotAlt(0).Enabled = True
+  ComMotExc.Enabled = True
+  ComMotInc.Enabled = True
+  Filgridrevi (0)
 
 End Sub
 
 Private Sub CmdNome_Click()
-    Dim cDIZ
-    Dim cSQL As String
-    On Error Resume Next
+  Dim cDIZ
+  Dim cSQL As String
+  On Error Resume Next
 
-    If aNUM(0) = 0 Then
-        Alert ("Processo Nao Escolhido")
-        Exit Sub
-    End If
-    cDIZ = pegdizseqssq(dizpro, cARQPF)
-    If Len(cDIZ) = 0 Then
-        Alert ("Descricao Nao Especificada")
-        Exit Sub
-    End If
-    If Not MDG(cDIZ, "Trocar Descricao Processo") Then
-        Exit Sub
-    End If
-    cSQL = "select PROCESSO from FEMeaPAD WHERE PRONUM=" & FixInt(aNUM(0)) & " AND PF=" & FixInt(nPF)
-    GrvSQL cARQFEMEA, cSQL, 1, Array("PROCESSO"), Array(cDIZ), Array("C")
+  If aNUM(0) = 0 Then
+    Alert ("Processo Nao Escolhido")
+    Exit Sub
+  End If
+  cDIZ = pegdizseqssq(dizpro, cARQPF)
+  If Len(cDIZ) = 0 Then
+    Alert ("Descricao Nao Especificada")
+    Exit Sub
+  End If
+  If Not MDG(cDIZ, "Trocar Descricao Processo") Then
+    Exit Sub
+  End If
+  cSQL = "select PROCESSO from FEMeaPAD WHERE PRONUM=" & FixInt(aNUM(0)) & " AND PF=" & FixInt(nPF)
+  GrvSQL cARQFEMEA, cSQL, 1, Array("PROCESSO"), Array(cDIZ), Array("C")
 
 End Sub
 
 Private Sub CmdNovaREV_Click()
-    Dim dDATAREV As Date
-    Encerrar.Visible = False
-    dDATAREV = Date
-    
-    FilRelat 0
-    If Not lRETU Then
-        Alert ("Corriga antes de fazer a revisao")
-        Exit Sub
+  Dim dDATAREV As Date
+  Encerrar.Visible = False
+  dDATAREV = Date
+
+  FilRelat 0
+  If Not lRETU Then
+    Alert ("Corriga antes de fazer a revisao")
+    Exit Sub
+  End If
+
+
+  If Len(TXTFIELDS(23).tEXT) > 0 Then          'corrige erro importacao protheus data em branco
+    If TXTFIELDS(23) > Today() Then
+      Alert ("Data Revisao Anterior Maior que Data do Sistema")
+      Exit Sub
     End If
-    
-    
-    If Len(TXTFIELDS(23).Text) > 0 Then          'corrige erro importacao protheus data em branco
-        If TXTFIELDS(23) > Today() Then
-            Alert ("Data Revisao Anterior Maior que Data do Sistema")
-            Exit Sub
-        End If
-    End If
-    
-    If MDG("gerar revisao com historico") Then
-        If MDG("gerar Utilizando novos indicadores") Then
-            CmdREvisarTodas_Click 0              ''CmdRevFemea_Click 16
-        Else
-            If MDG("gerar nova revisando mantendo os indicadores") Then
-                CmdREvisarTodas_Click 16         ''CmdRevFemea_Click 16
-            End If
-        End If
-    End If
-    
-    If IsNumeric(TXTFIELDS(12)) Then
-        TXTFIELDS(12) = TXTFIELDS(12) + 1
+  End If
+
+  If MDG("gerar revisao com historico") Then
+    If MDG("gerar Utilizando novos indicadores") Then
+      CmdREvisarTodas_Click 0              ''CmdRevFemea_Click 16
     Else
-        TXTFIELDS(12) = 1
+      If MDG("gerar nova revisando mantendo os indicadores") Then
+        CmdREvisarTodas_Click 16         ''CmdRevFemea_Click 16
+      End If
     End If
-    TXTFIELDS(20) = True
-    TXTFIELDS(13) = 0
-    TXTFIELDS(14) = ""
-    TXTFIELDS(24) = ""
-    TXTFIELDS(23) = dDATAREV
-    Check1.Value = False
-    nREV = FixInt(TXTFIELDS(12))
-    IncluiSQL cARQPF, "select * from rev WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), Array(FixInt(nPF), nREV, "FE", dDATAREV), True, False
-    CmdProx_Click
-    Filgridrev
-    Filgridrevi (0)
-    
-    Command3_Click
-    
-    
-    
-    eRETU02 = "PF:" & TXTPF.Text & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Data:" & Fdata(dDATAREV) & Chr(13) & Chr(10)
-    MAILENV "FEM00001", eRETU02
-    
-    cmdClose_Click
+  End If
+
+  If IsNumeric(TXTFIELDS(12)) Then
+    TXTFIELDS(12) = TXTFIELDS(12) + 1
+  Else
+    TXTFIELDS(12) = 1
+  End If
+  TXTFIELDS(20) = True
+  TXTFIELDS(13) = 0
+  TXTFIELDS(14) = ""
+  TXTFIELDS(24) = ""
+  TXTFIELDS(23) = dDATAREV
+  Check1.Value = False
+  nREV = FixInt(TXTFIELDS(12))
+  IncluiSQL cARQPF, "select * from rev WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), Array(FixInt(nPF), nREV, "FE", dDATAREV), True, False
+  CmdProx_Click
+  Filgridrev
+  Filgridrevi (0)
+
+  Command3_Click
+
+
+
+  eRETU02 = "PF:" & TXTPF.tEXT & Chr(13) & Chr(10)
+  eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
+  eRETU02 = eRETU02 & " Data:" & Fdata(dDATAREV) & Chr(13) & Chr(10)
+  MAILENV "FEM00001", eRETU02
+
+  cmdClose_Click
 
 End Sub
 
 Private Sub CmdOrdFem_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        cORDFEMUSO = "ITEM"
-        FilRelat (0)
-    Case 1
-        cORDFEMUSO = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
-        FilRelat (0)
-    Case 2
-        cORDFEMAVU = "ITEM"
-        FilRelat (1)
-    Case 3
-        cORDFEMAVU = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
-        FilRelat (1)
-    Case 4
-        cORDFEMPRE = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
-        FilRelat (2)
-    Case 5
-        cORDFEMPRE = "ITEM"
-        FilRelat (2)
-    Case 6
-        cORDFEMGP12 = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
-        FilRelat (3)
-    Case 7
-        cORDFEMGP12 = "ITEM"
-        FilRelat (3)
-    Case 9
-        cORDFEMADC = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
-        FilRelat (5)
-    Case 8
-        cORDFEMADC = "ITEM"
-        FilRelat (5)
-    Case 10
-        cORDREVI = "ITEM,SEGGRA"
-        FILGRIDrevCAU (0)
-    Case 11
-        cORDREVI = "FXSEQ,FXSSQ,FXITEM,FXITEMS,FEMEAREV"
-        FILGRIDrevCAU (0)
-    End Select
+  Select Case Index
+  Case 0
+    cORDFEMUSO = "ITEM"
+    FilRelat (0)
+  Case 1
+    cORDFEMUSO = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
+    FilRelat (0)
+  Case 2
+    cORDFEMAVU = "ITEM"
+    FilRelat (1)
+  Case 3
+    cORDFEMAVU = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
+    FilRelat (1)
+  Case 4
+    cORDFEMPRE = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
+    FilRelat (2)
+  Case 5
+    cORDFEMPRE = "ITEM"
+    FilRelat (2)
+  Case 6
+    cORDFEMGP12 = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
+    FilRelat (3)
+  Case 7
+    cORDFEMGP12 = "ITEM"
+    FilRelat (3)
+  Case 9
+    cORDFEMADC = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
+    FilRelat (5)
+  Case 8
+    cORDFEMADC = "ITEM"
+    FilRelat (5)
+  Case 10
+    cORDREVI = "ITEM,SEGGRA"
+    FILGRIDrevCAU (0)
+  Case 11
+    cORDREVI = "FXSEQ,FXSSQ,FXITEM,FXITEMS,FEMEAREV"
+    FILGRIDrevCAU (0)
+  End Select
 End Sub
 
 Private Sub CmdOrdPad_Click(Index As Integer)
 
-    Select Case Index
-    Case 0
-        cORDFEMPAD = "PRONUM,FALNUM,EFENUM,CAUNUM"
-    Case 1
-        cORDFEMPAD = "ITEM,PRONUM,FALNUM,EFENUM,CAUNUM"
-    Case 2
-        cORDFEMPAD = "INDRIS,PRONUM,FALNUM,EFENUM,CAUNUM DESC"
-    Case 3
-        cORDFEMPAD = "INDRIS,PRONUM,FALNUM,EFENUM,CAUNUM"
-        
-    End Select
-    FILGRIdPAD
+  Select Case Index
+  Case 0
+    cORDFEMPAD = "PRONUM,FALNUM,EFENUM,CAUNUM"
+  Case 1
+    cORDFEMPAD = "ITEM,PRONUM,FALNUM,EFENUM,CAUNUM"
+  Case 2
+    cORDFEMPAD = "INDRIS,PRONUM,FALNUM,EFENUM,CAUNUM DESC"
+  Case 3
+    cORDFEMPAD = "INDRIS,PRONUM,FALNUM,EFENUM,CAUNUM"
+
+  End Select
+  FILGRIdPAD
 
 End Sub
 
 Private Sub CmdPreinc_Click()
 
-    Dim cTITULO As String
-    cTITULO = FixStr(Busca("Digite o Titulo", "Titulo Pre-Cadastro Femea", Space(50), 50), "")
+  Dim cTITULO As String
+  cTITULO = FixStr(Busca("Digite o Titulo", "Titulo Pre-Cadastro Femea", Space(50), 50), "")
 
-    If Len(cTITULO) = 0 Then
-        Alert ("Titulo Necessario")
-        Exit Sub
-    End If
-    IncluiSQL cARQFEMEA, "select * from FEMPRE where titulo='" & cTITULO & "'", 1, Array("TITULO"), Array(cTITULO), True
-    FILGRIdfemprecad
+  If Len(cTITULO) = 0 Then
+    Alert ("Titulo Necessario")
+    Exit Sub
+  End If
+  IncluiSQL cARQFEMEA, "select * from FEMPRE where titulo='" & cTITULO & "'", 1, Array("TITULO"), Array(cTITULO), True
+  FILGRIdfemprecad
 
 End Sub
 
 Private Sub CmdProx_Click()
 
-    If femeacrg.Value = False Then
-        If IsDate(TXTFIELDS(23)) Then
-            DTPicker1.Value = CDate(TXTFIELDS(23)) + 730
-        Else
-            If IsDate(DTPicker1) Then
-                DTPicker1 = DTPicker1 + 730
-            Else
-                DTPicker1 = Today() + 730
-            End If
-        End If
+  If femeacrg.Value = False Then
+    If IsDate(TXTFIELDS(23)) Then
+      DTPicker1.Value = CDate(TXTFIELDS(23)) + 730
+    Else
+      If IsDate(DTPicker1) Then
+        DTPicker1 = DTPicker1 + 730
+      Else
+        DTPicker1 = Today() + 730
+      End If
     End If
+  End If
 
 End Sub
 
 Private Sub CmdRevFemea_Click(Index As Integer)
-    RevisaoFemea (Index)
+  RevisaoFemea (Index)
 End Sub
 
 Private Sub RevisaoFemea(ByVal Index As Integer)
-    Dim nREVI As Long
-    Dim nSEQ As Long
-    Dim cSQL As String
-    Dim cARQ As String
-    Dim aVAL As Variant
-    Dim aCAM As Variant
-    Dim aFOR As Variant
-    Dim aPAD As Variant
-    Dim lVALORES As Boolean
-    Dim nCAMPOSUSO As Integer
-    Dim nINDEXINI As Integer
+  Dim nREVI As Long
+  Dim nSEQ As Long
+  Dim cSQL As String
+  Dim cARQ As String
+  Dim aVAL As Variant
+  Dim aCAM As Variant
+  Dim aFOR As Variant
+  Dim aPAD As Variant
+  Dim lVALORES As Boolean
+  Dim nCAMPOSUSO As Integer
+  Dim nINDEXINI As Integer
 
 
-    nINDEXINI = Index
+  nINDEXINI = Index
 
-    '0-producao 1-Padraocomplementar 2 pre 3 gp12 5 adicional 14-complementar->historico 15-complementar->pre 16-Producao sem checagem valor
-    lVALORES = True
-    If Index = 16 Then
-        lVALORES = False
-        Index = 0
-    End If
-
-
-
-    If Index = 0 Then
-        If Not AcessaMenu("FemeaPro", 1) Then
-            Exit Sub
-        End If
-    End If
-      
-    If Index = 3 Then
-        If Not AcessaMenu("FemeaGP12", 1) Then
-            Exit Sub
-        End If
-    End If
-
-    If Index = 2 Then
-        If Not AcessaMenu("FemeaPre", 1) Then
-            Exit Sub
-        End If
-        If eproducao Then
-            Exit Sub
-        End If
-
-    End If
+  '0-producao 1-Padraocomplementar 2 pre 3 gp12 5 adicional 14-complementar->historico 15-complementar->pre 16-Producao sem checagem valor
+  lVALORES = True
+  If Index = 16 Then
+    lVALORES = False
+    Index = 0
+  End If
 
 
-    'Sequencia do femea
-    If Index < 6 Then
-        If GridSeq(Index).Row = 0 Then
-            Exit Sub
-        End If
-        GridSeq(Index).Col = 1
-        nSEQ = GridSeq(Index)
+
+  If Index = 0 Then
+    If Not AcessaMenu("FemeaPro", 1) Then
+      Exit Sub
     End If
-    If Index = 14 Or Index = 15 Then
-        If GridSeq(1).Row = 0 Then
-            Exit Sub
-        End If
-        GridSeq(1).Col = 1
-        nSEQ = GridSeq(1)
+  End If
+
+  If Index = 3 Then
+    If Not AcessaMenu("FemeaGP12", 1) Then
+      Exit Sub
     End If
-    If Index = 0 Then
-        cARQ = cARQFEMEAPF                       ',cARQPF
+  End If
+
+  If Index = 2 Then
+    If Not AcessaMenu("FemeaPre", 1) Then
+      Exit Sub
     End If
-    If Index = 1 Or Index = 14 Or Index = 5 Then
-        cARQ = cARQFEMEA
-    End If
-    If Index = 2 Or Index = 15 Then
-        cARQ = cARQPFP
-    End If
-    If Index = 3 Then
-        cARQ = cARQPFG
-    End If
-    
-    
-    If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
-        cSQL = "FEMrevi WHERE  TIPOAPU='" & tipoapu(Index) & "' AND PF=" & nPF & " AND ITEM=" & nSEQ
-    End If
-    
-    ''Numero da Proxima revisao conforme pf e sequencia P-padrao
-    
-    
-    If Index = 14 Then
-        cSQL = "FEMHIS WHERE PF=" & nPF
-    End If
-    If Index = 15 Then
-        cSQL = "FEMEA WHERE PF=" & nPF
+    If eproducao Then
+      Exit Sub
     End If
 
-    If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
-        nREVI = FixInt(PegMAXSQL(cARQFEMEA, cSQL, "SEGGRA", 0))
+  End If
+
+
+  'Sequencia do femea
+  If Index < 6 Then
+    If GridSeq(Index).Row = 0 Then
+      Exit Sub
     End If
-    If Index = 14 Then
-        nREVI = FixInt(PegMAXSQL(cARQFEMEA, cSQL, "ITEM", 0))
+    GridSeq(Index).Col = 1
+    nSEQ = GridSeq(Index)
+  End If
+  If Index = 14 Or Index = 15 Then
+    If GridSeq(1).Row = 0 Then
+      Exit Sub
     End If
-    If Index = 15 Then
-        nREVI = FixInt(PegMAXSQL(cARQPFP, cSQL, "ITEM", 0))
-    End If
-    nREVI = nREVI + 1
-    
-                 
-    nCAMPOSUSO = 53
-    aCAM = Array("PF", "ITEM", "PROCESSO", "FALTIP", "FALEFE", _
-                 "FALCAU", "CRTATU", "INDOCO", "INDSEV", "INDDET", _
-                 "INDRIS", "ACAREC", "RESCOD", "RESNOM", "RESCOD2", _
-                 "ACATOM", "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", _
-                 "RINDRIS", "RESNOM2", "RESNOM3", "SITUACAO", "SIGI", _
-                 "CARAPREV", "RESDAT", "RESDAT2", "RESDAT3", "ACADAT", _
-                 "ACAO", "EXCRPN", "ALTMAN", "MUDPAD", "PSA", _
-                 "FXSEQ", "FXSSQ", "FXITEM", "PRONUM", "EFENUM", _
-                 "FALNUM", "CAUNUM", "SEGGRA", "TIPOAPU", "PRONUM", _
-                 "FALNUM", "EFENUM", "CAUNUM", "SIG2", "SIG3", _
-                 "SUBTIPO", "FXITEMS", "FEMEAREV")
-                 
-    aFOR = Array("NI", "NI", "C", "C", "C", _
-                 "C", "C", "NI", "NI", "NI", _
-                 "NI", "C", "NI", "C", "NI", _
-                 "C", "NI", "NI", "NI", "NI", _
-                 "NI", "C", "C", "C", "C", "C", _
-                 "DN", "DN", "DN", "DN", "BN", _
-                 "BN", "BN", "BN", "C", "NI", "NI", "NI", "NI", "NI", "NI", "NI", "NI", "C", _
-                 "NI", "NI", "NI", "NI", "C", "C", "C", "", "NI")
-                 
-    aPAD = Array(0, 0, "", "", "", _
-                 "", "", 0, 0, 0, _
-                 0, "", 0, "", 0, _
-                 "", 0, 0, 0, 0, 0, _
-                 "", "", "", "", "", _
-                 "", "", "", "", False, _
-                 False, False, False, "", 0, 0, 0, 0, 0, 0, 0, 0, " ", _
-                 0, 0, 0, 0, "C", "C", "C", 0, 0)
-                 
-                 
-    
-    If Index = 0 Or Index = 2 Or Index = 3 Then
-        cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-    End If
-    If Index = 1 Or Index = 14 Or Index = 15 Then
-        cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-    End If
-    If Index = 5 Then
-        cSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-    End If
-    
-    
-    'carrega o femea atual
-    If Index = 15 Then                           'o destino e diferente da origem no index 15 carq=cARQPFP mas pega do femavu(cARQFEMEA)
-        aVAL = PegSQL(cARQFEMEA, cSQL, nCAMPOSUSO, aCAM, aFOR, aPAD)
-    Else
-        aVAL = PegSQL(cARQ, cSQL, nCAMPOSUSO, aCAM, aFOR, aPAD)
-    End If
-    
-    If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
-        'checa se foi feita a revisao
-        If lVALORES Then
-            If aVAL(17) = 0 Or aVAL(18) = 0 Or aVAL(19) = 0 Or aVAL(20) = 0 Then
-                Alert ("Novos Indices Nao Preenchidos")
-                Exit Sub
-            End If
-        End If
-        
-        'atualiza revisao e tipo
-        aVAL(42) = nREVI
-        
-        
-        'If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then 'ja no if acima
-        aVAL(43) = tipoapu(Index)
-        'End If
-        
-        If FixNum(aVAL(52)) = 0 Then             'revisao do femea checar em branco pois historio pode ter varias versoes
-            aVAL(52) = FixNum(TXTFIELDS(12).Text)
-        End If
-        
-        
-    End If
-    If Index = 14 Or Index = 15 Then             'a revisao e a passada no command10
-        aVAL(1) = nREVI
-    End If
-    
-    
-    If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
-        cSQL = "select * from FEMrevi WHERE  TIPOAPU='" & tipoapu(Index) & "' AND PF=" & nPF & " AND ITEM=" & nSEQ & " AND SEGGRA=" & nREVI
-    End If
-    
-    If Index = 14 Then
-        cSQL = "select * from FEMHIS WHERE PF=" & nPF & " AND ITEM=" & nREVI
-    End If
-    If Index = 15 Then
-        cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nREVI
-    End If
-    
-    
-    If Index < 6 Or Index = 14 Then
-        IncluiSQL cARQFEMEA, cSQL, nCAMPOSUSO, aCAM, aVAL, True, False
-    End If
-    
-    If Index = 15 Then
-        IncluiSQL cARQPFP, cSQL, nCAMPOSUSO, aCAM, aVAL, True, False
-    End If
-    
-    If Index = 14 Then
-        cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        ApagaSQL cARQFEMEA, cSQL
-        cSQL = "select * FROM FEMrevi WHERE  TIPOAPU='C' AND PF=" & nPF & " AND ITEM=" & nSEQ
-        GrvSQL cARQFEMEA, cSQL, 2, Array("ITEM", "TIPOAPU"), Array(nREVI, "1"), Array("NI", "C")
+    GridSeq(1).Col = 1
+    nSEQ = GridSeq(1)
+  End If
+  If Index = 0 Then
+    cARQ = cARQFEMEAPF                       ',cARQPF
+  End If
+  If Index = 1 Or Index = 14 Or Index = 5 Then
+    cARQ = cARQFEMEA
+  End If
+  If Index = 2 Or Index = 15 Then
+    cARQ = cARQPFP
+  End If
+  If Index = 3 Then
+    cARQ = cARQPFG
+  End If
+
+
+  If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
+    cSQL = "FEMrevi WHERE  TIPOAPU='" & tipoapu(Index) & "' AND PF=" & nPF & " AND ITEM=" & nSEQ
+  End If
+
+  ''Numero da Proxima revisao conforme pf e sequencia P-padrao
+
+
+  If Index = 14 Then
+    cSQL = "FEMHIS WHERE PF=" & nPF
+  End If
+  If Index = 15 Then
+    cSQL = "FEMEA WHERE PF=" & nPF
+  End If
+
+  If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
+    nREVI = FixInt(PegMAXSQL(cARQFEMEA, cSQL, "SEGGRA", 0))
+  End If
+  If Index = 14 Then
+    nREVI = FixInt(PegMAXSQL(cARQFEMEA, cSQL, "ITEM", 0))
+  End If
+  If Index = 15 Then
+    nREVI = FixInt(PegMAXSQL(cARQPFP, cSQL, "ITEM", 0))
+  End If
+  nREVI = nREVI + 1
+
+
+  nCAMPOSUSO = 53
+  aCAM = Array("PF", "ITEM", "PROCESSO", "FALTIP", "FALEFE", _
+               "FALCAU", "CRTATU", "INDOCO", "INDSEV", "INDDET", _
+               "INDRIS", "ACAREC", "RESCOD", "RESNOM", "RESCOD2", _
+               "ACATOM", "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", _
+               "RINDRIS", "RESNOM2", "RESNOM3", "SITUACAO", "SIGI", _
+               "CARAPREV", "RESDAT", "RESDAT2", "RESDAT3", "ACADAT", _
+               "ACAO", "EXCRPN", "ALTMAN", "MUDPAD", "PSA", _
+               "FXSEQ", "FXSSQ", "FXITEM", "PRONUM", "EFENUM", _
+               "FALNUM", "CAUNUM", "SEGGRA", "TIPOAPU", "PRONUM", _
+               "FALNUM", "EFENUM", "CAUNUM", "SIG2", "SIG3", _
+               "SUBTIPO", "FXITEMS", "FEMEAREV")
+
+  aFOR = Array("NI", "NI", "C", "C", "C", _
+               "C", "C", "NI", "NI", "NI", _
+               "NI", "C", "NI", "C", "NI", _
+               "C", "NI", "NI", "NI", "NI", _
+               "NI", "C", "C", "C", "C", "C", _
+               "DN", "DN", "DN", "DN", "BN", _
+               "BN", "BN", "BN", "C", "NI", "NI", "NI", "NI", "NI", "NI", "NI", "NI", "C", _
+               "NI", "NI", "NI", "NI", "C", "C", "C", "", "NI")
+
+  aPAD = Array(0, 0, "", "", "", _
+               "", "", 0, 0, 0, _
+               0, "", 0, "", 0, _
+               "", 0, 0, 0, 0, 0, _
+               "", "", "", "", "", _
+               "", "", "", "", False, _
+               False, False, False, "", 0, 0, 0, 0, 0, 0, 0, 0, " ", _
+               0, 0, 0, 0, "C", "C", "C", 0, 0)
+
+
+
+  If Index = 0 Or Index = 2 Or Index = 3 Then
+    cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+  End If
+  If Index = 1 Or Index = 14 Or Index = 15 Then
+    cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+  End If
+  If Index = 5 Then
+    cSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+  End If
+
+
+  'carrega o femea atual
+  If Index = 15 Then                           'o destino e diferente da origem no index 15 carq=cARQPFP mas pega do femavu(cARQFEMEA)
+    aVAL = PegSQL(cARQFEMEA, cSQL, nCAMPOSUSO, aCAM, aFOR, aPAD)
+  Else
+    aVAL = PegSQL(cARQ, cSQL, nCAMPOSUSO, aCAM, aFOR, aPAD)
+  End If
+
+  If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
+    'checa se foi feita a revisao
+    If lVALORES Then
+      If aVAL(17) = 0 Or aVAL(18) = 0 Or aVAL(19) = 0 Or aVAL(20) = 0 Then
+        Alert ("Novos Indices Nao Preenchidos")
         Exit Sub
+      End If
     End If
-    
-    If Index = 15 Then
-        cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        ApagaSQL cARQFEMEA, cSQL
-        cSQL = "select * FROM FEMrevi WHERE  TIPOAPU='C' AND PF=" & nPF & " AND ITEM=" & nSEQ
-        GrvSQL cARQFEMEA, cSQL, 2, Array("ITEM", "TIPOAPU"), Array(nREVI, "R"), Array("NI", "C")
-        Exit Sub
+
+    'atualiza revisao e tipo
+    aVAL(42) = nREVI
+
+
+    'If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then 'ja no if acima
+    aVAL(43) = tipoapu(Index)
+    'End If
+
+    If FixNum(aVAL(52)) = 0 Then             'revisao do femea checar em branco pois historio pode ter varias versoes
+      aVAL(52) = FixNum(TXTFIELDS(12).tEXT)
     End If
-    
-    If Index = 0 Or Index = 2 Or Index = 3 Then
-        cSQL = "select * from FEMEA  WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-    End If
-    If Index = 1 Then
-        cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-    End If
-    If Index = 5 Then
-        cSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-    End If
-    
-    If lVALORES Then                             'so zera se trocar os valores
-        GrvSQL cARQ, cSQL, 17, Array("ACAREC", "RESCOD", "RESNOM", "RESCOD2", "ACATOM", _
-                                     "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", "RINDRIS", _
-                                     "RESNOM2", "RESNOM3", "INDOCO", "INDSEV", "INDDET", _
-                                     "INDRIS", "ACAO"), _
-                                     Array("", 0, "", 0, "", 0, 0, 0, 0, 0, "", "", aVAL(17), aVAL(18), aVAL(19), aVAL(20), False), _
-                                     Array("C", "NI", "C", "NI", "C", "NI", "NI", "NI", "NI", "NI", "C", "C", "NI", "NI", "NI", "NI", "")
-    End If
-    If Index > 9 Then
-        Index = 1
-    End If
-    
-    Index = nINDEXINI                            'Retorna o index inicial pois index e byref
-    
-    If nINDEXINI <> 16 Then
-        FILGRIDrevCAU (Index)
-    End If
+
+
+  End If
+  If Index = 14 Or Index = 15 Then             'a revisao e a passada no command10
+    aVAL(1) = nREVI
+  End If
+
+
+  If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
+    cSQL = "select * from FEMrevi WHERE  TIPOAPU='" & tipoapu(Index) & "' AND PF=" & nPF & " AND ITEM=" & nSEQ & " AND SEGGRA=" & nREVI
+  End If
+
+  If Index = 14 Then
+    cSQL = "select * from FEMHIS WHERE PF=" & nPF & " AND ITEM=" & nREVI
+  End If
+  If Index = 15 Then
+    cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nREVI
+  End If
+
+
+  If Index < 6 Or Index = 14 Then
+    IncluiSQL cARQFEMEA, cSQL, nCAMPOSUSO, aCAM, aVAL, True, False
+  End If
+
+  If Index = 15 Then
+    IncluiSQL cARQPFP, cSQL, nCAMPOSUSO, aCAM, aVAL, True, False
+  End If
+
+  If Index = 14 Then
+    cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    ApagaSQL cARQFEMEA, cSQL
+    cSQL = "select * FROM FEMrevi WHERE  TIPOAPU='C' AND PF=" & nPF & " AND ITEM=" & nSEQ
+    GrvSQL cARQFEMEA, cSQL, 2, Array("ITEM", "TIPOAPU"), Array(nREVI, "1"), Array("NI", "C")
+    Exit Sub
+  End If
+
+  If Index = 15 Then
+    cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    ApagaSQL cARQFEMEA, cSQL
+    cSQL = "select * FROM FEMrevi WHERE  TIPOAPU='C' AND PF=" & nPF & " AND ITEM=" & nSEQ
+    GrvSQL cARQFEMEA, cSQL, 2, Array("ITEM", "TIPOAPU"), Array(nREVI, "R"), Array("NI", "C")
+    Exit Sub
+  End If
+
+  If Index = 0 Or Index = 2 Or Index = 3 Then
+    cSQL = "select * from FEMEA  WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+  End If
+  If Index = 1 Then
+    cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+  End If
+  If Index = 5 Then
+    cSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+  End If
+
+  If lVALORES Then                             'so zera se trocar os valores
+    GrvSQL cARQ, cSQL, 17, Array("ACAREC", "RESCOD", "RESNOM", "RESCOD2", "ACATOM", _
+                                 "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", "RINDRIS", _
+                                 "RESNOM2", "RESNOM3", "INDOCO", "INDSEV", "INDDET", _
+                                 "INDRIS", "ACAO"), _
+                                 Array("", 0, "", 0, "", 0, 0, 0, 0, 0, "", "", aVAL(17), aVAL(18), aVAL(19), aVAL(20), False), _
+                                 Array("C", "NI", "C", "NI", "C", "NI", "NI", "NI", "NI", "NI", "C", "C", "NI", "NI", "NI", "NI", "")
+  End If
+  If Index > 9 Then
+    Index = 1
+  End If
+
+  Index = nINDEXINI                            'Retorna o index inicial pois index e byref
+
+  If nINDEXINI <> 16 Then
+    FILGRIDrevCAU (Index)
+  End If
 
 
 End Sub
 
 Private Sub CmdREvi_Click(Index As Integer)
-    Dim nREVI As Long
-    Dim nSEQ As Long
+  Dim nREVI As Long
+  Dim nSEQ As Long
 
+  If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
+    If gridrevcau(Index).Row = 0 Then
+      Exit Sub
+    End If
+    gridrevcau(Index).Col = 0
+    nSEQ = gridrevcau(Index)
+    gridrevcau(Index).Col = 1
+    nREVI = gridrevcau(Index)
     If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
-        If gridrevcau(Index).Row = 0 Then
-            Exit Sub
-        End If
-        gridrevcau(Index).Col = 0
-        nSEQ = gridrevcau(Index)
-        gridrevcau(Index).Col = 1
-        nREVI = gridrevcau(Index)
-        If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
-            ePASS01 = "select * from FEMrevi WHERE  TIPOAPU='" & tipoapu(Index) & "' AND PF=" & nPF & " AND ITEM=" & nSEQ & " AND SEGGRA=" & nREVI
-        End If
+      ePASS01 = "select * from FEMrevi WHERE  TIPOAPU='" & tipoapu(Index) & "' AND PF=" & nPF & " AND ITEM=" & nSEQ & " AND SEGGRA=" & nREVI
     End If
-    If Index = 4 Then
-        If GridSeq(4).Row = 0 Then
-            Exit Sub
-        End If
-        GridSeq(4).Col = 1
-        nSEQ = GridSeq(4)
-        ePASS01 = "select * from FEMHIS WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+  End If
+  If Index = 4 Then
+    If GridSeq(4).Row = 0 Then
+      Exit Sub
     End If
-    ePASS02 = cARQFEMEA
-    
-    Load frmFEMEI
-    frmFEMEI.TXTFIELDS(2).Enabled = False
-    frmFEMEI.TXTFIELDS(3).Enabled = False
-    frmFEMEI.TXTFIELDS(4).Enabled = False
-    frmFEMEI.TXTFIELDS(5).Enabled = False
-    frmFEMEI.cmdClose.Enabled = False
-    frmFEMEI.CmdAltman.Enabled = False
-    frmFEMEI.Show vbModal, Me
-    
-    
+    GridSeq(4).Col = 1
+    nSEQ = GridSeq(4)
+    ePASS01 = "select * from FEMHIS WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+  End If
+  ePASS02 = cARQFEMEA
+
+  Load frmFEMEI
+  frmFEMEI.TXTFIELDS(2).Enabled = False
+  frmFEMEI.TXTFIELDS(3).Enabled = False
+  frmFEMEI.TXTFIELDS(4).Enabled = False
+  frmFEMEI.TXTFIELDS(5).Enabled = False
+  frmFEMEI.cmdClose.Enabled = False
+  frmFEMEI.CmdAltman.Enabled = False
+  frmFEMEI.Show vbModal, Me
+
+
 
 End Sub
 
 Private Sub CmdREvisarTodas_Click(Index As Integer)
-    Dim nROWS
-    Dim X
-    Dim nIndex
-    nIndex = Index
-    If GridSeq(0).Rows = 0 Then
-        Exit Sub
+  Dim nROWS
+  Dim x
+  Dim nIndex
+  nIndex = Index
+  If GridSeq(0).Rows = 0 Then
+    Exit Sub
+  End If
+  If Index = 0 Then
+    If Not MDG("Transfere indices e abre uma nova revisao todos") Then
+      Exit Sub
     End If
-    If Index = 0 Then
-        If Not MDG("Transfere indices e abre uma nova revisao todos") Then
-            Exit Sub
-        End If
+  End If
+  If Index = 16 Then
+    If Not MDG("Nao Transfere indices e abre uma nova revisao todos ") Then
+      Exit Sub
     End If
-    If Index = 16 Then
-        If Not MDG("Nao Transfere indices e abre uma nova revisao todos ") Then
-            Exit Sub
-        End If
-    End If
+  End If
 
-    nROWS = GridSeq(0).Rows
-    nROWS = nROWS - 1
-    For X = 1 To nROWS
-        GridSeq(0).Row = X
-        DizerBarra "Gerando Revisao femea " & X & "/" & nROWS
-        RevisaoFemea nIndex
-    Next X
-    DizerBarra ""
-    FilRelat 1
-    If nIndex = 16 Then
-        FILGRIDrevCAU 0
-    End If
+  nROWS = GridSeq(0).Rows
+  nROWS = nROWS - 1
+  For x = 1 To nROWS
+    GridSeq(0).Row = x
+    DizerBarra "Gerando Revisao femea " & x & "/" & nROWS
+    RevisaoFemea nIndex
+  Next x
+  DizerBarra ""
+  FilRelat 1
+  If nIndex = 16 Then
+    FILGRIDrevCAU 0
+  End If
 End Sub
 
 Private Sub CMDSIG_Click(Index As Integer)
 
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
-    If Index = 0 Then
-        escFLX.Show vbModal, Me
-    Else
-        ePASS01 = "isoqsymbol"
-        ePASS02 = True
-        frmCharacters.Show vbModal, Me
-    End If
-    If lRETU Then
-        txtsigi = eRETU01
-    End If
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  If Index = 0 Then
+    escFLX.Show vbModal, Me
+  Else
+    ePASS01 = "isoqsymbol"
+    ePASS02 = True
+    frmCharacters.Show vbModal, Me
+  End If
+  If lRETU Then
+    txtsigi = eRETU01
+  End If
 
 End Sub
 
 Private Sub CmdTotFlux_Click(Index As Integer)
-    Dim nROWS As Integer
-    Dim X As Integer
-    If Index = 1 Then
-        If GridPadPF.Rows < 2 Then
-            Alert "Este Femea nao utiliza Padrao"
-            Exit Sub
-        End If
+  Dim nROWS As Integer
+  Dim x As Integer
+  If Index = 1 Then
+    If GridPadPF.Rows < 2 Then
+      Alert "Este Femea nao utiliza Padrao"
+      Exit Sub
     End If
-    If Index = 0 Then                            'normal com complementar
-        If GridSeq(1).Rows > 1 Then
-            Alert "Femea com complemetar nao pode usar normal"
-            Exit Sub
-        End If
+  End If
+  If Index = 0 Then                            'normal com complementar
+    If GridSeq(1).Rows > 1 Then
+      Alert "Femea com complemetar nao pode usar normal"
+      Exit Sub
     End If
-    
-    If Index = 0 Then                            'normal com padrao
-        If GridPadPF.Rows > 1 Then
-            Alert "Femea com Padrao nao pode usar normal"
-            Exit Sub
-        End If
-    End If
+  End If
 
-    nROWS = GrdQsbLep.Rows - 1
-    For X = 1 To nROWS                           ' zero e o titulo do grid comeca 1
-        GrdQsbLep.Row = X
-        Select Case Index
-        Case 0
-            Command1_Click 4
-        Case 1
-            Command1_Click 5
-        Case 2
-            Command1_Click 8
-        Case 3
-            Command1_Click 9
-        End Select
-    Next X
+  If Index = 0 Then                            'normal com padrao
+    If GridPadPF.Rows > 1 Then
+      Alert "Femea com Padrao nao pode usar normal"
+      Exit Sub
+    End If
+  End If
 
+  nROWS = GrdQsbLep.Rows - 1
+  For x = 1 To nROWS                           ' zero e o titulo do grid comeca 1
+    GrdQsbLep.Row = x
     Select Case Index
-    Case 0                                       ' Command1_Click 4
-        FilRelat (0)
-    Case 1                                       'Command1_Click 5
-        FilRelat (1)
-    Case 2                                       'Command1_Click 8
-        FilRelat (2)
-    Case 3                                       'Command1_Click 9
-        FilRelat (3)
+    Case 0
+      Command1_Click 4
+    Case 1
+      Command1_Click 5
+    Case 2
+      Command1_Click 8
+    Case 3
+      Command1_Click 9
     End Select
+  Next x
+
+  Select Case Index
+  Case 0                                       ' Command1_Click 4
+    FilRelat (0)
+  Case 1                                       'Command1_Click 5
+    FilRelat (1)
+  Case 2                                       'Command1_Click 8
+    FilRelat (2)
+  Case 3                                       'Command1_Click 9
+    FilRelat (3)
+  End Select
 
 
 
 End Sub
 
 Private Sub CmdTotPad_Click(Index As Integer)
-    Dim nROWS As Integer
-    Dim X As Integer
-    nROWS = gridopr.Rows - 1
-    For X = 1 To nROWS                           ' zero e o titulo do grid comeca 1
-        gridopr.Row = X
-        If Index = 0 Then
-            Command1_Click 2
-        Else
-            Command1_Click 3
-        End If
-    Next X
+  Dim nROWS As Integer
+  Dim x As Integer
+  nROWS = gridopr.Rows - 1
+  For x = 1 To nROWS                           ' zero e o titulo do grid comeca 1
+    gridopr.Row = x
+    If Index = 0 Then
+      Command1_Click 2
+    Else
+      Command1_Click 3
+    End If
+  Next x
 End Sub
 
 Private Sub CmdTrocaREv_Click()
-    Dim nORI
-    Dim nDES
-    Dim cSQL As String
-    nORI = FixInt(TxtRevisao, 0)
-    nDES = FixInt(TxtRevNova, 0)
-    cSQL = "select * from rev WHERE PF=" & nPF & " AND REVISAO=" & nORI & " AND TIPO='FE'"
-    GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
-    cSQL = "select * from revI WHERE PF=" & nPF & " AND REVISAO=" & nORI & " AND TIPO='FE'"
-    GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
-    TXTFIELDS(12).Enabled = True
-    TXTFIELDS(23).Enabled = True
-    TXTFIELDS(12).Locked = False
-    TXTFIELDS(23).Locked = False
-    Filgridrev
+  Dim nORI
+  Dim nDES
+  Dim cSQL As String
+  nORI = FixInt(TxtRevisao, 0)
+  nDES = FixInt(TxtRevNova, 0)
+  cSQL = "select * from rev WHERE PF=" & nPF & " AND REVISAO=" & nORI & " AND TIPO='FE'"
+  GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
+  cSQL = "select * from revI WHERE PF=" & nPF & " AND REVISAO=" & nORI & " AND TIPO='FE'"
+  GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
+  TXTFIELDS(12).Enabled = True
+  TXTFIELDS(23).Enabled = True
+  TXTFIELDS(12).Locked = False
+  TXTFIELDS(23).Locked = False
+  Filgridrev
 End Sub
 
 Private Sub CmdVerApu_Click()
-    Dim cSQL As String
-    Dim nMES
-    Dim nANO As Integer
-    DizerBarra "carregando apuracoes"
-    nMES = FixInt(Text(1))
-    nANO = FixInt(Text(2))
-    cSQL = "SELECT PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU FROM FEMRPNT WHERE ANO=" & nANO & " AND MES=" & nMES & " AND PF=" & nPF & " ORDER BY PF,INDRIS"
-    MontaGridFast Grid10, 10, Array(400, 400, 400, 400, 400, 400, 400, 300, 2500, 2500), Array("PF", "ITEM", "RPN", "NºPro", "NºFal", "NºEfe", "NºCau", "Man", "Efeito", "Causa"), Array("PF", "ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
-    DizerBarra "carregando apuracoes RPN"
-    cSQL = "SELECT PF, SEQ, PRONUM, TOTRPN, TOTCAU, TOTM40, MAIRPN, TOTFX01, TOTFX02, TOTFX03, TOTRPN01, TOTRPN02, TOTRPN03 FROM FEMRPNO WHERE ANO=" & nANO & " AND MES=" & nMES & " AND PF=" & nPF & " ORDER BY PF,PRONUM"
-    MontaGridUltra GridOpe, 13, Array(500, 500, 500, 800, 500, 500, 500, 500, 500, 500, 800, 800, 800), Array("PF", "SEQ", "NºPro", "Tot RPN", "NºCau", ">40", "Maior", "0-40", "40-100", ">100", "Ant", "Ant", "Ant"), Array("PF", "SEQ", "PRONUM", "TOTRPN", "TOTCAU", "TOTM40", "MAIRPN", "TOTFX01", "TOTFX02", "TOTFX03", "TOTRPN01", "TOTRPN02", "TOTRPN03"), cARQFEMEA, cSQL
-    dizcomapu.Caption = StrZero(nMES, 2) & "/" & StrZero(nANO, 4)
-    DizerBarra ""
+  Dim cSQL As String
+  Dim nMES
+  Dim nANO As Integer
+  DizerBarra "carregando apuracoes"
+  nMES = FixInt(tEXT(1))
+  nANO = FixInt(tEXT(2))
+  cSQL = "SELECT PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU FROM FEMRPNT WHERE ANO=" & nANO & " AND MES=" & nMES & " AND PF=" & nPF & " ORDER BY PF,INDRIS"
+  MontaGridFast Grid10, 10, Array(400, 400, 400, 400, 400, 400, 400, 300, 2500, 2500), Array("PF", "ITEM", "RPN", "NºPro", "NºFal", "NºEfe", "NºCau", "Man", "Efeito", "Causa"), Array("PF", "ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
+  DizerBarra "carregando apuracoes RPN"
+  cSQL = "SELECT PF, SEQ, PRONUM, TOTRPN, TOTCAU, TOTM40, MAIRPN, TOTFX01, TOTFX02, TOTFX03, TOTRPN01, TOTRPN02, TOTRPN03 FROM FEMRPNO WHERE ANO=" & nANO & " AND MES=" & nMES & " AND PF=" & nPF & " ORDER BY PF,PRONUM"
+  MontaGridUltra GridOpe, 13, Array(500, 500, 500, 800, 500, 500, 500, 500, 500, 500, 800, 800, 800), Array("PF", "SEQ", "NºPro", "Tot RPN", "NºCau", ">40", "Maior", "0-40", "40-100", ">100", "Ant", "Ant", "Ant"), Array("PF", "SEQ", "PRONUM", "TOTRPN", "TOTCAU", "TOTM40", "MAIRPN", "TOTFX01", "TOTFX02", "TOTFX03", "TOTRPN01", "TOTRPN02", "TOTRPN03"), cARQFEMEA, cSQL
+  dizcomapu.Caption = StrZero(nMES, 2) & "/" & StrZero(nANO, 4)
+  DizerBarra ""
 End Sub
 
 Private Sub CmdVerDef_Click()
-    filgridmsrd
+  filgridmsrd
 End Sub
 
 Private Sub Command1_Click(Index As Integer)
-    Dim nNUM As Integer
-    Dim cSQL As String
-    Dim cDESC As String
-    Dim nTMPSEQ As Integer
-    Dim nTMPSSQ As Integer
-    Dim nTMPITEM As Integer
+  Dim nNUM As Integer
+  Dim cSQL As String
+  Dim cDESC As String
+  Dim nTMPSEQ As Integer
+  Dim nTMPSSQ As Integer
+  Dim nTMPITEM As Integer
 
-    If Index = 7 Then
-        If Not AcessaMenu("FemeaGP12", 1) Then
-            Exit Sub
-        End If
+  If Index = 7 Then
+    If Not AcessaMenu("FemeaGP12", 1) Then
+      Exit Sub
     End If
-    If Index = 0 Then
-        If Not AcessaMenu("FemeaPro", 1) Then
-            Exit Sub
-        End If
+  End If
+  If Index = 0 Then
+    If Not AcessaMenu("FemeaPro", 1) Then
+      Exit Sub
     End If
+  End If
 
-    If Index = 6 Then
-        If Not AcessaMenu("FemeaPre", 1) Then
-            Exit Sub
-        End If
-        If eproducao Then
-            Exit Sub
-        End If
+  If Index = 6 Then
+    If Not AcessaMenu("FemeaPre", 1) Then
+      Exit Sub
     End If
+    If eproducao Then
+      Exit Sub
+    End If
+  End If
 
-    If Index = 8 Then
-        If nREV = 0 Then
-            Alert "Revisão Nao Escolhida"
-            Exit Sub
-        End If
-        ePASS01 = "select * from rev WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV
-        FrmRev.Show vbModal, Me
-        Exit Sub
+  If Index = 8 Then
+    If nREV = 0 Then
+      Alert "Revisão Nao Escolhida"
+      Exit Sub
     End If
+    ePASS01 = "select * from rev WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV
+    FrmRev.Show vbModal, Me
+    Exit Sub
+  End If
 
-    If Index = 1 Or Index = 5 Then               'Complementar sem padrao
-        If GridPadPF.Rows < 2 Then
-            Alert "Este Femea nao utiliza Padrao"
-            Exit Sub
-        End If
-       
-    End If
-    
-    If Index = 0 Or Index = 4 Then               'normal com complementar
-        If GridSeq(1).Rows > 1 Then
-            Alert "Femea com complemetar nao pode usar normal"
-            Exit Sub
-        End If
-    End If
-    
-    If Index = 0 Or Index = 4 Then               'normal com padrao
-        If GridPadPF.Rows > 1 Then
-            Alert "Femea com Padrao nao pode usar normal"
-            Exit Sub
-        End If
-    End If
-    
-
-    If Index = 0 Or Index = 1 Or Index = 6 Or Index = 7 Or Index = 20 Then
-        nTMPSEQ = 0
-        nTMPSSQ = 0
-        nTMPITEM = 0
-        cDESC = ""
-    End If
-    If Index = 2 Or Index = 3 Then
-        gridopr.Col = 1
-        nTMPSEQ = FixInt(gridopr)
-        gridopr.Col = 2
-        nTMPSSQ = FixInt(gridopr)
-        nTMPITEM = 0
-        gridopr.Col = 4
-        cDESC = FixStr(gridopr)
+  If Index = 1 Or Index = 5 Then               'Complementar sem padrao
+    If GridPadPF.Rows < 2 Then
+      Alert "Este Femea nao utiliza Padrao"
+      Exit Sub
     End If
 
-    If Index = 4 Or Index = 5 Or Index = 8 Or Index = 9 Or Index = 10 Or Index = 11 Or Index = 12 Or Index = 13 Then
-        GrdQsbLep.Col = 0
-        nTMPSEQ = FixInt(GrdQsbLep)
-        GrdQsbLep.Col = 1
-        nTMPSSQ = FixInt(GrdQsbLep)
-        GrdQsbLep.Col = 2
-        nTMPITEM = FixInt(GrdQsbLep)
-        GrdQsbLep.Col = 3
-        cDESC = FixStr(GrdQsbLep)
+  End If
+
+  If Index = 0 Or Index = 4 Then               'normal com complementar
+    If GridSeq(1).Rows > 1 Then
+      Alert "Femea com complemetar nao pode usar normal"
+      Exit Sub
     End If
+  End If
+
+  If Index = 0 Or Index = 4 Then               'normal com padrao
+    If GridPadPF.Rows > 1 Then
+      Alert "Femea com Padrao nao pode usar normal"
+      Exit Sub
+    End If
+  End If
 
 
-    Select Case Index
-    Case 0, 2, 4
-        nNUM = FixInt(PegMAXSQL(cARQFEMEAPF, "FEMEA WHERE PF=" & nPF, "ItEM", 0)) + 1 'CARQPF
-    Case 1, 3, 5
-        nNUM = FixInt(PegMAXSQL(cARQFEMEA, "FEMAVU WHERE PF=" & nPF, "ITEM", 0)) + 1
-    Case 6, 8, 10, 12
-        nNUM = FixInt(PegMAXSQL(cARQPFP, "FEMEA WHERE PF=" & nPF, "ItEM", 0)) + 1
-    Case 7, 9, 11, 13
-        nNUM = FixInt(PegMAXSQL(cARQPFG, "FEMEA WHERE PF=" & nPF, "ItEM", 0)) + 1
-    Case 20                                      'ADCIONAL INCLUIR
-        nNUM = FixInt(PegMAXSQL(cARQFEMEA, "FEMADC WHERE PF=" & nPF, "ITEM", 0)) + 1
-    End Select
-    
-    If nNUM = 0 Then
-        nNUM = FixInt(Val(Busca("Nº " & StrZero(nTMPSEQ, 2) & "/" & StrZero(nTMPSSQ, 2) & "/" & StrZero(nTMPITEM, 2) & "- " & cDESC, "Incluindo", CStr(nNUM), 8)))
-    End If
-    If nNUM = 0 Then
-        Alert ("Nº em Branco")
-        Exit Sub
-    End If
-    
+  If Index = 0 Or Index = 1 Or Index = 6 Or Index = 7 Or Index = 20 Then
+    nTMPSEQ = 0
+    nTMPSSQ = 0
+    nTMPITEM = 0
+    cDESC = ""
+  End If
+  If Index = 2 Or Index = 3 Then
+    gridopr.Col = 1
+    nTMPSEQ = FixInt(gridopr)
+    gridopr.Col = 2
+    nTMPSSQ = FixInt(gridopr)
+    nTMPITEM = 0
+    gridopr.Col = 4
+    cDESC = FixStr(gridopr)
+  End If
 
-    Select Case Index
-    Case 0, 2, 4 '0 producao 2 padrao '4 fluxo 2
-        cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nNUM 'CARQPF
-        IncluiSQL cARQFEMEAPF, cSQL, 6, Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), Array(nPF, nNUM, nTMPSEQ, nTMPSSQ, nTMPITEM, cDESC), True, False
-            
-    Case 1, 3, 5 '3 complementar 1 padrao complemntar
-        cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nNUM
-        IncluiSQL cARQFEMEA, cSQL, 6, Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), Array(nPF, nNUM, nTMPSEQ, nTMPSSQ, nTMPITEM, cDESC), True, False
-            
-    Case 6, 8, 10, 12 'preliminar
-        cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nNUM
-        IncluiSQL cARQPFP, cSQL, 6, Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), Array(nPF, nNUM, nTMPSEQ, nTMPSSQ, nTMPITEM, cDESC), True, False
-            
-    Case 7, 9, 11, 13 'gp12
-        cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nNUM
-        IncluiSQL cARQPFG, cSQL, 6, Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), Array(nPF, nNUM, nTMPSEQ, nTMPSSQ, nTMPITEM, cDESC), True, False
-            
-    Case 20         'Incluir adcional
-        cSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nNUM
-        IncluiSQL cARQFEMEA, cSQL, 6, Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), Array(nPF, nNUM, nTMPSEQ, nTMPSSQ, nTMPITEM, cDESC), True, False
-    End Select
-    
-    Select Case Index
-    Case 0, 2
-        FilRelat (0)
-    Case 1, 3
-        FilRelat (1)
-    Case 6, 12
-        FilRelat (2)
-    Case 7, 13
-        FilRelat (3)
-    Case 20
-        FilRelat (5)
-    End Select
+  If Index = 4 Or Index = 5 Or Index = 8 Or Index = 9 Or Index = 10 Or Index = 11 Or Index = 12 Or Index = 13 Then
+    GrdQsbLep.Col = 0
+    nTMPSEQ = FixInt(GrdQsbLep)
+    GrdQsbLep.Col = 1
+    nTMPSSQ = FixInt(GrdQsbLep)
+    GrdQsbLep.Col = 2
+    nTMPITEM = FixInt(GrdQsbLep)
+    GrdQsbLep.Col = 3
+    cDESC = FixStr(GrdQsbLep)
+  End If
+
+
+  Select Case Index
+  Case 0, 2, 4
+    nNUM = FixInt(PegMAXSQL(cARQFEMEAPF, "FEMEA WHERE PF=" & nPF, "ItEM", 0)) + 1  'CARQPF
+  Case 1, 3, 5
+    nNUM = FixInt(PegMAXSQL(cARQFEMEA, "FEMAVU WHERE PF=" & nPF, "ITEM", 0)) + 1
+  Case 6, 8, 10, 12
+    nNUM = FixInt(PegMAXSQL(cARQPFP, "FEMEA WHERE PF=" & nPF, "ItEM", 0)) + 1
+  Case 7, 9, 11, 13
+    nNUM = FixInt(PegMAXSQL(cARQPFG, "FEMEA WHERE PF=" & nPF, "ItEM", 0)) + 1
+  Case 20                                      'ADCIONAL INCLUIR
+    nNUM = FixInt(PegMAXSQL(cARQFEMEA, "FEMADC WHERE PF=" & nPF, "ITEM", 0)) + 1
+  End Select
+
+  If nNUM = 0 Then
+    nNUM = FixInt(Val(Busca("Nº " & StrZero(nTMPSEQ, 2) & "/" & StrZero(nTMPSSQ, 2) & "/" & StrZero(nTMPITEM, 2) & "- " & cDESC, "Incluindo", CStr(nNUM), 8)))
+  End If
+  If nNUM = 0 Then
+    Alert ("Nº em Branco")
+    Exit Sub
+  End If
+
+
+  Select Case Index
+  Case 0, 2, 4  '0 producao 2 padrao '4 fluxo 2
+    cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nNUM  'CARQPF
+    IncluiSQL cARQFEMEAPF, cSQL, 6, Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), Array(nPF, nNUM, nTMPSEQ, nTMPSSQ, nTMPITEM, cDESC), True, False
+
+  Case 1, 3, 5  '3 complementar 1 padrao complemntar
+    cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nNUM
+    IncluiSQL cARQFEMEA, cSQL, 6, Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), Array(nPF, nNUM, nTMPSEQ, nTMPSSQ, nTMPITEM, cDESC), True, False
+
+  Case 6, 8, 10, 12  'preliminar
+    cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nNUM
+    IncluiSQL cARQPFP, cSQL, 6, Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), Array(nPF, nNUM, nTMPSEQ, nTMPSSQ, nTMPITEM, cDESC), True, False
+
+  Case 7, 9, 11, 13  'gp12
+    cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nNUM
+    IncluiSQL cARQPFG, cSQL, 6, Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), Array(nPF, nNUM, nTMPSEQ, nTMPSSQ, nTMPITEM, cDESC), True, False
+
+  Case 20         'Incluir adcional
+    cSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nNUM
+    IncluiSQL cARQFEMEA, cSQL, 6, Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), Array(nPF, nNUM, nTMPSEQ, nTMPSSQ, nTMPITEM, cDESC), True, False
+  End Select
+
+  Select Case Index
+  Case 0, 2
+    FilRelat (0)
+  Case 1, 3
+    FilRelat (1)
+  Case 6, 12
+    FilRelat (2)
+  Case 7, 13
+    FilRelat (3)
+  Case 20
+    FilRelat (5)
+  End Select
 End Sub
 
 Private Sub Command10_Click(Index As Integer)
-    Dim nROWS
-    Dim X
-    If GridSeq(1).Rows = 0 Then
-        Exit Sub
-    End If
-    nROWS = GridSeq(1).Rows
-    nROWS = nROWS - 1
-    For X = 1 To nROWS
-        GridSeq(1).Row = X
-        DizerBarra "Movendo femea " & X & "/" & nROWS
-        CmdRevFemea_Click 14 + Index
-    Next X
-    DizerBarra ""
-    FilRelat 1
-    FilRelat 2
-    FilRelat 4
-    FilRelat 5
+  Dim nROWS
+  Dim x
+  If GridSeq(1).Rows = 0 Then
+    Exit Sub
+  End If
+  nROWS = GridSeq(1).Rows
+  nROWS = nROWS - 1
+  For x = 1 To nROWS
+    GridSeq(1).Row = x
+    DizerBarra "Movendo femea " & x & "/" & nROWS
+    CmdRevFemea_Click 14 + Index
+  Next x
+  DizerBarra ""
+  FilRelat 1
+  FilRelat 2
+  FilRelat 4
+  FilRelat 5
 End Sub
 
 Private Sub Command11_Click()
-    CmdRevFemea_Click 14
-    FilRelat 4
+  CmdRevFemea_Click 14
+  FilRelat 4
 End Sub
 
 Private Sub Command12_Click()
-    CmdRevFemea_Click 15
-    FilRelat 4
+  CmdRevFemea_Click 15
+  FilRelat 4
 End Sub
 
 Private Sub Command13_Click()
-    Dim nROWS
-    Dim X
-    Dim cSQL As String
-    If GridPadPF.Rows = 0 Then
-        Exit Sub
-    End If
-    If Not MDG("Mover todos para historico") Then
-        Exit Sub
-    End If
-    nROWS = GridPadPF.Rows
-    nROWS = nROWS - 1
-    For X = 1 To nROWS
-        DizerBarra "Movendo femea padrao" & X & "/" & nROWS
-        GridPadPF.Row = X
-        CmdExcPFPad_Click 2
-    Next X
-    DizerBarra "Excluindo complementares"
-    cSQL = "select * from FEMPF WHERE  PF=" & nPF
-    ApagaSQL cARQFEMEA, cSQL
-    cSQL = "select * from FEMEAPAD WHERE  PF=" & nPF
-    ApagaSQL cARQFEMEA, cSQL
-    cSQL = "select * from FEMRPNO WHERE PF=" & nPF
-    ApagaSQL cARQFEMEA, cSQL
-    cSQL = "select * from FEMRPNT WHERE  PF = " & nPF
-    ApagaSQL cARQFEMEA, cSQL
-    DizerBarra ""
-    filgridpadpf
-    FILGRIdPAD
+  Dim nROWS
+  Dim x
+  Dim cSQL As String
+  If GridPadPF.Rows = 0 Then
+    Exit Sub
+  End If
+  If Not MDG("Mover todos para historico") Then
+    Exit Sub
+  End If
+  nROWS = GridPadPF.Rows
+  nROWS = nROWS - 1
+  For x = 1 To nROWS
+    DizerBarra "Movendo femea padrao" & x & "/" & nROWS
+    GridPadPF.Row = x
+    CmdExcPFPad_Click 2
+  Next x
+  DizerBarra "Excluindo complementares"
+  cSQL = "select * from FEMPF WHERE  PF=" & nPF
+  ApagaSQL cARQFEMEA, cSQL
+  cSQL = "select * from FEMEAPAD WHERE  PF=" & nPF
+  ApagaSQL cARQFEMEA, cSQL
+  cSQL = "select * from FEMRPNO WHERE PF=" & nPF
+  ApagaSQL cARQFEMEA, cSQL
+  cSQL = "select * from FEMRPNT WHERE  PF = " & nPF
+  ApagaSQL cARQFEMEA, cSQL
+  DizerBarra ""
+  filgridpadpf
+  FILGRIdPAD
 End Sub
 
 Private Sub Command14_Click()
-    CmdExcPFPad_Click 2
-    filgridpadpf
-    FILGRIdPAD
+  CmdExcPFPad_Click 2
+  filgridpadpf
+  FILGRIdPAD
 End Sub
 
 Private Sub Command15_Click()
-    Dim cDIZ
-    Encerrar.Visible = False
-    cDIZ = "PF: " & nPF & "Revisao: " & TXTFIELDS(16) & " Nao necessita revisar femea"
-    nREV = FixInt(TXTFIELDS(12))
-    XComMotInc_Click (cDIZ)
-    Check1.Value = False
-    TXTFIELDS(25) = Today()
-    cmdClose_Click
+  Dim cDIZ
+  Encerrar.Visible = False
+  cDIZ = "PF: " & nPF & "Revisao: " & TXTFIELDS(16) & " Nao necessita revisar femea"
+  nREV = FixInt(TXTFIELDS(12))
+  XComMotInc_Click (cDIZ)
+  Check1.Value = False
+  TXTFIELDS(25) = Today()
+  cmdClose_Click
 End Sub
 
 Private Sub Command16_Click()
-    DTPicker2.Value = Today()
+  DTPicker2.Value = Today()
 End Sub
 
 Private Sub Command2_Click(Index As Integer)
-    Dim nSEQ As Integer
-    Dim sSQL As String
+  Dim nSEQ As Integer
+  Dim sSQL As String
 
-    If Index = 10 Or Index = 15 Then             'todos os itens abaixo tratativa
-    Else
-        If GridSeq(Index).Row = 0 Then
-            Alert "Linha Nao Selecionada"
-            Exit Sub
-        End If
+  If Index = 10 Or Index = 15 Then             'todos os itens abaixo tratativa
+  Else
+    If GridSeq(Index).Row = 0 Then
+      Alert "Linha Nao Selecionada"
+      Exit Sub
     End If
-    
-    If Index = 3 Then
-        If Not AcessaMenu("FemeaGP12", 1) Then
-            Exit Sub
-        End If
-    End If
-    If Index = 0 Then
-        If Not AcessaMenu("FemeaPro", 1) Then
-            Exit Sub
-        End If
-    End If
-    If Index = 10 Then
-        If Not AcessaMenu("FemeaPro", 1) Then
-            Exit Sub
-        End If
-    End If
-    
-    If Index = 2 Then
-        If Not AcessaMenu("FemeaPre", 1) Then
-            Exit Sub
-        End If
-        If eproducao Then
-            Exit Sub
-        End If
-    End If
-   
+  End If
 
-    If Index = 10 Or Index = 15 Then             'todos os itens abaixo tratativa
-    Else
-        GridSeq(Index).Col = 1
-        nSEQ = GridSeq(Index)
+  If Index = 3 Then
+    If Not AcessaMenu("FemeaGP12", 1) Then
+      Exit Sub
     End If
+  End If
+  If Index = 0 Then
+    If Not AcessaMenu("FemeaPro", 1) Then
+      Exit Sub
+    End If
+  End If
+  If Index = 10 Then
+    If Not AcessaMenu("FemeaPro", 1) Then
+      Exit Sub
+    End If
+  End If
 
-    
-    If Index = 0 Then
-        sSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        If ApagaSQLP(cARQFEMEAPF, sSQL) Then
-            sSQL = "select * FEMrevi WHERE  TIPOAPU='N' AND PF=" & nPF & " AND ITEM=" & nSEQ
-            ApagaSQL cARQFEMEA, sSQL
-        End If
+  If Index = 2 Then
+    If Not AcessaMenu("FemeaPre", 1) Then
+      Exit Sub
     End If
-    If Index = 1 Then
-        sSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        If ApagaSQLP(cARQFEMEA, sSQL) Then
-            sSQL = "select * FEMrevi WHERE  TIPOAPU='C' AND PF=" & nPF & " AND ITEM=" & nSEQ
-            ApagaSQL cARQFEMEA, sSQL
-        End If
+    If eproducao Then
+      Exit Sub
     End If
-    If Index = 2 Then
-        sSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        If ApagaSQLP(cARQPFP, sSQL) Then
-            sSQL = "select * FEMrevi WHERE  TIPOAPU='R' AND PF=" & nPF & " AND ITEM=" & nSEQ
-            ApagaSQL cARQFEMEA, sSQL
-        End If
-    End If
-    If Index = 3 Then
-        sSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        If ApagaSQLP(cARQPFG, sSQL) Then
-            sSQL = "select * FEMrevi WHERE  TIPOAPU='G' AND PF=" & nPF & " AND ITEM=" & nSEQ
-            ApagaSQL cARQFEMEA, sSQL
-        End If
-    End If
-    If Index = 5 Then                            'Adicionais
-        sSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        If ApagaSQLP(cARQFEMEA, sSQL) Then
-            sSQL = "select * FEMrevi WHERE  TIPOAPU='A' AND PF=" & nPF & " AND ITEM=" & nSEQ
-            ApagaSQL cARQFEMEA, sSQL
-        End If
-    End If
+  End If
 
-    If Index = 10 Then                           'producao todos
-        If MDG("Excluir Todos os Itens Producao") Then
-            sSQL = "select * from FEMEA WHERE PF=" & nPF '
-            If ApagaSQLP(cARQFEMEAPF, sSQL) Then
-                sSQL = "select * FEMrevi WHERE  TIPOAPU='N' AND PF=" & nPF
-                ApagaSQL cARQFEMEA, sSQL
-            End If
-        End If
+
+  If Index = 10 Or Index = 15 Then             'todos os itens abaixo tratativa
+  Else
+    GridSeq(Index).Col = 1
+    nSEQ = GridSeq(Index)
+  End If
+
+
+  If Index = 0 Then
+    sSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    If ApagaSQLP(cARQFEMEAPF, sSQL) Then
+      sSQL = "select * FEMrevi WHERE  TIPOAPU='N' AND PF=" & nPF & " AND ITEM=" & nSEQ
+      ApagaSQL cARQFEMEA, sSQL
     End If
-    If Index = 15 Then                           'adcionais todos
-        If MDG("Excluir Todos os Itens Adicionais") Then
-            sSQL = "select * from FEMADC WHERE PF=" & nPF '// & " AND ITEM=" & nSEQ
-            If ApagaSQLP(cARQPF, sSQL) Then
-                sSQL = "select * FEMrevi WHERE  TIPOAPU='A' AND PF=" & nPF ''& " AND ITEM=" & nSEQ
-                ApagaSQL cARQFEMEA, sSQL
-            End If
-        End If
+  End If
+  If Index = 1 Then
+    sSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    If ApagaSQLP(cARQFEMEA, sSQL) Then
+      sSQL = "select * FEMrevi WHERE  TIPOAPU='C' AND PF=" & nPF & " AND ITEM=" & nSEQ
+      ApagaSQL cARQFEMEA, sSQL
     End If
-    If Index >= 10 Then
-        Index = Index - 10
+  End If
+  If Index = 2 Then
+    sSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    If ApagaSQLP(cARQPFP, sSQL) Then
+      sSQL = "select * FEMrevi WHERE  TIPOAPU='R' AND PF=" & nPF & " AND ITEM=" & nSEQ
+      ApagaSQL cARQFEMEA, sSQL
     End If
-    FilRelat (Index)
+  End If
+  If Index = 3 Then
+    sSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    If ApagaSQLP(cARQPFG, sSQL) Then
+      sSQL = "select * FEMrevi WHERE  TIPOAPU='G' AND PF=" & nPF & " AND ITEM=" & nSEQ
+      ApagaSQL cARQFEMEA, sSQL
+    End If
+  End If
+  If Index = 5 Then                            'Adicionais
+    sSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    If ApagaSQLP(cARQFEMEA, sSQL) Then
+      sSQL = "select * FEMrevi WHERE  TIPOAPU='A' AND PF=" & nPF & " AND ITEM=" & nSEQ
+      ApagaSQL cARQFEMEA, sSQL
+    End If
+  End If
+
+  If Index = 10 Then                           'producao todos
+    If MDG("Excluir Todos os Itens Producao") Then
+      sSQL = "select * from FEMEA WHERE PF=" & nPF  '
+      If ApagaSQLP(cARQFEMEAPF, sSQL) Then
+        sSQL = "select * FEMrevi WHERE  TIPOAPU='N' AND PF=" & nPF
+        ApagaSQL cARQFEMEA, sSQL
+      End If
+    End If
+  End If
+  If Index = 15 Then                           'adcionais todos
+    If MDG("Excluir Todos os Itens Adicionais") Then
+      sSQL = "select * from FEMADC WHERE PF=" & nPF  '// & " AND ITEM=" & nSEQ
+      If ApagaSQLP(cARQPF, sSQL) Then
+        sSQL = "select * FEMrevi WHERE  TIPOAPU='A' AND PF=" & nPF  ''& " AND ITEM=" & nSEQ
+        ApagaSQL cARQFEMEA, sSQL
+      End If
+    End If
+  End If
+  If Index >= 10 Then
+    Index = Index - 10
+  End If
+  FilRelat (Index)
 End Sub
 
 Private Sub Command3_Click()
-    If MDG("Gravar Elaborador", "Confirme Gravação") Then
-        frmfemea.TXTFIELDS(6) = zIDFOLHA
-        frmfemea.TXTFIELDS(9) = zNOMEFOLHA
-        TXTFIELDS(22) = Date
-        If IsNull(TXTFIELDS(23)) Or TXTFIELDS(23) = "" Then
-            TXTFIELDS(23) = Date
-        End If
+  If MDG("Gravar Elaborador", "Confirme Gravação") Then
+    frmfemea.TXTFIELDS(6) = zIDFOLHA
+    frmfemea.TXTFIELDS(9) = zNOMEFOLHA
+    TXTFIELDS(22) = Date
+    If IsNull(TXTFIELDS(23)) Or TXTFIELDS(23) = "" Then
+      TXTFIELDS(23) = Date
     End If
+  End If
 End Sub
 
 Private Sub Command4_Click(Index As Integer)
 
-    Dim nSEQ
-    Dim nNUM As Integer
-    Dim cSQL As String
+  Dim nSEQ
+  Dim nNUM As Integer
+  Dim cSQL As String
 
-    If Index = 0 And Not AcessaMenu("FemeaPro", 1) Then Exit Sub
-    If Index = 3 And Not AcessaMenu("FemeaGP12", 1) Then Exit Sub
-   
-    If Index = 2 Then
-        If Not AcessaMenu("FemeaPre", 1) Then
-            Exit Sub
-        End If
-        If eproducao Then
-            Exit Sub
-        End If
-      
+  If Index = 0 And Not AcessaMenu("FemeaPro", 1) Then Exit Sub
+  If Index = 3 And Not AcessaMenu("FemeaGP12", 1) Then Exit Sub
+
+  If Index = 2 Then
+    If Not AcessaMenu("FemeaPre", 1) Then
+      Exit Sub
+    End If
+    If eproducao Then
+      Exit Sub
     End If
 
-    If GridSeq(Index).Row = 0 Then
-        Exit Sub
-    End If
+  End If
 
-    nNUM = 0
+  If GridSeq(Index).Row = 0 Then
+    Exit Sub
+  End If
 
-    nNUM = FixInt(Val(Busca("Nº", "Renumerando", CStr(nNUM), 8)))
-    If nNUM = 0 Then
-        Alert ("Nº em Branco")
-        Exit Sub
-    End If
-    GridSeq(Index).Col = 1
-    nSEQ = GridSeq(Index)
-    If Index = 0 Then
-        cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        GrvSQL cARQFEMEAPF, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
-    End If
-    If Index = 1 Then
-        cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        GrvSQL cARQFEMEA, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
-    End If
-    If Index = 2 Then
-        cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        GrvSQL cARQPFP, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
-    End If
-    If Index = 3 Then
-        cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        GrvSQL cARQPFG, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
-    End If
-    If Index = 5 Then
-        cSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        GrvSQL cARQFEMEA, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
-    End If
-    FilRelat (Index)
+  nNUM = 0
+
+  nNUM = FixInt(Val(Busca("Nº", "Renumerando", CStr(nNUM), 8)))
+  If nNUM = 0 Then
+    Alert ("Nº em Branco")
+    Exit Sub
+  End If
+  GridSeq(Index).Col = 1
+  nSEQ = GridSeq(Index)
+  If Index = 0 Then
+    cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    GrvSQL cARQFEMEAPF, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
+  End If
+  If Index = 1 Then
+    cSQL = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    GrvSQL cARQFEMEA, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
+  End If
+  If Index = 2 Then
+    cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    GrvSQL cARQPFP, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
+  End If
+  If Index = 3 Then
+    cSQL = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    GrvSQL cARQPFG, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
+  End If
+  If Index = 5 Then
+    cSQL = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    GrvSQL cARQFEMEA, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
+  End If
+  FilRelat (Index)
 
 End Sub
 
 Private Sub Command5_Click()
-    Encerrar.Visible = False
-    CmdNovaREV_Click
-    nREV = FixInt(TXTFIELDS(12))
-    XComMotInc_Click ("Revisão Periodica")
-    Filgridrevi (0)
-    
-    Command3_Click
-    
-    eRETU02 = "PF:" & nPF & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
-    MAILENV "FEM00001", eRETU02
-    
-    
-    cmdClose_Click
+  Encerrar.Visible = False
+  CmdNovaREV_Click
+  nREV = FixInt(TXTFIELDS(12))
+  XComMotInc_Click ("Revisão Periodica")
+  Filgridrevi (0)
+
+  Command3_Click
+
+  eRETU02 = "PF:" & nPF & Chr(13) & Chr(10)
+  eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
+  eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
+  MAILENV "FEM00001", eRETU02
+
+
+  cmdClose_Click
 End Sub
 
 Private Sub Command6_Click()
 
-    FrmFemeaPad.Show vbModal, Me
-    FILGRIdPRO
-    FILGRIdFAL
-    FILGRIdPAD
-    filgridpadpf
-    ''zera pois o usuario pode ter mechido
-    aNUM = Array(0, 0, 0, 0)
-    aDIZ = Array("", "", "", "")
-    dizpro.Caption = ""
-    dizfal.Caption = ""
+  FrmFemeaPad.Show vbModal, Me
+  FILGRIdPRO
+  FILGRIdFAL
+  FILGRIdPAD
+  filgridpadpf
+  ''zera pois o usuario pode ter mechido
+  aNUM = Array(0, 0, 0, 0)
+  aDIZ = Array("", "", "", "")
+  dizpro.Caption = ""
+  dizfal.Caption = ""
 
 End Sub
 
 Private Sub Command7_Click()
-    LocalizaGri1 Gridfemprecad
+  LocalizaGri1 Gridfemprecad
 End Sub
 
 Private Sub Command8_Click()
-    Dim cDIZ As String
-    Dim nROWS
-    Dim nTMPFAL
-    Dim X As Integer
-    On Error Resume Next
+  Dim cDIZ As String
+  Dim nROWS
+  Dim nTMPFAL
+  Dim x As Integer
+  On Error Resume Next
 
-    If aNUM(0) = 0 Then
-        Alert ("Processo Nao Escolhido")
-        Exit Sub
+  If aNUM(0) = 0 Then
+    Alert ("Processo Nao Escolhido")
+    Exit Sub
+  End If
+  cDIZ = pegdizseqssq(dizpro, cARQPF)
+  If Len(cDIZ) = 0 Then
+    Alert ("Descricao Nao Especificada")
+    Exit Sub
+  End If
+  If Not MDG(cDIZ, "Incluir") Then
+    Exit Sub
+  End If
+  If Not MDG("Incluir Todas Falhas") Then
+    Exit Sub
+  End If
+  nROWS = GRIDFAL.Rows - 1
+  GRIDFAL.Col = 1
+  For x = 0 To nROWS
+    GRIDFAL.Row = x
+    nTMPFAL = FixInt(GRIDFAL)
+    If nTMPFAL > 0 Then
+      GERAFEMEAPAD aNUM(0), nTMPFAL, FixInt(nPF), cDIZ
     End If
-    cDIZ = pegdizseqssq(dizpro, cARQPF)
-    If Len(cDIZ) = 0 Then
-        Alert ("Descricao Nao Especificada")
-        Exit Sub
-    End If
-    If Not MDG(cDIZ, "Incluir") Then
-        Exit Sub
-    End If
-    If Not MDG("Incluir Todas Falhas") Then
-        Exit Sub
-    End If
-    nROWS = GRIDFAL.Rows - 1
-    GRIDFAL.Col = 1
-    For X = 0 To nROWS
-        GRIDFAL.Row = X
-        nTMPFAL = FixInt(GRIDFAL)
-        If nTMPFAL > 0 Then
-            GERAFEMEAPAD aNUM(0), nTMPFAL, FixInt(nPF), cDIZ
-        End If
-    Next X
-    filgridpadpf
-    FILGRIdPAD
+  Next x
+  filgridpadpf
+  FILGRIdPAD
 
 End Sub
 
 Private Sub Command9_Click()
-    Dim nSEQTMP
-    Dim nPROTMP As Long
-    GridOpe.Col = 1
-    nSEQTMP = FixInt(GridOpe)
-    GridOpe.Col = 2
-    nPROTMP = FixInt(GridOpe)
-    ePASS01 = "SELECT * FROM FEMRPNO WHERE SEQ=" & nSEQTMP & " AND PF=" & nPF & " AND PRONUM=" & nPROTMP
-    FrmFEMRPNO.Show vbModal, Me
+  Dim nSEQTMP
+  Dim nPROTMP As Long
+  GridOpe.Col = 1
+  nSEQTMP = FixInt(GridOpe)
+  GridOpe.Col = 2
+  nPROTMP = FixInt(GridOpe)
+  ePASS01 = "SELECT * FROM FEMRPNO WHERE SEQ=" & nSEQTMP & " AND PF=" & nPF & " AND PRONUM=" & nPROTMP
+  FrmFEMRPNO.Show vbModal, Me
 
 End Sub
 
 Private Sub ComMotAlt_Click(Index As Integer)
-    On Error Resume Next
-    
-    If gridrevi(Index).Row = 0 Then
-        Exit Sub
-    End If
-       
-    gridrevi(Index).Col = 1
-    nREV = FixInt(gridrevi(Index))
-    gridrevi(Index).Col = 3
-    nREVI = FixInt(gridrevi(Index))
-    
-    Select Case Index
-    Case 0                                       'Femea
-        lEDITAR = True
-        ePASS01 = "select * from revi WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV & " AND ITEM=" & nREVI
-    Case 1                                       'pf
-        lEDITAR = False
-        ePASS01 = "select * from revi WHERE PF=" & nPF & " AND TIPO='PF' AND REVISAO=" & nREV & " AND ITEM=" & nREVI
-    End Select
-    
-    frmREVI.Show vbModal, Me
-    Filgridrevi (Index)
+  On Error Resume Next
+
+  If gridrevi(Index).Row = 0 Then
+    Exit Sub
+  End If
+
+  gridrevi(Index).Col = 1
+  nREV = FixInt(gridrevi(Index))
+  gridrevi(Index).Col = 3
+  nREVI = FixInt(gridrevi(Index))
+
+  Select Case Index
+  Case 0                                       'Femea
+    lEDITAR = True
+    ePASS01 = "select * from revi WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV & " AND ITEM=" & nREVI
+  Case 1                                       'pf
+    lEDITAR = False
+    ePASS01 = "select * from revi WHERE PF=" & nPF & " AND TIPO='PF' AND REVISAO=" & nREV & " AND ITEM=" & nREVI
+  End Select
+
+  frmREVI.Show vbModal, Me
+  Filgridrevi (Index)
 
 End Sub
 
 Private Sub ComMotExc_Click()
-    Dim sSQL As String
-    If gridrevi(0).Row = 0 Then
-        Exit Sub
-    End If
-    gridrevi(0).Col = 3
-    nREVI = FixInt(gridrevi(0))
-    sSQL = "select * from revi WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV & " AND  ITEM=" & nREVI
-    ApagaSQLP cARQPF, sSQL
-    Filgridrevi (0)
+  Dim sSQL As String
+  If gridrevi(0).Row = 0 Then
+    Exit Sub
+  End If
+  gridrevi(0).Col = 3
+  nREVI = FixInt(gridrevi(0))
+  sSQL = "select * from revi WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV & " AND  ITEM=" & nREVI
+  ApagaSQLP cARQPF, sSQL
+  Filgridrevi (0)
 
 End Sub
 
 Private Sub ComMotInc_Click()
 
-    XComMotInc_Click ("")
+  XComMotInc_Click ("")
 
 End Sub
 
 Private Sub EditSeq_Click(Index As Integer)
 
-    ePASS03 = Index                              'Para usar com o revisao abaixo 'atualizacao de versao
-    ePASS04 = TXTFIELDS(12)                      ''REVISAO PF
+  ePASS03 = Index                              'Para usar com o revisao abaixo 'atualizacao de versao
+  ePASS04 = TXTFIELDS(12)                      ''REVISAO PF
 
-    If Index = 3 And (Not AcessaMenu("FemeaGP12", 1)) Then Exit Sub
-    If Index = 0 And (Not AcessaMenu("FemeaPro", 1)) Then Exit Sub
+  If Index = 3 And (Not AcessaMenu("FemeaGP12", 1)) Then Exit Sub
+  If Index = 0 And (Not AcessaMenu("FemeaPro", 1)) Then Exit Sub
 
-    If Index = 2 Then
-        If Not AcessaMenu("FemeaPre", 1) Then
-            Exit Sub
-        End If
-        If eproducao Then
-            Exit Sub
-        End If
+  If Index = 2 Then
+    If Not AcessaMenu("FemeaPre", 1) Then
+      Exit Sub
     End If
+    If eproducao Then
+      Exit Sub
+    End If
+  End If
 
-    If GridSeq(Index).Row = 0 Then
-        Alert "Escolha Linha diferente do cabecario"
-        Exit Sub
-    End If
-    GridSeq(Index).Col = 1
-    nSEQ = GridSeq(Index)
-    If Index = 0 Then 'producao
-        ePASS01 = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        ePASS02 = cARQFEMEAPF
-    End If
-    If Index = 1 Then 'padrao complementar
-        ePASS01 = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        ePASS02 = cARQFEMEA
-    End If
-    If Index = 2 Then 'pre
-        ePASS01 = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        ePASS02 = cARQPFP
-    End If
-    If Index = 3 Then 'gp12
-        ePASS01 = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        ePASS02 = cARQPFG
-    End If
-    If Index = 5 Then 'adcional
-        ePASS01 = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
-        ePASS02 = cARQFEMEA
-    End If
-    GridSeq(Index).Col = 2
-    If GridSeq(Index).CellBackColor = vbRed Then
-        Alert ("Sequencia ou sub sequencia inexistente no  processo")
-    End If
-    If GridSeq(Index).CellBackColor = vbYellow Then
-        Alert ("Sequencia ou sub sequencia ou item em branco")
-    End If
-   
-    
-    frmFEMEI.Show vbModal, Me
-    FilRelat (Index)
+  If GridSeq(Index).Row = 0 Then
+    Alert "Escolha Linha diferente do cabecario"
+    Exit Sub
+  End If
+  GridSeq(Index).Col = 1
+  nSEQ = GridSeq(Index)
+  If Index = 0 Then  'producao
+    ePASS01 = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    ePASS02 = cARQFEMEAPF
+  End If
+  If Index = 1 Then  'padrao complementar
+    ePASS01 = "select * from FEMAVU WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    ePASS02 = cARQFEMEA
+  End If
+  If Index = 2 Then  'pre
+    ePASS01 = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    ePASS02 = cARQPFP
+  End If
+  If Index = 3 Then  'gp12
+    ePASS01 = "select * from FEMEA WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    ePASS02 = cARQPFG
+  End If
+  If Index = 5 Then  'adcional
+    ePASS01 = "select * from FEMADC WHERE PF=" & nPF & " AND ITEM=" & nSEQ
+    ePASS02 = cARQFEMEA
+  End If
+  GridSeq(Index).Col = 2
+  If GridSeq(Index).CellBackColor = vbRed Then
+    Alert ("Sequencia ou sub sequencia inexistente no  processo")
+  End If
+  If GridSeq(Index).CellBackColor = vbYellow Then
+    Alert ("Sequencia ou sub sequencia ou item em branco")
+  End If
+
+
+  frmFEMEI.Show vbModal, Me
+  FilRelat (Index)
 
 End Sub
 
 Private Sub Filgridrev()
 
-    Dim cSQL As String
-    Dim cTIPO As String
-    cTIPO = "FE"
-    DizerBarra "Carregando revisoes"
-    cSQL = "select PF,REVISAO,TIPO,DATA from rev WHERE PF=" & nPF & " AND TIPO='" & cTIPO & "' ORDER BY REVISAO"
-    MontaGridUltra gridrev, 4, Array(600, 400, 400, 2000), Array("PF", "REV", "Tipo", "DATA"), Array("PF", "REVISAO", "TIPO", "L$DATA"), cARQPF, cSQL
-    DizerBarra ""
+  Dim cSQL As String
+  Dim cTIPO As String
+  cTIPO = "FE"
+  DizerBarra "Carregando revisoes"
+  cSQL = "select PF,REVISAO,TIPO,DATA from rev WHERE PF=" & nPF & " AND TIPO='" & cTIPO & "' ORDER BY REVISAO"
+  MontaGridUltra gridrev, 4, Array(600, 400, 400, 2000), Array("PF", "REV", "Tipo", "DATA"), Array("PF", "REVISAO", "TIPO", "L$DATA"), cARQPF, cSQL
+  DizerBarra ""
 
 End Sub
 
 Private Sub Filgridrevi(nIndex)
 
-    Dim cTIPO As String
-    Dim cSQL As String
+  Dim cTIPO As String
+  Dim cSQL As String
 
-    If nIndex > 0 Or nREV > 0 Then
-        Select Case nIndex
-        Case 0
-            cTIPO = "FE"
-            cSQL = "select PF, REVISAO, TIPO, ITEM,MOTIVO from revI WHERE PF=" & nPF & " AND REVISAO=" & nREV & " AND TIPO='FE' ORDER BY ITEM"
-        Case 1
-            cTIPO = "PF"
-            cSQL = "select PF, REVISAO, TIPO, ITEM,MOTIVO  from revI WHERE PF=" & nPF & " AND TIPO='" & cTIPO & "' ORDER BY ITEM"
-        End Select
-        DizerBarra "Carregando Itens Revisao" & nIndex
-        MontaGridFast gridrevi(nIndex), 5, Array(400, 400, 400, 400, 5000), Array("PF", "Rev", "Tipo", "Item", "Motivo"), Array("PF", "REVISAO", "TIPO", "ITEM", "MOTIVO"), cARQPF, cSQL
-        DizerBarra ""
-    End If
+  If nIndex > 0 Or nREV > 0 Then
+    Select Case nIndex
+    Case 0
+      cTIPO = "FE"
+      cSQL = "select PF, REVISAO, TIPO, ITEM,MOTIVO from revI WHERE PF=" & nPF & " AND REVISAO=" & nREV & " AND TIPO='FE' ORDER BY ITEM"
+    Case 1
+      cTIPO = "PF"
+      cSQL = "select PF, REVISAO, TIPO, ITEM,MOTIVO  from revI WHERE PF=" & nPF & " AND TIPO='" & cTIPO & "' ORDER BY ITEM"
+    End Select
+    DizerBarra "Carregando Itens Revisao" & nIndex
+    MontaGridFast gridrevi(nIndex), 5, Array(400, 400, 400, 400, 5000), Array("PF", "Rev", "Tipo", "Item", "Motivo"), Array("PF", "REVISAO", "TIPO", "ITEM", "MOTIVO"), cARQPF, cSQL
+    DizerBarra ""
+  End If
 End Sub
 
 Private Sub Filopr()
-    Dim cSQL As String
-    cSQL = "select PF, SEQ, SSQ, CODINT, DESCRI from PFS WHERE PF=" & nPF & " ORDER BY SEQ,SSQ"
-    DizerBarra "Carregando operacoes"
-    MontaGridFast gridopr, 5, Array(400, 400, 400, 1600, 6000), Array("PF", "SEQ", "SSQ", "Cod Int", "Descriçao"), Array("PF", "SEQ", "SSQ", "L$CODINT", "DESCRI"), cARQPF, cSQL
-    DizerBarra ""
+  Dim cSQL As String
+  cSQL = "select PF, SEQ, SSQ, CODINT, DESCRI from PFS WHERE PF=" & nPF & " ORDER BY SEQ,SSQ"
+  DizerBarra "Carregando operacoes"
+  MontaGridFast gridopr, 5, Array(400, 400, 400, 1600, 6000), Array("PF", "SEQ", "SSQ", "Cod Int", "Descriçao"), Array("PF", "SEQ", "SSQ", "L$CODINT", "DESCRI"), cARQPF, cSQL
+  DizerBarra ""
 End Sub
 
 Private Sub FilRelat(Index As Integer)
-    Dim cSQL As String
-    Dim cARQ As String
-    Dim I
-    Dim nROWS
-    Dim lTEM
-    Dim nTMPSEQ
-    Dim nTMPSSQ
-    Dim nTMPITEM
-    Dim nROWSQ
-    Dim nTMPSEQQ
-    Dim nTMPSSQQ
-    Dim nTMPITEMQ
-    Dim J
+  Dim cSQL As String
+  Dim cARQ As String
+  Dim i
+  Dim nROWS
+  Dim lTEM
+  Dim nTMPSEQ
+  Dim nTMPSSQ
+  Dim nTMPITEM
+  Dim nROWSQ
+  Dim nTMPSEQQ
+  Dim nTMPSSQQ
+  Dim nTMPITEMQ
+  Dim J
 
-    lRETU = True
+  lRETU = True
 
-    Select Case Index
-    Case 0
-        cARQ = cARQFEMEAPF
-        cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMEA WHERE PF=" & nPF & " ORDER BY " & cORDFEMUSO
-        DizerBarra "carregando femea padrao"
-    Case 1
-        cARQ = cARQFEMEA
-        cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMAVU WHERE PF=" & nPF & " ORDER BY " & cORDFEMAVU
-        DizerBarra "carregando femea avulso"
-    Case 2
-        cARQ = cARQPFP
-        cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMEA WHERE PF=" & nPF & " ORDER BY " & cORDFEMPRE
-        DizerBarra "carregando femea pre"
-    Case 3
-        cARQ = cARQPFG
-        cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMEA WHERE PF=" & nPF & " ORDER BY " & cORDFEMGP12
-        DizerBarra "carregando femea gp12"
-    Case 4
-        cARQ = cARQFEMEA
-        cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMHIS WHERE PF=" & nPF & " ORDER BY ITEM" '& cORDFEMAVU
-        DizerBarra "carregando femea historico"
-    Case 5
-        cARQ = cARQFEMEA
-        cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMADC WHERE PF=" & nPF & " ORDER BY " & cORDFEMADC
-        DizerBarra "carregando femea adicional"
-          
-          
-    End Select
-    MontaGridFast GridSeq(Index), 7, Array(600, 600, 400, 400, 400, 600, 5000), Array("PF", "REG", "SEQ", "SSQ", "IT", "ITS", "Descriçao"), Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "FXITEMS", "FALCAU"), cARQ, cSQL
-    DizerBarra "verificando sequencias"
-    'nROWSQ = GrdQsbLep.Rows - 1
-    nROWSQ = gridopr.Rows - 1
-    nROWS = GridSeq(Index).Rows
-    nROWS = nROWS - 1
-    For I = 1 To nROWS                           'ROW 0 = Cabecario
-        GridSeq(Index).Row = I
-        GridSeq(Index).Col = 2
-        nTMPSEQ = FixInt(GridSeq(Index))
-        GridSeq(Index).Col = 3
-        nTMPSSQ = FixInt(GridSeq(Index))
-        GridSeq(Index).Col = 4
-        nTMPITEM = FixInt(GridSeq(Index))
-        lTEM = False
-       
-        For J = 1 To nROWSQ                      ' zero e o titulo do grid comeca 1
+  Select Case Index
+  Case 0
+    cARQ = cARQFEMEAPF
+    cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMEA WHERE PF=" & nPF & " ORDER BY " & cORDFEMUSO
+    DizerBarra "carregando femea padrao"
+  Case 1
+    cARQ = cARQFEMEA
+    cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMAVU WHERE PF=" & nPF & " ORDER BY " & cORDFEMAVU
+    DizerBarra "carregando femea avulso"
+  Case 2
+    cARQ = cARQPFP
+    cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMEA WHERE PF=" & nPF & " ORDER BY " & cORDFEMPRE
+    DizerBarra "carregando femea pre"
+  Case 3
+    cARQ = cARQPFG
+    cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMEA WHERE PF=" & nPF & " ORDER BY " & cORDFEMGP12
+    DizerBarra "carregando femea gp12"
+  Case 4
+    cARQ = cARQFEMEA
+    cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMHIS WHERE PF=" & nPF & " ORDER BY ITEM"  '& cORDFEMAVU
+    DizerBarra "carregando femea historico"
+  Case 5
+    cARQ = cARQFEMEA
+    cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM,FXITEMS,FALCAU from FEMADC WHERE PF=" & nPF & " ORDER BY " & cORDFEMADC
+    DizerBarra "carregando femea adicional"
 
-            gridopr.Row = J
-            gridopr.Col = 1
-            nTMPSEQQ = FixInt(gridopr)
-            gridopr.Col = 2
-            nTMPSSQQ = FixInt(gridopr)
-            If nTMPSEQ = nTMPSEQQ And nTMPSSQ = nTMPSSQQ Then 'And nTMPITEM = nTMPITEMQ Then
-                lTEM = True
-            End If
-     
-     
-        Next J
-        If Not lTEM Then
-            GridSeq(Index).Col = 2
-            GridSeq(Index).CellBackColor = vbRed
-            GridSeq(Index).Col = 3
-            GridSeq(Index).CellBackColor = vbRed
-            GridSeq(Index).Col = 4
-            GridSeq(Index).CellBackColor = vbRed
-            If Index = 0 Then
-                lRETU = False
-            End If
-        End If
-        GridSeq(Index).Col = 2
-        If Val(GridSeq(Index)) = 0 Then
-            GridSeq(Index).CellBackColor = vbYellow '&HC0FFFF
-            If Index = 0 Then
-                lRETU = False
-            End If
-        End If
-        GridSeq(Index).Col = 3
-        If Val(GridSeq(Index)) = 0 Then
-            GridSeq(Index).CellBackColor = vbYellow '&HC0FFFF
-            If Index = 0 Then
-                lRETU = False
-            End If
-        End If
-        GridSeq(Index).Col = 4
-        If Val(GridSeq(Index)) = 0 Then
-            GridSeq(Index).CellBackColor = vbYellow '&HC0FFFF
-            If Index = 0 Then
-                lRETU = False
-            End If
-        End If
-        GridSeq(Index).Col = 5
-        If Val(GridSeq(Index)) = 0 Then
-            GridSeq(Index).CellBackColor = vbYellow '&HC0FFFF
-            If Index = 0 Then
-                lRETU = False
-            End If
-        End If
-    Next I
-     
-    If Index = 0 And Not lRETU Then
-        Alert ("Existes operacao ou itens nao preenchidos")
+
+  End Select
+  MontaGridFast GridSeq(Index), 7, Array(600, 600, 400, 400, 400, 600, 5000), Array("PF", "REG", "SEQ", "SSQ", "IT", "ITS", "Descriçao"), Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "FXITEMS", "FALCAU"), cARQ, cSQL
+  DizerBarra "verificando sequencias"
+  'nROWSQ = GrdQsbLep.Rows - 1
+  nROWSQ = gridopr.Rows - 1
+  nROWS = GridSeq(Index).Rows
+  nROWS = nROWS - 1
+  For i = 1 To nROWS                           'ROW 0 = Cabecario
+    GridSeq(Index).Row = i
+    GridSeq(Index).Col = 2
+    nTMPSEQ = FixInt(GridSeq(Index))
+    GridSeq(Index).Col = 3
+    nTMPSSQ = FixInt(GridSeq(Index))
+    GridSeq(Index).Col = 4
+    nTMPITEM = FixInt(GridSeq(Index))
+    lTEM = False
+
+    For J = 1 To nROWSQ                      ' zero e o titulo do grid comeca 1
+
+      gridopr.Row = J
+      gridopr.Col = 1
+      nTMPSEQQ = FixInt(gridopr)
+      gridopr.Col = 2
+      nTMPSSQQ = FixInt(gridopr)
+      If nTMPSEQ = nTMPSEQQ And nTMPSSQ = nTMPSSQQ Then  'And nTMPITEM = nTMPITEMQ Then
+        lTEM = True
+      End If
+
+
+    Next J
+    If Not lTEM Then
+      GridSeq(Index).Col = 2
+      GridSeq(Index).CellBackColor = vbRed
+      GridSeq(Index).Col = 3
+      GridSeq(Index).CellBackColor = vbRed
+      GridSeq(Index).Col = 4
+      GridSeq(Index).CellBackColor = vbRed
+      If Index = 0 Then
+        lRETU = False
+      End If
     End If
-  
-    DizerBarra ""
+    GridSeq(Index).Col = 2
+    If Val(GridSeq(Index)) = 0 Then
+      GridSeq(Index).CellBackColor = vbYellow  '&HC0FFFF
+      If Index = 0 Then
+        lRETU = False
+      End If
+    End If
+    GridSeq(Index).Col = 3
+    If Val(GridSeq(Index)) = 0 Then
+      GridSeq(Index).CellBackColor = vbYellow  '&HC0FFFF
+      If Index = 0 Then
+        lRETU = False
+      End If
+    End If
+    GridSeq(Index).Col = 4
+    If Val(GridSeq(Index)) = 0 Then
+      GridSeq(Index).CellBackColor = vbYellow  '&HC0FFFF
+      If Index = 0 Then
+        lRETU = False
+      End If
+    End If
+    GridSeq(Index).Col = 5
+    If Val(GridSeq(Index)) = 0 Then
+      GridSeq(Index).CellBackColor = vbYellow  '&HC0FFFF
+      If Index = 0 Then
+        lRETU = False
+      End If
+    End If
+  Next i
+
+  If Index = 0 And Not lRETU Then
+    Alert ("Existes operacao ou itens nao preenchidos")
+  End If
+
+  DizerBarra ""
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        chkfemeas
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    chkfemeas
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub escidfolha_Click(Index As Integer)
-    ePASS01 = ""
-    If Index > 9 Then
-        ePASS01 = "LOGIX"
-    End If
-    
-    escMP04.Show vbModal, Me
-    If lRETU Then
-        Select Case Index
-        Case 0, 10
-            TXTFIELDS(7).Text = TXTFIELDS(7).Text & " , " & Trim(MMCase(eRETU02))
-        Case 1, 11
-            TXTFIELDS(8).Text = TXTFIELDS(8).Text & " , " & Trim(MMCase(eRETU02))
-        End Select
-    End If
+  ePASS01 = ""
+  If Index > 9 Then
+    ePASS01 = "LOGIX"
+  End If
+
+  escMP04.Show vbModal, Me
+  If lRETU Then
+    Select Case Index
+    Case 0, 10
+      TXTFIELDS(7).tEXT = TXTFIELDS(7).tEXT & " , " & Trim(MMCase(eRETU02))
+    Case 1, 11
+      TXTFIELDS(8).tEXT = TXTFIELDS(8).tEXT & " , " & Trim(MMCase(eRETU02))
+    End Select
+  End If
 End Sub
 
 Private Sub ESCprofin_Click(Index As Integer)
-    Dim cCHAVEBUS As String
-    ePASS01 = "MANA5"
-    If Index = 1 Then
-        ePASS01 = "LOGIX"
-    End If
-    If Index = 2 Then
-        ePASS01 = "MICRO"
-    End If
-    If Len(TXTFIELDS(61)) = 0 Then
-        cCHAVEBUS = TXTFIELDS(60)
-    Else
-        cCHAVEBUS = TXTFIELDS(61)
-    End If
-    escms01.Show vbModal, Me
-    If lRETU Then
-        TXTFIELDS(61) = eRETU01
-    End If
-    cCHAVEBUS = ""
+  Dim cCHAVEBUS As String
+  ePASS01 = "MANA5"
+  If Index = 1 Then
+    ePASS01 = "LOGIX"
+  End If
+  If Index = 2 Then
+    ePASS01 = "MICRO"
+  End If
+  If Len(TXTFIELDS(61)) = 0 Then
+    cCHAVEBUS = TXTFIELDS(60)
+  Else
+    cCHAVEBUS = TXTFIELDS(61)
+  End If
+  escms01.Show vbModal, Me
+  If lRETU Then
+    TXTFIELDS(61) = eRETU01
+  End If
+  cCHAVEBUS = ""
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    TXTPF = nPF
-    aNUM = Array(0, 0, 0, 0)
-    aDIZ = Array("", "", "", "")
-    cARQFEMEA = PegPath("PATH", "FEMEA")
-    cARQFEMEAPF = PegPath("PATH", "FEMEAPF")
-    cARQPF = PegPath("PATH", "PF")
-    cARQPFP = PegPath("PATH", "PFP")
-    cARQPFG = PegPath("PATH", "PFG")
-    
-    CHECKPFPG                                    'inclui embalagem preliminar gp12
-    
-    nCAMPOS = 34
-    cSQL = "select * from PF WHERE PF=" & nPF
-    aCAM = Array("CODFINAL", "CPF", "CODIGO", "DESCR", "CLIENTE", _
-                 "CLINOME", "FEMEAF", "FEMEAG", "FEMEAC", "FEMEAEN", _
-                 "NOSREV", "NOSDAT", "FEMEAREV", "FEMEAF", "FEMEAR", _
-                 "CODIGOINT", "REVPRO", "REVDAT", "FEMEAOBS", "OPCAO", _
-                 "STFEPC", "CODFISCAL", "FEMEAED", "FEMEAREVD", "FEMEAD", _
-                 "FEMEAREVD2", "TIPO", "STPFFE", "EXCRPN", "FEMEACRG", _
-                 "FEMEAPREPRO", "FEMEAPRO", "femeaano", "femeaproj")
-    aFOR = Array("C", "C", "C", "C", "NI", _
-                 "C", "C", "C", "C", "C", _
-                 "NI", "D", "NI", "NI", "C", _
-                 "C", "NI", "D", "C", "NI", _
-                 "B", "C", "D", "DZ", "D", _
-                 "DZ", "C", "B", "B", "B", _
-                 "DZ", "D", "C", "C")
-    aPAD = Array("", "", "", "", 0, _
-                 "", "", "", "", "", _
-                 0, "", 0, 0, "", _
-                 "", 0, "", "", 0, _
-                 "", "", "", "", "", _
-                 "", "", "", "", "", _
-                 "", "", "", "")
-    aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 8
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    
-    
-    Check1.Value = FixBolNum(aVAL(27))
-    Check2.Value = FixBolNum(aVAL(28))
-    femeacrg.Value = FixBolNum(aVAL(29))
-    If IsDate(aVAL(30)) Then
-        DTPicker2.Value = aVAL(30)
-    End If
-    If IsDate(aVAL(31)) Then
-        DTPicker1.Value = aVAL(31)
-    End If
-    
-    For iLOOP = 32 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
+  CenterFormToScreen Me
+  TXTPF = nPF
+  aNUM = Array(0, 0, 0, 0)
+  aDIZ = Array("", "", "", "")
+  cARQFEMEA = PegPath("PATH", "FEMEA")
+  cARQFEMEAPF = PegPath("PATH", "FEMEAPF")
+  cARQPF = PegPath("PATH", "PF")
+  cARQPFP = PegPath("PATH", "PFP")
+  cARQPFG = PegPath("PATH", "PFG")
 
-    
-    cORDFEMUSO = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
-    cORDFEMPAD = "PRONUM,FALNUM,EFENUM,CAUNUM"
-    cORDFEMAVU = "FXSEQ,FXSSQ,FXITEM"
-    cORDFEMPRE = "FXSEQ,FXSSQ,FXITEM"
-    cORDFEMGP12 = "FXSEQ,FXSSQ,FXITEM"
-    cORDFEMADC = "FXSEQ,FXSSQ,FXITEM"
-    cORDREVI = "FXSEQ,FXSSQ,FXITEM,FXITEMS,FEMEAREV"
-    
-    Filopr                                       'antes das relat
-    Text(1) = CStr(Month(Date))
-    Text(2) = CStr(Year(Date))
-    FilQSBLEP
-    FilRelat (0)
-    FilRelat (1)
-    FilRelat (2)
-    FilRelat (3)
-    FilRelat (4)
-    Filgridrev
-    'Filopr
-    Filgridrevi (1)
-    FILGRIdPRO
-    FILGRIdFAL
-    FILGRIdfemprecad
-    filgridpadpf
-    FILGRIdpfrev
-    If zUSER = "ADMIN" Then
-        TXTFIELDS(12).Enabled = True
-        TXTFIELDS(12).Locked = False
-        TXTFIELDS(23).Enabled = True
-        TXTFIELDS(23).Locked = False
-    Else
-        CmdApaRev.Visible = False
-        CmdTrocaREv.Visible = False
-        TxtRevisao.Visible = False
-        TxtRevNova.Visible = False
-    End If
-    FILGRIDrevCAU (0)
-    FILGRIDrevCAU (1)
-    FILGRIDrevCAU (2)
-    FILGRIDrevCAU (3)
-    FILGRIDrevCAU (5)
-    chkfemeas
+  CHECKPFPG                                    'inclui embalagem preliminar gp12
+
+  nCAMPOS = 34
+  cSQL = "select * from PF WHERE PF=" & nPF
+  aCAM = Array("CODFINAL", "CPF", "CODIGO", "DESCR", "CLIENTE", _
+               "CLINOME", "FEMEAF", "FEMEAG", "FEMEAC", "FEMEAEN", _
+               "NOSREV", "NOSDAT", "FEMEAREV", "FEMEAF", "FEMEAR", _
+               "CODIGOINT", "REVPRO", "REVDAT", "FEMEAOBS", "OPCAO", _
+               "STFEPC", "CODFISCAL", "FEMEAED", "FEMEAREVD", "FEMEAD", _
+               "FEMEAREVD2", "TIPO", "STPFFE", "EXCRPN", "FEMEACRG", _
+               "FEMEAPREPRO", "FEMEAPRO", "femeaano", "femeaproj")
+  aFOR = Array("C", "C", "C", "C", "NI", _
+               "C", "C", "C", "C", "C", _
+               "NI", "D", "NI", "NI", "C", _
+               "C", "NI", "D", "C", "NI", _
+               "B", "C", "D", "DZ", "D", _
+               "DZ", "C", "B", "B", "B", _
+               "DZ", "D", "C", "C")
+  aPAD = Array("", "", "", "", 0, _
+               "", "", "", "", "", _
+               0, "", 0, 0, "", _
+               "", 0, "", "", 0, _
+               "", "", "", "", "", _
+               "", "", "", "", "", _
+               "", "", "", "")
+  aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 8
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
 
 
-    txtsigi.Font = "isoqsymbol"
-    
-    
+  Check1.Value = FixBolNum(aVAL(27))
+  Check2.Value = FixBolNum(aVAL(28))
+  femeacrg.Value = FixBolNum(aVAL(29))
+  If IsDate(aVAL(30)) Then
+    DTPicker2.Value = aVAL(30)
+  End If
+  If IsDate(aVAL(31)) Then
+    DTPicker1.Value = aVAL(31)
+  End If
+
+  For iLOOP = 32 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+
+
+  cORDFEMUSO = "FXSEQ,FXSSQ,FXITEM,FXITEMS"
+  cORDFEMPAD = "PRONUM,FALNUM,EFENUM,CAUNUM"
+  cORDFEMAVU = "FXSEQ,FXSSQ,FXITEM"
+  cORDFEMPRE = "FXSEQ,FXSSQ,FXITEM"
+  cORDFEMGP12 = "FXSEQ,FXSSQ,FXITEM"
+  cORDFEMADC = "FXSEQ,FXSSQ,FXITEM"
+  cORDREVI = "FXSEQ,FXSSQ,FXITEM,FXITEMS,FEMEAREV"
+
+  Filopr                                       'antes das relat
+  tEXT(1) = CStr(Month(Date))
+  tEXT(2) = CStr(Year(Date))
+  FilQSBLEP
+  FilRelat (0)
+  FilRelat (1)
+  FilRelat (2)
+  FilRelat (3)
+  FilRelat (4)
+  Filgridrev
+  'Filopr
+  Filgridrevi (1)
+  FILGRIdPRO
+  FILGRIdFAL
+  FILGRIdfemprecad
+  filgridpadpf
+  FILGRIdpfrev
+  If zUSER = "ADMIN" Then
+    TXTFIELDS(12).Enabled = True
+    TXTFIELDS(12).Locked = False
+    TXTFIELDS(23).Enabled = True
+    TXTFIELDS(23).Locked = False
+  Else
+    CmdApaRev.Visible = False
+    CmdTrocaREv.Visible = False
+    TxtRevisao.Visible = False
+    TxtRevNova.Visible = False
+  End If
+  FILGRIDrevCAU (0)
+  FILGRIDrevCAU (1)
+  FILGRIDrevCAU (2)
+  FILGRIDrevCAU (3)
+  FILGRIDrevCAU (5)
+  chkfemeas
+
+
+  txtsigi.Font = "isoqsymbol"
+
+
 End Sub
 
 Private Sub chkfemeas()
+  If GridSeq(1).Rows > 1 Then
+    If GridSeq(0).Rows > 1 Then
+      Alert "Femea com complementar nao pode usar normal"
+    End If
+  End If
+  If GridSeq(0).Rows > 1 Then
     If GridSeq(1).Rows > 1 Then
-        If GridSeq(0).Rows > 1 Then
-            Alert "Femea com complementar nao pode usar normal"
-        End If
+      Alert "Femea normal nao pode usar complementar"
     End If
+  End If
+  If GridPadPF.Rows > 1 Then
     If GridSeq(0).Rows > 1 Then
-        If GridSeq(1).Rows > 1 Then
-            Alert "Femea normal nao pode usar complementar"
-        End If
+      Alert "Femea com Padrao nao pode usar normal"
     End If
+  End If
+  If GridSeq(0).Rows > 1 Then
     If GridPadPF.Rows > 1 Then
-        If GridSeq(0).Rows > 1 Then
-            Alert "Femea com Padrao nao pode usar normal"
-        End If
+      Alert "Femea com normal nao pode usar padrao"
     End If
-    If GridSeq(0).Rows > 1 Then
-        If GridPadPF.Rows > 1 Then
-            Alert "Femea com normal nao pode usar padrao"
-        End If
-    End If
+  End If
 End Sub
 
 Private Sub importar_Click(Index As Integer)
-   
-    If Index = 0 And Not AcessaMenu("FemeaPro", 1) Then Exit Sub
-    If Index = 3 And Not AcessaMenu("FemeaGP12", 1) Then Exit Sub
-   
-    If Index = 1 Then
-        If GridPadPF.Rows < 2 Then
-            Alert "Este Femea nao utiliza Padrao"
-            Exit Sub
-        End If
-    End If
-    If Index = 0 Then                            'normal com complementar
-        If GridSeq(1).Rows > 1 Then
-            Alert "Femea com complemetar nao pode usar normal"
-            Exit Sub
-        End If
-    End If
-    If Index = 0 Then                            'normal com padrao
-        If GridPadPF.Rows > 1 Then
-            Alert "Femea com Padrao nao pode usar normal"
-            Exit Sub
-        End If
-    End If
 
-    If Index = 2 Then
-        If Not AcessaMenu("FemeaPre", 1) Then
-            Exit Sub
-        End If
-        If eproducao Then
-            Exit Sub
-        End If
+  If Index = 0 And Not AcessaMenu("FemeaPro", 1) Then Exit Sub
+  If Index = 3 And Not AcessaMenu("FemeaGP12", 1) Then Exit Sub
+
+  If Index = 1 Then
+    If GridPadPF.Rows < 2 Then
+      Alert "Este Femea nao utiliza Padrao"
+      Exit Sub
     End If
-   
-    Select Case Index
-    Case 0
-        cARQIMP = "FEMEA"
-    Case 1
-        cARQIMP = "FEMAVU"
-    Case 2
-        cARQIMP = "FEMEAPRE"
-    Case 3
-        cARQIMP = "FEMEAGP12"
-    Case 5
-        cARQIMP = "FEMADC"
-    Case 10
-        cARQIMP = "FEMAX"
-    End Select
-    FrmImp.Show vbModal, Me
-    If Index = 10 Then
-        If lRETU Then
-            Xcmdimp_Click eRETU01
-        End If
-    Else
-        FilRelat (Index)
+  End If
+  If Index = 0 Then                            'normal com complementar
+    If GridSeq(1).Rows > 1 Then
+      Alert "Femea com complemetar nao pode usar normal"
+      Exit Sub
     End If
+  End If
+  If Index = 0 Then                            'normal com padrao
+    If GridPadPF.Rows > 1 Then
+      Alert "Femea com Padrao nao pode usar normal"
+      Exit Sub
+    End If
+  End If
+
+  If Index = 2 Then
+    If Not AcessaMenu("FemeaPre", 1) Then
+      Exit Sub
+    End If
+    If eproducao Then
+      Exit Sub
+    End If
+  End If
+
+  Select Case Index
+  Case 0
+    cARQIMP = "FEMEA"
+  Case 1
+    cARQIMP = "FEMAVU"
+  Case 2
+    cARQIMP = "FEMEAPRE"
+  Case 3
+    cARQIMP = "FEMEAGP12"
+  Case 5
+    cARQIMP = "FEMADC"
+  Case 10
+    cARQIMP = "FEMAX"
+  End Select
+  FrmImp.Show vbModal, Me
+  If Index = 10 Then
+    If lRETU Then
+      Xcmdimp_Click eRETU01
+    End If
+  Else
+    FilRelat (Index)
+  End If
 End Sub
 
 Private Sub XComMotInc_Click(cDIZ)
-    Dim nITEM As Long
-    Dim cSQL As String
-    If nREV > 0 Then
-        nITEM = FixInt(PegMAXSQL(cARQPF, "revI WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV, "ITEM", 0)) + 1
-        cSQL = "select * from revi WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV & " AND  ITEM=" & nITEM
-        IncluiSQL cARQPF, cSQL, 5, Array("PF", "REVISAO", "TIPO", "ITEM", "MOTIVO"), Array(FixInt(nPF), FixInt(nREV), "FE", nITEM, cDIZ), True, False
-        Filgridrevi (0)
-    End If
+  Dim nITEM As Long
+  Dim cSQL As String
+  If nREV > 0 Then
+    nITEM = FixInt(PegMAXSQL(cARQPF, "revI WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV, "ITEM", 0)) + 1
+    cSQL = "select * from revi WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV & " AND  ITEM=" & nITEM
+    IncluiSQL cARQPF, cSQL, 5, Array("PF", "REVISAO", "TIPO", "ITEM", "MOTIVO"), Array(FixInt(nPF), FixInt(nREV), "FE", nITEM, cDIZ), True, False
+    Filgridrevi (0)
+  End If
 End Sub
 
 Private Sub filgridmsrd()
-    Dim cARQ As String
-    Dim cSQL As String
-    DizerBarra "carregando registro de defeitos"
-    cARQ = PegPath("PATH", "MANA5TGQ")
-    cSQL = "SELECT MSRD,DATA,DESC01,INV01,ACA01 FROM MSRD WHERE PF=" & nPF & " ORDER BY MSRD"
-    cARQ = GeraConn(cARQ, "JETFOX")
-    MontaGridUltra gridmsrd, 5, Array(800, 1200, 2000, 2000, 2000), Array("Nº", "Data", "Desc", "Inv", "Acao"), Array("MSRD", "C$DATA", "L$DESC01", "L$INV01", "L$ACA01"), cARQ, cSQL
-    DizerBarra ""
+  Dim cARQ As String
+  Dim cSQL As String
+  DizerBarra "carregando registro de defeitos"
+  cARQ = PegPath("PATH", "MANA5TGQ")
+  cSQL = "SELECT MSRD,DATA,DESC01,INV01,ACA01 FROM MSRD WHERE PF=" & nPF & " ORDER BY MSRD"
+  cARQ = GeraConn(cARQ, "JETFOX")
+  MontaGridUltra gridmsrd, 5, Array(800, 1200, 2000, 2000, 2000), Array("Nº", "Data", "Desc", "Inv", "Acao"), Array("MSRD", "C$DATA", "L$DESC01", "L$INV01", "L$ACA01"), cARQ, cSQL
+  DizerBarra ""
 End Sub
 
 Private Sub FILGRIdPRO()
-    Dim cSQL As String
-    DizerBarra "carregando femea processos"
-    cSQL = "SELECT PRONUM,PROCESSO FROM FEMPRO ORDER BY PRONUM"
-    MontaGridFast GridPRO, 2, Array(800, 3000), Array("Nº", "Descricao"), Array("PRONUM", "PROCESSO"), cARQFEMEA, cSQL
-    DizerBarra ""
+  Dim cSQL As String
+  DizerBarra "carregando femea processos"
+  cSQL = "SELECT PRONUM,PROCESSO FROM FEMPRO ORDER BY PRONUM"
+  MontaGridFast GridPRO, 2, Array(800, 3000), Array("Nº", "Descricao"), Array("PRONUM", "PROCESSO"), cARQFEMEA, cSQL
+  DizerBarra ""
 End Sub
 
 Private Sub FILGRIdFAL()
-    Dim cSQL As String
-    DizerBarra "carregando femea falhas"
-    cSQL = "SELECT PRONUM,FALNUM, FALTIP FROM FEMFAL WHERE PRONUM=" & FixInt(aNUM(0)) & " order by FALNUM"
-    MontaGridFast GRIDFAL, 3, Array(800, 800, 3000), Array("NºPro", "Nº", "Descricao"), Array("PRONUM", "FALNUM", "FALTIP"), cARQFEMEA, cSQL
-    DizerBarra ""
+  Dim cSQL As String
+  DizerBarra "carregando femea falhas"
+  cSQL = "SELECT PRONUM,FALNUM, FALTIP FROM FEMFAL WHERE PRONUM=" & FixInt(aNUM(0)) & " order by FALNUM"
+  MontaGridFast GRIDFAL, 3, Array(800, 800, 3000), Array("NºPro", "Nº", "Descricao"), Array("PRONUM", "FALNUM", "FALTIP"), cARQFEMEA, cSQL
+  DizerBarra ""
 End Sub
 
 Private Sub filgridpadpf()
-    Dim cSQL As String
-    DizerBarra "carregando femea padrao"
-    cSQL = "SELECT PF,PRONUM,FALNUM FROM FEMPF WHERE PF=" & nPF & " ORDER BY PRONUM,FALNUM"
-    MontaGridUltra GridPadPF, 3, Array(400, 400, 400), Array("PF", "NºPro", "NºFAL"), Array("PF", "PRONUM", "FALNUM"), cARQFEMEA, cSQL
-    DizerBarra "carregando femea historico"
-    cSQL = "SELECT PF,PRONUM,FALNUM FROM FEMPF WHERE PF=" & nPF & " ORDER BY PRONUM,FALNUM"
-    MontaGridUltra gridpfpadhist, 3, Array(400, 400, 400), Array("PF", "NºPro", "NºFAL"), Array("PF", "PRONUM", "FALNUM"), cARQFEMEA, cSQL
-    DizerBarra ""
+  Dim cSQL As String
+  DizerBarra "carregando femea padrao"
+  cSQL = "SELECT PF,PRONUM,FALNUM FROM FEMPF WHERE PF=" & nPF & " ORDER BY PRONUM,FALNUM"
+  MontaGridUltra GridPadPF, 3, Array(400, 400, 400), Array("PF", "NºPro", "NºFAL"), Array("PF", "PRONUM", "FALNUM"), cARQFEMEA, cSQL
+  DizerBarra "carregando femea historico"
+  cSQL = "SELECT PF,PRONUM,FALNUM FROM FEMPF WHERE PF=" & nPF & " ORDER BY PRONUM,FALNUM"
+  MontaGridUltra gridpfpadhist, 3, Array(400, 400, 400), Array("PF", "NºPro", "NºFAL"), Array("PF", "PRONUM", "FALNUM"), cARQFEMEA, cSQL
+  DizerBarra ""
 End Sub
 
 Private Sub FILGRIdpfrev()
-    Dim cSQL As String
-    DizerBarra "carregando pfrev"
-    cSQL = "SELECT PF,REV,PFDATA,FEMEAD,FEMEAN FROM PFREV WHERE PF=" & nPF & " ORDER BY REV"
-    MontaGridUltra GridPFrev, 5, Array(400, 400, 1200, 1200, 2000), _
-        Array("PF", "REV", "DATA", "FEMEA Em", "POR"), _
-        Array("PF", "REV", "PFDATA", "FEMEAD", "FEMEAN"), cARQPF, cSQL
-    DizerBarra ""
+  Dim cSQL As String
+  DizerBarra "carregando pfrev"
+  cSQL = "SELECT PF,REV,PFDATA,FEMEAD,FEMEAN FROM PFREV WHERE PF=" & nPF & " ORDER BY REV"
+  MontaGridUltra GridPFrev, 5, Array(400, 400, 1200, 1200, 2000), _
+                 Array("PF", "REV", "DATA", "FEMEA Em", "POR"), _
+                 Array("PF", "REV", "PFDATA", "FEMEAD", "FEMEAN"), cARQPF, cSQL
+  DizerBarra ""
 End Sub
 
 Private Sub FILGRIdfemprecad()
-    Dim cSQL As String
-    DizerBarra "carregando femea pre cadastro"
-    cSQL = "SELECT SEGGRA,TITULO FROM FEMPRE ORDER BY TITULO"
-    MontaGridUltra Gridfemprecad, 2, Array(600, 4000), Array("Código", "Descrição"), Array("SEGGRA", "L$TITULO"), cARQFEMEA, cSQL
-    DizerBarra ""
+  Dim cSQL As String
+  DizerBarra "carregando femea pre cadastro"
+  cSQL = "SELECT SEGGRA,TITULO FROM FEMPRE ORDER BY TITULO"
+  MontaGridUltra Gridfemprecad, 2, Array(600, 4000), Array("Código", "Descrição"), Array("SEGGRA", "L$TITULO"), cARQFEMEA, cSQL
+  DizerBarra ""
 End Sub
 
 Private Sub FILGRIdPAD()
-    Dim cSQL As String
-    DizerBarra "carregando femea"
-    cSQL = "SELECT ITEM,INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, MUDPAD, PROCESSO, FALTIP, FALEFE, FALCAU FROM FEMEAPAD WHERE PF=" & nPF & " ORDER BY " & cORDFEMPAD
-    'cSQL = "SELECT ITEM,INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, MUDPAD, PROCESSO, FALTIP, FALEFE, FALCAU FROM FEMEA WHERE PF=" & nPF & " ORDER BY " & cORDFEMPAD
-    MontaGrid GridPad, 12, Array(400, 400, 400, 400, 400, 400, 300, 300, 1000, 2000, 3000, 2000), Array("ITEM", "RPN", "NºPro", "NºFal", "NºEfe", "NºCau", "Man", "Mod", "Processo", "Falha", "Efeito", "Causa"), Array("ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "MUDPAD", "PROCESSO", "FALTIP", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
-    DizerBarra ""
+  Dim cSQL As String
+  DizerBarra "carregando femea"
+  cSQL = "SELECT ITEM,INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, MUDPAD, PROCESSO, FALTIP, FALEFE, FALCAU FROM FEMEAPAD WHERE PF=" & nPF & " ORDER BY " & cORDFEMPAD
+  'cSQL = "SELECT ITEM,INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, MUDPAD, PROCESSO, FALTIP, FALEFE, FALCAU FROM FEMEA WHERE PF=" & nPF & " ORDER BY " & cORDFEMPAD
+  MontaGrid GridPad, 12, Array(400, 400, 400, 400, 400, 400, 300, 300, 1000, 2000, 3000, 2000), Array("ITEM", "RPN", "NºPro", "NºFal", "NºEfe", "NºCau", "Man", "Mod", "Processo", "Falha", "Efeito", "Causa"), Array("ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "MUDPAD", "PROCESSO", "FALTIP", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
+  DizerBarra ""
 End Sub
 
 Private Sub maisano_Click()
-    Text(2) = CStr(IncDec(Text(2), 1, 1900, 2300))
+  tEXT(2) = CStr(IncDec(tEXT(2), 1, 1900, 2300))
 End Sub
 
 Private Sub maismes_Click()
-    Text(1) = CStr(IncDec(Text(1), 1, 1, 12))
+  tEXT(1) = CStr(IncDec(tEXT(1), 1, 1, 12))
 End Sub
 
 Private Sub menosano_Click()
-    Text(2) = CStr(IncDec(Text(2), -1, 1900, 2300))
+  tEXT(2) = CStr(IncDec(tEXT(2), -1, 1900, 2300))
 End Sub
 
 Private Sub menosmes_Click()
-    Text(1) = CStr(IncDec(Text(1), -1, 1, 12))
+  tEXT(1) = CStr(IncDec(tEXT(1), -1, 1, 12))
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Text_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub tEXT_KeyPress(Index As Integer, KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub FilQSBLEP()
-    Dim sSQL As String
-    DizerBarra "carregando fluxo II"
-    sSQL = "select SEQ,SSQ,ITEM,DESCRICAO from PFQSBLEP WHERE PF=" & nPF & " ORDER BY SEQ,SSQ,ITEM"
-    MontaGridUltra GrdQsbLep, 4, Array(400, 400, 400, 7000), Array("Seq", "SSQ", "Ord", "descricao"), _
-        Array("SEQ", "SSQ", "Item", "descricao"), cARQPF, sSQL
-    DizerBarra ""
+  Dim sSQL As String
+  DizerBarra "carregando fluxo II"
+  sSQL = "select SEQ,SSQ,ITEM,DESCRICAO from PFQSBLEP WHERE PF=" & nPF & " ORDER BY SEQ,SSQ,ITEM"
+  MontaGridUltra GrdQsbLep, 4, Array(400, 400, 400, 7000), Array("Seq", "SSQ", "Ord", "descricao"), _
+                 Array("SEQ", "SSQ", "Item", "descricao"), cARQPF, sSQL
+  DizerBarra ""
 End Sub
 
 Private Sub FILGRIDrevCAU(Index As Integer)
-    Dim cSQL As String
-    If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
-        cSQL = "select ITEM,SEGGRA,FXSEQ,FXSSQ,FXITEM,FXITEMS,FEMEAREV,FALCAU from FEMREVI WHERE  TIPOAPU='" & tipoapu(Index) & "' AND PF=" & nPF & " ORDER BY " & cORDREVI ''ITEM,SEGGRA"
-        DizerBarra "carregando femea revisoes " & tipoapu(Index)
-    End If
-    MontaGridFast gridrevcau(Index), 8, Array(400, 400, 500, 500, 400, 400, 400, 7000), Array("REG", "REGREV", "SEQ", "SSQ", "IT", "ITS", "FEREV", "Descriçao"), Array("ITEM", "SEGGRA", "FXSEQ", "FXSSQ", "FXITEM", "FXITEMS", "FEMEAREV", "FALCAU"), cARQFEMEA, cSQL
-    DizerBarra ""
+  Dim cSQL As String
+  If Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 5 Then
+    cSQL = "select ITEM,SEGGRA,FXSEQ,FXSSQ,FXITEM,FXITEMS,FEMEAREV,FALCAU from FEMREVI WHERE  TIPOAPU='" & tipoapu(Index) & "' AND PF=" & nPF & " ORDER BY " & cORDREVI  ''ITEM,SEGGRA"
+    DizerBarra "carregando femea revisoes " & tipoapu(Index)
+  End If
+  MontaGridFast gridrevcau(Index), 8, Array(400, 400, 500, 500, 400, 400, 400, 7000), Array("REG", "REGREV", "SEQ", "SSQ", "IT", "ITS", "FEREV", "Descriçao"), Array("ITEM", "SEGGRA", "FXSEQ", "FXSSQ", "FXITEM", "FXITEMS", "FEMEAREV", "FALCAU"), cARQFEMEA, cSQL
+  DizerBarra ""
 End Sub
 
 Private Function tipoapu(ByVal Index As Integer)
-    tipoapu = ""                                 ''N-ormal C-omplementar P-adrao R-pre G-gp12
-    If Index = 0 Then
-        tipoapu = "N"
-    End If
-    If Index = 1 Then
-        tipoapu = "C"
-    End If
-    If Index = 2 Then
-        tipoapu = "R"
-    End If
-    If Index = 3 Then
-        tipoapu = "G"
-    End If
-    If Index = 5 Then
-        tipoapu = "A"
-    End If
+  tipoapu = ""                                 ''N-ormal C-omplementar P-adrao R-pre G-gp12
+  If Index = 0 Then
+    tipoapu = "N"
+  End If
+  If Index = 1 Then
+    tipoapu = "C"
+  End If
+  If Index = 2 Then
+    tipoapu = "R"
+  End If
+  If Index = 3 Then
+    tipoapu = "G"
+  End If
+  If Index = 5 Then
+    tipoapu = "A"
+  End If
 End Function
 
 Private Function eproducao()
-    eproducao = False
-    If IsDate(DTPicker2.Value) Then
-        Alert "Ja Passou para producao"
-        eproducao = True
-    Else
-        If TXTFIELDS(26).Text = "P" Then
-            Alert "O Processo de Fabricao ja e TIPO (P) producao"
-            eproducao = True
-        End If
+  eproducao = False
+  If IsDate(DTPicker2.Value) Then
+    Alert "Ja Passou para producao"
+    eproducao = True
+  Else
+    If TXTFIELDS(26).tEXT = "P" Then
+      Alert "O Processo de Fabricao ja e TIPO (P) producao"
+      eproducao = True
     End If
+  End If
 End Function
 
 

@@ -87,17 +87,17 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Command1_Click()
-sDBpassword = txtPassword.Text
-Unload Me
+  sDBpassword = txtPassword.Text
+  Unload Me
 End Sub
 
 Private Sub Form_Load()
-CenterFormToScreen Me
+  CenterFormToScreen Me
 
 End Sub
 
 Private Sub txtPassword_KeyPress(KeyAscii As Integer)
-If KeyAscii = 32 Then 'don't allow spaces
-   KeyAscii = 0
-End If
+  If KeyAscii = 32 Then  'don't allow spaces
+    KeyAscii = 0
+  End If
 End Sub

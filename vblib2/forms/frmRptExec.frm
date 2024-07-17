@@ -218,88 +218,95 @@ Attribute VB_Exposed = False
 Const nFORMID = 1064
 Const cFORMID = "Tipos de Execuçao Gerenciador Formularios/Relatórios"
 Dim aCAM, aFOR, aVAL, aPAD As Variant
+Attribute aFOR.VB_VarUserMemId = 1073938432
+Attribute aVAL.VB_VarUserMemId = 1073938432
+Attribute aPAD.VB_VarUserMemId = 1073938432
 Dim cARQ, cSQL As String
+Attribute cARQ.VB_VarUserMemId = 1073938436
+Attribute cSQL.VB_VarUserMemId = 1073938436
 Dim nITEM, nCAMPOS As Long
+Attribute nITEM.VB_VarUserMemId = 1073938438
+Attribute nCAMPOS.VB_VarUserMemId = 1073938438
 
 Private Sub cmdClose_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-    If MDG("Gravar e Sair", "Gravando ") Then
-        For nITEM = 0 To nCAMPOS - 1
-            aVAL(nITEM) = Text(nITEM)
-        Next nITEM
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-        GravaLog nFORMID, 0, "Gravou "
-    Else
-        GravaLog nFORMID, 0, "Nao Gravou "
-    End If
-    Screen.MousePointer = vbDefault
+  If MDG("Gravar e Sair", "Gravando ") Then
+    For nITEM = 0 To nCAMPOS - 1
+      aVAL(nITEM) = tEXT(nITEM)
+    Next nITEM
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GravaLog nFORMID, 0, "Gravou "
+  Else
+    GravaLog nFORMID, 0, "Nao Gravou "
+  End If
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub cmdescexe_Click()
-    Dim sRECENTFILE, sPath, sFILTER, sFILENAME As String
-    sRECENTFILE = Text(2)
-    sPath = Text(2)
-    sFILTER = "Executáveis" & vbNullChar & "*.exe" & vbNullChar & "Todos os Arquivos" & vbNullChar & "*.*"
-    sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
-    If Not Len(sFILENAME) = 0 Then
-        Text(2) = NomeArq(sFILENAME)
-    End If
+  Dim sRECENTFILE, sPath, sFILTER, sFILENAME As String
+  sRECENTFILE = tEXT(2)
+  sPath = tEXT(2)
+  sFILTER = "Executáveis" & vbNullChar & "*.exe" & vbNullChar & "Todos os Arquivos" & vbNullChar & "*.*"
+  sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
+  If Not Len(sFILENAME) = 0 Then
+    tEXT(2) = NomeArq(sFILENAME)
+  End If
 End Sub
 
 Private Sub CmdEscExt_Click()
-    eLOCALIZA = Text(3)
-    aTABELA = Array(1061, "Tipos Arquivos (Extensões)", "TIPOSARQ", 8, 1062, "SYSCONF")
-    EscCodNome.Show vbModal, Me
-    If lRETU Then
-        Text(3) = eRETU02
-    End If
+  eLOCALIZA = tEXT(3)
+  aTABELA = Array(1061, "Tipos Arquivos (Extensões)", "TIPOSARQ", 8, 1062, "SYSCONF")
+  EscCodNome.Show vbModal, Me
+  If lRETU Then
+    tEXT(3) = eRETU02
+  End If
 End Sub
 
 Private Sub CmdEscform_Click()
-    eLOCALIZA = Text(2)
-    ePASS01 = 0
-    EscForm.Show vbModal, Me
-    If lRETU Then
-        Text(2) = FixStr(eRETU04)
-    End If
+  eLOCALIZA = tEXT(2)
+  ePASS01 = 0
+  EscForm.Show vbModal, Me
+  If lRETU Then
+    tEXT(2) = FixStr(eRETU04)
+  End If
 
 End Sub
 
 Private Sub CmdShell_Click()
-    Text(2) = "SHELL"
+  tEXT(2) = "SHELL"
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
-    
+  TeclaEnter KeyCode
+
 End Sub
 
 Private Sub Form_Load()
-   
-    CenterFormToScreen Me
-    ''Configura Help
-    Me.Caption = cFORMID
-    HelpContextID = nFORMID
-   
-    ''Arquivo
-    cARQ = PegPath("PATH", "SYSCONF")
-    If Not FileExist(cARQ, True) Then
-        End
-    End If
-   
-    'Variaveis sql
-    cSQL = ePASS01
-    nCAMPOS = 5
-    aCAM = Array("NUMERO", "NOME", "EXECUTAR", "EXTENSAO", "OBS")
-    aFOR = Array("N", "C", "C", "C", "C")
-    aPAD = Array(0, "", "", "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For nITEM = 0 To nCAMPOS - 1
-        Text(nITEM) = aVAL(nITEM)
-    Next nITEM
+
+  CenterFormToScreen Me
+  ''Configura Help
+  Me.Caption = cFORMID
+  HelpContextID = nFORMID
+
+  ''Arquivo
+  cARQ = PegPath("PATH", "SYSCONF")
+  If Not FileExist(cARQ, True) Then
+    End
+  End If
+
+  'Variaveis sql
+  cSQL = ePASS01
+  nCAMPOS = 5
+  aCAM = Array("NUMERO", "NOME", "EXECUTAR", "EXTENSAO", "OBS")
+  aFOR = Array("N", "C", "C", "C", "C")
+  aPAD = Array(0, "", "", "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For nITEM = 0 To nCAMPOS - 1
+    tEXT(nITEM) = aVAL(nITEM)
+  Next nITEM
 
 End Sub
 

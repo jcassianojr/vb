@@ -49,38 +49,38 @@ Const nFORMID = 1075
 Const cFORMID = "Escolher Ordem"
 
 Private Sub CmdCancelar_Click()
-    lRETU = False
-    Unload Me
+  lRETU = False
+  Unload Me
 End Sub
 
 Private Sub Form_Load()
-    Dim nLEN As Integer
+  Dim nLEN As Integer
 
-    
 
-CenterFormToScreen Me
-    Me.Caption = cFORMID
-    HelpContextID = nFORMID
 
-    'CentralizaJanela Me
+  CenterFormToScreen Me
+  Me.Caption = cFORMID
+  HelpContextID = nFORMID
 
-    lRETU = False
-    eRETU01 = 0
-    nLEN = UBound(ePASS01)
-    ''nLEN = nLEN ''aRRAY comeca 0
-    List.Clear
-    For x = 0 To nLEN
-        List.AddItem ePASS01(x)
-    Next x
-    HelpContextID = nFORMID
-    Me.Caption = cFORMID
+  'CentralizaJanela Me
+
+  lRETU = False
+  eRETU01 = 0
+  nLEN = UBound(ePASS01)
+  ''nLEN = nLEN ''aRRAY comeca 0
+  List.Clear
+  For x = 0 To nLEN
+    List.AddItem ePASS01(x)
+  Next x
+  HelpContextID = nFORMID
+  Me.Caption = cFORMID
 
 End Sub
 
 Private Sub List_Click()
-    lRETU = True
-    eRETU01 = List.ListIndex
-    Unload Me
-    
+  lRETU = True
+  eRETU01 = List.ListIndex
+  Unload Me
+
 End Sub
 

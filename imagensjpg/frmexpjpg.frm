@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form Frmexpjpg 
    Caption         =   "Exportando "
    ClientHeight    =   5955
@@ -23,7 +23,7 @@ Begin VB.Form Frmexpjpg
       Visible         =   0   'False
       Width           =   1575
    End
-   Begin vbccr18.SpinBox QtdeDigitos 
+   Begin VBCCR18.SpinBox QtdeDigitos 
       Height          =   375
       Left            =   3000
       TabIndex        =   6
@@ -36,7 +36,7 @@ Begin VB.Form Frmexpjpg
       Value           =   8
       TextAlignment   =   1
    End
-   Begin vbccr18.FrameW FrameW1 
+   Begin VBCCR18.FrameW FrameW1 
       Height          =   2055
       Left            =   240
       TabIndex        =   12
@@ -53,7 +53,7 @@ Begin VB.Form Frmexpjpg
          Top             =   1320
          Width           =   2295
       End
-      Begin vbccr18.CheckBoxW TiraCaracter 
+      Begin VBCCR18.CheckBoxW TiraCaracter 
          Height          =   375
          Left            =   240
          TabIndex        =   7
@@ -64,7 +64,7 @@ Begin VB.Form Frmexpjpg
          Value           =   1
          Caption         =   "Tira Caracters Pontuacao"
       End
-      Begin vbccr18.OptionButtonW PorNumero 
+      Begin VBCCR18.OptionButtonW PorNumero 
          Height          =   375
          Left            =   1560
          TabIndex        =   5
@@ -74,7 +74,7 @@ Begin VB.Form Frmexpjpg
          _ExtentY        =   661
          Caption         =   "Numero"
       End
-      Begin vbccr18.OptionButtonW PorCodigo 
+      Begin VBCCR18.OptionButtonW PorCodigo 
          Height          =   375
          Left            =   240
          TabIndex        =   4
@@ -210,186 +210,186 @@ Option Explicit
 Dim cCAMJPG As String
 
 Private Sub cmdBrowseFolder_Click()
-   Dim picbrowse As String
-   picbrowse = BrowseFolders(Me.hWnd, "Choose a location picture", BrowseForFolders, CSIDL_DESKTOP)
-    If picbrowse <> "" Then
-        Caminho.Caption = picbrowse & "\"
-        cCAMJPG = picbrowse & "\"
-    End If
+  Dim picbrowse As String
+  picbrowse = BrowseFolders(Me.hWnd, "Choose a location picture", BrowseForFolders, CSIDL_DESKTOP)
+  If picbrowse <> "" Then
+    Caminho.Caption = picbrowse & "\"
+    cCAMJPG = picbrowse & "\"
+  End If
 End Sub
 
 
 Private Sub CmdEncerrar_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 Private Sub CmdImportar_Click()
-    Dim OBJCONN As ADODB.Connection
-    Dim OBJRSGLOB As ADODB.Recordset
-    Dim strSQL As String
-    Dim DBCONNSTR As String
-    Dim iFileNum As Integer
-    Dim lFileLength As Long
-    Dim abBytes() As Byte
-    Dim sTEMPFILE As String
-    Dim cCAMPO As String
-    Set OBJCONN = New ADODB.Connection           'Create a new object
-    Set OBJRSGLOB = New ADODB.Recordset
+  Dim OBJCONN As ADODB.Connection
+  Dim OBJRSGLOB As ADODB.Recordset
+  Dim strSQL As String
+  Dim DBCONNSTR As String
+  Dim iFileNum As Integer
+  Dim lFileLength As Long
+  Dim abBytes() As Byte
+  Dim sTEMPFILE As String
+  Dim cCAMPO As String
+  Set OBJCONN = New ADODB.Connection           'Create a new object
+  Set OBJRSGLOB = New ADODB.Recordset
 
 
-    cCAMPO = "IMAGEM"
-    DBCONNSTR = GeracArq(cARQRTF)
-    OBJCONN.Open DBCONNSTR
-    If InStr(cARQRTF, "PF.MDB") > 0 Then
-        strSQL = "SELECT CODINT AS NUMERO,FIG01 FROM PFS where (codint is not null) and codint<>''"
-        cCAMPO = "FIG01"
-    Else
-        strSQL = "SELECT * FROM imagens where numero>0"
-    End If
-    OBJRSGLOB.Open strSQL, OBJCONN, adOpenForwardOnly, adLockOptimistic
+  cCAMPO = "IMAGEM"
+  DBCONNSTR = GeracArq(cARQRTF)
+  OBJCONN.Open DBCONNSTR
+  If InStr(cARQRTF, "PF.MDB") > 0 Then
+    strSQL = "SELECT CODINT AS NUMERO,FIG01 FROM PFS where (codint is not null) and codint<>''"
+    cCAMPO = "FIG01"
+  Else
+    strSQL = "SELECT * FROM imagens where numero>0"
+  End If
+  OBJRSGLOB.Open strSQL, OBJCONN, adOpenForwardOnly, adLockOptimistic
 
-    If Not OBJRSGLOB.RecordCount = 0 Then
-        Do While (Not OBJRSGLOB.EOF)
-            If IsNull(OBJRSGLOB(cCAMPO)) Then
-                lFileLength = 0
-            Else
-                lFileLength = LenB(OBJRSGLOB(cCAMPO))
-            End If
-            If lFileLength > 1 Then              ' Ja carregado
-            Else
-                If PorCodigo.Value = True Then
-                    If TiraCaracter.Value = vbChecked Then
-                        sTEMPFILE = cCAMJPG & Trim(TiraOut(OBJRSGLOB.Fields("codigo"))) + ".JPG"
-                    Else
-                        sTEMPFILE = cCAMJPG & Trim(OBJRSGLOB.Fields("codigo")) + ".JPG"
-                    End If
-                Else
-                    sTEMPFILE = cCAMJPG & Trim(StrZero(OBJRSGLOB.Fields("NUMERO"), QtdeDigitos.Value)) + ".JPG"
-                End If
-                If FileExist(sTEMPFILE) Then
-                    ccodigo.Caption = OBJRSGLOB.Fields("CODIGO")
-                    iFileNum = FreeFile
-                    Open sTEMPFILE For Binary Access Read As #iFileNum
-                    lFileLength = LOF(iFileNum)
-                    ReDim abBytes(lFileLength)
-                    Get #iFileNum, , abBytes()
-                    Close #iFileNum
-                    OBJRSGLOB.Fields(cCAMPO).AppendChunk abBytes()
-                    OBJRSGLOB.Update
-                End If
-            End If
-            OBJRSGLOB.MoveNext
-        Loop
-    End If
-    ccodigo.Caption = ""
-    Alert ("Importacao Concluida")
+  If Not OBJRSGLOB.RecordCount = 0 Then
+    Do While (Not OBJRSGLOB.EOF)
+      If IsNull(OBJRSGLOB(cCAMPO)) Then
+        lFileLength = 0
+      Else
+        lFileLength = LenB(OBJRSGLOB(cCAMPO))
+      End If
+      If lFileLength > 1 Then              ' Ja carregado
+      Else
+        If PorCodigo.Value = True Then
+          If TiraCaracter.Value = vbChecked Then
+            sTEMPFILE = cCAMJPG & Trim(TiraOut(OBJRSGLOB.Fields("codigo"))) + ".JPG"
+          Else
+            sTEMPFILE = cCAMJPG & Trim(OBJRSGLOB.Fields("codigo")) + ".JPG"
+          End If
+        Else
+          sTEMPFILE = cCAMJPG & Trim(StrZero(OBJRSGLOB.Fields("NUMERO"), QtdeDigitos.Value)) + ".JPG"
+        End If
+        If FileExist(sTEMPFILE) Then
+          ccodigo.Caption = OBJRSGLOB.Fields("CODIGO")
+          iFileNum = FreeFile
+          Open sTEMPFILE For Binary Access Read As #iFileNum
+          lFileLength = LOF(iFileNum)
+          ReDim abBytes(lFileLength)
+          Get #iFileNum, , abBytes()
+          Close #iFileNum
+          OBJRSGLOB.Fields(cCAMPO).AppendChunk abBytes()
+          OBJRSGLOB.Update
+        End If
+      End If
+      OBJRSGLOB.MoveNext
+    Loop
+  End If
+  ccodigo.Caption = ""
+  Alert ("Importacao Concluida")
 
 End Sub
 
 Private Sub Cmdiniciar_Click()
-    Dim OBJCONN As ADODB.Connection
-    Dim OBJRSGLOB As ADODB.Recordset
-    Dim strSQL As String
-    Dim CSQLI As String
-    Dim DBCONNSTR As String
-    Dim iFileNum As Integer
-    Dim lFileLength As Long
-    Dim abBytes() As Byte
-    Dim sTEMPFILE As String
-    Dim cCAMPO As String
-    Dim cCODIGOGRV As String
-    Set OBJCONN = New ADODB.Connection           'Create a new object
-    Set OBJRSGLOB = New ADODB.Recordset
-    cCAMPO = "IMAGEM"
-    DBCONNSTR = GeracArq(cARQRTF)
-    OBJCONN.Open DBCONNSTR
-    If InStr(cARQRTF, "PF.MDB") > 0 Then
-        strSQL = "SELECT CODINT AS NUMERO,FIG01 FROM PFS where (codint is not null) and codint<>''"
-        cCAMPO = "FIG01"
-    Else
-        strSQL = "SELECT * FROM imagens where numero>0"
-    End If
-    If InStr(UCase(cARQRTF), "OL_LOGIX") > 0 Then
-       'strSQL = " SELECT"
-       'strSQL = strSQL & " FIRST 10 CAST(EMPRESA || TRIM(STRZERO(MATRICULA,8)) AS CHAR(10)) AS CODIGO,"
-       'strSQL = strSQL & " MATRICULA AS NUMERO,LEN(FOTO) AS TAMANHO,"
-       'strSQL = strSQL & " FOTO"
-       'strSQL = strSQL & " From rhu_funcio_foto"
-       'strSQL = strSQL & " where foto is not null "
-       'cCAMPO = "FOTO"
-       strSQL = " SELECT CAST(EMPRESA || TRIM(STRZERO(MATRICULA,8)) AS CHAR(10)) AS CODIGO, empresa, matricula as numero from rhu_funcio_foto"
-       
-    End If
-    If InStr(UCase(cARQRTF), "DATAMACE") > 0 Then
-        strSQL = " SELECT"
-        strSQL = strSQL & " RIGHT(TAB_CADFUN.FUN_COD_EMP,2) + RIGHT(FORMAT(TAB_CADFUN.FUN_REGISTRO,'00000000'),8) AS CODIGO"
-        strSQL = strSQL & " ,FUN_REGISTRO as numero"
-        strSQL = strSQL & " ,fotos.BN_FOTO as FOTO "
-        strSQL = strSQL & " FROM gip.fotos AS gip"
-        strSQL = strSQL & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
-        strSQL = strSQL & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
-        strSQL = strSQL & " Where TAB_CADFUN.FUN_REGISTRO Is Not Null "
-        cCAMPO = "FOTO"
-    End If
+  Dim OBJCONN As ADODB.Connection
+  Dim OBJRSGLOB As ADODB.Recordset
+  Dim strSQL As String
+  Dim CSQLI As String
+  Dim DBCONNSTR As String
+  Dim iFileNum As Integer
+  Dim lFileLength As Long
+  Dim abBytes() As Byte
+  Dim sTEMPFILE As String
+  Dim cCAMPO As String
+  Dim cCODIGOGRV As String
+  Set OBJCONN = New ADODB.Connection           'Create a new object
+  Set OBJRSGLOB = New ADODB.Recordset
+  cCAMPO = "IMAGEM"
+  DBCONNSTR = GeracArq(cARQRTF)
+  OBJCONN.Open DBCONNSTR
+  If InStr(cARQRTF, "PF.MDB") > 0 Then
+    strSQL = "SELECT CODINT AS NUMERO,FIG01 FROM PFS where (codint is not null) and codint<>''"
+    cCAMPO = "FIG01"
+  Else
+    strSQL = "SELECT * FROM imagens where numero>0"
+  End If
+  If InStr(UCase(cARQRTF), "OL_LOGIX") > 0 Then
+    'strSQL = " SELECT"
+    'strSQL = strSQL & " FIRST 10 CAST(EMPRESA || TRIM(STRZERO(MATRICULA,8)) AS CHAR(10)) AS CODIGO,"
+    'strSQL = strSQL & " MATRICULA AS NUMERO,LEN(FOTO) AS TAMANHO,"
+    'strSQL = strSQL & " FOTO"
+    'strSQL = strSQL & " From rhu_funcio_foto"
+    'strSQL = strSQL & " where foto is not null "
+    'cCAMPO = "FOTO"
+    strSQL = " SELECT CAST(EMPRESA || TRIM(STRZERO(MATRICULA,8)) AS CHAR(10)) AS CODIGO, empresa, matricula as numero from rhu_funcio_foto"
 
-    
-    
-    OBJRSGLOB.Open strSQL, OBJCONN, adOpenForwardOnly, adLockReadOnly
-    If Not OBJRSGLOB.RecordCount = 0 Then        'not Have
-        Do While (Not OBJRSGLOB.EOF)
-            ccodigo.Caption = OBJRSGLOB.Fields("CODIGO")
-            sTEMPFILE = cCAMJPG
-            If SepararEmpresa.Value = True Or SepararEmpresa.Value = 1 Then
-               sTEMPFILE = sTEMPFILE & Left(ccodigo, 2) & "\"
-            End If
-            If PorCodigo.Value = True Then
-                If TiraCaracter.Value = vbChecked Then
-                    cCODIGOGRV = Trim(TiraOut(OBJRSGLOB.Fields("codigo")))
-                Else
-                    cCODIGOGRV = Trim(OBJRSGLOB.Fields("codigo"))
-                End If
-                
-                If SepararEmpresa.Value = True Or SepararEmpresa.Value = 1 Then
-                    cCODIGOGRV = Mid(cCODIGOGRV, 3)
-                End If
-            Else
-                cCODIGOGRV = Trim(StrZero(OBJRSGLOB.Fields("NUMERO"), QtdeDigitos.Value))
-            End If
-            sTEMPFILE = sTEMPFILE & cCODIGOGRV + ".JPG"
-            If InStr(UCase(cARQRTF), "OL_LOGIX") > 0 Then
-              CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & OBJRSGLOB.Fields("NUMERO")
-              CSQLI = CSQLI & " and empresa=" & OBJRSGLOB.Fields("EMPRESA")
-              If ADOPegBlob(cARQRTF, CSQLI, Picture1) Then
-                  PicSave.SavePicture Picture1.Picture, sTEMPFILE, fmtJPEG, 70
-                 'salvarpict Me, Picture1, sTEMPFILE
-              End If
-            Else
-                If Not IsNull(OBJRSGLOB.Fields(cCAMPO)) Then
-                    lFileLength = FixInt(LenB(OBJRSGLOB(cCAMPO)))
-                    If lFileLength = 0 And InStr(UCase(cARQRTF), "OL_LOGIX") Then
-                       lFileLength = FixInt(OBJRSGLOB("TAMANHO"))
-                    End If
-                    If lFileLength > 0 Then
-                        iFileNum = FreeFile
-                        Open sTEMPFILE For Binary As #iFileNum
-                        abBytes = OBJRSGLOB(cCAMPO).GetChunk(lFileLength)
-                        Put #iFileNum, , abBytes()
-                        Close #iFileNum
-                    End If
-                End If
-            End If
-            OBJRSGLOB.MoveNext
-        Loop
-    End If
-    Alert ("Exportaçao Concluida")
+  End If
+  If InStr(UCase(cARQRTF), "DATAMACE") > 0 Then
+    strSQL = " SELECT"
+    strSQL = strSQL & " RIGHT(TAB_CADFUN.FUN_COD_EMP,2) + RIGHT(FORMAT(TAB_CADFUN.FUN_REGISTRO,'00000000'),8) AS CODIGO"
+    strSQL = strSQL & " ,FUN_REGISTRO as numero"
+    strSQL = strSQL & " ,fotos.BN_FOTO as FOTO "
+    strSQL = strSQL & " FROM gip.fotos AS gip"
+    strSQL = strSQL & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
+    strSQL = strSQL & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
+    strSQL = strSQL & " Where TAB_CADFUN.FUN_REGISTRO Is Not Null "
+    cCAMPO = "FOTO"
+  End If
+
+
+
+  OBJRSGLOB.Open strSQL, OBJCONN, adOpenForwardOnly, adLockReadOnly
+  If Not OBJRSGLOB.RecordCount = 0 Then        'not Have
+    Do While (Not OBJRSGLOB.EOF)
+      ccodigo.Caption = OBJRSGLOB.Fields("CODIGO")
+      sTEMPFILE = cCAMJPG
+      If SepararEmpresa.Value = True Or SepararEmpresa.Value = 1 Then
+        sTEMPFILE = sTEMPFILE & Left(ccodigo, 2) & "\"
+      End If
+      If PorCodigo.Value = True Then
+        If TiraCaracter.Value = vbChecked Then
+          cCODIGOGRV = Trim(TiraOut(OBJRSGLOB.Fields("codigo")))
+        Else
+          cCODIGOGRV = Trim(OBJRSGLOB.Fields("codigo"))
+        End If
+
+        If SepararEmpresa.Value = True Or SepararEmpresa.Value = 1 Then
+          cCODIGOGRV = Mid(cCODIGOGRV, 3)
+        End If
+      Else
+        cCODIGOGRV = Trim(StrZero(OBJRSGLOB.Fields("NUMERO"), QtdeDigitos.Value))
+      End If
+      sTEMPFILE = sTEMPFILE & cCODIGOGRV + ".JPG"
+      If InStr(UCase(cARQRTF), "OL_LOGIX") > 0 Then
+        CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & OBJRSGLOB.Fields("NUMERO")
+        CSQLI = CSQLI & " and empresa=" & OBJRSGLOB.Fields("EMPRESA")
+        If ADOPegBlob(cARQRTF, CSQLI, Picture1) Then
+          PicSave.SavePicture Picture1.Picture, sTEMPFILE, fmtJPEG, 70
+          'salvarpict Me, Picture1, sTEMPFILE
+        End If
+      Else
+        If Not IsNull(OBJRSGLOB.Fields(cCAMPO)) Then
+          lFileLength = FixInt(LenB(OBJRSGLOB(cCAMPO)))
+          If lFileLength = 0 And InStr(UCase(cARQRTF), "OL_LOGIX") Then
+            lFileLength = FixInt(OBJRSGLOB("TAMANHO"))
+          End If
+          If lFileLength > 0 Then
+            iFileNum = FreeFile
+            Open sTEMPFILE For Binary As #iFileNum
+            abBytes = OBJRSGLOB(cCAMPO).GetChunk(lFileLength)
+            Put #iFileNum, , abBytes()
+            Close #iFileNum
+          End If
+        End If
+      End If
+      OBJRSGLOB.MoveNext
+    Loop
+  End If
+  Alert ("Exportaçao Concluida")
 End Sub
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    Me.Caption = cFORMID
-    HelpContextID = nFORMID
-    
-    cCAMJPG = PegPath("PATH", "IMGJPG")
-    Caminho.Caption = cCAMJPG
+  CenterFormToScreen Me
+  Me.Caption = cFORMID
+  HelpContextID = nFORMID
+
+  cCAMJPG = PegPath("PATH", "IMGJPG")
+  Caminho.Caption = cCAMJPG
 End Sub
 
 Private Sub XPButton5_Click()

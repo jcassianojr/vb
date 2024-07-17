@@ -67,181 +67,181 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Apaga_Click()
-    Dim cARQ As String
-    Dim sSQL As String
-   
+  Dim cARQ As String
+  Dim sSQL As String
 
 
-    Grid.Col = 0
-    cMENU = Grid
-    Grid.Col = 1
-    cTIPO = Grid
-    Grid.Col = 2
-    iMENU = Grid
-    cARQ = Dbname
 
-   
-   
+  Grid.Col = 0
+  cMENU = Grid
+  Grid.Col = 1
+  cTIPO = Grid
+  Grid.Col = 2
+  iMENU = Grid
+  cARQ = Dbname
+
+
+
+  '******************************************************************
+  'CONTROLE
+  sSQL = "select * from controle WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU
+  '******************************************************************
+
+  If ApagaSQLP(cARQ, sSQL) Then
+
     '******************************************************************
-    'CONTROLE
-    sSQL = "select * from controle WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU
+    'USUARIO
+    sSQL = "select * from USUCAD WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU
     '******************************************************************
 
-    If ApagaSQLP(cARQ, sSQL) Then
-
-        '******************************************************************
-        'USUARIO
-        sSQL = "select * from USUCAD WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU
-        '******************************************************************
-
-        ApagaSQL cARQ, sSQL
-        FilRelat
-    End If
+    ApagaSQL cARQ, sSQL
+    FilRelat
+  End If
 
 End Sub
 
 Private Sub cmdPADRAO()
-    Dim cARQ, cNOME As String
-    cNOME = InputBox("Digite o Nome", "Inclusão Botoes Padrão", " ")
-    cNOME = Left$(cNOME, 50)
-   
-    cARQ = Dbname
-   
-   
-    IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
-        Array(cNOME, 1, 1, "&Novo", "Incluir Registro", "Toolbar1", False)
-    IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
-        Array(cNOME, 2, 13, "&Editar", "Editar Registro", "Toolbar1", False)
-    IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
-        Array(cNOME, 3, 3, "E&xcluir", "EXcluir Registro", "Toolbar1", False)
-    IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
-        Array(cNOME, 4, 4, "&Localizar", "Localizar Registro", "Toolbar1", True)
-    IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
-        Array(cNOME, 5, 6, "&Imprimir", "Imprimir Registro", "Toolbar1", True)
-    IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
-        Array(cNOME, 6, 11, "Es&colher", "Escolher Registro", "Toolbar1", True)
-    IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
-        Array(cNOME, 7, 14, "&ordenar", "Ordenar", "Toolbar1", True)
-    IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
-        Array(cNOME, 8, 15, "&filtrar", "filtrar", "Toolbar1", True)
-    IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
-        Array(cNOME, 9, 19, "&Sair", "Sair/Retornar", "Toolbar1", True)
-            
-    FilRelat
+  Dim cARQ, cNOME As String
+  cNOME = InputBox("Digite o Nome", "Inclusão Botoes Padrão", " ")
+  cNOME = Left$(cNOME, 50)
+
+  cARQ = Dbname
+
+
+  IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
+            Array(cNOME, 1, 1, "&Novo", "Incluir Registro", "Toolbar1", False)
+  IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
+            Array(cNOME, 2, 13, "&Editar", "Editar Registro", "Toolbar1", False)
+  IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
+            Array(cNOME, 3, 3, "E&xcluir", "EXcluir Registro", "Toolbar1", False)
+  IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
+            Array(cNOME, 4, 4, "&Localizar", "Localizar Registro", "Toolbar1", True)
+  IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
+            Array(cNOME, 5, 6, "&Imprimir", "Imprimir Registro", "Toolbar1", True)
+  IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
+            Array(cNOME, 6, 11, "Es&colher", "Escolher Registro", "Toolbar1", True)
+  IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
+            Array(cNOME, 7, 14, "&ordenar", "Ordenar", "Toolbar1", True)
+  IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
+            Array(cNOME, 8, 15, "&filtrar", "filtrar", "Toolbar1", True)
+  IncluiSQL cARQ, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
+            Array(cNOME, 9, 19, "&Sair", "Sair/Retornar", "Toolbar1", True)
+
+  FilRelat
 
 End Sub
 
 Private Sub CmdSair_Click()
 
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 
 End Sub
 
 Private Sub Edit_Click()
 
-    Grid.Col = 0
-    cMENU = Grid
-    Grid.Col = 1
-    cTIPO = Grid
-    Grid.Col = 2
-    iMENU = Grid
-    frmBTN.Show vbModal
-    FilRelat
+  Grid.Col = 0
+  cMENU = Grid
+  Grid.Col = 1
+  cTIPO = Grid
+  Grid.Col = 2
+  iMENU = Grid
+  frmBTN.Show vbModal
+  FilRelat
 
 End Sub
 
 Private Sub FilRelat()
 
-    Dim cARQ, cSQL As String
+  Dim cARQ, cSQL As String
 
-    cARQ = Dbname
-    cSQL = "SELECT FORM,CONTROLE,INDICE,IMAGEM,CAPTION,DISPONIVEL FROM CONTROLE ORDER BY FORM,CONTROLE,INDICE"
-    MontaGridFast Grid, 6, Array(1600, 1000, 400, 400, 1600, 400), Array("Tela", "Botao", "Ord", "Icone", "Operaçao", "L"), _
-        Array("FORM", "CONTROLE", "INDICE", "IMAGEM", "CAPTION", "DISPONIVEL"), cARQ, cSQL
-    'MontaGridUltra Grid, 6, Array(1600, 1000, 400, 400, 1600, 400), Array("Tela", "Botao", "Ord", "Icone", "Operaçao", "L"), _
-    Array("FORM", "CONTROLE", "INDICE", "IMAGEM", "CAPTION", "DISPONIVEL"), cARQ, cSQL
-    'campo boleano
+  cARQ = Dbname
+  cSQL = "SELECT FORM,CONTROLE,INDICE,IMAGEM,CAPTION,DISPONIVEL FROM CONTROLE ORDER BY FORM,CONTROLE,INDICE"
+  MontaGridFast Grid, 6, Array(1600, 1000, 400, 400, 1600, 400), Array("Tela", "Botao", "Ord", "Icone", "Operaçao", "L"), _
+                Array("FORM", "CONTROLE", "INDICE", "IMAGEM", "CAPTION", "DISPONIVEL"), cARQ, cSQL
+  'MontaGridUltra Grid, 6, Array(1600, 1000, 400, 400, 1600, 400), Array("Tela", "Botao", "Ord", "Icone", "Operaçao", "L"), _
+   Array("FORM", "CONTROLE", "INDICE", "IMAGEM", "CAPTION", "DISPONIVEL"), cARQ, cSQL
+  'campo boleano
 
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    FilRelat
-    If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
-    xmontatoolbar Me.Toolbar1, "escBTN", True
+  CenterFormToScreen Me
+  FilRelat
+  If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
+  xmontatoolbar Me.Toolbar1, "escBTN", True
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 End Sub
 
 'Private Sub Grid_SelChange()
- '   With Grid
-  '      If .Rows > 2 Then
-   '         .Col = .Cols - 1
-    '        .ColSel = 0
-     '       .TopRow = .Row
-     '   End If
-    'End With
+'   With Grid
+'      If .Rows > 2 Then
+'         .Col = .Cols - 1
+'        .ColSel = 0
+'       .TopRow = .Row
+'   End If
+'End With
 'End Sub
 
 Private Sub LIB_Click()
 
-    Grid.Col = 0
-    cMENU = Grid
-    Grid.Col = 1
-    cTIPO = Grid
-    Grid.Col = 2
-    iMENU = Grid
-    escbtnusr.Show vbModal
+  Grid.Col = 0
+  cMENU = Grid
+  Grid.Col = 1
+  cTIPO = Grid
+  Grid.Col = 2
+  iMENU = Grid
+  escbtnusr.Show vbModal
 
 End Sub
 
 Private Sub Novo_Click()
-    IncluiSQL Dbname, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
-        Array("esc", 1, 1, "&", " ", "Toolbar1", False)
-    FilRelat
+  IncluiSQL Dbname, "CONTROLE", 7, Array("FORM", "INDICE", "IMAGEM", "CAPTION", "TOOLTIP", "CONTROLE", "DISPONIVEL"), _
+            Array("esc", 1, 1, "&", " ", "Toolbar1", False)
+  FilRelat
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Dim sButton          As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    
-    If Not AcessaBtnOld("escBTN", Button.Index) Then
-        Exit Sub
-    End If
-    
-    GravaLog 0, Button.Index, sButton, "escBTN"
-    
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
 
-    Select Case sButton
+  If Not AcessaBtnOld("escBTN", Button.Index) Then
+    Exit Sub
+  End If
 
-    Case "NOV"
-        Novo_Click
+  GravaLog 0, Button.Index, sButton, "escBTN"
 
-    Case "EDI"
-        Edit_Click
 
-    Case "EXC"
-        Apaga_Click
+  Select Case sButton
 
-    Case "LIB"
-        LIB_Click
+  Case "NOV"
+    Novo_Click
 
-    Case "LOC"
-        LocalizaGri1 Grid
+  Case "EDI"
+    Edit_Click
 
-    Case "PAD"
-        cmdPADRAO
-    Case "SAI"
-        CmdSair_Click
+  Case "EXC"
+    Apaga_Click
 
-    End Select
+  Case "LIB"
+    LIB_Click
+
+  Case "LOC"
+    LocalizaGri1 Grid
+
+  Case "PAD"
+    cmdPADRAO
+  Case "SAI"
+    CmdSair_Click
+
+  End Select
 
 End Sub
 

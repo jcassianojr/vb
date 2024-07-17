@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Begin VB.Form frmFER 
    Caption         =   "Cadastro Ferramenta"
    ClientHeight    =   6405
@@ -1884,176 +1884,176 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub cmdFOTO_Click()
-    zgrp = txtCodigo.Text
-    iImage = 3
-    cARQRTF = PegPath("PATH", "IMGFER")
-    Load frmIMAGENS
-    frmIMAGENS.TXTFIELDS(0).Enabled = False
-    frmIMAGENS.Escolher(0).Visible = False
-    frmIMAGENS.Show vbModal, Me
+  zgrp = TxtCodigo.tEXT
+  iImage = 3
+  cARQRTF = PegPath("PATH", "IMGFER")
+  Load frmIMAGENS
+  frmIMAGENS.TXTFIELDS(0).Enabled = False
+  frmIMAGENS.Escolher(0).Visible = False
+  frmIMAGENS.Show vbModal, Me
 End Sub
 
 Private Sub Command20_Click()
-    Dim X
-    Dim cTEMP As String
-    If Not MDG("Trocar Tipo Almofada") Then
-        Exit Sub
-    End If
-    If TXTFIELDS(6).Text = "6" Then
-        TXTFIELDS(6).Text = "8"
+  Dim x
+  Dim cTEMP As String
+  If Not MDG("Trocar Tipo Almofada") Then
+    Exit Sub
+  End If
+  If TXTFIELDS(6).tEXT = "6" Then
+    TXTFIELDS(6).tEXT = "8"
+  Else
+    TXTFIELDS(6).tEXT = "6"
+  End If
+  For x = 1 To 8
+    If TXTFIELDS(6).tEXT = "6" Then
+      cTEMP = String(6, "¡") + Space(2)
+      If x >= 5 Then
+        cTEMP = Space(8)
+      End If
     Else
-        TXTFIELDS(6).Text = "6"
+      cTEMP = String(8, "¡")
     End If
-    For X = 1 To 8
-        If TXTFIELDS(6).Text = "6" Then
-            cTEMP = String(6, "¡") + Space(2)
-            If X >= 5 Then
-                cTEMP = Space(8)
-            End If
-        Else
-            cTEMP = String(8, "¡")
-        End If
-        TXTFIELDS(10 + X).Text = cTEMP
-    Next
+    TXTFIELDS(10 + x).tEXT = cTEMP
+  Next
 End Sub
 
 Private Sub Command4_Click()
-    Dim cARQ As String
-    Dim aRETU As Variant
-    Dim sSQL             As String
-    Dim nNUMERO          As Long
-    nNUMERO = FixInt(TXTFIELDS(7), 0)
-    cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
-    aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
-    If lRETU Then
-        TXTFIELDS(8) = aRETU(0)
-    End If
+  Dim cARQ As String
+  Dim aRETU As Variant
+  Dim sSQL As String
+  Dim nNUMERO As Long
+  nNUMERO = FixInt(TXTFIELDS(7), 0)
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
+  sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
+  aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
+  If lRETU Then
+    TXTFIELDS(8) = aRETU(0)
+  End If
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub esc1_Click(Index As Integer)
-    Dim linha
-    Dim coluna
-    Dim cTEMP As String
-    Dim cDIG As String
-    Dim cGRV As String
-    linha = (Int((Index - 1) / 8)) + 1
-    coluna = (Index + 8) - (linha * 8)
-    'Alert coluna
-    'ALERT LINHA
-    If TXTFIELDS(6).Text = "6" And linha > 4 Then
-        Alert ("Linha Incorreta para Formato 4x6")
-        Exit Sub
-    End If
-    If TXTFIELDS(6).Text = "6" And coluna > 6 Then
-        Alert ("Coluna Incorreta para Formato 4x6")
-        Exit Sub
-    End If
-    cTEMP = TXTFIELDS(10 + linha).Text
-    cDIG = Mid(cTEMP, coluna, 1)
-    If cDIG = "l" Then
-        cDIG = "¡"
-    Else
-        cDIG = "l"
-    End If
-    Select Case coluna
-    Case 1
-        cGRV = cDIG & Mid(cTEMP, 2, 7)
-    Case 8
-        cGRV = Mid(cTEMP, 1, 7) + cDIG
-    Case Else
-        cGRV = Mid(cTEMP, 1, coluna - 1) + cDIG + Mid(cTEMP, coluna + 1)
-    End Select
-    TXTFIELDS(10 + linha).Text = cGRV
-    TXTFIELDS(10 + linha).Refresh
+  Dim linha
+  Dim coluna
+  Dim cTEMP As String
+  Dim cDIG As String
+  Dim cGRV As String
+  linha = (Int((Index - 1) / 8)) + 1
+  coluna = (Index + 8) - (linha * 8)
+  'Alert coluna
+  'ALERT LINHA
+  If TXTFIELDS(6).tEXT = "6" And linha > 4 Then
+    Alert ("Linha Incorreta para Formato 4x6")
+    Exit Sub
+  End If
+  If TXTFIELDS(6).tEXT = "6" And coluna > 6 Then
+    Alert ("Coluna Incorreta para Formato 4x6")
+    Exit Sub
+  End If
+  cTEMP = TXTFIELDS(10 + linha).tEXT
+  cDIG = Mid(cTEMP, coluna, 1)
+  If cDIG = "l" Then
+    cDIG = "¡"
+  Else
+    cDIG = "l"
+  End If
+  Select Case coluna
+  Case 1
+    cGRV = cDIG & Mid(cTEMP, 2, 7)
+  Case 8
+    cGRV = Mid(cTEMP, 1, 7) + cDIG
+  Case Else
+    cGRV = Mid(cTEMP, 1, coluna - 1) + cDIG + Mid(cTEMP, coluna + 1)
+  End Select
+  TXTFIELDS(10 + linha).tEXT = cGRV
+  TXTFIELDS(10 + linha).Refresh
 End Sub
 
 Private Sub ESCCLI_Click(Index As Integer)
 
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
-    eRETU03 = ""
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  eRETU03 = ""
+  cARQESC = "MA01"
+  Select Case Index
+  Case 0
     cARQESC = "MA01"
-    Select Case Index
-    Case 0
-        cARQESC = "MA01"
-    Case 1
-        ePASS01 = "LOGIX"
-    Case 2
-        ePASS01 = "LOGIX"
-        cARQESC = "2DIG"
-    End Select
-    escNUMNOM.Show vbModal, Me
+  Case 1
+    ePASS01 = "LOGIX"
+  Case 2
+    ePASS01 = "LOGIX"
+    cARQESC = "2DIG"
+  End Select
+  escNUMNOM.Show vbModal, Me
 
-    If lRETU Then
+  If lRETU Then
 
-        TXTFIELDS(7) = eRETU01
-        TXTFIELDS(6) = eRETU03
+    TXTFIELDS(7) = eRETU01
+    TXTFIELDS(6) = eRETU03
 
-    End If
+  End If
 
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = GeraConn(PegPath("PATH", "MANA5FER"), "SDECDX")
-    cSQL = "select "
-    cSQL = cSQL & " FERRAM , QTDEBASE, HRBAS, VDBAS, VDHBAS, COGCLI, CLIENTE, ESQTIP, USADEMI, USADISP, PRATILE, OBST01,"
-    cSQL = cSQL & " ESQL01 , ESQL02, ESQL03, ESQL04, ESQL05, ESQL06, ESQL07, ESQL08"
-    cSQL = cSQL & " FROM FERRAM WHERE FERRAM='" & LTrim(RTrim(ePASS01)) & "'"
-    txtCodigo.Text = ePASS01
-    TxtNumero.Text = ePASS02
-    txtNome.Text = ePASS03
-    nCAMPOS = 18
-    aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "COGCLI", "CLIENTE", "ESQTIP", "USADEMI", "USADISP", "PRATILE", "OBST01", _
-                 "ESQL01", "ESQL02", "ESQL03", "ESQL04", "ESQL05", "ESQL06", "ESQL07", "ESQL08")
-    aFOR = Array("N", "N", "N", "N", "C", "NI", "C", "C", "C", "C", "C", _
-                 "C", "C", "C", "C", "C", "C", "C", "C")
-    aPAD = Array(0, 0, 0, 0, "", 0, "", "", "", "", "", _
-                 "", "", "", "", "", "", "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
+  CenterFormToScreen Me
+  cARQ = GeraConn(PegPath("PATH", "MANA5FER"), "SDECDX")
+  cSQL = "select "
+  cSQL = cSQL & " FERRAM , QTDEBASE, HRBAS, VDBAS, VDHBAS, COGCLI, CLIENTE, ESQTIP, USADEMI, USADISP, PRATILE, OBST01,"
+  cSQL = cSQL & " ESQL01 , ESQL02, ESQL03, ESQL04, ESQL05, ESQL06, ESQL07, ESQL08"
+  cSQL = cSQL & " FROM FERRAM WHERE FERRAM='" & LTrim(RTrim(ePASS01)) & "'"
+  TxtCodigo.tEXT = ePASS01
+  TxtNumero.tEXT = ePASS02
+  TxtNome.tEXT = ePASS03
+  nCAMPOS = 18
+  aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "COGCLI", "CLIENTE", "ESQTIP", "USADEMI", "USADISP", "PRATILE", "OBST01", _
+               "ESQL01", "ESQL02", "ESQL03", "ESQL04", "ESQL05", "ESQL06", "ESQL07", "ESQL08")
+  aFOR = Array("N", "N", "N", "N", "C", "NI", "C", "C", "C", "C", "C", _
+               "C", "C", "C", "C", "C", "C", "C", "C")
+  aPAD = Array(0, 0, 0, 0, "", 0, "", "", "", "", "", _
+               "", "", "", "", "", "", "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub txtFields_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index <> 6 Then
-        KeyAscii = ValiText(KeyAscii, "#NI")
-    End If
+  If Index <> 6 Then
+    KeyAscii = ValiText(KeyAscii, "#NI")
+  End If
 End Sub
 
 

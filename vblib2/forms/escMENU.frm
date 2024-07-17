@@ -67,76 +67,76 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Apaga_Click()
-    Dim eRETU     As Variant
-    Dim cdb              As String
-    Dim sSQL As String
-    If Not MDG("Apagar Menu", "Confirme Exclusão") Then
-        Exit Sub
-    End If
+  Dim eRETU As Variant
+  Dim cdb As String
+  Dim sSQL As String
+  If Not MDG("Apagar Menu", "Confirme Exclusão") Then
+    Exit Sub
+  End If
 
-    Grid.Col = 0
-    cMENU = Grid
-    Grid.Col = 1
-    iMENU = Grid
-    cdb = Dbname
+  Grid.Col = 0
+  cMENU = Grid
+  Grid.Col = 1
+  iMENU = Grid
+  cdb = Dbname
 
-    '******************************************************************
-    'MENU
-    sSQL = "select * from MENU WHERE MENU='" & cMENU & "' AND INDICE=" & iMENU
-    '******************************************************************
+  '******************************************************************
+  'MENU
+  sSQL = "select * from MENU WHERE MENU='" & cMENU & "' AND INDICE=" & iMENU
+  '******************************************************************
 
-    eRETU = ApagaSQL(cdb, sSQL)
+  eRETU = ApagaSQL(cdb, sSQL)
 
-    '******************************************************************
-    'USUARIO
-    sSQL = "select * from MENUUSU WHERE MENU='" & cMENU & "' AND INDICE=" & iMENU
-    '******************************************************************
+  '******************************************************************
+  'USUARIO
+  sSQL = "select * from MENUUSU WHERE MENU='" & cMENU & "' AND INDICE=" & iMENU
+  '******************************************************************
 
-    eRETU = ApagaSQL(cdb, sSQL)
-    FilRelat
+  eRETU = ApagaSQL(cdb, sSQL)
+  FilRelat
 
 End Sub
 
 Private Sub CmdSair_Click()
 
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 
 End Sub
 
 Private Sub Edit_Click()
 
-    Grid.Col = 0
-    cMENU = Grid
-    Grid.Col = 1
-    iMENU = FixInt(Grid)
-    frmMENU.Show vbModal
-    FilRelat
+  Grid.Col = 0
+  cMENU = Grid
+  Grid.Col = 1
+  iMENU = FixInt(Grid)
+  frmMENU.Show vbModal
+  FilRelat
 
 End Sub
 
 Private Sub FilRelat()
-    Dim sSQL As String
-    On Error Resume Next
-    sSQL = "SELECT Menu,INDICE,descricao,CADASTRO FROM MENU ORDER BY MENU,INDICE"
-    '       MontaGridFast Grid, 4, Array(1600, 400, 4000, 400), Array("Nome", "I", "Descricao", "Cadastro"), _
-    Array("Menu", "Indice", "descricao", "Cadastro"), Dbname, sSQL
-    MontaGridUltra Grid, 4, Array(1600, 400, 4000, 400), Array("Nome", "I", "Descricao", "Cadastro"), _
-        Array("Menu", "Indice", "descricao", "Cadastro"), Dbname, sSQL
+  Dim sSQL As String
+  On Error Resume Next
+  sSQL = "SELECT Menu,INDICE,descricao,CADASTRO FROM MENU ORDER BY MENU,INDICE"
+  '       MontaGridFast Grid, 4, Array(1600, 400, 4000, 400), Array("Nome", "I", "Descricao", "Cadastro"), _
+          Array("Menu", "Indice", "descricao", "Cadastro"), Dbname, sSQL
+  MontaGridUltra Grid, 4, Array(1600, 400, 4000, 400), Array("Nome", "I", "Descricao", "Cadastro"), _
+                 Array("Menu", "Indice", "descricao", "Cadastro"), Dbname, sSQL
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    FilRelat
-    If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
-    xmontatoolbar Me.Toolbar1, "escMENU", True
+  CenterFormToScreen Me
+  FilRelat
+  If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
+  xmontatoolbar Me.Toolbar1, "escMENU", True
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
 
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 
 End Sub
@@ -154,55 +154,55 @@ End Sub
 
 Private Sub LIB_Click()
 
-    If Grid.Row > 0 Then
-        Grid.Col = 0
-        cMENU = Grid
-        Grid.Col = 1
-        iMENU = Grid
-        escmnuusr.Show vbModal
-        FilRelat
-    End If
+  If Grid.Row > 0 Then
+    Grid.Col = 0
+    cMENU = Grid
+    Grid.Col = 1
+    iMENU = Grid
+    escmnuusr.Show vbModal
+    FilRelat
+  End If
 End Sub
 
 Private Sub Novo_Click()
-    IncluiSQL Dbname, "SELECT * FROM MENU WHERE MENU='???' AND INDICE=0", 2, Array("MENU", "INDICE"), _
-        Array("???", 0), True, False
-    FilRelat
+  IncluiSQL Dbname, "SELECT * FROM MENU WHERE MENU='???' AND INDICE=0", 2, Array("MENU", "INDICE"), _
+            Array("???", 0), True, False
+  FilRelat
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Dim sButton          As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    
-    If Not AcessaBtnOld("escMENU", Button.Index) Then
-        Exit Sub
-    End If
-    GravaLog 0, Button.Index, sButton, "escMENU"
-    
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
 
-    Select Case sButton
+  If Not AcessaBtnOld("escMENU", Button.Index) Then
+    Exit Sub
+  End If
+  GravaLog 0, Button.Index, sButton, "escMENU"
 
-    Case "NOV"
-        Novo_Click
 
-    Case "EDI"
-        Edit_Click
+  Select Case sButton
 
-    Case "EXC"
-        Apaga_Click
+  Case "NOV"
+    Novo_Click
 
-    Case "LIB"
-        LIB_Click
+  Case "EDI"
+    Edit_Click
 
-    Case "LOC"
-        LocalizaGri1 Grid
+  Case "EXC"
+    Apaga_Click
 
-    Case "SAI"
-        CmdSair_Click
+  Case "LIB"
+    LIB_Click
 
-    End Select
+  Case "LOC"
+    LocalizaGri1 Grid
+
+  Case "SAI"
+    CmdSair_Click
+
+  End Select
 
 End Sub
 

@@ -71,88 +71,88 @@ Dim cORDEM As String
 Dim cSUBWHERE As String
 
 Private Sub Apaga_Click()
-    Dim sql              As String
-    Grid.Col = 0
-    zgrp = Grid
-    sql = "select * from IMAGENS WHERE CODIGO='" & zgrp & "'"
-    If ApagaSQLP(cARQRTF, sql, "Apagar Codigo") Then
-        FilRelat
-    End If
+  Dim sql As String
+  Grid.Col = 0
+  zgrp = Grid
+  sql = "select * from IMAGENS WHERE CODIGO='" & zgrp & "'"
+  If ApagaSQLP(cARQRTF, sql, "Apagar Codigo") Then
+    FilRelat
+  End If
 End Sub
 
 Private Sub CmdSair_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Edit_Click()
-    Grid.Col = 0
-    zgrp = Grid
-    frmIMAGENS.Show vbModal
-    FilRelat
+  Grid.Col = 0
+  zgrp = Grid
+  frmIMAGENS.Show vbModal
+  FilRelat
 End Sub
 
 Private Sub FilRelat()
-    Dim cARQ As String
-    Dim cSQL As String
-    cARQ = cARQRTF
-    If Len(cSUBWHERE) = 0 Then
-        cSQL = "SELECT CODIGO,NUMERO FROM IMAGENS ORDER BY " & cORDEM
-    Else
-        cSQL = "SELECT CODIGO,NUMERO FROM IMAGENS WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
-    End If
-    MontaGridUltra Grid, 2, Array(4000, 2000), Array("Codigo", "Numero"), _
-        Array("L$CODIGO", "L$NUMERO"), cARQ, cSQL
+  Dim cARQ As String
+  Dim cSQL As String
+  cARQ = cARQRTF
+  If Len(cSUBWHERE) = 0 Then
+    cSQL = "SELECT CODIGO,NUMERO FROM IMAGENS ORDER BY " & cORDEM
+  Else
+    cSQL = "SELECT CODIGO,NUMERO FROM IMAGENS WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
+  End If
+  MontaGridUltra Grid, 2, Array(4000, 2000), Array("Codigo", "Numero"), _
+                 Array("L$CODIGO", "L$NUMERO"), cARQ, cSQL
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    aORDEM = Array("CODIGO", "NUMERO")
-    aORDES = Array("CODIGO", "NUMERO")
-    cORDEM = "CODIGO"
-    cSUBWHERE = ""
-    Select Case iImage
-    Case 1
-        cARQRTF = PegPath("PATH", "IMGMA01")
-    Case 2
-        cARQRTF = PegPath("PATH", "IMGMS01")
-    Case 3
-        cARQRTF = PegPath("PATH", "IMGFER")
-    Case 4
-        cARQRTF = PegPath("PATH", "IMGME01")
-    Case 5
-        cARQRTF = PegPath("PATH", "IMGME04")
-    Case 6
-        ''frmcomp.Show vbModal, Me
-        ''If lRETU Then
-        ''    cARQRTF = Caminex(PegPath("PATH", "IMGMP04"), zANO, zMES, zEMPRESA)
-        ''End If
-        ''cARQRTF = Caminex(PegPath("PATH", "IMGMP04"), zANO, zMES, zEMPRESA)
-        cARQRTF = PegPath("PATH", "IMGMP04CPF")
-    Case 7
-        cARQRTF = PegPath("PATH", "IMGMU01")
-    Case 8
-        cARQRTF = PegPath("PATH", "IMGMT01")
-    Case 9
-        cARQRTF = PegPath("PATH", "IMGMW05")
-    Case 10
-        cARQRTF = PegPath("PATH", "IMGMR01")
-    Case 11
-        cARQRTF = PegPath("PATH", "IMGME06")
-    Case 12
-        cARQRTF = PegPath("PATH", "IMGMW07")
-    Case 13
-        cARQRTF = PegPath("PATH", "IMGMQ01")
-    End Select
-    xmontatoolbar Me.Toolbar1, "escIMG", True
-    FilRelat
-    If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
+  CenterFormToScreen Me
+  aORDEM = Array("CODIGO", "NUMERO")
+  aORDES = Array("CODIGO", "NUMERO")
+  cORDEM = "CODIGO"
+  cSUBWHERE = ""
+  Select Case iImage
+  Case 1
+    cARQRTF = PegPath("PATH", "IMGMA01")
+  Case 2
+    cARQRTF = PegPath("PATH", "IMGMS01")
+  Case 3
+    cARQRTF = PegPath("PATH", "IMGFER")
+  Case 4
+    cARQRTF = PegPath("PATH", "IMGME01")
+  Case 5
+    cARQRTF = PegPath("PATH", "IMGME04")
+  Case 6
+    ''frmcomp.Show vbModal, Me
+    ''If lRETU Then
+    ''    cARQRTF = Caminex(PegPath("PATH", "IMGMP04"), zANO, zMES, zEMPRESA)
+    ''End If
+    ''cARQRTF = Caminex(PegPath("PATH", "IMGMP04"), zANO, zMES, zEMPRESA)
+    cARQRTF = PegPath("PATH", "IMGMP04CPF")
+  Case 7
+    cARQRTF = PegPath("PATH", "IMGMU01")
+  Case 8
+    cARQRTF = PegPath("PATH", "IMGMT01")
+  Case 9
+    cARQRTF = PegPath("PATH", "IMGMW05")
+  Case 10
+    cARQRTF = PegPath("PATH", "IMGMR01")
+  Case 11
+    cARQRTF = PegPath("PATH", "IMGME06")
+  Case 12
+    cARQRTF = PegPath("PATH", "IMGMW07")
+  Case 13
+    cARQRTF = PegPath("PATH", "IMGMQ01")
+  End Select
+  xmontatoolbar Me.Toolbar1, "escIMG", True
+  FilRelat
+  If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 End Sub
 
@@ -168,105 +168,105 @@ End Sub
 'End Sub
 
 Private Sub Novo_Click()
-    Dim cCODNEW          As String
-    cCODNEW = InputBox("Digite o Codigo", "Incluindo", "__")
-    cCODNEW = Left(cCODNEW, 24)
-    IncluiSQL cARQRTF, "SELECT * FROM IMAGENS WHERE CODIGO='" & cCODNEW & "' ", 1, Array("CODIGO"), Array(cCODNEW), True, False
-    FilRelat
+  Dim cCODNEW As String
+  cCODNEW = InputBox("Digite o Codigo", "Incluindo", "__")
+  cCODNEW = Left(cCODNEW, 24)
+  IncluiSQL cARQRTF, "SELECT * FROM IMAGENS WHERE CODIGO='" & cCODNEW & "' ", 1, Array("CODIGO"), Array(cCODNEW), True, False
+  FilRelat
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Dim sButton          As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    If Not AcessaBtnOld("escIMG", Button.Index) Then
-        Exit Sub
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+  If Not AcessaBtnOld("escIMG", Button.Index) Then
+    Exit Sub
+  End If
+
+  GravaLog 0, Button.Index, sButton, "escIMG"
+
+  Select Case sButton
+
+
+  Case "ORD"
+    ePASS01 = aORDES
+    escOrdem.Show vbModal, Me
+    If lRETU Then
+      cORDEM = aORDEM(eRETU01)
+      FilRelat
     End If
-    
-    GravaLog 0, Button.Index, sButton, "escIMG"
-
-    Select Case sButton
-    
-    
-    Case "ORD"
-        ePASS01 = aORDES
-        escOrdem.Show vbModal, Me
-        If lRETU Then
-            cORDEM = aORDEM(eRETU01)
-            FilRelat
-        End If
-    Case "FIL"
-        cSUBWHERE = ""
-        If MDG("Usar Filtro Avancado") Then
-            aARQUIVOS = Array(cARQRTF)
-            ''Posicao 12 Nome da Tabela
-            ''Posicao 13 Nome da Tabela
-            aRELCFG = Array("", "", "", 0, False, _
-                            False, "", "", "", "", "", _
-                            False, "IMAGENS", "IMAGENS", "", "")
-            FrmFiltro.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-                FilRelat
-            End If
-        Else
-            ePASS01 = aORDES
-            frmLocalizaa.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "-"), eRETU01, eRETU02)
-            End If
-        End If
+  Case "FIL"
+    cSUBWHERE = ""
+    If MDG("Usar Filtro Avancado") Then
+      aARQUIVOS = Array(cARQRTF)
+      ''Posicao 12 Nome da Tabela
+      ''Posicao 13 Nome da Tabela
+      aRELCFG = Array("", "", "", 0, False, _
+                      False, "", "", "", "", "", _
+                      False, "IMAGENS", "IMAGENS", "", "")
+      FrmFiltro.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
         FilRelat
+      End If
+    Else
+      ePASS01 = aORDES
+      frmLocalizaa.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "-"), eRETU01, eRETU02)
+      End If
+    End If
+    FilRelat
 
 
-    Case "IMP"
-        cTIPO = "R"
-        Select Case iImage
-        Case 1
-            zgrp = "MA"
-        Case 2
-            zgrp = "MS"
-        Case 3
-            zgrp = "FR"
-        Case 4
-            zgrp = "ME"
-        Case 5, 11
-            zgrp = "M4"
-        Case 6
-            zgrp = "MP"
-        Case 7
-            zgrp = "MU"
-        Case 8
-            zgrp = "MT"
-        Case 9, 12
-            zgrp = "CO"
-        Case 10
-            zgrp = "MR"
-        End Select
-
-        escRPT.Show vbModal, Me
-
-    Case "NOV"
-        Novo_Click
-
-    Case "EDI"
-        Edit_Click
-
-    Case "EXC"
-        Apaga_Click
-
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02, , 1
-        End If
-
-    Case "SAI"
-        CmdSair_Click
-
+  Case "IMP"
+    cTIPO = "R"
+    Select Case iImage
+    Case 1
+      zgrp = "MA"
+    Case 2
+      zgrp = "MS"
+    Case 3
+      zgrp = "FR"
+    Case 4
+      zgrp = "ME"
+    Case 5, 11
+      zgrp = "M4"
+    Case 6
+      zgrp = "MP"
+    Case 7
+      zgrp = "MU"
+    Case 8
+      zgrp = "MT"
+    Case 9, 12
+      zgrp = "CO"
+    Case 10
+      zgrp = "MR"
     End Select
+
+    escRPT.Show vbModal, Me
+
+  Case "NOV"
+    Novo_Click
+
+  Case "EDI"
+    Edit_Click
+
+  Case "EXC"
+    Apaga_Click
+
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02, , 1
+    End If
+
+  Case "SAI"
+    CmdSair_Click
+
+  End Select
 
 End Sub
 

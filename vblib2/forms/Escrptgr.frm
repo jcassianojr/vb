@@ -68,123 +68,123 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Apaga_Click()
-    Dim cGRUPO, sSQL As String
-    If Grid.Row > 0 Then 'And Grid.Row < Grid.Rows - 1 Then
-        Grid.Col = 0
-        cGRUPO = FixStr(Grid, tEXT)
-        '******************************************************************
-        'RPTGRP
-        sSQL = "select * from RPTGRP WHERE GRP='" & cGRUPO & "'"
-        If ApagaSQLP(zRPTARQ, sSQL) Then
-            '******************************************************************
-            'RPT
-            sSQL = "select * from RPT WHERE GRP='" & cGRUPO & "'"
-            '******************************************************************
-            ApagaSQL zRPTARQ, sSQL
-            'RPTUSR
-            sSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & cGRUPO & "'"
-            ApagaSQL DBWRPT, sSQL
-            FilRelat
-        End If
+  Dim cGRUPO, sSQL As String
+  If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
+    Grid.Col = 0
+    cGRUPO = FixStr(Grid, tEXT)
+    '******************************************************************
+    'RPTGRP
+    sSQL = "select * from RPTGRP WHERE GRP='" & cGRUPO & "'"
+    If ApagaSQLP(zRPTARQ, sSQL) Then
+      '******************************************************************
+      'RPT
+      sSQL = "select * from RPT WHERE GRP='" & cGRUPO & "'"
+      '******************************************************************
+      ApagaSQL zRPTARQ, sSQL
+      'RPTUSR
+      sSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & cGRUPO & "'"
+      ApagaSQL DBWRPT, sSQL
+      FilRelat
     End If
+  End If
 End Sub
 
 Private Sub CmdSair_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Edit_Click()
-  If Grid.Row > 0 Then ''And Grid.Row < Grid.Rows - 1 Then
-        Grid.Col = 0
-        zgrp = Grid.tEXT
-        frmRPTGRP.Show vbModal
-         FilRelat
-    End If
+  If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
+    Grid.Col = 0
+    zgrp = Grid.tEXT
+    frmRPTGRP.Show vbModal
+    FilRelat
+  End If
 End Sub
 
 Private Sub Escolher_Click()
-    If Grid.Row > 0 Then 'And Grid.Row < Grid.Rows - 1 Then
-        Grid.Col = 0
-        zgrp = Grid.tEXT
-        escRPT.Show vbModal, Me
-    End If
+  If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
+    Grid.Col = 0
+    zgrp = Grid.tEXT
+    escRPT.Show vbModal, Me
+  End If
 End Sub
 
 Private Sub FilRelat()
-    Dim cSQL As String
-    cSQL = "SELECT GRP,NOME FROM rptgrp ORDER BY grp"
-    MontaGridUltra Grid, 2, Array(800, 4000), Array("GRP", "Nome"), _
-        Array("grp", "nome"), zRPTARQ, cSQL
+  Dim cSQL As String
+  cSQL = "SELECT GRP,NOME FROM rptgrp ORDER BY grp"
+  MontaGridUltra Grid, 2, Array(800, 4000), Array("GRP", "Nome"), _
+                 Array("grp", "nome"), zRPTARQ, cSQL
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    zgrp = ""
-    ZGRPSUB = ""
-    eLOCALIZA = ""
-    xmontatoolbar Me.Toolbar1, "escRPTGRP", True
-    FilRelat
-    If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
+  CenterFormToScreen Me
+  zgrp = ""
+  ZGRPSUB = ""
+  eLOCALIZA = ""
+  xmontatoolbar Me.Toolbar1, "escRPTGRP", True
+  FilRelat
+  If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
 End Sub
 
 Private Sub grid_Click()
-Dim X As Integer
- ' Grid.Col = 0
-Grid.ColSel = Grid.Cols - 1
-'For X = 0 To Grid.Cols - 1
-'  Grid.ColSel = X
-'Next X
+  Dim x As Integer
+  ' Grid.Col = 0
+  Grid.ColSel = Grid.cols - 1
+  'For X = 0 To Grid.Cols - 1
+  '  Grid.ColSel = X
+  'Next X
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 End Sub
 Private Sub Novo_Click()
-    Dim cSQL As String
-    zgrp = InputBox("Digite o Codigo", "Inclusão Relatorio", "____")
-    zgrp = FixStr(zgrp, "", "TRIM", 4)
-    cSQL = "select * from RPTGRP WHERE GRP='" & zgrp & "'"
-    If IncluiSQL(zRPTARQ, cSQL, 1, Array("GRP"), Array(zgrp), True, True) Then
-        frmRPTGRP.Show vbModal
-        FilRelat
-    End If
+  Dim cSQL As String
+  zgrp = InputBox("Digite o Codigo", "Inclusão Relatorio", "____")
+  zgrp = FixStr(zgrp, "", "TRIM", 4)
+  cSQL = "select * from RPTGRP WHERE GRP='" & zgrp & "'"
+  If IncluiSQL(zRPTARQ, cSQL, 1, Array("GRP"), Array(zgrp), True, True) Then
+    frmRPTGRP.Show vbModal
+    FilRelat
+  End If
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Dim sButton          As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    If Not AcessaBtnOld("escRPTGRP", Button.Index) Then
-        Exit Sub
-    End If
-    
-    GravaLog 0, Button.Index, sButton, "escRPTGRP"
-    
-    Select Case sButton
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+  If Not AcessaBtnOld("escRPTGRP", Button.Index) Then
+    Exit Sub
+  End If
 
-    Case "NOV"
-        Novo_Click
+  GravaLog 0, Button.Index, sButton, "escRPTGRP"
 
-    Case "EDI"
-        Edit_Click
+  Select Case sButton
 
-    Case "EXC"
-        Apaga_Click
+  Case "NOV"
+    Novo_Click
 
-    Case "ESC"
-        Escolher_Click
+  Case "EDI"
+    Edit_Click
 
-    Case "LOC"
-        LocalizaGri1 Grid
+  Case "EXC"
+    Apaga_Click
 
-    Case "SAI"
-        CmdSair_Click
+  Case "ESC"
+    Escolher_Click
 
-    End Select
+  Case "LOC"
+    LocalizaGri1 Grid
+
+  Case "SAI"
+    CmdSair_Click
+
+  End Select
 
 End Sub
 

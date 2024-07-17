@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Begin VB.Form frmPicViewer 
    Caption         =   "Picture Viewer"
    ClientHeight    =   7920
@@ -17,9 +17,6 @@ Begin VB.Form frmPicViewer
       Top             =   5280
       _ExtentX        =   1191
       _ExtentY        =   1191
-      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
-      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
-      AmbientBb       =   $"frmPicViewer.frx":5872
    End
    Begin VB.PictureBox picPrint 
       Height          =   3465
@@ -303,7 +300,7 @@ Begin VB.Form frmPicViewer
          Width           =   2175
          _ExtentX        =   3836
          _ExtentY        =   714
-         Picture         =   "frmPicViewer.frx":5912
+         Picture         =   "frmPicViewer.frx":5872
          Caption         =   "Buscar Pasta"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -461,7 +458,7 @@ Begin VB.Form frmPicViewer
       Begin VB.Image imgViewerUp 
          Height          =   1095
          Left            =   1140
-         MouseIcon       =   "frmPicViewer.frx":5EAC
+         MouseIcon       =   "frmPicViewer.frx":5E0C
          Top             =   1140
          Visible         =   0   'False
          Width           =   1095
@@ -469,7 +466,7 @@ Begin VB.Form frmPicViewer
       Begin VB.Image imgViewerDown 
          Height          =   1095
          Left            =   0
-         MouseIcon       =   "frmPicViewer.frx":6776
+         MouseIcon       =   "frmPicViewer.frx":66D6
          Top             =   1140
          Visible         =   0   'False
          Width           =   1095
@@ -490,7 +487,7 @@ Begin VB.Form frmPicViewer
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   979
-      Picture         =   "frmPicViewer.frx":7040
+      Picture         =   "frmPicViewer.frx":6FA0
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -635,19 +632,31 @@ Const cFORMID = "frmpicviewer"
 '------------------------------------------------------------------------------
 
 Dim KAX, KAY As Single
+Attribute KAY.VB_VarUserMemId = 1073938432
 Dim VarFileGambar, FileTerpilih As String
+Attribute VarFileGambar.VB_VarUserMemId = 1073938434
+Attribute FileTerpilih.VB_VarUserMemId = 1073938434
 Dim VarImage1Height, VarImage1Width, VarImage1HeightZoom, VarImage1WidthZoom As String
+Attribute VarImage1Height.VB_VarUserMemId = 1073938436
+Attribute VarImage1Width.VB_VarUserMemId = 1073938436
+Attribute VarImage1HeightZoom.VB_VarUserMemId = 1073938436
+Attribute VarImage1WidthZoom.VB_VarUserMemId = 1073938436
 
 'Untuk form resizer
 Private objFormResizer As clsResizer
+Attribute objFormResizer.VB_VarUserMemId = 1073938440
 Dim MeWidthMin As Single
+Attribute MeWidthMin.VB_VarUserMemId = 1073938441
 Dim MeHeightMin As Single
+Attribute MeHeightMin.VB_VarUserMemId = 1073938442
 
 'Untuk slide show
 Dim iFile As Long
+Attribute iFile.VB_VarUserMemId = 1073938443
 
 'Untuk menangani png file
 Dim Token As Long
+Attribute Token.VB_VarUserMemId = 1073938444
 
 'Untuk fasilitas print
 Private Const DC_PAPERS = 2
@@ -656,93 +665,98 @@ Private Const DC_PAPERNAMES = 16
 Private Const DC_ENUMRESOLUTIONS = 13
 Private Const DC_ORIENTATION = 17
 Private Type POINT
-    x As Long
-    y As Long
+  x As Long
+  y As Long
 End Type
 
 Private Declare Function DeviceCapabilities Lib "winspool.drv" Alias "DeviceCapabilitiesW" (ByVal lpDeviceName As Long, ByVal lpPort As Long, ByVal iIndex As Long, ByVal lpOutput As Long, ByVal lpDevMode As Long) As Long
 Private intPaperIds() As Integer
+Attribute intPaperIds.VB_VarUserMemId = 1073938445
 Private ptPaperSizes() As POINT
+Attribute ptPaperSizes.VB_VarUserMemId = 1073938446
 Private lngResolutions() As Long
+Attribute lngResolutions.VB_VarUserMemId = 1073938447
 Private Pr As Printer
+Attribute Pr.VB_VarUserMemId = 1073938448
 Private Pic As StdPicture
+Attribute Pic.VB_VarUserMemId = 1073938449
 
 Sub LokasiFile()
-    If Right(lstViewer.Path, 1) = "\" Then
-        FileTerpilih = lstViewer.Path & lstViewer.FileName
-    Else
-        FileTerpilih = lstViewer.Path & "\" & lstViewer.FileName
-    End If
+  If Right(lstViewer.Path, 1) = "\" Then
+    FileTerpilih = lstViewer.Path & lstViewer.FileName
+  Else
+    FileTerpilih = lstViewer.Path & "\" & lstViewer.FileName
+  End If
 End Sub
 
 Sub TampilanBrowse()
-    Me.WindowState = 0
+  Me.WindowState = 0
 End Sub
 
 Sub TampilanView()
-    Me.WindowState = 2
+  Me.WindowState = 2
 End Sub
 
 Sub GambarKeTengah()
-    If imgViewer.Width <= picViewer.Width Then
-        imgViewer.Left = (picViewer.Width - imgViewer.Width) / 2
-        HScrollViewer.Visible = False
-    Else
-        imgViewer.Left = 0
-        HScrollViewer.Visible = True
-        HScrollViewer.Value = 0
-    End If
-    If imgViewer.Height <= picViewer.Height Then
-        imgViewer.Top = (picViewer.Height - imgViewer.Height) / 2
-        VScrollViewer.Visible = False
-    Else
-        imgViewer.Top = 0
-        VScrollViewer.Visible = True
-        VScrollViewer.Value = 0
-    End If
+  If imgViewer.Width <= picViewer.Width Then
+    imgViewer.Left = (picViewer.Width - imgViewer.Width) / 2
+    HScrollViewer.Visible = False
+  Else
+    imgViewer.Left = 0
+    HScrollViewer.Visible = True
+    HScrollViewer.Value = 0
+  End If
+  If imgViewer.Height <= picViewer.Height Then
+    imgViewer.Top = (picViewer.Height - imgViewer.Height) / 2
+    VScrollViewer.Visible = False
+  Else
+    imgViewer.Top = 0
+    VScrollViewer.Visible = True
+    VScrollViewer.Value = 0
+  End If
 End Sub
 
 Sub AturScrollbar()
-    'Horizontal
-    If imgViewer.Width > picViewer.Width Then
-        If imgViewer.Width - picViewer.Width <= 32767 Then
-            HScrollViewer.Max = (imgViewer.Width - picViewer.Width)
-        Else
-            HScrollViewer.Max = 32767
-        End If
-        If imgViewer.Left < -(imgViewer.Width - picViewer.Width) Then
-            HScrollViewer.Value = (imgViewer.Width - picViewer.Width)
-        ElseIf imgViewer.Left > 0 Then
-            HScrollViewer.Value = 0
-        Else
-            HScrollViewer.Value = -imgViewer.Left
-        End If
+'Horizontal
+  If imgViewer.Width > picViewer.Width Then
+    If imgViewer.Width - picViewer.Width <= 32767 Then
+      HScrollViewer.Max = (imgViewer.Width - picViewer.Width)
+    Else
+      HScrollViewer.Max = 32767
     End If
-    'Vertical
-    If imgViewer.Height > picViewer.Height Then
-        If imgViewer.Height - picViewer.Height <= 32767 Then
-            VScrollViewer.Max = (imgViewer.Height - picViewer.Height)
-        Else
-            VScrollViewer.Max = 32767
-        End If
-        If imgViewer.Top < -(imgViewer.Height - picViewer.Height) Then
-            VScrollViewer.Value = (imgViewer.Height - picViewer.Height)
-        ElseIf imgViewer.Top > 0 Then
-            VScrollViewer.Value = 0
-        Else
-            VScrollViewer.Value = -imgViewer.Top
-        End If
+    If imgViewer.Left < -(imgViewer.Width - picViewer.Width) Then
+      HScrollViewer.Value = (imgViewer.Width - picViewer.Width)
+    ElseIf imgViewer.Left > 0 Then
+      HScrollViewer.Value = 0
+    Else
+      HScrollViewer.Value = -imgViewer.Left
     End If
+  End If
+  'Vertical
+  If imgViewer.Height > picViewer.Height Then
+    If imgViewer.Height - picViewer.Height <= 32767 Then
+      VScrollViewer.Max = (imgViewer.Height - picViewer.Height)
+    Else
+      VScrollViewer.Max = 32767
+    End If
+    If imgViewer.Top < -(imgViewer.Height - picViewer.Height) Then
+      VScrollViewer.Value = (imgViewer.Height - picViewer.Height)
+    ElseIf imgViewer.Top > 0 Then
+      VScrollViewer.Value = 0
+    Else
+      VScrollViewer.Value = -imgViewer.Top
+    End If
+  End If
 End Sub
 
 Private Sub CmdFEchar_Click()
-    lRETU = False
-    eRETU = ""
-    If FileExists(txtAddress.Text) Then
-        lRETU = True
-        eRETU01 = txtAddress.Text
-    End If
-    Unload Me
+  lRETU = False
+  eRETU = ""
+  If FileExists(txtAddress.tEXT) Then
+    lRETU = True
+    eRETU01 = txtAddress.tEXT
+  End If
+  Unload Me
 End Sub
 
 Private Sub cmdPrintDialog_Click()
@@ -752,828 +766,828 @@ End Sub
 
 
 Private Sub Form_Load()
-    lRETU = False
-    eRETU = ""
-    Me.Caption = cFORMID
-    HelpContextID = nFORMID
-    
-    'Untuk form resizer
-    Set objFormResizer = New clsResizer
-    With objFormResizer
-        Set .Container = Me
-        .SetAnchors "picFolderFile", avTop + avBottom + avLeft
-        .SetAnchors "cmdBrowseFolder", avTop + avLeft
-        .SetAnchors "lstViewer", avTop + avBottom + avLeft
-        .SetAnchors "lblTotalFile", avBottom + avLeft
-        .SetAnchors "txtAddress", avBottom + avLeft + avRight
-        .SetAnchors "picViewer", avTop + avBottom + avLeft + avRight
-        .SetAnchors "HScrollViewer", avBottom + avLeft + avRight
-        .SetAnchors "VScrollViewer", avTop + avBottom + avRight
-        .SetAnchors "picInfo", avBottom + avLeft
-        .SetAnchors "cmdStopSlideShow", avBottom + avRight
-        .SetAnchors "cmdFirst", avBottom + avRight
-        .SetAnchors "cmdPrevious", avBottom + avRight
-        .SetAnchors "cmdNext", avBottom + avRight
-        .SetAnchors "cmdLast", avBottom + avRight
-        .SetAnchors "cmdMenu", avBottom + avRight
-        .SetAnchors "cmdPrint", avBottom + avRight
-        .SetAnchors "picPrint", avBottom + avRight
-        .SetAnchors "CmdFechar", avBottom + avRight
-    End With
-    MeWidthMin = 12000
-    MeHeightMin = 8400
-    
-    lblSize.Caption = ""
-    lblDimension.Caption = ""
-    lblCoordinate.Caption = ""
-    lstViewer.FileName = "*.bmp;*.gif;*.jpg;*.ico;*.wmf;*.cur;*.png"
-    If lstViewer.ListCount <> 0 Then
-        lstViewer.ListIndex = 0
-    End If
-    VarImage1HeightZoom = imgViewer.Height
-    VarImage1WidthZoom = imgViewer.Width
-    lblTotalFile.Caption = "Total : " & lstViewer.ListCount & " file(s)"
-    
-    PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
-    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
+  lRETU = False
+  eRETU = ""
+  Me.Caption = cFORMID
+  HelpContextID = nFORMID
+
+  'Untuk form resizer
+  Set objFormResizer = New clsResizer
+  With objFormResizer
+    Set .Container = Me
+    .SetAnchors "picFolderFile", avTop + avBottom + avLeft
+    .SetAnchors "cmdBrowseFolder", avTop + avLeft
+    .SetAnchors "lstViewer", avTop + avBottom + avLeft
+    .SetAnchors "lblTotalFile", avBottom + avLeft
+    .SetAnchors "txtAddress", avBottom + avLeft + avRight
+    .SetAnchors "picViewer", avTop + avBottom + avLeft + avRight
+    .SetAnchors "HScrollViewer", avBottom + avLeft + avRight
+    .SetAnchors "VScrollViewer", avTop + avBottom + avRight
+    .SetAnchors "picInfo", avBottom + avLeft
+    .SetAnchors "cmdStopSlideShow", avBottom + avRight
+    .SetAnchors "cmdFirst", avBottom + avRight
+    .SetAnchors "cmdPrevious", avBottom + avRight
+    .SetAnchors "cmdNext", avBottom + avRight
+    .SetAnchors "cmdLast", avBottom + avRight
+    .SetAnchors "cmdMenu", avBottom + avRight
+    .SetAnchors "cmdPrint", avBottom + avRight
+    .SetAnchors "picPrint", avBottom + avRight
+    .SetAnchors "CmdFechar", avBottom + avRight
+  End With
+  MeWidthMin = 12000
+  MeHeightMin = 8400
+
+  lblSize.Caption = ""
+  lblDimension.Caption = ""
+  lblCoordinate.Caption = ""
+  lstViewer.FileName = "*.bmp;*.gif;*.jpg;*.ico;*.wmf;*.cur;*.png"
+  If lstViewer.ListCount <> 0 Then
+    lstViewer.ListIndex = 0
+  End If
+  VarImage1HeightZoom = imgViewer.Height
+  VarImage1WidthZoom = imgViewer.Width
+  lblTotalFile.Caption = "Total : " & lstViewer.ListCount & " file(s)"
+
+  PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+  PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 End Sub
 Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
-    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
-    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+  PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+  UpdateReport = False  ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
 Private Sub Form_Activate()
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub Form_Resize()
-    If Me.Width >= MeWidthMin Then
-        objFormResizer.Resize
-    Else
-        If Me.WindowState = 0 Then
-            Me.Width = MeWidthMin
-        End If
+  If Me.Width >= MeWidthMin Then
+    objFormResizer.Resize
+  Else
+    If Me.WindowState = 0 Then
+      Me.Width = MeWidthMin
     End If
-    If Me.Height >= MeHeightMin Then
-        objFormResizer.Resize
-    Else
-        If Me.WindowState = 0 Then
-            Me.Height = MeHeightMin
-        End If
+  End If
+  If Me.Height >= MeHeightMin Then
+    objFormResizer.Resize
+  Else
+    If Me.WindowState = 0 Then
+      Me.Height = MeHeightMin
     End If
-    GambarKeTengah
-    picProperties.Width = picViewer.Width
-    txtProperties.Width = picViewer.Width
-    AturScrollbar
+  End If
+  GambarKeTengah
+  picProperties.Width = picViewer.Width
+  txtProperties.Width = picViewer.Width
+  AturScrollbar
 End Sub
 
 Private Sub cmdBrowseFolder_Click()
-    picbrowse = BrowseFolders(Me.hWnd, "Choose a location picture", BrowseForFolders, H12)
-    If picbrowse <> "" Then
-        lstViewer.FileName = PathTujuan
-        If lstViewer.ListCount <> 0 Then
-            lstViewer.ListIndex = 0
-        Else
-            imgViewer.Picture = Nothing
-            lblTotalFile.Caption = "Total : " & lstViewer.ListCount & " file(s)"
-            lblDimension.Caption = ""
-            lblSize.Caption = ""
-            HScrollViewer.Visible = False
-            VScrollViewer.Visible = False
-        End If
-        lstViewer.SetFocus                       'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  picbrowse = BrowseFolders(Me.hWnd, "Choose a location picture", BrowseForFolders, H12)
+  If picbrowse <> "" Then
+    lstViewer.FileName = PathTujuan
+    If lstViewer.ListCount <> 0 Then
+      lstViewer.ListIndex = 0
+    Else
+      imgViewer.Picture = Nothing
+      lblTotalFile.Caption = "Total : " & lstViewer.ListCount & " file(s)"
+      lblDimension.Caption = ""
+      lblSize.Caption = ""
+      HScrollViewer.Visible = False
+      VScrollViewer.Visible = False
     End If
+    lstViewer.SetFocus                       'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  End If
 End Sub
 
 Private Sub imgViewer_DblClick()
-    If Me.WindowState = 2 Then
-        TampilanBrowse
-    ElseIf Me.WindowState <> 2 Then
-        TampilanView
-    End If
+  If Me.WindowState = 2 Then
+    TampilanBrowse
+  ElseIf Me.WindowState <> 2 Then
+    TampilanView
+  End If
 End Sub
 
 Private Sub imgViewer_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If Button = 1 Then
-        'KAX = Initial coordinates of the X axis (Koordinat Awal sb. X)
-        'KAY = Initial coordinates of the Y axis (Koordinat Awal sb. Y)
-        KAX = x
-        KAY = y
-        If imgViewer.Width > picViewer.Width Or imgViewer.Height > picViewer.Height Then
-            'If Dir(App.Path + "\Mouse.ico") <> vbNullString Then
-            '    MouseIcon = LoadPicture(App.Path + "\Mouse.ico")
-            '    MousePointer = 99
-            'Else
-            '    MousePointer = 5
-            'End If
-            MouseIcon = imgViewerDown.MouseIcon
-            MousePointer = 99
-        End If
+  If Button = 1 Then
+    'KAX = Initial coordinates of the X axis (Koordinat Awal sb. X)
+    'KAY = Initial coordinates of the Y axis (Koordinat Awal sb. Y)
+    KAX = x
+    KAY = y
+    If imgViewer.Width > picViewer.Width Or imgViewer.Height > picViewer.Height Then
+      'If Dir(App.Path + "\Mouse.ico") <> vbNullString Then
+      '    MouseIcon = LoadPicture(App.Path + "\Mouse.ico")
+      '    MousePointer = 99
+      'Else
+      '    MousePointer = 5
+      'End If
+      MouseIcon = imgViewerDown.MouseIcon
+      MousePointer = 99
     End If
+  End If
 End Sub
 
 Private Sub imgViewer_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
-    If Button = 1 Then
-        AturScrollbar
-        'X = VB by default stating the coordinates of the X axis (VB secara default menyatakan koordinat sb. X saat itu)
-        'Y = VB by default stating the coordinates of the Y axis (VB secara default menyatakan koordinat sb. Y saat itu)
-        lblCoordinate.Caption = "(" & x & "," & y & ")"
-        'Horizontal
-        If imgViewer.Width > picViewer.Width Then
-            If imgViewer.Left >= 0 And x - KAX > 0 Then
-                imgViewer.Left = 0
-                Exit Sub
-            ElseIf imgViewer.Left <= picViewer.Width - imgViewer.Width And x - KAX < 0 Then
-                imgViewer.Left = picViewer.Width - imgViewer.Width
-                Exit Sub
-            Else
-                imgViewer.Left = imgViewer.Left + x - KAX
-            End If
-        End If
-        'Vertical
-        If imgViewer.Height > picViewer.Height Or imgViewer.Height > picViewer.Height Then
-            If imgViewer.Top >= 0 And y - KAY > 0 Then
-                imgViewer.Top = 0
-                Exit Sub
-            ElseIf imgViewer.Top <= picViewer.Height - imgViewer.Height And y - KAY < 0 Then
-                imgViewer.Top = picViewer.Height - imgViewer.Height
-                Exit Sub
-            Else
-                imgViewer.Top = imgViewer.Top + y - KAY
-            End If
-        End If
-    Else
-        If imgViewer.Width > picViewer.Width Or imgViewer.Height > picViewer.Height Then
-            MouseIcon = imgViewerUp.MouseIcon
-            MousePointer = 99
-        Else
-            MousePointer = 0
-        End If
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  If Button = 1 Then
+    AturScrollbar
+    'X = VB by default stating the coordinates of the X axis (VB secara default menyatakan koordinat sb. X saat itu)
+    'Y = VB by default stating the coordinates of the Y axis (VB secara default menyatakan koordinat sb. Y saat itu)
+    lblCoordinate.Caption = "(" & x & "," & y & ")"
+    'Horizontal
+    If imgViewer.Width > picViewer.Width Then
+      If imgViewer.Left >= 0 And x - KAX > 0 Then
+        imgViewer.Left = 0
+        Exit Sub
+      ElseIf imgViewer.Left <= picViewer.Width - imgViewer.Width And x - KAX < 0 Then
+        imgViewer.Left = picViewer.Width - imgViewer.Width
+        Exit Sub
+      Else
+        imgViewer.Left = imgViewer.Left + x - KAX
+      End If
     End If
+    'Vertical
+    If imgViewer.Height > picViewer.Height Or imgViewer.Height > picViewer.Height Then
+      If imgViewer.Top >= 0 And y - KAY > 0 Then
+        imgViewer.Top = 0
+        Exit Sub
+      ElseIf imgViewer.Top <= picViewer.Height - imgViewer.Height And y - KAY < 0 Then
+        imgViewer.Top = picViewer.Height - imgViewer.Height
+        Exit Sub
+      Else
+        imgViewer.Top = imgViewer.Top + y - KAY
+      End If
+    End If
+  Else
+    If imgViewer.Width > picViewer.Width Or imgViewer.Height > picViewer.Height Then
+      MouseIcon = imgViewerUp.MouseIcon
+      MousePointer = 99
+    Else
+      MousePointer = 0
+    End If
+  End If
 End Sub
 
 Private Sub imgViewer_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If imgViewer.Width > picViewer.Width Or imgViewer.Height > picViewer.Height Then
-        MouseIcon = imgViewerUp.MouseIcon
-        MousePointer = 99
+  If imgViewer.Width > picViewer.Width Or imgViewer.Height > picViewer.Height Then
+    MouseIcon = imgViewerUp.MouseIcon
+    MousePointer = 99
+  End If
+  If Button = 2 Then
+    If Me.WindowState <> 2 Then
+      PopupMenu mnuPopUp1
+    ElseIf Me.WindowState = 2 Then
+      PopupMenu mnuPopUp1
     End If
-    If Button = 2 Then
-        If Me.WindowState <> 2 Then
-            PopupMenu mnuPopUp1
-        ElseIf Me.WindowState = 2 Then
-            PopupMenu mnuPopUp1
-        End If
-    End If
-    lblCoordinate.Caption = ""
+  End If
+  lblCoordinate.Caption = ""
 End Sub
 
 Private Sub lstViewer_Click()
-    On Error GoTo bawah
-    LokasiFile
-    VarFileGambar = True
-    If UCase(Right(FileTerpilih, 4)) = ".PNG" Then
-        Token = InitGDIPlus
-        imgViewer.Picture = LoadPictureGDIPlus(FileTerpilih, , , vbWhite)
-        FreeGDIPlus Token
-    Else
-        imgViewer.Picture = LoadPicture(FileTerpilih)
-    End If
-    imgViewer.Stretch = False
-    GambarKeTengah
-    lblDimension.Caption = "Dimension : " & imgViewer.Width & " x " & imgViewer.Height
-    VarImage1Height = imgViewer.Height
-    VarImage1Width = imgViewer.Width
-    VarImage1HeightZoom = imgViewer.Height
-    VarImage1WidthZoom = imgViewer.Width
-    AturScrollbar
-    txtAddress.Text = FileTerpilih
-    lblTotalFile.Caption = "Total : " & lstViewer.ListCount & " file(s)"
-    lblCoordinate.Caption = ""
-    FileSize = Int(FileLen(FileTerpilih) / 1024 + 1)
-    If FileLen(FileTerpilih) >= 1000000 Then
-        lblSize.Caption = "Size : " & Round(FileSize / 1000, 3) & " MB"
-    Else
-        lblSize.Caption = "Size : " & FileSize & " KB"
-    End If
-    If imgViewer.Width > picViewer.Width Or imgViewer.Height > picViewer.Height Then
-        MouseIcon = imgViewerUp.MouseIcon
-        MousePointer = 99
-    Else
-        MousePointer = 0
-    End If
-    Exit Sub
-    
+  On Error GoTo bawah
+  LokasiFile
+  VarFileGambar = True
+  If UCase(Right(FileTerpilih, 4)) = ".PNG" Then
+    Token = InitGDIPlus
+    imgViewer.Picture = LoadPictureGDIPlus(FileTerpilih, , , vbWhite)
+    FreeGDIPlus Token
+  Else
+    imgViewer.Picture = LoadPicture(FileTerpilih)
+  End If
+  imgViewer.Stretch = False
+  GambarKeTengah
+  lblDimension.Caption = "Dimension : " & imgViewer.Width & " x " & imgViewer.Height
+  VarImage1Height = imgViewer.Height
+  VarImage1Width = imgViewer.Width
+  VarImage1HeightZoom = imgViewer.Height
+  VarImage1WidthZoom = imgViewer.Width
+  AturScrollbar
+  txtAddress.tEXT = FileTerpilih
+  lblTotalFile.Caption = "Total : " & lstViewer.ListCount & " file(s)"
+  lblCoordinate.Caption = ""
+  fileSize = Int(FileLen(FileTerpilih) / 1024 + 1)
+  If FileLen(FileTerpilih) >= 1000000 Then
+    lblSize.Caption = "Size : " & Round(fileSize / 1000, 3) & " MB"
+  Else
+    lblSize.Caption = "Size : " & fileSize & " KB"
+  End If
+  If imgViewer.Width > picViewer.Width Or imgViewer.Height > picViewer.Height Then
+    MouseIcon = imgViewerUp.MouseIcon
+    MousePointer = 99
+  Else
+    MousePointer = 0
+  End If
+  Exit Sub
+
 bawah:
-    If Err.Number = 53 Then
-        lblDimension.Caption = ""
-        lblSize.Caption = ""
-        imgViewer.Picture = Nothing
-        HScrollViewer.Visible = False
-        VScrollViewer.Visible = False
-        MsgBox "The file has been deleted, moved or renamed", vbCritical, "" 'File telah dihapus, dipindahkan, atau diganti nama
-    ElseIf Err.Number = 76 Then
-        lblDimension.Caption = ""
-        lblSize.Caption = ""
-        imgViewer.Picture = Nothing
-        HScrollViewer.Visible = False
-        VScrollViewer.Visible = False
-        MsgBox "The folder has been deleted, moved or renamed", vbCritical, "" 'Folder telah dihapus, dipindahkan, atau diganti nama
-    ElseIf Err.Number = 0 Then
-        'Leave it alone (Biarkan saja)
-    Else
-        imgViewer.Picture = Nothing
-        MsgBox "" & Err.Description, vbExclamation, ""
-    End If
+  If Err.Number = 53 Then
+    lblDimension.Caption = ""
+    lblSize.Caption = ""
+    imgViewer.Picture = Nothing
+    HScrollViewer.Visible = False
+    VScrollViewer.Visible = False
+    MsgBox "The file has been deleted, moved or renamed", vbCritical, ""  'File telah dihapus, dipindahkan, atau diganti nama
+  ElseIf Err.Number = 76 Then
+    lblDimension.Caption = ""
+    lblSize.Caption = ""
+    imgViewer.Picture = Nothing
+    HScrollViewer.Visible = False
+    VScrollViewer.Visible = False
+    MsgBox "The folder has been deleted, moved or renamed", vbCritical, ""  'Folder telah dihapus, dipindahkan, atau diganti nama
+  ElseIf Err.Number = 0 Then
+    'Leave it alone (Biarkan saja)
+  Else
+    imgViewer.Picture = Nothing
+    MsgBox "" & Err.Description, vbExclamation, ""
+  End If
 End Sub
 
 Private Sub lstViewer_DblClick()
-    If VarFileGambar = True Then
-        imgViewer_DblClick
-    End If
+  If VarFileGambar = True Then
+    imgViewer_DblClick
+  End If
 End Sub
 
 Private Sub HScrollViewer_Change()
-    imgViewer.Left = -HScrollViewer.Value
+  imgViewer.Left = -HScrollViewer.Value
 End Sub
 Private Sub VScrollViewer_Change()
-    imgViewer.Top = -VScrollViewer.Value
+  imgViewer.Top = -VScrollViewer.Value
 End Sub
 
 Private Sub HScrollViewer_Scroll()
-    imgViewer.Left = -HScrollViewer.Value
+  imgViewer.Left = -HScrollViewer.Value
 End Sub
 
 Private Sub VScrollViewer_Scroll()
-    imgViewer.Top = -VScrollViewer.Value
+  imgViewer.Top = -VScrollViewer.Value
 End Sub
 
 Private Sub txtProperties_Click()
-    picProperties.Visible = False
+  picProperties.Visible = False
 End Sub
 
 Private Sub picProperties_Click()
-    picProperties.Visible = False
+  picProperties.Visible = False
 End Sub
 
 Private Sub cmdFirst_Click()
-    mnuPopUp1First_Click
+  mnuPopUp1First_Click
 End Sub
 
 Private Sub cmdPrevious_Click()
-    mnuPopUp1Previous_Click
+  mnuPopUp1Previous_Click
 End Sub
 
 Private Sub cmdNext_Click()
-    mnuPopUp1Next_Click
+  mnuPopUp1Next_Click
 End Sub
 
 Private Sub cmdLast_Click()
-    mnuPopUp1Last_Click
+  mnuPopUp1Last_Click
 End Sub
 
 Private Sub cmdMenu_Click()
-    PopupMenu mnuPopUp1
+  PopupMenu mnuPopUp1
 End Sub
 
 Private Sub mnuPopUp1ZoomIn_Click()
-    VarImage1HeightZoom = imgViewer.Height * 1.25
-    VarImage1WidthZoom = imgViewer.Width * 1.25
-    imgViewer.Height = VarImage1HeightZoom * 1.25
-    imgViewer.Width = VarImage1WidthZoom * 1.25
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  VarImage1HeightZoom = imgViewer.Height * 1.25
+  VarImage1WidthZoom = imgViewer.Width * 1.25
+  imgViewer.Height = VarImage1HeightZoom * 1.25
+  imgViewer.Width = VarImage1WidthZoom * 1.25
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1ZoomOut_Click()
-    VarImage1HeightZoom = imgViewer.Height * 0.8
-    VarImage1WidthZoom = imgViewer.Width * 0.8
-    imgViewer.Height = VarImage1HeightZoom * 0.8
-    imgViewer.Width = VarImage1WidthZoom * 0.8
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  VarImage1HeightZoom = imgViewer.Height * 0.8
+  VarImage1WidthZoom = imgViewer.Width * 0.8
+  imgViewer.Height = VarImage1HeightZoom * 0.8
+  imgViewer.Width = VarImage1WidthZoom * 0.8
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom43_Click()
-    imgViewer.Height = 7000
-    imgViewer.Width = imgViewer.Height * 1.33
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = 7000
+  imgViewer.Width = imgViewer.Height * 1.33
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom169_Click()
-    imgViewer.Height = 7000
-    imgViewer.Width = imgViewer.Height * 1.78
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = 7000
+  imgViewer.Width = imgViewer.Height * 1.78
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1ZoomFitImage_Click()
-    imgViewer.Height = picViewer.Height
-    imgViewer.Width = picViewer.Width
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = picViewer.Height
+  imgViewer.Width = picViewer.Width
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1ZoomFitWidth_Click()
-    imgViewer.Width = picViewer.Width
-    imgViewer.Height = VarImage1Height * (picViewer.Width / VarImage1Width)
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Width = picViewer.Width
+  imgViewer.Height = VarImage1Height * (picViewer.Width / VarImage1Width)
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1ZoomFitHeight_Click()
-    imgViewer.Height = picViewer.Height
-    imgViewer.Width = VarImage1Width * (picViewer.Height / VarImage1Height)
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = picViewer.Height
+  imgViewer.Width = VarImage1Width * (picViewer.Height / VarImage1Height)
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom10_Click()
-    imgViewer.Height = VarImage1Height * 0.1
-    imgViewer.Width = VarImage1Width * 0.1
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 0.1
+  imgViewer.Width = VarImage1Width * 0.1
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom25_Click()
-    imgViewer.Height = VarImage1Height * 0.25
-    imgViewer.Width = VarImage1Width * 0.25
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 0.25
+  imgViewer.Width = VarImage1Width * 0.25
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom33_Click()
-    imgViewer.Height = VarImage1Height * 0.33
-    imgViewer.Width = VarImage1Width * 0.33
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 0.33
+  imgViewer.Width = VarImage1Width * 0.33
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom50_Click()
-    imgViewer.Height = VarImage1Height * 0.5
-    imgViewer.Width = VarImage1Width * 0.5
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 0.5
+  imgViewer.Width = VarImage1Width * 0.5
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom67_Click()
-    imgViewer.Height = VarImage1Height * 0.67
-    imgViewer.Width = VarImage1Width * 0.67
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 0.67
+  imgViewer.Width = VarImage1Width * 0.67
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom75_Click()
-    imgViewer.Height = VarImage1Height * 0.75
-    imgViewer.Width = VarImage1Width * 0.75
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 0.75
+  imgViewer.Width = VarImage1Width * 0.75
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom100_Click()
-    imgViewer.Height = VarImage1Height
-    imgViewer.Width = VarImage1Width
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height
+  imgViewer.Width = VarImage1Width
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom150_Click()
-    imgViewer.Height = VarImage1Height * 1.5
-    imgViewer.Width = VarImage1Width * 1.5
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 1.5
+  imgViewer.Width = VarImage1Width * 1.5
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom200_Click()
-    imgViewer.Height = VarImage1Height * 2
-    imgViewer.Width = VarImage1Width * 2
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 2
+  imgViewer.Width = VarImage1Width * 2
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom300_Click()
-    imgViewer.Height = VarImage1Height * 3
-    imgViewer.Width = VarImage1Width * 3
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 3
+  imgViewer.Width = VarImage1Width * 3
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom400_Click()
-    imgViewer.Height = VarImage1Height * 4
-    imgViewer.Width = VarImage1Width * 4
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 4
+  imgViewer.Width = VarImage1Width * 4
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom500_Click()
-    imgViewer.Height = VarImage1Height * 5
-    imgViewer.Width = VarImage1Width * 5
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 5
+  imgViewer.Width = VarImage1Width * 5
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1Zoom1000_Click()
-    imgViewer.Height = VarImage1Height * 10
-    imgViewer.Width = VarImage1Width * 10
-    GambarKeTengah
-    imgViewer.Stretch = True
-    AturScrollbar
+  imgViewer.Height = VarImage1Height * 10
+  imgViewer.Width = VarImage1Width * 10
+  GambarKeTengah
+  imgViewer.Stretch = True
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1ZoomActualSize_Click()
-    mnuPopUp1Zoom100_Click
-    AturScrollbar
+  mnuPopUp1Zoom100_Click
+  AturScrollbar
 End Sub
 
 Private Sub mnuPopUp1First_Click()
-    If lstViewer.ListCount <> 0 Then
-        If lstViewer.ListIndex <> 0 Then
-            lstViewer.ListIndex = 0
-        End If
+  If lstViewer.ListCount <> 0 Then
+    If lstViewer.ListIndex <> 0 Then
+      lstViewer.ListIndex = 0
     End If
+  End If
 End Sub
 
 Private Sub mnuPopUp1Previous_Click()
-    If lstViewer.ListCount <> 0 Then
-        If lstViewer.ListIndex <> 0 Then
-            lstViewer.ListIndex = lstViewer.ListIndex - 1
-        End If
+  If lstViewer.ListCount <> 0 Then
+    If lstViewer.ListIndex <> 0 Then
+      lstViewer.ListIndex = lstViewer.ListIndex - 1
     End If
+  End If
 End Sub
 
 Private Sub mnuPopUp1Next_Click()
-    If lstViewer.ListCount <> 0 Then
-        If lstViewer.ListIndex < lstViewer.ListCount - 1 Then
-            lstViewer.ListIndex = lstViewer.ListIndex + 1
-        End If
+  If lstViewer.ListCount <> 0 Then
+    If lstViewer.ListIndex < lstViewer.ListCount - 1 Then
+      lstViewer.ListIndex = lstViewer.ListIndex + 1
     End If
+  End If
 End Sub
 
 Private Sub mnuPopUp1Last_Click()
-    If lstViewer.ListCount <> 0 Then
-        If lstViewer.ListIndex < lstViewer.ListCount - 1 Then
-            lstViewer.ListIndex = lstViewer.ListCount - 1
-        End If
+  If lstViewer.ListCount <> 0 Then
+    If lstViewer.ListIndex < lstViewer.ListCount - 1 Then
+      lstViewer.ListIndex = lstViewer.ListCount - 1
     End If
+  End If
 End Sub
 
 Private Sub mnuPopUp1SlideShow_Click()
-    iFile = 0
-    cmdStopSlideShow.Visible = True
-    tmrSlideShow.Enabled = True
+  iFile = 0
+  cmdStopSlideShow.Visible = True
+  tmrSlideShow.Enabled = True
 End Sub
 
 Private Sub tmrSlideShow_Timer()
-    If lstViewer.ListCount > 0 Then
-        If iFile < lstViewer.ListCount Then
-            lstViewer.ListIndex = iFile
-            iFile = iFile + 1
-        Else
-            tmrSlideShow.Enabled = False
-            cmdStopSlideShow.Visible = False
-        End If
+  If lstViewer.ListCount > 0 Then
+    If iFile < lstViewer.ListCount Then
+      lstViewer.ListIndex = iFile
+      iFile = iFile + 1
+    Else
+      tmrSlideShow.Enabled = False
+      cmdStopSlideShow.Visible = False
     End If
+  End If
 End Sub
 
 Private Sub cmdStopSlideShow_Click()
-    tmrSlideShow.Enabled = False
-    cmdStopSlideShow.Visible = False
+  tmrSlideShow.Enabled = False
+  cmdStopSlideShow.Visible = False
 End Sub
 
 Private Sub mnuPopUp1Properties_Click()
-    txtProperties.Top = 600
-    tmrProperties.Enabled = True
-    
-    txtProperties.Text = "File : " & FileTerpilih + vbCrLf _
-                       + lblDimension.Caption + vbCrLf _
-                       + lblSize.Caption
+  txtProperties.Top = 600
+  tmrProperties.Enabled = True
+
+  txtProperties.tEXT = "File : " & FileTerpilih + vbCrLf _
+                     + lblDimension.Caption + vbCrLf _
+                     + lblSize.Caption
 End Sub
 
 Private Sub tmrProperties_Timer()
-    picProperties.Left = 0
-    picProperties.Top = 0
-    picProperties.Visible = True
-    If txtProperties.Top > (picProperties.ScaleHeight - txtProperties.Height) Then
-        txtProperties.Top = txtProperties.Top - 10
-        If txtProperties.Top <= 90 Then
-            picProperties.Visible = False
-            tmrProperties.Enabled = False
-        End If
+  picProperties.Left = 0
+  picProperties.Top = 0
+  picProperties.Visible = True
+  If txtProperties.Top > (picProperties.ScaleHeight - txtProperties.Height) Then
+    txtProperties.Top = txtProperties.Top - 10
+    If txtProperties.Top <= 90 Then
+      picProperties.Visible = False
+      tmrProperties.Enabled = False
     End If
+  End If
 End Sub
 
 Private Sub mnuPopUp1CopyToClipboard_Click()
-    On Error Resume Next
-    Clipboard.Clear
-    'If UCase(Right(FileTerpilih, 4)) = ".PNG" Then
-    '    Token = InitGDIPlus
-    '    Clipboard.SetData LoadPictureGDIPlus(FileTerpilih, , , vbWhite) 'Copy based on file name (Copy berdasarkan nama file)
-    '    FreeGDIPlus Token
-    'Else
-    '    Clipboard.SetData LoadPicture(FileTerpilih) 'Copy based on file name (Copy berdasarkan nama file)
-    'End If
-    Clipboard.SetData imgViewer, 2               'Copy image direct from the image object (Copy gambar langsung dari object imgage)
+  On Error Resume Next
+  Clipboard.Clear
+  'If UCase(Right(FileTerpilih, 4)) = ".PNG" Then
+  '    Token = InitGDIPlus
+  '    Clipboard.SetData LoadPictureGDIPlus(FileTerpilih, , , vbWhite) 'Copy based on file name (Copy berdasarkan nama file)
+  '    FreeGDIPlus Token
+  'Else
+  '    Clipboard.SetData LoadPicture(FileTerpilih) 'Copy based on file name (Copy berdasarkan nama file)
+  'End If
+  Clipboard.SetData imgViewer, 2               'Copy image direct from the image object (Copy gambar langsung dari object imgage)
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    MousePointer = 0
+  MousePointer = 0
 End Sub
 
 Private Sub cmdBrowseFolder_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    MousePointer = 0
+  MousePointer = 0
 End Sub
 
 Private Sub lstViewer_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    MousePointer = 0
+  MousePointer = 0
 End Sub
 
 Private Sub picPrint_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    MousePointer = 0
+  MousePointer = 0
 End Sub
 
 Private Sub fraPrint_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    MousePointer = 0
+  MousePointer = 0
 End Sub
 
 Private Sub picViewer_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub picFolderFile_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub picInfo_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub cmdStopSlideShow_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub cmdFirst_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub cmdPrevious_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub cmdNext_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub cmdLast_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub cmdMenu_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub cmdPrint_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub cmdCloseDialog_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub txtAddress_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
+  lstViewer.SetFocus                           'So that the button can be used as previous and next (Agar tombol bisa digunakan sebagai previous dan next)
 End Sub
 
 Private Sub cmdPrint_Click()
-    On Error GoTo ErrorHandle
-    cmdPrint.Enabled = False
-    cmdPrintDialog.Enabled = False
-    picPrint.Visible = True
-    cmbPrinters.Clear
-    cmbPapers.Clear
-    cmbResolutions.Clear
-    optOrientation(0).Value = True
-    optOrientation(0).Enabled = False
-    optOrientation(1).Enabled = False
-    For Each Pr In Printers
-        cmbPrinters.AddItem Pr.DeviceName
-    Next
-    Exit Sub
-    
+  On Error GoTo ErrorHandle
+  cmdPrint.Enabled = False
+  cmdPrintDialog.Enabled = False
+  picPrint.Visible = True
+  cmbPrinters.Clear
+  cmbPapers.Clear
+  cmbResolutions.Clear
+  optOrientation(0).Value = True
+  optOrientation(0).Enabled = False
+  optOrientation(1).Enabled = False
+  For Each Pr In Printers
+    cmbPrinters.AddItem Pr.DeviceName
+  Next
+  Exit Sub
+
 ErrorHandle:
-    MsgBox Err.Description, vbExclamation, ""
+  MsgBox Err.Description, vbExclamation, ""
 End Sub
 
 Private Sub cmbPrinters_Click()
-    On Error GoTo ErrorHandle
-    
-    Dim PaperCount As Long
-    Dim strPaperNames As String
-    Dim I As Long
-    Dim strPaperName As String
-    Dim ActualLength As Long
-    Dim ResolutionCount As Long
-    Dim LandscapeRotation As Long
-    
-    Set Pr = Printers(cmbPrinters.ListIndex)
-    
-    'Get paper IDs, names, sizes
-    PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
-                                    StrPtr(Pr.Port), _
-                                    DC_PAPERS, _
-                                    0, _
-                                    0)
-    ReDim intPaperIds(PaperCount - 1)
-    PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
-                                    StrPtr(Pr.Port), _
-                                    DC_PAPERS, _
-                                    VarPtr(intPaperIds(0)), _
-                                    0)
-    
-    PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
-                                    StrPtr(Pr.Port), _
-                                    DC_PAPERNAMES, _
-                                    0, _
-                                    0)
-    strPaperNames = String$(PaperCount * 64, 0)
-    PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
-                                    StrPtr(Pr.Port), _
-                                    DC_PAPERNAMES, _
-                                    StrPtr(strPaperNames), _
-                                    0)
-    
-    PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
-                                    StrPtr(Pr.Port), _
-                                    DC_PAPERSIZE, _
-                                    0, _
-                                    0)
-    ReDim ptPaperSizes(PaperCount - 1)
-    PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
-                                    StrPtr(Pr.Port), _
-                                    DC_PAPERSIZE, _
-                                    VarPtr(ptPaperSizes(0)), _
-                                    0)
-    cmbPapers.Clear
-    For I = 0 To PaperCount - 1
-        strPaperName = Mid$(strPaperNames, 64 * I + 1, 64)
-        ActualLength = InStr(strPaperName, vbNullChar) - 1
-        If ActualLength > 1 Then strPaperName = Left$(strPaperName, ActualLength)
-        cmbPapers.AddItem CStr(intPaperIds(I)) _
-      & ": " & strPaperName _
-      & " (" & CStr(ptPaperSizes(I).x) / 10 _
-      & ", " & CStr(ptPaperSizes(I).y) / 10 & ")"
-    Next
-    cmbPapers.Enabled = True
-    
-    'Get resolutions
-    ResolutionCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
+  On Error GoTo ErrorHandle
+
+  Dim PaperCount As Long
+  Dim strPaperNames As String
+  Dim i As Long
+  Dim strPaperName As String
+  Dim ActualLength As Long
+  Dim ResolutionCount As Long
+  Dim LandscapeRotation As Long
+
+  Set Pr = Printers(cmbPrinters.ListIndex)
+
+  'Get paper IDs, names, sizes
+  PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
+                                  StrPtr(Pr.Port), _
+                                  DC_PAPERS, _
+                                  0, _
+                                  0)
+  ReDim intPaperIds(PaperCount - 1)
+  PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
+                                  StrPtr(Pr.Port), _
+                                  DC_PAPERS, _
+                                  VarPtr(intPaperIds(0)), _
+                                  0)
+
+  PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
+                                  StrPtr(Pr.Port), _
+                                  DC_PAPERNAMES, _
+                                  0, _
+                                  0)
+  strPaperNames = String$(PaperCount * 64, 0)
+  PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
+                                  StrPtr(Pr.Port), _
+                                  DC_PAPERNAMES, _
+                                  StrPtr(strPaperNames), _
+                                  0)
+
+  PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
+                                  StrPtr(Pr.Port), _
+                                  DC_PAPERSIZE, _
+                                  0, _
+                                  0)
+  ReDim ptPaperSizes(PaperCount - 1)
+  PaperCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
+                                  StrPtr(Pr.Port), _
+                                  DC_PAPERSIZE, _
+                                  VarPtr(ptPaperSizes(0)), _
+                                  0)
+  cmbPapers.Clear
+  For i = 0 To PaperCount - 1
+    strPaperName = Mid$(strPaperNames, 64 * i + 1, 64)
+    ActualLength = InStr(strPaperName, vbNullChar) - 1
+    If ActualLength > 1 Then strPaperName = Left$(strPaperName, ActualLength)
+    cmbPapers.AddItem CStr(intPaperIds(i)) _
+                    & ": " & strPaperName _
+                    & " (" & CStr(ptPaperSizes(i).x) / 10 _
+                    & ", " & CStr(ptPaperSizes(i).y) / 10 & ")"
+  Next
+  cmbPapers.Enabled = True
+
+  'Get resolutions
+  ResolutionCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
+                                       StrPtr(Pr.Port), _
+                                       DC_ENUMRESOLUTIONS, _
+                                       0, _
+                                       0)
+  ReDim lngResolutions(2 * ResolutionCount - 1)
+  ResolutionCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
+                                       StrPtr(Pr.Port), _
+                                       DC_ENUMRESOLUTIONS, _
+                                       VarPtr(lngResolutions(0)), _
+                                       0)
+  cmbResolutions.Clear
+  For i = 0 To ResolutionCount - 1
+    cmbResolutions.AddItem "(" & CStr(lngResolutions(2 * i)) _
+                         & ", " & CStr(lngResolutions(2 * i + 1)) & ")"
+  Next
+  cmbResolutions.Enabled = True
+
+  'Get orientations
+  LandscapeRotation = DeviceCapabilities(StrPtr(Pr.DeviceName), _
                                          StrPtr(Pr.Port), _
-                                         DC_ENUMRESOLUTIONS, _
+                                         DC_ORIENTATION, _
                                          0, _
                                          0)
-    ReDim lngResolutions(2 * ResolutionCount - 1)
-    ResolutionCount = DeviceCapabilities(StrPtr(Pr.DeviceName), _
-                                         StrPtr(Pr.Port), _
-                                         DC_ENUMRESOLUTIONS, _
-                                         VarPtr(lngResolutions(0)), _
-                                         0)
-    cmbResolutions.Clear
-    For I = 0 To ResolutionCount - 1
-        cmbResolutions.AddItem "(" & CStr(lngResolutions(2 * I)) _
-      & ", " & CStr(lngResolutions(2 * I + 1)) & ")"
-    Next
-    cmbResolutions.Enabled = True
-    
-    'Get orientations
-    LandscapeRotation = DeviceCapabilities(StrPtr(Pr.DeviceName), _
-                                           StrPtr(Pr.Port), _
-                                           DC_ORIENTATION, _
-                                           0, _
-                                           0)
-    optOrientation(0).Enabled = True
-    If LandscapeRotation > 0 Then
-        optOrientation(1).Enabled = True
-    Else
-        optOrientation(1).Enabled = False
-        optOrientation(0).Value = True
-    End If
-    
-    Exit Sub
-    
-ErrorHandle:
-    cmbPapers.Clear
-    cmbResolutions.Clear
-    cmdPrintDialog.Enabled = False
-    optOrientation(0).Enabled = False
+  optOrientation(0).Enabled = True
+  If LandscapeRotation > 0 Then
+    optOrientation(1).Enabled = True
+  Else
     optOrientation(1).Enabled = False
+    optOrientation(0).Value = True
+  End If
+
+  Exit Sub
+
+ErrorHandle:
+  cmbPapers.Clear
+  cmbResolutions.Clear
+  cmdPrintDialog.Enabled = False
+  optOrientation(0).Enabled = False
+  optOrientation(1).Enabled = False
 End Sub
 
 Private Sub cmbPapers_Click()
-    If Len(cmbPapers.Text) > 0 And Len(cmbResolutions.Text) > 0 Then cmdPrintDialog.Enabled = True
+  If Len(cmbPapers.tEXT) > 0 And Len(cmbResolutions.tEXT) > 0 Then cmdPrintDialog.Enabled = True
 End Sub
 
 Private Sub cmbResolutions_Click()
-    If Len(cmbPapers.Text) > 0 And Len(cmbResolutions.Text) > 0 Then cmdPrintDialog.Enabled = True
+  If Len(cmbPapers.tEXT) > 0 And Len(cmbResolutions.tEXT) > 0 Then cmdPrintDialog.Enabled = True
 End Sub
 
 
 Private Sub xcmdPrintDialog_Click()
-    If UCase(Right(FileTerpilih, 4)) = ".PNG" Then
-        Token = InitGDIPlus
-        Set Pic = LoadPictureGDIPlus(FileTerpilih, , , vbWhite)
-        FreeGDIPlus Token
+  If UCase(Right(FileTerpilih, 4)) = ".PNG" Then
+    Token = InitGDIPlus
+    Set Pic = LoadPictureGDIPlus(FileTerpilih, , , vbWhite)
+    FreeGDIPlus Token
+  Else
+    Set Pic = LoadPicture(FileTerpilih)
+  End If
+
+  'Print the StdPicture Pic centered on the selected rrinter (Pr)
+  'with the selected paper (lstPapers) at the selected quality
+  '(lngResolutions) within set margins
+  Dim MarginsLR As Single
+  Dim MarginsTB As Single
+  Dim PrintableWidth As Single
+  Dim PrintableHeight As Single
+  Dim ScaleFactor As Double
+  Dim ScaledWidth As Double
+  Dim ScaledHeight As Double
+
+  Set Printer = Pr
+  With Printer
+    'Set up paper
+    .PaperSize = intPaperIds(cmbPapers.ListIndex)
+    .PrintQuality = lngResolutions(2 * cmbResolutions.ListIndex)  'We can only set one
+    'value DPI value, just
+    'use X here
+    If optOrientation(1).Value Then
+      .Orientation = vbPRORLandscape
     Else
-        Set Pic = LoadPicture(FileTerpilih)
+      .Orientation = vbPRORPortrait
     End If
-    
-    'Print the StdPicture Pic centered on the selected rrinter (Pr)
-    'with the selected paper (lstPapers) at the selected quality
-    '(lngResolutions) within set margins
-    Dim MarginsLR As Single
-    Dim MarginsTB As Single
-    Dim PrintableWidth As Single
-    Dim PrintableHeight As Single
-    Dim ScaleFactor As Double
-    Dim ScaledWidth As Double
-    Dim ScaledHeight As Double
-    
-    Set Printer = Pr
-    With Printer
-        'Set up paper
-        .PaperSize = intPaperIds(cmbPapers.ListIndex)
-        .PrintQuality = lngResolutions(2 * cmbResolutions.ListIndex) 'We can only set one
-        'value DPI value, just
-        'use X here
-        If optOrientation(1).Value Then
-            .Orientation = vbPRORLandscape
-        Else
-            .Orientation = vbPRORPortrait
-        End If
-        
-        'Scale to paper, using 0.5" margins all around.Could also crop
-        'the image here
-        MarginsLR = .ScaleX(0.5, vbInches, .ScaleMode)
-        MarginsTB = .ScaleY(0.5, vbInches, .ScaleMode)
-        PrintableWidth = .Width - 2 * MarginsLR
-        PrintableHeight = .Height - 2 * MarginsTB
-        
-        ScaleFactor = PrintableWidth / .ScaleX(Pic.Width, vbHimetric, .ScaleMode)
-        If ScaleFactor * .ScaleY(Pic.Height, vbHimetric, .ScaleMode) > PrintableHeight Then
-            ScaleFactor = PrintableHeight / .ScaleY(Pic.Height, vbHimetric, .ScaleMode)
-        End If
-        
-        ScaledWidth = ScaleFactor * .ScaleX(Pic.Width, vbHimetric, .ScaleMode)
-        ScaledHeight = ScaleFactor * .ScaleY(Pic.Height, vbHimetric, .ScaleMode)
-        
-        'Paint (print) the image, scaled.Could also do the actual cropping
-        'here if any were desired by specifying additional arguments
-        .PaintPicture Pic, _
-                      (.Width - ScaledWidth) / 2, _
-                      (.Height - ScaledHeight) / 2, _
-                      ScaledWidth, _
-                      ScaledHeight
-        .NewPage
-      '  .EndDoc
-    End With
+
+    'Scale to paper, using 0.5" margins all around.Could also crop
+    'the image here
+    MarginsLR = .ScaleX(0.5, vbInches, .ScaleMode)
+    MarginsTB = .ScaleY(0.5, vbInches, .ScaleMode)
+    PrintableWidth = .Width - 2 * MarginsLR
+    PrintableHeight = .Height - 2 * MarginsTB
+
+    ScaleFactor = PrintableWidth / .ScaleX(Pic.Width, vbHimetric, .ScaleMode)
+    If ScaleFactor * .ScaleY(Pic.Height, vbHimetric, .ScaleMode) > PrintableHeight Then
+      ScaleFactor = PrintableHeight / .ScaleY(Pic.Height, vbHimetric, .ScaleMode)
+    End If
+
+    ScaledWidth = ScaleFactor * .ScaleX(Pic.Width, vbHimetric, .ScaleMode)
+    ScaledHeight = ScaleFactor * .ScaleY(Pic.Height, vbHimetric, .ScaleMode)
+
+    'Paint (print) the image, scaled.Could also do the actual cropping
+    'here if any were desired by specifying additional arguments
+    .PaintPicture Pic, _
+                  (.Width - ScaledWidth) / 2, _
+                  (.Height - ScaledHeight) / 2, _
+                  ScaledWidth, _
+                  ScaledHeight
+    .NewPage
+    '  .EndDoc
+  End With
 End Sub
 
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-    xcmdPrintDialog_Click
+  xcmdPrintDialog_Click
 End Sub
 
 Private Sub cmdCloseDialog_Click()
-    picPrint.Visible = False
-    cmdPrint.Enabled = True
+  picPrint.Visible = False
+  cmdPrint.Enabled = True
 End Sub
 
 Private Sub cmbPrinters_KeyPress(KeyAscii As Integer)
-    KeyAscii = 0
+  KeyAscii = 0
 End Sub
 
 Private Sub cmbPapers_KeyPress(KeyAscii As Integer)
-    KeyAscii = 0
+  KeyAscii = 0
 End Sub
 
 Private Sub cmbResolutions_KeyPress(KeyAscii As Integer)
-    KeyAscii = 0
+  KeyAscii = 0
 End Sub
 
 

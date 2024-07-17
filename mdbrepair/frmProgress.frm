@@ -65,6 +65,6 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Form_Load()
-CenterFormToScreen Me
+  CenterFormToScreen Me
 
 End Sub

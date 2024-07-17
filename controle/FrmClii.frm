@@ -153,44 +153,44 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    For iLOOP = 0 To nCAMPOS - 2
-        aVAL(iLOOP) = TXTFIELDS(iLOOP)
-    Next iLOOP
-    aVAL(4) = FixNumBol(inativo.Value)
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    Screen.MousePointer = vbDefault
-    Unload Me
+  For iLOOP = 0 To nCAMPOS - 2
+    aVAL(iLOOP) = TXTFIELDS(iLOOP)
+  Next iLOOP
+  aVAL(4) = FixNumBol(inativo.Value)
+  GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
- 
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = PegPath("PATH", "DESENHO")
-    cSQL = "select * from PRODUTO WHERE CLIENTE=" & nPF & " and ITEM=" & nREVI
-    nCAMPOS = 5
-    aCAM = Array("ITEM", "CLIENTE", "CODIGO", "NOME", "INATIVO")
-    aFOR = Array("NI", "NI", "C", "C", "BN")
-    aPAD = Array(0, 0, "", "", False)
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 2
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    inativo.Value = aVAL(4)
+  CenterFormToScreen Me
+  cARQ = PegPath("PATH", "DESENHO")
+  cSQL = "select * from PRODUTO WHERE CLIENTE=" & nPF & " and ITEM=" & nREVI
+  nCAMPOS = 5
+  aCAM = Array("ITEM", "CLIENTE", "CODIGO", "NOME", "INATIVO")
+  aFOR = Array("NI", "NI", "C", "C", "BN")
+  aPAD = Array(0, 0, "", "", False)
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 2
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  inativo.Value = aVAL(4)
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 

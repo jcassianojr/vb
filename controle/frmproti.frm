@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmproti 
    Caption         =   "Controle de Prototipos"
    ClientHeight    =   4515
@@ -262,7 +262,7 @@ Begin VB.Form frmproti
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin vbccr18.DTPicker DTPicker1 
+   Begin VBCCR18.DTPicker DTPicker1 
       Height          =   375
       Left            =   1440
       TabIndex        =   24
@@ -363,143 +363,143 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 3
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        aVAL(8) = DTPicker1
-        aVAL(9) = FixNumBol(Check1)
-        GrvSQL cARQDES, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 3
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    aVAL(8) = DTPicker1
+    aVAL(9) = FixNumBol(Check1)
+    GrvSQL cARQDES, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub CmdLocalizar_Click()
 
-    LocalizaGri1 GridAtual
+  LocalizaGri1 GridAtual
 
 End Sub
 
 Private Sub Editar_Click()
 
-    GridAtual.Col = 0
-    cCONJUNTO = FixStr(GridAtual)
-    frmprotii.Show vbModal, Me
-    Filgrid
+  GridAtual.Col = 0
+  cCONJUNTO = FixStr(GridAtual)
+  frmprotii.Show vbModal, Me
+  Filgrid
 
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub excluir_Click()
-    Dim sSQL As String
-    GridAtual.Col = 0
-    cCONJUNTO = FixStr(GridAtual)
-    GridAtual.Col = 2
-    nPPAP = FixInt(GridAtual)
-    '******************************************************************
-    'Conjunto
-    sSQL = "SELECT * FROM PROTOI WHERE PARTNUMBER='" & cDESENHO & "' AND SSMT='" & cCONJUNTO & "'"
-    '******************************************************************
-    If ApagaSQLP(cARQDES, sSQL) Then
-        Filgrid
-        eRETU02 = "GP11:" & Trim(Str(nPPAP)) & Chr(13) & Chr(10)
-        eRETU02 = eRETU02 & "Código:" & cDESENHO & Chr(13) & Chr(10)
-        eRETU02 = eRETU02 & "SSMT" & cCONJUNTO & Chr(13) & Chr(10)
-        MAILENV "PROT0002", eRETU02
-    End If
+  Dim sSQL As String
+  GridAtual.Col = 0
+  cCONJUNTO = FixStr(GridAtual)
+  GridAtual.Col = 2
+  nPPAP = FixInt(GridAtual)
+  '******************************************************************
+  'Conjunto
+  sSQL = "SELECT * FROM PROTOI WHERE PARTNUMBER='" & cDESENHO & "' AND SSMT='" & cCONJUNTO & "'"
+  '******************************************************************
+  If ApagaSQLP(cARQDES, sSQL) Then
+    Filgrid
+    eRETU02 = "GP11:" & Trim(Str(nPPAP)) & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & "Código:" & cDESENHO & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & "SSMT" & cCONJUNTO & Chr(13) & Chr(10)
+    MAILENV "PROT0002", eRETU02
+  End If
 
 End Sub
 
 Private Sub Filgrid()
 
-    Dim cSQL As String
-    cSQL = "SELECT SSMT,FASE,PPAP FROM PROTOI WHERE PARTNUMBER='" & cDESENHO & "'"
+  Dim cSQL As String
+  cSQL = "SELECT SSMT,FASE,PPAP FROM PROTOI WHERE PARTNUMBER='" & cDESENHO & "'"
 
-    MontaGridFast GridAtual, 3, Array(4000, 1000, 1000), Array("SSMT", "Fase", "GP11"), Array("L$SSMT", "fase", "PPAP"), cARQDES, cSQL
+  MontaGridFast GridAtual, 3, Array(4000, 1000, 1000), Array("SSMT", "Fase", "GP11"), Array("L$SSMT", "fase", "PPAP"), cARQDES, cSQL
 
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    'Dim aRETU As Variant
-    CenterFormToScreen Me
-    cARQDES = PegPath("PATH", "DESENHO")
-    cSQL = "select * from PROTO WHERE PARTNUMBER='" & cDESENHO & "'"
-    nCAMPOS = 10
-    aCAM = Array("PARTNUMBER", "NOME", "ENGENHEIRO", "ENGRAMAL", "CLIENTE", "CLINOME", "PROJETO", "COTVAL", "COTDATA", "COTACAO")
-    aFOR = Array("C", "C", "C", "C", "N", "C", "C", "C", "D", "BN")
-    aPAD = Array("", "", "", "", 0, "", "", "", Date, False)
-    aVAL = PegSQL(cARQDES, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 3
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    If IsDate(aVAL(8)) Then
-        DTPicker1.Value = aVAL(8)
-    End If
-    Check1.Value = aVAL(9)
-    Filgrid
+'Dim aRETU As Variant
+  CenterFormToScreen Me
+  cARQDES = PegPath("PATH", "DESENHO")
+  cSQL = "select * from PROTO WHERE PARTNUMBER='" & cDESENHO & "'"
+  nCAMPOS = 10
+  aCAM = Array("PARTNUMBER", "NOME", "ENGENHEIRO", "ENGRAMAL", "CLIENTE", "CLINOME", "PROJETO", "COTVAL", "COTDATA", "COTACAO")
+  aFOR = Array("C", "C", "C", "C", "N", "C", "C", "C", "D", "BN")
+  aPAD = Array("", "", "", "", 0, "", "", "", Date, False)
+  aVAL = PegSQL(cARQDES, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 3
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  If IsDate(aVAL(8)) Then
+    DTPicker1.Value = aVAL(8)
+  End If
+  Check1.Value = aVAL(9)
+  Filgrid
 End Sub
 
 Private Sub Novo_Click()
-    On Error Resume Next
-    Dim cSSMT As String
-    Dim cGP11 As String
-    Dim DB As New ADODB.Connection
-    Dim RSTAB As New ADODB.Recordset
-    Dim sSQL As String
-    nREVI = 0
-    cSSMT = InputBox("Digite o SSMT", "Inclusão SSMT", "__")
+  On Error Resume Next
+  Dim cSSMT As String
+  Dim cGP11 As String
+  Dim DB As New ADODB.Connection
+  Dim RSTAB As New ADODB.Recordset
+  Dim sSQL As String
+  nREVI = 0
+  cSSMT = InputBox("Digite o SSMT", "Inclusão SSMT", "__")
+  DB.ConnectionTimeout = 120
+  DB.Open GeracArq(cARQDES, , False)
+  sSQL = "SELECT * FROM PROTOI WHERE PARTNUMBER='" & cDESENHO & "' AND SSMT='" & cSSMT & "'"
+  RSTAB.Open sSQL, DB, adOpenForwardOnly, adLockReadOnly
+  If Not RSTAB.EOF Then
+    RSTAB.Close
+    Alert "SSMT Já Cadastrado"
+    Exit Sub
+  End If
+  RSTAB.Close
+  DB.Close
+  cGP11 = InputBox("Digite o GP11", "Numero do GP11 - Zero Cria Novo", "0")
+  nPF = Val(cGP11)
+  If nPF = 0 Then
     DB.ConnectionTimeout = 120
-    DB.Open GeracArq(cARQDES, , False)
-    sSQL = "SELECT * FROM PROTOI WHERE PARTNUMBER='" & cDESENHO & "' AND SSMT='" & cSSMT & "'"
-    RSTAB.Open sSQL, DB, adOpenForwardOnly, adLockReadOnly
-    If Not RSTAB.EOF Then
-        RSTAB.Close
-        Alert "SSMT Já Cadastrado"
-        Exit Sub
-    End If
+    DB.Open GeracArq(cARQDES)
+    RSTAB.Open "PPAG", DB, adOpenDynamic, adLockOptimistic
+    RSTAB.AddNew
+    RSTAB("CODIGO") = cDESENHO
+    RSTAB("NOME") = TXTFIELDS(1)
+    RSTAB("CLIENTE") = TXTFIELDS(4)
+    RSTAB("CLINOME") = TXTFIELDS(5)
+    RSTAB("SSMT") = cSSMT
+    nPF = RSTAB("PPAP")
+    RSTAB.Update
     RSTAB.Close
     DB.Close
-    cGP11 = InputBox("Digite o GP11", "Numero do GP11 - Zero Cria Novo", "0")
-    nPF = Val(cGP11)
-    If nPF = 0 Then
-        DB.ConnectionTimeout = 120
-        DB.Open GeracArq(cARQDES)
-        RSTAB.Open "PPAG", DB, adOpenDynamic, adLockOptimistic
-        RSTAB.AddNew
-        RSTAB("CODIGO") = cDESENHO
-        RSTAB("NOME") = TXTFIELDS(1)
-        RSTAB("CLIENTE") = TXTFIELDS(4)
-        RSTAB("CLINOME") = TXTFIELDS(5)
-        RSTAB("SSMT") = cSSMT
-        nPF = RSTAB("PPAP")
-        RSTAB.Update
-        RSTAB.Close
-        DB.Close
-    End If
-    IncluiSQL cARQDES, "select * from PROTOI where partnumeber='" & cDESENHO & "' and ssmt='" & cSSMT & " and pf=" & nPF, 3, Array("PARTNUMBER", "SSMT", "PPAP"), Array(cDESENHO, cSSMT, nPF), True, False
-    Filgrid
-    eRETU02 = "GP11:" & Trim(Str(nPPAP)) & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & "Código:" & cDESENHO & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & "SSMT" & cSSMT & Chr(13) & Chr(10)
-    MAILENV "PROT0001", eRETU02
+  End If
+  IncluiSQL cARQDES, "select * from PROTOI where partnumeber='" & cDESENHO & "' and ssmt='" & cSSMT & " and pf=" & nPF, 3, Array("PARTNUMBER", "SSMT", "PPAP"), Array(cDESENHO, cSSMT, nPF), True, False
+  Filgrid
+  eRETU02 = "GP11:" & Trim(Str(nPPAP)) & Chr(13) & Chr(10)
+  eRETU02 = eRETU02 & "Código:" & cDESENHO & Chr(13) & Chr(10)
+  eRETU02 = eRETU02 & "SSMT" & cSSMT & Chr(13) & Chr(10)
+  MAILENV "PROT0001", eRETU02
 
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 
 End Sub
 

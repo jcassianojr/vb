@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Begin VB.Form frmPOA 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MENU"
@@ -22,9 +22,6 @@ Begin VB.Form frmPOA
       Top             =   360
       _ExtentX        =   1191
       _ExtentY        =   1191
-      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
-      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
-      AmbientBb       =   $"frmPOA.frx":058A
    End
    Begin TabExCtl.SSTabEx SSTab1 
       Height          =   5175
@@ -152,7 +149,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":062A
+         Picture         =   "frmPOA.frx":058A
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -173,7 +170,7 @@ Begin VB.Form frmPOA
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":0BC4
+         Picture         =   "frmPOA.frx":0B24
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -195,7 +192,7 @@ Begin VB.Form frmPOA
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":115E
+         Picture         =   "frmPOA.frx":10BE
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -217,7 +214,7 @@ Begin VB.Form frmPOA
          Width           =   735
          _ExtentX        =   1296
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":16F8
+         Picture         =   "frmPOA.frx":1658
          Caption         =   "LX"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -238,7 +235,7 @@ Begin VB.Form frmPOA
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":1C92
+         Picture         =   "frmPOA.frx":1BF2
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -259,7 +256,7 @@ Begin VB.Form frmPOA
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPOA.frx":222C
+         Picture         =   "frmPOA.frx":218C
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -280,7 +277,7 @@ Begin VB.Form frmPOA
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":27C6
+         Picture         =   "frmPOA.frx":2726
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -300,7 +297,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":2D60
+         Picture         =   "frmPOA.frx":2CC0
          Caption         =   "Incluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -320,7 +317,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":31FA
+         Picture         =   "frmPOA.frx":315A
          Caption         =   "Excluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -340,7 +337,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPOA.frx":3694
+         Picture         =   "frmPOA.frx":35F4
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -360,7 +357,7 @@ Begin VB.Form frmPOA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOA.frx":3B2E
+         Picture         =   "frmPOA.frx":3A8E
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -542,7 +539,7 @@ Begin VB.Form frmPOA
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPOA.frx":3FC8
+      Picture         =   "frmPOA.frx":3F28
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -563,7 +560,7 @@ Begin VB.Form frmPOA
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPOA.frx":4562
+      Picture         =   "frmPOA.frx":44C2
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -583,7 +580,7 @@ Begin VB.Form frmPOA
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":4AFC
+      Picture         =   "frmPOA.frx":4A5C
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -605,7 +602,7 @@ Begin VB.Form frmPOA
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":5096
+      Picture         =   "frmPOA.frx":4FF6
       Caption         =   "mana5"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -626,7 +623,7 @@ Begin VB.Form frmPOA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":5630
+      Picture         =   "frmPOA.frx":5590
       Caption         =   "PF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -648,7 +645,7 @@ Begin VB.Form frmPOA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":5BCA
+      Picture         =   "frmPOA.frx":5B2A
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -670,7 +667,7 @@ Begin VB.Form frmPOA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOA.frx":6164
+      Picture         =   "frmPOA.frx":60C4
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -787,306 +784,306 @@ Dim iLOOP As Integer
 Dim lTROCOU As Boolean
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txt(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-        If lTROCOU Then
-            ADOGrvBlob cARQ, cSQL, Picture1, "FOTO"
-        End If
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXT(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    If lTROCOU Then
+      ADOGrvBlob cARQ, cSQL, Picture1, "FOTO"
     End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub CmdConfImp_Click()
-    FrmPrintSetup.Show vbModal, Me
+  FrmPrintSetup.Show vbModal, Me
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-   Printer.PaintPicture Picture1, 0, 0
+  Printer.PaintPicture Picture1, 0, 0
 End Sub
 Private Sub CmdImprimir_Click()
-    If Picture1.Height = 0 Then
-        Alert ("Sem Imagem")
-    Else
-       PrintPreview1.ShowPreview
-    End If
+  If Picture1.Height = 0 Then
+    Alert ("Sem Imagem")
+  Else
+    PrintPreview1.ShowPreview
+  End If
 End Sub
 
 Private Sub CmdPaste_Click()
-    If Picture1.Height = 0 Then
-        Alert ("Sem Imagem")
-    Else
-        Clipboard.Clear
-        Clipboard.SetData Picture1.Image, (vbCFBitmap)
-    End If
+  If Picture1.Height = 0 Then
+    Alert ("Sem Imagem")
+  Else
+    Clipboard.Clear
+    Clipboard.SetData Picture1.Image, (vbCFBitmap)
+  End If
 End Sub
 
 Private Sub Command1_Click()
-    escpffim.Show vbModal, Me
-    If lRETU Then
-        txt(1) = eRETU02
-        txt(2) = eRETU03
-    End If
+  escpffim.Show vbModal, Me
+  If lRETU Then
+    TXT(1) = eRETU02
+    TXT(2) = eRETU03
+  End If
 End Sub
 
 Private Sub Command2_Click()
-    Dim cARQ As String
-    Dim aRETU As Variant
-    Dim sSQL             As String
-    Dim nNUMERO          As Long
-    nNUMERO = FixInt(txt(4), 0)
-    
-    cARQ = PegPath("PATH", "LOGIXODBC")
-    sSQL = "SELECT nom_completo as NOMTEC FROM funcionario WHERE cod_empresa='01' and num_matricula=" & nNUMERO
+  Dim cARQ As String
+  Dim aRETU As Variant
+  Dim sSQL As String
+  Dim nNUMERO As Long
+  nNUMERO = FixInt(TXT(4), 0)
+
+  cARQ = PegPath("PATH", "LOGIXODBC")
+  sSQL = "SELECT nom_completo as NOMTEC FROM funcionario WHERE cod_empresa='01' and num_matricula=" & nNUMERO
+  aRETU = PegSQL(cARQ, sSQL, 1, Array("NOMTEC"), Array("C"), Array(""))
+  If Not lRETU Then
+    cARQ = PegPath("PATH", "CADMP04")
+    cARQ = GeraConn(cARQ, "JETFOX")
+    sSQL = "SELECT NOMTEC FROM MP04 WHERE TECNICO=" & nNUMERO
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOMTEC"), Array("C"), Array(""))
-    If Not lRETU Then
-        cARQ = PegPath("PATH", "CADMP04")
-        cARQ = GeraConn(cARQ, "JETFOX")
-        sSQL = "SELECT NOMTEC FROM MP04 WHERE TECNICO=" & nNUMERO
-        aRETU = PegSQL(cARQ, sSQL, 1, Array("NOMTEC"), Array("C"), Array(""))
-    End If
-    If lRETU Then
-        txt(5) = aRETU(0)
-    End If
+  End If
+  If lRETU Then
+    TXT(5) = aRETU(0)
+  End If
 End Sub
 
 Private Sub Command3_Click()
-    Dim nSAC, nLEN As Long
-    Dim cDESC01, cDESC02, cDESC03, cDESC04, cPROBLEMA, cCAM As String
-    Dim cData As Variant
-    Dim SACAREA As Variant
-    Dim iRETVAL As Variant
-   
-    If txt(8) = "N" Then
-        Alert ("Ja respondida")
-        Exit Sub
-    End If
-  
-    If txt(8) = "S" And FixNum(txt(7)) > 0 Then
-        Alert ("Ja respondida")
-        Exit Sub
-    End If
-  
-    If Not MDG("Gerar Sac") Then
-        txt(8) = "N"
-        txt(9) = Today()
-        Exit Sub
-    End If
-    txt(8) = "S"
-    txt(9) = Today()
+  Dim nSAC, nLEN As Long
+  Dim cDESC01, cDESC02, cDESC03, cDESC04, cPROBLEMA, cCAM As String
+  Dim cData As Variant
+  Dim SACAREA As Variant
+  Dim iRETVAL As Variant
 
-    cPROBLEMA = FixStr(txt(3))
-    nLEN = Len(cPROBLEMA)
+  If TXT(8) = "N" Then
+    Alert ("Ja respondida")
+    Exit Sub
+  End If
 
-    cDESC01 = Mid(cPROBLEMA, 1, 100)
-    If nLEN > 100 Then
-        cDESC02 = Mid(cPROBLEMA, 101, 100)
-    End If
-    If nLEN > 200 Then
-        cDESC03 = Mid(cPROBLEMA, 201, 100)
-    End If
-    If nLEN > 300 Then
-        cDESC04 = Mid(cPROBLEMA, 301)
-    End If
+  If TXT(8) = "S" And FixNum(TXT(7)) > 0 Then
+    Alert ("Ja respondida")
+    Exit Sub
+  End If
 
-    cData = Format(Date, "DD/MM/YY")
-    cCAM = PegPath("PATH", "MANA5TGQ")
-    sx_SetEpoch (Year(Date) - 30)
-    sx_SetDateFormat BRITISH
-    sx_SetDeleted True
-    SACAREA = sx_Use(cCAM & "sac.dbf", "sac", READWRITE, SDEFOX)
-    iRETVAL = sx_SetOrder(1)
-    sx_GoBottom
-    nSAC = FixInt(sx_GetVariant("SAC"))
-    nSAC = nSAC + 1
-    sx_AppendBlank
-    If sx_Rlock(sx_RecNo()) Then
-        sx_PutVariant "SAC", nSAC
-        sx_PutVariant "INCUSER", zUSER
-        sx_PutVariant "POA", FixNum(txt(0))
-        sx_PutVariant "CODIGO", FixStr(txt(1))
-        sx_PutVariant "NOME", FixStr(txt(2))
-        sx_PutVariant "DESC01", FixStr(cDESC01)
-        sx_PutVariant "DESC02", FixStr(cDESC02)
-        sx_PutVariant "DESC03", FixStr(cDESC03)
-        sx_PutVariant "DESC04", FixStr(cDESC04)
-        sx_PutVariant "DOCUMENTO", "Prog. Olhos Abertos"
-        sx_PutVariant "DATA", cData
-        sx_PutVariant "INCDATA", cData
-        sx_Commit
-    End If
-    sx_Unlock sx_RecNo()
-    sx_CloseAll
-    txt(7) = nSAC
+  If Not MDG("Gerar Sac") Then
+    TXT(8) = "N"
+    TXT(9) = Today()
+    Exit Sub
+  End If
+  TXT(8) = "S"
+  TXT(9) = Today()
+
+  cPROBLEMA = FixStr(TXT(3))
+  nLEN = Len(cPROBLEMA)
+
+  cDESC01 = Mid(cPROBLEMA, 1, 100)
+  If nLEN > 100 Then
+    cDESC02 = Mid(cPROBLEMA, 101, 100)
+  End If
+  If nLEN > 200 Then
+    cDESC03 = Mid(cPROBLEMA, 201, 100)
+  End If
+  If nLEN > 300 Then
+    cDESC04 = Mid(cPROBLEMA, 301)
+  End If
+
+  cData = Format(Date, "DD/MM/YY")
+  cCAM = PegPath("PATH", "MANA5TGQ")
+  sx_SetEpoch (Year(Date) - 30)
+  sx_SetDateFormat BRITISH
+  sx_SetDeleted True
+  SACAREA = sx_Use(cCAM & "sac.dbf", "sac", READWRITE, SDEFOX)
+  iRETVAL = sx_SetOrder(1)
+  sx_GoBottom
+  nSAC = FixInt(sx_GetVariant("SAC"))
+  nSAC = nSAC + 1
+  sx_AppendBlank
+  If sx_Rlock(sx_RecNo()) Then
+    sx_PutVariant "SAC", nSAC
+    sx_PutVariant "INCUSER", zUSER
+    sx_PutVariant "POA", FixNum(TXT(0))
+    sx_PutVariant "CODIGO", FixStr(TXT(1))
+    sx_PutVariant "NOME", FixStr(TXT(2))
+    sx_PutVariant "DESC01", FixStr(cDESC01)
+    sx_PutVariant "DESC02", FixStr(cDESC02)
+    sx_PutVariant "DESC03", FixStr(cDESC03)
+    sx_PutVariant "DESC04", FixStr(cDESC04)
+    sx_PutVariant "DOCUMENTO", "Prog. Olhos Abertos"
+    sx_PutVariant "DATA", cData
+    sx_PutVariant "INCDATA", cData
+    sx_Commit
+  End If
+  sx_Unlock sx_RecNo()
+  sx_CloseAll
+  TXT(7) = nSAC
 
 
 End Sub
 
 Private Sub Command4_Click()
-    salvarpict Me, Picture1, StrZero(txt(0), 8)
+  salvarpict Me, Picture1, StrZero(TXT(0), 8)
 End Sub
 
 Private Sub Command5_Click()
-    Dim cARQ As String
-    Dim aRETU As Variant
-    Dim sSQL             As String
-    Dim cCODIGO          As String
-    cCODIGO = FixStr(txt(1), "", "TRIM")
-    cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
-    aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
-    If lRETU Then
-        txt(2) = aRETU(0)
-    End If
+  Dim cARQ As String
+  Dim aRETU As Variant
+  Dim sSQL As String
+  Dim cCODIGO As String
+  cCODIGO = FixStr(TXT(1), "", "TRIM")
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
+  sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
+  aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
+  If lRETU Then
+    TXT(2) = aRETU(0)
+  End If
 End Sub
 
 Private Sub Command6_Click()
-    txt(4) = zIDFOLHA
-    txt(5) = zNOMEFOLHA
+  TXT(4) = zIDFOLHA
+  TXT(5) = zNOMEFOLHA
 End Sub
 
 Private Sub Command7_Click()
-    txt(10) = zIDFOLHA
-    txt(11) = zNOMEFOLHA
-    txt(12) = Date
+  TXT(10) = zIDFOLHA
+  TXT(11) = zNOMEFOLHA
+  TXT(12) = Date
 End Sub
 
 Private Sub PegCodigoDescricaoPf()
-    Dim sSQL, aRETU, sARQ
-    sARQ = PegPath("PATH", "PF")
-    sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
-    aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
-    If lRETU Then
-        txt(1) = aRETU(0)
-        txt(2) = aRETU(1)
-        txt(1).Enabled = False
-        txt(2).Enabled = False
-        txt(1).Locked = True
-        txt(2).Locked = True
-        ESCMS01A(0).Enabled = False
-        ESCMS01A(0).Visible = False
-        ESCMS01A(1).Enabled = False
-        ESCMS01A(1).Visible = False
-        ESCMS01A(2).Enabled = False
-        ESCMS01A(2).Visible = False
-        Command5.Enabled = False
-        Command5.Visible = False
-        Command1.Enabled = False
-        Command1.Visible = False
-    End If
+  Dim sSQL, aRETU, sARQ
+  sARQ = PegPath("PATH", "PF")
+  sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
+  aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
+  If lRETU Then
+    TXT(1) = aRETU(0)
+    TXT(2) = aRETU(1)
+    TXT(1).Enabled = False
+    TXT(2).Enabled = False
+    TXT(1).Locked = True
+    TXT(2).Locked = True
+    ESCMS01A(0).Enabled = False
+    ESCMS01A(0).Visible = False
+    ESCMS01A(1).Enabled = False
+    ESCMS01A(1).Visible = False
+    ESCMS01A(2).Enabled = False
+    ESCMS01A(2).Visible = False
+    Command5.Enabled = False
+    Command5.Visible = False
+    Command1.Enabled = False
+    Command1.Visible = False
+  End If
 End Sub
 
 Private Sub DelImg_Click()
-    Set Picture1.Picture = Nothing
-    Set Picture2.Picture = Nothing
-    lTROCOU = True
+  Set Picture1.Picture = Nothing
+  Set Picture2.Picture = Nothing
+  lTROCOU = True
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub escidfolha_Click(Index As Integer)
-    ePASS01 = ""
-    If Index = 1 Then
-        ePASS01 = "LOGIX"
-    End If
-    escMP04.Show vbModal, Me
-    
-    If lRETU Then
-        txt(4) = eRETU01
-        txt(5) = eRETU02
-    End If
+  ePASS01 = ""
+  If Index = 1 Then
+    ePASS01 = "LOGIX"
+  End If
+  escMP04.Show vbModal, Me
+
+  If lRETU Then
+    TXT(4) = eRETU01
+    TXT(5) = eRETU02
+  End If
 End Sub
 
 Private Sub ESCMS01A_Click(Index As Integer)
-    Dim cCHAVEBUS As String
-    cCHAVEBUS = txt(1)
-    ePASS01 = "MANA5"
-    If Index = 1 Then
-        ePASS01 = "LOGIX"
-    End If
-    If Index = 2 Then
-        ePASS01 = "MICRO"
-    End If
-    escms01.Show vbModal, Me
-    If lRETU Then
-        txt(1) = eRETU01
-        txt(2) = eRETU02
-    End If
+  Dim cCHAVEBUS As String
+  cCHAVEBUS = TXT(1)
+  ePASS01 = "MANA5"
+  If Index = 1 Then
+    ePASS01 = "LOGIX"
+  End If
+  If Index = 2 Then
+    ePASS01 = "MICRO"
+  End If
+  escms01.Show vbModal, Me
+  If lRETU Then
+    TXT(1) = eRETU01
+    TXT(2) = eRETU02
+  End If
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    PF.Text = nPF
-    SEQ.Text = nSEQ
-    SSQ.Text = nSSQ
-    CenterFormToScreen Me
-    
-    lTROCOU = False
-    cARQ = PegPath("PATH", "POA")
-    cSQL = "select * from poa WHERE numero=" & nPPAP
-    nCAMPOS = 13
-    aCAM = Array("NUMERO", "CODIGO", "NOME", "PROBLEMA", "NUMFUN", "NOMFUN", "ANALISE", "SAC", "SACSN", "DATASAC", "ELANUM", "ELANOM", "ELADAT")
-    aFOR = Array("NI", "C", "C", "C", "NI", "C", "C", "NI", "C", "DZ", "NI", "C", "DZ")
-    aPAD = Array(0, "", "", "", 0, "", "", 0, "", "", 0, "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        txt(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    If ADOPegBlob(cARQ, cSQL, Picture1, "FOTO") Then
-        StretchSourcePictureFromPicture Picture1, Picture2
-        If FixNum(eRETU01) > 500000 Then
-            Alert ("Imagem Muito Grande,Ajuste o tamanho")
-            salvarpict Me, Picture1, "POA_" & StrZero(nPPAP, 6)
-            Set Picture1.Picture = Nothing
-            Set Picture2.Picture = Nothing
-            lTROCOU = True
-        End If
-    Else
-        Set Picture1.Picture = Nothing
-        Set Picture2.Picture = Nothing
+  PF.tEXT = nPF
+  SEQ.tEXT = nSEQ
+  SSQ.tEXT = nSSQ
+  CenterFormToScreen Me
+
+  lTROCOU = False
+  cARQ = PegPath("PATH", "POA")
+  cSQL = "select * from poa WHERE numero=" & nPPAP
+  nCAMPOS = 13
+  aCAM = Array("NUMERO", "CODIGO", "NOME", "PROBLEMA", "NUMFUN", "NOMFUN", "ANALISE", "SAC", "SACSN", "DATASAC", "ELANUM", "ELANOM", "ELADAT")
+  aFOR = Array("NI", "C", "C", "C", "NI", "C", "C", "NI", "C", "DZ", "NI", "C", "DZ")
+  aPAD = Array(0, "", "", "", 0, "", "", 0, "", "", 0, "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXT(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  If ADOPegBlob(cARQ, cSQL, Picture1, "FOTO") Then
+    StretchSourcePictureFromPicture Picture1, Picture2
+    If FixNum(eRETU01) > 500000 Then
+      Alert ("Imagem Muito Grande,Ajuste o tamanho")
+      salvarpict Me, Picture1, "POA_" & StrZero(nPPAP, 6)
+      Set Picture1.Picture = Nothing
+      Set Picture2.Picture = Nothing
+      lTROCOU = True
     End If
-    If nPF > 0 Then
-        PegCodigoDescricaoPf
-    End If
-    
-   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
-    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
+  Else
+    Set Picture1.Picture = Nothing
+    Set Picture2.Picture = Nothing
+  End If
+  If nPF > 0 Then
+    PegCodigoDescricaoPf
+  End If
+
+  PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+  PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 End Sub
 Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
-    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
-    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+  PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+  UpdateReport = False  ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
 Private Sub Incluirimagem_Click()
-    Dim STMPFILE
-    STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
-    If lerarquivoimagem(STMPFILE, Picture1, Picture2) Then
-        lTROCOU = True
-    End If
+  Dim STMPFILE
+  STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
+  If lerarquivoimagem(STMPFILE, Picture1, Picture2) Then
+    lTROCOU = True
+  End If
 End Sub
 
 Private Sub VerImg_Click()
-    frmPicViewer.Show vbModal, Me
-    If lRETU Then
-        If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
-            lTROCOU = True
-        End If
+  frmPicViewer.Show vbModal, Me
+  If lRETU Then
+    If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
+      lTROCOU = True
     End If
+  End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub xCmdImprimir_Click()

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form FrmDesI 
    Caption         =   "Controle de Desenhos"
    ClientHeight    =   3735
@@ -12,7 +12,7 @@ Begin VB.Form FrmDesI
    ScaleHeight     =   3735
    ScaleWidth      =   8610
    StartUpPosition =   2  'CenterScreen
-   Begin vbccr18.DTPicker DTPicker2 
+   Begin VBCCR18.DTPicker DTPicker2 
       Height          =   375
       Left            =   4560
       TabIndex        =   6
@@ -24,7 +24,7 @@ Begin VB.Form FrmDesI
       CheckBox        =   -1  'True
       AllowUserInput  =   -1  'True
    End
-   Begin vbccr18.DTPicker DTPicker1 
+   Begin VBCCR18.DTPicker DTPicker1 
       Height          =   375
       Left            =   1320
       TabIndex        =   4
@@ -296,54 +296,54 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 4
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        aVAL(8) = DTPicker1.Value
-        aVAL(9) = DTPicker2.Value
-        aVAL(10) = FixNumBol(Check1.Value)
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 4
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    aVAL(8) = DTPicker1.Value
+    aVAL(9) = DTPicker2.Value
+    aVAL(10) = FixNumBol(Check1.Value)
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = PegPath("PATH", "DESENHO")
-    cSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'"
-    nCAMPOS = 11
-    aCAM = Array("CONJUNTO", "DESENHO", "REV", "CDROM", "FITADAT", "DESCRICAO", "OBS", "REVC", "RECEBIDO", "DATA", "PADRONIZADO")
-    aFOR = Array("C", "C", "NI", "NI", "NI", "C", "C", "C", "D", "D", "BN")
-    aPAD = Array(cCONJUNTO, cDESENHO, 0, 0, 0, "", "", "", Date, Date, True)
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 4
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    If IsDate(aVAL(8)) Then
-        DTPicker1.Value = aVAL(8)
-    End If
-    If IsDate(aVAL(9)) Then
-        DTPicker2.Value = aVAL(9)
-    End If
-    Check1.Value = aVAL(10)
+  CenterFormToScreen Me
+  cARQ = PegPath("PATH", "DESENHO")
+  cSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'"
+  nCAMPOS = 11
+  aCAM = Array("CONJUNTO", "DESENHO", "REV", "CDROM", "FITADAT", "DESCRICAO", "OBS", "REVC", "RECEBIDO", "DATA", "PADRONIZADO")
+  aFOR = Array("C", "C", "NI", "NI", "NI", "C", "C", "C", "D", "D", "BN")
+  aPAD = Array(cCONJUNTO, cDESENHO, 0, 0, 0, "", "", "", Date, Date, True)
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 4
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  If IsDate(aVAL(8)) Then
+    DTPicker1.Value = aVAL(8)
+  End If
+  If IsDate(aVAL(9)) Then
+    DTPicker2.Value = aVAL(9)
+  End If
+  Check1.Value = aVAL(10)
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 

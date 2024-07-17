@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Begin VB.Form frmPOKA 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MENU"
@@ -23,9 +23,6 @@ Begin VB.Form frmPOKA
       Top             =   720
       _ExtentX        =   1191
       _ExtentY        =   1191
-      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
-      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
-      AmbientBb       =   $"frmPOKA.frx":058A
    End
    Begin VB.CommandButton CmdTrocaSequencia 
       Caption         =   "TrocarSequencia"
@@ -507,7 +504,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":062A
+         Picture         =   "frmPOKA.frx":058A
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -529,7 +526,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":0AC4
+         Picture         =   "frmPOKA.frx":0A24
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -551,7 +548,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":0F5E
+         Picture         =   "frmPOKA.frx":0EBE
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -573,7 +570,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":13F8
+         Picture         =   "frmPOKA.frx":1358
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -595,7 +592,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":1892
+         Picture         =   "frmPOKA.frx":17F2
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -617,7 +614,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":1D2C
+         Picture         =   "frmPOKA.frx":1C8C
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -639,7 +636,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":21C6
+         Picture         =   "frmPOKA.frx":2126
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -661,7 +658,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":2660
+         Picture         =   "frmPOKA.frx":25C0
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -683,7 +680,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":2AFA
+         Picture         =   "frmPOKA.frx":2A5A
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -705,7 +702,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":2F94
+         Picture         =   "frmPOKA.frx":2EF4
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -727,7 +724,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":342E
+         Picture         =   "frmPOKA.frx":338E
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -749,7 +746,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":38C8
+         Picture         =   "frmPOKA.frx":3828
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -771,7 +768,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":3D62
+         Picture         =   "frmPOKA.frx":3CC2
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -793,7 +790,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":42FC
+         Picture         =   "frmPOKA.frx":425C
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -815,7 +812,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":4896
+         Picture         =   "frmPOKA.frx":47F6
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -837,7 +834,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":4E30
+         Picture         =   "frmPOKA.frx":4D90
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -859,7 +856,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":53CA
+         Picture         =   "frmPOKA.frx":532A
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -881,7 +878,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":5964
+         Picture         =   "frmPOKA.frx":58C4
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -903,7 +900,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":5EFE
+         Picture         =   "frmPOKA.frx":5E5E
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -925,7 +922,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPOKA.frx":6498
+         Picture         =   "frmPOKA.frx":63F8
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -947,7 +944,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPOKA.frx":6A32
+         Picture         =   "frmPOKA.frx":6992
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -969,7 +966,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPOKA.frx":6ECC
+         Picture         =   "frmPOKA.frx":6E2C
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -991,7 +988,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPOKA.frx":7366
+         Picture         =   "frmPOKA.frx":72C6
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1013,7 +1010,7 @@ Begin VB.Form frmPOKA
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPOKA.frx":7800
+         Picture         =   "frmPOKA.frx":7760
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1160,7 +1157,7 @@ Begin VB.Form frmPOKA
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPOKA.frx":7C9A
+      Picture         =   "frmPOKA.frx":7BFA
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1180,7 +1177,7 @@ Begin VB.Form frmPOKA
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPOKA.frx":8234
+      Picture         =   "frmPOKA.frx":8194
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1200,7 +1197,7 @@ Begin VB.Form frmPOKA
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPOKA.frx":87CE
+      Picture         =   "frmPOKA.frx":872E
       Caption         =   "Configurar Impressora"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1220,7 +1217,7 @@ Begin VB.Form frmPOKA
       Width           =   375
       _ExtentX        =   661
       _ExtentY        =   661
-      Picture         =   "frmPOKA.frx":8D68
+      Picture         =   "frmPOKA.frx":8CC8
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1242,7 +1239,7 @@ Begin VB.Form frmPOKA
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   661
-      Picture         =   "frmPOKA.frx":9302
+      Picture         =   "frmPOKA.frx":9262
       Caption         =   "mana5"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1263,7 +1260,7 @@ Begin VB.Form frmPOKA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOKA.frx":989C
+      Picture         =   "frmPOKA.frx":97FC
       Caption         =   "PF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1285,7 +1282,7 @@ Begin VB.Form frmPOKA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOKA.frx":9E36
+      Picture         =   "frmPOKA.frx":9D96
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1307,7 +1304,7 @@ Begin VB.Form frmPOKA
       Width           =   735
       _ExtentX        =   1296
       _ExtentY        =   661
-      Picture         =   "frmPOKA.frx":A3D0
+      Picture         =   "frmPOKA.frx":A330
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1398,354 +1395,354 @@ Dim iLOOP As Integer
 Dim lTROCOU As Variant
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    Dim i As Integer
+  On Error Resume Next
+  Dim i As Integer
 
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXT(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-       
-        For i = 0 To 3
-            If lTROCOU(i) Then
-                ADOGrvBlob cARQ, cSQL, Picture1(i), "FOTOPASSO0" + StrZero(i + 1, 1)
-            End If
-        Next i
-       
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXT(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+
+    For i = 0 To 3
+      If lTROCOU(i) Then
+        ADOGrvBlob cARQ, cSQL, Picture1(i), "FOTOPASSO0" + StrZero(i + 1, 1)
+      End If
+    Next i
+
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub CmdConfImp_Click()
-    FrmPrintSetup.Show vbModal, Me
+  FrmPrintSetup.Show vbModal, Me
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-   Printer.PaintPicture Picture1(ePASS02), 0, 0
+  Printer.PaintPicture Picture1(ePASS02), 0, 0
 End Sub
 
 Private Sub CmdImprimir_Click(Index As Integer)
-    If Picture1(Index).Height = 0 Then
-        Alert ("Sem Imagem")
-    Else
-        ePASS02 = Index
-        PrintPreview1.ShowPreview
-    End If
+  If Picture1(Index).Height = 0 Then
+    Alert ("Sem Imagem")
+  Else
+    ePASS02 = Index
+    PrintPreview1.ShowPreview
+  End If
 End Sub
 
 Private Sub CmdMotRev_Click()
-    gridrev.Col = 1
-    nREV = FixInt(gridrev)
-    ComMotAlt.Enabled = True
-    ComMotExc.Enabled = True
-    ComMotInc.Enabled = True
-    Filgridrevi
+  gridrev.Col = 1
+  nREV = FixInt(gridrev)
+  ComMotAlt.Enabled = True
+  ComMotExc.Enabled = True
+  ComMotInc.Enabled = True
+  Filgridrevi
 End Sub
 
 Private Sub CmdPaste_Click(Index As Integer)
-    If Picture1(Index).Height = 0 Then
-        Alert ("Sem Imagem")
-    Else
-        Clipboard.Clear
-        Clipboard.SetData Picture1(Index).Image, (vbCFBitmap)
-    End If
+  If Picture1(Index).Height = 0 Then
+    Alert ("Sem Imagem")
+  Else
+    Clipboard.Clear
+    Clipboard.SetData Picture1(Index).Image, (vbCFBitmap)
+  End If
 End Sub
 
 Private Sub CmdTrocaSequencia_Click()
-    iMU01 = 4
-    NewSeq.Show vbModal
-    SEQ.Text = nSEQ
-    SSQ.Text = nSSQ
-    item.Text = nORD
+  iMU01 = 4
+  NewSeq.Show vbModal
+  SEQ.tEXT = nSEQ
+  SSQ.tEXT = nSSQ
+  item.tEXT = nORD
 End Sub
 
 Private Sub Command1_Click()
-    escpffim.Show vbModal, Me
-    If lRETU Then
-        TXT(1) = eRETU02
-        TXT(2) = eRETU03
-    End If
+  escpffim.Show vbModal, Me
+  If lRETU Then
+    TXT(1) = eRETU02
+    TXT(2) = eRETU03
+  End If
 End Sub
 
 Private Sub Command2_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        TXT(11).Text = "SIMULAR AS FALHAS COM PEÇAS"
-    Case 1
-        TXT(11).Text = "SIMULAR AS FALHAS COM PEÇAS DA PRODUÇÃO"
-    Case 2
-        TXT(11).Text = "SIMULAR AS FALHAS COM PEÇAS COELHO"
-    End Select
+  Select Case Index
+  Case 0
+    TXT(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS"
+  Case 1
+    TXT(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS DA PRODUÇÃO"
+  Case 2
+    TXT(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS COELHO"
+  End Select
 End Sub
 
 Private Sub Command4_Click(Index As Integer)
-    salvarpict Me, Picture1(Index), StrZero(TXT(0), 8)
+  salvarpict Me, Picture1(Index), StrZero(TXT(0), 8)
 End Sub
 
 Private Sub Command5_Click()
-    Dim cARQ As String
-    Dim aRETU As Variant
-    Dim sSQL             As String
-    Dim cCODIGO          As String
-    cCODIGO = FixStr(TXT(1), "", "TRIM")
-    cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
-    aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
-    If lRETU Then
-        TXT(2) = aRETU(0)
-    End If
+  Dim cARQ As String
+  Dim aRETU As Variant
+  Dim sSQL As String
+  Dim cCODIGO As String
+  cCODIGO = FixStr(TXT(1), "", "TRIM")
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
+  sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
+  aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
+  If lRETU Then
+    TXT(2) = aRETU(0)
+  End If
 End Sub
 
 Private Sub Command6_Click()
-    If nREV = 0 Then
-        Alert "Revisão Nao Escolhida"
-        Exit Sub
-    End If
-    ePASS01 = "select * from rev WHERE PF=" & nPPAP & " AND TIPO='POK' AND REVISAO=" & nREV
-    FrmRev.Show vbModal, Me
+  If nREV = 0 Then
+    Alert "Revisão Nao Escolhida"
+    Exit Sub
+  End If
+  ePASS01 = "select * from rev WHERE PF=" & nPPAP & " AND TIPO='POK' AND REVISAO=" & nREV
+  FrmRev.Show vbModal, Me
 End Sub
 
 Private Sub Command7_Click()
-    TXT(7) = zIDFOLHA
-    TXT(8) = zNOMEFOLHA
-    TXT(9) = Date
+  TXT(7) = zIDFOLHA
+  TXT(8) = zNOMEFOLHA
+  TXT(9) = Date
 End Sub
 
 Private Sub PegCodigoDescricaoPf()
-    Dim sSQL, aRETU, sARQ
-    sARQ = PegPath("PATH", "PF")
-    sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
-    aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
-    If lRETU Then
-        TXT(1) = aRETU(0)
-        TXT(2) = aRETU(1)
-        TXT(1).Enabled = False
-        TXT(2).Enabled = False
-        TXT(1).Locked = True
-        TXT(2).Locked = True
-        ESCMS01A(0).Enabled = False
-        ESCMS01A(0).Visible = False
-        ESCMS01A(1).Enabled = False
-        ESCMS01A(1).Visible = False
-        ESCMS01A(2).Enabled = False
-        ESCMS01A(2).Visible = False
-        Command5.Enabled = False
-        Command5.Visible = False
-        Command1.Enabled = False
-        Command1.Visible = False
-        TXT(1).BackColor = &HC0FFFF
-        TXT(2).BackColor = &HC0FFFF
-    End If
+  Dim sSQL, aRETU, sARQ
+  sARQ = PegPath("PATH", "PF")
+  sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
+  aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
+  If lRETU Then
+    TXT(1) = aRETU(0)
+    TXT(2) = aRETU(1)
+    TXT(1).Enabled = False
+    TXT(2).Enabled = False
+    TXT(1).Locked = True
+    TXT(2).Locked = True
+    ESCMS01A(0).Enabled = False
+    ESCMS01A(0).Visible = False
+    ESCMS01A(1).Enabled = False
+    ESCMS01A(1).Visible = False
+    ESCMS01A(2).Enabled = False
+    ESCMS01A(2).Visible = False
+    Command5.Enabled = False
+    Command5.Visible = False
+    Command1.Enabled = False
+    Command1.Visible = False
+    TXT(1).BackColor = &HC0FFFF
+    TXT(2).BackColor = &HC0FFFF
+  End If
 End Sub
 
 Private Sub ComMotAlt_Click()
-    If nREV = 0 Then
-        Alert "Revisão Nao Escolhida"
-        Exit Sub
-    End If
-    If gridrevi.Row > 0 Then
-        gridrevi.Col = 3
-        nREVI = FixInt(gridrevi)
-        lEDITAR = True
-        ePASS01 = "select * from revi WHERE PF=" & nPPAP & " AND TIPO='POK' AND REVISAO=" & nREV & " AND ITEM=" & nREVI
-        frmREVI.Show vbModal, Me
-        Filgridrevi
-    End If
+  If nREV = 0 Then
+    Alert "Revisão Nao Escolhida"
+    Exit Sub
+  End If
+  If gridrevi.Row > 0 Then
+    gridrevi.Col = 3
+    nREVI = FixInt(gridrevi)
+    lEDITAR = True
+    ePASS01 = "select * from revi WHERE PF=" & nPPAP & " AND TIPO='POK' AND REVISAO=" & nREV & " AND ITEM=" & nREVI
+    frmREVI.Show vbModal, Me
+    Filgridrevi
+  End If
 
 End Sub
 
 Private Sub ComMotExc_Click()
-    Dim cSQL As String
-    If nREV = 0 Then
-        Alert "Revisão Nao Escolhida"
-        Exit Sub
+  Dim cSQL As String
+  If nREV = 0 Then
+    Alert "Revisão Nao Escolhida"
+    Exit Sub
+  End If
+  If gridrevi.Row > 0 Then
+    gridrevi.Col = 3
+    nREVI = FixInt(gridrevi)
+    cSQL = "select * from revi WHERE PF=" & nPPAP & " AND TIPO='POK' AND REVISAO=" & nREV & " AND  ITEM=" & nREVI
+    If ApagaSQLP(cARQPF, cSQL) Then
+      Filgridrevi
     End If
-    If gridrevi.Row > 0 Then
-        gridrevi.Col = 3
-        nREVI = FixInt(gridrevi)
-        cSQL = "select * from revi WHERE PF=" & nPPAP & " AND TIPO='POK' AND REVISAO=" & nREV & " AND  ITEM=" & nREVI
-        If ApagaSQLP(cARQPF, cSQL) Then
-            Filgridrevi
-        End If
-    End If
+  End If
 
 End Sub
 
 Private Sub ComMotInc_Click()
-    Dim nITEM As Long
-    If nREV = 0 Then
-        Alert "Revisão Nao Escolhida"
-        Exit Sub
-    End If
-    nITEM = 1
-    If gridrevi.rows > 1 Then
-        gridrevi.Row = gridrevi.rows - 1         ''//Posicao comeca com zero
-        gridrevi.Col = 3
-        nITEM = FixInt(gridrevi) + 1
-    End If
-    IncluiSQL cARQPF, "SELECT * FROM REVI WHERE PF=" & nPPAP & " AND TIPO='POK' AND REVISAO=" & nREV & " AND ITEM=" & nITEM, 4, Array("PF", "REVISAO", "TIPO", "ITEM"), _
-        Array(nPPAP, nREV, "POK", nITEM), True, False
-    Filgridrevi
+  Dim nITEM As Long
+  If nREV = 0 Then
+    Alert "Revisão Nao Escolhida"
+    Exit Sub
+  End If
+  nITEM = 1
+  If gridrevi.Rows > 1 Then
+    gridrevi.Row = gridrevi.Rows - 1         ''//Posicao comeca com zero
+    gridrevi.Col = 3
+    nITEM = FixInt(gridrevi) + 1
+  End If
+  IncluiSQL cARQPF, "SELECT * FROM REVI WHERE PF=" & nPPAP & " AND TIPO='POK' AND REVISAO=" & nREV & " AND ITEM=" & nITEM, 4, Array("PF", "REVISAO", "TIPO", "ITEM"), _
+            Array(nPPAP, nREV, "POK", nITEM), True, False
+  Filgridrevi
 
 End Sub
 
 Private Sub DelImg_Click(Index As Integer)
-    Set Picture1(Index).Picture = Nothing
-    Set Picture2(Index).Picture = Nothing
-    lTROCOU(Index) = True
+  Set Picture1(Index).Picture = Nothing
+  Set Picture2(Index).Picture = Nothing
+  lTROCOU(Index) = True
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub ESCMS01A_Click(Index As Integer)
-    Dim cCHAVEBUS As String
-    cCHAVEBUS = TXT(1)
-    ePASS01 = "MANA5"
-    If Index = 1 Then
-        ePASS01 = "LOGIX"
-    End If
-    If Index = 2 Then
-        ePASS01 = "MICRO"
-    End If
-    escms01.Show vbModal, Me
-    If lRETU Then
-        TXT(1) = eRETU01
-        TXT(2) = eRETU02
-    End If
+  Dim cCHAVEBUS As String
+  cCHAVEBUS = TXT(1)
+  ePASS01 = "MANA5"
+  If Index = 1 Then
+    ePASS01 = "LOGIX"
+  End If
+  If Index = 2 Then
+    ePASS01 = "MICRO"
+  End If
+  escms01.Show vbModal, Me
+  If lRETU Then
+    TXT(1) = eRETU01
+    TXT(2) = eRETU02
+  End If
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    Dim i As Integer
+  Dim i As Integer
 
-    CenterFormToScreen Me
+  CenterFormToScreen Me
 
-    PF.Text = nPF
-    SEQ.Text = nSEQ
-    SSQ.Text = nSSQ
-    item.Text = nORD
-    
-    lTROCOU = Array(False, False, False, False)
-    
-    
-    cARQPF = PegPath("PATH", "PF")
-    cARQ = PegPath("PATH", "POKA")
-    cSQL = "select * from poKa WHERE numero=" & nPPAP
-    nCAMPOS = 17
-    aCAM = Array("NUMERO", "CODIGO", "NOME", "5SOQUE", "5SPORQUE", "5SOQUEM", "5SONDE", "ELANUM", "ELANOM", "ELADAT", _
-                 "PASSO01", "OBSPASSO01", "PASSO02", "REVISAO", "PASSO03", "DATAREV", "PASSO04")
-    aFOR = Array("NI", "C", "C", "C", "C", "C", "C", "NI", "C", "DZ", "C", "C", "C", "NI", "C", "DZ", "C")
-    aPAD = Array(0, "", "", "", "", "", "", 0, "", "", "", "", "", 0, "", "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXT(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    For i = 0 To 3
-        If ADOPegBlob(cARQ, cSQL, Picture1(i), "FOTOPASSO0" + StrZero(i + 1, 1)) Then
-            StretchSourcePictureFromPicture Picture1(i), Picture2(i)
-           
-             
-            If FixNum(eRETU01) > 500000 Then
-                Alert ("Imagem Muito Grande,Ajuste o tamanho")
-               
-                salvarpict Me, Picture1(i), "FOTOPASSO0" & StrZero(i + 1, 1) & "_PF_" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3)
-               
-               
-                Set Picture1(i).Picture = Nothing
-                Set Picture2(i).Picture = Nothing
-                lTROCOU(i) = True
-            End If
-           
-        Else
-            Set Picture1(i).Picture = Nothing
-            Set Picture2(i).Picture = Nothing
-        End If
-    Next i
-    If nPF > 0 Then
-        PegCodigoDescricaoPf
+  PF.tEXT = nPF
+  SEQ.tEXT = nSEQ
+  SSQ.tEXT = nSSQ
+  item.tEXT = nORD
+
+  lTROCOU = Array(False, False, False, False)
+
+
+  cARQPF = PegPath("PATH", "PF")
+  cARQ = PegPath("PATH", "POKA")
+  cSQL = "select * from poKa WHERE numero=" & nPPAP
+  nCAMPOS = 17
+  aCAM = Array("NUMERO", "CODIGO", "NOME", "5SOQUE", "5SPORQUE", "5SOQUEM", "5SONDE", "ELANUM", "ELANOM", "ELADAT", _
+               "PASSO01", "OBSPASSO01", "PASSO02", "REVISAO", "PASSO03", "DATAREV", "PASSO04")
+  aFOR = Array("NI", "C", "C", "C", "C", "C", "C", "NI", "C", "DZ", "C", "C", "C", "NI", "C", "DZ", "C")
+  aPAD = Array(0, "", "", "", "", "", "", 0, "", "", "", "", "", 0, "", "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXT(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  For i = 0 To 3
+    If ADOPegBlob(cARQ, cSQL, Picture1(i), "FOTOPASSO0" + StrZero(i + 1, 1)) Then
+      StretchSourcePictureFromPicture Picture1(i), Picture2(i)
+
+
+      If FixNum(eRETU01) > 500000 Then
+        Alert ("Imagem Muito Grande,Ajuste o tamanho")
+
+        salvarpict Me, Picture1(i), "FOTOPASSO0" & StrZero(i + 1, 1) & "_PF_" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3)
+
+
+        Set Picture1(i).Picture = Nothing
+        Set Picture2(i).Picture = Nothing
+        lTROCOU(i) = True
+      End If
+
+    Else
+      Set Picture1(i).Picture = Nothing
+      Set Picture2(i).Picture = Nothing
     End If
-    
+  Next i
+  If nPF > 0 Then
+    PegCodigoDescricaoPf
+  End If
 
-    
-    Filgridrev
-    
-    
-    If gridrev.rows > 1 Then
-        gridrev.Row = gridrev.rows - 1
-        CmdMotRev_Click
-    End If
-    PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
-    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
-    
+
+
+  Filgridrev
+
+
+  If gridrev.Rows > 1 Then
+    gridrev.Row = gridrev.Rows - 1
+    CmdMotRev_Click
+  End If
+  PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+  PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
+
 End Sub
 Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
-    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
-    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+  PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+  UpdateReport = False  ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
 Private Sub Incluirimagem_Click(Index As Integer)
-    Dim STMPFILE
-    STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
-    If lerarquivoimagem(STMPFILE, Picture1(Index), Picture2(Index)) Then
-        lTROCOU(Index) = True
-    End If
+  Dim STMPFILE
+  STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
+  If lerarquivoimagem(STMPFILE, Picture1(Index), Picture2(Index)) Then
+    lTROCOU(Index) = True
+  End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub NovaRev_Click()
-    Dim nREV As Integer
-    If Len(TXT(15)) > 0 Then
-        If TXT(15) > Today() Then
-            Alert ("Data Revisao Anterior Maior que Data do Sistema")
-            Exit Sub
-        End If
+  Dim nREV As Integer
+  If Len(TXT(15)) > 0 Then
+    If TXT(15) > Today() Then
+      Alert ("Data Revisao Anterior Maior que Data do Sistema")
+      Exit Sub
     End If
-    If MDG("Fazer Nova Revisao") Then
-        nREV = FixNum(TXT(13)) + 1
-        IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & "AND TIPO='POK' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), _
-        Array(nPPAP, nREV, "POK", Today()), True, False
-        TXT(13) = nREV
-        TXT(15) = Date
-    End If
+  End If
+  If MDG("Fazer Nova Revisao") Then
+    nREV = FixNum(TXT(13)) + 1
+    IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & "AND TIPO='POK' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), _
+              Array(nPPAP, nREV, "POK", Today()), True, False
+    TXT(13) = nREV
+    TXT(15) = Date
+  End If
 End Sub
 
 Private Sub VerImg_Click(Index As Integer)
-    frmPicViewer.Show vbModal, Me
-    If lRETU Then
-        If lerarquivoimagem(eRETU01, Picture1(Index), Picture2(Index)) Then
-            lTROCOU(Index) = True
-        End If
+  frmPicViewer.Show vbModal, Me
+  If lRETU Then
+    If lerarquivoimagem(eRETU01, Picture1(Index), Picture2(Index)) Then
+      lTROCOU(Index) = True
     End If
+  End If
 End Sub
 
 Private Sub Filgridrev()
-    Dim cSQL As String
-    cSQL = "select PF,REVISAO,TIPO,DATA from rev WHERE PF=" & nPPAP & " AND TIPO='POK' ORDER BY REVISAO"
-    MontaGridFast gridrev, 4, Array(600, 400, 400, 1200), Array("PF", "REV", "Tipo", "DATA"), _
-        Array("PF", "REVISAO", "TIPO", "C$DATA"), cARQPF, cSQL
+  Dim cSQL As String
+  cSQL = "select PF,REVISAO,TIPO,DATA from rev WHERE PF=" & nPPAP & " AND TIPO='POK' ORDER BY REVISAO"
+  MontaGridFast gridrev, 4, Array(600, 400, 400, 1200), Array("PF", "REV", "Tipo", "DATA"), _
+                Array("PF", "REVISAO", "TIPO", "C$DATA"), cARQPF, cSQL
 End Sub
 
 Private Sub Filgridrevi()
-    Dim cSQL As String
-    cSQL = "select * from revI WHERE PF=" & nPPAP & " AND REVISAO=" & nREV & " AND TIPO='POK' ORDER BY ITEM"
-    MontaGridFast gridrevi, 5, Array(600, 400, 400, 400, 2000), Array("PF", "REV", "Tipo", "ITEM", "Motivo"), _
-        Array("PF", "REVISAO", "TIPO", "ITEM", "Motivo"), cARQPF, cSQL
+  Dim cSQL As String
+  cSQL = "select * from revI WHERE PF=" & nPPAP & " AND REVISAO=" & nREV & " AND TIPO='POK' ORDER BY ITEM"
+  MontaGridFast gridrevi, 5, Array(600, 400, 400, 400, 2000), Array("PF", "REV", "Tipo", "ITEM", "Motivo"), _
+                Array("PF", "REVISAO", "TIPO", "ITEM", "Motivo"), cARQPF, cSQL
 End Sub
 
 Private Sub ximgsave_Click(Index As Integer)
-    salvarpict Me, Picture1(Index), StrZero(TXT(0), 8)
+  salvarpict Me, Picture1(Index), StrZero(TXT(0), 8)
 End Sub
 
 

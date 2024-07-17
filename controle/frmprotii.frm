@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmprotii 
    Caption         =   "Controle de Prototipos"
    ClientHeight    =   4785
@@ -34,96 +34,60 @@ Begin VB.Form frmprotii
       Width           =   9495
       _ExtentX        =   16748
       _ExtentY        =   5953
-      _Version        =   393216
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       TabHeight       =   520
       TabCaption(0)   =   "GP11"
-      TabPicture(0)   =   "frmprotii.frx":058A
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Grid"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Text1(8)"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "Text3"
-      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).ControlCount=   3
+      Tab(0).Control(0)=   "Text3"
+      Tab(0).Control(1)=   "Text1(8)"
+      Tab(0).Control(2)=   "Grid"
       TabCaption(1)   =   "Pedido Entrega"
-      TabPicture(1)   =   "frmprotii.frx":05A6
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "lbl(9)"
-      Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "lbl(10)"
-      Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "lbl(22)"
-      Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "lbl(15)"
-      Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "lbl(16)"
-      Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "lbl(17)"
-      Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "lbl(19)"
-      Tab(1).Control(6).Enabled=   0   'False
-      Tab(1).Control(7)=   "lbl(23)"
-      Tab(1).Control(7).Enabled=   0   'False
-      Tab(1).Control(8)=   "lbl(24)"
-      Tab(1).Control(8).Enabled=   0   'False
-      Tab(1).Control(9)=   "lbl(25)"
-      Tab(1).Control(9).Enabled=   0   'False
-      Tab(1).Control(10)=   "lbl(26)"
-      Tab(1).Control(10).Enabled=   0   'False
-      Tab(1).Control(11)=   "DTPicker8"
-      Tab(1).Control(11).Enabled=   0   'False
-      Tab(1).Control(12)=   "DTPicker7"
-      Tab(1).Control(12).Enabled=   0   'False
-      Tab(1).Control(13)=   "DTPicker6"
-      Tab(1).Control(13).Enabled=   0   'False
-      Tab(1).Control(14)=   "DTPicker5"
-      Tab(1).Control(14).Enabled=   0   'False
-      Tab(1).Control(15)=   "Text1(7)"
-      Tab(1).Control(15).Enabled=   0   'False
-      Tab(1).Control(16)=   "Text1(2)"
-      Tab(1).Control(16).Enabled=   0   'False
-      Tab(1).Control(17)=   "Text1(10)"
-      Tab(1).Control(17).Enabled=   0   'False
-      Tab(1).Control(18)=   "Command2"
-      Tab(1).Control(18).Enabled=   0   'False
-      Tab(1).Control(19)=   "Command1"
-      Tab(1).Control(19).Enabled=   0   'False
-      Tab(1).Control(20)=   "Text1(5)"
-      Tab(1).Control(20).Enabled=   0   'False
-      Tab(1).Control(21)=   "Text1(6)"
-      Tab(1).Control(21).Enabled=   0   'False
-      Tab(1).Control(22)=   "Text1(18)"
-      Tab(1).Control(22).Enabled=   0   'False
-      Tab(1).Control(23)=   "Text1(11)"
-      Tab(1).Control(23).Enabled=   0   'False
-      Tab(1).Control(24)=   "Text1(3)"
-      Tab(1).Control(24).Enabled=   0   'False
       Tab(1).ControlCount=   25
+      Tab(1).Control(0)=   "lbl(9)"
+      Tab(1).Control(1)=   "lbl(10)"
+      Tab(1).Control(2)=   "lbl(22)"
+      Tab(1).Control(3)=   "lbl(15)"
+      Tab(1).Control(4)=   "lbl(16)"
+      Tab(1).Control(5)=   "lbl(17)"
+      Tab(1).Control(6)=   "lbl(19)"
+      Tab(1).Control(7)=   "lbl(23)"
+      Tab(1).Control(8)=   "lbl(24)"
+      Tab(1).Control(9)=   "lbl(25)"
+      Tab(1).Control(10)=   "lbl(26)"
+      Tab(1).Control(11)=   "DTPicker8"
+      Tab(1).Control(12)=   "DTPicker7"
+      Tab(1).Control(13)=   "DTPicker6"
+      Tab(1).Control(14)=   "DTPicker5"
+      Tab(1).Control(15)=   "Text1(7)"
+      Tab(1).Control(16)=   "Text1(2)"
+      Tab(1).Control(17)=   "Text1(10)"
+      Tab(1).Control(18)=   "Command2"
+      Tab(1).Control(19)=   "Command1"
+      Tab(1).Control(20)=   "Text1(5)"
+      Tab(1).Control(21)=   "Text1(6)"
+      Tab(1).Control(22)=   "Text1(18)"
+      Tab(1).Control(23)=   "Text1(11)"
+      Tab(1).Control(24)=   "Text1(3)"
       TabCaption(2)   =   "Desenho Observaçao"
-      TabPicture(2)   =   "frmprotii.frx":05C2
-      Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "lbl(18)"
-      Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "lbl(20)"
-      Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "lbl(21)"
-      Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "Text1(9)"
-      Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "Text1(16)"
-      Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "Text1(17)"
-      Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "Text1(12)"
-      Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "Text1(13)"
-      Tab(2).Control(7).Enabled=   0   'False
-      Tab(2).Control(8)=   "Text1(14)"
-      Tab(2).Control(8).Enabled=   0   'False
-      Tab(2).Control(9)=   "Text1(15)"
-      Tab(2).Control(9).Enabled=   0   'False
       Tab(2).ControlCount=   10
+      Tab(2).Control(0)=   "lbl(18)"
+      Tab(2).Control(1)=   "lbl(20)"
+      Tab(2).Control(2)=   "lbl(21)"
+      Tab(2).Control(3)=   "Text1(9)"
+      Tab(2).Control(4)=   "Text1(16)"
+      Tab(2).Control(5)=   "Text1(17)"
+      Tab(2).Control(6)=   "Text1(12)"
+      Tab(2).Control(7)=   "Text1(13)"
+      Tab(2).Control(8)=   "Text1(14)"
+      Tab(2).Control(9)=   "Text1(15)"
       Begin VB.TextBox Text1 
          Height          =   285
          Index           =   3
@@ -297,7 +261,7 @@ Begin VB.Form frmprotii
          _ExtentY        =   4683
          _Version        =   393216
       End
-      Begin vbccr18.DTPicker DTPicker5 
+      Begin VBCCR18.DTPicker DTPicker5 
          Height          =   375
          Left            =   -70920
          TabIndex        =   53
@@ -309,7 +273,7 @@ Begin VB.Form frmprotii
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
       End
-      Begin vbccr18.DTPicker DTPicker6 
+      Begin VBCCR18.DTPicker DTPicker6 
          Height          =   375
          Left            =   -68640
          TabIndex        =   54
@@ -321,7 +285,7 @@ Begin VB.Form frmprotii
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
       End
-      Begin vbccr18.DTPicker DTPicker7 
+      Begin VBCCR18.DTPicker DTPicker7 
          Height          =   375
          Left            =   -71280
          TabIndex        =   55
@@ -333,7 +297,7 @@ Begin VB.Form frmprotii
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
       End
-      Begin vbccr18.DTPicker DTPicker8 
+      Begin VBCCR18.DTPicker DTPicker8 
          Height          =   375
          Left            =   -68760
          TabIndex        =   56
@@ -590,7 +554,7 @@ Begin VB.Form frmprotii
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmprotii.frx":05DE
+      Picture         =   "frmprotii.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -610,7 +574,7 @@ Begin VB.Form frmprotii
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmprotii.frx":0B78
+      Picture         =   "frmprotii.frx":0B24
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -622,7 +586,7 @@ Begin VB.Form frmprotii
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin vbccr18.DTPicker DTPicker3 
+   Begin VBCCR18.DTPicker DTPicker3 
       Height          =   375
       Left            =   3720
       TabIndex        =   51
@@ -634,7 +598,7 @@ Begin VB.Form frmprotii
       CheckBox        =   -1  'True
       AllowUserInput  =   -1  'True
    End
-   Begin vbccr18.DTPicker DTPicker4 
+   Begin VBCCR18.DTPicker DTPicker4 
       Height          =   375
       Left            =   6240
       TabIndex        =   52
@@ -723,131 +687,131 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 7
-            aVAL(iLOOP) = Text1(iLOOP)
-        Next iLOOP
-        aVAL(19) = DTPicker3
-        aVAL(20) = DTPicker4
-        aVAL(21) = DTPicker5
-        aVAL(22) = DTPicker6
-        aVAL(23) = DTPicker7
-        aVAL(24) = DTPicker8
-        GrvSQL cARQDES, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 7
+      aVAL(iLOOP) = Text1(iLOOP)
+    Next iLOOP
+    aVAL(19) = DTPicker3
+    aVAL(20) = DTPicker4
+    aVAL(21) = DTPicker5
+    aVAL(22) = DTPicker6
+    aVAL(23) = DTPicker7
+    aVAL(24) = DTPicker8
+    GrvSQL cARQDES, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Command1_Click()
-    Text1(2) = "R"
+  Text1(2) = "R"
 End Sub
 
 Private Sub Command2_Click()
-    Text1(2) = "M"
+  Text1(2) = "M"
 End Sub
 
 Private Sub Command3_Click()
-    Text1(1) = "A"
+  Text1(1) = "A"
 End Sub
 
 Private Sub Command4_Click()
-    Text1(1) = "B"
+  Text1(1) = "B"
 End Sub
 
 Private Sub Command5_Click()
-    Text1(1) = "G"
+  Text1(1) = "G"
 End Sub
 
 Private Sub Command6_Click()
-    Text1(1) = "M"
+  Text1(1) = "M"
 End Sub
 
 Private Sub Command7_Click()
-    Text1(1) = "T"
+  Text1(1) = "T"
 End Sub
 
 Private Sub Command8_Click()
-    Text1(5) = "F"
+  Text1(5) = "F"
 End Sub
 
 Private Sub FilRelat()
-    Dim cSQL As String
-    Dim cARQ As String
+  Dim cSQL As String
+  Dim cARQ As String
 
-    cARQ = PegPath("PATH", "PF")
-    cSQL = "select * from PPAGI WHERE PPAP=" & nPPAP & " ORDER BY ITEM"
+  cARQ = PegPath("PATH", "PF")
+  cSQL = "select * from PPAGI WHERE PPAP=" & nPPAP & " ORDER BY ITEM"
 
-    MontaGridFast Grid, 4, Array(400, 1200, 400, 2000), Array("Item", "Data", "Dispo", "obs"), _
-        Array("ITEM", "C$DATA", "DISPO", "OBS"), cARQ, cSQL
-    Text3.tEXT = PegUltGrid(Grid, 2)
+  MontaGridFast Grid, 4, Array(400, 1200, 400, 2000), Array("Item", "Data", "Dispo", "obs"), _
+                Array("ITEM", "C$DATA", "DISPO", "OBS"), cARQ, cSQL
+  Text3.tEXT = PegUltGrid(Grid, 2)
 
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    nCAMPOS = 25
-    cARQDES = PegPath("PATH", "DESENHO")
-    aCAM = Array("PARTNUMBER", "FASE", "NFTIPO", "VALOR", "SSMT", _
-                 "TELEFONE", "COMPRADOR", "ENTREGA", "PPAP", "OBS", _
-                 "NFNUMERO", "PEDIDO", "RE2", "DESENH2", "REV", _
-                 "DESENHO", "RE3", "DESENH3", "QTDDE", "SSMTDAT", _
-                 "SSMTREQ", "NFDATA", "ENTRDATA", "PEDDATA", "PEDENTR")
-    aFOR = Array("C", "C", "C", "N", "C", _
-                 "C", "C", "C", "NI", "C", _
-                 "C", "C", "C", "C", "C", _
-                 "C", "C", "C", "NI", "D", _
-                 "D", "D", "D", "D", "D")
-    aPAD = Array("", "", "", 0, "", _
-                 "", "", "", 0, "", _
-                 "", "", "", "", "", _
-                 "", "", "", 0, "", _
-                 "", "", "", "", "")
-    
-    cSQL = "select * from PROTOI WHERE PARTNUMBER='" & cDESENHO & "' AND SSMT='" & cCONJUNTO & "'"
-    aVAL = PegSQL(cARQDES, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 7
-        Text1(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    
-    If IsDate(aVAL(19)) Then
-        DTPicker3 = aVAL(19)
-    End If
-    If IsDate(aVAL(20)) Then
-        DTPicker4 = aVAL(20)
-    End If
-    If IsDate(aVAL(21)) Then
-        DTPicker5 = aVAL(21)
-    End If
-    If IsDate(aVAL(22)) Then
-        DTPicker6 = aVAL(22)
-    End If
-    If IsDate(aVAL(23)) Then
-        DTPicker7 = aVAL(23)
-    End If
-    If IsDate(aVAL(24)) Then
-        DTPicker8 = aVAL(24)
-    End If
-    
-    nPPAP = aVAL(8)
-    FilRelat
+  CenterFormToScreen Me
+  nCAMPOS = 25
+  cARQDES = PegPath("PATH", "DESENHO")
+  aCAM = Array("PARTNUMBER", "FASE", "NFTIPO", "VALOR", "SSMT", _
+               "TELEFONE", "COMPRADOR", "ENTREGA", "PPAP", "OBS", _
+               "NFNUMERO", "PEDIDO", "RE2", "DESENH2", "REV", _
+               "DESENHO", "RE3", "DESENH3", "QTDDE", "SSMTDAT", _
+               "SSMTREQ", "NFDATA", "ENTRDATA", "PEDDATA", "PEDENTR")
+  aFOR = Array("C", "C", "C", "N", "C", _
+               "C", "C", "C", "NI", "C", _
+               "C", "C", "C", "C", "C", _
+               "C", "C", "C", "NI", "D", _
+               "D", "D", "D", "D", "D")
+  aPAD = Array("", "", "", 0, "", _
+               "", "", "", 0, "", _
+               "", "", "", "", "", _
+               "", "", "", 0, "", _
+               "", "", "", "", "")
+
+  cSQL = "select * from PROTOI WHERE PARTNUMBER='" & cDESENHO & "' AND SSMT='" & cCONJUNTO & "'"
+  aVAL = PegSQL(cARQDES, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 7
+    Text1(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+
+  If IsDate(aVAL(19)) Then
+    DTPicker3 = aVAL(19)
+  End If
+  If IsDate(aVAL(20)) Then
+    DTPicker4 = aVAL(20)
+  End If
+  If IsDate(aVAL(21)) Then
+    DTPicker5 = aVAL(21)
+  End If
+  If IsDate(aVAL(22)) Then
+    DTPicker6 = aVAL(22)
+  End If
+  If IsDate(aVAL(23)) Then
+    DTPicker7 = aVAL(23)
+  End If
+  If IsDate(aVAL(24)) Then
+    DTPicker8 = aVAL(24)
+  End If
+
+  nPPAP = aVAL(8)
+  FilRelat
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 
 End Sub
 

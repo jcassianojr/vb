@@ -301,66 +301,66 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Command1_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        TXTFIELDS(9).tEXT = "S"
-    Case 1
-        TXTFIELDS(9).tEXT = "T"
-    Case 2
-        TXTFIELDS(9).tEXT = "O"
-    End Select
+  Select Case Index
+  Case 0
+    TXTFIELDS(9).tEXT = "S"
+  Case 1
+    TXTFIELDS(9).tEXT = "T"
+  Case 2
+    TXTFIELDS(9).tEXT = "O"
+  End Select
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub ESCMP03_Click()
-    Dim oFORM As New escmp
-    iMU01 = 4
-    oFORM.Show vbModal, Me
-    If lRETU Then
-        TXTFIELDS(0) = eRETU01
-        TXTFIELDS(2) = eRETU02
-    End If
+  Dim oFORM As New escmp
+  iMU01 = 4
+  oFORM.Show vbModal, Me
+  If lRETU Then
+    TXTFIELDS(0) = eRETU01
+    TXTFIELDS(2) = eRETU02
+  End If
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = GeraConn(zMANA5EMP, "SDECDX")
-    cSQL = "select * from MP03 WHERE CODIGO='" & Trim(ePASS01) & "'"
-    TxtCodigo = ePASS01
-    nCAMPOS = 10
-    aCAM = Array("NORMA", "NOME", "NOM2", "APLICACAO", "COGNOME", "OBS01", "OBS02", "OBS03", "CODIGOINT", "TIPTRA")
-    aFOR = Array("C", "C", "C", "C", "C", "C", "C", "C", "C", "C")
-    aPAD = Array("", "", "", "", "", "", "", "", "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
+  CenterFormToScreen Me
+  cARQ = GeraConn(zMANA5EMP, "SDECDX")
+  cSQL = "select * from MP03 WHERE CODIGO='" & Trim(ePASS01) & "'"
+  TxtCodigo = ePASS01
+  nCAMPOS = 10
+  aCAM = Array("NORMA", "NOME", "NOM2", "APLICACAO", "COGNOME", "OBS01", "OBS02", "OBS03", "CODIGOINT", "TIPTRA")
+  aFOR = Array("C", "C", "C", "C", "C", "C", "C", "C", "C", "C")
+  aPAD = Array("", "", "", "", "", "", "", "", "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 

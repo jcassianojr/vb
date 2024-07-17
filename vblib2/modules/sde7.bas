@@ -320,7 +320,7 @@ Declare Sub sx_SetExact Lib "SDE7.dll" (ByVal uiOnOff As Integer)
 Declare Sub sx_SetFilter Lib "SDE7.dll" (ByVal cpExpression As Any)
 Declare Sub sx_SetGaugeHook Lib "SDE7.dll" (ByVal hwndGauge As Long)
 Declare Sub sx_SetLockTimeout Lib "SDE7.dll" (ByVal iSeconds As Integer)
-Declare Sub sx_SetMachineCollation Lib "SDE7.dll" () 'simple char value ordering
+Declare Sub sx_SetMachineCollation Lib "SDE7.dll" ()  'simple char value ordering
 Declare Function sx_SetMemoBlockSize Lib "SDE7.dll" (ByVal iBlockSize As Integer) As Integer
 Declare Function sx_SetOrder Lib "SDE7.dll" (ByVal iIndex As Integer) As Integer
 Declare Sub sx_SetPassword Lib "SDE7.dll" (ByVal cpEncodeKey As Any)
@@ -329,7 +329,7 @@ Declare Sub sx_SetRelation Lib "SDE7.dll" (ByVal uiChildArea As Integer, ByVal c
 Declare Function sx_SetScope Lib "SDE7.dll" (ByVal cpLowVal As Any, ByVal cpHighVal As Any) As Long
 Declare Sub sx_SetSoftSeek Lib "SDE7.dll" (ByVal uiOnOff As Integer)
 Declare Sub sx_SetStringType Lib "SDE7.dll" (ByVal uiStringType As Integer)
-Declare Sub sx_SetSystemCollation Lib "SDE7.dll" () ' default system linguistic collation
+Declare Sub sx_SetSystemCollation Lib "SDE7.dll" ()  ' default system linguistic collation
 Declare Sub sx_SetTranslate Lib "SDE7.dll" (ByVal uiOnOff As Integer)
 Declare Sub sx_SetTurboRead Lib "SDE7.dll" (ByVal uiOnOff As Integer)
 Declare Function sx_SetUDFPath Lib "SDE7.dll" (ByVal cpTagName As String)

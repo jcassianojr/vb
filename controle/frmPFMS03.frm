@@ -431,177 +431,177 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub CmdEditar_Click()
-    ePASS01 = TXTFIELDS(2).tEXT
-    Select Case TXTFIELDS(1).tEXT
-    Case "T"
-        FrmMP03.Show vbModal, Me
-    Case Else
-        Alert "Disponivel apenas para tipo T"
-    End Select
+  ePASS01 = TXTFIELDS(2).tEXT
+  Select Case TXTFIELDS(1).tEXT
+  Case "T"
+    FrmMP03.Show vbModal, Me
+  Case Else
+    Alert "Disponivel apenas para tipo T"
+  End Select
 End Sub
 
 Private Sub CmdPrd_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        TXTFIELDS(11) = "Int"
-    Case 1
-        TXTFIELDS(11) = "Ext"
-    End Select
+  Select Case Index
+  Case 0
+    TXTFIELDS(11) = "Int"
+  Case 1
+    TXTFIELDS(11) = "Ext"
+  End Select
 End Sub
 
 Private Sub Command1_Click()
-    Dim cNOME As String
-    Dim sSQL As String
-    Dim cCODIGO As String
-    Dim cARQ As String
-    Dim aRETU As Variant
+  Dim cNOME As String
+  Dim sSQL As String
+  Dim cCODIGO As String
+  Dim cARQ As String
+  Dim aRETU As Variant
 
 
-    cCODIGO = FixStr(TXTFIELDS(2), "", "TRIM")
-    
-    
-    cARQ = GeraConn(zMANA5EMP, "JETFOX")
+  cCODIGO = FixStr(TXTFIELDS(2), "", "TRIM")
 
-    
-    Select Case TXTFIELDS(1)
-    Case "C"
-        sSQL = "SELECT NOME,NOM2 FROM MT01 WHERE CODIGO='" & cCODIGO & "'"
-        aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
-        If lRETU Then
-            cNOME = aRETU(0) + " " + aRETU(1)
-        End If
-    Case "M"
-        sSQL = "SELECT NOME,NOM2 FROM MU01 WHERE CODIGO='" & cCODIGO & "'"
-        aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
-        If lRETU Then
-            cNOME = aRETU(0) + " " + aRETU(1)
-        End If
-           
-    Case "T"
-        sSQL = "SELECT NOME,NOM2 FROM mP03 WHERE CODIGO='" & cCODIGO & "'"
-        aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
-        If lRETU Then
-            cNOME = aRETU(1)                     ''Nome completo
-        End If
-    Case "S"
-        sSQL = "SELECT NOME,NOM2 FROM mQ01 WHERE CODIGO='" & cCODIGO & "'"
-        aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
-        If lRETU Then
-            cNOME = aRETU(0) + " " + aRETU(1)
-        End If
-        If Len(cNOME) = 0 Then                   ''Tenta Produtos
-            sSQL = "SELECT NOME FROM mS01 WHERE CODIGO='" & cCODIGO & "'"
-            aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
-            If lRETU Then
-                cNOME = aRETU(0) + " " + aRETU(1)
-            End If
-        End If
-    End Select
-    TXTFIELDS(3) = FixStr(cNOME)
+
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
+
+
+  Select Case TXTFIELDS(1)
+  Case "C"
+    sSQL = "SELECT NOME,NOM2 FROM MT01 WHERE CODIGO='" & cCODIGO & "'"
+    aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
+    If lRETU Then
+      cNOME = aRETU(0) + " " + aRETU(1)
+    End If
+  Case "M"
+    sSQL = "SELECT NOME,NOM2 FROM MU01 WHERE CODIGO='" & cCODIGO & "'"
+    aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
+    If lRETU Then
+      cNOME = aRETU(0) + " " + aRETU(1)
+    End If
+
+  Case "T"
+    sSQL = "SELECT NOME,NOM2 FROM mP03 WHERE CODIGO='" & cCODIGO & "'"
+    aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
+    If lRETU Then
+      cNOME = aRETU(1)                     ''Nome completo
+    End If
+  Case "S"
+    sSQL = "SELECT NOME,NOM2 FROM mQ01 WHERE CODIGO='" & cCODIGO & "'"
+    aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
+    If lRETU Then
+      cNOME = aRETU(0) + " " + aRETU(1)
+    End If
+    If Len(cNOME) = 0 Then                   ''Tenta Produtos
+      sSQL = "SELECT NOME FROM mS01 WHERE CODIGO='" & cCODIGO & "'"
+      aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
+      If lRETU Then
+        cNOME = aRETU(0) + " " + aRETU(1)
+      End If
+    End If
+  End Select
+  TXTFIELDS(3) = FixStr(cNOME)
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub escmu_Click()
 
-    iMU01 = 0
-    Select Case TXTFIELDS(1)
-    Case "M"
-        iMU01 = 1
-    Case "C"
-        iMU01 = 2
-    Case "T"
-        iMU01 = 5
-    Case "S"
-        iMU01 = 7
-    End Select
-    If iMU01 > 0 Then
-        escmu01.Show vbModal, Me
-        If Not lRETU Then Exit Sub
-        frmPFMS03.TXTFIELDS(2) = eRETU01
-        Command1_Click
-    End If
-   
+  iMU01 = 0
+  Select Case TXTFIELDS(1)
+  Case "M"
+    iMU01 = 1
+  Case "C"
+    iMU01 = 2
+  Case "T"
+    iMU01 = 5
+  Case "S"
+    iMU01 = 7
+  End Select
+  If iMU01 > 0 Then
+    escmu01.Show vbModal, Me
+    If Not lRETU Then Exit Sub
+    frmPFMS03.TXTFIELDS(2) = eRETU01
+    Command1_Click
+  End If
+
 
 End Sub
 
 Private Sub ESCpro_Click()
-    Dim cCHAVEBUS As String
-    ''2 codigo
-    ePASS01 = "LOGIC"                            ''
-    escms01.Show vbModal, Me
-    If lRETU Then
-        TXTFIELDS(2) = eRETU01
-        TXTFIELDS(3) = eRETU02
-    End If
-    cCHAVEBUS = ""
+  Dim cCHAVEBUS As String
+  ''2 codigo
+  ePASS01 = "LOGIC"                            ''
+  escms01.Show vbModal, Me
+  If lRETU Then
+    TXTFIELDS(2) = eRETU01
+    TXTFIELDS(3) = eRETU02
+  End If
+  cCHAVEBUS = ""
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQPF = PegPath("PATH", "PF")
-    cSQL = "select * from PFMS03 WHERE PF=" & nPF & " AND TIPOENT='" & Ctipoent & "' AND CODCOMP='" & Ccodcomp & "' and seq=" & FixInt(nSEQ) & " and ssq=" & FixInt(nSSQ)
-    nCAMPOS = 12
-    aCAM = Array("PF", "TIPOENT", "CODCOMP", "DESCRI", _
-                 "QTDDE", "PRECO", "TOTAL", "BAIXAC", _
-                 "SEQ", "SSQ", "OPCAO", "PRDORI")
-    aFOR = Array("NI", "C", "C", "C", _
-                 "N", "N", "N", "C", _
-                 "NI", "NI", "NI", "C")
-    aPAD = Array(0, "", "", "", _
-                 0, 0, 0, "", _
-                 0, 0, 0, "")
-                 
-    aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
+  CenterFormToScreen Me
+  cARQPF = PegPath("PATH", "PF")
+  cSQL = "select * from PFMS03 WHERE PF=" & nPF & " AND TIPOENT='" & Ctipoent & "' AND CODCOMP='" & Ccodcomp & "' and seq=" & FixInt(nSEQ) & " and ssq=" & FixInt(nSSQ)
+  nCAMPOS = 12
+  aCAM = Array("PF", "TIPOENT", "CODCOMP", "DESCRI", _
+               "QTDDE", "PRECO", "TOTAL", "BAIXAC", _
+               "SEQ", "SSQ", "OPCAO", "PRDORI")
+  aFOR = Array("NI", "C", "C", "C", _
+               "N", "N", "N", "C", _
+               "NI", "NI", "NI", "C")
+  aPAD = Array(0, "", "", "", _
+               0, 0, 0, "", _
+               0, 0, 0, "")
+
+  aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
 
 
 End Sub
 
 Private Sub TXTFIELDS_Change(Index As Integer)
-    Select Case Index
-    Case 4, 5
-        TXTFIELDS(6) = FixNum(TXTFIELDS(4)) * FixNum(TXTFIELDS(5))
-    End Select
+  Select Case Index
+  Case 4, 5
+    TXTFIELDS(6) = FixNum(TXTFIELDS(4)) * FixNum(TXTFIELDS(5))
+  End Select
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 
 End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
-    Dim KeyPressed As Variant
-    Select Case Index
-    Case 8, 9, 10
-        KeyAscii = ValiText(KeyAscii, "#NI")
-    Case 4, 5
-        KeyAscii = ValiText(KeyAscii, "#N")
-    End Select
+  Dim KeyPressed As Variant
+  Select Case Index
+  Case 8, 9, 10
+    KeyAscii = ValiText(KeyAscii, "#NI")
+  Case 4, 5
+    KeyAscii = ValiText(KeyAscii, "#N")
+  End Select
 End Sub
 
 

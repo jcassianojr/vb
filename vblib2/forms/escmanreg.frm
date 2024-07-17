@@ -68,48 +68,48 @@ Option Explicit
 
 Private Sub CmdSair_Click()
 
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 
 End Sub
 
 Private Sub Escolher_Click()
 
-    Grid.Col = 0
-    zgrp = Grid
-    escMANREL.Show vbModal, Me
-    FilRelat
+  Grid.Col = 0
+  zgrp = Grid
+  escMANREL.Show vbModal, Me
+  FilRelat
 
 End Sub
 
 Private Sub FilRelat()
 
-    Dim cARQ As String
-    Dim cSQL As String
-   
-    cARQ = ZMANA5CON
-    cSQL = "SELECT GRUPO,DESCRICAO FROM MANREG ORDER BY grupo"
-    cARQ = GeraConn(cARQ, "JETFOX")
-    MontaGridUltra Grid, 2, Array(400, 5000), Array("GRP", "Nome"), _
-        Array("L$Grupo", "Descricao"), cARQ, cSQL
-    
+  Dim cARQ As String
+  Dim cSQL As String
+
+  cARQ = ZMANA5CON
+  cSQL = "SELECT GRUPO,DESCRICAO FROM MANREG ORDER BY grupo"
+  cARQ = GeraConn(cARQ, "JETFOX")
+  MontaGridUltra Grid, 2, Array(400, 5000), Array("GRP", "Nome"), _
+                 Array("L$Grupo", "Descricao"), cARQ, cSQL
+
 
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    xmontatoolbar Me.Toolbar1, "escMANREG", True
-    FilRelat
-    If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
+  CenterFormToScreen Me
+  xmontatoolbar Me.Toolbar1, "escMANREG", True
+  FilRelat
+  If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii = 13 Then
-        Escolher_Click
-    End If
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii = 13 Then
+    Escolher_Click
+  End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 
 End Sub
@@ -117,36 +117,36 @@ End Sub
 'Private Sub Grid_SelChange()
 '    With Grid
 '        If .Rows > 2 Then
- '           .Col = .Cols - 1
-  '          .ColSel = 0
-   '         .TopRow = .Row
-    '    End If
-    'End With
+'           .Col = .Cols - 1
+'          .ColSel = 0
+'         .TopRow = .Row
+'    End If
+'End With
 
 'End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Dim sButton          As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    If Not AcessaBtnOld("escMANREG", Button.Index) Then
-        Exit Sub
-    End If
-    ''TbrLog Me, Button
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+  If Not AcessaBtnOld("escMANREG", Button.Index) Then
+    Exit Sub
+  End If
+  ''TbrLog Me, Button
 
-    Select Case sButton
+  Select Case sButton
 
-    Case "ESC"
-        Escolher_Click
+  Case "ESC"
+    Escolher_Click
 
-    Case "LOC"
-        LocalizaGri1 Grid
+  Case "LOC"
+    LocalizaGri1 Grid
 
-    Case "SAI"
-        CmdSair_Click
+  Case "SAI"
+    CmdSair_Click
 
-    End Select
+  End Select
 
 End Sub
 

@@ -52,7 +52,7 @@ Begin VB.Form frmIniEditor
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "frmIniEditor.frx":058A
-            TextSave        =   "11:11"
+            TextSave        =   "14:02"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -60,7 +60,7 @@ Begin VB.Form frmIniEditor
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "frmIniEditor.frx":0B24
-            TextSave        =   "04/05/2021"
+            TextSave        =   "17/07/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -483,292 +483,292 @@ Private oIni As New cIniSettings
 
 Private Sub AddKey(ParentNode As MSComctlLib.Node)
 
-    Const sTitle = "Adcionado Chave"
-    Dim A$
-    Dim nodx As Node
+  Const sTitle = "Adcionado Chave"
+  Dim A$
+  Dim nodx As Node
 
 
-    A$ = InputBox("Entre nome para a chave [" & ParentNode.tEXT & "]:", sTitle, "")
-    If Len(A$) = 0 Then
-        Exit Sub
+  A$ = InputBox("Entre nome para a chave [" & ParentNode.tEXT & "]:", sTitle, "")
+  If Len(A$) = 0 Then
+    Exit Sub
+  End If
+
+  Set nodx = ParentNode.Child                  'First Child
+  Do Until nodx Is Nothing
+    If nodx.tEXT = A$ Then
+      Alert "Ja existe a chave na seccao [" & ParentNode.tEXT & "].", sTitle
+      Exit Sub
     End If
-    
-    Set nodx = ParentNode.Child                  'First Child
-    Do Until nodx Is Nothing
-        If nodx.tEXT = A$ Then
-            Alert "Ja existe a chave na seccao [" & ParentNode.tEXT & "].", sTitle
-            Exit Sub
-        End If
-    
-        Set nodx = nodx.Next
-    Loop
-    
-    Set nodx = TreeView1.Nodes.Add(ParentNode.Index, tvwChild, , A$ & "=")
-    nodx.Selected = True
-    nodx.EnsureVisible
-    
-    ShowSave True
-    
+
+    Set nodx = nodx.Next
+  Loop
+
+  Set nodx = TreeView1.Nodes.Add(ParentNode.Index, tvwChild, , A$ & "=")
+  nodx.Selected = True
+  nodx.EnsureVisible
+
+  ShowSave True
+
 End Sub
 
 Private Sub AddSection()
 
-    Const sTitle = "Adcionando Seçao"
-    Dim A$
-    Dim nodx As Node
+  Const sTitle = "Adcionando Seçao"
+  Dim A$
+  Dim nodx As Node
 
 
-    A$ = InputBox("Entre o Nome da Nova Seçao:", sTitle, "")
-    If Len(A$) = 0 Then
+  A$ = InputBox("Entre o Nome da Nova Seçao:", sTitle, "")
+  If Len(A$) = 0 Then
+    Exit Sub
+  End If
+
+  For Each nodx In TreeView1.Nodes
+    If nodx.Parent Is Nothing Then
+      If nodx.tEXT = A$ Then
+        Alert "Ja existe esta Seccao.", sTitle
         Exit Sub
+      End If
     End If
-    
-    For Each nodx In TreeView1.Nodes
-        If nodx.Parent Is Nothing Then
-            If nodx.tEXT = A$ Then
-                Alert "Ja existe esta Seccao.", sTitle
-                Exit Sub
-            End If
-        End If
-    Next
-    
-    Set nodx = TreeView1.Nodes.Add(, , , A$)
-    nodx.Selected = True
-    nodx.EnsureVisible
-    
-    ShowSave True
-    
+  Next
+
+  Set nodx = TreeView1.Nodes.Add(, , , A$)
+  nodx.Selected = True
+  nodx.EnsureVisible
+
+  ShowSave True
+
 End Sub
 
 Private Sub ChangeKey(Node As MSComctlLib.Node)
 
-    Const sTitle = "Alterando Chave"
-    Dim A$
-    Dim nodx As Node
-    Dim Arr() As String
+  Const sTitle = "Alterando Chave"
+  Dim A$
+  Dim nodx As Node
+  Dim Arr() As String
 
-    Arr = Split(Node.tEXT, "=")
-    
-    A$ = InputBox("Digite o Nome da Chave:", sTitle, Arr(0))
-    If Len(A$) = 0 Then
+  Arr = Split(Node.tEXT, "=")
+
+  A$ = InputBox("Digite o Nome da Chave:", sTitle, Arr(0))
+  If Len(A$) = 0 Then
+    Exit Sub
+  End If
+
+  Set nodx = Node.Parent.Child                 'First Child
+  Do Until nodx Is Nothing
+    If nodx.Index <> Node.Index Then
+      If nodx.tEXT = A$ Then
+        Alert "Chave ja existe na seccao [" & Node.Parent.tEXT & "]."
         Exit Sub
+      End If
     End If
-    
-    Set nodx = Node.Parent.Child                 'First Child
-    Do Until nodx Is Nothing
-        If nodx.Index <> Node.Index Then
-            If nodx.tEXT = A$ Then
-                Alert "Chave ja existe na seccao [" & Node.Parent.tEXT & "]."
-                Exit Sub
-            End If
-        End If
-        Set nodx = nodx.Next
-    Loop
-        
-    Arr(0) = A$
-    
-    If UBound(Arr) = 0 Then
-        Arr(0) = Arr(0) & "="
-    End If
-    
-    Node.tEXT = Join(Arr, "=")
-    Node.Selected = True
-    Node.EnsureVisible
-    
-    ShowSave True
+    Set nodx = nodx.Next
+  Loop
+
+  Arr(0) = A$
+
+  If UBound(Arr) = 0 Then
+    Arr(0) = Arr(0) & "="
+  End If
+
+  Node.tEXT = Join(Arr, "=")
+  Node.Selected = True
+  Node.EnsureVisible
+
+  ShowSave True
 
 End Sub
 
 Private Sub ChangeSection(Node As MSComctlLib.Node)
 
-    Const sTitle = "Mudando Seção"
-    Dim A$
-    Dim nodx As Node
+  Const sTitle = "Mudando Seção"
+  Dim A$
+  Dim nodx As Node
 
 
-    A$ = InputBox("Digite o nome da nova Seção:", sTitle, Node.tEXT)
-    If Len(A$) = 0 Then
-        Exit Sub
-    End If
-    
-    For Each nodx In TreeView1.Nodes
-        If nodx.Parent Is Nothing Then
-            If nodx.Index <> Node.Index Then
-                If nodx.tEXT = A$ Then
-                    Alert "Ja existe a seccao.", sTitle
-                    Exit Sub
-                End If
-            End If
+  A$ = InputBox("Digite o nome da nova Seção:", sTitle, Node.tEXT)
+  If Len(A$) = 0 Then
+    Exit Sub
+  End If
+
+  For Each nodx In TreeView1.Nodes
+    If nodx.Parent Is Nothing Then
+      If nodx.Index <> Node.Index Then
+        If nodx.tEXT = A$ Then
+          Alert "Ja existe a seccao.", sTitle
+          Exit Sub
         End If
-    Next
-    
-    Node.tEXT = A$
-    Node.Selected = True
-    Node.EnsureVisible
-    
-    ShowSave True
+      End If
+    End If
+  Next
+
+  Node.tEXT = A$
+  Node.Selected = True
+  Node.EnsureVisible
+
+  ShowSave True
 
 End Sub
 
 Private Sub cmdFile_Click(Index As Integer)
-    Dim sFILENAME As String
-    Dim sPath As String
-    Dim sRECENTFILE As String
-    Dim sFILTER As String
+  Dim sFILENAME As String
+  Dim sPath As String
+  Dim sRECENTFILE As String
+  Dim sFILTER As String
 
-    On Error GoTo ERRTAG
-    
-    Select Case Index
-    Case 0                                       'Open
-        sPath = App.Path
-        ''            sPATH = oReg.GetSetting("Settings", "RecentPath", App.Path)
-        ''            sRECENTFILE = oReg.GetSetting("Settings", "RecentFile", "")
-        sFILTER = "Ini Files" & vbNullChar & "*.ini" & vbNullChar & "All Files" & vbNullChar & "*.*"
-        sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
-        If Len(sFILENAME) = 0 Then
-            Exit Sub
-        End If
-        ''          oReg.SaveSetting "Settings", "RecentFile", sFILENAME
-        ''            oReg.SaveSetting "Settings", "RecentPath", GetFilePath(sFILENAME)
-            
-        oIni.Path = sFILENAME
-        ShowIniData
-        ShowSave False
-            
-    Case 1                                       'New
-        oIni.Path = ""
-        ShowIniData
-        ShowSave False
-            
-    Case 2, 6                                    'Save e Sair
-        If Len(oIni.Path) = 0 Then
-            sPath = App.Path
-                
-            ''                sPATH = oReg.GetSetting("Settings", "RecentPath", App.Path)
-            sFILTER = "Ini Files" & vbNullChar & "*.ini" & vbNullChar & "All Files" & vbNullChar & "*.*"
-            sFILENAME = FileSave(Me, sFILTER, 1, , "ini", sPath, "Save Ini File")
-            If Len(sFILENAME) = 0 Then
-                Exit Sub
-            End If
-            ''                oReg.SaveSetting "Settings", "RecentFile", sFILENAME
-            ''                oReg.SaveSetting "Settings", "RecentPath", GetFilePath(sFILENAME)
-            oIni.Path = sFILENAME
-        End If
-        SaveIni
-                
-    Case 3                                       'Save As
-        sPath = App.Path
-            
-        ''            sPATH = oReg.GetSetting("Settings", "RecentPath", App.Path)
-        sFILTER = "Ini Files" & vbNullChar & "*.ini" & vbNullChar & "All Files" & vbNullChar & "*.*"
-        sFILENAME = FileSave(Me, sFILTER, 1, , "ini", sPath, "Save Ini File As")
-        If Len(sFILENAME) = 0 Then
-            Exit Sub
-        End If
-        ''            oReg.SaveSetting "Settings", "RecentFile", sFILENAME
-        ''            oReg.SaveSetting "Settings", "RecentPath", GetFilePath(sFILENAME)
-        oIni.Path = sFILENAME
-        SaveIni
-            
-    Case 4                                       'Undo
-        ShowIniData
-        ShowSave False
-            
-    Case 5                                       'Editar
-        cARQRTF = oIni.Path
-        FrmRTf.Show vbModal, Me
-            
-        
-        
-    End Select
-    If Index = 6 Then
-        Unload Me
+  On Error GoTo ERRTAG
+
+  Select Case Index
+  Case 0                                       'Open
+    sPath = App.Path
+    ''            sPATH = oReg.GetSetting("Settings", "RecentPath", App.Path)
+    ''            sRECENTFILE = oReg.GetSetting("Settings", "RecentFile", "")
+    sFILTER = "Ini Files" & vbNullChar & "*.ini" & vbNullChar & "All Files" & vbNullChar & "*.*"
+    sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
+    If Len(sFILENAME) = 0 Then
+      Exit Sub
     End If
-    
-    Exit Sub
+    ''          oReg.SaveSetting "Settings", "RecentFile", sFILENAME
+    ''            oReg.SaveSetting "Settings", "RecentPath", GetFilePath(sFILENAME)
+
+    oIni.Path = sFILENAME
+    ShowIniData
+    ShowSave False
+
+  Case 1                                       'New
+    oIni.Path = ""
+    ShowIniData
+    ShowSave False
+
+  Case 2, 6                                    'Save e Sair
+    If Len(oIni.Path) = 0 Then
+      sPath = App.Path
+
+      ''                sPATH = oReg.GetSetting("Settings", "RecentPath", App.Path)
+      sFILTER = "Ini Files" & vbNullChar & "*.ini" & vbNullChar & "All Files" & vbNullChar & "*.*"
+      sFILENAME = FileSave(Me, sFILTER, 1, , "ini", sPath, "Save Ini File")
+      If Len(sFILENAME) = 0 Then
+        Exit Sub
+      End If
+      ''                oReg.SaveSetting "Settings", "RecentFile", sFILENAME
+      ''                oReg.SaveSetting "Settings", "RecentPath", GetFilePath(sFILENAME)
+      oIni.Path = sFILENAME
+    End If
+    SaveIni
+
+  Case 3                                       'Save As
+    sPath = App.Path
+
+    ''            sPATH = oReg.GetSetting("Settings", "RecentPath", App.Path)
+    sFILTER = "Ini Files" & vbNullChar & "*.ini" & vbNullChar & "All Files" & vbNullChar & "*.*"
+    sFILENAME = FileSave(Me, sFILTER, 1, , "ini", sPath, "Save Ini File As")
+    If Len(sFILENAME) = 0 Then
+      Exit Sub
+    End If
+    ''            oReg.SaveSetting "Settings", "RecentFile", sFILENAME
+    ''            oReg.SaveSetting "Settings", "RecentPath", GetFilePath(sFILENAME)
+    oIni.Path = sFILENAME
+    SaveIni
+
+  Case 4                                       'Undo
+    ShowIniData
+    ShowSave False
+
+  Case 5                                       'Editar
+    cARQRTF = oIni.Path
+    FrmRTf.Show vbModal, Me
+
+
+
+  End Select
+  If Index = 6 Then
+    Unload Me
+  End If
+
+  Exit Sub
 ERREND:
-    Exit Sub
+  Exit Sub
 ERRTAG:
-    SayErro "FrmIniEditor"
-    Resume ERREND
+  SayErro "FrmIniEditor"
+  Resume ERREND
 
 End Sub
 
 Private Sub cmdKey_Click(Index As Integer)
 
-    Dim nodx As Node
-    Dim nPOS As Long
+  Dim nodx As Node
+  Dim nPOS As Long
 
 
-    Select Case Index
-    Case 0                                       'Change
-        Set nodx = TreeView1.selectedItem
-        If nodx Is Nothing Then
-            Beep
-            Exit Sub
-        End If
-        
-        If nodx.Parent Is Nothing Then           'Section
-            Beep
-            Exit Sub
-        End If
-            
-        ChangeKey nodx
-        
-    Case 1                                       'Add
-        Set nodx = TreeView1.selectedItem
-        If nodx Is Nothing Then
-            Beep
-            Exit Sub
-        End If
-        
-        If Not nodx.Parent Is Nothing Then
-            Set nodx = nodx.Parent               'Section
-        End If
-            
-        AddKey nodx
-        
-    Case 2                                       'Delete
-        Set nodx = TreeView1.selectedItem
-        If nodx Is Nothing Then
-            Beep
-            Exit Sub
-        End If
-        
-        If nodx.Parent Is Nothing Then           'Section
-            Beep
-            Exit Sub
-        End If
-        DeleteKey nodx
-            
-    Case 3, 4                                    'Value
-        Set nodx = TreeView1.selectedItem
-        If nodx Is Nothing Then
-            Beep
-            Exit Sub
-        End If
-        
-        If nodx.Parent Is Nothing Then           'Section
-            Beep
-            Exit Sub
-        End If
-            
-        If Index = 3 Then
-            KeyValue nodx
-        Else
-            nPOS = InStr(nodx, "=")
-            ePASS01 = ""
-            If nPOS > 0 Then
-                ePASS01 = Mid(nodx, nPOS + 1)
-            End If
-               
-            FrmPegdb.Show vbModal, Me
-            If lRETU Then
-                KeyValue nodx, eRETU01
-            End If
-        End If
-            
-    End Select
+  Select Case Index
+  Case 0                                       'Change
+    Set nodx = TreeView1.selectedItem
+    If nodx Is Nothing Then
+      Beep
+      Exit Sub
+    End If
+
+    If nodx.Parent Is Nothing Then           'Section
+      Beep
+      Exit Sub
+    End If
+
+    ChangeKey nodx
+
+  Case 1                                       'Add
+    Set nodx = TreeView1.selectedItem
+    If nodx Is Nothing Then
+      Beep
+      Exit Sub
+    End If
+
+    If Not nodx.Parent Is Nothing Then
+      Set nodx = nodx.Parent               'Section
+    End If
+
+    AddKey nodx
+
+  Case 2                                       'Delete
+    Set nodx = TreeView1.selectedItem
+    If nodx Is Nothing Then
+      Beep
+      Exit Sub
+    End If
+
+    If nodx.Parent Is Nothing Then           'Section
+      Beep
+      Exit Sub
+    End If
+    DeleteKey nodx
+
+  Case 3, 4                                    'Value
+    Set nodx = TreeView1.selectedItem
+    If nodx Is Nothing Then
+      Beep
+      Exit Sub
+    End If
+
+    If nodx.Parent Is Nothing Then           'Section
+      Beep
+      Exit Sub
+    End If
+
+    If Index = 3 Then
+      KeyValue nodx
+    Else
+      nPOS = InStr(nodx, "=")
+      ePASS01 = ""
+      If nPOS > 0 Then
+        ePASS01 = Mid(nodx, nPOS + 1)
+      End If
+
+      FrmPegdb.Show vbModal, Me
+      If lRETU Then
+        KeyValue nodx, eRETU01
+      End If
+    End If
+
+  End Select
 
 End Sub
 
@@ -778,89 +778,89 @@ End Sub
 
 Private Sub cmdSection_Click(Index As Integer)
 
-    Dim nodx As Node
+  Dim nodx As Node
 
 
-    Select Case Index
-    Case 0                                       'Change
-        Set nodx = TreeView1.selectedItem
-        If nodx Is Nothing Then
-            Beep
-            Exit Sub
-        End If
-        
-        If Not nodx.Parent Is Nothing Then
-            Set nodx = nodx.Parent
-            nodx.Selected = True
-        End If
-            
-        ChangeSection nodx
-            
-    Case 1                                       'Add
-        AddSection
-        
-    Case 2                                       'Delete
-        Set nodx = TreeView1.selectedItem
-        If nodx Is Nothing Then
-            Beep
-            Exit Sub
-        End If
-        
-        If Not nodx.Parent Is Nothing Then
-            Set nodx = nodx.Parent
-            nodx.Selected = True
-        End If
-            
-        DeleteSection nodx
-        
-        
-    End Select
-    
+  Select Case Index
+  Case 0                                       'Change
+    Set nodx = TreeView1.selectedItem
+    If nodx Is Nothing Then
+      Beep
+      Exit Sub
+    End If
+
+    If Not nodx.Parent Is Nothing Then
+      Set nodx = nodx.Parent
+      nodx.Selected = True
+    End If
+
+    ChangeSection nodx
+
+  Case 1                                       'Add
+    AddSection
+
+  Case 2                                       'Delete
+    Set nodx = TreeView1.selectedItem
+    If nodx Is Nothing Then
+      Beep
+      Exit Sub
+    End If
+
+    If Not nodx.Parent Is Nothing Then
+      Set nodx = nodx.Parent
+      nodx.Selected = True
+    End If
+
+    DeleteSection nodx
+
+
+  End Select
+
 End Sub
 
 Private Sub DeleteKey(Node As MSComctlLib.Node)
 
-    Const sTitle = "Key Delete"
-    Dim nodx As Node
+  Const sTitle = "Key Delete"
+  Dim nodx As Node
 
 
-    If Not MDG("Apagar a Chave: " & Node.tEXT & "  in section [" & Node.Parent.tEXT & "]?") Then
-        Exit Sub
-    End If
-    
-    Set nodx = Node.Parent
-    TreeView1.Nodes.Remove Node.Index
-        
-    nodx.Selected = True
-    nodx.EnsureVisible
+  If Not MDG("Apagar a Chave: " & Node.tEXT & "  in section [" & Node.Parent.tEXT & "]?") Then
+    Exit Sub
+  End If
 
-    ShowSave True
-    
+  Set nodx = Node.Parent
+  TreeView1.Nodes.Remove Node.Index
+
+  nodx.Selected = True
+  nodx.EnsureVisible
+
+  ShowSave True
+
 End Sub
 
 Private Sub DeleteSection(Node As MSComctlLib.Node)
 
-    Const sTitle = "Section Delete"
-    Dim nodx As Node
+  Const sTitle = "Section Delete"
+  Dim nodx As Node
 
 
-    If Not MDG("Apagar a Seccao: " & Node.tEXT & "?") Then
-        Exit Sub
-    End If
-    
-    Do Until Node.Children = 0
-        TreeView1.Nodes.Remove Node.Child.Index
-    Loop
-    TreeView1.Nodes.Remove Node.Index
-    
-    If TreeView1.Nodes.Count > 0 Then
-        Set nodx = TreeView1.Nodes(1)
-        nodx.Selected = True
-        nodx.EnsureVisible
-    End If
-    
-    ShowSave True
-    
+  If Not MDG("Apagar a Seccao: " & Node.tEXT & "?") Then
+    Exit Sub
+  End If
+
+  Do Until Node.children = 0
+    TreeView1.Nodes.Remove Node.Child.Index
+  Loop
+  TreeView1.Nodes.Remove Node.Index
+
+  If TreeView1.Nodes.Count > 0 Then
+    Set nodx = TreeView1.Nodes(1)
+    nodx.Selected = True
+    nodx.EnsureVisible
+  End If
+
+  ShowSave True
+
 End Sub
 
 Private Sub Encerrar_Click()
@@ -868,305 +868,305 @@ Private Sub Encerrar_Click()
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    ''Configura Help
-    Me.Caption = cFORMID
-    HelpContextID = nFORMID
+  CenterFormToScreen Me
+  ''Configura Help
+  Me.Caption = cFORMID
+  HelpContextID = nFORMID
 
-    ''    With oReg
-    ''        .Company = App.CompanyName
-    ''        .AppName = "IniEditor"
-    ''        .RootHKey = hkrLocalMachine
-        
-    'Get Saved form size
-    ''        Me.Width = .GetSetting("Pos", "Width", Me.Width)
-    ''        Me.Height = .GetSetting("Pos", "Height", Me.Height)
-    ''    End With
-    
-    
-    ' 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
-    ' 4-Editar,5-Visualizar,6-Imprimir,7-Exportar
-   
-    ''Novo
-    If Not aDIREITOS(0) Then
-        cmdFile(1).Enabled = False
-    End If
-    ''Abrir
-    If Not aDIREITOS(1) Then
-        cmdFile(1).Enabled = False
-    End If
-    ''Salvar
-    If Not aDIREITOS(2) Then
-        cmdFile(2).Enabled = False
-    End If
-    ''Salvar Como
-    If Not aDIREITOS(3) Then
-        cmdFile(3).Enabled = False
-    End If
-    ''Ediçao
-    If Not aDIREITOS(4) Then
-        cmdSection(0).Enabled = False
-        cmdSection(1).Enabled = False
-        cmdSection(2).Enabled = False
-        cmdkey(0).Enabled = False
-        cmdkey(1).Enabled = False
-        cmdkey(2).Enabled = False
-        cmdkey(3).Enabled = False
-        cmdkey(4).Enabled = False
-        cmdFile(5).Enabled = False
-    End If
-    ''Visualizaçao Ainda nao Criada
-    If Not aDIREITOS(5) Then
-    End If
-    ''Impressao e Configuraçao Impressao
-    If Not aDIREITOS(6) Then
-    End If
-    ''Exportaçao Ainda Nao Criada
-    If Not aDIREITOS(7) Then
-    End If
-       
-    'Save handle to the form and
-    'start subclassing to ensure minimum form size
-    ''gHW = Me.hwnd
-    ''Hook
+  ''    With oReg
+  ''        .Company = App.CompanyName
+  ''        .AppName = "IniEditor"
+  ''        .RootHKey = hkrLocalMachine
 
-    If Len(cARQRTF) > 0 Then
-        oIni.Path = cARQRTF
-        ShowIniData
-        ShowSave False
-    End If
-    
-    StatusBar1.Panels(6).tEXT = zUSER
-    
-End Sub
-
-Private Sub Form_Resize()
-
-    On Error Resume Next
-    
-    
-        
-    With TreeView1
-        .Move .Left, .Top, Me.ScaleWidth - .Left - 90, Me.ScaleHeight - .Top - 90
-    End With
-    
-End Sub
-
-Private Function GetFilePath(sFILENAME As String) As String
-
-    Dim Arr() As String
-    ''Dim i As Long
+  'Get Saved form size
+  ''        Me.Width = .GetSetting("Pos", "Width", Me.Width)
+  ''        Me.Height = .GetSetting("Pos", "Height", Me.Height)
+  ''    End With
 
 
-    Arr = Split(sFILENAME, "\")
-    
-    ReDim Preserve Arr(UBound(Arr) - 1)
-    GetFilePath = Join(Arr, "\")
-    
-End Function
+  ' 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
+  ' 4-Editar,5-Visualizar,6-Imprimir,7-Exportar
 
-Private Sub KeyValue(Node As MSComctlLib.Node, Optional ByVal A As String = "")
-
-    Const sTitle = "Valor da Chave"
-
-    ''Dim nodx As Node
-    Dim Arr() As String
-    Dim sTxt As String
-
-
-    Arr = Split(Node.tEXT, "=")
-    If UBound(Arr) > 0 Then
-        sTxt = Arr(1)
-    End If
-    ''Se nao Passou pega
-    If Len(A) = 0 Then
-        A = InputBox("Digite Valor para Chave " & Arr(0) & ":" & vbCr & "Tecle 'DEL' para apagar este Valor.", sTitle, sTxt)
-    End If
-    ''Se vzio nao continua
-    If Len(A) = 0 Then
-        Exit Sub
-    End If
-    
-    If A = "DEL" Then
-        Arr(1) = ""
-    Else
-        Arr(1) = A
-    End If
-    
-    Node.tEXT = Join(Arr, "=")
-    Node.Selected = True
-    Node.EnsureVisible
-    
-    ShowSave True
-
-End Sub
-
-Private Sub SaveIni()
-
-    Const sTitle = "Save Ini File"
-    Dim nodx As Node
-    Dim Arr As Variant
-    Dim I As Long
-    Dim sSection As String
-    Dim sKey As String
-    Dim sValue As String
-
-    If Not MDG("Salvar Alteracoes" & vbCr & "em: " & oIni.Path & " ?") Then
-        Exit Sub
-    End If
-    
-    Arr = oIni.GetAllSections()
-    If Not IsEmpty(Arr) Then
-        For I = 0 To UBound(Arr)
-            sSection = Arr(I)
-            
-            oIni.DeleteSetting sSection
-        Next
-    End If
-
-
-    For Each nodx In TreeView1.Nodes
-        If nodx.Parent Is Nothing Then
-            oIni.SaveSetting nodx.tEXT, "~TEMPORARY", "~TEMPORARY"
-            oIni.DeleteSetting nodx.tEXT, "~TEMPORARY" 'Leave empty section
-        Else
-            Arr = Split(nodx.tEXT, "=")
-            sKey = Arr(0)
-            If UBound(Arr) > 0 Then
-                sValue = Arr(1)
-            Else
-                sValue = ""
-            End If
-            
-            oIni.SaveSetting nodx.Parent.tEXT, sKey, sValue
-        End If
-    Next
-    
-    ShowSave False
-    
-End Sub
-
-Private Sub ShowIniData()
-
-    Dim arrSections As Variant
-    Dim arrKeys As Variant
-    Dim I As Long
-    Dim J As Long
-    Dim sSection As String
-    Dim sKey As String
-    Dim sValue As String
-    Dim nodx As Node
-
-    TreeView1.Nodes.Clear
-    Me.Caption = "AVE IniEditor"
-    
-    If Len(oIni.Path) = 0 Then
-        Me.Caption = Me.Caption & ": " & "New File"
-        Exit Sub
-    End If
-    Me.Caption = Me.Caption & ": " & oIni.Path
-    
-    arrSections = oIni.GetAllSections()
-    If Not IsEmpty(arrSections) Then
-        For I = 0 To UBound(arrSections)
-            sSection = arrSections(I)
-            Set nodx = TreeView1.Nodes.Add(, , , sSection)
-            
-            arrKeys = oIni.GetAllSettings(sSection)
-            If Not IsEmpty(arrKeys) Then
-                For J = 0 To UBound(arrKeys)
-                    sKey = arrKeys(J, 0)
-                    sValue = arrKeys(J, 1)
-                    
-                    TreeView1.Nodes.Add nodx.Index, tvwChild, , sKey & "=" & sValue
-                Next
-            End If
-        Next
-    End If
-
-    If TreeView1.Nodes.Count > 0 Then
-        Set nodx = TreeView1.Nodes(1)
-        nodx.Selected = True
-        nodx.EnsureVisible
-    End If
-
-End Sub
-
-Private Sub ShowSave(bMode As Boolean)
-
-    Dim nodx As Node
-
-    cmdFile(2).Enabled = bMode
-    cmdFile(3).Enabled = bMode
-    cmdFile(4).Enabled = bMode
-    
+  ''Novo
+  If Not aDIREITOS(0) Then
+    cmdFile(1).Enabled = False
+  End If
+  ''Abrir
+  If Not aDIREITOS(1) Then
+    cmdFile(1).Enabled = False
+  End If
+  ''Salvar
+  If Not aDIREITOS(2) Then
+    cmdFile(2).Enabled = False
+  End If
+  ''Salvar Como
+  If Not aDIREITOS(3) Then
+    cmdFile(3).Enabled = False
+  End If
+  ''Ediçao
+  If Not aDIREITOS(4) Then
     cmdSection(0).Enabled = False
-    cmdSection(1).Enabled = True
+    cmdSection(1).Enabled = False
     cmdSection(2).Enabled = False
-    
     cmdkey(0).Enabled = False
     cmdkey(1).Enabled = False
     cmdkey(2).Enabled = False
     cmdkey(3).Enabled = False
     cmdkey(4).Enabled = False
-    
-    Set nodx = TreeView1.selectedItem
-    If Not nodx Is Nothing Then
-        TreeView1_NodeClick nodx
+    cmdFile(5).Enabled = False
+  End If
+  ''Visualizaçao Ainda nao Criada
+  If Not aDIREITOS(5) Then
+  End If
+  ''Impressao e Configuraçao Impressao
+  If Not aDIREITOS(6) Then
+  End If
+  ''Exportaçao Ainda Nao Criada
+  If Not aDIREITOS(7) Then
+  End If
+
+  'Save handle to the form and
+  'start subclassing to ensure minimum form size
+  ''gHW = Me.hwnd
+  ''Hook
+
+  If Len(cARQRTF) > 0 Then
+    oIni.Path = cARQRTF
+    ShowIniData
+    ShowSave False
+  End If
+
+  StatusBar1.Panels(6).tEXT = zUSER
+
+End Sub
+
+Private Sub Form_Resize()
+
+  On Error Resume Next
+
+
+
+  With TreeView1
+    .Move .Left, .Top, Me.ScaleWidth - .Left - 90, Me.ScaleHeight - .Top - 90
+  End With
+
+End Sub
+
+Private Function GetFilePath(sFILENAME As String) As String
+
+  Dim Arr() As String
+  ''Dim i As Long
+
+
+  Arr = Split(sFILENAME, "\")
+
+  ReDim Preserve Arr(UBound(Arr) - 1)
+  GetFilePath = Join(Arr, "\")
+
+End Function
+
+Private Sub KeyValue(Node As MSComctlLib.Node, Optional ByVal A As String = "")
+
+  Const sTitle = "Valor da Chave"
+
+  ''Dim nodx As Node
+  Dim Arr() As String
+  Dim sTxt As String
+
+
+  Arr = Split(Node.tEXT, "=")
+  If UBound(Arr) > 0 Then
+    sTxt = Arr(1)
+  End If
+  ''Se nao Passou pega
+  If Len(A) = 0 Then
+    A = InputBox("Digite Valor para Chave " & Arr(0) & ":" & vbCr & "Tecle 'DEL' para apagar este Valor.", sTitle, sTxt)
+  End If
+  ''Se vzio nao continua
+  If Len(A) = 0 Then
+    Exit Sub
+  End If
+
+  If A = "DEL" Then
+    Arr(1) = ""
+  Else
+    Arr(1) = A
+  End If
+
+  Node.tEXT = Join(Arr, "=")
+  Node.Selected = True
+  Node.EnsureVisible
+
+  ShowSave True
+
+End Sub
+
+Private Sub SaveIni()
+
+  Const sTitle = "Save Ini File"
+  Dim nodx As Node
+  Dim Arr As Variant
+  Dim i As Long
+  Dim sSection As String
+  Dim sKey As String
+  Dim sValue As String
+
+  If Not MDG("Salvar Alteracoes" & vbCr & "em: " & oIni.Path & " ?") Then
+    Exit Sub
+  End If
+
+  Arr = oIni.GetAllSections()
+  If Not IsEmpty(Arr) Then
+    For i = 0 To UBound(Arr)
+      sSection = Arr(i)
+
+      oIni.DeleteSetting sSection
+    Next
+  End If
+
+
+  For Each nodx In TreeView1.Nodes
+    If nodx.Parent Is Nothing Then
+      oIni.SaveSetting nodx.tEXT, "~TEMPORARY", "~TEMPORARY"
+      oIni.DeleteSetting nodx.tEXT, "~TEMPORARY"  'Leave empty section
+    Else
+      Arr = Split(nodx.tEXT, "=")
+      sKey = Arr(0)
+      If UBound(Arr) > 0 Then
+        sValue = Arr(1)
+      Else
+        sValue = ""
+      End If
+
+      oIni.SaveSetting nodx.Parent.tEXT, sKey, sValue
     End If
-    
+  Next
+
+  ShowSave False
+
+End Sub
+
+Private Sub ShowIniData()
+
+  Dim arrSections As Variant
+  Dim arrKeys As Variant
+  Dim i As Long
+  Dim J As Long
+  Dim sSection As String
+  Dim sKey As String
+  Dim sValue As String
+  Dim nodx As Node
+
+  TreeView1.Nodes.Clear
+  Me.Caption = "AVE IniEditor"
+
+  If Len(oIni.Path) = 0 Then
+    Me.Caption = Me.Caption & ": " & "New File"
+    Exit Sub
+  End If
+  Me.Caption = Me.Caption & ": " & oIni.Path
+
+  arrSections = oIni.GetAllSections()
+  If Not IsEmpty(arrSections) Then
+    For i = 0 To UBound(arrSections)
+      sSection = arrSections(i)
+      Set nodx = TreeView1.Nodes.Add(, , , sSection)
+
+      arrKeys = oIni.GetAllSettings(sSection)
+      If Not IsEmpty(arrKeys) Then
+        For J = 0 To UBound(arrKeys)
+          sKey = arrKeys(J, 0)
+          sValue = arrKeys(J, 1)
+
+          TreeView1.Nodes.Add nodx.Index, tvwChild, , sKey & "=" & sValue
+        Next
+      End If
+    Next
+  End If
+
+  If TreeView1.Nodes.Count > 0 Then
+    Set nodx = TreeView1.Nodes(1)
+    nodx.Selected = True
+    nodx.EnsureVisible
+  End If
+
+End Sub
+
+Private Sub ShowSave(bMode As Boolean)
+
+  Dim nodx As Node
+
+  cmdFile(2).Enabled = bMode
+  cmdFile(3).Enabled = bMode
+  cmdFile(4).Enabled = bMode
+
+  cmdSection(0).Enabled = False
+  cmdSection(1).Enabled = True
+  cmdSection(2).Enabled = False
+
+  cmdkey(0).Enabled = False
+  cmdkey(1).Enabled = False
+  cmdkey(2).Enabled = False
+  cmdkey(3).Enabled = False
+  cmdkey(4).Enabled = False
+
+  Set nodx = TreeView1.selectedItem
+  If Not nodx Is Nothing Then
+    TreeView1_NodeClick nodx
+  End If
+
 End Sub
 
 Private Sub TreeView1_DblClick()
 
-    Dim nodx As Node
+  Dim nodx As Node
 
-    Set nodx = TreeView1.selectedItem
-    If nodx Is Nothing Then
-        Exit Sub
-    End If
-    
-    If nodx.Parent Is Nothing Then
-        ChangeSection nodx
-    Else
-        KeyValue nodx
-    End If
-    
-    
+  Set nodx = TreeView1.selectedItem
+  If nodx Is Nothing Then
+    Exit Sub
+  End If
+
+  If nodx.Parent Is Nothing Then
+    ChangeSection nodx
+  Else
+    KeyValue nodx
+  End If
+
+
 End Sub
 
 Private Sub TreeView1_KeyPress(KeyAscii As Integer)
 
-    If KeyAscii = 13 Then
-        KeyAscii = 0
-        TreeView1_DblClick
-    End If
-    
+  If KeyAscii = 13 Then
+    KeyAscii = 0
+    TreeView1_DblClick
+  End If
+
 End Sub
 
 Private Sub TreeView1_NodeClick(ByVal Node As MSComctlLib.Node)
 
-    If Node.Parent Is Nothing Then
-        cmdSection(0).Enabled = True
-        'cmdSection(1).Enabled = False
-        cmdSection(2).Enabled = True
-        
-        cmdkey(0).Enabled = False
-        cmdkey(1).Enabled = True
-        cmdkey(2).Enabled = False
-        cmdkey(3).Enabled = False
-        cmdkey(4).Enabled = False
-    Else
-        cmdSection(0).Enabled = False
-        'cmdSection(1).Enabled = False
-        cmdSection(2).Enabled = False
-        
-        cmdkey(0).Enabled = True
-        cmdkey(1).Enabled = True
-        cmdkey(2).Enabled = True
-        cmdkey(3).Enabled = True
-        cmdkey(4).Enabled = True
-    End If
-    
+  If Node.Parent Is Nothing Then
+    cmdSection(0).Enabled = True
+    'cmdSection(1).Enabled = False
+    cmdSection(2).Enabled = True
+
+    cmdkey(0).Enabled = False
+    cmdkey(1).Enabled = True
+    cmdkey(2).Enabled = False
+    cmdkey(3).Enabled = False
+    cmdkey(4).Enabled = False
+  Else
+    cmdSection(0).Enabled = False
+    'cmdSection(1).Enabled = False
+    cmdSection(2).Enabled = False
+
+    cmdkey(0).Enabled = True
+    cmdkey(1).Enabled = True
+    cmdkey(2).Enabled = True
+    cmdkey(3).Enabled = True
+    cmdkey(4).Enabled = True
+  End If
+
 End Sub
 

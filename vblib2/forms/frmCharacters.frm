@@ -99,58 +99,58 @@ Option Explicit
 Public lCLOSE As Boolean
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    On Error GoTo 5
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = 0
-    If Len(ePASS01) > 0 Then
-        lstList.FontName = ePASS01
-        Lblchr.FontName = ePASS01
-    End If
-    Lblchr.FontSize = 36                         '20
-    lCLOSE = ePASS02
-    Dim I As Integer
-    For I = 1 To 255
-        lstList.AddItem Chr$(I)
-    Next
-    lstList.ListIndex = 0
+  CenterFormToScreen Me
+  On Error GoTo 5
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = 0
+  If Len(ePASS01) > 0 Then
+    lstList.FontName = ePASS01
+    Lblchr.FontName = ePASS01
+  End If
+  Lblchr.FontSize = 36                         '20
+  lCLOSE = ePASS02
+  Dim i As Integer
+  For i = 1 To 255
+    lstList.AddItem Chr$(i)
+  Next
+  lstList.ListIndex = 0
 5:
 End Sub
 
 Private Sub Form_Resize()
-    On Error Resume Next
-    'If Me.Width < 3090 Then Me.Width = 3090
-    'If Me.Height < 1500 Then Me.Height = 1500
-    'lstList.Width = Me.ScaleWidth - lstList.Left * 2
-    'lstList.Columns = lstList.Width / 650
-    'lstList.Height = lblChar.Top - lstList.Top - 90
-    'lblChar.Width = Me.ScaleWidth - lblChar.Left * 2
+  On Error Resume Next
+  'If Me.Width < 3090 Then Me.Width = 3090
+  'If Me.Height < 1500 Then Me.Height = 1500
+  'lstList.Width = Me.ScaleWidth - lstList.Left * 2
+  'lstList.Columns = lstList.Width / 650
+  'lstList.Height = lblChar.Top - lstList.Top - 90
+  'lblChar.Width = Me.ScaleWidth - lblChar.Left * 2
 End Sub
 
 Private Sub lstList_Click()
-    On Error GoTo 5
-    lblChar.Caption = lstList.ListIndex + 1      ' & ": " & GetCharName(lstList.ListIndex + 1), vbProperCase)
-    Lblchr.Caption = Chr(lstList.ListIndex + 1)
+  On Error GoTo 5
+  lblChar.Caption = lstList.ListIndex + 1      ' & ": " & GetCharName(lstList.ListIndex + 1), vbProperCase)
+  Lblchr.Caption = Chr(lstList.ListIndex + 1)
 5:
 End Sub
 
 Private Sub lstList_DblClick()
-    eRETU01 = Chr$(lstList.ListIndex + 1)
-    eRETU02 = lstList.ListIndex + 1
-    lRETU = True
-    Unload Me
+  eRETU01 = Chr$(lstList.ListIndex + 1)
+  eRETU02 = lstList.ListIndex + 1
+  lRETU = True
+  Unload Me
 End Sub
 
 Private Sub lstList_KeyPress(KeyAscii As Integer)
-    On Error Resume Next
-    If KeyAscii = 27 Then
-        Unload Me
-    End If
-    If KeyAscii = 13 Then
-        lstList_DblClick
-    Else
-        lstList.ListIndex = KeyAscii - 1
-    End If
+  On Error Resume Next
+  If KeyAscii = 27 Then
+    Unload Me
+  End If
+  If KeyAscii = 13 Then
+    lstList_DblClick
+  Else
+    lstList.ListIndex = KeyAscii - 1
+  End If
 End Sub
 

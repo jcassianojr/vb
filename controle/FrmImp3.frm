@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form FrmImp3 
    Caption         =   "Importando Dados"
    ClientHeight    =   4590
@@ -139,7 +139,7 @@ Begin VB.Form FrmImp3
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin vbccr18.SpinBox mes 
+   Begin VBCCR18.SpinBox mes 
       Height          =   615
       Left            =   2760
       TabIndex        =   14
@@ -163,7 +163,7 @@ Begin VB.Form FrmImp3
       Max             =   3
       Value           =   1
    End
-   Begin vbccr18.SpinBox seq 
+   Begin VBCCR18.SpinBox seq 
       Height          =   495
       Left            =   840
       TabIndex        =   15
@@ -185,7 +185,7 @@ Begin VB.Form FrmImp3
       Value           =   10
       Increment       =   5
    End
-   Begin vbccr18.SpinBox Ssq 
+   Begin VBCCR18.SpinBox Ssq 
       Height          =   495
       Left            =   2160
       TabIndex        =   16
@@ -256,133 +256,133 @@ Dim cARQPFG As String
 Dim cARQFEMEA As String
 
 Private Sub Cancle_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 Private Sub CmdescPF_Click()
-    escpf.Show vbModal, Me
-    If lRETU Then
-        tEXT(0).tEXT = eRETU01
-    End If
+  escpf.Show vbModal, Me
+  If lRETU Then
+    tEXT(0).tEXT = eRETU01
+  End If
 End Sub
 
 Private Sub Final_Click()
-    laboratorio.Value = False
-    Recebimento.Value = False
+  laboratorio.Value = False
+  Recebimento.Value = False
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    SEQ.Value = Str(nSEQ)
-    SSQ.Value = Str(nSSQ)
-    cARQFEMEA = PegPath("PATH", "FEMEA")
-    cARQPF = PegPath("PATH", "PF")
-    cARQPFP = PegPath("PATH", "PFP")
-    cARQPFG = PegPath("PATH", "PFG")
-    If cARQIMP = "PFQSBLEP" Or cARQIMP = "PFI" Then
-        Recebimento.Visible = False
-        laboratorio.Visible = False
-        Final.Visible = False
-        mes.Visible = False
-       ' maismes.Visible = False
-       ' menosmes.Visible = False
-    End If
+  CenterFormToScreen Me
+  SEQ.Value = Str(nSEQ)
+  SSQ.Value = Str(nSSQ)
+  cARQFEMEA = PegPath("PATH", "FEMEA")
+  cARQPF = PegPath("PATH", "PF")
+  cARQPFP = PegPath("PATH", "PFP")
+  cARQPFG = PegPath("PATH", "PFG")
+  If cARQIMP = "PFQSBLEP" Or cARQIMP = "PFI" Then
+    Recebimento.Visible = False
+    laboratorio.Visible = False
+    Final.Visible = False
+    mes.Visible = False
+    ' maismes.Visible = False
+    ' menosmes.Visible = False
+  End If
 End Sub
 
 Private Sub importar()
-    Dim nPFORI, nSEQORI, nSSQORI As Long
-    Dim cORIGEM As String
-    Dim sSQL As String
-    Dim cDUPSQL As String
+  Dim nPFORI, nSEQORI, nSSQORI As Long
+  Dim cORIGEM As String
+  Dim sSQL As String
+  Dim cDUPSQL As String
 
-    nPFORI = Val(tEXT(0))
-    nSEQORI = Val(SEQ.Value)
-    nSSQORI = Val(SSQ.Value)
-    
-    cDUPSQL = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
-    
-    cORIGEM = cARQPF                             'NORMAL
-    If preliminar.Value = Checked Then
-        cORIGEM = cARQPFP
-    End If
-    If gp12.Value = Checked Then
-        cORIGEM = cARQPFG
-    End If
-    
-    sSQL = "select * from " & cARQIMP & " WHERE pf=" & nPFORI & " AND SEQ=" & nSEQORI & " AND SSQ=" & nSSQORI
-    If Recebimento.Value = Checked Then
-        Select Case mes
-        Case 1
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=10"
-        Case 2
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=10"
-        Case 3
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=10"
-        End Select
-    End If
-    If laboratorio.Value = Checked Then
-        Select Case mes
-        Case 1
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=20"
-        Case 2
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=20"
-        Case 3
-            sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=20"
-        End Select
-    End If
-    If Final.Value = Checked Then
-        sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=99 AND SSQ=99"
-    End If
-    importa2 cARQPF, cDUPSQL, cORIGEM, sSQL, Sdb, cARQIMP, "PFC"
-    'cDUPARQ,cDUPSQL, cORIARQ, cORISQL,  cDESARQ,  cDESSQL, cTIPO
+  nPFORI = Val(tEXT(0))
+  nSEQORI = Val(SEQ.Value)
+  nSSQORI = Val(SSQ.Value)
+
+  cDUPSQL = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
+
+  cORIGEM = cARQPF                             'NORMAL
+  If preliminar.Value = Checked Then
+    cORIGEM = cARQPFP
+  End If
+  If gp12.Value = Checked Then
+    cORIGEM = cARQPFG
+  End If
+
+  sSQL = "select * from " & cARQIMP & " WHERE pf=" & nPFORI & " AND SEQ=" & nSEQORI & " AND SSQ=" & nSSQORI
+  If Recebimento.Value = Checked Then
+    Select Case mes
+    Case 1
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=10"
+    Case 2
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=10"
+    Case 3
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=10"
+    End Select
+  End If
+  If laboratorio.Value = Checked Then
+    Select Case mes
+    Case 1
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=20"
+    Case 2
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=20"
+    Case 3
+      sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=20"
+    End Select
+  End If
+  If Final.Value = Checked Then
+    sSQL = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=99 AND SSQ=99"
+  End If
+  importa2 cARQPF, cDUPSQL, cORIGEM, sSQL, Sdb, cARQIMP, "PFC"
+  'cDUPARQ,cDUPSQL, cORIARQ, cORISQL,  cDESARQ,  cDESSQL, cTIPO
 End Sub
 
 Private Sub laboratorio_Click()
-    Recebimento.Value = False
-    Final.Value = False
+  Recebimento.Value = False
+  Final.Value = False
 End Sub
 
 Private Sub maismes_Click()
-    mes = CStr(IncDec(mes, 1, 1, 3))
+  mes = CStr(IncDec(mes, 1, 1, 3))
 End Sub
 
 Private Sub menosmes_Click()
-    mes = CStr(IncDec(mes, -1, 1, 3))
+  mes = CStr(IncDec(mes, -1, 1, 3))
 End Sub
 
 Private Sub ok_Click()
-    importar
-    Unload Me
+  importar
+  Unload Me
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub gp12_Click()
-    Normal.Value = False
-    preliminar.Value = False
+  Normal.Value = False
+  preliminar.Value = False
 End Sub
 
 Private Sub preliminar_Click()
-    gp12.Value = False
-    Normal.Value = False
+  gp12.Value = False
+  Normal.Value = False
 End Sub
 
 Private Sub Normal_Click()
-    gp12.Value = False
-    preliminar.Value = False
+  gp12.Value = False
+  preliminar.Value = False
 End Sub
 
 Private Sub Text_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub tEXT_KeyPress(Index As Integer, KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 

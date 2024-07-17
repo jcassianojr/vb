@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form FrmImp 
    Caption         =   "Importando Dados"
    ClientHeight    =   3945
@@ -194,7 +194,7 @@ Begin VB.Form FrmImp
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin vbccr18.SpinBox mes 
+   Begin VBCCR18.SpinBox mes 
       Height          =   615
       Left            =   2520
       TabIndex        =   19
@@ -252,237 +252,237 @@ Dim lFEMEA As Boolean
 Dim cARQDES As String
 
 Private Sub Cancle_Click()
-    lRETU = False
-    eRETU01 = 0
-    Unload Me
+  lRETU = False
+  eRETU01 = 0
+  Unload Me
 End Sub
 
 Private Sub impX()
-    Dim nPFORI As Long
-    On Error Resume Next
-    Dim cORIGEM As String
-    Dim cSQLORI As String
-    Dim cDUPSQL As String
-    Dim cDESARQ As String
-    Dim cDESSQL As String
+  Dim nPFORI As Long
+  On Error Resume Next
+  Dim cORIGEM As String
+  Dim cSQLORI As String
+  Dim cDUPSQL As String
+  Dim cDESARQ As String
+  Dim cDESSQL As String
 
-    nPFORI = Val(tEXT)
-    lRETU = True
-    eRETU01 = nPFORI
-    
-    'DUPLICACAO
-    cDUPSQL = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
-    If cARQIMP = "FEMAVU" Or cARQIMP = "FEMADC" Or cARQIMP = "FEMMAQ" Or cARQIMP = "FEMAX" Or cARQIMP = "FEMEAPRE" Or cARQIMP = "FEMEAGP12" Then
-        cDUPSQL = "select * from DUPLICAR WHERE TABELA='FEMEA'"
-    End If
-    
-    'DESTINO
-    cDESARQ = Sdb
-    Select Case cARQIMP
-    Case "FEMAVU", "FEMAX", "FEMADC", "FEMMAQ"
-        cDESARQ = cARQFEMEA
-    Case "FEMEAPRE"
-        cDESARQ = cARQPFP
-    Case "FEMEAGP12"
-        cDESARQ = cARQPFG
-    End Select
-    cDESSQL = cARQIMP
-    If cARQIMP = "FEMAX" Or cARQIMP = "FEMEAPRE" Or cARQIMP = "FEMEAGP12" Then
-        cDESSQL = "FEMEA"
-    End If
+  nPFORI = Val(tEXT)
+  lRETU = True
+  eRETU01 = nPFORI
 
-    
-    
-    
-    'origem duplicaçao
-    cORIGEM = cARQPF
-    cSQLORI = "select * from " & cARQIMP & " WHERE pf=" & nPFORI
-    If lFEMEA Then
-        If FemeaC.Value = vbChecked Then
-            cSQLORI = "select * from FEMAVU WHERE pf=" & nPFORI
-            cORIGEM = cARQFEMEA
-        End If
-        If FemeaA.Value = vbChecked Then
-            cSQLORI = "select * from FEMADC WHERE pf=" & nPFORI
-            cORIGEM = cARQFEMEA
-        End If
-        If FemeaM.Value = vbChecked Then
-            cSQLORI = "select * from FEMMAQ WHERE pf=" & nPFORI
-            cORIGEM = cARQFEMEA
-        End If
-        If FemeaP.Value = vbChecked Then
-            cORIGEM = cARQFEMEA
-            cSQLORI = "select * from FEMEAPAD WHERE pf=" & nPFORI 'FEMEA
-        End If
-        If FemeaN.Value = vbChecked Then
-            cORIGEM = cARQFEMEAPF                'cARQPF
-            cSQLORI = "select * from FEMEA WHERE pf=" & nPFORI
-        End If
-        If FemeaR.Value = vbChecked Then
-            cORIGEM = cARQPFP
-            cSQLORI = "select * from FEMEA WHERE pf=" & nPFORI
-        End If
-        If FemeaG.Value = vbChecked Then
-            cORIGEM = cARQPFG
-            cSQLORI = "select * from FEMEA WHERE pf=" & nPFORI
-        End If
-    Else
-        If preliminar.Value = vbChecked Then
-            cORIGEM = cARQPFP
-        End If
-        If gp12.Value = vbChecked Then
-            cORIGEM = cARQPFG
-        End If
-        If Normal.Value = vbChecked Then
-            cORIGEM = cARQPF
-        End If
-        If Recebimento.Value = Checked Then
-            Select Case mes
-            Case 1
-                cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=10"
-            Case 2
-                cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=10"
-            Case 3
-                cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=10"
-            End Select
-        End If
-        If laboratorio.Value = Checked Then
-            Select Case mes
-            Case 1
-                cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=20"
-            Case 2
-                cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=20"
-            Case 3
-                cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=20"
-            End Select
-        End If
-        If Final.Value = Checked Then
-            cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=99 AND SSQ=99"
-        End If
+  'DUPLICACAO
+  cDUPSQL = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
+  If cARQIMP = "FEMAVU" Or cARQIMP = "FEMADC" Or cARQIMP = "FEMMAQ" Or cARQIMP = "FEMAX" Or cARQIMP = "FEMEAPRE" Or cARQIMP = "FEMEAGP12" Then
+    cDUPSQL = "select * from DUPLICAR WHERE TABELA='FEMEA'"
+  End If
+
+  'DESTINO
+  cDESARQ = Sdb
+  Select Case cARQIMP
+  Case "FEMAVU", "FEMAX", "FEMADC", "FEMMAQ"
+    cDESARQ = cARQFEMEA
+  Case "FEMEAPRE"
+    cDESARQ = cARQPFP
+  Case "FEMEAGP12"
+    cDESARQ = cARQPFG
+  End Select
+  cDESSQL = cARQIMP
+  If cARQIMP = "FEMAX" Or cARQIMP = "FEMEAPRE" Or cARQIMP = "FEMEAGP12" Then
+    cDESSQL = "FEMEA"
+  End If
+
+
+
+
+  'origem duplicaçao
+  cORIGEM = cARQPF
+  cSQLORI = "select * from " & cARQIMP & " WHERE pf=" & nPFORI
+  If lFEMEA Then
+    If FemeaC.Value = vbChecked Then
+      cSQLORI = "select * from FEMAVU WHERE pf=" & nPFORI
+      cORIGEM = cARQFEMEA
     End If
-    
-    If cARQIMP = "FEMAX" Then
-        importa2 cARQPF, cDUPSQL, cORIGEM, cSQLORI, cDESARQ, cDESSQL, "FEMAX"
-    Else
-        importa2 cARQPF, cDUPSQL, cORIGEM, cSQLORI, cDESARQ, cDESSQL, ""
+    If FemeaA.Value = vbChecked Then
+      cSQLORI = "select * from FEMADC WHERE pf=" & nPFORI
+      cORIGEM = cARQFEMEA
     End If
-     
-   
+    If FemeaM.Value = vbChecked Then
+      cSQLORI = "select * from FEMMAQ WHERE pf=" & nPFORI
+      cORIGEM = cARQFEMEA
+    End If
+    If FemeaP.Value = vbChecked Then
+      cORIGEM = cARQFEMEA
+      cSQLORI = "select * from FEMEAPAD WHERE pf=" & nPFORI  'FEMEA
+    End If
+    If FemeaN.Value = vbChecked Then
+      cORIGEM = cARQFEMEAPF                'cARQPF
+      cSQLORI = "select * from FEMEA WHERE pf=" & nPFORI
+    End If
+    If FemeaR.Value = vbChecked Then
+      cORIGEM = cARQPFP
+      cSQLORI = "select * from FEMEA WHERE pf=" & nPFORI
+    End If
+    If FemeaG.Value = vbChecked Then
+      cORIGEM = cARQPFG
+      cSQLORI = "select * from FEMEA WHERE pf=" & nPFORI
+    End If
+  Else
+    If preliminar.Value = vbChecked Then
+      cORIGEM = cARQPFP
+    End If
+    If gp12.Value = vbChecked Then
+      cORIGEM = cARQPFG
+    End If
+    If Normal.Value = vbChecked Then
+      cORIGEM = cARQPF
+    End If
+    If Recebimento.Value = Checked Then
+      Select Case mes
+      Case 1
+        cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=10"
+      Case 2
+        cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=10"
+      Case 3
+        cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=10"
+      End Select
+    End If
+    If laboratorio.Value = Checked Then
+      Select Case mes
+      Case 1
+        cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=10 AND SSQ=20"
+      Case 2
+        cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=20 AND SSQ=20"
+      Case 3
+        cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=30 AND SSQ=20"
+      End Select
+    End If
+    If Final.Value = Checked Then
+      cSQLORI = "select * from PFCO WHERE PF=" & nPFORI & " AND SEQ=99 AND SSQ=99"
+    End If
+  End If
+
+  If cARQIMP = "FEMAX" Then
+    importa2 cARQPF, cDUPSQL, cORIGEM, cSQLORI, cDESARQ, cDESSQL, "FEMAX"
+  Else
+    importa2 cARQPF, cDUPSQL, cORIGEM, cSQLORI, cDESARQ, cDESSQL, ""
+  End If
+
+
 
 End Sub
 
 Private Sub CmdescPF_Click()
-    escpf.Show vbModal, Me
-    If lRETU Then
-        tEXT.tEXT = eRETU01
-    End If
+  escpf.Show vbModal, Me
+  If lRETU Then
+    tEXT.tEXT = eRETU01
+  End If
 End Sub
 
 Private Sub FemeaC_Click()
-    FemeaN.Value = False
-    FemeaP.Value = False
-    FemeaR.Value = False
-    FemeaG.Value = False
+  FemeaN.Value = False
+  FemeaP.Value = False
+  FemeaR.Value = False
+  FemeaG.Value = False
 End Sub
 
 Private Sub FemeaG_Click()
-    FemeaC.Value = False
-    FemeaP.Value = False
-    FemeaR.Value = False
-    FemeaN.Value = False
+  FemeaC.Value = False
+  FemeaP.Value = False
+  FemeaR.Value = False
+  FemeaN.Value = False
 End Sub
 
 Private Sub FemeaN_Click()
-    FemeaC.Value = False
-    FemeaP.Value = False
-    FemeaR.Value = False
-    FemeaG.Value = False
+  FemeaC.Value = False
+  FemeaP.Value = False
+  FemeaR.Value = False
+  FemeaG.Value = False
 End Sub
 
 Private Sub FemeaP_Click()
-    FemeaN.Value = False
-    FemeaC.Value = False
-    FemeaR.Value = False
-    FemeaG.Value = False
+  FemeaN.Value = False
+  FemeaC.Value = False
+  FemeaR.Value = False
+  FemeaG.Value = False
 End Sub
 
 Private Sub FemeaR_Click()
-    FemeaN.Value = False
-    FemeaC.Value = False
-    FemeaP.Value = False
-    FemeaG.Value = False
+  FemeaN.Value = False
+  FemeaC.Value = False
+  FemeaP.Value = False
+  FemeaG.Value = False
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQFEMEA = PegPath("PATH", "FEMEA")
-    cARQFEMEAPF = PegPath("PATH", "FEMEAPF")
-    cARQPF = PegPath("PATH", "PF")
-    cARQPFP = PegPath("PATH", "PFP")
-    cARQPFG = PegPath("PATH", "PFG")
-    If cARQIMP = "FEMADC" Or cARQIMP = "FEMMAQ" Or cARQIMP = "FEMEA" Or cARQIMP = "FEMAVU" Or cARQIMP = "FEMAX" Or cARQIMP = "FEMEAPRE" Or cARQIMP = "FEMEAGP12" Then
-        lFEMEA = True
-        Select Case cARQIMP
-        Case "FEMEA"
-            cARQDES = cARQFEMEA                  'cARQPF
-        Case "FEMEAPRE"
-            cARQDES = cARQPFP
-        Case "FEMEAGP12"
-            cARQDES = cARQPFG
-        Case "FEMAVU", "FEMMAQ"
-            cARQDES = cARQFEMEA
-        Case "FEMADC"
-            cARQDES = cARQFEMEA
-        Case "FEMAX"
-            cARQDES = cARQFEMEA
-        End Select
-    End If
-    
-    If cARQIMP = "PFS" Then
-        'preliminar.Visible = False
-        'gp12.Visible = False
-        'Normal.Visible = False
-        Recebimento.Visible = False
-        laboratorio.Visible = False
-        Final.Visible = False
-        mes.Visible = False
-       ' maismes.Visible = False
-       ' menosmes.Visible = False
-    End If
+  CenterFormToScreen Me
+  cARQFEMEA = PegPath("PATH", "FEMEA")
+  cARQFEMEAPF = PegPath("PATH", "FEMEAPF")
+  cARQPF = PegPath("PATH", "PF")
+  cARQPFP = PegPath("PATH", "PFP")
+  cARQPFG = PegPath("PATH", "PFG")
+  If cARQIMP = "FEMADC" Or cARQIMP = "FEMMAQ" Or cARQIMP = "FEMEA" Or cARQIMP = "FEMAVU" Or cARQIMP = "FEMAX" Or cARQIMP = "FEMEAPRE" Or cARQIMP = "FEMEAGP12" Then
+    lFEMEA = True
+    Select Case cARQIMP
+    Case "FEMEA"
+      cARQDES = cARQFEMEA                  'cARQPF
+    Case "FEMEAPRE"
+      cARQDES = cARQPFP
+    Case "FEMEAGP12"
+      cARQDES = cARQPFG
+    Case "FEMAVU", "FEMMAQ"
+      cARQDES = cARQFEMEA
+    Case "FEMADC"
+      cARQDES = cARQFEMEA
+    Case "FEMAX"
+      cARQDES = cARQFEMEA
+    End Select
+  End If
 
-    
-    If lFEMEA Then
-        preliminar.Visible = False
-        gp12.Visible = False
-        Normal.Visible = False
-        Recebimento.Visible = False
-        laboratorio.Visible = False
-        Final.Visible = False
-        mes.Visible = False
-       ' maismes.Visible = False
-       ' menosmes.Visible = False
-    Else
-        FemeaA.Visible = False
-        FemeaP.Visible = False
-        FemeaN.Visible = False
-        FemeaC.Visible = False
-        FemeaG.Visible = False
-        FemeaR.Visible = False
-        FemeaM.Visible = False
-    End If
+  If cARQIMP = "PFS" Then
+    'preliminar.Visible = False
+    'gp12.Visible = False
+    'Normal.Visible = False
+    Recebimento.Visible = False
+    laboratorio.Visible = False
+    Final.Visible = False
+    mes.Visible = False
+    ' maismes.Visible = False
+    ' menosmes.Visible = False
+  End If
+
+
+  If lFEMEA Then
+    preliminar.Visible = False
+    gp12.Visible = False
+    Normal.Visible = False
+    Recebimento.Visible = False
+    laboratorio.Visible = False
+    Final.Visible = False
+    mes.Visible = False
+    ' maismes.Visible = False
+    ' menosmes.Visible = False
+  Else
+    FemeaA.Visible = False
+    FemeaP.Visible = False
+    FemeaN.Visible = False
+    FemeaC.Visible = False
+    FemeaG.Visible = False
+    FemeaR.Visible = False
+    FemeaM.Visible = False
+  End If
 End Sub
 
 Private Sub gp12_Click()
-    Normal.Value = False
-    preliminar.Value = False
+  Normal.Value = False
+  preliminar.Value = False
 End Sub
 
 'Private Sub maismes_Click()
- '   mes = CStr(IncDec(mes, 1, 1, 3))
+'   mes = CStr(IncDec(mes, 1, 1, 3))
 'End Sub
 
 'Private Sub menosmes_Click()
@@ -490,35 +490,35 @@ End Sub
 'End Sub
 
 Private Sub Normal_Click()
-    gp12.Value = False
-    preliminar.Value = False
+  gp12.Value = False
+  preliminar.Value = False
 End Sub
 
 Private Sub ok_Click()
+  impX
+  If cARQIMP = "PFS" Then
+    cARQIMP = "PFI"
     impX
-    If cARQIMP = "PFS" Then
-        cARQIMP = "PFI"
-        impX
-        cARQIMP = "PFQSBLEP"
-        impX
-    End If
-    Unload Me
+    cARQIMP = "PFQSBLEP"
+    impX
+  End If
+  Unload Me
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub preliminar_Click()
-    gp12.Value = False
-    Normal.Value = False
+  gp12.Value = False
+  Normal.Value = False
 End Sub
 
 Private Sub Text_GotFocus()
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub tEXT_KeyPress(KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 

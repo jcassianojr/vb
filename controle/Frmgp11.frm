@@ -523,241 +523,241 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 2
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        aVAL(7) = FixNumBol(inativo.Value)
-        GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 2
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    aVAL(7) = FixNumBol(inativo.Value)
+    GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub CmdEditar_Click()
 
 
-   
 
-    eRETU02 = " Desenho:" & TXTFIELDS(5) & "-" & Replace(TXTFIELDS(6), " ", "_")
-    eRETU02 = eRETU02 & " Cliente:" & TXTFIELDS(1) & "-" & Replace(TXTFIELDS(2), " ", "_")
-    Grid.Col = 0
-    nREVI = Grid
-    frmPPAPI.Show vbModal
-    'analisar em qual cituacao ira chamar frmppapc frmpapi
-    
-    
-    'If Index = 0 Then
-    '    Grid.Col = 0
-    '    nREVI = Grid
-    '    frmPPAPI.Show vbModal
-    'Else
-    '    Grid.Col = 0
-    '    nREVI = Grid
-    '    FrmPPAPC.Show vbModal
-    'End If
-    Filgrid
+
+  eRETU02 = " Desenho:" & TXTFIELDS(5) & "-" & Replace(TXTFIELDS(6), " ", "_")
+  eRETU02 = eRETU02 & " Cliente:" & TXTFIELDS(1) & "-" & Replace(TXTFIELDS(2), " ", "_")
+  Grid.Col = 0
+  nREVI = Grid
+  frmPPAPI.Show vbModal
+  'analisar em qual cituacao ira chamar frmppapc frmpapi
+
+
+  'If Index = 0 Then
+  '    Grid.Col = 0
+  '    nREVI = Grid
+  '    frmPPAPI.Show vbModal
+  'Else
+  '    Grid.Col = 0
+  '    nREVI = Grid
+  '    FrmPPAPC.Show vbModal
+  'End If
+  Filgrid
 End Sub
 
 Private Sub CmdExcluir_Click()
-    Dim sSQL As String
-    Grid.Col = 0
-    nREVI = Grid
-    Select Case iPPAP
-    Case 1, 11
-        sSQL = "select * from PPAPI WHERE PPAP=" & nPPAP & " AND  ITEM=" & nREVI
-    Case 2
-        sSQL = "select * from PPAFI WHERE PPAP=" & nPPAP & " AND  ITEM=" & nREVI
-    Case 3
-        sSQL = "select * from PPAGI WHERE PPAP=" & nPPAP & " AND  ITEM=" & nREVI
-    End Select
-    If ApagaSQLP(cARQPF, sSQL) Then
-        Filgrid
-    End If
+  Dim sSQL As String
+  Grid.Col = 0
+  nREVI = Grid
+  Select Case iPPAP
+  Case 1, 11
+    sSQL = "select * from PPAPI WHERE PPAP=" & nPPAP & " AND  ITEM=" & nREVI
+  Case 2
+    sSQL = "select * from PPAFI WHERE PPAP=" & nPPAP & " AND  ITEM=" & nREVI
+  Case 3
+    sSQL = "select * from PPAGI WHERE PPAP=" & nPPAP & " AND  ITEM=" & nREVI
+  End Select
+  If ApagaSQLP(cARQPF, sSQL) Then
+    Filgrid
+  End If
 End Sub
 
 Private Sub CmdNovo_Click()
-    Dim nITEM            As Long
-    Dim sSQL As String
-    Select Case iPPAP
-    Case 1, 11
-        sSQL = "PPAPI WHERE PPAP=" & nPPAP
-    Case 2
-        sSQL = "PPAFI WHERE PPAP=" & nPPAP
-    Case 3
-        sSQL = "PPAGI WHERE PPAP=" & nPPAP
-    End Select
-    nITEM = PegMAXSQL(cARQPF, sSQL, "ITEM", 0)
-    nITEM = nITEM + 1
-    Select Case iPPAP
-    Case 1, 11
-        sSQL = "PPAPI"
-    Case 2
-        sSQL = "PPAFI"
-    Case 3
-        sSQL = "PPAGI"
-    End Select
-    sSQL = "SELECT * FROM " & sSQL & " WHERE PPAP=" & nPPAP & "AND  ITEM=" & nITEM
-    IncluiSQL cARQPF, sSQL, 3, Array("PPAP", "DATA", "ITEM"), Array(nPPAP, Date, nITEM), True, False
-    Filgrid
+  Dim nITEM As Long
+  Dim sSQL As String
+  Select Case iPPAP
+  Case 1, 11
+    sSQL = "PPAPI WHERE PPAP=" & nPPAP
+  Case 2
+    sSQL = "PPAFI WHERE PPAP=" & nPPAP
+  Case 3
+    sSQL = "PPAGI WHERE PPAP=" & nPPAP
+  End Select
+  nITEM = PegMAXSQL(cARQPF, sSQL, "ITEM", 0)
+  nITEM = nITEM + 1
+  Select Case iPPAP
+  Case 1, 11
+    sSQL = "PPAPI"
+  Case 2
+    sSQL = "PPAFI"
+  Case 3
+    sSQL = "PPAGI"
+  End Select
+  sSQL = "SELECT * FROM " & sSQL & " WHERE PPAP=" & nPPAP & "AND  ITEM=" & nITEM
+  IncluiSQL cARQPF, sSQL, 3, Array("PPAP", "DATA", "ITEM"), Array(nPPAP, Date, nITEM), True, False
+  Filgrid
 End Sub
 
 Private Sub Command1_Click()
-    Dim aRETU As Variant
-    Dim sSQL As String
-    escpffim.Show vbModal, Me
-    If lRETU Then
-        TXTFIELDS(5) = eRETU02
-        TXTFIELDS(6) = eRETU03
-        TXTFIELDS(4) = eRETU04
-        sSQL = "select CONPES from PF WHERE PF=" & eRETU04
-        aRETU = PegSQL(cARQPF, sSQL, 1, Array("CONPES"), Array("N"), Array(0))
-        TXTFIELDS(11) = aRETU(0)
-    End If
+  Dim aRETU As Variant
+  Dim sSQL As String
+  escpffim.Show vbModal, Me
+  If lRETU Then
+    TXTFIELDS(5) = eRETU02
+    TXTFIELDS(6) = eRETU03
+    TXTFIELDS(4) = eRETU04
+    sSQL = "select CONPES from PF WHERE PF=" & eRETU04
+    aRETU = PegSQL(cARQPF, sSQL, 1, Array("CONPES"), Array("N"), Array(0))
+    TXTFIELDS(11) = aRETU(0)
+  End If
 
 End Sub
 
 Private Sub Command3_Click()
-    Dim cARQ As String
-    Dim aRETU As Variant
-    Dim sSQL             As String
-    Dim nNUMERO          As Long
-    nNUMERO = FixInt(TXTFIELDS(1), 0)
-    cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
-    aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
-    If lRETU Then
-        TXTFIELDS(2) = aRETU(0)
-    End If
+  Dim cARQ As String
+  Dim aRETU As Variant
+  Dim sSQL As String
+  Dim nNUMERO As Long
+  nNUMERO = FixInt(TXTFIELDS(1), 0)
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
+  sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
+  aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
+  If lRETU Then
+    TXTFIELDS(2) = aRETU(0)
+  End If
 End Sub
 
 Private Sub Command5_Click()
 
-    Dim cARQ As String
-    Dim aRETU As Variant
-    Dim sSQL             As String
-    Dim cCODIGO          As String
-    cCODIGO = FixStr(TXTFIELDS(5), "", "TRIM")
-    cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
-    aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
-    If lRETU Then
-        TXTFIELDS(6) = aRETU(0)
-    End If
+  Dim cARQ As String
+  Dim aRETU As Variant
+  Dim sSQL As String
+  Dim cCODIGO As String
+  cCODIGO = FixStr(TXTFIELDS(5), "", "TRIM")
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
+  sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
+  aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
+  If lRETU Then
+    TXTFIELDS(6) = aRETU(0)
+  End If
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub EscMA01A_Click(Index As Integer)
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  cARQESC = "MA01"
+  Select Case Index
+  Case 0
     cARQESC = "MA01"
-    Select Case Index
-    Case 0
-        cARQESC = "MA01"
-    Case 1
-        ePASS01 = "LOGIX"
-    Case 2
-        ePASS01 = "LOGIX"
-        cARQESC = "2DIG"
-    End Select
-    escNUMNOM.Show vbModal, Me
+  Case 1
+    ePASS01 = "LOGIX"
+  Case 2
+    ePASS01 = "LOGIX"
+    cARQESC = "2DIG"
+  End Select
+  escNUMNOM.Show vbModal, Me
 
-    If lRETU Then
+  If lRETU Then
 
-        frmPPAP.TXTFIELDS(1) = eRETU01
-        frmPPAP.TXTFIELDS(2) = eRETU02
+    frmPPAP.TXTFIELDS(1) = eRETU01
+    frmPPAP.TXTFIELDS(2) = eRETU02
 
-    End If
+  End If
 
 
 End Sub
 
 Private Sub ESCMS01A_Click(Index As Integer)
-    ePASS01 = "MANA5"
-    If Index = 1 Then
-        ePASS01 = "LOGIX"
-    End If
-    If Index = 2 Then
-        ePASS01 = "MICRO"
-    End If
-    escms01.Show vbModal, Me
-    If lRETU Then
-        frmPPAP.TXTFIELDS(5) = eRETU01
-        frmPPAP.TXTFIELDS(6) = eRETU02
-    End If
+  ePASS01 = "MANA5"
+  If Index = 1 Then
+    ePASS01 = "LOGIX"
+  End If
+  If Index = 2 Then
+    ePASS01 = "MICRO"
+  End If
+  escms01.Show vbModal, Me
+  If lRETU Then
+    frmPPAP.TXTFIELDS(5) = eRETU01
+    frmPPAP.TXTFIELDS(6) = eRETU02
+  End If
 
 End Sub
 
 Private Sub Filgrid()
-    Dim sSQL As String
-    Select Case iPPAP
-    Case 1, 11
-        sSQL = "select * from PPAPI WHERE PPAP=" & nPPAP & " ORDER BY ITEM"
-    Case 2
-        sSQL = "select * from PPAFI WHERE PPAP=" & nPPAP & " ORDER BY ITEM"
-    Case 3
-        sSQL = "select * from PPAGI WHERE PPAP=" & nPPAP & " ORDER BY ITEM"
-    End Select
-    MontaGridFast Grid, 4, Array(400, 1200, 400, 2000), Array("Item", "Data", "Dispo", "Obs"), _
-        Array("Item", "Data", "Dispo", "OBS"), cARQPF, sSQL
-    TXTFIELDS(29) = PegUltGrid(Grid, 2)
+  Dim sSQL As String
+  Select Case iPPAP
+  Case 1, 11
+    sSQL = "select * from PPAPI WHERE PPAP=" & nPPAP & " ORDER BY ITEM"
+  Case 2
+    sSQL = "select * from PPAFI WHERE PPAP=" & nPPAP & " ORDER BY ITEM"
+  Case 3
+    sSQL = "select * from PPAGI WHERE PPAP=" & nPPAP & " ORDER BY ITEM"
+  End Select
+  MontaGridFast Grid, 4, Array(400, 1200, 400, 2000), Array("Item", "Data", "Dispo", "Obs"), _
+                Array("Item", "Data", "Dispo", "OBS"), cARQPF, sSQL
+  TXTFIELDS(29) = PegUltGrid(Grid, 2)
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQPF = PegPath("PATH", "PPAP")
-    Select Case iPPAP
-    Case 1, 11
-        cSQL = "select * from PPAP WHERE PPAP=" & nPPAP
-    Case 2
-        cSQL = "select * from PPAF WHERE PPAP=" & nPPAP
-        Me.Caption = "PPAP Fornecedores"
-    Case 3
-        cSQL = "select * from PPAG WHERE PPAP=" & nPPAP
-        Me.Caption = "GP11"
-    End Select
+  CenterFormToScreen Me
+  cARQPF = PegPath("PATH", "PPAP")
+  Select Case iPPAP
+  Case 1, 11
+    cSQL = "select * from PPAP WHERE PPAP=" & nPPAP
+  Case 2
+    cSQL = "select * from PPAF WHERE PPAP=" & nPPAP
+    Me.Caption = "PPAP Fornecedores"
+  Case 3
+    cSQL = "select * from PPAG WHERE PPAP=" & nPPAP
+    Me.Caption = "GP11"
+  End Select
 
-    
-    
-    nCAMPOS = 8
-    aCAM = Array("PPAP", "CLIENTE", "CLINOME", "SSMT", "PF", "CODIGO", "NOME", "INATIVO")
-    aFOR = Array("NI", "NI", "C", "C", "NI", "C", "C", "BN")
-    aPAD = Array(0, 0, "", "", 0, "", "", False)
-    aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 2
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    inativo.Value = aVAL(7)
 
-    Filgrid
+
+  nCAMPOS = 8
+  aCAM = Array("PPAP", "CLIENTE", "CLINOME", "SSMT", "PF", "CODIGO", "NOME", "INATIVO")
+  aFOR = Array("NI", "NI", "C", "C", "NI", "C", "C", "BN")
+  aPAD = Array(0, 0, "", "", 0, "", "", False)
+  aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 2
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  inativo.Value = aVAL(7)
+
+  Filgrid
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 
 End Sub
 
 Private Sub txtFields_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index = 1 Then
-        KeyAscii = ValiText(KeyAscii, "#NI")
-    End If
+  If Index = 1 Then
+    KeyAscii = ValiText(KeyAscii, "#NI")
+  End If
 End Sub
 
 

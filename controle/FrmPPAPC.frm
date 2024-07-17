@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form FrmPPAPC 
    Caption         =   "PPAPC"
    ClientHeight    =   3015
@@ -12,7 +12,7 @@ Begin VB.Form FrmPPAPC
    ScaleHeight     =   3015
    ScaleWidth      =   9360
    StartUpPosition =   2  'CenterScreen
-   Begin vbccr18.DTPicker DTPicker1 
+   Begin VBCCR18.DTPicker DTPicker1 
       Height          =   375
       Left            =   120
       TabIndex        =   16
@@ -138,7 +138,7 @@ Begin VB.Form FrmPPAPC
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin vbccr18.DTPicker DTPicker2 
+   Begin VBCCR18.DTPicker DTPicker2 
       Height          =   375
       Left            =   2880
       TabIndex        =   17
@@ -150,7 +150,7 @@ Begin VB.Form FrmPPAPC
       CheckBox        =   -1  'True
       AllowUserInput  =   -1  'True
    End
-   Begin vbccr18.DTPicker DTPicker3 
+   Begin VBCCR18.DTPicker DTPicker3 
       Height          =   375
       Left            =   4800
       TabIndex        =   18
@@ -249,80 +249,80 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To 2
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        aVAL(3) = DTPicker1
-        aVAL(4) = DTPicker2
-        aVAL(5) = DTPicker3
-        GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To 2
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    aVAL(3) = DTPicker1
+    aVAL(4) = DTPicker2
+    aVAL(5) = DTPicker3
+    GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Command1_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        DTPicker2 = DTPicker1 + 730
-    Case 1
-        DTPicker2 = DTPicker1 + 182
-    Case 2
-        DTPicker2 = DTPicker1 + 1095
-    End Select
+  Select Case Index
+  Case 0
+    DTPicker2 = DTPicker1 + 730
+  Case 1
+    DTPicker2 = DTPicker1 + 182
+  Case 2
+    DTPicker2 = DTPicker1 + 1095
+  End Select
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQPF = PegPath("PATH", "PPAP")
-    Select Case iPPAP
-    Case 1, 11
-        cSQL = "select * from PPAPC WHERE ITEM=" & nREVI
-    Case 2
-        cSQL = "select * from PPAFC WHERE ITEM=" & nREVI
-    Case 3
-        cSQL = "select * from PPAGC WHERE ITEM=" & nREVI
-    End Select
-    
-    txtItem.tEXT = nREVI
-    nCAMPOS = 6
-    aCAM = Array("PPAP", "CODIGO", "OBS", "DATA", "PREVISTO", "EFETUADO")
-    aFOR = Array("NI", "C", "C", "", "", "")
-    aPAD = Array(0, "", "", Date, Date, Date)
-    aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To 2
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    If IsDate(aVAL(3)) Then
-        DTPicker1.Value = aVAL(3)
-    End If
-    If IsDate(aVAL(4)) Then
-        DTPicker2.Value = aVAL(4)
-    End If
-    If IsDate(aVAL(5)) Then
-        DTPicker3.Value = aVAL(5)
-    End If
+  CenterFormToScreen Me
+  cARQPF = PegPath("PATH", "PPAP")
+  Select Case iPPAP
+  Case 1, 11
+    cSQL = "select * from PPAPC WHERE ITEM=" & nREVI
+  Case 2
+    cSQL = "select * from PPAFC WHERE ITEM=" & nREVI
+  Case 3
+    cSQL = "select * from PPAGC WHERE ITEM=" & nREVI
+  End Select
+
+  txtItem.tEXT = nREVI
+  nCAMPOS = 6
+  aCAM = Array("PPAP", "CODIGO", "OBS", "DATA", "PREVISTO", "EFETUADO")
+  aFOR = Array("NI", "C", "C", "", "", "")
+  aPAD = Array(0, "", "", Date, Date, Date)
+  aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To 2
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  If IsDate(aVAL(3)) Then
+    DTPicker1.Value = aVAL(3)
+  End If
+  If IsDate(aVAL(4)) Then
+    DTPicker2.Value = aVAL(4)
+  End If
+  If IsDate(aVAL(5)) Then
+    DTPicker3.Value = aVAL(5)
+  End If
 End Sub
 
 Private Sub xCommand1_Click(Index)
-    DTPicker2 = DTPicker1 + 730
+  DTPicker2 = DTPicker1 + 730
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 

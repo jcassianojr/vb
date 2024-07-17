@@ -67,100 +67,100 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub CmdSair_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub FilRelat()
- 
-    Dim cARQ As String
-    Dim cSQL As String
-    cARQ = ZMANA5CON
-   
-    If cTIPO = "R" Then
 
-        cSQL = "SELECT MENU,CODIGO,NOME FROM MANREL WHERE MENU='" & zgrp & "' order by CODIGO"
+  Dim cARQ As String
+  Dim cSQL As String
+  cARQ = ZMANA5CON
 
-    End If
+  If cTIPO = "R" Then
 
-    If cTIPO = "P" Then
+    cSQL = "SELECT MENU,CODIGO,NOME FROM MANREL WHERE MENU='" & zgrp & "' order by CODIGO"
 
-        cSQL = "SELECT MENU,CODIGO,NOME FROM PADREL WHERE MENU='" & zgrp & "' order by CODIGO"
+  End If
 
-    End If
-   
-    cARQ = GeraConn(cARQ, "JETFOX")
-    MontaGridUltra Grid, 3, Array(400, 1000, 6000), Array("GRP", "RPT", "Nome"), _
-        Array("L$Menu", "L$COdigo", "Nome"), cARQ, cSQL
+  If cTIPO = "P" Then
 
-   
+    cSQL = "SELECT MENU,CODIGO,NOME FROM PADREL WHERE MENU='" & zgrp & "' order by CODIGO"
+
+  End If
+
+  cARQ = GeraConn(cARQ, "JETFOX")
+  MontaGridUltra Grid, 3, Array(400, 1000, 6000), Array("GRP", "RPT", "Nome"), _
+                 Array("L$Menu", "L$COdigo", "Nome"), cARQ, cSQL
+
+
 
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    xmontatoolbar Me.Toolbar1, "escMANREL", True
-    FilRelat
-    If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
+  CenterFormToScreen Me
+  xmontatoolbar Me.Toolbar1, "escMANREL", True
+  FilRelat
+  If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii = 13 Then
-        imprima_click
-    End If
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii = 13 Then
+    imprima_click
+  End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 
 End Sub
 
 'Private Sub Grid_SelChange()
 
- '   With Grid
-  '      If .Rows > 2 Then
-   '         .Col = .Cols - 1
-    '        .ColSel = 0
-     '       .TopRow = .Row
-      '  End If
-    'End With
+'   With Grid
+'      If .Rows > 2 Then
+'         .Col = .Cols - 1
+'        .ColSel = 0
+'       .TopRow = .Row
+'  End If
+'End With
 'End Sub
 
 Private Sub imprima_click()
 
-    Dim eRUN             As String
-    Grid.Col = 1
-    zRPT = Grid
-    eRUN = ZMANA5IMP & "IMPREL " & zgrp & " " & zRPT & " " & zUSER & " " & cTIPO & " " & ZMANA5IMP
-    'Shell eRUN, vbNormalFocus
-    ShellEx "IMPREL", essSW_SHOWDEFAULT, zgrp & " " & zRPT & " " & zUSER & " " & cTIPO, ZMANA5IMP, , Me.hWnd
+  Dim eRUN As String
+  Grid.Col = 1
+  zRPT = Grid
+  eRUN = ZMANA5IMP & "IMPREL " & zgrp & " " & zRPT & " " & zUSER & " " & cTIPO & " " & ZMANA5IMP
+  'Shell eRUN, vbNormalFocus
+  ShellEx "IMPREL", essSW_SHOWDEFAULT, zgrp & " " & zRPT & " " & zUSER & " " & cTIPO, ZMANA5IMP, , Me.hWnd
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Dim sButton          As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    If Not AcessaBtnOld("escMANREL", Button.Index) Then
-        Exit Sub
-    End If
-    ''    TbrLog Me, Button
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+  If Not AcessaBtnOld("escMANREL", Button.Index) Then
+    Exit Sub
+  End If
+  ''    TbrLog Me, Button
 
-    Select Case sButton
+  Select Case sButton
 
-    Case "IMP"
-        imprima_click
+  Case "IMP"
+    imprima_click
 
-    Case "LOC"
-        LocalizaGri1 Grid
+  Case "LOC"
+    LocalizaGri1 Grid
 
-    Case "CON"
-        FrmPrintSetup.Show vbModal, Me
+  Case "CON"
+    FrmPrintSetup.Show vbModal, Me
 
-    Case "SAI"
-        CmdSair_Click
+  Case "SAI"
+    CmdSair_Click
 
-    End Select
+  End Select
 
 End Sub
 

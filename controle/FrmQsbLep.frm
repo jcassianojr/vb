@@ -913,159 +913,159 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub cmdescIED_Click(Index As Integer)
-    iMU01 = Index
-    escIED.Show vbModal, Me
-    If lRETU Then
-        Select Case Index
-        Case 401
-            TXTFIELDS(1) = TXTFIELDS(1) & " " & eRETU02
-        Case 402
-            TXTFIELDS(5) = TXTFIELDS(5) & " " & eRETU02
-        Case 403
-            TXTFIELDS(14) = TXTFIELDS(14) & " " & eRETU02
-        End Select
-    End If
+  iMU01 = Index
+  escIED.Show vbModal, Me
+  If lRETU Then
+    Select Case Index
+    Case 401
+      TXTFIELDS(1) = TXTFIELDS(1) & " " & eRETU02
+    Case 402
+      TXTFIELDS(5) = TXTFIELDS(5) & " " & eRETU02
+    Case 403
+      TXTFIELDS(14) = TXTFIELDS(14) & " " & eRETU02
+    End Select
+  End If
 End Sub
 
 Private Sub CmdFluxo_Click(Index As Integer)
-    escFLX.Show vbModal, Me
-    If lRETU Then
-        TXTFIELDS(Index + 6) = eRETU01
-    End If
+  escFLX.Show vbModal, Me
+  If lRETU Then
+    TXTFIELDS(Index + 6) = eRETU01
+  End If
 End Sub
 
 Private Sub CMDSIG_Click(Index As Integer)
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
-    ePASS01 = "isoqsymbol"
-    ePASS02 = True
-    frmCharacters.Show vbModal, Me
-    If lRETU Then
-        TXTFIELDS(Index + 6) = eRETU01
-    End If
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  ePASS01 = "isoqsymbol"
+  ePASS02 = True
+  frmCharacters.Show vbModal, Me
+  If lRETU Then
+    TXTFIELDS(Index + 6) = eRETU01
+  End If
 End Sub
 
 Private Sub CmdZera_Click(Index As Integer)
-    TXTFIELDS(Index + 6) = " "
+  TXTFIELDS(Index + 6) = " "
 End Sub
 
 Private Sub Command1_Click(Index As Integer)
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
-    If Index = 0 Or Index = 2 Or Index = 4 Then
-        escFLX.Show vbModal, Me
-    Else
-        ePASS01 = "isoqsymbol"
-        ePASS02 = True
-        frmCharacters.Show vbModal, Me
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  If Index = 0 Or Index = 2 Or Index = 4 Then
+    escFLX.Show vbModal, Me
+  Else
+    ePASS01 = "isoqsymbol"
+    ePASS02 = True
+    frmCharacters.Show vbModal, Me
+  End If
+  If lRETU Then
+    If Index = 0 Or Index = 1 Then
+      Me.TXTFIELDS(4) = eRETU01
     End If
-    If lRETU Then
-        If Index = 0 Or Index = 1 Then
-            Me.TXTFIELDS(4) = eRETU01
-        End If
-        If Index = 2 Or Index = 3 Then
-            Me.TXTFIELDS(15) = eRETU01
-        End If
-        If Index = 4 Or Index = 5 Then
-            Me.TXTFIELDS(16) = eRETU01
-        End If
-        
+    If Index = 2 Or Index = 3 Then
+      Me.TXTFIELDS(15) = eRETU01
     End If
+    If Index = 4 Or Index = 5 Then
+      Me.TXTFIELDS(16) = eRETU01
+    End If
+
+  End If
 End Sub
 
 Private Sub Command2_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        TXTFIELDS(0) = "P"
-    Case 1
-        TXTFIELDS(0) = "F"
-    Case 2
-        TXTFIELDS(0) = "S"
-    Case 3
-        TXTFIELDS(0) = "N"
-    Case 4
-        TXTFIELDS(0) = "I"
-    Case 5
-        TXTFIELDS(0) = "A"
-    Case 6
-        TXTFIELDS(0) = "M"
-    Case 7
-        TXTFIELDS(0) = "V"
-    Case 8
-        TXTFIELDS(0) = "Q"
-    
-    End Select
+  Select Case Index
+  Case 0
+    TXTFIELDS(0) = "P"
+  Case 1
+    TXTFIELDS(0) = "F"
+  Case 2
+    TXTFIELDS(0) = "S"
+  Case 3
+    TXTFIELDS(0) = "N"
+  Case 4
+    TXTFIELDS(0) = "I"
+  Case 5
+    TXTFIELDS(0) = "A"
+  Case 6
+    TXTFIELDS(0) = "M"
+  Case 7
+    TXTFIELDS(0) = "V"
+  Case 8
+    TXTFIELDS(0) = "Q"
+
+  End Select
 End Sub
 
 Private Sub Command3_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        TXTFIELDS(2) = "KPC"
-    Case 1
-        TXTFIELDS(2) = "PQC"
-    Case 2
-        TXTFIELDS(2) = "KCC"
-    Case 3
-        TXTFIELDS(3) = "KPC"
-    Case 4
-        TXTFIELDS(3) = "PQC"
-    Case 5
-        TXTFIELDS(3) = "KCC"
-    End Select
+  Select Case Index
+  Case 0
+    TXTFIELDS(2) = "KPC"
+  Case 1
+    TXTFIELDS(2) = "PQC"
+  Case 2
+    TXTFIELDS(2) = "KCC"
+  Case 3
+    TXTFIELDS(3) = "KPC"
+  Case 4
+    TXTFIELDS(3) = "PQC"
+  Case 5
+    TXTFIELDS(3) = "KCC"
+  End Select
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    Dim X As Integer
-    CenterFormToScreen Me
-    'cARQ = PegPath("PATH", "PF")
-    cARQ = Sdb                                   ''Agora sdb pois pode ser pf pfp pfg
-    txtItem.tEXT = nORD
-    cSQL = "select * from PFQSBLEP WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
-    nCAMPOS = 17
-    aCAM = Array("MUD", "DESCRICAO", "CLASS01", "CLASS02", "CARAC", "REQUER", _
-                 "FLX01", "FLX02", "FLX03", "FLX04", "FLX05", "FLX06", "FLX07", "FLX08", "REQUERSAI", "CARA2", "CARA3")
-    aFOR = Array("C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C")
-    aPAD = Array("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    TXTFIELDS(4).Font = "isoqsymbol"
-    For X = 6 To 13
-        TXTFIELDS(X).Font = "isoqsymbol"
-    Next X
-    TXTFIELDS(15).Font = "isoqsymbol"
-    TXTFIELDS(16).Font = "isoqsymbol"
+  Dim x As Integer
+  CenterFormToScreen Me
+  'cARQ = PegPath("PATH", "PF")
+  cARQ = Sdb                                   ''Agora sdb pois pode ser pf pfp pfg
+  txtItem.tEXT = nORD
+  cSQL = "select * from PFQSBLEP WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
+  nCAMPOS = 17
+  aCAM = Array("MUD", "DESCRICAO", "CLASS01", "CLASS02", "CARAC", "REQUER", _
+               "FLX01", "FLX02", "FLX03", "FLX04", "FLX05", "FLX06", "FLX07", "FLX08", "REQUERSAI", "CARA2", "CARA3")
+  aFOR = Array("C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C")
+  aPAD = Array("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  TXTFIELDS(4).Font = "isoqsymbol"
+  For x = 6 To 13
+    TXTFIELDS(x).Font = "isoqsymbol"
+  Next x
+  TXTFIELDS(15).Font = "isoqsymbol"
+  TXTFIELDS(16).Font = "isoqsymbol"
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 

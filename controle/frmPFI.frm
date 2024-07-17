@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Begin VB.Form frmPFI 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFI"
@@ -22,9 +22,6 @@ Begin VB.Form frmPFI
       Top             =   120
       _ExtentX        =   1191
       _ExtentY        =   1191
-      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
-      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
-      AmbientBb       =   $"frmPFI.frx":058A
    End
    Begin VB.TextBox TXTSSQ 
       BackColor       =   &H00C0FFFF&
@@ -317,7 +314,7 @@ Begin VB.Form frmPFI
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":062A
+         Picture         =   "frmPFI.frx":058A
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -338,7 +335,7 @@ Begin VB.Form frmPFI
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":0BC4
+         Picture         =   "frmPFI.frx":0B24
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -359,7 +356,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":115E
+         Picture         =   "frmPFI.frx":10BE
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -380,7 +377,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":16F8
+         Picture         =   "frmPFI.frx":1658
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -402,7 +399,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":1C92
+         Picture         =   "frmPFI.frx":1BF2
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -424,7 +421,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":222C
+         Picture         =   "frmPFI.frx":218C
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -446,7 +443,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":27C6
+         Picture         =   "frmPFI.frx":2726
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -467,7 +464,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":2D60
+         Picture         =   "frmPFI.frx":2CC0
          Caption         =   "Incluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -488,7 +485,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":31FA
+         Picture         =   "frmPFI.frx":315A
          Caption         =   "Excluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -509,7 +506,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPFI.frx":3694
+         Picture         =   "frmPFI.frx":35F4
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -530,7 +527,7 @@ Begin VB.Form frmPFI
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFI.frx":3B2E
+         Picture         =   "frmPFI.frx":3A8E
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -552,7 +549,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":3FC8
+         Picture         =   "frmPFI.frx":3F28
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -574,7 +571,7 @@ Begin VB.Form frmPFI
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFI.frx":4562
+         Picture         =   "frmPFI.frx":44C2
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -729,7 +726,7 @@ Begin VB.Form frmPFI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPFI.frx":4AFC
+      Picture         =   "frmPFI.frx":4A5C
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -750,7 +747,7 @@ Begin VB.Form frmPFI
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "frmPFI.frx":5096
+      Picture         =   "frmPFI.frx":4FF6
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -830,151 +827,151 @@ Dim iLOOP As Integer
 Dim lTROCOU As Boolean
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-       
-        If lTROCOU Then
-            ADOGrvBlob cARQ, cSQL, Picture1, "IMAGEM"
-        End If
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
 
-       
+    If lTROCOU Then
+      ADOGrvBlob cARQ, cSQL, Picture1, "IMAGEM"
     End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+
+
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub CmdConfImp_Click()
-    FrmPrintSetup.Show vbModal, Me
+  FrmPrintSetup.Show vbModal, Me
 End Sub
 
 Private Sub CmdImprimir_Click()
-     If Picture1.Height = 0 Then
-        Alert ("Sem Imagem")
-    Else
-        PrintPreview1.ShowPreview
-    End If
+  If Picture1.Height = 0 Then
+    Alert ("Sem Imagem")
+  Else
+    PrintPreview1.ShowPreview
+  End If
 End Sub
 
 Private Sub CmdPaste_Click()
-    If Picture1.Height = 0 Then
-        Alert ("Sem Imagem")
-    Else
-        Clipboard.Clear
-        Clipboard.SetData Picture1.Image, (vbCFBitmap)
+  If Picture1.Height = 0 Then
+    Alert ("Sem Imagem")
+  Else
+    Clipboard.Clear
+    Clipboard.SetData Picture1.Image, (vbCFBitmap)
 
-        ' CopyEntirePicture Picture1
-    End If
+    ' CopyEntirePicture Picture1
+  End If
 
 End Sub
 
 Private Sub cmdpeg_Click(Index As Integer)
-    iMU01 = 404                                  ' 5S
-    eRETU02 = ""                                 'Evita Cancelamento Escolha
-    escIED.Show vbModal, Me
-    If lRETU Then
-        TXTFIELDS(Index) = Mid(eRETU02, 1, 1)
-    End If
+  iMU01 = 404                                  ' 5S
+  eRETU02 = ""                                 'Evita Cancelamento Escolha
+  escIED.Show vbModal, Me
+  If lRETU Then
+    TXTFIELDS(Index) = Mid(eRETU02, 1, 1)
+  End If
 End Sub
 
 Private Sub Command4_Click()
-    salvarpict Me, Picture1
+  salvarpict Me, Picture1
 End Sub
 
 Private Sub DelImg_Click()
-    Set Picture1.Picture = Nothing
-    Set Picture2.Picture = Nothing
-    lTROCOU = True
+  Set Picture1.Picture = Nothing
+  Set Picture2.Picture = Nothing
+  lTROCOU = True
 
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = Sdb                                   'agora sdb pois pode ser pf pfp pfg
-    
-    TXTPF.Text = nPF
-    TXTSEQ.Text = nSEQ
-    TXTSSQ.Text = nSSQ
-    
-    cSQL = "select * from PFI WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
-    
-    nCAMPOS = 19
-    aCAM = Array("ITEM", "DESCR", "NORMA", "PTOCHAVE", "RAZAO", "TEMPOMAN", "TEMPOMAQ", "TEMPOMOV", "TAKT", "TAKTAT", _
-                 "5SOQUE", "5SCOMO", "5SPORQUE", "5SSIMB01", "5SSIMB02", "5SSIMB03", "5SSIMB04", "5SSIMB05", "5SSIMB06")
-    aFOR = Array("NI", "C", "C", "C", "C", "N", "N", "N", "N", "N", "C", "C", "C", "C", "C", "C", "C", "C", "C")
-    aPAD = Array(0, "", "", "", "", 0, 0, 0, 0, 0, "", "", "", "", "", "", "", "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    
-    
-    If ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
-        StretchSourcePictureFromPicture Picture1, Picture2
-        If FixNum(eRETU01) > 500000 Then
-            Alert ("Imagem Muito Grande,Ajuste o tamanho")
-            salvarpict Me, Picture1, "PFI_" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3) & "_item_" & StrZero(nORD, 3)
-            Set Picture1.Picture = Nothing
-            Set Picture2.Picture = Nothing
-            lTROCOU = True
-        End If
-    Else
-        Set Picture1.Picture = Nothing
-        Set Picture2.Picture = Nothing
+  CenterFormToScreen Me
+  cARQ = Sdb                                   'agora sdb pois pode ser pf pfp pfg
+
+  TXTPF.tEXT = nPF
+  TXTSEQ.tEXT = nSEQ
+  TXTSSQ.tEXT = nSSQ
+
+  cSQL = "select * from PFI WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
+
+  nCAMPOS = 19
+  aCAM = Array("ITEM", "DESCR", "NORMA", "PTOCHAVE", "RAZAO", "TEMPOMAN", "TEMPOMAQ", "TEMPOMOV", "TAKT", "TAKTAT", _
+               "5SOQUE", "5SCOMO", "5SPORQUE", "5SSIMB01", "5SSIMB02", "5SSIMB03", "5SSIMB04", "5SSIMB05", "5SSIMB06")
+  aFOR = Array("NI", "C", "C", "C", "C", "N", "N", "N", "N", "N", "C", "C", "C", "C", "C", "C", "C", "C", "C")
+  aPAD = Array(0, "", "", "", "", 0, 0, 0, 0, 0, "", "", "", "", "", "", "", "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+
+
+  If ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
+    StretchSourcePictureFromPicture Picture1, Picture2
+    If FixNum(eRETU01) > 500000 Then
+      Alert ("Imagem Muito Grande,Ajuste o tamanho")
+      salvarpict Me, Picture1, "PFI_" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3) & "_item_" & StrZero(nORD, 3)
+      Set Picture1.Picture = Nothing
+      Set Picture2.Picture = Nothing
+      lTROCOU = True
     End If
-   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
-    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
+  Else
+    Set Picture1.Picture = Nothing
+    Set Picture2.Picture = Nothing
+  End If
+  PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+  PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 End Sub
 Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
-    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
-    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+  PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+  UpdateReport = False  ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
 Private Sub Incluirimagem_Click()
-    Dim STMPFILE
-    STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
-    If lerarquivoimagem(STMPFILE, Picture1, Picture2) Then
-        lTROCOU = True
-    End If
+  Dim STMPFILE
+  STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
+  If lerarquivoimagem(STMPFILE, Picture1, Picture2) Then
+    lTROCOU = True
+  End If
 End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
-    Select Case Index
-    Case 0
-        KeyAscii = ValiText(KeyAscii, "#NI")
-    Case 5, 6, 7, 8, 9
-        KeyAscii = ValiText(KeyAscii, "#N")
-    End Select
+  Select Case Index
+  Case 0
+    KeyAscii = ValiText(KeyAscii, "#NI")
+  Case 5, 6, 7, 8, 9
+    KeyAscii = ValiText(KeyAscii, "#N")
+  End Select
 End Sub
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub VerImg_Click()
-    frmPicViewer.Show vbModal, Me
-    If lRETU Then
-        If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
-            lTROCOU = True
-        End If
+  frmPicViewer.Show vbModal, Me
+  If lRETU Then
+    If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
+      lTROCOU = True
     End If
+  End If
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-    On Error Resume Next
-    Printer.Print
-    Printer.PaintPicture Picture1, 0, 0
+  On Error Resume Next
+  Printer.Print
+  Printer.PaintPicture Picture1, 0, 0
 End Sub
 

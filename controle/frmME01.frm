@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Begin VB.Form frmME01 
    Caption         =   "Equipamento"
    ClientHeight    =   6915
@@ -588,370 +588,370 @@ Private cORDFEMUSO As String
 Private cARQFEMEA As String
 
 Private Sub CmdClo_Click(Index As Integer)
-    Dim dDATE As Date
-    Dim DB As New ADODB.Connection
-    Dim RSTAB As New ADODB.Recordset
-    Dim sSQL As String
+  Dim dDATE As Date
+  Dim DB As New ADODB.Connection
+  Dim RSTAB As New ADODB.Recordset
+  Dim sSQL As String
 
 
 
-    dDATE = Date
-    
-    If GridSeq.Row = 0 Then
-        Exit Sub
-    End If
+  dDATE = Date
 
-    DB.ConnectionTimeout = 120
-    DB.Open GeracArq(cARQFEMEA)
+  If GridSeq.Row = 0 Then
+    Exit Sub
+  End If
 
-    Select Case Index
-    Case 0
-        sSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " ORDER BY ITEM"
-    Case 1
-        GridSeq.Col = 1
-        nSEQ = GridSeq
-        sSQL = "select * from FEMmaq WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
-    End Select
-    
+  DB.ConnectionTimeout = 120
+  DB.Open GeracArq(cARQFEMEA)
+
+  Select Case Index
+  Case 0
+    sSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " ORDER BY ITEM"
+  Case 1
+    GridSeq.Col = 1
+    nSEQ = GridSeq
+    sSQL = "select * from FEMmaq WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
+  End Select
 
 
-    RSTAB.Open sSQL, DB, adOpenDynamic, adLockOptimistic
-    While Not RSTAB.EOF
-        If RSTAB("ACAO") Then
-            If IsDate(RSTAB("RESDAT")) Then
-                dDATE = RSTAB("RESDAT")
-            End If
-            If IsDate(RSTAB("RESDAT2")) Then
-                If dDATE < RSTAB("RESDAT2") Then
-                    dDATE = RSTAB("RESDAT2")
-                End If
-            End If
-            If IsDate(RSTAB("RESDAT3")) Then
-                If dDATE < RSTAB("RESDAT3") Then
-                    dDATE = RSTAB("RESDAT3")
-                End If
-            End If
-            RSTAB("ACATOM") = "Concluida"
-            RSTAB("ACADAT") = dDATE + 2
-            RSTAB.Update
+
+  RSTAB.Open sSQL, DB, adOpenDynamic, adLockOptimistic
+  While Not RSTAB.EOF
+    If RSTAB("ACAO") Then
+      If IsDate(RSTAB("RESDAT")) Then
+        dDATE = RSTAB("RESDAT")
+      End If
+      If IsDate(RSTAB("RESDAT2")) Then
+        If dDATE < RSTAB("RESDAT2") Then
+          dDATE = RSTAB("RESDAT2")
         End If
-        RSTAB.MoveNext
-    Wend
-    RSTAB.Close
-    DB.Close
-    FilRelat
+      End If
+      If IsDate(RSTAB("RESDAT3")) Then
+        If dDATE < RSTAB("RESDAT3") Then
+          dDATE = RSTAB("RESDAT3")
+        End If
+      End If
+      RSTAB("ACATOM") = "Concluida"
+      RSTAB("ACADAT") = dDATE + 2
+      RSTAB.Update
+    End If
+    RSTAB.MoveNext
+  Wend
+  RSTAB.Close
+  DB.Close
+  FilRelat
 
 End Sub
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
-            aVAL(iLOOP) = txtFields(iLOOP)       ''vb matriz zero
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub CmdExcluir_Click()
-    Dim nSEQ As Integer
-    Dim sSQL As String
-    If GridSeq.Row = 0 Then
-        Exit Sub
-    End If
-    GridSeq.Col = 1
-    nSEQ = GridSeq
-    sSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
-    If ApagaSQLP(cARQFEMEA, sSQL) Then
-        sSQL = "select * FEMrevi WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
-        ApagaSQL cARQFEMEA, sSQL
-    End If
-    FilRelat
+  Dim nSEQ As Integer
+  Dim sSQL As String
+  If GridSeq.Row = 0 Then
+    Exit Sub
+  End If
+  GridSeq.Col = 1
+  nSEQ = GridSeq
+  sSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
+  If ApagaSQLP(cARQFEMEA, sSQL) Then
+    sSQL = "select * FEMrevi WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
+    ApagaSQL cARQFEMEA, sSQL
+  End If
+  FilRelat
 End Sub
 
 Private Sub cmdFOTO_Click()
-    Dim cSQL As String
-    zgrp = txtcodigo.tEXT
-    iImage = 4
-    cARQRTF = PegPath("PATH", "IMGME01")
-    cSQL = "select * from IMAGENS WHERE CODIGO='" & zgrp & "'"
-    IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(zgrp), True, False
-    
-    Load frmIMAGENS
-    frmIMAGENS.txtFields(0).Enabled = False
-    frmIMAGENS.Escolher(0).Visible = False
-    frmIMAGENS.Show vbModal, Me
+  Dim cSQL As String
+  zgrp = TxtCodigo.tEXT
+  iImage = 4
+  cARQRTF = PegPath("PATH", "IMGME01")
+  cSQL = "select * from IMAGENS WHERE CODIGO='" & zgrp & "'"
+  IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(zgrp), True, False
+
+  Load frmIMAGENS
+  frmIMAGENS.TXTFIELDS(0).Enabled = False
+  frmIMAGENS.Escolher(0).Visible = False
+  frmIMAGENS.Show vbModal, Me
 
 End Sub
 
 Private Sub CmdNovo_Click()
-    Dim nNUM
-    nNUM = FixInt(PegMAXSQL(cARQFEMEA, "FEMMAQ WHERE PF=" & nFEMMAQ, "ITEM", 0)) + 1
-    cSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " AND ITEM=" & nNUM
-    IncluiSQL cARQFEMEA, cSQL, 2, Array("PF", "ITEM"), Array(nFEMMAQ, nNUM), True, False
-    FilRelat
+  Dim nNUM
+  nNUM = FixInt(PegMAXSQL(cARQFEMEA, "FEMMAQ WHERE PF=" & nFEMMAQ, "ITEM", 0)) + 1
+  cSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " AND ITEM=" & nNUM
+  IncluiSQL cARQFEMEA, cSQL, 2, Array("PF", "ITEM"), Array(nFEMMAQ, nNUM), True, False
+  FilRelat
 End Sub
 
 Private Sub CmdOrdFem_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        cORDFEMUSO = "ITEM"
-    Case 1
-        cORDFEMUSO = "FXSEQ,FXSSQ,FXITEM"
-    End Select
-    FilRelat
+  Select Case Index
+  Case 0
+    cORDFEMUSO = "ITEM"
+  Case 1
+    cORDFEMUSO = "FXSEQ,FXSSQ,FXITEM"
+  End Select
+  FilRelat
 End Sub
 
 Private Sub CmdRenumerar_Click()
-    Dim nSEQ
-    Dim nNUM As Integer
-    Dim cSQL As String
+  Dim nSEQ
+  Dim nNUM As Integer
+  Dim cSQL As String
 
-    If GridSeq.Row = 0 Then
-        Exit Sub
-    End If
+  If GridSeq.Row = 0 Then
+    Exit Sub
+  End If
 
-    nNUM = 0
+  nNUM = 0
 
-    nNUM = FixInt(Val(Busca("Nº", "Renumerando", CStr(nNUM), 8)))
-    If nNUM = 0 Then
-        Alert ("Nº em Branco")
-        Exit Sub
-    End If
-    GridSeq.Col = 1
-    nSEQ = GridSeq
-    cSQL = "select * from FEMmaq WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
-    GrvSQL cARQFEMEA, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
-    FilRelat
+  nNUM = FixInt(Val(Busca("Nº", "Renumerando", CStr(nNUM), 8)))
+  If nNUM = 0 Then
+    Alert ("Nº em Branco")
+    Exit Sub
+  End If
+  GridSeq.Col = 1
+  nSEQ = GridSeq
+  cSQL = "select * from FEMmaq WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
+  GrvSQL cARQFEMEA, cSQL, 1, Array("ITEM"), Array(nNUM), Array("NI")
+  FilRelat
 
 End Sub
 
 Private Sub CmdRevFemea_Click()
-    Dim nREVI As Long
-    Dim nSEQ As Long
-    Dim cSQL As String
-    Dim cARQ As String
-    Dim aVAL As Variant
-    Dim aCAM As Variant
-    Dim aFOR As Variant
-    Dim aPAD As Variant
-    If GridSeq.Row = 0 Then
-        Exit Sub
-    End If
-    GridSeq.Col = 1
-    nSEQ = GridSeq
-    cARQ = cARQFEMEA
-    cSQL = "FEMrevi WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
+  Dim nREVI As Long
+  Dim nSEQ As Long
+  Dim cSQL As String
+  Dim cARQ As String
+  Dim aVAL As Variant
+  Dim aCAM As Variant
+  Dim aFOR As Variant
+  Dim aPAD As Variant
+  If GridSeq.Row = 0 Then
+    Exit Sub
+  End If
+  GridSeq.Col = 1
+  nSEQ = GridSeq
+  cARQ = cARQFEMEA
+  cSQL = "FEMrevi WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
 
-    nREVI = FixInt(PegMAXSQL(cARQFEMEA, cSQL, "SEGGRA", 0))
-    nREVI = nREVI + 1
-                 
-    
-    aCAM = Array("PF", "ITEM", "PROCESSO", "FALTIP", "FALEFE", _
-                 "FALCAU", "CRTATU", "INDOCO", "INDSEV", "INDDET", _
-                 "INDRIS", "ACAREC", "RESCOD", "RESNOM", "RESCOD2", _
-                 "ACATOM", "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", _
-                 "RINDRIS", "RESNOM2", "RESNOM3", "SITUACAO", "SIGI", _
-                 "CARAPREV", "RESDAT", "RESDAT2", "RESDAT3", "ACADAT", _
-                 "ACAO", "EXCRPN", "ALTMAN", "MUDPAD", "PSA", "FXSEQ", "FXSSQ", "FXITEM", _
-                 "PRONUM", "EFENUM", "FALNUM", "CAUNUM", "SEGGRA", "TIPOAPU")
-    aFOR = Array("NI", "NI", "C", "C", "C", _
-                 "C", "C", "NI", "NI", "NI", _
-                 "NI", "C", "NI", "C", "NI", _
-                 "C", "NI", "NI", "NI", "NI", _
-                 "NI", "C", "C", "C", "C", "C", _
-                 "DN", "DN", "DN", "DN", "BN", _
-                 "BN", "BN", "BN", "C", "NI", "NI", "NI", "NI", "NI", "NI", "NI", "NI", "C")
-    aPAD = Array(0, 0, "", "", "", _
-                 "", "", 0, 0, 0, _
-                 0, "", 0, "", 0, _
-                 "", 0, 0, 0, 0, 0, _
-                 "", "", "", "", "", _
-                 "", "", "", "", False, _
-                 False, False, False, "", 0, 0, 0, 0, 0, 0, 0, 0, " ")
-                 
-    
-    cSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
-   
-    aVAL = PegSQL(cARQ, cSQL, 44, aCAM, aFOR, aPAD)
-    
-    'checa se foi feita a revisao
-    If aVAL(17) = 0 Or aVAL(18) = 0 Or aVAL(19) = 0 Or aVAL(20) = 0 Then
-        Alert ("Novos Indices Nao Preenchidos")
-        Exit Sub
-    End If
-        
-    'atualiza revisao e tipo
-    aVAL(42) = nREVI
-    aVAL(43) = "M"
-    
-    cSQL = "select * from FEMMAQ WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ & " AND ITEM=" & nSEQ & " AND SEGGRA=" & nREVI
-    
-    IncluiSQL cARQFEMEA, cSQL, 44, aCAM, aVAL, True, False
-    
-    cSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
-    
-    GrvSQL cARQ, cSQL, 17, Array("ACAREC", "RESCOD", "RESNOM", "RESCOD2", "ACATOM", _
-                                 "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", "RINDRIS", _
-                                 "RESNOM2", "RESNOM3", "INDOCO", "INDSEV", "INDDET", _
-                                 "INDRIS", "ACAO"), _
-                                 Array("", 0, "", 0, "", 0, 0, 0, 0, 0, "", "", aVAL(17), aVAL(18), aVAL(19), aVAL(20), False), _
-                                 Array("C", "NI", "C", "NI", "C", "NI", "NI", "NI", "NI", "NI", "C", "C", "NI", "NI", "NI", "NI", "")
-                                       
-    FILGRIDrevCAU
+  nREVI = FixInt(PegMAXSQL(cARQFEMEA, cSQL, "SEGGRA", 0))
+  nREVI = nREVI + 1
+
+
+  aCAM = Array("PF", "ITEM", "PROCESSO", "FALTIP", "FALEFE", _
+               "FALCAU", "CRTATU", "INDOCO", "INDSEV", "INDDET", _
+               "INDRIS", "ACAREC", "RESCOD", "RESNOM", "RESCOD2", _
+               "ACATOM", "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", _
+               "RINDRIS", "RESNOM2", "RESNOM3", "SITUACAO", "SIGI", _
+               "CARAPREV", "RESDAT", "RESDAT2", "RESDAT3", "ACADAT", _
+               "ACAO", "EXCRPN", "ALTMAN", "MUDPAD", "PSA", "FXSEQ", "FXSSQ", "FXITEM", _
+               "PRONUM", "EFENUM", "FALNUM", "CAUNUM", "SEGGRA", "TIPOAPU")
+  aFOR = Array("NI", "NI", "C", "C", "C", _
+               "C", "C", "NI", "NI", "NI", _
+               "NI", "C", "NI", "C", "NI", _
+               "C", "NI", "NI", "NI", "NI", _
+               "NI", "C", "C", "C", "C", "C", _
+               "DN", "DN", "DN", "DN", "BN", _
+               "BN", "BN", "BN", "C", "NI", "NI", "NI", "NI", "NI", "NI", "NI", "NI", "C")
+  aPAD = Array(0, 0, "", "", "", _
+               "", "", 0, 0, 0, _
+               0, "", 0, "", 0, _
+               "", 0, 0, 0, 0, 0, _
+               "", "", "", "", "", _
+               "", "", "", "", False, _
+               False, False, False, "", 0, 0, 0, 0, 0, 0, 0, 0, " ")
+
+
+  cSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
+
+  aVAL = PegSQL(cARQ, cSQL, 44, aCAM, aFOR, aPAD)
+
+  'checa se foi feita a revisao
+  If aVAL(17) = 0 Or aVAL(18) = 0 Or aVAL(19) = 0 Or aVAL(20) = 0 Then
+    Alert ("Novos Indices Nao Preenchidos")
+    Exit Sub
+  End If
+
+  'atualiza revisao e tipo
+  aVAL(42) = nREVI
+  aVAL(43) = "M"
+
+  cSQL = "select * from FEMMAQ WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ & " AND ITEM=" & nSEQ & " AND SEGGRA=" & nREVI
+
+  IncluiSQL cARQFEMEA, cSQL, 44, aCAM, aVAL, True, False
+
+  cSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
+
+  GrvSQL cARQ, cSQL, 17, Array("ACAREC", "RESCOD", "RESNOM", "RESCOD2", "ACATOM", _
+                               "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", "RINDRIS", _
+                               "RESNOM2", "RESNOM3", "INDOCO", "INDSEV", "INDDET", _
+                               "INDRIS", "ACAO"), _
+                               Array("", 0, "", 0, "", 0, 0, 0, 0, 0, "", "", aVAL(17), aVAL(18), aVAL(19), aVAL(20), False), _
+                               Array("C", "NI", "C", "NI", "C", "NI", "NI", "NI", "NI", "NI", "C", "C", "NI", "NI", "NI", "NI", "")
+
+  FILGRIDrevCAU
 End Sub
 
 Private Sub CmdREvi_Click()
-    Dim nREVI As Long
-    Dim nSEQ As Long
+  Dim nREVI As Long
+  Dim nSEQ As Long
 
-    If gridrevcau.Row = 0 Then
-        Exit Sub
-    End If
-    gridrevcau.Col = 0
-    nSEQ = gridrevcau
-    gridrevcau.Col = 1
-    nREVI = gridrevcau
-    ePASS01 = "select * from FEMrevi WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ & " AND ITEM=" & nSEQ & " AND SEGGRA=" & nREVI
-    ePASS02 = cARQFEMEA
-    
-    Load frmFEMEI
-    frmFEMEI.txtFields(2).Enabled = False
-    frmFEMEI.txtFields(3).Enabled = False
-    frmFEMEI.txtFields(4).Enabled = False
-    frmFEMEI.txtFields(5).Enabled = False
-    frmFEMEI.cmdClose.Enabled = False
-    frmFEMEI.CmdAltman.Enabled = False
-    frmFEMEI.Show vbModal, Me
+  If gridrevcau.Row = 0 Then
+    Exit Sub
+  End If
+  gridrevcau.Col = 0
+  nSEQ = gridrevcau
+  gridrevcau.Col = 1
+  nREVI = gridrevcau
+  ePASS01 = "select * from FEMrevi WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ & " AND ITEM=" & nSEQ & " AND SEGGRA=" & nREVI
+  ePASS02 = cARQFEMEA
+
+  Load frmFEMEI
+  frmFEMEI.TXTFIELDS(2).Enabled = False
+  frmFEMEI.TXTFIELDS(3).Enabled = False
+  frmFEMEI.TXTFIELDS(4).Enabled = False
+  frmFEMEI.TXTFIELDS(5).Enabled = False
+  frmFEMEI.cmdClose.Enabled = False
+  frmFEMEI.CmdAltman.Enabled = False
+  frmFEMEI.Show vbModal, Me
 
 
 End Sub
 
 Private Sub Command2_Click(Index As Integer)
-    Dim sSQL As String
+  Dim sSQL As String
 
-    sSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ
-    If ApagaSQLP(cARQFEMEA, sSQL) Then
-        sSQL = "select * FEMrevi WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ
-        ApagaSQL cARQFEMEA, sSQL
-    End If
-    FilRelat
+  sSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ
+  If ApagaSQLP(cARQFEMEA, sSQL) Then
+    sSQL = "select * FEMrevi WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ
+    ApagaSQL cARQFEMEA, sSQL
+  End If
+  FilRelat
 End Sub
 
 Private Sub EditSeq_Click()
-    Dim nSEQ As Integer
-    If GridSeq.Row = 0 Then
-        Exit Sub
-    End If
-    GridSeq.Col = 1
-    nSEQ = GridSeq
-    ePASS01 = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
-    ePASS02 = cARQFEMEA
-    frmFEMEI.Show vbModal, Me
-    FilRelat
+  Dim nSEQ As Integer
+  If GridSeq.Row = 0 Then
+    Exit Sub
+  End If
+  GridSeq.Col = 1
+  nSEQ = GridSeq
+  ePASS01 = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " AND ITEM=" & nSEQ
+  ePASS02 = cARQFEMEA
+  frmFEMEI.Show vbModal, Me
+  FilRelat
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub EscTipIns_Click(Index As Integer)
+  Select Case Index
+  Case 0
+    iMD02 = 8
+  Case 1
+    iMD02 = 9
+  End Select
+  escMD02.Show vbModal, Me
+  If lRETU Then
     Select Case Index
     Case 0
-        iMD02 = 8
+      TXTFIELDS(4).tEXT = eRETU01
+      TXTFIELDS(6).tEXT = eRETU03
+      '                txt(5).Text = eRETU02
     Case 1
-        iMD02 = 9
+      TXTFIELDS(5).tEXT = eRETU01
     End Select
-    escMD02.Show vbModal, Me
-    If lRETU Then
-        Select Case Index
-        Case 0
-            txtFields(4).tEXT = eRETU01
-            txtFields(6).tEXT = eRETU03
-            '                txt(5).Text = eRETU02
-        Case 1
-            txtFields(5).tEXT = eRETU01
-        End Select
-    End If
+  End If
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub FILGRIDrevCAU()
-    Dim cSQL As String
-    cSQL = "select ITEM,SEGGRA,PROCESSO,FXSEQ,FXSSQ,FXITEM from FEMREVI WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ & " ORDER BY ITEM,SEGGRA"
-    DizerBarra "carregando femea maquina revisoes"
-    MontaGridFast gridrevcau, 6, Array(400, 400, 400, 400, 400, 7000), Array("ITEM", "REV", "SEQ", "SSQ", "IT", "Descriçao"), Array("ITEM", "SEGGRA", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), cARQFEMEA, cSQL
-    DizerBarra ""
+  Dim cSQL As String
+  cSQL = "select ITEM,SEGGRA,PROCESSO,FXSEQ,FXSSQ,FXITEM from FEMREVI WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ & " ORDER BY ITEM,SEGGRA"
+  DizerBarra "carregando femea maquina revisoes"
+  MontaGridFast gridrevcau, 6, Array(400, 400, 400, 400, 400, 7000), Array("ITEM", "REV", "SEQ", "SSQ", "IT", "Descriçao"), Array("ITEM", "SEGGRA", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), cARQFEMEA, cSQL
+  DizerBarra ""
 End Sub
 
 Private Sub Form_Load()
-    Dim nTMPNUMERO
-    CenterFormToScreen Me
-    cARQ = GeraConn(zMANA5EMP, "SDECDX")
-    cSQL = "select NUMERO,QTDEBASE,HRBAS,VDBAS,VDHBAS,GRUPO,TIPO,FEMEA,CONTABIL,FABRICANTE,MODELO,NUMFAB,ANO "
-    cSQL = cSQL & " FROM ME01 WHERE NUMERO='" & Trim(ePASS01) & "'"
-    cARQFEMEA = PegPath("PATH", "FEMEA")
-    
-    txtcodigo.tEXT = ePASS01
-    txtNome.tEXT = ePASS02
-    nCAMPOS = 12
-    aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "GRUPO", "TIPO", "FEMEA", "CONTABIL", "FABRICANTE", "MODELO", "NUMFAB", "ANO")
-    aFOR = Array("N", "N", "N", "N", "C", "C", "N", "C", "C", "C", "C", "N")
-    aPAD = Array(0, 0, 0, 0, "", "", 0, "", "", "", "", 0)
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    
-    cORDFEMUSO = "ITEM"
-    
-    nFEMMAQ = Val(txtFields(6))
-    
-    
-    FilRelat
-    
+  Dim nTMPNUMERO
+  CenterFormToScreen Me
+  cARQ = GeraConn(zMANA5EMP, "SDECDX")
+  cSQL = "select NUMERO,QTDEBASE,HRBAS,VDBAS,VDHBAS,GRUPO,TIPO,FEMEA,CONTABIL,FABRICANTE,MODELO,NUMFAB,ANO "
+  cSQL = cSQL & " FROM ME01 WHERE NUMERO='" & Trim(ePASS01) & "'"
+  cARQFEMEA = PegPath("PATH", "FEMEA")
+
+  TxtCodigo.tEXT = ePASS01
+  TxtNome.tEXT = ePASS02
+  nCAMPOS = 12
+  aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "GRUPO", "TIPO", "FEMEA", "CONTABIL", "FABRICANTE", "MODELO", "NUMFAB", "ANO")
+  aFOR = Array("N", "N", "N", "N", "C", "C", "N", "C", "C", "C", "C", "N")
+  aPAD = Array(0, 0, 0, 0, "", "", 0, "", "", "", "", 0)
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+
+  cORDFEMUSO = "ITEM"
+
+  nFEMMAQ = Val(TXTFIELDS(6))
+
+
+  FilRelat
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub importar_Click()
-    cARQIMP = "FEMMAQ"
-    FrmImp.Show vbModal, Me
-    FilRelat
+  cARQIMP = "FEMMAQ"
+  FrmImp.Show vbModal, Me
+  FilRelat
 End Sub
 Private Sub txtFields_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index <= 3 Or Index = 6 Then
-        KeyAscii = ValiText(KeyAscii, "#NI")
-    End If
+  If Index <= 3 Or Index = 6 Then
+    KeyAscii = ValiText(KeyAscii, "#NI")
+  End If
 End Sub
 
 Private Sub FilRelat()
-    Dim cSQL As String
-    cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM from FEMMAQ WHERE PF=" & nFEMMAQ & " ORDER BY " & cORDFEMUSO
-    DizerBarra "carregando femea adicional"
-    MontaGridFast GridSeq, 6, Array(400, 400, 400, 400, 400, 7000), Array("PF", "ITEM", "SEQ", "SSQ", "IT", "Descriçao"), Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), cARQFEMEA, cSQL
-    DizerBarra ""
+  Dim cSQL As String
+  cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM from FEMMAQ WHERE PF=" & nFEMMAQ & " ORDER BY " & cORDFEMUSO
+  DizerBarra "carregando femea adicional"
+  MontaGridFast GridSeq, 6, Array(400, 400, 400, 400, 400, 7000), Array("PF", "ITEM", "SEQ", "SSQ", "IT", "Descriçao"), Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), cARQFEMEA, cSQL
+  DizerBarra ""
 End Sub
 
 Private Sub TXTFIELDS_LostFocus(Index As Integer)
-    If Index = 6 Then
-        nFEMMAQ = Val(txtFields(6))
-    End If
+  If Index = 6 Then
+    nFEMMAQ = Val(TXTFIELDS(6))
+  End If
 End Sub
 
 

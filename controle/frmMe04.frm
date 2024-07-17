@@ -917,237 +917,237 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub Cmd_Click()
-    cmdgrvdata.Visible = True
-    TXT(23).Locked = False
-    TXT(24).Locked = False
-    TXT(26).Locked = False
-    Cmd.Visible = False
+  cmdgrvdata.Visible = True
+  TXT(23).Locked = False
+  TXT(24).Locked = False
+  TXT(26).Locked = False
+  Cmd.Visible = False
 End Sub
 
 Private Sub CmdCalib_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        TXT(22).tEXT = "I"
-    Case 1
-        TXT(22).tEXT = "E"
-    Case 2
-        TXT(22).tEXT = "C"
-    End Select
+  Select Case Index
+  Case 0
+    TXT(22).tEXT = "I"
+  Case 1
+    TXT(22).tEXT = "E"
+  Case 2
+    TXT(22).tEXT = "C"
+  End Select
 
 End Sub
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
-            aVAL(iLOOP) = TXT(iLOOP)             ''vb matriz zero
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
+      aVAL(iLOOP) = TXT(iLOOP)             ''vb matriz zero
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub CmdCadTip_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        TXT(0).tEXT = "C"
-    Case 1
-        TXT(0).tEXT = "I"
-      
-    End Select
+  Select Case Index
+  Case 0
+    TXT(0).tEXT = "C"
+  Case 1
+    TXT(0).tEXT = "I"
+
+  End Select
 End Sub
 
 Private Sub cmdFOTO_Click()
-    Dim cSQL As String
-    zgrp = FixStr(txtcodigo.tEXT)
-    If Len(zgrp) = 0 Then
-        Alert "Codigo nao preenchido"
-        Exit Sub
-    End If
-    iImage = 5
-    cARQRTF = PegPath("PATH", "IMGME04")
-    cSQL = "select codigo from IMAGENS WHERE CODIGO='" & zgrp & "'"
-    IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(zgrp), True, False
-    Load frmIMAGENS
-    frmIMAGENS.txtFields(0).Enabled = False
-    frmIMAGENS.Escolher(0).Visible = False
-    frmIMAGENS.Show vbModal, Me
+  Dim cSQL As String
+  zgrp = FixStr(TxtCodigo.tEXT)
+  If Len(zgrp) = 0 Then
+    Alert "Codigo nao preenchido"
+    Exit Sub
+  End If
+  iImage = 5
+  cARQRTF = PegPath("PATH", "IMGME04")
+  cSQL = "select codigo from IMAGENS WHERE CODIGO='" & zgrp & "'"
+  IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(zgrp), True, False
+  Load frmIMAGENS
+  frmIMAGENS.TXTFIELDS(0).Enabled = False
+  frmIMAGENS.Escolher(0).Visible = False
+  frmIMAGENS.Show vbModal, Me
 End Sub
 
 Private Sub cmdgrvdata_Click()
-    cmdgrvdata.Visible = False
-    TXT(23).Locked = True
-    TXT(24).Locked = True
-    TXT(26).Locked = True
-    If IsDate(TXT(24)) And TXT(23) > 0 Then
-        TXT(25).tEXT = DateAdd("m", TXT(23), TXT(24))
-    End If
-    Cmd.Visible = True
+  cmdgrvdata.Visible = False
+  TXT(23).Locked = True
+  TXT(24).Locked = True
+  TXT(26).Locked = True
+  If IsDate(TXT(24)) And TXT(23) > 0 Then
+    TXT(25).tEXT = DateAdd("m", TXT(23), TXT(24))
+  End If
+  Cmd.Visible = True
 End Sub
 
 Private Sub CmdNorma_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        TXT(8).tEXT = "CONFORME DESENHO"
-    Case 1
-        TXT(8).tEXT = "CONFORME CERTIFICADO"
-    End Select
+  Select Case Index
+  Case 0
+    TXT(8).tEXT = "CONFORME DESENHO"
+  Case 1
+    TXT(8).tEXT = "CONFORME CERTIFICADO"
+  End Select
 
 End Sub
 
 Private Sub Cmdsitu_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        TXT(19).tEXT = "A"
-    Case 1
-        TXT(19).tEXT = "C"
-    Case 2
-        TXT(19).tEXT = "E"
-    Case 3
-        TXT(19).tEXT = "I"
-    Case 4
-        TXT(19).tEXT = "M"
-    End Select
+  Select Case Index
+  Case 0
+    TXT(19).tEXT = "A"
+  Case 1
+    TXT(19).tEXT = "C"
+  Case 2
+    TXT(19).tEXT = "E"
+  Case 3
+    TXT(19).tEXT = "I"
+  Case 4
+    TXT(19).tEXT = "M"
+  End Select
 End Sub
 
 Private Sub Command6_Click()
-    Dim cARQ As String
-    Dim aRETU As Variant
-    Dim sSQL             As String
-    Dim nNUMERO          As Long
-    nNUMERO = FixInt(TXT(14), 0)
-    cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    sSQL = "SELECT NOME FROM MB01 WHERE NUMERO=" & nNUMERO
-    aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
-    If lRETU Then
-        TXT(15) = aRETU(0)
-    End If
+  Dim cARQ As String
+  Dim aRETU As Variant
+  Dim sSQL As String
+  Dim nNUMERO As Long
+  nNUMERO = FixInt(TXT(14), 0)
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
+  sSQL = "SELECT NOME FROM MB01 WHERE NUMERO=" & nNUMERO
+  aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
+  If lRETU Then
+    TXT(15) = aRETU(0)
+  End If
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Command7_Click()
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
-    cARQESC = "MB01"
-    escNUMNOM.Show vbModal, Me
-    If lRETU Then
-        TXT(14) = eRETU01
-        TXT(15) = eRETU02
-    End If
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  cARQESC = "MB01"
+  escNUMNOM.Show vbModal, Me
+  If lRETU Then
+    TXT(14) = eRETU01
+    TXT(15) = eRETU02
+  End If
 End Sub
 
 Private Sub escCodInt_Click()
-    iMU01 = 12
-    escmp.Show vbModal
-    If lRETU Then
-        TXT(31) = eRETU01
-    End If
+  iMU01 = 12
+  escmp.Show vbModal
+  If lRETU Then
+    TXT(31) = eRETU01
+  End If
 End Sub
 
 Private Sub EscPFx_Click()
-    escpf.Show vbModal
-    If lRETU Then
-        TXT(3) = eRETU01
-    End If
+  escpf.Show vbModal
+  If lRETU Then
+    TXT(3) = eRETU01
+  End If
 End Sub
 
 Private Sub EscTipIns_Click(Index As Integer)
+  Select Case Index
+  Case 0
+    iMD02 = 1
+  Case 1
+    iMD02 = 6
+  Case 2
+    iMD02 = 7
+  End Select
+  escMD02.Show vbModal, Me
+  If lRETU Then
     Select Case Index
     Case 0
-        iMD02 = 1
+      TXT(4).tEXT = eRETU01
+      TXT(5).tEXT = eRETU02
     Case 1
-        iMD02 = 6
+      TXT(10).tEXT = eRETU01
     Case 2
-        iMD02 = 7
+      TXT(7).tEXT = eRETU02
+
     End Select
-    escMD02.Show vbModal, Me
-    If lRETU Then
-        Select Case Index
-        Case 0
-            TXT(4).tEXT = eRETU01
-            TXT(5).tEXT = eRETU02
-        Case 1
-            TXT(10).tEXT = eRETU01
-        Case 2
-            TXT(7).tEXT = eRETU02
-                
-        End Select
-       
-      
-    End If
+
+
+  End If
 
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cmdgrvdata.Visible = False
-    cARQ = PegPath("PATH", "MANA5INS")
-    cARQ = GeraConn(cARQ, "SDECDX")
-    cSQL = "select CODIGO, "
-    cSQL = cSQL & " CADTIP , NOMTIPO, APLICACAO, PF, CODTIPO,"
-    cSQL = cSQL & " TIPO , DESENHO, APLIC, NORMA, MODELO,"
-    cSQL = cSQL & " MARCA, CAPACI, DIVI, ERROADM, CODFOR,"
-    cSQL = cSQL & " COGFOR , COMPRA, Valor, ATIVO, SITUACAO,"
-    cSQL = cSQL & " DATAUSO , DATAFIM, TIPCAL, CALIBRAR, CALULT,"
-    cSQL = cSQL & " CALPRO , DATAEXT, OBS01, OBS02, OBS03, PRECO, CODIGOINT "
-    cSQL = cSQL & " FROM ME04 WHERE CODIGO='" & Trim(ePASS01) & "'"
-    txtcodigo.tEXT = ePASS01
-    nCAMPOS = 32
-    aCAM = Array("CADTIP", "NOMTIPO", "APLICACAO", "PF", "CODTIPO", _
-                 "TIPO", "DESENHO", "APLIC", "NORMA", "MODELO", _
-                 "MARCA", "CAPACI", "DIVI", "ERROADM", "CODFOR", _
-                 "COGFOR", "COMPRA", "VALOR", "ATIVO", "SITUACAO", _
-                 "DATAUSO", "DATAFIM", "TIPCAL", "CALIBRAR", "CALULT", _
-                 "CALPRO", "DATAEXT", "OBS01", "OBS02", "OBS03", "PRECO", "CODIGOINT")
-    aFOR = Array("C", "C", "C", "NI", "C", _
-                 "C", "C", "C", "C", "C", _
-                 "C", "C", "C", "C", "NI", _
-                 "C", "DC", "N", "C", "C", _
-                 "DC", "DC", "C", "NI", "DC", _
-                 "DC", "DC", "C", "C", "C", "N", "C")
-    aPAD = Array("", "", "", 0, "", _
-                 "", "", "", "", "", _
-                 "", "", "", "", 0, _
-                 "", "", 0, "", "", _
-                 "", "", "", 0, "", _
-                 "", "", "", "", "", 0, "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXT(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
+  CenterFormToScreen Me
+  cmdgrvdata.Visible = False
+  cARQ = PegPath("PATH", "MANA5INS")
+  cARQ = GeraConn(cARQ, "SDECDX")
+  cSQL = "select CODIGO, "
+  cSQL = cSQL & " CADTIP , NOMTIPO, APLICACAO, PF, CODTIPO,"
+  cSQL = cSQL & " TIPO , DESENHO, APLIC, NORMA, MODELO,"
+  cSQL = cSQL & " MARCA, CAPACI, DIVI, ERROADM, CODFOR,"
+  cSQL = cSQL & " COGFOR , COMPRA, Valor, ATIVO, SITUACAO,"
+  cSQL = cSQL & " DATAUSO , DATAFIM, TIPCAL, CALIBRAR, CALULT,"
+  cSQL = cSQL & " CALPRO , DATAEXT, OBS01, OBS02, OBS03, PRECO, CODIGOINT "
+  cSQL = cSQL & " FROM ME04 WHERE CODIGO='" & Trim(ePASS01) & "'"
+  TxtCodigo.tEXT = ePASS01
+  nCAMPOS = 32
+  aCAM = Array("CADTIP", "NOMTIPO", "APLICACAO", "PF", "CODTIPO", _
+               "TIPO", "DESENHO", "APLIC", "NORMA", "MODELO", _
+               "MARCA", "CAPACI", "DIVI", "ERROADM", "CODFOR", _
+               "COGFOR", "COMPRA", "VALOR", "ATIVO", "SITUACAO", _
+               "DATAUSO", "DATAFIM", "TIPCAL", "CALIBRAR", "CALULT", _
+               "CALPRO", "DATAEXT", "OBS01", "OBS02", "OBS03", "PRECO", "CODIGOINT")
+  aFOR = Array("C", "C", "C", "NI", "C", _
+               "C", "C", "C", "C", "C", _
+               "C", "C", "C", "C", "NI", _
+               "C", "DC", "N", "C", "C", _
+               "DC", "DC", "C", "NI", "DC", _
+               "DC", "DC", "C", "C", "C", "N", "C")
+  aPAD = Array("", "", "", 0, "", _
+               "", "", "", "", "", _
+               "", "", "", "", 0, _
+               "", "", 0, "", "", _
+               "", "", "", 0, "", _
+               "", "", "", "", "", 0, "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXT(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub txt_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub txt_KeyPress(Index As Integer, KeyAscii As Integer)
-    Select Case Index
-    Case 3, 14, 23
-        KeyAscii = ValiText(KeyAscii, "#NI")
-    Case 17, 30
-        KeyAscii = ValiText(KeyAscii, "#N")
-    Case 16, 20, 21, 24, 25, 26
-        KeyAscii = ValidaDados(KeyAscii, "DL")
-    End Select
+  Select Case Index
+  Case 3, 14, 23
+    KeyAscii = ValiText(KeyAscii, "#NI")
+  Case 17, 30
+    KeyAscii = ValiText(KeyAscii, "#N")
+  Case 16, 20, 21, 24, 25, 26
+    KeyAscii = ValidaDados(KeyAscii, "DL")
+  End Select
 End Sub
 
 

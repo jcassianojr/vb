@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Begin VB.Form frmPFC 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFC"
@@ -23,9 +23,6 @@ Begin VB.Form frmPFC
       Top             =   960
       _ExtentX        =   1191
       _ExtentY        =   1191
-      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
-      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
-      AmbientBb       =   $"frmPFC.frx":058A
    End
    Begin VB.TextBox TxtCodComp 
       BackColor       =   &H00C0FFFF&
@@ -206,7 +203,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   1
          Left            =   -71880
-         Picture         =   "frmPFC.frx":062A
+         Picture         =   "frmPFC.frx":058A
          Style           =   1  'Graphical
          TabIndex        =   75
          TabStop         =   0   'False
@@ -238,7 +235,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   0
          Left            =   -71880
-         Picture         =   "frmPFC.frx":0BB4
+         Picture         =   "frmPFC.frx":0B14
          Style           =   1  'Graphical
          TabIndex        =   72
          TabStop         =   0   'False
@@ -270,7 +267,7 @@ Begin VB.Form frmPFC
          Height          =   375
          Index           =   1
          Left            =   -73200
-         Picture         =   "frmPFC.frx":113E
+         Picture         =   "frmPFC.frx":109E
          Style           =   1  'Graphical
          TabIndex        =   69
          TabStop         =   0   'False
@@ -330,7 +327,7 @@ Begin VB.Form frmPFC
          Height          =   375
          Index           =   0
          Left            =   -73200
-         Picture         =   "frmPFC.frx":16C8
+         Picture         =   "frmPFC.frx":1628
          Style           =   1  'Graphical
          TabIndex        =   63
          TabStop         =   0   'False
@@ -397,7 +394,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   5
          Left            =   -71880
-         Picture         =   "frmPFC.frx":1C52
+         Picture         =   "frmPFC.frx":1BB2
          Style           =   1  'Graphical
          TabIndex        =   55
          TabStop         =   0   'False
@@ -408,7 +405,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   4
          Left            =   -71880
-         Picture         =   "frmPFC.frx":21DC
+         Picture         =   "frmPFC.frx":213C
          Style           =   1  'Graphical
          TabIndex        =   54
          TabStop         =   0   'False
@@ -438,7 +435,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   3
          Left            =   -72960
-         Picture         =   "frmPFC.frx":2766
+         Picture         =   "frmPFC.frx":26C6
          Style           =   1  'Graphical
          TabIndex        =   52
          TabStop         =   0   'False
@@ -449,7 +446,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   2
          Left            =   -72960
-         Picture         =   "frmPFC.frx":2CF0
+         Picture         =   "frmPFC.frx":2C50
          Style           =   1  'Graphical
          TabIndex        =   51
          TabStop         =   0   'False
@@ -460,7 +457,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   1
          Left            =   -74040
-         Picture         =   "frmPFC.frx":327A
+         Picture         =   "frmPFC.frx":31DA
          Style           =   1  'Graphical
          TabIndex        =   50
          TabStop         =   0   'False
@@ -471,7 +468,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   0
          Left            =   -74040
-         Picture         =   "frmPFC.frx":3804
+         Picture         =   "frmPFC.frx":3764
          Style           =   1  'Graphical
          TabIndex        =   49
          TabStop         =   0   'False
@@ -525,7 +522,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   6
          Left            =   1800
-         Picture         =   "frmPFC.frx":3D8E
+         Picture         =   "frmPFC.frx":3CEE
          Style           =   1  'Graphical
          TabIndex        =   43
          TabStop         =   0   'False
@@ -553,7 +550,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   7
          Left            =   1800
-         Picture         =   "frmPFC.frx":4318
+         Picture         =   "frmPFC.frx":4278
          Style           =   1  'Graphical
          TabIndex        =   39
          TabStop         =   0   'False
@@ -572,7 +569,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   5
          Left            =   6120
-         Picture         =   "frmPFC.frx":48A2
+         Picture         =   "frmPFC.frx":4802
          Style           =   1  'Graphical
          TabIndex        =   36
          TabStop         =   0   'False
@@ -590,7 +587,7 @@ Begin VB.Form frmPFC
       Begin VB.CommandButton cmdescpfd 
          Height          =   315
          Left            =   3120
-         Picture         =   "frmPFC.frx":4E2C
+         Picture         =   "frmPFC.frx":4D8C
          Style           =   1  'Graphical
          TabIndex        =   33
          TabStop         =   0   'False
@@ -601,7 +598,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   4
          Left            =   1800
-         Picture         =   "frmPFC.frx":53B6
+         Picture         =   "frmPFC.frx":5316
          Style           =   1  'Graphical
          TabIndex        =   31
          TabStop         =   0   'False
@@ -612,7 +609,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   3
          Left            =   960
-         Picture         =   "frmPFC.frx":5940
+         Picture         =   "frmPFC.frx":58A0
          Style           =   1  'Graphical
          TabIndex        =   29
          TabStop         =   0   'False
@@ -656,7 +653,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   8
          Left            =   1320
-         Picture         =   "frmPFC.frx":5ECA
+         Picture         =   "frmPFC.frx":5E2A
          Style           =   1  'Graphical
          TabIndex        =   23
          TabStop         =   0   'False
@@ -667,7 +664,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   1
          Left            =   1320
-         Picture         =   "frmPFC.frx":6454
+         Picture         =   "frmPFC.frx":63B4
          Style           =   1  'Graphical
          TabIndex        =   20
          TabStop         =   0   'False
@@ -678,7 +675,7 @@ Begin VB.Form frmPFC
          Height          =   315
          Index           =   2
          Left            =   1320
-         Picture         =   "frmPFC.frx":69DE
+         Picture         =   "frmPFC.frx":693E
          Style           =   1  'Graphical
          TabIndex        =   18
          TabStop         =   0   'False
@@ -694,7 +691,7 @@ Begin VB.Form frmPFC
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":6F68
+         Picture         =   "frmPFC.frx":6EC8
          Caption         =   "Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -715,7 +712,7 @@ Begin VB.Form frmPFC
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":7502
+         Picture         =   "frmPFC.frx":7462
          Caption         =   "Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -735,7 +732,7 @@ Begin VB.Form frmPFC
          Width           =   1515
          _ExtentX        =   2672
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":7A9C
+         Picture         =   "frmPFC.frx":79FC
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -755,7 +752,7 @@ Begin VB.Form frmPFC
          Width           =   2415
          _ExtentX        =   4260
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":8036
+         Picture         =   "frmPFC.frx":7F96
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -775,7 +772,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":85D0
+         Picture         =   "frmPFC.frx":8530
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -795,7 +792,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":8B6A
+         Picture         =   "frmPFC.frx":8ACA
          Caption         =   "Incluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -815,7 +812,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":9004
+         Picture         =   "frmPFC.frx":8F64
          Caption         =   "Excluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -835,7 +832,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "frmPFC.frx":949E
+         Picture         =   "frmPFC.frx":93FE
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -855,7 +852,7 @@ Begin VB.Form frmPFC
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "frmPFC.frx":9938
+         Picture         =   "frmPFC.frx":9898
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -876,7 +873,7 @@ Begin VB.Form frmPFC
          Width           =   375
          _ExtentX        =   661
          _ExtentY        =   661
-         Picture         =   "frmPFC.frx":9DD2
+         Picture         =   "frmPFC.frx":9D32
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -1133,7 +1130,7 @@ Begin VB.Form frmPFC
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPFC.frx":A36C
+      Picture         =   "frmPFC.frx":A2CC
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1153,7 +1150,7 @@ Begin VB.Form frmPFC
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "frmPFC.frx":A906
+      Picture         =   "frmPFC.frx":A866
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1269,648 +1266,648 @@ Dim iLOOP As Integer
 Dim lTROCOU As Boolean
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    
-    If Not CHECKME04 Then
-        If MDG("Continuar Mesmo Assim") Then
-            If Not MDG("Gravar Mesmo com Erro no Instrumento") Then
-                Exit Sub
-            End If
-        End If
+  On Error Resume Next
+
+  If Not CHECKME04 Then
+    If MDG("Continuar Mesmo Assim") Then
+      If Not MDG("Gravar Mesmo com Erro no Instrumento") Then
+        Exit Sub
+      End If
     End If
-    
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 4
-            aVAL(iLOOP) = txtFields(iLOOP)
-        Next iLOOP
-        aVAL(23) = FixNumBol(Check1.Value)
-        aVAL(24) = FixNumBol(Check2.Value)
-        aVAL(25) = FixNumBol(Check3.Value)
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-        
-        If lTROCOU Then
-            ADOGrvBlob cARQ, cSQL, Picture1, "IMAGEM"
-        End If
-       
-        'Select Case nARQPCS
-        '     Case 0, 1
-        '         eRETU02 = "PF:" & nPF & " " & " SEQ:" & nSEQ & " SSQ:" & nSSQ & " ITEM:" & nORD
-        '     Case 2
-        '         eRETU02 = "PF:" & nPF & " Componente:" & Ccodcomp & " Item:" & nORD
-        ' End Select
-        ' eRETU02 = eRETU02 & " Desenho:" & frmPCX.TXTPF(2) & Chr(13) & Chr(10)
-        ' eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
-        ' MAILENV "PI000001", eRETU02
+  End If
+
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 4
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    aVAL(23) = FixNumBol(Check1.Value)
+    aVAL(24) = FixNumBol(Check2.Value)
+    aVAL(25) = FixNumBol(Check3.Value)
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+
+    If lTROCOU Then
+      ADOGrvBlob cARQ, cSQL, Picture1, "IMAGEM"
     End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+
+    'Select Case nARQPCS
+    '     Case 0, 1
+    '         eRETU02 = "PF:" & nPF & " " & " SEQ:" & nSEQ & " SSQ:" & nSSQ & " ITEM:" & nORD
+    '     Case 2
+    '         eRETU02 = "PF:" & nPF & " Componente:" & Ccodcomp & " Item:" & nORD
+    ' End Select
+    ' eRETU02 = eRETU02 & " Desenho:" & frmPCX.TXTPF(2) & Chr(13) & Chr(10)
+    ' eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
+    ' MAILENV "PI000001", eRETU02
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub CmdConfImp_Click()
-    FrmPrintSetup.Show vbModal, Me
+  FrmPrintSetup.Show vbModal, Me
 End Sub
 
 Private Sub cmdescpfd_Click()
 
-    If Me.txtFields(12) = "" Then
+  If Me.TXTFIELDS(12) = "" Then
 
-        Alert "Setor em Branco"
-        Exit Sub
+    Alert "Setor em Branco"
+    Exit Sub
 
-    End If
+  End If
 
-    Zsetor = Me.txtFields(12)
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
-    escPFD.Show vbModal, Me
+  Zsetor = Me.TXTFIELDS(12)
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  escPFD.Show vbModal, Me
 
-    If lRETU Then
+  If lRETU Then
 
-        Me.txtFields(6) = eRETU01
-        Me.txtFields(7) = eRETU02
+    Me.TXTFIELDS(6) = eRETU01
+    Me.TXTFIELDS(7) = eRETU02
 
-    End If
+  End If
 
 End Sub
 
 Private Sub cmdFOTO_Click(Index As Integer)
-    Dim cSQL As String
-    Dim cCODIGO As String
+  Dim cSQL As String
+  Dim cCODIGO As String
 
-   
-    If Index = 0 Then
-        cCODIGO = FixStr(txtFields(16))
-    Else
-        cCODIGO = FixStr(txtFields(17))
-    End If
-    If Len(cCODIGO) = 0 Then
-        Alert "Codigo nao preenchido"
-        Exit Sub
-    End If
-    iImage = 5
-    cARQRTF = PegPath("PATH", "IMGME04")
-    cSQL = "select * from IMAGENS WHERE CODIGO='" & cCODIGO & "'"
-    IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(cCODIGO), True, False
-    zgrp = cCODIGO                               ''zGRP Interno frm imagens
-    Load frmIMAGENS
-    frmIMAGENS.txtFields(0).Enabled = False
-    frmIMAGENS.Escolher(0).Visible = False
-    frmIMAGENS.Show vbModal, Me
+
+  If Index = 0 Then
+    cCODIGO = FixStr(TXTFIELDS(16))
+  Else
+    cCODIGO = FixStr(TXTFIELDS(17))
+  End If
+  If Len(cCODIGO) = 0 Then
+    Alert "Codigo nao preenchido"
+    Exit Sub
+  End If
+  iImage = 5
+  cARQRTF = PegPath("PATH", "IMGME04")
+  cSQL = "select * from IMAGENS WHERE CODIGO='" & cCODIGO & "'"
+  IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(cCODIGO), True, False
+  zgrp = cCODIGO                               ''zGRP Interno frm imagens
+  Load frmIMAGENS
+  frmIMAGENS.TXTFIELDS(0).Enabled = False
+  frmIMAGENS.Escolher(0).Visible = False
+  frmIMAGENS.Show vbModal, Me
 End Sub
 
 Private Sub CmdImprimir_Click()
-     If Picture1.Height = 0 Then
-        Alert ("Sem Imagem")
-    Else
-        PrintPreview1.ShowPreview
-    End If
+  If Picture1.Height = 0 Then
+    Alert ("Sem Imagem")
+  Else
+    PrintPreview1.ShowPreview
+  End If
 End Sub
 
 Private Sub CmdPaste_Click()
-    If Picture1.Height = 0 Then
-        Alert ("Sem Imagem")
-    Else
-        Clipboard.Clear
-        Clipboard.SetData Picture1.Image, (vbCFBitmap)
+  If Picture1.Height = 0 Then
+    Alert ("Sem Imagem")
+  Else
+    Clipboard.Clear
+    Clipboard.SetData Picture1.Image, (vbCFBitmap)
 
-        ' CopyEntirePicture Picture1
-    End If
+    ' CopyEntirePicture Picture1
+  End If
 
 End Sub
 
 Private Sub CmdPegRel_Click()
-    Dim cARQ As String
-    Dim aRETU As Variant
-    Dim sSQL As String
-    cARQ = PegPath("PATH", "PF")
-    sSQL = "select regular from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
-    aRETU = PegSQL(cARQ, sSQL, 1, Array("REGULAR"), Array(""), Array(""))
-    txtFields(15) = aRETU(0)
+  Dim cARQ As String
+  Dim aRETU As Variant
+  Dim sSQL As String
+  cARQ = PegPath("PATH", "PF")
+  sSQL = "select regular from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+  aRETU = PegSQL(cARQ, sSQL, 1, Array("REGULAR"), Array(""), Array(""))
+  TXTFIELDS(15) = aRETU(0)
 End Sub
 
 Private Sub CmdSalvaImagem_Click()
-    salvarpict Me, Picture1, "imagem"
+  salvarpict Me, Picture1, "imagem"
 End Sub
 
 Private Sub Command1_Click(Index As Integer)
 
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
-    If Index = 0 Or Index = 2 Or Index = 4 Then
-        escFLX.Show vbModal, Me
-    Else
-        ePASS01 = "isoqsymbol"
-        ePASS02 = True
-        frmCharacters.Show vbModal, Me
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  If Index = 0 Or Index = 2 Or Index = 4 Then
+    escFLX.Show vbModal, Me
+  Else
+    ePASS01 = "isoqsymbol"
+    ePASS02 = True
+    frmCharacters.Show vbModal, Me
+  End If
+  If lRETU Then
+    If Index = 0 Or Index = 1 Then
+      Me.TXTFIELDS(3) = eRETU01
     End If
-    If lRETU Then
-        If Index = 0 Or Index = 1 Then
-            Me.txtFields(3) = eRETU01
-        End If
-        If Index = 2 Or Index = 3 Then
-            Me.txtFields(21) = eRETU01
-        End If
-        If Index = 4 Or Index = 5 Then
-            Me.txtFields(22) = eRETU01
-        End If
-        
+    If Index = 2 Or Index = 3 Then
+      Me.TXTFIELDS(21) = eRETU01
     End If
+    If Index = 4 Or Index = 5 Then
+      Me.TXTFIELDS(22) = eRETU01
+    End If
+
+  End If
 
 End Sub
 
 Private Sub Command2_Click(Index As Integer)
-    lRETU = False
+  lRETU = False
+  If Index = 0 Then
+    eRETU01 = TXTFIELDS(8)
+  Else
+    eRETU01 = TXTFIELDS(19)
+  End If
+  eRETU02 = ""
+  eRETU03 = ""
+  ePASS01 = ""
+  escME04.Show vbModal, Me
+
+  If lRETU Then
     If Index = 0 Then
-        eRETU01 = txtFields(8)
+      TXTFIELDS(16) = eRETU01
+      TXTFIELDS(8) = eRETU02
+      TXTFIELDS(9) = eRETU03
     Else
-        eRETU01 = txtFields(19)
+      TXTFIELDS(17) = eRETU01
+      TXTFIELDS(19) = eRETU02
+      TXTFIELDS(20) = eRETU03
     End If
-    eRETU02 = ""
-    eRETU03 = ""
-    ePASS01 = ""
-    escME04.Show vbModal, Me
-    
-    If lRETU Then
-        If Index = 0 Then
-            txtFields(16) = eRETU01
-            txtFields(8) = eRETU02
-            txtFields(9) = eRETU03
-        Else
-            txtFields(17) = eRETU01
-            txtFields(19) = eRETU02
-            txtFields(20) = eRETU03
-        End If
-    End If
-    
-    CHECKME04
-  
+  End If
+
+  CHECKME04
+
 End Sub
 
 Private Sub Command3_Click(Index As Integer)
-    Dim cARQTMP As String
-    Dim cSQLTMP As String
-    ePASS01 = "MICROSIGAODBC"
-    ePASS02 = "SELECT qm2_instr as codigo,qm2_descr as nome from qm2010"
-    ePASS03 = Array("qm2_instr", "qm2_descr")
-    EscCodNomSim.Show vbModal, Me
-    If lRETU Then
-        If Index = 0 Then
-            txtFields(16) = eRETU01
-            txtFields(9) = eRETU02
-        Else
-            txtFields(17) = eRETU01
-            txtFields(20) = eRETU02
-        End If
-
-        cARQTMP = PegPath("PATH", "MICROSIGAODBC")
-        cSQLTMP = "SELECT qm2_tipo from qm2010 where qm2_instr='" & eRETU01 & "'"
-   
-        eRETU01 = PegSQL(cARQTMP, cSQLTMP, 1, Array("qm2_tipo"), Array("C"), Array(""))
-        If lRETU Then
-            If Index = 0 Then
-                txtFields(8) = Mid(eRETU01(0), 1, 3)
-            Else
-                txtFields(19) = Mid(eRETU01(0), 1, 3)
-            End If
-        End If
+  Dim cARQTMP As String
+  Dim cSQLTMP As String
+  ePASS01 = "MICROSIGAODBC"
+  ePASS02 = "SELECT qm2_instr as codigo,qm2_descr as nome from qm2010"
+  ePASS03 = Array("qm2_instr", "qm2_descr")
+  EscCodNomSim.Show vbModal, Me
+  If lRETU Then
+    If Index = 0 Then
+      TXTFIELDS(16) = eRETU01
+      TXTFIELDS(9) = eRETU02
+    Else
+      TXTFIELDS(17) = eRETU01
+      TXTFIELDS(20) = eRETU02
     End If
+
+    cARQTMP = PegPath("PATH", "MICROSIGAODBC")
+    cSQLTMP = "SELECT qm2_tipo from qm2010 where qm2_instr='" & eRETU01 & "'"
+
+    eRETU01 = PegSQL(cARQTMP, cSQLTMP, 1, Array("qm2_tipo"), Array("C"), Array(""))
+    If lRETU Then
+      If Index = 0 Then
+        TXTFIELDS(8) = Mid(eRETU01(0), 1, 3)
+      Else
+        TXTFIELDS(19) = Mid(eRETU01(0), 1, 3)
+      End If
+    End If
+  End If
 
 
 End Sub
 
 Private Sub Command4_Click(Index As Integer)
-    ePASS01 = "MICROSIGAODBC"
-    ePASS02 = "SELECT qm1_tipo as codigo,qm1_descr as nome from qm1010"
-    ePASS03 = Array("qm1_tipo", "qm1_descr")
-    EscCodNomSim.Show vbModal, Me
+  ePASS01 = "MICROSIGAODBC"
+  ePASS02 = "SELECT qm1_tipo as codigo,qm1_descr as nome from qm1010"
+  ePASS03 = Array("qm1_tipo", "qm1_descr")
+  EscCodNomSim.Show vbModal, Me
+  If lRETU Then
     If lRETU Then
-        If lRETU Then
-            If Index = 0 Then
-                txtFields(8) = eRETU01
-                txtFields(9) = eRETU02
-            Else
-                txtFields(19) = eRETU01
-                txtFields(20) = eRETU02
-            End If
-        End If
+      If Index = 0 Then
+        TXTFIELDS(8) = eRETU01
+        TXTFIELDS(9) = eRETU02
+      Else
+        TXTFIELDS(19) = eRETU01
+        TXTFIELDS(20) = eRETU02
+      End If
     End If
+  End If
 End Sub
 
 Private Sub DelImg_Click()
-    Set Picture1.Picture = Nothing
-    Set Picture2.Picture = Nothing
-    lTROCOU = True
+  Set Picture1.Picture = Nothing
+  Set Picture2.Picture = Nothing
+  lTROCOU = True
 
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub ESCMS01A_Click(Index As Integer)
-    iMU01 = 12
-    escmp.Show vbModal
-    If lRETU Then
-        Select Case Index
-        Case 0
-            txtFields(16) = eRETU01
-        Case 1
-            txtFields(17) = eRETU01
-        End Select
-    End If
+  iMU01 = 12
+  escmp.Show vbModal
+  If lRETU Then
+    Select Case Index
+    Case 0
+      TXTFIELDS(16) = eRETU01
+    Case 1
+      TXTFIELDS(17) = eRETU01
+    End Select
+  End If
 
 End Sub
 
 Private Sub EscTipIns_Click(Index As Integer)
-    iMD02 = 1
-    escMD02.Show vbModal, Me
-    If lRETU Then
-        If Index = 0 Then
-            txtFields(8) = eRETU01
-            txtFields(9) = eRETU02
-        Else
-            txtFields(19) = eRETU01
-            txtFields(20) = eRETU02
-        End If
+  iMD02 = 1
+  escMD02.Show vbModal, Me
+  If lRETU Then
+    If Index = 0 Then
+      TXTFIELDS(8) = eRETU01
+      TXTFIELDS(9) = eRETU02
+    Else
+      TXTFIELDS(19) = eRETU01
+      TXTFIELDS(20) = eRETU02
     End If
+  End If
 
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
 
-    '  EscTipIns(0).Enabled = False
-    '  EscTipIns(1).Enabled = False
+'  EscTipIns(0).Enabled = False
+'  EscTipIns(1).Enabled = False
 
-    CenterFormToScreen Me
-    txtItem = nORD
-   
-    If nPF > 0 Then
-        txtPF.Text = nPF
-    Else
-        txtPF.Visible = False
-        Label1.Visible = False
+  CenterFormToScreen Me
+  txtItem = nORD
+
+  If nPF > 0 Then
+    TXTPF.tEXT = nPF
+  Else
+    TXTPF.Visible = False
+    Label1.Visible = False
+  End If
+  If nSEQ > 0 Then
+    TXTSEQ.tEXT = nSEQ
+  Else
+    TXTSEQ.Visible = False
+    Label1.Visible = False
+  End If
+  If nSSQ > 0 Then
+    TXTSSQ.tEXT = nSSQ
+  Else
+    TXTSSQ.Visible = False
+    Label2.Visible = False
+  End If
+  If nARQPCS = 2 Then
+    TxtCodComp.tEXT = Ccodcomp
+  Else
+    TxtCodComp.Visible = False
+    Label3.Visible = False
+  End If
+
+
+
+
+  aCAM = Array("COP", "DEscr", "CARAC", "SIGI", "ESPE", "TOL", "cqtde", "freq", _
+               "TIPINS", "InStr", "CAPA", "REACAO", "Setor", "CARTA", "CITEM", "PROCESSO", _
+               "CODME04", "CODME04B", "FILIAL", "TIPINSB", "INSTRB", "SIG2", "SIG3", "CERTFOR", "SAIPROC", "SAIRI")
+
+  aPAD = Array("", "", "", "", "", "", "", "", _
+               "", "", "", "", "", "", "", "", _
+               "", "", "", "", "", "", "", False, False, False)
+
+  aFOR = Array("C", "C", "C", "C", "C", "C", "C", "C", _
+               "C", "C", "C", "C", "C", "C", "C", "C", _
+               "C", "C", "C", "C", "C", "C", "C", "BN", "BN", "BN")
+
+  cARQ = Sdb
+
+  cSQL = "select COP,DEscr,CARAC,SIGI,ESPE,TOL,cqtde,freq, "
+  cSQL = cSQL & "TIPINS,InStr,CAPA,REACAO,Setor,CARTA,CITEM,PROCESSO,"
+  cSQL = cSQL & "CODME04,CODME04B,FILIAL,TIPINSB,INSTRB,SIG2,SIG3,CERTFOR,SAIPROC,SAIRI from "
+
+  Select Case nARQPCS
+  Case 0
+    cSQL = "PFC WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
+  Case 1
+    cSQL = "PFCO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
+  Case 2
+    cSQL = "PFCMS03 WHERE PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' AND ITEM=" & nORD
+  End Select
+
+
+  nCAMPOS = 26
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 4
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  Check1.Value = aVAL(23)
+  Check2.Value = aVAL(24)
+  Check3.Value = aVAL(25)
+
+  TXTFIELDS(3).Font = "isoqsymbol"
+  TXTFIELDS(21).Font = "isoqsymbol"
+  TXTFIELDS(22).Font = "isoqsymbol"
+
+  If ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
+    StretchSourcePictureFromPicture Picture1, Picture2
+    If FixNum(eRETU01) > 500000 Then
+      Alert ("Imagem Muito Grande,Ajuste o tamanho")
+      salvarpict Me, Picture1, "PFC_" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3) & "_item_" & StrZero(nORD, 3)
+      Set Picture1.Picture = Nothing
+      Set Picture2.Picture = Nothing
+      lTROCOU = True
     End If
-    If nSEQ > 0 Then
-        Txtseq.Text = nSEQ
-    Else
-        Txtseq.Visible = False
-        Label1.Visible = False
-    End If
-    If nSSQ > 0 Then
-        Txtssq.Text = nSSQ
-    Else
-        Txtssq.Visible = False
-        Label2.Visible = False
-    End If
-    If nARQPCS = 2 Then
-        TxtCodComp.Text = Ccodcomp
-    Else
-        TxtCodComp.Visible = False
-        Label3.Visible = False
-    End If
-   
-   
-   
- 
-    aCAM = Array("COP", "DEscr", "CARAC", "SIGI", "ESPE", "TOL", "cqtde", "freq", _
-                 "TIPINS", "InStr", "CAPA", "REACAO", "Setor", "CARTA", "CITEM", "PROCESSO", _
-                 "CODME04", "CODME04B", "FILIAL", "TIPINSB", "INSTRB", "SIG2", "SIG3", "CERTFOR", "SAIPROC", "SAIRI")
-      
-    aPAD = Array("", "", "", "", "", "", "", "", _
-                 "", "", "", "", "", "", "", "", _
-                 "", "", "", "", "", "", "", False, False, False)
-                    
-    aFOR = Array("C", "C", "C", "C", "C", "C", "C", "C", _
-                 "C", "C", "C", "C", "C", "C", "C", "C", _
-                 "C", "C", "C", "C", "C", "C", "C", "BN", "BN", "BN")
 
-    cARQ = Sdb
-
-    cSQL = "select COP,DEscr,CARAC,SIGI,ESPE,TOL,cqtde,freq, "
-    cSQL = cSQL & "TIPINS,InStr,CAPA,REACAO,Setor,CARTA,CITEM,PROCESSO,"
-    cSQL = cSQL & "CODME04,CODME04B,FILIAL,TIPINSB,INSTRB,SIG2,SIG3,CERTFOR,SAIPROC,SAIRI from "
-    
-    Select Case nARQPCS
-    Case 0
-        cSQL = "PFC WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
-    Case 1
-        cSQL = "PFCO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
-    Case 2
-        cSQL = "PFCMS03 WHERE PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' AND ITEM=" & nORD
-    End Select
-
-    
-    nCAMPOS = 26
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 4
-        txtFields(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    Check1.Value = aVAL(23)
-    Check2.Value = aVAL(24)
-    Check3.Value = aVAL(25)
-
-    txtFields(3).Font = "isoqsymbol"
-    txtFields(21).Font = "isoqsymbol"
-    txtFields(22).Font = "isoqsymbol"
-
-    If ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
-        StretchSourcePictureFromPicture Picture1, Picture2
-        If FixNum(eRETU01) > 500000 Then
-            Alert ("Imagem Muito Grande,Ajuste o tamanho")
-            salvarpict Me, Picture1, "PFC_" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3) & "_item_" & StrZero(nORD, 3)
-            Set Picture1.Picture = Nothing
-            Set Picture2.Picture = Nothing
-            lTROCOU = True
-        End If
-       
-    Else
-        Set Picture1.Picture = Nothing
-        Set Picture2.Picture = Nothing
-    End If
-   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
-    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
+  Else
+    Set Picture1.Picture = Nothing
+    Set Picture2.Picture = Nothing
+  End If
+  PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+  PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 
 End Sub
 Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
-    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
-    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+  PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+  UpdateReport = False  ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
 
 Private Sub Incluirimagem_Click()
-    Dim STMPFILE
-    STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
-    If lerarquivoimagem(STMPFILE, Picture1, Picture2) Then
-        lTROCOU = True
-    End If
+  Dim STMPFILE
+  STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
+  If lerarquivoimagem(STMPFILE, Picture1, Picture2) Then
+    lTROCOU = True
+  End If
 End Sub
 
 Private Sub pfcescid_Click(Index As Integer)
 
-    iMU01 = 100 + Index
-    escIED.Show vbModal, Me
+  iMU01 = 100 + Index
+  escIED.Show vbModal, Me
 
-    If lRETU Then
+  If lRETU Then
 
-        Select Case iMU01
+    Select Case iMU01
 
-        Case 101
-            txtFields(1) = eRETU02
+    Case 101
+      TXTFIELDS(1) = eRETU02
 
-        Case 102
-            txtFields(2) = eRETU02
+    Case 102
+      TXTFIELDS(2) = eRETU02
 
-        Case 103
-            txtFields(5) = eRETU02
+    Case 103
+      TXTFIELDS(5) = eRETU02
 
-        Case 104
-            txtFields(10) = eRETU02
+    Case 104
+      TXTFIELDS(10) = eRETU02
 
-        Case 105
-            txtFields(13) = eRETU02
+    Case 105
+      TXTFIELDS(13) = eRETU02
 
-        Case 106
-                
-            txtFields(11) = eRETU02
-                
-        Case 107
-                
-            txtFields(7) = eRETU02
-        Case 108
-                
-            txtFields(4) = eRETU02
-                
+    Case 106
 
-        End Select
+      TXTFIELDS(11) = eRETU02
 
-    End If
+    Case 107
+
+      TXTFIELDS(7) = eRETU02
+    Case 108
+
+      TXTFIELDS(4) = eRETU02
+
+
+    End Select
+
+  End If
 
 End Sub
 
 Private Sub Setor_Click(Index As Integer)
 
-    Select Case Index
+  Select Case Index
 
-    Case 0
-        Me.txtFields(12) = "P"
+  Case 0
+    Me.TXTFIELDS(12) = "P"
 
-    Case 1
-        Me.txtFields(12) = "O"
+  Case 1
+    Me.TXTFIELDS(12) = "O"
 
-    Case 2
-        Me.txtFields(12) = "L"
+  Case 2
+    Me.TXTFIELDS(12) = "L"
 
-    Case 3
-        Me.txtFields(12) = "R"
+  Case 3
+    Me.TXTFIELDS(12) = "R"
 
-    End Select
+  End Select
 
 End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
 
-    Select Case Index
+  Select Case Index
 
-    Case 1
-        
-        '' KeyAscii = ValiText(KeyAscii, "#NI")
+  Case 1
 
-           
+    '' KeyAscii = ValiText(KeyAscii, "#NI")
 
-    Case 5
-        'KeyAscii = ValiText(KeyAscii, "SN", , "#CU")
-        ''keypressed = ValiText(KeyAscii, "SN", True)
 
-    End Select
+
+  Case 5
+    'KeyAscii = ValiText(KeyAscii, "SN", , "#CU")
+    ''keypressed = ValiText(KeyAscii, "SN", True)
+
+  End Select
 
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub CmdEditMe04_Click(Index As Integer)
-    Dim cARQ As String
-    Dim cCODIGO As String
-    Dim cTIPO As String
-    Dim cCODTIP As String
-    Dim cTMP As String
-    Dim cAPLICACAO As String
-    Dim cCAPACIDADE As String
-    Dim cARQUSO As String
-    Dim cARQCDX As String
-    Dim cALIAS As String
-    Dim nHANDLE
-    Dim lTEM As Boolean
-    On Error GoTo errhandler
-    If Index = 0 Then
-        cCODIGO = FixStr(txtFields(16))
-        cCODTIP = FixStr(txtFields(8))
-        cTIPO = FixStr(txtFields(9))
-    Else
-        cCODIGO = FixStr(txtFields(17))
-        cCODTIP = FixStr(txtFields(19))
-        cTIPO = FixStr(txtFields(20))
-    End If
-    If Len(cCODIGO) = 0 Then
-        Exit Sub
-    End If
-
-    cAPLICACAO = FixStr(frmPCX.txtPF(12))
-    cCAPACIDADE = FixStr(txtFields(4)) & FixStr(txtFields(5))
-
-    cARQ = PegPath("PATH", "MANA5INS")
-    sx_SetEpoch (Year(Date) - 30)
-    sx_SetDateFormat BRITISH
-    sx_SetDeleted True
-    sx_SetSoftSeek True
-
-    cARQUSO = cARQ & "ME04.DBF"
-    cARQCDX = cARQ & "ME04.CDX"
-    cALIAS = "ME04"
-    If Not FileExist(cARQUSO, True) Then Exit Sub
-    If Not FileExist(cARQCDX, True) Then Exit Sub
-    nHANDLE = sx_Use(cARQUSO, cALIAS, READWRITE, SDEFOX)
-    sx_SetDeleted True
-    sx_SetSoftSeek True
-    sx_SetOrder (1)
-    sx_GoTop
-    lTEM = False
-    If sx_Seek(cCODIGO) Then
-        If Trim(sx_EvalString(sx_IndexKey())) <> Trim(cCODIGO) Then
-            sx_AppendBlank
-        Else
-            lTEM = True
-        End If
-        If sx_Rlock(sx_RecNo()) Then
-            If Not lTEM Then
-                sx_PutVariant "CODIGO", cCODIGO
-            End If
-            If Len(cTIPO) > 0 Then
-                cTMP = Trim(sx_GetString("TIPO"))
-                If Len(cTMP) = 0 Then
-                    sx_PutVariant "TIPO", cTIPO
-                End If
-            End If
-      
-            If Len(cCODTIP) > 0 Then
-                cTMP = Trim(sx_GetString("codTIPO"))
-                If Len(cTMP) = 0 Then
-                    sx_PutVariant "codtipo", cCODTIP
-                End If
-            End If
-      
-            If Len(cAPLICACAO) > 0 Then
-                cTMP = Trim(sx_GetString("APLICACAO"))
-                If Len(cTMP) = 0 Then
-                    sx_PutVariant "APLICACAO", cAPLICACAO
-                End If
-            End If
-      
-            If Len(cCAPACIDADE) > 0 Then
-                cTMP = Trim(sx_GetString("CAPACIDADE"))
-                If Len(cTMP) = 0 Then
-                    sx_PutVariant "CAPACIDADE", cCAPACIDADE
-                End If
-            End If
-
-       
-      
-      
-      
-            sx_Unlock sx_RecNo()
-        End If
-    End If
-    sx_Close
-
-    ePASS01 = cCODIGO
-    frmMe04.Show vbModal, Me
+  Dim cARQ As String
+  Dim cCODIGO As String
+  Dim cTIPO As String
+  Dim cCODTIP As String
+  Dim cTMP As String
+  Dim cAPLICACAO As String
+  Dim cCAPACIDADE As String
+  Dim cARQUSO As String
+  Dim cARQCDX As String
+  Dim cALIAS As String
+  Dim nHANDLE
+  Dim lTEM As Boolean
+  On Error GoTo errhandler
+  If Index = 0 Then
+    cCODIGO = FixStr(TXTFIELDS(16))
+    cCODTIP = FixStr(TXTFIELDS(8))
+    cTIPO = FixStr(TXTFIELDS(9))
+  Else
+    cCODIGO = FixStr(TXTFIELDS(17))
+    cCODTIP = FixStr(TXTFIELDS(19))
+    cTIPO = FixStr(TXTFIELDS(20))
+  End If
+  If Len(cCODIGO) = 0 Then
     Exit Sub
+  End If
+
+  cAPLICACAO = FixStr(frmPCX.TXTPF(12))
+  cCAPACIDADE = FixStr(TXTFIELDS(4)) & FixStr(TXTFIELDS(5))
+
+  cARQ = PegPath("PATH", "MANA5INS")
+  sx_SetEpoch (Year(Date) - 30)
+  sx_SetDateFormat BRITISH
+  sx_SetDeleted True
+  sx_SetSoftSeek True
+
+  cARQUSO = cARQ & "ME04.DBF"
+  cARQCDX = cARQ & "ME04.CDX"
+  cALIAS = "ME04"
+  If Not FileExist(cARQUSO, True) Then Exit Sub
+  If Not FileExist(cARQCDX, True) Then Exit Sub
+  nHANDLE = sx_Use(cARQUSO, cALIAS, READWRITE, SDEFOX)
+  sx_SetDeleted True
+  sx_SetSoftSeek True
+  sx_SetOrder (1)
+  sx_GoTop
+  lTEM = False
+  If sx_Seek(cCODIGO) Then
+    If Trim(sx_EvalString(sx_IndexKey())) <> Trim(cCODIGO) Then
+      sx_AppendBlank
+    Else
+      lTEM = True
+    End If
+    If sx_Rlock(sx_RecNo()) Then
+      If Not lTEM Then
+        sx_PutVariant "CODIGO", cCODIGO
+      End If
+      If Len(cTIPO) > 0 Then
+        cTMP = Trim(sx_GetString("TIPO"))
+        If Len(cTMP) = 0 Then
+          sx_PutVariant "TIPO", cTIPO
+        End If
+      End If
+
+      If Len(cCODTIP) > 0 Then
+        cTMP = Trim(sx_GetString("codTIPO"))
+        If Len(cTMP) = 0 Then
+          sx_PutVariant "codtipo", cCODTIP
+        End If
+      End If
+
+      If Len(cAPLICACAO) > 0 Then
+        cTMP = Trim(sx_GetString("APLICACAO"))
+        If Len(cTMP) = 0 Then
+          sx_PutVariant "APLICACAO", cAPLICACAO
+        End If
+      End If
+
+      If Len(cCAPACIDADE) > 0 Then
+        cTMP = Trim(sx_GetString("CAPACIDADE"))
+        If Len(cTMP) = 0 Then
+          sx_PutVariant "CAPACIDADE", cCAPACIDADE
+        End If
+      End If
+
+
+
+
+
+      sx_Unlock sx_RecNo()
+    End If
+  End If
+  sx_Close
+
+  ePASS01 = cCODIGO
+  frmMe04.Show vbModal, Me
+  Exit Sub
 errhandler:
-    Select Case Err.Number
-    Case Else
-        SayErro "frmPFC ME04 Editar" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL
-        Exit Sub
-    End Select
+  Select Case Err.Number
+  Case Else
+    SayErro "frmPFC ME04 Editar" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL
+    Exit Sub
+  End Select
 End Sub
 
 Function CHECKME04()
-    Dim cARQ As String
-    Dim cSQL As String
-    Dim X As Integer
-    Dim aRETU As Variant
-    Dim dDATA As Date
-    Dim cCODIGO As String
-    CHECKME04 = True
-    For X = 1 To 2
-        If X = 1 Then
-            cCODIGO = FixStr(txtFields(16))
-        Else
-            cCODIGO = FixStr(txtFields(17))
+  Dim cARQ As String
+  Dim cSQL As String
+  Dim x As Integer
+  Dim aRETU As Variant
+  Dim dDATA As Date
+  Dim cCODIGO As String
+  CHECKME04 = True
+  For x = 1 To 2
+    If x = 1 Then
+      cCODIGO = FixStr(TXTFIELDS(16))
+    Else
+      cCODIGO = FixStr(TXTFIELDS(17))
+    End If
+    cCODIGO = Trim(cCODIGO)
+    If Len(cCODIGO) > 0 Then
+      cARQ = PegPath("PATH", "MANA5INS")
+      cARQ = GeraConn(cARQ, "JETFOX")
+      cSQL = "select * from ME04 WHERE CODIGO='" & cCODIGO & "'"
+      aRETU = PegSQL(cARQ, cSQL, 5, Array("SITUACAO", "DATAUSO", "DATAFIM", "CALPRO", "DATAEXT"), _
+                     Array("C", "DC", "DC", "DC", "DC"), _
+                     Array("", "", "", "", ""))
+
+      If lRETU Then
+        If aRETU(0) <> "A" Then
+          Alert ("Instrumento nao esta Ativo")
+          CHECKME04 = False
         End If
-        cCODIGO = Trim(cCODIGO)
-        If Len(cCODIGO) > 0 Then
-            cARQ = PegPath("PATH", "MANA5INS")
-            cARQ = GeraConn(cARQ, "JETFOX")
-            cSQL = "select * from ME04 WHERE CODIGO='" & cCODIGO & "'"
-            aRETU = PegSQL(cARQ, cSQL, 5, Array("SITUACAO", "DATAUSO", "DATAFIM", "CALPRO", "DATAEXT"), _
-                           Array("C", "DC", "DC", "DC", "DC"), _
-                           Array("", "", "", "", ""))
-                                    
-            If lRETU Then
-                If aRETU(0) <> "A" Then
-                    Alert ("Instrumento nao esta Ativo")
-                    CHECKME04 = False
-                End If
-                If Not IsDate(aRETU(1)) Then
-                    Alert ("data de uso nao esta preenchida")
-                    CHECKME04 = False
-                End If
-                If IsDate(aRETU(2)) Then
-                    Alert ("data fim esta preenchida")
-                    CHECKME04 = False
-                End If
-                If IsDate(aRETU(3)) Then
-                    dDATA = aRETU(3)
-                End If
-                If IsDate(aRETU(4)) Then
-                    If aRETU(4) > dDATA Then
-                        dDATA = aRETU(4)
-                    End If
-                End If
-                If dDATA < Today() Then
-                    Alert ("Data Calibracao ou Extensao Vencida")
-                    CHECKME04 = False
-                End If
-            End If
+        If Not IsDate(aRETU(1)) Then
+          Alert ("data de uso nao esta preenchida")
+          CHECKME04 = False
         End If
-        If Not CHECKME04 And Len(cCODIGO) > 0 Then
-            If MDG("Editar Instrumento " & cCODIGO) Then
-                CmdEditMe04_Click (X - 1)
-            End If
+        If IsDate(aRETU(2)) Then
+          Alert ("data fim esta preenchida")
+          CHECKME04 = False
         End If
-    Next X
+        If IsDate(aRETU(3)) Then
+          dDATA = aRETU(3)
+        End If
+        If IsDate(aRETU(4)) Then
+          If aRETU(4) > dDATA Then
+            dDATA = aRETU(4)
+          End If
+        End If
+        If dDATA < Today() Then
+          Alert ("Data Calibracao ou Extensao Vencida")
+          CHECKME04 = False
+        End If
+      End If
+    End If
+    If Not CHECKME04 And Len(cCODIGO) > 0 Then
+      If MDG("Editar Instrumento " & cCODIGO) Then
+        CmdEditMe04_Click (x - 1)
+      End If
+    End If
+  Next x
 End Function
 Private Sub VerImg_Click()
-    frmPicViewer.Show vbModal, Me
-    If lRETU Then
-        If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
-            lTROCOU = True
-        End If
+  frmPicViewer.Show vbModal, Me
+  If lRETU Then
+    If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
+      lTROCOU = True
     End If
+  End If
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-    On Error Resume Next
-    Printer.Print
-    Printer.PaintPicture Picture1, 0, 0
+  On Error Resume Next
+  Printer.Print
+  Printer.PaintPicture Picture1, 0, 0
 End Sub
 

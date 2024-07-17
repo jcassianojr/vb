@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form imgsin 
    Caption         =   "Sincronizar Arquivos de Imagens"
    ClientHeight    =   7395
@@ -59,7 +59,7 @@ Begin VB.Form imgsin
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin vbccr18.SpinBox TxtEmpresa 
+   Begin VBCCR18.SpinBox TxtEmpresa 
       Height          =   375
       Left            =   5040
       TabIndex        =   17
@@ -244,381 +244,381 @@ Option Explicit
 
 Private Sub cmdCancel_Click()
 
-    Unload Me
+  Unload Me
 
 End Sub
 
 Private Sub CmdTransfer_Click()
 
-    If chkfer.Value = Checked Then
+  If chkfer.Value = Checked Then
 
-        transfer "IMGFER", "MANA5FER", "SELECT FERRAM,NUMERO FROM FERRAM ", "FERRAM", False, "NUMERO"
+    transfer "IMGFER", "MANA5FER", "SELECT FERRAM,NUMERO FROM FERRAM ", "FERRAM", False, "NUMERO"
 
-    End If
+  End If
 
-    If Chkmt01.Value = Checked Then
+  If Chkmt01.Value = Checked Then
 
-        transfer "IMGMT01", "MANA5EMP", "SELECT CODIGO FROM MT01 ", "CODIGO", False
+    transfer "IMGMT01", "MANA5EMP", "SELECT CODIGO FROM MT01 ", "CODIGO", False
 
-    End If
+  End If
 
-    If ChkMQ01.Value = Checked Then
+  If ChkMQ01.Value = Checked Then
 
-        transfer "IMGMQ01", "MANA5EMP", "SELECT CODIGO FROM MQ01 ", "CODIGO", False
+    transfer "IMGMQ01", "MANA5EMP", "SELECT CODIGO FROM MQ01 ", "CODIGO", False
 
-    End If
+  End If
 
-    If ChKMR01.Value = Checked Then
+  If ChKMR01.Value = Checked Then
 
-        transfer "IMGMR01", "MANA5EMP", "SELECT CODIGO FROM MR01 ", "CODIGO", False
+    transfer "IMGMR01", "MANA5EMP", "SELECT CODIGO FROM MR01 ", "CODIGO", False
 
-    End If
+  End If
 
-    If Chkmu01.Value = Checked Then
+  If Chkmu01.Value = Checked Then
 
-        transfer "IMGMU01", "MANA5EMP", "SELECT CODIGO FROM MU01 ", "CODIGO", False
+    transfer "IMGMU01", "MANA5EMP", "SELECT CODIGO FROM MU01 ", "CODIGO", False
 
-    End If
+  End If
 
-    If Chkmw05.Value = Checked Then
+  If Chkmw05.Value = Checked Then
 
-        transfer "IMGMW05", "MANA5EMP", "SELECT CODIGO FROM MW05 ", "CODIGO", False
+    transfer "IMGMW05", "MANA5EMP", "SELECT CODIGO FROM MW05 ", "CODIGO", False
 
-    End If
+  End If
 
-    If Chkmw07.Value = Checked Then
+  If Chkmw07.Value = Checked Then
 
-        transfer "IMGMW07", "MANA5EMP", "SELECT CODIGO FROM MW07 ", "CODIGO", False
+    transfer "IMGMW07", "MANA5EMP", "SELECT CODIGO FROM MW07 ", "CODIGO", False
 
-    End If
-
-
-    If ChKMS01.Value = Checked Then
-
-        transfer "IMGMS01", "MANA5EMP", "SELECT CODIGO FROM MS01 ", "CODIGO", False
-        transfer "IMGMS01", "MANA5EMP", "SELECT CODIGO FROM MS01X ", "CODIGO", False
-        fazcodiMG
-    End If
-
-    If ChKPF.Value = Checked Then
-
-        transfer "IMGMS01", "APP", "SELECT CODIGO,CODIGOINT FROM PF ", "CODIGO", False, "CODIGOINT"
-
-    End If
-
-    If Chkme01.Value = Checked Then
-
-        transfer "IMGME01", "MANA5EMP", "SELECT NUMERO FROM ME01 ", "NUMERO", False
-
-    End If
-
-    If Chkma01.Value = Checked Then
-
-        transfer "IMGMA01", "MANA5EMP", "SELECT NUMERO FROM MA01 ", "NUMERO", True
-
-    End If
-
-    If Chkmp04.Value = Checked Then
-
-        transfer "IMGMP04" + StrZero(TxtEmpresa.Value, 1), "MANA5EMZ", "SELECT TECNICO FROM MP04 ", "TECNICO", True
-
-    End If
-
-    If ChKME04.Value = Checked Then
-
-        transfer "IMGME04", "MANA5INS", "SELECT CODIGO FROM ME04 ", "CODIGO", False
-
-    End If
-    
-    If ChKME06.Value = Checked Then
-
-        transfer "IMGME06", "MANA5INS", "SELECT CODIGO FROM ME06 ", "CODIGO", False
-
-    End If
+  End If
 
 
-    Unload Me
+  If ChKMS01.Value = Checked Then
+
+    transfer "IMGMS01", "MANA5EMP", "SELECT CODIGO FROM MS01 ", "CODIGO", False
+    transfer "IMGMS01", "MANA5EMP", "SELECT CODIGO FROM MS01X ", "CODIGO", False
+    fazcodiMG
+  End If
+
+  If ChKPF.Value = Checked Then
+
+    transfer "IMGMS01", "APP", "SELECT CODIGO,CODIGOINT FROM PF ", "CODIGO", False, "CODIGOINT"
+
+  End If
+
+  If Chkme01.Value = Checked Then
+
+    transfer "IMGME01", "MANA5EMP", "SELECT NUMERO FROM ME01 ", "NUMERO", False
+
+  End If
+
+  If Chkma01.Value = Checked Then
+
+    transfer "IMGMA01", "MANA5EMP", "SELECT NUMERO FROM MA01 ", "NUMERO", True
+
+  End If
+
+  If Chkmp04.Value = Checked Then
+
+    transfer "IMGMP04" + StrZero(TxtEmpresa.Value, 1), "MANA5EMZ", "SELECT TECNICO FROM MP04 ", "TECNICO", True
+
+  End If
+
+  If ChKME04.Value = Checked Then
+
+    transfer "IMGME04", "MANA5INS", "SELECT CODIGO FROM ME04 ", "CODIGO", False
+
+  End If
+
+  If ChKME06.Value = Checked Then
+
+    transfer "IMGME06", "MANA5INS", "SELECT CODIGO FROM ME06 ", "CODIGO", False
+
+  End If
+
+
+  Unload Me
 
 End Sub
 
 Private Sub transfer(cLOGOARQ As String, cARQCAM As String, cCONSQL As String, cVARNAME As String, lCONV As Boolean, Optional cNUM As String)
-    Dim DB As New ADODB.Connection
-    Dim RSTAB As New ADODB.Recordset
-    Dim cCODIGO, cCAMINHO As String
-    Dim nNUMERO As Variant
-    Dim lCVARNUM As Boolean
-    Dim cARQTMP As String
-    Dim aRETU As Variant
-    Dim DB2 As New ADODB.Connection
-    Dim RSTA2 As New ADODB.Recordset
+  Dim DB As New ADODB.Connection
+  Dim RSTAB As New ADODB.Recordset
+  Dim cCODIGO, cCAMINHO As String
+  Dim nNUMERO As Variant
+  Dim lCVARNUM As Boolean
+  Dim cARQTMP As String
+  Dim aRETU As Variant
+  Dim DB2 As New ADODB.Connection
+  Dim RSTA2 As New ADODB.Recordset
 
-    
-    cNUM = CStr(cNUM)
-    If Len(cNUM) > 0 Then lCVARNUM = True
-    
-    
 
-    cCAMINHO = PegPath("PATH", cLOGOARQ)
-    If Not FileExist(cCAMINHO, True) Then
-        Exit Sub
+  cNUM = CStr(cNUM)
+  If Len(cNUM) > 0 Then lCVARNUM = True
+
+
+
+  cCAMINHO = PegPath("PATH", cLOGOARQ)
+  If Not FileExist(cCAMINHO, True) Then
+    Exit Sub
+  End If
+
+
+  DB2.Open GeracArq(cCAMINHO, "A12MDB")
+
+
+  With RSTA2
+    .ActiveConnection = DB2
+    .Source = "IMAGENS"
+    .CursorLocation = adUseServer
+    .CursorType = adOpenDynamic              ' adOpenKeyset
+    .LockType = adLockOptimistic
+    .Open Options:=adCmdTableDirect
+    .Index = "PrimaryKey"
+  End With
+
+
+  cCAMINHO = PegPath("PATH", cARQCAM)
+
+  If cARQCAM = "APP" Then
+
+    DB.Open GeracArq(cCAMINHO & "PF.MDB")
+    RSTAB.Open cCONSQL, DB, adOpenForwardOnly, adLockReadOnly
+
+  Else
+    If cARQCAM = "MANA5EMZ" Then
+      cCAMINHO = Caminex(cCAMINHO, 0, 0, TxtEmpresa.Value)
     End If
-    
-    
-    DB2.Open GeracArq(cCAMINHO, "A12MDB")
-    
-    
-    With RSTA2
-        .ActiveConnection = DB2
-        .Source = "IMAGENS"
-        .CursorLocation = adUseServer
-        .CursorType = adOpenDynamic              ' adOpenKeyset
-        .LockType = adLockOptimistic
-        .Open Options:=adCmdTableDirect
-        .Index = "PrimaryKey"
-    End With
-    
+    cARQTMP = GeraConn(cCAMINHO, "JETFOX")
+    aRETU = TipoConn(cARQTMP)
+    cARQTMP = aRETU(1)
+    DB.Open cARQTMP
+    RSTAB.Open cCONSQL, DB, adOpenStatic, adLockOptimistic
 
-    cCAMINHO = PegPath("PATH", cARQCAM)
+  End If
 
-    If cARQCAM = "APP" Then
 
-        DB.Open GeracArq(cCAMINHO & "PF.MDB")
-        RSTAB.Open cCONSQL, DB, adOpenForwardOnly, adLockReadOnly
+  Do While Not RSTAB.EOF
+
+    If lCONV Then
+
+      nNUMERO = RSTAB(cVARNAME)
+      cCODIGO = Trim(Str(nNUMERO))
+      cCODIGO = String(8 - Len(cCODIGO), "0") & cCODIGO
 
     Else
-        If cARQCAM = "MANA5EMZ" Then
-            cCAMINHO = Caminex(cCAMINHO, 0, 0, TxtEmpresa.Value)
-        End If
-        cARQTMP = GeraConn(cCAMINHO, "JETFOX")
-        aRETU = TipoConn(cARQTMP)
-        cARQTMP = aRETU(1)
-        DB.Open cARQTMP
-        RSTAB.Open cCONSQL, DB, adOpenStatic, adLockOptimistic
 
+      cCODIGO = Trim(RSTAB(cVARNAME))
+      If lCVARNUM Then
+        nNUMERO = funNumeroPuro(RSTAB(cNUM))
+      Else
+        nNUMERO = 0
+      End If
+      If Not IsNumeric(nNUMERO) Then
+        nNUMERO = 0
+      End If
     End If
 
+    cCODIGO = FixStr(cCODIGO, "")
+    DizerBarra cCODIGO
+    If Len(cCODIGO) > 0 Then
 
-    Do While Not RSTAB.EOF
+      Label.Caption = cCODIGO
+      Label.Refresh
 
-        If lCONV Then
+      If RSTA2.RecordCount > 0 Then
+        RSTA2.MoveFirst
+        RSTA2.Seek cCODIGO, adSeekFirstEQ
+      End If
 
-            nNUMERO = RSTAB(cVARNAME)
-            cCODIGO = Trim(Str(nNUMERO))
-            cCODIGO = String(8 - Len(cCODIGO), "0") & cCODIGO
+      If RSTA2.EOF Then
 
-        Else
-
-            cCODIGO = Trim(RSTAB(cVARNAME))
-            If lCVARNUM Then
-                nNUMERO = funNumeroPuro(RSTAB(cNUM))
-            Else
-                nNUMERO = 0
-            End If
-            If Not IsNumeric(nNUMERO) Then
-                nNUMERO = 0
-            End If
+        RSTA2.AddNew
+        RSTA2("CODIGO") = cCODIGO
+        RSTA2("NUMERO") = nNUMERO
+        RSTA2.Update
+      Else
+        If (RSTA2("NUMERO") = 0 Or cLOGOARQ = "IMGFER") And nNUMERO > 0 Then
+          RSTA2("NUMERO") = nNUMERO
+          RSTA2.Update
         End If
-        
-        cCODIGO = FixStr(cCODIGO, "")
-        DizerBarra cCODIGO
-        If Len(cCODIGO) > 0 Then
+      End If
 
-            Label.Caption = cCODIGO
-            Label.Refresh
-            
-            If RSTA2.RecordCount > 0 Then
-                RSTA2.MoveFirst
-                RSTA2.Seek cCODIGO, adSeekFirstEQ
-            End If
 
-            If RSTA2.EOF Then
+    End If
+    RSTAB.MoveNext
+  Loop
+  RSTAB.Close
+  RSTA2.Close
 
-                RSTA2.AddNew
-                RSTA2("CODIGO") = cCODIGO
-                RSTA2("NUMERO") = nNUMERO
-                RSTA2.Update
-            Else
-                If (RSTA2("NUMERO") = 0 Or cLOGOARQ = "IMGFER") And nNUMERO > 0 Then
-                    RSTA2("NUMERO") = nNUMERO
-                    RSTA2.Update
-                End If
-            End If
-            
-            
-        End If
-        RSTAB.MoveNext
-    Loop
-    RSTAB.Close
-    RSTA2.Close
-    
-    
-    Set DB = Nothing
-    Set RSTAB = Nothing
-    Set DB2 = Nothing
-    Set RSTA2 = Nothing
+
+  Set DB = Nothing
+  Set RSTAB = Nothing
+  Set DB2 = Nothing
+  Set RSTA2 = Nothing
 
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
+  CenterFormToScreen Me
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 
 End Sub
 
 Private Sub fazcodiMG()
-    Dim oCON As New ADODB.Connection
-    Dim oRS As New ADODB.Recordset
-    Dim cARQ As String
-    Dim sSQL As String
-    Dim cCODIGO As String
-    'Dim nCODINT As String
-    Dim aRETU As Variant
-    Dim cARQPF As String
-    cARQPF = GeracArq(PegPath("PATH", "IMGMS01"))
-    cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    oCON.Open cARQPF
-    oRS.Open "SELECT CODIGO,NUMERO FROM IMAGENS WHERE NUMERO=0", oCON, adOpenDynamic, adLockOptimistic
-    While Not oRS.EOF
-        cCODIGO = FixStr(oRS("CODIGO"), "", "TRIM")
-        DizerBarra cCODIGO
-        sSQL = "SELECT NOME,CODIGOINT FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
-        aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGOINT"), Array("C", "C"), Array("", ""))
-        If lRETU Then
-            oRS("Numero") = Val(aRETU(1))
-        Else
-            sSQL = "SELECT NOME,CODIGOINT FROM MS01X WHERE CODIGO='" & cCODIGO & "'"
-            aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGOINT"), Array("C", "C"), Array("", ""))
-            If lRETU Then
-                oRS("Numero") = Val(aRETU(1))
-                '' Else
-                ''    oRS("Numero") = 0
-            End If
-        End If
-        oRS.Update
-        oRS.MoveNext
-    Wend
-    oRS.Close
-    oRS.Open "SELECT CODIGO,NUMERO FROM IMAGENS", oCON, adOpenDynamic, adLockOptimistic
-    While Not oRS.EOF
-        DizerBarra cCODIGO
-        If FixStr(oRS("NUMERO")) = FixStr(oRS("CODIGO")) Then
-            oRS("Numero") = 0
-            oRS.Update
-            '' oRS.DELETE
-        End If
-        oRS.MoveNext
-    Wend
+  Dim oCON As New ADODB.Connection
+  Dim oRS As New ADODB.Recordset
+  Dim cARQ As String
+  Dim sSQL As String
+  Dim cCODIGO As String
+  'Dim nCODINT As String
+  Dim aRETU As Variant
+  Dim cARQPF As String
+  cARQPF = GeracArq(PegPath("PATH", "IMGMS01"))
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
+  oCON.Open cARQPF
+  oRS.Open "SELECT CODIGO,NUMERO FROM IMAGENS WHERE NUMERO=0", oCON, adOpenDynamic, adLockOptimistic
+  While Not oRS.EOF
+    cCODIGO = FixStr(oRS("CODIGO"), "", "TRIM")
+    DizerBarra cCODIGO
+    sSQL = "SELECT NOME,CODIGOINT FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
+    aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGOINT"), Array("C", "C"), Array("", ""))
+    If lRETU Then
+      oRS("Numero") = Val(aRETU(1))
+    Else
+      sSQL = "SELECT NOME,CODIGOINT FROM MS01X WHERE CODIGO='" & cCODIGO & "'"
+      aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGOINT"), Array("C", "C"), Array("", ""))
+      If lRETU Then
+        oRS("Numero") = Val(aRETU(1))
+        '' Else
+        ''    oRS("Numero") = 0
+      End If
+    End If
+    oRS.Update
+    oRS.MoveNext
+  Wend
+  oRS.Close
+  oRS.Open "SELECT CODIGO,NUMERO FROM IMAGENS", oCON, adOpenDynamic, adLockOptimistic
+  While Not oRS.EOF
+    DizerBarra cCODIGO
+    If FixStr(oRS("NUMERO")) = FixStr(oRS("CODIGO")) Then
+      oRS("Numero") = 0
+      oRS.Update
+      '' oRS.DELETE
+    End If
+    oRS.MoveNext
+  Wend
 End Sub
 
 Private Sub XPButton1_Click()
-    limpafoto "select * from pfs       where fig01     is not null  and len(fig01)>500000", "fig01", "PFS"
-    limpafoto "select * from pfs       where fig02     is not null  and len(fig02)>500000", "fig02", "PFS"
-    limpafoto "select * from pfs       where figembal  is not null  and len(figembal)>500000", "figembal", "PFS"
-    limpafoto "select * from pfs       where figseq01  is not null  and len(figseq01)>500000", "figseq01", "PFS"
-    limpafoto "select * from pfs       where figseq02  is not null  and len(figseq02)>500000", "figseq02", "PFS"
-    limpafoto "select * from pfs       where imgcroqui is not null  and len(imgcroqui)>500000", "imgcroqui", "PFS"
-    limpafoto "select * from pfs       where imgalerta is not null  and len(imgalerta)>500000", "imgalerta", "PFS"
-    limpafoto "select * from pf        where figmu011  is not null  and len(figmu011)>500000", "figmu011", "PF"
-    limpafoto "select * from pf        where figmu012  is not null  and len(figmu012)>500000", "figmu012", "PF"
-    limpafoto "select * from pf        where figmu013  is not null  and len(figmu013)>500000", "figmu013", "PF"
-    limpafoto "select * from pfc       where imagem    is not null  and len(imagem)>500000", "imagem", "PFC"
-    limpafoto "select * from pfco      where imagem    is not null  and len(imagem)>500000", "imagem", "PFCO"
-    limpafoto "select * from pfms03    where figseq01  is not null  and len(figseq01)>500000", "figseq01", "PFMS03"
-    limpafoto "select * from pfms03    where figseq02  is not null  and len(figseq02)>500000", "figseq02", "PFMS03"
-    limpafoto "select * from pfi       where imagem    is not null  and len(imagem)>500000 ", "imagem", "PFI"
-    'limpafoto "", "imagem", "IMGMS01"
-    limpafoto "select * from imagens   where imagem    is not null  and len(imagem)>500000 ", "imagem", "IMGMS01"
-    Alert ("concluida")
+  limpafoto "select * from pfs       where fig01     is not null  and len(fig01)>500000", "fig01", "PFS"
+  limpafoto "select * from pfs       where fig02     is not null  and len(fig02)>500000", "fig02", "PFS"
+  limpafoto "select * from pfs       where figembal  is not null  and len(figembal)>500000", "figembal", "PFS"
+  limpafoto "select * from pfs       where figseq01  is not null  and len(figseq01)>500000", "figseq01", "PFS"
+  limpafoto "select * from pfs       where figseq02  is not null  and len(figseq02)>500000", "figseq02", "PFS"
+  limpafoto "select * from pfs       where imgcroqui is not null  and len(imgcroqui)>500000", "imgcroqui", "PFS"
+  limpafoto "select * from pfs       where imgalerta is not null  and len(imgalerta)>500000", "imgalerta", "PFS"
+  limpafoto "select * from pf        where figmu011  is not null  and len(figmu011)>500000", "figmu011", "PF"
+  limpafoto "select * from pf        where figmu012  is not null  and len(figmu012)>500000", "figmu012", "PF"
+  limpafoto "select * from pf        where figmu013  is not null  and len(figmu013)>500000", "figmu013", "PF"
+  limpafoto "select * from pfc       where imagem    is not null  and len(imagem)>500000", "imagem", "PFC"
+  limpafoto "select * from pfco      where imagem    is not null  and len(imagem)>500000", "imagem", "PFCO"
+  limpafoto "select * from pfms03    where figseq01  is not null  and len(figseq01)>500000", "figseq01", "PFMS03"
+  limpafoto "select * from pfms03    where figseq02  is not null  and len(figseq02)>500000", "figseq02", "PFMS03"
+  limpafoto "select * from pfi       where imagem    is not null  and len(imagem)>500000 ", "imagem", "PFI"
+  'limpafoto "", "imagem", "IMGMS01"
+  limpafoto "select * from imagens   where imagem    is not null  and len(imagem)>500000 ", "imagem", "IMGMS01"
+  Alert ("concluida")
 End Sub
 
 Private Function limpafoto(cSQL As String, cCAMPO As String, cTabela)
-    Dim oDB              As ADODB.Connection
-    Dim oRS              As ADODB.Recordset
-    Dim cARQPF, cARQ, sTEMPFILE, cDIZARQ   As String
-    Dim iFileNum, X, nFIM As Integer
-    Dim lFileLength As Long
-    Dim abBytes() As Byte
+  Dim oDB As ADODB.Connection
+  Dim oRS As ADODB.Recordset
+  Dim cARQPF, cARQ, sTEMPFILE, cDIZARQ As String
+  Dim iFileNum, x, nFIM As Integer
+  Dim lFileLength As Long
+  Dim abBytes() As Byte
 
-    'ajustas fotos grandes
-    nFIM = 3
-    If cTabela = "IMGMS01" Then
-        nFIM = 1
-    End If
-    If Len(cSQL) = 0 Then
-        cSQL = "select * from " & cTabela & " where " & cCAMPO & " is not null and len(" & cCAMPO & ")>500000 "
-    End If
+  'ajustas fotos grandes
+  nFIM = 3
+  If cTabela = "IMGMS01" Then
+    nFIM = 1
+  End If
+  If Len(cSQL) = 0 Then
+    cSQL = "select * from " & cTabela & " where " & cCAMPO & " is not null and len(" & cCAMPO & ")>500000 "
+  End If
 
-    'On Error Resume Next
-    For X = 1 To nFIM
-        Select Case X
-        Case 1
-            Select Case cTabela
-            Case "IMGMS01"
-                cARQPF = PegPath("PATH", "IMGMS01")
-                cDIZARQ = "IMGMS01"
-            Case Else
-                cARQPF = PegPath("PATH", "PF")
-                cDIZARQ = "PF"
-            End Select
-        Case 2
-            cARQPF = PegPath("PATH", "PFG")
-            cDIZARQ = "PFG"
-        Case 3
-            cARQPF = PegPath("PATH", "PFP")
-            cDIZARQ = "PFP"
-        End Select
-        Label.Caption = cDIZARQ & "_" & cCAMPO
+  'On Error Resume Next
+  For x = 1 To nFIM
+    Select Case x
+    Case 1
+      Select Case cTabela
+      Case "IMGMS01"
+        cARQPF = PegPath("PATH", "IMGMS01")
+        cDIZARQ = "IMGMS01"
+      Case Else
+        cARQPF = PegPath("PATH", "PF")
+        cDIZARQ = "PF"
+      End Select
+    Case 2
+      cARQPF = PegPath("PATH", "PFG")
+      cDIZARQ = "PFG"
+    Case 3
+      cARQPF = PegPath("PATH", "PFP")
+      cDIZARQ = "PFP"
+    End Select
+    Label.Caption = cDIZARQ & "_" & cCAMPO
+    Label.Refresh
+    cARQ = GeracArq(cARQPF)
+    Set oDB = New ADODB.Connection
+    oDB.CursorLocation = adUseClient
+    oDB.ConnectionTimeout = 120
+    oDB.Open cARQ
+    Set oRS = New ADODB.Recordset
+    oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic  'adOpenStatic
+    While Not oRS.EOF
+      sTEMPFILE = ""
+      Select Case cTabela
+      Case "IMGMS01"
+        sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PF_" & oRS("codigo") & "_" & cCAMPO & ".JPG"
+      Case "PF"
+        sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PF_" & StrZero(oRS("PF"), 6) & "_" & cCAMPO & ".JPG"
+      Case "PFS"
+        sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFS_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & cCAMPO & ".JPG"
+      Case "PFMS03"
+        sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) & "_" & cCAMPO & ".JPG"
+      Case "PFCO"
+        sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
+      Case "PFC"
+        sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
+      Case "PFI"
+        sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
+      End Select
+      Label.Caption = cDIZARQ & "_" & cCAMPO
+      Label.Refresh
+      If sTEMPFILE <> "" Then  'salva a imagem antes de zerar o campo
+        Label.Caption = sTEMPFILE
         Label.Refresh
-        cARQ = GeracArq(cARQPF)
-        Set oDB = New ADODB.Connection
-        oDB.CursorLocation = adUseClient
-        oDB.ConnectionTimeout = 120
-        oDB.Open cARQ
-        Set oRS = New ADODB.Recordset
-        oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic 'adOpenStatic
-        While Not oRS.EOF
-            sTEMPFILE = ""
-            Select Case cTabela
-                Case "IMGMS01"
-                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PF_" & oRS("codigo") & "_" & cCAMPO & ".JPG"
-                Case "PF"
-                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PF_" & StrZero(oRS("PF"), 6) & "_" & cCAMPO & ".JPG"
-                Case "PFS"
-                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFS_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & cCAMPO & ".JPG"
-                Case "PFMS03"
-                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) & "_" & cCAMPO & ".JPG"
-                Case "PFCO"
-                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
-                Case "PFC"
-                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
-                Case "PFI"
-                    sTEMPFILE = zAppPath & "\" & cDIZARQ & "_PFI_" & StrZero(oRS("PF"), 6) & "_SEQ_" & StrZero(oRS("SEQ"), 3) & "_SSQ_" & StrZero(oRS("SEQ"), 3) & "_item_" & StrZero(oRS("ITEM"), 3) + ".JPG"
-            End Select
-            Label.Caption = cDIZARQ & "_" & cCAMPO
-            Label.Refresh
-            If sTEMPFILE <> "" Then 'salva a imagem antes de zerar o campo
-                Label.Caption = sTEMPFILE
-                Label.Refresh
-                lFileLength = LenB(oRS(cCAMPO))
-                iFileNum = FreeFile
-                Open sTEMPFILE For Binary As #iFileNum
-                abBytes = oRS(cCAMPO).GetChunk(lFileLength)
-                Put #iFileNum, , abBytes()
-                Close #iFileNum
-                Picture1.Picture = LoadPicture(sTEMPFILE)
-                StretchSourcePictureFromPicture Picture1, Picture2
-            End If
-            oRS.Fields(cCAMPO) = ""
-            oRS.Update
-            oRS.MoveNext
-        Wend
-        oRS.Close
-        oDB.Close
-    Next X
-    Set oRS = Nothing
-    Set oDB = Nothing
+        lFileLength = LenB(oRS(cCAMPO))
+        iFileNum = FreeFile
+        Open sTEMPFILE For Binary As #iFileNum
+        abBytes = oRS(cCAMPO).GetChunk(lFileLength)
+        Put #iFileNum, , abBytes()
+        Close #iFileNum
+        Picture1.Picture = LoadPicture(sTEMPFILE)
+        StretchSourcePictureFromPicture Picture1, Picture2
+      End If
+      oRS.Fields(cCAMPO) = ""
+      oRS.Update
+      oRS.MoveNext
+    Wend
+    oRS.Close
+    oDB.Close
+  Next x
+  Set oRS = Nothing
+  Set oDB = Nothing
 End Function
 

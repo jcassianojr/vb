@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Begin VB.Form frmDISPO 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MENU"
@@ -665,295 +665,295 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    Dim I As Integer
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXT(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  Dim i As Integer
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXT(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub CmdMotRev_Click()
-    gridrev.Col = 1
-    nREV = FixInt(gridrev)
-    ComMotAlt.Enabled = True
-    ComMotExc.Enabled = True
-    ComMotInc.Enabled = True
-    Filgridrevi
+  gridrev.Col = 1
+  nREV = FixInt(gridrev)
+  ComMotAlt.Enabled = True
+  ComMotExc.Enabled = True
+  ComMotInc.Enabled = True
+  Filgridrevi
 End Sub
 
 Private Sub Command4_Click()
-    If GridPla.Row > 0 Then
-        GridPla.Col = 0
-        nORD = GridPla
-        frmDISPOI.Show vbModal, Me
-        FilRelat
-    End If
+  If GridPla.Row > 0 Then
+    GridPla.Col = 0
+    nORD = GridPla
+    frmDISPOI.Show vbModal, Me
+    FilRelat
+  End If
 End Sub
 
 Private Sub Command6_Click()
-    If nREV = 0 Then
-        Alert "Revisão Nao Escolhida"
-        Exit Sub
-    End If
-    ePASS01 = "select * from rev WHERE PF=" & nPPAP & " AND TIPO='DIS' AND REVISAO=" & nREV
-    FrmRev.Show vbModal, Me
+  If nREV = 0 Then
+    Alert "Revisão Nao Escolhida"
+    Exit Sub
+  End If
+  ePASS01 = "select * from rev WHERE PF=" & nPPAP & " AND TIPO='DIS' AND REVISAO=" & nREV
+  FrmRev.Show vbModal, Me
 End Sub
 
 Private Sub Command7_Click()
-    TXT(5) = zIDFOLHA
-    TXT(6) = zNOMEFOLHA
-    TXT(7) = Date
+  TXT(5) = zIDFOLHA
+  TXT(6) = zNOMEFOLHA
+  TXT(7) = Date
 End Sub
 
 Private Sub PegCodigoDescricaoPf()
-    Dim sSQL, aRETU, sARQ
-    sARQ = PegPath("PATH", "PF")
-    sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
-    aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
-    If lRETU Then
-        TxtCodigo = aRETU(0)
-        TxtNome = aRETU(1)
-    End If
+  Dim sSQL, aRETU, sARQ
+  sARQ = PegPath("PATH", "PF")
+  sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
+  aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
+  If lRETU Then
+    TxtCodigo = aRETU(0)
+    TxtNome = aRETU(1)
+  End If
 End Sub
 
 Private Sub Command8_Click()
-    nNOVAPOS = FixInt(PegUltGrid(GridPla, 0), 0) + 1
-    iMU01 = 9
-    NewOrd.Show vbModal, Me
-    FilRelat
+  nNOVAPOS = FixInt(PegUltGrid(GridPla, 0), 0) + 1
+  iMU01 = 9
+  NewOrd.Show vbModal, Me
+  FilRelat
 End Sub
 
 Private Sub Command9_Click()
-    If GridPla.Row > 0 Then
-        GridPla.Col = 0
-        nORD = FixInt(GridPla)
-        If ApagaSQLP(cARQ, "select * from DISPOI WHERE NUMERO=" & nPPAP & " AND ITEM=" & nORD) Then
-            FilRelat
-        End If
+  If GridPla.Row > 0 Then
+    GridPla.Col = 0
+    nORD = FixInt(GridPla)
+    If ApagaSQLP(cARQ, "select * from DISPOI WHERE NUMERO=" & nPPAP & " AND ITEM=" & nORD) Then
+      FilRelat
     End If
+  End If
 End Sub
 
 Private Sub ComMotAlt_Click()
-    If nREV = 0 Then
-        Alert "Revisão Nao Escolhida"
-        Exit Sub
-    End If
-    If gridrevi.Row > 0 Then
-        gridrevi.Col = 3
-        nREVI = FixInt(gridrevi)
-        lEDITAR = True
-        ePASS01 = "select * from revi WHERE PF=" & nPPAP & " AND TIPO='DIS' AND REVISAO=" & nREV & " AND ITEM=" & nREVI
-        frmREVI.Show vbModal, Me
-        Filgridrevi
-    End If
+  If nREV = 0 Then
+    Alert "Revisão Nao Escolhida"
+    Exit Sub
+  End If
+  If gridrevi.Row > 0 Then
+    gridrevi.Col = 3
+    nREVI = FixInt(gridrevi)
+    lEDITAR = True
+    ePASS01 = "select * from revi WHERE PF=" & nPPAP & " AND TIPO='DIS' AND REVISAO=" & nREV & " AND ITEM=" & nREVI
+    frmREVI.Show vbModal, Me
+    Filgridrevi
+  End If
 End Sub
 
 Private Sub ComMotExc_Click()
-    Dim cSQL As String
-    If nREV = 0 Then
-        Alert "Revisão Nao Escolhida"
-        Exit Sub
+  Dim cSQL As String
+  If nREV = 0 Then
+    Alert "Revisão Nao Escolhida"
+    Exit Sub
+  End If
+  If gridrevi.Row > 0 Then
+    gridrevi.Col = 3
+    nREVI = FixInt(gridrevi)
+    cSQL = "select * from revi WHERE PF=" & nPPAP & " AND TIPO='DIS' AND REVISAO=" & nREV & " AND  ITEM=" & nREVI
+    If ApagaSQLP(cARQPF, cSQL) Then
+      Filgridrevi
     End If
-    If gridrevi.Row > 0 Then
-        gridrevi.Col = 3
-        nREVI = FixInt(gridrevi)
-        cSQL = "select * from revi WHERE PF=" & nPPAP & " AND TIPO='DIS' AND REVISAO=" & nREV & " AND  ITEM=" & nREVI
-        If ApagaSQLP(cARQPF, cSQL) Then
-            Filgridrevi
-        End If
-    End If
+  End If
 End Sub
 
 Private Sub ComMotInc_Click()
-    Dim nITEM As Long
-    If nREV = 0 Then
-        Alert "Revisão Nao Escolhida"
-        Exit Sub
-    End If
-    nITEM = 1
-    If gridrevi.Rows > 1 Then
-        gridrevi.Row = gridrevi.Rows - 1         ''//Posicao comeca com zero
-        gridrevi.Col = 3
-        nITEM = FixInt(gridrevi) + 1
-    End If
-    IncluiSQL cARQPF, "SELECT * FROM REVI WHERE PF=" & nPF & " AND TIPO='DIS' AND REVISAO=" & nREV & " AND ITEM=" & nITEM, 4, Array("PF", "REVISAO", "TIPO", "ITEM"), _
-        Array(nPPAP, nREV, "DIS", nITEM), True, False
-    Filgridrevi
+  Dim nITEM As Long
+  If nREV = 0 Then
+    Alert "Revisão Nao Escolhida"
+    Exit Sub
+  End If
+  nITEM = 1
+  If gridrevi.Rows > 1 Then
+    gridrevi.Row = gridrevi.Rows - 1         ''//Posicao comeca com zero
+    gridrevi.Col = 3
+    nITEM = FixInt(gridrevi) + 1
+  End If
+  IncluiSQL cARQPF, "SELECT * FROM REVI WHERE PF=" & nPF & " AND TIPO='DIS' AND REVISAO=" & nREV & " AND ITEM=" & nITEM, 4, Array("PF", "REVISAO", "TIPO", "ITEM"), _
+            Array(nPPAP, nREV, "DIS", nITEM), True, False
+  Filgridrevi
 End Sub
 
 Private Sub Duplicar_Click(Index As Integer)
-    Dim aVALTMP As Variant
-    Dim aCAMTMP As Variant
-    Dim aFORTMP As Variant
-    Dim aPADTMP As Variant
-    Dim sSQL As String
-    Dim nCAMPOS As Integer
-    Dim cARQ As String
-    Dim NINDEXREF As Integer
+  Dim aVALTMP As Variant
+  Dim aCAMTMP As Variant
+  Dim aFORTMP As Variant
+  Dim aPADTMP As Variant
+  Dim sSQL As String
+  Dim nCAMPOS As Integer
+  Dim cARQ As String
+  Dim NINDEXREF As Integer
 
-    cARQ = PegPath("PATH", "DISPO")
+  cARQ = PegPath("PATH", "DISPO")
 
-    NINDEXREF = Index
-    If NINDEXREF > 10 Then
-        NINDEXREF = Index - 10
+  NINDEXREF = Index
+  If NINDEXREF > 10 Then
+    NINDEXREF = Index - 10
+  End If
+
+
+
+  GridPla.Col = 0
+  nORD = FixInt(GridPla)
+
+  If nORD = 0 Then
+    Alert ("Clique no Item de Origem Antes")
+    Exit Sub
+  End If
+
+
+  nNOVAPOS = FixInt(PegUltGrid(GridPla, 0), 0) + 1
+
+  If Index = 13 Then                           'reordenacao
+    nNOVAPOS = FixInt(Val(Busca("No", "Renumerando", CStr(nNOVAPOS), 8)))
+    If nNOVAPOS = 0 Then
+      Alert ("No em Branco")
+      Exit Sub
     End If
-
-   
-    
-    GridPla.Col = 0
-    nORD = FixInt(GridPla)
-
-    If nORD = 0 Then
-        Alert ("Clique no Item de Origem Antes")
-        Exit Sub
+    LocalizaGrid GridPla, nNOVAPOS
+    If lRETU Then
+      Alert "ordem ja existe"
+      Exit Sub
     End If
+  End If
 
 
-    nNOVAPOS = FixInt(PegUltGrid(GridPla, 0), 0) + 1
-    
-    If Index = 13 Then                           'reordenacao
-        nNOVAPOS = FixInt(Val(Busca("No", "Renumerando", CStr(nNOVAPOS), 8)))
-        If nNOVAPOS = 0 Then
-            Alert ("No em Branco")
-            Exit Sub
-        End If
-        LocalizaGrid GridPla, nNOVAPOS
-        If lRETU Then
-            Alert "ordem ja existe"
-            Exit Sub
-        End If
-    End If
-    
-    
-    
-    sSQL = "select * from DISPOI WHERE NUMERO=" & nPPAP & " AND ITEM=" & nORD
-   
-                              
-    nCAMPOS = 1
-    aCAMTMP = Array("DESCRICAO")
-    aPADTMP = Array("")
-    aFORTMP = Array("C")
-                        
-    
-    aVALTMP = PegSQL(cARQ, sSQL, nCAMPOS, aCAMTMP, aFORTMP, aPADTMP)
-    
-    If Index = 13 Then                           'reordenacao apaga
-        ApagaSQL cARQ, sSQL
-    End If
-    
-    eRETU01 = 0
-    iMU01 = 9
-    
-    NewOrd.Show vbModal, Me
-    
-    nORD = eRETU01
-    sSQL = "select * from DISPOI WHERE NUMERO=" & nPPAP & " AND ITEM=" & nORD
-    
-    GrvSQL cARQ, sSQL, nCAMPOS, aCAMTMP, aVALTMP, aFORTMP
-    FilRelat
-    
+
+  sSQL = "select * from DISPOI WHERE NUMERO=" & nPPAP & " AND ITEM=" & nORD
+
+
+  nCAMPOS = 1
+  aCAMTMP = Array("DESCRICAO")
+  aPADTMP = Array("")
+  aFORTMP = Array("C")
+
+
+  aVALTMP = PegSQL(cARQ, sSQL, nCAMPOS, aCAMTMP, aFORTMP, aPADTMP)
+
+  If Index = 13 Then                           'reordenacao apaga
+    ApagaSQL cARQ, sSQL
+  End If
+
+  eRETU01 = 0
+  iMU01 = 9
+
+  NewOrd.Show vbModal, Me
+
+  nORD = eRETU01
+  sSQL = "select * from DISPOI WHERE NUMERO=" & nPPAP & " AND ITEM=" & nORD
+
+  GrvSQL cARQ, sSQL, nCAMPOS, aCAMTMP, aVALTMP, aFORTMP
+  FilRelat
+
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub ESCMS01A_Click(Index As Integer)
-    Select Case Index
-    Case 0
-        ePASS01 = " WHERE CODTIPO='DC'"
-        escME04.Show vbModal
-    Case 1
-        iMU01 = 12
-        escmp.Show vbModal
-        If lRETU Then
-            TXT(8) = eRETU01
-        End If
-    End Select
+  Select Case Index
+  Case 0
+    ePASS01 = " WHERE CODTIPO='DC'"
+    escME04.Show vbModal
+  Case 1
+    iMU01 = 12
+    escmp.Show vbModal
+    If lRETU Then
+      TXT(8) = eRETU01
+    End If
+  End Select
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    Dim I As Integer
-    CenterFormToScreen Me
-    PF.Text = nPF
-    SEQ.Text = nSEQ
-    SSQ.Text = nSSQ
-    cARQPF = PegPath("PATH", "PF")
-    cARQ = PegPath("PATH", "DISPO")
-    cSQL = "select * from DISPO WHERE numero=" & nPPAP
-    nCAMPOS = 9
-    aCAM = Array("NUMERO", "CODIGO", "NOME", "REVISAO", "DATAREV", "ELANUM", "ELANOM", "ELADAT", "CODIGOINT")
-    aFOR = Array("NI", "C", "C", "C", "DZ", "NI", "C", "DZ", "C")
-    aPAD = Array(0, "", "", "", "", 0, "", "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXT(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    If nPF > 0 Then
-        PegCodigoDescricaoPf
-    End If
-    Filgridrev
-    If gridrev.Rows > 1 Then
-        gridrev.Row = gridrev.Rows - 1
-        CmdMotRev_Click
-    End If
-    FilRelat
+  Dim i As Integer
+  CenterFormToScreen Me
+  PF.tEXT = nPF
+  SEQ.tEXT = nSEQ
+  SSQ.tEXT = nSSQ
+  cARQPF = PegPath("PATH", "PF")
+  cARQ = PegPath("PATH", "DISPO")
+  cSQL = "select * from DISPO WHERE numero=" & nPPAP
+  nCAMPOS = 9
+  aCAM = Array("NUMERO", "CODIGO", "NOME", "REVISAO", "DATAREV", "ELANUM", "ELANOM", "ELADAT", "CODIGOINT")
+  aFOR = Array("NI", "C", "C", "C", "DZ", "NI", "C", "DZ", "C")
+  aPAD = Array(0, "", "", "", "", 0, "", "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXT(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  If nPF > 0 Then
+    PegCodigoDescricaoPf
+  End If
+  Filgridrev
+  If gridrev.Rows > 1 Then
+    gridrev.Row = gridrev.Rows - 1
+    CmdMotRev_Click
+  End If
+  FilRelat
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub NovaRev_Click()
-    Dim nREV As Integer
-    If Len(TXT(4)) > 0 Then
-        If TXT(4) > Today() Then
-            Alert ("Data Revisao Anterior Maior que Data do Sistema")
-            Exit Sub
-        End If
+  Dim nREV As Integer
+  If Len(TXT(4)) > 0 Then
+    If TXT(4) > Today() Then
+      Alert ("Data Revisao Anterior Maior que Data do Sistema")
+      Exit Sub
     End If
-    If MDG("Fazer Nova Revisao") Then
-        nREV = FixNum(TXT(3)) + 1
-        IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & " AND TIPO='DIS' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), _
-        Array(nPPAP, nREV, "DIS", Today()), False, False
-        TXT(3) = nREV
-        TXT(4) = Date
-    End If
+  End If
+  If MDG("Fazer Nova Revisao") Then
+    nREV = FixNum(TXT(3)) + 1
+    IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & " AND TIPO='DIS' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), _
+              Array(nPPAP, nREV, "DIS", Today()), False, False
+    TXT(3) = nREV
+    TXT(4) = Date
+  End If
 End Sub
 
 Private Sub Filgridrev()
-    Dim cSQL As String
-    cSQL = "select PF,REVISAO,TIPO,DATA from rev WHERE PF=" & nPPAP & " AND TIPO='DIS' ORDER BY REVISAO"
-    MontaGridFast gridrev, 4, Array(600, 400, 400, 1200), Array("PF", "REV", "Tipo", "DATA"), _
-        Array("PF", "REVISAO", "TIPO", "C$DATA"), cARQPF, cSQL
+  Dim cSQL As String
+  cSQL = "select PF,REVISAO,TIPO,DATA from rev WHERE PF=" & nPPAP & " AND TIPO='DIS' ORDER BY REVISAO"
+  MontaGridFast gridrev, 4, Array(600, 400, 400, 1200), Array("PF", "REV", "Tipo", "DATA"), _
+                Array("PF", "REVISAO", "TIPO", "C$DATA"), cARQPF, cSQL
 End Sub
 
 Private Sub Filgridrevi()
-    Dim cSQL As String
-    cSQL = "select * from revI WHERE PF=" & nPPAP & " AND REVISAO=" & nREV & " AND TIPO='DIS' ORDER BY ITEM"
-    MontaGridFast gridrevi, 5, Array(600, 400, 400, 400, 2000), Array("PF", "REV", "Tipo", "ITEM", "Motivo"), _
-        Array("PF", "REVISAO", "TIPO", "ITEM", "Motivo"), cARQPF, cSQL
+  Dim cSQL As String
+  cSQL = "select * from revI WHERE PF=" & nPPAP & " AND REVISAO=" & nREV & " AND TIPO='DIS' ORDER BY ITEM"
+  MontaGridFast gridrevi, 5, Array(600, 400, 400, 400, 2000), Array("PF", "REV", "Tipo", "ITEM", "Motivo"), _
+                Array("PF", "REVISAO", "TIPO", "ITEM", "Motivo"), cARQPF, cSQL
 End Sub
 
 Private Sub FilRelat()
-    On Error Resume Next
-    Dim cSQL As String
-    cSQL = "select ITEM,DESCRICAO from DISPOI  WHERE NUMERO=" & nPPAP & " ORDER BY ITEM"
-    MontaGridFast GridPla, 2, Array(400, 4000), Array("Ord", "Descricao"), _
-        Array("L$ITEM", "L$DESCRicao"), cARQ, cSQL
+  On Error Resume Next
+  Dim cSQL As String
+  cSQL = "select ITEM,DESCRICAO from DISPOI  WHERE NUMERO=" & nPPAP & " ORDER BY ITEM"
+  MontaGridFast GridPla, 2, Array(400, 4000), Array("Ord", "Descricao"), _
+                Array("L$ITEM", "L$DESCRicao"), cARQ, cSQL
 End Sub
 
 

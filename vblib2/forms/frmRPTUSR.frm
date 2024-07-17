@@ -15,15 +15,25 @@ Begin VB.Form frmRPTUSR
    ScaleWidth      =   8340
    ShowInTaskbar   =   0   'False
    Begin XPControls.XPButton CmdLibTudo 
-      Caption         =   "Liberar Tudo"
       Height          =   315
       Left            =   6000
       TabIndex        =   21
       Top             =   1080
       Width           =   1095
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "Liberar Tudo"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
    Begin XPControls.XPButton CmdAbrirCom 
-      Caption         =   "Ext..."
       Height          =   375
       Index           =   0
       Left            =   6000
@@ -32,9 +42,20 @@ Begin VB.Form frmRPTUSR
       ToolTipText     =   "Abrir com Somente da Extencao"
       Top             =   1440
       Width           =   495
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "Ext..."
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
    Begin XPControls.XPButton CmdAbrirCom 
-      Caption         =   "*..."
       Height          =   375
       Index           =   1
       Left            =   6480
@@ -43,6 +64,18 @@ Begin VB.Form frmRPTUSR
       ToolTipText     =   "Abrir Com Todas Extensoes"
       Top             =   1440
       Width           =   375
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "*..."
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
    Begin VB.TextBox txtFields 
       BackColor       =   &H00C0FFFF&
@@ -275,79 +308,87 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Dim aCAM, aFOR, aVAL, aPAD As Variant
+Attribute aFOR.VB_VarUserMemId = 1073938432
+Attribute aVAL.VB_VarUserMemId = 1073938432
+Attribute aPAD.VB_VarUserMemId = 1073938432
 Dim cARQUSR, cSQL As String
+Attribute cARQUSR.VB_VarUserMemId = 1073938436
+Attribute cSQL.VB_VarUserMemId = 1073938436
 Dim nFORMID As Integer
+Attribute nFORMID.VB_VarUserMemId = 1073938438
 Dim cARQUIVO As String
-Dim X As Integer
+Attribute cARQUIVO.VB_VarUserMemId = 1073938439
+Dim x As Integer
+Attribute x.VB_VarUserMemId = 1073938440
 
 Private Sub CmdAbrirCom_Click(Index As Integer)
-    'Dim cEXTENSAO As String
-    'Dim nPOS As Long
+'Dim cEXTENSAO As String
+'Dim nPOS As Long
 
-    eLOCALIZA = txtFields(5)
-    ePASS01 = ""
-    If Index = 0 Then
-        ePASS01 = NomeEXT(cARQUIVO)
-    End If
-    EscRptExec.Show vbModal, Me
-    If lRETU Then
-        txtFields(5) = eRETU02
-    End If
+  eLOCALIZA = TXTFIELDS(5)
+  ePASS01 = ""
+  If Index = 0 Then
+    ePASS01 = NomeEXT(cARQUIVO)
+  End If
+  EscRptExec.Show vbModal, Me
+  If lRETU Then
+    TXTFIELDS(5) = eRETU02
+  End If
 End Sub
 
 Private Sub cmdClose_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 Private Sub CmdLibTudo_Click()
-    For X = 0 To 7
-        chkFields(X).Value = vbChecked
-    Next X
+  For x = 0 To 7
+    chkFields(x).Value = vbChecked
+  Next x
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
 
-    CenterFormToScreen Me
+  CenterFormToScreen Me
 
-    cSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "' AND IDUSUARIO=" & zIDRPTUSR
-    txtFields(0) = zIDRPTUSR
-    txtFields(1) = ePASS03
-    'txtFields(2) = "" codigo
-    txtFields(3) = zgrp
-    txtFields(4) = zRPT
+  cSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "' AND IDUSUARIO=" & zIDRPTUSR
+  TXTFIELDS(0) = zIDRPTUSR
+  TXTFIELDS(1) = ePASS03
+  'txtFields(2) = "" codigo
+  TXTFIELDS(3) = zgrp
+  TXTFIELDS(4) = zRPT
 
-    cARQUSR = DBWRPT
-    aCAM = Array("IMPRIME", "EXPORTA", "VISUALIZA", "SALVARTF", "SALVATXT", _
-                 "NOVO", "ABRIR", "Editar", "ABRIRCOM")
-    aFOR = Array("BN", "BN", "BN", "BN", "BN", _
-                 "BN", "BN", "BN", "C")
-    aPAD = Array(False, False, False, False, False, _
-                 False, False, False, "")
-    aVAL = PegSQL(cARQUSR, cSQL, 9, aCAM, aFOR, aPAD)
-    For X = 0 To 7
-        chkFields(X) = aVAL(X)
-    Next X
-    txtFields(5) = aVAL(8)
-    nFORMID = 998
+  cARQUSR = DBWRPT
+  aCAM = Array("IMPRIME", "EXPORTA", "VISUALIZA", "SALVARTF", "SALVATXT", _
+               "NOVO", "ABRIR", "Editar", "ABRIRCOM")
+  aFOR = Array("BN", "BN", "BN", "BN", "BN", _
+               "BN", "BN", "BN", "C")
+  aPAD = Array(False, False, False, False, False, _
+               False, False, False, "")
+  aVAL = PegSQL(cARQUSR, cSQL, 9, aCAM, aFOR, aPAD)
+  For x = 0 To 7
+    chkFields(x) = aVAL(x)
+  Next x
+  TXTFIELDS(5) = aVAL(8)
+  nFORMID = 998
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-    Dim X As Integer
-    If MDG("Gravar e Sair", "Gravando ") Then
-        For X = 0 To 7
-            aVAL(X) = FixNumBol(chkFields(X))
-        Next X
-        aVAL(8) = txtFields(5)
-        GrvSQL cARQUSR, cSQL, 9, aCAM, aVAL, aFOR
-        GravaLog nFORMID, 0, "Gravou "
-    Else
-        GravaLog nFORMID, 0, "Nao Gravou "
-    End If
-    Screen.MousePointer = vbDefault
+  Dim x As Integer
+  If MDG("Gravar e Sair", "Gravando ") Then
+    For x = 0 To 7
+      aVAL(x) = FixNumBol(chkFields(x))
+    Next x
+    aVAL(8) = TXTFIELDS(5)
+    GrvSQL cARQUSR, cSQL, 9, aCAM, aVAL, aFOR
+    GravaLog nFORMID, 0, "Gravou "
+  Else
+    GravaLog nFORMID, 0, "Nao Gravou "
+  End If
+  Screen.MousePointer = vbDefault
 End Sub
 
 

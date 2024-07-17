@@ -73,72 +73,72 @@ Const cFORMID = "Gerenciados Relatorios/Documentos Tipos Execuçao"
 Dim cSQLREF As String
 
 Private Sub Apagar()
-    Dim nNUMERO As Long
-    Dim cARQ, cSQL  As String
-    Grid.Col = 0
-    nNUMERO = FixNum(Grid)
-    cARQ = PegPath("PATH", "SYSCONF")
-    cSQL = "select * from RPTEXEC WHERE NUMERO=" & nNUMERO
-    lRETU = ApagaSQLP(cARQ, cSQL, "Apagar")
-    If lRETU Then
-        Filgrid
-    End If
+  Dim nNUMERO As Long
+  Dim cARQ, cSQL As String
+  Grid.Col = 0
+  nNUMERO = FixNum(Grid)
+  cARQ = PegPath("PATH", "SYSCONF")
+  cSQL = "select * from RPTEXEC WHERE NUMERO=" & nNUMERO
+  lRETU = ApagaSQLP(cARQ, cSQL, "Apagar")
+  If lRETU Then
+    Filgrid
+  End If
 End Sub
 
 Private Sub Editar()
-    Dim nNUMERO As Long
-    Grid.Col = 0
-    nNUMERO = FixNum(Grid)
-    ePASS01 = "select * from RPTEXEC WHERE NUMERO=" & nNUMERO
-    frmRptExec.Show vbModal
-    Filgrid
+  Dim nNUMERO As Long
+  Grid.Col = 0
+  nNUMERO = FixNum(Grid)
+  ePASS01 = "select * from RPTEXEC WHERE NUMERO=" & nNUMERO
+  frmRptExec.Show vbModal
+  Filgrid
 End Sub
 
 Private Sub Escolher()
-    lRETU = True
-    Grid.Col = 0                                 'Numero
-    eRETU01 = Grid
-    Grid.Col = 2                                 'Executar
-    eRETU02 = Grid
-    Unload Me
+  lRETU = True
+  Grid.Col = 0                                 'Numero
+  eRETU01 = Grid
+  Grid.Col = 2                                 'Executar
+  eRETU02 = Grid
+  Unload Me
 End Sub
 
 Private Sub Filgrid()
-    Dim cARQ As String
-    Dim cSQL As String
-    cARQ = PegPath("PATH", "SYSCONF")
-    cSQL = cSQLREF
-    '    MontaGridFast Grid, 4, Array(400, 500, 2000, 3000), Array("Nº", "Ext", "Executar", "NOME"), _
-    Array("NUMERO", "EXTENSAO", "EXECUTAR", "NOME"), cARQ, cSQL
-    MontaGridFast Grid, 4, Array(400, 500, 2000, 3000), Array("Nº", "Ext", "Executar", "NOME"), _
-        Array("NUMERO", "EXTENSAO", "EXECUTAR", "NOME"), cARQ, cSQL
+  Dim cARQ As String
+  Dim cSQL As String
+  cARQ = PegPath("PATH", "SYSCONF")
+  cSQL = cSQLREF
+  '    MontaGridFast Grid, 4, Array(400, 500, 2000, 3000), Array("Nº", "Ext", "Executar", "NOME"), _
+       Array("NUMERO", "EXTENSAO", "EXECUTAR", "NOME"), cARQ, cSQL
+  MontaGridFast Grid, 4, Array(400, 500, 2000, 3000), Array("Nº", "Ext", "Executar", "NOME"), _
+                Array("NUMERO", "EXTENSAO", "EXECUTAR", "NOME"), cARQ, cSQL
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    If AcessaForm(nFORMID) Then
-        MontaToolbar Me.Toolbar1, nFORMID
-        
-        If FixStr(ePASS01) <> "" Then
-            cSQLREF = "select NUMERO,EXTENSAO,EXECUTAR,NOME from RPTEXEC where EXTENSAO='" & ePASS01 & "' order by EXTENSAO"
-        Else
-            cSQLREF = "select NUMERO,EXTENSAO,EXECUTAR,NOME from RPTEXEC order by EXTENSAO"
-        End If
-        Filgrid
-        If FixStr(eLOCALIZA) <> "" Then LocalizaGrid Grid, eLOCALIZA, 3
+  CenterFormToScreen Me
+  If AcessaForm(nFORMID) Then
+    MontaToolbar Me.Toolbar1, nFORMID
+
+    If FixStr(ePASS01) <> "" Then
+      cSQLREF = "select NUMERO,EXTENSAO,EXECUTAR,NOME from RPTEXEC where EXTENSAO='" & ePASS01 & "' order by EXTENSAO"
     Else
-        MontaToolbar Me.Toolbar1, 999
+      cSQLREF = "select NUMERO,EXTENSAO,EXECUTAR,NOME from RPTEXEC order by EXTENSAO"
     End If
-    ''Configura Help
-    lRETU = False
-    HelpContextID = nFORMID
-    Me.Caption = cFORMID
+    Filgrid
+    If FixStr(eLOCALIZA) <> "" Then LocalizaGrid Grid, eLOCALIZA, 3
+  Else
+    MontaToolbar Me.Toolbar1, 999
+  End If
+  ''Configura Help
+  lRETU = False
+  HelpContextID = nFORMID
+  Me.Caption = cFORMID
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 End Sub
 
@@ -153,51 +153,51 @@ End Sub
 'End Sub
 
 Private Sub incluir()
-    Dim nNUMERO As Long
-    Dim cARQ As String
-    
-    cARQ = PegPath("PATH", "SYSCONF")
-    nNUMERO = FixInt(PegMAXSQL(cARQ, "RPTEXEC", "NUMERO", 0)) + 1
-    nNUMERO = FixNum(Val(Busca("Nº NUMERO", "Incluindo NUMERO", Str(nNUMERO), 3)))
-    ePASS01 = "select * from RPTEXEC WHERE NUMERO=" & nNUMERO
-    IncluiSQL cARQ, ePASS01, 1, Array("NUMERO"), Array(nNUMERO), True
-    frmRptExec.Show vbModal
-  
-    Filgrid
+  Dim nNUMERO As Long
+  Dim cARQ As String
+
+  cARQ = PegPath("PATH", "SYSCONF")
+  nNUMERO = FixInt(PegMAXSQL(cARQ, "RPTEXEC", "NUMERO", 0)) + 1
+  nNUMERO = FixNum(Val(Busca("Nº NUMERO", "Incluindo NUMERO", Str(nNUMERO), 3)))
+  ePASS01 = "select * from RPTEXEC WHERE NUMERO=" & nNUMERO
+  IncluiSQL cARQ, ePASS01, 1, Array("NUMERO"), Array(nNUMERO), True
+  frmRptExec.Show vbModal
+
+  Filgrid
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Dim sButton As String
-    Dim nINDICE As Integer
-    
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    
-    nINDICE = FixNum(Button.Index)
-    If Not AcessaBotao(nFORMID, nINDICE) Then
-        Exit Sub
-    End If
-    GravaLog nFORMID, nINDICE, sButton
-    
-    Select Case sButton
-    Case "NOV"
-        incluir
-    Case "IMP"
-        ''            cTIPO = "R"
-        ''            zGRP = "CT"
-        ''            escRPT.Show vbModal, Me
-    Case "EDI"
-        Editar
-    Case "ESC"
-        Escolher
-    Case "EXC"
-        Apagar
-    Case "LOC"
-        LocalizaGrid Grid
-    Case "SAI"
-        Screen.MousePointer = vbDefault
-        Unload Me
-    End Select
+  Dim sButton As String
+  Dim nINDICE As Integer
+
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+
+  nINDICE = FixNum(Button.Index)
+  If Not AcessaBotao(nFORMID, nINDICE) Then
+    Exit Sub
+  End If
+  GravaLog nFORMID, nINDICE, sButton
+
+  Select Case sButton
+  Case "NOV"
+    incluir
+  Case "IMP"
+    ''            cTIPO = "R"
+    ''            zGRP = "CT"
+    ''            escRPT.Show vbModal, Me
+  Case "EDI"
+    Editar
+  Case "ESC"
+    Escolher
+  Case "EXC"
+    Apagar
+  Case "LOC"
+    LocalizaGrid Grid
+  Case "SAI"
+    Screen.MousePointer = vbDefault
+    Unload Me
+  End Select
 End Sub
 
 

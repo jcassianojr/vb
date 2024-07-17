@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Begin VB.Form frmDes 
    Caption         =   "Controle de Desenho"
    ClientHeight    =   6135
@@ -389,146 +389,146 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub arquivar_Click()
-    Dim sSQL As String
-    GridAtual.Col = 0
-    cDESENHO = GridAtual
-    sSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'" 'atual->baixado
-    aTVAL = PegSQL(cARQDES, sSQL, 11, aTCAM, aTFOR, aTPAD)
-    If IncluiSQL(cARQDES, "select * from baixado WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'", 10, aTCAM, aTVAL, True, False) Then
-        ApagaSQL cARQDES, sSQL
-        Filgrid "atual", GridAtual
-        Filgrid "baixado", GridArq
-    End If
+  Dim sSQL As String
+  GridAtual.Col = 0
+  cDESENHO = GridAtual
+  sSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'"  'atual->baixado
+  aTVAL = PegSQL(cARQDES, sSQL, 11, aTCAM, aTFOR, aTPAD)
+  If IncluiSQL(cARQDES, "select * from baixado WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'", 10, aTCAM, aTVAL, True, False) Then
+    ApagaSQL cARQDES, sSQL
+    Filgrid "atual", GridAtual
+    Filgrid "baixado", GridArq
+  End If
 End Sub
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        GrvSQL cARQDES, cSQLDES, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    GrvSQL cARQDES, cSQLDES, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Command7_Click()
-    Dim cARQ As String
-    Dim aRETU As Variant
-    Dim sSQL             As String
-    Dim nNUMERO          As Long
-    nNUMERO = FixInt(TXTFIELDS(2), 0)
-    cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
-    aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
-    If lRETU Then
-        TXTFIELDS(3) = aRETU(0)
-    End If
+  Dim cARQ As String
+  Dim aRETU As Variant
+  Dim sSQL As String
+  Dim nNUMERO As Long
+  nNUMERO = FixInt(TXTFIELDS(2), 0)
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
+  sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
+  aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
+  If lRETU Then
+    TXTFIELDS(3) = aRETU(0)
+  End If
 End Sub
 
 Private Sub Editar_Click()
-    GridAtual.Col = 0
-    cDESENHO = GridAtual
-    FrmDesI.Show vbModal, Me
-    Filgrid "atual", GridAtual
+  GridAtual.Col = 0
+  cDESENHO = GridAtual
+  FrmDesI.Show vbModal, Me
+  Filgrid "atual", GridAtual
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub ESCCLI_Click(Index As Integer)
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  cARQESC = "MA01"
+  Select Case Index
+  Case 0
     cARQESC = "MA01"
-    Select Case Index
-    Case 0
-        cARQESC = "MA01"
-    Case 1
-        ePASS01 = "LOGIX"
-    Case 2
-        ePASS01 = "LOGIX"
-        cARQESC = "2DIG"
-    End Select
-    
-    escNUMNOM.Show vbModal, Me
-    If lRETU Then
-        TXTFIELDS(2) = eRETU01
-        TXTFIELDS(3) = eRETU02
-    End If
+  Case 1
+    ePASS01 = "LOGIX"
+  Case 2
+    ePASS01 = "LOGIX"
+    cARQESC = "2DIG"
+  End Select
+
+  escNUMNOM.Show vbModal, Me
+  If lRETU Then
+    TXTFIELDS(2) = eRETU01
+    TXTFIELDS(3) = eRETU02
+  End If
 End Sub
 
 Private Sub excluir_Click()
-    Dim sSQL As String
-    GridAtual.Col = 0
-    cDESENHO = FixStr(GridAtual)
-    sSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'"
-    If ApagaSQLP(cARQDES, sSQL) Then
-        Filgrid "atual", GridAtual
-    End If
+  Dim sSQL As String
+  GridAtual.Col = 0
+  cDESENHO = FixStr(GridAtual)
+  sSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'"
+  If ApagaSQLP(cARQDES, sSQL) Then
+    Filgrid "atual", GridAtual
+  End If
 End Sub
 
 Private Sub Filgrid(cARQ As String, oGRID As Variant)
-    Dim cSQL As String
-    cSQL = "SELECT * FROM " & cARQ & " WHERE CONJUNTO='" & cCONJUNTO & "' ORDER BY desenho "
-    MontaGridFast oGRID, 4, Array(1600, 4000, 200, 1200), Array("Desenho", "Descricao", "Rev", "Data"), Array("L$DESENHO", "DESCRICAO", "REV", "C$DATA"), cARQDES, cSQL
+  Dim cSQL As String
+  cSQL = "SELECT * FROM " & cARQ & " WHERE CONJUNTO='" & cCONJUNTO & "' ORDER BY desenho "
+  MontaGridFast oGRID, 4, Array(1600, 4000, 200, 1200), Array("Desenho", "Descricao", "Rev", "Data"), Array("L$DESENHO", "DESCRICAO", "REV", "C$DATA"), cARQDES, cSQL
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQDES = PegPath("PATH", "DESENHO")
-    cSQLDES = "select * from conjunto WHERE conjunto='" & cCONJUNTO & "'"
-    nCAMPOS = 4
-    aCAM = Array("CONJUNTO", "DESCRICAO", "CLIENTE", "CLINOME")
-    aFOR = Array("C", "C", "NI", "C")
-    aPAD = Array("", "", 0, "")
-    aVAL = PegSQL(cARQDES, cSQLDES, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    Filgrid "atual", GridAtual
-    Filgrid "baixado", GridArq
-    aTCAM = Array("CONJUNTO", "DESENHO", "REV", "CDROM", "FITADAT", "DATA", "RECEBIDO", "DESCRICAO", "OBS", "REVC", "PADRONIZADO")
-    aTFOR = Array("C", "C", "NI", "NI", "NI", "D", "D", "C", "C", "C", "B")
-    aTPAD = Array(cCONJUNTO, cDESENHO, 0, 0, 0, Date, Date, "", "", "", True)
+  CenterFormToScreen Me
+  cARQDES = PegPath("PATH", "DESENHO")
+  cSQLDES = "select * from conjunto WHERE conjunto='" & cCONJUNTO & "'"
+  nCAMPOS = 4
+  aCAM = Array("CONJUNTO", "DESCRICAO", "CLIENTE", "CLINOME")
+  aFOR = Array("C", "C", "NI", "C")
+  aPAD = Array("", "", 0, "")
+  aVAL = PegSQL(cARQDES, cSQLDES, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  Filgrid "atual", GridAtual
+  Filgrid "baixado", GridArq
+  aTCAM = Array("CONJUNTO", "DESENHO", "REV", "CDROM", "FITADAT", "DATA", "RECEBIDO", "DESCRICAO", "OBS", "REVC", "PADRONIZADO")
+  aTFOR = Array("C", "C", "NI", "NI", "NI", "D", "D", "C", "C", "C", "B")
+  aTPAD = Array(cCONJUNTO, cDESENHO, 0, 0, 0, Date, Date, "", "", "", True)
 End Sub
 
 Private Sub NovaRev_Click()
-    Dim sSQL As String
-    Dim nRTMP As Integer
-    GridAtual.Col = 0
-    cDESENHO = GridAtual
-    sSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'" ' atual->baixado
-    aTVAL = PegSQL(cARQDES, sSQL, 11, aTCAM, aTFOR, aTPAD)
-    If IncluiSQL(cARQDES, "select * from baixado WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'", 11, aTCAM, aTVAL, True, False) Then
-        nRTMP = FixInt(aTVAL(2)) + 1
-        GrvSQL cARQDES, sSQL, 1, Array("rev"), Array(nRTMP), Array("NI")
-        Filgrid "atual", GridAtual
-        Filgrid "baixado", GridArq
-    End If
+  Dim sSQL As String
+  Dim nRTMP As Integer
+  GridAtual.Col = 0
+  cDESENHO = GridAtual
+  sSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'"  ' atual->baixado
+  aTVAL = PegSQL(cARQDES, sSQL, 11, aTCAM, aTFOR, aTPAD)
+  If IncluiSQL(cARQDES, "select * from baixado WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'", 11, aTCAM, aTVAL, True, False) Then
+    nRTMP = FixInt(aTVAL(2)) + 1
+    GrvSQL cARQDES, sSQL, 1, Array("rev"), Array(nRTMP), Array("NI")
+    Filgrid "atual", GridAtual
+    Filgrid "baixado", GridArq
+  End If
 End Sub
 
 Private Sub Novo_Click()
-    Dim sSQL As String
-    Dim cDESENHO As String
-    cDESENHO = InputBox("Digite o Desenho", "Inclusão Desenho", "__")
-    sSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'"
-    If IncluiSQL(cARQDES, sSQL, 7, Array("CONJUNTO", "DESENHO", "REV", "CDROM", "FITADAT", "DATA", "RECEBIDO"), Array(cCONJUNTO, cDESENHO, 0, 0, 0, Date, Date), True, True) Then
-        Filgrid "atual", GridAtual
-    End If
+  Dim sSQL As String
+  Dim cDESENHO As String
+  cDESENHO = InputBox("Digite o Desenho", "Inclusão Desenho", "__")
+  sSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'"
+  If IncluiSQL(cARQDES, sSQL, 7, Array("CONJUNTO", "DESENHO", "REV", "CDROM", "FITADAT", "DATA", "RECEBIDO"), Array(cCONJUNTO, cDESENHO, 0, 0, 0, Date, Date), True, True) Then
+    Filgrid "atual", GridAtual
+  End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 

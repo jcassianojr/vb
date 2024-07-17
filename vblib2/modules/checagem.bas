@@ -319,7 +319,7 @@ End Function
 
 Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optional lMES As Boolean = True, Optional cUF As String = "") As Boolean
 ''cTIPO= M-Matriz F-Filial X-Nao Checar nao mais usado a matriz pode ser diferente 0001 agora
-  Dim X As Integer
+  Dim x As Integer
   Dim aUF As Variant
 
   CheckCNPJ = False
@@ -350,12 +350,12 @@ Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optio
   End If
 
 
-  For X = 0 To 14
-    If cCGC = String(14, CStr(X)) Then
-      If lMES Then Alert ("CNPJ Invalido - Sequencia Repetitiva de " + Str(X))
+  For x = 0 To 14
+    If cCGC = String(14, CStr(x)) Then
+      If lMES Then Alert ("CNPJ Invalido - Sequencia Repetitiva de " + Str(x))
       Exit Function
     End If
-  Next X
+  Next x
 
 
   If Left(funNumeroPuro(cCGC), 8) = "99999997" Then
@@ -513,7 +513,7 @@ Function FormataCPF(ByVal pCPF As String) As String
 End Function
 
 Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean = True) As Boolean
-  Dim X As Integer
+  Dim x As Integer
   Dim P1 As String
   CheckCPF = False
   P1 = Trim(TiraOut(xCPF))
@@ -530,12 +530,12 @@ Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean =
     Exit Function
   End If
 
-  For X = 0 To 9
-    If P1 = String(11, CStr(X)) Then
-      If lMES Then Alert ("CPF Invalido - Sequencia Repetitiva de " + Str(X))
+  For x = 0 To 9
+    If P1 = String(11, CStr(x)) Then
+      If lMES Then Alert ("CPF Invalido - Sequencia Repetitiva de " + Str(x))
       Exit Function
     End If
-  Next X
+  Next x
   If Mod11(P1, 10, 10) Then
     If Mod11(P1, 11, 11) Then
       CheckCPF = True
@@ -552,7 +552,7 @@ Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean =
 End Function
 
 Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As Boolean
-  Dim dv_d3, tam_chave, xrdig, y1, dv_base, X, y2, dv_p2
+  Dim dv_d3, tam_chave, xrdig, y1, dv_base, x, y2, dv_p2
   CheckRena = False
   dv_p1 = TiraOut(dv_p1)
   If Len(dv_p1) = 0 Then
@@ -570,9 +570,9 @@ Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As
   y1 = 0
   dv_base = "8923456789"
   y1 = 0
-  For X = 1 To tam_chave
-    dv_d3 = Val(Mid(dv_p1, X, 1))
-    y1 = y1 + (dv_d3 * Val(Mid(dv_base, X, 1)))
+  For x = 1 To tam_chave
+    dv_d3 = Val(Mid(dv_p1, x, 1))
+    y1 = y1 + (dv_d3 * Val(Mid(dv_base, x, 1)))
     ''y2 = mod(y1,11)
     y2 = y1 Mod 11
   Next
@@ -1001,7 +1001,7 @@ Public Function CheckCTA(ByVal cBANCO, ByVal cAGENCIA, ByVal cCONTA) As Boolean
   Dim eTOt As Long
   Dim nFIM As Integer
   Dim nINI As Integer
-  Dim X As Integer
+  Dim x As Integer
   Dim nRES
   eTOt = 0
   cBANCO = StrZero(FixInt(cBANCO), 3)
@@ -1051,10 +1051,10 @@ Public Function CheckCTA(ByVal cBANCO, ByVal cAGENCIA, ByVal cCONTA) As Boolean
     nFIM = Len(cCONTA)
     nINI = nFIM
     nFIM = nFIM - 1
-    For X = 1 To nFIM
-      eTOt = eTOt + nINI * Val(Mid(cCONTA, X, 1))
+    For x = 1 To nFIM
+      eTOt = eTOt + nINI * Val(Mid(cCONTA, x, 1))
       nINI = nINI - 1
-    Next X
+    Next x
     nRES = eTOt Mod 11
     nRES = 11 - nRES
     nRES = IIf(nRES = 10, "P", StrZero(nRES, 1))
@@ -1082,17 +1082,17 @@ Public Function DAC10(ByVal Arg1)
   Dim ninicio
   Dim ntotal
   Dim ccpoaux
-  Dim X
+  Dim x
   ninicio = Len(Trim(Arg1)) + 1
   ntotal = 0
   If (ninicio < 2) Then
     ninicio = 2
   End If
   ccpoaux = "0" + Trim(Arg1)
-  For X = ninicio To 1 Step -2
-    cNUMERO = Mid(ccpoaux, X, 1)
+  For x = ninicio To 1 Step -2
+    cNUMERO = Mid(ccpoaux, x, 1)
     ntotal = ntotal + InStr("516273849", cNUMERO)
-    ntotal = ntotal + Val(Mid(ccpoaux, X - 1, 1))
+    ntotal = ntotal + Val(Mid(ccpoaux, x - 1, 1))
   Next
   DAC10 = Trim(Str(InStr("987654321", Mid(StrZero(ntotal, 3), 3, 1))))
 End Function
@@ -1524,7 +1524,7 @@ Public Function FeriadoMovel(pdatPesquisa As Date) As Boolean
   Dim datData As Date
   Dim ano As Integer
   Dim A As Integer
-  Dim b As Integer
+  Dim B As Integer
   Dim C As Integer
   Dim D As Integer
   Dim E As Integer
@@ -1540,13 +1540,13 @@ Public Function FeriadoMovel(pdatPesquisa As Date) As Boolean
   FeriadoMovel = False
   ano = Year(pdatPesquisa)
   A = (ano Mod 19)
-  b = Int(ano / 100)
+  B = Int(ano / 100)
   C = (ano Mod 100)
-  D = Int(b / 4)
-  E = (b Mod 4)
-  F = Int((b + 8) / 25)
-  G = Int((b - F + 1) / 3)
-  H = ((19 * A + b - D - G + 15) Mod 30)
+  D = Int(B / 4)
+  E = (B Mod 4)
+  F = Int((B + 8) / 25)
+  G = Int((B - F + 1) / 3)
+  H = ((19 * A + B - D - G + 15) Mod 30)
   i = Int(C / 4)
   K = (C Mod 4)
   L = ((32 + 2 * E + 2 * i - H - K) Mod 7)

@@ -177,55 +177,55 @@ Dim aFOR As Variant
 Dim aCAM As Variant
 Dim aPAD As Variant
 Dim nCAMPOS As Integer
-Dim I As Integer
+Dim i As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    For I = 0 To nCAMPOS - 1
-        aVAL(I) = TXTFIELDS(I)
-    Next I
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  For i = 0 To nCAMPOS - 1
+    aVAL(i) = TXTFIELDS(i)
+  Next i
+  GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = PegPath("PATH", "PF")
-    nREV = FixInt(nREV, 0)
-    nREVI = FixInt(nREVI, 0)
-    If nREV = 0 Or nREVI = 0 Then
-        Alert "Revisao Ou Item da Revisao zerado"
-        lEDITAR = False
-    Else
-        cSQL = ePASS01
-        nCAMPOS = 5
-        aCAM = Array("PF", "REVISAO", "TIPO", "ITEM", "MOTIVO")
-        aFOR = Array("NI", "NI", "CU", "NI", "C")
-        aPAD = Array(0, 0, "", 0, "")
-        aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-        For I = 0 To nCAMPOS - 1
-            TXTFIELDS(I) = aVAL(I)
-        Next I
-    End If
-    If Not lEDITAR Then
-        TXTFIELDS(4).TabStop = False
-        TXTFIELDS(4).Locked = True
-        TXTFIELDS(4).Enabled = False
-        cmdClose.Enabled = False
-    End If
+  CenterFormToScreen Me
+  cARQ = PegPath("PATH", "PF")
+  nREV = FixInt(nREV, 0)
+  nREVI = FixInt(nREVI, 0)
+  If nREV = 0 Or nREVI = 0 Then
+    Alert "Revisao Ou Item da Revisao zerado"
+    lEDITAR = False
+  Else
+    cSQL = ePASS01
+    nCAMPOS = 5
+    aCAM = Array("PF", "REVISAO", "TIPO", "ITEM", "MOTIVO")
+    aFOR = Array("NI", "NI", "CU", "NI", "C")
+    aPAD = Array(0, 0, "", 0, "")
+    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+    For i = 0 To nCAMPOS - 1
+      TXTFIELDS(i) = aVAL(i)
+    Next i
+  End If
+  If Not lEDITAR Then
+    TXTFIELDS(4).TabStop = False
+    TXTFIELDS(4).Locked = True
+    TXTFIELDS(4).Enabled = False
+    cmdClose.Enabled = False
+  End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 

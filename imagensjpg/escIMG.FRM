@@ -35,12 +35,23 @@ Begin VB.Form escIMG
       EndProperty
    End
    Begin XPControls.XPButton Cmdexpall 
-      Caption         =   "Exportar Todas Imagens jpg"
       Height          =   615
       Left            =   8040
       TabIndex        =   1
       Top             =   4680
       Width           =   1575
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "Exportar Todas Imagens jpg"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
    Begin MSFlexGridLib.MSFlexGrid Grid 
       Height          =   5775
@@ -251,72 +262,189 @@ Dim cSUBWHERE As String
 Dim cBASEDADOS As String
 
 Private Sub Apaga_Click()
-    Dim eRESP As Variant
-    Dim SQL As String
-    Dim ZGRP
-    Grid.Col = 0
-    ZGRP = Grid
-    SQL = "select * from IMAGENS WHERE CODIGO='" & ZGRP & "'"
-    If ApagaSQLP(cARQRTF, SQL) Then
-        FilRelat
-    End If
+  Dim eRESP As Variant
+  Dim SQL As String
+  Dim ZGRP
+  Grid.Col = 0
+  ZGRP = Grid
+  SQL = "select * from IMAGENS WHERE CODIGO='" & ZGRP & "'"
+  If ApagaSQLP(cARQRTF, SQL) Then
+    FilRelat
+  End If
 End Sub
 
 Private Sub Cmdexpall_Click()
-    Frmexpjpg.Show vbModal, Me
+  Frmexpjpg.Show vbModal, Me
 End Sub
 
 Private Sub CmdFILTRO_Click()
-    cSUBWHERE = ""
-    If MDG("Usar Filtro Avancado") Then
-        aARQUIVOS = Array(cARQRTF)
-        ''Posicao 12 Nome da Tabela
-        ''Posicao 13 Nome da Tabela
-        aRELCFG = Array("", "", "", 0, False, _
-                        False, "", "", "", "", "", _
-                        False, "IMAGENS", "IMAGENS", "", "")
-        FrmFiltro.Show vbModal, Me
-        If lRETU Then
-            cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-            FilRelat
-        End If
-    Else
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "="), eRETU01, eRETU02)
-            FilRelat
-        End If
+  cSUBWHERE = ""
+  If MDG("Usar Filtro Avancado") Then
+    aARQUIVOS = Array(cARQRTF)
+    ''Posicao 12 Nome da Tabela
+    ''Posicao 13 Nome da Tabela
+    aRELCFG = Array("", "", "", 0, False, _
+                    False, "", "", "", "", "", _
+                    False, "IMAGENS", "IMAGENS", "", "")
+    FrmFiltro.Show vbModal, Me
+    If lRETU Then
+      cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
+      FilRelat
     End If
+  Else
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "="), eRETU01, eRETU02)
+      FilRelat
+    End If
+  End If
 
 End Sub
 
 Private Sub cmdlocalizar_Click()
-    ePASS01 = aORDES
-    frmLocalizaa.Show vbModal, Me
-    If lRETU Then
-        LocalizaGrid Grid, eRETU01, eRETU02
-    End If
+  ePASS01 = aORDES
+  frmLocalizaa.Show vbModal, Me
+  If lRETU Then
+    LocalizaGrid Grid, eRETU01, eRETU02
+  End If
 End Sub
 
 Private Sub CmdOrdem_Click()
-    ePASS01 = aORDES
-    escOrdem.Show vbModal, Me
-    If lRETU Then
-        cORDEM = aORDEM(eRETU01)
-        FilRelat
-    End If
+  ePASS01 = aORDES
+  escOrdem.Show vbModal, Me
+  If lRETU Then
+    cORDEM = aORDEM(eRETU01)
+    FilRelat
+  End If
 End Sub
 
 Private Sub CmdSair_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub cmdEditar_Click()
-    Grid.Col = 0
-    ZGRP = Grid
+  Grid.Col = 0
+  ZGRP = Grid
+  Load frmIMAGENS
+  frmIMAGENS.txtFields(0).Enabled = False
+  frmIMAGENS.txtFields(0).TabStop = False
+  frmIMAGENS.txtFields(0).Locked = True
+  frmIMAGENS.txtFields(1).Enabled = False
+  frmIMAGENS.txtFields(1).TabStop = False
+  frmIMAGENS.txtFields(1).Locked = True
+  frmIMAGENS.Show vbModal
+  FilRelat
+  LocalizaGrid Grid, ZGRP
+End Sub
+
+Private Sub Command1_Click()
+  Text1.Text = OpenArqExt(Me, "", "MDB", "Access *.MDB")
+  cARQRTF = Text1.Text
+End Sub
+
+Private Sub Grid_KeyPress(KeyAscii As Integer)
+  If KeyAscii = 13 Then
+    cmdEditar_Click
+  Else
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
+End Sub
+
+Private Sub Form_Load()
+  Dim nPOS As Long
+  Dim cARQHELP As String
+  Dim SSQL As String
+
+  CenterFormToScreen Me
+  Me.Caption = cFORMID
+  HelpContextID = nFORMID
+
+  aORDEM = Array("CODIGO", "NUMERO")
+  aORDES = Array("CODIGO", "NUMERO")
+  cORDEM = "CODIGO"
+
+  'cARQRTF = UCase(Trim(Command())) 'usuario e senha e conn sao podem ser convertida para maisculas
+  cARQRTF = Trim(Command())
+  cARQRTF = Replace(cARQRTF, UCase(App.EXEName) & ".EXE", "")
+  cARQRTF = Trim(cARQRTF)
+  ZGRP = ""
+  zRPTCAM = ""
+
+
+  cARQHELP = PegPath("PATH", "HELP")
+  If FileExist(cARQHELP) Then
+    App.HelpFile = cARQHELP
+  End If
+
+  If Len(cARQRTF) = 0 Then
+    cARQRTF = PegPath("PATH", "IMGARQ")
+  End If
+
+  '"IMGME06.EXE #"+SELF:SERVER:FIELDGET("CODIGO") -> SELF:SERVER:FIELDGET("CODIGO")+"#{IMGME06}"
+  '"IMGME06.EXE  -> {IMGME06}
+  '01%[CONN]Provider=MSDASQL.1;Persist Security Info=False;Data Source=ol_logix
+
+  nPOS = InStr(cARQRTF, "#")  ''Codigo
+  If nPOS > 0 Then
+    ZGRP = Mid(cARQRTF, 1, nPOS - 1)
+    cARQRTF = Mid(cARQRTF, nPOS + 1)
+  End If
+  nPOS = InStr(cARQRTF, "$")  ''caminho do jpg vai para frmimagens
+  If nPOS > 0 Then
+    ZGRP = Mid(cARQRTF, 1, nPOS - 1)
+    cARQRTF = Mid(cARQRTF, nPOS + 1)
+  End If
+  nPOS = InStr(cARQRTF, "%")  ''empresa
+  If nPOS > 0 Then
+    zEMPRESA = Mid(cARQRTF, 1, nPOS - 1)
+    cARQRTF = Mid(cARQRTF, nPOS + 1)
+  End If
+
+  If Len(cARQRTF) = 0 Then                 'Passado Somente Codigo
+    cARQRTF = PegPath("PATH", "IMGARQ")
+  End If
+
+  cBASEDADOS = ""
+  If InStr(UCase(cARQRTF), "OL_LOGIX") > 0 Then
+    cBASEDADOS = "LOGIX"
+  End If
+
+  If InStr(UCase(cARQRTF), "DATAMACE") > 0 Then
+    cBASEDADOS = "DATAMACE"
+  End If
+
+
+
+  cARQRTF = PegCamini(cARQRTF)
+
+  Alert (cARQRTF)
+
+  If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then
+    '
+    'nao busca mdb se for logix ou datamace
+  Else
+    If Not FileExist(cARQRTF, True) Then
+      Command1_Click
+    End If
+    If Not FileExist(cARQRTF, True) Then
+      End
+    End If
+  End If
+
+  Text1.Text = cARQRTF
+
+  If Len(ZGRP) > 0 Then
+
+    SSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & ZGRP & "'"
+    IncluiSQL cARQRTF, SSQL, 2, Array("CODIGO", "NUMERO"), Array(ZGRP, Val(TiraOut(ZGRP))), True, False
+
+
+
+
     Load frmIMAGENS
+
     frmIMAGENS.txtFields(0).Enabled = False
     frmIMAGENS.txtFields(0).TabStop = False
     frmIMAGENS.txtFields(0).Locked = True
@@ -324,175 +452,58 @@ Private Sub cmdEditar_Click()
     frmIMAGENS.txtFields(1).TabStop = False
     frmIMAGENS.txtFields(1).Locked = True
     frmIMAGENS.Show vbModal
-    FilRelat
-    LocalizaGrid Grid, ZGRP
-End Sub
+    End
+  End If
+  Grid.SelectionMode = flexSelectionByRow
+  FilRelat
 
-Private Sub Command1_Click()
-    Text1.Text = OpenArqExt(Me, "", "MDB", "Access *.MDB")
-    cARQRTF = Text1.Text
-End Sub
-
-Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii = 13 Then
-        cmdEditar_Click
-    Else
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
-End Sub
-
-Private Sub Form_Load()
-    Dim nPOS As Long
-    Dim cARQHELP As String
-    Dim SSQL As String
-    
-    CenterFormToScreen Me
-    Me.Caption = cFORMID
-    HelpContextID = nFORMID
-    
-    aORDEM = Array("CODIGO", "NUMERO")
-    aORDES = Array("CODIGO", "NUMERO")
-    cORDEM = "CODIGO"
-    
-    'cARQRTF = UCase(Trim(Command())) 'usuario e senha e conn sao podem ser convertida para maisculas
-    cARQRTF = Trim(Command())
-    cARQRTF = Replace(cARQRTF, UCase(App.EXEName) & ".EXE", "")
-    cARQRTF = Trim(cARQRTF)
-    ZGRP = ""
-    zRPTCAM = ""
-    
-  
-    cARQHELP = PegPath("PATH", "HELP")
-    If FileExist(cARQHELP) Then
-       App.HelpFile = cARQHELP
-    End If
-
-    If Len(cARQRTF) = 0 Then
-        cARQRTF = PegPath("PATH", "IMGARQ")
-    End If
-    
-    '"IMGME06.EXE #"+SELF:SERVER:FIELDGET("CODIGO") -> SELF:SERVER:FIELDGET("CODIGO")+"#{IMGME06}"
-    '"IMGME06.EXE  -> {IMGME06}
-    '01%[CONN]Provider=MSDASQL.1;Persist Security Info=False;Data Source=ol_logix
-    
-        nPOS = InStr(cARQRTF, "#") ''Codigo
-        If nPOS > 0 Then
-            ZGRP = Mid(cARQRTF, 1, nPOS - 1)
-            cARQRTF = Mid(cARQRTF, nPOS + 1)
-        End If
-        nPOS = InStr(cARQRTF, "$") ''caminho do jpg vai para frmimagens
-        If nPOS > 0 Then
-            ZGRP = Mid(cARQRTF, 1, nPOS - 1)
-            cARQRTF = Mid(cARQRTF, nPOS + 1)
-        End If
-        nPOS = InStr(cARQRTF, "%") ''empresa
-        If nPOS > 0 Then
-            zEMPRESA = Mid(cARQRTF, 1, nPOS - 1)
-            cARQRTF = Mid(cARQRTF, nPOS + 1)
-        End If
-       
-        If Len(cARQRTF) = 0 Then                 'Passado Somente Codigo
-            cARQRTF = PegPath("PATH", "IMGARQ")
-        End If
-    
-    cBASEDADOS = ""
-    If InStr(UCase(cARQRTF), "OL_LOGIX") > 0 Then
-        cBASEDADOS = "LOGIX"
-    End If
-    
-    If InStr(UCase(cARQRTF), "DATAMACE") > 0 Then
-        cBASEDADOS = "DATAMACE"
-    End If
-    
-    
-    
-    cARQRTF = PegCamini(cARQRTF)
-    
-    Alert (cARQRTF)
-    
-    If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then
-    '
-    'nao busca mdb se for logix ou datamace
-    Else
-         If Not FileExist(cARQRTF, True) Then
-            Command1_Click
-         End If
-         If Not FileExist(cARQRTF, True) Then
-            End
-         End If
-    End If
-    
-    Text1.Text = cARQRTF
-    
-    If Len(ZGRP) > 0 Then
-    
-        SSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & ZGRP & "'"
-        IncluiSQL cARQRTF, SSQL, 2, Array("CODIGO", "NUMERO"), Array(ZGRP, Val(TiraOut(ZGRP))), True, False
-       
- 
-      
-    
-        Load frmIMAGENS
-        
-        frmIMAGENS.txtFields(0).Enabled = False
-        frmIMAGENS.txtFields(0).TabStop = False
-        frmIMAGENS.txtFields(0).Locked = True
-        frmIMAGENS.txtFields(1).Enabled = False
-        frmIMAGENS.txtFields(1).TabStop = False
-        frmIMAGENS.txtFields(1).Locked = True
-        frmIMAGENS.Show vbModal
-        End
-    End If
-    Grid.SelectionMode = flexSelectionByRow
-    FilRelat
-    
 End Sub
 
 Private Sub FilRelat()
-    Dim cARQ As String
-    Dim cSQL As String
-    cARQ = cARQRTF
-    cSQL = "SELECT CODIGO,NUMERO FROM IMAGENS "
-    If InStr(cARQ, "PF.MDB") > 0 And InStr(cARQ, "CPF.MDB") = 0 Then
-        cSQL = "SELECT PF AS CODIGO,CODINT AS NUMERO FROM PFS "
-    End If
-    If cBASEDADOS = "LOGIX" Then
-        cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto"
-        cSQL = cSQL & " where empresa=" & StrZero(zEMPRESA, 2)
-    End If
-    If cBASEDADOS = "DATAMACE" Then
-        cSQL = " SELECT "
-        cSQL = cSQL & " RIGHT(TAB_CADFUN.FUN_COD_EMP,2) + RIGHT(FORMAT(TAB_CADFUN.FUN_REGISTRO,'00000000'),8) AS CODIGO "
-        cSQL = cSQL & " ,FUN_REGISTRO AS NUMERO "
-        cSQL = cSQL & " FROM gip.fotos AS gip "
-        cSQL = cSQL & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto "
-        cSQL = cSQL & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO "
-    End If
-    If Len(cSUBWHERE) > 0 Then
-        cSQL = cSQL & " WHERE " & cSUBWHERE
-    End If
-    If InStr(cARQ, "PF.MDB") > 0 Then
-    Else
-        cSQL = cSQL & " ORDER BY " & cORDEM
-    End If
-    MontaGridUltra Grid, 2, Array(4000, 1500), Array("Codigo", "Numero"), _
-        Array("L$CODIGO", "L$NUMERO"), cARQ, cSQL
+  Dim cARQ As String
+  Dim cSQL As String
+  cARQ = cARQRTF
+  cSQL = "SELECT CODIGO,NUMERO FROM IMAGENS "
+  If InStr(cARQ, "PF.MDB") > 0 And InStr(cARQ, "CPF.MDB") = 0 Then
+    cSQL = "SELECT PF AS CODIGO,CODINT AS NUMERO FROM PFS "
+  End If
+  If cBASEDADOS = "LOGIX" Then
+    cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto"
+    cSQL = cSQL & " where empresa=" & StrZero(zEMPRESA, 2)
+  End If
+  If cBASEDADOS = "DATAMACE" Then
+    cSQL = " SELECT "
+    cSQL = cSQL & " RIGHT(TAB_CADFUN.FUN_COD_EMP,2) + RIGHT(FORMAT(TAB_CADFUN.FUN_REGISTRO,'00000000'),8) AS CODIGO "
+    cSQL = cSQL & " ,FUN_REGISTRO AS NUMERO "
+    cSQL = cSQL & " FROM gip.fotos AS gip "
+    cSQL = cSQL & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto "
+    cSQL = cSQL & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO "
+  End If
+  If Len(cSUBWHERE) > 0 Then
+    cSQL = cSQL & " WHERE " & cSUBWHERE
+  End If
+  If InStr(cARQ, "PF.MDB") > 0 Then
+  Else
+    cSQL = cSQL & " ORDER BY " & cORDEM
+  End If
+  MontaGridUltra Grid, 2, Array(4000, 1500), Array("Codigo", "Numero"), _
+                 Array("L$CODIGO", "L$NUMERO"), cARQ, cSQL
 End Sub
 
 Private Sub Novo_Click()
-    Dim cCODNEW As String
-    Dim SSQL As String
-    
-    
-    cCODNEW = Busca("Digite o Codigo", "Incluindo", "_", 24)
-    
-    SSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & cCODNEW & "'"
-    
-    If InStr(cARQRTF, "OL_LOGIX") > 0 Then
-    Else
-        IncluiSQL cARQRTF, SSQL, 2, Array("CODIGO", "NUMERO"), Array(cCODNEW, Val(TiraOut(cCODNEW))), True
-    End If
-    FilRelat
+  Dim cCODNEW As String
+  Dim SSQL As String
+
+
+  cCODNEW = Busca("Digite o Codigo", "Incluindo", "_", 24)
+
+  SSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & cCODNEW & "'"
+
+  If InStr(cARQRTF, "OL_LOGIX") > 0 Then
+  Else
+    IncluiSQL cARQRTF, SSQL, 2, Array("CODIGO", "NUMERO"), Array(cCODNEW, Val(TiraOut(cCODNEW))), True
+  End If
+  FilRelat
 End Sub
 
 

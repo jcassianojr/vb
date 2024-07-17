@@ -191,85 +191,85 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    'na inclusao preenchido aqui nao salva
-    'On Error Resume Next
-    '    For iLOOP = 0 To nCAMPOS - 1
-    '        aVAL(iLOOP) = txtFields(iLOOP)
-    '    Next iLOOP
-    '    GrvSQL cARQDES, cSQLDES, nCAMPOS, aCAM, aVAL, aFOR
-    '    Screen.MousePointer = vbDefault
-    '    Unload Me
+'na inclusao preenchido aqui nao salva
+'On Error Resume Next
+'    For iLOOP = 0 To nCAMPOS - 1
+'        aVAL(iLOOP) = txtFields(iLOOP)
+'    Next iLOOP
+'    GrvSQL cARQDES, cSQLDES, nCAMPOS, aCAM, aVAL, aFOR
+'    Screen.MousePointer = vbDefault
+'    Unload Me
 End Sub
 
 Private Sub Editar_Click()
-    GridAtual.Col = 0
-    nREVI = FixInt(GridAtual)
-    FrmClii.Show vbModal, Me
-    Filgrid
+  GridAtual.Col = 0
+  nREVI = FixInt(GridAtual)
+  FrmClii.Show vbModal, Me
+  Filgrid
 End Sub
 
 Private Sub Encerrar_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 
 End Sub
 
 Private Sub excluir_Click()
-    Dim sSQL As String
-    GridAtual.Col = 0
-    nREVI = FixInt(GridAtual)
-    'Conjunto
-    sSQL = "select * from PRODUTO WHERE CLIENTE=" & nPF & " and ITEM=" & nREVI
-    If ApagaSQLP(cARQDES, sSQL) Then
-        Filgrid
-    End If
+  Dim sSQL As String
+  GridAtual.Col = 0
+  nREVI = FixInt(GridAtual)
+  'Conjunto
+  sSQL = "select * from PRODUTO WHERE CLIENTE=" & nPF & " and ITEM=" & nREVI
+  If ApagaSQLP(cARQDES, sSQL) Then
+    Filgrid
+  End If
 End Sub
 
 Private Sub Filgrid()
-    Dim cSQL As String
-    cSQL = "SELECT ITEM,CODIGO,NOME FROM PRODUTO WHERE CLIENTE=" & nPF
-    MontaGridFast GridAtual, 3, Array(400, 2000, 4000), Array("IEB", "Produto", "Descrição"), _
-        Array("ITEM", "L$CODIGO", "NOME"), cARQDES, cSQL
+  Dim cSQL As String
+  cSQL = "SELECT ITEM,CODIGO,NOME FROM PRODUTO WHERE CLIENTE=" & nPF
+  MontaGridFast GridAtual, 3, Array(400, 2000, 4000), Array("IEB", "Produto", "Descrição"), _
+                Array("ITEM", "L$CODIGO", "NOME"), cARQDES, cSQL
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    cARQDES = PegPath("PATH", "DESENHO")
-    cSQLDES = "select * from cliente WHERE cliente=" & nPF
-    CenterFormToScreen Me
-    nCAMPOS = 2
-    aCAM = Array("CLIENTE", "CLINOME")
-    aFOR = Array("NI", "C")
-    aPAD = Array(0, "")
-    aVAL = PegSQL(cARQDES, cSQLDES, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    Filgrid
+  cARQDES = PegPath("PATH", "DESENHO")
+  cSQLDES = "select * from cliente WHERE cliente=" & nPF
+  CenterFormToScreen Me
+  nCAMPOS = 2
+  aCAM = Array("CLIENTE", "CLINOME")
+  aFOR = Array("NI", "C")
+  aPAD = Array(0, "")
+  aVAL = PegSQL(cARQDES, cSQLDES, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  Filgrid
 End Sub
 
 Private Sub Novo_Click()
-    Dim cDESENHO As String
-    Dim sSQL As String
-    nREVI = 0
-    cDESENHO = InputBox("Digite o Produto", "Inclusão Produto", "__")
-    sSQL = "PRODUTO WHERE CLIENTE=" & nPF
-    nREVI = FixInt(PegMAXSQL(cARQDES, sSQL, "item", 0)) + 1
-    sSQL = "SELECT CLIENTE,CODIGO,ITEM FROM PRODUTO WHERE CLIENTE=" & nPF & " AND CODIGO='" & cDESENHO & "'"
-    IncluiSQL cARQDES, sSQL, 3, Array("codigo", "item", "cliente"), Array(cDESENHO, nREVI, nPF), True, False
-    If Not lRETU Then
-        Alert "Produgo Ja Cadastrado"
-        Exit Sub
-    Else
-        Filgrid
-    End If
+  Dim cDESENHO As String
+  Dim sSQL As String
+  nREVI = 0
+  cDESENHO = InputBox("Digite o Produto", "Inclusão Produto", "__")
+  sSQL = "PRODUTO WHERE CLIENTE=" & nPF
+  nREVI = FixInt(PegMAXSQL(cARQDES, sSQL, "item", 0)) + 1
+  sSQL = "SELECT CLIENTE,CODIGO,ITEM FROM PRODUTO WHERE CLIENTE=" & nPF & " AND CODIGO='" & cDESENHO & "'"
+  IncluiSQL cARQDES, sSQL, 3, Array("codigo", "item", "cliente"), Array(cDESENHO, nREVI, nPF), True, False
+  If Not lRETU Then
+    Alert "Produgo Ja Cadastrado"
+    Exit Sub
+  Else
+    Filgrid
+  End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 

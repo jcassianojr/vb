@@ -17,7 +17,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    ''formulario vazio em outro modulos frmpegdb padrao
+  CenterFormToScreen Me
+  ''formulario vazio em outro modulos frmpegdb padrao
 End Sub
 

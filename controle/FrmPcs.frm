@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.OCX"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.0#0"; "BSPrin10.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Begin VB.Form frmPCS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFS"
@@ -23,9 +23,6 @@ Begin VB.Form frmPCS
       Top             =   1200
       _ExtentX        =   1191
       _ExtentY        =   1191
-      LcK1b           =   "yefT59bnyufI583n1ufV59HnyefN58nn0+fK58nnzefR58rn1+fW5w=="
-      LcK2b           =   "reeI58zn+ue059jn1Of656fni+eN543nleeM54HnlueR5w=="
-      AmbientBb       =   $"FrmPcs.frx":058A
    End
    Begin VB.TextBox TXTSSQ 
       BackColor       =   &H00C0FFFF&
@@ -169,13 +166,12 @@ Begin VB.Form frmPCS
       Tab(3).Control(4)=   "Duplicar(2)"
       Tab(3).Control(5)=   "GridPla(2)"
       TabCaption(4)   =   "Checklist"
-      Tab(4).ControlCount=   6
+      Tab(4).ControlCount=   5
       Tab(4).Control(0)=   "Duplicar(11)"
       Tab(4).Control(1)=   "Duplicar(1)"
-      Tab(4).Control(2)=   "Command4(1)"
-      Tab(4).Control(3)=   "Command9(1)"
-      Tab(4).Control(4)=   "Command8(1)"
-      Tab(4).Control(5)=   "GridPla(1)"
+      Tab(4).Control(2)=   "Command9(1)"
+      Tab(4).Control(3)=   "Command8(1)"
+      Tab(4).Control(4)=   "GridPla(1)"
       TabCaption(5)   =   "Alerta"
       Tab(5).ControlCount=   8
       Tab(5).Control(0)=   "Picture1(1)"
@@ -543,7 +539,7 @@ Begin VB.Form frmPCS
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   661
-         Picture         =   "FrmPcs.frx":062A
+         Picture         =   "FrmPcs.frx":058A
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -564,7 +560,7 @@ Begin VB.Form frmPCS
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   661
-         Picture         =   "FrmPcs.frx":0BC4
+         Picture         =   "FrmPcs.frx":0B24
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -585,7 +581,7 @@ Begin VB.Form frmPCS
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   661
-         Picture         =   "FrmPcs.frx":115E
+         Picture         =   "FrmPcs.frx":10BE
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -606,7 +602,7 @@ Begin VB.Form frmPCS
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   661
-         Picture         =   "FrmPcs.frx":16F8
+         Picture         =   "FrmPcs.frx":1658
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -628,7 +624,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":1C92
+         Picture         =   "FrmPcs.frx":1BF2
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -650,7 +646,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":212C
+         Picture         =   "FrmPcs.frx":208C
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -672,7 +668,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":25C6
+         Picture         =   "FrmPcs.frx":2526
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -694,7 +690,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":2A60
+         Picture         =   "FrmPcs.frx":29C0
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -716,7 +712,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":2EFA
+         Picture         =   "FrmPcs.frx":2E5A
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -738,7 +734,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   767
-         Picture         =   "FrmPcs.frx":3394
+         Picture         =   "FrmPcs.frx":32F4
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -760,7 +756,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "FrmPcs.frx":382E
+         Picture         =   "FrmPcs.frx":378E
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -782,7 +778,7 @@ Begin VB.Form frmPCS
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   873
-         Picture         =   "FrmPcs.frx":3CC8
+         Picture         =   "FrmPcs.frx":3C28
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -803,7 +799,7 @@ Begin VB.Form frmPCS
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmPcs.frx":4162
+      Picture         =   "FrmPcs.frx":40C2
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -823,7 +819,7 @@ Begin VB.Form frmPCS
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FrmPcs.frx":46FC
+      Picture         =   "FrmPcs.frx":465C
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -843,7 +839,7 @@ Begin VB.Form frmPCS
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "FrmPcs.frx":4C96
+      Picture         =   "FrmPcs.frx":4BF6
       Caption         =   "Configurar Impressora"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -915,488 +911,488 @@ Dim cSQL As String
 Dim lTROCOU As Variant
 
 Private Sub cmdClose_Click()
-    Dim cSQLIMG As String
-    Dim cCAMIMG As String
-    On Error Resume Next
-    txtFields(1).Text = Replace(txtFields(1).Text, "/", "-") 'chave apresentando erro de gravacao
-    
-    If MDG("Gravar alteraçôes") Then
-        'campos
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txtFields(iLOOP)
-        Next iLOOP
-        GrvSQL cARQUSO, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-        'imagens
-        For iLOOP = 0 To 1
-            If lTROCOU(iLOOP) Then
-                Select Case iLOOP
-                Case 0
-                    cCAMIMG = "IMGCROQUI"        'croqui
-                Case 1
-                    cCAMIMG = "IMGALERTA"        'alerta
-                End Select
-                cSQLIMG = "select PF,SEQ,SSQ," & cCAMIMG & " from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
-                ADOGrvBlob cARQUSO, cSQLIMG, Picture1(iLOOP), cCAMIMG
-            End If
-        Next iLOOP
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Dim cSQLIMG As String
+  Dim cCAMIMG As String
+  On Error Resume Next
+  TXTFIELDS(1).tEXT = Replace(TXTFIELDS(1).tEXT, "/", "-")  'chave apresentando erro de gravacao
+
+  If MDG("Gravar alteraçôes") Then
+    'campos
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    GrvSQL cARQUSO, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    'imagens
+    For iLOOP = 0 To 1
+      If lTROCOU(iLOOP) Then
+        Select Case iLOOP
+        Case 0
+          cCAMIMG = "IMGCROQUI"        'croqui
+        Case 1
+          cCAMIMG = "IMGALERTA"        'alerta
+        End Select
+        cSQLIMG = "select PF,SEQ,SSQ," & cCAMIMG & " from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+        ADOGrvBlob cARQUSO, cSQLIMG, Picture1(iLOOP), cCAMIMG
+      End If
+    Next iLOOP
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 Private Sub CHECKDISPO()
-    Dim cARQDISPO
-    cARQDISPO = PegPath("PATH", "DISPO")
-    nPPAP = PegUltSQL(cARQDISPO, "select numero from DISPO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ, "NUMERO", 0)
-    If nPPAP = 0 Then
-        nPPAP = FixInt(PegMAXSQL(cARQDISPO, "DISPO", "NUMERO", 0)) + 1
-        IncluiSQL cARQDISPO, "SELECT * FROM DISPO WHERE NUMERO=" & nPPAP, 4, Array("NUMERO", "PF", "SEQ", "SSQ"), Array(nPPAP, nPF, nSEQ, nSSQ), True, False
-    End If
+  Dim cARQDISPO
+  cARQDISPO = PegPath("PATH", "DISPO")
+  nPPAP = PegUltSQL(cARQDISPO, "select numero from DISPO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ, "NUMERO", 0)
+  If nPPAP = 0 Then
+    nPPAP = FixInt(PegMAXSQL(cARQDISPO, "DISPO", "NUMERO", 0)) + 1
+    IncluiSQL cARQDISPO, "SELECT * FROM DISPO WHERE NUMERO=" & nPPAP, 4, Array("NUMERO", "PF", "SEQ", "SSQ"), Array(nPPAP, nPF, nSEQ, nSSQ), True, False
+  End If
 End Sub
 
 Private Sub CmdConfImp_Click()
-    FrmPrintSetup.Show vbModal, Me
+  FrmPrintSetup.Show vbModal, Me
 End Sub
 
 Private Sub CmdControleDispo_Click()
-    frmDISPO.Show vbModal
+  frmDISPO.Show vbModal
 End Sub
 
 Private Sub CmdImprimir_Click(Index As Integer)
   If Picture1(Index).Height = 0 Then
-        Alert ("Sem Imagem")
-    Else
-       ePASS01 = Index
-       PrintPreview1.ShowPreview
-    End If
+    Alert ("Sem Imagem")
+  Else
+    ePASS01 = Index
+    PrintPreview1.ShowPreview
+  End If
 End Sub
 
 Private Sub cmdMarPlr_Click(Index As Integer)
-    Dim cFILIAL As String
-    Dim sSQL As String
-    cFILIAL = InputBox("Digite a Filial", "Inclusão Todas Seq", "1")
-    cFILIAL = FixStr(cFILIAL, "1", "TRIM", 5)
-    Select Case nARQPCS
-    Case 0
-        sSQL = "select PF,SEQ,SSQ,item,FILIAL from PFC WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ITEM"
-    Case 1
-        sSQL = "select PF,SEQ,SSQ,item,FILIAL from PFCO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ITEM"
-    Case 2
-        sSQL = "select PF,SEQ,SSQ,item,FILIAL from PFCMS03 WHERE PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' ORDER BY ITEM"
-    End Select
-    GrvSQL Sdb, sSQL, 1, Array("FILIAL"), Array(cFILIAL), Array("")
-    FilRelat (Index)
+  Dim cFILIAL As String
+  Dim sSQL As String
+  cFILIAL = InputBox("Digite a Filial", "Inclusão Todas Seq", "1")
+  cFILIAL = FixStr(cFILIAL, "1", "TRIM", 5)
+  Select Case nARQPCS
+  Case 0
+    sSQL = "select PF,SEQ,SSQ,item,FILIAL from PFC WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ITEM"
+  Case 1
+    sSQL = "select PF,SEQ,SSQ,item,FILIAL from PFCO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ITEM"
+  Case 2
+    sSQL = "select PF,SEQ,SSQ,item,FILIAL from PFCMS03 WHERE PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' ORDER BY ITEM"
+  End Select
+  GrvSQL Sdb, sSQL, 1, Array("FILIAL"), Array(cFILIAL), Array("")
+  FilRelat (Index)
 End Sub
 
 Private Sub CmdPaste_Click(Index As Integer)
-    If Picture1(Index).Height = 0 Then
-        Alert ("Sem Imagem")
-    Else
-        Clipboard.Clear
-        Clipboard.SetData Picture1(Index).Image, (vbCFBitmap)
-    End If
+  If Picture1(Index).Height = 0 Then
+    Alert ("Sem Imagem")
+  Else
+    Clipboard.Clear
+    Clipboard.SetData Picture1(Index).Image, (vbCFBitmap)
+  End If
 End Sub
 
 Private Sub Command1_Click()
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
-    ESCPCT.Show vbModal, Me
-    If lRETU Then
-        FRMPCS.txtFields(1) = eRETU02
-    End If
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  ESCPCT.Show vbModal, Me
+  If lRETU Then
+    FRMPCS.TXTFIELDS(1) = eRETU02
+  End If
 End Sub
 
 Private Sub Command2_Click()
-    Select Case nARQPCS
-    Case 0
-        cARQIMP = "PFC"
-    Case 1
-        cARQIMP = "PFCO"
-    Case 2
-        cARQIMP = "PFCMS03"
-    End Select
-    FrmImp3.Show vbModal, Me
-    FilRelat 0
+  Select Case nARQPCS
+  Case 0
+    cARQIMP = "PFC"
+  Case 1
+    cARQIMP = "PFCO"
+  Case 2
+    cARQIMP = "PFCMS03"
+  End Select
+  FrmImp3.Show vbModal, Me
+  FilRelat 0
 End Sub
 
 Private Sub Command3_Click()
-    Select Case nARQPCS
-    Case 0
-        cARQIMP = "PFC"
-    Case 1
-        cARQIMP = "PFCO"
-    Case 2
-        cARQIMP = "PFCMS03"
-    End Select
-    frmIMP4.Show vbModal, Me
-    FilRelat 0
+  Select Case nARQPCS
+  Case 0
+    cARQIMP = "PFC"
+  Case 1
+    cARQIMP = "PFCO"
+  Case 2
+    cARQIMP = "PFCMS03"
+  End Select
+  frmIMP4.Show vbModal, Me
+  FilRelat 0
 End Sub
 
 Private Sub Command4_Click(Index As Integer)
-    Dim sSQL, cDESCRICAO, aVALTMP As Variant
-    If GridPla(Index).Row > 0 Then
-        GridPla(Index).Col = 0
-        nORD = GridPla(Index)
-        Select Case Index
-        Case 0
-            frmPFC.Show vbModal, Me
-        Case 1, 2
-            sSQL = SUBGERASQL(Index)
-            aVALTMP = PegSQL(Sdb, sSQL, 1, Array("DESCRICAO"), Array("C"), Array(""))
-            cDESCRICAO = aVALTMP(0)
-            cDESCRICAO = InputBox("Digite a Descricao", "Descricao", cDESCRICAO)
-            cDESCRICAO = FixStr(cDESCRICAO, "1", "TRIM", 255)
-            GrvSQL Sdb, sSQL, 1, Array("DESCRICAO"), Array(cDESCRICAO), Array("C")
-        Case 3
-            frmDISPOI.Show vbModal, Me
-        End Select
-        FilRelat (Index)
-    End If
+  Dim sSQL, cDESCRICAO, aVALTMP As Variant
+  If GridPla(Index).Row > 0 Then
+    GridPla(Index).Col = 0
+    nORD = GridPla(Index)
+    Select Case Index
+    Case 0
+      frmPFC.Show vbModal, Me
+    Case 1, 2
+      sSQL = SUBGERASQL(Index)
+      aVALTMP = PegSQL(Sdb, sSQL, 1, Array("DESCRICAO"), Array("C"), Array(""))
+      cDESCRICAO = aVALTMP(0)
+      cDESCRICAO = InputBox("Digite a Descricao", "Descricao", cDESCRICAO)
+      cDESCRICAO = FixStr(cDESCRICAO, "1", "TRIM", 255)
+      GrvSQL Sdb, sSQL, 1, Array("DESCRICAO"), Array(cDESCRICAO), Array("C")
+    Case 3
+      frmDISPOI.Show vbModal, Me
+    End Select
+    FilRelat (Index)
+  End If
 End Sub
 
 Private Sub Command5_Click()
-    Dim cARQPOA
-    cARQPOA = PegPath("PATH", "POA")
-    nPPAP = PegUltSQL(cARQPOA, "select numero from POA WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ, "NUMERO", 0)
-    If nPPAP = 0 Then
-        nPPAP = FixInt(PegMAXSQL(cARQPOA, "POA", "NUMERO", 0)) + 1
-        IncluiSQL cARQPOA, "SELECT * FROM POA WHERE NUMERO=" & nPPAP, 4, Array("NUMERO", "PF", "SEQ", "SSQ"), Array(nPPAP, nPF, nSEQ, nSSQ)
-    End If
-    frmPOA.Show vbModal
+  Dim cARQPOA
+  cARQPOA = PegPath("PATH", "POA")
+  nPPAP = PegUltSQL(cARQPOA, "select numero from POA WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ, "NUMERO", 0)
+  If nPPAP = 0 Then
+    nPPAP = FixInt(PegMAXSQL(cARQPOA, "POA", "NUMERO", 0)) + 1
+    IncluiSQL cARQPOA, "SELECT * FROM POA WHERE NUMERO=" & nPPAP, 4, Array("NUMERO", "PF", "SEQ", "SSQ"), Array(nPPAP, nPF, nSEQ, nSSQ)
+  End If
+  frmPOA.Show vbModal
 End Sub
 
 Private Sub Command6_Click()
-    Dim cARQPOKA
-    
-    If Not AcessaMenu("escPOKA", 2) Then
-       Exit Sub
-    End If
-    
-    cARQPOKA = PegPath("PATH", "POKA")
-    nORD = TxtItem.Text
-    nPPAP = PegUltSQL(cARQPOKA, "select numero from POKA WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
-    If nPPAP = 0 Then
-        nPPAP = FixInt(PegMAXSQL(cARQPOKA, "POKA", "NUMERO", 0)) + 1
-        IncluiSQL cARQPOKA, "SELECT * FROM POKA WHERE NUMERO=" & nPPAP, 5, Array("NUMERO", "PF", "SEQ", "SSQ", "item"), Array(nPPAP, nPF, nSEQ, nSSQ, nORD)
-    End If
-    frmPOKA.Show vbModal
+  Dim cARQPOKA
+
+  If Not AcessaMenu("escPOKA", 2) Then
+    Exit Sub
+  End If
+
+  cARQPOKA = PegPath("PATH", "POKA")
+  nORD = txtItem.tEXT
+  nPPAP = PegUltSQL(cARQPOKA, "select numero from POKA WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
+  If nPPAP = 0 Then
+    nPPAP = FixInt(PegMAXSQL(cARQPOKA, "POKA", "NUMERO", 0)) + 1
+    IncluiSQL cARQPOKA, "SELECT * FROM POKA WHERE NUMERO=" & nPPAP, 5, Array("NUMERO", "PF", "SEQ", "SSQ", "item"), Array(nPPAP, nPF, nSEQ, nSSQ, nORD)
+  End If
+  frmPOKA.Show vbModal
 End Sub
 
 Private Sub subgerimu(Index As Integer)
-    Select Case Index
-    Case 0, 10
-        Select Case nARQPCS
-        Case 0
-            iMU01 = 3
-        Case 1
-            iMU01 = 4
-        Case 2
-            iMU01 = 5
-        End Select
-    Case 1, 11
-        iMU01 = 7
-    Case 2, 12
-        iMU01 = 8
-    Case 3, 13
-        iMU01 = 9
+  Select Case Index
+  Case 0, 10
+    Select Case nARQPCS
+    Case 0
+      iMU01 = 3
+    Case 1
+      iMU01 = 4
+    Case 2
+      iMU01 = 5
     End Select
+  Case 1, 11
+    iMU01 = 7
+  Case 2, 12
+    iMU01 = 8
+  Case 3, 13
+    iMU01 = 9
+  End Select
 End Sub
 
 Private Function SUBGERASQL(Index As Integer)
-    Dim sSQL As String
-    Select Case Index
-    Case 0, 10
-        Select Case nARQPCS
-        Case 0
-            sSQL = "select * from PFC WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
-        Case 1
-            sSQL = "select * from PFCO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
-        Case 2
-            sSQL = "select * from PFCMS03 WHERE PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' AND ITEM=" & nORD
-        End Select
-    Case 1, 11
-        sSQL = "select * from PFSCHECKLIST WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ORDEM=" & nORD
-    Case 2, 12
-        sSQL = "select * from PFSONTHEJOB WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ORDEM=" & nORD
-    Case 3, 13
-        sSQL = "select * from DISPOI WHERE NUMERO=" & nPPAP & " AND ITEM=" & nORD
+  Dim sSQL As String
+  Select Case Index
+  Case 0, 10
+    Select Case nARQPCS
+    Case 0
+      sSQL = "select * from PFC WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
+    Case 1
+      sSQL = "select * from PFCO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
+    Case 2
+      sSQL = "select * from PFCMS03 WHERE PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' AND ITEM=" & nORD
     End Select
-    SUBGERASQL = sSQL
+  Case 1, 11
+    sSQL = "select * from PFSCHECKLIST WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ORDEM=" & nORD
+  Case 2, 12
+    sSQL = "select * from PFSONTHEJOB WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ORDEM=" & nORD
+  Case 3, 13
+    sSQL = "select * from DISPOI WHERE NUMERO=" & nPPAP & " AND ITEM=" & nORD
+  End Select
+  SUBGERASQL = sSQL
 End Function
 
 Private Sub Command8_Click(Index As Integer)
-    Dim nGRIDINDEX
-    nNOVAPOS = FixInt(PegUltGrid(GridPla(Index), 0), 0) + 1
-    subgerimu Index
-    NewOrd.Show vbModal, Me
-    FilRelat (Index)
+  Dim nGRIDINDEX
+  nNOVAPOS = FixInt(PegUltGrid(GridPla(Index), 0), 0) + 1
+  subgerimu Index
+  NewOrd.Show vbModal, Me
+  FilRelat (Index)
 End Sub
 
 Private Sub Command9_Click(Index As Integer)
-    Dim sSQL As String
-    Dim cSQL As String
-    If GridPla(Index).Row > 0 Then
-        GridPla(Index).Col = 0
-        nORD = FixInt(GridPla(Index))
-        sSQL = SUBGERASQL(Index)
-        cSQL = Sdb
-        If Index = 3 Then
-            cSQL = PegPath("PATH", "DISPO")
-        End If
-        If ApagaSQLP(cSQL, sSQL) Then
-            FilRelat (Index)
-        End If
+  Dim sSQL As String
+  Dim cSQL As String
+  If GridPla(Index).Row > 0 Then
+    GridPla(Index).Col = 0
+    nORD = FixInt(GridPla(Index))
+    sSQL = SUBGERASQL(Index)
+    cSQL = Sdb
+    If Index = 3 Then
+      cSQL = PegPath("PATH", "DISPO")
     End If
+    If ApagaSQLP(cSQL, sSQL) Then
+      FilRelat (Index)
+    End If
+  End If
 End Sub
 
 Private Sub DelImg_Click(Index As Integer)
-    Set Picture1(Index).Picture = Nothing
-    Set Picture2(Index).Picture = Nothing
-    lTROCOU(Index) = True
+  Set Picture1(Index).Picture = Nothing
+  Set Picture2(Index).Picture = Nothing
+  lTROCOU(Index) = True
 End Sub
 
 Private Sub Duplicar_Click(Index As Integer)
-    Dim aVALTMP As Variant
-    Dim aCAMTMP As Variant
-    Dim aFORTMP As Variant
-    Dim aPADTMP As Variant
-    Dim sSQL As String
-    Dim nCAMPOS As Integer
-    Dim cARQ As String
-    Dim NINDEXREF As Integer
+  Dim aVALTMP As Variant
+  Dim aCAMTMP As Variant
+  Dim aFORTMP As Variant
+  Dim aPADTMP As Variant
+  Dim sSQL As String
+  Dim nCAMPOS As Integer
+  Dim cARQ As String
+  Dim NINDEXREF As Integer
 
 
-    cARQ = Sdb
-    If Index = 3 Or Index = 13 Then
-        cARQ = PegPath("PATH", "DISPO")
-    End If
-    NINDEXREF = Index
-    If NINDEXREF > 10 Then
-        NINDEXREF = Index - 10
-    End If
- 
-    
-    GridPla(NINDEXREF).Col = 0
-    nORD = FixInt(GridPla(NINDEXREF))
-    If nORD = 0 Then
-        Alert ("Clique no Item de Origem Antes")
-        Exit Sub
-    End If
+  cARQ = Sdb
+  If Index = 3 Or Index = 13 Then
+    cARQ = PegPath("PATH", "DISPO")
+  End If
+  NINDEXREF = Index
+  If NINDEXREF > 10 Then
+    NINDEXREF = Index - 10
+  End If
 
-    nNOVAPOS = FixInt(PegUltGrid(GridPla(NINDEXREF), 0), 0) + 1
-    nNOVAPOS = FixInt(Val(Busca("No", "Renumerando", CStr(nNOVAPOS), 8)))
-    If nNOVAPOS = 0 Then
-        Alert ("No em Branco")
-        Exit Sub
-    End If
-    LocalizaGrid GridPla(NINDEXREF), nNOVAPOS, , False
-    If lRETU Then
-        Alert "sequencia ja existe"
-        Exit Sub
-    End If
-   
-    sSQL = SUBGERASQL(Index)
-    Select Case Index
-    Case 0, 10                                   ' plano de controle
-        nCAMPOS = 24
-        aCAMTMP = Array("COP", "DEscr", "CARAC", "SIGI", "ESPE", "TOL", "cqtde", "freq", _
-                        "TIPINS", "InStr", "CAPA", "REACAO", "Setor", "CARTA", "CITEM", "PROCESSO", _
-                        "CODME04", "CODME04B", "FILIAL", "TIPINSB", "INSTRB", "CERTFOR", "SAIPROC", "SAIRI")
-          
-        aPADTMP = Array("", "", "", "", "", "", "", "", _
-                        "", "", "", "", "", "", "", "", _
-                        "", "", "", "", "", False, False, False)
-                        
-        aFORTMP = Array("C", "C", "C", "C", "C", "C", "C", "C", _
-                        "C", "C", "C", "C", "C", "C", "C", "C", _
-                        "C", "C", "C", "C", "C", "B", "B", "B")
-    Case 1, 11, 2, 12, 13                        'checklist on the job
-        nCAMPOS = 1
-        aCAMTMP = Array("DESCRICAO")
-        aPADTMP = Array("")
-        aFORTMP = Array("C")
-    End Select
-    
-    aVALTMP = PegSQL(cARQ, sSQL, nCAMPOS, aCAMTMP, aFORTMP, aPADTMP)
-   
-    eRETU01 = 0
-    subgerimu Index
-    NewOrd.Show vbModal, Me
-  
-   
-    If Index >= 10 Then                          'reordenacao apaga
-        ApagaSQL cARQ, sSQL
-    End If
-    
-    nORD = eRETU01
-    sSQL = SUBGERASQL(Index)
-   
-    GrvSQL cARQ, sSQL, nCAMPOS, aCAMTMP, aVALTMP, aFORTMP
-    FilRelat (Index)
+
+  GridPla(NINDEXREF).Col = 0
+  nORD = FixInt(GridPla(NINDEXREF))
+  If nORD = 0 Then
+    Alert ("Clique no Item de Origem Antes")
+    Exit Sub
+  End If
+
+  nNOVAPOS = FixInt(PegUltGrid(GridPla(NINDEXREF), 0), 0) + 1
+  nNOVAPOS = FixInt(Val(Busca("No", "Renumerando", CStr(nNOVAPOS), 8)))
+  If nNOVAPOS = 0 Then
+    Alert ("No em Branco")
+    Exit Sub
+  End If
+  LocalizaGrid GridPla(NINDEXREF), nNOVAPOS, , False
+  If lRETU Then
+    Alert "sequencia ja existe"
+    Exit Sub
+  End If
+
+  sSQL = SUBGERASQL(Index)
+  Select Case Index
+  Case 0, 10                                   ' plano de controle
+    nCAMPOS = 24
+    aCAMTMP = Array("COP", "DEscr", "CARAC", "SIGI", "ESPE", "TOL", "cqtde", "freq", _
+                    "TIPINS", "InStr", "CAPA", "REACAO", "Setor", "CARTA", "CITEM", "PROCESSO", _
+                    "CODME04", "CODME04B", "FILIAL", "TIPINSB", "INSTRB", "CERTFOR", "SAIPROC", "SAIRI")
+
+    aPADTMP = Array("", "", "", "", "", "", "", "", _
+                    "", "", "", "", "", "", "", "", _
+                    "", "", "", "", "", False, False, False)
+
+    aFORTMP = Array("C", "C", "C", "C", "C", "C", "C", "C", _
+                    "C", "C", "C", "C", "C", "C", "C", "C", _
+                    "C", "C", "C", "C", "C", "B", "B", "B")
+  Case 1, 11, 2, 12, 13                        'checklist on the job
+    nCAMPOS = 1
+    aCAMTMP = Array("DESCRICAO")
+    aPADTMP = Array("")
+    aFORTMP = Array("C")
+  End Select
+
+  aVALTMP = PegSQL(cARQ, sSQL, nCAMPOS, aCAMTMP, aFORTMP, aPADTMP)
+
+  eRETU01 = 0
+  subgerimu Index
+  NewOrd.Show vbModal, Me
+
+
+  If Index >= 10 Then                          'reordenacao apaga
+    ApagaSQL cARQ, sSQL
+  End If
+
+  nORD = eRETU01
+  sSQL = SUBGERASQL(Index)
+
+  GrvSQL cARQ, sSQL, nCAMPOS, aCAMTMP, aVALTMP, aFORTMP
+  FilRelat (Index)
 
 End Sub
 
 Private Sub FilRelat(Index As Integer)
-    On Error Resume Next
-    Dim cSQL As String
-    Select Case Index
-    Case 0                                       'item
-        Select Case nARQPCS
-        Case 0
-            cSQL = "select ITEM,CITEM, FILIAL, SETOR, DESCR from PFC WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ITEM"
-        Case 1
-            cSQL = "select ITEM,CITEM, FILIAL, SETOR, DESCR from PFCO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ITEM"
-        Case 2
-            cSQL = "select ITEM,CITEM, FILIAL, SETOR, DESCR from PFCMS03 WHERE PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' ORDER BY ITEM"
-        End Select
-        MontaGridFast GridPla(Index), 5, Array(400, 600, 600, 400, 4000), Array("Ord", "Item", "Filial", "Setor", "Descricao"), _
-        Array("L$ITEM", "L$CITEM", "L$FILIAL", "L$SETOR", "L$DESCR"), Sdb, cSQL
-    Case 1                                       'checklist
-        cSQL = "select ORDEM,DESCRICAO from PFSCHECKLIST WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ORDEM"
-        MontaGridFast GridPla(Index), 2, Array(400, 4000), Array("Ord", "Descricao"), _
-        Array("L$ORDEM", "L$DESCRICAO"), Sdb, cSQL
-    Case 2                                       'on the job
-        cSQL = "select ORDEM,DESCRICAO from PFSONTHEJOB  WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ORDEM"
-        MontaGridFast GridPla(Index), 2, Array(400, 4000), Array("Ord", "Descricao"), _
-        Array("L$ORDEM", "L$DESCRICAO"), Sdb, cSQL
-    Case 3                                       'dispositivo
-        cSQL = "select ITEM,DESCRICAO from DISPOI  WHERE NUMERO=" & nPPAP & " ORDER BY ITEM"
-        MontaGridFast GridPla(Index), 2, Array(400, 4000), Array("Ord", "Descricao"), _
-        Array("L$ITEM", "L$DESCRICAO"), PegPath("PATH", "DISPO"), cSQL
-     
+  On Error Resume Next
+  Dim cSQL As String
+  Select Case Index
+  Case 0                                       'item
+    Select Case nARQPCS
+    Case 0
+      cSQL = "select ITEM,CITEM, FILIAL, SETOR, DESCR from PFC WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ITEM"
+    Case 1
+      cSQL = "select ITEM,CITEM, FILIAL, SETOR, DESCR from PFCO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ITEM"
+    Case 2
+      cSQL = "select ITEM,CITEM, FILIAL, SETOR, DESCR from PFCMS03 WHERE PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' ORDER BY ITEM"
     End Select
+    MontaGridFast GridPla(Index), 5, Array(400, 600, 600, 400, 4000), Array("Ord", "Item", "Filial", "Setor", "Descricao"), _
+                  Array("L$ITEM", "L$CITEM", "L$FILIAL", "L$SETOR", "L$DESCR"), Sdb, cSQL
+  Case 1                                       'checklist
+    cSQL = "select ORDEM,DESCRICAO from PFSCHECKLIST WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ORDEM"
+    MontaGridFast GridPla(Index), 2, Array(400, 4000), Array("Ord", "Descricao"), _
+                  Array("L$ORDEM", "L$DESCRICAO"), Sdb, cSQL
+  Case 2                                       'on the job
+    cSQL = "select ORDEM,DESCRICAO from PFSONTHEJOB  WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " ORDER BY ORDEM"
+    MontaGridFast GridPla(Index), 2, Array(400, 4000), Array("Ord", "Descricao"), _
+                  Array("L$ORDEM", "L$DESCRICAO"), Sdb, cSQL
+  Case 3                                       'dispositivo
+    cSQL = "select ITEM,DESCRICAO from DISPOI  WHERE NUMERO=" & nPPAP & " ORDER BY ITEM"
+    MontaGridFast GridPla(Index), 2, Array(400, 4000), Array("Ord", "Descricao"), _
+                  Array("L$ITEM", "L$DESCRICAO"), PegPath("PATH", "DISPO"), cSQL
+
+  End Select
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    Dim cCAMIMG As String
-    Dim cSQLIMG As String
-    CenterFormToScreen Me
-    
-    TXTPF.Text = nPF
-    TXTSEQ.Text = nSEQ
-    TXTSSQ.Text = nSSQ
-    
-    
-    lTROCOU = Array(False, False, False, False, False)
-    cARQPF = PegPath("PATH", "PF")
-    cARQPFG = PegPath("PATH", "PFG")
-    cARQPFP = PegPath("PATH", "PFP")
-    cARQUSO = cARQPF
-    If nSEQ = 99 And nSSQ = 99 Then
-        If InStr(Sdb, "PFG.MDB") Then
-            cARQUSO = cARQPFG
-        End If
-        If InStr(Sdb, "PFP.MDB") Then
-            cARQUSO = cARQPFP
-        End If
+  Dim cCAMIMG As String
+  Dim cSQLIMG As String
+  CenterFormToScreen Me
+
+  TXTPF.tEXT = nPF
+  TXTSEQ.tEXT = nSEQ
+  TXTSSQ.tEXT = nSSQ
+
+
+  lTROCOU = Array(False, False, False, False, False)
+  cARQPF = PegPath("PATH", "PF")
+  cARQPFG = PegPath("PATH", "PFG")
+  cARQPFP = PegPath("PATH", "PFP")
+  cARQUSO = cARQPF
+  If nSEQ = 99 And nSSQ = 99 Then
+    If InStr(Sdb, "PFG.MDB") Then
+      cARQUSO = cARQPFG
     End If
-    If nARQPCS = 2 Then
-        TxtCodComp.Text = Ccodcomp
-    Else
-        TxtCodComp.Visible = False
-        Label4.Visible = False
+    If InStr(Sdb, "PFP.MDB") Then
+      cARQUSO = cARQPFP
     End If
-   
-    Select Case nARQPCS
+  End If
+  If nARQPCS = 2 Then
+    TxtCodComp.tEXT = Ccodcomp
+  Else
+    TxtCodComp.Visible = False
+    Label4.Visible = False
+  End If
+
+  Select Case nARQPCS
+  Case 0
+    cSQL = "select PF,SEQ,SSQ,DESCRI,PCTIPO,PCOBS,CODINT from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+  Case 1
+    cSQL = "select PF,SEQ,SSQ,DESCRI,PCTIPO,PCOBS,CODINT from PFSO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+  Case 2
+    cSQL = "select PF,codcomp,DESCRI,PCTIPO,PCOBS,CODINT from PFMS03 WHERE PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "'"
+  End Select
+  nCAMPOS = 4
+  aCAM = Array("DESCRI", "PCTIPO", "PCOBS", "CODINT")
+  aFOR = Array("C", "C", "C", "C")
+  aPAD = Array("", "", "", "")
+  aVAL = PegSQL(cARQUSO, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  For iLOOP = 0 To 1
+    Select Case iLOOP
     Case 0
-        cSQL = "select PF,SEQ,SSQ,DESCRI,PCTIPO,PCOBS,CODINT from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+      cCAMIMG = "IMGCROQUI"                'croqui
     Case 1
-        cSQL = "select PF,SEQ,SSQ,DESCRI,PCTIPO,PCOBS,CODINT from PFSO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
-    Case 2
-        cSQL = "select PF,codcomp,DESCRI,PCTIPO,PCOBS,CODINT from PFMS03 WHERE PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "'"
+      cCAMIMG = "IMGALERTA"                'alerta
     End Select
-    nCAMPOS = 4
-    aCAM = Array("DESCRI", "PCTIPO", "PCOBS", "CODINT")
-    aFOR = Array("C", "C", "C", "C")
-    aPAD = Array("", "", "", "")
-    aVAL = PegSQL(cARQUSO, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    For iLOOP = 0 To 1
-        Select Case iLOOP
-        Case 0
-            cCAMIMG = "IMGCROQUI"                'croqui
-        Case 1
-            cCAMIMG = "IMGALERTA"                'alerta
-        End Select
-        cSQLIMG = "select " & cCAMIMG & " from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
-        If ADOPegBlob(cARQUSO, cSQLIMG, Picture1(iLOOP), cCAMIMG) Then
-            StretchSourcePictureFromPicture Picture1(iLOOP), Picture2(iLOOP)
-            If FixNum(eRETU01) > 500000 Then
-                Alert ("Imagem Muito Grande,Ajuste o tamanho")
-                salvarpict Me, Picture1(iLOOP), cCAMIMG & "_PF_" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3)
-                Set Picture1(iLOOP).Picture = Nothing
-                Set Picture2(iLOOP).Picture = Nothing
-                lTROCOU(iLOOP) = True
-            End If
-        Else
-            Set Picture1(iLOOP).Picture = Nothing
-            Set Picture2(iLOOP).Picture = Nothing
-        End If
-    Next iLOOP
-    CHECKDISPO
-    FilRelat (0)                                 'item
-    FilRelat (1)                                 'checklist
-    FilRelat (2)                                 'on the job
-    FilRelat (3)                                 'dispositivo
-    
-    txtFields(1).Text = Replace(txtFields(1).Text, "/", "-") 'chave apresentando erro de gravacao
-    PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
-    PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
-    
+    cSQLIMG = "select " & cCAMIMG & " from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+    If ADOPegBlob(cARQUSO, cSQLIMG, Picture1(iLOOP), cCAMIMG) Then
+      StretchSourcePictureFromPicture Picture1(iLOOP), Picture2(iLOOP)
+      If FixNum(eRETU01) > 500000 Then
+        Alert ("Imagem Muito Grande,Ajuste o tamanho")
+        salvarpict Me, Picture1(iLOOP), cCAMIMG & "_PF_" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3)
+        Set Picture1(iLOOP).Picture = Nothing
+        Set Picture2(iLOOP).Picture = Nothing
+        lTROCOU(iLOOP) = True
+      End If
+    Else
+      Set Picture1(iLOOP).Picture = Nothing
+      Set Picture2(iLOOP).Picture = Nothing
+    End If
+  Next iLOOP
+  CHECKDISPO
+  FilRelat (0)                                 'item
+  FilRelat (1)                                 'checklist
+  FilRelat (2)                                 'on the job
+  FilRelat (3)                                 'dispositivo
+
+  TXTFIELDS(1).tEXT = Replace(TXTFIELDS(1).tEXT, "/", "-")  'chave apresentando erro de gravacao
+  PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
+  PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
+
 End Sub
-    
+
 Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
-    PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
-    UpdateReport = False ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
+  PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
+  UpdateReport = False  ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub VerImg_Click(Index As Integer)
-    frmPicViewer.Show vbModal, Me
-    If lRETU Then
-        If lerarquivoimagem(eRETU01, Picture1(Index), Picture2(Index)) Then
-            lTROCOU(Index) = True
-        End If
+  frmPicViewer.Show vbModal, Me
+  If lRETU Then
+    If lerarquivoimagem(eRETU01, Picture1(Index), Picture2(Index)) Then
+      lTROCOU(Index) = True
     End If
+  End If
 End Sub
 Private Sub imgsave_Click(Index As Integer)
-    Dim cARQ As String
-    Select Case Index
-    Case 0
-        cARQ = "croqui"
-    Case 1
-        cARQ = "alerta"
-    End Select
-    cARQ = cARQ & "_PF" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3)
-    salvarpict Me, Picture1(Index), cARQ
+  Dim cARQ As String
+  Select Case Index
+  Case 0
+    cARQ = "croqui"
+  Case 1
+    cARQ = "alerta"
+  End Select
+  cARQ = cARQ & "_PF" & StrZero(nPF, 6) & "_SEQ_" & StrZero(nSEQ, 3) & "_SSQ_" & StrZero(nSSQ, 3)
+  salvarpict Me, Picture1(Index), cARQ
 End Sub
 Private Sub Incluirimagem_Click(Index As Integer)
-    Dim STMPFILE
-    STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
-    If lerarquivoimagem(STMPFILE, Picture1(Index), Picture2(Index)) Then
-        lTROCOU(Index) = True
-    End If
+  Dim STMPFILE
+  STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
+  If lerarquivoimagem(STMPFILE, Picture1(Index), Picture2(Index)) Then
+    lTROCOU(Index) = True
+  End If
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-    On Error Resume Next
-    Printer.Print
-    Printer.PaintPicture Picture1(ePASS01), 0, 0
+  On Error Resume Next
+  Printer.Print
+  Printer.PaintPicture Picture1(ePASS01), 0, 0
 End Sub
 

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmETI 
    Caption         =   "Cadastro ETI"
    ClientHeight    =   6285
@@ -13,7 +13,7 @@ Begin VB.Form frmETI
    ScaleHeight     =   6285
    ScaleWidth      =   10170
    StartUpPosition =   2  'CenterScreen
-   Begin vbccr18.DTPicker DTPicker1 
+   Begin VBCCR18.DTPicker DTPicker1 
       Height          =   375
       Left            =   2160
       TabIndex        =   28
@@ -365,144 +365,144 @@ Dim nREV As Integer
 Dim nREVI As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 2
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        aVAL(9) = DTPicker1.Value
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 2
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    aVAL(9) = DTPicker1.Value
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub CmdMotRev_Click()
-    gridrev.Col = 1
-    nREV = FixInt(gridrev)
-    ComMotAlt.Enabled = True
-    ComMotExc.Enabled = True
-    ComMotInc.Enabled = True
-    Filgridrevi
+  gridrev.Col = 1
+  nREV = FixInt(gridrev)
+  ComMotAlt.Enabled = True
+  ComMotExc.Enabled = True
+  ComMotInc.Enabled = True
+  Filgridrevi
 End Sub
 
 Private Sub CmdNovaREV_Click()
-    If nNUMERO < 1 Then
-        Alert ("Preencher numero interno")
-        Exit Sub
-    End If
-    TXTFIELDS(5) = FixInt(TXTFIELDS(5), 0) + 1
-    DTPicker1 = Date
-    IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & " and tipo='ETI' and revisao=" & TXTFIELDS(5), 4, Array("PF", "REVISAO", "TIPO", "DatA"), _
-        Array(nNUMERO, TXTFIELDS(5), "ETI", Date), True, False
-    Filgridrev
+  If nNUMERO < 1 Then
+    Alert ("Preencher numero interno")
+    Exit Sub
+  End If
+  TXTFIELDS(5) = FixInt(TXTFIELDS(5), 0) + 1
+  DTPicker1 = Date
+  IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & " and tipo='ETI' and revisao=" & TXTFIELDS(5), 4, Array("PF", "REVISAO", "TIPO", "DatA"), _
+            Array(nNUMERO, TXTFIELDS(5), "ETI", Date), True, False
+  Filgridrev
 End Sub
 
 Private Sub Command1_Click()
-    If nREV = 0 Then
-        Alert "Revisão Nao Escolhida"
-        Exit Sub
-    End If
-    ePASS01 = "select * from rev WHERE PF=" & nPF & " AND TIPO='ETI' AND REVISAO=" & nREV
-    FrmRev.Show vbModal, Me
+  If nREV = 0 Then
+    Alert "Revisão Nao Escolhida"
+    Exit Sub
+  End If
+  ePASS01 = "select * from rev WHERE PF=" & nPF & " AND TIPO='ETI' AND REVISAO=" & nREV
+  FrmRev.Show vbModal, Me
 End Sub
 
 Private Sub ComMotAlt_Click()
-    If gridrevi.Row > 0 Then
-        gridrevi.Col = 3
-        nREVI = FixInt(gridrevi, 0)
-        ePASS01 = "select * from revi WHERE PF=" & nNUMERO & " AND TIPO='ETI' AND REVISAO=" & nREV & " AND  ITEM=" & nREVI
-        lEDITAR = True
-        frmREVI.Show vbModal, Me
-        Filgridrevi
-    End If
+  If gridrevi.Row > 0 Then
+    gridrevi.Col = 3
+    nREVI = FixInt(gridrevi, 0)
+    ePASS01 = "select * from revi WHERE PF=" & nNUMERO & " AND TIPO='ETI' AND REVISAO=" & nREV & " AND  ITEM=" & nREVI
+    lEDITAR = True
+    frmREVI.Show vbModal, Me
+    Filgridrevi
+  End If
 End Sub
 
 Private Sub ComMotExc_Click()
-    Dim sSQL As String
-    If gridrevi.Row > 0 Then
-        gridrevi.Col = 3
-        nREVI = FixInt(gridrevi, 0)
-        sSQL = "select * from revi WHERE PF=" & nNUMERO & " AND TIPO='ETI' AND REVISAO=" & nREV & " AND  ITEM=" & nREVI
-        If ApagaSQLP(cARQPF, sSQL) Then
-            Filgridrevi
-        End If
+  Dim sSQL As String
+  If gridrevi.Row > 0 Then
+    gridrevi.Col = 3
+    nREVI = FixInt(gridrevi, 0)
+    sSQL = "select * from revi WHERE PF=" & nNUMERO & " AND TIPO='ETI' AND REVISAO=" & nREV & " AND  ITEM=" & nREVI
+    If ApagaSQLP(cARQPF, sSQL) Then
+      Filgridrevi
     End If
+  End If
 End Sub
 
 Private Sub ComMotInc_Click()
-    Dim nITEM As Long
-    Dim sSQL As String
-    sSQL = "revI WHERE PF=" & nNUMERO & " AND TIPO='ETI' AND REVISAO=" & nREV
-    nITEM = FixInt(PegMAXSQL(cARQPF, sSQL, "ITEM", 0)) + 1
-    sSQL = "select * from revi WHERE PF=" & nNUMERO & " AND TIPO='ETI' AND REVISAO=" & nREV & " AND  ITEM=" & nITEM
-    IncluiSQL cARQPF, sSQL, 4, Array("PF", "REVISAO", "TIPO", "ITEM"), _
-        Array(nNUMERO, nREV, "ETI", nITEM), True, False
+  Dim nITEM As Long
+  Dim sSQL As String
+  sSQL = "revI WHERE PF=" & nNUMERO & " AND TIPO='ETI' AND REVISAO=" & nREV
+  nITEM = FixInt(PegMAXSQL(cARQPF, sSQL, "ITEM", 0)) + 1
+  sSQL = "select * from revi WHERE PF=" & nNUMERO & " AND TIPO='ETI' AND REVISAO=" & nREV & " AND  ITEM=" & nITEM
+  IncluiSQL cARQPF, sSQL, 4, Array("PF", "REVISAO", "TIPO", "ITEM"), _
+            Array(nNUMERO, nREV, "ETI", nITEM), True, False
 End Sub
 
 Private Sub Filgridrev()
-    Dim sSQL As String
-    sSQL = "select PF,REVISAO,TIPO,DATA from rev WHERE PF=" & nNUMERO & " AND TIPO='ETI' ORDER BY REVISAO"
-    MontaGridFast gridrev, 4, Array(400, 400, 400, 1200), Array("PF", "REV", "Tipo", "DATA"), _
-        Array("PF", "REVISAO", "TIPO", "DATA"), cARQPF, sSQL
+  Dim sSQL As String
+  sSQL = "select PF,REVISAO,TIPO,DATA from rev WHERE PF=" & nNUMERO & " AND TIPO='ETI' ORDER BY REVISAO"
+  MontaGridFast gridrev, 4, Array(400, 400, 400, 1200), Array("PF", "REV", "Tipo", "DATA"), _
+                Array("PF", "REVISAO", "TIPO", "DATA"), cARQPF, sSQL
 End Sub
 
 Private Sub Filgridrevi()
-    Dim sSQL As String
-    sSQL = "select * from revI WHERE PF=" & nNUMERO & " AND REVISAO=" & nREV & " AND TIPO='ETI'ORDER BY ITEM"
-    MontaGridFast gridrevi, 5, Array(400, 400, 400, 400, 2000), Array("PF", "Rev", "Tipo", "Item", "Motivo"), _
-        Array("PF", "REVISAO", "TIPO", "ITEM", "MOTIVO"), cARQPF, sSQL
+  Dim sSQL As String
+  sSQL = "select * from revI WHERE PF=" & nNUMERO & " AND REVISAO=" & nREV & " AND TIPO='ETI'ORDER BY ITEM"
+  MontaGridFast gridrevi, 5, Array(400, 400, 400, 400, 2000), Array("PF", "Rev", "Tipo", "Item", "Motivo"), _
+                Array("PF", "REVISAO", "TIPO", "ITEM", "MOTIVO"), cARQPF, sSQL
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQPF = PegPath("PATH", "PF")
-    cARQ = GeraConn(zMANA5EMP, "SDECDX")
-    cSQL = "select * from ETI WHERE CODIGO='" & Trim(ePASS01) & "'"
-    nCAMPOS = 10
-    aCAM = Array("CODIGO", "CAMADA", "SALTO", "NOME", "ESPE", "REV", "NINTERNO", "SUPE", "COGNOME", "REVDATA")
-    aFOR = Array("C", "C", "C", "C", "C", "NI", "NI", "C", "C", "D")
-    aPAD = Array("", "", "", "", "", 0, 0, "", "", Date)
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 2
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    If IsDate(aVAL(9)) Then
-        DTPicker1.Value = aVAL(9)
-    End If
-    nNUMERO = FixInt(TXTFIELDS(6), 0)
-    ComMotAlt.Enabled = False
-    ComMotExc.Enabled = False
-    ComMotInc.Enabled = False
-    Filgridrev
+  CenterFormToScreen Me
+  cARQPF = PegPath("PATH", "PF")
+  cARQ = GeraConn(zMANA5EMP, "SDECDX")
+  cSQL = "select * from ETI WHERE CODIGO='" & Trim(ePASS01) & "'"
+  nCAMPOS = 10
+  aCAM = Array("CODIGO", "CAMADA", "SALTO", "NOME", "ESPE", "REV", "NINTERNO", "SUPE", "COGNOME", "REVDATA")
+  aFOR = Array("C", "C", "C", "C", "C", "NI", "NI", "C", "C", "D")
+  aPAD = Array("", "", "", "", "", 0, 0, "", "", Date)
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 2
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  If IsDate(aVAL(9)) Then
+    DTPicker1.Value = aVAL(9)
+  End If
+  nNUMERO = FixInt(TXTFIELDS(6), 0)
+  ComMotAlt.Enabled = False
+  ComMotExc.Enabled = False
+  ComMotInc.Enabled = False
+  Filgridrev
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index = 6 Then
-        KeyAscii = ValiText(KeyAscii, "#NI")
-    End If
+  If Index = 6 Then
+    KeyAscii = ValiText(KeyAscii, "#NI")
+  End If
 End Sub
 
 Private Sub TXTFIELDS_LostFocus(Index As Integer)
-    If Index = 6 Then
-        nNUMERO = FixInt(TXTFIELDS(6), 0)
-    End If
+  If Index = 6 Then
+    nNUMERO = FixInt(TXTFIELDS(6), 0)
+  End If
 End Sub
 
 

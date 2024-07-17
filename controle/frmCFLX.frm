@@ -4998,61 +4998,61 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = PegPath("PATH", "PF")
-    cSQL = "select * frOm cflx where NUMERO=" & ePASS01
-    nCAMPOS = 3
-    aCAM = Array("LETRA", "DESCRICAO", "NUMERO")
-    aFOR = Array("C", "C", "NI")
-    aPAD = Array("", "", 32)
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    TXTFIELDS(0).Font = "isoqsymbol"
-    For iLOOP = 0 To 255
-        letra(iLOOP).Font = "isoqsymbol"
-        letra(iLOOP).tEXT = Chr(iLOOP)
-        letra(iLOOP).Locked = True
-    Next iLOOP
+  CenterFormToScreen Me
+  cARQ = PegPath("PATH", "PF")
+  cSQL = "select * frOm cflx where NUMERO=" & ePASS01
+  nCAMPOS = 3
+  aCAM = Array("LETRA", "DESCRICAO", "NUMERO")
+  aFOR = Array("C", "C", "NI")
+  aPAD = Array("", "", 32)
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  TXTFIELDS(0).Font = "isoqsymbol"
+  For iLOOP = 0 To 255
+    letra(iLOOP).Font = "isoqsymbol"
+    letra(iLOOP).tEXT = Chr(iLOOP)
+    letra(iLOOP).Locked = True
+  Next iLOOP
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub letra_Click(Index As Integer)
-    '   txtFields(0).tEXT = Chr(Index)
-    '   txtFields(2).tEXT = Index
+'   txtFields(0).tEXT = Chr(Index)
+'   txtFields(2).tEXT = Index
 End Sub
 
 Private Sub TXTFIELDS_Change(Index As Integer)
-    If Len(TXTFIELDS(0).tEXT) > 0 Then
-        TXTFIELDS(2).tEXT = Asc(TXTFIELDS(0).tEXT)
-    End If
+  If Len(TXTFIELDS(0).tEXT) > 0 Then
+    TXTFIELDS(2).tEXT = Asc(TXTFIELDS(0).tEXT)
+  End If
 End Sub
 

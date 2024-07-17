@@ -54,46 +54,46 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
-    Dim MyApp As New CRAXDRT.Application
-    Dim MyRpt As New CRAXDRT.Report
+  Dim MyApp As New CRAXDRT.Application
+  Dim MyRpt As New CRAXDRT.Report
 
-    'Center Me
-    Me.Height = Screen.Height - 1200
-    Me.Width = Screen.Width - 1200
-    Me.Top = 100
-    Me.Left = 100
-
-
-
-    CRViewer1.Top = 0
-    CRViewer1.Left = 0
-    CRViewer1.Height = ScaleHeight - 200
-    CRViewer1.Width = ScaleWidth - 200
-    CRViewer1.Visible = True
-
-    CRViewer1.EnablePrintButton = aDIREITOS(6)
-    CRViewer1.EnableGroupTree = aRELCFG(4)
-    CRViewer1.EnableSearchControl = aRELCFG(5)
-    CRViewer1.EnableExportButton = aDIREITOS(7)
+  'Center Me
+  Me.Height = Screen.Height - 1200
+  Me.Width = Screen.Width - 1200
+  Me.Top = 100
+  Me.Left = 100
 
 
 
-    Set MyRpt = MyApp.OpenReport(cARQRTF, 1)
- 
+  CRViewer1.Top = 0
+  CRViewer1.Left = 0
+  CRViewer1.Height = ScaleHeight - 200
+  CRViewer1.Width = ScaleWidth - 200
+  CRViewer1.Visible = True
 
-    CRViewer1.ReportSource = MyRpt
-    CRViewer1.ViewReport
+  CRViewer1.EnablePrintButton = aDIREITOS(6)
+  CRViewer1.EnableGroupTree = aRELCFG(4)
+  CRViewer1.EnableSearchControl = aRELCFG(5)
+  CRViewer1.EnableExportButton = aDIREITOS(7)
+
+
+
+  Set MyRpt = MyApp.OpenReport(cARQRTF, 1)
+
+
+  CRViewer1.ReportSource = MyRpt
+  CRViewer1.ViewReport
 
 
 End Sub
 
 Private Sub Form_Resize()
-    CRViewer1.Top = 0
+  CRViewer1.Top = 0
 
-    CRViewer1.Left = 0
+  CRViewer1.Left = 0
 
-    CRViewer1.Height = ScaleHeight
+  CRViewer1.Height = ScaleHeight
 
-    CRViewer1.Width = ScaleWidth
+  CRViewer1.Width = ScaleWidth
 End Sub
 

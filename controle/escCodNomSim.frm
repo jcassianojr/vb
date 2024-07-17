@@ -83,42 +83,42 @@ Dim aORDES As Variant
 Dim cORDEM As String
 
 Private Sub Escolher()
-    lRETU = True
-    Grid.Col = 0
-    eRETU01 = Grid
-    Grid.Col = 1
-    eRETU02 = Grid
-    Unload Me
+  lRETU = True
+  Grid.Col = 0
+  eRETU01 = Grid
+  Grid.Col = 1
+  eRETU02 = Grid
+  Unload Me
 End Sub
 
 Private Sub Filgrid()
-    Dim cSQLUSO As String
-    cSQLUSO = cSQL & " ORDER BY " & cORDEM
-    MontaGridFast Grid, 2, Array(1200, 5000), Array("Codigo", "Dizer"), _
-        Array("L$CODIGO", "L$NOME"), cARQ, cSQLUSO
+  Dim cSQLUSO As String
+  cSQLUSO = cSQL & " ORDER BY " & cORDEM
+  MontaGridFast Grid, 2, Array(1200, 5000), Array("Codigo", "Dizer"), _
+                Array("L$CODIGO", "L$NOME"), cARQ, cSQLUSO
 End Sub
 
 Private Sub Form_Load()
-    '    CentralizaJanela Me
-    CenterFormToScreen Me
-    cARQ = GeracArq(PegPath("PATH", ePASS01))
-    cSQL = ePASS02
-    aORDEM = ePASS03
-    aORDES = Array("Codigo", "Nome")
-    cORDEM = aORDEM(0)
-    xmontatoolbar Me.Toolbar1, "escSIM", True
-    Filgrid
-    lRETU = False
+'    CentralizaJanela Me
+  CenterFormToScreen Me
+  cARQ = GeracArq(PegPath("PATH", ePASS01))
+  cSQL = ePASS02
+  aORDEM = ePASS03
+  aORDES = Array("Codigo", "Nome")
+  cORDEM = aORDEM(0)
+  xmontatoolbar Me.Toolbar1, "escSIM", True
+  Filgrid
+  lRETU = False
 End Sub
 
 Private Sub Grid_DblClick()
-    Escolher
+  Escolher
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 End Sub
 
 'Private Sub Grid_SelChange()
@@ -132,35 +132,35 @@ End Sub
 'End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Dim sButton As String
-    'Dim nINDICE As Integer
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    If sButton = "SAI" Then
-        lRETU = False
-        Unload Me
+  Dim sButton As String
+  'Dim nINDICE As Integer
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+  If sButton = "SAI" Then
+    lRETU = False
+    Unload Me
+  End If
+  Select Case sButton
+  Case "ORD"
+    ORDENAR
+  Case "ESC"
+    Escolher
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02 + 1, , 1
     End If
-    Select Case sButton
-    Case "ORD"
-        ORDENAR
-    Case "ESC"
-        Escolher
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02 + 1, , 1
-        End If
-    End Select
+  End Select
 End Sub
 
 Private Sub ORDENAR()
-    ePASS01 = aORDES
-    escOrdem.Show vbModal, Me
-    If lRETU Then
-        cORDEM = aORDEM(eRETU01)
-        Filgrid
-    End If
+  ePASS01 = aORDES
+  escOrdem.Show vbModal, Me
+  If lRETU Then
+    cORDEM = aORDEM(eRETU01)
+    Filgrid
+  End If
 End Sub
 
 

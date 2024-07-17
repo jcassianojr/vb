@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.0#0"; "TabExC01.ocx"
+Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmFEMEI 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "FMEA"
@@ -223,300 +223,163 @@ Begin VB.Form frmFEMEI
       Width           =   10695
       _ExtentX        =   18865
       _ExtentY        =   12303
-      _Version        =   393216
       Tabs            =   6
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       TabHeight       =   520
       TabCaption(0)   =   "Passo 2"
-      TabPicture(0)   =   "frmFEMEI.frx":0B14
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "lblLabels(23)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "lblLabels(24)"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "lblLabels(25)"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "txtFields(47)"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "txtFields(48)"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "txtFields(49)"
-      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).ControlCount=   6
+      Tab(0).Control(0)=   "txtFields(49)"
+      Tab(0).Control(1)=   "txtFields(48)"
+      Tab(0).Control(2)=   "txtFields(47)"
+      Tab(0).Control(3)=   "lblLabels(25)"
+      Tab(0).Control(4)=   "lblLabels(24)"
+      Tab(0).Control(5)=   "lblLabels(23)"
       TabCaption(1)   =   "Passo 3"
-      TabPicture(1)   =   "frmFEMEI.frx":0B30
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "lblLabels(26)"
-      Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "lblLabels(27)"
-      Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "lblLabels(28)"
-      Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "txtFields(50)"
-      Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "txtFields(51)"
-      Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "txtFields(52)"
-      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).ControlCount=   6
+      Tab(1).Control(0)=   "lblLabels(26)"
+      Tab(1).Control(1)=   "lblLabels(27)"
+      Tab(1).Control(2)=   "lblLabels(28)"
+      Tab(1).Control(3)=   "txtFields(50)"
+      Tab(1).Control(4)=   "txtFields(51)"
+      Tab(1).Control(5)=   "txtFields(52)"
       TabCaption(2)   =   "Passo 4 5"
-      TabPicture(2)   =   "frmFEMEI.frx":0B4C
-      Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "lblLabels(2)"
-      Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "Label1(0)"
-      Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "lblLabels(4)"
-      Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "lblLabels(5)"
-      Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "lblLabels(16)"
-      Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "lblLabels(6)"
-      Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "Label1(1)"
-      Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "lblLabels(8)"
-      Tab(2).Control(7).Enabled=   0   'False
-      Tab(2).Control(8)=   "lblLabels(7)"
-      Tab(2).Control(8).Enabled=   0   'False
-      Tab(2).Control(9)=   "lblLabels(9)"
-      Tab(2).Control(9).Enabled=   0   'False
-      Tab(2).Control(10)=   "lblLabels(10)"
-      Tab(2).Control(10).Enabled=   0   'False
-      Tab(2).Control(11)=   "lblLabels(14)"
-      Tab(2).Control(11).Enabled=   0   'False
-      Tab(2).Control(12)=   "lblLabels(21)"
-      Tab(2).Control(12).Enabled=   0   'False
-      Tab(2).Control(13)=   "lblLabels(29)"
-      Tab(2).Control(13).Enabled=   0   'False
-      Tab(2).Control(14)=   "lblLabels(33)"
-      Tab(2).Control(14).Enabled=   0   'False
-      Tab(2).Control(15)=   "lblLabels(34)"
-      Tab(2).Control(15).Enabled=   0   'False
-      Tab(2).Control(16)=   "txtFields(38)"
-      Tab(2).Control(16).Enabled=   0   'False
-      Tab(2).Control(17)=   "cmdpegpro(0)"
-      Tab(2).Control(17).Enabled=   0   'False
-      Tab(2).Control(18)=   "txtFields(2)"
-      Tab(2).Control(18).Enabled=   0   'False
-      Tab(2).Control(19)=   "txtFields(39)"
-      Tab(2).Control(19).Enabled=   0   'False
-      Tab(2).Control(20)=   "cmdpegpro(1)"
-      Tab(2).Control(20).Enabled=   0   'False
-      Tab(2).Control(21)=   "txtFields(3)"
-      Tab(2).Control(21).Enabled=   0   'False
-      Tab(2).Control(22)=   "txtFields(40)"
-      Tab(2).Control(22).Enabled=   0   'False
-      Tab(2).Control(23)=   "cmdpegpro(2)"
-      Tab(2).Control(23).Enabled=   0   'False
-      Tab(2).Control(24)=   "txtFields(4)"
-      Tab(2).Control(24).Enabled=   0   'False
-      Tab(2).Control(25)=   "txtFields(41)"
-      Tab(2).Control(25).Enabled=   0   'False
-      Tab(2).Control(26)=   "cmdpegpro(3)"
-      Tab(2).Control(26).Enabled=   0   'False
-      Tab(2).Control(27)=   "txtFields(5)"
-      Tab(2).Control(27).Enabled=   0   'False
-      Tab(2).Control(28)=   "cmdpeg(25)"
-      Tab(2).Control(28).Enabled=   0   'False
-      Tab(2).Control(29)=   "txtFields(25)"
-      Tab(2).Control(29).Enabled=   0   'False
-      Tab(2).Control(30)=   "cmdpeg(6)"
-      Tab(2).Control(30).Enabled=   0   'False
-      Tab(2).Control(31)=   "txtFields(6)"
-      Tab(2).Control(31).Enabled=   0   'False
-      Tab(2).Control(32)=   "txtFields(8)"
-      Tab(2).Control(32).Enabled=   0   'False
-      Tab(2).Control(33)=   "cmdmais(8)"
-      Tab(2).Control(33).Enabled=   0   'False
-      Tab(2).Control(34)=   "cmdmenos(8)"
-      Tab(2).Control(34).Enabled=   0   'False
-      Tab(2).Control(35)=   "pfcescid(2)"
-      Tab(2).Control(35).Enabled=   0   'False
-      Tab(2).Control(36)=   "txtFields(7)"
-      Tab(2).Control(36).Enabled=   0   'False
-      Tab(2).Control(37)=   "cmdmais(7)"
-      Tab(2).Control(37).Enabled=   0   'False
-      Tab(2).Control(38)=   "cmdmenos(7)"
-      Tab(2).Control(38).Enabled=   0   'False
-      Tab(2).Control(39)=   "pfcescid(1)"
-      Tab(2).Control(39).Enabled=   0   'False
-      Tab(2).Control(40)=   "txtFields(9)"
-      Tab(2).Control(40).Enabled=   0   'False
-      Tab(2).Control(41)=   "cmdmais(9)"
-      Tab(2).Control(41).Enabled=   0   'False
-      Tab(2).Control(42)=   "cmdmenos(9)"
-      Tab(2).Control(42).Enabled=   0   'False
-      Tab(2).Control(43)=   "pfcescid(3)"
-      Tab(2).Control(43).Enabled=   0   'False
-      Tab(2).Control(44)=   "txtFields(10)"
-      Tab(2).Control(44).Enabled=   0   'False
-      Tab(2).Control(45)=   "txtFields(24)"
-      Tab(2).Control(45).Enabled=   0   'False
-      Tab(2).Control(46)=   "CMDSIG(0)"
-      Tab(2).Control(46).Enabled=   0   'False
-      Tab(2).Control(47)=   "CMDSIG(1)"
-      Tab(2).Control(47).Enabled=   0   'False
-      Tab(2).Control(48)=   "txtFields(42)"
-      Tab(2).Control(48).Enabled=   0   'False
-      Tab(2).Control(49)=   "CMDSIG(2)"
-      Tab(2).Control(49).Enabled=   0   'False
-      Tab(2).Control(50)=   "CMDSIG(3)"
-      Tab(2).Control(50).Enabled=   0   'False
-      Tab(2).Control(51)=   "txtFields(43)"
-      Tab(2).Control(51).Enabled=   0   'False
-      Tab(2).Control(52)=   "CMDSIG(4)"
-      Tab(2).Control(52).Enabled=   0   'False
-      Tab(2).Control(53)=   "CMDSIG(5)"
-      Tab(2).Control(53).Enabled=   0   'False
-      Tab(2).Control(54)=   "Check4"
-      Tab(2).Control(54).Enabled=   0   'False
-      Tab(2).Control(55)=   "Check2"
-      Tab(2).Control(55).Enabled=   0   'False
-      Tab(2).Control(56)=   "txtFields(34)"
-      Tab(2).Control(56).Enabled=   0   'False
-      Tab(2).Control(57)=   "txtFields(53)"
-      Tab(2).Control(57).Enabled=   0   'False
-      Tab(2).Control(58)=   "txtFields(54)"
-      Tab(2).Control(58).Enabled=   0   'False
-      Tab(2).Control(59)=   "txtFields(55)"
-      Tab(2).Control(59).Enabled=   0   'False
       Tab(2).ControlCount=   60
+      Tab(2).Control(0)=   "lblLabels(2)"
+      Tab(2).Control(1)=   "Label1(0)"
+      Tab(2).Control(2)=   "lblLabels(4)"
+      Tab(2).Control(3)=   "lblLabels(5)"
+      Tab(2).Control(4)=   "lblLabels(16)"
+      Tab(2).Control(5)=   "lblLabels(6)"
+      Tab(2).Control(6)=   "Label1(1)"
+      Tab(2).Control(7)=   "lblLabels(8)"
+      Tab(2).Control(8)=   "lblLabels(7)"
+      Tab(2).Control(9)=   "lblLabels(9)"
+      Tab(2).Control(10)=   "lblLabels(10)"
+      Tab(2).Control(11)=   "lblLabels(14)"
+      Tab(2).Control(12)=   "lblLabels(21)"
+      Tab(2).Control(13)=   "lblLabels(29)"
+      Tab(2).Control(14)=   "lblLabels(33)"
+      Tab(2).Control(15)=   "lblLabels(34)"
+      Tab(2).Control(16)=   "txtFields(38)"
+      Tab(2).Control(17)=   "cmdpegpro(0)"
+      Tab(2).Control(18)=   "txtFields(2)"
+      Tab(2).Control(19)=   "txtFields(39)"
+      Tab(2).Control(20)=   "cmdpegpro(1)"
+      Tab(2).Control(21)=   "txtFields(3)"
+      Tab(2).Control(22)=   "txtFields(40)"
+      Tab(2).Control(23)=   "cmdpegpro(2)"
+      Tab(2).Control(24)=   "txtFields(4)"
+      Tab(2).Control(25)=   "txtFields(41)"
+      Tab(2).Control(26)=   "cmdpegpro(3)"
+      Tab(2).Control(27)=   "txtFields(5)"
+      Tab(2).Control(28)=   "cmdpeg(25)"
+      Tab(2).Control(29)=   "txtFields(25)"
+      Tab(2).Control(30)=   "cmdpeg(6)"
+      Tab(2).Control(31)=   "txtFields(6)"
+      Tab(2).Control(32)=   "txtFields(8)"
+      Tab(2).Control(33)=   "cmdmais(8)"
+      Tab(2).Control(34)=   "cmdmenos(8)"
+      Tab(2).Control(35)=   "pfcescid(2)"
+      Tab(2).Control(36)=   "txtFields(7)"
+      Tab(2).Control(37)=   "cmdmais(7)"
+      Tab(2).Control(38)=   "cmdmenos(7)"
+      Tab(2).Control(39)=   "pfcescid(1)"
+      Tab(2).Control(40)=   "txtFields(9)"
+      Tab(2).Control(41)=   "cmdmais(9)"
+      Tab(2).Control(42)=   "cmdmenos(9)"
+      Tab(2).Control(43)=   "pfcescid(3)"
+      Tab(2).Control(44)=   "txtFields(10)"
+      Tab(2).Control(45)=   "txtFields(24)"
+      Tab(2).Control(46)=   "CMDSIG(0)"
+      Tab(2).Control(47)=   "CMDSIG(1)"
+      Tab(2).Control(48)=   "txtFields(42)"
+      Tab(2).Control(49)=   "CMDSIG(2)"
+      Tab(2).Control(50)=   "CMDSIG(3)"
+      Tab(2).Control(51)=   "txtFields(43)"
+      Tab(2).Control(52)=   "CMDSIG(4)"
+      Tab(2).Control(53)=   "CMDSIG(5)"
+      Tab(2).Control(54)=   "Check4"
+      Tab(2).Control(55)=   "Check2"
+      Tab(2).Control(56)=   "txtFields(34)"
+      Tab(2).Control(57)=   "txtFields(53)"
+      Tab(2).Control(58)=   "txtFields(54)"
+      Tab(2).Control(59)=   "txtFields(55)"
       TabCaption(3)   =   "Tab 3"
-      TabPicture(3)   =   "frmFEMEI.frx":0B68
-      Tab(3).ControlEnabled=   0   'False
       Tab(3).ControlCount=   0
       TabCaption(4)   =   "Tab 4"
-      TabPicture(4)   =   "frmFEMEI.frx":0B84
-      Tab(4).ControlEnabled=   0   'False
       Tab(4).ControlCount=   0
       TabCaption(5)   =   "Passo 6"
-      TabPicture(5)   =   "frmFEMEI.frx":0BA0
-      Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "lblLabels(15)"
-      Tab(5).Control(0).Enabled=   0   'False
-      Tab(5).Control(1)=   "lblLabels(12)"
-      Tab(5).Control(1).Enabled=   0   'False
-      Tab(5).Control(2)=   "lblLabels(13)"
-      Tab(5).Control(2).Enabled=   0   'False
-      Tab(5).Control(3)=   "Label1(2)"
-      Tab(5).Control(3).Enabled=   0   'False
-      Tab(5).Control(4)=   "lblLabels(18)"
-      Tab(5).Control(4).Enabled=   0   'False
-      Tab(5).Control(5)=   "lblLabels(17)"
-      Tab(5).Control(5).Enabled=   0   'False
-      Tab(5).Control(6)=   "lblLabels(19)"
-      Tab(5).Control(6).Enabled=   0   'False
-      Tab(5).Control(7)=   "lblLabels(20)"
-      Tab(5).Control(7).Enabled=   0   'False
-      Tab(5).Control(8)=   "lblLabels(11)"
-      Tab(5).Control(8).Enabled=   0   'False
-      Tab(5).Control(9)=   "lblLabels(30)"
-      Tab(5).Control(9).Enabled=   0   'False
-      Tab(5).Control(10)=   "lblLabels(31)"
-      Tab(5).Control(10).Enabled=   0   'False
-      Tab(5).Control(11)=   "lblLabels(32)"
-      Tab(5).Control(11).Enabled=   0   'False
-      Tab(5).Control(12)=   "Label1(3)"
-      Tab(5).Control(12).Enabled=   0   'False
-      Tab(5).Control(13)=   "Check1"
-      Tab(5).Control(13).Enabled=   0   'False
-      Tab(5).Control(14)=   "txtFields(11)"
-      Tab(5).Control(14).Enabled=   0   'False
-      Tab(5).Control(15)=   "Command2"
-      Tab(5).Control(15).Enabled=   0   'False
-      Tab(5).Control(16)=   "Command3"
-      Tab(5).Control(16).Enabled=   0   'False
-      Tab(5).Control(17)=   "txtFields(15)"
-      Tab(5).Control(17).Enabled=   0   'False
-      Tab(5).Control(18)=   "txtFields(12)"
-      Tab(5).Control(18).Enabled=   0   'False
-      Tab(5).Control(19)=   "txtFields(14)"
-      Tab(5).Control(19).Enabled=   0   'False
-      Tab(5).Control(20)=   "txtFields(16)"
-      Tab(5).Control(20).Enabled=   0   'False
-      Tab(5).Control(21)=   "Command1(0)"
-      Tab(5).Control(21).Enabled=   0   'False
-      Tab(5).Control(22)=   "Command1(1)"
-      Tab(5).Control(22).Enabled=   0   'False
-      Tab(5).Control(23)=   "Command1(2)"
-      Tab(5).Control(23).Enabled=   0   'False
-      Tab(5).Control(24)=   "Command1(10)"
-      Tab(5).Control(24).Enabled=   0   'False
-      Tab(5).Control(25)=   "Command1(11)"
-      Tab(5).Control(25).Enabled=   0   'False
-      Tab(5).Control(26)=   "Command1(12)"
-      Tab(5).Control(26).Enabled=   0   'False
-      Tab(5).Control(27)=   "Command4(0)"
-      Tab(5).Control(27).Enabled=   0   'False
-      Tab(5).Control(28)=   "Command4(1)"
-      Tab(5).Control(28).Enabled=   0   'False
-      Tab(5).Control(29)=   "Command4(2)"
-      Tab(5).Control(29).Enabled=   0   'False
-      Tab(5).Control(30)=   "Command1(3)"
-      Tab(5).Control(30).Enabled=   0   'False
-      Tab(5).Control(31)=   "Command1(4)"
-      Tab(5).Control(31).Enabled=   0   'False
-      Tab(5).Control(32)=   "Command1(5)"
-      Tab(5).Control(32).Enabled=   0   'False
-      Tab(5).Control(33)=   "txtFields(13)"
-      Tab(5).Control(33).Enabled=   0   'False
-      Tab(5).Control(34)=   "txtFields(21)"
-      Tab(5).Control(34).Enabled=   0   'False
-      Tab(5).Control(35)=   "txtFields(22)"
-      Tab(5).Control(35).Enabled=   0   'False
-      Tab(5).Control(36)=   "txtFields(18)"
-      Tab(5).Control(36).Enabled=   0   'False
-      Tab(5).Control(37)=   "cmdmais(18)"
-      Tab(5).Control(37).Enabled=   0   'False
-      Tab(5).Control(38)=   "cmdmenos(18)"
-      Tab(5).Control(38).Enabled=   0   'False
-      Tab(5).Control(39)=   "pfcescid(5)"
-      Tab(5).Control(39).Enabled=   0   'False
-      Tab(5).Control(40)=   "txtFields(17)"
-      Tab(5).Control(40).Enabled=   0   'False
-      Tab(5).Control(41)=   "cmdmais(17)"
-      Tab(5).Control(41).Enabled=   0   'False
-      Tab(5).Control(42)=   "cmdmenos(17)"
-      Tab(5).Control(42).Enabled=   0   'False
-      Tab(5).Control(43)=   "pfcescid(4)"
-      Tab(5).Control(43).Enabled=   0   'False
-      Tab(5).Control(44)=   "txtFields(19)"
-      Tab(5).Control(44).Enabled=   0   'False
-      Tab(5).Control(45)=   "cmdmais(19)"
-      Tab(5).Control(45).Enabled=   0   'False
-      Tab(5).Control(46)=   "cmdmenos(19)"
-      Tab(5).Control(46).Enabled=   0   'False
-      Tab(5).Control(47)=   "pfcescid(6)"
-      Tab(5).Control(47).Enabled=   0   'False
-      Tab(5).Control(48)=   "txtFields(20)"
-      Tab(5).Control(48).Enabled=   0   'False
-      Tab(5).Control(49)=   "txtFields(23)"
-      Tab(5).Control(49).Enabled=   0   'False
-      Tab(5).Control(50)=   "Cmdsitu(1)"
-      Tab(5).Control(50).Enabled=   0   'False
-      Tab(5).Control(51)=   "Cmdsitu(2)"
-      Tab(5).Control(51).Enabled=   0   'False
-      Tab(5).Control(52)=   "Cmdsitu(0)"
-      Tab(5).Control(52).Enabled=   0   'False
-      Tab(5).Control(53)=   "txtFields(58)"
-      Tab(5).Control(53).Enabled=   0   'False
-      Tab(5).Control(54)=   "txtFields(56)"
-      Tab(5).Control(54).Enabled=   0   'False
-      Tab(5).Control(55)=   "txtFields(57)"
-      Tab(5).Control(55).Enabled=   0   'False
-      Tab(5).Control(56)=   "txtFields(59)"
-      Tab(5).Control(56).Enabled=   0   'False
-      Tab(5).Control(57)=   "DTPicker1"
-      Tab(5).Control(57).Enabled=   0   'False
-      Tab(5).Control(58)=   "DTPicker2"
-      Tab(5).Control(58).Enabled=   0   'False
-      Tab(5).Control(59)=   "DTPicker3"
-      Tab(5).Control(59).Enabled=   0   'False
-      Tab(5).Control(60)=   "DTPicker4"
-      Tab(5).Control(60).Enabled=   0   'False
       Tab(5).ControlCount=   61
-      Begin vbccr18.DTPicker DTPicker4 
+      Tab(5).Control(0)=   "lblLabels(15)"
+      Tab(5).Control(1)=   "lblLabels(12)"
+      Tab(5).Control(2)=   "lblLabels(13)"
+      Tab(5).Control(3)=   "Label1(2)"
+      Tab(5).Control(4)=   "lblLabels(18)"
+      Tab(5).Control(5)=   "lblLabels(17)"
+      Tab(5).Control(6)=   "lblLabels(19)"
+      Tab(5).Control(7)=   "lblLabels(20)"
+      Tab(5).Control(8)=   "lblLabels(11)"
+      Tab(5).Control(9)=   "lblLabels(30)"
+      Tab(5).Control(10)=   "lblLabels(31)"
+      Tab(5).Control(11)=   "lblLabels(32)"
+      Tab(5).Control(12)=   "Label1(3)"
+      Tab(5).Control(13)=   "Check1"
+      Tab(5).Control(14)=   "txtFields(11)"
+      Tab(5).Control(15)=   "Command2"
+      Tab(5).Control(16)=   "Command3"
+      Tab(5).Control(17)=   "txtFields(15)"
+      Tab(5).Control(18)=   "txtFields(12)"
+      Tab(5).Control(19)=   "txtFields(14)"
+      Tab(5).Control(20)=   "txtFields(16)"
+      Tab(5).Control(21)=   "Command1(0)"
+      Tab(5).Control(22)=   "Command1(1)"
+      Tab(5).Control(23)=   "Command1(2)"
+      Tab(5).Control(24)=   "Command1(10)"
+      Tab(5).Control(25)=   "Command1(11)"
+      Tab(5).Control(26)=   "Command1(12)"
+      Tab(5).Control(27)=   "Command4(0)"
+      Tab(5).Control(28)=   "Command4(1)"
+      Tab(5).Control(29)=   "Command4(2)"
+      Tab(5).Control(30)=   "Command1(3)"
+      Tab(5).Control(31)=   "Command1(4)"
+      Tab(5).Control(32)=   "Command1(5)"
+      Tab(5).Control(33)=   "txtFields(13)"
+      Tab(5).Control(34)=   "txtFields(21)"
+      Tab(5).Control(35)=   "txtFields(22)"
+      Tab(5).Control(36)=   "txtFields(18)"
+      Tab(5).Control(37)=   "cmdmais(18)"
+      Tab(5).Control(38)=   "cmdmenos(18)"
+      Tab(5).Control(39)=   "pfcescid(5)"
+      Tab(5).Control(40)=   "txtFields(17)"
+      Tab(5).Control(41)=   "cmdmais(17)"
+      Tab(5).Control(42)=   "cmdmenos(17)"
+      Tab(5).Control(43)=   "pfcescid(4)"
+      Tab(5).Control(44)=   "txtFields(19)"
+      Tab(5).Control(45)=   "cmdmais(19)"
+      Tab(5).Control(46)=   "cmdmenos(19)"
+      Tab(5).Control(47)=   "pfcescid(6)"
+      Tab(5).Control(48)=   "txtFields(20)"
+      Tab(5).Control(49)=   "txtFields(23)"
+      Tab(5).Control(50)=   "Cmdsitu(1)"
+      Tab(5).Control(51)=   "Cmdsitu(2)"
+      Tab(5).Control(52)=   "Cmdsitu(0)"
+      Tab(5).Control(53)=   "txtFields(58)"
+      Tab(5).Control(54)=   "txtFields(56)"
+      Tab(5).Control(55)=   "txtFields(57)"
+      Tab(5).Control(56)=   "txtFields(59)"
+      Tab(5).Control(57)=   "DTPicker1"
+      Tab(5).Control(58)=   "DTPicker2"
+      Tab(5).Control(59)=   "DTPicker3"
+      Tab(5).Control(60)=   "DTPicker4"
+      Begin VBCCR18.DTPicker DTPicker4 
          Height          =   375
          Left            =   -66360
          TabIndex        =   157
@@ -528,7 +391,7 @@ Begin VB.Form frmFEMEI
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
       End
-      Begin vbccr18.DTPicker DTPicker3 
+      Begin VBCCR18.DTPicker DTPicker3 
          Height          =   375
          Left            =   -66360
          TabIndex        =   156
@@ -540,7 +403,7 @@ Begin VB.Form frmFEMEI
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
       End
-      Begin vbccr18.DTPicker DTPicker2 
+      Begin VBCCR18.DTPicker DTPicker2 
          Height          =   375
          Left            =   -66360
          TabIndex        =   155
@@ -552,7 +415,7 @@ Begin VB.Form frmFEMEI
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
       End
-      Begin vbccr18.DTPicker DTPicker1 
+      Begin VBCCR18.DTPicker DTPicker1 
          Height          =   375
          Left            =   -66120
          TabIndex        =   154
@@ -750,7 +613,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   6
          Left            =   -70080
-         Picture         =   "frmFEMEI.frx":0BBC
+         Picture         =   "frmFEMEI.frx":0B14
          Style           =   1  'Graphical
          TabIndex        =   131
          TabStop         =   0   'False
@@ -791,7 +654,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   4
          Left            =   -71520
-         Picture         =   "frmFEMEI.frx":1146
+         Picture         =   "frmFEMEI.frx":109E
          Style           =   1  'Graphical
          TabIndex        =   127
          TabStop         =   0   'False
@@ -832,7 +695,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   5
          Left            =   -72960
-         Picture         =   "frmFEMEI.frx":16D0
+         Picture         =   "frmFEMEI.frx":1628
          Style           =   1  'Graphical
          TabIndex        =   123
          TabStop         =   0   'False
@@ -961,7 +824,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   12
          Left            =   -73200
-         Picture         =   "frmFEMEI.frx":1C5A
+         Picture         =   "frmFEMEI.frx":1BB2
          Style           =   1  'Graphical
          TabIndex        =   111
          TabStop         =   0   'False
@@ -973,7 +836,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   11
          Left            =   -73200
-         Picture         =   "frmFEMEI.frx":21E4
+         Picture         =   "frmFEMEI.frx":213C
          Style           =   1  'Graphical
          TabIndex        =   110
          TabStop         =   0   'False
@@ -985,7 +848,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   10
          Left            =   -73200
-         Picture         =   "frmFEMEI.frx":276E
+         Picture         =   "frmFEMEI.frx":26C6
          Style           =   1  'Graphical
          TabIndex        =   109
          TabStop         =   0   'False
@@ -996,7 +859,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   2
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":2CF8
+         Picture         =   "frmFEMEI.frx":2C50
          Style           =   1  'Graphical
          TabIndex        =   108
          TabStop         =   0   'False
@@ -1007,7 +870,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   1
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":3282
+         Picture         =   "frmFEMEI.frx":31DA
          Style           =   1  'Graphical
          TabIndex        =   107
          TabStop         =   0   'False
@@ -1018,7 +881,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   0
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":380C
+         Picture         =   "frmFEMEI.frx":3764
          Style           =   1  'Graphical
          TabIndex        =   106
          TabStop         =   0   'False
@@ -1127,7 +990,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   5
          Left            =   -65520
-         Picture         =   "frmFEMEI.frx":3D96
+         Picture         =   "frmFEMEI.frx":3CEE
          Style           =   1  'Graphical
          TabIndex        =   97
          TabStop         =   0   'False
@@ -1138,7 +1001,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   4
          Left            =   -65520
-         Picture         =   "frmFEMEI.frx":4320
+         Picture         =   "frmFEMEI.frx":4278
          Style           =   1  'Graphical
          TabIndex        =   96
          TabStop         =   0   'False
@@ -1169,7 +1032,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   3
          Left            =   -66600
-         Picture         =   "frmFEMEI.frx":48AA
+         Picture         =   "frmFEMEI.frx":4802
          Style           =   1  'Graphical
          TabIndex        =   94
          TabStop         =   0   'False
@@ -1180,7 +1043,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   2
          Left            =   -66600
-         Picture         =   "frmFEMEI.frx":4E34
+         Picture         =   "frmFEMEI.frx":4D8C
          Style           =   1  'Graphical
          TabIndex        =   93
          TabStop         =   0   'False
@@ -1211,7 +1074,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   1
          Left            =   -67560
-         Picture         =   "frmFEMEI.frx":53BE
+         Picture         =   "frmFEMEI.frx":5316
          Style           =   1  'Graphical
          TabIndex        =   91
          TabStop         =   0   'False
@@ -1222,7 +1085,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   0
          Left            =   -67560
-         Picture         =   "frmFEMEI.frx":5948
+         Picture         =   "frmFEMEI.frx":58A0
          Style           =   1  'Graphical
          TabIndex        =   90
          TabStop         =   0   'False
@@ -1266,7 +1129,7 @@ Begin VB.Form frmFEMEI
          HelpContextID   =   3
          Index           =   3
          Left            =   -70680
-         Picture         =   "frmFEMEI.frx":5ED2
+         Picture         =   "frmFEMEI.frx":5E2A
          Style           =   1  'Graphical
          TabIndex        =   80
          TabStop         =   0   'False
@@ -1307,7 +1170,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   1
          Left            =   -72120
-         Picture         =   "frmFEMEI.frx":645C
+         Picture         =   "frmFEMEI.frx":63B4
          Style           =   1  'Graphical
          TabIndex        =   76
          TabStop         =   0   'False
@@ -1348,7 +1211,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   2
          Left            =   -73560
-         Picture         =   "frmFEMEI.frx":69E6
+         Picture         =   "frmFEMEI.frx":693E
          Style           =   1  'Graphical
          TabIndex        =   72
          TabStop         =   0   'False
@@ -1399,7 +1262,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   6
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":6F70
+         Picture         =   "frmFEMEI.frx":6EC8
          Style           =   1  'Graphical
          TabIndex        =   67
          TabStop         =   0   'False
@@ -1420,7 +1283,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   25
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":74FA
+         Picture         =   "frmFEMEI.frx":7452
          Style           =   1  'Graphical
          TabIndex        =   66
          TabStop         =   0   'False
@@ -1441,7 +1304,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   3
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":7A84
+         Picture         =   "frmFEMEI.frx":79DC
          Style           =   1  'Graphical
          TabIndex        =   63
          TabStop         =   0   'False
@@ -1474,7 +1337,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   2
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":800E
+         Picture         =   "frmFEMEI.frx":7F66
          Style           =   1  'Graphical
          TabIndex        =   60
          TabStop         =   0   'False
@@ -1507,7 +1370,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   1
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":8598
+         Picture         =   "frmFEMEI.frx":84F0
          Style           =   1  'Graphical
          TabIndex        =   57
          TabStop         =   0   'False
@@ -1540,7 +1403,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   0
          Left            =   -73680
-         Picture         =   "frmFEMEI.frx":8B22
+         Picture         =   "frmFEMEI.frx":8A7A
          Style           =   1  'Graphical
          TabIndex        =   54
          TabStop         =   0   'False
@@ -1922,7 +1785,7 @@ Begin VB.Form frmFEMEI
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   767
-      Picture         =   "frmFEMEI.frx":90AC
+      Picture         =   "frmFEMEI.frx":9004
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -1943,7 +1806,7 @@ Begin VB.Form frmFEMEI
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   767
-      Picture         =   "frmFEMEI.frx":9646
+      Picture         =   "frmFEMEI.frx":959E
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -2020,762 +1883,762 @@ Private nCAMPOS As Long
 
 Private Sub CmdAltman_Click()
 
-    Check3.Value = Checked
-    EnableControls Me, True
-    acaocampos
-    ''sEMPRE DESABILITADOS
-    Check3.Enabled = False                       ''ALTMAN
-    Check1.Enabled = False                       ''ACAO
-    TXTFIELDS(23).Enabled = False                ''SITUACAO
-    TXTFIELDS(10).Enabled = False                ''RISCO
-    TXTFIELDS(20).Enabled = False                ''RISCO
-    TXTFIELDS(0).Enabled = False                 ''PF
-    TXTFIELDS(1).Enabled = False                 ''ITEM
+  Check3.Value = Checked
+  EnableControls Me, True
+  acaocampos
+  ''sEMPRE DESABILITADOS
+  Check3.Enabled = False                       ''ALTMAN
+  Check1.Enabled = False                       ''ACAO
+  TXTFIELDS(23).Enabled = False                ''SITUACAO
+  TXTFIELDS(10).Enabled = False                ''RISCO
+  TXTFIELDS(20).Enabled = False                ''RISCO
+  TXTFIELDS(0).Enabled = False                 ''PF
+  TXTFIELDS(1).Enabled = False                 ''ITEM
 
 End Sub
 
 Private Sub cmdClose_Click()
-    If TXTFIELDS(38) = 0 Or TXTFIELDS(38) = 0 Or TXTFIELDS(38) = 0 Or TXTFIELDS(38) = 0 Then
-        Alert "Processo Falha Efeito Causa nao selecionados"
-    End If
+  If TXTFIELDS(38) = 0 Or TXTFIELDS(38) = 0 Or TXTFIELDS(38) = 0 Or TXTFIELDS(38) = 0 Then
+    Alert "Processo Falha Efeito Causa nao selecionados"
+  End If
 
-    If MDG("Gravar e Sair", "Gravando ") Then
-        For nITEM = 0 To 25
-            aVAL(nITEM) = TXTFIELDS(nITEM)
-        Next nITEM
-        aVAL(26) = DTPicker1.Value
-        aVAL(27) = DTPicker2.Value
-        aVAL(28) = DTPicker3.Value
-        aVAL(29) = DTPicker4.Value
-        If Len(aVAL(15)) = 0 Then                ''Sem Acao zera Data
-            aVAL(29) = ""
-        End If
-        If FixInt(aVAL(12)) = 0 Then
-            aVAL(26) = ""
-        End If
-        If FixInt(aVAL(14)) = 0 Then
-            aVAL(27) = ""
-        End If
-        If FixInt(aVAL(16)) = 0 Then
-            aVAL(28) = ""
-        End If
-        aVAL(30) = Check1.Value
-        aVAL(31) = Check2.Value
-        aVAL(32) = Check3.Value
-        aVAL(33) = Check4.Value
-        For nITEM = 34 To 59 '46
-            aVAL(nITEM) = TXTFIELDS(nITEM)
-        Next
-        GrvSQL cARQUSO, cSQLUSO, nCAMPOS, aCAM, aVAL, aFOR
-        GravaLog 0, 0, "Gravou "
-    Else
-        GravaLog 0, 0, "Nao Gravou "
+  If MDG("Gravar e Sair", "Gravando ") Then
+    For nITEM = 0 To 25
+      aVAL(nITEM) = TXTFIELDS(nITEM)
+    Next nITEM
+    aVAL(26) = DTPicker1.Value
+    aVAL(27) = DTPicker2.Value
+    aVAL(28) = DTPicker3.Value
+    aVAL(29) = DTPicker4.Value
+    If Len(aVAL(15)) = 0 Then                ''Sem Acao zera Data
+      aVAL(29) = ""
     End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+    If FixInt(aVAL(12)) = 0 Then
+      aVAL(26) = ""
+    End If
+    If FixInt(aVAL(14)) = 0 Then
+      aVAL(27) = ""
+    End If
+    If FixInt(aVAL(16)) = 0 Then
+      aVAL(28) = ""
+    End If
+    aVAL(30) = Check1.Value
+    aVAL(31) = Check2.Value
+    aVAL(32) = Check3.Value
+    aVAL(33) = Check4.Value
+    For nITEM = 34 To 59  '46
+      aVAL(nITEM) = TXTFIELDS(nITEM)
+    Next
+    GrvSQL cARQUSO, cSQLUSO, nCAMPOS, aCAM, aVAL, aFOR
+    GravaLog 0, 0, "Gravou "
+  Else
+    GravaLog 0, 0, "Nao Gravou "
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 
 End Sub
 
 Private Sub cmddizsessq_Click(Index As Integer)
 
-    Dim cDIZ
-    Dim cARQ As String
-    cARQ = PegPath("PATH", "PF")
+  Dim cDIZ
+  Dim cARQ As String
+  cARQ = PegPath("PATH", "PF")
 
-    cDIZ = pegdizseqssq(TXTFIELDS(2), cARQ, FixInt(TXTFIELDS(35).tEXT), FixInt(TXTFIELDS(36).tEXT), FixInt(TXTFIELDS(37).tEXT), FixInt(TXTFIELDS(45).tEXT))
-    
-    If Index = 0 Then
-        TXTFIELDS(2).tEXT = eRETU01(5)
-    End If
-    If Index = 1 Then
-        TXTFIELDS(2).tEXT = eRETU01(4)
-    End If
+  cDIZ = pegdizseqssq(TXTFIELDS(2), cARQ, FixInt(TXTFIELDS(35).tEXT), FixInt(TXTFIELDS(36).tEXT), FixInt(TXTFIELDS(37).tEXT), FixInt(TXTFIELDS(45).tEXT))
 
-    
-    TXTFIELDS(35).tEXT = eRETU01(0)
-    TXTFIELDS(36).tEXT = eRETU01(1)
-    TXTFIELDS(37).tEXT = eRETU01(2)
-    TXTFIELDS(45).tEXT = eRETU01(3)
-    
+  If Index = 0 Then
+    TXTFIELDS(2).tEXT = eRETU01(5)
+  End If
+  If Index = 1 Then
+    TXTFIELDS(2).tEXT = eRETU01(4)
+  End If
+
+
+  TXTFIELDS(35).tEXT = eRETU01(0)
+  TXTFIELDS(36).tEXT = eRETU01(1)
+  TXTFIELDS(37).tEXT = eRETU01(2)
+  TXTFIELDS(45).tEXT = eRETU01(3)
+
 
 End Sub
 
 Private Sub cmdmais_Click(Index As Integer)
 
-    TXTFIELDS(Index) = CStr(IncDec(TXTFIELDS(Index), 1, 1, 10))
+  TXTFIELDS(Index) = CStr(IncDec(TXTFIELDS(Index), 1, 1, 10))
 
 End Sub
 
 Private Sub cmdmenos_Click(Index As Integer)
 
-    TXTFIELDS(Index) = CStr(IncDec(TXTFIELDS(Index), -1, 1, 10))
+  TXTFIELDS(Index) = CStr(IncDec(TXTFIELDS(Index), -1, 1, 10))
 
 End Sub
 
 Private Sub cmdpeg_Click(Index As Integer)
 
-    Select Case Index
-    Case 25
-        iMU01 = 304
-    Case 6
-        iMU01 = 305
-    Case 44
-        iMU01 = 306
-    End Select
-    eRETU02 = ""                                 'Evita Cancelamento Escolha
-    escIED.Show vbModal, Me
-    If lRETU Then
-        If Index = 44 Then
-            TXTFIELDS(Index) = Mid(eRETU02, 1, 1)
-        Else
-            TXTFIELDS(Index) = eRETU02
-        End If
+  Select Case Index
+  Case 25
+    iMU01 = 304
+  Case 6
+    iMU01 = 305
+  Case 44
+    iMU01 = 306
+  End Select
+  eRETU02 = ""                                 'Evita Cancelamento Escolha
+  escIED.Show vbModal, Me
+  If lRETU Then
+    If Index = 44 Then
+      TXTFIELDS(Index) = Mid(eRETU02, 1, 1)
+    Else
+      TXTFIELDS(Index) = eRETU02
     End If
+  End If
 
 End Sub
 
 Private Sub cmdpegpro_Click(Index As Integer)
-    Dim sSQL
-    Dim lATU
-    If Index > 0 And Val(TXTFIELDS(38)) = 0 Then
-        Alert ("Escolha um Processo")
-        Exit Sub
+  Dim sSQL
+  Dim lATU
+  If Index > 0 And Val(TXTFIELDS(38)) = 0 Then
+    Alert ("Escolha um Processo")
+    Exit Sub
+  End If
+  If Index > 1 And Val(TXTFIELDS(39)) = 0 Then
+    Alert ("Escolha uma Falha")
+    Exit Sub
+  End If
+  If Index > 2 And Val(TXTFIELDS(40)) = 0 Then
+    Alert ("Escolha um Efeito")
+    Exit Sub
+  End If
+  ePASS01 = "FEMEA"
+  If Index = 0 Then                            'PROCESSO
+    ePASS02 = "SELECT pronum AS CODIGO,processo AS NOME FROM FEMPRO"
+    ePASS03 = Array("PRONUM", "PROCESSO")
+  End If
+  If Index = 1 Then                            'FALHA
+    ePASS02 = "SELECT FALNUM AS CODIGO, FALTIP AS NOME FROM FEMFAL WHERE PRONUM=" & FixInt(TXTFIELDS(38))
+    ePASS03 = Array("FALNUM", "FALTIP")
+  End If
+  If Index = 2 Then                            'EFEITO
+    ePASS02 = "SELECT EFENUM AS CODIGO, FALEFE AS NOME FROM FEMEFE WHERE PRONUM=" & FixInt(TXTFIELDS(38)) & " AND FALNUM=" & FixInt(TXTFIELDS(39))
+    ePASS03 = Array("EFENUM", "FALEFE")
+  End If
+  If Index = 3 Then                            'CAUSA
+    ePASS02 = "SELECT cAUNUM as codigo,FALCAU as nome FROM FEMCAU WHERE PRONUM=" & FixInt(TXTFIELDS(38)) & " AND FALNUM=" & FixInt(TXTFIELDS(39)) & " AND EFEnum=" & FixInt(TXTFIELDS(40))
+    ePASS03 = Array("CAUNUM", "FALCAU")
+  End If
+  EscCodNomSim.Show vbModal, Me
+  If lRETU Then
+    lATU = MDG("Atualizar descritivo")
+    If Index = 0 Then
+      TXTFIELDS(38) = eRETU01
+      If Len(TXTFIELDS(2)) = 0 Or lATU Then
+        TXTFIELDS(2) = eRETU02
+      End If
+      If MDG("Apagar Falha Efeito Causa") Then
+        TXTFIELDS(39) = 0
+        TXTFIELDS(3) = ""
+        TXTFIELDS(40) = 0
+        TXTFIELDS(4) = ""
+        TXTFIELDS(41) = 0
+        TXTFIELDS(5) = ""
+      End If
     End If
-    If Index > 1 And Val(TXTFIELDS(39)) = 0 Then
-        Alert ("Escolha uma Falha")
-        Exit Sub
+    If Index = 1 Then
+      TXTFIELDS(39) = eRETU01
+      If Len(TXTFIELDS(3)) = 0 Or lATU Then
+        TXTFIELDS(3) = eRETU02
+      End If
+      If MDG("Apagar Efeito Causa") Then
+        TXTFIELDS(40) = 0
+        TXTFIELDS(4) = ""
+        TXTFIELDS(41) = 0
+        TXTFIELDS(5) = ""
+      End If
     End If
-    If Index > 2 And Val(TXTFIELDS(40)) = 0 Then
-        Alert ("Escolha um Efeito")
-        Exit Sub
+    If Index = 2 Then
+      TXTFIELDS(40) = eRETU01
+      If Len(TXTFIELDS(4)) = 0 Or lATU Then
+        TXTFIELDS(4) = eRETU02
+      End If
+      If MDG("Apagar Causa") Then
+        TXTFIELDS(41) = 0
+        TXTFIELDS(5) = ""
+      End If
     End If
-    ePASS01 = "FEMEA"
-    If Index = 0 Then                            'PROCESSO
-        ePASS02 = "SELECT pronum AS CODIGO,processo AS NOME FROM FEMPRO"
-        ePASS03 = Array("PRONUM", "PROCESSO")
+    If Index = 3 Then
+      TXTFIELDS(41) = eRETU01
+      If Len(TXTFIELDS(5)) = 0 Or lATU Then
+        TXTFIELDS(5) = eRETU02
+      End If
+      sSQL = "select * from FEMCAU WHERE PRONUM=" & TXTFIELDS(38) & " AND FALNUM=" & TXTFIELDS(39) & " AND EFENUM=" & TXTFIELDS(40) & " AND CAUNUM=" & TXTFIELDS(41)
+      aVAL = PegSQL(cARQFEMEA, sSQL, nCAMPOS, aCAM, aFOR, aPAD)
+      gravaAvalTxt (3)
+      TXTFIELDS_Change (7)
+      TXTFIELDS_Change (17)
     End If
-    If Index = 1 Then                            'FALHA
-        ePASS02 = "SELECT FALNUM AS CODIGO, FALTIP AS NOME FROM FEMFAL WHERE PRONUM=" & FixInt(TXTFIELDS(38))
-        ePASS03 = Array("FALNUM", "FALTIP")
-    End If
-    If Index = 2 Then                            'EFEITO
-        ePASS02 = "SELECT EFENUM AS CODIGO, FALEFE AS NOME FROM FEMEFE WHERE PRONUM=" & FixInt(TXTFIELDS(38)) & " AND FALNUM=" & FixInt(TXTFIELDS(39))
-        ePASS03 = Array("EFENUM", "FALEFE")
-    End If
-    If Index = 3 Then                            'CAUSA
-        ePASS02 = "SELECT cAUNUM as codigo,FALCAU as nome FROM FEMCAU WHERE PRONUM=" & FixInt(TXTFIELDS(38)) & " AND FALNUM=" & FixInt(TXTFIELDS(39)) & " AND EFEnum=" & FixInt(TXTFIELDS(40))
-        ePASS03 = Array("CAUNUM", "FALCAU")
-    End If
-    EscCodNomSim.Show vbModal, Me
-    If lRETU Then
-        lATU = MDG("Atualizar descritivo")
-        If Index = 0 Then
-            TXTFIELDS(38) = eRETU01
-            If Len(TXTFIELDS(2)) = 0 Or lATU Then
-                TXTFIELDS(2) = eRETU02
-            End If
-            If MDG("Apagar Falha Efeito Causa") Then
-                TXTFIELDS(39) = 0
-                TXTFIELDS(3) = ""
-                TXTFIELDS(40) = 0
-                TXTFIELDS(4) = ""
-                TXTFIELDS(41) = 0
-                TXTFIELDS(5) = ""
-            End If
-        End If
-        If Index = 1 Then
-            TXTFIELDS(39) = eRETU01
-            If Len(TXTFIELDS(3)) = 0 Or lATU Then
-                TXTFIELDS(3) = eRETU02
-            End If
-            If MDG("Apagar Efeito Causa") Then
-                TXTFIELDS(40) = 0
-                TXTFIELDS(4) = ""
-                TXTFIELDS(41) = 0
-                TXTFIELDS(5) = ""
-            End If
-        End If
-        If Index = 2 Then
-            TXTFIELDS(40) = eRETU01
-            If Len(TXTFIELDS(4)) = 0 Or lATU Then
-                TXTFIELDS(4) = eRETU02
-            End If
-            If MDG("Apagar Causa") Then
-                TXTFIELDS(41) = 0
-                TXTFIELDS(5) = ""
-            End If
-        End If
-        If Index = 3 Then
-            TXTFIELDS(41) = eRETU01
-            If Len(TXTFIELDS(5)) = 0 Or lATU Then
-                TXTFIELDS(5) = eRETU02
-            End If
-            sSQL = "select * from FEMCAU WHERE PRONUM=" & TXTFIELDS(38) & " AND FALNUM=" & TXTFIELDS(39) & " AND EFENUM=" & TXTFIELDS(40) & " AND CAUNUM=" & TXTFIELDS(41)
-            aVAL = PegSQL(cARQFEMEA, sSQL, nCAMPOS, aCAM, aFOR, aPAD)
-            gravaAvalTxt (3)
-            TXTFIELDS_Change (7)
-            TXTFIELDS_Change (17)
-        End If
-    End If
+  End If
 End Sub
 
 Private Sub CmdRetornaAcao_Click(Index As Integer)
-    Dim aCAMUSO As Variant
-    Dim aPADUSO As Variant
-    Dim aFORUSO As Variant
-    Dim aRETU   As Variant
-    Dim sSQL    As String
-    Dim cREVFEM As String
-    Dim nCAMUSO
-    Dim nTMPGRA
-    nCAMUSO = 17
-    If Index = 0 Then
-        cREVFEM = TXTFIELDS(46).tEXT
-        cREVFEM = Busca("Qual Revisao Femeao", "Retornar Revisao Femea", cREVFEM, 3)
-        sSQL = "select * from FEMrevi WHERE  TIPOAPU='N' AND PF=" & nPF & " AND FEMEAREV=" & FixNum(cREVFEM)
-        sSQL = sSQL & " AND FXSEQ=" & TXTFIELDS(35)
-        sSQL = sSQL & " AND FXSSQ=" & TXTFIELDS(36)
-        sSQL = sSQL & " AND FXITEM=" & TXTFIELDS(37)
-        sSQL = sSQL & " AND FXITEMS=" & TXTFIELDS(45)
-    End If
-    If Index = 1 Then
-        nTMPGRA = 0
-        nTMPGRA = FixInt(Val(Busca("Qual sequencia", "Retornar Sequencia Revisao", CStr(nTMPGRA), 8)))
-        sSQL = "select * from FEMrevi WHERE  TIPOAPU='N' AND PF=" & nPF & " AND ITEM=" & TXTFIELDS(1)
-        sSQL = sSQL & " AND SEGGRA=" & nTMPGRA
-    End If
+  Dim aCAMUSO As Variant
+  Dim aPADUSO As Variant
+  Dim aFORUSO As Variant
+  Dim aRETU As Variant
+  Dim sSQL As String
+  Dim cREVFEM As String
+  Dim nCAMUSO
+  Dim nTMPGRA
+  nCAMUSO = 17
+  If Index = 0 Then
+    cREVFEM = TXTFIELDS(46).tEXT
+    cREVFEM = Busca("Qual Revisao Femeao", "Retornar Revisao Femea", cREVFEM, 3)
+    sSQL = "select * from FEMrevi WHERE  TIPOAPU='N' AND PF=" & nPF & " AND FEMEAREV=" & FixNum(cREVFEM)
+    sSQL = sSQL & " AND FXSEQ=" & TXTFIELDS(35)
+    sSQL = sSQL & " AND FXSSQ=" & TXTFIELDS(36)
+    sSQL = sSQL & " AND FXITEM=" & TXTFIELDS(37)
+    sSQL = sSQL & " AND FXITEMS=" & TXTFIELDS(45)
+  End If
+  If Index = 1 Then
+    nTMPGRA = 0
+    nTMPGRA = FixInt(Val(Busca("Qual sequencia", "Retornar Sequencia Revisao", CStr(nTMPGRA), 8)))
+    sSQL = "select * from FEMrevi WHERE  TIPOAPU='N' AND PF=" & nPF & " AND ITEM=" & TXTFIELDS(1)
+    sSQL = sSQL & " AND SEGGRA=" & nTMPGRA
+  End If
 
-    If Not MDG("Retornar versao") Then
-        Exit Sub
-    End If
+  If Not MDG("Retornar versao") Then
+    Exit Sub
+  End If
 
-    aCAMUSO = Array("ACAREC", "RESCOD", "RESNOM", "RESCOD2", "ACATOM", _
-                    "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", "RINDRIS", _
-                    "RESNOM2", "RESNOM3", "INDOCO", "INDSEV", "INDDET", _
-                    "INDRIS", "ACAO")
-    aPADUSO = Array("", 0, "", 0, "", 0, 0, 0, 0, 0, "", "", 0, 0, 0, 0, False)
-    aFORUSO = Array("C", "NI", "C", "NI", "C", "NI", "NI", "NI", "NI", "NI", "C", "C", "NI", "NI", "NI", "NI", "BN")
-    aRETU = PegSQL(cARQFEMEA, sSQL, nCAMUSO, aCAMUSO, aFORUSO, aPADUSO)
-    If Not lRETU Then
-        Alert ("Versao anterior nao encontrada")
-        Exit Sub
-    End If
+  aCAMUSO = Array("ACAREC", "RESCOD", "RESNOM", "RESCOD2", "ACATOM", _
+                  "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", "RINDRIS", _
+                  "RESNOM2", "RESNOM3", "INDOCO", "INDSEV", "INDDET", _
+                  "INDRIS", "ACAO")
+  aPADUSO = Array("", 0, "", 0, "", 0, 0, 0, 0, 0, "", "", 0, 0, 0, 0, False)
+  aFORUSO = Array("C", "NI", "C", "NI", "C", "NI", "NI", "NI", "NI", "NI", "C", "C", "NI", "NI", "NI", "NI", "BN")
+  aRETU = PegSQL(cARQFEMEA, sSQL, nCAMUSO, aCAMUSO, aFORUSO, aPADUSO)
+  If Not lRETU Then
+    Alert ("Versao anterior nao encontrada")
+    Exit Sub
+  End If
 
-    TXTFIELDS(11) = aRETU(0)
-    TXTFIELDS(12) = aRETU(1)
-    TXTFIELDS(13) = aRETU(2)
-    TXTFIELDS(14) = aRETU(3)
-    TXTFIELDS(15) = aRETU(4)
-    TXTFIELDS(16) = aRETU(5)
-    TXTFIELDS(7) = aRETU(6)
-    TXTFIELDS(8) = aRETU(7)
-    TXTFIELDS(9) = aRETU(8)
-    TXTFIELDS(10) = aRETU(9)
-    TXTFIELDS(21) = aRETU(10)
-    TXTFIELDS(22) = aRETU(11)
-    TXTFIELDS(17) = aRETU(12)
-    TXTFIELDS(18) = aRETU(13)
-    TXTFIELDS(19) = aRETU(14)
-    TXTFIELDS(20) = aRETU(15)
-    Check1.Value = aRETU(16)
+  TXTFIELDS(11) = aRETU(0)
+  TXTFIELDS(12) = aRETU(1)
+  TXTFIELDS(13) = aRETU(2)
+  TXTFIELDS(14) = aRETU(3)
+  TXTFIELDS(15) = aRETU(4)
+  TXTFIELDS(16) = aRETU(5)
+  TXTFIELDS(7) = aRETU(6)
+  TXTFIELDS(8) = aRETU(7)
+  TXTFIELDS(9) = aRETU(8)
+  TXTFIELDS(10) = aRETU(9)
+  TXTFIELDS(21) = aRETU(10)
+  TXTFIELDS(22) = aRETU(11)
+  TXTFIELDS(17) = aRETU(12)
+  TXTFIELDS(18) = aRETU(13)
+  TXTFIELDS(19) = aRETU(14)
+  TXTFIELDS(20) = aRETU(15)
+  Check1.Value = aRETU(16)
 End Sub
 
 Private Sub CMDSIG_Click(Index As Integer)
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
-    If Index = 0 Or Index = 2 Or Index = 4 Then
-        escFLX.Show vbModal, Me
-    Else
-        ePASS01 = "isoqsymbol"
-        ePASS02 = True
-        frmCharacters.Show vbModal, Me
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  If Index = 0 Or Index = 2 Or Index = 4 Then
+    escFLX.Show vbModal, Me
+  Else
+    ePASS01 = "isoqsymbol"
+    ePASS02 = True
+    frmCharacters.Show vbModal, Me
+  End If
+  If lRETU Then
+    If Index = 0 Or Index = 1 Then
+      Me.TXTFIELDS(24) = eRETU01
     End If
-    If lRETU Then
-        If Index = 0 Or Index = 1 Then
-            Me.TXTFIELDS(24) = eRETU01
-        End If
-        If Index = 2 Or Index = 3 Then
-            Me.TXTFIELDS(42) = eRETU01
-        End If
-        If Index = 4 Or Index = 5 Then
-            Me.TXTFIELDS(43) = eRETU01
-        End If
+    If Index = 2 Or Index = 3 Then
+      Me.TXTFIELDS(42) = eRETU01
     End If
+    If Index = 4 Or Index = 5 Then
+      Me.TXTFIELDS(43) = eRETU01
+    End If
+  End If
 
 
 End Sub
 
 Private Sub Cmdsitu_Click(Index As Integer)
 
-    Select Case Index
-    Case 0
-        TXTFIELDS(23) = "C"
-    Case 1
-        TXTFIELDS(23) = "N"
-    Case 2
-        TXTFIELDS(23) = "E"
-    End Select
+  Select Case Index
+  Case 0
+    TXTFIELDS(23) = "C"
+  Case 1
+    TXTFIELDS(23) = "N"
+  Case 2
+    TXTFIELDS(23) = "E"
+  End Select
 
 End Sub
 
 Private Sub Command1_Click(Index As Integer)
-    ePASS01 = ""
-    If Index > 9 Then
-        ePASS01 = "LOGIX"
+  ePASS01 = ""
+  If Index > 9 Then
+    ePASS01 = "LOGIX"
+  End If
+  Select Case Index
+  Case 0, 10
+    escMP04.Show vbModal, Me
+    If lRETU Then
+      frmFEMEI.TXTFIELDS(12) = eRETU01
+      frmFEMEI.TXTFIELDS(13) = eRETU02
     End If
-    Select Case Index
-    Case 0, 10
-        escMP04.Show vbModal, Me
-        If lRETU Then
-            frmFEMEI.TXTFIELDS(12) = eRETU01
-            frmFEMEI.TXTFIELDS(13) = eRETU02
-        End If
-    Case 1, 11
-        escMP04.Show vbModal, Me
-        If lRETU Then
-            frmFEMEI.TXTFIELDS(14) = eRETU01
-            frmFEMEI.TXTFIELDS(21) = eRETU02
-        End If
-    Case 2, 12
-        escMP04.Show vbModal, Me
-        If lRETU Then
-            frmFEMEI.TXTFIELDS(16) = eRETU01
-            frmFEMEI.TXTFIELDS(22) = eRETU02
-        End If
-    Case 3
-        escMP05.Show vbModal, Me
-        If lRETU Then
-            frmFEMEI.TXTFIELDS(12) = 0
-            frmFEMEI.TXTFIELDS(13) = eRETU01
-        End If
-    Case 4
-        escMP05.Show vbModal, Me
-        If lRETU Then
-            frmFEMEI.TXTFIELDS(14) = 0
-            frmFEMEI.TXTFIELDS(21) = eRETU01
-        End If
-    Case 5
-        escMP05.Show vbModal, Me
-        If lRETU Then
-            frmFEMEI.TXTFIELDS(16) = 0
-            frmFEMEI.TXTFIELDS(22) = eRETU01
-        End If
-    End Select
+  Case 1, 11
+    escMP04.Show vbModal, Me
+    If lRETU Then
+      frmFEMEI.TXTFIELDS(14) = eRETU01
+      frmFEMEI.TXTFIELDS(21) = eRETU02
+    End If
+  Case 2, 12
+    escMP04.Show vbModal, Me
+    If lRETU Then
+      frmFEMEI.TXTFIELDS(16) = eRETU01
+      frmFEMEI.TXTFIELDS(22) = eRETU02
+    End If
+  Case 3
+    escMP05.Show vbModal, Me
+    If lRETU Then
+      frmFEMEI.TXTFIELDS(12) = 0
+      frmFEMEI.TXTFIELDS(13) = eRETU01
+    End If
+  Case 4
+    escMP05.Show vbModal, Me
+    If lRETU Then
+      frmFEMEI.TXTFIELDS(14) = 0
+      frmFEMEI.TXTFIELDS(21) = eRETU01
+    End If
+  Case 5
+    escMP05.Show vbModal, Me
+    If lRETU Then
+      frmFEMEI.TXTFIELDS(16) = 0
+      frmFEMEI.TXTFIELDS(22) = eRETU01
+    End If
+  End Select
 
 End Sub
 
 Private Sub Command2_Click()
 
-    Check1.Value = Checked
-    acaocampos
+  Check1.Value = Checked
+  acaocampos
 
 End Sub
 
 Private Sub Command3_Click()
-    On Error Resume Next
+  On Error Resume Next
 
-    If MDG("Sem Ação Zera Dados? ", "Confirme Gravação") Then
-        Check1.Value = Unchecked
-        acaocampos
-        TXTFIELDS(11) = ""
-        TXTFIELDS(12) = 0
-        TXTFIELDS(13) = ""
-        TXTFIELDS(14) = 0
-        TXTFIELDS(21) = ""
-        TXTFIELDS(16) = 0
-        TXTFIELDS(22) = ""
-        TXTFIELDS(15) = ""
-        TXTFIELDS(17) = 0
-        TXTFIELDS(18) = 0
-        TXTFIELDS(19) = 0
-        TXTFIELDS(20) = 0
-        DTPicker1 = NullDate()
-        DTPicker2 = NullDate()
-        DTPicker3 = NullDate()
-        DTPicker4 = NullDate()
-    End If
+  If MDG("Sem Ação Zera Dados? ", "Confirme Gravação") Then
+    Check1.Value = Unchecked
+    acaocampos
+    TXTFIELDS(11) = ""
+    TXTFIELDS(12) = 0
+    TXTFIELDS(13) = ""
+    TXTFIELDS(14) = 0
+    TXTFIELDS(21) = ""
+    TXTFIELDS(16) = 0
+    TXTFIELDS(22) = ""
+    TXTFIELDS(15) = ""
+    TXTFIELDS(17) = 0
+    TXTFIELDS(18) = 0
+    TXTFIELDS(19) = 0
+    TXTFIELDS(20) = 0
+    DTPicker1 = NullDate()
+    DTPicker2 = NullDate()
+    DTPicker3 = NullDate()
+    DTPicker4 = NullDate()
+  End If
 
 End Sub
 
 Private Sub Command4_Click(Index As Integer)
-    Dim cARQ As String
-    Dim aRETU As Variant
-    Dim sSQL             As String
-    Dim nNUMERO          As Long
+  Dim cARQ As String
+  Dim aRETU As Variant
+  Dim sSQL As String
+  Dim nNUMERO As Long
 
+  Select Case Index
+  Case 0
+    nNUMERO = FixInt(frmFEMEI.TXTFIELDS(12), 0)
+  Case 1
+    nNUMERO = FixInt(frmFEMEI.TXTFIELDS(14), 0)
+  Case 2
+    nNUMERO = FixInt(frmFEMEI.TXTFIELDS(16), 0)
+  End Select
+  cARQ = PegPath("PATH", "LOGIXODBC")
+  sSQL = "SELECT nom_completo as NOMTEC FROM funcionario WHERE cod_empresa='01' and num_matricula=" & nNUMERO
+  aRETU = PegSQL(cARQ, sSQL, 1, Array("NOMTEC"), Array("C"), Array(""))
+  If Not lRETU Then
+    cARQ = PegPath("PATH", "CADMP04")
+    cARQ = GeraConn(cARQ, "JETFOX")
+    sSQL = "SELECT NOMTEC FROM MP04 WHERE TECNICO=" & nNUMERO
+    aRETU = PegSQL(cARQ, sSQL, 1, Array("NOMTEC"), Array("C"), Array(""))
+  End If
+
+  If lRETU Then
     Select Case Index
     Case 0
-        nNUMERO = FixInt(frmFEMEI.TXTFIELDS(12), 0)
+      frmFEMEI.TXTFIELDS(13) = aRETU(0)
     Case 1
-        nNUMERO = FixInt(frmFEMEI.TXTFIELDS(14), 0)
+      frmFEMEI.TXTFIELDS(21) = aRETU(0)
     Case 2
-        nNUMERO = FixInt(frmFEMEI.TXTFIELDS(16), 0)
+      frmFEMEI.TXTFIELDS(22) = aRETU(0)
     End Select
-    cARQ = PegPath("PATH", "LOGIXODBC")
-    sSQL = "SELECT nom_completo as NOMTEC FROM funcionario WHERE cod_empresa='01' and num_matricula=" & nNUMERO
-    aRETU = PegSQL(cARQ, sSQL, 1, Array("NOMTEC"), Array("C"), Array(""))
-    If Not lRETU Then
-        cARQ = PegPath("PATH", "CADMP04")
-        cARQ = GeraConn(cARQ, "JETFOX")
-        sSQL = "SELECT NOMTEC FROM MP04 WHERE TECNICO=" & nNUMERO
-        aRETU = PegSQL(cARQ, sSQL, 1, Array("NOMTEC"), Array("C"), Array(""))
-    End If
-    
-    If lRETU Then
-        Select Case Index
-        Case 0
-            frmFEMEI.TXTFIELDS(13) = aRETU(0)
-        Case 1
-            frmFEMEI.TXTFIELDS(21) = aRETU(0)
-        Case 2
-            frmFEMEI.TXTFIELDS(22) = aRETU(0)
-        End Select
-    End If
+  End If
 End Sub
 
 Private Sub Encerrar_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    Encerrar.Enabled = True
-    CenterFormToScreen Me
-    cARQPF = PegPath("PATH", "PF")
-    cARQFEMEA = PegPath("PATH", "FEMEA")
-    cARQFEMEAPF = PegPath("PATH", "FEMEAPF")
-    cARQUSO = ePASS02
-    cSQLUSO = ePASS01
-    '    ePASS04 versao do femea
-    '    epass03 index qual arquivo trabalha 0 producao
-    '    utilizacao abaixo
-    nCAMPOS = 60 '47
-    aCAM = Array("PF", "ITEM", "PROCESSO", "FALTIP", "FALEFE", _
-                 "FALCAU", "CRTATU", "INDOCO", "INDSEV", "INDDET", _
-                 "INDRIS", "ACAREC", "RESCOD", "RESNOM", "RESCOD2", _
-                 "ACATOM", "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", _
-                 "RINDRIS", "RESNOM2", "RESNOM3", "SITUACAO", "SIGI", _
-                 "CARAPREV", "RESDAT", "RESDAT2", "RESDAT3", "ACADAT", _
-                 "ACAO", "EXCRPN", "ALTMAN", "MUDPAD", "PSA", "FXSEQ", "FXSSQ", "FXITEM", _
-                 "PRONUM", "EFENUM", "FALNUM", "CAUNUM", "SIG2", "SIG3", "SUBTIPO", "FXITEMS", "FEMEAREV", _
-                 "elemento", "estacao", "trabalho", "funcaoitem", "funcaoetapa", "funcaoelemento", _
-                 "pafemea", "caraespecial", "filtroespecial", "acaoprev", "acaodet", "rpafemea", "observacao")
-    aFOR = Array("NI", "NI", "C", "C", "C", _
-                 "C", "C", "NI", "NI", "NI", _
-                 "NI", "C", "NI", "C", "NI", _
-                 "C", "NI", "NI", "NI", "NI", _
-                 "NI", "C", "C", "C", "C", "C", _
-                 "DN", "DN", "DN", "DN", "BN", _
-                 "BN", "BN", "BN", "C", "NI", "NI", "NI", "NI", "NI", "NI", "NI", "C", "C", "C", "NI", "NI", _
-                 "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C")
-    aPAD = Array(0, 0, "", "", "", _
-                 "", "", 0, 0, 0, _
-                 0, "", 0, "", 0, _
-                 "", 0, 0, 0, 0, 0, _
-                 "", "", "", "", "", _
-                 "", "", "", "", False, _
-                 False, False, False, "", 0, 0, 0, 0, 0, 0, 0, "", "", "", 0, 0, _
-                 "", "", "", "", "", "", "", "", "", "", "", "", "")
-                 
-    aVAL = PegSQL(cARQUSO, cSQLUSO, nCAMPOS, aCAM, aFOR, aPAD)
-    gravaAvalTxt (0)
-    
-    If ePASS03 = 0 Then                          'so producao
-        If FixNum(TXTFIELDS(46)) = 0 Then        'precisa checar se e em branco pois no historico e revisoes consta revisoes antigas
-            TXTFIELDS(46) = ePASS04              ''Revisao femea
-        Else
-            If FixNum(TXTFIELDS(46)) < FixNum(ePASS04) Then 'houve revisao e esta menor
-                TXTFIELDS(46) = ePASS04          ''Revisao femea
-            End If
-        End If
+  Encerrar.Enabled = True
+  CenterFormToScreen Me
+  cARQPF = PegPath("PATH", "PF")
+  cARQFEMEA = PegPath("PATH", "FEMEA")
+  cARQFEMEAPF = PegPath("PATH", "FEMEAPF")
+  cARQUSO = ePASS02
+  cSQLUSO = ePASS01
+  '    ePASS04 versao do femea
+  '    epass03 index qual arquivo trabalha 0 producao
+  '    utilizacao abaixo
+  nCAMPOS = 60  '47
+  aCAM = Array("PF", "ITEM", "PROCESSO", "FALTIP", "FALEFE", _
+               "FALCAU", "CRTATU", "INDOCO", "INDSEV", "INDDET", _
+               "INDRIS", "ACAREC", "RESCOD", "RESNOM", "RESCOD2", _
+               "ACATOM", "RESCOD3", "RINDOCO", "RINDSER", "RINDDET", _
+               "RINDRIS", "RESNOM2", "RESNOM3", "SITUACAO", "SIGI", _
+               "CARAPREV", "RESDAT", "RESDAT2", "RESDAT3", "ACADAT", _
+               "ACAO", "EXCRPN", "ALTMAN", "MUDPAD", "PSA", "FXSEQ", "FXSSQ", "FXITEM", _
+               "PRONUM", "EFENUM", "FALNUM", "CAUNUM", "SIG2", "SIG3", "SUBTIPO", "FXITEMS", "FEMEAREV", _
+               "elemento", "estacao", "trabalho", "funcaoitem", "funcaoetapa", "funcaoelemento", _
+               "pafemea", "caraespecial", "filtroespecial", "acaoprev", "acaodet", "rpafemea", "observacao")
+  aFOR = Array("NI", "NI", "C", "C", "C", _
+               "C", "C", "NI", "NI", "NI", _
+               "NI", "C", "NI", "C", "NI", _
+               "C", "NI", "NI", "NI", "NI", _
+               "NI", "C", "C", "C", "C", "C", _
+               "DN", "DN", "DN", "DN", "BN", _
+               "BN", "BN", "BN", "C", "NI", "NI", "NI", "NI", "NI", "NI", "NI", "C", "C", "C", "NI", "NI", _
+               "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C")
+  aPAD = Array(0, 0, "", "", "", _
+               "", "", 0, 0, 0, _
+               0, "", 0, "", 0, _
+               "", 0, 0, 0, 0, 0, _
+               "", "", "", "", "", _
+               "", "", "", "", False, _
+               False, False, False, "", 0, 0, 0, 0, 0, 0, 0, "", "", "", 0, 0, _
+               "", "", "", "", "", "", "", "", "", "", "", "", "")
+
+  aVAL = PegSQL(cARQUSO, cSQLUSO, nCAMPOS, aCAM, aFOR, aPAD)
+  gravaAvalTxt (0)
+
+  If ePASS03 = 0 Then                          'so producao
+    If FixNum(TXTFIELDS(46)) = 0 Then        'precisa checar se e em branco pois no historico e revisoes consta revisoes antigas
+      TXTFIELDS(46) = ePASS04              ''Revisao femea
+    Else
+      If FixNum(TXTFIELDS(46)) < FixNum(ePASS04) Then  'houve revisao e esta menor
+        TXTFIELDS(46) = ePASS04          ''Revisao femea
+      End If
     End If
-    
-    EnableControls Me, False
-    cmdClose.Enabled = False
-    CmdAltman.Enabled = True
-    Check3.Enabled = False
-    Encerrar.Enabled = True
-    
-    
-    TXTFIELDS(24).Font = "isoqsymbol"
-    TXTFIELDS(42).Font = "isoqsymbol"
-    TXTFIELDS(43).Font = "isoqsymbol"
-    
-    'Calcular indices e PA
-    TXTFIELDS_Change 7
-    TXTFIELDS_Change 17
-    
+  End If
+
+  EnableControls Me, False
+  cmdClose.Enabled = False
+  CmdAltman.Enabled = True
+  Check3.Enabled = False
+  Encerrar.Enabled = True
+
+
+  TXTFIELDS(24).Font = "isoqsymbol"
+  TXTFIELDS(42).Font = "isoqsymbol"
+  TXTFIELDS(43).Font = "isoqsymbol"
+
+  'Calcular indices e PA
+  TXTFIELDS_Change 7
+  TXTFIELDS_Change 17
+
 End Sub
 
 Private Sub gravaAvalTxt(nUSO)
-    For nITEM = nUSO To 25
-        TXTFIELDS(nITEM) = aVAL(nITEM)
-    Next nITEM
-    If Not IsNull(aVAL(26)) And aVAL(26) <> "" Then
-        DTPicker1.Value = aVAL(26)
-    End If
-    If Not IsNull(aVAL(27)) And aVAL(27) <> "" Then
-        DTPicker2.Value = aVAL(27)
-    End If
-    If Not IsNull(aVAL(28)) And aVAL(28) <> "" Then
-        DTPicker3.Value = aVAL(28)
-    End If
-    If Not IsNull(aVAL(29)) And aVAL(29) <> "" Then
-        DTPicker4.Value = aVAL(29)
-    End If
-    Check1.Value = aVAL(30)
-    Check2.Value = aVAL(31)
-    If nUSO = 0 Then
-        Check3.Value = aVAL(32)
-        Check4.Value = aVAL(33)
-        For nITEM = 34 To 41                     'aVAL 34 35 36 37 38 39 40 41  pronum,falcum,efenum,caunum nao gravar
-            TXTFIELDS(nITEM) = aVAL(nITEM)
-        Next
-    Else
-        For nITEM = 34 To 37                     'aVAL 38 39 40 41  pronum,falcum,efenum,caunum nao gravar
-            TXTFIELDS(nITEM) = aVAL(nITEM)
-        Next
-    End If
-    For nITEM = 42 To 59 '46                         'campos textos finais
-        TXTFIELDS(nITEM) = aVAL(nITEM)
+  For nITEM = nUSO To 25
+    TXTFIELDS(nITEM) = aVAL(nITEM)
+  Next nITEM
+  If Not IsNull(aVAL(26)) And aVAL(26) <> "" Then
+    DTPicker1.Value = aVAL(26)
+  End If
+  If Not IsNull(aVAL(27)) And aVAL(27) <> "" Then
+    DTPicker2.Value = aVAL(27)
+  End If
+  If Not IsNull(aVAL(28)) And aVAL(28) <> "" Then
+    DTPicker3.Value = aVAL(28)
+  End If
+  If Not IsNull(aVAL(29)) And aVAL(29) <> "" Then
+    DTPicker4.Value = aVAL(29)
+  End If
+  Check1.Value = aVAL(30)
+  Check2.Value = aVAL(31)
+  If nUSO = 0 Then
+    Check3.Value = aVAL(32)
+    Check4.Value = aVAL(33)
+    For nITEM = 34 To 41                     'aVAL 34 35 36 37 38 39 40 41  pronum,falcum,efenum,caunum nao gravar
+      TXTFIELDS(nITEM) = aVAL(nITEM)
     Next
- 
+  Else
+    For nITEM = 34 To 37                     'aVAL 38 39 40 41  pronum,falcum,efenum,caunum nao gravar
+      TXTFIELDS(nITEM) = aVAL(nITEM)
+    Next
+  End If
+  For nITEM = 42 To 59  '46                         'campos textos finais
+    TXTFIELDS(nITEM) = aVAL(nITEM)
+  Next
+
 End Sub
 
 Private Sub acaocampos()
 
-    Dim lENABLE As Boolean
-    Dim X As Integer
-    lENABLE = False
+  Dim lENABLE As Boolean
+  Dim x As Integer
+  lENABLE = False
 
-    If Check1.Value = Checked Then
-        lENABLE = True
-    End If
-    For X = 11 To 22
-        TXTFIELDS(X).Enabled = lENABLE
-    Next X
-    DTPicker1.Enabled = lENABLE
-    DTPicker4.Enabled = lENABLE
-    DTPicker2.Enabled = lENABLE
-    DTPicker3.Enabled = lENABLE
-    Command4(0).Enabled = lENABLE
-    Command4(1).Enabled = lENABLE
-    Command4(2).Enabled = lENABLE
-    For X = 0 To 5
-        Command1(X).Enabled = lENABLE
-    Next X
-    For X = 17 To 19
-        cmdmais(X).Enabled = lENABLE
-        cmdmenos(X).Enabled = lENABLE
-    Next
-    pfcescid(4).Enabled = lENABLE
-    pfcescid(5).Enabled = lENABLE
-    pfcescid(6).Enabled = lENABLE
-    For X = 42 To 45
-        TXTFIELDS(X).Enabled = lENABLE
-    Next X
-    ''46 Revisao sempre travado
-    For X = 47 To 59
-        TXTFIELDS(X).Enabled = lENABLE
-    Next X
-    CmdRetornaAcao(0).Enabled = lENABLE
-    CmdRetornaAcao(1).Enabled = lENABLE
+  If Check1.Value = Checked Then
+    lENABLE = True
+  End If
+  For x = 11 To 22
+    TXTFIELDS(x).Enabled = lENABLE
+  Next x
+  DTPicker1.Enabled = lENABLE
+  DTPicker4.Enabled = lENABLE
+  DTPicker2.Enabled = lENABLE
+  DTPicker3.Enabled = lENABLE
+  Command4(0).Enabled = lENABLE
+  Command4(1).Enabled = lENABLE
+  Command4(2).Enabled = lENABLE
+  For x = 0 To 5
+    Command1(x).Enabled = lENABLE
+  Next x
+  For x = 17 To 19
+    cmdmais(x).Enabled = lENABLE
+    cmdmenos(x).Enabled = lENABLE
+  Next
+  pfcescid(4).Enabled = lENABLE
+  pfcescid(5).Enabled = lENABLE
+  pfcescid(6).Enabled = lENABLE
+  For x = 42 To 45
+    TXTFIELDS(x).Enabled = lENABLE
+  Next x
+  ''46 Revisao sempre travado
+  For x = 47 To 59
+    TXTFIELDS(x).Enabled = lENABLE
+  Next x
+  CmdRetornaAcao(0).Enabled = lENABLE
+  CmdRetornaAcao(1).Enabled = lENABLE
 End Sub
 
 Private Sub grvitem_Click()
-    Dim cTITULO As String
-    Dim aCAMTMP As Variant
+  Dim cTITULO As String
+  Dim aCAMTMP As Variant
 
 
-    
-    cTITULO = FixStr(Busca("Digite o Titulo", "Titulo Pre-Cadastro Femea", Space(50), 50), "")
-    If Len(cTITULO) = 0 Then
-        Alert ("Titulo Necessario")
-        Exit Sub
-    End If
-    
-    
-    For nITEM = 0 To 25
-        aVAL(nITEM) = TXTFIELDS(nITEM)
-    Next nITEM
-    aVAL(26) = NullDate()
-    aVAL(27) = NullDate()
-    aVAL(28) = NullDate()
-    aVAL(29) = NullDate()
-    aVAL(30) = Check1.Value
-    aVAL(31) = Check2.Value
-    aVAL(32) = Check3.Value
-    aVAL(33) = Check4.Value
-    aCAMTMP = aCAM
-    aCAMTMP(2) = "TITULO"
-    aVAL(2) = cTITULO
-    For nITEM = 34 To 37
-        aVAL(nITEM) = TXTFIELDS(nITEM)
-    Next
-    IncluiSQL cARQFEMEA, "SELECT * FROM FEMPRE WHERE TITULO'=" & cTITULO & "'", nCAMPOS, aCAMTMP, aVAL, False, False
+
+  cTITULO = FixStr(Busca("Digite o Titulo", "Titulo Pre-Cadastro Femea", Space(50), 50), "")
+  If Len(cTITULO) = 0 Then
+    Alert ("Titulo Necessario")
+    Exit Sub
+  End If
+
+
+  For nITEM = 0 To 25
+    aVAL(nITEM) = TXTFIELDS(nITEM)
+  Next nITEM
+  aVAL(26) = NullDate()
+  aVAL(27) = NullDate()
+  aVAL(28) = NullDate()
+  aVAL(29) = NullDate()
+  aVAL(30) = Check1.Value
+  aVAL(31) = Check2.Value
+  aVAL(32) = Check3.Value
+  aVAL(33) = Check4.Value
+  aCAMTMP = aCAM
+  aCAMTMP(2) = "TITULO"
+  aVAL(2) = cTITULO
+  For nITEM = 34 To 37
+    aVAL(nITEM) = TXTFIELDS(nITEM)
+  Next
+  IncluiSQL cARQFEMEA, "SELECT * FROM FEMPRE WHERE TITULO'=" & cTITULO & "'", nCAMPOS, aCAMTMP, aVAL, False, False
 
 End Sub
 
 Private Sub pegitem_Click()
-    Dim sSQL As String
-    On Error Resume Next
-    escfrmpre.Show vbModal, Me
-    If lRETU And Val(eRETU01) > 0 Then
-        sSQL = "SELECT * FROM FEMPRE WHERE SEGGRA=" & eRETU01
-        aVAL = PegSQL(cARQFEMEA, sSQL, nCAMPOS, aCAM, aFOR, aPAD)
-        gravaAvalTxt (3)
-        TXTFIELDS_Change (7)
-        TXTFIELDS_Change (17)
-    End If
+  Dim sSQL As String
+  On Error Resume Next
+  escfrmpre.Show vbModal, Me
+  If lRETU And Val(eRETU01) > 0 Then
+    sSQL = "SELECT * FROM FEMPRE WHERE SEGGRA=" & eRETU01
+    aVAL = PegSQL(cARQFEMEA, sSQL, nCAMPOS, aCAM, aFOR, aPAD)
+    gravaAvalTxt (3)
+    TXTFIELDS_Change (7)
+    TXTFIELDS_Change (17)
+  End If
 End Sub
 
 Private Sub pfcescid_Click(Index As Integer)
-    iMU01 = 300 + Index
-    If Index > 3 Then iMU01 = iMU01 - 3
-    eRETU03 = 0                                  'Evita Cancelamento Escolha
-    escIED.Show vbModal, Me
-    If lRETU Then
-        Select Case Index
-        Case 1
-            TXTFIELDS(7) = eRETU03
-        Case 2
-            TXTFIELDS(8) = eRETU03
-        Case 3
-            TXTFIELDS(9) = eRETU03
-        Case 4
-            TXTFIELDS(17) = eRETU03
-        Case 5
-            TXTFIELDS(18) = eRETU03
-        Case 6
-            TXTFIELDS(19) = eRETU03
-        End Select
-    End If
+  iMU01 = 300 + Index
+  If Index > 3 Then iMU01 = iMU01 - 3
+  eRETU03 = 0                                  'Evita Cancelamento Escolha
+  escIED.Show vbModal, Me
+  If lRETU Then
+    Select Case Index
+    Case 1
+      TXTFIELDS(7) = eRETU03
+    Case 2
+      TXTFIELDS(8) = eRETU03
+    Case 3
+      TXTFIELDS(9) = eRETU03
+    Case 4
+      TXTFIELDS(17) = eRETU03
+    Case 5
+      TXTFIELDS(18) = eRETU03
+    Case 6
+      TXTFIELDS(19) = eRETU03
+    End Select
+  End If
 End Sub
 
 
 
 Private Sub TXTFIELDS_Change(Index As Integer)
-If Index = 7 Or Index = 8 Or Index = 9 Or Index = 17 Or Index = 18 Or Index = 19 Then
+  If Index = 7 Or Index = 8 Or Index = 9 Or Index = 17 Or Index = 18 Or Index = 19 Then
     If FixNum(TXTFIELDS(Index)) > 10 Then
-       TXTFIELDS(Index) = 10
+      TXTFIELDS(Index) = 10
     End If
     Select Case Index
-        Case 7, 8, 9
-            TXTFIELDS(10) = FixNum(TXTFIELDS(7)) * FixNum(TXTFIELDS(8)) * FixNum(TXTFIELDS(9))
-            TXTFIELDS(53) = subcalcpa(FixNum(TXTFIELDS(8)), FixNum(TXTFIELDS(7)), FixNum(TXTFIELDS(9)))
-        Case 17, 18, 19
-            TXTFIELDS(20) = FixNum(TXTFIELDS(17)) * FixNum(TXTFIELDS(18)) * FixNum(TXTFIELDS(19))
-            TXTFIELDS(58) = subcalcpa(FixNum(TXTFIELDS(18)), FixNum(TXTFIELDS(17)), FixNum(TXTFIELDS(19)))
+    Case 7, 8, 9
+      TXTFIELDS(10) = FixNum(TXTFIELDS(7)) * FixNum(TXTFIELDS(8)) * FixNum(TXTFIELDS(9))
+      TXTFIELDS(53) = subcalcpa(FixNum(TXTFIELDS(8)), FixNum(TXTFIELDS(7)), FixNum(TXTFIELDS(9)))
+    Case 17, 18, 19
+      TXTFIELDS(20) = FixNum(TXTFIELDS(17)) * FixNum(TXTFIELDS(18)) * FixNum(TXTFIELDS(19))
+      TXTFIELDS(58) = subcalcpa(FixNum(TXTFIELDS(18)), FixNum(TXTFIELDS(17)), FixNum(TXTFIELDS(19)))
     End Select
-End If
+  End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Function subcalcpa(nSEV As Integer, nOCO As Integer, nDET)
-subcalcpa = ""
-Select Case nSEV
-    Case 9, 10
-        Select Case nOCO
-             Case 1
-                subcalcpa = "B"
-             Case 2, 3
-                   Select Case nDET
-                       Case 7, 8, 9, 10
-                            subcalcpa = "A"
-                       Case 5, 6
-                            subcalcpa = "M"
-                       Case 1, 2, 3, 4
-                            subcalcpa = "B"
-                  End Select
-             Case 4, 5
-                  Select Case nDET
-                       Case 2, 3, 4, 5, 6, 7, 8, 9, 10
-                            subcalcpa = "A"
-                       Case 1
-                            subcalcpa = "M"
-                  End Select
-             Case 6, 7, 8, 9, 10
-                subcalcpa = "A"
-        End Select
-    
-    Case 7, 8
-        Select Case nOCO
-            Case 1
-                subcalcpa = "B"
-            Case 2, 3
-                Select Case nDET
-                       Case 1, 2, 3, 4
-                            subcalcpa = "B"
-                       Case 5, 6, 7, 8, 9, 10
-                            subcalcpa = "M"
-                End Select
-            Case 4, 5
-                Select Case nDET
-                       Case 1, 2, 3, 4, 5, 6
-                            subcalcpa = "M"
-                       Case 7, 8, 9, 10
-                            subcalcpa = "A"
-                End Select
-            Case 6, 7
-                Select Case nDET
-                       Case 1
-                            subcalcpa = "M"
-                       Case 2, 3, 4, 5, 6, 7, 8, 9, 10
-                            subcalcpa = "A"
-                End Select
-            Case 8, 9, 10
-                subcalcpa = "A"
-        End Select
-    Case 4, 5, 6
-       Select Case nOCO
-           Case 1, 2, 3
-               subcalcpa = "B"
-           Case 4, 5
-                Select Case nDET
-                       Case 1, 2, 3, 4, 5, 6
-                            subcalcpa = "B"
-                       Case 7, 8, 9, 10
-                            subcalcpa = "M"
-                End Select
-           Case 6, 7
-                Select Case nDET
-                       Case 1
-                            subcalcpa = "B"
-                       Case 2, 3, 4, 5, 6, 7, 8, 9, 10
-                            subcalcpa = "M"
-                End Select
-
-           Case 8, 10
-                Select Case nDET
-                       Case 1, 2, 3, 4
-                            subcalcpa = "M"
-                       Case 5, 6, 7, 8, 9, 10
-                            subcalcpa = "A"
-                End Select
-
-       End Select
-    Case 2, 3
-       Select Case nOCO
-              Case 1, 2, 3, 4, 5, 6, 7
-                   subcalcpa = "B"
-              Case 8, 9, 10
-                   Select Case nDET
-                        Case 1, 2, 3, 4
-                            subcalcpa = "B"
-                        Case 5, 6, 7, 8, 9, 10
-                            subcalcpa = "M"
-                   End Select
-       End Select
+  subcalcpa = ""
+  Select Case nSEV
+  Case 9, 10
+    Select Case nOCO
     Case 1
-     subcalcpa = "B"
-End Select
+      subcalcpa = "B"
+    Case 2, 3
+      Select Case nDET
+      Case 7, 8, 9, 10
+        subcalcpa = "A"
+      Case 5, 6
+        subcalcpa = "M"
+      Case 1, 2, 3, 4
+        subcalcpa = "B"
+      End Select
+    Case 4, 5
+      Select Case nDET
+      Case 2, 3, 4, 5, 6, 7, 8, 9, 10
+        subcalcpa = "A"
+      Case 1
+        subcalcpa = "M"
+      End Select
+    Case 6, 7, 8, 9, 10
+      subcalcpa = "A"
+    End Select
+
+  Case 7, 8
+    Select Case nOCO
+    Case 1
+      subcalcpa = "B"
+    Case 2, 3
+      Select Case nDET
+      Case 1, 2, 3, 4
+        subcalcpa = "B"
+      Case 5, 6, 7, 8, 9, 10
+        subcalcpa = "M"
+      End Select
+    Case 4, 5
+      Select Case nDET
+      Case 1, 2, 3, 4, 5, 6
+        subcalcpa = "M"
+      Case 7, 8, 9, 10
+        subcalcpa = "A"
+      End Select
+    Case 6, 7
+      Select Case nDET
+      Case 1
+        subcalcpa = "M"
+      Case 2, 3, 4, 5, 6, 7, 8, 9, 10
+        subcalcpa = "A"
+      End Select
+    Case 8, 9, 10
+      subcalcpa = "A"
+    End Select
+  Case 4, 5, 6
+    Select Case nOCO
+    Case 1, 2, 3
+      subcalcpa = "B"
+    Case 4, 5
+      Select Case nDET
+      Case 1, 2, 3, 4, 5, 6
+        subcalcpa = "B"
+      Case 7, 8, 9, 10
+        subcalcpa = "M"
+      End Select
+    Case 6, 7
+      Select Case nDET
+      Case 1
+        subcalcpa = "B"
+      Case 2, 3, 4, 5, 6, 7, 8, 9, 10
+        subcalcpa = "M"
+      End Select
+
+    Case 8, 10
+      Select Case nDET
+      Case 1, 2, 3, 4
+        subcalcpa = "M"
+      Case 5, 6, 7, 8, 9, 10
+        subcalcpa = "A"
+      End Select
+
+    End Select
+  Case 2, 3
+    Select Case nOCO
+    Case 1, 2, 3, 4, 5, 6, 7
+      subcalcpa = "B"
+    Case 8, 9, 10
+      Select Case nDET
+      Case 1, 2, 3, 4
+        subcalcpa = "B"
+      Case 5, 6, 7, 8, 9, 10
+        subcalcpa = "M"
+      End Select
+    End Select
+  Case 1
+    subcalcpa = "B"
+  End Select
 End Function
 

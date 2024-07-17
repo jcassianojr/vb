@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form escuser 
    Caption         =   "Selecione o Usuario Desejado"
@@ -75,93 +75,93 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub ApagaNF_Click()
-    Dim aRETU As Variant
-    Dim sSQL As String
-    If Not MDG("Apagar Usuario", "Confirme Exclusão") Then
-        Exit Sub
-    End If
-    Grid.Col = 0
-    zIDTEMP = Grid
-    'USUARIO
-    sSQL = "select * from USUARIO WHERE IDUSUARIO=" & zIDTEMP
-    ApagaSQL dbuser, sSQL
-    'USUCAD
-    sSQL = "select * from USUCAD WHERE IDUSUARIO=" & zIDTEMP
-    ApagaSQL dbuser, sSQL
-    'MENU
-    sSQL = "select * from MENUUSU WHERE IDUSUARIO=" & zIDTEMP
-    ApagaSQL dbuser, sSQL
-    ''  Apagar Direitos Relatorios
-    'RTFUSR
-    sSQL = "select * from RTFUSR WHERE IDUSUARIO=" & zIDTEMP
-    ApagaSQL DBWRPT, sSQL
-    'RPTUSR
-    sSQL = "select * from RPTUSR WHERE IDUSUARIO=" & zIDTEMP
-    ApagaSQL DBWRPT, sSQL
-    'RPTFOLUSR
-    sSQL = "select * from RPTFOLUSR WHERE IDUSUARIO=" & zIDTEMP
-    ApagaSQL DBWRPT, sSQL
-    'RPTINTUSR
-    sSQL = "select * from RPTINTUSR WHERE IDUSUARIO=" & zIDTEMP
-    ApagaSQL DBWRPT, sSQL
-    FilRelat
+  Dim aRETU As Variant
+  Dim sSQL As String
+  If Not MDG("Apagar Usuario", "Confirme Exclusão") Then
+    Exit Sub
+  End If
+  Grid.Col = 0
+  zIDTEMP = Grid
+  'USUARIO
+  sSQL = "select * from USUARIO WHERE IDUSUARIO=" & zIDTEMP
+  ApagaSQL dbuser, sSQL
+  'USUCAD
+  sSQL = "select * from USUCAD WHERE IDUSUARIO=" & zIDTEMP
+  ApagaSQL dbuser, sSQL
+  'MENU
+  sSQL = "select * from MENUUSU WHERE IDUSUARIO=" & zIDTEMP
+  ApagaSQL dbuser, sSQL
+  ''  Apagar Direitos Relatorios
+  'RTFUSR
+  sSQL = "select * from RTFUSR WHERE IDUSUARIO=" & zIDTEMP
+  ApagaSQL DBWRPT, sSQL
+  'RPTUSR
+  sSQL = "select * from RPTUSR WHERE IDUSUARIO=" & zIDTEMP
+  ApagaSQL DBWRPT, sSQL
+  'RPTFOLUSR
+  sSQL = "select * from RPTFOLUSR WHERE IDUSUARIO=" & zIDTEMP
+  ApagaSQL DBWRPT, sSQL
+  'RPTINTUSR
+  sSQL = "select * from RPTINTUSR WHERE IDUSUARIO=" & zIDTEMP
+  ApagaSQL DBWRPT, sSQL
+  FilRelat
 End Sub
 
 Private Sub CmdSair_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub EditPf_Click()
-    Dim nFOLHATMP As Long
-    Dim sSQL As String
-    Dim cARQ As String
-    Dim aRETU As Variant
-    Dim x As Integer
- 
+  Dim nFOLHATMP As Long
+  Dim sSQL As String
+  Dim cARQ As String
+  Dim aRETU As Variant
+  Dim x As Integer
 
-    Grid.Col = 0
-    zIDTEMP = FixInt(Grid)
-    
-    cARQ = dbuser
-    sSQL = "select IDFOLHA from USUARIO WHERE IDUSUARIO=" & zIDTEMP
-    nFOLHATMP = PegUltSQL(cARQ, sSQL, "IDFOLHA", 0)
-    If demitido(nFOLHATMP) Then
-        If MDG("Deseja exlui-lo") Then
-            ApagaNF_Click
-            Exit Sub
-        End If
+
+  Grid.Col = 0
+  zIDTEMP = FixInt(Grid)
+
+  cARQ = dbuser
+  sSQL = "select IDFOLHA from USUARIO WHERE IDUSUARIO=" & zIDTEMP
+  nFOLHATMP = PegUltSQL(cARQ, sSQL, "IDFOLHA", 0)
+  If demitido(nFOLHATMP) Then
+    If MDG("Deseja exlui-lo") Then
+      ApagaNF_Click
+      Exit Sub
     End If
-    
-    ePASS01 = "select * from USUARIO WHERE IDUSUARIO=" & zIDTEMP
-    frmUSER.Show vbModal
-    FilRelat
-    LocalizaGrid Grid, zIDTEMP, 1, False
+  End If
+
+  ePASS01 = "select * from USUARIO WHERE IDUSUARIO=" & zIDTEMP
+  frmUSER.Show vbModal
+  FilRelat
+  LocalizaGrid Grid, zIDTEMP, 1, False
 
 
 End Sub
 
 Private Sub FilRelat()
-    Dim cARQ As String
-    Dim cSQL As String
-    cARQ = dbuser
-    cSQL = "SELECT IDUSUARIO,USUARIO,IDFOLHA,DATAULT FROM USUARIO ORDER BY USUARIO"
-    MontaGridUltra Grid, 4, Array(400, 1600, 800, 1200), Array("ID", "NOme", "Folha", "Ultimo"), _
-        Array("IDUSUARIO", "USUARIO", "IDFOLHA", "DATAULT"), cARQ, cSQL
+  Dim cARQ As String
+  Dim cSQL As String
+  cARQ = dbuser
+  cSQL = "SELECT IDUSUARIO,USUARIO,IDFOLHA,DATAULT FROM USUARIO ORDER BY USUARIO"
+  MontaGridUltra Grid, 4, Array(400, 1600, 800, 1200), Array("ID", "NOme", "Folha", "Ultimo"), _
+                 Array("IDUSUARIO", "USUARIO", "IDFOLHA", "DATAULT"), cARQ, cSQL
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    FilRelat
-    If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
-    xmontatoolbar Me.Toolbar1, "escUSER", True
+  CenterFormToScreen Me
+  FilRelat
+  If FixStr(eLOCALIZA) <> "" Then LocalizaGri1 Grid, eLOCALIZA, 1
+  xmontatoolbar Me.Toolbar1, "escUSER", True
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
 
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 End Sub
 
@@ -177,63 +177,63 @@ End Sub
 'End Sub
 
 Private Sub NovoPF_Click()
-    zIDTEMP = FixInt(PegMAXSQL(dbuser, "usuario", "idusuario", 0)) + 1
-    IncluiSQL dbuser, "SELECT * FROM USUARIO WHERE IDUSUARIO=" & zIDTEMP, 2, Array("IDUSUARIO", "USUARIO"), _
-        Array(zIDTEMP, CStr(zIDTEMP)), False, False
-    FilRelat
+  zIDTEMP = FixInt(PegMAXSQL(dbuser, "usuario", "idusuario", 0)) + 1
+  IncluiSQL dbuser, "SELECT * FROM USUARIO WHERE IDUSUARIO=" & zIDTEMP, 2, Array("IDUSUARIO", "USUARIO"), _
+            Array(zIDTEMP, CStr(zIDTEMP)), False, False
+  FilRelat
 End Sub
 
 Private Sub SENHA_Click()
 
-   If Grid.Row > 0 Then 'evitar quando clicado na linha de cabecario
-     Grid.Col = 0
-     zIDTEMP = Grid
-     frmUSUSENHA.Show vbModal
-     FilRelat
+  If Grid.Row > 0 Then  'evitar quando clicado na linha de cabecario
+    Grid.Col = 0
+    zIDTEMP = Grid
+    frmUSUSENHA.Show vbModal
+    FilRelat
   End If
 
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Dim sButton          As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    
-    If Not AcessaBtnOld("escUSER", Button.Index) Then
-        Exit Sub
-    End If
-    GravaLog 0, Button.Index, sButton, "escUSER"
-    
-    
-    Grid.Col = 0
-    If Grid.Row > 0 Then
-        zIDTEMP = Grid
-        ePASS02 = zIDTEMP
-    End If
-    
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
 
-    Select Case sButton
+  If Not AcessaBtnOld("escUSER", Button.Index) Then
+    Exit Sub
+  End If
+  GravaLog 0, Button.Index, sButton, "escUSER"
 
-    Case "NOV"
-        NovoPF_Click
 
-    Case "EDI"
-        EditPf_Click
+  Grid.Col = 0
+  If Grid.Row > 0 Then
+    zIDTEMP = Grid
+    ePASS02 = zIDTEMP
+  End If
 
-    Case "EXC"
-        ApagaNF_Click
 
-    Case "SEN"
-        SENHA_Click
+  Select Case sButton
 
-    Case "LOC"
-        LocalizaGri1 Grid
+  Case "NOV"
+    NovoPF_Click
 
-    Case "SAI"
-        CmdSair_Click
+  Case "EDI"
+    EditPf_Click
 
-    End Select
+  Case "EXC"
+    ApagaNF_Click
+
+  Case "SEN"
+    SENHA_Click
+
+  Case "LOC"
+    LocalizaGri1 Grid
+
+  Case "SAI"
+    CmdSair_Click
+
+  End Select
 
 End Sub
 

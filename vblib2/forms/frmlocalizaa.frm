@@ -104,44 +104,44 @@ Const nFORMID = 1072
 Const cFORMID = "Dialogo de Busca"
 
 Private Sub cBUSCA_GotFocus()
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub Command1_Click()
-    lRETU = True
-    Unload Me
+  lRETU = True
+  Unload Me
 End Sub
 
 Private Sub Command2_Click()
-    lRETU = False
-    Unload Me
+  lRETU = False
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    Dim nLEN As Integer
-    CenterFormToScreen Me
-    Me.Caption = cFORMID
-    HelpContextID = nFORMID
-    
-    'CentralizaJanela Me
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = 1
-    nLEN = UBound(ePASS01)
-    ''nLEN = nLEN ''aRRAY comeca 0
-    List.Clear
-    For x = 0 To nLEN
-        List.AddItem ePASS01(x)
-    Next x
-    List.ListIndex = 0
+  Dim nLEN As Integer
+  CenterFormToScreen Me
+  Me.Caption = cFORMID
+  HelpContextID = nFORMID
+
+  'CentralizaJanela Me
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = 1
+  nLEN = UBound(ePASS01)
+  ''nLEN = nLEN ''aRRAY comeca 0
+  List.Clear
+  For x = 0 To nLEN
+    List.AddItem ePASS01(x)
+  Next x
+  List.ListIndex = 0
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-    eRETU01 = cBUSCA
-    eRETU02 = List.ListIndex + 1                 ''matriz zero posional 1
+  eRETU01 = cBUSCA
+  eRETU02 = List.ListIndex + 1                 ''matriz zero posional 1
 End Sub
 

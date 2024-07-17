@@ -185,60 +185,60 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Cancle_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 Private Sub CmdescPF_Click()
-    escpf.Show vbModal, Me
-    If lRETU Then
-        tEXT(0).tEXT = eRETU01
-    End If
+  escpf.Show vbModal, Me
+  If lRETU Then
+    tEXT(0).tEXT = eRETU01
+  End If
 End Sub
 
 Private Sub Command1_Click()
-    escpf.Show vbModal, Me
-    If lRETU Then
-        tEXT(1).tEXT = eRETU01
-    End If
+  escpf.Show vbModal, Me
+  If lRETU Then
+    tEXT(1).tEXT = eRETU01
+  End If
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
+  CenterFormToScreen Me
 End Sub
 
 Private Sub ok_Click()
-    Dim nPFORI As Long
-    Dim cARQ, cSQL1, cSQL2, cSQL3 As String
-    
-    cARQ = PegPath("PATH", "PF")
-    If cARQIMP = "IE" Then
-        cARQ = PegPath("PATH", "IE")
-    End If
-    
-    nPF = Val(tEXT(1))
-    nPFORI = Val(tEXT(0))
-    cSQL1 = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
-    cSQL2 = "select * from " & cARQIMP & " WHERE pf=" & nPF
-    cSQL3 = "select * from " & cARQIMP & " WHERE pf=" & nPFORI
-    
-    importa2 cARQ, cSQL1, cARQ, cSQL3, cARQ, cSQL2, "PFX"
-    
-    Unload Me
+  Dim nPFORI As Long
+  Dim cARQ, cSQL1, cSQL2, cSQL3 As String
+
+  cARQ = PegPath("PATH", "PF")
+  If cARQIMP = "IE" Then
+    cARQ = PegPath("PATH", "IE")
+  End If
+
+  nPF = Val(tEXT(1))
+  nPFORI = Val(tEXT(0))
+  cSQL1 = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
+  cSQL2 = "select * from " & cARQIMP & " WHERE pf=" & nPF
+  cSQL3 = "select * from " & cARQIMP & " WHERE pf=" & nPFORI
+
+  importa2 cARQ, cSQL1, cARQ, cSQL3, cARQ, cSQL2, "PFX"
+
+  Unload Me
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Text_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub tEXT_KeyPress(Index As Integer, KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 

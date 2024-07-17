@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form NewSeq 
    Caption         =   "Incluindo Nova Sequenica"
    ClientHeight    =   1815
@@ -53,7 +53,7 @@ Begin VB.Form NewSeq
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin vbccr18.SpinBox seq 
+   Begin VBCCR18.SpinBox seq 
       Height          =   495
       Left            =   1440
       TabIndex        =   7
@@ -75,7 +75,7 @@ Begin VB.Form NewSeq
       Value           =   10
       Increment       =   5
    End
-   Begin vbccr18.SpinBox Ssq 
+   Begin VBCCR18.SpinBox Ssq 
       Height          =   495
       Left            =   2400
       TabIndex        =   8
@@ -97,7 +97,7 @@ Begin VB.Form NewSeq
       Value           =   10
       Increment       =   5
    End
-   Begin vbccr18.SpinBox item 
+   Begin VBCCR18.SpinBox item 
       Height          =   495
       Left            =   3360
       TabIndex        =   9
@@ -171,150 +171,150 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 
 
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    PF.tEXT = nPF
-    If FixInt(nPF) = 0 Then
-        PF.Enabled = True
-        PF.Locked = False
-        PF.BackColor = &H80000005
-    End If
-    If iMU01 <> 3 And iMU01 <> 4 Then
-        item.Enabled = False
-        item.Visible = False
-        item.Locked = True
-    End If
-    If iMU01 = 4 Then
-        NewSeq.SEQ.Value = nSEQ
-        NewSeq.SSQ.Value = nSSQ
-        NewSeq.item.Value = nORD
-    End If
-   
+  CenterFormToScreen Me
+  PF.tEXT = nPF
+  If FixInt(nPF) = 0 Then
+    PF.Enabled = True
+    PF.Locked = False
+    PF.BackColor = &H80000005
+  End If
+  If iMU01 <> 3 And iMU01 <> 4 Then
+    item.Enabled = False
+    item.Visible = False
+    item.Locked = True
+  End If
+  If iMU01 = 4 Then
+    NewSeq.SEQ.Value = nSEQ
+    NewSeq.SSQ.Value = nSSQ
+    NewSeq.item.Value = nORD
+  End If
+
 End Sub
 
 Private Sub Gravar_Click()
-    Dim sSQL As String
-    If iMU01 = 1 Then
-        nSEQ = FixInt(NewSeq.SEQ)
-        nSSQ = FixInt(NewSeq.SSQ)
-        sSQL = "select pf,seq,ssq from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
-        IncluiSQL Sdb, sSQL, 3, Array("PF", "SEQ", "SSQ"), _
-        Array(nPF, nSEQ, nSSQ), True, True
-    End If
-    If iMU01 = 2 Then
-        'PFS
-        sSQL = "select pf,seq,ssq from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
-        REORDER sSQL, "PF"
-        REORDER sSQL, "PFP"
-        REORDER sSQL, "PFG"
-        'PFI
-        sSQL = "select pf,seq,ssq from PFI WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
-        REORDER sSQL, "PF"
-        REORDER sSQL, "PFP"
-        REORDER sSQL, "PFG"
-        'PFC
-        sSQL = "select pf,seq,ssq from PFC WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
-        REORDER sSQL, "PF"
-        REORDER sSQL, "PFP"
-        REORDER sSQL, "PFG"
-        'pfqsqblep (fluxo 2)
-        sSQL = "select pf,seq,ssq from PFQSBLEP WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
-        REORDER sSQL, "PF"
-        REORDER sSQL, "PFP"
-        REORDER sSQL, "PFG"
-    End If
-    
-    If iMU01 = 3 Then
-        nSEQ = FixInt(NewSeq.SEQ.Value)
-        nSSQ = FixInt(NewSeq.SSQ.Value)
-        nPF = FixInt(NewSeq.PF.tEXT)
-        nORD = FixInt(NewSeq.item.Value)
-        If nPF = 0 Then
-            Alert ("PF Nao preenchido")
-            Exit Sub
-        End If
-        If nORD = 0 Then
-            Alert ("item Nao preenchido")
-            Exit Sub
-        End If
-    End If
-    
-    If iMU01 = 4 Then
-        nSEQ = FixInt(NewSeq.SEQ.Value)
-        nSSQ = FixInt(NewSeq.SSQ.Value)
-        nORD = FixInt(NewSeq.item.Value)
-        sSQL = "select * from poKa WHERE numero=" & nPPAP
-        REORDER sSQL, "POKA"
-    End If
-    
+  Dim sSQL As String
+  If iMU01 = 1 Then
+    nSEQ = FixInt(NewSeq.SEQ)
+    nSSQ = FixInt(NewSeq.SSQ)
+    sSQL = "select pf,seq,ssq from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+    IncluiSQL Sdb, sSQL, 3, Array("PF", "SEQ", "SSQ"), _
+              Array(nPF, nSEQ, nSSQ), True, True
+  End If
+  If iMU01 = 2 Then
+    'PFS
+    sSQL = "select pf,seq,ssq from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+    REORDER sSQL, "PF"
+    REORDER sSQL, "PFP"
+    REORDER sSQL, "PFG"
+    'PFI
+    sSQL = "select pf,seq,ssq from PFI WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+    REORDER sSQL, "PF"
+    REORDER sSQL, "PFP"
+    REORDER sSQL, "PFG"
+    'PFC
+    sSQL = "select pf,seq,ssq from PFC WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+    REORDER sSQL, "PF"
+    REORDER sSQL, "PFP"
+    REORDER sSQL, "PFG"
+    'pfqsqblep (fluxo 2)
+    sSQL = "select pf,seq,ssq from PFQSBLEP WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+    REORDER sSQL, "PF"
+    REORDER sSQL, "PFP"
+    REORDER sSQL, "PFG"
+  End If
 
-    
-    If iMU01 = 1 Then
-        eRETU02 = "PF:" & nPF & Chr(13) & Chr(10)
-        eRETU02 = eRETU02 & " Desenho:" & frmPF.TXTFIELDS(2) & Chr(13) & Chr(10)
-        eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
-        eRETU02 = eRETU02 & " SEQ=" & nSEQ & " SSQ=" & nSSQ
-        MAILENV "PFS00001", eRETU02
+  If iMU01 = 3 Then
+    nSEQ = FixInt(NewSeq.SEQ.Value)
+    nSSQ = FixInt(NewSeq.SSQ.Value)
+    nPF = FixInt(NewSeq.PF.tEXT)
+    nORD = FixInt(NewSeq.item.Value)
+    If nPF = 0 Then
+      Alert ("PF Nao preenchido")
+      Exit Sub
     End If
-   
-    Unload Me
-    
+    If nORD = 0 Then
+      Alert ("item Nao preenchido")
+      Exit Sub
+    End If
+  End If
+
+  If iMU01 = 4 Then
+    nSEQ = FixInt(NewSeq.SEQ.Value)
+    nSSQ = FixInt(NewSeq.SSQ.Value)
+    nORD = FixInt(NewSeq.item.Value)
+    sSQL = "select * from poKa WHERE numero=" & nPPAP
+    REORDER sSQL, "POKA"
+  End If
+
+
+
+  If iMU01 = 1 Then
+    eRETU02 = "PF:" & nPF & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Desenho:" & frmPF.TXTFIELDS(2) & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " SEQ=" & nSEQ & " SSQ=" & nSSQ
+    MAILENV "PFS00001", eRETU02
+  End If
+
+  Unload Me
+
 End Sub
 
 Private Sub REORDER(sSQL As Variant, Optional ByVal cARQ As String = "")
-    Dim DB As New ADODB.Connection
-    Dim RSTAB As New ADODB.Recordset
-    Select Case cARQ
-    Case "PF"
-        cARQ = PegPath("PATH", "PF")
-    Case "PFP"
-        cARQ = PegPath("PATH", "PFP")
-    Case "PFG"
-        cARQ = PegPath("PATH", "PFG")
-    Case "POKA"
-        cARQ = PegPath("PATH", "POKA")
-    Case Else
-        cARQ = Sdb
-    End Select
-    cARQ = GeracArq(cARQ)
-    DB.ConnectionTimeout = 120
-    DB.Open cARQ
-    RSTAB.Open sSQL, DB, adOpenDynamic, adLockOptimistic
-    Do While Not RSTAB.EOF
-        RSTAB("SEQ") = FixInt(NewSeq.SEQ)
-        RSTAB("SSQ") = FixInt(NewSeq.SSQ)
-        If iMU01 = 4 Then
-            RSTAB("ITEM") = FixInt(NewSeq.item)
-        End If
-        RSTAB.Update
-        RSTAB.MoveNext
-    Loop
-    RSTAB.Close
+  Dim DB As New ADODB.Connection
+  Dim RSTAB As New ADODB.Recordset
+  Select Case cARQ
+  Case "PF"
+    cARQ = PegPath("PATH", "PF")
+  Case "PFP"
+    cARQ = PegPath("PATH", "PFP")
+  Case "PFG"
+    cARQ = PegPath("PATH", "PFG")
+  Case "POKA"
+    cARQ = PegPath("PATH", "POKA")
+  Case Else
+    cARQ = Sdb
+  End Select
+  cARQ = GeracArq(cARQ)
+  DB.ConnectionTimeout = 120
+  DB.Open cARQ
+  RSTAB.Open sSQL, DB, adOpenDynamic, adLockOptimistic
+  Do While Not RSTAB.EOF
+    RSTAB("SEQ") = FixInt(NewSeq.SEQ)
+    RSTAB("SSQ") = FixInt(NewSeq.SSQ)
+    If iMU01 = 4 Then
+      RSTAB("ITEM") = FixInt(NewSeq.item)
+    End If
+    RSTAB.Update
+    RSTAB.MoveNext
+  Loop
+  RSTAB.Close
 End Sub
 
 Private Sub SEQ_GotFocus()
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub SEQ_KeyPress(KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub SSQ_GotFocus()
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub SSQ_KeyPress(KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 

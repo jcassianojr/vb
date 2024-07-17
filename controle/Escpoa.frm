@@ -72,200 +72,200 @@ Dim cSUBWHERE As String
 Dim cARQPOA As String
 
 Private Sub ApagaNF_Click()
-    Dim sSQL As String
-    Grid.Col = 0
-    nPPAP = Grid
-    sSQL = "select * from " & zPFTIPO & " WHERE numero=" & nPPAP
-    If ApagaSQLP(cARQPOA, sSQL) Then
-        FilRelat
-    End If
+  Dim sSQL As String
+  Grid.Col = 0
+  nPPAP = Grid
+  sSQL = "select * from " & zPFTIPO & " WHERE numero=" & nPPAP
+  If ApagaSQLP(cARQPOA, sSQL) Then
+    FilRelat
+  End If
 End Sub
 
 Private Sub CmdSair_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub EditPf_Click()
-    Grid.Col = 0
-    nPPAP = Grid
-    Grid.Col = 1
-    nPF = Grid
-    Grid.Col = 2
-    nSEQ = Grid
-    Grid.Col = 3
-    nSSQ = Grid
-    Grid.Col = 4
-    nORD = Grid
-    
-    If zPFTIPO = "POA" Then
-        frmPOA.Show vbModal
-    End If
-    If zPFTIPO = "POKA" Then
-        frmPOKA.Show vbModal
-    End If
-    If zPFTIPO = "DISPO" Then
-        frmDISPO.Show vbModal
-    End If
-    
-    FilRelat
+  Grid.Col = 0
+  nPPAP = Grid
+  Grid.Col = 1
+  nPF = Grid
+  Grid.Col = 2
+  nSEQ = Grid
+  Grid.Col = 3
+  nSSQ = Grid
+  Grid.Col = 4
+  nORD = Grid
+
+  If zPFTIPO = "POA" Then
+    frmPOA.Show vbModal
+  End If
+  If zPFTIPO = "POKA" Then
+    frmPOKA.Show vbModal
+  End If
+  If zPFTIPO = "DISPO" Then
+    frmDISPO.Show vbModal
+  End If
+
+  FilRelat
 End Sub
 
 Private Sub FilRelat()
-    Dim cSQL As String
-    If Len(cSUBWHERE) = 0 Then
-        cSQL = "SELECT NUMERO,PF,SEQ,SSQ,ITEM,codigo,NOME,resnum,eladat FROM " & zPFTIPO & " ORDER BY " & cORDEM
-    Else
-        cSQL = "SELECT NUMERO,PF,SEQ,SSQ,ITEM,codigo,NOME,resnum,eladat FROM " & zPFTIPO & " WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
-    End If
-    MontaGridFast Grid, 9, Array(600, 600, 400, 400, 400, 1600, 1000, 4000, 600), Array("N�", "PF", "SEQ", "SSQ", "Item", "Produto", "Elaboracao", "Descricao", "LibNum"), _
-        Array("NUMERO", "PF", "SEQ", "SSQ", "ITEM", "L$CODIGO", "ELADAT", "NOME", "RESNUM"), cARQPOA, cSQL
+  Dim cSQL As String
+  If Len(cSUBWHERE) = 0 Then
+    cSQL = "SELECT NUMERO,PF,SEQ,SSQ,ITEM,codigo,NOME,resnum,eladat FROM " & zPFTIPO & " ORDER BY " & cORDEM
+  Else
+    cSQL = "SELECT NUMERO,PF,SEQ,SSQ,ITEM,codigo,NOME,resnum,eladat FROM " & zPFTIPO & " WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
+  End If
+  MontaGridFast Grid, 9, Array(600, 600, 400, 400, 400, 1600, 1000, 4000, 600), Array("N�", "PF", "SEQ", "SSQ", "Item", "Produto", "Elaboracao", "Descricao", "LibNum"), _
+                Array("NUMERO", "PF", "SEQ", "SSQ", "ITEM", "L$CODIGO", "ELADAT", "NOME", "RESNUM"), cARQPOA, cSQL
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    aORDEM = Array("PF,SEQ,SSQ", "NUMERO", "CODIGO", "NOME", "ELADAT")
-    aORDES = Array("PF", "N�", "Produto", "Descricao", "Elaboracao")
-    cORDEM = "PF,SEQ,SSQ"
-    cSUBWHERE = ""
-    cARQPOA = PegPath("PATH", zPFTIPO)
-    xmontatoolbar Me.Toolbar1, "Esc" & zPFTIPO, True
-    FilRelat
+  CenterFormToScreen Me
+  aORDEM = Array("PF,SEQ,SSQ", "NUMERO", "CODIGO", "NOME", "ELADAT")
+  aORDES = Array("PF", "N�", "Produto", "Descricao", "Elaboracao")
+  cORDEM = "PF,SEQ,SSQ"
+  cSUBWHERE = ""
+  cARQPOA = PegPath("PATH", zPFTIPO)
+  xmontatoolbar Me.Toolbar1, "Esc" & zPFTIPO, True
+  FilRelat
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 End Sub
 
 'Private Sub Grid_SelChange()
- '   With Grid
-  '      If .Rows > 2 Then
-   '         .Col = .Cols - 1
-    '        .ColSel = 0
-     '       .TopRow = .Row
-      '  End If
-    'End With
+'   With Grid
+'      If .Rows > 2 Then
+'         .Col = .Cols - 1
+'        .ColSel = 0
+'       .TopRow = .Row
+'  End If
+'End With
 'End Sub
 
 Private Sub NovoPF_Click()
-    iMU01 = 3
-    nPF = 0
-    NewSeq.Show vbModal
-    'nPPAP = PegUltSQL(cARQPOA, "select numero from " & zPFTIPO & " WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
-    
-    nPPAP = PegCampoSQLADO(cARQPOA, "select numero from " & zPFTIPO & " WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "", 0)
-      
-    'checagem acima necessario pos checas as sequencias
-    If nPPAP = 0 Then
-        nPPAP = FixInt(PegMAXSQL(cARQPOA, zPFTIPO, "NUMERO", 0)) + 1
-        IncluiSQL cARQPOA, "SELECT * FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, 5, Array("NUMERO", "PF", "SEQ", "SSQ", "ITEM"), Array(nPPAP, nPF, nSEQ, nSSQ, nORD)
-    End If
-    If zPFTIPO = "POA" Then
-        frmPOA.Show vbModal
-    End If
-    If zPFTIPO = "POKA" Then
-        frmPOKA.Show vbModal
-    End If
-    If zPFTIPO = "DISPO" Then
-        frmDISPO.Show vbModal
-    End If
-    
-    FilRelat
+  iMU01 = 3
+  nPF = 0
+  NewSeq.Show vbModal
+  'nPPAP = PegUltSQL(cARQPOA, "select numero from " & zPFTIPO & " WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
+
+  nPPAP = PegCampoSQLADO(cARQPOA, "select numero from " & zPFTIPO & " WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "", 0)
+
+  'checagem acima necessario pos checas as sequencias
+  If nPPAP = 0 Then
+    nPPAP = FixInt(PegMAXSQL(cARQPOA, zPFTIPO, "NUMERO", 0)) + 1
+    IncluiSQL cARQPOA, "SELECT * FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, 5, Array("NUMERO", "PF", "SEQ", "SSQ", "ITEM"), Array(nPPAP, nPF, nSEQ, nSSQ, nORD)
+  End If
+  If zPFTIPO = "POA" Then
+    frmPOA.Show vbModal
+  End If
+  If zPFTIPO = "POKA" Then
+    frmPOKA.Show vbModal
+  End If
+  If zPFTIPO = "DISPO" Then
+    frmDISPO.Show vbModal
+  End If
+
+  FilRelat
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Dim sButton As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    
-    If Not AcessaBtnOld("esc" & zPFTIPO, Button.Index) Then
-        Exit Sub
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+
+  If Not AcessaBtnOld("esc" & zPFTIPO, Button.Index) Then
+    Exit Sub
+  End If
+  GravaLog 0, Button.Index, sButton, "esc" & zPFTIPO
+
+  Select Case sButton
+
+  Case "LIB"
+    CmdLiberar_Click
+  Case "ORD"
+    ePASS01 = aORDES
+    escOrdem.Show vbModal, Me
+    If lRETU Then
+      cORDEM = aORDEM(eRETU01)
+      FilRelat
     End If
-    GravaLog 0, Button.Index, sButton, "esc" & zPFTIPO
-    
-    Select Case sButton
-    
-    Case "LIB"
-        CmdLiberar_Click
-    Case "ORD"
-        ePASS01 = aORDES
-        escOrdem.Show vbModal, Me
-        If lRETU Then
-            cORDEM = aORDEM(eRETU01)
-            FilRelat
-        End If
-    Case "FIL"
-        cSUBWHERE = ""
-        If MDG("Usar Filtro Avancado") Then
-            aARQUIVOS = Array(cARQPOA)
-            ''Posicao 12 Nome da Tabela
-            ''Posicao 13 Nome da Tabela
-            aRELCFG = Array("", "", "", 0, False, _
-                            False, "", "", "", "", "", _
-                            False, zPFTIPO, zPFTIPO, "", "")
-            FrmFiltro.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-            End If
-        Else
-            ePASS01 = aORDES
-            frmLocalizaa.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = MontaFiltro(aORDEM, Array("=", "L%", "L%", "L%"), eRETU01, eRETU02)
-            End If
-        End If
-        FilRelat
-    Case "IMP"
-        cTIPO = "R"
-        zgrp = "SAC"
-        escRPT.Show vbModal, Me
-    Case "NOV"
-        NovoPF_Click
-    Case "EDI"
-        EditPf_Click
-    Case "EXC"
-        ApagaNF_Click
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02, , 1
-        End If
-          
-    Case "SAI"
-        CmdSair_Click
-    End Select
+  Case "FIL"
+    cSUBWHERE = ""
+    If MDG("Usar Filtro Avancado") Then
+      aARQUIVOS = Array(cARQPOA)
+      ''Posicao 12 Nome da Tabela
+      ''Posicao 13 Nome da Tabela
+      aRELCFG = Array("", "", "", 0, False, _
+                      False, "", "", "", "", "", _
+                      False, zPFTIPO, zPFTIPO, "", "")
+      FrmFiltro.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
+      End If
+    Else
+      ePASS01 = aORDES
+      frmLocalizaa.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = MontaFiltro(aORDEM, Array("=", "L%", "L%", "L%"), eRETU01, eRETU02)
+      End If
+    End If
+    FilRelat
+  Case "IMP"
+    cTIPO = "R"
+    zgrp = "SAC"
+    escRPT.Show vbModal, Me
+  Case "NOV"
+    NovoPF_Click
+  Case "EDI"
+    EditPf_Click
+  Case "EXC"
+    ApagaNF_Click
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02, , 1
+    End If
+
+  Case "SAI"
+    CmdSair_Click
+  End Select
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub CmdLiberar_Click()
-    Dim nTMPELA
-  
-    Grid.Col = 0
-    nPPAP = Grid
-    Grid.Col = 1
-    nPF = Grid
-    Grid.Col = 2
-    nSEQ = Grid
-    Grid.Col = 3
-    nSSQ = Grid
+  Dim nTMPELA
 
-    'nTMPELA = PegUltSQL(Sdb, "SELECT ELANUM FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, "ELANUM", 0)
-    nTMPELA = PegCampoSQLADO(Sdb, "SELECT ELANUM FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, "", 0)
-    
-    
-    If nTMPELA = zIDFOLHA Then
-        Alert ("Voce ja e o Elaborador")
-        Exit Sub
-    End If
-    ePASS01 = zPFTIPO
-    frmPFLIB.Show vbModal, Me
-    FilRelat
+  Grid.Col = 0
+  nPPAP = Grid
+  Grid.Col = 1
+  nPF = Grid
+  Grid.Col = 2
+  nSEQ = Grid
+  Grid.Col = 3
+  nSSQ = Grid
+
+  'nTMPELA = PegUltSQL(Sdb, "SELECT ELANUM FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, "ELANUM", 0)
+  nTMPELA = PegCampoSQLADO(Sdb, "SELECT ELANUM FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, "", 0)
+
+
+  If nTMPELA = zIDFOLHA Then
+    Alert ("Voce ja e o Elaborador")
+    Exit Sub
+  End If
+  ePASS01 = zPFTIPO
+  frmPFLIB.Show vbModal, Me
+  FilRelat
 End Sub
 
 

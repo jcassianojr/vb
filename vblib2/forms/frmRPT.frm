@@ -1047,179 +1047,186 @@ Attribute VB_Exposed = False
 Const nFORMID = 1066
 Const cFORMID = "Relatorios /Documentos"
 Dim aCAM, aFOR, aVAL, aPAD As Variant
+Attribute aFOR.VB_VarUserMemId = 1073938432
+Attribute aVAL.VB_VarUserMemId = 1073938432
+Attribute aPAD.VB_VarUserMemId = 1073938432
 Dim cARQ, cSQL As String
+Attribute cARQ.VB_VarUserMemId = 1073938436
+Attribute cSQL.VB_VarUserMemId = 1073938436
 Dim nITEM, nCAMPOS As Long
+Attribute nITEM.VB_VarUserMemId = 1073938438
+Attribute nCAMPOS.VB_VarUserMemId = 1073938438
 
 Private Sub CmdAbrirCom_Click(Index As Integer)
-    'Dim cEXTENSAO As String
-    'Dim nPOS As Long
+'Dim cEXTENSAO As String
+'Dim nPOS As Long
 
-    eLOCALIZA = Text(5)
-    ePASS01 = ""
-    If Index = 0 Then
-        ePASS01 = NomeEXT(FixStr(Text(4).Text))
-    End If
-    EscRptExec.Show vbModal, Me
-    If lRETU Then
-        Text(5).Text = eRETU02
-    End If
-    
+  eLOCALIZA = tEXT(5)
+  ePASS01 = ""
+  If Index = 0 Then
+    ePASS01 = NomeEXT(FixStr(tEXT(4).tEXT))
+  End If
+  EscRptExec.Show vbModal, Me
+  If lRETU Then
+    tEXT(5).tEXT = eRETU02
+  End If
+
 End Sub
 
 Private Sub cmdClose_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 Private Sub CmdEDIT_Click(Index As Integer)
-    Dim cEXTENSAO As String
-    Dim nPOS As Long
-    eLOCALIZA = Text(5)
-    If Index = 0 Then
-        cARQRTF = Text(4)
-        nPOS = InStrRev(cARQRTF, ".")
-        If nPOS > 0 Then
-            cEXTENSAO = Mid(cARQRTF, nPOS + 1)
-        End If
-        If Len(cEXTENSAO) > 0 Then
-            Select Case cEXTENSAO
-            Case "RPT"
-                If Index = 0 Then
-                    ShellEx CRYUPD, essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
-                Else
-                    ShellEx CRWUPD, essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
-                End If
-           
-            End Select
-        End If
+  Dim cEXTENSAO As String
+  Dim nPOS As Long
+  eLOCALIZA = tEXT(5)
+  If Index = 0 Then
+    cARQRTF = tEXT(4)
+    nPOS = InStrRev(cARQRTF, ".")
+    If nPOS > 0 Then
+      cEXTENSAO = Mid(cARQRTF, nPOS + 1)
     End If
+    If Len(cEXTENSAO) > 0 Then
+      Select Case cEXTENSAO
+      Case "RPT"
+        If Index = 0 Then
+          ShellEx CRYUPD, essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
+        Else
+          ShellEx CRWUPD, essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
+        End If
+
+      End Select
+    End If
+  End If
 End Sub
 
 Private Sub Command1_Click()
-    escrptusr.Show vbModal
+  escrptusr.Show vbModal
 End Sub
 
 Private Sub Command2_Click()
-    Text(5).Text = ""
+  tEXT(5).tEXT = ""
 End Sub
 
 Private Sub escarq_Click(Index As Integer)
-    Index = Index + 18
-    ePASS01 = Text(Index)
-    FrmPegdb.Show vbModal, Me
-    If lRETU Then
-        Text(Index) = eRETU01
-    End If
+  Index = Index + 18
+  ePASS01 = tEXT(Index)
+  FrmPegdb.Show vbModal, Me
+  If lRETU Then
+    tEXT(Index) = eRETU01
+  End If
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-    If MDG("Gravar e Sair", "Gravando ") Then
-        For nITEM = 0 To 23
-            aVAL(nITEM) = Text(nITEM)
-        Next nITEM
-        For nITEM = 24 To 26
-            aVAL(nITEM) = FixNumBol(chkFields(nITEM).Value)
-        Next nITEM
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-        GravaLog nFORMID, 0, "Gravou "
-    Else
-        GravaLog nFORMID, 0, "Nao Gravou "
-    End If
-    Screen.MousePointer = vbDefault
+  If MDG("Gravar e Sair", "Gravando ") Then
+    For nITEM = 0 To 23
+      aVAL(nITEM) = tEXT(nITEM)
+    Next nITEM
+    For nITEM = 24 To 26
+      aVAL(nITEM) = FixNumBol(chkFields(nITEM).Value)
+    Next nITEM
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GravaLog nFORMID, 0, "Gravou "
+  Else
+    GravaLog nFORMID, 0, "Nao Gravou "
+  End If
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub escolherrpt_Click()
-    Dim cFILTER          As String
-    Dim sPath As String
+  Dim cFILTER As String
+  Dim sPath As String
 
-    cFILTER = "Crystal Reports (*.RPT)" & vbNullChar & "*.RPT" & vbNullChar
-    
-   ' cFILTER = cFILTER & "Report Manager (*.REP)" & vbNullChar & "*.REP" & vbNullChar 'Removidos rep com pouco uso
-    cFILTER = cFILTER & "CA-RET Reports VORETRUN (*.RET)" & vbNullChar & "*.RET" & vbNullChar ''usar voretrun pois caretrun e 16 bits
-    cFILTER = cFILTER & "ZPL Etiquetas preview(*.ZPL)" & vbNullChar & "*.RET" & vbNullChar
-    
-    'cFILTER = cFILTER & "QuickReport MMK-Report (*.QRP)" & vbNullChar & "*.QRP" & vbNullChar
-    
-    cFILTER = cFILTER & "Rich-Text Format (*.RTF)" & vbNullChar & "*.RTF" & vbNullChar
-    cFILTER = cFILTER & "Acrobat Reader (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar
-    cFILTER = cFILTER & "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar
-    cFILTER = cFILTER & "Documentos do Word  (*.DOC)" & vbNullChar & "*.DOC" & vbNullChar
-    cFILTER = cFILTER & "Planilhas do Excel  (*.XLS)" & vbNullChar & "*.XLS" & vbNullChar
-    cFILTER = cFILTER & "Apresentacao Power-Point (*.PPS)(*.PPT)" & vbNullChar & "*.PPS;*.PPT" & vbNullChar
-    
-    cFILTER = cFILTER & "Ajuda Windows (*.HLP)" & vbNullChar & "*.HLP" & vbNullChar
-    cFILTER = cFILTER & "Ajuda Windows Compactadas (*.CHM)" & vbNullChar & "*.CHM" & vbNullChar
-    
-    cFILTER = cFILTER & "Internet (*.HTM;*.HTML) " & vbNullChar & "*.HTM;*.HTML" & vbNullChar
-    
-    cFILTER = cFILTER & "Windows Control Panel (*.CPL)" & vbNullChar & "*.CPL" & vbNullChar
-    cFILTER = cFILTER & "Video - MPEG (*.mpeg;*.MPG;*.M1V;*.MP2;*.MPA;*.MPE) " & vbNullChar & "*.mpeg;*.MPG;*.M1V;*.MP2;*.MPA;*.MPE" & vbNullChar
-    cFILTER = cFILTER & "Videos (*.avi;*.wmf) " & vbNullChar & "*.avi;*.wmf" & vbNullChar
-    cFILTER = cFILTER & "Audio (*.wav;*.snd;*.au;*.aif;*.aifc;*.aiff;*.wma;*.mp3) " & vbNullChar & "*.wav;*.snd;*.au;*.aif;*.aifc;*.aiff;*.wma;*.mp3" & vbNullChar
-    cFILTER = cFILTER & "MIDI (*.mid;*.rmi;*.midi) " & vbNullChar & "*.mid;*.rmi;*.midi" & vbNullChar
-    cFILTER = cFILTER & "CD (*.cda) " & vbNullChar & "*.cda" & vbNullChar
-    cFILTER = cFILTER & "Windows Media (*.asf;*.wm;*.wma;*.wmv) " & vbNullChar & "*.asf;*.wm;*.wma;*.wmv" & vbNullChar
-    cFILTER = cFILTER & "Rep Midia (*.asx;*.wax;*.m3u;*.mvx;*.wmx) " & vbNullChar & "*.asx;*.wax;*.m3u;*.mvx;*.wmx" & vbNullChar
-    cFILTER = cFILTER & "Imagens-1 (*.BMP;*.ICO;*.WMF;*.EMF;*.JPG;*.GIF) " & vbNullChar & "*.BMP;*.ICO;*.WMF;*.EMF;*.JPG;*.GIF" & vbNullChar
-    cFILTER = cFILTER & "Imagens-2 (*.DIB;*.JPEG;*.PCX;*.TGA;*.TIF;*.TIFF;*.PNG;*.PIC) " & vbNullChar & "*.DIB;*.JPEG;*.PCX;*.TGA;*.TIF;*.TIFF;*.PNG;*.PIC" & vbNullChar
-    cFILTER = cFILTER & "Desenhos(*.DWF;*.DWG;*.DXF;*.RML;*.IPT;*.IAM;*.IDW)" & vbNullChar & "*.DWF;*.DWG;*.DXF;*.RML;*.IPT;*.IAM;*.IDW" & vbNullChar
-    cFILTER = cFILTER & "Todos os Arquivos (*.*) " & vbNullChar & "*.*"
-    sPath = App.Path
-    If Len(zRPTGRPCAM) > 0 Then
-        sPath = Caminex(zRPTGRPCAM)
-    Else
-        If Len(zRPTCAM) > 0 Then
-            sPath = Caminex(zRPTCAM)
-        End If
+  cFILTER = "Crystal Reports (*.RPT)" & vbNullChar & "*.RPT" & vbNullChar
+
+  ' cFILTER = cFILTER & "Report Manager (*.REP)" & vbNullChar & "*.REP" & vbNullChar 'Removidos rep com pouco uso
+  cFILTER = cFILTER & "CA-RET Reports VORETRUN (*.RET)" & vbNullChar & "*.RET" & vbNullChar  ''usar voretrun pois caretrun e 16 bits
+  cFILTER = cFILTER & "ZPL Etiquetas preview(*.ZPL)" & vbNullChar & "*.RET" & vbNullChar
+
+  'cFILTER = cFILTER & "QuickReport MMK-Report (*.QRP)" & vbNullChar & "*.QRP" & vbNullChar
+
+  cFILTER = cFILTER & "Rich-Text Format (*.RTF)" & vbNullChar & "*.RTF" & vbNullChar
+  cFILTER = cFILTER & "Acrobat Reader (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar
+  cFILTER = cFILTER & "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar
+  cFILTER = cFILTER & "Documentos do Word  (*.DOC)" & vbNullChar & "*.DOC" & vbNullChar
+  cFILTER = cFILTER & "Planilhas do Excel  (*.XLS)" & vbNullChar & "*.XLS" & vbNullChar
+  cFILTER = cFILTER & "Apresentacao Power-Point (*.PPS)(*.PPT)" & vbNullChar & "*.PPS;*.PPT" & vbNullChar
+
+  cFILTER = cFILTER & "Ajuda Windows (*.HLP)" & vbNullChar & "*.HLP" & vbNullChar
+  cFILTER = cFILTER & "Ajuda Windows Compactadas (*.CHM)" & vbNullChar & "*.CHM" & vbNullChar
+
+  cFILTER = cFILTER & "Internet (*.HTM;*.HTML) " & vbNullChar & "*.HTM;*.HTML" & vbNullChar
+
+  cFILTER = cFILTER & "Windows Control Panel (*.CPL)" & vbNullChar & "*.CPL" & vbNullChar
+  cFILTER = cFILTER & "Video - MPEG (*.mpeg;*.MPG;*.M1V;*.MP2;*.MPA;*.MPE) " & vbNullChar & "*.mpeg;*.MPG;*.M1V;*.MP2;*.MPA;*.MPE" & vbNullChar
+  cFILTER = cFILTER & "Videos (*.avi;*.wmf) " & vbNullChar & "*.avi;*.wmf" & vbNullChar
+  cFILTER = cFILTER & "Audio (*.wav;*.snd;*.au;*.aif;*.aifc;*.aiff;*.wma;*.mp3) " & vbNullChar & "*.wav;*.snd;*.au;*.aif;*.aifc;*.aiff;*.wma;*.mp3" & vbNullChar
+  cFILTER = cFILTER & "MIDI (*.mid;*.rmi;*.midi) " & vbNullChar & "*.mid;*.rmi;*.midi" & vbNullChar
+  cFILTER = cFILTER & "CD (*.cda) " & vbNullChar & "*.cda" & vbNullChar
+  cFILTER = cFILTER & "Windows Media (*.asf;*.wm;*.wma;*.wmv) " & vbNullChar & "*.asf;*.wm;*.wma;*.wmv" & vbNullChar
+  cFILTER = cFILTER & "Rep Midia (*.asx;*.wax;*.m3u;*.mvx;*.wmx) " & vbNullChar & "*.asx;*.wax;*.m3u;*.mvx;*.wmx" & vbNullChar
+  cFILTER = cFILTER & "Imagens-1 (*.BMP;*.ICO;*.WMF;*.EMF;*.JPG;*.GIF) " & vbNullChar & "*.BMP;*.ICO;*.WMF;*.EMF;*.JPG;*.GIF" & vbNullChar
+  cFILTER = cFILTER & "Imagens-2 (*.DIB;*.JPEG;*.PCX;*.TGA;*.TIF;*.TIFF;*.PNG;*.PIC) " & vbNullChar & "*.DIB;*.JPEG;*.PCX;*.TGA;*.TIF;*.TIFF;*.PNG;*.PIC" & vbNullChar
+  cFILTER = cFILTER & "Desenhos(*.DWF;*.DWG;*.DXF;*.RML;*.IPT;*.IAM;*.IDW)" & vbNullChar & "*.DWF;*.DWG;*.DXF;*.RML;*.IPT;*.IAM;*.IDW" & vbNullChar
+  cFILTER = cFILTER & "Todos os Arquivos (*.*) " & vbNullChar & "*.*"
+  sPath = App.Path
+  If Len(zRPTGRPCAM) > 0 Then
+    sPath = Caminex(zRPTGRPCAM)
+  Else
+    If Len(zRPTCAM) > 0 Then
+      sPath = Caminex(zRPTCAM)
     End If
-    Text(4).Text = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
+  End If
+  tEXT(4).tEXT = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
 
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-   
-    CenterFormToScreen Me
-    ''Configura Help
-    Me.Caption = cFORMID
-    HelpContextID = nFORMID
-   
-    ''Arquivo Compatibilizar Versao Antiga
-    cARQ = ePASS02
-    cSQL = ePASS01
-    ''cARQ = pegpath("PATH", "SYSRPT")
-    
-    If Not FileExist(cARQ, True, , cSQL) Then
-        End
-    End If
-   
-    'Variaveis sql
-    
-    nCAMPOS = 27
-    aCAM = Array("SUBGRP", "RPT", "COGNOME", "NOME", "ARQUIVO", _
-                 "ABRIRCOM", "TITULO", "MENSAGEM", "COBSMSG", "TABNAME", _
-                 "TABALIAS", "CARQUSO", "CARQBAI", "CARQFEC", "CARQACU", _
-                 "DATAIMP", "UTILIZADO", "DATACRI", "CAMINHO", "CAMINH2", _
-                 "CAMINH3", "CAMINH4", "PREFILTRO", "SQLUSO", "ARVORE", "BUSCA", "LFILTRO")
-    aFOR = Array("C", "C", "C", "C", "C", _
-                 "C", "C", "C", "C", "C", _
-                 "C", "C", "C", "C", "C", _
-                 "DH", "N", "DH", "C", "C", _
-                 "C", "C", "C", "C", "BN", "BN", "BN")
-    aPAD = Array("", "", "", "", "", _
-                 "", "", "", "", "", _
-                 "", "", "", "", "", _
-                 Now, 0, Now, "", "", _
-                 "", "", "", "", False, False, False)
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For nITEM = 0 To 23
-        Text(nITEM) = aVAL(nITEM)
-    Next nITEM
-    For nITEM = 24 To 26
-        chkFields(nITEM) = aVAL(nITEM)
-    Next nITEM
+
+  CenterFormToScreen Me
+  ''Configura Help
+  Me.Caption = cFORMID
+  HelpContextID = nFORMID
+
+  ''Arquivo Compatibilizar Versao Antiga
+  cARQ = ePASS02
+  cSQL = ePASS01
+  ''cARQ = pegpath("PATH", "SYSRPT")
+
+  If Not FileExist(cARQ, True, , cSQL) Then
+    End
+  End If
+
+  'Variaveis sql
+
+  nCAMPOS = 27
+  aCAM = Array("SUBGRP", "RPT", "COGNOME", "NOME", "ARQUIVO", _
+               "ABRIRCOM", "TITULO", "MENSAGEM", "COBSMSG", "TABNAME", _
+               "TABALIAS", "CARQUSO", "CARQBAI", "CARQFEC", "CARQACU", _
+               "DATAIMP", "UTILIZADO", "DATACRI", "CAMINHO", "CAMINH2", _
+               "CAMINH3", "CAMINH4", "PREFILTRO", "SQLUSO", "ARVORE", "BUSCA", "LFILTRO")
+  aFOR = Array("C", "C", "C", "C", "C", _
+               "C", "C", "C", "C", "C", _
+               "C", "C", "C", "C", "C", _
+               "DH", "N", "DH", "C", "C", _
+               "C", "C", "C", "C", "BN", "BN", "BN")
+  aPAD = Array("", "", "", "", "", _
+               "", "", "", "", "", _
+               "", "", "", "", "", _
+               Now, 0, Now, "", "", _
+               "", "", "", "", False, False, False)
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For nITEM = 0 To 23
+    tEXT(nITEM) = aVAL(nITEM)
+  Next nITEM
+  For nITEM = 24 To 26
+    chkFields(nITEM) = aVAL(nITEM)
+  Next nITEM
 End Sub
 
 

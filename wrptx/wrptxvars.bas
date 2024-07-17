@@ -23,21 +23,21 @@ Public iMENU As Long
 Public iImage As Long
 
 Public Sub Main()
-    EnabledVisualStyles
-    frmPRINCIPAL.Show
+  EnabledVisualStyles
+  frmPRINCIPAL.Show
 End Sub
 
 Public Function ArqRPTUsr() As String
+  ArqRPTUsr = "RPTUSR"
+  Select Case cTIPORPT
+  Case "R"
     ArqRPTUsr = "RPTUSR"
-    Select Case cTIPORPT
-    Case "R"
-        ArqRPTUsr = "RPTUSR"
-    Case "F"
-        ArqRPTUsr = "RPTFOLUSR"
-    Case "I"
-        ArqRPTUsr = "RPTINTUSR"
-    Case "D"
-        ArqRPTUsr = "RTFUSR"
-    End Select
+  Case "F"
+    ArqRPTUsr = "RPTFOLUSR"
+  Case "I"
+    ArqRPTUsr = "RPTINTUSR"
+  Case "D"
+    ArqRPTUsr = "RTFUSR"
+  End Select
 End Function
 

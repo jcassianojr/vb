@@ -300,59 +300,59 @@ Dim aFOR As Variant
 Dim aCAM As Variant
 Dim aPAD As Variant
 Dim nCAMPOS As Integer
-Dim I As Integer
+Dim i As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    For I = 0 To nCAMPOS - 1
-        aVAL(I) = TXTFIELDS(I)
-    Next I
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  For i = 0 To nCAMPOS - 1
+    aVAL(i) = TXTFIELDS(i)
+  Next i
+  GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = PegPath("PATH", "PF")
-    nREV = FixInt(nREV, 0)
-    nREVI = FixInt(nREVI, 0)
-    cSQL = ePASS01
-    nCAMPOS = 12
-    ', ""
-    aCAM = Array("PF", "REVISAO", "TIPO", "DATA", "RECSETOR", "RECNOME", "RECNUM", "COPIAS", "COPIASDEV", "COPIASEXT", "OBSOLETO", "DATAREC")
-    aFOR = Array("NI", "NI", "CU", "D", "C", "C", "C", "NI", "NI", "NI", "C", "D")
-    aPAD = Array(0, 0, "", "", "", "", "", 0, 0, 0, "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For I = 0 To nCAMPOS - 1
-        TXTFIELDS(I) = aVAL(I)
-    Next I
-    If FixNum(TXTFIELDS(6)) > 0 Then
-        TXTFIELDS(4).Enabled = False
-        TXTFIELDS(10).Enabled = False
-        TXTFIELDS(7).Enabled = False
-        TXTFIELDS(8).Enabled = False
-        TXTFIELDS(9).Enabled = False
-    End If
+  CenterFormToScreen Me
+  cARQ = PegPath("PATH", "PF")
+  nREV = FixInt(nREV, 0)
+  nREVI = FixInt(nREVI, 0)
+  cSQL = ePASS01
+  nCAMPOS = 12
+  ', ""
+  aCAM = Array("PF", "REVISAO", "TIPO", "DATA", "RECSETOR", "RECNOME", "RECNUM", "COPIAS", "COPIASDEV", "COPIASEXT", "OBSOLETO", "DATAREC")
+  aFOR = Array("NI", "NI", "CU", "D", "C", "C", "C", "NI", "NI", "NI", "C", "D")
+  aPAD = Array(0, 0, "", "", "", "", "", 0, 0, 0, "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For i = 0 To nCAMPOS - 1
+    TXTFIELDS(i) = aVAL(i)
+  Next i
+  If FixNum(TXTFIELDS(6)) > 0 Then
+    TXTFIELDS(4).Enabled = False
+    TXTFIELDS(10).Enabled = False
+    TXTFIELDS(7).Enabled = False
+    TXTFIELDS(8).Enabled = False
+    TXTFIELDS(9).Enabled = False
+  End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
-    Select Case Index
-    Case 8, 7, 9
-        KeyAscii = ValiText(KeyAscii, "#NI")
-    End Select
+  Select Case Index
+  Case 8, 7, 9
+    KeyAscii = ValiText(KeyAscii, "#NI")
+  End Select
 End Sub
 

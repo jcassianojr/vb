@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmMENU 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MENU"
@@ -61,7 +61,7 @@ Begin VB.Form frmMENU
       Top             =   120
       Width           =   1575
    End
-   Begin vbccr18.SpinBox indice 
+   Begin VBCCR18.SpinBox indice 
       Height          =   495
       Left            =   3840
       TabIndex        =   6
@@ -82,7 +82,7 @@ Begin VB.Form frmMENU
       Max             =   999
       Value           =   1
    End
-   Begin vbccr18.SpinBox Cadastro 
+   Begin VBCCR18.SpinBox Cadastro 
       Height          =   495
       Left            =   5520
       TabIndex        =   7
@@ -240,63 +240,63 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        txtFields(2) = indice.Value
-        txtFields(3) = Cadastro.Value
-        
-        For iLOOP = 0 To nCAMPOS - 1
-            aVAL(iLOOP) = txtFields(iLOOP)
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    txtFields(2) = indice.Value
+    txtFields(3) = Cadastro.Value
+
+    For iLOOP = 0 To nCAMPOS - 1
+      aVAL(iLOOP) = txtFields(iLOOP)
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = Dbname
-    cSQL = "select * from MENU WHERE MENU='" & cMENU & "' AND INDICE=" & iMENU
-    
-    nCAMPOS = 4
-    aCAM = Array("menu", "descricao", "indice", "cadastro")
-    aFOR = Array("C", "C", "NI", "NI")
-    aPAD = Array("", "", 0, 0)
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        txtFields(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
- 'ajustar depois para nao precisar txtfiels 3 4
-    indice.Value = txtFields(2)
-    Cadastro.Value = txtFields(3)
-    
+  CenterFormToScreen Me
+  cARQ = Dbname
+  cSQL = "select * from MENU WHERE MENU='" & cMENU & "' AND INDICE=" & iMENU
+
+  nCAMPOS = 4
+  aCAM = Array("menu", "descricao", "indice", "cadastro")
+  aFOR = Array("C", "C", "NI", "NI")
+  aPAD = Array("", "", 0, 0)
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    txtFields(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  'ajustar depois para nao precisar txtfiels 3 4
+  indice.Value = txtFields(2)
+  Cadastro.Value = txtFields(3)
+
 
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub txtFields_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index = 2 Then
-        KeyAscii = ValiText(KeyAscii, "#NI")
-    End If
+  If Index = 2 Then
+    KeyAscii = ValiText(KeyAscii, "#NI")
+  End If
 End Sub
 

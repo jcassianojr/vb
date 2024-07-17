@@ -12,7 +12,7 @@ Declare Function SetConsoleCtrlHandler Lib "kernel32" (ByVal HandlerRoutine As L
 Public Const STD_OUTPUT_HANDLE = -11&
 Public hConsole As Long
 Public Function ConsoleHandler(ByVal CtrlType As Long) As Long
-    
-    ConsoleHandler = 1  'Keep track of the console, it'll survive even Ctrl+Break
-    
+
+  ConsoleHandler = 1  'Keep track of the console, it'll survive even Ctrl+Break
+
 End Function

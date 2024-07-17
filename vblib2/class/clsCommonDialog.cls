@@ -166,86 +166,86 @@ Private Const BIF_BROWSEINCLUDEFILES = &H4000
 
 ' API TYPES
 Private Type PRINTDLG_TYPE
-    lStructSize As Long
-    hwndOwner As Long
-    hDevMode As Long
-    hDevNames As Long
-    hDC As Long
-    Flags As Long
-    nFromPage As Integer
-    nToPage As Integer
-    nMinPage As Integer
-    nMaxPage As Integer
-    nCopies As Integer
-    hInstance As Long
-    lCustData As Long
-    lpfnPrintHook As Long
-    lpfnSetupHook As Long
-    lpPrintTemplateName As String
-    lpSetupTemplateName As String
-    hPrintTemplate As Long
-    hSetupTemplate As Long
+  lStructSize As Long
+  hwndOwner As Long
+  hDevMode As Long
+  hDevNames As Long
+  hDC As Long
+  Flags As Long
+  nFromPage As Integer
+  nToPage As Integer
+  nMinPage As Integer
+  nMaxPage As Integer
+  nCopies As Integer
+  hInstance As Long
+  lCustData As Long
+  lpfnPrintHook As Long
+  lpfnSetupHook As Long
+  lpPrintTemplateName As String
+  lpSetupTemplateName As String
+  hPrintTemplate As Long
+  hSetupTemplate As Long
 End Type
 
 Private Type DEVNAMES_TYPE
-    wDriverOffset As Integer
-    wDeviceOffset As Integer
-    wOutputOffset As Integer
-    wDefault As Integer
-    extra As String * 100
+  wDriverOffset As Integer
+  wDeviceOffset As Integer
+  wOutputOffset As Integer
+  wDefault As Integer
+  extra As String * 100
 End Type
 
 Private Type DEVMODE_TYPE
-    dmDeviceName As String * CCHDEVICENAME
-    dmSpecVersion As Integer
-    dmDriverVersion As Integer
-    dmSize As Integer
-    dmDriverExtra As Integer
-    dmFields As Long
-    dmOrientation As Integer
-    dmPaperSize As Integer
-    dmPaperLength As Integer
-    dmPaperWidth As Integer
-    dmScale As Integer
-    dmCopies As Integer
-    dmDefaultSource As Integer
-    dmPrintQuality As Integer
-    dmColor As Integer
-    dmDuplex As Integer
-    dmYResolution As Integer
-    dmTTOption As Integer
-    dmCollate As Integer
-    dmFormName As String * CCHFORMNAME
-    dmUnusedPadding As Integer
-    dmBitsPerPel As Integer
-    dmPelsWidth As Long
-    dmPelsHeight As Long
-    dmDisplayFlags As Long
-    dmDisplayFrequency As Long
+  dmDeviceName As String * CCHDEVICENAME
+  dmSpecVersion As Integer
+  dmDriverVersion As Integer
+  dmSize As Integer
+  dmDriverExtra As Integer
+  dmFields As Long
+  dmOrientation As Integer
+  dmPaperSize As Integer
+  dmPaperLength As Integer
+  dmPaperWidth As Integer
+  dmScale As Integer
+  dmCopies As Integer
+  dmDefaultSource As Integer
+  dmPrintQuality As Integer
+  dmColor As Integer
+  dmDuplex As Integer
+  dmYResolution As Integer
+  dmTTOption As Integer
+  dmCollate As Integer
+  dmFormName As String * CCHFORMNAME
+  dmUnusedPadding As Integer
+  dmBitsPerPel As Integer
+  dmPelsWidth As Long
+  dmPelsHeight As Long
+  dmDisplayFlags As Long
+  dmDisplayFrequency As Long
 End Type
 
 ' PUBLIC ENUM
 Public Enum PrinterConstants
-    CdlPDAllPages = &H0
-    CdlPDCollate = &H10
-    CdlPDDisablePrintToFile = &H80000
-    CdlPDHelpButton = &H800
-    CdlPDHidePrintToFile = &H100000
-    CdlPDNoPageNums = &H8
-    CdlPDNoSelection = &H4
-    CdlPDNoWarning = &H80
-    CdlPDPageNums = &H2
-    CdlPDPrintSetup = &H40
-    CdlPDPrintToFile = &H20
-    CdlPDReturnDC = &H100
-    CdlPDReturnDefault = &H400
-    CdlPDReturnIC = &H200
-    CdlPDSelection = &H1
-    CdlPDUseDevModeCopies = &H40000
+  cdlPDAllPages = &H0
+  cdlPDCollate = &H10
+  cdlPDDisablePrintToFile = &H80000
+  cdlPDHelpButton = &H800
+  cdlPDHidePrintToFile = &H100000
+  cdlPDNoPageNums = &H8
+  cdlPDNoSelection = &H4
+  cdlPDNoWarning = &H80
+  cdlPDPageNums = &H2
+  cdlPDPrintSetup = &H40
+  cdlPDPrintToFile = &H20
+  cdlPDReturnDC = &H100
+  cdlPDReturnDefault = &H400
+  cdlPDReturnIC = &H200
+  cdlPDSelection = &H1
+  cdlPDUseDevModeCopies = &H40000
 End Enum
 
 Public Enum ErrorConstants
-    CdlCancel = 32755
+  CdlCancel = 32755
 End Enum
 
 ' Variáveis
@@ -257,233 +257,233 @@ Private intToPage As Integer
 
 ' Estruturas
 Public Enum DLGmode
-    Complete = 2
-    Partial = 1
-    FixedPartial = 0
+  Complete = 2
+  Partial = 1
+  FixedPartial = 0
 End Enum
 
 Public Enum wModeType                            ' Modo de abertura do FileDialog
-    OpenFile = 1
-    SaveFile = 2
+  OpenFile = 1
+  SaveFile = 2
 End Enum
 
 Private Type OPENFILENAME
-    lStructSize As Long
-    hWnd As Long
-    hInstance As Long
-    lpstrFilter As String
-    lpstrCustomFilter As String
-    nMaxCustFilter As Long
-    nFilterIndex As Long
-    lpstrFile As String
-    nMaxFile As Long
-    lpstrFileTitle As String
-    nMaxFileTitle As Long
-    lpstrInitialDir As String
-    lpstrTitle As String
-    Flags As Long
-    nFileOffset As Integer
-    nFileExtension As Integer
-    lpstrDefExt As String
-    lCustData As Long
-    lpfnHook As Long
-    lpTemplateName As String
+  lStructSize As Long
+  hWnd As Long
+  hInstance As Long
+  lpstrFilter As String
+  lpstrCustomFilter As String
+  nMaxCustFilter As Long
+  nFilterIndex As Long
+  lpstrFile As String
+  nMaxFile As Long
+  lpstrFileTitle As String
+  nMaxFileTitle As Long
+  lpstrInitialDir As String
+  lpstrTitle As String
+  Flags As Long
+  nFileOffset As Integer
+  nFileExtension As Integer
+  lpstrDefExt As String
+  lCustData As Long
+  lpfnHook As Long
+  lpTemplateName As String
 End Type
 
 Private Type COLORSTRUC
-    lStructSize As Long
-    hWnd As Long
-    hInstance As Long
-    RGBResult As Long
-    lpCustColors As Long
-    Flags As Long
-    lCustData As Long
-    lpfnHook As Long
-    lpTemplateName As String
+  lStructSize As Long
+  hWnd As Long
+  hInstance As Long
+  RGBResult As Long
+  lpCustColors As Long
+  Flags As Long
+  lCustData As Long
+  lpfnHook As Long
+  lpTemplateName As String
 End Type
 
 Private Const LF_FACESIZE = 32
 
 Private Type LOGFONT
-    LFHeight As Long
-    LFWidth As Long
-    LFEscapement As Long
-    LFOrientation As Long
-    LFWeight As Long
-    LFItalic As Byte
-    LFUnderline As Byte
-    LFStrikeOut As Byte
-    LFCharset As Byte
-    LFOutPrecision As Byte
-    LFClipPrecision As Byte
-    LFQuality As Byte
-    LFPitchAndFamily As Byte
-    LFFaceName As String * 31
+  LFHeight As Long
+  LFWidth As Long
+  LFEscapement As Long
+  LFOrientation As Long
+  LFWeight As Long
+  LFItalic As Byte
+  LFUnderline As Byte
+  LFStrikeOut As Byte
+  LFCharset As Byte
+  LFOutPrecision As Byte
+  LFClipPrecision As Byte
+  LFQuality As Byte
+  LFPitchAndFamily As Byte
+  LFFaceName As String * 31
 End Type
 
 Private Type FONTSTRUC
-    lStructSize As Long
-    hWnd As Long
-    hDC As Long
-    lpLogFont As Long
-    iPointSize As Long
-    Flags As Long
-    rgbColors As Long
-    lCustData As Long
-    lpfnHook As Long
-    lpTemplateName As String
-    hInstance As Long
-    lpszStyle As String
-    nFontType As Integer
-    MISSING_ALIGNMENT As Integer
-    nSizeMin As Long
-    nSizeMax As Long
+  lStructSize As Long
+  hWnd As Long
+  hDC As Long
+  lpLogFont As Long
+  iPointSize As Long
+  Flags As Long
+  rgbColors As Long
+  lCustData As Long
+  lpfnHook As Long
+  lpTemplateName As String
+  hInstance As Long
+  lpszStyle As String
+  nFontType As Integer
+  MISSING_ALIGNMENT As Integer
+  nSizeMin As Long
+  nSizeMax As Long
 End Type
 
 Private Type DevMode
-    dmDeviceName As String * 32
-    dmSpecVersion As Integer
-    dmDriverVersion As Integer
-    dmSize As Integer
-    dmDriverExtra As Integer
-    dmFields As Long
-    dmOrientation As Integer
-    dmPaperSize As Integer
-    dmPaperLength As Integer
-    dmPaperWidth As Integer
-    dmScale As Integer
-    dmCopies As Integer
-    dmDefaultSource As Integer
-    dmPrintQuality As Integer
-    dmColor As Integer
-    dmDuplex As Integer
-    dmYResolution As Integer
-    dmTTOption As Integer
-    dmCollate As Integer
-    dmFormName As String * 32
-    dmUnusedPadding As Integer
-    dmBitsPerPel As Integer
-    dmPelsWidth As Long
-    dmPelsHeight As Long
-    dmDisplayFlags As Long
-    dmDisplayFreq As Long
+  dmDeviceName As String * 32
+  dmSpecVersion As Integer
+  dmDriverVersion As Integer
+  dmSize As Integer
+  dmDriverExtra As Integer
+  dmFields As Long
+  dmOrientation As Integer
+  dmPaperSize As Integer
+  dmPaperLength As Integer
+  dmPaperWidth As Integer
+  dmScale As Integer
+  dmCopies As Integer
+  dmDefaultSource As Integer
+  dmPrintQuality As Integer
+  dmColor As Integer
+  dmDuplex As Integer
+  dmYResolution As Integer
+  dmTTOption As Integer
+  dmCollate As Integer
+  dmFormName As String * 32
+  dmUnusedPadding As Integer
+  dmBitsPerPel As Integer
+  dmPelsWidth As Long
+  dmPelsHeight As Long
+  dmDisplayFlags As Long
+  dmDisplayFreq As Long
 End Type
 
 Private Type SHITEMID
-    cb As Long
-    abID As Byte
+  cb As Long
+  abID As Byte
 End Type
 
 Private Type ITEMIDLIST
-    mkid As SHITEMID
+  mkid As SHITEMID
 End Type
 
 Private ppp As ITEMIDLIST
 
 Private Type BROWSEINFO
-    hOwner As Long
-    pidlRoot As Long
-    pszDisplayName As String
-    lpszTitle As String
-    ulFlags As Long
-    lpfn As Long
-    lParam As Long
-    iImage As Long
+  hOwner As Long
+  pidlRoot As Long
+  pszDisplayName As String
+  lpszTitle As String
+  ulFlags As Long
+  lpfn As Long
+  lParam As Long
+  iImage As Long
 End Type
 
 Public Enum OFNtype
-    FILEDEFAULT = -1
-    ALLOWMULTISELECT = &H200
-    CREATEPROMPT = &H2000
-    ENABLEHOOK = &H20
-    ENABLETEMPLATE = &H40
-    ENABLETEMPLATEHANDLE = &H80
-    EXPLORER = &H80000
-    EXTENSIONDIFFERENT = &H400
-    FILEMUSTEXIST = &H1000
-    HIDEREADONLY = &H4
-    LONGNAMES = &H200000
-    NOCHANGEDIR = &H8
-    NODEREFERENCELINKS = &H100000
-    NOLONGNAMES = &H40000
-    NONETWORKBUTTON = &H20000
-    NOREADONLYRETURN = &H8000
-    NOTESTFILECREATE = &H10000
-    NOVALIDATE = &H100
-    OVERWRITEPROMPT = &H2
-    PATHMUSTEXIST = &H800
-    ReadOnly = &H1
-    SHAREAWARE = &H4000
-    SHAREFALLTHROUGH = 2
-    SHARENOWARN = 1
-    SHAREWARN = 0
-    ShowHelp = &H10
+  FILEDEFAULT = -1
+  ALLOWMULTISELECT = &H200
+  CREATEPROMPT = &H2000
+  ENABLEHOOK = &H20
+  ENABLETEMPLATE = &H40
+  ENABLETEMPLATEHANDLE = &H80
+  EXPLORER = &H80000
+  EXTENSIONDIFFERENT = &H400
+  FILEMUSTEXIST = &H1000
+  HIDEREADONLY = &H4
+  LONGNAMES = &H200000
+  NOCHANGEDIR = &H8
+  NODEREFERENCELINKS = &H100000
+  NOLONGNAMES = &H40000
+  NONETWORKBUTTON = &H20000
+  NOREADONLYRETURN = &H8000
+  NOTESTFILECREATE = &H10000
+  NOVALIDATE = &H100
+  OVERWRITEPROMPT = &H2
+  PATHMUSTEXIST = &H800
+  READONLY = &H1
+  SHAREAWARE = &H4000
+  SHAREFALLTHROUGH = 2
+  SHARENOWARN = 1
+  SHAREWARN = 0
+  ShowHelp = &H10
 End Enum
 
 Public Enum CFType
-    ANSIONLY = &H400&
-    APPLY = &H200&
-    BITMAP = 2
-    PRINTERFONTS = &H2
-    PRIVATEFIRST = &H200
-    PRIVATELAST = &H2FF
-    RIFF = 11
-    SCALABLEONLY = &H20000
-    SCREENFONTS = &H1
-    BOTH = (&H1 Or &H2)
-    dib = 8
-    DIF = 5
-    DSPBITMAP = &H82
-    DSPENHMETAFILE = &H8E
-    DSPMETAFILEPICT = &H83
-    DSPTEXT = &H81
-    EFFECTS = &H100&
-    ENABLEHOOK = &H8&
-    ENABLETEMPLATE = &H10&
-    ENABLETEMPLATEHANDLE = &H20&
-    ENHMETAFILE = 14
-    FIXEDPITCHONLY = &H4000&
-    FORCEFONTEXIST = &H10000
-    GDIOBJFIRST = &H300
-    GDIOBJLAST = &H3FF
-    INITTOLOGFONTSTRUCT = &H40&
-    LIMITSIZE = &H2000&
-    METAFILEPICT = 3
-    NOFACESEL = &H80000
-    NOVERTFONTS = &H1000000
-    NOVECTORFONTS = &H800&
-    NOOEMFONTS = &H800&
-    NOSCRIPTSEL = &H800000
-    NOSIMULATIONS = &H1000&
-    NOSIZESEL = &H200000
-    NOSTYLESEL = &H100000
-    OEMTEXT = 7
-    OWNERDISPLAY = &H80
-    Palette = 9
-    PENDATA = 10
-    SCRIPTSONLY = &H400&
-    SELECTSCRIPT = &H400000
-    ShowHelp = &H4&
-    SYLK = 4
-    tEXT = 1
-    TIFF = 6
-    TTONLY = &H40000
-    UNICODETEXT = 13
-    USESTYLE = &H80&
-    WAVE = 12
-    WYSIWYG = &H8000
+  ANSIONLY = &H400&
+  Apply = &H200&
+  BITMAP = 2
+  PRINTERFONTS = &H2
+  PRIVATEFIRST = &H200
+  PRIVATELAST = &H2FF
+  RIFF = 11
+  SCALABLEONLY = &H20000
+  SCREENFONTS = &H1
+  BOTH = (&H1 Or &H2)
+  dib = 8
+  DIF = 5
+  DSPBITMAP = &H82
+  DSPENHMETAFILE = &H8E
+  DSPMETAFILEPICT = &H83
+  DSPTEXT = &H81
+  EFFECTS = &H100&
+  ENABLEHOOK = &H8&
+  ENABLETEMPLATE = &H10&
+  ENABLETEMPLATEHANDLE = &H20&
+  ENHMETAFILE = 14
+  FIXEDPITCHONLY = &H4000&
+  FORCEFONTEXIST = &H10000
+  GDIOBJFIRST = &H300
+  GDIOBJLAST = &H3FF
+  INITTOLOGFONTSTRUCT = &H40&
+  LIMITSIZE = &H2000&
+  METAFILEPICT = 3
+  NOFACESEL = &H80000
+  NOVERTFONTS = &H1000000
+  NOVECTORFONTS = &H800&
+  NOOEMFONTS = &H800&
+  NOSCRIPTSEL = &H800000
+  NOSIMULATIONS = &H1000&
+  NOSIZESEL = &H200000
+  NOSTYLESEL = &H100000
+  OEMTEXT = 7
+  OWNERDISPLAY = &H80
+  Palette = 9
+  PENDATA = 10
+  SCRIPTSONLY = &H400&
+  SELECTSCRIPT = &H400000
+  ShowHelp = &H4&
+  SYLK = 4
+  tEXT = 1
+  TIFF = 6
+  TTONLY = &H40000
+  UNICODETEXT = 13
+  USESTYLE = &H80&
+  WAVE = 12
+  WYSIWYG = &H8000
 End Enum
 
 Public Enum FormatDriveCapEnum
-    SHFD_CAPACITY_DEFAULT = 0                    ' default drive capacity
-    SHFD_CAPACITY_360 = 3                        ' 360KB, applies to 5.25" drives only
-    SHFD_CAPACITY_720 = 5                        ' 720KB, applies to 3.5" drives only
+  SHFD_CAPACITY_DEFAULT = 0                    ' default drive capacity
+  SHFD_CAPACITY_360 = 3                        ' 360KB, applies to 5.25" drives only
+  SHFD_CAPACITY_720 = 5                        ' 720KB, applies to 3.5" drives only
 End Enum
 
 Public Enum FormatDriveFormatTypeEnum
-    SHFD_FORMAT_QUICK = 0                        ' quick format
-    SHFD_FORMAT_FULL = 1                         ' full format
-    SHFD_FORMAT_SYSONLY = 2                      ' copies system files only (Win95 Only!)
+  SHFD_FORMAT_QUICK = 0                        ' quick format
+  SHFD_FORMAT_FULL = 1                         ' full format
+  SHFD_FORMAT_SYSONLY = 2                      ' copies system files only (Win95 Only!)
 End Enum
 
 '// Declares privados do módulo
@@ -498,7 +498,7 @@ Private Declare Function GlobalUnlock Lib "kernel32" (ByVal hMem As Long) As Lon
 Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (hpvDest As Any, hpvSource As Any, ByVal cbCopy As Long)
 Private Declare Function SHGetPathFromIDList Lib "shell32.dll" Alias "SHGetPathFromIDListA" (ByVal pidl As Long, ByVal pszPath As String) As Long
 Private Declare Function SHGetSpecialFolderLocation Lib "shell32.dll" (ByVal hwndOwner As Long, ByVal nFolder As Long, pidl As ITEMIDLIST) As Long
-Private Declare Function SHBrowseForFolder Lib "shell32.dll" Alias "SHBrowseForFolderA" (lpBrowseInfo As BROWSEINFO) As Long 'ITEMIDLIST
+Private Declare Function SHBrowseForFolder Lib "shell32.dll" Alias "SHBrowseForFolderA" (lpBrowseInfo As BROWSEINFO) As Long  'ITEMIDLIST
 Private Declare Function WriteProfileString Lib "kernel32" Alias "WriteProfileStringA" (ByVal lpszSection As String, ByVal lpszKeyName As String, ByVal lpszString As String) As Long
 Private Declare Function GetProfileString Lib "kernel32" Alias "GetProfileStringA" (ByVal lpAppName As String, ByVal lpKeyName As String, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As Long) As Long
 Private Declare Function SendMessageByString Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As String) As Long
@@ -516,84 +516,84 @@ Private Declare Function HtmlHelp Lib "hhctrl.ocx" Alias "HtmlHelpA" (ByVal hWnd
 
 ' Enum de flags para o diálogo de impressora
 Enum PrintFLAGS
-    PD_NOSELECTION = &H4
-    PD_DISABLEPRINTTOFILE = &H80000
-    PD_PRINTTOFILE = &H20
-    PD_RETURNDC = &H100
-    PD_RETURNDEFAULT = &H400
-    PD_RETURNIC = &H200
-    PD_SELECTION = &H1
-    PD_SHOWHELP = &H800
-    PD_NOPAGENUMS = &H8
-    PD_PAGENUMS = &H2
-    PD_ALLPAGES = &H0
-    PD_COLLATE = &H10
-    PD_HIDEPRINTTOFILE = &H100000
+  PD_NOSELECTION = &H4
+  PD_DISABLEPRINTTOFILE = &H80000
+  PD_PRINTTOFILE = &H20
+  PD_RETURNDC = &H100
+  PD_RETURNDEFAULT = &H400
+  PD_RETURNIC = &H200
+  PD_SELECTION = &H1
+  PD_SHOWHELP = &H800
+  PD_NOPAGENUMS = &H8
+  PD_PAGENUMS = &H2
+  PD_ALLPAGES = &H0
+  PD_COLLATE = &H10
+  PD_HIDEPRINTTOFILE = &H100000
 End Enum
 
 ' Enum do HTMLHelp
 Enum HTMLhelpFLAGS
-    HH_DISPLAY_TOPIC = &H0&
-    HH_HELP_FINDER = &H0&
-    HH_DISPLAY_TOC = &H1&                        '// Currently Not Implemented
-    HH_DISPLAY_INDEX = &H2&                      '// Currently Not Implemented
-    HH_DISPLAY_SEARCH = &H3&                     '// Currently Not Implemented
-    HH_SET_WIN_TYPE = &H4&
-    HH_GET_WIN_TYPE = &H5&
-    HH_GET_WIN_HANDLE = &H6&
-    HH_ENUM_INFO_TYPE = &H7&
-    HH_SET_INFO_TYPE = &H8&
-    HH_SYNC = &H9&
-    HH_ADD_NAV_UI = &H10&                        '// Currently Not Implemented
-    HH_ADD_BUTTON = &H11&                        '// Currently Not Implemented
-    HH_GETBROWSER_APP = &H12&                    '// Currently Not Implemented
-    HH_KEYWORD_LOOKUP = &H13&
-    HH_DISPLAY_TEXT_POPUP = &H14&
-    HH_HELP_CONTEXT = &H15&
-    HH_TP_HELP_CONTEXTMENU = &H16&
-    HH_TP_HELP_WM_HELP = &H17&
-    HH_CLOSE_ALL = &H18&
-    HH_ALINK_LOOKUP = &H19&
-    HH_GET_LAST_ERROR = &H20&                    '// Currently Not Implemented
-    HH_ENUM_CATEGORY = &H21&
-    HH_ENUM_CATEGORY_IT = &H22&
-    HH_RESET_IT_FILTER = &H23&
-    HH_SET_INCLUSIVE_FILTER = &H24&
-    HH_SET_EXCLUSIVE_FILTER = &H25&
-    HH_SET_GUID = &H26&
-    HH_INTERNAL = &H255&
+  HH_DISPLAY_TOPIC = &H0&
+  HH_HELP_FINDER = &H0&
+  HH_DISPLAY_TOC = &H1&                        '// Currently Not Implemented
+  HH_DISPLAY_INDEX = &H2&                      '// Currently Not Implemented
+  HH_DISPLAY_SEARCH = &H3&                     '// Currently Not Implemented
+  HH_SET_WIN_TYPE = &H4&
+  HH_GET_WIN_TYPE = &H5&
+  HH_GET_WIN_HANDLE = &H6&
+  HH_ENUM_INFO_TYPE = &H7&
+  HH_SET_INFO_TYPE = &H8&
+  HH_SYNC = &H9&
+  HH_ADD_NAV_UI = &H10&                        '// Currently Not Implemented
+  HH_ADD_BUTTON = &H11&                        '// Currently Not Implemented
+  HH_GETBROWSER_APP = &H12&                    '// Currently Not Implemented
+  HH_KEYWORD_LOOKUP = &H13&
+  HH_DISPLAY_TEXT_POPUP = &H14&
+  HH_HELP_CONTEXT = &H15&
+  HH_TP_HELP_CONTEXTMENU = &H16&
+  HH_TP_HELP_WM_HELP = &H17&
+  HH_CLOSE_ALL = &H18&
+  HH_ALINK_LOOKUP = &H19&
+  HH_GET_LAST_ERROR = &H20&                    '// Currently Not Implemented
+  HH_ENUM_CATEGORY = &H21&
+  HH_ENUM_CATEGORY_IT = &H22&
+  HH_RESET_IT_FILTER = &H23&
+  HH_SET_INCLUSIVE_FILTER = &H24&
+  HH_SET_EXCLUSIVE_FILTER = &H25&
+  HH_SET_GUID = &H26&
+  HH_INTERNAL = &H255&
 End Enum
 
 ' Enum do BrowseForFolders
 Enum BFType
-    Pastas = 0
-    Pastas_e_Arquivos = 1
-    Computadores = 2
-    Impressoras = 3
+  Pastas = 0
+  Pastas_e_Arquivos = 1
+  Computadores = 2
+  Impressoras = 3
 End Enum
 
 Public Function SetDefaultPrinter(objPrn As Printer) As Boolean
 
-    Dim x As Long, szTmp As String
+  Dim x As Long, szTmp As String
 
-    szTmp = objPrn.DeviceName & "," & objPrn.DriverName & "," & objPrn.Port
-    x = WriteProfileString("windows", "device", szTmp)
-    x = SendMessageByString(HWND_BROADCAST, WM_WININICHANGE, 0&, "windows")
-    SetDefaultPrinter = (x <> 0)
-    
+  szTmp = objPrn.DeviceName & "," & objPrn.DriverName & "," & objPrn.Port
+  x = WriteProfileString("windows", "device", szTmp)
+  x = SendMessageByString(HWND_BROADCAST, WM_WININICHANGE, 0&, "windows")
+  SetDefaultPrinter = (x <> 0)
+
 End Function
 
 Public Function GetPrinterFromDevice(sDeviceName As String) As Object
 
-    Dim PRT As Printer
-    
-    For Each PRT In Printers
-        If PRT.DeviceName = sDeviceName Then
-            Set GetPrinterFromDevice = PRT
-            Exit For
-        End If
-    Next
-    
+  Dim PRT As Printer
+
+  For Each PRT In Printers
+    If PRT.DeviceName = sDeviceName Then
+      Set GetPrinterFromDevice = PRT
+      Exit For
+    End If
+  Next
+
 End Function
 
 ' retorna o devicename da impressora default via API
@@ -601,792 +601,792 @@ End Function
 
 Public Property Get GetDefaultPrinter()
 
-    Dim x As Long, szTmp As String, dwBuf As Long
+  Dim x As Long, szTmp As String, dwBuf As Long
 
-    dwBuf = 1024
-    szTmp = Space(dwBuf + 1)
-    x = GetProfileString("windows", "device", "", szTmp, dwBuf)
-    GetDefaultPrinter = Trim(Left(szTmp, x))
+  dwBuf = 1024
+  szTmp = Space(dwBuf + 1)
+  x = GetProfileString("windows", "device", "", szTmp, dwBuf)
+  GetDefaultPrinter = Trim(Left(szTmp, x))
 
 End Property
 
 ' Reseta a impressora default para o devicename passado via API
 Public Sub MakeDefaultPrinter(PrinterDeviceName As String)
 
-    Dim x As Long
+  Dim x As Long
 
-    x = WriteProfileString("windows", "device", PrinterDeviceName)
-    x = SendMessageByString(HWND_BROADCAST, WM_WININICHANGE, 0&, "windows")
+  x = WriteProfileString("windows", "device", PrinterDeviceName)
+  x = SendMessageByString(HWND_BROADCAST, WM_WININICHANGE, 0&, "windows")
 
 End Sub
 
 ' Escolha de pasta
 Public Sub BrowseFolder(szDialogTitle As String, BrowseForWhat As BFType, Optional NewInterface As Boolean = False)
 
-    Dim x As Long, BI As BROWSEINFO, dwIList As Long, szPath As String
-    Dim wPos As Integer, r As Long, PDL As ITEMIDLIST, Flags As Long
-    
-    Select Case BrowseForWhat
-    Case 1                                       ' Arquivos e Pastas
-        r = SHGetSpecialFolderLocation(mHWND, CSIDL_DESKTOP, PDL)
-        Flags = BIF_RETURNONLYFSDIRS + BIF_BROWSEINCLUDEFILES + BIF_VALIDATE
-    Case 2                                       ' Computadores
-        r = SHGetSpecialFolderLocation(mHWND, CSIDL_NETWORK, PDL)
-        Flags = BIF_BROWSEFORCOMPUTER
-    Case 3                                       ' Impressoras
-        r = SHGetSpecialFolderLocation(mHWND, CSIDL_PRINTERS, PDL)
-        Flags = BIF_BROWSEFORPRINTER
-    Case Else                                    ' Pastas
-        r = SHGetSpecialFolderLocation(mHWND, CSIDL_DESKTOP, PDL)
-        Flags = BIF_RETURNONLYFSDIRS + BIF_VALIDATE
-    End Select
-    
-    If NewInterface = True Then Flags = Flags + BIF_USENEWUI + BIF_EDITBOX
-    
-    BI.hOwner = mHWND
-    BI.lpszTitle = szDialogTitle
-    BI.ulFlags = Flags
-    BI.pidlRoot = PDL.mkid.cb
-    dwIList = SHBrowseForFolder(BI)
-    szPath = Space$(512)
-    x = SHGetPathFromIDList(ByVal dwIList, ByVal szPath)
-    If x Then
-        wPos = InStr(szPath, Chr(0))
-        mPATH = Left$(szPath, wPos - 1)
-        mCANCEL = False
-    Else
-        '' Cancela foi pressionado
-        mPATH = ""
-        mCANCEL = True
-    End If
+  Dim x As Long, BI As BROWSEINFO, dwIList As Long, szPath As String
+  Dim wPos As Integer, R As Long, PDL As ITEMIDLIST, Flags As Long
+
+  Select Case BrowseForWhat
+  Case 1                                       ' Arquivos e Pastas
+    R = SHGetSpecialFolderLocation(mHWND, CSIDL_DESKTOP, PDL)
+    Flags = BIF_RETURNONLYFSDIRS + BIF_BROWSEINCLUDEFILES + BIF_VALIDATE
+  Case 2                                       ' Computadores
+    R = SHGetSpecialFolderLocation(mHWND, CSIDL_NETWORK, PDL)
+    Flags = BIF_BROWSEFORCOMPUTER
+  Case 3                                       ' Impressoras
+    R = SHGetSpecialFolderLocation(mHWND, CSIDL_PRINTERS, PDL)
+    Flags = BIF_BROWSEFORPRINTER
+  Case Else                                    ' Pastas
+    R = SHGetSpecialFolderLocation(mHWND, CSIDL_DESKTOP, PDL)
+    Flags = BIF_RETURNONLYFSDIRS + BIF_VALIDATE
+  End Select
+
+  If NewInterface = True Then Flags = Flags + BIF_USENEWUI + BIF_EDITBOX
+
+  BI.hOwner = mHWND
+  BI.lpszTitle = szDialogTitle
+  BI.ulFlags = Flags
+  BI.pidlRoot = PDL.mkid.cb
+  dwIList = SHBrowseForFolder(BI)
+  szPath = Space$(512)
+  x = SHGetPathFromIDList(ByVal dwIList, ByVal szPath)
+  If x Then
+    wPos = InStr(szPath, Chr(0))
+    mPATH = Left$(szPath, wPos - 1)
+    mCANCEL = False
+  Else
+    '' Cancela foi pressionado
+    mPATH = ""
+    mCANCEL = True
+  End If
 
 End Sub
 
 ' Permite conectar a impressoras locais ou na rede
 Public Sub DialogConnectToPrinter()
 
-    Shell "rundll32.exe shell32.dll,SHHelpShortcuts_RunDLL AddPrinter", vbNormalFocus
+  Shell "rundll32.exe shell32.dll,SHHelpShortcuts_RunDLL AddPrinter", vbNormalFocus
 
 End Sub
 
 Private Function ByteToString(aBytes() As Byte) As String
 
-    Dim dwBytePoint As Long, dwByteVal As Long, szOut As String
+  Dim dwBytePoint As Long, dwByteVal As Long, szOut As String
 
-    dwBytePoint = LBound(aBytes)
+  dwBytePoint = LBound(aBytes)
 
-    While dwBytePoint <= UBound(aBytes)
+  While dwBytePoint <= UBound(aBytes)
 
-        dwByteVal = aBytes(dwBytePoint)
+    dwByteVal = aBytes(dwBytePoint)
 
-        If dwByteVal = 0 Then
-            ByteToString = szOut
-            Exit Function
-        Else
-            szOut = szOut & Chr$(dwByteVal)
-        End If
+    If dwByteVal = 0 Then
+      ByteToString = szOut
+      Exit Function
+    Else
+      szOut = szOut & Chr$(dwByteVal)
+    End If
 
-        dwBytePoint = dwBytePoint + 1
+    dwBytePoint = dwBytePoint + 1
 
-    Wend
+  Wend
 
-    ByteToString = szOut
+  ByteToString = szOut
 
 End Function
 
 ' Diálogo de Cor
 Public Sub DialogColor(Modo As DLGmode)
 
-    Dim x As Long, CS As COLORSTRUC, CustColor(16) As Long, CSTNTs As Long
-    
-    Select Case Modo
-    Case 0
-        CSTNTs = CC_PREVENTFULLOPEN
-    Case 1
-        CSTNTs = 0
-    Case Else
-        CSTNTs = 3
-        
-    End Select
-    
-    CS.lStructSize = Len(CS)
-    CS.hWnd = mHWND
-    CS.hInstance = App.hInstance
-    CS.Flags = CC_SOLIDCOLOR + CSTNTs + CC_SHOWHELP
-    CS.lpCustColors = VarPtr(aCustColor(0))
-    x = ChooseColor(CS)
-    If x = 0 Then
-        mCANCEL = True
-    Else
-        mCOLOR = CS.RGBResult
-        mCANCEL = False
-    End If
+  Dim x As Long, CS As COLORSTRUC, CustColor(16) As Long, CSTNTs As Long
+
+  Select Case Modo
+  Case 0
+    CSTNTs = CC_PREVENTFULLOPEN
+  Case 1
+    CSTNTs = 0
+  Case Else
+    CSTNTs = 3
+
+  End Select
+
+  CS.lStructSize = Len(CS)
+  CS.hWnd = mHWND
+  CS.hInstance = App.hInstance
+  CS.Flags = CC_SOLIDCOLOR + CSTNTs + CC_SHOWHELP
+  CS.lpCustColors = VarPtr(aCustColor(0))
+  x = ChooseColor(CS)
+  If x = 0 Then
+    mCANCEL = True
+  Else
+    mCOLOR = CS.RGBResult
+    mCANCEL = False
+  End If
 
 End Sub
 
 ' Dialogo de Abrir / Salvar Arquivo
 Public Sub DialogFile(wMode As wModeType, Optional szDialogTitle As String = "")
 
-    Dim x As Long, OFN As OPENFILENAME, szFile As String
-    Dim szFileTitle As String, FilterBUF As String, i As Integer
-    Dim A As Integer, FL As OFNtype, tmp As Variant, Findexes As Integer
+  Dim x As Long, OFN As OPENFILENAME, szFile As String
+  Dim szFileTitle As String, FilterBUF As String, i As Integer
+  Dim A As Integer, FL As OFNtype, tmp As Variant, Findexes As Integer
 
-    FilterBUF = mFILTER
-    Findexes = 0
-    Do
-        x = InStr(1, FilterBUF, "|")
-        If x Then Mid$(FilterBUF, x, 1) = Chr(0)
-        Findexes = Findexes + 1
-    Loop Until x = 0
+  FilterBUF = mFILTER
+  Findexes = 0
+  Do
+    x = InStr(1, FilterBUF, "|")
+    If x Then Mid$(FilterBUF, x, 1) = Chr(0)
+    Findexes = Findexes + 1
+  Loop Until x = 0
 
-    If szDialogTitle = "" Then
-        If wMode = OpenFile Then
-            szDialogTitle = "Abrir Arquivo"
-        Else
-            szDialogTitle = "Salvar Arquivo"
-        End If
-    End If
-    
-    OFN.lStructSize = Len(OFN)
-    OFN.hWnd = mHWND
-    OFN.lpstrTitle = szDialogTitle
-    OFN.lpstrFile = String$(250, 0)
-    OFN.nMaxFile = 255
-    OFN.lpstrFileTitle = String$(255, 0)
-    OFN.nMaxFileTitle = 255
-    OFN.lpstrFilter = FilterBUF
-    If Findexes < mFilterIndex Then mFilterIndex = 1
-    OFN.nFilterIndex = mFilterIndex
-    OFN.lpstrInitialDir = mPATH
-    OFN.lpstrDefExt = mDEFEXT
-
-    If wMode = 1 Then
-        If mFlags = 0 Then
-            FL = PATHMUSTEXIST Or FILEMUSTEXIST Or HIDEREADONLY
-        Else
-            FL = mFlags
-        End If
-        OFN.Flags = FL
-        x = GetOpenFileName(OFN)
+  If szDialogTitle = "" Then
+    If wMode = OpenFile Then
+      szDialogTitle = "Abrir Arquivo"
     Else
-        If mFlags = 0 Then
-            FL = OVERWRITEPROMPT Or PATHMUSTEXIST Or HIDEREADONLY
-        Else
-            FL = mFlags
-        End If
-        OFN.Flags = FL
-        x = GetSaveFileName(OFN)
+      szDialogTitle = "Salvar Arquivo"
     End If
-    
-    If x <> 0 Then
-        ' remove os char 0s extras
-        tmp = Replace(OFN.lpstrFile, Chr(0) & Chr(0), "")
-        If Right(tmp, 1) = Chr(0) Then tmp = Left(tmp, Len(tmp) - 1)
-        ' Divide num array para obter path e filename
-        tmp = Split(tmp, Chr(0))
-        mFilterIndex = OFN.nFilterIndex
-        ' Verifica se foram escolhidos 1 ou mais arquivos
-        If UBound(tmp) = 0 Then
-            mMultipleFiles = False
-            mFULLPATH = tmp(0)
-            mFILE = Replace(OFN.lpstrFileTitle, Chr(0), "")
-            A = InStrRev(tmp(0), "\")
-            If A Then
-                mPATH = Left(tmp(0), A)
-            Else
-                mPATH = tmp(0)
-            End If
-        Else
-            mMultipleFiles = True
-            mFULLPATH = tmp(0) & tmp(1)
-            mPATH = tmp(0)
-            mFILE = ""
-            For i = 1 To UBound(tmp)
-                mFILE = mFILE & tmp(i) & "|"
-            Next
-            mFILE = Left(mFILE, Len(mFILE) - 1)
-        End If
-        mDEFEXT = OFN.lpstrDefExt
-        mCANCEL = False
+  End If
+
+  OFN.lStructSize = Len(OFN)
+  OFN.hWnd = mHWND
+  OFN.lpstrTitle = szDialogTitle
+  OFN.lpstrFile = String$(250, 0)
+  OFN.nMaxFile = 255
+  OFN.lpstrFileTitle = String$(255, 0)
+  OFN.nMaxFileTitle = 255
+  OFN.lpstrFilter = FilterBUF
+  If Findexes < mFilterIndex Then mFilterIndex = 1
+  OFN.nFilterIndex = mFilterIndex
+  OFN.lpstrInitialDir = mPATH
+  OFN.lpstrDefExt = mDEFEXT
+
+  If wMode = 1 Then
+    If mFlags = 0 Then
+      FL = PATHMUSTEXIST Or FILEMUSTEXIST Or HIDEREADONLY
     Else
-        mFULLPATH = ""
-        mCANCEL = True
+      FL = mFlags
     End If
+    OFN.Flags = FL
+    x = GetOpenFileName(OFN)
+  Else
+    If mFlags = 0 Then
+      FL = OVERWRITEPROMPT Or PATHMUSTEXIST Or HIDEREADONLY
+    Else
+      FL = mFlags
+    End If
+    OFN.Flags = FL
+    x = GetSaveFileName(OFN)
+  End If
+
+  If x <> 0 Then
+    ' remove os char 0s extras
+    tmp = Replace(OFN.lpstrFile, Chr(0) & Chr(0), "")
+    If Right(tmp, 1) = Chr(0) Then tmp = Left(tmp, Len(tmp) - 1)
+    ' Divide num array para obter path e filename
+    tmp = Split(tmp, Chr(0))
+    mFilterIndex = OFN.nFilterIndex
+    ' Verifica se foram escolhidos 1 ou mais arquivos
+    If UBound(tmp) = 0 Then
+      mMultipleFiles = False
+      mFULLPATH = tmp(0)
+      mFILE = Replace(OFN.lpstrFileTitle, Chr(0), "")
+      A = InStrRev(tmp(0), "\")
+      If A Then
+        mPATH = Left(tmp(0), A)
+      Else
+        mPATH = tmp(0)
+      End If
+    Else
+      mMultipleFiles = True
+      mFULLPATH = tmp(0) & tmp(1)
+      mPATH = tmp(0)
+      mFILE = ""
+      For i = 1 To UBound(tmp)
+        mFILE = mFILE & tmp(i) & "|"
+      Next
+      mFILE = Left(mFILE, Len(mFILE) - 1)
+    End If
+    mDEFEXT = OFN.lpstrDefExt
+    mCANCEL = False
+  Else
+    mFULLPATH = ""
+    mCANCEL = True
+  End If
 
 End Sub
 
 ' Dialogo de Fonte
 Public Sub DialogFont()
 
-    ' O tamanho não está entrando direito
+' O tamanho não está entrando direito
 
-    Dim cf As FONTSTRUC
-    Dim LF As LOGFONT
-    Dim i As Integer
-    Dim hMem As Long, pMem As Long
-    Dim RetVal As Long
-    
-    cf.hWnd = mHWND
+  Dim cf As FONTSTRUC
+  Dim LF As LOGFONT
+  Dim i As Integer
+  Dim hMem As Long, pMem As Long
+  Dim RetVal As Long
 
-    LF.LFWeight = 400 + Abs((mBOLD = True)) * 500
-    LF.LFFaceName = mFONT & vbNullChar
-    LF.LFHeight = -(mSIZE * (20 / Screen.TwipsPerPixelY))
-    LF.LFWidth = 0
-    LF.LFCharset = 1
-    LF.LFEscapement = 0                          ' angle between baseline and escapement vector
-    LF.LFOrientation = 0                         ' angle between baseline and orientation vector
-    LF.LFOutPrecision = 0                        ' default precision mapping
-    LF.LFClipPrecision = 0                       ' default clipping precision
-    LF.LFQuality = 0                             ' default quality setting
-    LF.LFPitchAndFamily = 16                     ' default pitch, proportional with serifs
+  cf.hWnd = mHWND
 
-    cf.rgbColors = 0
-    cf.Flags = mFontFlags + &H40&
-    cf.iPointSize = mSIZE * 10
-    cf.hDC = Printer.hDC
-    cf.hWnd = mHWND
-    
-    hMem = GlobalAlloc(GMEM_MOVEABLE Or GMEM_ZEROINIT, Len(LF))
-    pMem = GlobalLock(hMem)
-    CopyMemory ByVal pMem, LF, Len(LF)
-    
-    cf.lpLogFont = pMem
-    cf.lStructSize = Len(cf)
-    
-    If ChooseFont(cf) <> 1 Then
-        mCANCEL = True
-        Exit Sub
-    End If
-    mCANCEL = False
+  LF.LFWeight = 400 + Abs((mBOLD = True)) * 500
+  LF.LFFaceName = mFONT & vbNullChar
+  LF.LFHeight = -(mSIZE * (20 / Screen.TwipsPerPixelY))
+  LF.LFWidth = 0
+  LF.LFCharset = 1
+  LF.LFEscapement = 0                          ' angle between baseline and escapement vector
+  LF.LFOrientation = 0                         ' angle between baseline and orientation vector
+  LF.LFOutPrecision = 0                        ' default precision mapping
+  LF.LFClipPrecision = 0                       ' default clipping precision
+  LF.LFQuality = 0                             ' default quality setting
+  LF.LFPitchAndFamily = 16                     ' default pitch, proportional with serifs
 
-    CopyMemory LF, ByVal pMem, Len(LF)
+  cf.rgbColors = 0
+  cf.Flags = mFontFlags + &H40&
+  cf.iPointSize = mSIZE * 10
+  cf.hDC = Printer.hDC
+  cf.hWnd = mHWND
 
-    mSIZE = cf.iPointSize / 10
-    mITALIC = LF.LFItalic
-    mBOLD = IIf(LF.LFWeight > 400, 1, 0)
+  hMem = GlobalAlloc(GMEM_MOVEABLE Or GMEM_ZEROINIT, Len(LF))
+  pMem = GlobalLock(hMem)
+  CopyMemory ByVal pMem, LF, Len(LF)
 
-    mFONT = Left(LF.LFFaceName, InStr(1, LF.LFFaceName, Chr(0)) - 1)
+  cf.lpLogFont = pMem
+  cf.lStructSize = Len(cf)
 
-    mCOLOR = cf.rgbColors
-    mStrikeThru = LF.LFStrikeOut
-    mUnderline = LF.LFUnderline
-    
-    RetVal = GlobalUnlock(hMem)
-    RetVal = GlobalFree(hMem)
+  If ChooseFont(cf) <> 1 Then
+    mCANCEL = True
+    Exit Sub
+  End If
+  mCANCEL = False
+
+  CopyMemory LF, ByVal pMem, Len(LF)
+
+  mSIZE = cf.iPointSize / 10
+  mITALIC = LF.LFItalic
+  mBOLD = IIf(LF.LFWeight > 400, 1, 0)
+
+  mFONT = Left(LF.LFFaceName, InStr(1, LF.LFFaceName, Chr(0)) - 1)
+
+  mCOLOR = cf.rgbColors
+  mStrikeThru = LF.LFStrikeOut
+  mUnderline = LF.LFUnderline
+
+  RetVal = GlobalUnlock(hMem)
+  RetVal = GlobalFree(hMem)
 
 End Sub
 
 ' Dialogo de Impressão
 Public Sub DialogPrintSetup()
 
-    Dim x As Long, PD As PRINTDLG_TYPE
+  Dim x As Long, PD As PRINTDLG_TYPE
 
-    If mHWND = 0 Then Exit Sub
+  If mHWND = 0 Then Exit Sub
 
-    PD.lStructSize = Len(PD)
-    PD.hwndOwner = mHWND
-    PD.Flags = PD_PRINTSETUP
-    x = PrintDialog(PD)
+  PD.lStructSize = Len(PD)
+  PD.hwndOwner = mHWND
+  PD.Flags = PD_PRINTSETUP
+  x = PrintDialog(PD)
 
 End Sub
 
 ' Flags do diálogo Abrir / Salvar
 Public Property Let FileFlags(ByVal FFlgs As OFNtype)
 
-    mFlags = FFlgs
+  mFlags = FFlgs
 
 End Property
 
 Public Property Get FileFlags() As OFNtype
 
-    FileFlags = mFlags
+  FileFlags = mFlags
 
 End Property
 
 ' Flags do diálogo de Fontes
 Public Property Let FontFlags(ByVal FFlgs As CFType)
 
-    mFontFlags = FFlgs
+  mFontFlags = FFlgs
 
 End Property
 
 Public Property Get FontFlags() As CFType
 
-    FontFlags = mFontFlags
+  FontFlags = mFontFlags
 
 End Property
 
 ' Flags do diálogo impressão
 Public Property Let PrinterFlags(ByVal FFlgs As PrinterConstants)
 
-    mPRTFlags = FFlgs
+  mPRTFlags = FFlgs
 
 End Property
 
 Public Property Get PrinterFlags() As PrinterConstants
 
-    PrinterFlags = mPRTFlags
+  PrinterFlags = mPRTFlags
 
 End Property
 
 ' Nome do arquivo (Abrir / Salvar)
 Public Property Let FileName(ByVal fln As String)
 
-    mFILE = fln
+  mFILE = fln
 
 End Property
 
 Public Property Get FileName() As String
 
-    FileName = mFILE
+  FileName = mFILE
 
 End Property
 
 ' Caminho (Abrir / Salvar, BrowseForFolder)
 Public Property Let Path(ByVal PTH As String)
 
-    mPATH = PTH
+  mPATH = PTH
 
 End Property
 
 Public Property Get Path() As String
 
-    Path = mPATH
+  Path = mPATH
 
 End Property
 
 ' Caminho Completo (Abrir / Salvar)
 Public Property Get FullPath() As String
-    '' Read only
-    FullPath = mFULLPATH
+'' Read only
+  FullPath = mFULLPATH
 
 End Property
 
 ' Cores do Sistema
 Public Property Get CustomColor(ByVal Ind As Integer) As Long
-    
-    If Ind >= 0 And Ind <= 15 Then
-        CustomColor = aCustColor(Ind)
-    Else
-        CustomColor = -1
-    End If
-    
+
+  If Ind >= 0 And Ind <= 15 Then
+    CustomColor = aCustColor(Ind)
+  Else
+    CustomColor = -1
+  End If
+
 End Property
 
 Public Property Let CustomColor(ByVal Ind As Integer, COR As Long)
-    
-    If Ind >= 0 And Ind <= 15 Then
-        aCustColor(Ind) = COR
-    End If
-    
+
+  If Ind >= 0 And Ind <= 15 Then
+    aCustColor(Ind) = COR
+  End If
+
 End Property
 
 ' Cor (Cor, Fonte)
 Public Property Let Color(ByVal COR As Long)
 
-    mCOLOR = COR
+  mCOLOR = COR
 
 End Property
 
 Public Property Get Color() As Long
 
-    Color = mCOLOR
+  Color = mCOLOR
 
 End Property
 
 ' Nome da Fonte (Fonte)
 Public Property Let Font(xxx As String)
 
-    mFONT = xxx
+  mFONT = xxx
 
 End Property
 
 Public Property Get Font() As String
-    '' Read only
-    Font = mFONT
+'' Read only
+  Font = mFONT
 
 End Property
 
 ' tamanho da Fonte (Fonte)
 Public Property Let FontSize(ByVal xxx As Integer)
 
-    mSIZE = xxx
+  mSIZE = xxx
 
 End Property
 
 Public Property Get FontSize() As Integer
-    
-    FontSize = mSIZE
+
+  FontSize = mSIZE
 
 End Property
 
 ' Negrito (fonte)
 Public Property Let FontBold(ByVal bld As Boolean)
 
-    mBOLD = bld
+  mBOLD = bld
 
 End Property
 
 Public Property Get FontBold() As Boolean
 
-    FontBold = mBOLD
+  FontBold = mBOLD
 
 End Property
 
 ' Italico  (fonte)
 Public Property Let FontItalic(ByVal ita As Boolean)
 
-    mITALIC = ita
+  mITALIC = ita
 
 End Property
 
 Public Property Get FontItalic() As Boolean
 
-    FontItalic = mITALIC
+  FontItalic = mITALIC
 
 End Property
 
 ' Sublinhado (fonte) Read Only
 Public Property Get FontUnderline() As Boolean
 
-    FontUnderline = mUnderline
+  FontUnderline = mUnderline
 
 End Property
 
 ' Riscado (fonte) Read Only
 Public Property Get FontStrikeThru() As Boolean
 
-    FontStrikeThru = mStrikeThru
+  FontStrikeThru = mStrikeThru
 
 End Property
 
 ' Handle do form pai
-Public Property Let hWnd(ByVal hw As Long)
+Public Property Let hWnd(ByVal HW As Long)
 
-    mHWND = hw
+  mHWND = HW
 
 End Property
 
 Public Property Get hWnd() As Long
 
-    hWnd = mHWND
+  hWnd = mHWND
 
 End Property
 
 ' Filtro de extensões (Abrir / Salvar) Read Only
 Public Property Let Filter(fil As String)
-    
-    mFILTER = fil
+
+  mFILTER = fil
 
 End Property
 
 ' Extensão Default (Abrir / Salvar)
 Public Property Let DefaultEXT(ByVal xxx As String)
 
-    mDEFEXT = xxx
+  mDEFEXT = xxx
 
 End Property
 
 Public Property Get DefaultEXT() As String
 
-    DefaultEXT = mDEFEXT
+  DefaultEXT = mDEFEXT
 
 End Property
 
 ' Indice do Filtro a ser feito default qdo o diálogo abrir (Abrir / Salvar)
 Public Property Let FilterIndex(ByVal xxx As String)
 
-    mFilterIndex = xxx
+  mFilterIndex = xxx
 
 End Property
 
 Public Property Get FilterIndex() As String
 
-    FilterIndex = mFilterIndex
+  FilterIndex = mFilterIndex
 
 End Property
 
 ' Fica True quando cancel for pressionado em algum diálogo (Varios)
 Public Property Get Cancel()
 
-    Cancel = mCANCEL
+  Cancel = mCANCEL
 
 End Property
 
 ' retorna se foram escolhidos mais de um arquivo no diálogo de abrir arquivo (read Only)
 Public Property Get MultipleFiles() As Boolean
 
-    MultipleFiles = mMultipleFiles
-    
+  MultipleFiles = mMultipleFiles
+
 End Property
 
 Private Sub Class_Initialize()
 
-    Dim i As Integer
-    
-    mFILE = ""
-    mPATH = "c:\"
-    mFULLPATH = "c:\"
-    mCOLOR = 0
-    mBOLD = False
-    mITALIC = False
-    mSIZE = 8
-    mFONT = "Arial"
-    mHWND = 0
-    mCANCEL = False
-    mFILTER = ""
-    mFromPAGE = 1
-    mToPAGE = 1
-    mINITDIR = ""
-    mDEFEXT = ""
-    mFlags = 0
-    mPRTFlags = CdlPDAllPages
-    intMinPage = 0
-    intMaxPage = 0
-    intFromPage = 0
-    intToPage = 0
-    mFontFlags = BOTH
-    mMultipleFiles = False
-    
-    ' Inicializa as cores customizáveis
-    For i = 0 To 15
-        aCustColor(i) = GetSysColor(i)
-    Next
-    
+  Dim i As Integer
+
+  mFILE = ""
+  mPATH = "c:\"
+  mFULLPATH = "c:\"
+  mCOLOR = 0
+  mBOLD = False
+  mITALIC = False
+  mSIZE = 8
+  mFONT = "Arial"
+  mHWND = 0
+  mCANCEL = False
+  mFILTER = ""
+  mFromPAGE = 1
+  mToPAGE = 1
+  mINITDIR = ""
+  mDEFEXT = ""
+  mFlags = 0
+  mPRTFlags = cdlPDAllPages
+  intMinPage = 0
+  intMaxPage = 0
+  intFromPage = 0
+  intToPage = 0
+  mFontFlags = BOTH
+  mMultipleFiles = False
+
+  ' Inicializa as cores customizáveis
+  For i = 0 To 15
+    aCustColor(i) = GetSysColor(i)
+  Next
+
 End Sub
 
 ' Diálogo de Formatação de disquetes
 Public Sub FormatFloppy(ByVal DriveLetter As String, Capacity As FormatDriveCapEnum, Format As FormatDriveFormatTypeEnum)
-    
-    ' Formata um disquete
-    
-    Dim DRNum As Long
-    
-    DRNum = Asc(Left(DriveLetter, 1)) - 65
-    SHFormatDrive Me.hWnd, DRNum, SHFD_CAPACITY_DEFAULT, SHFD_FORMAT_QUICK
+
+' Formata um disquete
+
+  Dim DRNum As Long
+
+  DRNum = Asc(Left(DriveLetter, 1)) - 65
+  SHFormatDrive Me.hWnd, DRNum, SHFD_CAPACITY_DEFAULT, SHFD_FORMAT_QUICK
 
 End Sub
 
 ' Diálogo de conexão de drives de rede (compartilhamentos)
 Public Sub ConnectNetDrive()
 
-    Dim Resp As Long
-    
-    Resp = WNetConnectionDialog(mHWND, RESOURCETYPE_DISK)
+  Dim Resp As Long
+
+  Resp = WNetConnectionDialog(mHWND, RESOURCETYPE_DISK)
 
 End Sub
 
 ' Diálogo de desconexão de drives de rede (compartilhamentos)
 Public Sub DisconnectNetDrive()
 
-    Dim Resp As Long
-    
-    Resp = WNetDisconnectDialog(mHWND, RESOURCETYPE_DISK)
+  Dim Resp As Long
+
+  Resp = WNetDisconnectDialog(mHWND, RESOURCETYPE_DISK)
 
 End Sub
 
 ' Copia Disquetes
 Public Sub CopyDisk()
 
-    Shell "rundll32 diskcopy,DiskCopyRunDll", vbNormalFocus
+  Shell "rundll32 diskcopy,DiskCopyRunDll", vbNormalFocus
 
 End Sub
 
 ' Menor Página (Impressão)
 Property Get Min() As Integer
 
-    Min = intMinPage
-  
+  Min = intMinPage
+
 End Property
 
 Property Let Min(ByVal intNewValue As Integer)
 
-    intNewValue = IIf(intNewValue > 0, intNewValue, 0)
-    intMinPage = intNewValue
-    If intNewValue > intFromPage Then intFromPage = intNewValue
-    If intNewValue > intToPage Then intToPage = intNewValue
-    If intNewValue > intMaxPage Then intMaxPage = intNewValue
-  
+  intNewValue = IIf(intNewValue > 0, intNewValue, 0)
+  intMinPage = intNewValue
+  If intNewValue > intFromPage Then intFromPage = intNewValue
+  If intNewValue > intToPage Then intToPage = intNewValue
+  If intNewValue > intMaxPage Then intMaxPage = intNewValue
+
 End Property
 
 ' Página Inicial (Impressão)
 Property Get FromPage() As Integer
 
-    FromPage = intFromPage
-  
+  FromPage = intFromPage
+
 End Property
 
 Property Let FromPage(ByVal intNewValue As Integer)
 
-    intNewValue = IIf(intNewValue > 0, intNewValue, 0)
-    intFromPage = intNewValue
-    If intNewValue > intToPage Then intToPage = intNewValue
-    If intNewValue > intMaxPage Then intMaxPage = intNewValue
-    If intNewValue < intMinPage Then intMinPage = intNewValue
-  
+  intNewValue = IIf(intNewValue > 0, intNewValue, 0)
+  intFromPage = intNewValue
+  If intNewValue > intToPage Then intToPage = intNewValue
+  If intNewValue > intMaxPage Then intMaxPage = intNewValue
+  If intNewValue < intMinPage Then intMinPage = intNewValue
+
 End Property
 
 ' Página Final (Impressão)
 Property Get ToPage() As Integer
-  
-    ToPage = intToPage
+
+  ToPage = intToPage
 
 End Property
 
 Property Let ToPage(ByVal intNewValue As Integer)
 
-    intNewValue = IIf(intNewValue > 0, intNewValue, 0)
-    intToPage = intNewValue
-    If intNewValue > intMaxPage Then intMaxPage = intNewValue
-    If intNewValue < intFromPage Then intFromPage = intNewValue
-    If intNewValue < intMinPage Then intMinPage = intNewValue
-  
+  intNewValue = IIf(intNewValue > 0, intNewValue, 0)
+  intToPage = intNewValue
+  If intNewValue > intMaxPage Then intMaxPage = intNewValue
+  If intNewValue < intFromPage Then intFromPage = intNewValue
+  If intNewValue < intMinPage Then intMinPage = intNewValue
+
 End Property
 
 ' Maior Página  (Impressão)
 Property Get Max() As Integer
 
-    Max = intMaxPage
-  
+  Max = intMaxPage
+
 End Property
 
 Property Let Max(ByVal intNewValue As Integer)
 
-    intNewValue = IIf(intNewValue > 0, intNewValue, 0)
-    intMaxPage = intNewValue
-    If intNewValue < intToPage Then intToPage = intNewValue
-    If intNewValue < intFromPage Then intFromPage = intNewValue
-    If intNewValue < intMinPage Then intMinPage = intNewValue
-  
+  intNewValue = IIf(intNewValue > 0, intNewValue, 0)
+  intMaxPage = intNewValue
+  If intNewValue < intToPage Then intToPage = intNewValue
+  If intNewValue < intFromPage Then intFromPage = intNewValue
+  If intNewValue < intMinPage Then intMinPage = intNewValue
+
 End Property
 
 ' Diálogo de Impressão
 Public Sub DialogPrint()
 
-    Dim PrintDlg As PRINTDLG_TYPE
-    Dim DevMode As DEVMODE_TYPE
-    Dim DevName As DEVNAMES_TYPE
-    Dim lpDevMode As Long, lpDevName As Long
-    Dim intReturn As Integer
-    Dim objPrinter As Printer
-    Dim strNewPrinterName As String
+  Dim PrintDlg As PRINTDLG_TYPE
+  Dim DevMode As DEVMODE_TYPE
+  Dim DevName As DEVNAMES_TYPE
+  Dim lpDevMode As Long, lpDevName As Long
+  Dim intReturn As Integer
+  Dim objPrinter As Printer
+  Dim strNewPrinterName As String
 
-    mCANCEL = False
-  
-    With PrintDlg
-        .lStructSize = Len(PrintDlg)
-        .hwndOwner = mHWND
-        .Flags = mPRTFlags
-        .nMinPage = intMinPage
-        .nFromPage = intFromPage
-        .nToPage = intToPage
-        .nMaxPage = intMaxPage
-    End With
-  
-    'Setar orientação e duplex
-    DevMode.dmDeviceName = Printer.DeviceName
-    DevMode.dmSize = Len(DevMode)
-    DevMode.dmFields = DM_ORIENTATION Or DM_DUPLEX
-    DevMode.dmOrientation = Printer.Orientation
-  
-    On Error Resume Next
-    DevMode.dmDuplex = Printer.Duplex
-    On Error GoTo 0
-  
-    PrintDlg.hDevMode = GlobalAlloc(GMEM_MOVEABLE Or GMEM_ZEROINIT, Len(DevMode))
-    lpDevMode = GlobalLock(PrintDlg.hDevMode)
-    If lpDevMode > 0 Then
-        CopyMemory ByVal lpDevMode, DevMode, Len(DevMode)
-        intReturn = GlobalUnlock(lpDevMode)
-    End If
-  
-    With DevName
-        .wDriverOffset = 8
-        .wDeviceOffset = .wDriverOffset + 1 + Len(Printer.DriverName)
-        .wOutputOffset = .wDeviceOffset + 1 + Len(Printer.Port)
-        .wDefault = 0
-    End With
-  
-    With Printer
-        DevName.extra = .DriverName & Chr(0) & .DeviceName & Chr(0) & .Port & Chr(0)
-    End With
-  
-    PrintDlg.hDevNames = GlobalAlloc(GMEM_MOVEABLE Or GMEM_ZEROINIT, Len(DevName))
+  mCANCEL = False
+
+  With PrintDlg
+    .lStructSize = Len(PrintDlg)
+    .hwndOwner = mHWND
+    .Flags = mPRTFlags
+    .nMinPage = intMinPage
+    .nFromPage = intFromPage
+    .nToPage = intToPage
+    .nMaxPage = intMaxPage
+  End With
+
+  'Setar orientação e duplex
+  DevMode.dmDeviceName = Printer.DeviceName
+  DevMode.dmSize = Len(DevMode)
+  DevMode.dmFields = DM_ORIENTATION Or DM_DUPLEX
+  DevMode.dmOrientation = Printer.Orientation
+
+  On Error Resume Next
+  DevMode.dmDuplex = Printer.Duplex
+  On Error GoTo 0
+
+  PrintDlg.hDevMode = GlobalAlloc(GMEM_MOVEABLE Or GMEM_ZEROINIT, Len(DevMode))
+  lpDevMode = GlobalLock(PrintDlg.hDevMode)
+  If lpDevMode > 0 Then
+    CopyMemory ByVal lpDevMode, DevMode, Len(DevMode)
+    intReturn = GlobalUnlock(lpDevMode)
+  End If
+
+  With DevName
+    .wDriverOffset = 8
+    .wDeviceOffset = .wDriverOffset + 1 + Len(Printer.DriverName)
+    .wOutputOffset = .wDeviceOffset + 1 + Len(Printer.Port)
+    .wDefault = 0
+  End With
+
+  With Printer
+    DevName.extra = .DriverName & Chr(0) & .DeviceName & Chr(0) & .Port & Chr(0)
+  End With
+
+  PrintDlg.hDevNames = GlobalAlloc(GMEM_MOVEABLE Or GMEM_ZEROINIT, Len(DevName))
+  lpDevName = GlobalLock(PrintDlg.hDevNames)
+  If lpDevName > 0 Then
+    CopyMemory ByVal lpDevName, DevName, Len(DevName)
+    intReturn = GlobalUnlock(lpDevName)
+  End If
+
+  ' Chama diálogo
+  If PrintDialog(PrintDlg) Then
     lpDevName = GlobalLock(PrintDlg.hDevNames)
-    If lpDevName > 0 Then
-        CopyMemory ByVal lpDevName, DevName, Len(DevName)
-        intReturn = GlobalUnlock(lpDevName)
+    CopyMemory DevName, ByVal lpDevName, 45
+    intReturn = GlobalUnlock(lpDevName)
+
+    With PrintDlg
+      mPRTFlags = .Flags
+      intFromPage = .nFromPage
+      intToPage = .nToPage
+    End With
+    GlobalFree PrintDlg.hDevNames
+
+    ' Marca as propriedades retornadas pela estrutura
+    lpDevMode = GlobalLock(PrintDlg.hDevMode)
+    CopyMemory DevMode, ByVal lpDevMode, Len(DevMode)
+    intReturn = GlobalUnlock(PrintDlg.hDevMode)
+    GlobalFree PrintDlg.hDevMode
+    strNewPrinterName = UCase$(Left(DevMode.dmDeviceName, InStr(DevMode.dmDeviceName, Chr$(0)) - 1))
+
+    If Printer.DeviceName <> strNewPrinterName Then
+      For Each objPrinter In Printers
+        If UCase$(objPrinter.DeviceName) = strNewPrinterName Then Set Printer = objPrinter
+      Next
     End If
-  
-    ' Chama diálogo
-    If PrintDialog(PrintDlg) Then
-        lpDevName = GlobalLock(PrintDlg.hDevNames)
-        CopyMemory DevName, ByVal lpDevName, 45
-        intReturn = GlobalUnlock(lpDevName)
-    
-        With PrintDlg
-            mPRTFlags = .Flags
-            intFromPage = .nFromPage
-            intToPage = .nToPage
-        End With
-        GlobalFree PrintDlg.hDevNames
-    
-        ' Marca as propriedades retornadas pela estrutura
-        lpDevMode = GlobalLock(PrintDlg.hDevMode)
-        CopyMemory DevMode, ByVal lpDevMode, Len(DevMode)
-        intReturn = GlobalUnlock(PrintDlg.hDevMode)
-        GlobalFree PrintDlg.hDevMode
-        strNewPrinterName = UCase$(Left(DevMode.dmDeviceName, InStr(DevMode.dmDeviceName, Chr$(0)) - 1))
-    
-        If Printer.DeviceName <> strNewPrinterName Then
-            For Each objPrinter In Printers
-                If UCase$(objPrinter.DeviceName) = strNewPrinterName Then Set Printer = objPrinter
-            Next
-        End If
-    
-        On Error Resume Next
-    
-        With Printer
-            .Copies = DevMode.dmCopies
-            .Duplex = DevMode.dmDuplex
-            .Orientation = DevMode.dmOrientation
-        End With
-        On Error GoTo 0
-        mCANCEL = False
-    Else
-        GlobalFree PrintDlg.hDevMode
-        GlobalFree PrintDlg.hDevNames
-        mCANCEL = True
-    End If
-    
+
+    On Error Resume Next
+
+    With Printer
+      .Copies = DevMode.dmCopies
+      .Duplex = DevMode.dmDuplex
+      .Orientation = DevMode.dmOrientation
+    End With
+    On Error GoTo 0
+    mCANCEL = False
+  Else
+    GlobalFree PrintDlg.hDevMode
+    GlobalFree PrintDlg.hDevNames
+    mCANCEL = True
+  End If
+
 End Sub
 
 ' Carrega um listbox ou combobox com a lista de impressoras disponíveis na coleção printers
 Public Function LoadPrinters(LST As Control, Optional MarkDefault As Boolean = False) As Integer
 
-    Dim PRT As Printer, buf As String, i As Integer
-    
-    LST.Clear
-    For Each PRT In Printers
-        buf = PRT.DeviceName
-        If Printer.DeviceName = buf Then
-            LoadPrinters = i
-            If MarkDefault = True Then
-                buf = buf & " (Default)"
-            End If
-        End If
-        LST.AddItem buf
-    Next
-    
+  Dim PRT As Printer, buf As String, i As Integer
+
+  LST.Clear
+  For Each PRT In Printers
+    buf = PRT.DeviceName
+    If Printer.DeviceName = buf Then
+      LoadPrinters = i
+      If MarkDefault = True Then
+        buf = buf & " (Default)"
+      End If
+    End If
+    LST.AddItem buf
+  Next
+
 End Function
 
 ' Mostra HTMLHelp
-Public Function ShowHTMLHelp(strFilename As String) As Long
-    
-    Dim hwndHelp As Long
-    
-    'The return value is the window handle of the created help window.
-    ShowHTMLHelp = HtmlHelp(mHWND, strFilename, HH_DISPLAY_TOPIC, 0&)
-    
+Public Function ShowHTMLHelp(strFileName As String) As Long
+
+  Dim hwndHelp As Long
+
+  'The return value is the window handle of the created help window.
+  ShowHTMLHelp = HtmlHelp(mHWND, strFileName, HH_DISPLAY_TOPIC, 0&)
+
 End Function
 

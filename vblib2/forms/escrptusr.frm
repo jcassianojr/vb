@@ -176,70 +176,70 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub CmdSair_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 Private Sub edirptusr_Click()
-    gridrptusr.Col = 0
-    zIDRPTUSR = FixInt(gridrptusr, 0)
-    gridrptusr.Col = 1
-    ePASS03 = gridrptusr
-    frmRPTUSR.Show vbModal, Me
+  gridrptusr.Col = 0
+  zIDRPTUSR = FixInt(gridrptusr, 0)
+  gridrptusr.Col = 1
+  ePASS03 = gridrptusr
+  frmRPTUSR.Show vbModal, Me
 End Sub
 
 Private Sub excrptusr_Click()
-    Dim sSQL As String
-    gridrptusr.Col = 0
-    zIDRPTUSR = FixInt(gridrptusr)
-    sSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "' AND IDUSUARIO=" & zIDRPTUSR
-    If ApagaSQLP(DBWRPT, sSQL) Then
-        filrptusr
-    End If
+  Dim sSQL As String
+  gridrptusr.Col = 0
+  zIDRPTUSR = FixInt(gridrptusr)
+  sSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "' AND IDUSUARIO=" & zIDRPTUSR
+  If ApagaSQLP(DBWRPT, sSQL) Then
+    filrptusr
+  End If
 End Sub
 
 Private Sub filrptusr()
-    'Dim carq As String
-    Dim sSQL As String
-    Dim cNOME As String
+'Dim carq As String
+  Dim sSQL As String
+  Dim cNOME As String
 
-    cNOME = ArqRPTUsr
+  cNOME = ArqRPTUsr
 
 
-    sSQL = "select " & cNOME & ".IDUSUARIO,USUARIO.USUARIO "
-    sSQL = sSQL & "from " & cNOME & ",USUARIO WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
-    sSQL = sSQL & " and " & cNOME & ".IDUSUARIO = USUARIO.IDUSUARIO"
-    sSQL = sSQL & " Order By USUARIO.USUARIO  "
+  sSQL = "select " & cNOME & ".IDUSUARIO,USUARIO.USUARIO "
+  sSQL = sSQL & "from " & cNOME & ",USUARIO WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
+  sSQL = sSQL & " and " & cNOME & ".IDUSUARIO = USUARIO.IDUSUARIO"
+  sSQL = sSQL & " Order By USUARIO.USUARIO  "
 
-    MontaGridFast gridrptusr, 2, Array(500, 2000), Array("ID", "Usuario"), _
-        Array("IDUSUARIO", "USUARIO"), DBWRPT, sSQL
+  MontaGridFast gridrptusr, 2, Array(500, 2000), Array("ID", "Usuario"), _
+                Array("IDUSUARIO", "USUARIO"), DBWRPT, sSQL
 
 
 End Sub
 
 Private Sub filusr()
-    Dim cARQ As String
-    Dim cSQL As String
- 
-    cARQ = DBWRPT
-    cSQL = "SELECT IDUSUARIO,USUARIO FROM USUARIO ORDER BY USUARIO"
- 
-    MontaGridUltra gridusr, 2, Array(500, 2000), Array("ID", "Nome"), _
-        Array("IDUSUARIO", "L$USUARIO"), cARQ, cSQL
+  Dim cARQ As String
+  Dim cSQL As String
 
-   
+  cARQ = DBWRPT
+  cSQL = "SELECT IDUSUARIO,USUARIO FROM USUARIO ORDER BY USUARIO"
+
+  MontaGridUltra gridusr, 2, Array(500, 2000), Array("ID", "Nome"), _
+                 Array("IDUSUARIO", "L$USUARIO"), cARQ, cSQL
+
+
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    filusr
-    filrptusr
+  CenterFormToScreen Me
+  filusr
+  filrptusr
 
 End Sub
 
 Private Sub gridrptusr_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid gridrptusr, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid gridrptusr, Chr(KeyAscii), 1, False
+  End If
 
 End Sub
 
@@ -249,14 +249,14 @@ End Sub
 '            .Col = .Cols - 1
 '            .ColSel = 0
 '            .TopRow = .Row
- '       End If
- '   End With
+'       End If
+'   End With
 'End Sub
 
 Private Sub gridusr_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid gridusr, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid gridusr, Chr(KeyAscii), 1, False
+  End If
 
 End Sub
 
@@ -271,16 +271,16 @@ End Sub
 'End Sub
 
 Private Sub incusrrpt_Click()
-    Dim sSQL As String
-    gridusr.Col = 0
-    zIDRPTUSR = FixInt(gridusr)
-    sSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "' AND IDUSUARIO=" & zIDRPTUSR
-    IncluiSQL DBWRPT, sSQL, 4, Array("GRP", "RPT", "IDUSUARIO", "VISUALIZA"), _
-        Array(zgrp, zRPT, zIDRPTUSR, True), True, False
-    gridusr.Col = 1
-    ePASS03 = gridusr
-    frmRPTUSR.Show vbModal, Me
-    filrptusr
+  Dim sSQL As String
+  gridusr.Col = 0
+  zIDRPTUSR = FixInt(gridusr)
+  sSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "' AND IDUSUARIO=" & zIDRPTUSR
+  IncluiSQL DBWRPT, sSQL, 4, Array("GRP", "RPT", "IDUSUARIO", "VISUALIZA"), _
+            Array(zgrp, zRPT, zIDRPTUSR, True), True, False
+  gridusr.Col = 1
+  ePASS03 = gridusr
+  frmRPTUSR.Show vbModal, Me
+  filrptusr
 End Sub
 
 

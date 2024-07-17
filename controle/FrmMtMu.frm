@@ -283,66 +283,66 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
-        For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
-            aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
-        Next iLOOP
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
+    For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
+    Next iLOOP
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Command1_Click()
-    ePASS01 = "MANA5EMPFOX"
-    ePASS02 = "SELECT UNIDADE as codigo,UNIDDES as nome from MD07"
-    ePASS03 = Array("UNIDADE", "UNIDDES")
-    EscCodNomSim.Show vbModal, Me
-    If lRETU Then
-        TXTFIELDS(9) = eRETU01
-    End If
+  ePASS01 = "MANA5EMPFOX"
+  ePASS02 = "SELECT UNIDADE as codigo,UNIDDES as nome from MD07"
+  ePASS03 = Array("UNIDADE", "UNIDDES")
+  EscCodNomSim.Show vbModal, Me
+  If lRETU Then
+    TXTFIELDS(9) = eRETU01
+  End If
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    TxtCodigo.tEXT = ePASS01
-    cARQMTMU = ePASS02
-    cARQ = GeraConn(zMANA5EMP, "SDECDX")
-    cSQL = "select * from " & cARQMTMU & " WHERE CODIGO='" & Trim(ePASS01) & "'"
-    nCAMPOS = 10
-    aCAM = Array("NOME", "NOM2", "DIMX", "DIMY", "DIMZ", "PESLIQ", "APLICACAO", "INSTRU", "LOCACAO", "UNIDADE")
-    aFOR = Array("C", "C", "N", "N", "N", "N", "C", "C", "C", "C")
-    aPAD = Array("", "", 0, 0, 0, 0, "", "", "", "")
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 1
-        TXTFIELDS(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
+  CenterFormToScreen Me
+  TxtCodigo.tEXT = ePASS01
+  cARQMTMU = ePASS02
+  cARQ = GeraConn(zMANA5EMP, "SDECDX")
+  cSQL = "select * from " & cARQMTMU & " WHERE CODIGO='" & Trim(ePASS01) & "'"
+  nCAMPOS = 10
+  aCAM = Array("NOME", "NOM2", "DIMX", "DIMY", "DIMZ", "PESLIQ", "APLICACAO", "INSTRU", "LOCACAO", "UNIDADE")
+  aFOR = Array("C", "C", "N", "N", "N", "N", "C", "C", "C", "C")
+  aPAD = Array("", "", 0, 0, 0, 0, "", "", "", "")
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 1
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub txtFields_GotFocus(Index As Integer)
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index = 2 Or Index = 3 Or Index = 4 Or Index = 5 Then
-        KeyAscii = ValiText(KeyAscii, "#N")
-    End If
+  If Index = 2 Or Index = 3 Or Index = 4 Or Index = 5 Then
+    KeyAscii = ValiText(KeyAscii, "#N")
+  End If
 End Sub
 

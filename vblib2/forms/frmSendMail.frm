@@ -143,12 +143,23 @@ Begin VB.Form FrmSendMail
       Width           =   855
    End
    Begin XPControls.XPButton CmdLimpa 
-      Caption         =   "Limpar Informaçoes"
       Height          =   615
       Left            =   7680
       TabIndex        =   13
       Top             =   5520
       Width           =   1095
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "Limpar Informaçoes"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
    Begin VB.TextBox Txt_Porta 
       Alignment       =   1  'Right Justify
@@ -366,179 +377,179 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Private Sub CmdCancelar_Click()
-    Unload Me
+  Unload Me
 End Sub
 Private Sub CmdEnviar_Click()
-    Select Case Lista.ListIndex
+  Select Case Lista.ListIndex
 
-    Case 0
-        mapienviar_Click ''mapi
-    Case 1
-        shellenviar_Click ''shell
-    Case 2
-        cdoenviar_Click ''cdo
-   End Select
+  Case 0
+    mapienviar_Click  ''mapi
+  Case 1
+    shellenviar_Click  ''shell
+  Case 2
+    cdoenviar_Click  ''cdo
+  End Select
 
 End Sub
 Private Sub CmdLimpa_Click()
-    txt_status.tEXT = ""
+  txt_status.tEXT = ""
 End Sub
 Private Sub shellenviar_Click()
-    If campos_checagem Then
-        SendEmailShell txt_email_to.tEXT, txt_subject.tEXT, txt_message_text.tEXT, txt_attach.tEXT
-    End If
+  If campos_checagem Then
+    SendEmailShell txt_email_to.tEXT, txt_subject.tEXT, txt_message_text.tEXT, txt_attach.tEXT
+  End If
 End Sub
 Private Sub mapienviar_Click()
-    If Not campos_checagem Then
-        Exit Sub
-    End If
-    MAPISession1.LogonUI = True
-    MAPISession1.SignOn
-    MAPIMessages1.SessionID = MAPISession1.SessionID
-    MAPIMessages1.Compose
-     
-    '////////////////////////////////////////
-    '// Informa o email, se enviar para mais de 1 email é separar com(;)e ir informando
-    '////////////////////////////////////////
-    MAPIMessages1.RecipIndex = 0
-    MAPIMessages1.RecipAddress = txt_email_to.tEXT
-    MAPIMessages1.RecipType = 1
-         
-    '////////////////////////////////////////
-    '// Assunto
-    '////////////////////////////////////////
-    MAPIMessages1.MsgSubject = txt_subject.tEXT
-    '////////////////////////////////////////
-    '// Conteudo da mens
-    '////////////////////////////////////////
-    MAPIMessages1.MsgNoteText = txt_message_text.tEXT
-    '////////////////////////////////////////
-    '// Informa anexo
-    '////////////////////////////////////////
-    MAPIMessages1.AttachmentIndex = 0
-    MAPIMessages1.AttachmentPathName = txt_attach.tEXT
-    MAPIMessages1.AttachmentPosition = 0
-    '////////////////////////////////////////////////
-    '// Se existir outros anexos alterar os valores
-    '////////////////////////////////////////////////
-    'MAPIMessages1.AttachmentIndex = 1
-    'MAPIMessages1.AttachmentPathName = app.path & "\Leia.doc"
-    'MAPIMessages1.AttachmentPosition = 1
-    
-    MAPIMessages1.Send False
-    MAPISession1.SignOff
+  If Not campos_checagem Then
+    Exit Sub
+  End If
+  MAPISession1.LogonUI = True
+  MAPISession1.SignOn
+  MAPIMessages1.sessionID = MAPISession1.sessionID
+  MAPIMessages1.Compose
+
+  '////////////////////////////////////////
+  '// Informa o email, se enviar para mais de 1 email é separar com(;)e ir informando
+  '////////////////////////////////////////
+  MAPIMessages1.RecipIndex = 0
+  MAPIMessages1.RecipAddress = txt_email_to.tEXT
+  MAPIMessages1.RecipType = 1
+
+  '////////////////////////////////////////
+  '// Assunto
+  '////////////////////////////////////////
+  MAPIMessages1.MsgSubject = txt_subject.tEXT
+  '////////////////////////////////////////
+  '// Conteudo da mens
+  '////////////////////////////////////////
+  MAPIMessages1.MsgNoteText = txt_message_text.tEXT
+  '////////////////////////////////////////
+  '// Informa anexo
+  '////////////////////////////////////////
+  MAPIMessages1.AttachmentIndex = 0
+  MAPIMessages1.AttachmentPathName = txt_attach.tEXT
+  MAPIMessages1.AttachmentPosition = 0
+  '////////////////////////////////////////////////
+  '// Se existir outros anexos alterar os valores
+  '////////////////////////////////////////////////
+  'MAPIMessages1.AttachmentIndex = 1
+  'MAPIMessages1.AttachmentPathName = app.path & "\Leia.doc"
+  'MAPIMessages1.AttachmentPosition = 1
+
+  MAPIMessages1.Send False
+  MAPISession1.SignOff
 End Sub
 
 
 Private Sub cdoenviar_Click()
-   Dim RetVal          As String
-   RetVal = SendMailCDO(Trim$(txt_email_to.tEXT), _
-        Trim$(txt_subject.tEXT), _
-        Trim$(txtFromName.tEXT) & "<" & Trim$(txt_email_from.tEXT) & ">", _
-        Trim$(txt_message_text.tEXT), _
-        Trim$(txt_smtp_server.tEXT), _
-        CInt(Trim$(Txt_Porta.tEXT)), _
-        Trim$(txtUsername.tEXT), _
-        Trim$(txtPassword.tEXT), _
-        Trim$(txt_attach.tEXT), _
-        CBool(chkSSL.Value))
-   txt_status.tEXT = RetVal
+  Dim RetVal As String
+  RetVal = SendMailCDO(Trim$(txt_email_to.tEXT), _
+                       Trim$(txt_subject.tEXT), _
+                       Trim$(txtFromName.tEXT) & "<" & Trim$(txt_email_from.tEXT) & ">", _
+                       Trim$(txt_message_text.tEXT), _
+                       Trim$(txt_smtp_server.tEXT), _
+                       CInt(Trim$(Txt_Porta.tEXT)), _
+                       Trim$(txtUsername.tEXT), _
+                       Trim$(txtPassword.tEXT), _
+                       Trim$(txt_attach.tEXT), _
+                       CBool(chkSSL.Value))
+  txt_status.tEXT = RetVal
 
 End Sub
 
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    txt_status.tEXT = "Pronto." & vbCrLf
-    txt_smtp_server.tEXT = ePASS01(0)
-    Txt_Porta.tEXT = ePASS01(1)
-    txt_email_from.tEXT = ePASS01(2)
-    txt_email_to.tEXT = ePASS01(3)
-    txt_subject.tEXT = ePASS01(4)
-    txt_attach.tEXT = ePASS01(5)
-    txt_message_text.tEXT = ePASS01(6)
-    If Len(txt_smtp_server.tEXT) = 0 Then
-        txt_smtp_server.tEXT = PegPath("EMAIL", "SERVER", "stmp..com.br")
+  CenterFormToScreen Me
+  txt_status.tEXT = "Pronto." & vbCrLf
+  txt_smtp_server.tEXT = ePASS01(0)
+  Txt_Porta.tEXT = ePASS01(1)
+  txt_email_from.tEXT = ePASS01(2)
+  txt_email_to.tEXT = ePASS01(3)
+  txt_subject.tEXT = ePASS01(4)
+  txt_attach.tEXT = ePASS01(5)
+  txt_message_text.tEXT = ePASS01(6)
+  If Len(txt_smtp_server.tEXT) = 0 Then
+    txt_smtp_server.tEXT = PegPath("EMAIL", "SERVER", "stmp..com.br")
+  End If
+  If Len(Txt_Porta.tEXT) = 0 Then
+    Txt_Porta.tEXT = PegPath("EMAIL", "PORTA", "25")
+  End If
+  If Len(txt_email_from.tEXT) = 0 Then
+    txt_email_from.tEXT = PegPath("EMAIL", UCase(zNOMEFOLHA), " ")
+    If Len(Trim(txt_email_from.tEXT)) = 0 Then
+      txt_email_from.tEXT = PegPath("EMAIL", "FROM", "@.com.br")
     End If
-    If Len(Txt_Porta.tEXT) = 0 Then
-        Txt_Porta.tEXT = PegPath("EMAIL", "PORTA", "25")
-    End If
-    If Len(txt_email_from.tEXT) = 0 Then
-        txt_email_from.tEXT = PegPath("EMAIL", UCase(zNOMEFOLHA), " ")
-        If Len(Trim(txt_email_from.tEXT)) = 0 Then
-            txt_email_from.tEXT = PegPath("EMAIL", "FROM", "@.com.br")
-        End If
-    End If
-    Lista.ListIndex = 0
-    
-    If ePASS01(7) = True Then
-        'enviaresair
-    End If
-    ''txt
+  End If
+  Lista.ListIndex = 0
+
+  If ePASS01(7) = True Then
+    'enviaresair
+  End If
+  ''txt
 End Sub
 Private Sub Form_Unload(Cancel As Integer)
-    Unload Me
+  Unload Me
 End Sub
 Private Sub Lista_Click()
-    CmdEnviar_Click
+  CmdEnviar_Click
 End Sub
 Private Sub txt_email_from_LostFocus()
-    If Not CheckEmail(txt_email_from) Then
-        txt_email_from.SetFocus
-    End If
+  If Not CheckEmail(txt_email_from) Then
+    txt_email_from.SetFocus
+  End If
 End Sub
 
 Private Sub txt_email_to_LostFocus()
-    If Not CheckEmail(txt_email_to) Then
-        txt_email_to.SetFocus
-    End If
+  If Not CheckEmail(txt_email_to) Then
+    txt_email_to.SetFocus
+  End If
 End Sub
 
 Private Sub txt_porta_KeyPress(KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 
 
 Function campos_checagem() As Boolean
-    campos_checagem = False
-    If Len(txt_subject.tEXT) = 0 Then
-        If Not MDG("Enviar Sem Assunto") Then
-            Exit Function
-        End If
+  campos_checagem = False
+  If Len(txt_subject.tEXT) = 0 Then
+    If Not MDG("Enviar Sem Assunto") Then
+      Exit Function
     End If
-    If Len(txt_email_to.tEXT) = 0 Then
-        Alert ("Sem Destinatario")
-        Exit Function
+  End If
+  If Len(txt_email_to.tEXT) = 0 Then
+    Alert ("Sem Destinatario")
+    Exit Function
+  End If
+  If Len(txt_email_from.tEXT) = 0 Then
+    Alert ("Sem Remetente")
+    Exit Function
+  End If
+  If Not CheckEmail(txt_email_from.tEXT) Then
+    txt_status.tEXT = "Erro: " & txt_email_from.tEXT & "." & vbCrLf & txt_status.tEXT & vbCrLf
+    Alert ("Email Origem Invalido")
+    Exit Function
+  End If
+  If Not CheckEmail(txt_email_to.tEXT) Then
+    txt_status.tEXT = "Erro: " & txt_email_to.tEXT & "." & vbCrLf & txt_status.tEXT & vbCrLf
+    Alert ("Email Destino Invalido")
+    Exit Function
+  End If
+  If Len(txt_smtp_server.tEXT) = 0 Then
+    Alert ("Servidor de Envio Nao Preenchido")
+    Exit Function
+  End If
+  If Not IsWebConnected Then
+    If Not MDG("Internet Pode nao estar conectada Continuar") Then
+      Exit Function
     End If
-    If Len(txt_email_from.tEXT) = 0 Then
-        Alert ("Sem Remetente")
-        Exit Function
-    End If
-    If Not CheckEmail(txt_email_from.tEXT) Then
-        txt_status.tEXT = "Erro: " & txt_email_from.tEXT & "." & vbCrLf & txt_status.tEXT & vbCrLf
-        Alert ("Email Origem Invalido")
-        Exit Function
-    End If
-    If Not CheckEmail(txt_email_to.tEXT) Then
-        txt_status.tEXT = "Erro: " & txt_email_to.tEXT & "." & vbCrLf & txt_status.tEXT & vbCrLf
-        Alert ("Email Destino Invalido")
-        Exit Function
-    End If
-    If Len(txt_smtp_server.tEXT) = 0 Then
-        Alert ("Servidor de Envio Nao Preenchido")
-        Exit Function
-    End If
-    If Not IsWebConnected Then
-        If Not MDG("Internet Pode nao estar conectada Continuar") Then
-            Exit Function
-        End If
-    End If
-    campos_checagem = True
+  End If
+  campos_checagem = True
 End Function
 
 

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmPFLIB 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PF"
@@ -16,7 +16,7 @@ Begin VB.Form frmPFLIB
    ScaleWidth      =   7080
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin vbccr18.DTPicker DTPicker1 
+   Begin VBCCR18.DTPicker DTPicker1 
       Height          =   495
       Left            =   2760
       TabIndex        =   8
@@ -152,79 +152,79 @@ Option Explicit
 Public cTIPO
 
 Private Sub cmdClose_Click()
-    Dim cSQL
-    Dim aFOR
-    Dim aVAL
-    Dim aCAM
-    aFOR = Array("NI", "C", "D")
-    aVAL = Array(TXTFIELDS(0), TXTFIELDS(1), DTPicker1)
-    cSQL = "select PF,CODIGO,FEMEAF,FEMEAR,FEMEAD,PCLIBNUM,PCLIBNOM,PCLIBDATE,RESNUM,RESNOM,RESDAT,ELANUM,FEMEAEF,PCELANUM,PRDNUM,PRDNOM,PRDDAT,SEGNUM,SEGNOM,SEGDAT from PF WHERE PF=" & nPF
-    If cTIPO = "PF" Then
-        cSQL = "select PF,RESNUM,RESNOM,RESDAT from PF WHERE PF=" & nPF
-        aCAM = Array("RESNUM", "RESNOM", "RESDAT")
-    End If
-    
-    If cTIPO = "PFSEG" Then                      ' aprovador seguranca do trabalho
-        cSQL = "select PF,SEGNUM,SEGNOM,SEGDAT from PF WHERE PF=" & nPF
-        aCAM = Array("RESNUM", "RESNOM", "RESDAT")
-    End If
-    If cTIPO = "PFPRO" Then                      ' aprovador producao
-        cSQL = "select PF,PRDNUM,PRDNOM,PRDDAT from PF WHERE PF=" & nPF
-        aCAM = Array("RESNUM", "RESNOM", "RESDAT")
-    End If
-    
-    If cTIPO = "FEMEA" Then
-        cSQL = "select PF,FEMEAF,FEMEAR,FEMEAD from PF WHERE PF=" & nPF
-        aCAM = Array("FEMEAF", "FEMEAR", "FEMEAD")
-    End If
-    If cTIPO = "PC" Then
-        cSQL = "select PF,PCLIBNUM,PCLIBNOM,PCLIBDATE from PF WHERE PF=" & nPF
-        aCAM = Array("PCLIBNUM", "PCLIBNOM", "PCLIBDATE")
-    End If
-    
-    If cTIPO = "POA" Then
-        cSQL = "select NUMERO,RESNUM,RESNOM,RESDAT from POA WHERE NUMERO=" & nPPAP
-        aCAM = Array("RESNUM", "RESNOM", "RESDAT")
-    End If
-    
-    If cTIPO = "POKA" Then
-        cSQL = "select NUMERO,RESNUM,RESNOM,RESDAT from POKA WHERE NUMERO=" & nPPAP
-        aCAM = Array("RESNUM", "RESNOM", "RESDAT")
-    End If
+  Dim cSQL
+  Dim aFOR
+  Dim aVAL
+  Dim aCAM
+  aFOR = Array("NI", "C", "D")
+  aVAL = Array(TXTFIELDS(0), TXTFIELDS(1), DTPicker1)
+  cSQL = "select PF,CODIGO,FEMEAF,FEMEAR,FEMEAD,PCLIBNUM,PCLIBNOM,PCLIBDATE,RESNUM,RESNOM,RESDAT,ELANUM,FEMEAEF,PCELANUM,PRDNUM,PRDNOM,PRDDAT,SEGNUM,SEGNOM,SEGDAT from PF WHERE PF=" & nPF
+  If cTIPO = "PF" Then
+    cSQL = "select PF,RESNUM,RESNOM,RESDAT from PF WHERE PF=" & nPF
+    aCAM = Array("RESNUM", "RESNOM", "RESDAT")
+  End If
 
-    If cTIPO = "DISPO" Then
-        cSQL = "select NUMERO,RESNUM,RESNOM,RESDAT from DISPO WHERE NUMERO=" & nPPAP
-        aCAM = Array("RESNUM", "RESNOM", "RESDAT")
-    End If
+  If cTIPO = "PFSEG" Then                      ' aprovador seguranca do trabalho
+    cSQL = "select PF,SEGNUM,SEGNOM,SEGDAT from PF WHERE PF=" & nPF
+    aCAM = Array("RESNUM", "RESNOM", "RESDAT")
+  End If
+  If cTIPO = "PFPRO" Then                      ' aprovador producao
+    cSQL = "select PF,PRDNUM,PRDNOM,PRDDAT from PF WHERE PF=" & nPF
+    aCAM = Array("RESNUM", "RESNOM", "RESDAT")
+  End If
 
-    
-    GrvSQL Sdb, cSQL, 3, aCAM, aVAL, aFOR
-    Unload Me
+  If cTIPO = "FEMEA" Then
+    cSQL = "select PF,FEMEAF,FEMEAR,FEMEAD from PF WHERE PF=" & nPF
+    aCAM = Array("FEMEAF", "FEMEAR", "FEMEAD")
+  End If
+  If cTIPO = "PC" Then
+    cSQL = "select PF,PCLIBNUM,PCLIBNOM,PCLIBDATE from PF WHERE PF=" & nPF
+    aCAM = Array("PCLIBNUM", "PCLIBNOM", "PCLIBDATE")
+  End If
+
+  If cTIPO = "POA" Then
+    cSQL = "select NUMERO,RESNUM,RESNOM,RESDAT from POA WHERE NUMERO=" & nPPAP
+    aCAM = Array("RESNUM", "RESNOM", "RESDAT")
+  End If
+
+  If cTIPO = "POKA" Then
+    cSQL = "select NUMERO,RESNUM,RESNOM,RESDAT from POKA WHERE NUMERO=" & nPPAP
+    aCAM = Array("RESNUM", "RESNOM", "RESDAT")
+  End If
+
+  If cTIPO = "DISPO" Then
+    cSQL = "select NUMERO,RESNUM,RESNOM,RESDAT from DISPO WHERE NUMERO=" & nPPAP
+    aCAM = Array("RESNUM", "RESNOM", "RESDAT")
+  End If
+
+
+  GrvSQL Sdb, cSQL, 3, aCAM, aVAL, aFOR
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cTIPO = ePASS01
-    CABECARIO.Caption = ""
-    If InStr(Sdb, "PFP.MDB") Then
-        ''Cabeçario
-        CABECARIO.Caption = "PRELIMINAR"
-    End If
-    If InStr(Sdb, "PFG.MDB") Then
-        ''Cabeçario
-        CABECARIO.Caption = "GP12"
-    End If
-    frmPFLIB.TXTFIELDS(0) = zIDFOLHA
-    frmPFLIB.TXTFIELDS(1) = zNOMEFOLHA
-    DTPicker1.Value = Date
-    TXTPF.tEXT = nPF
+  CenterFormToScreen Me
+  cTIPO = ePASS01
+  CABECARIO.Caption = ""
+  If InStr(Sdb, "PFP.MDB") Then
+    ''Cabeçario
+    CABECARIO.Caption = "PRELIMINAR"
+  End If
+  If InStr(Sdb, "PFG.MDB") Then
+    ''Cabeçario
+    CABECARIO.Caption = "GP12"
+  End If
+  frmPFLIB.TXTFIELDS(0) = zIDFOLHA
+  frmPFLIB.TXTFIELDS(1) = zNOMEFOLHA
+  DTPicker1.Value = Date
+  TXTPF.tEXT = nPF
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 

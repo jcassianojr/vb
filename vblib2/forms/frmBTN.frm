@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmBTN 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Botoes"
@@ -133,7 +133,7 @@ Begin VB.Form frmBTN
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin vbccr18.SpinBox indice 
+   Begin VBCCR18.SpinBox indice 
       Height          =   495
       Left            =   3480
       TabIndex        =   15
@@ -154,7 +154,7 @@ Begin VB.Form frmBTN
       Max             =   999
       Value           =   1
    End
-   Begin vbccr18.SpinBox icone 
+   Begin VBCCR18.SpinBox icone 
       Height          =   495
       Left            =   4560
       TabIndex        =   16
@@ -310,55 +310,55 @@ Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
-    On Error Resume Next
-    If MDG("Gravar alteraçôes") Then
+  On Error Resume Next
+  If MDG("Gravar alteraçôes") Then
     'ajustar depois para nao precisar txtfiels 3 4
-         txtFields(3) = indice.Value
-         txtFields(4) = icone.Value
+    txtFields(3) = indice.Value
+    txtFields(4) = icone.Value
 
-        For iLOOP = 0 To nCAMPOS - 2
-            aVAL(iLOOP) = txtFields(iLOOP)
-        Next iLOOP
-        aVAL(6) = FixNumBol(Check2.Value)
-        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+    For iLOOP = 0 To nCAMPOS - 2
+      aVAL(iLOOP) = txtFields(iLOOP)
+    Next iLOOP
+    aVAL(6) = FixNumBol(Check2.Value)
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Encerrar_Click()
-    If Not MDG("Sair sem gravar") Then
-        Exit Sub
-    End If
-    Screen.MousePointer = vbDefault
-    Unload Me
+  If Not MDG("Sair sem gravar") Then
+    Exit Sub
+  End If
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter KeyCode
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQ = Dbname
-    cSQL = "select * from controle WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU
-    nCAMPOS = 7
-    aCAM = Array("FORM", "CONTROLE", "TOOLTIP", "INDICE", "IMAGEM", "CAPTION", "DISPONIVEL")
-    aFOR = Array("C", "C", "C", "NI", "NI", "C", "BN")
-    aPAD = Array("", "", "", 0, 0, "", False)
-    aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
-    For iLOOP = 0 To nCAMPOS - 2
-        txtFields(iLOOP) = aVAL(iLOOP)
-    Next iLOOP
-    Check2.Value = aVAL(6)
-    'ajustar depois para nao precisar txtfiels 3 4
-    indice.Value = txtFields(3)
-    icone.Value = txtFields(4)
+  CenterFormToScreen Me
+  cARQ = Dbname
+  cSQL = "select * from controle WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU
+  nCAMPOS = 7
+  aCAM = Array("FORM", "CONTROLE", "TOOLTIP", "INDICE", "IMAGEM", "CAPTION", "DISPONIVEL")
+  aFOR = Array("C", "C", "C", "NI", "NI", "C", "BN")
+  aPAD = Array("", "", "", 0, 0, "", False)
+  aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
+  For iLOOP = 0 To nCAMPOS - 2
+    txtFields(iLOOP) = aVAL(iLOOP)
+  Next iLOOP
+  Check2.Value = aVAL(6)
+  'ajustar depois para nao precisar txtfiels 3 4
+  indice.Value = txtFields(3)
+  icone.Value = txtFields(4)
 
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 'Private Sub maisind_Click()
@@ -378,8 +378,8 @@ End Sub
 'End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index = 3 Or Index = 4 Then
-        KeyAscii = ValiText(KeyAscii, "#NI")
-    End If
+  If Index = 3 Or Index = 4 Then
+    KeyAscii = ValiText(KeyAscii, "#NI")
+  End If
 End Sub
 

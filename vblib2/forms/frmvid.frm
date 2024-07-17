@@ -85,15 +85,15 @@ Const nFORMID = 1071
 Const cFORMID = "Visualizar de Videos"
 
 Private Sub Encerrar_Click()
-    Unload Me
+  Unload Me
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    If FileExist(cARQRTF, True) Then
-        Player.URL = cARQRTF
-         
-        '        PlayerVideo.FileName = cARQRTF
-    End If
+  CenterFormToScreen Me
+  If FileExist(cARQRTF, True) Then
+    Player.URL = cARQRTF
+
+    '        PlayerVideo.FileName = cARQRTF
+  End If
 End Sub
 

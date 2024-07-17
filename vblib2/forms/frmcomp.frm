@@ -1,18 +1,18 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{7020C36F-09FC-41FE-B822-CDE6FBB321EB}#1.0#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmcomp 
    Caption         =   "Competencia"
    ClientHeight    =   3210
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   5100
-   Icon            =   "FRMCOMP.frx":0000
+   Icon            =   "frmcomp.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3210
    ScaleWidth      =   5100
    StartUpPosition =   3  'Windows Default
-   Begin vbccr18.SpinBox mes 
+   Begin VBCCR18.SpinBox mes 
       Height          =   615
       Left            =   1560
       TabIndex        =   4
@@ -33,7 +33,7 @@ Begin VB.Form frmcomp
       Max             =   12
       Value           =   1
    End
-   Begin vbccr18.SpinBox ano 
+   Begin VBCCR18.SpinBox ano 
       Height          =   615
       Left            =   1320
       TabIndex        =   5
@@ -55,7 +55,7 @@ Begin VB.Form frmcomp
       Value           =   1950
       ThousandsSeparator=   0   'False
    End
-   Begin vbccr18.SpinBox empresa 
+   Begin VBCCR18.SpinBox empresa 
       Height          =   615
       Left            =   1560
       TabIndex        =   6
@@ -77,7 +77,7 @@ Begin VB.Form frmcomp
       Value           =   1
       AllowOnlyNumbers=   -1  'True
    End
-   Begin vbccr18.SpinBox quinzena 
+   Begin VBCCR18.SpinBox quinzena 
       Height          =   615
       Left            =   1560
       TabIndex        =   7
@@ -107,7 +107,7 @@ Begin VB.Form frmcomp
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
-      Picture         =   "FRMCOMP.frx":038A
+      Picture         =   "frmcomp.frx":038A
       Caption         =   "Confirmar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -204,15 +204,15 @@ Attribute VB_Exposed = False
 Const nFORMID = 1020
 Const cFORMID = "Competencia"
 Private Sub ano_GotFocus()
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub cmdOK_Click()
-    eRETU01 = FixInt(ano)
-    eRETU02 = FixInt(mes)
-    eRETU03 = FixInt(empresa)
-    eRETU04 = FixInt(quinzena)
-    Unload Me
+  eRETU01 = FixInt(ano)
+  eRETU02 = FixInt(mes)
+  eRETU03 = FixInt(empresa)
+  eRETU04 = FixInt(quinzena)
+  Unload Me
 End Sub
 
 'Private Sub Command1_Click()
@@ -220,26 +220,26 @@ End Sub
 'End Sub
 
 'Private Sub Command2_Click()
- '   quinzena = CStr(IncDec(quinzena, -1, 0, 2))
+'   quinzena = CStr(IncDec(quinzena, -1, 0, 2))
 'End Sub
 
 Private Sub empresa_GotFocus()
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-    TeclaEnter (KeyCode)
+  TeclaEnter (KeyCode)
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    'frmcomp.Left = (Screen.Width - frmcomp.Width) / 2
-    'frmcomp.Top = (Screen.Height - frmcomp.Height) / 2
-    Me.Caption = cFORMID
-    Me.HelpContextID = nFORMID
-    ano = zANO
-    mes = zMES
-    empresa = zEMPRESA
+  CenterFormToScreen Me
+  'frmcomp.Left = (Screen.Width - frmcomp.Width) / 2
+  'frmcomp.Top = (Screen.Height - frmcomp.Height) / 2
+  Me.Caption = cFORMID
+  Me.HelpContextID = nFORMID
+  ano = zANO
+  mes = zMES
+  empresa = zEMPRESA
 End Sub
 
 'Private Sub maisano_Click()
@@ -267,24 +267,24 @@ End Sub
 'End Sub
 
 Private Sub ano_KeyPress(KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub empresa_KeyPress(KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub mes_GotFocus()
-    FocusMe
+  FocusMe
 End Sub
 Private Sub QUINZENA_GotFocus()
-    FocusMe
+  FocusMe
 End Sub
 
 Private Sub mes_KeyPress(KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub quinzena_KeyPress(KeyAscii As Integer)
-    KeyAscii = ValiText(KeyAscii, "#NI")
+  KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
