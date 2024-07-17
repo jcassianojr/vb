@@ -72,47 +72,47 @@ Dim cSUBWHERE As String
 Dim cARQFER As String
 
 Private Sub CmdEscolher()
-    Grid.Col = 0
-    eRETU01 = Grid
-    Grid.Col = 1
-    eRETU02 = Grid
-    lRETU = True
-    Unload Me
+  Grid.Col = 0
+  eRETU01 = Grid
+  Grid.Col = 1
+  eRETU02 = Grid
+  lRETU = True
+  Unload Me
 End Sub
 
 Private Sub cmdSair()
-    lRETU = False
-    Screen.MousePointer = vbDefault
-    Unload Me
+  lRETU = False
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub FilRelat()
-    Dim cSQL As String
-    If Len(cSUBWHERE) = 0 Then
-        cSQL = "SELECT FERRAM,NUMERO,NOME FROM FERRAM ORDER BY " & cORDEM
-    Else
-        cSQL = "SELECT FERRAM,NUMERO,NOME FROM FERRAM WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
-    End If
-    MontaGridUltra Grid, 3, Array(2000, 800, 5000), Array("Codigo", "Numero", "Descrição"), _
-        Array("L$ferram", "R$numero", "NOME"), cARQFER, cSQL
+  Dim cSQL As String
+  If Len(cSUBWHERE) = 0 Then
+    cSQL = "SELECT FERRAM,NUMERO,NOME FROM FERRAM ORDER BY " & cORDEM
+  Else
+    cSQL = "SELECT FERRAM,NUMERO,NOME FROM FERRAM WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
+  End If
+  MontaGridUltra Grid, 3, Array(2000, 800, 5000), Array("Codigo", "Numero", "Descrição"), _
+                 Array("L$ferram", "R$numero", "NOME"), cARQFER, cSQL
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQFER = PegPath("PATH", "MANA5FER")
-    cARQFER = GeraConn(cARQFER, "JETFOX")
-    aORDEM = Array("FERRAM", "Nome")
-    aORDES = Array("CODIGO", "Nome")
-    cORDEM = "FERRAM"
-    cSUBWHERE = ""
-    xmontatoolbar Me.Toolbar1, "escFER", True
-    FilRelat
+  CenterFormToScreen Me
+  cARQFER = PegPath("PATH", "MANA5FER")
+  cARQFER = GeraConn(cARQFER, "JETFOX")
+  aORDEM = Array("FERRAM", "Nome")
+  aORDES = Array("CODIGO", "Nome")
+  cORDEM = "FERRAM"
+  cSUBWHERE = ""
+  xmontatoolbar Me.Toolbar1, "escFER", True
+  FilRelat
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 End Sub
 
@@ -124,91 +124,91 @@ End Sub
 '            .TopRow = .Row
 '        End If
 '    End With
-    
+
 
 'End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Dim sButton As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-        
-        
-    If Not AcessaBtnOld("escFER", Button.Index) Then
-        Exit Sub
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+
+
+  If Not AcessaBtnOld("escFER", Button.Index) Then
+    Exit Sub
+  End If
+
+
+  GravaLog 0, Button.Index, sButton, "escFER"
+
+  Select Case sButton
+  Case "ORD"
+    ePASS01 = aORDES
+    escOrdem.Show vbModal, Me
+    If lRETU Then
+      cORDEM = aORDEM(eRETU01)
+      FilRelat
     End If
+  Case "FIL"
+    cSUBWHERE = ""
+    If MDG("Usar Filtro Avancado") Then
+      aARQUIVOS = Array(cARQFER)
+      aRELCFG = Array("", "", "", 0, False, _
+                      False, "", "", "", "", "", _
+                      False, "FERRAM", "FERRAM", "", "")
+      FrmFiltro.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
+      End If
+    Else
+      ePASS01 = aORDES
+      frmLocalizaa.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "L%"), eRETU01, eRETU02)
+      End If
+    End If
+    FilRelat
+  Case "IMP"
+    cTIPO = "R"
+    zgrp = "FR"
+    escRPT.Show vbModal, Me
 
-   
-    GravaLog 0, Button.Index, sButton, "escFER"
+  Case "EDI"
+    If Grid.Row > 0 Then
+      Grid.Col = 0
+      ePASS01 = Grid
+      Grid.Col = 1
+      ePASS02 = Grid
+      Grid.Col = 2
+      ePASS03 = Grid
+      frmFER.Show vbModal, Me
+    End If
+  Case "FOT"
+    Grid.Col = 0
+    zgrp = Grid
+    iImage = 3
+    cARQRTF = PegPath("PATH", "LOGOFER") & "IMGFER.MDB"
+    Load frmIMAGENS
+    frmIMAGENS.TXTFIELDS(0).Enabled = False
+    frmIMAGENS.Escolher(0).Visible = False
+    frmIMAGENS.Show vbModal, Me
 
-    Select Case sButton
-    Case "ORD"
-        ePASS01 = aORDES
-        escOrdem.Show vbModal, Me
-        If lRETU Then
-            cORDEM = aORDEM(eRETU01)
-            FilRelat
-        End If
-    Case "FIL"
-        cSUBWHERE = ""
-        If MDG("Usar Filtro Avancado") Then
-            aARQUIVOS = Array(cARQFER)
-            aRELCFG = Array("", "", "", 0, False, _
-                            False, "", "", "", "", "", _
-                            False, "FERRAM", "FERRAM", "", "")
-            FrmFiltro.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-            End If
-        Else
-            ePASS01 = aORDES
-            frmLocalizaa.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "L%"), eRETU01, eRETU02)
-            End If
-        End If
-        FilRelat
-    Case "IMP"
-        cTIPO = "R"
-        zgrp = "FR"
-        escRPT.Show vbModal, Me
+  Case "ESC"
+    CmdEscolher
 
-    Case "EDI"
-         If Grid.Row > 0 Then
-            Grid.Col = 0
-            ePASS01 = Grid
-            Grid.Col = 1
-            ePASS02 = Grid
-            Grid.Col = 2
-            ePASS03 = Grid
-            frmFER.Show vbModal, Me
-        End If
-    Case "FOT"
-        Grid.Col = 0
-        zgrp = Grid
-        iImage = 3
-        cARQRTF = PegPath("PATH", "LOGOFER") & "IMGFER.MDB"
-        Load frmIMAGENS
-        frmIMAGENS.TXTFIELDS(0).Enabled = False
-        frmIMAGENS.Escolher(0).Visible = False
-        frmIMAGENS.Show vbModal, Me
-
-    Case "ESC"
-        CmdEscolher
-
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02, , 1
-        End If
-    Case "SAI"
-        cmdSair
-    End Select
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02, , 1
+    End If
+  Case "SAI"
+    cmdSair
+  End Select
 End Sub
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 

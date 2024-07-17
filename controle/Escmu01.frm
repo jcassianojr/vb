@@ -73,82 +73,82 @@ Dim cESCUSO As String
 Dim cTABUSO As String
 
 Private Sub CmdEscolher()
-    Grid.Col = 0
-    eRETU01 = Grid
-    Grid.Col = 1
-    eRETU02 = Grid
-    lRETU = True
-    Unload Me
+  Grid.Col = 0
+  eRETU01 = Grid
+  Grid.Col = 1
+  eRETU02 = Grid
+  lRETU = True
+  Unload Me
 End Sub
 
 Private Sub cmdSair()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub FilRelat()
-    On Error Resume Next
-    Dim cARQ As String
-    Dim cSQL As String
-    cARQ = GeraConn(zMANA5EMP, "JETFOX")
-    'cSQL = "SELECT CODIGO, NOME,NOM2 FROM " & cTABUSO
-    cSQL = "SELECT CODIGO, NOME + NOM2 AS NOME FROM " & cTABUSO
-    
-    If Len(cSUBWHERE) > 0 Then
-        cSQL = cSQL & " WHERE " & cSUBWHERE
-    End If
-    
-    cSQL = cSQL & " ORDER BY " & cORDEM
-    '     MontaGridFast Grid, 3, Array(2000, 3500, 3500), Array("Codigo", "Nome", ""), _
-    Array("L$CODIGO", "L$NOME", "L$NOM2"), cARQ, cSQL
-    MontaGridFast Grid, 2, Array(1500, 6000), Array("Codigo", "Nome", ""), _
-        Array("L$CODIGO", "L$NOME"), cARQ, cSQL
+  On Error Resume Next
+  Dim cARQ As String
+  Dim cSQL As String
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
+  'cSQL = "SELECT CODIGO, NOME,NOM2 FROM " & cTABUSO
+  cSQL = "SELECT CODIGO, NOME + NOM2 AS NOME FROM " & cTABUSO
+
+  If Len(cSUBWHERE) > 0 Then
+    cSQL = cSQL & " WHERE " & cSUBWHERE
+  End If
+
+  cSQL = cSQL & " ORDER BY " & cORDEM
+  '     MontaGridFast Grid, 3, Array(2000, 3500, 3500), Array("Codigo", "Nome", ""), _
+        Array("L$CODIGO", "L$NOME", "L$NOM2"), cARQ, cSQL
+  MontaGridFast Grid, 2, Array(1500, 6000), Array("Codigo", "Nome", ""), _
+                Array("L$CODIGO", "L$NOME"), cARQ, cSQL
 
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    aORDEM = Array("CODIGO", "NOME")
-    aORDES = Array("CODIGO", "NOME")
-    cORDEM = "CODIGO"
-    cSUBWHERE = ""
+  CenterFormToScreen Me
+  aORDEM = Array("CODIGO", "NOME")
+  aORDES = Array("CODIGO", "NOME")
+  cORDEM = "CODIGO"
+  cSUBWHERE = ""
 
 
-    eRETU01 = ""
-    eRETU02 = ""
-    lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  lRETU = False
 
-    If iMU01 = 1 Then cESCUSO = "escMU01"
-    If iMU01 = 2 Then cESCUSO = "escMT01"
-    If iMU01 = 3 Then cESCUSO = "escMW05"
-    If iMU01 = 4 Then cESCUSO = "escMR01"
-    If iMU01 = 5 Then cESCUSO = "escMP03"
-    If iMU01 = 6 Then cESCUSO = "escMW07"
-    If iMU01 = 7 Then cESCUSO = "escMQ01"
-    
-    
-    If iMU01 = 1 Then cTABUSO = "MU01"
-    If iMU01 = 2 Then cTABUSO = "MT01"
-    If iMU01 = 3 Then cTABUSO = "MW05"
-    If iMU01 = 4 Then cTABUSO = "MR01"
-    If iMU01 = 5 Then cTABUSO = "MP03"
-    If iMU01 = 6 Then cTABUSO = "MW07"
-    If iMU01 = 7 Then cTABUSO = "MQ01"
+  If iMU01 = 1 Then cESCUSO = "escMU01"
+  If iMU01 = 2 Then cESCUSO = "escMT01"
+  If iMU01 = 3 Then cESCUSO = "escMW05"
+  If iMU01 = 4 Then cESCUSO = "escMR01"
+  If iMU01 = 5 Then cESCUSO = "escMP03"
+  If iMU01 = 6 Then cESCUSO = "escMW07"
+  If iMU01 = 7 Then cESCUSO = "escMQ01"
 
-    xmontatoolbar Me.Toolbar1, cESCUSO, True
 
-   
-    FilRelat
+  If iMU01 = 1 Then cTABUSO = "MU01"
+  If iMU01 = 2 Then cTABUSO = "MT01"
+  If iMU01 = 3 Then cTABUSO = "MW05"
+  If iMU01 = 4 Then cTABUSO = "MR01"
+  If iMU01 = 5 Then cTABUSO = "MP03"
+  If iMU01 = 6 Then cTABUSO = "MW07"
+  If iMU01 = 7 Then cTABUSO = "MQ01"
+
+  xmontatoolbar Me.Toolbar1, cESCUSO, True
+
+
+  FilRelat
 
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii = 13 Then
-        CmdEscolher
-    End If
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii = 13 Then
+    CmdEscolher
+  End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 End Sub
 
@@ -163,146 +163,146 @@ End Sub
 'End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Dim cARQTMP As String
-    Dim sSQL As String
-    Dim cCODINC As String
-    Dim sButton          As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    If Not AcessaBtnOld(cESCUSO, Button.Index) Then
-        Exit Sub
+  Dim cARQTMP As String
+  Dim sSQL As String
+  Dim cCODINC As String
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+  If Not AcessaBtnOld(cESCUSO, Button.Index) Then
+    Exit Sub
+  End If
+
+
+  GravaLog 0, Button.Index, sButton, cESCUSO
+
+  Select Case sButton
+  Case "NOV", "INC"
+    cCODINC = InputBox("Digite o Codigo", "Inclusão", "__")
+    cARQTMP = GeraConn(zMANA5EMP, "SDECDX")
+    sSQL = "select codigo from " & cTABUSO & " WHERE CODIGO='" & cCODINC & "'"
+    If IncluiSQL(cARQTMP, sSQL, 1, Array("CODIGO"), Array(cCODINC), True, True) Then
+      ePASS01 = cCODINC
+      If iMU01 = 1 Or iMU01 = 2 Or iMU01 = 4 Or iMU01 = 7 Then
+        ePASS02 = cTABUSO
+        FrmMtMu.Show vbModal, Me
+      End If
+      If iMU01 = 5 Then
+        FrmMP03.Show vbModal, Me
+      End If
+      FilRelat
     End If
+  Case "EDI", "ALT"
+    Grid.Col = 0
+    ePASS01 = Grid
+    If iMU01 = 1 Or iMU01 = 2 Or iMU01 = 4 Or iMU01 = 7 Then
+      ePASS02 = cTABUSO
+      FrmMtMu.Show vbModal, Me
+    End If
+    If iMU01 = 5 Then
+      FrmMP03.Show vbModal, Me
+    End If
+  Case "EXC", "DEL"
+    cARQTMP = zMANA5EMP
+    cARQTMP = GeraConn(cARQTMP, "SDECDX")
+    Grid.Col = 0
+    sSQL = "select codigo from " & cTABUSO & " WHERE CODIGO='" & Trim(Grid) & "'"
+    If ApagaSQLP(cARQTMP, sSQL) Then
+      FilRelat
+    End If
+  Case "ORD"
+    ePASS01 = aORDES
+    escOrdem.Show vbModal, Me
+    If lRETU Then
+      cORDEM = aORDEM(eRETU01)
+      FilRelat
+    End If
+  Case "FIL"
+    cSUBWHERE = ""
+    If MDG("Usar Filtro Avancado") Then
+      aARQUIVOS = Array(zMANA5EMP)
+      ''Posicao 12 Nome da Tabela
+      ''Posicao 13 Nome da Tabela
+      aRELCFG = Array("", "", "", 0, False, _
+                      False, "", "", "", "", "", _
+                      False, cTABUSO, cTABUSO, "", "")
+      FrmFiltro.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
+      End If
+    Else
+      ''frmLocalizar.Show vbModal, Me
+      ePASS01 = aORDES
+      frmLocalizaa.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "L%"), eRETU01, eRETU02)
+      End If
+    End If
+    FilRelat
 
-    
-    GravaLog 0, Button.Index, sButton, cESCUSO
-    
-    Select Case sButton
-    Case "NOV", "INC"
-        cCODINC = InputBox("Digite o Codigo", "Inclusão", "__")
-        cARQTMP = GeraConn(zMANA5EMP, "SDECDX")
-        sSQL = "select codigo from " & cTABUSO & " WHERE CODIGO='" & cCODINC & "'"
-        If IncluiSQL(cARQTMP, sSQL, 1, Array("CODIGO"), Array(cCODINC), True, True) Then
-            ePASS01 = cCODINC
-            If iMU01 = 1 Or iMU01 = 2 Or iMU01 = 4 Or iMU01 = 7 Then
-                ePASS02 = cTABUSO
-                FrmMtMu.Show vbModal, Me
-            End If
-            If iMU01 = 5 Then
-                FrmMP03.Show vbModal, Me
-            End If
-            FilRelat
-        End If
-    Case "EDI", "ALT"
-        Grid.Col = 0
-        ePASS01 = Grid
-        If iMU01 = 1 Or iMU01 = 2 Or iMU01 = 4 Or iMU01 = 7 Then
-            ePASS02 = cTABUSO
-            FrmMtMu.Show vbModal, Me
-        End If
-        If iMU01 = 5 Then
-            FrmMP03.Show vbModal, Me
-        End If
-    Case "EXC", "DEL"
-        cARQTMP = zMANA5EMP
-        cARQTMP = GeraConn(cARQTMP, "SDECDX")
-        Grid.Col = 0
-        sSQL = "select codigo from " & cTABUSO & " WHERE CODIGO='" & Trim(Grid) & "'"
-        If ApagaSQLP(cARQTMP, sSQL) Then
-            FilRelat
-        End If
-    Case "ORD"
-        ePASS01 = aORDES
-        escOrdem.Show vbModal, Me
-        If lRETU Then
-            cORDEM = aORDEM(eRETU01)
-            FilRelat
-        End If
-    Case "FIL"
-        cSUBWHERE = ""
-        If MDG("Usar Filtro Avancado") Then
-            aARQUIVOS = Array(zMANA5EMP)
-            ''Posicao 12 Nome da Tabela
-            ''Posicao 13 Nome da Tabela
-            aRELCFG = Array("", "", "", 0, False, _
-                            False, "", "", "", "", "", _
-                            False, cTABUSO, cTABUSO, "", "")
-            FrmFiltro.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-            End If
-        Else
-            ''frmLocalizar.Show vbModal, Me
-            ePASS01 = aORDES
-            frmLocalizaa.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "L%"), eRETU01, eRETU02)
-            End If
-        End If
-        FilRelat
-
-    Case "IMP"
-        cTIPO = "R"
-        Select Case iMU01
-        Case 1
-            zgrp = "MU"
-        Case 2
-            zgrp = "MT"
-        Case 3, 6
-            zgrp = "CO"
-        Case 4, 6
-            zgrp = "MR"
-        Case 5
-            zgrp = "MP"
-        Case 7
-            zgrp = "MQ"
-        End Select
-        escRPT.Show vbModal, Me
-    Case "FOT"
-        Grid.Col = 0
-        zgrp = Grid
-        Select Case iMU01
-        Case 1
-            iImage = 7
-            cARQRTF = PegPath("PATH", "IMGMU01")
-        Case 2
-            iImage = 8
-            cARQRTF = PegPath("PATH", "IMGMT01")
-        Case 3
-            iImage = 9
-            cARQRTF = PegPath("PATH", "IMGMW05")
-        Case 4
-            iImage = 10
-            cARQRTF = PegPath("PATH", "IMGMR01")
-        Case 5
-            Alert "Não Possui Imagens", "Opçao não Disponivel"
-            Exit Sub
-        Case 6
-            iImage = 12
-            cARQRTF = PegPath("PATH", "IMGMW07")
-        Case 7
-            iImage = 13
-            cARQRTF = PegPath("PATH", "IMGMQ01")
-
-        End Select
-        Load frmIMAGENS
-        frmIMAGENS.TXTFIELDS(0).Enabled = False
-        frmIMAGENS.Escolher(0).Visible = False
-        frmIMAGENS.Show vbModal, Me
-    Case "ESC"
-        CmdEscolher
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02, , 1
-        End If
-    Case "SAI"
-        cmdSair
+  Case "IMP"
+    cTIPO = "R"
+    Select Case iMU01
+    Case 1
+      zgrp = "MU"
+    Case 2
+      zgrp = "MT"
+    Case 3, 6
+      zgrp = "CO"
+    Case 4, 6
+      zgrp = "MR"
+    Case 5
+      zgrp = "MP"
+    Case 7
+      zgrp = "MQ"
     End Select
+    escRPT.Show vbModal, Me
+  Case "FOT"
+    Grid.Col = 0
+    zgrp = Grid
+    Select Case iMU01
+    Case 1
+      iImage = 7
+      cARQRTF = PegPath("PATH", "IMGMU01")
+    Case 2
+      iImage = 8
+      cARQRTF = PegPath("PATH", "IMGMT01")
+    Case 3
+      iImage = 9
+      cARQRTF = PegPath("PATH", "IMGMW05")
+    Case 4
+      iImage = 10
+      cARQRTF = PegPath("PATH", "IMGMR01")
+    Case 5
+      Alert "Não Possui Imagens", "Opçao não Disponivel"
+      Exit Sub
+    Case 6
+      iImage = 12
+      cARQRTF = PegPath("PATH", "IMGMW07")
+    Case 7
+      iImage = 13
+      cARQRTF = PegPath("PATH", "IMGMQ01")
+
+    End Select
+    Load frmIMAGENS
+    frmIMAGENS.TXTFIELDS(0).Enabled = False
+    frmIMAGENS.Escolher(0).Visible = False
+    frmIMAGENS.Show vbModal, Me
+  Case "ESC"
+    CmdEscolher
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02, , 1
+    End If
+  Case "SAI"
+    cmdSair
+  End Select
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 

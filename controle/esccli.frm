@@ -72,71 +72,71 @@ Dim cORDEM As String
 Dim cSUBWHERE As String
 
 Private Sub Apagar_Click()
-    Dim sSQL As String
-    Grid.Col = 0
-    nPF = FixInt(Grid)
-    'Cliente
-    sSQL = "select * from cliente WHERE cliente=" & nPF
-    If ApagaSQLP(cARQDES, sSQL) Then
-        'Produtos
-        sSQL = "select * from produto WHERE cliente=" & nPF
-        ApagaSQL cARQDES, sSQL
-        FilRelat
-    End If
+  Dim sSQL As String
+  Grid.Col = 0
+  nPF = FixInt(Grid)
+  'Cliente
+  sSQL = "select * from cliente WHERE cliente=" & nPF
+  If ApagaSQLP(cARQDES, sSQL) Then
+    'Produtos
+    sSQL = "select * from produto WHERE cliente=" & nPF
+    ApagaSQL cARQDES, sSQL
+    FilRelat
+  End If
 End Sub
 
 Private Sub CmdSair_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub Editar_Click()
-    
-    Grid.Col = 0
-    nPF = FixInt(Grid)
-    
-    Grid.Col = 1
-    cCLINOME = Grid
-    
-    If ZENGTIP = "DES" Then
-        frmCLI.Show vbModal
-    End If
-    
-    If ZENGTIP = "PRO" Then
-        frmprot.Show vbModal
-    End If
-    
-    
-    
+
+  Grid.Col = 0
+  nPF = FixInt(Grid)
+
+  Grid.Col = 1
+  cCLINOME = Grid
+
+  If ZENGTIP = "DES" Then
+    frmCLI.Show vbModal
+  End If
+
+  If ZENGTIP = "PRO" Then
+    frmprot.Show vbModal
+  End If
+
+
+
 End Sub
 
 Private Sub FilRelat()
-    Dim cSQL As String
-    If Len(cSUBWHERE) > 0 Then
-        cSQL = "SELECT CLIENTE,CLINOME FROM CLIENTE WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
-    Else
-        cSQL = "SELECT CLIENTE,CLINOME FROM CLIENTE ORDER BY " & cORDEM
-    End If
-    MontaGridFast Grid, 2, Array(1200, 4000), Array("Cliente", "Nome"), _
-        Array("Cliente", "L$Clinome"), cARQDES, cSQL
+  Dim cSQL As String
+  If Len(cSUBWHERE) > 0 Then
+    cSQL = "SELECT CLIENTE,CLINOME FROM CLIENTE WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
+  Else
+    cSQL = "SELECT CLIENTE,CLINOME FROM CLIENTE ORDER BY " & cORDEM
+  End If
+  MontaGridFast Grid, 2, Array(1200, 4000), Array("Cliente", "Nome"), _
+                Array("Cliente", "L$Clinome"), cARQDES, cSQL
 
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    aORDEM = Array("CLIENTE", "CLINOME")
-    aORDES = Array("Nº CLIENTE", "NOME")
-    cORDEM = "CLIENTE"
-    cSUBWHERE = ""
-    cARQDES = PegPath("PATH", "DESENHO")
-    xmontatoolbar Me.Toolbar1, "escCLI", True
-    FilRelat
+  CenterFormToScreen Me
+  aORDEM = Array("CLIENTE", "CLINOME")
+  aORDES = Array("Nº CLIENTE", "NOME")
+  cORDEM = "CLIENTE"
+  cSUBWHERE = ""
+  cARQDES = PegPath("PATH", "DESENHO")
+  xmontatoolbar Me.Toolbar1, "escCLI", True
+  FilRelat
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 End Sub
 
 'Private Sub Grid_SelChange()
@@ -150,92 +150,92 @@ End Sub
 'End Sub
 
 Private Sub incluir_Click()
-    Dim cNOME As String
-    cNOME = InputBox("Digite o Nome", "Inclusão Cliente", " ")
-    cNOME = Left$(cNOME, 50)
-    nPF = FixInt(PegMAXSQL(cARQDES, "cliente", "cliente", 0)) + 1
-    If IncluiSQL(cARQDES, "SELECT * FROM CLieNTE WHERE CLIENTE=" & nPF, 2, Array("CLIENTE", "CLINOME"), Array(nPF, cNOME), True, False) Then
-        FilRelat
-    End If
+  Dim cNOME As String
+  cNOME = InputBox("Digite o Nome", "Inclusão Cliente", " ")
+  cNOME = Left$(cNOME, 50)
+  nPF = FixInt(PegMAXSQL(cARQDES, "cliente", "cliente", 0)) + 1
+  If IncluiSQL(cARQDES, "SELECT * FROM CLieNTE WHERE CLIENTE=" & nPF, 2, Array("CLIENTE", "CLINOME"), Array(nPF, cNOME), True, False) Then
+    FilRelat
+  End If
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Dim sButton As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    
-    If Not AcessaBtnOld("escCLI", Button.Index) Then
-        Exit Sub
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+
+  If Not AcessaBtnOld("escCLI", Button.Index) Then
+    Exit Sub
+  End If
+
+  GravaLog 0, Button.Index, sButton, "escCLI"
+
+
+  Select Case sButton
+
+  Case "ORD"
+    ePASS01 = aORDES
+    escOrdem.Show vbModal, Me
+    If lRETU Then
+      cORDEM = aORDEM(eRETU01)
+      FilRelat
     End If
-    
-    GravaLog 0, Button.Index, sButton, "escCLI"
-    
-
-    Select Case sButton
-
-    Case "ORD"
-        ePASS01 = aORDES
-        escOrdem.Show vbModal, Me
-        If lRETU Then
-            cORDEM = aORDEM(eRETU01)
-            FilRelat
-        End If
-    Case "FIL"
-        cSUBWHERE = ""
-        If MDG("Usar Filtro Avancado") Then
-            aARQUIVOS = Array(cARQDES)
-            ''Posicao 12 Nome da Tabela
-            ''Posicao 13 Nome da Tabela
-            aRELCFG = Array("", "", "", 0, False, _
-                            False, "", "", "", "", "", _
-                            False, "CLIENTE", "CLIENTE", "", "")
-            FrmFiltro.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-            End If
-        Else
-            ePASS01 = aORDES
-            frmLocalizaa.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = MontaFiltro(aORDEM, Array("=", "L%"), eRETU01, eRETU02)
-            End If
-        End If
-        FilRelat
+  Case "FIL"
+    cSUBWHERE = ""
+    If MDG("Usar Filtro Avancado") Then
+      aARQUIVOS = Array(cARQDES)
+      ''Posicao 12 Nome da Tabela
+      ''Posicao 13 Nome da Tabela
+      aRELCFG = Array("", "", "", 0, False, _
+                      False, "", "", "", "", "", _
+                      False, "CLIENTE", "CLIENTE", "", "")
+      FrmFiltro.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
+      End If
+    Else
+      ePASS01 = aORDES
+      frmLocalizaa.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = MontaFiltro(aORDEM, Array("=", "L%"), eRETU01, eRETU02)
+      End If
+    End If
+    FilRelat
 
 
 
 
-    Case "IMP"
-        cTIPO = "R"
-        zgrp = "EN"
-        escRPT.Show vbModal, Me
+  Case "IMP"
+    cTIPO = "R"
+    zgrp = "EN"
+    escRPT.Show vbModal, Me
 
-    Case "NOV"
-        incluir_Click
+  Case "NOV"
+    incluir_Click
 
-    Case "EDI"
-        Editar_Click
+  Case "EDI"
+    Editar_Click
 
-    Case "EXC"
-        Apagar_Click
+  Case "EXC"
+    Apagar_Click
 
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02, , 1
-        End If
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02, , 1
+    End If
 
-    Case "SAI"
-        CmdSair_Click
+  Case "SAI"
+    CmdSair_Click
 
-    End Select
+  End Select
 
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 
 End Sub
 

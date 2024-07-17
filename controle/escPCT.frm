@@ -73,129 +73,129 @@ Dim cARQPF As String
 
 Private Sub CmdEscolher()
 
-    Grid.Col = 0
-    eRETU01 = Grid
-    Grid.Col = 1
-    eRETU02 = Grid
-    lRETU = True
-    Unload Me
+  Grid.Col = 0
+  eRETU01 = Grid
+  Grid.Col = 1
+  eRETU02 = Grid
+  lRETU = True
+  Unload Me
 
 End Sub
 
 Private Sub cmdSair()
 
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 
 End Sub
 
 Private Sub FilRelat()
-    On Error Resume Next
-    Dim sSQL As String
+  On Error Resume Next
+  Dim sSQL As String
 
-    If Len(cSUBWHERE) = 0 Then
-        sSQL = "SELECT IDTIPO,DESCRICAO FROM PCTIPO ORDER BY " & cORDEM
-    Else
-        sSQL = "SELECT IDTIPO,DESCRICAO FROM PCTIPO WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
-    End If
-    MontaGridFast Grid, 2, Array(800, 3000), Array("Nº", "Descricao"), _
-        Array("IDtipo", "Descricao"), cARQPF, sSQL
+  If Len(cSUBWHERE) = 0 Then
+    sSQL = "SELECT IDTIPO,DESCRICAO FROM PCTIPO ORDER BY " & cORDEM
+  Else
+    sSQL = "SELECT IDTIPO,DESCRICAO FROM PCTIPO WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
+  End If
+  MontaGridFast Grid, 2, Array(800, 3000), Array("Nº", "Descricao"), _
+                Array("IDtipo", "Descricao"), cARQPF, sSQL
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    aORDEM = Array("IDtipo", "Descricao")
-    aORDES = Array("Nº", "Descricao")
-    cORDEM = "IDTIPO"
-    cSUBWHERE = ""
-   
-    cARQPF = PegPath("PATH", "PF")
-    xmontatoolbar Me.Toolbar1, "escPCT", True
-    FilRelat
+  CenterFormToScreen Me
+  aORDEM = Array("IDtipo", "Descricao")
+  aORDES = Array("Nº", "Descricao")
+  cORDEM = "IDTIPO"
+  cSUBWHERE = ""
+
+  cARQPF = PegPath("PATH", "PF")
+  xmontatoolbar Me.Toolbar1, "escPCT", True
+  FilRelat
 
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
 
-    If KeyAscii = 13 Then
+  If KeyAscii = 13 Then
 
-        CmdEscolher
-    End If
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+    CmdEscolher
+  End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 
 End Sub
 
 'Private Sub Grid_SelChange()
 
- '   With Grid
-   '     If .Rows > 2 Then
-  '          .Col = .Cols - 1
-     '       .ColSel = 0
-    '        .TopRow = .Row
-      '  End If
+'   With Grid
+'     If .Rows > 2 Then
+'          .Col = .Cols - 1
+'       .ColSel = 0
+'        .TopRow = .Row
+'  End If
 '    End With
 'End Sub'
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Dim sButton As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    If Not AcessaBtnOld("escPCT", Button.Index) Then
-        Exit Sub
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+  If Not AcessaBtnOld("escPCT", Button.Index) Then
+    Exit Sub
+  End If
+
+  GravaLog 0, Button.Index, sButton, "escPCT"
+
+
+  Select Case sButton
+
+  Case "ORD"
+    ePASS01 = aORDES
+    escOrdem.Show vbModal, Me
+    If lRETU Then
+      cORDEM = aORDEM(eRETU01)
+      FilRelat
     End If
-    
-    GravaLog 0, Button.Index, sButton, "escPCT"
-
-
-    Select Case sButton
-    
-    Case "ORD"
-        ePASS01 = aORDES
-        escOrdem.Show vbModal, Me
-        If lRETU Then
-            cORDEM = aORDEM(eRETU01)
-            FilRelat
-        End If
-    Case "FIL"
-        cSUBWHERE = ""
-        If MDG("Usar Filtro Avancado") Then
-            aARQUIVOS = Array(cARQPF)
-            ''Posicao 12 Nome da Tabela
-            ''Posicao 13 Nome da Tabela
-            aRELCFG = Array("", "", "", 0, False, _
-                            False, "", "", "", "", "", _
-                            False, "PCTIPO", "PCTIPO", "", "")
-            FrmFiltro.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-            End If
-        Else
-            ePASS01 = aORDES
-            frmLocalizaa.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = MontaFiltro(aORDEM, Array("=", "L%"), eRETU01, eRETU02)
-            End If
-        End If
-        FilRelat
-    Case "ESC"
-        CmdEscolher
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02, , 1
-        End If
-    Case "SAI"
-        cmdSair
-    End Select
+  Case "FIL"
+    cSUBWHERE = ""
+    If MDG("Usar Filtro Avancado") Then
+      aARQUIVOS = Array(cARQPF)
+      ''Posicao 12 Nome da Tabela
+      ''Posicao 13 Nome da Tabela
+      aRELCFG = Array("", "", "", 0, False, _
+                      False, "", "", "", "", "", _
+                      False, "PCTIPO", "PCTIPO", "", "")
+      FrmFiltro.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
+      End If
+    Else
+      ePASS01 = aORDES
+      frmLocalizaa.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = MontaFiltro(aORDEM, Array("=", "L%"), eRETU01, eRETU02)
+      End If
+    End If
+    FilRelat
+  Case "ESC"
+    CmdEscolher
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02, , 1
+    End If
+  Case "SAI"
+    cmdSair
+  End Select
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 

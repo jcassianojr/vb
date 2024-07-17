@@ -101,87 +101,87 @@ Dim cSUBWHERE As String
 Dim cARQPF As String
 
 Private Sub CmdLocalizar_Click()
-    LocalizaGri1 Grid
+  LocalizaGri1 Grid
 End Sub
 
 Private Sub CmdSair_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub FilRelat()
-    Dim cSQL As String
-    Dim nROWS As Integer
-    Dim X As Integer
-    If Len(cSUBWHERE) = 0 Then
-        cSQL = "SELECT NUMERO,LETRA,DESCRICAO FROM CFLX ORDER BY " & cORDEM
-    Else
-        cSQL = "SELECT NUMERO,LETRA,DESCRICAO FROM CFLX WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
-    End If
-    
-    MontaGrid Grid, 3, Array(600, 600, 3500), Array("Letra", "Nº", "Descriçao"), _
-        Array("C$Letra", "C$NUMERO", "L$Descricao"), cARQPF, cSQL
-    grid_Click
-   
-    nROWS = Grid.Rows - 1
-   
-    Grid.Col = 0
-    For X = 1 To nROWS                           '0 e to titulo
-        Grid.Row = X
-        Grid.RowHeight(X) = 600
-       
-        'Grid.CellWidth = 600
-       
-        Grid.CellFontBold = True
-        Grid.CellFontName = "isoqsymbol"
-        Grid.CellFontSize = 18
-        Grid.CellAlignment = flexAlignCenterCenter
-    Next X
+  Dim cSQL As String
+  Dim nROWS As Integer
+  Dim x As Integer
+  If Len(cSUBWHERE) = 0 Then
+    cSQL = "SELECT NUMERO,LETRA,DESCRICAO FROM CFLX ORDER BY " & cORDEM
+  Else
+    cSQL = "SELECT NUMERO,LETRA,DESCRICAO FROM CFLX WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
+  End If
 
-   
-   
-   
+  MontaGrid Grid, 3, Array(600, 600, 3500), Array("Letra", "Nº", "Descriçao"), _
+            Array("C$Letra", "C$NUMERO", "L$Descricao"), cARQPF, cSQL
+  grid_Click
+
+  nROWS = Grid.Rows - 1
+
+  Grid.Col = 0
+  For x = 1 To nROWS                           '0 e to titulo
+    Grid.Row = x
+    Grid.RowHeight(x) = 600
+
+    'Grid.CellWidth = 600
+
+    Grid.CellFontBold = True
+    Grid.CellFontName = "isoqsymbol"
+    Grid.CellFontSize = 18
+    Grid.CellAlignment = flexAlignCenterCenter
+  Next x
+
+
+
+
 End Sub
 
 Private Sub Form_Load()
-    'Dim X As Integer
-    'Dim cLETRA As String
-    CenterFormToScreen Me
-    cARQPF = PegPath("PATH", "PF")
-    aORDEM = Array("NUMERO", "Descricao")
-    aORDES = Array("Letra", "Descricao")
-    cORDEM = "NUMERO"
-    cSUBWHERE = ""
-    xmontatoolbar Me.Toolbar1, "escFLX", True
-    FilRelat
-    TXTFIELDS(0).Font = "isoqsymbol"
-    lRETU = False
-    '    For X = 32 To 96
-    '      cLETRA = Chr(X)
-    '      IncluiSQL cARQPF, "SELECT * FROM CFLX WHERE NUMERO=" & X, 2, Array("NUMERO", "LETRA"), Array(X, cLETRA), True, False
-    '    Next X
+'Dim X As Integer
+'Dim cLETRA As String
+  CenterFormToScreen Me
+  cARQPF = PegPath("PATH", "PF")
+  aORDEM = Array("NUMERO", "Descricao")
+  aORDES = Array("Letra", "Descricao")
+  cORDEM = "NUMERO"
+  cSUBWHERE = ""
+  xmontatoolbar Me.Toolbar1, "escFLX", True
+  FilRelat
+  TXTFIELDS(0).Font = "isoqsymbol"
+  lRETU = False
+  '    For X = 32 To 96
+  '      cLETRA = Chr(X)
+  '      IncluiSQL cARQPF, "SELECT * FROM CFLX WHERE NUMERO=" & X, 2, Array("NUMERO", "LETRA"), Array(X, cLETRA), True, False
+  '    Next X
 End Sub
 
 Private Sub grid_Click()
-    Grid.Col = 0
-    TXTFIELDS(0).tEXT = Grid
+  Grid.Col = 0
+  TXTFIELDS(0).tEXT = Grid
 End Sub
 
 Private Sub Grid_DblClick()
-    Grid.Col = 0
-    eRETU01 = Grid
-    Grid.Col = 1
-    eRETU02 = Grid
-    lRETU = True
-    Unload Me
+  Grid.Col = 0
+  eRETU01 = Grid
+  Grid.Col = 1
+  eRETU02 = Grid
+  lRETU = True
+  Unload Me
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    Else
-        grid_Click
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  Else
+    grid_Click
+  End If
 End Sub
 
 'Private Sub Grid_SelChange()
@@ -198,94 +198,94 @@ End Sub
 'End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Dim sButton As String
-    'Dim cTMP As String
-    Dim nTMP As Integer
+  Dim sButton As String
+  'Dim cTMP As String
+  Dim nTMP As Integer
 
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    
-    If Not AcessaBtnOld("escFLX", Button.Index) Then
-        Exit Sub
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+
+  If Not AcessaBtnOld("escFLX", Button.Index) Then
+    Exit Sub
+  End If
+
+  GravaLog 0, Button.Index, sButton, "escFLX"
+  lRETU = False
+
+
+  Select Case sButton
+  Case "ESC"
+    Grid_DblClick
+  Case "NOV"
+    ePASS01 = "ISOQSYMBOL"
+    ePASS02 = True
+    frmCharacters.Show vbModal, Me
+    If lRETU Then
+      nTMP = eRETU02
+      IncluiSQL cARQPF, "SELECT * FROM CFLX WHERE NUMERO=" & nTMP, 2, Array("NUMERO", "LETRA"), Array(nTMP, Chr(nTMP)), True, True
+      FilRelat
     End If
-    
-    GravaLog 0, Button.Index, sButton, "escFLX"
-    lRETU = False
-    
-    
-    Select Case sButton
-    Case "ESC"
-        Grid_DblClick
-    Case "NOV"
-        ePASS01 = "ISOQSYMBOL"
-        ePASS02 = True
-        frmCharacters.Show vbModal, Me
-        If lRETU Then
-            nTMP = eRETU02
-            IncluiSQL cARQPF, "SELECT * FROM CFLX WHERE NUMERO=" & nTMP, 2, Array("NUMERO", "LETRA"), Array(nTMP, Chr(nTMP)), True, True
-            FilRelat
-        End If
-    Case "EXC"
-        If Grid.Row > 0 Then
-            Grid.Col = 1
-            If ApagaSQLP(cARQPF, "SELECT * FROM CFLX WHERE NUMERO=" & Grid) Then
-                FilRelat
-            End If
-        End If
-    Case "EDI"
-        If Grid.Row > 0 Then
-            Grid.Col = 1
-            ePASS01 = Grid
-            frmCFLX.Show vbModal, Me
-            FilRelat
-        End If
-    Case "ORD"
-        ePASS01 = aORDES
-        escOrdem.Show vbModal, Me
-        If lRETU Then
-            cORDEM = aORDEM(eRETU01)
-            FilRelat
-        End If
-    Case "FIL"
-        cSUBWHERE = ""
-        If MDG("Usar Filtro Avancado") Then
-            aARQUIVOS = Array(cARQPF)
-            ''Posicao 12 Nome da Tabela
-            ''Posicao 13 Nome da Tabela
-            aRELCFG = Array("", "", "", 0, False, _
-                            False, "", "", "", "", "", _
-                            False, "CFLX", "CFLX", "", "")
-            FrmFiltro.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-                FilRelat
-            End If
-        Else
-            ePASS01 = aORDES
-            frmLocalizaa.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "L%"), eRETU01, eRETU02)
-            End If
-        End If
+  Case "EXC"
+    If Grid.Row > 0 Then
+      Grid.Col = 1
+      If ApagaSQLP(cARQPF, "SELECT * FROM CFLX WHERE NUMERO=" & Grid) Then
         FilRelat
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02, , 1
-        End If
-    Case "IMP"
-        cTIPO = "R"
-        zgrp = "PF"
-        escRPT.Show vbModal, Me
-    Case "SAI"
-        CmdSair_Click
-    End Select
+      End If
+    End If
+  Case "EDI"
+    If Grid.Row > 0 Then
+      Grid.Col = 1
+      ePASS01 = Grid
+      frmCFLX.Show vbModal, Me
+      FilRelat
+    End If
+  Case "ORD"
+    ePASS01 = aORDES
+    escOrdem.Show vbModal, Me
+    If lRETU Then
+      cORDEM = aORDEM(eRETU01)
+      FilRelat
+    End If
+  Case "FIL"
+    cSUBWHERE = ""
+    If MDG("Usar Filtro Avancado") Then
+      aARQUIVOS = Array(cARQPF)
+      ''Posicao 12 Nome da Tabela
+      ''Posicao 13 Nome da Tabela
+      aRELCFG = Array("", "", "", 0, False, _
+                      False, "", "", "", "", "", _
+                      False, "CFLX", "CFLX", "", "")
+      FrmFiltro.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
+        FilRelat
+      End If
+    Else
+      ePASS01 = aORDES
+      frmLocalizaa.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "L%"), eRETU01, eRETU02)
+      End If
+    End If
+    FilRelat
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02, , 1
+    End If
+  Case "IMP"
+    cTIPO = "R"
+    zgrp = "PF"
+    escRPT.Show vbModal, Me
+  Case "SAI"
+    CmdSair_Click
+  End Select
 
 End Sub
 

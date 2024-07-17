@@ -73,43 +73,43 @@ Dim cARQPF As String
 Dim cARQIE As String
 
 Private Sub CmdSair_Click()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub EditPf_Click()
-    Grid.Col = 0
-    nPF = Grid
-    frmIE.Show vbModal
+  Grid.Col = 0
+  nPF = Grid
+  frmIE.Show vbModal
 End Sub
 
 Private Sub FilRelat()
-    Dim cSQL
-    If Len(cSUBWHERE) = 0 Then
-        cSQL = "SELECT CODIGOINT,PF,codigo,descr,resdat,RESNUM,BLOQUEADO FROM PF WHERE RESNUM>0 AND NOT BLOQUEADO ORDER BY " & cORDEM
-    Else
-        cSQL = "SELECT CODIGOINT,PF,codigo,descr,resdat,RESNUM,BLOQUEADO FROM PF WHERE RESNUM>0 AND NOT BLOQUEADO AND " & cSUBWHERE & " ORDER BY " & cORDEM
-    End If
-    MontaGridFast Grid, 5, Array(600, 1600, 4000, 1000, 1600), Array("PF", "Produto", "Descricao", "Liberada", "Codigo INT"), _
-        Array("PF", "L$CODIGO", "L$DESCR", "RESDAT", "L$CODIGOINT"), cARQPF, cSQL
+  Dim cSQL
+  If Len(cSUBWHERE) = 0 Then
+    cSQL = "SELECT CODIGOINT,PF,codigo,descr,resdat,RESNUM,BLOQUEADO FROM PF WHERE RESNUM>0 AND NOT BLOQUEADO ORDER BY " & cORDEM
+  Else
+    cSQL = "SELECT CODIGOINT,PF,codigo,descr,resdat,RESNUM,BLOQUEADO FROM PF WHERE RESNUM>0 AND NOT BLOQUEADO AND " & cSUBWHERE & " ORDER BY " & cORDEM
+  End If
+  MontaGridFast Grid, 5, Array(600, 1600, 4000, 1000, 1600), Array("PF", "Produto", "Descricao", "Liberada", "Codigo INT"), _
+                Array("PF", "L$CODIGO", "L$DESCR", "RESDAT", "L$CODIGOINT"), cARQPF, cSQL
 End Sub
 
 Private Sub Form_Load()
-    cARQIE = PegPath("PATH", "IE")
-    cARQPF = PegPath("PATH", "PF")
-    CenterFormToScreen Me
-    aORDEM = Array("PF", "CODIGO", "DESCR", "RESDAT", "CODIGOINT")
-    aORDES = Array("PF", "Codigo", "Descricao", "Data Liberacao", "Codigo Int")
-    cORDEM = "PF"
-    cSUBWHERE = ""
-    xmontatoolbar Me.Toolbar1, "escIE", True
-    FilRelat
+  cARQIE = PegPath("PATH", "IE")
+  cARQPF = PegPath("PATH", "PF")
+  CenterFormToScreen Me
+  aORDEM = Array("PF", "CODIGO", "DESCR", "RESDAT", "CODIGOINT")
+  aORDES = Array("PF", "Codigo", "Descricao", "Data Liberacao", "Codigo Int")
+  cORDEM = "PF"
+  cSUBWHERE = ""
+  xmontatoolbar Me.Toolbar1, "escIE", True
+  FilRelat
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 End Sub
 
 'Private Sub Grid_SelChange()
@@ -123,72 +123,72 @@ End Sub
 'End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Dim sButton As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    If Not AcessaBtnOld("escIE", Button.Index) Then
-        Exit Sub
+  Dim sButton As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
+  If Not AcessaBtnOld("escIE", Button.Index) Then
+    Exit Sub
+  End If
+  GravaLog 0, Button.Index, sButton, "escIE"
+  Select Case sButton
+  Case "ORD"
+    ePASS01 = aORDES
+    escOrdem.Show vbModal, Me
+    If lRETU Then
+      cORDEM = aORDEM(eRETU01)
+      FilRelat
     End If
-    GravaLog 0, Button.Index, sButton, "escIE"
-    Select Case sButton
-    Case "ORD"
-        ePASS01 = aORDES
-        escOrdem.Show vbModal, Me
-        If lRETU Then
-            cORDEM = aORDEM(eRETU01)
-            FilRelat
-        End If
-    Case "FIL"
-        cSUBWHERE = ""
-        If MDG("Usar Filtro Avancado") Then
-            aARQUIVOS = Array(cARQPF)
-            ''Posicao 12 Nome da Tabela
-            ''Posicao 13 Nome da Tabela
-            aRELCFG = Array("", "", "", 0, False, _
-                            False, "", "", "", "", "", _
-                            False, "PF", "PF", "", "")
-            FrmFiltro.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-            End If
-        Else
-            ePASS01 = aORDES
-            frmLocalizaa.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = MontaFiltro(aORDEM, Array("=", "L%", "L%", "L%"), eRETU01, eRETU02)
-            End If
-        End If
-        FilRelat
-    Case "EDI"
-        EditPf_Click
-    Case "COP"
-        cARQIMP = "IE"
-        FrmImp2.Show vbModal, Me
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02, , 1
-        End If
-    Case "IMP"
-        cTIPO = "R"
-        zgrp = "PF"
-        ZGRPSUB = "IE"
-        eLOCALIZA = ""
-        escRPT.Show vbModal, Me
-    Case "IEB"
-        cTIPO = "R"
-        zgrp = "PF"
-        ZGRPSUB = "IE"
-        eLOCALIZA = "ITA00148"
-        escRPT.Show vbModal, Me
-    Case "SAI"
-        CmdSair_Click
-    End Select
+  Case "FIL"
+    cSUBWHERE = ""
+    If MDG("Usar Filtro Avancado") Then
+      aARQUIVOS = Array(cARQPF)
+      ''Posicao 12 Nome da Tabela
+      ''Posicao 13 Nome da Tabela
+      aRELCFG = Array("", "", "", 0, False, _
+                      False, "", "", "", "", "", _
+                      False, "PF", "PF", "", "")
+      FrmFiltro.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
+      End If
+    Else
+      ePASS01 = aORDES
+      frmLocalizaa.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = MontaFiltro(aORDEM, Array("=", "L%", "L%", "L%"), eRETU01, eRETU02)
+      End If
+    End If
+    FilRelat
+  Case "EDI"
+    EditPf_Click
+  Case "COP"
+    cARQIMP = "IE"
+    FrmImp2.Show vbModal, Me
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02, , 1
+    End If
+  Case "IMP"
+    cTIPO = "R"
+    zgrp = "PF"
+    ZGRPSUB = "IE"
+    eLOCALIZA = ""
+    escRPT.Show vbModal, Me
+  Case "IEB"
+    cTIPO = "R"
+    zgrp = "PF"
+    ZGRPSUB = "IE"
+    eLOCALIZA = "ITA00148"
+    escRPT.Show vbModal, Me
+  Case "SAI"
+    CmdSair_Click
+  End Select
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 

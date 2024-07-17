@@ -71,140 +71,140 @@ Dim cORDEM As String
 Dim cSUBWHERE As String
 
 Private Sub CmdEscolher()
-    Grid.Col = 0
-    eRETU01 = Grid
-    Grid.Col = 1
-    eRETU02 = Grid
-    Grid.Col = 2
-    eRETU03 = Grid
-    Grid.Col = 3
-    eRETU04 = Grid
-    lRETU = True
-    Unload Me
+  Grid.Col = 0
+  eRETU01 = Grid
+  Grid.Col = 1
+  eRETU02 = Grid
+  Grid.Col = 2
+  eRETU03 = Grid
+  Grid.Col = 3
+  eRETU04 = Grid
+  lRETU = True
+  Unload Me
 End Sub
 
 Private Sub cmdSair()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub FilRelat()
-    Dim cARQ As String
-    Dim cSQL As String
-    cARQ = PegPath("PATH", "PF")
-    If Len(cSUBWHERE) = 0 Then
-        cSQL = "SELECT CODFINAL,codigo,DEscr,PF FROM PF WHERE NOT BLOQUEADO ORDER BY " & cORDEM
-    Else
-        cSQL = "SELECT CODFINAL,codigo,DEscr,PF FROM PF WHERE NOT BLOQUEADO AND " & cSUBWHERE & " ORDER BY " & cORDEM
-    End If
-    MontaGridFast Grid, 4, Array(1600, 1600, 4000, 200), Array("Final", "Produto", "Descriçao", "PF"), _
-        Array("L$CODFINAL", "L$CODIGO", "L$DESCR", "PF"), cARQ, cSQL
+  Dim cARQ As String
+  Dim cSQL As String
+  cARQ = PegPath("PATH", "PF")
+  If Len(cSUBWHERE) = 0 Then
+    cSQL = "SELECT CODFINAL,codigo,DEscr,PF FROM PF WHERE NOT BLOQUEADO ORDER BY " & cORDEM
+  Else
+    cSQL = "SELECT CODFINAL,codigo,DEscr,PF FROM PF WHERE NOT BLOQUEADO AND " & cSUBWHERE & " ORDER BY " & cORDEM
+  End If
+  MontaGridFast Grid, 4, Array(1600, 1600, 4000, 200), Array("Final", "Produto", "Descriçao", "PF"), _
+                Array("L$CODFINAL", "L$CODIGO", "L$DESCR", "PF"), cARQ, cSQL
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    aORDEM = Array("CODFINAL", "CODIGO", "DESCR", "PF ")
-    aORDES = Array("Codigo Final", "Codigo", "Descricao", "PF")
-    cORDEM = "CODFINAL"
-    cSUBWHERE = ""
+  CenterFormToScreen Me
+  aORDEM = Array("CODFINAL", "CODIGO", "DESCR", "PF ")
+  aORDES = Array("Codigo Final", "Codigo", "Descricao", "PF")
+  cORDEM = "CODFINAL"
+  cSUBWHERE = ""
 
-    lRETU = False
-    eRETU01 = ""
-    eRETU02 = ""
-    eRETU03 = ""
-    eRETU04 = 0
-    xmontatoolbar Me.Toolbar1, "escPFFIM", True
-    FilRelat
+  lRETU = False
+  eRETU01 = ""
+  eRETU02 = ""
+  eRETU03 = ""
+  eRETU04 = 0
+  xmontatoolbar Me.Toolbar1, "escPFFIM", True
+  FilRelat
 End Sub
 
 Private Sub grid_Click()
-    With Grid
-        If .Rows > 2 Then
-            .Col = .Cols - 1
-            .ColSel = 0
-            .TopRow = .Row
-        End If
-    End With
+  With Grid
+    If .Rows > 2 Then
+      .Col = .cols - 1
+      .ColSel = 0
+      .TopRow = .Row
+    End If
+  End With
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii = 13 Then
-        CmdEscolher
-    End If
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii = 13 Then
+    CmdEscolher
+  End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 
 End Sub
 
 'Private Sub Grid_SelChange()
 '    With Grid
- '       If .Rows > 2 Then
-  '          .Col = .Cols - 1
-   '         .ColSel = 0
-    '        .TopRow = .Row
-     '   End If
-   ' End With
+'       If .Rows > 2 Then
+'          .Col = .Cols - 1
+'         .ColSel = 0
+'        .TopRow = .Row
+'   End If
+' End With
 'End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Dim sButton As String
-    Dim cARQ As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    
-    If Not AcessaBtnOld("escPFFIM", Button.Index) Then
-        Exit Sub
-    End If
-    GravaLog 0, Button.Index, sButton, "escPFFIM"
-    
-    
-    Select Case sButton
-    Case "ORD"
-        ePASS01 = aORDES
-        escOrdem.Show vbModal, Me
-        If lRETU Then
-            cORDEM = aORDEM(eRETU01)
-            FilRelat
-        End If
-    Case "FIL"
-        cSUBWHERE = ""
-        If MDG("Usar Filtro Avancado") Then
-            cARQ = PegPath("PATH", "PF")
-            aARQUIVOS = Array(cARQ)
-            ''Posicao 12 Nome da Tabela
-            ''Posicao 13 Nome da Tabela
-            aRELCFG = Array("", "", "", 0, False, _
-                            False, "", "", "", "", "", _
-                            False, "PF", "PF", "", "")
-            FrmFiltro.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-            End If
-        Else
-            ePASS01 = aORDES
-            frmLocalizaa.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "L%", "L%", "="), eRETU01, eRETU02)
-            End If
-        End If
-        FilRelat
+  Dim sButton As String
+  Dim cARQ As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
 
-    Case "ESC"
-        CmdEscolher
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02, , 1
-        End If
-    Case "SAI"
-        cmdSair
-    End Select
+  If Not AcessaBtnOld("escPFFIM", Button.Index) Then
+    Exit Sub
+  End If
+  GravaLog 0, Button.Index, sButton, "escPFFIM"
+
+
+  Select Case sButton
+  Case "ORD"
+    ePASS01 = aORDES
+    escOrdem.Show vbModal, Me
+    If lRETU Then
+      cORDEM = aORDEM(eRETU01)
+      FilRelat
+    End If
+  Case "FIL"
+    cSUBWHERE = ""
+    If MDG("Usar Filtro Avancado") Then
+      cARQ = PegPath("PATH", "PF")
+      aARQUIVOS = Array(cARQ)
+      ''Posicao 12 Nome da Tabela
+      ''Posicao 13 Nome da Tabela
+      aRELCFG = Array("", "", "", 0, False, _
+                      False, "", "", "", "", "", _
+                      False, "PF", "PF", "", "")
+      FrmFiltro.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
+      End If
+    Else
+      ePASS01 = aORDES
+      frmLocalizaa.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "L%", "L%", "="), eRETU01, eRETU02)
+      End If
+    End If
+    FilRelat
+
+  Case "ESC"
+    CmdEscolher
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02, , 1
+    End If
+  Case "SAI"
+    cmdSair
+  End Select
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 
 End Sub
 

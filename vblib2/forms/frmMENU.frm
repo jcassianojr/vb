@@ -242,11 +242,11 @@ Dim iLOOP As Integer
 Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
-    txtFields(2) = indice.Value
-    txtFields(3) = Cadastro.Value
+    TXTFIELDS(2) = indice.Value
+    TXTFIELDS(3) = Cadastro.Value
 
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = txtFields(iLOOP)
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
   End If
@@ -277,11 +277,11 @@ Private Sub Form_Load()
   aPAD = Array("", "", 0, 0)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    txtFields(iLOOP) = aVAL(iLOOP)
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   'ajustar depois para nao precisar txtfiels 3 4
-  indice.Value = txtFields(2)
-  Cadastro.Value = txtFields(3)
+  indice.Value = TXTFIELDS(2)
+  Cadastro.Value = TXTFIELDS(3)
 
 
 End Sub

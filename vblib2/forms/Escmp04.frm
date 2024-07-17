@@ -210,8 +210,8 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     iImage = 6
     cARQRTF = PegPath("PATH", "IMGMP04CPF")
     Load frmIMAGENS
-    frmIMAGENS.txtFields(0).Visible = False
-    frmIMAGENS.txtFields(1).Visible = False
+    frmIMAGENS.TXTFIELDS(0).Visible = False
+    frmIMAGENS.TXTFIELDS(1).Visible = False
     frmIMAGENS.Escolher(0).Visible = False
     frmIMAGENS.Escolher(1).Visible = False
     frmIMAGENS.Escolher(2).Visible = False

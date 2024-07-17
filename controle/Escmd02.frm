@@ -72,51 +72,51 @@ Dim cSUBWHERE As String
 Dim cARQMD As String
 
 Private Sub CmdEscolher()
-    lRETU = True
-    Grid.Col = 0
-    eRETU01 = Grid
-    Grid.Col = 1
-    eRETU02 = Grid
-    Grid.Col = 2
-    eRETU03 = Grid
-    Unload Me
+  lRETU = True
+  Grid.Col = 0
+  eRETU01 = Grid
+  Grid.Col = 1
+  eRETU02 = Grid
+  Grid.Col = 2
+  eRETU03 = Grid
+  Unload Me
 End Sub
 
 Private Sub cmdSair()
-    Screen.MousePointer = vbDefault
-    Unload Me
+  Screen.MousePointer = vbDefault
+  Unload Me
 End Sub
 
 Private Sub FilRelat()
-    Dim cSQL As String
-    If Len(cSUBWHERE) = 0 Then
-        cSQL = "SELECT CODIGO1,DESCRICAO,VALOR FROM MD02 WHERE CODIGO='" & tipocodigo() & "' ORDER BY " & cORDEM
-    Else
-        cSQL = "SELECT CODIGO1,DESCRICAO,VALOR FROM MD02 WHERE CODIGO='" & tipocodigo() & "' AND " & cSUBWHERE & " ORDER BY " & cORDEM
-    End If
-    MontaGridFast Grid, 3, Array(1200, 3000, 800), Array("Código", "Descrição", "Valor"), _
-        Array("L$CODIGO1", "DESCRICAO", "VALOR"), cARQMD, cSQL
+  Dim cSQL As String
+  If Len(cSUBWHERE) = 0 Then
+    cSQL = "SELECT CODIGO1,DESCRICAO,VALOR FROM MD02 WHERE CODIGO='" & tipocodigo() & "' ORDER BY " & cORDEM
+  Else
+    cSQL = "SELECT CODIGO1,DESCRICAO,VALOR FROM MD02 WHERE CODIGO='" & tipocodigo() & "' AND " & cSUBWHERE & " ORDER BY " & cORDEM
+  End If
+  MontaGridFast Grid, 3, Array(1200, 3000, 800), Array("Código", "Descrição", "Valor"), _
+                Array("L$CODIGO1", "DESCRICAO", "VALOR"), cARQMD, cSQL
 End Sub
 
 Private Sub Form_Load()
-    CenterFormToScreen Me
-    cARQMD = zMANA5EMP
-    cARQMD = GeraConn(cARQMD, "JETFOX")
-    aORDEM = Array("CODIGO1", "DESCRICAO")
-    aORDES = Array("CODIGO1", "Descricao")
-    cORDEM = "CODIGO1"
-    cSUBWHERE = ""
-    xmontatoolbar Me.Toolbar1, "escMD02", True
-    FilRelat
+  CenterFormToScreen Me
+  cARQMD = zMANA5EMP
+  cARQMD = GeraConn(cARQMD, "JETFOX")
+  aORDEM = Array("CODIGO1", "DESCRICAO")
+  aORDES = Array("CODIGO1", "Descricao")
+  cORDEM = "CODIGO1"
+  cSUBWHERE = ""
+  xmontatoolbar Me.Toolbar1, "escMD02", True
+  FilRelat
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
-    If KeyAscii = 13 Then
-        CmdEscolher
-    End If
-    If KeyAscii > 31 And KeyAscii < 123 Then
-        LocalizaGrid Grid, Chr(KeyAscii), 1, False
-    End If
+  If KeyAscii = 13 Then
+    CmdEscolher
+  End If
+  If KeyAscii > 31 And KeyAscii < 123 Then
+    LocalizaGrid Grid, Chr(KeyAscii), 1, False
+  End If
 End Sub
 
 'Private Sub Grid_SelChange()
@@ -130,114 +130,114 @@ End Sub
 'End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Dim sButton As String
-    Dim cARQTMP As String
-    Dim sSQL As String
-    Dim cDESCRICAO As String
-    sButton = Button
-    sButton = Left(UCase(Replace(sButton, "&", "")), 3)
-    
-    
-    lRETU = False
-    If Not AcessaBtnOld("escMD02", Button.Index) Then
-        Exit Sub
-    End If
+  Dim sButton As String
+  Dim cARQTMP As String
+  Dim sSQL As String
+  Dim cDESCRICAO As String
+  sButton = Button
+  sButton = Left(UCase(Replace(sButton, "&", "")), 3)
 
-    GravaLog 0, Button.Index, sButton, "escMD02"
-    
-    Select Case sButton
-    Case "EXC", "DEL"
-        Grid.Col = 0
-        cCONJUNTO = Trim(Grid)
-        cARQTMP = GeraConn(zMANA5EMP, "SDECDX")
-        ''sSQL = "select codigo from MD02 WHERE CODIGO='" & tipocodigo() & "' AND CODIGO1='" & cCONJUNTO & "'"
-        sSQL = "select codigo from MD02 WHERE =" & PadRight(tipocodigo(), 12) & cCONJUNTO
-        If ApagaSQLP(cARQTMP, sSQL) Then
-            FilRelat
-        End If
-    Case "NOV"
-        cCONJUNTO = InputBox("Digite o Codigo", "Inclusão ", "__")
-        cDESCRICAO = InputBox("Digite a descricao", "Inclusão ", "__")
-        If Len(cCONJUNTO) = 0 Or Len(cDESCRICAO) = 0 Then
-            Alert ("Preencha Codigo e Descricao")
-            Exit Sub
-        End If
-        cARQTMP = GeraConn(zMANA5EMP, "SDECDX")
-        sSQL = "select codigo from MD02 WHERE CODIGO='" & tipocodigo() & "' AND CODIGO1='" & cCONJUNTO & "'"
-        IncluiSQL cARQTMP, sSQL, 3, Array("CODIGO", "CODIGO1", "DESCRICAO"), _
-        Array(tipocodigo(), cCONJUNTO, cDESCRICAO), True, True
-        FilRelat
-    Case "ORD"
-        ePASS01 = aORDES
-        escOrdem.Show vbModal, Me
-        If lRETU Then
-            cORDEM = aORDEM(eRETU01)
-            FilRelat
-        End If
-    Case "FIL"
-        cSUBWHERE = ""
-        If MDG("Usar Filtro Avancado") Then
-            aARQUIVOS = Array(cARQMD)
-            ''Posicao 12 Nome da Tabela
-            ''Posicao 13 Nome da Tabela
-            aRELCFG = Array("", "", "", 0, False, _
-                            False, "", "", "", "", "", _
-                            False, "MD02", "MD02", "", "")
-            FrmFiltro.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
-            End If
-        Else
-            ePASS01 = aORDES
-            frmLocalizaa.Show vbModal, Me
-            If lRETU Then
-                cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "L%"), eRETU01, eRETU02)
-            End If
-        End If
-        FilRelat
-    Case "IMP"
-        cTIPO = "R"
-        zgrp = "MD"
-        escRPT.Show vbModal, Me
-    Case "ESC"
-        CmdEscolher
-    Case "LOC"
-        ePASS01 = aORDES
-        frmLocalizaa.Show vbModal, Me
-        If lRETU Then
-            LocalizaGrid Grid, eRETU01, eRETU02, , 1
-        End If
-    Case "SAI"
-        cmdSair
-    End Select
+
+  lRETU = False
+  If Not AcessaBtnOld("escMD02", Button.Index) Then
+    Exit Sub
+  End If
+
+  GravaLog 0, Button.Index, sButton, "escMD02"
+
+  Select Case sButton
+  Case "EXC", "DEL"
+    Grid.Col = 0
+    cCONJUNTO = Trim(Grid)
+    cARQTMP = GeraConn(zMANA5EMP, "SDECDX")
+    ''sSQL = "select codigo from MD02 WHERE CODIGO='" & tipocodigo() & "' AND CODIGO1='" & cCONJUNTO & "'"
+    sSQL = "select codigo from MD02 WHERE =" & PadRight(tipocodigo(), 12) & cCONJUNTO
+    If ApagaSQLP(cARQTMP, sSQL) Then
+      FilRelat
+    End If
+  Case "NOV"
+    cCONJUNTO = InputBox("Digite o Codigo", "Inclusão ", "__")
+    cDESCRICAO = InputBox("Digite a descricao", "Inclusão ", "__")
+    If Len(cCONJUNTO) = 0 Or Len(cDESCRICAO) = 0 Then
+      Alert ("Preencha Codigo e Descricao")
+      Exit Sub
+    End If
+    cARQTMP = GeraConn(zMANA5EMP, "SDECDX")
+    sSQL = "select codigo from MD02 WHERE CODIGO='" & tipocodigo() & "' AND CODIGO1='" & cCONJUNTO & "'"
+    IncluiSQL cARQTMP, sSQL, 3, Array("CODIGO", "CODIGO1", "DESCRICAO"), _
+              Array(tipocodigo(), cCONJUNTO, cDESCRICAO), True, True
+    FilRelat
+  Case "ORD"
+    ePASS01 = aORDES
+    escOrdem.Show vbModal, Me
+    If lRETU Then
+      cORDEM = aORDEM(eRETU01)
+      FilRelat
+    End If
+  Case "FIL"
+    cSUBWHERE = ""
+    If MDG("Usar Filtro Avancado") Then
+      aARQUIVOS = Array(cARQMD)
+      ''Posicao 12 Nome da Tabela
+      ''Posicao 13 Nome da Tabela
+      aRELCFG = Array("", "", "", 0, False, _
+                      False, "", "", "", "", "", _
+                      False, "MD02", "MD02", "", "")
+      FrmFiltro.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = Replace(Replace(eRETU01, "{", ""), "}", "")
+      End If
+    Else
+      ePASS01 = aORDES
+      frmLocalizaa.Show vbModal, Me
+      If lRETU Then
+        cSUBWHERE = MontaFiltro(aORDEM, Array("L%", "L%"), eRETU01, eRETU02)
+      End If
+    End If
+    FilRelat
+  Case "IMP"
+    cTIPO = "R"
+    zgrp = "MD"
+    escRPT.Show vbModal, Me
+  Case "ESC"
+    CmdEscolher
+  Case "LOC"
+    ePASS01 = aORDES
+    frmLocalizaa.Show vbModal, Me
+    If lRETU Then
+      LocalizaGrid Grid, eRETU01, eRETU02, , 1
+    End If
+  Case "SAI"
+    cmdSair
+  End Select
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    Screen.MousePointer = vbDefault
+  Screen.MousePointer = vbDefault
 End Sub
 
 Private Function tipocodigo()
-    tipocodigo = ""
-    Select Case iMD02
-    Case 1
-        tipocodigo = "TIPINS"
-    Case 2
-        tipocodigo = "SETINS"
-    Case 3
-        tipocodigo = "CRRS02"
-    Case 4
-        tipocodigo = "SIMNAO"
-    Case 5
-        tipocodigo = "MONTAGEM"
-    Case 6
-        tipocodigo = "MARINS"
-    Case 7
-        tipocodigo = "APLINS"
-    Case 8
-        tipocodigo = "GRUPOMAQ"
-    Case 9
-        tipocodigo = "TIPOEQI"
-    End Select
+  tipocodigo = ""
+  Select Case iMD02
+  Case 1
+    tipocodigo = "TIPINS"
+  Case 2
+    tipocodigo = "SETINS"
+  Case 3
+    tipocodigo = "CRRS02"
+  Case 4
+    tipocodigo = "SIMNAO"
+  Case 5
+    tipocodigo = "MONTAGEM"
+  Case 6
+    tipocodigo = "MARINS"
+  Case 7
+    tipocodigo = "APLINS"
+  Case 8
+    tipocodigo = "GRUPOMAQ"
+  Case 9
+    tipocodigo = "TIPOEQI"
+  End Select
 End Function
 
 

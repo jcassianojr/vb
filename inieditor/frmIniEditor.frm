@@ -52,7 +52,7 @@ Begin VB.Form frmIniEditor
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "frmIniEditor.frx":058A
-            TextSave        =   "14:02"
+            TextSave        =   "14:25"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6

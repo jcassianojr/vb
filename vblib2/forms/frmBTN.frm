@@ -313,11 +313,11 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     'ajustar depois para nao precisar txtfiels 3 4
-    txtFields(3) = indice.Value
-    txtFields(4) = icone.Value
+    TXTFIELDS(3) = indice.Value
+    TXTFIELDS(4) = icone.Value
 
     For iLOOP = 0 To nCAMPOS - 2
-      aVAL(iLOOP) = txtFields(iLOOP)
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     aVAL(6) = FixNumBol(Check2.Value)
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
@@ -348,12 +348,12 @@ Private Sub Form_Load()
   aPAD = Array("", "", "", 0, 0, "", False)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 2
-    txtFields(iLOOP) = aVAL(iLOOP)
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   Check2.Value = aVAL(6)
   'ajustar depois para nao precisar txtfiels 3 4
-  indice.Value = txtFields(3)
-  icone.Value = txtFields(4)
+  indice.Value = TXTFIELDS(3)
+  icone.Value = TXTFIELDS(4)
 
 End Sub
 

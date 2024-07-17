@@ -300,7 +300,7 @@ Private Sub cmdOK_Click()
 
 
   ''Armazena Codigo empresa
-1 zEMPRESA = FixInt(txtempresa.Value)
+1 zEMPRESA = FixInt(TxtEmpresa.Value)
 2 If zEMPRESA < 0 Then zEMPRESA = 1
 
 
@@ -486,7 +486,7 @@ End Sub
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   zMES = mes.Value
   zANO = ano.Value
-  zEMPRESA = txtempresa.Value
+  zEMPRESA = TxtEmpresa.Value
 End Sub
 
 'Private Sub maisemp_Click()
@@ -503,7 +503,7 @@ Private Sub Form_Load()
   EnableCloseButton Me.hWnd, False
   txtUSUARIO = NetworkUserName()
   nTENTA = 0
-  txtempresa.Value = 1
+  TxtEmpresa.Value = 1
   mes.Value = Month(Date)
   ano.Value = Year(Date)
   nTEMPO = 0
