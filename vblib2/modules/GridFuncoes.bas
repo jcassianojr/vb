@@ -494,7 +494,7 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
   lOPEN = True
 
   oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
-
+  
   oGRID.Visible = False
   With oGRID
     .FixedCols = 0
