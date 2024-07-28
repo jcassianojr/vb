@@ -109,10 +109,11 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     GeraConn = "[XLSX]" & cARQ
   Case "XLSDRV"
     GeraConn = "[XLSDRV]" & cARQ
-  Case "SQLLITE" Or InStr(LCase(cARQ), ".db") > 0  'http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
-    GeraConn = "[SQLLITE]" & cARQ
-  Case "SQLLITE3" Or InStr(LCase(cARQ), ".sqlite3") Or InStr(LCase(cARQ), ".fossil") Or InStr(LCase(cARQ), ".db3") > 0  'http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
-    GeraConn = "[SQLLITE3]" & cARQ
+  Case "SQLITE" Or InStr(LCase(cARQ), ".db") > 0 Or InStr(LCase(cARQ), ".sqlite3") _
+                 Or InStr(LCase(cARQ), ".fossil") Or InStr(LCase(cARQ), ".db3") > 0 _
+                 Or InStr(LCase(cARQ), ".sqlite")
+        'http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
+    GeraConn = "[SQLITE]" & cARQ
   Case "JETTXT"
     GeraConn = "[JETTXT]" & cARQ
   Case "DBFIII"
@@ -229,24 +230,6 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     TipoConn = Array("ADO", cARQ, "DBF")
     Exit Function
   End If
-  'sde
-  'If InStr(cARQTMP, "[SDE") > 0 Then
-  'acima agora e jetfox
-  ' If InStr(cARQTMP, "[SDECDX]") > 0 Then
-  '     TipoConn = Array("SDE", cARQ, "SDECDX")
-  '     Exit Function
-  ' End If
-  'agora usa adsnxt
-  '   If InStr(cARQTMP, "[SDENTX]") > 0 Then
-  '      TipoConn = Array("SDE", cARQ, "SDENTX")
-  '      Exit Function
-  '  End If
-  ' pouco uso de indices nsx mas ver outra solucao ou converter via dbu
-  '  If InStr(cARQTMP, "[SDENSX]") > 0 Then
-  '      TipoConn = Array("SDE", cARQ, "SDENSX")
-  '      Exit Function
-  '  End If
-  'End If
   If InStr(cARQTMP, "[XLSDRV]") > 0 Then
     cARQ = Replace(cARQ, "[XLSDRV]", "")
     cARQ = "DRIVER=Microsoft Excel Driver (*.xls);" & "DBQ=" & cARQ
@@ -267,14 +250,8 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     TipoConn = Array("ADO", cARQ, "SQLSERVER")
     Exit Function
   End If
-  If InStr(cARQTMP, "[SQLLITE]") > 0 Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
-    cARQ = Replace(cARQ, "[SQLLITE]", "")
-    cARQ = "Driver={SQLite ODBC Driver};Database=" + cARQ + ";"
-    TipoConn = Array("ADO", cARQ, "SQLITE")
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[SQLLITE3]") > 0 Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
-    cARQ = Replace(cARQ, "[SQLLITE3]", "")
+  If InStr(cARQTMP, "[SQLITE]") > 0 Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
+    cARQ = Replace(cARQ, "[SQLITE]", "")
     cARQ = "Driver={SQLite3 ODBC Driver};Database=" + cARQ + ";"
     TipoConn = Array("ADO", cARQ, "SQLITE")
     Exit Function
