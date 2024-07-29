@@ -1,0 +1,14 @@
+
+Re: VB6 Properties window disappears
+
+    I fixed it. You need to add "property explorer" and "properties window" to the toolbar menu at the top of VB6
+
+    1. right-clicked on one of the toolbars
+    2. selected 'customize'
+    3. Clicked on the 'Commands' Tab
+    4. Under Commands, Click 'View'
+    5. Select "property explorer" and "properties window" and drag them onto the offending menu in VB
+    6. Quit out of VB and then went back in.
+
+    I think I removed these icons from the toolbar which may have confused VB6. 
+
