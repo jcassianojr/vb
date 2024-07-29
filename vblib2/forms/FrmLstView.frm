@@ -1,7 +1,9 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form FrmLstView 
    Caption         =   "Visualizador de LST"
    ClientHeight    =   7560
@@ -13,10 +15,22 @@ Begin VB.Form FrmLstView
    ScaleHeight     =   7560
    ScaleWidth      =   10365
    StartUpPosition =   3  'Windows Default
+   Begin VBFLXGRD17.VBFlexGrid Grid 
+      Height          =   5295
+      Left            =   120
+      TabIndex        =   26
+      Top             =   1560
+      Width           =   7575
+      _ExtentX        =   13361
+      _ExtentY        =   9340
+      FixedRows       =   0
+      Rows            =   0
+      ColWidthMax     =   333
+   End
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
       Left            =   120
-      TabIndex        =   26
+      TabIndex        =   25
       Top             =   1080
       Width           =   1725
       _ExtentX        =   3043
@@ -37,7 +51,7 @@ Begin VB.Form FrmLstView
       Height          =   255
       Index           =   3
       Left            =   9840
-      TabIndex        =   8
+      TabIndex        =   7
       ToolTipText     =   "Caminho Inicial"
       Top             =   300
       Width           =   375
@@ -58,7 +72,7 @@ Begin VB.Form FrmLstView
       Height          =   255
       Index           =   2
       Left            =   9840
-      TabIndex        =   7
+      TabIndex        =   6
       ToolTipText     =   "Caminho Inicial"
       Top             =   60
       Width           =   375
@@ -79,7 +93,7 @@ Begin VB.Form FrmLstView
       Height          =   255
       Index           =   0
       Left            =   9480
-      TabIndex        =   6
+      TabIndex        =   5
       ToolTipText     =   "Caminho Inicial"
       Top             =   60
       Width           =   375
@@ -100,7 +114,7 @@ Begin VB.Form FrmLstView
       Height          =   255
       Index           =   1
       Left            =   9480
-      TabIndex        =   5
+      TabIndex        =   4
       ToolTipText     =   "Caminho Servidor"
       Top             =   300
       Width           =   375
@@ -123,14 +137,14 @@ Begin VB.Form FrmLstView
       Left            =   9600
       Picture         =   "FrmLstView.frx":058A
       Style           =   1  'Graphical
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   6600
       Width           =   675
    End
    Begin VB.TextBox TxtExecutar 
       Height          =   435
       Left            =   120
-      TabIndex        =   3
+      TabIndex        =   2
       Text            =   "c:\plugin\lstview\log0290.exe"
       Top             =   600
       Width           =   7515
@@ -138,7 +152,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command2 
       Height          =   315
       Left            =   8040
-      TabIndex        =   2
+      TabIndex        =   1
       ToolTipText     =   "Renomear extensao do Arquivo de .LST para .TXT"
       Top             =   4800
       Width           =   2115
@@ -155,16 +169,6 @@ Begin VB.Form FrmLstView
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin MSFlexGridLib.MSFlexGrid Grid 
-      Height          =   5895
-      Left            =   120
-      TabIndex        =   1
-      Top             =   1560
-      Width           =   7635
-      _ExtentX        =   13467
-      _ExtentY        =   10398
-      _Version        =   393216
-   End
    Begin VB.TextBox Txtcaminho 
       Height          =   435
       Left            =   120
@@ -176,7 +180,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdConfImp 
       Height          =   375
       Left            =   8040
-      TabIndex        =   9
+      TabIndex        =   8
       Top             =   6120
       Width           =   2175
       _ExtentX        =   3836
@@ -196,7 +200,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdVisua 
       Height          =   375
       Left            =   8040
-      TabIndex        =   10
+      TabIndex        =   9
       Top             =   2040
       Width           =   2055
       _ExtentX        =   3625
@@ -216,7 +220,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdSendMail 
       Height          =   375
       Left            =   8040
-      TabIndex        =   11
+      TabIndex        =   10
       Top             =   5160
       Width           =   2175
       _ExtentX        =   3836
@@ -236,7 +240,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdLocaliza 
       Height          =   375
       Left            =   8040
-      TabIndex        =   12
+      TabIndex        =   11
       Top             =   2520
       Width           =   2055
       _ExtentX        =   3625
@@ -256,7 +260,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdPrinterPort 
       Height          =   375
       Left            =   8040
-      TabIndex        =   13
+      TabIndex        =   12
       Top             =   5640
       Width           =   2175
       _ExtentX        =   3836
@@ -276,7 +280,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command5 
       Height          =   375
       Left            =   7800
-      TabIndex        =   14
+      TabIndex        =   13
       TabStop         =   0   'False
       Top             =   6600
       Width           =   855
@@ -297,7 +301,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command6 
       Height          =   375
       Left            =   7800
-      TabIndex        =   15
+      TabIndex        =   14
       TabStop         =   0   'False
       Top             =   7080
       Width           =   795
@@ -318,7 +322,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command10 
       Height          =   375
       Left            =   8760
-      TabIndex        =   16
+      TabIndex        =   15
       TabStop         =   0   'False
       Top             =   6600
       Width           =   795
@@ -339,7 +343,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command4 
       Height          =   375
       Left            =   8040
-      TabIndex        =   17
+      TabIndex        =   16
       TabStop         =   0   'False
       Top             =   3000
       Width           =   2055
@@ -360,7 +364,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   375
       Left            =   8040
-      TabIndex        =   18
+      TabIndex        =   17
       TabStop         =   0   'False
       Top             =   3480
       Width           =   2055
@@ -381,7 +385,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdExcluir 
       Height          =   435
       Left            =   8040
-      TabIndex        =   19
+      TabIndex        =   18
       TabStop         =   0   'False
       Top             =   1560
       Width           =   2055
@@ -402,7 +406,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton btnOpen 
       Height          =   375
       Left            =   8040
-      TabIndex        =   20
+      TabIndex        =   19
       TabStop         =   0   'False
       Top             =   1080
       Width           =   2055
@@ -423,7 +427,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command3 
       Height          =   375
       Left            =   7800
-      TabIndex        =   21
+      TabIndex        =   20
       TabStop         =   0   'False
       Top             =   120
       Width           =   1575
@@ -444,7 +448,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command1 
       Height          =   375
       Left            =   8040
-      TabIndex        =   22
+      TabIndex        =   21
       TabStop         =   0   'False
       Top             =   600
       Width           =   2055
@@ -465,7 +469,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdFiltra 
       Height          =   675
       Left            =   8040
-      TabIndex        =   23
+      TabIndex        =   22
       TabStop         =   0   'False
       Top             =   3960
       Width           =   675
@@ -487,7 +491,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command7 
       Height          =   675
       Left            =   8760
-      TabIndex        =   24
+      TabIndex        =   23
       TabStop         =   0   'False
       Top             =   3960
       Width           =   675
@@ -509,7 +513,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command8 
       Height          =   675
       Left            =   9480
-      TabIndex        =   25
+      TabIndex        =   24
       TabStop         =   0   'False
       Top             =   3960
       Width           =   675
@@ -527,6 +531,25 @@ Begin VB.Form FrmLstView
          Strikethrough   =   0   'False
       EndProperty
       PictureAlignment=   2
+   End
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   6840
+      Top             =   1080
+      _ExtentX        =   1191
+      _ExtentY        =   1191
+   End
+   Begin VBCCR18.RichTextBox RichTextBox1 
+      Height          =   255
+      Left            =   5520
+      TabIndex        =   27
+      TabStop         =   0   'False
+      Top             =   1200
+      Visible         =   0   'False
+      Width           =   855
+      _ExtentX        =   1508
+      _ExtentY        =   450
+      MultiLine       =   -1  'True
+      TextRTF         =   "FrmLstView.frx":604E
    End
 End
 Attribute VB_Name = "FrmLstView"
@@ -547,7 +570,7 @@ Private Sub btnOpen_Click()
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = Txtcaminho.tEXT & Trim(Grid)
+  cARQRTF = TxtCaminho.tEXT & Trim(Grid)
   If FileExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
@@ -562,7 +585,7 @@ Private Sub CmdExcluir_Click()
   Grid.Col = 0
   cARQUIVO = Grid
   If Len(cARQUIVO) > 0 Then
-    cARQUIVO = Txtcaminho.tEXT & Grid
+    cARQUIVO = TxtCaminho.tEXT & Grid
     If MDG("Excluir " & cARQUIVO) Then
       DeleteFile cARQUIVO  'Kill cARQUIVO
       Command1_Click
@@ -599,13 +622,13 @@ Private Sub CmdIni_Click(Index As Integer)
   Case 3
     cCHAVE = "USO02"
   End Select
-  Txtcaminho.tEXT = PegPath(cCHAVE, UCase(cNOMEFOLHA), " ")
-  If Len(Trim(Txtcaminho.tEXT)) = 0 Then
-    Txtcaminho.tEXT = PegPath(cCHAVE, "CAMINHO", "C:\TEMP")
+  TxtCaminho.tEXT = PegPath(cCHAVE, UCase(cNOMEFOLHA), " ")
+  If Len(Trim(TxtCaminho.tEXT)) = 0 Then
+    TxtCaminho.tEXT = PegPath(cCHAVE, "CAMINHO", "C:\TEMP")
   End If
 
-  If InStr(Txtcaminho.tEXT, "%USUARIO%") > 0 Then
-    Txtcaminho.tEXT = Replace(Txtcaminho.tEXT, "%USUARIO%", cNOMEFOLHA)
+  If InStr(TxtCaminho.tEXT, "%USUARIO%") > 0 Then
+    TxtCaminho.tEXT = Replace(TxtCaminho.tEXT, "%USUARIO%", cNOMEFOLHA)
   End If
   Command1_Click
 End Sub
@@ -620,7 +643,7 @@ End Sub
 
 Private Sub CmdPrinterPort_Click()
   Grid.Col = 0
-  cARQRTF = Txtcaminho.tEXT & Trim(Grid)
+  cARQRTF = TxtCaminho.tEXT & Trim(Grid)
   If Right(UCase(cARQRTF), 4) = ".PSR" Or Right(UCase(cARQRTF), 4) = ".QRP" Then
     Alert "Somente LST/TXT"
     Exit Sub
@@ -658,7 +681,7 @@ End Sub
 Private Sub CmdSendMail_Click()
   Dim cARQUIVO As String
   Grid.Col = 0
-  cARQUIVO = Txtcaminho.tEXT & Trim(Grid)
+  cARQUIVO = TxtCaminho.tEXT & Trim(Grid)
   'servidor,porta,from,to,assunto,anexos,mensagem,enviar e sair
   ePASS01 = Array("", _
                   "", _
@@ -687,20 +710,29 @@ Private Sub Command1_Click()
   Dim lINCLUI As Boolean
   On Error Resume Next
 
-  cDRIVE = Left(Txtcaminho.tEXT, 1)
+  cDRIVE = Left(TxtCaminho.tEXT, 1)
   ChDrive (cDRIVE)
-  cDIRER = Mid(Txtcaminho.tEXT, 3)
+  cDIRER = Mid(TxtCaminho.tEXT, 3)
   ChDir cDIRER
 
+  Grid.Rows = 1
   Grid.Clear
-  Grid.Rows = 0
+  Grid.cols = 2
+  Grid.Col = 0
+  
+  Grid.AllowUserResizing = FlexAllowUserResizingBoth
+  Grid.ColWidthMax = 3001
+  Grid.ColAlignment(0) = FlexAlignmentLeftCenter
   Grid.ColWidth(0) = 3000
   Grid.ColWidth(1) = 2000
-  Grid.ColAlignment(0) = flexAlignLeftCenter
-  If Right(Txtcaminho.tEXT, 1) <> "\" Then
-    Txtcaminho.tEXT = Txtcaminho.tEXT + "\"
+  Grid.Col = 0
+ Grid.tEXT = "Arquivo"
+ Grid.Col = 1
+ Grid.tEXT = "Data Hora"
+  If Right(TxtCaminho.tEXT, 1) <> "\" Then
+    TxtCaminho.tEXT = TxtCaminho.tEXT + "\"
   End If
-  Set thisFolder = FS.GetFolder(Txtcaminho.tEXT)
+  Set thisFolder = FS.GetFolder(TxtCaminho.tEXT)
   Set allfiles = thisFolder.Files
   For Each thisFile In allfiles
     cFILENAME = UCase(thisFile.Name)
@@ -733,9 +765,9 @@ Private Sub Command10_Click()
   Dim cORIGEM As String
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = Txtcaminho.tEXT & cNOME
+  cORIGEM = TxtCaminho.tEXT & cNOME
   If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
-    txttoRTF (cORIGEM)
+    txttoRTF cORIGEM, TrocaExt(cORIGEM, "RTF")
     Command1_Click
   Else
     Alert ("Nao e TXT ou Lst")
@@ -749,8 +781,8 @@ Private Sub Command2_Click()
   Dim nRETU As Integer
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = Txtcaminho.tEXT & cNOME
-  cDESTINO = Txtcaminho.tEXT & NomeArq(cNOME, True) & ".txt"
+  cORIGEM = TxtCaminho.tEXT & cNOME
+  cDESTINO = TxtCaminho.tEXT & NomeArq(cNOME, True) & ".txt"
   nRETU = CopyFileWindowsWay(cORIGEM, cDESTINO)
   If nRETU = 0 And MDG("Apagar arquivo lst") Then
     DeleteFile cORIGEM  'Kill cORIGEM
@@ -763,7 +795,7 @@ Private Sub Command3_Click()
   DLG.BrowseFolder "Escolha uma Pasta", Pastas, False
   If DLG.Cancel = True Then Exit Sub
   ' Mostra o caminho escolhido
-  Txtcaminho.tEXT = DLG.Path & "\"
+  TxtCaminho.tEXT = DLG.Path & "\"
   Command1_Click
 End Sub
 
@@ -771,7 +803,7 @@ Private Sub Command4_Click()
 ''Dim carq As String
   Dim cNOME As String
   Grid.Col = 0
-  cNOME = Txtcaminho.tEXT & Trim(Grid)
+  cNOME = TxtCaminho.tEXT & Trim(Grid)
   ShellEx cNOME, essSW_SHOWDEFAULT, , , , Me.hWnd
 End Sub
 
@@ -780,9 +812,9 @@ Private Sub Command5_Click()
   Dim cORIGEM As String
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = Txtcaminho.tEXT & cNOME
+  cORIGEM = TxtCaminho.tEXT & cNOME
   If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
-    txttohtml (cORIGEM)
+    txttohtml cORIGEM, TrocaExt(cORIGEM, "htm")
     Command1_Click
   Else
     Alert ("Nao e TXT ou Lst")
@@ -794,7 +826,7 @@ Private Sub Command6_Click()
   Grid.Col = 0
   cNOME = Trim(Grid)
   If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
-    ePASS01 = Txtcaminho.tEXT & cNOME
+    ePASS01 = TxtCaminho.tEXT & cNOME
     formConvertToPDF.Show vbModal, Me
     Command1_Click
   Else
@@ -823,10 +855,11 @@ Private Sub Command9_Click()
   'Dim oZIP As cZip
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = Txtcaminho.tEXT & cNOME
+  cORIGEM = TxtCaminho.tEXT & cNOME
   If InStr(UCase(cNOME), ".ZIP") > 0 Then
     Alert ("Ja e um zip")
   Else
+    Alert "ainda nao implementado"
     ' Set oZIP = New cZip
     'oZIP.ZipFile = cORIGEM & ".ZIP"
     'oZIP.StoreFolderNames = False
@@ -851,35 +884,93 @@ Private Sub Grid_DblClick()
   Dim cARQ As String
   Dim cCOMP As String
   Dim cNOME As String
+  Dim cEXTENSAO As String
+  
+  If Grid.Row = 0 Then
+     Exit Sub
+  End If
+  
   Grid.Col = 0
   cNOME = Trim(Grid)
   cCOMP = UCase(Trim(Grid))
-
-  If InStr(cCOMP, ".ZIP") > 0 Then
-    Alert ("Sem Visualizacao para Zip")
-    Exit Sub
+  cARQRTF = TxtCaminho.tEXT & cNOME
+  
+  Select Case cEXTENSAO
+         Case "ZIP"
+              Alert ("Sem Visualizacao para Zip")
+         Case "PSR"
+              cARQ = "rptview " & TxtCaminho.tEXT & cNOME
+              Shell cARQ, vbMaximizedFocus
+         Case "QRP"
+              cARQ = "qrpview " & TxtCaminho.tEXT & cNOME
+              Shell cARQ, vbMaximizedFocus
+         Case "PDF"
+              cARQ = TxtCaminho.tEXT & cNOME
+              ShellEx cARQ, essSW_SHOWDEFAULT, , , , Me.hWnd
+         Case "HTM"
+              If MDG("Usar Interno") Then
+                 ePASS03 = 3
+                 PrintPreview1.ShowPreview
+              Else
+                cARQ = TxtCaminho.tEXT & cNOME
+                ShellEx cARQ, essSW_SHOWDEFAULT, , , , Me.hWnd
+              End If
+          Case "RTF"
+               ePASS03 = 2
+              PrintPreview1.ShowPreview
+         Case Else
+            'carq = "log0290 " & Txtcaminho.Text & cNOME
+              If MDG("Usar Interno") Then
+                 ePASS03 = 1
+                 PrintPreview1.ShowPreview
+              Else
+                cARQ = Trim(TxtExecutar.tEXT) & " " & TxtCaminho.tEXT & cNOME
+                Shell cARQ, vbMaximizedFocus
+              End If
+  End Select
+  
+End Sub
+Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+  If ePASS03 = 1 Then  'TXT
+    MyPrintingTXT
   End If
-  If InStr(cCOMP, ".PSR") > 0 Then
-    cARQ = "rptview " & Txtcaminho.tEXT & cNOME
-    Shell cARQ, vbMaximizedFocus
-  Else
-    If InStr(cCOMP, ".QRP") > 0 Then
-      cARQ = "qrpview " & Txtcaminho.tEXT & cNOME
-      Shell cARQ, vbMaximizedFocus
-      'ShellEx cNOME, essSW_SHOWDEFAULT, , , , Me.hwnd
-    Else
-      If InStr(cCOMP, ".PDF") > 0 Or InStr(cCOMP, ".HTM") > 0 Or InStr(cCOMP, ".RTF") > 0 Then
-        cARQ = Txtcaminho.tEXT & cNOME
-        ShellEx cARQ, essSW_SHOWDEFAULT, , , , Me.hWnd
-      Else
-        'carq = "log0290 " & Txtcaminho.Text & cNOME
-        cARQ = Trim(TxtExecutar.tEXT) & " " & Txtcaminho.tEXT & cNOME
-        Shell cARQ, vbMaximizedFocus
-      End If
-    End If
+  If ePASS03 = 2 Then  'rtf
+    MyPrintingRTF
+  End If
+  If ePASS03 = 3 Then  'HTML
+    MyPrintinghtml
   End If
 End Sub
-
+Public Sub MyPrintingTXT()
+  Dim fileFile As Integer
+  Dim STRBUFFER As String
+  'If Not FileExist(cARQRTF, True) Then 'ja checado na cmdvisual click
+  '    Exit Sub
+  ' End If
+  fileFile = FreeFile
+  Open cARQRTF For Input As #fileFile
+  Do While Not EOF(fileFile)
+    'read line
+    Input #fileFile, STRBUFFER
+    Printer.Print STRBUFFER
+  Loop
+  Close fileFile
+End Sub
+Public Sub MyPrintinghtml()
+  Dim cTEXTO As String
+  Dim cLINHA As String
+  Dim LINES() As String
+  Dim i As Integer
+  cTEXTO = FileText(cARQRTF)
+  cTEXTO = HtmlToText(cTEXTO)
+  LINES = Split(cLINHA, vbCrLf)
+  For i = 0 To UBound(LINES)
+    Printer.Print LINES(i)
+  Next
+End Sub
+Public Sub MyPrintingRTF()
+  PrinterEx.PrintRichTextBox RichTextBox1
+End Sub
 Private Sub Txtcaminho_LostFocus()
   Command1_Click
 End Sub

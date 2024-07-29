@@ -188,7 +188,9 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   'access
   If InStr(cARQTMP, "[JETMDB]") > 0 Then
     cARQ = Replace(cARQ, "[JETMDB]", "")
-    cARQ = cJetPro & cARQ
+    If InStr("PROVIDER", cARQTMP) = 0 Then
+       cARQ = cJetPro & cARQ
+    End If
     If Len(cUSER) > 0 Then
       cARQ = cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
     End If

@@ -1,23 +1,32 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escIMG 
    Caption         =   "Escolha o Codigo da Imagem"
-   ClientHeight    =   7230
+   ClientHeight    =   6675
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   9945
    HelpContextID   =   1001
    Icon            =   "escIMG.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   7230
+   ScaleHeight     =   6675
    ScaleWidth      =   9945
    StartUpPosition =   3  'Windows Default
+   Begin VBFLXGRD17.VBFlexGrid Grid 
+      Height          =   5655
+      Left            =   120
+      TabIndex        =   11
+      Top             =   120
+      Width           =   7575
+      _ExtentX        =   13361
+      _ExtentY        =   9975
+   End
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
       Left            =   8040
-      TabIndex        =   11
+      TabIndex        =   10
       Top             =   120
       Width           =   1725
       _ExtentX        =   3043
@@ -37,8 +46,8 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton Cmdexpall 
       Height          =   615
       Left            =   8040
-      TabIndex        =   1
-      Top             =   4680
+      TabIndex        =   0
+      Top             =   4920
       Width           =   1575
       _ExtentX        =   0
       _ExtentY        =   0
@@ -53,21 +62,10 @@ Begin VB.Form escIMG
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin MSFlexGridLib.MSFlexGrid Grid 
-      Height          =   5775
-      Left            =   120
-      TabIndex        =   0
-      ToolTipText     =   "Listas de Imagens"
-      Top             =   120
-      Width           =   7755
-      _ExtentX        =   13679
-      _ExtentY        =   10186
-      _Version        =   393216
-   End
    Begin XPControls.XPText Text1 
       Height          =   375
       Left            =   120
-      TabIndex        =   2
+      TabIndex        =   1
       Top             =   6000
       Width           =   7575
       _ExtentX        =   13361
@@ -87,8 +85,8 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton cmdsair 
       Height          =   435
       Left            =   8040
-      TabIndex        =   3
-      Top             =   4080
+      TabIndex        =   2
+      Top             =   4320
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
@@ -107,8 +105,8 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton cmdlocalizar 
       Height          =   435
       Left            =   8040
-      TabIndex        =   4
-      Top             =   2280
+      TabIndex        =   3
+      Top             =   2640
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
@@ -127,8 +125,8 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton CmdFiltro 
       Height          =   435
       Left            =   8040
-      TabIndex        =   6
-      Top             =   3480
+      TabIndex        =   5
+      Top             =   3600
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
@@ -147,8 +145,8 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton CmdOrdem 
       Height          =   435
       Left            =   8040
-      TabIndex        =   7
-      Top             =   2880
+      TabIndex        =   6
+      Top             =   3120
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
@@ -167,7 +165,7 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton Command1 
       Height          =   435
       Left            =   7920
-      TabIndex        =   8
+      TabIndex        =   7
       Top             =   6000
       Width           =   1575
       _ExtentX        =   2778
@@ -187,8 +185,8 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton novo 
       Height          =   435
       Left            =   8040
-      TabIndex        =   9
-      Top             =   600
+      TabIndex        =   8
+      Top             =   720
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
@@ -207,8 +205,8 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton cmdEditar 
       Height          =   435
       Left            =   8040
-      TabIndex        =   10
-      Top             =   1080
+      TabIndex        =   9
+      Top             =   1200
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
@@ -227,8 +225,8 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton apaga 
       Height          =   435
       Left            =   8040
-      TabIndex        =   5
-      Top             =   1560
+      TabIndex        =   4
+      Top             =   1920
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
@@ -328,12 +326,12 @@ Private Sub cmdEditar_Click()
   Grid.Col = 0
   ZGRP = Grid
   Load frmIMAGENS
-  frmIMAGENS.txtFields(0).Enabled = False
-  frmIMAGENS.txtFields(0).TabStop = False
-  frmIMAGENS.txtFields(0).Locked = True
-  frmIMAGENS.txtFields(1).Enabled = False
-  frmIMAGENS.txtFields(1).TabStop = False
-  frmIMAGENS.txtFields(1).Locked = True
+  frmIMAGENS.TXTFIELDS(0).Enabled = False
+  frmIMAGENS.TXTFIELDS(0).TabStop = False
+  frmIMAGENS.TXTFIELDS(0).Locked = True
+  frmIMAGENS.TXTFIELDS(1).Enabled = False
+  frmIMAGENS.TXTFIELDS(1).TabStop = False
+  frmIMAGENS.TXTFIELDS(1).Locked = True
   frmIMAGENS.Show vbModal
   FilRelat
   LocalizaGrid Grid, ZGRP
@@ -460,12 +458,12 @@ Private Sub Form_Load()
 
     Load frmIMAGENS
 
-    frmIMAGENS.txtFields(0).Enabled = False
-    frmIMAGENS.txtFields(0).TabStop = False
-    frmIMAGENS.txtFields(0).Locked = True
-    frmIMAGENS.txtFields(1).Enabled = False
-    frmIMAGENS.txtFields(1).TabStop = False
-    frmIMAGENS.txtFields(1).Locked = True
+    frmIMAGENS.TXTFIELDS(0).Enabled = False
+    frmIMAGENS.TXTFIELDS(0).TabStop = False
+    frmIMAGENS.TXTFIELDS(0).Locked = True
+    frmIMAGENS.TXTFIELDS(1).Enabled = False
+    frmIMAGENS.TXTFIELDS(1).TabStop = False
+    frmIMAGENS.TXTFIELDS(1).Locked = True
     frmIMAGENS.Show vbModal
     End
   End If

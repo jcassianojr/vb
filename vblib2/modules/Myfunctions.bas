@@ -822,7 +822,9 @@ Public Function FixStr(ByVal eVAR As Variant, _
       eVAR = ePAD
     End If
   End If
-  FixStr = CStr(eVAR)
+  If Not IsNull(eVAR) Then
+     FixStr = CStr(eVAR)
+  End If
   If UCase(eVAR) = "NULL" Then
     FixStr = ePAD
   End If
@@ -1525,7 +1527,7 @@ Public Function ShellEx( _
        Optional Owner As Long = 0 _
      ) As Boolean
   Dim lr As Long
-  Dim lErr As Long, sErr As Long
+  Dim lErr As Long, sErr As String
   If (InStr(UCase$(sFile), ".EXE") <> 0) Then
     eShowCmd = 0
   End If
@@ -1575,7 +1577,7 @@ Public Function ShellEx( _
       sErr = "Erro nao especificado."
     End Select
 
-    Err.Raise lErr, , App.EXEName & ".GShell", sErr
+  '  Err.Raise lErr, , App.EXEName & ".GShell", sErr
     ShellEx = False
   End If
 

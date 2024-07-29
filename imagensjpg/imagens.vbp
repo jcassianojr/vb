@@ -45,6 +45,7 @@ Module=mBrowseFolder; ..\vblib2\modules\mBrowseFolder.bas
 Module=modGDIPlusResize; ..\vblib2\modules\modGDIPlusResize.bas
 Module=Strings; ..\vblib2\modules\split.bas
 Module=mPrintPreview; ..\vblib2\modules\mPrintPreview.bas
+Object={2DA70529-3366-414A-B408-46083BCD481B}#1.8#0; VBFLXGRD17.OCX
 ResFile32="..\vblib2\Resources.res"
 IconForm="escIMG"
 Startup="Sub Main"
