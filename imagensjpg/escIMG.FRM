@@ -340,8 +340,23 @@ Private Sub cmdEditar_Click()
 End Sub
 
 Private Sub Command1_Click()
-  Text1.Text = OpenArqExt(Me, "", "MDB", "Access *.MDB")
-  cARQRTF = Text1.Text
+  Dim sFILENAME As String
+  Dim sPath As String
+  Dim sRECENTFILE As String
+  Dim sFILTER As String
+
+
+  sPath = App.Path
+  sFILTER = "Access mdb" & vbNullChar & "*.mdb" & vbNullChar & "Sqlite" & vbNullChar & "*.sqlite"
+  sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
+  If Len(sFILENAME) = 0 Then
+    Text1.tEXT = ""
+    cARQRTF = ""
+    Exit Sub
+  End If
+  Text1.tEXT = sFILENAME
+  cARQRTF = GeraConn(sFILENAME)
+  FilRelat
 End Sub
 
 Private Sub Grid_KeyPress(KeyAscii As Integer)
@@ -433,7 +448,7 @@ Private Sub Form_Load()
     End If
   End If
 
-  Text1.Text = cARQRTF
+  Text1.tEXT = cARQRTF
 
   If Len(ZGRP) > 0 Then
 

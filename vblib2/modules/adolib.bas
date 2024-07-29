@@ -77,11 +77,6 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     GeraConn = "[JETFOX]" & cARQ
     Exit Function
   End If
-  ' acima usa fox
-  '   If cTIPO = "SDECDX" Or cTIPO = "SDEFOX" Then
-  '       GeraConn = "[SDECDX]" & cARQ
-  '       Exit Function
-  '   End If
   If cTIPO = "A16MDB" Or cTIPO = "A16JETMDB" Then
     GeraConn = "[A16MDB]" & cARQ
     Exit Function
@@ -96,10 +91,16 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     GeraConn = "[JETFOX]" & cARQ
     Exit Function
   End If
-  If InStr(cARQ, ".PD") Then  ' paradox
+  If InStr(cARQ, ".PD") > 0 Then   ' paradox
     nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
     cARQ = Mid(cARQ, 1, nPOS)
     GeraConn = "[JETPDX5]" & cARQ
+    Exit Function
+  End If
+  If cTIPO = "SQLITE" Or InStr(LCase(cARQ), ".sqlite") > 0 Or InStr(LCase(cARQ), ".sqlite3") > 0 _
+                 Or InStr(LCase(cARQ), ".fossil") > 0 Or InStr(LCase(cARQ), ".db3") > 0 _
+                 Or InStr(LCase(cARQ), ".db") > 0 Then
+    GeraConn = "[SQLITE]" & cARQ
     Exit Function
   End If
   Select Case cTIPO
@@ -109,10 +110,7 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     GeraConn = "[XLSX]" & cARQ
   Case "XLSDRV"
     GeraConn = "[XLSDRV]" & cARQ
-  Case "SQLITE" Or InStr(LCase(cARQ), ".db") > 0 Or InStr(LCase(cARQ), ".sqlite3") _
-                 Or InStr(LCase(cARQ), ".fossil") Or InStr(LCase(cARQ), ".db3") > 0 _
-                 Or InStr(LCase(cARQ), ".sqlite")
-        'http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
+  Case "SQLITE"
     GeraConn = "[SQLITE]" & cARQ
   Case "JETTXT"
     GeraConn = "[JETTXT]" & cARQ
@@ -619,7 +617,7 @@ Public Function ADORsStatus(ByRef eSTATUS)
 End Function
 
 Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String = "")
-  Dim errorObject As ADODB.error
+  Dim errorObject As ADODB.Error
   For Each errorObject In oErro
     cERRO = cERRO & " Ado Erro Numero: " & errorObject.Number & vbCrLf
     cERRO = cERRO & " Ado Descricao  : " & errorObject.Description & vbCrLf
