@@ -16,13 +16,13 @@ Begin VB.Form FrmLstView
    ScaleWidth      =   10365
    StartUpPosition =   3  'Windows Default
    Begin VBFLXGRD17.VBFlexGrid Grid 
-      Height          =   5295
+      Height          =   5175
       Left            =   120
-      TabIndex        =   26
-      Top             =   1560
+      TabIndex        =   25
+      Top             =   1680
       Width           =   7575
       _ExtentX        =   13361
-      _ExtentY        =   9340
+      _ExtentY        =   9128
       FixedRows       =   0
       Rows            =   0
       ColWidthMax     =   333
@@ -30,7 +30,7 @@ Begin VB.Form FrmLstView
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
       Left            =   120
-      TabIndex        =   25
+      TabIndex        =   24
       Top             =   1080
       Width           =   1725
       _ExtentX        =   3043
@@ -51,7 +51,7 @@ Begin VB.Form FrmLstView
       Height          =   255
       Index           =   3
       Left            =   9840
-      TabIndex        =   7
+      TabIndex        =   6
       ToolTipText     =   "Caminho Inicial"
       Top             =   300
       Width           =   375
@@ -72,7 +72,7 @@ Begin VB.Form FrmLstView
       Height          =   255
       Index           =   2
       Left            =   9840
-      TabIndex        =   6
+      TabIndex        =   5
       ToolTipText     =   "Caminho Inicial"
       Top             =   60
       Width           =   375
@@ -93,7 +93,7 @@ Begin VB.Form FrmLstView
       Height          =   255
       Index           =   0
       Left            =   9480
-      TabIndex        =   5
+      TabIndex        =   4
       ToolTipText     =   "Caminho Inicial"
       Top             =   60
       Width           =   375
@@ -114,7 +114,7 @@ Begin VB.Form FrmLstView
       Height          =   255
       Index           =   1
       Left            =   9480
-      TabIndex        =   4
+      TabIndex        =   3
       ToolTipText     =   "Caminho Servidor"
       Top             =   300
       Width           =   375
@@ -131,16 +131,6 @@ Begin VB.Form FrmLstView
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VB.CommandButton Command9 
-      Caption         =   "ZIP"
-      Height          =   555
-      Left            =   9600
-      Picture         =   "FrmLstView.frx":058A
-      Style           =   1  'Graphical
-      TabIndex        =   3
-      Top             =   6600
-      Width           =   675
-   End
    Begin VB.TextBox TxtExecutar 
       Height          =   435
       Left            =   120
@@ -154,10 +144,10 @@ Begin VB.Form FrmLstView
       Left            =   8040
       TabIndex        =   1
       ToolTipText     =   "Renomear extensao do Arquivo de .LST para .TXT"
-      Top             =   4800
-      Width           =   2115
-      _ExtentX        =   0
-      _ExtentY        =   0
+      Top             =   4680
+      Width           =   2055
+      _ExtentX        =   3625
+      _ExtentY        =   556
       Caption         =   ".LST -> .TXT"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -180,12 +170,12 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdConfImp 
       Height          =   375
       Left            =   8040
-      TabIndex        =   8
-      Top             =   6120
-      Width           =   2175
-      _ExtentX        =   3836
+      TabIndex        =   7
+      Top             =   6000
+      Width           =   2055
+      _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":0914
+      Picture         =   "FrmLstView.frx":058A
       Caption         =   "Configurar Impressora"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -200,12 +190,12 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdVisua 
       Height          =   375
       Left            =   8040
-      TabIndex        =   9
+      TabIndex        =   8
       Top             =   2040
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":0EAE
+      Picture         =   "FrmLstView.frx":0B24
       Caption         =   "Visualizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -220,12 +210,12 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdSendMail 
       Height          =   375
       Left            =   8040
-      TabIndex        =   10
-      Top             =   5160
-      Width           =   2175
-      _ExtentX        =   3836
+      TabIndex        =   9
+      Top             =   5040
+      Width           =   2055
+      _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":1448
+      Picture         =   "FrmLstView.frx":10BE
       Caption         =   "EnviarEmail"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -240,12 +230,12 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdLocaliza 
       Height          =   375
       Left            =   8040
-      TabIndex        =   11
+      TabIndex        =   10
       Top             =   2520
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":19E2
+      Picture         =   "FrmLstView.frx":1658
       Caption         =   "Localizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -260,12 +250,12 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdPrinterPort 
       Height          =   375
       Left            =   8040
-      TabIndex        =   12
-      Top             =   5640
-      Width           =   2175
-      _ExtentX        =   3836
+      TabIndex        =   11
+      Top             =   5520
+      Width           =   2055
+      _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":1F7C
+      Picture         =   "FrmLstView.frx":1BF2
       Caption         =   "Imprimir na porta"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -279,14 +269,14 @@ Begin VB.Form FrmLstView
    End
    Begin XPControls.XPButton Command5 
       Height          =   375
-      Left            =   7800
-      TabIndex        =   13
+      Left            =   8040
+      TabIndex        =   12
       TabStop         =   0   'False
-      Top             =   6600
+      Top             =   6480
       Width           =   855
       _ExtentX        =   1508
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":2516
+      Picture         =   "FrmLstView.frx":218C
       Caption         =   "Html"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -300,14 +290,14 @@ Begin VB.Form FrmLstView
    End
    Begin XPControls.XPButton Command6 
       Height          =   375
-      Left            =   7800
-      TabIndex        =   14
+      Left            =   8040
+      TabIndex        =   13
       TabStop         =   0   'False
-      Top             =   7080
-      Width           =   795
-      _ExtentX        =   1402
+      Top             =   6960
+      Width           =   855
+      _ExtentX        =   1508
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":2AB0
+      Picture         =   "FrmLstView.frx":2726
       Caption         =   "PDF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -321,14 +311,14 @@ Begin VB.Form FrmLstView
    End
    Begin XPControls.XPButton Command10 
       Height          =   375
-      Left            =   8760
-      TabIndex        =   15
+      Left            =   9240
+      TabIndex        =   14
       TabStop         =   0   'False
-      Top             =   6600
-      Width           =   795
-      _ExtentX        =   1402
+      Top             =   6480
+      Width           =   855
+      _ExtentX        =   1508
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":2E4A
+      Picture         =   "FrmLstView.frx":2AC0
       Caption         =   "RTF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -343,13 +333,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command4 
       Height          =   375
       Left            =   8040
-      TabIndex        =   16
+      TabIndex        =   15
       TabStop         =   0   'False
       Top             =   3000
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":31E4
+      Picture         =   "FrmLstView.frx":2E5A
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -364,13 +354,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   375
       Left            =   8040
-      TabIndex        =   17
+      TabIndex        =   16
       TabStop         =   0   'False
       Top             =   3480
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":377E
+      Picture         =   "FrmLstView.frx":33F4
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -385,13 +375,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdExcluir 
       Height          =   435
       Left            =   8040
-      TabIndex        =   18
+      TabIndex        =   17
       TabStop         =   0   'False
       Top             =   1560
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   767
-      Picture         =   "FrmLstView.frx":3D18
+      Picture         =   "FrmLstView.frx":398E
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -406,13 +396,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton btnOpen 
       Height          =   375
       Left            =   8040
-      TabIndex        =   19
+      TabIndex        =   18
       TabStop         =   0   'False
       Top             =   1080
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":42B2
+      Picture         =   "FrmLstView.frx":3F28
       Caption         =   "Ver Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -427,13 +417,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command3 
       Height          =   375
       Left            =   7800
-      TabIndex        =   20
+      TabIndex        =   19
       TabStop         =   0   'False
       Top             =   120
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":484C
+      Picture         =   "FrmLstView.frx":44C2
       Caption         =   "Buscar Pasta"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -448,13 +438,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command1 
       Height          =   375
       Left            =   8040
-      TabIndex        =   21
+      TabIndex        =   20
       TabStop         =   0   'False
       Top             =   600
       Width           =   2055
       _ExtentX        =   3625
       _ExtentY        =   661
-      Picture         =   "FrmLstView.frx":4DE6
+      Picture         =   "FrmLstView.frx":4A5C
       Caption         =   "Atualizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -469,13 +459,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdFiltra 
       Height          =   675
       Left            =   8040
-      TabIndex        =   22
+      TabIndex        =   21
       TabStop         =   0   'False
       Top             =   3960
       Width           =   675
       _ExtentX        =   1191
       _ExtentY        =   1191
-      Picture         =   "FrmLstView.frx":5380
+      Picture         =   "FrmLstView.frx":4FF6
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -491,13 +481,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command7 
       Height          =   675
       Left            =   8760
-      TabIndex        =   23
+      TabIndex        =   22
       TabStop         =   0   'False
       Top             =   3960
       Width           =   675
       _ExtentX        =   1191
       _ExtentY        =   1191
-      Picture         =   "FrmLstView.frx":591A
+      Picture         =   "FrmLstView.frx":5590
       Caption         =   "Dia"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -513,13 +503,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command8 
       Height          =   675
       Left            =   9480
-      TabIndex        =   24
+      TabIndex        =   23
       TabStop         =   0   'False
       Top             =   3960
       Width           =   675
       _ExtentX        =   1191
       _ExtentY        =   1191
-      Picture         =   "FrmLstView.frx":5CB4
+      Picture         =   "FrmLstView.frx":592A
       Caption         =   "limpar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -541,7 +531,7 @@ Begin VB.Form FrmLstView
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   5520
-      TabIndex        =   27
+      TabIndex        =   26
       TabStop         =   0   'False
       Top             =   1200
       Visible         =   0   'False
@@ -549,7 +539,27 @@ Begin VB.Form FrmLstView
       _ExtentX        =   1508
       _ExtentY        =   450
       MultiLine       =   -1  'True
-      TextRTF         =   "FrmLstView.frx":604E
+      TextRTF         =   "FrmLstView.frx":5CC4
+   End
+   Begin XPControls.XPButton Command9 
+      Height          =   375
+      Left            =   9240
+      TabIndex        =   27
+      TabStop         =   0   'False
+      Top             =   6960
+      Width           =   855
+      _ExtentX        =   1508
+      _ExtentY        =   661
+      Caption         =   "ZIP"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
 End
 Attribute VB_Name = "FrmLstView"
@@ -570,7 +580,7 @@ Private Sub btnOpen_Click()
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtCaminho.tEXT & Trim(Grid)
+  cARQRTF = Txtcaminho.tEXT & Trim(Grid)
   If FileExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
@@ -585,7 +595,7 @@ Private Sub CmdExcluir_Click()
   Grid.Col = 0
   cARQUIVO = Grid
   If Len(cARQUIVO) > 0 Then
-    cARQUIVO = TxtCaminho.tEXT & Grid
+    cARQUIVO = Txtcaminho.tEXT & Grid
     If MDG("Excluir " & cARQUIVO) Then
       DeleteFile cARQUIVO  'Kill cARQUIVO
       Command1_Click
@@ -610,6 +620,7 @@ Private Sub CmdFiltro_Click()
 
 End Sub
 
+
 Private Sub CmdIni_Click(Index As Integer)
   Dim cCHAVE As String
   Select Case Index
@@ -622,13 +633,13 @@ Private Sub CmdIni_Click(Index As Integer)
   Case 3
     cCHAVE = "USO02"
   End Select
-  TxtCaminho.tEXT = PegPath(cCHAVE, UCase(cNOMEFOLHA), " ")
-  If Len(Trim(TxtCaminho.tEXT)) = 0 Then
-    TxtCaminho.tEXT = PegPath(cCHAVE, "CAMINHO", "C:\TEMP")
+  Txtcaminho.tEXT = PegPath(cCHAVE, UCase(cNOMEFOLHA), " ")
+  If Len(Trim(Txtcaminho.tEXT)) = 0 Then
+    Txtcaminho.tEXT = PegPath(cCHAVE, "CAMINHO", "C:\TEMP")
   End If
 
-  If InStr(TxtCaminho.tEXT, "%USUARIO%") > 0 Then
-    TxtCaminho.tEXT = Replace(TxtCaminho.tEXT, "%USUARIO%", cNOMEFOLHA)
+  If InStr(Txtcaminho.tEXT, "%USUARIO%") > 0 Then
+    Txtcaminho.tEXT = Replace(Txtcaminho.tEXT, "%USUARIO%", cNOMEFOLHA)
   End If
   Command1_Click
 End Sub
@@ -643,7 +654,7 @@ End Sub
 
 Private Sub CmdPrinterPort_Click()
   Grid.Col = 0
-  cARQRTF = TxtCaminho.tEXT & Trim(Grid)
+  cARQRTF = Txtcaminho.tEXT & Trim(Grid)
   If Right(UCase(cARQRTF), 4) = ".PSR" Or Right(UCase(cARQRTF), 4) = ".QRP" Then
     Alert "Somente LST/TXT"
     Exit Sub
@@ -681,7 +692,7 @@ End Sub
 Private Sub CmdSendMail_Click()
   Dim cARQUIVO As String
   Grid.Col = 0
-  cARQUIVO = TxtCaminho.tEXT & Trim(Grid)
+  cARQUIVO = Txtcaminho.tEXT & Trim(Grid)
   'servidor,porta,from,to,assunto,anexos,mensagem,enviar e sair
   ePASS01 = Array("", _
                   "", _
@@ -710,9 +721,9 @@ Private Sub Command1_Click()
   Dim lINCLUI As Boolean
   On Error Resume Next
 
-  cDRIVE = Left(TxtCaminho.tEXT, 1)
+  cDRIVE = Left(Txtcaminho.tEXT, 1)
   ChDrive (cDRIVE)
-  cDIRER = Mid(TxtCaminho.tEXT, 3)
+  cDIRER = Mid(Txtcaminho.tEXT, 3)
   ChDir cDIRER
 
   Grid.Rows = 1
@@ -729,10 +740,10 @@ Private Sub Command1_Click()
  Grid.tEXT = "Arquivo"
  Grid.Col = 1
  Grid.tEXT = "Data Hora"
-  If Right(TxtCaminho.tEXT, 1) <> "\" Then
-    TxtCaminho.tEXT = TxtCaminho.tEXT + "\"
+  If Right(Txtcaminho.tEXT, 1) <> "\" Then
+    Txtcaminho.tEXT = Txtcaminho.tEXT + "\"
   End If
-  Set thisFolder = FS.GetFolder(TxtCaminho.tEXT)
+  Set thisFolder = FS.GetFolder(Txtcaminho.tEXT)
   Set allfiles = thisFolder.Files
   For Each thisFile In allfiles
     cFILENAME = UCase(thisFile.Name)
@@ -765,7 +776,7 @@ Private Sub Command10_Click()
   Dim cORIGEM As String
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = TxtCaminho.tEXT & cNOME
+  cORIGEM = Txtcaminho.tEXT & cNOME
   If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
     txttoRTF cORIGEM, TrocaExt(cORIGEM, "RTF")
     Command1_Click
@@ -781,8 +792,8 @@ Private Sub Command2_Click()
   Dim nRETU As Integer
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = TxtCaminho.tEXT & cNOME
-  cDESTINO = TxtCaminho.tEXT & NomeArq(cNOME, True) & ".txt"
+  cORIGEM = Txtcaminho.tEXT & cNOME
+  cDESTINO = Txtcaminho.tEXT & NomeArq(cNOME, True) & ".txt"
   nRETU = CopyFileWindowsWay(cORIGEM, cDESTINO)
   If nRETU = 0 And MDG("Apagar arquivo lst") Then
     DeleteFile cORIGEM  'Kill cORIGEM
@@ -795,7 +806,7 @@ Private Sub Command3_Click()
   DLG.BrowseFolder "Escolha uma Pasta", Pastas, False
   If DLG.Cancel = True Then Exit Sub
   ' Mostra o caminho escolhido
-  TxtCaminho.tEXT = DLG.Path & "\"
+  Txtcaminho.tEXT = DLG.Path & "\"
   Command1_Click
 End Sub
 
@@ -803,7 +814,7 @@ Private Sub Command4_Click()
 ''Dim carq As String
   Dim cNOME As String
   Grid.Col = 0
-  cNOME = TxtCaminho.tEXT & Trim(Grid)
+  cNOME = Txtcaminho.tEXT & Trim(Grid)
   ShellEx cNOME, essSW_SHOWDEFAULT, , , , Me.hWnd
 End Sub
 
@@ -812,7 +823,7 @@ Private Sub Command5_Click()
   Dim cORIGEM As String
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = TxtCaminho.tEXT & cNOME
+  cORIGEM = Txtcaminho.tEXT & cNOME
   If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
     txttohtml cORIGEM, TrocaExt(cORIGEM, "htm")
     Command1_Click
@@ -826,7 +837,7 @@ Private Sub Command6_Click()
   Grid.Col = 0
   cNOME = Trim(Grid)
   If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
-    ePASS01 = TxtCaminho.tEXT & cNOME
+    ePASS01 = Txtcaminho.tEXT & cNOME
     formConvertToPDF.Show vbModal, Me
     Command1_Click
   Else
@@ -855,7 +866,7 @@ Private Sub Command9_Click()
   'Dim oZIP As cZip
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = TxtCaminho.tEXT & cNOME
+  cORIGEM = Txtcaminho.tEXT & cNOME
   If InStr(UCase(cNOME), ".ZIP") > 0 Then
     Alert ("Ja e um zip")
   Else
@@ -893,26 +904,26 @@ Private Sub Grid_DblClick()
   Grid.Col = 0
   cNOME = Trim(Grid)
   cCOMP = UCase(Trim(Grid))
-  cARQRTF = TxtCaminho.tEXT & cNOME
+  cARQRTF = Txtcaminho.tEXT & cNOME
   
   Select Case cEXTENSAO
          Case "ZIP"
               Alert ("Sem Visualizacao para Zip")
          Case "PSR"
-              cARQ = "rptview " & TxtCaminho.tEXT & cNOME
+              cARQ = "rptview " & Txtcaminho.tEXT & cNOME
               Shell cARQ, vbMaximizedFocus
          Case "QRP"
-              cARQ = "qrpview " & TxtCaminho.tEXT & cNOME
+              cARQ = "qrpview " & Txtcaminho.tEXT & cNOME
               Shell cARQ, vbMaximizedFocus
          Case "PDF"
-              cARQ = TxtCaminho.tEXT & cNOME
+              cARQ = Txtcaminho.tEXT & cNOME
               ShellEx cARQ, essSW_SHOWDEFAULT, , , , Me.hWnd
          Case "HTM"
               If MDG("Usar Interno") Then
                  ePASS03 = 3
                  PrintPreview1.ShowPreview
               Else
-                cARQ = TxtCaminho.tEXT & cNOME
+                cARQ = Txtcaminho.tEXT & cNOME
                 ShellEx cARQ, essSW_SHOWDEFAULT, , , , Me.hWnd
               End If
           Case "RTF"
@@ -924,7 +935,7 @@ Private Sub Grid_DblClick()
                  ePASS03 = 1
                  PrintPreview1.ShowPreview
               Else
-                cARQ = Trim(TxtExecutar.tEXT) & " " & TxtCaminho.tEXT & cNOME
+                cARQ = Trim(TxtExecutar.tEXT) & " " & Txtcaminho.tEXT & cNOME
                 Shell cARQ, vbMaximizedFocus
               End If
   End Select
