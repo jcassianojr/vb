@@ -654,35 +654,31 @@ Public Function FileExist(ByVal cARQ As Variant, _
                           Optional ByVal lMES As Boolean = False, _
                           Optional ByVal cMES As String = "Arquivo Não Encontrado ", _
                           Optional ByVal cSQL As String = "")
-'Verifica a existencia de Uma Arquivo
   Dim cARQUIVO As String
   Dim nFILELEN
   Dim nPOS As Long
   Dim cEXT As String
-  '    Dim nPOS2 As Long
   On Error GoTo NotExist
+  FileExist = False
   cARQUIVO = UCase(Trim(CStr(cARQ)))
+  If Len(cARQ) = 0 Then
+     FileExist = False
+     Exit Function
+  End If
 
   If InStr(cARQUIVO, "[") > 0 Then
-    If InStr(cARQUIVO, "[JETMDB]") > 0 Or InStr(cARQUIVO, "[A12MDB]") Or InStr(cARQUIVO, "[A16MDB]") > 0 Then
+     
+    If InStr(cARQUIVO, "[JETMDB]") > 0 Or InStr(cARQUIVO, "[SQLITE]") Or InStr(cARQUIVO, "[A16MDB]") > 0 Then
       cARQUIVO = Replace(cARQUIVO, "[JETMDB]", "")
-      cARQUIVO = Replace(cARQUIVO, "[A12MDB]", "")
+      cARQUIVO = Replace(cARQUIVO, "[SQLITE]", "")
       cARQUIVO = Replace(cARQUIVO, "[A16MDB]", "")
     Else
-      'InStr(cARQUIVO, "[DAODBF]") > 0 Or
-      If InStr(cARQUIVO, "[JETFOX]") > 0 Or InStr(cARQUIVO, "[SDECDX]") > 0 Or _
-         InStr(cARQUIVO, "[JETDBFIII]") > 0 Or InStr(cARQUIVO, "[SDECDX]") > 0 Or _
-         InStr(cARQUIVO, "[ADSCDX]") > 0 Or InStr(cARQUIVO, "[ADSNTX]") > 0 Or _
-         InStr(cARQUIVO, "[SDENTX]") > 0 Or InStr(cARQUIVO, "[SDENSX]") > 0 Then
-        '   cARQUIVO = Replace(cARQUIVO, "[DAODBF]", "")
+      If InStr(cARQUIVO, "[JETFOX]") > 0 Or InStr(cARQUIVO, "[ADSCDX]") > 0 Or InStr(cARQUIVO, "[ADSNTX]") > 0 _
+        Or InStr(cARQUIVO, "[ADSADT]") > 0 Then
         cARQUIVO = Replace(cARQUIVO, "[JETFOX]", "")
-        cARQUIVO = Replace(cARQUIVO, "[SDECDX]", "")
-        cARQUIVO = Replace(cARQUIVO, "[JETDBFIII]", "")
         cARQUIVO = Replace(cARQUIVO, "[ADSCDX]", "")
         cARQUIVO = Replace(cARQUIVO, "[ADSNTX]", "")
         cARQUIVO = Replace(cARQUIVO, "[ADSADT]", "")
-        cARQUIVO = Replace(cARQUIVO, "[SDENTX]", "")
-        cARQUIVO = Replace(cARQUIVO, "[SDENSX]", "")
 
         If Len(cSQL) = 0 Then
           Alert ("Fileexit  Nao Passado cSQL Necessario Para DBF")
@@ -744,10 +740,7 @@ Public Function FileExist(ByVal cARQ As Variant, _
   If FileExists(cARQUIVO) Then
     FileExist = True
   End If
-  'nFILELEN = FileLen(cARQUIVO)
-  'If nFILELEN > 0 Then
-  '   FileExist = True
-  'End If
+
   Exit Function
 NotExist:
   FileExist = False

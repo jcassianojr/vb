@@ -518,8 +518,7 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
     Next
   End With
 
-
-
+If Not oRS.BOF Then
   oRS.MoveFirst
 
   'define o numero de linhas e colunas e configura o grid
@@ -540,7 +539,7 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
   End With
   oGRID.Visible = True
 
-
+End If
 
 
   oRS.Close
