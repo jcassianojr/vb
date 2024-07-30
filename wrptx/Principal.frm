@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":058A
-            TextSave        =   "11:19"
+            TextSave        =   "14:17"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -207,7 +207,7 @@ Private Sub MDIForm_Load()
 
 
   Set DAORS = New ADODB.Recordset
-  DAORS.Open "select * from controle where form='frmmdiprincipal'", DAODB, adOpenForwardOnly, adLockReadOnly
+  DAORS.Open "select * from controle where form='frmMDIPRINCIPAL'", DAODB, adOpenForwardOnly, adLockReadOnly
 
   With DAORS
     Do While Not DAORS.EOF  '!controle = "ImageList1"
@@ -268,7 +268,7 @@ Private Sub MDIForm_Load()
   End If
 
 
-  StatusBar1.Panels(6).Text = zUSER
+  StatusBar1.Panels(6).tEXT = zUSER
 
   If zWRPTID = 0 Then
     MsgBox "Usuário Não Cadastrado", vbOKOnly, "Bloqueio de Acesso"

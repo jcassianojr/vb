@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "12:11"
+            TextSave        =   "14:12"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -539,7 +539,7 @@ Private Sub MDIForm_Load()
 
 
 
-  DAORS.Open "select * from controle where form='frmmdiprincipal'", DAODB, adOpenForwardOnly, adLockReadOnly
+  DAORS.Open "select * from controle where form='frmMDIPRINCIPAL'", DAODB, adOpenForwardOnly, adLockReadOnly
 
   With DAORS
     Do While Not DAORS.EOF  '!controle = "ImageList1"
