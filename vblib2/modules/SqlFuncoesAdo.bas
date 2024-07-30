@@ -487,7 +487,12 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         'oFIELD = FVar(eVAL, aFOR(X), eVAZIO)
       End If
     Next x
-    oRS.Update
+    Select Case aRETU(2)
+           Case "SQLSERVER", "MDB", "MYSQL"
+               oRS.Update
+    End Select
+'    oRS.Update
+    
     oRS.MoveNext
   Wend
   oRS.Close
