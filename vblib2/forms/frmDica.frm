@@ -164,15 +164,12 @@ Dim sExibir As String * 255
 Dim nTOTREG As Long
 Dim cARQ As String
 Dim x As Long
-
 Private Sub cmdProxima_Click()
   PegMensagem
 End Sub
-
 Private Sub cmdOK_Click()
   sExibir = IIf(chkExibir = vbChecked, "S", "N")
   x = WritePrivateProfileString("CITACAO", zUSER, sExibir, App.Path + "\" & App.EXEName & ".INI")
-  'X = WritePrivateProfileString(zUSER, "EXIBIR", sExibir, App.Path & "\CITACAO.INI")
   Unload Me
 End Sub
 
@@ -196,15 +193,13 @@ End Sub
 
 Private Sub Form_Load()
   cARQ = PegPath("PATH", "CITACAO")
-  sExibir = Trim(PegPath("CITACAO", zUSER, "S"))
-  If Left(sExibir, 1) = "S" And FileExist(cARQ, True) Then
+  nTOTREG = 0
+  If FileExist(cARQ, True) Then
     chkExibir = vbChecked
     CenterFormToScreen Me
-    'CentralizaJanela Me
     nTOTREG = PegCountSQL(cARQ, "tblcitacao", "codcitacao", 1)
     PegMensagem
   End If
-
 End Sub
 
 Function RandomNumber(intHighestNumber)
