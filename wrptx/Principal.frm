@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":058A
-            TextSave        =   "14:42"
+            TextSave        =   "18:46"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -104,15 +104,7 @@ Private Sub MDIForm_Load()
 
   CenterFormToScreen Me
   cmdline = Trim(Command())
-
-  '   CheckPass "Teste1#z", True
-  'CheckPass "Teste#z", True
-  'CheckPass "Teste1z", True
-  'CheckPass "este1#z", True
-  'CheckPass "TESTE1#Z", True
-
-  ' cARQ = CreateSHA256HashString("arroz e feijao")
-
+ 
   ' aDIREITOS = Array(True, True, True, True, True, True, True, True)
   ' FrmRTf.Show vbModal
 
@@ -178,26 +170,13 @@ Private Sub MDIForm_Load()
     End
   End If
 
-
   'Cria o Arquivo log do mes
-  cARQERRO = PegPath("PATH", "LOGCAM") & "LOG" & Format(Now, "MMYYYY") & ".MDB"
-  If Not FileExist(cARQERRO) Then
-    If Not FileExist(PegPath("PATH", "LOG"), True) Then
-      Alert ("Erro Ini [PATH] LOG=")
-      End
-    End If
-    nRETU = CopyFileWindowsWay(PegPath("PATH", "LOG"), cARQERRO)
-    If nRETU <> 0 Then
+  cARQERRO = PegPath("PATH", "LOGCAM") & "LOG" & Format(Now, "MMYYYY") & ".sqlite"
+  nRETU = CopyFileWindowsWay(PegPath("PATH", "LOG"), cARQERRO, False)
+  If nRETU <> 0 Then
       Alert "Erro Criando Arquivo Log do Mes"
       End
-    End If
   End If
-
-
-
-
-
-
 
   ' Carrega imagens para o ImageList
   Set DAODB = New ADODB.Connection
@@ -268,7 +247,7 @@ Private Sub MDIForm_Load()
   End If
 
 
-  StatusBar1.Panels(6).tEXT = zUSER
+  StatusBar1.Panels(6).Text = zUSER
 
   If zWRPTID = 0 Then
     MsgBox "Usuário Não Cadastrado", vbOKOnly, "Bloqueio de Acesso"

@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "18:34"
+            TextSave        =   "18:51"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -466,31 +466,19 @@ Private Sub MDIForm_Load()
   Set DAODB = New ADODB.Connection
   Set DAORS = New ADODB.Recordset
 
-  'Cria o Arquivo log do mes
+    'Cria o Arquivo log do mes
   cARQERRO = PegPath("PATH", "LOGCAM") & "LOG" & Format(Now, "MMYYYY") & ".sqlite"
-  
- CopyFileWindowsWay PegPath("PATH", "LOG"), cARQERRO, False
- ' If Not FileExist(cARQERRO) Then
- '   If Not FileExist(PegPath("PATH", "LOG"), True) Then
- '     Alert ("Erro Ini [PATH] LOG=")
- '     End
- '   End If
- '   nRETU = CopyFileWindowsWay(PegPath("PATH", "LOG"), cARQERRO)
- '   If nRETU <> 0 Then
- '     Alert "Erro Criando Arquivo Log do Mes"
- '     End
- '   End If
- ' End If
-  
-
+  nRETU = CopyFileWindowsWay(PegPath("PATH", "LOG"), cARQERRO, False)
+  If nRETU <> 0 Then
+      Alert "Erro Criando Arquivo Log do Mes"
+      End
+  End If
 
   zEMPRESA = 1
   zMES = Month(Date)
   zANO = Year(Date)
 
   ZGRPSUB = ""
-
-  'FrmSplash.Show vbModal
 
   cmdline = Trim(Command())
   bACESSO = False

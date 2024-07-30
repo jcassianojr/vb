@@ -67,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "12:21"
+            TextSave        =   "18:55"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -84,6 +84,216 @@ Begin VB.MDIForm frmPRINCIPAL
          BeginProperty Panel7 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
             Object.Width           =   8890
+         EndProperty
+      EndProperty
+   End
+   Begin MSComctlLib.ImageList ImgMenu 
+      Left            =   0
+      Top             =   0
+      _ExtentX        =   1005
+      _ExtentY        =   1005
+      BackColor       =   -2147483643
+      ImageWidth      =   16
+      ImageHeight     =   16
+      MaskColor       =   12632256
+      _Version        =   393216
+      BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
+         NumListImages   =   49
+         BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":1458
+            Key             =   "center"
+         EndProperty
+         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":17F2
+            Key             =   "justificado"
+         EndProperty
+         BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":1B8C
+            Key             =   "left"
+         EndProperty
+         BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":1F26
+            Key             =   "right"
+         EndProperty
+         BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":22C0
+            Key             =   "Bold"
+         EndProperty
+         BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":265A
+            Key             =   "copy"
+         EndProperty
+         BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":2BF4
+            Key             =   "cut"
+         EndProperty
+         BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":2F8E
+            Key             =   "diahora"
+         EndProperty
+         BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":3328
+            Key             =   "editor"
+         EndProperty
+         BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":38C2
+            Key             =   "find"
+         EndProperty
+         BeginProperty ListImage11 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":3C5C
+            Key             =   "marcado"
+         EndProperty
+         BeginProperty ListImage12 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":3DB6
+            Key             =   "letra01"
+         EndProperty
+         BeginProperty ListImage13 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":4150
+            Key             =   "tamanho"
+         EndProperty
+         BeginProperty ListImage14 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":44EA
+            Key             =   "paragro"
+         EndProperty
+         BeginProperty ListImage15 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":4884
+            Key             =   "decrese"
+         EndProperty
+         BeginProperty ListImage16 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":4C1E
+            Key             =   "incrise"
+         EndProperty
+         BeginProperty ListImage17 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":4FB8
+            Key             =   "imagem"
+         EndProperty
+         BeginProperty ListImage18 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":5352
+            Key             =   "italico"
+         EndProperty
+         BeginProperty ListImage19 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":56EC
+            Key             =   "s_Key19"
+         EndProperty
+         BeginProperty ListImage20 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":5A86
+            Key             =   "mail"
+         EndProperty
+         BeginProperty ListImage21 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":6020
+            Key             =   "new"
+         EndProperty
+         BeginProperty ListImage22 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":63BA
+            Key             =   "open"
+         EndProperty
+         BeginProperty ListImage23 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":6954
+            Key             =   "xxx"
+         EndProperty
+         BeginProperty ListImage24 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":6CEE
+            Key             =   "imagem2"
+         EndProperty
+         BeginProperty ListImage25 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":7088
+            Key             =   "colar"
+         EndProperty
+         BeginProperty ListImage26 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":7622
+            Key             =   "printer"
+         EndProperty
+         BeginProperty ListImage27 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":7BBC
+            Key             =   "printcfg"
+         EndProperty
+         BeginProperty ListImage28 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":7F56
+            Key             =   "sair"
+         EndProperty
+         BeginProperty ListImage29 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":82F0
+            Key             =   "salvar"
+         EndProperty
+         BeginProperty ListImage30 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":868A
+            Key             =   "busca"
+         EndProperty
+         BeginProperty ListImage31 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":8A24
+            Key             =   "proximabusca"
+         EndProperty
+         BeginProperty ListImage32 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":8DBE
+            Key             =   "letra"
+         EndProperty
+         BeginProperty ListImage33 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":9158
+            Key             =   "abc"
+         EndProperty
+         BeginProperty ListImage34 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":94F2
+            Key             =   "riscado"
+         EndProperty
+         BeginProperty ListImage35 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":988C
+            Key             =   "sub"
+         EndProperty
+         BeginProperty ListImage36 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":9C26
+            Key             =   "sob"
+         EndProperty
+         BeginProperty ListImage37 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":9FC0
+            Key             =   "minusculas"
+         EndProperty
+         BeginProperty ListImage38 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":A35A
+            Key             =   "maisculas"
+         EndProperty
+         BeginProperty ListImage39 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":A6F4
+            Key             =   "underline"
+         EndProperty
+         BeginProperty ListImage40 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":AA8E
+            Key             =   "refazer"
+         EndProperty
+         BeginProperty ListImage41 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":AE28
+            Key             =   "info"
+         EndProperty
+         BeginProperty ListImage42 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":B3C2
+            Key             =   "exit"
+         EndProperty
+         BeginProperty ListImage43 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":B95C
+            Key             =   "calc"
+         EndProperty
+         BeginProperty ListImage44 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":BEF6
+            Key             =   "menusa"
+         EndProperty
+         BeginProperty ListImage45 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":C290
+            Key             =   "usuerchave"
+         EndProperty
+         BeginProperty ListImage46 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":C62A
+            Key             =   "odbcinfo"
+         EndProperty
+         BeginProperty ListImage47 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":C784
+            Key             =   "todo"
+         EndProperty
+         BeginProperty ListImage48 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":CC1E
+            Key             =   "lampada"
+         EndProperty
+         BeginProperty ListImage49 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principa.frx":D0B8
+            Key             =   "user"
          EndProperty
       EndProperty
    End
@@ -232,19 +442,14 @@ Private Sub MDIForm_Load()
     App.HelpFile = carqhelp
   End If
 
-  'Cria o Arquivo log do mes
-  cARQERRO = PegPath("PATH", "LOGCAM") & "LOG" & Format(Now, "MMYYYY") & ".MDB"
-  If Not FileExist(cARQERRO) Then
-    If Not FileExist(PegPath("PATH", "LOG"), True) Then
-      Alert PegPath("PATH", "LOG")
-      End
-    End If
-    nRETU = CopyFileWindowsWay(PegPath("PATH", "LOG"), cARQERRO)
-    If nRETU = 0 Then
+   'Cria o Arquivo log do mes
+  cARQERRO = PegPath("PATH", "LOGCAM") & "LOG" & Format(Now, "MMYYYY") & ".sqlite"
+  nRETU = CopyFileWindowsWay(PegPath("PATH", "LOG"), cARQERRO, False)
+  If nRETU <> 0 Then
       Alert "Erro Criando Arquivo Log do Mes"
       End
-    End If
   End If
+
   Dbname = PegPath("PATH", "MDB")
   zMDBPATH = Dbname
   ZGRPSUB = ""
