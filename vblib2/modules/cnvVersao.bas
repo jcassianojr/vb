@@ -56,7 +56,7 @@ Public Function AcessaForm(ByVal nFORM As Long) As Boolean
 End Function
 
 Public Function GravaLog(Optional ByVal nFORM As Long = 0, Optional ByVal nBOTAO As Long = 0, Optional ByVal Copr As String = "", Optional ByVal cOBS As String = "")
-  GravaLog = IncluiSQL(cARQERRO, "LOG", 6, Array("USER", "FORM", "BOTAO", "OPR", "DATA", "OBS"), Array(zUSERID, nFORM, nBOTAO, Copr, Now, cOBS))
+  GravaLog = IncluiSQL(cARQERRO, "SELECT * FROM LOG WHERE USER=-1", 6, Array("USER", "FORM", "BOTAO", "OPR", "DATA", "OBS"), Array(zUSERID, nFORM, nBOTAO, Copr, Now, cOBS))
 End Function
 
 Public Function demitido(ByVal nNUMERO As Long, Optional ByVal lMES As Boolean = True)

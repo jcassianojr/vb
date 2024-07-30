@@ -555,10 +555,11 @@ End Function
 Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal DestinationFile As String, Optional ByVal lAPAGA As Boolean = False) As Long
   Dim lngReturn As Long
   Dim typFileOperation As SHFILEOPSTRUCT
-  If lAPAGA Then
-    If FileExist(DestinationFile, False) Then
-      DeleteFile DestinationFile  'Kill DestinationFile
-    End If
+  If FileExist(DestinationFile, False) Then
+      If lAPAGA Then
+          DeleteFile DestinationFile  'Kill DestinationFile
+      End If
+      Exit Function
   End If
   With typFileOperation
     .hWnd = 0
