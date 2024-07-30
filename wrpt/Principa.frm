@@ -43,6 +43,7 @@ Begin VB.MDIForm frmPRINCIPAL
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   2
             AutoSize        =   2
+            Enabled         =   0   'False
             Object.Width           =   1058
             MinWidth        =   1058
             TextSave        =   "NUM"
@@ -60,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "14:02"
+            TextSave        =   "12:11"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -68,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":0B24
-            TextSave        =   "17/07/2024"
+            TextSave        =   "30/07/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -388,7 +389,6 @@ Private WithEvents MenuEvents As CEvents
 Attribute MenuEvents.VB_VarHelpID = -1
 Private Sub MDIForm_Load()
 
-
 '/ If gbSubClassMenu is False, the menu is not subclassed
   gbSubClassMenu = True
 
@@ -442,7 +442,7 @@ Private Sub MDIForm_Load()
   zusamc = PegPath("PATH", "USAMC")
   dbuser = PegPath("PATH", "USER")
   DBWRPT = PegPath("PATH", "WRPT")
-  Dbname = PegPath("PATH", "MDB") + "WRPT.MDB"
+  Dbname = PegPath("PATH", "MDB") ' agora no ini+ "WRPT.MDB"
 
   If Not FileExist(Dbname, True) Then
     Alert ("Erro Ini [PATH] MDB=")
@@ -612,25 +612,25 @@ Private Sub MDIForm_Unload(Cancel As Integer)
 End Sub
 Private Sub Menu2_Click()
   cTIPORPT = "R"
-  zRPTARQ = PegPath("PATH", "RPT") + "RPT.MDB"
+  zRPTARQ = PegPath("PATH", "RPT") ' agora no ini + "RPT.MDB"
   escRPTGRP.Show vbModal, Me
 End Sub
 
 Private Sub Menu3_Click()
   cTIPORPT = "D"
-  zRPTARQ = PegPath("PATH", "RTF") + "RTF.MDB"
+  zRPTARQ = PegPath("PATH", "DOC") ' agora no ini + "RTF.MDB"
   escRPTGRP.Show vbModal, Me
 End Sub
 
 Private Sub Menu4_Click()
   cTIPORPT = "F"
-  zRPTARQ = PegPath("PATH", "FOL") + "RPTFOL.MDB"
+  zRPTARQ = PegPath("PATH", "FOL") 'agora no ini + "RPTFOL.MDB"
   escRPTGRP.Show vbModal, Me
 End Sub
 
 Private Sub Menu5_Click()
   cTIPORPT = "I"
-  zRPTARQ = PegPath("PATH", "INT") + "RPTINT.MDB"
+  zRPTARQ = PegPath("PATH", "INT") 'agora no ini+ "RPTINT.MDB"
   escRPTGRP.Show vbModal, Me
 End Sub
 

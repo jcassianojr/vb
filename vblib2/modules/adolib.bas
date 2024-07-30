@@ -166,16 +166,32 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   Dim cARQTMP As String
   Dim cJETUSO As String
   Dim lTEMMDB As Boolean
+  Dim lTEMSQLITE As Boolean
   Dim cADSTIP As String
   Dim cADSNOM As String
   Dim cXLSVER As String '
   lTEMMDB = False
+  lTEMSQLITE = False
   TipoConn = Array("ADO", cARQ, "???")
   cARQTMP = UCase(cARQ)
+  
+  '
+  'access
+  '
   If InStr(cARQTMP, ".MDB") > 0 Then
     lTEMMDB = True
     TipoConn = Array("ADO", cARQ, "MDB")
   End If
+  '
+  'sqlite
+  '
+  If InStr(cARQTMP, ".SQLITE") > 0 Then
+    lTEMSQLITE = True
+    TipoConn = Array("ADO", cARQ, "SQLITE")
+  End If
+  '
+  'checando provider
+  '
   If InStr(cARQ, "[") = 0 Then
     If InStr(cARQTMP, "PROVIDER") > 0 Then
       Exit Function
@@ -184,8 +200,14 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
       cARQ = "[JETMDB]" & cARQ
       cARQTMP = UCase(cARQ)
     End If
+     If lTEMSQLITE Then
+      cARQ = "[SQLITE]" & cARQ
+      cARQTMP = UCase(cARQ)
+    End If
   End If
-  'access
+'
+'access
+'
   If InStr(cARQTMP, "[JETMDB]") > 0 Then
     cARQ = Replace(cARQ, "[JETMDB]", "")
     If InStr("PROVIDER", cARQTMP) = 0 Then
@@ -202,7 +224,20 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     TipoConn = Array("ADO", cARQ, "MDB")
     Exit Function                            '' encerra agilizar
   End If
+  
+  '
+  ' SQLITE
+  '
+  If InStr(cARQTMP, "[SQLITE]") > 0 Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
+    cARQ = Replace(cARQ, "[SQLITE]", "")
+    cARQ = "Driver={SQLite3 ODBC Driver};Database=" + cARQ + ";"
+    TipoConn = Array("ADO", cARQ, "SQLITE")
+    Exit Function
+  End If
+
+  '
   'jetfox
+  '
   If InStr(cARQTMP, "[JETFOX]") > 0 Or InStr(cARQTMP, "[SDECDX]") > 0 Then
     cARQ = Replace(cARQ, "[JETFOX]", "")
     cARQ = Replace(cARQ, "[SDECDX]", "")
@@ -250,23 +285,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     TipoConn = Array("ADO", cARQ, "SQLSERVER")
     Exit Function
   End If
-  If InStr(cARQTMP, "[SQLITE]") > 0 Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
-    cARQ = Replace(cARQ, "[SQLITE]", "")
-    cARQ = "Driver={SQLite3 ODBC Driver};Database=" + cARQ + ";"
-    TipoConn = Array("ADO", cARQ, "SQLITE")
-    Exit Function
-  End If
 
-  If InStr(cARQTMP, "[A12MDB]") > 0 Then
-    cARQ = Replace(cARQ, "[A12MDB]", "")
-    If Len(cUSER) > 0 Then
-      cARQ = cJetA12 & cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
-    Else
-      cARQ = cJetA12 & cARQ                ''& ";Persist Security Info=False"
-    End If
-    TipoConn = Array("ADO", cARQ, "MDB")
-    Exit Function
-  End If
   If InStr(cARQTMP, "[A16MDB]") > 0 Then
     cARQ = Replace(cARQ, "[A16MDB]", "")
     If Len(cUSER) > 0 Then
@@ -282,6 +301,18 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     TipoConn = Array("ADO", cARQ, "MDB")
     Exit Function
   End If
+
+  If InStr(cARQTMP, "[A12MDB]") > 0 Then
+    cARQ = Replace(cARQ, "[A12MDB]", "")
+    If Len(cUSER) > 0 Then
+      cARQ = cJetA12 & cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
+    Else
+      cARQ = cJetA12 & cARQ                ''& ";Persist Security Info=False"
+    End If
+    TipoConn = Array("ADO", cARQ, "MDB")
+    Exit Function
+  End If
+  
   If InStr(cARQTMP, "[MYSQL]") > 0 Then
     cARQ = Replace(cARQ, "[MYSQL]", "")
     TipoConn = Array("ADO", cARQ, "MYSQL")
@@ -619,7 +650,7 @@ Public Function ADORsStatus(ByRef eSTATUS)
 End Function
 
 Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String = "")
-  Dim errorObject As ADODB.Error
+  Dim errorObject As ADODB.error
   For Each errorObject In oErro
     cERRO = cERRO & " Ado Erro Numero: " & errorObject.Number & vbCrLf
     cERRO = cERRO & " Ado Descricao  : " & errorObject.Description & vbCrLf

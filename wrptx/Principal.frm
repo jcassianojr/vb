@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":058A
-            TextSave        =   "14:01"
+            TextSave        =   "11:19"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -69,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principal.frx":0B24
-            TextSave        =   "17/07/2024"
+            TextSave        =   "30/07/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -154,20 +154,20 @@ Private Sub MDIForm_Load()
   zusamc = PegPath("PATH", "USAMC")
 
   cTIPORPT = "R"
-  zRPTARQ = PegPath("PATH", "RPT") + "RPT.MDB"
+  zRPTARQ = PegPath("PATH", "RPT") 'agora no ini + "RPT.MDB"
 
 
   If Trim(UCase(App.EXEName)) = "WRPTF" Then
     cTIPORPT = "F"
-    zRPTARQ = PegPath("PATH", "FOL") + "RPTFOL.MDB"
+    zRPTARQ = PegPath("PATH", "FOL") ' agora no ini+ "RPTFOL.MDB"
   End If
   If Trim(UCase(App.EXEName)) = "WRPTD" Then
     cTIPORPT = "D"
-    zRPTARQ = PegPath("PATH", "RTF") + "RTF.MDB"
+    zRPTARQ = PegPath("PATH", "DOC") + "RTF.MDB"
   End If
   If Trim(UCase(App.EXEName)) = "WRPTI" Then
     cTIPORPT = "I"
-    zRPTARQ = PegPath("PATH", "INT") + "RPTINT.MDB"
+    zRPTARQ = PegPath("PATH", "INT") 'agora no ini+ "RPTINT.MDB"
   End If
 
 

@@ -67,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "14:20"
+            TextSave        =   "12:21"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -75,7 +75,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":0B24
-            TextSave        =   "17/07/2024"
+            TextSave        =   "30/07/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -222,7 +222,7 @@ Private Sub MDIForm_Load()
   ZMANA5CON = PegPath("PATH", "MANA5CON")
   ZMANA5IMP = PegPath("PATH", "IMPREL")
   ZRELAT = PegPath("PATH", "RELAT")
-  zRPTARQ = PegPath("PATH", "RPT") + "RPT.MDB"
+  zRPTARQ = PegPath("PATH", "RPT") 'agora no ini + "RPT.MDB"
   zusalx = PegPath("PATH", "USALX")
   zusamc = PegPath("PATH", "USAMC")
   cTIPORPT = "R"
@@ -371,7 +371,7 @@ End Sub
 Private Sub mnuSUBMENU2_Click(Index As Integer)
   On Error Resume Next
   If Not AcessaMenu("mnuSUBMENU2", Index) Then Exit Sub
-  zRPTARQ = PegPath("PATH", "RPT") + "RPT.MDB"
+  zRPTARQ = PegPath("PATH", "RPT") ' agora no ini  + "RPT.MDB"
   cTIPORPT = "R"
   Sdb = ""
   zPFTIPO = ""
@@ -565,7 +565,7 @@ Private Sub ImportaWrptUser()
 End Sub
 
 Private Sub mnuSUBMENU_Click(Index As Integer)
-  zRPTARQ = PegPath("PATH", "RPT") + "RPT.MDB"
+  zRPTARQ = PegPath("PATH", "RPT") ' agora no ini + "RPT.MDB"
   cTIPORPT = "R"
   If UCase(Replace(mnuSUBMENU(Index).Caption, "&", "")) = "SAIR" Then
     Unload Me
@@ -658,11 +658,11 @@ Private Sub Relat_Click(Index As Integer)
   Select Case Index
   Case 0
     cTIPORPT = "R"
-    zRPTARQ = PegPath("PATH", "RPT") + "RPT.MDB"
+    zRPTARQ = PegPath("PATH", "RPT") 'agora no ini + "RPT.MDB"
     escRPTGRP.Show vbModal, Me
   Case 1
     cTIPORPT = "D"
-    zRPTARQ = PegPath("PATH", "RTF") + "RTF.MDB"
+    zRPTARQ = PegPath("PATH", "DOC") 'agora o ini + "RTF.MDB"
     escRPTGRP.Show vbModal, Me
   Case 2
     cTIPO = "R"
@@ -672,11 +672,11 @@ Private Sub Relat_Click(Index As Integer)
     escmanreg.Show vbModal, Me
   Case 4
     cTIPO = "F"
-    zRPTARQ = PegPath("PATH", "FOL") + "RPTFOL.MDB"
+    zRPTARQ = PegPath("PATH", "FOL") 'agora no ini + "RPTFOL.MDB"
     escRPTGRP.Show vbModal, Me
   Case 5
     cTIPO = "I"
-    zRPTARQ = PegPath("PATH", "INT") + "RPTINT.MDB"
+    zRPTARQ = PegPath("PATH", "INT") 'agora no ini + "RPTINT.MDB"
     escRPTGRP.Show vbModal, Me
   Case 6
     FrmLstView.Show vbModal, Me
