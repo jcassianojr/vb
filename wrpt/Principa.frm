@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "17:32"
+            TextSave        =   "18:34"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -467,7 +467,7 @@ Private Sub MDIForm_Load()
   Set DAORS = New ADODB.Recordset
 
   'Cria o Arquivo log do mes
-  cARQERRO = PegPath("PATH", "LOGCAM") & "LOG" & Format(Now, "MMYYYY") & ".sqlite" ' & ".MDB"
+  cARQERRO = PegPath("PATH", "LOGCAM") & "LOG" & Format(Now, "MMYYYY") & ".sqlite"
   
  CopyFileWindowsWay PegPath("PATH", "LOG"), cARQERRO, False
  ' If Not FileExist(cARQERRO) Then
