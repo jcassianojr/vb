@@ -77,13 +77,14 @@ Public Function MontaFiltro(ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal 
   End Select
 End Function
 
-Public Function GrvSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aVAL As Variant, ByVal aFOR As Variant)
+Public Function GrvSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, _
+                       ByVal aVAL As Variant, ByVal aFOR As Variant, Optional ByVal nStartItem = 0)
   Dim aRETU As Variant
   aRETU = TipoConn(cARQ)
   cARQ = aRETU(1)
   Select Case aRETU(0)
   Case "ADO"
-    GrvSQL = GrvSQLado(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR)
+    GrvSQL = GrvSQLado(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
     '  Case "SDE"
     '      GrvSQL = GrvSQLSDE(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR)
     'Case Else

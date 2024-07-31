@@ -64,12 +64,14 @@ End Function
 
 Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As String
   Dim nPOS As Long
+  Dim cARQTMP As String
+  
   GeraConn = cARQ
-  cARQ = UCase(cARQ)
-  If InStr(cARQ, "[") > 0 Then                 ''ja e uma connecao
+  cARQTMP = UCase(cARQ) 'usado no instr maiscula mas sempre atribui na carq conecao e case sensitive
+  If InStr(cARQTMP, "[") > 0 Then                 ''ja e uma connecao
     Exit Function
   End If
-  If cTIPO = "JETMDB" Or cTIPO = "MDB" Or InStr(cARQ, ".MDB") > 0 Then
+  If cTIPO = "JETMDB" Or cTIPO = "MDB" Or InStr(cARQTMP, ".MDB") > 0 Then
     GeraConn = "[JETMDB]" & cARQ
     Exit Function
   End If
@@ -77,88 +79,88 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     GeraConn = "[JETFOX]" & cARQ
     Exit Function
   End If
+    If cTIPO = "SQLITE" Or InStr(LCase(cARQ), ".sqlite") > 0 Or InStr(LCase(cARQ), ".sqlite3") > 0 _
+                 Or InStr(LCase(cARQ), ".fossil") > 0 Or InStr(LCase(cARQ), ".db3") > 0 _
+                 Or InStr(LCase(cARQ), ".db") > 0 Then
+    GeraConn = "[SQLITE]" & cARQ
+    Exit Function
+  End If
+
+  If InStr(cARQTMP, ".DBF") > 0 Then  'DBF
+    nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
+    cARQ = Mid(cARQ, 1, nPOS)
+    GeraConn = "[JETFOX]" & cARQ
+    Exit Function
+  End If
+
   If cTIPO = "A16MDB" Or cTIPO = "A16JETMDB" Then
     GeraConn = "[A16MDB]" & cARQ
+    Exit Function
+  End If
+  
+  If InStr(cARQTMP, ".PD") > 0 Then   ' paradox
+    nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
+    cARQ = Mid(cARQ, 1, nPOS)
+    GeraConn = "[JETPDX5]" & cARQ
     Exit Function
   End If
   If cTIPO = "A12MDB" Or cTIPO = "A12JETMDB" Then
     GeraConn = "[A12MDB]" & cARQ
     Exit Function
   End If
-  If InStr(cARQ, ".DBF") > 0 Then  'DBF
-    nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
-    cARQ = Mid(cARQ, 1, nPOS)
-    GeraConn = "[JETFOX]" & cARQ
-    Exit Function
-  End If
-  If InStr(cARQ, ".PD") > 0 Then   ' paradox
-    nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
-    cARQ = Mid(cARQ, 1, nPOS)
-    GeraConn = "[JETPDX5]" & cARQ
-    Exit Function
-  End If
-  If cTIPO = "SQLITE" Or InStr(LCase(cARQ), ".sqlite") > 0 Or InStr(LCase(cARQ), ".sqlite3") > 0 _
-                 Or InStr(LCase(cARQ), ".fossil") > 0 Or InStr(LCase(cARQ), ".db3") > 0 _
-                 Or InStr(LCase(cARQ), ".db") > 0 Then
-    GeraConn = "[SQLITE]" & cARQ
-    Exit Function
-  End If
-  Select Case cTIPO
-  Case "XLS"
-    GeraConn = "[XLS]" & cARQ
-  Case "XLSX"
-    GeraConn = "[XLSX]" & cARQ
-  Case "XLSDRV"
-    GeraConn = "[XLSDRV]" & cARQ
-  Case "SQLITE"
-    GeraConn = "[SQLITE]" & cARQ
-  Case "JETTXT"
-    GeraConn = "[JETTXT]" & cARQ
-  Case "DBFIII"
-    GeraConn = "[JETDBFIII]" & cARQ
-  Case "ADSDX"
-    GeraConn = "[ADSCDX]" & cARQ
-  Case "ADSNTX" Or "SDENTX"
-    GeraConn = "[ADSNTX]" & cARQ
-  Case "ADSADT"
-    GeraConn = "[ADSADT]" & cARQ
-  Case "ADSVFP"
-    GeraConn = "[ADSVFP]" & cARQ
-    'Case "SDENTX" 'usa adsacima
-    '    GeraConn = "[SDENTX]" & cARQ
-    'Case "SDENSX" 'pouco uso nsx mais verificar opcoes futuramente
-    '    GeraConn = "[SDENSX]" & cARQ
-  Case "PDX3"
-    GeraConn = "[JETPDX3]" & cARQ
-  Case "PDX4"
-    GeraConn = "[JETPDX4]" & cARQ
-  Case "PDX5"
-    GeraConn = "[JETPDX5]" & cARQ
-  Case "A12DBFIII"
-    GeraConn = "[A12DBFIII]" & cARQ
-  Case "A12PDX3"
-    GeraConn = "[A12PDX3]" & cARQ
-  Case "A12PDX4"
-    GeraConn = "[A12PDX4]" & cARQ
-  Case "A12PDX5"
-    GeraConn = "[A12PDX5]" & cARQ
-  Case "A16XLS"
-    GeraConn = "[A16XLS]" & cARQ
-  Case "A16XLSX"
-    GeraConn = "[A16XLSX]" & cARQ
-  Case "A16XLSM"
-    GeraConn = "[A16XLSM]" & cARQ
-  Case "A16XLSB"
-    GeraConn = "[A16XLSB]" & cARQ
-  Case "A16DBFIII"
-    GeraConn = "[A16DBFIII]" & cARQ
-  Case "A16PDX3"
-    GeraConn = "[A16PDX3]" & cARQ
-  Case "A16PDX4"
-    GeraConn = "[A16PDX4]" & cARQ
-  Case "A16PDX5"
-    GeraConn = "[A16PDX5]" & cARQ
-  End Select
+  
+Select Case cTIPO
+    Case "XLS"
+      GeraConn = "[XLS]" & cARQ
+    Case "XLSX"
+      GeraConn = "[XLSX]" & cARQ
+    Case "XLSDRV"
+      GeraConn = "[XLSDRV]" & cARQ
+    Case "SQLITE"
+      GeraConn = "[SQLITE]" & cARQ
+    Case "JETTXT"
+      GeraConn = "[JETTXT]" & cARQ
+    Case "DBFIII"
+      GeraConn = "[JETDBFIII]" & cARQ
+    Case "ADSDX"
+      GeraConn = "[ADSCDX]" & cARQ
+    Case "ADSNTX" Or "SDENTX"
+      GeraConn = "[ADSNTX]" & cARQ
+    Case "ADSADT"
+      GeraConn = "[ADSADT]" & cARQ
+    Case "ADSVFP"
+      GeraConn = "[ADSVFP]" & cARQ
+    Case "PDX3"
+      GeraConn = "[JETPDX3]" & cARQ
+    Case "PDX4"
+      GeraConn = "[JETPDX4]" & cARQ
+    Case "PDX5"
+      GeraConn = "[JETPDX5]" & cARQ
+    Case "A12DBFIII"
+      GeraConn = "[A12DBFIII]" & cARQ
+    Case "A12PDX3"
+      GeraConn = "[A12PDX3]" & cARQ
+    Case "A12PDX4"
+      GeraConn = "[A12PDX4]" & cARQ
+    Case "A12PDX5"
+      GeraConn = "[A12PDX5]" & cARQ
+    Case "A16XLS"
+      GeraConn = "[A16XLS]" & cARQ
+    Case "A16XLSX"
+      GeraConn = "[A16XLSX]" & cARQ
+    Case "A16XLSM"
+      GeraConn = "[A16XLSM]" & cARQ
+    Case "A16XLSB"
+      GeraConn = "[A16XLSB]" & cARQ
+    Case "A16DBFIII"
+      GeraConn = "[A16DBFIII]" & cARQ
+    Case "A16PDX3"
+      GeraConn = "[A16PDX3]" & cARQ
+    Case "A16PDX4"
+      GeraConn = "[A16PDX4]" & cARQ
+    Case "A16PDX5"
+      GeraConn = "[A16PDX5]" & cARQ
+End Select
 End Function
 
 Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = "", _
@@ -230,7 +232,9 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   '
   If InStr(cARQTMP, "[SQLITE]") > 0 Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
     cARQ = Replace(cARQ, "[SQLITE]", "")
-    cARQ = "Driver={SQLite3 ODBC Driver};Database=" + cARQ + ";"
+    If InStr(cARQTMP, "SQLITE3 ODBC DRIVER") = 0 Then
+       cARQ = "Driver={SQLite3 ODBC Driver};Database=" + cARQ + ";"
+    End If
     TipoConn = Array("ADO", cARQ, "SQLITE")
     Exit Function
   End If

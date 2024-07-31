@@ -37,30 +37,32 @@ Begin VB.Form frmBTN
       Width           =   3765
    End
    Begin VB.TextBox txtFields 
+      BackColor       =   &H00C0FFFF&
       Height          =   285
       Index           =   4
-      Left            =   7080
+      Left            =   4800
       MaxLength       =   12
       TabIndex        =   3
       TabStop         =   0   'False
-      Top             =   1920
+      Top             =   840
+      Visible         =   0   'False
+      Width           =   495
+   End
+   Begin VB.TextBox txtFields 
+      BackColor       =   &H00C0FFFF&
+      Height          =   285
+      Index           =   2
+      Left            =   3720
+      MaxLength       =   12
+      TabIndex        =   2
+      TabStop         =   0   'False
+      Top             =   840
       Visible         =   0   'False
       Width           =   495
    End
    Begin VB.TextBox txtFields 
       Height          =   285
       Index           =   3
-      Left            =   6360
-      MaxLength       =   12
-      TabIndex        =   2
-      TabStop         =   0   'False
-      Top             =   1920
-      Visible         =   0   'False
-      Width           =   495
-   End
-   Begin VB.TextBox txtFields 
-      Height          =   285
-      Index           =   2
       Left            =   120
       MaxLength       =   20
       TabIndex        =   5
@@ -77,6 +79,7 @@ Begin VB.Form frmBTN
       Width           =   3375
    End
    Begin VB.TextBox txtFields 
+      BackColor       =   &H00C0FFFF&
       Height          =   285
       Index           =   1
       Left            =   1920
@@ -86,6 +89,7 @@ Begin VB.Form frmBTN
       Width           =   1455
    End
    Begin VB.TextBox txtFields 
+      BackColor       =   &H00C0FFFF&
       Height          =   285
       Index           =   0
       Left            =   120
@@ -150,6 +154,7 @@ Begin VB.Form frmBTN
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      BackColor       =   12648447
       Min             =   1
       Max             =   999
       Value           =   1
@@ -313,14 +318,14 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     'ajustar depois para nao precisar txtfiels 3 4
-    TXTFIELDS(3) = indice.Value
-    TXTFIELDS(4) = icone.Value
+    txtFields(2) = indice.Value
+    txtFields(4) = icone.Value
 
     For iLOOP = 0 To nCAMPOS - 2
-      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+      aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP
     aVAL(6) = FixNumBol(Check2.Value)
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 3 '0 MENU 1 CONTROLE 2 INDICE
   End If
   Screen.MousePointer = vbDefault
   Unload Me
@@ -343,17 +348,17 @@ Private Sub Form_Load()
   cARQ = Dbname
   cSQL = "select * from controle WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU
   nCAMPOS = 7
-  aCAM = Array("FORM", "CONTROLE", "TOOLTIP", "INDICE", "IMAGEM", "CAPTION", "DISPONIVEL")
-  aFOR = Array("C", "C", "C", "NI", "NI", "C", "BN")
-  aPAD = Array("", "", "", 0, 0, "", False)
+  aCAM = Array("FORM", "CONTROLE", "INDICE", "TOOLTIP", "IMAGEM", "CAPTION", "DISPONIVEL")
+  aFOR = Array("C", "C", "NI", "C", "NI", "C", "BN")
+  aPAD = Array("", "", 0, "", 0, "", False)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 2
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtFields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   Check2.Value = aVAL(6)
   'ajustar depois para nao precisar txtfiels 3 4
-  indice.Value = TXTFIELDS(3)
-  icone.Value = TXTFIELDS(4)
+  indice.Value = txtFields(2)
+  icone.Value = txtFields(4)
 
 End Sub
 

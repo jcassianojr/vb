@@ -72,7 +72,7 @@ Begin VB.Form FrmRpt
    End
    Begin VB.TextBox text 
       Height          =   285
-      Index           =   0
+      Index           =   1
       Left            =   4200
       TabIndex        =   2
       ToolTipText     =   "Sub Grupo do Relatorio"
@@ -83,7 +83,7 @@ Begin VB.Form FrmRpt
       BackColor       =   &H00C0FFFF&
       Enabled         =   0   'False
       Height          =   285
-      Index           =   1
+      Index           =   0
       Left            =   1080
       Locked          =   -1  'True
       TabIndex        =   1
@@ -1061,14 +1061,14 @@ Private Sub CmdAbrirCom_Click(Index As Integer)
 'Dim cEXTENSAO As String
 'Dim nPOS As Long
 
-  eLOCALIZA = tEXT(5)
+  eLOCALIZA = text(5)
   ePASS01 = ""
   If Index = 0 Then
-    ePASS01 = NomeEXT(FixStr(tEXT(4).tEXT))
+    ePASS01 = NomeEXT(FixStr(text(4).text))
   End If
   EscRptExec.Show vbModal, Me
   If lRETU Then
-    tEXT(5).tEXT = eRETU02
+    text(5).text = eRETU02
   End If
 
 End Sub
@@ -1080,9 +1080,9 @@ End Sub
 Private Sub CmdEDIT_Click(Index As Integer)
   Dim cEXTENSAO As String
   Dim nPOS As Long
-  eLOCALIZA = tEXT(5)
+  eLOCALIZA = text(5)
   If Index = 0 Then
-    cARQRTF = tEXT(4)
+    cARQRTF = text(4)
     nPOS = InStrRev(cARQRTF, ".")
     If nPOS > 0 Then
       cEXTENSAO = Mid(cARQRTF, nPOS + 1)
@@ -1106,27 +1106,27 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub Command2_Click()
-  tEXT(5).tEXT = ""
+  text(5).text = ""
 End Sub
 
 Private Sub escarq_Click(Index As Integer)
   Index = Index + 18
-  ePASS01 = tEXT(Index)
+  ePASS01 = text(Index)
   FrmPegdb.Show vbModal, Me
   If lRETU Then
-    tEXT(Index) = eRETU01
+    text(Index) = eRETU01
   End If
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   If MDG("Gravar e Sair", "Gravando ") Then
     For nITEM = 0 To 23
-      aVAL(nITEM) = tEXT(nITEM)
+      aVAL(nITEM) = text(nITEM)
     Next nITEM
     For nITEM = 24 To 26
       aVAL(nITEM) = FixNumBol(chkFields(nITEM).Value)
     Next nITEM
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 'comeca no 1 0=RPT chave
     GravaLog nFORMID, 0, "Gravou "
   Else
     GravaLog nFORMID, 0, "Nao Gravou "
@@ -1178,7 +1178,7 @@ Private Sub escolherrpt_Click()
       sPath = Caminex(zRPTCAM)
     End If
   End If
-  tEXT(4).tEXT = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
+  text(4).text = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
 
 End Sub
 
@@ -1205,7 +1205,7 @@ Private Sub Form_Load()
   'Variaveis sql
 
   nCAMPOS = 27
-  aCAM = Array("SUBGRP", "RPT", "COGNOME", "NOME", "ARQUIVO", _
+  aCAM = Array("RPT", "SUBGRP", "COGNOME", "NOME", "ARQUIVO", _
                "ABRIRCOM", "TITULO", "MENSAGEM", "COBSMSG", "TABNAME", _
                "TABALIAS", "CARQUSO", "CARQBAI", "CARQFEC", "CARQACU", _
                "DATAIMP", "UTILIZADO", "DATACRI", "CAMINHO", "CAMINH2", _
@@ -1222,7 +1222,7 @@ Private Sub Form_Load()
                "", "", "", "", False, False, False)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 23
-    tEXT(nITEM) = aVAL(nITEM)
+    text(nITEM) = aVAL(nITEM)
   Next nITEM
   For nITEM = 24 To 26
     chkFields(nITEM) = aVAL(nITEM)

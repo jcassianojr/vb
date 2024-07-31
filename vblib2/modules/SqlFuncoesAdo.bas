@@ -119,13 +119,26 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
   ADOComando = False
   cARQ = GeraConn(cARQ)
   aRETU = TipoConn(cARQ)  ''Gera string conneccao
-  If aRETU(0) = "ADO" Then
-    cCONN = aRETU(1)
+  
+  '
+  ' nao executa se nao for ado
+  '
+  If aRETU(0) <> "ADO" Then
+     Exit Function
+  End If
+    
+  '
+  ' se for foxpro necessita rotina adocomandodbf
+  '
     If InStr(UCase(cARQ), "VFPOLEDB") Then
       ADOComando = AdoComandodbf(cARQ, "", cSQL)
       Exit Function
     End If
+    
+    cCONN = aRETU(1)
     Set oDB = New ADODB.Connection
+    Set oCOM = New ADODB.Command
+    
     oDB.ConnectionTimeout = 120
     oDB.Open cCONN
 
@@ -137,7 +150,7 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
     oDB.Close
     Set oCOM = Nothing
     Set oDB = Nothing
-  End If
+  
   Exit Function
 trataerro:
   Select Case Err.Number
@@ -372,12 +385,12 @@ Public Function ApagaSQLpAdo(ByVal cARQ As String, ByVal cSQL As String, Optiona
   End If
 End Function
 
-Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aVAL As Variant, ByVal aFOR As Variant) As Boolean
+Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, _
+                          ByVal aVAL As Variant, ByVal aFOR As Variant, Optional ByVal nSTARITEM = 0) As Boolean
   Dim oDB As ADODB.Connection
   Dim oRS As ADODB.Recordset
   Dim eVAL, aOPE As Variant
   Dim x, nLENVAR, nLENCAM As Long
-  'Dim nPOS As Long
   Dim lGRAVA As Boolean
   Dim cTabela As String
   Dim eVAZIO As Variant
@@ -403,16 +416,8 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   oDB.ConnectionTimeout = 120
   oDB.Open cARQ
 
-  'Set null off permitido deixar campos em branco set deleted on ja esta na string de conecao
   If InStr(cARQ, "VFPOLEDB") Then
     VFPSetValues oDB
-    'vfpsetvalues ODB 'Testar funcao para precisar das linhas abaixo
-    ' Set oCOMANDO = New ADODB.Command
-    ' oCOMANDO.ActiveConnection = oDB
-    ' oCOMANDO.CommandType = adCmdText
-    ' cCOM = "Set null off"
-    ' oCOMANDO.CommandText = cCOM
-    ' oCOMANDO.Execute
   End If
 
   lOPEN = True
@@ -430,10 +435,9 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   End If
 
   While Not oRS.EOF
-    For x = 0 To nITEM - 1                   ''Matriz Vb comeca 0
+    For x = nSTARITEM To nITEM - 1     ''Matriz Vb comeca 0 x = 0 To nITEM - 1
+                                       'permite nao gravar campos iniciais evitando grava campo chave primaria
       Set oFIELD = oRS(aCAM(x))
-      ''nLENCAM = oRS(aCAM(x)).DefinedSize
-      ''cTIPO = TipoDado2(oRS(aCAM(x)).type)
       cTIPO = TipoDado2(oFIELD.Type)
       lGRAVA = True
       ''Evita Gravar Campos nullos correcao data nula abaixo
@@ -487,11 +491,12 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         'oFIELD = FVar(eVAL, aFOR(X), eVAZIO)
       End If
     Next x
-    Select Case aRETU(2)
-           Case "SQLSERVER", "MDB", "MYSQL"
+    Select Case aRETU(2) ' alguns nao aceitam update
+           Case "SQLSERVER", "MDB", "MYSQL", "SQLITE"
+               oRS.Update
+           Case Else
                oRS.Update
     End Select
-'    oRS.Update
     
     oRS.MoveNext
   Wend
@@ -621,11 +626,11 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
       Next x
       eRETU01 = aRETUID
     End If
-    Select Case aRETU(2)
-    Case "SQLSERVER", "MDB", "MYSQL"
-
-    Case Else
-      oRS.Update
+    Select Case aRETU(2) 'alguns nao aceitam update
+        Case "SQLSERVER", "MDB", "MYSQL", "SQLITE"
+            oRS.Update
+        Case Else
+          oRS.Update
     End Select
 
     lRETU = True

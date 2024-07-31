@@ -1643,7 +1643,8 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     aVAL(13) = tEXT(13)  ' CHAVEV
     'volta para 14 para nao gravar postelaa postelab chaveh estao apenas para exibir no label
     nCAMPOS = 14
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 'comeca gravar do 1 0=idusuario chave da tabela
+    
     GravaLog nFORMID, 0, "Gravou Usuario"
   Else
     GravaLog nFORMID, 0, "Nao Gravou Usuario"

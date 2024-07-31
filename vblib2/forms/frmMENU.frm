@@ -52,6 +52,7 @@ Begin VB.Form frmMENU
       Width           =   3375
    End
    Begin VB.TextBox txtFields 
+      BackColor       =   &H00C0FFFF&
       Height          =   285
       Index           =   0
       Left            =   1200
@@ -78,6 +79,7 @@ Begin VB.Form frmMENU
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      BackColor       =   12648447
       Min             =   1
       Max             =   999
       Value           =   1
@@ -242,13 +244,13 @@ Dim iLOOP As Integer
 Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
-    TXTFIELDS(2) = indice.Value
-    TXTFIELDS(3) = Cadastro.Value
+    txtFields(1) = indice.Value
+    txtFields(3) = Cadastro.Value
 
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+      aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 2 ' 0 MENU 1 INDICE CHAVE
   End If
   Screen.MousePointer = vbDefault
   Unload Me
@@ -272,16 +274,16 @@ Private Sub Form_Load()
   cSQL = "select * from MENU WHERE MENU='" & cMENU & "' AND INDICE=" & iMENU
 
   nCAMPOS = 4
-  aCAM = Array("menu", "descricao", "indice", "cadastro")
-  aFOR = Array("C", "C", "NI", "NI")
-  aPAD = Array("", "", 0, 0)
+  aCAM = Array("menu", "indice", "descricao", "cadastro")
+  aFOR = Array("C", "NI", "C", "NI")
+  aPAD = Array("", 0, "", 0)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtFields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   'ajustar depois para nao precisar txtfiels 3 4
-  indice.Value = TXTFIELDS(2)
-  Cadastro.Value = TXTFIELDS(3)
+  indice.Value = txtFields(1)
+  Cadastro.Value = txtFields(3)
 
 
 End Sub
