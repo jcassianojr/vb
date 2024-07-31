@@ -308,7 +308,7 @@ Private Sub cmdClose_Click()
     aVAL(8) = DTPicker2
     aVAL(9) = DTPicker3
 
-    GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 2 ' pula 0 ppap 1 item chaves
   End If
   Screen.MousePointer = vbDefault
   Unload Me

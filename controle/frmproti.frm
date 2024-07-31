@@ -370,7 +370,7 @@ Private Sub cmdClose_Click()
     Next iLOOP
     aVAL(8) = DTPicker1
     aVAL(9) = FixNumBol(Check1)
-    GrvSQL cARQDES, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQDES, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 ' pula chave 0 PARTNUMBER
   End If
   Screen.MousePointer = vbDefault
   Unload Me

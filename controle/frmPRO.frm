@@ -23,7 +23,7 @@ Begin VB.Form frmPro
       BackColor       =   &H00C0FFFF&
       Enabled         =   0   'False
       Height          =   285
-      Index           =   2
+      Index           =   0
       Left            =   720
       Locked          =   -1  'True
       TabIndex        =   5
@@ -33,7 +33,7 @@ Begin VB.Form frmPro
    End
    Begin VB.TextBox txtFields 
       Height          =   285
-      Index           =   0
+      Index           =   2
       Left            =   120
       TabIndex        =   2
       Top             =   1080
@@ -43,6 +43,7 @@ Begin VB.Form frmPro
       BackColor       =   &H00C0FFFF&
       Enabled         =   0   'False
       Height          =   285
+      HelpContextID   =   90
       Index           =   1
       Left            =   120
       Locked          =   -1  'True
@@ -191,9 +192,9 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+      aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 2 ' PULA 0 NUMERO 1 TIPO Chaves
   End If
   Screen.MousePointer = vbDefault
   Unload Me
@@ -211,7 +212,7 @@ Private Sub esciedx_Click()
   iMU01 = 201
   escIED.Show vbModal, Me
   If lRETU Then
-    TXTFIELDS(0) = eRETU02
+    txtFields(0) = eRETU02
   End If
 End Sub
 
@@ -224,12 +225,12 @@ Private Sub Form_Load()
   cARQ = PegPath("PATH", "DESENHO")
   cSQL = "select * from PRODENG WHERE NUMERO=" & nPF & " AND TIPO='" & cCONJUNTO & "'"
   nCAMPOS = 5
-  aCAM = Array("RESCLI", "TIPO", "NUMERO", "PRODUTO", "NOME")
-  aFOR = Array("C", "C", "NI", "C", "C")
-  aPAD = Array("", "", 0, "", "")
+  aCAM = Array("NUMERO", "TIPO", "RESCLI", "PRODUTO", "NOME")
+  aFOR = Array("NI", "C", "C", "C", "C")
+  aPAD = Array(0, "", "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtFields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
 
 End Sub

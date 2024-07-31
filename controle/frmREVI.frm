@@ -182,9 +182,9 @@ Dim i As Integer
 Private Sub cmdClose_Click()
   On Error Resume Next
   For i = 0 To nCAMPOS - 1
-    aVAL(i) = TXTFIELDS(i)
+    aVAL(i) = txtFields(i)
   Next i
-  GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 4 'pula chaves "PF", "REVISAO", "TIPO", "ITEM"
   Screen.MousePointer = vbDefault
   Unload Me
 End Sub
@@ -214,13 +214,13 @@ Private Sub Form_Load()
     aPAD = Array(0, 0, "", 0, "")
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For i = 0 To nCAMPOS - 1
-      TXTFIELDS(i) = aVAL(i)
+      txtFields(i) = aVAL(i)
     Next i
   End If
   If Not lEDITAR Then
-    TXTFIELDS(4).TabStop = False
-    TXTFIELDS(4).Locked = True
-    TXTFIELDS(4).Enabled = False
+    txtFields(4).TabStop = False
+    txtFields(4).Locked = True
+    txtFields(4).Enabled = False
     cmdClose.Enabled = False
   End If
 End Sub

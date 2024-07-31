@@ -18,7 +18,7 @@ Begin VB.Form frmprotii
       BackColor       =   &H00C0FFFF&
       Enabled         =   0   'False
       Height          =   285
-      Index           =   1
+      Index           =   4
       Left            =   4320
       Locked          =   -1  'True
       TabIndex        =   43
@@ -527,8 +527,9 @@ Begin VB.Form frmprotii
       Width           =   615
    End
    Begin VB.TextBox Text1 
+      BackColor       =   &H00C0FFFF&
       Height          =   285
-      Index           =   4
+      Index           =   1
       Left            =   720
       TabIndex        =   5
       Top             =   600
@@ -698,7 +699,7 @@ Private Sub cmdClose_Click()
     aVAL(22) = DTPicker6
     aVAL(23) = DTPicker7
     aVAL(24) = DTPicker8
-    GrvSQL cARQDES, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQDES, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 2 'pula chaves PARTNUMBER,SSMT
   End If
   Screen.MousePointer = vbDefault
   Unload Me
@@ -765,7 +766,7 @@ Private Sub Form_Load()
   CenterFormToScreen Me
   nCAMPOS = 25
   cARQDES = PegPath("PATH", "DESENHO")
-  aCAM = Array("PARTNUMBER", "FASE", "NFTIPO", "VALOR", "SSMT", _
+  aCAM = Array("PARTNUMBER", "SSMT", "NFTIPO", "VALOR", "FASE", _
                "TELEFONE", "COMPRADOR", "ENTREGA", "PPAP", "OBS", _
                "NFNUMERO", "PEDIDO", "RE2", "DESENH2", "REV", _
                "DESENHO", "RE3", "DESENH3", "QTDDE", "SSMTDAT", _
