@@ -830,9 +830,9 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+      aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 '0 ordem chave
 
     If lTROCOU Then
       ADOGrvBlob cARQ, cSQL, Picture1, "IMAGEM"
@@ -873,7 +873,7 @@ Private Sub cmdpeg_Click(Index As Integer)
   eRETU02 = ""                                 'Evita Cancelamento Escolha
   escIED.Show vbModal, Me
   If lRETU Then
-    TXTFIELDS(Index) = Mid(eRETU02, 1, 1)
+    txtFields(Index) = Mid(eRETU02, 1, 1)
   End If
 End Sub
 
@@ -904,9 +904,9 @@ Private Sub Form_Load()
   CenterFormToScreen Me
   cARQ = Sdb                                   'agora sdb pois pode ser pf pfp pfg
 
-  TXTPF.tEXT = nPF
-  TXTSEQ.tEXT = nSEQ
-  TXTSSQ.tEXT = nSSQ
+  TXTPF.text = nPF
+  TXTSEQ.text = nSEQ
+  TXTSSQ.text = nSSQ
 
   cSQL = "select * from PFI WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
 
@@ -917,7 +917,7 @@ Private Sub Form_Load()
   aPAD = Array(0, "", "", "", "", 0, 0, 0, 0, 0, "", "", "", "", "", "", "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtFields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
 
 

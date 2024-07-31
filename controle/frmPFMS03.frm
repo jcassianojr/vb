@@ -53,16 +53,18 @@ Begin VB.Form frmPFMS03
       Width           =   255
    End
    Begin VB.TextBox txtFields 
+      BackColor       =   &H00C0FFFF&
       Height          =   405
-      Index           =   9
+      Index           =   4
       Left            =   4200
       TabIndex        =   2
       Top             =   120
       Width           =   615
    End
    Begin VB.TextBox txtFields 
+      BackColor       =   &H00C0FFFF&
       Height          =   405
-      Index           =   8
+      Index           =   3
       Left            =   3000
       TabIndex        =   1
       Top             =   120
@@ -99,7 +101,7 @@ Begin VB.Form frmPFMS03
    End
    Begin VB.TextBox txtFields 
       Height          =   285
-      Index           =   4
+      Index           =   9
       Left            =   120
       TabIndex        =   5
       Top             =   1680
@@ -107,7 +109,7 @@ Begin VB.Form frmPFMS03
    End
    Begin VB.TextBox txtFields 
       Height          =   285
-      Index           =   3
+      Index           =   8
       Left            =   1080
       MaxLength       =   100
       TabIndex        =   4
@@ -434,17 +436,17 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+      aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP
-    GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 4    'Pula chaves "PF", "TIPOENT", "CODCOMP", "SEQ", "SSQ",
   End If
   Screen.MousePointer = vbDefault
   Unload Me
 End Sub
 
 Private Sub CmdEditar_Click()
-  ePASS01 = TXTFIELDS(2).tEXT
-  Select Case TXTFIELDS(1).tEXT
+  ePASS01 = txtFields(2).text
+  Select Case txtFields(1).text
   Case "T"
     FrmMP03.Show vbModal, Me
   Case Else
@@ -455,9 +457,9 @@ End Sub
 Private Sub CmdPrd_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXTFIELDS(11) = "Int"
+    txtFields(11) = "Int"
   Case 1
-    TXTFIELDS(11) = "Ext"
+    txtFields(11) = "Ext"
   End Select
 End Sub
 
@@ -469,13 +471,13 @@ Private Sub Command1_Click()
   Dim aRETU As Variant
 
 
-  cCODIGO = FixStr(TXTFIELDS(2), "", "TRIM")
+  cCODIGO = FixStr(txtFields(2), "", "TRIM")
 
 
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
 
 
-  Select Case TXTFIELDS(1)
+  Select Case txtFields(1)
   Case "C"
     sSQL = "SELECT NOME,NOM2 FROM MT01 WHERE CODIGO='" & cCODIGO & "'"
     aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "NOM2"), Array("C", "C"), Array("", ""))
@@ -509,7 +511,7 @@ Private Sub Command1_Click()
       End If
     End If
   End Select
-  TXTFIELDS(3) = FixStr(cNOME)
+  txtFields(3) = FixStr(cNOME)
 End Sub
 
 Private Sub Encerrar_Click()
@@ -523,7 +525,7 @@ End Sub
 Private Sub escmu_Click()
 
   iMU01 = 0
-  Select Case TXTFIELDS(1)
+  Select Case txtFields(1)
   Case "M"
     iMU01 = 1
   Case "C"
@@ -536,7 +538,7 @@ Private Sub escmu_Click()
   If iMU01 > 0 Then
     escmu01.Show vbModal, Me
     If Not lRETU Then Exit Sub
-    frmPFMS03.TXTFIELDS(2) = eRETU01
+    frmPFMS03.txtFields(2) = eRETU01
     Command1_Click
   End If
 
@@ -549,8 +551,8 @@ Private Sub ESCpro_Click()
   ePASS01 = "LOGIC"                            ''
   escms01.Show vbModal, Me
   If lRETU Then
-    TXTFIELDS(2) = eRETU01
-    TXTFIELDS(3) = eRETU02
+    txtFields(2) = eRETU01
+    txtFields(3) = eRETU02
   End If
   cCHAVEBUS = ""
 End Sub
@@ -564,19 +566,19 @@ Private Sub Form_Load()
   cARQPF = PegPath("PATH", "PF")
   cSQL = "select * from PFMS03 WHERE PF=" & nPF & " AND TIPOENT='" & Ctipoent & "' AND CODCOMP='" & Ccodcomp & "' and seq=" & FixInt(nSEQ) & " and ssq=" & FixInt(nSSQ)
   nCAMPOS = 12
-  aCAM = Array("PF", "TIPOENT", "CODCOMP", "DESCRI", _
-               "QTDDE", "PRECO", "TOTAL", "BAIXAC", _
-               "SEQ", "SSQ", "OPCAO", "PRDORI")
-  aFOR = Array("NI", "C", "C", "C", _
-               "N", "N", "N", "C", _
-               "NI", "NI", "NI", "C")
-  aPAD = Array(0, "", "", "", _
+  aCAM = Array("PF", "TIPOENT", "CODCOMP", "SEQ", _
+               "SSQ", "PRECO", "TOTAL", "BAIXAC", _
+               "DESCRI", "QTDE", "OPCAO", "PRDORI")
+  aFOR = Array("NI", "C", "C", "NI", _
+               "NI", "N", "N", "C", _
+               "C", "N", "NI", "C")
+  aPAD = Array(0, "", 0, 0, _
                0, 0, 0, "", _
-               0, 0, 0, "")
+               "", 0, 0, "")
 
   aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtFields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
 
 
@@ -585,7 +587,7 @@ End Sub
 Private Sub TXTFIELDS_Change(Index As Integer)
   Select Case Index
   Case 4, 5
-    TXTFIELDS(6) = FixNum(TXTFIELDS(4)) * FixNum(TXTFIELDS(5))
+    txtFields(6) = FixNum(txtFields(4)) * FixNum(txtFields(5))
   End Select
 End Sub
 

@@ -671,7 +671,7 @@ Private Sub cmdClose_Click()
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = TXT(iLOOP)
     Next iLOOP
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 '0 numero chave
   End If
   Screen.MousePointer = vbDefault
   Unload Me

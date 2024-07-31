@@ -371,7 +371,7 @@ Private Sub cmdClose_Click()
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     aVAL(9) = DTPicker1.Value
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 '0 codigo chave
   End If
   Screen.MousePointer = vbDefault
   Unload Me

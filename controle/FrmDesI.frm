@@ -299,12 +299,12 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 4
-      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+      aVAL(iLOOP) = txtfields(iLOOP)
     Next iLOOP
     aVAL(8) = DTPicker1.Value
     aVAL(9) = DTPicker2.Value
     aVAL(10) = FixNumBol(Check1.Value)
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 2 '0 conjunto 1 desenho chaves
   End If
   Screen.MousePointer = vbDefault
   Unload Me
@@ -332,7 +332,7 @@ Private Sub Form_Load()
   aPAD = Array(cCONJUNTO, cDESENHO, 0, 0, 0, "", "", "", Date, Date, True)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 4
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtfields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   If IsDate(aVAL(8)) Then
     DTPicker1.Value = aVAL(8)

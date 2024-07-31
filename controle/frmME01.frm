@@ -647,9 +647,9 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
-      aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
+      aVAL(iLOOP) = txtFields(iLOOP)       ''vb matriz zero
     Next iLOOP
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 '0 codigo chave
   End If
   Screen.MousePointer = vbDefault
   Unload Me
@@ -673,14 +673,14 @@ End Sub
 
 Private Sub cmdFOTO_Click()
   Dim cSQL As String
-  zgrp = TxtCodigo.tEXT
+  zgrp = txtcodigo.text
   iImage = 4
   cARQRTF = PegPath("PATH", "IMGME01")
   cSQL = "select * from IMAGENS WHERE CODIGO='" & zgrp & "'"
   IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(zgrp), True, False
 
   Load frmIMAGENS
-  frmIMAGENS.TXTFIELDS(0).Enabled = False
+  frmIMAGENS.txtFields(0).Enabled = False
   frmIMAGENS.Escolher(0).Visible = False
   frmIMAGENS.Show vbModal, Me
 
@@ -818,10 +818,10 @@ Private Sub CmdREvi_Click()
   ePASS02 = cARQFEMEA
 
   Load frmFEMEI
-  frmFEMEI.TXTFIELDS(2).Enabled = False
-  frmFEMEI.TXTFIELDS(3).Enabled = False
-  frmFEMEI.TXTFIELDS(4).Enabled = False
-  frmFEMEI.TXTFIELDS(5).Enabled = False
+  frmFEMEI.txtFields(2).Enabled = False
+  frmFEMEI.txtFields(3).Enabled = False
+  frmFEMEI.txtFields(4).Enabled = False
+  frmFEMEI.txtFields(5).Enabled = False
   frmFEMEI.cmdClose.Enabled = False
   frmFEMEI.CmdAltman.Enabled = False
   frmFEMEI.Show vbModal, Me
@@ -872,11 +872,11 @@ Private Sub EscTipIns_Click(Index As Integer)
   If lRETU Then
     Select Case Index
     Case 0
-      TXTFIELDS(4).tEXT = eRETU01
-      TXTFIELDS(6).tEXT = eRETU03
+      txtFields(4).text = eRETU01
+      txtFields(6).text = eRETU03
       '                txt(5).Text = eRETU02
     Case 1
-      TXTFIELDS(5).tEXT = eRETU01
+      txtFields(5).text = eRETU01
     End Select
   End If
 End Sub
@@ -901,20 +901,20 @@ Private Sub Form_Load()
   cSQL = cSQL & " FROM ME01 WHERE NUMERO='" & Trim(ePASS01) & "'"
   cARQFEMEA = PegPath("PATH", "FEMEA")
 
-  TxtCodigo.tEXT = ePASS01
-  TxtNome.tEXT = ePASS02
+  txtcodigo.text = ePASS01
+  txtNome.text = ePASS02
   nCAMPOS = 12
   aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "GRUPO", "TIPO", "FEMEA", "CONTABIL", "FABRICANTE", "MODELO", "NUMFAB", "ANO")
   aFOR = Array("N", "N", "N", "N", "C", "C", "N", "C", "C", "C", "C", "N")
   aPAD = Array(0, 0, 0, 0, "", "", 0, "", "", "", "", 0)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtFields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
 
   cORDFEMUSO = "ITEM"
 
-  nFEMMAQ = Val(TXTFIELDS(6))
+  nFEMMAQ = Val(txtFields(6))
 
 
   FilRelat
@@ -950,7 +950,7 @@ End Sub
 
 Private Sub TXTFIELDS_LostFocus(Index As Integer)
   If Index = 6 Then
-    nFEMMAQ = Val(TXTFIELDS(6))
+    nFEMMAQ = Val(txtFields(6))
   End If
 End Sub
 

@@ -407,7 +407,7 @@ Private Sub cmdClose_Click()
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
-    GrvSQL cARQDES, cSQLDES, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQDES, cSQLDES, nCAMPOS, aCAM, aVAL, aFOR, 1 '0 conjunto chave
   End If
   Screen.MousePointer = vbDefault
   Unload Me

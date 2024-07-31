@@ -323,7 +323,7 @@ Private Sub cmdClose_Click()
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 '0 item chave
 
     If lTROCOU Then
       ADOGrvBlob cARQ, cSQL, Picture1, "IMAGEM"

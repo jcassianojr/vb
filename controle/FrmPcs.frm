@@ -122,23 +122,22 @@ Begin VB.Form frmPCS
       TabsPerRow      =   4
       TabHeight       =   520
       TabCaption(0)   =   "Plano Controle"
-      Tab(0).ControlCount=   16
-      Tab(0).Control(0)=   "Command9(2)"
-      Tab(0).Control(1)=   "TxtItem"
-      Tab(0).Control(2)=   "CmdControleDispo"
-      Tab(0).Control(3)=   "Command6"
-      Tab(0).Control(4)=   "Command5"
-      Tab(0).Control(5)=   "Command1"
-      Tab(0).Control(6)=   "Command3"
-      Tab(0).Control(7)=   "Command2"
-      Tab(0).Control(8)=   "Duplicar(10)"
-      Tab(0).Control(9)=   "Duplicar(0)"
-      Tab(0).Control(10)=   "Command4(0)"
-      Tab(0).Control(11)=   "Command9(0)"
-      Tab(0).Control(12)=   "Command8(0)"
-      Tab(0).Control(13)=   "txtFields(2)"
-      Tab(0).Control(14)=   "txtFields(1)"
-      Tab(0).Control(15)=   "GridPla(0)"
+      Tab(0).ControlCount=   15
+      Tab(0).Control(0)=   "TxtItem"
+      Tab(0).Control(1)=   "CmdControleDispo"
+      Tab(0).Control(2)=   "Command6"
+      Tab(0).Control(3)=   "Command5"
+      Tab(0).Control(4)=   "Command1"
+      Tab(0).Control(5)=   "Command3"
+      Tab(0).Control(6)=   "Command2"
+      Tab(0).Control(7)=   "Duplicar(10)"
+      Tab(0).Control(8)=   "Duplicar(0)"
+      Tab(0).Control(9)=   "Command4(0)"
+      Tab(0).Control(10)=   "Command9(0)"
+      Tab(0).Control(11)=   "Command8(0)"
+      Tab(0).Control(12)=   "txtFields(2)"
+      Tab(0).Control(13)=   "txtFields(1)"
+      Tab(0).Control(14)=   "GridPla(0)"
       TabCaption(1)   =   "Croqui"
       Tab(1).ControlCount=   8
       Tab(1).Control(0)=   "Picture1(0)"
@@ -159,11 +158,11 @@ Begin VB.Form frmPCS
       Tab(2).Control(5)=   "GridPla(3)"
       TabCaption(3)   =   "On the Job"
       Tab(3).ControlCount=   6
-      Tab(3).Control(0)=   "Command4(1)"
-      Tab(3).Control(1)=   "Command4(2)"
-      Tab(3).Control(2)=   "Command8(2)"
-      Tab(3).Control(3)=   "Duplicar(12)"
-      Tab(3).Control(4)=   "Duplicar(2)"
+      Tab(3).Control(0)=   "Command4(2)"
+      Tab(3).Control(1)=   "Command8(2)"
+      Tab(3).Control(2)=   "Duplicar(12)"
+      Tab(3).Control(3)=   "Duplicar(2)"
+      Tab(3).Control(4)=   "Command4(1)"
       Tab(3).Control(5)=   "GridPla(2)"
       TabCaption(4)   =   "Checklist"
       Tab(4).ControlCount=   5
@@ -182,15 +181,6 @@ Begin VB.Form frmPCS
       Tab(5).Control(5)=   "DelImg(1)"
       Tab(5).Control(6)=   "imgsave(1)"
       Tab(5).Control(7)=   "VerImg(1)"
-      Begin VB.CommandButton Command9 
-         Caption         =   "Apaga"
-         Height          =   375
-         Index           =   2
-         Left            =   8040
-         TabIndex        =   63
-         Top             =   1800
-         Width           =   1095
-      End
       Begin VB.CommandButton Command4 
          Caption         =   "Editar"
          Height          =   375
@@ -914,12 +904,12 @@ Private Sub cmdClose_Click()
   Dim cSQLIMG As String
   Dim cCAMIMG As String
   On Error Resume Next
-  TXTFIELDS(1).tEXT = Replace(TXTFIELDS(1).tEXT, "/", "-")  'chave apresentando erro de gravacao
+  txtFields(1).text = Replace(txtFields(1).text, "/", "-")  'chave apresentando erro de gravacao
 
   If MDG("Gravar alteraçôes") Then
     'campos
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+      aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP
     GrvSQL cARQUSO, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     'imagens
@@ -998,7 +988,7 @@ Private Sub Command1_Click()
   eRETU02 = ""
   ESCPCT.Show vbModal, Me
   If lRETU Then
-    FRMPCS.TXTFIELDS(1) = eRETU02
+    FRMPCS.txtFields(1) = eRETU02
   End If
 End Sub
 
@@ -1069,7 +1059,7 @@ Private Sub Command6_Click()
   End If
 
   cARQPOKA = PegPath("PATH", "POKA")
-  nORD = txtItem.tEXT
+  nORD = TxtItem.text
   nPPAP = PegUltSQL(cARQPOKA, "select numero from POKA WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
   If nPPAP = 0 Then
     nPPAP = FixInt(PegMAXSQL(cARQPOKA, "POKA", "NUMERO", 0)) + 1
@@ -1280,9 +1270,9 @@ Private Sub Form_Load()
   Dim cSQLIMG As String
   CenterFormToScreen Me
 
-  TXTPF.tEXT = nPF
-  TXTSEQ.tEXT = nSEQ
-  TXTSSQ.tEXT = nSSQ
+  TXTPF.text = nPF
+  TXTSEQ.text = nSEQ
+  TXTSSQ.text = nSSQ
 
 
   lTROCOU = Array(False, False, False, False, False)
@@ -1299,7 +1289,7 @@ Private Sub Form_Load()
     End If
   End If
   If nARQPCS = 2 Then
-    TxtCodComp.tEXT = Ccodcomp
+    TxtCodComp.text = Ccodcomp
   Else
     TxtCodComp.Visible = False
     Label4.Visible = False
@@ -1319,7 +1309,7 @@ Private Sub Form_Load()
   aPAD = Array("", "", "", "")
   aVAL = PegSQL(cARQUSO, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtFields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   For iLOOP = 0 To 1
     Select Case iLOOP
@@ -1349,7 +1339,7 @@ Private Sub Form_Load()
   FilRelat (2)                                 'on the job
   FilRelat (3)                                 'dispositivo
 
-  TXTFIELDS(1).tEXT = Replace(TXTFIELDS(1).tEXT, "/", "-")  'chave apresentando erro de gravacao
+  txtFields(1).text = Replace(txtFields(1).text, "/", "-")  'chave apresentando erro de gravacao
   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
   PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 

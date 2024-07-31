@@ -154,10 +154,10 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   For iLOOP = 0 To nCAMPOS - 2
-    aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    aVAL(iLOOP) = txtFields(iLOOP)
   Next iLOOP
   aVAL(4) = FixNumBol(inativo.Value)
-  GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+  GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 2 '0 item 1 cliente chaves
   Screen.MousePointer = vbDefault
   Unload Me
 End Sub
@@ -185,7 +185,7 @@ Private Sub Form_Load()
   aPAD = Array(0, 0, "", "", False)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 2
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtFields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   inativo.Value = aVAL(4)
 End Sub
