@@ -79,17 +79,22 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     GeraConn = "[JETFOX]" & cARQ
     Exit Function
   End If
-    If cTIPO = "SQLITE" Or InStr(LCase(cARQ), ".sqlite") > 0 Or InStr(LCase(cARQ), ".sqlite3") > 0 _
-                 Or InStr(LCase(cARQ), ".fossil") > 0 Or InStr(LCase(cARQ), ".db3") > 0 _
-                 Or InStr(LCase(cARQ), ".db") > 0 Then
-    GeraConn = "[SQLITE]" & cARQ
-    Exit Function
-  End If
-
+  
+'
+' foxpro .dbf 'vir antes do sqlite para nao confundir com .db
+'
+  
   If InStr(cARQTMP, ".DBF") > 0 Then  'DBF
     nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
     cARQ = Mid(cARQ, 1, nPOS)
     GeraConn = "[JETFOX]" & cARQ
+    Exit Function
+  End If
+  
+  If cTIPO = "SQLITE" Or InStr(LCase(cARQ), ".sqlite") > 0 Or InStr(LCase(cARQ), ".sqlite3") > 0 _
+                 Or InStr(LCase(cARQ), ".fossil") > 0 Or InStr(LCase(cARQ), ".db3") > 0 _
+                 Or (InStr(LCase(cARQ), ".db") > 0 And InStr(cARQTMP, ".DBF") = 0) Then
+    GeraConn = "[SQLITE]" & cARQ
     Exit Function
   End If
 
@@ -654,7 +659,7 @@ Public Function ADORsStatus(ByRef eSTATUS)
 End Function
 
 Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String = "")
-  Dim errorObject As ADODB.error
+  Dim errorObject As ADODB.Error
   For Each errorObject In oErro
     cERRO = cERRO & " Ado Erro Numero: " & errorObject.Number & vbCrLf
     cERRO = cERRO & " Ado Descricao  : " & errorObject.Description & vbCrLf

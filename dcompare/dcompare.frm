@@ -290,7 +290,7 @@ Private Sub CmdCompactar_Click()
 End Sub
 
 Private Sub CmdExportarSqlite_Click()
-   Text2.tEXT = TrocaExt(Text1.tEXT, "sqlite")
+  ' Text2.tEXT = TrocaExt(Text1.tEXT, "sqlite")
    If MDG("Converter Reescreve Destino") Then
       Convert Text1.tEXT, Text2.tEXT
    End If
@@ -299,24 +299,29 @@ End Sub
 Private Sub Convert(NWindMDBFileName$, SQLiteFileName$)
 Dim i&, aCnn As ADODB.Connection, sCnn As cConnection
   On Error Resume Next
+  Dim cCONN As String
   
   Set aCnn = New ADODB.Connection
   aCnn.CursorLocation = adUseClient
-  aCnn.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & NWindMDBFileName
+  cCONN = GeracArq(NWindMDBFileName)
+  'aCnn.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & NWindMDBFileName
+  aCnn.Open cCONN
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
  
-  If FileExist(SQLiteFileName, True) Then
-     If MDG("Excluir Destino") Then
-        Kill SQLiteFileName 'ensure, that we kill the older File first
-     Else
-        Exit Sub
-     End If
+  'If FileExist(SQLiteFileName, True) Then
+  '   If MDG("Excluir Destino") Then
+  '      Kill SQLiteFileName 'ensure, that we kill the older File first
+  '   Else
+  '      Exit Sub
+  '   End If
      
-  End If
+  'End If
   Err.Clear
   
   Set sCnn = New_c.Connection
-  sCnn.CreateNewDB SQLiteFileName
+  'sCnn.CreateNewDB SQLiteFileName
+  sCnn.OpenDB SQLiteFileName
+  
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
   
   Set C = New cConverter
@@ -348,10 +353,36 @@ Dim i&, aCnn As ADODB.Connection, sCnn As cConnection
 End Sub
 
 Private Sub Command1_Click()
-  Text1.tEXT = OpenArqExt(Me, "", "MDB", "Microsoft Access (*.mdb)")
+  Dim sFILENAME As String
+  Dim sPath As String
+  Dim sRECENTFILE As String
+  Dim sFILTER As String
+
+  sPath = App.Path
+  sFILTER = "Access mdb" & vbNullChar & "*.mdb" & vbNullChar & "DBF" & vbNullChar & "*.DBF"
+  sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
+  If Len(sFILENAME) = 0 Then
+    Text1.tEXT = ""
+    Exit Sub
+  End If
+  Text1.tEXT = sFILENAME
 End Sub
 Private Sub Command2_Click()
-  Text2.tEXT = OpenArqExt(Me, "", "MDB", "Microsoft Access (*.mdb)")
+  Dim sFILENAME As String
+  Dim sPath As String
+  Dim sRECENTFILE As String
+  Dim sFILTER As String
+
+
+  sPath = App.Path
+  sFILTER = "Access mdb" & vbNullChar & "*.mdb" & vbNullChar & "Sqlite" & vbNullChar & "*.sqlite"
+  sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
+  If Len(sFILENAME) = 0 Then
+    Text2.tEXT = ""
+    Exit Sub
+  End If
+  Text2.tEXT = sFILENAME
+  
 End Sub
 Private Sub Command3_Click()
   If Len(Text1.tEXT) = 0 Or Len(Text2.tEXT) = 0 Then

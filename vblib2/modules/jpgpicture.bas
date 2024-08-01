@@ -107,7 +107,6 @@ Public Function ADOPegBlob(ByVal cARQ As String, ByVal cSQL As String, _
         iFileNum = FreeFile
         Open sTEMPFILE For Binary As #iFileNum
         abBytes = oRS(cCAMPO).GetChunk(lFileLength)
-      '  abBytes = oRS(cCAMPO)
         
         Put #iFileNum, , abBytes()
         Close #iFileNum
@@ -122,8 +121,8 @@ Public Function ADOPegBlob(ByVal cARQ As String, ByVal cSQL As String, _
 
        'abBytes = oRS(cCAMPO)
         
-     '   Set pb = New PropertyBag
-     '   pb.Contents = abBytes
+   '     Set pb = New PropertyBag
+    '    pb.Contents = abBytes
      '   Set cPICTURE.Picture = pb.ReadProperty("Picture")
 
 
