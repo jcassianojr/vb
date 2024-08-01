@@ -352,7 +352,7 @@ If Left$(PathName, 2) = "\\" Then PathName = "UNC\" & Mid$(PathName, 3)
 Dim dwAttributes As Long
 dwAttributes = GetFileAttributes(StrPtr("\\?\" & PathName))
 If dwAttributes = INVALID_FILE_ATTRIBUTES Then
-    Err.Raise 53
+'    Err.Raise 53
 ElseIf dwAttributes = FILE_ATTRIBUTE_NORMAL Then
     GetAttr = vbNormal
 Else

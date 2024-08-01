@@ -12,6 +12,25 @@ Begin VB.Form dCompare
    ScaleHeight     =   5805
    ScaleWidth      =   8955
    StartUpPosition =   3  'Windows Default
+   Begin XPControls.XPButton CmdExportarSqlite 
+      Height          =   375
+      Left            =   5160
+      TabIndex        =   12
+      Top             =   1200
+      Width           =   1815
+      _ExtentX        =   3201
+      _ExtentY        =   661
+      Caption         =   "Exportar Sqlite"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
    Begin VBCCR18.TextBoxW Text3 
       Height          =   2895
       Left            =   120
@@ -193,6 +212,16 @@ Begin VB.Form dCompare
       ColorBegin      =   8454143
       ColorEnd        =   8454143
    End
+   Begin VB.Label lProgress 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   1  'Fixed Single
+      Height          =   375
+      Left            =   5160
+      TabIndex        =   13
+      Top             =   1680
+      Width           =   3360
+      WordWrap        =   -1  'True
+   End
    Begin VB.Label Label2 
       Alignment       =   2  'Center
       Caption         =   "Destino"
@@ -239,14 +268,17 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Dim nERRO
+Private WithEvents C As cConverter
+Attribute C.VB_VarHelpID = -1
+'Attribute C.VB_VarHelpID = -1
 
 Private Sub CmdCompactar_Click()
   Dim lngBefore, lngAfter As Long
   Dim strResult As String
-  lngBefore = FileLen(Text1.Text)
-  If CompactAccess(Text1.Text) Then
+  lngBefore = FileLen(Text1.tEXT)
+  If CompactAccess(Text1.tEXT) Then
 
-    lngAfter = FileLen(Text1.Text)
+    lngAfter = FileLen(Text1.tEXT)
     strResult = "Resultados da Compactacao" & vbCrLf
     strResult = strResult & "-------------------------------------------" & vbCrLf
     strResult = strResult & "Tamanho Antes  da Compactação: " & lngBefore & " bytes" & vbCrLf
@@ -257,25 +289,83 @@ Private Sub CmdCompactar_Click()
   End If
 End Sub
 
+Private Sub CmdExportarSqlite_Click()
+   Text2.tEXT = TrocaExt(Text1.tEXT, "sqlite")
+   If MDG("Converter Reescreve Destino") Then
+      Convert Text1.tEXT, Text2.tEXT
+   End If
+   
+End Sub
+Private Sub Convert(NWindMDBFileName$, SQLiteFileName$)
+Dim i&, aCnn As ADODB.Connection, sCnn As cConnection
+  On Error Resume Next
+  
+  Set aCnn = New ADODB.Connection
+  aCnn.CursorLocation = adUseClient
+  aCnn.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & NWindMDBFileName
+  If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
+ 
+  If FileExist(SQLiteFileName, True) Then
+     If MDG("Excluir Destino") Then
+        Kill SQLiteFileName 'ensure, that we kill the older File first
+     Else
+        Exit Sub
+     End If
+     
+  End If
+  Err.Clear
+  
+  Set sCnn = New_c.Connection
+  sCnn.CreateNewDB SQLiteFileName
+  If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
+  
+  Set C = New cConverter
+  C.ConvertDatabase aCnn, sCnn
+  If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
+  lProgress.Caption = "Table-Schemas created, Table-Data transferred!"
+  
+  C.ConvertIndexes aCnn, sCnn
+  If Err Then MsgBox Err.Description
+  lProgress.Caption = "Index-Import finished!"
+  
+  'Now we add the (prior) manually created SQLite-Views from their Def-Files
+  'For i = 1 To 10
+  '  Err.Clear
+  '  sCnn.Execute GetTextFromFile(App.Path & "\NWind.db View-Defs\" & i & ".txt")
+  '  If Err Then MsgBox Err.Description
+  'Next i
+  'lProgress.Caption = "Manually defined View-Pendants created!"
+
+  'finally we create a backup-table from 'employees' inside the new
+  'created SQLite-Database (used inside the DC/DataBinding-Demos)
+  Err.Clear
+  'sCnn.BeginTrans
+  '  sCnn.Execute "Create Table EmployeesBackup As Select * from Employees"
+  sCnn.CommitTrans
+  If Err Then MsgBox Err.Description: Err.Clear
+
+  Set C = Nothing
+End Sub
+
 Private Sub Command1_Click()
-  Text1.Text = OpenArqExt(Me, "", "MDB", "Microsoft Access (*.mdb)")
+  Text1.tEXT = OpenArqExt(Me, "", "MDB", "Microsoft Access (*.mdb)")
 End Sub
 Private Sub Command2_Click()
-  Text2.Text = OpenArqExt(Me, "", "MDB", "Microsoft Access (*.mdb)")
+  Text2.tEXT = OpenArqExt(Me, "", "MDB", "Microsoft Access (*.mdb)")
 End Sub
 Private Sub Command3_Click()
-  If Len(Text1.Text) = 0 Or Len(Text2.Text) = 0 Then
+  If Len(Text1.tEXT) = 0 Or Len(Text2.tEXT) = 0 Then
     Alert "Origem ou Destino Nao Preenchido"
     Exit Sub
   End If
-  corrige Text1.Text, Text2.Text, False
+  corrige Text1.tEXT, Text2.tEXT, False
 End Sub
 Private Sub Command4_Click()
-  If Len(Text1.Text) = 0 Or Len(Text2.Text) = 0 Then
+  If Len(Text1.tEXT) = 0 Or Len(Text2.tEXT) = 0 Then
     Alert "Origem ou Destino Nao Preenchido"
     Exit Sub
   End If
-  corrige Text1.Text, Text2.Text, True
+  corrige Text1.tEXT, Text2.tEXT, True
 End Sub
 Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional ByVal lGRAVA As Boolean = False)
   Dim WrkSpace As DAO.Workspace
@@ -293,16 +383,16 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
   Dim oFieldDef As Variant
 
 
-  Dim I As Integer
-  Dim X As Integer
+  Dim i As Integer
+  Dim x As Integer
   Dim cARQ As String
 
   On Error GoTo errhandler
   Set WrkSpace = DBEngine.CreateWorkspace("Compare", "Admin", "")
-  Set Baza1 = WrkSpace.OpenDatabase(Text1.Text)
-  Set Baza2 = WrkSpace.OpenDatabase(Text2.Text)
+  Set Baza1 = WrkSpace.OpenDatabase(Text1.tEXT)
+  Set Baza2 = WrkSpace.OpenDatabase(Text2.tEXT)
   ''On Error Resume Next
-  Text3.Text = ""
+  Text3.tEXT = ""
   For N = 0 To Baza1.TableDefs.Count - 1
     If Baza1.TableDefs(N).Properties(5) = 0 Then
       nERRO = 0
@@ -311,7 +401,7 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
       Set rec1 = Baza1.OpenRecordset(T_Ime)
       Set rec2 = Baza2.OpenRecordset(T_Ime)
       If nERRO = 3078 Then
-        Text3.Text = Text3.Text & "Falta Tabela: " & T_Ime & vbNewLine
+        Text3.tEXT = Text3.tEXT & "Falta Tabela: " & T_Ime & vbNewLine
         If lGRAVA Then
           Set NewTable = Baza2.CreateTableDef(T_Ime)
           With NewTable
@@ -334,7 +424,7 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
           R_Ime = rec1.Fields(m).Name
           nekej = rec2.Fields(R_Ime).Name
           If nERRO = 3265 Then
-            Text3.Text = Text3.Text & "Falta Campo: " & T_Ime & "." & R_Ime & vbNewLine
+            Text3.tEXT = Text3.tEXT & "Falta Campo: " & T_Ime & "." & R_Ime & vbNewLine
             If lGRAVA Then
               Set NewTable = Baza2.TableDefs(T_Ime)
               rec2.Close
@@ -362,8 +452,8 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
   Baza2.Close
   Baza1.Close
   WrkSpace.Close
-  If Text3.Text = "" Then
-    Text3.Text = "Arquivos sem diferencas"
+  If Text3.tEXT = "" Then
+    Text3.tEXT = "Arquivos sem diferencas"
   End If
 
   Exit Sub
@@ -381,15 +471,15 @@ errhandler:
 End Sub
 
 Private Sub Command5_Click()
-  Dim sFILTER, sFileName As String
+  Dim sFILTER, sFILENAME As String
   sFILTER = "Arquivos Access (*.MDB)" & vbNullChar & "*.MDB" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-  sFileName = FileSave(Me, sFILTER, 1, "MDB", "", "", "Criar Access Como")
-  If Not Len(sFileName) = 0 Then
-    If FileExist(sFileName) Then
+  sFILENAME = FileSave(Me, sFILTER, 1, "MDB", "", "", "Criar Access Como")
+  If Not Len(sFILENAME) = 0 Then
+    If FileExist(sFILENAME) Then
       ''nAO GRAVA EM CIMA
     Else
-      AdoNewTable sFileName, False, 5
-      Text2.Text = sFileName
+      AdoNewTable sFILENAME, False, 5
+      Text2.tEXT = sFILENAME
     End If
   End If
 End Sub

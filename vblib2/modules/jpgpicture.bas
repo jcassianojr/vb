@@ -74,7 +74,7 @@ Public Function ADOPegBlob(ByVal cARQ As String, ByVal cSQL As String, _
   Dim abBytes() As Byte
   Dim iFileNum As Integer
   Dim sTEMPFILE As String
-
+  Dim pb As PropertyBag
 
 
   On Error GoTo errhandler
@@ -103,23 +103,28 @@ Public Function ADOPegBlob(ByVal cARQ As String, ByVal cSQL As String, _
       lFileLength = LenB(oRS(cCAMPO))
 
       If lFileLength > 1 Then
+        
         iFileNum = FreeFile
         Open sTEMPFILE For Binary As #iFileNum
         abBytes = oRS(cCAMPO).GetChunk(lFileLength)
+      '  abBytes = oRS(cCAMPO)
+        
         Put #iFileNum, , abBytes()
         Close #iFileNum
 
         If Not sTEMPFILE = "" Then
-          'Set cPICTURE.Picture = LoadPictureEx(sTEMPFILE)
-
-          Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
+           Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
           eRETU01 = FileLen(sTEMPFILE)
           ADOPegBlob = True
+          End If
+          DeleteFile sTEMPFILE
         End If
-        DeleteFile sTEMPFILE  'Kill sTEMPFILE
-      End If
 
-
+       'abBytes = oRS(cCAMPO)
+        
+     '   Set pb = New PropertyBag
+     '   pb.Contents = abBytes
+     '   Set cPICTURE.Picture = pb.ReadProperty("Picture")
 
 
     End If
