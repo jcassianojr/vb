@@ -287,6 +287,7 @@ Private Sub CmdCompactar_Click()
   Else
     MsgBox "Erro na compactacao do arquivo", vbExclamation
   End If
+  
 End Sub
 
 Private Sub CmdExportarSqlite_Click()
@@ -298,8 +299,19 @@ Private Sub CmdExportarSqlite_Click()
 End Sub
 Private Sub Convert(NWindMDBFileName$, SQLiteFileName$)
 Dim i&, aCnn As ADODB.Connection, sCnn As cConnection
+Dim aCnnMDB As ADODB.Connection
+'Dim oCSV As cCSV
+'Dim oFSO As cFSO
+'cConnection cRecordset ImpCSV As New cSpecificImport cCollection
+'cStringCompare cSortedDictionary Catalog command parameter Recordset
+'cDBAccess
+'Dim OTESTE As
+'OTESTE.
+
+
   On Error Resume Next
-  Dim cCONN As String
+  Dim cCONN, cCONMDB As String
+  Dim lMDB As Boolean
   
   Set aCnn = New ADODB.Connection
   aCnn.CursorLocation = adUseClient
@@ -308,45 +320,45 @@ Dim i&, aCnn As ADODB.Connection, sCnn As cConnection
   aCnn.Open cCONN
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
  
-  'If FileExist(SQLiteFileName, True) Then
-  '   If MDG("Excluir Destino") Then
-  '      Kill SQLiteFileName 'ensure, that we kill the older File first
-  '   Else
-  '      Exit Sub
-  '   End If
-     
-  'End If
   Err.Clear
   
-  Set sCnn = New_c.Connection
-  'sCnn.CreateNewDB SQLiteFileName
-  sCnn.OpenDB SQLiteFileName
+  'lMDB = InStr(UCase(SQLiteFileName), ".MDB") > 0
+  lMDB = False 'quando destino e access apresentou erro possivel implantacao futura
+  
+  If lMDB Then
+     Set aCnnMDB = New ADODB.Connection
+     aCnnMDB.CursorLocation = adUseClient
+     cCONMDB = GeracArq(SQLiteFileName)
+     aCnnMDB.Open cCONMDB
+  Else
+      Set sCnn = New_c.Connection
+      'sCnn.CreateNewDB SQLiteFileName 'para evitar apagar usando sempre uma base sqlite existente
+      sCnn.OpenDB SQLiteFileName
+  End If
   
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
   
   Set C = New cConverter
-  C.ConvertDatabase aCnn, sCnn
+  If lMDB Then
+     C.ConvertDatabase aCnn, aCnnMDB
+  Else
+     C.ConvertDatabase aCnn, sCnn
+  End If
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
   lProgress.Caption = "Table-Schemas created, Table-Data transferred!"
   
-  C.ConvertIndexes aCnn, sCnn
+  If lMDB Then
+    C.ConvertIndexes aCnn, aCnnMDB
+  Else
+    C.ConvertIndexes aCnn, sCnn
+  End If
   If Err Then MsgBox Err.Description
   lProgress.Caption = "Index-Import finished!"
   
-  'Now we add the (prior) manually created SQLite-Views from their Def-Files
-  'For i = 1 To 10
-  '  Err.Clear
-  '  sCnn.Execute GetTextFromFile(App.Path & "\NWind.db View-Defs\" & i & ".txt")
-  '  If Err Then MsgBox Err.Description
-  'Next i
-  'lProgress.Caption = "Manually defined View-Pendants created!"
-
-  'finally we create a backup-table from 'employees' inside the new
-  'created SQLite-Database (used inside the DC/DataBinding-Demos)
+  
+  
   Err.Clear
-  'sCnn.BeginTrans
-  '  sCnn.Execute "Create Table EmployeesBackup As Select * from Employees"
-  sCnn.CommitTrans
+  
   If Err Then MsgBox Err.Description: Err.Clear
 
   Set C = Nothing
