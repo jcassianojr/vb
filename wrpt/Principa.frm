@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "20:30"
+            TextSave        =   "11:51"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -69,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":0B24
-            TextSave        =   "30/07/2024"
+            TextSave        =   "03/08/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -468,8 +468,10 @@ Private Sub MDIForm_Load()
 
     'Cria o Arquivo log do mes
   cARQERRO = PegPath("PATH", "LOGCAM") & "LOG" & Format(Now, "MMYYYY") & ".sqlite"
-  nRETU = CopyFileWindowsWay(PegPath("PATH", "LOG"), cARQERRO, False)
-  If nRETU <> 0 Then
+  If Not FileExists(cARQERRO) Then
+     CopyFileWindowsWay PegPath("PATH", "LOG"), cARQERRO, True
+  End If
+  If Not FileExists(cARQERRO) Then
       Alert "Erro Criando Arquivo Log do Mes"
       End
   End If
