@@ -56,13 +56,42 @@ Public Function AcessaForm(ByVal nFORM As Long) As Boolean
 End Function
 
 Public Function GravaLog(Optional ByVal nFORM As Long = 0, Optional ByVal nBOTAO As Long = 0, Optional ByVal Copr As String = "", Optional ByVal cOBS As String = "")
-  GravaLog = IncluiSQL(cARQERRO, "SELECT * FROM LOG WHERE USER=-1", 6, Array("USER", "FORM", "BOTAO", "OPR", "DATA", "OBS"), Array(zUSERID, nFORM, nBOTAO, Copr, Now, cOBS))
+Dim aretu
+Dim cSQLINS As String
+
+aretu = TipoConn(cARQERRO)
+   
+Select Case aretu(2)
+    Case "MDB" 'cSQLINS = " INSERT INTO [log] ([userid] ,[form] ,[opr] ,[botao] ,[data] ,[OBS]) "
+         cSQLINS = " INSERT INTO log (userid ,form ,opr ,botao ,data ,OBS) "
+         cSQLINS = cSQLINS + "     VALUES  ( " + Str(zUSERID) + "," + Str(nFORM)
+         cSQLINS = cSQLINS + ",'" + Copr + "'"
+         cSQLINS = cSQLINS + "," + Str(nBOTAO)
+         cSQLINS = cSQLINS + ", NOW"
+         cSQLINS = cSQLINS + ",'" + cOBS + "'"
+         cSQLINS = cSQLINS + " )"
+         ADOComando cARQERRO, cSQLINS
+    Case "SQLITE"
+         cSQLINS = " INSERT INTO log (userid ,form ,opr ,botao ,data ,OBS) "
+         cSQLINS = cSQLINS + "     VALUES  ( " + Str(zUSERID) + "," + Str(nFORM)
+         cSQLINS = cSQLINS + ",'" + Copr + "'"
+         cSQLINS = cSQLINS + "," + Str(nBOTAO)
+         cSQLINS = cSQLINS + ", current_timestamp"
+         cSQLINS = cSQLINS + ",'" + cOBS + "'"
+         cSQLINS = cSQLINS + " )"
+        ADOComando cARQERRO, cSQLINS
+    Case Else
+     GravaLog = IncluiSQL(cARQERRO, "SELECT * FROM LOG WHERE USER=-1", 6, _
+                      Array("USERID", "FORM", "BOTAO", "OPR", "DATA", "OBS"), _
+                      Array(zUSERID, nFORM, nBOTAO, Copr, Now, cOBS))
+    End Select
+   
 End Function
 
 Public Function demitido(ByVal nNUMERO As Long, Optional ByVal lMES As Boolean = True)
   Dim cARQ As String
   Dim sSQL As String
-  Dim aRETU As Variant
+  Dim aretu As Variant
   Dim nLOOP As Integer
 
   demitido = False
@@ -96,13 +125,13 @@ Public Function demitido(ByVal nNUMERO As Long, Optional ByVal lMES As Boolean =
     If nLOOP < 5 And zusalx = "NAO" Then
       lRETU = False
     Else
-      aRETU = PegSQL(cARQ, sSQL, 1, Array("demitido"), Array("DN"), Array(Today()), False)
+      aretu = PegSQL(cARQ, sSQL, 1, Array("demitido"), Array("DN"), Array(Today()), False)
     End If
     If lRETU Then
-      If Day(aRETU(0)) > 0 And aRETU(0) <> Today() Then
-        Alert ("Funcionario: " & CStr(nNUMERO) & " Troca de Empresa/Cracha ou Demitido em " & aRETU(0))
+      If Day(aretu(0)) > 0 And aretu(0) <> Today() Then
+        Alert ("Funcionario: " & CStr(nNUMERO) & " Troca de Empresa/Cracha ou Demitido em " & aretu(0))
         demitido = True
-        eRETU01 = aRETU(0)
+        eRETU01 = aretu(0)
       Else
         demitido = False
         Exit Function
