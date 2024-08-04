@@ -169,19 +169,6 @@ Public Sub GravaRTF(Optional cDESTINO As String = "")
   txttoRTF mvarArquivo, cDESTINO
 End Sub
 Public Sub GravaPDF(Optional cDESTINO As String = "")
-'If cDESTINO = "" Then
-'    cDESTINO = TrocaExt(mvarArquivo, "pdf") 'no formConvertToPDF ja tem trocaext
-' End If
-'ConvertToPDF(FileName As String, outputfile As String, _
-  '                    Optional TextAuthor As String, Optional TextCreator As String, Optional TextKeywords As String, _
-  '                    Optional TextSubject As String, Optional TextTitle As String, _
-  '                    Optional FontName As String = "Courier", Optional FontSize As Integer = 10, Optional Rotation As Integer, _
-  '                    Optional pwidth As Single = 8.5, Optional pheight As Single = 11, _
-  '                    Optional lPAISAGEM As Boolean = False)
-
-
-'ConvertToPDF mvarArquivo, cDESTINO
-
   ePASS01 = mvarArquivo
   formConvertToPDF.Show
 End Sub
@@ -263,7 +250,6 @@ Public Property Get nROW() As Integer
 End Property
 
 Private Sub Class_Initialize()
-'Dim X As Integer
   mvarnROW = 66
   mvarnCOL = 80
   mvarArquivo = App.Path & "\" & zUSER & Format(Now, "_DDMMYYYY_HHMMSS") & ".TXT"

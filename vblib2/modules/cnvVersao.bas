@@ -56,12 +56,12 @@ Public Function AcessaForm(ByVal nFORM As Long) As Boolean
 End Function
 
 Public Function GravaLog(Optional ByVal nFORM As Long = 0, Optional ByVal nBOTAO As Long = 0, Optional ByVal Copr As String = "", Optional ByVal cOBS As String = "")
-Dim aretu
+Dim aRETU
 Dim cSQLINS As String
 
-aretu = TipoConn(cARQERRO)
+aRETU = TipoConn(cARQERRO)
    
-Select Case aretu(2)
+Select Case aRETU(2)
     Case "MDB" 'cSQLINS = " INSERT INTO [log] ([userid] ,[form] ,[opr] ,[botao] ,[data] ,[OBS]) "
          cSQLINS = " INSERT INTO log (userid ,form ,opr ,botao ,data ,OBS) "
          cSQLINS = cSQLINS + "     VALUES  ( " + Str(zUSERID) + "," + Str(nFORM)
@@ -91,7 +91,7 @@ End Function
 Public Function demitido(ByVal nNUMERO As Long, Optional ByVal lMES As Boolean = True)
   Dim cARQ As String
   Dim sSQL As String
-  Dim aretu As Variant
+  Dim aRETU As Variant
   Dim nLOOP As Integer
 
   demitido = False
@@ -125,13 +125,13 @@ Public Function demitido(ByVal nNUMERO As Long, Optional ByVal lMES As Boolean =
     If nLOOP < 5 And zusalx = "NAO" Then
       lRETU = False
     Else
-      aretu = PegSQL(cARQ, sSQL, 1, Array("demitido"), Array("DN"), Array(Today()), False)
+      aRETU = PegSQL(cARQ, sSQL, 1, Array("demitido"), Array("DN"), Array(Today()), False)
     End If
     If lRETU Then
-      If Day(aretu(0)) > 0 And aretu(0) <> Today() Then
-        Alert ("Funcionario: " & CStr(nNUMERO) & " Troca de Empresa/Cracha ou Demitido em " & aretu(0))
+      If Day(aRETU(0)) > 0 And aRETU(0) <> Today() Then
+        Alert ("Funcionario: " & CStr(nNUMERO) & " Troca de Empresa/Cracha ou Demitido em " & aRETU(0))
         demitido = True
-        eRETU01 = aretu(0)
+        eRETU01 = aRETU(0)
       Else
         demitido = False
         Exit Function
@@ -141,38 +141,5 @@ Public Function demitido(ByVal nNUMERO As Long, Optional ByVal lMES As Boolean =
 
   Next nLOOP
 
-  '     cARQ = PegPath("PATH", "LOGIXODBC")
-  '       sSQL = "SELECT dat_demis FROM funcionario WHERE (cod_empresa='01' or cod_empresa='05' or cod_empresa='11' ) and cod_vinculo<>99 and num_matricula=" & nNUMERO ''tenta funcionarios
-  '       aRETU = PegSQL(cARQ, sSQL, 1, Array("dat_demis"), Array("DN"), Array(Today()), False)
-  '       If lRETU Then
-  '          If Day(aRETU(0)) > 0 And aRETU(0) <> Today() Then
-  '             Alert ("Funcionario: " & CStr(nNUMERO) & " Demitido em " & aRETU(0))
-  '             demitido = True
-  '             eRETU01 = aRETU(0)
-  '          End If
-  '       Else
-  '          cARQ = PegPath("PATH", "LOGIXODBC")
-  '          sSQL = "SELECT dat_demis FROM funcionario WHERE cod_vinculo=50 and num_matricula=" & nNUMERO  ''tenta temporarios
-  '          aRETU = PegSQL(cARQ, sSQL, 1, Array("dat_demis"), Array("DN"), Array(Today()), False)
-  '          If lRETU Then
-  '             If Day(aRETU(0)) > 0 And aRETU(0) <> Today() Then
-  '                Alert ("Funcionario: " & CStr(nNUMERO) & " Demitido em " & aRETU(0))
-  '                demitido = True
-  '                eRETU01 = aRETU(0)
-  '             End If
-  '          Else
-  '                cARQ = PegPath("PATH", "CADMP04")
-  '                cARQ = GeraConn(cARQ, "JETFOX")
-  '                sSQL = "SELECT DEMITIDO FROM MP04 WHERE TECNICO=" & nNUMERO ''tenta pela folha
-  '                aRETU = PegSQL(cARQ, sSQL, 1, Array("DEMITIDO"), Array("DN"), Array(Today()), False)
-  '                If lRETU Then
-  '                   If Day(aRETU(0)) > 0 And aRETU(0) <> Today() Then
-  '                      Alert ("Funcionario: " & CStr(nNUMERO) & " Demitido em " & aRETU(0))
-  '                      demitido = True
-  '                      eRETU01 = aRETU(0)
-  '                   End If
-  '                End If
-  '          End If
-  '       End If
 End Function
 
