@@ -1,6 +1,6 @@
 Attribute VB_Name = "AdoLib"
 'MaxBufferSize=2048;MaxScanRows=8;PageTimeout=5;SafeTransactions=0;Threads=3;UserCommitSync=Yes
-'
+'SQL
 'mysql
 'Your table must have a primary key
 'Your connection string must have Option=3
@@ -659,7 +659,7 @@ Public Function ADORsStatus(ByRef eSTATUS)
 End Function
 
 Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String = "")
-  Dim errorObject As ADODB.Error
+  Dim errorObject As ADODB.error
   For Each errorObject In oErro
     cERRO = cERRO & " Ado Erro Numero: " & errorObject.Number & vbCrLf
     cERRO = cERRO & " Ado Descricao  : " & errorObject.Description & vbCrLf

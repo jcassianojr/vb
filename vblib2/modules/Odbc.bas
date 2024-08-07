@@ -40,6 +40,9 @@ Public Function AddDSN(ByVal strDSN As String, ByVal strDescription As String, _
   Case "DBF"
     StrDriver = "Microsoft Visual FoxPro Driver"
     cData = "SourceDB=" & strDB & Chr(0)
+  Case "SQLITE"
+    StrDriver = "SQLite3 ODBC Driver"
+    cData = "Database=" & strDB & Chr(0)
   End Select
 
   'Build the attributes - Attributes must be Null separated
