@@ -1,4 +1,39 @@
 Attribute VB_Name = "AdoLib"
+' sqlite funcao para ajustes foxpro equivalente
+'     {"LEFT(%1%,%2%)"     ,"SUBSTR(%1%,1,%2%)"},;
+'                      {"LOWER(%1%)"        ,"LOWER(%1%)"},;
+'                      {"UPPER(%1%)"        ,"UPPER(%1%)"},;
+'                      {"DTOS(%1%)"        ,"strftime('%Y%m%d',%1%)"},;
+'                      {"DAY(%1%)"       ,"cast(strftime('%d',%1) as int)"},;
+'                      {"MONTH(%1%)"       ,"cast(strftime('%m',%1) as int)"},;
+'                      {"YEAR(%1%)"        ,"cast(strftime('%Y',%1) as int)"},;
+'                      {"TODAY()"          ,"CURRENT_DATE"},;
+'                      {"CHR(%1%)"       ,"CHAR(%1%)"},;
+'                      {"LEN(%1%)"       ,"LENGTH(%1%)"},;
+'                      {"REPL(%1%,%2%)"      ,"FORMAT('%.*c',%2%,%1%)"},;
+'                      {"ASC(%1%)"       ,"ASCII(%1%)"},;
+'                      {"TRIM(%1%)"        ,"RTRIM(%1%)"},;
+'                      {"ALLTRIM(%1%)"     ,"TRIM(%1%)"},;
+
+' oledb funcao para ajustes foxpro equivalentes
+ '      {"STR(%1%,%2%)"        ,"{fn RIGHT({fn SPACE(%2%)}+{fn CONVERT({fn ROUND(%1%,0)},SQL_VARCHAR)},%2%)}"},;
+ '                       {"SUBSTR(%1%,%2%,%3%)"    ,"{fn SUBSTRING(%1%,%2%,%3%)}"},;
+ '                       {"DTOS(%1%)"        ,"{fn CONVERT({fn YEAR(%1%)}, SQL_VARCHAR)}+{fn RIGHT('0'+ {fn CONVERT({fn MONTH(%1%)},SQL_VARCHAR)},2)}+{fn RIGHT('0'+ {fn CONVERT({fn DAYOFMONTH(%1%)},SQL_VARCHAR)},2)}"},;
+ '                       {"DAY(%1%)"         ,"{fn DAYOFMONTH(%1%)}"},;
+ '                       {"MONTH(%1%)"       ,"{fn MONTH(%1%)}"},;
+ '                       {"YEAR(%1%)"        ,"{fn YEAR(%1%)}"},;
+ '                       {"UPPER(%1%)"       ,"{fn UCASE(%1%)}"},;
+ '                       {"LOWER(%1%)"       ,"{fn LCASE(%1%)}"},;
+ '                       {"LEN(%1%)"         ,"{fn LENGTH(%1%)}"},;
+ '                       {"CHR(%1%)"         ,"{fn CHAR(%1%)}"},;
+ '                       {"ASC(%1%)"         ,"{fn ASCII(%1%)}"},;
+ '                       {"TODAY()"          ,"{fn CURDATE()}"},;
+ '                       {"REPL(%1%,%2%)"      ,"{fn REPEAT(%1%,%2%)}"},;
+ '                       {"TRIM(%1%)"        ,"{fn RTRIM(%1%)}"},;
+ '                       {"ALLTRIM(%1%)"       ,"{fn LTRIM( {fn RTRIM(%1%) } )}"},;
+ '                       {"LEFT(%1%,%2%)"      ,"{fn LEFT(%1%,%2%)}"},;
+ '                       {"RIGHT(%1%)"       ,"{fn RIGHT(%1%)}"},;
+
 'MaxBufferSize=2048;MaxScanRows=8;PageTimeout=5;SafeTransactions=0;Threads=3;UserCommitSync=Yes
 'SQL
 'mysql
