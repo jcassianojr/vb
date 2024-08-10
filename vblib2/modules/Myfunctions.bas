@@ -153,11 +153,11 @@ Private Declare Function PostMessage Lib "user32" Alias _
                                      "PostMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, _
                                                      ByVal wParam As Long, ByVal lParam As Long) As Long
 
-Declare Function GetLocaleInfo Lib "kernel32" Alias _
+Declare Function GetLocaleInfoa Lib "kernel32" Alias _
                                "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, _
                                                  ByVal lpLCData As String, ByVal cchData As Long) As Long
 
-Declare Function SetLocaleInfo Lib "kernel32" Alias _
+Declare Function SetLocaleInfoa Lib "kernel32" Alias _
                                "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, _
                                                  ByVal lpLCData As String) As Boolean
 
@@ -165,6 +165,21 @@ Declare Function GetUserDefaultLCID% Lib "kernel32" ()
 Declare Function GetSystemDefaultLCID Lib "kernel32" () As Long
 Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
 Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+Private Sub ForceSystemDecimalToPeriod()
+    ' We MUST use the ANSI API version so it's an ANSI character that's used for the actual decimal character.
+    Const LOCALE_SDECIMAL   As Long = &HE&
+    Const LOCALE_SGROUPING  As Long = &H10&
+    Const Eng_LCID          As Long = 1033&
+    Dim s                   As String
+    '
+    s = String$(GetLocaleInfoa(Eng_LCID, LOCALE_SDECIMAL, vbNullString, 0&), 0)
+    GetLocaleInfoa Eng_LCID, LOCALE_SDECIMAL, s, Len(s)
+    If RTrimNull(s) <> "." Then
+        SetLocaleInfoa Eng_LCID, LOCALE_SDECIMAL, "."
+        SetLocaleInfoa Eng_LCID, LOCALE_SGROUPING, ","
+    End If
+End Sub
+
 Public Function tocar(cARQ)
   PlaySound (cARQ), ByVal 0&, SND_FILENAME Or SND_ASYNC
 End Function
@@ -2521,12 +2536,12 @@ Public Function SameWords(ByRef Text1 As String, ByRef Text2 As String) As Boole
 End Function
 
 Public Function FolderExists(sDir As String) As Boolean
-  Dim S As String
-  S = sDir
-  If Right$(S, 1) = "\" Then S = Left$(S, Len(S) - 1)
+  Dim s As String
+  s = sDir
+  If Right$(s, 1) = "\" Then s = Left$(s, Len(s) - 1)
   On Error GoTo FileExistsError
   ' If no error then something existed.
-  bFolderExists = ((GetAttr(S) And vbDirectory) = vbDirectory)
+  bFolderExists = ((GetAttr(s) And vbDirectory) = vbDirectory)
   Exit Function
 FileExistsError:
   bFolderExists = False
