@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "11:51"
+            TextSave        =   "12:16"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -69,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":0B24
-            TextSave        =   "03/08/2024"
+            TextSave        =   "10/08/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -604,24 +604,28 @@ Private Sub MDIForm_Unload(Cancel As Integer)
   End
 End Sub
 Private Sub Menu2_Click()
+cARQRTF = ""
   cTIPORPT = "R"
   zRPTARQ = PegPath("PATH", "RPT") ' agora no ini + "RPT.MDB"
   escRPTGRP.Show vbModal, Me
 End Sub
 
 Private Sub Menu3_Click()
+cARQRTF = ""
   cTIPORPT = "D"
   zRPTARQ = PegPath("PATH", "DOC") ' agora no ini + "RTF.MDB"
   escRPTGRP.Show vbModal, Me
 End Sub
 
 Private Sub Menu4_Click()
+cARQRTF = ""
   cTIPORPT = "F"
   zRPTARQ = PegPath("PATH", "FOL") 'agora no ini + "RPTFOL.MDB"
   escRPTGRP.Show vbModal, Me
 End Sub
 
 Private Sub Menu5_Click()
+cARQRTF = ""
   cTIPORPT = "I"
   zRPTARQ = PegPath("PATH", "INT") 'agora no ini+ "RPTINT.MDB"
   escRPTGRP.Show vbModal, Me

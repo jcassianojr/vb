@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":058A
-            TextSave        =   "09:59"
+            TextSave        =   "13:04"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -69,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principal.frx":0B24
-            TextSave        =   "09/08/2024"
+            TextSave        =   "10/08/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -110,9 +110,20 @@ Private Sub MDIForm_Load()
      End
   End If
   
+   If InStr(UCase(cmdline), ".TXT") _
+     Or InStr(UCase(cmdline), ".RTF") _
+     Or InStr(UCase(cmdline), ".JPG") Then
+     'Alert (cmdline)
+     cARQRTF = cmdline
+     escRPT.Show vbModal, Me
+     End
+  End If
+  
+  
   'comand line properties project
   '$admin%CU#VIA
   'lstview
+  ' .txt .rtf preview
  
   ' aDIREITOS = Array(True, True, True, True, True, True, True, True)
   ' FrmRTf.Show vbModal
@@ -263,9 +274,11 @@ Private Sub MDIForm_Load()
     Unload Me
   Else
     If zgrp = "" Then
+    cARQRTF = ""
       escRPTGRP.Show vbModal
       End
     Else
+      cARQRTF = ""
       escRPT.Show vbModal
       End
     End If

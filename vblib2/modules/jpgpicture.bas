@@ -98,6 +98,9 @@ Public Function ADOPegBlob(ByVal cARQ As String, ByVal cSQL As String, _
   lRSOP = True
   If Not oRS.EOF Then
     sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
+    If FileExists(sTEMPFILE) Then 'arquivo temporario pode apagar
+       DeleteFile sTEMPFILE
+    End If
 
     If Not IsNull(oRS(cCAMPO)) Then
       lFileLength = LenB(oRS(cCAMPO))
@@ -118,14 +121,6 @@ Public Function ADOPegBlob(ByVal cARQ As String, ByVal cSQL As String, _
           End If
           DeleteFile sTEMPFILE
         End If
-
-       'abBytes = oRS(cCAMPO)
-        
-   '     Set pb = New PropertyBag
-    '    pb.Contents = abBytes
-     '   Set cPICTURE.Picture = pb.ReadProperty("Picture")
-
-
     End If
   End If
 

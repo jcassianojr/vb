@@ -379,8 +379,8 @@ Dim lTROCOU As Boolean
 Dim cBASEDADOS As String
 
 Private Sub CmdAbrirCom_Click()
-  salvarpict Me, Picture1, TXTFIELDS(0)
-  If FileExist(TXTFIELDS(0), True) Then
+  salvarpict Me, Picture1, txtFields(0)
+  If FileExist(txtFields(0), True) Then
     'Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
 End Sub
@@ -392,14 +392,14 @@ Private Sub cmdClose_Click()
   End If
   If lABRE Then
     If MDG("Gravar Alteracoes") Then
-      TXTFIELDS(1) = FixNum(TXTFIELDS(1))
-      If TXTFIELDS(1) = 0 Then TXTFIELDS(1) = Val(TiraOut(TXTFIELDS(0)))
+      txtFields(1) = FixNum(txtFields(1))
+      If txtFields(1) = 0 Then txtFields(1) = Val(TiraOut(txtFields(0)))
       For iLOOP = 0 To nCAMPOS - 1
-        aVAL(iLOOP) = TXTFIELDS(iLOOP)
+        aVAL(iLOOP) = txtFields(iLOOP)
       Next iLOOP
       GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
       If lTROCOU Then
-        CSQLI = "select * from imagens  WHERE CODIGO='" & zgrp & "'"
+        CSQLI = "select * from imagens  WHERE CODIGO='" & ZGRP & "'"
         ADOGrvBlob cARQ, CSQLI, Picture1
       End If
     End If
@@ -417,6 +417,9 @@ Private Sub CmdImprimir_Click()
   If Picture1.Height = 0 Then
     Alert ("Sem Imagem")
   Else
+    ePASS01 = Array("Esquerda Superior", "Direita Superior", "Esquera Inferior", "Direita Inferior", "Centralizado")
+    escOrdem.Show vbModal, Me
+    ePASS02 = FixInt(eRETU01, 0)
     PrintPreview1.ShowPreview
   End If
 End Sub
@@ -465,31 +468,31 @@ Private Sub Escolher_Click(Index As Integer)
 
     If lRETU Then
 
-      frmIMAGENS.TXTFIELDS(0) = CStr(eRETU01)
-      frmIMAGENS.TXTFIELDS(1) = eRETU01
+      frmIMAGENS.txtFields(0) = CStr(eRETU01)
+      frmIMAGENS.txtFields(1) = eRETU01
 
     End If
 
   Case 2                                       'Produtos
     ePASS01 = "MANA5"
     escms01.Show vbModal, Me
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 3                                       'Ferramental
     escFER.Show vbModal, Me
 
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 4                                       'Maquinas
     cARQESC = "ME01"
     escNUMNOM.Show vbModal, Me
 
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 5                                       'Instrumentos
     escME04.Show vbModal, Me
 
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 6                                       'Funcionarios
 
@@ -497,8 +500,8 @@ Private Sub Escolher_Click(Index As Integer)
 
     If lRETU Then
 
-      frmIMAGENS.TXTFIELDS(0) = CStr(eRETU01)
-      frmIMAGENS.TXTFIELDS(1) = eRETU01
+      frmIMAGENS.txtFields(0) = CStr(eRETU01)
+      frmIMAGENS.txtFields(1) = eRETU01
 
     End If
 
@@ -506,36 +509,36 @@ Private Sub Escolher_Click(Index As Integer)
     iMU01 = 1
     escmu01.Show vbModal, Me
 
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 8                                       'cOMPONENTES mt01
     iMU01 = 2
     escmu01.Show vbModal, Me
 
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 9                                       'cONSUMIVEIS mw05
     iMU01 = 3
     escmu01.Show vbModal, Me
 
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 10                                      'embalagens mr01
     iMU01 = 4
     escmu01.Show vbModal, Me
 
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 12                                      'iTENS MANUTENCAO
     iMU01 = 6
     escmu01.Show vbModal, Me
 
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
   Case 13                                      'Sub Produtos
     iMU01 = 7
     escmu01.Show vbModal, Me
 
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
 
   End Select
@@ -580,28 +583,28 @@ Private Sub Form_Load()
   End If
 
 
-  zgrp = FixStr(zgrp, "")
-  If Len(zgrp) = 0 Then
+  ZGRP = FixStr(ZGRP, "")
+  If Len(ZGRP) = 0 Then
     Alert ("Codigo em Branco")
     lABRE = False
   End If
 
   If lABRE Then
     cARQ = cARQRTF
-    nPOS = InStr(zgrp, "|")
+    nPOS = InStr(ZGRP, "|")
     If nPOS > 0 Then
-      nTMPNUMERO = Mid(zgrp, nPOS + 1)
-      zgrp = Mid(zgrp, 1, nPOS - 1)
+      nTMPNUMERO = Mid(ZGRP, nPOS + 1)
+      ZGRP = Mid(ZGRP, 1, nPOS - 1)
     Else
-      nTMPNUMERO = zgrp
+      nTMPNUMERO = ZGRP
     End If
     nTMPNUMERO = funNumeroPuro(nTMPNUMERO)
     nTMPNUMERO = Val(nTMPNUMERO)
 
 
-    cSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & zgrp & "'"
+    cSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & ZGRP & "'"
     If cBASEDADOS = "LOGIX" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
-      cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto  WHERE MATRICULA='" & zgrp & "'"
+      cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto  WHERE MATRICULA='" & ZGRP & "'"
       cSQL = cSQL & " and empresa=" & StrZero(zEMPRESA, 2)
     End If
 
@@ -612,14 +615,14 @@ Private Sub Form_Load()
       cSQL = cSQL & " FROM gip.fotos AS gip"
       cSQL = cSQL & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
       cSQL = cSQL & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
-      cSQL = cSQL & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(zgrp, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(zgrp, 8)
+      cSQL = cSQL & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(ZGRP, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(ZGRP, 8)
     End If
 
 
 
     If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
     Else
-      IncluiSQL cARQ, cSQL, 2, Array("CODIGO", "NUMERO"), Array(zgrp, nTMPNUMERO), True, False
+      IncluiSQL cARQ, cSQL, 2, Array("CODIGO", "NUMERO"), Array(ZGRP, nTMPNUMERO), True, False
     End If
 
 
@@ -629,14 +632,14 @@ Private Sub Form_Load()
     aPAD = Array("", 0)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-      TXTFIELDS(iLOOP) = aVAL(iLOOP)
+      txtFields(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     If iImage = 2 And nPOS > 0 Then
-      TXTFIELDS(1) = nTMPNUMERO
+      txtFields(1) = nTMPNUMERO
     End If
-    CSQLI = "select IMAGEM from imagens  WHERE CODIGO='" & zgrp & "'"
+    CSQLI = "select IMAGEM from imagens  WHERE CODIGO='" & ZGRP & "'"
     If cBASEDADOS = "LOGIX" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
-      CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & zgrp
+      CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & ZGRP
       CSQLI = CSQLI & " and empresa=" & StrZero(zEMPRESA, 2)
     End If
     If cBASEDADOS = "DATAMACE" Then
@@ -645,7 +648,7 @@ Private Sub Form_Load()
       CSQLI = CSQLI & " FROM gip.fotos AS gip"
       CSQLI = CSQLI & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
       CSQLI = CSQLI & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
-      CSQLI = CSQLI & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(zgrp, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(zgrp, 8)
+      CSQLI = CSQLI & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(ZGRP, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(ZGRP, 8)
     End If
 
 
@@ -653,7 +656,7 @@ Private Sub Form_Load()
       StretchSourcePictureFromPicture Picture1, Picture2
       If FixNum(eRETU01) > 500000 Then
         Alert ("Imagem Muito Grande,Ajuste o tamanho")
-        salvarpict Me, Picture1, "Imagem_" & zgrp
+        salvarpict Me, Picture1, "Imagem_" & ZGRP
         Set Picture1.Picture = Nothing
         Set Picture2.Picture = Nothing
         lTROCOU = True
@@ -712,16 +715,37 @@ Private Sub VerImg_Click()
   End If
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-  On Error Resume Next
-  Printer.Print
-  Printer.PaintPicture Picture1, 0, 0
+ 
+      MyPrintingJPG
+  
+End Sub
+
+Public Sub MyPrintingJPG()
+  Select Case ePASS02
+   Case 1
+       Printer.PaintPicture Picture1.Picture, 0, 0
+   Case 1
+       Printer.PaintPicture Picture1.Picture, Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode), 0
+  Case 2
+    Printer.PaintPicture Picture1.Picture, 0, Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)
+  Case 3
+    Printer.PaintPicture Picture1.Picture, Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode), Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)
+
+  Case 4
+    Printer.PaintPicture Picture1.Picture, (Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode)) / 2, (Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)) / 2
+
+  
+  Case Else
+  Printer.PaintPicture Picture1.Picture, 0, 0
+       
+ End Select
 End Sub
 
 Private Sub ximgsave_Click()
   If Picture1.Height = 0 Then
     Alert ("Sem Imagem")
   Else
-    salvarpict Me, Picture1, TXTFIELDS(0)
+    salvarpict Me, Picture1, txtFields(0)
   End If
 End Sub
 

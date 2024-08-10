@@ -67,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "20:32"
+            TextSave        =   "12:15"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -75,7 +75,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":0B24
-            TextSave        =   "30/07/2024"
+            TextSave        =   "10/08/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -863,9 +863,11 @@ Private Sub Relat_Click(Index As Integer)
   Select Case Index
   Case 0
     cTIPORPT = "R"
+    cARQRTF = ""
     zRPTARQ = PegPath("PATH", "RPT") 'agora no ini + "RPT.MDB"
     escRPTGRP.Show vbModal, Me
   Case 1
+  cARQRTF = ""
     cTIPORPT = "D"
     zRPTARQ = PegPath("PATH", "DOC") 'agora o ini + "RTF.MDB"
     escRPTGRP.Show vbModal, Me
@@ -876,10 +878,12 @@ Private Sub Relat_Click(Index As Integer)
     cTIPO = "P"
     escmanreg.Show vbModal, Me
   Case 4
+    cARQRTF = ""
     cTIPO = "F"
     zRPTARQ = PegPath("PATH", "FOL") 'agora no ini + "RPTFOL.MDB"
     escRPTGRP.Show vbModal, Me
   Case 5
+    cARQRTF = ""
     cTIPO = "I"
     zRPTARQ = PegPath("PATH", "INT") 'agora no ini + "RPTINT.MDB"
     escRPTGRP.Show vbModal, Me

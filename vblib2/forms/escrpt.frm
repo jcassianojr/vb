@@ -15,6 +15,17 @@ Begin VB.Form escRPT
    ScaleHeight     =   6675
    ScaleWidth      =   10785
    StartUpPosition =   2  'CenterScreen
+   Begin VB.PictureBox Picture1 
+      AutoRedraw      =   -1  'True
+      Height          =   375
+      Left            =   6840
+      ScaleHeight     =   315
+      ScaleWidth      =   1875
+      TabIndex        =   4
+      Top             =   120
+      Visible         =   0   'False
+      Width           =   1935
+   End
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   3840
       Top             =   0
@@ -94,7 +105,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -110,7 +121,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -131,6 +142,32 @@ End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
+  If InStr(UCase(cARQRTF), ".TXT") Then
+     If FileExist(cARQRTF, True) Then
+        ePASS03 = 1
+        PrintPreview1.ShowPreview
+     End If
+     End
+  End If
+  If InStr(UCase(cARQRTF), ".RTF") Then
+     If FileExist(cARQRTF, True) Then
+        RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
+        ePASS03 = 2
+        PrintPreview1.ShowPreview
+     End If
+     End
+  End If
+  
+  If InStr(UCase(cARQRTF), ".JPG") Then
+     If FileExist(cARQRTF, True) Then
+        Picture1.Picture = LoadPicture(cARQRTF)
+        ePASS03 = 4
+        PrintPreview1.ShowPreview
+     End If
+     End
+  End If
+  
+  
   aORDEM = Array("RPT,COGNOME", "COGNOME,RPT", "NOME", "SUBGRP,RPT,COGNOME", "SUBGRP,COGNOME,RPT")
   aORDES = Array("Codigo", "Cod.Int.", "Descricao", "Sub-Codigo", "Sub-Cod.Int.")
   cORDEM = "RPT,COGNOME"
@@ -185,7 +222,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.tEXT
+  zRPT = Grid.Text
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -369,7 +406,7 @@ Private Sub imprima_click()
       Case 0
         aRELCFG(1) = "FRMRTF"
       Case 2
-        ePASS03 = 1
+        ePASS03 = 2
         PrintPreview1.ShowPreview
         Exit Sub
       End Select
@@ -465,10 +502,12 @@ Private Sub imprima_click()
     '     FrmCrwView.Show vbModal, Me
   Case "FRMCRWENG"
     FrmCrwENG.Show vbModal, Me
-    'Case "FRMIMG"
-    '    ePASS01 = False
-    '    ePASS02 = ""
-    '    Frmimg.Show vbModal, Me
+  Case "FRMIMG"
+      If FileExist(cARQRTF, True) Then
+        Picture1.Picture = LoadPicture(cARQRTF)
+        ePASS03 = 4
+        PrintPreview1.ShowPreview
+     End If
   Case "FRMPREVIEW"
     If cEXTENSAO = "ZPL" Then
       fileFile = FreeFile
@@ -534,7 +573,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     escrptusr.Show vbModal
   End If
 End Sub
@@ -601,7 +640,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 
-Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
   If ePASS03 = 1 Then  'TXT
     MyPrintingTXT
   End If
@@ -610,6 +649,12 @@ Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
   End If
   If ePASS03 = 3 Then  'HTML
     MyPrintinghtml
+  End If
+  If ePASS03 = 4 Then 'JPG
+      ePASS01 = Array("Esquerda Superior", "Direita Superior", "Esquera Inferior", "Direita Inferior", "Centralizado")
+      escOrdem.Show vbModal, Me
+      ePASS02 = FixInt(eRETU01, 0)
+      MyPrintingJPG
   End If
 End Sub
 
@@ -634,6 +679,27 @@ End Sub
 Public Sub MyPrintingRTF()
   PrinterEx.PrintRichTextBox RichTextBox1
 End Sub
+Public Sub MyPrintingJPG()
+  Select Case ePASS02
+   Case 1
+       Printer.PaintPicture Picture1.Picture, 0, 0
+   Case 1
+       Printer.PaintPicture Picture1.Picture, Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode), 0
+  Case 2
+    Printer.PaintPicture Picture1.Picture, 0, Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)
+  Case 3
+    Printer.PaintPicture Picture1.Picture, Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode), Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)
+
+  Case 4
+    Printer.PaintPicture Picture1.Picture, (Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode)) / 2, (Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)) / 2
+
+  
+  Case Else
+  Printer.PaintPicture Picture1.Picture, 0, 0
+       
+ End Select
+End Sub
+
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
   Dim STRBUFFER As String
