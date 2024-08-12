@@ -387,7 +387,7 @@ End Sub
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
+  If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then  'estas imagens sao gravadas apenas pelo sistema de origem
     lABRE = False
   End If
   If lABRE Then
@@ -397,9 +397,9 @@ Private Sub cmdClose_Click()
       For iLOOP = 0 To nCAMPOS - 1
         aVAL(iLOOP) = txtFields(iLOOP)
       Next iLOOP
-      GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
+      GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 ' pula campo codigo chave
       If lTROCOU Then
-        CSQLI = "select * from imagens  WHERE CODIGO='" & ZGRP & "'"
+        CSQLI = "select imagem from imagens  WHERE CODIGO='" & ZGRP & "'"
         ADOGrvBlob cARQ, CSQLI, Picture1
       End If
     End If
@@ -409,7 +409,6 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub CmdConfImp_Click()
-'picbrowse = BrowseFolders(Me.hWnd, "Choose a location picture", BrowseForPrinters, CSIDL_PRINTERS)
   FrmPrintSetup.Show vbModal, Me
 End Sub
 
@@ -553,7 +552,6 @@ Private Sub Form_Load()
   Dim nTMPNUMERO
   Dim nPOS
   Dim cWHERE As String
-  'Dim cTABLE As String
 
   CenterFormToScreen Me
   Me.Caption = cFORMID

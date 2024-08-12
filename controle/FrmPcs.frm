@@ -904,7 +904,7 @@ Private Sub cmdClose_Click()
   Dim cSQLIMG As String
   Dim cCAMIMG As String
   On Error Resume Next
-  txtFields(1).text = Replace(txtFields(1).text, "/", "-")  'chave apresentando erro de gravacao
+  txtFields(1).tEXT = Replace(txtFields(1).tEXT, "/", "-")  'chave apresentando erro de gravacao
 
   If MDG("Gravar alteraçôes") Then
     'campos
@@ -1059,7 +1059,7 @@ Private Sub Command6_Click()
   End If
 
   cARQPOKA = PegPath("PATH", "POKA")
-  nORD = TxtItem.text
+  nORD = TxtItem.tEXT
   nPPAP = PegUltSQL(cARQPOKA, "select numero from POKA WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
   If nPPAP = 0 Then
     nPPAP = FixInt(PegMAXSQL(cARQPOKA, "POKA", "NUMERO", 0)) + 1
@@ -1270,9 +1270,9 @@ Private Sub Form_Load()
   Dim cSQLIMG As String
   CenterFormToScreen Me
 
-  TXTPF.text = nPF
-  TXTSEQ.text = nSEQ
-  TXTSSQ.text = nSSQ
+  TXTPF.tEXT = nPF
+  TXTSEQ.tEXT = nSEQ
+  TXTSSQ.tEXT = nSSQ
 
 
   lTROCOU = Array(False, False, False, False, False)
@@ -1289,7 +1289,7 @@ Private Sub Form_Load()
     End If
   End If
   If nARQPCS = 2 Then
-    TxtCodComp.text = Ccodcomp
+    TxtCodComp.tEXT = Ccodcomp
   Else
     TxtCodComp.Visible = False
     Label4.Visible = False
@@ -1319,7 +1319,8 @@ Private Sub Form_Load()
       cCAMIMG = "IMGALERTA"                'alerta
     End Select
     cSQLIMG = "select " & cCAMIMG & " from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
-    If ADOPegBlob(cARQUSO, cSQLIMG, Picture1(iLOOP), cCAMIMG) Then
+    
+    If ADOPegBlob(Picture1(iLOOP), cARQUSO, "PFS", "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ, cCAMIMG) Then 'ADOPegBlob(cARQUSO, cSQLIMG, Picture1(iLOOP), cCAMIMG) Then
       StretchSourcePictureFromPicture Picture1(iLOOP), Picture2(iLOOP)
       If FixNum(eRETU01) > 500000 Then
         Alert ("Imagem Muito Grande,Ajuste o tamanho")
@@ -1339,7 +1340,7 @@ Private Sub Form_Load()
   FilRelat (2)                                 'on the job
   FilRelat (3)                                 'dispositivo
 
-  txtFields(1).text = Replace(txtFields(1).text, "/", "-")  'chave apresentando erro de gravacao
+  txtFields(1).tEXT = Replace(txtFields(1).tEXT, "/", "-")  'chave apresentando erro de gravacao
   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
   PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 
