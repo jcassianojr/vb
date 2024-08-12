@@ -5925,7 +5925,7 @@ Private Sub Form_Load()
 
     cSQLIMG = "select " & cCAMIMG & " from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
 
-    If ADOPegBlob(cARQPF, cSQLIMG, Picture1(iLOOP), cCAMIMG) Then
+    If ADOPegBlob(Picture1(iLOOP), cARQPF, "PFS", "WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ, cCAMIMG) Then 'ADOPegBlob(cARQPF, cSQLIMG, Picture1(iLOOP), cCAMIMG) Then
       StretchSourcePictureFromPicture Picture1(iLOOP), Picture2(iLOOP)
       If FixNum(eRETU01) > 500000 Then
         Alert ("Imagem Muito Grande,Ajuste o tamanho")

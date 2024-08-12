@@ -1544,6 +1544,8 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
+Dim cWHERE As String
+Dim cTABLE As String
 
 '  EscTipIns(0).Enabled = False
 '  EscTipIns(1).Enabled = False
@@ -1599,13 +1601,16 @@ Private Sub Form_Load()
 
   Select Case nARQPCS
   Case 0
-    cSQL = "PFC WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
+    cTABLE = "PFC"
+    cWHERE = "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
   Case 1
-    cSQL = "PFCO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
+    cTABLE = "PFCO"
+    cWHERE = "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
   Case 2
-    cSQL = "PFCMS03 WHERE PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' AND ITEM=" & nORD
+    cTABLE = "PFCMS03"
+    cWHERE = "PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' AND ITEM=" & nORD
   End Select
-
+ cSQL = cSQL + cTABLE + " WHERE " + cWHERE
 
   nCAMPOS = 26
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
@@ -1620,7 +1625,9 @@ Private Sub Form_Load()
   TXTFIELDS(21).Font = "isoqsymbol"
   TXTFIELDS(22).Font = "isoqsymbol"
 
-  If ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
+    'ADOPegBlob(cPICURE, cARQ, cTABLE, cWHERE, cCAMPO)
+
+  If ADOPegBlob(Picture1, cARQ, cTABLE, cWHERE, "IMAGEM") Then 'ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
     StretchSourcePictureFromPicture Picture1, Picture2
     If FixNum(eRETU01) > 500000 Then
       Alert ("Imagem Muito Grande,Ajuste o tamanho")

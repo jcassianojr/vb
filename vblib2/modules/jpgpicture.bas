@@ -63,8 +63,8 @@ Private Declare Function StretchBlt _
 'Win32 API Constant Declarations
 Private Const STRETCH_HALFTONE = 4
 
-Public Function ADOPegBlob(ByVal cARQ As String, ByVal cSQL As String, _
-                           ByRef cPICTURE, Optional ByVal cCAMPO As String = "IMAGEM") As Boolean
+Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTABLE As String, Optional ByVal cWHERE As String, _
+                           Optional ByVal cCAMPO As String = "IMAGEM") As Boolean
   Dim oDB As ADODB.Connection
   Dim oRS As ADODB.Recordset
   Dim lOPEN As Boolean
@@ -74,7 +74,8 @@ Public Function ADOPegBlob(ByVal cARQ As String, ByVal cSQL As String, _
   Dim abBytes() As Byte
   Dim iFileNum As Integer
   Dim sTEMPFILE As String
-  Dim pb As PropertyBag
+  Dim aRETU
+  Dim cSQL As String
 
 
   On Error GoTo errhandler
@@ -84,7 +85,27 @@ Public Function ADOPegBlob(ByVal cARQ As String, ByVal cSQL As String, _
   lOPEN = False
   lRSOP = False
 
-  cARQ = GeracArq(cARQ, , False)
+  aRETU = TipoConn(cARQ)
+  cARQ = aRETU(1) '//GeracArq(cARQ, , False)
+  
+    sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
+    If FileExists(sTEMPFILE) Then 'arquivo temporario pode apagar
+       DeleteFile sTEMPFILE
+    End If
+  
+  cSQL = cTABLE
+  If cWHERE <> "" Then
+     Select Case aRETU(2)
+          Case "SQLITE"
+               cSQL = "select BLOB_EXPORT(" + cCAMPO + ",'" + sTEMPFILE + "' )  as imagem from " + cTABLE + "  WHERE " & cWHERE
+          Case Else
+               cSQL = "select " + cCAMPO + " from " + cTABLE + "  WHERE " & cWHERE
+     End Select
+  End If
+  
+  
+  '"select IMAGEM from imagens  WHERE CODIGO='" & ZGRP & "'"
+  
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
@@ -97,30 +118,33 @@ Public Function ADOPegBlob(ByVal cARQ As String, ByVal cSQL As String, _
   oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
   lRSOP = True
   If Not oRS.EOF Then
-    sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
-    If FileExists(sTEMPFILE) Then 'arquivo temporario pode apagar
-       DeleteFile sTEMPFILE
-    End If
-
     If Not IsNull(oRS(cCAMPO)) Then
-      lFileLength = LenB(oRS(cCAMPO))
-
-      If lFileLength > 1 Then
-        
-        iFileNum = FreeFile
-        Open sTEMPFILE For Binary As #iFileNum
-        abBytes = oRS(cCAMPO).GetChunk(lFileLength)
-        
-        Put #iFileNum, , abBytes()
-        Close #iFileNum
-
-        If Not sTEMPFILE = "" Then
-           Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
-          eRETU01 = FileLen(sTEMPFILE)
-          ADOPegBlob = True
-          End If
-          DeleteFile sTEMPFILE
-        End If
+    
+       Select Case aRETU(2)
+         Case "SQLITE"
+              If FileExists(sTEMPFILE) Then
+                 eRETU01 = FileLen(sTEMPFILE)
+                 Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
+                 ADOPegBlob = True
+                 Kill sTEMPFILE
+              End If
+         Case Else
+           lFileLength = LenB(oRS(cCAMPO))
+           If lFileLength > 1 Then
+              iFileNum = FreeFile
+              Open sTEMPFILE For Binary As #iFileNum
+              abBytes = oRS(cCAMPO).GetChunk(lFileLength)
+              Put #iFileNum, , abBytes()
+              Close #iFileNum
+      
+              If Not sTEMPFILE = "" Then
+                 Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
+                eRETU01 = FileLen(sTEMPFILE)
+                ADOPegBlob = True
+              End If
+             DeleteFile sTEMPFILE
+            End If
+        End Select
     End If
   End If
 

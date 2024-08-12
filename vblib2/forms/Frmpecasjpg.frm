@@ -552,6 +552,8 @@ End Sub
 Private Sub Form_Load()
   Dim nTMPNUMERO
   Dim nPOS
+  Dim cWHERE As String
+  'Dim cTABLE As String
 
   CenterFormToScreen Me
   Me.Caption = cFORMID
@@ -637,10 +639,17 @@ Private Sub Form_Load()
     If iImage = 2 And nPOS > 0 Then
       txtFields(1) = nTMPNUMERO
     End If
-    CSQLI = "select IMAGEM from imagens  WHERE CODIGO='" & ZGRP & "'"
+    
+    cWHERE = ""
+    '
+    '
+    '
+    CSQLI = "imagens"
+    cWHERE = "CODIGO='" & ZGRP & "'"
     If cBASEDADOS = "LOGIX" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
       CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & ZGRP
       CSQLI = CSQLI & " and empresa=" & StrZero(zEMPRESA, 2)
+      cWHERE = ""
     End If
     If cBASEDADOS = "DATAMACE" Then
       CSQLI = " SELECT"
@@ -649,10 +658,11 @@ Private Sub Form_Load()
       CSQLI = CSQLI & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
       CSQLI = CSQLI & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
       CSQLI = CSQLI & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(ZGRP, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(ZGRP, 8)
+      cWHERE = ""
     End If
 
 
-    If ADOPegBlob(cARQ, CSQLI, Picture1) Then
+    If ADOPegBlob(Picture1, cARQ, CSQLI, cWHERE) Then 'ADOPegBlob(cARQ, CSQLI, Picture1)
       StretchSourcePictureFromPicture Picture1, Picture2
       If FixNum(eRETU01) > 500000 Then
         Alert ("Imagem Muito Grande,Ajuste o tamanho")

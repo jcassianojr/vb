@@ -1041,7 +1041,7 @@ Private Sub Form_Load()
   For iLOOP = 0 To nCAMPOS - 1
     txt(iLOOP) = aVAL(iLOOP)
   Next iLOOP
-  If ADOPegBlob(cARQ, cSQL, Picture1, "FOTO") Then
+  If ADOPegBlob(Picture1, cARQ, "POA", "numero=" & nPPAP, "FOTO") Then  ' ADOPegBlob(cARQ, cSQL, Picture1, "FOTO") Then
     StretchSourcePictureFromPicture Picture1, Picture2
     If FixNum(eRETU01) > 500000 Then
       Alert ("Imagem Muito Grande,Ajuste o tamanho")
