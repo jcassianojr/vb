@@ -105,7 +105,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -121,7 +121,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -148,6 +148,7 @@ Private Sub Form_Load()
         PrintPreview1.ShowPreview
      End If
      End
+     'Unload Me
   End If
   If InStr(UCase(cARQRTF), ".RTF") Then
      If FileExist(cARQRTF, True) Then
@@ -156,6 +157,7 @@ Private Sub Form_Load()
         PrintPreview1.ShowPreview
      End If
      End
+     'Unload Me
   End If
   
   If InStr(UCase(cARQRTF), ".JPG") Then
@@ -165,6 +167,7 @@ Private Sub Form_Load()
         PrintPreview1.ShowPreview
      End If
      End
+     'Unload Me
   End If
   
   
@@ -182,7 +185,6 @@ Private Sub Form_Load()
     End If
   End If
 End Sub
-
 Private Sub Grid_KeyPress(KeyAscii As Integer)
   If KeyAscii = 13 Then
     imprima_click
@@ -222,7 +224,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.Text
+  zRPT = Grid.tEXT
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -573,7 +575,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     escrptusr.Show vbModal
   End If
 End Sub
