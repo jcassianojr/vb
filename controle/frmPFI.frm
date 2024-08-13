@@ -835,7 +835,7 @@ Private Sub cmdClose_Click()
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 '0 ordem chave
 
     If lTROCOU Then
-      ADOGrvBlob cARQ, cSQL, Picture1, "IMAGEM"
+      ADOGrvBlob cARQ, "PFI", Picture1, "IMAGEM", "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
     End If
 
 
@@ -922,7 +922,7 @@ Private Sub Form_Load()
 
    'ADOPegBlob(cPICURE, cARQ, cTABLE, cWHERE, cCAMPO)
 
-  If ADOPegBlob(Picture1, cARQ, "PFI", "WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD, "IMAGEM") Then 'ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
+  If ADOPegBlob(Picture1, cARQ, "PFI", "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD, "IMAGEM") Then 'ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
     StretchSourcePictureFromPicture Picture1, Picture2
     If FixNum(eRETU01) > 500000 Then
       Alert ("Imagem Muito Grande,Ajuste o tamanho")

@@ -18,8 +18,8 @@ Begin VB.Form frmIMAGENS
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin BSPrinter.PrintPreview PrintPreview1 
-      Left            =   4440
-      Top             =   1200
+      Left            =   3720
+      Top             =   5400
       _ExtentX        =   1191
       _ExtentY        =   1191
    End
@@ -114,19 +114,19 @@ Begin VB.Form frmIMAGENS
       ScaleHeight     =   3675
       ScaleWidth      =   4155
       TabIndex        =   5
-      Top             =   960
+      Top             =   1440
       Width           =   4215
    End
    Begin VB.PictureBox Picture1 
       AutoRedraw      =   -1  'True
-      Height          =   1335
+      Height          =   735
       Left            =   120
-      ScaleHeight     =   1275
-      ScaleWidth      =   4155
+      ScaleHeight     =   675
+      ScaleWidth      =   3435
       TabIndex        =   4
-      Top             =   4800
+      Top             =   5400
       Visible         =   0   'False
-      Width           =   4215
+      Width           =   3495
    End
    Begin VB.TextBox txtFields 
       Height          =   285
@@ -139,11 +139,14 @@ Begin VB.Form frmIMAGENS
       Width           =   2175
    End
    Begin VB.TextBox txtFields 
-      Height          =   285
+      BackColor       =   &H00C0FFFF&
+      Enabled         =   0   'False
+      Height          =   405
       Index           =   0
       Left            =   120
       MaxLength       =   24
       TabIndex        =   1
+      TabStop         =   0   'False
       ToolTipText     =   "Codigo da Imagem"
       Top             =   600
       Width           =   2655
@@ -377,15 +380,12 @@ Dim iLOOP As Integer
 Dim lABRE As Boolean
 Dim lTROCOU As Boolean
 Dim cBASEDADOS As String
-
 Private Sub CmdAbrirCom_Click()
   salvarpict Me, Picture1, txtFields(0)
-  If FileExist(txtFields(0), True) Then
-    'Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
-  End If
 End Sub
 
 Private Sub cmdClose_Click()
+
   On Error Resume Next
   If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then  'estas imagens sao gravadas apenas pelo sistema de origem
     lABRE = False
@@ -394,13 +394,15 @@ Private Sub cmdClose_Click()
     If MDG("Gravar Alteracoes") Then
       txtFields(1) = FixNum(txtFields(1))
       If txtFields(1) = 0 Then txtFields(1) = Val(TiraOut(txtFields(0)))
-      For iLOOP = 0 To nCAMPOS - 1
-        aVAL(iLOOP) = txtFields(iLOOP)
-      Next iLOOP
-      GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 ' pula campo codigo chave
+      If aVAL(1) <> txtFields(1) And txtFields(1) > 0 Then 'nao grava se nao trocou o numero
+        For iLOOP = 0 To nCAMPOS - 1
+          aVAL(iLOOP) = txtFields(iLOOP)
+        Next iLOOP
+        GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 ' pula campo codigo chave
+      End If
       If lTROCOU Then
-        CSQLI = "select imagem from imagens  WHERE CODIGO='" & ZGRP & "'"
-        ADOGrvBlob cARQ, CSQLI, Picture1
+        'CSQLI = "select imagem from imagens  WHERE CODIGO='" & ZGRP & "'"
+        ADOGrvBlob cARQ, "imagens", Picture1, "imagem", "CODIGO='" & ZGRP & "'"
       End If
     End If
   End If
@@ -439,7 +441,7 @@ Private Sub DelImg_Click()
 End Sub
 
 Private Sub Encerrar_Click()
-  If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then   'InStr(UCase(cARQ), "OL_LOGIX") = 0 Then
+  If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then
     If MDG("Sair Sem Gravar") Then
       Screen.MousePointer = vbDefault
       Unload Me

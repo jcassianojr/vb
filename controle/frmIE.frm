@@ -1701,7 +1701,8 @@ Private Sub cmdClose_Click()
 
   For iLOOP = 0 To 2
     If lTROCOU(iLOOP) Then
-      ADOGrvBlob cARQIE, cSQL, Picture1(iLOOP), aCAMIMG(iLOOP)
+      'cSQL = "select * from IE WHERE PF=" & nPF
+      ADOGrvBlob cARQIE, "IE", Picture1(iLOOP), aCAMIMG(iLOOP), "WHERE PF=" & nPF
     End If
   Next iLOOP
 

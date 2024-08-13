@@ -326,7 +326,8 @@ Private Sub cmdClose_Click()
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 '0 item chave
 
     If lTROCOU Then
-      ADOGrvBlob cARQ, cSQL, Picture1, "IMAGEM"
+     'cSQL = "select * from DISPOI WHERE NUMERO=" & nPPAP & " AND Item = " & nORD
+      ADOGrvBlob cARQ, "DISPOI", Picture1, "IMAGEM", "NUMERO=" & nPPAP & " AND Item = " & nORD
     End If
 
 

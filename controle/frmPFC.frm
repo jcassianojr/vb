@@ -1266,6 +1266,9 @@ Dim iLOOP As Integer
 Dim lTROCOU As Boolean
 
 Private Sub cmdClose_Click()
+Dim cTABLE As String
+Dim cWHERE As String
+
   On Error Resume Next
 
   If Not CHECKME04 Then
@@ -1286,18 +1289,24 @@ Private Sub cmdClose_Click()
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
 
     If lTROCOU Then
-      ADOGrvBlob cARQ, cSQL, Picture1, "IMAGEM"
+     Select Case nARQPCS
+          Case 0
+            cTABLE = "PFC"
+            cWHERE = "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
+          Case 1
+            cTABLE = "PFCO"
+            cWHERE = "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
+          Case 2
+            cTABLE = "PFCMS03"
+            cWHERE = "PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' AND ITEM=" & nORD
+    End Select
+    
+    
+    
+      ADOGrvBlob cARQ, cTABLE, Picture1, "IMAGEM", cWHERE
     End If
 
-    'Select Case nARQPCS
-    '     Case 0, 1
-    '         eRETU02 = "PF:" & nPF & " " & " SEQ:" & nSEQ & " SSQ:" & nSSQ & " ITEM:" & nORD
-    '     Case 2
-    '         eRETU02 = "PF:" & nPF & " Componente:" & Ccodcomp & " Item:" & nORD
-    ' End Select
-    ' eRETU02 = eRETU02 & " Desenho:" & frmPCX.TXTPF(2) & Chr(13) & Chr(10)
-    ' eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
-    ' MAILENV "PI000001", eRETU02
+   
   End If
   Screen.MousePointer = vbDefault
   Unload Me

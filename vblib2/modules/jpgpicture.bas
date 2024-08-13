@@ -63,7 +63,7 @@ Private Declare Function StretchBlt _
 'Win32 API Constant Declarations
 Private Const STRETCH_HALFTONE = 4
 
-Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTABLE As String, Optional ByVal cWHERE As String, _
+Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As String, Optional ByVal cWHERE As String, _
                            Optional ByVal cCAMPO As String = "IMAGEM") As Boolean
   Dim oDB As ADODB.Connection
   Dim oRS As ADODB.Recordset
@@ -93,13 +93,13 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTABLE As
        DeleteFile sTEMPFILE
     End If
   
-  cSQL = cTABLE
+  cSQL = cTable
   If cWHERE <> "" Then
      Select Case aRETU(2)
           Case "SQLITE"
-               cSQL = "select BLOB_EXPORT(" + cCAMPO + ",'" + sTEMPFILE + "' )  as imagem from " + cTABLE + "  WHERE " & cWHERE
+               cSQL = "select BLOB_EXPORT(" + cCAMPO + ",'" + sTEMPFILE + "' )  as imagem from " + cTable + "  WHERE " & cWHERE
           Case Else
-               cSQL = "select " + cCAMPO + " from " + cTABLE + "  WHERE " & cWHERE
+               cSQL = "select " + cCAMPO + " from " + cTable + "  WHERE " & cWHERE
      End Select
   End If
   
@@ -174,10 +174,12 @@ errhandler:
 
 End Function
 
-Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cSQL As String, _
-                           ByRef cPICTURE, Optional ByVal cCAMPO As String = "IMAGEM") As Boolean
+Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
+                           ByRef cPICTURE, Optional ByVal cCAMPO As String = "IMAGEM", _
+                           Optional ByVal cWHERE As String = "") As Boolean
   Dim oDB As ADODB.Connection
   Dim oRS As ADODB.Recordset
+  Dim oCMD As ADODB.Command
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
@@ -185,69 +187,83 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cSQL As String, _
   Dim abBytes() As Byte
   Dim iFileNum As Integer
   Dim sTEMPFILE As String
-
+  Dim aRETU
+  Dim cCMD As String
+  Dim cSQL As String
 
 
   On Error GoTo errhandler
 
   ADOGrvBlob = False
 
-  cARQ = GeracArq(cARQ)
+  aRETU = TipoConn(cARQ)
+  cARQ = aRETU(1) ' GeracArq(cARQ)
 
   lOPEN = False
   lRSOP = False
 
+  cSQL = cTable
+  If cWHERE <> "" Then
+    cSQL = "select " + cCAMPO + " from " + cTable + "  WHERE " & cWHERE
+  End If
+  
+  
+  sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
+  PicSave.SavePicture cPICTURE.Picture, sTEMPFILE, fmtJPEG, 70
+  
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
   oDB.Open cARQ
 
-
-
   lOPEN = True
-
-  Set oRS = New ADODB.Recordset
-  oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic  ''adOpenStatic
-
-
-  lRSOP = True
-  If Not oRS.EOF Then
-    If cPICTURE.Picture.Height = 0 Then
-      oRS.Fields(cCAMPO) = Null
-      oRS.Update
-      ADOGrvBlob = True
-    Else
-      sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
-
-      PicSave.SavePicture cPICTURE.Picture, sTEMPFILE, fmtJPEG, 70
-      'SavePictureEx cPICTURE.Picture, sTEMPFILE, FIF_JPEG
-
-
-      iFileNum = FreeFile
-      Open sTEMPFILE For Binary Access Read As #iFileNum
-      lFileLength = LOF(iFileNum)
-      ReDim abBytes(lFileLength)
-      Get #iFileNum, , abBytes()
-      Close #iFileNum
-      'put byte array contents into db field
-      If Not sTEMPFILE = "" Then
-        oRS.Fields(cCAMPO).AppendChunk abBytes()
-        oRS.Update
-        ADOGrvBlob = True
-      End If
-      'sTEMPFILE = sTEMPFILE & ".jpg"
-      DeleteFile sTEMPFILE  'Kill sTEMPFILE
-    End If
-  End If
-
-  oRS.Close
+  
+Select Case aRETU(2)
+     Case "SQLITE"
+          '"Update IMAGENS  SET IMAGEM = blob_import('c:\temp\testered.jpg') where   codigo='red'"
+          If cPICTURE.Picture.Height = 0 Then
+             cCMD = "Update " + cSQL + "  SET " + cCAMPO + " = NULL where  " + cWHERE
+          Else
+             cCMD = "Update " + cSQL + "  SET " + cCAMPO + " = blob_import('" + sTEMPFILE + "') where  " + cWHERE
+          End If
+          Set oCMD = New ADODB.Command
+          oCMD.ActiveConnection = oDB
+          oCMD.CommandText = cCMD
+          oCMD.Execute
+          Set oCMD = Nothing
+     Case Else
+        Set oRS = New ADODB.Recordset
+        oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic  ''adOpenStatic
+      
+      
+        lRSOP = True
+        If Not oRS.EOF Then
+          If cPICTURE.Picture.Height = 0 Then
+            oRS.Fields(cCAMPO) = Null
+            oRS.Update
+            ADOGrvBlob = True
+          Else
+            iFileNum = FreeFile
+            Open sTEMPFILE For Binary Access Read As #iFileNum
+            lFileLength = LOF(iFileNum)
+            ReDim abBytes(lFileLength)
+            Get #iFileNum, , abBytes()
+            Close #iFileNum
+            'put byte array contents into db field
+            If Not sTEMPFILE = "" Then
+              oRS.Fields(cCAMPO).AppendChunk abBytes()
+              oRS.Update
+              ADOGrvBlob = True
+            End If
+            DeleteFile sTEMPFILE, True  'Kill sTEMPFILE
+          End If
+        End If
+        oRS.Close
+        Set oRS = Nothing
+  End Select
   oDB.Close
-  Set oRS = Nothing
   Set oDB = Nothing
   Exit Function
-
-
-
 
 errhandler:
   cERRO = "AdoGRVBlob" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL & Chr(13) & Chr(10)

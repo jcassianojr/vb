@@ -1406,7 +1406,8 @@ Private Sub cmdClose_Click()
 
     For i = 0 To 3
       If lTROCOU(i) Then
-        ADOGrvBlob cARQ, cSQL, Picture1(i), "FOTOPASSO0" + StrZero(i + 1, 1)
+        'cSQL = "select * from poKa WHERE numero=" & nPPAP
+        ADOGrvBlob cARQ, "POKA", Picture1(i), "FOTOPASSO0" + StrZero(i + 1, 1), "numero=" & nPPAP
       End If
     Next i
 

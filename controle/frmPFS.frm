@@ -5172,8 +5172,8 @@ Private Sub cmdClose_Click()
         Case 4
           cCAMIMG = "FIGSEQ02"         'visa explodida
         End Select
-        cSQLIMG = "select  PF,SEQ,SSQ," & cCAMIMG & " from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
-        ADOGrvBlob cARQPF, cSQLIMG, Picture1(iLOOP), cCAMIMG
+        'cSQLIMG = "select  PF,SEQ,SSQ," & cCAMIMG & " from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
+        ADOGrvBlob cARQPF, "PFS", Picture1(iLOOP), cCAMIMG, "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
       End If
     Next iLOOP
   End If
