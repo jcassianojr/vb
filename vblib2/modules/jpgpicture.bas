@@ -203,13 +203,14 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
   lRSOP = False
 
   cSQL = cTable
-  If cWHERE <> "" Then
+  If cWHERE = "" Then
     cSQL = "select " + cCAMPO + " from " + cTable + "  WHERE " & cWHERE
   End If
   
-  
-  sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
-  PicSave.SavePicture cPICTURE.Picture, sTEMPFILE, fmtJPEG, 70
+  If cPICTURE.Picture.Height > 0 Then
+     sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
+     PicSave.SavePicture cPICTURE.Picture, sTEMPFILE, fmtJPEG, 70
+  End If
   
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
