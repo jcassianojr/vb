@@ -170,11 +170,11 @@ Private Sub ForceSystemDecimalToPeriod()
     Const LOCALE_SDECIMAL   As Long = &HE&
     Const LOCALE_SGROUPING  As Long = &H10&
     Const Eng_LCID          As Long = 1033&
-    Dim s                   As String
+    Dim S                   As String
     '
-    s = String$(GetLocaleInfoa(Eng_LCID, LOCALE_SDECIMAL, vbNullString, 0&), 0)
-    GetLocaleInfoa Eng_LCID, LOCALE_SDECIMAL, s, Len(s)
-    If RTrimNull(s) <> "." Then
+    S = String$(GetLocaleInfoa(Eng_LCID, LOCALE_SDECIMAL, vbNullString, 0&), 0)
+    GetLocaleInfoa Eng_LCID, LOCALE_SDECIMAL, S, Len(S)
+    If RTrimNull(S) <> "." Then
         SetLocaleInfoa Eng_LCID, LOCALE_SDECIMAL, "."
         SetLocaleInfoa Eng_LCID, LOCALE_SGROUPING, ","
     End If
@@ -288,7 +288,7 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
     Case "CC"                                'Caracter Capitalizado
       eVAR = FixStr(eVAR, ePAD)
       FVar = MMCase(eVAR)
-    Case "D", "DN", "DS", "DC", "DF", "DH", "DD", "DZ"
+    Case "D", "DN", "DS", "DC", "DF", "DH", "DD", "DZ", "D-"
       FVar = Fdata(eVAR, cFORM, ePAD)
       'Data dd/mm/yyyy
       'se for null
@@ -644,10 +644,13 @@ Public Function Fdata(ByVal Data As Variant, _
   'data padrao
   Fdata = ePAD
 
+  If cTipoData = "D-" Then
+     cMASCARA = "yyyy-mm-dd"
+  End If
   If IsDate(Data) And Not DataBranco(Data) Then  ''Data <> "00:00:00" And Data <> "0000-00-00" Then
     Fdata = Format(Data, cMASCARA)
   Else
-    Select Case cTipoData
+    Select Case cTipoData 'gera null conforme o tipo
     Case "", "D", "DS"
       Fdata = DateSerial(0, 0, 0)
     Case "DD"
@@ -2536,12 +2539,12 @@ Public Function SameWords(ByRef Text1 As String, ByRef Text2 As String) As Boole
 End Function
 
 Public Function FolderExists(sDir As String) As Boolean
-  Dim s As String
-  s = sDir
-  If Right$(s, 1) = "\" Then s = Left$(s, Len(s) - 1)
+  Dim S As String
+  S = sDir
+  If Right$(S, 1) = "\" Then S = Left$(S, Len(S) - 1)
   On Error GoTo FileExistsError
   ' If no error then something existed.
-  bFolderExists = ((GetAttr(s) And vbDirectory) = vbDirectory)
+  bFolderExists = ((GetAttr(S) And vbDirectory) = vbDirectory)
   Exit Function
 FileExistsError:
   bFolderExists = False

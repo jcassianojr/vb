@@ -599,9 +599,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Dim cNOMEFOLHA As String
-'Dim aORDEM As Variant
 Dim aORDES As Variant
-'Dim cORDEM As String
 Dim cSUBWHERE As String
 Dim nSUBWHERE As Long
 

@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":058A
-            TextSave        =   "09:22"
+            TextSave        =   "17:10"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -69,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principal.frx":0B24
-            TextSave        =   "12/08/2024"
+            TextSave        =   "18/08/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -105,6 +105,20 @@ Private Sub MDIForm_Load()
   CenterFormToScreen Me
   cmdline = Trim(Command())
   
+  
+  'comand line properties project
+  '$admin%CU#VIA
+  ' user  grupo sub grupo
+  'lstview
+  '.txt .rtf jpg preview
+  
+  ' exemplo charmar rpt
+  ' cTIPO = "R"
+  '  zgrp = "PF"
+  '  ZGRPSUB = "IE"
+  '  eLOCALIZA = "ITA00148"
+  '  escRPT.Show vbModal, Me
+  
   If InStr(UCase(cmdline), "LSTVIEW") Then
      FrmLstView.Show vbModal, Me
      End
@@ -113,18 +127,11 @@ Private Sub MDIForm_Load()
    If InStr(UCase(cmdline), ".TXT") _
      Or InStr(UCase(cmdline), ".RTF") _
      Or InStr(UCase(cmdline), ".JPG") Then
-     'Alert (cmdline)
      cARQRTF = cmdline
      escRPT.Show vbModal, Me
      End
   End If
   
-  
-  'comand line properties project
-  '$admin%CU#VIA
-  'lstview
-  ' .txt .rtf preview
- 
   ' aDIREITOS = Array(True, True, True, True, True, True, True, True)
   ' FrmRTf.Show vbModal
 
@@ -152,6 +159,20 @@ Private Sub MDIForm_Load()
     zUSER = "ADMIN"
   End If
 
+  cTIPORPT = "R"
+  zRPTARQ = PegPath("PATH", "RPT")
+  If Trim(UCase(App.EXEName)) = "WRPTF" Then
+    cTIPORPT = "F"
+    zRPTARQ = PegPath("PATH", "FOL")
+  End If
+  If Trim(UCase(App.EXEName)) = "WRPTD" Then
+    cTIPORPT = "D"
+    zRPTARQ = PegPath("PATH", "DOC")
+  End If
+  If Trim(UCase(App.EXEName)) = "WRPTI" Then
+    cTIPORPT = "I"
+    zRPTARQ = PegPath("PATH", "INT")
+  End If
 
   'Caminhos
   pICONES = PegPath("PATH", "ICONES")
@@ -164,26 +185,6 @@ Private Sub MDIForm_Load()
   Dbname = PegPath("PATH", "MDB") ' agora no ini + "WRPT.MDB"
   zusalx = PegPath("PATH", "USALX")
   zusamc = PegPath("PATH", "USAMC")
-
-  cTIPORPT = "R"
-  zRPTARQ = PegPath("PATH", "RPT") 'agora no ini + "RPT.MDB"
-
-
-  If Trim(UCase(App.EXEName)) = "WRPTF" Then
-    cTIPORPT = "F"
-    zRPTARQ = PegPath("PATH", "FOL") ' agora no ini+ "RPTFOL.MDB"
-  End If
-  If Trim(UCase(App.EXEName)) = "WRPTD" Then
-    cTIPORPT = "D"
-    zRPTARQ = PegPath("PATH", "DOC") + "RTF.MDB"
-  End If
-  If Trim(UCase(App.EXEName)) = "WRPTI" Then
-    cTIPORPT = "I"
-    zRPTARQ = PegPath("PATH", "INT") 'agora no ini+ "RPTINT.MDB"
-  End If
-
-
-
 
   If Not FileExist(Dbname, True) Then
     Alert ("Erro Ini [PATH] MDB=")
@@ -198,47 +199,18 @@ Private Sub MDIForm_Load()
       End
   End If
 
-  ' Carrega imagens para o ImageList
-  Set DAODB = New ADODB.Connection
-  DAODB.CursorLocation = adUseClient
-  DAODB.ConnectionTimeout = 120
-  DAODB.Open GeracArq(Dbname, , False)
 
-
-  Set DAORS = New ADODB.Recordset
-  DAORS.Open "select * from controle where form='frmMDIPRINCIPAL'", DAODB, adOpenForwardOnly, adLockReadOnly
-
-  With DAORS
-    Do While Not DAORS.EOF  '!controle = "ImageList1"
-      cARQICO = pICONES & DAORS.Fields("TOOLTIP")
-      If FileExist(cARQICO, True) Then
-        ImageList1.ListImages.Add , DAORS.Fields("Caption"), LoadPicture(cARQICO)
-      Else
-        End
-      End If
-      .MoveNext
-    Loop
-  End With
-  DAORS.Close
-  DAODB.Close
-  Set DAODB = Nothing
-  Set DAORS = Nothing
-
+  'competencia empresa
   zEMPRESA = 1
   zMES = Month(Date)
   zANO = Year(Date)
 
+  'dados do usuario
   zWRPTID = 0
   zUSERID = 0
   zIDFOLHA = 0
   zNOMEFOLHA = ""
-
-
-
-
-
-  sSQL = "SELECT IDUSUARIO,USUARIO,IDFOLHA,NOMEFOLHA FROM USUARIO WHERE USUARIO='" & zUSER & "'"
-
+  sSQL = "SELECT IDUSUARIO,IDFOLHA,NOMEFOLHA FROM USUARIO WHERE USUARIO='" & zUSER & "'"
   aRETU = PegSQL(DBWRPT, sSQL, 3, Array("IDUSUARIO", "IDFOLHA", "NOMEFOLHA"), _
                  Array("NI", "NI", "C"), _
                  Array(0, 0, ""))
@@ -259,7 +231,6 @@ Private Sub MDIForm_Load()
     Alert ("Nome Folha de Pagamento WRPT Nao Preenchido" & zUSER)
     End
   End If
-
   If zIDFOLHA > 0 Then
     If demitido(zIDFOLHA) Then
       End
@@ -267,30 +238,58 @@ Private Sub MDIForm_Load()
   End If
 
 
-  StatusBar1.Panels(6).Text = zUSER
+  StatusBar1.Panels(6).tEXT = zUSER
 
   If zWRPTID = 0 Then
-    MsgBox "Usuário Não Cadastrado", vbOKOnly, "Bloqueio de Acesso"
-    Unload Me
-  Else
-    If zgrp = "" Then
-    cARQRTF = ""
+    MsgBox "Usuario Nao Cadastrado", vbOKOnly, "Bloqueio de Acesso"
+    End 'unload me
+  End If
+  
+  'grava ultima data de acesso
+  cARQ = PegPath("PATH", "SYSUSER")
+  sSQL = "select DATAULT from USUARIO WHERE USUARIO='" & zUSER & "'"
+
+'
+'checar gravacao sqlite tentar por select id ou current date
+'GrvSQL cARQ, sSQL, 1, Array("DATAULT"), Array(Today()), Array("D")
+ '
+ '
+  
+  ' Carrega imagens para o ImageList
+  Set DAODB = New ADODB.Connection
+  DAODB.CursorLocation = adUseClient
+  DAODB.ConnectionTimeout = 120
+  DAODB.Open GeracArq(Dbname, , False)
+  Set DAORS = New ADODB.Recordset
+  DAORS.Open "select * from controle where form='frmMDIPRINCIPAL'", DAODB, adOpenForwardOnly, adLockReadOnly
+  With DAORS
+    Do While Not DAORS.EOF
+      cARQICO = pICONES & DAORS.Fields("TOOLTIP")
+      If FileExist(cARQICO, True) Then
+        ImageList1.ListImages.Add , DAORS.Fields("Caption"), LoadPicture(cARQICO)
+      Else
+        End
+      End If
+      .MoveNext
+    Loop
+  End With
+  DAORS.Close
+  DAODB.Close
+  Set DAODB = Nothing
+  Set DAORS = Nothing
+
+
+   If zgrp = "" Then
+      cARQRTF = ""
+      eLOCALIZA = ""
       escRPTGRP.Show vbModal
       End
-    Else
+   Else
       cARQRTF = ""
+      eLOCALIZA = ""
       escRPT.Show vbModal
       End
-    End If
-  End If
-
-
-
-  cARQ = PegPath("PATH", "SYSUSER")
-  sSQL = "select * from USUARIO WHERE USUARIO='" & zUSER & "'"
-  GrvSQL cARQ, sSQL, 1, Array("DATAULT"), Array(Today()), Array("D")
-
-
-
+   End If
+  
 
 End Sub

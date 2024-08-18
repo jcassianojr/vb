@@ -470,6 +470,11 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
           eVAL = "_"
         End If
       End If
+      
+       If cTIPO = "D" And aRETU(2) = "SQLITE" Then
+         aFOR(x) = "D-"
+      End If
+      
       ''Evitar Gravar String Vazias Campos DAta
       If cTIPO = "D" Then
         If DataBranco(eVAL) Then
@@ -482,9 +487,11 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
           End If
         End If
       End If
+     
       If cTIPO = "B" Then
         aFOR(x) = ""
       End If
+      
       ''Efetua a Gravaçao
       If lGRAVA Then
         oRS(aCAM(x)) = FVar(eVAL, aFOR(x), eVAZIO)
