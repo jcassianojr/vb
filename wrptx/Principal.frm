@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":058A
-            TextSave        =   "17:10"
+            TextSave        =   "21:34"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -101,6 +101,7 @@ Private Sub MDIForm_Load()
   Dim aRETU As Variant
   Dim cARQ As String
   Dim cARQICO As String
+  Dim ctmpline As String
 
   CenterFormToScreen Me
   cmdline = Trim(Command())
@@ -138,18 +139,50 @@ Private Sub MDIForm_Load()
   zgrp = ""
   ZGRPSUB = ""
   zUSER = ""
+  eLOCALIZA = ""
+  cARQRTF = ""
 
-  nPOS = InStr(cmdline, "%")
-  zUSER = Mid(cmdline, 2, nPOS - 2)
-
-  nPOS2 = InStr(cmdline, "#")
-  If nPOS2 <> Len(cmdline) Then
-    nPOS3 = nPOS2 - nPOS - 1
-    zgrp = Mid(cmdline, nPOS + 1, nPOS3)
-    ZGRPSUB = Mid(cmdline, nPOS2 + 1)
-  Else
-    zgrp = Mid(cmdline, nPOS + 1, Len(cmdline) - nPOS - 1)
+  '$admin%CU#VIA_RPT0001
+  
+  'pegando o usuario
+  ctmpline = cmdline
+  nPOS = InStr(ctmpline, "$")
+  nPOS2 = InStr(ctmpline, "%")
+  If nPOS > 0 And nPOS2 = 0 Then
+    zUSER = Mid(ctmpline, 2)
+    ctmpline = ""
   End If
+  If nPOS > 0 And nPOS2 > 0 Then
+    zUSER = Mid(ctmpline, 2, nPOS2 - 2)
+    ctmpline = Mid(ctmpline, nPOS2)
+  End If
+  'pegando o grupo
+  nPOS = InStr(ctmpline, "%")
+  nPOS2 = InStr(ctmpline, "#")
+  If nPOS > 0 And nPOS2 = 0 Then
+    zgrp = Mid(ctmpline, 2)
+    ctmpline = ""
+  End If
+  If nPOS > 0 And nPOS2 > 0 Then
+    zgrp = Mid(ctmpline, 2, nPOS2 - 2)
+    ctmpline = Mid(ctmpline, nPOS2)
+  End If
+   'pegando o subgrupo
+  nPOS = InStr(ctmpline, "#")
+  nPOS2 = InStr(ctmpline, "_")
+  If nPOS > 0 And nPOS2 = 0 Then
+    ZGRPSUB = Mid(ctmpline, 2)
+    ctmpline = ""
+  End If
+  If nPOS > 0 And nPOS2 > 0 Then
+    ZGRPSUB = Mid(ctmpline, 2, nPOS2 - 2)
+    ctmpline = Mid(ctmpline, nPOS2)
+  End If
+  nPOS2 = InStr(ctmpline, "_")
+  If nPOS2 > 0 Then
+     eLOCALIZA = Mid(ctmpline, 2)
+  End If
+  
 
   zUSER = UCase(zUSER)
   zgrp = UCase(zgrp)
@@ -173,6 +206,7 @@ Private Sub MDIForm_Load()
     cTIPORPT = "I"
     zRPTARQ = PegPath("PATH", "INT")
   End If
+  cTIPO = cTIPORPT
 
   'Caminhos
   pICONES = PegPath("PATH", "ICONES")
@@ -209,16 +243,18 @@ Private Sub MDIForm_Load()
   zWRPTID = 0
   zUSERID = 0
   zIDFOLHA = 0
+  zIDUNI = 0
   zNOMEFOLHA = ""
-  sSQL = "SELECT IDUSUARIO,IDFOLHA,NOMEFOLHA FROM USUARIO WHERE USUARIO='" & zUSER & "'"
-  aRETU = PegSQL(DBWRPT, sSQL, 3, Array("IDUSUARIO", "IDFOLHA", "NOMEFOLHA"), _
-                 Array("NI", "NI", "C"), _
-                 Array(0, 0, ""))
+  sSQL = "SELECT IDUSUARIO,IDFOLHA,NOMEFOLHA,ID FROM USUARIO WHERE USUARIO='" & zUSER & "'"
+  aRETU = PegSQL(DBWRPT, sSQL, 4, Array("IDUSUARIO", "IDFOLHA", "NOMEFOLHA", "ID"), _
+                 Array("NI", "NI", "C", "NI"), _
+                 Array(0, 0, "", 0))
   If lRETU Then
     zWRPTID = aRETU(0)
     zUSERID = zWRPTID
     zIDFOLHA = aRETU(1)
     zNOMEFOLHA = aRETU(2)
+    zIDUNI = aRETU(3)
   End If
 
 
@@ -238,7 +274,7 @@ Private Sub MDIForm_Load()
   End If
 
 
-  StatusBar1.Panels(6).tEXT = zUSER
+  StatusBar1.Panels(6).Text = zUSER
 
   If zWRPTID = 0 Then
     MsgBox "Usuario Nao Cadastrado", vbOKOnly, "Bloqueio de Acesso"
@@ -246,14 +282,18 @@ Private Sub MDIForm_Load()
   End If
   
   'grava ultima data de acesso
-  cARQ = PegPath("PATH", "SYSUSER")
-  sSQL = "select DATAULT from USUARIO WHERE USUARIO='" & zUSER & "'"
-
+ 'cARQ = PegPath("PATH", "SYSUSER")
+ ' sSQL = "select DATAULT from USUARIO WHERE USUARIO='" & zUSER & "'"
+ 'sSQL = "select DATAULT from USUARIO WHERE ID=" & zIDUNI
 '
 'checar gravacao sqlite tentar por select id ou current date
-'GrvSQL cARQ, sSQL, 1, Array("DATAULT"), Array(Today()), Array("D")
+'GrvSQL cARQ, sSQL, 1, Array("DATAULT"), Array(Today()), Array("DH")
  '
  '
+ 
+ cARQ = PegPath("PATH", "SYSUSER")
+ sSQL = "UPDATE USUARIO  SET DATAULT = CURRENTDATETIME   WHERE  USUARIO = '" & zUSER & "'"
+ ADOComando cARQ, sSQL
   
   ' Carrega imagens para o ImageList
   Set DAODB = New ADODB.Connection
@@ -278,18 +318,22 @@ Private Sub MDIForm_Load()
   Set DAODB = Nothing
   Set DAORS = Nothing
 
-
-   If zgrp = "" Then
-      cARQRTF = ""
-      eLOCALIZA = ""
-      escRPTGRP.Show vbModal
-      End
-   Else
-      cARQRTF = ""
-      eLOCALIZA = ""
+  If eLOCALIZA = "" Then
+     If zgrp = "" Then
+        cARQRTF = ""
+        eLOCALIZA = ""
+        escRPTGRP.Show vbModal
+        End
+     Else
+        cARQRTF = ""
+        eLOCALIZA = ""
+        escRPT.Show vbModal
+        End
+     End If
+  Else
       escRPT.Show vbModal
       End
-   End If
+  End If
   
 
 End Sub

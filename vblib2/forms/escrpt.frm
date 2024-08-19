@@ -325,8 +325,14 @@ Private Sub imprima_click()
 
 
   ''Grava Utilizaçao
+  
+  '
+  '
+  ' ajustar gravacao data sqlite
+  '
+  
   aRELCFG(3) = aRELCFG(3) + 1
-  GrvSQL cARQ, cSQL, 2, Array("DATAIMP", "UTILIZADO"), Array(Now, aRELCFG(3)), Array("", "N")
+  GrvSQL cARQ, cSQL, 2, Array("DATAIMP", "UTILIZADO"), Array(Now, aRELCFG(3)), Array("D", "N"), 1
 
 
 

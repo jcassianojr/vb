@@ -135,6 +135,19 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
       Exit Function
     End If
     
+    If InStr(cSQL, "CURRENTDATETIME") > 0 Then
+       Select Case aRETU(2)
+           Case "SQLITE"
+                cSQL = Replace(cSQL, "CURRENTDATETIME", " current_timestamp ")
+           Case "MDB"
+                cSQL = Replace(cSQL, "CURRENTDATETIME", " now ")
+           Case Else
+                cSQL = Replace(cSQL, "CURRENTDATETIME", "'" & Format(Date, "dd/mm/yyyy") & "'")
+       End Select
+       
+    End If
+    
+    
     cCONN = aRETU(1)
     Set oDB = New ADODB.Connection
     Set oCOM = New ADODB.Command
@@ -471,9 +484,10 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         End If
       End If
       
-       If cTIPO = "D" And aRETU(2) = "SQLITE" Then
-         aFOR(x) = "D-"
-      End If
+        'nao grava com mascara yyyy-mm-dd erro no update
+       'If cTIPO = "D" And aRETU(2) = "SQLITE" Then
+       '  aFOR(x) = "D-"
+       'End If
       
       ''Evitar Gravar String Vazias Campos DAta
       If cTIPO = "D" Then
@@ -494,7 +508,11 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
       
       ''Efetua a Gravaçao
       If lGRAVA Then
-        oRS(aCAM(x)) = FVar(eVAL, aFOR(x), eVAZIO)
+         If aFOR(x) = "DH" And aRETU(2) = "SQLITE" Then
+            oRS(aCAM(x)) = Now
+         Else
+            oRS(aCAM(x)) = FVar(eVAL, aFOR(x), eVAZIO)
+         End If
         'oFIELD = FVar(eVAL, aFOR(X), eVAZIO)
       End If
     Next x

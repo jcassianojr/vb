@@ -14,6 +14,7 @@ Public zgrp As String
 Public ZGRPSUB As String
 Public cTIPORPT As String
 Public zIDRPTUSR As Long
+Public zIDUNI
 'requeridas wrpt
 Public strCodeKey As String
 Public dbuser As String
