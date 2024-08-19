@@ -102,12 +102,12 @@ Dim aORDES As Variant
 Dim cORDEM As String
 
 Private Sub Apaga_Click()
-  Dim sSQL As String
+  Dim SSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
     zRPT = Grid.Text
-    sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
-    If ApagaSQLP(zRPTARQ, sSQL) Then
+    SSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
+    If ApagaSQLP(zRPTARQ, SSQL) Then
       FilRelat
     End If
   End If
@@ -213,6 +213,7 @@ Private Sub imprima_click()
   Dim aRETU As Variant
   Dim eRUN As String
   Dim fileFile As Integer
+  Dim SSQL As String
   Dim STRBUFFER As String
   Dim cLINHA As String
 
@@ -244,7 +245,7 @@ Private Sub imprima_click()
                      Array(False, False, False, False, False, False, False, False, ""))
 
   If Not aDIREITOS(5) And Not aDIREITOS(6) And (Not lLIBGRP) Then
-    Alert "Não Liberado Contate o Administrador"
+    Alert "Nao Liberado Contate o Administrador"
     Exit Sub
   End If
 
@@ -312,7 +313,7 @@ Private Sub imprima_click()
         cARQRTF = Caminex(App.Path & aRELCFG(0))
         If Not FileExist(cARQRTF) Then
           If aRELCFG(1) <> "SITE" Then
-            Alert ("Arquivo Não Encontrado " & aRELCFG(0))
+            Alert ("Arquivo Nao Encontrado " & aRELCFG(0))
             Exit Sub
           Else
             cARQRTF = aRELCFG(0)
@@ -323,17 +324,10 @@ Private Sub imprima_click()
     End If
   End If
 
-
-  ''Grava Utilizaçao
-  
-  '
-  '
-  ' ajustar gravacao data sqlite
-  '
-  
   aRELCFG(3) = aRELCFG(3) + 1
-  GrvSQL cARQ, cSQL, 2, Array("DATAIMP", "UTILIZADO"), Array(Now, aRELCFG(3)), Array("D", "N"), 1
-
+'  GrvSQL cARQ, cSQL, 2, Array("DATAIMP", "UTILIZADO"), Array(Now, aRELCFG(3)), Array("D", "N"), 1
+   SSQL = "UPDATE RPT SET  DATAIMP = CURRENTDATETIME,  UTILIZADO = " & aRELCFG(3) & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
+  ADOComando cARQ, SSQL
 
 
   ''Aarquivos

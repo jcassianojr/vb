@@ -1,12 +1,12 @@
-dCompare = 116, 68, 1270, 510, C, 104, 104, 1250, 538, C
-Myfunctions = 52, 52, 1179, 393, C
+dCompare = 116, 68, 1270, 510, , 104, 104, 1250, 538, C
+Myfunctions = 52, 52, 1179, 393, 
 AdoLib = 26, 26, 1153, 514, C
-mFileAPI = 0, 0, 0, 0, C
-dcompareMain = 0, 0, 0, 0, C
+mFileAPI = 0, 0, 1127, 341, C
+dcompareMain = 26, 26, 1153, 367, 
 GeralVars = 0, 0, 0, 0, C
 SqlFuncoesAdo = 0, 0, 0, 0, C
 clsOSInfo = 104, 104, 1249, 538, C
-Common = 52, 52, 1258, 401, C
+Common = 52, 52, 1258, 401, 
 MdbRepComSimples = 0, 0, 0, 0, C
 VisualStyles = 0, 0, 0, 0, C
 Strings = 0, 0, 0, 0, C

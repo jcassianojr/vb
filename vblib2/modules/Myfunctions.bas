@@ -346,7 +346,7 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
       FVar = Mid(eVAR, 1, 2) & "." & Mid(eVAR, 3, 3) & "." & _
              Mid(eVAR, 6, 3) & "/" & Mid(eVAR, 9, 4) & "-" & Mid(eVAR, 13, 2)
     Case "RG"
-      FVar = FormataRG(eVAR)
+      FVar = formatarg(eVAR)
       '            Case "IE" Precisa estado
       '                FVar = FormataIE(eVAR)
     Case "CHAPA"
@@ -757,6 +757,7 @@ Public Function FileExist(ByVal cARQ As Variant, _
     Exit Function
   End If
   If FileExists(cARQUIVO) Then
+    
     FileExist = True
   End If
 
@@ -2332,7 +2333,7 @@ Public Function CharCodesToHTML(ByVal iString As String) As String
   Dim iXml As New MSXML2.DOMDocument60
 
   With iXml.createTextNode(iString)
-    CharCodesToHTML = .Xml
+    CharCodesToHTML = .xml
   End With
 End Function
 
@@ -2362,8 +2363,8 @@ End Function
 Public Function HtmlToText(sHTML) As String
   Dim oDoc As HTMLDocument
   Set oDoc = New HTMLDocument
-  oDoc.Body.innerHTML = sHTML
-  HtmlToText = oDoc.Body.innerText
+  oDoc.body.innerHTML = sHTML
+  HtmlToText = oDoc.body.innerText
 End Function
 Public Function FindInList(ByRef cList As ListBox, sSearch As String) As Long
   Dim sString As String

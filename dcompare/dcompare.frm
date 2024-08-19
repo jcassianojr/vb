@@ -300,13 +300,7 @@ End Sub
 Private Sub Convert(NWindMDBFileName$, SQLiteFileName$)
 Dim i&, aCnn As ADODB.Connection, sCnn As cConnection
 Dim aCnnMDB As ADODB.Connection
-'Dim oCSV As cCSV
-'Dim oFSO As cFSO
-'cConnection cRecordset ImpCSV As New cSpecificImport cCollection
-'cStringCompare cSortedDictionary Catalog command parameter Recordset
-'cDBAccess
-'Dim OTESTE As
-'OTESTE.
+Dim sACCESS As cDBAccess
 
 
   On Error Resume Next
@@ -316,46 +310,32 @@ Dim aCnnMDB As ADODB.Connection
   Set aCnn = New ADODB.Connection
   aCnn.CursorLocation = adUseClient
   cCONN = GeracArq(NWindMDBFileName)
-  'aCnn.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & NWindMDBFileName
   aCnn.Open cCONN
+  
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
  
   Err.Clear
   
-  'lMDB = InStr(UCase(SQLiteFileName), ".MDB") > 0
-  lMDB = False 'quando destino e access apresentou erro possivel implantacao futura
-  
-  If lMDB Then
-     Set aCnnMDB = New ADODB.Connection
-     aCnnMDB.CursorLocation = adUseClient
-     cCONMDB = GeracArq(SQLiteFileName)
-     aCnnMDB.Open cCONMDB
-  Else
-      Set sCnn = New_c.Connection
-      'sCnn.CreateNewDB SQLiteFileName 'para evitar apagar usando sempre uma base sqlite existente
-      sCnn.OpenDB SQLiteFileName
+  If InStr(UCase(SQLiteFileName), ".SQLITE") = 0 Then
+     Alert "Destino nao e sql lite"
+     Exit Sub
   End If
+  
+  Set sCnn = New_c.Connection
+  sCnn.OpenDB SQLiteFileName
   
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
   
   Set C = New cConverter
-  If lMDB Then
-     C.ConvertDatabase aCnn, aCnnMDB
-  Else
-     C.ConvertDatabase aCnn, sCnn
-  End If
+  C.ConvertDatabase aCnn, sCnn
+  
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
   lProgress.Caption = "Table-Schemas created, Table-Data transferred!"
   
-  If lMDB Then
-    C.ConvertIndexes aCnn, aCnnMDB
-  Else
-    C.ConvertIndexes aCnn, sCnn
-  End If
+  C.ConvertIndexes aCnn, sCnn
+  
   If Err Then MsgBox Err.Description
   lProgress.Caption = "Index-Import finished!"
-  
-  
   
   Err.Clear
   
