@@ -12,13 +12,23 @@ Begin VB.Form dCompare
    ScaleHeight     =   5805
    ScaleWidth      =   8955
    StartUpPosition =   3  'Windows Default
+   Begin VBCCR18.CommandButtonW CmdTeste 
+      Height          =   255
+      Left            =   6600
+      TabIndex        =   14
+      Top             =   1200
+      Width           =   615
+      _ExtentX        =   1085
+      _ExtentY        =   450
+      Caption         =   "teste"
+   End
    Begin XPControls.XPButton CmdExportarSqlite 
       Height          =   375
       Left            =   5160
       TabIndex        =   12
       Top             =   1200
-      Width           =   1815
-      _ExtentX        =   3201
+      Width           =   1215
+      _ExtentX        =   2143
       _ExtentY        =   661
       Caption         =   "Exportar Sqlite"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -344,6 +354,11 @@ Dim sACCESS As cDBAccess
   Set C = Nothing
 End Sub
 
+Private Sub CmdTeste_Click()
+listTables Text1.tEXT
+ListFields Text1.tEXT, "BA01"
+End Sub
+
 Private Sub Command1_Click()
   Dim sFILENAME As String
   Dim sPath As String
@@ -515,3 +530,77 @@ Private Sub Form_Load()
 'Center Me
   CenterFormToScreen Me
 End Sub
+
+
+Private Sub listTables(dbNameWithPath As String)
+Dim dbConn As ADODB.Connection
+Dim rs As ADODB.Recordset
+
+    Set dbConn = New ADODB.Connection
+    
+    dbConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" _
+    & dbNameWithPath & ";" _
+    & "Persist Security Info=False"
+    dbConn.Open
+
+   ' lstTables.Clear
+   ' lstFields.Clear
+    
+    ' Use OpenSchema and get the table names.
+    ' The final argument in the parameter array
+    ' is "Table" to indicate we want a list of tables.
+
+    Set rs = dbConn.OpenSchema(adSchemaTables, Array(Empty, Empty, Empty, "Table"))
+    Do Until rs.EOF
+       ' Me.lstTables.AddItem (rs!Table_Name)
+       Debug.Print rs!table_name
+        rs.MoveNext
+    Loop
+    rs.Close
+    dbConn.Close
+End Sub
+Private Sub ListFields(dbFileWithPath As String, dbTableName As String)
+Dim dbConn As ADODB.Connection
+Dim rs As ADODB.Recordset
+Dim cTIPO
+Dim nLENGTH
+    Set dbConn = New ADODB.Connection
+    
+    dbConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" _
+    & dbFileWithPath & ";" _
+    & "Persist Security Info=False"
+    dbConn.Open
+
+   ' Me.lstFields.Clear
+    
+   ' Set rs = dbConn.OpenSchema(adSchemaColumns) ', Array(Empty, Empty, dbTableName))
+    Set rs = dbConn.OpenSchema(adSchemaColumns, Array(Empty, Empty, dbTableName))
+    
+    Do Until rs.EOF
+        'Me.lstFields.AddItem (rs!COLUMN_NAME)
+        Debug.Print
+        Debug.Print "Table         :" & rs("table_name")
+        Debug.Print "Campo         :" & rs("COLUMN_NAME")
+        cTIPO = TipoDado2(rs("DATA_TYPE"))
+        Debug.Print "Tipo          :" & TipoDado2(rs("DATA_TYPE"))
+        If cTIPO = "S" Then
+           Debug.Print "Tamanho Char  :" & FixInt(rs("CHARACTER_MAXIMUM_LENGTH"))
+        End If
+        If cTIPO = "N" Then
+           Debug.Print "Tamanho Numero:" & FixInt(rs("NUMERIC_PRECISION"))
+           Debug.Print "Scala Numero:" & FixInt(rs("NUMERIC_SCALE"))
+        End If
+        If cTIPO = "D" And FixInt(rs("DATETIME_PRECISION")) > 0 Then
+          Debug.Print "Tamanho DATA:" & FixInt(rs("DATETIME_PRECISION"))
+        End If
+        
+        'alguns tipos nao retorna CHARACTER_MAXIMUM_LENGTH
+        'int' THEN 4
+        'money' THEN 8
+        
+        rs.MoveNext
+    Loop
+    rs.Close
+    dbConn.Close
+End Sub
+
