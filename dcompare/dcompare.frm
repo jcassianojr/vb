@@ -563,7 +563,7 @@ Private Sub ListFields(dbFileWithPath As String, dbTableName As String)
 Dim dbConn As ADODB.Connection
 Dim rs As ADODB.Recordset
 Dim cTIPO
-Dim nLENGTH
+Dim nLength
     Set dbConn = New ADODB.Connection
     
     dbConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" _
@@ -582,7 +582,7 @@ Dim nLENGTH
         Debug.Print "Table         :" & rs("table_name")
         Debug.Print "Campo         :" & rs("COLUMN_NAME")
         cTIPO = TipoDado2(rs("DATA_TYPE"))
-        Debug.Print "Tipo          :" & TipoDado2(rs("DATA_TYPE"))
+        Debug.Print "Tipo          :"; TipoDado2(rs("DATA_TYPE")) & " -  " & rs("DATA_TYPE") & " - " & TipoDados(rs("DATA_TYPE"))
         If cTIPO = "S" Then
            Debug.Print "Tamanho Char  :" & FixInt(rs("CHARACTER_MAXIMUM_LENGTH"))
         End If

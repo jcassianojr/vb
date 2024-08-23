@@ -102,12 +102,12 @@ Dim aORDES As Variant
 Dim cORDEM As String
 
 Private Sub Apaga_Click()
-  Dim SSQL As String
+  Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
     zRPT = Grid.Text
-    SSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
-    If ApagaSQLP(zRPTARQ, SSQL) Then
+    sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
+    If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
     End If
   End If
@@ -159,6 +159,15 @@ Private Sub Form_Load()
      End
      'Unload Me
   End If
+  If InStr(UCase(cARQRTF), ".ZPL") Then
+     If FileExists(cARQRTF) Then
+        PRINTZPLONLINE
+     End If
+     End
+     'Unload Me
+  End If
+  
+  
   
   If InStr(UCase(cARQRTF), ".JPG") Then
      If FileExist(cARQRTF, True) Then
@@ -212,10 +221,10 @@ Private Sub imprima_click()
   Dim lLIBGRP As Boolean
   Dim aRETU As Variant
   Dim eRUN As String
-  Dim fileFile As Integer
-  Dim SSQL As String
+  Dim filefile As Integer
+  Dim sSQL As String
   Dim STRBUFFER As String
-  Dim cLINHA As String
+  Dim Clinha As String
 
 
   On Error Resume Next
@@ -326,8 +335,8 @@ Private Sub imprima_click()
 
   aRELCFG(3) = aRELCFG(3) + 1
 '  GrvSQL cARQ, cSQL, 2, Array("DATAIMP", "UTILIZADO"), Array(Now, aRELCFG(3)), Array("D", "N"), 1
-   SSQL = "UPDATE RPT SET  DATAIMP = CURRENTDATETIME,  UTILIZADO = " & aRELCFG(3) & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
-  ADOComando cARQ, SSQL
+   sSQL = "UPDATE RPT SET  DATAIMP = CURRENTDATETIME,  UTILIZADO = " & aRELCFG(3) & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
+  ADOComando cARQ, sSQL
 
 
   ''Aarquivos
@@ -512,19 +521,7 @@ Private Sub imprima_click()
      End If
   Case "FRMPREVIEW"
     If cEXTENSAO = "ZPL" Then
-      fileFile = FreeFile
-      Open cARQRTF For Input As #fileFile
-      Do While Not EOF(fileFile)
-        'read line
-        Input #fileFile, STRBUFFER
-        cLINHA = cLINHA + STRBUFFER
-      Loop
-      Close fileFile
-      cLINHA = Replace(cLINHA, Chr(13), "")
-      cLINHA = Replace(cLINHA, Chr(10), "")
-      ePASS02 = "http://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/"
-      ePASS02 = ePASS02 + Chr(34) + cLINHA + Chr(34)
-      OpenUrl (ePASS02)
+      PRINTZPLONLINE
       Exit Sub
     End If
 
@@ -662,7 +659,7 @@ End Sub
 
 Public Sub MyPrintinghtml()
   Dim cTEXTO As String
-  Dim cLINHA As String
+  Dim Clinha As String
   Dim LINES() As String
   Dim i As Integer
 
@@ -672,7 +669,7 @@ Public Sub MyPrintinghtml()
   cTEXTO = FileText(cARQRTF)
   cTEXTO = HtmlToText(cTEXTO)
 
-  LINES = Split(cLINHA, vbCrLf)
+  LINES = Split(Clinha, vbCrLf)
 
   For i = 0 To UBound(LINES)
     Printer.Print LINES(i)
@@ -703,19 +700,39 @@ Public Sub MyPrintingJPG()
 End Sub
 
 Public Sub MyPrintingTXT()
-  Dim fileFile As Integer
+  Dim filefile As Integer
   Dim STRBUFFER As String
   'If Not FileExist(cARQRTF, True) Then 'ja checado na cmdvisual click
   '    Exit Sub
   ' End If
-  fileFile = FreeFile
-  Open cARQRTF For Input As #fileFile
-  Do While Not EOF(fileFile)
+  filefile = FreeFile
+  Open cARQRTF For Input As #filefile
+  Do While Not EOF(filefile)
     'read line
-    Input #fileFile, STRBUFFER
+    Input #filefile, STRBUFFER
     Printer.Print STRBUFFER
   Loop
-  Close fileFile
+  Close filefile
 End Sub
+
+Public Function PRINTZPLONLINE()
+Dim filefile As Integer
+  Dim STRBUFFER As String
+  Dim Clinha As String
+  
+  filefile = FreeFile
+      Open cARQRTF For Input As #filefile
+      Do While Not EOF(filefile)
+        'read line
+        Input #filefile, STRBUFFER
+        Clinha = Clinha + STRBUFFER
+      Loop
+      Close filefile
+      Clinha = Replace(Clinha, Chr(13), "")
+      Clinha = Replace(Clinha, Chr(10), "")
+      ePASS02 = "http://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/"
+      ePASS02 = ePASS02 + Chr(34) + Clinha + Chr(34)
+      OpenUrl (ePASS02)
+End Function
 
 
