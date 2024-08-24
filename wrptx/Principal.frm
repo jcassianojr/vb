@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":058A
-            TextSave        =   "15:29"
+            TextSave        =   "12:54"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -69,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principal.frx":0B24
-            TextSave        =   "23/08/2024"
+            TextSave        =   "24/08/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -119,6 +119,11 @@ Private Sub MDIForm_Load()
   '  ZGRPSUB = "IE"
   '  eLOCALIZA = "ITA00148"
   '  escRPT.Show vbModal, Me
+  
+ ' ePASS01 = "C:\TEMP\TESTE.TXT"
+ ' formConvertToPDF.Show vbModal, Me
+ ' End
+   
   
   If InStr(UCase(cmdline), "LSTVIEW") Then
      FrmLstView.Show vbModal, Me
