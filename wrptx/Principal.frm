@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":058A
-            TextSave        =   "12:54"
+            TextSave        =   "10:32"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -69,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principal.frx":0B24
-            TextSave        =   "24/08/2024"
+            TextSave        =   "25/08/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -108,22 +108,34 @@ Private Sub MDIForm_Load()
   
   
   'comand line properties project
-  '$admin%CU#VIA
-  ' user  grupo sub grupo
-  'lstview
-  '.txt .rtf jpg preview
+  
+  ' $admin%CU#VIA_fol0001.rpt
+  ' $user  %grupo #subgrupo _relatorio
   
   ' exemplo charmar rpt
-  ' cTIPO = "R"
+  '  cTIPO = "R" o tipo e pego abaixo conforme o exe wrptx wrptf wrpti wrptd
   '  zgrp = "PF"
   '  ZGRPSUB = "IE"
   '  eLOCALIZA = "ITA00148"
   '  escRPT.Show vbModal, Me
   
+  ' chama o form lstview
+  ' lstview
+  '
+    
+  'C:\TEMP\TESTE.TXT
+  ' abre as extensoes com o preview
+  '.txt .rtf .jpg .zpl
+  
+  ' teste convert pdf
  ' ePASS01 = "C:\TEMP\TESTE.TXT"
  ' formConvertToPDF.Show vbModal, Me
  ' End
    
+  ' teste frmrtf
+  ' aDIREITOS = Array(True, True, True, True, True, True, True, True)
+  ' FrmRTf.Show vbModal
+  ' end
   
   If InStr(UCase(cmdline), "LSTVIEW") Then
      FrmLstView.Show vbModal, Me
@@ -139,8 +151,6 @@ Private Sub MDIForm_Load()
      End
   End If
   
-  ' aDIREITOS = Array(True, True, True, True, True, True, True, True)
-  ' FrmRTf.Show vbModal
 
   zgrp = ""
   ZGRPSUB = ""
@@ -148,8 +158,7 @@ Private Sub MDIForm_Load()
   eLOCALIZA = ""
   cARQRTF = ""
 
-  '$admin%CU#VIA_RPT0001
-  
+ 
   'pegando o usuario
   ctmpline = cmdline
   nPOS = InStr(ctmpline, "$")
@@ -184,6 +193,7 @@ Private Sub MDIForm_Load()
     ZGRPSUB = Mid(ctmpline, 2, nPOS2 - 2)
     ctmpline = Mid(ctmpline, nPOS2)
   End If
+  'pegando o relatorio
   nPOS2 = InStr(ctmpline, "_")
   If nPOS2 > 0 Then
      eLOCALIZA = Mid(ctmpline, 2)

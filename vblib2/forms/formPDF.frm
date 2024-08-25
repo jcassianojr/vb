@@ -449,6 +449,7 @@ End Sub
 Private Sub cmdPreviewOrigem_Click()
   PrintPreview1.ShowPreview
 End Sub
+
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
   MyPrintingTXT
 End Sub
