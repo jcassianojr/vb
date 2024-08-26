@@ -105,7 +105,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -121,7 +121,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -224,7 +224,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.tEXT
+  zRPT = Grid.Text
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -371,8 +371,8 @@ Private Sub imprima_click()
     Case "M5M"                               ''Mana5 Padrao /Mana5 Manrel
       aRELCFG(1) = "IMPRELM5M"             ''MANREL
     Case "HTM", "HTML"
-      aRELCFG(1) = "FRMPREVIEW"
-    Case "PDF", "CHM", "HLP"
+      aRELCFG(1) = "FRMHTML"
+    Case "CHM", "HLP"
       aRELCFG(1) = "SHELL"
     Case "DOC", "XLS", "PPS", "PPT"
       aRELCFG(1) = "SHELL"
@@ -380,6 +380,16 @@ Private Sub imprima_click()
       aRELCFG(1) = "SHELL"
     Case "INI"
       aRELCFG(1) = "FRMINIEDITOR"
+    Case "PDF"
+          ePASS01 = Array("Externo", "Interno")
+      escOrdem.Show vbModal, Me
+      eRETU01 = FixInt(eRETU01, 0)
+      Select Case eRETU01
+      Case 0
+        aRELCFG(1) = "SHELL"
+      Case 1
+         aRELCFG(1) = "FRMPREVIEW"
+      End Select
     Case "TXT", "MAN"
       ePASS01 = Array("Editor Interno", "Imprimir Direto Impressora", "Preview Interno")
       escOrdem.Show vbModal, Me
@@ -404,7 +414,7 @@ Private Sub imprima_click()
       Select Case eRETU01
       Case 0
         aRELCFG(1) = "FRMRTF"
-      Case 2
+      Case 1
         ePASS03 = 2
         PrintPreview1.ShowPreview
         Exit Sub
@@ -412,12 +422,15 @@ Private Sub imprima_click()
     Case "WMF", "EMF", "BMP", "ICO", "JPG", "JPEG", "JNG", "KOALA", "LBM", "IFF", "MNG", "PBM", "PBMRAW", _
          "PCD", "PCX", "PGM", "PGMRAW", "PNG", "PPM", "PPMRAW", "RAS", "TARGA", _
          "DIB", "TGA", "PIC", "TIF", "TIFF", "WBMP", "PSD", "CUT", "XBM", "XPM", "DDS", "GIF", "HDR"
-      aRELCFG(1) = "FRMIMG"
+         Picture1.Picture = LoadPicture(cARQRTF)
+         ePASS03 = 4
+         PrintPreview1.ShowPreview
+         Exit Sub
     Case "MPEG", "MPG", "M1V", "MP2", "MPE", "AVI", "WMF", "WAV", "SND", "AU" _
        , "AIF", "AIFC", "AIFF", "WMA", "WMA", "MP3", "MID", "RMI" _
        , "MIDI", "CDA", "WMA", "ASF", "WM", "WMV", "ASX" _
        , "WAX", "M3U", "MVX", "WMX"
-      aRELCFG(1) = "FRMVID"
+      aRELCFG(1) = "SHELL"
     Case Else
       'exibir abrir com para o usuario escolher o aplicativo
       aRELCFG(1) = "ABRIRCOM"
@@ -454,12 +467,6 @@ Private Sub imprima_click()
     aRELCFG(6) = Replace(aRELCFG(6), "[ZCOG]", zrelcog)
   End If
 
- If cEXTENSAO = "ZPL" Then
-      PRINTZPLONLINE
-      Exit Sub
-    End If
-
-
   ''Imprime conforme Abrir Com
 Select Case aRELCFG(1)
   Case "FRMCRW"
@@ -490,14 +497,8 @@ Select Case aRELCFG(1)
     frmIniEditor.Show vbModal, Me
   Case "FRMCRWENG"
     FrmCrwENG.Show vbModal, Me
-  Case "FRMIMG"
-      If FileExist(cARQRTF, True) Then
-        Picture1.Picture = LoadPicture(cARQRTF)
-        ePASS03 = 4
-        PrintPreview1.ShowPreview
-     End If
-  Case "FRMPREVIEW"
-    ePASS01 = Array("Abir no Navegador", "Preview Interno")
+  Case "FRMHTML"
+    ePASS01 = Array("Navegador Externo", "Preview Interno", "Navegador Interno")
     escOrdem.Show vbModal, Me
     eRETU01 = FixInt(eRETU01, 0)
     Select Case eRETU01
@@ -506,11 +507,9 @@ Select Case aRELCFG(1)
     Case 1
       ePASS03 = 3
       PrintPreview1.ShowPreview
-      Exit Sub
+    Case 3
+      FrmPreview.Show vbModal, Me
     End Select
-
-  Case "FRMVID"
-    FrmVid.Show vbModal, Me
     Exit Sub
 End Select
 
@@ -536,7 +535,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     escrptusr.Show vbModal
   End If
 End Sub
@@ -627,9 +626,6 @@ Public Sub MyPrintinghtml()
   Dim LINES() As String
   Dim i As Integer
 
-  ' If Not FileExist(cARQRTF, True) Then 'ja checado cmdvisualclick
-  '     Exit Sub
-  ' End If
   cTEXTO = FileText(cARQRTF)
   cTEXTO = HtmlToText(cTEXTO)
 
@@ -666,9 +662,6 @@ End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
   Dim STRBUFFER As String
-  'If Not FileExist(cARQRTF, True) Then 'ja checado na cmdvisual click
-  '    Exit Sub
-  ' End If
   fileFile = FreeFile
   Open cARQRTF For Input As #fileFile
   Do While Not EOF(fileFile)
