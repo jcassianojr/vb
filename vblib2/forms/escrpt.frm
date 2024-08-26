@@ -105,7 +105,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -121,7 +121,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -204,16 +204,6 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
   End If
 End Sub
 
-'Private Sub Grid_SelChange()
-'    With Grid
-'        If .Rows > 2 Then
-'            .Col = .Cols - 1
-'            .ColSel = 0
-'            .TopRow = .Row
-'        End If
-'    End With
-'End Sub
-
 Private Sub imprima_click()
   Dim nPOS, x As Integer
   Dim zrelano, zrelmes, zrelemp, zrelcog, zrelqui
@@ -221,10 +211,10 @@ Private Sub imprima_click()
   Dim lLIBGRP As Boolean
   Dim aRETU As Variant
   Dim eRUN As String
-  Dim filefile As Integer
+  Dim fileFile As Integer
   Dim sSQL As String
   Dim STRBUFFER As String
-  Dim Clinha As String
+  Dim cLINHA As String
 
 
   On Error Resume Next
@@ -234,7 +224,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.Text
+  zRPT = Grid.tEXT
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -338,7 +328,6 @@ Private Sub imprima_click()
    sSQL = "UPDATE RPT SET  DATAIMP = CURRENTDATETIME,  UTILIZADO = " & aRELCFG(3) & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
   ADOComando cARQ, sSQL
 
-
   ''Aarquivos
   aARQUIVOS = Array(aRELCFG(7), aRELCFG(8), aRELCFG(9), aRELCFG(10))
 
@@ -372,9 +361,7 @@ Private Sub imprima_click()
     Case "REP"
       aRELCFG(1) = "FRMREP"
     Case "RET"
-      aRELCFG(1) = "VORETRUN"  ''"CARETRUN.EXE"
-    Case "TXL"
-      aRELCFG(1) = "FRMTXL"
+      aRELCFG(1) = "VORETRUN"  ''"CARETRUN.EXE nao funciona mais pois e 32 bits"
     Case "SQL"
       aRELCFG(1) = "FRMSQL"
     Case "CPL"
@@ -383,7 +370,7 @@ Private Sub imprima_click()
       aRELCFG(1) = "IMPRELM5P"             ''PADREL
     Case "M5M"                               ''Mana5 Padrao /Mana5 Manrel
       aRELCFG(1) = "IMPRELM5M"             ''MANREL
-    Case "HTM", "HTML", "ZPL"
+    Case "HTM", "HTML"
       aRELCFG(1) = "FRMPREVIEW"
     Case "PDF", "CHM", "HLP"
       aRELCFG(1) = "SHELL"
@@ -398,17 +385,18 @@ Private Sub imprima_click()
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
       Select Case eRETU01
-      Case 0
-        aRELCFG(1) = "FRMRTF"
-      Case 1
-        aRELCFG(1) = "FRMTXL"
-      Case 2
-        ePASS03 = 1
-        PrintPreview1.ShowPreview
-        Exit Sub
-      End Select
-      'Case "QRP"
-      '   aRELCFG(1) = "qrpVIEW.EXE"
+         Case 0
+           aRELCFG(1) = "FRMRTF"
+         Case 1
+           aRELCFG(1) = "FRMTXL"
+         Case 2
+           ePASS03 = 1
+           PrintPreview1.ShowPreview
+           Exit Sub
+        End Select
+    Case cEXTENSAO = "ZPL"
+       PRINTZPLONLINE
+       Exit Sub
     Case "RTF"
       ePASS01 = Array("Editor Interno", "Preview Interno")
       escOrdem.Show vbModal, Me
@@ -421,10 +409,6 @@ Private Sub imprima_click()
         PrintPreview1.ShowPreview
         Exit Sub
       End Select
-      'Case "DWF"
-      '    aRELCFG(1) = "FRMDWF"
-      'Case "DWG", "DXF", "RML", "IPT", "IAM", "IDW"
-      '    aRELCFG(1) = "FRMDWG"
     Case "WMF", "EMF", "BMP", "ICO", "JPG", "JPEG", "JNG", "KOALA", "LBM", "IFF", "MNG", "PBM", "PBMRAW", _
          "PCD", "PCX", "PGM", "PGMRAW", "PNG", "PPM", "PPMRAW", "RAS", "TARGA", _
          "DIB", "TGA", "PIC", "TIF", "TIFF", "WBMP", "PSD", "CUT", "XBM", "XPM", "DDS", "GIF", "HDR"
@@ -435,15 +419,14 @@ Private Sub imprima_click()
        , "WAX", "M3U", "MVX", "WMX"
       aRELCFG(1) = "FRMVID"
     Case Else
+      'exibir abrir com para o usuario escolher o aplicativo
       aRELCFG(1) = "ABRIRCOM"
-      ''Alert ("Abrir Com Não Configurado")
-      Exit Sub
     End Select
   End If
 
 
   ''Exibe Mensagem Configurada
-  If Len(aRELCFG(2)) > 0 Then Alert aRELCFG(2), "Atençao"
+  If Len(aRELCFG(2)) > 0 Then Alert aRELCFG(2), "Atencao"
 
   ''Ajusta Nome Arquivos
   If Len(aARQUIVOS(0)) > 0 Then cARQNOME = NomeArq(aARQUIVOS(0))
@@ -471,46 +454,40 @@ Private Sub imprima_click()
     aRELCFG(6) = Replace(aRELCFG(6), "[ZCOG]", zrelcog)
   End If
 
-
-
-  ''Direitos agora no shellex abaixo
-  'If aRELCFG(1) = "VORETRUN.EXE" Then cARQRTF = cARQRTF & MONTARSN(, "") & "#" & aARQUIVOS(0) & "#" & aRELCFG(15)
-  'If aRELCFG(1) = "VORTF.EXE" Then cARQRTF = cARQRTF & MONTARSN()
+ If cEXTENSAO = "ZPL" Then
+      PRINTZPLONLINE
+      Exit Sub
+    End If
 
 
   ''Imprime conforme Abrir Com
-  Select Case aRELCFG(1)
+Select Case aRELCFG(1)
   Case "FRMCRW"
     If MDG("usar novo visualizador") Then
       FrmCrwENG.Show vbModal, Me
     Else
       FrmCrw.Show vbModal, Me
     End If
+  Case "FRMTXL"
+     FrmTxl.Show vbModal, Me
   Case "FRMSQL"
     FrmSql.Show vbModal, Me
-    'Case "FRMREP"
-    '   FrmRep.Show vbModal, Me
   Case "EXECUTARDLL"
     ExecutarDLL cARQRTF
   Case "IMPRELM5P"
-    'eRUN = ZMANA5IMP & "IMPREL " & zgrp & " " & zRPT & " " & zUSER & " P " & ZMANA5IMP
-    'Shell eRUN, vbNormalFocus
     ShellEx "IMPREL", essSW_SHOWDEFAULT, zgrp & " " & zRPT & " " & zUSER & " P ", ZMANA5IMP, , Me.hWnd
-
   Case "IMPRELM5M"
-    'eRUN = ZMANA5IMP & "IMPREL " & zgrp & " " & zRPT & " " & zUSER & " M " & ZMANA5IMP
-    'Shell eRUN, vbNormalFocus
     ShellEx "IMPREL", essSW_SHOWDEFAULT, zgrp & " " & zRPT & " " & zUSER & " M ", ZMANA5IMP, , Me.hWnd
   Case "ABRIRCOM"
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   Case "SHELL"
     ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
+  Case "SHELLPRINT"
+    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , "print", Me.hWnd
   Case "FRMRTF"
     FrmRTf.Show vbModal, Me
   Case "FRMINIEDITOR"
     frmIniEditor.Show vbModal, Me
-    'Case "FRWCRWVIEW"
-    '     FrmCrwView.Show vbModal, Me
   Case "FRMCRWENG"
     FrmCrwENG.Show vbModal, Me
   Case "FRMIMG"
@@ -520,12 +497,7 @@ Private Sub imprima_click()
         PrintPreview1.ShowPreview
      End If
   Case "FRMPREVIEW"
-    If cEXTENSAO = "ZPL" Then
-      PRINTZPLONLINE
-      Exit Sub
-    End If
-
-    ePASS01 = Array("Navegador", "Preview Interno")
+    ePASS01 = Array("Abir no Navegador", "Preview Interno")
     escOrdem.Show vbModal, Me
     eRETU01 = FixInt(eRETU01, 0)
     Select Case eRETU01
@@ -539,31 +511,23 @@ Private Sub imprima_click()
 
   Case "FRMVID"
     FrmVid.Show vbModal, Me
-    ''Encerra Para Evitar Nova Abertura Sistema Novo
     Exit Sub
-  End Select
+End Select
 
-  '' Executavel
-  If InStr(aRELCFG(1), ".EXE") Then
-    ' If aRELCFG(1) = "MKRVIEW.EXE" Then
-    '     cARQRTF = Chr(34) & aARQUIVOS(0) & Chr(34) & " " & Chr(34) & "SYSDBA" & Chr(34) & " " & Chr(34) & "masterkey" & Chr(34) & " " & Chr(34) & " " & Chr(34) & " " & Chr(34) & "none" & Chr(34) & " " & Chr(34) & cARQRTF & Chr(34)
-    ' End If
+If aRELCFG(1) = "CARETRUN" Then 'caretrun 16 bits nao funciona mais
+   Alert ("Mudar para executar como VORETRUN")
+   aRELCFG(1) = "VORETRUN"
+End If
+
+  '' abrir com Executavel
+  If InStr(aRELCFG(1), ".EXE") Or "VORETRUN" Then
     aRELCFG(1) = Trim(Replace(aRELCFG(1), ".EXE", " "))
     Select Case aRELCFG(1)
-    Case "CARETRUN"
-      'Shell "caretrun  " & cARQRTF, vbNormalFocus
-      Alert ("configur para voretrun")
-      Exit Sub
-    Case "VORETRUN"
-      'Shell "VORETRUN " & cARQRTF, vbNormalFocus
-      ShellEx "VORETRUN", essSW_SHOWDEFAULT, cARQRTF & MONTARSN(, "") & "#" & aARQUIVOS(0) & "#" & aRELCFG(15), PegPath("PATH", "VORETRUN"), , Me.hWnd
-      'Case "MKRVIEW"
-      '    ShellEx aRELCFG(1), essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
-    Case Else
-      ShellEx aRELCFG(1), essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
+        Case "VORETRUN"
+          ShellEx "VORETRUN", essSW_SHOWDEFAULT, cARQRTF & MONTARSN(, "") & "#" & aARQUIVOS(0) & "#" & aRELCFG(15), PegPath("PATH", "VORETRUN"), , Me.hWnd
+        Case Else
+          ShellEx aRELCFG(1), essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
     End Select
-
-
   End If
 
 
@@ -572,7 +536,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     escrptusr.Show vbModal
   End If
 End Sub
@@ -659,7 +623,7 @@ End Sub
 
 Public Sub MyPrintinghtml()
   Dim cTEXTO As String
-  Dim Clinha As String
+  Dim cLINHA As String
   Dim LINES() As String
   Dim i As Integer
 
@@ -669,7 +633,7 @@ Public Sub MyPrintinghtml()
   cTEXTO = FileText(cARQRTF)
   cTEXTO = HtmlToText(cTEXTO)
 
-  LINES = Split(Clinha, vbCrLf)
+  LINES = Split(cLINHA, vbCrLf)
 
   For i = 0 To UBound(LINES)
     Printer.Print LINES(i)
@@ -700,38 +664,38 @@ Public Sub MyPrintingJPG()
 End Sub
 
 Public Sub MyPrintingTXT()
-  Dim filefile As Integer
+  Dim fileFile As Integer
   Dim STRBUFFER As String
   'If Not FileExist(cARQRTF, True) Then 'ja checado na cmdvisual click
   '    Exit Sub
   ' End If
-  filefile = FreeFile
-  Open cARQRTF For Input As #filefile
-  Do While Not EOF(filefile)
+  fileFile = FreeFile
+  Open cARQRTF For Input As #fileFile
+  Do While Not EOF(fileFile)
     'read line
-    Input #filefile, STRBUFFER
+    Input #fileFile, STRBUFFER
     Printer.Print STRBUFFER
   Loop
-  Close filefile
+  Close fileFile
 End Sub
 
 Public Function PRINTZPLONLINE()
-Dim filefile As Integer
+Dim fileFile As Integer
   Dim STRBUFFER As String
-  Dim Clinha As String
+  Dim cLINHA As String
   
-  filefile = FreeFile
-      Open cARQRTF For Input As #filefile
-      Do While Not EOF(filefile)
+  fileFile = FreeFile
+      Open cARQRTF For Input As #fileFile
+      Do While Not EOF(fileFile)
         'read line
-        Input #filefile, STRBUFFER
-        Clinha = Clinha + STRBUFFER
+        Input #fileFile, STRBUFFER
+        cLINHA = cLINHA + STRBUFFER
       Loop
-      Close filefile
-      Clinha = Replace(Clinha, Chr(13), "")
-      Clinha = Replace(Clinha, Chr(10), "")
+      Close fileFile
+      cLINHA = Replace(cLINHA, Chr(13), "")
+      cLINHA = Replace(cLINHA, Chr(10), "")
       ePASS02 = "http://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/"
-      ePASS02 = ePASS02 + Chr(34) + Clinha + Chr(34)
+      ePASS02 = ePASS02 + Chr(34) + cLINHA + Chr(34)
       OpenUrl (ePASS02)
 End Function
 
