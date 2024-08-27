@@ -105,7 +105,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -121,7 +121,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -224,7 +224,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.Text
+  zRPT = Grid.tEXT
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -370,7 +370,7 @@ Private Sub imprima_click()
       aRELCFG(1) = "IMPRELM5P"             ''PADREL
     Case "M5M"                               ''Mana5 Padrao /Mana5 Manrel
       aRELCFG(1) = "IMPRELM5M"             ''MANREL
-    Case "HTM", "HTML"
+    Case "HTM", "HTML", "XML", "MD", "MARKDOWN"
       aRELCFG(1) = "FRMHTML"
     Case "CHM", "HLP"
       aRELCFG(1) = "SHELL"
@@ -535,7 +535,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     escrptusr.Show vbModal
   End If
 End Sub
