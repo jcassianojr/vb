@@ -105,7 +105,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -121,7 +121,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -224,7 +224,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.tEXT
+  zRPT = Grid.Text
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -519,7 +519,7 @@ If aRELCFG(1) = "CARETRUN" Then 'caretrun 16 bits nao funciona mais
 End If
 
   '' abrir com Executavel
-  If InStr(aRELCFG(1), ".EXE") Or "VORETRUN" Then
+  If InStr(aRELCFG(1), ".EXE") Or aRELCFG(1) = "VORETRUN" Then
     aRELCFG(1) = Trim(Replace(aRELCFG(1), ".EXE", " "))
     Select Case aRELCFG(1)
         Case "VORETRUN"
@@ -535,7 +535,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     escrptusr.Show vbModal
   End If
 End Sub
