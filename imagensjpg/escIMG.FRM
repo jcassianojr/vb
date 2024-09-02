@@ -323,18 +323,20 @@ Private Sub CmdSair_Click()
 End Sub
 
 Private Sub cmdEditar_Click()
-  Grid.Col = 0
-  ZGRP = Grid
-  Load frmIMAGENS
-  frmIMAGENS.TXTFIELDS(0).Enabled = False
-  frmIMAGENS.TXTFIELDS(0).TabStop = False
-  frmIMAGENS.TXTFIELDS(0).Locked = True
-  frmIMAGENS.TXTFIELDS(1).Enabled = False
-  frmIMAGENS.TXTFIELDS(1).TabStop = False
-  frmIMAGENS.TXTFIELDS(1).Locked = True
-  frmIMAGENS.Show vbModal
-  FilRelat
-  LocalizaGrid Grid, ZGRP
+  If Grid.Row > 0 Then 'row 0 cabecario
+      Grid.Col = 0
+      ZGRP = Grid
+      Load frmIMAGENS
+      frmIMAGENS.txtFields(0).Enabled = False
+      frmIMAGENS.txtFields(0).TabStop = False
+      frmIMAGENS.txtFields(0).Locked = True
+      frmIMAGENS.txtFields(1).Enabled = False
+      frmIMAGENS.txtFields(1).TabStop = False
+      frmIMAGENS.txtFields(1).Locked = True
+      frmIMAGENS.Show vbModal
+      FilRelat
+      LocalizaGrid Grid, ZGRP
+  End If
 End Sub
 
 Private Sub Command1_Click()
@@ -458,12 +460,12 @@ Private Sub Form_Load()
 
     Load frmIMAGENS
 
-    frmIMAGENS.TXTFIELDS(0).Enabled = False
-    frmIMAGENS.TXTFIELDS(0).TabStop = False
-    frmIMAGENS.TXTFIELDS(0).Locked = True
-    frmIMAGENS.TXTFIELDS(1).Enabled = False
-    frmIMAGENS.TXTFIELDS(1).TabStop = False
-    frmIMAGENS.TXTFIELDS(1).Locked = True
+    frmIMAGENS.txtFields(0).Enabled = False
+    frmIMAGENS.txtFields(0).TabStop = False
+    frmIMAGENS.txtFields(0).Locked = True
+    frmIMAGENS.txtFields(1).Enabled = False
+    frmIMAGENS.txtFields(1).TabStop = False
+    frmIMAGENS.txtFields(1).Locked = True
     frmIMAGENS.Show vbModal
     End
   End If

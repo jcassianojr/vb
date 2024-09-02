@@ -52,3 +52,4 @@ FrmLstView = 0, 0, 1127, 339, C, 0, 0, 1127, 341, C
 frmLocalizaa = 0, 0, 0, 0, C, 26, 26, 1153, 367, C
 frmInsertDate = 0, 0, 0, 0, C, 52, 52, 1179, 393, C
 FrmPreview = 78, 78, 1153, 512, C, 130, 130, 1112, 564, C
+FrmPicturePrinter = 0, 0, 0, 0, C, 0, 0, 0, 0, C

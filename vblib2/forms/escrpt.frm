@@ -105,7 +105,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -121,7 +121,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -224,7 +224,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.Text
+  zRPT = Grid.tEXT
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -422,9 +422,13 @@ Private Sub imprima_click()
     Case "WMF", "EMF", "BMP", "ICO", "JPG", "JPEG", "JNG", "KOALA", "LBM", "IFF", "MNG", "PBM", "PBMRAW", _
          "PCD", "PCX", "PGM", "PGMRAW", "PNG", "PPM", "PPMRAW", "RAS", "TARGA", _
          "DIB", "TGA", "PIC", "TIF", "TIFF", "WBMP", "PSD", "CUT", "XBM", "XPM", "DDS", "GIF", "HDR"
-         Picture1.Picture = LoadPicture(cARQRTF)
-         ePASS03 = 4
-         PrintPreview1.ShowPreview
+         If MDG("Preview(SIM) ou Impressora(NAO)") Then
+            Picture1.Picture = LoadPicture(cARQRTF)
+            ePASS03 = 4
+            PrintPreview1.ShowPreview
+         Else
+            FrmPicturePrinter.Show vbModal, Me
+         End If
          Exit Sub
     Case "MPEG", "MPG", "M1V", "MP2", "MPE", "AVI", "WMF", "WAV", "SND", "AU" _
        , "AIF", "AIFC", "AIFF", "WMA", "WMA", "MP3", "MID", "RMI" _
@@ -535,7 +539,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     escrptusr.Show vbModal
   End If
 End Sub

@@ -7,14 +7,14 @@ Begin VB.Form frmIMAGENS
    ClientHeight    =   6435
    ClientLeft      =   1095
    ClientTop       =   330
-   ClientWidth     =   6960
+   ClientWidth     =   7050
    HelpContextID   =   1002
    Icon            =   "Frmpecasjpg.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6435
-   ScaleWidth      =   6960
+   ScaleWidth      =   7050
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin BSPrinter.PrintPreview PrintPreview1 
@@ -25,7 +25,7 @@ Begin VB.Form frmIMAGENS
    End
    Begin XPControls.XPButton ximgsave 
       Height          =   435
-      Left            =   5160
+      Left            =   5280
       TabIndex        =   17
       TabStop         =   0   'False
       Top             =   2520
@@ -46,7 +46,7 @@ Begin VB.Form frmIMAGENS
    End
    Begin XPControls.XPButton DelImg 
       Height          =   435
-      Left            =   5160
+      Left            =   5280
       TabIndex        =   16
       TabStop         =   0   'False
       Top             =   1920
@@ -67,7 +67,7 @@ Begin VB.Form frmIMAGENS
    End
    Begin XPControls.XPButton IncImg 
       Height          =   435
-      Left            =   5160
+      Left            =   5280
       TabIndex        =   15
       TabStop         =   0   'False
       Top             =   1320
@@ -88,10 +88,10 @@ Begin VB.Form frmIMAGENS
    End
    Begin XPControls.XPButton VerImg 
       Height          =   495
-      Left            =   5160
+      Left            =   5280
       TabIndex        =   14
       TabStop         =   0   'False
-      Top             =   5280
+      Top             =   5760
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   873
@@ -112,10 +112,10 @@ Begin VB.Form frmIMAGENS
       Height          =   3735
       Left            =   120
       ScaleHeight     =   3675
-      ScaleWidth      =   4155
+      ScaleWidth      =   4875
       TabIndex        =   5
-      Top             =   1440
-      Width           =   4215
+      Top             =   1080
+      Width           =   4935
    End
    Begin VB.PictureBox Picture1 
       AutoRedraw      =   -1  'True
@@ -129,7 +129,7 @@ Begin VB.Form frmIMAGENS
       Width           =   3495
    End
    Begin VB.TextBox txtFields 
-      Height          =   285
+      Height          =   405
       Index           =   1
       Left            =   2880
       MaxLength       =   24
@@ -153,10 +153,10 @@ Begin VB.Form frmIMAGENS
    End
    Begin XPControls.XPButton CmdConfImp 
       Height          =   435
-      Left            =   5160
+      Left            =   5280
       TabIndex        =   6
       TabStop         =   0   'False
-      Top             =   4680
+      Top             =   4080
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
@@ -174,7 +174,7 @@ Begin VB.Form frmIMAGENS
    End
    Begin XPControls.XPButton Encerrar 
       Height          =   435
-      Left            =   5160
+      Left            =   5280
       TabIndex        =   7
       TabStop         =   0   'False
       Top             =   720
@@ -195,7 +195,7 @@ Begin VB.Form frmIMAGENS
    End
    Begin XPControls.XPButton cmdClose 
       Height          =   435
-      Left            =   5160
+      Left            =   5280
       TabIndex        =   8
       TabStop         =   0   'False
       Top             =   120
@@ -216,10 +216,10 @@ Begin VB.Form frmIMAGENS
    End
    Begin XPControls.XPButton CmdPaste 
       Height          =   435
-      Left            =   5160
+      Left            =   5280
       TabIndex        =   9
       TabStop         =   0   'False
-      Top             =   3600
+      Top             =   4680
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
@@ -237,7 +237,7 @@ Begin VB.Form frmIMAGENS
    End
    Begin XPControls.XPButton cmdimprimir 
       Height          =   435
-      Left            =   5160
+      Left            =   5280
       TabIndex        =   10
       TabStop         =   0   'False
       Top             =   3120
@@ -245,7 +245,7 @@ Begin VB.Form frmIMAGENS
       _ExtentX        =   2778
       _ExtentY        =   767
       Picture         =   "Frmpecasjpg.frx":2C5A
-      Caption         =   "Imprimir"
+      Caption         =   "Imprimir (Preview)"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -321,15 +321,36 @@ Begin VB.Form frmIMAGENS
    End
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   435
-      Left            =   5160
+      Left            =   5280
       TabIndex        =   18
       TabStop         =   0   'False
-      Top             =   4080
+      Top             =   5280
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
       Picture         =   "Frmpecasjpg.frx":42C2
       Caption         =   "Abrir Com"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton XPButton1 
+      Height          =   435
+      Left            =   5280
+      TabIndex        =   19
+      TabStop         =   0   'False
+      Top             =   3600
+      Width           =   1575
+      _ExtentX        =   2778
+      _ExtentY        =   767
+      Picture         =   "Frmpecasjpg.frx":485C
+      Caption         =   "Imprimir (Impressora)"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -759,3 +780,13 @@ Private Sub ximgsave_Click()
   End If
 End Sub
 
+Private Sub XPButton1_Click()
+  If Picture1.Height = 0 Then
+    Alert ("Sem Imagem")
+  Else
+    cARQRTF = "temp_" + txtFields(0) + ".JPG"
+    PicSave.SavePicture Picture1.Picture, cARQRTF, fmtJPEG, 70
+    FrmPicturePrinter.Show vbModal, Me
+    Kill cARQRTF
+  End If
+End Sub
