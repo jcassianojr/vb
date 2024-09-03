@@ -174,8 +174,9 @@ Private ptPaperSizes() As POINT
 Private lngResolutions() As Long
 Private Pr As Printer
 Private Pic As StdPicture
+Dim cEXTENSAO As String
 
-Private Sub cmdPrint_Click()
+Private Sub PRINTIMG()
     'Print the StdPicture Pic centered on the selected rrinter (Pr)
     'with the selected paper (lstPapers) at the selected quality
     '(lngResolutions) within set margins.
@@ -227,18 +228,63 @@ Private Sub cmdPrint_Click()
     End With
 End Sub
 
+Private Sub cmdPrint_Click()
+  Select Case cEXTENSAO
+         Case "TXT"
+              PrintTXT
+         Case "JPG"
+              PRINTIMG
+  End Select
+End Sub
+Private Sub PrintTXT()
+Dim fileFile As Integer
+  Dim STRBUFFER As String
+    Printer.FontSize = 12
+    Printer.PrintQuality = lngResolutions(2 * lstResolutions.ListIndex) 'We can only set one
+                                                                     'value DPI value, just
+                                                                     'use X here.
+
+    
+    If optOrientation(1).Value Then
+       Printer.Orientation = vbPRORLandscape 'PrinterObjectConstants.vbPRORPortrait
+    Else
+      Printer.Orientation = vbPRORPortrait
+    End If
+    Printer.PaperSize = intPaperIds(lstPapers.ListIndex) 'PrinterObjectConstants.vbPRPSA4
+    Printer.ColorMode = PrinterObjectConstants.vbPRCMMonochrome
+    
+     fileFile = FreeFile
+  Open cARQRTF For Input As #fileFile
+  Do While Not EOF(fileFile)
+    'read line
+    Input #fileFile, STRBUFFER
+    Printer.Print STRBUFFER
+  Loop
+  Close fileFile
+  Printer.EndDoc
+
+End Sub
 Private Sub Encerrar_Click()
   Unload Me
 End Sub
 
 Private Sub Form_Load()
+Dim nPOS As Integer
+
     For Each Pr In Printers
         lstPrinters.AddItem Pr.DeviceName
     Next
+  cEXTENSAO = "XXX"
+  nPOS = InStrRev(cARQRTF, ".")
+  If nPOS > 0 Then
+    cEXTENSAO = Mid(cARQRTF, nPOS + 1)
+  End If
     
-    'Just load up a sample image.  Could just as easily be
-    'from a WIA scan or something else.
+  'Just load up a sample image.  Could just as easily be
+  'from a WIA scan or something else.
+  If cEXTENSAO = "JPG" Then
     Set Pic = LoadPicture(cARQRTF)
+  End If
 End Sub
 
 Private Sub lstPapers_Click()

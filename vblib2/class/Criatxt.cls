@@ -265,12 +265,14 @@ End Property
 Public Property Get nCOL() As Integer
   nCOL = mvarnCOL
 End Property
-Private Property Get Printer() As Printer
-  Set Printer = vbExtra.Printer2
-End Property
-Private Property Set Printer(nPrinter As Printer)
-  Set vbExtra.Printer2 = nPrinter
-End Property
+'usando bsprint no lugar vbextra preview
+'definicoes em mprintpreview.bas
+'Private Property Get Printer() As Printer
+'  Set Printer = vbExtra.Printer2
+'End Property
+'Private Property Set Printer(nPrinter As Printer)
+'  Set vbExtra.Printer2 = nPrinter
+'End Property
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
   Dim STRBUFFER As String

@@ -105,7 +105,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -121,7 +121,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -224,7 +224,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.tEXT
+  zRPT = Grid.Text
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -391,18 +391,21 @@ Private Sub imprima_click()
          aRELCFG(1) = "FRMPREVIEW"
       End Select
     Case "TXT", "MAN"
-      ePASS01 = Array("Editor Interno", "Imprimir Direto Impressora", "Preview Interno")
+      ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Escolher Porta(Destino)", "Editor Interno")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
       Select Case eRETU01
          Case 0
-           aRELCFG(1) = "FRMRTF"
-         Case 1
-           aRELCFG(1) = "FRMTXL"
-         Case 2
            ePASS03 = 1
            PrintPreview1.ShowPreview
            Exit Sub
+         Case 1
+           FrmPicturePrinter.Show vbModal, Me
+           Exit Sub
+         Case 2
+           aRELCFG(1) = "FRMTXL"
+         Case 3
+           aRELCFG(1) = "FRMRTF"
         End Select
     Case cEXTENSAO = "ZPL"
        PRINTZPLONLINE
@@ -539,7 +542,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     escrptusr.Show vbModal
   End If
 End Sub
