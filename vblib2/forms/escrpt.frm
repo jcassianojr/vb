@@ -15,6 +15,14 @@ Begin VB.Form escRPT
    ScaleHeight     =   6675
    ScaleWidth      =   10785
    StartUpPosition =   2  'CenterScreen
+   Begin vbExtra.CommonDialogEx CommonDialogEx1 
+      Left            =   2400
+      Top             =   0
+      _ExtentX        =   900
+      _ExtentY        =   900
+      MaxFileSize     =   255
+      FontName        =   ""
+   End
    Begin VB.PictureBox Picture1 
       AutoRedraw      =   -1  'True
       Height          =   375
@@ -105,7 +113,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -121,7 +129,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -224,7 +232,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.Text
+  zRPT = Grid.tEXT
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -396,6 +404,12 @@ Private Sub imprima_click()
       eRETU01 = FixInt(eRETU01, 0)
       Select Case eRETU01
          Case 0
+           CommonDialogEx1.Flags = cdlCFPrinterFonts
+           CommonDialogEx1.ShowFont
+           Printer.FontName = CommonDialogEx1.FontName
+           Printer.FontSize = CommonDialogEx1.FontSize
+           Printer.FontBold = CommonDialogEx1.FontBold
+           Printer.FontItalic = CommonDialogEx1.FontItalic
            ePASS03 = 1
            PrintPreview1.ShowPreview
            Exit Sub
@@ -542,7 +556,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     escrptusr.Show vbModal
   End If
 End Sub

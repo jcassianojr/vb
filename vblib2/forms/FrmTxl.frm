@@ -600,7 +600,7 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If FileExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
@@ -654,11 +654,11 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-  If Extensao(TxtArquivo.Text, "TXT") Then
+  If Extensao(TxtArquivo.tEXT, "TXT") Then
     imptxt  'Aqui e direct print com1 lpt1 no pode ser usado preview aqui
     Exit Sub
   End If
-  If Extensao(TxtArquivo.Text, "PDF") Or Extensao(TxtArquivo.Text, "HTML") Or Extensao(TxtArquivo.Text, "RTF") Then
+  If Extensao(TxtArquivo.tEXT, "PDF") Or Extensao(TxtArquivo.tEXT, "HTML") Or Extensao(TxtArquivo.tEXT, "RTF") Then
     CmdVisua_Click
     Exit Sub
   End If
@@ -710,7 +710,7 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If Not FileExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -734,7 +734,7 @@ Private Sub CmdVisua_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.Text = ""
+    RichTextBox1.tEXT = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -1002,7 +1002,7 @@ Private Sub Salvar_Click(Index As Integer)
     End Select
 
     sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
+    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
 
     If InStr(cARQUIVO, ".") > 0 Then
       cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO
@@ -1119,5 +1119,17 @@ End Function
 
 
 Private Sub XPButton1_Click()
-   FrmPicturePrinter.Show vbModal, Me
+      ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Escolher Porta(Destino)", "Editor Interno")
+      escOrdem.Show vbModal, Me
+      eRETU01 = FixInt(eRETU01, 0)
+      Select Case eRETU01
+         Case 0
+           CmdVisua_Click
+         Case 1
+           FrmPicturePrinter.Show vbModal, Me
+         Case 2
+           FrmTxl.Show vbModal, Me
+         Case 3
+           FrmRTf.Show vbModal, Me
+        End Select
 End Sub

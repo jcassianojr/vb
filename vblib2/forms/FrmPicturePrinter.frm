@@ -1,5 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form FrmPicturePrinter 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Print a StdPicture centered within margins on a selected printer, paper, resolution, and orientation"
@@ -21,6 +22,14 @@ Begin VB.Form FrmPicturePrinter
    ScaleHeight     =   2820
    ScaleWidth      =   11250
    StartUpPosition =   2  'CenterScreen
+   Begin vbExtra.CommonDialogEx CommonDialogEx1 
+      Left            =   9600
+      Top             =   2280
+      _ExtentX        =   900
+      _ExtentY        =   900
+      MaxFileSize     =   255
+      FontName        =   ""
+   End
    Begin VB.OptionButton optOrientation 
       Caption         =   "Paisagem"
       Enabled         =   0   'False
@@ -238,8 +247,16 @@ Private Sub cmdPrint_Click()
 End Sub
 Private Sub PrintTXT()
 Dim fileFile As Integer
-  Dim STRBUFFER As String
-    Printer.FontSize = 12
+Dim STRBUFFER As String
+ CommonDialogEx1.Flags = cdlCFPrinterFonts
+  CommonDialogEx1.ShowFont
+    
+    Printer.FontName = CommonDialogEx1.FontName
+    Printer.FontSize = CommonDialogEx1.FontSize
+    Printer.FontBold = CommonDialogEx1.FontBold
+    Printer.FontItalic = CommonDialogEx1.FontItalic
+    
+    
     Printer.PrintQuality = lngResolutions(2 * lstResolutions.ListIndex) 'We can only set one
                                                                      'value DPI value, just
                                                                      'use X here.
