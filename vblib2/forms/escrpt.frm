@@ -406,10 +406,11 @@ Private Sub imprima_click()
          Case 0
            CommonDialogEx1.Flags = cdlCFPrinterFonts
            CommonDialogEx1.ShowFont
-           Printer.FontName = CommonDialogEx1.FontName
-           Printer.FontSize = CommonDialogEx1.FontSize
-           Printer.FontBold = CommonDialogEx1.FontBold
-           Printer.FontItalic = CommonDialogEx1.FontItalic
+           'Printer.FontName = CommonDialogEx1.FontName
+           'Printer.FontSize = CommonDialogEx1.FontSize
+           'Printer.FontBold = CommonDialogEx1.FontBold
+           'Printer.FontItalic = CommonDialogEx1.FontItalic
+           Printer.Font = CommonDialogEx1.Font 'todos os atributos
            ePASS03 = 1
            PrintPreview1.ShowPreview
            Exit Sub

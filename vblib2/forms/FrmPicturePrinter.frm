@@ -251,11 +251,12 @@ Dim STRBUFFER As String
  CommonDialogEx1.Flags = cdlCFPrinterFonts
   CommonDialogEx1.ShowFont
     
-    Printer.FontName = CommonDialogEx1.FontName
-    Printer.FontSize = CommonDialogEx1.FontSize
-    Printer.FontBold = CommonDialogEx1.FontBold
-    Printer.FontItalic = CommonDialogEx1.FontItalic
-    
+'    Printer.FontName = CommonDialogEx1.FontName
+'    Printer.FontSize = CommonDialogEx1.FontSize
+'    Printer.FontBold = CommonDialogEx1.FontBold
+'    Printer.FontItalic = CommonDialogEx1.FontItalic
+     Printer.Font = CommonDialogEx1.Font 'todos os atributos
+     
     
     Printer.PrintQuality = lngResolutions(2 * lstResolutions.ListIndex) 'We can only set one
                                                                      'value DPI value, just

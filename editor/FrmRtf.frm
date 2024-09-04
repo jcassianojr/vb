@@ -1,5 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form FrmRTf 
@@ -13,6 +14,14 @@ Begin VB.Form FrmRTf
    ScaleHeight     =   7245
    ScaleWidth      =   11715
    StartUpPosition =   2  'CenterScreen
+   Begin vbExtra.CommonDialogEx CommonDialogEx1 
+      Left            =   11160
+      Top             =   1560
+      _ExtentX        =   900
+      _ExtentY        =   900
+      MaxFileSize     =   255
+      FontName        =   ""
+   End
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   11160
       Top             =   2040
@@ -103,7 +112,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "FrmRtf.frx":1204
-            TextSave        =   "14:25"
+            TextSave        =   "11:20"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -111,7 +120,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "FrmRtf.frx":179E
-            TextSave        =   "17/07/2024"
+            TextSave        =   "04/09/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -990,12 +999,12 @@ Private Sub ABRIR()
   End If
   If InStr(cARQRTF, "RTF") > 0 Then
     cARQTIPO = "RTF"
-    RichTextBox1.LoadFile cARQRTF, rtfRTF
+    RichTextbox1.LoadFile cARQRTF, rtfRTF
   Else
     cARQTIPO = "TXT"
-    RichTextBox1.LoadFile cARQRTF, rtfText
+    RichTextbox1.LoadFile cARQRTF, rtfText
   End If
-  RichTextBox1.SetFocus
+  RichTextbox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1010,12 +1019,12 @@ End Sub
 Private Sub achartf(nPOS)
   Dim textfound As Long
   ''    RichTextbox1.Find (RichTextbox1.Text)
-  RichTextBox1.SetFocus
-  textfound = RichTextBox1.Find(texto, nPOS, , rtfWholeWord)
+  RichTextbox1.SetFocus
+  textfound = RichTextbox1.Find(texto, nPOS, , rtfWholeWord)
   If textfound = -1 Then
     Alert vbCr & "Texto Não Foi Encontrado"
   End If
-  RichTextBox1.SetFocus
+  RichTextbox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1037,7 +1046,7 @@ Private Sub cmbFontColor_Click()
 ''*   Me.Show
 '******************************************************************
 
-  With RichTextBox1
+  With RichTextbox1
     Select Case cmbfontcolor.ListIndex
     Case 0
       .SelColor = vbBlack
@@ -1083,7 +1092,7 @@ End Sub
 Private Sub cmbFontSize_Click()
 '  RichTextbox1.SelFontSize = FontCombo1
 '  RichTextbox1.SetFocus
-
+RichTextbox1.SelFontSize = cmbfontsize.FontSize
 End Sub
 
 Private Sub CmdExpHtml_Click()
@@ -1247,8 +1256,8 @@ End Sub
 '***************************************************************************
 
 Private Sub Command20_Click()
-  RichTextBox1.SetFocus
-  achartf (RichTextBox1.SelStart + 1)
+  RichTextbox1.SetFocus
+  achartf (RichTextbox1.SelStart + 1)
 End Sub
 
 '***************************************************************************
@@ -1261,8 +1270,8 @@ End Sub
 '***************************************************************************
 
 Private Sub Command21_Click()
-  RichTextBox1.SelStrikethru = Not RichTextBox1.SelStrikethru
-  If RichTextBox1.SelStrikethru Then
+  RichTextbox1.SelStrikethru = Not RichTextbox1.SelStrikethru
+  If RichTextbox1.SelStrikethru Then
     Command21.Appearance = 0
   Else
     Command21.Appearance = 1
@@ -1293,7 +1302,7 @@ Private Sub Command22_Click()
 
 
 
-  With RichTextBox1
+  With RichTextbox1
     .SelFontName = oDLG.Font
     .SelFontSize = oDLG.FontSize
     .SelBold = oDLG.FontBold
@@ -1310,11 +1319,11 @@ Private Sub Command23_Click()
 End Sub
 
 Private Sub Command24_Click()
-  RichTextBox1.SelIndent = IncDec(RichTextBox1.SelIndent, 1, 0, 99)
+  RichTextbox1.SelIndent = IncDec(RichTextbox1.SelIndent, 1, 0, 99)
 End Sub
 
 Private Sub Command25_Click()
-  RichTextBox1.SelIndent = IncDec(RichTextBox1.SelIndent, -1, 0, 99)
+  RichTextbox1.SelIndent = IncDec(RichTextbox1.SelIndent, -1, 0, 99)
 End Sub
 
 '***************************************************************************
@@ -1331,11 +1340,11 @@ Private Sub Command2_Click()
 End Sub
 
 Private Sub Command26_Click()
-  RichTextBox1.SelText = LCase(RichTextBox1.SelText)
+  RichTextbox1.SelText = LCase(RichTextbox1.SelText)
 End Sub
 
 Private Sub Command27_Click()
-  RichTextBox1.SelText = UCase(RichTextBox1.SelText)
+  RichTextbox1.SelText = UCase(RichTextbox1.SelText)
 End Sub
 
 Private Sub Command28_Click()
@@ -1415,13 +1424,13 @@ End Sub
 '***************************************************************************
 
 Private Sub Command7_Click()
-  RichTextBox1.SelBold = Not RichTextBox1.SelBold
-  If RichTextBox1.SelBold Then
+  RichTextbox1.SelBold = Not RichTextbox1.SelBold
+  If RichTextbox1.SelBold Then
     Command7.Appearance = 0
   Else
     Command7.Appearance = 1
   End If
-  RichTextBox1.SetFocus
+  RichTextbox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1434,8 +1443,8 @@ End Sub
 '***************************************************************************
 
 Private Sub Command8_Click()
-  RichTextBox1.SelItalic = Not RichTextBox1.SelItalic
-  If RichTextBox1.SelItalic Then
+  RichTextbox1.SelItalic = Not RichTextbox1.SelItalic
+  If RichTextbox1.SelItalic Then
     Command8.Appearance = 0
   Else
     Command8.Appearance = 1
@@ -1452,8 +1461,8 @@ End Sub
 '***************************************************************************
 
 Private Sub Command9_Click()
-  RichTextBox1.SelUnderline = Not RichTextBox1.SelUnderline
-  If RichTextBox1.SelUnderline = False Then
+  RichTextbox1.SelUnderline = Not RichTextbox1.SelUnderline
+  If RichTextbox1.SelUnderline = False Then
     Command9.Appearance = 0
   Else
     Command9.Appearance = 1
@@ -1461,7 +1470,9 @@ Private Sub Command9_Click()
 End Sub
 
 Private Sub FontCombo1_Click()
-  RichTextBox1.SelFontName = FontCombo1.tEXT
+  'RichTextbox1.SelFontName = FontCombo1.tEXT
+  RichTextbox1.Font = FontCombo1.Font
+  'RichTextbox1.fo
 End Sub
 
 
@@ -1529,7 +1540,7 @@ Private Sub Form_Load()
   '    .ListIndex = 0
   ' End With
 
-  With cmbFontSize
+  With cmbfontsize
 
     '******************************************************************
     '* Populate the combo with sizes in
@@ -1546,8 +1557,8 @@ Private Sub Form_Load()
     '******************************************************************
 
   End With
-  RichTextBox1.Width = Me.Width - 30           ''10695
-  RichTextBox1.Height = Me.Height - 2225       ''6855
+  RichTextbox1.Width = Me.Width - 30           ''10695
+  RichTextbox1.Height = Me.Height - 2225       ''6855
 
   '******************************************************************
   '* 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
@@ -1608,6 +1619,12 @@ Private Sub Form_Load()
   ' richTest1.SpellChecking("en-US") = True
 
 End Sub
+
+Private Sub mnuVerFontes_Click()
+  CommonDialogEx1.ShowFont
+  RichTextbox1.Font = CommonDialogEx1.Font
+End Sub
+
 Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
   PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
   UpdateReport = False  ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
@@ -1629,14 +1646,14 @@ Private Sub Form_Resize()
   H = 6855
 
   If FrmRTf.WindowState = vbMaximized Then
-    RichTextBox1.Width = (FrmRTf.Width - 300)
-    RichTextBox1.Height = (FrmRTf.Height - 800)
+    RichTextbox1.Width = (FrmRTf.Width - 300)
+    RichTextbox1.Height = (FrmRTf.Height - 800)
 
   End If
 
   If FrmRTf.WindowState = vbNormal Then
-    RichTextBox1.Width = w
-    RichTextBox1.Height = H
+    RichTextbox1.Width = w
+    RichTextbox1.Height = H
 
   End If
 
@@ -1669,18 +1686,18 @@ Private Sub mnubold_Click()
 End Sub
 
 Private Sub mnubullet_Click()
-  RichTextBox1.SelBullet = Not RichTextBox1.SelBullet
-  If RichTextBox1.SelBullet Then
+  RichTextbox1.SelBullet = Not RichTextbox1.SelBullet
+  If RichTextbox1.SelBullet Then
     Command23.Appearance = 0
   Else
     Command23.Appearance = 1
   End If
-  RichTextBox1.SetFocus
+  RichTextbox1.SetFocus
 
 End Sub
 
 Private Sub mnucapitalizar_Click()
-  RichTextBox1.SelText = MMCase(RichTextBox1.SelText)
+  RichTextbox1.SelText = MMCase(RichTextbox1.SelText)
 End Sub
 
 '***************************************************************************
@@ -1693,26 +1710,26 @@ End Sub
 '***************************************************************************
 
 Private Sub mnucenter_Click()
-  If RichTextBox1.SelLength > 0 Then
-    RichTextBox1.SelAlignment = 2
+  If RichTextbox1.SelLength > 0 Then
+    RichTextbox1.SelAlignment = 2
   End If
-  RichTextBox1.SetFocus
+  RichTextbox1.SetFocus
 End Sub
 
 Private Sub mnucnvansi_Click()
-  RichTextBox1.SelText = ConvAnsi(RichTextBox1.SelText)
+  RichTextbox1.SelText = ConvAnsi(RichTextbox1.SelText)
 End Sub
 
 Private Sub mnucnvoem_Click()
-  RichTextBox1.SelText = ConvOEM(RichTextBox1.SelText)
+  RichTextbox1.SelText = ConvOEM(RichTextbox1.SelText)
 End Sub
 
 Private Sub mnucnvansi2_Click()
-  RichTextBox1.SelText = ConvAnsi2(RichTextBox1.SelText)
+  RichTextbox1.SelText = ConvAnsi2(RichTextbox1.SelText)
 End Sub
 
 Private Sub mnucnvoem2_Click()
-  RichTextBox1.SelText = ConvOEM2(RichTextBox1.SelText)
+  RichTextbox1.SelText = ConvOEM2(RichTextbox1.SelText)
 End Sub
 
 '***************************************************************************
@@ -1725,8 +1742,8 @@ End Sub
 '***************************************************************************
 
 Private Sub mnucopy_Click()
-  Clipboard.SetText RichTextBox1.SelText
-  RichTextBox1.SetFocus
+  Clipboard.SetText RichTextbox1.SelText
+  RichTextbox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1744,8 +1761,8 @@ Private Sub mnucustomcolors_Click()
   If DLG.Cancel = True Then
     Exit Sub
   End If
-  RichTextBox1.SelColor = DLG.Color
-  RichTextBox1.SetFocus
+  RichTextbox1.SelColor = DLG.Color
+  RichTextbox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1758,9 +1775,9 @@ End Sub
 '***************************************************************************
 
 Private Sub mnucut_Click()
-  Clipboard.SetText RichTextBox1.SelText
-  RichTextBox1.SelText = ""
-  RichTextBox1.SetFocus
+  Clipboard.SetText RichTextbox1.SelText
+  RichTextbox1.SelText = ""
+  RichTextbox1.SetFocus
 End Sub
 
 Private Sub mnudecInd_Click()
@@ -1769,13 +1786,13 @@ End Sub
 
 Private Sub mnuDelSel_Click()
   If MDG("Apagar Seleçao") Then
-    RichTextBox1.SelText = ""
+    RichTextbox1.SelText = ""
   End If
 
 End Sub
 
 Private Sub mnuDown_Click()
-  RichTextBox1.SelText = LCase(RichTextBox1.SelText)
+  RichTextbox1.SelText = LCase(RichTextbox1.SelText)
 End Sub
 
 '***************************************************************************
@@ -1801,7 +1818,7 @@ Private Sub mnuEditarInserirCaracter_Click()
   'FrmAscII.Show vbModal, Me
   If lRETU Then
     '      FrmRTf.RichTextbox1.SelFontName = eRETU02
-    FrmRTf.RichTextBox1.SelText = eRETU01
+    FrmRTf.RichTextbox1.SelText = eRETU01
     '      cmbfontname = eRETU02
   End If
 End Sub
@@ -1820,8 +1837,8 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuFindNext_Click()
-  RichTextBox1.SetFocus
-  achartf (RichTextBox1.SelStart + 1)
+  RichTextbox1.SetFocus
+  achartf (RichTextbox1.SelStart + 1)
 End Sub
 
 Private Sub mnufindrep_Click()
@@ -1861,7 +1878,7 @@ End Sub
 Private Sub mnuinsdate_Click()
   frmInsertDate.Show vbModal
   If lRETU Then
-    FrmRTf.RichTextBox1.SelText = eRETU02
+    FrmRTf.RichTextbox1.SelText = eRETU02
   End If
 End Sub
 
@@ -1875,7 +1892,7 @@ Private Sub mnuinsimg_Click()
     'Image1.Picture = LoadPictureEx(sFILENAME)
     Image1.Picture = LoadPicture(sFILENAME)
     Clipboard.SetData Image1.Picture
-    SendMessage RichTextBox1.hWnd, WM_PASTE, 0, 0
+    SendMessage RichTextbox1.hWnd, WM_PASTE, 0, 0
   End If
 End Sub
 
@@ -1902,10 +1919,10 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuleft_Click()
-  If RichTextBox1.SelLength > 0 Then
-    RichTextBox1.SelAlignment = 0
+  If RichTextbox1.SelLength > 0 Then
+    RichTextbox1.SelAlignment = 0
   End If
-  RichTextBox1.SetFocus
+  RichTextbox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1918,8 +1935,8 @@ End Sub
 '***************************************************************************
 
 Private Sub mnunew_Click()
-  RichTextBox1.tEXT = ""
-  RichTextBox1.SetFocus
+  RichTextbox1.tEXT = ""
+  RichTextbox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1969,8 +1986,8 @@ End Sub
 
 
 Private Sub mnupaste_Click()
-  RichTextBox1.SelText = Clipboard.GetText
-  RichTextBox1.SetFocus
+  RichTextbox1.SelText = Clipboard.GetText
+  RichTextbox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1984,7 +2001,7 @@ End Sub
 
 Private Sub mnuprintcfg_Click()
   FrmPrintSetup.Show vbModal, Me
-  RichTextBox1.SetFocus
+  RichTextbox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -1998,16 +2015,16 @@ End Sub
 
 Private Sub mnuprint_Click()
   PrintPreview1.ShowPreview
-  RichTextBox1.SetFocus
+  RichTextbox1.SetFocus
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
-  PrintPreview1.PrintRichTextBox RichTextBox1
+  PrintPreview1.PrintRichTextBox RichTextbox1
 End Sub
 Private Sub mnuright_Click()
-  If RichTextBox1.SelLength > 0 Then
-    RichTextBox1.SelAlignment = 1
+  If RichTextbox1.SelLength > 0 Then
+    RichTextbox1.SelAlignment = 1
   End If
-  RichTextBox1.SetFocus
+  RichTextbox1.SetFocus
 End Sub
 
 Private Sub mnusaveasHTML_Click()
@@ -2023,7 +2040,7 @@ Private Sub mnusaveasHTML_Click()
       End If
     End If
     stmp = TrocaExt(sFILENAME, "TMP")
-    RichTextBox1.SaveFile stmp, rtfText
+    RichTextbox1.SaveFile stmp, rtfText
     ePASS01 = stmp
     txttohtml stmp, sFILENAME
     DeleteFile stmp  'Kill stmp
@@ -2037,7 +2054,7 @@ Private Sub mnusaveasPDF_Click()
   sFILENAME = FileSave(Me, sFILTER, 1, "PDF", stmp, stmp, "Salvar PDF Como")
   If Not Len(sFILENAME) = 0 Then
     stmp = TrocaExt(sFILENAME, "TMP")
-    RichTextBox1.SaveFile stmp, rtfText
+    RichTextbox1.SaveFile stmp, rtfText
     ePASS01 = stmp
     formConvertToPDF.Show vbModal, Me
     DeleteFile stmp  'Kill stmp
@@ -2060,8 +2077,8 @@ Private Sub mnusaveasrtf_Click()
   If Not Len(sFILENAME) = 0 Then
     cARQRTF = sFILENAME
     cARQTIPO = "RTF"
-    RichTextBox1.SaveFile sFILENAME, rtfRTF
-    RichTextBox1.SetFocus
+    RichTextbox1.SaveFile sFILENAME, rtfRTF
+    RichTextbox1.SetFocus
   End If
 End Sub
 
@@ -2081,8 +2098,8 @@ Private Sub mnusaveastxt_Click()
   If Not Len(sFILENAME) = 0 Then
     cARQRTF = sFILENAME
     cARQTIPO = "TXT"
-    RichTextBox1.SaveFile sFILENAME, rtfText
-    RichTextBox1.SetFocus
+    RichTextbox1.SaveFile sFILENAME, rtfText
+    RichTextbox1.SetFocus
   End If
 
 End Sub
@@ -2098,23 +2115,23 @@ End Sub
 
 Private Sub mnusave_Click()
   If cARQTIPO = "RTF" Then
-    RichTextBox1.SaveFile cARQRTF, rtfRTF
+    RichTextbox1.SaveFile cARQRTF, rtfRTF
   Else
-    RichTextBox1.SaveFile cARQRTF, rtfText
+    RichTextbox1.SaveFile cARQRTF, rtfText
   End If
-  RichTextBox1.SetFocus
+  RichTextbox1.SetFocus
 End Sub
 
 Private Sub mnuscrinf_Click()
-  RichTextBox1.SelCharOffset = -55
+  RichTextbox1.SelCharOffset = -55
 End Sub
 
 Private Sub mnuscrnor_Click()
-  RichTextBox1.SelCharOffset = 0
+  RichTextbox1.SelCharOffset = 0
 End Sub
 
 Private Sub mnuscrsup_Click()
-  RichTextBox1.SelCharOffset = 55
+  RichTextbox1.SelCharOffset = 55
 End Sub
 
 '***************************************************************************
@@ -2128,9 +2145,9 @@ End Sub
 
 
 Private Sub mnuselectall_Click()
-  RichTextBox1.SelStart = 0
-  RichTextBox1.SelLength = Len(RichTextBox1.tEXT)
-  RichTextBox1.SetFocus
+  RichTextbox1.SelStart = 0
+  RichTextbox1.SelLength = Len(RichTextbox1.tEXT)
+  RichTextbox1.SetFocus
 End Sub
 
 Private Sub mnuselectline_Click()
@@ -2139,7 +2156,7 @@ Private Sub mnuselectline_Click()
 End Sub
 
 Private Sub mnuselsen_Click()
-  With RichTextBox1
+  With RichTextbox1
     '   .Span ".?!:", True, True
     .SelLength = .SelLength + 1
   End With
@@ -2177,7 +2194,7 @@ Private Sub mnustrik_Click()
 End Sub
 
 Private Sub mnutirace_Click()
-  RichTextBox1.SelText = Tirace(RichTextBox1.SelText)
+  RichTextbox1.SelText = Tirace(RichTextbox1.SelText)
 End Sub
 
 '***************************************************************************
@@ -2204,12 +2221,12 @@ End Sub
 
 Private Sub mnuundo_Click()
   Dim Success
-  Success = SendMessage(RichTextBox1.hWnd, WM_UNDO, 0&, 0&)
-  RichTextBox1.SetFocus
+  Success = SendMessage(RichTextbox1.hWnd, WM_UNDO, 0&, 0&)
+  RichTextbox1.SetFocus
 End Sub
 
 Private Sub mnuUpper_Click()
-  RichTextBox1.SelText = UCase(RichTextBox1.SelText)
+  RichTextbox1.SelText = UCase(RichTextbox1.SelText)
 End Sub
 
 

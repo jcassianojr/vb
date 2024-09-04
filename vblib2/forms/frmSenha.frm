@@ -297,10 +297,19 @@ Private Sub cmdOK_Click()
   If UCase(txtUSUARIO) = "ADMLOG" Or UCase(txtUSUARIO) = "ADMINISTRADOR" Or UCase(txtUSUARIO) = "SUPERVISOR" Then
     txtUSUARIO = "ADMIN"
   End If
-
+  
+  If Len(txtUSUARIO) > 10 Then
+     txtUSUARIO = Mid(txtUSUARIO, 1, 10)
+    End If
+  
+  If InStr(txtUSUARIO, "=") > 0 Or InStr(txtUSUARIO, "<") > 0 Or InStr(txtUSUARIO, ">") > 0 _
+          Or InStr(txtUSUARIO, "'") > 0 Or InStr(txtUSUARIO, Chr(39)) > 0 Then
+     txtUSUARIO = ""
+     Exit Sub
+  End If
 
   ''Armazena Codigo empresa
-1 zEMPRESA = FixInt(TxtEmpresa.Value)
+1 zEMPRESA = FixInt(txtempresa.Value)
 2 If zEMPRESA < 0 Then zEMPRESA = 1
 
 
@@ -312,7 +321,7 @@ Private Sub cmdOK_Click()
 8 cSENHA4 = XOREncryption(SysCodeKey, LCase(txtSENHA))  ''Senhas Antigas minusculas
 
 9 If Len(zUSER) = 0 Then
-10  TimedMsgBox "Nome Usuario Não Preenchido"  'Alert ("Nome Usuario Não Preenchido")
+10  TimedMsgBox "Nome Usuario Nao Preenchido"  'Alert ("Nome Usuario Não Preenchido")
 11  txtUSUARIO.SetFocus
 12  If nTENTA >= 3 Then
 13    End
@@ -486,7 +495,7 @@ End Sub
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   zMES = mes.Value
   zANO = ano.Value
-  zEMPRESA = TxtEmpresa.Value
+  zEMPRESA = txtempresa.Value
 End Sub
 
 'Private Sub maisemp_Click()
@@ -503,7 +512,7 @@ Private Sub Form_Load()
   EnableCloseButton Me.hWnd, False
   txtUSUARIO = NetworkUserName()
   nTENTA = 0
-  TxtEmpresa.Value = 1
+  txtempresa.Value = 1
   mes.Value = Month(Date)
   ano.Value = Year(Date)
   nTEMPO = 0
