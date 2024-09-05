@@ -205,7 +205,9 @@ Private Sub Form_Load()
   SetDateList MonthView1.Value
 
 End Sub
-
+Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
+  TeclaEnter KeyCode
+End Sub
 Private Sub lstDates_DblClick()
 ''SetDateList DateClicked
   TxtData = Format(MonthView1.Value, "dddd, dd/mmmm/yyyy")

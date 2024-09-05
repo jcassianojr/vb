@@ -27,7 +27,7 @@ Begin VB.Form frmUSUSENHA
       Picture         =   "frmUsusen.frx":038A
       ScaleHeight     =   375
       ScaleWidth      =   615
-      TabIndex        =   6
+      TabIndex        =   8
       Top             =   480
       Width           =   615
    End
@@ -64,7 +64,7 @@ Begin VB.Form frmUSUSENHA
    Begin XPControls.XPButton cmdCANCELAR 
       Height          =   435
       Left            =   3120
-      TabIndex        =   9
+      TabIndex        =   4
       Top             =   960
       Width           =   1515
       _ExtentX        =   2672
@@ -84,7 +84,7 @@ Begin VB.Form frmUSUSENHA
    Begin XPControls.XPButton cmdOK 
       Height          =   435
       Left            =   3120
-      TabIndex        =   10
+      TabIndex        =   3
       Top             =   360
       Width           =   1515
       _ExtentX        =   2672
@@ -104,7 +104,7 @@ Begin VB.Form frmUSUSENHA
    Begin VB.Label Label4 
       Height          =   255
       Left            =   1200
-      TabIndex        =   8
+      TabIndex        =   10
       Top             =   120
       Width           =   1695
    End
@@ -114,7 +114,7 @@ Begin VB.Form frmUSUSENHA
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   240
-      TabIndex        =   7
+      TabIndex        =   9
       Top             =   120
       Width           =   855
    End
@@ -124,7 +124,7 @@ Begin VB.Form frmUSUSENHA
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   120
-      TabIndex        =   5
+      TabIndex        =   7
       Top             =   1200
       Width           =   1695
    End
@@ -134,7 +134,7 @@ Begin VB.Form frmUSUSENHA
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   480
-      TabIndex        =   4
+      TabIndex        =   6
       Top             =   840
       Width           =   1335
    End
@@ -145,7 +145,7 @@ Begin VB.Form frmUSUSENHA
       Height          =   255
       Index           =   1
       Left            =   960
-      TabIndex        =   3
+      TabIndex        =   5
       Top             =   480
       Width           =   855
    End
@@ -169,44 +169,44 @@ Private Sub cmdOK_Click()
   eRETU03 = ""
 
   lRETU = True
-  TXTFIELDS(0) = Trim(TXTFIELDS(0))
-  TXTFIELDS(1) = Trim(TXTFIELDS(1))
-  TXTFIELDS(2) = Trim(TXTFIELDS(2))
+  txtFields(0) = Trim(txtFields(0))
+  txtFields(1) = Trim(txtFields(1))
+  txtFields(2) = Trim(txtFields(2))
 
 
-  If TXTFIELDS(0) = TXTFIELDS(1) Then
+  If txtFields(0) = txtFields(1) Then
     Alert "Senha Precisa ser Diferente da Anterior"
-    TXTFIELDS(1).tEXT = ""
-    TXTFIELDS(2).tEXT = ""
-    TXTFIELDS(1).SetFocus
+    txtFields(1).Text = ""
+    txtFields(2).Text = ""
+    txtFields(1).SetFocus
     lRETU = False
     Exit Sub
   End If
 
-  If Len(TXTFIELDS(1)) <> 8 Then
+  If Len(txtFields(1)) <> 8 Then
     Alert "8 digitos para a Senha"
-    TXTFIELDS(1).tEXT = ""
-    TXTFIELDS(2).tEXT = ""
-    TXTFIELDS(1).SetFocus
+    txtFields(1).Text = ""
+    txtFields(2).Text = ""
+    txtFields(1).SetFocus
     lRETU = False
     Exit Sub
   End If
 
-  If Len(TXTFIELDS(1)) <> Len(TXTFIELDS(2)) Then
+  If Len(txtFields(1)) <> Len(txtFields(2)) Then
     Alert "Senha diferente da de confirmacao"
-    TXTFIELDS(1).tEXT = ""
-    TXTFIELDS(2).tEXT = ""
-    TXTFIELDS(1).SetFocus
+    txtFields(1).Text = ""
+    txtFields(2).Text = ""
+    txtFields(1).SetFocus
     lRETU = False
     Exit Sub
   End If
 
   'faze inicial acostumar os usuarios
-  If Not CheckPass(TXTFIELDS(1)) Then
+  If Not CheckPass(txtFields(1)) Then
     If Not MDG("Senha Fraca , gravar mesmo assim") Then
-      TXTFIELDS(1).tEXT = ""
-      TXTFIELDS(2).tEXT = ""
-      TXTFIELDS(1).SetFocus
+      txtFields(1).Text = ""
+      txtFields(2).Text = ""
+      txtFields(1).SetFocus
       lRETU = False
       Exit Sub
     End If
@@ -223,19 +223,19 @@ Private Sub cmdOK_Click()
 
   With RSSENHA
     If Not .EOF Then
-      strEncryptedText = XOREncryption(strCodeKey, TXTFIELDS(0))
+      strEncryptedText = XOREncryption(strCodeKey, txtFields(0))
       If strEncryptedText = "" & !Senha Then
-        If TXTFIELDS(1) = TXTFIELDS(2) Then
-          strEncryptedText = XOREncryption(strCodeKey, TXTFIELDS(1))
+        If txtFields(1) = txtFields(2) Then
+          strEncryptedText = XOREncryption(strCodeKey, txtFields(1))
           RSSENHA("SENHA") = strEncryptedText
           RSSENHA("TROCAR") = Date + 90
 
 
-          RSSENHA("CHAVEV") = UCase(CreateSHA256HashString(UCase(Trim(RSSENHA("usuario"))) + Trim(TXTFIELDS(1))))
+          RSSENHA("CHAVEV") = UCase(CreateSHA256HashString(UCase(Trim(RSSENHA("usuario"))) + Trim(txtFields(1))))
 
           .Update
           eRETU01 = strEncryptedText
-          eRETU02 = TXTFIELDS(1)
+          eRETU02 = txtFields(1)
         Else
           Alert "Confirmação não confere! A Senha não foi alterada.", "Alteração de senha"
         End If
@@ -255,4 +255,6 @@ Private Sub Form_Load()
   CenterFormToScreen Me
   Label4 = zIDTEMP
 End Sub
+
+
 

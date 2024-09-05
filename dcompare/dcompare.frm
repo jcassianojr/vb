@@ -13,18 +13,18 @@ Begin VB.Form dCompare
    ScaleWidth      =   8955
    StartUpPosition =   3  'Windows Default
    Begin VBCCR18.CommandButtonW CmdTeste 
-      Height          =   255
-      Left            =   6600
+      Height          =   375
+      Left            =   6240
       TabIndex        =   14
       Top             =   1200
-      Width           =   615
-      _ExtentX        =   1085
-      _ExtentY        =   450
-      Caption         =   "teste"
+      Width           =   975
+      _ExtentX        =   1720
+      _ExtentY        =   661
+      Caption         =   "TableInfo"
    End
    Begin XPControls.XPButton CmdExportarSqlite 
       Height          =   375
-      Left            =   5160
+      Left            =   4920
       TabIndex        =   12
       Top             =   1200
       Width           =   1215
@@ -226,7 +226,7 @@ Begin VB.Form dCompare
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   1  'Fixed Single
       Height          =   375
-      Left            =   5160
+      Left            =   4920
       TabIndex        =   13
       Top             =   1680
       Width           =   3360

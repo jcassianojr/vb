@@ -201,7 +201,9 @@ Private Sub Form_Load()
     PegMensagem
   End If
 End Sub
-
+Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
+  TeclaEnter KeyCode
+End Sub
 Function RandomNumber(intHighestNumber)
   Randomize
   RandomNumber = Int(intHighestNumber * Rnd) + 1

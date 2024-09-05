@@ -195,7 +195,7 @@ Private Sub cboPrinters_Click()
   Dim OUSO
   If Loaded Then
     Me.MousePointer = vbHourglass
-    OUSO = DLG.GetPrinterFromDevice(cboPrinters.tEXT)
+    OUSO = DLG.GetPrinterFromDevice(cboPrinters.Text)
     '' If DLG.SetDefaultPrinter(Byref OUSO) Then
     ''     txtDefault.tEXT = cboPrinters.tEXT
     '' End If
@@ -208,13 +208,15 @@ Private Sub Form_Load()
   HelpContextID = nFORMID
 
   DLG.hWnd = Me.hWnd
-  txtDefault.tEXT = DLG.GetDefaultPrinter
-  OldDefaultPrinter = txtDefault.tEXT
+  txtDefault.Text = DLG.GetDefaultPrinter
+  OldDefaultPrinter = txtDefault.Text
   DLG.LoadPrinters cboPrinters, False
   Loaded = True
 End Sub
 
-
+Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
+  TeclaEnter KeyCode
+End Sub
 
 Private Sub XPButton1_Click()
   DLG.DialogPrintSetup

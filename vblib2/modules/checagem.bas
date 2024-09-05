@@ -587,7 +587,7 @@ Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As
   CheckRena = True
 End Function
 
-Function TeclaEnter(KeyIN As Integer)
+Function TeclaEnter(KeyIN As Integer) 'Enter vira tab e troca de campo
   TeclaEnter = KeyIN
   If KeyIN = 13 Or KeyIN = 40 Then
     SendKeys Chr(9)
@@ -608,27 +608,29 @@ Function ValiText(KeyIN As Integer, Optional ByVal eTipo As String = "#N", _
   Dim ValidateList As String
   Dim KeyOut As Integer
   If lENTER Then
-    If TeclaEnter(KeyIN) = 0 Then
-      ValiText = 0
+    If TeclaEnter(KeyIN) = 0 Then 'Enter vira tab e troca de campo
+      ValiText = 0                'teclaentet usa sendkeys zera valitext=0 para nao virar loop
       Exit Function
     End If
   End If
   Select Case eTipo
   Case "#HR"
     ValidateList = "0123456789.:"
-  Case "#NI"                                   ''Numeros Inteiros
+  Case "#NI", "I"                                   ''Numeros Inteiros"
     ValidateList = "0123456789"
   Case "#NI-"                                  ''Numeros Inteiros e Negativos
     ValidateList = "0123456789-"
-  Case "#NP"                                   ''Numeros Inteiros e o Ponto
+  Case "#NP", "F"                                  ''Numeros Inteiros e o Ponto
     ValidateList = "0123456789."
-  Case "#N-.X"                                 ''Numeros Traco  Ponto X (RG)"
+  Case "#N-.X", "RG"                                ''Numeros Traco  Ponto X (RG)"
     ValidateList = "0123456789.-X"
-  Case "#N-./"                                 ''Numero - e Ponto (CGC/CNPJ,CPF,CIC)
+  Case "#N-./", "CPF"                                ''Numero - e Ponto (CGC/CNPJ,CPF,CIC)
     ValidateList = "0123456789.-/"
-  Case "#N-"                                   ''Numero e -   (Telefone CEP)
+   Case "#N-()+", "FONE"                      'Numero -()+  FONE
+    ValidateList = "0123456789-()+"
+  Case "#N-", "CEP"                            ''Numero -   CEP
     ValidateList = "0123456789-"
-  Case "#D", "N/"                              ''Numero e / - (Data)
+  Case "#D", "N/"                              ''Numero / - Data
     ValidateList = "0123456789/"
   Case "#N", "#N.,"                            ''Numeros . ,
     ValidateList = "0123456789.,"
@@ -636,10 +638,12 @@ Function ValiText(KeyIN As Integer, Optional ByVal eTipo As String = "#N", _
     ValidateList = "0123456789.,-"
   Case "#SN"                                   ''Sim Nao
     ValidateList = "SN"
-  Case "#C", "#CU", "#CL"                      ''SoLetras SoMaisculas SoMinusculas
+  Case "#C", "#CU", "#CL", "C"                     ''SoLetras SoMaisculas SoMinusculas
     ValidateList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  Case "#CN", "#CNU", "#CNL"                   ''letras numeros
+  Case "#CN", "#CNU", "#CNL", "CN"                  ''letras numeros
     ValidateList = "01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  Case "CNPJ", "CGC"                  ''letras numeros
+    ValidateList = "01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ.-/"
   Case "#CNP", "#CNPU", "#CNPL"                ''letras numeros
     ValidateList = ",.01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   Case Else                                    ''Se nao For um tipo e uma lista
@@ -800,7 +804,7 @@ Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
   Case "CNPJ", "CGC"                           '' 11.222.333/4444-55 18 digitos
     nTAM = 18
   End Select
-  nLEN = Len(Trim(FixStr(Screen.ActiveControl.tEXT)))
+  nLEN = Len(Trim(FixStr(Screen.ActiveControl.Text)))
   If KeyAscii <> 8 And nLEN >= nTAM And _
      KeyAscii <> 13 And Screen.ActiveControl.SelStart > 0 _
      And Screen.ActiveControl.SelLength = 0 Then
@@ -824,16 +828,16 @@ Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
         End If
       End If
       If nLEN = 2 Or (nLEN = 5 And eTipo = "HORAL") Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "."
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "."
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
       End If
 
     Case "PLACA"                             ''traco na posicao 4
       If nLEN = 3 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
         nLEN = nLEN + 1
       End If
       If nLEN < 3 Then
@@ -857,48 +861,48 @@ Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
         End If
       End If
       If nLEN = 2 Or nLEN = 5 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "/"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "/"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
       End If
     Case "CEP"                               ''traco na posicao 6
       If nLEN = 5 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
       End If
     Case "TEL"                               ''traco na posicao 5
       If nLEN = 4 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
       End If
     Case "CPF", "CIC"                        ''ponto 4 e 8
       If nLEN = 3 Or nLEN = 7 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "."
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "."
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
       End If
       If nLEN = 11 Then                    ''TRaco na 12
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
       End If
     Case "CNPJ", "CGC"                       ''ponto 3 e 7
       If nLEN = 2 Or nLEN = 6 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "."
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "."
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
       End If
       If nLEN = 10 Then                    ''barra na 11
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "/"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "/"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
       End If
       If nLEN = 15 Then                    ''TRaco na 16
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
       End If
     End Select
   End If

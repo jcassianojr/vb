@@ -23,7 +23,7 @@ Begin VB.Form frmSENHA
    Begin XPControls.XPButton cmdOK 
       Height          =   495
       Left            =   3480
-      TabIndex        =   11
+      TabIndex        =   5
       Top             =   120
       Width           =   1215
       _ExtentX        =   2143
@@ -48,7 +48,7 @@ Begin VB.Form frmSENHA
       Picture         =   "frmSenha.frx":0724
       ScaleHeight     =   2175
       ScaleWidth      =   405
-      TabIndex        =   4
+      TabIndex        =   8
       TabStop         =   0   'False
       Top             =   0
       Width           =   405
@@ -97,7 +97,7 @@ Begin VB.Form frmSENHA
    Begin VBCCR18.SpinBox txtempresa 
       Height          =   495
       Left            =   840
-      TabIndex        =   8
+      TabIndex        =   2
       Top             =   1080
       Width           =   735
       _ExtentX        =   1296
@@ -119,7 +119,7 @@ Begin VB.Form frmSENHA
    Begin VBCCR18.SpinBox mes 
       Height          =   495
       Left            =   2160
-      TabIndex        =   9
+      TabIndex        =   3
       Top             =   1080
       Width           =   735
       _ExtentX        =   1296
@@ -140,7 +140,7 @@ Begin VB.Form frmSENHA
    Begin VBCCR18.SpinBox ano 
       Height          =   495
       Left            =   3360
-      TabIndex        =   10
+      TabIndex        =   4
       Top             =   1080
       Width           =   975
       _ExtentX        =   1720
@@ -174,7 +174,7 @@ Begin VB.Form frmSENHA
       ForeColor       =   &H00C00000&
       Height          =   300
       Left            =   660
-      TabIndex        =   7
+      TabIndex        =   11
       Top             =   60
       Width           =   810
    End
@@ -193,7 +193,7 @@ Begin VB.Form frmSENHA
       ForeColor       =   &H00C00000&
       Height          =   300
       Left            =   720
-      TabIndex        =   6
+      TabIndex        =   10
       Top             =   360
       Width           =   810
    End
@@ -212,7 +212,7 @@ Begin VB.Form frmSENHA
       ForeColor       =   &H00C00000&
       Height          =   300
       Left            =   720
-      TabIndex        =   5
+      TabIndex        =   9
       Top             =   780
       Width           =   810
    End
@@ -231,7 +231,7 @@ Begin VB.Form frmSENHA
       ForeColor       =   &H00C00000&
       Height          =   300
       Left            =   1980
-      TabIndex        =   3
+      TabIndex        =   7
       Top             =   780
       Width           =   810
    End
@@ -250,7 +250,7 @@ Begin VB.Form frmSENHA
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   3240
-      TabIndex        =   2
+      TabIndex        =   6
       Top             =   780
       Width           =   810
    End
@@ -534,7 +534,7 @@ Private Sub Timer1_Timer()
   If nTENTA >= 3 Then
     End
   End If
-  Barra.Value = nTEMPO
+  barra.Value = nTEMPO
 End Sub
 
 Private Sub TXTempresa_GotFocus()
@@ -583,40 +583,18 @@ Private Sub txtUSUARIO_GotFocus()
   FocusMe
 End Sub
 
-Private Sub txtUSUARIO_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    SendKeys "+" + Chr(9)
-  End If
+Private Sub txtUSUARIO_KeyPress(KeyAscii As Integer)
+  KeyAscii = ValiText(KeyAscii, "CN")
 End Sub
-
-'Private Sub maisano_Click()
-'    ano = CStr(IncDec(ano, 1, 1900, 2300))
-'End Sub
-
-'Private Sub maismes_Click()
-'    mes = CStr(IncDec(mes, 1, 1, 12))
-'End Sub
-
-'Private Sub menosano_Click()
-'    ano = CStr(IncDec(ano, -1, 1900, 2300))
-'End Sub
-
-'Private Sub menosmes_Click()
-'    mes = CStr(IncDec(mes, -1, 1, 12))
-'End Sub
-
 Private Sub fixuser()
-  If UCase(txtUSUARIO.tEXT) = "ADMLOG" Then
-    txtUSUARIO.tEXT = "admin"
+  If UCase(txtUSUARIO.Text) = "ADMLOG" Then
+    txtUSUARIO.Text = "admin"
   End If
-  If UCase(txtUSUARIO.tEXT) = "ADMINISTRA" Then
-    txtUSUARIO.tEXT = "admin"
+  If UCase(txtUSUARIO.Text) = "ADMINISTRA" Then
+    txtUSUARIO.Text = "admin"
   End If
-  If UCase(txtUSUARIO.tEXT) = "SUPERVISOR" Then
-    txtUSUARIO.tEXT = "admin"
+  If UCase(txtUSUARIO.Text) = "SUPERVISOR" Then
+    txtUSUARIO.Text = "admin"
   End If
 
 End Sub

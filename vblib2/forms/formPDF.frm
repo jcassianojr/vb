@@ -503,6 +503,9 @@ Private Sub CmdVisua_Click()
  'imprimir frmpreview con edge
 End Sub
 
+Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
+  TeclaEnter KeyCode
+End Sub
 Private Sub Form_Load()
 
   CenterFormToScreen Me
