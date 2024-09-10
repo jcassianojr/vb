@@ -1,4 +1,5 @@
 VERSION 5.00
+Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form frmCharacters 
    BackColor       =   &H00FFFFFF&
    BorderStyle     =   5  'Sizable ToolWindow
@@ -32,6 +33,15 @@ Begin VB.Form frmCharacters
       TabIndex        =   0
       Top             =   120
       Width           =   7545
+   End
+   Begin vbExtra.FontPicker FontPicker1 
+      Height          =   495
+      Left            =   2040
+      TabIndex        =   3
+      Top             =   4560
+      Width           =   2775
+      _ExtentX        =   4895
+      _ExtentY        =   873
    End
    Begin VB.Label Lblchr 
       Alignment       =   2  'Center
@@ -98,6 +108,11 @@ Option Explicit
 ''Public strOtherField As String
 Public lCLOSE As Boolean
 
+Private Sub FontPicker1_Change()
+   lstList.FontName = FontPicker1.Font.Name
+    Lblchr.FontName = FontPicker1.Font.Name
+End Sub
+
 Private Sub Form_Load()
   CenterFormToScreen Me
   On Error GoTo 5
@@ -107,6 +122,7 @@ Private Sub Form_Load()
   If Len(ePASS01) > 0 Then
     lstList.FontName = ePASS01
     Lblchr.FontName = ePASS01
+    FontPicker1.Font.Name = ePASS01
   End If
   Lblchr.FontSize = 36                         '20
   lCLOSE = ePASS02

@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":058A
-            TextSave        =   "10:32"
+            TextSave        =   "18:32"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -69,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principal.frx":0B24
-            TextSave        =   "25/08/2024"
+            TextSave        =   "10/09/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -290,7 +290,7 @@ Private Sub MDIForm_Load()
   End If
 
 
-  StatusBar1.Panels(6).tEXT = zUSER
+  StatusBar1.Panels(6).Text = zUSER
 
   If zWRPTID = 0 Then
     MsgBox "Usuario Nao Cadastrado", vbOKOnly, "Bloqueio de Acesso"

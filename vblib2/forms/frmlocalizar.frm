@@ -135,6 +135,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1072
 Const cFORMID = "Dialogo de Busca"
+Option Explicit
 
 Private Sub cBUSCA_GotFocus()
   FocusMe

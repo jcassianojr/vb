@@ -228,6 +228,7 @@ Attribute cSQL.VB_VarUserMemId = 1073938436
 Dim nITEM, nCAMPOS As Long
 Attribute nITEM.VB_VarUserMemId = 1073938438
 Attribute nCAMPOS.VB_VarUserMemId = 1073938438
+Option Explicit
 
 Private Sub cmdClose_Click()
   Unload Me
@@ -247,11 +248,11 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 End Sub
 
 Private Sub cmdescexe_Click()
-  Dim sRECENTFILE, sPath, sFILTER, sFILENAME As String
+  Dim sRECENTFILE, sPath, SFILTER, sFILENAME As String
   sRECENTFILE = Text(2)
   sPath = Text(2)
-  sFILTER = "Executáveis" & vbNullChar & "*.exe" & vbNullChar & "Todos os Arquivos" & vbNullChar & "*.*"
-  sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
+  SFILTER = "Executáveis" & vbNullChar & "*.exe" & vbNullChar & "Todos os Arquivos" & vbNullChar & "*.*"
+  sFILENAME = FileOpen(Me, SFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
   If Not Len(sFILENAME) = 0 Then
     Text(2) = NomeArq(sFILENAME)
   End If
@@ -259,20 +260,20 @@ End Sub
 
 Private Sub CmdEscExt_Click()
   eLOCALIZA = Text(3)
-  aTABELA = Array(1061, "Tipos Arquivos (Extensões)", "TIPOSARQ", 8, 1062, "SYSCONF")
-  EscCodNome.Show vbModal, Me
-  If lRETU Then
-    Text(3) = eRETU02
-  End If
+  aTABELA = Array(1061, "Tipos Arquivos (Extensoes)", "TIPOSARQ", 8, 1062, "SYSCONF")
+'  EscCodNome.Show vbModal, Me
+'  If lRETU Then
+'    Text(3) = eRETU02
+'  End If
 End Sub
 
 Private Sub CmdEscform_Click()
   eLOCALIZA = Text(2)
   ePASS01 = 0
-  EscForm.Show vbModal, Me
-  If lRETU Then
-    Text(2) = FixStr(eRETU04)
-  End If
+  'EscForm.Show vbModal, Me
+  'If lRETU Then
+  '  Text(2) = FixStr(eRETU04)
+  'End If
 
 End Sub
 

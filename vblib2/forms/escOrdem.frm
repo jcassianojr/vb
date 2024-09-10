@@ -47,6 +47,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1075
 Const cFORMID = "Escolher Ordem"
+Option Explicit
 
 Private Sub CmdCancelar_Click()
   lRETU = False
@@ -55,7 +56,7 @@ End Sub
 
 Private Sub Form_Load()
   Dim nLEN As Integer
-
+  Dim X As Integer
 
 
   CenterFormToScreen Me
@@ -69,9 +70,9 @@ Private Sub Form_Load()
   nLEN = UBound(ePASS01)
   ''nLEN = nLEN ''aRRAY comeca 0
   List.Clear
-  For x = 0 To nLEN
-    List.AddItem ePASS01(x)
-  Next x
+  For X = 0 To nLEN
+    List.AddItem ePASS01(X)
+  Next X
   HelpContextID = nFORMID
   Me.Caption = cFORMID
 

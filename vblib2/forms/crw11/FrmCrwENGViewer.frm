@@ -53,6 +53,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Option Explicit
 Private Sub Form_Load()
   Dim MyApp As New CRAXDRT.Application
   Dim MyRpt As New CRAXDRT.Report

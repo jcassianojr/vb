@@ -16,6 +16,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Option Explicit
 Private Sub Form_Load()
   CenterFormToScreen Me
   ''formulario vazio em outro modulos frmpegdb padrao

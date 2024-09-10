@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "crystl32.ocx"
+Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
@@ -535,9 +535,10 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1068
 Const cFORMID = "Imprimir Relatorios Crystal-OCX"
+Option Explicit
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.Text
   If FileExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
@@ -599,7 +600,7 @@ Private Sub CmdFiltro_Click()
     FrmFiltro.Show vbModal, Me
     FILTRO = eRETU01
   End If
-  cFILTRO = CStr(FILTRO.tEXT)
+  cFILTRO = CStr(FILTRO.Text)
 
   If Len(cFILTRO) > 0 Then
     RPT.ReplaceSelectionFormula (cFILTRO)
@@ -624,24 +625,27 @@ Private Sub cmdimp_Click()
 End Sub
 
 Private Sub CmdMudaFec_Click()
+Dim nARQUIVOS As Integer
+Dim X As Integer
+
   Mana5Fec
-  TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
+  TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
   With RPT
     nARQUIVOS = UBound(aARQUIVOS)
-    For x = 0 To nARQUIVOS
-      If Len(aARQUIVOS(x)) > 0 Then
-        If Not FileExist(aARQUIVOS(x)) Then
-          Alert "Arquivo nao Encontrado: " + aARQUIVOS(x)
+    For X = 0 To nARQUIVOS
+      If Len(aARQUIVOS(X)) > 0 Then
+        If Not FileExist(aARQUIVOS(X)) Then
+          Alert "Arquivo nao Encontrado: " + aARQUIVOS(X)
           Exit Sub
         End If
-        .DataFiles(x) = aARQUIVOS(x)
+        .DataFiles(X) = aARQUIVOS(X)
       End If
-    Next x
+    Next X
   End With
 End Sub
 
 Private Sub CmdPreview_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.Text
   If Not FileExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -662,11 +666,11 @@ Private Sub CmdPreview_Click()
     End If
   End If
   If Extensao(cARQRTF, "RTF") Then
-    cARQRTF = TxtArquivo.tEXT
-    RichTextBox1.LoadFile cARQRTF, rtfRTF
+    cARQRTF = TxtArquivo.Text
+    RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.tEXT = ""
+    RichTextBox1.Text = ""
   End If
 End Sub
 Public Sub MyPrintinghtml()
@@ -745,7 +749,8 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-  Dim x, nARQUIVOS As Integer
+  Dim X, nARQUIVOS As Integer
+  Dim cFILTRO As String
   ''Configura Help
   CenterFormToScreen Me
   Me.Caption = cFORMID
@@ -764,7 +769,7 @@ Private Sub Form_Load()
     TxtComp.Visible = True
     CmdMudaFec.Visible = True
     CmdMudaFec.Enabled = True
-    TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
+    TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
   End If
 
   If Len(aRELCFG(6)) = 0 Then
@@ -820,15 +825,15 @@ Private Sub Form_Load()
 
     nARQUIVOS = UBound(aARQUIVOS)
 
-    For x = 0 To nARQUIVOS
-      If Len(aARQUIVOS(x)) > 0 Then
-        If Not FileExist(aARQUIVOS(x)) Then
-          Alert "Arquivo nao Encontrado: " + aARQUIVOS(x)
+    For X = 0 To nARQUIVOS
+      If Len(aARQUIVOS(X)) > 0 Then
+        If Not FileExist(aARQUIVOS(X)) Then
+          Alert "Arquivo nao Encontrado: " + aARQUIVOS(X)
           Exit Sub
         End If
-        .DataFiles(x) = aARQUIVOS(x)
+        .DataFiles(X) = aARQUIVOS(X)
       End If
-    Next x
+    Next X
 
   End With
 
@@ -857,6 +862,7 @@ End Sub
 
 Private Sub Salvar_Click(Index As Integer)
   Dim cARQUIVO, cEXTENSAO As String
+  Dim SFILTER As String
 
   If CmdEmail.Value = 1 Then
     RPT.Destination = crptMapi
@@ -896,8 +902,8 @@ Private Sub Salvar_Click(Index As Integer)
     cEXTENSAO = "XLS"
   End Select
 
-  sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-  cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
+  SFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
+  cARQUIVO = FileSave(Me, SFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
 
 
   If InStr(cARQUIVO, ".") > 0 Then

@@ -102,6 +102,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1072
 Const cFORMID = "Dialogo de Busca"
+Option Explicit
 
 Private Sub cBUSCA_GotFocus()
   FocusMe
@@ -123,6 +124,7 @@ End Sub
 
 Private Sub Form_Load()
   Dim nLEN As Integer
+  Dim X As Integer
   CenterFormToScreen Me
   Me.Caption = cFORMID
   HelpContextID = nFORMID
@@ -134,9 +136,9 @@ Private Sub Form_Load()
   nLEN = UBound(ePASS01)
   ''nLEN = nLEN ''aRRAY comeca 0
   List.Clear
-  For x = 0 To nLEN
-    List.AddItem ePASS01(x)
-  Next x
+  For X = 0 To nLEN
+    List.AddItem ePASS01(X)
+  Next X
   List.ListIndex = 0
 End Sub
 

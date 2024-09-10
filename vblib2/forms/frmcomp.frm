@@ -203,6 +203,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1020
 Const cFORMID = "Competencia"
+Option Explicit
 Private Sub ano_GotFocus()
   FocusMe
 End Sub

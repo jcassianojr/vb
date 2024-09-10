@@ -543,7 +543,7 @@ Private Sub CmdGera_Click()
   Dim strtipo As String
   Dim strsize As String
   Dim strdec As String
-  Dim x As Integer
+  Dim X As Integer
   Dim RstCampos
 
   If Len(FixStr(arquivo)) = 0 Then
@@ -561,31 +561,31 @@ Private Sub CmdGera_Click()
   DB.Open cCAM
 
 
-  cSQL = tabela.tEXT
-  Grid.Clear
+  cSQL = tabela.Text
+  grid.Clear
 
 
 
-  With Grid
+  With grid
     .Clear
     .cols = 4
     .FixedCols = 0
     .Rows = 1
     .Row = 0
     .Col = 0
-    .tEXT = "Campo"
+    .Text = "Campo"
     .ColWidth(0) = 2000
 
     .Col = 1
-    .tEXT = "Tipo"
+    .Text = "Tipo"
     .ColWidth(1) = 400
 
     .Col = 2
-    .tEXT = "Tipo"
+    .Text = "Tipo"
     .ColWidth(2) = 1400
 
     .Col = 3
-    .tEXT = "Tamanho"
+    .Text = "Tamanho"
     .ColWidth(3) = 800
 
 
@@ -594,7 +594,7 @@ Private Sub CmdGera_Click()
 
 
   'Adicionar campos das tabelas
-  Set RstCampos = DB.OpenSchema(adSchemaColumns, Array(Empty, Empty, tabela.tEXT, Empty))
+  Set RstCampos = DB.OpenSchema(adSchemaColumns, Array(Empty, Empty, tabela.Text, Empty))
   Do While Not RstCampos.EOF
     STRCAMPO = RstCampos!Column_Name
     strtipo = FixStr((TipoDados(RstCampos!DATA_TYPE)))
@@ -607,7 +607,7 @@ Private Sub CmdGera_Click()
         strsize = FixStr(RstCampos!NUMERIC_PRECISION) & "." & strdec
       End If
     End If
-    Grid.AddItem STRCAMPO & vbTab & TipoDado2(RstCampos!DATA_TYPE) & vbTab & strtipo & vbTab & strsize
+    grid.AddItem STRCAMPO & vbTab & TipoDado2(RstCampos!DATA_TYPE) & vbTab & strtipo & vbTab & strsize
     RstCampos.MoveNext
   Loop
   DB.Close
@@ -626,10 +626,10 @@ monta02:
   ''     RstCampos.Close
   Set rs = New ADODB.Recordset
   rs.Open cSQL, DB, adOpenForwardOnly, adLockReadOnly
-  For x = 0 To rs.Fields.Count - 1
-    STRCAMPO = rs.Fields(x).Name
-    Grid.AddItem STRCAMPO & vbTab & TipoDado2(rs.Fields(x).Type) & vbTab & TipoDados(rs.Fields(x).Type) & vbTab & rs.Fields(x).DefinedSize
-  Next x
+  For X = 0 To rs.Fields.Count - 1
+    STRCAMPO = rs.Fields(X).Name
+    grid.AddItem STRCAMPO & vbTab & TipoDado2(rs.Fields(X).Type) & vbTab & TipoDados(rs.Fields(X).Type) & vbTab & rs.Fields(X).DefinedSize
+  Next X
   rs.Close
   DB.Close
   Screen.MousePointer = vbDefault
@@ -645,7 +645,7 @@ Private Sub CmdSair_Click()
 End Sub
 
 Private Sub CmdZerar_Click()
-  FILTRO.tEXT = ""
+  FILTRO.Text = ""
 End Sub
 
 Private Sub Encerrar_Click()
@@ -741,10 +741,10 @@ Private Sub grid_Click()
   Vazio.Value = vbUnchecked
 
 
-  Grid.Col = 0
-  campo = Grid
-  Grid.Col = 1
-  camtip = Grid
+  grid.Col = 0
+  campo = grid
+  grid.Col = 1
+  camtip = grid
   Select Case camtip
   Case "N"
     ValINI = "0.00000"
@@ -762,21 +762,21 @@ Private Sub grid_Click()
 End Sub
 
 Private Sub ok_Click()
-  Dim x As Long
+  Dim X As Long
   Dim nVEZ As Long
   Dim aUSO As Variant
   If InStr(ValINI, ";") > 0 Then
     aUSO = Split(ValINI, ";")
     ValFim = ""
     nVEZ = UBound(aUSO)
-    For x = 0 To nVEZ
-      ValINI = aUSO(x)
-      If x = nVEZ Then
+    For X = 0 To nVEZ
+      ValINI = aUSO(X)
+      If X = nVEZ Then
         ok_ClickX (True)
       Else
         ok_ClickX (False)
       End If
-    Next x
+    Next X
   Else
     ok_ClickX (True)
   End If
@@ -816,7 +816,7 @@ Private Sub ok_ClickX(lZERA As Boolean)
   cDIZ = "{" & Trim(UCase(CStr(Alias))) & "." & Trim(UCase(campo)) & "}"
 
   cTIPDIZ = " AND "
-  If cTIPO.tEXT = "OU" Then cTIPDIZ = " OR "
+  If cTIPO.Text = "OU" Then cTIPDIZ = " OR "
 
   Select Case camtip
   Case "N"
@@ -905,11 +905,11 @@ Private Sub oper_Click(Index As Integer)
       Exit Sub
     End If
   End If
-  coper.tEXT = oper(Index).Caption
+  coper.Text = oper(Index).Caption
 End Sub
 
 Private Sub TIPOFIL_Click(Index As Integer)
-  cTIPO.tEXT = TIPOFIL(Index).Caption
+  cTIPO.Text = TIPOFIL(Index).Caption
 End Sub
 
 Private Sub ValFim_GotFocus()

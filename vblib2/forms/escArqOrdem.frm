@@ -90,6 +90,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Option Explicit
 Const nFORMID = 1075
 Const cFORMID = "Escolher Ordem"
 
@@ -115,6 +116,8 @@ Private Sub Form_Load()
   Dim cSQL As String
   Dim oRS As New ADODB.Recordset
   Dim oCONN As New ADODB.Connection
+  Dim X As Integer
+  
 
   '  CentralizaJanela Me
   CenterFormToScreen Me
@@ -128,9 +131,9 @@ Private Sub Form_Load()
   oCONN.Open cARQ
   oRS.Open cSQL, oCONN, adOpenForwardOnly, adLockReadOnly
   List.Clear
-  For x = 0 To oRS.Fields.Count - 1
-    List.AddItem oRS.Fields(x).Name
-  Next x
+  For X = 0 To oRS.Fields.Count - 1
+    List.AddItem oRS.Fields(X).Name
+  Next X
   HelpContextID = nFORMID
   Me.Caption = cFORMID
 End Sub

@@ -689,6 +689,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1180
 Const cFORMID = "Imprimir Relatorios sql"
+Option Explicit
 Private Sub CmdAbrirCom_Click()
   cARQRTF = TxtArquivo.Text
   If FileExist(cARQRTF, True) Then
@@ -743,10 +744,11 @@ Private Sub cmdexportar_Click(Index As Integer)
   Dim DBEXP As ADODB.Connection
   Dim RA, nPOS As Long
   Dim gsRecordSource
-  Dim sFILTER As String
+  Dim SFILTER As String
   Dim nDESTINO
-  Dim cLIM As String
-  cLIN = Chr(13) + Chr(10)
+  Dim cLIn As String
+  Dim cconn As String
+  cLIn = Chr(13) + Chr(10)
 
 
   cARQUIVO = tabela.Text
@@ -773,8 +775,8 @@ Private Sub cmdexportar_Click(Index As Integer)
   End Select
 
 
-  sFILTER = "Formato (*." & cEXT & ")" & vbNullChar & "*." & cEXT
-  cARQUIVO = FileSave(Me, sFILTER, 1, cEXT, , App.Path, "Salvar " & cEXT & " Como")
+  SFILTER = "Formato (*." & cEXT & ")" & vbNullChar & "*." & cEXT
+  cARQUIVO = FileSave(Me, SFILTER, 1, cEXT, , App.Path, "Salvar " & cEXT & " Como")
   TxtArquivo.Text = cARQUIVO
 
   If Len(cARQUIVO) = 0 Then
@@ -784,14 +786,14 @@ Private Sub cmdexportar_Click(Index As Integer)
 
 
 
-  cCONN = GeracArq(arquivo.Text, , False)
+  cconn = GeracArq(arquivo.Text, , False)
 
 
   Set DBEXP = New ADODB.Connection
   Set RsExp = New ADODB.Recordset
 
   DBEXP.ConnectionTimeout = 120
-  DBEXP.Open cCONN
+  DBEXP.Open cconn
   RsExp.Open cSQL, DBEXP, adOpenStatic, adLockReadOnly
   Select Case Index
   Case 0
@@ -808,13 +810,13 @@ Private Sub cmdexportar_Click(Index As Integer)
     nDESTINO = FreeFile + 1
     Open cARQTMP For Output As #nDESTINO
     If Index = 6 Then
-      Print #nDESTINO, "<html>" & cLIN
-      Print #nDESTINO, "<body>" & cLIN
-      Print #nDESTINO, "<table border=" & Chr(34) & "1" & Chr(34) & ">" & cLIN
-      Print #nDESTINO, "<!-- cabecalho com os nomes dos campos da tabela -->" & cLIN
-      Print #nDESTINO, "<tr>" & cLIN
+      Print #nDESTINO, "<html>" & cLIn
+      Print #nDESTINO, "<body>" & cLIn
+      Print #nDESTINO, "<table border=" & Chr(34) & "1" & Chr(34) & ">" & cLIn
+      Print #nDESTINO, "<!-- cabecalho com os nomes dos campos da tabela -->" & cLIn
+      Print #nDESTINO, "<tr>" & cLIn
       ''CAMPOS
-      Print #nDESTINO, "</tr>" & cLIN
+      Print #nDESTINO, "</tr>" & cLIn
       While Not RsExp.EOF
 
         RsExp.MoveNext
@@ -833,9 +835,9 @@ Private Sub cmdexportar_Click(Index As Integer)
     End If
 
     If Index = 6 Then
-      Print #nDESTINO, "</table>" + cLIN
-      Print #nDESTINO, "</body>" + cLIN
-      Print #nDESTINO, "</html>" + cLIN
+      Print #nDESTINO, "</table>" + cLIn
+      Print #nDESTINO, "</body>" + cLIn
+      Print #nDESTINO, "</html>" + cLIn
     End If
 
     Close nDESTINO
@@ -873,13 +875,13 @@ Private Sub CmdFiltro_Click()
   On Error GoTo errhandler
   Dim cFILTRO As String
 
-  cFILTRO = FixStr(filtro)
+  cFILTRO = FixStr(FILTRO)
   If aRELCFG(11) Then
     ePASS01 = ""
     FrmFiltro.Show vbModal, Me
-    filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
+    FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
     If lRETU And Len(aRELCFG(15)) > 0 Then
-      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
       sql.Text = aRELCFG(15)
     End If
   End If
@@ -990,7 +992,7 @@ Private Sub CmdVisua_Click()
     End Select
   End If
   If Extensao(cARQRTF, "RTF") Then
-    RichTextBox1.LoadFile cARQRTF, rtfRTF
+    RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS02 = 3
     PrintPreview1.ShowPreview
     RichTextBox1.Text = ""
@@ -1049,7 +1051,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-
+  Dim cFILTRO As String
 
   Dim nARQUIVOS As Integer
   TxtArquivo = zUSER & Format(Now, "_DDMMYYYY_HHMMSS") & ".TXT"
@@ -1057,7 +1059,7 @@ Private Sub Form_Load()
   ''Configura Help
   Me.Caption = cFORMID
   HelpContextID = nFORMID
-  filtro = ""
+  FILTRO = ""
 
   Label1 = aRELCFG(6)
 
@@ -1069,7 +1071,7 @@ Private Sub Form_Load()
   If Not aDIREITOS(5) Then CmdVisua.Visible = False
   If Not aDIREITOS(7) Then CmdEmail.Visible = False
   If Not aRELCFG(11) Then CmdFiltro.Visible = False
-  If Not aRELCFG(11) Then filtro.Visible = False
+  If Not aRELCFG(11) Then FILTRO.Visible = False
   If Not aDIREITOS(4) Then CmdEditar.Visible = False
   If Not aDIREITOS(4) Then CmdShell.Visible = False
 
@@ -1085,15 +1087,15 @@ Private Sub Form_Load()
   aRELCFG(14) = FixStr(aRELCFG(14))
   If Len(aRELCFG(14)) > 0 Then
     cFILTRO = aRELCFG(14)
-    filtro = cFILTRO
+    FILTRO = cFILTRO
   Else
     If aRELCFG(11) Then
       CmdFiltro_Click
     End If
   End If
   If Len(aRELCFG(15)) > 0 Then
-    If Len(filtro) > 0 Then
-      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+    If Len(FILTRO) > 0 Then
+      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
     End If
     sql.Text = aRELCFG(15)
   End If

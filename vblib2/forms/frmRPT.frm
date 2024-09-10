@@ -1056,6 +1056,7 @@ Attribute cSQL.VB_VarUserMemId = 1073938436
 Dim nITEM, nCAMPOS As Long
 Attribute nITEM.VB_VarUserMemId = 1073938438
 Attribute nCAMPOS.VB_VarUserMemId = 1073938438
+Option Explicit
 
 Private Sub CmdAbrirCom_Click(Index As Integer)
 'Dim cEXTENSAO As String
@@ -1091,9 +1092,9 @@ Private Sub CmdEDIT_Click(Index As Integer)
       Select Case cEXTENSAO
       Case "RPT"
         If Index = 0 Then
-          ShellEx CRYUPD, essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
+          ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
         Else
-          ShellEx CRWUPD, essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
+          ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
         End If
 
       End Select
