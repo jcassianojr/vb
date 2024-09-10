@@ -486,7 +486,7 @@ Private Sub Escolher_Click(Index As Integer)
 
   Case 1                                       'Clientes
     cARQESC = "MA01"
-    escNUMNOM.Show vbModal, Me
+   escNUMNOM.Show vbModal, Me
 
     If lRETU Then
 

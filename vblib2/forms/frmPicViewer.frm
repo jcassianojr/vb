@@ -607,6 +607,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1110
 Const cFORMID = "frmpicviewer"
+Option Explicit
 '------------------------------------------------------------------------------
 'Title:Picture Viewer
 'Coder:Hidayat Suriapermana
@@ -751,7 +752,7 @@ End Sub
 
 Private Sub CmdFEchar_Click()
   lRETU = False
-  eRETU = ""
+  eRETU01 = ""
   If FileExists(txtAddress.tEXT) Then
     lRETU = True
     eRETU01 = txtAddress.tEXT
@@ -767,7 +768,7 @@ End Sub
 
 Private Sub Form_Load()
   lRETU = False
-  eRETU = ""
+  'eRETU = ""
   Me.Caption = cFORMID
   HelpContextID = nFORMID
 
@@ -841,8 +842,9 @@ Private Sub Form_Resize()
 End Sub
 
 Private Sub cmdBrowseFolder_Click()
-  picbrowse = BrowseFolders(Me.hWnd, "Choose a location picture", BrowseForFolders, H12)
-  If picbrowse <> "" Then
+Dim PICBROWSE
+  PICBROWSE = BrowseFolders(Me.hWnd, "Choose a location picture", BrowseForFolders, CSIDL_RECENT)
+  If PICBROWSE <> "" Then
     lstViewer.FileName = PathTujuan
     If lstViewer.ListCount <> 0 Then
       lstViewer.ListIndex = 0
@@ -942,6 +944,7 @@ Private Sub imgViewer_MouseUp(Button As Integer, Shift As Integer, x As Single, 
 End Sub
 
 Private Sub lstViewer_Click()
+Dim FILESIZE As Integer
   On Error GoTo bawah
   LokasiFile
   VarFileGambar = True
@@ -963,11 +966,11 @@ Private Sub lstViewer_Click()
   txtAddress.tEXT = FileTerpilih
   lblTotalFile.Caption = "Total : " & lstViewer.ListCount & " file(s)"
   lblCoordinate.Caption = ""
-  fileSize = Int(FileLen(FileTerpilih) / 1024 + 1)
+  FILESIZE = Int(FileLen(FileTerpilih) / 1024 + 1)
   If FileLen(FileTerpilih) >= 1000000 Then
-    lblSize.Caption = "Size : " & Round(fileSize / 1000, 3) & " MB"
+    lblSize.Caption = "Size : " & Round(FILESIZE / 1000, 3) & " MB"
   Else
-    lblSize.Caption = "Size : " & fileSize & " KB"
+    lblSize.Caption = "Size : " & FILESIZE & " KB"
   End If
   If imgViewer.Width > picViewer.Width Or imgViewer.Height > picViewer.Height Then
     MouseIcon = imgViewerUp.MouseIcon
