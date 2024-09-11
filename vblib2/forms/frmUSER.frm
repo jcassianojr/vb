@@ -1131,6 +1131,7 @@ Attribute cSQL.VB_VarUserMemId = 1073938436
 Dim nITEM, nCAMPOS As Long
 Attribute nITEM.VB_VarUserMemId = 1073938438
 Attribute nCAMPOS.VB_VarUserMemId = 1073938438
+Option Explicit
 
 Private Sub cboEQUIVALENTE_Change()
 'ComboChange  cboEQUIVALENTE
@@ -1196,17 +1197,18 @@ Private Sub chkweekend_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub CmdApaAll_Click()
+Dim sSQL As String
 ''RTFUSR
-  sSQL = "select * from RTFUSR WHERE IDUSUARIO=" & tEXT(0)
+  sSQL = "select * from RTFUSR WHERE IDUSUARIO=" & TEXT(0)
   ApagaSQL DBWRPT, sSQL
   'RPTUSR
-  sSQL = "select * from RPTUSR WHERE IDUSUARIO=" & tEXT(0)
+  sSQL = "select * from RPTUSR WHERE IDUSUARIO=" & TEXT(0)
   ApagaSQL DBWRPT, sSQL
   'RPTFOLUSR
-  sSQL = "select * from RPTFOLUSR WHERE IDUSUARIO=" & tEXT(0)
+  sSQL = "select * from RPTFOLUSR WHERE IDUSUARIO=" & TEXT(0)
   ApagaSQL DBWRPT, sSQL
   'RPTINTUSR
-  sSQL = "select * from RPTINTUSR WHERE IDUSUARIO=" & tEXT(0)
+  sSQL = "select * from RPTINTUSR WHERE IDUSUARIO=" & TEXT(0)
   ApagaSQL DBWRPT, sSQL
   Alert "exclusao concluida"
 End Sub
@@ -1223,6 +1225,7 @@ Private Sub CMDIMPBTN_Click()
   Dim cARQORI As String
   Dim cSQLORI, cSQLDES As String
   Dim aVAL, aCAM As Variant
+  Dim nBARPOS As Integer
 
   ''On Error Resume Next
 
@@ -1243,7 +1246,7 @@ Private Sub CMDIMPBTN_Click()
   oRSORI.Open cSQLORI, oDBORI, adOpenForwardOnly, adLockReadOnly
 
   If Not oRSORI.EOF Then
-    Barra.Value = 0
+    barra.Value = 0
     nBARPOS = 0
     While Not oRSORI.EOF
       cMENU = oRSORI("FORM")
@@ -1285,6 +1288,8 @@ Private Sub Cmdimpmenu_Click()
   Dim oRSDES As New ADODB.Recordset
   Dim cSQLORI, cSQLDES As String
   Dim aVAL, aCAM As Variant
+  Dim nBARPOS As Integer
+  Dim nROWREC As Integer
 
   On Error Resume Next
 
@@ -1307,7 +1312,7 @@ Private Sub Cmdimpmenu_Click()
   oRSORI.Open cSQLORI, oDBORI, adOpenForwardOnly, adLockReadOnly
 
   If Not oRSORI.EOF Then
-    Barra.Value = 0
+    barra.Value = 0
     nBARPOS = 0
     oRSORI.MoveLast
     nROWREC = oRSORI.RecordCount
@@ -1348,7 +1353,8 @@ Private Sub Cmdimpwrpt_Click(Index As Integer)
   Dim oDBORI As ADODB.Connection
   Dim oRSORI As ADODB.Recordset
   Dim oRSDES As ADODB.Recordset
-
+  Dim nBARPOS As Integer
+  Dim nROWREC As Integer
   Dim cSQLORI, cSQLDES, cGRP, cRPT, cTabela As String
 
   On Error Resume Next
@@ -1378,7 +1384,7 @@ Private Sub Cmdimpwrpt_Click(Index As Integer)
 
 
   If Not oRSORI.EOF Then
-    Barra.Value = 0
+    barra.Value = 0
     nBARPOS = 0
     oRSORI.MoveLast
     nROWREC = oRSORI.RecordCount
@@ -1425,12 +1431,15 @@ Private Sub CmdLibGrp_Click(Index As Integer)
   Dim oDBDESI As ADODB.Connection
   Dim oRSORI As ADODB.Recordset
   Dim oRSDES As ADODB.Recordset
+  Dim oDBDES As ADODB.Connection
   Dim cORIGEM As String
   Dim cSQLORI As String
   Dim cSQLDES As String
   Dim cGRP As String
   Dim cRPT As String
   Dim cTabela As String
+  Dim nBARPOS As Integer
+  Dim nROWREC As Integer
 
   '   On Error Resume Next
 
@@ -1459,7 +1468,7 @@ Private Sub CmdLibGrp_Click(Index As Integer)
   Else
     cORIGEM = "Todos"
   End If
-  nDESTINO = FixInt(Busca("Digite O Numero de destino", "Numero de Destino", tEXT(0), 8))
+  nDESTINO = FixInt(Busca("Digite O Numero de destino", "Numero de Destino", TEXT(0), 8))
   If nDESTINO = 0 Or (Index < 2 And Len(cORIGEM) = 0) Then
     Alert ("Necessario Preencher Origem e Destino")
     Exit Sub
@@ -1502,7 +1511,7 @@ Private Sub CmdLibGrp_Click(Index As Integer)
   oRSORI.Open cSQLORI, oDBORI, adOpenForwardOnly, adLockReadOnly
 
   If Not oRSORI.EOF Then
-    Barra.Value = 0
+    barra.Value = 0
     nBARPOS = 0
     oRSORI.MoveLast
     nROWREC = oRSORI.RecordCount
@@ -1611,19 +1620,19 @@ Private Sub DTPicker4_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-  If FixInt(tEXT(5)) = 0 Then
+  If FixInt(TEXT(5)) = 0 Then
     If MDG("Colocar o numero do seu Funcionario na folha") Then
       Cancel = 1
       Exit Sub
     End If
   End If
 
-  If Len(Trim(tEXT(2))) = 0 Then
+  If Len(Trim(TEXT(2))) = 0 Then
     If MDG("Senha nao Colocada deseja Colocar ? ", "Gravar Senha") Then
-      zIDTEMP = tEXT(0)
+      zIDTEMP = TEXT(0)
       frmUSUSENHA.Show vbModal, Me
       If lRETU Then
-        tEXT(2) = eRETU01
+        TEXT(2) = eRETU01
         DTPicker2.Value = Date + 60
       End If
     End If
@@ -1632,7 +1641,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   ' CHAVEH POSTELAA POSTELAB nao sao gravados por isso nao sao atribuidos abaixo
   If MDG("Gravar e Sair", "Gravando Usuarios") Then
     For nITEM = 0 To 6                       'Array comeca 0
-      aVAL(nITEM) = tEXT(nITEM)
+      aVAL(nITEM) = TEXT(nITEM)
     Next nITEM
     aVAL(9) = FixNumBol(chkAtivo)
     aVAL(10) = FixNumBol(chkweekend)
@@ -1640,7 +1649,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     aVAL(12) = DTPicker2
     aVAL(7) = DTPicker3.Hour & ":" & DTPicker3.Minute
     aVAL(8) = DTPicker4.Hour & ":" & DTPicker4.Minute
-    aVAL(13) = tEXT(13)  ' CHAVEV
+    aVAL(13) = TEXT(13)  ' CHAVEV
     'volta para 14 para nao gravar postelaa postelab chaveh estao apenas para exibir no label
     nCAMPOS = 14
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 'comeca gravar do 1 0=idusuario chave da tabela
@@ -1657,7 +1666,7 @@ Private Sub Command1_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim nNUMERO As Long
-  nNUMERO = FixInt(tEXT(5), 0)
+  nNUMERO = FixInt(TEXT(5), 0)
   If demitido(nNUMERO) Then
     If lRETU Then
       If MDG("bloquear acesso e Zerar Senha") Then
@@ -1665,10 +1674,10 @@ Private Sub Command1_Click()
         chkweekend.Value = 0
         DTPicker1.Value = eRETU01
         DTPicker2.Value = eRETU01
-        tEXT(2) = ""                     ''zERA SeNHA
+        TEXT(2) = ""                     ''zERA SeNHA
       End If
       If MDG("zerar matricula") Then
-        tEXT(5) = 0
+        TEXT(5) = 0
       End If
     End If
     Exit Sub
@@ -1687,25 +1696,25 @@ Private Sub Command1_Click()
     aRETU = PegSQL(cARQ, sSQL, 2, Array("NOMTEC", "DEMITIDO"), Array("C", "DN"), Array("", Today()))
   End If
   If lRETU Then
-    tEXT(6) = aRETU(0)
+    TEXT(6) = aRETU(0)
   End If
 
 End Sub
 
 Private Sub cmdTroca_Click()
-  zIDTEMP = tEXT(0)
+  zIDTEMP = TEXT(0)
   frmUSUSENHA.Show vbModal, Me
   If lRETU Then
-    tEXT(2) = eRETU01
+    TEXT(2) = eRETU01
     DTPicker2.Value = Date + 60
-    tEXT(13) = UCase(CreateSHA256HashString(UCase(Trim(tEXT(1))) + UCase(Trim(eRETU02))))
+    TEXT(13) = UCase(CreateSHA256HashString(UCase(Trim(TEXT(1))) + UCase(Trim(eRETU02))))
   End If
 
 End Sub
 
 Private Sub cmdZeraSenha_Click()
-  tEXT(2) = " "
-  tEXT(13) = " "
+  TEXT(2) = " "
+  TEXT(13) = " "
   cmdClose_Click
 End Sub
 
@@ -1720,8 +1729,8 @@ Private Sub escidfolha_Click(Index As Integer)
 
   If lRETU Then
 
-    frmUSER.tEXT(5) = eRETU01
-    frmUSER.tEXT(6) = eRETU02
+    frmUSER.TEXT(5) = eRETU01
+    frmUSER.TEXT(6) = eRETU02
     Command1_Click
 
   End If
@@ -1783,7 +1792,7 @@ Private Sub Form_Load()
   aPAD = Array(0, "", "", "", "", 0, "", Now, Now, False, False, Today() + 30, Today() + 60, "", "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 6                           '' array comeca 0
-    tEXT(nITEM) = aVAL(nITEM)
+    TEXT(nITEM) = aVAL(nITEM)
   Next nITEM
   If aVAL(7) <> "" Then DTPicker3 = Date + aVAL(7)  ''Adciona date pois o datapicker nao aceita vazio
   If aVAL(8) <> "" Then DTPicker4 = Date + aVAL(8)  ''na mascara datapicker fica so  a hora
@@ -1796,7 +1805,7 @@ Private Sub Form_Load()
   If IsDate(aVAL(12)) Then
     DTPicker2 = aVAL(12)
   End If
-  tEXT(13) = aVAL(13)
+  TEXT(13) = aVAL(13)
   Lblpostelaa.Caption = aVAL(14)
   LblpostelaB.Caption = aVAL(15)
   Lblchaveh.Caption = aVAL(16)
@@ -1838,6 +1847,8 @@ End Sub
 
 Private Sub BARPOS()
   Dim nPOSATU As Long
+  Dim nBARPOS As Integer
+  Dim nROWREC As Integer
   nPOSATU = 0
   nBARPOS = nBARPOS + 1
   If nROWREC > 0 Then
@@ -1845,7 +1856,7 @@ Private Sub BARPOS()
   End If
   If nPOSATU > 0 And nPOSATU < 101 Then
     Debug.Print nPOSATU
-    Barra.Value = nPOSATU
+    barra.Value = nPOSATU
   End If
   DIZAPU.Refresh
 End Sub

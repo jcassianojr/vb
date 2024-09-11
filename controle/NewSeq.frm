@@ -172,8 +172,6 @@ Option Explicit
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
   TeclaEnter KeyCode
-
-
 End Sub
 
 Private Sub Form_Load()
@@ -190,8 +188,8 @@ Private Sub Form_Load()
     item.Locked = True
   End If
   If iMU01 = 4 Then
-    NewSeq.SEQ.Value = nSEQ
-    NewSeq.SSQ.Value = nSSQ
+    NewSeq.seq.Value = nSEQ
+    NewSeq.Ssq.Value = nSSQ
     NewSeq.item.Value = nORD
   End If
 
@@ -200,8 +198,8 @@ End Sub
 Private Sub Gravar_Click()
   Dim sSQL As String
   If iMU01 = 1 Then
-    nSEQ = FixInt(NewSeq.SEQ)
-    nSSQ = FixInt(NewSeq.SSQ)
+    nSEQ = FixInt(NewSeq.seq)
+    nSSQ = FixInt(NewSeq.Ssq)
     sSQL = "select pf,seq,ssq from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
     IncluiSQL Sdb, sSQL, 3, Array("PF", "SEQ", "SSQ"), _
               Array(nPF, nSEQ, nSSQ), True, True
@@ -230,8 +228,8 @@ Private Sub Gravar_Click()
   End If
 
   If iMU01 = 3 Then
-    nSEQ = FixInt(NewSeq.SEQ.Value)
-    nSSQ = FixInt(NewSeq.SSQ.Value)
+    nSEQ = FixInt(NewSeq.seq.Value)
+    nSSQ = FixInt(NewSeq.Ssq.Value)
     nPF = FixInt(NewSeq.PF.tEXT)
     nORD = FixInt(NewSeq.item.Value)
     If nPF = 0 Then
@@ -245,8 +243,8 @@ Private Sub Gravar_Click()
   End If
 
   If iMU01 = 4 Then
-    nSEQ = FixInt(NewSeq.SEQ.Value)
-    nSSQ = FixInt(NewSeq.SSQ.Value)
+    nSEQ = FixInt(NewSeq.seq.Value)
+    nSSQ = FixInt(NewSeq.Ssq.Value)
     nORD = FixInt(NewSeq.item.Value)
     sSQL = "select * from poKa WHERE numero=" & nPPAP
     REORDER sSQL, "POKA"
@@ -265,7 +263,6 @@ Private Sub Gravar_Click()
   Unload Me
 
 End Sub
-
 Private Sub REORDER(sSQL As Variant, Optional ByVal cARQ As String = "")
   Dim DB As New ADODB.Connection
   Dim RSTAB As New ADODB.Recordset
@@ -286,8 +283,8 @@ Private Sub REORDER(sSQL As Variant, Optional ByVal cARQ As String = "")
   DB.Open cARQ
   RSTAB.Open sSQL, DB, adOpenDynamic, adLockOptimistic
   Do While Not RSTAB.EOF
-    RSTAB("SEQ") = FixInt(NewSeq.SEQ)
-    RSTAB("SSQ") = FixInt(NewSeq.SSQ)
+    RSTAB("SEQ") = FixInt(NewSeq.seq)
+    RSTAB("SSQ") = FixInt(NewSeq.Ssq)
     If iMU01 = 4 Then
       RSTAB("ITEM") = FixInt(NewSeq.item)
     End If
@@ -295,6 +292,10 @@ Private Sub REORDER(sSQL As Variant, Optional ByVal cARQ As String = "")
     RSTAB.MoveNext
   Loop
   RSTAB.Close
+End Sub
+
+Private Sub item_KeyPress(KeyAscii As Integer)
+   KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub SEQ_GotFocus()

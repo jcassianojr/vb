@@ -1,6 +1,34 @@
 Attribute VB_Name = "mFileAPI"
 Option Explicit
-
+'
+'extensao(cARQ, cEXT As String) verifica extensao arquivo Ex. ("teste.txt",".txt") Ret. true
+'TrocaExt(ByVal cARQ As Variant, ByVal cEXT As String) As String
+'NomeEXT(ByVal eARQ As String) As String
+'NomeArq(ByVal eARQ As Variant, Optional ByVal lTIRAEXT As Boolean = False) As String
+'CreateNewDirectory(ByVal NewDirectory As String)
+'FileOpen(frmOwner As Form, _
+'                         Optional ByVal sFilters As String, _
+'                         Optional ByVal nFilterIndex As Long = 1, _
+'                         Optional ByVal sDefaultFileName As String, _
+'                         Optional ByVal sDefaultExtension As String, _
+'                         Optional ByVal sStartingFolder As String, _
+'                         Optional ByVal sTitle As String) As String
+'FileSave(frmOwner As Form, _
+'                         Optional ByVal sFilters As String, _
+'                         Optional ByVal nFilterIndex As Long, _
+'                         Optional ByVal sDefaultExtension As String, _
+'                         Optional ByVal sDefaultFileName As String, _
+'                         Optional ByVal sStartingFolder As String, _
+'                         Optional ByVal sTitle As String) As String
+'OpenArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, ByVal cTITULO As String) As String
+'SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, ByVal cTITULO As String) As String
+'ImgFILTER() As String
+'ImgFILTER2() As String
+'parsefile(ByVal archivo As String, ByVal parte As String) As String
+'FixPath(ByVal cARQ As String) As String
+'ShortSpec(ByVal sFileSpec As String) As String
+'OpenStreamFile(FileName$, Mode%, RLock%, RecordLen%) As Integer
+'FileErrors(ErrVal As Integer) As Integer
 Public Const OFN_ALLOWMULTISELECT As Long = &H200
 Public Const OFN_CREATEPROMPT As Long = &H2000
 Public Const OFN_ENABLEHOOK As Long = &H20
@@ -105,6 +133,57 @@ Private Declare Function SHFileOperation _
 Public Declare Function CreateDirectory Lib "kernel32" Alias "CreateDirectoryA" (ByVal lpPathName As String, lpSecurityAttributes As SECURITY_ATTRIBUTES) As Long
 Public Declare Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As Long, ByVal lpBuffer As String) As Long
 Private Declare Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As Long, ByVal lpszShortPath As Long, ByVal cchBuffer As Long) As Long
+Public Function Extensao(ByVal cARQ As String, cEXT As String) As Boolean
+  Extensao = False
+  cARQ = UCase(FixStr(cARQ))
+  cEXT = UCase(cEXT)
+
+  If InStr(1, cARQ, cEXT, vbTextCompare) > 0 Then
+
+    Extensao = True
+
+  End If
+
+End Function
+Public Function TrocaExt(ByVal cARQ As Variant, ByVal cEXT As String) As String
+  Dim nPOS As Integer
+  TrocaExt = FixStr(cARQ)
+  nPOS = InStrRev(cARQ, ".")
+  If nPOS > 0 Then
+    TrocaExt = Mid(cARQ, 1, nPOS) & cEXT
+  End If
+End Function
+
+Public Function NomeEXT(ByVal eARQ As String) As String
+  Dim nPOS As Integer
+  NomeEXT = ""
+  nPOS = InStrRev(eARQ, ".")
+  If nPOS > 0 Then
+    NomeEXT = Mid(eARQ, nPOS + 1)
+  End If
+End Function
+
+Public Function NomeArq(ByVal eARQ As Variant, Optional ByVal lTIRAEXT As Boolean = False) As String
+  Dim nPOS As Integer
+
+  eARQ = FixStr(eARQ)
+  NomeArq = ""
+  If eARQ <> "" Then
+    While InStr(eARQ, "\") > 0
+      nPOS = InStr(eARQ, "\") + 1
+      eARQ = Mid(eARQ, nPOS, Len(eARQ))
+    Wend
+    If lTIRAEXT Then
+      nPOS = InStr(eARQ, ".")
+      If nPOS > 0 Then
+        eARQ = Mid(eARQ, 1, nPOS - 1)
+      End If
+    End If
+    NomeArq = eARQ
+  End If
+End Function
+
+
 
 Public Sub CreateNewDirectory(ByVal NewDirectory As String)
   Dim sDirTest As String

@@ -67,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "12:15"
+            TextSave        =   "07:58"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -75,7 +75,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":0B24
-            TextSave        =   "10/08/2024"
+            TextSave        =   "11/09/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -392,31 +392,16 @@ Private Sub MDIForm_Load()
   Dim DB As New ADODB.Connection
   Dim rs As New ADODB.Recordset
   Dim carqhelp As String
-  '  Dim nPOS As Integer
-
-  'Dim lngReturn As Long
-  '      SetSysColors 1, COLOR_ACTIVECAPTION, RGB(191, 230, 255)
-  '      SetSysColors 1, COLOR_CAPTIONTEXT, RGB(191, 230, 255)
-
 
 
   StatusBar1.Panels(5).tEXT = ""
 
 
-  'carqhelp = "SELECT FEMEAEF FROM"
-  'carqhelp = UCase(carqhelp)
-  'If InStr(carqhelp, "SELECT") > 0 And InStr(carqhelp, "FROM") > 0 Then
-  '   carqhelp = Replace(carqhelp, "SELECT ", "")
-  '   carqhelp = Mid(carqhelp, 1, InStr(carqhelp, "FROM") - 1)
-  '   carqhelp = Trim(carqhelp)
-  'End If
-  'SayErro "abrindo"
 
   CenterFormToScreen Me
 
   On Error GoTo ErrorHandler
 
-  'SayErro "instance"
 
   If App.PrevInstance Then
     Alert App.EXEName & " já está rodando!"
@@ -455,7 +440,6 @@ Private Sub MDIForm_Load()
   ZGRPSUB = ""
 
 
-  'FrmSplash.Show vbModal
   zANO = Year(Date)
   zMES = Month(Date)
   cmdline = Trim(Command())
@@ -518,11 +502,6 @@ Private Sub MDIForm_Load()
   aRETU = PegSQL(DBWRPT, sSQL, 1, Array("IDUSUARIO"), Array("NI"), Array(0))
   zWRPTID = aRETU(0)
   GravaLog 0, 0, "Entrar", "Sistema"
-
-  'opcao somente via menu
-  'CLINHA = "MAIL $" & UCase(zUSER)
-  'Shell CLINHA, vbNormalFocus
-  'ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER),PegPath("PATH", "MAIL") , , Me.hWnd
 
   '* Carrega imagens para o ImageList
   DB.ConnectionTimeout = 120

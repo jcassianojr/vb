@@ -1,7 +1,6 @@
 Attribute VB_Name = "Myfunctions"
 'fileexist(cARQ)Verifica a existencia de Uma Arquivo
 'pegpath(Cgrupo,Ccamp) 'Traz caminho de uma arquivo ini(nomeaplicativo.ini)
-'extensao(cARQ, cEXT As String) verifica extensao arquivo Ex. ("teste.txt",".txt") Ret. true
 'today() data atual
 'nulldate() data em branco
 'fdata() formata data dd/mm/yyy
@@ -346,7 +345,7 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
       FVar = Mid(eVAR, 1, 2) & "." & Mid(eVAR, 3, 3) & "." & _
              Mid(eVAR, 6, 3) & "/" & Mid(eVAR, 9, 4) & "-" & Mid(eVAR, 13, 2)
     Case "RG"
-      FVar = formatarg(eVAR)
+      FVar = FormataRG(eVAR)
       '            Case "IE" Precisa estado
       '                FVar = FormataIE(eVAR)
     Case "CHAPA"
@@ -605,18 +604,6 @@ Public Function Dividir(ByVal nVAL As Variant, ByVal nDIV As Variant)
   End If
 End Function
 
-Public Function Extensao(ByVal cARQ As String, cEXT As String) As Boolean
-  Extensao = False
-  cARQ = UCase(FixStr(cARQ))
-  cEXT = UCase(cEXT)
-
-  If InStr(1, cARQ, cEXT, vbTextCompare) > 0 Then
-
-    Extensao = True
-
-  End If
-
-End Function
 
 Public Function NumToData(ByVal nNUM As Variant) As Date
   Dim dDATA As Date
@@ -951,44 +938,6 @@ Public Function Multiplicar(ByVal nVAL As Variant, ByVal nMUL As Variant)
   nMUL = FixNum(nMUL)
   If nVAL > 0 And nMUL > 0 Then
     Multiplicar = nVAL * nMUL
-  End If
-End Function
-
-Public Function TrocaExt(ByVal cARQ As Variant, ByVal cEXT As String) As String
-  Dim nPOS As Integer
-  TrocaExt = FixStr(cARQ)
-  nPOS = InStrRev(cARQ, ".")
-  If nPOS > 0 Then
-    TrocaExt = Mid(cARQ, 1, nPOS) & cEXT
-  End If
-End Function
-
-Public Function NomeEXT(ByVal eARQ As String) As String
-  Dim nPOS As Integer
-  NomeEXT = ""
-  nPOS = InStrRev(eARQ, ".")
-  If nPOS > 0 Then
-    NomeEXT = Mid(eARQ, nPOS + 1)
-  End If
-End Function
-
-Public Function NomeArq(ByVal eARQ As Variant, Optional ByVal lTIRAEXT As Boolean = False) As String
-  Dim nPOS As Integer
-
-  eARQ = FixStr(eARQ)
-  NomeArq = ""
-  If eARQ <> "" Then
-    While InStr(eARQ, "\") > 0
-      nPOS = InStr(eARQ, "\") + 1
-      eARQ = Mid(eARQ, nPOS, Len(eARQ))
-    Wend
-    If lTIRAEXT Then
-      nPOS = InStr(eARQ, ".")
-      If nPOS > 0 Then
-        eARQ = Mid(eARQ, 1, nPOS - 1)
-      End If
-    End If
-    NomeArq = eARQ
   End If
 End Function
 
@@ -2333,7 +2282,7 @@ Public Function CharCodesToHTML(ByVal iString As String) As String
   Dim iXml As New MSXML2.DOMDocument60
 
   With iXml.createTextNode(iString)
-    CharCodesToHTML = .xml
+    CharCodesToHTML = .Xml
   End With
 End Function
 
@@ -2363,8 +2312,8 @@ End Function
 Public Function HtmlToText(sHTML) As String
   Dim oDoc As HTMLDocument
   Set oDoc = New HTMLDocument
-  oDoc.body.innerHTML = sHTML
-  HtmlToText = oDoc.body.innerText
+  oDoc.Body.innerHTML = sHTML
+  HtmlToText = oDoc.Body.innerText
 End Function
 Public Function FindInList(ByRef cList As ListBox, sSearch As String) As Long
   Dim sString As String

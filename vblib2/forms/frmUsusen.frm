@@ -3,19 +3,19 @@ Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form frmUSUSENHA 
    Caption         =   "Troca de Senha"
-   ClientHeight    =   1800
+   ClientHeight    =   2265
    ClientLeft      =   60
    ClientTop       =   345
-   ClientWidth     =   4980
+   ClientWidth     =   5655
    Icon            =   "frmUsusen.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   1800
-   ScaleWidth      =   4980
+   ScaleHeight     =   2265
+   ScaleWidth      =   5655
    StartUpPosition =   2  'CenterScreen
    Begin vbExtra.SizeGrip SizeGrip1 
       Height          =   285
-      Left            =   4695
-      Top             =   1515
+      Left            =   5370
+      Top             =   1980
       Width           =   285
       _ExtentX        =   503
       _ExtentY        =   503
@@ -28,44 +28,44 @@ Begin VB.Form frmUSUSENHA
       ScaleHeight     =   375
       ScaleWidth      =   615
       TabIndex        =   8
-      Top             =   480
+      Top             =   600
       Width           =   615
    End
    Begin VB.TextBox txtFields 
       Height          =   285
       IMEMode         =   3  'DISABLE
       Index           =   2
-      Left            =   1920
+      Left            =   2160
       PasswordChar    =   "*"
       TabIndex        =   2
-      Top             =   1200
-      Width           =   975
+      Top             =   1440
+      Width           =   1095
    End
    Begin VB.TextBox txtFields 
       Height          =   285
       IMEMode         =   3  'DISABLE
       Index           =   1
-      Left            =   1920
+      Left            =   2160
       PasswordChar    =   "*"
       TabIndex        =   1
-      Top             =   840
-      Width           =   975
+      Top             =   960
+      Width           =   1095
    End
    Begin VB.TextBox txtFields 
       Height          =   285
       IMEMode         =   3  'DISABLE
       Index           =   0
-      Left            =   1920
+      Left            =   2160
       PasswordChar    =   "*"
       TabIndex        =   0
       Top             =   480
-      Width           =   975
+      Width           =   1095
    End
    Begin XPControls.XPButton cmdCANCELAR 
       Height          =   435
-      Left            =   3120
+      Left            =   3840
       TabIndex        =   4
-      Top             =   960
+      Top             =   1200
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
@@ -83,9 +83,9 @@ Begin VB.Form frmUSUSENHA
    End
    Begin XPControls.XPButton cmdOK 
       Height          =   435
-      Left            =   3120
+      Left            =   3840
       TabIndex        =   3
-      Top             =   360
+      Top             =   480
       Width           =   1515
       _ExtentX        =   2672
       _ExtentY        =   767
@@ -103,10 +103,10 @@ Begin VB.Form frmUSUSENHA
    End
    Begin VB.Label Label4 
       Height          =   255
-      Left            =   1200
+      Left            =   1440
       TabIndex        =   10
       Top             =   120
-      Width           =   1695
+      Width           =   1815
    End
    Begin VB.Label Label3 
       Alignment       =   1  'Right Justify
@@ -123,9 +123,9 @@ Begin VB.Form frmUSUSENHA
       Caption         =   "Confirme a nova senha:"
       ForeColor       =   &H00C00000&
       Height          =   255
-      Left            =   120
+      Left            =   240
       TabIndex        =   7
-      Top             =   1200
+      Top             =   1440
       Width           =   1695
    End
    Begin VB.Label Label1 
@@ -133,9 +133,9 @@ Begin VB.Form frmUSUSENHA
       Caption         =   "Novo senha:"
       ForeColor       =   &H00C00000&
       Height          =   255
-      Left            =   480
+      Left            =   600
       TabIndex        =   6
-      Top             =   840
+      Top             =   960
       Width           =   1335
    End
    Begin VB.Label lblLabels 
@@ -144,7 +144,7 @@ Begin VB.Form frmUSUSENHA
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   1
-      Left            =   960
+      Left            =   1080
       TabIndex        =   5
       Top             =   480
       Width           =   855
@@ -176,8 +176,8 @@ Private Sub cmdOK_Click()
 
   If txtFields(0) = txtFields(1) Then
     Alert "Senha Precisa ser Diferente da Anterior"
-    txtFields(1).Text = ""
-    txtFields(2).Text = ""
+    txtFields(1).tEXT = ""
+    txtFields(2).tEXT = ""
     txtFields(1).SetFocus
     lRETU = False
     Exit Sub
@@ -185,8 +185,8 @@ Private Sub cmdOK_Click()
 
   If Len(txtFields(1)) <> 8 Then
     Alert "8 digitos para a Senha"
-    txtFields(1).Text = ""
-    txtFields(2).Text = ""
+    txtFields(1).tEXT = ""
+    txtFields(2).tEXT = ""
     txtFields(1).SetFocus
     lRETU = False
     Exit Sub
@@ -194,8 +194,8 @@ Private Sub cmdOK_Click()
 
   If Len(txtFields(1)) <> Len(txtFields(2)) Then
     Alert "Senha diferente da de confirmacao"
-    txtFields(1).Text = ""
-    txtFields(2).Text = ""
+    txtFields(1).tEXT = ""
+    txtFields(2).tEXT = ""
     txtFields(1).SetFocus
     lRETU = False
     Exit Sub
@@ -204,8 +204,8 @@ Private Sub cmdOK_Click()
   'faze inicial acostumar os usuarios
   If Not CheckPass(txtFields(1)) Then
     If Not MDG("Senha Fraca , gravar mesmo assim") Then
-      txtFields(1).Text = ""
-      txtFields(2).Text = ""
+      txtFields(1).tEXT = ""
+      txtFields(2).tEXT = ""
       txtFields(1).SetFocus
       lRETU = False
       Exit Sub

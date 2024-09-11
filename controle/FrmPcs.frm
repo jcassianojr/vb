@@ -1355,6 +1355,10 @@ Private Sub Form_Unload(Cancel As Integer)
   Screen.MousePointer = vbDefault
 End Sub
 
+Private Sub SSTab1_Click(PreviousTab As Integer)
+
+End Sub
+
 Private Sub VerImg_Click(Index As Integer)
   frmPicViewer.Show vbModal, Me
   If lRETU Then
