@@ -71,7 +71,7 @@ Private Sub Apaga_Click()
   Dim cGRUPO, sSQL As String
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    cGRUPO = FixStr(Grid, tEXT)
+    cGRUPO = FixStr(Grid.tEXT)
     '******************************************************************
     'RPTGRP
     sSQL = "select * from RPTGRP WHERE GRP='" & cGRUPO & "'"

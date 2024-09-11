@@ -57,7 +57,7 @@ Begin VB.Form FrmSendMail
       Width           =   1065
    End
    Begin VB.ListBox Lista 
-      Height          =   1425
+      Height          =   1035
       ItemData        =   "frmSendMail.frx":038A
       Left            =   6240
       List            =   "frmSendMail.frx":0397
@@ -251,6 +251,26 @@ Begin VB.Form FrmSendMail
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin XPControls.XPButton Command9 
+      Height          =   255
+      Left            =   6240
+      TabIndex        =   29
+      TabStop         =   0   'False
+      Top             =   1560
+      Width           =   855
+      _ExtentX        =   1508
+      _ExtentY        =   450
+      Caption         =   "ZIP"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
    Begin VB.Label Label8 
       Alignment       =   1  'Right Justify
       Caption         =   "Nome"
@@ -394,6 +414,24 @@ End Sub
 Private Sub CmdLimpa_Click()
   txt_status.tEXT = ""
 End Sub
+
+Private Sub Command9_Click()
+  Dim cORIGEM As String
+  Dim cDESTINO As String
+  cORIGEM = txt_attach.tEXT
+  If InStr(UCase(cORIGEM), ".ZIP") > 0 Then
+    Alert ("Ja e um zip")
+  Else
+    cDESTINO = TrocaExt(cORIGEM, "ZIP")
+    With New cZipArchive
+      .AddFile cORIGEM
+       .CompressArchive cDESTINO
+    End With
+    txt_attach.tEXT = cDESTINO
+  End If
+
+End Sub
+
 Private Sub shellenviar_Click()
   If campos_checagem Then
     SendEmailShell txt_email_to.tEXT, txt_subject.tEXT, txt_message_text.tEXT, txt_attach.tEXT
@@ -497,6 +535,7 @@ End Sub
 Private Sub Lista_Click()
   CmdEnviar_Click
 End Sub
+
 Private Sub txt_email_from_LostFocus()
   If Not CheckEmail(txt_email_from) Then
     txt_email_from.SetFocus

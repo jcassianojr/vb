@@ -155,7 +155,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     LocalizaGri1 Grid
 
   Case "CON"
-    FrmPrintSetup.Show vbModal, Me
+  '  FrmPrintSetup.Show vbModal, Me
 
   Case "SAI"
     CmdSair_Click

@@ -3215,7 +3215,7 @@ Private Sub CmdcomIMp_Click()
 End Sub
 
 Private Sub CmdConfImp_Click()
-  FrmPrintSetup.Show vbModal, Me
+ ' FrmPrintSetup.Show vbModal, Me
 End Sub
 Private Sub cmdFOTO_Click(Index As Integer)
   Select Case Index

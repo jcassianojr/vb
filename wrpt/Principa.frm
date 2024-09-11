@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "12:16"
+            TextSave        =   "10:32"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -69,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":0B24
-            TextSave        =   "10/08/2024"
+            TextSave        =   "11/09/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -658,7 +658,7 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
 
   Case 0
 
-    FrmPrintSetup.Show vbModal, Me
+   ' FrmPrintSetup.Show vbModal, Me
 
   Case 1
     cARQRTF = PegPath("HELP", "CAMINHO") + "WRPT.txt"

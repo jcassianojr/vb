@@ -337,7 +337,7 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub CmdConfImp_Click()
-  FrmPrintSetup.Show vbModal, Me
+ ' FrmPrintSetup.Show vbModal, Me
 End Sub
 
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)

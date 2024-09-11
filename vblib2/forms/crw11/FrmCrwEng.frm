@@ -540,7 +540,7 @@ Private Sub CmdAbrirCom_Click()
 End Sub
 
 Private Sub CmdConfImp_Click()
-  FrmPrintSetup.Show vbModal, Me
+ ' FrmPrintSetup.Show vbModal, Me
 End Sub
 
 Private Sub CmdEditar_Click()

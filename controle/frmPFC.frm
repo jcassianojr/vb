@@ -1266,7 +1266,7 @@ Dim iLOOP As Integer
 Dim lTROCOU As Boolean
 
 Private Sub cmdClose_Click()
-Dim cTABLE As String
+Dim cTable As String
 Dim cWHERE As String
 
   On Error Resume Next
@@ -1281,7 +1281,7 @@ Dim cWHERE As String
 
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 4
-      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+      aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP
     aVAL(23) = FixNumBol(Check1.Value)
     aVAL(24) = FixNumBol(Check2.Value)
@@ -1291,19 +1291,19 @@ Dim cWHERE As String
     If lTROCOU Then
      Select Case nARQPCS
           Case 0
-            cTABLE = "PFC"
+            cTable = "PFC"
             cWHERE = "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
           Case 1
-            cTABLE = "PFCO"
+            cTable = "PFCO"
             cWHERE = "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
           Case 2
-            cTABLE = "PFCMS03"
+            cTable = "PFCMS03"
             cWHERE = "PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' AND ITEM=" & nORD
     End Select
     
     
     
-      ADOGrvBlob cARQ, cTABLE, Picture1, "IMAGEM", cWHERE
+      ADOGrvBlob cARQ, cTable, Picture1, "IMAGEM", cWHERE
     End If
 
    
@@ -1313,19 +1313,19 @@ Dim cWHERE As String
 End Sub
 
 Private Sub CmdConfImp_Click()
-  FrmPrintSetup.Show vbModal, Me
+ ' FrmPrintSetup.Show vbModal, Me
 End Sub
 
 Private Sub cmdescpfd_Click()
 
-  If Me.TXTFIELDS(12) = "" Then
+  If Me.txtFields(12) = "" Then
 
     Alert "Setor em Branco"
     Exit Sub
 
   End If
 
-  Zsetor = Me.TXTFIELDS(12)
+  Zsetor = Me.txtFields(12)
   lRETU = False
   eRETU01 = ""
   eRETU02 = ""
@@ -1333,8 +1333,8 @@ Private Sub cmdescpfd_Click()
 
   If lRETU Then
 
-    Me.TXTFIELDS(6) = eRETU01
-    Me.TXTFIELDS(7) = eRETU02
+    Me.txtFields(6) = eRETU01
+    Me.txtFields(7) = eRETU02
 
   End If
 
@@ -1346,9 +1346,9 @@ Private Sub cmdFOTO_Click(Index As Integer)
 
 
   If Index = 0 Then
-    cCODIGO = FixStr(TXTFIELDS(16))
+    cCODIGO = FixStr(txtFields(16))
   Else
-    cCODIGO = FixStr(TXTFIELDS(17))
+    cCODIGO = FixStr(txtFields(17))
   End If
   If Len(cCODIGO) = 0 Then
     Alert "Codigo nao preenchido"
@@ -1360,7 +1360,7 @@ Private Sub cmdFOTO_Click(Index As Integer)
   IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(cCODIGO), True, False
   zgrp = cCODIGO                               ''zGRP Interno frm imagens
   Load frmIMAGENS
-  frmIMAGENS.TXTFIELDS(0).Enabled = False
+  frmIMAGENS.txtFields(0).Enabled = False
   frmIMAGENS.Escolher(0).Visible = False
   frmIMAGENS.Show vbModal, Me
 End Sub
@@ -1392,7 +1392,7 @@ Private Sub CmdPegRel_Click()
   cARQ = PegPath("PATH", "PF")
   sSQL = "select regular from PFS WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ
   aRETU = PegSQL(cARQ, sSQL, 1, Array("REGULAR"), Array(""), Array(""))
-  TXTFIELDS(15) = aRETU(0)
+  txtFields(15) = aRETU(0)
 End Sub
 
 Private Sub CmdSalvaImagem_Click()
@@ -1413,13 +1413,13 @@ Private Sub Command1_Click(Index As Integer)
   End If
   If lRETU Then
     If Index = 0 Or Index = 1 Then
-      Me.TXTFIELDS(3) = eRETU01
+      Me.txtFields(3) = eRETU01
     End If
     If Index = 2 Or Index = 3 Then
-      Me.TXTFIELDS(21) = eRETU01
+      Me.txtFields(21) = eRETU01
     End If
     If Index = 4 Or Index = 5 Then
-      Me.TXTFIELDS(22) = eRETU01
+      Me.txtFields(22) = eRETU01
     End If
 
   End If
@@ -1429,9 +1429,9 @@ End Sub
 Private Sub Command2_Click(Index As Integer)
   lRETU = False
   If Index = 0 Then
-    eRETU01 = TXTFIELDS(8)
+    eRETU01 = txtFields(8)
   Else
-    eRETU01 = TXTFIELDS(19)
+    eRETU01 = txtFields(19)
   End If
   eRETU02 = ""
   eRETU03 = ""
@@ -1440,13 +1440,13 @@ Private Sub Command2_Click(Index As Integer)
 
   If lRETU Then
     If Index = 0 Then
-      TXTFIELDS(16) = eRETU01
-      TXTFIELDS(8) = eRETU02
-      TXTFIELDS(9) = eRETU03
+      txtFields(16) = eRETU01
+      txtFields(8) = eRETU02
+      txtFields(9) = eRETU03
     Else
-      TXTFIELDS(17) = eRETU01
-      TXTFIELDS(19) = eRETU02
-      TXTFIELDS(20) = eRETU03
+      txtFields(17) = eRETU01
+      txtFields(19) = eRETU02
+      txtFields(20) = eRETU03
     End If
   End If
 
@@ -1463,11 +1463,11 @@ Private Sub Command3_Click(Index As Integer)
   EscCodNomSim.Show vbModal, Me
   If lRETU Then
     If Index = 0 Then
-      TXTFIELDS(16) = eRETU01
-      TXTFIELDS(9) = eRETU02
+      txtFields(16) = eRETU01
+      txtFields(9) = eRETU02
     Else
-      TXTFIELDS(17) = eRETU01
-      TXTFIELDS(20) = eRETU02
+      txtFields(17) = eRETU01
+      txtFields(20) = eRETU02
     End If
 
     cARQTMP = PegPath("PATH", "MICROSIGAODBC")
@@ -1476,9 +1476,9 @@ Private Sub Command3_Click(Index As Integer)
     eRETU01 = PegSQL(cARQTMP, cSQLTMP, 1, Array("qm2_tipo"), Array("C"), Array(""))
     If lRETU Then
       If Index = 0 Then
-        TXTFIELDS(8) = Mid(eRETU01(0), 1, 3)
+        txtFields(8) = Mid(eRETU01(0), 1, 3)
       Else
-        TXTFIELDS(19) = Mid(eRETU01(0), 1, 3)
+        txtFields(19) = Mid(eRETU01(0), 1, 3)
       End If
     End If
   End If
@@ -1494,11 +1494,11 @@ Private Sub Command4_Click(Index As Integer)
   If lRETU Then
     If lRETU Then
       If Index = 0 Then
-        TXTFIELDS(8) = eRETU01
-        TXTFIELDS(9) = eRETU02
+        txtFields(8) = eRETU01
+        txtFields(9) = eRETU02
       Else
-        TXTFIELDS(19) = eRETU01
-        TXTFIELDS(20) = eRETU02
+        txtFields(19) = eRETU01
+        txtFields(20) = eRETU02
       End If
     End If
   End If
@@ -1525,9 +1525,9 @@ Private Sub ESCMS01A_Click(Index As Integer)
   If lRETU Then
     Select Case Index
     Case 0
-      TXTFIELDS(16) = eRETU01
+      txtFields(16) = eRETU01
     Case 1
-      TXTFIELDS(17) = eRETU01
+      txtFields(17) = eRETU01
     End Select
   End If
 
@@ -1538,11 +1538,11 @@ Private Sub EscTipIns_Click(Index As Integer)
   escMD02.Show vbModal, Me
   If lRETU Then
     If Index = 0 Then
-      TXTFIELDS(8) = eRETU01
-      TXTFIELDS(9) = eRETU02
+      txtFields(8) = eRETU01
+      txtFields(9) = eRETU02
     Else
-      TXTFIELDS(19) = eRETU01
-      TXTFIELDS(20) = eRETU02
+      txtFields(19) = eRETU01
+      txtFields(20) = eRETU02
     End If
   End If
 
@@ -1554,7 +1554,7 @@ End Sub
 
 Private Sub Form_Load()
 Dim cWHERE As String
-Dim cTABLE As String
+Dim cTable As String
 
 '  EscTipIns(0).Enabled = False
 '  EscTipIns(1).Enabled = False
@@ -1563,21 +1563,21 @@ Dim cTABLE As String
   txtItem = nORD
 
   If nPF > 0 Then
-    TXTPF.tEXT = nPF
+    txtPF.tEXT = nPF
   Else
-    TXTPF.Visible = False
+    txtPF.Visible = False
     Label1.Visible = False
   End If
   If nSEQ > 0 Then
-    TXTSEQ.tEXT = nSEQ
+    Txtseq.tEXT = nSEQ
   Else
-    TXTSEQ.Visible = False
+    Txtseq.Visible = False
     Label1.Visible = False
   End If
   If nSSQ > 0 Then
-    TXTSSQ.tEXT = nSSQ
+    Txtssq.tEXT = nSSQ
   Else
-    TXTSSQ.Visible = False
+    Txtssq.Visible = False
     Label2.Visible = False
   End If
   If nARQPCS = 2 Then
@@ -1610,33 +1610,33 @@ Dim cTABLE As String
 
   Select Case nARQPCS
   Case 0
-    cTABLE = "PFC"
+    cTable = "PFC"
     cWHERE = "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
   Case 1
-    cTABLE = "PFCO"
+    cTable = "PFCO"
     cWHERE = "PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
   Case 2
-    cTABLE = "PFCMS03"
+    cTable = "PFCMS03"
     cWHERE = "PF=" & nPF & " AND CODCOMP='" & Ccodcomp & "' AND ITEM=" & nORD
   End Select
- cSQL = cSQL + cTABLE + " WHERE " + cWHERE
+ cSQL = cSQL + cTable + " WHERE " + cWHERE
 
   nCAMPOS = 26
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 4
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtFields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   Check1.Value = aVAL(23)
   Check2.Value = aVAL(24)
   Check3.Value = aVAL(25)
 
-  TXTFIELDS(3).Font = "isoqsymbol"
-  TXTFIELDS(21).Font = "isoqsymbol"
-  TXTFIELDS(22).Font = "isoqsymbol"
+  txtFields(3).Font = "isoqsymbol"
+  txtFields(21).Font = "isoqsymbol"
+  txtFields(22).Font = "isoqsymbol"
 
     'ADOPegBlob(cPICURE, cARQ, cTABLE, cWHERE, cCAMPO)
 
-  If ADOPegBlob(Picture1, cARQ, cTABLE, cWHERE, "IMAGEM") Then 'ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
+  If ADOPegBlob(Picture1, cARQ, cTable, cWHERE, "IMAGEM") Then 'ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
     StretchSourcePictureFromPicture Picture1, Picture2
     If FixNum(eRETU01) > 500000 Then
       Alert ("Imagem Muito Grande,Ajuste o tamanho")
@@ -1677,30 +1677,30 @@ Private Sub pfcescid_Click(Index As Integer)
     Select Case iMU01
 
     Case 101
-      TXTFIELDS(1) = eRETU02
+      txtFields(1) = eRETU02
 
     Case 102
-      TXTFIELDS(2) = eRETU02
+      txtFields(2) = eRETU02
 
     Case 103
-      TXTFIELDS(5) = eRETU02
+      txtFields(5) = eRETU02
 
     Case 104
-      TXTFIELDS(10) = eRETU02
+      txtFields(10) = eRETU02
 
     Case 105
-      TXTFIELDS(13) = eRETU02
+      txtFields(13) = eRETU02
 
     Case 106
 
-      TXTFIELDS(11) = eRETU02
+      txtFields(11) = eRETU02
 
     Case 107
 
-      TXTFIELDS(7) = eRETU02
+      txtFields(7) = eRETU02
     Case 108
 
-      TXTFIELDS(4) = eRETU02
+      txtFields(4) = eRETU02
 
 
     End Select
@@ -1714,16 +1714,16 @@ Private Sub Setor_Click(Index As Integer)
   Select Case Index
 
   Case 0
-    Me.TXTFIELDS(12) = "P"
+    Me.txtFields(12) = "P"
 
   Case 1
-    Me.TXTFIELDS(12) = "O"
+    Me.txtFields(12) = "O"
 
   Case 2
-    Me.TXTFIELDS(12) = "L"
+    Me.txtFields(12) = "L"
 
   Case 3
-    Me.TXTFIELDS(12) = "R"
+    Me.txtFields(12) = "R"
 
   End Select
 
@@ -1766,20 +1766,20 @@ Private Sub CmdEditMe04_Click(Index As Integer)
   Dim lTEM As Boolean
   On Error GoTo errhandler
   If Index = 0 Then
-    cCODIGO = FixStr(TXTFIELDS(16))
-    cCODTIP = FixStr(TXTFIELDS(8))
-    cTIPO = FixStr(TXTFIELDS(9))
+    cCODIGO = FixStr(txtFields(16))
+    cCODTIP = FixStr(txtFields(8))
+    cTIPO = FixStr(txtFields(9))
   Else
-    cCODIGO = FixStr(TXTFIELDS(17))
-    cCODTIP = FixStr(TXTFIELDS(19))
-    cTIPO = FixStr(TXTFIELDS(20))
+    cCODIGO = FixStr(txtFields(17))
+    cCODTIP = FixStr(txtFields(19))
+    cTIPO = FixStr(txtFields(20))
   End If
   If Len(cCODIGO) = 0 Then
     Exit Sub
   End If
 
-  cAPLICACAO = FixStr(frmPCX.TXTPF(12))
-  cCAPACIDADE = FixStr(TXTFIELDS(4)) & FixStr(TXTFIELDS(5))
+  cAPLICACAO = FixStr(frmPCX.txtPF(12))
+  cCAPACIDADE = FixStr(txtFields(4)) & FixStr(txtFields(5))
 
   cARQ = PegPath("PATH", "MANA5INS")
   sx_SetEpoch (Year(Date) - 30)
@@ -1866,9 +1866,9 @@ Function CHECKME04()
   CHECKME04 = True
   For x = 1 To 2
     If x = 1 Then
-      cCODIGO = FixStr(TXTFIELDS(16))
+      cCODIGO = FixStr(txtFields(16))
     Else
-      cCODIGO = FixStr(TXTFIELDS(17))
+      cCODIGO = FixStr(txtFields(17))
     End If
     cCODIGO = Trim(cCODIGO)
     If Len(cCODIGO) > 0 Then

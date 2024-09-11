@@ -691,32 +691,32 @@ Const nFORMID = 1180
 Const cFORMID = "Imprimir Relatorios sql"
 Option Explicit
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If FileExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
 End Sub
 
 Private Sub CmdConfImp_Click()
-  FrmPrintSetup.Show vbModal, Me
+ ' FrmPrintSetup.Show vbModal, Me
 End Sub
 
 Private Sub cmdDeli_Click(Index As Integer)
   Select Case Index
   Case 0
-    TxtDeli.Text = " "
+    TxtDeli.tEXT = " "
   Case 1
-    TxtDeli.Text = "|"
+    TxtDeli.tEXT = "|"
   Case 2
-    TxtDeli.Text = ","
+    TxtDeli.tEXT = ","
   Case 3
-    TxtDeli.Text = ";"
+    TxtDeli.tEXT = ";"
   Case 4
-    TxtDeli.Text = "#"
+    TxtDeli.tEXT = "#"
   Case 5
-    TxtDeli.Text = "~"
+    TxtDeli.tEXT = "~"
   Case 5
-    TxtDeli.Text = "<tab>"
+    TxtDeli.tEXT = "<tab>"
 
   End Select
 End Sub
@@ -731,7 +731,7 @@ Private Sub CmdEditar_Click()
     cEXTENSAO = Mid(TxtArquivo, nPOS + 1)
   End If
   If cEXTENSAO = "RTF" Or cEXTENSAO = "TXT" Then
-    cARQRTF = TxtArquivo.Text
+    cARQRTF = TxtArquivo.tEXT
     FrmRTf.Show vbModal, Me
   End If
 
@@ -744,21 +744,21 @@ Private Sub cmdexportar_Click(Index As Integer)
   Dim DBEXP As ADODB.Connection
   Dim RA, nPOS As Long
   Dim gsRecordSource
-  Dim SFILTER As String
+  Dim sFILTER As String
   Dim nDESTINO
   Dim cLIn As String
   Dim cconn As String
   cLIn = Chr(13) + Chr(10)
 
 
-  cARQUIVO = tabela.Text
-  gsRecordSource = tabela.Text
+  cARQUIVO = tabela.tEXT
+  gsRecordSource = tabela.tEXT
   cEXT = "TXT"
   If Len(cARQUIVO) = 0 Then
     Alert ("Escolha Uma Tabela Antes")
     Exit Sub
   End If
-  cSQL = CStr(sql.Text)
+  cSQL = CStr(sql.tEXT)
   Select Case Index
   Case 0                                       'ok
     cEXT = "XML"
@@ -775,9 +775,9 @@ Private Sub cmdexportar_Click(Index As Integer)
   End Select
 
 
-  SFILTER = "Formato (*." & cEXT & ")" & vbNullChar & "*." & cEXT
-  cARQUIVO = FileSave(Me, SFILTER, 1, cEXT, , App.Path, "Salvar " & cEXT & " Como")
-  TxtArquivo.Text = cARQUIVO
+  sFILTER = "Formato (*." & cEXT & ")" & vbNullChar & "*." & cEXT
+  cARQUIVO = FileSave(Me, sFILTER, 1, cEXT, , App.Path, "Salvar " & cEXT & " Como")
+  TxtArquivo.tEXT = cARQUIVO
 
   If Len(cARQUIVO) = 0 Then
     Alert ("Nome Nao Definido")
@@ -786,7 +786,7 @@ Private Sub cmdexportar_Click(Index As Integer)
 
 
 
-  cconn = GeracArq(arquivo.Text, , False)
+  cconn = GeracArq(arquivo.tEXT, , False)
 
 
   Set DBEXP = New ADODB.Connection
@@ -826,11 +826,11 @@ Private Sub cmdexportar_Click(Index As Integer)
     If Index = 1 Then
       Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
     Else
-      If TxtDeli.Text = "<tab>" Then
+      If TxtDeli.tEXT = "<tab>" Then
         Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
       Else
         ''o usuario pode digitar o campo txtdeli fixstr ajustas para espaco em caso de vazio
-        Print #nDESTINO, RsExp.GetString(adClipString, -1, FixStr(TxtDeli.Text, " "), Chr(13) + Chr(10), vbNullString)
+        Print #nDESTINO, RsExp.GetString(adClipString, -1, FixStr(TxtDeli.tEXT, " "), Chr(13) + Chr(10), vbNullString)
       End If
     End If
 
@@ -875,19 +875,19 @@ Private Sub CmdFiltro_Click()
   On Error GoTo errhandler
   Dim cFILTRO As String
 
-  cFILTRO = FixStr(FILTRO)
+  cFILTRO = FixStr(filtro)
   If aRELCFG(11) Then
     ePASS01 = ""
     FrmFiltro.Show vbModal, Me
-    FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
+    filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
     If lRETU And Len(aRELCFG(15)) > 0 Then
-      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
-      sql.Text = aRELCFG(15)
+      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+      sql.tEXT = aRELCFG(15)
     End If
   End If
   If Len(aRELCFG(15)) > 0 Then
     'aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
-    sql.Text = aRELCFG(15)
+    sql.tEXT = aRELCFG(15)
   End If
 
   Exit Sub
@@ -905,8 +905,8 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-  cARQRTF = TxtArquivo.Text
-  If Extensao(TxtArquivo.Text, "TXT") Then
+  cARQRTF = TxtArquivo.tEXT
+  If Extensao(TxtArquivo.tEXT, "TXT") Then
       ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Escolher Porta(Destino)", "Editor Interno")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
@@ -921,7 +921,7 @@ Private Sub cmdimp_Click()
            FrmRTf.Show vbModal, Me
         End Select
   End If
- If Extensao(TxtArquivo.Text, "PDF") Then
+ If Extensao(TxtArquivo.tEXT, "PDF") Then
     ePASS01 = Array("Externo", "Interno")
     escOrdem.Show vbModal, Me
     eRETU01 = FixInt(eRETU01, 0)
@@ -932,7 +932,7 @@ Private Sub cmdimp_Click()
          FrmPreview.Show vbModal, Me
       End Select
   End If
-  If Extensao(TxtArquivo.Text, "RTF") Then
+  If Extensao(TxtArquivo.tEXT, "RTF") Then
      ePASS01 = Array("Editor Interno", "Preview Interno")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
@@ -943,7 +943,7 @@ Private Sub cmdimp_Click()
          CmdVisua_Click
       End Select
   End If
-  If Extensao(TxtArquivo.Text, "HTML") Then
+  If Extensao(TxtArquivo.tEXT, "HTML") Then
     CmdVisua_Click
   End If
 
@@ -955,7 +955,7 @@ Private Sub CmdOrdem_Click()
   EscArqOrdem.Show vbModal, Me
   If lRETU Then
     aRELCFG(15) = TrocaSQLOrder(aRELCFG(15), FixStr(eRETU01))
-    sql.Text = aRELCFG(15)
+    sql.tEXT = aRELCFG(15)
   End If
 End Sub
 
@@ -966,7 +966,7 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If Not FileExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -995,7 +995,7 @@ Private Sub CmdVisua_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS02 = 3
     PrintPreview1.ShowPreview
-    RichTextBox1.Text = ""
+    RichTextBox1.tEXT = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -1059,7 +1059,7 @@ Private Sub Form_Load()
   ''Configura Help
   Me.Caption = cFORMID
   HelpContextID = nFORMID
-  FILTRO = ""
+  filtro = ""
 
   Label1 = aRELCFG(6)
 
@@ -1071,7 +1071,7 @@ Private Sub Form_Load()
   If Not aDIREITOS(5) Then CmdVisua.Visible = False
   If Not aDIREITOS(7) Then CmdEmail.Visible = False
   If Not aRELCFG(11) Then CmdFiltro.Visible = False
-  If Not aRELCFG(11) Then FILTRO.Visible = False
+  If Not aRELCFG(11) Then filtro.Visible = False
   If Not aDIREITOS(4) Then CmdEditar.Visible = False
   If Not aDIREITOS(4) Then CmdShell.Visible = False
 
@@ -1080,31 +1080,31 @@ Private Sub Form_Load()
   If nARQUIVOS > 0 Then
     If Len(aARQUIVOS(0)) > 0 Then
       If FileExist(aARQUIVOS(0), True, True, aRELCFG(15)) Then
-        arquivo.Text = aARQUIVOS(0)
+        arquivo.tEXT = aARQUIVOS(0)
       End If
     End If
   End If
   aRELCFG(14) = FixStr(aRELCFG(14))
   If Len(aRELCFG(14)) > 0 Then
     cFILTRO = aRELCFG(14)
-    FILTRO = cFILTRO
+    filtro = cFILTRO
   Else
     If aRELCFG(11) Then
       CmdFiltro_Click
     End If
   End If
   If Len(aRELCFG(15)) > 0 Then
-    If Len(FILTRO) > 0 Then
-      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
+    If Len(filtro) > 0 Then
+      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
     End If
-    sql.Text = aRELCFG(15)
+    sql.tEXT = aRELCFG(15)
   End If
 
 
   If aRELCFG(13) = "" Then                     'nome tabela nao preenchido pega do sql
     aRELCFG(13) = NomeTableSql(aRELCFG(15))
   End If
-  tabela.Text = aRELCFG(13)
+  tabela.tEXT = aRELCFG(13)
   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
   PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 
@@ -1116,7 +1116,7 @@ End Sub
 Private Sub XPButton1_Click()
   frmCharacters.Show vbModal, Me
   If lRETU Then
-    TxtDeli.Text = eRETU01
+    TxtDeli.tEXT = eRETU01
   End If
 End Sub
 

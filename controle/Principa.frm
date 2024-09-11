@@ -67,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "07:58"
+            TextSave        =   "10:15"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -585,15 +585,15 @@ Private Sub mnuSUBMENU2_Click(Index As Integer)
     escDes.Show vbModal
   Case 7
     ZENGTIP = "DES"
-    escCLI.Show vbModal
+    ESCCLI.Show vbModal
   Case 8
-    escPRO.Show vbModal
+    ESCpro.Show vbModal
   Case 9
     iPPAP = 3
     escPPAP.Show vbModal
   Case 10
     ZENGTIP = "PRO"
-    escCLI.Show vbModal
+    ESCCLI.Show vbModal
   Case 11
     zPFTIPO = "POA"
     Sdb = PegPath("PATH", "POA")
@@ -639,7 +639,7 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
   Select Case Index
 
   Case 0
-    FrmPrintSetup.Show vbModal
+   ' FrmPrintSetup.Show vbModal
     Exit Sub
 
   Case 1

@@ -116,7 +116,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "FrmRtf.frx":1204
-            TextSave        =   "18:49"
+            TextSave        =   "10:06"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -124,7 +124,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "FrmRtf.frx":179E
-            TextSave        =   "10/09/2024"
+            TextSave        =   "11/09/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -1523,7 +1523,7 @@ Private Sub Form_Load()
   ''Abre o Arquivo se passado cARQRTF
   ABRIR
 
-  StatusBar1.Panels(6).Text = zUSER
+  StatusBar1.Panels(6).tEXT = zUSER
 
   ' cmbfontname.tEXT = RichTextbox1.SelFontName
 
@@ -1661,13 +1661,8 @@ End Sub
 '***************************************************************************
 
 Private Sub mnucustomcolors_Click()
-  Dim DLG As New clsCommonDialogs
-  DLG.DialogColor Complete
-  If DLG.Cancel = True Then
-    Exit Sub
-  End If
-  RichTextbox1.SelColor = DLG.Color
-  RichTextbox1.SetFocus
+  CommonDialogEx1.ShowColor
+  RichTextbox1.SelColor = CommonDialogEx1.Color
 End Sub
 
 '***************************************************************************
@@ -1836,7 +1831,7 @@ End Sub
 '***************************************************************************
 
 Private Sub mnunew_Click()
-  RichTextbox1.Text = ""
+  RichTextbox1.tEXT = ""
   RichTextbox1.SetFocus
 End Sub
 
@@ -1901,8 +1896,8 @@ End Sub
 '***************************************************************************
 
 Private Sub mnuprintcfg_Click()
-  FrmPrintSetup.Show vbModal, Me
-  RichTextbox1.SetFocus
+  'FrmPrintSetup.Show vbModal, Me
+  'RichTextbox1.SetFocus
 End Sub
 
 '***************************************************************************
@@ -2047,7 +2042,7 @@ End Sub
 
 Private Sub mnuselectall_Click()
   RichTextbox1.SelStart = 0
-  RichTextbox1.SelLength = Len(RichTextbox1.Text)
+  RichTextbox1.SelLength = Len(RichTextbox1.tEXT)
   RichTextbox1.SetFocus
 End Sub
 
