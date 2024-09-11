@@ -50,6 +50,14 @@ Attribute VB_Name = "AdoLib"
      '      "Provider=Microsoft.Jet.OLEDB.4.0;Jet OLEDB:Engine Type=" & Format & ";Data Source=" & DestDB
 'End Sub
 'myData.Properties("Update Criteria").value = adCriteriaKey
+  'OLEDB:Engine Type=5
+  'Unknown                      0
+  'Microsoft Jet 1.0            1
+  'Microsoft Jet 1.1            2
+  'Microsoft Jet 2.0            3
+  'Microsoft Jet 3.x(97)        4
+  'Microsoft Jet 4.x(2000)      5
+  
 
 Option Explicit
 Public Const cJetPro = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
@@ -694,7 +702,7 @@ Public Function ADORsStatus(ByRef eSTATUS)
 End Function
 
 Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String = "")
-  Dim errorObject As ADODB.error
+  Dim errorObject As ADODB.Error
   For Each errorObject In oErro
     cERRO = cERRO & " Ado Erro Numero: " & errorObject.Number & vbCrLf
     cERRO = cERRO & " Ado Descricao  : " & errorObject.Description & vbCrLf
