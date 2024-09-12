@@ -61,7 +61,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principal.frx":058A
-            TextSave        =   "18:32"
+            TextSave        =   "18:27"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -69,7 +69,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principal.frx":0B24
-            TextSave        =   "10/09/2024"
+            TextSave        =   "12/09/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -106,6 +106,16 @@ Private Sub MDIForm_Load()
   CenterFormToScreen Me
   cmdline = Trim(Command())
   
+  
+  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "D")
+  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "R")
+  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "C")
+  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "N")
+  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "A")
+  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "E")
+  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "PD")
+  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "PP")
+  'End
   
   'comand line properties project
   

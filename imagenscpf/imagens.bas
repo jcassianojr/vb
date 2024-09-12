@@ -66,7 +66,7 @@ Public Sub Cmdiniciar_Click()
 
 End Sub
 Public Function StrToArray(ByVal cGRUPO As String) As Variant
-  Dim X, nLEN As Integer
+  Dim x, nLEN As Integer
   Dim aUSO As Variant
   Dim cCHAR, eCNV As String
   Select Case cGRUPO
@@ -111,25 +111,25 @@ Public Function StrToArray(ByVal cGRUPO As String) As Variant
 
   nLEN = Len(eCNV)
   ReDim aUSO(nLEN)
-  For X = 1 To nLEN
-    cCHAR = Mid(eCNV, X, 1)
+  For x = 1 To nLEN
+    cCHAR = Mid(eCNV, x, 1)
     Select Case cCHAR
     Case "ª"
-      aUSO(X - 1) = "a."
+      aUSO(x - 1) = "a."
 
     Case "º"
-      aUSO(X - 1) = "o."
+      aUSO(x - 1) = "o."
 
     Case Else
-      aUSO(X - 1) = cCHAR
+      aUSO(x - 1) = cCHAR
 
     End Select
-  Next X
+  Next x
   StrToArray = aUSO
 End Function
 
 Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
-  Dim nLEN, nTEXTO, X, Y As Integer
+  Dim nLEN, nTEXTO, x, y As Integer
   Dim aORI, aDES, aTEXTO As Variant
   If IsArray(eORI) Then
     aORI = eORI
@@ -141,24 +141,33 @@ Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eD
   aTEXTO = StrToArray(cTexto)
   nLEN = UBound(aORI)
   nTEXTO = UBound(aTEXTO)
-  For Y = 0 To nTEXTO
-    For X = 0 To nLEN
-      If aTEXTO(Y) = aORI(X) Then  ''Encerra Analise Para Evitar
-        aTEXTO(Y) = aDES(X)       ''Loop de Troca
+  For y = 0 To nTEXTO
+    For x = 0 To nLEN
+      If aTEXTO(y) = aORI(x) Then  ''Encerra Analise Para Evitar
+        aTEXTO(y) = aDES(x)       ''Loop de Troca
         Exit For
       End If
     Next
   Next
   CharConv = ""
-  For Y = 0 To nTEXTO
-    CharConv = CharConv & aTEXTO(Y)
-  Next Y
+  For y = 0 To nTEXTO
+    CharConv = CharConv & aTEXTO(y)
+  Next y
 End Function
 Public Function TiraOut(ByVal eVAR As Variant) As String
   Dim cTexto As String
   cTexto = FixStr(eVAR)
   TiraOut = CharConv(cTexto, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
                      Array("", "", "", "", "", "", "", "", ""))
+End Function
+Public Function FileExists(ByVal PathName As String) As Boolean
+
+On Error Resume Next
+Dim Attributes As VbFileAttribute, ErrVal As Long
+Attributes = GetAttr(PathName)
+ErrVal = Err.Number
+On Error GoTo 0
+If (Attributes And (vbDirectory Or vbVolume)) = 0 And ErrVal = 0 Then FileExists = True
 End Function
 
 Public Function FixStr(ByVal eVAR As Variant, _

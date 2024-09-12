@@ -5,6 +5,6 @@ frmProgress = 104, 104, 1231, 445, C, 156, 156, 1231, 590, C
 frmPassword = 156, 156, 1231, 590, C, 182, 182, 1257, 616, C
 VisualStyles = 0, 0, 0, 0, C
 Common = 52, 52, 1223, 486, C
-mFileAPI = 0, 0, 0, 0, C
+mFileAPI = 130, 130, 1257, 471, C
 copywindowway = 78, 78, 1249, 512, C
 Strings = 26, 26, 1197, 460, C

@@ -647,14 +647,14 @@ Private Sub CmdPreview_Click()
   If Not FileExist(cARQRTF, True) Then
     Exit Sub
   End If
-  If Extensao(cARQRTF, "TXT") Then
+  If IsExtensao(cARQRTF, "TXT") Then
     ePASS03 = 1
     PrintPreview1.ShowPreview
   End If
-  If Extensao(cARQRTF, "PDF") Then
+  If IsExtensao(cARQRTF, "PDF") Then
     ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
   End If
-  If Extensao(TxtArquivo.tEXT, "HTML") Then
+  If IsExtensao(TxtArquivo.tEXT, "HTML") Then
     'FrmPreview.Show vbModal, Me
     If MDG("Sim->Navegador Nao->Visualizador Interno") Then
       OpenUrl (cARQRTF)
@@ -663,7 +663,7 @@ Private Sub CmdPreview_Click()
       PrintPreview1.ShowPreview
     End If
   End If
-  If Extensao(cARQRTF, "RTF") Then
+  If IsExtensao(cARQRTF, "RTF") Then
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  '/ rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
@@ -867,7 +867,7 @@ End Sub
 
 
 Private Sub Salvar_Click(Index As Integer)
-  On Error GoTo error
+  On Error GoTo Error
   Dim cARQUIVO As String
   Dim cEXTENSAO As String
   Dim sFILTER As String
@@ -933,7 +933,7 @@ Private Sub Salvar_Click(Index As Integer)
   End If
 
   Exit Sub
-error:
+Error:
   Select Case Err.Number
   Case Else
     SayErro

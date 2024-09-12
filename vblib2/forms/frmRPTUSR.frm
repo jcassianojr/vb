@@ -325,14 +325,14 @@ Private Sub CmdAbrirCom_Click(Index As Integer)
 'Dim cEXTENSAO As String
 'Dim nPOS As Long
 
-  eLOCALIZA = TXTFIELDS(5)
+  eLOCALIZA = txtFields(5)
   ePASS01 = ""
   If Index = 0 Then
-    ePASS01 = NomeEXT(cARQUIVO)
+    ePASS01 = EXTENSAO(cARQUIVO)
   End If
   EscRptExec.Show vbModal, Me
   If lRETU Then
-    TXTFIELDS(5) = eRETU02
+    txtFields(5) = eRETU02
   End If
 End Sub
 
@@ -355,11 +355,11 @@ Private Sub Form_Load()
   CenterFormToScreen Me
 
   cSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "' AND IDUSUARIO=" & zIDRPTUSR
-  TXTFIELDS(0) = zIDRPTUSR
-  TXTFIELDS(1) = ePASS03
+  txtFields(0) = zIDRPTUSR
+  txtFields(1) = ePASS03
   'txtFields(2) = "" codigo
-  TXTFIELDS(3) = zgrp
-  TXTFIELDS(4) = zRPT
+  txtFields(3) = zgrp
+  txtFields(4) = zRPT
 
   cARQUSR = DBWRPT
   aCAM = Array("IMPRIME", "EXPORTA", "VISUALIZA", "SALVARTF", "SALVATXT", _
@@ -372,7 +372,7 @@ Private Sub Form_Load()
   For x = 0 To 7
     chkFields(x) = aVAL(x)
   Next x
-  TXTFIELDS(5) = aVAL(8)
+  txtFields(5) = aVAL(8)
   nFORMID = 998
 End Sub
 
@@ -382,7 +382,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     For x = 0 To 7
       aVAL(x) = FixNumBol(chkFields(x))
     Next x
-    aVAL(8) = TXTFIELDS(5)
+    aVAL(8) = txtFields(5)
     GrvSQL cARQUSR, cSQL, 9, aCAM, aVAL, aFOR
     GravaLog nFORMID, 0, "Gravou "
   Else

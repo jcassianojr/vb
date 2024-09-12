@@ -1,9 +1,9 @@
 Attribute VB_Name = "mFileAPI"
 Option Explicit
 '
-'extensao(cARQ, cEXT As String) verifica extensao arquivo Ex. ("teste.txt",".txt") Ret. true
+'ISextensao(cARQ, cEXT As String) verifica extensao arquivo Ex. ("teste.txt",".txt") Ret. true
 'TrocaExt(ByVal cARQ As Variant, ByVal cEXT As String) As String
-'NomeEXT(ByVal eARQ As String) As String
+'EXTENSAO(ByVal eARQ As String) As String
 'NomeArq(ByVal eARQ As Variant, Optional ByVal lTIRAEXT As Boolean = False) As String
 'CreateNewDirectory(ByVal NewDirectory As String)
 'FileOpen(frmOwner As Form, _
@@ -24,7 +24,18 @@ Option Explicit
 'SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, ByVal cTITULO As String) As String
 'ImgFILTER() As String
 'ImgFILTER2() As String
+
 'parsefile(ByVal archivo As String, ByVal parte As String) As String
+' c:\Users\jcass\Downloads\lembra.txt
+'"D" 'drive                       c:
+'"R" 'raiz                        c:\Users\jcass\Downloads\
+'"C" 'completo sem extensao       c:\Users\jcass\Downloads\lembra
+'"N" 'SO Nome -sem extensao       lembra
+'"A" 'Arquivo nome+exensao        lembra.TXT
+'"E" ' Extensao                   TXT
+'"PD"'parente dir                 Downloads
+'"PP"'Parente path                c:\Users\jcass\Downloads
+
 'FixPath(ByVal cARQ As String) As String
 'ShortSpec(ByVal sFileSpec As String) As String
 'OpenStreamFile(FileName$, Mode%, RLock%, RecordLen%) As Integer
@@ -133,53 +144,60 @@ Private Declare Function SHFileOperation _
 Public Declare Function CreateDirectory Lib "kernel32" Alias "CreateDirectoryA" (ByVal lpPathName As String, lpSecurityAttributes As SECURITY_ATTRIBUTES) As Long
 Public Declare Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As Long, ByVal lpBuffer As String) As Long
 Private Declare Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As Long, ByVal lpszShortPath As Long, ByVal cchBuffer As Long) As Long
-Public Function Extensao(ByVal cARQ As String, cEXT As String) As Boolean
-  Extensao = False
+Public Function IsExtensao(ByVal cARQ As String, cEXT As String) As Boolean
+ IsExtensao = False
   cARQ = UCase(FixStr(cARQ))
   cEXT = UCase(cEXT)
-
-  If InStr(1, cARQ, cEXT, vbTextCompare) > 0 Then
-
-    Extensao = True
-
-  End If
-
+'  If InStr(1, cARQ, cEXT, vbTextCompare) > 0 Then
+'    Extensao = True
+'  End If
+   If parsefile(cARQ, "E") = cEXT Then
+      IsExtensao = True
+   End If
 End Function
 Public Function TrocaExt(ByVal cARQ As Variant, ByVal cEXT As String) As String
-  Dim nPOS As Integer
-  TrocaExt = FixStr(cARQ)
-  nPOS = InStrRev(cARQ, ".")
-  If nPOS > 0 Then
-    TrocaExt = Mid(cARQ, 1, nPOS) & cEXT
-  End If
+  'Dim nPOS As Integer
+  'TrocaExt = FixStr(cARQ)
+  'nPOS = InStrRev(cARQ, ".")
+  'If nPOS > 0 Then
+  '  TrocaExt = Mid(cARQ, 1, nPOS) & cEXT
+  'End If
+  TrocaExt = parsefile(cARQ, "C") & cEXT
 End Function
 
-Public Function NomeEXT(ByVal eARQ As String) As String
-  Dim nPOS As Integer
-  NomeEXT = ""
-  nPOS = InStrRev(eARQ, ".")
-  If nPOS > 0 Then
-    NomeEXT = Mid(eARQ, nPOS + 1)
-  End If
+Public Function EXTENSAO(ByVal eARQ As String) As String
+  'Dim nPOS As Integer
+  'NomeEXT = ""
+  'nPOS = InStrRev(eARQ, ".")
+  'If nPOS > 0 Then
+  '  NomeEXT = Mid(eARQ, nPOS + 1)
+  'End If
+  EXTENSAO = parsefile(eARQ, "E")
 End Function
+
 
 Public Function NomeArq(ByVal eARQ As Variant, Optional ByVal lTIRAEXT As Boolean = False) As String
-  Dim nPOS As Integer
+  'Dim nPOS As Integer
 
-  eARQ = FixStr(eARQ)
-  NomeArq = ""
-  If eARQ <> "" Then
-    While InStr(eARQ, "\") > 0
-      nPOS = InStr(eARQ, "\") + 1
-      eARQ = Mid(eARQ, nPOS, Len(eARQ))
-    Wend
-    If lTIRAEXT Then
-      nPOS = InStr(eARQ, ".")
-      If nPOS > 0 Then
-        eARQ = Mid(eARQ, 1, nPOS - 1)
-      End If
-    End If
-    NomeArq = eARQ
+  'eARQ = FixStr(eARQ)
+  'NomeArq = ""
+  'If eARQ <> "" Then
+  '  While InStr(eARQ, "\") > 0
+  '    nPOS = InStr(eARQ, "\") + 1
+  '    eARQ = Mid(eARQ, nPOS, Len(eARQ))
+  '  Wend
+  '  If lTIRAEXT Then
+  '    nPOS = InStr(eARQ, ".")
+  '    If nPOS > 0 Then
+  '      eARQ = Mid(eARQ, 1, nPOS - 1)
+  '    End If
+  '  End If
+  '  NomeArq = eARQ
+  'End If
+  If lTIRAEXT Then
+     NomeArq = parsefile(eARQ, "N")
+  Else
+     NomeArq = parsefile(eARQ, "A")
   End If
 End Function
 
@@ -297,7 +315,7 @@ Public Function FileSave(frmOwner As Form, _
 End Function
 
 Function OpenArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, ByVal cTITULO As String) As String
-  Dim sFILENAME As String
+  Dim sFileName As String
   Dim sPath As String
   Dim sRECENTFILE As String
   Dim sFILTER As String
@@ -308,17 +326,17 @@ Function OpenArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
     sPath = App.Path
   End If
   sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
-  sFILENAME = FileOpen(oFORM, sFILTER, 1, sRECENTFILE, cEXT, sPath, "Escolher " & cTITULO)
-  If Len(sFILENAME) = 0 Then
+  sFileName = FileOpen(oFORM, sFILTER, 1, sRECENTFILE, cEXT, sPath, "Escolher " & cTITULO)
+  If Len(sFileName) = 0 Then
     lRETU = False
     Exit Function
   End If
   lRETU = True
-  OpenArqExt = sFILENAME
+  OpenArqExt = sFileName
 End Function
 
 Function SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, ByVal cTITULO As String) As String
-  Dim sFILENAME As String
+  Dim sFileName As String
   Dim sPath As String
   Dim sRECENTFILE As String
   Dim sFILTER As String
@@ -329,13 +347,13 @@ Function SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
     sPath = App.Path
   End If
   sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
-  sFILENAME = FileSave(oFORM, sFILTER, 1, cEXT, "Novo", sPath, cTITULO)
-  If Len(sFILENAME) = 0 Then
+  sFileName = FileSave(oFORM, sFILTER, 1, cEXT, "Novo", sPath, cTITULO)
+  If Len(sFileName) = 0 Then
     lRETU = False
     Exit Function
   End If
   lRETU = True
-  SaveArqExt = sFILENAME
+  SaveArqExt = sFileName
 End Function
 
 Public Function ImgFILTER() As String
@@ -600,11 +618,11 @@ Private Function FileErrors(ErrVal As Integer) As Integer
 End Function
 
 
-Public Function DeleteFile(ByVal sFILENAME As String, Optional vRecycleBin As Boolean) As Boolean
+Public Function DeleteFile(ByVal sFileName As String, Optional vRecycleBin As Boolean) As Boolean
   Dim fo As SHFILEOPSTRUCT
 
   With fo
-    .pFrom = sFILENAME & vbNullChar
+    .pFrom = sFileName & vbNullChar
     .wFunc = FO_DELETE
     If vRecycleBin Then .fFlags = FOF_ALLOWUNDO    ' Send to RecycleBin
   End With

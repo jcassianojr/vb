@@ -62,3 +62,30 @@ Public Function TrimNull(ByVal sTxt As String) As String
 
 End Function
 
+Public Function FixStr(ByVal eVAR As Variant, _
+                       Optional ByVal ePAD As Variant = "", _
+                       Optional ByVal coper As String = "", _
+                       Optional ByVal nLEN As Integer = 0) As Variant
+  On Error GoTo errhandler
+  If IsNull(eVAR) Then
+    If ePAD <> "" Then
+      eVAR = ePAD
+    End If
+  End If
+  FixStr = CStr(eVAR)
+  If UCase(eVAR) = "NULL" Then
+    FixStr = ePAD
+  End If
+  If InStr(coper, "TRIM") > 0 Then
+    eVAR = Trim(eVAR)
+    FixStr = eVAR
+  End If
+  If nLEN > 0 And Len(eVAR) > nLEN Then
+    eVAR = Mid(eVAR, 1, nLEN)
+    FixStr = eVAR
+  End If
+  Exit Function
+errhandler:
+  FixStr = ""
+  Resume Next
+End Function

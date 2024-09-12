@@ -426,7 +426,7 @@ Public Function CharToLit(aVAL As Variant, Optional ByVal cTIPO As String = "", 
     cTIPO = aRETU(2)
   End If
   Select Case cTIPO
-  Case "MYSQL"
+  Case "MYSQL", "MARIADB"
     CharToLit = GeraSplit(aVAL, "CONCAT(", ",", ")")
   Case Else
     CharToLit = GeraSplit(aVAL, "", " + ", "")
@@ -465,7 +465,7 @@ Public Function DataToLit(ByVal dDATA As Variant, Optional ByVal cTIPO As String
     DataToLit = "CDATE(" & Year(dDATA) & "," & Month(dDATA) & "," & Day(dDATA) & ")"
   Case "MYSQL", "MYSQL/"
     DataToLit = "'" & Year(dDATA) & "/" & Month(dDATA) & "/" & Day(dDATA) & "'"
-  Case "MYSQL-"
+  Case "MYSQL-", "MARIADB"
     DataToLit = "'" & Year(dDATA) & "-" & Month(dDATA) & "-" & Day(dDATA) & "'"
   Case "SQLSERVER"
     DataToLit = "CONVERT(datetime, '" & Format(DateValue(dDATA), "yyyy-mm-dd") & "', 102)"
@@ -674,18 +674,23 @@ Public Function FileExist(ByVal cARQ As Variant, _
 
   If InStr(cARQUIVO, "[") > 0 Then
      
-    If InStr(cARQUIVO, "[JETMDB]") > 0 Or InStr(cARQUIVO, "[SQLITE]") Or InStr(cARQUIVO, "[A16MDB]") > 0 Then
+    If InStr(cARQUIVO, "[JETMDB]") > 0 Or InStr(cARQUIVO, "[SQLITE]") Or InStr(cARQUIVO, "[A1") > 0 Then
       cARQUIVO = Replace(cARQUIVO, "[JETMDB]", "")
       cARQUIVO = Replace(cARQUIVO, "[SQLITE]", "")
-      cARQUIVO = Replace(cARQUIVO, "[A16MDB]", "")
+      cARQUIVO = Replace(cARQUIVO, "[A16", "")
+      cARQUIVO = Replace(cARQUIVO, "[A14", "")
+      cARQUIVO = Replace(cARQUIVO, "[A12", "")
+      cARQUIVO = Replace(cARQUIVO, "MDB]", "")
+      cARQUIVO = Replace(cARQUIVO, "ACCDB]", "")
+      cARQUIVO = Replace(cARQUIVO, "]", "")
     Else
-      If InStr(cARQUIVO, "[JETFOX]") > 0 Or InStr(cARQUIVO, "[ADSCDX]") > 0 Or InStr(cARQUIVO, "[ADSNTX]") > 0 _
-        Or InStr(cARQUIVO, "[ADSADT]") > 0 Then
+      If InStr(cARQUIVO, "[JETFOX]") > 0 Or InStr(cARQUIVO, "[ADS") > 0 Then
         cARQUIVO = Replace(cARQUIVO, "[JETFOX]", "")
-        cARQUIVO = Replace(cARQUIVO, "[ADSCDX]", "")
-        cARQUIVO = Replace(cARQUIVO, "[ADSNTX]", "")
-        cARQUIVO = Replace(cARQUIVO, "[ADSADT]", "")
-
+        cARQUIVO = Replace(cARQUIVO, "[ADS", "")
+        cARQUIVO = Replace(cARQUIVO, "CDX]", "")
+        cARQUIVO = Replace(cARQUIVO, "NTX]", "")
+        cARQUIVO = Replace(cARQUIVO, "ADT]", "")
+        cARQUIVO = Replace(cARQUIVO, "]", "")
         If Len(cSQL) = 0 Then
           Alert ("Fileexit  Nao Passado cSQL Necessario Para DBF")
           FileExist = True
@@ -694,20 +699,15 @@ Public Function FileExist(ByVal cARQ As Variant, _
         cARQUIVO = cARQUIVO & NomeTableSql(cSQL, ".DBF")
       End If
 
-      If InStr(cARQUIVO, "[JETPDX3]") > 0 Or InStr(cARQUIVO, "[JETPDX4]") Or InStr(cARQUIVO, "[JETPDX5]") > 0 Or _
-         InStr(cARQUIVO, "[A12PDX3]") > 0 Or InStr(cARQUIVO, "[A12PDX4]") Or InStr(cARQUIVO, "[A12PDX5]") > 0 Or _
-         InStr(cARQUIVO, "[A16PDX3]") > 0 Or InStr(cARQUIVO, "[A16PDX4]") Or InStr(cARQUIVO, "[A16PDX5]") > 0 Then
-        cARQUIVO = Replace(cARQUIVO, "[JETPDX3]", "")
-        cARQUIVO = Replace(cARQUIVO, "[JETPDX4]", "")
-        cARQUIVO = Replace(cARQUIVO, "[JETPDX5]", "")
-        cARQUIVO = Replace(cARQUIVO, "[A12PDX3]", "")
-        cARQUIVO = Replace(cARQUIVO, "[A12PDX4]", "")
-        cARQUIVO = Replace(cARQUIVO, "[A12PDX5]", "")
-        cARQUIVO = Replace(cARQUIVO, "[A16PDX3]", "")
-        cARQUIVO = Replace(cARQUIVO, "[A16PDX4]", "")
-        cARQUIVO = Replace(cARQUIVO, "[A16PDX5]", "")
-
-
+      If InStr(cARQUIVO, "PDX3]") > 0 Or InStr(cARQUIVO, "PDX4]") Or InStr(cARQUIVO, "PDX5]") > 0 Then
+        cARQUIVO = Replace(cARQUIVO, "PDX3]", "")
+        cARQUIVO = Replace(cARQUIVO, "PDX4]", "")
+        cARQUIVO = Replace(cARQUIVO, "PDX5]", "")
+        cARQUIVO = Replace(cARQUIVO, "[A16", "")
+        cARQUIVO = Replace(cARQUIVO, "[A14", "")
+        cARQUIVO = Replace(cARQUIVO, "[A12", "")
+        cARQUIVO = Replace(cARQUIVO, "[JET", "")
+        cARQUIVO = Replace(cARQUIVO, "]", "")
         If Len(cSQL) = 0 Then
           Alert ("Fileexit  Nao Passado cSQL Necessario Para DB")
           FileExist = True
@@ -716,7 +716,7 @@ Public Function FileExist(ByVal cARQ As Variant, _
         cARQUIVO = cARQUIVO & NomeTableSql(cSQL, ".DB")
       End If
 
-      If InStr(cARQUIVO, "[CONN]") > 0 Or InStr(cARQUIVO, "[MYSQL]") > 0 Or _
+      If InStr(cARQUIVO, "[CONN]") > 0 Or InStr(cARQUIVO, "[MYSQL]") > 0 Or InStr(cARQUIVO, "[MARIADB]") > 0 Or _
          InStr(cARQUIVO, "[POSTGRESQL]") > 0 Or InStr(cARQUIVO, "[SQLSERVER]") > 0 Then
         FileExist = True
         Exit Function
@@ -880,7 +880,7 @@ Public Function MathOper(ByVal nVAL01 As Variant, ByVal nVAL02 As Variant, _
       eVAL = 32
     End If
   Case "EXT"
-    eVAL = UCase(NomeEXT(FixStr(nVAL01, FixStr(nVAL02))))
+    eVAL = UCase(EXTENSAO(FixStr(nVAL01, FixStr(nVAL02))))
   Case "NPD"
     eTMP = FixInt(nVAL01)
     If eTMP > 0 Then
@@ -950,7 +950,7 @@ Public Function NullDate(Optional ByVal cTIPO As String = "", Optional ByVal cAR
   Select Case cTIPO
   Case "DBF", "ADSCDX", "ADSNTX", "ADSADT", "SDECDX", "SDENTX", "SDENSX"
     NullDate = "        "
-  Case "MYSQL"
+  Case "MYSQL", "MARIADB"
     NullDate = "'0000-00-00'"
   Case Else
     NullDate = Null
@@ -966,7 +966,7 @@ Public Function NullDateTime(Optional ByVal cTIPO As String = "", Optional ByVal
   Select Case cTIPO
   Case "DBF", "ADSCDX", "ADSNTX", "ADSADT", "SDECDX", "SDENTX", "SDENSX"
     NullDateTime = "        "
-  Case "MYSQL"
+  Case "MYSQL", "MARIADB"
     NullDateTime = "'0000-00-00 00:00:00'"
   Case Else
     NullDateTime = Null

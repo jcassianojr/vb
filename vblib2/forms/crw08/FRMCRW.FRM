@@ -649,14 +649,14 @@ Private Sub CmdPreview_Click()
   If Not FileExist(cARQRTF, True) Then
     Exit Sub
   End If
-  If Extensao(cARQRTF, "TXT") Then
+  If IsExtensao(cARQRTF, "TXT") Then
     ePASS03 = 1
     PrintPreview1.ShowPreview
   End If
-  If Extensao(cARQRTF, "PDF") Then
+  If IsExtensao(cARQRTF, "PDF") Then
     ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
   End If
-  If Extensao(cARQRTF, "HTML") Then
+  If IsExtensao(cARQRTF, "HTML") Then
     'FrmPreview.Show vbModal, Me
     If MDG("Sim->Navegador Nao->Visualizador Interno") Then
       OpenUrl (cARQRTF)
@@ -665,7 +665,7 @@ Private Sub CmdPreview_Click()
       PrintPreview1.ShowPreview
     End If
   End If
-  If Extensao(cARQRTF, "RTF") Then
+  If IsExtensao(cARQRTF, "RTF") Then
     cARQRTF = TxtArquivo.tEXT
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS03 = 2

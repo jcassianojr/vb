@@ -62,6 +62,7 @@ Attribute VB_Name = "AdoLib"
 Option Explicit
 Public Const cJetPro = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
 Public Const cJetA12 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source="
+Public Const cJetA14 = "Provider=Microsoft.ACE.OLEDB.14.0;Data Source="
 Public Const cJetA16 = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source="
 Public Const cJetADV = "Provider=Advantage.OLEDB.1;Data Source="
 Public Const cJetExt = ";Extended Properties="
@@ -124,7 +125,7 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
   End If
   
 '
-' foxpro .dbf 'vir antes do sqlite para nao confundir com .db
+' foxpro .dbf 'vir antes do sqlite para nao confundir com .db tambem paradox.db
 '
   
   If InStr(cARQTMP, ".DBF") > 0 Then  'DBF
@@ -141,8 +142,8 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
 
-  If cTIPO = "A16MDB" Or cTIPO = "A16JETMDB" Then
-    GeraConn = "[A16MDB]" & cARQ
+  If cTIPO = "A14MDB" Or cTIPO = "A14ACCDB" Or InStr(LCase(cARQ), ".accdb") > 0 Then
+    GeraConn = "[A14]" & cARQ
     Exit Function
   End If
   
@@ -152,63 +153,74 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     GeraConn = "[JETPDX5]" & cARQ
     Exit Function
   End If
-  If cTIPO = "A12MDB" Or cTIPO = "A12JETMDB" Then
-    GeraConn = "[A12MDB]" & cARQ
+  If cTIPO = "A12MDB" Or cTIPO = "A12ACCDB" Then
+    GeraConn = "[A12]" & cARQ
     Exit Function
   End If
+  If cTIPO = "A14MDB" Or cTIPO = "A14ACCDB" Then
+    GeraConn = "[A14]" & cARQ
+    Exit Function
+  End If
+   If cTIPO = "A16MDB" Or cTIPO = "A16ACCDB" Then
+    GeraConn = "[A16]" & cARQ
+    Exit Function
+  End If
+ 
   
-Select Case cTIPO
-    Case "XLS"
-      GeraConn = "[XLS]" & cARQ
-    Case "XLSX"
-      GeraConn = "[XLSX]" & cARQ
-    Case "XLSDRV"
-      GeraConn = "[XLSDRV]" & cARQ
-    Case "SQLITE"
-      GeraConn = "[SQLITE]" & cARQ
-    Case "JETTXT"
-      GeraConn = "[JETTXT]" & cARQ
-    Case "DBFIII"
-      GeraConn = "[JETDBFIII]" & cARQ
-    Case "ADSDX"
-      GeraConn = "[ADSCDX]" & cARQ
-    Case "ADSNTX" Or "SDENTX"
-      GeraConn = "[ADSNTX]" & cARQ
-    Case "ADSADT"
-      GeraConn = "[ADSADT]" & cARQ
-    Case "ADSVFP"
-      GeraConn = "[ADSVFP]" & cARQ
-    Case "PDX3"
-      GeraConn = "[JETPDX3]" & cARQ
-    Case "PDX4"
-      GeraConn = "[JETPDX4]" & cARQ
-    Case "PDX5"
-      GeraConn = "[JETPDX5]" & cARQ
-    Case "A12DBFIII"
-      GeraConn = "[A12DBFIII]" & cARQ
-    Case "A12PDX3"
-      GeraConn = "[A12PDX3]" & cARQ
-    Case "A12PDX4"
-      GeraConn = "[A12PDX4]" & cARQ
-    Case "A12PDX5"
-      GeraConn = "[A12PDX5]" & cARQ
-    Case "A16XLS"
-      GeraConn = "[A16XLS]" & cARQ
-    Case "A16XLSX"
-      GeraConn = "[A16XLSX]" & cARQ
-    Case "A16XLSM"
-      GeraConn = "[A16XLSM]" & cARQ
-    Case "A16XLSB"
-      GeraConn = "[A16XLSB]" & cARQ
-    Case "A16DBFIII"
-      GeraConn = "[A16DBFIII]" & cARQ
-    Case "A16PDX3"
-      GeraConn = "[A16PDX3]" & cARQ
-    Case "A16PDX4"
-      GeraConn = "[A16PDX4]" & cARQ
-    Case "A16PDX5"
-      GeraConn = "[A16PDX5]" & cARQ
-End Select
+If Len(cTIPO) > 0 Then
+  Select Case cTIPO
+      Case "XLS"
+        GeraConn = "[XLS]" & cARQ
+      Case "XLSX"
+        GeraConn = "[XLSX]" & cARQ
+      Case "XLSDRV"
+        GeraConn = "[XLSDRV]" & cARQ
+      Case "SQLITE"
+        GeraConn = "[SQLITE]" & cARQ
+      Case "JETTXT"
+        GeraConn = "[JETTXT]" & cARQ
+      Case "DBFIII"
+        GeraConn = "[JETDBFIII]" & cARQ
+      Case "ADSDX"
+        GeraConn = "[ADSCDX]" & cARQ
+      Case "ADSNTX" Or "SDENTX"
+        GeraConn = "[ADSNTX]" & cARQ
+      Case "ADSADT"
+        GeraConn = "[ADSADT]" & cARQ
+      Case "ADSVFP"
+        GeraConn = "[ADSVFP]" & cARQ
+      Case "PDX3"
+        GeraConn = "[JETPDX3]" & cARQ
+      Case "PDX4"
+        GeraConn = "[JETPDX4]" & cARQ
+      Case "PDX5"
+        GeraConn = "[JETPDX5]" & cARQ
+      Case "A12DBFIII"
+        GeraConn = "[A12DBFIII]" & cARQ
+      Case "A12PDX3"
+        GeraConn = "[A12PDX3]" & cARQ
+      Case "A12PDX4"
+        GeraConn = "[A12PDX4]" & cARQ
+      Case "A12PDX5"
+        GeraConn = "[A12PDX5]" & cARQ
+      Case "A16XLS"
+        GeraConn = "[A16XLS]" & cARQ
+      Case "A16XLSX"
+        GeraConn = "[A16XLSX]" & cARQ
+      Case "A16XLSM"
+        GeraConn = "[A16XLSM]" & cARQ
+      Case "A16XLSB"
+        GeraConn = "[A16XLSB]" & cARQ
+      Case "A16DBFIII"
+        GeraConn = "[A16DBFIII]" & cARQ
+      Case "A16PDX3"
+        GeraConn = "[A16PDX3]" & cARQ
+      Case "A16PDX4"
+        GeraConn = "[A16PDX4]" & cARQ
+      Case "A16PDX5"
+        GeraConn = "[A16PDX5]" & cARQ
+  End Select
+End If
 End Function
 
 Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = "", _
@@ -338,33 +350,39 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     Exit Function
   End If
 
-  If InStr(cARQTMP, "[A16MDB]") > 0 Then
-    cARQ = Replace(cARQ, "[A16MDB]", "")
+  If InStr(cARQTMP, "[A1") > 0 Then
+    cJETUSO = cJetA16
+    
+    If InStr(cARQTMP, "[A16") > 0 Then
+      cJETUSO = cJetA16
+      cARQ = Replace(cARQ, "[A16", "")
+    End If
+    If InStr(cARQTMP, "[A14") > 0 Then
+      cJETUSO = cJetA14
+      cARQ = Replace(cARQ, "[A14", "")
+    End If
+    If InStr(cARQTMP, "[A12") > 0 Then
+      cJETUSO = cJetA12
+      cARQ = Replace(cARQ, "[A12", "")
+    End If
+    cARQ = Replace(cARQ, "MDB]", "")
+    cARQ = Replace(cARQ, "ACCDB]", "")
+    cARQ = Replace(cARQ, "]", "")
+    
     If Len(cUSER) > 0 Then
-      cARQ = cJetA16 & cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
+      cARQ = cJETUSO & cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
     Else
-      cARQ = cJetA16 & cARQ                ''& ";Persist Security Info=False"
+      cARQ = cJETUSO & cARQ                ''& ";Persist Security Info=False"
     End If
     If Not lWRITE Then
       cARQ = cARQ & ";Mode=Share Deny Write"  '";Mode=Read"
     Else
       cARQ = cARQ & ";Mode=Share Deny None"  '";Mode=Read"
     End If
-    TipoConn = Array("ADO", cARQ, "MDB")
+    TipoConn = Array("ADO", cARQ, "ACEOLEDB")
     Exit Function
   End If
 
-  If InStr(cARQTMP, "[A12MDB]") > 0 Then
-    cARQ = Replace(cARQ, "[A12MDB]", "")
-    If Len(cUSER) > 0 Then
-      cARQ = cJetA12 & cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
-    Else
-      cARQ = cJetA12 & cARQ                ''& ";Persist Security Info=False"
-    End If
-    TipoConn = Array("ADO", cARQ, "MDB")
-    Exit Function
-  End If
-  
   If InStr(cARQTMP, "[MYSQL]") > 0 Then
     cARQ = Replace(cARQ, "[MYSQL]", "")
     TipoConn = Array("ADO", cARQ, "MYSQL")
@@ -429,9 +447,9 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     Exit Function
   End If
   'tratamentos JET
-  cJETUSO = cJetPro  ''usa padrao jet mas a12 a 16 tem especifico
-  'a12MDB a16MDB acima
-  'aqui a12 a16 pdx dbiii seta o jetuso
+  cJETUSO = cJetPro  ''usa padrao jet mas a12,A14 a 16 tem especifico
+  'a12 A14 a16 MDB accdb acima
+  'aqui a12 a14 a16 pdx dbiii seta o jetuso
   'retorno abaixo com o jet jeta12 ou jeTa16
   cXLSVER = "8.0"
   If InStr(cARQTMP, "[A12") > 0 Then
@@ -439,6 +457,12 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     cARQ = Replace(cARQ, "[A12", "[JET")
     cJETUSO = cJetA12
     cXLSVER = "12.0"
+  End If
+ If InStr(cARQTMP, "[A14") > 0 Then
+    cARQTMP = Replace(cARQTMP, "[A14", "[JET")
+    cARQ = Replace(cARQ, "[A14", "[JET")
+    cJETUSO = cJetA16
+    cXLSVER = "14.0"
   End If
   If InStr(cARQTMP, "[A16") > 0 Then
     cARQTMP = Replace(cARQTMP, "[A16", "[JET")

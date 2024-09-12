@@ -347,8 +347,10 @@ Private Sub Command1_Click()
 
 
   sPath = App.Path
-  sFILTER = "Access mdb" & vbNullChar & "*.mdb" & vbNullChar & "Sqlite" & vbNullChar & "*.sqlite"
-  sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
+  sFILTER = "Access mdb" & vbNullChar & "*.mdb" _
+            & vbNullChar & "Sqlite" & vbNullChar & "*.sqlite" _
+            & vbNullChar & "accdb" & vbNullChar & "*.accdb"
+  sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Escolha arquivos de imagens")
   If Len(sFILENAME) = 0 Then
     Text1.tEXT = ""
     cARQRTF = ""

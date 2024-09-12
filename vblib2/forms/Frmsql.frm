@@ -875,13 +875,13 @@ Private Sub CmdFiltro_Click()
   On Error GoTo errhandler
   Dim cFILTRO As String
 
-  cFILTRO = FixStr(filtro)
+  cFILTRO = FixStr(FILTRO)
   If aRELCFG(11) Then
     ePASS01 = ""
     FrmFiltro.Show vbModal, Me
-    filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
+    FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
     If lRETU And Len(aRELCFG(15)) > 0 Then
-      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
       sql.tEXT = aRELCFG(15)
     End If
   End If
@@ -906,7 +906,7 @@ End Sub
 
 Private Sub cmdimp_Click()
   cARQRTF = TxtArquivo.tEXT
-  If Extensao(TxtArquivo.tEXT, "TXT") Then
+  If IsExtensao(TxtArquivo.tEXT, "TXT") Then
       ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Escolher Porta(Destino)", "Editor Interno")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
@@ -921,7 +921,7 @@ Private Sub cmdimp_Click()
            FrmRTf.Show vbModal, Me
         End Select
   End If
- If Extensao(TxtArquivo.tEXT, "PDF") Then
+ If IsExtensao(TxtArquivo.tEXT, "PDF") Then
     ePASS01 = Array("Externo", "Interno")
     escOrdem.Show vbModal, Me
     eRETU01 = FixInt(eRETU01, 0)
@@ -932,7 +932,7 @@ Private Sub cmdimp_Click()
          FrmPreview.Show vbModal, Me
       End Select
   End If
-  If Extensao(TxtArquivo.tEXT, "RTF") Then
+  If IsExtensao(TxtArquivo.tEXT, "RTF") Then
      ePASS01 = Array("Editor Interno", "Preview Interno")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
@@ -943,7 +943,7 @@ Private Sub cmdimp_Click()
          CmdVisua_Click
       End Select
   End If
-  If Extensao(TxtArquivo.tEXT, "HTML") Then
+  If IsExtensao(TxtArquivo.tEXT, "HTML") Then
     CmdVisua_Click
   End If
 
@@ -970,14 +970,14 @@ Private Sub CmdVisua_Click()
   If Not FileExist(cARQRTF, True) Then
     Exit Sub
   End If
-  If Extensao(cARQRTF, "TXT") Then
+  If IsExtensao(cARQRTF, "TXT") Then
     ePASS03 = 1
     PrintPreview1.ShowPreview
   End If
-  If Extensao(cARQRTF, "PDF") Then
+  If IsExtensao(cARQRTF, "PDF") Then
     ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
   End If
-  If Extensao(cARQRTF, "HTML") Then
+  If IsExtensao(cARQRTF, "HTML") Then
     ePASS01 = Array("Navegador Externo", "Preview Interno", "Navegador Interno")
     escOrdem.Show vbModal, Me
     eRETU01 = FixInt(eRETU01, 0)
@@ -991,7 +991,7 @@ Private Sub CmdVisua_Click()
       FrmPreview.Show vbModal, Me
     End Select
   End If
-  If Extensao(cARQRTF, "RTF") Then
+  If IsExtensao(cARQRTF, "RTF") Then
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS02 = 3
     PrintPreview1.ShowPreview
@@ -1059,7 +1059,7 @@ Private Sub Form_Load()
   ''Configura Help
   Me.Caption = cFORMID
   HelpContextID = nFORMID
-  filtro = ""
+  FILTRO = ""
 
   Label1 = aRELCFG(6)
 
@@ -1071,7 +1071,7 @@ Private Sub Form_Load()
   If Not aDIREITOS(5) Then CmdVisua.Visible = False
   If Not aDIREITOS(7) Then CmdEmail.Visible = False
   If Not aRELCFG(11) Then CmdFiltro.Visible = False
-  If Not aRELCFG(11) Then filtro.Visible = False
+  If Not aRELCFG(11) Then FILTRO.Visible = False
   If Not aDIREITOS(4) Then CmdEditar.Visible = False
   If Not aDIREITOS(4) Then CmdShell.Visible = False
 
@@ -1087,15 +1087,15 @@ Private Sub Form_Load()
   aRELCFG(14) = FixStr(aRELCFG(14))
   If Len(aRELCFG(14)) > 0 Then
     cFILTRO = aRELCFG(14)
-    filtro = cFILTRO
+    FILTRO = cFILTRO
   Else
     If aRELCFG(11) Then
       CmdFiltro_Click
     End If
   End If
   If Len(aRELCFG(15)) > 0 Then
-    If Len(filtro) > 0 Then
-      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+    If Len(FILTRO) > 0 Then
+      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
     End If
     sql.tEXT = aRELCFG(15)
   End If

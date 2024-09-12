@@ -1065,7 +1065,7 @@ Private Sub CmdAbrirCom_Click(Index As Integer)
   eLOCALIZA = text(5)
   ePASS01 = ""
   If Index = 0 Then
-    ePASS01 = NomeEXT(FixStr(text(4).text))
+    ePASS01 = EXTENSAO(FixStr(text(4).text))
   End If
   EscRptExec.Show vbModal, Me
   If lRETU Then

@@ -654,11 +654,11 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-  If Extensao(TxtArquivo.tEXT, "TXT") Then
+  If IsExtensao(TxtArquivo.tEXT, "TXT") Then
     imptxt  'Aqui e direct print com1 lpt1 no pode ser usado preview aqui
     Exit Sub
   End If
-  If Extensao(TxtArquivo.tEXT, "PDF") Or Extensao(TxtArquivo.tEXT, "HTML") Or Extensao(TxtArquivo.tEXT, "RTF") Then
+  If IsExtensao(TxtArquivo.tEXT, "PDF") Or IsExtensao(TxtArquivo.tEXT, "HTML") Or IsExtensao(TxtArquivo.tEXT, "RTF") Then
     CmdVisua_Click
     Exit Sub
   End If
@@ -714,14 +714,14 @@ Private Sub CmdVisua_Click()
   If Not FileExist(cARQRTF, True) Then
     Exit Sub
   End If
-  If Extensao(cARQRTF, "TXT") Then
+  If IsExtensao(cARQRTF, "TXT") Then
     ePASS03 = 1
     PrintPreview1.ShowPreview
   End If
-  If Extensao(cARQRTF, "PDF") Then
+  If IsExtensao(cARQRTF, "PDF") Then
     ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
   End If
-  If Extensao(cARQRTF, "HTML") Then
+  If IsExtensao(cARQRTF, "HTML") Then
     'FrmPreview.Show vbModal, Me
     If MDG("Sim->Navegador Nao->Visualizador Interno") Then
       OpenUrl (cARQRTF)
@@ -730,7 +730,7 @@ Private Sub CmdVisua_Click()
       PrintPreview1.ShowPreview
     End If
   End If
-  If Extensao(cARQRTF, "RTF") Then
+  If IsExtensao(cARQRTF, "RTF") Then
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
@@ -803,13 +803,13 @@ Private Sub Form_Load()
   OptDestino(6).Value = True
   montaimp
 
-  If Extensao(cARQRTF, "TXT") Then
+  If IsExtensao(cARQRTF, "TXT") Then
     lARQTXT = True
   End If
-  If Extensao(cARQRTF, "MAN") Then
+  If IsExtensao(cARQRTF, "MAN") Then
     lARQTXT = True
   End If
-  If InStr(UCase(cARQRTF), ".LST") > 0 Then    ''.LST .LTS2 .LTS3...
+  If InStr(UCase(cARQRTF), ".LST") > 0 Then    ''.LST .LTS2 .LTS3... pode ser sequencial usando instr inves isextensao
     lARQTXT = True
   End If
 
