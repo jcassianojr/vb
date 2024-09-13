@@ -90,7 +90,7 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
   
     sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
     If FileExists(sTEMPFILE) Then 'arquivo temporario pode apagar
-       DeleteFile sTEMPFILE
+       DeleteFile sTEMPFILE, True
     End If
   
   cSQL = cTable
@@ -142,7 +142,7 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
                 eRETU01 = FileLen(sTEMPFILE)
                 ADOPegBlob = True
               End If
-             DeleteFile sTEMPFILE
+             DeleteFile sTEMPFILE, True
             End If
         End Select
     End If
@@ -495,7 +495,7 @@ Public Function salvarpict(oFORM As Form, ByVal Picture1 As Variant, _
   End If
   If FileExist(sFILENAME, False) Then
     If MDG("Arquivo de Destino Ja existe Sobrepor") Then
-      DeleteFile sFILENAME  'Kill sFILENAME
+      DeleteFile sFILENAME, True  'Kill sFILENAME
     Else
       Exit Function
     End If
