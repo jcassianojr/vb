@@ -356,11 +356,7 @@ Private Sub imprima_click()
   ''Verifica fechamento Mana5
   Mana5Fec
 
-  cEXTENSAO = "XXX"
-  nPOS = InStrRev(cARQRTF, ".")
-  If nPOS > 0 Then
-    cEXTENSAO = Mid(cARQRTF, nPOS + 1)
-  End If
+  cEXTENSAO = EXTENSAO(cARQRTF)
   If aRELCFG(1) = "" Or aRELCFG(1) = "_" Then  'Abrir Com Não Especificado
     Select Case cEXTENSAO
       'extensoes mais usadas na frente acelerar

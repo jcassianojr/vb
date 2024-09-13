@@ -2,8 +2,8 @@ VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form FrmLstView 
    Caption         =   "Visualizador de LST"
    ClientHeight    =   7560
@@ -940,6 +940,8 @@ Private Sub Grid_DblClick()
   cNOME = Trim(Grid)
   cCOMP = UCase(Trim(Grid))
   cARQRTF = Txtcaminho.tEXT & cNOME
+  
+  cEXTENSAO = EXTENSAO(cARQRTF)
   
   Select Case cEXTENSAO
          Case "ZIP"

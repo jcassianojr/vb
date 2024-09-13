@@ -549,14 +549,7 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  Dim cEXTENSAO As String
-  Dim nPOS As Long
-  cEXTENSAO = "XXX"
-  nPOS = InStrRev(TxtArquivo, ".")
-  If nPOS > 0 Then
-    cEXTENSAO = Mid(TxtArquivo, nPOS + 1)
-  End If
-  If cEXTENSAO = "RTF" Or cEXTENSAO = "TXT" Then
+  If IsExtensao(TxtArquivo.tEXT, "RTF") Or IsExtensao(TxtArquivo.tEXT, "TXT") Then
     cARQRTF = TxtArquivo
     FrmRTf.Show
   End If

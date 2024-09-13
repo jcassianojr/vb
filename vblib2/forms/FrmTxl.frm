@@ -600,7 +600,7 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.text
   If FileExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
@@ -611,18 +611,10 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  Dim cEXTENSAO As String
-  Dim nPOS As Long
-  cEXTENSAO = "XXX"
-  nPOS = InStrRev(TxtArquivo, ".")
-  If nPOS > 0 Then
-    cEXTENSAO = Mid(TxtArquivo, nPOS + 1)
-  End If
-  If cEXTENSAO = "RTF" Or lARQTXT Then
-    cARQRTF = TxtArquivo
+  If IsExtensao(TxtArquivo.text, "RTF") Or IsExtensao(TxtArquivo.text, "TXT") Then
+    cARQRTF = TxtArquivo.text
     FrmRTf.Show vbModal, Me
   End If
-
 End Sub
 
 Private Sub CmdFiltro_Click()
@@ -654,11 +646,11 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-  If IsExtensao(TxtArquivo.tEXT, "TXT") Then
+  If IsExtensao(TxtArquivo.text, "TXT") Then
     imptxt  'Aqui e direct print com1 lpt1 no pode ser usado preview aqui
     Exit Sub
   End If
-  If IsExtensao(TxtArquivo.tEXT, "PDF") Or IsExtensao(TxtArquivo.tEXT, "HTML") Or IsExtensao(TxtArquivo.tEXT, "RTF") Then
+  If IsExtensao(TxtArquivo.text, "PDF") Or IsExtensao(TxtArquivo.text, "HTML") Or IsExtensao(TxtArquivo.text, "RTF") Then
     CmdVisua_Click
     Exit Sub
   End If
@@ -710,7 +702,7 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.text
   If Not FileExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -734,7 +726,7 @@ Private Sub CmdVisua_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.tEXT = ""
+    RichTextBox1.text = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -1002,7 +994,7 @@ Private Sub Salvar_Click(Index As Integer)
     End Select
 
     sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
+    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.text, App.Path, "Salvar " & cEXTENSAO & " Como")
 
     If InStr(cARQUIVO, ".") > 0 Then
       cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO

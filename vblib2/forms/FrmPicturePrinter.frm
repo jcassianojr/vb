@@ -287,16 +287,11 @@ Private Sub Encerrar_Click()
 End Sub
 
 Private Sub Form_Load()
-Dim nPOS As Integer
 
     For Each Pr In Printers
         lstPrinters.AddItem Pr.DeviceName
     Next
-  cEXTENSAO = "XXX"
-  nPOS = InStrRev(cARQRTF, ".")
-  If nPOS > 0 Then
-    cEXTENSAO = Mid(cARQRTF, nPOS + 1)
-  End If
+  cEXTENSAO = EXTENSAO(cARQRTF)
     
   'Just load up a sample image.  Could just as easily be
   'from a WIA scan or something else.

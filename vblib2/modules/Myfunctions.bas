@@ -216,9 +216,9 @@ End Function
 
 Public Function ComboLostFocus(ByRef Combo1)
   With Combo1
-    If Len(.tEXT) Then
+    If Len(.text) Then
       'Procura pelo texto digitado
-      strPartial = .tEXT
+      strPartial = .text
       i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
@@ -229,7 +229,7 @@ End Function
 Public Function ComboChange(ByRef Combo1)
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .tEXT
+    strPartial = .text
     i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
@@ -566,34 +566,6 @@ Public Function Caminex(ByVal cARQ As String, Optional ByVal nANO As Integer = 0
   Caminex = cARQ
 End Function
 
-Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal DestinationFile As String, Optional ByVal lAPAGA As Boolean = False) As Long
-  Dim lngReturn As Long
-  Dim typFileOperation As SHFILEOPSTRUCT
-  If FileExist(DestinationFile, False) Then
-      If lAPAGA Then
-          DeleteFile DestinationFile  'Kill DestinationFile
-      End If
-      Exit Function
-  End If
-  With typFileOperation
-    .hWnd = 0
-    .wFunc = FO_COPY
-    .pFrom = SourceFile & vbNullChar & vbNullChar  'source file
-    .pTo = DestinationFile & vbNullChar & vbNullChar  'destination file
-    .fFlags = FOF_ALLOWUNDO
-  End With
-  lngReturn = SHFileOperation(typFileOperation)
-
-  CopyFileWindowsWay = lngReturn
-
-  If lngReturn <> 0 Then                       'Operation failed
-    SayErro "Copiando " & SourceFile & " " & DestinationFile
-  Else                                         'Aborted
-    If typFileOperation.fAnyOperationsAborted = True Then
-      SayErro "Copiando " & SourceFile & " " & DestinationFile
-    End If
-  End If
-End Function
 
 Public Function Dividir(ByVal nVAL As Variant, ByVal nDIV As Variant)
   Dividir = 0
@@ -674,8 +646,8 @@ Public Function FileExist(ByVal cARQ As Variant, _
 
   If InStr(cARQUIVO, "[") > 0 Then
      
-    If InStr(cARQUIVO, "[JETMDB]") > 0 Or InStr(cARQUIVO, "[SQLITE]") Or InStr(cARQUIVO, "[A1") > 0 Then
-      cARQUIVO = Replace(cARQUIVO, "[JETMDB]", "")
+    If InStr(cARQUIVO, "[JET") > 0 Or InStr(cARQUIVO, "[SQLITE]") Or InStr(cARQUIVO, "[A1") > 0 Then
+      cARQUIVO = Replace(cARQUIVO, "[JET", "")
       cARQUIVO = Replace(cARQUIVO, "[SQLITE]", "")
       cARQUIVO = Replace(cARQUIVO, "[A16", "")
       cARQUIVO = Replace(cARQUIVO, "[A14", "")
@@ -1942,7 +1914,7 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.text))
   End If
 End Sub
 
@@ -2367,51 +2339,7 @@ Function FastArraySearch(SearchArray As Variant, SearchPhrase As String) As Long
   End If
 End Function
 
-Function GetDriveUNC(DriveString As String) As String
-'GetDriveUNC by Gavin Bollard 2000
-'---------------------------------
-'This function is designed to be used when you want
-'your program to be network aware and be able to use
-'either the drive letter reference or the UNC Name.
-'For example when creating a CD that needs to
-'reference it's own drive letter, you might use this
-'code to anticipate it being shared on a Network CD
-'Tower or Drive.
-'
-'Example Usage:  sDriveLetter = GetDriveUNC(App.Path)
-'
-'Reads a String and Returns either...
-'1. Drive Letter,Colon, backslash
-'2. UNC Name ending in Backslash
-'3. Empty String (if not a drive letter or UNC Name)
 
-  Dim DriveText As String
-
-  DriveString = Trim$(DriveString)
-  If Mid$(DriveString, 2, 1) = ":" Then
-    DriveText = Left$(DriveString, 2) + "\"
-  Else
-    If Left$(DriveString, 2) = "\\" Then
-      ThirdSlashPos = InStr(3, DriveString, "\", _
-                            vbTextCompare)
-      FourthSlashPos = InStr(ThirdSlashPos + 1, _
-                             DriveString, "\", vbTextCompare)
-      If FourthSlashPos > 5 Then
-        DriveText = Left$(DriveString, FourthSlashPos)
-      Else
-        If (FourthSlashPos = 0) And (ThirdSlashPos > 3) _
-           Then
-          DriveText = DriveString + "\"
-        Else
-          DriveText = ""
-        End If
-      End If
-    Else
-      DriveText = ""
-    End If
-  End If
-  GetDriveUNC = DriveText
-End Function
 
 Public Function NetworkUserName() As String
   Dim iStringLength As Long
@@ -2436,12 +2364,12 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef tEXT As String) As Long
+Public Function WordLen(ByRef text As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
+  Bytes = StrConv(UCase$(text), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next
@@ -2488,18 +2416,7 @@ Public Function SameWords(ByRef Text1 As String, ByRef Text2 As String) As Boole
   SameWords = LetterCountsS1 = LetterCountsS2
 End Function
 
-Public Function FolderExists(sDir As String) As Boolean
-  Dim S As String
-  S = sDir
-  If Right$(S, 1) = "\" Then S = Left$(S, Len(S) - 1)
-  On Error GoTo FileExistsError
-  ' If no error then something existed.
-  bFolderExists = ((GetAttr(S) And vbDirectory) = vbDirectory)
-  Exit Function
-FileExistsError:
-  bFolderExists = False
-  Exit Function
-End Function
+
 
 Public Function TimedMsgBox(Prompt As String, Optional ByVal TimeOut As Long = 0, Optional Icon As VbMsgBoxStyle = vbOKOnly, Optional Title As String = vbNullString)
 

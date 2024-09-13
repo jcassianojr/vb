@@ -67,6 +67,7 @@ Public Const OFN_SHARENOWARN As Long = 1
 Public Const OFN_SHOWHELP As Long = &H10
 Public Const OFS_MAXPATHNAME As Long = 260
 
+
 Public Const OFS_FILE_OPEN_FLAGS = OFN_EXPLORER _
        Or OFN_LONGNAMES _
        Or OFN_CREATEPROMPT _
@@ -118,6 +119,9 @@ Private Type SHFILEOPSTRUCT
   fAborted As Boolean
   hNameMaps As Long
   sProgress As String
+  fAnyOperationsAborted As Boolean
+  hNameMappings As Long
+  lpszProgressTitle As String
 End Type
 
 Public OFN As OPENFILENAME
@@ -156,52 +160,47 @@ Public Function IsExtensao(ByVal cARQ As String, cEXT As String) As Boolean
    End If
 End Function
 Public Function TrocaExt(ByVal cARQ As Variant, ByVal cEXT As String) As String
-  'Dim nPOS As Integer
-  'TrocaExt = FixStr(cARQ)
-  'nPOS = InStrRev(cARQ, ".")
-  'If nPOS > 0 Then
-  '  TrocaExt = Mid(cARQ, 1, nPOS) & cEXT
-  'End If
-  TrocaExt = parsefile(cARQ, "C") & cEXT
+  TrocaExt = parsefile(cARQ, "C") & "." & cEXT
 End Function
 
 Public Function EXTENSAO(ByVal eARQ As String) As String
-  'Dim nPOS As Integer
-  'NomeEXT = ""
-  'nPOS = InStrRev(eARQ, ".")
-  'If nPOS > 0 Then
-  '  NomeEXT = Mid(eARQ, nPOS + 1)
-  'End If
   EXTENSAO = parsefile(eARQ, "E")
 End Function
-
-
 Public Function NomeArq(ByVal eARQ As Variant, Optional ByVal lTIRAEXT As Boolean = False) As String
-  'Dim nPOS As Integer
-
-  'eARQ = FixStr(eARQ)
-  'NomeArq = ""
-  'If eARQ <> "" Then
-  '  While InStr(eARQ, "\") > 0
-  '    nPOS = InStr(eARQ, "\") + 1
-  '    eARQ = Mid(eARQ, nPOS, Len(eARQ))
-  '  Wend
-  '  If lTIRAEXT Then
-  '    nPOS = InStr(eARQ, ".")
-  '    If nPOS > 0 Then
-  '      eARQ = Mid(eARQ, 1, nPOS - 1)
-  '    End If
-  '  End If
-  '  NomeArq = eARQ
-  'End If
   If lTIRAEXT Then
      NomeArq = parsefile(eARQ, "N")
   Else
      NomeArq = parsefile(eARQ, "A")
   End If
 End Function
+Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal DestinationFile As String, Optional ByVal lAPAGA As Boolean = False) As Long
+  Dim lngReturn As Long
+  Dim typFileOperation As SHFILEOPSTRUCT
+  If FileExist(DestinationFile, False) Then
+      If lAPAGA Then
+          DeleteFile DestinationFile  'Kill DestinationFile
+      End If
+      Exit Function
+  End If
+  With typFileOperation
+    .hWnd = 0
+    .wFunc = FO_COPY
+    .pFrom = SourceFile & vbNullChar & vbNullChar  'source file
+    .pTo = DestinationFile & vbNullChar & vbNullChar  'destination file
+    .fFlags = FOF_ALLOWUNDO
+  End With
+  lngReturn = SHFileOperation(typFileOperation)
 
+  CopyFileWindowsWay = lngReturn
 
+  If lngReturn <> 0 Then                       'Operation failed
+    SayErro "Copiando " & SourceFile & " " & DestinationFile
+  Else                                         'Aborted
+    If typFileOperation.fAnyOperationsAborted = True Then
+      SayErro "Copiando " & SourceFile & " " & DestinationFile
+    End If
+  End If
+End Function
 
 Public Sub CreateNewDirectory(ByVal NewDirectory As String)
   Dim sDirTest As String
@@ -446,7 +445,53 @@ Function FixPath(ByVal cARQ As String) As String
     FixPath = cARQ + "\"
   End If
 End Function
+Function GetDriveUNC(DriveString As String) As String
+'GetDriveUNC by Gavin Bollard 2000
+'---------------------------------
+'This function is designed to be used when you want
+'your program to be network aware and be able to use
+'either the drive letter reference or the UNC Name.
+'For example when creating a CD that needs to
+'reference it's own drive letter, you might use this
+'code to anticipate it being shared on a Network CD
+'Tower or Drive.
+'
+'Example Usage:  sDriveLetter = GetDriveUNC(App.Path)
+'
+'Reads a String and Returns either...
+'1. Drive Letter,Colon, backslash
+'2. UNC Name ending in Backslash
+'3. Empty String (if not a drive letter or UNC Name)
 
+  Dim DriveText As String
+  Dim ThirdSlashPos As Integer
+  Dim FourthSlashPos As Integer
+
+  DriveString = Trim$(DriveString)
+  If Mid$(DriveString, 2, 1) = ":" Then
+    DriveText = Left$(DriveString, 2) + "\"
+  Else
+    If Left$(DriveString, 2) = "\\" Then
+      ThirdSlashPos = InStr(3, DriveString, "\", _
+                            vbTextCompare)
+      FourthSlashPos = InStr(ThirdSlashPos + 1, _
+                             DriveString, "\", vbTextCompare)
+      If FourthSlashPos > 5 Then
+        DriveText = Left$(DriveString, FourthSlashPos)
+      Else
+        If (FourthSlashPos = 0) And (ThirdSlashPos > 3) _
+           Then
+          DriveText = DriveString + "\"
+        Else
+          DriveText = ""
+        End If
+      End If
+    Else
+      DriveText = ""
+    End If
+  End If
+  GetDriveUNC = DriveText
+End Function
 Public Function ShortSpec(ByVal sFileSpec As String) As String
 ' This works with drive assignments or UNC paths.
 ' If it fails, an empty string is returned.
@@ -475,7 +520,18 @@ Public Function ShortSpec(ByVal sFileSpec As String) As String
     End If
   End If
 End Function
-
+Public Function FolderExists(sDir As String) As Boolean
+  Dim S As String
+  S = sDir
+  If Right$(S, 1) = "\" Then S = Left$(S, Len(S) - 1)
+  On Error GoTo FileExistsError
+  ' If no error then something existed.
+  FolderExists = ((GetAttr(S) And vbDirectory) = vbDirectory)
+  Exit Function
+FileExistsError:
+  FolderExists = False
+  Exit Function
+End Function
 Public Function OpenStreamFile(FileName$, Mode%, RLock%, RecordLen%) As Integer
   Const REPLACEFILE = 1, READAFILE = 2, ADDTOFILE = 3
   Const RANDOMFILE = 4, BINARYFILE = 5

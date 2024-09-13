@@ -1059,17 +1059,15 @@ Attribute nCAMPOS.VB_VarUserMemId = 1073938438
 Option Explicit
 
 Private Sub CmdAbrirCom_Click(Index As Integer)
-'Dim cEXTENSAO As String
-'Dim nPOS As Long
 
-  eLOCALIZA = text(5)
+  eLOCALIZA = tEXT(5).tEXT
   ePASS01 = ""
   If Index = 0 Then
-    ePASS01 = EXTENSAO(FixStr(text(4).text))
+    ePASS01 = EXTENSAO(FixStr(tEXT(4).tEXT))
   End If
   EscRptExec.Show vbModal, Me
   If lRETU Then
-    text(5).text = eRETU02
+    tEXT(5).tEXT = eRETU02
   End If
 
 End Sub
@@ -1079,26 +1077,19 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub CmdEDIT_Click(Index As Integer)
-  Dim cEXTENSAO As String
-  Dim nPOS As Long
-  eLOCALIZA = text(5)
+Dim cEXTENSAO As String
+  eLOCALIZA = tEXT(5).tEXT
   If Index = 0 Then
-    cARQRTF = text(4)
-    nPOS = InStrRev(cARQRTF, ".")
-    If nPOS > 0 Then
-      cEXTENSAO = Mid(cARQRTF, nPOS + 1)
-    End If
-    If Len(cEXTENSAO) > 0 Then
-      Select Case cEXTENSAO
+    cARQRTF = tEXT(4).tEXT
+    cEXTENSAO = EXTENSAO(cARQRTF)
+    Select Case cEXTENSAO
       Case "RPT"
         If Index = 0 Then
           ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
         Else
           ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
         End If
-
-      End Select
-    End If
+    End Select
   End If
 End Sub
 
@@ -1107,22 +1098,22 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub Command2_Click()
-  text(5).text = ""
+  tEXT(5).tEXT = ""
 End Sub
 
 Private Sub escarq_Click(Index As Integer)
   Index = Index + 18
-  ePASS01 = text(Index)
+  ePASS01 = tEXT(Index)
   FrmPegdb.Show vbModal, Me
   If lRETU Then
-    text(Index) = eRETU01
+    tEXT(Index) = eRETU01
   End If
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   If MDG("Gravar e Sair", "Gravando ") Then
     For nITEM = 0 To 23
-      aVAL(nITEM) = text(nITEM)
+      aVAL(nITEM) = tEXT(nITEM)
     Next nITEM
     For nITEM = 24 To 26
       aVAL(nITEM) = FixNumBol(chkFields(nITEM).Value)
@@ -1179,7 +1170,7 @@ Private Sub escolherrpt_Click()
       sPath = Caminex(zRPTCAM)
     End If
   End If
-  text(4).text = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
+  tEXT(4).tEXT = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
 
 End Sub
 
@@ -1223,7 +1214,7 @@ Private Sub Form_Load()
                "", "", "", "", False, False, False)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 23
-    text(nITEM) = aVAL(nITEM)
+    tEXT(nITEM) = aVAL(nITEM)
   Next nITEM
   For nITEM = 24 To 26
     chkFields(nITEM) = aVAL(nITEM)

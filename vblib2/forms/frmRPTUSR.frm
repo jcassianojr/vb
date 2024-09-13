@@ -322,10 +322,7 @@ Dim x As Integer
 Attribute x.VB_VarUserMemId = 1073938440
 
 Private Sub CmdAbrirCom_Click(Index As Integer)
-'Dim cEXTENSAO As String
-'Dim nPOS As Long
-
-  eLOCALIZA = txtFields(5)
+  eLOCALIZA = txtFields(5).text
   ePASS01 = ""
   If Index = 0 Then
     ePASS01 = EXTENSAO(cARQUIVO)

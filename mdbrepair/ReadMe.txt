@@ -1,1 +1,0 @@
-Please go to http://www.getfilez.com/vb-source.htm to download more FREE VB Source Code
