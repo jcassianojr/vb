@@ -61,11 +61,11 @@ Attribute VB_Name = "AdoLib"
 
 Option Explicit
 Public Const cJetPro = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
+
+'There is no provider named 'Microsoft.ACE.OLEDB.14.0' even though it's Access 2010 (aka version number 14) the provider that should be used still is named with version number 12.
+'So change from 'Microsoft.ACE.OLEDB.14.0' to 'Microsoft.ACE.OLEDB.12.0' and it will probably work better!
+
 Public Const cJetA12 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source="
-Public Const cJetA13 = "Provider=Microsoft.ACE.OLEDB.13.0;Data Source="
-Public Const cJetA14 = "Provider=Microsoft.ACE.OLEDB.14.0;Data Source="
-Public Const cJetA15 = "Provider=Microsoft.ACE.OLEDB.15.0;Data Source="
-Public Const cJetA16 = "Provider=Microsoft.ACE.OLEDB.16.0;Data Source="
 Public Const cJetADV = "Provider=Advantage.OLEDB.1;Data Source="
 Public Const cJetExt = ";Extended Properties="
 Public Const JET_ENGINETYPE_UNKNOWN = 0
@@ -144,8 +144,8 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
 
-  If cTIPO = "A15MDB" Or cTIPO = "A15ACCDB" Or InStr(LCase(cARQ), ".accdb") > 0 Then
-    GeraConn = "[A15]" & cARQ
+  If InStr(LCase(cARQ), ".accdb") > 0 Then
+    GeraConn = "[ACCDB]" & cARQ
     Exit Function
   End If
   
@@ -156,11 +156,11 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
   
-  If Mid(cTIPO, 1, 2) = "A1" Then 'A12MDB A12ACCDB A12DBFIII PX3 PX4 PX5 XLS XLXS XLXB, CSV... _
+  If Mid(cTIPO, 1, 5) = "ACCDB" Then ' ACCDBDBFIII  ACCDBMDB PX3 PX4 PX5 XLS XLXS XLXB, CSV... _
                                    cada versao jet suporta extensoes em outros formatos de arquivos _
                                    posicao 2,3 versao 12,13,14,115 _
                                    posicao 4 MDB ACCDB formato extensao
-     GeraConn = "[A1" & Mid(cTIPO, 2, 2) & Mid(cTIPO, 4) & "]"
+     GeraConn = "[ACCDB" & Mid(cTIPO, 6) & "]"
      Exit Function
   End If
  
@@ -324,26 +324,10 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     Exit Function
   End If
 
-  If InStr(cARQTMP, "[A1") > 0 Then
-    cJETUSO = cJetA16
-    If InStr(cARQTMP, "[A16") > 0 Then
-      cJETUSO = cJetA16
-      cARQ = Replace(cARQ, "[A16", "")
-    End If
-    If InStr(cARQTMP, "[A15") > 0 Then
-      cJETUSO = cJetA15
-      cARQ = Replace(cARQ, "[A15", "")
-    End If
-    If InStr(cARQTMP, "[A14") > 0 Then
-      cJETUSO = cJetA14
-      cARQ = Replace(cARQ, "[A14", "")
-    End If
-    If InStr(cARQTMP, "[A12") > 0 Then
-      cJETUSO = cJetA12
-      cARQ = Replace(cARQ, "[A12", "")
-    End If
+  If InStr(cARQTMP, "[ACCDB") > 0 Then
+    cJETUSO = cJetA12
+    cARQ = Replace(cARQ, "[ACCDB", "")
     cARQ = Replace(cARQ, "MDB]", "")
-    cARQ = Replace(cARQ, "ACCDB]", "")
     cARQ = Replace(cARQ, "]", "")
     If Len(cUSER) > 0 Then
       cARQ = cJETUSO & cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
@@ -423,29 +407,25 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     Exit Function
   End If
   'tratamentos JET
-  cJETUSO = cJetPro  ''usa padrao jet mas a12,A15,A14 a 16 tem especifico
-  'a12 A14 A15 a16 MDB accdb acima
-  'aqui a12 a14 A15 a16 pdx dbiii seta o jetuso
-  'retorno abaixo com o jet jeta12 ou jeTa16
+  cJETUSO = cJetPro
   cXLSVER = "8.0"
-  If InStr(cARQTMP, "[A1") > 0 Then
-    cARQTMP = Replace(cARQTMP, "[A12", "[JET")
-    cARQ = Replace(cARQ, "[A12", "[JET")
+  If InStr(cARQTMP, "12") > 0 Then
     cJETUSO = cJetA12
     cXLSVER = "12.0"
   End If
- If InStr(cARQTMP, "[A14") > 0 Then
-    cARQTMP = Replace(cARQTMP, "[A14", "[JET")
-    cARQ = Replace(cARQ, "[A14", "[JET")
-    cJETUSO = cJetA14
+  If InStr(cARQTMP, "14") > 0 Then
+    cJETUSO = cJetA12
     cXLSVER = "14.0"
   End If
-  If InStr(cARQTMP, "[A16") > 0 Then
-    cARQTMP = Replace(cARQTMP, "[A16", "[JET")
-    cARQ = Replace(cARQ, "[A16", "[JET")
-    cJETUSO = cJetA16
+  If InStr(cARQTMP, "15") > 0 Then
+    cJETUSO = cJetA12
+    cXLSVER = "15.0"
+  End If
+  If InStr(cARQTMP, "16") > 0 Then
+    cJETUSO = cJetA12
     cXLSVER = "16.0"
   End If
+  
   If InStr(cARQTMP, "[XLS]") > 0 Then
     cARQ = Replace(cARQ, "[XLS]", "")
     cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "Excel " + cXLSVER + ";HDR=Yes" & Chr(34) & ";"

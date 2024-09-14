@@ -646,15 +646,11 @@ Public Function FileExist(ByVal cARQ As Variant, _
 
   If InStr(cARQUIVO, "[") > 0 Then
      
-    If InStr(cARQUIVO, "[JET") > 0 Or InStr(cARQUIVO, "[SQLITE]") Or InStr(cARQUIVO, "[A1") > 0 Then
+    If InStr(cARQUIVO, "[JET") > 0 Or InStr(cARQUIVO, "[SQLITE]") Or InStr(cARQUIVO, "[ACCDB") > 0 Then
       cARQUIVO = Replace(cARQUIVO, "[JET", "")
       cARQUIVO = Replace(cARQUIVO, "[SQLITE]", "")
-      cARQUIVO = Replace(cARQUIVO, "[A16", "")
-      cARQUIVO = Replace(cARQUIVO, "[A15", "")
-      cARQUIVO = Replace(cARQUIVO, "[A14", "")
-      cARQUIVO = Replace(cARQUIVO, "[A12", "")
+      cARQUIVO = Replace(cARQUIVO, "[ACCDB", "")
       cARQUIVO = Replace(cARQUIVO, "MDB]", "")
-      cARQUIVO = Replace(cARQUIVO, "ACCDB]", "")
       cARQUIVO = Replace(cARQUIVO, "]", "")
     Else
       If InStr(cARQUIVO, "[JETFOX]") > 0 Or InStr(cARQUIVO, "[ADS") > 0 Then
