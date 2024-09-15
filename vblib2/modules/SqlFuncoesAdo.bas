@@ -29,7 +29,7 @@ Public Function VFPSetValues(ByRef oCON As Object) As Boolean  ''as ADODB.Connec
   VFPSetValues = True
 
 End Function
-Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVal CCOMANDO As String) As Boolean
+Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTable As String, ByVal CCOMANDO As String) As Boolean
   Dim cCOM As String
   Dim oCON As ADODB.Connection
   Dim oCOMANDO As ADODB.Command
@@ -40,8 +40,8 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVa
   'insert into mail (numero,erro,data,hora,de,destino,assunto,texto) values (recno(),"erro",ctod(date()),"12:00","de","destino","assunto","texto")
 
   'Passado "" pega o da string
-  If Len(cTABLE) = 0 Then
-    cTABLE = NomeTableSql(CCOMANDO)
+  If Len(cTable) = 0 Then
+    cTable = NomeTableSql(CCOMANDO)
   End If
   'atribui os valores iniciais
   AdoComandodbf = False
@@ -73,8 +73,8 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVa
   oCOMANDO.Execute
 
   'abre a tabela
-  If Len(cTABLE) > 0 Then
-    cCOM = "use " & cTABLE
+  If Len(cTable) > 0 Then
+    cCOM = "use " & cTable
     oCOMANDO.CommandText = cCOM
     oCOMANDO.ActiveConnection = oCON
     oCOMANDO.Execute
@@ -82,7 +82,7 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTABLE As String, ByVa
 
   'executa o comando
   If CCOMANDO = "ZAP" Then
-    cCOM = "DELETE FROM " & cTABLE & " WHERE 1=1"
+    cCOM = "DELETE FROM " & cTable & " WHERE 1=1"
     oCOMANDO.CommandText = cCOM
     oCOMANDO.Execute
   End If
@@ -105,7 +105,7 @@ trataerro:
   On Error Resume Next
   Select Case Err.Number
   Case Else
-    SayErro "ADO Comando DBF:" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTABLE & Chr(13) & Chr(10) & cCOM & Chr(13) & Chr(10)
+    SayErro "ADO Comando DBF:" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTable & Chr(13) & Chr(10) & cCOM & Chr(13) & Chr(10)
     Exit Function
   End Select
 End Function
@@ -219,10 +219,11 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim x, nCAMPOS As Integer
-  Dim aRETU, aOPE, eVAL As Variant
+  Dim aRETU, aARQ, aOPE, eVAL As Variant
   Dim cERRO As String
   Dim oCOMANDO As ADODB.Command
   Dim cCOM As String
+  Dim cARQCON As String
 
   On Error GoTo errhandler
 
@@ -239,13 +240,13 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     Exit Function
   End If
 
-
-  cARQ = GeracArq(cARQ, , False)
+  aARQ = TipoConn(cARQ, , , False)
+  cARQCON = aARQ(1) 'GeracArq(cARQ, , False)
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open cARQ
+  oDB.Open cARQCON
   lOPEN = True
 
   'na string de conecao delete =yes
@@ -255,7 +256,11 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
 
 
   Set oRS = New ADODB.Recordset
-  oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+  If aARQ(2) = "SQLITE" Then
+     oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
+  Else
+     oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+  End If
   lRSOP = True
 
 
@@ -304,12 +309,13 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
   Dim oDB As ADODB.Connection
   Dim oRS As ADODB.Recordset
   Dim x, nCAMPOS As Integer
-  Dim aRETU, aOPE, eVAL As Variant
+  Dim aRETU, aARQ, aOPE, eVAL As Variant
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
   Dim oCOMANDO As ADODB.Command
   Dim cCOM As String
+  Dim cARQCON As String
 
   On Error GoTo errhandler
 
@@ -326,13 +332,14 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
     Exit Function
   End If
 
-
-  cARQ = GeracArq(cARQ, , False)
+  aARQ = TipoConn(cARQ, , , False)
+  'ARQ = GeracArq(cARQ, , False)
+  cARQCON = aARQ(1)
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open cARQ
+  oDB.Open cARQCON
 
   'na string de conecao delete =yes
   If InStr(cARQ, "VFPOLEDB") > 0 Then  ''delete on para foxpro nao usar registro deletados
@@ -409,12 +416,14 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim eVAZIO As Variant
   Dim cTIPO As String
   Dim aRETU As Variant
+  Dim aARQ As Variant
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
   Dim oFIELD As ADODB.Field
   Dim oCOMANDO As ADODB.Command
   Dim cCOM As String
+  Dim cARQCON As String
 
   On Error GoTo errhandler
   lOPEN = False
@@ -422,12 +431,13 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   GrvSQLado = False
   cTabela = NomeTableSql(cSQL)
 
-  aRETU = TipoConn(cARQ)
+  aARQ = TipoConn(cARQ)
+  cARQCON = aARQ(1)
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open cARQ
+  oDB.Open cARQCON
 
   If InStr(cARQ, "VFPOLEDB") Then
     VFPSetValues oDB
@@ -435,7 +445,9 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
 
   lOPEN = True
   Set oRS = New ADODB.Recordset
-  oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic  'adOpenStatic
+  If aARQ(2) = "SQLITE" Then
+  End If
+  oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic
 
   lRSOP = True
 
@@ -485,15 +497,15 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
       End If
       
         'nao grava com mascara yyyy-mm-dd erro no update
-       'If cTIPO = "D" And aRETU(2) = "SQLITE" Then
+       'If cTIPO = "D" And aARQ(2) = "SQLITE" Then
        '  aFOR(x) = "D-"
        'End If
       
       ''Evitar Gravar String Vazias Campos DAta
       If cTIPO = "D" Then
         If DataBranco(eVAL) Then
-          If aRETU(2) = "MDB" Or aRETU(2) = "MYSQL" Then
-            eVAL = NullDate(aRETU(2))
+          If aARQ(2) = "MDB" Or aARQ(2) = "MYSQL" Then
+            eVAL = NullDate(aARQ(2))
             lGRAVA = True
             aFOR(x) = ""
           Else
@@ -508,7 +520,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
       
       ''Efetua a Gravaçao
       If lGRAVA Then
-         If aFOR(x) = "DH" And aRETU(2) = "SQLITE" Then
+         If aFOR(x) = "DH" And aARQ(2) = "SQLITE" Then
             oRS(aCAM(x)) = Now
          Else
             oRS(aCAM(x)) = FVar(eVAL, aFOR(x), eVAZIO)
@@ -516,7 +528,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         'oFIELD = FVar(eVAL, aFOR(X), eVAZIO)
       End If
     Next x
-    Select Case aRETU(2) ' alguns nao aceitam update
+    Select Case aARQ(2) ' alguns nao aceitam update
            Case "SQLSERVER", "MDB", "MYSQL", "SQLITE"
                oRS.Update
            Case Else
@@ -604,17 +616,12 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
   'Set null off permitido deixar campos em branco set deleted on ja esta na string de conecao
   If InStr(cARQ1, "VFPOLEDB") Then
     VFPSetValues oDB
-    'vfpsetvalues odb 'testar funcao para nao precisar das linhas abaixo
-    'Set oCOMANDO = New ADODB.Command
-    'oCOMANDO.ActiveConnection = oDB
-    'oCOMANDO.CommandType = adCmdText
-    'cCOM = "Set null off"
-    'oCOMANDO.CommandText = cCOM
-    'oCOMANDO.Execute
   End If
 
   Set oRS = New ADODB.Recordset
-  oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic  'adOpenStatic
+  If aRETU(1) = "SQLITE" Then
+  End If
+  oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic
 
   lRSOP = True
 
@@ -944,30 +951,20 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
   oDBDES.ConnectionTimeout = 120
   oDBDES.Open cARQDES1
 
-  'If InStr(cARQORI1, "VFPOLEDB") Then
-  '   VFPSetValues oDB
-  'End If
 
   'Set null off permitido deixar campos em branco set deleted on ja esta na string de conecao
   If InStr(cARQDES1, "VFPOLEDB") Then
     VFPSetValues oDBDES
-    'vfpsetvalues odbdes 'testar funcao para na precisar das linhas abaixo
-    '  Set OCOMANDO2 = New ADODB.Command
-    '  OCOMANDO2.ActiveConnection = oDBDES
-    '  OCOMANDO2.CommandType = adCmdText
-    '  cCOM = "Set null off"
-    '  OCOMANDO2.CommandText = cCOM
-    '  OCOMANDO2.Execute
   End If
 
   lOPEN = True
 
   Set oRS = New ADODB.Recordset
-  oRS.Open cSQLORI, oDB, adOpenKeyset, adLockOptimistic  'adOpenStatic
+  oRS.Open cSQLORI, oDB, adOpenKeyset, adLockOptimistic
 
 
   Set oRSDES = New ADODB.Recordset
-  oRSDES.Open cSQLDES, oDBDES, adOpenKeyset, adLockOptimistic  'adOpenStatic
+  oRSDES.Open cSQLDES, oDBDES, adOpenKeyset, adLockOptimistic
 
   lRSOP = True
 

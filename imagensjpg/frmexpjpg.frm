@@ -210,11 +210,11 @@ Option Explicit
 Dim cCAMJPG As String
 
 Private Sub cmdBrowseFolder_Click()
-  Dim picbrowse As String
-  picbrowse = BrowseFolders(Me.hWnd, "Choose a location picture", BrowseForFolders, CSIDL_DESKTOP)
-  If picbrowse <> "" Then
-    Caminho.Caption = picbrowse & "\"
-    cCAMJPG = picbrowse & "\"
+  Dim PICBROWSE As String
+  PICBROWSE = BrowseFolders(Me.hWnd, "Choose a location picture", BrowseForFolders, CSIDL_DESKTOP)
+  If PICBROWSE <> "" Then
+    Caminho.Caption = PICBROWSE & "\"
+    cCAMJPG = PICBROWSE & "\"
   End If
 End Sub
 
@@ -297,36 +297,40 @@ Private Sub Cmdiniciar_Click()
   Dim abBytes() As Byte
   Dim sTEMPFILE As String
   Dim cCAMPO As String
-  Dim cTABLE As String
+  Dim cTable As String
   Dim cWHERE As String
-  Dim cCODIGOGRV As String
+  Dim cCODIGOGRV
   Set OBJCONN = New ADODB.Connection           'Create a new object
   Set OBJRSGLOB = New ADODB.Recordset
   cCAMPO = "IMAGEM"
-  cTABLE = ""
+  cTable = ""
   cWHERE = ""
-  DBCONNSTR = GeracArq(cARQRTF)
+  DBCONNSTR = GeracArq(cARQRTF, , False)
   OBJCONN.Open DBCONNSTR
   If InStr(UCase(cARQRTF), "PF.MDB") > 0 Or InStr(UCase(cARQRTF), "PF.SQLITE") > 0 Then
     strSQL = "SELECT CODINT AS NUMERO,FIG01 FROM PFS where (codint is not null) and codint<>''"
-    cTABLE = "PFS"
+    cTable = "PFS"
     cCAMPO = "FIG01"
     cWHERE = "(codint is not null) and codint<>''"
-    strSQL = cTABLE
+    strSQL = cTable
   Else
-    strSQL = "SELECT * FROM imagens where numero>0"
-    cTABLE = "imagens"
+    If PorCodigo.Value = True Then
+       strSQL = "SELECT CODIGO,NUMERO FROM imagens where (codigo is not null) and codigo<>''"
+       cWHERE = "(codigo is not null) and codigo<>''"
+    Else
+       strSQL = "SELECT CODIGO,NUMERO FROM imagens where numero>0"
+       cWHERE = "numero>0"
+    End If
+    cTable = "imagens"
     cCAMPO = "imagem"
-    cWHERE = "numero>0"
-    strSQL = cTABLE
   End If
   If InStr(UCase(cARQRTF), "OL_LOGIX") > 0 Then
-    cTABLE = ""
+    cTable = ""
     cWHERE = ""
     strSQL = " SELECT CAST(EMPRESA || TRIM(STRZERO(MATRICULA,8)) AS CHAR(10)) AS CODIGO, empresa, matricula as numero from rhu_funcio_foto"
   End If
   If InStr(UCase(cARQRTF), "DATAMACE") > 0 Then
-    cTABLE = ""
+    cTable = ""
     cWHERE = ""
     strSQL = " SELECT"
     strSQL = strSQL & " RIGHT(TAB_CADFUN.FUN_COD_EMP,2) + RIGHT(FORMAT(TAB_CADFUN.FUN_REGISTRO,'00000000'),8) AS CODIGO"
@@ -339,9 +343,14 @@ Private Sub Cmdiniciar_Click()
     cCAMPO = "FOTO"
   End If
 
-
-
-  OBJRSGLOB.Open strSQL, OBJCONN, adOpenForwardOnly, adLockReadOnly
+'  OBJRSGLOB.Open strSQL, OBJCONN, adOpenForwardOnly, adLockReadOnly
+  ' sqlite nao tem adOpenForwardOnly mudado para static
+  If InStr(UCase(cARQRTF), ".SQLITE") > 0 Then
+     OBJRSGLOB.Open strSQL, OBJCONN, adOpenStatic, adLockReadOnly
+  Else
+     OBJRSGLOB.Open strSQL, OBJCONN, adOpenForwardOnly, adLockReadOnly
+  
+  End If
   If Not OBJRSGLOB.RecordCount = 0 Then        'not Have
     Do While (Not OBJRSGLOB.EOF)
       ccodigo.Caption = OBJRSGLOB.Fields("CODIGO")
@@ -351,11 +360,13 @@ Private Sub Cmdiniciar_Click()
       End If
       If PorCodigo.Value = True Then
         If TiraCaracter.Value = vbChecked Then
-          cCODIGOGRV = Trim(TiraOut(OBJRSGLOB.Fields("codigo")))
+          cCODIGOGRV = OBJRSGLOB.Fields("codigo").Value
+          cCODIGOGRV = TiraOut(cCODIGOGRV)
+          cCODIGOGRV = Trim(cCODIGOGRV)
         Else
-          cCODIGOGRV = Trim(OBJRSGLOB.Fields("codigo"))
+          cCODIGOGRV = OBJRSGLOB.Fields("CODIGO").Value
+          cCODIGOGRV = Trim(cCODIGOGRV)
         End If
-
         If SepararEmpresa.Value = True Or SepararEmpresa.Value = 1 Then
           cCODIGOGRV = Mid(cCODIGOGRV, 3)
         End If
@@ -371,7 +382,12 @@ Private Sub Cmdiniciar_Click()
         End If
       Else
         If InStr(UCase(cARQRTF), ".SQLITE") > 0 Then
-           ADOPegBlob Picture1, cARQRTF, cTABLE, cWHERE, cCAMPO
+           If PorCodigo.Value = True Then
+              cWHERE = "codigo='" & cCODIGOGRV & "'"
+           Else
+              cWHERE = "numero=" & cCODIGOGRV
+           End If
+           ADOPegBlob Picture1, cARQRTF, cTable, cWHERE, cCAMPO
            PicSave.SavePicture Picture1.Picture, sTEMPFILE, fmtJPEG, 70
         Else
           If Not IsNull(OBJRSGLOB.Fields(cCAMPO)) Then

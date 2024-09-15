@@ -5,7 +5,7 @@ Option Explicit
 '    Dim i As Integer
 '    For i = 1 To .rows - 1
 '   .Row = i
-'   .Col = 2:   .CellBackColor = &HC0FFFF
+'   .Col = 2:   .CellBackColor = &HC0FFFFD
 '    Next
 Public Function LocalizaGri1(ByRef oGRID As Variant, Optional ByVal eBUSCA As Variant = "", _
                              Optional ByVal iBUSCA As Integer = 1, _
@@ -131,9 +131,13 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
     oDB.Open cARQTMP
 
 
-
+   'sqlite nao tem cursor forwardonly openstatic ou adOpenUnspecified
     Set oRS = New ADODB.Recordset
-    oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+    If aRETU(2) = "SQLITE" Then
+      oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
+    Else
+      oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+    End If
   End Select
 
 
@@ -269,6 +273,7 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
   Dim l3265 As Boolean
   Dim cERRO As String
   Dim lOPEN As Boolean
+  Dim aRETU
 
   lOPEN = False
   l3265 = True
@@ -282,7 +287,12 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
     Exit Sub
   End If
 
-  cARQTMP = GeracArq(cARQ, , False)
+  aRETU = TipoConn(cARQ, , , False)
+
+  cARQTMP = aRETU(1)
+
+
+'  cARQTMP = GeracArq(cARQ, , False)
 
   oDB.ConnectionTimeout = 120
   oDB.Open cARQTMP
@@ -291,7 +301,11 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
 
   lOPEN = True
 
-  oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+  If aRETU(2) = "SQLITE" Then 'sqlite nao tem curos forwardonly usar static ou adOpenUnspecified
+     oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
+  Else
+     oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+  End If
 
   oGRID.Visible = False
   With oGRID
@@ -473,6 +487,7 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
   Dim l3265 As Boolean
   Dim cERRO As String
   Dim lOPEN As Boolean
+  Dim aRETU
 
   lOPEN = False
   l3265 = True
@@ -483,7 +498,13 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
     Exit Sub
   End If
 
-  cARQTMP = GeracArq(cARQ, , False)
+  aRETU = TipoConn(cARQ, , , False)
+
+  cARQTMP = aRETU(1)
+  
+  
+'  cARQTMP = GeracArq(cARQ, , False)
+
 
 
   oDB.ConnectionTimeout = 120
@@ -493,7 +514,12 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
 
   lOPEN = True
 
-  oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
+  ' sqlite nao tem adOpenForwardOnly mudado para static ou adOpenUnspecified
+  If aRETU(2) = "SQLITE" Then
+    oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
+  Else
+    oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+  End If
   
   oGRID.Visible = False
   With oGRID
