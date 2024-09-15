@@ -113,7 +113,7 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
   Dim aRETU As Variant
   Dim oDB As ADODB.Connection
   Dim oCOM As ADODB.Command
-  Dim cCONN As String
+  Dim cconn As String
 
   On Error GoTo trataerro
   ADOComando = False
@@ -148,12 +148,12 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
     End If
     
     
-    cCONN = aRETU(1)
+    cconn = aRETU(1)
     Set oDB = New ADODB.Connection
     Set oCOM = New ADODB.Command
     
     oDB.ConnectionTimeout = 120
-    oDB.Open cCONN
+    oDB.Open cconn
 
     oCOM.ActiveConnection = oDB
     oCOM.CommandText = cSQL
@@ -446,9 +446,10 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   lOPEN = True
   Set oRS = New ADODB.Recordset
   If aARQ(2) = "SQLITE" Then
+     oRS.Open cSQL, oDB, adOpenStatic, adLockOptimistic
+  Else
+     oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic
   End If
-  oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic
-
   lRSOP = True
 
   If oRS.EOF Then
@@ -529,8 +530,8 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
       End If
     Next x
     Select Case aARQ(2) ' alguns nao aceitam update
-           Case "SQLSERVER", "MDB", "MYSQL", "SQLITE"
-               oRS.Update
+   '        Case "SQLSERVER", "MDB", "MYSQL", "SQLITE"
+   '            oRS.Update
            Case Else
                oRS.Update
     End Select
