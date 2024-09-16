@@ -9,13 +9,13 @@ Option Explicit
 
 '---------------------------------Start Code------------------
 Private Type BITMAP                              '14 bytes
-  BMType As Long
-  BMWidth As Long
-  BMHeight As Long
-  BMWidthBytes As Long
-  BMPlanes As Integer
-  BMBitsPixel As Integer
-  BMBits As Long
+  bmType As Long
+  bmWidth As Long
+  bmHeight As Long
+  bmWidthBytes As Long
+  bmPlanes As Integer
+  bmBitsPixel As Integer
+  bmBits As Long
 End Type
 
 'Win32 API Function Declarations
@@ -209,7 +209,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
   
   If cPICTURE.Picture.Height > 0 Then
      sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
-     PicSave.SavePicture cPICTURE.Picture, sTEMPFILE, fmtJPEG, 70
+     PicSaveLoad.SavePicture cPICTURE.Picture, sTEMPFILE, fmtJPEG, 70
   End If
   
   Set oDB = New ADODB.Connection
@@ -315,8 +315,8 @@ Public Function StretchSourcePictureFromFile(ByVal FileName As String, ByRef pic
 
   'Get the sizes of the picture
   nRetVal = GetObject(picSrc.Handle, Len(Bmp), Bmp)
-  hMemWdth = Bmp.BMWidth
-  hMemHght = Bmp.BMHeight
+  hMemWdth = Bmp.bmWidth
+  hMemHght = Bmp.bmHeight
 
   'Make sure there is a picture
   If (hMemWdth > 0) And (hMemHght > 0) Then
@@ -419,8 +419,8 @@ Public Sub StretchSourcePictureFromPicture(ByVal picSrc As StdPicture, _
 
   'Get the sizes of the picture
   nRetVal = GetObject(picSrc.Handle, Len(Bmp), Bmp)
-  hMemWdth = Bmp.BMWidth
-  hMemHght = Bmp.BMHeight
+  hMemWdth = Bmp.bmWidth
+  hMemHght = Bmp.bmHeight
 
   'Make sure there is a picture
   If (hMemWdth > 0) And (hMemHght > 0) Then
@@ -484,7 +484,7 @@ Public Function salvarpict(oFORM As Form, ByVal Picture1 As Variant, _
   If Len(sPath) = 0 Then
     sPath = App.Path
   End If
-  sFILTER = ImgFILTER2()                       ''ImgFILTER()
+  sFILTER = ImgFILTER2()
   sFILENAME = FileSave(oFORM, sFILTER, 1, , sFILENAME, sPath, "Salvar Imagem")
 
   cEXTENSAO = parsefile(sFILENAME, "E")
@@ -502,14 +502,12 @@ Public Function salvarpict(oFORM As Form, ByVal Picture1 As Variant, _
   End If
   Select Case cEXTENSAO
   Case "JPG"
-    PicSave.SavePicture Picture1.Picture, sFILENAME, fmtJPEG, 70
+    PicSaveLoad.SavePicture Picture1.Picture, sFILENAME, fmtJPEG, 70
   Case "PNG"
-    PicSave.SavePicture Picture1.Picture, sFILENAME, fmtPNG
+    PicSaveLoad.SavePicture Picture1.Picture, sFILENAME, fmtPNG
   Case "GIF"
-    PicSave.SavePicture Picture1.Picture, sFILENAME, fmtGIF
-
-
-  Case Else
+    PicSaveLoad.SavePicture Picture1.Picture, sFILENAME, fmtGIF
+  Case Else 'usa default vb
     SavePicture Picture1.Picture, sFILENAME
   End Select
 End Function

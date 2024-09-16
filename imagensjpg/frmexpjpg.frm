@@ -378,7 +378,7 @@ Private Sub Cmdiniciar_Click()
         CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & OBJRSGLOB.Fields("NUMERO")
         CSQLI = CSQLI & " and empresa=" & OBJRSGLOB.Fields("EMPRESA")
         If ADOPegBlob(Picture1, cARQRTF, CSQLI, "", "IMAGEM") Then 'ADOPegBlob(cARQRTF, CSQLI, Picture1) Then
-          PicSave.SavePicture Picture1.Picture, sTEMPFILE, fmtJPEG, 70
+          PicSaveLoad.SavePicture Picture1.Picture, sTEMPFILE, fmtJPEG, 70
         End If
       Else
         If InStr(UCase(cARQRTF), ".SQLITE") > 0 Then
@@ -388,7 +388,7 @@ Private Sub Cmdiniciar_Click()
               cWHERE = "numero=" & cCODIGOGRV
            End If
            ADOPegBlob Picture1, cARQRTF, cTable, cWHERE, cCAMPO
-           PicSave.SavePicture Picture1.Picture, sTEMPFILE, fmtJPEG, 70
+           PicSaveLoad.SavePicture Picture1.Picture, sTEMPFILE, fmtJPEG, 70
         Else
           If Not IsNull(OBJRSGLOB.Fields(cCAMPO)) Then
             lFileLength = FixInt(LenB(OBJRSGLOB(cCAMPO)))
