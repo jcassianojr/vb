@@ -2,8 +2,8 @@ VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form FrmLstView 
    Caption         =   "Visualizador de LST"
    ClientHeight    =   7560
@@ -933,6 +933,7 @@ Private Sub Grid_DblClick()
   Dim cEXTENSAO As String
   
   If Grid.Row = 0 Then
+     ePASS03 = 0 'ZERA TIPO DE PREVIEW
      Exit Sub
   End If
   
@@ -958,7 +959,6 @@ Private Sub Grid_DblClick()
          Case "HTM"
               If MDG("Usar Interno") Then
                  ePASS03 = 3
-                 
                  PrintPreview1.ShowPreview
               Else
                 cARQ = Txtcaminho.tEXT & cNOME
@@ -1000,17 +1000,14 @@ Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
       ePASS02 = FixInt(eRETU01, 0)
       MyPrintingJPG
   End If
-  If ePASS03 = 5 Then  'HTML
+  If ePASS03 = 5 Then  'grid
     MyPrintinggrid
   End If
-  
+  ePASS03 = 0
 End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
   Dim STRBUFFER As String
-  'If Not FileExist(cARQRTF, True) Then 'ja checado na cmdvisual click
-  '    Exit Sub
-  ' End If
   fileFile = FreeFile
   Open cARQRTF For Input As #fileFile
   Do While Not EOF(fileFile)
