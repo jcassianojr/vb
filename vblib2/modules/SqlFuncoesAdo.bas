@@ -446,7 +446,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   lOPEN = True
   Set oRS = New ADODB.Recordset
   If aARQ(2) = "SQLITE" Then
-     oRS.Open cSQL, oDB, adOpenStatic, adLockOptimistic
+     oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic
   Else
      oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic
   End If

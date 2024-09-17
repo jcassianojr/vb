@@ -19,7 +19,7 @@ Begin VB.Form FrmRpt
    Begin VB.TextBox text 
       BackColor       =   &H00C0FFFF&
       Height          =   285
-      Index           =   17
+      Index           =   3
       Left            =   9840
       TabIndex        =   30
       ToolTipText     =   "Data de Inclusão do Relatorio"
@@ -30,7 +30,7 @@ Begin VB.Form FrmRpt
       BackColor       =   &H00C0FFFF&
       Enabled         =   0   'False
       Height          =   285
-      Index           =   16
+      Index           =   2
       Left            =   9840
       Locked          =   -1  'True
       TabIndex        =   29
@@ -43,7 +43,7 @@ Begin VB.Form FrmRpt
       BackColor       =   &H00C0FFFF&
       Enabled         =   0   'False
       Height          =   285
-      Index           =   15
+      Index           =   1
       Left            =   9840
       Locked          =   -1  'True
       TabIndex        =   28
@@ -54,7 +54,7 @@ Begin VB.Form FrmRpt
    End
    Begin VB.TextBox text 
       Height          =   285
-      Index           =   2
+      Index           =   16
       Left            =   6240
       TabIndex        =   9
       ToolTipText     =   "Codigo Interno do Relatorio"
@@ -63,7 +63,7 @@ Begin VB.Form FrmRpt
    End
    Begin VB.TextBox text 
       Height          =   285
-      Index           =   3
+      Index           =   17
       Left            =   1080
       TabIndex        =   7
       ToolTipText     =   "Descriçao do Relatorio"
@@ -72,7 +72,7 @@ Begin VB.Form FrmRpt
    End
    Begin VB.TextBox text 
       Height          =   285
-      Index           =   1
+      Index           =   15
       Left            =   4200
       TabIndex        =   2
       ToolTipText     =   "Sub Grupo do Relatorio"
@@ -1118,7 +1118,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     For nITEM = 24 To 26
       aVAL(nITEM) = FixNumBol(chkFields(nITEM).Value)
     Next nITEM
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 'comeca no 1 0=RPT chave
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 4 'comeca no 1 0=RPT chave 1 utilizacao 2 qtde 3 inclusao
     GravaLog nFORMID, 0, "Gravou "
   Else
     GravaLog nFORMID, 0, "Nao Gravou "
@@ -1197,20 +1197,20 @@ Private Sub Form_Load()
   'Variaveis sql
 
   nCAMPOS = 27
-  aCAM = Array("RPT", "SUBGRP", "COGNOME", "NOME", "ARQUIVO", _
+  aCAM = Array("RPT", "DATAIMP", "UTILIZADO", "DATACRI", "ARQUIVO", _
                "ABRIRCOM", "TITULO", "MENSAGEM", "COBSMSG", "TABNAME", _
                "TABALIAS", "CARQUSO", "CARQBAI", "CARQFEC", "CARQACU", _
-               "DATAIMP", "UTILIZADO", "DATACRI", "CAMINHO", "CAMINH2", _
+               "SUBGRP", "COGNOME", "NOME", "CAMINHO", "CAMINH2", _
                "CAMINH3", "CAMINH4", "PREFILTRO", "SQLUSO", "ARVORE", "BUSCA", "LFILTRO")
-  aFOR = Array("C", "C", "C", "C", "C", _
+  aFOR = Array("C", "DH", "N", "DH", "C", _
                "C", "C", "C", "C", "C", _
                "C", "C", "C", "C", "C", _
-               "DH", "N", "DH", "C", "C", _
+               "C", "C", "C", "C", "C", _
                "C", "C", "C", "C", "BN", "BN", "BN")
-  aPAD = Array("", "", "", "", "", _
+  aPAD = Array("", Now, 0, Now, "", _
                "", "", "", "", "", _
                "", "", "", "", "", _
-               Now, 0, Now, "", "", _
+               "", "", "", "", "", _
                "", "", "", "", False, False, False)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 23
