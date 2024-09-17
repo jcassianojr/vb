@@ -553,7 +553,7 @@ Private Sub gerar(ByVal cOPE As String)
     oTXT.arquivo = TxtArquivo
   End If
   If cDESTINO = "IMPNET" Then
-    oTXT.caminho = TxtCaminho
+    oTXT.caminho = Txtcaminho
   End If
   If cSETUP <> "" Then
     oTXT.impsetup cSETUP
@@ -600,7 +600,7 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.Text
   If FileExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
@@ -611,8 +611,8 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.tEXT, "RTF") Or lARQTXT Then
-    cARQRTF = TxtArquivo.tEXT
+  If IsExtensao(TxtArquivo.Text, "RTF") Or lARQTXT Then
+    cARQRTF = TxtArquivo.Text
     FrmRTf.Show vbModal, Me
   End If
 End Sub
@@ -624,11 +624,11 @@ Private Sub CmdFiltro_Click()
   If aRELCFG(11) Then
     ePASS01 = ""
     FrmFiltro.Show vbModal, Me
-    filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
+    FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
   End If
-  cFILTRO = FixStr(filtro)
+  cFILTRO = FixStr(FILTRO)
   If Len(aRELCFG(15)) > 0 Then
-    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
     Lblsql = cSQL
   End If
 
@@ -650,7 +650,7 @@ Private Sub cmdimp_Click()
     imptxt  'Aqui e direct print com1 lpt1 no pode ser usado preview aqui
     Exit Sub
   End If
-  If IsExtensao(TxtArquivo.tEXT, "PDF") Or IsExtensao(TxtArquivo.tEXT, "HTML") Or IsExtensao(TxtArquivo.tEXT, "RTF") Then
+  If IsExtensao(TxtArquivo.Text, "PDF") Or IsExtensao(TxtArquivo.Text, "HTML") Or IsExtensao(TxtArquivo.Text, "RTF") Then
     CmdVisua_Click
     Exit Sub
   End If
@@ -669,7 +669,7 @@ Private Sub imptxt()  'Aqui e direct print com1 lpt1 no pode ser usado preview a
   oTXT.Destino = cDESTINO
   oTXT.ABRIR
   If cDESTINO = "IMPNET" Then
-    oTXT.caminho = TxtCaminho
+    oTXT.caminho = Txtcaminho
   End If
   If cSETUP <> "" Then
     oTXT.impsetup cSETUP
@@ -702,7 +702,7 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.Text
   If Not FileExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -714,19 +714,24 @@ Private Sub CmdVisua_Click()
     ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
   End If
   If IsExtensao(cARQRTF, "HTML") Then
-    'FrmPreview.Show vbModal, Me
-    If MDG("Sim->Navegador Nao->Visualizador Interno") Then
+    ePASS01 = Array("Navegador Externo", "Preview Interno", "Navegador Interno")
+    escOrdem.Show vbModal, Me
+    eRETU01 = FixInt(eRETU01, 0)
+    Select Case eRETU01
+    Case 0
       OpenUrl (cARQRTF)
-    Else
+    Case 1
       ePASS03 = 3
       PrintPreview1.ShowPreview
-    End If
+    Case 3
+      FrmPreview.Show vbModal, Me
+    End Select
   End If
   If IsExtensao(cARQRTF, "RTF") Then
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.tEXT = ""
+    RichTextBox1.Text = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -789,9 +794,9 @@ Private Sub Form_Load()
   Dim x As Long
   Dim cTMP As String
   CenterFormToScreen Me
-  filtro = ""
-  TxtCaminho = ""
-  TxtCaminho.Enabled = False
+  FILTRO = ""
+  Txtcaminho = ""
+  Txtcaminho.Enabled = False
   OptDestino(6).Value = True
   montaimp
 
@@ -815,7 +820,7 @@ Private Sub Form_Load()
     nCOLUNAS = oIni.GetSetting("CONFIGURACAO", "COLUNAS", 80)
     nLINHAS = oIni.GetSetting("CONFIGURACAO", "LINHAS", 60)
     cDESTINO = oIni.GetSetting("CONFIGURACAO", "DESTINO", "ARQ")
-    TxtCaminho = oIni.GetSetting("CONFIGURACAO", "CAMINHO", "LPT1")
+    Txtcaminho = oIni.GetSetting("CONFIGURACAO", "CAMINHO", "LPT1")
 
     Select Case cDESTINO
     Case "LPT1"
@@ -834,7 +839,7 @@ Private Sub Form_Load()
       OptDestino(6).Value = True
     Case "IMPNET"
       OptDestino(7).Value = True
-      TxtCaminho.Enabled = True
+      Txtcaminho.Enabled = True
     End Select
 
 
@@ -843,7 +848,7 @@ Private Sub Form_Load()
     If aRELCFG(14) = "" Then
       aRELCFG(14) = oIni.GetSetting("CONFIGURACAO", "FILTRO", 1)
     End If
-    filtro = aRELCFG(14)
+    FILTRO = aRELCFG(14)
     If aRELCFG(15) = "" Then
       aRELCFG(15) = oIni.GetSetting("CONFIGURACAO", "SQL", 1)
     End If
@@ -894,10 +899,10 @@ Private Sub Form_Load()
   If Not aDIREITOS(6) Then cmdimp.Visible = False
   If Not aDIREITOS(6) Then CmdConfImp.Visible = False
   If Not aDIREITOS(5) Then CmdVisua.Visible = False
-  If Not aDIREITOS(7) Then Salvar(0).Visible = False
+  If Not aDIREITOS(7) Then salvar(0).Visible = False
   If Not aDIREITOS(7) Then CmdEmail.Visible = False
   If Not aRELCFG(11) Then CmdFiltro.Visible = False
-  If Not aRELCFG(11) Then filtro.Visible = False
+  If Not aRELCFG(11) Then FILTRO.Visible = False
 
   If Not aDIREITOS(4) Then CmdEditar.Visible = False
   If Not aDIREITOS(4) Then CmdShell.Visible = False
@@ -910,7 +915,7 @@ Private Sub Form_Load()
     End If
   End If
   If Len(aRELCFG(15)) > 0 Then
-    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
   End If
 
   Lblsql = cSQL
@@ -947,7 +952,7 @@ Private Sub Listview1_Click()
 End Sub
 
 Private Sub OptDestino_Click(Index As Integer)
-  TxtCaminho.Enabled = False
+  Txtcaminho.Enabled = False
   Select Case Index
   Case 0
     cDESTINO = "LPT1"
@@ -965,7 +970,7 @@ Private Sub OptDestino_Click(Index As Integer)
     cDESTINO = "PRINTER"
   Case 7
     cDESTINO = "IMPNET"
-    TxtCaminho.Enabled = True
+    Txtcaminho.Enabled = True
   End Select
 End Sub
 
@@ -991,7 +996,7 @@ Private Sub Salvar_Click(Index As Integer)
     End Select
 
     sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
+    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
 
     If InStr(cARQUIVO, ".") > 0 Then
       cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO

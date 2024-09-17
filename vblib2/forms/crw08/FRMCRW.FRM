@@ -650,13 +650,18 @@ Private Sub CmdPreview_Click()
     ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
   End If
   If IsExtensao(cARQRTF, "HTML") Then
-    'FrmPreview.Show vbModal, Me
-    If MDG("Sim->Navegador Nao->Visualizador Interno") Then
+    ePASS01 = Array("Navegador Externo", "Preview Interno", "Navegador Interno")
+    escOrdem.Show vbModal, Me
+    eRETU01 = FixInt(eRETU01, 0)
+    Select Case eRETU01
+    Case 0
       OpenUrl (cARQRTF)
-    Else
+    Case 1
       ePASS03 = 3
       PrintPreview1.ShowPreview
-    End If
+    Case 3
+      FrmPreview.Show vbModal, Me
+    End Select
   End If
   If IsExtensao(cARQRTF, "RTF") Then
     cARQRTF = TxtArquivo.tEXT

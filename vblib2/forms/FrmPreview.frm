@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{F74FE4B4-2AF4-4F6A-B323-05690FDB6730}#1.3#0"; "OrdoWebView2.ocx"
+Object = "{F74FE4B4-2AF4-4F6A-B323-05690FDB6730}#1.3#0"; "OrdoWebView2.OCX"
 Begin VB.Form FrmPreview 
    Caption         =   "FrmPreview"
    ClientHeight    =   5130
@@ -82,3 +82,10 @@ End Sub
 Private Sub Form_Load()
   OrdoWebView1.NavigateToFile cARQRTF
 End Sub
+
+
+'OrdoWebView1.GetInnerHTML
+'OrdoWebView1.GetInnertxt
+
+
+ 
