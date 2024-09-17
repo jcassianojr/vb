@@ -239,7 +239,7 @@ End Sub
 
 Private Sub cmdPrint_Click()
   Select Case cEXTENSAO
-         Case "TXT", "ZPL"
+         Case "TXT", "ZPL", "MAN"
               PrintTXT
          Case "JPG"
               PRINTIMG

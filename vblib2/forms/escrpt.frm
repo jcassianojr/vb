@@ -105,7 +105,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Dim aORDEM As Variant
+Dim aORDEM As VariantZ
 Dim aORDES As Variant
 Dim cORDEM As String
 
