@@ -600,7 +600,7 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.text
+  cARQRTF = TxtArquivo.tEXT
   If FileExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
@@ -611,8 +611,8 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.text, "RTF") Or IsExtensao(TxtArquivo.text, "TXT") Then
-    cARQRTF = TxtArquivo.text
+  If IsExtensao(TxtArquivo.tEXT, "RTF") Or lARQTXT Then
+    cARQRTF = TxtArquivo.tEXT
     FrmRTf.Show vbModal, Me
   End If
 End Sub
@@ -646,11 +646,11 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-  If IsExtensao(TxtArquivo.text, "TXT") Then
+  If lARQTXT Then
     imptxt  'Aqui e direct print com1 lpt1 no pode ser usado preview aqui
     Exit Sub
   End If
-  If IsExtensao(TxtArquivo.text, "PDF") Or IsExtensao(TxtArquivo.text, "HTML") Or IsExtensao(TxtArquivo.text, "RTF") Then
+  If IsExtensao(TxtArquivo.tEXT, "PDF") Or IsExtensao(TxtArquivo.tEXT, "HTML") Or IsExtensao(TxtArquivo.tEXT, "RTF") Then
     CmdVisua_Click
     Exit Sub
   End If
@@ -702,11 +702,11 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.text
+  cARQRTF = TxtArquivo.tEXT
   If Not FileExist(cARQRTF, True) Then
     Exit Sub
   End If
-  If IsExtensao(cARQRTF, "TXT") Then
+  If lARQTXT Then
     ePASS03 = 1
     PrintPreview1.ShowPreview
   End If
@@ -726,7 +726,7 @@ Private Sub CmdVisua_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.text = ""
+    RichTextBox1.tEXT = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -795,10 +795,7 @@ Private Sub Form_Load()
   OptDestino(6).Value = True
   montaimp
 
-  If IsExtensao(cARQRTF, "TXT") Then
-    lARQTXT = True
-  End If
-  If IsExtensao(cARQRTF, "MAN") Then
+  If IsExtensao(cARQRTF, "TXT") Or IsExtensao(cARQRTF, "ZPL ") Or IsExtensao(cARQRTF, "MAN") Then
     lARQTXT = True
   End If
   If InStr(UCase(cARQRTF), ".LST") > 0 Then    ''.LST .LTS2 .LTS3... pode ser sequencial usando instr inves isextensao
@@ -994,7 +991,7 @@ Private Sub Salvar_Click(Index As Integer)
     End Select
 
     sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.text, App.Path, "Salvar " & cEXTENSAO & " Como")
+    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
 
     If InStr(cARQUIVO, ".") > 0 Then
       cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO

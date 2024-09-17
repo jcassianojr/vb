@@ -394,19 +394,21 @@ Private Sub imprima_click()
       Case 1
          aRELCFG(1) = "FRMPREVIEW"
       End Select
-    Case "TXT", "MAN"
-      ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Escolher Porta(Destino)", "Editor Interno")
+    Case "TXT", "MAN", "ZPL"
+      If cEXTENSAO = "ZPL" Then
+         ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Escolher Porta(Destino)", "Editor Interno", "Preview Externo")
+      Else
+         ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Escolher Porta(Destino)", "Editor Interno")
+      End If
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
       Select Case eRETU01
          Case 0
-           CommonDialogEx1.Flags = cdlCFPrinterFonts
-           CommonDialogEx1.ShowFont
-           'Printer.FontName = CommonDialogEx1.FontName
-           'Printer.FontSize = CommonDialogEx1.FontSize
-           'Printer.FontBold = CommonDialogEx1.FontBold
-           'Printer.FontItalic = CommonDialogEx1.FontItalic
-           Printer.Font = CommonDialogEx1.Font 'todos os atributos
+           If cEXTENSAO <> "ZPL" Then
+              CommonDialogEx1.Flags = cdlCFPrinterFonts
+              CommonDialogEx1.ShowFont
+              Printer.Font = CommonDialogEx1.Font 'todos os atributos
+           End If
            ePASS03 = 1
            PrintPreview1.ShowPreview
            Exit Sub
@@ -417,10 +419,10 @@ Private Sub imprima_click()
            aRELCFG(1) = "FRMTXL"
          Case 3
            aRELCFG(1) = "FRMRTF"
+         Case 4
+           PRINTZPLONLINE
+           Exit Sub
         End Select
-    Case cEXTENSAO = "ZPL"
-       PRINTZPLONLINE
-       Exit Sub
     Case "RTF"
       ePASS01 = Array("Editor Interno", "Preview Interno")
       escOrdem.Show vbModal, Me
