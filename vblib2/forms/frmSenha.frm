@@ -287,6 +287,7 @@ Private Sub cmdOK_Click()
   Dim USALX As String
   Dim cCHAVE As String
   Dim cSENHAPOS As String
+  Dim sSQLUP As String
 
   On Error GoTo errhandler
 
@@ -467,7 +468,12 @@ Private Sub cmdOK_Click()
 95 zNOMEFOLHA = aRETU(9)
 
 
-96 GrvSQL cARQ, cSQL, 1, Array("DATAULT"), Array(Today()), Array("D")
+'96 GrvSQL cARQ, cSQL, 1, Array("DATAULT"), Array(Today()), Array("DH")
+
+'cSQL = "select * from USUARIO WHERE USUARIO='" & zUSER & "'"
+
+ sSQLUP = "UPDATE USUARIO SET  DATAULT = CURRENTDATETIME WHERE USUARIO='" & zUSER & "'"
+96  ADOComando cARQ, sSQLUP
 
 
 97 If aRETU(10) < Today() Then
@@ -534,7 +540,7 @@ Private Sub Timer1_Timer()
   If nTENTA >= 3 Then
     End
   End If
-  barra.Value = nTEMPO
+  Barra.Value = nTEMPO
 End Sub
 
 Private Sub TXTempresa_GotFocus()
@@ -587,23 +593,18 @@ Private Sub txtUSUARIO_KeyPress(KeyAscii As Integer)
   KeyAscii = ValiText(KeyAscii, "CN")
 End Sub
 Private Sub fixuser()
-  If UCase(txtUSUARIO.Text) = "ADMLOG" Then
-    txtUSUARIO.Text = "admin"
+  If UCase(txtUSUARIO.tEXT) = "ADMLOG" Then
+    txtUSUARIO.tEXT = "admin"
   End If
-  If UCase(txtUSUARIO.Text) = "ADMINISTRA" Then
-    txtUSUARIO.Text = "admin"
+  If UCase(txtUSUARIO.tEXT) = "ADMINISTRA" Then
+    txtUSUARIO.tEXT = "admin"
   End If
-  If UCase(txtUSUARIO.Text) = "SUPERVISOR" Then
-    txtUSUARIO.Text = "admin"
+  If UCase(txtUSUARIO.tEXT) = "SUPERVISOR" Then
+    txtUSUARIO.tEXT = "admin"
   End If
 
 End Sub
-
 Private Sub txtUSUARIO_LostFocus()
   fixuser
 End Sub
 
-
-Private Sub XPButton1_Click()
-
-End Sub

@@ -67,7 +67,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "Principa.frx":058A
-            TextSave        =   "10:15"
+            TextSave        =   "17:50"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -75,7 +75,7 @@ Begin VB.MDIForm frmPRINCIPAL
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "Principa.frx":0B24
-            TextSave        =   "11/09/2024"
+            TextSave        =   "20/09/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -394,7 +394,7 @@ Private Sub MDIForm_Load()
   Dim carqhelp As String
 
 
-  StatusBar1.Panels(5).tEXT = ""
+  StatusBar1.Panels(5).text = ""
 
 
 
@@ -514,7 +514,7 @@ Private Sub MDIForm_Load()
   rs.Close
   DB.Close
 
-  StatusBar1.Panels(6).tEXT = zUSER
+  StatusBar1.Panels(6).text = zUSER
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If
@@ -585,15 +585,15 @@ Private Sub mnuSUBMENU2_Click(Index As Integer)
     escDes.Show vbModal
   Case 7
     ZENGTIP = "DES"
-    ESCCLI.Show vbModal
+    escCLI.Show vbModal
   Case 8
-    ESCpro.Show vbModal
+    escPRO.Show vbModal
   Case 9
     iPPAP = 3
     escPPAP.Show vbModal
   Case 10
     ZENGTIP = "PRO"
-    ESCCLI.Show vbModal
+    escCLI.Show vbModal
   Case 11
     zPFTIPO = "POA"
     Sdb = PegPath("PATH", "POA")

@@ -522,7 +522,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
       ''Efetua a Gravaçao
       If lGRAVA Then
          If aFOR(x) = "DH" And aARQ(2) = "SQLITE" Then
-            oRS(aCAM(x)) = Now
+            oRS(aCAM(x)) = Now 'Format(Now, "yyyy-mm-dd hh:mm:ss")
          Else
             oRS(aCAM(x)) = FVar(eVAL, aFOR(x), eVAZIO)
          End If
