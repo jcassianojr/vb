@@ -807,6 +807,7 @@ Begin VB.Form frmUSER
       End
       Begin VB.TextBox tEXT 
          Alignment       =   2  'Center
+         BackColor       =   &H00C0FFFF&
          Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -1132,30 +1133,12 @@ Dim nITEM, nCAMPOS As Long
 Attribute nITEM.VB_VarUserMemId = 1073938438
 Attribute nCAMPOS.VB_VarUserMemId = 1073938438
 Option Explicit
-
-Private Sub cboEQUIVALENTE_Change()
-'ComboChange  cboEQUIVALENTE
-End Sub
-
 Private Sub cboEQUIVALENTE_GotFocus()
   FocusMe
 End Sub
-
 Private Sub cboEQUIVALENTE_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    Visual
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    Visual
-    SendKeys "+" + Chr(9)
-  End If
+  TeclaEnter KeyCode
 End Sub
-
-Private Sub cboEQUIVALENTE_LostFocus()
-'ComboLostFocus cboEQUIVALENTE
-End Sub
-
 Private Sub chkAtivo_Click()
   Visual
 End Sub
@@ -1165,15 +1148,7 @@ Private Sub chkAtivo_GotFocus()
 End Sub
 
 Private Sub chkAtivo_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    Visual
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    Visual
-    SendKeys "+" + Chr(9)
-  End If
-
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub chkweekend_Click()
@@ -1185,30 +1160,22 @@ Private Sub chkweekend_GotFocus()
 End Sub
 
 Private Sub chkweekend_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    Visual
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    Visual
-    SendKeys "+" + Chr(9)
-  End If
-
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub CmdApaAll_Click()
 Dim sSQL As String
 ''RTFUSR
-  sSQL = "select * from RTFUSR WHERE IDUSUARIO=" & TEXT(0)
+  sSQL = "select * from RTFUSR WHERE IDUSUARIO=" & tEXT(0)
   ApagaSQL DBWRPT, sSQL
   'RPTUSR
-  sSQL = "select * from RPTUSR WHERE IDUSUARIO=" & TEXT(0)
+  sSQL = "select * from RPTUSR WHERE IDUSUARIO=" & tEXT(0)
   ApagaSQL DBWRPT, sSQL
   'RPTFOLUSR
-  sSQL = "select * from RPTFOLUSR WHERE IDUSUARIO=" & TEXT(0)
+  sSQL = "select * from RPTFOLUSR WHERE IDUSUARIO=" & tEXT(0)
   ApagaSQL DBWRPT, sSQL
   'RPTINTUSR
-  sSQL = "select * from RPTINTUSR WHERE IDUSUARIO=" & TEXT(0)
+  sSQL = "select * from RPTINTUSR WHERE IDUSUARIO=" & tEXT(0)
   ApagaSQL DBWRPT, sSQL
   Alert "exclusao concluida"
 End Sub
@@ -1246,7 +1213,7 @@ Private Sub CMDIMPBTN_Click()
   oRSORI.Open cSQLORI, oDBORI, adOpenForwardOnly, adLockReadOnly
 
   If Not oRSORI.EOF Then
-    barra.Value = 0
+    Barra.Value = 0
     nBARPOS = 0
     While Not oRSORI.EOF
       cMENU = oRSORI("FORM")
@@ -1255,9 +1222,6 @@ Private Sub CMDIMPBTN_Click()
       DIZAPU = cMENU & "/" & cTIPO & "/" & CStr(iMENU)
       BARPOS
       cSQLDES = "select * from USUCAD WHERE FORM='" & cMENU & "' AND CONTROLE='" & cTIPO & "' AND INDICE=" & iMENU & " AND IDUSUARIO=" & nDESTINO
-      'aCAM = Array("IDUSUARIO", "FORM", "CONTROLE", "INDICE", "ATUALIZADO", "LIGADO")
-      'aVAL = Array(nDESTINO, cMENU, cTIPO, iMENU, True, True)
-      'IncluiSQL Dbname, cSQLDES, 6, aCAM, aVAL, True, False
       oRSDES.Open cSQLDES, oDBORI, adOpenDynamic, adLockOptimistic
       If oRSDES.EOF Then
         oRSDES.AddNew
@@ -1312,7 +1276,7 @@ Private Sub Cmdimpmenu_Click()
   oRSORI.Open cSQLORI, oDBORI, adOpenForwardOnly, adLockReadOnly
 
   If Not oRSORI.EOF Then
-    barra.Value = 0
+    Barra.Value = 0
     nBARPOS = 0
     oRSORI.MoveLast
     nROWREC = oRSORI.RecordCount
@@ -1323,8 +1287,6 @@ Private Sub Cmdimpmenu_Click()
       DIZAPU = cMENU & "/" & CStr(iMENU)
       BARPOS
       cSQLDES = "select * from MENUUSU WHERE MENU='" & cMENU & "' AND INDICE=" & iMENU & " AND IDUSUARIO=" & nDESTINO
-      'aCAM = Array("IDUSUARIO", "MENU", "INDICE", "ATUALIZADO", "LIGADO")
-      'aVAL = Array(nDESTINO, cMENU, iMENU, True, True)
       oRSDES.Open cSQLDES, oDBORI, adOpenDynamic, adLockOptimistic
       If oRSDES.EOF Then
         oRSDES.AddNew
@@ -1336,7 +1298,6 @@ Private Sub Cmdimpmenu_Click()
         oRSDES.Update
       End If
       oRSDES.Close
-      ''IncluiSQL Dbname, cSQLDES, 5, aCAM, aVAL, True, False ''tabela ja aberta
       oRSORI.MoveNext
     Wend
   End If
@@ -1384,7 +1345,7 @@ Private Sub Cmdimpwrpt_Click(Index As Integer)
 
 
   If Not oRSORI.EOF Then
-    barra.Value = 0
+    Barra.Value = 0
     nBARPOS = 0
     oRSORI.MoveLast
     nROWREC = oRSORI.RecordCount
@@ -1468,7 +1429,7 @@ Private Sub CmdLibGrp_Click(Index As Integer)
   Else
     cORIGEM = "Todos"
   End If
-  nDESTINO = FixInt(Busca("Digite O Numero de destino", "Numero de Destino", TEXT(0), 8))
+  nDESTINO = FixInt(Busca("Digite O Numero de destino", "Numero de Destino", tEXT(0), 8))
   If nDESTINO = 0 Or (Index < 2 And Len(cORIGEM) = 0) Then
     Alert ("Necessario Preencher Origem e Destino")
     Exit Sub
@@ -1511,7 +1472,7 @@ Private Sub CmdLibGrp_Click(Index As Integer)
   oRSORI.Open cSQLORI, oDBORI, adOpenForwardOnly, adLockReadOnly
 
   If Not oRSORI.EOF Then
-    barra.Value = 0
+    Barra.Value = 0
     nBARPOS = 0
     oRSORI.MoveLast
     nROWREC = oRSORI.RecordCount
@@ -1560,15 +1521,7 @@ Private Sub DTPicker1_GotFocus()
 End Sub
 
 Private Sub DTPicker1_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    Visual
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    Visual
-    SendKeys "+" + Chr(9)
-  End If
-
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub DTPicker2_GotFocus()
@@ -1576,31 +1529,13 @@ Private Sub DTPicker2_GotFocus()
 End Sub
 
 Private Sub DTPicker2_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    Visual
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    Visual
-    SendKeys "+" + Chr(9)
-  End If
-
+  TeclaEnter KeyCode
 End Sub
-
 Private Sub DTPicker3_GotFocus()
   FocusMe
 End Sub
-
 Private Sub DTPicker3_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    Visual
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    Visual
-    SendKeys "+" + Chr(9)
-  End If
-
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub DTPicker4_GotFocus()
@@ -1608,31 +1543,23 @@ Private Sub DTPicker4_GotFocus()
 End Sub
 
 Private Sub DTPicker4_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    Visual
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    Visual
-    SendKeys "+" + Chr(9)
-  End If
-
+ TeclaEnter KeyCode
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-  If FixInt(TEXT(5)) = 0 Then
+  If FixInt(tEXT(5)) = 0 Then
     If MDG("Colocar o numero do seu Funcionario na folha") Then
       Cancel = 1
       Exit Sub
     End If
   End If
 
-  If Len(Trim(TEXT(2))) = 0 Then
+  If Len(Trim(tEXT(2))) = 0 Then
     If MDG("Senha nao Colocada deseja Colocar ? ", "Gravar Senha") Then
-      zIDTEMP = TEXT(0)
+      zIDTEMP = tEXT(0)
       frmUSUSENHA.Show vbModal, Me
       If lRETU Then
-        TEXT(2) = eRETU01
+        tEXT(2) = eRETU01
         DTPicker2.Value = Date + 60
       End If
     End If
@@ -1641,7 +1568,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   ' CHAVEH POSTELAA POSTELAB nao sao gravados por isso nao sao atribuidos abaixo
   If MDG("Gravar e Sair", "Gravando Usuarios") Then
     For nITEM = 0 To 6                       'Array comeca 0
-      aVAL(nITEM) = TEXT(nITEM)
+      aVAL(nITEM) = tEXT(nITEM)
     Next nITEM
     aVAL(9) = FixNumBol(chkAtivo)
     aVAL(10) = FixNumBol(chkweekend)
@@ -1649,7 +1576,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     aVAL(12) = DTPicker2
     aVAL(7) = DTPicker3.Hour & ":" & DTPicker3.Minute
     aVAL(8) = DTPicker4.Hour & ":" & DTPicker4.Minute
-    aVAL(13) = TEXT(13)  ' CHAVEV
+    aVAL(13) = tEXT(13)  ' CHAVEV
     'volta para 14 para nao gravar postelaa postelab chaveh estao apenas para exibir no label
     nCAMPOS = 14
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 'comeca gravar do 1 0=idusuario chave da tabela
@@ -1666,7 +1593,7 @@ Private Sub Command1_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim nNUMERO As Long
-  nNUMERO = FixInt(TEXT(5), 0)
+  nNUMERO = FixInt(tEXT(5), 0)
   If demitido(nNUMERO) Then
     If lRETU Then
       If MDG("bloquear acesso e Zerar Senha") Then
@@ -1674,10 +1601,10 @@ Private Sub Command1_Click()
         chkweekend.Value = 0
         DTPicker1.Value = eRETU01
         DTPicker2.Value = eRETU01
-        TEXT(2) = ""                     ''zERA SeNHA
+        tEXT(2) = ""                     ''zERA SeNHA
       End If
       If MDG("zerar matricula") Then
-        TEXT(5) = 0
+        tEXT(5) = 0
       End If
     End If
     Exit Sub
@@ -1696,25 +1623,25 @@ Private Sub Command1_Click()
     aRETU = PegSQL(cARQ, sSQL, 2, Array("NOMTEC", "DEMITIDO"), Array("C", "DN"), Array("", Today()))
   End If
   If lRETU Then
-    TEXT(6) = aRETU(0)
+    tEXT(6) = aRETU(0)
   End If
 
 End Sub
 
 Private Sub cmdTroca_Click()
-  zIDTEMP = TEXT(0)
+  zIDTEMP = tEXT(0)
   frmUSUSENHA.Show vbModal, Me
   If lRETU Then
-    TEXT(2) = eRETU01
+    tEXT(2) = eRETU01
     DTPicker2.Value = Date + 60
-    TEXT(13) = UCase(CreateSHA256HashString(UCase(Trim(TEXT(1))) + UCase(Trim(eRETU02))))
+    tEXT(13) = UCase(CreateSHA256HashString(UCase(Trim(tEXT(1))) + UCase(Trim(eRETU02))))
   End If
 
 End Sub
 
 Private Sub cmdZeraSenha_Click()
-  TEXT(2) = " "
-  TEXT(13) = " "
+  tEXT(2) = " "
+  tEXT(13) = " "
   cmdClose_Click
 End Sub
 
@@ -1729,8 +1656,8 @@ Private Sub escidfolha_Click(Index As Integer)
 
   If lRETU Then
 
-    frmUSER.TEXT(5) = eRETU01
-    frmUSER.TEXT(6) = eRETU02
+    frmUSER.tEXT(5) = eRETU01
+    frmUSER.tEXT(6) = eRETU02
     Command1_Click
 
   End If
@@ -1792,7 +1719,7 @@ Private Sub Form_Load()
   aPAD = Array(0, "", "", "", "", 0, "", Now, Now, False, False, Today() + 30, Today() + 60, "", "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 6                           '' array comeca 0
-    TEXT(nITEM) = aVAL(nITEM)
+    tEXT(nITEM) = aVAL(nITEM)
   Next nITEM
   If aVAL(7) <> "" Then DTPicker3 = Date + aVAL(7)  ''Adciona date pois o datapicker nao aceita vazio
   If aVAL(8) <> "" Then DTPicker4 = Date + aVAL(8)  ''na mascara datapicker fica so  a hora
@@ -1805,7 +1732,7 @@ Private Sub Form_Load()
   If IsDate(aVAL(12)) Then
     DTPicker2 = aVAL(12)
   End If
-  TEXT(13) = aVAL(13)
+  tEXT(13) = aVAL(13)
   Lblpostelaa.Caption = aVAL(14)
   LblpostelaB.Caption = aVAL(15)
   Lblchaveh.Caption = aVAL(16)
@@ -1822,26 +1749,19 @@ Private Sub tEXT_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub Text_KeyUp(Index As Integer, KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    Visual
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    Visual
-    SendKeys "+" + Chr(9)
-  End If
+TeclaEnter KeyCode
 End Sub
 
 Public Sub Visual()
   If chkAtivo.Value = 1 Then
-    chkAtivo.Caption = "Usuário Ativo"
+    chkAtivo.Caption = "Usuario Ativo"
   Else
-    chkAtivo.Caption = "Usuário Desativado"
+    chkAtivo.Caption = "Usuario Desativado"
   End If
   If chkweekend.Value = 1 Then
     chkweekend.Caption = "Pode Acessar no fim-de-semana"
   Else
-    chkweekend.Caption = "Não Pode Acessar no fim-de-semana"
+    chkweekend.Caption = "Nao Pode Acessar no fim-de-semana"
   End If
 End Sub
 
@@ -1856,7 +1776,7 @@ Private Sub BARPOS()
   End If
   If nPOSATU > 0 And nPOSATU < 101 Then
     Debug.Print nPOSATU
-    barra.Value = nPOSATU
+    Barra.Value = nPOSATU
   End If
   DIZAPU.Refresh
 End Sub

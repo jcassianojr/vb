@@ -521,12 +521,16 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
       
       ''Efetua a Gravaçao
       If lGRAVA Then
-         If aFOR(x) = "DH" And aARQ(2) = "SQLITE" Then
-            oRS(aCAM(x)) = Now 'Format(Now, "yyyy-mm-dd hh:mm:ss")
+         If aARQ(2) = "SQLITE" And (aFOR(x) = "DH" Or aFOR(x) = "D") Then
+            If aFOR(x) = "DH" Then
+              oRS(aCAM(x)) = CStr(Now)
+            End If
+            If aFOR(x) = "D" Then
+              oRS(aCAM(x)) = CStr(eVAL)
+            End If
          Else
             oRS(aCAM(x)) = FVar(eVAL, aFOR(x), eVAZIO)
          End If
-        'oFIELD = FVar(eVAL, aFOR(X), eVAZIO)
       End If
     Next x
     Select Case aARQ(2) ' alguns nao aceitam update

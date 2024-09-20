@@ -136,25 +136,16 @@ Attribute VB_Exposed = False
 Const nFORMID = 1072
 Const cFORMID = "Dialogo de Busca"
 Option Explicit
-
 Private Sub cBUSCA_GotFocus()
   FocusMe
 End Sub
-
 Private Sub cBUSCA_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    SendKeys "+" + Chr(9)
-  End If
+  TeclaEnter KeyCode
 End Sub
-
 Private Sub Command1_Click()
   lRETU = True
   Unload Me
 End Sub
-
 Private Sub Command2_Click()
   lRETU = False
   Unload Me
@@ -163,44 +154,23 @@ End Sub
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
   TeclaEnter KeyCode
 End Sub
-
 Private Sub Form_Load()
   CenterFormToScreen Me
   Me.Caption = cFORMID
   HelpContextID = nFORMID
-
   lRETU = False
-  'frmLocalizar.Left = (Screen.Width - frmLocalizar.Width) / 2
-  'frmLocalizar.Top = (Screen.Height - frmLocalizar.Height) / 2
 End Sub
-
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   eRETU01 = cBUSCA
   eRETU02 = nIND
 End Sub
-
-Private Sub mais_Click()
-  nIND = CStr(IncDec(nIND, 1, 1, 99))
-End Sub
-
-Private Sub menos_Click()
-  nIND = CStr(IncDec(nIND, -1, 1, 99))
-End Sub
-
 Private Sub nIND_GotFocus()
   FocusMe
 End Sub
-
 Private Sub nIND_KeyPress(KeyAscii As Integer)
   KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
-
 Private Sub nIND_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    SendKeys "+" + Chr(9)
-  End If
+  TeclaEnter KeyCode
 End Sub
 

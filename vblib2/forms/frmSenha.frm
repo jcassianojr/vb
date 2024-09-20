@@ -260,18 +260,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
-'Dim lOK As Integer
 Const nFORMID = 1070
 Const cFORMID = "Acesso ao Sistema"
 Dim nTENTA As Integer
 Dim nTEMPO As Integer
-
 Private Sub ano_GotFocus()
   FocusMe
 End Sub
-
 Private Sub ano_KeyPress(KeyAscii As Integer)
   KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
@@ -382,23 +378,6 @@ Private Sub cmdOK_Click()
 
   cCHAVE = UCase(CreateSHA256HashString(UCase(Trim(txtUSUARIO)) + UCase(Trim(txtSENHA))))
 
-  '   If aRETU(0) = cSENHA Then
-  '       Alert ("Senha")
-  '   End If
-  '       Alert ("senha 2")
-  '   End If
-  ''      If aRETU(0) = cSENHA3 Then
-  '       Alert ("senha 3")
-  '   End If
-  '   If aRETU(0) = cSENHA4 Then
-  '       Alert ("senha 4")
-  '   End If
-  '   If aRETU(13) = cCHAVE Then
-  '       Alert ("HASH H")
-  '   End If
-  '   If aRETU(14) = cCHAVE Then
-  '       Alert ("HASH V")
-  '   End If
   cSENHAPOS = senhapos(zUSERCHV)
 
 49 If aRETU(0) = cSENHA Or _
@@ -503,17 +482,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   zANO = ano.Value
   zEMPRESA = txtempresa.Value
 End Sub
-
-'Private Sub maisemp_Click()
-'    txtempresa = CStr(IncDec(txtempresa, 1, 1, 999))
-'End Sub
-
-'Private Sub menosemp_Click()
-'    txtempresa = CStr(IncDec(txtempresa, -1, 1, 999))
-'End Sub
-
 Private Sub Form_Load()
-'CentralizaJanela Me
   CenterFormToScreen Me
   EnableCloseButton Me.hWnd, False
   txtUSUARIO = NetworkUserName()
@@ -552,12 +521,7 @@ Private Sub TxtEmpresa_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub TXTempresa_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    SendKeys "+" + Chr(9)
-  End If
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub txtSENHA_GotFocus()
@@ -576,13 +540,7 @@ Private Sub txtSENHA_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub txtSENHA_KeyUp(KeyCode As Integer, Shift As Integer)
-  If KeyCode = 13 Or KeyCode = 40 Then
-    SendKeys Chr(9)
-  End If
-  If KeyCode = 38 Then
-    SendKeys "+" + Chr(9)
-  End If
-
+  TeclaEnter KeyCode
 End Sub
 
 Private Sub txtUSUARIO_GotFocus()
