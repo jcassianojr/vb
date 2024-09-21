@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escRPTGRP 
    Caption         =   "Escolha o grupo de Relatorio"
    ClientHeight    =   6135
@@ -13,10 +13,19 @@ Begin VB.Form escRPTGRP
    ScaleHeight     =   6135
    ScaleWidth      =   9345
    StartUpPosition =   2  'CenterScreen
+   Begin VBFLXGRD17.VBFlexGrid Grid 
+      Height          =   5415
+      Left            =   120
+      TabIndex        =   2
+      Top             =   480
+      Width           =   7575
+      _ExtentX        =   13361
+      _ExtentY        =   9551
+   End
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
       Left            =   120
-      TabIndex        =   2
+      TabIndex        =   1
       Top             =   0
       Width           =   1725
       _ExtentX        =   3043
@@ -37,7 +46,7 @@ Begin VB.Form escRPTGRP
       Align           =   4  'Align Right
       Height          =   6135
       Left            =   7875
-      TabIndex        =   1
+      TabIndex        =   0
       Top             =   0
       Width           =   1470
       _ExtentX        =   2593
@@ -47,17 +56,6 @@ Begin VB.Form escRPTGRP
       Appearance      =   1
       TextAlignment   =   1
       _Version        =   393216
-   End
-   Begin MSFlexGridLib.MSFlexGrid Grid 
-      Height          =   5235
-      Left            =   240
-      TabIndex        =   0
-      Top             =   720
-      Width           =   7335
-      _ExtentX        =   12938
-      _ExtentY        =   9234
-      _Version        =   393216
-      SelectionMode   =   1
    End
 End
 Attribute VB_Name = "escRPTGRP"
@@ -71,7 +69,7 @@ Private Sub Apaga_Click()
   Dim cGRUPO, sSQL As String
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    cGRUPO = FixStr(Grid.tEXT)
+    cGRUPO = FixStr(Grid.Text)
     '******************************************************************
     'RPTGRP
     sSQL = "select * from RPTGRP WHERE GRP='" & cGRUPO & "'"
@@ -97,7 +95,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    zgrp = Grid.tEXT
+    zgrp = Grid.Text
     frmRPTGRP.Show vbModal
     FilRelat
   End If
@@ -106,7 +104,7 @@ End Sub
 Private Sub Escolher_Click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    zgrp = Grid.tEXT
+    zgrp = Grid.Text
     escRPT.Show vbModal, Me
   End If
 End Sub

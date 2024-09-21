@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form FrmTxl 
    Caption         =   "Gerador Relatorios Texto"
    ClientHeight    =   7545
@@ -14,6 +14,15 @@ Begin VB.Form FrmTxl
    ScaleHeight     =   7545
    ScaleWidth      =   11760
    StartUpPosition =   3  'Windows Default
+   Begin VBFLXGRD17.VBFlexGrid Listview1 
+      Height          =   1335
+      Left            =   120
+      TabIndex        =   34
+      Top             =   6000
+      Width           =   9855
+      _ExtentX        =   17383
+      _ExtentY        =   2355
+   End
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   10200
       Top             =   2640
@@ -23,7 +32,7 @@ Begin VB.Form FrmTxl
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   10080
-      TabIndex        =   33
+      TabIndex        =   32
       TabStop         =   0   'False
       Top             =   2280
       Visible         =   0   'False
@@ -32,16 +41,6 @@ Begin VB.Form FrmTxl
       _ExtentY        =   450
       MultiLine       =   -1  'True
       TextRTF         =   "FrmTxl.frx":058A
-   End
-   Begin MSFlexGridLib.MSFlexGrid Listview1 
-      Height          =   1335
-      Left            =   120
-      TabIndex        =   18
-      Top             =   6000
-      Width           =   9735
-      _ExtentX        =   17171
-      _ExtentY        =   2355
-      _Version        =   393216
    End
    Begin VB.Frame Destino 
       Caption         =   "Destino"
@@ -158,7 +157,7 @@ Begin VB.Form FrmTxl
       Begin XPControls.XPButton cmdimp 
          Height          =   675
          Left            =   1680
-         TabIndex        =   20
+         TabIndex        =   19
          Top             =   240
          Width           =   1395
          _ExtentX        =   2461
@@ -178,7 +177,7 @@ Begin VB.Form FrmTxl
       Begin XPControls.XPButton CmdVisua 
          Height          =   675
          Left            =   4440
-         TabIndex        =   21
+         TabIndex        =   20
          Top             =   240
          Width           =   1275
          _ExtentX        =   2249
@@ -198,7 +197,7 @@ Begin VB.Form FrmTxl
       Begin XPControls.XPButton CmdConfImp 
          Height          =   675
          Left            =   120
-         TabIndex        =   28
+         TabIndex        =   27
          TabStop         =   0   'False
          Top             =   240
          Width           =   1455
@@ -219,7 +218,7 @@ Begin VB.Form FrmTxl
       Begin XPControls.XPButton Encerrar 
          Height          =   675
          Left            =   5880
-         TabIndex        =   29
+         TabIndex        =   28
          Top             =   240
          Width           =   1215
          _ExtentX        =   2143
@@ -239,7 +238,7 @@ Begin VB.Form FrmTxl
       Begin XPControls.XPButton XPButton1 
          Height          =   675
          Left            =   3120
-         TabIndex        =   34
+         TabIndex        =   33
          Top             =   240
          Width           =   1275
          _ExtentX        =   2249
@@ -269,7 +268,7 @@ Begin VB.Form FrmTxl
          Height          =   375
          Index           =   0
          Left            =   120
-         TabIndex        =   24
+         TabIndex        =   23
          TabStop         =   0   'False
          Top             =   360
          Width           =   795
@@ -291,7 +290,7 @@ Begin VB.Form FrmTxl
          Height          =   375
          Index           =   1
          Left            =   1080
-         TabIndex        =   25
+         TabIndex        =   24
          TabStop         =   0   'False
          Top             =   360
          Width           =   855
@@ -313,7 +312,7 @@ Begin VB.Form FrmTxl
          Height          =   375
          Index           =   2
          Left            =   2160
-         TabIndex        =   26
+         TabIndex        =   25
          TabStop         =   0   'False
          Top             =   360
          Width           =   795
@@ -335,7 +334,7 @@ Begin VB.Form FrmTxl
          Height          =   375
          Index           =   3
          Left            =   3120
-         TabIndex        =   27
+         TabIndex        =   26
          TabStop         =   0   'False
          Top             =   360
          Width           =   795
@@ -384,7 +383,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdFiltro 
       Height          =   435
       Left            =   10080
-      TabIndex        =   22
+      TabIndex        =   21
       Top             =   3960
       Width           =   1215
       _ExtentX        =   2143
@@ -404,7 +403,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdOrdem 
       Height          =   435
       Left            =   10080
-      TabIndex        =   23
+      TabIndex        =   22
       Top             =   4920
       Width           =   1275
       _ExtentX        =   2249
@@ -424,7 +423,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdEditar 
       Height          =   315
       Left            =   960
-      TabIndex        =   31
+      TabIndex        =   30
       TabStop         =   0   'False
       Top             =   2280
       Width           =   975
@@ -445,7 +444,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   315
       Left            =   2040
-      TabIndex        =   30
+      TabIndex        =   29
       TabStop         =   0   'False
       Top             =   2280
       Width           =   1335
@@ -466,7 +465,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdShell 
       Height          =   315
       Left            =   3480
-      TabIndex        =   32
+      TabIndex        =   31
       Top             =   2280
       Width           =   375
       _ExtentX        =   661
@@ -487,7 +486,7 @@ Begin VB.Form FrmTxl
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   240
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   1800
       Width           =   615
    End
@@ -788,6 +787,7 @@ End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
   TeclaEnter KeyCode
+  
 End Sub
 
 Private Sub Form_Load()

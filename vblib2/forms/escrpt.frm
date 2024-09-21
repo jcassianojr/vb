@@ -1,9 +1,9 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escRPT 
    Caption         =   "Escolha o grupo de Relatorio"
    ClientHeight    =   6675
@@ -15,6 +15,15 @@ Begin VB.Form escRPT
    ScaleHeight     =   6675
    ScaleWidth      =   10785
    StartUpPosition =   2  'CenterScreen
+   Begin VBFLXGRD17.VBFlexGrid Grid 
+      Height          =   5775
+      Left            =   120
+      TabIndex        =   4
+      Top             =   600
+      Width           =   9015
+      _ExtentX        =   15901
+      _ExtentY        =   10186
+   End
    Begin vbExtra.CommonDialogEx CommonDialogEx1 
       Left            =   2400
       Top             =   0
@@ -29,7 +38,7 @@ Begin VB.Form escRPT
       Left            =   6840
       ScaleHeight     =   315
       ScaleWidth      =   1875
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   120
       Visible         =   0   'False
       Width           =   1935
@@ -44,7 +53,7 @@ Begin VB.Form escRPT
       Align           =   4  'Align Right
       Height          =   6675
       Left            =   9315
-      TabIndex        =   1
+      TabIndex        =   0
       Top             =   0
       Width           =   1470
       _ExtentX        =   2593
@@ -55,20 +64,10 @@ Begin VB.Form escRPT
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin MSFlexGridLib.MSFlexGrid Grid 
-      Height          =   5895
-      Left            =   240
-      TabIndex        =   0
-      Top             =   600
-      Width           =   8775
-      _ExtentX        =   15478
-      _ExtentY        =   10398
-      _Version        =   393216
-   End
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
       Left            =   0
-      TabIndex        =   2
+      TabIndex        =   1
       Top             =   0
       Width           =   1725
       _ExtentX        =   3043
@@ -88,7 +87,7 @@ Begin VB.Form escRPT
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   5160
-      TabIndex        =   3
+      TabIndex        =   2
       TabStop         =   0   'False
       Top             =   120
       Visible         =   0   'False
@@ -113,7 +112,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -129,7 +128,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -232,7 +231,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.Text
+  zRPT = Grid.tEXT
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -555,7 +554,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     escrptusr.Show vbModal
   End If
 End Sub

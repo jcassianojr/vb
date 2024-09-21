@@ -65,7 +65,7 @@ Public Function LocalizaGrid(ByRef oGRID As Variant, Optional ByVal eBUSCA As Va
   eBUSCA = UCase(eBUSCA)
   For x = 0 To nROWS
     oGRID.Row = x
-    cCOMPARE = UCase(Left(FixStr(oGRID.tEXT), nTAM))
+    cCOMPARE = UCase(Left(FixStr(oGRID.Text), nTAM))
     If cCOMPARE = eBUSCA Then
       lFOUND = True
       oGRID.Col = oGRID.cols - 1
@@ -140,7 +140,7 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
     End If
   End Select
 
-
+  
   oGRID.Visible = False
   With oGRID
     .cols = nITEM
@@ -149,16 +149,16 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
     .Row = 0
     For x = 0 To nITEM - 1
       .Col = x
-      .tEXT = aDIZ(x)
+      .Text = aDIZ(x)
       .ColWidth(x) = aTAM(x)
       If InStr(aCAM(x), "$") > 0 Then
-        Select Case Mid(aCAM(x), 1, 1)
+        Select Case Mid(aCAM(x), 1, 1)  ' FlexAlignmentCENTERCenter FlexAlignmentRIGHTCenter FlexAlignmentLeftCenter
         Case "L"
-          .ColAlignment(x) = flexAlignLeftCenter
+          .ColAlignment(x) = FlexAlignmentLeftCenter 'flexAlignLeftCenter
         Case "R"
-          .ColAlignment(x) = flexAlignRightCenter
+          .ColAlignment(x) = FlexAlignmentRightCenter 'flexAlignRightCenter
         Case "C"
-          .ColAlignment(x) = flexAlignCenterCenter
+          .ColAlignment(x) = FlexAlignmentCenterCenter 'flexAlignCenterCenter
         End Select
         aCAM(x) = Mid(aCAM(x), InStr(aCAM(x), "$") + 1)
       End If
@@ -321,16 +321,16 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
     .Row = 0
     For x = 0 To nITEM - 1
       .Col = x
-      .tEXT = aDIZ(x)
+      .Text = aDIZ(x)
       .ColWidth(x) = aTAM(x)
       If InStr(aCAM(x), "$") > 0 Then
-        Select Case Mid(aCAM(x), 1, 1)
+        Select Case Mid(aCAM(x), 1, 1)  ' FlexAlignmentCENTERCenter FlexAlignmentRIGHTCenter FlexAlignmentLeftCenter
         Case "L"
-          .ColAlignment(x) = flexAlignLeftCenter
+          .ColAlignment(x) = FlexAlignmentLeftCenter 'flexAlignLeftCenter
         Case "R"
-          .ColAlignment(x) = flexAlignRightCenter
+          .ColAlignment(x) = FlexAlignmentRightCenter 'flexAlignRightCenter
         Case "C"
-          .ColAlignment(x) = flexAlignCenterCenter
+          .ColAlignment(x) = FlexAlignmentCenterCenter 'flexAlignCenterCenter
         End Select
         aCAM(x) = Mid(aCAM(x), InStr(aCAM(x), "$") + 1)
       End If
@@ -542,13 +542,13 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
       .Col = x
       .ColWidth(x) = aTAM(x)
       If InStr(aCAM(x), "$") > 0 Then
-        Select Case Mid(aCAM(x), 1, 1)
+        Select Case Mid(aCAM(x), 1, 1)  ' FlexAlignmentCENTERCenter FlexAlignmentRIGHTCenter FlexAlignmentLeftCenter
         Case "L"
-          .ColAlignment(x) = flexAlignLeftCenter
+          .ColAlignment(x) = FlexAlignmentLeftCenter 'flexAlignLeftCenter
         Case "R"
-          .ColAlignment(x) = flexAlignRightCenter
+          .ColAlignment(x) = FlexAlignmentRightCenter 'flexAlignRightCenter
         Case "C"
-          .ColAlignment(x) = flexAlignCenterCenter
+          .ColAlignment(x) = FlexAlignmentCenterCenter 'flexAlignCenterCenter
         End Select
         aCAM(x) = Mid(aCAM(x), InStr(aCAM(x), "$") + 1)
       End If
@@ -571,7 +571,7 @@ If Not oRS.BOF Then
   With oGRID
     For x = 0 To nITEM - 1
       .Col = x
-      .tEXT = aDIZ(x)
+      .Text = aDIZ(x)
     Next x
   End With
   oGRID.Visible = True
@@ -645,7 +645,7 @@ Public Function CloneGrid(ByRef oGRIDORI As Variant, ByRef oGRIDDES As Variant)
     For x = 0 To nCOLS
       oGRIDORI.Col = x
       .Col = x
-      .tEXT = oGRIDORI
+      .Text = oGRIDORI
       .ColWidth(x) = oGRIDORI.ColWidth(x)
       .ColAlignment(x) = oGRIDORI.ColAlignment(x)
     Next

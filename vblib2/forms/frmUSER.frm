@@ -1715,7 +1715,7 @@ Private Sub Form_Load()
   aCAM = Array("IDUSUARIO", "DATAULT", "SENHA", "EQUIVALENTE", _
                "USUARIO", "IDFOLHA", "NOMEFOLHA", "HORAINI", "HORAFIM", _
                "ATIVO", "WEEKEND", "DATAVAL", "TROCAR", "chavev", "POSTELAA", "POSTELAB", "CHAVEH")
-  aFOR = Array("N", "D", "C", "C", "C", "N", "C", "D", "D", "BN", "BN", "DC", "DC", "C", "C", "C", "C")
+  aFOR = Array("N", "D", "C", "C", "C", "N", "C", "", "", "BN", "BN", "DC", "DC", "C", "C", "C", "C")
   aPAD = Array(0, Now, "", "", "", 0, "", Now, Now, False, False, Today() + 30, Today() + 60, "", "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 6                           '' array comeca 0
@@ -1739,6 +1739,7 @@ Private Sub Form_Load()
   senhapos (LblpostelaB.Caption)
   Visual
 End Sub
+
 Private Sub Text_GotFocus(Index As Integer)
   FocusMe
 End Sub

@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form FrmFiltro 
    Caption         =   "Filtro"
    ClientHeight    =   5895
@@ -12,11 +12,20 @@ Begin VB.Form FrmFiltro
    ScaleHeight     =   5895
    ScaleWidth      =   9360
    StartUpPosition =   3  'Windows Default
+   Begin VBFLXGRD17.VBFlexGrid Grid 
+      Height          =   2415
+      Left            =   120
+      TabIndex        =   33
+      Top             =   3360
+      Width           =   6495
+      _ExtentX        =   11456
+      _ExtentY        =   4260
+   End
    Begin XPControls.XPButton oper 
       Height          =   375
       Index           =   0
       Left            =   1080
-      TabIndex        =   28
+      TabIndex        =   27
       Top             =   2880
       Width           =   495
       _ExtentX        =   0
@@ -36,7 +45,7 @@ Begin VB.Form FrmFiltro
       Height          =   375
       Index           =   6
       Left            =   3960
-      TabIndex        =   27
+      TabIndex        =   26
       Top             =   2880
       Width           =   495
       _ExtentX        =   0
@@ -57,7 +66,7 @@ Begin VB.Form FrmFiltro
       Height          =   300
       Left            =   5400
       Locked          =   -1  'True
-      TabIndex        =   25
+      TabIndex        =   24
       TabStop         =   0   'False
       ToolTipText     =   "Tabela"
       Top             =   540
@@ -67,7 +76,7 @@ Begin VB.Form FrmFiltro
       Height          =   285
       Index           =   2
       Left            =   5760
-      TabIndex        =   24
+      TabIndex        =   23
       Top             =   2940
       Width           =   420
       _ExtentX        =   0
@@ -87,7 +96,7 @@ Begin VB.Form FrmFiltro
       Height          =   285
       Index           =   3
       Left            =   5280
-      TabIndex        =   23
+      TabIndex        =   22
       Top             =   2940
       Width           =   420
       _ExtentX        =   0
@@ -108,7 +117,7 @@ Begin VB.Form FrmFiltro
       Height          =   285
       Left            =   4800
       Locked          =   -1  'True
-      TabIndex        =   22
+      TabIndex        =   21
       TabStop         =   0   'False
       Text            =   "E"
       Top             =   2940
@@ -118,7 +127,7 @@ Begin VB.Form FrmFiltro
       Height          =   375
       Index           =   5
       Left            =   3480
-      TabIndex        =   21
+      TabIndex        =   20
       Top             =   2880
       Width           =   495
       _ExtentX        =   0
@@ -138,7 +147,7 @@ Begin VB.Form FrmFiltro
       Height          =   375
       Index           =   4
       Left            =   3000
-      TabIndex        =   20
+      TabIndex        =   19
       Top             =   2880
       Width           =   495
       _ExtentX        =   0
@@ -158,7 +167,7 @@ Begin VB.Form FrmFiltro
       Height          =   375
       Index           =   3
       Left            =   2520
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   2880
       Width           =   495
       _ExtentX        =   0
@@ -178,7 +187,7 @@ Begin VB.Form FrmFiltro
       Height          =   375
       Index           =   2
       Left            =   2040
-      TabIndex        =   18
+      TabIndex        =   17
       Top             =   2880
       Width           =   495
       _ExtentX        =   0
@@ -198,7 +207,7 @@ Begin VB.Form FrmFiltro
       Height          =   375
       Index           =   1
       Left            =   1560
-      TabIndex        =   17
+      TabIndex        =   16
       Top             =   2880
       Width           =   495
       _ExtentX        =   0
@@ -218,7 +227,7 @@ Begin VB.Form FrmFiltro
       Caption         =   "Operaçao"
       Height          =   645
       Left            =   120
-      TabIndex        =   15
+      TabIndex        =   14
       Top             =   2700
       Width           =   4515
       Begin VB.TextBox coper 
@@ -226,7 +235,7 @@ Begin VB.Form FrmFiltro
          Height          =   285
          Left            =   90
          Locked          =   -1  'True
-         TabIndex        =   16
+         TabIndex        =   15
          TabStop         =   0   'False
          Text            =   ">="
          Top             =   225
@@ -237,7 +246,7 @@ Begin VB.Form FrmFiltro
       Caption         =   "Vazio/Zerado"
       Height          =   285
       Left            =   6360
-      TabIndex        =   14
+      TabIndex        =   13
       Top             =   2700
       Width           =   1545
    End
@@ -245,7 +254,7 @@ Begin VB.Form FrmFiltro
       Caption         =   "Tipo"
       Height          =   645
       Left            =   4740
-      TabIndex        =   13
+      TabIndex        =   12
       Top             =   2700
       Width           =   1545
    End
@@ -254,7 +263,7 @@ Begin VB.Form FrmFiltro
       Height          =   300
       Left            =   6840
       Locked          =   -1  'True
-      TabIndex        =   10
+      TabIndex        =   9
       TabStop         =   0   'False
       ToolTipText     =   "Tipo do Campo Escolhido"
       Top             =   3840
@@ -265,7 +274,7 @@ Begin VB.Form FrmFiltro
       Height          =   300
       Left            =   6840
       Locked          =   -1  'True
-      TabIndex        =   9
+      TabIndex        =   8
       TabStop         =   0   'False
       ToolTipText     =   "Campo Escolhido"
       Top             =   3480
@@ -274,7 +283,7 @@ Begin VB.Form FrmFiltro
    Begin VB.TextBox ValFim 
       Height          =   300
       Left            =   495
-      TabIndex        =   8
+      TabIndex        =   7
       ToolTipText     =   "Valor Final"
       Top             =   2340
       Width           =   6960
@@ -282,22 +291,10 @@ Begin VB.Form FrmFiltro
    Begin VB.TextBox ValINI 
       Height          =   300
       Left            =   495
-      TabIndex        =   7
+      TabIndex        =   6
       ToolTipText     =   "Valor Inicial do Campo"
       Top             =   1980
       Width           =   6960
-   End
-   Begin MSFlexGridLib.MSFlexGrid grid 
-      Height          =   2400
-      Left            =   45
-      TabIndex        =   6
-      TabStop         =   0   'False
-      ToolTipText     =   "Lista de Campos (Clique Para Escolher)"
-      Top             =   3420
-      Width           =   6630
-      _ExtentX        =   11695
-      _ExtentY        =   4233
-      _Version        =   393216
    End
    Begin VB.TextBox FILTRO 
       Enabled         =   0   'False
@@ -348,7 +345,7 @@ Begin VB.Form FrmFiltro
    Begin XPControls.XPButton CmdAbrir 
       Height          =   375
       Left            =   6840
-      TabIndex        =   30
+      TabIndex        =   29
       Top             =   4200
       Width           =   1455
       _ExtentX        =   2566
@@ -368,7 +365,7 @@ Begin VB.Form FrmFiltro
    Begin XPControls.XPButton Encerrar 
       Height          =   435
       Left            =   7680
-      TabIndex        =   31
+      TabIndex        =   30
       Top             =   120
       Width           =   1455
       _ExtentX        =   2566
@@ -388,7 +385,7 @@ Begin VB.Form FrmFiltro
    Begin XPControls.XPButton ok 
       Height          =   435
       Left            =   7560
-      TabIndex        =   32
+      TabIndex        =   31
       Top             =   1920
       Width           =   1515
       _ExtentX        =   2672
@@ -408,7 +405,7 @@ Begin VB.Form FrmFiltro
    Begin XPControls.XPButton CmdZerar 
       Height          =   435
       Left            =   7680
-      TabIndex        =   33
+      TabIndex        =   32
       TabStop         =   0   'False
       Top             =   960
       Width           =   1515
@@ -431,7 +428,7 @@ Begin VB.Form FrmFiltro
       ForeColor       =   &H00C00000&
       Height          =   195
       Left            =   6360
-      TabIndex        =   29
+      TabIndex        =   28
       Top             =   3060
       Width           =   2115
    End
@@ -440,7 +437,7 @@ Begin VB.Form FrmFiltro
       ForeColor       =   &H00C00000&
       Height          =   270
       Left            =   4920
-      TabIndex        =   26
+      TabIndex        =   25
       Top             =   585
       Width           =   420
    End
@@ -449,7 +446,7 @@ Begin VB.Form FrmFiltro
       ForeColor       =   &H00C00000&
       Height          =   330
       Left            =   135
-      TabIndex        =   12
+      TabIndex        =   11
       Top             =   2340
       Width           =   510
    End
@@ -458,7 +455,7 @@ Begin VB.Form FrmFiltro
       ForeColor       =   &H00C00000&
       Height          =   330
       Left            =   135
-      TabIndex        =   11
+      TabIndex        =   10
       Top             =   1980
       Width           =   510
    End
@@ -543,7 +540,7 @@ Private Sub CmdGera_Click()
   Dim strtipo As String
   Dim strsize As String
   Dim strdec As String
-  Dim X As Integer
+  Dim x As Integer
   Dim RstCampos
 
   If Len(FixStr(arquivo)) = 0 Then
@@ -562,11 +559,11 @@ Private Sub CmdGera_Click()
 
 
   cSQL = tabela.Text
-  grid.Clear
+  Grid.Clear
 
 
 
-  With grid
+  With Grid
     .Clear
     .cols = 4
     .FixedCols = 0
@@ -607,7 +604,7 @@ Private Sub CmdGera_Click()
         strsize = FixStr(RstCampos!NUMERIC_PRECISION) & "." & strdec
       End If
     End If
-    grid.AddItem STRCAMPO & vbTab & TipoDado2(RstCampos!DATA_TYPE) & vbTab & strtipo & vbTab & strsize
+    Grid.AddItem STRCAMPO & vbTab & TipoDado2(RstCampos!DATA_TYPE) & vbTab & strtipo & vbTab & strsize
     RstCampos.MoveNext
   Loop
   DB.Close
@@ -626,10 +623,10 @@ monta02:
   ''     RstCampos.Close
   Set rs = New ADODB.Recordset
   rs.Open cSQL, DB, adOpenForwardOnly, adLockReadOnly
-  For X = 0 To rs.Fields.Count - 1
-    STRCAMPO = rs.Fields(X).Name
-    grid.AddItem STRCAMPO & vbTab & TipoDado2(rs.Fields(X).Type) & vbTab & TipoDados(rs.Fields(X).Type) & vbTab & rs.Fields(X).DefinedSize
-  Next X
+  For x = 0 To rs.Fields.Count - 1
+    STRCAMPO = rs.Fields(x).Name
+    Grid.AddItem STRCAMPO & vbTab & TipoDado2(rs.Fields(x).Type) & vbTab & TipoDados(rs.Fields(x).Type) & vbTab & rs.Fields(x).DefinedSize
+  Next x
   rs.Close
   DB.Close
   Screen.MousePointer = vbDefault
@@ -741,10 +738,10 @@ Private Sub grid_Click()
   Vazio.Value = vbUnchecked
 
 
-  grid.Col = 0
-  campo = grid
-  grid.Col = 1
-  camtip = grid
+  Grid.Col = 0
+  campo = Grid
+  Grid.Col = 1
+  camtip = Grid
   Select Case camtip
   Case "N"
     ValINI = "0.00000"
@@ -762,21 +759,21 @@ Private Sub grid_Click()
 End Sub
 
 Private Sub ok_Click()
-  Dim X As Long
+  Dim x As Long
   Dim nVEZ As Long
   Dim aUSO As Variant
   If InStr(ValINI, ";") > 0 Then
     aUSO = Split(ValINI, ";")
     ValFim = ""
     nVEZ = UBound(aUSO)
-    For X = 0 To nVEZ
-      ValINI = aUSO(X)
-      If X = nVEZ Then
+    For x = 0 To nVEZ
+      ValINI = aUSO(x)
+      If x = nVEZ Then
         ok_ClickX (True)
       Else
         ok_ClickX (False)
       End If
-    Next X
+    Next x
   Else
     ok_ClickX (True)
   End If
