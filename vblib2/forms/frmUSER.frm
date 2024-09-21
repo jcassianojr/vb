@@ -797,7 +797,7 @@ Begin VB.Form frmUSER
             Strikethrough   =   0   'False
          EndProperty
          Height          =   285
-         Index           =   1
+         Index           =   4
          Left            =   1320
          MaxLength       =   10
          TabIndex        =   1
@@ -819,7 +819,7 @@ Begin VB.Form frmUSER
             Strikethrough   =   0   'False
          EndProperty
          Height          =   285
-         Index           =   4
+         Index           =   1
          Left            =   3840
          Locked          =   -1  'True
          TabIndex        =   2
@@ -1574,12 +1574,12 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     aVAL(10) = FixNumBol(chkweekend)
     aVAL(11) = DTPicker1
     aVAL(12) = DTPicker2
-    aVAL(7) = DTPicker3.Hour & ":" & DTPicker3.Minute
-    aVAL(8) = DTPicker4.Hour & ":" & DTPicker4.Minute
+    aVAL(7) = DTPicker3 'DTPicker3.Hour & ":" & DTPicker3.Minute
+    aVAL(8) = DTPicker4 'DTPicker4.Hour & ":" & DTPicker4.Minute
     aVAL(13) = tEXT(13)  ' CHAVEV
     'volta para 14 para nao gravar postelaa postelab chaveh estao apenas para exibir no label
     nCAMPOS = 14
-    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 'comeca gravar do 1 0=idusuario chave da tabela
+    GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 2 'comeca gravar do 2 0=idusuario chave da tabela 1 datault no login
     
     GravaLog nFORMID, 0, "Gravou Usuario"
   Else
@@ -1712,17 +1712,17 @@ Private Sub Form_Load()
   zIDTEMP = ePASS02
 
   nCAMPOS = 17
-  aCAM = Array("IDUSUARIO", "USUARIO", "SENHA", "EQUIVALENTE", _
-               "DATAULT", "IDFOLHA", "NOMEFOLHA", "HORAINI", "HORAFIM", _
+  aCAM = Array("IDUSUARIO", "DATAULT", "SENHA", "EQUIVALENTE", _
+               "USUARIO", "IDFOLHA", "NOMEFOLHA", "HORAINI", "HORAFIM", _
                "ATIVO", "WEEKEND", "DATAVAL", "TROCAR", "chavev", "POSTELAA", "POSTELAB", "CHAVEH")
-  aFOR = Array("N", "C", "C", "C", "D", "N", "C", "", "", "BN", "BN", "DC", "DC", "C", "C", "C", "C")
-  aPAD = Array(0, "", "", "", "", 0, "", Now, Now, False, False, Today() + 30, Today() + 60, "", "", "", "")
+  aFOR = Array("N", "D", "C", "C", "C", "N", "C", "D", "D", "BN", "BN", "DC", "DC", "C", "C", "C", "C")
+  aPAD = Array(0, Now, "", "", "", 0, "", Now, Now, False, False, Today() + 30, Today() + 60, "", "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 6                           '' array comeca 0
     tEXT(nITEM) = aVAL(nITEM)
   Next nITEM
-  If aVAL(7) <> "" Then DTPicker3 = Date + aVAL(7)  ''Adciona date pois o datapicker nao aceita vazio
-  If aVAL(8) <> "" Then DTPicker4 = Date + aVAL(8)  ''na mascara datapicker fica so  a hora
+  If aVAL(7) <> "" Then DTPicker3 = aVAL(7) 'Date + aVAL(7)  ''Adciona date pois o datapicker nao aceita vazio
+  If aVAL(8) <> "" Then DTPicker4 = aVAL(8) 'Date + aVAL(8)  ''na mascara datapicker fica so  a hora
 
   chkAtivo = FixBolNum(aVAL(9))
   chkweekend = FixBolNum(aVAL(10))

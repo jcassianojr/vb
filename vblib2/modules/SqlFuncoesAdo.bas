@@ -446,7 +446,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   lOPEN = True
   Set oRS = New ADODB.Recordset
   If aARQ(2) = "SQLITE" Then
-     oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic
+     oRS.Open cSQL, oDB, adOpenStatic, adLockOptimistic
   Else
      oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic
   End If
@@ -521,13 +521,19 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
       
       ''Efetua a Gravaçao
       If lGRAVA Then
-         If aARQ(2) = "SQLITE" And (aFOR(x) = "DH" Or aFOR(x) = "D") Then
-            If aFOR(x) = "DH" Then
-              oRS(aCAM(x)) = CStr(Now)
-            End If
-            If aFOR(x) = "D" Then
-              oRS(aCAM(x)) = CStr(eVAL)
-            End If
+         If aARQ(2) = "SQLITE" And Mid(aFOR(x), 1, 1) = "D" Then '(aFOR(x) = "DH" Or aFOR(x) = "D" Or aFOR(x) = "DC") Then
+             oRS(aCAM(x)) = CStr(Format(eVAL, "yyyy-mm-dd hh:ss:mm"))
+'             oRS(aCAM(x)) = eVAL 'FVar(eVAL, aFOR(x), eVAZIO)
+'            If aFOR(x) = "DH" Then
+'              oRS(aCAM(x)) = CStr(Now)
+'            End If
+'            If aFOR(x) = "D" Or aFOR(x) = "DC" Then
+'              oRS(aCAM(x)) = CStr(Format(eVAL, "yyyy-mm-dd hh:ss:mm"))
+'            End If
+'            If aFOR(x) = "T" Then
+'              oRS(aCAM(x)) = CStr(Format(eVAL, "yyyy-mm-dd hh:ss:mm"))
+'            End If
+
          Else
             oRS(aCAM(x)) = FVar(eVAL, aFOR(x), eVAZIO)
          End If

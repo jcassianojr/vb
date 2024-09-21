@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escuser 
    Caption         =   "Selecione o Usuario Desejado"
    ClientHeight    =   6075
@@ -13,10 +13,19 @@ Begin VB.Form escuser
    ScaleHeight     =   6075
    ScaleWidth      =   8475
    StartUpPosition =   2  'CenterScreen
+   Begin VBFLXGRD17.VBFlexGrid Grid 
+      Height          =   5415
+      Left            =   120
+      TabIndex        =   2
+      Top             =   480
+      Width           =   6735
+      _ExtentX        =   11880
+      _ExtentY        =   9551
+   End
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
       Left            =   240
-      TabIndex        =   2
+      TabIndex        =   1
       Top             =   0
       Width           =   1725
       _ExtentX        =   3043
@@ -32,16 +41,6 @@ Begin VB.Form escuser
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-   End
-   Begin MSFlexGridLib.MSFlexGrid Grid 
-      Height          =   5535
-      Left            =   120
-      TabIndex        =   1
-      Top             =   480
-      Width           =   6735
-      _ExtentX        =   11880
-      _ExtentY        =   9763
-      _Version        =   393216
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
@@ -146,8 +145,11 @@ Private Sub FilRelat()
   Dim cSQL As String
   cARQ = dbuser
   cSQL = "SELECT IDUSUARIO,USUARIO,IDFOLHA,DATAULT FROM USUARIO ORDER BY USUARIO"
-  MontaGridUltra Grid, 4, Array(400, 1600, 800, 1200), Array("ID", "NOme", "Folha", "Ultimo"), _
+ 'MontaGridUltra Grid, 4, Array(400, 1600, 800, 1200), Array("ID", "NOme", "Folha", "Ultimo"), _
                  Array("IDUSUARIO", "USUARIO", "IDFOLHA", "DATAULT"), cARQ, cSQL
+  MontaGridFast Grid, 4, Array(400, 800, 400, 800), Array("ID", "NOme", "Folha", "Ultimo"), _
+                 Array("IDUSUARIO", "L$USUARIO", "IDFOLHA", "L$DATAULT"), cARQ, cSQL
+
 End Sub
 
 Private Sub Form_Load()
@@ -164,27 +166,13 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
   End If
 
 End Sub
-
-'Private Sub Grid_SelChange()
-'    With Grid
-'        If .Rows > 2 Then
-'            .Col = .Cols - 1
-'            .ColSel = 0
-'            .TopRow = .Row
-'        End If
-'    End With
-
-'End Sub
-
 Private Sub NovoPF_Click()
   zIDTEMP = FixInt(PegMAXSQL(dbuser, "usuario", "idusuario", 0)) + 1
   IncluiSQL dbuser, "SELECT * FROM USUARIO WHERE IDUSUARIO=" & zIDTEMP, 2, Array("IDUSUARIO", "USUARIO"), _
             Array(zIDTEMP, CStr(zIDTEMP)), False, False
   FilRelat
 End Sub
-
 Private Sub SENHA_Click()
-
   If Grid.Row > 0 Then  'evitar quando clicado na linha de cabecario
     Grid.Col = 0
     zIDTEMP = Grid

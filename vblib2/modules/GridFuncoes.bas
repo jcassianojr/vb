@@ -193,6 +193,12 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
             eVAR = Mid(eVAR, 1, 100)
           End If
           eVAR = Replace(eVAR, Chr(13) & Chr(10), " ")
+          If aRETU(2) = "SQLITE" Then
+             If Mid(eVAR, 5, 1) = "-" And Mid(eVAR, 8, 1) = "-" Then 'datetime no sqlite vem no texto yyyy-mm-dd hh:mm:ss
+                eVAR = Mid(eVAR, 9, 2) + "/" + Mid(eVAR, 6, 2) + "/" + Mid(eVAR, 1, 4)
+             End If
+          End If
+          
         End Select
         If Not IsNumeric(aFOR) Then      'E Matriz
           If aFOR(x) <> "" Then
@@ -408,6 +414,11 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
             eVAR = Mid(eVAR, 1, 100)
           End If
           eVAR = Replace(eVAR, Chr(13) & Chr(10), " ")
+          If aRETU(2) = "SQLITE" Then
+             If Mid(eVAR, 5, 1) = "-" And Mid(eVAR, 8, 1) = "-" Then 'datetime no sqlite vem no texto yyyy-mm-dd hh:mm:ss
+                eVAR = Mid(eVAR, 9, 2) + "/" + Mid(eVAR, 6, 2) + "/" + Mid(eVAR, 1, 4)
+             End If
+          End If
         End Select
         If Not IsNumeric(aFOR) Then      'E Matriz
           If aFOR(x) <> "" Then

@@ -433,13 +433,14 @@ Private Sub cmdOK_Click()
 82    TimedMsgBox "Acesso Final Semana Bloqueado"  'Alert("Acesso Final Semana Bloqueado")
 83    End
 84  End If
-85  If Not IsNull(aRETU(4)) And Not IsNull(aRETU(5)) Then
-86    If DateValue(Format(Date, "HH:MM:SS")) < DateValue(aRETU(4)) Or _
-         DateValue(Format(Date, "HH:MM:SS")) > DateValue(aRETU(5)) Then
-87      TimedMsgBox "Horario nao Autorizado"  'Alert("Horario nao Autorizado")
-88      End
-89    End If
-90  End If
+   ' ajustar pois no sqlite grava datetime em string
+85 ' If Not IsNull(aRETU(4)) And Not IsNull(aRETU(5)) Then
+86 '   If DateValue(Format(Date, "HH:MM:SS")) < DateValue(aRETU(4)) Or _
+   '      DateValue(Format(Date, "HH:MM:SS")) > DateValue(aRETU(5)) Then
+87 '     TimedMsgBox "Horario nao Autorizado"  'Alert("Horario nao Autorizado")
+88 '     End
+89 '   End If
+90 ' End If
 91 End If
 92 zUSERID = aRETU(7)
 93 zWRPTID = aRETU(7)
