@@ -1,5 +1,5 @@
 FrmRTf = 67, 126, 1212, 560, C, 208, 31, 1081, 571, C
-frmIniEditor = 130, 130, 1284, 572, C, -137, 171, 1217, 711, C
+frmIniEditor = 139, 43, 1293, 485, C, 10, -15, 1364, 525, C
 FrmCrw = 26, 26, 1180, 468, C, 251, 17, 1188, 557, C
 EscArqOrdem = 130, 130, 1205, 564, C, 303, 59, 876, 383, C
 escOrdem = 130, 130, 1205, 564, C, 270, 117, 749, 436, C
@@ -33,7 +33,7 @@ GridFuncoes = 0, 0, 0, 0, C
 CnvVersao = 0, 0, 1127, 341, C
 Toolbarlib = 0, 0, 0, 0, C
 jpgpicture = 0, 0, 0, 0, C
-xoldTool = 0, 0, 0, 0, C
+xoldTool = 26, 26, 1208, 367, C
 SqlFuncoesAdo = 4, 108, 1014, 457, C
 FrmCrwENG = 76, 109, 1229, 551, C, 130, 74, 968, 554, C
 FrmCrwENGViewer = 130, 130, 1284, 572, C, 0, 0, 1354, 540, C

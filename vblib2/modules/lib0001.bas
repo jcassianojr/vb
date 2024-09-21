@@ -15,6 +15,7 @@ Public Sub xmontatoolbar(ByRef vFormtool As Variant, _
 
   vFormtool.ImageList = Nothing
   vFormtool.ImageList = frmPRINCIPAL.ImageList1
+  
 
   sSQL = "SELECT * FROM CONTROLE WHERE FORM = '" & VNome & "' and controle='" & vCONTROL & "' order by indice"
 

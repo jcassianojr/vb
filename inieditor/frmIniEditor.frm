@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmIniEditor 
    Caption         =   "IniEditor"
    ClientHeight    =   7470
@@ -12,11 +13,20 @@ Begin VB.Form frmIniEditor
    ScaleHeight     =   7470
    ScaleWidth      =   11325
    WindowState     =   2  'Maximized
+   Begin VBCCR18.TreeView TreeView1 
+      Height          =   5175
+      Left            =   120
+      TabIndex        =   19
+      Top             =   1800
+      Width           =   10815
+      _ExtentX        =   19076
+      _ExtentY        =   9128
+   End
    Begin MSComctlLib.StatusBar StatusBar1 
       Align           =   2  'Align Bottom
       Height          =   315
       Left            =   0
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   7155
       Width           =   11325
       _ExtentX        =   19976
@@ -35,6 +45,7 @@ Begin VB.Form frmIniEditor
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   2
             AutoSize        =   2
+            Enabled         =   0   'False
             Object.Width           =   1058
             MinWidth        =   1058
             TextSave        =   "NUM"
@@ -52,7 +63,7 @@ Begin VB.Form frmIniEditor
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "frmIniEditor.frx":058A
-            TextSave        =   "14:25"
+            TextSave        =   "12:01"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -60,7 +71,7 @@ Begin VB.Form frmIniEditor
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "frmIniEditor.frx":0B24
-            TextSave        =   "17/07/2024"
+            TextSave        =   "21/09/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -85,14 +96,14 @@ Begin VB.Form frmIniEditor
       EndProperty
       Height          =   825
       Left            =   60
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   0
       Width           =   10305
       Begin XPControls.XPButton cmdFile 
          Height          =   435
          Index           =   1
          Left            =   120
-         TabIndex        =   5
+         TabIndex        =   4
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
@@ -114,7 +125,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   0
          Left            =   1200
-         TabIndex        =   6
+         TabIndex        =   5
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
@@ -136,7 +147,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   2
          Left            =   2280
-         TabIndex        =   7
+         TabIndex        =   6
          TabStop         =   0   'False
          Top             =   240
          Width           =   1035
@@ -158,7 +169,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   3
          Left            =   3360
-         TabIndex        =   8
+         TabIndex        =   7
          TabStop         =   0   'False
          Top             =   240
          Width           =   1275
@@ -180,7 +191,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   6
          Left            =   7440
-         TabIndex        =   9
+         TabIndex        =   8
          TabStop         =   0   'False
          Top             =   240
          Width           =   1215
@@ -202,7 +213,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   5
          Left            =   4800
-         TabIndex        =   10
+         TabIndex        =   9
          TabStop         =   0   'False
          Top             =   240
          Width           =   1215
@@ -224,7 +235,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   4
          Left            =   6120
-         TabIndex        =   11
+         TabIndex        =   10
          TabStop         =   0   'False
          Top             =   240
          Width           =   1215
@@ -256,14 +267,14 @@ Begin VB.Form frmIniEditor
       EndProperty
       Height          =   765
       Left            =   60
-      TabIndex        =   1
+      TabIndex        =   0
       Top             =   870
       Width           =   3825
       Begin XPControls.XPButton cmdSection 
          Height          =   435
          Index           =   0
          Left            =   120
-         TabIndex        =   12
+         TabIndex        =   11
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
@@ -285,7 +296,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   1
          Left            =   1200
-         TabIndex        =   13
+         TabIndex        =   12
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
@@ -307,7 +318,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   2
          Left            =   2280
-         TabIndex        =   14
+         TabIndex        =   13
          TabStop         =   0   'False
          Top             =   240
          Width           =   1095
@@ -326,22 +337,6 @@ Begin VB.Form frmIniEditor
          EndProperty
       End
    End
-   Begin MSComctlLib.TreeView TreeView1 
-      Height          =   5355
-      Left            =   120
-      TabIndex        =   0
-      Top             =   1680
-      Width           =   10815
-      _ExtentX        =   19076
-      _ExtentY        =   9446
-      _Version        =   393217
-      HideSelection   =   0   'False
-      Indentation     =   529
-      LabelEdit       =   1
-      LineStyle       =   1
-      Style           =   7
-      Appearance      =   1
-   End
    Begin VB.Frame frmKey 
       Caption         =   "Chaves"
       BeginProperty Font 
@@ -355,14 +350,14 @@ Begin VB.Form frmIniEditor
       EndProperty
       Height          =   765
       Left            =   4140
-      TabIndex        =   2
+      TabIndex        =   1
       Top             =   870
       Width           =   6375
       Begin XPControls.XPButton cmdkey 
          Height          =   435
          Index           =   0
          Left            =   120
-         TabIndex        =   15
+         TabIndex        =   14
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
@@ -384,7 +379,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   1
          Left            =   1200
-         TabIndex        =   16
+         TabIndex        =   15
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
@@ -406,7 +401,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   2
          Left            =   2280
-         TabIndex        =   17
+         TabIndex        =   16
          TabStop         =   0   'False
          Top             =   240
          Width           =   1095
@@ -428,7 +423,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   3
          Left            =   3480
-         TabIndex        =   18
+         TabIndex        =   17
          TabStop         =   0   'False
          Top             =   240
          Width           =   1215
@@ -450,7 +445,7 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   4
          Left            =   4800
-         TabIndex        =   19
+         TabIndex        =   18
          TabStop         =   0   'False
          Top             =   240
          Width           =   1215
@@ -488,15 +483,15 @@ Private Sub AddKey(ParentNode As MSComctlLib.Node)
   Dim nodx As Node
 
 
-  A$ = InputBox("Entre nome para a chave [" & ParentNode.tEXT & "]:", sTitle, "")
+  A$ = InputBox("Entre nome para a chave [" & ParentNode.Text & "]:", sTitle, "")
   If Len(A$) = 0 Then
     Exit Sub
   End If
 
   Set nodx = ParentNode.Child                  'First Child
   Do Until nodx Is Nothing
-    If nodx.tEXT = A$ Then
-      Alert "Ja existe a chave na seccao [" & ParentNode.tEXT & "].", sTitle
+    If nodx.Text = A$ Then
+      Alert "Ja existe a chave na seccao [" & ParentNode.Text & "].", sTitle
       Exit Sub
     End If
 
@@ -525,7 +520,7 @@ Private Sub AddSection()
 
   For Each nodx In TreeView1.Nodes
     If nodx.Parent Is Nothing Then
-      If nodx.tEXT = A$ Then
+      If nodx.Text = A$ Then
         Alert "Ja existe esta Seccao.", sTitle
         Exit Sub
       End If
@@ -547,7 +542,7 @@ Private Sub ChangeKey(Node As MSComctlLib.Node)
   Dim nodx As Node
   Dim Arr() As String
 
-  Arr = Split(Node.tEXT, "=")
+  Arr = Split(Node.Text, "=")
 
   A$ = InputBox("Digite o Nome da Chave:", sTitle, Arr(0))
   If Len(A$) = 0 Then
@@ -557,8 +552,8 @@ Private Sub ChangeKey(Node As MSComctlLib.Node)
   Set nodx = Node.Parent.Child                 'First Child
   Do Until nodx Is Nothing
     If nodx.Index <> Node.Index Then
-      If nodx.tEXT = A$ Then
-        Alert "Chave ja existe na seccao [" & Node.Parent.tEXT & "]."
+      If nodx.Text = A$ Then
+        Alert "Chave ja existe na seccao [" & Node.Parent.Text & "]."
         Exit Sub
       End If
     End If
@@ -571,7 +566,7 @@ Private Sub ChangeKey(Node As MSComctlLib.Node)
     Arr(0) = Arr(0) & "="
   End If
 
-  Node.tEXT = Join(Arr, "=")
+  Node.Text = Join(Arr, "=")
   Node.Selected = True
   Node.EnsureVisible
 
@@ -586,7 +581,7 @@ Private Sub ChangeSection(Node As MSComctlLib.Node)
   Dim nodx As Node
 
 
-  A$ = InputBox("Digite o nome da nova Seção:", sTitle, Node.tEXT)
+  A$ = InputBox("Digite o nome da nova Seção:", sTitle, Node.Text)
   If Len(A$) = 0 Then
     Exit Sub
   End If
@@ -594,7 +589,7 @@ Private Sub ChangeSection(Node As MSComctlLib.Node)
   For Each nodx In TreeView1.Nodes
     If nodx.Parent Is Nothing Then
       If nodx.Index <> Node.Index Then
-        If nodx.tEXT = A$ Then
+        If nodx.Text = A$ Then
           Alert "Ja existe a seccao.", sTitle
           Exit Sub
         End If
@@ -602,7 +597,7 @@ Private Sub ChangeSection(Node As MSComctlLib.Node)
     End If
   Next
 
-  Node.tEXT = A$
+  Node.Text = A$
   Node.Selected = True
   Node.EnsureVisible
 
@@ -611,7 +606,7 @@ Private Sub ChangeSection(Node As MSComctlLib.Node)
 End Sub
 
 Private Sub cmdFile_Click(Index As Integer)
-  Dim sFILENAME As String
+  Dim sFileName As String
   Dim sPath As String
   Dim sRECENTFILE As String
   Dim sFILTER As String
@@ -624,14 +619,14 @@ Private Sub cmdFile_Click(Index As Integer)
     ''            sPATH = oReg.GetSetting("Settings", "RecentPath", App.Path)
     ''            sRECENTFILE = oReg.GetSetting("Settings", "RecentFile", "")
     sFILTER = "Ini Files" & vbNullChar & "*.ini" & vbNullChar & "All Files" & vbNullChar & "*.*"
-    sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
-    If Len(sFILENAME) = 0 Then
+    sFileName = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
+    If Len(sFileName) = 0 Then
       Exit Sub
     End If
     ''          oReg.SaveSetting "Settings", "RecentFile", sFILENAME
     ''            oReg.SaveSetting "Settings", "RecentPath", GetFilePath(sFILENAME)
 
-    oIni.Path = sFILENAME
+    oIni.Path = sFileName
     ShowIniData
     ShowSave False
 
@@ -646,13 +641,13 @@ Private Sub cmdFile_Click(Index As Integer)
 
       ''                sPATH = oReg.GetSetting("Settings", "RecentPath", App.Path)
       sFILTER = "Ini Files" & vbNullChar & "*.ini" & vbNullChar & "All Files" & vbNullChar & "*.*"
-      sFILENAME = FileSave(Me, sFILTER, 1, , "ini", sPath, "Save Ini File")
-      If Len(sFILENAME) = 0 Then
+      sFileName = FileSave(Me, sFILTER, 1, , "ini", sPath, "Save Ini File")
+      If Len(sFileName) = 0 Then
         Exit Sub
       End If
       ''                oReg.SaveSetting "Settings", "RecentFile", sFILENAME
       ''                oReg.SaveSetting "Settings", "RecentPath", GetFilePath(sFILENAME)
-      oIni.Path = sFILENAME
+      oIni.Path = sFileName
     End If
     SaveIni
 
@@ -661,13 +656,13 @@ Private Sub cmdFile_Click(Index As Integer)
 
     ''            sPATH = oReg.GetSetting("Settings", "RecentPath", App.Path)
     sFILTER = "Ini Files" & vbNullChar & "*.ini" & vbNullChar & "All Files" & vbNullChar & "*.*"
-    sFILENAME = FileSave(Me, sFILTER, 1, , "ini", sPath, "Save Ini File As")
-    If Len(sFILENAME) = 0 Then
+    sFileName = FileSave(Me, sFILTER, 1, , "ini", sPath, "Save Ini File As")
+    If Len(sFileName) = 0 Then
       Exit Sub
     End If
     ''            oReg.SaveSetting "Settings", "RecentFile", sFILENAME
     ''            oReg.SaveSetting "Settings", "RecentPath", GetFilePath(sFILENAME)
-    oIni.Path = sFILENAME
+    oIni.Path = sFileName
     SaveIni
 
   Case 4                                       'Undo
@@ -702,7 +697,7 @@ Private Sub cmdKey_Click(Index As Integer)
 
   Select Case Index
   Case 0                                       'Change
-    Set nodx = TreeView1.selectedItem
+    Set nodx = TreeView1.SelectedItem
     If nodx Is Nothing Then
       Beep
       Exit Sub
@@ -716,7 +711,7 @@ Private Sub cmdKey_Click(Index As Integer)
     ChangeKey nodx
 
   Case 1                                       'Add
-    Set nodx = TreeView1.selectedItem
+    Set nodx = TreeView1.SelectedItem
     If nodx Is Nothing Then
       Beep
       Exit Sub
@@ -729,7 +724,7 @@ Private Sub cmdKey_Click(Index As Integer)
     AddKey nodx
 
   Case 2                                       'Delete
-    Set nodx = TreeView1.selectedItem
+    Set nodx = TreeView1.SelectedItem
     If nodx Is Nothing Then
       Beep
       Exit Sub
@@ -742,7 +737,7 @@ Private Sub cmdKey_Click(Index As Integer)
     DeleteKey nodx
 
   Case 3, 4                                    'Value
-    Set nodx = TreeView1.selectedItem
+    Set nodx = TreeView1.SelectedItem
     If nodx Is Nothing Then
       Beep
       Exit Sub
@@ -783,7 +778,7 @@ Private Sub cmdSection_Click(Index As Integer)
 
   Select Case Index
   Case 0                                       'Change
-    Set nodx = TreeView1.selectedItem
+    Set nodx = TreeView1.SelectedItem
     If nodx Is Nothing Then
       Beep
       Exit Sub
@@ -800,7 +795,7 @@ Private Sub cmdSection_Click(Index As Integer)
     AddSection
 
   Case 2                                       'Delete
-    Set nodx = TreeView1.selectedItem
+    Set nodx = TreeView1.SelectedItem
     If nodx Is Nothing Then
       Beep
       Exit Sub
@@ -824,7 +819,7 @@ Private Sub DeleteKey(Node As MSComctlLib.Node)
   Dim nodx As Node
 
 
-  If Not MDG("Apagar a Chave: " & Node.tEXT & "  in section [" & Node.Parent.tEXT & "]?") Then
+  If Not MDG("Apagar a Chave: " & Node.Text & "  in section [" & Node.Parent.Text & "]?") Then
     Exit Sub
   End If
 
@@ -844,7 +839,7 @@ Private Sub DeleteSection(Node As MSComctlLib.Node)
   Dim nodx As Node
 
 
-  If Not MDG("Apagar a Seccao: " & Node.tEXT & "?") Then
+  If Not MDG("Apagar a Seccao: " & Node.Text & "?") Then
     Exit Sub
   End If
 
@@ -936,7 +931,7 @@ Private Sub Form_Load()
     ShowSave False
   End If
 
-  StatusBar1.Panels(6).tEXT = zUSER
+  StatusBar1.Panels(6).Text = zUSER
 
 End Sub
 
@@ -952,13 +947,13 @@ Private Sub Form_Resize()
 
 End Sub
 
-Private Function GetFilePath(sFILENAME As String) As String
+Private Function GetFilePath(sFileName As String) As String
 
   Dim Arr() As String
   ''Dim i As Long
 
 
-  Arr = Split(sFILENAME, "\")
+  Arr = Split(sFileName, "\")
 
   ReDim Preserve Arr(UBound(Arr) - 1)
   GetFilePath = Join(Arr, "\")
@@ -974,7 +969,7 @@ Private Sub KeyValue(Node As MSComctlLib.Node, Optional ByVal A As String = "")
   Dim sTxt As String
 
 
-  Arr = Split(Node.tEXT, "=")
+  Arr = Split(Node.Text, "=")
   If UBound(Arr) > 0 Then
     sTxt = Arr(1)
   End If
@@ -993,7 +988,7 @@ Private Sub KeyValue(Node As MSComctlLib.Node, Optional ByVal A As String = "")
     Arr(1) = A
   End If
 
-  Node.tEXT = Join(Arr, "=")
+  Node.Text = Join(Arr, "=")
   Node.Selected = True
   Node.EnsureVisible
 
@@ -1027,10 +1022,10 @@ Private Sub SaveIni()
 
   For Each nodx In TreeView1.Nodes
     If nodx.Parent Is Nothing Then
-      oIni.SaveSetting nodx.tEXT, "~TEMPORARY", "~TEMPORARY"
-      oIni.DeleteSetting nodx.tEXT, "~TEMPORARY"  'Leave empty section
+      oIni.SaveSetting nodx.Text, "~TEMPORARY", "~TEMPORARY"
+      oIni.DeleteSetting nodx.Text, "~TEMPORARY"  'Leave empty section
     Else
-      Arr = Split(nodx.tEXT, "=")
+      Arr = Split(nodx.Text, "=")
       sKey = Arr(0)
       If UBound(Arr) > 0 Then
         sValue = Arr(1)
@@ -1038,7 +1033,7 @@ Private Sub SaveIni()
         sValue = ""
       End If
 
-      oIni.SaveSetting nodx.Parent.tEXT, sKey, sValue
+      oIni.SaveSetting nodx.Parent.Text, sKey, sValue
     End If
   Next
 
@@ -1094,7 +1089,7 @@ End Sub
 
 Private Sub ShowSave(bMode As Boolean)
 
-  Dim nodx As Node
+  Dim nodx
 
   cmdFile(2).Enabled = bMode
   cmdFile(3).Enabled = bMode
@@ -1110,9 +1105,9 @@ Private Sub ShowSave(bMode As Boolean)
   cmdkey(3).Enabled = False
   cmdkey(4).Enabled = False
 
-  Set nodx = TreeView1.selectedItem
+  Set nodx = TreeView1.SelectedItem
   If Not nodx Is Nothing Then
-    TreeView1_NodeClick nodx
+    TreeView1_NodeClick nodx, 0
   End If
 
 End Sub
@@ -1121,7 +1116,7 @@ Private Sub TreeView1_DblClick()
 
   Dim nodx As Node
 
-  Set nodx = TreeView1.selectedItem
+  Set nodx = TreeView1.SelectedItem
   If nodx Is Nothing Then
     Exit Sub
   End If
@@ -1143,9 +1138,7 @@ Private Sub TreeView1_KeyPress(KeyAscii As Integer)
   End If
 
 End Sub
-
-Private Sub TreeView1_NodeClick(ByVal Node As MSComctlLib.Node)
-
+Private Sub TreeView1_NodeClick(ByVal Node As VBCCR18.TvwNode, ByVal Button As Integer)
   If Node.Parent Is Nothing Then
     cmdSection(0).Enabled = True
     'cmdSection(1).Enabled = False
@@ -1168,5 +1161,5 @@ Private Sub TreeView1_NodeClick(ByVal Node As MSComctlLib.Node)
     cmdkey(4).Enabled = True
   End If
 
-End Sub
 
+End Sub
