@@ -1,10 +1,9 @@
 Form1 = 104, 104, 1276, 477, C, 104, 104, 1179, 538, C
 submain = 78, 78, 1153, 512, C
 clsRegistry = 130, 130, 1275, 564, C
-frmProgress = 104, 104, 1231, 445, C, 156, 156, 1231, 590, C
+frmProgress = 104, 104, 1231, 445, C, 156, 12, 1231, 590, C
 frmPassword = 156, 156, 1231, 590, C, 182, 182, 1257, 616, C
 VisualStyles = 0, 0, 0, 0, C
 Common = 52, 52, 1223, 486, C
-mFileAPI = 130, 130, 1257, 471, C
-copywindowway = 78, 78, 1249, 512, C
+mFileAPI = 116, 131, 1243, 472, C
 Strings = 26, 26, 1197, 460, C

@@ -1,0 +1,24 @@
+09/21/2024 10:22:25 am
+Database: C:\temp\desenho_repaired.mdb
+Schema: C:\temp\desenho_Schema.mdb
+
+Checking...
+Comparing Table Definitions...
+ Update Field: PROTO.ENGRAMAL
+ Update Field: PROTOI.REV
+ Update Field: PROTOI.RE2
+ Update Field: PROTOI.RE3
+Comparing Index Definitions...
+ Create Index: atual.conjunto
+ Create Index: atual.conjuntodesenho
+ Create Index: baixado.conjunto
+ Create Index: baixado.conjuntodesenho
+ Create Index: CLIENTE.CLIENTE
+ Create Index: conjunto.conjunto
+ Create Index: PRODENG.PRODUTO
+ Create Index: PRODENG.TIPONUMERO
+ Create Index: PRODUTO.CLIENTE
+ Create Index: PROTO.PARTNUMBER
+ Create Index: PROTOI.PARTNUMBER
+Comparing Query Definitions...
+Finished.

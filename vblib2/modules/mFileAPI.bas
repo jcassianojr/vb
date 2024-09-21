@@ -176,7 +176,7 @@ End Function
 Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal DestinationFile As String, Optional ByVal lAPAGA As Boolean = False) As Long
   Dim lngReturn As Long
   Dim typFileOperation As SHFILEOPSTRUCT
-  If FileExist(DestinationFile, False) Then
+  If FileExists(DestinationFile) Then
       If lAPAGA Then
           DeleteFile DestinationFile  'Kill DestinationFile
       End If
@@ -194,10 +194,10 @@ Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal Destination
   CopyFileWindowsWay = lngReturn
 
   If lngReturn <> 0 Then                       'Operation failed
-    SayErro "Copiando " & SourceFile & " " & DestinationFile
+    MsgBox "Copiando " & SourceFile & " " & DestinationFile
   Else                                         'Aborted
     If typFileOperation.fAnyOperationsAborted = True Then
-      SayErro "Copiando " & SourceFile & " " & DestinationFile
+      MsgBox "Copiando " & SourceFile & " " & DestinationFile
     End If
   End If
 End Function
@@ -327,10 +327,10 @@ Function OpenArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
   sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
   sFileName = FileOpen(oFORM, sFILTER, 1, sRECENTFILE, cEXT, sPath, "Escolher " & cTITULO)
   If Len(sFileName) = 0 Then
-    lRETU = False
+    lretu = False
     Exit Function
   End If
-  lRETU = True
+  lretu = True
   OpenArqExt = sFileName
 End Function
 
@@ -348,10 +348,10 @@ Function SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
   sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
   sFileName = FileSave(oFORM, sFILTER, 1, cEXT, "Novo", sPath, cTITULO)
   If Len(sFileName) = 0 Then
-    lRETU = False
+    lretu = False
     Exit Function
   End If
-  lRETU = True
+  lretu = True
   SaveArqExt = sFileName
 End Function
 

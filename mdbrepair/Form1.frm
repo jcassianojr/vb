@@ -128,7 +128,7 @@ Begin VB.Form Form1
    End
    Begin vbExtra.CommonDialogEx CDL1 
       Left            =   8880
-      Top             =   4200
+      Top             =   120
       _ExtentX        =   900
       _ExtentY        =   900
       MaxFileSize     =   255
@@ -200,13 +200,6 @@ Dim sDir As String
 Dim sAppPath As String
 
 Dim oRel As Relation
-'Dim oRels() As Object
-'Dim sRelation() As String
-'Dim sTable() As String
-'Dim sFTable() As String
-'Dim lAttr() As Long
-'Dim sField() As String
-'Dim sFField() As String
 Dim fld As Field
 Dim flds As Fields
 Dim bRel As Boolean
@@ -229,16 +222,16 @@ Private Declare Function GetDiskFreeSpace Lib "kernel32" Alias "GetDiskFreeSpace
 
 Private Sub cmdCreate_Click()
 
-  If Text1.Text = "" Then
+  If Text1.tEXT = "" Then
     MsgBox "Enter database name.", vbExclamation
     Exit Sub
-  ElseIf FileExists(Text1.Text) = False Then
+  ElseIf FileExists(Text1.tEXT) = False Then
     If iMode = 1 Then
-      WriteErrLog "Unable to create master schema file. " & Text1.Text & " does not exist"
+      WriteErrLog "Unable to create master schema file. " & Text1.tEXT & " does not exist"
       End
     Else
       lblStatus.Caption = "The database does not exist"
-      Text1.Text = ""
+      Text1.tEXT = ""
       Exit Sub
     End If
   End If
@@ -252,10 +245,10 @@ Private Sub cmdCreate_Click()
 
     bFix = False
 
-    S = Text1.Text
+    S = Text1.tEXT
     S = Replace(S, ".mdb", "_Schema.mdb", 1, 1, vbTextCompare)
 
-    sPath = Text1.Text
+    sPath = Text1.tEXT
     sPath = Left(sPath, InStrRev(sPath, "\") - 1)
 
     'Show Save Dialog Screen
@@ -279,12 +272,12 @@ Private Sub cmdCreate_Click()
       Exit Sub
     End If
 
-    If StrComp(Text1.Text, sSchemaDB, vbTextCompare) = 0 Then
+    If StrComp(Text1.tEXT, sSchemaDB, vbTextCompare) = 0 Then
       MsgBox "The master schema database cannot be the same name as the selected database.", vbExclamation
       Exit Sub
     End If
 
-  ElseIf StrComp(Text1.Text, sSchemaDB, vbTextCompare) = 0 Then
+  ElseIf StrComp(Text1.tEXT, sSchemaDB, vbTextCompare) = 0 Then
     If iMode = 1 Then
       WriteErrLog "The master schema database cannot be the same name as the selected database."
       End
@@ -300,13 +293,13 @@ Private Sub cmdCreate_Click()
   Dim rsloIx As Recordset
 
   'If MsgBox("You are going to override Master-Schema, are you sure ?", vbYesNo) = vbNo Then Exit Sub
-  Text2.Text = ""
+  Text2.tEXT = ""
 
   CreateLocalTable sSchemaDB
 
   If Not OpenAllDB(sSchemaDB, False, False) Then
     lblStatus.Caption = "Unable to open databases"
-    Text1.Text = ""
+    Text1.tEXT = ""
     Exit Sub
   End If
 
@@ -321,15 +314,15 @@ Private Sub cmdCreate_Click()
   On Error GoTo ErrProc
 
   putText "Creating TABLE and INDEX definitions..."
-  Dim I%, J%, K%
+  Dim i%, J%, K%
 
-  For I = 0 To dbx.TableDefs.Count - 1
+  For i = 0 To dbx.TableDefs.Count - 1
 
-    If dbx.TableDefs(I).Updatable Then  'Ignore linked tables
+    If dbx.TableDefs(i).Updatable Then  'Ignore linked tables
 
       'If UCase(Mid(dbx.TableDefs(i).Name, 1, 2)) = "TB" Or UCase(Mid(dbx.TableDefs(i).Name, 1, 2)) = "LO" Then
-      If LCase(Left(dbx.TableDefs(I).Name, 4)) <> "msys" Then
-        With dbx.TableDefs(I)
+      If LCase(Left(dbx.TableDefs(i).Name, 4)) <> "msys" Then
+        With dbx.TableDefs(i)
           For J = 0 To .Fields.Count - 1
 
             rsloTb.AddNew
@@ -351,7 +344,7 @@ Private Sub cmdCreate_Click()
             End If
             rsloTb.Update
           Next  'j
-          For J = 0 To dbx.TableDefs(I).Indexes.Count - 1
+          For J = 0 To dbx.TableDefs(i).Indexes.Count - 1
             rsloIx.AddNew
             rsloIx("TableName") = .Name
             rsloIx("IndexName") = .Indexes(J).Name
@@ -371,13 +364,13 @@ Jump:
   putText "Finished."
 
   putText "Creating QUERY definitions..."
-  For I = 0 To dbx.QueryDefs.Count - 1
+  For i = 0 To dbx.QueryDefs.Count - 1
 
-    If dbx.QueryDefs(I).Updatable Then  'Ignore linked tables
+    If dbx.QueryDefs(i).Updatable Then  'Ignore linked tables
 
       rsloQy.AddNew
-      rsloQy!QueryName = dbx.QueryDefs(I).Name
-      rsloQy!QueryDef = dbx.QueryDefs(I).SQL
+      rsloQy!QueryName = dbx.QueryDefs(i).Name
+      rsloQy!QueryDef = dbx.QueryDefs(i).SQL
       rsloQy.Update
 
     End If
@@ -403,7 +396,7 @@ ErrProc:
   If iMode = 1 Then
     WriteErrLog Err.Number & " : " & Err.Description
   Else
-    MsgBox Err.Description, vbExclamation, dbx.TableDefs(I).Name
+    MsgBox Err.Description, vbExclamation, dbx.TableDefs(i).Name
   End If
   Resume Jump
 End Sub
@@ -418,34 +411,28 @@ Private Sub Command1_Click()
 
   sDBpassword = ""
 
-  'CDL1.CancelError = True
-  'CDL1.DefaultExt = "mdb"
-  'CDL1.InitDir = sDir
-  'CDL1.Filter = "Microsoft Access (*.mdb)|*.mdb|All Files (*.*)|*.*"
 
-  'CDL1.ShowOpen
+  Text1.tEXT = OpenArqExt(Me, "", "MDB", "Microsoft Access (*.mdb)")
 
-  'If Err.Number = 0 Then
+  If IsNull(Text1.tEXT) Then
+     Exit Sub
+  End If
 
-  Text1.Text = OpenArqExt(Me, "", "MDB", "Microsoft Access (*.mdb)")
-
-  'Text1.Text = CDL1.FileName
-
-  sDir = Text1.Text
+  sDir = Text1.tEXT
   sDir = Left(sDir, InStrRev(sDir, "\") - 1)
   SaveSetting App.Title, "Options", "Dir", sDir
 
   'attempt to open the database shared, read-only
-  Set dbTemp = OpenDatabase(Text1.Text, False, True)
+  Set dbTemp = OpenDatabase(Text1.tEXT, False, True)
   If Err.Number = 3031 Then
     Err.Clear
     frmPassword.Show vbModal
     If sDBpassword <> "" Then
-      Set dbTemp = OpenDatabase(Text1.Text, False, True, ";pwd=" & sDBpassword)
+      Set dbTemp = OpenDatabase(Text1.tEXT, False, True, ";pwd=" & sDBpassword)
       If Err.Number > 0 Then
         lblStatus.Caption = "Unable to open database."
         lblStatus.Refresh
-        Text1.Text = ""
+        Text1.tEXT = ""
         MsgBox Err.Number & " : " & Err.Description, vbExclamation
       Else
         dbTemp.Close
@@ -456,11 +443,11 @@ Private Sub Command1_Click()
     Else
       lblStatus.Caption = "Unable to open database - password not provided."
       lblStatus.Refresh
-      Text1.Text = ""
+      Text1.tEXT = ""
     End If
   ElseIf Err.Number > 0 Then  '3343 Then 'corrupt, attempt to fix
     If MsgBox(Err.Number & " : " & Err.Description & vbCrLf & "The database is corrupted. Attempt to repair it?", vbYesNo + vbQuestion) = vbNo Then
-      Text1.Text = ""
+      Text1.tEXT = ""
       lblStatus.Caption = ""
       Exit Sub
     End If
@@ -470,27 +457,27 @@ Private Sub Command1_Click()
       DeleteFile sGood  'Kill sGood
     End If
     Screen.MousePointer = vbHourglass
-    CompactDatabase Text1.Text, sGood
+    CompactDatabase Text1.tEXT, sGood
     Screen.MousePointer = vbDefault
     If Err.Number Then
       lblStatus.Caption = "Unable to repair database."
       lblStatus.Refresh
-      Text1.Text = ""
+      Text1.tEXT = ""
       MsgBox Err.Number & " : " & Err.Description, vbExclamation
     Else
       If FileExists(sGood) Then
         sBad = sDir & "\bad_" & Format(Date, "mmddyy") & ".mdb"
         'Rename corrupt database
-        Name Text1.Text As sBad
+        Name Text1.tEXT As sBad
         'Rename fixed database
-        Name sGood As Text1.Text
+        Name sGood As Text1.tEXT
         MsgBox "The database was repaired." & vbCrLf & _
                "The corrupted database has been renamed as " & sBad & vbCrLf & _
                "If the database still has problems you should run 'Fix Corrupt Database'"
       Else
         lblStatus.Caption = "Unable to repair database."
         lblStatus.Refresh
-        Text1.Text = ""
+        Text1.tEXT = ""
       End If
     End If
   Else
@@ -504,7 +491,7 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub putText(teks As String)
-  Text2.Text = Text2.Text & Chr(13) & Chr(10) & teks
+  Text2.tEXT = Text2.tEXT & Chr(13) & Chr(10) & teks
 End Sub
 
 Private Function UpdNewStat(oldstat As String, At_Digit As Integer)
@@ -626,17 +613,17 @@ End Sub
 
 Private Function OpenAllDB(S As String, Optional bExclusive As Boolean, Optional bReadOnly As Boolean) As Boolean
   On Error Resume Next
-  dbx.Close
-  Set dbx = Nothing
-  dbTemp.Close
-  Set dbTemp = Nothing
+'  dbx.Close
+'  Set dbx = Nothing
+'  dbTemp.Close
+'  Set dbTemp = Nothing
 
   'On Error GoTo 0
   On Error GoTo Err
   If sDBpassword = "" Then
-    Set dbx = OpenDatabase(Text1.Text, bExclusive, bReadOnly)
+    Set dbx = OpenDatabase(Text1.tEXT, bExclusive, bReadOnly)
   Else
-    Set dbx = OpenDatabase(Text1.Text, bExclusive, bReadOnly, ";pwd=" & sDBpassword)
+    Set dbx = OpenDatabase(Text1.tEXT, bExclusive, bReadOnly, ";pwd=" & sDBpassword)
   End If
   Set dbTemp = OpenDatabase(S, True, False)
   OpenAllDB = True
@@ -647,7 +634,7 @@ Err:
     WriteErrLog "Unable to open databases due to error " & Err.Number & " : " & Err.Description
     End
   Else
-    Text1.Text = ""
+    Text1.tEXT = ""
     MsgBox "Error " & Err.Number & " : " & Err.Description, vbExclamation
   End If
   OpenAllDB = False
@@ -664,16 +651,16 @@ End Function
 
 Private Sub cmdCompare_Click()
 
-  Text2.Text = ""
-  If Text1.Text = "" Then
+  Text2.tEXT = ""
+  If Text1.tEXT = "" Then
     MsgBox "Enter database name.", vbExclamation
     Exit Sub
-  ElseIf FileExists(Text1.Text) = False Then
+  ElseIf FileExists(Text1.tEXT) = False Then
     If iMode = 2 Then
-      WriteErrLog "Unable to compare with master schema file. " & Text1.Text & " does not exist"
+      WriteErrLog "Unable to compare with master schema file. " & Text1.tEXT & " does not exist"
       End
     Else
-      Text1.Text = ""
+      Text1.tEXT = ""
       lblStatus.Caption = "The database does not exist"
       Exit Sub
     End If
@@ -695,13 +682,13 @@ Private Sub cmdCompare_Click()
   If iMode = 0 Then
 
     If bFix = False Then
-      S = Text1.Text
+      S = Text1.tEXT
       S = Replace(S, ".mdb", "_Schema.mdb", 1, 1, vbTextCompare)
     End If
 
     bFix = False
 
-    sPath = Text1.Text
+    sPath = Text1.tEXT
     sPath = Left(sPath, InStrRev(sPath, "\") - 1)
 
     CDL1.CancelError = True
@@ -733,7 +720,7 @@ Private Sub cmdCompare_Click()
     End If
   End If
 
-  If StrComp(sSchemaDB, Text1.Text, vbTextCompare) = 0 Then
+  If StrComp(sSchemaDB, Text1.tEXT, vbTextCompare) = 0 Then
     If iMode = 2 Then
       WriteErrLog "The master schema database cannot be the same file as the selected database"
       End
@@ -796,38 +783,38 @@ Private Sub cmdCompare_Click()
   Set rsloQy = dbTemp.OpenRecordset("select * from myQUERY")
   Set rsloIx = dbTemp.OpenRecordset("select * from myINDEX")
 
-  Dim I%, J%, K%, l%, mPB1%, mPB2%
+  Dim i%, J%, K%, l%, mPB1%, mPB2%
   DoEvents
   putText "Checking..."
 
   ' Checking index and TableDef
-  For I = 0 To dbx.TableDefs.Count - 1
+  For i = 0 To dbx.TableDefs.Count - 1
 
-    PB1.Value = I / dbx.TableDefs.Count * 40
+    PB1.Value = i / dbx.TableDefs.Count * 40
     DoEvents
 
-    If dbx.TableDefs(I).Updatable = False Then  'this causes linked tables to be ignored
-      putText dbx.TableDefs(I).Name & " is not updateable thus is ignored. May be a linked table."
-      srIgnore = srIgnore & " " & dbx.TableDefs(I).Name
+    If dbx.TableDefs(i).Updatable = False Then  'this causes linked tables to be ignored
+      putText dbx.TableDefs(i).Name & " is not updateable thus is ignored. May be a linked table."
+      srIgnore = srIgnore & " " & dbx.TableDefs(i).Name
     Else
 
       'MsgBox dbx.TableDefs(i).Updatable, vbOKOnly, dbx.TableDefs(i).Name
 
       'Ignore system files
-      If LCase(Mid(dbx.TableDefs(I).Name, 1, 4)) <> "msys" Then
+      If LCase(Mid(dbx.TableDefs(i).Name, 1, 4)) <> "msys" Then
         If rsloTb.RecordCount > 0 Then
-          For J = 0 To dbx.TableDefs(I).Fields.Count - 1
+          For J = 0 To dbx.TableDefs(i).Fields.Count - 1
             rsloTb.FindFirst _
-              " [TableName] = '" & dbx.TableDefs(I).Name & "' and " & _
-                               " [FieldName] = '" & dbx.TableDefs(I).Fields(J).Name & "'"
+              " [TableName] = '" & dbx.TableDefs(i).Name & "' and " & _
+                               " [FieldName] = '" & dbx.TableDefs(i).Fields(J).Name & "'"
             rsloTb.Edit
             If Not rsloTb.NoMatch Then
               NewStat = "-----"
-              If rsloTb("FieldType") <> dbx.TableDefs(I).Fields(J).Type Then NewStat = UpdNewStat(NewStat, 1)
-              If rsloTb("Attributes") <> dbx.TableDefs(I).Fields(J).Attributes Then NewStat = UpdNewStat(NewStat, 2)
+              If rsloTb("FieldType") <> dbx.TableDefs(i).Fields(J).Type Then NewStat = UpdNewStat(NewStat, 1)
+              If rsloTb("Attributes") <> dbx.TableDefs(i).Fields(J).Attributes Then NewStat = UpdNewStat(NewStat, 2)
               'If rsloTb("Required") <> dbx.TableDefs(i).Fields(j).Required Then NewStat = UpdNewStat(NewStat, 3)
-              If rsloTb("Size") <> dbx.TableDefs(I).Fields(J).Size Then NewStat = UpdNewStat(NewStat, 4)
-              If rsloTb("AllowZeroLength") <> dbx.TableDefs(I).Fields(J).AllowZeroLength Then NewStat = UpdNewStat(NewStat, 5)
+              If rsloTb("Size") <> dbx.TableDefs(i).Fields(J).Size Then NewStat = UpdNewStat(NewStat, 4)
+              If rsloTb("AllowZeroLength") <> dbx.TableDefs(i).Fields(J).AllowZeroLength Then NewStat = UpdNewStat(NewStat, 5)
               rsloTb("Status") = NewStat
             End If
             rsloTb.Update
@@ -835,19 +822,19 @@ Private Sub cmdCompare_Click()
         End If
 
         If rsloIx.RecordCount > 0 Then
-          For J = 0 To dbx.TableDefs(I).Indexes.Count - 1
+          For J = 0 To dbx.TableDefs(i).Indexes.Count - 1
             rsloIx.FindFirst _
-              " [TableName] = '" & dbx.TableDefs(I).Name & "' and " & _
-                               " [IndexName] = '" & dbx.TableDefs(I).Indexes(J).Name & "'"
+              " [TableName] = '" & dbx.TableDefs(i).Name & "' and " & _
+                               " [IndexName] = '" & dbx.TableDefs(i).Indexes(J).Name & "'"
             rsloIx.Edit
             'If dbx.TableDefs(i).Indexes(j).Name = "Doc Id" Then
             'Debug.Print "Sa"
             'End If
             If Not rsloIx.NoMatch Then
               NewStat = "-----"
-              If UCase(rsloIx("Fields")) <> UCase(dbx.TableDefs(I).Indexes(J).Fields) Then NewStat = UpdNewStat(NewStat, 1)
-              If rsloIx("Primary") <> dbx.TableDefs(I).Indexes(J).Primary Then NewStat = UpdNewStat(NewStat, 2)
-              If rsloIx("Unique") <> dbx.TableDefs(I).Indexes(J).Unique Then NewStat = UpdNewStat(NewStat, 3)
+              If UCase(rsloIx("Fields")) <> UCase(dbx.TableDefs(i).Indexes(J).Fields) Then NewStat = UpdNewStat(NewStat, 1)
+              If rsloIx("Primary") <> dbx.TableDefs(i).Indexes(J).Primary Then NewStat = UpdNewStat(NewStat, 2)
+              If rsloIx("Unique") <> dbx.TableDefs(i).Indexes(J).Unique Then NewStat = UpdNewStat(NewStat, 3)
               rsloIx("Status") = NewStat
             End If
             rsloIx.Update
@@ -857,20 +844,20 @@ Private Sub cmdCompare_Click()
 
     End If
 
-  Next I
+  Next i
 
   ' 10%
   If rsloQy.RecordCount > 0 Then
-    For I = 0 To dbx.QueryDefs.Count - 1
-      PB1.Value = I / dbx.QueryDefs.Count * 10 + 40
+    For i = 0 To dbx.QueryDefs.Count - 1
+      PB1.Value = i / dbx.QueryDefs.Count * 10 + 40
       DoEvents
       rsloQy.FindFirst _
-        " [QueryName] = '" & dbx.QueryDefs(I).Name & "'"
+        " [QueryName] = '" & dbx.QueryDefs(i).Name & "'"
       rsloQy.Edit
 
       If Not rsloQy.NoMatch Then
         NewStat = "-----"
-        If rsloQy!QueryDef <> dbx.QueryDefs(I).SQL Then NewStat = "U"
+        If rsloQy!QueryDef <> dbx.QueryDefs(i).SQL Then NewStat = "U"
         rsloQy("Status") = NewStat
       End If
       rsloQy.Update
@@ -897,8 +884,8 @@ Private Sub cmdCompare_Click()
       If rsloTb("Status") = "NEW" Then
         ' New field or new Table
         isNewTable = True
-        For I = 0 To dbx.TableDefs.Count - 1
-          If dbx.TableDefs(I).Name = rsloTb!TableName Then isNewTable = False
+        For i = 0 To dbx.TableDefs.Count - 1
+          If dbx.TableDefs(i).Name = rsloTb!TableName Then isNewTable = False
         Next
 
 
@@ -1151,14 +1138,14 @@ Private Sub cmdCompare_Click()
     'dbx.Execute "DELETE FROM MSysRelationships"
 
     'For i = 0 To UBound(oRels)
-    For I = 0 To UBound(RelData)
+    For i = 0 To UBound(RelData)
 
       'Set oRel = dbx.CreateRelation()
       'oRel.Name = "CategoriesProducts"
       'oRel.Table = "Categories"
       'oRel.ForeignTable = "Products"
 
-      Set oRel = dbx.CreateRelation(RelData(I).sRelation & SQL, RelData(I).sTable, RelData(I).sFTable, RelData(I).lAttr)
+      Set oRel = dbx.CreateRelation(RelData(i).sRelation & SQL, RelData(i).sTable, RelData(i).sFTable, RelData(i).lAttr)
       'Set oRel = dbx.CreateRelation(sRelation(i) & Format(Now, "hhmmss"), sTable(i), sFTable(i), lAttr(i))
 
       'Get error "Index already exists" with code below
@@ -1166,9 +1153,9 @@ Private Sub cmdCompare_Click()
       'oRel.Attributes = dbRelationDontEnforce
 
       'append fields
-      For J = 0 To UBound(RelData(I).sField)
-        Set fld = oRel.CreateField(RelData(I).sField(J))
-        fld.ForeignName = RelData(I).sFField(J)
+      For J = 0 To UBound(RelData(i).sField)
+        Set fld = oRel.CreateField(RelData(i).sField(J))
+        fld.ForeignName = RelData(i).sFField(J)
         oRel.Fields.Append fld
       Next
 
@@ -1198,14 +1185,14 @@ Private Sub cmdCompare_Click()
   lblStatus.Caption = "Database compared to master schema database"
 
   If bCorrupt Then
-    I = FreeFile
+    i = FreeFile
     NewStat = sAppPath & "results.txt"
-    Open NewStat For Output As #I
-    Print #I, Format(Now, "mm/dd/yyyy hh:mm:ss am/pm")
-    Print #I, "Database: " & Text1.Text
-    Print #I, "Schema: " & sSchemaDB
-    Print #I, Text2.Text
-    Close #I
+    Open NewStat For Output As #i
+    Print #i, Format(Now, "mm/dd/yyyy hh:mm:ss am/pm")
+    Print #i, "Database: " & Text1.tEXT
+    Print #i, "Schema: " & sSchemaDB
+    Print #i, Text2.tEXT
+    Close #i
   End If
 
   EnableControls
@@ -1231,7 +1218,7 @@ Err:
     '3265: ignore item not found in this collection error
     '3113: Field not updatable
   Else
-    Text2.Text = Text2.Text & vbCrLf & "ERROR " & CStr(Err.Number) & " : " & Err.Description & vbCrLf
+    Text2.tEXT = Text2.tEXT & vbCrLf & "ERROR " & CStr(Err.Number) & " : " & Err.Description & vbCrLf
   End If
   Resume Next
   'End If
@@ -1239,7 +1226,7 @@ End Sub
 
 Private Sub Command2_Click()
 
-  If Text1.Text = "" Then
+  If Text1.tEXT = "" Then
     MsgBox "Enter database name.", vbExclamation
     Exit Sub
   End If
@@ -1248,84 +1235,51 @@ Private Sub Command2_Click()
     Exit Sub
   End If
 
-  Dim I As Integer
+  Dim i As Integer
   Dim K As Integer
   Dim FreeSpace As Currency
   Dim strNew As String
+  Dim strrepaired As String
   Dim SQL As String
   Dim strTable As String
   Dim ws As Workspace
   Dim strPath As String
-  Dim lItem As ListItem
-
-  'If chkNoMods.Value Then
-  '   Dim rst As Recordset
-  '   Dim a(4) As String
-  '   Dim t As Integer
-  '   Screen.MousePointer = vbHourglass
-  '   a(0) = "[case]"
-  '   a(1) = "offense"
-  '   a(2) = "event"
-  '   a(3) = "participant"
-  '   a(4) = "person"
-  '   Set dbTemp = OpenDatabase(Text1.Text)
-  '   Text2.Text = ""
-  '   For i = 0 To UBound(a)
-  '       strSQL = "SELECT R_ID FROM " & a(i) & " WHERE R_ID LIKE '%#%'"
-  '       Set rst = dbTemp.OpenRecordset(strSQL, dbOpenDynaset, 0, dbReadOnly)
-  '       If rst.RecordCount > 0 Then
-  '          t = t + 1
-  '          Text2.Text = Text2.Text & CStr(a(i)) & " Table contains " & CStr(rst.RecordCount) & " corrupt records" & vbCrLf
-  '       End If
-  '       rst.Close
-  '   Next
-  '   If t Then
-  '      Text2.Text = Text2.Text & CStr(t) & " total corrupt records found!"
-  '   Else
-  '      Text2.Text = "No corrupt records found in Tables Case, Event, Offense, Participant, or Person"
-  '   End If
-  '   Set rst = Nothing
-  '   dbTemp.Close
-  '   Set dbTemp = Nothing
-  '   Screen.MousePointer = vbDefault
-  '   Exit Sub
-  'End If
+  Dim lItem
 
   On Error Resume Next
 
   bFix = False
 
-  strNew = Text1.Text
-  strPath = Left(strNew, InStrRev(strNew, "\"))
-  strNew = strPath & "new.mdb"
+  strNew = parsefile(Text1.tEXT, "C") & "_new.mdb"
+  strrepaired = parsefile(Text1.tEXT, "C") & "_repaired.mdb"
 
   If FileExists(strNew) Then
-    DeleteFile strPath & "new.?db"  'Kill strPath & "new.?db"
+    Kill strNew
     If Err.Number Then
-      lblStatus.Caption = "Unable to delete " & strPath & "new.?db"
+      lblStatus.Caption = "Unable to delete " & strNew
       Exit Sub
     End If
   End If
 
-  If FileExists(strPath & "repaired.mdb") Then
-    DeleteFile strPath & "repaired.?db"  'Kill strPath & "repaired.?db"
+  If FileExists(strrepaired) Then
+    Kill strrepaired
     If Err.Number Then
-      lblStatus.Caption = "Unable to delete " & strPath & "repaired.?db"
+      lblStatus.Caption = "Unable to delete " & strrepaired
       Exit Sub
     End If
   End If
 
-  If FileExists(Text1.Text) = False Then
-    Text1.Text = ""
+  If FileExists(Text1.tEXT) = False Then
+    Text1.tEXT = ""
     lblStatus.Caption = "Database does not exist"
     Exit Sub
   End If
 
   'attempt to open the database shared, read-only
   If sDBpassword = "" Then
-    Set dbTemp = OpenDatabase(Text1.Text, False, True)
+    Set dbTemp = OpenDatabase(Text1.tEXT, False, True)
   Else
-    Set dbTemp = OpenDatabase(Text1.Text, False, True, ";pwd=" & sDBpassword)
+    Set dbTemp = OpenDatabase(Text1.tEXT, False, True, ";pwd=" & sDBpassword)
   End If
   If Err.Number Then
     'TODO: Fix database header if it is corrupted
@@ -1351,13 +1305,13 @@ Private Sub Command2_Click()
 
   DisableControls
 
-  Text2.Text = ""
+  Text2.tEXT = ""
 
   'make a copy of corrupt database
   lblStatus.Caption = "Making a copy of the database..."
   lblStatus.Refresh
   'FileCopy Text1.Text, strNew
-  CopyFileWindowsWay Text1.Text, strNew
+  FileCopy Text1.tEXT, strNew
   If Err.Number Then
     Screen.MousePointer = vbDefault
     lblStatus.Caption = "Unable to copy database. If the database is open, close it and try again."
@@ -1389,11 +1343,15 @@ Private Sub Command2_Click()
     Load frmProgress
     frmProgress.ListView1.ColumnHeaders.Add , , "Table Name", 5000, lvwColumnLeft
     'populate list
-    For I = 0 To dbTemp.TableDefs.Count - 1
-      strTable = dbTemp.TableDefs(I).Name
+    For i = 0 To dbTemp.TableDefs.Count - 1
+      strTable = dbTemp.TableDefs(i).Name
       If LCase(Left(strTable, 4)) <> "msys" Then
         'MsgBox strTable
         Set lItem = frmProgress.ListView1.ListItems.Add(, , strTable)
+       ' frmProgress.ListView1.ListItems.Add(,,
+        
+        
+        
       End If
     Next
     frmProgress.Show
@@ -1407,17 +1365,17 @@ Private Sub Command2_Click()
 
     If dbTemp.Relations.Count > 0 Then
       bRel = True
-      I = 0
+      i = 0
       'store relation data
       ReDim RelData(dbTemp.Relations.Count - 1)
       For Each oRel In dbTemp.Relations
-        Set oRel = dbTemp.Relations(I)
+        Set oRel = dbTemp.Relations(i)
         'ReDim Preserve RelData(i)
-        Set RelData(I).oRels = oRel
-        RelData(I).sRelation = oRel.Name
-        RelData(I).sTable = oRel.Table
-        RelData(I).sFTable = oRel.ForeignTable
-        RelData(I).lAttr = oRel.Attributes
+        Set RelData(i).oRels = oRel
+        RelData(i).sRelation = oRel.Name
+        RelData(i).sTable = oRel.Table
+        RelData(i).sFTable = oRel.ForeignTable
+        RelData(i).lAttr = oRel.Attributes
         'ReDim Preserve oRels(i)
         'ReDim Preserve sRelation(i)
         'ReDim Preserve sTable(i)
@@ -1431,8 +1389,8 @@ Private Sub Command2_Click()
         Set flds = oRel.Fields
         'MsgBox flds.Count
         K = 0
-        ReDim RelData(I).sField(flds.Count - 1)
-        ReDim RelData(I).sFField(flds.Count - 1)
+        ReDim RelData(i).sField(flds.Count - 1)
+        ReDim RelData(i).sFField(flds.Count - 1)
         For Each fld In flds
           'ReDim Preserve sField(i)
           'ReDim Preserve sFField(i)
@@ -1440,20 +1398,20 @@ Private Sub Command2_Click()
           'ReDim Preserve RelData(i).sFField(k)
           'sField(i) = fld.Name
           'sFField(i) = fld.ForeignName
-          RelData(I).sField(K) = fld.Name
-          RelData(I).sFField(K) = fld.ForeignName
+          RelData(i).sField(K) = fld.Name
+          RelData(i).sFField(K) = fld.ForeignName
           K = K + 1
         Next
-        I = I + 1
+        i = i + 1
       Next
 
       'then delete them
       'For i = 0 To UBound(oRels)
-      For I = 0 To UBound(RelData)
+      For i = 0 To UBound(RelData)
         'Set oRel = oRels(i)
         'MsgBox oRel.Name
         'oRel.Fields.Delete sField(i)
-        dbTemp.Relations.Delete RelData(I).sRelation
+        dbTemp.Relations.Delete RelData(i).sRelation
         'dbTemp.Relations.Delete oRel.Name
       Next
       'dbTemp.Relations.Refresh
@@ -1474,8 +1432,8 @@ Private Sub Command2_Click()
     K = 1
     frmProgress.Label1.Caption = "Deleting Tables in New MDB..."
     frmProgress.Label1.Refresh
-    For I = 0 To dbTemp.TableDefs.Count - 1
-      strTable = dbTemp.TableDefs(I).Name
+    For i = 0 To dbTemp.TableDefs.Count - 1
+      strTable = dbTemp.TableDefs(i).Name
       If LCase(Left(strTable, 4)) <> "msys" Then
         'MsgBox strTable
         Set lItem = frmProgress.ListView1.ListItems.Item(K)
@@ -1495,9 +1453,9 @@ Private Sub Command2_Click()
     Next
 
     If sDBpassword = "" Then
-      Set dbx = OpenDatabase(Text1.Text, False, True)
+      Set dbx = OpenDatabase(Text1.tEXT, False, True)
     Else
-      Set dbx = OpenDatabase(Text1.Text, False, True, ";pwd=" & sDBpassword)
+      Set dbx = OpenDatabase(Text1.tEXT, False, True, ";pwd=" & sDBpassword)
     End If
 
     On Error GoTo 0
@@ -1517,8 +1475,8 @@ Private Sub Command2_Click()
       frmProgress.Label1.Caption = "Creating Tables in New MDB..."
       frmProgress.Label1.Refresh
       K = 1
-      For I = 0 To dbx.TableDefs.Count - 1
-        strTable = dbx.TableDefs(I).Name
+      For i = 0 To dbx.TableDefs.Count - 1
+        strTable = dbx.TableDefs(i).Name
         If LCase(Left(strTable, 4)) <> "msys" Then
           'MsgBox strTable
           Set lItem = frmProgress.ListView1.ListItems.Item(K)
@@ -1549,16 +1507,16 @@ Private Sub Command2_Click()
     lblStatus.Caption = "Compacting and repairing new database..."
     lblStatus.Refresh
     If sDBpassword = "" Then
-      CompactDatabase strNew, strPath & "repaired.mdb"
+      CompactDatabase strNew, strrepaired
     Else
-      CompactDatabase strNew, strPath & "repaired.mdb", ";pwd=" & sDBpassword, , ";pwd=" & sDBpassword
+      CompactDatabase strNew, strrepaired, ";pwd=" & sDBpassword, , ";pwd=" & sDBpassword
     End If
     lblStatus.Caption = "Compacting and repairing new database...done."
     lblStatus.Refresh
 
-    DeleteFile strNew  'Kill strNew
+    Kill strNew
     Text1.Enabled = True
-    Text1.Text = strPath & "repaired.mdb"
+    Text1.tEXT = strrepaired
     chkNoMods.Enabled = True
     chkNoMods.Value = 0
 
@@ -1580,13 +1538,13 @@ End Sub
 Private Sub Form_Load()
 
 'TODO: Accept command line values
-  Dim I As Integer
+  Dim i As Integer
 
   On Error Resume Next
   CenterFormToScreen Me
 
   Me.Caption = App.Title & " " & App.Major & "." & App.Minor & "." & App.Revision
-  Text1.Text = ""
+  Text1.tEXT = ""
   PB1.Value = 0
   sAppPath = App.Path
   If Right(sAppPath, 1) <> "\" Then
@@ -1633,14 +1591,14 @@ Private Sub Form_Load()
     'Create Master Schema
     '"C:\Program Files\MDB Repair Tool\mdbrt.exe" -C:\Program Files\MDB Repair Tool\northwind.mdb -C:\Program Files\MDB Repair Tool\northwind_schema.mdb -3
 
-    I = UBound(a)
+    i = UBound(a)
 
-    If I = 3 Then  'no database password passed
-      Text1.Text = Trim(a(1))
+    If i = 3 Then  'no database password passed
+      Text1.tEXT = Trim(a(1))
       sSchemaDB = Trim(a(2))
       iMode = CInt(a(3))
-    ElseIf I = 4 Then  'database password passed
-      Text1.Text = Trim(a(1))
+    ElseIf i = 4 Then  'database password passed
+      Text1.tEXT = Trim(a(1))
       sSchemaDB = Trim(a(2))
       iMode = CInt(a(3))
       sDBpassword = Trim(a(4))
@@ -1685,7 +1643,7 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
 
   S = LCase(strTableName)
 
-  Text2.Text = ""
+  Text2.tEXT = ""
 
   Select Case S
   Case "offense"
@@ -1732,30 +1690,30 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
 
       Select Case S
       Case "offense"
-        Text2.Text = "Duplicates found in Offense Table" & vbCrLf
+        Text2.tEXT = "Duplicates found in Offense Table" & vbCrLf
       Case "case"
-        Text2.Text = "Duplicates found in Case Table" & vbCrLf
+        Text2.tEXT = "Duplicates found in Case Table" & vbCrLf
       Case "event"
-        Text2.Text = "Duplicates found in Event Table" & vbCrLf
+        Text2.tEXT = "Duplicates found in Event Table" & vbCrLf
       Case "participant"
-        Text2.Text = "Duplicates found in Participant Table" & vbCrLf
+        Text2.tEXT = "Duplicates found in Participant Table" & vbCrLf
       Case "person"
-        Text2.Text = "Duplicates found in Person Table" & vbCrLf
+        Text2.tEXT = "Duplicates found in Person Table" & vbCrLf
       End Select
 
       rst.MoveNext  'Important! Do not delete the first record!
       Do While Not rst.EOF
         Select Case S
         Case "offense"
-          Text2.Text = Text2.Text & "R_ID = " & rst.Fields("R_ID").Value & ", Case_R_ID = " & rst.Fields("Case_R_ID").Value & ", SequenceNumber = '" & rst.Fields("SequenceNumber").Value & "'" & vbCrLf
+          Text2.tEXT = Text2.tEXT & "R_ID = " & rst.Fields("R_ID").Value & ", Case_R_ID = " & rst.Fields("Case_R_ID").Value & ", SequenceNumber = '" & rst.Fields("SequenceNumber").Value & "'" & vbCrLf
         Case "case"
-          Text2.Text = Text2.Text & "R_ID = " & rst.Fields("R_ID").Value & ", CaseCounty = '" & rst.Fields("CaseCounty").Value & "', LocalNumber = '" & rst.Fields("LocalNumber").Value & "', CaseCentury = '" & rst.Fields("CaseCentury").Value & "', CaseNumber = '" & rst.Fields("CaseNumber").Value & "', CaseType = '" & rst.Fields("CaseType").Value & "'" & vbCrLf
+          Text2.tEXT = Text2.tEXT & "R_ID = " & rst.Fields("R_ID").Value & ", CaseCounty = '" & rst.Fields("CaseCounty").Value & "', LocalNumber = '" & rst.Fields("LocalNumber").Value & "', CaseCentury = '" & rst.Fields("CaseCentury").Value & "', CaseNumber = '" & rst.Fields("CaseNumber").Value & "', CaseType = '" & rst.Fields("CaseType").Value & "'" & vbCrLf
         Case "event"
-          Text2.Text = Text2.Text & "R_ID = " & rst.Fields("R_ID").Value & ", Case_R_ID = " & rst.Fields("Case_R_ID").Value & ", EventCode = '" & rst.Fields("EventCode").Value & "', Suffix = '" & rst.Fields("Suffix").Value & "'" & vbCrLf
+          Text2.tEXT = Text2.tEXT & "R_ID = " & rst.Fields("R_ID").Value & ", Case_R_ID = " & rst.Fields("Case_R_ID").Value & ", EventCode = '" & rst.Fields("EventCode").Value & "', Suffix = '" & rst.Fields("Suffix").Value & "'" & vbCrLf
         Case "participant"
-          Text2.Text = Text2.Text & "R_ID = " & rst.Fields("R_ID").Value & vbCrLf
+          Text2.tEXT = Text2.tEXT & "R_ID = " & rst.Fields("R_ID").Value & vbCrLf
         Case "person"
-          Text2.Text = Text2.Text & "R_ID = " & rst.Fields("R_ID").Value & vbCrLf
+          Text2.tEXT = Text2.tEXT & "R_ID = " & rst.Fields("R_ID").Value & vbCrLf
         End Select
         If chkNoMods.Value = False Then
           rst.Delete
@@ -1764,13 +1722,13 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
         rst.MoveNext
       Loop
       If chkNoMods.Value Then
-        Dim I As Integer
+        Dim i As Integer
         Dim NewStat As String
-        I = FreeFile
+        i = FreeFile
         NewStat = sAppPath & "results.txt"
-        Open NewStat For Output As #I
-        Print #I, Text2.Text
-        Close #I
+        Open NewStat For Output As #i
+        Print #i, Text2.tEXT
+        Close #i
         Shell "notepad.exe " & NewStat, vbNormalFocus
       End If
     End If
@@ -1822,7 +1780,7 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
 
 ErrProc:
 
-  Text2.Text = Text2.Text & vbCrLf & "ERROR " & CStr(Err.Number) & " : " & Err.Description & vbCrLf
+  Text2.tEXT = Text2.tEXT & vbCrLf & "ERROR " & CStr(Err.Number) & " : " & Err.Description & vbCrLf
 
   DeleteDuplicateRecords = B
 
@@ -1892,7 +1850,7 @@ Private Sub DisableControls()
   Dim ctl As Control
   On Error Resume Next
   For Each ctl In Controls
-    ctl.Enabled = False
+   ' ctl.Enabled = False
     If Err.Number Then Err.Clear
   Next
   Text2.Enabled = True
@@ -1904,17 +1862,17 @@ Private Sub EnableControls()
   Dim ctl As Control
   On Error Resume Next
   For Each ctl In Controls
-    ctl.Enabled = True
+  '  ctl.Enabled = True
     If Err.Number Then Err.Clear
   Next
 End Sub
 
 Private Sub WriteErrLog(S As String)
-  Dim I As Integer
+  Dim i As Integer
   On Error Resume Next
-  I = FreeFile
-  Open App.Path & "\errors.txt" For Append As #I
-  Print #I, Format(Now, "mm/dd/yy hh:mm:ss am/pm") & vbTab & S
-  Close #I
+  i = FreeFile
+  Open App.Path & "\errors.txt" For Append As #i
+  Print #i, Format(Now, "mm/dd/yy hh:mm:ss am/pm") & vbTab & S
+  Close #i
 End Sub
 
