@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escmnuusr 
    Caption         =   "Liberação Usuario"
    ClientHeight    =   5040
@@ -13,30 +13,28 @@ Begin VB.Form escmnuusr
    ScaleHeight     =   5040
    ScaleWidth      =   7800
    StartUpPosition =   2  'CenterScreen
-   Begin MSFlexGridLib.MSFlexGrid gridusr 
-      Height          =   4215
-      Left            =   120
-      TabIndex        =   0
-      Top             =   600
-      Width           =   2895
-      _ExtentX        =   5106
-      _ExtentY        =   7435
-      _Version        =   393216
-   End
-   Begin MSFlexGridLib.MSFlexGrid gridrptusr 
-      Height          =   4215
+   Begin VBFLXGRD17.VBFlexGrid gridrptusr 
+      Height          =   3135
       Left            =   4800
-      TabIndex        =   3
+      TabIndex        =   7
+      Top             =   720
+      Width           =   2775
+      _ExtentX        =   4895
+      _ExtentY        =   5530
+   End
+   Begin VBFLXGRD17.VBFlexGrid gridusr 
+      Height          =   4335
+      Left            =   120
+      TabIndex        =   6
       Top             =   600
       Width           =   2895
       _ExtentX        =   5106
-      _ExtentY        =   7435
-      _Version        =   393216
+      _ExtentY        =   7646
    End
    Begin XPControls.XPButton cmdSair 
       Height          =   435
       Left            =   3120
-      TabIndex        =   4
+      TabIndex        =   2
       Top             =   4320
       Width           =   1575
       _ExtentX        =   2778
@@ -56,7 +54,7 @@ Begin VB.Form escmnuusr
    Begin XPControls.XPButton incusrrpt 
       Height          =   375
       Left            =   3120
-      TabIndex        =   6
+      TabIndex        =   4
       Top             =   720
       Width           =   1455
       _ExtentX        =   2566
@@ -76,7 +74,7 @@ Begin VB.Form escmnuusr
    Begin XPControls.XPButton excrptusr 
       Height          =   375
       Left            =   3120
-      TabIndex        =   5
+      TabIndex        =   3
       Top             =   1200
       Width           =   1455
       _ExtentX        =   2566
@@ -96,7 +94,7 @@ Begin VB.Form escmnuusr
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
       Left            =   3000
-      TabIndex        =   7
+      TabIndex        =   5
       Top             =   120
       Width           =   1725
       _ExtentX        =   3043
@@ -126,7 +124,7 @@ Begin VB.Form escmnuusr
       EndProperty
       Height          =   375
       Left            =   4800
-      TabIndex        =   2
+      TabIndex        =   1
       Top             =   120
       Width           =   2775
    End
@@ -143,7 +141,7 @@ Begin VB.Form escmnuusr
       EndProperty
       Height          =   375
       Left            =   120
-      TabIndex        =   1
+      TabIndex        =   0
       Top             =   120
       Width           =   2775
    End

@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escMP04 
    Caption         =   "Escolha o Usuario Desejado"
    ClientHeight    =   6090
@@ -13,21 +13,20 @@ Begin VB.Form escMP04
    ScaleHeight     =   6090
    ScaleWidth      =   8265
    StartUpPosition =   2  'CenterScreen
-   Begin MSFlexGridLib.MSFlexGrid Grid 
-      Height          =   5535
+   Begin VBFLXGRD17.VBFlexGrid Grid 
+      Height          =   5415
       Left            =   120
-      TabIndex        =   0
+      TabIndex        =   2
       Top             =   480
       Width           =   6615
       _ExtentX        =   11668
-      _ExtentY        =   9763
-      _Version        =   393216
+      _ExtentY        =   9551
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
       Height          =   6090
       Left            =   6795
-      TabIndex        =   1
+      TabIndex        =   0
       Top             =   0
       Width           =   1470
       _ExtentX        =   2593
@@ -41,7 +40,7 @@ Begin VB.Form escMP04
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
       Left            =   0
-      TabIndex        =   2
+      TabIndex        =   1
       Top             =   0
       Width           =   1725
       _ExtentX        =   3043
@@ -210,8 +209,8 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     iImage = 6
     cARQRTF = PegPath("PATH", "IMGMP04CPF")
     Load frmIMAGENS
-    frmIMAGENS.TXTFIELDS(0).Visible = False
-    frmIMAGENS.TXTFIELDS(1).Visible = False
+    frmIMAGENS.txtFields(0).Visible = False
+    frmIMAGENS.txtFields(1).Visible = False
     frmIMAGENS.Escolher(0).Visible = False
     frmIMAGENS.Escolher(1).Visible = False
     frmIMAGENS.Escolher(2).Visible = False
