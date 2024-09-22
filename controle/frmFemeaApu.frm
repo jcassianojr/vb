@@ -218,7 +218,7 @@ Begin VB.Form frmFemeaApu
          Top             =   3180
          Width           =   1095
       End
-      Begin MSFlexGridLib.MSFlexGrid Grid 
+      Begin VBFLXGRD17.VBFlexGrid Grid 
          Height          =   2535
          Left            =   240
          TabIndex        =   25
@@ -229,7 +229,7 @@ Begin VB.Form frmFemeaApu
          _ExtentY        =   4471
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid Grid10 
+      Begin VBFLXGRD17.VBFlexGrid Grid10 
          Height          =   4335
          Left            =   -74880
          TabIndex        =   34
@@ -240,7 +240,7 @@ Begin VB.Form frmFemeaApu
          _ExtentY        =   7646
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GridOpe 
+      Begin VBFLXGRD17.VBFlexGrid GridOpe 
          Height          =   4335
          Left            =   -74760
          TabIndex        =   35

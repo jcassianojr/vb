@@ -59,7 +59,7 @@ Begin VB.Form frmprot
       Top             =   480
       Width           =   4335
    End
-   Begin MSFlexGridLib.MSFlexGrid GridAtual 
+   Begin VBFLXGRD17.VBFlexGrid GridAtual 
       Height          =   2895
       Left            =   120
       TabIndex        =   4

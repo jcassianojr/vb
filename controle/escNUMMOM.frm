@@ -33,7 +33,7 @@ Begin VB.Form escNUMNOM
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin MSFlexGridLib.MSFlexGrid Grid 
+   Begin VBFLXGRD17.VBFlexGrid Grid 
       Height          =   5535
       Left            =   120
       TabIndex        =   0

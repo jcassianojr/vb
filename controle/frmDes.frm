@@ -73,7 +73,7 @@ Begin VB.Form frmDes
          Top             =   2880
          Width           =   1095
       End
-      Begin MSFlexGridLib.MSFlexGrid GridAtual 
+      Begin VBFLXGRD17.VBFlexGrid GridAtual 
          Height          =   3135
          Left            =   240
          TabIndex        =   9
@@ -84,7 +84,7 @@ Begin VB.Form frmDes
          _ExtentY        =   5530
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GridArq 
+      Begin VBFLXGRD17.VBFlexGrid GridArq 
          Height          =   2535
          Left            =   -74760
          TabIndex        =   10

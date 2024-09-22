@@ -2225,7 +2225,7 @@ Begin VB.Form frmPCX
          Top             =   1200
          Width           =   1575
       End
-      Begin MSFlexGridLib.MSFlexGrid grdRI 
+      Begin VBFLXGRD17.VBFlexGrid grdRI 
          Height          =   3855
          Left            =   -74820
          TabIndex        =   198
@@ -3475,7 +3475,7 @@ Begin VB.Form frmPCX
          Top             =   1020
          Width           =   4215
       End
-      Begin MSFlexGridLib.MSFlexGrid GridSeq 
+      Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   2115
          Index           =   0
          Left            =   -74880
@@ -3487,7 +3487,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   3731
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GRIDMAT 
+      Begin VBFLXGRD17.VBFlexGrid GRIDMAT 
          Height          =   1095
          Index           =   0
          Left            =   -74820
@@ -3499,7 +3499,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridlab 
+      Begin VBFLXGRD17.VBFlexGrid gridlab 
          Height          =   1035
          Index           =   0
          Left            =   -74880
@@ -3511,7 +3511,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1826
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GRIDFIM 
+      Begin VBFLXGRD17.VBFlexGrid GRIDFIM 
          Height          =   1275
          Index           =   0
          Left            =   -74880
@@ -3523,7 +3523,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2249
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GRIDCOM 
+      Begin VBFLXGRD17.VBFlexGrid GRIDCOM 
          Height          =   1155
          Index           =   0
          Left            =   -74880
@@ -3535,7 +3535,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2037
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1335
          Index           =   0
          Left            =   -74760
@@ -3547,7 +3547,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2355
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   1
          Left            =   -74820
@@ -3559,7 +3559,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   2
          Left            =   -74880
@@ -3571,7 +3571,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1215
          Index           =   3
          Left            =   -74880
@@ -3583,7 +3583,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2143
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   4
          Left            =   -74880
@@ -3595,7 +3595,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   5
          Left            =   -74880
@@ -3607,7 +3607,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   0
          Left            =   -74760
@@ -3619,7 +3619,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1335
          Index           =   1
          Left            =   -74820
@@ -3631,7 +3631,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2355
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1335
          Index           =   2
          Left            =   -74880
@@ -3643,7 +3643,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2355
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   3
          Left            =   -74880
@@ -3655,7 +3655,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2143
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   4
          Left            =   -74880
@@ -3667,7 +3667,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2143
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   5
          Left            =   -74880
@@ -3679,7 +3679,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2143
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   2055
          Index           =   6
          Left            =   -74880
@@ -3691,7 +3691,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   3625
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   3255
          Index           =   7
          Left            =   -74880
@@ -3703,7 +3703,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   5741
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GRIDMAT 
+      Begin VBFLXGRD17.VBFlexGrid GRIDMAT 
          Height          =   1095
          Index           =   1
          Left            =   -74820
@@ -3715,7 +3715,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   11
          Left            =   -74820
@@ -3727,7 +3727,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1335
          Index           =   11
          Left            =   -74820
@@ -3739,7 +3739,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2355
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridlab 
+      Begin VBFLXGRD17.VBFlexGrid gridlab 
          Height          =   1035
          Index           =   1
          Left            =   -74880
@@ -3751,7 +3751,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1826
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   9
          Left            =   -74880
@@ -3763,7 +3763,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   9
          Left            =   -74880
@@ -3775,7 +3775,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2143
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GridSeq 
+      Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   1095
          Index           =   1
          Left            =   -74880
@@ -3787,7 +3787,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   13
          Left            =   -74880
@@ -3799,7 +3799,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1275
          Index           =   13
          Left            =   -74880
@@ -3811,7 +3811,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2249
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GRIDFIM 
+      Begin VBFLXGRD17.VBFlexGrid GRIDFIM 
          Height          =   1515
          Index           =   1
          Left            =   -74880
@@ -3823,7 +3823,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2672
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   14
          Left            =   -74880
@@ -3835,7 +3835,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1155
          Index           =   14
          Left            =   -74880
@@ -3847,7 +3847,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2037
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GRIDCOM 
+      Begin VBFLXGRD17.VBFlexGrid GRIDCOM 
          Height          =   1155
          Index           =   1
          Left            =   -74880
@@ -3859,7 +3859,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2037
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   15
          Left            =   -74880
@@ -3871,7 +3871,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   15
          Left            =   -74880
@@ -3883,7 +3883,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2143
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GRIDFIM 
+      Begin VBFLXGRD17.VBFlexGrid GRIDFIM 
          Height          =   1515
          Index           =   2
          Left            =   -74820
@@ -3895,7 +3895,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2672
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   24
          Left            =   -74820
@@ -3907,7 +3907,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1155
          Index           =   24
          Left            =   -74820
@@ -3919,7 +3919,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2037
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GridSeq 
+      Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   1095
          Index           =   2
          Left            =   -74820
@@ -3931,7 +3931,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   23
          Left            =   -74820
@@ -3943,7 +3943,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1275
          Index           =   23
          Left            =   -74820
@@ -3955,7 +3955,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2249
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GRIDCOM 
+      Begin VBFLXGRD17.VBFlexGrid GRIDCOM 
          Height          =   1155
          Index           =   2
          Left            =   -74880
@@ -3967,7 +3967,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2037
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   25
          Left            =   -74880
@@ -3979,7 +3979,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   25
          Left            =   -74880
@@ -3991,7 +3991,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2143
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GRIDMAT 
+      Begin VBFLXGRD17.VBFlexGrid GRIDMAT 
          Height          =   1095
          Index           =   2
          Left            =   -74820
@@ -4003,7 +4003,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   21
          Left            =   -74820
@@ -4015,7 +4015,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1335
          Index           =   21
          Left            =   -74820
@@ -4027,7 +4027,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2355
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridlab 
+      Begin VBFLXGRD17.VBFlexGrid gridlab 
          Height          =   1035
          Index           =   2
          Left            =   -74820
@@ -4039,7 +4039,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1826
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   22
          Left            =   -74820
@@ -4051,7 +4051,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   1931
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   22
          Left            =   -74820
@@ -4063,7 +4063,7 @@ Begin VB.Form frmPCX
          _ExtentY        =   2143
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GridPFrev 
+      Begin VBFLXGRD17.VBFlexGrid GridPFrev 
          Height          =   1695
          Left            =   -74880
          TabIndex        =   349

@@ -13,7 +13,7 @@ Begin VB.Form escmp
    ScaleHeight     =   6090
    ScaleWidth      =   8970
    StartUpPosition =   2  'CenterScreen
-   Begin MSFlexGridLib.MSFlexGrid Grid 
+   Begin VBFLXGRD17.VBFlexGrid Grid 
       Height          =   5535
       Left            =   120
       TabIndex        =   0

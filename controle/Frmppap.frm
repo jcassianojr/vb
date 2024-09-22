@@ -542,7 +542,7 @@ Begin VB.Form frmPPAP
          Top             =   600
          Width           =   795
       End
-      Begin MSFlexGridLib.MSFlexGrid Grid 
+      Begin VBFLXGRD17.VBFlexGrid Grid 
          Height          =   2655
          Left            =   -74760
          TabIndex        =   78
@@ -1024,7 +1024,7 @@ Begin VB.Form frmPPAP
          Top             =   1860
          Width           =   2115
       End
-      Begin MSFlexGridLib.MSFlexGrid gridlay 
+      Begin VBFLXGRD17.VBFlexGrid gridlay 
          Height          =   2655
          Left            =   -74640
          TabIndex        =   102
@@ -1034,7 +1034,7 @@ Begin VB.Form frmPPAP
          _ExtentY        =   4683
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GridCjto 
+      Begin VBFLXGRD17.VBFlexGrid GridCjto 
          Height          =   2655
          Left            =   -74760
          TabIndex        =   111

@@ -138,7 +138,7 @@ Begin VB.Form frmGp11
       Top             =   360
       Width           =   975
    End
-   Begin MSFlexGridLib.MSFlexGrid Grid 
+   Begin VBFLXGRD17.VBFlexGrid Grid 
       Height          =   3495
       Left            =   120
       TabIndex        =   14

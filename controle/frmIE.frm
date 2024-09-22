@@ -608,7 +608,7 @@ Begin VB.Form frmIE
          Top             =   600
          Width           =   9975
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1815
          Left            =   -74640
          TabIndex        =   32
@@ -619,7 +619,7 @@ Begin VB.Form frmIE
          _ExtentY        =   3201
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1575
          Left            =   -74640
          TabIndex        =   33

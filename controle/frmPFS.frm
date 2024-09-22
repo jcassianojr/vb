@@ -3706,7 +3706,7 @@ Begin VB.Form frmPFS
          Top             =   3210
          Width           =   255
       End
-      Begin MSFlexGridLib.MSFlexGrid GridIns 
+      Begin VBFLXGRD17.VBFlexGrid GridIns 
          Height          =   3855
          Left            =   -74880
          TabIndex        =   135
@@ -3716,7 +3716,7 @@ Begin VB.Form frmPFS
          _ExtentY        =   6800
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GrdQsbLep 
+      Begin VBFLXGRD17.VBFlexGrid GrdQsbLep 
          Height          =   3915
          Left            =   120
          TabIndex        =   140

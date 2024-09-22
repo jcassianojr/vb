@@ -324,7 +324,7 @@ Begin VB.Form frmME01
          Top             =   1500
          Width           =   2055
       End
-      Begin MSFlexGridLib.MSFlexGrid GridSeq 
+      Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   3255
          Left            =   -74880
          TabIndex        =   15
@@ -335,7 +335,7 @@ Begin VB.Form frmME01
          _ExtentY        =   5741
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevcau 
+      Begin VBFLXGRD17.VBFlexGrid gridrevcau 
          Height          =   1515
          Left            =   -74880
          TabIndex        =   16

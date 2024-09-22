@@ -28,7 +28,7 @@ Begin VB.Form escMP05
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin MSFlexGridLib.MSFlexGrid Grid 
+   Begin VBFLXGRD17.VBFlexGrid Grid 
       Height          =   5415
       Left            =   120
       TabIndex        =   0

@@ -472,7 +472,7 @@ Begin VB.Form frmPOKA
          Top             =   780
          Width           =   4215
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrev 
+      Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1815
          Left            =   240
          TabIndex        =   45
@@ -483,7 +483,7 @@ Begin VB.Form frmPOKA
          _ExtentY        =   3201
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevi 
+      Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1575
          Left            =   240
          TabIndex        =   46

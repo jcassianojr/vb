@@ -561,7 +561,7 @@ Begin VB.Form FrmFemeaPad
          Top             =   720
          Width           =   1095
       End
-      Begin MSFlexGridLib.MSFlexGrid GridPRO 
+      Begin VBFLXGRD17.VBFlexGrid GridPRO 
          Height          =   1155
          Left            =   360
          TabIndex        =   14
@@ -571,7 +571,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   2037
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GRIDFAL 
+      Begin VBFLXGRD17.VBFlexGrid GRIDFAL 
          Height          =   1155
          Left            =   360
          TabIndex        =   15
@@ -581,7 +581,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   2037
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridefe 
+      Begin VBFLXGRD17.VBFlexGrid gridefe 
          Height          =   1155
          Left            =   360
          TabIndex        =   16
@@ -591,7 +591,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   2037
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridcau 
+      Begin VBFLXGRD17.VBFlexGrid gridcau 
          Height          =   1035
          Left            =   360
          TabIndex        =   17
@@ -601,7 +601,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   1826
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid Gridfemprecad 
+      Begin VBFLXGRD17.VBFlexGrid Gridfemprecad 
          Height          =   5895
          Left            =   -74880
          TabIndex        =   31
@@ -612,7 +612,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   10398
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid GridPadPF 
+      Begin VBFLXGRD17.VBFlexGrid GridPadPF 
          Height          =   5235
          Left            =   -67680
          TabIndex        =   33
@@ -622,7 +622,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   9234
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridpf 
+      Begin VBFLXGRD17.VBFlexGrid gridpf 
          Height          =   5355
          Left            =   -74880
          TabIndex        =   34
@@ -632,7 +632,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   9446
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid gridrevcau 
+      Begin VBFLXGRD17.VBFlexGrid gridrevcau 
          Height          =   1035
          Left            =   360
          TabIndex        =   61
@@ -656,7 +656,7 @@ Begin VB.Form FrmFemeaPad
          TextAlignment   =   1
          _Version        =   393216
       End
-      Begin MSFlexGridLib.MSFlexGrid Grid 
+      Begin VBFLXGRD17.VBFlexGrid Grid 
          Height          =   5595
          Left            =   -74820
          TabIndex        =   69

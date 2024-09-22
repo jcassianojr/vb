@@ -34,7 +34,7 @@ Begin VB.Form escFLX
       Top             =   60
       Width           =   1095
    End
-   Begin MSFlexGridLib.MSFlexGrid Grid 
+   Begin VBFLXGRD17.VBFlexGrid Grid 
       Height          =   5355
       Left            =   0
       TabIndex        =   0
