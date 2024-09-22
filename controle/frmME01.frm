@@ -13,7 +13,7 @@ Begin VB.Form frmME01
    ScaleHeight     =   6915
    ScaleWidth      =   11280
    StartUpPosition =   2  'CenterScreen
-   Begin TabExCtl.SSTabEx SSTab1 
+   Begin NewTabCtl.NewTab SSTab1 
       Height          =   5895
       Index           =   0
       Left            =   120

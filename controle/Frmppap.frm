@@ -99,7 +99,7 @@ Begin VB.Form frmPPAP
       Top             =   120
       Width           =   975
    End
-   Begin TabExCtl.SSTabEx SSTab1 
+   Begin NewTabCtl.NewTab SSTab1 
       Height          =   4635
       Left            =   120
       TabIndex        =   12

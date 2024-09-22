@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmprotii 
    Caption         =   "Controle de Prototipos"
    ClientHeight    =   4785
@@ -26,7 +26,7 @@ Begin VB.Form frmprotii
       Top             =   120
       Width           =   375
    End
-   Begin TabExCtl.SSTabEx SSTab1 
+   Begin NewTabCtl.NewTab SSTab1 
       Height          =   3375
       Left            =   120
       TabIndex        =   12
@@ -34,6 +34,7 @@ Begin VB.Form frmprotii
       Width           =   9495
       _ExtentX        =   16748
       _ExtentY        =   5953
+      ControlJustAdded=   0   'False
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -44,6 +45,7 @@ Begin VB.Form frmprotii
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
+      ControlVersion  =   9
       TabCaption(0)   =   "GP11"
       Tab(0).ControlCount=   3
       Tab(0).Control(0)=   "Text3"
@@ -51,43 +53,43 @@ Begin VB.Form frmprotii
       Tab(0).Control(2)=   "Grid"
       TabCaption(1)   =   "Pedido Entrega"
       Tab(1).ControlCount=   25
-      Tab(1).Control(0)=   "lbl(9)"
-      Tab(1).Control(1)=   "lbl(10)"
-      Tab(1).Control(2)=   "lbl(22)"
-      Tab(1).Control(3)=   "lbl(15)"
-      Tab(1).Control(4)=   "lbl(16)"
-      Tab(1).Control(5)=   "lbl(17)"
-      Tab(1).Control(6)=   "lbl(19)"
-      Tab(1).Control(7)=   "lbl(23)"
-      Tab(1).Control(8)=   "lbl(24)"
-      Tab(1).Control(9)=   "lbl(25)"
-      Tab(1).Control(10)=   "lbl(26)"
-      Tab(1).Control(11)=   "DTPicker8"
+      Tab(1).Control(0)=   "Text1(3)"
+      Tab(1).Control(1)=   "Text1(11)"
+      Tab(1).Control(2)=   "Text1(18)"
+      Tab(1).Control(3)=   "Text1(6)"
+      Tab(1).Control(4)=   "Text1(5)"
+      Tab(1).Control(5)=   "Command1"
+      Tab(1).Control(6)=   "Command2"
+      Tab(1).Control(7)=   "Text1(10)"
+      Tab(1).Control(8)=   "Text1(2)"
+      Tab(1).Control(9)=   "Text1(7)"
+      Tab(1).Control(10)=   "DTPicker5"
+      Tab(1).Control(11)=   "DTPicker6"
       Tab(1).Control(12)=   "DTPicker7"
-      Tab(1).Control(13)=   "DTPicker6"
-      Tab(1).Control(14)=   "DTPicker5"
-      Tab(1).Control(15)=   "Text1(7)"
-      Tab(1).Control(16)=   "Text1(2)"
-      Tab(1).Control(17)=   "Text1(10)"
-      Tab(1).Control(18)=   "Command2"
-      Tab(1).Control(19)=   "Command1"
-      Tab(1).Control(20)=   "Text1(5)"
-      Tab(1).Control(21)=   "Text1(6)"
-      Tab(1).Control(22)=   "Text1(18)"
-      Tab(1).Control(23)=   "Text1(11)"
-      Tab(1).Control(24)=   "Text1(3)"
+      Tab(1).Control(13)=   "DTPicker8"
+      Tab(1).Control(14)=   "lbl(26)"
+      Tab(1).Control(15)=   "lbl(25)"
+      Tab(1).Control(16)=   "lbl(24)"
+      Tab(1).Control(17)=   "lbl(23)"
+      Tab(1).Control(18)=   "lbl(19)"
+      Tab(1).Control(19)=   "lbl(17)"
+      Tab(1).Control(20)=   "lbl(16)"
+      Tab(1).Control(21)=   "lbl(15)"
+      Tab(1).Control(22)=   "lbl(22)"
+      Tab(1).Control(23)=   "lbl(10)"
+      Tab(1).Control(24)=   "lbl(9)"
       TabCaption(2)   =   "Desenho Observaçao"
       Tab(2).ControlCount=   10
-      Tab(2).Control(0)=   "lbl(18)"
-      Tab(2).Control(1)=   "lbl(20)"
-      Tab(2).Control(2)=   "lbl(21)"
-      Tab(2).Control(3)=   "Text1(9)"
-      Tab(2).Control(4)=   "Text1(16)"
-      Tab(2).Control(5)=   "Text1(17)"
-      Tab(2).Control(6)=   "Text1(12)"
-      Tab(2).Control(7)=   "Text1(13)"
-      Tab(2).Control(8)=   "Text1(14)"
-      Tab(2).Control(9)=   "Text1(15)"
+      Tab(2).Control(0)=   "Text1(15)"
+      Tab(2).Control(1)=   "Text1(14)"
+      Tab(2).Control(2)=   "Text1(13)"
+      Tab(2).Control(3)=   "Text1(12)"
+      Tab(2).Control(4)=   "Text1(17)"
+      Tab(2).Control(5)=   "Text1(16)"
+      Tab(2).Control(6)=   "Text1(9)"
+      Tab(2).Control(7)=   "lbl(21)"
+      Tab(2).Control(8)=   "lbl(20)"
+      Tab(2).Control(9)=   "lbl(18)"
       Begin VB.TextBox Text1 
          Height          =   285
          Index           =   3
@@ -100,9 +102,9 @@ Begin VB.Form frmprotii
       Begin VB.TextBox Text3 
          BackColor       =   &H00C0FFFF&
          Height          =   285
-         Left            =   2040
+         Left            =   1920
          TabIndex        =   47
-         Top             =   120
+         Top             =   480
          Width           =   855
       End
       Begin VB.TextBox Text1 
@@ -110,11 +112,11 @@ Begin VB.Form frmprotii
          Enabled         =   0   'False
          Height          =   285
          Index           =   8
-         Left            =   360
+         Left            =   480
          Locked          =   -1  'True
          TabIndex        =   45
          TabStop         =   0   'False
-         Top             =   120
+         Top             =   480
          Width           =   735
       End
       Begin VB.TextBox Text1 
@@ -252,13 +254,13 @@ Begin VB.Form frmprotii
          Width           =   7695
       End
       Begin MSFlexGridLib.MSFlexGrid Grid 
-         Height          =   2655
+         Height          =   2295
          Left            =   240
          TabIndex        =   46
-         Top             =   480
+         Top             =   840
          Width           =   8115
          _ExtentX        =   14314
-         _ExtentY        =   4683
+         _ExtentY        =   4048
          _Version        =   393216
       End
       Begin VBCCR18.DTPicker DTPicker5 

@@ -64,7 +64,7 @@ Begin VB.Form frmFemeaApu
       Top             =   480
       Width           =   1215
    End
-   Begin TabExCtl.SSTabEx SSTab1 
+   Begin NewTabCtl.NewTab SSTab1 
       Height          =   5055
       Left            =   120
       TabIndex        =   14

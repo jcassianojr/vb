@@ -23,7 +23,7 @@ Begin VB.Form frmPOA
       _ExtentX        =   1191
       _ExtentY        =   1191
    End
-   Begin TabExCtl.SSTabEx SSTab1 
+   Begin NewTabCtl.NewTab SSTab1 
       Height          =   5175
       Left            =   120
       TabIndex        =   20

@@ -23,7 +23,7 @@ Begin VB.Form frmDISPOI
       _ExtentX        =   1191
       _ExtentY        =   1191
    End
-   Begin TabExCtl.SSTabEx SSTab1 
+   Begin NewTabCtl.NewTab SSTab1 
       Height          =   4815
       Left            =   120
       TabIndex        =   4

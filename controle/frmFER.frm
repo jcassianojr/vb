@@ -23,7 +23,7 @@ Begin VB.Form frmFER
       Top             =   1080
       Width           =   1335
    End
-   Begin TabExCtl.SSTabEx SSTab1 
+   Begin NewTabCtl.NewTab SSTab1 
       Height          =   4215
       Left            =   120
       TabIndex        =   8

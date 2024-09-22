@@ -44,7 +44,7 @@ Begin VB.Form frmPOKA
       Top             =   120
       Width           =   735
    End
-   Begin TabExCtl.SSTabEx SSTab1 
+   Begin NewTabCtl.NewTab SSTab1 
       Height          =   7095
       Left            =   120
       TabIndex        =   11

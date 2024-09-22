@@ -223,7 +223,7 @@ Begin VB.Form frmfemea
       Top             =   360
       Width           =   1095
    End
-   Begin TabExCtl.SSTabEx SSTab1 
+   Begin NewTabCtl.NewTab SSTab1 
       Height          =   7575
       Left            =   240
       TabIndex        =   28
