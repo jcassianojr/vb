@@ -92,7 +92,7 @@ Begin VB.Form FrmRpt
       Top             =   120
       Width           =   1815
    End
-   Begin vbExtra.SSTabEx SSTab1 
+   Begin NewTabCtl.NewTab SSTab1 
       Height          =   3495
       Left            =   120
       TabIndex        =   0
