@@ -1,5 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000C&
    Caption         =   "Menu Inicial"
@@ -10,6 +11,16 @@ Begin VB.MDIForm frmPRINCIPAL
    Icon            =   "Principal.frx":0000
    LinkTopic       =   "MDIForm1"
    StartUpPosition =   3  'Windows Default
+   Begin VBCCR18.StatusBar StatusBar1 
+      Align           =   2  'Align Bottom
+      Height          =   375
+      Left            =   0
+      Top             =   7575
+      Width           =   12180
+      _ExtentX        =   21484
+      _ExtentY        =   661
+      InitPanels      =   "Principal.frx":058A
+   End
    Begin MSComctlLib.ImageList ImageList1 
       Left            =   840
       Top             =   120
@@ -20,67 +31,6 @@ Begin VB.MDIForm frmPRINCIPAL
       ImageHeight     =   16
       MaskColor       =   12632256
       _Version        =   393216
-   End
-   Begin MSComctlLib.StatusBar StatusBar1 
-      Align           =   2  'Align Bottom
-      Height          =   315
-      Left            =   0
-      TabIndex        =   0
-      Top             =   7635
-      Width           =   12180
-      _ExtentX        =   21484
-      _ExtentY        =   556
-      _Version        =   393216
-      BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
-         NumPanels       =   7
-         BeginProperty Panel1 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            Style           =   1
-            AutoSize        =   2
-            Enabled         =   0   'False
-            Object.Width           =   1058
-            MinWidth        =   1058
-            TextSave        =   "CAPS"
-         EndProperty
-         BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            Style           =   2
-            AutoSize        =   2
-            Enabled         =   0   'False
-            Object.Width           =   1058
-            MinWidth        =   1058
-            TextSave        =   "NUM"
-         EndProperty
-         BeginProperty Panel3 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            Style           =   3
-            Enabled         =   0   'False
-            Object.Width           =   1058
-            MinWidth        =   1058
-            TextSave        =   "INS"
-         EndProperty
-         BeginProperty Panel4 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            Style           =   5
-            AutoSize        =   2
-            Object.Width           =   1588
-            MinWidth        =   1587
-            Picture         =   "Principal.frx":058A
-            TextSave        =   "12:10"
-         EndProperty
-         BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            Style           =   6
-            AutoSize        =   2
-            Object.Width           =   2302
-            MinWidth        =   2293
-            Picture         =   "Principal.frx":0B24
-            TextSave        =   "21/09/2024"
-         EndProperty
-         BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            AutoSize        =   2
-            Picture         =   "Principal.frx":10BE
-         EndProperty
-         BeginProperty Panel7 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            AutoSize        =   1
-            Object.Width           =   11192
-         EndProperty
-      EndProperty
    End
 End
 Attribute VB_Name = "frmPRINCIPAL"

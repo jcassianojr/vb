@@ -1,5 +1,4 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmIniEditor 
@@ -16,72 +15,11 @@ Begin VB.Form frmIniEditor
    Begin VBCCR18.TreeView TreeView1 
       Height          =   5175
       Left            =   120
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   1800
       Width           =   10815
       _ExtentX        =   19076
       _ExtentY        =   9128
-   End
-   Begin MSComctlLib.StatusBar StatusBar1 
-      Align           =   2  'Align Bottom
-      Height          =   315
-      Left            =   0
-      TabIndex        =   3
-      Top             =   7155
-      Width           =   11325
-      _ExtentX        =   19976
-      _ExtentY        =   556
-      _Version        =   393216
-      BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
-         NumPanels       =   7
-         BeginProperty Panel1 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            Style           =   1
-            AutoSize        =   2
-            Enabled         =   0   'False
-            Object.Width           =   1058
-            MinWidth        =   1058
-            TextSave        =   "CAPS"
-         EndProperty
-         BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            Style           =   2
-            AutoSize        =   2
-            Enabled         =   0   'False
-            Object.Width           =   1058
-            MinWidth        =   1058
-            TextSave        =   "NUM"
-         EndProperty
-         BeginProperty Panel3 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            Style           =   3
-            Enabled         =   0   'False
-            Object.Width           =   1058
-            MinWidth        =   1058
-            TextSave        =   "INS"
-         EndProperty
-         BeginProperty Panel4 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            Style           =   5
-            AutoSize        =   2
-            Object.Width           =   1588
-            MinWidth        =   1587
-            Picture         =   "frmIniEditor.frx":058A
-            TextSave        =   "12:01"
-         EndProperty
-         BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            Style           =   6
-            AutoSize        =   2
-            Object.Width           =   2302
-            MinWidth        =   2293
-            Picture         =   "frmIniEditor.frx":0B24
-            TextSave        =   "21/09/2024"
-         EndProperty
-         BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            AutoSize        =   2
-            Picture         =   "frmIniEditor.frx":10BE
-         EndProperty
-         BeginProperty Panel7 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
-            AutoSize        =   1
-            Object.Width           =   9684
-         EndProperty
-      EndProperty
    End
    Begin VB.Frame frmFile 
       Caption         =   "Arquivo"
@@ -103,13 +41,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   1
          Left            =   120
-         TabIndex        =   4
+         TabIndex        =   3
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
          _ExtentX        =   1720
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":1458
+         Picture         =   "frmIniEditor.frx":058A
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -125,13 +63,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   0
          Left            =   1200
-         TabIndex        =   5
+         TabIndex        =   4
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
          _ExtentX        =   1720
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":19F2
+         Picture         =   "frmIniEditor.frx":0B24
          Caption         =   "Abrir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -147,13 +85,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   2
          Left            =   2280
-         TabIndex        =   6
+         TabIndex        =   5
          TabStop         =   0   'False
          Top             =   240
          Width           =   1035
          _ExtentX        =   1826
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":1F8C
+         Picture         =   "frmIniEditor.frx":10BE
          Caption         =   "Salvar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -169,13 +107,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   3
          Left            =   3360
-         TabIndex        =   7
+         TabIndex        =   6
          TabStop         =   0   'False
          Top             =   240
          Width           =   1275
          _ExtentX        =   2249
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":2526
+         Picture         =   "frmIniEditor.frx":1658
          Caption         =   "Salvar Como"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -191,13 +129,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   6
          Left            =   7440
-         TabIndex        =   8
+         TabIndex        =   7
          TabStop         =   0   'False
          Top             =   240
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":2AC0
+         Picture         =   "frmIniEditor.frx":1BF2
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -213,13 +151,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   5
          Left            =   4800
-         TabIndex        =   9
+         TabIndex        =   8
          TabStop         =   0   'False
          Top             =   240
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":305A
+         Picture         =   "frmIniEditor.frx":218C
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -235,13 +173,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   4
          Left            =   6120
-         TabIndex        =   10
+         TabIndex        =   9
          TabStop         =   0   'False
          Top             =   240
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":35F4
+         Picture         =   "frmIniEditor.frx":2726
          Caption         =   "Desfazer"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -274,13 +212,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   0
          Left            =   120
-         TabIndex        =   11
+         TabIndex        =   10
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
          _ExtentX        =   1720
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":3B8E
+         Picture         =   "frmIniEditor.frx":2CC0
          Caption         =   "Abrir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -296,13 +234,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   1
          Left            =   1200
-         TabIndex        =   12
+         TabIndex        =   11
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
          _ExtentX        =   1720
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":4128
+         Picture         =   "frmIniEditor.frx":325A
          Caption         =   "Nova"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -318,13 +256,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   2
          Left            =   2280
-         TabIndex        =   13
+         TabIndex        =   12
          TabStop         =   0   'False
          Top             =   240
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":46C2
+         Picture         =   "frmIniEditor.frx":37F4
          Caption         =   "apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -335,6 +273,15 @@ Begin VB.Form frmIniEditor
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+      End
+      Begin VBCCR18.StatusBar StatusBar1 
+         Height          =   375
+         Left            =   0
+         Top             =   0
+         Width           =   10530
+         _ExtentX        =   18574
+         _ExtentY        =   661
+         InitPanels      =   "frmIniEditor.frx":3C8E
       End
    End
    Begin VB.Frame frmKey 
@@ -357,13 +304,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   0
          Left            =   120
-         TabIndex        =   14
+         TabIndex        =   13
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
          _ExtentX        =   1720
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":4B5C
+         Picture         =   "frmIniEditor.frx":4322
          Caption         =   "Abrir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -379,13 +326,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   1
          Left            =   1200
-         TabIndex        =   15
+         TabIndex        =   14
          TabStop         =   0   'False
          Top             =   240
          Width           =   975
          _ExtentX        =   1720
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":50F6
+         Picture         =   "frmIniEditor.frx":48BC
          Caption         =   "Nova"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -401,13 +348,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   2
          Left            =   2280
-         TabIndex        =   16
+         TabIndex        =   15
          TabStop         =   0   'False
          Top             =   240
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":5690
+         Picture         =   "frmIniEditor.frx":4E56
          Caption         =   "apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -423,13 +370,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   3
          Left            =   3480
-         TabIndex        =   17
+         TabIndex        =   16
          TabStop         =   0   'False
          Top             =   240
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":5B2A
+         Picture         =   "frmIniEditor.frx":52F0
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -445,13 +392,13 @@ Begin VB.Form frmIniEditor
          Height          =   435
          Index           =   4
          Left            =   4800
-         TabIndex        =   18
+         TabIndex        =   17
          TabStop         =   0   'False
          Top             =   240
          Width           =   1215
          _ExtentX        =   2143
          _ExtentY        =   767
-         Picture         =   "frmIniEditor.frx":60C4
+         Picture         =   "frmIniEditor.frx":588A
          Caption         =   "arquivar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -463,6 +410,16 @@ Begin VB.Form frmIniEditor
             Strikethrough   =   0   'False
          EndProperty
       End
+   End
+   Begin VBCCR18.StatusBar StatusBar2 
+      Align           =   2  'Align Bottom
+      Height          =   375
+      Left            =   0
+      Top             =   7095
+      Width           =   11325
+      _ExtentX        =   19976
+      _ExtentY        =   661
+      InitPanels      =   "frmIniEditor.frx":5E24
    End
 End
 Attribute VB_Name = "frmIniEditor"
