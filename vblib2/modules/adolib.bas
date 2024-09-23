@@ -121,7 +121,7 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     GeraConn = "[JETMDB]" & cARQ
     Exit Function
   End If
-  If cTIPO = "JETFOX" Or cTIPO = "FOX" Or cTIPO = "DBF" Or cTIPO = "SDECDX" Or cTIPO = "SDEFOX" Then
+  If cTIPO = "JETFOX" Or cTIPO = "FOX" Or cTIPO = "DBF" Or InStr(cARQTMP, ".DBF") > 0 Then
     GeraConn = "[JETFOX]" & cARQ
     Exit Function
   End If
@@ -276,9 +276,8 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   '
   'jetfox
   '
-  If InStr(cARQTMP, "[JETFOX]") > 0 Or InStr(cARQTMP, "[SDECDX]") > 0 Then
+  If InStr(cARQTMP, "[JETFOX]") > 0 Then
     cARQ = Replace(cARQ, "[JETFOX]", "")
-    cARQ = Replace(cARQ, "[SDECDX]", "")
 
     ' PROVIDER=VFPOLEDB.1;Data Source=caminho
     ' ;SourceType=dbf;Deleted=Yes;Mode=ReadWrite|Share Deny None;Mode=Share Deny None

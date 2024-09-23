@@ -665,7 +665,6 @@ End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
-  'CentralizaJanela Me
 End Sub
 
 Private Sub tEXT_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -1031,11 +1030,6 @@ Private Sub XPButton5_Click()
 
   cARQPF = PegPath("PATH", "PF")
   dbPF.Open GeracArq(cARQPF, , False)
-  'sx_SetEpoch (Year(Date) - 30)
-  'sx_SetDateFormat BRITISH
-  'sx_SetSoftSeek True
-  'SACAREA = sx_Use(zMANA5EMP & "MS01.dbf", "MS01", READWRITE, SDEFOX)
-  'iRETVAL = sx_SetOrder(2)
   SACAREA = GeraConn(zMANA5EMP, "JETFOX")
   sqlPF = "SELECT PF.CODFINAL, PF.PESLIQ, IE.TARA FROM PF,IE WHERE ( PF.PF = IE.PF ) AND PF.CODFINAL<>"" AND PF.CODFINAL IS NOT NULL"
   rsPF.Open sqlPF, dbPF, adOpenForwardOnly, adLockReadOnly
@@ -1049,22 +1043,11 @@ Private Sub XPButton5_Click()
     cCODIGO = FixStr(rsPF("CODFINAL"))
     LblDiz.Caption = cCODIGO
     LblDiz.Refresh
-   ' sx_GoTop
-   ' sx_Seek (cCODIGO)
-   ' If Trim(sx_EvalString(sx_IndexKey())) = Trim(cCODIGO) Then
-   '   If sx_Rlock(sx_RecNo()) Then
-   '     sx_PutVariant "PESUNIPF", FixNum(rsPF("PESLIQ"))
-   '     sx_PutVariant "PESEMBPF", FixNum(rsPF("TARA"))
-   '     sx_Commit
-   '     sx_Unlock sx_RecNo()
-   '   End If
-    'End If
     'criar opcao futura con recodset e find
     GrvSQL SACAREA, "SELECT PESUNIPF,PESEMBPF FROM MS01 WHERE CODIGO='" & cCODIGO & "'", 2, Array("PESUNIPF", "PESEMBPF"), _
            Array(FixNum(rsPF("PESLIQ")), FixNum(rsPF("TARA"))), Array("N", "N")
     rsPF.MoveNext
   Wend
-  sx_CloseAll
   rsPF.Close
   dbPF.Close
   Set rsPF = Nothing

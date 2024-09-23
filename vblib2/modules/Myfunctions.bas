@@ -253,9 +253,9 @@ Public Function ComboChange(ByRef Combo1)
   End With
 End Function
 
-Public Sub MoveObject(ByRef obj As Control)
+Public Sub MoveObject(ByRef Obj As Control)
   Screen.MousePointer = vbSizeAll
-  SendMessage obj.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 1
+  SendMessage Obj.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 1
   ReleaseCapture
   Screen.MousePointer = vbDefault
 End Sub
@@ -918,7 +918,7 @@ Public Function NullDate(Optional ByVal cTIPO As String = "", Optional ByVal cAR
     cTIPO = aRETU(2)
   End If
   Select Case cTIPO
-  Case "DBF", "ADSCDX", "ADSNTX", "ADSADT", "SDECDX", "SDENTX", "SDENSX"
+  Case "DBF", "ADSCDX", "ADSNTX", "ADSADT", "JETFOX"
     NullDate = "        "
   Case "MYSQL", "MARIADB"
     NullDate = "'0000-00-00'"
@@ -934,7 +934,7 @@ Public Function NullDateTime(Optional ByVal cTIPO As String = "", Optional ByVal
     cTIPO = aRETU(2)
   End If
   Select Case cTIPO
-  Case "DBF", "ADSCDX", "ADSNTX", "ADSADT", "SDECDX", "SDENTX", "SDENSX"
+  Case "DBF", "ADSCDX", "ADSNTX", "ADSADT", "JETFOX"
     NullDateTime = "        "
   Case "MYSQL", "MARIADB"
     NullDateTime = "'0000-00-00 00:00:00'"

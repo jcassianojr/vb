@@ -5095,72 +5095,68 @@ Private Sub CmdNovoRI_Click(Index As Integer)
   Dim cDESCRI As Variant
   Dim cDESENHO As Variant
   Dim cCLINOME As Variant
+  Dim cCAMJET As String
+  Dim cCOMJET As String
+  Dim AVALJET As Variant
+  Dim ACAMJET As Variant
+  Dim cORIGEM As String
+  
   On Error GoTo erro
 
   cData = Format(Date, "DD/MM/YY")
-  cCAM = PegPath("PATH", "MANA5QUA")
-
-  sx_SetEpoch (Year(Date) - 30)
-  sx_SetDateFormat BRITISH
-  sx_SetDeleted True
-  sx_SetSoftSeek True
-
-  nRIAREA = sx_Use(cCAM & "RI.Dbf", "RI", READWRITE, SDEFOX)
-  iRETVAL = sx_SetOrder(1)
-  sx_GoBottom
-  nRI = FixInt(sx_GetVariant("RI"))
-  nRI = nRI + 1
-  cDESENHO = FixStr(TXTPF(2))
-  cDESCRI = FixStr(TXTPF(3))
-  nCLIENTE = FixInt(TXTPF(4))
-  cCLINOME = FixStr(TXTPF(5))
-
-  sx_AppendBlank
-  If sx_Rlock(sx_RecNo()) Then
-    sx_PutVariant "RI", nRI
-    sx_PutVariant "DESENHO", cDESENHO
-    sx_PutVariant "DESCRI", cDESCRI
-    sx_PutVariant "CLIENTE", nCLIENTE
-    sx_PutVariant "CLINOME", cCLINOME
-    sx_PutVariant "DATA", cData
-    sx_PutVariant "TIPOI", "P"
-    sx_PutVariant "TIPO2", "D"
-    If Index = 0 Then
-      sx_PutVariant "ORIGEM", "PCP"
+  
+  
+    cCAMJET = PegPath("PATH", "MANA5TGQ")
+     cCOMJET = GeraConn(cCAM, "FOX")
+     nRI = PegMAXSQL(cCOMJET, "RI", "RI", 1)
+     nRI = nRI + 1
+     cDESENHO = FixStr(TXTPF(2))
+    cDESCRI = FixStr(TXTPF(3))
+    nCLIENTE = FixInt(TXTPF(4))
+     cCLINOME = FixStr(TXTPF(5))
+     cORIGEM = ""
+     If Index = 0 Then
+      cORIGEM = "PCP"
     Else
-      sx_PutVariant "ORIGEM", "PPP"
+      cORIGEM = "PPP"
     End If
-    sx_Commit
-  End If
-  sx_Unlock sx_RecNo()
-  sx_CloseAll
 
-  nITEM = 1
+     ACAMJET = Array("RI", "DESENHO", "DESCRI", "CLIENTE", "CLINOME", "DATA", "TIPOI", "TIPO2", "ORIGEM")
+     AVALJET = Array(nRI, cDESENHO, cDESCRI, nCLIENTE, cCLINOME, cData, "P", "D", cORIGEM)
+    IncluiSQL cCOMJET, "SELECT * FROM RI WHERE RI=" & nRI, 9 _
+           , ACAMJET _
+           , AVALJET, _
+           , False, True
+
+   
+
+
   cARQ = cARQPF
   If Index = 1 Then
     cARQ = cARQPFP
   End If
-  nRIAREA = sx_Use(cCAM & "RII.Dbf", "RII", READWRITE, SDEFOX)
+  
+  nITEM = 1
   cARQ = GeracArq(cARQ)
   cSQL = "SELECT ESPE FROM PFC WHERE PF=" & nPF & " AND SAIRI ORDER BY SEQ,SSQ,ITEM"
   oCONN.ConnectionTimeout = 120
   oCONN.Open cARQ
   oRS.Open cSQL, oCONN, adOpenForwardOnly, adLockReadOnly
   While Not oRS.EOF
-    sx_AppendBlank
-    If sx_Rlock(sx_RecNo()) Then
-      sx_PutVariant "RI", nRI
-      sx_PutVariant "ITEM", nITEM
-      sx_PutVariant "ESPE", FixStr(oRS("ESPE"))
-      sx_Commit
-    End If
-    sx_Unlock sx_RecNo()
+  
+      ACAMJET = Array("RI", "ITEM", "ESPE")
+     AVALJET = Array(nRI, nITEM, FixStr(oRS("ESPE")))
+     IncluiSQL cCOMJET, "SELECT * FROM RII WHERE RI=" & nRI & " AND ITEM=" & nITEM, 3 _
+           , ACAMJET _
+           , AVALJET, _
+           , False, True
+
     nITEM = nITEM + 1
     oRS.MoveNext
   Wend
-  sx_CloseAll
   oRS.Close
   oCONN.Close
+  
   Alert "RI Gerado Nº" & nRI
   Exit Sub
 erro:
@@ -5515,14 +5511,14 @@ Private Sub escidfolha_Click(Index As Integer)
 
     Select Case Index
     Case 0, 10
-      TXTpc(11).text = TXTpc(11).text & " , " & Trim(MMCase(eRETU02))
+      TXTpc(11).tEXT = TXTpc(11).tEXT & " , " & Trim(MMCase(eRETU02))
     Case 1, 11
-      TXTpre(11).text = TXTpre(11).text & " , " & Trim(MMCase(eRETU02))
+      TXTpre(11).tEXT = TXTpre(11).tEXT & " , " & Trim(MMCase(eRETU02))
     Case 2, 12
-      TXTgp12(11).text = TXTgp12(11).text & " , " & Trim(MMCase(eRETU02))
+      TXTgp12(11).tEXT = TXTgp12(11).tEXT & " , " & Trim(MMCase(eRETU02))
     Case 3, 13
-      TXTpc(33).text = eRETU01
-      TXTpc(34).text = eRETU02
+      TXTpc(33).tEXT = eRETU01
+      TXTpc(34).tEXT = eRETU02
     End Select
   End If
 
@@ -5601,13 +5597,13 @@ Private Sub escTIPPC_Click(Index As Integer)
   Select Case Index
   Case 1, 2, 3, 4, 5
     nPOS = Index + 5 - 1
-    TXTpc(nPOS).text = cTIPO
+    TXTpc(nPOS).tEXT = cTIPO
   Case 11, 12, 13, 14, 15
     nPOS = Index + 5 - 11
-    TXTpre(nPOS).text = cTIPO
+    TXTpre(nPOS).tEXT = cTIPO
   Case 21, 22, 23, 24, 25
     nPOS = Index + 5 - 21
-    TXTgp12(nPOS).text = cTIPO
+    TXTgp12(nPOS).tEXT = cTIPO
   End Select
 End Sub
 
@@ -5722,7 +5718,7 @@ Private Sub Form_Load()
 
   CHECKPFPG                                    'inclui embalagem preliminar gp12
 
-  TXTNPF.text = nPF
+  TXTNPF.tEXT = nPF
 
 
   cSQL = "select PF,CODCLIENTE,CPF,CODIGO,DESCR,CLIENTE,CLINOME,CODMU011,CODMU012,CODMU013,NOMMU011,NOMMU012,NOMMU013,CODFINAL,CODIGOINT,OPCAO,FEMEAREV,FEMEAREVD,REVPRO,REVDAT,FEMEAREVD2 from PF WHERE PF=" & nPF

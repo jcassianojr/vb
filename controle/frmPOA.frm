@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmPOA 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MENU"
@@ -42,6 +42,7 @@ Begin VB.Form frmPOA
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
+      ControlVersion  =   9
       TabCaption(0)   =   "Colaborador Elabarador"
       Tab(0).ControlCount=   12
       Tab(0).Control(0)=   "txt(12)"
@@ -787,7 +788,7 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = txt(iLOOP)
+      aVAL(iLOOP) = TXT(iLOOP)
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 'pula 1 chave numero
     If lTROCOU Then
@@ -825,8 +826,8 @@ End Sub
 Private Sub Command1_Click()
   escpffim.Show vbModal, Me
   If lRETU Then
-    txt(1) = eRETU02
-    txt(2) = eRETU03
+    TXT(1) = eRETU02
+    TXT(2) = eRETU03
   End If
 End Sub
 
@@ -835,7 +836,7 @@ Private Sub Command2_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim nNUMERO As Long
-  nNUMERO = FixInt(txt(4), 0)
+  nNUMERO = FixInt(TXT(4), 0)
 
   cARQ = PegPath("PATH", "LOGIXODBC")
   sSQL = "SELECT nom_completo as NOMTEC FROM funcionario WHERE cod_empresa='01' and num_matricula=" & nNUMERO
@@ -847,7 +848,7 @@ Private Sub Command2_Click()
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOMTEC"), Array("C"), Array(""))
   End If
   If lRETU Then
-    txt(5) = aRETU(0)
+    TXT(5) = aRETU(0)
   End If
 End Sub
 
@@ -857,26 +858,30 @@ Private Sub Command3_Click()
   Dim cData As Variant
   Dim SACAREA As Variant
   Dim iRETVAL As Variant
+  Dim cCAMJET As String
+  Dim cCOMJET As String
+  Dim aCAMJET As Variant
+  Dim aVALJET As Variant
 
-  If txt(8) = "N" Then
+  If TXT(8) = "N" Then
     Alert ("Ja respondida")
     Exit Sub
   End If
 
-  If txt(8) = "S" And FixNum(txt(7)) > 0 Then
+  If TXT(8) = "S" And FixNum(TXT(7)) > 0 Then
     Alert ("Ja respondida")
     Exit Sub
   End If
 
   If Not MDG("Gerar Sac") Then
-    txt(8) = "N"
-    txt(9) = Today()
+    TXT(8) = "N"
+    TXT(9) = Today()
     Exit Sub
   End If
-  txt(8) = "S"
-  txt(9) = Today()
+  TXT(8) = "S"
+  TXT(9) = Today()
 
-  cPROBLEMA = FixStr(txt(3))
+  cPROBLEMA = FixStr(TXT(3))
   nLEN = Len(cPROBLEMA)
 
   cDESC01 = Mid(cPROBLEMA, 1, 100)
@@ -890,41 +895,30 @@ Private Sub Command3_Click()
     cDESC04 = Mid(cPROBLEMA, 301)
   End If
 
+  cCAMJET = PegPath("PATH", "MANA5TGQ")
+  cCOMJET = GeraConn(cCAM, "FOX")
   cData = Format(Date, "DD/MM/YY")
-  cCAM = PegPath("PATH", "MANA5TGQ")
-  sx_SetEpoch (Year(Date) - 30)
-  sx_SetDateFormat BRITISH
-  sx_SetDeleted True
-  SACAREA = sx_Use(cCAM & "sac.dbf", "sac", READWRITE, SDEFOX)
-  iRETVAL = sx_SetOrder(1)
-  sx_GoBottom
-  nSAC = FixInt(sx_GetVariant("SAC"))
+  nSAC = PegMAXSQL(cCOMJET, "SAC", "SAC", 1)
   nSAC = nSAC + 1
-  sx_AppendBlank
-  If sx_Rlock(sx_RecNo()) Then
-    sx_PutVariant "SAC", nSAC
-    sx_PutVariant "INCUSER", zUSER
-    sx_PutVariant "POA", FixNum(txt(0))
-    sx_PutVariant "CODIGO", FixStr(txt(1))
-    sx_PutVariant "NOME", FixStr(txt(2))
-    sx_PutVariant "DESC01", FixStr(cDESC01)
-    sx_PutVariant "DESC02", FixStr(cDESC02)
-    sx_PutVariant "DESC03", FixStr(cDESC03)
-    sx_PutVariant "DESC04", FixStr(cDESC04)
-    sx_PutVariant "DOCUMENTO", "Prog. Olhos Abertos"
-    sx_PutVariant "DATA", cData
-    sx_PutVariant "INCDATA", cData
-    sx_Commit
-  End If
-  sx_Unlock sx_RecNo()
-  sx_CloseAll
-  txt(7) = nSAC
+  
+  
+ 
+     aCAMJET = Array("SAC", "INCUSER", "POA", "CODIGO", "NOME", "DESC01", _
+     "DESC02", "DESC03", "DESC04", "DOCUMENTO", "DATA", "INCDATA")
+     aVALJET = Array(nSAC, zUSER, FixNum(TXT(0)), FixStr(TXT(1)), FixStr(cDESC01), _
+                    FixStr(cDESC02), FixStr(cDESC03), FixStr(cDESC04), "Prog. Olhos Abertos", cData, cData)
+    IncluiSQL cCOMJET, "SELECT * FROM SAC WHERE SAC=" & nSAC, 12 _
+           , aCAMJET _
+           , aVALJET, _
+           , False, True
+           
+  TXT(7) = nSAC
 
 
 End Sub
 
 Private Sub Command4_Click()
-  salvarpict Me, Picture1, StrZero(txt(0), 8)
+  salvarpict Me, Picture1, StrZero(TXT(0), 8)
 End Sub
 
 Private Sub Command5_Click()
@@ -932,24 +926,24 @@ Private Sub Command5_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim cCODIGO As String
-  cCODIGO = FixStr(txt(1), "", "TRIM")
+  cCODIGO = FixStr(TXT(1), "", "TRIM")
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
   aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
   If lRETU Then
-    txt(2) = aRETU(0)
+    TXT(2) = aRETU(0)
   End If
 End Sub
 
 Private Sub Command6_Click()
-  txt(4) = zIDFOLHA
-  txt(5) = zNOMEFOLHA
+  TXT(4) = zIDFOLHA
+  TXT(5) = zNOMEFOLHA
 End Sub
 
 Private Sub Command7_Click()
-  txt(10) = zIDFOLHA
-  txt(11) = zNOMEFOLHA
-  txt(12) = Date
+  TXT(10) = zIDFOLHA
+  TXT(11) = zNOMEFOLHA
+  TXT(12) = Date
 End Sub
 
 Private Sub PegCodigoDescricaoPf()
@@ -958,12 +952,12 @@ Private Sub PegCodigoDescricaoPf()
   sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
   aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
   If lRETU Then
-    txt(1) = aRETU(0)
-    txt(2) = aRETU(1)
-    txt(1).Enabled = False
-    txt(2).Enabled = False
-    txt(1).Locked = True
-    txt(2).Locked = True
+    TXT(1) = aRETU(0)
+    TXT(2) = aRETU(1)
+    TXT(1).Enabled = False
+    TXT(2).Enabled = False
+    TXT(1).Locked = True
+    TXT(2).Locked = True
     ESCMS01A(0).Enabled = False
     ESCMS01A(0).Visible = False
     ESCMS01A(1).Enabled = False
@@ -999,14 +993,14 @@ Private Sub escidfolha_Click(Index As Integer)
   escMP04.Show vbModal, Me
 
   If lRETU Then
-    txt(4) = eRETU01
-    txt(5) = eRETU02
+    TXT(4) = eRETU01
+    TXT(5) = eRETU02
   End If
 End Sub
 
 Private Sub ESCMS01A_Click(Index As Integer)
   Dim cCHAVEBUS As String
-  cCHAVEBUS = txt(1)
+  cCHAVEBUS = TXT(1)
   ePASS01 = "MANA5"
   If Index = 1 Then
     ePASS01 = "LOGIX"
@@ -1016,8 +1010,8 @@ Private Sub ESCMS01A_Click(Index As Integer)
   End If
   escms01.Show vbModal, Me
   If lRETU Then
-    txt(1) = eRETU01
-    txt(2) = eRETU02
+    TXT(1) = eRETU01
+    TXT(2) = eRETU02
   End If
 End Sub
 
@@ -1040,7 +1034,7 @@ Private Sub Form_Load()
   aPAD = Array(0, "", "", "", 0, "", "", 0, "", "", 0, "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    txt(iLOOP) = aVAL(iLOOP)
+    TXT(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   If ADOPegBlob(Picture1, cARQ, "POA", "numero=" & nPPAP, "FOTO") Then  ' ADOPegBlob(cARQ, cSQL, Picture1, "FOTO") Then
     StretchSourcePictureFromPicture Picture1, Picture2
