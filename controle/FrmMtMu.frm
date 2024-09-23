@@ -318,9 +318,9 @@ End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
-  TxtCodigo.tEXT = ePASS01
+  txtcodigo.text = ePASS01
   cARQMTMU = ePASS02
-  cARQ = GeraConn(zMANA5EMP, "SDECDX")
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
   cSQL = "select * from " & cARQMTMU & " WHERE CODIGO='" & Trim(ePASS01) & "'"
   nCAMPOS = 10
   aCAM = Array("NOME", "NOM2", "DIMX", "DIMY", "DIMZ", "PESLIQ", "APLICACAO", "INSTRU", "LOCACAO", "UNIDADE")

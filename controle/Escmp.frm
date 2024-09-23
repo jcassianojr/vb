@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escmp 
    Caption         =   "Selecione o  desejado:"
    ClientHeight    =   6090
@@ -21,7 +21,6 @@ Begin VB.Form escmp
       Width           =   7275
       _ExtentX        =   12832
       _ExtentY        =   9763
-      _Version        =   393216
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
@@ -223,7 +222,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     If cTABUSO = "ETI" Or cTABUSO = "MP03" Or cTABUSO = "MP01" Or cTABUSO = "MP02" Then
       cCODINC = InputBox("Digite o Codigo", "Codigo para inclusão", "__")
       cNOMEINC = InputBox("Digite a Descricao", "Descricao do codigo", "__")
-      cARQTMP = GeraConn(zMANA5EMP, "SDECDX")
+      cARQTMP = GeraConn(zMANA5EMP, "JETFOX")
       If cTABUSO = "ETI" Then
         sSQL = "select codigo,nome from ETI WHERE CODIGO='" & cCODINC & "'"
       End If
@@ -251,7 +250,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End If
   Case "EXC"
     If cTABUSO = "ETI" Or cTABUSO = "MP03" Or cTABUSO = "MP01" Or cTABUSO = "MP02" Then
-      cARQTMP = GeraConn(zMANA5EMP, "SDECDX")
+      cARQTMP = GeraConn(zMANA5EMP, "JETFOX")
       Grid.Col = 0
       sSQL = "select codigo from " & cTABUSO & " WHERE CODIGO='" & Trim(Grid) & "'"
 

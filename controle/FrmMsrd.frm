@@ -182,7 +182,7 @@ End Sub
 Private Sub Form_Load()
   CenterFormToScreen Me
   cARQ = PegPath("PATH", "MANA5TGQ")
-  cARQ = GeraConn(cARQ, "SDECDX")
+  cARQ = GeraConn(cARQ, "JETFOX")
   cSQL = "select * from MSRD WHERE MSRD=" & ePASS01
   nCAMPOS = 6
   aCAM = Array("DATA", "OCORREU", "DESC01", "DESC02", "INV01", "ACA01")

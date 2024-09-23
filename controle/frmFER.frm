@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmFER 
    Caption         =   "Cadastro Ferramenta"
    ClientHeight    =   6405
@@ -43,8 +43,8 @@ Begin VB.Form frmFER
       EndProperty
       TabsPerRow      =   5
       TabHeight       =   794
+      ControlVersion  =   9
       TabCaption(0)   =   "Basica"
-      Tab(0).ControlCount=   0
       TabCaption(1)   =   "Preventiva Vida Util"
       Tab(1).ControlCount=   8
       Tab(1).Control(0)=   "TXTFIELDS(3)"
@@ -56,9 +56,7 @@ Begin VB.Form frmFER
       Tab(1).Control(6)=   "Label(3)"
       Tab(1).Control(7)=   "Label(2)"
       TabCaption(2)   =   "Dimensoes Elaborador"
-      Tab(2).ControlCount=   0
       TabCaption(3)   =   "Tecnicas I"
-      Tab(3).ControlCount=   0
       TabCaption(4)   =   "Tecnicas II"
       Tab(4).ControlCount=   82
       Tab(4).Control(0)=   "TXTFIELDS(10)"
@@ -1887,7 +1885,7 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+      aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
   End If
@@ -1896,11 +1894,11 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub cmdFOTO_Click()
-  zgrp = TxtCodigo.tEXT
+  zgrp = txtcodigo.text
   iImage = 3
   cARQRTF = PegPath("PATH", "IMGFER")
   Load frmIMAGENS
-  frmIMAGENS.TXTFIELDS(0).Enabled = False
+  frmIMAGENS.txtFields(0).Enabled = False
   frmIMAGENS.Escolher(0).Visible = False
   frmIMAGENS.Show vbModal, Me
 End Sub
@@ -1911,13 +1909,13 @@ Private Sub Command20_Click()
   If Not MDG("Trocar Tipo Almofada") Then
     Exit Sub
   End If
-  If TXTFIELDS(6).tEXT = "6" Then
-    TXTFIELDS(6).tEXT = "8"
+  If txtFields(6).text = "6" Then
+    txtFields(6).text = "8"
   Else
-    TXTFIELDS(6).tEXT = "6"
+    txtFields(6).text = "6"
   End If
   For x = 1 To 8
-    If TXTFIELDS(6).tEXT = "6" Then
+    If txtFields(6).text = "6" Then
       cTEMP = String(6, "¡") + Space(2)
       If x >= 5 Then
         cTEMP = Space(8)
@@ -1925,7 +1923,7 @@ Private Sub Command20_Click()
     Else
       cTEMP = String(8, "¡")
     End If
-    TXTFIELDS(10 + x).tEXT = cTEMP
+    txtFields(10 + x).text = cTEMP
   Next
 End Sub
 
@@ -1934,12 +1932,12 @@ Private Sub Command4_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim nNUMERO As Long
-  nNUMERO = FixInt(TXTFIELDS(7), 0)
+  nNUMERO = FixInt(txtFields(7), 0)
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
   aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
   If lRETU Then
-    TXTFIELDS(8) = aRETU(0)
+    txtFields(8) = aRETU(0)
   End If
 End Sub
 
@@ -1961,15 +1959,15 @@ Private Sub esc1_Click(Index As Integer)
   coluna = (Index + 8) - (linha * 8)
   'Alert coluna
   'ALERT LINHA
-  If TXTFIELDS(6).tEXT = "6" And linha > 4 Then
+  If txtFields(6).text = "6" And linha > 4 Then
     Alert ("Linha Incorreta para Formato 4x6")
     Exit Sub
   End If
-  If TXTFIELDS(6).tEXT = "6" And coluna > 6 Then
+  If txtFields(6).text = "6" And coluna > 6 Then
     Alert ("Coluna Incorreta para Formato 4x6")
     Exit Sub
   End If
-  cTEMP = TXTFIELDS(10 + linha).tEXT
+  cTEMP = txtFields(10 + linha).text
   cDIG = Mid(cTEMP, coluna, 1)
   If cDIG = "l" Then
     cDIG = "¡"
@@ -1984,8 +1982,8 @@ Private Sub esc1_Click(Index As Integer)
   Case Else
     cGRV = Mid(cTEMP, 1, coluna - 1) + cDIG + Mid(cTEMP, coluna + 1)
   End Select
-  TXTFIELDS(10 + linha).tEXT = cGRV
-  TXTFIELDS(10 + linha).Refresh
+  txtFields(10 + linha).text = cGRV
+  txtFields(10 + linha).Refresh
 End Sub
 
 Private Sub ESCCLI_Click(Index As Integer)
@@ -2008,8 +2006,8 @@ Private Sub ESCCLI_Click(Index As Integer)
 
   If lRETU Then
 
-    TXTFIELDS(7) = eRETU01
-    TXTFIELDS(6) = eRETU03
+    txtFields(7) = eRETU01
+    txtFields(6) = eRETU03
 
   End If
 
@@ -2021,14 +2019,14 @@ End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
-  cARQ = GeraConn(PegPath("PATH", "MANA5FER"), "SDECDX")
+  cARQ = GeraConn(PegPath("PATH", "MANA5FER"), "JETFOX")
   cSQL = "select "
   cSQL = cSQL & " FERRAM , QTDEBASE, HRBAS, VDBAS, VDHBAS, COGCLI, CLIENTE, ESQTIP, USADEMI, USADISP, PRATILE, OBST01,"
   cSQL = cSQL & " ESQL01 , ESQL02, ESQL03, ESQL04, ESQL05, ESQL06, ESQL07, ESQL08"
   cSQL = cSQL & " FROM FERRAM WHERE FERRAM='" & LTrim(RTrim(ePASS01)) & "'"
-  TxtCodigo.tEXT = ePASS01
-  TxtNumero.tEXT = ePASS02
-  TxtNome.tEXT = ePASS03
+  txtcodigo.text = ePASS01
+  TxtNumero.text = ePASS02
+  txtNome.text = ePASS03
   nCAMPOS = 18
   aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "COGCLI", "CLIENTE", "ESQTIP", "USADEMI", "USADISP", "PRATILE", "OBST01", _
                "ESQL01", "ESQL02", "ESQL03", "ESQL04", "ESQL05", "ESQL06", "ESQL07", "ESQL08")
@@ -2038,7 +2036,7 @@ Private Sub Form_Load()
                "", "", "", "", "", "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtFields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
 End Sub
 

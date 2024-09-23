@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmPFS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFS"
@@ -88,6 +88,7 @@ Begin VB.Form frmPFS
       TabsPerRow      =   6
       Tab             =   5
       TabHeight       =   706
+      ControlVersion  =   9
       TabCaption(0)   =   "Mao de Obra"
       Tab(0).ControlCount=   63
       Tab(0).Control(0)=   "escArranjo(2)"
@@ -413,7 +414,6 @@ Begin VB.Form frmPFS
       Tab(8).Control(16)=   "lblLabels(24)"
       Tab(8).Control(17)=   "lblLabels(22)"
       TabCaption(9)   =   "..."
-      Tab(9).ControlCount=   0
       TabCaption(10)  =   "Vista Explodida"
       Tab(10).ControlCount=   37
       Tab(10).Control(0)=   "TXTFIELDS(95)"
@@ -3714,7 +3714,6 @@ Begin VB.Form frmPFS
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   6800
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GrdQsbLep 
          Height          =   3915
@@ -3724,7 +3723,6 @@ Begin VB.Form frmPFS
          Width           =   8475
          _ExtentX        =   14949
          _ExtentY        =   6906
-         _Version        =   393216
       End
       Begin XPControls.XPButton Incimg 
          Height          =   435
@@ -5397,13 +5395,13 @@ Private Sub Command20_Click()
   If Not MDG("Trocar Tipo Almofada") Then
     Exit Sub
   End If
-  If TXTFIELDS(36).tEXT = "6" Then
-    TXTFIELDS(36).tEXT = "8"
+  If TXTFIELDS(36).Text = "6" Then
+    TXTFIELDS(36).Text = "8"
   Else
-    TXTFIELDS(36).tEXT = "6"
+    TXTFIELDS(36).Text = "6"
   End If
   For x = 1 To 8
-    If TXTFIELDS(36).tEXT = "6" Then
+    If TXTFIELDS(36).Text = "6" Then
       cTEMP = String(6, "¡") + Space(2)
       If x >= 5 Then
         cTEMP = Space(8)
@@ -5411,7 +5409,7 @@ Private Sub Command20_Click()
     Else
       cTEMP = String(8, "¡")
     End If
-    TXTFIELDS(40 + x).tEXT = cTEMP
+    TXTFIELDS(40 + x).Text = cTEMP
   Next
 End Sub
 Private Sub Command3_Click()
@@ -5587,11 +5585,11 @@ Private Sub CommandX_Click(Index As Integer)
   End Select
 
   cARQ = cARQ & "_PF_"
-  cARQ = cARQ & StrZero(FixInt(TXTPF.tEXT), 6)
+  cARQ = cARQ & StrZero(FixInt(TXTPF.Text), 6)
   cARQ = cARQ & "_SEQ_"
-  cARQ = cARQ & StrZero(FixInt(TXTSEQ.tEXT), 3)
+  cARQ = cARQ & StrZero(FixInt(TXTSEQ.Text), 3)
   cARQ = cARQ & "_SSQ_"
-  cARQ = cARQ & StrZero(FixInt(TXTSSQ.tEXT), 3)
+  cARQ = cARQ & StrZero(FixInt(TXTSSQ.Text), 3)
   salvarpict Me, Picture1(Index), cARQ
 
 End Sub
@@ -5617,7 +5615,7 @@ Private Sub Edifer_Click(Index As Integer)
     ePASS01 = TXTFIELDS(30)
   End Select
 
-  cARQ = GeraConn(PegPath("PATH", "MANA5FER"), "SDECDX")
+  cARQ = GeraConn(PegPath("PATH", "MANA5FER"), "JETFOX")
   cSQL = "select * from FERRAM WHERE FERRAM='" & LTrim(RTrim(ePASS01)) & "'"
   aRETU = PegSQL(cARQ, cSQL, 1, Array("NOME"), Array("C"), Array(""))
 
@@ -5641,15 +5639,15 @@ Private Sub esc1_Click(Index As Integer)
   Dim cGRV As String
   linha = (Int((Index - 1) / 8)) + 1
   coluna = (Index + 8) - (linha * 8)
-  If TXTFIELDS(36).tEXT = "6" And linha > 4 Then
+  If TXTFIELDS(36).Text = "6" And linha > 4 Then
     Alert ("Linha Incorreta para Formato 4x6")
     Exit Sub
   End If
-  If TXTFIELDS(36).tEXT = "6" And coluna > 6 Then
+  If TXTFIELDS(36).Text = "6" And coluna > 6 Then
     Alert ("Coluna Incorreta para Formato 4x6")
     Exit Sub
   End If
-  cTEMP = TXTFIELDS(40 + linha).tEXT
+  cTEMP = TXTFIELDS(40 + linha).Text
   cDIG = Mid(cTEMP, coluna, 1)
   If cDIG = "l" Then
     cDIG = "¡"
@@ -5664,7 +5662,7 @@ Private Sub esc1_Click(Index As Integer)
   Case Else
     cGRV = Mid(cTEMP, 1, coluna - 1) + cDIG + Mid(cTEMP, coluna + 1)
   End Select
-  TXTFIELDS(40 + linha).tEXT = cGRV
+  TXTFIELDS(40 + linha).Text = cGRV
   TXTFIELDS(40 + linha).Refresh
 End Sub
 
@@ -5824,9 +5822,9 @@ Private Sub Form_Load()
   Dim x
   CenterFormToScreen Me
   lTROCOU = Array(False, False, False, False, False)
-  TXTPF.tEXT = nPF
-  TXTSEQ.tEXT = nSEQ
-  TXTSSQ.tEXT = nSSQ
+  TXTPF.Text = nPF
+  TXTSEQ.Text = nSEQ
+  TXTSSQ.Text = nSSQ
   cARQPF = Sdb        'agora tem que usar sdb pois pode ser pf pfp pfg
 
   'Usando 2 matrizes pois estava com erro string complex

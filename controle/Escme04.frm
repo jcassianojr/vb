@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escME04 
    Caption         =   "Selecione o Item  desejado:"
    ClientHeight    =   6090
@@ -36,7 +36,6 @@ Begin VB.Form escME04
       Width           =   7455
       _ExtentX        =   13150
       _ExtentY        =   9763
-      _Version        =   393216
    End
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
@@ -177,7 +176,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     FilRelat
   Case "EXC", "DEL"
     cARQTMP = PegPath("PATH", "MANA5INS")
-    cARQTMP = GeraConn(cARQTMP, "SDECDX")
+    cARQTMP = GeraConn(cARQTMP, "JETFOX")
     Grid.Col = 0
     sSQL = "select codigo from ME04 WHERE CODIGO='" & Grid & "'"
     If ApagaSQLP(cARQTMP, sSQL) Then
@@ -186,7 +185,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
   Case "NOV", "INC"
     cCONJUNTO = InputBox("Digite o Codigo", "Inclusão Instr/Calib", "__")
     cARQTMP = PegPath("PATH", "MANA5INS")
-    cARQTMP = GeraConn(cARQTMP, "SDECDX")
+    cARQTMP = GeraConn(cARQTMP, "JETFOX")
     sSQL = "select codigo from ME04 WHERE CODIGO='" & cCONJUNTO & "'"
     If IncluiSQL(cARQTMP, sSQL, 1, Array("CODIGO"), Array(cCONJUNTO), True, True) Then
       ePASS01 = cCONJUNTO

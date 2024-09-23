@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmETI 
    Caption         =   "Cadastro ETI"
@@ -138,7 +138,6 @@ Begin VB.Form frmETI
       Width           =   7455
       _ExtentX        =   13150
       _ExtentY        =   1931
-      _Version        =   393216
    End
    Begin VBFLXGRD17.VBFlexGrid gridrevi 
       Height          =   1575
@@ -149,7 +148,6 @@ Begin VB.Form frmETI
       Width           =   7455
       _ExtentX        =   13150
       _ExtentY        =   2778
-      _Version        =   393216
    End
    Begin XPControls.XPButton Encerrar 
       Height          =   435
@@ -469,7 +467,7 @@ End Sub
 Private Sub Form_Load()
   CenterFormToScreen Me
   cARQPF = PegPath("PATH", "PF")
-  cARQ = GeraConn(zMANA5EMP, "SDECDX")
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
   cSQL = "select * from ETI WHERE CODIGO='" & Trim(ePASS01) & "'"
   nCAMPOS = 10
   aCAM = Array("CODIGO", "CAMADA", "SALTO", "NOME", "ESPE", "REV", "NINTERNO", "SUPE", "COGNOME", "REVDATA")

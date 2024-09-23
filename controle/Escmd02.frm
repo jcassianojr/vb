@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escMD02 
    Caption         =   "Selecione:"
    ClientHeight    =   6090
@@ -36,7 +36,6 @@ Begin VB.Form escMD02
       Width           =   7035
       _ExtentX        =   12409
       _ExtentY        =   9657
-      _Version        =   393216
    End
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
@@ -149,8 +148,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
   Case "EXC", "DEL"
     Grid.Col = 0
     cCONJUNTO = Trim(Grid)
-    cARQTMP = GeraConn(zMANA5EMP, "SDECDX")
-    ''sSQL = "select codigo from MD02 WHERE CODIGO='" & tipocodigo() & "' AND CODIGO1='" & cCONJUNTO & "'"
+    cARQTMP = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "select codigo from MD02 WHERE =" & PadRight(tipocodigo(), 12) & cCONJUNTO
     If ApagaSQLP(cARQTMP, sSQL) Then
       FilRelat
@@ -162,7 +160,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
       Alert ("Preencha Codigo e Descricao")
       Exit Sub
     End If
-    cARQTMP = GeraConn(zMANA5EMP, "SDECDX")
+    cARQTMP = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "select codigo from MD02 WHERE CODIGO='" & tipocodigo() & "' AND CODIGO1='" & cCONJUNTO & "'"
     IncluiSQL cARQTMP, sSQL, 3, Array("CODIGO", "CODIGO1", "DESCRICAO"), _
               Array(tipocodigo(), cCONJUNTO, cDESCRICAO), True, True

@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escfemea 
    Caption         =   "Selecione o Fmea  desejado:"
    ClientHeight    =   5775
@@ -56,7 +56,6 @@ Begin VB.Form escfemea
       Width           =   9795
       _ExtentX        =   17277
       _ExtentY        =   9340
-      _Version        =   393216
    End
 End
 Attribute VB_Name = "escfemea"
@@ -242,11 +241,11 @@ Private Sub FilRelat()
     .ColWidth(5) = 1000
     .ColWidth(6) = 1000
     .ColWidth(7) = 1600
-    .ColAlignment(1) = flexAlignCenterCenter
-    .ColAlignment(2) = flexAlignCenterCenter
-    .ColAlignment(3) = flexAlignLeftCenter
-    .ColAlignment(4) = flexAlignLeftCenter
-    .ColAlignment(7) = flexAlignLeftCenter
+    .ColAlignment(1) = FlexAlignmentCenterCenter
+    .ColAlignment(2) = FlexAlignmentCenterCenter
+    .ColAlignment(3) = FlexAlignmentLeftCenter
+    .ColAlignment(4) = FlexAlignmentLeftCenter
+    .ColAlignment(7) = FlexAlignmentLeftCenter
 
     If Not RSTAB.EOF Then RSTAB.MoveFirst
 

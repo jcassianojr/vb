@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmME01 
    Caption         =   "Equipamento"
    ClientHeight    =   6915
@@ -33,6 +33,7 @@ Begin VB.Form frmME01
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
+      ControlVersion  =   9
       TabCaption(0)   =   "Preventiva"
       Tab(0).ControlCount=   26
       Tab(0).Control(0)=   "txtFields(11)"
@@ -333,7 +334,6 @@ Begin VB.Form frmME01
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   5741
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevcau 
          Height          =   1515
@@ -343,9 +343,9 @@ Begin VB.Form frmME01
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   2672
-         _Version        =   393216
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Ano"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -356,6 +356,7 @@ Begin VB.Form frmME01
          Width           =   1095
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Numero Fabricante/Serial"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -366,6 +367,7 @@ Begin VB.Form frmME01
          Width           =   1815
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Modelo"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -376,6 +378,7 @@ Begin VB.Form frmME01
          Width           =   1095
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Fabricante"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -386,6 +389,7 @@ Begin VB.Form frmME01
          Width           =   1095
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Contabil"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -396,6 +400,7 @@ Begin VB.Form frmME01
          Width           =   1095
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Grupo Femea"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -406,6 +411,7 @@ Begin VB.Form frmME01
          Width           =   1095
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Tipo"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -416,6 +422,7 @@ Begin VB.Form frmME01
          Width           =   495
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Grupo"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -426,6 +433,7 @@ Begin VB.Form frmME01
          Width           =   615
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Quantidade Manutenção Preventiva"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -436,6 +444,7 @@ Begin VB.Form frmME01
          Width           =   2655
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Horas Manutenção Preventiva"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -446,6 +455,7 @@ Begin VB.Form frmME01
          Width           =   2655
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Quantidade Vida Util"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -456,6 +466,7 @@ Begin VB.Form frmME01
          Width           =   2655
       End
       Begin VB.Label Label 
+         BackStyle       =   0  'Transparent
          Caption         =   "Horas Vida Util"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -588,14 +599,14 @@ Private cORDFEMUSO As String
 Private cARQFEMEA As String
 
 Private Sub CmdClo_Click(Index As Integer)
-  Dim dDATE As Date
+  Dim dDate As Date
   Dim DB As New ADODB.Connection
   Dim RSTAB As New ADODB.Recordset
   Dim sSQL As String
 
 
 
-  dDATE = Date
+  dDate = Date
 
   If GridSeq.Row = 0 Then
     Exit Sub
@@ -619,20 +630,20 @@ Private Sub CmdClo_Click(Index As Integer)
   While Not RSTAB.EOF
     If RSTAB("ACAO") Then
       If IsDate(RSTAB("RESDAT")) Then
-        dDATE = RSTAB("RESDAT")
+        dDate = RSTAB("RESDAT")
       End If
       If IsDate(RSTAB("RESDAT2")) Then
-        If dDATE < RSTAB("RESDAT2") Then
-          dDATE = RSTAB("RESDAT2")
+        If dDate < RSTAB("RESDAT2") Then
+          dDate = RSTAB("RESDAT2")
         End If
       End If
       If IsDate(RSTAB("RESDAT3")) Then
-        If dDATE < RSTAB("RESDAT3") Then
-          dDATE = RSTAB("RESDAT3")
+        If dDate < RSTAB("RESDAT3") Then
+          dDate = RSTAB("RESDAT3")
         End If
       End If
       RSTAB("ACATOM") = "Concluida"
-      RSTAB("ACADAT") = dDATE + 2
+      RSTAB("ACADAT") = dDate + 2
       RSTAB.Update
     End If
     RSTAB.MoveNext
@@ -896,7 +907,7 @@ End Sub
 Private Sub Form_Load()
   Dim nTMPNUMERO
   CenterFormToScreen Me
-  cARQ = GeraConn(zMANA5EMP, "SDECDX")
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
   cSQL = "select NUMERO,QTDEBASE,HRBAS,VDBAS,VDHBAS,GRUPO,TIPO,FEMEA,CONTABIL,FABRICANTE,MODELO,NUMFAB,ANO "
   cSQL = cSQL & " FROM ME01 WHERE NUMERO='" & Trim(ePASS01) & "'"
   cARQFEMEA = PegPath("PATH", "FEMEA")

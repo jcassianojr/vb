@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escmu01 
    Caption         =   "Selecione o Item Desejado:"
    ClientHeight    =   6090
@@ -21,7 +21,6 @@ Begin VB.Form escmu01
       Width           =   8055
       _ExtentX        =   14208
       _ExtentY        =   9551
-      _Version        =   393216
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
@@ -179,7 +178,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
   Select Case sButton
   Case "NOV", "INC"
     cCODINC = InputBox("Digite o Codigo", "Inclusão", "__")
-    cARQTMP = GeraConn(zMANA5EMP, "SDECDX")
+    cARQTMP = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "select codigo from " & cTABUSO & " WHERE CODIGO='" & cCODINC & "'"
     If IncluiSQL(cARQTMP, sSQL, 1, Array("CODIGO"), Array(cCODINC), True, True) Then
       ePASS01 = cCODINC
@@ -204,7 +203,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End If
   Case "EXC", "DEL"
     cARQTMP = zMANA5EMP
-    cARQTMP = GeraConn(cARQTMP, "SDECDX")
+    cARQTMP = GeraConn(cARQTMP, "JETFOX")
     Grid.Col = 0
     sSQL = "select codigo from " & cTABUSO & " WHERE CODIGO='" & Trim(Grid) & "'"
     If ApagaSQLP(cARQTMP, sSQL) Then

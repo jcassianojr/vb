@@ -315,11 +315,11 @@ End Sub
 Private Sub Command1_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXTFIELDS(9).tEXT = "S"
+    TXTFIELDS(9).text = "S"
   Case 1
-    TXTFIELDS(9).tEXT = "T"
+    TXTFIELDS(9).text = "T"
   Case 2
-    TXTFIELDS(9).tEXT = "O"
+    TXTFIELDS(9).text = "O"
   End Select
 End Sub
 
@@ -347,9 +347,9 @@ End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
-  cARQ = GeraConn(zMANA5EMP, "SDECDX")
+  cARQ = GeraConn(zMANA5EMP, "JETFOX")
   cSQL = "select * from MP03 WHERE CODIGO='" & Trim(ePASS01) & "'"
-  TxtCodigo = ePASS01
+  txtcodigo = ePASS01
   nCAMPOS = 10
   aCAM = Array("NORMA", "NOME", "NOM2", "APLICACAO", "COGNOME", "OBS01", "OBS02", "OBS03", "CODIGOINT", "TIPTRA")
   aFOR = Array("C", "C", "C", "C", "C", "C", "C", "C", "C", "C")

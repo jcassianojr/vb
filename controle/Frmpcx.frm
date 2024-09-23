@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmPCX 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Plano de Controle"
@@ -184,6 +184,7 @@ Begin VB.Form frmPCX
       TabsPerRow      =   8
       Tab             =   20
       TabHeight       =   529
+      ControlVersion  =   9
       TabCaption(0)   =   "Recebimento"
       Tab(0).ControlCount=   18
       Tab(0).Control(0)=   "lblLabels(9)"
@@ -2233,7 +2234,6 @@ Begin VB.Form frmPCX
          Width           =   7215
          _ExtentX        =   12726
          _ExtentY        =   6800
-         _Version        =   393216
       End
       Begin VB.TextBox TXTpc 
          DataField       =   "CRITIOBS"
@@ -3485,7 +3485,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   3731
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GRIDMAT 
          Height          =   1095
@@ -3497,7 +3496,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridlab 
          Height          =   1035
@@ -3509,7 +3507,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   1826
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GRIDFIM 
          Height          =   1275
@@ -3521,7 +3518,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   2249
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GRIDCOM 
          Height          =   1155
@@ -3533,7 +3529,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   2037
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1335
@@ -3545,7 +3540,6 @@ Begin VB.Form frmPCX
          Width           =   8175
          _ExtentX        =   14420
          _ExtentY        =   2355
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3557,7 +3551,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3569,7 +3562,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1215
@@ -3581,7 +3573,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   2143
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3593,7 +3584,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3605,7 +3595,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3617,7 +3606,6 @@ Begin VB.Form frmPCX
          Width           =   8175
          _ExtentX        =   14420
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1335
@@ -3629,7 +3617,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   2355
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1335
@@ -3641,7 +3628,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   2355
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
@@ -3653,7 +3639,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   2143
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
@@ -3665,7 +3650,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   2143
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
@@ -3677,7 +3661,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   2143
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   2055
@@ -3689,7 +3672,6 @@ Begin VB.Form frmPCX
          Width           =   8775
          _ExtentX        =   15478
          _ExtentY        =   3625
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   3255
@@ -3701,7 +3683,6 @@ Begin VB.Form frmPCX
          Width           =   8835
          _ExtentX        =   15584
          _ExtentY        =   5741
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GRIDMAT 
          Height          =   1095
@@ -3713,7 +3694,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3725,7 +3705,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1335
@@ -3737,7 +3716,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   2355
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridlab 
          Height          =   1035
@@ -3749,7 +3727,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   1826
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3761,7 +3738,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
@@ -3773,7 +3749,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   2143
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   1095
@@ -3785,7 +3760,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3797,7 +3771,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1275
@@ -3809,7 +3782,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   2249
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GRIDFIM 
          Height          =   1515
@@ -3821,7 +3793,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   2672
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3833,7 +3804,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1155
@@ -3845,7 +3815,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   2037
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GRIDCOM 
          Height          =   1155
@@ -3857,7 +3826,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   2037
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3869,7 +3837,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
@@ -3881,7 +3848,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   2143
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GRIDFIM 
          Height          =   1515
@@ -3893,7 +3859,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   2672
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3905,7 +3870,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1155
@@ -3917,7 +3881,6 @@ Begin VB.Form frmPCX
          Width           =   8355
          _ExtentX        =   14737
          _ExtentY        =   2037
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   1095
@@ -3929,7 +3892,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3941,7 +3903,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1275
@@ -3953,7 +3914,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   2249
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GRIDCOM 
          Height          =   1155
@@ -3965,7 +3925,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   2037
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -3977,7 +3936,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
@@ -3989,7 +3947,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   2143
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GRIDMAT 
          Height          =   1095
@@ -4001,7 +3958,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -4013,7 +3969,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1335
@@ -4025,7 +3980,6 @@ Begin VB.Form frmPCX
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   2355
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridlab 
          Height          =   1035
@@ -4037,7 +3991,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   1826
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -4049,7 +4002,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1215
@@ -4061,7 +4013,6 @@ Begin VB.Form frmPCX
          Width           =   8415
          _ExtentX        =   14843
          _ExtentY        =   2143
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridPFrev 
          Height          =   1695
@@ -4071,7 +4022,6 @@ Begin VB.Form frmPCX
          Width           =   8775
          _ExtentX        =   15478
          _ExtentY        =   2990
-         _Version        =   393216
       End
       Begin VB.Label lblLabels 
          Caption         =   "Inf Req.Cliente"
@@ -4094,6 +4044,7 @@ Begin VB.Form frmPCX
          Width           =   1815
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Grupo"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -4104,6 +4055,7 @@ Begin VB.Form frmPCX
          Width           =   615
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Data Abertura"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -4114,6 +4066,7 @@ Begin VB.Form frmPCX
          Width           =   1215
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Elaborador"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -5562,14 +5515,14 @@ Private Sub escidfolha_Click(Index As Integer)
 
     Select Case Index
     Case 0, 10
-      TXTpc(11).tEXT = TXTpc(11).tEXT & " , " & Trim(MMCase(eRETU02))
+      TXTpc(11).text = TXTpc(11).text & " , " & Trim(MMCase(eRETU02))
     Case 1, 11
-      TXTpre(11).tEXT = TXTpre(11).tEXT & " , " & Trim(MMCase(eRETU02))
+      TXTpre(11).text = TXTpre(11).text & " , " & Trim(MMCase(eRETU02))
     Case 2, 12
-      TXTgp12(11).tEXT = TXTgp12(11).tEXT & " , " & Trim(MMCase(eRETU02))
+      TXTgp12(11).text = TXTgp12(11).text & " , " & Trim(MMCase(eRETU02))
     Case 3, 13
-      TXTpc(33).tEXT = eRETU01
-      TXTpc(34).tEXT = eRETU02
+      TXTpc(33).text = eRETU01
+      TXTpc(34).text = eRETU02
     End Select
   End If
 
@@ -5648,13 +5601,13 @@ Private Sub escTIPPC_Click(Index As Integer)
   Select Case Index
   Case 1, 2, 3, 4, 5
     nPOS = Index + 5 - 1
-    TXTpc(nPOS).tEXT = cTIPO
+    TXTpc(nPOS).text = cTIPO
   Case 11, 12, 13, 14, 15
     nPOS = Index + 5 - 11
-    TXTpre(nPOS).tEXT = cTIPO
+    TXTpre(nPOS).text = cTIPO
   Case 21, 22, 23, 24, 25
     nPOS = Index + 5 - 21
-    TXTgp12(nPOS).tEXT = cTIPO
+    TXTgp12(nPOS).text = cTIPO
   End Select
 End Sub
 
@@ -5769,7 +5722,7 @@ Private Sub Form_Load()
 
   CHECKPFPG                                    'inclui embalagem preliminar gp12
 
-  TXTNPF.tEXT = nPF
+  TXTNPF.text = nPF
 
 
   cSQL = "select PF,CODCLIENTE,CPF,CODIGO,DESCR,CLIENTE,CLINOME,CODMU011,CODMU012,CODMU013,NOMMU011,NOMMU012,NOMMU013,CODFINAL,CODIGOINT,OPCAO,FEMEAREV,FEMEAREVD,REVPRO,REVDAT,FEMEAREVD2 from PF WHERE PF=" & nPF
@@ -5978,7 +5931,7 @@ Private Sub selmar_Click(Index As Integer)
   On Error Resume Next
 
   cARQ = PegPath("PATH", "MANA5FIN")
-  cARQ = GeraConn(cARQ, "SDECDX")
+  cARQ = GeraConn(cARQ, "JETFOX")
   cCODIGO = Trim(TXTpc(22))
   sSQL = "SELECT SEL100,RIFSEL FROM Rifpr WHERE PRODUTO='" & cCODIGO & "'"
   If Len(cCODIGO) = 0 Then

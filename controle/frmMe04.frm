@@ -918,20 +918,20 @@ Dim iLOOP As Integer
 
 Private Sub Cmd_Click()
   cmdgrvdata.Visible = True
-  TXT(23).Locked = False
-  TXT(24).Locked = False
-  TXT(26).Locked = False
+  txt(23).Locked = False
+  txt(24).Locked = False
+  txt(26).Locked = False
   Cmd.Visible = False
 End Sub
 
 Private Sub CmdCalib_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXT(22).tEXT = "I"
+    txt(22).text = "I"
   Case 1
-    TXT(22).tEXT = "E"
+    txt(22).text = "E"
   Case 2
-    TXT(22).tEXT = "C"
+    txt(22).text = "C"
   End Select
 
 End Sub
@@ -940,7 +940,7 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
-      aVAL(iLOOP) = TXT(iLOOP)             ''vb matriz zero
+      aVAL(iLOOP) = txt(iLOOP)             ''vb matriz zero
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
   End If
@@ -951,16 +951,16 @@ End Sub
 Private Sub CmdCadTip_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXT(0).tEXT = "C"
+    txt(0).text = "C"
   Case 1
-    TXT(0).tEXT = "I"
+    txt(0).text = "I"
 
   End Select
 End Sub
 
 Private Sub cmdFOTO_Click()
   Dim cSQL As String
-  zgrp = FixStr(TxtCodigo.tEXT)
+  zgrp = FixStr(txtcodigo.text)
   If Len(zgrp) = 0 Then
     Alert "Codigo nao preenchido"
     Exit Sub
@@ -970,18 +970,18 @@ Private Sub cmdFOTO_Click()
   cSQL = "select codigo from IMAGENS WHERE CODIGO='" & zgrp & "'"
   IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(zgrp), True, False
   Load frmIMAGENS
-  frmIMAGENS.TXTFIELDS(0).Enabled = False
+  frmIMAGENS.txtFields(0).Enabled = False
   frmIMAGENS.Escolher(0).Visible = False
   frmIMAGENS.Show vbModal, Me
 End Sub
 
 Private Sub cmdgrvdata_Click()
   cmdgrvdata.Visible = False
-  TXT(23).Locked = True
-  TXT(24).Locked = True
-  TXT(26).Locked = True
-  If IsDate(TXT(24)) And TXT(23) > 0 Then
-    TXT(25).tEXT = DateAdd("m", TXT(23), TXT(24))
+  txt(23).Locked = True
+  txt(24).Locked = True
+  txt(26).Locked = True
+  If IsDate(txt(24)) And txt(23) > 0 Then
+    txt(25).text = DateAdd("m", txt(23), txt(24))
   End If
   Cmd.Visible = True
 End Sub
@@ -989,9 +989,9 @@ End Sub
 Private Sub CmdNorma_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXT(8).tEXT = "CONFORME DESENHO"
+    txt(8).text = "CONFORME DESENHO"
   Case 1
-    TXT(8).tEXT = "CONFORME CERTIFICADO"
+    txt(8).text = "CONFORME CERTIFICADO"
   End Select
 
 End Sub
@@ -999,15 +999,15 @@ End Sub
 Private Sub Cmdsitu_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXT(19).tEXT = "A"
+    txt(19).text = "A"
   Case 1
-    TXT(19).tEXT = "C"
+    txt(19).text = "C"
   Case 2
-    TXT(19).tEXT = "E"
+    txt(19).text = "E"
   Case 3
-    TXT(19).tEXT = "I"
+    txt(19).text = "I"
   Case 4
-    TXT(19).tEXT = "M"
+    txt(19).text = "M"
   End Select
 End Sub
 
@@ -1016,12 +1016,12 @@ Private Sub Command6_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim nNUMERO As Long
-  nNUMERO = FixInt(TXT(14), 0)
+  nNUMERO = FixInt(txt(14), 0)
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   sSQL = "SELECT NOME FROM MB01 WHERE NUMERO=" & nNUMERO
   aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
   If lRETU Then
-    TXT(15) = aRETU(0)
+    txt(15) = aRETU(0)
   End If
 End Sub
 
@@ -1040,8 +1040,8 @@ Private Sub Command7_Click()
   cARQESC = "MB01"
   escNUMNOM.Show vbModal, Me
   If lRETU Then
-    TXT(14) = eRETU01
-    TXT(15) = eRETU02
+    txt(14) = eRETU01
+    txt(15) = eRETU02
   End If
 End Sub
 
@@ -1049,14 +1049,14 @@ Private Sub escCodInt_Click()
   iMU01 = 12
   escmp.Show vbModal
   If lRETU Then
-    TXT(31) = eRETU01
+    txt(31) = eRETU01
   End If
 End Sub
 
 Private Sub EscPFx_Click()
   escpf.Show vbModal
   If lRETU Then
-    TXT(3) = eRETU01
+    txt(3) = eRETU01
   End If
 End Sub
 
@@ -1073,12 +1073,12 @@ Private Sub EscTipIns_Click(Index As Integer)
   If lRETU Then
     Select Case Index
     Case 0
-      TXT(4).tEXT = eRETU01
-      TXT(5).tEXT = eRETU02
+      txt(4).text = eRETU01
+      txt(5).text = eRETU02
     Case 1
-      TXT(10).tEXT = eRETU01
+      txt(10).text = eRETU01
     Case 2
-      TXT(7).tEXT = eRETU02
+      txt(7).text = eRETU02
 
     End Select
 
@@ -1096,7 +1096,7 @@ Private Sub Form_Load()
   CenterFormToScreen Me
   cmdgrvdata.Visible = False
   cARQ = PegPath("PATH", "MANA5INS")
-  cARQ = GeraConn(cARQ, "SDECDX")
+  cARQ = GeraConn(cARQ, "JETFOX")
   cSQL = "select CODIGO, "
   cSQL = cSQL & " CADTIP , NOMTIPO, APLICACAO, PF, CODTIPO,"
   cSQL = cSQL & " TIPO , DESENHO, APLIC, NORMA, MODELO,"
@@ -1105,7 +1105,7 @@ Private Sub Form_Load()
   cSQL = cSQL & " DATAUSO , DATAFIM, TIPCAL, CALIBRAR, CALULT,"
   cSQL = cSQL & " CALPRO , DATAEXT, OBS01, OBS02, OBS03, PRECO, CODIGOINT "
   cSQL = cSQL & " FROM ME04 WHERE CODIGO='" & Trim(ePASS01) & "'"
-  TxtCodigo.tEXT = ePASS01
+  txtcodigo.text = ePASS01
   nCAMPOS = 32
   aCAM = Array("CADTIP", "NOMTIPO", "APLICACAO", "PF", "CODTIPO", _
                "TIPO", "DESENHO", "APLIC", "NORMA", "MODELO", _
@@ -1127,7 +1127,7 @@ Private Sub Form_Load()
                "", "", "", "", "", 0, "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXT(iLOOP) = aVAL(iLOOP)
+    txt(iLOOP) = aVAL(iLOOP)
   Next iLOOP
 End Sub
 

@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmfemea 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PF/FMEA"
@@ -243,6 +243,7 @@ Begin VB.Form frmfemea
       EndProperty
       TabsPerRow      =   6
       TabHeight       =   529
+      ControlVersion  =   9
       TabCaption(0)   =   "Producao"
       Tab(0).ControlCount=   19
       Tab(0).Control(0)=   "CmdOrdFem(11)"
@@ -1451,7 +1452,6 @@ Begin VB.Form frmfemea
          Width           =   8655
          _ExtentX        =   15266
          _ExtentY        =   2143
-         _Version        =   393216
       End
       Begin VB.CommandButton escidfolha 
          Height          =   495
@@ -2327,7 +2327,6 @@ Begin VB.Form frmfemea
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   5741
-         _Version        =   393216
          Cols            =   8
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
@@ -2339,7 +2338,6 @@ Begin VB.Form frmfemea
          Width           =   7455
          _ExtentX        =   13150
          _ExtentY        =   2355
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1095
@@ -2351,7 +2349,6 @@ Begin VB.Form frmfemea
          Width           =   7455
          _ExtentX        =   13150
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridopr 
          Height          =   2955
@@ -2362,7 +2359,6 @@ Begin VB.Form frmfemea
          Width           =   9075
          _ExtentX        =   16007
          _ExtentY        =   5212
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   2115
@@ -2374,7 +2370,6 @@ Begin VB.Form frmfemea
          Width           =   8655
          _ExtentX        =   15266
          _ExtentY        =   3731
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridmsrd 
          Height          =   2955
@@ -2385,7 +2380,6 @@ Begin VB.Form frmfemea
          Width           =   8715
          _ExtentX        =   15372
          _ExtentY        =   5212
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridPRO 
          Height          =   1155
@@ -2396,7 +2390,6 @@ Begin VB.Form frmfemea
          Width           =   4875
          _ExtentX        =   8599
          _ExtentY        =   2037
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GRIDFAL 
          Height          =   1155
@@ -2407,7 +2400,6 @@ Begin VB.Form frmfemea
          Width           =   4875
          _ExtentX        =   8599
          _ExtentY        =   2037
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridPadPF 
          Height          =   2715
@@ -2418,7 +2410,6 @@ Begin VB.Form frmfemea
          Width           =   2115
          _ExtentX        =   3731
          _ExtentY        =   4789
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   3375
@@ -2430,7 +2421,6 @@ Begin VB.Form frmfemea
          Width           =   9375
          _ExtentX        =   16536
          _ExtentY        =   5953
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid Gridfemprecad 
          Height          =   4095
@@ -2441,7 +2431,6 @@ Begin VB.Form frmfemea
          Width           =   8175
          _ExtentX        =   14420
          _ExtentY        =   7223
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridPad 
          Height          =   4095
@@ -2452,7 +2441,6 @@ Begin VB.Form frmfemea
          Width           =   10575
          _ExtentX        =   18653
          _ExtentY        =   7223
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid Grid10 
          Height          =   1695
@@ -2463,7 +2451,6 @@ Begin VB.Form frmfemea
          Width           =   8835
          _ExtentX        =   15584
          _ExtentY        =   2990
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridOpe 
          Height          =   1695
@@ -2474,7 +2461,6 @@ Begin VB.Form frmfemea
          Width           =   8835
          _ExtentX        =   15584
          _ExtentY        =   2990
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GrdQsbLep 
          Height          =   5115
@@ -2485,7 +2471,6 @@ Begin VB.Form frmfemea
          Width           =   8955
          _ExtentX        =   15796
          _ExtentY        =   9022
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevcau 
          Height          =   1995
@@ -2497,7 +2482,6 @@ Begin VB.Form frmfemea
          Width           =   9195
          _ExtentX        =   16219
          _ExtentY        =   3519
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevcau 
          Height          =   1515
@@ -2509,7 +2493,6 @@ Begin VB.Form frmfemea
          Width           =   9315
          _ExtentX        =   16431
          _ExtentY        =   2672
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   3255
@@ -2521,7 +2504,6 @@ Begin VB.Form frmfemea
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   5741
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevcau 
          Height          =   1635
@@ -2533,7 +2515,6 @@ Begin VB.Form frmfemea
          Width           =   9315
          _ExtentX        =   16431
          _ExtentY        =   2884
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   3255
@@ -2545,7 +2526,6 @@ Begin VB.Form frmfemea
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   5741
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevcau 
          Height          =   1635
@@ -2557,7 +2537,6 @@ Begin VB.Form frmfemea
          Width           =   9315
          _ExtentX        =   16431
          _ExtentY        =   2884
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   3255
@@ -2569,7 +2548,6 @@ Begin VB.Form frmfemea
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   5741
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridpfpadhist 
          Height          =   2715
@@ -2580,7 +2558,6 @@ Begin VB.Form frmfemea
          Width           =   2115
          _ExtentX        =   3731
          _ExtentY        =   4789
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   3255
@@ -2591,7 +2568,6 @@ Begin VB.Form frmfemea
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   5741
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevcau 
          Height          =   1515
@@ -2602,7 +2578,6 @@ Begin VB.Form frmfemea
          Width           =   9255
          _ExtentX        =   16325
          _ExtentY        =   2672
-         _Version        =   393216
       End
       Begin VB.Label Label14 
          Caption         =   "Projeto:"
@@ -3158,12 +3133,12 @@ Private Sub cmdClose_Click()
   Dim dFEMEA As Date
   Dim dPF As Date
   On Error Resume Next
-  If IsDate(TXTFIELDS(23)) And IsDate(TXTFIELDS(17)) Then
-    dFEMEA = TXTFIELDS(23)
-    If IsDate(TXTFIELDS(25)) Then
-      dFEMEA = TXTFIELDS(25)
+  If IsDate(Txtfields(23)) And IsDate(Txtfields(17)) Then
+    dFEMEA = Txtfields(23)
+    If IsDate(Txtfields(25)) Then
+      dFEMEA = Txtfields(25)
     End If
-    dPF = TXTFIELDS(17)
+    dPF = Txtfields(17)
     If dFEMEA < dPF Then
       Alert ("Data Revisao Femea Menor que Processo Fabricacao")
     End If
@@ -3171,7 +3146,7 @@ Private Sub cmdClose_Click()
   chkfemeas
 
   For iLOOP = 0 To nCAMPOS - 8
-    aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    aVAL(iLOOP) = Txtfields(iLOOP)
   Next iLOOP
   aVAL(27) = FixNumBol(Check1.Value)
   aVAL(28) = FixNumBol(Check2.Value)
@@ -3180,7 +3155,7 @@ Private Sub cmdClose_Click()
   aVAL(31) = DTPicker1.Value
 
   For iLOOP = 32 To nCAMPOS - 1
-    aVAL(iLOOP) = TXTFIELDS(iLOOP)
+    aVAL(iLOOP) = Txtfields(iLOOP)
   Next iLOOP
 
 
@@ -3193,11 +3168,11 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub CmdClo_Click(Index As Integer)
-  Dim dDATE As Date
+  Dim dDate As Date
   Dim DB As New ADODB.Connection
   Dim RSTAB As New ADODB.Recordset
   Dim sSQL As String
-  dDATE = Date
+  dDate = Date
 
   If Index = 0 And Not AcessaMenu("FemeaPro", 1) Then Exit Sub
   If Index = 1 And Not AcessaMenu("FemeaPro", 1) Then Exit Sub
@@ -3259,20 +3234,20 @@ Private Sub CmdClo_Click(Index As Integer)
   While Not RSTAB.EOF
     If RSTAB("ACAO") Then
       If IsDate(RSTAB("RESDAT")) Then
-        dDATE = RSTAB("RESDAT")
+        dDate = RSTAB("RESDAT")
       End If
       If IsDate(RSTAB("RESDAT2")) Then
-        If dDATE < RSTAB("RESDAT2") Then
-          dDATE = RSTAB("RESDAT2")
+        If dDate < RSTAB("RESDAT2") Then
+          dDate = RSTAB("RESDAT2")
         End If
       End If
       If IsDate(RSTAB("RESDAT3")) Then
-        If dDATE < RSTAB("RESDAT3") Then
-          dDATE = RSTAB("RESDAT3")
+        If dDate < RSTAB("RESDAT3") Then
+          dDate = RSTAB("RESDAT3")
         End If
       End If
       RSTAB("ACATOM") = "Concluida"
-      RSTAB("ACADAT") = dDATE + 2
+      RSTAB("ACADAT") = dDate + 2
       RSTAB.Update
     End If
     RSTAB.MoveNext
@@ -3286,7 +3261,7 @@ Private Sub CmdDelDef_Click()
   Dim cARQTMP As String
   Dim sSQL As String
   cARQTMP = PegPath("PATH", "MANA5TGQ")
-  cARQTMP = GeraConn(cARQTMP, "SDECDX")
+  cARQTMP = GeraConn(cARQTMP, "JETFOX")
   gridmsrd.Col = 0
   sSQL = "select NUMERO from MSRD WHERE MSRD=" & gridmsrd
   If ApagaSQLP(cARQTMP, sSQL) Then
@@ -3649,7 +3624,7 @@ Private Sub CmdIncDef_Click()
   nSAC = nSAC + 1
 
   aCAMPOS = Array("MSRD", "DATA", "PF", "CODIGO", "CLIENTE", "DESC01")
-  avalor = Array(nSAC, Format(Date, "DD/MM/YY"), FixNum(TXTFIELDS(0)), FixStr(TXTFIELDS(2)), FixNum(TXTFIELDS(4)), FixStr(cTITULO))
+  avalor = Array(nSAC, Format(Date, "DD/MM/YY"), FixNum(Txtfields(0)), FixStr(Txtfields(2)), FixNum(Txtfields(4)), FixStr(cTITULO))
 
   IncluiSQL GeraConn(cCAM, "FOX"), "SELECT * FROM MSRD WHERE MSRD=" & nSAC, 6 _
           , aCAMPOS _
@@ -3691,9 +3666,9 @@ Private Sub CmdLiberar_Click()
   'eRETU01 = PegUltSQL(Dbname, sSQL, "LIGADO", False)
   eRETU01 = PegCampoSQLADO(Dbname, sSQL, "", False)
   If eRETU01 Then
-    TXTFIELDS(13) = zIDFOLHA
-    TXTFIELDS(14) = zNOMEFOLHA
-    TXTFIELDS(24) = Today()
+    Txtfields(13) = zIDFOLHA
+    Txtfields(14) = zNOMEFOLHA
+    Txtfields(24) = Today()
     Encerrar.Visible = False
   Else
     Alert ("Sem direito")
@@ -3764,8 +3739,8 @@ Private Sub CmdNovaREV_Click()
   End If
 
 
-  If Len(TXTFIELDS(23).tEXT) > 0 Then          'corrige erro importacao protheus data em branco
-    If TXTFIELDS(23) > Today() Then
+  If Len(Txtfields(23).text) > 0 Then          'corrige erro importacao protheus data em branco
+    If Txtfields(23) > Today() Then
       Alert ("Data Revisao Anterior Maior que Data do Sistema")
       Exit Sub
     End If
@@ -3781,18 +3756,18 @@ Private Sub CmdNovaREV_Click()
     End If
   End If
 
-  If IsNumeric(TXTFIELDS(12)) Then
-    TXTFIELDS(12) = TXTFIELDS(12) + 1
+  If IsNumeric(Txtfields(12)) Then
+    Txtfields(12) = Txtfields(12) + 1
   Else
-    TXTFIELDS(12) = 1
+    Txtfields(12) = 1
   End If
-  TXTFIELDS(20) = True
-  TXTFIELDS(13) = 0
-  TXTFIELDS(14) = ""
-  TXTFIELDS(24) = ""
-  TXTFIELDS(23) = dDATAREV
+  Txtfields(20) = True
+  Txtfields(13) = 0
+  Txtfields(14) = ""
+  Txtfields(24) = ""
+  Txtfields(23) = dDATAREV
   Check1.Value = False
-  nREV = FixInt(TXTFIELDS(12))
+  nREV = FixInt(Txtfields(12))
   IncluiSQL cARQPF, "select * from rev WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), Array(FixInt(nPF), nREV, "FE", dDATAREV), True, False
   CmdProx_Click
   Filgridrev
@@ -3802,8 +3777,8 @@ Private Sub CmdNovaREV_Click()
 
 
 
-  eRETU02 = "PF:" & TXTPF.tEXT & Chr(13) & Chr(10)
-  eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
+  eRETU02 = "PF:" & txtPF.text & Chr(13) & Chr(10)
+  eRETU02 = eRETU02 & " Desenho:" & Txtfields(2) & Chr(13) & Chr(10)
   eRETU02 = eRETU02 & " Data:" & Fdata(dDATAREV) & Chr(13) & Chr(10)
   MAILENV "FEM00001", eRETU02
 
@@ -3886,8 +3861,8 @@ End Sub
 Private Sub CmdProx_Click()
 
   If femeacrg.Value = False Then
-    If IsDate(TXTFIELDS(23)) Then
-      DTPicker1.Value = CDate(TXTFIELDS(23)) + 730
+    If IsDate(Txtfields(23)) Then
+      DTPicker1.Value = CDate(Txtfields(23)) + 730
     Else
       If IsDate(DTPicker1) Then
         DTPicker1 = DTPicker1 + 730
@@ -4075,7 +4050,7 @@ Private Sub RevisaoFemea(ByVal Index As Integer)
     'End If
 
     If FixNum(aVAL(52)) = 0 Then             'revisao do femea checar em branco pois historio pode ter varias versoes
-      aVAL(52) = FixNum(TXTFIELDS(12).tEXT)
+      aVAL(52) = FixNum(Txtfields(12).text)
     End If
 
 
@@ -4179,10 +4154,10 @@ Private Sub CmdREvi_Click(Index As Integer)
   ePASS02 = cARQFEMEA
 
   Load frmFEMEI
-  frmFEMEI.TXTFIELDS(2).Enabled = False
-  frmFEMEI.TXTFIELDS(3).Enabled = False
-  frmFEMEI.TXTFIELDS(4).Enabled = False
-  frmFEMEI.TXTFIELDS(5).Enabled = False
+  frmFEMEI.Txtfields(2).Enabled = False
+  frmFEMEI.Txtfields(3).Enabled = False
+  frmFEMEI.Txtfields(4).Enabled = False
+  frmFEMEI.Txtfields(5).Enabled = False
   frmFEMEI.cmdClose.Enabled = False
   frmFEMEI.CmdAltman.Enabled = False
   frmFEMEI.Show vbModal, Me
@@ -4319,10 +4294,10 @@ Private Sub CmdTrocaREv_Click()
   GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
   cSQL = "select * from revI WHERE PF=" & nPF & " AND REVISAO=" & nORI & " AND TIPO='FE'"
   GrvSQL cARQPF, cSQL, 1, Array("REVISAO"), Array(nDES), Array("NI")
-  TXTFIELDS(12).Enabled = True
-  TXTFIELDS(23).Enabled = True
-  TXTFIELDS(12).Locked = False
-  TXTFIELDS(23).Locked = False
+  Txtfields(12).Enabled = True
+  Txtfields(23).Enabled = True
+  Txtfields(12).Locked = False
+  Txtfields(23).Locked = False
   Filgridrev
 End Sub
 
@@ -4331,8 +4306,8 @@ Private Sub CmdVerApu_Click()
   Dim nMES
   Dim nANO As Integer
   DizerBarra "carregando apuracoes"
-  nMES = FixInt(tEXT(1))
-  nANO = FixInt(tEXT(2))
+  nMES = FixInt(text(1))
+  nANO = FixInt(text(2))
   cSQL = "SELECT PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU FROM FEMRPNT WHERE ANO=" & nANO & " AND MES=" & nMES & " AND PF=" & nPF & " ORDER BY PF,INDRIS"
   MontaGridFast Grid10, 10, Array(400, 400, 400, 400, 400, 400, 400, 300, 2500, 2500), Array("PF", "ITEM", "RPN", "NºPro", "NºFal", "NºEfe", "NºCau", "Man", "Efeito", "Causa"), Array("PF", "ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
   DizerBarra "carregando apuracoes RPN"
@@ -4563,11 +4538,11 @@ End Sub
 Private Sub Command15_Click()
   Dim cDIZ
   Encerrar.Visible = False
-  cDIZ = "PF: " & nPF & "Revisao: " & TXTFIELDS(16) & " Nao necessita revisar femea"
-  nREV = FixInt(TXTFIELDS(12))
+  cDIZ = "PF: " & nPF & "Revisao: " & Txtfields(16) & " Nao necessita revisar femea"
+  nREV = FixInt(Txtfields(12))
   XComMotInc_Click (cDIZ)
   Check1.Value = False
-  TXTFIELDS(25) = Today()
+  Txtfields(25) = Today()
   cmdClose_Click
 End Sub
 
@@ -4682,11 +4657,11 @@ End Sub
 
 Private Sub Command3_Click()
   If MDG("Gravar Elaborador", "Confirme Gravação") Then
-    frmfemea.TXTFIELDS(6) = zIDFOLHA
-    frmfemea.TXTFIELDS(9) = zNOMEFOLHA
-    TXTFIELDS(22) = Date
-    If IsNull(TXTFIELDS(23)) Or TXTFIELDS(23) = "" Then
-      TXTFIELDS(23) = Date
+    frmfemea.Txtfields(6) = zIDFOLHA
+    frmfemea.Txtfields(9) = zNOMEFOLHA
+    Txtfields(22) = Date
+    If IsNull(Txtfields(23)) Or Txtfields(23) = "" Then
+      Txtfields(23) = Date
     End If
   End If
 End Sub
@@ -4750,14 +4725,14 @@ End Sub
 Private Sub Command5_Click()
   Encerrar.Visible = False
   CmdNovaREV_Click
-  nREV = FixInt(TXTFIELDS(12))
+  nREV = FixInt(Txtfields(12))
   XComMotInc_Click ("Revisão Periodica")
   Filgridrevi (0)
 
   Command3_Click
 
   eRETU02 = "PF:" & nPF & Chr(13) & Chr(10)
-  eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
+  eRETU02 = eRETU02 & " Desenho:" & Txtfields(2) & Chr(13) & Chr(10)
   eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
   MAILENV "FEM00001", eRETU02
 
@@ -4880,7 +4855,7 @@ End Sub
 Private Sub EditSeq_Click(Index As Integer)
 
   ePASS03 = Index                              'Para usar com o revisao abaixo 'atualizacao de versao
-  ePASS04 = TXTFIELDS(12)                      ''REVISAO PF
+  ePASS04 = Txtfields(12)                      ''REVISAO PF
 
   If Index = 3 And (Not AcessaMenu("FemeaGP12", 1)) Then Exit Sub
   If Index = 0 And (Not AcessaMenu("FemeaPro", 1)) Then Exit Sub
@@ -5115,9 +5090,9 @@ Private Sub escidfolha_Click(Index As Integer)
   If lRETU Then
     Select Case Index
     Case 0, 10
-      TXTFIELDS(7).tEXT = TXTFIELDS(7).tEXT & " , " & Trim(MMCase(eRETU02))
+      Txtfields(7).text = Txtfields(7).text & " , " & Trim(MMCase(eRETU02))
     Case 1, 11
-      TXTFIELDS(8).tEXT = TXTFIELDS(8).tEXT & " , " & Trim(MMCase(eRETU02))
+      Txtfields(8).text = Txtfields(8).text & " , " & Trim(MMCase(eRETU02))
     End Select
   End If
 End Sub
@@ -5131,14 +5106,14 @@ Private Sub ESCprofin_Click(Index As Integer)
   If Index = 2 Then
     ePASS01 = "MICRO"
   End If
-  If Len(TXTFIELDS(61)) = 0 Then
-    cCHAVEBUS = TXTFIELDS(60)
+  If Len(Txtfields(61)) = 0 Then
+    cCHAVEBUS = Txtfields(60)
   Else
-    cCHAVEBUS = TXTFIELDS(61)
+    cCHAVEBUS = Txtfields(61)
   End If
   escms01.Show vbModal, Me
   If lRETU Then
-    TXTFIELDS(61) = eRETU01
+    Txtfields(61) = eRETU01
   End If
   cCHAVEBUS = ""
 End Sub
@@ -5149,7 +5124,7 @@ End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
-  TXTPF = nPF
+  txtPF = nPF
   aNUM = Array(0, 0, 0, 0)
   aDIZ = Array("", "", "", "")
   cARQFEMEA = PegPath("PATH", "FEMEA")
@@ -5185,7 +5160,7 @@ Private Sub Form_Load()
                "", "", "", "")
   aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 8
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    Txtfields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
 
 
@@ -5200,7 +5175,7 @@ Private Sub Form_Load()
   End If
 
   For iLOOP = 32 To nCAMPOS - 1
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    Txtfields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
 
 
@@ -5213,8 +5188,8 @@ Private Sub Form_Load()
   cORDREVI = "FXSEQ,FXSSQ,FXITEM,FXITEMS,FEMEAREV"
 
   Filopr                                       'antes das relat
-  tEXT(1) = CStr(Month(Date))
-  tEXT(2) = CStr(Year(Date))
+  text(1) = CStr(Month(Date))
+  text(2) = CStr(Year(Date))
   FilQSBLEP
   FilRelat (0)
   FilRelat (1)
@@ -5230,10 +5205,10 @@ Private Sub Form_Load()
   filgridpadpf
   FILGRIdpfrev
   If zUSER = "ADMIN" Then
-    TXTFIELDS(12).Enabled = True
-    TXTFIELDS(12).Locked = False
-    TXTFIELDS(23).Enabled = True
-    TXTFIELDS(23).Locked = False
+    Txtfields(12).Enabled = True
+    Txtfields(12).Locked = False
+    Txtfields(23).Enabled = True
+    Txtfields(23).Locked = False
   Else
     CmdApaRev.Visible = False
     CmdTrocaREv.Visible = False
@@ -5410,19 +5385,19 @@ Private Sub FILGRIdPAD()
 End Sub
 
 Private Sub maisano_Click()
-  tEXT(2) = CStr(IncDec(tEXT(2), 1, 1900, 2300))
+  text(2) = CStr(IncDec(text(2), 1, 1900, 2300))
 End Sub
 
 Private Sub maismes_Click()
-  tEXT(1) = CStr(IncDec(tEXT(1), 1, 1, 12))
+  text(1) = CStr(IncDec(text(1), 1, 1, 12))
 End Sub
 
 Private Sub menosano_Click()
-  tEXT(2) = CStr(IncDec(tEXT(2), -1, 1900, 2300))
+  text(2) = CStr(IncDec(text(2), -1, 1900, 2300))
 End Sub
 
 Private Sub menosmes_Click()
-  tEXT(1) = CStr(IncDec(tEXT(1), -1, 1, 12))
+  text(1) = CStr(IncDec(text(1), -1, 1, 12))
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -5481,7 +5456,7 @@ Private Function eproducao()
     Alert "Ja Passou para producao"
     eproducao = True
   Else
-    If TXTFIELDS(26).tEXT = "P" Then
+    If Txtfields(26).text = "P" Then
       Alert "O Processo de Fabricao ja e TIPO (P) producao"
       eproducao = True
     End If
