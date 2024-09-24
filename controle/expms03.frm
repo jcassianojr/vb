@@ -337,15 +337,15 @@ Private Sub CmdEscMs01_Click()
   ePASS01 = "MANA5"
   escms01.Show vbModal, Me
   If lRETU Then
-    tEXT(1).tEXT = eRETU01
+    Text(1).Text = eRETU01
   End If
 End Sub
 
 Private Sub CmdEscPfim_Click(Index As Integer)
   escpffim.Show vbModal, Me
   If lRETU Then
-    If Index = 0 Then tEXT(0).tEXT = eRETU01
-    If Index = 1 Then tEXT(2).tEXT = eRETU01
+    If Index = 0 Then Text(0).Text = eRETU01
+    If Index = 1 Then Text(2).Text = eRETU01
   End If
 End Sub
 
@@ -371,13 +371,13 @@ Private Sub CmdTransfer_Click()
   dbPF.ConnectionTimeout = 120
   dbPF.Open GeracArq(cARQ, , False)
 
-  If tEXT(2).tEXT = "" Then
+  If Text(2).Text = "" Then
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' AND NOT BLOQUEADO ORDER BY PF"
 
   Else
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' OR CODFINAL='" & Trim(tEXT(2).tEXT) & "'AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' OR CODFINAL='" & Trim(Text(2).Text) & "'AND NOT BLOQUEADO ORDER BY PF"
 
   End If
 
@@ -411,7 +411,7 @@ Private Sub CmdTransfer_Click()
   CON.ConnectionTimeout = 120
   CON.Open "mana5emp"
 
-  sqlMS03 = "DELETE FROM MS03 where codigo='" & tEXT(1).tEXT & "'"
+  sqlMS03 = "DELETE FROM MS03 where codigo='" & Text(1).Text & "'"
   CON.Execute sqlMS03
 
   Set rs = New ADODB.Recordset
@@ -601,7 +601,7 @@ Private Sub GRAVAMS03(aCAMPOS As Variant, rs As Variant)
   sDESCRI = Tirace(sDESCRI)
 
   rs.AddNew
-  rs("codigo") = tEXT(1).tEXT
+  rs("codigo") = Text(1).Text
   rs("TIPOENT") = aCAMPOS(0)
   rs("CODCOMP") = aCAMPOS(1)
   rs("NOMECOMP") = sDESCRI
@@ -696,13 +696,13 @@ Private Sub XPButton1_Click()
   dbPF.ConnectionTimeout = 120
   dbPF.Open GeracArq(cARQ, , False)
 
-  If tEXT(2) = "" Then
+  If Text(2) = "" Then
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' AND NOT BLOQUEADO ORDER BY PF"
 
   Else
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' OR CODFINAL='" & Trim(tEXT(2).tEXT) & "'AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' OR CODFINAL='" & Trim(Text(2).Text) & "'AND NOT BLOQUEADO ORDER BY PF"
 
   End If
 
@@ -742,7 +742,7 @@ Private Sub XPButton1_Click()
   CON.ConnectionTimeout = 120
   CON.Open "mana5emp"
 
-  sqlms06 = "DELETE FROM MS06 where codigo='" & tEXT(1).tEXT & "'"
+  sqlms06 = "DELETE FROM MS06 where codigo='" & Text(1).Text & "'"
 
   CON.Execute sqlms06
 
@@ -797,7 +797,7 @@ Private Sub XPButton1_Click()
         sDESCRI = LCase(sDESCRI)
         sDESCRI = Left(sDESCRI, 70)
         sDESCRI = Tirace(sDESCRI)
-        rs("codigo") = tEXT(1).tEXT
+        rs("codigo") = Text(1).Text
         rs("SEQ") = aPFI(0)
         rs("SSQ") = aPFI(1)
         rs("DESCRI") = sDESCRI
@@ -829,11 +829,11 @@ Private Sub XPButton1_Click()
       Wend
 
       rs.AddNew
-      rs("codigo") = tEXT(1).tEXT
+      rs("codigo") = Text(1).Text
       rs("SEQ") = aPFI(0)
       rs("SSQ") = 99
       rs("TIPFEC") = "0"
-      rs("CODFEC") = tEXT(0).tEXT
+      rs("CODFEC") = Text(0).Text
       rs("DESCRI") = "Final"
       rs.Update
 
@@ -1072,20 +1072,21 @@ Private Sub XPButton6_Click()
   Dim x As Integer
   Dim cFERRAM As String
   Dim nHANDLE
+  Dim cnn As New ADODB.Connection
+  Dim rst As New ADODB.Recordset
+  Dim cCONTMP As String
+  Dim cSQLTMP As String
+  Dim cCRITERIO As String
+  
   cARQ = PegPath("PATH", "MANA5FER")
+  cCONTMP = GeraConn(cARQ, "JETFOX")
+  cSQLTMP = "SELECT FERRAM,SEQ,SSQ,PECA,PF,OPERN FROM FERRAM"
+  cnn.Open cCONTMP
+  VFPSetValues cnn
 
-  cARQUSO = cARQ & "FERRAM.DBF"
-  cARQCDX = cARQ & "FERRAM.CDX"
-  cALIAS = "FERRAM"
-  If Not FileExist(cARQUSO, True) Then Exit Sub
-  If Not FileExist(cARQCDX, True) Then Exit Sub
-
-  sx_SetEpoch (Year(Date) - 30)
-  sx_SetDateFormat BRITISH
-  sx_SetDeleted True
-  sx_SetSoftSeek True
-  nHANDLE = sx_Use(cARQUSO, cALIAS, READWRITE, SDEFOX)
-  sx_SetOrder (1)
+ 'Abre o Recordset
+  rst.CursorLocation = adUseClient
+  rst.Open cSQLTMP, cnn, adOpenKeyset, adLockOptimistic, adCmdText
 
   cARQPF = GeracArq(PegPath("PATH", "PF"))
   oCON.Open cARQPF
@@ -1113,34 +1114,38 @@ Private Sub XPButton6_Click()
         cFERRAM = FixStr(oRS("FERRAME4"))
       End Select
       If Len(cFERRAM) > 0 Then
-        sx_GoTop
-        If sx_Seek(cFERRAM) Then
-          If Trim(sx_EvalString(sx_IndexKey())) = Trim(cFERRAM) Then
-            If sx_Rlock(sx_RecNo()) Then
-              If FixInt(sx_GetVariant("SEQ")) = 0 Then
-                sx_PutVariant "SEQ", oRS("SEQ")
-                sx_PutVariant "SSQ", oRS("SSQ")
-              End If
-              If Len(Trim(FixStr(sx_GetVariant("PECA")))) = 0 Then
-                sx_PutVariant "PECA", cCODIGO
-              End If
-              If FixInt(sx_GetVariant("PF")) = 0 Then
-                sx_PutVariant "PF", oRS("PF")
-              End If
-              If Len(Trim(FixStr(sx_GetVariant("OPERN")))) = 0 Then
-                sx_PutVariant "OPERN", oRS("DESCRI")
-              End If
-              sx_Unlock sx_RecNo()
+        cCRITERIO = "FERRAM='" & cFERRAM & "'"
+        rst.MoveFirst
+        rst.Find cCRITERIO, 0, adSearchForward
+        If Not rst.EOF Then
+            If FixInt(rst("SEQ")) = 0 Then
+                rst("SEQ") = FixInt(oRS("SEQ"))
+                rst("SSQ") = FixInt(oRS("SSQ"))
             End If
-          End If
+            
+            If FixInt(rst("PF")) = 0 Then
+                rst("PF") = FixInt(oRS("PF"))
+            End If
+            
+            If Len(Trim(FixStr(rst("PECA")))) = 0 Then
+                rst("PECA") = FixStr(oRS("PECA"))
+            End If
+            
+            If Len(Trim(FixStr(rst("OPERN")))) = 0 Then
+                rst("OPERN") = FixStr(oRS("OPERN"))
+            End If
+        
         End If
+        
+        
       End If
     Next x
     oRS.MoveNext
   Wend
   oRS.Close
   oCON.Close
-  sx_Close
+  rst.Close
+  cnn.Close
 
   Alert "Transferencia Concluida"
 
