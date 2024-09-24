@@ -216,9 +216,9 @@ End Function
 
 Public Function ComboLostFocus(ByRef Combo1)
   With Combo1
-    If Len(.tEXT) Then
+    If Len(.Text) Then
       'Procura pelo texto digitado
-      strPartial = .tEXT
+      strPartial = .Text
       i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
@@ -229,7 +229,7 @@ End Function
 Public Function ComboChange(ByRef Combo1)
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .tEXT
+    strPartial = .Text
     i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
@@ -492,9 +492,11 @@ Public Function Alert(ByVal cDIZ As String, Optional ByVal cTITLE As String = "I
   MsgBox cDIZ, vbOKOnly, cTITLE
 End Function
 
-Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVAL As String, ByVal nLEN As Long) As String
+Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVAL As String, Optional ByVal nLEN As Integer = 0) As String
   Busca = InputBox(cDIZ, cCAB, cVAL)
-  Busca = Left$(Busca, nLEN)
+  If nLEN > O Then
+     Busca = Left$(Busca, nLEN)
+  End If
 End Function
 
 Public Function Caminex(ByVal cARQ As String, Optional ByVal nANO As Integer = 0, Optional ByVal nMES As Integer = 0, Optional ByVal nEMP = 1)
@@ -565,8 +567,6 @@ Public Function Caminex(ByVal cARQ As String, Optional ByVal nANO As Integer = 0
   End If
   Caminex = cARQ
 End Function
-
-
 Public Function Dividir(ByVal nVAL As Variant, ByVal nDIV As Variant)
   Dividir = 0
   nVAL = FixNum(nVAL)
@@ -575,8 +575,6 @@ Public Function Dividir(ByVal nVAL As Variant, ByVal nDIV As Variant)
     Dividir = nVAL / nDIV
   End If
 End Function
-
-
 Public Function NumToData(ByVal nNUM As Variant) As Date
   Dim dDATA As Date
   Dim cData As String
@@ -1912,7 +1910,7 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
   End If
 End Sub
 
@@ -2362,12 +2360,12 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef tEXT As String) As Long
+Public Function WordLen(ByRef Text As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
+  Bytes = StrConv(UCase$(Text), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next

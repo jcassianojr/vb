@@ -69,7 +69,6 @@ Option Explicit
 Const nFORMID = 1063
 Const cFORMID = "Gerenciados Relatorios/Documentos Tipos Execuçao"
 Dim cSQLREF As String
-
 Private Sub Apagar()
   Dim nNUMERO As Long
   Dim cARQ, cSQL As String
@@ -82,7 +81,6 @@ Private Sub Apagar()
     Filgrid
   End If
 End Sub
-
 Private Sub Editar()
   Dim nNUMERO As Long
   Grid.Col = 0
@@ -91,7 +89,6 @@ Private Sub Editar()
   frmRptExec.Show vbModal
   Filgrid
 End Sub
-
 Private Sub Escolher()
   lRETU = True
   Grid.Col = 0                                 'Numero
@@ -100,18 +97,14 @@ Private Sub Escolher()
   eRETU02 = Grid
   Unload Me
 End Sub
-
 Private Sub Filgrid()
   Dim cARQ As String
   Dim cSQL As String
   cARQ = PegPath("PATH", "SYSCONF")
   cSQL = cSQLREF
-  '    MontaGridFast Grid, 4, Array(400, 500, 2000, 3000), Array("Nº", "Ext", "Executar", "NOME"), _
-       Array("NUMERO", "EXTENSAO", "EXECUTAR", "NOME"), cARQ, cSQL
   MontaGridFast Grid, 4, Array(400, 500, 2000, 3000), Array("Nº", "Ext", "Executar", "NOME"), _
                 Array("NUMERO", "EXTENSAO", "EXECUTAR", "NOME"), cARQ, cSQL
 End Sub
-
 Private Sub Form_Load()
   CenterFormToScreen Me
   If AcessaForm(nFORMID) Then
@@ -139,16 +132,6 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
   End If
 
 End Sub
-
-'Private Sub Grid_SelChange()
-'    With Grid
-'        If .Rows > 2 Then
-'            .Col = .Cols - 1
-'            .ColSel = 0
-'            .TopRow = .Row
-'        End If
-'    End With
-'End Sub
 
 Private Sub incluir()
   Dim nNUMERO As Long

@@ -1,7 +1,7 @@
 Attribute VB_Name = "Toolbarlib"
 Option Explicit
 
-Public Sub MontaToolbar(vFormtool As Variant, ByVal nFORM As Long)
+Public Sub MontaToolbar(ByRef vFormtool As Variant, ByVal nFORM As Long)
 'Variaves Locais
   Dim oBTNX As Button
   Dim oDB As ADODB.Connection
