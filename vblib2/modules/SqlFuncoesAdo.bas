@@ -1,6 +1,7 @@
 Attribute VB_Name = "SqlFuncoesAdo"
 Option Explicit
-Public Function VFPSetValues(ByRef oCON As Object) As Boolean  ''as ADODB.Connection as object
+Public Function VFPSetValues(ByRef oCON As Object) As Boolean  ''como objeto nao gerou erro como byref ADODB.Connection as object
+'exemplos copia e cola
 'VFPSetValues DB
 'VFPSetValues ODB
 'VFPSetValues oCONN

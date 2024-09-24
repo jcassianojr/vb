@@ -76,6 +76,7 @@ Begin VB.Form frmPFC
       Width           =   9375
       _ExtentX        =   16536
       _ExtentY        =   8281
+      ControlJustAdded=   0   'False
       Tabs            =   4
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -886,6 +887,7 @@ Begin VB.Form frmPFC
          EndProperty
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Tipo Instr."
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -896,6 +898,7 @@ Begin VB.Form frmPFC
          Width           =   915
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Instrumento"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -906,6 +909,7 @@ Begin VB.Form frmPFC
          Width           =   975
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Simbologia"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -916,6 +920,7 @@ Begin VB.Form frmPFC
          Width           =   855
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Plano de Reação"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -926,6 +931,7 @@ Begin VB.Form frmPFC
          Width           =   1335
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Frequência"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -936,6 +942,7 @@ Begin VB.Form frmPFC
          Width           =   855
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Carta"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -946,6 +953,7 @@ Begin VB.Form frmPFC
          Width           =   615
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Qtde:"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -956,6 +964,7 @@ Begin VB.Form frmPFC
          Width           =   495
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Capacidade/Precisão"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -966,6 +975,7 @@ Begin VB.Form frmPFC
          Width           =   1695
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Tolerancia"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -976,6 +986,7 @@ Begin VB.Form frmPFC
          Width           =   975
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Especificação"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -986,6 +997,7 @@ Begin VB.Form frmPFC
          Width           =   1215
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Carac.Processo"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -996,6 +1008,7 @@ Begin VB.Form frmPFC
          Width           =   1335
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Descrição"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -1006,6 +1019,7 @@ Begin VB.Form frmPFC
          Width           =   1095
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Característica"
          ForeColor       =   &H00FF0000&
          Height          =   255
@@ -1379,12 +1393,8 @@ Private Sub CmdPaste_Click()
   Else
     Clipboard.Clear
     Clipboard.SetData Picture1.Image, (vbCFBitmap)
-
-    ' CopyEntirePicture Picture1
   End If
-
 End Sub
-
 Private Sub CmdPegRel_Click()
   Dim cARQ As String
   Dim aRETU As Variant
@@ -1394,7 +1404,6 @@ Private Sub CmdPegRel_Click()
   aRETU = PegSQL(cARQ, sSQL, 1, Array("REGULAR"), Array(""), Array(""))
   TXTFIELDS(15) = aRETU(0)
 End Sub
-
 Private Sub CmdSalvaImagem_Click()
   salvarpict Me, Picture1, "imagem"
 End Sub
@@ -1556,9 +1565,6 @@ Private Sub Form_Load()
 Dim cWHERE As String
 Dim cTable As String
 
-'  EscTipIns(0).Enabled = False
-'  EscTipIns(1).Enabled = False
-
   CenterFormToScreen Me
   txtItem = nORD
 
@@ -1634,9 +1640,8 @@ Dim cTable As String
   TXTFIELDS(21).Font = "isoqsymbol"
   TXTFIELDS(22).Font = "isoqsymbol"
 
-    'ADOPegBlob(cPICURE, cARQ, cTABLE, cWHERE, cCAMPO)
 
-  If ADOPegBlob(Picture1, cARQ, cTable, cWHERE, "IMAGEM") Then 'ADOPegBlob(cARQ, cSQL, Picture1, "IMAGEM") Then
+  If ADOPegBlob(Picture1, cARQ, cTable, cWHERE, "IMAGEM") Then
     StretchSourcePictureFromPicture Picture1, Picture2
     If FixNum(eRETU01) > 500000 Then
       Alert ("Imagem Muito Grande,Ajuste o tamanho")
@@ -1764,6 +1769,11 @@ Private Sub CmdEditMe04_Click(Index As Integer)
   Dim cALIAS As String
   Dim nHANDLE
   Dim lTEM As Boolean
+  Dim cCONTMP As String
+  Dim SSQLTMP As String
+  Dim cnn As New ADODB.Connection
+  Dim rst As New ADODB.Recordset
+  
   On Error GoTo errhandler
   If Index = 0 Then
     cCODIGO = FixStr(TXTFIELDS(16))
@@ -1782,68 +1792,50 @@ Private Sub CmdEditMe04_Click(Index As Integer)
   cCAPACIDADE = FixStr(TXTFIELDS(4)) & FixStr(TXTFIELDS(5))
 
   cARQ = PegPath("PATH", "MANA5INS")
-  sx_SetEpoch (Year(Date) - 30)
-  sx_SetDateFormat BRITISH
-  sx_SetDeleted True
-  sx_SetSoftSeek True
+  cCONTMP = GeraConn(cARQ, "JETFOX")
+  SSQLTMP = "SELECT * FROM ME04 WHERE CODIGO='" & cCODIGO & "'"
+  
+   IncluiSQL cCONTMP, SSQLTMP, 1, Array("CODIGO"), Array(cCODIGO), True, False
+    
+  
+cnn.Open cCONTMP
+VFPSetValues cnn
 
-  cARQUSO = cARQ & "ME04.DBF"
-  cARQCDX = cARQ & "ME04.CDX"
-  cALIAS = "ME04"
-  If Not FileExist(cARQUSO, True) Then Exit Sub
-  If Not FileExist(cARQCDX, True) Then Exit Sub
-  nHANDLE = sx_Use(cARQUSO, cALIAS, READWRITE, SDEFOX)
-  sx_SetDeleted True
-  sx_SetSoftSeek True
-  sx_SetOrder (1)
-  sx_GoTop
-  lTEM = False
-  If sx_Seek(cCODIGO) Then
-    If Trim(sx_EvalString(sx_IndexKey())) <> Trim(cCODIGO) Then
-      sx_AppendBlank
-    Else
-      lTEM = True
-    End If
-    If sx_Rlock(sx_RecNo()) Then
-      If Not lTEM Then
-        sx_PutVariant "CODIGO", cCODIGO
-      End If
-      If Len(cTIPO) > 0 Then
-        cTMP = Trim(sx_GetString("TIPO"))
-        If Len(cTMP) = 0 Then
-          sx_PutVariant "TIPO", cTIPO
-        End If
-      End If
-
-      If Len(cCODTIP) > 0 Then
-        cTMP = Trim(sx_GetString("codTIPO"))
-        If Len(cTMP) = 0 Then
-          sx_PutVariant "codtipo", cCODTIP
-        End If
-      End If
-
-      If Len(cAPLICACAO) > 0 Then
-        cTMP = Trim(sx_GetString("APLICACAO"))
-        If Len(cTMP) = 0 Then
-          sx_PutVariant "APLICACAO", cAPLICACAO
-        End If
-      End If
-
-      If Len(cCAPACIDADE) > 0 Then
-        cTMP = Trim(sx_GetString("CAPACIDADE"))
-        If Len(cTMP) = 0 Then
-          sx_PutVariant "CAPACIDADE", cCAPACIDADE
-        End If
-      End If
-
-
-
-
-
-      sx_Unlock sx_RecNo()
-    End If
+rst.CursorLocation = adUseClient
+rst.Open SSQLTMP, cnn, adOpenKeyset, adLockOptimistic, adCmdText
+If Not rst.EOF Then
+  If Len(cTIPO) > 0 Then
+     If Len(Trim(FixStr(rst("TIPO")))) = 0 Then
+        rst("TIPO") = cTIPO
+     End If
   End If
-  sx_Close
+            
+  If Len(cCODTIP) > 0 Then
+     If Len(Trim(FixStr(rst("CODTIPO")))) = 0 Then
+        rst("CODTIPO") = cCODTIP
+     End If
+  End If
+            
+  If Len(cAPLICACAO) > 0 Then
+     If Len(Trim(FixStr(rst("APLICACAO")))) = 0 Then
+        rst("APLICACAO") = cAPLICACAO
+     End If
+  End If
+            
+  If Len(cCAPACIDADE) > 0 Then
+     If Len(Trim(FixStr(rst("CAPACIDADE")))) = 0 Then
+        rst("CAPACIDADE") = cCAPACIDADE
+     End If
+  End If
+            
+            
+
+   rst.Update
+End If
+
+rst.Close
+cnn.Close
+
 
   ePASS01 = cCODIGO
   frmMe04.Show vbModal, Me

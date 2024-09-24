@@ -1134,7 +1134,7 @@ Private Sub XPButton6_Click()
             If Len(Trim(FixStr(rst("OPERN")))) = 0 Then
                 rst("OPERN") = FixStr(oRS("OPERN"))
             End If
-        
+           rst.Update
         End If
         
         
