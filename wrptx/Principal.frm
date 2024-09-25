@@ -57,16 +57,10 @@ Private Sub MDIForm_Load()
   CenterFormToScreen Me
   cmdline = Trim(Command())
   
-  
-  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "D")
-  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "R")
-  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "C")
-  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "N")
-  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "A")
-  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "E")
-  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "PD")
-  'Debug.Print parsefile("c:\Users\jcass\Downloads\lembra.txt", "PP")
-  'End
+ ' GeraConn ("localhost.3306.mariadb.citacao")
+'  TipoConn ("localhost.3306.mariadb.citacao")
+ ' TipoConn ("localhost.3306.mysql.citacao")
+ ' TipoConn ("[MARIADB]localhost.3306.mariadb.citacao")
   
   'comand line properties project
   

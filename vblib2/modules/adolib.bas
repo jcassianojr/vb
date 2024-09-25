@@ -35,20 +35,22 @@ Attribute VB_Name = "AdoLib"
  '                       {"RIGHT(%1%)"       ,"{fn RIGHT(%1%)}"},;
 
 'MaxBufferSize=2048;MaxScanRows=8;PageTimeout=5;SafeTransactions=0;Threads=3;UserCommitSync=Yes
-'SQL
-'mysql
-'Your table must have a primary key
-'Your connection string must have Option=3
-'Driver={MySQL ODBC 5.2 ANSI Driver};Server=myServerAddress;Database=myDataBase;UID=myUsername;PWD=myPassword;Option=3;
+'
+'
+'Driver={MySQL ODBC 8.0 ANSI Driver};Server="+cSERVERX+";Database="+cDATABASEX+";Uid="+CUSERX+";Pwd="+cPASSX+";"  //32 driver versao 8 //;Option=3;
+'
+'
+'"DRIVER={MariaDB ODBC 3.2 Driver};DATABASE="+cDATABASEX+";SERVER="+cSERVERX+";UID="+cUSERX+";PASSWORD="+cPASSX
+'
+'
+'
+'"DRIVER={PostgreSQL ANSI(x64)};Database="+cDATABASEX+";Server="+cSERVERX+";Uid="+cUSERX+";Pwd="+cPASSX
+'
 '
 'const JET_ENGINETYPE abaixo
-'DoConvertMDB "C:\data\MyDB97.MDB", "C:\data\MyDB2000.MDB", Jet4x
-'Sub DoConvertMDB(SourceDB, DestDB, Format)
-'Dim EngineS
 '    Set Engine = CreateObject("JRO.JetEngine")
 '    Engine.CompactDatabase "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & SourceDB, _
      '      "Provider=Microsoft.Jet.OLEDB.4.0;Jet OLEDB:Engine Type=" & Format & ";Data Source=" & DestDB
-'End Sub
 'myData.Properties("Update Criteria").value = adCriteriaKey
   'OLEDB:Engine Type=5
   'Unknown                      0
@@ -61,10 +63,11 @@ Attribute VB_Name = "AdoLib"
 
 Option Explicit
 Public Const cJetPro = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
-
-'There is no provider named 'Microsoft.ACE.OLEDB.14.0' even though it's Access 2010 (aka version number 14) the provider that should be used still is named with version number 12.
+'
+'There is no provider named 'Microsoft.ACE.OLEDB.14.0' even though it's Access 2010 (aka version number 14) the provider that should be
+'used still is named with version number 12.
 'So change from 'Microsoft.ACE.OLEDB.14.0' to 'Microsoft.ACE.OLEDB.12.0' and it will probably work better!
-
+'
 Public Const cJetA12 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source="
 Public Const cJetADV = "Provider=Advantage.OLEDB.1;Data Source="
 Public Const cJetExt = ";Extended Properties="
@@ -149,6 +152,19 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
   
+  If InStr(LCase(cARQ), ".mariadb") > 0 Then
+    GeraConn = "[MARIADB]" & cARQ
+    Exit Function
+  End If
+  
+  If InStr(LCase(cARQ), ".mysql") > 0 Then
+    GeraConn = "[MYSQL]" & cARQ
+    Exit Function
+  End If
+      
+    
+
+  
   If InStr(cARQTMP, ".PD") > 0 Then   ' paradox
     nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
     cARQ = Mid(cARQ, 1, nPOS)
@@ -181,7 +197,7 @@ If Len(cTIPO) > 0 Then
         GeraConn = "[JETDBFIII]" & cARQ
       Case "ADSDX"
         GeraConn = "[ADSCDX]" & cARQ
-      Case "ADSNTX" Or "SDENTX"
+      Case "ADSNTX"
         GeraConn = "[ADSNTX]" & cARQ
       Case "ADSADT"
         GeraConn = "[ADSADT]" & cARQ
@@ -203,11 +219,18 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   Dim cJETUSO As String
   Dim lTEMMDB As Boolean
   Dim lTEMSQLITE As Boolean
+  Dim lTEMMARIADB As Boolean
+  Dim lTEMMYSQL As Boolean
+  
   Dim cADSTIP As String
   Dim cADSNOM As String
   Dim cXLSVER As String '
+  Dim aCONN As Variant
   lTEMMDB = False
   lTEMSQLITE = False
+  lTEMMARIADB = False
+  lTEMMYSQL = False
+  
   TipoConn = Array("ADO", cARQ, "???")
   cARQTMP = UCase(cARQ)
   
@@ -225,6 +248,20 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     lTEMSQLITE = True
     TipoConn = Array("ADO", cARQ, "SQLITE")
   End If
+   '
+  'mariadb
+  '
+  If InStr(cARQTMP, ".MARIADB") > 0 Then
+    lTEMMARIADB = True
+    TipoConn = Array("ADO", cARQ, "MARIADB")
+  End If
+    '
+  'mysql
+  '
+  If InStr(cARQTMP, ".MYSQL") > 0 Then
+    lTEMMYSQL = True
+    TipoConn = Array("ADO", cARQ, "MYSQL")
+  End If
   '
   'checando provider
   '
@@ -236,10 +273,22 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
       cARQ = "[JETMDB]" & cARQ
       cARQTMP = UCase(cARQ)
     End If
-     If lTEMSQLITE Then
+    If lTEMSQLITE Then
       cARQ = "[SQLITE]" & cARQ
       cARQTMP = UCase(cARQ)
     End If
+    If lTEMMARIADB Then
+      cARQ = "[MARIADB]" & cARQ
+      cARQTMP = UCase(cARQ)
+    End If
+    If lTEMMYSQL Then
+      cARQ = "[MYSQL]" & cARQ
+      cARQTMP = UCase(cARQ)
+    End If
+
+    
+    
+    
   End If
 '
 'access
@@ -264,7 +313,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   '
   ' SQLITE
   '
-  If InStr(cARQTMP, "[SQLITE]") > 0 Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
+  If lTEMSQLITE Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
     cARQ = Replace(cARQ, "[SQLITE]", "")
     If InStr(cARQTMP, "SQLITE3 ODBC DRIVER") = 0 Then
        cARQ = "Driver={SQLite3 ODBC Driver};Database=" + cARQ + ";"
@@ -272,6 +321,35 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     TipoConn = Array("ADO", cARQ, "SQLITE")
     Exit Function
   End If
+  
+  If lTEMMARIADB Then
+    cARQ = Replace(cARQ, "[MARIADB]", "")
+    If InStr(cARQTMP, "MARIADB ODBC") = 0 Then 'geracom se nao passado
+       aCONN = Split(cARQ, ".") 'localhost.port.mariadb.banco 'localhost.3306.mariadb.citacao
+       If Len(cUSER) > 0 Then
+         cARQ = "DRIVER={MariaDB ODBC 3.2 Driver};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PASSWORD=" + cPASS + ";"
+       Else
+         cARQ = "DRIVER={MariaDB ODBC 3.2 Driver};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=root;PASSWORD=admin;"
+       End If
+    End If
+    TipoConn = Array("ADO", cARQ, "MARIADB")
+    Exit Function
+  End If
+
+  If lTEMMYSQL Then
+    cARQ = Replace(cARQ, "[MYSQL]", "")
+    If InStr(cARQTMP, "MYSQL ODBC") = 0 Then 'geracom se nao passado
+       aCONN = Split(cARQ, ".") 'localhost.port.mysql.banco 'localhost.3306.mysql.citacao
+       If Len(cUSER) > 0 Then
+          cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"     '32 driver versao 8
+       Else
+         cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=root;Pwd=admin;"    '32 driver versao 8
+       End If
+    End If
+    TipoConn = Array("ADO", cARQ, "MYSQL")
+    Exit Function
+  End If
+
 
   '
   'jetfox
@@ -347,6 +425,11 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     TipoConn = Array("ADO", cARQ, "MYSQL")
     Exit Function
   End If
+  If InStr(cARQTMP, "[MARIADB]") > 0 Then
+    cARQ = Replace(cARQ, "[MARIADB]", "")
+    TipoConn = Array("ADO", cARQ, "MARIADB")
+    Exit Function
+  End If
   If InStr(cARQTMP, "[INFORMIX]") > 0 Then
     cARQ = Replace(cARQ, "[INFORMIX]", "")
     TipoConn = Array("ADO", cARQ, "INFORMIX")
@@ -379,7 +462,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
       cADSTIP = "ADS_CDX"
       cADSNOM = "ADSCDX"
     End If
-    If InStr(cARQTMP, "[ADSNTX]") > 0 Or InStr(cARQTMP, "[SDENTX]") > 0 Then
+    If InStr(cARQTMP, "[ADSNTX]") > 0 Then
       cADSTIP = "ADS_NTX"
       cADSNOM = "ADSCDX"
     End If

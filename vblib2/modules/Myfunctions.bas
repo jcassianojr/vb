@@ -216,9 +216,9 @@ End Function
 
 Public Function ComboLostFocus(ByRef Combo1)
   With Combo1
-    If Len(.Text) Then
+    If Len(.tEXT) Then
       'Procura pelo texto digitado
-      strPartial = .Text
+      strPartial = .tEXT
       i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
@@ -229,7 +229,7 @@ End Function
 Public Function ComboChange(ByRef Combo1)
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .Text
+    strPartial = .tEXT
     i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
@@ -463,9 +463,9 @@ Public Function DataToLit(ByVal dDATA As Variant, Optional ByVal cTIPO As String
     DataToLit = "#" & Year(dDATA) & "/" & Month(dDATA) & "/" & Day(dDATA) & "#"
   Case "CRYSTAL"
     DataToLit = "CDATE(" & Year(dDATA) & "," & Month(dDATA) & "," & Day(dDATA) & ")"
-  Case "MYSQL", "MYSQL/"
+  Case "MYSQL/"
     DataToLit = "'" & Year(dDATA) & "/" & Month(dDATA) & "/" & Day(dDATA) & "'"
-  Case "MYSQL-", "MARIADB"
+  Case "MYSQL", "MYSQL-", "MARIADB"
     DataToLit = "'" & Year(dDATA) & "-" & Month(dDATA) & "-" & Day(dDATA) & "'"
   Case "SQLSERVER"
     DataToLit = "CONVERT(datetime, '" & Format(DateValue(dDATA), "yyyy-mm-dd") & "', 102)"
@@ -1910,7 +1910,7 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
   End If
 End Sub
 
@@ -2360,12 +2360,12 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef Text As String) As Long
+Public Function WordLen(ByRef tEXT As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(Text), vbFromUnicode)
+  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next

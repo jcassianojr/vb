@@ -498,15 +498,11 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         End If
       End If
       
-        'nao grava com mascara yyyy-mm-dd erro no update
-       'If cTIPO = "D" And aARQ(2) = "SQLITE" Then
-       '  aFOR(x) = "D-"
-       'End If
-      
+           
       ''Evitar Gravar String Vazias Campos DAta
       If cTIPO = "D" Then
         If DataBranco(eVAL) Then
-          If aARQ(2) = "MDB" Or aARQ(2) = "MYSQL" Then
+          If aARQ(2) = "MDB" Or aARQ(2) = "MYSQL" Or aARQ(2) = "MARIADB" Then
             eVAL = NullDate(aARQ(2))
             lGRAVA = True
             aFOR(x) = ""
@@ -541,8 +537,6 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
       End If
     Next x
     Select Case aARQ(2) ' alguns nao aceitam update
-   '        Case "SQLSERVER", "MDB", "MYSQL", "SQLITE"
-   '            oRS.Update
            Case Else
                oRS.Update
     End Select
@@ -569,14 +563,9 @@ errhandler:
   Case -2147217887
     GrvSQLado = True
     Exit Function
-  Case -2147217864  '', -2147467259                 'Update Mysql/informix
-    ''      oRS.Close
-    ''     oDB.Close
-    ''     Set oRS = Nothing
-    ''     Set oDB = Nothing
+  Case -2147217864
     GrvSQLado = True
     Exit Function
-    ''             Resume Next
   Case Else
     If lOPEN Then
       ADOErro oRS.ActiveConnection.Errors, cERRO
@@ -658,9 +647,9 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     Next
 
     ' PEGAR O ID
-    Select Case aRETU(2)
-    Case "SQLSERVER", "MDB", "MYSQL"
-      oRS.Update
+    Select Case aRETU(2) 'opcao conn que nao aceitam update
+      Case Else
+         oRS.Update
     End Select
     If Not IsNumeric(aIDDES) Then            ''Se for numerico nao e matriz
       nCAMPOS = UBound(aIDDES)
@@ -671,8 +660,6 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
       eRETU01 = aRETUID
     End If
     Select Case aRETU(2) 'alguns nao aceitam update
-        Case "SQLSERVER", "MDB", "MYSQL", "SQLITE"
-            oRS.Update
         Case Else
           oRS.Update
     End Select
@@ -1011,9 +998,9 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
           oRSDES(aOUTDES(x)) = aOUTORI(x)
         Next x
       End If
-      Select Case aRETU(2)
-      Case "SQLSERVER", "MDB", "MYSQL"
-        oRSDES.Update
+      Select Case aRETU(2) 'alguns nao aceitam updade
+            Case Else
+                 oRSDES.Update
       End Select
 
       ' PEGAR O ID
@@ -1025,11 +1012,9 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
         Next x
         eRETU01 = aRETUID
       End If
-      Select Case aRETU(2)
-      Case "SQLSERVER", "MDB", "MYSQL"
-
-      Case Else
-        oRSDES.Update
+      Select Case aRETU(2) 'alguns nao aceita updade
+          Case Else
+            oRSDES.Update
       End Select
       oRS.MoveNext
     Wend

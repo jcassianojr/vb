@@ -85,10 +85,6 @@ Public Function GrvSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
   Select Case aRETU(0)
   Case "ADO"
     GrvSQL = GrvSQLado(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
-    '  Case "SDE"
-    '      GrvSQL = GrvSQLSDE(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR)
-    'Case Else
-    '   GrvSQL = GrvSQLdao(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR)
   End Select
 End Function
 
@@ -102,10 +98,6 @@ Public Function IncluiSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Select Case aRETU(0)
   Case "ADO"
     IncluiSQL = IncluiSQLAdo(cARQ, cSQL, nITEM, aCAM, aVAL, lCHECK, lMES, aIDDES)
-    '  Case "SDE"
-    '     IncluiSQL = IncluiSQLSDE(cARQ, cSQL, nITEM, aCAM, aVAL, lCHECK, lMES, aIDDES)
-    ' Case Else
-    '   IncluiSQL = IncluiSQLDao(cARQ, cSQL, nITEM, aCAM, aVAL, lCHECK, lMES, aIDDES)
   End Select
 End Function
 
@@ -116,10 +108,6 @@ Public Function PegSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
   Select Case aRETU(0)
   Case "ADO"
     PegSQL = PegSQLAdo(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
-    '    Case "SDE"
-    '        PegSQL = PegSQLSDE(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
-    'Case Else
-    '     PegSQL = PegSQLDao(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD, "DAOMDB")
   End Select
 End Function
 
@@ -130,38 +118,26 @@ Public Function PegUltSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal cCAM
   Select Case aRETU(0)
   Case "ADO"
     PegUltSQL = PegUltSQLAdo(cARQ, cSQL, cCAMPO, eDEFAULT)
-    '  Case "SDE"
-    '      PegUltSQL = PegUltSQLSDE(cARQ, cSQL, cCAMPO, eDEFAULT)
-    'Case Else
-    '    PegUltSQL = PegUltSQLDao(cARQ, cSQL, cCAMPO, eDEFAULT)
   End Select
 End Function
 
-Public Function PegMAXSQL(ByVal cARQ As String, ByVal cTABLE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, Optional ByVal lWRITE As Boolean = False) As Variant
+Public Function PegMAXSQL(ByVal cARQ As String, ByVal cTable As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, Optional ByVal lWRITE As Boolean = False) As Variant
   Dim aRETU As Variant
   aRETU = TipoConn(cARQ, , , lWRITE)
   cARQ = aRETU(1)
   Select Case aRETU(0)
   Case "ADO"
-    PegMAXSQL = PegMAXSQLADO(cARQ, cTABLE, cCAMPO, eDEFAULT)
-    '   Case "SDE"
-    '       PegMAXSQL = PegMAXSQLSDE(cARQ, cTABLE, cCAMPO, eDEFAULT)
-    'Case Else
-    'PegMAXSQL = PegMAXSQLDAO(cARQ, cTABLE, cCAMPO, eDEFAULT)
+    PegMAXSQL = PegMAXSQLADO(cARQ, cTable, cCAMPO, eDEFAULT)
   End Select
 End Function
 
-Public Function PegCountSQL(ByVal cARQ As String, ByVal cTABLE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, Optional ByVal lWRITE As Boolean = False) As Variant
+Public Function PegCountSQL(ByVal cARQ As String, ByVal cTable As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, Optional ByVal lWRITE As Boolean = False) As Variant
   Dim aRETU As Variant
   aRETU = TipoConn(cARQ, , , lWRITE)
   cARQ = aRETU(1)
   Select Case aRETU(0)
   Case "ADO"
-    PegCountSQL = PegCountSQLADO(cARQ, cTABLE, cCAMPO, eDEFAULT)
-    '  Case "SDE"
-    '      PegCountSQL = PegCountSQLSDE(cARQ, cTABLE, cCAMPO, eDEFAULT)
-    'Case Else
-    'PegCountSQL = PegCountSQLDAO(cARQ, cTABLE, cCAMPO, eDEFAULT)
+    PegCountSQL = PegCountSQLADO(cARQ, cTable, cCAMPO, eDEFAULT)
   End Select
 End Function
 
@@ -172,24 +148,15 @@ Public Function ApagaSQL(ByVal cARQ As String, ByVal cSQL As String) As Boolean
   Select Case aRETU(0)
   Case "ADO"
     ApagaSQL = APAGASQLADO(cARQ, cSQL)
-    '    Case "SDE"
-    '        ApagaSQL = ApagaSQLSDE(cARQ, cSQL)
-    'Case Else
-    '   ApagaSQL = ApagaSQLDao(cARQ, cSQL)
   End Select
 End Function
 
 Public Function SomaSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM As Variant, Optional ByVal lWRITE As Boolean = False) As Variant
   Dim aRETU As Variant
   aRETU = TipoConn(cARQ, , , lWRITE)
-  ''cARQ = aRETU(1)
   Select Case aRETU(0)
   Case "ADO"
     SomaSQL = SomaSQLAdo(cARQ, cSQL, aCAM)
-    '    Case "SDE"
-    '        SomaSQL = SomaSQLSDE(cARQ, cSQL, aCAM)
-    'Case Else
-    '   SomaSQL = SomaSQLDao(cARQ, cSQL, aCAM)
   End Select
 End Function
 
@@ -197,14 +164,9 @@ Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
                            ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", Optional ByVal lWRITE As Boolean = False) As Variant
   Dim aRETU As Variant
   aRETU = TipoConn(cARQ, , , lWRITE)
-  ''cARQ = aRETU(1)
   Select Case aRETU(0)
   Case "ADO"
     PegSQLDeli = PegSQLDeliAdo(cARQ, cSQL, aCAM, cDELI)
-    '    Case "SDE"
-    '        PegSQLDeli = PegSQLDeliSDE(cARQ, cSQL, aCAM, cDELI)
-    'Case Else
-    '   PegSQLDeli = PegSQLDeliDao(cARQ, cSQL, aCAM, cDELI)
   End Select
 End Function
 
@@ -215,10 +177,6 @@ Public Function ApagaSQLP(ByVal cARQ As String, ByVal cSQL As String, Optional B
   Select Case aRETU(0)
   Case "ADO"
     ApagaSQLP = ApagaSQLpAdo(cARQ, cSQL, cTEXTO)
-    '  Case "SDE"
-    '      ApagaSQLP = ApagaSQLPSDE(cARQ, cSQL, cTexto)
-    'Case Else
-    '   ApagaSQLP = ApagaSQLPDao(cARQ, cSQL, cTexto)
   End Select
 End Function
 
@@ -257,15 +215,6 @@ Public Function SqlMoveReg(ByVal cARQORI As String, _
     SQLMoveRegADO cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
                   cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, _
                   aIDDES
-    '  Case "SDE"
-    '      SQLMoveRegSDE cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
-           cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, _
-           aIDDES
-
-  Case Else
-    'SQLMoveRegDAO cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
-     '              cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, _
-     '              aIDDES
   End Select
 End Function
 
