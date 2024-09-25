@@ -707,7 +707,7 @@ Public Function FileExist(ByVal cARQ As Variant, _
       End If
     End If
   End If
-  If InStr(cARQUIVO, "PROVIDER") > 0 Then
+  If InStr(cARQUIVO, "PROVIDER") > 0 Or InStr(cARQUIVO, ".MARIADB") > 0 Or InStr(cARQUIVO, ".MYSQL") > 0 Then
     FileExist = True
     Exit Function
   End If

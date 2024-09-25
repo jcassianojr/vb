@@ -226,11 +226,14 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   Dim cADSNOM As String
   Dim cXLSVER As String '
   Dim aCONN As Variant
+  
+  'usa boolean para agilizar if,case... no lugar de comparacao com string
   lTEMMDB = False
   lTEMSQLITE = False
   lTEMMARIADB = False
   lTEMMYSQL = False
   
+  'inicial valores padrao
   TipoConn = Array("ADO", cARQ, "???")
   cARQTMP = UCase(cARQ)
   
@@ -263,9 +266,9 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     TipoConn = Array("ADO", cARQ, "MYSQL")
   End If
   '
-  'checando provider
+  'checando provider,driver connecao
   '
-  If InStr(cARQ, "[") = 0 Then
+  If InStr(cARQ, "[") = 0 Then 'inclui se nao tiver [ evita duplicar [USO][USO]
     If InStr(cARQTMP, "PROVIDER") > 0 Then
       Exit Function
     End If
@@ -285,15 +288,11 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
       cARQ = "[MYSQL]" & cARQ
       cARQTMP = UCase(cARQ)
     End If
-
-    
-    
-    
   End If
 '
 'access
 '
-  If InStr(cARQTMP, "[JETMDB]") > 0 Then
+  If lTEMMDB Then
     cARQ = Replace(cARQ, "[JETMDB]", "")
     If InStr("PROVIDER", cARQTMP) = 0 Then
        cARQ = cJetPro & cARQ
@@ -388,7 +387,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   End If
   If InStr(cARQTMP, "[CONN]") > 0 Then
     cARQ = Replace(cARQ, "[CONN]", "")
-    If lTEMMDB > 0 Then
+    If lTEMMDB Then
       TipoConn = Array("ADO", cARQ, "MDB")
     Else
       TipoConn = Array("ADO", cARQ, "CONN")
@@ -420,16 +419,6 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     Exit Function
   End If
 
-  If InStr(cARQTMP, "[MYSQL]") > 0 Then
-    cARQ = Replace(cARQ, "[MYSQL]", "")
-    TipoConn = Array("ADO", cARQ, "MYSQL")
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[MARIADB]") > 0 Then
-    cARQ = Replace(cARQ, "[MARIADB]", "")
-    TipoConn = Array("ADO", cARQ, "MARIADB")
-    Exit Function
-  End If
   If InStr(cARQTMP, "[INFORMIX]") > 0 Then
     cARQ = Replace(cARQ, "[INFORMIX]", "")
     TipoConn = Array("ADO", cARQ, "INFORMIX")
