@@ -44,7 +44,7 @@ Attribute VB_Name = "AdoLib"
 '
 '
 '
-'"DRIVER={PostgreSQL ANSI(x64)};Database="+cDATABASEX+";Server="+cSERVERX+";Uid="+cUSERX+";Pwd="+cPASSX
+'"DRIVER={PostgreSQL ANSI};Database="+cDATABASEX+";Server="+cSERVERX+";Uid="+cUSERX+";Pwd="+cPASSX
 '
 '
 'const JET_ENGINETYPE abaixo
@@ -157,6 +157,12 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
   
+  If InStr(LCase(cARQ), ".pgsql") > 0 Or InStr(LCase(cARQ), ".postgresql") > 0 Then
+    GeraConn = "[PGSQL]" & cARQ
+    Exit Function
+  End If
+  
+  
   If InStr(LCase(cARQ), ".mysql") > 0 Then
     GeraConn = "[MYSQL]" & cARQ
     Exit Function
@@ -220,6 +226,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   Dim lTEMMDB As Boolean
   Dim lTEMSQLITE As Boolean
   Dim lTEMMARIADB As Boolean
+  Dim lTEMPG As Boolean
   Dim lTEMMYSQL As Boolean
   
   Dim cADSTIP As String
@@ -232,6 +239,8 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   lTEMSQLITE = False
   lTEMMARIADB = False
   lTEMMYSQL = False
+  lTEMPG = False
+  
   
   'inicial valores padrao
   TipoConn = Array("ADO", cARQ, "???")
@@ -265,6 +274,16 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     lTEMMYSQL = True
     TipoConn = Array("ADO", cARQ, "MYSQL")
   End If
+  
+    '
+  'postgresql pgsql
+  '
+  If InStr(cARQTMP, ".PGSQL") > 0 Or InStr(cARQTMP, ".POSTGRESQL") > 0 Then
+    lTEMPG = True
+    TipoConn = Array("ADO", cARQ, "PGSQL")
+  End If
+    '
+ 
   '
   'checando provider,driver connecao
   '
@@ -288,6 +307,11 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
       cARQ = "[MYSQL]" & cARQ
       cARQTMP = UCase(cARQ)
     End If
+    If lTEMPG Then
+      cARQ = "[PGSQL]" & cARQ
+      cARQTMP = UCase(cARQ)
+    End If
+    
   End If
 '
 'access
@@ -338,7 +362,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   If lTEMMYSQL Then
     cARQ = Replace(cARQ, "[MYSQL]", "")
     If InStr(cARQTMP, "MYSQL ODBC") = 0 Then 'geracom se nao passado
-       aCONN = Split(cARQ, ".") 'localhost.port.mysql.banco 'localhost.3306.mysql.citacao
+       aCONN = Split(cARQ, ".") 'localhost.port.mysql.banco 'localhost.5432.mysql.citacao
        If Len(cUSER) > 0 Then
           cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"     '32 driver versao 8
        Else
@@ -349,6 +373,20 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     Exit Function
   End If
 
+   If lTEMPG Then
+    cARQ = Replace(cARQ, "[PGSQL]", "")
+    cARQ = Replace(cARQ, "[POSTGRESQL]", "")
+    If InStr(cARQTMP, "POSTGRESQL ANSI") = 0 Then 'geracom se nao passado
+       aCONN = Split(cARQ, ".") 'localhost.port.postgresql.banco 'localhost.5432.postgresql.citacao
+       If Len(cUSER) > 0 Then
+          cARQ = "Driver={PostgreSQL ANSI};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"
+       Else
+          cARQ = "Driver={PostgreSQL ANSI};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=postgres;Pwd=admin;"
+       End If
+    End If
+    TipoConn = Array("ADO", cARQ, "PGSQL")
+    Exit Function
+  End If
 
   '
   'jetfox
