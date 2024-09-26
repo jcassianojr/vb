@@ -349,6 +349,9 @@ Private Sub Command1_Click()
   sPath = App.Path
   sFILTER = "Access mdb" & vbNullChar & "*.mdb" _
             & vbNullChar & "Sqlite" & vbNullChar & "*.sqlite" _
+            & vbNullChar & "MariaDb" & vbNullChar & "*.mariadb*" _
+            & vbNullChar & "MySQL" & vbNullChar & "*.mysql*" _
+            & vbNullChar & "PostgreSQL" & vbNullChar & "*.postgresql*" _
             & vbNullChar & "accdb" & vbNullChar & "*.accdb"
   sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Escolha arquivos de imagens")
   If Len(sFILENAME) = 0 Then
@@ -356,7 +359,12 @@ Private Sub Command1_Click()
     cARQRTF = ""
     Exit Sub
   End If
+  If InStr(LCase(sFILENAME), ".mariadb") > 0 Or InStr(LCase(sFILENAME), ".mysql") > 0 _
+     Or InStr(LCase(sFILENAME), ".postgresql") > 0 Then
+     sFILENAME = parsefile(sFILENAME, "A") 'pega apenas referencia da coneccao
+  End If
   Text1.tEXT = sFILENAME
+  
   cARQRTF = GeraConn(sFILENAME)
   FilRelat
 End Sub
@@ -471,7 +479,7 @@ Private Sub Form_Load()
     frmIMAGENS.Show vbModal
     End
   End If
-  Grid.SelectionMode = flexSelectionByRow
+  Grid.SelectionMode = FlexSelectionModeByRow
   FilRelat
 
 End Sub
@@ -503,7 +511,11 @@ Private Sub FilRelat()
   Else
     cSQL = cSQL & " ORDER BY " & cORDEM
   End If
-  MontaGridUltra Grid, 2, Array(4000, 1500), Array("Codigo", "Numero"), _
+  If InStr(UCase(cARQ), ".PGSQL") > 0 Or InStr(UCase(cARQ), ".POSTGRESQL") > 0 Then
+     cSQL = "SELECT 'CODIGO','NUMERO' FROM 'IMAGENS'"
+     cSQL = Replace(cSQL, Chr(39), Chr(34))
+  End If
+  MontaGridFast Grid, 2, Array(4000, 1500), Array("Codigo", "Numero"), _
                  Array("L$CODIGO", "L$NUMERO"), cARQ, cSQL
 End Sub
 

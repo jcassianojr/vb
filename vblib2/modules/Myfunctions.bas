@@ -685,7 +685,7 @@ Public Function FileExist(ByVal cARQ As Variant, _
       End If
 
       If InStr(cARQUIVO, "[CONN]") > 0 Or InStr(cARQUIVO, "[MYSQL]") > 0 Or InStr(cARQUIVO, "[MARIADB]") > 0 Or _
-         InStr(cARQUIVO, "[POSTGRESQL]") > 0 Or InStr(cARQUIVO, "[SQLSERVER]") > 0 Then
+         InStr(cARQUIVO, "[PGSQL]") > 0 Or InStr(cARQUIVO, "[POSTGRESQL]") > 0 Or InStr(cARQUIVO, "[SQLSERVER]") > 0 Then
         FileExist = True
         Exit Function
       End If
