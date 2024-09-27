@@ -110,7 +110,27 @@ Public Function GeracArq(ByVal cARQ As String, Optional ByVal cTIPO As String = 
   aRETU = TipoConn(cARQ, , , lWRITE)
   GeracArq = aRETU(1)
 End Function
-
+Public Function SQLPGSQLDOUBLEQUOTES(ByVal cSQL As String) As String
+cSQL = UCase(cSQL)
+    cSQL = Replace(cSQL, "  ", " ")
+    cSQL = Replace(cSQL, " ,", ",")
+    cSQL = Replace(cSQL, ", ", ",")
+    cSQL = Replace(cSQL, "SELECT ", "SELECT " + Chr(34))
+    cSQL = Replace(cSQL, ",", Chr(34) + "," + Chr(34))
+    cSQL = Replace(cSQL, " FROM ", Chr(34) + " FROM " + Chr(34))
+    If InStr(cSQL, " WHERE ") > 0 Then
+      cSQL = Replace(cSQL, " WHERE ", Chr(34) + " WHERE " + Chr(34))
+      cSQL = Replace(cSQL, "=", Chr(34) + "=")
+    End If
+    If InStr(cSQL, " ORDER BY ") > 0 Then
+      cSQL = Replace(cSQL, " ORDER BY ", Chr(34) + " ORDER BY " + Chr(34))
+    End If
+    cSQL = cSQL + Chr(34)
+    cSQL = Replace(cSQL, Chr(39) + Chr(34), Chr(39))
+    cSQL = Replace(cSQL, Chr(34) + Chr(34), Chr(34))
+    
+    SQLPGSQLDOUBLEQUOTES = cSQL
+End Function
 Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As String
   Dim nPOS As Long
   Dim cARQTMP As String
@@ -263,14 +283,14 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
    '
   'mariadb
   '
-  If InStr(cARQTMP, ".MARIADB") > 0 Then
+  If InStr(cARQTMP, ".MARIADB") > 0 Or InStr(cARQTMP, "{MARIADB") > 0 Then
     lTEMMARIADB = True
     TipoConn = Array("ADO", cARQ, "MARIADB")
   End If
     '
   'mysql
   '
-  If InStr(cARQTMP, ".MYSQL") > 0 Then
+  If InStr(cARQTMP, ".MYSQL") > 0 Or InStr(cARQTMP, "{MYSQL") > 0 Then
     lTEMMYSQL = True
     TipoConn = Array("ADO", cARQ, "MYSQL")
   End If
@@ -278,7 +298,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     '
   'postgresql pgsql
   '
-  If InStr(cARQTMP, ".PGSQL") > 0 Or InStr(cARQTMP, ".POSTGRESQL") > 0 Then
+  If InStr(cARQTMP, ".PGSQL") > 0 Or InStr(cARQTMP, ".POSTGRESQL") > 0 Or InStr(cARQTMP, "{POSTGRESQL") > 0 Then
     lTEMPG = True
     TipoConn = Array("ADO", cARQ, "PGSQL")
   End If

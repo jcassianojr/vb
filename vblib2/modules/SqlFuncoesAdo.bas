@@ -435,6 +435,10 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   aARQ = TipoConn(cARQ)
   cARQCON = aARQ(1)
 
+  If aRETU(2) = "PGSQL" Then
+     cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
+  End If
+  
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
@@ -606,6 +610,10 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
   cARQ1 = aRETU(1)
   lOPEN = False
   lRSOP = False
+  
+   If aRETU(2) = "PGSQL" Then
+     cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
+  End If
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
@@ -725,12 +733,18 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim eVAL As Variant
   Dim oCOMANDO As ADODB.Command
   Dim cCOM As String
-
+  Dim aCON As Variant
 
   On Error GoTo errhandler
   ReDim aRETU(nITEM)
   lOPEN = False
   lRSOP = False
+  
+  aCON = TipoConn(cARQ, , , False)
+  
+   If aCON(2) = "PGSQL" Then
+     cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
+  End If
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient

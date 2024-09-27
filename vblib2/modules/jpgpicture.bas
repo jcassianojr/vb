@@ -103,6 +103,10 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
      End Select
   End If
   
+  If aRETU(2) = "PGSQL" Then
+     cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
+  End If
+
   
   '"select IMAGEM from imagens  WHERE CODIGO='" & ZGRP & "'"
   
@@ -206,6 +210,11 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
   If cWHERE = "" Then
     cSQL = "select " + cCAMPO + " from " + cTable + "  WHERE " & cWHERE
   End If
+  
+  If aRETU(2) = "PGSQL" Then
+     cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
+  End If
+  
   
   If cPICTURE.Picture.Height > 0 Then
      sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"

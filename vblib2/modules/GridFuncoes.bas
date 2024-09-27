@@ -124,6 +124,11 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
     cSQL = Replace(cSQL, "]", "")
   End If
 
+  If aRETU(2) = "PGSQL" Then
+     cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
+  End If
+
+
   Select Case aRETU(0)
   Case "ADO"
     Set oDB = New ADODB.Connection
@@ -296,6 +301,10 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
   aRETU = TipoConn(cARQ, , , False)
 
   cARQTMP = aRETU(1)
+
+  If aRETU(2) = "PGSQL" Then
+     cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
+  End If
 
 
 '  cARQTMP = GeracArq(cARQ, , False)
@@ -513,6 +522,10 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
 
   cARQTMP = aRETU(1)
   
+  
+  If aRETU(2) = "PGSQL" Then
+     cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
+  End If
   
 '  cARQTMP = GeracArq(cARQ, , False)
 
