@@ -128,6 +128,7 @@ cSQL = UCase(cSQL)
     cSQL = cSQL + Chr(34)
     cSQL = Replace(cSQL, Chr(39) + Chr(34), Chr(39))
     cSQL = Replace(cSQL, Chr(34) + Chr(34), Chr(34))
+    cSQL = Replace(cSQL, Chr(34) + "*" + Chr(34), "*") 'astericos nao requer double quotes
     
     SQLPGSQLDOUBLEQUOTES = cSQL
 End Function

@@ -511,19 +511,6 @@ Private Sub FilRelat()
   Else
     cSQL = cSQL & " ORDER BY " & cORDEM
   End If
-  'test pg ja nas montagrid
-  'If InStr(UCase(cARQ), ".PGSQL") > 0 Or InStr(UCase(cARQ), ".POSTGRESQL") > 0 Then
-   ' cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
-    'cSQL = UCase(cSQL)
-    'cSQL = Replace(cSQL, "  ", " ")
-    'cSQL = Replace(cSQL, " ,", ",")
-    'cSQL = Replace(cSQL, ", ", ",")
-    'cSQL = Replace(cSQL, "SELECT ", "SELECT " + Chr(34))
-    'cSQL = Replace(cSQL, ",", Chr(34) + "," + Chr(34))
-    'cSQL = Replace(cSQL, " FROM ", Chr(34) + " FROM " + Chr(34))
-    'cSQL = Replace(cSQL, " ORDER BY ", Chr(34) + " ORDER BY " + Chr(34))
-    'cSQL = cSQL + Chr(34)
-  'End If
   MontaGridFast Grid, 2, Array(4000, 1500), Array("Codigo", "Numero"), _
                  Array("L$CODIGO", "L$NUMERO"), cARQ, cSQL
 End Sub
@@ -534,6 +521,7 @@ Private Sub Novo_Click()
 
 
   cCODNEW = Busca("Digite o Codigo", "Incluindo", "_", 24)
+  cCODNEW = UCase(cCODNEW)
 
   SSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & cCODNEW & "'"
 

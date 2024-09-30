@@ -76,6 +76,8 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
   Dim sTEMPFILE As String
   Dim aRETU
   Dim cSQL As String
+  Dim mystream As New ADODB.Stream
+  mystream.Type = adTypeBinary
 
 
   On Error GoTo errhandler
@@ -107,10 +109,6 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
      cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
   End If
 
-  
-  '"select IMAGEM from imagens  WHERE CODIGO='" & ZGRP & "'"
-  
-
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
@@ -125,6 +123,17 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
     If Not IsNull(oRS(cCAMPO)) Then
     
        Select Case aRETU(2)
+         Case "MYSQL", "MARIADB", "PGSQL"
+               mystream.Open
+               mystream.Write oRS.Fields(0)
+               mystream.SaveToFile sTEMPFILE, adSaveCreateOverWrite
+               If FileExists(sTEMPFILE) Then
+                 eRETU01 = FileLen(sTEMPFILE)
+                 Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
+                 ADOPegBlob = True
+                 Kill sTEMPFILE
+              End If
+              mystream.Close
          Case "SQLITE"
               If FileExists(sTEMPFILE) Then
                  eRETU01 = FileLen(sTEMPFILE)
@@ -194,6 +203,8 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
   Dim aRETU
   Dim cCMD As String
   Dim cSQL As String
+  Dim mystream As New ADODB.Stream
+  mystream.Type = adTypeBinary
 
 
   On Error GoTo errhandler
@@ -207,12 +218,17 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
   lRSOP = False
 
   cSQL = cTable
-  If cWHERE = "" Then
+  If cWHERE <> "" Then
     cSQL = "select " + cCAMPO + " from " + cTable + "  WHERE " & cWHERE
   End If
   
+  If aRETU(2) = "MYSQL" Or aRETU(2) = "MYSQL" Then ' chave indice precisam estar o recordset
+      cSQL = "select * from " + cTable + "  WHERE " & cWHERE
+  End If
+  
   If aRETU(2) = "PGSQL" Then
-     cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
+      cSQL = "select * from " + Chr(34) + UCase(cTable) + Chr(34) + "  WHERE " + Chr(34) + cWHERE 'fazendo double quotes
+      cSQL = Replace(cSQL, "=", Chr(34) + "=")
   End If
   
   
@@ -241,6 +257,22 @@ Select Case aRETU(2)
           oCMD.CommandText = cCMD
           oCMD.Execute
           Set oCMD = Nothing
+     Case "MYSQL", "MARIADB", "PGSQL"
+        If FileExists(sTEMPFILE) Then
+          Set oRS = New ADODB.Recordset
+          oRS.Open cSQL, oDB, adOpenStatic, adLockOptimistic  ''adOpenStatic ADOPENKEYSET
+          lRSOP = True
+          If Not oRS.EOF Then
+             mystream.Open
+             mystream.LoadFromFile sTEMPFILE
+             oRS.Fields(cCAMPO) = mystream.Read
+             mystream.Close
+             oRS.Update
+             ADOGrvBlob = True
+          End If
+          DeleteFile sTEMPFILE, True
+          oRS.Close
+        End If
      Case Else
         Set oRS = New ADODB.Recordset
         oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic  ''adOpenStatic
