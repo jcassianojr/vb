@@ -1,0 +1,9 @@
+1. download zip from github
+2. open "Whole VBIDEUTILS.vbg" project
+3. File > Build all
+4. This will create about 15 files in the project directory, so sort by date and copy all of those new files
+5. Create folder "VBIDEUtils" ie. Program Files (x86)\Microsoft Visual Studio\VB98\Addins\VBIDEUtils
+6. paste those 15 files into that folder
+7. Use regsvr32 to register each of the three .dll and one .ocx out of the ones you copied
+8. back to VB6 - type ADDTOINI in Immediate Folder
+9. Exit VB6 - I didn't save changes to the project.

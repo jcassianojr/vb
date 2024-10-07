@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmFemeaApu 
    Caption         =   "Apuracao Femea"
    ClientHeight    =   6630
@@ -82,6 +82,7 @@ Begin VB.Form frmFemeaApu
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
+      ControlVersion  =   9
       TabCaption(0)   =   "SAC RDP FAIXAS"
       Tab(0).ControlCount=   22
       Tab(0).Control(0)=   "text(4)"
@@ -227,7 +228,6 @@ Begin VB.Form frmFemeaApu
          Width           =   7155
          _ExtentX        =   12621
          _ExtentY        =   4471
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid Grid10 
          Height          =   4335
@@ -238,7 +238,6 @@ Begin VB.Form frmFemeaApu
          Width           =   7635
          _ExtentX        =   13467
          _ExtentY        =   7646
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridOpe 
          Height          =   4335
@@ -249,7 +248,6 @@ Begin VB.Form frmFemeaApu
          Width           =   7635
          _ExtentX        =   13467
          _ExtentY        =   7646
-         _Version        =   393216
       End
       Begin XPControls.XPButton Cmdeditar 
          Height          =   435
@@ -718,7 +716,7 @@ Private Sub CmdApurar_Click(Index As Integer)
   Dim nFX05
   Dim nFX06
   Dim nFX07
-  Dim nFX08 As Long
+  'Dim nFX08 As Long
   Dim nINDICE
   Dim nSEQ
   Dim nMES
@@ -760,7 +758,7 @@ Private Sub CmdApurar_Click(Index As Integer)
   Dim cSQL
   Dim cTabela As String
   Dim cCODIGO As String
-  Dim lPULA As Variant
+'  Dim lPULA As Variant
   Dim dINI
   Dim dFIM As Date
   Dim lSAC
@@ -774,7 +772,7 @@ Private Sub CmdApurar_Click(Index As Integer)
   lRDP = False
   dINI = DTPicker1.Value
   dFIM = DTPicker2.Value
-  nSEQ = FixInt(tEXT(0))
+  nSEQ = FixInt(text(0))
   nMES = FixInt(mes.Value)
   nANO = FixInt(ano.Value)
 
@@ -819,7 +817,7 @@ Private Sub CmdApurar_Click(Index As Integer)
     While Not oRSFEMEA.EOF
       nPF = oRSFEMEA("PF")
       nPRONUM = FixNum(oRSFEMEA("PRONUM"))
-      DIZAPU.tEXT = nPF & "/" & nPRONUM
+      DIZAPU.text = nPF & "/" & nPRONUM
       DIZAPU.Refresh
       cSQL = "SELECT PF,PRONUM FROM FEMPF WHERE PF=" & nPF & " and pronum=" & nPRONUM
       oRSFEME2.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
@@ -843,7 +841,7 @@ Private Sub CmdApurar_Click(Index As Integer)
     oRSPF.Open cSQL, oDBPF
     While Not oRSPF.EOF
       nPF = oRSPF("PF")
-      DIZAPU.tEXT = nPF
+      DIZAPU.text = nPF
       DIZAPU.Refresh
       'cSQL = "DELETE FROM FEMEA WHERE PF=" & nPF
       cSQL = "DELETE FROM FEMEAPAD WHERE PF=" & nPF
@@ -916,14 +914,14 @@ Private Sub CmdApurar_Click(Index As Integer)
   'rpn faixas
   If MDG("Apurar Femea RPN-Faixas") Then
     '        cSQL = "SELECT PF,EXCRPN FROM PF WHERE PF=" & nPF checar excprn/bloqueados melhorar selects abaixo
-    tEXT(4) = 0
-    tEXT(5) = 0
-    tEXT(6) = 0
-    tEXT(7) = 0
-    tEXT(8) = 0
-    tEXT(9) = 0
-    tEXT(10) = 0
-    tEXT(11) = 0
+    text(4) = 0
+    text(5) = 0
+    text(6) = 0
+    text(7) = 0
+    text(8) = 0
+    text(9) = 0
+    text(10) = 0
+    text(11) = 0
 
     Set oDBFEMEA = New ADODB.Connection
     Set oRSFEMEA = New ADODB.Recordset
@@ -947,42 +945,42 @@ Private Sub CmdApurar_Click(Index As Integer)
       DizerBarra "carregando femea,indices <21"
       cSQL = "SELECT count(indris) FROM " & cTabela & " where indris<21 AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(4) = tEXT(4) + FixInt(oRSFEMEA(0))
+      text(4) = text(4) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >21 <41"
       cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>21 AND indris<41 AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(5) = tEXT(5) + FixInt(oRSFEMEA(0))
+      text(5) = text(5) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >40 <61"
       cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>40 AND indris<61 AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(6) = tEXT(6) + FixInt(oRSFEMEA(0))
+      text(6) = text(6) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >60 <81"
       cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>60 AND indris<81 AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(7) = tEXT(7) + FixInt(oRSFEMEA(0))
+      text(7) = text(7) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >80 <101"
       cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>80 AND indris<101 AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(8) = tEXT(8) + FixInt(oRSFEMEA(0))
+      text(8) = text(8) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >100 <121"
       cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>100 AND indris<121  AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(9) = tEXT(9) + FixInt(oRSFEMEA(0))
+      text(9) = text(9) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >120 <141"
       cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>120 AND indris<141  AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(10) = tEXT(10) + FixInt(oRSFEMEA(0))
+      text(10) = text(10) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >140"
       cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>140  AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(11) = tEXT(11) + FixInt(oRSFEMEA(0))
+      text(11) = text(11) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       oDBFEMEA.Close
     Next x
@@ -1109,7 +1107,7 @@ Private Sub CmdApurar_Click(Index As Integer)
     oRSSAC.Open cSQLSAC, oCONSAC, adOpenForwardOnly, adLockReadOnly
 
 
-    Barra.Value = 0
+    barra.Value = 0
     nBARPOS = 0
     nROWREC = oRSSAC.RecordCount
     oRSSAC.MoveFirst
@@ -1184,7 +1182,7 @@ Private Sub CmdApurar_Click(Index As Integer)
     oRSMSRD.Open cSQLMSRD, cARQ, adOpenForwardOnly, adLockReadOnly
     DizerBarra ""
 
-    Barra.Value = 0
+    barra.Value = 0
     nBARPOS = 0
     nROWREC = oRSMSRD.RecordCount
     oRSMSRD.MoveFirst
@@ -1262,7 +1260,7 @@ Private Sub CmdApurar_Click(Index As Integer)
     oRSPF.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
     DizerBarra ""
 
-    Barra.Value = 0
+    barra.Value = 0
     nBARPOS = 0
     nROWREC = oRSPF.RecordCount
     oRSPF.MoveFirst
@@ -1345,7 +1343,7 @@ Private Sub CmdApurar_Click(Index As Integer)
     oRSFEMEA.Open cSQL, oDBFEMEA, adOpenDynamic, adLockOptimistic
 
 
-    Barra.Value = 0
+    barra.Value = 0
     nBARPOS = 0
     nROWREC = oRSFEMEA.RecordCount
     oRSFEMEA.MoveFirst
@@ -1413,7 +1411,7 @@ Private Sub CmdApurar_Click(Index As Integer)
     Set oRSPF = New ADODB.Recordset
     oRSPF.Open cSQL, oDBPF, adOpenForwardOnly, adLockReadOnly
 
-    Barra.Value = 0
+    barra.Value = 0
     nBARPOS = 0
     nROWREC = oRSPF.RecordCount
     oRSPF.MoveFirst
@@ -1457,10 +1455,10 @@ Private Sub CmdApurar_Click(Index As Integer)
     oRSPF.Close
   End If
 
-  tEXT(12) = Today()
+  text(12) = Today()
   apurado = 1
   Screen.MousePointer = vbDefault
-  Barra.Value = 0
+  barra.Value = 0
   DIZAPU = " "
   DIZAPU.Refresh
   Filgrid
@@ -1643,7 +1641,7 @@ Private Sub Command3_Click()
   nPFTMP = FixInt(GridOpe)
   GridOpe.Col = 1
   nPROTMP = FixInt(GridOpe)
-  ePASS01 = "SELECT * FROM FEMRPNO WHERE SEQ=" & FixInt(tEXT(0)) & " AND PF=" & nPFTMP & " AND PRONUM=" & nPROTMP
+  ePASS01 = "SELECT * FROM FEMRPNO WHERE SEQ=" & FixInt(text(0)) & " AND PF=" & nPFTMP & " AND PRONUM=" & nPROTMP
   FrmFEMRPNO.Show vbModal, Me
 
 End Sub
@@ -1666,7 +1664,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 
   If MDG("Gravar e Sair", "Gravando ") Then
     For nITEM = 0 To 12
-      aVAL(nITEM) = tEXT(nITEM)
+      aVAL(nITEM) = text(nITEM)
     Next nITEM
     aVAL(13) = DTPicker1
     aVAL(14) = DTPicker2
@@ -1706,12 +1704,12 @@ Private Sub Form_Load()
   aPAD = Array(0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, "", "", "", False, False, False)
   aVAL = PegSQL(cARQFEMEA, cSQLUSO, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 12
-    tEXT(nITEM) = aVAL(nITEM)
+    text(nITEM) = aVAL(nITEM)
   Next nITEM
   If aVAL(13) <> "" Then DTPicker1 = aVAL(13)
   If aVAL(14) <> "" Then DTPicker2 = aVAL(14)
-  mes.Value = tEXT(1)
-  ano.Value = tEXT(2)
+  mes.Value = text(1)
+  ano.Value = text(2)
   Anual = aVAL(15)
   Semestral = aVAL(16)
   apurado = aVAL(17)
@@ -1748,7 +1746,7 @@ End Sub
 Private Sub filgrid10()
   Dim cSQL As String
   DizerBarra "Carregando RPNT"
-  cSQL = "SELECT TIPOAPU, PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU,50 FROM FEMRPNT WHERE SEQ=" & FixInt(tEXT(0)) & " ORDER BY INDRIS DESC"
+  cSQL = "SELECT TIPOAPU, PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU,50 FROM FEMRPNT WHERE SEQ=" & FixInt(text(0)) & " ORDER BY INDRIS DESC"
   MontaGrid Grid10, 11, Array(400, 400, 400, 400, 400, 400, 400, 400, 300, 2500, 2500), Array("TIPOAPU", "PF", "ITEM", "RPN", "Pro", "Fal", "Efe", "Cau", "Man", "Efeito", "Causa"), Array("TIPOAPU", "PF", "ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
@@ -1756,7 +1754,7 @@ End Sub
 Private Sub filgridope()
   Dim cSQL As String
   DizerBarra "Carregando RPNO"
-  cSQL = "SELECT PF, PRONUM, TOTRPN, TOTCAU, TOTM40, MAIRPN, TOTFX01, TOTFX02, TOTFX03, TOTRPN01, TOTRPN02, TOTRPN03 FROM FEMRPNO WHERE SEQ=" & FixInt(tEXT(0)) & " ORDER BY PF,PRONUM"
+  cSQL = "SELECT PF, PRONUM, TOTRPN, TOTCAU, TOTM40, MAIRPN, TOTFX01, TOTFX02, TOTFX03, TOTRPN01, TOTRPN02, TOTRPN03 FROM FEMRPNO WHERE SEQ=" & FixInt(text(0)) & " ORDER BY PF,PRONUM"
   MontaGridUltra GridOpe, 12, Array(500, 500, 800, 500, 500, 500, 500, 500, 500, 800, 800, 800), Array("PF", "Pro", "Tot RPN", "Cau", ">40", "Maior", "<40", "40-100", ">100", "Ant", "Ant", "Ant"), Array("PF", "PRONUM", "TOTRPN", "TOTCAU", "TOTM40", "MAIRPN", "TOTFX01", "TOTFX02", "TOTFX03", "TOTRPN01", "TOTRPN02", "TOTRPN03"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
@@ -1770,7 +1768,7 @@ Private Sub BARPOS()
   End If
   If nPOSATU > 0 And nPOSATU < 101 Then
     Debug.Print nPOSATU
-    Barra.Value = nPOSATU
+    barra.Value = nPOSATU
   End If
   DIZAPU.Refresh
 End Sub

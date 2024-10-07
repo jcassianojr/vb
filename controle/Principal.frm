@@ -332,7 +332,7 @@ Option Explicit
 Private Sub MDIForm_Load()
 
   Dim pICONES As String
-  Dim cLINHA As String
+ ' Dim cLINHA As String
   Dim nRETU As Variant
   Dim zMDBPATH As String
   Dim cmdline As String
@@ -584,7 +584,7 @@ Private Sub mnuSUBMENU3_Click(Index As Integer)
 End Sub
 
 Private Sub mnuSUBMENU4_Click(Index As Integer)
-  Dim cLINHA As String
+ ' Dim cLINHA As String
 
   ''todos usurios aceeos
   ''os que necessitam permissao case abaixo apos o check

@@ -651,494 +651,491 @@ End Function
 
 Private Sub cmdCompare_Click()
 
-  Text2.tEXT = ""
-  If Text1.tEXT = "" Then
-    MsgBox "Enter database name.", vbExclamation
-    Exit Sub
-  ElseIf FileExists(Text1.tEXT) = False Then
-    If iMode = 2 Then
+Text2.tEXT = ""
+If Text1.tEXT = "" Then
+   MsgBox "Enter database name.", vbExclamation
+   Exit Sub
+ElseIf FileExists(Text1.tEXT) = False Then
+   If iMode = 2 Then
       WriteErrLog "Unable to compare with master schema file. " & Text1.tEXT & " does not exist"
       End
-    Else
+   Else
       Text1.tEXT = ""
       lblStatus.Caption = "The database does not exist"
       Exit Sub
-    End If
-  End If
+   End If
+End If
 
-  If bFix = False Then
-    If chkNoMods.Value = False Then
+If bFix = False Then
+   If chkNoMods.Value = False Then
       If MsgBox("You are about to make changes to the database." & vbCrLf & "Do you want to continue?", vbYesNo + vbQuestion) = vbNo Then
-        Exit Sub
+         Exit Sub
       End If
-    End If
-  End If
+   End If
+End If
 
-  Dim S As String
-  Dim sPath As String
+Dim S As String
+Dim sPath As String
 
-  On Error Resume Next
+On Error Resume Next
 
-  If iMode = 0 Then
+If iMode = 0 Then
 
-    If bFix = False Then
+   If bFix = False Then
       S = Text1.tEXT
       S = Replace(S, ".mdb", "_Schema.mdb", 1, 1, vbTextCompare)
-    End If
+   End If
 
-    bFix = False
+   bFix = False
 
-    sPath = Text1.tEXT
-    sPath = Left(sPath, InStrRev(sPath, "\") - 1)
+   sPath = Text1.tEXT
+   sPath = Left(sPath, InStrRev(sPath, "\") - 1)
 
-    CDL1.CancelError = True
-    CDL1.DefaultExt = "mdb"
-    CDL1.InitDir = sPath
-    CDL1.Filter = "Microsoft Access (*.mdb)|*.mdb|All Files (*.*)|*.*"
-    CDL1.FileName = S
+   CDL1.CancelError = True
+   CDL1.DefaultExt = "mdb"
+   CDL1.InitDir = sPath
+   CDL1.Filter = "Microsoft Access (*.mdb)|*.mdb|All Files (*.*)|*.*"
+   CDL1.FileName = S
 
-    CDL1.ShowOpen
+   CDL1.ShowOpen
 
-    If Err.Number Then  'Cancel selected
+   If Err.Number Then  'Cancel selected
       Exit Sub
-    End If
+   End If
 
-    If LCase(Right(CDL1.FileName, 11)) <> "_schema.mdb" Then
+   If LCase(Right(CDL1.FileName, 11)) <> "_schema.mdb" Then
       MsgBox "The master schema database name must end with '_schema.mdb'.", vbExclamation
       Exit Sub
-    End If
+   End If
 
-    sSchemaDB = CDL1.FileName
+   sSchemaDB = CDL1.FileName
 
-  ElseIf FileExists(sSchemaDB) = False Then
-    If iMode = 2 Then
+ElseIf FileExists(sSchemaDB) = False Then
+   If iMode = 2 Then
       WriteErrLog "Master schema file " & sSchemaDB & " does not exist"
       End
-    Else
+   Else
       lblStatus.Caption = "The Master Schema Database does not exist"
       Exit Sub
-    End If
-  End If
+   End If
+End If
 
-  If StrComp(sSchemaDB, Text1.tEXT, vbTextCompare) = 0 Then
-    If iMode = 2 Then
+If StrComp(sSchemaDB, Text1.tEXT, vbTextCompare) = 0 Then
+   If iMode = 2 Then
       WriteErrLog "The master schema database cannot be the same file as the selected database"
       End
-    Else
+   Else
       MsgBox "The master schema database cannot be the same file as the selected database.", vbExclamation
       Exit Sub
-    End If
-  End If
+   End If
+End If
 
-  'open database
-  If chkNoMods.Value Then
-    'Open database to modify shared, not read-only
-    If Not OpenAllDB(sSchemaDB, False, False) Then
+'open database
+If chkNoMods.Value Then
+   'Open database to modify shared, not read-only
+   If Not OpenAllDB(sSchemaDB, False, False) Then
       Exit Sub
-    End If
-  Else
-    'Open database to modify exclusively, not read-only
-    If Not OpenAllDB(sSchemaDB, True, False) Then
+   End If
+Else
+   'Open database to modify exclusively, not read-only
+   If Not OpenAllDB(sSchemaDB, True, False) Then
       Exit Sub
-    End If
-  End If
+   End If
+End If
 
-  Dim rsloTb As Recordset
-  Dim rsloQy As Recordset
-  Dim rsloIx As Recordset
-  Dim rsClone As Recordset
-  Dim SQL As String
+Dim rsloTb As Recordset
+Dim rsloQy As Recordset
+Dim rsloIx As Recordset
+Dim rsClone As Recordset
+Dim SQL As String
 
-  Dim NewTable As TableDef
-  Dim NewField As Field
-  Dim NewQuery As QueryDef
-  Dim NewIndex As Index
-  Dim NewStat As String
+Dim NewTable As TableDef
+Dim NewField As Field
+Dim NewQuery As QueryDef
+Dim NewIndex As Index
+Dim NewStat As String
 
-  Dim isNewTable As Boolean
-  Dim isNewField As Boolean
-  Dim isNewIndex As Boolean
-  Dim isNewQuery As Boolean
-  Dim blnNoMods As Boolean
-  Dim srIgnore As String
-  Dim bCorrupt As Boolean
+Dim isNewTable As Boolean
+'Dim isNewField As Boolean
+'Dim isNewIndex As Boolean
+'Dim isNewQuery As Boolean
+Dim blnNoMods As Boolean
+Dim srIgnore As String
+Dim bCorrupt As Boolean
 
-  On Error GoTo Err
+On Error GoTo Err
 
-  Screen.MousePointer = vbHourglass
+Screen.MousePointer = vbHourglass
 
-  DisableControls
+DisableControls
 
-  lblStatus.Caption = "Comparing..."
-  lblStatus.Refresh
+lblStatus.Caption = "Comparing..."
+lblStatus.Refresh
 
-  blnNoMods = chkNoMods.Value
+blnNoMods = chkNoMods.Value
 
-  'Status set to NEW
-  dbTemp.Execute "update myTABLE set [status] = 'NEW'"
-  dbTemp.Execute "update myINDEX set [status] = 'NEW'"
-  dbTemp.Execute "update myQUERY set [status] = 'NEW'"
+'Status set to NEW
+dbTemp.Execute "update myTABLE set [status] = 'NEW'"
+dbTemp.Execute "update myINDEX set [status] = 'NEW'"
+dbTemp.Execute "update myQUERY set [status] = 'NEW'"
 
-  Set rsloTb = dbTemp.OpenRecordset("select * from myTABLE")
-  Set rsloQy = dbTemp.OpenRecordset("select * from myQUERY")
-  Set rsloIx = dbTemp.OpenRecordset("select * from myINDEX")
+Set rsloTb = dbTemp.OpenRecordset("select * from myTABLE")
+Set rsloQy = dbTemp.OpenRecordset("select * from myQUERY")
+Set rsloIx = dbTemp.OpenRecordset("select * from myINDEX")
 
-  Dim i%, J%, K%, l%, mPB1%, mPB2%
-  DoEvents
-  putText "Checking..."
+Dim i%, J%, K%, l%, mPB1%, mPB2%
+DoEvents
+putText "Checking..."
 
-  ' Checking index and TableDef
-  For i = 0 To dbx.TableDefs.Count - 1
+' Checking index and TableDef
+For i = 0 To dbx.TableDefs.Count - 1
 
-    PB1.Value = i / dbx.TableDefs.Count * 40
-    DoEvents
+   PB1.Value = i / dbx.TableDefs.Count * 40
+   DoEvents
 
-    If dbx.TableDefs(i).Updatable = False Then  'this causes linked tables to be ignored
+   If dbx.TableDefs(i).Updatable = False Then  'this causes linked tables to be ignored
       putText dbx.TableDefs(i).Name & " is not updateable thus is ignored. May be a linked table."
       srIgnore = srIgnore & " " & dbx.TableDefs(i).Name
-    Else
+   Else
 
       'MsgBox dbx.TableDefs(i).Updatable, vbOKOnly, dbx.TableDefs(i).Name
 
       'Ignore system files
       If LCase(Mid(dbx.TableDefs(i).Name, 1, 4)) <> "msys" Then
-        If rsloTb.RecordCount > 0 Then
-          For J = 0 To dbx.TableDefs(i).Fields.Count - 1
-            rsloTb.FindFirst _
-              " [TableName] = '" & dbx.TableDefs(i).Name & "' and " & _
-                               " [FieldName] = '" & dbx.TableDefs(i).Fields(J).Name & "'"
-            rsloTb.Edit
-            If Not rsloTb.NoMatch Then
-              NewStat = "-----"
-              If rsloTb("FieldType") <> dbx.TableDefs(i).Fields(J).Type Then NewStat = UpdNewStat(NewStat, 1)
-              If rsloTb("Attributes") <> dbx.TableDefs(i).Fields(J).Attributes Then NewStat = UpdNewStat(NewStat, 2)
-              'If rsloTb("Required") <> dbx.TableDefs(i).Fields(j).Required Then NewStat = UpdNewStat(NewStat, 3)
-              If rsloTb("Size") <> dbx.TableDefs(i).Fields(J).Size Then NewStat = UpdNewStat(NewStat, 4)
-              If rsloTb("AllowZeroLength") <> dbx.TableDefs(i).Fields(J).AllowZeroLength Then NewStat = UpdNewStat(NewStat, 5)
-              rsloTb("Status") = NewStat
-            End If
-            rsloTb.Update
-          Next  'j
-        End If
+         If rsloTb.RecordCount > 0 Then
+            For J = 0 To dbx.TableDefs(i).Fields.Count - 1
+               rsloTb.FindFirst _
+                  " [TableName] = '" & dbx.TableDefs(i).Name & "' and " & _
+                  " [FieldName] = '" & dbx.TableDefs(i).Fields(J).Name & "'"
+               rsloTb.Edit
+               If Not rsloTb.NoMatch Then
+                  NewStat = "-----"
+                  If rsloTb("FieldType") <> dbx.TableDefs(i).Fields(J).Type Then NewStat = UpdNewStat(NewStat, 1)
+                  If rsloTb("Attributes") <> dbx.TableDefs(i).Fields(J).Attributes Then NewStat = UpdNewStat(NewStat, 2)
+                  'If rsloTb("Required") <> dbx.TableDefs(i).Fields(j).Required Then NewStat = UpdNewStat(NewStat, 3)
+                  If rsloTb("Size") <> dbx.TableDefs(i).Fields(J).Size Then NewStat = UpdNewStat(NewStat, 4)
+                  If rsloTb("AllowZeroLength") <> dbx.TableDefs(i).Fields(J).AllowZeroLength Then NewStat = UpdNewStat(NewStat, 5)
+                  rsloTb("Status") = NewStat
+               End If
+               rsloTb.Update
+            Next  'j
+         End If
 
-        If rsloIx.RecordCount > 0 Then
-          For J = 0 To dbx.TableDefs(i).Indexes.Count - 1
-            rsloIx.FindFirst _
-              " [TableName] = '" & dbx.TableDefs(i).Name & "' and " & _
-                               " [IndexName] = '" & dbx.TableDefs(i).Indexes(J).Name & "'"
-            rsloIx.Edit
-            'If dbx.TableDefs(i).Indexes(j).Name = "Doc Id" Then
-            'Debug.Print "Sa"
-            'End If
-            If Not rsloIx.NoMatch Then
-              NewStat = "-----"
-              If UCase(rsloIx("Fields")) <> UCase(dbx.TableDefs(i).Indexes(J).Fields) Then NewStat = UpdNewStat(NewStat, 1)
-              If rsloIx("Primary") <> dbx.TableDefs(i).Indexes(J).Primary Then NewStat = UpdNewStat(NewStat, 2)
-              If rsloIx("Unique") <> dbx.TableDefs(i).Indexes(J).Unique Then NewStat = UpdNewStat(NewStat, 3)
-              rsloIx("Status") = NewStat
-            End If
-            rsloIx.Update
-          Next  'j
-        End If
+         If rsloIx.RecordCount > 0 Then
+            For J = 0 To dbx.TableDefs(i).Indexes.Count - 1
+               rsloIx.FindFirst _
+                  " [TableName] = '" & dbx.TableDefs(i).Name & "' and " & _
+                  " [IndexName] = '" & dbx.TableDefs(i).Indexes(J).Name & "'"
+               rsloIx.Edit
+               'If dbx.TableDefs(i).Indexes(j).Name = "Doc Id" Then
+               'Debug.Print "Sa"
+               'End If
+               If Not rsloIx.NoMatch Then
+                  NewStat = "-----"
+                  If UCase(rsloIx("Fields")) <> UCase(dbx.TableDefs(i).Indexes(J).Fields) Then NewStat = UpdNewStat(NewStat, 1)
+                  If rsloIx("Primary") <> dbx.TableDefs(i).Indexes(J).Primary Then NewStat = UpdNewStat(NewStat, 2)
+                  If rsloIx("Unique") <> dbx.TableDefs(i).Indexes(J).Unique Then NewStat = UpdNewStat(NewStat, 3)
+                  rsloIx("Status") = NewStat
+               End If
+               rsloIx.Update
+            Next  'j
+         End If
       End If
 
-    End If
+   End If
 
-  Next i
+Next i
 
-  ' 10%
-  If rsloQy.RecordCount > 0 Then
-    For i = 0 To dbx.QueryDefs.Count - 1
+' 10%
+If rsloQy.RecordCount > 0 Then
+   For i = 0 To dbx.QueryDefs.Count - 1
       PB1.Value = i / dbx.QueryDefs.Count * 10 + 40
       DoEvents
       rsloQy.FindFirst _
-        " [QueryName] = '" & dbx.QueryDefs(i).Name & "'"
+         " [QueryName] = '" & dbx.QueryDefs(i).Name & "'"
       rsloQy.Edit
 
       If Not rsloQy.NoMatch Then
-        NewStat = "-----"
-        If rsloQy!QueryDef <> dbx.QueryDefs(i).SQL Then NewStat = "U"
-        rsloQy("Status") = NewStat
+         NewStat = "-----"
+         If rsloQy!QueryDef <> dbx.QueryDefs(i).SQL Then NewStat = "U"
+         rsloQy("Status") = NewStat
       End If
       rsloQy.Update
-    Next
-  End If
+   Next
+End If
 
-  '------------------------------------------------------------------
-  ' Fix the database
-  ' Progress Bar 30% untuk tabledef
-  putText "Comparing Table Definitions..."
-  Set rsClone = rsloTb.Clone
-  If rsloTb.RecordCount > 0 Then
-    rsloTb.MoveFirst
-    rsloTb.MoveLast
-    mPB1 = rsloTb.RecordCount
-    rsloTb.MoveFirst
-    mPB2 = 0
+'------------------------------------------------------------------
+' Fix the database
+' Progress Bar 30% untuk tabledef
+putText "Comparing Table Definitions..."
+Set rsClone = rsloTb.Clone
+If rsloTb.RecordCount > 0 Then
+   rsloTb.MoveFirst
+   rsloTb.MoveLast
+   mPB1 = rsloTb.RecordCount
+   rsloTb.MoveFirst
+   mPB2 = 0
 
-    Do While Not rsloTb.EOF
+   Do While Not rsloTb.EOF
       isNewTable = False
       mPB2 = mPB2 + 1
       PB1.Value = 50 + mPB2 / mPB1 * 40
       DoEvents
       If rsloTb("Status") = "NEW" Then
-        ' New field or new Table
-        isNewTable = True
-        For i = 0 To dbx.TableDefs.Count - 1
-          If dbx.TableDefs(i).Name = rsloTb!TableName Then isNewTable = False
-        Next
+         ' New field or new Table
+         isNewTable = True
+         For i = 0 To dbx.TableDefs.Count - 1
+            If dbx.TableDefs(i).Name = rsloTb!TableName Then isNewTable = False
+         Next
 
+         If isNewTable Then
+            bCorrupt = True
+            isNewTable = True
+            Set NewTable = Nothing
+            Set NewTable = dbx.CreateTableDef(rsloTb!TableName)
+            putText " Create Table: " & rsloTb!TableName
+         Else
+            Set NewTable = Nothing
+            Set NewTable = dbx.TableDefs(rsloTb!TableName)
+         End If
 
-        If isNewTable Then
-          bCorrupt = True
-          isNewTable = True
-          Set NewTable = Nothing
-          Set NewTable = dbx.CreateTableDef(rsloTb!TableName)
-          putText " Create Table: " & rsloTb!TableName
-        Else
-          Set NewTable = Nothing
-          Set NewTable = dbx.TableDefs(rsloTb!TableName)
-        End If
+         If NewTable.Updatable Then
 
+            bCorrupt = True
+            putText " Create Field: " & rsloTb!TableName & "." & rsloTb!FieldName
 
-        If NewTable.Updatable Then
-
-          bCorrupt = True
-          putText " Create Field: " & rsloTb!TableName & "." & rsloTb!FieldName
-
-
-          Set NewField = Nothing
-          Set NewField = NewTable.CreateField(rsloTb!FieldName)
-          NewField.Type = rsloTb!FieldType
-          NewField.Attributes = rsloTb!Attributes
-          NewField.Size = rsloTb![Size]
-          NewField.OrdinalPosition = rsloTb!SeqNum
-
-          If blnNoMods = False Then
-
-            If rsloTb!FieldType = 10 Then NewField.AllowZeroLength = rsloTb![AllowZeroLength]
-
-            NewTable.Fields.Append NewField
-
-            If isNewTable Then dbx.TableDefs.Append NewTable
-            ' Assign new field
-            If rsloTb!FieldType = 1 Or rsloTb!FieldType = 4 Or rsloTb!FieldType = 5 Then
-              SQL = "update [" & rsloTb!TableName & "] set [" & rsloTb!FieldName & "] = 0"
-              dbx.Execute SQL
-            ElseIf rsloTb!FieldType = 10 Then
-              If IsNull(rsloTb!DefaultValue) Or rsloTb!DefaultValue = "" Then
-                SQL = "update [" & rsloTb!TableName & "] set [" & rsloTb!FieldName & "] = ''"
-              Else
-                SQL = "update [" & rsloTb!TableName & "] set [" & rsloTb!FieldName & "] = " & rsloTb!DefaultValue & ""
-              End If
-              dbx.Execute SQL
-            End If
-
-          End If
-
-        End If
-
-      ElseIf rsloTb!Status <> "-----" Then
-        bCorrupt = True
-        putText " Update Field: " & rsloTb!TableName & "." & rsloTb!FieldName
-
-        ' Update field
-        ' Cannot do update field properties,
-        ' so the tricks is rename oldfield, create new field
-        ' and move the content from oldfield to newfield then delete oldfield
-
-        If blnNoMods = False Then
-
-          Set NewTable = Nothing
-          Set NewTable = dbx.TableDefs(rsloTb!TableName)
-
-          If NewTable.Updatable Then
-
-            ' Maybe indexes use that field, so delete indexe, later create again
-            On Error Resume Next
-            For l = 0 To dbx.TableDefs(rsloTb!TableName).Indexes.Count - 1
-              NewTable.Indexes.Delete dbx.TableDefs(rsloTb!TableName).Indexes(l).Name
-            Next l
-
-            'rename
-            Set NewField = Nothing
-            Set NewField = NewTable.Fields(rsloTb!FieldName)
-            NewField.Name = rsloTb!FieldName & "_x"
-
-            'create new
             Set NewField = Nothing
             Set NewField = NewTable.CreateField(rsloTb!FieldName)
             NewField.Type = rsloTb!FieldType
             NewField.Attributes = rsloTb!Attributes
             NewField.Size = rsloTb![Size]
-            If rsloTb!FieldType = 10 Then NewField.AllowZeroLength = rsloTb![AllowZeroLength]
             NewField.OrdinalPosition = rsloTb!SeqNum
-            NewTable.Fields.Append NewField
 
-            ' copying content
-            SQL = "update [" & rsloTb!TableName & "] set [" & rsloTb!FieldName & "] = [" & rsloTb!FieldName & "_x]"
-            dbx.Execute SQL
+            If blnNoMods = False Then
 
-            ' delete old field
-            NewTable.Fields.Delete rsloTb!FieldName & "_x"
+               If rsloTb!FieldType = 10 Then NewField.AllowZeroLength = rsloTb![AllowZeroLength]
 
-          End If
+               NewTable.Fields.Append NewField
 
-        End If
+               If isNewTable Then dbx.TableDefs.Append NewTable
+               ' Assign new field
+               If rsloTb!FieldType = 1 Or rsloTb!FieldType = 4 Or rsloTb!FieldType = 5 Then
+                  SQL = "update [" & rsloTb!TableName & "] set [" & rsloTb!FieldName & "] = 0"
+                  dbx.Execute SQL
+               ElseIf rsloTb!FieldType = 10 Then
+                  If IsNull(rsloTb!DefaultValue) Or rsloTb!DefaultValue = "" Then
+                     SQL = "update [" & rsloTb!TableName & "] set [" & rsloTb!FieldName & "] = ''"
+                  Else
+                     SQL = "update [" & rsloTb!TableName & "] set [" & rsloTb!FieldName & "] = " & rsloTb!DefaultValue & ""
+                  End If
+                  dbx.Execute SQL
+               End If
 
-        On Error GoTo Err
+            End If
+
+         End If
+
+      ElseIf rsloTb!Status <> "-----" Then
+         bCorrupt = True
+         putText " Update Field: " & rsloTb!TableName & "." & rsloTb!FieldName
+
+         ' Update field
+         ' Cannot do update field properties,
+         ' so the tricks is rename oldfield, create new field
+         ' and move the content from oldfield to newfield then delete oldfield
+
+         If blnNoMods = False Then
+
+            Set NewTable = Nothing
+            Set NewTable = dbx.TableDefs(rsloTb!TableName)
+
+            If NewTable.Updatable Then
+
+               ' Maybe indexes use that field, so delete indexe, later create again
+               On Error Resume Next
+               For l = 0 To dbx.TableDefs(rsloTb!TableName).Indexes.Count - 1
+                  NewTable.Indexes.Delete dbx.TableDefs(rsloTb!TableName).Indexes(l).Name
+               Next l
+
+               'rename
+               Set NewField = Nothing
+               Set NewField = NewTable.Fields(rsloTb!FieldName)
+               NewField.Name = rsloTb!FieldName & "_x"
+
+               'create new
+               Set NewField = Nothing
+               Set NewField = NewTable.CreateField(rsloTb!FieldName)
+               NewField.Type = rsloTb!FieldType
+               NewField.Attributes = rsloTb!Attributes
+               NewField.Size = rsloTb![Size]
+               If rsloTb!FieldType = 10 Then NewField.AllowZeroLength = rsloTb![AllowZeroLength]
+               NewField.OrdinalPosition = rsloTb!SeqNum
+               NewTable.Fields.Append NewField
+
+               ' copying content
+               SQL = "update [" & rsloTb!TableName & "] set [" & rsloTb!FieldName & "] = [" & rsloTb!FieldName & "_x]"
+               dbx.Execute SQL
+
+               ' delete old field
+               NewTable.Fields.Delete rsloTb!FieldName & "_x"
+
+            End If
+
+         End If
+
+         On Error GoTo Err
       End If
       rsloTb.Edit
       rsloTb("Status") = rsloTb("Status") & "  DONE"
       rsloTb.Update
       rsloTb.MoveNext
-    Loop
-  Else
-    PB1.Value = 80
-    DoEvents
-  End If
+   Loop
+Else
+   PB1.Value = 80
+   DoEvents
+End If
 
-  putText "Comparing Index Definitions..."
-  'open database
-  If chkNoMods.Value Then
-    'Open database to modify shared, read-only
-    If Not OpenAllDB(sSchemaDB, False, True) Then
+putText "Comparing Index Definitions..."
+'open database
+If chkNoMods.Value Then
+   'Open database to modify shared, read-only
+   If Not OpenAllDB(sSchemaDB, False, True) Then
       EnableControls
       lblStatus.Caption = "Unable to open databases"
       Exit Sub
-    End If
-  Else
-    'Open database to modify exclusively, not read-only
-    If Not OpenAllDB(sSchemaDB, True, False) Then
+   End If
+Else
+   'Open database to modify exclusively, not read-only
+   If Not OpenAllDB(sSchemaDB, True, False) Then
       EnableControls
       lblStatus.Caption = "Unable to open databases"
       Exit Sub
-    End If
-  End If
+   End If
+End If
 
-  Set rsloTb = dbTemp.OpenRecordset("select * from myTABLE")
-  Set rsloQy = dbTemp.OpenRecordset("select * from myQUERY")
-  Set rsloIx = dbTemp.OpenRecordset("select * from myINDEX")
+Set rsloTb = dbTemp.OpenRecordset("select * from myTABLE")
+Set rsloQy = dbTemp.OpenRecordset("select * from myQUERY")
+Set rsloIx = dbTemp.OpenRecordset("select * from myINDEX")
 
-  If rsloIx.RecordCount > 0 Then
-    rsloIx.MoveFirst
-    rsloIx.MoveLast
-    mPB1 = rsloIx.RecordCount
-    mPB2 = 0
-    rsloIx.MoveFirst
-    Do While Not rsloIx.EOF
+If rsloIx.RecordCount > 0 Then
+   rsloIx.MoveFirst
+   rsloIx.MoveLast
+   mPB1 = rsloIx.RecordCount
+   mPB2 = 0
+   rsloIx.MoveFirst
+   Do While Not rsloIx.EOF
       mPB2 = mPB2 + 1
       PB1.Value = 80 + mPB2 / mPB1 * 10
       DoEvents
       If rsloIx("Status") <> "-----" Then
-        'New atau update
-        'If update state just delete index and create new index
-        'Set NewTable = Nothing
-        Set NewTable = dbx.TableDefs(rsloIx!TableName)
-        If InStr(1, srIgnore, NewTable.Name, vbTextCompare) Then
-          'MsgBox "ignore"
-        Else
+         'New atau update
+         'If update state just delete index and create new index
+         'Set NewTable = Nothing
+         Set NewTable = dbx.TableDefs(rsloIx!TableName)
+         If InStr(1, srIgnore, NewTable.Name, vbTextCompare) Then
+            'MsgBox "ignore"
+         Else
 
-          If rsloIx("Status") <> "NEW" Then
-            bCorrupt = True
-            putText " Update Index: " & rsloIx!TableName & "." & rsloIx!Indexname
-            ' Delete old index, later create new index
-            If blnNoMods = False Then
-              NewTable.Indexes.Delete rsloIx!Indexname
+            If rsloIx("Status") <> "NEW" Then
+               bCorrupt = True
+               putText " Update Index: " & rsloIx!TableName & "." & rsloIx!Indexname
+               ' Delete old index, later create new index
+               If blnNoMods = False Then
+                  NewTable.Indexes.Delete rsloIx!Indexname
+               End If
+            Else
+               bCorrupt = True
+               putText " Create Index: " & rsloIx!TableName & "." & rsloIx!Indexname
             End If
-          Else
-            bCorrupt = True
-            putText " Create Index: " & rsloIx!TableName & "." & rsloIx!Indexname
-          End If
 
-          Set NewIndex = Nothing
-          If blnNoMods = False Then
-            Set NewIndex = NewTable.CreateIndex(rsloIx!Indexname)
-            NewIndex.Fields = rsloIx("Fields")
-            NewIndex.Primary = rsloIx("Primary")
-            NewIndex.Unique = rsloIx("Unique")
-            'set newindex
-            dbx.TableDefs(rsloIx!TableName).Indexes.Append NewIndex
-          End If
+            Set NewIndex = Nothing
+            If blnNoMods = False Then
+               Set NewIndex = NewTable.CreateIndex(rsloIx!Indexname)
+               NewIndex.Fields = rsloIx("Fields")
+               NewIndex.Primary = rsloIx("Primary")
+               NewIndex.Unique = rsloIx("Unique")
+               'set newindex
+               dbx.TableDefs(rsloIx!TableName).Indexes.Append NewIndex
+            End If
 
-        End If
+         End If
 
       End If
       rsloIx.MoveNext
-    Loop
-  Else
-    PB1.Value = 90
-    DoEvents
-  End If
+   Loop
+Else
+   PB1.Value = 90
+   DoEvents
+End If
 
-  putText "Comparing Query Definitions..."
-  ' Progress bar = 10%
-  If rsloQy.RecordCount > 0 Then
-    rsloQy.MoveFirst
-    rsloQy.MoveLast
-    mPB1 = rsloQy.RecordCount
-    mPB2 = 0
-    rsloQy.MoveFirst
-    Do While Not rsloQy.EOF
+putText "Comparing Query Definitions..."
+' Progress bar = 10%
+If rsloQy.RecordCount > 0 Then
+   rsloQy.MoveFirst
+   rsloQy.MoveLast
+   mPB1 = rsloQy.RecordCount
+   mPB2 = 0
+   rsloQy.MoveFirst
+   Do While Not rsloQy.EOF
       mPB2 = mPB2 + 1
       PB1.Value = 90 + mPB2 / mPB1 * 10
       DoEvents
       If rsloQy("Status") <> "-----" Then
-        If rsloQy("Status") <> "NEW" Then
-          ' If query is different, just delete it
-          bCorrupt = True
-          putText " Update Query: " & rsloQy!QueryName
-          If blnNoMods = False Then
-            dbx.QueryDefs.Delete rsloQy!QueryName
-          End If
-        Else
-          bCorrupt = True
-          putText " Create Query: " & rsloQy!QueryName
-        End If
-        Set NewQuery = Nothing
-        If blnNoMods = False Then
-          Set NewQuery = dbx.CreateQueryDef(rsloQy!QueryName, rsloQy!QueryDef)
-        End If
+         If rsloQy("Status") <> "NEW" Then
+            ' If query is different, just delete it
+            bCorrupt = True
+            putText " Update Query: " & rsloQy!QueryName
+            If blnNoMods = False Then
+               dbx.QueryDefs.Delete rsloQy!QueryName
+            End If
+         Else
+            bCorrupt = True
+            putText " Create Query: " & rsloQy!QueryName
+         End If
+         Set NewQuery = Nothing
+         If blnNoMods = False Then
+            Set NewQuery = dbx.CreateQueryDef(rsloQy!QueryName, rsloQy!QueryDef)
+         End If
       End If
       rsloQy.MoveNext
-    Loop
-  Else
-    PB1.Value = 100
-    DoEvents
-  End If
-  putText "Finished."
+   Loop
+Else
+   PB1.Value = 100
+   DoEvents
+End If
+putText "Finished."
 
-  'On Error GoTo 0
+'On Error GoTo 0
 
-  '  db.Relations.Delete "CategoriesProducts"
+'  db.Relations.Delete "CategoriesProducts"
 
-  '   Set rel = db.CreateRelation()
-  '   rel.Name = "CategoriesProducts"
-  '   rel.Table = "Categories"
-  '   rel.ForeignTable = "Products"
-  '
-  '   ' Specify cascading updates and deletes
-  '   rel.Attributes = dbRelationUpdateCascade Or _
-      '      dbRelationDeleteCascade
-  '
-  '   ' Create the field the tables are related on
-  '   Set fld = rel.CreateField("CategoryId")
-  '   ' Set ForeignName property of the field to the name of
-  '   ' the corresponding field in the primary table
-  '   fld.ForeignName = "CategoryId"
-  '
-  '   rel.Fields.Append fld
-  '
-  '   ' Append the relation to the collection
-  '   db.Relations.Append rel
+'   Set rel = db.CreateRelation()
+'   rel.Name = "CategoriesProducts"
+'   rel.Table = "Categories"
+'   rel.ForeignTable = "Products"
+'
+'   ' Specify cascading updates and deletes
+'   rel.Attributes = dbRelationUpdateCascade Or _
+'      dbRelationDeleteCascade
+'
+'   ' Create the field the tables are related on
+'   Set fld = rel.CreateField("CategoryId")
+'   ' Set ForeignName property of the field to the name of
+'   ' the corresponding field in the primary table
+'   fld.ForeignName = "CategoryId"
+'
+'   rel.Fields.Append fld
+'
+'   ' Append the relation to the collection
+'   db.Relations.Append rel
 
-  SQL = Format(Now, "hhmmss")
+SQL = Format(Now, "hhmmss")
 
-  If bRel = True And blnNoMods = False Then  'Add relationships
-    'dbx.Execute "DELETE FROM MSysRelationships"
+If bRel = True And blnNoMods = False Then  'Add relationships
+   'dbx.Execute "DELETE FROM MSysRelationships"
 
-    'For i = 0 To UBound(oRels)
-    For i = 0 To UBound(RelData)
+   'For i = 0 To UBound(oRels)
+   For i = 0 To UBound(RelData)
 
       'Set oRel = dbx.CreateRelation()
       'oRel.Name = "CategoriesProducts"
@@ -1154,9 +1151,9 @@ Private Sub cmdCompare_Click()
 
       'append fields
       For J = 0 To UBound(RelData(i).sField)
-        Set fld = oRel.CreateField(RelData(i).sField(J))
-        fld.ForeignName = RelData(i).sFField(J)
-        oRel.Fields.Append fld
+         Set fld = oRel.CreateField(RelData(i).sField(J))
+         fld.ForeignName = RelData(i).sFField(J)
+         oRel.Fields.Append fld
       Next
 
       'Set fld = oRel.CreateField(sField(i))
@@ -1167,61 +1164,61 @@ Private Sub cmdCompare_Click()
 
       'oRel.Fields.Append fld
       dbx.Relations.Append oRel
-    Next
-    Set oRel = Nothing
-    Set fld = Nothing
-    'Erase oRels
-    'Erase sRelation
-    'Erase sTable
-    'Erase sFTable
-    'Erase lAttr
-    'Erase sField
-    Erase RelData
-    bRel = False
-  End If
+   Next
+   Set oRel = Nothing
+   Set fld = Nothing
+   'Erase oRels
+   'Erase sRelation
+   'Erase sTable
+   'Erase sFTable
+   'Erase lAttr
+   'Erase sField
+   Erase RelData
+   bRel = False
+End If
 
-  CloseAllDB
+CloseAllDB
 
-  lblStatus.Caption = "Database compared to master schema database"
+lblStatus.Caption = "Database compared to master schema database"
 
-  If bCorrupt Then
-    i = FreeFile
-    NewStat = sAppPath & "results.txt"
-    Open NewStat For Output As #i
-    Print #i, Format(Now, "mm/dd/yyyy hh:mm:ss am/pm")
-    Print #i, "Database: " & Text1.tEXT
-    Print #i, "Schema: " & sSchemaDB
-    Print #i, Text2.tEXT
-    Close #i
-  End If
+If bCorrupt Then
+   i = FreeFile
+   NewStat = sAppPath & "results.txt"
+   Open NewStat For Output As #i
+   Print #i, Format(Now, "mm/dd/yyyy hh:mm:ss am/pm")
+   Print #i, "Database: " & Text1.tEXT
+   Print #i, "Schema: " & sSchemaDB
+   Print #i, Text2.tEXT
+   Close #i
+End If
 
-  EnableControls
+EnableControls
 
-  Screen.MousePointer = vbNormal
+Screen.MousePointer = vbNormal
 
-  If bCorrupt Then
-    If FileExists(NewStat) Then
+If bCorrupt Then
+   If FileExists(NewStat) Then
       Shell "notepad.exe " & NewStat, vbNormalFocus
-    End If
-  End If
+   End If
+End If
 
-  If iMode = 2 Then
-    End
-  End If
+If iMode = 2 Then
+   End
+End If
 
-  Exit Sub
+Exit Sub
 
 Err:
-  If iMode = 2 Then
-    WriteErrLog Err.Number & " : " & Err.Description
-  ElseIf Err.Number = 3265 Or Err.Number = 3113 Then
-    '3265: ignore item not found in this collection error
-    '3113: Field not updatable
-  Else
-    Text2.tEXT = Text2.tEXT & vbCrLf & "ERROR " & CStr(Err.Number) & " : " & Err.Description & vbCrLf
-  End If
-  Resume Next
-  'End If
+If iMode = 2 Then
+   WriteErrLog Err.Number & " : " & Err.Description
+ElseIf Err.Number = 3265 Or Err.Number = 3113 Then
+   '3265: ignore item not found in this collection error
+   '3113: Field not updatable
+Else
+   Text2.tEXT = Text2.tEXT & vbCrLf & "ERROR " & CStr(Err.Number) & " : " & Err.Description & vbCrLf
+End If
+Resume Next
+'End If
 End Sub
 
 Private Sub Command2_Click()
@@ -1242,7 +1239,7 @@ Private Sub Command2_Click()
   Dim strrepaired As String
   Dim SQL As String
   Dim strTable As String
-  Dim ws As Workspace
+ ' Dim ws As Workspace
   Dim strPath As String
   Dim lItem
 
@@ -1341,7 +1338,7 @@ Private Sub Command2_Click()
     Exit Sub
   Else
     Load frmProgress
-    frmProgress.ListView1.ColumnHeaders.Add , , "Table Name", 5000, lvwColumnLeft
+    frmProgress.ListView1.ColumnHeaders.Add , , "Table Name", 5000, LvwColumnHeaderAlignmentLeft
     'populate list
     For i = 0 To dbTemp.TableDefs.Count - 1
       strTable = dbTemp.TableDefs(i).Name

@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmPCS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFS"
@@ -121,6 +121,7 @@ Begin VB.Form frmPCS
       EndProperty
       TabsPerRow      =   4
       TabHeight       =   520
+      ControlVersion  =   9
       TabCaption(0)   =   "Plano Controle"
       Tab(0).ControlCount=   15
       Tab(0).Control(0)=   "TxtItem"
@@ -485,7 +486,6 @@ Begin VB.Form frmPCS
          Width           =   8295
          _ExtentX        =   14631
          _ExtentY        =   5530
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridPla 
          Height          =   2895
@@ -496,7 +496,6 @@ Begin VB.Form frmPCS
          Width           =   7095
          _ExtentX        =   12515
          _ExtentY        =   5106
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridPla 
          Height          =   2895
@@ -507,7 +506,6 @@ Begin VB.Form frmPCS
          Width           =   7095
          _ExtentX        =   12515
          _ExtentY        =   5106
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridPla 
          Height          =   2895
@@ -518,7 +516,6 @@ Begin VB.Form frmPCS
          Width           =   7815
          _ExtentX        =   13785
          _ExtentY        =   5106
-         _Version        =   393216
       End
       Begin XPControls.XPButton cmdimprimir 
          Height          =   375
@@ -901,10 +898,10 @@ Dim cSQL As String
 Dim lTROCOU As Variant
 
 Private Sub cmdClose_Click()
-  Dim cSQLIMG As String
+ ' Dim cSQLIMG As String
   Dim cCAMIMG As String
   On Error Resume Next
-  txtFields(1).tEXT = Replace(txtFields(1).tEXT, "/", "-")  'chave apresentando erro de gravacao
+  txtFields(1).text = Replace(txtFields(1).text, "/", "-")  'chave apresentando erro de gravacao
 
   If MDG("Gravar alteraçôes") Then
     'campos
@@ -1059,7 +1056,7 @@ Private Sub Command6_Click()
   End If
 
   cARQPOKA = PegPath("PATH", "POKA")
-  nORD = TxtItem.tEXT
+  nORD = TxtItem.text
   nPPAP = PegUltSQL(cARQPOKA, "select numero from POKA WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
   If nPPAP = 0 Then
     nPPAP = FixInt(PegMAXSQL(cARQPOKA, "POKA", "NUMERO", 0)) + 1
@@ -1270,9 +1267,9 @@ Private Sub Form_Load()
   Dim cSQLIMG As String
   CenterFormToScreen Me
 
-  TXTPF.tEXT = nPF
-  TXTSEQ.tEXT = nSEQ
-  TXTSSQ.tEXT = nSSQ
+  TXTPF.text = nPF
+  TXTSEQ.text = nSEQ
+  TXTSSQ.text = nSSQ
 
 
   lTROCOU = Array(False, False, False, False, False)
@@ -1289,7 +1286,7 @@ Private Sub Form_Load()
     End If
   End If
   If nARQPCS = 2 Then
-    TxtCodComp.tEXT = Ccodcomp
+    TxtCodComp.text = Ccodcomp
   Else
     TxtCodComp.Visible = False
     Label4.Visible = False
@@ -1340,7 +1337,7 @@ Private Sub Form_Load()
   FilRelat (2)                                 'on the job
   FilRelat (3)                                 'dispositivo
 
-  txtFields(1).tEXT = Replace(txtFields(1).tEXT, "/", "-")  'chave apresentando erro de gravacao
+  txtFields(1).text = Replace(txtFields(1).text, "/", "-")  'chave apresentando erro de gravacao
   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
   PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 

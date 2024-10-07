@@ -1,9 +1,9 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmPF 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Processo de Fabricação"
@@ -518,6 +518,7 @@ Begin VB.Form frmPF
       TabsPerRow      =   7
       Tab             =   5
       TabHeight       =   520
+      ControlVersion  =   9
       TabCaption(0)   =   "Matéria Prima 1"
       Tab(0).ControlCount=   28
       Tab(0).Control(0)=   "lblLabels(22)"
@@ -1740,7 +1741,6 @@ Begin VB.Form frmPF
          Width           =   8055
          _ExtentX        =   14208
          _ExtentY        =   6376
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid GridSeq 
          Height          =   3615
@@ -1751,7 +1751,6 @@ Begin VB.Form frmPF
          Width           =   9795
          _ExtentX        =   17277
          _ExtentY        =   6376
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrev 
          Height          =   1095
@@ -1762,7 +1761,6 @@ Begin VB.Form frmPF
          Width           =   7455
          _ExtentX        =   13150
          _ExtentY        =   1931
-         _Version        =   393216
       End
       Begin VBFLXGRD17.VBFlexGrid gridrevi 
          Height          =   1335
@@ -1773,7 +1771,6 @@ Begin VB.Form frmPF
          Width           =   7455
          _ExtentX        =   13150
          _ExtentY        =   2355
-         _Version        =   393216
       End
       Begin XPControls.XPButton cmdFOTO 
          Height          =   375
@@ -3085,7 +3082,7 @@ End Sub
 Private Sub cmdClose_Click()
   On Error Resume Next
   Dim cSQLUP As String
-  Dim cSQLIMG As String
+ ' Dim cSQLIMG As String
 
   If Check1 And Len(txtfields(11)) = 0 Then
     Alert ("Preencher Motivo do Bloqueio")
@@ -3192,7 +3189,7 @@ Private Sub CmdcomIMp_Click()
 
     PFMS03!QTDDE = aCAMPOS(1)
     PFMS03!PRECO = aCAMPOS(2)
-    PFMS03!total = PFMS03!QTDDE * PFMS03!PRECO
+    PFMS03!Total = PFMS03!QTDDE * PFMS03!PRECO
     PFMS03!DESCRI = aCAMPOS(3)
     PFMS03!BAIXAC = aCAMPOS(4)
     PFMS03!SEQ = aCAMPOS(5)
@@ -3340,7 +3337,7 @@ End Sub
 
 Private Sub Command2_Click()
 'Dim eRETU As Variant
-  Dim cdb As String
+ ' Dim cdb As String
   Dim sSQL As String
   If GridSeq.Row = 0 Then
     Exit Sub

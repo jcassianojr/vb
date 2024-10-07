@@ -597,7 +597,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
-  Dim KeyPressed As Variant
+ ' Dim KeyPressed As Variant
   Select Case Index
   Case 8, 9, 10
     KeyAscii = ValiText(KeyAscii, "#NI")

@@ -1191,7 +1191,7 @@ Private Sub CMDIMPBTN_Click()
   Dim oRSDES As New ADODB.Recordset
   Dim cARQORI As String
   Dim cSQLORI, cSQLDES As String
-  Dim aVAL, aCAM As Variant
+'  Dim aVAL, aCAM As Variant
   Dim nBARPOS As Integer
 
   ''On Error Resume Next
@@ -1251,7 +1251,7 @@ Private Sub Cmdimpmenu_Click()
   Dim oRSORI As New ADODB.Recordset
   Dim oRSDES As New ADODB.Recordset
   Dim cSQLORI, cSQLDES As String
-  Dim aVAL, aCAM As Variant
+ ' Dim aVAL, aCAM As Variant
   Dim nBARPOS As Integer
   Dim nROWREC As Integer
 
@@ -1389,7 +1389,7 @@ End Sub
 Private Sub CmdLibGrp_Click(Index As Integer)
   Dim nDESTINO As Long
   Dim oDBORI As ADODB.Connection
-  Dim oDBDESI As ADODB.Connection
+'  Dim oDBDESI As ADODB.Connection
   Dim oRSORI As ADODB.Recordset
   Dim oRSDES As ADODB.Recordset
   Dim oDBDES As ADODB.Connection

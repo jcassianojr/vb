@@ -248,10 +248,10 @@ Public Function FileOpen(frmOwner As Form, _
                          Optional ByVal sTitle As String) As String
 
 
-  Dim Pos As Long
-  Dim buff As String
-  Dim sLongname As String
-  Dim sShortname As String
+  'Dim Pos As Long
+  'Dim buff As String
+  'Dim sLongname As String
+  'Dim sShortname As String
 
 
   With OFN
@@ -327,10 +327,10 @@ Function OpenArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
   sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
   sFileName = FileOpen(oFORM, sFILTER, 1, sRECENTFILE, cEXT, sPath, "Escolher " & cTITULO)
   If Len(sFileName) = 0 Then
-    lretu = False
+    lRETU = False
     Exit Function
   End If
-  lretu = True
+  lRETU = True
   OpenArqExt = sFileName
 End Function
 
@@ -348,10 +348,10 @@ Function SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
   sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
   sFileName = FileSave(oFORM, sFILTER, 1, cEXT, "Novo", sPath, cTITULO)
   If Len(sFileName) = 0 Then
-    lretu = False
+    lRETU = False
     Exit Function
   End If
-  lretu = True
+  lRETU = True
   SaveArqExt = sFileName
 End Function
 

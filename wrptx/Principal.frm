@@ -42,7 +42,7 @@ Option Explicit
 Private Sub MDIForm_Load()
   Dim nPOS As Integer
   Dim nPOS2 As Integer
-  Dim nPOS3 As Integer
+ ' Dim nPOS3 As Integer
   Dim cmdline As String
   Dim pICONES As String
   Dim nRETU
@@ -245,7 +245,7 @@ Private Sub MDIForm_Load()
   End If
 
 
-  StatusBar1.Panels(6).Text = zUSER
+  StatusBar1.Panels(6).tEXT = zUSER
 
   If zWRPTID = 0 Then
     MsgBox "Usuario Nao Cadastrado", vbOKOnly, "Bloqueio de Acesso"

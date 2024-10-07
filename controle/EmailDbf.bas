@@ -16,9 +16,9 @@ Public Function xMAILENV(cCODIGO, cTEXTO, Optional ByVal lEMAILINT = True, Optio
   Dim oMAIL As Variant
   Dim nNUMERO As Variant
   Dim cASSUNTO As String
-  Dim txt_email_from As String
+  'Dim txt_email_from As String
 
-  On Error GoTo error
+  On Error GoTo Error
   cASSUNTO = cCODIGO
 
   If lEMAILINT Then
@@ -96,7 +96,7 @@ Public Function xMAILENV(cCODIGO, cTEXTO, Optional ByVal lEMAILINT = True, Optio
   End If
 
   Exit Function
-error:
+Error:
   Select Case Err.Number
   Case Else
     SayErro "Mail Env"

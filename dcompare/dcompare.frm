@@ -308,19 +308,21 @@ Private Sub CmdExportarSqlite_Click()
    
 End Sub
 Private Sub Convert(NWindMDBFileName$, SQLiteFileName$)
-Dim i&, aCnn As ADODB.Connection, sCnn As cConnection
-Dim aCnnMDB As ADODB.Connection
-Dim sACCESS As cDBAccess
+'Dim i&, aCnn As ADODB.Connection, sCnn As cConnection
+'Dim aCnnMDB As ADODB.Connection
+'Dim sACCESS As cDBAccess
 
+Dim aCnn As ADODB.Connection, sCnn As cConnection
 
   On Error Resume Next
-  Dim cCONN, cCONMDB As String
-  Dim lMDB As Boolean
+'  Dim cconn, cCONMDB As String
+ ' Dim lMDB As Boolean
+  Dim cconn As String
   
   Set aCnn = New ADODB.Connection
   aCnn.CursorLocation = adUseClient
-  cCONN = GeracArq(NWindMDBFileName)
-  aCnn.Open cCONN
+  cconn = GeracArq(NWindMDBFileName)
+  aCnn.Open cconn
   
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
  
@@ -360,22 +362,22 @@ ListFields Text1.tEXT, "BA01"
 End Sub
 
 Private Sub Command1_Click()
-  Dim sFILENAME As String
+  Dim sFileName As String
   Dim sPath As String
   Dim sRECENTFILE As String
   Dim sFILTER As String
 
   sPath = App.Path
   sFILTER = "Access mdb" & vbNullChar & "*.mdb" & vbNullChar & "DBF" & vbNullChar & "*.DBF"
-  sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
-  If Len(sFILENAME) = 0 Then
+  sFileName = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
+  If Len(sFileName) = 0 Then
     Text1.tEXT = ""
     Exit Sub
   End If
-  Text1.tEXT = sFILENAME
+  Text1.tEXT = sFileName
 End Sub
 Private Sub Command2_Click()
-  Dim sFILENAME As String
+  Dim sFileName As String
   Dim sPath As String
   Dim sRECENTFILE As String
   Dim sFILTER As String
@@ -383,12 +385,12 @@ Private Sub Command2_Click()
 
   sPath = App.Path
   sFILTER = "Access mdb" & vbNullChar & "*.mdb" & vbNullChar & "Sqlite" & vbNullChar & "*.sqlite"
-  sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
-  If Len(sFILENAME) = 0 Then
+  sFileName = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
+  If Len(sFileName) = 0 Then
     Text2.tEXT = ""
     Exit Sub
   End If
-  Text2.tEXT = sFILENAME
+  Text2.tEXT = sFileName
   
 End Sub
 Private Sub Command3_Click()
@@ -412,18 +414,18 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
   Dim rec1 As DAO.Recordset
   Dim rec2 As DAO.Recordset
   Dim NewTable As DAO.TableDef
-  Dim oTableDef As DAO.TableDef
+ ' Dim oTableDef As DAO.TableDef
   Dim fldTemp As DAO.Field
-  Dim NewFld As DAO.Field
+ ' Dim NewFld As DAO.Field
   Dim N, m As Integer
-  Dim cTabela As String
+ ' Dim cTabela As String
   Dim T_Ime, R_Ime, nekej, r_type, R_size As Variant
-  Dim oFieldDef As Variant
+ ' Dim oFieldDef As Variant
 
 
   Dim i As Integer
   Dim x As Integer
-  Dim cARQ As String
+  'Dim cARQ As String
 
   On Error GoTo errhandler
   Set WrkSpace = DBEngine.CreateWorkspace("Compare", "Admin", "")
@@ -509,15 +511,15 @@ errhandler:
 End Sub
 
 Private Sub Command5_Click()
-  Dim sFILTER, sFILENAME As String
+  Dim sFILTER, sFileName As String
   sFILTER = "Arquivos Access (*.MDB)" & vbNullChar & "*.MDB" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-  sFILENAME = FileSave(Me, sFILTER, 1, "MDB", "", "", "Criar Access Como")
-  If Not Len(sFILENAME) = 0 Then
-    If FileExist(sFILENAME) Then
+  sFileName = FileSave(Me, sFILTER, 1, "MDB", "", "", "Criar Access Como")
+  If Not Len(sFileName) = 0 Then
+    If FileExist(sFileName) Then
       ''nAO GRAVA EM CIMA
     Else
-      AdoNewTable sFILENAME, False, 5
-      Text2.tEXT = sFILENAME
+      AdoNewTable sFileName, False, 5
+      Text2.tEXT = sFileName
     End If
   End If
 End Sub

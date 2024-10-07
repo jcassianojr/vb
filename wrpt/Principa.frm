@@ -344,7 +344,7 @@ Private Sub MDIForm_Load()
 
   If gbSubClassMenu Then SubClassMenuXP
 
-  Dim cLINHA As String
+ ' Dim cLINHA As String
   Dim pICONES As String
   Dim nRETU
   Dim cmdline As String
@@ -352,7 +352,7 @@ Private Sub MDIForm_Load()
   Dim nPOS As Long
   Dim sSQL As String
   Dim cARQ As String
-  Dim aRETU As Variant
+'  Dim aRETU As Variant
   Dim DAODB As ADODB.Connection
   Dim DAORS As ADODB.Recordset
   Dim cARQICO As String

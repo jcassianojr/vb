@@ -4783,7 +4783,7 @@ Dim aVALGP12 As Variant
 
 Private Sub cmdClose_Click()
   On Error GoTo errhandler
-  Dim sSQL As String
+'  Dim sSQL As String
   Dim dFEMEA As Date
   Dim dPF As Date
   Dim dMAIOR As Date
@@ -5086,8 +5086,8 @@ Private Sub CmdNovoRI_Click(Index As Integer)
   Dim cARQ As String
   Dim cSQL As String
   Dim cData As Variant
-  Dim nRIAREA As Variant
-  Dim iRETVAL As Variant
+  'Dim nRIAREA As Variant
+  'Dim iRETVAL As Variant
   Dim nRI As Variant
   Dim nITEM As Variant
   Dim cCAM As String
@@ -5097,8 +5097,8 @@ Private Sub CmdNovoRI_Click(Index As Integer)
   Dim cCLINOME As Variant
   Dim cCAMJET As String
   Dim cCOMJET As String
-  Dim AVALJET As Variant
-  Dim ACAMJET As Variant
+  Dim aVALJET As Variant
+  Dim aCAMJET As Variant
   Dim cORIGEM As String
   
   On Error GoTo erro
@@ -5121,11 +5121,11 @@ Private Sub CmdNovoRI_Click(Index As Integer)
       cORIGEM = "PPP"
     End If
 
-     ACAMJET = Array("RI", "DESENHO", "DESCRI", "CLIENTE", "CLINOME", "DATA", "TIPOI", "TIPO2", "ORIGEM")
-     AVALJET = Array(nRI, cDESENHO, cDESCRI, nCLIENTE, cCLINOME, cData, "P", "D", cORIGEM)
+     aCAMJET = Array("RI", "DESENHO", "DESCRI", "CLIENTE", "CLINOME", "DATA", "TIPOI", "TIPO2", "ORIGEM")
+     aVALJET = Array(nRI, cDESENHO, cDESCRI, nCLIENTE, cCLINOME, cData, "P", "D", cORIGEM)
     IncluiSQL cCOMJET, "SELECT * FROM RI WHERE RI=" & nRI, 9 _
-           , ACAMJET _
-           , AVALJET, _
+           , aCAMJET _
+           , aVALJET, _
            , False, True
 
    
@@ -5144,11 +5144,11 @@ Private Sub CmdNovoRI_Click(Index As Integer)
   oRS.Open cSQL, oCONN, adOpenForwardOnly, adLockReadOnly
   While Not oRS.EOF
   
-      ACAMJET = Array("RI", "ITEM", "ESPE")
-     AVALJET = Array(nRI, nITEM, FixStr(oRS("ESPE")))
+      aCAMJET = Array("RI", "ITEM", "ESPE")
+     aVALJET = Array(nRI, nITEM, FixStr(oRS("ESPE")))
      IncluiSQL cCOMJET, "SELECT * FROM RII WHERE RI=" & nRI & " AND ITEM=" & nITEM, 3 _
-           , ACAMJET _
-           , AVALJET, _
+           , aCAMJET _
+           , aVALJET, _
            , False, True
 
     nITEM = nITEM + 1
@@ -5511,14 +5511,14 @@ Private Sub escidfolha_Click(Index As Integer)
 
     Select Case Index
     Case 0, 10
-      TXTpc(11).tEXT = TXTpc(11).tEXT & " , " & Trim(MMCase(eRETU02))
+      TXTpc(11).text = TXTpc(11).text & " , " & Trim(MMCase(eRETU02))
     Case 1, 11
-      TXTpre(11).tEXT = TXTpre(11).tEXT & " , " & Trim(MMCase(eRETU02))
+      TXTpre(11).text = TXTpre(11).text & " , " & Trim(MMCase(eRETU02))
     Case 2, 12
-      TXTgp12(11).tEXT = TXTgp12(11).tEXT & " , " & Trim(MMCase(eRETU02))
+      TXTgp12(11).text = TXTgp12(11).text & " , " & Trim(MMCase(eRETU02))
     Case 3, 13
-      TXTpc(33).tEXT = eRETU01
-      TXTpc(34).tEXT = eRETU02
+      TXTpc(33).text = eRETU01
+      TXTpc(34).text = eRETU02
     End Select
   End If
 
@@ -5597,13 +5597,13 @@ Private Sub escTIPPC_Click(Index As Integer)
   Select Case Index
   Case 1, 2, 3, 4, 5
     nPOS = Index + 5 - 1
-    TXTpc(nPOS).tEXT = cTIPO
+    TXTpc(nPOS).text = cTIPO
   Case 11, 12, 13, 14, 15
     nPOS = Index + 5 - 11
-    TXTpre(nPOS).tEXT = cTIPO
+    TXTpre(nPOS).text = cTIPO
   Case 21, 22, 23, 24, 25
     nPOS = Index + 5 - 21
-    TXTgp12(nPOS).tEXT = cTIPO
+    TXTgp12(nPOS).text = cTIPO
   End Select
 End Sub
 
@@ -5718,7 +5718,7 @@ Private Sub Form_Load()
 
   CHECKPFPG                                    'inclui embalagem preliminar gp12
 
-  TXTNPF.tEXT = nPF
+  TXTNPF.text = nPF
 
 
   cSQL = "select PF,CODCLIENTE,CPF,CODIGO,DESCR,CLIENTE,CLINOME,CODMU011,CODMU012,CODMU013,NOMMU011,NOMMU012,NOMMU013,CODFINAL,CODIGOINT,OPCAO,FEMEAREV,FEMEAREVD,REVPRO,REVDAT,FEMEAREVD2 from PF WHERE PF=" & nPF

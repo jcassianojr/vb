@@ -345,7 +345,7 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
       FVar = Mid(eVAR, 1, 2) & "." & Mid(eVAR, 3, 3) & "." & _
              Mid(eVAR, 6, 3) & "/" & Mid(eVAR, 9, 4) & "-" & Mid(eVAR, 13, 2)
     Case "RG"
-      FVar = FormataRG(eVAR)
+      FVar = formatarg(eVAR)
       '            Case "IE" Precisa estado
       '                FVar = FormataIE(eVAR)
     Case "CHAPA"
@@ -633,7 +633,7 @@ Public Function FileExist(ByVal cARQ As Variant, _
   Dim cARQUIVO As String
   Dim nFILELEN
   Dim nPOS As Long
-  Dim cEXT As String
+ ' Dim cEXT As String
   On Error GoTo NotExist
   FileExist = False
   cARQUIVO = UCase(Trim(CStr(cARQ)))
@@ -2250,7 +2250,7 @@ Public Function CharCodesToHTML(ByVal iString As String) As String
   Dim iXml As New MSXML2.DOMDocument60
 
   With iXml.createTextNode(iString)
-    CharCodesToHTML = .Xml
+    CharCodesToHTML = .xml
   End With
 End Function
 
@@ -2321,7 +2321,8 @@ Function TiraEspaco(sNome As String) As String
 End Function
 
 Function FastArraySearch(SearchArray As Variant, SearchPhrase As String) As Long  'String
-  Dim Pos As Long, i As Long, NumCharsProcessed As Long, TXT As String
+  Dim Pos As Long, i As Long, NumCharsProcessed As Long
+ ' dim TXT As String
   FastArraySearch = -1
   Pos = InStr(Join(SearchArray, "§"), SearchPhrase)
   If Pos > 0 Then
@@ -2441,10 +2442,10 @@ End Sub
 Function CheckRegEx(texto As String, padrao As String)
 
   Dim objRegExp As RegExp
-  Dim objMatch As Match
-  Dim colMatch As MatchCollection
+ ' Dim objMatch As Match
+ ' Dim colMatch As MatchCollection
 
-  Dim valor As String
+  'Dim valor As String
 
   'cria um objeto expressão regular
   Set objRegExp = New RegExp

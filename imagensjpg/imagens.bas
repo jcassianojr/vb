@@ -3,8 +3,8 @@ Public ZGRP As Variant
 Public iImage As Long
 
 Sub Main()
-  Dim CCOMANDO As String
-  Dim nNUMERO As Integer
+ ' Dim CCOMANDO As String
+ ' Dim nNUMERO As Integer
 
   'InitXPStyles
   '01%[CONN]Provider=MSDASQL.1;Persist Security Info=False;Data Source=ol_logix

@@ -69,7 +69,7 @@ Private Sub Apaga_Click()
   Dim cGRUPO, sSQL As String
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    cGRUPO = FixStr(Grid.Text)
+    cGRUPO = FixStr(Grid.tEXT)
     '******************************************************************
     'RPTGRP
     sSQL = "select * from RPTGRP WHERE GRP='" & cGRUPO & "'"
@@ -95,7 +95,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    zgrp = Grid.Text
+    zgrp = Grid.tEXT
     frmRPTGRP.Show vbModal
     FilRelat
   End If
@@ -104,7 +104,7 @@ End Sub
 Private Sub Escolher_Click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    zgrp = Grid.Text
+    zgrp = Grid.tEXT
     escRPT.Show vbModal, Me
   End If
 End Sub
@@ -127,7 +127,7 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub grid_Click()
-  Dim x As Integer
+  'Dim x As Integer
   ' Grid.Col = 0
   Grid.ColSel = Grid.cols - 1
   'For X = 0 To Grid.Cols - 1

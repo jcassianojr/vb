@@ -212,16 +212,16 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub imprima_click()
-  Dim nPOS, x As Integer
+  Dim x As Integer
   Dim zrelano, zrelmes, zrelemp, zrelcog, zrelqui
   Dim cARQ, cSQL, cEXTENSAO, cARQNOME As String
   Dim lLIBGRP As Boolean
   Dim aRETU As Variant
-  Dim eRUN As String
-  Dim fileFile As Integer
+  'Dim eRUN As String
+  'Dim fileFile As Integer
   Dim sSQL As String
-  Dim STRBUFFER As String
-  Dim cLINHA As String
+  'Dim STRBUFFER As String
+  'Dim cLINHA As String
 
 
   On Error Resume Next

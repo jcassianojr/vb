@@ -260,7 +260,7 @@ Dim cSUBWHERE As String
 Dim cBASEDADOS As String
 
 Private Sub Apaga_Click()
-  Dim eRESP As Variant
+' Dim eRESP As Variant
   Dim SQL As String
   Dim ZGRP
   Grid.Col = 0

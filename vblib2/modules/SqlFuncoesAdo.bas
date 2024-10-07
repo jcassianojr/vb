@@ -222,8 +222,8 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
   Dim x, nCAMPOS As Integer
   Dim aRETU, aARQ, aOPE, eVAL As Variant
   Dim cERRO As String
-  Dim oCOMANDO As ADODB.Command
-  Dim cCOM As String
+ ' Dim oCOMANDO As ADODB.Command
+ ' Dim cCOM As String
   Dim cARQCON As String
 
   On Error GoTo errhandler
@@ -314,8 +314,8 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
-  Dim oCOMANDO As ADODB.Command
-  Dim cCOM As String
+  'Dim oCOMANDO As ADODB.Command
+  'Dim cCOM As String
   Dim cARQCON As String
 
   On Error GoTo errhandler
@@ -422,8 +422,8 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim lRSOP As Boolean
   Dim cERRO As String
   Dim oFIELD As ADODB.Field
-  Dim oCOMANDO As ADODB.Command
-  Dim cCOM As String
+ ' Dim oCOMANDO As ADODB.Command
+ ' Dim cCOM As String
   Dim cARQCON As String
 
   On Error GoTo errhandler
@@ -597,8 +597,8 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
-  Dim oCOMANDO As ADODB.Command
-  Dim cCOM As String
+'  Dim oCOMANDO As ADODB.Command
+'  Dim cCOM As String
 
   IncluiSQLAdo = False
   On Error GoTo errhandler
@@ -731,8 +731,8 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim cERRO As String
   Dim aOPE As Variant
   Dim eVAL As Variant
-  Dim oCOMANDO As ADODB.Command
-  Dim cCOM As String
+'  Dim oCOMANDO As ADODB.Command
+'  Dim cCOM As String
   Dim aCON As Variant
 
   On Error GoTo errhandler
@@ -859,8 +859,8 @@ Public Function PegUltSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal c
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
-  Dim oCOMANDO As ADODB.Command
-  Dim cCOM As String
+'  Dim oCOMANDO As ADODB.Command
+'  Dim cCOM As String
 
   On Error GoTo errhandler
 
@@ -910,149 +910,145 @@ errhandler:
 End Function
 
 Public Function SQLMoveRegADO(ByVal cARQORI As String, _
-                              ByVal cSQLORI As String, _
-                              Optional ByVal cOPEORI As String = "", _
-                              Optional ByVal aCAMORI As Variant = 0, _
-                              Optional ByVal aOUTORI As Variant = 0, _
-                              Optional ByVal cARQDES As String = "", _
-                              Optional ByVal cSQLDES As String = "", _
-                              Optional ByVal cOPEDES As String = "", _
-                              Optional ByVal aCAMDES As Variant = 0, _
-                              Optional ByVal aOUTDES As Variant = 0, _
-                              Optional ByVal aIDDES As Variant = 0) As Boolean
+   ByVal cSQLORI As String, _
+   Optional ByVal cOPEORI As String = "", _
+   Optional ByVal aCAMORI As Variant = 0, _
+   Optional ByVal aOUTORI As Variant = 0, _
+   Optional ByVal cARQDES As String = "", _
+   Optional ByVal cSQLDES As String = "", _
+   Optional ByVal cOPEDES As String = "", _
+   Optional ByVal aCAMDES As Variant = 0, _
+   Optional ByVal aOUTDES As Variant = 0, _
+   Optional ByVal aIDDES As Variant = 0) As Boolean
 
-  Dim oDB, oDBDES As ADODB.Connection
-  Dim oRS, oRSDES As ADODB.Recordset
-  Dim cARQORI1 As String
-  Dim cARQDES1 As String
-  Dim aRETU As Variant
-  Dim x As Integer
-  Dim nCAMPOS As Integer
-  Dim aVALORI As Variant
-  Dim aRETUID As Variant
-  Dim lOPEN As Boolean
-  Dim lRSOP As Boolean
-  Dim cERRO As String
-  Dim oCOMANDO As ADODB.Command
-  Dim OCOMANDO2 As ADODB.Command
+Dim oDB, oDBDES As ADODB.Connection
+Dim oRS, oRSDES As ADODB.Recordset
+Dim cARQORI1 As String
+Dim cARQDES1 As String
+Dim aRETU As Variant
+Dim x As Integer
+Dim nCAMPOS As Integer
+Dim aVALORI As Variant
+Dim aRETUID As Variant
+Dim lOPEN As Boolean
+Dim lRSOP As Boolean
+Dim cERRO As String
+'  Dim oCOMANDO As ADODB.Command
+'  Dim OCOMANDO2 As ADODB.Command
 
+'  Dim cCOM As String
 
-  Dim cCOM As String
+On Error GoTo errhandler
 
-  On Error GoTo errhandler
+SQLMoveRegADO = False
+lOPEN = False
+lRSOP = False
 
-  SQLMoveRegADO = False
-  lOPEN = False
-  lRSOP = False
+aRETU = TipoConn(cARQORI)
 
-  aRETU = TipoConn(cARQORI)
+cARQORI1 = aRETU(1)
 
-  cARQORI1 = aRETU(1)
+aRETU = TipoConn(cARQDES)
 
-  aRETU = TipoConn(cARQDES)
+cARQDES1 = aRETU(1)
 
-  cARQDES1 = aRETU(1)
+Set oDB = New ADODB.Connection
+oDB.CursorLocation = adUseClient
+oDB.ConnectionTimeout = 120
+oDB.Open cARQORI1
 
+Set oDBDES = New ADODB.Connection
+oDBDES.CursorLocation = adUseClient
+oDBDES.ConnectionTimeout = 120
+oDBDES.Open cARQDES1
 
-  Set oDB = New ADODB.Connection
-  oDB.CursorLocation = adUseClient
-  oDB.ConnectionTimeout = 120
-  oDB.Open cARQORI1
+'Set null off permitido deixar campos em branco set deleted on ja esta na string de conecao
+If InStr(cARQDES1, "VFPOLEDB") Then
+   VFPSetValues oDBDES
+End If
 
-  Set oDBDES = New ADODB.Connection
-  oDBDES.CursorLocation = adUseClient
-  oDBDES.ConnectionTimeout = 120
-  oDBDES.Open cARQDES1
+lOPEN = True
 
+Set oRS = New ADODB.Recordset
+oRS.Open cSQLORI, oDB, adOpenKeyset, adLockOptimistic
 
-  'Set null off permitido deixar campos em branco set deleted on ja esta na string de conecao
-  If InStr(cARQDES1, "VFPOLEDB") Then
-    VFPSetValues oDBDES
-  End If
+Set oRSDES = New ADODB.Recordset
+oRSDES.Open cSQLDES, oDBDES, adOpenKeyset, adLockOptimistic
 
-  lOPEN = True
+lRSOP = True
 
-  Set oRS = New ADODB.Recordset
-  oRS.Open cSQLORI, oDB, adOpenKeyset, adLockOptimistic
-
-
-  Set oRSDES = New ADODB.Recordset
-  oRSDES.Open cSQLDES, oDBDES, adOpenKeyset, adLockOptimistic
-
-  lRSOP = True
-
-  If Not oRS.EOF Then
-    oRS.MoveFirst
-    While Not oRS.EOF
+If Not oRS.EOF Then
+   oRS.MoveFirst
+   While Not oRS.EOF
       If Not IsNumeric(aCAMORI) Then       ''Se for numerico nao e matriz
-        nCAMPOS = UBound(aCAMORI)
-        ReDim aVALORI(nCAMPOS + 1)
-        For x = 0 To nCAMPOS
-          aVALORI(x) = oRS(aCAMORI(x))
-        Next x
+         nCAMPOS = UBound(aCAMORI)
+         ReDim aVALORI(nCAMPOS + 1)
+         For x = 0 To nCAMPOS
+            aVALORI(x) = oRS(aCAMORI(x))
+         Next x
       End If
       If InStr(cOPEORI, "DEL") > 0 Then
-        oRS.Delete
+         oRS.Delete
       End If
       If InStr(cOPEDES, "INC") > 0 Then
-        oRSDES.AddNew
+         oRSDES.AddNew
       Else
-        ''               oRSDES.Edit
+         ''               oRSDES.Edit
       End If
 
       If Not IsNumeric(aCAMDES) Then       ''Se for numerico nao e matriz
-        nCAMPOS = UBound(aCAMDES)
-        For x = 0 To nCAMPOS
-          oRSDES(aCAMDES(x)) = aVALORI(x)
-        Next x
+         nCAMPOS = UBound(aCAMDES)
+         For x = 0 To nCAMPOS
+            oRSDES(aCAMDES(x)) = aVALORI(x)
+         Next x
       End If
       If Not IsNumeric(aOUTDES) Then       ''Se for numerico nao e matriz
-        nCAMPOS = UBound(aOUTDES)
-        For x = 0 To nCAMPOS
-          oRSDES(aOUTDES(x)) = aOUTORI(x)
-        Next x
+         nCAMPOS = UBound(aOUTDES)
+         For x = 0 To nCAMPOS
+            oRSDES(aOUTDES(x)) = aOUTORI(x)
+         Next x
       End If
       Select Case aRETU(2) 'alguns nao aceitam updade
-            Case Else
-                 oRSDES.Update
+      Case Else
+         oRSDES.Update
       End Select
 
       ' PEGAR O ID
       If Not IsNumeric(aIDDES) Then        ''Se for numerico nao e matriz
-        nCAMPOS = UBound(aIDDES)
-        ReDim aRETUID(nCAMPOS + 1)
-        For x = 0 To nCAMPOS
-          aRETUID(x) = oRSDES(aIDDES(x))
-        Next x
-        eRETU01 = aRETUID
+         nCAMPOS = UBound(aIDDES)
+         ReDim aRETUID(nCAMPOS + 1)
+         For x = 0 To nCAMPOS
+            aRETUID(x) = oRSDES(aIDDES(x))
+         Next x
+         eRETU01 = aRETUID
       End If
       Select Case aRETU(2) 'alguns nao aceita updade
-          Case Else
-            oRSDES.Update
+      Case Else
+         oRSDES.Update
       End Select
       oRS.MoveNext
-    Wend
-  End If
-  oRS.Close
-  oDB.Close
+   Wend
+End If
+oRS.Close
+oDB.Close
 
-  Set oRS = Nothing
-  Set oDB = Nothing
-  SQLMoveRegADO = True
-  Exit Function
+Set oRS = Nothing
+Set oDB = Nothing
+SQLMoveRegADO = True
+Exit Function
 errhandler:
-  cERRO = "Soma SQL ADO" & Chr(13) & Chr(10) & cARQORI & Chr(13) & Chr(10) & cSQLORI & Chr(13) & Chr(10)
-  If lRSOP Then
-    cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
-  End If
-  Select Case Err.Number
-  Case Else
-    If lOPEN Then
+cERRO = "Soma SQL ADO" & Chr(13) & Chr(10) & cARQORI & Chr(13) & Chr(10) & cSQLORI & Chr(13) & Chr(10)
+If lRSOP Then
+   cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
+End If
+Select Case Err.Number
+Case Else
+   If lOPEN Then
       ADOErro oRS.ActiveConnection.Errors, cERRO
-    Else
+   Else
       ADOErro oDB.Errors, cERRO
-    End If
-    Exit Function
-  End Select
+   End If
+   Exit Function
+End Select
 End Function
 

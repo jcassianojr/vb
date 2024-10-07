@@ -56,7 +56,7 @@ Public Property Set Container(MainContainer As Object)
 ' In a valid container, controls collection named
 ' "Controls" must be available. Use standard form
 ' or PVL_Container control as a container.
-  Dim objControl As Object
+ ' Dim objControl As Object
 
   On Error Resume Next
   Set objContainer = MainContainer

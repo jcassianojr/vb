@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
 Begin VB.Form escpf 
    Caption         =   "Selecione o Processo  desejado:"
    ClientHeight    =   7920
@@ -56,7 +56,6 @@ Begin VB.Form escpf
       Width           =   9975
       _ExtentX        =   17595
       _ExtentY        =   12832
-      _Version        =   393216
    End
 End
 Attribute VB_Name = "escpf"
@@ -331,8 +330,8 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
   Dim sButton As String
-  Dim aORDLIB As Variant
-  Dim aDESLIB As Variant
+ ' Dim aORDLIB As Variant
+ ' Dim aDESLIB As Variant
 
   sButton = Button
   sButton = Left(UCase(Replace(sButton, "&", "")), 3)

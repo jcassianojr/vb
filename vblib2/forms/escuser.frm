@@ -74,7 +74,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub ApagaNF_Click()
-  Dim aRETU As Variant
+ ' Dim aRETU As Variant
   Dim sSQL As String
   If Not MDG("Apagar Usuario", "Confirme Exclusão") Then
     Exit Sub
@@ -115,7 +115,7 @@ Private Sub EditPf_Click()
   Dim nFOLHATMP As Long
   Dim sSQL As String
   Dim cARQ As String
-  Dim aRETU As Variant
+ ' Dim aRETU As Variant
   Dim x As Integer
 
 

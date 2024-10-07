@@ -1025,7 +1025,7 @@ Private Sub XPButton5_Click()
   Dim cCODIGO As String
   Dim cARQPF As String
   Dim SACAREA As Variant
-  Dim iRETVAL As Variant
+ ' Dim iRETVAL As Variant
 
 
   cARQPF = PegPath("PATH", "PF")
@@ -1065,9 +1065,9 @@ Private Sub XPButton6_Click()
   Dim sSQL As String
   Dim cCODIGO As String
   'Dim cCODINT As String
-  Dim cARQUSO As String
-  Dim cARQCDX As String
-  Dim cALIAS As String
+ ' Dim cARQUSO As String
+ ' Dim cARQCDX As String
+ ' Dim cALIAS As String
   Dim cARQPF As String
   Dim x As Integer
   Dim cFERRAM As String

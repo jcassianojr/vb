@@ -77,7 +77,7 @@ Public Sub prompt_err(ByVal sError As ErrObject, _
 
   Dim s1, s2, s3, s4 As String
   Dim s5 As Long
-  Dim ff As Integer
+''  Dim ff As Integer
   Dim strMsg As String
 
   s1 = ModuleName
