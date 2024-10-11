@@ -333,7 +333,7 @@ Private Function GenSQLInsert(r As ADODB.Recordset, sTableName As String) As Str
     ' set error handler
     On Error Resume Next
     
-    stmp = "Insert into `" & sTableName & "` values('"
+    stmp = "Insert into `" & sTableName & "` values(" '  '" deixando aspas para criar na get value string e data
     For k = 1 To r.Fields.Count
     
         ' get value from recordset
@@ -343,11 +343,12 @@ Private Function GenSQLInsert(r As ADODB.Recordset, sTableName As String) As Str
             stmp = stmp & "NULL"
         End If
     
+    
         ' add separator
         If k < r.Fields.Count Then
-            stmp = stmp & "','"
+            stmp = stmp & ","  '  ',' deixando aspas para criar na get value string e data
         Else
-            stmp = stmp & "');"
+            stmp = stmp & ");"  '  ') deixando aspas para criar na get value string e data
         End If
     
     Next k
@@ -490,13 +491,23 @@ Private Function GetValue(IsField As ADODB.Field) As String
             GetValue = IIf(IsField.Value = True, 1, 0) ' get boolean value
         ElseIf IsField.Type = adDate Then
             GetValue = MySQLDate(IsField.Value) ' get mysql date format
+            GetValue = "'" & GetValue & "'"
         ElseIf IsField.Type = adBinary Or IsField.Type = adLongVarBinary Then
             ' sorry i can't get value from this column type
             ' if you have solution, please let me know
             GetValue = "Null"
         Else
             ' you must replace  "'" to "''", if not will retrun error on insert statement
-            GetValue = Replace(IsField.Value, "'", "''") ' get string value
+            'GetValue = Replace(IsField.Value, "'", "''") ' get string value
+            GetValue = IsField.Value ' pegar o valor string
+            GetValue = Replace(GetValue, "'", " ") ' remover aspas simples
+            GetValue = Replace(GetValue, Chr(13), " ") 'remover final de linha
+            GetValue = Replace(GetValue, Chr(10), " ") 'remover final de linha
+            GetValue = Replace(GetValue, "(", " ") 'remover parentes
+            GetValue = Replace(GetValue, ")", " ") 'remover parentes
+            GetValue = Replace(GetValue, ",", " ") 'remover virgula
+            GetValue = Trim(GetValue)
+            GetValue = "'" & GetValue & "'"
         End If
     Else
         
