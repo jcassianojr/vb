@@ -66,7 +66,7 @@ Public Const OFN_SHAREWARN As Long = 0
 Public Const OFN_SHARENOWARN As Long = 1
 Public Const OFN_SHOWHELP As Long = &H10
 Public Const OFS_MAXPATHNAME As Long = 260
-
+Private Const FO_COPY = &H2
 
 Public Const OFS_FILE_OPEN_FLAGS = OFN_EXPLORER _
        Or OFN_LONGNAMES _

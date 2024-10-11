@@ -1,0 +1,2 @@
+****** Run at 11/10/2024 10:56:21
+L1NK "D:\develop\vb\dcompare\DCompare.OBJ"    /ENTRY:__vbaS /OUT:"D:\develop\vb\dcompare\DCompare.exe" /BASE:0x400000 /SUBSYSTEM:WINDOWS,4.0 /VERSION:1.0   /INCREMENTAL:NO /OPT:REF /MERGE:.rdata=.text /IGNORE:4078 

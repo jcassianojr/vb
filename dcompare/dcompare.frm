@@ -285,10 +285,10 @@ Attribute C.VB_VarHelpID = -1
 Private Sub CmdCompactar_Click()
   Dim lngBefore, lngAfter As Long
   Dim strResult As String
-  lngBefore = FileLen(Text1.tEXT)
-  If CompactAccess(Text1.tEXT) Then
+  lngBefore = FileLen(Text1.Text)
+  If CompactAccess(Text1.Text) Then
 
-    lngAfter = FileLen(Text1.tEXT)
+    lngAfter = FileLen(Text1.Text)
     strResult = "Resultados da Compactacao" & vbCrLf
     strResult = strResult & "-------------------------------------------" & vbCrLf
     strResult = strResult & "Tamanho Antes  da Compactação: " & lngBefore & " bytes" & vbCrLf
@@ -303,7 +303,7 @@ End Sub
 Private Sub CmdExportarSqlite_Click()
   ' Text2.tEXT = TrocaExt(Text1.tEXT, "sqlite")
    If MDG("Converter Reescreve Destino") Then
-      Convert Text1.tEXT, Text2.tEXT
+      Convert Text1.Text, Text2.Text
    End If
    
 End Sub
@@ -357,8 +357,9 @@ Dim aCnn As ADODB.Connection, sCnn As cConnection
 End Sub
 
 Private Sub CmdTeste_Click()
-listTables Text1.tEXT
-ListFields Text1.tEXT, "BA01"
+listTables Text1.Text
+Listindex Text1.Text, "RPT"
+ListFields Text1.Text, "RPT"
 End Sub
 
 Private Sub Command1_Click()
@@ -371,10 +372,10 @@ Private Sub Command1_Click()
   sFILTER = "Access mdb" & vbNullChar & "*.mdb" & vbNullChar & "DBF" & vbNullChar & "*.DBF"
   sFileName = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
   If Len(sFileName) = 0 Then
-    Text1.tEXT = ""
+    Text1.Text = ""
     Exit Sub
   End If
-  Text1.tEXT = sFileName
+  Text1.Text = sFileName
 End Sub
 Private Sub Command2_Click()
   Dim sFileName As String
@@ -387,25 +388,25 @@ Private Sub Command2_Click()
   sFILTER = "Access mdb" & vbNullChar & "*.mdb" & vbNullChar & "Sqlite" & vbNullChar & "*.sqlite"
   sFileName = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
   If Len(sFileName) = 0 Then
-    Text2.tEXT = ""
+    Text2.Text = ""
     Exit Sub
   End If
-  Text2.tEXT = sFileName
+  Text2.Text = sFileName
   
 End Sub
 Private Sub Command3_Click()
-  If Len(Text1.tEXT) = 0 Or Len(Text2.tEXT) = 0 Then
+  If Len(Text1.Text) = 0 Or Len(Text2.Text) = 0 Then
     Alert "Origem ou Destino Nao Preenchido"
     Exit Sub
   End If
-  corrige Text1.tEXT, Text2.tEXT, False
+  corrige Text1.Text, Text2.Text, False
 End Sub
 Private Sub Command4_Click()
-  If Len(Text1.tEXT) = 0 Or Len(Text2.tEXT) = 0 Then
+  If Len(Text1.Text) = 0 Or Len(Text2.Text) = 0 Then
     Alert "Origem ou Destino Nao Preenchido"
     Exit Sub
   End If
-  corrige Text1.tEXT, Text2.tEXT, True
+  corrige Text1.Text, Text2.Text, True
 End Sub
 Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional ByVal lGRAVA As Boolean = False)
   Dim WrkSpace As DAO.Workspace
@@ -429,10 +430,10 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
 
   On Error GoTo errhandler
   Set WrkSpace = DBEngine.CreateWorkspace("Compare", "Admin", "")
-  Set Baza1 = WrkSpace.OpenDatabase(Text1.tEXT)
-  Set Baza2 = WrkSpace.OpenDatabase(Text2.tEXT)
+  Set Baza1 = WrkSpace.OpenDatabase(Text1.Text)
+  Set Baza2 = WrkSpace.OpenDatabase(Text2.Text)
   ''On Error Resume Next
-  Text3.tEXT = ""
+  Text3.Text = ""
   For N = 0 To Baza1.TableDefs.Count - 1
     If Baza1.TableDefs(N).Properties(5) = 0 Then
       nERRO = 0
@@ -441,7 +442,7 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
       Set rec1 = Baza1.OpenRecordset(T_Ime)
       Set rec2 = Baza2.OpenRecordset(T_Ime)
       If nERRO = 3078 Then
-        Text3.tEXT = Text3.tEXT & "Falta Tabela: " & T_Ime & vbNewLine
+        Text3.Text = Text3.Text & "Falta Tabela: " & T_Ime & vbNewLine
         If lGRAVA Then
           Set NewTable = Baza2.CreateTableDef(T_Ime)
           With NewTable
@@ -464,7 +465,7 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
           R_Ime = rec1.Fields(m).Name
           nekej = rec2.Fields(R_Ime).Name
           If nERRO = 3265 Then
-            Text3.tEXT = Text3.tEXT & "Falta Campo: " & T_Ime & "." & R_Ime & vbNewLine
+            Text3.Text = Text3.Text & "Falta Campo: " & T_Ime & "." & R_Ime & vbNewLine
             If lGRAVA Then
               Set NewTable = Baza2.TableDefs(T_Ime)
               rec2.Close
@@ -492,8 +493,8 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
   Baza2.Close
   Baza1.Close
   WrkSpace.Close
-  If Text3.tEXT = "" Then
-    Text3.tEXT = "Arquivos sem diferencas"
+  If Text3.Text = "" Then
+    Text3.Text = "Arquivos sem diferencas"
   End If
 
   Exit Sub
@@ -519,7 +520,7 @@ Private Sub Command5_Click()
       ''nAO GRAVA EM CIMA
     Else
       AdoNewTable sFileName, False, 5
-      Text2.tEXT = sFileName
+      Text2.Text = sFileName
     End If
   End If
 End Sub
@@ -573,13 +574,9 @@ Dim nLength
     & "Persist Security Info=False"
     dbConn.Open
 
-   ' Me.lstFields.Clear
-    
-   ' Set rs = dbConn.OpenSchema(adSchemaColumns) ', Array(Empty, Empty, dbTableName))
     Set rs = dbConn.OpenSchema(adSchemaColumns, Array(Empty, Empty, dbTableName))
     
     Do Until rs.EOF
-        'Me.lstFields.AddItem (rs!COLUMN_NAME)
         Debug.Print
         Debug.Print "Table         :" & rs("table_name")
         Debug.Print "Campo         :" & rs("COLUMN_NAME")
@@ -595,14 +592,52 @@ Dim nLength
         If cTIPO = "D" And FixInt(rs("DATETIME_PRECISION")) > 0 Then
           Debug.Print "Tamanho DATA:" & FixInt(rs("DATETIME_PRECISION"))
         End If
-        
-        'alguns tipos nao retorna CHARACTER_MAXIMUM_LENGTH
-        'int' THEN 4
-        'money' THEN 8
-        
         rs.MoveNext
     Loop
     rs.Close
     dbConn.Close
 End Sub
+
+Private Sub Listindex(dbFileWithPath As String, dbTableName As String)
+Dim dbConn As ADODB.Connection
+Dim rs As ADODB.Recordset
+Dim cINDEX   As String
+Dim cCOLUNAS As String
+    Set dbConn = New ADODB.Connection
+    
+    dbConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" _
+    & dbFileWithPath & ";" _
+    & "Persist Security Info=False"
+    dbConn.Open
+
+    Set rs = dbConn.OpenSchema(adSchemaIndexes) ', Array(Empty, Empty, dbTableName))
+    
+    cINDEX = ""
+    cCOLUNAS = ""
+    Do Until rs.EOF
+       If UCase(rs.Fields!table_name) = UCase(dbTableName) Then
+        Debug.Print
+        Debug.Print "Table         :" & rs("table_name")
+        Debug.Print "Indice        :" & rs("INDEX_NAME")
+        If cINDEX = rs("INDEX_NAME") Then
+           cCOLUNAS = cCOLUNAS & "," & rs("COLUMN_NAME")
+        End If
+        If cINDEX = "" Then
+           cINDEX = rs("INDEX_NAME")
+           cCOLUNAS = rs("COLUMN_NAME")
+        End If
+        If cINDEX <> rs("INDEX_NAME") Then
+           Debug.Print cCOLUNAS
+           cINDEX = rs("INDEX_NAME")
+           cCOLUNAS = rs("COLUMN_NAME")
+        End If
+       End If
+       rs.MoveNext
+    Loop
+    Debug.Print cCOLUNAS
+    rs.Close
+    dbConn.Close
+End Sub
+
+
 
