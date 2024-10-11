@@ -24,6 +24,7 @@ Object={379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0; vbccr18.ocx
 Object={2DA70529-3366-414A-B408-46083BCD481B}#1.8#0; VBFLXGRD17.OCX
 Object={7E9995B7-C8C4-4CF8-997D-AEA8489ADBBC}#1.3#0; OrdoPDFReader.OCX
 Object={F74FE4B4-2AF4-4F6A-B323-05690FDB6730}#1.3#0; OrdoWebView2.OCX
+Object={66E63055-5A66-4C79-9327-4BC077858695}#9.0#0; newtab01.OCX
 Form=..\editor\FrmRtf.frm
 Form=..\IniEditor\frmIniEditor.frm
 Form=..\vblib2\forms\crw08\FRMCRW.FRM
@@ -80,7 +81,6 @@ Module=modMenuXP; ..\wrpt\modMenuXP.bas
 Form=..\vblib2\forms\frmCharacters.frm
 Class=cZipArchive; ..\vblib2\class\cZipArchive.cls
 Class=PicSaveLoad; ..\vblib2\class\PicSavev11.cls
-Object={66E63055-5A66-4C79-9327-4BC077858695}#9.0#0; newtab01.OCX
 ResFile32="..\vblib2\Resources.res"
 IconForm="frmPRINCIPAL"
 Startup="Sub Main"
@@ -93,7 +93,7 @@ HelpContextID="0"
 CompatibleMode="0"
 MajorVer=1
 MinorVer=0
-RevisionVer=255
+RevisionVer=256
 AutoIncrementVer=1
 ServerSupportFiles=0
 VersionComments="$admin%CU#VIA_FOL00001"
@@ -119,3 +119,6 @@ AutoRefresh=1
 
 [Rubberduck]
 ProjectId=11bf90e8-c439-40a7-aabb-018bd51874b4
+
+[Form Designer]
+ReferenceAdded=1

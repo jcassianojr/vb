@@ -78,7 +78,8 @@ Private Sub ApagaNF_Click()
   Dim sSQL As String
   If Not MDG("Apagar Usuario", "Confirme Exclusão") Then
     Exit Sub
-  End If
+  End
+  
   Grid.Col = 0
   zIDTEMP = Grid
   'USUARIO

@@ -165,48 +165,48 @@ Dim nTOTREG As Long
 Dim cARQ As String
 Dim x As Long
 Private Sub cmdProxima_Click()
-  PegMensagem
+   PegMensagem
 End Sub
 Private Sub cmdOK_Click()
-  sExibir = IIf(chkExibir = vbChecked, "S", "N")
-  x = WritePrivateProfileString("CITACAO", zUSER, sExibir, App.Path + "\" & App.EXEName & ".INI")
-  Unload Me
+   sExibir = IIf(chkExibir = vbChecked, "S", "N")
+   x = WritePrivateProfileString("CITACAO", zUSER, sExibir, App.Path + "\" & App.EXEName & ".INI")
+   Unload Me
 End Sub
 
 Private Sub PegMensagem()
-  Dim cSQL As String
-  Dim aRETU As Variant
-  lRETU = False
-  While Not lRETU
-    cSQL = "SELECT tblCitacao.Titulo, tblCitacao.Citacao, tblCitacao.Titulo, tblAutor.Nome as Autor, " & _
-           "tblAutor.Nacionalidade, tblOcupacao.Nome As Ocupacao FROM (tblAutor LEFT JOIN tblOcupacao " & _
-           "ON tblAutor.codOcupacao = tblOcupacao.codOcupacao) RIGHT JOIN tblCitacao ON tblAutor.codAutor = " & _
-           "tblCitacao.codAutor Where Not tblCitacao.Ocultar and codcitacao=" & RandomNumber(nTOTREG)
-    aRETU = PegSQL(cARQ, cSQL, 5, Array("titulo", "citacao", "autor", "ocupacao", "nacionalidade"), _
-                   Array("CC", "CC", "CC", "CC", "CC"), _
-                   Array("", "", "", "", ""))
-    lblTitulo = FixStr(aRETU(0))
-    lblMensagem = FixStr(aRETU(1))
-    lblAutor = FixStr(aRETU(2), "") & ", " & FixStr(aRETU(3), "") & ", " & FixStr(aRETU(4))
-  Wend
+   Dim cSQL As String
+   Dim aRETU As Variant
+   lRETU = False
+   While Not lRETU
+      cSQL = "SELECT tblCitacao.Titulo, tblCitacao.Citacao, tblCitacao.Titulo, tblAutor.Nome as Autor, " & _
+      "tblAutor.Nacionalidade, tblOcupacao.Nome As Ocupacao FROM (tblAutor LEFT JOIN tblOcupacao " & _
+      "ON tblAutor.codOcupacao = tblOcupacao.codOcupacao) RIGHT JOIN tblCitacao ON tblAutor.codAutor = " & _
+      "tblCitacao.codAutor Where Not tblCitacao.Ocultar and codcitacao=" & RandomNumber(nTOTREG)
+      aRETU = PegSQL(cARQ, cSQL, 5, Array("titulo", "citacao", "autor", "ocupacao", "nacionalidade"), _
+      Array("CC", "CC", "CC", "CC", "CC"), _
+      Array("", "", "", "", ""))
+      lblTitulo = FixStr(aRETU(0))
+      lblMensagem = FixStr(aRETU(1))
+      lblAutor = FixStr(aRETU(2), "") & ", " & FixStr(aRETU(3), "") & ", " & FixStr(aRETU(4))
+   Wend
 End Sub
 
 Private Sub Form_Load()
-  cARQ = PegPath("PATH", "CITACAO")
-  nTOTREG = 0
-  If FileExist(cARQ, True) Then
-    chkExibir = vbChecked
-    CenterFormToScreen Me
-    nTOTREG = PegCountSQL(cARQ, "tblcitacao", "codcitacao", 1)
-    PegMensagem
-  End If
+   cARQ = PegPath("PATH", "CITACAO")
+   nTOTREG = 0
+   If FileExist(cARQ, True) Then
+      chkExibir = vbChecked
+      CenterFormToScreen Me
+      nTOTREG = PegCountSQL(cARQ, "tblcitacao", "codcitacao", 1)
+      PegMensagem
+   End If
 End Sub
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-  TeclaEnter KeyCode
+   TeclaEnter KeyCode
 End Sub
 Function RandomNumber(intHighestNumber)
-  Randomize
-  RandomNumber = Int(intHighestNumber * Rnd) + 1
+   Randomize
+   RandomNumber = Int(intHighestNumber * Rnd) + 1
 End Function
 
 

@@ -205,87 +205,50 @@ Const nFORMID = 1020
 Const cFORMID = "Competencia"
 Option Explicit
 Private Sub ano_GotFocus()
-  FocusMe
+   FocusMe
 End Sub
 
 Private Sub cmdOK_Click()
-  eRETU01 = FixInt(ano)
-  eRETU02 = FixInt(mes)
-  eRETU03 = FixInt(empresa)
-  eRETU04 = FixInt(quinzena)
-  Unload Me
+   eRETU01 = FixInt(ano)
+   eRETU02 = FixInt(mes)
+   eRETU03 = FixInt(empresa)
+   eRETU04 = FixInt(quinzena)
+   Unload Me
 End Sub
-
-'Private Sub Command1_Click()
-'    quinzena = CStr(IncDec(quinzena, 1, 0, 2))
-'End Sub
-
-'Private Sub Command2_Click()
-'   quinzena = CStr(IncDec(quinzena, -1, 0, 2))
-'End Sub
-
 Private Sub empresa_GotFocus()
-  FocusMe
+   FocusMe
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
-  TeclaEnter (KeyCode)
+   TeclaEnter (KeyCode)
 End Sub
 
 Private Sub Form_Load()
-  CenterFormToScreen Me
-  'frmcomp.Left = (Screen.Width - frmcomp.Width) / 2
-  'frmcomp.Top = (Screen.Height - frmcomp.Height) / 2
-  Me.Caption = cFORMID
-  Me.HelpContextID = nFORMID
-  ano = zANO
-  mes = zMES
-  empresa = zEMPRESA
+   CenterFormToScreen Me
+   Me.Caption = cFORMID
+   Me.HelpContextID = nFORMID
+   ano = zANO
+   mes = zMES
+   empresa = zEMPRESA
 End Sub
-
-'Private Sub maisano_Click()
-'    ano = CStr(IncDec(ano, 1, 1900, 2300))
-'End Sub
-
-'Private Sub maisemp_Click()
-'    empresa = CStr(IncDec(empresa, 1, 1, 999))
-'End Sub
-
-'Private Sub maismes_Click()
-'    mes = CStr(IncDec(mes, 1, 1, 12))
-'End Sub
-
-'Private Sub menosano_Click()
-'    ano = CStr(IncDec(ano, -1, 1900, 2300))
-'End Sub
-
-'Private Sub menosemp_Click()
-'    empresa = CStr(IncDec(empresa, -1, 1, 999))
-'End Sub
-
-'Private Sub menosmes_Click()
-'    mes = CStr(IncDec(mes, -1, 1, 12))
-'End Sub
-
 Private Sub ano_KeyPress(KeyAscii As Integer)
-  KeyAscii = ValiText(KeyAscii, "#NI")
+   KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub empresa_KeyPress(KeyAscii As Integer)
-  KeyAscii = ValiText(KeyAscii, "#NI")
+   KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
-
 Private Sub mes_GotFocus()
-  FocusMe
+   FocusMe
 End Sub
 Private Sub QUINZENA_GotFocus()
-  FocusMe
+   FocusMe
 End Sub
 
 Private Sub mes_KeyPress(KeyAscii As Integer)
-  KeyAscii = ValiText(KeyAscii, "#NI")
+   KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
 Private Sub quinzena_KeyPress(KeyAscii As Integer)
-  KeyAscii = ValiText(KeyAscii, "#NI")
+   KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
