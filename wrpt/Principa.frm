@@ -256,8 +256,8 @@ Begin VB.MDIForm frmPRINCIPAL
       End
    End
    Begin VB.Menu Menu2 
-      Caption         =   "&Relatórios"
-      Tag             =   "&Relatórios|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+      Caption         =   "&RelatÃ³rios"
+      Tag             =   "&RelatÃ³rios|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
    End
    Begin VB.Menu Menu3 
       Caption         =   "&Documentos/Manuais"
@@ -276,8 +276,8 @@ Begin VB.MDIForm frmPRINCIPAL
       Tag             =   "&Lst(Logix)|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
    End
    Begin VB.Menu Menu7 
-      Caption         =   "&Configurações"
-      Tag             =   "&Configurações|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+      Caption         =   "&ConfiguraÃ§Ãµes"
+      Tag             =   "&ConfiguraÃ§Ãµes|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       Begin VB.Menu mnuSUBMENU4 
          Caption         =   "Impressoras"
          Index           =   0
@@ -372,7 +372,7 @@ Private Sub MDIForm_Load()
 
   If App.PrevInstance Then
 
-    MsgBox App.EXEName & " já está rodando!", 48
+    MsgBox App.EXEName & " jÃ¡ estÃ¡ rodando!", 48
     End
 
   End If
@@ -465,7 +465,7 @@ Private Sub MDIForm_Load()
     End If
   End If
 
-  Me.Caption = App.FileDescription & " Versao:" & App.Major & "." & App.Minor & "Usuário: " & zUSER
+  Me.Caption = App.FileDescription & " Versao:" & App.Major & "." & App.Minor & "UsuÃ¡rio: " & zUSER
 
 
   ''cLINHA = "MAIL $" & UCase(zUSER)
@@ -686,12 +686,12 @@ Public Sub SubClassMenuXP()
   Menu1.Caption = "&Gerador"
   mnuSUBMENU1(0).Caption = "Especificos"
   mnuSUBMENU1(1).Caption = "Padrao"
-  Menu2.Caption = "&Relatórios"
+  Menu2.Caption = "&RelatÃ³rios"
   Menu3.Caption = "&Documentos/Manuais"
   Menu4.Caption = "&Folha/Pto/RH"
   Menu5.Caption = "&Integrados"
   Menu6.Caption = "&Lst(Logix)"
-  Menu7.Caption = "&Configurações"
+  Menu7.Caption = "&ConfiguraÃ§Ãµes"
   mnuSUBMENU4(0).Caption = "Impressoras|#printcfg"
   mnuSUBMENU4(1).Caption = "Alteracoes|#info"
   mnuSUBMENU4(2).Caption = "Usuarios|#user"

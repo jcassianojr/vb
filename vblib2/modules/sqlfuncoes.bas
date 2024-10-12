@@ -170,7 +170,7 @@ Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
   End Select
 End Function
 
-Public Function ApagaSQLP(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclus„o")
+Public Function ApagaSQLP(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclus√£o")
   Dim aRETU As Variant
   aRETU = TipoConn(cARQ)
   cARQ = aRETU(1)
@@ -258,15 +258,15 @@ Public Function Mana5Fec() As Boolean
     End If
     cCAMFEC = UCase(Busca(cDIZBX, "Utilizar", "A", 1))
     If Len(aARQFEC(1)) = 0 And cCAMFEC = "B" Then
-      Alert "N„o Possue Baixa"
+      Alert "N√£o Possue Baixa"
       Exit Function
     End If
     If Len(aARQFEC(2)) = 0 And cCAMFEC = "F" Then
-      Alert "N„o Possue Fechamento"
+      Alert "N√£o Possue Fechamento"
       Exit Function
     End If
     If Len(aARQFEC(3)) = 0 And cCAMFEC = "C" Then
-      Alert "N„o Possue Acumulado"
+      Alert "N√£o Possue Acumulado"
       Exit Function
     End If
     If cCAMFEC = "F" Then
@@ -304,10 +304,10 @@ Public Function Mana5Fec() As Boolean
       End Select
     End If
     If cCAMFEC = "C" Then
-      If Not MDG("Usar Acumulo Anterior", "ConfirmaÁao") Then
+      If Not MDG("Usar Acumulo Anterior", "Confirma√ßao") Then
         ''Shell "somaano $" & UCase(aARQFEC(0)), vbNormalFocus
         ShellEx "SOMAANO", essSW_SHOWDEFAULT, "$" & UCase(aARQFEC(0)), PegPath("PATH", "SOMAANO")
-        Alert "Clique em Ok, ApÛs o Termino do Acumulo", "Aguarde.."
+        Alert "Clique em Ok, Ap√≥s o Termino do Acumulo", "Aguarde.."
       End If
     End If
     aARQFEC(4) = cFECDIZ
