@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escuser 
    Caption         =   "Selecione o Usuario Desejado"
    ClientHeight    =   6075
@@ -13,7 +13,7 @@ Begin VB.Form escuser
    ScaleHeight     =   6075
    ScaleWidth      =   8475
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5415
       Left            =   120
       TabIndex        =   2
@@ -76,9 +76,9 @@ Option Explicit
 Private Sub ApagaNF_Click()
  ' Dim aRETU As Variant
   Dim sSQL As String
-  If Not MDG("Apagar Usuario", "Confirme Exclus„o") Then
+  If Not MDG("Apagar Usuario", "Confirme Exclus√£o") Then
     Exit Sub
-  End
+  End If
   
   Grid.Col = 0
   zIDTEMP = Grid

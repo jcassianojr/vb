@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escMP04 
    Caption         =   "Escolha o Usuario Desejado"
    ClientHeight    =   6090
@@ -13,7 +13,7 @@ Begin VB.Form escMP04
    ScaleHeight     =   6090
    ScaleWidth      =   8265
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5415
       Left            =   120
       TabIndex        =   2
@@ -105,7 +105,7 @@ Private Sub FilRelat()
       cSQL = "SELECT TECNICO,NOMTEC,DEMITIDO,CPF FROM MP04 WHERE DAY(DEMITIDO)=0 ORDER BY " & cORDEM
     End If
   End If
-  MontaGridFast Grid, 3, Array(1200, 3500, 1), Array("Nº", "Nome", "X"), Array("TECNICO", "L$NOMTEC", "CPF"), cARQ, cSQL
+  MontaGridFast Grid, 3, Array(1200, 3500, 1), Array("NÂº", "Nome", "X"), Array("TECNICO", "L$NOMTEC", "CPF"), cARQ, cSQL
 End Sub
 
 Private Sub Form_Load()
@@ -115,7 +115,7 @@ Private Sub Form_Load()
   Else
     aORDEM = Array("TECNICO", "NOMTEC")
   End If
-  aORDES = Array("Nº", "Nome")
+  aORDES = Array("NÂº", "Nome")
   cORDEM = "TECNICO"
   cSUBWHERE = ""
   xmontatoolbar Me.Toolbar1, "escMP04", True

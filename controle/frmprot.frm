@@ -59,7 +59,7 @@ Begin VB.Form frmprot
       Top             =   480
       Width           =   4335
    End
-   Begin VBFLXGRD17.VBFlexGrid GridAtual 
+   Begin VBFLXGRD18.VBFlexGrid GridAtual 
       Height          =   2895
       Left            =   120
       TabIndex        =   4
@@ -243,7 +243,7 @@ End Sub
 Private Sub Filgrid()
   Dim cSQL As String
   cSQL = "SELECT PARTNUMBER,NOME,PROJETO FROM PROTO WHERE CLIENTE=" & nPF
-  MontaGridFast GridAtual, 3, Array(2000, 4000, 2000), Array("Produto", "DescriÁ„o", "Projeto"), _
+  MontaGridFast GridAtual, 3, Array(2000, 4000, 2000), Array("Produto", "Descri√ß√£o", "Projeto"), _
                 Array("L$PARTNUMBER", "NOME", "PROJETO"), cARQDES, cSQL
 End Sub
 
@@ -270,7 +270,7 @@ Private Sub Novo_Click()
   Dim cDESENHO As String
   Dim sSQL As String
 
-  cDESENHO = InputBox("Digite o Produto", "Inclus„o Produto", "__")
+  cDESENHO = InputBox("Digite o Produto", "Inclus√£o Produto", "__")
   sSQL = "SELECT * FROM PROTO WHERE PARTNUMBER='" & cDESENHO & "'"
   If IncluiSQL(cARQDES, sSQL, 3, Array("PARTNUMBER", "CLIENTE", "CLINOME"), _
                Array(cDESENHO, nPF, cCLINOME), True, True) Then

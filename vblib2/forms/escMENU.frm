@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escMENU 
    Caption         =   "Selecione o Menu Desejado"
    ClientHeight    =   5775
@@ -13,7 +13,7 @@ Begin VB.Form escMENU
    ScaleHeight     =   5775
    ScaleWidth      =   8880
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5175
       Left            =   120
       TabIndex        =   2
@@ -69,7 +69,7 @@ Private Sub Apaga_Click()
   Dim eRETU As Variant
   Dim cdb As String
   Dim sSQL As String
-  If Not MDG("Apagar Menu", "Confirme Exclus„o") Then
+  If Not MDG("Apagar Menu", "Confirme Exclus√£o") Then
     Exit Sub
   End If
 

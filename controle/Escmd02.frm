@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escMD02 
    Caption         =   "Selecione:"
    ClientHeight    =   6090
@@ -28,7 +28,7 @@ Begin VB.Form escMD02
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5475
       Left            =   120
       TabIndex        =   0
@@ -93,7 +93,7 @@ Private Sub FilRelat()
   Else
     cSQL = "SELECT CODIGO1,DESCRICAO,VALOR FROM MD02 WHERE CODIGO='" & tipocodigo() & "' AND " & cSUBWHERE & " ORDER BY " & cORDEM
   End If
-  MontaGridFast Grid, 3, Array(1200, 3000, 800), Array("CÛdigo", "DescriÁ„o", "Valor"), _
+  MontaGridFast Grid, 3, Array(1200, 3000, 800), Array("C√≥digo", "Descri√ß√£o", "Valor"), _
                 Array("L$CODIGO1", "DESCRICAO", "VALOR"), cARQMD, cSQL
 End Sub
 
@@ -154,8 +154,8 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
       FilRelat
     End If
   Case "NOV"
-    cCONJUNTO = InputBox("Digite o Codigo", "Inclus„o ", "__")
-    cDESCRICAO = InputBox("Digite a descricao", "Inclus„o ", "__")
+    cCONJUNTO = InputBox("Digite o Codigo", "Inclus√£o ", "__")
+    cDESCRICAO = InputBox("Digite a descricao", "Inclus√£o ", "__")
     If Len(cCONJUNTO) = 0 Or Len(cDESCRICAO) = 0 Then
       Alert ("Preencha Codigo e Descricao")
       Exit Sub

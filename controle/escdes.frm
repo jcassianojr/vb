@@ -28,7 +28,7 @@ Begin VB.Form escDes
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5655
       Left            =   120
       TabIndex        =   0
@@ -159,7 +159,7 @@ End Sub
 
 Private Sub incluir_Click()
   Dim sSQL As String
-  cCONJUNTO = InputBox("Digite o Conjunto", "Inclus„o Conjunto", "__")
+  cCONJUNTO = InputBox("Digite o Conjunto", "Inclus√£o Conjunto", "__")
   sSQL = "select * from conjunto WHERE conjunto='" & cCONJUNTO & "'"
   If IncluiSQL(cARQDES, sSQL, 2, Array("CONJUNTO", "CLIENTE"), Array(cCONJUNTO, 0), True, True) Then
     FilRelat

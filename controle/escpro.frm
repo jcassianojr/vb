@@ -28,7 +28,7 @@ Begin VB.Form escPRO
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5775
       Left            =   120
       TabIndex        =   0
@@ -114,14 +114,14 @@ Private Sub FilRelat()
     cSQL = "SELECT * FROM PRODENG ORDER BY PRODUTO,TIPO,NUMERO"
   End If
 
-  MontaGridFast Grid, 5, Array(400, 1200, 2000, 1200, 800), Array("T", "Número", "Descrição", "Ref Cliente", "Cliente"), _
+  MontaGridFast Grid, 5, Array(400, 1200, 2000, 1200, 800), Array("T", "NÃºmero", "DescriÃ§Ã£o", "Ref Cliente", "Cliente"), _
                 Array("TIPO", "NUMERO", "NOME", "L$PRODUTO", "RESCLI"), cARQDES, cSQL
 End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
   aORDEM = Array("TIPO,NUMERO", "PRODUTO,TIPO,NUMERO")
-  aORDES = Array("Nº", "Produto")
+  aORDES = Array("NÂº", "Produto")
   cORDEM = "PRODUTO,TIPO,NUMERO"
   cSUBWHERE = ""
   cARQDES = PegPath("PATH", "DESENHO")

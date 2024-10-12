@@ -40,7 +40,7 @@ Begin VB.Form frmproti
       Index           =   7
       Left            =   4080
       TabIndex        =   16
-      ToolTipText     =   "Valor da Cotaçao"
+      ToolTipText     =   "Valor da CotaÃ§ao"
       Top             =   1860
       Visible         =   0   'False
       Width           =   1575
@@ -55,7 +55,7 @@ Begin VB.Form frmproti
       Width           =   2055
    End
    Begin VB.CheckBox Check1 
-      Caption         =   "Cotação"
+      Caption         =   "CotaÃ§Ã£o"
       Height          =   255
       Left            =   240
       TabIndex        =   12
@@ -67,7 +67,7 @@ Begin VB.Form frmproti
       Index           =   1
       Left            =   3360
       TabIndex        =   11
-      ToolTipText     =   "Descriçao do Produto"
+      ToolTipText     =   "DescriÃ§ao do Produto"
       Top             =   720
       Width           =   4695
    End
@@ -127,7 +127,7 @@ Begin VB.Form frmproti
       Top             =   360
       Width           =   4335
    End
-   Begin VBFLXGRD17.VBFlexGrid GridAtual 
+   Begin VBFLXGRD18.VBFlexGrid GridAtual 
       Height          =   2055
       Left            =   120
       TabIndex        =   4
@@ -364,7 +364,7 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 3
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
@@ -412,7 +412,7 @@ Private Sub excluir_Click()
   If ApagaSQLP(cARQDES, sSQL) Then
     Filgrid
     eRETU02 = "GP11:" & Trim(Str(nPPAP)) & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & "Código:" & cDESENHO & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & "CÃ³digo:" & cDESENHO & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & "SSMT" & cCONJUNTO & Chr(13) & Chr(10)
     MAILENV "PROT0002", eRETU02
   End If
@@ -460,14 +460,14 @@ Private Sub Novo_Click()
   Dim RSTAB As New ADODB.Recordset
   Dim sSQL As String
   nREVI = 0
-  cSSMT = InputBox("Digite o SSMT", "Inclusão SSMT", "__")
+  cSSMT = InputBox("Digite o SSMT", "InclusÃ£o SSMT", "__")
   DB.ConnectionTimeout = 120
   DB.Open GeracArq(cARQDES, , False)
   sSQL = "SELECT * FROM PROTOI WHERE PARTNUMBER='" & cDESENHO & "' AND SSMT='" & cSSMT & "'"
   RSTAB.Open sSQL, DB, adOpenForwardOnly, adLockReadOnly
   If Not RSTAB.EOF Then
     RSTAB.Close
-    Alert "SSMT Já Cadastrado"
+    Alert "SSMT JÃ¡ Cadastrado"
     Exit Sub
   End If
   RSTAB.Close
@@ -492,7 +492,7 @@ Private Sub Novo_Click()
   IncluiSQL cARQDES, "select * from PROTOI where partnumeber='" & cDESENHO & "' and ssmt='" & cSSMT & " and pf=" & nPF, 3, Array("PARTNUMBER", "SSMT", "PPAP"), Array(cDESENHO, cSSMT, nPF), True, False
   Filgrid
   eRETU02 = "GP11:" & Trim(Str(nPPAP)) & Chr(13) & Chr(10)
-  eRETU02 = eRETU02 & "Código:" & cDESENHO & Chr(13) & Chr(10)
+  eRETU02 = eRETU02 & "CÃ³digo:" & cDESENHO & Chr(13) & Chr(10)
   eRETU02 = eRETU02 & "SSMT" & cSSMT & Chr(13) & Chr(10)
   MAILENV "PROT0001", eRETU02
 

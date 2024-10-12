@@ -1,0 +1,58 @@
+****** Run at 12/10/2024 10:47:14
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549816" -f "d:\develop\vb\vblib2\forms\escOrdem.frm" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\escOrdem.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:14
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549817" -f "d:\develop\vb\vblib2\forms\FRMCOMP.FRM" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\FRMCOMP.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:15
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549818" -f "d:\develop\vb\vblib2\forms\FrmFiltro.frm" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\FrmFiltro.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:15
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549819" -f "d:\develop\vb\imagensjpg\escIMG.FRM" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\escIMG.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:16
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549820" -f "d:\develop\vb\imagensjpg\frmexpjpg.frm" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\frmexpjpg.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:16
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549821" -f "d:\develop\vb\vblib2\modules\adolib.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\adolib.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:17
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549822" -f "d:\develop\vb\vblib2\modules\checagem.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\checagem.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:17
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549823" -f "d:\develop\vb\vblib2\modules\GeralVars.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\GeralVars.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:17
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549824" -f "d:\develop\vb\vblib2\modules\GridFuncoes.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\GridFuncoes.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:18
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549825" -f "d:\develop\vb\vblib2\modules\mFileAPI.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\mFileAPI.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:18
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549826" -f "d:\develop\vb\vblib2\modules\Myfunctions.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\Myfunctions.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:19
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549827" -f "d:\develop\vb\vblib2\modules\sqlfuncoes.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\sqlfuncoes.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:19
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549828" -f "d:\develop\vb\vblib2\modules\SqlFuncoesAdo.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\SqlFuncoesAdo.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:20
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549829" -f "d:\develop\vb\imagensjpg\imagens.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\imagens.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:20
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549830" -f "d:\develop\vb\vblib2\forms\frmlocalizaa.frm" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\frmlocalizaa.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:20
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549831" -f "d:\develop\vb\vblib2\forms\frmlocalizar.frm" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\frmlocalizar.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:21
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549832" -f "d:\develop\vb\vblib2\modules\jpgpicture.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\jpgpicture.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:21
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549833" -f "d:\develop\vb\vblib2\FORMS\Frmpecasjpg.frm" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\Frmpecasjpg.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:22
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549834" -f "d:\develop\vb\vblib2\modules\VisualStyles.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\VisualStyles.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:22
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549835" -f "d:\develop\vb\vblib2\class\clsOSInfo.cls" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\clsOSInfo.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:22
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549836" -f "d:\develop\vb\vblib2\modules\Common.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\Common.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:23
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549837" -f "d:\develop\vb\vblib2\forms\frmPicViewer.frm" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\frmPicViewer.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:24
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549838" -f "d:\develop\vb\vblib2\class\Resizer.cls" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\Resizer.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:24
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549839" -f "d:\develop\vb\vblib2\modules\mBrowseFolder.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\mBrowseFolder.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:24
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549840" -f "d:\develop\vb\vblib2\modules\modGDIPlusResize.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\modGDIPlusResize.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:25
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549841" -f "d:\develop\vb\vblib2\modules\split.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\split.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:25
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549842" -f "d:\develop\vb\vblib2\modules\mPrintPreview.bas" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\mPrintPreview.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:25
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549843" -f "d:\develop\vb\vblib2\forms\FrmPicturePrinter.frm" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\FrmPicturePrinter.OBJ" -QIfdiv -ML -basic
+****** Run at 12/10/2024 10:47:26
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB549844" -f "d:\develop\vb\vblib2\class\PicSavev11.cls" -W 3 -Gy -G5 -Gs4096 -dos -Zl -Fo"D:\develop\vb\wrpt\PicSavev11.OBJ" -QIfdiv -ML -basic

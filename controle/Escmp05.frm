@@ -28,7 +28,7 @@ Begin VB.Form escMP05
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5415
       Left            =   120
       TabIndex        =   0
@@ -94,14 +94,14 @@ Private Sub FilRelat()
     cSQL = "SELECT DESCRI,RESPON,CARGO FROM MP05 ORDER BY " & cORDEM
   End If
   cARQ = GeraConn(cARQ, "JETFOX")
-  MontaGridFast Grid, 3, Array(3000, 3000, 1500), Array("DescriÁ„o", "Respons·vel", "Cargo"), _
+  MontaGridFast Grid, 3, Array(3000, 3000, 1500), Array("Descri√ß√£o", "Respons√°vel", "Cargo"), _
                 Array("L$DESCRI", "RESPON", "CARGO"), cARQ, cSQL
 End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
   aORDEM = Array("DESCRI", "RESPON", "CARGO")
-  aORDES = Array("DescriÁ„o", "Respons·vel", "Cargo")
+  aORDES = Array("Descri√ß√£o", "Respons√°vel", "Cargo")
   cORDEM = "DESCRI"
   cSUBWHERE = ""
   FilRelat

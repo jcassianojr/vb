@@ -13,7 +13,7 @@ Begin VB.Form escpffim
    ScaleHeight     =   5775
    ScaleWidth      =   8880
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5175
       Left            =   120
       TabIndex        =   0
@@ -97,7 +97,7 @@ Private Sub FilRelat()
   Else
     cSQL = "SELECT CODFINAL,codigo,DEscr,PF FROM PF WHERE NOT BLOQUEADO AND " & cSUBWHERE & " ORDER BY " & cORDEM
   End If
-  MontaGridFast Grid, 4, Array(1600, 1600, 4000, 200), Array("Final", "Produto", "Descriçao", "PF"), _
+  MontaGridFast Grid, 4, Array(1600, 1600, 4000, 200), Array("Final", "Produto", "DescriÃ§ao", "PF"), _
                 Array("L$CODFINAL", "L$CODIGO", "L$DESCR", "PF"), cARQ, cSQL
 End Sub
 

@@ -411,7 +411,7 @@ Begin VB.Form frmIE
          Width           =   1215
          _ExtentX        =   0
          _ExtentY        =   0
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -608,7 +608,7 @@ Begin VB.Form frmIE
          Top             =   600
          Width           =   9975
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1815
          Left            =   -74640
          TabIndex        =   32
@@ -619,7 +619,7 @@ Begin VB.Form frmIE
          _ExtentY        =   3201
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1575
          Left            =   -74640
          TabIndex        =   33
@@ -1215,7 +1215,7 @@ Begin VB.Form frmIE
          Width           =   855
       End
       Begin VB.Label lblLabels 
-         Caption         =   "ObservaÁ„o"
+         Caption         =   "Observa√ß√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   16
@@ -1237,7 +1237,7 @@ Begin VB.Form frmIE
       End
       Begin VB.Label lblLabels 
          BackStyle       =   0  'Transparent
-         Caption         =   "ProteÁ„o"
+         Caption         =   "Prote√ß√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   6
@@ -1248,7 +1248,7 @@ Begin VB.Form frmIE
       End
       Begin VB.Label lblLabels 
          BackStyle       =   0  'Transparent
-         Caption         =   "IdentificaÁ„o"
+         Caption         =   "Identifica√ß√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   5
@@ -1701,7 +1701,7 @@ Private Sub cmdClose_Click()
     TXTFIELDS(21) = Fdata(TXTFIELDS(24))
   End If
 
-  '    If MDG("Gravar alteraÁÙes") Then 'sempre gravar por causa revisao
+  '    If MDG("Gravar altera√ß√¥es") Then 'sempre gravar por causa revisao
   For iLOOP = 0 To nCAMPOS - 1
     aVAL(iLOOP) = TXTFIELDS(iLOOP)
   Next iLOOP
@@ -1798,7 +1798,7 @@ End Sub
 
 Private Sub Command1_Click()
   If nREV = 0 Then
-    Alert "Revis„o Nao Escolhida"
+    Alert "Revis√£o Nao Escolhida"
     Exit Sub
   End If
   ePASS01 = "select * from rev WHERE PF=" & nPF & " AND TIPO='IE' AND REVISAO=" & nREV
@@ -1807,7 +1807,7 @@ End Sub
 
 Private Sub ComMotAlt_Click()
   If nREV = 0 Then
-    Alert "Revis„o Nao Escolhida"
+    Alert "Revis√£o Nao Escolhida"
     Exit Sub
   End If
   If gridrevi.Row > 0 Then
@@ -1823,7 +1823,7 @@ End Sub
 Private Sub ComMotExc_Click()
   Dim cSQL As String
   If nREV = 0 Then
-    Alert "Revis„o Nao Escolhida"
+    Alert "Revis√£o Nao Escolhida"
     Exit Sub
   End If
   If gridrevi.Row > 0 Then
@@ -1839,7 +1839,7 @@ End Sub
 Private Sub ComMotInc_Click()
   Dim nITEM As Long
   If nREV = 0 Then
-    Alert "Revis„o Nao Escolhida"
+    Alert "Revis√£o Nao Escolhida"
     Exit Sub
   End If
   nITEM = 1

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmFemeaApu 
@@ -219,7 +219,7 @@ Begin VB.Form frmFemeaApu
          Top             =   3180
          Width           =   1095
       End
-      Begin VBFLXGRD17.VBFlexGrid Grid 
+      Begin VBFLXGRD18.VBFlexGrid Grid 
          Height          =   2535
          Left            =   240
          TabIndex        =   25
@@ -229,7 +229,7 @@ Begin VB.Form frmFemeaApu
          _ExtentX        =   12621
          _ExtentY        =   4471
       End
-      Begin VBFLXGRD17.VBFlexGrid Grid10 
+      Begin VBFLXGRD18.VBFlexGrid Grid10 
          Height          =   4335
          Left            =   -74880
          TabIndex        =   34
@@ -239,7 +239,7 @@ Begin VB.Form frmFemeaApu
          _ExtentX        =   13467
          _ExtentY        =   7646
       End
-      Begin VBFLXGRD17.VBFlexGrid GridOpe 
+      Begin VBFLXGRD18.VBFlexGrid GridOpe 
          Height          =   4335
          Left            =   -74760
          TabIndex        =   35
@@ -622,7 +622,7 @@ Begin VB.Form frmFemeaApu
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
-      Caption         =   "DescriÁ„o"
+      Caption         =   "Descri√ß√£o"
       ForeColor       =   &H00C00000&
       Height          =   195
       Index           =   5
@@ -703,7 +703,7 @@ Private nROWREC As Long
 Private Sub CmdApagaTudo_Click()
   Dim cSQL As String
   cSQL = "SELECT * FROM FEMEARPNI WHERE SEQ=" & FixInt(aVAL(0))
-  If ApagaSQLP(cARQFEMEA, cSQL, "Apagar Todos LanÁamentos") Then
+  If ApagaSQLP(cARQFEMEA, cSQL, "Apagar Todos Lan√ßamentos") Then
     Filgrid
   End If
 End Sub
@@ -777,7 +777,7 @@ Private Sub CmdApurar_Click(Index As Integer)
   nANO = FixInt(ano.Value)
 
   If nMES = 0 Or nANO = 0 Then
-    Alert "Mes ou Ano n„o Preenchido"
+    Alert "Mes ou Ano n√£o Preenchido"
     Exit Sub
   End If
 
@@ -1245,7 +1245,7 @@ Private Sub CmdApurar_Click(Index As Integer)
   'atualizar femea padrao operacoes
   If MDG("Apura Femea Padrao- Operacoes") Then
 
-    DizerBarra "Apagando ApuraÁ„o Anterior"
+    DizerBarra "Apagando Apura√ß√£o Anterior"
     cSQL = "DELETE FROM FEMRPNO WHERE SEQ=" & nSEQ
     ADOComando GeracArq(cARQFEMEA), cSQL
     DizerBarra ""
@@ -1594,7 +1594,7 @@ Private Sub Command1_Click()
   Dim nCLIENTE As Integer
   Dim cSQL As String
   Dim aCLI As Variant
-  nCLIENTE = FixNum(Val(Busca("N› Cliente", "Incluindo RPN/ITEM", "1", 8)))
+  nCLIENTE = FixNum(Val(Busca("N√ù Cliente", "Incluindo RPN/ITEM", "1", 8)))
 
   cCODIGO = FixStr(InputBox("Digite o Codigo", "Incluindo", "__"), "")
   If nCLIENTE = 0 Then

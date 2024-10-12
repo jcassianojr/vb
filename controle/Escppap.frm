@@ -13,7 +13,7 @@ Begin VB.Form escPPAP
    ScaleHeight     =   6135
    ScaleWidth      =   8535
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5055
       Left            =   120
       TabIndex        =   0
@@ -147,11 +147,11 @@ Private Sub FilRelat()
     End Select
   End If
   If iPPAP = 3 Then
-    MontaGridFast Grid, 4, Array(400, 1600, 4000, 2000), Array("N167", "Produto", "DescriÁ„o", "SSMT"), _
+    MontaGridFast Grid, 4, Array(400, 1600, 4000, 2000), Array("N167", "Produto", "Descri√ß√£o", "SSMT"), _
                   Array("PPAP", "L$CODIGO", "NOME", "SSMT"), cARQPF, cSQL
 
   Else
-    MontaGridFast Grid, 3, Array(400, 1600, 4000), Array("N›", "Produto", "DescriÁ„o"), _
+    MontaGridFast Grid, 3, Array(400, 1600, 4000), Array("N√ù", "Produto", "Descri√ß√£o"), _
                   Array("PPAP", "L$CODIGO", "NOME"), cARQPF, cSQL
   End If
 End Sub
@@ -159,10 +159,10 @@ End Sub
 Private Sub Form_Load()
   CenterFormToScreen Me
   If iPPAP = 3 Then
-    aORDES = Array("N∫", "Produto", "DescriÁ„o", "SSMT")
+    aORDES = Array("N¬∫", "Produto", "Descri√ß√£o", "SSMT")
     aORDEM = Array("PPAP", "CODIGO", "NOME", "SSMT")
   Else
-    aORDES = Array("N∫", "Produto", "DescriÁ„o")
+    aORDES = Array("N¬∫", "Produto", "Descri√ß√£o")
     aORDEM = Array("PPAP", "CODIGO", "NOME")
   End If
   cORDEM = "PPAP"

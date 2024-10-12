@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form FrmFiltro 
    Caption         =   "Filtro"
    ClientHeight    =   5895
@@ -12,7 +12,7 @@ Begin VB.Form FrmFiltro
    ScaleHeight     =   5895
    ScaleWidth      =   9360
    StartUpPosition =   3  'Windows Default
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   2415
       Left            =   120
       TabIndex        =   33
@@ -224,7 +224,7 @@ Begin VB.Form FrmFiltro
       EndProperty
    End
    Begin VB.Frame Frame1 
-      Caption         =   "Operaçao"
+      Caption         =   "OperaÃ§ao"
       Height          =   645
       Left            =   120
       TabIndex        =   14
@@ -485,7 +485,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Const nFORMID = 1067
-Const cFORMID = "Filtro Para Relatórios"
+Const cFORMID = "Filtro Para RelatÃ³rios"
 Dim lCONTINUA As Boolean
 Dim cTIPOCON As String
 
@@ -508,7 +508,7 @@ Private Sub CmdAbrir_Click()
     cTIPOCON = "JETFOX"
   Else
     If Len(aRELCFG(13)) = 0 Then
-      Alert ("Tabela Não Preenchida")
+      Alert ("Tabela NÃ£o Preenchida")
       lCONTINUA = False
     Else
       tabela = aRELCFG(13)

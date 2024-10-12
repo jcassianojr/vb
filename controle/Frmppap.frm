@@ -542,7 +542,7 @@ Begin VB.Form frmPPAP
          Top             =   600
          Width           =   795
       End
-      Begin VBFLXGRD17.VBFlexGrid Grid 
+      Begin VBFLXGRD18.VBFlexGrid Grid 
          Height          =   2655
          Left            =   -74760
          TabIndex        =   78
@@ -648,7 +648,7 @@ Begin VB.Form frmPPAP
          Width           =   7335
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Submissão Inicial"
+         Caption         =   "SubmissÃ£o Inicial"
          DataField       =   "SUB01"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -659,7 +659,7 @@ Begin VB.Form frmPPAP
          Width           =   2595
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Alterações de Engenharia"
+         Caption         =   "AlteraÃ§Ãµes de Engenharia"
          DataField       =   "SUB02"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -681,7 +681,7 @@ Begin VB.Form frmPPAP
          Width           =   2595
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Correção de Discrepancia"
+         Caption         =   "CorreÃ§Ã£o de Discrepancia"
          DataField       =   "SUB04"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -703,7 +703,7 @@ Begin VB.Form frmPPAP
          Width           =   2595
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Medições Tridimensionais"
+         Caption         =   "MediÃ§Ãµes Tridimensionais"
          DataField       =   "RES01"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -714,7 +714,7 @@ Begin VB.Form frmPPAP
          Width           =   2955
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Critérios de Aparencia"
+         Caption         =   "CritÃ©rios de Aparencia"
          DataField       =   "RES03"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -725,7 +725,7 @@ Begin VB.Form frmPPAP
          Width           =   2955
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Material/Construção Opcional"
+         Caption         =   "Material/ConstruÃ§Ã£o Opcional"
          DataField       =   "SUB06"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -747,7 +747,7 @@ Begin VB.Form frmPPAP
          Width           =   3075
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Mudança no Processo da Peça"
+         Caption         =   "MudanÃ§a no Processo da PeÃ§a"
          DataField       =   "SUB08"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -758,7 +758,7 @@ Begin VB.Form frmPPAP
          Width           =   3075
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Peças Produzidas em outra localidade"
+         Caption         =   "PeÃ§as Produzidas em outra localidade"
          DataField       =   "SUB09"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -791,7 +791,7 @@ Begin VB.Form frmPPAP
          Width           =   2955
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Atendem todos os requisitos de desenhos e especificações"
+         Caption         =   "Atendem todos os requisitos de desenhos e especificaÃ§Ãµes"
          DataField       =   "APLIC"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -853,7 +853,7 @@ Begin VB.Form frmPPAP
          Width           =   2115
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Marcação ISO"
+         Caption         =   "MarcaÃ§Ã£o ISO"
          DataField       =   "NOT02"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -886,7 +886,7 @@ Begin VB.Form frmPPAP
          Width           =   2055
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Aparência"
+         Caption         =   "AparÃªncia"
          DataField       =   "INF03"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -951,7 +951,7 @@ Begin VB.Form frmPPAP
          Width           =   495
       End
       Begin VB.CheckBox check1 
-         Caption         =   "Item de Segurança"
+         Caption         =   "Item de SeguranÃ§a"
          DataField       =   "ITEM"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -1024,7 +1024,7 @@ Begin VB.Form frmPPAP
          Top             =   1860
          Width           =   2115
       End
-      Begin VBFLXGRD17.VBFlexGrid gridlay 
+      Begin VBFLXGRD18.VBFlexGrid gridlay 
          Height          =   2655
          Left            =   -74640
          TabIndex        =   102
@@ -1034,7 +1034,7 @@ Begin VB.Form frmPPAP
          _ExtentY        =   4683
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid GridCjto 
+      Begin VBFLXGRD18.VBFlexGrid GridCjto 
          Height          =   2655
          Left            =   -74760
          TabIndex        =   111
@@ -1132,7 +1132,7 @@ Begin VB.Form frmPPAP
          Width           =   915
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Explicações Comentarios"
+         Caption         =   "ExplicaÃ§Ãµes Comentarios"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   23
@@ -1152,7 +1152,7 @@ Begin VB.Form frmPPAP
          Width           =   615
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Disposição de Cert. (A)(R)(O)"
+         Caption         =   "DisposiÃ§Ã£o de Cert. (A)(R)(O)"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   4
@@ -1162,7 +1162,7 @@ Begin VB.Form frmPPAP
          Width           =   2235
       End
       Begin VB.Label Label1 
-         Caption         =   "Aprovação Funcional (A)(D)"
+         Caption         =   "AprovaÃ§Ã£o Funcional (A)(D)"
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -72120
@@ -1191,7 +1191,7 @@ Begin VB.Form frmPPAP
          Width           =   795
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Alteraçoes Adc. Eng."
+         Caption         =   "AlteraÃ§oes Adc. Eng."
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   13
@@ -1210,7 +1210,7 @@ Begin VB.Form frmPPAP
          Width           =   675
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Cliente/Divisào"
+         Caption         =   "Cliente/DivisÃ o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   16
@@ -1260,7 +1260,7 @@ Begin VB.Form frmPPAP
          Width           =   1455
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Nivel Alteraçao"
+         Caption         =   "Nivel AlteraÃ§ao"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   6
@@ -1279,7 +1279,7 @@ Begin VB.Form frmPPAP
          Width           =   615
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Nivel de Submissão"
+         Caption         =   "Nivel de SubmissÃ£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   24
@@ -1299,7 +1299,7 @@ Begin VB.Form frmPPAP
          Width           =   735
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Data Alteração"
+         Caption         =   "Data AlteraÃ§Ã£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   9
@@ -1329,7 +1329,7 @@ Begin VB.Form frmPPAP
          Width           =   975
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Aplicação"
+         Caption         =   "AplicaÃ§Ã£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   31
@@ -1511,7 +1511,7 @@ Begin VB.Form frmPPAP
       Width           =   495
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Disposição"
+      Caption         =   "DisposiÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   20
@@ -1521,7 +1521,7 @@ Begin VB.Form frmPPAP
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Código:"
+      Caption         =   "CÃ³digo:"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   5
@@ -1589,7 +1589,7 @@ End Sub
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To 32
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
@@ -1746,7 +1746,7 @@ End Sub
 Private Sub CmdNovCjto_Click(Index As Integer)
   Dim cDESENHO As String
   Dim sSQL As String
-  cDESENHO = InputBox("Digite o Produto", "Inclusão Produto", "__")
+  cDESENHO = InputBox("Digite o Produto", "InclusÃ£o Produto", "__")
 
   Select Case iPPAP
   Case 1, 11
@@ -1770,7 +1770,7 @@ Private Sub CmdNovoLay_Click(Index As Integer)
   Dim sSQL As String
 
   If Index = 1 Then
-    cDESENHO = InputBox("Digite o Produto", "Inclusão Produto", TXTFIELDS(5).tEXT)
+    cDESENHO = InputBox("Digite o Produto", "InclusÃ£o Produto", TXTFIELDS(5).tEXT)
     dDATA = Today()
   Else
     gridlay.Row = (gridlay.Rows) - 1         ''UltimoItem

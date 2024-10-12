@@ -48,7 +48,7 @@ Begin VB.Form escpc
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5115
       Left            =   60
       TabIndex        =   0
@@ -114,7 +114,7 @@ Private Sub Form_Load()
   CenterFormToScreen Me
   cARQPC = PegPath("PATH", "PF")
   aORDEM = Array("PF", "STPFPC", "STFEPC", "CODIGO", "DESCR", "RESDAT", "FEMEAD", "PCLIBDATE", "CODIGOINT")
-  aORDES = Array("Nº PF", "Alterado PC", "Alterado PF", "Codigo", "Descricao", "Data liberacao Processo fabricacao", "data liberacao femea", "data liberacao plano de controle", "Codigo Integrado")
+  aORDES = Array("NÂº PF", "Alterado PC", "Alterado PF", "Codigo", "Descricao", "Data liberacao Processo fabricacao", "data liberacao femea", "data liberacao plano de controle", "Codigo Integrado")
   cORDEM = "PF"
   cSUBWHERE = ""
 

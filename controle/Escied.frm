@@ -13,7 +13,7 @@ Begin VB.Form escIED
    ScaleHeight     =   6090
    ScaleWidth      =   8925
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5535
       Left            =   120
       TabIndex        =   0
@@ -91,9 +91,9 @@ Private Function cTIPO()
     cTIPO = "T"
   Case 2                                       ' Fechamento
     cTIPO = "F"
-  Case 3                                       ' Identificaçao
+  Case 3                                       ' IdentificaÃ§ao
     cTIPO = "I"
-  Case 4                                       ' Proteçao
+  Case 4                                       ' ProteÃ§ao
     cTIPO = "P"
   Case 5                                       ' Local
     cTIPO = "L"
@@ -109,7 +109,7 @@ Private Function cTIPO()
     cTIPO = "4"
   Case 105                                     'Carta
     cTIPO = "5"
-  Case 106                                     'Plano Reaçao
+  Case 106                                     'Plano ReaÃ§ao
     cTIPO = "6"
   Case 107                                     'frequencia
     cTIPO = "7"
@@ -127,7 +127,7 @@ Private Function cTIPO()
     cTIPO = "O"
   Case 302                                     'Severidade
     cTIPO = "S"
-  Case 303                                     ' Deteçao
+  Case 303                                     ' DeteÃ§ao
     cTIPO = "D"
   Case 304                                     'Carac Atual Preventiva
     cTIPO = "A"
@@ -184,7 +184,7 @@ Private Sub FilRelat()
     End If
 
   End If
-  MontaGridFast Grid, 4, Array(400, 5000, 400, 10), Array("Tipo", "Descriçao", "Valor", ""), _
+  MontaGridFast Grid, 4, Array(400, 5000, 400, 10), Array("Tipo", "DescriÃ§ao", "Valor", ""), _
                 Array("TIPO", "L$DESCRITIVO", "VALOR", "ITEM"), cARQPF, cSQL
 
 End Sub
@@ -193,7 +193,7 @@ Private Sub Form_Load()
 '    CentralizaJanela Me
   CenterFormToScreen Me
   aORDEM = Array("TIPO", "DESCRITIVO", "VALOR")
-  aORDES = Array("Tipo", "Descriçao", "Valor")
+  aORDES = Array("Tipo", "DescriÃ§ao", "Valor")
   cORDEM = "TIPO"
   cSUBWHERE = ""
   cARQPF = PegPath("PATH", "PF")

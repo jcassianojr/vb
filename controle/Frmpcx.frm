@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmPCX 
@@ -303,7 +303,7 @@ Begin VB.Form frmPCX
       Tab(4).Control(24)=   "Cmddistro(0)"
       Tab(4).Control(25)=   "escidfolha(10)"
       Tab(4).Control(26)=   "PCDinipc"
-      TabCaption(5)   =   "ComposiÁ„o"
+      TabCaption(5)   =   "Composi√ß√£o"
       Tab(5).ControlCount=   18
       Tab(5).Control(0)=   "lblLabels(7)"
       Tab(5).Control(1)=   "lblLabels(17)"
@@ -441,7 +441,7 @@ Begin VB.Form frmPCX
       Tab(12).Control(10)=   "TXTpre(10)"
       Tab(12).Control(11)=   "escidfolha(11)"
       Tab(12).Control(12)=   "PCDinipre"
-      TabCaption(13)  =   "ComposiÁao Pre"
+      TabCaption(13)  =   "Composi√ßao Pre"
       Tab(13).ControlCount=   18
       Tab(13).Control(0)=   "Cmddistro(15)"
       Tab(13).Control(1)=   "TXTpre(19)"
@@ -461,7 +461,7 @@ Begin VB.Form frmPCX
       Tab(13).Control(15)=   "gridrevi(15)"
       Tab(13).Control(16)=   "lblLabels(33)"
       Tab(13).Control(17)=   "lblLabels(32)"
-      TabCaption(14)  =   "PeÁa Critica "
+      TabCaption(14)  =   "Pe√ßa Critica "
       Tab(14).ControlCount=   2
       Tab(14).Control(0)=   "TXTpc(23)"
       Tab(14).Control(1)=   "Check5"
@@ -640,7 +640,7 @@ Begin VB.Form frmPCX
          Style           =   1  'Graphical
          TabIndex        =   399
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher N∫ Folha"
+         ToolTipText     =   "Escolher N¬∫ Folha"
          Top             =   1560
          Width           =   375
       End
@@ -653,7 +653,7 @@ Begin VB.Form frmPCX
          Style           =   1  'Graphical
          TabIndex        =   398
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher N∫ Folha"
+         ToolTipText     =   "Escolher N¬∫ Folha"
          Top             =   2040
          Width           =   375
       End
@@ -666,7 +666,7 @@ Begin VB.Form frmPCX
          Style           =   1  'Graphical
          TabIndex        =   397
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher N∫ Folha"
+         ToolTipText     =   "Escolher N¬∫ Folha"
          Top             =   1920
          Width           =   375
       End
@@ -679,7 +679,7 @@ Begin VB.Form frmPCX
          Style           =   1  'Graphical
          TabIndex        =   396
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher N∫ Folha"
+         ToolTipText     =   "Escolher N¬∫ Folha"
          Top             =   1800
          Width           =   375
       End
@@ -691,7 +691,7 @@ Begin VB.Form frmPCX
          Style           =   1  'Graphical
          TabIndex        =   395
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher N∫ Folha"
+         ToolTipText     =   "Escolher N¬∫ Folha"
          Top             =   1560
          Width           =   375
       End
@@ -1223,7 +1223,7 @@ Begin VB.Form frmPCX
          Style           =   1  'Graphical
          TabIndex        =   347
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher N∫ Folha"
+         ToolTipText     =   "Escolher N¬∫ Folha"
          Top             =   2040
          Width           =   375
       End
@@ -1235,7 +1235,7 @@ Begin VB.Form frmPCX
          Style           =   1  'Graphical
          TabIndex        =   346
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher N∫ Folha"
+         ToolTipText     =   "Escolher N¬∫ Folha"
          Top             =   1920
          Width           =   375
       End
@@ -1247,7 +1247,7 @@ Begin VB.Form frmPCX
          Style           =   1  'Graphical
          TabIndex        =   345
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher N∫ Folha"
+         ToolTipText     =   "Escolher N¬∫ Folha"
          Top             =   1800
          Width           =   375
       End
@@ -1565,7 +1565,7 @@ Begin VB.Form frmPCX
          Width           =   435
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   375
          Index           =   22
          Left            =   -71160
@@ -1666,7 +1666,7 @@ Begin VB.Form frmPCX
          Width           =   435
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   255
          Index           =   21
          Left            =   -72960
@@ -1767,7 +1767,7 @@ Begin VB.Form frmPCX
          Width           =   435
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   315
          Index           =   25
          Left            =   -72900
@@ -1868,7 +1868,7 @@ Begin VB.Form frmPCX
          Width           =   495
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   375
          Index           =   23
          Left            =   -71220
@@ -1969,7 +1969,7 @@ Begin VB.Form frmPCX
          Width           =   495
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   375
          Index           =   24
          Left            =   -72720
@@ -2226,7 +2226,7 @@ Begin VB.Form frmPCX
          Top             =   1200
          Width           =   1575
       End
-      Begin VBFLXGRD17.VBFlexGrid grdRI 
+      Begin VBFLXGRD18.VBFlexGrid grdRI 
          Height          =   3855
          Left            =   -74820
          TabIndex        =   198
@@ -2304,7 +2304,7 @@ Begin VB.Form frmPCX
          Width           =   1455
       End
       Begin VB.CheckBox Check4 
-         Caption         =   "SeleÁao 100 %"
+         Caption         =   "Sele√ßao 100 %"
          DataField       =   "sel100"
          DataSource      =   "datPrimaryRS"
          Enabled         =   0   'False
@@ -2343,7 +2343,7 @@ Begin VB.Form frmPCX
          Width           =   1335
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   315
          Index           =   15
          Left            =   -72900
@@ -2435,7 +2435,7 @@ Begin VB.Form frmPCX
          Width           =   1335
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   375
          Index           =   14
          Left            =   -72720
@@ -2527,7 +2527,7 @@ Begin VB.Form frmPCX
          Width           =   1335
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   375
          Index           =   13
          Left            =   -71280
@@ -2619,7 +2619,7 @@ Begin VB.Form frmPCX
          Width           =   1335
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   375
          Index           =   12
          Left            =   -71220
@@ -2711,7 +2711,7 @@ Begin VB.Form frmPCX
          Width           =   1335
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   255
          Index           =   11
          Left            =   -72960
@@ -3140,7 +3140,7 @@ Begin VB.Form frmPCX
          Width           =   615
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   375
          Index           =   5
          Left            =   -72900
@@ -3187,7 +3187,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   255
          Index           =   4
          Left            =   -72840
@@ -3234,7 +3234,7 @@ Begin VB.Form frmPCX
          Width           =   495
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   375
          Index           =   3
          Left            =   -71640
@@ -3271,7 +3271,7 @@ Begin VB.Form frmPCX
          Width           =   255
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   375
          Index           =   2
          Left            =   -70800
@@ -3318,7 +3318,7 @@ Begin VB.Form frmPCX
          Width           =   435
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   255
          Index           =   1
          Left            =   -72960
@@ -3339,7 +3339,7 @@ Begin VB.Form frmPCX
          Width           =   8895
       End
       Begin VB.CheckBox Check2 
-         Caption         =   "Indicador Revis„o Femea"
+         Caption         =   "Indicador Revis√£o Femea"
          DataField       =   "STFEPC"
          DataSource      =   "datPrimaryRS"
          Height          =   255
@@ -3349,7 +3349,7 @@ Begin VB.Form frmPCX
          Width           =   2295
       End
       Begin VB.CheckBox Check1 
-         Caption         =   "Indicador Revis„o PF"
+         Caption         =   "Indicador Revis√£o PF"
          Height          =   255
          Left            =   -71940
          TabIndex        =   36
@@ -3475,7 +3475,7 @@ Begin VB.Form frmPCX
          Top             =   1020
          Width           =   4215
       End
-      Begin VBFLXGRD17.VBFlexGrid GridSeq 
+      Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   2115
          Index           =   0
          Left            =   -74880
@@ -3486,7 +3486,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   3731
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDMAT 
+      Begin VBFLXGRD18.VBFlexGrid GRIDMAT 
          Height          =   1095
          Index           =   0
          Left            =   -74820
@@ -3497,7 +3497,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridlab 
+      Begin VBFLXGRD18.VBFlexGrid gridlab 
          Height          =   1035
          Index           =   0
          Left            =   -74880
@@ -3508,7 +3508,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   1826
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDFIM 
+      Begin VBFLXGRD18.VBFlexGrid GRIDFIM 
          Height          =   1275
          Index           =   0
          Left            =   -74880
@@ -3519,7 +3519,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   2249
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDCOM 
+      Begin VBFLXGRD18.VBFlexGrid GRIDCOM 
          Height          =   1155
          Index           =   0
          Left            =   -74880
@@ -3530,7 +3530,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   2037
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1335
          Index           =   0
          Left            =   -74760
@@ -3541,7 +3541,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14420
          _ExtentY        =   2355
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   1
          Left            =   -74820
@@ -3552,7 +3552,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   2
          Left            =   -74880
@@ -3563,7 +3563,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1215
          Index           =   3
          Left            =   -74880
@@ -3574,7 +3574,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   2143
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   4
          Left            =   -74880
@@ -3585,7 +3585,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   5
          Left            =   -74880
@@ -3596,7 +3596,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   0
          Left            =   -74760
@@ -3607,7 +3607,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14420
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1335
          Index           =   1
          Left            =   -74820
@@ -3618,7 +3618,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   2355
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1335
          Index           =   2
          Left            =   -74880
@@ -3629,7 +3629,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   2355
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   3
          Left            =   -74880
@@ -3640,7 +3640,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   2143
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   4
          Left            =   -74880
@@ -3651,7 +3651,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   2143
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   5
          Left            =   -74880
@@ -3662,7 +3662,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   2143
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   2055
          Index           =   6
          Left            =   -74880
@@ -3673,7 +3673,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   15478
          _ExtentY        =   3625
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   3255
          Index           =   7
          Left            =   -74880
@@ -3684,7 +3684,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   15584
          _ExtentY        =   5741
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDMAT 
+      Begin VBFLXGRD18.VBFlexGrid GRIDMAT 
          Height          =   1095
          Index           =   1
          Left            =   -74820
@@ -3695,7 +3695,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   11
          Left            =   -74820
@@ -3706,7 +3706,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1335
          Index           =   11
          Left            =   -74820
@@ -3717,7 +3717,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   2355
       End
-      Begin VBFLXGRD17.VBFlexGrid gridlab 
+      Begin VBFLXGRD18.VBFlexGrid gridlab 
          Height          =   1035
          Index           =   1
          Left            =   -74880
@@ -3728,7 +3728,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   1826
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   9
          Left            =   -74880
@@ -3739,7 +3739,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   9
          Left            =   -74880
@@ -3750,7 +3750,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   2143
       End
-      Begin VBFLXGRD17.VBFlexGrid GridSeq 
+      Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   1095
          Index           =   1
          Left            =   -74880
@@ -3761,7 +3761,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   13
          Left            =   -74880
@@ -3772,7 +3772,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1275
          Index           =   13
          Left            =   -74880
@@ -3783,7 +3783,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   2249
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDFIM 
+      Begin VBFLXGRD18.VBFlexGrid GRIDFIM 
          Height          =   1515
          Index           =   1
          Left            =   -74880
@@ -3794,7 +3794,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   2672
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   14
          Left            =   -74880
@@ -3805,7 +3805,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1155
          Index           =   14
          Left            =   -74880
@@ -3816,7 +3816,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   2037
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDCOM 
+      Begin VBFLXGRD18.VBFlexGrid GRIDCOM 
          Height          =   1155
          Index           =   1
          Left            =   -74880
@@ -3827,7 +3827,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   2037
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   15
          Left            =   -74880
@@ -3838,7 +3838,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   15
          Left            =   -74880
@@ -3849,7 +3849,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   2143
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDFIM 
+      Begin VBFLXGRD18.VBFlexGrid GRIDFIM 
          Height          =   1515
          Index           =   2
          Left            =   -74820
@@ -3860,7 +3860,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   2672
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   24
          Left            =   -74820
@@ -3871,7 +3871,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1155
          Index           =   24
          Left            =   -74820
@@ -3882,7 +3882,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14737
          _ExtentY        =   2037
       End
-      Begin VBFLXGRD17.VBFlexGrid GridSeq 
+      Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   1095
          Index           =   2
          Left            =   -74820
@@ -3893,7 +3893,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   23
          Left            =   -74820
@@ -3904,7 +3904,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1275
          Index           =   23
          Left            =   -74820
@@ -3915,7 +3915,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   2249
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDCOM 
+      Begin VBFLXGRD18.VBFlexGrid GRIDCOM 
          Height          =   1155
          Index           =   2
          Left            =   -74880
@@ -3926,7 +3926,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   2037
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   25
          Left            =   -74880
@@ -3937,7 +3937,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   25
          Left            =   -74880
@@ -3948,7 +3948,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   2143
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDMAT 
+      Begin VBFLXGRD18.VBFlexGrid GRIDMAT 
          Height          =   1095
          Index           =   2
          Left            =   -74820
@@ -3959,7 +3959,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   21
          Left            =   -74820
@@ -3970,7 +3970,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1335
          Index           =   21
          Left            =   -74820
@@ -3981,7 +3981,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14631
          _ExtentY        =   2355
       End
-      Begin VBFLXGRD17.VBFlexGrid gridlab 
+      Begin VBFLXGRD18.VBFlexGrid gridlab 
          Height          =   1035
          Index           =   2
          Left            =   -74820
@@ -3992,7 +3992,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   1826
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Index           =   22
          Left            =   -74820
@@ -4003,7 +4003,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1215
          Index           =   22
          Left            =   -74820
@@ -4014,7 +4014,7 @@ Begin VB.Form frmPCX
          _ExtentX        =   14843
          _ExtentY        =   2143
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPFrev 
+      Begin VBFLXGRD18.VBFlexGrid GridPFrev 
          Height          =   1695
          Left            =   -74880
          TabIndex        =   349
@@ -4034,7 +4034,7 @@ Begin VB.Form frmPCX
          Width           =   1815
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Outra AprovaÁao Data"
+         Caption         =   "Outra Aprova√ßao Data"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   35
@@ -4077,7 +4077,7 @@ Begin VB.Form frmPCX
          Width           =   975
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   48
@@ -4107,7 +4107,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   45
@@ -4117,7 +4117,7 @@ Begin VB.Form frmPCX
          Width           =   735
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   44
@@ -4137,7 +4137,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   42
@@ -4157,7 +4157,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   39
@@ -4177,7 +4177,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   36
@@ -4207,7 +4207,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   32
@@ -4227,7 +4227,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   30
@@ -4247,7 +4247,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   28
@@ -4267,7 +4267,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   26
@@ -4317,7 +4317,7 @@ Begin VB.Form frmPCX
          Width           =   615
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   17
@@ -4347,7 +4347,7 @@ Begin VB.Form frmPCX
          Width           =   615
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   16
@@ -4367,7 +4367,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   14
@@ -4387,7 +4387,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   12
@@ -4407,7 +4407,7 @@ Begin VB.Form frmPCX
          Width           =   375
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Revis„o"
+         Caption         =   "Revis√£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   10
@@ -4651,7 +4651,7 @@ Begin VB.Form frmPCX
       Width           =   1215
    End
    Begin VB.Label lblLabels 
-      Caption         =   "TIPO:  (C)ontenÁ„o Avancanda ( )Normal (I)tem Seguranca (X)Cont.Avancada/Item Seg. (G)P12 agressivo GP12 Plan(N)"
+      Caption         =   "TIPO:  (C)onten√ß√£o Avancanda ( )Normal (I)tem Seguranca (X)Cont.Avancada/Item Seg. (G)P12 agressivo GP12 Plan(N)"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   37
@@ -4700,7 +4700,7 @@ Begin VB.Form frmPCX
       Width           =   615
    End
    Begin VB.Label lblLabels 
-      Caption         =   "OpÁ„o"
+      Caption         =   "Op√ß√£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   19
@@ -4730,7 +4730,7 @@ Begin VB.Form frmPCX
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "DescriÁ„o"
+      Caption         =   "Descri√ß√£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   3
@@ -4933,7 +4933,7 @@ End Sub
 
 Private Sub Cmddistro_Click(Index As Integer)
   If nREV = 0 Then
-    Alert "Revis„o Nao Escolhida"
+    Alert "Revis√£o Nao Escolhida"
     Exit Sub
   End If
   cTIPO = CTIPOPLANO(Index)
@@ -5029,7 +5029,7 @@ Private Sub CmdNovaREV_Click(Index As Integer)
   'End If
 
 
-  If MDG("Fazer Nova Revisao", "Confirme GravaÁ„o") Then
+  If MDG("Fazer Nova Revisao", "Confirme Grava√ß√£o") Then
     Encerrar.Visible = False
     eRETU01 = Date
 
@@ -5157,7 +5157,7 @@ Private Sub CmdNovoRI_Click(Index As Integer)
   oRS.Close
   oCONN.Close
   
-  Alert "RI Gerado N∫" & nRI
+  Alert "RI Gerado N¬∫" & nRI
   Exit Sub
 erro:
   Select Case Err.Number
@@ -5526,7 +5526,7 @@ Private Sub escidfolha_Click(Index As Integer)
 End Sub
 
 Private Sub escpfela_Click(Index As Integer)
-  If Not MDG("Gravar Elaborador", "Confirme GravaÁ„o") Then
+  If Not MDG("Gravar Elaborador", "Confirme Grava√ß√£o") Then
     Exit Sub
   End If
 
@@ -5626,7 +5626,7 @@ Private Sub FilgridFIM()
   DizerBarra "Montando Lista final"
   cARQ = PegPath("PATH", "PF")
   cSQL = "select PF,SEQ,SSQ,DESCRI from PFSO WHERE PF=" & nPF & " AND SSQ=99 ORDER BY SEQ,SSQ"
-  MontaGridUltra GRIDFIM(0), 4, Array(600, 400, 400, 6000), Array("PF", "SEQ", "SSQ", "DescriÁao"), _
+  MontaGridUltra GRIDFIM(0), 4, Array(600, 400, 400, 6000), Array("PF", "SEQ", "SSQ", "Descri√ßao"), _
                  Array("PF", "SEQ", "SSQ", "Descri"), cARQ, cSQL
   CloneGrid GRIDFIM(0), GRIDFIM(1)
   CloneGrid GRIDFIM(0), GRIDFIM(2)
@@ -5639,7 +5639,7 @@ Private Sub FilgridLAB()
   DizerBarra "Montando Lista Laboratorio"
   cARQ = PegPath("PATH", "PF")
   cSQL = "select PF,SEQ,SSQ,DESCRI from PFSO WHERE PF=" & nPF & " AND SSQ=20 ORDER BY SEQ,SSQ"
-  MontaGridUltra gridlab(0), 4, Array(600, 400, 400, 6000), Array("PF", "SEQ", "SSQ", "DescriÁao"), _
+  MontaGridUltra gridlab(0), 4, Array(600, 400, 400, 6000), Array("PF", "SEQ", "SSQ", "Descri√ßao"), _
                  Array("PF", "SEQ", "SSQ", "Descri"), cARQ, cSQL
   CloneGrid gridlab(0), gridlab(1)
   CloneGrid gridlab(0), gridlab(2)
@@ -5652,7 +5652,7 @@ Private Sub Filgridmat()
   DizerBarra "Montando LIsta Materia Prima"
   cARQ = PegPath("PATH", "PF")
   cSQL = "select PF,SEQ,SSQ,DESCRI from PFSO WHERE PF=" & nPF & " AND SSQ=10 ORDER BY SEQ,SSQ"
-  MontaGridUltra GRIDMAT(0), 4, Array(600, 400, 400, 4000), Array("PF", "SEQ", "SSQ", "DescriÁao"), _
+  MontaGridUltra GRIDMAT(0), 4, Array(600, 400, 400, 4000), Array("PF", "SEQ", "SSQ", "Descri√ßao"), _
                  Array("PF", "SEQ", "SSQ", "DESCRI"), cARQ, cSQL
   CloneGrid GRIDMAT(0), GRIDMAT(1)
   CloneGrid GRIDMAT(0), GRIDMAT(2)
@@ -5695,7 +5695,7 @@ Private Sub Filgridseq()
   DizerBarra "Carregando Sequencias de Operacoes"
   cARQ = PegPath("PATH", "PF")
   cSQL = "select PF,SEQ,SSQ,CODINT,DESCRI from PFS WHERE PF=" & nPF & " ORDER BY SEQ,SSQ"
-  MontaGridUltra GridSeq(0), 5, Array(600, 400, 400, 1600, 5000), Array("PF", "SEQ", "SSQ", "CodInt", "DescriÁao"), _
+  MontaGridUltra GridSeq(0), 5, Array(600, 400, 400, 1600, 5000), Array("PF", "SEQ", "SSQ", "CodInt", "Descri√ßao"), _
                  Array("PF", "SEQ", "SSQ", "L$CODINT", "L$DESCRI"), cARQ, cSQL
   CloneGrid GridSeq(0), GridSeq(1)
   CloneGrid GridSeq(0), GridSeq(2)
@@ -5870,22 +5870,22 @@ Private Sub NewMat_Click(Index As Integer)
   Select Case Index
 
   Case 11
-    cDESCRI = "MatÈria Prima: " & TXTPF(6)
+    cDESCRI = "Mat√©ria Prima: " & TXTPF(6)
 
   Case 12
-    cDESCRI = "MatÈria Prima: " & TXTPF(7)
+    cDESCRI = "Mat√©ria Prima: " & TXTPF(7)
 
   Case 13
-    cDESCRI = "MatÈria Prima: " & TXTPF(8)
+    cDESCRI = "Mat√©ria Prima: " & TXTPF(8)
 
   Case 21
-    cDESCRI = "LaboratÛrio: " & TXTPF(6)
+    cDESCRI = "Laborat√≥rio: " & TXTPF(6)
 
   Case 22
-    cDESCRI = "LaboratÛrio: " & TXTPF(7)
+    cDESCRI = "Laborat√≥rio: " & TXTPF(7)
 
   Case 23
-    cDESCRI = "LaboratÛrio: " & TXTPF(8)
+    cDESCRI = "Laborat√≥rio: " & TXTPF(8)
 
   Case 4
     cDESCRI = "Final "

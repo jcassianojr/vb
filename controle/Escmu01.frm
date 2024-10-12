@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escmu01 
    Caption         =   "Selecione o Item Desejado:"
    ClientHeight    =   6090
@@ -13,7 +13,7 @@ Begin VB.Form escmu01
    ScaleHeight     =   6090
    ScaleWidth      =   9690
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5415
       Left            =   60
       TabIndex        =   0
@@ -177,7 +177,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
   Select Case sButton
   Case "NOV", "INC"
-    cCODINC = InputBox("Digite o Codigo", "Inclus„o", "__")
+    cCODINC = InputBox("Digite o Codigo", "Inclus√£o", "__")
     cARQTMP = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "select codigo from " & cTABUSO & " WHERE CODIGO='" & cCODINC & "'"
     If IncluiSQL(cARQTMP, sSQL, 1, Array("CODIGO"), Array(cCODINC), True, True) Then
@@ -273,7 +273,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
       iImage = 10
       cARQRTF = PegPath("PATH", "IMGMR01")
     Case 5
-      Alert "N„o Possui Imagens", "OpÁao n„o Disponivel"
+      Alert "N√£o Possui Imagens", "Op√ßao n√£o Disponivel"
       Exit Sub
     Case 6
       iImage = 12

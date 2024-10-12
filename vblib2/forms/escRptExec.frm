@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form EscRptExec 
    Caption         =   "Selecione o Desejado"
    ClientHeight    =   5775
@@ -14,7 +14,7 @@ Begin VB.Form EscRptExec
    ScaleHeight     =   5775
    ScaleWidth      =   9105
    StartUpPosition =   3  'Windows Default
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5175
       Left            =   120
       TabIndex        =   2
@@ -28,7 +28,7 @@ Begin VB.Form EscRptExec
       Height          =   5775
       Left            =   7605
       TabIndex        =   0
-      ToolTipText     =   "Botoes de Açoes"
+      ToolTipText     =   "Botoes de AÃ§oes"
       Top             =   0
       Width           =   1500
       _ExtentX        =   2646
@@ -67,7 +67,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Const nFORMID = 1063
-Const cFORMID = "Gerenciados Relatorios/Documentos Tipos Execuçao"
+Const cFORMID = "Gerenciados Relatorios/Documentos Tipos ExecuÃ§ao"
 Dim cSQLREF As String
 Private Sub Apagar()
   Dim nNUMERO As Long
@@ -102,7 +102,7 @@ Private Sub Filgrid()
   Dim cSQL As String
   cARQ = PegPath("PATH", "SYSCONF")
   cSQL = cSQLREF
-  MontaGridFast Grid, 4, Array(400, 500, 2000, 3000), Array("Nº", "Ext", "Executar", "NOME"), _
+  MontaGridFast Grid, 4, Array(400, 500, 2000, 3000), Array("NÂº", "Ext", "Executar", "NOME"), _
                 Array("NUMERO", "EXTENSAO", "EXECUTAR", "NOME"), cARQ, cSQL
 End Sub
 Private Sub Form_Load()
@@ -139,7 +139,7 @@ Private Sub incluir()
 
   cARQ = PegPath("PATH", "SYSCONF")
   nNUMERO = FixInt(PegMAXSQL(cARQ, "RPTEXEC", "NUMERO", 0)) + 1
-  nNUMERO = FixNum(Val(Busca("Nº NUMERO", "Incluindo NUMERO", Str(nNUMERO), 3)))
+  nNUMERO = FixNum(Val(Busca("NÂº NUMERO", "Incluindo NUMERO", Str(nNUMERO), 3)))
   ePASS01 = "select * from RPTEXEC WHERE NUMERO=" & nNUMERO
   IncluiSQL cARQ, ePASS01, 1, Array("NUMERO"), Array(nNUMERO), True
   frmRptExec.Show vbModal

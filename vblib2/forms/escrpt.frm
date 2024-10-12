@@ -3,7 +3,7 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escRPT 
    Caption         =   "Escolha o grupo de Relatorio"
    ClientHeight    =   6675
@@ -15,7 +15,7 @@ Begin VB.Form escRPT
    ScaleHeight     =   6675
    ScaleWidth      =   10785
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5775
       Left            =   120
       TabIndex        =   4
@@ -283,7 +283,7 @@ Private Sub imprima_click()
   ''0 Arquivo
   ''1 Abrir como
   ''2 Mensagem Antes Imprimir
-  ''3 Nº Utilizacoes
+  ''3 NÂº Utilizacoes
   ''4 Arvore
   ''5 Busca
   ''6 Titulo do Relatorio
@@ -356,7 +356,7 @@ Private Sub imprima_click()
   Mana5Fec
 
   cEXTENSAO = EXTENSAO(cARQRTF)
-  If aRELCFG(1) = "" Or aRELCFG(1) = "_" Then  'Abrir Com Não Especificado
+  If aRELCFG(1) = "" Or aRELCFG(1) = "_" Then  'Abrir Com NÃ£o Especificado
     Select Case cEXTENSAO
       'extensoes mais usadas na frente acelerar
     Case "RPT"
@@ -570,7 +570,7 @@ End Function
 
 Private Sub Novo_Click()
   Dim cSQL As String
-  zRPT = InputBox("Digite o Codigo", "Inclusão Relatorio", "__")
+  zRPT = InputBox("Digite o Codigo", "InclusÃ£o Relatorio", "__")
   zRPT = FixStr(zRPT, "", "TRIM", 8)
   If Len(zRPT) > 0 Then
     cSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmPFS 
    BorderStyle     =   3  'Fixed Dialog
@@ -241,7 +241,7 @@ Begin VB.Form frmPFS
       Tab(2).Control(72)=   "lblLabels(10)"
       Tab(2).Control(73)=   "Label13"
       Tab(2).Control(74)=   "lblLabels(19)"
-      TabCaption(3)   =   "EPI/Observações"
+      TabCaption(3)   =   "EPI/ObservaÃ§Ãµes"
       Tab(3).ControlCount=   14
       Tab(3).Control(0)=   "EPI07"
       Tab(3).Control(1)=   "EPI06"
@@ -1316,7 +1316,7 @@ Begin VB.Form frmPFS
          Width           =   2175
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1334,7 +1334,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1352,7 +1352,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1370,7 +1370,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1388,7 +1388,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1406,7 +1406,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1424,7 +1424,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1442,7 +1442,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1460,7 +1460,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1478,7 +1478,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1496,7 +1496,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1514,7 +1514,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1532,7 +1532,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1550,7 +1550,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1568,7 +1568,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1586,7 +1586,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1604,7 +1604,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1622,7 +1622,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1640,7 +1640,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1658,7 +1658,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1676,7 +1676,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1694,7 +1694,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1712,7 +1712,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1730,7 +1730,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1748,7 +1748,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1766,7 +1766,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1784,7 +1784,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1802,7 +1802,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1820,7 +1820,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1838,7 +1838,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1856,7 +1856,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1874,7 +1874,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1892,7 +1892,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1910,7 +1910,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1928,7 +1928,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1946,7 +1946,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1964,7 +1964,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1982,7 +1982,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2000,7 +2000,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2018,7 +2018,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2036,7 +2036,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2054,7 +2054,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2072,7 +2072,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2090,7 +2090,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2108,7 +2108,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2126,7 +2126,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2144,7 +2144,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2162,7 +2162,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2180,7 +2180,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2198,7 +2198,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2216,7 +2216,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2234,7 +2234,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2252,7 +2252,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2270,7 +2270,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2288,7 +2288,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2306,7 +2306,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2324,7 +2324,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2342,7 +2342,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2360,7 +2360,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2378,7 +2378,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2396,7 +2396,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2414,7 +2414,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2432,7 +2432,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -2450,7 +2450,7 @@ Begin VB.Form frmPFS
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "¡"
+         Caption         =   "Â¡"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -3706,7 +3706,7 @@ Begin VB.Form frmPFS
          Top             =   3210
          Width           =   255
       End
-      Begin VBFLXGRD17.VBFlexGrid GridIns 
+      Begin VBFLXGRD18.VBFlexGrid GridIns 
          Height          =   3855
          Left            =   -74880
          TabIndex        =   135
@@ -3715,7 +3715,7 @@ Begin VB.Form frmPFS
          _ExtentX        =   14843
          _ExtentY        =   6800
       End
-      Begin VBFLXGRD17.VBFlexGrid GrdQsbLep 
+      Begin VBFLXGRD18.VBFlexGrid GrdQsbLep 
          Height          =   3915
          Left            =   120
          TabIndex        =   140
@@ -4454,7 +4454,7 @@ Begin VB.Form frmPFS
          Width           =   615
       End
       Begin VB.Label Label16 
-         Caption         =   "Força de Extracao"
+         Caption         =   "ForÃ§a de Extracao"
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -70200
@@ -4709,7 +4709,7 @@ Begin VB.Form frmPFS
          Width           =   1335
       End
       Begin VB.Label Label1 
-         Caption         =   "Observações"
+         Caption         =   "ObservaÃ§Ãµes"
          ForeColor       =   &H00C00000&
          Height          =   195
          Left            =   -74880
@@ -4718,7 +4718,7 @@ Begin VB.Form frmPFS
          Width           =   1995
       End
       Begin VB.Label Label3 
-         Caption         =   "Regulagem de Máquina"
+         Caption         =   "Regulagem de MÃ¡quina"
          ForeColor       =   &H00C00000&
          Height          =   195
          Left            =   -74880
@@ -5051,7 +5051,7 @@ Begin VB.Form frmPFS
       Width           =   615
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Descrição"
+      Caption         =   "DescriÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   3
@@ -5137,7 +5137,7 @@ Private Sub cmdClose_Click()
   Dim cCAMIMG
 
   CONTAHOMEM
-  If MDG("Gravar Sequencia", "Confirme Gravação ") Then
+  If MDG("Gravar Sequencia", "Confirme GravaÃ§Ã£o ") Then
     'CAMPOS
     For iLOOP = 0 To nCAMPOS - 1  '- 8
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
@@ -5189,8 +5189,8 @@ Private Sub CmdEditar_Click()
 End Sub
 
 Private Sub Cmdepi_Click()
-  TXTFIELDS(26) = TXTFIELDS(26) & " É OBRIGATÓRIO O USO DOS EQUIPAMENTOS DE PROTEÇÃO INDIVIDUAIS (EPI's)" _
-                & " - ÓCULOS, PROTETOR AURICULAR, LUVAS E SAPATOS"
+  TXTFIELDS(26) = TXTFIELDS(26) & " Ã‰ OBRIGATÃ“RIO O USO DOS EQUIPAMENTOS DE PROTEÃ‡ÃƒO INDIVIDUAIS (EPI's)" _
+                & " - Ã“CULOS, PROTETOR AURICULAR, LUVAS E SAPATOS"
 End Sub
 
 Private Sub CmdEscMe01_Click()
@@ -5282,9 +5282,9 @@ Private Sub CmdRenumera_Click()
     Exit Sub
   End If
   nNUM = 0
-  nNUM = FixInt(Val(Busca("Nº", "Renumerando", CStr(nNUM), 8)))
+  nNUM = FixInt(Val(Busca("NÂº", "Renumerando", CStr(nNUM), 8)))
   If nNUM = 0 Then
-    Alert ("Nº em Branco")
+    Alert ("NÂº em Branco")
     Exit Sub
   End If
   GridIns.Col = 0
@@ -5402,12 +5402,12 @@ Private Sub Command20_Click()
   End If
   For x = 1 To 8
     If TXTFIELDS(36).tEXT = "6" Then
-      cTEMP = String(6, "¡") + Space(2)
+      cTEMP = String(6, "Â¡") + Space(2)
       If x >= 5 Then
         cTEMP = Space(8)
       End If
     Else
-      cTEMP = String(8, "¡")
+      cTEMP = String(8, "Â¡")
     End If
     TXTFIELDS(40 + x).tEXT = cTEMP
   Next
@@ -5650,7 +5650,7 @@ Private Sub esc1_Click(Index As Integer)
   cTEMP = TXTFIELDS(40 + linha).tEXT
   cDIG = Mid(cTEMP, coluna, 1)
   If cDIG = "l" Then
-    cDIG = "¡"
+    cDIG = "Â¡"
   Else
     cDIG = "l"
   End If

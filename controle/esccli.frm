@@ -28,7 +28,7 @@ Begin VB.Form escCLI
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5775
       Left            =   120
       TabIndex        =   0
@@ -125,7 +125,7 @@ End Sub
 Private Sub Form_Load()
   CenterFormToScreen Me
   aORDEM = Array("CLIENTE", "CLINOME")
-  aORDES = Array("Nº CLIENTE", "NOME")
+  aORDES = Array("NÂº CLIENTE", "NOME")
   cORDEM = "CLIENTE"
   cSUBWHERE = ""
   cARQDES = PegPath("PATH", "DESENHO")
@@ -151,7 +151,7 @@ End Sub
 
 Private Sub incluir_Click()
   Dim cNOME As String
-  cNOME = InputBox("Digite o Nome", "Inclusão Cliente", " ")
+  cNOME = InputBox("Digite o Nome", "InclusÃ£o Cliente", " ")
   cNOME = Left$(cNOME, 50)
   nPF = FixInt(PegMAXSQL(cARQDES, "cliente", "cliente", 0)) + 1
   If IncluiSQL(cARQDES, "SELECT * FROM CLieNTE WHERE CLIENTE=" & nPF, 2, Array("CLIENTE", "CLINOME"), Array(nPF, cNOME), True, False) Then

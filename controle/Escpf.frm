@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escpf 
    Caption         =   "Selecione o Processo  desejado:"
    ClientHeight    =   7920
@@ -48,7 +48,7 @@ Begin VB.Form escpf
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   7275
       Left            =   60
       TabIndex        =   0
@@ -82,10 +82,10 @@ Private Sub ApagaNF_Click()
   cARQIE = PegPath("PATH", "IE")
 
 
-  If Not MDG("Apagar Processo Fabricação", "Confirme Exclusão") Then
+  If Not MDG("Apagar Processo FabricaÃ§Ã£o", "Confirme ExclusÃ£o") Then
     Exit Sub
   End If
-  If Not MDG("Deseja Realmente Apagar Processo Fabricação", "Confirme Exclusão") Then
+  If Not MDG("Deseja Realmente Apagar Processo FabricaÃ§Ã£o", "Confirme ExclusÃ£o") Then
     Exit Sub
   End If
 
@@ -204,7 +204,7 @@ Private Sub CmdLiberar_Click(ByVal cTIPOLIB)
   If RSTAB.EOF Then
     RSTAB.Close
     DB.Close
-    Alert ("Nenhuma Sequencia Operaçao Cadastrada PF:" & CStr(nPF))
+    Alert ("Nenhuma Sequencia OperaÃ§ao Cadastrada PF:" & CStr(nPF))
     Exit Sub
   End If
   RSTAB.MoveFirst
@@ -217,7 +217,7 @@ Private Sub CmdLiberar_Click(ByVal cTIPOLIB)
       RSTAB.Close
       RSTA2.Close
       DB.Close
-      Alert ("PF " & CStr(nPF) & "Seq " & CStr(nSEQ) & "/" & CStr(nSSQ) & " Sem Instruçao")
+      Alert ("PF " & CStr(nPF) & "Seq " & CStr(nSEQ) & "/" & CStr(nSSQ) & " Sem InstruÃ§ao")
       Exit Sub
     End If
     RSTA2.Close
@@ -299,7 +299,7 @@ Private Sub Form_Load()
     xmontatoolbar Me.Toolbar1, "escPFGP12", True
   End Select
   aORDEM = Array("PF", "CODIGO", "DESCR", "RESNUM", "RESDAT", "CODIGOINT")
-  aORDES = Array("PF", "Codigo", "Descricao", "Nº Liberador", "Data Liberacao", "Codigo Int")
+  aORDES = Array("PF", "Codigo", "Descricao", "NÂº Liberador", "Data Liberacao", "Codigo Int")
   cORDEM = "PF"
   cSUBWHERE = ""
   FilRelat

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escfemea 
    Caption         =   "Selecione o Fmea  desejado:"
    ClientHeight    =   5775
@@ -48,7 +48,7 @@ Begin VB.Form escfemea
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5295
       Left            =   60
       TabIndex        =   0
@@ -134,7 +134,7 @@ Private Sub cdmrevperiodica()
         RSTA3!REVISAO = nREV
         RSTA3!TIPO = "FE"
         RSTA3!item = 1
-        RSTA3!motivo = "Revisão Periodica"
+        RSTA3!motivo = "RevisÃ£o Periodica"
         RSTA3.Update
 
 
@@ -226,7 +226,7 @@ Private Sub FilRelat()
     .Col = 3
     .tEXT = "Produto"
     .Col = 4
-    .tEXT = "Descrição"
+    .tEXT = "DescriÃ§Ã£o"
     .Col = 5
     .tEXT = "Lib.PF"
     .Col = 6
@@ -296,7 +296,7 @@ End Sub
 Private Sub Form_Load()
   CenterFormToScreen Me
   aORDEM = Array("PF", "STPFFE", "FEMUDPAD", "CODIGO", "DESCR", "RESDAT", "FEMEAD", "CODIGOINT")
-  aORDES = Array("Nº PF", "Alterado PF", "Alterado Femea Padrao", "Codigo", "Descricao", "Data Liberacao Processo", "Data Liberacao Femea", "Codigo INT")
+  aORDES = Array("NÂº PF", "Alterado PF", "Alterado Femea Padrao", "Codigo", "Descricao", "Data Liberacao Processo", "Data Liberacao Femea", "Codigo INT")
   cORDEM = "PF"
   cSUBWHERE = ""
   xmontatoolbar Me.Toolbar1, "escFEMEA", True

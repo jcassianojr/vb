@@ -138,7 +138,7 @@ Begin VB.Form frmGp11
       Top             =   360
       Width           =   975
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   3495
       Left            =   120
       TabIndex        =   14
@@ -467,7 +467,7 @@ Begin VB.Form frmGp11
       Width           =   375
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Disposição"
+      Caption         =   "DisposiÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   20
@@ -477,7 +477,7 @@ Begin VB.Form frmGp11
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Código:"
+      Caption         =   "CÃ³digo:"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   5
@@ -524,7 +524,7 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 2
       aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP

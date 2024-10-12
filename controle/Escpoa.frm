@@ -48,7 +48,7 @@ Begin VB.Form escPOA
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   6315
       Left            =   60
       TabIndex        =   0
@@ -118,14 +118,14 @@ Private Sub FilRelat()
   Else
     cSQL = "SELECT NUMERO,PF,SEQ,SSQ,ITEM,codigo,NOME,resnum,eladat FROM " & zPFTIPO & " WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
   End If
-  MontaGridFast Grid, 9, Array(600, 600, 400, 400, 400, 1600, 1000, 4000, 600), Array("Nº", "PF", "SEQ", "SSQ", "Item", "Produto", "Elaboracao", "Descricao", "LibNum"), _
+  MontaGridFast Grid, 9, Array(600, 600, 400, 400, 400, 1600, 1000, 4000, 600), Array("NÂº", "PF", "SEQ", "SSQ", "Item", "Produto", "Elaboracao", "Descricao", "LibNum"), _
                 Array("NUMERO", "PF", "SEQ", "SSQ", "ITEM", "L$CODIGO", "ELADAT", "NOME", "RESNUM"), cARQPOA, cSQL
 End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
   aORDEM = Array("PF,SEQ,SSQ", "NUMERO", "CODIGO", "NOME", "ELADAT")
-  aORDES = Array("PF", "Nº", "Produto", "Descricao", "Elaboracao")
+  aORDES = Array("PF", "NÂº", "Produto", "Descricao", "Elaboracao")
   cORDEM = "PF,SEQ,SSQ"
   cSUBWHERE = ""
   cARQPOA = PegPath("PATH", zPFTIPO)

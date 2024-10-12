@@ -1,9 +1,9 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escmnuusr 
-   Caption         =   "LiberaÁ„o Usuario"
+   Caption         =   "Libera√ß√£o Usuario"
    ClientHeight    =   5040
    ClientLeft      =   60
    ClientTop       =   345
@@ -13,7 +13,7 @@ Begin VB.Form escmnuusr
    ScaleHeight     =   5040
    ScaleWidth      =   7800
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid gridrptusr 
+   Begin VBFLXGRD18.VBFlexGrid gridrptusr 
       Height          =   3135
       Left            =   4800
       TabIndex        =   7
@@ -22,7 +22,7 @@ Begin VB.Form escmnuusr
       _ExtentX        =   4895
       _ExtentY        =   5530
    End
-   Begin VBFLXGRD17.VBFlexGrid gridusr 
+   Begin VBFLXGRD18.VBFlexGrid gridusr 
       Height          =   4335
       Left            =   120
       TabIndex        =   6
@@ -163,7 +163,7 @@ Private Sub excrptusr_Click()
   Dim eRETU As Variant
   Dim cdb As String
   Dim sSQL As String
-  If Not MDG("Eliminar Acesso ao menu", "Confirme Exclus„o") Then
+  If Not MDG("Eliminar Acesso ao menu", "Confirme Exclus√£o") Then
     Exit Sub
   End If
 

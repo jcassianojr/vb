@@ -1,9 +1,9 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escrptusr 
-   Caption         =   "Liberação Usuario"
+   Caption         =   "LiberaÃ§Ã£o Usuario"
    ClientHeight    =   6030
    ClientLeft      =   60
    ClientTop       =   345
@@ -13,7 +13,7 @@ Begin VB.Form escrptusr
    ScaleHeight     =   6030
    ScaleWidth      =   8955
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid gridrptusr 
+   Begin VBFLXGRD18.VBFlexGrid gridrptusr 
       Height          =   5295
       Left            =   5520
       TabIndex        =   8
@@ -22,7 +22,7 @@ Begin VB.Form escrptusr
       _ExtentX        =   5953
       _ExtentY        =   9340
    End
-   Begin VBFLXGRD17.VBFlexGrid gridusr 
+   Begin VBFLXGRD18.VBFlexGrid gridusr 
       Height          =   5175
       Left            =   120
       TabIndex        =   7

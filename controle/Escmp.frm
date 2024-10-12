@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escmp 
    Caption         =   "Selecione o  desejado:"
    ClientHeight    =   6090
@@ -13,7 +13,7 @@ Begin VB.Form escmp
    ScaleHeight     =   6090
    ScaleWidth      =   8970
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5535
       Left            =   120
       TabIndex        =   0
@@ -126,7 +126,7 @@ Private Sub FilRelat()
   End If
   sSQL = sSQL & " ORDER BY " & cORDEM
 
-  MontaGrid Grid, 2, Array(1800, 4800), Array("CÛdigo", "DescriÁ„o"), _
+  MontaGrid Grid, 2, Array(1800, 4800), Array("C√≥digo", "Descri√ß√£o"), _
             Array("L$CODIGO", "L$NOME"), cARQ, sSQL
 
 End Sub
@@ -220,7 +220,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
   Case "NOV", "INC"
     If cTABUSO = "ETI" Or cTABUSO = "MP03" Or cTABUSO = "MP01" Or cTABUSO = "MP02" Then
-      cCODINC = InputBox("Digite o Codigo", "Codigo para inclus„o", "__")
+      cCODINC = InputBox("Digite o Codigo", "Codigo para inclus√£o", "__")
       cNOMEINC = InputBox("Digite a Descricao", "Descricao do codigo", "__")
       cARQTMP = GeraConn(zMANA5EMP, "JETFOX")
       If cTABUSO = "ETI" Then

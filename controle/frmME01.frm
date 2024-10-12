@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmME01 
    Caption         =   "Equipamento"
@@ -325,7 +325,7 @@ Begin VB.Form frmME01
          Top             =   1500
          Width           =   2055
       End
-      Begin VBFLXGRD17.VBFlexGrid GridSeq 
+      Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3255
          Left            =   -74880
          TabIndex        =   15
@@ -335,7 +335,7 @@ Begin VB.Form frmME01
          _ExtentX        =   16325
          _ExtentY        =   5741
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevcau 
+      Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1515
          Left            =   -74880
          TabIndex        =   16
@@ -434,7 +434,7 @@ Begin VB.Form frmME01
       End
       Begin VB.Label Label 
          BackStyle       =   0  'Transparent
-         Caption         =   "Quantidade Manutenção Preventiva"
+         Caption         =   "Quantidade ManutenÃ§Ã£o Preventiva"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   2
@@ -445,7 +445,7 @@ Begin VB.Form frmME01
       End
       Begin VB.Label Label 
          BackStyle       =   0  'Transparent
-         Caption         =   "Horas Manutenção Preventiva"
+         Caption         =   "Horas ManutenÃ§Ã£o Preventiva"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   3
@@ -656,7 +656,7 @@ End Sub
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
       aVAL(iLOOP) = txtFields(iLOOP)       ''vb matriz zero
     Next iLOOP
@@ -726,9 +726,9 @@ Private Sub CmdRenumerar_Click()
 
   nNUM = 0
 
-  nNUM = FixInt(Val(Busca("Nº", "Renumerando", CStr(nNUM), 8)))
+  nNUM = FixInt(Val(Busca("NÂº", "Renumerando", CStr(nNUM), 8)))
   If nNUM = 0 Then
-    Alert ("Nº em Branco")
+    Alert ("NÂº em Branco")
     Exit Sub
   End If
   GridSeq.Col = 1
@@ -900,7 +900,7 @@ Private Sub FILGRIDrevCAU()
   Dim cSQL As String
   cSQL = "select ITEM,SEGGRA,PROCESSO,FXSEQ,FXSSQ,FXITEM from FEMREVI WHERE  TIPOAPU='M' AND PF=" & nFEMMAQ & " ORDER BY ITEM,SEGGRA"
   DizerBarra "carregando femea maquina revisoes"
-  MontaGridFast gridrevcau, 6, Array(400, 400, 400, 400, 400, 7000), Array("ITEM", "REV", "SEQ", "SSQ", "IT", "Descriçao"), Array("ITEM", "SEGGRA", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), cARQFEMEA, cSQL
+  MontaGridFast gridrevcau, 6, Array(400, 400, 400, 400, 400, 7000), Array("ITEM", "REV", "SEQ", "SSQ", "IT", "DescriÃ§ao"), Array("ITEM", "SEGGRA", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
 
@@ -955,7 +955,7 @@ Private Sub FilRelat()
   Dim cSQL As String
   cSQL = "select PF,ITEM,PROCESSO,FXSEQ,FXSSQ,FXITEM from FEMMAQ WHERE PF=" & nFEMMAQ & " ORDER BY " & cORDFEMUSO
   DizerBarra "carregando femea adicional"
-  MontaGridFast GridSeq, 6, Array(400, 400, 400, 400, 400, 7000), Array("PF", "ITEM", "SEQ", "SSQ", "IT", "Descriçao"), Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), cARQFEMEA, cSQL
+  MontaGridFast GridSeq, 6, Array(400, 400, 400, 400, 400, 7000), Array("PF", "ITEM", "SEQ", "SSQ", "IT", "DescriÃ§ao"), Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "PROCESSO"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
 

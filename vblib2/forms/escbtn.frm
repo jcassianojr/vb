@@ -1,9 +1,9 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escBTN 
-   Caption         =   "Selecione o Bot„o Desejado"
+   Caption         =   "Selecione o Bot√£o Desejado"
    ClientHeight    =   5775
    ClientLeft      =   165
    ClientTop       =   450
@@ -13,7 +13,7 @@ Begin VB.Form escBTN
    ScaleHeight     =   5775
    ScaleWidth      =   8880
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5175
       Left            =   120
       TabIndex        =   2
@@ -101,7 +101,7 @@ End Sub
 
 Private Sub cmdPADRAO()
   Dim cARQ, cNOME As String
-  cNOME = InputBox("Digite o Nome", "Inclus„o Botoes Padr„o", " ")
+  cNOME = InputBox("Digite o Nome", "Inclus√£o Botoes Padr√£o", " ")
   cNOME = Left$(cNOME, 50)
 
   cARQ = Dbname
@@ -156,9 +156,9 @@ Private Sub FilRelat()
 
   cARQ = Dbname
   cSQL = "SELECT FORM,CONTROLE,INDICE,IMAGEM,CAPTION,DISPONIVEL FROM CONTROLE ORDER BY FORM,CONTROLE,INDICE"
-  MontaGridFast Grid, 6, Array(1600, 1000, 400, 400, 1600, 400), Array("Tela", "Botao", "Ord", "Icone", "OperaÁao", "L"), _
+  MontaGridFast Grid, 6, Array(1600, 1000, 400, 400, 1600, 400), Array("Tela", "Botao", "Ord", "Icone", "Opera√ßao", "L"), _
                 Array("FORM", "CONTROLE", "INDICE", "IMAGEM", "CAPTION", "DISPONIVEL"), cARQ, cSQL
-  'MontaGridUltra Grid, 6, Array(1600, 1000, 400, 400, 1600, 400), Array("Tela", "Botao", "Ord", "Icone", "OperaÁao", "L"), _
+  'MontaGridUltra Grid, 6, Array(1600, 1000, 400, 400, 1600, 400), Array("Tela", "Botao", "Ord", "Icone", "Opera√ßao", "L"), _
    Array("FORM", "CONTROLE", "INDICE", "IMAGEM", "CAPTION", "DISPONIVEL"), cARQ, cSQL
   'campo boleano
 

@@ -18,7 +18,7 @@ Begin VB.Form EscCodNomSim
       Height          =   7680
       Left            =   6765
       TabIndex        =   1
-      ToolTipText     =   "Botoes de Açoes"
+      ToolTipText     =   "Botoes de AÃ§oes"
       Top             =   0
       Width           =   1500
       _ExtentX        =   2646
@@ -29,7 +29,7 @@ Begin VB.Form EscCodNomSim
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   7095
       Left            =   120
       TabIndex        =   0

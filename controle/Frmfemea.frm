@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmfemea 
@@ -281,7 +281,7 @@ Begin VB.Form frmfemea
       Tab(1).Control(11)=   "escidfolha(11)"
       Tab(1).Control(12)=   "Txtfields(32)"
       Tab(1).Control(13)=   "Txtfields(33)"
-      TabCaption(2)   =   "Elaborador/Revisão"
+      TabCaption(2)   =   "Elaborador/RevisÃ£o"
       Tab(2).ControlCount=   38
       Tab(2).Control(0)=   "Label10"
       Tab(2).Control(1)=   "Label9"
@@ -321,7 +321,7 @@ Begin VB.Form frmfemea
       Tab(2).Control(35)=   "Check2"
       Tab(2).Control(36)=   "DTPicker1"
       Tab(2).Control(37)=   "DTPicker2"
-      TabCaption(3)   =   "Revisões PF"
+      TabCaption(3)   =   "RevisÃµes PF"
       Tab(3).ControlCount=   6
       Tab(3).Control(0)=   "gridrevi(1)"
       Tab(3).Control(1)=   "ComMotAlt(1)"
@@ -548,7 +548,7 @@ Begin VB.Form frmfemea
          Width           =   2415
       End
       Begin VB.CheckBox Check2 
-         Caption         =   "Desconsiderar Apuraçao RPN"
+         Caption         =   "Desconsiderar ApuraÃ§ao RPN"
          Height          =   255
          Left            =   -67080
          TabIndex        =   250
@@ -565,7 +565,7 @@ Begin VB.Form frmfemea
          Style           =   1  'Graphical
          TabIndex        =   247
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher Nº Folha"
+         ToolTipText     =   "Escolher NÂº Folha"
          Top             =   2040
          Width           =   615
       End
@@ -578,7 +578,7 @@ Begin VB.Form frmfemea
          Style           =   1  'Graphical
          TabIndex        =   246
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher Nº Folha"
+         ToolTipText     =   "Escolher NÂº Folha"
          Top             =   1320
          Width           =   615
       End
@@ -1443,7 +1443,7 @@ Begin VB.Form frmfemea
          Top             =   3420
          Width           =   1455
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPFrev 
+      Begin VBFLXGRD18.VBFlexGrid GridPFrev 
          Height          =   1215
          Left            =   -74760
          TabIndex        =   144
@@ -1461,7 +1461,7 @@ Begin VB.Form frmfemea
          Style           =   1  'Graphical
          TabIndex        =   143
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher Nº Folha"
+         ToolTipText     =   "Escolher NÂº Folha"
          Top             =   2100
          Width           =   495
       End
@@ -1473,7 +1473,7 @@ Begin VB.Form frmfemea
          Style           =   1  'Graphical
          TabIndex        =   142
          TabStop         =   0   'False
-         ToolTipText     =   "Escolher Nº Folha"
+         ToolTipText     =   "Escolher NÂº Folha"
          Top             =   1380
          Width           =   495
       End
@@ -1778,7 +1778,7 @@ Begin VB.Form frmfemea
          Width           =   1095
       End
       Begin VB.CommandButton CmdNovaREV 
-         Caption         =   "Nova Revisão"
+         Caption         =   "Nova RevisÃ£o"
          Height          =   255
          Left            =   -74760
          TabIndex        =   79
@@ -1787,7 +1787,7 @@ Begin VB.Form frmfemea
          Width           =   1695
       End
       Begin VB.CheckBox Check1 
-         Caption         =   "Indicador Revisão PF"
+         Caption         =   "Indicador RevisÃ£o PF"
          Height          =   255
          Left            =   -67080
          TabIndex        =   5
@@ -1855,7 +1855,7 @@ Begin VB.Form frmfemea
          Width           =   495
       End
       Begin VB.CommandButton Command5 
-         Caption         =   "Nova Revisão Periodica"
+         Caption         =   "Nova RevisÃ£o Periodica"
          Height          =   255
          Left            =   -70920
          TabIndex        =   72
@@ -2317,7 +2317,7 @@ Begin VB.Form frmfemea
          Top             =   1500
          Width           =   855
       End
-      Begin VBFLXGRD17.VBFlexGrid GridSeq 
+      Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3255
          Index           =   0
          Left            =   120
@@ -2329,7 +2329,7 @@ Begin VB.Form frmfemea
          _ExtentY        =   5741
          Cols            =   8
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1335
          Left            =   -74880
          TabIndex        =   92
@@ -2339,7 +2339,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   13150
          _ExtentY        =   2355
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1095
          Index           =   0
          Left            =   -74880
@@ -2350,7 +2350,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   13150
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridopr 
+      Begin VBFLXGRD18.VBFlexGrid gridopr 
          Height          =   2955
          Left            =   -74880
          TabIndex        =   94
@@ -2360,7 +2360,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   16007
          _ExtentY        =   5212
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   2115
          Index           =   1
          Left            =   -74820
@@ -2371,7 +2371,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   15266
          _ExtentY        =   3731
       End
-      Begin VBFLXGRD17.VBFlexGrid gridmsrd 
+      Begin VBFLXGRD18.VBFlexGrid gridmsrd 
          Height          =   2955
          Left            =   -74880
          TabIndex        =   96
@@ -2381,7 +2381,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   15372
          _ExtentY        =   5212
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPRO 
+      Begin VBFLXGRD18.VBFlexGrid GridPRO 
          Height          =   1155
          Left            =   -74760
          TabIndex        =   97
@@ -2391,7 +2391,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   8599
          _ExtentY        =   2037
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDFAL 
+      Begin VBFLXGRD18.VBFlexGrid GRIDFAL 
          Height          =   1155
          Left            =   -74760
          TabIndex        =   98
@@ -2401,7 +2401,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   8599
          _ExtentY        =   2037
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPadPF 
+      Begin VBFLXGRD18.VBFlexGrid GridPadPF 
          Height          =   2715
          Left            =   -68280
          TabIndex        =   99
@@ -2411,7 +2411,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   3731
          _ExtentY        =   4789
       End
-      Begin VBFLXGRD17.VBFlexGrid GridSeq 
+      Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3375
          Index           =   1
          Left            =   -74880
@@ -2422,7 +2422,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   16536
          _ExtentY        =   5953
       End
-      Begin VBFLXGRD17.VBFlexGrid Gridfemprecad 
+      Begin VBFLXGRD18.VBFlexGrid Gridfemprecad 
          Height          =   4095
          Left            =   -74880
          TabIndex        =   101
@@ -2432,7 +2432,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   14420
          _ExtentY        =   7223
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPad 
+      Begin VBFLXGRD18.VBFlexGrid GridPad 
          Height          =   4095
          Left            =   -74880
          TabIndex        =   102
@@ -2442,7 +2442,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   18653
          _ExtentY        =   7223
       End
-      Begin VBFLXGRD17.VBFlexGrid Grid10 
+      Begin VBFLXGRD18.VBFlexGrid Grid10 
          Height          =   1695
          Left            =   -74880
          TabIndex        =   103
@@ -2452,7 +2452,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   15584
          _ExtentY        =   2990
       End
-      Begin VBFLXGRD17.VBFlexGrid GridOpe 
+      Begin VBFLXGRD18.VBFlexGrid GridOpe 
          Height          =   1695
          Left            =   -74880
          TabIndex        =   104
@@ -2462,7 +2462,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   15584
          _ExtentY        =   2990
       End
-      Begin VBFLXGRD17.VBFlexGrid GrdQsbLep 
+      Begin VBFLXGRD18.VBFlexGrid GrdQsbLep 
          Height          =   5115
          Left            =   -74880
          TabIndex        =   155
@@ -2472,7 +2472,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   15796
          _ExtentY        =   9022
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevcau 
+      Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1995
          Index           =   0
          Left            =   120
@@ -2483,7 +2483,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   16219
          _ExtentY        =   3519
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevcau 
+      Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1515
          Index           =   1
          Left            =   -74880
@@ -2494,7 +2494,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   16431
          _ExtentY        =   2672
       End
-      Begin VBFLXGRD17.VBFlexGrid GridSeq 
+      Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3255
          Index           =   2
          Left            =   -74880
@@ -2505,7 +2505,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   16325
          _ExtentY        =   5741
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevcau 
+      Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1635
          Index           =   2
          Left            =   -74880
@@ -2516,7 +2516,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   16431
          _ExtentY        =   2884
       End
-      Begin VBFLXGRD17.VBFlexGrid GridSeq 
+      Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3255
          Index           =   3
          Left            =   -74880
@@ -2527,7 +2527,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   16325
          _ExtentY        =   5741
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevcau 
+      Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1635
          Index           =   3
          Left            =   -74880
@@ -2538,7 +2538,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   16431
          _ExtentY        =   2884
       End
-      Begin VBFLXGRD17.VBFlexGrid GridSeq 
+      Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3255
          Index           =   4
          Left            =   -74760
@@ -2549,7 +2549,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   16325
          _ExtentY        =   5741
       End
-      Begin VBFLXGRD17.VBFlexGrid gridpfpadhist 
+      Begin VBFLXGRD18.VBFlexGrid gridpfpadhist 
          Height          =   2715
          Left            =   -74640
          TabIndex        =   218
@@ -2559,7 +2559,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   3731
          _ExtentY        =   4789
       End
-      Begin VBFLXGRD17.VBFlexGrid GridSeq 
+      Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3255
          Index           =   5
          Left            =   -74880
@@ -2569,7 +2569,7 @@ Begin VB.Form frmfemea
          _ExtentX        =   16325
          _ExtentY        =   5741
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevcau 
+      Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1515
          Index           =   5
          Left            =   -74880
@@ -2678,7 +2678,7 @@ Begin VB.Form frmfemea
          Width           =   615
       End
       Begin VB.Label Label7 
-         Caption         =   "Revisão"
+         Caption         =   "RevisÃ£o"
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -74880
@@ -2890,7 +2890,7 @@ Begin VB.Form frmfemea
       Width           =   615
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Opção"
+      Caption         =   "OpÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   19
@@ -2910,7 +2910,7 @@ Begin VB.Form frmfemea
       Width           =   615
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Revisão"
+      Caption         =   "RevisÃ£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   10
@@ -2940,7 +2940,7 @@ Begin VB.Form frmfemea
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Descrição"
+      Caption         =   "DescriÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   3
@@ -3338,9 +3338,9 @@ Private Sub CmdEdiPad_Click(Index As Integer)
     End If
   Case 3
     nNUM = 0
-    nNUM = FixInt(Val(Busca("Nº Item", "Atribuindo", CStr(nNUM), 8)))
+    nNUM = FixInt(Val(Busca("NÂº Item", "Atribuindo", CStr(nNUM), 8)))
     If nNUM = 0 Then
-      Alert ("Nº ITEM em Branco")
+      Alert ("NÂº ITEM em Branco")
       Exit Sub
     End If
     If MDG("Atribuir Item " & CStr(nNUM) & "Para Processo " & CStr(aVAL(0))) Then
@@ -3569,9 +3569,9 @@ Private Sub Xcmdimp_Click(nPFTMP)
   lGRAVA = False
   On Error Resume Next
   If nPFTMP = 0 Then
-    nPFTMP = FixInt(Val(Busca("Nº PF", "Importando", CStr(nPFTMP), 8)))
+    nPFTMP = FixInt(Val(Busca("NÂº PF", "Importando", CStr(nPFTMP), 8)))
     If nPFTMP = 0 Then
-      Alert ("Nº PF Nao Especificado")
+      Alert ("NÂº PF Nao Especificado")
       Exit Sub
     End If
     lGRAVA = True
@@ -4309,10 +4309,10 @@ Private Sub CmdVerApu_Click()
   nMES = FixInt(text(1))
   nANO = FixInt(text(2))
   cSQL = "SELECT PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU FROM FEMRPNT WHERE ANO=" & nANO & " AND MES=" & nMES & " AND PF=" & nPF & " ORDER BY PF,INDRIS"
-  MontaGridFast Grid10, 10, Array(400, 400, 400, 400, 400, 400, 400, 300, 2500, 2500), Array("PF", "ITEM", "RPN", "NºPro", "NºFal", "NºEfe", "NºCau", "Man", "Efeito", "Causa"), Array("PF", "ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
+  MontaGridFast Grid10, 10, Array(400, 400, 400, 400, 400, 400, 400, 300, 2500, 2500), Array("PF", "ITEM", "RPN", "NÂºPro", "NÂºFal", "NÂºEfe", "NÂºCau", "Man", "Efeito", "Causa"), Array("PF", "ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
   DizerBarra "carregando apuracoes RPN"
   cSQL = "SELECT PF, SEQ, PRONUM, TOTRPN, TOTCAU, TOTM40, MAIRPN, TOTFX01, TOTFX02, TOTFX03, TOTRPN01, TOTRPN02, TOTRPN03 FROM FEMRPNO WHERE ANO=" & nANO & " AND MES=" & nMES & " AND PF=" & nPF & " ORDER BY PF,PRONUM"
-  MontaGridUltra GridOpe, 13, Array(500, 500, 500, 800, 500, 500, 500, 500, 500, 500, 800, 800, 800), Array("PF", "SEQ", "NºPro", "Tot RPN", "NºCau", ">40", "Maior", "0-40", "40-100", ">100", "Ant", "Ant", "Ant"), Array("PF", "SEQ", "PRONUM", "TOTRPN", "TOTCAU", "TOTM40", "MAIRPN", "TOTFX01", "TOTFX02", "TOTFX03", "TOTRPN01", "TOTRPN02", "TOTRPN03"), cARQFEMEA, cSQL
+  MontaGridUltra GridOpe, 13, Array(500, 500, 500, 800, 500, 500, 500, 500, 500, 500, 800, 800, 800), Array("PF", "SEQ", "NÂºPro", "Tot RPN", "NÂºCau", ">40", "Maior", "0-40", "40-100", ">100", "Ant", "Ant", "Ant"), Array("PF", "SEQ", "PRONUM", "TOTRPN", "TOTCAU", "TOTM40", "MAIRPN", "TOTFX01", "TOTFX02", "TOTFX03", "TOTRPN01", "TOTRPN02", "TOTRPN03"), cARQFEMEA, cSQL
   dizcomapu.Caption = StrZero(nMES, 2) & "/" & StrZero(nANO, 4)
   DizerBarra ""
 End Sub
@@ -4351,7 +4351,7 @@ Private Sub Command1_Click(Index As Integer)
 
   If Index = 8 Then
     If nREV = 0 Then
-      Alert "Revisão Nao Escolhida"
+      Alert "RevisÃ£o Nao Escolhida"
       Exit Sub
     End If
     ePASS01 = "select * from rev WHERE PF=" & nPF & " AND TIPO='FE' AND REVISAO=" & nREV
@@ -4424,10 +4424,10 @@ Private Sub Command1_Click(Index As Integer)
   End Select
 
   If nNUM = 0 Then
-    nNUM = FixInt(Val(Busca("Nº " & StrZero(nTMPSEQ, 2) & "/" & StrZero(nTMPSSQ, 2) & "/" & StrZero(nTMPITEM, 2) & "- " & cDESC, "Incluindo", CStr(nNUM), 8)))
+    nNUM = FixInt(Val(Busca("NÂº " & StrZero(nTMPSEQ, 2) & "/" & StrZero(nTMPSSQ, 2) & "/" & StrZero(nTMPITEM, 2) & "- " & cDESC, "Incluindo", CStr(nNUM), 8)))
   End If
   If nNUM = 0 Then
-    Alert ("Nº em Branco")
+    Alert ("NÂº em Branco")
     Exit Sub
   End If
 
@@ -4656,7 +4656,7 @@ Private Sub Command2_Click(Index As Integer)
 End Sub
 
 Private Sub Command3_Click()
-  If MDG("Gravar Elaborador", "Confirme Gravação") Then
+  If MDG("Gravar Elaborador", "Confirme GravaÃ§Ã£o") Then
     frmfemea.Txtfields(6) = zIDFOLHA
     frmfemea.Txtfields(9) = zNOMEFOLHA
     Txtfields(22) = Date
@@ -4691,9 +4691,9 @@ Private Sub Command4_Click(Index As Integer)
 
   nNUM = 0
 
-  nNUM = FixInt(Val(Busca("Nº", "Renumerando", CStr(nNUM), 8)))
+  nNUM = FixInt(Val(Busca("NÂº", "Renumerando", CStr(nNUM), 8)))
   If nNUM = 0 Then
-    Alert ("Nº em Branco")
+    Alert ("NÂº em Branco")
     Exit Sub
   End If
   GridSeq(Index).Col = 1
@@ -4726,7 +4726,7 @@ Private Sub Command5_Click()
   Encerrar.Visible = False
   CmdNovaREV_Click
   nREV = FixInt(Txtfields(12))
-  XComMotInc_Click ("Revisão Periodica")
+  XComMotInc_Click ("RevisÃ£o Periodica")
   Filgridrevi (0)
 
   Command3_Click
@@ -4945,7 +4945,7 @@ Private Sub Filopr()
   Dim cSQL As String
   cSQL = "select PF, SEQ, SSQ, CODINT, DESCRI from PFS WHERE PF=" & nPF & " ORDER BY SEQ,SSQ"
   DizerBarra "Carregando operacoes"
-  MontaGridFast gridopr, 5, Array(400, 400, 400, 1600, 6000), Array("PF", "SEQ", "SSQ", "Cod Int", "Descriçao"), Array("PF", "SEQ", "SSQ", "L$CODINT", "DESCRI"), cARQPF, cSQL
+  MontaGridFast gridopr, 5, Array(400, 400, 400, 1600, 6000), Array("PF", "SEQ", "SSQ", "Cod Int", "DescriÃ§ao"), Array("PF", "SEQ", "SSQ", "L$CODINT", "DESCRI"), cARQPF, cSQL
   DizerBarra ""
 End Sub
 
@@ -4994,7 +4994,7 @@ Private Sub FilRelat(Index As Integer)
 
 
   End Select
-  MontaGridFast GridSeq(Index), 7, Array(600, 600, 400, 400, 400, 600, 5000), Array("PF", "REG", "SEQ", "SSQ", "IT", "ITS", "Descriçao"), Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "FXITEMS", "FALCAU"), cARQ, cSQL
+  MontaGridFast GridSeq(Index), 7, Array(600, 600, 400, 400, 400, 600, 5000), Array("PF", "REG", "SEQ", "SSQ", "IT", "ITS", "DescriÃ§ao"), Array("PF", "ITEM", "FXSEQ", "FXSSQ", "FXITEM", "FXITEMS", "FALCAU"), cARQ, cSQL
   DizerBarra "verificando sequencias"
   'nROWSQ = GrdQsbLep.Rows - 1
   nROWSQ = gridopr.Rows - 1
@@ -5326,7 +5326,7 @@ Private Sub filgridmsrd()
   cARQ = PegPath("PATH", "MANA5TGQ")
   cSQL = "SELECT MSRD,DATA,DESC01,INV01,ACA01 FROM MSRD WHERE PF=" & nPF & " ORDER BY MSRD"
   cARQ = GeraConn(cARQ, "JETFOX")
-  MontaGridUltra gridmsrd, 5, Array(800, 1200, 2000, 2000, 2000), Array("Nº", "Data", "Desc", "Inv", "Acao"), Array("MSRD", "C$DATA", "L$DESC01", "L$INV01", "L$ACA01"), cARQ, cSQL
+  MontaGridUltra gridmsrd, 5, Array(800, 1200, 2000, 2000, 2000), Array("NÂº", "Data", "Desc", "Inv", "Acao"), Array("MSRD", "C$DATA", "L$DESC01", "L$INV01", "L$ACA01"), cARQ, cSQL
   DizerBarra ""
 End Sub
 
@@ -5334,7 +5334,7 @@ Private Sub FILGRIdPRO()
   Dim cSQL As String
   DizerBarra "carregando femea processos"
   cSQL = "SELECT PRONUM,PROCESSO FROM FEMPRO ORDER BY PRONUM"
-  MontaGridFast GridPRO, 2, Array(800, 3000), Array("Nº", "Descricao"), Array("PRONUM", "PROCESSO"), cARQFEMEA, cSQL
+  MontaGridFast GridPRO, 2, Array(800, 3000), Array("NÂº", "Descricao"), Array("PRONUM", "PROCESSO"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
 
@@ -5342,7 +5342,7 @@ Private Sub FILGRIdFAL()
   Dim cSQL As String
   DizerBarra "carregando femea falhas"
   cSQL = "SELECT PRONUM,FALNUM, FALTIP FROM FEMFAL WHERE PRONUM=" & FixInt(aNUM(0)) & " order by FALNUM"
-  MontaGridFast GRIDFAL, 3, Array(800, 800, 3000), Array("NºPro", "Nº", "Descricao"), Array("PRONUM", "FALNUM", "FALTIP"), cARQFEMEA, cSQL
+  MontaGridFast GRIDFAL, 3, Array(800, 800, 3000), Array("NÂºPro", "NÂº", "Descricao"), Array("PRONUM", "FALNUM", "FALTIP"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
 
@@ -5350,10 +5350,10 @@ Private Sub filgridpadpf()
   Dim cSQL As String
   DizerBarra "carregando femea padrao"
   cSQL = "SELECT PF,PRONUM,FALNUM FROM FEMPF WHERE PF=" & nPF & " ORDER BY PRONUM,FALNUM"
-  MontaGridUltra GridPadPF, 3, Array(400, 400, 400), Array("PF", "NºPro", "NºFAL"), Array("PF", "PRONUM", "FALNUM"), cARQFEMEA, cSQL
+  MontaGridUltra GridPadPF, 3, Array(400, 400, 400), Array("PF", "NÂºPro", "NÂºFAL"), Array("PF", "PRONUM", "FALNUM"), cARQFEMEA, cSQL
   DizerBarra "carregando femea historico"
   cSQL = "SELECT PF,PRONUM,FALNUM FROM FEMPF WHERE PF=" & nPF & " ORDER BY PRONUM,FALNUM"
-  MontaGridUltra gridpfpadhist, 3, Array(400, 400, 400), Array("PF", "NºPro", "NºFAL"), Array("PF", "PRONUM", "FALNUM"), cARQFEMEA, cSQL
+  MontaGridUltra gridpfpadhist, 3, Array(400, 400, 400), Array("PF", "NÂºPro", "NÂºFAL"), Array("PF", "PRONUM", "FALNUM"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
 
@@ -5371,7 +5371,7 @@ Private Sub FILGRIdfemprecad()
   Dim cSQL As String
   DizerBarra "carregando femea pre cadastro"
   cSQL = "SELECT SEGGRA,TITULO FROM FEMPRE ORDER BY TITULO"
-  MontaGridUltra Gridfemprecad, 2, Array(600, 4000), Array("Código", "Descrição"), Array("SEGGRA", "L$TITULO"), cARQFEMEA, cSQL
+  MontaGridUltra Gridfemprecad, 2, Array(600, 4000), Array("CÃ³digo", "DescriÃ§Ã£o"), Array("SEGGRA", "L$TITULO"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
 
@@ -5380,7 +5380,7 @@ Private Sub FILGRIdPAD()
   DizerBarra "carregando femea"
   cSQL = "SELECT ITEM,INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, MUDPAD, PROCESSO, FALTIP, FALEFE, FALCAU FROM FEMEAPAD WHERE PF=" & nPF & " ORDER BY " & cORDFEMPAD
   'cSQL = "SELECT ITEM,INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, MUDPAD, PROCESSO, FALTIP, FALEFE, FALCAU FROM FEMEA WHERE PF=" & nPF & " ORDER BY " & cORDFEMPAD
-  MontaGrid GridPad, 12, Array(400, 400, 400, 400, 400, 400, 300, 300, 1000, 2000, 3000, 2000), Array("ITEM", "RPN", "NºPro", "NºFal", "NºEfe", "NºCau", "Man", "Mod", "Processo", "Falha", "Efeito", "Causa"), Array("ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "MUDPAD", "PROCESSO", "FALTIP", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
+  MontaGrid GridPad, 12, Array(400, 400, 400, 400, 400, 400, 300, 300, 1000, 2000, 3000, 2000), Array("ITEM", "RPN", "NÂºPro", "NÂºFal", "NÂºEfe", "NÂºCau", "Man", "Mod", "Processo", "Falha", "Efeito", "Causa"), Array("ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "MUDPAD", "PROCESSO", "FALTIP", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
 
@@ -5427,7 +5427,7 @@ Private Sub FILGRIDrevCAU(Index As Integer)
     cSQL = "select ITEM,SEGGRA,FXSEQ,FXSSQ,FXITEM,FXITEMS,FEMEAREV,FALCAU from FEMREVI WHERE  TIPOAPU='" & tipoapu(Index) & "' AND PF=" & nPF & " ORDER BY " & cORDREVI  ''ITEM,SEGGRA"
     DizerBarra "carregando femea revisoes " & tipoapu(Index)
   End If
-  MontaGridFast gridrevcau(Index), 8, Array(400, 400, 500, 500, 400, 400, 400, 7000), Array("REG", "REGREV", "SEQ", "SSQ", "IT", "ITS", "FEREV", "Descriçao"), Array("ITEM", "SEGGRA", "FXSEQ", "FXSSQ", "FXITEM", "FXITEMS", "FEMEAREV", "FALCAU"), cARQFEMEA, cSQL
+  MontaGridFast gridrevcau(Index), 8, Array(400, 400, 500, 500, 400, 400, 400, 7000), Array("REG", "REGREV", "SEQ", "SSQ", "IT", "ITS", "FEREV", "DescriÃ§ao"), Array("ITEM", "SEGGRA", "FXSEQ", "FXSSQ", "FXITEM", "FXITEMS", "FEMEAREV", "FALCAU"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
 

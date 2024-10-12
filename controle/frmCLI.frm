@@ -59,7 +59,7 @@ Begin VB.Form frmCLI
       Top             =   480
       Width           =   4335
    End
-   Begin VBFLXGRD17.VBFlexGrid GridAtual 
+   Begin VBFLXGRD18.VBFlexGrid GridAtual 
       Height          =   2655
       Left            =   120
       TabIndex        =   4
@@ -228,7 +228,7 @@ End Sub
 Private Sub Filgrid()
   Dim cSQL As String
   cSQL = "SELECT ITEM,CODIGO,NOME FROM PRODUTO WHERE CLIENTE=" & nPF
-  MontaGridFast GridAtual, 3, Array(400, 2000, 4000), Array("IEB", "Produto", "DescriÁ„o"), _
+  MontaGridFast GridAtual, 3, Array(400, 2000, 4000), Array("IEB", "Produto", "Descri√ß√£o"), _
                 Array("ITEM", "L$CODIGO", "NOME"), cARQDES, cSQL
 End Sub
 
@@ -255,7 +255,7 @@ Private Sub Novo_Click()
   Dim cDESENHO As String
   Dim sSQL As String
   nREVI = 0
-  cDESENHO = InputBox("Digite o Produto", "Inclus„o Produto", "__")
+  cDESENHO = InputBox("Digite o Produto", "Inclus√£o Produto", "__")
   sSQL = "PRODUTO WHERE CLIENTE=" & nPF
   nREVI = FixInt(PegMAXSQL(cARQDES, sSQL, "item", 0)) + 1
   sSQL = "SELECT CLIENTE,CODIGO,ITEM FROM PRODUTO WHERE CLIENTE=" & nPF & " AND CODIGO='" & cDESENHO & "'"

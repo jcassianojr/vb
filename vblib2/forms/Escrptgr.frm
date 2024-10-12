@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escRPTGRP 
    Caption         =   "Escolha o grupo de Relatorio"
    ClientHeight    =   6135
@@ -13,7 +13,7 @@ Begin VB.Form escRPTGRP
    ScaleHeight     =   6135
    ScaleWidth      =   9345
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5415
       Left            =   120
       TabIndex        =   2
@@ -143,7 +143,7 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
 End Sub
 Private Sub Novo_Click()
   Dim cSQL As String
-  zgrp = InputBox("Digite o Codigo", "Inclus„o Relatorio", "____")
+  zgrp = InputBox("Digite o Codigo", "Inclus√£o Relatorio", "____")
   zgrp = FixStr(zgrp, "", "TRIM", 4)
   cSQL = "select * from RPTGRP WHERE GRP='" & zgrp & "'"
   If IncluiSQL(zRPTARQ, cSQL, 1, Array("GRP"), Array(zgrp), True, True) Then

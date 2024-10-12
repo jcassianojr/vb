@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmprotii 
@@ -78,7 +78,7 @@ Begin VB.Form frmprotii
       Tab(1).Control(22)=   "lbl(22)"
       Tab(1).Control(23)=   "lbl(10)"
       Tab(1).Control(24)=   "lbl(9)"
-      TabCaption(2)   =   "Desenho ObservaÁao"
+      TabCaption(2)   =   "Desenho Observa√ßao"
       Tab(2).ControlCount=   10
       Tab(2).Control(0)=   "Text1(15)"
       Tab(2).Control(1)=   "Text1(14)"
@@ -253,7 +253,7 @@ Begin VB.Form frmprotii
          Top             =   1440
          Width           =   7695
       End
-      Begin VBFLXGRD17.VBFlexGrid Grid 
+      Begin VBFLXGRD18.VBFlexGrid Grid 
          Height          =   2295
          Left            =   240
          TabIndex        =   46
@@ -409,7 +409,7 @@ Begin VB.Form frmprotii
       Begin VB.Label lbl 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "Nota Fiscal N›."
+         Caption         =   "Nota Fiscal N√ù."
          ForeColor       =   &H00C00000&
          Height          =   195
          Index           =   22
@@ -690,7 +690,7 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraÁÙes") Then
+  If MDG("Gravar altera√ß√¥es") Then
     For iLOOP = 0 To nCAMPOS - 7
       aVAL(iLOOP) = Text1(iLOOP)
     Next iLOOP

@@ -28,7 +28,7 @@ Begin VB.Form escfrmpre
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5475
       Left            =   120
       TabIndex        =   0
@@ -105,7 +105,7 @@ Private Sub FilRelat()
   Else
     cSQL = "SELECT SEGGRA,TITULO FROM FEMPRE WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
   End If
-  MontaGridFast Grid, 2, Array(400, 4000), Array("Código", "Descrição"), _
+  MontaGridFast Grid, 2, Array(400, 4000), Array("CÃ³digo", "DescriÃ§Ã£o"), _
                 Array("SEGGRA", "L$TITULO"), cARQFEMEA, cSQL
 End Sub
 
@@ -114,7 +114,7 @@ Private Sub Form_Load()
   cARQPF = PegPath("PATH", "PF")
   cARQFEMEA = PegPath("PATH", "FEMEA")
   aORDEM = Array("SEGGRA", "TITULO")
-  aORDES = Array("Código", "Descrição")
+  aORDES = Array("CÃ³digo", "DescriÃ§Ã£o")
   cORDEM = "TITULO"
   cSUBWHERE = ""
   xmontatoolbar Me.Toolbar1, "escfrmpre", True

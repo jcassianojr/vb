@@ -204,7 +204,7 @@ Begin VB.Form frmDISPO
          Width           =   1215
          _ExtentX        =   0
          _ExtentY        =   0
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -251,7 +251,7 @@ Begin VB.Form frmDISPO
          Top             =   600
          Width           =   1095
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1815
          Left            =   -74880
          TabIndex        =   20
@@ -262,7 +262,7 @@ Begin VB.Form frmDISPO
          _ExtentY        =   3201
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1575
          Left            =   -74880
          TabIndex        =   23
@@ -273,7 +273,7 @@ Begin VB.Form frmDISPO
          _ExtentY        =   2778
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPla 
+      Begin VBFLXGRD18.VBFlexGrid GridPla 
          Height          =   2895
          Left            =   240
          TabIndex        =   27
@@ -667,7 +667,7 @@ Dim iLOOP As Integer
 Private Sub cmdClose_Click()
   On Error Resume Next
   Dim i As Integer
-  If MDG("Gravar alteraÁÙes") Then
+  If MDG("Gravar altera√ß√¥es") Then
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = TXT(iLOOP)
     Next iLOOP
@@ -697,7 +697,7 @@ End Sub
 
 Private Sub Command6_Click()
   If nREV = 0 Then
-    Alert "Revis„o Nao Escolhida"
+    Alert "Revis√£o Nao Escolhida"
     Exit Sub
   End If
   ePASS01 = "select * from rev WHERE PF=" & nPPAP & " AND TIPO='DIS' AND REVISAO=" & nREV
@@ -740,7 +740,7 @@ End Sub
 
 Private Sub ComMotAlt_Click()
   If nREV = 0 Then
-    Alert "Revis„o Nao Escolhida"
+    Alert "Revis√£o Nao Escolhida"
     Exit Sub
   End If
   If gridrevi.Row > 0 Then
@@ -756,7 +756,7 @@ End Sub
 Private Sub ComMotExc_Click()
   Dim cSQL As String
   If nREV = 0 Then
-    Alert "Revis„o Nao Escolhida"
+    Alert "Revis√£o Nao Escolhida"
     Exit Sub
   End If
   If gridrevi.Row > 0 Then
@@ -772,7 +772,7 @@ End Sub
 Private Sub ComMotInc_Click()
   Dim nITEM As Long
   If nREV = 0 Then
-    Alert "Revis„o Nao Escolhida"
+    Alert "Revis√£o Nao Escolhida"
     Exit Sub
   End If
   nITEM = 1

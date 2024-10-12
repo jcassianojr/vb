@@ -28,7 +28,7 @@ Begin VB.Form escFER
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5475
       Left            =   120
       TabIndex        =   0
@@ -93,7 +93,7 @@ Private Sub FilRelat()
   Else
     cSQL = "SELECT FERRAM,NUMERO,NOME FROM FERRAM WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
   End If
-  MontaGridUltra Grid, 3, Array(2000, 800, 5000), Array("Codigo", "Numero", "Descrição"), _
+  MontaGridUltra Grid, 3, Array(2000, 800, 5000), Array("Codigo", "Numero", "DescriÃ§Ã£o"), _
                  Array("L$ferram", "R$numero", "NOME"), cARQFER, cSQL
 End Sub
 

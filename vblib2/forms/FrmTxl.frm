@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form FrmTxl 
    Caption         =   "Gerador Relatorios Texto"
    ClientHeight    =   7545
@@ -14,7 +14,7 @@ Begin VB.Form FrmTxl
    ScaleHeight     =   7545
    ScaleWidth      =   11760
    StartUpPosition =   3  'Windows Default
-   Begin VBFLXGRD17.VBFlexGrid Listview1 
+   Begin VBFLXGRD18.VBFlexGrid Listview1 
       Height          =   1335
       Left            =   120
       TabIndex        =   34
@@ -1075,7 +1075,7 @@ Private Sub montaimp()
   For Each xPrinter In Printers
 
     cPAD = " "
-    ''If xPrinter = Printer.DeviceName Then '… a Impressora Padr„o
+    ''If xPrinter = Printer.DeviceName Then '√â a Impressora Padr√£o
     ''      sIcone = ImageList1.ListImages(1).key
     ''   cPAD = "*"
     ''Else 'Outras Impressoras Instaladas

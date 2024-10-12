@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escFLX 
    Caption         =   "Selecione Simbolo Desejado"
    ClientHeight    =   6090
@@ -34,7 +34,7 @@ Begin VB.Form escFLX
       Top             =   60
       Width           =   1095
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5355
       Left            =   0
       TabIndex        =   0
@@ -118,7 +118,7 @@ Private Sub FilRelat()
     cSQL = "SELECT NUMERO,LETRA,DESCRICAO FROM CFLX WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
   End If
 
-  MontaGrid Grid, 3, Array(600, 600, 3500), Array("Letra", "Nº", "Descriçao"), _
+  MontaGrid Grid, 3, Array(600, 600, 3500), Array("Letra", "NÂº", "DescriÃ§ao"), _
             Array("C$Letra", "C$NUMERO", "L$Descricao"), cARQPF, cSQL
   grid_Click
 

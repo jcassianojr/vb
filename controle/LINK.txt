@@ -1,0 +1,2 @@
+****** Run at 12/10/2024 10:53:04
+L1NK "D:\develop\vb\controle\controle.OBJ"    /ENTRY:__vbaS /OUT:"D:\develop\vb\controle\controle.exe" /BASE:0x400000 /SUBSYSTEM:WINDOWS,4.0 /VERSION:1.14   /INCREMENTAL:NO /OPT:REF /MERGE:.rdata=.text /IGNORE:4078 

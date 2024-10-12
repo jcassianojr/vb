@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escME04 
    Caption         =   "Selecione o Item  desejado:"
    ClientHeight    =   6090
@@ -28,7 +28,7 @@ Begin VB.Form escME04
       TextAlignment   =   1
       _Version        =   393216
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5535
       Left            =   120
       TabIndex        =   0
@@ -98,7 +98,7 @@ Private Sub FilRelat()
   Else
     cSQL = "SELECT CODIGO,TIPO,CODTIPO,NOMTIPO,APLICACAO,PF,SITUACAO FROM ME04 " & cSUBWHERE & " ORDER BY " & cORDEM
   End If
-  MontaGridFast Grid, 7, Array(1200, 2000, 800, 1, 2000, 400, 400), Array("CÛdigo", "DescriÁ„o", "Tipo", "_", "AplicaÁ„o", "PF", "Sit"), _
+  MontaGridFast Grid, 7, Array(1200, 2000, 800, 1, 2000, 400, 400), Array("C√≥digo", "Descri√ß√£o", "Tipo", "_", "Aplica√ß√£o", "PF", "Sit"), _
                 Array("L$CODIGO", "L$TIPO", "L$CODTIPO", "L$NOMTIPO", "L$APLICACAO", "PF", "C$SITUACAO"), cARQME, cSQL
 End Sub
 
@@ -107,7 +107,7 @@ Private Sub Form_Load()
   cARQME = PegPath("PATH", "MANA5INS")
   cARQME = GeraConn(cARQME, "JETFOX")
   aORDEM = Array("CODIGO", "TIPO", "CODTIPO", "APLICACAO", "PF")
-  aORDES = Array("CÛdigo", "DescriÁ„o", "Tipo", "AplicaÁ„o", "PF")
+  aORDES = Array("C√≥digo", "Descri√ß√£o", "Tipo", "Aplica√ß√£o", "PF")
   cORDEM = "CODIGO"
   cSUBWHERE = ePASS01
   FilRelat
@@ -183,7 +183,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
       FilRelat
     End If
   Case "NOV", "INC"
-    cCONJUNTO = InputBox("Digite o Codigo", "Inclus„o Instr/Calib", "__")
+    cCONJUNTO = InputBox("Digite o Codigo", "Inclus√£o Instr/Calib", "__")
     cARQTMP = PegPath("PATH", "MANA5INS")
     cARQTMP = GeraConn(cARQTMP, "JETFOX")
     sSQL = "select codigo from ME04 WHERE CODIGO='" & cCONJUNTO & "'"

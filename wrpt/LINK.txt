@@ -1,0 +1,2 @@
+****** Run at 12/10/2024 10:46:09
+L1NK "D:\develop\vb\wrpt\wrpt.OBJ"    /ENTRY:__vbaS /OUT:"D:\develop\vb\wrpt\wrpt.exe" /BASE:0x400000 /SUBSYSTEM:WINDOWS,4.0 /VERSION:1.8   /INCREMENTAL:NO /OPT:REF /MERGE:.rdata=.text /IGNORE:4078 

@@ -13,7 +13,7 @@ Begin VB.Form escPFD
    ScaleHeight     =   6090
    ScaleWidth      =   8190
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5535
       Left            =   120
       TabIndex        =   0

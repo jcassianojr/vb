@@ -65,7 +65,7 @@ Begin VB.Form frmDes
          EndProperty
       End
       Begin VB.CommandButton NovaREv 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   495
          Left            =   8640
          TabIndex        =   11
@@ -73,7 +73,7 @@ Begin VB.Form frmDes
          Top             =   2880
          Width           =   1095
       End
-      Begin VBFLXGRD17.VBFlexGrid GridAtual 
+      Begin VBFLXGRD18.VBFlexGrid GridAtual 
          Height          =   3135
          Left            =   240
          TabIndex        =   9
@@ -84,7 +84,7 @@ Begin VB.Form frmDes
          _ExtentY        =   5530
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid GridArq 
+      Begin VBFLXGRD18.VBFlexGrid GridArq 
          Height          =   2535
          Left            =   -74760
          TabIndex        =   10
@@ -339,7 +339,7 @@ Begin VB.Form frmDes
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "DescriÁ„o"
+      Caption         =   "Descri√ß√£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   3
@@ -403,7 +403,7 @@ End Sub
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraÁÙes") Then
+  If MDG("Gravar altera√ß√¥es") Then
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
@@ -521,7 +521,7 @@ End Sub
 Private Sub Novo_Click()
   Dim sSQL As String
   Dim cDESENHO As String
-  cDESENHO = InputBox("Digite o Desenho", "Inclus„o Desenho", "__")
+  cDESENHO = InputBox("Digite o Desenho", "Inclus√£o Desenho", "__")
   sSQL = "select * from atual WHERE conjunto='" & cCONJUNTO & "' AND DESENHO='" & cDESENHO & "'"
   If IncluiSQL(cARQDES, sSQL, 7, Array("CONJUNTO", "DESENHO", "REV", "CDROM", "FITADAT", "DATA", "RECEBIDO"), Array(cCONJUNTO, cDESENHO, 0, 0, 0, Date, Date), True, True) Then
     Filgrid "atual", GridAtual

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escNUMNOM 
    Caption         =   "Selecione item Desejado  desejado:"
    ClientHeight    =   6090
@@ -33,7 +33,7 @@ Begin VB.Form escNUMNOM
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5535
       Left            =   120
       TabIndex        =   0
@@ -195,7 +195,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End If
   Case "NOV", "INC"
     If cARQESC = "ME01" Then
-      cCODINC = InputBox("Digite o Codigo", "Inclus„o ", "__")
+      cCODINC = InputBox("Digite o Codigo", "Inclus√£o ", "__")
       cNOMEINC = InputBox("Digite a Descricao", "Descricao do codigo", "__")
       cARQTMP = PegPath("PATH", "MANA5")
       cARQTMP = GeraConn(cARQTMP, "JETFOX")

@@ -13,7 +13,7 @@ Begin VB.Form escPCT
    ScaleHeight     =   6090
    ScaleWidth      =   8880
    StartUpPosition =   2  'CenterScreen
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5415
       Left            =   120
       TabIndex        =   0
@@ -98,14 +98,14 @@ Private Sub FilRelat()
   Else
     sSQL = "SELECT IDTIPO,DESCRICAO FROM PCTIPO WHERE " & cSUBWHERE & " ORDER BY " & cORDEM
   End If
-  MontaGridFast Grid, 2, Array(800, 3000), Array("Nº", "Descricao"), _
+  MontaGridFast Grid, 2, Array(800, 3000), Array("NÂº", "Descricao"), _
                 Array("IDtipo", "Descricao"), cARQPF, sSQL
 End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
   aORDEM = Array("IDtipo", "Descricao")
-  aORDES = Array("Nº", "Descricao")
+  aORDES = Array("NÂº", "Descricao")
   cORDEM = "IDTIPO"
   cSUBWHERE = ""
 

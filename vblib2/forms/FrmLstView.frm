@@ -3,7 +3,7 @@ Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form FrmLstView 
    Caption         =   "Visualizador de LST"
    ClientHeight    =   7560
@@ -53,7 +53,7 @@ Begin VB.Form FrmLstView
       Visible         =   0   'False
       Width           =   1455
    End
-   Begin VBFLXGRD17.VBFlexGrid Grid 
+   Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5175
       Left            =   120
       TabIndex        =   25
@@ -699,7 +699,7 @@ Private Sub CmdPrinterPort_Click()
   ''0 Arquivo
   ''1 Abrir como
   ''2 Mensagem Antes Imprimir
-  ''3 Nº Utilizacoes
+  ''3 NÂº Utilizacoes
   ''4 Arvore
   ''5 Busca
   ''6 Titulo do Relatorio
@@ -919,7 +919,7 @@ End Sub
 Private Sub Form_Load()
 'Call systray(TrayAdd, Me.Hwnd, Me.Caption, Me.Icon)
   CenterFormToScreen Me
-  aORDES = Array("Relatório", "Data")
+  aORDES = Array("RelatÃ³rio", "Data")
   cSUBWHERE = ""
   cNOMEFOLHA = NetworkUserName()
   TxtExecutar.Text = PegPath("LSTVIEW", "VIEW", "C:\plugin\lstview\log0290.exe")

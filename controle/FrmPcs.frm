@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmPCS 
    BorderStyle     =   3  'Fixed Dialog
@@ -477,7 +477,7 @@ Begin VB.Form frmPCS
          Top             =   4080
          Width           =   2415
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPla 
+      Begin VBFLXGRD18.VBFlexGrid GridPla 
          Height          =   3135
          Index           =   0
          Left            =   120
@@ -487,7 +487,7 @@ Begin VB.Form frmPCS
          _ExtentX        =   14631
          _ExtentY        =   5530
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPla 
+      Begin VBFLXGRD18.VBFlexGrid GridPla 
          Height          =   2895
          Index           =   1
          Left            =   -74760
@@ -497,7 +497,7 @@ Begin VB.Form frmPCS
          _ExtentX        =   12515
          _ExtentY        =   5106
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPla 
+      Begin VBFLXGRD18.VBFlexGrid GridPla 
          Height          =   2895
          Index           =   2
          Left            =   -74880
@@ -507,7 +507,7 @@ Begin VB.Form frmPCS
          _ExtentX        =   12515
          _ExtentY        =   5106
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPla 
+      Begin VBFLXGRD18.VBFlexGrid GridPla 
          Height          =   2895
          Index           =   3
          Left            =   -74880
@@ -903,7 +903,7 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   txtFields(1).text = Replace(txtFields(1).text, "/", "-")  'chave apresentando erro de gravacao
 
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     'campos
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = txtFields(iLOOP)
@@ -956,7 +956,7 @@ End Sub
 Private Sub cmdMarPlr_Click(Index As Integer)
   Dim cFILIAL As String
   Dim sSQL As String
-  cFILIAL = InputBox("Digite a Filial", "Inclusão Todas Seq", "1")
+  cFILIAL = InputBox("Digite a Filial", "InclusÃ£o Todas Seq", "1")
   cFILIAL = FixStr(cFILIAL, "1", "TRIM", 5)
   Select Case nARQPCS
   Case 0

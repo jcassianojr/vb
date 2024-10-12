@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmETI 
    Caption         =   "Cadastro ETI"
@@ -59,7 +59,7 @@ Begin VB.Form frmETI
       Width           =   855
    End
    Begin VB.CommandButton CmdNovaREV 
-      Caption         =   "Nova Revisão"
+      Caption         =   "Nova RevisÃ£o"
       Height          =   495
       Left            =   4080
       TabIndex        =   18
@@ -129,7 +129,7 @@ Begin VB.Form frmETI
       Top             =   2040
       Width           =   6855
    End
-   Begin VBFLXGRD17.VBFlexGrid gridrev 
+   Begin VBFLXGRD18.VBFlexGrid gridrev 
       Height          =   1095
       Left            =   120
       TabIndex        =   16
@@ -139,7 +139,7 @@ Begin VB.Form frmETI
       _ExtentX        =   13150
       _ExtentY        =   1931
    End
-   Begin VBFLXGRD17.VBFlexGrid gridrevi 
+   Begin VBFLXGRD18.VBFlexGrid gridrevi 
       Height          =   1575
       Left            =   120
       TabIndex        =   17
@@ -273,7 +273,7 @@ Begin VB.Form frmETI
       Width           =   975
    End
    Begin VB.Label Label 
-      Caption         =   "Nº"
+      Caption         =   "NÂº"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   6
@@ -283,7 +283,7 @@ Begin VB.Form frmETI
       Width           =   255
    End
    Begin VB.Label Label 
-      Caption         =   "Revisäo"
+      Caption         =   "RevisÃ¤o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   5
@@ -293,7 +293,7 @@ Begin VB.Form frmETI
       Width           =   1095
    End
    Begin VB.Label Label 
-      Caption         =   "Especificaçäo"
+      Caption         =   "EspecificaÃ§Ã¤o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   4
@@ -364,7 +364,7 @@ Dim nREVI As Integer
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 2
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
@@ -398,7 +398,7 @@ End Sub
 
 Private Sub Command1_Click()
   If nREV = 0 Then
-    Alert "Revisão Nao Escolhida"
+    Alert "RevisÃ£o Nao Escolhida"
     Exit Sub
   End If
   ePASS01 = "select * from rev WHERE PF=" & nPF & " AND TIPO='ETI' AND REVISAO=" & nREV

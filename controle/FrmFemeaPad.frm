@@ -561,7 +561,7 @@ Begin VB.Form FrmFemeaPad
          Top             =   720
          Width           =   1095
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPRO 
+      Begin VBFLXGRD18.VBFlexGrid GridPRO 
          Height          =   1155
          Left            =   360
          TabIndex        =   14
@@ -571,7 +571,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   2037
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDFAL 
+      Begin VBFLXGRD18.VBFlexGrid GRIDFAL 
          Height          =   1155
          Left            =   360
          TabIndex        =   15
@@ -581,7 +581,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   2037
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid gridefe 
+      Begin VBFLXGRD18.VBFlexGrid gridefe 
          Height          =   1155
          Left            =   360
          TabIndex        =   16
@@ -591,7 +591,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   2037
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid gridcau 
+      Begin VBFLXGRD18.VBFlexGrid gridcau 
          Height          =   1035
          Left            =   360
          TabIndex        =   17
@@ -601,7 +601,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   1826
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid Gridfemprecad 
+      Begin VBFLXGRD18.VBFlexGrid Gridfemprecad 
          Height          =   5895
          Left            =   -74880
          TabIndex        =   31
@@ -612,7 +612,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   10398
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid GridPadPF 
+      Begin VBFLXGRD18.VBFlexGrid GridPadPF 
          Height          =   5235
          Left            =   -67680
          TabIndex        =   33
@@ -622,7 +622,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   9234
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid gridpf 
+      Begin VBFLXGRD18.VBFlexGrid gridpf 
          Height          =   5355
          Left            =   -74880
          TabIndex        =   34
@@ -632,7 +632,7 @@ Begin VB.Form FrmFemeaPad
          _ExtentY        =   9446
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevcau 
+      Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1035
          Left            =   360
          TabIndex        =   61
@@ -656,7 +656,7 @@ Begin VB.Form FrmFemeaPad
          TextAlignment   =   1
          _Version        =   393216
       End
-      Begin VBFLXGRD17.VBFlexGrid Grid 
+      Begin VBFLXGRD18.VBFlexGrid Grid 
          Height          =   5595
          Left            =   -74820
          TabIndex        =   69
@@ -1101,16 +1101,16 @@ Private Sub CmdExpCau_Click(Index As Integer)
       Exit Sub
     End If
   End If
-  nPRODES = FixNum(Val(Busca("Nº Processo Destino", "Exportando", CStr(aNUM(0)), 8)))
+  nPRODES = FixNum(Val(Busca("NÂº Processo Destino", "Exportando", CStr(aNUM(0)), 8)))
   cDIZPRO = PegUltSQL(cARQFEMEA, "select * from FEMPRO WHERE PRONUM=" & nPRODES, "PROCESSO", "")
   cDIZPRO = FixStr(InputBox("Digite a Descricao Processo", "Exportando", cDIZPRO), "")
   If Index > 0 Then
-    nFALDES = FixNum(Val(Busca("Nº Falha Destino", "Exportando", CStr(aNUM(1)), 8)))
+    nFALDES = FixNum(Val(Busca("NÂº Falha Destino", "Exportando", CStr(aNUM(1)), 8)))
     cDIZFAL = PegUltSQL(cARQFEMEA, "select * from FEMFAL WHERE PRONUM=" & nPRODES & " AND FALNUM=" & nFALDES, "FALTIP", "")
     cDIZFAL = FixStr(InputBox("Digite a Descricao Falha", "Exportando", cDIZFAL), "")
   End If
   If Index > 1 Then
-    nEFEDES = FixNum(Val(Busca("Nº Efeito Destino", "Exportando", CStr(aNUM(2) + 1), 8)))
+    nEFEDES = FixNum(Val(Busca("NÂº Efeito Destino", "Exportando", CStr(aNUM(2) + 1), 8)))
     cDIZEFE = PegUltSQL(cARQFEMEA, "select * from FEMEFE WHERE PRONUM=" & nPRODES & " AND FALNUM=" & nFALDES & " AND EFENUM=" & nEFEDES, "FALEFE", "")
     cDIZEFE = FixStr(InputBox("Digite a Descricao Efeito", "Exportando", cDIZEFE), "")
   End If
@@ -1133,7 +1133,7 @@ Private Sub CmdExpCau_Click(Index As Integer)
   'arquivo destino
   DB2.ConnectionTimeout = 120
   DB2.Open GeracArq(cARQFEMEA)
-  'origem duplicaçao
+  'origem duplicaÃ§ao
   Select Case Index
   Case 0
     cSQLORI = "select * from FEMCAU WHERE PRONUM=" & aNUM(0)
@@ -1382,10 +1382,10 @@ Private Sub CmdNovo_Click(Index As Integer)
     cCAMPO = "CAUNUM"
   End Select
   nNUM = FixInt(PegMAXSQL(cARQFEMEA, cSQL, cCAMPO, 0)) + 1
-  nNUM = FixNum(Val(Busca("Nº", "Incluindo", CStr(nNUM), 8)))
+  nNUM = FixNum(Val(Busca("NÂº", "Incluindo", CStr(nNUM), 8)))
   cDIZ = FixStr(InputBox("Digite a Descricao", "Incluindo", ""), "")
   If nNUM = 0 Then
-    Alert ("Nº em Branco")
+    Alert ("NÂº em Branco")
     Exit Sub
   End If
   If Len(cDIZ) = 0 Then
@@ -1519,7 +1519,7 @@ Private Sub gerapfs()
   Set RSTA2 = Nothing
   Set RSTA3 = Nothing
   Set RSTA4 = Nothing
-  Alert "Concluido Atualização PF/FEMEA/PADRAO"
+  Alert "Concluido AtualizaÃ§Ã£o PF/FEMEA/PADRAO"
 
 End Sub
 
@@ -1846,7 +1846,7 @@ Private Sub FILGRIdfemprecad()
   Dim cSQL As String
   DizerBarra "Carretando Femea pre Cadastro"
   cSQL = "SELECT SEGGRA,TITULO FROM FEMPRE ORDER BY TITULO"
-  MontaGridUltra Gridfemprecad, 2, Array(800, 4000), Array("Código", "Descrição"), Array("SEGGRA", "L$TITULO"), cARQFEMEA, cSQL
+  MontaGridUltra Gridfemprecad, 2, Array(800, 4000), Array("CÃ³digo", "DescriÃ§Ã£o"), Array("SEGGRA", "L$TITULO"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
 
@@ -2024,7 +2024,7 @@ Private Sub FILGRIdPRO()
   Dim cSQL As String
   cSQL = "SELECT pronum,processo FROM FEMPRO ORDER BY PRONUM"
   DizerBarra "Carregando Processos"
-  MontaGridUltra GridPRO, 2, Array(600, 6000), Array("Nº", "Descricao"), Array("PRONUM", "PROCESSO"), cARQFEMEA, cSQL
+  MontaGridUltra GridPRO, 2, Array(600, 6000), Array("NÂº", "Descricao"), Array("PRONUM", "PROCESSO"), cARQFEMEA, cSQL
   DizerBarra ""
 
 End Sub
@@ -2035,7 +2035,7 @@ Private Sub FILGRIdFAL()
   cSQL = "SELECT PRONUM, FALNUM, FALTIP FROM FEMFAL WHERE PRONUM=" & FixInt(aNUM(0)) & " order by FALNUM"
 
   DizerBarra "Carregando Falhas"
-  MontaGridUltra GRIDFAL, 3, Array(600, 600, 6000), Array("NºPro", "Nº", "Descricao"), Array("PRONUM", "FALNUM", "FALTIP"), cARQFEMEA, cSQL
+  MontaGridUltra GRIDFAL, 3, Array(600, 600, 6000), Array("NÂºPro", "NÂº", "Descricao"), Array("PRONUM", "FALNUM", "FALTIP"), cARQFEMEA, cSQL
   DizerBarra ""
 
 End Sub
@@ -2046,7 +2046,7 @@ Private Sub FILGRIdEFE()
   cSQL = "SELECT PRONUM, FALNUM, EFENUM, FALEFE FROM FEMEFE WHERE PRONUM=" & FixInt(aNUM(0)) & " AND FALNUM=" & FixInt(aNUM(1)) & " ORDER BY EFENUM"
 
   DizerBarra "Carregando Efeitos"
-  MontaGridUltra gridefe, 4, Array(600, 600, 600, 6000), Array("NºPro", "NºFal", "NºEfe", "Descricao"), Array("PRONUM", "FALNUM", "EFENUM", "FALEFE"), cARQFEMEA, cSQL
+  MontaGridUltra gridefe, 4, Array(600, 600, 600, 6000), Array("NÂºPro", "NÂºFal", "NÂºEfe", "Descricao"), Array("PRONUM", "FALNUM", "EFENUM", "FALEFE"), cARQFEMEA, cSQL
   DizerBarra ""
 
 End Sub
@@ -2057,7 +2057,7 @@ Private Sub FILGRIdCAU()
   cSQL = "SELECT PRONUM,FALNUM,EFENUM,cAUNUM,FALCAU FROM FEMCAU WHERE PRONUM=" & FixInt(aNUM(0)) & " AND FALNUM=" & FixInt(aNUM(1)) & " AND EFEnum=" & FixInt(aNUM(2)) & " ORDER BY CAUNUM"
 
   DizerBarra "Carregando Causas"
-  MontaGridUltra gridcau, 5, Array(600, 600, 600, 600, 5000), Array("NºPro", "NºFal", "NºEfe", "NºCau", "Descricao"), Array("PRONUM", "FALNUM", "EFENUM", "CAUNUM", "FALCAU"), cARQFEMEA, cSQL
+  MontaGridUltra gridcau, 5, Array(600, 600, 600, 600, 5000), Array("NÂºPro", "NÂºFal", "NÂºEfe", "NÂºCau", "Descricao"), Array("PRONUM", "FALNUM", "EFENUM", "CAUNUM", "FALCAU"), cARQFEMEA, cSQL
   DizerBarra ""
 
 End Sub
@@ -2068,7 +2068,7 @@ Private Sub FILGRIDrevCAU()
   cSQL = "SELECT PRONUM,FALNUM,EFENUM,CAUNUM,SEGGRA,FALCAU FROM FEMrevi WHERE  TIPOAPU='P' AND PRONUM=" & FixInt(aNUM(0)) & " AND FALNUM=" & FixInt(aNUM(1)) & " AND EFEnum=" & FixInt(aNUM(2)) & " AND caunum=" & FixInt(aNUM(3)) & " order by SEGGRA"
 
   DizerBarra "Carregando Revisao Causas"
-  MontaGridUltra gridrevcau, 6, Array(600, 600, 600, 600, 600, 5000), Array("NºPro", "NºFal", "NºEfe", "NºCau", "Rev", "Descricao"), Array("PRONUM", "FALNUM", "EFENUM", "CAUNUM", "SEGGRA", "FALCAU"), cARQFEMEA, cSQL
+  MontaGridUltra gridrevcau, 6, Array(600, 600, 600, 600, 600, 5000), Array("NÂºPro", "NÂºFal", "NÂºEfe", "NÂºCau", "Rev", "Descricao"), Array("PRONUM", "FALNUM", "EFENUM", "CAUNUM", "SEGGRA", "FALCAU"), cARQFEMEA, cSQL
   DizerBarra ""
 
 End Sub
@@ -2086,7 +2086,7 @@ Private Sub filgridpadpf()
   End If
   cSQL = "SELECT PF,PRONUM,FALNUM FROM FEMPF WHERE PRONUM=" & FixInt(aNUM(0)) & " AND FALNUM=" & FixInt(aNUM(1)) & " ORDER BY PF"
   DizerBarra "carregando femea pf"
-  MontaGridUltra GridPadPF, 3, Array(400, 400, 400), Array("PF", "NºPro", "NºFAL"), Array("PF", "PRONUM", "FALNUM"), cARQFEMEA, cSQL
+  MontaGridUltra GridPadPF, 3, Array(400, 400, 400), Array("PF", "NÂºPro", "NÂºFAL"), Array("PF", "PRONUM", "FALNUM"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
 

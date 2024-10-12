@@ -1,12 +1,12 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD17.OCX"
+Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmPF 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Processo de FabricaÁ„o"
+   Caption         =   "Processo de Fabrica√ß√£o"
    ClientHeight    =   8265
    ClientLeft      =   1095
    ClientTop       =   330
@@ -519,7 +519,7 @@ Begin VB.Form frmPF
       Tab             =   5
       TabHeight       =   520
       ControlVersion  =   9
-      TabCaption(0)   =   "MatÈria Prima 1"
+      TabCaption(0)   =   "Mat√©ria Prima 1"
       Tab(0).ControlCount=   28
       Tab(0).Control(0)=   "lblLabels(22)"
       Tab(0).Control(1)=   "lblLabels(23)"
@@ -549,7 +549,7 @@ Begin VB.Form frmPF
       Tab(0).Control(25)=   "Picture1(0)"
       Tab(0).Control(26)=   "Picture2(0)"
       Tab(0).Control(27)=   "ESCpro(9)"
-      TabCaption(1)   =   "MatÈria Prima 2"
+      TabCaption(1)   =   "Mat√©ria Prima 2"
       Tab(1).ControlCount=   24
       Tab(1).Control(0)=   "lblLabels(27)"
       Tab(1).Control(1)=   "lblLabels(28)"
@@ -575,7 +575,7 @@ Begin VB.Form frmPF
       Tab(1).Control(21)=   "txtfields(49)"
       Tab(1).Control(22)=   "txtfields(50)"
       Tab(1).Control(23)=   "Picture1(1)"
-      TabCaption(2)   =   "MatÈria Prima 3"
+      TabCaption(2)   =   "Mat√©ria Prima 3"
       Tab(2).ControlCount=   28
       Tab(2).Control(0)=   "lblLabels(32)"
       Tab(2).Control(1)=   "lblLabels(33)"
@@ -605,7 +605,7 @@ Begin VB.Form frmPF
       Tab(2).Control(25)=   "Picture1(2)"
       Tab(2).Control(26)=   "Picture2(2)"
       Tab(2).Control(27)=   "ESCpro(11)"
-      TabCaption(3)   =   "ComposiÁ„o"
+      TabCaption(3)   =   "Composi√ß√£o"
       Tab(3).ControlCount=   7
       Tab(3).Control(0)=   "Command5"
       Tab(3).Control(1)=   "Command4"
@@ -1415,7 +1415,7 @@ Begin VB.Form frmPF
          Width           =   975
       End
       Begin VB.CommandButton NovaRev 
-         Caption         =   "Nova Revis„o"
+         Caption         =   "Nova Revis√£o"
          Height          =   375
          Left            =   -71160
          TabIndex        =   113
@@ -1732,7 +1732,7 @@ Begin VB.Form frmPF
          Top             =   1380
          Width           =   5175
       End
-      Begin VBFLXGRD17.VBFlexGrid GRIDCOM 
+      Begin VBFLXGRD18.VBFlexGrid GRIDCOM 
          Height          =   3615
          Left            =   -74880
          TabIndex        =   104
@@ -1742,7 +1742,7 @@ Begin VB.Form frmPF
          _ExtentX        =   14208
          _ExtentY        =   6376
       End
-      Begin VBFLXGRD17.VBFlexGrid GridSeq 
+      Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3615
          Left            =   120
          TabIndex        =   118
@@ -1752,7 +1752,7 @@ Begin VB.Form frmPF
          _ExtentX        =   17277
          _ExtentY        =   6376
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrev 
+      Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
          Left            =   -74880
          TabIndex        =   120
@@ -1762,7 +1762,7 @@ Begin VB.Form frmPF
          _ExtentX        =   13150
          _ExtentY        =   1931
       End
-      Begin VBFLXGRD17.VBFlexGrid gridrevi 
+      Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1335
          Left            =   -74880
          TabIndex        =   121
@@ -2457,7 +2457,7 @@ Begin VB.Form frmPF
          Width           =   1095
       End
       Begin VB.Label lblLabels 
-         Caption         =   "ObservaÁıes"
+         Caption         =   "Observa√ß√µes"
          Height          =   255
          Index           =   36
          Left            =   -71400
@@ -2506,7 +2506,7 @@ Begin VB.Form frmPF
          Width           =   735
       End
       Begin VB.Label lblLabels 
-         Caption         =   "ObservaÁıes"
+         Caption         =   "Observa√ß√µes"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   31
@@ -2556,7 +2556,7 @@ Begin VB.Form frmPF
          Width           =   735
       End
       Begin VB.Label lblLabels 
-         Caption         =   "ObservaÁıes"
+         Caption         =   "Observa√ß√µes"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   26
@@ -2790,7 +2790,7 @@ Begin VB.Form frmPF
       Width           =   1095
    End
    Begin VB.Label Label2 
-      Caption         =   "OpÁ„o"
+      Caption         =   "Op√ß√£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   8640
@@ -2828,7 +2828,7 @@ Begin VB.Form frmPF
       Width           =   615
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Motivo Revis„o"
+      Caption         =   "Motivo Revis√£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   18
@@ -2868,7 +2868,7 @@ Begin VB.Form frmPF
       Width           =   1095
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Data Revis„o Cjto"
+      Caption         =   "Data Revis√£o Cjto"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   14
@@ -2898,7 +2898,7 @@ Begin VB.Form frmPF
       Width           =   1575
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Data Nossa Revis„o"
+      Caption         =   "Data Nossa Revis√£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   11
@@ -2908,7 +2908,7 @@ Begin VB.Form frmPF
       Width           =   1575
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Nossa Revis„o"
+      Caption         =   "Nossa Revis√£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   10
@@ -2928,7 +2928,7 @@ Begin VB.Form frmPF
       Width           =   1455
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Data da Revis„o"
+      Caption         =   "Data da Revis√£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   8
@@ -2938,7 +2938,7 @@ Begin VB.Form frmPF
       Width           =   1575
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Revis„o Cliente"
+      Caption         =   "Revis√£o Cliente"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   7
@@ -2978,7 +2978,7 @@ Begin VB.Form frmPF
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "DescriÁ„o"
+      Caption         =   "Descri√ß√£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   3
@@ -3328,7 +3328,7 @@ End Sub
 
 Private Sub Command10_Click()
   If nREV = 0 Then
-    Alert "Revis„o Nao Escolhida"
+    Alert "Revis√£o Nao Escolhida"
     Exit Sub
   End If
   ePASS01 = "select * from rev WHERE PF=" & nPF & " AND TIPO='PF' AND REVISAO=" & nREV
@@ -3343,7 +3343,7 @@ Private Sub Command2_Click()
     Exit Sub
   End If
 
-  If Not MDG("Apagar Sequencia FabricaÁ„o", "Confirme Exclus„o") Then
+  If Not MDG("Apagar Sequencia Fabrica√ß√£o", "Confirme Exclus√£o") Then
     Exit Sub
   End If
 
@@ -3451,19 +3451,19 @@ End Sub
 
 Private Sub Command6_Click()
   Ctipoent = "C"
-  Ctipoent = InputBox("Tipo (C)omponente (T)ratamento (S)ubProdutos (M)at.Prima", "Inclus„o", Ctipoent)
+  Ctipoent = InputBox("Tipo (C)omponente (T)ratamento (S)ubProdutos (M)at.Prima", "Inclus√£o", Ctipoent)
   Ctipoent = UCase$(Left$(Ctipoent, 1))
   If Ctipoent = "C" Or Ctipoent = "T" Or Ctipoent = "S" Or Ctipoent = "M" Then
   Else
     Exit Sub
   End If
-  Ccodcomp = InputBox("Digite o Codigo", "Inclus„o", "__")
+  Ccodcomp = InputBox("Digite o Codigo", "Inclus√£o", "__")
   Ccodcomp = UCase$(Left$(Ccodcomp, 24))
   nSEQ = 0
   nSSQ = 0
 
-  nSEQ = FixInt(Val(Busca("N∫ SEQ", "Incluindo", CStr(nSEQ), 8)))
-  nSSQ = FixInt(Val(Busca("N∫ SSQ", "Incluindo", CStr(nSSQ), 8)))
+  nSEQ = FixInt(Val(Busca("N¬∫ SEQ", "Incluindo", CStr(nSEQ), 8)))
+  nSSQ = FixInt(Val(Busca("N¬∫ SSQ", "Incluindo", CStr(nSSQ), 8)))
 
   IncluiSQL cARQPF, "SELECT * FROM PFMS03 WHERE PF=" & nPF & " AND TIPOENT='" & Ctipoent & "' AND CODCOMP='" & Ccodcomp & "'", 5, Array("PF", "TIPOENT", "CODCOMP", "SEQ", "SSQ"), _
             Array(nPF, Ctipoent, Ccodcomp, FixInt(nSEQ), FixInt(nSSQ)), True, False
@@ -3767,7 +3767,7 @@ Private Sub esciedx_Click()
 End Sub
 
 Private Sub escmp04a_Click()
-  If MDG("Gravar Elaborador", "Confirme GravaÁ„o") Then
+  If MDG("Gravar Elaborador", "Confirme Grava√ß√£o") Then
     frmPF.txtfields(30) = zIDFOLHA
     frmPF.txtfields(31) = zNOMEFOLHA
     frmPF.txtfields(63) = Date
@@ -3888,7 +3888,7 @@ Private Sub FilRelat()
   DizerBarra "Carregando Operacoes"
   cARQ = Sdb
   cSQL = "select PF,SEQ,SSQ,DESCRI,CODINT  from PFS WHERE PF=" & nPF & " ORDER BY SEQ,SSQ"
-  MontaGridFast GridSeq, 5, Array(400, 400, 400, 5000, 1600), Array("PF", "SEQ", "SSQ", "DescriÁ„o", "Cod Int"), _
+  MontaGridFast GridSeq, 5, Array(400, 400, 400, 5000, 1600), Array("PF", "SEQ", "SSQ", "Descri√ß√£o", "Cod Int"), _
                 Array("PF", "SEQ", "SSQ", "DESCRI", "L$CODINT"), cARQ, cSQL
   DizerBarra ""
 End Sub
@@ -4122,7 +4122,7 @@ Private Sub NovaRev_Click()
     End If
   End If
 
-  If MDG("Fazer Nova Revisao", "Confirme GravaÁ„o") Then
+  If MDG("Fazer Nova Revisao", "Confirme Grava√ß√£o") Then
     Encerrar.Visible = False
     nrevisao = FixInt(txtfields(8)) + 1
     txtfields(8) = nrevisao
