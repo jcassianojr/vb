@@ -92,7 +92,7 @@ Public Function ConvFieldType(ByVal iField As ADODB.Field) As String
 End Function
 
 '*********************************************************************
-' Created date: 2004-10-29 09:56
+' Created date: 2004-10-29 09:5
 ' Purpose: Convert Access Table to MySQL Table
 '*********************************************************************
 Public Sub ConvTable(ByVal sTableName As String, _
@@ -159,6 +159,8 @@ Public Sub ConvTable(ByVal sTableName As String, _
         If DumpSQLonly = False Then
             ExecuteSQL StrMySQL
         End If
+                    
+
         RaiseEvent ExecuteInfo(StrMySQL)
         DoEvents
     End If
@@ -171,6 +173,7 @@ Public Sub ConvTable(ByVal sTableName As String, _
         ExecuteSQL StrMySQL
     End If
     
+    StrMySQL = StrMySQL & " ;"
     RaiseEvent ExecuteInfo(StrMySQL)
     DoEvents
       
@@ -186,7 +189,7 @@ Public Sub ConvTable(ByVal sTableName As String, _
                         
                         If RstSchema.Fields!PRIMARY_KEY = True Then
                             Ant_Primary = True
-                            ' El índice es la clave principal de la tabla
+                            ' El Ã­ndice es la clave principal de la tabla
                             'ALTER TABLE `trn01` ADD PRIMARY KEY (nrosocio)
                             
                             If Campitos = "" Then
@@ -201,7 +204,7 @@ Public Sub ConvTable(ByVal sTableName As String, _
                              
                         ElseIf RstSchema.Fields!Unique = True Then
                             Ant_Primary = False
-                            ' El índice es único
+                            ' El Ã­ndice es Ãºnico
                             '
                             SQL = 1
                             
@@ -216,7 +219,7 @@ Public Sub ConvTable(ByVal sTableName As String, _
                                   "(CAMPOS)"
                 
                         Else
-                            ' Cualquier otro índice existente en la tabla
+                            ' Cualquier otro Ã­ndice existente en la tabla
                             '
                             Ant_Primary = False
                             
@@ -252,6 +255,7 @@ Public Sub ConvTable(ByVal sTableName As String, _
                             If DumpSQLonly = False Then
                                ExecuteSQL SQL
                             End If
+                            SQL = SQL & " ;"
                             RaiseEvent ExecuteInfo(SQL)
                             Ant_Tabla = ""
                             Ant_Primary = False
@@ -336,11 +340,17 @@ Private Function GenSQLInsert(r As ADODB.Recordset, sTableName As String) As Str
     stmp = "Insert into `" & sTableName & "` values(" '  '" deixando aspas para criar na get value string e data
     For k = 1 To r.Fields.Count
     
+    
+        
         ' get value from recordset
         If Not IsNull(r.Fields(k - 1).Value) Then
             stmp = stmp & GetValue(r.Fields(k - 1))
         Else
-            stmp = stmp & "NULL"
+            If TipoDado2(r.Fields(k - 1).Type) = "S" Then
+              stmp = stmp & "''"
+            Else
+              stmp = stmp & "NULL"
+            End If
         End If
     
     
@@ -487,15 +497,17 @@ End Function
 Private Function GetValue(IsField As ADODB.Field) As String
 
     If Not IsNull(IsField.Value) Then
-        If IsField.Type = adBoolean Then
+        If TipoDado2(IsField.Type) = "B" Then  ' adBoolean
             GetValue = IIf(IsField.Value = True, 1, 0) ' get boolean value
-        ElseIf IsField.Type = adDate Then
+        ElseIf TipoDado2(IsField.Type) = "D" Then 'adDate
             GetValue = MySQLDate(IsField.Value) ' get mysql date format
             GetValue = "'" & GetValue & "'"
-        ElseIf IsField.Type = adBinary Or IsField.Type = adLongVarBinary Then
+        ElseIf TipoDado2(IsField.Type) = "O" Then 'adBinary adLongVarBinary
             ' sorry i can't get value from this column type
             ' if you have solution, please let me know
             GetValue = "Null"
+        ElseIf TipoDado2(IsField.Type) = "N" Then
+            GetValue = IsField.Value
         Else
             ' you must replace  "'" to "''", if not will retrun error on insert statement
             'GetValue = Replace(IsField.Value, "'", "''") ' get string value

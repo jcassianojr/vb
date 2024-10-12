@@ -48,4 +48,31 @@ ErrVal = Err.Number
 On Error GoTo 0
 If (Attributes And (vbDirectory Or vbVolume)) = 0 And ErrVal = 0 Then FileExists = True
 End Function
-
+Public Function TipoDado2(ByVal intType As Integer) As String
+  Select Case intType
+  Case adSmallInt, adInteger, adSingle, adDouble, adCurrency, adBigInt, adBinary, _
+       adDecimal, adNumeric, adTinyInt, adUnsignedBigInt, adUnsignedInt, _
+       adUnsignedSmallInt, adUnsignedTinyInt
+    TipoDado2 = "N"                          ''E um Numero
+  Case adDate, adDBDate, adDBTimeStamp
+    TipoDado2 = "D"                          ''Tipos Data
+  Case adBoolean
+    TipoDado2 = "B"                          ''Tipos Boolean
+  Case adVarChar, adLongVarChar, adChar, adLongVarWChar, adVarWChar, adWChar
+    TipoDado2 = "S"                          ''Tipos String
+  Case adDBTime
+    TipoDado2 = "T"                          ''Tipos Time
+  Case adBSTR, adChapter, adFileTime, adGUID, adIDispatch, adUserDefined
+    TipoDado2 = "X"                          ''Outros Tipos
+  Case adEmpty
+    TipoDado2 = "U"                          ''uNDEFINIDOS VAZIOS
+  Case adError, adIUnknown
+    TipoDado2 = "E"                          ''Erros
+  Case adLongVarBinary, adVarBinary, adBinary
+    TipoDado2 = "O"                          ''Ole
+  Case adPropVariant, adVariant   ''Variantes
+    TipoDado2 = "V"
+  Case Else
+    TipoDado2 = "U"
+  End Select
+End Function

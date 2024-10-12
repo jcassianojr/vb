@@ -41,7 +41,6 @@ Begin VB.Form Frm_Conversion
          Left            =   2700
          TabIndex        =   41
          Top             =   3000
-         Value           =   1  'Checked
          Width           =   1335
       End
       Begin VB.CommandButton cmdSelect 
@@ -199,7 +198,7 @@ Begin VB.Form Frm_Conversion
             IMEMode         =   3  'DISABLE
             Index           =   3
             Left            =   1470
-            PasswordChar    =   "•"
+            PasswordChar    =   "â€¢"
             TabIndex        =   30
             Top             =   1230
             Width           =   1935
@@ -1023,6 +1022,8 @@ Private Sub ConversionData()
     
         If MyScenario > 0 Then
             Open TxtDestDumpFile.Text For Output As #1
+            Print #1, "Create database if not exists '" & TxtMySQLInfo(4).Text & "' ;"
+            
         End If
         
             ' counter function
