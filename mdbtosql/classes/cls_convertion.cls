@@ -512,6 +512,7 @@ Private Function GetValue(IsField As ADODB.Field) As String
             ' you must replace  "'" to "''", if not will retrun error on insert statement
             'GetValue = Replace(IsField.Value, "'", "''") ' get string value
             GetValue = IsField.Value ' pegar o valor string
+            GetValue = tirace2(GetValue)
             GetValue = Replace(GetValue, "'", " ") ' remover aspas simples
             GetValue = Replace(GetValue, Chr(13), " ") 'remover final de linha
             GetValue = Replace(GetValue, Chr(10), " ") 'remover final de linha

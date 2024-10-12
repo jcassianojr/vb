@@ -54,8 +54,8 @@ Public Const COLOR_BTNHIGHLIGHT = 20  '3D highlight of button
 
 'Constante para pegar formato data hora do sistema
 Public Const LOCALE_SDECIMAL = &HE               '---------------------------------- AGRUPAMENTO DE DIGITOS NORMAL
-Public Const LOCALE_STHOUSAND = &HF              '----------------------------------------- SEPARADOR DECIMAL MONETÁRIO
-Public Const LOCALE_SMONDECIMALSEP = &H16        '------------------------------------------ AGRUPAMENTO DE DIGITOS MONETÁRIOS
+Public Const LOCALE_STHOUSAND = &HF              '----------------------------------------- SEPARADOR DECIMAL MONETÃRIO
+Public Const LOCALE_SMONDECIMALSEP = &H16        '------------------------------------------ AGRUPAMENTO DE DIGITOS MONETÃRIOS
 Public Const LOCALE_SMONTHOUSANDSEP = &H17       '------------------------------------- FORMATO DA DATA
 Public Const LOCALE_SSHORTDATE = &H1F
 Public Const LOCALE_SDATE = &H1D
@@ -216,11 +216,11 @@ End Function
 
 Public Function ComboLostFocus(ByRef Combo1)
   With Combo1
-    If Len(.tEXT) Then
+    If Len(.Text) Then
       'Procura pelo texto digitado
-      strPartial = .tEXT
+      strPartial = .Text
       i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
-      'Se não achou, retorna      o focus para o Combo
+      'Se nÃ£o achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
     End If
   End With
@@ -228,8 +228,8 @@ End Function
 
 Public Function ComboChange(ByRef Combo1)
   With Combo1
-    'Procura pelo texto já digitado
-    strPartial = .tEXT
+    'Procura pelo texto jÃ¡ digitado
+    strPartial = .Text
     i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
@@ -345,7 +345,7 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
       FVar = Mid(eVAR, 1, 2) & "." & Mid(eVAR, 3, 3) & "." & _
              Mid(eVAR, 6, 3) & "/" & Mid(eVAR, 9, 4) & "-" & Mid(eVAR, 13, 2)
     Case "RG"
-      FVar = formatarg(eVAR)
+      FVar = FormataRG(eVAR)
       '            Case "IE" Precisa estado
       '                FVar = FormataIE(eVAR)
     Case "CHAPA"
@@ -370,7 +370,7 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
         FVar = 0
       End If
 
-    Case Else                                'Retorna o Campo Sem Formataçao
+    Case Else                                'Retorna o Campo Sem FormataÃ§ao
       FVar = eVAR
     End Select
   Else
@@ -628,7 +628,7 @@ End Function
 
 Public Function FileExist(ByVal cARQ As Variant, _
                           Optional ByVal lMES As Boolean = False, _
-                          Optional ByVal cMES As String = "Arquivo Não Encontrado ", _
+                          Optional ByVal cMES As String = "Arquivo NÃ£o Encontrado ", _
                           Optional ByVal cSQL As String = "")
   Dim cARQUIVO As String
   Dim nFILELEN
@@ -1558,24 +1558,21 @@ Function Convert2oem(ByVal in_string As String) As String
   Convert2oem = Out_String
 End Function
 Public Function ConvOEM(ByVal texto As String) As String
-  ConvOEM = Convert2oem(cTEXTO)  'CharConv(texto, "ANSI", "OEM")
+  ConvOEM = Convert2oem(cTEXTO)
 End Function
 
 Public Function ConvOEM2(ByVal texto As String) As String
-  ConvOEM2 = Convert2oem(cTEXTO)  ' CharConv(texto, "MEUANSI", "MEUOEM")
+  ConvOEM2 = Convert2oem(cTEXTO)
 End Function
 
 Public Function ConvAnsi2(ByVal texto As String) As String
-  ConvAnsi2 = Convert2ansi(texto)  'CharConv(texto, "MEUOEM", "MEUANSI")
+  ConvAnsi2 = Convert2ansi(texto)
 End Function
 
 Public Function ConvAnsi(ByVal texto As String) As String
-  ConvAnsi = Convert2ansi(texto)  ' CharConv(texto, "OEM", "ANSI")
+  ConvAnsi = Convert2ansi(texto)
 End Function
-
 Public Function Tirace(ByVal texto As String) As String
-' texto = CharConv(texto, "UACENTO", "UACETIR")
-' texto = CharConv(texto, "LACENTO", "LACETIR")
   Tirace = tirace2(texto)
 End Function
 Public Function StrToArray(ByVal cGRUPO As String) As Variant
@@ -1593,10 +1590,10 @@ Public Function StrToArray(ByVal cGRUPO As String) As Variant
   For x = 1 To nLEN
     cCHAR = Mid(eCNV, x, 1)
     Select Case cCHAR
-    Case "ª"
+    Case "Âª"
       aUSO(x - 1) = "a."
 
-    Case "º"
+    Case "Âº"
       aUSO(x - 1) = "o."
 
     Case Else
@@ -1910,10 +1907,9 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
   End If
 End Sub
-
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
   Dim nLEN, nTEXTO, x, y As Integer
   Dim aORI, aDES, aTEXTO As Variant
@@ -1940,7 +1936,6 @@ Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eD
     CharConv = CharConv & aTEXTO(y)
   Next y
 End Function
-
 Public Function TiraOut(ByVal eVAR As Variant) As String
   Dim cTEXTO As String
   cTEXTO = FixStr(eVAR)
@@ -1981,14 +1976,14 @@ Public Function Extenso(ByVal valor As Double, _
   valor = Abs(CDec(valor))
   If valor Then
     Unidades = Array(vbNullString, "Um", "Dois", _
-                     "Três", "Quatro", "Cinco", _
+                     "TrÃªs", "Quatro", "Cinco", _
                      "Seis", "Sete", "Oito", "Nove", _
                      "Dez", "Onze", "Doze", "Treze", _
                      "Quatorze", "Quinze", "Dezesseis", _
                      "Dezessete", "Dezoito", "Dezenove")
     Dezenas = Array(vbNullString, vbNullString, _
                     "Vinte", "Trinta", "Quarenta", _
-                    "Cinqüenta", "Sessenta", "Setenta", _
+                    "CinqÃ¼enta", "Sessenta", "Setenta", _
                     "Oitenta", "Noventa")
     Centenas = Array(vbNullString, "Cento", _
                      "Duzentos", "Trezentos", _
@@ -1996,11 +1991,11 @@ Public Function Extenso(ByVal valor As Double, _
                      "Seiscentos", "Setecentos", _
                      "Oitocentos", "Novecentos")
     PotenciasSingular = Array(vbNullString, " Mil", _
-                            " Milhão", " Bilhão", _
-                            " Trilhão", " Quatrilhão")
+                            " MilhÃ£o", " BilhÃ£o", _
+                            " TrilhÃ£o", " QuatrilhÃ£o")
     PotenciasPlural = Array(vbNullString, " Mil", _
-                          " Milhões", " Bilhões", _
-                          " Trilhões", " Quatrilhões")
+                          " MilhÃµes", " BilhÃµes", _
+                          " TrilhÃµes", " QuatrilhÃµes")
 
     StrValor = Left(Format(valor, String(18, "0") & _
                                   ".000"), 18)
@@ -2250,7 +2245,7 @@ Public Function CharCodesToHTML(ByVal iString As String) As String
   Dim iXml As New MSXML2.DOMDocument60
 
   With iXml.createTextNode(iString)
-    CharCodesToHTML = .xml
+    CharCodesToHTML = .Xml
   End With
 End Function
 
@@ -2324,7 +2319,7 @@ Function FastArraySearch(SearchArray As Variant, SearchPhrase As String) As Long
   Dim Pos As Long, i As Long, NumCharsProcessed As Long
  ' dim TXT As String
   FastArraySearch = -1
-  Pos = InStr(Join(SearchArray, "§"), SearchPhrase)
+  Pos = InStr(Join(SearchArray, "Â§"), SearchPhrase)
   If Pos > 0 Then
     For i = LBound(SearchArray) To UBound(SearchArray)
       NumCharsProcessed = NumCharsProcessed + Len(SearchArray(i)) + 1
@@ -2361,12 +2356,12 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef tEXT As String) As Long
+Public Function WordLen(ByRef Text As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
+  Bytes = StrConv(UCase$(Text), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next
@@ -2447,10 +2442,10 @@ Function CheckRegEx(texto As String, padrao As String)
 
   'Dim valor As String
 
-  'cria um objeto expressão regular
+  'cria um objeto expressÃ£o regular
   Set objRegExp = New RegExp
 
-  'define o padrão - Pattern
+  'define o padrÃ£o - Pattern
   objRegExp.Pattern = padrao
 
   'define IgnoreCase
@@ -2469,12 +2464,12 @@ Function CheckRegEx(texto As String, padrao As String)
 
 
     'For Each objMatch In colMatch
-    ''   valor = valor & " padrao encontrado na posição "
-    ''   valor = valor & objMatch.FirstIndex & ". o valor é '"
+    ''   valor = valor & " padrao encontrado na posiÃ§Ã£o "
+    ''   valor = valor & objMatch.FirstIndex & ". o valor Ã© '"
     ''   valor = valor & objMatch.Value & " '." & vbCrLf
     'Next
   Else
-    ' valor = "Comparação falhou !"
+    ' valor = "ComparaÃ§Ã£o falhou !"
   End If
 
 

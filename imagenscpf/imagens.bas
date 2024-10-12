@@ -65,100 +65,19 @@ Public Sub Cmdiniciar_Click()
 
 
 End Sub
-Public Function StrToArray(ByVal cGRUPO As String) As Variant
-  Dim x, nLEN As Integer
-  Dim aUSO As Variant
-  Dim cCHAR, eCNV As String
-  Select Case cGRUPO
-  Case "OEM"
-    eCNV = "€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œŸ ¡¢£¤¥¦§¨©ª«¬­®¯àáâãäåæçèéêëìíîïğñòóôõö÷øù³Å¿ÄØ"
-  Case "ANSI"
-    eCNV = "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ¨¸¥´ªº²³¯¿¦†¬­‡"
-  Case "MEUANSI"
-    eCNV = "ªºÇçÅåÀàÈèÌìÒòÙùÄäËëÏïÖöÜüÂâÊêÎîÔôÛûÁáÉéÍíÓóÚúİıÃãÕõÑñ|"
-  Case "MEUOEM"
-    ''Numeral
-    eCNV = "¦§"
-    ''Cidilha
-    eCNV = eCNV & "€‡"
-    ''Grau
-    eCNV = eCNV & "†"
-    ''Crase
-    eCNV = eCNV & "·…ÔŠŞã•ë—"
-    ''Trema
-    eCNV = eCNV & "„Ó‰Ø‹™”š"
-    ''cIRCUNFLEXO
-    eCNV = eCNV & "¶ƒÒˆ×Œâ“ê–"
-    ''Agudo
-    eCNV = eCNV & "µ ‚Ö¡à¢é£íì"
-    '''Til
-    eCNV = eCNV & "ÇÆåä¥¤"
-    ''Tracos quadro
-    eCNV = eCNV & "İ"
-
-    ''"_" Caracter so maiscula ou minuscula usado "_" manter tamanho array
-  Case "UACENTO"
-    eCNV = "ÇÁÉÍÓÚÀÃÕÂÊÔÄÖÜªº__Å"
-  Case "LACENTO"
-    eCNV = "çáéíóúàãõâêôäöüªºòù_"
-  Case "LACETIR"
-    eCNV = "caeiouaaoaeoaouaoou_"
-  Case "UACETIR"
-    eCNV = "CAEIOUAAOAEOAOUao__A"
-  Case Else
-    eCNV = cGRUPO
-  End Select
-
-  nLEN = Len(eCNV)
-  ReDim aUSO(nLEN)
-  For x = 1 To nLEN
-    cCHAR = Mid(eCNV, x, 1)
-    Select Case cCHAR
-    Case "ª"
-      aUSO(x - 1) = "a."
-
-    Case "º"
-      aUSO(x - 1) = "o."
-
-    Case Else
-      aUSO(x - 1) = cCHAR
-
-    End Select
-  Next x
-  StrToArray = aUSO
-End Function
-
-Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
-  Dim nLEN, nTEXTO, x, y As Integer
-  Dim aORI, aDES, aTEXTO As Variant
-  If IsArray(eORI) Then
-    aORI = eORI
-    aDES = eDES
-  Else
-    aORI = StrToArray(CStr(eORI))
-    aDES = StrToArray(CStr(eDES))
-  End If
-  aTEXTO = StrToArray(cTexto)
-  nLEN = UBound(aORI)
-  nTEXTO = UBound(aTEXTO)
-  For y = 0 To nTEXTO
-    For x = 0 To nLEN
-      If aTEXTO(y) = aORI(x) Then  ''Encerra Analise Para Evitar
-        aTEXTO(y) = aDES(x)       ''Loop de Troca
-        Exit For
-      End If
-    Next
-  Next
-  CharConv = ""
-  For y = 0 To nTEXTO
-    CharConv = CharConv & aTEXTO(y)
-  Next y
-End Function
 Public Function TiraOut(ByVal eVAR As Variant) As String
   Dim cTexto As String
   cTexto = FixStr(eVAR)
-  TiraOut = CharConv(cTexto, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
-                     Array("", "", "", "", "", "", "", "", ""))
+  cTexto = Replace(cTexto, "-", "")
+  cTexto = Replace(cTexto, ",", "")
+  cTexto = Replace(cTexto, ".", "")
+  cTexto = Replace(cTexto, ":", "")
+  cTexto = Replace(cTexto, "/", "")
+  cTexto = Replace(cTexto, ";", "")
+  cTexto = Replace(cTexto, "*", "")
+  cTexto = Replace(cTexto, "(", "")
+  cTexto = Replace(cTexto, ")", "")
+  TiraOut = cTexto
 End Function
 Public Function FileExists(ByVal PathName As String) As Boolean
 
