@@ -21,9 +21,6 @@ Sub Main()
   dCompare.Show
 End Sub
 
-Function formatarg()
-  formatarg = True
-End Function
 
 Public Function FileExists(ByVal PathName As String) As Boolean
 On Error Resume Next
