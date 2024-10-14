@@ -57,13 +57,16 @@ Option Explicit
 Private Sub Form_Load()
   Dim MyApp As New CRAXDRT.Application
   Dim MyRpt As New CRAXDRT.Report
-
+ ' Dim CRViewer1 As New CrystalActiveXReportViewerLib11_5Ctl.CrystalActiveXReportViewer
+  
   'Center Me
   Me.Height = Screen.Height - 1200
   Me.Width = Screen.Width - 1200
   Me.Top = 100
   Me.Left = 100
 
+  Set MyRpt = MyApp.OpenReport(cARQRTF, 1)
+  CRViewer1.ReportSource = MyRpt
 
 
   CRViewer1.Top = 0
@@ -77,13 +80,9 @@ Private Sub Form_Load()
   CRViewer1.EnableSearchControl = aRELCFG(5)
   CRViewer1.EnableExportButton = aDIREITOS(7)
 
-
-
-  Set MyRpt = MyApp.OpenReport(cARQRTF, 1)
-
-
-  CRViewer1.ReportSource = MyRpt
   CRViewer1.ViewReport
+  
+  
 
 
 End Sub

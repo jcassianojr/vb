@@ -402,7 +402,7 @@ Dim lABRE As Boolean
 Dim lTROCOU As Boolean
 Dim cBASEDADOS As String
 Private Sub CmdAbrirCom_Click()
-  salvarpict Me, Picture1, TXTFIELDS(0)
+  salvarpict Me, Picture1, txtFields(0)
 End Sub
 
 Private Sub cmdClose_Click()
@@ -413,11 +413,11 @@ Private Sub cmdClose_Click()
   End If
   If lABRE Then
     If MDG("Gravar Alteracoes") Then
-      TXTFIELDS(1) = FixNum(TXTFIELDS(1))
-      If TXTFIELDS(1) = 0 Then TXTFIELDS(1) = Val(TiraOut(TXTFIELDS(0)))
-      If aVAL(1) <> TXTFIELDS(1) And TXTFIELDS(1) > 0 Then 'nao grava se nao trocou o numero
+      txtFields(1) = FixNum(txtFields(1))
+      If txtFields(1) = 0 Then txtFields(1) = Val(TiraOut(txtFields(0)))
+      If aVAL(1) <> txtFields(1) And txtFields(1) > 0 Then 'nao grava se nao trocou o numero
         For iLOOP = 0 To nCAMPOS - 1
-          aVAL(iLOOP) = TXTFIELDS(iLOOP)
+          aVAL(iLOOP) = txtFields(iLOOP)
         Next iLOOP
         GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 ' pula campo codigo chave
       End If
@@ -475,6 +475,8 @@ End Sub
 
 Private Sub Escolher_Click(Index As Integer)
   Dim cARQESC As String
+  Dim iMU01 As Integer
+  
   ePASS01 = ""
   If Index = 1 Then
     ePASS01 = "LOGIX"
@@ -486,81 +488,82 @@ Private Sub Escolher_Click(Index As Integer)
 
   Case 1                                       'Clientes
     cARQESC = "MA01"
-   escNUMNOM.Show vbModal, Me
-
+  ' escNUMNOM.Show vbModal, Me
+    lRETU = False
     If lRETU Then
 
-      frmIMAGENS.TXTFIELDS(0) = CStr(eRETU01)
-      frmIMAGENS.TXTFIELDS(1) = eRETU01
+      frmIMAGENS.txtFields(0) = CStr(eRETU01)
+      frmIMAGENS.txtFields(1) = eRETU01
 
     End If
 
   Case 2                                       'Produtos
     ePASS01 = "MANA5"
-    escms01.Show vbModal, Me
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+   ' escms01.Show vbModal, Me
+   lRETU = False
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 3                                       'Ferramental
-    escFER.Show vbModal, Me
-
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+      'escFER.Show vbModal, Me
+    lRETU = False
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 4                                       'Maquinas
     cARQESC = "ME01"
-    escNUMNOM.Show vbModal, Me
-
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+   ' escNUMNOM.Show vbModal, Me
+    lRETU = False
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 5                                       'Instrumentos
-    escME04.Show vbModal, Me
-
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    'escME04.Show vbModal, Me
+    lRETU = False
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 6                                       'Funcionarios
 
-    escMP04.Show vbModal, Me
-
+    'escMP04.Show vbModal, Me
+    lRETU = False
     If lRETU Then
 
-      frmIMAGENS.TXTFIELDS(0) = CStr(eRETU01)
-      frmIMAGENS.TXTFIELDS(1) = eRETU01
+      frmIMAGENS.txtFields(0) = CStr(eRETU01)
+      frmIMAGENS.txtFields(1) = eRETU01
 
     End If
 
   Case 7                                       'Materia Prima mu01
     iMU01 = 1
-    escmu01.Show vbModal, Me
-
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    'escmu01.Show vbModal, Me
+     lRETU = False
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 8                                       'cOMPONENTES mt01
     iMU01 = 2
-    escmu01.Show vbModal, Me
-
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    'escmu01.Show vbModal, Me
+lRETU = False
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 9                                       'cONSUMIVEIS mw05
     iMU01 = 3
-    escmu01.Show vbModal, Me
-
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    'escmu01.Show vbModal, Me
+lRETU = False
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 10                                      'embalagens mr01
     iMU01 = 4
-    escmu01.Show vbModal, Me
-
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    'escmu01.Show vbModal, Me
+lRETU = False
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
   Case 12                                      'iTENS MANUTENCAO
     iMU01 = 6
-    escmu01.Show vbModal, Me
-
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+   ' escmu01.Show vbModal, Me
+lRETU = False
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
   Case 13                                      'Sub Produtos
     iMU01 = 7
-    escmu01.Show vbModal, Me
-
-    If lRETU Then frmIMAGENS.TXTFIELDS(0) = eRETU01
+    'escmu01.Show vbModal, Me
+lRETU = False
+    If lRETU Then frmIMAGENS.txtFields(0) = eRETU01
 
 
   End Select
@@ -656,10 +659,10 @@ Private Sub Form_Load()
     aPAD = Array("", 0)
     aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
     For iLOOP = 0 To nCAMPOS - 1
-      TXTFIELDS(iLOOP) = aVAL(iLOOP)
+      txtFields(iLOOP) = aVAL(iLOOP)
     Next iLOOP
     If iImage = 2 And nPOS > 0 Then
-      TXTFIELDS(1) = nTMPNUMERO
+      txtFields(1) = nTMPNUMERO
     End If
     
     cWHERE = ""
@@ -739,12 +742,12 @@ Private Sub Picture2_DblClick()
 End Sub
 
 Private Sub VerImg_Click()
-  frmPicViewer.Show vbModal, Me
-  If lRETU Then
-    If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
-      lTROCOU = True
-    End If
-  End If
+ ' frmPicViewer.Show vbModal, Me
+ ' If lRETU Then
+ '   If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
+ '     lTROCOU = True
+ '   End If
+ ' End If
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
  
@@ -777,7 +780,7 @@ Private Sub ximgsave_Click()
   If Picture1.Height = 0 Then
     Alert ("Sem Imagem")
   Else
-    salvarpict Me, Picture1, TXTFIELDS(0)
+    salvarpict Me, Picture1, txtFields(0)
   End If
 End Sub
 
@@ -785,7 +788,7 @@ Private Sub XPButton1_Click()
   If Picture1.Height = 0 Then
     Alert ("Sem Imagem")
   Else
-    cARQRTF = "temp_" + TXTFIELDS(0) + ".JPG"
+    cARQRTF = "temp_" + txtFields(0) + ".JPG"
     PicSaveLoad.SavePicture Picture1.Picture, cARQRTF, fmtJPEG, 70
     FrmPicturePrinter.Show vbModal, Me
     Kill cARQRTF
