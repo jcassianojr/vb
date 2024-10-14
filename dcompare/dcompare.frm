@@ -291,8 +291,8 @@ Private Sub CmdCompactar_Click()
     lngAfter = FileLen(Text1.Text)
     strResult = "Resultados da Compactacao" & vbCrLf
     strResult = strResult & "-------------------------------------------" & vbCrLf
-    strResult = strResult & "Tamanho Antes  da Compactação: " & lngBefore & " bytes" & vbCrLf
-    strResult = strResult & "Tamanho Depois da Compactação: " & lngAfter & " bytes"
+    strResult = strResult & "Tamanho Antes  da CompactaÃ§Ã£o: " & lngBefore & " bytes" & vbCrLf
+    strResult = strResult & "Tamanho Depois da CompactaÃ§Ã£o: " & lngAfter & " bytes"
     MsgBox strResult, vbInformation
   Else
     MsgBox "Erro na compactacao do arquivo", vbExclamation
