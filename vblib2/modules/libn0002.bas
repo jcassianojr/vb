@@ -6,7 +6,10 @@ Public Sub MontaToolbar(ByRef vFormtool As Variant, ByVal nFORM As Long)
   Dim oBTNX As Button
   Dim oDB As ADODB.Connection
   Dim oRS As ADODB.Recordset
-  Dim cSQL, cNOME, cTOOL, cCAM As String
+  Dim cSQL As String
+  Dim cNOME As String
+  Dim cTOOL As String
+  Dim cCAM As String
   Dim nICONE As Integer
 
 

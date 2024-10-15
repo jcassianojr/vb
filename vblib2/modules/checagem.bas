@@ -254,7 +254,7 @@ End Function
 Public Function CheckPIS(ByVal ePIS As Variant, Optional lMES As Boolean = True) As Boolean
   Dim cPIS As String
   Dim ftap As String
-  Dim total As String
+  Dim Total As String
   Dim i As Integer
   Dim resto As Integer
 
@@ -280,13 +280,13 @@ Public Function CheckPIS(ByVal ePIS As Variant, Optional lMES As Boolean = True)
   End If
 
   ftap = "3298765432"
-  total = 0
+  Total = 0
 
   For i = 1 To 10
-    total = total + Val(Mid(cPIS, i, 1)) * Val(Mid(ftap, i, 1))
+    Total = Total + Val(Mid(cPIS, i, 1)) * Val(Mid(ftap, i, 1))
   Next i
 
-  resto = Int(total Mod 11)
+  resto = Int(Total Mod 11)
 
   If resto <> 0 Then
     resto = 11 - resto
@@ -557,7 +557,15 @@ Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean =
 End Function
 
 Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As Boolean
-  Dim dv_d3, tam_chave, xrdig, y1, dv_base, x, y2, dv_p2
+  Dim dv_d3 As Integer
+  Dim tam_chav As Integer
+  Dim xrdig As String
+  Dim y1 As Integer
+  Dim dv_base As String
+  Dim x As Integer
+  Dim y2 As Integer
+  Dim dv_p2 As String
+  Dim tam_chave As Integer
   CheckRena = False
   dv_p1 = TiraOut(dv_p1)
   If Len(dv_p1) = 0 Then
@@ -679,14 +687,22 @@ Function ValiText(KeyIN As Integer, Optional ByVal eTipo As String = "#N", _
 End Function
 
 Public Function CheckRG(ByVal valor, Optional ByVal lMES As Boolean = True) As Boolean
-  Dim n1, n2, n3, n4, n5, n6, n7, n8, D
-  Dim soma
-  Dim nPOS
-  Dim cDAC
+  Dim n1 As Integer
+  Dim n2 As Integer
+  Dim n3 As Integer
+  Dim n4 As Integer
+  Dim n5 As Integer
+  Dim n6 As Integer
+  Dim n7 As Integer
+  Dim n8 As Integer
+  Dim D  As Integer
+  Dim soma  As Integer
+  Dim nPOS As Integer
+  Dim cDAC As String
   Dim zDAC As String
-  Dim lRETU
+  Dim lRETU As Boolean
   Dim ZNERRO As Integer
-  Dim ZERRO
+  Dim ZERRO As String
   
   zDAC = " "
   ZNERRO = 0
@@ -1011,7 +1027,7 @@ Public Function CheckCTA(ByVal cBANCO, ByVal cAGENCIA, ByVal cCONTA) As Boolean
   Dim nFIM As Integer
   Dim nINI As Integer
   Dim x As Integer
-  Dim nRES
+  Dim nRES As Integer
   eTOt = 0
   cBANCO = StrZero(FixInt(cBANCO), 3)
   If cBANCO <> "033" And cBANCO <> "237" And cBANCO <> "341" Then

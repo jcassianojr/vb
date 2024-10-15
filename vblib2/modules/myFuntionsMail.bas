@@ -36,7 +36,7 @@ End Function
 
 Public Sub SendEmailShell(ByVal sEmailAddress As String, Optional ByVal sSubject As String = "", Optional ByVal sBody As String = "", Optional ByVal cARQ As String = "")
   Dim nTENTA As Integer
-  Dim ret
+  Dim ret As Integer
   nTENTA = 0
   Rem HotTo use:
   Rem Call ShellExecute(0, "Open", "mailto:email_address?Subject=your_subject?Body=body_message", "", "", 1)

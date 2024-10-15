@@ -74,7 +74,7 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
   Dim abBytes() As Byte
   Dim iFileNum As Integer
   Dim sTEMPFILE As String
-  Dim aRETU
+  Dim aRETU As Variant
   Dim cSQL As String
   Dim mystream As New ADODB.Stream
   mystream.Type = adTypeBinary
@@ -200,7 +200,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
   Dim abBytes() As Byte
   Dim iFileNum As Integer
   Dim sTEMPFILE As String
-  Dim aRETU
+  Dim aRETU As Variant
   Dim cCMD As String
   Dim cSQL As String
   Dim mystream As New ADODB.Stream
@@ -517,7 +517,7 @@ Private Function Biggest(Val1 As Double, Val2 As Double) As Double
 End Function
 
 Public Function salvarpict(oFORM As Form, ByVal Picture1 As Variant, _
-                           Optional ByVal sFILENAME As String = "imagem", _
+                           Optional ByVal sFileName As String = "imagem", _
                            Optional ByVal sPath As String = "")
   Dim sFILTER As String
   Dim cEXTENSAO As String
@@ -526,30 +526,30 @@ Public Function salvarpict(oFORM As Form, ByVal Picture1 As Variant, _
     sPath = App.Path
   End If
   sFILTER = ImgFILTER2()
-  sFILENAME = FileSave(oFORM, sFILTER, 1, , sFILENAME, sPath, "Salvar Imagem")
+  sFileName = FileSave(oFORM, sFILTER, 1, , sFileName, sPath, "Salvar Imagem")
 
-  cEXTENSAO = parsefile(sFILENAME, "E")
+  cEXTENSAO = parsefile(sFileName, "E")
 
-  If Len(sFILENAME) <= 0 Then
+  If Len(sFileName) <= 0 Then
     Alert ("Nome do arquivo nao Preenchido")
     Exit Function
   End If
-  If FileExist(sFILENAME, False) Then
+  If FileExist(sFileName, False) Then
     If MDG("Arquivo de Destino Ja existe Sobrepor") Then
-      DeleteFile sFILENAME, True  'Kill sFILENAME
+      DeleteFile sFileName, True  'Kill sFILENAME
     Else
       Exit Function
     End If
   End If
   Select Case cEXTENSAO
   Case "JPG"
-    PicSaveLoad.SavePicture Picture1.Picture, sFILENAME, fmtJPEG, 70
+    PicSaveLoad.SavePicture Picture1.Picture, sFileName, fmtJPEG, 70
   Case "PNG"
-    PicSaveLoad.SavePicture Picture1.Picture, sFILENAME, fmtPNG
+    PicSaveLoad.SavePicture Picture1.Picture, sFileName, fmtPNG
   Case "GIF"
-    PicSaveLoad.SavePicture Picture1.Picture, sFILENAME, fmtGIF
+    PicSaveLoad.SavePicture Picture1.Picture, sFileName, fmtGIF
   Case Else 'usa default vb
-    SavePicture Picture1.Picture, sFILENAME
+    SavePicture Picture1.Picture, sFileName
   End Select
 End Function
 

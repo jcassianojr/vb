@@ -56,7 +56,7 @@ Public Function AcessaForm(ByVal nFORM As Long) As Boolean
 End Function
 
 Public Function GravaLog(Optional ByVal nFORM As Long = 0, Optional ByVal nBOTAO As Long = 0, Optional ByVal Copr As String = "", Optional ByVal cOBS As String = "")
-Dim aRETU
+Dim aRETU As Variant
 Dim cSQLINS As String
 
 aRETU = TipoConn(cARQERRO)

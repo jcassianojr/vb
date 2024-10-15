@@ -15,8 +15,11 @@ Public Function LocalizaGri1(ByRef oGRID As Variant, Optional ByVal eBUSCA As Va
 End Function
 
 Public Function SomaGrid(ByRef oGRID As Variant, Optional ByVal nCOL As Integer = 0, Optional ByVal nROWINI As Integer = 0)
-  Dim nROWS, nROW, x As Integer
-  Dim nVAL, nTMPVAL As Variant
+  Dim nROWS  As Integer
+  Dim nROW As Integer
+  Dim x As Integer
+  Dim nVAL  As Variant
+  Dim nTMPVAL As Variant
   nROWS = oGRID.Rows - 1                       ''gRID ROW Indice inicia 0
   oGRID.Col = nCOL
   For x = nROWINI To nROWS
@@ -28,7 +31,8 @@ Public Function SomaGrid(ByRef oGRID As Variant, Optional ByVal nCOL As Integer 
 End Function
 
 Public Function PegUltGrid(ByRef oGRID As Variant, Optional ByVal nCOL As Integer = 0)
-  Dim nROWS, nROW As Integer
+  Dim nROWS  As Integer
+  Dim nROW As Integer
   nROWS = oGRID.Rows - 1                       ''gRID ROW Indice inicia 0
   oGRID.Col = nCOL
   oGRID.Row = nROWS
@@ -43,9 +47,11 @@ Public Function LocalizaGrid(ByRef oGRID As Variant, Optional ByVal eBUSCA As Va
 'eBUSCA Expressao para Busca
 'iBUSCA Indice
 'lMes exibe mensagem padrao sim/nao
-'iPOS Incremento posicional pois geralmente a col0 e o id e nao È buscada
-  Dim nROWS, nROW, x As Double
-  Dim nTAM As Long
+'iPOS Incremento posicional pois geralmente a col0 e o id e nao √© buscada
+  Dim nROWS As Integer
+  Dim nROW As Integer
+  Dim x As Integer
+  Dim nTAM As Integer
   Dim lFOUND As Boolean
   Dim cCOMPARE As String
   lRETU = True
@@ -57,7 +63,7 @@ Public Function LocalizaGrid(ByRef oGRID As Variant, Optional ByVal eBUSCA As Va
   If eBUSCA = "" Or iBUSCA = 0 Then
     frmLocalizar.Show vbModal
     eBUSCA = FixStr(eRETU01)
-    iBUSCA = FixNum(eRETU02) + iPos          '¥¥Mais Um Pois 0 e sempre id
+    iBUSCA = FixNum(eRETU02) + iPos          '¬¥¬¥Mais Um Pois 0 e sempre id
   End If
   If iBUSCA > 0 Then iBUSCA = iBUSCA - 1       ''gRID COW Inicia 0
   oGRID.Col = iBUSCA
@@ -65,7 +71,7 @@ Public Function LocalizaGrid(ByRef oGRID As Variant, Optional ByVal eBUSCA As Va
   eBUSCA = UCase(eBUSCA)
   For x = 0 To nROWS
     oGRID.Row = x
-    cCOMPARE = UCase(Left(FixStr(oGRID.tEXT), nTAM))
+    cCOMPARE = UCase(Left(FixStr(oGRID.Text), nTAM))
     If cCOMPARE = eBUSCA Then
       lFOUND = True
       oGRID.Col = oGRID.cols - 1
@@ -81,7 +87,7 @@ Public Function LocalizaGrid(ByRef oGRID As Variant, Optional ByVal eBUSCA As Va
     oGRID.Row = nROW
   End If
   If lMES And Not lFOUND Then
-    Alert "N„o Localizado"
+    Alert "N√£o Localizado"
   End If
   eLOCALIZA = ""
 End Function
@@ -98,8 +104,8 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
   On Error GoTo errhandler
   Dim x As Integer
   Dim cDIZ As Variant
-  Dim oDB
-  Dim oRS
+  Dim oDB As New ADODB.Connection
+  Dim oRS As New ADODB.Recordset
   Dim aRETU As Variant
   Dim cARQTMP As String
   Dim eVAR As Variant
@@ -154,7 +160,7 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
     .Row = 0
     For x = 0 To nITEM - 1
       .Col = x
-      .tEXT = aDIZ(x)
+      .Text = aDIZ(x)
       .ColWidth(x) = aTAM(x)
       If InStr(aCAM(x), "$") > 0 Then
         Select Case Mid(aCAM(x), 1, 1)  ' FlexAlignmentCENTERCenter FlexAlignmentRIGHTCenter FlexAlignmentLeftCenter
@@ -284,7 +290,8 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
   Dim l3265 As Boolean
   Dim cERRO As String
   Dim lOPEN As Boolean
-  Dim aRETU
+  Dim aRETU As Variant
+  
 
   lOPEN = False
   l3265 = True
@@ -294,7 +301,7 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
   End If
 
   If nITEM > 10 Then
-    Alert ("MontaGridFast atÈ 10 itens")
+    Alert ("MontaGridFast at√© 10 itens")
     Exit Sub
   End If
 
@@ -330,7 +337,7 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
     .Row = 0
     For x = 0 To nITEM - 1
       .Col = x
-      .tEXT = aDIZ(x)
+      .Text = aDIZ(x)
       .ColWidth(x) = aTAM(x)
       If InStr(aCAM(x), "$") > 0 Then
         Select Case Mid(aCAM(x), 1, 1)  ' FlexAlignmentCENTERCenter FlexAlignmentRIGHTCenter FlexAlignmentLeftCenter
@@ -507,7 +514,8 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
   Dim l3265 As Boolean
   Dim cERRO As String
   Dim lOPEN As Boolean
-  Dim aRETU
+  Dim aRETU As Variant
+  
 
   lOPEN = False
   l3265 = True
@@ -578,14 +586,14 @@ If Not oRS.BOF Then
   oGRID.RowSel = oGRID.Rows - 1
   oGRID.ColSel = oGRID.cols - 1
 
-  'estamos usando a propriedade Clip e o mÈtodo GetString para selecionar uma regi„o do grid
+  'estamos usando a propriedade Clip e o m√©todo GetString para selecionar uma regi√£o do grid
   oGRID.clip = oRS.GetString(adClipString, -1, Chr(9), Chr(13), vbNullString)
   oGRID.Row = 0
 
   With oGRID
     For x = 0 To nITEM - 1
       .Col = x
-      .tEXT = aDIZ(x)
+      .Text = aDIZ(x)
     Next x
   End With
   oGRID.Visible = True
@@ -659,7 +667,7 @@ Public Function CloneGrid(ByRef oGRIDORI As Variant, ByRef oGRIDDES As Variant)
     For x = 0 To nCOLS
       oGRIDORI.Col = x
       .Col = x
-      .tEXT = oGRIDORI
+      .Text = oGRIDORI
       .ColWidth(x) = oGRIDORI.ColWidth(x)
       .ColAlignment(x) = oGRIDORI.ColAlignment(x)
     Next

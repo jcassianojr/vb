@@ -219,11 +219,13 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
   Dim oRS As ADODB.Recordset
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
-  Dim x, nCAMPOS As Integer
-  Dim aRETU, aARQ, aOPE, eVAL As Variant
+  Dim x As Integer
+  Dim nCAMPOS As Integer
+  Dim aRETU As Variant
+  Dim aARQ As Variant
+  Dim aOPE As Variant
+  Dim eVAL As Variant
   Dim cERRO As String
- ' Dim oCOMANDO As ADODB.Command
- ' Dim cCOM As String
   Dim cARQCON As String
 
   On Error GoTo errhandler
@@ -310,12 +312,13 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
   Dim oDB As ADODB.Connection
   Dim oRS As ADODB.Recordset
   Dim x, nCAMPOS As Integer
-  Dim aRETU, aARQ, aOPE, eVAL As Variant
+  Dim aRETU As Variant
+  Dim aARQ As Variant
+  Dim aOPE As Variant
+  Dim eVAL As Variant
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
-  'Dim oCOMANDO As ADODB.Command
-  'Dim cCOM As String
   Dim cARQCON As String
 
   On Error GoTo errhandler
@@ -399,9 +402,9 @@ errhandler:
   End Select
 End Function
 
-Public Function ApagaSQLpAdo(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclus„o") As Boolean
+Public Function ApagaSQLpAdo(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclus√£o") As Boolean
   ApagaSQLpAdo = False
-  If MDG(cTEXTO, "Exclus„o Registro") Then
+  If MDG(cTEXTO, "Exclus√£o Registro") Then
     ApagaSQLpAdo = APAGASQLADO(cARQ, cSQL)
   End If
 End Function
@@ -411,7 +414,9 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim oDB As ADODB.Connection
   Dim oRS As ADODB.Recordset
   Dim eVAL, aOPE As Variant
-  Dim x, nLENVAR, nLENCAM As Long
+  Dim x As Long
+  Dim nLENVAR As Long
+  Dim nLENCAM As Long
   Dim lGRAVA As Boolean
   Dim cTabela As String
   Dim eVAZIO As Variant
@@ -422,8 +427,6 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim lRSOP As Boolean
   Dim cERRO As String
   Dim oFIELD As ADODB.Field
- ' Dim oCOMANDO As ADODB.Command
- ' Dim cCOM As String
   Dim cARQCON As String
 
   On Error GoTo errhandler
@@ -520,7 +523,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         aFOR(x) = ""
       End If
       
-      ''Efetua a GravaÁao
+      ''Efetua a Grava√ßao
       If lGRAVA Then
          If aARQ(2) = "SQLITE" And Mid(aFOR(x), 1, 1) = "D" Then '(aFOR(x) = "DH" Or aFOR(x) = "D" Or aFOR(x) = "DC") Then
              oRS(aCAM(x)) = CStr(Format(eVAL, "yyyy-mm-dd hh:ss:mm"))
@@ -597,8 +600,6 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
-'  Dim oCOMANDO As ADODB.Command
-'  Dim cCOM As String
 
   IncluiSQLAdo = False
   On Error GoTo errhandler
@@ -731,8 +732,6 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim cERRO As String
   Dim aOPE As Variant
   Dim eVAL As Variant
-'  Dim oCOMANDO As ADODB.Command
-'  Dim cCOM As String
   Dim aCON As Variant
 
   On Error GoTo errhandler
@@ -859,8 +858,6 @@ Public Function PegUltSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal c
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
-'  Dim oCOMANDO As ADODB.Command
-'  Dim cCOM As String
 
   On Error GoTo errhandler
 
@@ -921,8 +918,10 @@ Public Function SQLMoveRegADO(ByVal cARQORI As String, _
    Optional ByVal aOUTDES As Variant = 0, _
    Optional ByVal aIDDES As Variant = 0) As Boolean
 
-Dim oDB, oDBDES As ADODB.Connection
-Dim oRS, oRSDES As ADODB.Recordset
+Dim oDB  As ADODB.Connection
+Dim oDBDES As ADODB.Connection
+Dim oRS As ADODB.Recordset
+Dim oRSDES As ADODB.Recordset
 Dim cARQORI1 As String
 Dim cARQDES1 As String
 Dim aRETU As Variant
@@ -933,10 +932,6 @@ Dim aRETUID As Variant
 Dim lOPEN As Boolean
 Dim lRSOP As Boolean
 Dim cERRO As String
-'  Dim oCOMANDO As ADODB.Command
-'  Dim OCOMANDO2 As ADODB.Command
-
-'  Dim cCOM As String
 
 On Error GoTo errhandler
 
