@@ -277,13 +277,14 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Dim nERRO
+Dim nERRO As Integer
 Private WithEvents C As cConverter
 Attribute C.VB_VarHelpID = -1
 'Attribute C.VB_VarHelpID = -1
 
 Private Sub CmdCompactar_Click()
-  Dim lngBefore, lngAfter As Long
+  Dim lngBefore As Long
+  Dim lngAfter As Long
   Dim strResult As String
   lngBefore = FileLen(Text1.Text)
   If CompactAccess(Text1.Text) Then
@@ -291,8 +292,8 @@ Private Sub CmdCompactar_Click()
     lngAfter = FileLen(Text1.Text)
     strResult = "Resultados da Compactacao" & vbCrLf
     strResult = strResult & "-------------------------------------------" & vbCrLf
-    strResult = strResult & "Tamanho Antes  da Compactação: " & lngBefore & " bytes" & vbCrLf
-    strResult = strResult & "Tamanho Depois da Compactação: " & lngAfter & " bytes"
+    strResult = strResult & "Tamanho Antes  da Compactacao: " & lngBefore & " bytes" & vbCrLf
+    strResult = strResult & "Tamanho Depois da Compactacao: " & lngAfter & " bytes"
     MsgBox strResult, vbInformation
   Else
     MsgBox "Erro na compactacao do arquivo", vbExclamation
@@ -301,23 +302,18 @@ Private Sub CmdCompactar_Click()
 End Sub
 
 Private Sub CmdExportarSqlite_Click()
-  ' Text2.tEXT = TrocaExt(Text1.tEXT, "sqlite")
    If MDG("Converter Reescreve Destino") Then
       Convert Text1.Text, Text2.Text
    End If
    
 End Sub
 Private Sub Convert(NWindMDBFileName$, SQLiteFileName$)
-'Dim i&, aCnn As ADODB.Connection, sCnn As cConnection
-'Dim aCnnMDB As ADODB.Connection
-'Dim sACCESS As cDBAccess
 
-Dim aCnn As ADODB.Connection, sCnn As cConnection
+Dim aCnn As ADODB.Connection
+Dim sCnn As cConnection
+Dim cconn As String
 
   On Error Resume Next
-'  Dim cconn, cCONMDB As String
- ' Dim lMDB As Boolean
-  Dim cconn As String
   
   Set aCnn = New ADODB.Connection
   aCnn.CursorLocation = adUseClient
@@ -415,18 +411,16 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
   Dim rec1 As DAO.Recordset
   Dim rec2 As DAO.Recordset
   Dim NewTable As DAO.TableDef
- ' Dim oTableDef As DAO.TableDef
   Dim fldTemp As DAO.Field
- ' Dim NewFld As DAO.Field
-  Dim N, m As Integer
- ' Dim cTabela As String
-  Dim T_Ime, R_Ime, nekej, r_type, R_size As Variant
- ' Dim oFieldDef As Variant
-
-
+  Dim N  As Integer
+  Dim m As Integer
+  Dim T_Ime As Variant
+  Dim R_Ime As Variant
+  Dim nekej As Variant
+  Dim r_type As Variant
+  Dim R_size As Variant
   Dim i As Integer
   Dim x As Integer
-  'Dim cARQ As String
 
   On Error GoTo errhandler
   Set WrkSpace = DBEngine.CreateWorkspace("Compare", "Admin", "")
@@ -512,7 +506,8 @@ errhandler:
 End Sub
 
 Private Sub Command5_Click()
-  Dim sFILTER, sFileName As String
+  Dim sFILTER  As String
+  Dim sFileName As String
   sFILTER = "Arquivos Access (*.MDB)" & vbNullChar & "*.MDB" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
   sFileName = FileSave(Me, sFILTER, 1, "MDB", "", "", "Criar Access Como")
   If Not Len(sFileName) = 0 Then
@@ -565,8 +560,9 @@ End Sub
 Private Sub ListFields(dbFileWithPath As String, dbTableName As String)
 Dim dbConn As ADODB.Connection
 Dim rs As ADODB.Recordset
-Dim cTIPO
-Dim nLength
+Dim cTIPO As String
+'Dim nLength
+
     Set dbConn = New ADODB.Connection
     
     dbConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" _
@@ -603,6 +599,8 @@ Dim dbConn As ADODB.Connection
 Dim rs As ADODB.Recordset
 Dim cINDEX   As String
 Dim cCOLUNAS As String
+    
+    
     Set dbConn = New ADODB.Connection
     
     dbConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" _

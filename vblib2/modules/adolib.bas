@@ -1,7 +1,7 @@
 Attribute VB_Name = "AdoLib"
 ' sqlite funcao para ajustes foxpro equivalente
 '     {"LEFT(%1%,%2%)"     ,"SUBSTR(%1%,1,%2%)"},;
-'                      {"LOWER(%1%)"        ,"LOWER(%1%)"},;
+'                      {"LOWER(%1%)"        ,"LOWER(%1%)"},;D
 '                      {"UPPER(%1%)"        ,"UPPER(%1%)"},;
 '                      {"DTOS(%1%)"        ,"strftime('%Y%m%d',%1%)"},;
 '                      {"DAY(%1%)"       ,"cast(strftime('%d',%1) as int)"},;
@@ -104,7 +104,7 @@ Public Const JET_ENGINETYPE_HTML1X = 70
 ''Tipo con gera a matrix com o tipo conecao,string concecao,tipo interno conecao
 ''Tipodado2 retorna o tipo C aracter D ata ...
 ''Tipodado retorno o tipo conforme o padrao ado
-Public Function GeracArq(ByVal cARQ As String, Optional ByVal cTIPO As String = "", Optional ByVal lWRITE As Boolean = True)
+Public Function GeracArq(ByVal cARQ As String, Optional ByVal cTIPO As String = "", Optional ByVal lWRITE As Boolean = True) As String
   Dim aRETU As Variant
   cARQ = GeraConn(cARQ, cTIPO)
   aRETU = TipoConn(cARQ, , , lWRITE)
@@ -582,7 +582,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   End If
 
   If InStr(cARQTMP, "[JETTXTPIPE]") > 0 Then
-    'Delimited(x)   File is considered as a delimited file with delimited character ‘x’.
+    'Delimited(x)   File is considered as a delimited file with delimited character â€˜xâ€™.
     cARQ = Replace(cARQ, "[JETTXT]", "")
     cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;FMT=Delimited(|)" & Chr(34) & ";"
     TipoConn = Array("ADO", cARQ, "JETXT")
@@ -762,11 +762,11 @@ Public Function TipoDados(ByVal intType As Integer) As String
     TipoDados = "IUnknown"
 
   Case Else
-    TipoDados = "Tipo de dados não reconhecido"
+    TipoDados = "Tipo de dados nÃ£o reconhecido"
   End Select
 End Function
 
-Public Function ADORsStatus(ByRef eSTATUS)
+Public Function ADORsStatus(ByRef eSTATUS) As String
   ADORsStatus = "Status Nao Especificado"
   Select Case eSTATUS
   Case adRecOK
@@ -964,8 +964,10 @@ Public Function BytesToHexString(vaBytes As Variant) As String
 '   Michael Johnson     2000/Aug/01 13:51     Initial creation
   On Error GoTo trataerro
 
-  Dim sAccumulator As String, lCtr As Long
-  Dim sHex As String, sFormatted As String
+  Dim sAccumulator As String
+  Dim lCtr As Long
+  Dim sHex As String
+  Dim sFormatted As String
 
   BytesToHexString = ""
   If Not TypeName(vaBytes) = "Byte()" Then

@@ -83,7 +83,7 @@ Private Const FOF_ALLOWUNDO = &H40
 
 Public Type OPENFILENAME
   nStructSize As Long
-  hwndOwner As Long
+  hWndOwner As Long
   hInstance As Long
   sFILTER As String
   sCustomFilter As String
@@ -232,7 +232,8 @@ Public Sub CreateNewDirectory(ByVal NewDirectory As String)
 End Sub
 
 Public Function GetTempDirectory() As String
-  Dim tempPath As String, sLen As Integer
+  Dim tempPath As String
+  Dim sLen As Integer
   tempPath = String(255, 0)
   sLen = GetTempPath(256, tempPath)
   tempPath = Left(tempPath, sLen)
@@ -248,15 +249,10 @@ Public Function FileOpen(frmOwner As Form, _
                          Optional ByVal sTitle As String) As String
 
 
-  'Dim Pos As Long
-  'Dim buff As String
-  'Dim sLongname As String
-  'Dim sShortname As String
-
 
   With OFN
     .nStructSize = Len(OFN)
-    .hwndOwner = frmOwner.hWnd
+    .hWndOwner = frmOwner.hWnd
     .sFILTER = sFilters & vbNullChar & vbNullChar
     .nFilterIndex = nFilterIndex
     .sFile = sDefaultFileName & Space$(1024) & vbNullChar & vbNullChar
@@ -284,14 +280,11 @@ Public Function FileSave(frmOwner As Form, _
                          Optional ByVal sTitle As String) As String
 
 
-''Dim buff As String
-''Dim sLname As String
-''Dim sSname As String
 
   With OFN
 
     .nStructSize = Len(OFN)
-    .hwndOwner = frmOwner.hWnd
+    .hWndOwner = frmOwner.hWnd
     .sFILTER = sFilters & vbNullChar & vbNullChar
     .nFilterIndex = nFilterIndex
     .sFile = sDefaultFileName & Space$(1024) & _
@@ -397,7 +390,11 @@ Public Function ImgFILTER2() As String
 End Function
 
 Public Function parsefile(ByVal archivo As String, ByVal parte As String) As String
-  Dim PosSlash, PosPunto, PosColon, LastSlash, i As Long
+  Dim PosSlash As Integer
+  Dim PosPunto As Integer
+  Dim PosColon As Integer
+  Dim LastSlash As Integer
+  Dim i As Integer
   Dim C As String
   PosSlash = 0
   LastSlash = 0                                'un slash antes del ultimo

@@ -33,7 +33,7 @@ AutoIncrementVer=0
 ServerSupportFiles=0
 VersionCompanyName="SkySof Software Inc."
 VersionFileDescription="Access Database Repair Tool"
-VersionLegalCopyright="Copyright © 2007 SkySof Software Inc."
+VersionLegalCopyright="Copyright Â© 2007 SkySof Software Inc."
 VersionProductName="MDB Repair Tool"
 CondComp="Prod = 1 : Server = 1"
 CompilationType=0

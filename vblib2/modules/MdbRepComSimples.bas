@@ -73,11 +73,12 @@ Public Sub prompt_err(ByVal sError As ErrObject, _
                       ByVal ModuleName As String, _
                       ByVal OccurIn As String)
 
-'Dim cErr As clsErrorReport
 
-  Dim s1, s2, s3, s4 As String
+  Dim s1 As String
+  Dim s2  As String
+  Dim s3  As String
+  Dim s4 As String
   Dim s5 As Long
-''  Dim ff As Integer
   Dim strMsg As String
 
   s1 = ModuleName
