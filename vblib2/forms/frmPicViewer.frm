@@ -632,16 +632,15 @@ Option Explicit
 'Sedangkan file image yang difilter adalah bmp, gif, jpg, ico, wmf, cur dan png.
 '------------------------------------------------------------------------------
 
-Dim KAX, KAY As Single
-Attribute KAY.VB_VarUserMemId = 1073938432
-Dim VarFileGambar, FileTerpilih As String
+Dim KAX As Single
+Dim KAY As Single
+Dim VarFileGambar As String
 Attribute VarFileGambar.VB_VarUserMemId = 1073938434
-Attribute FileTerpilih.VB_VarUserMemId = 1073938434
-Dim VarImage1Height, VarImage1Width, VarImage1HeightZoom, VarImage1WidthZoom As String
-Attribute VarImage1Height.VB_VarUserMemId = 1073938436
-Attribute VarImage1Width.VB_VarUserMemId = 1073938436
-Attribute VarImage1HeightZoom.VB_VarUserMemId = 1073938436
-Attribute VarImage1WidthZoom.VB_VarUserMemId = 1073938436
+Dim FileTerpilih As String
+Dim VarImage1Height As String
+Dim VarImage1Width As String
+Dim VarImage1HeightZoom As String
+Dim VarImage1WidthZoom As String
 
 'Untuk form resizer
 Private objFormResizer As clsResizer
@@ -753,9 +752,9 @@ End Sub
 Private Sub CmdFEchar_Click()
   lRETU = False
   eRETU01 = ""
-  If FileExists(txtAddress.tEXT) Then
+  If FileExists(txtAddress.Text) Then
     lRETU = True
-    eRETU01 = txtAddress.tEXT
+    eRETU01 = txtAddress.Text
   End If
   Unload Me
 End Sub
@@ -963,7 +962,7 @@ Dim FILESIZE As Integer
   VarImage1HeightZoom = imgViewer.Height
   VarImage1WidthZoom = imgViewer.Width
   AturScrollbar
-  txtAddress.tEXT = FileTerpilih
+  txtAddress.Text = FileTerpilih
   lblTotalFile.Caption = "Total : " & lstViewer.ListCount & " file(s)"
   lblCoordinate.Caption = ""
   FILESIZE = Int(FileLen(FileTerpilih) / 1024 + 1)
@@ -1280,7 +1279,7 @@ Private Sub mnuPopUp1Properties_Click()
   txtProperties.Top = 600
   tmrProperties.Enabled = True
 
-  txtProperties.tEXT = "File : " & FileTerpilih + vbCrLf _
+  txtProperties.Text = "File : " & FileTerpilih + vbCrLf _
                      + lblDimension.Caption + vbCrLf _
                      + lblSize.Caption
 End Sub
@@ -1504,11 +1503,11 @@ ErrorHandle:
 End Sub
 
 Private Sub cmbPapers_Click()
-  If Len(cmbPapers.tEXT) > 0 And Len(cmbResolutions.tEXT) > 0 Then cmdPrintDialog.Enabled = True
+  If Len(cmbPapers.Text) > 0 And Len(cmbResolutions.Text) > 0 Then cmdPrintDialog.Enabled = True
 End Sub
 
 Private Sub cmbResolutions_Click()
-  If Len(cmbPapers.tEXT) > 0 And Len(cmbResolutions.tEXT) > 0 Then cmdPrintDialog.Enabled = True
+  If Len(cmbPapers.Text) > 0 And Len(cmbResolutions.Text) > 0 Then cmdPrintDialog.Enabled = True
 End Sub
 
 

@@ -181,7 +181,7 @@ Begin VB.Form Frmexpjpg
       Width           =   3675
    End
    Begin VB.Label Label1 
-      Caption         =   "Aguarde Exportação"
+      Caption         =   "Aguarde ExportaÃ§Ã£o"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   18
@@ -299,7 +299,7 @@ Private Sub Cmdiniciar_Click()
   Dim cCAMPO As String
   Dim cTable As String
   Dim cWHERE As String
-  Dim cCODIGOGRV
+  Dim cCODIGOGRV As String
   Set OBJCONN = New ADODB.Connection           'Create a new object
   Set OBJRSGLOB = New ADODB.Recordset
   cCAMPO = "IMAGEM"
@@ -360,11 +360,11 @@ Private Sub Cmdiniciar_Click()
       End If
       If PorCodigo.Value = True Then
         If TiraCaracter.Value = vbChecked Then
-          cCODIGOGRV = OBJRSGLOB.Fields("codigo").Value
+          cCODIGOGRV = FixStr(OBJRSGLOB.Fields("codigo").Value)
           cCODIGOGRV = TiraOut(cCODIGOGRV)
           cCODIGOGRV = Trim(cCODIGOGRV)
         Else
-          cCODIGOGRV = OBJRSGLOB.Fields("CODIGO").Value
+          cCODIGOGRV = FixStr(OBJRSGLOB.Fields("CODIGO").Value)
           cCODIGOGRV = Trim(cCODIGOGRV)
         End If
         If SepararEmpresa.Value = True Or SepararEmpresa.Value = 1 Then

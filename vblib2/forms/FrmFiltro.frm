@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form FrmFiltro 
    Caption         =   "Filtro"
    ClientHeight    =   5895
@@ -780,10 +780,14 @@ Private Sub ok_Click()
 End Sub
 
 Private Sub ok_ClickX(lZERA As Boolean)
-  Dim cVALINI, cVALFIM, cDIZ As String
-  Dim nVALINI, nVALFIM As Variant
+  Dim cVALINI As String
+  Dim cVALFIM As String
+  Dim cDIZ As String
+  Dim nVALINI As Variant
+  Dim nVALFIM As Variant
   Dim cTIPDIZ As String
-  Dim cOPE, cOP2 As String
+  Dim cOPE As String
+  Dim cOP2 As String
 
 
   ValINI.Enabled = False

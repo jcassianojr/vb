@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escIMG 
    Caption         =   "Escolha o Codigo da Imagem"
    ClientHeight    =   6675
@@ -262,7 +262,7 @@ Dim cBASEDADOS As String
 Private Sub Apaga_Click()
 ' Dim eRESP As Variant
   Dim SQL As String
-  Dim ZGRP
+  Dim ZGRP As String
   Grid.Col = 0
   ZGRP = Grid
   SQL = "select * from IMAGENS WHERE CODIGO='" & ZGRP & "'"
@@ -340,7 +340,7 @@ Private Sub cmdEditar_Click()
 End Sub
 
 Private Sub Command1_Click()
-  Dim sFILENAME As String
+  Dim sFileName As String
   Dim sPath As String
   Dim sRECENTFILE As String
   Dim sFILTER As String
@@ -353,19 +353,19 @@ Private Sub Command1_Click()
             & vbNullChar & "MySQL" & vbNullChar & "*.mysql*" _
             & vbNullChar & "PostgreSQL" & vbNullChar & "*.postgresql*" _
             & vbNullChar & "accdb" & vbNullChar & "*.accdb"
-  sFILENAME = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Escolha arquivos de imagens")
-  If Len(sFILENAME) = 0 Then
-    Text1.tEXT = ""
+  sFileName = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Escolha arquivos de imagens")
+  If Len(sFileName) = 0 Then
+    Text1.Text = ""
     cARQRTF = ""
     Exit Sub
   End If
-  If InStr(LCase(sFILENAME), ".mariadb") > 0 Or InStr(LCase(sFILENAME), ".mysql") > 0 _
-     Or InStr(LCase(sFILENAME), ".postgresql") > 0 Then
-     sFILENAME = parsefile(sFILENAME, "A") 'pega apenas referencia da coneccao
+  If InStr(LCase(sFileName), ".mariadb") > 0 Or InStr(LCase(sFileName), ".mysql") > 0 _
+     Or InStr(LCase(sFileName), ".postgresql") > 0 Then
+     sFileName = parsefile(sFileName, "A") 'pega apenas referencia da coneccao
   End If
-  Text1.tEXT = sFILENAME
+  Text1.Text = sFileName
   
-  cARQRTF = GeraConn(sFILENAME)
+  cARQRTF = GeraConn(sFileName)
   FilRelat
 End Sub
 
@@ -458,7 +458,7 @@ Private Sub Form_Load()
     End If
   End If
 
-  Text1.tEXT = cARQRTF
+  Text1.Text = cARQRTF
 
   If Len(ZGRP) > 0 Then
 

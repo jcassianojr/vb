@@ -1,7 +1,7 @@
 Attribute VB_Name = "checagem"
 Option Explicit
 
-Public Function CNPJ_Novo(ByVal pCNPJ) As Boolean
+Public Function CNPJ_Novo(ByVal pCNPJ As String) As Boolean
 
   Dim lResult As Boolean
   Dim soma As Integer
@@ -97,7 +97,7 @@ Public Function IsValidIP(Test As String) As Boolean
   IsValidIP = True
 End Function
 
-Public Function formataTelefone(ByVal cNUMERO) As String
+Public Function formataTelefone(ByVal cNUMERO As String) As String
 'Dim cTMP As String
 'formataTelefone ("99-12435678")->(99)1234-5678
 'formataTelefone ("99,12345678")->(99)1234-5678
@@ -141,7 +141,7 @@ Public Function formataTelefone(ByVal cNUMERO) As String
   formataTelefone = FormataTelfon2(cNUMERO)
 End Function
 
-Public Function FormataTelfon2(ByVal cNUMERO) As String
+Public Function FormataTelfon2(ByVal cNUMERO As String) As String
   FormataTelfon2 = cNUMERO
   cNUMERO = funNumeroPuro(cNUMERO)
   If Len(cNUMERO) = 8 And Mid(cNUMERO, 4, 1) <> "-" Then  '123-4567
@@ -154,7 +154,7 @@ Public Function FormataTelfon2(ByVal cNUMERO) As String
   End If
 End Function
 
-Public Function FormataRG(ByVal valor)
+Public Function FormataRG(ByVal valor As String) As String
   Dim nPOS As String
   Dim cDAC As String
   FormataRG = FixStr(valor)
@@ -458,7 +458,7 @@ Function FormataCGC(ByVal pCGC As String) As String
   End If
 End Function
 
-Public Function CheckCNPJIE(ByVal cPESSOA, ByVal CCNPJ, ByVal cIE, ByVal cUF, Optional ByVal lMES As Boolean = True) As Boolean
+Public Function CheckCNPJIE(ByVal cPESSOA As String, ByVal CCNPJ As String, ByVal cIE As String, ByVal cUF As String, Optional ByVal lMES As Boolean = True) As Boolean
   Dim nERRO As Integer
   CheckCNPJIE = True
   If cPESSOA = "J" Then
@@ -686,7 +686,7 @@ Function ValiText(KeyIN As Integer, Optional ByVal eTipo As String = "#N", _
   ValiText = KeyOut
 End Function
 
-Public Function CheckRG(ByVal valor, Optional ByVal lMES As Boolean = True) As Boolean
+Public Function CheckRG(ByVal valor As String, Optional ByVal lMES As Boolean = True) As Boolean
   Dim n1 As Integer
   Dim n2 As Integer
   Dim n3 As Integer
@@ -928,7 +928,7 @@ Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
   ValidaDados = KeyAscii
 End Function
 
-Public Function ChecaSimNao(ByVal nText As Variant)
+Public Function ChecaSimNao(ByVal nText As Variant) As String
 'nText = expressa o campo/numero/variavel
   nText = UCase(nText)
   If (nText) = "S" Then
@@ -971,7 +971,7 @@ Function FormataCFOP(ByVal pCFOP As String) As String
   End If
 End Function
 
-Function FormataPlaca(ByVal eCHAPA) As String
+Function FormataPlaca(ByVal eCHAPA As String) As String
   Dim cCHAPA As String
   cCHAPA = FixStr(eCHAPA, "")
   cCHAPA = UCase(cCHAPA)
@@ -984,7 +984,7 @@ Function FormataPlaca(ByVal eCHAPA) As String
   FormataPlaca = cCHAPA
 End Function
 
-Function CheckHora(ByVal eHORA, Optional ByVal lMES As Boolean = False) As Boolean
+Function CheckHora(ByVal eHORA As Variant, Optional ByVal lMES As Boolean = False) As Boolean
   Dim cTMP  As String
   Dim cHORA  As String
   Dim cMIN  As String
@@ -1022,7 +1022,7 @@ Function CheckHora(ByVal eHORA, Optional ByVal lMES As Boolean = False) As Boole
   End If
 End Function
 
-Public Function CheckCTA(ByVal cBANCO, ByVal cAGENCIA, ByVal cCONTA) As Boolean
+Public Function CheckCTA(ByVal cBANCO As Variant, ByVal cAGENCIA As Variant, ByVal cCONTA As Variant) As Boolean
   Dim eTOt As Long
   Dim nFIM As Integer
   Dim nINI As Integer
@@ -1122,7 +1122,8 @@ Public Function DAC10(ByVal Arg1)
   DAC10 = Trim(Str(InStr("987654321", Mid(StrZero(ntotal, 3), 3, 1))))
 End Function
 
-Public Function CheckDat2(ByVal eDATA As Variant, Optional ByVal lMES As Boolean = True)
+Public Function CheckDat2(ByVal eDATA As Variant, Optional ByVal lMES As Boolean = True) As Boolean
+
   CheckDat2 = False
   If Not DataBranco(eDATA) Then
     If IsDate(eDATA) Then
@@ -1134,7 +1135,8 @@ Public Function CheckDat2(ByVal eDATA As Variant, Optional ByVal lMES As Boolean
   End If
 End Function
 
-Public Function CheckData(ByVal eDATA As Variant, Optional ByVal lMES As Boolean = True)
+Public Function CheckData(ByVal eDATA As Variant, Optional ByVal lMES As Boolean = True) As Boolean
+
   Dim aMES As Variant
   Dim nDIAMES As Integer
   Dim cData As String
@@ -1459,7 +1461,7 @@ Public Function checkcep(ByVal cCEP As String, Optional ByVal lMES As Boolean = 
   checkcep = True
 End Function
 
-Public Function FormataIE(ByVal valor, ByVal cUF, Optional ByVal cPESSOA As String = "J") As String
+Public Function FormataIE(ByVal valor As String, ByVal cUF As String, Optional ByVal cPESSOA As String = "J") As String
   Dim cMASK As String
   valor = FixStr(valor, "")
   FormataIE = valor
@@ -1671,7 +1673,7 @@ Public Sub PreencheCboEstados(ByRef cbo)
   cbo.AddItem "EX"
 End Sub
 
-Public Function PEGDDD(ByVal cTEL As String)
+Public Function PEGDDD(ByVal cTEL As String) As String
   cTEL = formataTelefone(cTEL)
   PEGDDD = ""
   If InStr(cTEL, "(") > 0 Then
@@ -1679,7 +1681,7 @@ Public Function PEGDDD(ByVal cTEL As String)
   End If
 End Function
 
-Public Function PEGTEL(ByVal cTEL As String)
+Public Function PEGTEL(ByVal cTEL As String) As String
   cTEL = formataTelefone(cTEL)
   PEGTEL = cTEL
   If InStr(cTEL, "(") > 0 Then
@@ -1687,7 +1689,7 @@ Public Function PEGTEL(ByVal cTEL As String)
   End If
 End Function
 
-Public Function PEGPREF(ByVal cTEL As String)
+Public Function PEGPREF(ByVal cTEL As String) As String
 'cTEL = tem que ser so o numero telefone antes de chamar usar pegtel se necessario
   PEGPREF = ""
   If InStr(cTEL, "-") > 0 Then
