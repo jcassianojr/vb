@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escrptusr 
    Caption         =   "Liberação Usuario"
    ClientHeight    =   6030
@@ -196,7 +196,6 @@ Private Sub excrptusr_Click()
 End Sub
 
 Private Sub filrptusr()
-'Dim carq As String
   Dim sSQL As String
   Dim cNOME As String
 

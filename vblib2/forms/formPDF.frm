@@ -592,7 +592,8 @@ Private Sub btnOpen_Click()
 End Sub
 
 Private Sub btnSave_Click()
-  Dim sFILTER, FileName As String
+  Dim sFILTER As String
+  Dim FileName As String
   sFILTER = "Arquivos PDF (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
   FileName = FileSave(Me, sFILTER, 1, "PDF", cARQRTF, cARQRTF, "Salvar PDF")
   If Not Len(FileName) = 0 Then
@@ -640,7 +641,7 @@ Public Function ConvertToPDF(FileName As String, outputfile As String, _
   Dim tpheight As Long
   On Error GoTo er
   If Not FileExist(FileName) Then
-    MsgBox "Arquivo '" & FileName & "' não existe."
+    MsgBox "Arquivo '" & FileName & "' nÃ£o existe."
     Exit Function
   ElseIf FileExist(outputfile) Then
     If MDG("Arquivo Ja Existente" & outputfile, "Confirma Exclusao") Then
@@ -680,7 +681,7 @@ Private Sub initialize(FontName As String, FontSize As Integer, Rotation As Inte
   pageWidth = 72 * pwidth
 
   BaseFont = FontName                          ' Courier, Times-Roman, Arial
-  pointSize = FontSize                         ' Font Size; não altere
+  pointSize = FontSize                         ' Font Size; nÃ£o altere
   vertSpace = FontSize * 1.2                   ' Vertical spacing
   rotate = Rotation                            ' degrees to rotate; try setting 90,180,etc
   LINES = (pageHeight - 72) / vertSpace        ' no of lines on one page
@@ -714,7 +715,7 @@ End Sub
 
 Private Sub WriteStart()
   writepdf ("%PDF-1.2")
-  writepdf ("%âãÏÓ")
+  writepdf ("%Ã¢Ã£ÃÃ“")
 End Sub
 
 Private Sub WriteHead()
@@ -780,7 +781,9 @@ End Sub
 
 Private Sub WritePages()
   Dim i As Integer
-  Dim line As String, tmpline As String, beginstream As String
+  Dim line As String
+  Dim tmpline As String
+  Dim beginstream As String
   On Error GoTo er
   Open filetxt For Input As #2
   beginstream = StartPage
@@ -789,7 +792,7 @@ Private Sub WritePages()
     Line Input #2, line
     lineNo = lineNo + 1
 
-    'quebra de página
+    'quebra de pÃ¡gina
     If lineNo >= LINES Or InStr(line, Chr(12)) > 0 Then
       writepdf ("1 0 0 1 " & npagex & " " & npagey & " Tm")
       writepdf ("(" & pageNo & ") Tj")
@@ -817,7 +820,7 @@ Private Sub WritePages()
         writepdf ("T* (" & tmpline & vbCrLf & ") Tj")
         lineNo = lineNo + 1
 
-        'quebra de página
+        'quebra de pÃ¡gina
         If lineNo >= LINES Or InStr(line, Chr(12)) > 0 Then
           writepdf ("1 0 0 1 " & npagex & " " & npagey & " Tm")
           writepdf ("(" & pageNo & ") Tj")
@@ -903,7 +906,10 @@ er:
 End Function
 
 Sub endpdf()
-  Dim ty As String, i As Integer, xreF As Long
+  Dim ty As String
+  Dim i As Integer
+  Dim xreF As Long
+  
   On Error GoTo er
   location(root) = Position
   writepdf (root & " 0 obj")
@@ -947,7 +953,8 @@ er:
 End Sub
 
 Public Function ReplaceText(tEXT As String, TextToReplace As String, NewText As String) As String
-  Dim mtext As String, SpacePos As Long
+  Dim mtext As String
+  Dim SpacePos As Long
   mtext = tEXT
   SpacePos = InStr(mtext, TextToReplace)
   Do While SpacePos

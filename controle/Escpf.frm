@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escpf 
    Caption         =   "Selecione o Processo  desejado:"
    ClientHeight    =   7920
@@ -77,7 +77,7 @@ Private Sub ApagaNF_Click()
   Dim sSQL As String
   Dim cARQUSO As String
   Dim cARQIE As String
-  Dim x
+  Dim x As Integer
 
   cARQIE = PegPath("PATH", "IE")
 
@@ -191,7 +191,7 @@ Private Sub CmdLiberar_Click(ByVal cTIPOLIB)
   Dim DB As New ADODB.Connection
   Dim RSTAB As New ADODB.Recordset
   Dim RSTA2 As New ADODB.Recordset
-  Dim nTMPELA
+  Dim nTMPELA As Integer
 
 
   'Checa operacao a operacao para ver se tem sequencia e instrucao por isso o loop
@@ -239,8 +239,7 @@ Private Sub CmdLiberar_Click(ByVal cTIPOLIB)
   Grid.Col = 0
   nPF = Grid
 
-  'nTMPELA = PegUltSQL(Sdb, "SELECT ELANUM FROM PF WHERE PF=" & nPF, "ELANUM", 0)
-  nTMPELA = PegCampoSQLADO(Sdb, "SELECT ELANUM FROM PF WHERE PF=" & nPF, "", 0)
+  nTMPELA = FixInt(PegCampoSQLADO(Sdb, "SELECT ELANUM FROM PF WHERE PF=" & nPF, "", 0))
 
   If nTMPELA = zIDFOLHA Then
     Alert ("Voce ja e o Elaborador")
@@ -330,8 +329,6 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
   Dim sButton As String
- ' Dim aORDLIB As Variant
- ' Dim aDESLIB As Variant
 
   sButton = Button
   sButton = Left(UCase(Replace(sButton, "&", "")), 3)

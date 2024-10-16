@@ -80,7 +80,7 @@ Begin VB.Form imgsin
       Width           =   1455
    End
    Begin VB.CheckBox Chkmw07 
-      Caption         =   "Itens Manutençao"
+      Caption         =   "Itens ManutenÃ§ao"
       Height          =   375
       Left            =   3600
       TabIndex        =   13
@@ -537,8 +537,13 @@ End Sub
 Private Function limpafoto(cSQL As String, cCAMPO As String, cTabela)
   Dim oDB As ADODB.Connection
   Dim oRS As ADODB.Recordset
-  Dim cARQPF, cARQ, sTEMPFILE, cDIZARQ As String
-  Dim iFileNum, x, nFIM As Integer
+  Dim cARQPF As String
+  Dim cARQ As String
+  Dim sTEMPFILE As String
+  Dim cDIZARQ As String
+  Dim iFileNum As Integer
+  Dim x As Integer
+  Dim nFIM As Integer
   Dim lFileLength As Long
   Dim abBytes() As Byte
 

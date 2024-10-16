@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escRPTGRP 
    Caption         =   "Escolha o grupo de Relatorio"
    ClientHeight    =   6135
@@ -66,7 +66,8 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Apaga_Click()
-  Dim cGRUPO, sSQL As String
+  Dim cGRUPO As String
+  Dim sSQL As String
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
     cGRUPO = FixStr(Grid.tEXT)
@@ -127,7 +128,6 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub grid_Click()
-  'Dim x As Integer
   ' Grid.Col = 0
   Grid.ColSel = Grid.cols - 1
   'For X = 0 To Grid.Cols - 1

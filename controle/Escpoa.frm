@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escPOA 
    Caption         =   "Selecione o Processo  desejado:"
    ClientHeight    =   7260
@@ -56,7 +56,6 @@ Begin VB.Form escPOA
       Width           =   9675
       _ExtentX        =   17066
       _ExtentY        =   11139
-      _Version        =   393216
    End
 End
 Attribute VB_Name = "escPOA"
@@ -244,7 +243,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub CmdLiberar_Click()
-  Dim nTMPELA
+  Dim nTMPELA As Integer
 
   Grid.Col = 0
   nPPAP = Grid
@@ -255,8 +254,7 @@ Private Sub CmdLiberar_Click()
   Grid.Col = 3
   nSSQ = Grid
 
-  'nTMPELA = PegUltSQL(Sdb, "SELECT ELANUM FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, "ELANUM", 0)
-  nTMPELA = PegCampoSQLADO(Sdb, "SELECT ELANUM FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, "", 0)
+  nTMPELA = FixInt(PegCampoSQLADO(Sdb, "SELECT ELANUM FROM " & zPFTIPO & " WHERE NUMERO=" & nPPAP, "", 0))
 
 
   If nTMPELA = zIDFOLHA Then

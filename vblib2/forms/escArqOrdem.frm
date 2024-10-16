@@ -111,15 +111,12 @@ Private Sub Encerrar_Click()
 End Sub
 
 Private Sub Form_Load()
-'Dim nLEN As Integer
   Dim cARQ As String
   Dim cSQL As String
   Dim oRS As New ADODB.Recordset
   Dim oCONN As New ADODB.Connection
-  Dim X As Integer
+  Dim x As Integer
   
-
-  '  CentralizaJanela Me
   CenterFormToScreen Me
   lRETU = False
   TxtOrdem = ""
@@ -131,9 +128,9 @@ Private Sub Form_Load()
   oCONN.Open cARQ
   oRS.Open cSQL, oCONN, adOpenForwardOnly, adLockReadOnly
   List.Clear
-  For X = 0 To oRS.Fields.Count - 1
-    List.AddItem oRS.Fields(X).Name
-  Next X
+  For x = 0 To oRS.Fields.Count - 1
+    List.AddItem oRS.Fields(x).Name
+  Next x
   HelpContextID = nFORMID
   Me.Caption = cFORMID
 End Sub

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escmnuusr 
    Caption         =   "Liberação Usuario"
    ClientHeight    =   5040
@@ -14,13 +14,13 @@ Begin VB.Form escmnuusr
    ScaleWidth      =   7800
    StartUpPosition =   2  'CenterScreen
    Begin VBFLXGRD18.VBFlexGrid gridrptusr 
-      Height          =   3135
+      Height          =   4095
       Left            =   4800
       TabIndex        =   7
       Top             =   720
       Width           =   2775
       _ExtentX        =   4895
-      _ExtentY        =   5530
+      _ExtentY        =   7223
    End
    Begin VBFLXGRD18.VBFlexGrid gridusr 
       Height          =   4335

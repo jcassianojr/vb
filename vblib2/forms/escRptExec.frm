@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form EscRptExec 
    Caption         =   "Selecione o Desejado"
    ClientHeight    =   5775
@@ -71,7 +71,8 @@ Const cFORMID = "Gerenciados Relatorios/Documentos Tipos Execuçao"
 Dim cSQLREF As String
 Private Sub Apagar()
   Dim nNUMERO As Long
-  Dim cARQ, cSQL As String
+  Dim cARQ As String
+  Dim cSQL As String
   Grid.Col = 0
   nNUMERO = FixNum(Grid)
   cARQ = PegPath("PATH", "SYSCONF")

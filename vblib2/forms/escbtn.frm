@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escBTN 
    Caption         =   "Selecione o Botão Desejado"
    ClientHeight    =   5775
@@ -100,7 +100,8 @@ Private Sub Apaga_Click()
 End Sub
 
 Private Sub cmdPADRAO()
-  Dim cARQ, cNOME As String
+  Dim cARQ As String
+  Dim cNOME As String
   cNOME = InputBox("Digite o Nome", "Inclusão Botoes Padrão", " ")
   cNOME = Left$(cNOME, 50)
 
@@ -152,7 +153,8 @@ End Sub
 
 Private Sub FilRelat()
 
-  Dim cARQ, cSQL As String
+  Dim cARQ As String
+  Dim cSQL As String
 
   cARQ = Dbname
   cSQL = "SELECT FORM,CONTROLE,INDICE,IMAGEM,CAPTION,DISPONIVEL FROM CONTROLE ORDER BY FORM,CONTROLE,INDICE"

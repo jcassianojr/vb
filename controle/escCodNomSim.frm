@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form EscCodNomSim 
    Caption         =   "Selecione o Desejado"
    ClientHeight    =   7680
@@ -38,7 +38,6 @@ Begin VB.Form EscCodNomSim
       Width           =   6525
       _ExtentX        =   11509
       _ExtentY        =   12515
-      _Version        =   393216
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -99,7 +98,6 @@ Private Sub Filgrid()
 End Sub
 
 Private Sub Form_Load()
-'    CentralizaJanela Me
   CenterFormToScreen Me
   cARQ = GeracArq(PegPath("PATH", ePASS01))
   cSQL = ePASS02
@@ -121,19 +119,8 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
   End If
 End Sub
 
-'Private Sub Grid_SelChange()
-'    With Grid
-'        If .Rows > 2 Then
-'            .Col = .Cols - 1
-'            .ColSel = 0
-'            .TopRow = .Row
-'        End If
-'    End With
-'End Sub
-
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
   Dim sButton As String
-  'Dim nINDICE As Integer
   sButton = Button
   sButton = Left(UCase(Replace(sButton, "&", "")), 3)
   If sButton = "SAI" Then

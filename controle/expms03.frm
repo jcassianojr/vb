@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form ExpMS03 
-   Caption         =   "Transferencias OperacaÁ„o/Sequencia"
+   Caption         =   "Transferencias Operaca√ß√£o/Sequencia"
    ClientHeight    =   4200
    ClientLeft      =   60
    ClientTop       =   345
@@ -60,7 +60,7 @@ Begin VB.Form ExpMS03
       _ExtentX        =   3731
       _ExtentY        =   661
       Picture         =   "expms03.frx":0B24
-      Caption         =   "Transferir ComposiÁ„o"
+      Caption         =   "Transferir Composi√ß√£o"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -311,7 +311,7 @@ Begin VB.Form ExpMS03
       Width           =   2655
    End
    Begin VB.Label Label1 
-      Caption         =   "Codigo Final Processo FabricaÁ„o"
+      Caption         =   "Codigo Final Processo Fabrica√ß√£o"
       ForeColor       =   &H00FF0000&
       Height          =   255
       Index           =   0
@@ -337,15 +337,15 @@ Private Sub CmdEscMs01_Click()
   ePASS01 = "MANA5"
   escms01.Show vbModal, Me
   If lRETU Then
-    Text(1).Text = eRETU01
+    tEXT(1).tEXT = eRETU01
   End If
 End Sub
 
 Private Sub CmdEscPfim_Click(Index As Integer)
   escpffim.Show vbModal, Me
   If lRETU Then
-    If Index = 0 Then Text(0).Text = eRETU01
-    If Index = 1 Then Text(2).Text = eRETU01
+    If Index = 0 Then tEXT(0).tEXT = eRETU01
+    If Index = 1 Then tEXT(2).tEXT = eRETU01
   End If
 End Sub
 
@@ -356,11 +356,13 @@ Private Sub CmdTransfer_Click()
   Dim dbPF As New ADODB.Connection
   Dim rsPF As New ADODB.Recordset
   Dim sqlPF, sqlMS03 As String
-  Dim lnrPF, x As Long
+  Dim lnrPF As Long
+  Dim x As Long
   Dim CON As ADODB.Connection
   Dim rs As ADODB.Recordset
   Dim aCAMPOS As Variant
-  Dim nBSEQ, nBSSQ As Long
+  Dim nBSEQ As Long
+  Dim nBSSQ As Long
   Dim nHORAS As Single
   Dim cOPCAO As String
   Dim cARQ As String
@@ -371,13 +373,13 @@ Private Sub CmdTransfer_Click()
   dbPF.ConnectionTimeout = 120
   dbPF.Open GeracArq(cARQ, , False)
 
-  If Text(2).Text = "" Then
+  If tEXT(2).tEXT = "" Then
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' AND NOT BLOQUEADO ORDER BY PF"
 
   Else
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' OR CODFINAL='" & Trim(Text(2).Text) & "'AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' OR CODFINAL='" & Trim(tEXT(2).tEXT) & "'AND NOT BLOQUEADO ORDER BY PF"
 
   End If
 
@@ -388,7 +390,7 @@ Private Sub CmdTransfer_Click()
     rsPF.Close
     Set dbPF = Nothing
     Set rsPF = Nothing
-    Alert "Produto Final n„o Disponivel"
+    Alert "Produto Final n√£o Disponivel"
     Exit Sub
   End If
 
@@ -411,7 +413,7 @@ Private Sub CmdTransfer_Click()
   CON.ConnectionTimeout = 120
   CON.Open "mana5emp"
 
-  sqlMS03 = "DELETE FROM MS03 where codigo='" & Text(1).Text & "'"
+  sqlMS03 = "DELETE FROM MS03 where codigo='" & tEXT(1).tEXT & "'"
   CON.Execute sqlMS03
 
   Set rs = New ADODB.Recordset
@@ -601,7 +603,7 @@ Private Sub GRAVAMS03(aCAMPOS As Variant, rs As Variant)
   sDESCRI = Tirace(sDESCRI)
 
   rs.AddNew
-  rs("codigo") = Text(1).Text
+  rs("codigo") = tEXT(1).tEXT
   rs("TIPOENT") = aCAMPOS(0)
   rs("CODCOMP") = aCAMPOS(1)
   rs("NOMECOMP") = sDESCRI
@@ -684,8 +686,10 @@ Private Sub XPButton1_Click()
   Dim aPFI() As Variant
   Dim dbPF As New ADODB.Connection
   Dim rsPF As New ADODB.Recordset
-  Dim sqlPF, sqlms06 As String
-  Dim lnrPF, x As Long
+  Dim sqlPF As String
+  Dim sqlms06 As String
+  Dim lnrPF As Long
+  Dim x As Long
   Dim CON As ADODB.Connection
   Dim rs As ADODB.Recordset
   Dim sDESCRI As String
@@ -696,13 +700,13 @@ Private Sub XPButton1_Click()
   dbPF.ConnectionTimeout = 120
   dbPF.Open GeracArq(cARQ, , False)
 
-  If Text(2) = "" Then
+  If tEXT(2) = "" Then
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' AND NOT BLOQUEADO ORDER BY PF"
 
   Else
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' OR CODFINAL='" & Trim(Text(2).Text) & "'AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' OR CODFINAL='" & Trim(tEXT(2).tEXT) & "'AND NOT BLOQUEADO ORDER BY PF"
 
   End If
 
@@ -716,7 +720,7 @@ Private Sub XPButton1_Click()
 
     Set dbPF = Nothing
     Set rsPF = Nothing
-    Alert "Produto Final n„o Disponivel"
+    Alert "Produto Final n√£o Disponivel"
     Exit Sub
 
   End If
@@ -742,7 +746,7 @@ Private Sub XPButton1_Click()
   CON.ConnectionTimeout = 120
   CON.Open "mana5emp"
 
-  sqlms06 = "DELETE FROM MS06 where codigo='" & Text(1).Text & "'"
+  sqlms06 = "DELETE FROM MS06 where codigo='" & tEXT(1).tEXT & "'"
 
   CON.Execute sqlms06
 
@@ -797,7 +801,7 @@ Private Sub XPButton1_Click()
         sDESCRI = LCase(sDESCRI)
         sDESCRI = Left(sDESCRI, 70)
         sDESCRI = Tirace(sDESCRI)
-        rs("codigo") = Text(1).Text
+        rs("codigo") = tEXT(1).tEXT
         rs("SEQ") = aPFI(0)
         rs("SSQ") = aPFI(1)
         rs("DESCRI") = sDESCRI
@@ -829,11 +833,11 @@ Private Sub XPButton1_Click()
       Wend
 
       rs.AddNew
-      rs("codigo") = Text(1).Text
+      rs("codigo") = tEXT(1).tEXT
       rs("SEQ") = aPFI(0)
       rs("SSQ") = 99
       rs("TIPFEC") = "0"
-      rs("CODFEC") = Text(0).Text
+      rs("CODFEC") = tEXT(0).tEXT
       rs("DESCRI") = "Final"
       rs.Update
 

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escFLX 
    Caption         =   "Selecione Simbolo Desejado"
    ClientHeight    =   6090
@@ -144,8 +144,6 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Form_Load()
-'Dim X As Integer
-'Dim cLETRA As String
   CenterFormToScreen Me
   cARQPF = PegPath("PATH", "PF")
   aORDEM = Array("NUMERO", "Descricao")
@@ -156,10 +154,6 @@ Private Sub Form_Load()
   FilRelat
   TXTFIELDS(0).Font = "isoqsymbol"
   lRETU = False
-  '    For X = 32 To 96
-  '      cLETRA = Chr(X)
-  '      IncluiSQL cARQPF, "SELECT * FROM CFLX WHERE NUMERO=" & X, 2, Array("NUMERO", "LETRA"), Array(X, cLETRA), True, False
-  '    Next X
 End Sub
 
 Private Sub grid_Click()
@@ -184,19 +178,6 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
   End If
 End Sub
 
-'Private Sub Grid_SelChange()
-
-'    With Grid
-'        If .Rows > 2 Then
-'            .Col = .Cols - 1
-'            .ColSel = 0
-'            .TopRow = .Row
-'        End If
-'    End With
-'    grid_Click
-
-'End Sub
-
 Private Sub Form_Unload(Cancel As Integer)
   Screen.MousePointer = vbDefault
 
@@ -204,7 +185,6 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
   Dim sButton As String
-  'Dim cTMP As String
   Dim nTMP As Integer
 
   sButton = Button

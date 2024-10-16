@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escME04 
    Caption         =   "Selecione o Item  desejado:"
    ClientHeight    =   6090
@@ -123,19 +123,9 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
   End If
 End Sub
 
-'Private Sub Grid_SelChange()
-'    With Grid
-'        If .Rows > 2 Then
-'            .Col = .Cols - 1
-'            .ColSel = 0
-'            .TopRow = .Row
-'        End If
-'    End With
-'End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
   Dim sButton As String
-  'Dim CLINHA As String
   Dim cARQTMP As String
   Dim sSQL As String
   On Error Resume Next

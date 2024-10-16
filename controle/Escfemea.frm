@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escfemea 
    Caption         =   "Selecione o Fmea  desejado:"
    ClientHeight    =   5775
@@ -156,7 +156,8 @@ Private Sub cdmrevperiodica()
 End Sub
 
 Private Sub CmdLiberar_Click()
-  Dim nTMPELA
+  Dim nTMPELA As Integer
+  
   Grid.Col = 6
   If IsDate(Grid) Then
     If Not MDG("Ja Liberada - Liberar Novamente", "Confirme Liberacao") Then
@@ -166,8 +167,7 @@ Private Sub CmdLiberar_Click()
   Grid.Col = 0
   nPF = Grid
 
-  'nTMPELA = PegUltSQL(Sdb, "SELECT FEMEAEF FROM PF WHERE PF=" & nPF, "FEMEAEF", 0)
-  nTMPELA = PegCampoSQLADO(Sdb, "SELECT FEMEAEF FROM PF WHERE PF=" & nPF, "", 0)
+  nTMPELA = FixInt(PegCampoSQLADO(Sdb, "SELECT FEMEAEF FROM PF WHERE PF=" & nPF, "", 0))
   If nTMPELA = zIDFOLHA Then
     Alert ("Voce ja e o Elaborador")
     Exit Sub

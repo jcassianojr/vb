@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escPPAP 
    Caption         =   "Selecione o Processo  desejado:"
    ClientHeight    =   6135
@@ -21,7 +21,6 @@ Begin VB.Form escPPAP
       Width           =   6855
       _ExtentX        =   12091
       _ExtentY        =   8916
-      _Version        =   393216
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
@@ -83,8 +82,6 @@ Private Sub CmdEditar()
 End Sub
 
 Private Sub CmdExcluir()
-'Dim eRETU As Variant
-'Dim cdb As String
   Dim sSQL As String
   Grid.Col = 0
   nPPAP = FixInt(Grid)
