@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escCLI 
    Caption         =   "Selecione o Cliente Desejado"
    ClientHeight    =   6390
@@ -36,7 +36,6 @@ Begin VB.Form escCLI
       Width           =   7155
       _ExtentX        =   12621
       _ExtentY        =   10186
-      _Version        =   393216
    End
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   405
@@ -139,19 +138,9 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
   End If
 End Sub
 
-'Private Sub Grid_SelChange()
-'    With Grid
-'        If .Rows > 2 Then
-'            .Col = .Cols - 1
-'            .ColSel = 0
-'            .TopRow = .Row
-'        End If
-'    End With
-'End Sub
-
 Private Sub incluir_Click()
   Dim cNOME As String
-  cNOME = InputBox("Digite o Nome", "Inclusão Cliente", " ")
+  cNOME = InputBox("Digite o Nome", "Inclusao Cliente", " ")
   cNOME = Left$(cNOME, 50)
   nPF = FixInt(PegMAXSQL(cARQDES, "cliente", "cliente", 0)) + 1
   If IncluiSQL(cARQDES, "SELECT * FROM CLieNTE WHERE CLIENTE=" & nPF, 2, Array("CLIENTE", "CLINOME"), Array(nPF, cNOME), True, False) Then

@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escpffim 
    Caption         =   "Selecione o produto final  desejado:"
    ClientHeight    =   5775
@@ -21,7 +21,6 @@ Begin VB.Form escpffim
       Width           =   7215
       _ExtentX        =   12726
       _ExtentY        =   9128
-      _Version        =   393216
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
@@ -136,16 +135,6 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
   End If
 
 End Sub
-
-'Private Sub Grid_SelChange()
-'    With Grid
-'       If .Rows > 2 Then
-'          .Col = .Cols - 1
-'         .ColSel = 0
-'        .TopRow = .Row
-'   End If
-' End With
-'End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
   Dim sButton As String
