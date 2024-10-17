@@ -130,7 +130,7 @@ Begin VB.Form FrmCrw
       Begin VB.Label Label1 
          Alignment       =   2  'Center
          BackColor       =   &H00C0E0FF&
-         Caption         =   "Label1 - Nome do Relatório que Estamos Imprimindo"
+         Caption         =   "Label1 - Nome do RelatÃ³rio que Estamos Imprimindo"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   9.75
@@ -468,7 +468,7 @@ Begin VB.Form FrmCrw
       _ExtentX        =   3096
       _ExtentY        =   873
       Picture         =   "FRMCRW.frx":467A
-      Caption         =   "Competência "
+      Caption         =   "CompetÃªncia "
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -582,7 +582,7 @@ Private Sub CmdEmail1_Click()
 End Sub
 
 Private Sub CmdExport_Click()
-  Alert ("Em Implantaçao")
+  Alert ("Em ImplantaÃ§ao")
 End Sub
 
 Private Sub CmdFiltro_Click()
@@ -747,7 +747,8 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-  Dim x, nARQUIVOS As Integer
+  Dim x As Integer
+  Dim nARQUIVOS As Integer
   Dim cFILTRO As String
   ''Configura Help
   CenterFormToScreen Me
@@ -859,7 +860,8 @@ Private Sub imprimir_Click()
 End Sub
 
 Private Sub Salvar_Click(Index As Integer)
-  Dim cARQUIVO, cEXTENSAO As String
+  Dim cARQUIVO As String
+  Dim cEXTENSAO As String
   Dim sFILTER As String
 
   If CmdEmail.Value = 1 Then

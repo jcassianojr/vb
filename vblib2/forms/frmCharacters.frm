@@ -131,7 +131,6 @@ Private Sub Form_Load()
     lstList.AddItem Chr$(i)
   Next
   lstList.ListIndex = 0
-5:
 End Sub
 
 Private Sub Form_Resize()

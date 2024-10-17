@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form FrmFemeaPad 
    Caption         =   "Femea Padrao"
    ClientHeight    =   7065
@@ -34,6 +34,7 @@ Begin VB.Form FrmFemeaPad
       EndProperty
       TabsPerRow      =   4
       TabHeight       =   520
+      ControlVersion  =   9
       TabCaption(0)   =   "Padrao"
       Tab(0).ControlCount=   53
       Tab(0).Control(0)=   "barra"
@@ -569,7 +570,6 @@ Begin VB.Form FrmFemeaPad
          Width           =   7995
          _ExtentX        =   14102
          _ExtentY        =   2037
-         _Version        =   393216
       End
       Begin VBFLXGRD18.VBFlexGrid GRIDFAL 
          Height          =   1155
@@ -579,7 +579,6 @@ Begin VB.Form FrmFemeaPad
          Width           =   7995
          _ExtentX        =   14102
          _ExtentY        =   2037
-         _Version        =   393216
       End
       Begin VBFLXGRD18.VBFlexGrid gridefe 
          Height          =   1155
@@ -589,7 +588,6 @@ Begin VB.Form FrmFemeaPad
          Width           =   7995
          _ExtentX        =   14102
          _ExtentY        =   2037
-         _Version        =   393216
       End
       Begin VBFLXGRD18.VBFlexGrid gridcau 
          Height          =   1035
@@ -599,7 +597,6 @@ Begin VB.Form FrmFemeaPad
          Width           =   7995
          _ExtentX        =   14102
          _ExtentY        =   1826
-         _Version        =   393216
       End
       Begin VBFLXGRD18.VBFlexGrid Gridfemprecad 
          Height          =   5895
@@ -610,7 +607,6 @@ Begin VB.Form FrmFemeaPad
          Width           =   8175
          _ExtentX        =   14420
          _ExtentY        =   10398
-         _Version        =   393216
       End
       Begin VBFLXGRD18.VBFlexGrid GridPadPF 
          Height          =   5235
@@ -620,7 +616,6 @@ Begin VB.Form FrmFemeaPad
          Width           =   2595
          _ExtentX        =   4577
          _ExtentY        =   9234
-         _Version        =   393216
       End
       Begin VBFLXGRD18.VBFlexGrid gridpf 
          Height          =   5355
@@ -630,7 +625,6 @@ Begin VB.Form FrmFemeaPad
          Width           =   6195
          _ExtentX        =   10927
          _ExtentY        =   9446
-         _Version        =   393216
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1035
@@ -640,7 +634,6 @@ Begin VB.Form FrmFemeaPad
          Width           =   7995
          _ExtentX        =   14102
          _ExtentY        =   1826
-         _Version        =   393216
       End
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   600
@@ -664,7 +657,6 @@ Begin VB.Form FrmFemeaPad
          Width           =   7455
          _ExtentX        =   13150
          _ExtentY        =   9869
-         _Version        =   393216
       End
       Begin VB.Label dizfal 
          ForeColor       =   &H000000FF&
@@ -685,6 +677,7 @@ Begin VB.Form FrmFemeaPad
          Width           =   5175
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Siginificativa"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -695,6 +688,7 @@ Begin VB.Form FrmFemeaPad
          Width           =   975
       End
       Begin VB.Label Label1 
+         BackStyle       =   0  'Transparent
          Caption         =   "Funcao do Processo Requisitos"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -704,6 +698,7 @@ Begin VB.Form FrmFemeaPad
          Width           =   2415
       End
       Begin VB.Label Label2 
+         BackStyle       =   0  'Transparent
          Caption         =   "Modo de Falha Potencial"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -713,6 +708,7 @@ Begin VB.Form FrmFemeaPad
          Width           =   2175
       End
       Begin VB.Label Label3 
+         BackStyle       =   0  'Transparent
          Caption         =   "Efeito Potencial da Falha"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -722,6 +718,7 @@ Begin VB.Form FrmFemeaPad
          Width           =   1935
       End
       Begin VB.Label Label4 
+         BackStyle       =   0  'Transparent
          Caption         =   "Causa(s) Mecanismo(s) Potencial(ais)"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -731,6 +728,7 @@ Begin VB.Form FrmFemeaPad
          Width           =   2775
       End
       Begin VB.Label dizpro 
+         BackStyle       =   0  'Transparent
          ForeColor       =   &H000000FF&
          Height          =   255
          Index           =   0
@@ -740,6 +738,7 @@ Begin VB.Form FrmFemeaPad
          Width           =   5535
       End
       Begin VB.Label dizfal 
+         BackStyle       =   0  'Transparent
          ForeColor       =   &H000000FF&
          Height          =   255
          Index           =   0
@@ -749,6 +748,7 @@ Begin VB.Form FrmFemeaPad
          Width           =   5655
       End
       Begin VB.Label dizefe 
+         BackStyle       =   0  'Transparent
          ForeColor       =   &H000000FF&
          Height          =   255
          Left            =   2400
@@ -757,6 +757,7 @@ Begin VB.Form FrmFemeaPad
          Width           =   5895
       End
       Begin VB.Label dizcau 
+         BackStyle       =   0  'Transparent
          ForeColor       =   &H000000FF&
          Height          =   255
          Left            =   3240
@@ -1081,18 +1082,18 @@ Private Sub CmdExpCau_Click(Index As Integer)
   Dim RSTAB As ADODB.Recordset
   Dim RSTA2 As ADODB.Recordset
   Dim RSTA3 As ADODB.Recordset
-  Dim nPRODES
-  Dim nFALDES
-  Dim nEFEDES
+  Dim nPRODES As Integer
+  Dim nFALDES As Integer
+  Dim nEFEDES As Integer
   Dim nCAUDES As Integer
-  Dim cSQLORI
-  Dim cSQL2
-  Dim cSQL3
-  Dim cDIZPRO
-  Dim cDIZFAL
-  Dim cDIZEFE
+  Dim cSQLORI As String
+  Dim cSQL2 As String
+  Dim cSQL3 As String
+  Dim cDIZPRO As String
+  Dim cDIZFAL As String
+  Dim cDIZEFE As String
   Dim cDIZEXP As String
-  Dim cSQLPFPAD
+  Dim cSQLPFPAD As String
   Dim oRSPFPAD As New ADODB.Recordset
   On Error Resume Next
 
@@ -1317,8 +1318,8 @@ End Sub
 
 Private Sub CmdMacSig_Click(Index As Integer)
 
-  Dim cSQL
-  Dim cSQL2
+  Dim cSQL  As String
+  Dim cSQL2  As String
   Dim cSIG As String
   cSIG = TXTFIELDS(24)
 
@@ -1539,7 +1540,7 @@ End Sub
 
 Private Sub CmdRem_Click(Index As Integer)
 
-  Dim cDIZ
+  Dim cDIZ  As String
   Dim cSQL As String
 
   If Not checkval(Index) Then
@@ -1746,7 +1747,7 @@ Private Sub CMDSIG_Click(Index As Integer)
 End Sub
 
 Private Sub Command1_Click()
-  Dim nNUM
+  Dim nNUM As Integer
   Dim cDIZ As String
   gridcau.Col = 3
   nNUM = FixInt(gridcau)
@@ -1958,8 +1959,8 @@ End Sub
 
 Private Sub Command6_Click()
 
-  Dim nROWS
-  Dim x
+  Dim nROWS As Integer
+  Dim x As Integer
   Dim nNUM As Integer
 
   If Not MDG("Revisar Todas as Causas") Then

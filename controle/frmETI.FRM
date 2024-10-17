@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmETI 
    Caption         =   "Cadastro ETI"
    ClientHeight    =   6285
@@ -444,6 +444,7 @@ Private Sub Filgridrev()
   MontaGridFast gridrev, 4, Array(400, 400, 400, 1200), Array("PF", "REV", "Tipo", "DATA"), _
                 Array("PF", "REVISAO", "TIPO", "DATA"), cARQPF, sSQL
 End Sub
+
 
 Private Sub Filgridrevi()
   Dim sSQL As String

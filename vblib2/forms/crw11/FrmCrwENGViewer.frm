@@ -64,6 +64,7 @@ Private Sub Form_Load()
   Me.Width = Screen.Width - 1200
   Me.Top = 100
   Me.Left = 100
+  
 
   Set MyRpt = MyApp.OpenReport(cARQRTF, 1)
   CRViewer1.ReportSource = MyRpt

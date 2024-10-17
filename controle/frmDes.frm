@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmDes 
    Caption         =   "Controle de Desenho"
    ClientHeight    =   6135
@@ -21,6 +21,7 @@ Begin VB.Form frmDes
       Width           =   10455
       _ExtentX        =   18441
       _ExtentY        =   7223
+      ControlJustAdded=   0   'False
       Tabs            =   2
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -33,6 +34,7 @@ Begin VB.Form frmDes
       EndProperty
       TabsPerRow      =   2
       TabHeight       =   520
+      ControlVersion  =   9
       TabCaption(0)   =   "Atual"
       Tab(0).ControlCount=   6
       Tab(0).Control(0)=   "arquivar"
@@ -82,7 +84,6 @@ Begin VB.Form frmDes
          Width           =   8175
          _ExtentX        =   14420
          _ExtentY        =   5530
-         _Version        =   393216
       End
       Begin VBFLXGRD18.VBFlexGrid GridArq 
          Height          =   2535
@@ -93,7 +94,6 @@ Begin VB.Form frmDes
          Width           =   8175
          _ExtentX        =   14420
          _ExtentY        =   4471
-         _Version        =   393216
       End
       Begin XPControls.XPButton novo 
          Height          =   435
@@ -473,6 +473,7 @@ Private Sub excluir_Click()
     Filgrid "atual", GridAtual
   End If
 End Sub
+
 
 Private Sub Filgrid(cARQ As String, oGRID As Variant)
   Dim cSQL As String

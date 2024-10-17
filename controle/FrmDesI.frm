@@ -220,7 +220,7 @@ Begin VB.Form FrmDesI
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Observação"
+      Caption         =   "ObservaÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   6
@@ -240,7 +240,7 @@ Begin VB.Form FrmDesI
       Width           =   615
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Revisão"
+      Caption         =   "RevisÃ£o"
       ForeColor       =   &H00C00000&
       Height          =   195
       Index           =   1
@@ -260,7 +260,7 @@ Begin VB.Form FrmDesI
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Descrição"
+      Caption         =   "DescriÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   3
@@ -295,11 +295,12 @@ Dim aPAD As Variant
 Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
+
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 4
-      aVAL(iLOOP) = txtfields(iLOOP)
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     aVAL(8) = DTPicker1.Value
     aVAL(9) = DTPicker2.Value
@@ -332,7 +333,7 @@ Private Sub Form_Load()
   aPAD = Array(cCONJUNTO, cDESENHO, 0, 0, 0, "", "", "", Date, Date, True)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 4
-    txtfields(iLOOP) = aVAL(iLOOP)
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   If IsDate(aVAL(8)) Then
     DTPicker1.Value = aVAL(8)

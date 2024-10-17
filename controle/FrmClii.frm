@@ -53,7 +53,7 @@ Begin VB.Form FrmClii
       Left            =   1920
       MaxLength       =   40
       TabIndex        =   1
-      ToolTipText     =   "Descriçao do Codigo"
+      ToolTipText     =   "DescriÃ§ao do Codigo"
       Top             =   840
       Width           =   5115
    End
@@ -62,7 +62,7 @@ Begin VB.Form FrmClii
       Height          =   195
       Left            =   2760
       TabIndex        =   0
-      ToolTipText     =   "Se A Peça Esta Ativa"
+      ToolTipText     =   "Se A PeÃ§a Esta Ativa"
       Top             =   240
       Width           =   1095
    End
@@ -127,7 +127,7 @@ Begin VB.Form FrmClii
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Código:"
+      Caption         =   "CÃ³digo:"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   5
@@ -151,6 +151,7 @@ Dim aCAM As Variant
 Dim aPAD As Variant
 Dim nCAMPOS As Integer
 Dim iLOOP As Integer
+
 
 Private Sub cmdClose_Click()
   For iLOOP = 0 To nCAMPOS - 2

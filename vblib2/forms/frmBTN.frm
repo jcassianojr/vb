@@ -17,7 +17,7 @@ Begin VB.Form frmBTN
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.CheckBox Check2 
-      Caption         =   "Liberar  Bot„o para todos Usu·rios"
+      Caption         =   "Liberar  Bot√£o para todos Usu√°rios"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -181,7 +181,7 @@ Begin VB.Form frmBTN
       Value           =   1
    End
    Begin VB.Label Label1 
-      Caption         =   "Nome do Bot„o"
+      Caption         =   "Nome do Bot√£o"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -200,7 +200,7 @@ Begin VB.Form frmBTN
       Width           =   1965
    End
    Begin VB.Label Label1 
-      Caption         =   "ToolTip => o que deve aparecer quando o mouse fica sobre o bot„o"
+      Caption         =   "ToolTip => o que deve aparecer quando o mouse fica sobre o bot√£o"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -220,7 +220,7 @@ Begin VB.Form frmBTN
    End
    Begin VB.Label Label1 
       Alignment       =   2  'Center
-      Caption         =   "Õcone"
+      Caption         =   "√çcone"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -240,7 +240,7 @@ Begin VB.Form frmBTN
    End
    Begin VB.Label Label1 
       Alignment       =   2  'Center
-      Caption         =   "Õndice"
+      Caption         =   "√çndice"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -314,9 +314,10 @@ Dim aPAD As Variant
 Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
+
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraÁÙes") Then
+  If MDG("Gravar altera√ß√¥es") Then
     'ajustar depois para nao precisar txtfiels 3 4
     txtFields(2) = indice.Value
     txtFields(4) = icone.Value

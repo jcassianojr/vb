@@ -4997,11 +4997,12 @@ Dim aPAD As Variant
 Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
+
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = TXTFIELDS(iLOOP)
+      aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
   End If
@@ -5031,12 +5032,12 @@ Private Sub Form_Load()
   aPAD = Array("", "", 32)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXTFIELDS(iLOOP) = aVAL(iLOOP)
+    txtFields(iLOOP) = aVAL(iLOOP)
   Next iLOOP
-  TXTFIELDS(0).Font = "isoqsymbol"
+  txtFields(0).Font = "isoqsymbol"
   For iLOOP = 0 To 255
     letra(iLOOP).Font = "isoqsymbol"
-    letra(iLOOP).tEXT = Chr(iLOOP)
+    letra(iLOOP).Text = Chr(iLOOP)
     letra(iLOOP).Locked = True
   Next iLOOP
 End Sub
@@ -5051,8 +5052,8 @@ Private Sub letra_Click(Index As Integer)
 End Sub
 
 Private Sub TXTFIELDS_Change(Index As Integer)
-  If Len(TXTFIELDS(0).tEXT) > 0 Then
-    TXTFIELDS(2).tEXT = Asc(TXTFIELDS(0).tEXT)
+  If Len(txtFields(0).Text) > 0 Then
+    txtFields(2).Text = Asc(txtFields(0).Text)
   End If
 End Sub
 

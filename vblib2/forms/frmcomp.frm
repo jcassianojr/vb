@@ -178,7 +178,7 @@ Begin VB.Form frmcomp
    End
    Begin VB.Label Label1 
       Alignment       =   2  'Center
-      Caption         =   "Mês"
+      Caption         =   "MÃªs"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -222,6 +222,7 @@ End Sub
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
    TeclaEnter (KeyCode)
 End Sub
+
 
 Private Sub Form_Load()
    CenterFormToScreen Me

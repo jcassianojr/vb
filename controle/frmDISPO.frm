@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmDISPO 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MENU"
@@ -66,6 +66,7 @@ Begin VB.Form frmDISPO
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
+      ControlVersion  =   9
       TabCaption(0)   =   "Colaborador Elabarador"
       Tab(0).ControlCount=   12
       Tab(0).Control(0)=   "Duplicar(13)"
@@ -260,7 +261,6 @@ Begin VB.Form frmDISPO
          Width           =   7515
          _ExtentX        =   13256
          _ExtentY        =   3201
-         _Version        =   393216
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1575
@@ -271,7 +271,6 @@ Begin VB.Form frmDISPO
          Width           =   7515
          _ExtentX        =   13256
          _ExtentY        =   2778
-         _Version        =   393216
       End
       Begin VBFLXGRD18.VBFlexGrid GridPla 
          Height          =   2895
@@ -281,7 +280,6 @@ Begin VB.Form frmDISPO
          Width           =   7815
          _ExtentX        =   13785
          _ExtentY        =   5106
-         _Version        =   393216
       End
       Begin XPControls.XPButton ComMotInc 
          Height          =   435
@@ -711,13 +709,15 @@ Private Sub Command7_Click()
 End Sub
 
 Private Sub PegCodigoDescricaoPf()
-  Dim sSQL, aRETU, sARQ
+  Dim sSQL As String
+  Dim aRETU As Variant
+  Dim sARQ As String
   sARQ = PegPath("PATH", "PF")
   sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
   aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
   If lRETU Then
-    TxtCodigo = aRETU(0)
-    TxtNome = aRETU(1)
+    txtcodigo = aRETU(0)
+    txtNome = aRETU(1)
   End If
 End Sub
 

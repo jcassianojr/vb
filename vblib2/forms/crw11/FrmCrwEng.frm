@@ -456,7 +456,7 @@ Begin VB.Form FrmCrwENG
       _ExtentX        =   3096
       _ExtentY        =   661
       Picture         =   "FrmCrwEng.frx":447A
-      Caption         =   "Competência "
+      Caption         =   "CompetÃªncia "
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -512,7 +512,7 @@ Const nFORMID = 1069
 Const cFORMID = "Imprimir Relatorios Crystal-Engine 10"
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If FileExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
@@ -524,7 +524,7 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.Text, "RTF") Or IsExtensao(TxtArquivo.Text, "TXT") Then
+  If IsExtensao(TxtArquivo.tEXT, "RTF") Or IsExtensao(TxtArquivo.tEXT, "TXT") Then
     cARQRTF = TxtArquivo
     FrmRTf.Show
   End If
@@ -573,7 +573,7 @@ Private Sub CmdFiltro_Click()
     FrmFiltro.Show vbModal, Me
     FILTRO = eRETU01
   End If
-  cFILTRO = CStr(FILTRO.Text)
+  cFILTRO = CStr(FILTRO.tEXT)
 
   If Len(cFILTRO) > 0 Then
     CrystalReport.RecordSelectionFormula = cFILTRO
@@ -615,7 +615,7 @@ Private Sub CmdMudaFec_Click()
 End Sub
 
 Private Sub CmdPreview_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If Not FileExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -626,7 +626,7 @@ Private Sub CmdPreview_Click()
   If IsExtensao(cARQRTF, "PDF") Then
     ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
   End If
-  If IsExtensao(TxtArquivo.Text, "HTML") Then
+  If IsExtensao(TxtArquivo.tEXT, "HTML") Then
      ePASS01 = Array("Navegador Externo", "Preview Interno", "Navegador Interno")
     escOrdem.Show vbModal, Me
     eRETU01 = FixInt(eRETU01, 0)
@@ -644,7 +644,7 @@ Private Sub CmdPreview_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  '/ rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.Text = ""
+    RichTextBox1.tEXT = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -719,8 +719,9 @@ Private Sub Encerrar_Click()
 End Sub
 
 Private Sub Form_Load()
-  Dim x, nARQUIVOS As Integer
-  Dim cFILTRO
+  Dim x As Integer
+  Dim nARQUIVOS As Integer
+  Dim cFILTRO As String
   CenterFormToScreen Me
   TxtArquivo = zUSER & Format(Now, "_DDMMYYYY_HHMMSS") & ".TXT"
   ''Configura Help
@@ -736,7 +737,7 @@ Private Sub Form_Load()
     TxtComp.Visible = True
     CmdMudaFec.Visible = True
     CmdMudaFec.Enabled = True
-    TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
+    TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
   End If
 
   If Len(aRELCFG(6)) = 0 Then
@@ -875,7 +876,7 @@ Private Sub Salvar_Click(Index As Integer)
 
 
   sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-  cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
+  cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
 
 
 

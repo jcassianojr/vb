@@ -126,7 +126,7 @@ Begin VB.Form frmDica
    End
    Begin VB.Label lblTitulo 
       BackColor       =   &H80000009&
-      Caption         =   "Você sabia..."
+      Caption         =   "VocÃª sabia..."
       BeginProperty Font 
          Name            =   "Times New Roman"
          Size            =   14.25
@@ -172,6 +172,7 @@ Private Sub cmdOK_Click()
    x = WritePrivateProfileString("CITACAO", zUSER, sExibir, App.Path + "\" & App.EXEName & ".INI")
    Unload Me
 End Sub
+
 
 Private Sub PegMensagem()
    Dim cSQL As String
