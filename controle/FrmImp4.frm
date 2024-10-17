@@ -297,16 +297,17 @@ Private Sub importar()
   Dim cORIGEM As String
   Dim cDUPSQL As String
 
+
   On Error Resume Next
 
-  nPFORI = Val(tEXT(0))
+  nPFORI = Val(text(0))
 
-  'Sequencia Duplicaçao
+  'Sequencia DuplicaÃ§ao
   cDUPSQL = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
 
 
   'sql Arquivo Origem
-  sSQL = "select * from PFCMS03 WHERE PF=" & nPFORI & " AND CODCOMP='" & tEXT(1) & "'"
+  sSQL = "select * from PFCMS03 WHERE PF=" & nPFORI & " AND CODCOMP='" & text(1) & "'"
 
   If Recebimento.Value = Checked Then
     Select Case mes
@@ -351,7 +352,7 @@ End Sub
 Private Sub CmdescPF_Click()
   escpf.Show vbModal, Me
   If lRETU Then
-    tEXT(0).tEXT = eRETU01
+    text(0).text = eRETU01
   End If
 
 End Sub

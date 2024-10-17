@@ -152,6 +152,7 @@ Private Sub Command2_Click()
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
+  
   TeclaEnter KeyCode
 End Sub
 Private Sub Form_Load()

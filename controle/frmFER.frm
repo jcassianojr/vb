@@ -363,7 +363,7 @@ Begin VB.Form frmFER
          Width           =   1995
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -381,7 +381,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -399,7 +399,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -417,7 +417,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -435,7 +435,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -453,7 +453,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -471,7 +471,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -489,7 +489,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -507,7 +507,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -525,7 +525,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -543,7 +543,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -561,7 +561,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -579,7 +579,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -597,7 +597,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -615,7 +615,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -633,7 +633,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -651,7 +651,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -669,7 +669,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -687,7 +687,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -705,7 +705,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -723,7 +723,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -741,7 +741,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -759,7 +759,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -777,7 +777,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -795,7 +795,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -813,7 +813,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -831,7 +831,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -849,7 +849,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -867,7 +867,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -885,7 +885,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -903,7 +903,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -921,7 +921,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -939,7 +939,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -957,7 +957,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -975,7 +975,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -993,7 +993,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1011,7 +1011,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1029,7 +1029,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1047,7 +1047,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1065,7 +1065,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1083,7 +1083,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1101,7 +1101,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1119,7 +1119,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1137,7 +1137,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1155,7 +1155,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1173,7 +1173,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1191,7 +1191,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1209,7 +1209,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1227,7 +1227,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1245,7 +1245,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1263,7 +1263,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1281,7 +1281,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1299,7 +1299,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1317,7 +1317,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1335,7 +1335,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1353,7 +1353,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1371,7 +1371,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1389,7 +1389,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1407,7 +1407,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1425,7 +1425,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1443,7 +1443,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1461,7 +1461,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1479,7 +1479,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1497,7 +1497,7 @@ Begin VB.Form frmFER
          Width           =   255
       End
       Begin VB.CommandButton esc1 
-         Caption         =   "ก"
+         Caption         =   "ยก"
          BeginProperty Font 
             Name            =   "Wingdings"
             Size            =   8.25
@@ -1607,7 +1607,7 @@ Begin VB.Form frmFER
          Width           =   2655
       End
       Begin VB.Label Label 
-         Caption         =   "Horas Manuten็ใo Preventiva"
+         Caption         =   "Horas Manutenรงรฃo Preventiva"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   3
@@ -1617,7 +1617,7 @@ Begin VB.Form frmFER
          Width           =   2655
       End
       Begin VB.Label Label 
-         Caption         =   "Quantidade Manuten็ใo Preventiva"
+         Caption         =   "Quantidade Manutenรงรฃo Preventiva"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   2
@@ -1883,9 +1883,9 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar altera็๔es") Then
+  If MDG("Gravar alteraรงรดes") Then
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = txtFields(iLOOP)
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
   End If
@@ -1894,36 +1894,36 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub cmdFOTO_Click()
-  zgrp = txtcodigo.text
+  zgrp = TxtCodigo.text
   iImage = 3
   cARQRTF = PegPath("PATH", "IMGFER")
   Load frmIMAGENS
-  frmIMAGENS.txtFields(0).Enabled = False
+  frmIMAGENS.TXTFIELDS(0).Enabled = False
   frmIMAGENS.Escolher(0).Visible = False
   frmIMAGENS.Show vbModal, Me
 End Sub
 
 Private Sub Command20_Click()
-  Dim x
+  Dim x As Integer
   Dim cTEMP As String
   If Not MDG("Trocar Tipo Almofada") Then
     Exit Sub
   End If
-  If txtFields(6).text = "6" Then
-    txtFields(6).text = "8"
+  If TXTFIELDS(6).text = "6" Then
+    TXTFIELDS(6).text = "8"
   Else
-    txtFields(6).text = "6"
+    TXTFIELDS(6).text = "6"
   End If
   For x = 1 To 8
-    If txtFields(6).text = "6" Then
-      cTEMP = String(6, "ก") + Space(2)
+    If TXTFIELDS(6).text = "6" Then
+      cTEMP = String(6, "ยก") + Space(2)
       If x >= 5 Then
         cTEMP = Space(8)
       End If
     Else
-      cTEMP = String(8, "ก")
+      cTEMP = String(8, "ยก")
     End If
-    txtFields(10 + x).text = cTEMP
+    TXTFIELDS(10 + x).text = cTEMP
   Next
 End Sub
 
@@ -1932,12 +1932,12 @@ Private Sub Command4_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim nNUMERO As Long
-  nNUMERO = FixInt(txtFields(7), 0)
+  nNUMERO = FixInt(TXTFIELDS(7), 0)
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
   aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
   If lRETU Then
-    txtFields(8) = aRETU(0)
+    TXTFIELDS(8) = aRETU(0)
   End If
 End Sub
 
@@ -1950,8 +1950,8 @@ Private Sub Encerrar_Click()
 End Sub
 
 Private Sub esc1_Click(Index As Integer)
-  Dim linha
-  Dim coluna
+  Dim linha As Integer
+  Dim coluna As Integer
   Dim cTEMP As String
   Dim cDIG As String
   Dim cGRV As String
@@ -1959,18 +1959,18 @@ Private Sub esc1_Click(Index As Integer)
   coluna = (Index + 8) - (linha * 8)
   'Alert coluna
   'ALERT LINHA
-  If txtFields(6).text = "6" And linha > 4 Then
+  If TXTFIELDS(6).text = "6" And linha > 4 Then
     Alert ("Linha Incorreta para Formato 4x6")
     Exit Sub
   End If
-  If txtFields(6).text = "6" And coluna > 6 Then
+  If TXTFIELDS(6).text = "6" And coluna > 6 Then
     Alert ("Coluna Incorreta para Formato 4x6")
     Exit Sub
   End If
-  cTEMP = txtFields(10 + linha).text
+  cTEMP = TXTFIELDS(10 + linha).text
   cDIG = Mid(cTEMP, coluna, 1)
   If cDIG = "l" Then
-    cDIG = "ก"
+    cDIG = "ยก"
   Else
     cDIG = "l"
   End If
@@ -1982,8 +1982,8 @@ Private Sub esc1_Click(Index As Integer)
   Case Else
     cGRV = Mid(cTEMP, 1, coluna - 1) + cDIG + Mid(cTEMP, coluna + 1)
   End Select
-  txtFields(10 + linha).text = cGRV
-  txtFields(10 + linha).Refresh
+  TXTFIELDS(10 + linha).text = cGRV
+  TXTFIELDS(10 + linha).Refresh
 End Sub
 
 Private Sub ESCCLI_Click(Index As Integer)
@@ -2006,8 +2006,8 @@ Private Sub ESCCLI_Click(Index As Integer)
 
   If lRETU Then
 
-    txtFields(7) = eRETU01
-    txtFields(6) = eRETU03
+    TXTFIELDS(7) = eRETU01
+    TXTFIELDS(6) = eRETU03
 
   End If
 
@@ -2024,9 +2024,9 @@ Private Sub Form_Load()
   cSQL = cSQL & " FERRAM , QTDEBASE, HRBAS, VDBAS, VDHBAS, COGCLI, CLIENTE, ESQTIP, USADEMI, USADISP, PRATILE, OBST01,"
   cSQL = cSQL & " ESQL01 , ESQL02, ESQL03, ESQL04, ESQL05, ESQL06, ESQL07, ESQL08"
   cSQL = cSQL & " FROM FERRAM WHERE FERRAM='" & LTrim(RTrim(ePASS01)) & "'"
-  txtcodigo.text = ePASS01
+  TxtCodigo.text = ePASS01
   TxtNumero.text = ePASS02
-  txtNome.text = ePASS03
+  TxtNome.text = ePASS03
   nCAMPOS = 18
   aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "COGCLI", "CLIENTE", "ESQTIP", "USADEMI", "USADISP", "PRATILE", "OBST01", _
                "ESQL01", "ESQL02", "ESQL03", "ESQL04", "ESQL05", "ESQL06", "ESQL07", "ESQL08")
@@ -2036,7 +2036,7 @@ Private Sub Form_Load()
                "", "", "", "", "", "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    txtFields(iLOOP) = aVAL(iLOOP)
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
   Next iLOOP
 End Sub
 

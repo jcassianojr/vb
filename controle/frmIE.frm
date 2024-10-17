@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmIE 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "IE"
@@ -617,7 +617,6 @@ Begin VB.Form frmIE
          Width           =   7515
          _ExtentX        =   13256
          _ExtentY        =   3201
-         _Version        =   393216
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1575
@@ -628,7 +627,6 @@ Begin VB.Form frmIE
          Width           =   7515
          _ExtentX        =   13256
          _ExtentY        =   2778
-         _Version        =   393216
       End
       Begin XPControls.XPButton cmdimprimir 
          Height          =   375
@@ -1664,7 +1662,9 @@ Dim aCAMIMG As Variant
 
 Private Sub Cmdbusmr_Click()
   Dim aRETU As Variant
-  Dim cARQ, cSQL, cCODIGO As String
+  Dim cARQ As String
+  Dim cSQL  As String
+  Dim cCODIGO As String
   cCODIGO = FixStr(TXTFIELDS(19))
   If Len(cCODIGO) > 0 Then
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
@@ -1683,7 +1683,7 @@ Private Sub cmdClose_Click()
     If gridrev.Rows > 1 Then
       gridrev.Row = gridrev.Rows - 1
       gridrev.Col = 3
-      TXTFIELDS(21).tEXT = gridrev
+      TXTFIELDS(21).text = gridrev
     Else
       TXTFIELDS(21) = TXTFIELDS(24)
     End If
@@ -1921,7 +1921,7 @@ End Sub
 Private Sub Form_Load()
 
   CenterFormToScreen Me
-  TXTPF.tEXT = nPF
+  TXTPF.text = nPF
   lTROCOU = Array(False, False, False)
   aCAMIMG = Array("IMAGEM", "FOTOESQ", "FOTODIR")
 
@@ -2003,7 +2003,7 @@ Private Sub imgsave_Click(Index As Integer)
 End Sub
 
 Private Sub Incluirimagem_Click(Index As Integer)
-  Dim STMPFILE
+  Dim STMPFILE As String
   STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
   If lerarquivoimagem(STMPFILE, Picture1(Index), Picture2(Index)) Then
     lTROCOU(Index) = True
@@ -2038,9 +2038,9 @@ Private Sub TXTFIELDS_Change(Index As Integer)
   Select Case Index
   Case 10, 11, 12, 13
     'Peso Liquido=Peso Unitario * N Peca por Embalagem
-    TXTFIELDS(12).tEXT = CDbl(FixNum(TXTFIELDS(10))) * CDbl(FixNum(TXTFIELDS(11)))
+    TXTFIELDS(12).text = CDbl(FixNum(TXTFIELDS(10))) * CDbl(FixNum(TXTFIELDS(11)))
     'Peso Bruto Peso Liquido + Tara
-    TXTFIELDS(14).tEXT = CDbl(FixNum(TXTFIELDS(12))) + CDbl(FixNum(TXTFIELDS(13)))
+    TXTFIELDS(14).text = CDbl(FixNum(TXTFIELDS(12))) + CDbl(FixNum(TXTFIELDS(13)))
   End Select
 End Sub
 

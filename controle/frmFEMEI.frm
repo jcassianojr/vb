@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmFEMEI 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "FMEA"
@@ -234,6 +234,7 @@ Begin VB.Form frmFEMEI
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
+      ControlVersion  =   9
       TabCaption(0)   =   "Passo 2"
       Tab(0).ControlCount=   6
       Tab(0).Control(0)=   "txtFields(49)"
@@ -312,10 +313,6 @@ Begin VB.Form frmFEMEI
       Tab(2).Control(57)=   "txtFields(53)"
       Tab(2).Control(58)=   "txtFields(54)"
       Tab(2).Control(59)=   "txtFields(55)"
-      TabCaption(3)   =   "Tab 3"
-      Tab(3).ControlCount=   0
-      TabCaption(4)   =   "Tab 4"
-      Tab(4).ControlCount=   0
       TabCaption(5)   =   "Passo 6"
       Tab(5).ControlCount=   61
       Tab(5).Control(0)=   "lblLabels(15)"
@@ -931,7 +928,7 @@ Begin VB.Form frmFEMEI
          Width           =   7215
       End
       Begin VB.CommandButton Command3 
-         Caption         =   "Não"
+         Caption         =   "NÃ£o"
          Height          =   255
          Left            =   -74160
          TabIndex        =   102
@@ -959,7 +956,7 @@ Begin VB.Form frmFEMEI
          Width           =   8175
       End
       Begin VB.CheckBox Check1 
-         Caption         =   "Ação Cor."
+         Caption         =   "AÃ§Ã£o Cor."
          Enabled         =   0   'False
          Height          =   195
          Left            =   -74760
@@ -969,7 +966,7 @@ Begin VB.Form frmFEMEI
          Width           =   1095
       End
       Begin VB.CheckBox Check2 
-         Caption         =   "Desconsiderar Apuraçao RPN"
+         Caption         =   "Desconsiderar ApuraÃ§ao RPN"
          Height          =   255
          Left            =   -72480
          TabIndex        =   99
@@ -1454,7 +1451,7 @@ Begin VB.Form frmFEMEI
          Width           =   975
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Ação Deteccao"
+         Caption         =   "AÃ§Ã£o Deteccao"
          ForeColor       =   &H00C00000&
          Height          =   495
          Index           =   32
@@ -1464,7 +1461,7 @@ Begin VB.Form frmFEMEI
          Width           =   1095
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Ação Prevenção"
+         Caption         =   "AÃ§Ã£o PrevenÃ§Ã£o"
          ForeColor       =   &H00C00000&
          Height          =   495
          Index           =   31
@@ -1524,6 +1521,7 @@ Begin VB.Form frmFEMEI
          Width           =   4095
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Estacao do Trabalho"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -1534,6 +1532,7 @@ Begin VB.Form frmFEMEI
          Width           =   4095
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Estacao Nome do Elemento"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -1544,6 +1543,7 @@ Begin VB.Form frmFEMEI
          Width           =   4095
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Processo Elemento Sistema"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -1574,7 +1574,7 @@ Begin VB.Form frmFEMEI
          Width           =   735
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Deteçao"
+         Caption         =   "DeteÃ§ao"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   19
@@ -1625,7 +1625,7 @@ Begin VB.Form frmFEMEI
          Width           =   855
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Responsável"
+         Caption         =   "ResponsÃ¡vel"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   12
@@ -1645,7 +1645,7 @@ Begin VB.Form frmFEMEI
          Width           =   495
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Ação Tomada"
+         Caption         =   "AÃ§Ã£o Tomada"
          ForeColor       =   &H00C00000&
          Height          =   495
          Index           =   15
@@ -1675,7 +1675,7 @@ Begin VB.Form frmFEMEI
          Width           =   735
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Deteçao"
+         Caption         =   "DeteÃ§ao"
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   9
@@ -1941,24 +1941,24 @@ End Sub
 
 Private Sub cmddizsessq_Click(Index As Integer)
 
-  Dim cDIZ
+  Dim cDIZ As String
   Dim cARQ As String
   cARQ = PegPath("PATH", "PF")
 
-  cDIZ = pegdizseqssq(TXTFIELDS(2), cARQ, FixInt(TXTFIELDS(35).tEXT), FixInt(TXTFIELDS(36).tEXT), FixInt(TXTFIELDS(37).tEXT), FixInt(TXTFIELDS(45).tEXT))
+  cDIZ = pegdizseqssq(TXTFIELDS(2), cARQ, FixInt(TXTFIELDS(35).text), FixInt(TXTFIELDS(36).text), FixInt(TXTFIELDS(37).text), FixInt(TXTFIELDS(45).text))
 
   If Index = 0 Then
-    TXTFIELDS(2).tEXT = eRETU01(5)
+    TXTFIELDS(2).text = eRETU01(5)
   End If
   If Index = 1 Then
-    TXTFIELDS(2).tEXT = eRETU01(4)
+    TXTFIELDS(2).text = eRETU01(4)
   End If
 
 
-  TXTFIELDS(35).tEXT = eRETU01(0)
-  TXTFIELDS(36).tEXT = eRETU01(1)
-  TXTFIELDS(37).tEXT = eRETU01(2)
-  TXTFIELDS(45).tEXT = eRETU01(3)
+  TXTFIELDS(35).text = eRETU01(0)
+  TXTFIELDS(36).text = eRETU01(1)
+  TXTFIELDS(37).text = eRETU01(2)
+  TXTFIELDS(45).text = eRETU01(3)
 
 
 End Sub
@@ -1998,8 +1998,9 @@ Private Sub cmdpeg_Click(Index As Integer)
 End Sub
 
 Private Sub cmdpegpro_Click(Index As Integer)
-  Dim sSQL
-  Dim lATU
+  Dim sSQL As String
+  Dim lATU As Boolean
+  
   If Index > 0 And Val(TXTFIELDS(38)) = 0 Then
     Alert ("Escolha um Processo")
     Exit Sub
@@ -2089,11 +2090,11 @@ Private Sub CmdRetornaAcao_Click(Index As Integer)
   Dim aRETU As Variant
   Dim sSQL As String
   Dim cREVFEM As String
-  Dim nCAMUSO
-  Dim nTMPGRA
+  Dim nCAMUSO As Integer
+  Dim nTMPGRA As Integer
   nCAMUSO = 17
   If Index = 0 Then
-    cREVFEM = TXTFIELDS(46).tEXT
+    cREVFEM = TXTFIELDS(46).text
     cREVFEM = Busca("Qual Revisao Femeao", "Retornar Revisao Femea", cREVFEM, 3)
     sSQL = "select * from FEMrevi WHERE  TIPOAPU='N' AND PF=" & nPF & " AND FEMEAREV=" & FixNum(cREVFEM)
     sSQL = sSQL & " AND FXSEQ=" & TXTFIELDS(35)
@@ -2238,7 +2239,7 @@ End Sub
 Private Sub Command3_Click()
   On Error Resume Next
 
-  If MDG("Sem Ação Zera Dados? ", "Confirme Gravação") Then
+  If MDG("Sem AÃ§Ã£o Zera Dados? ", "Confirme GravaÃ§Ã£o") Then
     Check1.Value = Unchecked
     acaocampos
     TXTFIELDS(11) = ""

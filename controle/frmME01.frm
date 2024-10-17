@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmME01 
    Caption         =   "Equipamento"
    ClientHeight    =   6915
@@ -658,7 +658,7 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
-      aVAL(iLOOP) = txtFields(iLOOP)       ''vb matriz zero
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 '0 codigo chave
   End If
@@ -684,21 +684,21 @@ End Sub
 
 Private Sub cmdFOTO_Click()
   Dim cSQL As String
-  zgrp = txtcodigo.text
+  zgrp = TxtCodigo.tEXT
   iImage = 4
   cARQRTF = PegPath("PATH", "IMGME01")
   cSQL = "select * from IMAGENS WHERE CODIGO='" & zgrp & "'"
   IncluiSQL cARQRTF, cSQL, 1, Array("CODIGO"), Array(zgrp), True, False
 
   Load frmIMAGENS
-  frmIMAGENS.txtFields(0).Enabled = False
+  frmIMAGENS.TXTFIELDS(0).Enabled = False
   frmIMAGENS.Escolher(0).Visible = False
   frmIMAGENS.Show vbModal, Me
 
 End Sub
 
 Private Sub CmdNovo_Click()
-  Dim nNUM
+  Dim nNUM As Integer
   nNUM = FixInt(PegMAXSQL(cARQFEMEA, "FEMMAQ WHERE PF=" & nFEMMAQ, "ITEM", 0)) + 1
   cSQL = "select * from FEMMAQ WHERE PF=" & nFEMMAQ & " AND ITEM=" & nNUM
   IncluiSQL cARQFEMEA, cSQL, 2, Array("PF", "ITEM"), Array(nFEMMAQ, nNUM), True, False
@@ -716,7 +716,7 @@ Private Sub CmdOrdFem_Click(Index As Integer)
 End Sub
 
 Private Sub CmdRenumerar_Click()
-  Dim nSEQ
+  Dim nSEQ As Integer
   Dim nNUM As Integer
   Dim cSQL As String
 
@@ -829,10 +829,10 @@ Private Sub CmdREvi_Click()
   ePASS02 = cARQFEMEA
 
   Load frmFEMEI
-  frmFEMEI.txtFields(2).Enabled = False
-  frmFEMEI.txtFields(3).Enabled = False
-  frmFEMEI.txtFields(4).Enabled = False
-  frmFEMEI.txtFields(5).Enabled = False
+  frmFEMEI.TXTFIELDS(2).Enabled = False
+  frmFEMEI.TXTFIELDS(3).Enabled = False
+  frmFEMEI.TXTFIELDS(4).Enabled = False
+  frmFEMEI.TXTFIELDS(5).Enabled = False
   frmFEMEI.cmdClose.Enabled = False
   frmFEMEI.CmdAltman.Enabled = False
   frmFEMEI.Show vbModal, Me
@@ -883,11 +883,11 @@ Private Sub EscTipIns_Click(Index As Integer)
   If lRETU Then
     Select Case Index
     Case 0
-      txtFields(4).text = eRETU01
-      txtFields(6).text = eRETU03
+      TXTFIELDS(4).tEXT = eRETU01
+      TXTFIELDS(6).tEXT = eRETU03
       '                txt(5).Text = eRETU02
     Case 1
-      txtFields(5).text = eRETU01
+      TXTFIELDS(5).tEXT = eRETU01
     End Select
   End If
 End Sub
@@ -895,6 +895,7 @@ End Sub
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
   TeclaEnter KeyCode
 End Sub
+
 
 Private Sub FILGRIDrevCAU()
   Dim cSQL As String
@@ -905,27 +906,27 @@ Private Sub FILGRIDrevCAU()
 End Sub
 
 Private Sub Form_Load()
-  Dim nTMPNUMERO
+  Dim nTMPNUMERO As Integer
   CenterFormToScreen Me
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   cSQL = "select NUMERO,QTDEBASE,HRBAS,VDBAS,VDHBAS,GRUPO,TIPO,FEMEA,CONTABIL,FABRICANTE,MODELO,NUMFAB,ANO "
   cSQL = cSQL & " FROM ME01 WHERE NUMERO='" & Trim(ePASS01) & "'"
   cARQFEMEA = PegPath("PATH", "FEMEA")
 
-  txtcodigo.text = ePASS01
-  txtNome.text = ePASS02
+  TxtCodigo.tEXT = ePASS01
+  TxtNome.tEXT = ePASS02
   nCAMPOS = 12
   aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "GRUPO", "TIPO", "FEMEA", "CONTABIL", "FABRICANTE", "MODELO", "NUMFAB", "ANO")
   aFOR = Array("N", "N", "N", "N", "C", "C", "N", "C", "C", "C", "C", "N")
   aPAD = Array(0, 0, 0, 0, "", "", 0, "", "", "", "", 0)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    txtFields(iLOOP) = aVAL(iLOOP)
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
   Next iLOOP
 
   cORDFEMUSO = "ITEM"
 
-  nFEMMAQ = Val(txtFields(6))
+  nFEMMAQ = Val(TXTFIELDS(6))
 
 
   FilRelat
@@ -961,7 +962,7 @@ End Sub
 
 Private Sub TXTFIELDS_LostFocus(Index As Integer)
   If Index = 6 Then
-    nFEMMAQ = Val(txtFields(6))
+    nFEMMAQ = Val(TXTFIELDS(6))
   End If
 End Sub
 

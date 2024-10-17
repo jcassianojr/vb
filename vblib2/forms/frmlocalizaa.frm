@@ -122,9 +122,10 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
   TeclaEnter KeyCode
 End Sub
 
+
 Private Sub Form_Load()
   Dim nLEN As Integer
-  Dim X As Integer
+  Dim x As Integer
   CenterFormToScreen Me
   Me.Caption = cFORMID
   HelpContextID = nFORMID
@@ -136,9 +137,9 @@ Private Sub Form_Load()
   nLEN = UBound(ePASS01)
   ''nLEN = nLEN ''aRRAY comeca 0
   List.Clear
-  For X = 0 To nLEN
-    List.AddItem ePASS01(X)
-  Next X
+  For x = 0 To nLEN
+    List.AddItem ePASS01(x)
+  Next x
   List.ListIndex = 0
 End Sub
 

@@ -115,7 +115,7 @@ End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
-  On Error GoTo 5
+  On Error Resume Next
   lRETU = False
   eRETU01 = ""
   eRETU02 = 0

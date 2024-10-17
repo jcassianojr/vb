@@ -302,7 +302,7 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
@@ -315,11 +315,11 @@ End Sub
 Private Sub Command1_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXTFIELDS(9).text = "S"
+    TXTFIELDS(9).tEXT = "S"
   Case 1
-    TXTFIELDS(9).text = "T"
+    TXTFIELDS(9).tEXT = "T"
   Case 2
-    TXTFIELDS(9).text = "O"
+    TXTFIELDS(9).tEXT = "O"
   End Select
 End Sub
 
@@ -333,6 +333,7 @@ End Sub
 
 Private Sub ESCMP03_Click()
   Dim oFORM As New escmp
+  
   iMU01 = 4
   oFORM.Show vbModal, Me
   If lRETU Then
@@ -349,7 +350,7 @@ Private Sub Form_Load()
   CenterFormToScreen Me
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   cSQL = "select * from MP03 WHERE CODIGO='" & Trim(ePASS01) & "'"
-  txtcodigo = ePASS01
+  TxtCodigo = ePASS01
   nCAMPOS = 10
   aCAM = Array("NORMA", "NOME", "NOM2", "APLICACAO", "COGNOME", "OBS01", "OBS02", "OBS03", "CODIGOINT", "TIPTRA")
   aFOR = Array("C", "C", "C", "C", "C", "C", "C", "C", "C", "C")

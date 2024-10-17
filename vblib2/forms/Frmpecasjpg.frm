@@ -572,8 +572,8 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-  Dim nTMPNUMERO
-  Dim nPOS
+  Dim nTMPNUMERO As Integer
+  Dim nPOS As Integer
   Dim cWHERE As String
   Dim STMPFILE As String
 
@@ -719,7 +719,7 @@ Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
 End Sub
 
 Private Sub IncImg_Click()
-  Dim STMPFILE
+  Dim STMPFILE As String
   STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
   If lerarquivoimagem(STMPFILE, Picture1, Picture2) Then
     lTROCOU = True

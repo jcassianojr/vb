@@ -262,7 +262,7 @@ End Sub
 Private Sub CmdescPF_Click()
   escpf.Show vbModal, Me
   If lRETU Then
-    tEXT(0).tEXT = eRETU01
+    text(0).text = eRETU01
   End If
 End Sub
 
@@ -294,12 +294,14 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub importar()
-  Dim nPFORI, nSEQORI, nSSQORI As Long
+  Dim nPFORI As Long
+  Dim nSEQORI As Long
+  Dim nSSQORI As Long
   Dim cORIGEM As String
   Dim sSQL As String
   Dim cDUPSQL As String
 
-  nPFORI = Val(tEXT(0))
+  nPFORI = Val(text(0))
   nSEQORI = Val(SEQ.Value)
   nSSQORI = Val(SSQ.Value)
 

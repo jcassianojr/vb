@@ -191,14 +191,14 @@ End Sub
 Private Sub CmdescPF_Click()
   escpf.Show vbModal, Me
   If lRETU Then
-    tEXT(0).tEXT = eRETU01
+    text(0).text = eRETU01
   End If
 End Sub
 
 Private Sub Command1_Click()
   escpf.Show vbModal, Me
   If lRETU Then
-    tEXT(1).tEXT = eRETU01
+    text(1).text = eRETU01
   End If
 End Sub
 
@@ -212,15 +212,18 @@ End Sub
 
 Private Sub ok_Click()
   Dim nPFORI As Long
-  Dim cARQ, cSQL1, cSQL2, cSQL3 As String
+  Dim cARQ As String
+  Dim cSQL1 As String
+  Dim cSQL2 As String
+  Dim cSQL3 As String
 
   cARQ = PegPath("PATH", "PF")
   If cARQIMP = "IE" Then
     cARQ = PegPath("PATH", "IE")
   End If
 
-  nPF = Val(tEXT(1))
-  nPFORI = Val(tEXT(0))
+  nPF = Val(text(1))
+  nPFORI = Val(text(0))
   cSQL1 = "select * from DUPLICAR WHERE TABELA='" & cARQIMP & "'"
   cSQL2 = "select * from " & cARQIMP & " WHERE pf=" & nPF
   cSQL3 = "select * from " & cARQIMP & " WHERE pf=" & nPFORI

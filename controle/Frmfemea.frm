@@ -4169,8 +4169,7 @@ End Sub
 Private Sub CmdREvisarTodas_Click(Index As Integer)
   Dim nROWS As Integer
   Dim x As Integer
-  Dim nIndex As interger
-  nIndex = Index
+  Dim nIndex As Integer
   If GridSeq(0).Rows = 0 Then
     Exit Sub
   End If

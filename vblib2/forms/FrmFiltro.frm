@@ -535,7 +535,6 @@ Private Sub CmdGera_Click()
   Dim rs As ADODB.Recordset
   Dim cCAM As String
   Dim cSQL As String
-  'Dim cCAMPO As String
   Dim STRCAMPO As String
   Dim strtipo As String
   Dim strsize As String
@@ -558,7 +557,7 @@ Private Sub CmdGera_Click()
   DB.Open cCAM
 
 
-  cSQL = tabela.Text
+  cSQL = tabela.text
   Grid.Clear
 
 
@@ -570,19 +569,19 @@ Private Sub CmdGera_Click()
     .Rows = 1
     .Row = 0
     .Col = 0
-    .Text = "Campo"
+    .text = "Campo"
     .ColWidth(0) = 2000
 
     .Col = 1
-    .Text = "Tipo"
+    .text = "Tipo"
     .ColWidth(1) = 400
 
     .Col = 2
-    .Text = "Tipo"
+    .text = "Tipo"
     .ColWidth(2) = 1400
 
     .Col = 3
-    .Text = "Tamanho"
+    .text = "Tamanho"
     .ColWidth(3) = 800
 
 
@@ -591,7 +590,7 @@ Private Sub CmdGera_Click()
 
 
   'Adicionar campos das tabelas
-  Set RstCampos = DB.OpenSchema(adSchemaColumns, Array(Empty, Empty, tabela.Text, Empty))
+  Set RstCampos = DB.OpenSchema(adSchemaColumns, Array(Empty, Empty, tabela.text, Empty))
   Do While Not RstCampos.EOF
     STRCAMPO = RstCampos!Column_Name
     strtipo = FixStr((TipoDados(RstCampos!DATA_TYPE)))
@@ -642,7 +641,7 @@ Private Sub CmdSair_Click()
 End Sub
 
 Private Sub CmdZerar_Click()
-  FILTRO.Text = ""
+  FILTRO.text = ""
 End Sub
 
 Private Sub Encerrar_Click()
@@ -817,7 +816,7 @@ Private Sub ok_ClickX(lZERA As Boolean)
   cDIZ = "{" & Trim(UCase(CStr(Alias))) & "." & Trim(UCase(campo)) & "}"
 
   cTIPDIZ = " AND "
-  If cTIPO.Text = "OU" Then cTIPDIZ = " OR "
+  If cTIPO.text = "OU" Then cTIPDIZ = " OR "
 
   Select Case camtip
   Case "N"
@@ -906,11 +905,11 @@ Private Sub oper_Click(Index As Integer)
       Exit Sub
     End If
   End If
-  coper.Text = oper(Index).Caption
+  coper.text = oper(Index).Caption
 End Sub
 
 Private Sub TIPOFIL_Click(Index As Integer)
-  cTIPO.Text = TIPOFIL(Index).Caption
+  cTIPO.text = TIPOFIL(Index).Caption
 End Sub
 
 Private Sub ValFim_GotFocus()

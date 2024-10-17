@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmGp11 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PPAP"
@@ -146,7 +146,6 @@ Begin VB.Form frmGp11
       Width           =   8235
       _ExtentX        =   14526
       _ExtentY        =   6165
-      _Version        =   393216
    End
    Begin XPControls.XPButton Encerrar 
       Height          =   435
@@ -526,7 +525,7 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 2
-      aVAL(iLOOP) = txtFields(iLOOP)
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     aVAL(7) = FixNumBol(inativo.Value)
     GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 '0 chave ppap
@@ -540,8 +539,8 @@ Private Sub CmdEditar_Click()
 
 
 
-  eRETU02 = " Desenho:" & txtFields(5) & "-" & Replace(txtFields(6), " ", "_")
-  eRETU02 = eRETU02 & " Cliente:" & txtFields(1) & "-" & Replace(txtFields(2), " ", "_")
+  eRETU02 = " Desenho:" & TXTFIELDS(5) & "-" & Replace(TXTFIELDS(6), " ", "_")
+  eRETU02 = eRETU02 & " Cliente:" & TXTFIELDS(1) & "-" & Replace(TXTFIELDS(2), " ", "_")
   Grid.Col = 0
   nREVI = Grid
   frmPPAPI.Show vbModal
@@ -608,12 +607,12 @@ Private Sub Command1_Click()
   Dim sSQL As String
   escpffim.Show vbModal, Me
   If lRETU Then
-    txtFields(5) = eRETU02
-    txtFields(6) = eRETU03
-    txtFields(4) = eRETU04
+    TXTFIELDS(5) = eRETU02
+    TXTFIELDS(6) = eRETU03
+    TXTFIELDS(4) = eRETU04
     sSQL = "select CONPES from PF WHERE PF=" & eRETU04
     aRETU = PegSQL(cARQPF, sSQL, 1, Array("CONPES"), Array("N"), Array(0))
-    txtFields(11) = aRETU(0)
+    TXTFIELDS(11) = aRETU(0)
   End If
 
 End Sub
@@ -623,12 +622,12 @@ Private Sub Command3_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim nNUMERO As Long
-  nNUMERO = FixInt(txtFields(1), 0)
+  nNUMERO = FixInt(TXTFIELDS(1), 0)
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   sSQL = "SELECT NOME FROM MA01 WHERE NUMERO=" & nNUMERO
   aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
   If lRETU Then
-    txtFields(2) = aRETU(0)
+    TXTFIELDS(2) = aRETU(0)
   End If
 End Sub
 
@@ -638,12 +637,12 @@ Private Sub Command5_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim cCODIGO As String
-  cCODIGO = FixStr(txtFields(5), "", "TRIM")
+  cCODIGO = FixStr(TXTFIELDS(5), "", "TRIM")
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
   aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
   If lRETU Then
-    txtFields(6) = aRETU(0)
+    TXTFIELDS(6) = aRETU(0)
   End If
 End Sub
 
@@ -673,8 +672,8 @@ Private Sub EscMA01A_Click(Index As Integer)
 
   If lRETU Then
 
-    frmPPAP.txtFields(1) = eRETU01
-    frmPPAP.txtFields(2) = eRETU02
+    frmPPAP.TXTFIELDS(1) = eRETU01
+    frmPPAP.TXTFIELDS(2) = eRETU02
 
   End If
 
@@ -691,11 +690,12 @@ Private Sub ESCMS01A_Click(Index As Integer)
   End If
   escms01.Show vbModal, Me
   If lRETU Then
-    frmPPAP.txtFields(5) = eRETU01
-    frmPPAP.txtFields(6) = eRETU02
+    frmPPAP.TXTFIELDS(5) = eRETU01
+    frmPPAP.TXTFIELDS(6) = eRETU02
   End If
 
 End Sub
+
 
 Private Sub Filgrid()
   Dim sSQL As String
@@ -709,7 +709,7 @@ Private Sub Filgrid()
   End Select
   MontaGridFast Grid, 4, Array(400, 1200, 400, 2000), Array("Item", "Data", "Dispo", "Obs"), _
                 Array("Item", "Data", "Dispo", "OBS"), cARQPF, sSQL
-  txtFields(29) = PegUltGrid(Grid, 2)
+  TXTFIELDS(29) = PegUltGrid(Grid, 2)
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
@@ -738,7 +738,7 @@ Private Sub Form_Load()
   aPAD = Array(0, 0, "", "", 0, "", "", False)
   aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 2
-    txtFields(iLOOP) = aVAL(iLOOP)
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   inativo.Value = aVAL(7)
 

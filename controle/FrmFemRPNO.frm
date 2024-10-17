@@ -320,7 +320,7 @@ Begin VB.Form FrmFEMRPNO
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
-      Caption         =   "N›Causa"
+      Caption         =   "N√ùCausa"
       ForeColor       =   &H00C00000&
       Height          =   195
       Index           =   8
@@ -385,17 +385,15 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Const cFORMID = "Apurado Femea Operacoes"
-Dim aCAM, aFOR, aVAL, aPAD As Variant
-Attribute aFOR.VB_VarUserMemId = 1073938432
-Attribute aVAL.VB_VarUserMemId = 1073938432
-Attribute aPAD.VB_VarUserMemId = 1073938432
-Dim cARQFEMEA, cARQPF, cSQLUSO As String
-Attribute cARQFEMEA.VB_VarUserMemId = 1073938436
-Attribute cARQPF.VB_VarUserMemId = 1073938436
-Attribute cSQLUSO.VB_VarUserMemId = 1073938436
-Dim nITEM, nCAMPOS As Long
-Attribute nITEM.VB_VarUserMemId = 1073938439
-Attribute nCAMPOS.VB_VarUserMemId = 1073938439
+Dim aCAM As Variant
+Dim aFOR As Variant
+Dim aVAL As Variant
+Dim aPAD As Variant
+Dim cARQFEMEA As String
+Dim cARQPF As String
+Dim cSQLUSO As String
+Dim nITEM As Long
+Dim nCAMPOS As Long
 
 Private Sub cmdClose_Click()
   Unload Me
@@ -409,7 +407,7 @@ End Sub
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   If MDG("Gravar e Sair", "Gravando ") Then
     For nITEM = 0 To nCAMPOS - 1
-      aVAL(nITEM) = tEXT(nITEM)
+      aVAL(nITEM) = text(nITEM)
     Next nITEM
     GrvSQL cARQFEMEA, cSQLUSO, nCAMPOS, aCAM, aVAL, aFOR
     GravaLog 999, 0, "Gravou "
@@ -452,7 +450,7 @@ Private Sub Form_Load()
                0, 0, 0, 0, 0)
   aVAL = PegSQL(cARQFEMEA, cSQLUSO, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To nCAMPOS - 1
-    tEXT(nITEM) = aVAL(nITEM)
+    text(nITEM) = aVAL(nITEM)
   Next nITEM
 End Sub
 

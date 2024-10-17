@@ -266,7 +266,8 @@ Private Sub impX()
   Dim cDESARQ As String
   Dim cDESSQL As String
 
-  nPFORI = Val(tEXT)
+
+  nPFORI = Val(text)
   lRETU = True
   eRETU01 = nPFORI
 
@@ -294,7 +295,7 @@ Private Sub impX()
 
 
 
-  'origem duplicaçao
+  'origem duplicaÃ§ao
   cORIGEM = cARQPF
   cSQLORI = "select * from " & cARQIMP & " WHERE pf=" & nPFORI
   If lFEMEA Then
@@ -374,7 +375,7 @@ End Sub
 Private Sub CmdescPF_Click()
   escpf.Show vbModal, Me
   If lRETU Then
-    tEXT.tEXT = eRETU01
+    text.text = eRETU01
   End If
 End Sub
 

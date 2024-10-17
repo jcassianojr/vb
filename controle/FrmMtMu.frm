@@ -226,7 +226,7 @@ Begin VB.Form FrmMtMu
       Width           =   855
    End
    Begin VB.Label Label 
-      Caption         =   "Instrução"
+      Caption         =   "InstruÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   3
@@ -282,9 +282,10 @@ Dim aPAD As Variant
 Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
+
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
       aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
     Next iLOOP
@@ -318,7 +319,7 @@ End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
-  txtcodigo.text = ePASS01
+  TxtCodigo.tEXT = ePASS01
   cARQMTMU = ePASS02
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   cSQL = "select * from " & cARQMTMU & " WHERE CODIGO='" & Trim(ePASS01) & "'"

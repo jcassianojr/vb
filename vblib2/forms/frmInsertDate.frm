@@ -210,6 +210,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 Private Sub lstDates_DblClick()
 ''SetDateList DateClicked
+
   TxtData = Format(MonthView1.Value, "dddd, dd/mmmm/yyyy")
   cmdOK_Click
 End Sub
