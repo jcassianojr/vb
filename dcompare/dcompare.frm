@@ -424,6 +424,14 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
 
   On Error GoTo errhandler
   Set WrkSpace = DBEngine.CreateWorkspace("Compare", "Admin", "")
+  If Not FileExists(Text1.Text) Then
+     Alert ("Falta arquivo " + Text1.Text)
+     Exit Sub
+  End If
+  If Not FileExists(Text2.Text) Then
+     Alert ("Falta arquivo " + Text2.Text)
+     Exit Sub
+  End If
   Set Baza1 = WrkSpace.OpenDatabase(Text1.Text)
   Set Baza2 = WrkSpace.OpenDatabase(Text2.Text)
   ''On Error Resume Next

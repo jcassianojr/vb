@@ -20,15 +20,35 @@ Sub Main()
   EnabledVisualStyles
   dCompare.Show
 End Sub
+  ' Public Function FileExists(ByVal sFilePath As String) As Boolean
+  '  Dim fso As FileSystemObject
+     
+  '      Set fso = New FileSystemObject
+        
+  '      If fso.FileExists(sFilePath) Then
+   '         FileExists = True
+   '     Else
+   '         FileExists = False
+   '     End If
+     
+    'End Function
 
+'Public Function FileExists(ByVal PathName As String) As Boolean
+'On Error Resume Next
+'Dim Attributes As VbFileAttribute, ErrVal As Long
+'Attributes = GetAttr(PathName)
+'ErrVal = Err.Number
+'On Error GoTo 0
+'If (Attributes And (vbDirectory Or vbVolume)) = 0 And ErrVal = 0 Then FileExists = True
+'End Function
 
-Public Function FileExists(ByVal PathName As String) As Boolean
-On Error Resume Next
-Dim Attributes As VbFileAttribute, ErrVal As Long
-Attributes = GetAttr(PathName)
-ErrVal = Err.Number
-On Error GoTo 0
-If (Attributes And (vbDirectory Or vbVolume)) = 0 And ErrVal = 0 Then FileExists = True
+'Public Function FileExists(ByRef sFileName As String) As Boolean
+'    On Error Resume Next
+'    FileExists = (GetAttr(sFileName) And vbDirectory) <> vbDirectory
+'End Function
+
+Public Function FileExists(ByRef sFileName As String) As Boolean
+    On Error Resume Next
+    FileExists = PathFileExists(sFileName)
 End Function
-
 

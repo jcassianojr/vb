@@ -32,7 +32,7 @@ Bottom As Long
 End Type
 Private Type POINTAPI
 x As Long
-y As Long
+Y As Long
 End Type
 Private Type BITMAP
 bmType As Long
@@ -294,7 +294,7 @@ Private Declare Function GetDC Lib "user32" (ByVal hWnd As Long) As Long
 Private Declare Function GetDeviceCaps Lib "gdi32" (ByVal hDC As Long, ByVal nIndex As Long) As Long
 Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
 Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
-Private Declare Function GdiAlphaBlend Lib "gdi32" (ByVal hDestDC As Long, ByVal x As Long, ByVal y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, ByVal XSrc As Long, ByVal YSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal BlendFunc As Long) As Long
+Private Declare Function GdiAlphaBlend Lib "gdi32" (ByVal hDestDC As Long, ByVal x As Long, ByVal Y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, ByVal XSrc As Long, ByVal YSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal BlendFunc As Long) As Long
 Private Declare Function DrawIconEx Lib "user32" (ByVal hDC As Long, ByVal XLeft As Long, ByVal YTop As Long, ByVal hIcon As Long, ByVal CXWidth As Long, ByVal CYWidth As Long, ByVal istepIfAniCur As Long, ByVal hbrFlickerFreeDraw As Long, ByVal diFlags As Long) As Long
 Private Declare Function FillRect Lib "user32" (ByVal hDC As Long, ByRef lpRect As RECT, ByVal hBrush As Long) As Long
 Private Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As Long
@@ -822,7 +822,7 @@ If hWndCursor <> NULL_PTR Then
 Else
     hWndCursor = hWndFallback
 End If
-If hWndCursor <> NULL_PTR Then SendMessage hWndCursor, WM_SETCURSOR, hWndCursor, ByVal MakeDWord(CLng(SendMessage(hWndCursor, WM_NCHITTEST, 0, ByVal Make_XY_lParam(P.x, P.y))), WM_MOUSEMOVE)
+If hWndCursor <> NULL_PTR Then SendMessage hWndCursor, WM_SETCURSOR, hWndCursor, ByVal MakeDWord(CLng(SendMessage(hWndCursor, WM_NCHITTEST, 0, ByVal Make_XY_lParam(P.x, P.Y))), WM_MOUSEMOVE)
 End Sub
 
 Public Function OLEFontIsEqual(ByVal Font As StdFont, ByVal FontOther As StdFont) As Boolean
@@ -1138,11 +1138,11 @@ If CLng(lParam) And &H80000000 Then Get_Y_lParam = Get_Y_lParam Or &HFFFF8000
 End Function
 
 #If VBA7 Then
-Public Function Make_XY_lParam(ByVal x As Long, ByVal y As Long) As LongPtr
+Public Function Make_XY_lParam(ByVal x As Long, ByVal Y As Long) As LongPtr
 #Else
-Public Function Make_XY_lParam(ByVal x As Long, ByVal y As Long) As Long
+Public Function Make_XY_lParam(ByVal x As Long, ByVal Y As Long) As Long
 #End If
-Make_XY_lParam = (CLng(LoWord(y)) * &H10000) Or (LoWord(x) And &HFFFF&)
+Make_XY_lParam = (CLng(LoWord(Y)) * &H10000) Or (LoWord(x) And &HFFFF&)
 End Function
 
 Public Function UTF32CodePoint_To_UTF16(ByVal CodePoint As Long) As String
@@ -1485,9 +1485,9 @@ End With
 End Function
 
 #If VBA7 Then
-Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As LongPtr, ByVal x As Long, ByVal y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
+Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As LongPtr, ByVal x As Long, ByVal Y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
 #Else
-Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As Long, ByVal x As Long, ByVal y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
+Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As Long, ByVal x As Long, ByVal Y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
 #End If
 ' RenderFlag is passed as a optional parameter ByRef.
 ' It is ignored for icons and metafiles.
@@ -1501,7 +1501,7 @@ If .Handle <> NULL_PTR Then
     If CY = 0 Then CY = CHimetricToPixel_Y(.Height)
     If .Type = vbPicTypeIcon Then
         Const DI_NORMAL As Long = &H3
-        DrawIconEx hDC, x, y, .Handle, CX, CY, 0, NULL_PTR, DI_NORMAL
+        DrawIconEx hDC, x, Y, .Handle, CX, CY, 0, NULL_PTR, DI_NORMAL
     Else
         Dim HasAlpha As Boolean
         If .Type = vbPicTypeBitmap Then
@@ -1556,16 +1556,16 @@ If .Handle <> NULL_PTR Then
             #If Win64 Then
             Dim hDC32 As Long
             CopyMemory ByVal VarPtr(hDC32), ByVal VarPtr(hDC), 4
-            .Render hDC32 Or 0&, x Or 0&, y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
+            .Render hDC32 Or 0&, x Or 0&, Y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
             #Else
-            .Render hDC Or 0&, x Or 0&, y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
+            .Render hDC Or 0&, x Or 0&, Y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
             #End If
         Else
             Dim hDCBmp As LongPtr, hBmpOld As LongPtr
             hDCBmp = CreateCompatibleDC(NULL_PTR)
             If hDCBmp <> NULL_PTR Then
                 hBmpOld = SelectObject(hDCBmp, .Handle)
-                GdiAlphaBlend hDC, x, y, CX, CY, hDCBmp, 0, 0, CHimetricToPixel_X(.Width), CHimetricToPixel_Y(.Height), &H1FF0000
+                GdiAlphaBlend hDC, x, Y, CX, CY, hDCBmp, 0, 0, CHimetricToPixel_X(.Width), CHimetricToPixel_Y(.Height), &H1FF0000
                 SelectObject hDCBmp, hBmpOld
                 DeleteDC hDCBmp
             End If

@@ -126,6 +126,47 @@ End Type
 
 Public OFN As OPENFILENAME
 
+
+
+#If (VBA7 = 0) Then
+Private Enum LongPtr
+[_]
+End Enum
+#End If
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
+#If VBA7 Then
+Public Declare PtrSafe Function GetOpenFileName Lib "comdlg32.dll" _
+                                        Alias "GetOpenFileNameA" _
+                                        (pOpenfilename As OPENFILENAME) As Long
+
+Public Declare PtrSafe Function GetSaveFileName Lib "comdlg32.dll" _
+                                        Alias "GetSaveFileNameA" _
+                                        (pOpenfilename As OPENFILENAME) As Long
+
+Public Declare PtrSafe Function GetShortPathName Lib "kernel32" _
+                                         Alias "GetShortPathNameA" _
+                                         (ByVal lpszLongPath As String, _
+                                          ByVal lpszShortPath As String, _
+                                          ByVal cchBuffer As LongPtr) As Long
+
+Private Declare PtrSafe Function SHFileOperation _
+                          Lib "shell32.dll" Alias "SHFileOperationA" ( _
+                              lpFileOp As SHFILEOPSTRUCT _
+                            ) As Long
+
+Public Declare PtrSafe Function CreateDirectory Lib "kernel32" Alias "CreateDirectoryA" (ByVal lpPathName As String, lpSecurityAttributes As SECURITY_ATTRIBUTES) As Long
+Public Declare PtrSafe Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As LongPtr, ByVal lpBuffer As String) As Long
+Private Declare PtrSafe Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As LongPtr, ByVal lpszShortPath As LongPtr, ByVal cchBuffer As LongPtr) As Long
+
+
+#Else
 Public Declare Function GetOpenFileName Lib "comdlg32.dll" _
                                         Alias "GetOpenFileNameA" _
                                         (pOpenfilename As OPENFILENAME) As Long
@@ -148,6 +189,10 @@ Private Declare Function SHFileOperation _
 Public Declare Function CreateDirectory Lib "kernel32" Alias "CreateDirectoryA" (ByVal lpPathName As String, lpSecurityAttributes As SECURITY_ATTRIBUTES) As Long
 Public Declare Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As Long, ByVal lpBuffer As String) As Long
 Private Declare Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As Long, ByVal lpszShortPath As Long, ByVal cchBuffer As Long) As Long
+#End If
+
+
+
 Public Function IsExtensao(ByVal cARQ As String, cEXT As String) As Boolean
  IsExtensao = False
   cARQ = UCase(FixStr(cARQ))
@@ -176,7 +221,7 @@ End Function
 Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal DestinationFile As String, Optional ByVal lAPAGA As Boolean = False) As Long
   Dim lngReturn As Long
   Dim typFileOperation As SHFILEOPSTRUCT
-  If FileExists(DestinationFile) Then
+  If PathFileExists(DestinationFile) Then
       If lAPAGA Then
           DeleteFile DestinationFile  'Kill DestinationFile
       End If
@@ -252,7 +297,7 @@ Public Function FileOpen(frmOwner As Form, _
 
   With OFN
     .nStructSize = Len(OFN)
-    .hWndOwner = frmOwner.hWnd
+    .hWndOwner = CLng(frmOwner.hWnd)
     .sFILTER = sFilters & vbNullChar & vbNullChar
     .nFilterIndex = nFilterIndex
     .sFile = sDefaultFileName & Space$(1024) & vbNullChar & vbNullChar
@@ -284,7 +329,7 @@ Public Function FileSave(frmOwner As Form, _
   With OFN
 
     .nStructSize = Len(OFN)
-    .hWndOwner = frmOwner.hWnd
+    .hWndOwner = CLng(frmOwner.hWnd)
     .sFILTER = sFilters & vbNullChar & vbNullChar
     .nFilterIndex = nFilterIndex
     .sFile = sDefaultFileName & Space$(1024) & _

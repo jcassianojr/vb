@@ -48,11 +48,11 @@ Public Function CompactAccess(xDatabaseLocation As String, _
 32 Else
 34  MsgBox "Invalid Database or database is not yet supported with the code!", vbExclamation, "Not Supported"
 36 End If
-
+   CopyFileWindowsWay SourcePath, parsefile(SourcePath, "C") & "_OLD.MDB"
 38 JRO.CompactDatabase SourceCon1, SourceCon2
-40 DeleteFile SourcePath  '' kill SourcePath
+40 Kill SourcePath  '' kill SourcePath
 42 CopyFileWindowsWay DesPath, SourcePath  'FileCopy DesPath, SourcePath
-44 DeleteFile DesPath  '' Kill DesPath
+44 Kill DesPath  '' Kill DesPath
 
 46 Set JRO = Nothing
 48 CompactAccess = True
