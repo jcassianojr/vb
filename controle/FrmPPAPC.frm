@@ -193,7 +193,7 @@ Begin VB.Form FrmPPAPC
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Observação:"
+      Caption         =   "ObservaÃ§Ã£o:"
       ForeColor       =   &H00C00000&
       Height          =   195
       Index           =   2
@@ -248,9 +248,10 @@ Dim aPAD As Variant
 Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
+
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To 2
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP

@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmprot 
    Caption         =   "Controle de Prototipos"
    ClientHeight    =   4035
@@ -69,7 +69,6 @@ Begin VB.Form frmprot
       Width           =   8175
       _ExtentX        =   14420
       _ExtentY        =   5106
-      _Version        =   393216
    End
    Begin XPControls.XPButton Encerrar 
       Height          =   435
@@ -239,6 +238,7 @@ Private Sub excluir_Click()
     Filgrid
   End If
 End Sub
+
 
 Private Sub Filgrid()
   Dim cSQL As String

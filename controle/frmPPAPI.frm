@@ -220,7 +220,7 @@ Begin VB.Form frmPPAPI
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Aprovaçäo"
+      Caption         =   "AprovaÃ§Ã¤o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   5
@@ -240,7 +240,7 @@ Begin VB.Form frmPPAPI
       Width           =   855
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Disposição"
+      Caption         =   "DisposiÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   3
@@ -250,7 +250,7 @@ Begin VB.Form frmPPAPI
       Width           =   975
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Observação:"
+      Caption         =   "ObservaÃ§Ã£o:"
       ForeColor       =   &H00C00000&
       Height          =   195
       Index           =   2
@@ -295,9 +295,10 @@ Dim aPAD As Variant
 Dim nCAMPOS As Integer
 Dim iLOOP As Integer
 
+
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 4
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
@@ -453,7 +454,7 @@ Private Sub Setor_Click(Index As Integer)
 
 
   eRETU02 = eRETU02 & "PF:" & frmPPAP.TXTFIELDS(32) & Chr(13) & Chr(10)
-  eRETU02 = eRETU02 & "Código:" & frmPPAP.TXTFIELDS(5) & Chr(13) & Chr(10)
+  eRETU02 = eRETU02 & "CÃ³digo:" & frmPPAP.TXTFIELDS(5) & Chr(13) & Chr(10)
   If IsDate(DTPicker1) Then
     eRETU02 = eRETU02 & " Abertura:" & Fdata(DTPicker1) & Chr(13) & Chr(10)
   End If

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{EA478B61-D9EC-47F6-BB21-95A533AF2251}#1.3#0"; "TabExt01.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form frmPFI 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFI"
@@ -72,6 +72,7 @@ Begin VB.Form frmPFI
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
+      ControlVersion  =   9
       TabCaption(0)   =   "Item"
       Tab(0).ControlCount=   34
       Tab(0).Control(0)=   "TXTFIELDS(18)"
@@ -790,7 +791,7 @@ Begin VB.Form frmPFI
       Width           =   495
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Descrição:"
+      Caption         =   "DescriÃ§Ã£o:"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   1
@@ -828,7 +829,7 @@ Dim lTROCOU As Boolean
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
@@ -943,7 +944,7 @@ Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
   UpdateReport = False  ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
 Private Sub Incluirimagem_Click()
-  Dim STMPFILE
+  Dim STMPFILE As String
   STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
   If lerarquivoimagem(STMPFILE, Picture1, Picture2) Then
     lTROCOU = True

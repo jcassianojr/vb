@@ -655,7 +655,9 @@ Private Sub ImportaWrptUser()
   Dim oDBDES As ADODB.Connection
   Dim oRSORI As ADODB.Recordset
   Dim oRSDES As ADODB.Recordset
-  Dim cSQL, cARQORI, cARQDES As String
+  Dim cSQL S As String
+  dim cARQORI S As String
+  Dim cARQDES As String
   Dim aCAM As Variant
   Dim x As Integer
 

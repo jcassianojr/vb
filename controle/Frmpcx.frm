@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmPCX 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Plano de Controle"
@@ -5511,14 +5511,14 @@ Private Sub escidfolha_Click(Index As Integer)
 
     Select Case Index
     Case 0, 10
-      TXTpc(11).text = TXTpc(11).text & " , " & Trim(MMCase(eRETU02))
+      TXTpc(11).tEXT = TXTpc(11).tEXT & " , " & Trim(MMCase(eRETU02))
     Case 1, 11
-      TXTpre(11).text = TXTpre(11).text & " , " & Trim(MMCase(eRETU02))
+      TXTpre(11).tEXT = TXTpre(11).tEXT & " , " & Trim(MMCase(eRETU02))
     Case 2, 12
-      TXTgp12(11).text = TXTgp12(11).text & " , " & Trim(MMCase(eRETU02))
+      TXTgp12(11).tEXT = TXTgp12(11).tEXT & " , " & Trim(MMCase(eRETU02))
     Case 3, 13
-      TXTpc(33).text = eRETU01
-      TXTpc(34).text = eRETU02
+      TXTpc(33).tEXT = eRETU01
+      TXTpc(34).tEXT = eRETU02
     End Select
   End If
 
@@ -5549,7 +5549,7 @@ Private Sub escpfela_Click(Index As Integer)
 End Sub
 
 Private Sub ESCprofin_Click(Index As Integer)
-  Dim cCHAVEBUS
+  Dim cCHAVEBUS As String
   If Len(TXTpc(22)) = 0 Then
     cCHAVEBUS = TXTPF(12)
   Else
@@ -5568,7 +5568,7 @@ End Sub
 
 Private Sub escTIPPC_Click(Index As Integer)
   Dim cTIPO As String
-  Dim nPOS
+  Dim nPOS As Integer
 
   ePASS01 = Array("(C)ontencao Avancada", "( )Normal", "(I)tem Seguranca", "(X)Contencao Avancada+Item Seguranca", "(G)P12 Agressivo", "GP12 Pla(N)", "Processo Alternativo-(B)Y PASS", "MUDANCA (T)emporaria")
   escOrdem.Show vbModal, Me
@@ -5597,13 +5597,13 @@ Private Sub escTIPPC_Click(Index As Integer)
   Select Case Index
   Case 1, 2, 3, 4, 5
     nPOS = Index + 5 - 1
-    TXTpc(nPOS).text = cTIPO
+    TXTpc(nPOS).tEXT = cTIPO
   Case 11, 12, 13, 14, 15
     nPOS = Index + 5 - 11
-    TXTpre(nPOS).text = cTIPO
+    TXTpre(nPOS).tEXT = cTIPO
   Case 21, 22, 23, 24, 25
     nPOS = Index + 5 - 21
-    TXTgp12(nPOS).text = cTIPO
+    TXTgp12(nPOS).tEXT = cTIPO
   End Select
 End Sub
 
@@ -5718,7 +5718,7 @@ Private Sub Form_Load()
 
   CHECKPFPG                                    'inclui embalagem preliminar gp12
 
-  TXTNPF.text = nPF
+  TXTNPF.tEXT = nPF
 
 
   cSQL = "select PF,CODCLIENTE,CPF,CODIGO,DESCR,CLIENTE,CLINOME,CODMU011,CODMU012,CODMU013,NOMMU011,NOMMU012,NOMMU013,CODFINAL,CODIGOINT,OPCAO,FEMEAREV,FEMEAREVD,REVPRO,REVDAT,FEMEAREVD2 from PF WHERE PF=" & nPF
@@ -5921,7 +5921,7 @@ Private Sub selmar_Click(Index As Integer)
   Dim cARQ As String
   Dim sSQL As String
   Dim aRETU As Variant
-  Dim dDATA
+  Dim dDATA As Date
 
 
   On Error Resume Next

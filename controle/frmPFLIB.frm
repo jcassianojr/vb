@@ -152,10 +152,10 @@ Option Explicit
 Public cTIPO
 
 Private Sub cmdClose_Click()
-  Dim cSQL
-  Dim aFOR
-  Dim aVAL
-  Dim aCAM
+  Dim cSQL As String
+  Dim aFOR As Variant
+  Dim aVAL As Variant
+  Dim aCAM As Variant
   aFOR = Array("NI", "C", "D")
   aVAL = Array(TXTFIELDS(0), TXTFIELDS(1), DTPicker1)
   cSQL = "select PF,CODIGO,FEMEAF,FEMEAR,FEMEAD,PCLIBNUM,PCLIBNOM,PCLIBDATE,RESNUM,RESNOM,RESDAT,ELANUM,FEMEAEF,PCELANUM,PRDNUM,PRDNOM,PRDDAT,SEGNUM,SEGNOM,SEGDAT from PF WHERE PF=" & nPF
@@ -211,11 +211,11 @@ Private Sub Form_Load()
   cTIPO = ePASS01
   CABECARIO.Caption = ""
   If InStr(Sdb, "PFP.MDB") Then
-    ''Cabeçario
+    ''CabeÃ§ario
     CABECARIO.Caption = "PRELIMINAR"
   End If
   If InStr(Sdb, "PFG.MDB") Then
-    ''Cabeçario
+    ''CabeÃ§ario
     CABECARIO.Caption = "GP12"
   End If
   frmPFLIB.TXTFIELDS(0) = zIDFOLHA

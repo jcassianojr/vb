@@ -1,9 +1,9 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmPF 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Processo de Fabricação"
@@ -3137,7 +3137,9 @@ Private Sub CmdcomIMp_Click()
   Dim cARQ As String
   Dim ms03 As New ADODB.Recordset
   Dim PFMS03 As New ADODB.Recordset
-  Dim cCODIGO, sqlMS03, sqlpfms03 As String
+  Dim cCODIGO As String
+  Dim sqlMS03 As String
+  Dim sqlpfms03 As String
   Dim aCAMPOS As Variant
   cCODIGO = frmPF.txtfields(14)
 
@@ -3626,7 +3628,7 @@ End Sub
 
 Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVal dDATACLI As Variant)
   Dim cCODLOGIX As String
-  Dim nPOS
+  Dim nPOS As Integer
 
   If Not MDG("Gravar revisao do cliente no logix") Then
     Exit Sub
@@ -4088,7 +4090,7 @@ Private Sub IMPSEQ_Click()
 End Sub
 
 Private Sub IncImg_Click(Index As Integer)
-  Dim STMPFILE
+  Dim STMPFILE As String
   STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
   If Len(STMPFILE) > 0 Then
     If FixInt(FileLen(STMPFILE)) > 500000 Then
@@ -4203,9 +4205,9 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub TXTFIELDS_LostFocus(Index As Integer)
-  Dim cSQLITEM
-  Dim cCODLOGIX
-  Dim nPOS
+  Dim cSQLITEM As String
+  Dim cCODLOGIX As String
+  Dim nPOS As Integer
   If Index = 0 Then
     cCODLOGIX = Trim(txtfields(0))
     If Len(cCODLOGIX) > 0 Then

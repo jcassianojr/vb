@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmPCS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFS"
@@ -901,12 +901,12 @@ Private Sub cmdClose_Click()
  ' Dim cSQLIMG As String
   Dim cCAMIMG As String
   On Error Resume Next
-  txtFields(1).text = Replace(txtFields(1).text, "/", "-")  'chave apresentando erro de gravacao
+  TXTFIELDS(1).tEXT = Replace(TXTFIELDS(1).tEXT, "/", "-")  'chave apresentando erro de gravacao
 
   If MDG("Gravar alteraçôes") Then
     'campos
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = txtFields(iLOOP)
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     GrvSQL cARQUSO, cSQL, nCAMPOS, aCAM, aVAL, aFOR
     'imagens
@@ -927,7 +927,7 @@ Private Sub cmdClose_Click()
   Unload Me
 End Sub
 Private Sub CHECKDISPO()
-  Dim cARQDISPO
+  Dim cARQDISPO As String
   cARQDISPO = PegPath("PATH", "DISPO")
   nPPAP = PegUltSQL(cARQDISPO, "select numero from DISPO WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ, "NUMERO", 0)
   If nPPAP = 0 Then
@@ -985,7 +985,7 @@ Private Sub Command1_Click()
   eRETU02 = ""
   ESCPCT.Show vbModal, Me
   If lRETU Then
-    FRMPCS.txtFields(1) = eRETU02
+    FRMPCS.TXTFIELDS(1) = eRETU02
   End If
 End Sub
 
@@ -1016,7 +1016,9 @@ Private Sub Command3_Click()
 End Sub
 
 Private Sub Command4_Click(Index As Integer)
-  Dim sSQL, cDESCRICAO, aVALTMP As Variant
+  Dim sSQL As String
+  Dim cDESCRICAO As String
+  Dim aVALTMP As Variant
   If GridPla(Index).Row > 0 Then
     GridPla(Index).Col = 0
     nORD = GridPla(Index)
@@ -1038,7 +1040,7 @@ Private Sub Command4_Click(Index As Integer)
 End Sub
 
 Private Sub Command5_Click()
-  Dim cARQPOA
+  Dim cARQPOA As String
   cARQPOA = PegPath("PATH", "POA")
   nPPAP = PegUltSQL(cARQPOA, "select numero from POA WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ, "NUMERO", 0)
   If nPPAP = 0 Then
@@ -1049,14 +1051,14 @@ Private Sub Command5_Click()
 End Sub
 
 Private Sub Command6_Click()
-  Dim cARQPOKA
+  Dim cARQPOKA As String
 
   If Not AcessaMenu("escPOKA", 2) Then
     Exit Sub
   End If
 
   cARQPOKA = PegPath("PATH", "POKA")
-  nORD = TxtItem.text
+  nORD = txtItem.tEXT
   nPPAP = PegUltSQL(cARQPOKA, "select numero from POKA WHERE PF=" & FixInt(nPF) & " AND SEQ=" & FixInt(nSEQ) & " AND SSQ=" & FixInt(nSSQ) & " AND ITEM=" & FixInt(nORD), "NUMERO", 0)
   If nPPAP = 0 Then
     nPPAP = FixInt(PegMAXSQL(cARQPOKA, "POKA", "NUMERO", 0)) + 1
@@ -1108,7 +1110,7 @@ Private Function SUBGERASQL(Index As Integer)
 End Function
 
 Private Sub Command8_Click(Index As Integer)
-  Dim nGRIDINDEX
+  Dim nGRIDINDEX As Integer
   nNOVAPOS = FixInt(PegUltGrid(GridPla(Index), 0), 0) + 1
   subgerimu Index
   NewOrd.Show vbModal, Me
@@ -1267,9 +1269,9 @@ Private Sub Form_Load()
   Dim cSQLIMG As String
   CenterFormToScreen Me
 
-  TXTPF.text = nPF
-  TXTSEQ.text = nSEQ
-  TXTSSQ.text = nSSQ
+  TXTPF.tEXT = nPF
+  TXTSEQ.tEXT = nSEQ
+  TXTSSQ.tEXT = nSSQ
 
 
   lTROCOU = Array(False, False, False, False, False)
@@ -1286,7 +1288,7 @@ Private Sub Form_Load()
     End If
   End If
   If nARQPCS = 2 Then
-    TxtCodComp.text = Ccodcomp
+    TxtCodComp.tEXT = Ccodcomp
   Else
     TxtCodComp.Visible = False
     Label4.Visible = False
@@ -1306,7 +1308,7 @@ Private Sub Form_Load()
   aPAD = Array("", "", "", "")
   aVAL = PegSQL(cARQUSO, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    txtFields(iLOOP) = aVAL(iLOOP)
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   For iLOOP = 0 To 1
     Select Case iLOOP
@@ -1337,7 +1339,7 @@ Private Sub Form_Load()
   FilRelat (2)                                 'on the job
   FilRelat (3)                                 'dispositivo
 
-  txtFields(1).text = Replace(txtFields(1).text, "/", "-")  'chave apresentando erro de gravacao
+  TXTFIELDS(1).tEXT = Replace(TXTFIELDS(1).tEXT, "/", "-")  'chave apresentando erro de gravacao
   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
   PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 
@@ -1372,7 +1374,7 @@ Private Sub imgsave_Click(Index As Integer)
   salvarpict Me, Picture1(Index), cARQ
 End Sub
 Private Sub Incluirimagem_Click(Index As Integer)
-  Dim STMPFILE
+  Dim STMPFILE As String
   STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
   If lerarquivoimagem(STMPFILE, Picture1(Index), Picture2(Index)) Then
     lTROCOU(Index) = True

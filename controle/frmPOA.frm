@@ -786,7 +786,7 @@ Dim lTROCOU As Boolean
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = txt(iLOOP)
     Next iLOOP
@@ -853,8 +853,14 @@ Private Sub Command2_Click()
 End Sub
 
 Private Sub Command3_Click()
-  Dim nSAC, nLEN As Long
-  Dim cDESC01, cDESC02, cDESC03, cDESC04, cPROBLEMA, cCAM As String
+  Dim nSAC As Long
+  Dim nLEN As Long
+  Dim cDESC01 As String
+  Dim cDESC02 As String
+  Dim cDESC03 As String
+  Dim cDESC04 As String
+  Dim cPROBLEMA As String
+  Dim cCAM As String
   Dim cData As Variant
  ' Dim SACAREA As Variant
  ' Dim iRETVAL As Variant
@@ -947,7 +953,9 @@ Private Sub Command7_Click()
 End Sub
 
 Private Sub PegCodigoDescricaoPf()
-  Dim sSQL, aRETU, sARQ
+  Dim sSQL As String
+  Dim aRETU As Variant
+  Dim sARQ As String
   sARQ = PegPath("PATH", "PF")
   sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
   aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
@@ -1061,7 +1069,7 @@ Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
   UpdateReport = False  ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
 Private Sub Incluirimagem_Click()
-  Dim STMPFILE
+  Dim STMPFILE As String
   STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
   If lerarquivoimagem(STMPFILE, Picture1, Picture2) Then
     lTROCOU = True

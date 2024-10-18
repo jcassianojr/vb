@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmPFS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFS"
@@ -5119,7 +5119,9 @@ Private Sub Cmdapgobs_Click()
 End Sub
 Private Sub Cmdbusmr_Click()
   Dim aRETU As Variant
-  Dim cARQ, cSQL, cCODIGO As String
+  Dim cARQ As String
+  Dim cSQL As String
+  Dim cCODIGO As String
   cCODIGO = FixStr(TXTFIELDS(19))
   If Len(cCODIGO) > 0 Then
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
@@ -5134,7 +5136,7 @@ End Sub
 Private Sub cmdClose_Click()
   On Error Resume Next
  ' Dim cSQLIMG As String
-  Dim cCAMIMG
+  Dim cCAMIMG As String
 
   CONTAHOMEM
   If MDG("Gravar Sequencia", "Confirme Gravação ") Then
@@ -5390,7 +5392,7 @@ Private Sub Command2_Click(Index As Integer)
 End Sub
 
 Private Sub Command20_Click()
-  Dim x
+  Dim x As Integer
   Dim cTEMP As String
   If Not MDG("Trocar Tipo Almofada") Then
     Exit Sub
@@ -5632,8 +5634,8 @@ Private Sub Encerrar_Click()
 End Sub
 
 Private Sub esc1_Click(Index As Integer)
-  Dim linha
-  Dim coluna
+  Dim linha As Integer
+  Dim coluna As Integer
   Dim cTEMP As String
   Dim cDIG As String
   Dim cGRV As String
@@ -5817,9 +5819,9 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-  Dim cCAMIMG
-  Dim cSQLIMG
-  Dim x
+  Dim cCAMIMG As String
+  Dim cSQLIMG As String
+  Dim x As Integer
   CenterFormToScreen Me
   lTROCOU = Array(False, False, False, False, False)
   TXTPF.tEXT = nPF
@@ -5958,7 +5960,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub IncImg_Click(Index As Integer)
-  Dim STMPFILE
+  Dim STMPFILE As String
   STMPFILE = OpenArqExt(Me, "", "JPG", "JPEG *.JPG")
   If lerarquivoimagem(STMPFILE, Picture1(Index), Picture2(Index)) Then
     lTROCOU(Index) = True
@@ -5989,9 +5991,9 @@ Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub TXTFIELDS_LostFocus(Index As Integer)
-  Dim cSQLITEM
-  Dim cCODLOGIX
-  Dim nPOS
+  Dim cSQLITEM As String
+  Dim cCODLOGIX As String
+  Dim nPOS As Integer
   If Index = 64 Then
     cCODLOGIX = Trim(TXTFIELDS(64))
     If Len(cCODLOGIX) > 0 Then
