@@ -760,12 +760,12 @@ Begin VB.Form FrmRTf
          Tag             =   "Selecionar Palavra|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnuselsen 
-         Caption         =   "Selecionar Sentençao"
-         Tag             =   "Selecionar Sentençao|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+         Caption         =   "Selecionar SentenÃ§ao"
+         Tag             =   "Selecionar SentenÃ§ao|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu mnuDelSel 
-         Caption         =   "Deletar Seleçao"
-         Tag             =   "Deletar Seleçao|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+         Caption         =   "Deletar SeleÃ§ao"
+         Tag             =   "Deletar SeleÃ§ao|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu tr02 
          Caption         =   "-"
@@ -877,15 +877,15 @@ Begin VB.Form FrmRTf
          Tag             =   "Ver Fontes|#find|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
       End
       Begin VB.Menu xxx 
-         Caption         =   "Identicaçao"
-         Tag             =   "Identicaçao|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+         Caption         =   "IdenticaÃ§ao"
+         Tag             =   "IdenticaÃ§ao|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
          Begin VB.Menu mnuIncInd 
-            Caption         =   "Aumentar Posiçao"
-            Tag             =   "Aumentar Posiçao|#imagem|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+            Caption         =   "Aumentar PosiÃ§ao"
+            Tag             =   "Aumentar PosiÃ§ao|#imagem|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
          End
          Begin VB.Menu mnudecInd 
-            Caption         =   "Diminuir Posiçao"
-            Tag             =   "Diminuir Posiçao|#decrese|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+            Caption         =   "Diminuir PosiÃ§ao"
+            Tag             =   "Diminuir PosiÃ§ao|#decrese|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
          End
       End
       Begin VB.Menu yyy 
@@ -924,8 +924,8 @@ Begin VB.Form FrmRTf
             Tag             =   "Capitalizar|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
          End
          Begin VB.Menu mnutirace 
-            Caption         =   "Tira Acentuaçao"
-            Tag             =   "Tira Acentuaçao|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
+            Caption         =   "Tira AcentuaÃ§ao"
+            Tag             =   "Tira AcentuaÃ§ao|(Checked=0)(Enabled=-1)(Visible=-1)(WindowList=0)"
          End
          Begin VB.Menu mnucnvoem 
             Caption         =   "Converter Ansi(Windows)-> Oem(DOS)"
@@ -971,7 +971,7 @@ Private Sub ABRIR()
   If Len(cARQRTF) = 0 Then
     Exit Sub
   End If
-  If Not FileExist(cARQRTF, True) Then
+  If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
   If InStr(cARQRTF, "RTF") > 0 Then
@@ -1506,17 +1506,17 @@ Private Sub Form_Load()
   ''Editor Precisa estar Abilitado Barra Rolagen Funcionar
   If Not aDIREITOS(4) Then
   End If
-  ''Visualizaçao Ainda nao Criada
+  ''VisualizaÃ§ao Ainda nao Criada
   If Not aDIREITOS(5) Then
   End If
-  ''Impressao e Configuraçao Impressao
+  ''Impressao e ConfiguraÃ§ao Impressao
   If Not aDIREITOS(6) Then
     mnuprint.Enabled = False
     mnuprintcfg.Enabled = False
     Command4.Enabled = False
     Command13.Enabled = False
   End If
-  ''Exportaçao Ainda Nao Criada
+  ''ExportaÃ§ao Ainda Nao Criada
   If Not aDIREITOS(7) Then
   End If
 
@@ -1685,7 +1685,7 @@ Private Sub mnudecInd_Click()
 End Sub
 
 Private Sub mnuDelSel_Click()
-  If MDG("Apagar Seleçao") Then
+  If MDG("Apagar SeleÃ§ao") Then
     RichTextbox1.SelText = ""
   End If
 
@@ -1931,7 +1931,7 @@ Private Sub mnusaveasHTML_Click()
   sFILTER = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
   sFileName = FileSave(Me, sFILTER, 1, "HTML", stmp, stmp, "Salvar HTML Como")
   If Not Len(sFileName) = 0 Then
-    If FileExist(sFileName) Then
+    If FileConnExist(sFileName) Then
       If MDG("Arquivo ja Existe Sobrepor") Then
         DeleteFile sFileName  'Kill sFILENAME
         Exit Sub
@@ -2146,8 +2146,8 @@ Public Sub SubClassMenuXP()
   mnuselectall.Caption = "Selecionar &Tudo"
   mnuselectline.Caption = "Selecionar Linha"
   mnuselword.Caption = "Selecionar Palavra"
-  mnuselsen.Caption = "Selecionar Sentençao"
-  mnuDelSel.Caption = "Deletar Seleçao"
+  mnuselsen.Caption = "Selecionar SentenÃ§ao"
+  mnuDelSel.Caption = "Deletar SeleÃ§ao"
   tr02.Caption = "-"
   mnucopy.Caption = "&Copiar|#copy"
   mnupaste.Caption = "Co&lar|#colar"
@@ -2174,9 +2174,9 @@ Public Sub SubClassMenuXP()
   mnuunder.Caption = "Sublilhado|#underline"
   mnustrik.Caption = "Riscado|#riscado"
   mnuVerFontes.Caption = "Ver Fontes|#find"
-  xxx.Caption = "Identicaçao"
-  mnuIncInd.Caption = "Aumentar Posiçao|#imagem"
-  mnudecInd.Caption = "Diminuir Posiçao|#decrese"
+  xxx.Caption = "IdenticaÃ§ao"
+  mnuIncInd.Caption = "Aumentar PosiÃ§ao|#imagem"
+  mnudecInd.Caption = "Diminuir PosiÃ§ao|#decrese"
   yyy.Caption = "Escrita"
   mnuscrsup.Caption = "Escrita Superior|#sob"
   mnuscrinf.Caption = "Escrita Inferior|#sub"
@@ -2186,7 +2186,7 @@ Public Sub SubClassMenuXP()
   mnuUpper.Caption = "Maisculas|#maisculas"
   mnuDown.Caption = "Minusculas|#minusculas"
   mnucapitalizar.Caption = "Capitalizar"
-  mnutirace.Caption = "Tira Acentuaçao"
+  mnutirace.Caption = "Tira AcentuaÃ§ao"
   mnucnvoem.Caption = "Converter Ansi(Windows)-> Oem(DOS)"
   mnucnvoem2.Caption = "Converter Ansi(Windows)-> Oem(DOS)Padrao2"
   mnucnvansi.Caption = "Converter Oem(DOS)->Ansi(Windows)"

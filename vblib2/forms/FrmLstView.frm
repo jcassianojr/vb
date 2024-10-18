@@ -617,7 +617,7 @@ End Sub
 
 Private Sub CmdAbrirCom_Click()
   cARQRTF = Txtcaminho.text & Trim(Grid)
-  If FileExist(cARQRTF, True) Then
+  If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
 End Sub

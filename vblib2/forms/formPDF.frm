@@ -441,7 +441,7 @@ Dim cache As String
 Const AppName = "Text-PDF v1.0"
 
 Private Sub CmdAbrirCom_Click()
-  If FileExist(txtFilename.tEXT, True) Then
+  If FileConnExist(txtFilename.tEXT, True) Then
     Call OpenWith(txtFilename.tEXT, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
 End Sub
@@ -449,7 +449,7 @@ End Sub
 Private Sub CmdAbrirPdf_Click()
   Dim cARQSHELL As String
   cARQSHELL = FixStr(txtOutputFile.tEXT)
-  If FileExist(cARQSHELL) Then
+  If FileConnExist(cARQSHELL) Then
     ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , Me.hWnd
   End If
 End Sub
@@ -471,7 +471,7 @@ End Sub
 Private Sub cmdimp_Click()
   Dim cARQSHELL As String
   cARQSHELL = FixStr(txtOutputFile.tEXT)
-  If FileExist(cARQSHELL) Then
+  If FileConnExist(cARQSHELL) Then
     ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , "print", Me.hWnd
   End If
 End Sub
@@ -520,7 +520,7 @@ Private Sub Form_Load()
 
 
   If Len(ePASS01) > 0 Then
-    If FileExist(ePASS01) Then
+    If FileConnExist(ePASS01) Then
       txtTitle.tEXT = NomeArq(ePASS01, True)
       txtFilename.tEXT = ePASS01
       txtOutputFile.tEXT = TrocaExt(ePASS01, "PDF")
@@ -621,7 +621,7 @@ Private Sub btnConvert_Click()
                  txtSubject.tEXT, txtTitle.tEXT, _
                  cmbFont.tEXT, Val(cmbFontSize.tEXT), Val(cmbRotation.tEXT), _
                  Val(cmbPageSize.tEXT), Val(Right(cmbPageSize.tEXT, 3)), ChkPaisagem.Value
-    If FileExist(txtOutputFile.tEXT) Then
+    If FileConnExist(txtOutputFile.tEXT) Then
       Alert "Conversao Concluida"
       btnfalse
     End If
@@ -640,10 +640,10 @@ Public Function ConvertToPDF(FileName As String, outputfile As String, _
   Dim tpwidth As Long
   Dim tpheight As Long
   On Error GoTo er
-  If Not FileExist(FileName) Then
+  If Not FileConnExist(FileName) Then
     MsgBox "Arquivo '" & FileName & "' não existe."
     Exit Function
-  ElseIf FileExist(outputfile) Then
+  ElseIf FileConnExist(outputfile) Then
     If MDG("Arquivo Ja Existente" & outputfile, "Confirma Exclusao") Then
       DeleteFile outputfile  'Kill outputfile
     End If
@@ -968,7 +968,7 @@ Public Sub MyPrintingTXT()
   Dim STRBUFFER As String
   Dim cARQOPEN As String
   cARQOPEN = txtFilename.tEXT
-  If Not FileExist(cARQOPEN, True) Then
+  If Not FileConnExist(cARQOPEN, True) Then
     Exit Sub
   End If
   fileFile = FreeFile

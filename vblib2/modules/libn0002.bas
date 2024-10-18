@@ -19,7 +19,7 @@ Public Sub MontaToolbar(ByRef vFormtool As Variant, ByVal nFORM As Long)
   vFormtool.ImageList = frmPRINCIPAL.ImageList1
 
   cCAM = PegPath("PATH", "SYSCONF")
-  If Not FileExist(cCAM, True) Then
+  If Not FileConnExist(cCAM, True) Then
     Exit Sub
   End If
 

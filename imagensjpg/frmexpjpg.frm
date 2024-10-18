@@ -266,7 +266,7 @@ Private Sub CmdImportar_Click()
         Else
           sTEMPFILE = cCAMJPG & Trim(StrZero(OBJRSGLOB.Fields("NUMERO"), QtdeDigitos.Value)) + ".JPG"
         End If
-        If FileExist(sTEMPFILE) Then
+        If FileConnExist(sTEMPFILE) Then
           ccodigo.Caption = OBJRSGLOB.Fields("CODIGO")
           iFileNum = FreeFile
           Open sTEMPFILE For Binary Access Read As #iFileNum

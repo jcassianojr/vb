@@ -69,7 +69,7 @@ End Property
 Public Sub MyPrintingTXT()
     Dim fileFile As Integer
     Dim STRBUFFER As String
-	If FileExist(cARQRTF, true) Then        
+	If FileConnExist(cARQRTF, true) Then        
         Exit Function
     End If	
     fileFile = FreeFile

@@ -511,7 +511,7 @@ Private Sub Command5_Click()
   sFILTER = "Arquivos Access (*.MDB)" & vbNullChar & "*.MDB" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
   sFileName = FileSave(Me, sFILTER, 1, "MDB", "", "", "Criar Access Como")
   If Not Len(sFileName) = 0 Then
-    If FileExist(sFileName) Then
+    If FileConnExist(sFileName) Then
       ''nAO GRAVA EM CIMA
     Else
       AdoNewTable sFileName, False, 5

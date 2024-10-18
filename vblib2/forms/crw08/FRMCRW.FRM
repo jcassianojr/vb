@@ -539,7 +539,7 @@ Option Explicit
 
 Private Sub CmdAbrirCom_Click()
   cARQRTF = TxtArquivo.tEXT
-  If FileExist(cARQRTF, True) Then
+  If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
 End Sub
@@ -627,7 +627,7 @@ Dim x As Integer
     nARQUIVOS = UBound(aARQUIVOS)
     For x = 0 To nARQUIVOS
       If Len(aARQUIVOS(x)) > 0 Then
-        If Not FileExist(aARQUIVOS(x)) Then
+        If Not FileConnExist(aARQUIVOS(x)) Then
           Alert "Arquivo nao Encontrado: " + aARQUIVOS(x)
           Exit Sub
         End If
@@ -639,7 +639,7 @@ End Sub
 
 Private Sub CmdPreview_Click()
   cARQRTF = TxtArquivo.tEXT
-  If Not FileExist(cARQRTF, True) Then
+  If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
   If IsExtensao(cARQRTF, "TXT") Then
@@ -677,7 +677,7 @@ Public Sub MyPrintinghtml()
   Dim LINES() As String
   Dim i As Integer
 
-  ' If Not FileExist(cARQRTF, True) Then 'ja checado cmdvisualclick
+  ' If Not FileConnExist(cARQRTF, True) Then 'ja checado cmdvisualclick
   '     Exit Sub
   ' End If
   cTEXTO = FileText(cARQRTF)
@@ -707,7 +707,7 @@ End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
   Dim STRBUFFER As String
-  'If FileExist(cARQRTF, True) Then 'ja checado cmdvisualclick
+  'If FileConnExist(cARQRTF, True) Then 'ja checado cmdvisualclick
   '    Exit Sub
   'End If
   fileFile = FreeFile
@@ -826,7 +826,7 @@ Private Sub Form_Load()
 
     For x = 0 To nARQUIVOS
       If Len(aARQUIVOS(x)) > 0 Then
-        If Not FileExist(aARQUIVOS(x)) Then
+        If Not FileConnExist(aARQUIVOS(x)) Then
           Alert "Arquivo nao Encontrado: " + aARQUIVOS(x)
           Exit Sub
         End If

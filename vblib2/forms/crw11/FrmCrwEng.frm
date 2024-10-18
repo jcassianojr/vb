@@ -513,7 +513,7 @@ Const cFORMID = "Imprimir Relatorios Crystal-Engine 10"
 
 Private Sub CmdAbrirCom_Click()
   cARQRTF = TxtArquivo.tEXT
-  If FileExist(cARQRTF, True) Then
+  If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
 
@@ -604,7 +604,7 @@ Private Sub CmdMudaFec_Click()
 'x = 0
 'For Each CRYSTALTABLE In CrystalDatabase.Tables
 '    If x <= nARQUIVOS Then
-'       If FileExist(aARQUIVOS(x), True) Then
+'       If FileConnExist(aARQUIVOS(x), True) Then
 '          CRYSTALTABLE.location = aARQUIVOS(x)
 ''CrystalTable.SetLogOnInfo "PDBDAO", "", "userid", "senha"
 ''CrystalTable.SetLogOnInfo "crystalserver", "Databasename", "userid", "Password"
@@ -616,7 +616,7 @@ End Sub
 
 Private Sub CmdPreview_Click()
   cARQRTF = TxtArquivo.tEXT
-  If Not FileExist(cARQRTF, True) Then
+  If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
   If IsExtensao(cARQRTF, "TXT") Then
@@ -664,7 +664,7 @@ Public Sub MyPrintinghtml()
   Dim LINES() As String
   Dim i As Integer
 
-  ' If Not FileExist(cARQRTF, True) Then 'ja checado cmdvisualclick
+  ' If Not FileConnExist(cARQRTF, True) Then 'ja checado cmdvisualclick
   '     Exit Sub
   ' End If
   cTEXTO = FileText(cARQRTF)
@@ -682,7 +682,7 @@ End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
   Dim STRBUFFER As String
-  '   If FileExist(cARQRTF, True) Then
+  '   If FileConnExist(cARQRTF, True) Then
   '       Exit Sub
   '   End If
   fileFile = FreeFile
@@ -810,7 +810,7 @@ Private Sub Form_Load()
   For Each CRYSTALTABLE In CrystalDatabase.Tables
     If x <= nARQUIVOS Then
       If Len(aARQUIVOS(x)) > 0 Then
-        If FileExist(aARQUIVOS(x), True) Then
+        If FileConnExist(aARQUIVOS(x), True) Then
           CRYSTALTABLE.location = aARQUIVOS(x)
 
           ''CrystalTable.SetLogOnInfo "PDBDAO", "", "userid", "senha"

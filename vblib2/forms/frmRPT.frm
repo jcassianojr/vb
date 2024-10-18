@@ -3,7 +3,7 @@ Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form FrmRpt 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "RelatÛrios /Documentos"
+   Caption         =   "Relat√≥rios /Documentos"
    ClientHeight    =   4590
    ClientLeft      =   1095
    ClientTop       =   330
@@ -22,7 +22,7 @@ Begin VB.Form FrmRpt
       Index           =   3
       Left            =   9840
       TabIndex        =   30
-      ToolTipText     =   "Data de Inclus„o do Relatorio"
+      ToolTipText     =   "Data de Inclus√£o do Relatorio"
       Top             =   3480
       Width           =   1095
    End
@@ -66,7 +66,7 @@ Begin VB.Form FrmRpt
       Index           =   17
       Left            =   1080
       TabIndex        =   7
-      ToolTipText     =   "DescriÁao do Relatorio"
+      ToolTipText     =   "Descri√ßao do Relatorio"
       Top             =   480
       Width           =   6255
    End
@@ -190,7 +190,7 @@ Begin VB.Form FrmRpt
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   51
-         ToolTipText     =   "ObervarÁıes Sobre o Relatorio"
+         ToolTipText     =   "Obervar√ß√µes Sobre o Relatorio"
          Top             =   1440
          Width           =   8535
       End
@@ -201,7 +201,7 @@ Begin VB.Form FrmRpt
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   45
-         ToolTipText     =   "ObervarÁıes Sobre o Relatorio"
+         ToolTipText     =   "Obervar√ß√µes Sobre o Relatorio"
          Top             =   1440
          Width           =   7575
       End
@@ -309,7 +309,7 @@ Begin VB.Form FrmRpt
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   34
-         ToolTipText     =   "ObervarÁıes Sobre o Relatorio"
+         ToolTipText     =   "Obervar√ß√µes Sobre o Relatorio"
          Top             =   360
          Width           =   8535
       End
@@ -372,7 +372,7 @@ Begin VB.Form FrmRpt
          Index           =   21
          Left            =   -73560
          TabIndex        =   14
-         ToolTipText     =   "Nome da 4™ Base de Dados"
+         ToolTipText     =   "Nome da 4¬™ Base de Dados"
          Top             =   1305
          Width           =   6015
       End
@@ -381,7 +381,7 @@ Begin VB.Form FrmRpt
          Index           =   20
          Left            =   -73560
          TabIndex        =   13
-         ToolTipText     =   "Nome da 3™ Base de Dados"
+         ToolTipText     =   "Nome da 3¬™ Base de Dados"
          Top             =   945
          Width           =   6015
       End
@@ -390,7 +390,7 @@ Begin VB.Form FrmRpt
          Index           =   19
          Left            =   -73560
          TabIndex        =   12
-         ToolTipText     =   "Nome da 2™ Base de Dados"
+         ToolTipText     =   "Nome da 2¬™ Base de Dados"
          Top             =   585
          Width           =   6015
       End
@@ -399,7 +399,7 @@ Begin VB.Form FrmRpt
          Index           =   18
          Left            =   -73560
          TabIndex        =   11
-         ToolTipText     =   "Nome da 1™ Base de Dados"
+         ToolTipText     =   "Nome da 1¬™ Base de Dados"
          Top             =   195
          Width           =   6015
       End
@@ -415,7 +415,7 @@ Begin VB.Form FrmRpt
          Width           =   795
       End
       Begin VB.CheckBox chkFields 
-         Caption         =   "¡rvore"
+         Caption         =   "√Årvore"
          ForeColor       =   &H00C00000&
          Height          =   285
          Index           =   24
@@ -617,7 +617,7 @@ Begin VB.Form FrmRpt
          Width           =   525
       End
       Begin VB.Label lblLabels 
-         Caption         =   "TÌtulo"
+         Caption         =   "T√≠tulo"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -827,7 +827,7 @@ Begin VB.Form FrmRpt
       End
       Begin VB.Label lblLabels 
          Alignment       =   2  'Center
-         Caption         =   "Arquivo Caminhos Par‚metros"
+         Caption         =   "Arquivo Caminhos Par√¢metros"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -906,7 +906,7 @@ Begin VB.Form FrmRpt
       Width           =   855
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Inclus„o Alteracao"
+      Caption         =   "Inclus√£o Alteracao"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -963,7 +963,7 @@ Begin VB.Form FrmRpt
       Width           =   915
    End
    Begin VB.Label lblLabels 
-      Caption         =   "CÛd.Interno"
+      Caption         =   "C√≥d.Interno"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -982,7 +982,7 @@ Begin VB.Form FrmRpt
       Width           =   1035
    End
    Begin VB.Label lblLabels 
-      Caption         =   "DescriÁ„o"
+      Caption         =   "Descri√ß√£o"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -1020,7 +1020,7 @@ Begin VB.Form FrmRpt
       Width           =   945
    End
    Begin VB.Label lblLabels 
-      Caption         =   "CÛdigo"
+      Caption         =   "C√≥digo"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -1190,7 +1190,7 @@ Private Sub Form_Load()
   cSQL = ePASS01
   ''cARQ = pegpath("PATH", "SYSRPT")
 
-  If Not FileExist(cARQ, True, , cSQL) Then
+  If Not FileConnExist(cARQ, True, , cSQL) Then
     End
   End If
 

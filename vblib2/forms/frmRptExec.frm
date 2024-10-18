@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form frmRptExec 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Tipos de Execuçao Gerenciador Relatorio/Documentos"
+   Caption         =   "Tipos de ExecuÃ§ao Gerenciador Relatorio/Documentos"
    ClientHeight    =   2505
    ClientLeft      =   1095
    ClientTop       =   330
@@ -28,7 +28,7 @@ Begin VB.Form frmRptExec
       Height          =   375
       Left            =   1080
       TabIndex        =   11
-      ToolTipText     =   "Escolher um Formulario Para Execuçao"
+      ToolTipText     =   "Escolher um Formulario Para ExecuÃ§ao"
       Top             =   720
       Width           =   975
       _ExtentX        =   0
@@ -92,7 +92,7 @@ Begin VB.Form frmRptExec
       Index           =   1
       Left            =   1710
       TabIndex        =   1
-      ToolTipText     =   "Nº do Formulario Associado"
+      ToolTipText     =   "NÂº do Formulario Associado"
       Top             =   360
       Width           =   2955
    End
@@ -217,7 +217,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1064
-Const cFORMID = "Tipos de Execuçao Gerenciador Formularios/Relatórios"
+Const cFORMID = "Tipos de ExecuÃ§ao Gerenciador Formularios/RelatÃ³rios"
 Dim aCAM, aFOR, aVAL, aPAD As Variant
 Attribute aFOR.VB_VarUserMemId = 1073938432
 Attribute aVAL.VB_VarUserMemId = 1073938432
@@ -251,7 +251,7 @@ Private Sub cmdescexe_Click()
   Dim sRECENTFILE, sPath, SFILTER, sFILENAME As String
   sRECENTFILE = Text(2)
   sPath = Text(2)
-  SFILTER = "Executáveis" & vbNullChar & "*.exe" & vbNullChar & "Todos os Arquivos" & vbNullChar & "*.*"
+  SFILTER = "ExecutÃ¡veis" & vbNullChar & "*.exe" & vbNullChar & "Todos os Arquivos" & vbNullChar & "*.*"
   sFILENAME = FileOpen(Me, SFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
   If Not Len(sFILENAME) = 0 Then
     Text(2) = NomeArq(sFILENAME)
@@ -295,7 +295,7 @@ Private Sub Form_Load()
 
   ''Arquivo
   cARQ = PegPath("PATH", "SYSCONF")
-  If Not FileExist(cARQ, True) Then
+  If Not FileConnExist(cARQ, True) Then
     End
   End If
 

@@ -692,7 +692,7 @@ Const cFORMID = "Imprimir Relatorios sql"
 Option Explicit
 Private Sub CmdAbrirCom_Click()
   cARQRTF = TxtArquivo.Text
-  If FileExist(cARQRTF, True) Then
+  If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
 End Sub
@@ -843,7 +843,7 @@ Private Sub cmdexportar_Click(Index As Integer)
   End Select
   RsExp.Close
   DBEXP.Close
-  Alert "Exportação Concluida"
+  Alert "ExportaÃ§Ã£o Concluida"
 
   If CmdEmail.Value = 1 Then
     ePASS01 = Array("", _
@@ -955,7 +955,7 @@ End Sub
 
 Private Sub CmdVisua_Click()
   cARQRTF = TxtArquivo.Text
-  If Not FileExist(cARQRTF, True) Then
+  If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
   If IsExtensao(cARQRTF, "TXT") Then
@@ -1003,7 +1003,7 @@ Public Sub MyPrintinghtml()
   Dim LINES() As String
   Dim i As Integer
 
-  ' If Not FileExist(cARQRTF, True) Then 'ja checado cmdvisualclick
+  ' If Not FileConnExist(cARQRTF, True) Then 'ja checado cmdvisualclick
   '     Exit Sub
   ' End If
   cTEXTO = FileText(cARQRTF)
@@ -1067,7 +1067,7 @@ Private Sub Form_Load()
   nARQUIVOS = UBound(aARQUIVOS)
   If nARQUIVOS > 0 Then
     If Len(aARQUIVOS(0)) > 0 Then
-      If FileExist(aARQUIVOS(0), True, True, aRELCFG(15)) Then
+      If FileConnExist(aARQUIVOS(0), True, True, aRELCFG(15)) Then
         arquivo.Text = aARQUIVOS(0)
       End If
     End If

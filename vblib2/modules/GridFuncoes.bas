@@ -117,7 +117,7 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
   l3265 = True
 
 
-  If Not FileExist(cARQ, True, , cSQL) Then
+  If Not FileConnExist(cARQ, True, , cSQL) Then
     Exit Sub
   End If
 
@@ -296,7 +296,7 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
   lOPEN = False
   l3265 = True
 
-  If Not FileExist(cARQ, True, , cSQL) Then
+  If Not FileConnExist(cARQ, True, , cSQL) Then
     Exit Sub
   End If
 
@@ -522,7 +522,7 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
 
 
 
-  If Not FileExist(cARQ, True, , cSQL) Then
+  If Not FileConnExist(cARQ, True, , cSQL) Then
     Exit Sub
   End If
 

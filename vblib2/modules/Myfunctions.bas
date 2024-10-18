@@ -1,6 +1,6 @@
 Attribute VB_Name = "Myfunctions"
 Option Explicit
-'fileexist(cARQ)Verifica a existencia de Uma Arquivo
+'FileConnExist(cARQ)Verifica a existencia de Uma Arquivo
 'pegpath(Cgrupo,Ccamp) 'Traz caminho de uma arquivo ini(nomeaplicativo.ini)
 'today() data atual
 'nulldate() data em branco
@@ -640,7 +640,7 @@ Public Function Fdata(ByVal Data As Variant, _
   End If
 End Function
 
-Public Function FileExist(ByVal cARQ As Variant, _
+Public Function FileConnExist(ByVal cARQ As Variant, _
                           Optional ByVal lMES As Boolean = False, _
                           Optional ByVal cMES As String = "Arquivo Não Encontrado ", _
                           Optional ByVal cSQL As String = "")
@@ -648,10 +648,10 @@ Public Function FileExist(ByVal cARQ As Variant, _
   Dim nFILELEN
   Dim nPOS As Long
   On Error GoTo NotExist
-  FileExist = False
+  FileConnExist = False
   cARQUIVO = UCase(Trim(CStr(cARQ)))
   If Len(cARQ) = 0 Then
-     FileExist = False
+     FileConnExist = False
      Exit Function
   End If
 
@@ -673,7 +673,7 @@ Public Function FileExist(ByVal cARQ As Variant, _
         cARQUIVO = Replace(cARQUIVO, "]", "")
         If Len(cSQL) = 0 Then
           Alert ("Fileexit  Nao Passado cSQL Necessario Para DBF")
-          FileExist = True
+          FileConnExist = True
           Exit Function
         End If
         cARQUIVO = cARQUIVO & NomeTableSql(cSQL, ".DBF")
@@ -691,7 +691,7 @@ Public Function FileExist(ByVal cARQ As Variant, _
         cARQUIVO = Replace(cARQUIVO, "]", "")
         If Len(cSQL) = 0 Then
           Alert ("Fileexit  Nao Passado cSQL Necessario Para DB")
-          FileExist = True
+          FileConnExist = True
           Exit Function
         End If
         cARQUIVO = cARQUIVO & NomeTableSql(cSQL, ".DB")
@@ -699,7 +699,7 @@ Public Function FileExist(ByVal cARQ As Variant, _
 
       If InStr(cARQUIVO, "[CONN]") > 0 Or InStr(cARQUIVO, "[MYSQL]") > 0 Or InStr(cARQUIVO, "[MARIADB]") > 0 Or _
          InStr(cARQUIVO, "[PGSQL]") > 0 Or InStr(cARQUIVO, "[POSTGRESQL]") > 0 Or InStr(cARQUIVO, "[SQLSERVER]") > 0 Then
-        FileExist = True
+        FileConnExist = True
         Exit Function
       End If
       If InStr(cARQUIVO, "[FIREBIRD]") > 0 Or InStr(cARQUIVO, "[INTERBASE]") > 0 Then
@@ -709,7 +709,7 @@ Public Function FileExist(ByVal cARQ As Variant, _
         If nPOS > 0 Then
           cARQUIVO = Mid(cARQUIVO, 1, nPOS - 1)
         End If
-        FileExist = True
+        FileConnExist = True
         Exit Function
       End If
       If InStr(cARQUIVO, "[XLSEXT]") > 0 Then
@@ -721,17 +721,17 @@ Public Function FileExist(ByVal cARQ As Variant, _
     End If
   End If
   If InStr(cARQUIVO, "PROVIDER") > 0 Or InStr(cARQUIVO, ".MARIADB") > 0 Or InStr(cARQUIVO, ".MYSQL") > 0 Then
-    FileExist = True
+    FileConnExist = True
     Exit Function
   End If
   If FileExists(cARQUIVO) Then
     
-    FileExist = True
+    FileConnExist = True
   End If
 
   Exit Function
 NotExist:
-  FileExist = False
+  FileConnExist = False
   If lMES Then
     Alert cMES & cARQUIVO, "Erro Arquivo"
   End If
@@ -2184,7 +2184,7 @@ Public Function Count_Lines_In_File(ByVal strFilePath As String, Optional ByVal 
   fileFile = FreeFile
 
 
-  If Not FileExist(strFilePath, lMES) Then
+  If Not FileConnExist(strFilePath, lMES) Then
     Count_Lines_In_File = -1
     Exit Function
   End If
@@ -2213,13 +2213,13 @@ Public Function txttohtml(ByVal cORIGEM As String, Optional ByVal cDESTINO As St
   Dim nDESTINO As Integer
   Dim STRBUFFER
   Dim cLINHA As String
-  If Not FileExist(cORIGEM, True) Then
+  If Not FileConnExist(cORIGEM, True) Then
     Exit Function
   End If
   If Len(cDESTINO) = 0 Then
     cDESTINO = TrocaExt(cORIGEM, "HTML")
   End If
-  If FileExist(cDESTINO, False) Then
+  If FileConnExist(cDESTINO, False) Then
     Alert ("Arquivo Destino Ja existe")
     Exit Function
   End If
@@ -2257,13 +2257,13 @@ Public Function txttoRTF(ByVal cORIGEM As String, Optional ByVal cDESTINO As Str
   Dim nDESTINO As Integer
   Dim STRBUFFER
   Dim cLINHA As String
-  If Not FileExist(cORIGEM, True) Then
+  If Not FileConnExist(cORIGEM, True) Then
     Exit Function
   End If
   If Len(cDESTINO) = 0 Then
     cDESTINO = TrocaExt(cORIGEM, "RTF")
   End If
-  If FileExist(cDESTINO, False) Then
+  If FileConnExist(cDESTINO, False) Then
     Alert ("Arquivo Destino Ja existe")
     Exit Function
   End If

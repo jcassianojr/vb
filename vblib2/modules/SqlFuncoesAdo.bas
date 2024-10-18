@@ -238,7 +238,7 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     aRETU(x) = 0
   Next x
 
-  If Not FileExist(SomaExt(cARQ), True) Then
+  If Not FileConnExist(SomaExt(cARQ), True) Then
     SomaSQLAdo = aRETU
     Exit Function
   End If
@@ -331,7 +331,7 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
     aRETU(x) = ""
   Next x
 
-  If Not FileExist(SomaExt(cARQ), True) Then
+  If Not FileConnExist(SomaExt(cARQ), True) Then
     PegSQLDeliAdo = aRETU
     Exit Function
   End If

@@ -1020,7 +1020,7 @@ Public Function AdoNewTable(ByVal cARQORI As String, Optional ByVal lCRIA As Boo
   Dim cat As New ADOX.Catalog
   On Error GoTo trataerro
   AdoNewTable = False
-  If Not FileExist(cARQORI, True) Then
+  If Not FileConnExist(cARQORI, True) Then
     If lCRIA Or MDG("Criar Arquivo " & cARQORI) Then
       cat.Create "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & cARQORI & _
                  ";Jet OLEDB:Engine Type=" & Ntipo & ";"

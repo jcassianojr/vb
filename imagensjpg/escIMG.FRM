@@ -399,7 +399,7 @@ Private Sub Form_Load()
 
 
   cARQHELP = PegPath("PATH", "HELP")
-  If FileExist(cARQHELP) Then
+  If FileConnExist(cARQHELP) Then
     App.HelpFile = cARQHELP
   End If
 
@@ -450,10 +450,10 @@ Private Sub Form_Load()
     '
     'nao busca mdb se for logix ou datamace
   Else
-    If Not FileExist(cARQRTF, True) Then
+    If Not FileConnExist(cARQRTF, True) Then
       Command1_Click
     End If
-    If Not FileExist(cARQRTF, True) Then
+    If Not FileConnExist(cARQRTF, True) Then
       End
     End If
   End If

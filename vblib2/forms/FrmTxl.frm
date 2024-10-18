@@ -600,7 +600,7 @@ End Sub
 
 Private Sub CmdAbrirCom_Click()
   cARQRTF = TxtArquivo.Text
-  If FileExist(cARQRTF, True) Then
+  If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
   End If
 End Sub
@@ -660,7 +660,7 @@ Private Sub imptxt()  'Aqui e direct print com1 lpt1 no pode ser usado preview a
   Dim fileFile As Integer
   Dim STRBUFFER As String
 
-  If Not FileExist(cARQRTF, True) Then
+  If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
   cLINHA = ""
@@ -702,7 +702,7 @@ End Sub
 
 Private Sub CmdVisua_Click()
   cARQRTF = TxtArquivo.Text
-  If Not FileExist(cARQRTF, True) Then
+  If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
   If lARQTXT Then
@@ -751,7 +751,7 @@ Public Sub MyPrintinghtml()
   Dim LINES() As String
   Dim i As Integer
 
-  ' If Not FileExist(cARQRTF, True) Then 'ja checado cmdvisualclick
+  ' If Not FileConnExist(cARQRTF, True) Then 'ja checado cmdvisualclick
   '     Exit Sub
   ' End If
   cTEXTO = FileText(cARQRTF)
@@ -769,7 +769,7 @@ End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
   Dim STRBUFFER As String
-  'If Not FileExist(cARQRTF, True) Then 'ja checado na cmdvisual click
+  'If Not FileConnExist(cARQRTF, True) Then 'ja checado na cmdvisual click
   '    Exit Sub
   ' End If
   fileFile = FreeFile

@@ -261,12 +261,12 @@ Begin VB.MDIForm frmPRINCIPAL
       Caption         =   "&Cadastro"
       Index           =   1
       Begin VB.Menu mnuSUBMENU2 
-         Caption         =   "&Tipo de tÌtulos"
+         Caption         =   "&Tipo de t√≠tulos"
          Index           =   0
       End
    End
    Begin VB.Menu mnuMENU 
-      Caption         =   "&RelatÛrios"
+      Caption         =   "&Relat√≥rios"
       Index           =   2
       Begin VB.Menu RELAT 
          Caption         =   "Wrpt"
@@ -302,18 +302,18 @@ Begin VB.MDIForm frmPRINCIPAL
       End
    End
    Begin VB.Menu mnuMENU 
-      Caption         =   "Con&figuraÁıes"
+      Caption         =   "Con&figura√ß√µes"
       Index           =   4
       Begin VB.Menu mnuSUBMENU4 
-         Caption         =   "&B·sica"
+         Caption         =   "&B√°sica"
          Index           =   0
       End
    End
    Begin VB.Menu mnuMENU 
-      Caption         =   "&OperaÁıes"
+      Caption         =   "&Opera√ß√µes"
       Index           =   5
       Begin VB.Menu mnuSUBMENU5 
-         Caption         =   "OperaÁ„o 01"
+         Caption         =   "Opera√ß√£o 01"
          Index           =   0
       End
    End
@@ -356,7 +356,7 @@ Private Sub MDIForm_Load()
 
 
   If App.PrevInstance Then
-    Alert App.EXEName & " j· est· rodando!"
+    Alert App.EXEName & " j√° est√° rodando!"
     End
   End If
   strCodeKey = "SoFtEc1SiStEmAs24055-2265"
@@ -375,7 +375,7 @@ Private Sub MDIForm_Load()
   cTIPORPT = "R"
 
   carqhelp = PegPath("PATH", "HELP")
-  If FileExist(carqhelp) Then
+  If FileConnExist(carqhelp) Then
     App.HelpFile = carqhelp
   End If
 
@@ -431,21 +431,21 @@ Private Sub MDIForm_Load()
 
 
 
-  Me.Caption = App.FileDescription & " Versao:" & App.Major & "." & App.Minor & " Usu·rio: " & zUSER
+  Me.Caption = App.FileDescription & " Versao:" & App.Major & "." & App.Minor & " Usu√°rio: " & zUSER
   If Not FillMenu("SUBMENU") Then
-    Alert "O Sub-Menu n„o foi carregado!", "Sub Menu"
+    Alert "O Sub-Menu n√£o foi carregado!", "Sub Menu"
   End If
   If Not FillMenu("SUBMENU2") Then
-    Alert "O Sub-Menu 2 n„o foi carregado!", "SubMenu 2"
+    Alert "O Sub-Menu 2 n√£o foi carregado!", "SubMenu 2"
   End If
   ''If Not FillMenu("SUBMENU3") Then
-  ''  alert "O Sub-Menu 3 n„o foi carregado!",  "SubMenu 2"
+  ''  alert "O Sub-Menu 3 n√£o foi carregado!",  "SubMenu 2"
   ''End If
   If Not FillMenu("SUBMENU4") Then
-    Alert "O Sub-Menu 4 n„o foi carregado!", "SubMenu 4"
+    Alert "O Sub-Menu 4 n√£o foi carregado!", "SubMenu 4"
   End If
   If Not FillMenu("SUBMENU5") Then
-    Alert "O Sub-Menu 5 n„o foi carregado!", "SubMenu 5"
+    Alert "O Sub-Menu 5 n√£o foi carregado!", "SubMenu 5"
   End If
   ''* Pega Identificacao do WRPT
 
@@ -596,7 +596,7 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
 
   Case 1
     cARQRTF = PegPath("HELP", "HELPTXT")
-    If FileExist(cARQRTF, True) Then
+    If FileConnExist(cARQRTF, True) Then
       PrintPreview1.ShowPreview
     End If
     Exit Sub

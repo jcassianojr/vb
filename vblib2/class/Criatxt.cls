@@ -143,7 +143,7 @@ Public Sub fechar()
 End Sub
 Public Sub arqview()
   cARQRTF = mvarArquivo
-  If FileExist(cARQRTF, True) Then
+  If FileConnExist(cARQRTF, True) Then
     PrinterEx.ShowPrintPreview Me, "MyPrintingTXT"
   End If
 End Sub

@@ -195,7 +195,7 @@ End Sub
 Private Sub Form_Load()
    cARQ = PegPath("PATH", "CITACAO")
    nTOTREG = 0
-   If FileExist(cARQ, True) Then
+   If FileConnExist(cARQ, True) Then
       chkExibir = vbChecked
       CenterFormToScreen Me
       nTOTREG = PegCountSQL(cARQ, "tblcitacao", "codcitacao", 1)

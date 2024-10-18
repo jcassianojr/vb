@@ -191,7 +191,7 @@ Private Sub MDIForm_Load()
   zusalx = PegPath("PATH", "USALX")
   zusamc = PegPath("PATH", "USAMC")
 
-  If Not FileExist(Dbname, True) Then
+  If Not FileConnExist(Dbname, True) Then
     Alert ("Erro Ini [PATH] MDB=")
     End
   End If
@@ -276,7 +276,7 @@ Private Sub MDIForm_Load()
   With DAORS
     Do While Not DAORS.EOF
       cARQICO = pICONES & DAORS.Fields("TOOLTIP")
-      If FileExist(cARQICO, True) Then
+      If FileConnExist(cARQICO, True) Then
         ImageList1.ListImages.Add , DAORS.Fields("Caption"), LoadPicture(cARQICO)
       Else
         End

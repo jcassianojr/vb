@@ -359,7 +359,7 @@ Private Sub transfer(cLOGOARQ As String, cARQCAM As String, cCONSQL As String, c
 
 
   cCAMINHO = PegPath("PATH", cLOGOARQ)
-  If Not FileExist(cCAMINHO, True) Then
+  If Not FileConnExist(cCAMINHO, True) Then
     Exit Sub
   End If
 

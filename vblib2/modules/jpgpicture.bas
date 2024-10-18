@@ -534,7 +534,7 @@ Public Function salvarpict(oFORM As Form, ByVal Picture1 As Variant, _
     Alert ("Nome do arquivo nao Preenchido")
     Exit Function
   End If
-  If FileExist(sFileName, False) Then
+  If FileConnExist(sFileName, False) Then
     If MDG("Arquivo de Destino Ja existe Sobrepor") Then
       DeleteFile sFileName, True  'Kill sFILENAME
     Else

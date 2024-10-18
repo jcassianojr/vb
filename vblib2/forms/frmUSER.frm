@@ -3,7 +3,7 @@ Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form frmUSER 
-   Caption         =   "Cadastro de Usuário"
+   Caption         =   "Cadastro de UsuÃ¡rio"
    ClientHeight    =   7500
    ClientLeft      =   1110
    ClientTop       =   345
@@ -597,7 +597,7 @@ Begin VB.Form frmUSER
          Left            =   1080
          TabIndex        =   3
          Text            =   "0"
-         ToolTipText     =   "Nº Folha Pagamento"
+         ToolTipText     =   "NÂº Folha Pagamento"
          Top             =   1740
          Width           =   735
       End
@@ -782,7 +782,7 @@ Begin VB.Form frmUSER
          Locked          =   -1  'True
          TabIndex        =   0
          TabStop         =   0   'False
-         ToolTipText     =   "Nº Usuario"
+         ToolTipText     =   "NÂº Usuario"
          Top             =   420
          Width           =   1095
       End
@@ -998,7 +998,7 @@ Begin VB.Form frmUSER
       End
       Begin VB.Label lblLabels 
          Alignment       =   1  'Right Justify
-         Caption         =   "Usuário Equivalente"
+         Caption         =   "UsuÃ¡rio Equivalente"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -1056,7 +1056,7 @@ Begin VB.Form frmUSER
          Width           =   1005
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Nrº Usuário"
+         Caption         =   "NrÂº UsuÃ¡rio"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -1075,7 +1075,7 @@ Begin VB.Form frmUSER
          Width           =   1035
       End
       Begin VB.Label lblLabels 
-         Caption         =   "Cognome do Usuário"
+         Caption         =   "Cognome do UsuÃ¡rio"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -1095,7 +1095,7 @@ Begin VB.Form frmUSER
       End
       Begin VB.Label lblLabels 
          Alignment       =   2  'Center
-         Caption         =   "Último Acesso em :"
+         Caption         =   "Ãšltimo Acesso em :"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -1121,7 +1121,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1012
-Const cFORMID = "Cadastro de Usuários"
+Const cFORMID = "Cadastro de UsuÃ¡rios"
 Dim aCAM, aFOR, aVAL, aPAD As Variant
 Attribute aFOR.VB_VarUserMemId = 1073938432
 Attribute aVAL.VB_VarUserMemId = 1073938432
@@ -1198,7 +1198,7 @@ Private Sub CMDIMPBTN_Click()
 
   nORIGEM = Val(Busca("Digite o Numero de Origem", "Numero de Origem", "0", 8))
   nDESTINO = Val(Busca("Digite O Numero de destino", "Numero de Destino", CStr(zIDTEMP), 8))
-  If Not MDG("Importar " & CStr(nORIGEM) & " para " & CStr(nDESTINO), "Confirme Importaçao") Then
+  If Not MDG("Importar " & CStr(nORIGEM) & " para " & CStr(nDESTINO), "Confirme ImportaÃ§ao") Then
     Exit Sub
   End If
 
@@ -1259,7 +1259,7 @@ Private Sub Cmdimpmenu_Click()
 
   nORIGEM = Val(Busca("Digite o Numero de Origem", "Numero de Origem", "0", 8))
   nDESTINO = Val(Busca("Digite O Numero de destino", "Numero de Destino", CStr(zIDTEMP), 8))
-  If Not MDG("Importar " & CStr(nORIGEM) & " para " & CStr(nDESTINO), "Confirme Importaçao") Then
+  If Not MDG("Importar " & CStr(nORIGEM) & " para " & CStr(nDESTINO), "Confirme ImportaÃ§ao") Then
     Exit Sub
   End If
 
@@ -1327,7 +1327,7 @@ Private Sub Cmdimpwrpt_Click(Index As Integer)
 
   nORIGEM = Val(Busca("Digite o Numero de Origem", "Numero de Origem", "0", 8))
   nDESTINO = Val(Busca("Digite O Numero de destino", "Numero de Destino", CStr(zIDTEMP), 8))
-  If Not MDG("Importar " & CStr(nORIGEM) & " para " & CStr(nDESTINO), "Confirme Importaçao") Then
+  If Not MDG("Importar " & CStr(nORIGEM) & " para " & CStr(nDESTINO), "Confirme ImportaÃ§ao") Then
     Exit Sub
   End If
 
@@ -1702,7 +1702,7 @@ Private Sub Form_Load()
 
   ''Arquivo
   cARQ = PegPath("PATH", "SYSUSER")
-  If Not FileExist(cARQ, True) Then
+  If Not FileConnExist(cARQ, True) Then
     End
   End If
 

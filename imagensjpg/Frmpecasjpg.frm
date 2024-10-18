@@ -699,7 +699,7 @@ Private Sub Form_Load()
     Else
       Set Picture1.Picture = Nothing
       Set Picture2.Picture = Nothing
-      If FileExist(zRPTCAM, False) Then
+      If FileConnExist(zRPTCAM, False) Then
         If FixInt(FileLen(STMPFILE)) > 500000 Then
           Alert ("Imagem Muito Grande,Ajuste o tamanho " & zRPTCAM)
         Else

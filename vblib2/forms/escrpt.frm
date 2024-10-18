@@ -150,7 +150,7 @@ End Sub
 Private Sub Form_Load()
   CenterFormToScreen Me
   If InStr(UCase(cARQRTF), ".TXT") Then
-     If FileExist(cARQRTF, True) Then
+     If FileConnExist(cARQRTF, True) Then
         ePASS03 = 1
         PrintPreview1.ShowPreview
      End If
@@ -158,7 +158,7 @@ Private Sub Form_Load()
      'Unload Me
   End If
   If InStr(UCase(cARQRTF), ".RTF") Then
-     If FileExist(cARQRTF, True) Then
+     If FileConnExist(cARQRTF, True) Then
         RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
         ePASS03 = 2
         PrintPreview1.ShowPreview
@@ -177,7 +177,7 @@ Private Sub Form_Load()
   
   
   If InStr(UCase(cARQRTF), ".JPG") Then
-     If FileExist(cARQRTF, True) Then
+     If FileConnExist(cARQRTF, True) Then
         Picture1.Picture = LoadPicture(cARQRTF)
         ePASS03 = 4
         PrintPreview1.ShowPreview
@@ -311,16 +311,16 @@ Private Sub imprima_click()
     cARQRTF = Caminex(cARQRTF)
   End If
 
-  If Not FileExist(cARQRTF) Then
+  If Not FileConnExist(cARQRTF) Then
     ''Tenta Caminho do grupo
     cARQRTF = Caminex(zRPTGRPCAM & aRELCFG(0))
-    If Not FileExist(cARQRTF) Then
+    If Not FileConnExist(cARQRTF) Then
       ''Tenta Caminho indicado
       cARQRTF = Caminex(ZRELAT & aRELCFG(0))
-      If Not FileExist(cARQRTF) Then
+      If Not FileConnExist(cARQRTF) Then
         ''Tenta Caminho do Aplicativo
         cARQRTF = Caminex(App.Path & aRELCFG(0))
-        If Not FileExist(cARQRTF) Then
+        If Not FileConnExist(cARQRTF) Then
           If aRELCFG(1) <> "SITE" Then
             Alert ("Arquivo Nao Encontrado " & aRELCFG(0))
             Exit Sub

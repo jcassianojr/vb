@@ -25,8 +25,8 @@ Public Function xMAILENV(cCODIGO, cTEXTO, Optional ByVal lEMAILINT = True, Optio
 
     cMAILDIR = PegPath("PATH", "MAIL")
     cMAILDIR2 = PegPath("PATH", "MAIL2")
-    If Not FileExist(cMAILDIR2 & "MAIL.DBF") Then
-      If Not FileExist(cMAILDIR2 & "\" & "MAIL.DBF") Then
+    If Not FileConnExist(cMAILDIR2 & "MAIL.DBF") Then
+      If Not FileConnExist(cMAILDIR2 & "\" & "MAIL.DBF") Then
         Alert "Falta Arquivo Email"
       End If
     End If

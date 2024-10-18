@@ -432,7 +432,7 @@ Private Sub Form_Load()
   ''Arquivo
   cARQPF = PegPath("PATH", "PF")
   cARQFEMEA = PegPath("PATH", "FEMEA")
-  If Not FileExist(cARQFEMEA, True) Then
+  If Not FileConnExist(cARQFEMEA, True) Then
     End
   End If
 
