@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmproti 
    Caption         =   "Controle de Prototipos"
    ClientHeight    =   4515
@@ -137,7 +137,6 @@ Begin VB.Form frmproti
       Width           =   8175
       _ExtentX        =   14420
       _ExtentY        =   3625
-      _Version        =   393216
    End
    Begin XPControls.XPButton cmdClose 
       Height          =   435
@@ -429,6 +428,7 @@ Private Sub Filgrid()
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
+  
   TeclaEnter KeyCode
 End Sub
 

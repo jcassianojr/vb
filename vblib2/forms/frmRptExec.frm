@@ -218,16 +218,14 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1064
 Const cFORMID = "Tipos de Execuçao Gerenciador Formularios/Relatórios"
-Dim aCAM, aFOR, aVAL, aPAD As Variant
-Attribute aFOR.VB_VarUserMemId = 1073938432
-Attribute aVAL.VB_VarUserMemId = 1073938432
-Attribute aPAD.VB_VarUserMemId = 1073938432
-Dim cARQ, cSQL As String
-Attribute cARQ.VB_VarUserMemId = 1073938436
-Attribute cSQL.VB_VarUserMemId = 1073938436
-Dim nITEM, nCAMPOS As Long
-Attribute nITEM.VB_VarUserMemId = 1073938438
-Attribute nCAMPOS.VB_VarUserMemId = 1073938438
+Dim aCAM As Variant
+Dim aFOR As Variant
+Dim aVAL As Variant
+Dim aPAD As Variant
+Dim cARQ As String
+Dim cSQL As String
+Dim nITEM As Long
+Dim nCAMPOS As Long
 Option Explicit
 
 Private Sub cmdClose_Click()
@@ -248,13 +246,16 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 End Sub
 
 Private Sub cmdescexe_Click()
-  Dim sRECENTFILE, sPath, SFILTER, sFILENAME As String
+  Dim sRECENTFILE As String
+  Dim sPath As String
+  Dim sFILTER As String
+  Dim sFileName As String
   sRECENTFILE = Text(2)
   sPath = Text(2)
-  SFILTER = "Executáveis" & vbNullChar & "*.exe" & vbNullChar & "Todos os Arquivos" & vbNullChar & "*.*"
-  sFILENAME = FileOpen(Me, SFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
-  If Not Len(sFILENAME) = 0 Then
-    Text(2) = NomeArq(sFILENAME)
+  sFILTER = "Executáveis" & vbNullChar & "*.exe" & vbNullChar & "Todos os Arquivos" & vbNullChar & "*.*"
+  sFileName = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
+  If Not Len(sFileName) = 0 Then
+    Text(2) = NomeArq(sFileName)
   End If
 End Sub
 

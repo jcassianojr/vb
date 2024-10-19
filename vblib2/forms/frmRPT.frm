@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
 Begin VB.Form FrmRpt 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Relatórios /Documentos"
@@ -111,6 +111,7 @@ Begin VB.Form FrmRpt
       EndProperty
       TabOrientation  =   1
       TabHeight       =   732
+      ControlVersion  =   9
       TabPic16(0)     =   "frmRPT.frx":058A
       TabCaption(0)   =   "Configuracao"
       Tab(0).ControlCount=   19
@@ -1046,28 +1047,26 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1066
 Const cFORMID = "Relatorios /Documentos"
-Dim aCAM, aFOR, aVAL, aPAD As Variant
-Attribute aFOR.VB_VarUserMemId = 1073938432
-Attribute aVAL.VB_VarUserMemId = 1073938432
-Attribute aPAD.VB_VarUserMemId = 1073938432
-Dim cARQ, cSQL As String
-Attribute cARQ.VB_VarUserMemId = 1073938436
-Attribute cSQL.VB_VarUserMemId = 1073938436
-Dim nITEM, nCAMPOS As Long
-Attribute nITEM.VB_VarUserMemId = 1073938438
-Attribute nCAMPOS.VB_VarUserMemId = 1073938438
+Dim aCAM As Variant
+Dim aFOR As Variant
+Dim aVAL As Variant
+Dim aPAD As Variant
+Dim cARQ As String
+Dim cSQL As String
+Dim nITEM As Long
+Dim nCAMPOS As Long
 Option Explicit
 
 Private Sub CmdAbrirCom_Click(Index As Integer)
 
-  eLOCALIZA = tEXT(5).tEXT
+  eLOCALIZA = Text(5).Text
   ePASS01 = ""
   If Index = 0 Then
-    ePASS01 = EXTENSAO(FixStr(tEXT(4).tEXT))
+    ePASS01 = EXTENSAO(FixStr(Text(4).Text))
   End If
   EscRptExec.Show vbModal, Me
   If lRETU Then
-    tEXT(5).tEXT = eRETU02
+    Text(5).Text = eRETU02
   End If
 
 End Sub
@@ -1078,9 +1077,9 @@ End Sub
 
 Private Sub CmdEDIT_Click(Index As Integer)
 Dim cEXTENSAO As String
-  eLOCALIZA = tEXT(5).tEXT
+  eLOCALIZA = Text(5).Text
   If Index = 0 Then
-    cARQRTF = tEXT(4).tEXT
+    cARQRTF = Text(4).Text
     cEXTENSAO = EXTENSAO(cARQRTF)
     Select Case cEXTENSAO
       Case "RPT"
@@ -1098,22 +1097,22 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub Command2_Click()
-  tEXT(5).tEXT = ""
+  Text(5).Text = ""
 End Sub
 
 Private Sub escarq_Click(Index As Integer)
   Index = Index + 18
-  ePASS01 = tEXT(Index)
+  ePASS01 = Text(Index)
   FrmPegdb.Show vbModal, Me
   If lRETU Then
-    tEXT(Index) = eRETU01
+    Text(Index) = eRETU01
   End If
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   If MDG("Gravar e Sair", "Gravando ") Then
     For nITEM = 0 To 23
-      aVAL(nITEM) = tEXT(nITEM)
+      aVAL(nITEM) = Text(nITEM)
     Next nITEM
     For nITEM = 24 To 26
       aVAL(nITEM) = FixNumBol(chkFields(nITEM).Value)
@@ -1170,7 +1169,7 @@ Private Sub escolherrpt_Click()
       sPath = Caminex(zRPTCAM)
     End If
   End If
-  tEXT(4).tEXT = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
+  Text(4).Text = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
 
 End Sub
 
@@ -1214,7 +1213,7 @@ Private Sub Form_Load()
                "", "", "", "", False, False, False)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 23
-    tEXT(nITEM) = aVAL(nITEM)
+    Text(nITEM) = aVAL(nITEM)
   Next nITEM
   For nITEM = 24 To 26
     chkFields(nITEM) = aVAL(nITEM)

@@ -307,13 +307,12 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Dim aCAM, aFOR, aVAL, aPAD As Variant
-Attribute aFOR.VB_VarUserMemId = 1073938432
-Attribute aVAL.VB_VarUserMemId = 1073938432
-Attribute aPAD.VB_VarUserMemId = 1073938432
-Dim cARQUSR, cSQL As String
-Attribute cARQUSR.VB_VarUserMemId = 1073938436
-Attribute cSQL.VB_VarUserMemId = 1073938436
+Dim aCAM As Variant
+Dim aFOR As Variant
+Dim aVAL As Variant
+Dim aPAD As Variant
+Dim cARQUSR As String
+Dim cSQL As String
 Dim nFORMID As Integer
 Attribute nFORMID.VB_VarUserMemId = 1073938438
 Dim cARQUIVO As String
@@ -322,14 +321,14 @@ Dim x As Integer
 Attribute x.VB_VarUserMemId = 1073938440
 
 Private Sub CmdAbrirCom_Click(Index As Integer)
-  eLOCALIZA = txtFields(5).text
+  eLOCALIZA = TXTFIELDS(5).tEXT
   ePASS01 = ""
   If Index = 0 Then
     ePASS01 = EXTENSAO(cARQUIVO)
   End If
   EscRptExec.Show vbModal, Me
   If lRETU Then
-    txtFields(5) = eRETU02
+    TXTFIELDS(5) = eRETU02
   End If
 End Sub
 
@@ -352,11 +351,11 @@ Private Sub Form_Load()
   CenterFormToScreen Me
 
   cSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "' AND IDUSUARIO=" & zIDRPTUSR
-  txtFields(0) = zIDRPTUSR
-  txtFields(1) = ePASS03
+  TXTFIELDS(0) = zIDRPTUSR
+  TXTFIELDS(1) = ePASS03
   'txtFields(2) = "" codigo
-  txtFields(3) = zgrp
-  txtFields(4) = zRPT
+  TXTFIELDS(3) = zgrp
+  TXTFIELDS(4) = zRPT
 
   cARQUSR = DBWRPT
   aCAM = Array("IMPRIME", "EXPORTA", "VISUALIZA", "SALVARTF", "SALVATXT", _
@@ -369,7 +368,7 @@ Private Sub Form_Load()
   For x = 0 To 7
     chkFields(x) = aVAL(x)
   Next x
-  txtFields(5) = aVAL(8)
+  TXTFIELDS(5) = aVAL(8)
   nFORMID = 998
 End Sub
 
@@ -379,7 +378,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     For x = 0 To 7
       aVAL(x) = FixNumBol(chkFields(x))
     Next x
-    aVAL(8) = txtFields(5)
+    aVAL(8) = TXTFIELDS(5)
     GrvSQL cARQUSR, cSQL, 9, aCAM, aVAL, aFOR
     GravaLog nFORMID, 0, "Gravou "
   Else

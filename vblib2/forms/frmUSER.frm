@@ -1122,16 +1122,14 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Const nFORMID = 1012
 Const cFORMID = "Cadastro de Usuários"
-Dim aCAM, aFOR, aVAL, aPAD As Variant
-Attribute aFOR.VB_VarUserMemId = 1073938432
-Attribute aVAL.VB_VarUserMemId = 1073938432
-Attribute aPAD.VB_VarUserMemId = 1073938432
-Dim cARQ, cSQL As String
-Attribute cARQ.VB_VarUserMemId = 1073938436
-Attribute cSQL.VB_VarUserMemId = 1073938436
-Dim nITEM, nCAMPOS As Long
-Attribute nITEM.VB_VarUserMemId = 1073938438
-Attribute nCAMPOS.VB_VarUserMemId = 1073938438
+Dim aCAM As Variant
+Dim aFOR As Variant
+Dim aVAL As Variant
+Dim aPAD As Variant
+Dim cARQ As String
+Dim cSQL As String
+Dim nITEM As Long
+Dim nCAMPOS As Long
 Option Explicit
 Private Sub cboEQUIVALENTE_GotFocus()
   FocusMe
@@ -1185,12 +1183,14 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub CMDIMPBTN_Click()
-  Dim nORIGEM, nDESTINO As Long
+  Dim nORIGEM As Long
+  Dim nDESTINO As Long
   Dim oDBORI As ADODB.Connection
   Dim oRSORI As New ADODB.Recordset
   Dim oRSDES As New ADODB.Recordset
   Dim cARQORI As String
-  Dim cSQLORI, cSQLDES As String
+  Dim cSQLORI As String
+  Dim cSQLDES As String
 '  Dim aVAL, aCAM As Variant
   Dim nBARPOS As Integer
 
@@ -1250,7 +1250,8 @@ Private Sub Cmdimpmenu_Click()
   Dim oDBORI As ADODB.Connection
   Dim oRSORI As New ADODB.Recordset
   Dim oRSDES As New ADODB.Recordset
-  Dim cSQLORI, cSQLDES As String
+  Dim cSQLORI As String
+  Dim cSQLDES As String
  ' Dim aVAL, aCAM As Variant
   Dim nBARPOS As Integer
   Dim nROWREC As Integer
@@ -1316,7 +1317,11 @@ Private Sub Cmdimpwrpt_Click(Index As Integer)
   Dim oRSDES As ADODB.Recordset
   Dim nBARPOS As Integer
   Dim nROWREC As Integer
-  Dim cSQLORI, cSQLDES, cGRP, cRPT, cTabela As String
+  Dim cSQLORI As String
+  Dim cSQLDES As String
+  Dim cGRP As String
+  Dim cRPT As String
+  Dim cTabela As String
 
   On Error Resume Next
 

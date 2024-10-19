@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmprotii 
    Caption         =   "Controle de Prototipos"
    ClientHeight    =   4785
@@ -747,7 +747,7 @@ Private Sub FilRelat()
 
   MontaGridFast Grid, 4, Array(400, 1200, 400, 2000), Array("Item", "Data", "Dispo", "obs"), _
                 Array("ITEM", "C$DATA", "DISPO", "OBS"), cARQ, cSQL
-  Text3.tEXT = PegUltGrid(Grid, 2)
+  Text3.Text = PegUltGrid(Grid, 2)
 
 End Sub
 
@@ -760,6 +760,8 @@ Private Sub Encerrar_Click()
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
+  
+  
   TeclaEnter KeyCode
 End Sub
 
