@@ -110,7 +110,7 @@ Begin VB.Form frmUSUSENHA
    End
    Begin VB.Label Label3 
       Alignment       =   1  'Right Justify
-      Caption         =   "Usuário:"
+      Caption         =   "UsuÃ¡rio:"
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   240
@@ -169,44 +169,44 @@ Private Sub cmdOK_Click()
   eRETU03 = ""
 
   lRETU = True
-  txtFields(0) = Trim(txtFields(0))
-  txtFields(1) = Trim(txtFields(1))
-  txtFields(2) = Trim(txtFields(2))
+  TXTFIELDS(0) = Trim(TXTFIELDS(0))
+  TXTFIELDS(1) = Trim(TXTFIELDS(1))
+  TXTFIELDS(2) = Trim(TXTFIELDS(2))
 
 
-  If txtFields(0) = txtFields(1) Then
+  If TXTFIELDS(0) = TXTFIELDS(1) Then
     Alert "Senha Precisa ser Diferente da Anterior"
-    txtFields(1).tEXT = ""
-    txtFields(2).tEXT = ""
-    txtFields(1).SetFocus
+    TXTFIELDS(1).tEXT = ""
+    TXTFIELDS(2).tEXT = ""
+    TXTFIELDS(1).SetFocus
     lRETU = False
     Exit Sub
   End If
 
-  If Len(txtFields(1)) <> 8 Then
+  If Len(TXTFIELDS(1)) <> 8 Then
     Alert "8 digitos para a Senha"
-    txtFields(1).tEXT = ""
-    txtFields(2).tEXT = ""
-    txtFields(1).SetFocus
+    TXTFIELDS(1).tEXT = ""
+    TXTFIELDS(2).tEXT = ""
+    TXTFIELDS(1).SetFocus
     lRETU = False
     Exit Sub
   End If
 
-  If Len(txtFields(1)) <> Len(txtFields(2)) Then
+  If Len(TXTFIELDS(1)) <> Len(TXTFIELDS(2)) Then
     Alert "Senha diferente da de confirmacao"
-    txtFields(1).tEXT = ""
-    txtFields(2).tEXT = ""
-    txtFields(1).SetFocus
+    TXTFIELDS(1).tEXT = ""
+    TXTFIELDS(2).tEXT = ""
+    TXTFIELDS(1).SetFocus
     lRETU = False
     Exit Sub
   End If
 
   'faze inicial acostumar os usuarios
-  If Not CheckPass(txtFields(1)) Then
+  If Not CheckPass(TXTFIELDS(1)) Then
     If Not MDG("Senha Fraca , gravar mesmo assim") Then
-      txtFields(1).tEXT = ""
-      txtFields(2).tEXT = ""
-      txtFields(1).SetFocus
+      TXTFIELDS(1).tEXT = ""
+      TXTFIELDS(2).tEXT = ""
+      TXTFIELDS(1).SetFocus
       lRETU = False
       Exit Sub
     End If
@@ -223,24 +223,24 @@ Private Sub cmdOK_Click()
 
   With RSSENHA
     If Not .EOF Then
-      strEncryptedText = XOREncryption(strCodeKey, txtFields(0))
+      strEncryptedText = XOREncryption(strCodeKey, TXTFIELDS(0))
       If strEncryptedText = "" & !Senha Then
-        If txtFields(1) = txtFields(2) Then
-          strEncryptedText = XOREncryption(strCodeKey, txtFields(1))
+        If TXTFIELDS(1) = TXTFIELDS(2) Then
+          strEncryptedText = XOREncryption(strCodeKey, TXTFIELDS(1))
           RSSENHA("SENHA") = strEncryptedText
           RSSENHA("TROCAR") = Date + 90
 
 
-          RSSENHA("CHAVEV") = UCase(CreateSHA256HashString(UCase(Trim(RSSENHA("usuario"))) + Trim(txtFields(1))))
+          RSSENHA("CHAVEV") = UCase(CreateSHA256HashString(UCase(Trim(RSSENHA("usuario"))) + Trim(TXTFIELDS(1))))
 
           .Update
           eRETU01 = strEncryptedText
-          eRETU02 = txtFields(1)
+          eRETU02 = TXTFIELDS(1)
         Else
-          Alert "Confirmação não confere! A Senha não foi alterada.", "Alteração de senha"
+          Alert "ConfirmaÃ§Ã£o nao confere! A Senha nao foi alterada.", "Alteracao de senha"
         End If
       Else
-        Alert "Senha não confere! A Senha não foi alterada.", "Alteração de senha"
+        Alert "Senha nao confere! A Senha nao foi alterada.", "Alteracao de senha"
       End If
     End If
     .Close
