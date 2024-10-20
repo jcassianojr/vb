@@ -999,7 +999,7 @@ Dim k As Integer
     If LstTables.ListCount > 0 Then
         For k = 1 To LstTables.ListCount
             If LstTables.Selected(k - 1) Then
-                lTotal = lTotal + LstTables.ItemData(k - 1)
+                lTotal = lTotal + CLng(LstTables.ItemData(k - 1))
             End If
         Next k
         getTotalRecords = lTotal

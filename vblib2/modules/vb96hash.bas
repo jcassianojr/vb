@@ -13,7 +13,23 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
-
+#If VBA7 Then
+Private Declare PtrSafe  Function CryptAcquireContext Lib "advapi32.dll" Alias "CryptAcquireContextA" _
+                                             (ByRef phProv As LongPtr, ByVal pszContainer As String, ByVal pszProvider As String, _
+                                              ByVal dwProvType As LongPtr, ByVal dwFlags As LongPtr) As Long
+Private Declare  PtrSafe Function CryptReleaseContext Lib "advapi32.dll" _
+                                             (ByVal hProv As LongPtr, ByVal dwFlags As LongPtr) As Long
+Private Declare  PtrSafe Function CryptCreateHash Lib "advapi32.dll" _
+                                         (ByVal hProv As LongPtr, ByVal Algid As LongPtr, ByVal hKey As LongPtr, ByVal dwFlags As LongPtr, _
+                                          ByRef phHash As LongPtr) As Long
+Private Declare  PtrSafe Function CryptDestroyHash Lib "advapi32.dll" _
+                                          (ByVal hHash As LongPtr) As Long
+Private Declare  PtrSafe Function CryptHashData Lib "advapi32.dll" _
+                                       (ByVal hHash As LongPtr, pbData As Any, ByVal cbData As LongPtr, ByVal dwFlags As LongPtr) As Long
+Private Declare  PtrSafe Function CryptGetHashParam Lib "advapi32.dll" _
+                                           (ByVal hHash As LongPtr, ByVal dwParam As LongPtr, pbData As Any, ByRef pcbData As LongPtr, _
+                                            ByVal dwFlags As LongPtr) As Long
+#Else
 Private Declare Function CryptAcquireContext Lib "advapi32.dll" Alias "CryptAcquireContextA" _
                                              (ByRef phProv As Long, ByVal pszContainer As String, ByVal pszProvider As String, _
                                               ByVal dwProvType As Long, ByVal dwFlags As Long) As Long
@@ -29,6 +45,7 @@ Private Declare Function CryptHashData Lib "advapi32.dll" _
 Private Declare Function CryptGetHashParam Lib "advapi32.dll" _
                                            (ByVal hHash As Long, ByVal dwParam As Long, pbData As Any, ByRef pcbData As Long, _
                                             ByVal dwFlags As Long) As Long
+#End If
 
 Private Const PROV_RSA_FULL As Long = 1
 Private Const PROV_RSA_AES As Long = 24

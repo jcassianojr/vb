@@ -14,7 +14,35 @@ Public Type POINTAPI
     Y                 As Long
 End Type
 
+#If (VBA7 = 0) Then
+Private Enum LongPtr
+[_]
+End Enum
+#End If
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
 ' Declare API functions
+#If VBA7 Then
+Public Declare PtrSafe  Function CreatePen Lib "gdi32" (ByVal nPenStyle As LongPtr, ByVal nWidth As LongPtr, ByVal crColor As LongPtr) As Long
+Public Declare PtrSafe Function DeleteObject Lib "gdi32" (ByVal hObject As LongPtr) As Long
+Public Declare PtrSafe Function SelectObject Lib "gdi32" (ByVal hDC As LongPtr, ByVal hObject As LongPtr) As Long
+Public Declare PtrSafe  Function LineTo Lib "gdi32" (ByVal hDC As LongPtr, ByVal X As LongPtr, ByVal Y As LongPtr) As Long
+Public Declare PtrSafe  Function MoveToEx Lib "gdi32" (ByVal hDC As LongPtr, ByVal X As LongPtr, ByVal Y As LongPtr, lpPoint As POINTAPI) As Long
+Public Declare PtrSafe Function DrawText Lib "user32" Alias "DrawTextA" (ByVal hDC As LongPtr, ByVal lpStr As String, ByVal nCount As LongPtr, lpRect As RECT, ByVal wFormat As LongPtr) As Long
+Public Declare PtrSafe Function DeleteDC Lib "gdi32" (ByVal hDC As LongPtr) As Long
+Public Declare PtrSafe Function CreateCompatibleBitmap Lib "gdi32" (ByVal hDC As LongPtr, ByVal nWidth As LongPtr, ByVal nHeight As LongPtr) As Long
+Public Declare PtrSafe Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As LongPtr) As Long
+Public Declare PtrSafe Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As LongPtr, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As LongPtr) As Long
+Public Declare PtrSafe Function StretchBlt Lib "gdi32" (ByVal hDC As LongPtr, ByVal X As LongPtr, ByVal Y As LongPtr, ByVal nWidth As LongPtr, ByVal nHeight As LongPtr, ByVal hSrcDC As LongPtr, ByVal xSrc As LongPtr, ByVal ySrc As LongPtr, ByVal nSrcWidth As LongPtr, ByVal nSrcHeight As LongPtr, ByVal dwRop As LongPtr) As Long
+Public Declare PtrSafe Function GetTickCount Lib "kernel32" () As Long
+
+#Else
 Public Declare Function CreatePen Lib "gdi32" (ByVal nPenStyle As Long, ByVal nWidth As Long, ByVal crColor As Long) As Long
 Public Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
 Public Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
@@ -24,9 +52,11 @@ Public Declare Function DrawText Lib "user32" Alias "DrawTextA" (ByVal hDC As Lo
 Public Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
 Public Declare Function CreateCompatibleBitmap Lib "gdi32" (ByVal hDC As Long, ByVal nWidth As Long, ByVal nHeight As Long) As Long
 Public Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
-Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal Hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 Public Declare Function StretchBlt Lib "gdi32" (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, ByVal xSrc As Long, ByVal ySrc As Long, ByVal nSrcWidth As Long, ByVal nSrcHeight As Long, ByVal dwRop As Long) As Long
 Public Declare Function GetTickCount Lib "kernel32" () As Long
+#End If
+
 
 '***********************************************************************
 ' created date: 2004-10-30 17:15
@@ -126,7 +156,7 @@ On Error Resume Next
         
        
         ' Draw Line
-        fDrawLine .hDC, 0, .Height - 1, .Width, .Height - 1, RGB(154, 154, 156)
+        fDrawLine CLng(.hDC), 0, .Height - 1, .Width, .Height - 1, RGB(154, 154, 156)
         
         ' Set Font Properties
         .FontBold = True
@@ -134,16 +164,16 @@ On Error Resume Next
         .ForeColor = vbBlack
         
         ' draw Title
-        fDrawText .hDC, LoadResString(102), 175, 15, 400, 90
+        fDrawText CLng(.hDC), LoadResString(102), 175, 15, 400, 90
         
         ' back to normal font
         .FontSize = 8
         .FontBold = False
         
         ' draw caption for description about this wizard
-        fDrawText .hDC, LoadResString(103), 175, 80, 470, 500
-        fDrawText .hDC, LoadResString(104), 175, 130, 460, 220
-        fDrawText .hDC, LoadResString(105), 175, 230, 470, 246
+        fDrawText CLng(.hDC), LoadResString(103), 175, 80, 470, 500
+        fDrawText CLng(.hDC), LoadResString(104), 175, 130, 460, 220
+        fDrawText CLng(.hDC), LoadResString(105), 175, 230, 470, 246
         
         ' display scenario option
         ' 1. Move to MySQL server directly
@@ -168,7 +198,7 @@ On Error Resume Next
         OptObject(0).Value = True ' Move to MySQL server directly
         
         ' Drawline
-        fDrawLine .hDC, 0, 311, .Width, 311, RGB(145, 154, 156)
+        fDrawLine CLng(.hDC), 0, 311, .Width, 311, RGB(145, 154, 156)
         ' post process
         .Refresh
         .AutoRedraw = False
@@ -186,23 +216,23 @@ On Error Resume Next
         
         ' draw image
         If Index = 1 Then ' MySQL logo
-            fTransBlt .hDC, 420, 10, LoadResPicture(102, 0)
+            fTransBlt CLng(.hDC), 420, 10, LoadResPicture(102, 0)
         Else
-            fTransBlt .hDC, 440, 10, LoadResPicture(101 + Index, 0)
+            fTransBlt CLng(.hDC), 440, 10, LoadResPicture(101 + Index, 0)
         End If
         ' draw line
-        fDrawLine .hDC, 0, .Height - 1, .Width, .Height - 1, RGB(146, 154, 158)
+        fDrawLine CLng(.hDC), 0, .Height - 1, .Width, .Height - 1, RGB(146, 154, 158)
         
         ' Draw title
         .FontBold = True
         
         ' draw title page
-        fDrawText .hDC, LoadResString(109 + Index), 22, 12, 400, 25
+        fDrawText CLng(.hDC), LoadResString(109 + Index), 22, 12, 400, 25
         
         '= Draw Description
         .FontBold = False
         If 114 + Index <> 118 Then
-           fDrawText .hDC, LoadResString(114 + Index), 32, 28, 500, 60
+           fDrawText CLng(.hDC), LoadResString(114 + Index), 32, 28, 500, 60
         End If
         .Refresh
         .AutoRedraw = False
@@ -227,12 +257,12 @@ Dim lRight As Long
            .FontSize = 8
            lRight = .TextWidth(MyCompany) + 19
            ' Draw caption on line separator
-           fDrawText .hDC, MyCompany, 17, 297, lRight, 309
+           fDrawText CLng(.hDC), MyCompany, 17, 297, lRight, 309
            .ForeColor = vbHighlight
-           fDrawText .hDC, MyCompany, 16, 296, lRight, 309
+           fDrawText CLng(.hDC), MyCompany, 16, 296, lRight, 309
            ' draw line separator
-           fDrawLine .hDC, CSng(lRight), 305, .ScaleWidth - 16, 305, vbWhite
-           fDrawLine .hDC, CSng(lRight), 304, .ScaleWidth - 15, 304, RGB(154, 156, 158)
+           fDrawLine CLng(.hDC), CSng(lRight), 305, .ScaleWidth - 16, 305, vbWhite
+           fDrawLine CLng(.hDC), CSng(lRight), 304, .ScaleWidth - 15, 304, RGB(154, 156, 158)
            .Refresh
            .AutoRedraw = False
     End With

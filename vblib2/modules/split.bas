@@ -21,17 +21,31 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
+#If VBA7 Then
+Private Declare  PtrSafe Function ArrPtr Lib "msvbvm60" Alias "VarPtr" (Arr() As Any) As Long
+'Private Declare  PtrSafe Sub GetMem4 Lib "msvbvm60" (ByVal Ptr As LongPtr, Value As LongPtr) 'imcompatibilidade vba7
+'Private Declare  PtrSafe Sub PutMem4 Lib "msvbvm60" (ByVal Ptr As LongPtr, ByVal Value As LongPtr) 'imcompatibilidade vba7
+'Private Declare  PtrSafe Sub PutMem8 Lib "msvbvm60" (ByVal Ptr As LongPtr, ByVal Value As Currency) 'imcompatibilidade vba7
+Private Declare  PtrSafe Function SysAllocStringByteLen Lib "oleaut32" (ByVal Ptr As LongPtr, ByVal Length As LongPtr) As Long
+Private Declare  PtrSafe Function SysAllocStringLen Lib "oleaut32" (ByVal Ptr As LongPtr, ByVal Length As LongPtr) As Long
+Private Declare  PtrSafe Function CloseHandle Lib "kernel32" (ByVal hObject As LongPtr) As Long
+Private Declare  PtrSafe Function GetCurrentProcessId Lib "kernel32" () As Long
+Private Declare  PtrSafe Function OpenProcess Lib "kernel32" (ByVal dwDesiredAccess As LongPtr, ByVal bInheritHandle As LongPtr, ByVal dwProcessId As LongPtr) As Long
+Private Declare  PtrSafe Function WriteProcessMemory Lib "kernel32" (ByVal hProcess As LongPtr, lpBaseAddress As Any, lpBuffer As Any, ByVal nSize As LongPtr, Optional lpNumberOfBytesWritten As LongPtr) As Long
+#Else
 Private Declare Function ArrPtr Lib "msvbvm60" Alias "VarPtr" (Arr() As Any) As Long
 Private Declare Sub GetMem4 Lib "msvbvm60" (ByVal Ptr As Long, Value As Long)
 Private Declare Sub PutMem4 Lib "msvbvm60" (ByVal Ptr As Long, ByVal Value As Long)
 Private Declare Sub PutMem8 Lib "msvbvm60" (ByVal Ptr As Long, ByVal Value As Currency)
 Private Declare Function SysAllocStringByteLen Lib "oleaut32" (ByVal Ptr As Long, ByVal Length As Long) As Long
 Private Declare Function SysAllocStringLen Lib "oleaut32" (ByVal Ptr As Long, ByVal Length As Long) As Long
-
 Private Declare Function CloseHandle Lib "kernel32" (ByVal hObject As Long) As Long
 Private Declare Function GetCurrentProcessId Lib "kernel32" () As Long
 Private Declare Function OpenProcess Lib "kernel32" (ByVal dwDesiredAccess As Long, ByVal bInheritHandle As Long, ByVal dwProcessId As Long) As Long
 Private Declare Function WriteProcessMemory Lib "kernel32" (ByVal hProcess As Long, lpBaseAddress As Any, lpBuffer As Any, ByVal nSize As Long, Optional lpNumberOfBytesWritten As Long) As Long
+#End If
+
+
 
 Private Function InIDE(Optional IDE) As Boolean
   If IsMissing(IDE) Then Debug.Assert Not InIDE(InIDE) Else IDE = True
