@@ -53,33 +53,6 @@ Private Enum STGM
     STGM_CREATE = &H1000&
 End Enum
 
-
-#If (VBA7 = 0) Then
-Private Enum LongPtr
-[_]
-End Enum
-#End If
-#If Win64 Then
-Private Const NULL_PTR As LongPtr = 0
-Private Const PTR_SIZE As Long = 8
-#Else
-Private Const NULL_PTR As Long = 0
-Private Const PTR_SIZE As Long = 4
-#End If
-
-
-
-
-Private Declare Function SHCreateStreamOnFile Lib "shlwapi" Alias "SHCreateStreamOnFileW" ( _
-    ByVal pszFile As Long, _
-    ByVal grfMode As STGM, _
-    ByRef stm As IUnknown) As HRESULT
-
-Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" ( _
-    ByVal pDestination As Long, _
-    ByVal pSource As Long, _
-    ByVal Length As Long)
-
 Private Type PICTDESC
     cbSizeOfStruct As Long
     picType As Long
@@ -93,17 +66,6 @@ Private Type IID
     Data3 As Integer
     Data4(0 To 7) As Byte
 End Type
-
-Private Declare Function CLSIDFromString Lib "ole32" ( _
-    ByVal lpsz As Long, _
-    ByRef clsid As IID) As Long
-
-Private Declare Function OleCreatePictureIndirect Lib "oleaut32" ( _
-    ByRef PICTDESC As PICTDESC, _
-    ByRef IID As IID, _
-    ByVal fOwn As Long, _
-    ByRef Obj As Object) As Long
-
 Private Const BI_RGB As Long = 0&
 
 Private Type BITMAP
@@ -144,25 +106,9 @@ End Type
 
 Private Const DIB_RGB_COLORS As Long = 0&
 
-Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
 
-Private Declare Function GetDC Lib "user32" (ByVal hWnd As Long) As Long
 
-Private Declare Function GetDIBits Lib "gdi32" ( _
-    ByVal hDC As Long, _
-    ByVal hBitmap As Long, _
-    ByVal nStartScan As Long, _
-    ByVal nNumScans As Long, _
-    ByRef Bits As Byte, _
-    ByRef bmi As BITMAPINFO, _
-    ByVal wUsage As Long) As Long
 
-Private Declare Function GetObject Lib "gdi32" Alias "GetObjectW" ( _
-    ByVal hObject As Long, _
-    ByVal nCount As Long, _
-    ByRef Obj As Any) As Long
-
-Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
 
 Private Enum GdiplusStatus
     ok = 0
@@ -259,6 +205,84 @@ Private Enum RotateFlipType
     Rotate180FlipXY = RotateNoneFlipNone
     Rotate270FlipXY = Rotate90FlipNone
 End Enum
+Private IID_IPicture As IID
+Private ImageFormatBMP As IID
+Private ImageFormatGIF As IID
+Private ImageFormatJPEG As IID
+Private ImageFormatPNG As IID
+Private EncoderQuality As IID
+Private gdipStartupInput As GdiplusStartupInput
+Private gdipToken As Long
+
+Public Enum SavePictureFormats
+    [_fmtMin] = 0
+    fmtBMP = 0
+    fmtGIF
+    fmtJPEG
+    fmtPNG
+    [_fmtMax] = fmtPNG
+End Enum
+#If False Then
+Dim fmtBMP, fmtGIF, fmtJPEG, fmtPNG
+#End If
+
+
+#If (VBA7 = 0) Then
+Private Enum LongPtr
+[_]
+End Enum
+#End If
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
+
+
+
+Private Declare Function SHCreateStreamOnFile Lib "shlwapi" Alias "SHCreateStreamOnFileW" ( _
+    ByVal pszFile As Long, _
+    ByVal grfMode As STGM, _
+    ByRef stm As IUnknown) As HRESULT
+
+Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" ( _
+    ByVal pDestination As Long, _
+    ByVal pSource As Long, _
+    ByVal Length As Long)
+
+
+Private Declare Function CLSIDFromString Lib "ole32" ( _
+    ByVal lpsz As Long, _
+    ByRef clsid As IID) As Long
+
+Private Declare Function OleCreatePictureIndirect Lib "oleaut32" ( _
+    ByRef PICTDESC As PICTDESC, _
+    ByRef IID As IID, _
+    ByVal fOwn As Long, _
+    ByRef Obj As Object) As Long
+
+Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
+
+Private Declare Function GetDC Lib "user32" (ByVal hWnd As Long) As Long
+
+Private Declare Function GetDIBits Lib "gdi32" ( _
+    ByVal hDC As Long, _
+    ByVal hBitmap As Long, _
+    ByVal nStartScan As Long, _
+    ByVal nNumScans As Long, _
+    ByRef Bits As Byte, _
+    ByRef bmi As BITMAPINFO, _
+    ByVal wUsage As Long) As Long
+
+Private Declare Function GetObject Lib "gdi32" Alias "GetObjectW" ( _
+    ByVal hObject As Long, _
+    ByVal nCount As Long, _
+    ByRef Obj As Any) As Long
+
+Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
 
 Private Declare Function GdiplusStartup Lib "gdiplus" ( _
     ByRef gdipToken As Long, _
@@ -298,26 +322,6 @@ Private Declare Function GdipSaveImageToStream Lib "gdiplus" ( _
     ByRef clsidEncoder As IID, _
     ByVal pEncoderParams As Long) As GdiplusStatus
 
-Private IID_IPicture As IID
-Private ImageFormatBMP As IID
-Private ImageFormatGIF As IID
-Private ImageFormatJPEG As IID
-Private ImageFormatPNG As IID
-Private EncoderQuality As IID
-Private gdipStartupInput As GdiplusStartupInput
-Private gdipToken As Long
-
-Public Enum SavePictureFormats
-    [_fmtMin] = 0
-    fmtBMP = 0
-    fmtGIF
-    fmtJPEG
-    fmtPNG
-    [_fmtMax] = fmtPNG
-End Enum
-#If False Then
-Dim fmtBMP, fmtGIF, fmtJPEG, fmtPNG
-#End If
 
 Public Function LoadPicture( _
     ByVal FileName As String, _

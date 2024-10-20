@@ -47,13 +47,19 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
-
+#If VBA7 Then
+Private Declare  PtrSafe Sub CoTaskMemFree Lib "ole32.dll" (ByVal hMem  As LongPtr)
+Private Declare  PtrSafe Function lstrcat Lib "kernel32.dll" Alias "lstrcatA" (ByVal lpString1 As String, ByVal lpString2 As String) As Long
+Private Declare  PtrSafe Function SHBrowseForFolder Lib "shell32.dll" (lpbi As BROWSEINFO) As Long
+Private Declare  PtrSafe Function SHGetPathFromIDList Lib "shell32.dll" (ByVal pidList  As LongPtr, ByVal lpBuffer As String) As Long
+Private Declare  PtrSafe Function SHGetSpecialFolderLocation Lib "shell32.dll" (ByVal hwndOwner  As LongPtr, ByVal nFolder  As LongPtr, ListId  As LongPtr) As Long
+#Else
 Private Declare Sub CoTaskMemFree Lib "ole32.dll" (ByVal hMem As Long)
 Private Declare Function lstrcat Lib "kernel32.dll" Alias "lstrcatA" (ByVal lpString1 As String, ByVal lpString2 As String) As Long
 Private Declare Function SHBrowseForFolder Lib "shell32.dll" (lpbi As BROWSEINFO) As Long
 Private Declare Function SHGetPathFromIDList Lib "shell32.dll" (ByVal pidList As Long, ByVal lpBuffer As String) As Long
 Private Declare Function SHGetSpecialFolderLocation Lib "shell32.dll" (ByVal hwndOwner As Long, ByVal nFolder As Long, ListId As Long) As Long
-
+#End If
 Public PathTujuan As String
 
 Public Function BrowseFolders(hwndOwner As Long, sMessage As String, Browse As BrowseType, ByVal RootFolder As FolderType) As String

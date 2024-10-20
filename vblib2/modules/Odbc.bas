@@ -12,7 +12,22 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
+#If VBA7 Then
+Public Declare  PtrSafe Function SQLAllocEnv Lib "odbc32.dll" (phenv  As LongPtr) As Integer
+Public Declare  PtrSafe Function SQLFreeEnv Lib "odbc32.dll" (ByVal hEnv  As LongPtr) As Integer
+Public Declare  PtrSafe Function SQLDataSources Lib "odbc32.dll" _
+                                       (ByVal hEnv  As LongPtr, ByVal fDirection As Integer, ByVal szDSN As String, _
+                                        ByVal cbDSNMax As Integer, pcbDSN As Integer, _
+                                        ByVal szDescription As String, ByVal cbDescriptionMax As Integer, _
+                                        pcbDescription As Integer) As Integer
+Public Declare  PtrSafe Function SQLConfigDataSource Lib "ODBCCP32.DLL" _
+                                            (ByVal hWndParent  As LongPtr, ByVal fRequest  As LongPtr, _
+                                             ByVal lpszDriver As String, ByVal lpszAttributes As String) As Long
+Public Declare  PtrSafe Function SQLDrivers Lib "odbc32.dll" _
+                                   (ByVal env  As LongPtr, ByVal Dir As Integer, ByVal descrip As String, ByVal bflen As Integer, descriplen As Integer, _
+                                    ByVal attrib As String, ByVal bfattrlen As Integer, attriblen As Integer) As Long
 
+#Else
 Public Declare Function SQLAllocEnv Lib "odbc32.dll" (phenv As Long) As Integer
 Public Declare Function SQLFreeEnv Lib "odbc32.dll" (ByVal hEnv As Long) As Integer
 Public Declare Function SQLDataSources Lib "odbc32.dll" _
@@ -26,7 +41,7 @@ Public Declare Function SQLConfigDataSource Lib "ODBCCP32.DLL" _
 Public Declare Function SQLDrivers Lib "odbc32.dll" _
                                    (ByVal env As Long, ByVal Dir As Integer, ByVal descrip As String, ByVal bflen As Integer, descriplen As Integer, _
                                     ByVal attrib As String, ByVal bfattrlen As Integer, attriblen As Integer) As Long
-
+#End If
 
 'Contants for adding DSN's
 Private Const ODBC_ADD_DSN = 1

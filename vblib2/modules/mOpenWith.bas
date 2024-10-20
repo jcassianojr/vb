@@ -23,7 +23,6 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
-Public Declare Function SHOpenWithDialog Lib "shell32" (ByVal hWnd As Long, poainfo As OPENASINFO) As Long
 
 Public Enum OPEN_AS_INFO_FLAGS
   OAIF_ALLOW_REGISTRATION = &H1  'Enable the "always use this program" checkbox. If not passed, it will be disabled.
@@ -46,8 +45,14 @@ End Type
 ' Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd 'escolhe o aplicativo da extensao
 ' ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd 'abre o aplicativo padrao da extensao
 
-
+#If VBA7 Then
+Public Declare  PtrSafe Function SHOpenWithDialog Lib "shell32" (ByVal hWnd  As LongPtr, poainfo As OPENASINFO) As Long
+Public Declare  PtrSafe Function GetBinaryType Lib "kernel32" Alias "GetBinaryTypeW" (ByVal lpApplicationName  As LongPtr, lpBinaryType  As LongPtr) As Long
+#Else
+Public Declare Function SHOpenWithDialog Lib "shell32" (ByVal hWnd As Long, poainfo As OPENASINFO) As Long
 Public Declare Function GetBinaryType Lib "kernel32" Alias "GetBinaryTypeW" (ByVal lpApplicationName As Long, lpBinaryType As Long) As Long
+#End If
+
 Public Const SCS_32BIT_BINARY = 0
 Public Const SCS_64BIT_BINARY = 6
 Public Const SCS_DOS_BINARY = 1
