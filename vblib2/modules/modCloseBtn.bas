@@ -38,6 +38,28 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
+
+#If VBA7 Then
+Private Declare  PtrSafe Function GetSystemMenu Lib "user32" ( _
+                                       ByVal hWnd As LongPtr, ByVal bRevert As LongPtr) As Long
+
+Private Declare  PtrSafe Function GetMenuItemInfo Lib "user32" Alias _
+                                         "GetMenuItemInfoA" (ByVal hMenu As LongPtr, ByVal un As LongPtr, _
+                                                             ByVal B As Boolean, lpMenuItemInfo As MENUITEMINFO) As Long
+
+Private Declare  PtrSafe Function SetMenuItemInfo Lib "user32" Alias _
+                                         "SetMenuItemInfoA" (ByVal hMenu As LongPtr, ByVal un As LongPtr, _
+                                                             ByVal bool As Boolean, lpcMenuItemInfo As MENUITEMINFO) As Long
+
+Private Declare  PtrSafe Function SendMessage Lib "user32" Alias _
+                                     "SendMessageA" (ByVal hWnd As LongPtr, ByVal wMsg As LongPtr, _
+                                                     ByVal wParam As LongPtr, lParam As Any) As Long
+
+Private Declare  PtrSafe Function IsWindow Lib "user32" _
+                                  (ByVal hWnd As LongPtr) As Long
+
+
+#Else
 Private Declare Function GetSystemMenu Lib "user32" ( _
                                        ByVal hWnd As Long, ByVal bRevert As Long) As Long
 
@@ -55,6 +77,9 @@ Private Declare Function SendMessage Lib "user32" Alias _
 
 Private Declare Function IsWindow Lib "user32" _
                                   (ByVal hWnd As Long) As Long
+ #End If
+                                  
+                                  
 
 '*******************************************************************************
 ' Enables / Disables the close button on the titlebar and in the system menu

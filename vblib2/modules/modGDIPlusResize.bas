@@ -52,6 +52,38 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
+#If VBA7 Then
+' GDI Functions
+Private Declare  PtrSafe Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As LongPtr) As Long
+Private Declare  PtrSafe Function OleCreatePictureIndirect Lib "olepro32.dll" (PicDesc As PICTDESC, RefIID As GUID, ByVal fPictureOwnsHandle As LongPtr, IPic As IPicture) As Long
+Private Declare  PtrSafe Function CreateCompatibleBitmap Lib "gdi32" (ByVal hDC As LongPtr, ByVal nWidth As LongPtr, ByVal nHeight As LongPtr) As Long
+Private Declare  PtrSafe Function GetDeviceCaps Lib "gdi32" (ByVal hDC As LongPtr, ByVal nIndex As LongPtr) As Long
+Private Declare  PtrSafe Function PatBlt Lib "gdi32" (ByVal hDC As LongPtr, ByVal x As LongPtr, ByVal y As LongPtr, ByVal nWidth As LongPtr, ByVal nHeight As LongPtr, ByVal dwRop As LongPtr) As Long
+Private Declare  PtrSafe Function CreateBitmap Lib "gdi32" (ByVal nWidth As LongPtr, ByVal nHeight As LongPtr, ByVal nPlanes As LongPtr, ByVal nBitCount As LongPtr, lpBits As Any) As Long
+Private Declare  PtrSafe Function SelectObject Lib "gdi32" (ByVal hDC As LongPtr, ByVal hObject As LongPtr) As Long
+Private Declare  PtrSafe Function CreateSolidBrush Lib "gdi32" (ByVal crColor As LongPtr) As Long
+Private Declare  PtrSafe Function DeleteObject Lib "gdi32" (ByVal hObject As LongPtr) As Long
+Private Declare  PtrSafe Function DeleteDC Lib "gdi32" (ByVal hDC As LongPtr) As Long
+
+' GDI+ functions
+Private Declare  PtrSafe Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal FileName As LongPtr, GpImage As LongPtr) As Long
+Private Declare  PtrSafe Function GdiplusStartup Lib "gdiplus.dll" (Token As LongPtr, gdipInput As GdiplusStartupInput, GdiplusStartupOutput As LongPtr) As Long
+Private Declare  PtrSafe Function GdipCreateFromHDC Lib "gdiplus.dll" (ByVal hDC As LongPtr, GpGraphics As LongPtr) As Long
+Private Declare  PtrSafe Function GdipSetInterpolationMode Lib "gdiplus.dll" (ByVal Graphics As LongPtr, ByVal InterMode As LongPtr) As Long
+Private Declare  PtrSafe Function GdipDrawImageRectI Lib "gdiplus.dll" (ByVal Graphics As LongPtr, ByVal Img As LongPtr, ByVal x As LongPtr, ByVal y As LongPtr, ByVal Width As LongPtr, ByVal Height As LongPtr) As Long
+Private Declare  PtrSafe Function GdipDeleteGraphics Lib "gdiplus.dll" (ByVal Graphics As LongPtr) As Long
+Private Declare  PtrSafe Function GdipDisposeImage Lib "gdiplus.dll" (ByVal Image As LongPtr) As Long
+Private Declare  PtrSafe Function GdipCreateBitmapFromHBITMAP Lib "gdiplus.dll" (ByVal hBmp As LongPtr, ByVal hPal As LongPtr, GpBitmap As LongPtr) As Long
+Private Declare  PtrSafe Function GdipGetImageWidth Lib "gdiplus.dll" (ByVal Image As LongPtr, Width As LongPtr) As Long
+Private Declare  PtrSafe Function GdipGetImageHeight Lib "gdiplus.dll" (ByVal Image As LongPtr, Height As LongPtr) As Long
+Private Declare  PtrSafe Function GdipCreateMetafileFromWmf Lib "gdiplus.dll" (ByVal hWmf As LongPtr, ByVal deleteWmf As LongPtr, WmfHeader As wmfPlaceableFileHeader, Metafile As LongPtr) As Long
+Private Declare  PtrSafe Function GdipCreateMetafileFromEmf Lib "gdiplus.dll" (ByVal hEmf As LongPtr, ByVal deleteEmf As LongPtr, Metafile As LongPtr) As Long
+Private Declare  PtrSafe Function GdipCreateBitmapFromHICON Lib "gdiplus.dll" (ByVal hIcon As LongPtr, GpBitmap As LongPtr) As Long
+Private Declare  PtrSafe Function GdipDrawImageRectRectI Lib "gdiplus.dll" (ByVal Graphics As LongPtr, ByVal GpImage As LongPtr, ByVal dstx As LongPtr, ByVal dsty As LongPtr, ByVal dstwidth As LongPtr, ByVal dstheight As LongPtr, ByVal srcx As LongPtr, ByVal srcy As LongPtr, ByVal srcwidth As LongPtr, ByVal srcheight As LongPtr, ByVal srcUnit As LongPtr, ByVal imageAttributes As LongPtr, ByVal callback As LongPtr, ByVal callbackData As LongPtr) As Long
+Private Declare  PtrSafe Sub GdiplusShutdown Lib "gdiplus.dll" (ByVal Token As LongPtr)
+
+
+#Else
 ' GDI Functions
 Private Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
 Private Declare Function OleCreatePictureIndirect Lib "olepro32.dll" (PicDesc As PICTDESC, RefIID As GUID, ByVal fPictureOwnsHandle As Long, IPic As IPicture) As Long
@@ -80,6 +112,7 @@ Private Declare Function GdipCreateMetafileFromEmf Lib "gdiplus.dll" (ByVal hEmf
 Private Declare Function GdipCreateBitmapFromHICON Lib "gdiplus.dll" (ByVal hIcon As Long, GpBitmap As Long) As Long
 Private Declare Function GdipDrawImageRectRectI Lib "gdiplus.dll" (ByVal Graphics As Long, ByVal GpImage As Long, ByVal dstx As Long, ByVal dsty As Long, ByVal dstwidth As Long, ByVal dstheight As Long, ByVal srcx As Long, ByVal srcy As Long, ByVal srcwidth As Long, ByVal srcheight As Long, ByVal srcUnit As Long, ByVal imageAttributes As Long, ByVal callback As Long, ByVal callbackData As Long) As Long
 Private Declare Sub GdiplusShutdown Lib "gdiplus.dll" (ByVal Token As Long)
+#End If
 
 ' GDI and GDI+ constants
 Private Const PLANES = 14                        '  Number of planes

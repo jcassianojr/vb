@@ -241,7 +241,88 @@ Private Const PTR_SIZE As Long = 4
 #End If
 
 
+#If VBA7 Then
 
+Private Declare  PtrSafe Function SHCreateStreamOnFile Lib "shlwapi" Alias "SHCreateStreamOnFileW" ( _
+    ByVal pszFile As LongPtr, _
+    ByVal grfMode As STGM, _
+    ByRef stm As IUnknown) As HRESULT
+
+Private Declare  PtrSafe Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" ( _
+    ByVal pDestination As LongPtr, _
+    ByVal pSource As LongPtr, _
+    ByVal Length As LongPtr)
+
+
+Private Declare  PtrSafe Function CLSIDFromString Lib "ole32" ( _
+    ByVal lpsz As LongPtr, _
+    ByRef clsid As IID) As Long
+
+Private Declare  PtrSafe  PtrSafe Function OleCreatePictureIndirect Lib "oleaut32" ( _
+    ByRef PICTDESC As PICTDESC, _
+    ByRef IID As IID, _
+    ByVal fOwn As LongPtr, _
+    ByRef Obj As Object) As Long
+
+Private Declare  PtrSafe Function DeleteObject Lib "gdi32" (ByVal hObject As LongPtr) As Long
+
+Private Declare  PtrSafe Function GetDC Lib "user32" (ByVal hWnd As LongPtr) As Long
+
+Private Declare  PtrSafe Function GetDIBits Lib "gdi32" ( _
+    ByVal hDC As LongPtr, _
+    ByVal hBitmap As LongPtr, _
+    ByVal nStartScan As LongPtr, _
+    ByVal nNumScans As LongPtr, _
+    ByRef Bits As Byte, _
+    ByRef bmi As BITMAPINFO, _
+    ByVal wUsage As LongPtr) As Long
+
+Private Declare  PtrSafe Function GetObject Lib "gdi32" Alias "GetObjectW" ( _
+    ByVal hObject As LongPtr, _
+    ByVal nCount As LongPtr, _
+    ByRef Obj As Any) As Long
+
+Private Declare  PtrSafe Function ReleaseDC Lib "user32" (ByVal hWnd As LongPtr, ByVal hDC As LongPtr) As Long
+
+Private Declare  PtrSafe Function GdiplusStartup Lib "gdiplus" ( _
+    ByRef gdipToken As LongPtr, _
+    ByRef StartupInput As GdiplusStartupInput, _
+    ByVal pStartupOutput As LongPtr) As GdiplusStatus
+
+Private Declare  PtrSafe Function GdiplusShutdown Lib "gdiplus" ( _
+    ByVal gdipToken As LongPtr) As GdiplusStatus
+
+Private Declare  PtrSafe Function GdipCreateBitmapFromScan0 Lib "gdiplus" ( _
+    ByVal WidthPixels As LongPtr, _
+    ByVal HeightPixels As LongPtr, _
+    ByVal Stride As LongPtr, _
+    ByVal FormatPixels As PixelFormat, _
+    ByRef Scan0 As Byte, _
+    ByRef gdipBitmap As LongPtr) As GdiplusStatus
+
+Private Declare  PtrSafe Function GdipCreateBitmapFromStream Lib "gdiplus" ( _
+    ByVal Stream As IUnknown, _
+    ByRef hBitmap As LongPtr) As GdiplusStatus
+
+Private Declare  PtrSafe Function GdipCreateHBITMAPFromBitmap Lib "gdiplus" ( _
+    ByVal gdipBitmap As LongPtr, _
+    ByRef hBitmap As LongPtr, _
+    ByVal background As LongPtr) As GdiplusStatus
+
+Private Declare  PtrSafe Function GdipDisposeImage Lib "gdiplus" ( _
+    ByVal gdipImage As LongPtr) As GdiplusStatus
+
+Private Declare  PtrSafe Function GdipImageRotateFlip Lib "gdiplus" ( _
+    ByVal gdipImage As LongPtr, _
+    ByVal rfType As RotateFlipType) As GdiplusStatus
+
+Private Declare  PtrSafe Function GdipSaveImageToStream Lib "gdiplus" ( _
+    ByVal gdipImage As LongPtr, _
+    ByVal Stream As IUnknown, _
+    ByRef clsidEncoder As IID, _
+    ByVal pEncoderParams As LongPtr) As GdiplusStatus
+
+#Else
 
 Private Declare Function SHCreateStreamOnFile Lib "shlwapi" Alias "SHCreateStreamOnFileW" ( _
     ByVal pszFile As Long, _
@@ -321,7 +402,7 @@ Private Declare Function GdipSaveImageToStream Lib "gdiplus" ( _
     ByVal Stream As IUnknown, _
     ByRef clsidEncoder As IID, _
     ByVal pEncoderParams As Long) As GdiplusStatus
-
+#End If
 
 Public Function LoadPicture( _
     ByVal FileName As String, _

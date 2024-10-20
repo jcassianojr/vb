@@ -1,9 +1,6 @@
 Attribute VB_Name = "jpgpicture"
 Option Explicit
 
-
-
-
 ' http://www.codenewsgroups.net/group/microsoft.public.vb.general.discussion/topic3286.aspx
 ' http://edais.mvps.org/
 
@@ -31,6 +28,51 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
+#If VBA7 Then
+
+Private Declare  PtrSafe Function CreateCompatibleDC _
+                          Lib "gdi32" (ByVal hDC As LongPtr) As Long
+
+Private Declare  PtrSafe Function DeleteDC _
+                          Lib "gdi32" (ByVal hDC As LongPtr) As Long
+
+Private Declare  PtrSafe Function DeleteObject _
+                          Lib "gdi32" (ByVal hObject As LongPtr) As Long
+
+Private Declare  PtrSafe Function GetDC _
+                          Lib "user32" (ByVal hWnd As LongPtr) As Long
+
+Private Declare  PtrSafe Function GetDesktopWindow _
+                          Lib "user32" () As Long
+
+Private Declare  PtrSafe Function GetObject _
+                          Lib "gdi32" _
+                              Alias "GetObjectA" (ByVal hObject As LongPtr, _
+                                                  ByVal nCount As LongPtr, _
+                                                  lpObject As Any) As Long
+
+Private Declare  PtrSafe Function SelectObject _
+                          Lib "gdi32" (ByVal hDC As LongPtr, _
+                                       ByVal hObject As LongPtr) As Long
+
+Private Declare  PtrSafe Function SetStretchBltMode _
+                          Lib "gdi32" (ByVal hDC As LongPtr, _
+                                       ByVal nStretchMode As LongPtr) As Long
+
+Private Declare  PtrSafe Function StretchBlt _
+                          Lib "gdi32" (ByVal hDC As LongPtr, _
+                                       ByVal x As LongPtr, _
+                                       ByVal y As LongPtr, _
+                                       ByVal nWidth As LongPtr, _
+                                       ByVal nHeight As LongPtr, _
+                                       ByVal hSrcDC As LongPtr, _
+                                       ByVal XSrc As LongPtr, _
+                                       ByVal YSrc As LongPtr, _
+                                       ByVal nSrcWidth As LongPtr, _
+                                       ByVal nSrcHeight As LongPtr, ByVal dwRop As LongPtr) As Long
+
+
+#Else
 
 'Win32 API Function Declarations
 Private Declare Function CreateCompatibleDC _
@@ -75,6 +117,7 @@ Private Declare Function StretchBlt _
                                        ByVal nSrcHeight As Long, ByVal dwRop As Long) As Long
 
 'Win32 API Constant Declarations
+#End If
 Private Const STRETCH_HALFTONE = 4
 
 Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As String, Optional ByVal cWHERE As String, _
