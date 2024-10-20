@@ -6,12 +6,12 @@ Public cCONJUNTO
 Public cDESENHO
 Public cARQESC As String
 Public Sdb
-Public nPF
-Public nSEQ
-Public nSSQ
-Public nORD
-Public nPPAP
-Public nARQPCS
+Public nPF As Integer
+Public nSEQ As Integer
+Public nSSQ As Integer
+Public nORD As Integer
+Public nPPAP As Integer
+Public nARQPCS As Integer
 Public Zsetor As String
 Public Ctipoent As String
 Public Ccodcomp As String

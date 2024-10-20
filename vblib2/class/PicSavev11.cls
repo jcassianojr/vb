@@ -53,6 +53,23 @@ Private Enum STGM
     STGM_CREATE = &H1000&
 End Enum
 
+
+#If (VBA7 = 0) Then
+Private Enum LongPtr
+[_]
+End Enum
+#End If
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
+
+
+
 Private Declare Function SHCreateStreamOnFile Lib "shlwapi" Alias "SHCreateStreamOnFileW" ( _
     ByVal pszFile As Long, _
     ByVal grfMode As STGM, _

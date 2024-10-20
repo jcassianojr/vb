@@ -25,6 +25,19 @@ Private Type MENUITEMINFO
   cch As Long
 End Type
 
+#If (VBA7 = 0) Then
+Private Enum LongPtr
+[_]
+End Enum
+#End If
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
 Private Declare Function GetSystemMenu Lib "user32" ( _
                                        ByVal hWnd As Long, ByVal bRevert As Long) As Long
 

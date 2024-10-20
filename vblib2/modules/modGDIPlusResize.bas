@@ -39,6 +39,19 @@ Private Type wmfPlaceableFileHeader
   CheckSum As Integer
 End Type
 
+#If (VBA7 = 0) Then
+Private Enum LongPtr
+[_]
+End Enum
+#End If
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
 ' GDI Functions
 Private Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
 Private Declare Function OleCreatePictureIndirect Lib "olepro32.dll" (PicDesc As PICTDESC, RefIID As GUID, ByVal fPictureOwnsHandle As Long, IPic As IPicture) As Long
@@ -204,14 +217,14 @@ Private Function CreatePicture(hBitmap As Long) As IPicture
 End Function
 
 ' Returns a resized version of the picture
-Public Function Resize(Handle As Long, PicType As PictureTypeConstants, Width As Long, Height As Long, Optional BackColor As Long = vbWhite, Optional RetainRatio As Boolean = False) As IPicture
+Public Function Resize(Handle As Long, picType As PictureTypeConstants, Width As Long, Height As Long, Optional BackColor As Long = vbWhite, Optional RetainRatio As Boolean = False) As IPicture
   Dim Img As Long
   Dim hDC As Long
   Dim hBitmap As Long
   Dim WmfHeader As wmfPlaceableFileHeader
 
   ' Determine pictyre type
-  Select Case PicType
+  Select Case picType
   Case vbPicTypeBitmap
     GdipCreateBitmapFromHBITMAP Handle, ByVal 0&, Img
   Case vbPicTypeMetafile

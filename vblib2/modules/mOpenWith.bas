@@ -10,6 +10,19 @@ Option Explicit
 Public Const S_OK = 0           ' indicates success
 Public Const S_FALSE = 1&   ' special HRESULT value
 
+#If (VBA7 = 0) Then
+Private Enum LongPtr
+[_]
+End Enum
+#End If
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
 Public Declare Function SHOpenWithDialog Lib "shell32" (ByVal hWnd As Long, poainfo As OPENASINFO) As Long
 
 Public Enum OPEN_AS_INFO_FLAGS

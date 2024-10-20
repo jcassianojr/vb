@@ -1,4 +1,18 @@
 Attribute VB_Name = "Odbc"
+#If (VBA7 = 0) Then
+Private Enum LongPtr
+[_]
+End Enum
+#End If
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
+
 Public Declare Function SQLAllocEnv Lib "odbc32.dll" (phenv As Long) As Integer
 Public Declare Function SQLFreeEnv Lib "odbc32.dll" (ByVal hEnv As Long) As Integer
 Public Declare Function SQLDataSources Lib "odbc32.dll" _
