@@ -71,4 +71,4 @@ FrmPicturePrinter = 156, 156, 1231, 590, C, 52, 52, 1127, 486, C
 cZipArchive = 0, 0, 0, 0, C
 frmCharacters = 0, 0, 0, 0, C, 182, 182, 1257, 616, C
 PicSaveLoad = 0, 0, 0, 0, C
-frmIMAGENS = 156, 156, 1152, 589, , 182, 182, 1178, 615, C
+frmIMAGENS = 156, 156, 1152, 589, C, 182, 182, 1178, 615, C
