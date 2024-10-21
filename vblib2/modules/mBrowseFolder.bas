@@ -70,7 +70,7 @@ Public Function BrowseFolders(hwndOwner As Long, sMessage As String, Browse As B
   Dim BInfo As BROWSEINFO
   Dim RootID As Long
 
-  SHGetSpecialFolderLocation hwndOwner, RootFolder, RootID
+  SHGetSpecialFolderLocation CLng(hwndOwner), RootFolder, CLng(RootID)
   BInfo.hwndOwner = hwndOwner
   BInfo.lpszTitle = lstrcat(sMessage, "")
   BInfo.ulFlags = Browse

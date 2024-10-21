@@ -38,11 +38,12 @@ End Function
 
 Public Function SendText(sText As String) As Boolean
 
-  Dim sOut As String, cWritten As Long
+  Dim sOut As String
+  Dim cWritten As Long
 
   sOut = sText & vbCrLf
   'Write the text to the console
-  SendText = WriteConsole(hConsole, ByVal sOut, Len(sOut), cWritten, ByVal 0&)
+  SendText = WriteConsole(CLng(hConsole), ByVal sOut, Len(sOut), CLng(cWritten), ByVal 0&)
 
 End Function
 

@@ -207,7 +207,25 @@ Dim bRel As Boolean
 'Parameter variables
 Dim sSchemaDB As String
 Dim iMode As Integer
+#If VBA7 Then
+''for getting drive type
+Private Declare  PtrSafe Function GetDriveType Lib "kernel32" Alias "GetDriveTypeA" (ByVal nDrive As String) As Long
 
+Private Declare  PtrSafe Function ShellExecute Lib "shell32.dll" Alias _
+                                      "ShellExecuteA" (ByVal hWnd As LongPtr, ByVal lpOperation _
+                                                                           As String, ByVal lpFile As String, ByVal lpParameters _
+                                                                                                              As String, ByVal lpDirectory As String, ByVal nShowCmd _
+                                                                                                                                                      As LongPtr) As Long
+'Private Declare  PtrSafe Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As LongPtr)
+'Private Declare  PtrSafe Function GetDiskFreeSpaceEx Lib "kernel32" Alias "GetDiskFreeSpaceExA" (ByVal lpDirectoryName As String, lpFreeBytesAvailableToCaller As Currency, lpTotalNumberOfBytes As Currency, lpTotalNumberOfFreeBytes As Currency) As Long
+ Private Declare PtrSafe Function GetDiskFreeSpaceEx Lib "kernel32" Alias "GetDiskFreeSpaceExA" _
+        (ByVal lpDirectoryName As String, ByRef lpFreeBytesAvailableToMe As LongPtr, _
+        ByRef lpTotalNumberOfBytes As LongPtr, ByRef lpTotalNumberOfFreeBytes As LongPtr) As Long
+
+
+Private Declare  PtrSafe Function GetDiskFreeSpace Lib "kernel32" Alias "GetDiskFreeSpaceA" (ByVal lpRootPathName As String, lpSectorsPerCluster As LongPtr, lpBytesPerSector As LongPtr, lpNumberOfFreeClusters As LongPtr, lpTotalNumberOfClusters As LongPtr) As Long
+
+#Else
 'for getting drive type
 Private Declare Function GetDriveType Lib "kernel32" Alias "GetDriveTypeA" (ByVal nDrive As String) As Long
 
@@ -217,21 +235,29 @@ Private Declare Function ShellExecute Lib "shell32.dll" Alias _
                                                                                                               As String, ByVal lpDirectory As String, ByVal nShowCmd _
                                                                                                                                                       As Long) As Long
 'Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
-Private Declare Function GetDiskFreeSpaceEx Lib "kernel32" Alias "GetDiskFreeSpaceExA" (ByVal lpDirectoryName As String, lpFreeBytesAvailableToCaller As Currency, lpTotalNumberOfBytes As Currency, lpTotalNumberOfFreeBytes As Currency) As Long
+
+ Private Declare Function GetDiskFreeSpaceEx Lib "kernel32" Alias "GetDiskFreeSpaceExA" _
+        (ByVal lpDirectoryName As String, ByRef lpFreeBytesAvailableToMe As Long, _
+        ByRef lpTotalNumberOfBytes As Long, ByRef lpTotalNumberOfFreeBytes As Long) As Long
+
+
+'trocado currency por long acima
+'Private Declare Function GetDiskFreeSpaceEx Lib "kernel32" Alias "GetDiskFreeSpaceExA" (ByVal lpDirectoryName As String, lpFreeBytesAvailableToCaller As Currency, lpTotalNumberOfBytes As Currency, lpTotalNumberOfFreeBytes As Currency) As Long
 Private Declare Function GetDiskFreeSpace Lib "kernel32" Alias "GetDiskFreeSpaceA" (ByVal lpRootPathName As String, lpSectorsPerCluster As Long, lpBytesPerSector As Long, lpNumberOfFreeClusters As Long, lpTotalNumberOfClusters As Long) As Long
+#End If
 
 Private Sub cmdCreate_Click()
 
-  If Text1.tEXT = "" Then
+  If Text1.Text = "" Then
     MsgBox "Enter database name.", vbExclamation
     Exit Sub
-  ElseIf FileExists(Text1.tEXT) = False Then
+  ElseIf FileExists(Text1.Text) = False Then
     If iMode = 1 Then
-      WriteErrLog "Unable to create master schema file. " & Text1.tEXT & " does not exist"
+      WriteErrLog "Unable to create master schema file. " & Text1.Text & " does not exist"
       End
     Else
       lblStatus.Caption = "The database does not exist"
-      Text1.tEXT = ""
+      Text1.Text = ""
       Exit Sub
     End If
   End If
@@ -245,10 +271,10 @@ Private Sub cmdCreate_Click()
 
     bFix = False
 
-    S = Text1.tEXT
+    S = Text1.Text
     S = Replace(S, ".mdb", "_Schema.mdb", 1, 1, vbTextCompare)
 
-    sPath = Text1.tEXT
+    sPath = Text1.Text
     sPath = Left(sPath, InStrRev(sPath, "\") - 1)
 
     'Show Save Dialog Screen
@@ -272,12 +298,12 @@ Private Sub cmdCreate_Click()
       Exit Sub
     End If
 
-    If StrComp(Text1.tEXT, sSchemaDB, vbTextCompare) = 0 Then
+    If StrComp(Text1.Text, sSchemaDB, vbTextCompare) = 0 Then
       MsgBox "The master schema database cannot be the same name as the selected database.", vbExclamation
       Exit Sub
     End If
 
-  ElseIf StrComp(Text1.tEXT, sSchemaDB, vbTextCompare) = 0 Then
+  ElseIf StrComp(Text1.Text, sSchemaDB, vbTextCompare) = 0 Then
     If iMode = 1 Then
       WriteErrLog "The master schema database cannot be the same name as the selected database."
       End
@@ -293,13 +319,13 @@ Private Sub cmdCreate_Click()
   Dim rsloIx As Recordset
 
   'If MsgBox("You are going to override Master-Schema, are you sure ?", vbYesNo) = vbNo Then Exit Sub
-  Text2.tEXT = ""
+  Text2.Text = ""
 
   CreateLocalTable sSchemaDB
 
   If Not OpenAllDB(sSchemaDB, False, False) Then
     lblStatus.Caption = "Unable to open databases"
-    Text1.tEXT = ""
+    Text1.Text = ""
     Exit Sub
   End If
 
@@ -412,27 +438,27 @@ Private Sub Command1_Click()
   sDBpassword = ""
 
 
-  Text1.tEXT = OpenArqExt(Me, "", "MDB", "Microsoft Access (*.mdb)")
+  Text1.Text = OpenArqExt(Me, "", "MDB", "Microsoft Access (*.mdb)")
 
-  If IsNull(Text1.tEXT) Then
+  If IsNull(Text1.Text) Then
      Exit Sub
   End If
 
-  sDir = Text1.tEXT
+  sDir = Text1.Text
   sDir = Left(sDir, InStrRev(sDir, "\") - 1)
   SaveSetting App.Title, "Options", "Dir", sDir
 
   'attempt to open the database shared, read-only
-  Set dbTemp = OpenDatabase(Text1.tEXT, False, True)
+  Set dbTemp = OpenDatabase(Text1.Text, False, True)
   If Err.Number = 3031 Then
     Err.Clear
     frmPassword.Show vbModal
     If sDBpassword <> "" Then
-      Set dbTemp = OpenDatabase(Text1.tEXT, False, True, ";pwd=" & sDBpassword)
+      Set dbTemp = OpenDatabase(Text1.Text, False, True, ";pwd=" & sDBpassword)
       If Err.Number > 0 Then
         lblStatus.Caption = "Unable to open database."
         lblStatus.Refresh
-        Text1.tEXT = ""
+        Text1.Text = ""
         MsgBox Err.Number & " : " & Err.Description, vbExclamation
       Else
         dbTemp.Close
@@ -443,11 +469,11 @@ Private Sub Command1_Click()
     Else
       lblStatus.Caption = "Unable to open database - password not provided."
       lblStatus.Refresh
-      Text1.tEXT = ""
+      Text1.Text = ""
     End If
   ElseIf Err.Number > 0 Then  '3343 Then 'corrupt, attempt to fix
     If MsgBox(Err.Number & " : " & Err.Description & vbCrLf & "The database is corrupted. Attempt to repair it?", vbYesNo + vbQuestion) = vbNo Then
-      Text1.tEXT = ""
+      Text1.Text = ""
       lblStatus.Caption = ""
       Exit Sub
     End If
@@ -457,27 +483,27 @@ Private Sub Command1_Click()
       DeleteFile sGood  'Kill sGood
     End If
     Screen.MousePointer = vbHourglass
-    CompactDatabase Text1.tEXT, sGood
+    CompactDatabase Text1.Text, sGood
     Screen.MousePointer = vbDefault
     If Err.Number Then
       lblStatus.Caption = "Unable to repair database."
       lblStatus.Refresh
-      Text1.tEXT = ""
+      Text1.Text = ""
       MsgBox Err.Number & " : " & Err.Description, vbExclamation
     Else
       If FileExists(sGood) Then
         sBad = sDir & "\bad_" & Format(Date, "mmddyy") & ".mdb"
         'Rename corrupt database
-        Name Text1.tEXT As sBad
+        Name Text1.Text As sBad
         'Rename fixed database
-        Name sGood As Text1.tEXT
+        Name sGood As Text1.Text
         MsgBox "The database was repaired." & vbCrLf & _
                "The corrupted database has been renamed as " & sBad & vbCrLf & _
                "If the database still has problems you should run 'Fix Corrupt Database'"
       Else
         lblStatus.Caption = "Unable to repair database."
         lblStatus.Refresh
-        Text1.tEXT = ""
+        Text1.Text = ""
       End If
     End If
   Else
@@ -491,7 +517,7 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub putText(teks As String)
-  Text2.tEXT = Text2.tEXT & Chr(13) & Chr(10) & teks
+  Text2.Text = Text2.Text & Chr(13) & Chr(10) & teks
 End Sub
 
 Private Function UpdNewStat(oldstat As String, At_Digit As Integer)
@@ -621,9 +647,9 @@ Private Function OpenAllDB(S As String, Optional bExclusive As Boolean, Optional
   'On Error GoTo 0
   On Error GoTo Err
   If sDBpassword = "" Then
-    Set dbx = OpenDatabase(Text1.tEXT, bExclusive, bReadOnly)
+    Set dbx = OpenDatabase(Text1.Text, bExclusive, bReadOnly)
   Else
-    Set dbx = OpenDatabase(Text1.tEXT, bExclusive, bReadOnly, ";pwd=" & sDBpassword)
+    Set dbx = OpenDatabase(Text1.Text, bExclusive, bReadOnly, ";pwd=" & sDBpassword)
   End If
   Set dbTemp = OpenDatabase(S, True, False)
   OpenAllDB = True
@@ -634,7 +660,7 @@ Err:
     WriteErrLog "Unable to open databases due to error " & Err.Number & " : " & Err.Description
     End
   Else
-    Text1.tEXT = ""
+    Text1.Text = ""
     MsgBox "Error " & Err.Number & " : " & Err.Description, vbExclamation
   End If
   OpenAllDB = False
@@ -651,16 +677,16 @@ End Function
 
 Private Sub cmdCompare_Click()
 
-Text2.tEXT = ""
-If Text1.tEXT = "" Then
+Text2.Text = ""
+If Text1.Text = "" Then
    MsgBox "Enter database name.", vbExclamation
    Exit Sub
-ElseIf FileExists(Text1.tEXT) = False Then
+ElseIf FileExists(Text1.Text) = False Then
    If iMode = 2 Then
-      WriteErrLog "Unable to compare with master schema file. " & Text1.tEXT & " does not exist"
+      WriteErrLog "Unable to compare with master schema file. " & Text1.Text & " does not exist"
       End
    Else
-      Text1.tEXT = ""
+      Text1.Text = ""
       lblStatus.Caption = "The database does not exist"
       Exit Sub
    End If
@@ -682,13 +708,13 @@ On Error Resume Next
 If iMode = 0 Then
 
    If bFix = False Then
-      S = Text1.tEXT
+      S = Text1.Text
       S = Replace(S, ".mdb", "_Schema.mdb", 1, 1, vbTextCompare)
    End If
 
    bFix = False
 
-   sPath = Text1.tEXT
+   sPath = Text1.Text
    sPath = Left(sPath, InStrRev(sPath, "\") - 1)
 
    CDL1.CancelError = True
@@ -720,7 +746,7 @@ ElseIf FileExists(sSchemaDB) = False Then
    End If
 End If
 
-If StrComp(sSchemaDB, Text1.tEXT, vbTextCompare) = 0 Then
+If StrComp(sSchemaDB, Text1.Text, vbTextCompare) = 0 Then
    If iMode = 2 Then
       WriteErrLog "The master schema database cannot be the same file as the selected database"
       End
@@ -1186,9 +1212,9 @@ If bCorrupt Then
    NewStat = sAppPath & "results.txt"
    Open NewStat For Output As #i
    Print #i, Format(Now, "mm/dd/yyyy hh:mm:ss am/pm")
-   Print #i, "Database: " & Text1.tEXT
+   Print #i, "Database: " & Text1.Text
    Print #i, "Schema: " & sSchemaDB
-   Print #i, Text2.tEXT
+   Print #i, Text2.Text
    Close #i
 End If
 
@@ -1215,7 +1241,7 @@ ElseIf Err.Number = 3265 Or Err.Number = 3113 Then
    '3265: ignore item not found in this collection error
    '3113: Field not updatable
 Else
-   Text2.tEXT = Text2.tEXT & vbCrLf & "ERROR " & CStr(Err.Number) & " : " & Err.Description & vbCrLf
+   Text2.Text = Text2.Text & vbCrLf & "ERROR " & CStr(Err.Number) & " : " & Err.Description & vbCrLf
 End If
 Resume Next
 'End If
@@ -1223,7 +1249,7 @@ End Sub
 
 Private Sub Command2_Click()
 
-  If Text1.tEXT = "" Then
+  If Text1.Text = "" Then
     MsgBox "Enter database name.", vbExclamation
     Exit Sub
   End If
@@ -1247,8 +1273,8 @@ Private Sub Command2_Click()
 
   bFix = False
 
-  strNew = parsefile(Text1.tEXT, "C") & "_new.mdb"
-  strrepaired = parsefile(Text1.tEXT, "C") & "_repaired.mdb"
+  strNew = parsefile(Text1.Text, "C") & "_new.mdb"
+  strrepaired = parsefile(Text1.Text, "C") & "_repaired.mdb"
 
   If FileExists(strNew) Then
     Kill strNew
@@ -1266,17 +1292,17 @@ Private Sub Command2_Click()
     End If
   End If
 
-  If FileExists(Text1.tEXT) = False Then
-    Text1.tEXT = ""
+  If FileExists(Text1.Text) = False Then
+    Text1.Text = ""
     lblStatus.Caption = "Database does not exist"
     Exit Sub
   End If
 
   'attempt to open the database shared, read-only
   If sDBpassword = "" Then
-    Set dbTemp = OpenDatabase(Text1.tEXT, False, True)
+    Set dbTemp = OpenDatabase(Text1.Text, False, True)
   Else
-    Set dbTemp = OpenDatabase(Text1.tEXT, False, True, ";pwd=" & sDBpassword)
+    Set dbTemp = OpenDatabase(Text1.Text, False, True, ";pwd=" & sDBpassword)
   End If
   If Err.Number Then
     'TODO: Fix database header if it is corrupted
@@ -1302,13 +1328,13 @@ Private Sub Command2_Click()
 
   DisableControls
 
-  Text2.tEXT = ""
+  Text2.Text = ""
 
   'make a copy of corrupt database
   lblStatus.Caption = "Making a copy of the database..."
   lblStatus.Refresh
   'FileCopy Text1.Text, strNew
-  FileCopy Text1.tEXT, strNew
+  FileCopy Text1.Text, strNew
   If Err.Number Then
     Screen.MousePointer = vbDefault
     lblStatus.Caption = "Unable to copy database. If the database is open, close it and try again."
@@ -1450,9 +1476,9 @@ Private Sub Command2_Click()
     Next
 
     If sDBpassword = "" Then
-      Set dbx = OpenDatabase(Text1.tEXT, False, True)
+      Set dbx = OpenDatabase(Text1.Text, False, True)
     Else
-      Set dbx = OpenDatabase(Text1.tEXT, False, True, ";pwd=" & sDBpassword)
+      Set dbx = OpenDatabase(Text1.Text, False, True, ";pwd=" & sDBpassword)
     End If
 
     On Error GoTo 0
@@ -1513,7 +1539,7 @@ Private Sub Command2_Click()
 
     Kill strNew
     Text1.Enabled = True
-    Text1.tEXT = strrepaired
+    Text1.Text = strrepaired
     chkNoMods.Enabled = True
     chkNoMods.Value = 0
 
@@ -1541,7 +1567,7 @@ Private Sub Form_Load()
   CenterFormToScreen Me
 
   Me.Caption = App.Title & " " & App.Major & "." & App.Minor & "." & App.Revision
-  Text1.tEXT = ""
+  Text1.Text = ""
   PB1.Value = 0
   sAppPath = App.Path
   If Right(sAppPath, 1) <> "\" Then
@@ -1591,11 +1617,11 @@ Private Sub Form_Load()
     i = UBound(a)
 
     If i = 3 Then  'no database password passed
-      Text1.tEXT = Trim(a(1))
+      Text1.Text = Trim(a(1))
       sSchemaDB = Trim(a(2))
       iMode = CInt(a(3))
     ElseIf i = 4 Then  'database password passed
-      Text1.tEXT = Trim(a(1))
+      Text1.Text = Trim(a(1))
       sSchemaDB = Trim(a(2))
       iMode = CInt(a(3))
       sDBpassword = Trim(a(4))
@@ -1640,7 +1666,7 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
 
   S = LCase(strTableName)
 
-  Text2.tEXT = ""
+  Text2.Text = ""
 
   Select Case S
   Case "offense"
@@ -1687,30 +1713,30 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
 
       Select Case S
       Case "offense"
-        Text2.tEXT = "Duplicates found in Offense Table" & vbCrLf
+        Text2.Text = "Duplicates found in Offense Table" & vbCrLf
       Case "case"
-        Text2.tEXT = "Duplicates found in Case Table" & vbCrLf
+        Text2.Text = "Duplicates found in Case Table" & vbCrLf
       Case "event"
-        Text2.tEXT = "Duplicates found in Event Table" & vbCrLf
+        Text2.Text = "Duplicates found in Event Table" & vbCrLf
       Case "participant"
-        Text2.tEXT = "Duplicates found in Participant Table" & vbCrLf
+        Text2.Text = "Duplicates found in Participant Table" & vbCrLf
       Case "person"
-        Text2.tEXT = "Duplicates found in Person Table" & vbCrLf
+        Text2.Text = "Duplicates found in Person Table" & vbCrLf
       End Select
 
       rst.MoveNext  'Important! Do not delete the first record!
       Do While Not rst.EOF
         Select Case S
         Case "offense"
-          Text2.tEXT = Text2.tEXT & "R_ID = " & rst.Fields("R_ID").Value & ", Case_R_ID = " & rst.Fields("Case_R_ID").Value & ", SequenceNumber = '" & rst.Fields("SequenceNumber").Value & "'" & vbCrLf
+          Text2.Text = Text2.Text & "R_ID = " & rst.Fields("R_ID").Value & ", Case_R_ID = " & rst.Fields("Case_R_ID").Value & ", SequenceNumber = '" & rst.Fields("SequenceNumber").Value & "'" & vbCrLf
         Case "case"
-          Text2.tEXT = Text2.tEXT & "R_ID = " & rst.Fields("R_ID").Value & ", CaseCounty = '" & rst.Fields("CaseCounty").Value & "', LocalNumber = '" & rst.Fields("LocalNumber").Value & "', CaseCentury = '" & rst.Fields("CaseCentury").Value & "', CaseNumber = '" & rst.Fields("CaseNumber").Value & "', CaseType = '" & rst.Fields("CaseType").Value & "'" & vbCrLf
+          Text2.Text = Text2.Text & "R_ID = " & rst.Fields("R_ID").Value & ", CaseCounty = '" & rst.Fields("CaseCounty").Value & "', LocalNumber = '" & rst.Fields("LocalNumber").Value & "', CaseCentury = '" & rst.Fields("CaseCentury").Value & "', CaseNumber = '" & rst.Fields("CaseNumber").Value & "', CaseType = '" & rst.Fields("CaseType").Value & "'" & vbCrLf
         Case "event"
-          Text2.tEXT = Text2.tEXT & "R_ID = " & rst.Fields("R_ID").Value & ", Case_R_ID = " & rst.Fields("Case_R_ID").Value & ", EventCode = '" & rst.Fields("EventCode").Value & "', Suffix = '" & rst.Fields("Suffix").Value & "'" & vbCrLf
+          Text2.Text = Text2.Text & "R_ID = " & rst.Fields("R_ID").Value & ", Case_R_ID = " & rst.Fields("Case_R_ID").Value & ", EventCode = '" & rst.Fields("EventCode").Value & "', Suffix = '" & rst.Fields("Suffix").Value & "'" & vbCrLf
         Case "participant"
-          Text2.tEXT = Text2.tEXT & "R_ID = " & rst.Fields("R_ID").Value & vbCrLf
+          Text2.Text = Text2.Text & "R_ID = " & rst.Fields("R_ID").Value & vbCrLf
         Case "person"
-          Text2.tEXT = Text2.tEXT & "R_ID = " & rst.Fields("R_ID").Value & vbCrLf
+          Text2.Text = Text2.Text & "R_ID = " & rst.Fields("R_ID").Value & vbCrLf
         End Select
         If chkNoMods.Value = False Then
           rst.Delete
@@ -1724,7 +1750,7 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
         i = FreeFile
         NewStat = sAppPath & "results.txt"
         Open NewStat For Output As #i
-        Print #i, Text2.tEXT
+        Print #i, Text2.Text
         Close #i
         Shell "notepad.exe " & NewStat, vbNormalFocus
       End If
@@ -1777,7 +1803,7 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
 
 ErrProc:
 
-  Text2.tEXT = Text2.tEXT & vbCrLf & "ERROR " & CStr(Err.Number) & " : " & Err.Description & vbCrLf
+  Text2.Text = Text2.Text & vbCrLf & "ERROR " & CStr(Err.Number) & " : " & Err.Description & vbCrLf
 
   DeleteDuplicateRecords = B
 
@@ -1805,15 +1831,15 @@ Function GetDiskSpaceFree(drive As String) As Currency
   Dim BytesPerCluster&
 
   Dim Status As Long
-  Dim TotalBytes As Currency
-  Dim FreeBytes As Currency
-  Dim BytesAvailableToCaller As Currency
+  Dim TotalBytes As Long
+  Dim FreeBytes As Long
+  Dim BytesAvailableToCaller As Long
 
   On Error GoTo GetDiskSpaceFreeExError
 
   S$ = drive
 
-  Status = GetDiskFreeSpaceEx(S$, BytesAvailableToCaller, TotalBytes, FreeBytes)
+  Status = GetDiskFreeSpaceEx(S$, CLng(BytesAvailableToCaller), CLng(TotalBytes), CLng(FreeBytes))
   If Status <> 0 Then
     GetDiskSpaceFree = FreeBytes * 10000
   Else
@@ -1824,7 +1850,7 @@ Function GetDiskSpaceFree(drive As String) As Currency
 GetDiskSpaceFreeExError:
   If Err = 453 Then  ' specified dll not found (early versions of Windows 95)
     On Error GoTo GetDiskSpaceFreeError
-    dl = GetDiskFreeSpace(S$, SectersPerCluster, BytesPerSector, NumFreeClusters, TotNumofClusters)
+    dl = GetDiskFreeSpace(S$, CLng(SectersPerCluster), CLng(BytesPerSector), CLng(NumFreeClusters), CLng(TotNumofClusters))
     BytesPerCluster = SectersPerCluster * BytesPerSector
     NumFreeBytes = BytesPerCluster * NumFreeClusters
     GetDiskSpaceFree = NumFreeBytes

@@ -1,0 +1,36 @@
+****** Run at 21/10/2024 10:13:45
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB308869" -f "d:\develop\vb\mdbrepair\Form1.frm" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\Form1.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:13:46
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB308870" -f "d:\develop\vb\mdbrepair\submain.bas" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\submain.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:13:46
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB308871" -f "d:\develop\vb\mdbrepair\clsRegistry.cls" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\clsRegistry.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:13:46
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB308872" -f "d:\develop\vb\mdbrepair\frmProgress.frm" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\frmProgress.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:13:47
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB308873" -f "d:\develop\vb\mdbrepair\frmPassword.frm" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\frmPassword.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:13:47
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB308874" -f "d:\develop\vb\vblib2\modules\VisualStyles.bas" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\VisualStyles.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:13:47
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB308875" -f "d:\develop\vb\vblib2\modules\Common.bas" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\Common.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:13:48
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB308876" -f "d:\develop\vb\vblib2\modules\mFileAPI.bas" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\mFileAPI.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:13:48
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB308877" -f "d:\develop\vb\vblib2\modules\split.bas" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\split.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:36:39
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB840814" -f "d:\develop\vb\mdbrepair\Form1.frm" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\Form1.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:36:39
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB840815" -f "d:\develop\vb\mdbrepair\submain.bas" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\submain.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:36:40
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB840816" -f "d:\develop\vb\mdbrepair\clsRegistry.cls" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\clsRegistry.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:36:40
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB840817" -f "d:\develop\vb\mdbrepair\frmProgress.frm" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\frmProgress.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:36:40
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB840818" -f "d:\develop\vb\mdbrepair\frmPassword.frm" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\frmPassword.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:36:40
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB840819" -f "d:\develop\vb\vblib2\modules\VisualStyles.bas" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\VisualStyles.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:36:41
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB840820" -f "d:\develop\vb\vblib2\modules\Common.bas" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\Common.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:36:41
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB840821" -f "d:\develop\vb\vblib2\modules\mFileAPI.bas" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\mFileAPI.OBJ" -QIfdiv -ML -basic
+****** Run at 21/10/2024 10:36:42
+C3 -il "C:\Users\jcass\AppData\Local\Temp\VB840822" -f "d:\develop\vb\vblib2\modules\split.bas" -W 3 -Gy -G6 -Gs4096 -dos -Zl -Fo"D:\develop\vb\mdbrepair\split.OBJ" -QIfdiv -ML -basic

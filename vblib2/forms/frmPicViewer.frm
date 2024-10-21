@@ -669,7 +669,41 @@ Private Type POINT
   y As Long
 End Type
 
-Private Declare Function DeviceCapabilities Lib "winspool.drv" Alias "DeviceCapabilitiesW" (ByVal lpDeviceName As Long, ByVal lpPort As Long, ByVal iIndex As Long, ByVal lpOutput As Long, ByVal lpDevMode As Long) As Long
+
+#If (VBA7 = 0) Then
+Private Enum LongPtr
+[_]
+End Enum
+#End If
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
+#If VBA7 Then
+Private Declare ptrsafe Function DeviceCapabilities Lib "winspool.drv" _
+    Alias "DeviceCapabilitiesW" ( _
+    ByVal lpDeviceName As Longptr, _
+    ByVal lpPort As Longptr, _
+    ByVal iIndex As Longptr, _
+    ByVal lpOutput As Longptr, _
+    ByVal lpDevMode As Longptr) As Long
+#Else
+Private Declare Function DeviceCapabilities Lib "winspool.drv" _
+    Alias "DeviceCapabilitiesW" ( _
+    ByVal lpDeviceName As Long, _
+    ByVal lpPort As Long, _
+    ByVal iIndex As Long, _
+    ByVal lpOutput As Long, _
+    ByVal lpDevMode As Long) As Long
+#End If
+
+'Private Declare Function DeviceCapabilities Lib "winspool.drv" Alias "DeviceCapabilitiesW" (ByVal lpDeviceName As Long, ByVal lpPort As Long, ByVal iIndex As Long, ByVal lpOutput As Long, ByVal lpDevMode As Long) As Long
+
+
 Private intPaperIds() As Integer
 Attribute intPaperIds.VB_VarUserMemId = 1073938445
 Private ptPaperSizes() As POINT
@@ -842,7 +876,7 @@ End Sub
 
 Private Sub cmdBrowseFolder_Click()
 Dim PICBROWSE
-  PICBROWSE = BrowseFolders(Me.hWnd, "Choose a location picture", BrowseForFolders, CSIDL_RECENT)
+  PICBROWSE = BrowseFolders(CLng(Me.hWnd), "Choose a location picture", BrowseForFolders, CSIDL_RECENT)
   If PICBROWSE <> "" Then
     lstViewer.FileName = PathTujuan
     If lstViewer.ListCount <> 0 Then

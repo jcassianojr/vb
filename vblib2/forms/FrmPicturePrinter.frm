@@ -170,6 +170,28 @@ Private Type POINT
     y As Long
 End Type
 
+#If (VBA7 = 0) Then
+Private Enum LongPtr
+[_]
+End Enum
+#End If
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
+#If VBA7 Then
+Private Declare ptrsafe Function DeviceCapabilities Lib "winspool.drv" _
+    Alias "DeviceCapabilitiesW" ( _
+    ByVal lpDeviceName As Longptr, _
+    ByVal lpPort As Longptr, _
+    ByVal iIndex As Longptr, _
+    ByVal lpOutput As Longptr, _
+    ByVal lpDevMode As Longptr) As Long
+#Else
 Private Declare Function DeviceCapabilities Lib "winspool.drv" _
     Alias "DeviceCapabilitiesW" ( _
     ByVal lpDeviceName As Long, _
@@ -177,6 +199,7 @@ Private Declare Function DeviceCapabilities Lib "winspool.drv" _
     ByVal iIndex As Long, _
     ByVal lpOutput As Long, _
     ByVal lpDevMode As Long) As Long
+#End If
 
 Private intPaperIds() As Integer
 Private ptPaperSizes() As POINT

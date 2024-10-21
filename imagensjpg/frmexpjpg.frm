@@ -211,7 +211,7 @@ Dim cCAMJPG As String
 
 Private Sub cmdBrowseFolder_Click()
   Dim PICBROWSE As String
-  PICBROWSE = BrowseFolders(Me.hWnd, "Choose a location picture", BrowseForFolders, CSIDL_DESKTOP)
+  PICBROWSE = BrowseFolders(CLng(Me.hWnd), "Choose a location picture", BrowseForFolders, CSIDL_DESKTOP)
   If PICBROWSE <> "" Then
     Caminho.Caption = PICBROWSE & "\"
     cCAMJPG = PICBROWSE & "\"

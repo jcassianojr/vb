@@ -16,6 +16,33 @@ Type RelationType
 End Type
 Public RelData() As RelationType
 
+#If (VBA7 = 0) Then
+Private Enum LongPtr
+[_]
+End Enum
+#End If
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
+#If VBA7 Then
+'for loading my web page
+Private Declare  PtrSafe Function ShellExecute Lib "shell32.dll" Alias _
+                                      "ShellExecuteA" (ByVal hWnd As LongPtr, ByVal lpOperation _
+                                                                           As String, ByVal lpFile As String, ByVal lpParameters _
+                                                                                                              As String, ByVal lpDirectory As String, ByVal nShowCmd _
+                                                                                                                                                      As LongPtr) As Long
+
+'for finding default browser
+Private Declare  PtrSafe Function FindExecutable Lib "shell32.dll" Alias _
+                                        "FindExecutableA" (ByVal lpFile As String, ByVal lpDirectory As _
+                                                                                   String, ByVal lpResult As String) As Long
+
+#Else
 'for loading my web page
 Private Declare Function ShellExecute Lib "shell32.dll" Alias _
                                       "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation _
@@ -27,6 +54,7 @@ Private Declare Function ShellExecute Lib "shell32.dll" Alias _
 Private Declare Function FindExecutable Lib "shell32.dll" Alias _
                                         "FindExecutableA" (ByVal lpFile As String, ByVal lpDirectory As _
                                                                                    String, ByVal lpResult As String) As Long
+#End If
 
 Sub Main()
 
