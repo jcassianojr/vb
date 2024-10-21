@@ -37,14 +37,14 @@ Private Const PTR_SIZE As Long = 4
 #End If
 
 
-Private Declare Function SetTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
-Private Declare Function KillTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long) As Long
+'Private Declare Function SetTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
+'Private Declare Function KillTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long) As Long
 Private CurMBTitle As String
 
 'constantes para syscolors
 'Dim lngReturn As Long
 'lngReturn = SetSysColors(1, COLOR_ACTIVECAPTION ,RGB(255 0 0))
-Declare Function SetSysColors Lib "user32" (ByVal nChanges As Long, lpSysColor As Long, lpColorValues As Long) As Long
+'Declare Function SetSysColors Lib "user32" (ByVal nChanges As Long, lpSysColor As Long, lpColorValues As Long) As Long
 Public Const COLOR_SCROLLBAR = 0  'The Scrollbar color
 Public Const COLOR_BACKGROUND = 1  'Colour of the background with no wallpaper
 Public Const COLOR_ACTIVECAPTION = 2  'Caption of Active Window
@@ -122,6 +122,119 @@ Public Enum EShellShowConstants
   essSW_SHOW = 5
 End Enum
 
+'Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
+'Private Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
+'Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
+'Public Declare Function ReleaseCapture Lib "user32" () As Long
+'Public Declare Function SHFileOperation Lib "shell32.dll" Alias "SHFileOperationA" (lpFileOp As SHFILEOPSTRUCT) As Long
+'Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+''Exemplos  find   Call ShellExecute(Me.hwnd, "find", "C:\", vbNullString, vbNullString, SW_SHOWNORMAL)
+'Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
+'Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+'Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
+'Declare Function WinAPI_GetComputerName Lib "kernel32" Alias "GetComputerNameA" (ByVal sBuffer As String, lSize As Long) As Long
+''Chama O HELP AVULSO
+''hh_ variaveis acima
+''Exemplos(0,"c:\temp\teste.chm",HH_DISPLAY_TOPIC,20)
+''no mdi atribua os shortcurts/helpid no menueditor
+'html ja na clscommondialog com enum e funcao ShowHTMLHelp
+'Public Declare Function HtmlHelp Lib "hhctrl.ocx" Alias "HtmlHelpA" (ByVal hWnd As Long, ByVal lpHelpFile As String, ByVal wCommand As Long, dwData As Any) As Long
+'Public Declare Function GetPrivateProfileString Lib "kernel32" Alias _
+'                                                "GetPrivateProfileStringA" (ByVal lpApplicationName As String, _
+'                                                                            ByVal lpKeyName As Any, ByVal lpDefault As String, _
+'                                                                            ByVal lpReturnedString As String, ByVal nSize As Long, _
+'                                                                            ByVal lpFileName As String) As Long'
+'
+'
+'Public Declare Function WritePrivateProfileString Lib "kernel32" Alias _
+'                                                  "WritePrivateProfileStringA" (ByVal lpApplicationName As String, _
+'                                                                                ByVal lpKeyName As Any, ByVal lpString As Any, _
+'                                                                                ByVal lpFileName As String) As Long
+'Public Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+'Public Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (hpvDest As Any, ByVal hpvSource As Long, ByVal cbCopy As Long)
+'Private Declare Sub keybd_event Lib "user32" (ByVal bVk As Byte, ByVal bScan As Byte, ByVal dwFlags As Long, ByVal dwExtraInfo As Long)
+'Private Declare Function PlaySound Lib "winmm.dll" (ByVal lpszName As String, ByVal hModule As Long, ByVal dwFlags As Long) As Long
+'Tirar botao maximar minizar
+'Public Declare Function SetWindowLong Lib "user32" _
+'                                      Alias "SetWindowLongA" (ByVal hWnd As Long, _
+'                                                              ByVal nIndex As Long, ByVal dwNewLong As _
+'                                                                                    Long) As Long
+'Public Declare Function GetWindowLong Lib "user32" _
+'                                      Alias "GetWindowLongA" (ByVal hWnd As Long, _
+'                                                              ByVal nIndex As Long) As Long
+
+'declare para data hora do sistema
+'Private Declare Function PostMessage Lib "user32" Alias _
+                                     "PostMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, _
+                                                     ByVal wParam As Long, ByVal lParam As Long) As Long
+
+'Declare Function GetLocaleInfoa Lib "kernel32" Alias _
+                               "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, _
+                                                 ByVal lpLCData As String, ByVal cchData As Long) As Long
+
+'Declare Function SetLocaleInfoa Lib "kernel32" Alias _
+                               "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, _
+                                                 ByVal lpLCData As String) As Boolean
+
+'Declare Function GetUserDefaultLCID% Lib "kernel32" ()
+'Declare Function GetSystemDefaultLCID Lib "kernel32" () As Long
+'Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+'Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+
+#If VBA7 Then
+Private Declare  PtrSafe Function SetTimer Lib "user32" (ByVal hWnd As LongPtr, ByVal nIDEvent As LongPtr, ByVal uElapse As LongPtr, ByVal lpTimerFunc As LongPtr) As Long
+Private Declare  PtrSafe Function KillTimer Lib "user32" (ByVal hWnd As LongPtr, ByVal nIDEvent As LongPtr) As Long
+Declare  PtrSafe Function SetSysColors Lib "user32" (ByVal nChanges As LongPtr, lpSysColor As LongPtr, lpColorValues As LongPtr) As Long
+Public Declare  PtrSafe Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As LongPtr) As Long
+Private Declare  PtrSafe Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As LongPtr, ByVal dwReserved As LongPtr) As Long
+Public Declare  PtrSafe Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As LongPtr, ByVal Unknownn1 As LongPtr, ByVal Unknownn2 As LongPtr, ByVal fCheckOnly As LongPtr) As Long
+Public Declare  PtrSafe Function ReleaseCapture Lib "user32" () As Long
+Public Declare  PtrSafe Function SHFileOperation Lib "shell32.dll" Alias "SHFileOperationA" (lpFileOp As SHFILEOPSTRUCT) As Long
+Public Declare  PtrSafe Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As LongPtr, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As LongPtr) As Long
+Public Declare  PtrSafe Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As LongPtr, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As LongPtr) As Long
+Public Declare  PtrSafe Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As LongPtr, ByVal wMsg As LongPtr, ByVal wParam As LongPtr, ByVal lParam As LongPtr) As Long
+Public Declare  PtrSafe Function GetPrivateProfileString Lib "kernel32" Alias _
+                                                "GetPrivateProfileStringA" (ByVal lpApplicationName As String, _
+                                                                            ByVal lpKeyName As Any, ByVal lpDefault As String, _
+                                                                            ByVal lpReturnedString As String, ByVal nSize As LongPtr, _
+                                                                            ByVal lpFileName As String) As Long
+
+Public Declare  PtrSafe Function WritePrivateProfileString Lib "kernel32" Alias _
+                                                  "WritePrivateProfileStringA" (ByVal lpApplicationName As String, _
+                                                                                ByVal lpKeyName As Any, ByVal lpString As Any, _
+                                                                                ByVal lpFileName As String) As Long
+Public Declare  PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+Public Declare  PtrSafe Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (hpvDest As Any, ByVal hpvSource As LongPtr, ByVal cbCopy As LongPtr)
+Private Declare  PtrSafe Sub keybd_event Lib "user32" (ByVal bVk As Byte, ByVal bScan As Byte, ByVal dwFlags As LongPtr, ByVal dwExtraInfo As LongPtr)
+Private Declare  PtrSafe Function PlaySound Lib "winmm.dll" (ByVal lpszName As String, ByVal hModule As LongPtr, ByVal dwFlags As LongPtr) As Long
+Public Declare  PtrSafe Function SetWindowLong Lib "user32" _
+                                      Alias "SetWindowLongA" (ByVal hWnd As LongPtr, _
+                                                              ByVal nIndex As LongPtr, ByVal dwNewLong As _
+                                                                                    Long) As Long
+Public Declare  PtrSafe Function GetWindowLong Lib "user32" _
+                                      Alias "GetWindowLongA" (ByVal hWnd As LongPtr, _
+                                                              ByVal nIndex As LongPtr) As Long
+
+Private Declare  PtrSafe Function PostMessage Lib "user32" Alias _
+                                     "PostMessageA" (ByVal hWnd As LongPtr, ByVal wMsg As LongPtr, _
+                                                     ByVal wParam As LongPtr, ByVal lParam As LongPtr) As Long
+
+Declare Function  PtrSafe GetLocaleInfoa Lib "kernel32" Alias _
+                               "GetLocaleInfoA" (ByVal Locale As LongPtr, ByVal LCTYPE As LongPtr, _
+                                                 ByVal lpLCData As String, ByVal cchData As LongPtr) As Long
+
+Declare Function  PtrSafe SetLocaleInfoa Lib "kernel32" Alias _
+                               "SetLocaleInfoA" (ByVal Locale As LongPtr, ByVal LCTYPE As LongPtr, _
+                                                 ByVal lpLCData As String) As Boolean
+
+Declare Function  PtrSafe GetUserDefaultLCID% Lib "kernel32" ()
+Declare Function  PtrSafe GetSystemDefaultLCID Lib "kernel32" () As Long
+Public Declare  PtrSafe Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+Public Declare  PtrSafe Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+#Else
+Private Declare Function SetTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
+Private Declare Function KillTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long) As Long
+Declare Function SetSysColors Lib "user32" (ByVal nChanges As Long, lpSysColor As Long, lpColorValues As Long) As Long
 Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
 Private Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
@@ -131,14 +244,6 @@ Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (By
 ''Exemplos  find   Call ShellExecute(Me.hwnd, "find", "C:\", vbNullString, vbNullString, SW_SHOWNORMAL)
 Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
 Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
-'Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
-'Declare Function WinAPI_GetComputerName Lib "kernel32" Alias "GetComputerNameA" (ByVal sBuffer As String, lSize As Long) As Long
-''Chama O HELP AVULSO
-''hh_ variaveis acima
-''Exemplos(0,"c:\temp\teste.chm",HH_DISPLAY_TOPIC,20)
-''no mdi atribua os shortcurts/helpid no menueditor
-'html ja na clscommondialog com enum e funcao ShowHTMLHelp
-'Public Declare Function HtmlHelp Lib "hhctrl.ocx" Alias "HtmlHelpA" (ByVal hWnd As Long, ByVal lpHelpFile As String, ByVal wCommand As Long, dwData As Any) As Long
 Public Declare Function GetPrivateProfileString Lib "kernel32" Alias _
                                                 "GetPrivateProfileStringA" (ByVal lpApplicationName As String, _
                                                                             ByVal lpKeyName As Any, ByVal lpDefault As String, _
@@ -179,6 +284,11 @@ Declare Function GetUserDefaultLCID% Lib "kernel32" ()
 Declare Function GetSystemDefaultLCID Lib "kernel32" () As Long
 Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
 Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+#End If
+
+
+
+
 Private Sub ForceSystemDecimalToPeriod()
     ' We MUST use the ANSI API version so it's an ANSI character that's used for the actual decimal character.
     Const LOCALE_SDECIMAL   As Long = &HE&
@@ -233,9 +343,9 @@ Public Function ComboLostFocus(ByRef Combo1)
 Dim strPartial
 Dim i
   With Combo1
-    If Len(.tEXT) Then
+    If Len(.Text) Then
       'Procura pelo texto digitado
-      strPartial = .tEXT
+      strPartial = .Text
       i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
@@ -251,7 +361,7 @@ Dim J
 Dim m_bEditFromCode
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .tEXT
+    strPartial = .Text
     i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
@@ -1946,7 +2056,7 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
   End If
 End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
@@ -2413,12 +2523,12 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef tEXT As String) As Long
+Public Function WordLen(ByRef Text As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
+  Bytes = StrConv(UCase$(Text), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next
