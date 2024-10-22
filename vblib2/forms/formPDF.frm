@@ -441,22 +441,22 @@ Dim cache As String
 Const AppName = "Text-PDF v1.0"
 
 Private Sub CmdAbrirCom_Click()
-  If FileConnExist(txtFilename.tEXT, True) Then
-    Call OpenWith(txtFilename.tEXT, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
+  If FileConnExist(txtFilename.Text, True) Then
+    Call OpenWith(txtFilename.Text, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hWnd))
   End If
 End Sub
 
 Private Sub CmdAbrirPdf_Click()
   Dim cARQSHELL As String
-  cARQSHELL = FixStr(txtOutputFile.tEXT)
+  cARQSHELL = FixStr(txtOutputFile.Text)
   If FileConnExist(cARQSHELL) Then
-    ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , Me.hWnd
+    ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
   End If
 End Sub
 
 Private Sub CmdGeraPorPreview_Click()
  If PrintPreview1.PrinterExists("Microsoft Print to PDF") Then
-        PrintPreview1.SaveToFile "Microsoft Print to PDF", txtOutputFile.tEXT
+        PrintPreview1.SaveToFile "Microsoft Print to PDF", txtOutputFile.Text
         If PrintPreview1.Canceled Then
             MsgBox "Error, could not save the file, check if to are allowed to write at that location", vbExclamation
             Exit Sub
@@ -470,9 +470,9 @@ End Sub
 
 Private Sub cmdimp_Click()
   Dim cARQSHELL As String
-  cARQSHELL = FixStr(txtOutputFile.tEXT)
+  cARQSHELL = FixStr(txtOutputFile.Text)
   If FileConnExist(cARQSHELL) Then
-    ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , "print", Me.hWnd
+    ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , "print", CLng(Me.hWnd)
   End If
 End Sub
 
@@ -486,7 +486,7 @@ End Sub
 
 Private Sub CmdSendMail_Click()
   Dim cARQUIVO As String
-  cARQUIVO = FixStr(txtOutputFile.tEXT)
+  cARQUIVO = FixStr(txtOutputFile.Text)
   'servidor,porta,from,to,assunto,anexos,mensagem,enviar e sair
   ePASS01 = Array("", _
                   "", _
@@ -500,7 +500,7 @@ Private Sub CmdSendMail_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
- cARQRTF = FixStr(txtOutputFile.tEXT)
+ cARQRTF = FixStr(txtOutputFile.Text)
  FrmPreview.Show vbModal, Me
 End Sub
 
@@ -515,15 +515,15 @@ Private Sub Form_Load()
   cmbRotation.ListIndex = 0
   cmbPageSize.ListIndex = 0
 
-  txtCreator.tEXT = zNOMEFOLHA
+  txtCreator.Text = zNOMEFOLHA
 
 
 
   If Len(ePASS01) > 0 Then
     If FileConnExist(ePASS01) Then
-      txtTitle.tEXT = NomeArq(ePASS01, True)
-      txtFilename.tEXT = ePASS01
-      txtOutputFile.tEXT = TrocaExt(ePASS01, "PDF")
+      txtTitle.Text = NomeArq(ePASS01, True)
+      txtFilename.Text = ePASS01
+      txtOutputFile.Text = TrocaExt(ePASS01, "PDF")
       btnOpen.Enabled = False
       txtFilename.Enabled = False
     End If
@@ -544,36 +544,36 @@ Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
 End Sub
 Private Sub txtAuthor_GotFocus()
   txtAuthor.SelStart = 0
-  txtAuthor.SelLength = Len(txtAuthor.tEXT)
+  txtAuthor.SelLength = Len(txtAuthor.Text)
 End Sub
 Private Sub txtCreator_GotFocus()
   txtCreator.SelStart = 0
-  txtCreator.SelLength = Len(txtCreator.tEXT)
+  txtCreator.SelLength = Len(txtCreator.Text)
 End Sub
 
 Private Sub txtSubject_GotFocus()
   txtSubject.SelStart = 0
-  txtSubject.SelLength = Len(txtSubject.tEXT)
+  txtSubject.SelLength = Len(txtSubject.Text)
 End Sub
 
 Private Sub txtTitle_GotFocus()
   txtTitle.SelStart = 0
-  txtTitle.SelLength = Len(txtTitle.tEXT)
+  txtTitle.SelLength = Len(txtTitle.Text)
 End Sub
 
 Private Sub txtKeywords_GotFocus()
   txtKeywords.SelStart = 0
-  txtKeywords.SelLength = Len(txtKeywords.tEXT)
+  txtKeywords.SelLength = Len(txtKeywords.Text)
 End Sub
 
 Private Sub txtFilename_GotFocus()
   txtFilename.SelStart = 0
-  txtFilename.SelLength = Len(txtFilename.tEXT)
+  txtFilename.SelLength = Len(txtFilename.Text)
 End Sub
 
 Private Sub txtOutputFile_GotFocus()
   txtOutputFile.SelStart = 0
-  txtOutputFile.SelLength = Len(txtOutputFile.tEXT)
+  txtOutputFile.SelLength = Len(txtOutputFile.Text)
 End Sub
 
 Private Sub btnClose_Click()
@@ -582,10 +582,10 @@ End Sub
 
 Private Sub btnOpen_Click()
   On Local Error Resume Next
-  txtFilename.tEXT = OpenArqExt(Me, txtFilename.tEXT, "txt", "Arquivos txt")
+  txtFilename.Text = OpenArqExt(Me, txtFilename.Text, "txt", "Arquivos txt")
 
-  If Not Len(txtFilename.tEXT) = 0 Then
-    txtOutputFile.tEXT = TrocaExt(txtFilename.tEXT, "pdf")
+  If Not Len(txtFilename.Text) = 0 Then
+    txtOutputFile.Text = TrocaExt(txtFilename.Text, "pdf")
   End If
 
 
@@ -597,7 +597,7 @@ Private Sub btnSave_Click()
   sFILTER = "Arquivos PDF (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
   FileName = FileSave(Me, sFILTER, 1, "PDF", cARQRTF, cARQRTF, "Salvar PDF")
   If Not Len(FileName) = 0 Then
-    txtOutputFile.tEXT = FileName
+    txtOutputFile.Text = FileName
   End If
 End Sub
 
@@ -615,13 +615,13 @@ Private Sub btnfalse()
        txtOutputFile.Enabled = False
 End Sub
 Private Sub btnConvert_Click()
-  If txtFilename.tEXT <> "" And txtOutputFile.tEXT <> "" Then
-    ConvertToPDF txtFilename.tEXT, txtOutputFile.tEXT, _
-                 txtAuthor.tEXT, txtCreator.tEXT, txtKeywords.tEXT, _
-                 txtSubject.tEXT, txtTitle.tEXT, _
-                 cmbFont.tEXT, Val(cmbFontSize.tEXT), Val(cmbRotation.tEXT), _
-                 Val(cmbPageSize.tEXT), Val(Right(cmbPageSize.tEXT, 3)), ChkPaisagem.Value
-    If FileConnExist(txtOutputFile.tEXT) Then
+  If txtFilename.Text <> "" And txtOutputFile.Text <> "" Then
+    ConvertToPDF txtFilename.Text, txtOutputFile.Text, _
+                 txtAuthor.Text, txtCreator.Text, txtKeywords.Text, _
+                 txtSubject.Text, txtTitle.Text, _
+                 cmbFont.Text, Val(cmbFontSize.Text), Val(cmbRotation.Text), _
+                 Val(cmbPageSize.Text), Val(Right(cmbPageSize.Text, 3)), ChkPaisagem.Value
+    If FileConnExist(txtOutputFile.Text) Then
       Alert "Conversao Concluida"
       btnfalse
     End If
@@ -952,10 +952,10 @@ er:
   MsgBox Err.Description
 End Sub
 
-Public Function ReplaceText(tEXT As String, TextToReplace As String, NewText As String) As String
+Public Function ReplaceText(Text As String, TextToReplace As String, NewText As String) As String
   Dim mtext As String
   Dim SpacePos As Long
-  mtext = tEXT
+  mtext = Text
   SpacePos = InStr(mtext, TextToReplace)
   Do While SpacePos
     mtext = Left(mtext, SpacePos - 1) & NewText & Mid(mtext, SpacePos + Len(TextToReplace))
@@ -967,7 +967,7 @@ Public Sub MyPrintingTXT()
   Dim fileFile As Integer
   Dim STRBUFFER As String
   Dim cARQOPEN As String
-  cARQOPEN = txtFilename.tEXT
+  cARQOPEN = txtFilename.Text
   If Not FileConnExist(cARQOPEN, True) Then
     Exit Sub
   End If

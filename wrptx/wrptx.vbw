@@ -52,5 +52,5 @@ FrmPreview = 78, 78, 1153, 512, C, 130, 130, 1112, 564, C
 FrmPicturePrinter = 156, 156, 1231, 590, C, 130, 130, 1205, 564, C
 modMenuXP = 0, 0, 1130, 434, C
 frmCharacters = 182, 182, 1336, 624, C, 156, 156, 1310, 598, C
-cZipArchive = 0, 0, 0, 0, C
-PicSaveLoad = 0, 0, 0, 0, C
+cZipArchive = 78, 78, 1074, 511, 
+PicSaveLoad = 52, 52, 1048, 485, C

@@ -463,13 +463,13 @@ Private Sub LoadPictureStream( _
     Dim PICTDESC As PICTDESC
     Dim HRESULT As HRESULT
 
-    gdipStatus = GdipCreateBitmapFromStream(Stream, gdipBitmap)
+    gdipStatus = GdipCreateBitmapFromStream(Stream, CLng(gdipBitmap))
     If gdipStatus <> ok Then
         Err.Raise &H80044A00, _
                   TypeName(Me), _
                   "GdipCreateBitmapFromStream error " & CStr(gdipStatus)
     End If
-    gdipStatus = GdipCreateHBITMAPFromBitmap(gdipBitmap, hBitmap, BackARGB)
+    gdipStatus = GdipCreateHBITMAPFromBitmap(gdipBitmap, CLng(hBitmap), BackARGB)
     If gdipStatus <> ok Then
         GdipDisposeImage gdipBitmap
         Err.Raise &H80044A10, _
@@ -548,7 +548,7 @@ Private Sub SavePictureStream( _
                                                Stride, _
                                                PixelFormat24bppRGB, _
                                                Bits(0), _
-                                               gdipBitmap)
+                                               CLng(gdipBitmap))
         If gdipStatus <> ok Then
             Err.Raise &H80044818, _
                       TypeName(Me), _
@@ -597,7 +597,7 @@ Private Sub Class_Initialize()
     CLSIDFromString StrPtr("{557CF406-1A04-11D3-9A73-0000F81EF32E}"), ImageFormatPNG
     CLSIDFromString StrPtr("{1D5BE4B5-FA4A-452D-9CDD-5DB35105E7EB}"), EncoderQuality
     gdipStartupInput.GdiplusVersion = 1
-    If GdiplusStartup(gdipToken, gdipStartupInput, WIN32_NULL) <> ok Then
+    If GdiplusStartup(CLng(gdipToken), gdipStartupInput, WIN32_NULL) <> ok Then
         'On an error gdipToken should be left at its original value (0) anyway, but
         'let's be sure:
         gdipToken = 0

@@ -112,7 +112,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -128,7 +128,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -234,7 +234,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.tEXT
+  zRPT = Grid.Text
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -504,15 +504,15 @@ Select Case aRELCFG(1)
   Case "EXECUTARDLL"
     ExecutarDLL cARQRTF
   Case "IMPRELM5P"
-    ShellEx "IMPREL", essSW_SHOWDEFAULT, zgrp & " " & zRPT & " " & zUSER & " P ", ZMANA5IMP, , Me.hWnd
+    ShellEx "IMPREL", essSW_SHOWDEFAULT, zgrp & " " & zRPT & " " & zUSER & " P ", ZMANA5IMP, , CLng(Me.hWnd)
   Case "IMPRELM5M"
-    ShellEx "IMPREL", essSW_SHOWDEFAULT, zgrp & " " & zRPT & " " & zUSER & " M ", ZMANA5IMP, , Me.hWnd
+    ShellEx "IMPREL", essSW_SHOWDEFAULT, zgrp & " " & zRPT & " " & zUSER & " M ", ZMANA5IMP, , CLng(Me.hWnd)
   Case "ABRIRCOM"
-    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
+    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hWnd))
   Case "SHELL"
-    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
+    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
   Case "SHELLPRINT"
-    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , "print", Me.hWnd
+    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , "print", CLng(Me.hWnd)
   Case "FRMRTF"
     FrmRTf.Show vbModal, Me
   Case "FRMINIEDITOR"
@@ -545,9 +545,9 @@ End If
     aRELCFG(1) = Trim(Replace(aRELCFG(1), ".EXE", " "))
     Select Case aRELCFG(1)
         Case "VORETRUN"
-          ShellEx "VORETRUN", essSW_SHOWDEFAULT, cARQRTF & MONTARSN(, "") & "#" & aARQUIVOS(0) & "#" & aRELCFG(15), PegPath("PATH", "VORETRUN"), , Me.hWnd
+          ShellEx "VORETRUN", essSW_SHOWDEFAULT, cARQRTF & MONTARSN(, "") & "#" & aARQUIVOS(0) & "#" & aRELCFG(15), PegPath("PATH", "VORETRUN"), , CLng(Me.hWnd)
         Case Else
-          ShellEx aRELCFG(1), essSW_SHOWDEFAULT, cARQRTF, , , Me.hWnd
+          ShellEx aRELCFG(1), essSW_SHOWDEFAULT, cARQRTF, , , CLng(Me.hWnd)
     End Select
   End If
 
@@ -557,7 +557,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     escrptusr.Show vbModal
   End If
 End Sub

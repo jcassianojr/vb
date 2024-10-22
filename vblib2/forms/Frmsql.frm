@@ -691,9 +691,9 @@ Const nFORMID = 1180
 Const cFORMID = "Imprimir Relatorios sql"
 Option Explicit
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.text
   If FileConnExist(cARQRTF, True) Then
-    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
+    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hWnd))
   End If
 End Sub
 
@@ -704,26 +704,26 @@ End Sub
 Private Sub cmdDeli_Click(Index As Integer)
   Select Case Index
   Case 0
-    TxtDeli.tEXT = " "
+    TxtDeli.text = " "
   Case 1
-    TxtDeli.tEXT = "|"
+    TxtDeli.text = "|"
   Case 2
-    TxtDeli.tEXT = ","
+    TxtDeli.text = ","
   Case 3
-    TxtDeli.tEXT = ";"
+    TxtDeli.text = ";"
   Case 4
-    TxtDeli.tEXT = "#"
+    TxtDeli.text = "#"
   Case 5
-    TxtDeli.tEXT = "~"
+    TxtDeli.text = "~"
   Case 5
-    TxtDeli.tEXT = "<tab>"
+    TxtDeli.text = "<tab>"
 
   End Select
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.tEXT, "RTF") Or IsExtensao(TxtArquivo.tEXT, "TXT") Then
-    cARQRTF = TxtArquivo.tEXT
+  If IsExtensao(TxtArquivo.text, "RTF") Or IsExtensao(TxtArquivo.text, "TXT") Then
+    cARQRTF = TxtArquivo.text
     FrmRTf.Show vbModal, Me
   End If
 End Sub
@@ -745,14 +745,14 @@ Private Sub cmdexportar_Click(Index As Integer)
   cLIn = Chr(13) + Chr(10)
 
 
-  cARQUIVO = tabela.tEXT
-  gsRecordSource = tabela.tEXT
+  cARQUIVO = tabela.text
+  gsRecordSource = tabela.text
   cEXT = "TXT"
   If Len(cARQUIVO) = 0 Then
     Alert ("Escolha Uma Tabela Antes")
     Exit Sub
   End If
-  cSQL = CStr(sql.tEXT)
+  cSQL = CStr(sql.text)
   Select Case Index
   Case 0                                       'ok
     cEXT = "XML"
@@ -771,7 +771,7 @@ Private Sub cmdexportar_Click(Index As Integer)
 
   sFILTER = "Formato (*." & cEXT & ")" & vbNullChar & "*." & cEXT
   cARQUIVO = FileSave(Me, sFILTER, 1, cEXT, , App.Path, "Salvar " & cEXT & " Como")
-  TxtArquivo.tEXT = cARQUIVO
+  TxtArquivo.text = cARQUIVO
 
   If Len(cARQUIVO) = 0 Then
     Alert ("Nome Nao Definido")
@@ -780,7 +780,7 @@ Private Sub cmdexportar_Click(Index As Integer)
 
 
 
-  cconn = GeracArq(arquivo.tEXT, , False)
+  cconn = GeracArq(arquivo.text, , False)
 
 
   Set DBEXP = New ADODB.Connection
@@ -817,11 +817,11 @@ Private Sub cmdexportar_Click(Index As Integer)
     If Index = 1 Then
       Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
     Else
-      If TxtDeli.tEXT = "<tab>" Then
+      If TxtDeli.text = "<tab>" Then
         Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
       Else
         ''o usuario pode digitar o campo txtdeli fixstr ajustas para espaco em caso de vazio
-        Print #nDESTINO, RsExp.GetString(adClipString, -1, FixStr(TxtDeli.tEXT, " "), Chr(13) + Chr(10), vbNullString)
+        Print #nDESTINO, RsExp.GetString(adClipString, -1, FixStr(TxtDeli.text, " "), Chr(13) + Chr(10), vbNullString)
       End If
     End If
 
@@ -866,19 +866,19 @@ Private Sub CmdFiltro_Click()
   On Error GoTo errhandler
   Dim cFILTRO As String
 
-  cFILTRO = FixStr(FILTRO)
+  cFILTRO = FixStr(filtro)
   If aRELCFG(11) Then
     ePASS01 = ""
     FrmFiltro.Show vbModal, Me
-    FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
+    filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
     If lRETU And Len(aRELCFG(15)) > 0 Then
-      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
-      sql.tEXT = aRELCFG(15)
+      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+      sql.text = aRELCFG(15)
     End If
   End If
   If Len(aRELCFG(15)) > 0 Then
     'aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
-    sql.tEXT = aRELCFG(15)
+    sql.text = aRELCFG(15)
   End If
 
   Exit Sub
@@ -896,8 +896,8 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-  cARQRTF = TxtArquivo.tEXT
-  If IsExtensao(TxtArquivo.tEXT, "TXT") Then
+  cARQRTF = TxtArquivo.text
+  If IsExtensao(TxtArquivo.text, "TXT") Then
       ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Escolher Porta(Destino)", "Editor Interno")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
@@ -912,7 +912,7 @@ Private Sub cmdimp_Click()
            FrmRTf.Show vbModal, Me
         End Select
   End If
- If IsExtensao(TxtArquivo.tEXT, "PDF") Then
+ If IsExtensao(TxtArquivo.text, "PDF") Then
     ePASS01 = Array("Externo", "Interno")
     escOrdem.Show vbModal, Me
     eRETU01 = FixInt(eRETU01, 0)
@@ -923,7 +923,7 @@ Private Sub cmdimp_Click()
          FrmPreview.Show vbModal, Me
       End Select
   End If
-  If IsExtensao(TxtArquivo.tEXT, "RTF") Then
+  If IsExtensao(TxtArquivo.text, "RTF") Then
      ePASS01 = Array("Editor Interno", "Preview Interno")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
@@ -934,7 +934,7 @@ Private Sub cmdimp_Click()
          CmdVisua_Click
       End Select
   End If
-  If IsExtensao(TxtArquivo.tEXT, "HTML") Then
+  If IsExtensao(TxtArquivo.text, "HTML") Then
     CmdVisua_Click
   End If
 
@@ -946,18 +946,18 @@ Private Sub CmdOrdem_Click()
   EscArqOrdem.Show vbModal, Me
   If lRETU Then
     aRELCFG(15) = TrocaSQLOrder(aRELCFG(15), FixStr(eRETU01))
-    sql.tEXT = aRELCFG(15)
+    sql.text = aRELCFG(15)
   End If
 End Sub
 
 Private Sub CmdShell_Click()
   Dim cARQSHELL As String
   cARQSHELL = FixStr(TxtArquivo)
-  ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , Me.hWnd
+  ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.text
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -966,7 +966,7 @@ Private Sub CmdVisua_Click()
     PrintPreview1.ShowPreview
   End If
   If IsExtensao(cARQRTF, "PDF") Then
-    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
+    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
   End If
   If IsExtensao(cARQRTF, "HTML") Then
     ePASS01 = Array("Navegador Externo", "Preview Interno", "Navegador Interno")
@@ -986,7 +986,7 @@ Private Sub CmdVisua_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS02 = 3
     PrintPreview1.ShowPreview
-    RichTextBox1.tEXT = ""
+    RichTextBox1.text = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -1050,7 +1050,7 @@ Private Sub Form_Load()
   ''Configura Help
   Me.Caption = cFORMID
   HelpContextID = nFORMID
-  FILTRO = ""
+  filtro = ""
 
   Label1 = aRELCFG(6)
 
@@ -1062,7 +1062,7 @@ Private Sub Form_Load()
   If Not aDIREITOS(5) Then CmdVisua.Visible = False
   If Not aDIREITOS(7) Then CmdEmail.Visible = False
   If Not aRELCFG(11) Then CmdFiltro.Visible = False
-  If Not aRELCFG(11) Then FILTRO.Visible = False
+  If Not aRELCFG(11) Then filtro.Visible = False
   If Not aDIREITOS(4) Then CmdEditar.Visible = False
   If Not aDIREITOS(4) Then CmdShell.Visible = False
 
@@ -1071,31 +1071,31 @@ Private Sub Form_Load()
   If nARQUIVOS > 0 Then
     If Len(aARQUIVOS(0)) > 0 Then
       If FileConnExist(aARQUIVOS(0), True, True, aRELCFG(15)) Then
-        arquivo.tEXT = aARQUIVOS(0)
+        arquivo.text = aARQUIVOS(0)
       End If
     End If
   End If
   aRELCFG(14) = FixStr(aRELCFG(14))
   If Len(aRELCFG(14)) > 0 Then
     cFILTRO = aRELCFG(14)
-    FILTRO = cFILTRO
+    filtro = cFILTRO
   Else
     If aRELCFG(11) Then
       CmdFiltro_Click
     End If
   End If
   If Len(aRELCFG(15)) > 0 Then
-    If Len(FILTRO) > 0 Then
-      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
+    If Len(filtro) > 0 Then
+      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
     End If
-    sql.tEXT = aRELCFG(15)
+    sql.text = aRELCFG(15)
   End If
 
 
   If aRELCFG(13) = "" Then                     'nome tabela nao preenchido pega do sql
     aRELCFG(13) = NomeTableSql(aRELCFG(15))
   End If
-  tabela.tEXT = aRELCFG(13)
+  tabela.text = aRELCFG(13)
   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
   PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 
@@ -1107,7 +1107,7 @@ End Sub
 Private Sub XPButton1_Click()
   frmCharacters.Show vbModal, Me
   If lRETU Then
-    TxtDeli.tEXT = eRETU01
+    TxtDeli.text = eRETU01
   End If
 End Sub
 

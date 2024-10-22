@@ -218,7 +218,7 @@ Begin VB.Form frmSENHA
    End
    Begin VB.Label Label5 
       Alignment       =   2  'Center
-      Caption         =   "Mês"
+      Caption         =   "MÃªs"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -318,7 +318,7 @@ Private Sub cmdOK_Click()
 8 cSENHA4 = XOREncryption(SysCodeKey, LCase(txtSENHA))  ''Senhas Antigas minusculas
 
 9 If Len(zUSER) = 0 Then
-10  TimedMsgBox "Nome Usuario Nao Preenchido"  'Alert ("Nome Usuario Não Preenchido")
+10  TimedMsgBox "Nome Usuario Nao Preenchido"  'Alert ("Nome Usuario NÃ£o Preenchido")
 11  txtUSUARIO.SetFocus
 12  If nTENTA >= 3 Then
 13    End
@@ -369,7 +369,7 @@ Private Sub cmdOK_Click()
 40  End If
 41 End If
 42 If Len(aRETU(0)) = 0 And UCase(txtUSUARIO) <> "ADMIN" Then
-43  TimedMsgBox " Necessário Cadastrar sua Senha"  'Alert (" Necessário Cadastrar de Senha")
+43  TimedMsgBox " NecessÃ¡rio Cadastrar sua Senha"  'Alert (" NecessÃ¡rio Cadastrar de Senha")
 44  zIDTEMP = aRETU(7)
 45  frmUSUSENHA.Show vbModal, Me
 46  TimedMsgBox "Necessario Reiniciar Sistema"  'Alert ("Necessario Reiniciar Sistema")
@@ -392,7 +392,7 @@ Private Sub cmdOK_Click()
       aRETU(14) = cCHAVE Then
   Else
 50  If nTENTA >= 3 Then
-51    TimedMsgBox "Usuário - numero de tentativas esgotadas"
+51    TimedMsgBox "UsuÃ¡rio - numero de tentativas esgotadas"
 52    End
 53  Else
 54    nTENTA = nTENTA + 1
@@ -485,7 +485,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 End Sub
 Private Sub Form_Load()
   CenterFormToScreen Me
-  EnableCloseButton Me.hWnd, False
+  EnableCloseButton CLng(Me.hWnd), False
   txtUSUARIO = NetworkUserName()
   nTENTA = 0
   txtempresa.Value = 1
@@ -510,7 +510,7 @@ Private Sub Timer1_Timer()
   If nTENTA >= 3 Then
     End
   End If
-  Barra.Value = nTEMPO
+  barra.Value = nTEMPO
 End Sub
 
 Private Sub TXTempresa_GotFocus()
@@ -552,14 +552,14 @@ Private Sub txtUSUARIO_KeyPress(KeyAscii As Integer)
   KeyAscii = ValiText(KeyAscii, "CN")
 End Sub
 Private Sub fixuser()
-  If UCase(txtUSUARIO.tEXT) = "ADMLOG" Then
-    txtUSUARIO.tEXT = "admin"
+  If UCase(txtUSUARIO.text) = "ADMLOG" Then
+    txtUSUARIO.text = "admin"
   End If
-  If UCase(txtUSUARIO.tEXT) = "ADMINISTRA" Then
-    txtUSUARIO.tEXT = "admin"
+  If UCase(txtUSUARIO.text) = "ADMINISTRA" Then
+    txtUSUARIO.text = "admin"
   End If
-  If UCase(txtUSUARIO.tEXT) = "SUPERVISOR" Then
-    txtUSUARIO.tEXT = "admin"
+  If UCase(txtUSUARIO.text) = "SUPERVISOR" Then
+    txtUSUARIO.text = "admin"
   End If
 
 End Sub

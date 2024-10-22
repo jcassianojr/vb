@@ -136,7 +136,7 @@ Public Declare  PtrSafe Function GetPrivateProfileString Lib "kernel32" Alias _
                                                                             ByVal lpReturnedString As String, ByVal nSize As LongPtr, _
                                                                             ByVal lpFileName As String) As Long
 
-'Public Declare  PtrSafe Function WritePrivateProfileString Lib "kernel32" Alias _
+Public Declare  PtrSafe Function WritePrivateProfileString Lib "kernel32" Alias _
                                                   "WritePrivateProfileStringA" (ByVal lpApplicationName As String, _
                                                                                 ByVal lpKeyName As Any, ByVal lpString As Any, _
                                                                                 ByVal lpFileName As String) As Long
@@ -176,7 +176,7 @@ Public Declare  PtrSafe Function OemToChar Lib "user32" (ByVal lpszSrc As String
 'Private Declare Function SetTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
 'Private Declare Function KillTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long) As Long
 'Declare Function SetSysColors Lib "user32" (ByVal nChanges As Long, lpSysColor As Long, lpColorValues As Long) As Long
-Public Declare Function WinAPI_GetUserName Lib "Advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
+Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
 Private Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
 Public Declare Function ReleaseCapture Lib "user32" () As Long
@@ -190,7 +190,7 @@ Public Declare Function GetPrivateProfileString Lib "kernel32" Alias _
                                                                             ByVal lpReturnedString As String, ByVal nSize As Long, _
                                                                             ByVal lpFileName As String) As Long
 
-'Public Declare Function WritePrivateProfileString Lib "kernel32" Alias _
+Public Declare Function WritePrivateProfileString Lib "kernel32" Alias _
                                                   "WritePrivateProfileStringA" (ByVal lpApplicationName As String, _
                                                                                 ByVal lpKeyName As Any, ByVal lpString As Any, _
                                                                                 ByVal lpFileName As String) As Long
@@ -286,9 +286,9 @@ Public Function ComboLostFocus(ByRef Combo1)
 Dim strPartial
 Dim i
   With Combo1
-    If Len(.Text) Then
+    If Len(.tEXT) Then
       'Procura pelo texto digitado
-      strPartial = .Text
+      strPartial = .tEXT
       i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
@@ -304,7 +304,7 @@ Dim J
 Dim m_bEditFromCode
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .Text
+    strPartial = .tEXT
     i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
@@ -1999,7 +1999,7 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
   End If
 End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
@@ -2466,12 +2466,12 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef Text As String) As Long
+Public Function WordLen(ByRef tEXT As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(Text), vbFromUnicode)
+  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next

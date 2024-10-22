@@ -138,6 +138,76 @@ Private Const STD_ERROR_HANDLE              As Long = -12
 Private Enum LongPtr
     [_]
 End Enum
+
+#If Win64 Then
+Private Const NULL_PTR As LongPtr = 0
+Private Const PTR_SIZE As Long = 8
+#Else
+Private Const NULL_PTR As Long = 0
+Private Const PTR_SIZE As Long = 4
+#End If
+
+#If VBA7 Then
+Private Declare   PtrSafe Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length  As LongPtr)
+Private Declare   PtrSafe Function FindFirstFile Lib "kernel32" Alias "FindFirstFileW" (ByVal lpFileName  As LongPtr, ByVal lpFindFileData  As LongPtr) As Long
+Private Declare   PtrSafe Function FindClose Lib "kernel32" (ByVal hFindFile  As LongPtr) As Long
+Private Declare   PtrSafe Function CreateFile Lib "kernel32" Alias "CreateFileW" (ByVal lpFileName  As LongPtr, ByVal dwDesiredAccess  As LongPtr, ByVal dwShareMode  As LongPtr, ByVal NoSecurity  As LongPtr, ByVal dwCreationDisposition  As LongPtr, ByVal dwFlagsAndAttributes  As LongPtr, ByVal hTemplateFile  As LongPtr) As Long
+Private Declare   PtrSafe Function CloseHandle Lib "kernel32" (ByVal hObject  As LongPtr) As Long
+Private Declare   PtrSafe Function ReadFile Lib "kernel32" (ByVal hFile  As LongPtr, lpBuffer As Any, ByVal nNumberOfBytesToRead  As LongPtr, lpNumberOfBytesRead  As LongPtr, ByVal lpOverlapped  As LongPtr) As Long
+Private Declare   PtrSafe Function WriteFile Lib "kernel32" (ByVal hFile  As LongPtr, lpBuffer As Any, ByVal nNumberOfBytesToWrite  As LongPtr, lpNumberOfBytesWritten  As LongPtr, ByVal lpOverlapped  As LongPtr) As Long
+Private Declare   PtrSafe Function SetFilePointerEx Lib "kernel32" (ByVal hFile  As LongPtr, ByVal liDistanceToMove As Currency, lpNewFilePointer As Any, ByVal dwMoveMethod  As LongPtr) As Long
+Private Declare   PtrSafe Function SetEndOfFile Lib "kernel32" (ByVal hFile  As LongPtr) As Long
+Private Declare   PtrSafe Function SetFileTime Lib "kernel32" (ByVal hFile  As LongPtr, lpCreationTime As Any, lpLastAccessTime As Any, lpLastWriteTime As Any) As Long
+Private Declare   PtrSafe Function FileTimeToSystemTime Lib "kernel32" (lpFileTime As FILETIME, lpSystemTime As SYSTEMTIME) As Long
+Private Declare   PtrSafe Function SystemTimeToFileTime Lib "kernel32" (lpSystemTime As SYSTEMTIME, lpFileTime As FILETIME) As Long
+Private Declare   PtrSafe Function FileTimeToLocalFileTime Lib "kernel32" (lpFileTime As Any, lpLocalFileTime As FILETIME) As Long
+Private Declare   PtrSafe Function LocalFileTimeToFileTime Lib "kernel32" (lpLocalFileTime As FILETIME, lpFileTime As FILETIME) As Long
+Private Declare   PtrSafe Function SystemTimeToVariantTime Lib "oleaut32" (lpSystemTime As SYSTEMTIME, pvTime As Date) As Long
+Private Declare   PtrSafe Function VariantTimeToSystemTime Lib "oleaut32" (ByVal vTime As Date, lpSystemTime As SYSTEMTIME) As Long
+Private Declare   PtrSafe Function VirtualAlloc Lib "kernel32" (ByVal lpAddress  As LongPtr, ByVal dwSize  As LongPtr, ByVal flAllocationType  As LongPtr, ByVal flProtect  As LongPtr) As Long
+Private Declare   PtrSafe Function GetModuleHandle Lib "kernel32" Alias "GetModuleHandleW" (ByVal lpModuleName  As LongPtr) As Long
+Private Declare   PtrSafe Function GetProcAddress Lib "kernel32" (ByVal hModule  As LongPtr, ByVal lpProcName As String) As Long
+Private Declare   PtrSafe Function CallWindowProc Lib "user32" Alias "CallWindowProcW" (ByVal lpPrevWndFunc  As LongPtr, ByVal hWnd  As LongPtr, Optional ByVal Msg  As LongPtr, Optional ByVal wParam  As LongPtr, Optional ByVal lParam  As LongPtr) As Long
+Private Declare   PtrSafe Sub CoTaskMemFree Lib "ole32" (ByVal pv  As LongPtr)
+Private Declare   PtrSafe Function MultiByteToWideChar Lib "kernel32" (ByVal CodePage  As LongPtr, ByVal dwFlags  As LongPtr, lpMultiByteStr As Any, ByVal cbMultiByte  As LongPtr, lpWideCharStr As Any, ByVal cchWideChar  As LongPtr) As Long
+Private Declare   PtrSafe Function WideCharToMultiByte Lib "kernel32" (ByVal CodePage  As LongPtr, ByVal dwFlags  As LongPtr, ByVal lpWideCharStr  As LongPtr, ByVal cchWideChar  As LongPtr, ByVal lpMultiByteStr  As LongPtr, ByVal cchMultiByte  As LongPtr, ByVal lpDefaultChar  As LongPtr, ByVal lpUsedDefaultChar  As LongPtr)  As LongPtr
+Private Declare   PtrSafe Function GetStdHandle Lib "kernel32" (ByVal nStdHandle  As LongPtr) As Long
+Private Declare   PtrSafe Function GetEnvironmentVariable Lib "kernel32" Alias "GetEnvironmentVariableW" (ByVal lpName  As LongPtr, ByVal lpBuffer  As LongPtr, ByVal nSize  As LongPtr) As Long
+Private Declare   PtrSafe Function SetEnvironmentVariable Lib "kernel32" Alias "SetEnvironmentVariableW" (ByVal lpName  As LongPtr, ByVal lpValue  As LongPtr) As Long
+Private Declare   PtrSafe Function PathMatchSpecW Lib "shlwapi" (ByVal pszFileParam  As LongPtr, ByVal pszSpec  As LongPtr) As Long
+Private Declare   PtrSafe Function GetCurrentProcessId Lib "kernel32" () As Long
+#If ImplCompress Then
+    Private Declare   PtrSafe Function FileTimeToDosDateTime Lib "kernel32" (lpFileTime As FILETIME, ByVal lpFatDate  As LongPtr, ByVal lpFatTime  As LongPtr) As Long
+    Private Declare   PtrSafe Function FindNextFile Lib "kernel32" Alias "FindNextFileW" (ByVal hFindFile  As LongPtr, ByVal lpFindFileData  As LongPtr) As Long
+#End If ' ImplCompress
+#If ImplDecompress Then
+    Private Declare   PtrSafe Function DosDateTimeToFileTime Lib "kernel32" (ByVal wFatDate  As LongPtr, ByVal wFatTime  As LongPtr, lpFileTime As FILETIME) As Long
+#End If ' ImplDecompress
+#If ImplCrypto Then
+    Private Declare   PtrSafe Function RtlGenRandom Lib "advapi32" Alias "SystemFunction036" (RandomBuffer As Any, ByVal RandomBufferLength  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptOpenAlgorithmProvider Lib "bcrypt" (phAlgorithm  As LongPtr, ByVal pszAlgId  As LongPtr, ByVal pszImplementation  As LongPtr, ByVal dwFlags  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptCloseAlgorithmProvider Lib "bcrypt" (ByVal hAlgorithm  As LongPtr, ByVal dwFlags  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptGetProperty Lib "bcrypt" (ByVal hObject  As LongPtr, ByVal pszProperty  As LongPtr, pbOutput As Any, ByVal cbOutput  As LongPtr, cbResult  As LongPtr, ByVal dwFlags  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptSetProperty Lib "bcrypt" (ByVal hObject  As LongPtr, ByVal pszProperty  As LongPtr, ByVal pbInput  As LongPtr, ByVal cbInput  As LongPtr, ByVal dwFlags  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptGenerateSymmetricKey Lib "bcrypt" (ByVal hAlgorithm  As LongPtr, phKey  As LongPtr, pbKeyObject As Any, ByVal cbKeyObject  As LongPtr, pbSecret As Any, ByVal cbSecret  As LongPtr, ByVal dwFlags  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptDestroyKey Lib "bcrypt" (ByVal hKey  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptEncrypt Lib "bcrypt" (ByVal hKey  As LongPtr, pbInput As Any, ByVal cbInput  As LongPtr, ByVal pPaddingInfo  As LongPtr, ByVal pbIV  As LongPtr, ByVal cbIV  As LongPtr, pbOutput As Any, ByVal cbOutput  As LongPtr, pcbResult  As LongPtr, ByVal dwFlags  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptDeriveKeyPBKDF2 Lib "bcrypt" (ByVal pPrf  As LongPtr, pbPassword As Any, ByVal cbPassword  As LongPtr, pbSalt As Any, ByVal cbSalt  As LongPtr, ByVal cIterations  As LongPtr, ByVal dwDummy  As LongPtr, pbDerivedKey As Any, ByVal cbDerivedKey  As LongPtr, ByVal dwFlags  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptCreateHash Lib "bcrypt" (ByVal hAlgorithm  As LongPtr, phHash  As LongPtr, ByVal pbHashObject  As LongPtr, ByVal cbHashObject  As LongPtr, pbSecret As Any, ByVal cbSecret  As LongPtr, ByVal dwFlags  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptDestroyHash Lib "bcrypt" (ByVal hHash  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptHashData Lib "bcrypt" (ByVal hHash  As LongPtr, pbInput As Any, ByVal cbInput  As LongPtr, ByVal dwFlags  As LongPtr) As Long
+    Private Declare   PtrSafe Function BCryptFinishHash Lib "bcrypt" (ByVal hHash  As LongPtr, pbOutput As Any, ByVal cbOutput  As LongPtr, ByVal dwFlags  As LongPtr) As Long
+#End If ' ImplCrypto
+#If ImplUseShared = 0 Then
+    Private Declare   PtrSafe Function FormatMessage Lib "kernel32" Alias "FormatMessageW" (ByVal dwFlags  As LongPtr, lpSource  As LongPtr, ByVal dwMessageId  As LongPtr, ByVal dwLanguageId  As LongPtr, ByVal lpBuffer  As LongPtr, ByVal nSize  As LongPtr, Args As Any) As Long
+    Private Declare   PtrSafe Function GetFileAttributes Lib "kernel32" Alias "GetFileAttributesW" (ByVal lpFileName  As LongPtr) As Long
+    Private Declare   PtrSafe Function CreateDirectory Lib "kernel32" Alias "CreateDirectoryW" (ByVal lpPathName  As LongPtr, ByVal lpSecurityAttributes  As LongPtr) As Long
+    Private Declare   PtrSafe Function CryptBinaryToString Lib "crypt32" Alias "CryptBinaryToStringW" (ByVal pbBinary  As LongPtr, ByVal cbBinary  As LongPtr, ByVal dwFlags  As LongPtr, ByVal pszString  As LongPtr, ByRef pcchString  As LongPtr) As Long
+    Private Declare   PtrSafe Function CryptStringToBinary Lib "crypt32" Alias "CryptStringToBinaryW" (ByVal pszString  As LongPtr, ByVal cchString  As LongPtr, ByVal dwFlags  As LongPtr, ByVal pbBinary  As LongPtr, ByRef pcbBinary  As LongPtr, ByRef pdwSkip  As LongPtr, ByRef pdwFlags  As LongPtr) As Long
+#End If ' Not ImplUseShared
+
+
+#Else
 Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As Long)
 Private Declare Function FindFirstFile Lib "kernel32" Alias "FindFirstFileW" (ByVal lpFileName As Long, ByVal lpFindFileData As Long) As Long
 Private Declare Function FindClose Lib "kernel32" (ByVal hFindFile As Long) As Long
@@ -195,6 +265,7 @@ Private Declare Function GetCurrentProcessId Lib "kernel32" () As Long
     Private Declare Function CryptBinaryToString Lib "crypt32" Alias "CryptBinaryToStringW" (ByVal pbBinary As Long, ByVal cbBinary As Long, ByVal dwFlags As Long, ByVal pszString As Long, ByRef pcchString As Long) As Long
     Private Declare Function CryptStringToBinary Lib "crypt32" Alias "CryptStringToBinaryW" (ByVal pszString As Long, ByVal cchString As Long, ByVal dwFlags As Long, ByVal pbBinary As Long, ByRef pcbBinary As Long, ByRef pdwSkip As Long, ByRef pdwFlags As Long) As Long
 #End If ' Not ImplUseShared
+#End If
 
 Private Type FILETIME
     dwLowDateTime       As Long
@@ -2215,7 +2286,7 @@ End Sub
 Private Function pvCryptoAesInit(baPass() As Byte, baSalt() As Byte, ByVal lKeyLen As Long, nPassVer As Integer) As Boolean
     Dim baDerivedKey()  As Byte
     Dim lDummy          As Long '--- discarded
-    Dim hResult         As Long
+    Dim HRESULT         As Long
     Dim sApiSource      As String
     
     '--- init member vars
@@ -2227,8 +2298,8 @@ Private Function pvCryptoAesInit(baPass() As Byte, baSalt() As Byte, ByVal lKeyL
     If m_uCrypto.hPbkdf2Alg = 0 Then
         '--- CNG API missing on XP
         On Error GoTo EH_Unsupported
-        hResult = BCryptOpenAlgorithmProvider(m_uCrypto.hPbkdf2Alg, StrPtr(BCRYPT_SHA1_ALGORITHM), StrPtr(MS_PRIMITIVE_PROVIDER), BCRYPT_ALG_HANDLE_HMAC_FLAG)
-        If hResult < 0 Then
+        HRESULT = BCryptOpenAlgorithmProvider(m_uCrypto.hPbkdf2Alg, StrPtr(BCRYPT_SHA1_ALGORITHM), StrPtr(MS_PRIMITIVE_PROVIDER), BCRYPT_ALG_HANDLE_HMAC_FLAG)
+        If HRESULT < 0 Then
             sApiSource = "BCryptOpenAlgorithmProvider(" & BCRYPT_SHA1_ALGORITHM & ")"
             GoTo QH
         End If
@@ -2237,8 +2308,8 @@ Private Function pvCryptoAesInit(baPass() As Byte, baSalt() As Byte, ByVal lKeyL
     ReDim baDerivedKey(0 To 2 * lKeyLen + 1) As Byte
     '--- PBKDF2 API missing on Vista
     On Error GoTo EH_Unsupported
-    hResult = BCryptDeriveKeyPBKDF2(m_uCrypto.hPbkdf2Alg, baPass(0), UBound(baPass) + 1, baSalt(0), UBound(baSalt) + 1, 1000, 0, baDerivedKey(0), UBound(baDerivedKey) + 1, 0)
-    If hResult < 0 Then
+    HRESULT = BCryptDeriveKeyPBKDF2(m_uCrypto.hPbkdf2Alg, baPass(0), UBound(baPass) + 1, baSalt(0), UBound(baSalt) + 1, 1000, 0, baDerivedKey(0), UBound(baDerivedKey) + 1, 0)
+    If HRESULT < 0 Then
         sApiSource = "BCryptDeriveKeyPBKDF2"
         GoTo QH
     End If
@@ -2247,18 +2318,18 @@ Private Function pvCryptoAesInit(baPass() As Byte, baSalt() As Byte, ByVal lKeyL
     Call CopyMemory(nPassVer, baDerivedKey(2 * lKeyLen), 2)
     '--- init AES key from first half of the derived key
     If m_uCrypto.hAesAlg = 0 Then
-        hResult = BCryptOpenAlgorithmProvider(m_uCrypto.hAesAlg, StrPtr(BCRYPT_AES_ALGORITHM), StrPtr(MS_PRIMITIVE_PROVIDER), 0)
-        If hResult < 0 Then
+        HRESULT = BCryptOpenAlgorithmProvider(m_uCrypto.hAesAlg, StrPtr(BCRYPT_AES_ALGORITHM), StrPtr(MS_PRIMITIVE_PROVIDER), 0)
+        If HRESULT < 0 Then
             sApiSource = "BCryptOpenAlgorithmProvider(" & BCRYPT_AES_ALGORITHM & ")"
             GoTo QH
         End If
-        hResult = BCryptGetProperty(m_uCrypto.hAesAlg, StrPtr(BCRYPT_OBJECT_LENGTH), m_uCrypto.AesKeyObjLen, 4, lDummy, 0)
-        If hResult < 0 Then
+        HRESULT = BCryptGetProperty(m_uCrypto.hAesAlg, StrPtr(BCRYPT_OBJECT_LENGTH), m_uCrypto.AesKeyObjLen, 4, lDummy, 0)
+        If HRESULT < 0 Then
             sApiSource = "BCryptGetProperty(" & BCRYPT_OBJECT_LENGTH & ")"
             GoTo QH
         End If
-        hResult = BCryptSetProperty(m_uCrypto.hAesAlg, StrPtr(BCRYPT_CHAINING_MODE), StrPtr(BCRYPT_CHAIN_MODE_ECB), LenB(BCRYPT_CHAIN_MODE_ECB), 0)
-        If hResult < 0 Then
+        HRESULT = BCryptSetProperty(m_uCrypto.hAesAlg, StrPtr(BCRYPT_CHAINING_MODE), StrPtr(BCRYPT_CHAIN_MODE_ECB), LenB(BCRYPT_CHAIN_MODE_ECB), 0)
+        If HRESULT < 0 Then
             sApiSource = "BCryptSetProperty(" & BCRYPT_CHAINING_MODE & ")"
             GoTo QH
         End If
@@ -2268,20 +2339,20 @@ Private Function pvCryptoAesInit(baPass() As Byte, baSalt() As Byte, ByVal lKeyL
         m_uCrypto.hAesKey = 0
     End If
     ReDim m_uCrypto.AesKeyObjData(0 To m_uCrypto.AesKeyObjLen - 1) As Byte
-    hResult = BCryptGenerateSymmetricKey(m_uCrypto.hAesAlg, m_uCrypto.hAesKey, m_uCrypto.AesKeyObjData(0), m_uCrypto.AesKeyObjLen, baDerivedKey(0), lKeyLen, 0)
-    If hResult < 0 Then
+    HRESULT = BCryptGenerateSymmetricKey(m_uCrypto.hAesAlg, m_uCrypto.hAesKey, m_uCrypto.AesKeyObjData(0), m_uCrypto.AesKeyObjLen, baDerivedKey(0), lKeyLen, 0)
+    If HRESULT < 0 Then
         sApiSource = "BCryptGenerateSymmetricKey"
         GoTo QH
     End If
     '--- init HMAC key from second half of the derived key
     If m_uCrypto.hHmacAlg = 0 Then
-        hResult = BCryptOpenAlgorithmProvider(m_uCrypto.hHmacAlg, StrPtr(BCRYPT_SHA1_ALGORITHM), StrPtr(MS_PRIMITIVE_PROVIDER), BCRYPT_ALG_HANDLE_HMAC_FLAG)
-        If hResult < 0 Then
+        HRESULT = BCryptOpenAlgorithmProvider(m_uCrypto.hHmacAlg, StrPtr(BCRYPT_SHA1_ALGORITHM), StrPtr(MS_PRIMITIVE_PROVIDER), BCRYPT_ALG_HANDLE_HMAC_FLAG)
+        If HRESULT < 0 Then
             sApiSource = "BCryptOpenAlgorithmProvider(" & BCRYPT_SHA1_ALGORITHM & ")"
             GoTo QH
         End If
-        hResult = BCryptGetProperty(m_uCrypto.hHmacAlg, StrPtr(BCRYPT_HASH_LENGTH), m_uCrypto.HmacLen, 4, lDummy, 0)
-        If hResult < 0 Then
+        HRESULT = BCryptGetProperty(m_uCrypto.hHmacAlg, StrPtr(BCRYPT_HASH_LENGTH), m_uCrypto.HmacLen, 4, lDummy, 0)
+        If HRESULT < 0 Then
             sApiSource = "BCryptGetProperty(" & BCRYPT_HASH_LENGTH & ")"
             GoTo QH
         End If
@@ -2290,8 +2361,8 @@ Private Function pvCryptoAesInit(baPass() As Byte, baSalt() As Byte, ByVal lKeyL
         Call BCryptDestroyHash(m_uCrypto.hHmacHash)
         m_uCrypto.hHmacHash = 0
     End If
-    hResult = BCryptCreateHash(m_uCrypto.hHmacAlg, m_uCrypto.hHmacHash, 0, 0, baDerivedKey(lKeyLen), lKeyLen, 0)
-    If hResult < 0 Then
+    HRESULT = BCryptCreateHash(m_uCrypto.hHmacAlg, m_uCrypto.hHmacHash, 0, 0, baDerivedKey(lKeyLen), lKeyLen, 0)
+    If HRESULT < 0 Then
         sApiSource = "BCryptCreateHash"
         GoTo QH
     End If
@@ -2299,8 +2370,8 @@ Private Function pvCryptoAesInit(baPass() As Byte, baSalt() As Byte, ByVal lKeyL
     pvCryptoAesInit = True
     Exit Function
 QH:
-    If hResult < 0 Then
-        m_sLastError = GetSystemMessage(hResult) & " [" & sApiSource & "]"
+    If HRESULT < 0 Then
+        m_sLastError = GetSystemMessage(HRESULT) & " [" & sApiSource & "]"
     ElseIf Err.LastDllError <> 0 Then
         m_sLastError = GetSystemMessage(Err.LastDllError)
     End If
@@ -2337,15 +2408,15 @@ Private Function pvCryptoAesCrypt( _
     Dim lIdx            As Long
     Dim lPadSize        As Long
     Dim lDummy          As Long '--- discarded
-    Dim hResult         As Long
+    Dim HRESULT         As Long
     Dim sApiSource      As String
     
     If Size < 0 Then
         Size = UBound(baData) + 1 - Offset
     End If
     If HashBefore Then
-        hResult = BCryptHashData(m_uCrypto.hHmacHash, baData(Offset), Size, 0)
-        If hResult < 0 Then
+        HRESULT = BCryptHashData(m_uCrypto.hHmacHash, baData(Offset), Size, 0)
+        If HRESULT < 0 Then
             sApiSource = "BCryptHashData"
             GoTo QH
         End If
@@ -2367,8 +2438,8 @@ Private Function pvCryptoAesCrypt( _
             End If
             '--- encrypt incremental nonces in EncrData
             Call CallWindowProc(m_uRtbl.MemNonce, VarPtr(.EncrData(0)), VarPtr(.Nonce(0)), lPadSize)
-            hResult = BCryptEncrypt(.hAesKey, .EncrData(0), lPadSize, 0, 0, 0, .EncrData(0), lPadSize, lDummy, 0)
-            If hResult < 0 Then
+            HRESULT = BCryptEncrypt(.hAesKey, .EncrData(0), lPadSize, 0, 0, 0, .EncrData(0), lPadSize, lDummy, 0)
+            If HRESULT < 0 Then
                 sApiSource = "BCryptEncrypt"
                 GoTo QH
             End If
@@ -2378,8 +2449,8 @@ Private Function pvCryptoAesCrypt( _
         End If
     End With
     If HashAfter Then
-        hResult = BCryptHashData(m_uCrypto.hHmacHash, baData(Offset), Size, 0)
-        If hResult < 0 Then
+        HRESULT = BCryptHashData(m_uCrypto.hHmacHash, baData(Offset), Size, 0)
+        If HRESULT < 0 Then
             sApiSource = "BCryptHashData"
             GoTo QH
         End If
@@ -2388,8 +2459,8 @@ Private Function pvCryptoAesCrypt( _
     pvCryptoAesCrypt = True
     Exit Function
 QH:
-    If hResult < 0 Then
-        m_sLastError = GetSystemMessage(hResult) & " [" & sApiSource & "]"
+    If HRESULT < 0 Then
+        m_sLastError = GetSystemMessage(HRESULT) & " [" & sApiSource & "]"
     ElseIf Err.LastDllError <> 0 Then
         m_sLastError = GetSystemMessage(Err.LastDllError)
     End If

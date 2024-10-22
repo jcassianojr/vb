@@ -538,9 +538,9 @@ Const cFORMID = "Imprimir Relatorios Crystal-OCX"
 Option Explicit
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.Text
   If FileConnExist(cARQRTF, True) Then
-    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd)
+    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hWnd))
   End If
 End Sub
 
@@ -549,7 +549,7 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.tEXT, "RTF") Or IsExtensao(TxtArquivo.tEXT, "TXT") Then
+  If IsExtensao(TxtArquivo.Text, "RTF") Or IsExtensao(TxtArquivo.Text, "TXT") Then
     cARQRTF = TxtArquivo
     FrmRTf.Show
   End If
@@ -593,7 +593,7 @@ Private Sub CmdFiltro_Click()
     FrmFiltro.Show vbModal, Me
     FILTRO = eRETU01
   End If
-  cFILTRO = CStr(FILTRO.tEXT)
+  cFILTRO = CStr(FILTRO.Text)
 
   If Len(cFILTRO) > 0 Then
     RPT.ReplaceSelectionFormula (cFILTRO)
@@ -622,7 +622,7 @@ Dim nARQUIVOS As Integer
 Dim x As Integer
 
   Mana5Fec
-  TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
+  TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
   With RPT
     nARQUIVOS = UBound(aARQUIVOS)
     For x = 0 To nARQUIVOS
@@ -638,7 +638,7 @@ Dim x As Integer
 End Sub
 
 Private Sub CmdPreview_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.Text
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -647,7 +647,7 @@ Private Sub CmdPreview_Click()
     PrintPreview1.ShowPreview
   End If
   If IsExtensao(cARQRTF, "PDF") Then
-    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
+    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
   End If
   If IsExtensao(cARQRTF, "HTML") Then
     ePASS01 = Array("Navegador Externo", "Preview Interno", "Navegador Interno")
@@ -664,11 +664,11 @@ Private Sub CmdPreview_Click()
     End Select
   End If
   If IsExtensao(cARQRTF, "RTF") Then
-    cARQRTF = TxtArquivo.tEXT
+    cARQRTF = TxtArquivo.Text
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.tEXT = ""
+    RichTextBox1.Text = ""
   End If
 End Sub
 Public Sub MyPrintinghtml()
@@ -722,7 +722,7 @@ End Sub
 Private Sub CmdShell_Click()
   Dim cARQSHELL As String
   cARQSHELL = FixStr(TxtArquivo)
-  ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , Me.hWnd
+  ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
 End Sub
 
 Private Sub CmdVisua_Click()
@@ -768,7 +768,7 @@ Private Sub Form_Load()
     TxtComp.Visible = True
     CmdMudaFec.Visible = True
     CmdMudaFec.Enabled = True
-    TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
+    TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
   End If
 
   If Len(aRELCFG(6)) = 0 Then
@@ -903,7 +903,7 @@ Private Sub Salvar_Click(Index As Integer)
   End Select
 
   sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-  cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
+  cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
 
 
   If InStr(cARQUIVO, ".") > 0 Then

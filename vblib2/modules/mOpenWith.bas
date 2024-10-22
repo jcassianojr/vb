@@ -42,8 +42,8 @@ End Type
 
 ' Esta funcao abre o openwith do windows deixando escolher qual aplicativos cadastrados para a extensao
 ' nao pode ser trocada por shellexecute pois ela abre o programa padrao para a extensao
-' Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, Me.hWnd 'escolhe o aplicativo da extensao
-' ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd 'abre o aplicativo padrao da extensao
+' Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, clng(Me.hwnd) 'escolhe o aplicativo da extensao
+' ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , clng(Me.hwnd) 'abre o aplicativo padrao da extensao
 
 #If VBA7 Then
 Public Declare  PtrSafe Function SHOpenWithDialog Lib "shell32" (ByVal hWnd  As LongPtr, poainfo As OPENASINFO) As Long

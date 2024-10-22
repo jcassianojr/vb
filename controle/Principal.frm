@@ -346,7 +346,7 @@ Private Sub MDIForm_Load()
   Dim carqhelp As String
 
 
-  StatusBar1.Panels(5).tEXT = ""
+  StatusBar1.Panels(5).Text = ""
 
 
 
@@ -466,7 +466,7 @@ Private Sub MDIForm_Load()
   rs.Close
   DB.Close
 
-  StatusBar1.Panels(6).tEXT = zUSER
+  StatusBar1.Panels(6).Text = zUSER
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If
@@ -537,15 +537,15 @@ Private Sub mnuSUBMENU2_Click(Index As Integer)
     escDes.Show vbModal
   Case 7
     ZENGTIP = "DES"
-    ESCCLI.Show vbModal
+    escCLI.Show vbModal
   Case 8
-    ESCpro.Show vbModal
+    escPRO.Show vbModal
   Case 9
     iPPAP = 3
     escPPAP.Show vbModal
   Case 10
     ZENGTIP = "PRO"
-    ESCCLI.Show vbModal
+    escCLI.Show vbModal
   Case 11
     zPFTIPO = "POA"
     Sdb = PegPath("PATH", "POA")
@@ -612,7 +612,7 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
     ShellEx "calc"
     Exit Sub
   Case 9
-    ShellEx "emailprg.exe", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hWnd
+    ShellEx "emailprg.exe", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , CLng(Me.hWnd)
     Exit Sub
   End Select
 
@@ -825,7 +825,7 @@ Private Sub Relat_Click(Index As Integer)
   Case 7
     'zRPTARQ = PegPath("PATH", "WRPTX") + " $" + Trim(zUSER) + "%#"
     'Shell zRPTARQ, vbNormalFocus
-    ShellEx "WRPTX", essSW_SHOWDEFAULT, "$" + Trim(zUSER) + "%#", PegPath("PATH", "WRPTX"), , Me.hWnd
+    ShellEx "WRPTX", essSW_SHOWDEFAULT, "$" + Trim(zUSER) + "%#", PegPath("PATH", "WRPTX"), , CLng(Me.hWnd)
   End Select
 End Sub
 

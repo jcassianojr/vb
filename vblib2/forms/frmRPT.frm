@@ -1059,14 +1059,14 @@ Option Explicit
 
 Private Sub CmdAbrirCom_Click(Index As Integer)
 
-  eLOCALIZA = Text(5).Text
+  eLOCALIZA = text(5).text
   ePASS01 = ""
   If Index = 0 Then
-    ePASS01 = EXTENSAO(FixStr(Text(4).Text))
+    ePASS01 = EXTENSAO(FixStr(text(4).text))
   End If
   EscRptExec.Show vbModal, Me
   If lRETU Then
-    Text(5).Text = eRETU02
+    text(5).text = eRETU02
   End If
 
 End Sub
@@ -1077,16 +1077,16 @@ End Sub
 
 Private Sub CmdEDIT_Click(Index As Integer)
 Dim cEXTENSAO As String
-  eLOCALIZA = Text(5).Text
+  eLOCALIZA = text(5).text
   If Index = 0 Then
-    cARQRTF = Text(4).Text
+    cARQRTF = text(4).text
     cEXTENSAO = EXTENSAO(cARQRTF)
     Select Case cEXTENSAO
       Case "RPT"
         If Index = 0 Then
-          ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
+          ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
         Else
-          ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , Me.hWnd
+          ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
         End If
     End Select
   End If
@@ -1097,22 +1097,22 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub Command2_Click()
-  Text(5).Text = ""
+  text(5).text = ""
 End Sub
 
 Private Sub escarq_Click(Index As Integer)
   Index = Index + 18
-  ePASS01 = Text(Index)
+  ePASS01 = text(Index)
   FrmPegdb.Show vbModal, Me
   If lRETU Then
-    Text(Index) = eRETU01
+    text(Index) = eRETU01
   End If
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   If MDG("Gravar e Sair", "Gravando ") Then
     For nITEM = 0 To 23
-      aVAL(nITEM) = Text(nITEM)
+      aVAL(nITEM) = text(nITEM)
     Next nITEM
     For nITEM = 24 To 26
       aVAL(nITEM) = FixNumBol(chkFields(nITEM).Value)
@@ -1169,7 +1169,7 @@ Private Sub escolherrpt_Click()
       sPath = Caminex(zRPTCAM)
     End If
   End If
-  Text(4).Text = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
+  text(4).text = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
 
 End Sub
 
@@ -1213,7 +1213,7 @@ Private Sub Form_Load()
                "", "", "", "", False, False, False)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 23
-    Text(nITEM) = aVAL(nITEM)
+    text(nITEM) = aVAL(nITEM)
   Next nITEM
   For nITEM = 24 To 26
     chkFields(nITEM) = aVAL(nITEM)

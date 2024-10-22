@@ -118,7 +118,7 @@ Private Declare Function IsWindow Lib "user32" _
 '
 '    Private Sub Command1_Click()
 '        m_blnCloseEnabled = Not m_blnCloseEnabled
-'        EnableCloseButton Me.hwnd, m_blnCloseEnabled
+'        EnableCloseButton clng(Me.hwnd), m_blnCloseEnabled
 '
 '        If m_blnCloseEnabled Then
 '            Command1.Caption = "Disable"
