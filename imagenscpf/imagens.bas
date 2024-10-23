@@ -21,16 +21,12 @@ Public Sub Cmdiniciar_Click()
   Set OBJCONN = New ADODB.Connection  'Create a new object
   Set OBJRSGLOB = New ADODB.Recordset
 
-  'Dim scrbuf      As CONSOLE_SCREEN_BUFFER_INFO
-
-  'Get the standard output handle
-  '  hOutput = GetStdHandle(STD_OUTPUT_HANDLE)
-  '  GetConsoleScreenBufferInfo hOutput, scrbuf
-
 
   cCAMPO = "IMAGEM"
-  DBCONNSTR = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=d:\modelos\PECAS\FMP04CPF.MDB;Mode=Share Deny None"
-  cCAMJPG = "d:\modelos\rh\fotoscpf\"
+  DBCONNSTR = PegPath("PATH", "IMGCOM")
+  cCAMJPG = PegPath("PATH", "IMGJPG")
+ ' DBCONNSTR = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=d:\modelos\PECAS\FMP04CPF.MDB;Mode=Share Deny None"
+ ' cCAMJPG = "d:\modelos\rh\fotoscpf\"
   OBJCONN.Open DBCONNSTR
   strSQL = "SELECT * FROM imagens where numero>0"
   OBJRSGLOB.Open strSQL, OBJCONN, adOpenForwardOnly, adLockOptimistic

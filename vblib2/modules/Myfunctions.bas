@@ -176,7 +176,7 @@ Public Declare  PtrSafe Function OemToChar Lib "user32" (ByVal lpszSrc As String
 'Private Declare Function SetTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
 'Private Declare Function KillTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long) As Long
 'Declare Function SetSysColors Lib "user32" (ByVal nChanges As Long, lpSysColor As Long, lpColorValues As Long) As Long
-Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
+Public Declare Function WinAPI_GetUserName Lib "Advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
 Private Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
 Public Declare Function ReleaseCapture Lib "user32" () As Long
@@ -267,15 +267,16 @@ Public Function IsWebConnected(Optional ByRef ConnType As String) As Boolean
   IsWebConnected = WebTest
 End Function
 
-Public Function ExecutarDLL(ByVal cDLL As String)
+Public Function ExecutarDLL(ByVal cDLL As String) As Double
 ' appwiz.cpl adicionar e remover programas
 ' odbccp32.cpl gerenciador odbc
 ' sysdm.cpl informacoes do sistema
 ' outro cpl
 ' outra dll que possa ser executada via rundll32
-  Dim RetVal
+'  Dim RetVal
   On Error Resume Next
-  RetVal = Shell("rundll32.exe shell32.dll,Control_RunDLL " & cDLL & ",,3", 1)
+  ExecutarDLL = Shell("rundll32.exe shell32.dll,Control_RunDLL " & cDLL & ",,3", 1)
+  
 End Function
 
 Public Function ExecuteLine(ByVal Scode As String, Optional ByVal fCheckOnly As Boolean) As Boolean
@@ -286,9 +287,9 @@ Public Function ComboLostFocus(ByRef Combo1)
 Dim strPartial
 Dim i
   With Combo1
-    If Len(.tEXT) Then
+    If Len(.Text) Then
       'Procura pelo texto digitado
-      strPartial = .tEXT
+      strPartial = .Text
       i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
@@ -304,7 +305,7 @@ Dim J
 Dim m_bEditFromCode
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .tEXT
+    strPartial = .Text
     i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
@@ -1039,7 +1040,7 @@ Public Function PegCamini(ByVal cCAMINHO As String) As String
   PegCamini = Caminex(cCAMINHO, 0, 0, 0)
 End Function
 
-Public Function PegPath(ByVal cGRUPO As String, ByVal cCAMPO As String, Optional ByVal ePAD As String = "")
+Public Function PegPath(ByVal cGRUPO As String, ByVal cCAMPO As String, Optional ByVal ePAD As String = "") As String
   Dim z As Long
   Dim scaminho As String * 255
   z = GetPrivateProfileString(cGRUPO, cCAMPO, "", scaminho, 150, App.Path + "\" & App.EXEName & ".INI")
@@ -1999,7 +2000,7 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
   End If
 End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
@@ -2466,12 +2467,12 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef tEXT As String) As Long
+Public Function WordLen(ByRef Text As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
+  Bytes = StrConv(UCase$(Text), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next
@@ -2523,7 +2524,9 @@ End Function
 Public Function TimedMsgBox(Prompt As String, Optional ByVal TimeOut As Long = 0, Optional Icon As VbMsgBoxStyle = vbOKOnly, Optional Title As String = vbNullString)
 
   Dim TimerId As Long
-
+  #If VBA7 Then
+     Dim nADDRESSOF As Long
+  #End If
 
   CurMBTitle = Title
 
@@ -2533,8 +2536,13 @@ Public Function TimedMsgBox(Prompt As String, Optional ByVal TimeOut As Long = 0
     TimeOut = TimeOut * 1000
   End If
   
-
-  TimerId = SetTimer(0, 0, TimeOut, AddressOf TimeOutMB)
+  
+  #If VBA7 Then
+    nADDRESSOF = CLng(AddressOf TimeOutMB)
+    TimerId = SetTimer(0, 0, TimeOut, nADDRESSOF)
+  #Else
+     TimerId = SetTimer(0, 0, TimeOut, AddressOf TimeOutMB)
+  #End If
   TimedMsgBox = MsgBox(Prompt, Icon, CurMBTitle)
   TimedMsgBox = 0
   KillTimer 0, TimerId

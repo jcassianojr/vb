@@ -139,17 +139,18 @@ Public Function Split(ByVal Expression, Optional Delimiter As String = " ", Opti
           HS(0) = 1: HS(1) = 4: HS(4) = 1
           ' S = current R array item (Long)
           PS = ArrPtr(S)
-          PutMem4 PS, VarPtr(HS(0))
+          PutMem4 PS, CLng(VarPtr(HS(0)))
           H(0) = 1: H(1) = 2: H(4) = LE
           HE = H
-          HE(3) = StrPtr(Expression)
+          HE(3) = CLng(StrPtr(Expression))
+          
           ' D = current R item's data (Integer array)
           PD = ArrPtr(D)
-          PutMem4 PD, VarPtr(H(0))
+          PutMem4 PD, CLng(VarPtr(H(0)))
           ' E = Expression's data (Integer array)
           PE = ArrPtr(E)
-          PutMem4 PE, VarPtr(HE(0))
-          V = VarPtr(R(0))
+          PutMem4 PE, CLng(VarPtr(HE(0)))
+          V = CLng(VarPtr(R(0)))
           ' then start working...
           i = 1
           For C = 0 To C
@@ -203,17 +204,17 @@ Public Function Split(ByVal Expression, Optional Delimiter As String = " ", Opti
           HS(0) = 1: HS(1) = 4: HS(4) = 1
           ' S = current R array item (Long)
           PS = ArrPtr(S)
-          PutMem4 PS, VarPtr(HS(0))
+          PutMem4 PS, CLng(VarPtr(HS(0)))
           H(0) = 1: H(1) = 2: H(4) = LE
           HE = H
-          HE(3) = StrPtr(Expression)
+          HE(3) = CLng(StrPtr(Expression))
           ' D = current R item's data (Integer array)
           PD = ArrPtr(D)
-          PutMem4 PD, VarPtr(H(0))
+          PutMem4 PD, CLng(VarPtr(H(0)))
           ' E = Expression's data (Integer array)
           PE = ArrPtr(E)
-          PutMem4 PE, VarPtr(HE(0))
-          V = VarPtr(R(0))
+          PutMem4 PE, CLng(VarPtr(HE(0)))
+          V = CLng(VarPtr(R(0)))
           ' then start working...
           i = 1
           For C = 0 To C
@@ -251,7 +252,7 @@ Public Function Split(ByVal Expression, Optional Delimiter As String = " ", Opti
     ' safe array header for an empty string array
     ReDim H(0 To 6): H(0) = vbString: H(1) = &H1800001: H(2) = 4
     ' H(1) becomes ArrPtr; H(0) is a negative item telling array datatype
-    PutMem4 StrArrPtr(Split), VarPtr(H(1))
+    PutMem4 StrArrPtr(Split), CLng(VarPtr(H(1)))
     ' remove items from H array
     PutMem8 (Not Not H) + 12, 0
     ' VB6 IDE mysterious bug fix with Not Array

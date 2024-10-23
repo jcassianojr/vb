@@ -572,9 +572,9 @@ Private Sub SavePictureStream( _
                 .EncoderGUID = EncoderQuality
                 .NumberOfValues = 1
                 .Type = EncoderParameterValueTypeLong
-                .pValue = VarPtr(JpegQualityPct)
+                .pValue = CLng(VarPtr(JpegQualityPct))
             End With
-            pEncoderParams = VarPtr(Params)
+            pEncoderParams = CLng(VarPtr(Params))
         Case fmtGIF
             EncoderGUID = ImageFormatGIF
         Case fmtPNG

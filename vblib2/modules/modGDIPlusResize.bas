@@ -129,7 +129,7 @@ Public Function InitGDIPlus() As Long
   Dim gdipInit As GdiplusStartupInput
 
   gdipInit.GdiplusVersion = 1
-  GdiplusStartup Token, gdipInit, ByVal 0&
+  GdiplusStartup CLng(Token), gdipInit, ByVal 0&
   InitGDIPlus = Token
 End Function
 
@@ -145,15 +145,15 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
   Dim Img As Long
 
   ' Load the image
-  If GdipLoadImageFromFile(StrPtr(PicFile), Img) <> 0 Then
+  If GdipLoadImageFromFile(StrPtr(PicFile), CLng(Img)) <> 0 Then
     Err.Raise 999, "GDI+ Module", "Error loading picture " & PicFile
     Exit Function
   End If
 
   ' Calculate picture's width and height if not specified
   If Width = -1 Or Height = -1 Then
-    GdipGetImageWidth Img, Width
-    GdipGetImageHeight Img, Height
+    GdipGetImageWidth Img, CLng(Width) '
+    GdipGetImageHeight Img, CLng(Height)
   End If
 
   ' Initialise the hDC
@@ -196,12 +196,12 @@ Private Sub gdipResize(Img As Long, hDC As Long, Width As Long, Height As Long, 
   Dim DestWidth As Long                      ' Destination image Width
   Dim DestHeight As Long                       ' Destination image Height
 
-  GdipCreateFromHDC hDC, Graphics
+  GdipCreateFromHDC hDC, CLng(Graphics)
   GdipSetInterpolationMode Graphics, InterpolationModeHighQualityBicubic
 
   If RetainRatio Then
-    GdipGetImageWidth Img, OrWidth
-    GdipGetImageHeight Img, OrHeight
+    GdipGetImageWidth Img, CLng(OrWidth)
+    GdipGetImageHeight Img, CLng(OrHeight)
 
     OrRatio = OrWidth / OrHeight
     DesRatio = Width / Height
@@ -259,15 +259,15 @@ Public Function Resize(Handle As Long, picType As PictureTypeConstants, Width As
   ' Determine pictyre type
   Select Case picType
   Case vbPicTypeBitmap
-    GdipCreateBitmapFromHBITMAP Handle, ByVal 0&, Img
+    GdipCreateBitmapFromHBITMAP Handle, ByVal 0&, CLng(Img)
   Case vbPicTypeMetafile
     FillInWmfHeader WmfHeader, Width, Height
-    GdipCreateMetafileFromWmf Handle, False, WmfHeader, Img
+    GdipCreateMetafileFromWmf Handle, False, WmfHeader, CLng(Img)
   Case vbPicTypeEMetafile
-    GdipCreateMetafileFromEmf Handle, False, Img
+    GdipCreateMetafileFromEmf Handle, False, CLng(Img)
   Case vbPicTypeIcon
     ' Does not return a valid Image object
-    GdipCreateBitmapFromHICON Handle, Img
+    GdipCreateBitmapFromHICON Handle, CLng(Img)
   End Select
 
   ' Continue with resizing only if we have a valid image object
