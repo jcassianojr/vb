@@ -85,16 +85,16 @@ Private Function CreateHash(abytData() As Byte, ByVal lngAlgID As Long) As Strin
   Dim strHash As String
   Dim i As Long
   strHash = ""
-  If CryptAcquireContext(hProv, vbNullString, vbNullString, _
+  If CryptAcquireContext(CLng(hProv), vbNullString, vbNullString, _
                          IIf(lngAlgID >= CALG_SHA_256, PROV_RSA_AES, PROV_RSA_FULL), _
                          CRYPT_VERIFYCONTEXT) <> 0& Then
-    If CryptCreateHash(hProv, lngAlgID, 0&, 0&, hHash) <> 0& Then
+    If CryptCreateHash(hProv, lngAlgID, 0&, 0&, CLng(hHash)) <> 0& Then
       lngLength = UBound(abytData()) - LBound(abytData()) + 1
       If lngLength > 0 Then lngResult = CryptHashData(hHash, abytData(LBound(abytData())), lngLength, 0&) _
          Else lngResult = CryptHashData(hHash, ByVal 0&, 0&, 0&)
       If lngResult <> 0& Then
         lngLength = UBound(abytHash()) - LBound(abytHash()) + 1
-        If CryptGetHashParam(hHash, HP_HASHVAL, abytHash(LBound(abytHash())), lngLength, 0&) <> 0& Then
+        If CryptGetHashParam(hHash, HP_HASHVAL, abytHash(LBound(abytHash())), CLng(lngLength), 0&) <> 0& Then
           For i = 0 To lngLength - 1
             strHash = strHash & Right$("0" & Hex$(abytHash(LBound(abytHash()) + i)), 2)
           Next

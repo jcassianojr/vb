@@ -65,7 +65,7 @@ Public Function OpenWith(sFile As String, lFlags As OPEN_AS_INFO_FLAGS, Optional
   Dim oai As OPENASINFO
   oai.pcszFile = StrPtr(sFile)
   oai.oafInFlags = lFlags
-  If sClass <> "" Then oai.pcszClass = StrPtr(sClass)
+  If sClass <> "" Then oai.pcszClass = CLng(StrPtr(sClass))
   OpenWith = SHOpenWithDialog(hWndParent, oai)
 End Function
 
@@ -73,7 +73,7 @@ Public Function IsExecutable(sFile As String) As Boolean
   Dim lType As Long
   Dim hr As Long
 
-  hr = GetBinaryType(StrPtr(sFile), lType)
+  hr = GetBinaryType(StrPtr(sFile), CLng(lType))
   Debug.Print "hr=" & hr & "; lType=" & lType
   If hr = 0 Then
     IsExecutable = False
