@@ -176,7 +176,7 @@ Public Declare  PtrSafe Function OemToChar Lib "user32" (ByVal lpszSrc As String
 'Private Declare Function SetTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
 'Private Declare Function KillTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long) As Long
 'Declare Function SetSysColors Lib "user32" (ByVal nChanges As Long, lpSysColor As Long, lpColorValues As Long) As Long
-Public Declare Function WinAPI_GetUserName Lib "Advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
+Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
 Private Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
 Public Declare Function ReleaseCapture Lib "user32" () As Long
@@ -1693,45 +1693,54 @@ Public Function StrToArray(ByVal cGRUPO As String) As Variant
   StrToArray = aUSO
 End Function
 
-Public Function TiraSin(ByVal texto As String)
+Public Function TiraSin(ByVal texto As String, Optional ByVal RemoveUp As Boolean = True) As String
 Dim x As Integer
-
-  For x = 0 To 31
+  For x = 0 To 31 'nao caracteres padrao
     texto = Replace(texto, Chr(x), "")
   Next x
-  For x = 33 To 38
+  '32 espaco
+  For x = 33 To 38 '33! 34" 35# 36$ 37% 38&
     texto = Replace(texto, Chr(x), "")
   Next x
-  For x = 39 To 47
+  For x = 39 To 47 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
     texto = Replace(texto, Chr(x), "")
   Next x
+  '48 a 57 0-9
   For x = 58 To 64
     texto = Replace(texto, Chr(x), "")
   Next x
+  '65 a 90 maisculas
   For x = 91 To 96
     texto = Replace(texto, Chr(x), "")
   Next x
-  For x = 123 To 127
+  '97 a 122 minusculas
+  For x = 123 To 126
     texto = Replace(texto, Chr(x), "")
   Next x
-  For x = 155 To 159
-    texto = Replace(texto, Chr(x), "")
-  Next x
-  For x = 168 To 180
-    texto = Replace(texto, Chr(x), "")
-  Next x
-  For x = 184 To 197
-    texto = Replace(texto, Chr(x), "")
-  Next x
-  For x = 200 To 209
-    texto = Replace(texto, Chr(x), "")
-  Next x
-  For x = 217 To 223
-    texto = Replace(texto, Chr(x), "")
-  Next x
-  For x = 238 To 255
-    texto = Replace(texto, Chr(x), "")
-  Next x
+  If removerup Then
+    For x = 127 To 255
+      texto = Replace(texto, Chr(x), "")
+    Next x
+  Else 'matem caracteres de acentuacao uso tirace caso queira manter sem acentuacao
+    For x = 155 To 159
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 168 To 180
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 184 To 197
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 200 To 209
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 217 To 223
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 238 To 255
+      texto = Replace(texto, Chr(x), "")
+    Next x
+  End If
   TiraSin = texto
 End Function
 Function CheckPass(ByVal cTEXTO As String, Optional ByVal lMES As Boolean = True) As Boolean
@@ -2585,11 +2594,19 @@ Function CheckRegEx(texto As String, padrao As String)
     ''   valor = valor & objMatch.Value & " '." & vbCrLf
     'Next
   Else
-    ' valor = "Comparação falhou !"
+    ' valor = "Comparacao falhou !"
   End If
 
 
 
 End Function
 
-
+'Returns True if the user is running 64-bit *VBA*
+'   This is *NOT* the same as the Windows bitness;
+'   64-bit Windows can (and often does) run 32-bit VBA
+Public Function Isvba64() As Boolean
+Isvba64 = False
+    #If Win64 Then
+        Isvba64 = True
+    #End If
+End Function
