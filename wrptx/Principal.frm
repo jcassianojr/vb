@@ -57,6 +57,13 @@ Private Sub MDIForm_Load()
   CenterFormToScreen Me
   cmdline = Trim(Command())
   
+  
+ 'Alert (MSSqlOdbcDriver())
+' Alert (MSSqlOledbProvider(1))
+ 'Alert (MSSqlOledbProvider(2))
+ 'Alert (MSSqlOledbProvider(3))
+'End
+  
  ' GeraConn ("localhost.3306.mariadb.citacao")
 '  TipoConn ("localhost.3306.mariadb.citacao")
  ' TipoConn ("localhost.3306.mysql.citacao")
@@ -245,7 +252,7 @@ Private Sub MDIForm_Load()
   End If
 
 
-  StatusBar1.Panels(6).tEXT = zUSER
+  StatusBar1.Panels(6).Text = zUSER
 
   If zWRPTID = 0 Then
     MsgBox "Usuario Nao Cadastrado", vbOKOnly, "Bloqueio de Acesso"

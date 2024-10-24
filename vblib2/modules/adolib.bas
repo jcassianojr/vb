@@ -64,8 +64,9 @@ Attribute VB_Name = "AdoLib"
 Option Explicit
 Public Const cJetPro = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
 '
-'There is no provider named 'Microsoft.ACE.OLEDB.14.0' even though it's Access 2010 (aka version number 14) the provider that should be
-'used still is named with version number 12.
+'There is no provider named 'Microsoft.ACE.OLEDB.14.0' even though it's Access 2010 (aka version number 14) the provider
+'that should be used
+'still is named with version number 12.
 'So change from 'Microsoft.ACE.OLEDB.14.0' to 'Microsoft.ACE.OLEDB.12.0' and it will probably work better!
 '
 Public Const cJetA12 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source="
@@ -453,8 +454,14 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     End If
     Exit Function
   End If
-  If InStr(cARQTMP, "[SQLSERVER]") > 0 Then
-    cARQ = Replace(cARQ, "[SQLSERVER]", "")
+  If InStr(cARQTMP, "[SQLSERVER]") > 0 Or InStr(cARQTMP, "[MSSQL]") > 0 Then
+     cARQ = Replace(cARQ, "[SQLSERVER]", "")
+     cARQ = Replace(cARQ, "[MSSQL]", "")
+       If Len(cUSER) > 0 Then
+         cARQ = "Provider=" + MSSqlOledbProvider(1) + ";Server=" + cARQ + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"
+       Else
+         cARQ = "Provider=" + MSSqlOledbProvider(1) + ";Server=" + cARQ + ";"
+       End If
     TipoConn = Array("ADO", cARQ, "SQLSERVER")
     Exit Function
   End If
@@ -1015,16 +1022,16 @@ trataerro:
 
 End Function
 
-Public Function AdoNewTable(ByVal cARQORI As String, Optional ByVal lCRIA As Boolean = False, _
-                            Optional ByVal Ntipo As Integer = 5) As Boolean
+Public Function CriaMdbAccess(ByVal cARQORI As String, Optional ByVal lCRIA As Boolean = False, _
+                            Optional ByVal nTIPO As Integer = 5) As Boolean
   Dim cat As New ADOX.Catalog
   On Error GoTo trataerro
-  AdoNewTable = False
+  CriaMdbAccess = False
   If Not FileConnExist(cARQORI, True) Then
     If lCRIA Or MDG("Criar Arquivo " & cARQORI) Then
       cat.Create "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & cARQORI & _
-                 ";Jet OLEDB:Engine Type=" & Ntipo & ";"
-      AdoNewTable = True
+                 ";Jet OLEDB:Engine Type=" & nTIPO & ";"
+      CriaMdbAccess = True
     End If
   End If
   Exit Function
@@ -1037,4 +1044,99 @@ trataerro:
 End Function
 
 
+Public Function MSSqlOdbcDriver() As String
+    
+    'Customize this list to include the drivers you want to support
+    Dim SupportedDrivers As Variant
+    SupportedDrivers = Array( _
+        "ODBC Driver 17 for SQL Server", _
+        "ODBC Driver 13 for SQL Server", _
+        "SQL Server Native Client 11.0", _
+        "SQL Server")   'the "SQL Server" driver is the legacy driver that is included with Windows
+    
+    'We're using the registry to check for Drivers, so we'll just create the registry object
+    '   once and use it each time through the loop below
+    Dim oReg As Object
+    Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
+    Const RegPath As String = "SOFTWARE\ODBC\ODBCINST.INI\ODBC Drivers"
+    Const HKEY_LOCAL_MACHINE = &H80000002
+    
+    
+    Dim i As Long
+    For i = 0 To UBound(SupportedDrivers)
+        Dim DriverName As String: DriverName = SupportedDrivers(i)
+        
+        Dim KeyExists As Boolean, RegValue As String
+        KeyExists = (oReg.GetStringValue(HKEY_LOCAL_MACHINE, RegPath, DriverName, RegValue) = 0)
+        
+        Dim DriverIsInstalled
+        DriverIsInstalled = (KeyExists And (RegValue = "Installed"))
+        
+        If DriverIsInstalled Then
+            'Return the first Driver from the list that is installed on the computer
+            MSSqlOdbcDriver = DriverName
+            Set oReg = Nothing
+            Exit Function
+        End If
+    Next i
+    Set oReg = Nothing
+    
+    'If we get here it means there were no matches found;
+    '   until we work out all the kinks, we may be better served by returning the default Driver
+    '   here rather than throwing an error
+    MsgBox "No ODBC Drivers found (not even the default that ships with Windows!)"
+End Function
+
+' ----------------------------------------------------------------
+' Procedure : GetLatestOledbProvider --MSSqlOledbProvider
+' Date      : 12/14/2022
+' Author    : Mike Wolfe
+' Source    : https://nolongerset.com/getlatestoledbprovider/
+' Purpose   : Iterates through a custom list of OLEDB providers
+'               and returns the first installed match.
+' ----------------------------------------------------------------
+Public Function MSSqlOledbProvider(Optional ByVal nTIPO As Integer = 1) As String
+    Dim SupportedProviders As Variant
+    SupportedProviders = Array( _
+        "MSOLEDBSQL19", "Microsoft OLE DB Driver 19 for SQL Server", "EE5DE99A-4453-4C96-861C-F8832A7F59FE", _
+        "MSOLEDBSQL", "Microsoft OLE DB Driver for SQL Server", "5A23DE84-1D7B-4A16-8DED-B29C09CB648D", _
+        "SQLNCLI11", "SQL Server Native Client 11.0", "397C2819-8272-4532-AD3A-FB5E43BEAA39", _
+        "SQLNCLI10", "SQL Server Native Client 10.0", "8F4A6B68-4F36-4e3c-BE81-BC7CA4E9C45C", _
+        "SQLOLEDB", "Microsoft OLE DB Provider for SQL Server", "0C7FF16C-38E3-11d0-97AB-00C04FC2AD98")
+    
+    'We're using the registry to check for providers, so we'll just create the registry object
+    '   once and use it each time through the loop below
+    Dim oReg As Object
+    Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
+    Const HKEY_CLASSES_ROOT = &H80000000
+    
+    Dim i As Long
+    For i = 0 To UBound(SupportedProviders) Step 3
+        Dim ProviderName As String: ProviderName = SupportedProviders(i)
+        Dim ProviderDesc As String: ProviderDesc = SupportedProviders(i + 1)
+        Dim ProviderUID As String: ProviderUID = SupportedProviders(i + 2)
+        
+        Dim ProviderIsInstalled As Boolean, SubkeyPath As String
+        SubkeyPath = "CLSID\{" & ProviderUID & "}\"
+        ProviderIsInstalled = (oReg.EnumKey(HKEY_CLASSES_ROOT, SubkeyPath, "", "") = 0)
+        
+        If ProviderIsInstalled Then
+            'Return the first provider from the list that is installed on the computer
+            Select Case nTIPO
+                   Case 1
+                       MSSqlOledbProvider = ProviderName
+                   Case 2
+                       MSSqlOledbProvider = ProviderDesc
+                   Case 3
+                       MSSqlOledbProvider = ProviderUID
+            End Select
+            Set oReg = Nothing
+            Exit Function
+        End If
+    Next i
+    Set oReg = Nothing
+    
+    'If we get here it means there were no matches found
+    MsgBox "No OLE DB providers found (not even the default that ships with Windows!)"
+End Function
 
