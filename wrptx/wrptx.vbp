@@ -82,6 +82,7 @@ Module=modMenuXP; ..\wrpt\modMenuXP.bas
 Form=..\vblib2\forms\frmCharacters.frm
 Class=cZipArchive; ..\vblib2\class\cZipArchive.cls
 Class=PicSaveLoad; ..\vblib2\class\PicSavev11.cls
+Module=Datas; ..\vblib2\modules\Datas.bas
 IconForm="frmPRINCIPAL"
 Startup="Sub Main"
 HelpFile=""

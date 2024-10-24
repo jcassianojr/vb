@@ -468,25 +468,6 @@ Public Function GeraSplit(ByVal aVAR As Variant, Optional ByVal cINI As String =
   GeraSplit = GeraSplit & cFIM
 End Function
 
-Public Function DataBranco(ByVal eVAR As Variant) As Boolean
-  DataBranco = False
-  If IsNull(eVAR) Then
-    DataBranco = True
-    Exit Function
-  End If
-  If eVAR = "" Or eVAR = "  /  /    " Or eVAR = "00/00/0000" Or eVAR = Space(8) _
-     Or eVAR = "00:00:00" Or eVAR = "0000-00-00" _
-     Or eVAR = "0000-00-00 00:00:00" Then
-    DataBranco = True
-    Exit Function
-  End If
-  If IsDate(eVAR) Then                         ''Corrige Erro data null voltando 31/12/1899
-    If Year(Date) <= 1899 Then
-      DataBranco = True
-      Exit Function
-    End If
-  End If
-End Function
 Public Function SepSqlOpe(ByVal eEXP As String) As Variant
   Dim aRETU As Variant
   aRETU = Array("", "", "")
@@ -517,54 +498,6 @@ erro:
   End Select
 End Function
 
-Public Function DataToLit(ByVal dDATA As Variant, Optional ByVal cTIPO As String = "", Optional ByVal cARQ As String = "") As String
-  Dim aRETU As Variant
-  Dim cSEP As String
-  On Error GoTo trataerro
-  cSEP = ""
-  dDATA = Fdata(dDATA, "DN")
-  Select Case Mid(cTIPO, 1, 1)
-  Case "/"
-    cSEP = "/"
-    cTIPO = Mid(cTIPO, 2)
-  Case "-"
-    cSEP = "-"
-    cTIPO = Mid(cTIPO, 2)
-  End Select
-  If Len(cARQ) > 0 Then
-    cARQ = GeraConn(cARQ, cTIPO)
-    aRETU = TipoConn(cARQ)
-    cTIPO = aRETU(2)
-  End If
-  Select Case cTIPO
-  Case "ACESSS"                                ''access
-    DataToLit = "#" & Year(dDATA) & "/" & Month(dDATA) & "/" & Day(dDATA) & "#"
-  Case "CRYSTAL"
-    DataToLit = "CDATE(" & Year(dDATA) & "," & Month(dDATA) & "," & Day(dDATA) & ")"
-  Case "MYSQL/"
-    DataToLit = "'" & Year(dDATA) & "/" & Month(dDATA) & "/" & Day(dDATA) & "'"
-  Case "MYSQL", "MYSQL-", "MARIADB"
-    DataToLit = "'" & Year(dDATA) & "-" & Month(dDATA) & "-" & Day(dDATA) & "'"
-  Case "SQLSERVER"
-    DataToLit = "CONVERT(datetime, '" & Format(DateValue(dDATA), "yyyy-mm-dd") & "', 102)"
-  Case "ORACLE"
-    DataToLit = "to_date('" + Format(dDATA, "dd/mm/yyyy") + "','DD/MM/YYYY')"
-  Case "CRYSTAX"
-    DataToLit = "DATE(" & Year(dDATA) & "," & Month(dDATA) & "," & Day(dDATA) & ")"
-  Case "NDL"                                   ''yyyymmdd
-    DataToLit = StrZero(Year(dDATA), 4) & cSEP & StrZero(Month(dDATA), 2) & cSEP & StrZero(Day(dDATA), 2)
-  Case "NDC"                                   ''yymmdd
-    DataToLit = Mid(StrZero(Year(dDATA), 4), 3) & cSEP & StrZero(Month(dDATA), 2) & cSEP & StrZero(Day(dDATA), 2)
-  Case Else
-    DataToLit = "'" & Year(dDATA) & "/" & Month(dDATA) & "/" & Day(dDATA) & "'"
-  End Select
-  Exit Function
-trataerro:
-  Select Case Err.Number
-  Case Else
-    SayErro "DatatoLit"
-  End Select
-End Function
 
 Public Function Alert(ByVal cDIZ As String, Optional ByVal cTITLE As String = "Informacao")
   MsgBox cDIZ, vbOKOnly, cTITLE
@@ -657,56 +590,8 @@ Public Function Dividir(ByVal nVAL As Variant, ByVal nDIV As Variant)
     Dividir = nVAL / nDIV
   End If
 End Function
-Public Function NumToData(ByVal nNUM As Variant) As Date
-  Dim dDATA As Date
-  Dim cData As String
-  cData = Trim(TiraOut(nNUM))
-  If Len(cData) = 6 Then                       ''yymmdd
-    dDATA = DateSerial(Mid(cData, 1, 2), Mid(cData, 3, 2), Mid(cData, 5, 2))
-  End If
-  If Len(cData) - 8 Then                       ''8 ''yyyymmdd
-    dDATA = DateSerial(Mid(cData, 1, 4), Mid(cData, 5, 2), Mid(cData, 7, 2))
-  End If
-  NumToData = Fdata(dDATA)
-End Function
 
-Public Function Fdata(ByVal Data As Variant, _
-                      Optional ByVal cTipoData = "", _
-                      Optional ByVal ePAD As Variant, _
-                      Optional ByVal cTipoDataNull As String = "", _
-                      Optional ByVal cMASCARA As String = "dd/mm/yyyy") As Variant
-  Dim dDATA As Date
 
-  '         "\#mm\/dd\/yyyy#"
-  '         "\#hh:mm:ss#"
-  '         "\#mm\/dd\/yyyy hh:mm:ss#"
-  'data padrao
-  Fdata = ePAD
-
-  If cTipoData = "D-" Then
-     cMASCARA = "yyyy-mm-dd"
-  End If
-  If IsDate(Data) And Not DataBranco(Data) Then  ''Data <> "00:00:00" And Data <> "0000-00-00" Then
-    Fdata = Format(Data, cMASCARA)
-  Else
-    Select Case cTipoData 'gera null conforme o tipo
-    Case "", "D", "DS"
-      Fdata = DateSerial(0, 0, 0)
-    Case "DD"
-      Fdata = dDATA
-    Case "DN"
-      Fdata = NullDate(cTipoDataNull)
-    Case "DC"
-      Fdata = Space(8)
-    Case "DZ"
-      Fdata = ""
-    Case "DF"
-      Fdata = "  /  /    "
-    Case "DH"
-      Fdata = Today()
-    End Select
-  End If
-End Function
 
 Public Function FileConnExist(ByVal cARQ As Variant, _
                           Optional ByVal lMES As Boolean = False, _
@@ -990,39 +875,6 @@ Public Function Multiplicar(ByVal nVAL As Variant, ByVal nMUL As Variant)
   End If
 End Function
 
-Public Function NullDate(Optional ByVal cTIPO As String = "", Optional ByVal cARQ As String = "") As Variant
-Dim aRETU As Variant
-  If Len(cARQ) > 0 Then
-    cARQ = GeraConn(cARQ, cTIPO)
-    aRETU = TipoConn(cARQ)
-    cTIPO = aRETU(2)
-  End If
-  Select Case cTIPO
-  Case "DBF", "ADSCDX", "ADSNTX", "ADSADT", "JETFOX"
-    NullDate = "        "
-  Case "MYSQL", "MARIADB"
-    NullDate = "'0000-00-00'"
-  Case Else
-    NullDate = Null
-  End Select
-End Function
-
-Public Function NullDateTime(Optional ByVal cTIPO As String = "", Optional ByVal cARQ As String = "") As Variant
- Dim aRETU As Variant
-  If Len(cARQ) > 0 Then
-    cARQ = GeraConn(cARQ, cTIPO)
-    aRETU = TipoConn(cARQ)
-    cTIPO = aRETU(2)
-  End If
-  Select Case cTIPO
-  Case "DBF", "ADSCDX", "ADSNTX", "ADSADT", "JETFOX"
-    NullDateTime = "        "
-  Case "MYSQL", "MARIADB"
-    NullDateTime = "'0000-00-00 00:00:00'"
-  Case Else
-    NullDateTime = Null
-  End Select
-End Function
 
 Public Function PadRight(ByVal cTEXTO, ByVal nLEN) As String
   cTEXTO = cTEXTO & Space(nLEN)
@@ -1644,21 +1496,21 @@ Function Convert2oem(ByVal in_string As String) As String
   t = CharToOem(in_string, Out_String)
   Convert2oem = Out_String
 End Function
-Public Function ConvOEM(ByVal cTEXTO As String) As String
-  ConvOEM = Convert2oem(cTEXTO)
-End Function
+'Public Function ConvOEM(ByVal cTEXTO As String) As String
+'  ConvOEM = Convert2oem(cTEXTO)
+'End Function
 
-Public Function ConvOEM2(ByVal cTEXTO As String) As String
-  ConvOEM2 = Convert2oem(cTEXTO)
-End Function
+'Public Function ConvOEM2(ByVal cTEXTO As String) As String
+'  ConvOEM2 = Convert2oem(cTEXTO)
+'End Function
 
-Public Function ConvAnsi2(ByVal cTEXTO As String) As String
-  ConvAnsi2 = Convert2ansi(cTEXTO)
-End Function
+'Public Function ConvAnsi2(ByVal cTEXTO As String) As String
+'  ConvAnsi2 = Convert2ansi(cTEXTO)
+'End Function
 
-Public Function ConvAnsi(ByVal texto As String) As String
-  ConvAnsi = Convert2ansi(texto)
-End Function
+'Public Function ConvAnsi(ByVal texto As String) As String
+'  ConvAnsi = Convert2ansi(texto)
+'End Function
 Public Function Tirace(ByVal texto As String) As String
   Tirace = tirace2(texto)
 End Function
@@ -1695,30 +1547,37 @@ End Function
 
 Public Function TiraSin(ByVal texto As String, Optional ByVal RemoveUp As Boolean = True) As String
 Dim x As Integer
+  'https://www.ascii-code.com/pt
+  'Caracteres de controle ASCII (código de caractere 0-31)
   For x = 0 To 31 'nao caracteres padrao
     texto = Replace(texto, Chr(x), "")
   Next x
+  'Caracteres imprimiveis ASCII (código de caractere 32-127)
   '32 espaco
-  For x = 33 To 38 '33! 34" 35# 36$ 37% 38&
+  For x = 33 To 38                 '33! 34" 35# 36$ 37% 38&
     texto = Replace(texto, Chr(x), "")
   Next x
-  For x = 39 To 47 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
+  For x = 39 To 47                 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
     texto = Replace(texto, Chr(x), "")
   Next x
-  '48 a 57 0-9
-  For x = 58 To 64
+  '48 a 57 numeros 0-9
+  For x = 58 To 64                 '58: 59: 60< 61= 62> 63? 64@
     texto = Replace(texto, Chr(x), "")
   Next x
   '65 a 90 maisculas
-  For x = 91 To 96
+  For x = 91 To 96                 '91[ 92\ 93] 94^ 95_ 96`
     texto = Replace(texto, Chr(x), "")
   Next x
   '97 a 122 minusculas
-  For x = 123 To 126
+  For x = 123 To 126                '123{ 124| 125} 126~
     texto = Replace(texto, Chr(x), "")
   Next x
-  If removerup Then
-    For x = 127 To 255
+  For x = 127 To 127                 '127 del
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  'Códigos ASCII estendidos (código de caracteres 128-255)
+  If RemoveUp Then
+    For x = 128 To 255
       texto = Replace(texto, Chr(x), "")
     Next x
   Else 'matem caracteres de acentuacao uso tirace caso queira manter sem acentuacao
@@ -1803,30 +1662,31 @@ Function CheckPass(ByVal cTEXTO As String, Optional ByVal lMES As Boolean = True
   End If
 
 End Function
+
+Function isnumber(ByVal cLETRA As String) As Boolean
+   isnumber = InStr("0123456789", cLETRA) > 0
+End Function
+
+Function isstringupper(ByVal cLETRA As String) As Boolean
+   isstringupper = InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", cLETRA) > 0
+End Function
+
+Function isstringlower(ByVal cLETRA As String) As Boolean
+   isstringlower = InStr("abcdefghijklmnopqrstuvwxyz", cLETRA) > 0
+End Function
+
+Function issimbolo(ByVal cLETRA As String) As Boolean
+   issimbolo = InStr(",.:;$@&*!?<>%+-*/\|#=:_{}[]()'^~´`", cLETRA) > 0
+End Function
+
+Function isstring(ByVal cLETRA As String) As Boolean
+    isstring = isstringlower(cLETRA) Or isstringupper(cLETRA)
+End Function
 Public Function tirace2(ByVal cXml As String) As String
   Dim nAscii As Integer
   Dim ltroca As Boolean
   Dim nCont As Integer
   Dim cLETRA As String
-
-  '' cRemoveTag := { ;
-  ''    [<?xml version="1.0" encoding="utf-8"?>], ; // Petrobras inventou de usar assim
-  ''    [<?xml version="1.0" encoding="ISO-8859-1"?>], ; // Petrobras agora assim
-  ''    [<?xml version="1.0" encoding="UTF-8"?>], ; // o mais correto
-  ''    [<?xml version="1.00"?>], ;
-  ''    [<?xml version="1.0"?>] }''
-
-  ''  cXml := StrTran( cXml, , "" )
-
-  ''  IF ! ["] $ cXml // Pode ser usado aspas simples
-  ''     cXml := replace( cXml, ['], ["] )
-  ''  ENDIF
-  ''  IF Chr(195) $ cXml
-  ''     nPos := At( Chr(195), cXml )
-  ''     IF Asc( Substr( cXml, nPos + 1 ) ) > 122
-  ''        cXml := hb_Utf8ToStr( cXml )
-  ''     ENDIF
-  ''  ENDIF
 
   For nCont = 1 To 2
     cXml = Replace(cXml, Chr(26), "")
@@ -1967,9 +1827,6 @@ Public Function tirace2(ByVal cXml As String) As String
 End Function
 
 
-Public Function Today() As Date
-  Today = Format(Date, "dd/mm/yyyy")
-End Function
 
 Public Function XOREncryption(strCodeKey As String, _
                               strDataIn As String) As String
@@ -2212,17 +2069,6 @@ Public Sub EnableControls(ByVal frm As Form, ByVal enabled_state As Boolean)
   Next ctl
 End Sub
 
-Public Function MesAnt(ByVal nMES As Integer, ByVal nANO As Long)
-  Dim nMESTMP As Integer
-  Dim nANOTMP As Long
-  nMESTMP = nMES - 1
-  nANOTMP = nANO
-  If nMESTMP = 0 Then
-    nMESTMP = 12
-    nANOTMP = nANOTMP - 1
-  End If
-  MesAnt = Array(nMESTMP, nANOTMP)
-End Function
 
 Public Function FixBolNum(ByVal lbol As Boolean) As Integer  'variant
   FixBolNum = 0
