@@ -75,14 +75,9 @@ Public Function TiraOut(ByVal eVAR As Variant) As String
   cTexto = Replace(cTexto, ")", "")
   TiraOut = cTexto
 End Function
-Public Function FileExists(ByVal PathName As String) As Boolean
-
-On Error Resume Next
-Dim Attributes As VbFileAttribute, ErrVal As Long
-Attributes = GetAttr(PathName)
-ErrVal = Err.Number
-On Error GoTo 0
-If (Attributes And (vbDirectory Or vbVolume)) = 0 And ErrVal = 0 Then FileExists = True
+Public Function FileExists(ByRef sFileName As String) As Boolean
+    On Error Resume Next
+    FileExists = PathFileExists(sFileName)
 End Function
 
 Public Function FixStr(ByVal eVAR As Variant, _

@@ -204,14 +204,6 @@ Public Function TrimNull(ByVal sTxt As String) As String
     TrimNull = sTxt
   End If
 End Function
-Public Function FileExists(ByVal PathName As String) As Boolean
-On Error Resume Next
-Dim Attributes As VbFileAttribute, ErrVal As Long
-Attributes = GetAttr(PathName)
-ErrVal = Err.Number
-On Error GoTo 0
-If (Attributes And (vbDirectory Or vbVolume)) = 0 And ErrVal = 0 Then FileExists = True
-End Function
 Public Function TipoDado2(ByVal intType As Integer) As String
   Select Case intType
   Case adSmallInt, adInteger, adSingle, adDouble, adCurrency, adBigInt, adBinary, _

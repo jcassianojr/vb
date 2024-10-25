@@ -68,6 +68,9 @@ Public Const OFN_SHOWHELP As Long = &H10
 Public Const OFS_MAXPATHNAME As Long = 260
 Private Const FO_COPY = &H2
 
+Private Const GCT_LFNCHAR = &H1
+Private Const GCT_SHORTCHAR = &H2
+
 Public Const OFS_FILE_OPEN_FLAGS = OFN_EXPLORER _
        Or OFN_LONGNAMES _
        Or OFN_CREATEPROMPT _
@@ -165,8 +168,12 @@ Public Declare PtrSafe Function CreateDirectory Lib "kernel32" Alias "CreateDire
 Public Declare PtrSafe Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As LongPtr, ByVal lpBuffer As String) As Long
 Private Declare PtrSafe Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As LongPtr, ByVal lpszShortPath As LongPtr, ByVal cchBuffer As LongPtr) As Long
 
+Private Declare prtsafe Function PathGetCharType Lib "shlwapi.dll" Alias "PathGetCharTypeW" (ByVal ch As Longptr) As Long
 
 #Else
+
+Private Declare Function PathGetCharType Lib "shlwapi.dll" Alias "PathGetCharTypeW" (ByVal ch As Long) As Long
+
 Public Declare Function GetOpenFileName Lib "comdlg32.dll" _
                                         Alias "GetOpenFileNameA" _
                                         (pOpenfilename As OPENFILENAME) As Long
@@ -191,6 +198,10 @@ Public Declare Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal n
 Private Declare Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As Long, ByVal lpszShortPath As Long, ByVal cchBuffer As Long) As Long
 #End If
 
+Public Function FileExists(ByRef sFileName As String) As Boolean
+    On Error Resume Next
+    FileExists = PathFileExists(sFileName)
+End Function
 
 
 Public Function IsExtensao(ByVal cARQ As String, cEXT As String) As Boolean
@@ -440,19 +451,19 @@ Public Function parsefile(ByVal archivo As String, ByVal parte As String) As Str
   Dim PosColon As Integer
   Dim LastSlash As Integer
   Dim i As Integer
-  Dim C As String
+  Dim c As String
   PosSlash = 0
   LastSlash = 0                                'un slash antes del ultimo
   PosPunto = 0
   PosColon = 0
   For i = 1 To Len(archivo)
-    C = Mid(archivo, i, 1)
-    If C = "." Then PosPunto = i             'Posicion del ULTIMO punto
-    If C = "\" Then
+    c = Mid(archivo, i, 1)
+    If c = "." Then PosPunto = i             'Posicion del ULTIMO punto
+    If c = "\" Then
       LastSlash = PosSlash
       PosSlash = i                         'Posicion del ULTIMO backslash
     End If
-    If C = ":" Then PosColon = i             'Posicion del :
+    If c = ":" Then PosColon = i             'Posicion del :
   Next
   Select Case UCase(parte)
   Case "D"                                     'drive
@@ -727,4 +738,138 @@ Public Function DeleteFile(ByVal sFileName As String, Optional vRecycleBin As Bo
 
   Call SHFileOperation(fo)
   DeleteFile = Abs(fo.fAborted) - 1
+End Function
+
+
+'*****************************************
+' ValidFileName: returns a valid file name String
+
+' The cases where an invalid file name can be returned are:
+' 1) The DefaultFileName parameter is a null String ("") and ProposedFileName was completely invalid or also a null string.
+' 2) The DefaultFileName parameter is a null String ("") and ProposedFileName was only an extension (".something").
+' In both above cases it will return a null string (""). So if you set DefaultFileName to "" you should check that the returned value is not "". In all other cases some valid file name will be returned.
+
+' Parameters
+' ProposedFileName: the String that is proposed to use as file name
+' ReplacementChar (Optional): a character to be used as a replacement for invalid characters, the default is nothing (a null string)
+' DefaultFileName (Optional): the file name that will be used when the is not file name
+' ForOldFileFormat_8Dot3 (Optional): set it to True in the case that you need to support the old file format convention that was used in the D.O.S. or if for some reason you want to restrict the file name to that format
+' AllowExtension (Optional): specifies if the string can supply not only the file name but also the file extension. The default is True.
+' [out] HasExtension (Optional): It is a return value. It is passed ByRef, it returns if the file name included an Extension.
+'*****************************************
+Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal ReplacementChar As String = "", Optional DefaultFileName As String = "Untitled", Optional ForOldFileFormat_8Dot3 As Boolean = False, Optional AllowExtension As Boolean = True, Optional ByRef HasExtension As Boolean) As String
+    Dim iChar As String
+    Dim c  As Long
+    Dim iFlag As Long
+    Dim iName As String
+    Dim iExt As String
+    Dim iDotPos As Long
+    Dim iNameLen As Long
+    Dim iExtLen As Long
+    Dim iFileName As String
+    
+    If ForOldFileFormat_8Dot3 Then
+        iFlag = GCT_SHORTCHAR
+    Else
+        iFlag = GCT_LFNCHAR
+    End If
+     
+     ' Validate the replacement char (thanks Lavolpe)
+    If ReplacementChar <> "" Then
+        If Not ((PathGetCharType(AscW(ReplacementChar)) And iFlag) = iFlag) Then
+            Err.Raise 2069, App.Title & "ValidFileName", "ReplacementChar is not valid."
+            Exit Function
+        End If
+    End If
+   
+    ProposedFileName = Trim$(ProposedFileName)
+    If InStr(ProposedFileName, "/") Then ProposedFileName = Replace(ProposedFileName, "/", "-")  ' to preserve a date formatting
+    If InStr(ProposedFileName, """") Then ProposedFileName = Replace(ProposedFileName, """", "'") ' convert double quotes to single quotes to preserve quotation
+    
+    'strip out not allowed characters in all the file name:
+    iFileName = ""
+    For c = 1 To Len(ProposedFileName)
+        iChar = Mid$(ProposedFileName, c, 1)
+        If (PathGetCharType(AscW(iChar)) And iFlag) = iFlag Then
+            iFileName = iFileName & iChar
+        Else
+            iFileName = iFileName & ReplacementChar
+        End If
+    Next c
+    
+    ' strip out illegal characters at the end:
+    Do
+        iChar = Right$(iFileName, 1)
+        Select Case iChar
+            Case " ", "."
+                iFileName = Left(iFileName, Len(iFileName) - 1)
+            Case Else
+                Exit Do
+        End Select
+    Loop
+    
+    ' separate name and (optional) extension
+    iDotPos = InStrRev(iFileName, ".")
+    If iDotPos > 0 Then
+        iName = Left(iFileName, iDotPos - 1)
+        iExt = Mid(iFileName, iDotPos + 1)
+    Else
+        iName = iFileName
+        iExt = ""
+    End If
+    
+    ' strip out illegal characters at the beginning of the name
+    For c = 1 To Len(iName)
+        iChar = Left(iName, 1)
+        Select Case iChar
+            Case " ", "."
+                iName = Mid(iName, 2)
+            Case Else
+                Exit For
+        End Select
+    Next c
+    
+    ' don't permit too long file names (or estensions in the case of ForOldFileFormat_8Dot3)
+    iNameLen = Len(iName)
+    iExtLen = Len(iExt)
+    If ForOldFileFormat_8Dot3 Then
+        If iNameLen > 8 Then
+            iName = Left(iName, 8)
+        End If
+        If iExtLen > 3 Then
+            iExt = Left(iExt, 3)
+        End If
+    Else
+        If iExtLen > 0 Then
+            If iNameLen > 258 Then
+                iName = Left(iName, 258)
+                iNameLen = 258
+            End If
+        End If
+        If (iNameLen + iExtLen + 1) > 260 Then
+            iExt = Left(iExt, 260 - iNameLen - 1)
+        End If
+    End If
+    
+    ' don't permit forbidden file names
+    Select Case UCase(iName)
+        Case "CON", "PRN", "AUX", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
+            iName = ""
+    End Select
+    If iName = "" Then
+        'if there is not a valid file name, then use the default
+        iName = DefaultFileName
+    End If
+    
+    ' compose file name again
+    ValidFileName = iName
+    If iDotPos > 0 Then
+        If AllowExtension Then
+            If ValidFileName <> "" Then
+                ValidFileName = ValidFileName & "." & iExt
+                HasExtension = True
+            End If
+        End If
+    End If
+
 End Function

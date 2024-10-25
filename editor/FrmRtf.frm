@@ -116,7 +116,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "FrmRtf.frx":1204
-            TextSave        =   "15:36"
+            TextSave        =   "09:07"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -124,7 +124,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "FrmRtf.frx":179E
-            TextSave        =   "24/10/2024"
+            TextSave        =   "25/10/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -2163,9 +2163,9 @@ Public Sub SubClassMenuXP()
   mnucapitalizar.Caption = "Capitalizar"
   mnutirace.Caption = "Tira Acentuaçao"
   mnucnvoem.Caption = "Converter Ansi(Windows)-> Oem(DOS)"
-  mnucnvoem2.Caption = "Converter Ansi(Windows)-> Oem(DOS)Padrao2"
+'  mnucnvoem2.Caption = "Converter Ansi(Windows)-> Oem(DOS)Padrao2"
   mnucnvansi.Caption = "Converter Oem(DOS)->Ansi(Windows)"
-  mnucnvansi2.Caption = "Converter Oem(DOS)->Ansi(Windows)Padrao2"
+ ' mnucnvansi2.Caption = "Converter Oem(DOS)->Ansi(Windows)Padrao2"
   Menu4.Caption = "Aj&uda"
   mnuabout.Caption = "&Sobre|#info"
 

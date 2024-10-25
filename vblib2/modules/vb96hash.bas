@@ -118,7 +118,7 @@ Private Function CreateHashFile(ByVal strFileName As String, ByVal lngAlgID As L
   Dim intFile As Integer
   Dim lngError As Long
   On Error Resume Next
-  If Len(Dir(strFileName)) > 0 Then
+  If FileExists(strFileName) Then 'Len(Dir(strFileName)) > 0 Then
     intFile = FreeFile
     Open strFileName For Binary Access Read Shared As #intFile
     abytData() = InputB(LOF(intFile), #intFile)

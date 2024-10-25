@@ -10,7 +10,6 @@ Module=ImagensMain; imagens.bas
 Module=Common; ..\vblib2\modules\Common.bas
 Module=basConsole; Console.bas
 Class=clsConsole; console.cls
-ResFile32="..\vblib2\Resources.res"
 Startup="Sub Main"
 HelpFile=""
 Title="imagens"

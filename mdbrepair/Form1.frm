@@ -534,7 +534,7 @@ Private Sub CreateLocalTable(S As String)
   db = Mid(S, InStrRev(S, "\") + 1)
 
   ' if dbFixTmp already exist, delete it
-  If StrComp(Dir(S), db, vbTextCompare) = 0 Then
+  If FileExists(S) Then 'StrComp(Dir(S), db, vbTextCompare) = 0 Then
     DeleteFile S  'Kill S
   End If
 
@@ -1761,42 +1761,6 @@ Function DeleteDuplicateRecords(strTableName As String) As Boolean
   rst.Close
   Set rst = Nothing
 
-  '    Set tdf = DBEngine(0)(0).TableDefs(strTableName)
-  '    strSQL = "SELECT * FROM " & strTableName & " ORDER BY "
-  '    ' Build a sort string to make sure duplicate records are
-  '    ' adjacent. Can't sort on OLE or Memo fields,though.
-  '    For Each fld In tdf.Fields
-  '        If (fld.Type <> dbMemo) And (fld.Type <> dbLongBinary) Then
-  '            strSQL = strSQL & fld.Name & ", "
-  '        End If
-  '    Next 'fld
-  '    ' Remove the extra comma and space from the SQL
-  '    strSQL = Left(strSQL, Len(strSQL) - 2)
-  '    Set tdf = Nothing
-  '
-  '    'strSQL = "select * from event order by r_id" 'for testing only
-  '    'On Error Resume Next
-  '
-  '    Set rst = dbTemp.OpenRecordset(strSQL)
-  '    Set rst2 = rst.Clone
-  '    rst.MoveNext
-  '    Do Until rst.EOF
-  '        varBookmark = rst.Bookmark
-  '        For Each fld In rst.Fields
-  '            If fld.Value <> rst2.Fields(fld.Name).Value Then
-  '                GoTo NextRecord
-  '            End If
-  '        Next 'fld
-  '        MsgBox "Delete " & fld.Name
-  '        'rst.Delete
-  '        b = True
-  '        GoTo SkipBookmark
-  'NextRecord:
-  '        rst2.Bookmark = varBookmark
-  'SkipBookmark:
-  '        rst.MoveNext
-  '    Loop
-
   DeleteDuplicateRecords = B
 
   Exit Function
@@ -1809,16 +1773,6 @@ ErrProc:
 
 End Function
 #End If
-
-Private Function FileExists(sFile As String) As Boolean
-  On Error Resume Next
-  If Dir(sFile) = "" Then
-    FileExists = False
-  Else
-    FileExists = True
-  End If
-End Function
-
 Function GetDiskSpaceFree(drive As String) As Currency
 
   Dim dl As Long

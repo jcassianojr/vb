@@ -278,8 +278,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Dim nERRO As Integer
-Private WithEvents C As cConverter
-Attribute C.VB_VarHelpID = -1
+Private WithEvents c As cConverter
+Attribute c.VB_VarHelpID = -1
 'Attribute C.VB_VarHelpID = -1
 
 Private Sub CmdCompactar_Click()
@@ -334,13 +334,13 @@ Dim cconn As String
   
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
   
-  Set C = New cConverter
-  C.ConvertDatabase aCnn, sCnn
+  Set c = New cConverter
+  c.ConvertDatabase aCnn, sCnn
   
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
   lProgress.Caption = "Table-Schemas created, Table-Data transferred!"
   
-  C.ConvertIndexes aCnn, sCnn
+  c.ConvertIndexes aCnn, sCnn
   
   If Err Then MsgBox Err.Description
   lProgress.Caption = "Index-Import finished!"
@@ -349,7 +349,7 @@ Dim cconn As String
   
   If Err Then MsgBox Err.Description: Err.Clear
 
-  Set C = Nothing
+  Set c = Nothing
 End Sub
 
 Private Sub CmdTeste_Click()
@@ -522,7 +522,7 @@ Private Sub Command5_Click()
     If FileConnExist(sFileName) Then
       ''nAO GRAVA EM CIMA
     Else
-      AdoNewTable sFileName, False, 5
+      CriaMdbAccess sFileName, False, 5
       Text2.Text = sFileName
     End If
   End If
