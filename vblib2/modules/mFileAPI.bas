@@ -451,19 +451,19 @@ Public Function parsefile(ByVal archivo As String, ByVal parte As String) As Str
   Dim PosColon As Integer
   Dim LastSlash As Integer
   Dim i As Integer
-  Dim c As String
+  Dim C As String
   PosSlash = 0
   LastSlash = 0                                'un slash antes del ultimo
   PosPunto = 0
   PosColon = 0
   For i = 1 To Len(archivo)
-    c = Mid(archivo, i, 1)
-    If c = "." Then PosPunto = i             'Posicion del ULTIMO punto
-    If c = "\" Then
+    C = Mid(archivo, i, 1)
+    If C = "." Then PosPunto = i             'Posicion del ULTIMO punto
+    If C = "\" Then
       LastSlash = PosSlash
       PosSlash = i                         'Posicion del ULTIMO backslash
     End If
-    If c = ":" Then PosColon = i             'Posicion del :
+    If C = ":" Then PosColon = i             'Posicion del :
   Next
   Select Case UCase(parte)
   Case "D"                                     'drive
@@ -759,7 +759,7 @@ End Function
 '*****************************************
 Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal ReplacementChar As String = "", Optional DefaultFileName As String = "Untitled", Optional ForOldFileFormat_8Dot3 As Boolean = False, Optional AllowExtension As Boolean = True, Optional ByRef HasExtension As Boolean) As String
     Dim iChar As String
-    Dim c  As Long
+    Dim C  As Long
     Dim iFlag As Long
     Dim iName As String
     Dim iExt As String
@@ -788,14 +788,14 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
     
     'strip out not allowed characters in all the file name:
     iFileName = ""
-    For c = 1 To Len(ProposedFileName)
-        iChar = Mid$(ProposedFileName, c, 1)
+    For C = 1 To Len(ProposedFileName)
+        iChar = Mid$(ProposedFileName, C, 1)
         If (PathGetCharType(AscW(iChar)) And iFlag) = iFlag Then
             iFileName = iFileName & iChar
         Else
             iFileName = iFileName & ReplacementChar
         End If
-    Next c
+    Next C
     
     ' strip out illegal characters at the end:
     Do
@@ -819,7 +819,7 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
     End If
     
     ' strip out illegal characters at the beginning of the name
-    For c = 1 To Len(iName)
+    For C = 1 To Len(iName)
         iChar = Left(iName, 1)
         Select Case iChar
             Case " ", "."
@@ -827,7 +827,7 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
             Case Else
                 Exit For
         End Select
-    Next c
+    Next C
     
     ' don't permit too long file names (or estensions in the case of ForOldFileFormat_8Dot3)
     iNameLen = Len(iName)
@@ -873,3 +873,54 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
     End If
 
 End Function
+
+'Returns the contents of file FName as a string
+Function FileRead(FName As String) As String
+Dim FNum As Integer, Result As String
+    
+    Result = Space(FileLen(FName))
+    FNum = FreeFile
+    Open FName For Binary Access Read As #FNum
+    Get #FNum, , Result
+    Close FNum
+    FileRead = Result
+
+End Function
+
+'Writes a text file with the contents of a string
+'   - Creates the file if it does not exist
+'   - Overwrites the contents of an existing file without warning
+'   - Returns true if successful
+Function FileWrite(FName As String, Contents As String) As Boolean
+    If Not DeleteFile(FName) Then Exit Function
+    Dim FNum As Integer
+    FNum = FreeFile()
+    Open FName For Output As FNum
+    'trailing semi-colon needed to prevent adding blank line at end of file
+    '  see: http://stackoverflow.com/a/9445141/154439
+    Print #FNum, Contents;
+    Close #FNum
+    FileWrite = True
+End Function
+
+'Appends the contents to the end of a file
+' - if the file does not exist, it is created
+' - a new line is implicitly added after the contents
+'   `- this means that FileAppend may be repeatedly called without passing any vbCrLf's
+Function FileAppend(FName As String, Contents As String) As Boolean
+    FileAppend = False
+    If Not FileExists(FName) Then
+        'File does not exist, create new via FileWrite
+        FileWrite FName, Contents & vbCrLf
+        FileAppend = True
+    Else
+        Dim FNum As Integer
+        FNum = FreeFile()
+        Open FName For Append Access Write As #FNum
+        Print #FNum, Contents
+        Close #FNum
+        FileAppend = True
+    End If
+End Function
+
+

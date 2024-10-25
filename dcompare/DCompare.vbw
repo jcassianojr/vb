@@ -1,7 +1,7 @@
 dCompare = 156, 26, 1128, 468, , 104, 104, 1025, 597, C
 Myfunctions = 52, 52, 1179, 393, 
 AdoLib = 26, 26, 1153, 514, I
-mFileAPI = 0, 0, 1127, 341, 
+mFileAPI = 0, 0, 1127, 341, C
 dcompareMain = 26, 26, 1153, 367, C
 GeralVars = 182, 182, 1178, 615, C
 SqlFuncoesAdo = -53, 164, 803, 479, C

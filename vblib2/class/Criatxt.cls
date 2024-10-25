@@ -81,14 +81,16 @@ Public Sub gravalincon(ByVal cTEXTO As String, ByVal nROW As Integer, ByVal nCOL
   ''End If
   mvaraLINHAS(nROW) = cLINHA
 End Sub
-
+'Imprime configuracao incial da impressora (escape codes outros)
 Public Sub impsetup(cSETUP As String)
-  Select Case mvarDESTINO
-  Case "PRINTER"
-    Printer.Print cSETUP
-  Case "LPT1", "LPT2", "LPT3", "IMPNET", "COM1", "COM2", "ARQ"
-    Print #mvarhandle, cSETUP
-  End Select
+Dim cDESTINO As String
+'LPT1,LPT2.... COM1,COM2...
+If Mid(mvarDESTINO, 1, 3) = "LPT" Or Mid(mvarDESTINO, 1, 3) = "COM" Or mvarDESTINO = "IMPNET" Then
+   Print #mvarhandle, cSETUP
+End If
+If mvarDESTINO = "PRINTER" Then
+   Printer.Print cSETUP
+End If
 End Sub
 
 Public Sub implinha(cLINHA As String)
@@ -98,24 +100,27 @@ End Sub
 Public Sub destini(ByVal cGRUPO As String, ByVal cCHAVE As String)
   Dim cDESTINO As String
   cDESTINO = PegPath(cGRUPO, cCHAVE)
-  Select Case cDESTINO
-  Case "LPT1", "LPT2", "LPT3", "IMPNET", "COM1", "COM2", "ARQ", "PRINTER"
-    Me.Destino = cDESTINO
-  Case "IMPNET"
+'LPT1,LPT2.... COM1,COM2...
+If Mid(cDESTINO, 1, 3) = "LPT" Or Mid(cDESTINO, 1, 3) = "COM" Or mvarDESTINO = "PRINTER" Then
+   Me.Destino = cDESTINO
+End If
+If cDESTINO = "IMPNET" Then
     Me.Destino = "IMPNET"
     Me.caminho = cDESTINO
-  End Select
+End If
 End Sub
 
 Public Sub gravafolha()
   Dim i As Integer
   For i = 0 To mvarnROW - 1
-    Select Case mvarDESTINO
-    Case "PRINTER"
+  
+    If mvarDESTINO = "PRINTER" Then
       Printer.Print mvaraLINHAS(i)
-    Case "LPT1", "LPT2", "LPT3", "IMPNET", "COM1", "COM2", "ARQ"
+    End If
+    'COM1,COM2... LPT1,LPT2...
+    If Mid(mvarDESTINO, 1, 3) = "LPT" Or Mid(mvarDESTINO, 1, 3) = "COM" Or mvarDESTINO = "IMPNET" Or mvarDESTINO = "ARQ" Then
       Print #mvarhandle, mvaraLINHAS(i)
-    End Select
+    End If
   Next
   If mvarDESTINO = "PRINTER" Then
     ''Printer.EndDoc
@@ -132,14 +137,16 @@ Public Property Get Handle() As Integer
 End Property
 
 Public Sub fechar()
-  Select Case mvarDESTINO
-  Case "ARQ"
+  If mvarDESTINO = "ARQ" Then
     Close (mvarhandle)
-  Case "LPT1", "LPT2", "LPT3", "IMPNET", "COM1", "COM2"
+  End If
+  'COM1,COM2... LPT1,LPT2...
+  If Mid(mvarDESTINO, 1, 3) = "LPT" Or Mid(mvarDESTINO, 1, 3) = "COM" Or mvarDESTINO = "IMPNET" Then
     Close #mvarhandle
-  Case "PRINTER"
+  End If
+  If mvarDESTINO = "PRINTER" Then
     ''Printer.EndDoc
-  End Select
+  End If
 End Sub
 Public Sub arqview()
   cARQRTF = mvarArquivo
@@ -186,23 +193,22 @@ Public Sub arqimpdos(Optional ByVal cDESTINO As String = ">PRN")
 End Sub
 
 Public Sub ABRIR()
+Dim cVAROPEN As String
   If mvarDESTINO = "ARQ" Then
     Open mvarArquivo For Output As #mvarhandle
   End If
-  If mvarDESTINO = "LPT1" Then
-    Open "LPT1:" For Output As #mvarhandle
+  If Mid(mvarDESTINO, 1, 3) = "LPT" Then
+    'LPT1,LPT2,LPT3...
+    cVAROPEN = mvarDESTINO + ":"
+    'Open "LPT1:" For Output As #mvarhandle
+    Open cVAROPEN For Output As #mvarhandle
   End If
-  If mvarDESTINO = "LPT2" Then
-    Open "LPT2:" For Output As #mvarhandle
-  End If
-  If mvarDESTINO = "LPT3" Then
-    Open "LPT3:" For Output As #mvarhandle
-  End If
-  If mvarDESTINO = "COM1" Then
-    Open "COM1:" For Output As #mvarhandle
-  End If
-  If mvarDESTINO = "COM2" Then
-    Open "COM2:" For Output As #mvarhandle
+  
+  If Mid(mvarDESTINO, 1, 3) = "COM" Then
+    'COM1,COM2,COM3...
+    cVAROPEN = mvarDESTINO + ":"
+    'Open "COM1:" For Output As #mvarhandle
+    Open cVAROPEN For Output As #mvarhandle
   End If
   If mvarDESTINO = "IMPNET" Then
     Open mvarcaminho For Output As #mvarhandle
