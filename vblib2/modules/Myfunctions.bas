@@ -296,7 +296,59 @@ Dim i
     End If
   End With
 End Function
-
+Public Function pegue2delimitado(ByVal ctmpline As String, ByVal cDelimIni As String, ByVal cdelifim As String) As Variant
+Dim nPOS As Integer
+Dim nPOS2 As Integer
+Dim nPOS3 As Integer
+Dim cVALOR As String
+Dim cINICIO As String
+nPOS = 0
+nPOS2 = 0
+nPOS3 = 0
+cVALOR = ""
+cINICIO = ""
+If Len(ctmpline) = 0 Then
+   pegue2delimitado = Array("", "")
+   Exit Function
+End If
+nPOS = InStr(ctmpline, cDelimIni)
+If Len(cdelifim) = 0 Then
+Else
+  If nPOS > 0 Then
+     nPOS2 = InStr(nPOS, ctmpline, cdelifim)
+  Else
+     nPOS2 = InStr(ctmpline, cdelifim)
+  End If
+End If
+  
+  If nPOS > 0 And nPOS2 = 0 Then
+    If nPOS > 1 Then
+      cINICIO = Mid(ctmpline, nPOS - 1)
+    End If
+    cVALOR = Mid(ctmpline, nPOS + Len(cDelimIni))
+    ctmpline = ""
+  End If
+  If nPOS > 0 And nPOS2 > 0 Then
+    cINICIO = Mid(ctmpline, 1, nPOS + Len(cDelimIni) - 1)
+    cVALOR = Mid(ctmpline, nPOS + Len(cDelimIni))
+    nPOS3 = InStr(cVALOR, cdelifim)
+    If nPOS3 > 1 Then
+       cVALOR = Mid(cVALOR, 1, nPOS3 - 1)
+    End If
+    
+    If Right(cVALOR, Len(cdelifim)) = cdelifim Then
+       cVALOR = Left(cVALOR, Len(cVALOR) - Len(cdelifim))
+    End If
+    ctmpline = Mid(ctmpline, nPOS2)
+    If Left(ctmpline, Len(cdelifim)) = cdelifim Then
+        ctmpline = Mid(ctmpline, Len(cdelifim) + 1)
+    End If
+    If ctmpline = cdelifim Then
+       ctmpline = ""
+    End If
+  End If
+pegue2delimitado = Array(cVALOR, ctmpline, cINICIO)
+End Function
 Public Function ComboChange(ByRef Combo1)
 Dim strPartial
 Dim i

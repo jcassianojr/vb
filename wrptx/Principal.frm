@@ -55,19 +55,10 @@ Private Sub MDIForm_Load()
   Dim ctmpline As String
 
   CenterFormToScreen Me
-  cmdline = Trim(Command())
+  
+  'cmdline = Trim(Command())
   
   
- 'Alert (MSSqlOdbcDriver())
-' Alert (MSSqlOledbProvider(1))
- 'Alert (MSSqlOledbProvider(2))
- 'Alert (MSSqlOledbProvider(3))
-'End
-  
- ' GeraConn ("localhost.3306.mariadb.citacao")
-'  TipoConn ("localhost.3306.mariadb.citacao")
- ' TipoConn ("localhost.3306.mysql.citacao")
- ' TipoConn ("[MARIADB]localhost.3306.mariadb.citacao")
   
   'comand line properties project
   
@@ -81,9 +72,6 @@ Private Sub MDIForm_Load()
   '  eLOCALIZA = "ITA00148"
   '  escRPT.Show vbModal, Me
   
-  ' chama o form lstview
-  ' lstview
-  '
     
   'C:\TEMP\TESTE.TXT
   ' abre as extensoes com o preview
@@ -119,47 +107,36 @@ Private Sub MDIForm_Load()
   zUSER = ""
   eLOCALIZA = ""
   cARQRTF = ""
+  
+  'aRETU = pegue2delimitado("where mes=MONTH(%1%) AND ano=YEAR(%1%)", "YEAR(", ")")
 
+  'aRETU = pegue2delimitado("where mes=MONTH(%1%) AND ano=YEAR(%1%)", "MONTH(", ")")
+
+'  ctmpline = SQLDIAPAR("where mes=MONTH(%1%) AND ano=YEAR(%1%)", "YEAR(", ")", "TOTEXT(", ",'YYYY')")
+ ' ctmpline = SQLDIAPAR(ctmpline, "MONTH(", ")", "TOTEXT(", ",'MM')")
+  'End
  
   'pegando o usuario
   ctmpline = cmdline
-  nPOS = InStr(ctmpline, "$")
-  nPOS2 = InStr(ctmpline, "%")
-  If nPOS > 0 And nPOS2 = 0 Then
-    zUSER = Mid(ctmpline, 2)
-    ctmpline = ""
-  End If
-  If nPOS > 0 And nPOS2 > 0 Then
-    zUSER = Mid(ctmpline, 2, nPOS2 - 2)
-    ctmpline = Mid(ctmpline, nPOS2)
-  End If
+  aRETU = pegue2delimitado(Command(), "$", "%")
+  zUSER = aRETU(0)
+  ctmpline = aRETU(1)
+
   'pegando o grupo
-  nPOS = InStr(ctmpline, "%")
-  nPOS2 = InStr(ctmpline, "#")
-  If nPOS > 0 And nPOS2 = 0 Then
-    zgrp = Mid(ctmpline, 2)
-    ctmpline = ""
-  End If
-  If nPOS > 0 And nPOS2 > 0 Then
-    zgrp = Mid(ctmpline, 2, nPOS2 - 2)
-    ctmpline = Mid(ctmpline, nPOS2)
-  End If
+  aRETU = pegue2delimitado(Command(), "%", "#")
+  zgrp = aRETU(0)
+  ctmpline = aRETU(1)
+  
    'pegando o subgrupo
-  nPOS = InStr(ctmpline, "#")
-  nPOS2 = InStr(ctmpline, "_")
-  If nPOS > 0 And nPOS2 = 0 Then
-    ZGRPSUB = Mid(ctmpline, 2)
-    ctmpline = ""
-  End If
-  If nPOS > 0 And nPOS2 > 0 Then
-    ZGRPSUB = Mid(ctmpline, 2, nPOS2 - 2)
-    ctmpline = Mid(ctmpline, nPOS2)
-  End If
+  aRETU = pegue2delimitado(Command(), "#", "_")
+  ZGRPSUB = aRETU(0)
+  ctmpline = aRETU(1)
+   
+   
   'pegando o relatorio
-  nPOS2 = InStr(ctmpline, "_")
-  If nPOS2 > 0 Then
-     eLOCALIZA = Mid(ctmpline, 2)
-  End If
+  aRETU = pegue2delimitado(Command(), "_", "")
+  eLOCALIZA = aRETU(0)
+  ctmpline = aRETU(1)
   
 
   zUSER = UCase(zUSER)

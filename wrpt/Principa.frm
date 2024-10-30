@@ -344,7 +344,6 @@ Private Sub MDIForm_Load()
 
   If gbSubClassMenu Then SubClassMenuXP
 
- ' Dim cLINHA As String
   Dim pICONES As String
   Dim nRETU
   Dim cmdline As String
@@ -352,7 +351,7 @@ Private Sub MDIForm_Load()
   Dim nPOS As Long
   Dim sSQL As String
   Dim cARQ As String
-'  Dim aRETU As Variant
+  Dim aRETU As Variant
   Dim DAODB As ADODB.Connection
   Dim DAORS As ADODB.Recordset
   Dim cARQICO As String
@@ -362,12 +361,6 @@ Private Sub MDIForm_Load()
   On Error GoTo ErrorHandler
 
   CenterFormToScreen Me
-
-  '    aDIREITOS = Array(True, True, True, True, True, True, True, True)
-  '    FrmRTf.Show vbModal
-
-  '   aDIREITOS = Array(True, True, True, True, True, True, True, True)
-  '   frmIniEditor.Show vbModal
 
 
   If App.PrevInstance Then
@@ -429,30 +422,26 @@ Private Sub MDIForm_Load()
   zEMPRESA = 1
   zMES = Month(Date)
   zANO = Year(Date)
-
   ZGRPSUB = ""
-
-  cmdline = Trim(Command())
+  
+  aRETU = pegue2delimitado(Trim(Command()), "__$", "%__")
+  
   bACESSO = False
-  If InStr(cmdline, "__$") > 0 And InStr(cmdline, "%__") > 0 Then
-    nPOS = InStr(cmdline, "__$")
-    cmdline = Mid(cmdline, 4)
-    nPOS = InStr(cmdline, "%__")
-    cmdline = UCase(Left(cmdline, Len(cmdline) - 3))
-    DAODB.ConnectionTimeout = 120
-    DAODB.Open GeracArq(dbuser, , False)
+  If Len(aRETU(0)) > 0 Then
+    cmdline = UCase(aRETU(0))
     sSQL = "SELECT IDUSUARIO,USUARIO,IDFOLHA,NOMEFOLHA FROM USUARIO WHERE USUARIO='" & cmdline & "'"
-    DAORS.Open sSQL, DAODB, adOpenForwardOnly, adLockReadOnly
-    If Not DAORS.EOF Then
-      zUSERID = FixNum(DAORS("IDUSUARIO"))
+    aRETU = PegSQL(dbuser, sSQL, 3, Array("IDUSUARIO", "IDFOLHA", "NOMEFOLHA"), _
+                   Array("NI", "NI", "C"), _
+                   Array(0, 0, ""))
+    If lRETU Then
       zUSER = cmdline
+      zUSERID = aRETU(0)
       zWRPTID = zUSERID
-      zIDFOLHA = FixNum(DAORS("IDFOLHA"))
-      zNOMEFOLHA = FixStr(DAORS("NOMEFOLHA"))
+      zIDFOLHA = aRETU(1)
+      zNOMEFOLHA = aRETU(2)
       bACESSO = True
     End If
-    DAORS.Close
-    DAODB.Close
+
   End If
 
   If Not bACESSO Then
@@ -468,9 +457,6 @@ Private Sub MDIForm_Load()
   Me.Caption = App.FileDescription & " Versao:" & App.Major & "." & App.Minor & "Usuário: " & zUSER
 
 
-  ''cLINHA = "MAIL $" & UCase(zUSER)
-  ' CLINHA = "$" & UCase(zUSER)
-  ' ShellEx "MAIL.EXE", , CLINHA, , , Me.hWnd
   ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hWnd
 
 
@@ -502,7 +488,7 @@ Private Sub MDIForm_Load()
 
 
 
-  StatusBar1.Panels(6).tEXT = zUSER
+  StatusBar1.Panels(6).Text = zUSER
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If

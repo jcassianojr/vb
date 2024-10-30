@@ -1,68 +1,5 @@
 Attribute VB_Name = "AdoLib"
-' sqlite funcao para ajustes foxpro equivalente
-'     {"LEFT(%1%,%2%)"     ,"SUBSTR(%1%,1,%2%)"},;
-'                      {"LOWER(%1%)"        ,"LOWER(%1%)"},;D
-'                      {"UPPER(%1%)"        ,"UPPER(%1%)"},;
-'                      {"DTOS(%1%)"        ,"strftime('%Y%m%d',%1%)"},;
-'                      {"DAY(%1%)"       ,"cast(strftime('%d',%1) as int)"},;
-'                      {"MONTH(%1%)"       ,"cast(strftime('%m',%1) as int)"},;
-'                      {"YEAR(%1%)"        ,"cast(strftime('%Y',%1) as int)"},;
-'                      {"TODAY()"          ,"CURRENT_DATE"},;
-'                      {"CHR(%1%)"       ,"CHAR(%1%)"},;
-'                      {"LEN(%1%)"       ,"LENGTH(%1%)"},;
-'                      {"REPL(%1%,%2%)"      ,"FORMAT('%.*c',%2%,%1%)"},;
-'                      {"ASC(%1%)"       ,"ASCII(%1%)"},;
-'                      {"TRIM(%1%)"        ,"RTRIM(%1%)"},;
-'                      {"ALLTRIM(%1%)"     ,"TRIM(%1%)"},;
-
-' oledb funcao para ajustes foxpro equivalentes
- '      {"STR(%1%,%2%)"        ,"{fn RIGHT({fn SPACE(%2%)}+{fn CONVERT({fn ROUND(%1%,0)},SQL_VARCHAR)},%2%)}"},;
- '                       {"SUBSTR(%1%,%2%,%3%)"    ,"{fn SUBSTRING(%1%,%2%,%3%)}"},;
- '                       {"DTOS(%1%)"        ,"{fn CONVERT({fn YEAR(%1%)}, SQL_VARCHAR)}+{fn RIGHT('0'+ {fn CONVERT({fn MONTH(%1%)},SQL_VARCHAR)},2)}+{fn RIGHT('0'+ {fn CONVERT({fn DAYOFMONTH(%1%)},SQL_VARCHAR)},2)}"},;
- '                       {"DAY(%1%)"         ,"{fn DAYOFMONTH(%1%)}"},;
- '                       {"MONTH(%1%)"       ,"{fn MONTH(%1%)}"},;
- '                       {"YEAR(%1%)"        ,"{fn YEAR(%1%)}"},;
- '                       {"UPPER(%1%)"       ,"{fn UCASE(%1%)}"},;
- '                       {"LOWER(%1%)"       ,"{fn LCASE(%1%)}"},;
- '                       {"LEN(%1%)"         ,"{fn LENGTH(%1%)}"},;
- '                       {"CHR(%1%)"         ,"{fn CHAR(%1%)}"},;
- '                       {"ASC(%1%)"         ,"{fn ASCII(%1%)}"},;
- '                       {"TODAY()"          ,"{fn CURDATE()}"},;
- '                       {"REPL(%1%,%2%)"      ,"{fn REPEAT(%1%,%2%)}"},;
- '                       {"TRIM(%1%)"        ,"{fn RTRIM(%1%)}"},;
- '                       {"ALLTRIM(%1%)"       ,"{fn LTRIM( {fn RTRIM(%1%) } )}"},;
- '                       {"LEFT(%1%,%2%)"      ,"{fn LEFT(%1%,%2%)}"},;
- '                       {"RIGHT(%1%)"       ,"{fn RIGHT(%1%)}"},;
-
-'MaxBufferSize=2048;MaxScanRows=8;PageTimeout=5;SafeTransactions=0;Threads=3;UserCommitSync=Yes
-'
-'
-'Driver={MySQL ODBC 8.0 ANSI Driver};Server="+cSERVERX+";Database="+cDATABASEX+";Uid="+CUSERX+";Pwd="+cPASSX+";"  //32 driver versao 8 //;Option=3;
-'
-'
-'"DRIVER={MariaDB ODBC 3.2 Driver};DATABASE="+cDATABASEX+";SERVER="+cSERVERX+";UID="+cUSERX+";PASSWORD="+cPASSX
-'
-'
-'
-'"DRIVER={PostgreSQL ANSI};Database="+cDATABASEX+";Server="+cSERVERX+";Uid="+cUSERX+";Pwd="+cPASSX
-'
-'
-'const JET_ENGINETYPE abaixo
-'    Set Engine = CreateObject("JRO.JetEngine")
-'    Engine.CompactDatabase "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & SourceDB, _
-     '      "Provider=Microsoft.Jet.OLEDB.4.0;Jet OLEDB:Engine Type=" & Format & ";Data Source=" & DestDB
-'myData.Properties("Update Criteria").value = adCriteriaKey
-  'OLEDB:Engine Type=5
-  'Unknown                      0
-  'Microsoft Jet 1.0            1
-  'Microsoft Jet 1.1            2
-  'Microsoft Jet 2.0            3
-  'Microsoft Jet 3.x(97)        4
-  'Microsoft Jet 4.x(2000)      5
-  
-
 Option Explicit
-Public Const cJetPro = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
 '
 'There is no provider named 'Microsoft.ACE.OLEDB.14.0' even though it's Access 2010 (aka version number 14) the provider
 'that should be used
@@ -72,12 +9,15 @@ Public Const cJetPro = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
 Public Const cJetA12 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source="
 Public Const cJetADV = "Provider=Advantage.OLEDB.1;Data Source="
 Public Const cJetExt = ";Extended Properties="
+Public Const cJetPro = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
+
 Public Const JET_ENGINETYPE_UNKNOWN = 0
 Public Const JET_ENGINETYPE_JET10 = 1
 Public Const JET_ENGINETYPE_JET11 = 2
 Public Const JET_ENGINETYPE_JET2X = 3
 Public Const JET_ENGINETYPE_JET3X = 4
 Public Const JET_ENGINETYPE_JET4X = 5
+Public Const Jet_EngineType_Ace12 = 6 'accdb
 Public Const JET_ENGINETYPE_DBASE3 = 10
 Public Const JET_ENGINETYPE_DBASE4 = 11
 Public Const JET_ENGINETYPE_DBASE5 = 12
@@ -99,6 +39,7 @@ Public Const JET_ENGINETYPE_HTML1X = 70
 
 '' rs.Open "SELECT * FROM [Salary$A1:B2] ", cn, adOpenDynamic, adLockOptimistic excel select
 ''                         pasta$faixa
+
 ''Geracarq Gera Um Conecao conforme tipo dbf->foxpro mdb->oledbacess ...
 '' convertendo [JETFOX],[JETMDB]...
 ''Geraconn gera um conecao conforme tipo dbf->[FOXPRO] mdb->[JETMDB]oledbacess ...
@@ -111,6 +52,142 @@ Public Function GeracArq(ByVal cARQ As String, Optional ByVal cTIPO As String = 
   aRETU = TipoConn(cARQ, , , lWRITE)
   GeracArq = aRETU(1)
 End Function
+Public Function SQLDIAPAR(ByVal cSQLCNV As String, cDelimIni As String, cDelimFim As String, cREPINI As String, cREPFIM As String) As String
+Dim aRETU
+SQLDIAPAR = cSQLCNV
+aRETU = pegue2delimitado(cSQLCNV, cDelimIni, cDelimFim)
+If Len(aRETU(0)) > 0 Then
+   SQLDIAPAR = Replace(aRETU(2), cDelimIni, "")
+   SQLDIAPAR = SQLDIAPAR & cREPINI & aRETU(0) & cREPFIM & aRETU(1)
+End If
+End Function
+Public Function SQLDialeto(ByVal cSQLCNV As String, cDIALETO As String) As String
+'SQLDialeto = SQLDIAPAR(SQLDialeto, "FUNCAO(", ")", "", "")
+     SQLDialeto = cSQLCNV
+     Select Case cDIALETO
+            Case "SQLITE"
+                 '"LOWER(%1%)"        ,"LOWER(%1%)"
+                 '"UPPER(%1%)"        ,"UPPER(%1%)"
+                 SQLDialeto = Replace(SQLDialeto, "CURRENTDATETIME", " current_timestamp ")
+                 SQLDialeto = Replace(SQLDialeto, "TODAY()", "CURRENT_DATE ")
+                 SQLDialeto = Replace(SQLDialeto, "CHR(", "CHAR(")
+                 SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
+                 SQLDialeto = Replace(SQLDialeto, "TRIM(", "RTRIM(")
+                 SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(")
+                 SQLDialeto = Replace(SQLDialeto, "LEN(", "LENGTH(")
+                 
+                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DTOS(", ")", "strftime('%Y%m%d',", ")")
+                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DAY((", ")", "cast(strftime('%d',", ") as int)")
+                 SQLDialeto = SQLDIAPAR(SQLDialeto, "MONTH(", ")", "cast(strftime('%m',", ") as int)")
+                 SQLDialeto = SQLDIAPAR(SQLDialeto, "YEAR(", ")", "cast(strftime('%Y'", ") as int)")
+                 
+                '  {"LEFT(%1%,%2%)"      ,"SUBSTR(%1%,1,%2%)"},;
+                '  {"REPL(%1%,%2%)"      ,"FORMAT('%.*c',%2%,%1%)"},;
+                
+            Case "MYSQL", "MARIADB"
+                 '"LOWER(%1%)"        ,"LOWER(%1%)"
+                 '"UPPER(%1%)"        ,"UPPER(%1%)"
+                 '"LEFT(%1%,%2%)"     ,"LEFT(%1%,%2%)"
+                 '"DAY(%1%)"         ,"DAY(%1%)"
+                 '"MONTH(%1%)"       ,"MONTH(%1%)"}
+                 '"YEAR(%1%)"        ,"YEAR(%1%)"
+                 SQLDialeto = Replace(SQLDialeto, "TODAY()", "SYSDATE()")
+                 SQLDialeto = Replace(SQLDialeto, "CHR(", "CHAR(")
+                 SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
+                 SQLDialeto = Replace(SQLDialeto, "TRIM(", "RTRIM(")
+                 SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(")
+                 SQLDialeto = Replace(SQLDialeto, "REPL(", "REPEAT(")
+                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DTOS(", ")", "DATE_FORMAT(", ",'%Y%m%d')")
+            Case "PGSQL", "POSTGRESQL"
+                 '"LOWER(%1%)"        ,"LOWER(%1%)"
+                 '"UPPER(%1%)"        ,"UPPER(%1%)"
+                 '"LEFT(%1%,%2%)"      ,"LEFT(%1%,%2%)"
+                 '"CHR(%1%)"         ,"CHR(%1%)"
+                 SQLDialeto = Replace(SQLDialeto, "TODAY()", "CURRENT_DATE ")
+                 SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
+                 SQLDialeto = Replace(SQLDialeto, "TRIM(", "RTRIM(")
+                 SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(")
+                 SQLDialeto = Replace(SQLDialeto, "LEN(", "LENGTH(")
+                 SQLDialeto = Replace(SQLDialeto, "DAY(", "EXTRACT('DAY' FROM ")
+                 SQLDialeto = Replace(SQLDialeto, "MONTH(", "EXTRACT('MONTH' FROM ")
+                 SQLDialeto = Replace(SQLDialeto, "YEAR(", "EXTRACT('YEAR' FROM ")
+                 SQLDialeto = Replace(SQLDialeto, "REPL(", "REPEAT(")
+            Case "MSSQL", "SQLSERVER"
+            
+                 SQLDialeto = Replace(SQLDialeto, "TODAY()", "GETDATE() ")
+                 SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
+                 SQLDialeto = Replace(SQLDialeto, "TRIM(", "RTRIM(")
+                 SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(")
+                 SQLDialeto = Replace(SQLDialeto, "REPL(", "REPLICATE(")
+                 SQLDialeto = Replace(SQLDialeto, "CHR(", "CHAR(")
+                 SQLDialeto = Replace(SQLDialeto, "SUBSTR(", "SUBSTRING(")
+                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DTOS(", ")", "CONVERT(char(8),", ",11)")
+                 '  {"STR(%1%,%2%,%3%)"      ,"STR(%1%,%2%,%3%)"},;
+                 '       {"STR(%1%,%2%)"       ,"STR(%1%,%2%,0)"},;
+                  '      {"IIF(%1%,%2%,%3%)"     ,"CASE WHEN %1% THEN %2% ELSE %3% END"},;
+            
+            Case "ODBC"
+        '       {"STR(%1%,%2%,%3%)"      ,"{fn RIGHT({fn SPACE(%2%)}+{fn CONVERT({fn ROUND(%1%,%3%)},SQL_VARCHAR)},%2%)}"},;
+        '                {"STR(%1%,%2%)"       ,"{fn RIGHT({fn SPACE(%2%)}+{fn CONVERT({fn ROUND(%1%,0)},SQL_VARCHAR)},%2%)}"},;
+         '               {"SUBSTR(%1%,%2%,%3%)"    ,"{fn SUBSTRING(%1%,%2%,%3%)}"},;
+          '              {"DTOS(%1%)"        ,"{fn CONVERT({fn YEAR(%1%)}, SQL_VARCHAR)}+{fn RIGHT('0'+ {fn CONVERT({fn MONTH(%1%)},SQL_VARCHAR)},2)}+{fn RIGHT('0'+ {fn CONVERT({fn DAYOFMONTH(%1%)},SQL_VARCHAR)},2)}"},;
+      '                  {"DAY(%1%)"         ,"{fn DAYOFMONTH(%1%)}"},;
+     '                   {"MONTH(%1%)"       ,"{fn MONTH(%1%)}"},;
+      '                  {"YEAR(%1%)"        ,"{fn YEAR(%1%)}"},;
+         '               {"UPPER(%1%)"       ,"{fn UCASE(%1%)}"},;
+         '               {"LOWER(%1%)"       ,"{fn LCASE(%1%)}"},;
+         '               {"LEFT(%1%,%2%)"      ,"{fn LEFT(%1%,%2%)}"},;
+          '              {"LEN(%1%)"         ,"{fn LENGTH(%1%)}"},;
+         '               {"CHR(%1%)"         ,"{fn CHAR(%1%)}"},;
+         '               {"ASC(%1%)"         ,"{fn ASCII(%1%)}"},;
+         '               {"TODAY()"          ,"{fn CURDATE()}"},;
+         '               {"REPL(%1%,%2%)"      ,"{fn REPEAT(%1%,%2%)}"},;
+         '               {"TRIM(%1%)"        ,"{fn RTRIM(%1%)}"},;
+         ''               {"ALLTRIM(%1%)"       ,"{fn LTRIM( {fn RTRIM(%1%) } )}"},;
+         '               {"RIGHT(%1%)"       ,"{fn RIGHT(%1%)}"},;
+            
+            Case "ADS", "ADVANTAGE"
+            Case "OLEDB"
+   '    {"STR(%1%,%2%,%3%)"      ,"{fn RIGHT({fn SPACE(%2%)}+{fn CONVERT({fn ROUND(%1%,%3%)},SQL_VARCHAR)},%2%)}"},;
+   '                     {"STR(%1%,%2%)"       ,"{fn RIGHT({fn SPACE(%2%)}+{fn CONVERT({fn ROUND(%1%,0)},SQL_VARCHAR)},%2%)}"},;
+   '                     {"SUBSTR(%1%,%2%,%3%)"    ,"{fn SUBSTRING(%1%,%2%,%3%)}"},;
+   '                     {"DTOS(%1%)"        ,"{fn CONVERT({fn YEAR(%1%)}, SQL_VARCHAR)}+{fn RIGHT('0'+ {fn CONVERT({fn MONTH(%1%)},SQL_VARCHAR)},2)}+{fn RIGHT('0'+ {fn CONVERT({fn DAYOFMONTH(%1%)},SQL_VARCHAR)},2)}"},;
+   '                     {"DAY(%1%)"         ,"{fn DAYOFMONTH(%1%)}"},;
+   '                     {"MONTH(%1%)"       ,"{fn MONTH(%1%)}"},;
+   '                     {"YEAR(%1%)"        ,"{fn YEAR(%1%)}"},;
+   '                     {"UPPER(%1%)"       ,"{fn UCASE(%1%)}"},;
+   '                     {"LOWER(%1%)"       ,"{fn LCASE(%1%)}"},;
+   '                     {"LEN(%1%)"         ,"{fn LENGTH(%1%)}"},;
+   '                     {"CHR(%1%)"         ,"{fn CHAR(%1%)}"},;
+   '                     {"ASC(%1%)"         ,"{fn ASCII(%1%)}"},;
+   '                     {"TODAY()"          ,"{fn CURDATE()}"},;
+   '                     {"REPL(%1%,%2%)"      ,"{fn REPEAT(%1%,%2%)}"},;
+   '                     {"TRIM(%1%)"        ,"{fn RTRIM(%1%)}"},;
+   '                     {"ALLTRIM(%1%)"       ,"{fn LTRIM( {fn RTRIM(%1%) } )}"},;
+   '                     {"LEFT(%1%,%2%)"      ,"{fn LEFT(%1%,%2%)}"},;
+   '                     {"RIGHT(%1%)"       ,"{fn RIGHT(%1%)}"},;
+            
+            Case "ORACLE", "OCI"
+                 SQLDialeto = Replace(SQLDialeto, "TODAY()", "SYSDATE ")
+                 SQLDialeto = Replace(SQLDialeto, "CHR(", "CHAR(")
+                 SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
+                 SQLDialeto = Replace(SQLDialeto, "TRIM(", "RTRIM(")
+                 SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "LTRIM(RTRIM(")
+                 SQLDialeto = Replace(SQLDialeto, "LEN(", "LENGTH(")
+                 SQLDialeto = Replace(SQLDialeto, "REPL(", "REPLICATE(")
+                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DTOS(", ")", "TO_CHAR(", ",'YYYYMMDD')")
+                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DAY(", ")", "TO_NUM(TO_CHAR(", ",'DD'))")
+                 SQLDialeto = SQLDIAPAR(SQLDialeto, "MONTH(", ")", "TO_NUM(TO_CHAR(", ",'MM'))")
+                 SQLDialeto = SQLDIAPAR(SQLDialeto, "YEAR(", ")", "TO_NUM(TO_CHAR(", "'YYYY'))")
+                 
+             '  {"LEFT(%1%,%2%)"     ,"SUBSTR(%1%,1,%2%)"},;
+            
+            Case "MDB", "ACCESS", "ACCDB"
+                 SQLDialeto = Replace(SQLDialeto, "CURRENTDATETIME", " now ")
+   
+     End Select
+End Function
+
 Public Function SQLPGSQLDOUBLEQUOTES(ByVal cSQL As String) As String
 cSQL = UCase(cSQL)
     cSQL = Replace(cSQL, "  ", " ")
@@ -1024,13 +1101,30 @@ End Function
 
 Public Function CriaMdbAccess(ByVal cARQORI As String, Optional ByVal lCRIA As Boolean = False, _
                             Optional ByVal nTIPO As Integer = 5) As Boolean
+                            
+    'OLEDB:Engine Type=5
+  'Unknown                      0
+  'Microsoft Jet 1.0            1
+  'Microsoft Jet 1.1            2
+  'Microsoft Jet 2.0            3
+  'Microsoft Jet 3.x(97)        4
+  'Microsoft Jet 4.x(2000)      5
+  'JetEngineType_Ace12 =        6         accdb
+                            
+                            
   Dim cat As New ADOX.Catalog
   On Error GoTo trataerro
   CriaMdbAccess = False
   If Not FileConnExist(cARQORI, True) Then
     If lCRIA Or MDG("Criar Arquivo " & cARQORI) Then
-      cat.Create "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & cARQORI & _
-                 ";Jet OLEDB:Engine Type=" & nTIPO & ";"
+      If nTIPO = 6 Or InStr(LCase(cARQORI), ".accdb") > 0 Then
+           cat.Create ("Provider=Microsoft.ACE.OLEDB.12;" & _
+                        "Data Source=" & cARQORI & ";" & _
+                        "JET OLEDB:Engine Type=6;")
+      Else
+          cat.Create "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & cARQORI & _
+                  ";Jet OLEDB:Engine Type=" & nTIPO & ";"
+      End If
       CriaMdbAccess = True
     End If
   End If

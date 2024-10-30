@@ -391,16 +391,15 @@ Private Sub MDIForm_Load()
   zMDBPATH = Dbname
   ZGRPSUB = ""
 
-
   zANO = Year(Date)
   zMES = Month(Date)
-  cmdline = Trim(Command())
+  zEMPRESA = 1
+  
+  aRETU = pegue2delimitado(Trim(Command()), "__$", "%__")
+  
   bACESSO = False
-  If InStr(cmdline, "__$") > 0 And InStr(cmdline, "%__") > 0 Then
-    nPOS = InStr(cmdline, "__$")
-    cmdline = Mid(cmdline, 4)
-    nPOS = InStr(cmdline, "%__")
-    cmdline = UCase(Left(cmdline, Len(cmdline) - 3))
+  If Len(aRETU(0)) > 0 Then
+    cmdline = UCase(aRETU(0))
     sSQL = "SELECT IDUSUARIO,USUARIO,IDFOLHA,NOMEFOLHA FROM USUARIO WHERE USUARIO='" & cmdline & "'"
     aRETU = PegSQL(dbuser, sSQL, 3, Array("IDUSUARIO", "IDFOLHA", "NOMEFOLHA"), _
                    Array("NI", "NI", "C"), _
@@ -412,9 +411,6 @@ Private Sub MDIForm_Load()
       zIDFOLHA = aRETU(1)
       zNOMEFOLHA = aRETU(2)
       bACESSO = True
-      zEMPRESA = 1
-      zANO = Year(Date)
-      zMES = Month(Date)
     End If
   End If
 
