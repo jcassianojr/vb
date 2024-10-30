@@ -1234,3 +1234,56 @@ Public Function MSSqlOledbProvider(Optional ByVal nTIPO As Integer = 1) As Strin
     MsgBox "No OLE DB providers found (not even the default that ships with Windows!)"
 End Function
 
+
+Public Function ado_GetCursorType(CursorType As Integer) As String
+
+    ' *******************
+    ' CursorTypeEnum
+    '
+    ' adOpenDynamic = 2
+    ' adOpenForwardOnly = 0
+    ' adOpenKeyset = 1
+    ' adOpenStatic = 3
+    ' adOpenUnspecified = -1
+    '*******************
+    
+    Select Case CursorType
+        Case 2
+            ado_GetCursorType = "Dynamic"
+        Case 0
+            ado_GetCursorType = "ForwardOnly"
+       Case 1
+            ado_GetCursorType = "Keyset"
+        Case 3
+            ado_GetCursorType = "Static"
+        Case -1
+            ado_GetCursorType = "Unspecified"
+    End Select
+End Function
+
+Function ado_GetLockType(LockType As Integer) As String
+    
+    '*******************
+    ' LockTypeEnum
+    '
+    ' adLockBatchOptimistic = 4
+    ' adLockOptimistic = 3
+    ' adLockPessimistic = 2
+    ' adLockReadOnly = 1
+    ' adLockUnspecified = -1
+    '*******************
+    
+    Select Case LockType
+        Case 4
+            ado_GetLockType = "BatchOptimistic"
+        Case 3
+            ado_GetLockType = "Optimistic"
+       Case 2
+            ado_GetLockType = "Pessimistic"
+        Case 1
+            ado_GetLockType = "ReadOnly "
+        Case -1
+            ado_GetLockType = "Unspecified"
+    End Select
+
+End Function
