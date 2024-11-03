@@ -27,7 +27,7 @@ Begin VB.Form FrmPreview
       Height          =   435
       Left            =   11520
       TabIndex        =   1
-      Top             =   840
+      Top             =   720
       Width           =   1215
       _ExtentX        =   2143
       _ExtentY        =   767
@@ -63,6 +63,46 @@ Begin VB.Form FrmPreview
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin XPControls.XPButton cmdSavehtml 
+      Height          =   375
+      Left            =   11520
+      TabIndex        =   3
+      Top             =   1560
+      Width           =   1215
+      _ExtentX        =   2143
+      _ExtentY        =   661
+      Picture         =   "FrmPreview.frx":0B34
+      Caption         =   "Html"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton cmdSaveTXT 
+      Height          =   375
+      Left            =   11520
+      TabIndex        =   4
+      Top             =   2040
+      Width           =   1215
+      _ExtentX        =   2143
+      _ExtentY        =   661
+      Picture         =   "FrmPreview.frx":10CE
+      Caption         =   "TXT"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
 End
 Attribute VB_Name = "FrmPreview"
 Attribute VB_GlobalNameSpace = False
@@ -75,6 +115,22 @@ Private Sub cmdimp_Click()
 OrdoWebView1.showPrintDialog
 End Sub
 
+Private Sub cmdSavehtml_Click()
+Dim sFileName As String
+Dim sFILTER As String
+  sFILTER = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, sFILTER, 1, "HTML", , , "Salvar HTML Como")
+  FileWrite sFileName, OrdoWebView1.GetInnerHTML
+End Sub
+
+Private Sub cmdSaveTXT_Click()
+Dim sFileName As String
+Dim sFILTER As String
+  sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, sFILTER, 1, "HTML", , , "Salvar TXT Como")
+  FileWrite sFileName, OrdoWebView1.GetInnerText
+End Sub
+
 Private Sub Encerrar_Click()
 Unload Me
 End Sub
@@ -84,8 +140,7 @@ Private Sub Form_Load()
 End Sub
 
 
-'OrdoWebView1.GetInnerHTML
-'OrdoWebView1.GetInnertxt
+
 
 
  

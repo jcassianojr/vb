@@ -755,7 +755,10 @@ Private Sub Command1_Click()
   Dim cFileName As String
   Dim cData As Variant
   Dim lINCLUI As Boolean
+  Dim cEXTENSAO As String
   On Error Resume Next
+  
+  
 
   cDRIVE = Left(Txtcaminho.Text, 1)
   ChDrive (cDRIVE)
@@ -784,10 +787,11 @@ Private Sub Command1_Click()
   For Each thisFile In allfiles
     cFileName = UCase(thisFile.Name)
     cData = Trim(thisFile.DateCreated)
-    If InStr(cFileName, ".TXT") > 0 Or InStr(cFileName, ".LST") > 0 Or Right(cFileName, 4) = ".PSR" _
-       Or Right(cFileName, 4) = ".QRP" Or Right(cFileName, 5) = ".HTML" _
-       Or Right(cFileName, 4) = ".PDF" Or Right(cFileName, 4) = ".ZIP" _
-       Or Right(cFileName, 4) = ".RTF" Or Right(cFileName, 4) = ".JPG" Then
+    'LST1 LST2
+    If IsExtensao(cFileName, "TXT") Or InStr(cFileName, ".LST") > 0 Or IsExtensao(cFileName, "PSR") _
+       Or IsExtensao(cFileName, "QRP") Or IsExtensao(cFileName, "HTML") _
+       Or IsExtensao(cFileName, "PDF") Or IsExtensao(cFileName, "ZIP") _
+       Or IsExtensao(cFileName, "RTF") Or IsExtensao(cFileName, "JPG") Then
       lINCLUI = True
       If nSUBWHERE = 1 Then
         If InStr(cFileName, UCase(cSUBWHERE)) = 0 Then
@@ -813,7 +817,7 @@ Private Sub Command10_Click()
   Grid.Col = 0
   cNOME = Trim(Grid)
   cORIGEM = Txtcaminho.Text & cNOME
-  If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
+  If IsExtensao(cNOME, "TXT") Or InStr(UCase(cNOME), ".LST") > 0 Then
     txttoRTF cORIGEM, TrocaExt(cORIGEM, "RTF")
     Command1_Click
   Else
@@ -858,7 +862,7 @@ Private Sub Command5_Click()
   Grid.Col = 0
   cNOME = Trim(Grid)
   cORIGEM = Txtcaminho.Text & cNOME
-  If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
+  If IsExtensao(cNOME, "TXT") Or InStr(UCase(cNOME), ".LST") > 0 Then
     txttohtml cORIGEM, TrocaExt(cORIGEM, "htm")
     Command1_Click
   Else
@@ -870,7 +874,7 @@ Private Sub Command6_Click()
   Dim cNOME As String
   Grid.Col = 0
   cNOME = Trim(Grid)
-  If InStr(UCase(cNOME), ".TXT") > 0 Or InStr(UCase(cNOME), ".LST") > 0 Then
+  If IsExtensao(cNOME, "TXT") Or InStr(UCase(cNOME), ".LST") > 0 Then
     ePASS01 = Txtcaminho.Text & cNOME
     formConvertToPDF.Show vbModal, Me
     Command1_Click
@@ -902,7 +906,7 @@ Private Sub Command9_Click()
   Grid.Col = 0
   cNOME = Trim(Grid)
   cORIGEM = Txtcaminho.Text & cNOME
-  If InStr(UCase(cNOME), ".ZIP") > 0 Then
+  If IsExtensao(cNOME, "ZIP") Then
     Alert ("Ja e um zip")
   Else
     cDESTINO = TrocaExt(cORIGEM, "ZIP")
