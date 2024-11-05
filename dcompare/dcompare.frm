@@ -278,8 +278,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Dim nERRO As Integer
-Private WithEvents c As cConverter
-Attribute c.VB_VarHelpID = -1
+Private WithEvents C As cConverter
+Attribute C.VB_VarHelpID = -1
 'Attribute C.VB_VarHelpID = -1
 
 Private Sub CmdCompactar_Click()
@@ -334,13 +334,13 @@ Dim cconn As String
   
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
   
-  Set c = New cConverter
-  c.ConvertDatabase aCnn, sCnn
+  Set C = New cConverter
+  C.ConvertDatabase aCnn, sCnn
   
   If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
   lProgress.Caption = "Table-Schemas created, Table-Data transferred!"
   
-  c.ConvertIndexes aCnn, sCnn
+  C.ConvertIndexes aCnn, sCnn
   
   If Err Then MsgBox Err.Description
   lProgress.Caption = "Index-Import finished!"
@@ -349,7 +349,7 @@ Dim cconn As String
   
   If Err Then MsgBox Err.Description: Err.Clear
 
-  Set c = Nothing
+  Set C = Nothing
 End Sub
 
 Private Sub CmdTeste_Click()
@@ -541,7 +541,7 @@ End Sub
 Private Sub listTables(dbNameWithPath As String)
 Dim dbConn As ADODB.Connection
 Dim rs As ADODB.Recordset
-
+Dim cTABLE As String
     Set dbConn = New ADODB.Connection
     
     dbConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" _
@@ -559,7 +559,10 @@ Dim rs As ADODB.Recordset
     Set rs = dbConn.OpenSchema(adSchemaTables, Array(Empty, Empty, Empty, "Table"))
     Do Until rs.EOF
        ' Me.lstTables.AddItem (rs!Table_Name)
-       Debug.Print rs!table_name
+       cTABLE = rs!Table_Name
+       Debug.Print cTABLE
+       ListFields dbNameWithPath, cTABLE
+       Listindexes dbNameWithPath, cTABLE
         rs.MoveNext
     Loop
     rs.Close
@@ -602,6 +605,36 @@ Dim cTIPO As String
     dbConn.Close
 End Sub
 
+
+Private Sub Listindexes(dbFileWithPath As String, dbTableName As String)
+Dim dbConn As ADODB.Connection
+Dim rs As ADODB.Recordset
+Dim cTIPO As String
+'Dim nLength
+
+    Set dbConn = New ADODB.Connection
+    
+    dbConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" _
+    & dbFileWithPath & ";" _
+    & "Persist Security Info=False"
+    dbConn.Open
+
+    Set rs = dbConn.OpenSchema(adSchemaIndexes, Array(Empty, Empty, Empty, Empty, dbTableName))
+    
+    Do Until rs.EOF
+        Debug.Print
+        '!TABLE_NAME, !INDEX_NAME, !PRIMARY_KEY
+        Debug.Print "Table         :" & rs("table_name")
+        Debug.Print "Indice        :" & rs("INDEX_NAME")
+        Debug.Print "Primaria      :" & rs("PRIMARY_KEY")
+        Debug.Print "Chave         :" & rs("COLUMN_NAME")
+        rs.MoveNext
+    Loop
+    rs.Close
+    dbConn.Close
+End Sub
+
+
 Private Sub Listindex(dbFileWithPath As String, dbTableName As String)
 Dim dbConn As ADODB.Connection
 Dim rs As ADODB.Recordset
@@ -621,7 +654,7 @@ Dim cCOLUNAS As String
     cINDEX = ""
     cCOLUNAS = ""
     Do Until rs.EOF
-       If UCase(rs.Fields!table_name) = UCase(dbTableName) Then
+       If UCase(rs.Fields!Table_Name) = UCase(dbTableName) Then
         Debug.Print
         Debug.Print "Table         :" & rs("table_name")
         Debug.Print "Indice        :" & rs("INDEX_NAME")
