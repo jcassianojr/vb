@@ -31,17 +31,17 @@ Right As Long
 Bottom As Long
 End Type
 Private Type POINTAPI
-x As Long
+X As Long
 Y As Long
 End Type
 Private Type BITMAP
-bmType As Long
-bmWidth As Long
-bmHeight As Long
-bmWidthBytes As Long
-bmPlanes As Integer
-bmBitsPixel As Integer
-bmBits As LongPtr
+BMType As Long
+BMWidth As Long
+BMHeight As Long
+BMWidthBytes As Long
+BMPlanes As Integer
+BMBitsPixel As Integer
+BMBits As LongPtr
 End Type
 Private Type SAFEARRAYBOUND
 cElements As Long
@@ -57,12 +57,12 @@ Bounds As SAFEARRAYBOUND
 End Type
 Private Type PICTDESC
 cbSizeOfStruct As Long
-picType As Long
+PicType As Long
 hImage As LongPtr
 Data1 As Long
 Data2 As Long
 End Type
-Private Type clsid
+Private Type CLSID
 Data1 As Long
 Data2 As Integer
 Data3 As Integer
@@ -85,9 +85,9 @@ End Type
 Private Const MAX_PATH As Long = 260
 Private Type WIN32_FIND_DATA
 dwFileAttributes As Long
-ftCreationTime As FILETIME
-ftLastAccessTime As FILETIME
-ftLastWriteTime As FILETIME
+FTCreationTime As FILETIME
+FTLastAccessTime As FILETIME
+FTLastWriteTime As FILETIME
 nFileSizeHigh As Long
 nFileSizeLow As Long
 dwReserved0 As Long
@@ -97,9 +97,9 @@ lpszAlternateFileName(0 To ((14 * 2) - 1)) As Byte
 End Type
 Private Type WIN32_FILE_ATTRIBUTE_DATA
 dwFileAttributes As Long
-ftCreationTime As FILETIME
-ftLastAccessTime As FILETIME
-ftLastWriteTime As FILETIME
+FTCreationTime As FILETIME
+FTLastAccessTime As FILETIME
+FTLastWriteTime As FILETIME
 nFileSizeHigh As Long
 nFileSizeLow As Long
 End Type
@@ -155,6 +155,7 @@ LFFaceName(0 To ((LF_FACESIZE * 2) - 1)) As Byte
 End Type
 #If VBA7 Then
 Private Declare PtrSafe Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByRef Destination As Any, ByRef Source As Any, ByVal Length As Long)
+Private Declare PtrSafe Sub GetSystemTime Lib "kernel32" (ByRef lpSystemTime As SYSTEMTIME)
 Private Declare PtrSafe Function ArrPtr Lib "msvbvm60.dll" Alias "VarPtr" (ByRef Var() As Any) As LongPtr
 Private Declare PtrSafe Function lstrlen Lib "kernel32" Alias "lstrlenW" (ByVal lpString As LongPtr) As Long
 Private Declare PtrSafe Function lstrcpy Lib "kernel32" Alias "lstrcpyW" (ByVal lpString1 As LongPtr, ByVal lpString2 As LongPtr) As LongPtr
@@ -165,10 +166,14 @@ Private Declare PtrSafe Function GetFileAttributes Lib "kernel32" Alias "GetFile
 Private Declare PtrSafe Function SetFileAttributes Lib "kernel32" Alias "SetFileAttributesW" (ByVal lpFileName As LongPtr, ByVal dwFileAttributes As Long) As Long
 Private Declare PtrSafe Function GetFileAttributesEx Lib "kernel32" Alias "GetFileAttributesExW" (ByVal lpFileName As LongPtr, ByVal fInfoLevelId As Long, ByVal lpFileInformation As LongPtr) As Long
 Private Declare PtrSafe Function FileTimeToLocalFileTime Lib "kernel32" (ByVal lpFileTime As LongPtr, ByVal lpLocalFileTime As LongPtr) As Long
+Private Declare PtrSafe Function LocalFileTimeToFileTime Lib "kernel32" (ByVal lpLocalFileTime As LongPtr, ByVal lpFileTime As LongPtr) As Long
 Private Declare PtrSafe Function FileTimeToSystemTime Lib "kernel32" (ByVal lpFileTime As LongPtr, ByVal lpSystemTime As LongPtr) As Long
+Private Declare PtrSafe Function SystemTimeToFileTime Lib "kernel32" (ByVal lpSystemTime As LongPtr, ByVal lpFileTime As LongPtr) As Long
 Private Declare PtrSafe Function FindFirstFile Lib "kernel32" Alias "FindFirstFileW" (ByVal lpFileName As LongPtr, ByRef lpFindFileData As WIN32_FIND_DATA) As LongPtr
 Private Declare PtrSafe Function FindNextFile Lib "kernel32" Alias "FindNextFileW" (ByVal hFindFile As LongPtr, ByRef lpFindFileData As WIN32_FIND_DATA) As Long
 Private Declare PtrSafe Function FindClose Lib "kernel32" (ByVal hFindFile As LongPtr) As Long
+Private Declare PtrSafe Function SystemTimeToTzSpecificLocalTime Lib "kernel32" (ByVal lpTimeZoneInformation As LongPtr, ByVal lpUniversalTime As LongPtr, ByVal lpLocalTime As LongPtr) As Long
+Private Declare PtrSafe Function TzSpecificLocalTimeToSystemTime Lib "kernel32" (ByVal lpTimeZoneInformation As LongPtr, ByVal lpLocalTime As LongPtr, ByVal lpUniversalTime As LongPtr) As Long
 Private Declare PtrSafe Function GetWindowRect Lib "user32" (ByVal hWnd As LongPtr, ByRef lpRect As RECT) As Long
 Private Declare PtrSafe Function MonitorFromWindow Lib "user32" (ByVal hWnd As LongPtr, ByVal dwFlags As Long) As LongPtr
 Private Declare PtrSafe Function GetMonitorInfo Lib "user32" Alias "GetMonitorInfoW" (ByVal hMonitor As LongPtr, ByRef lpMI As MONITORINFO) As Long
@@ -235,6 +240,7 @@ Private Declare PtrSafe Function WideCharToMultiByte Lib "kernel32" (ByVal CodeP
 Private Declare PtrSafe Function MultiByteToWideChar Lib "kernel32" (ByVal CodePage As Long, ByVal dwFlags As Long, ByVal lpMultiByteStr As LongPtr, ByVal cbMultiByte As Long, ByVal lpWideCharStr As LongPtr, ByVal cchWideChar As Long) As Long
 #Else
 Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByRef Destination As Any, ByRef Source As Any, ByVal Length As Long)
+Private Declare Sub GetSystemTime Lib "kernel32" (ByRef lpSystemTime As SYSTEMTIME)
 Private Declare Function ArrPtr Lib "msvbvm60.dll" Alias "VarPtr" (ByRef Var() As Any) As Long
 Private Declare Function lstrlen Lib "kernel32" Alias "lstrlenW" (ByVal lpString As Long) As Long
 Private Declare Function lstrcpy Lib "kernel32" Alias "lstrcpyW" (ByVal lpString1 As Long, ByVal lpString2 As Long) As Long
@@ -245,10 +251,14 @@ Private Declare Function GetFileAttributes Lib "kernel32" Alias "GetFileAttribut
 Private Declare Function SetFileAttributes Lib "kernel32" Alias "SetFileAttributesW" (ByVal lpFileName As Long, ByVal dwFileAttributes As Long) As Long
 Private Declare Function GetFileAttributesEx Lib "kernel32" Alias "GetFileAttributesExW" (ByVal lpFileName As Long, ByVal fInfoLevelId As Long, ByVal lpFileInformation As Long) As Long
 Private Declare Function FileTimeToLocalFileTime Lib "kernel32" (ByVal lpFileTime As Long, ByVal lpLocalFileTime As Long) As Long
+Private Declare Function LocalFileTimeToFileTime Lib "kernel32" (ByVal lpLocalFileTime As Long, ByVal lpFileTime As Long) As Long
 Private Declare Function FileTimeToSystemTime Lib "kernel32" (ByVal lpFileTime As Long, ByVal lpSystemTime As Long) As Long
+Private Declare Function SystemTimeToFileTime Lib "kernel32" (ByVal lpSystemTime As Long, ByVal lpFileTime As Long) As Long
 Private Declare Function FindFirstFile Lib "kernel32" Alias "FindFirstFileW" (ByVal lpFileName As Long, ByRef lpFindFileData As WIN32_FIND_DATA) As Long
 Private Declare Function FindNextFile Lib "kernel32" Alias "FindNextFileW" (ByVal hFindFile As Long, ByRef lpFindFileData As WIN32_FIND_DATA) As Long
 Private Declare Function FindClose Lib "kernel32" (ByVal hFindFile As Long) As Long
+Private Declare Function SystemTimeToTzSpecificLocalTime Lib "kernel32" (ByVal lpTimeZoneInformation As Long, ByVal lpUniversalTime As Long, ByVal lpLocalTime As Long) As Long
+Private Declare Function TzSpecificLocalTimeToSystemTime Lib "kernel32" (ByVal lpTimeZoneInformation As Long, ByVal lpLocalTime As Long, ByVal lpUniversalTime As Long) As Long
 Private Declare Function GetWindowRect Lib "user32" (ByVal hWnd As Long, ByRef lpRect As RECT) As Long
 Private Declare Function MonitorFromWindow Lib "user32" (ByVal hWnd As Long, ByVal dwFlags As Long) As Long
 Private Declare Function GetMonitorInfo Lib "user32" Alias "GetMonitorInfoW" (ByVal hMonitor As Long, ByRef lpMI As MONITORINFO) As Long
@@ -294,7 +304,7 @@ Private Declare Function GetDC Lib "user32" (ByVal hWnd As Long) As Long
 Private Declare Function GetDeviceCaps Lib "gdi32" (ByVal hDC As Long, ByVal nIndex As Long) As Long
 Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
 Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
-Private Declare Function GdiAlphaBlend Lib "gdi32" (ByVal hDestDC As Long, ByVal x As Long, ByVal Y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, ByVal XSrc As Long, ByVal YSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal BlendFunc As Long) As Long
+Private Declare Function GdiAlphaBlend Lib "gdi32" (ByVal hDestDC As Long, ByVal X As Long, ByVal Y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, ByVal XSrc As Long, ByVal YSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal BlendFunc As Long) As Long
 Private Declare Function DrawIconEx Lib "user32" (ByVal hDC As Long, ByVal XLeft As Long, ByVal YTop As Long, ByVal hIcon As Long, ByVal CXWidth As Long, ByVal CYWidth As Long, ByVal istepIfAniCur As Long, ByVal hbrFlickerFreeDraw As Long, ByVal diFlags As Long) As Long
 Private Declare Function FillRect Lib "user32" (ByVal hDC As Long, ByRef lpRect As RECT, ByVal hBrush As Long) As Long
 Private Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As Long
@@ -308,7 +318,7 @@ Private Declare Function GlobalUnlock Lib "kernel32" (ByVal hMem As Long) As Lon
 Private Declare Function GlobalSize Lib "kernel32" (ByVal hMem As Long) As Long
 Private Declare Function OleTranslateColor Lib "oleaut32" (ByVal Color As Long, ByVal hPal As Long, ByRef RGBResult As Long) As Long
 Private Declare Function OleLoadPicture Lib "oleaut32" (ByVal pStream As IUnknown, ByVal lSize As Long, ByVal fRunmode As Long, ByRef riid As Any, ByRef pIPicture As IPicture) As Long
-Private Declare Function OleLoadPicturePath Lib "oleaut32" (ByVal lpszPath As Long, ByVal pUnkCaller As Long, ByVal dwReserved As Long, ByVal ClrReserved As Long, ByRef riid As clsid, ByRef pIPicture As IPicture) As Long
+Private Declare Function OleLoadPicturePath Lib "oleaut32" (ByVal lpszPath As Long, ByVal pUnkCaller As Long, ByVal dwReserved As Long, ByVal ClrReserved As Long, ByRef riid As CLSID, ByRef pIPicture As IPicture) As Long
 Private Declare Function OleCreatePictureIndirect Lib "oleaut32" (ByRef pPictDesc As PICTDESC, ByRef riid As Any, ByVal fPictureOwnsHandle As Long, ByRef pIPicture As IPicture) As Long
 Private Declare Function CreateStreamOnHGlobal Lib "ole32" (ByVal hGlobal As Long, ByVal fDeleteOnRelease As Long, ByRef pStream As IUnknown) As Long
 Private Declare Function WideCharToMultiByte Lib "kernel32" (ByVal CodePage As Long, ByVal dwFlags As Long, ByVal lpWideCharStr As Long, ByVal cchWideChar As Long, ByVal lpMultiByteStr As Long, ByVal cbMultiByte As Long, ByVal lpDefaultChar As Long, ByVal lpUsedDefaultChar As Long) As Long
@@ -502,7 +512,7 @@ Dim FAD As WIN32_FILE_ATTRIBUTE_DATA
 If Left$(PathName, 2) = "\\" Then PathName = "UNC\" & Mid$(PathName, 3)
 If GetFileAttributesEx(StrPtr("\\?\" & PathName), 0, VarPtr(FAD)) <> 0 Then
     Dim FT As FILETIME, ST As SYSTEMTIME
-    FileTimeToLocalFileTime VarPtr(FAD.ftLastWriteTime), VarPtr(FT)
+    FileTimeToLocalFileTime VarPtr(FAD.FTLastWriteTime), VarPtr(FT)
     FileTimeToSystemTime VarPtr(FT), VarPtr(ST)
     FileDateTime = DateSerial(ST.wYear, ST.wMonth, ST.wDay) + TimeSerial(ST.wHour, ST.wMinute, ST.wSecond)
 Else
@@ -822,7 +832,7 @@ If hWndCursor <> NULL_PTR Then
 Else
     hWndCursor = hWndFallback
 End If
-If hWndCursor <> NULL_PTR Then SendMessage hWndCursor, WM_SETCURSOR, hWndCursor, ByVal MakeDWord(CLng(SendMessage(hWndCursor, WM_NCHITTEST, 0, ByVal Make_XY_lParam(P.x, P.Y))), WM_MOUSEMOVE)
+If hWndCursor <> NULL_PTR Then SendMessage hWndCursor, WM_SETCURSOR, hWndCursor, ByVal MakeDWord(CLng(SendMessage(hWndCursor, WM_NCHITTEST, 0, ByVal Make_XY_lParam(P.X, P.Y))), WM_MOUSEMOVE)
 End Sub
 
 Public Function OLEFontIsEqual(ByVal Font As StdFont, ByVal FontOther As StdFont) As Boolean
@@ -873,6 +883,133 @@ End Function
 
 Public Function GetDecimalChar() As String
 GetDecimalChar = Mid$(CStr(1.1), 2, 1)
+End Function
+
+Public Function CurrentUTC() As Date
+Dim ST As SYSTEMTIME
+GetSystemTime ST
+CurrentUTC = DateSerial(ST.wYear, ST.wMonth, ST.wDay) + TimeSerial(ST.wHour, ST.wMinute, ST.wSecond)
+End Function
+
+Public Function FromUTC(ByVal UTCDate As Date) As Date
+Dim UT As SYSTEMTIME, LT As SYSTEMTIME
+UT.wYear = VBA.Year(UTCDate)
+UT.wMonth = VBA.Month(UTCDate)
+UT.wDay = VBA.Day(UTCDate)
+UT.wDayOfWeek = VBA.Weekday(UTCDate)
+UT.wHour = VBA.Hour(UTCDate)
+UT.wMinute = VBA.Minute(UTCDate)
+UT.wSecond = VBA.Second(UTCDate)
+UT.wMilliseconds = 0
+If SystemTimeToTzSpecificLocalTime(NULL_PTR, VarPtr(UT), VarPtr(LT)) <> 0 Then
+    FromUTC = DateSerial(LT.wYear, LT.wMonth, LT.wDay) + TimeSerial(LT.wHour, LT.wMinute, LT.wSecond)
+Else
+    FromUTC = UTCDate
+End If
+End Function
+
+Public Function ToUTC(ByVal LocalDate As Date) As Date
+Dim LT As SYSTEMTIME, UT As SYSTEMTIME
+LT.wYear = VBA.Year(LocalDate)
+LT.wMonth = VBA.Month(LocalDate)
+LT.wDay = VBA.Day(LocalDate)
+LT.wDayOfWeek = VBA.Weekday(LocalDate)
+LT.wHour = VBA.Hour(LocalDate)
+LT.wMinute = VBA.Minute(LocalDate)
+LT.wSecond = VBA.Second(LocalDate)
+LT.wMilliseconds = 0
+If TzSpecificLocalTimeToSystemTime(NULL_PTR, VarPtr(LT), VarPtr(UT)) <> 0 Then
+    ToUTC = DateSerial(UT.wYear, UT.wMonth, UT.wDay) + TimeSerial(UT.wHour, UT.wMinute, UT.wSecond)
+Else
+    ToUTC = LocalDate
+End If
+End Function
+
+Public Function FromJulianDay(ByVal JulianDay As Double) As Date
+Const JULIANDAY_OFFSET As Double = 2415018.5
+Const MIN_DATE As Double = -657434# + JULIANDAY_OFFSET ' 01/01/0100
+Const MAX_DATE As Double = 2958465# + JULIANDAY_OFFSET ' 12/31/9999
+If JulianDay >= MIN_DATE And JulianDay <= MAX_DATE Then
+    If JulianDay >= JULIANDAY_OFFSET Then
+        FromJulianDay = CDate(JulianDay - JULIANDAY_OFFSET)
+    Else
+        Dim DateValue As Double, Temp As Double
+        DateValue = JulianDay - JULIANDAY_OFFSET
+        Temp = Int(DateValue)
+        FromJulianDay = CDate(Temp + (Temp - DateValue))
+    End If
+Else
+    Err.Raise 5
+End If
+End Function
+
+Public Function ToJulianDay(ByVal OADate As Date) As Double
+Const JULIANDAY_OFFSET As Double = 2415018.5
+If CDbl(OADate) >= 0# Then
+    ToJulianDay = CDbl(OADate) + JULIANDAY_OFFSET
+Else
+    Dim Temp As Double
+    Temp = -Int(-CDbl(OADate))
+    ToJulianDay = Temp - (CDbl(OADate) - Temp) + JULIANDAY_OFFSET
+End If
+End Function
+
+Public Function FromUnixEpoch(ByVal UnixEpoch As Double) As Date
+Const UNIXEPOCH_OFFSET As Double = 25569#
+If UnixEpoch >= -59010681600# And UnixEpoch <= 253402214400# Then
+    Dim DateValue As Double
+    DateValue = (Int(UnixEpoch) / 86400#) + UNIXEPOCH_OFFSET
+    If DateValue >= 0# Then
+        FromUnixEpoch = CDate(DateValue)
+    Else
+        Dim Temp As Double
+        Temp = Int(DateValue)
+        FromUnixEpoch = CDate(Temp + (Temp - DateValue))
+    End If
+Else
+    Err.Raise 5
+End If
+End Function
+
+Public Function ToUnixEpoch(ByVal OADate As Date) As Variant
+Const UNIXEPOCH_OFFSET As Double = 25569#
+Dim Dbl As Double
+If CDbl(OADate) >= 0# Then
+    Dbl = Int((CDbl(OADate) - UNIXEPOCH_OFFSET) * 86400#)
+Else
+    Dim Temp As Double
+    Temp = -Int(-CDbl(OADate))
+    Dbl = Int((Temp - (CDbl(OADate) - Temp) - UNIXEPOCH_OFFSET) * 86400#)
+End If
+If Dbl >= -2147483648# And Dbl <= 2147483647# Then ToUnixEpoch = CLng(Dbl) Else ToUnixEpoch = CDec(Dbl)
+End Function
+
+Public Function FromUnixEpochMs(ByVal UnixEpochMs As Double) As Date
+Const UNIXEPOCH_OFFSET As Double = 25569#
+If UnixEpochMs >= -59010681600# And UnixEpochMs <= 253402214400# Then
+    Dim DateValue As Double
+    DateValue = (UnixEpochMs / 86400#) + UNIXEPOCH_OFFSET
+    If DateValue >= 0# Then
+        FromUnixEpochMs = CDate(DateValue)
+    Else
+        Dim Temp As Double
+        Temp = Int(DateValue)
+        FromUnixEpochMs = CDate(Temp + (Temp - DateValue))
+    End If
+Else
+    Err.Raise 5
+End If
+End Function
+
+Public Function ToUnixEpochMs(ByVal OADate As Date) As Double
+Const UNIXEPOCH_OFFSET As Double = 25569#
+If CDbl(OADate) >= 0# Then
+    ToUnixEpochMs = (CDbl(OADate) - UNIXEPOCH_OFFSET) * 86400#
+Else
+    Dim Temp As Double
+    Temp = -Int(-CDbl(OADate))
+    ToUnixEpochMs = (Temp - (CDbl(OADate) - Temp) - UNIXEPOCH_OFFSET) * 86400#
+End If
 End Function
 
 Public Function IsFormLoaded(ByVal FormName As String) As Boolean
@@ -1138,11 +1275,11 @@ If CLng(lParam) And &H80000000 Then Get_Y_lParam = Get_Y_lParam Or &HFFFF8000
 End Function
 
 #If VBA7 Then
-Public Function Make_XY_lParam(ByVal x As Long, ByVal Y As Long) As LongPtr
+Public Function Make_XY_lParam(ByVal X As Long, ByVal Y As Long) As LongPtr
 #Else
-Public Function Make_XY_lParam(ByVal x As Long, ByVal Y As Long) As Long
+Public Function Make_XY_lParam(ByVal X As Long, ByVal Y As Long) As Long
 #End If
-Make_XY_lParam = (CLng(LoWord(Y)) * &H10000) Or (LoWord(x) And &HFFFF&)
+Make_XY_lParam = (CLng(LoWord(Y)) * &H10000) Or (LoWord(X) And &HFFFF&)
 End Function
 
 Public Function UTF32CodePoint_To_UTF16(ByVal CodePoint As Long) As String
@@ -1363,7 +1500,7 @@ End Function
 
 Public Function PictureFromByteStream(ByRef ByteStream As Variant) As IPictureDisp
 Const GMEM_MOVEABLE As Long = &H2
-Dim IID As clsid, Stream As IUnknown, NewPicture As IPicture
+Dim IID As CLSID, Stream As IUnknown, NewPicture As IPicture
 Dim B() As Byte, ByteCount As Long
 Dim hMem As LongPtr, lpMem As LongPtr
 With IID
@@ -1395,7 +1532,7 @@ End If
 End Function
 
 Public Function PictureFromPath(ByVal PathName As String) As IPictureDisp
-Dim IID As clsid, NewPicture As IPicture
+Dim IID As CLSID, NewPicture As IPicture
 With IID
 .Data1 = &H7BF80980
 .Data2 = &HBF32
@@ -1411,15 +1548,15 @@ If OleLoadPicturePath(StrPtr(PathName), NULL_PTR, 0, 0, IID, NewPicture) = 0 The
 End Function
 
 #If VBA7 Then
-Public Function PictureFromHandle(ByVal Handle As LongPtr, ByVal picType As VBRUN.PictureTypeConstants) As IPictureDisp
+Public Function PictureFromHandle(ByVal Handle As LongPtr, ByVal PicType As VBRUN.PictureTypeConstants) As IPictureDisp
 #Else
-Public Function PictureFromHandle(ByVal Handle As Long, ByVal picType As VBRUN.PictureTypeConstants) As IPictureDisp
+Public Function PictureFromHandle(ByVal Handle As Long, ByVal PicType As VBRUN.PictureTypeConstants) As IPictureDisp
 #End If
 If Handle = NULL_PTR Then Exit Function
-Dim PICD As PICTDESC, IID As clsid, NewPicture As IPicture
+Dim PICD As PICTDESC, IID As CLSID, NewPicture As IPicture
 With PICD
 .cbSizeOfStruct = LenB(PICD)
-.picType = picType
+.PicType = PicType
 .hImage = Handle
 End With
 With IID
@@ -1485,9 +1622,9 @@ End With
 End Function
 
 #If VBA7 Then
-Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As LongPtr, ByVal x As Long, ByVal Y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
+Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As LongPtr, ByVal X As Long, ByVal Y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
 #Else
-Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As Long, ByVal x As Long, ByVal Y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
+Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As Long, ByVal X As Long, ByVal Y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
 #End If
 ' RenderFlag is passed as a optional parameter ByRef.
 ' It is ignored for icons and metafiles.
@@ -1501,7 +1638,7 @@ If .Handle <> NULL_PTR Then
     If CY = 0 Then CY = CHimetricToPixel_Y(.Height)
     If .Type = vbPicTypeIcon Then
         Const DI_NORMAL As Long = &H3
-        DrawIconEx hDC, x, Y, .Handle, CX, CY, 0, NULL_PTR, DI_NORMAL
+        DrawIconEx hDC, X, Y, .Handle, CX, CY, 0, NULL_PTR, DI_NORMAL
     Else
         Dim HasAlpha As Boolean
         If .Type = vbPicTypeBitmap Then
@@ -1510,39 +1647,39 @@ If .Handle <> NULL_PTR Then
                 If (.Attributes And PICTURE_TRANSPARENT) = 0 Then ' Exclude GIF
                     Dim Bmp As BITMAP
                     GetObjectAPI .Handle, LenB(Bmp), Bmp
-                    If Bmp.bmBitsPixel = 32 And Bmp.bmBits <> NULL_PTR Then
+                    If Bmp.BMBitsPixel = 32 And Bmp.BMBits <> NULL_PTR Then
                         Dim SA1D As SAFEARRAY1D, B() As Byte
                         With SA1D
                         .cDims = 1
                         .fFeatures = 0
                         .cbElements = 1
                         .cLocks = 0
-                        .pvData = Bmp.bmBits
+                        .pvData = Bmp.BMBits
                         .Bounds.lLbound = 0
-                        .Bounds.cElements = Bmp.bmWidthBytes * Bmp.bmHeight
+                        .Bounds.cElements = Bmp.BMWidthBytes * Bmp.BMHeight
                         End With
                         CopyMemory ByVal ArrPtr(B()), VarPtr(SA1D), PTR_SIZE
-                        Dim i As Long, J As Long, Pos As Long
-                        For i = 0 To (Abs(Bmp.bmHeight) - 1)
-                            Pos = i * Bmp.bmWidthBytes
-                            For J = (Pos + 3) To (Pos + Bmp.bmWidthBytes - 1) Step 4
-                                If HasAlpha = False Then HasAlpha = (B(J) > 0)
+                        Dim i As Long, j As Long, Pos As Long
+                        For i = 0 To (Abs(Bmp.BMHeight) - 1)
+                            Pos = i * Bmp.BMWidthBytes
+                            For j = (Pos + 3) To (Pos + Bmp.BMWidthBytes - 1) Step 4
+                                If HasAlpha = False Then HasAlpha = (B(j) > 0)
                                 If HasAlpha = True Then
-                                    If B(J - 1) > B(J) Then
+                                    If B(j - 1) > B(j) Then
                                         HasAlpha = False
-                                        i = Abs(Bmp.bmHeight) - 1
+                                        i = Abs(Bmp.BMHeight) - 1
                                         Exit For
-                                    ElseIf B(J - 2) > B(J) Then
+                                    ElseIf B(j - 2) > B(j) Then
                                         HasAlpha = False
-                                        i = Abs(Bmp.bmHeight) - 1
+                                        i = Abs(Bmp.BMHeight) - 1
                                         Exit For
-                                    ElseIf B(J - 3) > B(J) Then
+                                    ElseIf B(j - 3) > B(j) Then
                                         HasAlpha = False
-                                        i = Abs(Bmp.bmHeight) - 1
+                                        i = Abs(Bmp.BMHeight) - 1
                                         Exit For
                                     End If
                                 End If
-                            Next J
+                            Next j
                         Next i
                         CopyMemory ByVal ArrPtr(B()), NULL_PTR, PTR_SIZE
                     End If
@@ -1556,16 +1693,16 @@ If .Handle <> NULL_PTR Then
             #If Win64 Then
             Dim hDC32 As Long
             CopyMemory ByVal VarPtr(hDC32), ByVal VarPtr(hDC), 4
-            .Render hDC32 Or 0&, x Or 0&, Y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
+            .Render hDC32 Or 0&, X Or 0&, Y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
             #Else
-            .Render hDC Or 0&, x Or 0&, Y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
+            .Render hDC Or 0&, X Or 0&, Y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
             #End If
         Else
             Dim hDCBmp As LongPtr, hBmpOld As LongPtr
             hDCBmp = CreateCompatibleDC(NULL_PTR)
             If hDCBmp <> NULL_PTR Then
                 hBmpOld = SelectObject(hDCBmp, .Handle)
-                GdiAlphaBlend hDC, x, Y, CX, CY, hDCBmp, 0, 0, CHimetricToPixel_X(.Width), CHimetricToPixel_Y(.Height), &H1FF0000
+                GdiAlphaBlend hDC, X, Y, CX, CY, hDCBmp, 0, 0, CHimetricToPixel_X(.Width), CHimetricToPixel_Y(.Height), &H1FF0000
                 SelectObject hDCBmp, hBmpOld
                 DeleteDC hDCBmp
             End If

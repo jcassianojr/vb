@@ -1003,11 +1003,11 @@ trataerro:
   SayErro "ADO_ISOPEN"
 
 End Function
-
-Public Function Nz( _
-       vValue As Variant, _
-       Optional vReplacementIfNull As Variant = 0 _
-     ) As Variant
+'existe na commom.bas
+'Public Function Nz( _
+'       vValue As Variant, _
+'       Optional vReplacementIfNull As Variant = 0 _
+'     ) As Variant
 ' Purpose: To replace a NULL with another value, if the value is Null.
 ' Example/Note:     sResult = Nz(rs.Fields(sFieldName), "") ' See MS Access VBA for Nz documentation
 ' !! Assumes/Pre: Nothing
@@ -1024,14 +1024,14 @@ Public Function Nz( _
 'Call TraceEnters(MODULE_NAME & "::Nz")
 'TraceDetail = "To replace a NULL with a string, if the value is Null."
 
-  If IsNull(vValue) Then
-    Nz = vReplacementIfNull
-  Else
-    Nz = vValue
-  End If
+ ' If IsNull(vValue) Then
+ '   Nz = vReplacementIfNull
+ ' Else
+ '   Nz = vValue
+ ' End If
 
-  Exit Function
-End Function
+  'Exit Function
+'End Function
 
 Public Function BytesToHexString(vaBytes As Variant) As String
 ' Purpose: To translate a Byte() Array into human readable Format
