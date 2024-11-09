@@ -171,7 +171,7 @@ Private Sub cmdReplace_Click()
         ''FrmRTf.RichTextbox1.SetFocus
         
     Else
-''        MsgBox "Substituiçao Concluida " & Chr(34) & txtFind.Text & Chr(34) & " with " & _
+''        MsgBox "SubstituiÃ§ao Concluida " & Chr(34) & txtFind.Text & Chr(34) & " with " & _
 ''                Chr(34) & txtReplaceWith.Text & Chr(34)
     End If
 
@@ -218,7 +218,7 @@ Dim textfound As Long
 ''    FrmRTf.RichTextbox1.SetFocus
     textfound = FrmRTf.RichTextbox1.Find(txtfind, nPOS, , findflags)
     If textfound = -1 Then
-        MsgBox vbCr & "Texto Não Foi Encontrado", vbInformation
+        MsgBox vbCr & "Texto NÃ£o Foi Encontrado", vbInformation
     End If
     ''FrmRTf.RichTextbox1.SetFocus
 End Sub

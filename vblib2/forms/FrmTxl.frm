@@ -626,7 +626,7 @@ End Sub
 Private Sub CmdEditar_Click()
   If IsExtensao(TxtArquivo.Text, "RTF") Or larqtxt Then
     cARQRTF = TxtArquivo.Text
-    FrmRTf.Show vbModal, Me
+    FrmRtfView.Show vbModal, Me
   End If
 End Sub
 
@@ -741,10 +741,10 @@ Private Sub CmdVisua_Click()
     End Select
   End If
   If IsExtensao(cARQRTF, "RTF") Then
-    RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
+    RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextbox1.Text = ""
+    RichTextBox1.Text = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -778,7 +778,7 @@ Public Sub MyPrintinghtml()
   Next
 End Sub
 Public Sub MyPrintingRTF()
-  PrinterEx.PrintRichTextBox RichTextbox1
+  PrinterEx.PrintRichTextBox RichTextBox1
 End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
@@ -1124,7 +1124,7 @@ End Function
 
 
 Private Sub XPButton1_Click()
-      ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Editor Interno")
+      ePASS01 = Array("Preview", "Imprimir Direto Impressora", "Preview Interno")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
       Select Case eRETU01
@@ -1133,6 +1133,6 @@ Private Sub XPButton1_Click()
          Case 1
            FrmPicturePrinter.Show vbModal, Me
          Case 2
-           FrmRTf.Show vbModal, Me
+           FrmRtfView.Show vbModal, Me
         End Select
 End Sub

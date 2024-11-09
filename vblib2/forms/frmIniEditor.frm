@@ -440,15 +440,15 @@ Private Sub AddKey(ParentNode As MSComctlLib.Node)
   Dim nodx As Node
 
 
-  A$ = InputBox("Entre nome para a chave [" & ParentNode.Text & "]:", sTitle, "")
+  A$ = InputBox("Entre nome para a chave [" & ParentNode.text & "]:", sTitle, "")
   If Len(A$) = 0 Then
     Exit Sub
   End If
 
   Set nodx = ParentNode.Child                  'First Child
   Do Until nodx Is Nothing
-    If nodx.Text = A$ Then
-      Alert "Ja existe a chave na seccao [" & ParentNode.Text & "].", sTitle
+    If nodx.text = A$ Then
+      Alert "Ja existe a chave na seccao [" & ParentNode.text & "].", sTitle
       Exit Sub
     End If
 
@@ -477,7 +477,7 @@ Private Sub AddSection()
 
   For Each nodx In TreeView1.Nodes
     If nodx.Parent Is Nothing Then
-      If nodx.Text = A$ Then
+      If nodx.text = A$ Then
         Alert "Ja existe esta Seccao.", sTitle
         Exit Sub
       End If
@@ -499,7 +499,7 @@ Private Sub ChangeKey(Node As MSComctlLib.Node)
   Dim nodx As Node
   Dim Arr() As String
 
-  Arr = Split(Node.Text, "=")
+  Arr = Split(Node.text, "=")
 
   A$ = InputBox("Digite o Nome da Chave:", sTitle, Arr(0))
   If Len(A$) = 0 Then
@@ -509,8 +509,8 @@ Private Sub ChangeKey(Node As MSComctlLib.Node)
   Set nodx = Node.Parent.Child                 'First Child
   Do Until nodx Is Nothing
     If nodx.Index <> Node.Index Then
-      If nodx.Text = A$ Then
-        Alert "Chave ja existe na seccao [" & Node.Parent.Text & "]."
+      If nodx.text = A$ Then
+        Alert "Chave ja existe na seccao [" & Node.Parent.text & "]."
         Exit Sub
       End If
     End If
@@ -523,7 +523,7 @@ Private Sub ChangeKey(Node As MSComctlLib.Node)
     Arr(0) = Arr(0) & "="
   End If
 
-  Node.Text = Join(Arr, "=")
+  Node.text = Join(Arr, "=")
   Node.Selected = True
   Node.EnsureVisible
 
@@ -538,7 +538,7 @@ Private Sub ChangeSection(Node As MSComctlLib.Node)
   Dim nodx As Node
 
 
-  A$ = InputBox("Digite o nome da nova Seção:", sTitle, Node.Text)
+  A$ = InputBox("Digite o nome da nova Seção:", sTitle, Node.text)
   If Len(A$) = 0 Then
     Exit Sub
   End If
@@ -546,7 +546,7 @@ Private Sub ChangeSection(Node As MSComctlLib.Node)
   For Each nodx In TreeView1.Nodes
     If nodx.Parent Is Nothing Then
       If nodx.Index <> Node.Index Then
-        If nodx.Text = A$ Then
+        If nodx.text = A$ Then
           Alert "Ja existe a seccao.", sTitle
           Exit Sub
         End If
@@ -554,7 +554,7 @@ Private Sub ChangeSection(Node As MSComctlLib.Node)
     End If
   Next
 
-  Node.Text = A$
+  Node.text = A$
   Node.Selected = True
   Node.EnsureVisible
 
@@ -714,7 +714,7 @@ Private Sub cmdKey_Click(Index As Integer)
         ePASS01 = Mid(nodx, nPOS + 1)
       End If
 
-      FrmPegdb.Show vbModal, Me
+    '  FrmPegdb.Show vbModal, Me
       If lRETU Then
         KeyValue nodx, eRETU01
       End If
@@ -776,7 +776,7 @@ Private Sub DeleteKey(Node As MSComctlLib.Node)
   Dim nodx As Node
 
 
-  If Not MDG("Apagar a Chave: " & Node.Text & "  in section [" & Node.Parent.Text & "]?") Then
+  If Not MDG("Apagar a Chave: " & Node.text & "  in section [" & Node.Parent.text & "]?") Then
     Exit Sub
   End If
 
@@ -797,7 +797,7 @@ Private Sub DeleteSection(Node As MSComctlLib.Node)
 
 
 
-  If Not MDG("Apagar a Seccao: " & Node.Text & "?") Then
+  If Not MDG("Apagar a Seccao: " & Node.text & "?") Then
     Exit Sub
   End If
 
@@ -889,7 +889,7 @@ Private Sub Form_Load()
     ShowSave False
   End If
 
-  StatusBar1.Panels(6).Text = zUSER
+  StatusBar1.Panels(6).text = zUSER
 
 End Sub
 
@@ -927,7 +927,7 @@ Private Sub KeyValue(Node As MSComctlLib.Node, Optional ByVal A As String = "")
   Dim sTxt As String
 
 
-  Arr = Split(Node.Text, "=")
+  Arr = Split(Node.text, "=")
   If UBound(Arr) > 0 Then
     sTxt = Arr(1)
   End If
@@ -946,7 +946,7 @@ Private Sub KeyValue(Node As MSComctlLib.Node, Optional ByVal A As String = "")
     Arr(1) = A
   End If
 
-  Node.Text = Join(Arr, "=")
+  Node.text = Join(Arr, "=")
   Node.Selected = True
   Node.EnsureVisible
 
@@ -980,10 +980,10 @@ Private Sub SaveIni()
 
   For Each nodx In TreeView1.Nodes
     If nodx.Parent Is Nothing Then
-      oIni.SaveSetting nodx.Text, "~TEMPORARY", "~TEMPORARY"
-      oIni.DeleteSetting nodx.Text, "~TEMPORARY"  'Leave empty section
+      oIni.SaveSetting nodx.text, "~TEMPORARY", "~TEMPORARY"
+      oIni.DeleteSetting nodx.text, "~TEMPORARY"  'Leave empty section
     Else
-      Arr = Split(nodx.Text, "=")
+      Arr = Split(nodx.text, "=")
       sKey = Arr(0)
       If UBound(Arr) > 0 Then
         sValue = Arr(1)
@@ -991,7 +991,7 @@ Private Sub SaveIni()
         sValue = ""
       End If
 
-      oIni.SaveSetting nodx.Parent.Text, sKey, sValue
+      oIni.SaveSetting nodx.Parent.text, sKey, sValue
     End If
   Next
 

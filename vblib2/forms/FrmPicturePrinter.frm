@@ -5,7 +5,7 @@ Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form FrmPicturePrinter 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Print a StdPicture centered within margins on a selected printer, paper, resolution, and orientation"
-   ClientHeight    =   5670
+   ClientHeight    =   6975
    ClientLeft      =   45
    ClientTop       =   345
    ClientWidth     =   11250
@@ -20,9 +20,30 @@ Begin VB.Form FrmPicturePrinter
    EndProperty
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   5670
+   ScaleHeight     =   6975
    ScaleWidth      =   11250
    StartUpPosition =   2  'CenterScreen
+   Begin VB.PictureBox Picture1 
+      AutoRedraw      =   -1  'True
+      Height          =   495
+      Left            =   10200
+      ScaleHeight     =   435
+      ScaleWidth      =   675
+      TabIndex        =   13
+      Top             =   2280
+      Visible         =   0   'False
+      Width           =   735
+   End
+   Begin VB.PictureBox Picture2 
+      AutoRedraw      =   -1  'True
+      Height          =   3735
+      Left            =   120
+      ScaleHeight     =   3675
+      ScaleWidth      =   4875
+      TabIndex        =   12
+      Top             =   2880
+      Width           =   4935
+   End
    Begin vbExtra.CommonDialogEx CommonDialogEx1 
       Left            =   9600
       Top             =   2280
@@ -121,13 +142,13 @@ Begin VB.Form FrmPicturePrinter
       EndProperty
    End
    Begin VBCCR18.RichTextBox RichTextbox1 
-      Height          =   2655
-      Left            =   120
+      Height          =   3615
+      Left            =   240
       TabIndex        =   11
       Top             =   2880
       Width           =   9135
       _ExtentX        =   16113
-      _ExtentY        =   4683
+      _ExtentY        =   6376
       MultiLine       =   -1  'True
       ScrollBars      =   3
       TextRTF         =   "FrmPicturePrinter.frx":0B34
@@ -328,8 +349,14 @@ Private Sub Form_Load()
     
   'Just load up a sample image.  Could just as easily be
   'from a WIA scan or something else.
+  Picture2.Visible = False
   If cEXTENSAO = "JPG" Then
-    Set Pic = LoadPicture(cARQRTF)
+    If FileExists(cARQRTF) Then
+      Set Pic = LoadPicture(cARQRTF)
+      Picture2.Visible = True
+      Picture1.Picture = LoadPicture(cARQRTF)
+      StretchSourcePictureFromPicture Picture1, Picture2
+    End If
   End If
   
   larqtxt = False

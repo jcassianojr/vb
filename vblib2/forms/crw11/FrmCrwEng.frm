@@ -526,7 +526,7 @@ End Sub
 Private Sub CmdEditar_Click()
   If IsExtensao(TxtArquivo.Text, "RTF") Or IsExtensao(TxtArquivo.Text, "TXT") Then
     cARQRTF = TxtArquivo
-    FrmRTf.Show
+    FrmRtfView.Show
   End If
 
 End Sub

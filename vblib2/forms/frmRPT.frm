@@ -100,6 +100,7 @@ Begin VB.Form FrmRpt
       Width           =   9615
       _ExtentX        =   16960
       _ExtentY        =   6165
+      ControlJustAdded=   0   'False
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -580,6 +581,7 @@ Begin VB.Form FrmRpt
          EndProperty
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "SQL"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -599,6 +601,7 @@ Begin VB.Form FrmRpt
          Width           =   735
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Obs:"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -618,6 +621,7 @@ Begin VB.Form FrmRpt
          Width           =   525
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Título"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -637,6 +641,7 @@ Begin VB.Form FrmRpt
          Width           =   585
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Mensagem"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -656,6 +661,7 @@ Begin VB.Form FrmRpt
          Width           =   975
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Abrir Com"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -675,6 +681,7 @@ Begin VB.Form FrmRpt
          Width           =   855
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Arquivo"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -694,6 +701,7 @@ Begin VB.Form FrmRpt
          Width           =   705
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Prefiltro"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -713,6 +721,7 @@ Begin VB.Form FrmRpt
          Width           =   855
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Acumulado"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -732,6 +741,7 @@ Begin VB.Form FrmRpt
          Width           =   945
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Fechado"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -751,6 +761,7 @@ Begin VB.Form FrmRpt
          Width           =   735
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Baixa"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -770,6 +781,7 @@ Begin VB.Form FrmRpt
          Width           =   495
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Atual"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -789,6 +801,7 @@ Begin VB.Form FrmRpt
          Width           =   555
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Tabela"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -808,6 +821,7 @@ Begin VB.Form FrmRpt
          Width           =   585
       End
       Begin VB.Label lblLabels 
+         BackStyle       =   0  'Transparent
          Caption         =   "Alias"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -828,6 +842,7 @@ Begin VB.Form FrmRpt
       End
       Begin VB.Label lblLabels 
          Alignment       =   2  'Center
+         BackStyle       =   0  'Transparent
          Caption         =   "Arquivo Caminhos Parâmetros"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -1103,7 +1118,7 @@ End Sub
 Private Sub escarq_Click(Index As Integer)
   Index = Index + 18
   ePASS01 = text(Index)
-  FrmPegdb.Show vbModal, Me
+ ' FrmPegdb.Show vbModal, Me
   If lRETU Then
     text(Index) = eRETU01
   End If

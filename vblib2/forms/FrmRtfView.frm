@@ -25,8 +25,8 @@ Begin VB.Form FrmRtfView
       TextRTF         =   "FrmRtfView.frx":0000
    End
    Begin BSPrinter.PrintPreview PrintPreview1 
-      Left            =   12240
-      Top             =   3240
+      Left            =   12480
+      Top             =   5040
       _ExtentX        =   1191
       _ExtentY        =   1191
    End
@@ -90,6 +90,90 @@ Begin VB.Form FrmRtfView
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin XPControls.XPButton SalvarComoTxt 
+      Height          =   375
+      Left            =   11880
+      TabIndex        =   4
+      TabStop         =   0   'False
+      Top             =   2280
+      Width           =   795
+      _ExtentX        =   1402
+      _ExtentY        =   661
+      Picture         =   "FrmRtfView.frx":1234
+      Caption         =   "TXT"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton SalvarComoHTML 
+      Height          =   375
+      Left            =   11880
+      TabIndex        =   5
+      TabStop         =   0   'False
+      Top             =   2760
+      Width           =   855
+      _ExtentX        =   1508
+      _ExtentY        =   661
+      Picture         =   "FrmRtfView.frx":15CE
+      Caption         =   "Html"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton CmdSalvarComoPdf 
+      Height          =   375
+      Left            =   11880
+      TabIndex        =   6
+      TabStop         =   0   'False
+      Top             =   3240
+      Width           =   795
+      _ExtentX        =   1402
+      _ExtentY        =   661
+      Picture         =   "FrmRtfView.frx":1B68
+      Caption         =   "PDF"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton SalvarComoRTF 
+      Height          =   375
+      Left            =   11880
+      TabIndex        =   7
+      TabStop         =   0   'False
+      Top             =   3720
+      Width           =   795
+      _ExtentX        =   1402
+      _ExtentY        =   661
+      Picture         =   "FrmRtfView.frx":1F02
+      Caption         =   "RTF"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
 End
 Attribute VB_Name = "FrmRtfView"
 Attribute VB_GlobalNameSpace = False
@@ -104,10 +188,27 @@ Private Sub cmdimp_Click()
 End Sub
 
 
+Private Sub CmdSalvarComoPdf_Click()
+  Dim sFILTER As String
+  Dim sFileName As String
+  Dim stmp As String
+  stmp = TrocaExt(cARQRTF, "PDF")
+  sFILTER = "Arquivos de Textos (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, sFILTER, 1, "PDF", stmp, stmp, "Salvar PDF Como")
+  If Not Len(sFileName) = 0 Then
+    stmp = TrocaExt(sFileName, "TMP")
+    RichTextbox1.SaveFile stmp, RtfLoadSaveFormatText
+    ePASS01 = stmp
+    formConvertToPDF.Show vbModal, Me
+    DeleteFile stmp  'Kill stmp
+  End If
+End Sub
+
 Private Sub Form_Load()
   larqtxt = False
   
-  If IsExtensao(cARQRTF, "TXT") Or IsExtensao(cARQRTF, "ZPL ") Or IsExtensao(cARQRTF, "MAN") Then
+  If IsExtensao(cARQRTF, "TXT") Or IsExtensao(cARQRTF, "ZPL ") Or IsExtensao(cARQRTF, "MAN") _
+     Or IsExtensao(cARQRTF, "INI") Then
     larqtxt = True
   End If
   If InStr(UCase(cARQRTF), ".LST") > 0 Then    ''.LST .LTS2 .LTS3... pode ser sequencial usando instr inves isextensao
@@ -144,4 +245,48 @@ End Sub
 
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
   PrintPreview1.PrintRichTextBox RichTextbox1
+End Sub
+
+Private Sub SalvarComoHTML_Click()
+ Dim sFILTER As String
+  Dim sFileName As String
+  Dim stmp As String
+  stmp = TrocaExt(cARQRTF, "HTML")
+  sFILTER = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, sFILTER, 1, "HTML", stmp, stmp, "Salvar HTML Como")
+  If Not Len(sFileName) = 0 Then
+    If FileConnExist(sFileName) Then
+      If MDG("Arquivo ja Existe Sobrepor") Then
+        DeleteFile sFileName  'Kill sFILENAME
+        Exit Sub
+      End If
+    End If
+    stmp = TrocaExt(sFileName, "TMP")
+    RichTextbox1.SaveFile stmp, RtfLoadSaveFormatText
+    ePASS01 = stmp
+    txttohtml stmp, sFileName
+    DeleteFile stmp  'Kill stmp
+  End If
+End Sub
+
+Private Sub SalvarComoRTF_Click()
+Dim sFILTER As String
+  Dim sFileName As String
+  sFILTER = "Arquivos de Textos (*.RTF)" & vbNullChar & "*.RTF" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, sFILTER, 1, "RTF", cARQRTF, cARQRTF, "Salvar RTF Como")
+  If Not Len(sFileName) = 0 Then
+    RichTextbox1.SaveFile sFileName, RtfLoadSaveFormatRTF
+    RichTextbox1.SetFocus
+  End If
+End Sub
+
+Private Sub SalvarComoTxt_Click()
+Dim sFILTER As String
+  Dim sFileName As String
+  sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, sFILTER, 1, "TXT", cARQRTF, cARQRTF, "Salvar TXT Como")
+  If Not Len(sFileName) = 0 Then
+    RichTextbox1.SaveFile sFileName, RtfLoadSaveFormatText
+    RichTextbox1.SetFocus
+  End If
 End Sub

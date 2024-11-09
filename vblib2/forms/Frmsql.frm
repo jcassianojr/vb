@@ -22,7 +22,7 @@ Begin VB.Form FrmSql
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   3960
-      TabIndex        =   36
+      TabIndex        =   35
       TabStop         =   0   'False
       Top             =   5520
       Visible         =   0   'False
@@ -52,7 +52,7 @@ Begin VB.Form FrmSql
       Begin XPControls.XPButton CmdVisua 
          Height          =   435
          Left            =   120
-         TabIndex        =   26
+         TabIndex        =   25
          Top             =   120
          Width           =   1275
          _ExtentX        =   2249
@@ -72,7 +72,7 @@ Begin VB.Form FrmSql
       Begin XPControls.XPButton cmdimp 
          Height          =   435
          Left            =   120
-         TabIndex        =   27
+         TabIndex        =   26
          Top             =   600
          Width           =   1275
          _ExtentX        =   2249
@@ -92,7 +92,7 @@ Begin VB.Form FrmSql
       Begin XPControls.XPButton Encerrar 
          Height          =   435
          Left            =   1440
-         TabIndex        =   28
+         TabIndex        =   27
          Top             =   120
          Width           =   1455
          _ExtentX        =   2566
@@ -112,7 +112,7 @@ Begin VB.Form FrmSql
       Begin XPControls.XPButton CmdConfImp 
          Height          =   435
          Left            =   1440
-         TabIndex        =   29
+         TabIndex        =   28
          Top             =   600
          Width           =   1455
          _ExtentX        =   2566
@@ -385,37 +385,16 @@ Begin VB.Form FrmSql
             Strikethrough   =   0   'False
          EndProperty
       End
-      Begin XPControls.XPButton XPButton1 
-         Height          =   375
-         Left            =   5880
-         TabIndex        =   22
-         Top             =   240
-         Width           =   495
-         _ExtentX        =   873
-         _ExtentY        =   661
-         Picture         =   "Frmsql.frx":35AC
-         Caption         =   ""
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         PictureAlignment=   1
-      End
       Begin XPControls.XPButton cmdexportar 
          Height          =   375
          Index           =   5
          Left            =   5280
-         TabIndex        =   23
+         TabIndex        =   22
          Top             =   720
          Width           =   795
          _ExtentX        =   1402
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":3946
+         Picture         =   "Frmsql.frx":35AC
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -431,12 +410,12 @@ Begin VB.Form FrmSql
          Height          =   375
          Index           =   6
          Left            =   1320
-         TabIndex        =   25
+         TabIndex        =   24
          Top             =   720
          Width           =   1095
          _ExtentX        =   1931
          _ExtentY        =   661
-         Picture         =   "Frmsql.frx":3CE0
+         Picture         =   "Frmsql.frx":3946
          Caption         =   "xls(TR)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -452,7 +431,7 @@ Begin VB.Form FrmSql
          Height          =   375
          Index           =   6
          Left            =   5160
-         TabIndex        =   35
+         TabIndex        =   34
          Top             =   240
          Width           =   555
          _ExtentX        =   979
@@ -554,7 +533,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPText sql 
       Height          =   1245
       Left            =   120
-      TabIndex        =   24
+      TabIndex        =   23
       Top             =   3720
       Width           =   10095
       _ExtentX        =   17806
@@ -574,12 +553,12 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdOrdem 
       Height          =   435
       Left            =   9000
-      TabIndex        =   30
+      TabIndex        =   29
       Top             =   3120
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "Frmsql.frx":427A
+      Picture         =   "Frmsql.frx":3EE0
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -594,12 +573,12 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdFiltro 
       Height          =   435
       Left            =   9000
-      TabIndex        =   31
+      TabIndex        =   30
       Top             =   2640
       Width           =   1275
       _ExtentX        =   2249
       _ExtentY        =   767
-      Picture         =   "Frmsql.frx":4814
+      Picture         =   "Frmsql.frx":447A
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -614,13 +593,13 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdEditar 
       Height          =   315
       Left            =   120
-      TabIndex        =   33
+      TabIndex        =   32
       TabStop         =   0   'False
       Top             =   2280
       Width           =   975
       _ExtentX        =   1720
       _ExtentY        =   556
-      Picture         =   "Frmsql.frx":4DAE
+      Picture         =   "Frmsql.frx":4A14
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -635,13 +614,13 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   315
       Left            =   1200
-      TabIndex        =   32
+      TabIndex        =   31
       TabStop         =   0   'False
       Top             =   2280
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   556
-      Picture         =   "Frmsql.frx":5348
+      Picture         =   "Frmsql.frx":4FAE
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -656,7 +635,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdShell 
       Height          =   315
       Left            =   2640
-      TabIndex        =   34
+      TabIndex        =   33
       Top             =   2280
       Width           =   375
       _ExtentX        =   661
@@ -691,7 +670,7 @@ Const nFORMID = 1180
 Const cFORMID = "Imprimir Relatorios sql"
 Option Explicit
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.text
+  cARQRTF = TxtArquivo.Text
   If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hWnd))
   End If
@@ -704,27 +683,27 @@ End Sub
 Private Sub cmdDeli_Click(Index As Integer)
   Select Case Index
   Case 0
-    TxtDeli.text = " "
+    TxtDeli.Text = " "
   Case 1
-    TxtDeli.text = "|"
+    TxtDeli.Text = "|"
   Case 2
-    TxtDeli.text = ","
+    TxtDeli.Text = ","
   Case 3
-    TxtDeli.text = ";"
+    TxtDeli.Text = ";"
   Case 4
-    TxtDeli.text = "#"
+    TxtDeli.Text = "#"
   Case 5
-    TxtDeli.text = "~"
+    TxtDeli.Text = "~"
   Case 5
-    TxtDeli.text = "<tab>"
+    TxtDeli.Text = "<tab>"
 
   End Select
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.text, "RTF") Or IsExtensao(TxtArquivo.text, "TXT") Then
-    cARQRTF = TxtArquivo.text
-    FrmRTf.Show vbModal, Me
+  If IsExtensao(TxtArquivo.Text, "RTF") Or IsExtensao(TxtArquivo.Text, "TXT") Then
+    cARQRTF = TxtArquivo.Text
+    FrmRtfView.Show vbModal, Me
   End If
 End Sub
 
@@ -745,14 +724,14 @@ Private Sub cmdexportar_Click(Index As Integer)
   cLIn = Chr(13) + Chr(10)
 
 
-  cARQUIVO = tabela.text
-  gsRecordSource = tabela.text
+  cARQUIVO = tabela.Text
+  gsRecordSource = tabela.Text
   cEXT = "TXT"
   If Len(cARQUIVO) = 0 Then
     Alert ("Escolha Uma Tabela Antes")
     Exit Sub
   End If
-  cSQL = CStr(sql.text)
+  cSQL = CStr(sql.Text)
   Select Case Index
   Case 0                                       'ok
     cEXT = "XML"
@@ -771,7 +750,7 @@ Private Sub cmdexportar_Click(Index As Integer)
 
   sFILTER = "Formato (*." & cEXT & ")" & vbNullChar & "*." & cEXT
   cARQUIVO = FileSave(Me, sFILTER, 1, cEXT, , App.Path, "Salvar " & cEXT & " Como")
-  TxtArquivo.text = cARQUIVO
+  TxtArquivo.Text = cARQUIVO
 
   If Len(cARQUIVO) = 0 Then
     Alert ("Nome Nao Definido")
@@ -780,7 +759,7 @@ Private Sub cmdexportar_Click(Index As Integer)
 
 
 
-  cconn = GeracArq(arquivo.text, , False)
+  cconn = GeracArq(arquivo.Text, , False)
 
 
   Set DBEXP = New ADODB.Connection
@@ -817,11 +796,11 @@ Private Sub cmdexportar_Click(Index As Integer)
     If Index = 1 Then
       Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
     Else
-      If TxtDeli.text = "<tab>" Then
+      If TxtDeli.Text = "<tab>" Then
         Print #nDESTINO, RsExp.GetString(adClipString, -1, Chr(9), Chr(13) + Chr(10), vbNullString)
       Else
         ''o usuario pode digitar o campo txtdeli fixstr ajustas para espaco em caso de vazio
-        Print #nDESTINO, RsExp.GetString(adClipString, -1, FixStr(TxtDeli.text, " "), Chr(13) + Chr(10), vbNullString)
+        Print #nDESTINO, RsExp.GetString(adClipString, -1, FixStr(TxtDeli.Text, " "), Chr(13) + Chr(10), vbNullString)
       End If
     End If
 
@@ -873,12 +852,12 @@ Private Sub CmdFiltro_Click()
     filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
     If lRETU And Len(aRELCFG(15)) > 0 Then
       aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
-      sql.text = aRELCFG(15)
+      sql.Text = aRELCFG(15)
     End If
   End If
   If Len(aRELCFG(15)) > 0 Then
     'aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
-    sql.text = aRELCFG(15)
+    sql.Text = aRELCFG(15)
   End If
 
   Exit Sub
@@ -896,8 +875,8 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-  cARQRTF = TxtArquivo.text
-  If IsExtensao(TxtArquivo.text, "TXT") Then
+  cARQRTF = TxtArquivo.Text
+  If IsExtensao(TxtArquivo.Text, "TXT") Then
       ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Escolher Porta(Destino)", "Editor Interno")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
@@ -909,10 +888,10 @@ Private Sub cmdimp_Click()
          Case 2
            FrmTxl.Show vbModal, Me
          Case 3
-           FrmRTf.Show vbModal, Me
+           FrmRtfView.Show vbModal, Me
         End Select
   End If
- If IsExtensao(TxtArquivo.text, "PDF") Then
+ If IsExtensao(TxtArquivo.Text, "PDF") Then
     ePASS01 = Array("Externo", "Interno")
     escOrdem.Show vbModal, Me
     eRETU01 = FixInt(eRETU01, 0)
@@ -923,18 +902,18 @@ Private Sub cmdimp_Click()
          FrmPreview.Show vbModal, Me
       End Select
   End If
-  If IsExtensao(TxtArquivo.text, "RTF") Then
+  If IsExtensao(TxtArquivo.Text, "RTF") Then
      ePASS01 = Array("Editor Interno", "Preview Interno")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
       Select Case eRETU01
       Case 0
-         FrmRTf.Show vbModal, Me
+         FrmRtfView.Show vbModal, Me
       Case 1
          CmdVisua_Click
       End Select
   End If
-  If IsExtensao(TxtArquivo.text, "HTML") Then
+  If IsExtensao(TxtArquivo.Text, "HTML") Then
     CmdVisua_Click
   End If
 
@@ -946,7 +925,7 @@ Private Sub CmdOrdem_Click()
   EscArqOrdem.Show vbModal, Me
   If lRETU Then
     aRELCFG(15) = TrocaSQLOrder(aRELCFG(15), FixStr(eRETU01))
-    sql.text = aRELCFG(15)
+    sql.Text = aRELCFG(15)
   End If
 End Sub
 
@@ -957,7 +936,7 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.text
+  cARQRTF = TxtArquivo.Text
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -986,7 +965,7 @@ Private Sub CmdVisua_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS02 = 3
     PrintPreview1.ShowPreview
-    RichTextBox1.text = ""
+    RichTextBox1.Text = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -1071,7 +1050,7 @@ Private Sub Form_Load()
   If nARQUIVOS > 0 Then
     If Len(aARQUIVOS(0)) > 0 Then
       If FileConnExist(aARQUIVOS(0), True, True, aRELCFG(15)) Then
-        arquivo.text = aARQUIVOS(0)
+        arquivo.Text = aARQUIVOS(0)
       End If
     End If
   End If
@@ -1088,14 +1067,14 @@ Private Sub Form_Load()
     If Len(filtro) > 0 Then
       aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
     End If
-    sql.text = aRELCFG(15)
+    sql.Text = aRELCFG(15)
   End If
 
 
   If aRELCFG(13) = "" Then                     'nome tabela nao preenchido pega do sql
     aRELCFG(13) = NomeTableSql(aRELCFG(15))
   End If
-  tabela.text = aRELCFG(13)
+  tabela.Text = aRELCFG(13)
   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
   PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 
@@ -1104,11 +1083,6 @@ Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
   PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
   UpdateReport = False  ' we don't need to update the report in the Print preview window after this action (the default value of UpdateReport parameter is True)
 End Sub
-Private Sub XPButton1_Click()
-  frmCharacters.Show vbModal, Me
-  If lRETU Then
-    TxtDeli.text = eRETU01
-  End If
-End Sub
+
 
 

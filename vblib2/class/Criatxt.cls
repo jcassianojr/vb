@@ -159,7 +159,7 @@ Public Sub ArqEdit()
   ' 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
   ' 4-Editar,5-Visualizar,6-Imprimir,7-Exportar
   aDIREITOS = Array(False, False, False, False, False, True, True, False)
-  FrmRTf.Show vbModal
+  FrmRtfView.Show vbModal
 End Sub
 
 Public Sub GravaHtml(Optional cDESTINO As String = "", Optional cTITULO As String = "", Optional cAUTOR As String = "")

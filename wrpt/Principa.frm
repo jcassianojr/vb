@@ -488,7 +488,7 @@ Private Sub MDIForm_Load()
 
 
 
-  StatusBar1.Panels(6).Text = zUSER
+  StatusBar1.Panels(6).tEXT = zUSER
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If
@@ -601,7 +601,7 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
     ' 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
     ' 4-Editar,5-Visualizar,6-Imprimir,7-Exportar
     aDIREITOS = Array(False, False, False, False, True, True, True, False)
-    FrmRTf.Show vbModal, Me
+    FrmRtfView.Show vbModal, Me
 
   Case 2
     escuser.Show vbModal, Me

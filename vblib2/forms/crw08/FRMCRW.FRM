@@ -551,7 +551,7 @@ End Sub
 Private Sub CmdEditar_Click()
   If IsExtensao(TxtArquivo.Text, "RTF") Or IsExtensao(TxtArquivo.Text, "TXT") Then
     cARQRTF = TxtArquivo
-    FrmRTf.Show
+    FrmRtfView.Show
   End If
 End Sub
 
@@ -591,9 +591,9 @@ Private Sub CmdFiltro_Click()
   If aRELCFG(11) Then
     ePASS01 = "CRYSTAL"
     FrmFiltro.Show vbModal, Me
-    FILTRO = eRETU01
+    filtro = eRETU01
   End If
-  cFILTRO = CStr(FILTRO.Text)
+  cFILTRO = CStr(filtro.Text)
 
   If Len(cFILTRO) > 0 Then
     RPT.ReplaceSelectionFormula (cFILTRO)
@@ -783,10 +783,10 @@ Private Sub Form_Load()
   If Not aDIREITOS(6) Then cmdimp.Visible = False
   If Not aDIREITOS(6) Then CmdConfImp.Visible = False
   If Not aDIREITOS(5) Then CmdVisua.Visible = False
-  If Not aDIREITOS(7) Then salvar(2).Visible = False
-  If Not aDIREITOS(7) Then salvar(3).Visible = False
-  If Not aDIREITOS(7) Then salvar(0).Visible = False
-  If Not aDIREITOS(7) Then salvar(1).Visible = False
+  If Not aDIREITOS(7) Then Salvar(2).Visible = False
+  If Not aDIREITOS(7) Then Salvar(3).Visible = False
+  If Not aDIREITOS(7) Then Salvar(0).Visible = False
+  If Not aDIREITOS(7) Then Salvar(1).Visible = False
   If Not aDIREITOS(7) Then CmdExport.Visible = False
 
   If Not aDIREITOS(7) Then CmdEmail1.Visible = False
@@ -805,7 +805,7 @@ Private Sub Form_Load()
   CmdEmail_Click
 
   If Not aRELCFG(11) Then CmdFiltro.Visible = False
-  If Not aRELCFG(11) Then FILTRO.Visible = False
+  If Not aRELCFG(11) Then filtro.Visible = False
 
 
 
@@ -839,7 +839,7 @@ Private Sub Form_Load()
   aRELCFG(14) = FixStr(aRELCFG(14))
   If Len(aRELCFG(14)) > 0 Then
     cFILTRO = aRELCFG(14)
-    FILTRO = cFILTRO
+    filtro = cFILTRO
 
     RPT.ReplaceSelectionFormula (cFILTRO)
   Else

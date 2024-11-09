@@ -159,7 +159,7 @@ Private Sub Form_Load()
   End If
   If InStr(UCase(cARQRTF), ".RTF") Then
      If FileConnExist(cARQRTF, True) Then
-        RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
+        RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
         ePASS03 = 2
         PrintPreview1.ShowPreview
      End If
@@ -514,9 +514,10 @@ Select Case aRELCFG(1)
   Case "SHELLPRINT"
     ShellEx cARQRTF, essSW_SHOWDEFAULT, , , "print", CLng(Me.hWnd)
   Case "FRMRTF"
-    FrmRTf.Show vbModal, Me
+    FrmRtfView.Show vbModal, Me
   Case "FRMINIEDITOR"
-    frmIniEditor.Show vbModal, Me
+    FrmRtfView.Show vbModal, Me
+  '  frmIniEditor.Show vbModal, Me
   Case "FRMCRWENG"
     FrmCrwENG.Show vbModal, Me
   Case "FRMHTML"
@@ -658,7 +659,7 @@ Public Sub MyPrintinghtml()
   Next
 End Sub
 Public Sub MyPrintingRTF()
-  PrinterEx.PrintRichTextBox RichTextBox1
+  PrinterEx.PrintRichTextBox RichTextbox1
 End Sub
 Public Sub MyPrintingJPG()
   Select Case ePASS02
