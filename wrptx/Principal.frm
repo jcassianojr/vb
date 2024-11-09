@@ -92,15 +92,22 @@ Private Sub MDIForm_Load()
      End
   End If
   
-   If InStr(UCase(cmdline), ".TXT") _
-     Or InStr(UCase(cmdline), ".RTF") _
-     Or InStr(UCase(cmdline), ".ZPL") _
+   If InStr(UCase(cmdline), ".ZPL") _
      Or InStr(UCase(cmdline), ".JPG") Then
      cARQRTF = cmdline
      escRPT.Show vbModal, Me
      End
   End If
   
+  If InStr(UCase(cmdline), ".TXT") Or InStr(UCase(cmdline), ".MAN") _
+     Or InStr(UCase(cmdline), ".RTF") Then
+     cARQRTF = cmdline
+     escRPT.Show vbModal, Me
+     'criar opcao de preview direto
+     'FrmRtfView.Show vbModal, Me
+     End
+  End If
+
 
   zgrp = ""
   ZGRPSUB = ""

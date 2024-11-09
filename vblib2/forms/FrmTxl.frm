@@ -543,7 +543,7 @@ Dim oRS As New ADODB.Recordset
 Dim cSQL As String
 Dim cARQ As String
 Dim cSETUP As String
-Dim lARQTXT As Boolean
+Dim larqtxt As Boolean
 
 Private Sub gerar(ByVal cOPE As String)
   Dim x As Long
@@ -613,7 +613,7 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.Text
   If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hWnd))
   End If
@@ -624,8 +624,8 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.tEXT, "RTF") Or lARQTXT Then
-    cARQRTF = TxtArquivo.tEXT
+  If IsExtensao(TxtArquivo.Text, "RTF") Or larqtxt Then
+    cARQRTF = TxtArquivo.Text
     FrmRTf.Show vbModal, Me
   End If
 End Sub
@@ -659,11 +659,11 @@ errhandler:
 End Sub
 
 Private Sub cmdimp_Click()
-  If lARQTXT Then
+  If larqtxt Then
     imptxt  'Aqui e direct print com1,COM2.. lpt1,LPT2.. no pode ser usado preview aqui
     Exit Sub
   End If
-  If IsExtensao(TxtArquivo.tEXT, "PDF") Or IsExtensao(TxtArquivo.tEXT, "HTML") Or IsExtensao(TxtArquivo.tEXT, "RTF") Then
+  If IsExtensao(TxtArquivo.Text, "PDF") Or IsExtensao(TxtArquivo.Text, "HTML") Or IsExtensao(TxtArquivo.Text, "RTF") Then
     CmdVisua_Click
     Exit Sub
   End If
@@ -715,11 +715,11 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.Text
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
-  If lARQTXT Then
+  If larqtxt Then
     ePASS03 = 1
     PrintPreview1.ShowPreview
   End If
@@ -741,10 +741,10 @@ Private Sub CmdVisua_Click()
     End Select
   End If
   If IsExtensao(cARQRTF, "RTF") Then
-    RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
+    RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.tEXT = ""
+    RichTextbox1.Text = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -778,7 +778,7 @@ Public Sub MyPrintinghtml()
   Next
 End Sub
 Public Sub MyPrintingRTF()
-  PrinterEx.PrintRichTextBox RichTextBox1
+  PrinterEx.PrintRichTextBox RichTextbox1
 End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
@@ -815,14 +815,14 @@ Private Sub Form_Load()
   montaimp
 
   If IsExtensao(cARQRTF, "TXT") Or IsExtensao(cARQRTF, "ZPL ") Or IsExtensao(cARQRTF, "MAN") Then
-    lARQTXT = True
+    larqtxt = True
   End If
   If InStr(UCase(cARQRTF), ".LST") > 0 Then    ''.LST .LTS2 .LTS3... pode ser sequencial usando instr inves isextensao
-    lARQTXT = True
+    larqtxt = True
   End If
 
 
-  If lARQTXT Then
+  If larqtxt Then
     TxtArquivo = cARQRTF
   Else
     oIni.Path = cARQRTF
@@ -902,7 +902,7 @@ Private Sub Form_Load()
   ' 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
   ' 4-Editar,5-Visualizar,6-Imprimir,7-Exportar
 
-  If lARQTXT Then
+  If larqtxt Then
     aRELCFG(11) = False
     CmdOrdem.Visible = False
     TxtArquivo.Locked = True
@@ -935,7 +935,7 @@ Private Sub Form_Load()
 
   Lblsql = cSQL
 
-  If Not lARQTXT Then
+  If Not larqtxt Then
     If aRELCFG(13) = "" Then                 'nome tabela nao preenchido pega do sql
       aRELCFG(13) = NomeTableSql(cSQL)
     End If
@@ -991,7 +991,7 @@ Private Sub Salvar_Click(Index As Integer)
   Dim cEXTENSAO As String
   Dim sFILTER As String
 
-  If lARQTXT Then
+  If larqtxt Then
     cARQUIVO = TxtArquivo
   Else
     Select Case Index
@@ -1007,7 +1007,7 @@ Private Sub Salvar_Click(Index As Integer)
     End Select
 
     sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
+    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
 
     If InStr(cARQUIVO, ".") > 0 Then
       cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO
@@ -1124,7 +1124,7 @@ End Function
 
 
 Private Sub XPButton1_Click()
-      ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Escolher Porta(Destino)", "Editor Interno")
+      ePASS01 = Array("Preview Interno", "Imprimir Direto Impressora", "Editor Interno")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
       Select Case eRETU01
@@ -1133,8 +1133,6 @@ Private Sub XPButton1_Click()
          Case 1
            FrmPicturePrinter.Show vbModal, Me
          Case 2
-           FrmTxl.Show vbModal, Me
-         Case 3
            FrmRTf.Show vbModal, Me
         End Select
 End Sub

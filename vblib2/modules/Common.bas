@@ -31,17 +31,17 @@ Right As Long
 Bottom As Long
 End Type
 Private Type POINTAPI
-X As Long
-Y As Long
+x As Long
+y As Long
 End Type
 Private Type BITMAP
-BMType As Long
-BMWidth As Long
-BMHeight As Long
-BMWidthBytes As Long
-BMPlanes As Integer
-BMBitsPixel As Integer
-BMBits As LongPtr
+bmType As Long
+bmWidth As Long
+bmHeight As Long
+bmWidthBytes As Long
+bmPlanes As Integer
+bmBitsPixel As Integer
+bmBits As LongPtr
 End Type
 Private Type SAFEARRAYBOUND
 cElements As Long
@@ -57,12 +57,12 @@ Bounds As SAFEARRAYBOUND
 End Type
 Private Type PICTDESC
 cbSizeOfStruct As Long
-PicType As Long
+picType As Long
 hImage As LongPtr
 Data1 As Long
 Data2 As Long
 End Type
-Private Type CLSID
+Private Type clsid
 Data1 As Long
 Data2 As Integer
 Data3 As Integer
@@ -85,9 +85,9 @@ End Type
 Private Const MAX_PATH As Long = 260
 Private Type WIN32_FIND_DATA
 dwFileAttributes As Long
-FTCreationTime As FILETIME
-FTLastAccessTime As FILETIME
-FTLastWriteTime As FILETIME
+ftCreationTime As FILETIME
+ftLastAccessTime As FILETIME
+ftLastWriteTime As FILETIME
 nFileSizeHigh As Long
 nFileSizeLow As Long
 dwReserved0 As Long
@@ -97,9 +97,9 @@ lpszAlternateFileName(0 To ((14 * 2) - 1)) As Byte
 End Type
 Private Type WIN32_FILE_ATTRIBUTE_DATA
 dwFileAttributes As Long
-FTCreationTime As FILETIME
-FTLastAccessTime As FILETIME
-FTLastWriteTime As FILETIME
+ftCreationTime As FILETIME
+ftLastAccessTime As FILETIME
+ftLastWriteTime As FILETIME
 nFileSizeHigh As Long
 nFileSizeLow As Long
 End Type
@@ -304,7 +304,7 @@ Private Declare Function GetDC Lib "user32" (ByVal hWnd As Long) As Long
 Private Declare Function GetDeviceCaps Lib "gdi32" (ByVal hDC As Long, ByVal nIndex As Long) As Long
 Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
 Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
-Private Declare Function GdiAlphaBlend Lib "gdi32" (ByVal hDestDC As Long, ByVal X As Long, ByVal Y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, ByVal XSrc As Long, ByVal YSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal BlendFunc As Long) As Long
+Private Declare Function GdiAlphaBlend Lib "gdi32" (ByVal hDestDC As Long, ByVal x As Long, ByVal y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, ByVal XSrc As Long, ByVal YSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal BlendFunc As Long) As Long
 Private Declare Function DrawIconEx Lib "user32" (ByVal hDC As Long, ByVal XLeft As Long, ByVal YTop As Long, ByVal hIcon As Long, ByVal CXWidth As Long, ByVal CYWidth As Long, ByVal istepIfAniCur As Long, ByVal hbrFlickerFreeDraw As Long, ByVal diFlags As Long) As Long
 Private Declare Function FillRect Lib "user32" (ByVal hDC As Long, ByRef lpRect As RECT, ByVal hBrush As Long) As Long
 Private Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As Long
@@ -318,7 +318,7 @@ Private Declare Function GlobalUnlock Lib "kernel32" (ByVal hMem As Long) As Lon
 Private Declare Function GlobalSize Lib "kernel32" (ByVal hMem As Long) As Long
 Private Declare Function OleTranslateColor Lib "oleaut32" (ByVal Color As Long, ByVal hPal As Long, ByRef RGBResult As Long) As Long
 Private Declare Function OleLoadPicture Lib "oleaut32" (ByVal pStream As IUnknown, ByVal lSize As Long, ByVal fRunmode As Long, ByRef riid As Any, ByRef pIPicture As IPicture) As Long
-Private Declare Function OleLoadPicturePath Lib "oleaut32" (ByVal lpszPath As Long, ByVal pUnkCaller As Long, ByVal dwReserved As Long, ByVal ClrReserved As Long, ByRef riid As CLSID, ByRef pIPicture As IPicture) As Long
+Private Declare Function OleLoadPicturePath Lib "oleaut32" (ByVal lpszPath As Long, ByVal pUnkCaller As Long, ByVal dwReserved As Long, ByVal ClrReserved As Long, ByRef riid As clsid, ByRef pIPicture As IPicture) As Long
 Private Declare Function OleCreatePictureIndirect Lib "oleaut32" (ByRef pPictDesc As PICTDESC, ByRef riid As Any, ByVal fPictureOwnsHandle As Long, ByRef pIPicture As IPicture) As Long
 Private Declare Function CreateStreamOnHGlobal Lib "ole32" (ByVal hGlobal As Long, ByVal fDeleteOnRelease As Long, ByRef pStream As IUnknown) As Long
 Private Declare Function WideCharToMultiByte Lib "kernel32" (ByVal CodePage As Long, ByVal dwFlags As Long, ByVal lpWideCharStr As Long, ByVal cchWideChar As Long, ByVal lpMultiByteStr As Long, ByVal cbMultiByte As Long, ByVal lpDefaultChar As Long, ByVal lpUsedDefaultChar As Long) As Long
@@ -512,7 +512,7 @@ Dim FAD As WIN32_FILE_ATTRIBUTE_DATA
 If Left$(PathName, 2) = "\\" Then PathName = "UNC\" & Mid$(PathName, 3)
 If GetFileAttributesEx(StrPtr("\\?\" & PathName), 0, VarPtr(FAD)) <> 0 Then
     Dim FT As FILETIME, ST As SYSTEMTIME
-    FileTimeToLocalFileTime VarPtr(FAD.FTLastWriteTime), VarPtr(FT)
+    FileTimeToLocalFileTime VarPtr(FAD.ftLastWriteTime), VarPtr(FT)
     FileTimeToSystemTime VarPtr(FT), VarPtr(ST)
     FileDateTime = DateSerial(ST.wYear, ST.wMonth, ST.wDay) + TimeSerial(ST.wHour, ST.wMinute, ST.wSecond)
 Else
@@ -530,14 +530,14 @@ Else
 End If
 End Function
 
-Public Function FileExists(ByVal PathName As String) As Boolean
-On Error Resume Next
-Dim Attributes As VbFileAttribute, ErrVal As Long
-Attributes = GetAttr(PathName)
-ErrVal = Err.Number
-On Error GoTo 0
-If (Attributes And (vbDirectory Or vbVolume)) = 0 And ErrVal = 0 Then FileExists = True
-End Function
+'Public Function FileExists(ByVal PathName As String) As Boolean
+'On Error Resume Next
+'Dim Attributes As VbFileAttribute, ErrVal As Long
+'Attributes = GetAttr(PathName)
+'ErrVal = Err.Number
+'On Error GoTo 0
+'If (Attributes And (vbDirectory Or vbVolume)) = 0 And ErrVal = 0 Then FileExists = True
+'End Function
 
 Public Function AppPath() As String
 If InIDE() = False Then
@@ -832,7 +832,7 @@ If hWndCursor <> NULL_PTR Then
 Else
     hWndCursor = hWndFallback
 End If
-If hWndCursor <> NULL_PTR Then SendMessage hWndCursor, WM_SETCURSOR, hWndCursor, ByVal MakeDWord(CLng(SendMessage(hWndCursor, WM_NCHITTEST, 0, ByVal Make_XY_lParam(P.X, P.Y))), WM_MOUSEMOVE)
+If hWndCursor <> NULL_PTR Then SendMessage hWndCursor, WM_SETCURSOR, hWndCursor, ByVal MakeDWord(CLng(SendMessage(hWndCursor, WM_NCHITTEST, 0, ByVal Make_XY_lParam(P.x, P.y))), WM_MOUSEMOVE)
 End Sub
 
 Public Function OLEFontIsEqual(ByVal Font As StdFont, ByVal FontOther As StdFont) As Boolean
@@ -1243,11 +1243,11 @@ If CLng(lParam) And &H80000000 Then Get_Y_lParam = Get_Y_lParam Or &HFFFF8000
 End Function
 
 #If VBA7 Then
-Public Function Make_XY_lParam(ByVal X As Long, ByVal Y As Long) As LongPtr
+Public Function Make_XY_lParam(ByVal x As Long, ByVal y As Long) As LongPtr
 #Else
-Public Function Make_XY_lParam(ByVal X As Long, ByVal Y As Long) As Long
+Public Function Make_XY_lParam(ByVal x As Long, ByVal y As Long) As Long
 #End If
-Make_XY_lParam = (CLng(LoWord(Y)) * &H10000) Or (LoWord(X) And &HFFFF&)
+Make_XY_lParam = (CLng(LoWord(y)) * &H10000) Or (LoWord(x) And &HFFFF&)
 End Function
 
 Public Function UTF32CodePoint_To_UTF16(ByVal CodePoint As Long) As String
@@ -1491,7 +1491,7 @@ End Function
 
 Public Function PictureFromByteStream(ByRef ByteStream As Variant) As IPictureDisp
 Const GMEM_MOVEABLE As Long = &H2
-Dim IID As CLSID, Stream As IUnknown, NewPicture As IPicture
+Dim IID As clsid, Stream As IUnknown, NewPicture As IPicture
 Dim B() As Byte, ByteCount As Long
 Dim hMem As LongPtr, lpMem As LongPtr
 With IID
@@ -1523,7 +1523,7 @@ End If
 End Function
 
 Public Function PictureFromPath(ByVal PathName As String) As IPictureDisp
-Dim IID As CLSID, NewPicture As IPicture
+Dim IID As clsid, NewPicture As IPicture
 With IID
 .Data1 = &H7BF80980
 .Data2 = &HBF32
@@ -1539,15 +1539,15 @@ If OleLoadPicturePath(StrPtr(PathName), NULL_PTR, 0, 0, IID, NewPicture) = 0 The
 End Function
 
 #If VBA7 Then
-Public Function PictureFromHandle(ByVal Handle As LongPtr, ByVal PicType As VBRUN.PictureTypeConstants) As IPictureDisp
+Public Function PictureFromHandle(ByVal Handle As LongPtr, ByVal picType As VBRUN.PictureTypeConstants) As IPictureDisp
 #Else
-Public Function PictureFromHandle(ByVal Handle As Long, ByVal PicType As VBRUN.PictureTypeConstants) As IPictureDisp
+Public Function PictureFromHandle(ByVal Handle As Long, ByVal picType As VBRUN.PictureTypeConstants) As IPictureDisp
 #End If
 If Handle = NULL_PTR Then Exit Function
-Dim PICD As PICTDESC, IID As CLSID, NewPicture As IPicture
+Dim PICD As PICTDESC, IID As clsid, NewPicture As IPicture
 With PICD
 .cbSizeOfStruct = LenB(PICD)
-.PicType = PicType
+.picType = picType
 .hImage = Handle
 End With
 With IID
@@ -1613,9 +1613,9 @@ End With
 End Function
 
 #If VBA7 Then
-Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As LongPtr, ByVal X As Long, ByVal Y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
+Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As LongPtr, ByVal x As Long, ByVal y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
 #Else
-Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As Long, ByVal X As Long, ByVal Y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
+Public Sub RenderPicture(ByVal Picture As IPicture, ByVal hDC As Long, ByVal x As Long, ByVal y As Long, Optional ByVal CX As Long, Optional ByVal CY As Long, Optional ByRef RenderFlag As Integer)
 #End If
 ' RenderFlag is passed as a optional parameter ByRef.
 ' It is ignored for icons and metafiles.
@@ -1629,7 +1629,7 @@ If .Handle <> NULL_PTR Then
     If CY = 0 Then CY = CHimetricToPixel_Y(.Height)
     If .Type = vbPicTypeIcon Then
         Const DI_NORMAL As Long = &H3
-        DrawIconEx hDC, X, Y, .Handle, CX, CY, 0, NULL_PTR, DI_NORMAL
+        DrawIconEx hDC, x, y, .Handle, CX, CY, 0, NULL_PTR, DI_NORMAL
     Else
         Dim HasAlpha As Boolean
         If .Type = vbPicTypeBitmap Then
@@ -1638,39 +1638,39 @@ If .Handle <> NULL_PTR Then
                 If (.Attributes And PICTURE_TRANSPARENT) = 0 Then ' Exclude GIF
                     Dim Bmp As BITMAP
                     GetObjectAPI .Handle, LenB(Bmp), Bmp
-                    If Bmp.BMBitsPixel = 32 And Bmp.BMBits <> NULL_PTR Then
+                    If Bmp.bmBitsPixel = 32 And Bmp.bmBits <> NULL_PTR Then
                         Dim SA1D As SAFEARRAY1D, B() As Byte
                         With SA1D
                         .cDims = 1
                         .fFeatures = 0
                         .cbElements = 1
                         .cLocks = 0
-                        .pvData = Bmp.BMBits
+                        .pvData = Bmp.bmBits
                         .Bounds.lLbound = 0
-                        .Bounds.cElements = Bmp.BMWidthBytes * Bmp.BMHeight
+                        .Bounds.cElements = Bmp.bmWidthBytes * Bmp.bmHeight
                         End With
                         CopyMemory ByVal ArrPtr(B()), VarPtr(SA1D), PTR_SIZE
-                        Dim i As Long, j As Long, Pos As Long
-                        For i = 0 To (Abs(Bmp.BMHeight) - 1)
-                            Pos = i * Bmp.BMWidthBytes
-                            For j = (Pos + 3) To (Pos + Bmp.BMWidthBytes - 1) Step 4
-                                If HasAlpha = False Then HasAlpha = (B(j) > 0)
+                        Dim i As Long, J As Long, Pos As Long
+                        For i = 0 To (Abs(Bmp.bmHeight) - 1)
+                            Pos = i * Bmp.bmWidthBytes
+                            For J = (Pos + 3) To (Pos + Bmp.bmWidthBytes - 1) Step 4
+                                If HasAlpha = False Then HasAlpha = (B(J) > 0)
                                 If HasAlpha = True Then
-                                    If B(j - 1) > B(j) Then
+                                    If B(J - 1) > B(J) Then
                                         HasAlpha = False
-                                        i = Abs(Bmp.BMHeight) - 1
+                                        i = Abs(Bmp.bmHeight) - 1
                                         Exit For
-                                    ElseIf B(j - 2) > B(j) Then
+                                    ElseIf B(J - 2) > B(J) Then
                                         HasAlpha = False
-                                        i = Abs(Bmp.BMHeight) - 1
+                                        i = Abs(Bmp.bmHeight) - 1
                                         Exit For
-                                    ElseIf B(j - 3) > B(j) Then
+                                    ElseIf B(J - 3) > B(J) Then
                                         HasAlpha = False
-                                        i = Abs(Bmp.BMHeight) - 1
+                                        i = Abs(Bmp.bmHeight) - 1
                                         Exit For
                                     End If
                                 End If
-                            Next j
+                            Next J
                         Next i
                         CopyMemory ByVal ArrPtr(B()), NULL_PTR, PTR_SIZE
                     End If
@@ -1684,16 +1684,16 @@ If .Handle <> NULL_PTR Then
             #If Win64 Then
             Dim hDC32 As Long
             CopyMemory ByVal VarPtr(hDC32), ByVal VarPtr(hDC), 4
-            .Render hDC32 Or 0&, X Or 0&, Y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
+            .Render hDC32 Or 0&, x Or 0&, y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
             #Else
-            .Render hDC Or 0&, X Or 0&, Y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
+            .Render hDC Or 0&, x Or 0&, y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
             #End If
         Else
             Dim hDCBmp As LongPtr, hBmpOld As LongPtr
             hDCBmp = CreateCompatibleDC(NULL_PTR)
             If hDCBmp <> NULL_PTR Then
                 hBmpOld = SelectObject(hDCBmp, .Handle)
-                GdiAlphaBlend hDC, X, Y, CX, CY, hDCBmp, 0, 0, CHimetricToPixel_X(.Width), CHimetricToPixel_Y(.Height), &H1FF0000
+                GdiAlphaBlend hDC, x, y, CX, CY, hDCBmp, 0, 0, CHimetricToPixel_X(.Width), CHimetricToPixel_Y(.Height), &H1FF0000
                 SelectObject hDCBmp, hBmpOld
                 DeleteDC hDCBmp
             End If

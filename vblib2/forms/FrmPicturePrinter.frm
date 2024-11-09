@@ -1,10 +1,11 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form FrmPicturePrinter 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Print a StdPicture centered within margins on a selected printer, paper, resolution, and orientation"
-   ClientHeight    =   2820
+   ClientHeight    =   5670
    ClientLeft      =   45
    ClientTop       =   345
    ClientWidth     =   11250
@@ -19,7 +20,7 @@ Begin VB.Form FrmPicturePrinter
    EndProperty
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   2820
+   ScaleHeight     =   5670
    ScaleWidth      =   11250
    StartUpPosition =   2  'CenterScreen
    Begin vbExtra.CommonDialogEx CommonDialogEx1 
@@ -119,6 +120,18 @@ Begin VB.Form FrmPicturePrinter
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR18.RichTextBox RichTextbox1 
+      Height          =   2655
+      Left            =   120
+      TabIndex        =   11
+      Top             =   2880
+      Width           =   9135
+      _ExtentX        =   16113
+      _ExtentY        =   4683
+      MultiLine       =   -1  'True
+      ScrollBars      =   3
+      TextRTF         =   "FrmPicturePrinter.frx":0B34
+   End
    Begin VB.Label Label5 
       Caption         =   "Orientacao"
       Height          =   255
@@ -207,6 +220,7 @@ Private lngResolutions() As Long
 Private Pr As Printer
 Private Pic As StdPicture
 Dim cEXTENSAO As String
+Dim larqtxt As Boolean
 
 Private Sub PRINTIMG()
     'Print the StdPicture Pic centered on the selected rrinter (Pr)
@@ -316,6 +330,22 @@ Private Sub Form_Load()
   'from a WIA scan or something else.
   If cEXTENSAO = "JPG" Then
     Set Pic = LoadPicture(cARQRTF)
+  End If
+  
+  larqtxt = False
+  
+  If IsExtensao(cARQRTF, "TXT") Or IsExtensao(cARQRTF, "ZPL ") Or IsExtensao(cARQRTF, "MAN") Then
+    larqtxt = True
+  End If
+  If InStr(UCase(cARQRTF), ".LST") > 0 Then    ''.LST .LTS2 .LTS3... pode ser sequencial usando instr inves isextensao
+    larqtxt = True
+  End If
+  RichTextbox1.Visible = False
+  If larqtxt Then
+     RichTextbox1.Visible = True
+     If FileExists(cARQRTF) Then
+       RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatText
+     End If
   End If
 End Sub
 
