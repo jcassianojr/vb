@@ -207,18 +207,20 @@ Private Sub MDIForm_Load()
   zIDFOLHA = 0
   zIDUNI = 0
   zNOMEFOLHA = ""
-  sSQL = "SELECT IDUSUARIO,IDFOLHA,NOMEFOLHA,ID FROM USUARIO WHERE USUARIO='" & zUSER & "'"
-  aRETU = PegSQL(DBWRPT, sSQL, 4, Array("IDUSUARIO", "IDFOLHA", "NOMEFOLHA", "ID"), _
-                 Array("NI", "NI", "C", "NI"), _
-                 Array(0, 0, "", 0))
-  If lRETU Then
-    zWRPTID = aRETU(0)
-    zUSERID = zWRPTID
-    zIDFOLHA = aRETU(1)
-    zNOMEFOLHA = aRETU(2)
-    zIDUNI = aRETU(3)
+  
+  If Len(zUSER) > 0 Then
+    sSQL = "SELECT IDUSUARIO,IDFOLHA,NOMEFOLHA,ID FROM USUARIO WHERE USUARIO='" & zUSER & "'"
+    aRETU = PegSQL(DBWRPT, sSQL, 4, Array("IDUSUARIO", "IDFOLHA", "NOMEFOLHA", "ID"), _
+                   Array("NI", "NI", "C", "NI"), _
+                   Array(0, 0, "", 0))
+    If lRETU Then
+      zWRPTID = aRETU(0)
+      zUSERID = zWRPTID
+      zIDFOLHA = aRETU(1)
+      zNOMEFOLHA = aRETU(2)
+      zIDUNI = aRETU(3)
+    End If
   End If
-
 
   If zIDFOLHA = 0 Then
     Alert ("No Folha de Pagamento WRPT Nao Preenchido " & zUSER)

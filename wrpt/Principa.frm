@@ -356,6 +356,7 @@ Private Sub MDIForm_Load()
   Dim DAORS As ADODB.Recordset
   Dim cARQICO As String
   Dim carqhelp As String
+  Dim ctmpline As String
 
 
   On Error GoTo ErrorHandler
@@ -365,7 +366,7 @@ Private Sub MDIForm_Load()
 
   If App.PrevInstance Then
 
-    MsgBox App.EXEName & " já está rodando!", 48
+    MsgBox App.EXEName & " já esta rodando!", 48
     End
 
   End If
@@ -424,17 +425,110 @@ Private Sub MDIForm_Load()
   zANO = Year(Date)
   ZGRPSUB = ""
   
-  aRETU = pegue2delimitado(Trim(Command()), "__$", "%__")
+  zgrp = ""
+  ZGRPSUB = ""
+  zUSER = ""
+  eLOCALIZA = ""
+  cARQRTF = ""
+  
+  
+  
+  
+  
+   'pegando o usuario
+   cmdline = Command()
+   cmdline = Replace(cmdline, "__", "")
+   
+  If InStr(UCase(cmdline), "LSTVIEW") Then
+     FrmLstView.Show vbModal, Me
+     End
+  End If
+  
+   If InStr(UCase(cmdline), ".ZPL") _
+     Or InStr(UCase(cmdline), ".JPG") Then
+     cARQRTF = cmdline
+     escRPT.Show vbModal, Me
+     End
+  End If
+  
+  If InStr(UCase(cmdline), ".TXT") Or InStr(UCase(cmdline), ".MAN") _
+     Or InStr(UCase(cmdline), ".RTF") Then
+     cARQRTF = cmdline
+     escRPT.Show vbModal, Me
+     'criar opcao de preview direto
+     'FrmRtfView.Show vbModal, Me
+     End
+  End If
+   
+   
+   cTIPORPT = ""
+   If Mid(cmdline, 1, 1) = "X" Or Mid(cmdline, 1, 1) = "R" Then
+      cTIPORPT = "R"
+      cmdline = Mid(cmdline, 2)
+   End If
+   If Mid(cmdline, 1, 1) = "D" Then
+      cTIPORPT = "D"
+      cmdline = Mid(cmdline, 2)
+   End If
+   If Mid(cmdline, 1, 1) = "I" Then
+      cTIPORPT = "I"
+      cmdline = Mid(cmdline, 2)
+   End If
+   If Mid(cmdline, 1, 1) = "F" Then
+      cTIPORPT = "F"
+      cmdline = Mid(cmdline, 2)
+   End If
+   
+   
+   
+   
+   
+   
+  aRETU = pegue2delimitado(cmdline, "$", "%")
+  zUSER = aRETU(0)
+  ctmpline = aRETU(1)
+
+  'pegando o grupo
+  aRETU = pegue2delimitado(cmdline, "%", "#")
+  zgrp = aRETU(0)
+  ctmpline = aRETU(1)
+  
+   'pegando o subgrupo
+  aRETU = pegue2delimitado(cmdline, "#", "_")
+  ZGRPSUB = aRETU(0)
+  ctmpline = aRETU(1)
+   
+   
+  'pegando o relatorio
+  aRETU = pegue2delimitado(cmdline, "_", "")
+  eLOCALIZA = aRETU(0)
+  ctmpline = aRETU(1)
+  
+
+  zUSER = UCase(zUSER)
+  zgrp = UCase(zgrp)
+  ZGRPSUB = UCase(ZGRPSUB)
+
+  If zUSER = "SUPERVISOR" Then
+    zUSER = "ADMIN"
+  End If
+  
+  'aRETU = pegue2delimitado(Trim(Command()), "__$", "%__")
+  
   
   bACESSO = False
-  If Len(aRETU(0)) > 0 Then
-    cmdline = UCase(aRETU(0))
-    sSQL = "SELECT IDUSUARIO,USUARIO,IDFOLHA,NOMEFOLHA FROM USUARIO WHERE USUARIO='" & cmdline & "'"
+  'dados do usuario
+  zWRPTID = 0
+  zUSERID = 0
+  zIDFOLHA = 0
+  zIDUNI = 0
+  zNOMEFOLHA = ""
+  If Len(zUSER) > 0 Then
+    sSQL = "SELECT IDUSUARIO,USUARIO,IDFOLHA,NOMEFOLHA FROM USUARIO WHERE USUARIO='" & zUSER & "'"
     aRETU = PegSQL(dbuser, sSQL, 3, Array("IDUSUARIO", "IDFOLHA", "NOMEFOLHA"), _
                    Array("NI", "NI", "C"), _
                    Array(0, 0, ""))
     If lRETU Then
-      zUSER = cmdline
       zUSERID = aRETU(0)
       zWRPTID = zUSERID
       zIDFOLHA = aRETU(1)

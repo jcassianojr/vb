@@ -93,7 +93,6 @@ MinorVer=0
 RevisionVer=274
 AutoIncrementVer=1
 ServerSupportFiles=0
-VersionComments="$admin%CU#VIA_FOL00001"
 CompilationType=-1
 OptimizationType=0
 FavorPentiumPro(tm)=0

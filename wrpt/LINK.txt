@@ -12,3 +12,5 @@ L1NK "D:\develop\vb\wrpt\wrpt.OBJ"    /ENTRY:__vbaS /OUT:"D:\develop\vb\wrpt\wrp
 L1NK "D:\develop\vb\wrpt\wrpt.OBJ"    /ENTRY:__vbaS /OUT:"D:\develop\vb\wrpt\wrpt.exe" /BASE:0x400000 /SUBSYSTEM:WINDOWS,4.0 /VERSION:1.8   /INCREMENTAL:NO /OPT:REF /MERGE:.rdata=.text /IGNORE:4078 
 ****** Run at 09/11/2024 18:45:34
 L1NK "D:\develop\vb\wrpt\wrpt.OBJ"    /ENTRY:__vbaS /OUT:"D:\develop\vb\wrpt\wrpt.exe" /BASE:0x400000 /SUBSYSTEM:WINDOWS,4.0 /VERSION:1.8   /INCREMENTAL:NO /OPT:REF /MERGE:.rdata=.text /IGNORE:4078 
+****** Run at 09/11/2024 20:13:05
+L1NK "D:\develop\vb\wrpt\wrpt.OBJ"    /ENTRY:__vbaS /OUT:"D:\develop\vb\wrpt\wrpt.exe" /BASE:0x400000 /SUBSYSTEM:WINDOWS,4.0 /VERSION:1.8   /INCREMENTAL:NO /OPT:REF /MERGE:.rdata=.text /IGNORE:4078 
