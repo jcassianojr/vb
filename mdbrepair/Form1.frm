@@ -1642,11 +1642,13 @@ End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   On Error Resume Next
-  dbx.Close
-  Set dbx = Nothing
-
-  dbTemp.Close
-  Set dbTemp = Nothing
+  If dbx Is Nothing Then
+  Else
+   dbx.Close
+    Set dbx = Nothing
+    dbTemp.Close
+    Set dbTemp = Nothing
+  End If
 End Sub
 
 #If Win16 Then
