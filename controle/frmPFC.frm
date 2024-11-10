@@ -1569,25 +1569,25 @@ Dim cTable As String
   txtItem = nORD
 
   If nPF > 0 Then
-    TXTPF.tEXT = nPF
+    TXTPF.text = nPF
   Else
     TXTPF.Visible = False
     Label1.Visible = False
   End If
   If nSEQ > 0 Then
-    TXTSEQ.tEXT = nSEQ
+    TXTSEQ.text = nSEQ
   Else
     TXTSEQ.Visible = False
     Label1.Visible = False
   End If
   If nSSQ > 0 Then
-    TXTSSQ.tEXT = nSSQ
+    TXTSSQ.text = nSSQ
   Else
     TXTSSQ.Visible = False
     Label2.Visible = False
   End If
   If nARQPCS = 2 Then
-    TxtCodComp.tEXT = Ccodcomp
+    TxtCodComp.text = Ccodcomp
   Else
     TxtCodComp.Visible = False
     Label3.Visible = False
@@ -1906,12 +1906,12 @@ Function CHECKME04()
   Next x
 End Function
 Private Sub VerImg_Click()
-  frmPicViewer.Show vbModal, Me
-  If lRETU Then
-    If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
-      lTROCOU = True
-    End If
-  End If
+ ' frmPicViewer.Show vbModal, Me
+ ' If lRETU Then
+ '   If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
+ '     lTROCOU = True
+ '   End If
+ ' End If
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
   On Error Resume Next

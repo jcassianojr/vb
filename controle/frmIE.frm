@@ -2056,12 +2056,12 @@ Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub VerImg_Click(Index As Integer)
-  frmPicViewer.Show vbModal, Me
-  If lRETU Then
-    If lerarquivoimagem(eRETU01, Picture1(Index), Picture2(Index)) Then
-      lTROCOU(Index) = True
-    End If
-  End If
+ ' frmPicViewer.Show vbModal, Me
+ ' If lRETU Then
+ '   If lerarquivoimagem(eRETU01, Picture1(Index), Picture2(Index)) Then
+ '     lTROCOU(Index) = True
+ '   End If
+ ' End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)

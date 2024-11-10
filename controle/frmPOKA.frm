@@ -1399,7 +1399,7 @@ Private Sub cmdClose_Click()
 
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = txt(iLOOP)
+      aVAL(iLOOP) = TXT(iLOOP)
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 ' pula 1 chave ppap
 
@@ -1452,32 +1452,32 @@ End Sub
 Private Sub CmdTrocaSequencia_Click()
   iMU01 = 4
   NewSeq.Show vbModal
-  SEQ.tEXT = nSEQ
-  SSQ.tEXT = nSSQ
-  item.tEXT = nORD
+  SEQ.text = nSEQ
+  SSQ.text = nSSQ
+  item.text = nORD
 End Sub
 
 Private Sub Command1_Click()
   escpffim.Show vbModal, Me
   If lRETU Then
-    txt(1) = eRETU02
-    txt(2) = eRETU03
+    TXT(1) = eRETU02
+    TXT(2) = eRETU03
   End If
 End Sub
 
 Private Sub Command2_Click(Index As Integer)
   Select Case Index
   Case 0
-    txt(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS"
+    TXT(11).text = "SIMULAR AS FALHAS COM PEÇAS"
   Case 1
-    txt(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS DA PRODUÇÃO"
+    TXT(11).text = "SIMULAR AS FALHAS COM PEÇAS DA PRODUÇÃO"
   Case 2
-    txt(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS COELHO"
+    TXT(11).text = "SIMULAR AS FALHAS COM PEÇAS COELHO"
   End Select
 End Sub
 
 Private Sub Command4_Click(Index As Integer)
-  salvarpict Me, Picture1(Index), StrZero(txt(0), 8)
+  salvarpict Me, Picture1(Index), StrZero(TXT(0), 8)
 End Sub
 
 Private Sub Command5_Click()
@@ -1485,12 +1485,12 @@ Private Sub Command5_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim cCODIGO As String
-  cCODIGO = FixStr(txt(1), "", "TRIM")
+  cCODIGO = FixStr(TXT(1), "", "TRIM")
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
   aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
   If lRETU Then
-    txt(2) = aRETU(0)
+    TXT(2) = aRETU(0)
   End If
 End Sub
 
@@ -1504,9 +1504,9 @@ Private Sub Command6_Click()
 End Sub
 
 Private Sub Command7_Click()
-  txt(7) = zIDFOLHA
-  txt(8) = zNOMEFOLHA
-  txt(9) = Date
+  TXT(7) = zIDFOLHA
+  TXT(8) = zNOMEFOLHA
+  TXT(9) = Date
 End Sub
 
 Private Sub PegCodigoDescricaoPf()
@@ -1517,12 +1517,12 @@ Private Sub PegCodigoDescricaoPf()
   sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
   aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
   If lRETU Then
-    txt(1) = aRETU(0)
-    txt(2) = aRETU(1)
-    txt(1).Enabled = False
-    txt(2).Enabled = False
-    txt(1).Locked = True
-    txt(2).Locked = True
+    TXT(1) = aRETU(0)
+    TXT(2) = aRETU(1)
+    TXT(1).Enabled = False
+    TXT(2).Enabled = False
+    TXT(1).Locked = True
+    TXT(2).Locked = True
     ESCMS01A(0).Enabled = False
     ESCMS01A(0).Visible = False
     ESCMS01A(1).Enabled = False
@@ -1533,8 +1533,8 @@ Private Sub PegCodigoDescricaoPf()
     Command5.Visible = False
     Command1.Enabled = False
     Command1.Visible = False
-    txt(1).BackColor = &HC0FFFF
-    txt(2).BackColor = &HC0FFFF
+    TXT(1).BackColor = &HC0FFFF
+    TXT(2).BackColor = &HC0FFFF
   End If
 End Sub
 
@@ -1605,7 +1605,7 @@ End Sub
 
 Private Sub ESCMS01A_Click(Index As Integer)
   Dim cCHAVEBUS As String
-  cCHAVEBUS = txt(1)
+  cCHAVEBUS = TXT(1)
   ePASS01 = "MANA5"
   If Index = 1 Then
     ePASS01 = "LOGIX"
@@ -1615,8 +1615,8 @@ Private Sub ESCMS01A_Click(Index As Integer)
   End If
   escms01.Show vbModal, Me
   If lRETU Then
-    txt(1) = eRETU01
-    txt(2) = eRETU02
+    TXT(1) = eRETU01
+    TXT(2) = eRETU02
   End If
 End Sub
 
@@ -1629,10 +1629,10 @@ Private Sub Form_Load()
 
   CenterFormToScreen Me
 
-  PF.tEXT = nPF
-  SEQ.tEXT = nSEQ
-  SSQ.tEXT = nSSQ
-  item.tEXT = nORD
+  PF.text = nPF
+  SEQ.text = nSEQ
+  SSQ.text = nSSQ
+  item.text = nORD
 
   lTROCOU = Array(False, False, False, False)
 
@@ -1647,7 +1647,7 @@ Private Sub Form_Load()
   aPAD = Array(0, "", "", "", "", "", "", 0, "", "", "", "", "", 0, "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    txt(iLOOP) = aVAL(iLOOP)
+    TXT(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   For i = 0 To 3
     If ADOPegBlob(Picture1(i), cARQ, "POKA", "numero=" & nPPAP, "FOTOPASSO0" + StrZero(i + 1, 1)) Then 'ADOPegBlob(cARQ, cSQL, Picture1(i), "FOTOPASSO0" + StrZero(i + 1, 1)) Then
@@ -1705,28 +1705,28 @@ End Sub
 
 Private Sub NovaRev_Click()
   Dim nREV As Integer
-  If Len(txt(15)) > 0 Then
-    If txt(15) > Today() Then
+  If Len(TXT(15)) > 0 Then
+    If TXT(15) > Today() Then
       Alert ("Data Revisao Anterior Maior que Data do Sistema")
       Exit Sub
     End If
   End If
   If MDG("Fazer Nova Revisao") Then
-    nREV = FixNum(txt(13)) + 1
+    nREV = FixNum(TXT(13)) + 1
     IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & "AND TIPO='POK' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), _
               Array(nPPAP, nREV, "POK", Today()), True, False
-    txt(13) = nREV
-    txt(15) = Date
+    TXT(13) = nREV
+    TXT(15) = Date
   End If
 End Sub
 
 Private Sub VerImg_Click(Index As Integer)
-  frmPicViewer.Show vbModal, Me
-  If lRETU Then
-    If lerarquivoimagem(eRETU01, Picture1(Index), Picture2(Index)) Then
-      lTROCOU(Index) = True
-    End If
-  End If
+ ' frmPicViewer.Show vbModal, Me
+ ' If lRETU Then
+ '   If lerarquivoimagem(eRETU01, Picture1(Index), Picture2(Index)) Then
+ '     lTROCOU(Index) = True
+ '   End If
+ ' End If
 End Sub
 
 Private Sub Filgridrev()
@@ -1744,7 +1744,7 @@ Private Sub Filgridrevi()
 End Sub
 
 Private Sub ximgsave_Click(Index As Integer)
-  salvarpict Me, Picture1(Index), StrZero(txt(0), 8)
+  salvarpict Me, Picture1(Index), StrZero(TXT(0), 8)
 End Sub
 
 

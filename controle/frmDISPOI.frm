@@ -467,9 +467,9 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub VerImg_Click()
-  frmPicViewer.Show vbModal, Me
-  If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
-    lTROCOU = True
-  End If
+'  frmPicViewer.Show vbModal, Me
+'  If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
+'    lTROCOU = True
+'  End If
 End Sub
 

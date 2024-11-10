@@ -905,9 +905,9 @@ Private Sub Form_Load()
   CenterFormToScreen Me
   cARQ = Sdb                                   'agora sdb pois pode ser pf pfp pfg
 
-  TXTPF.tEXT = nPF
-  TXTSEQ.tEXT = nSEQ
-  TXTSSQ.tEXT = nSSQ
+  TXTPF.text = nPF
+  TXTSEQ.text = nSEQ
+  TXTSSQ.text = nSSQ
 
   cSQL = "select * from PFI WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
 
@@ -964,12 +964,12 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub VerImg_Click()
-  frmPicViewer.Show vbModal, Me
-  If lRETU Then
-    If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
-      lTROCOU = True
-    End If
-  End If
+ ' frmPicViewer.Show vbModal, Me
+ ' If lRETU Then
+ '   If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
+ '     lTROCOU = True
+ '   End If
+ ' End If
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
   On Error Resume Next

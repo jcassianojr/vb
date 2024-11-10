@@ -739,12 +739,12 @@ Private Sub Picture2_DblClick()
 End Sub
 
 Private Sub VerImg_Click()
-  frmPicViewer.Show vbModal, Me
-  If lRETU Then
-    If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
-      lTROCOU = True
-    End If
-  End If
+ ' frmPicViewer.Show vbModal, Me
+ ' If lRETU Then
+ '   If lerarquivoimagem(eRETU01, Picture1, Picture2) Then
+ '     lTROCOU = True
+ '   End If
+ ' End If
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
  
