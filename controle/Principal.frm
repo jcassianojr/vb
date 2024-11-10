@@ -346,7 +346,7 @@ Private Sub MDIForm_Load()
   Dim carqhelp As String
 
 
-  StatusBar1.Panels(5).Text = ""
+  StatusBar1.Panels(5).tEXT = ""
 
 
 
@@ -462,7 +462,7 @@ Private Sub MDIForm_Load()
   rs.Close
   DB.Close
 
-  StatusBar1.Panels(6).Text = zUSER
+  StatusBar1.Panels(6).tEXT = zUSER
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If
@@ -533,15 +533,15 @@ Private Sub mnuSUBMENU2_Click(Index As Integer)
     escDes.Show vbModal
   Case 7
     ZENGTIP = "DES"
-    escCLI.Show vbModal
+    ESCCLI.Show vbModal
   Case 8
-    escPRO.Show vbModal
+    ESCpro.Show vbModal
   Case 9
     iPPAP = 3
     escPPAP.Show vbModal
   Case 10
     ZENGTIP = "PRO"
-    escCLI.Show vbModal
+    ESCCLI.Show vbModal
   Case 11
     zPFTIPO = "POA"
     Sdb = PegPath("PATH", "POA")
@@ -699,7 +699,7 @@ Private Sub ImportaWrptUser()
 End Sub
 
 Private Sub mnuSUBMENU_Click(Index As Integer)
-  zRPTARQ = PegPath("PATH", "RPT") ' agora no ini + "RPT.MDB"
+  zRPTARQ = PegPath("PATH", "RPT")
   cTIPORPT = "R"
   If UCase(Replace(mnuSUBMENU(Index).Caption, "&", "")) = "SAIR" Then
     Unload Me
@@ -793,12 +793,12 @@ Private Sub Relat_Click(Index As Integer)
   Case 0
     cTIPORPT = "R"
     cARQRTF = ""
-    zRPTARQ = PegPath("PATH", "RPT") 'agora no ini + "RPT.MDB"
+    zRPTARQ = PegPath("PATH", "RPT")
     escRPTGRP.Show vbModal, Me
   Case 1
   cARQRTF = ""
     cTIPORPT = "D"
-    zRPTARQ = PegPath("PATH", "DOC") 'agora o ini + "RTF.MDB"
+    zRPTARQ = PegPath("PATH", "DOC")
     escRPTGRP.Show vbModal, Me
   Case 2
     cTIPO = "R"
@@ -809,19 +809,17 @@ Private Sub Relat_Click(Index As Integer)
   Case 4
     cARQRTF = ""
     cTIPO = "F"
-    zRPTARQ = PegPath("PATH", "FOL") 'agora no ini + "RPTFOL.MDB"
+    zRPTARQ = PegPath("PATH", "FOL")
     escRPTGRP.Show vbModal, Me
   Case 5
     cARQRTF = ""
     cTIPO = "I"
-    zRPTARQ = PegPath("PATH", "INT") 'agora no ini + "RPTINT.MDB"
+    zRPTARQ = PegPath("PATH", "INT")
     escRPTGRP.Show vbModal, Me
   Case 6
     FrmLstView.Show vbModal, Me
   Case 7
-    'zRPTARQ = PegPath("PATH", "WRPTX") + " $" + Trim(zUSER) + "%#"
-    'Shell zRPTARQ, vbNormalFocus
-    ShellEx "WRPTX", essSW_SHOWDEFAULT, "$" + Trim(zUSER) + "%#", PegPath("PATH", "WRPTX"), , CLng(Me.hWnd)
+    ShellEx "WRPT", essSW_SHOWDEFAULT, "$" + Trim(zUSER) + "%#", PegPath("PATH", "WRPTX"), , CLng(Me.hWnd)
   End Select
 End Sub
 

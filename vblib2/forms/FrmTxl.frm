@@ -532,7 +532,6 @@ Option Explicit
 Const nFORMID = 1181
 Const cFORMID = "Imprimir Relatorios Script de Texto"
 Dim oTXT As New Criatxt
-Dim oIni As New cIniSettings
 Dim nQTDELAY As Long
 Dim nLINHAS As Long
 Dim nCOLUNAS As Long
@@ -613,7 +612,7 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hWnd))
   End If
@@ -624,8 +623,8 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.Text, "RTF") Or larqtxt Then
-    cARQRTF = TxtArquivo.Text
+  If IsExtensao(TxtArquivo.tEXT, "RTF") Or larqtxt Then
+    cARQRTF = TxtArquivo.tEXT
     FrmRtfView.Show vbModal, Me
   End If
 End Sub
@@ -663,7 +662,7 @@ Private Sub cmdimp_Click()
     imptxt  'Aqui e direct print com1,COM2.. lpt1,LPT2.. no pode ser usado preview aqui
     Exit Sub
   End If
-  If IsExtensao(TxtArquivo.Text, "PDF") Or IsExtensao(TxtArquivo.Text, "HTML") Or IsExtensao(TxtArquivo.Text, "RTF") Then
+  If IsExtensao(TxtArquivo.tEXT, "PDF") Or IsExtensao(TxtArquivo.tEXT, "HTML") Or IsExtensao(TxtArquivo.tEXT, "RTF") Then
     CmdVisua_Click
     Exit Sub
   End If
@@ -715,7 +714,7 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -744,7 +743,7 @@ Private Sub CmdVisua_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.Text = ""
+    RichTextBox1.tEXT = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -807,6 +806,7 @@ End Sub
 Private Sub Form_Load()
   Dim x As Long
   Dim cTMP As String
+  Dim cARQINI As String
   CenterFormToScreen Me
   filtro = ""
   TxtCaminho = ""
@@ -822,19 +822,22 @@ Private Sub Form_Load()
   End If
 
 
-  If larqtxt Then
-    TxtArquivo = cARQRTF
-  Else
-    oIni.Path = cARQRTF
-    nQTDELAY = oIni.GetSetting("CONFIGURACAO", "QTDELAY", 1)
+  cARQINI = TrocaExt(cARQRTF, "INI")
+  TxtArquivo = cARQRTF
+  
+  'Pega configuracoes zpl etiquetas outros
+  If FileExists(cARQINI) Then
+    
+    
+    nQTDELAY = PegINIVAL(cARQINI, "CONFIGURACAO", "QTDELAY", 1)
     ReDim aLAY(nQTDELAY + 1)
     For x = 1 To nQTDELAY
-      aLAY(x) = oIni.GetSetting("LAYOUT", StrZero(x, 3), "")
+      aLAY(x) = PegINIVAL(cARQINI, "LAYOUT", StrZero(x, 3), "")
     Next x
-    nCOLUNAS = oIni.GetSetting("CONFIGURACAO", "COLUNAS", 80)
-    nLINHAS = oIni.GetSetting("CONFIGURACAO", "LINHAS", 60)
-    cDESTINO = oIni.GetSetting("CONFIGURACAO", "DESTINO", "ARQ")
-    TxtCaminho = oIni.GetSetting("CONFIGURACAO", "CAMINHO", "LPT1")
+    nCOLUNAS = PegINIVAL(cARQINI, "CONFIGURACAO", "COLUNAS", 80)
+    nLINHAS = PegINIVAL(cARQINI, "CONFIGURACAO", "LINHAS", 60)
+    cDESTINO = PegINIVAL(cARQINI, "CONFIGURACAO", "DESTINO", "ARQ")
+    TxtCaminho = PegINIVAL(cARQINI, "CONFIGURACAO", "CAMINHO", "LPT1")
 
     If Mid(cDESTINO, 1, 3) = "LPT" Then
        OptDestino(0).Value = True
@@ -858,18 +861,18 @@ Private Sub Form_Load()
     End Select
 
 
-    cSETUP = oIni.GetSetting("CONFIGURACAO", "SETUP", "")
-    TxtArquivo = oIni.GetSetting("CONFIGURACAO", "NOMEARQUIVO", "TXL_" & zUSER & Format(Now, "_DDMMYYYY_HHMMSS") & ".TXT")
+    cSETUP = PegINIVAL(cARQINI, "CONFIGURACAO", "SETUP", "")
+    TxtArquivo = PegINIVAL(cARQINI, "CONFIGURACAO", "NOMEARQUIVO", "TXL_" & zUSER & Format(Now, "_DDMMYYYY_HHMMSS") & ".TXT")
     If aRELCFG(14) = "" Then
-      aRELCFG(14) = oIni.GetSetting("CONFIGURACAO", "FILTRO", 1)
+      aRELCFG(14) = PegINIVAL(cARQINI, "CONFIGURACAO", "FILTRO", 1)
     End If
     filtro = aRELCFG(14)
     If aRELCFG(15) = "" Then
-      aRELCFG(15) = oIni.GetSetting("CONFIGURACAO", "SQL", 1)
+      aRELCFG(15) = PegINIVAL(cARQINI, "CONFIGURACAO", "SQL", 1)
     End If
     cSQL = aRELCFG(15)
     If aARQUIVOS(0) = "" Then
-      cTMP = oIni.GetSetting("CONFIGURACAO", "ARQ", 1)
+      cTMP = PegINIVAL(cARQINI, "CONFIGURACAO", "ARQ", 1)
       If Left(cTMP, 3) = "[T]" Then
         cTMP = PegTable("TABELAS", cTMP)
       End If
@@ -1007,7 +1010,7 @@ Private Sub Salvar_Click(Index As Integer)
     End Select
 
     sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
+    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
 
     If InStr(cARQUIVO, ".") > 0 Then
       cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO
