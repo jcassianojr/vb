@@ -386,7 +386,7 @@ Private Sub MDIForm_Load()
   zusamc = PegPath("PATH", "USAMC")
   dbuser = PegPath("PATH", "USER")
   DBWRPT = PegPath("PATH", "WRPT")
-  Dbname = PegPath("PATH", "MDB") ' agora no ini+ "WRPT.MDB"
+  Dbname = PegPath("PATH", "MDB")
 
   If Not FileConnExist(Dbname, True) Then
     Alert ("Erro Ini [PATH] MDB=")
@@ -462,26 +462,34 @@ Private Sub MDIForm_Load()
    
    
    cTIPORPT = ""
+   zRPTARQ = ""
    If Mid(cmdline, 1, 1) = "X" Or Mid(cmdline, 1, 1) = "R" Then
       cTIPORPT = "R"
       cmdline = Mid(cmdline, 2)
+      zRPTARQ = PegPath("PATH", "RPT")
    End If
    If Mid(cmdline, 1, 1) = "D" Then
       cTIPORPT = "D"
       cmdline = Mid(cmdline, 2)
+      zRPTARQ = PegPath("PATH", "DOC")
    End If
    If Mid(cmdline, 1, 1) = "I" Then
       cTIPORPT = "I"
       cmdline = Mid(cmdline, 2)
+      zRPTARQ = PegPath("PATH", "INT")
    End If
    If Mid(cmdline, 1, 1) = "F" Then
       cTIPORPT = "F"
       cmdline = Mid(cmdline, 2)
+      zRPTARQ = PegPath("PATH", "FOL")
    End If
-   
-   
-   
-   
+   ''especifico ou padrao manrel mana5
+   If Mid(cmdline, 1, 1) = "E" Then
+      cTIPORPT = "E"
+   End If
+   If Mid(cmdline, 1, 1) = "P" Then
+      cTIPORPT = "P"
+   End If
    
    
   aRETU = pegue2delimitado(cmdline, "$", "%")
@@ -551,7 +559,9 @@ Private Sub MDIForm_Load()
   Me.Caption = App.FileDescription & " Versao:" & App.Major & "." & App.Minor & "Usuário: " & zUSER
 
 
-  ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hWnd
+  If Trim(PegPath("EMAILINT", zUSER, "S")) = "S" Then
+     ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hWnd
+  End If
 
 
   '* Carrega imagens para o ImageList
@@ -586,6 +596,37 @@ Private Sub MDIForm_Load()
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If
+  
+  
+  'abre caso o tipo nao esteja em branco
+  If cTIPORPT <> "" Then
+     If cTIPORPT = "E" Or cTIPORPT = "P" Then
+       'especificos ou padrao manrel mana5 imprel via shell
+       If cTIPORPT = "E" Then
+          mnuSUBMENU1_Click (0)
+       End If
+        If cTIPORPT = "P" Then
+          mnuSUBMENU1_Click (1)
+       End If
+     Else
+        If eLOCALIZA = "" Then
+           If zgrp = "" Then
+              cARQRTF = ""
+              eLOCALIZA = ""
+              escRPTGRP.Show vbModal
+              End
+           Else
+              cARQRTF = ""
+              eLOCALIZA = ""
+              escRPT.Show vbModal
+              End
+           End If
+        Else
+            escRPT.Show vbModal
+            End
+        End If
+      End If
+    End If
   Exit Sub
 
 ErrorHandler:
@@ -634,30 +675,30 @@ Private Sub MDIForm_Unload(Cancel As Integer)
   End
 End Sub
 Private Sub Menu2_Click()
-cARQRTF = ""
+  cARQRTF = ""
   cTIPORPT = "R"
   zRPTARQ = PegPath("PATH", "RPT") ' agora no ini + "RPT.MDB"
   escRPTGRP.Show vbModal, Me
 End Sub
 
 Private Sub Menu3_Click()
-cARQRTF = ""
+  cARQRTF = ""
   cTIPORPT = "D"
   zRPTARQ = PegPath("PATH", "DOC") ' agora no ini + "RTF.MDB"
   escRPTGRP.Show vbModal, Me
 End Sub
 
 Private Sub Menu4_Click()
-cARQRTF = ""
+  cARQRTF = ""
   cTIPORPT = "F"
-  zRPTARQ = PegPath("PATH", "FOL") 'agora no ini + "RPTFOL.MDB"
+  zRPTARQ = PegPath("PATH", "FOL")
   escRPTGRP.Show vbModal, Me
 End Sub
 
 Private Sub Menu5_Click()
-cARQRTF = ""
+  cARQRTF = ""
   cTIPORPT = "I"
-  zRPTARQ = PegPath("PATH", "INT") 'agora no ini+ "RPTINT.MDB"
+  zRPTARQ = PegPath("PATH", "INT")
   escRPTGRP.Show vbModal, Me
 End Sub
 
@@ -672,10 +713,10 @@ End Sub
 Private Sub mnuSUBMENU1_Click(Index As Integer)
   Select Case Index
   Case 0
-    cTIPO = "R"
+    cTIPO = "R"  'especifico
     escmanreg.Show vbModal, Me
   Case 1
-    cTIPO = "P"
+    cTIPO = "P"  'padrao
     escmanreg.Show vbModal, Me
   End Select
 End Sub
