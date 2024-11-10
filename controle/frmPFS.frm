@@ -5397,13 +5397,13 @@ Private Sub Command20_Click()
   If Not MDG("Trocar Tipo Almofada") Then
     Exit Sub
   End If
-  If TXTFIELDS(36).tEXT = "6" Then
-    TXTFIELDS(36).tEXT = "8"
+  If TXTFIELDS(36).text = "6" Then
+    TXTFIELDS(36).text = "8"
   Else
-    TXTFIELDS(36).tEXT = "6"
+    TXTFIELDS(36).text = "6"
   End If
   For x = 1 To 8
-    If TXTFIELDS(36).tEXT = "6" Then
+    If TXTFIELDS(36).text = "6" Then
       cTEMP = String(6, "¡") + Space(2)
       If x >= 5 Then
         cTEMP = Space(8)
@@ -5411,7 +5411,7 @@ Private Sub Command20_Click()
     Else
       cTEMP = String(8, "¡")
     End If
-    TXTFIELDS(40 + x).tEXT = cTEMP
+    TXTFIELDS(40 + x).text = cTEMP
   Next
 End Sub
 Private Sub Command3_Click()
@@ -5587,11 +5587,11 @@ Private Sub CommandX_Click(Index As Integer)
   End Select
 
   cARQ = cARQ & "_PF_"
-  cARQ = cARQ & StrZero(FixInt(TXTPF.tEXT), 6)
+  cARQ = cARQ & StrZero(FixInt(TXTPF.text), 6)
   cARQ = cARQ & "_SEQ_"
-  cARQ = cARQ & StrZero(FixInt(TXTSEQ.tEXT), 3)
+  cARQ = cARQ & StrZero(FixInt(TXTSEQ.text), 3)
   cARQ = cARQ & "_SSQ_"
-  cARQ = cARQ & StrZero(FixInt(TXTSSQ.tEXT), 3)
+  cARQ = cARQ & StrZero(FixInt(TXTSSQ.text), 3)
   salvarpict Me, Picture1(Index), cARQ
 
 End Sub
@@ -5641,15 +5641,15 @@ Private Sub esc1_Click(Index As Integer)
   Dim cGRV As String
   linha = (Int((Index - 1) / 8)) + 1
   coluna = (Index + 8) - (linha * 8)
-  If TXTFIELDS(36).tEXT = "6" And linha > 4 Then
+  If TXTFIELDS(36).text = "6" And linha > 4 Then
     Alert ("Linha Incorreta para Formato 4x6")
     Exit Sub
   End If
-  If TXTFIELDS(36).tEXT = "6" And coluna > 6 Then
+  If TXTFIELDS(36).text = "6" And coluna > 6 Then
     Alert ("Coluna Incorreta para Formato 4x6")
     Exit Sub
   End If
-  cTEMP = TXTFIELDS(40 + linha).tEXT
+  cTEMP = TXTFIELDS(40 + linha).text
   cDIG = Mid(cTEMP, coluna, 1)
   If cDIG = "l" Then
     cDIG = "¡"
@@ -5664,7 +5664,7 @@ Private Sub esc1_Click(Index As Integer)
   Case Else
     cGRV = Mid(cTEMP, 1, coluna - 1) + cDIG + Mid(cTEMP, coluna + 1)
   End Select
-  TXTFIELDS(40 + linha).tEXT = cGRV
+  TXTFIELDS(40 + linha).text = cGRV
   TXTFIELDS(40 + linha).Refresh
 End Sub
 
@@ -5824,9 +5824,9 @@ Private Sub Form_Load()
   Dim x As Integer
   CenterFormToScreen Me
   lTROCOU = Array(False, False, False, False, False)
-  TXTPF.tEXT = nPF
-  TXTSEQ.tEXT = nSEQ
-  TXTSSQ.tEXT = nSSQ
+  TXTPF.text = nPF
+  TXTSEQ.text = nSEQ
+  TXTSSQ.text = nSSQ
   cARQPF = Sdb        'agora tem que usar sdb pois pode ser pf pfp pfg
 
   'Usando 2 matrizes pois estava com erro string complex
@@ -6018,12 +6018,12 @@ Private Sub TXTFIELDS_LostFocus(Index As Integer)
   End If
 End Sub
 Private Sub VerImg_Click(Index As Integer)
-  frmPicViewer.Show vbModal, Me
-  If lRETU Then
-    If lerarquivoimagem(eRETU01, Picture1(Index), Picture2(Index)) Then
-      lTROCOU(Index) = True
-    End If
-  End If
+ ' frmPicViewer.Show vbModal, Me
+ ' If lRETU Then
+  '  If lerarquivoimagem(eRETU01, Picture1(Index), Picture2(Index)) Then
+ '     lTROCOU(Index) = True
+ '   End If
+ ' End If
 End Sub
 Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
   On Error Resume Next
