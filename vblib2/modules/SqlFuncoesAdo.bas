@@ -438,7 +438,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   aARQ = TipoConn(cARQ)
   cARQCON = aARQ(1)
 
-  If aRETU(2) = "PGSQL" Then
+  If aARQ(2) = "PGSQL" Then
      cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
   End If
   

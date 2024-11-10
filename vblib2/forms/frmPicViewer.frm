@@ -86,21 +86,21 @@ Begin VB.Form frmPicViewer
                Width           =   1215
             End
          End
-         Begin VB.ComboBox cmbPrinters 
+         Begin VBCCR18.ComboBoxW cmbPrinters 
             Height          =   315
             Left            =   120
             TabIndex        =   8
             Top             =   450
             Width           =   3585
          End
-         Begin VB.ComboBox cmbPapers 
+         Begin VBCCR18.ComboBoxW cmbPapers 
             Height          =   315
             Left            =   120
             TabIndex        =   9
             Top             =   1080
             Width           =   4545
          End
-         Begin VB.ComboBox cmbResolutions 
+         Begin VBCCR18.ComboBoxW cmbResolutions 
             Height          =   315
             Left            =   120
             TabIndex        =   10

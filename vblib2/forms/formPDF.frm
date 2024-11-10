@@ -48,7 +48,7 @@ Begin VB.Form formConvertToPDF
       Top             =   2400
       Width           =   1455
    End
-   Begin VB.ComboBox cmbPageSize 
+   Begin VBCCR18.ComboBoxW cmbPageSize 
       Height          =   315
       ItemData        =   "formPDF.frx":0E64
       Left            =   3720
@@ -58,7 +58,7 @@ Begin VB.Form formConvertToPDF
       Top             =   2400
       Width           =   1305
    End
-   Begin VB.ComboBox cmbFontSize 
+   Begin VBCCR18.ComboBoxW cmbFontSize 
       Height          =   315
       ItemData        =   "formPDF.frx":0E98
       Left            =   2280
@@ -68,7 +68,7 @@ Begin VB.Form formConvertToPDF
       Top             =   2400
       Width           =   690
    End
-   Begin VB.ComboBox cmbRotation 
+   Begin VBCCR18.ComboBoxW cmbRotation 
       Height          =   315
       ItemData        =   "formPDF.frx":0EE6
       Left            =   3000
@@ -78,7 +78,7 @@ Begin VB.Form formConvertToPDF
       Top             =   2400
       Width           =   690
    End
-   Begin VB.ComboBox cmbFont 
+   Begin VBCCR18.ComboBoxW cmbFont 
       Height          =   315
       ItemData        =   "formPDF.frx":0F0F
       Left            =   120

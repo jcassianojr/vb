@@ -148,7 +148,7 @@ Begin VB.Form Frm_Conversion
             Top             =   1680
             Width           =   3015
          End
-         Begin VB.ComboBox CboType 
+         Begin VBCCR18.ComboBoxW CboType 
             Height          =   315
             ItemData        =   "frm_conversion.frx":058A
             Left            =   4770

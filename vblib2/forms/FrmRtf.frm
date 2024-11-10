@@ -14,6 +14,16 @@ Begin VB.Form FrmRTf
    ScaleHeight     =   7245
    ScaleWidth      =   11715
    StartUpPosition =   2  'CenterScreen
+   Begin VBCCR18.ComboBoxW cmbfontcolor 
+      Height          =   315
+      Left            =   4200
+      TabIndex        =   39
+      ToolTipText     =   "Cor do Texto "
+      Top             =   360
+      Width           =   1215
+      _ExtentX        =   2143
+      _ExtentY        =   556
+   End
    Begin vbExtra.MouseWheelEnabler MouseWheelEnabler1 
       Left            =   11160
       Top             =   2760
@@ -22,8 +32,9 @@ Begin VB.Form FrmRTf
    End
    Begin vbExtra.FontPicker FontPicker1 
       Height          =   375
-      Left            =   2520
-      TabIndex        =   40
+      Left            =   2040
+      TabIndex        =   38
+      ToolTipText     =   "Tipo de Letra"
       Top             =   360
       Width           =   1695
       _ExtentX        =   2990
@@ -44,33 +55,33 @@ Begin VB.Form FrmRTf
       _ExtentY        =   1191
    End
    Begin VBCCR18.RichTextBox RichTextbox1 
-      Height          =   6015
-      Left            =   -120
-      TabIndex        =   39
-      Top             =   1320
-      Width           =   11415
-      _ExtentX        =   20135
-      _ExtentY        =   10610
+      Height          =   6495
+      Left            =   120
+      TabIndex        =   37
+      Top             =   840
+      Width           =   10815
+      _ExtentX        =   19076
+      _ExtentY        =   11456
       MultiLine       =   -1  'True
       ScrollBars      =   3
       TextRTF         =   "FrmRtf.frx":058A
    End
    Begin VB.CommandButton CmdExpHtml 
       Height          =   315
-      Left            =   1620
+      Left            =   1800
       Picture         =   "FrmRtf.frx":06F0
       Style           =   1  'Graphical
-      TabIndex        =   38
+      TabIndex        =   36
       ToolTipText     =   "Exportar Documento como HTML"
       Top             =   0
       Width           =   360
    End
    Begin VB.CommandButton CmdExpPdf 
       Height          =   315
-      Left            =   1320
+      Left            =   1440
       Picture         =   "FrmRtf.frx":0C7A
       Style           =   1  'Graphical
-      TabIndex        =   37
+      TabIndex        =   35
       ToolTipText     =   "Exportar Documento como PDF"
       Top             =   0
       Width           =   360
@@ -79,7 +90,7 @@ Begin VB.Form FrmRTf
       Align           =   2  'Align Bottom
       Height          =   315
       Left            =   0
-      TabIndex        =   36
+      TabIndex        =   34
       Top             =   6930
       Width           =   11715
       _ExtentX        =   20664
@@ -116,7 +127,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   1588
             MinWidth        =   1587
             Picture         =   "FrmRtf.frx":1204
-            TextSave        =   "15:54"
+            TextSave        =   "12:41"
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   6
@@ -124,7 +135,7 @@ Begin VB.Form FrmRTf
             Object.Width           =   2302
             MinWidth        =   2293
             Picture         =   "FrmRtf.frx":179E
-            TextSave        =   "09/11/2024"
+            TextSave        =   "10/11/2024"
          EndProperty
          BeginProperty Panel6 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   2
@@ -320,10 +331,10 @@ Begin VB.Form FrmRTf
    End
    Begin VB.CommandButton Command34 
       Height          =   315
-      Left            =   8760
+      Left            =   8880
       Picture         =   "FrmRtf.frx":C5D6
       Style           =   1  'Graphical
-      TabIndex        =   35
+      TabIndex        =   33
       ToolTipText     =   "Capitalizar"
       Top             =   360
       Width           =   360
@@ -333,27 +344,27 @@ Begin VB.Form FrmRTf
       Left            =   3120
       Picture         =   "FrmRtf.frx":C960
       Style           =   1  'Graphical
-      TabIndex        =   34
+      TabIndex        =   32
       ToolTipText     =   "Enviar Email  Documento Atual"
       Top             =   0
       Width           =   360
    End
    Begin VB.CommandButton Command32 
       Height          =   315
-      Left            =   10320
+      Left            =   10440
       Picture         =   "FrmRtf.frx":CEEA
       Style           =   1  'Graphical
-      TabIndex        =   33
+      TabIndex        =   31
       ToolTipText     =   "Inserir Data"
       Top             =   360
       Width           =   360
    End
    Begin VB.CommandButton Command31 
       Height          =   315
-      Left            =   9960
+      Left            =   10080
       Picture         =   "FrmRtf.frx":D274
       Style           =   1  'Graphical
-      TabIndex        =   32
+      TabIndex        =   30
       ToolTipText     =   "Incluir Imagens"
       Top             =   360
       Width           =   360
@@ -363,17 +374,17 @@ Begin VB.Form FrmRTf
       Left            =   4560
       Picture         =   "FrmRtf.frx":D5FE
       Style           =   1  'Graphical
-      TabIndex        =   31
+      TabIndex        =   29
       ToolTipText     =   "Selecionar Todo o Texto"
       Top             =   0
       Width           =   360
    End
    Begin VB.CommandButton Command29 
       Height          =   315
-      Left            =   9120
+      Left            =   9240
       Picture         =   "FrmRtf.frx":D988
       Style           =   1  'Graphical
-      TabIndex        =   30
+      TabIndex        =   28
       ToolTipText     =   "Mudar Letra Escrita Inferiores"
       Top             =   360
       Width           =   360
@@ -383,27 +394,27 @@ Begin VB.Form FrmRTf
       Left            =   9600
       Picture         =   "FrmRtf.frx":DD12
       Style           =   1  'Graphical
-      TabIndex        =   29
+      TabIndex        =   27
       ToolTipText     =   "Mudar Letra Escrita Superiores"
       Top             =   360
       Width           =   360
    End
    Begin VB.CommandButton Command27 
       Height          =   315
-      Left            =   8400
+      Left            =   8520
       Picture         =   "FrmRtf.frx":E09C
       Style           =   1  'Graphical
-      TabIndex        =   28
+      TabIndex        =   26
       ToolTipText     =   "Converter Maisculas"
       Top             =   360
       Width           =   360
    End
    Begin VB.CommandButton Command26 
       Height          =   315
-      Left            =   8040
+      Left            =   8160
       Picture         =   "FrmRtf.frx":E426
       Style           =   1  'Graphical
-      TabIndex        =   27
+      TabIndex        =   25
       ToolTipText     =   "Converter Minusculas"
       Top             =   360
       Width           =   360
@@ -413,7 +424,7 @@ Begin VB.Form FrmRTf
       Left            =   9120
       Picture         =   "FrmRtf.frx":E7B0
       Style           =   1  'Graphical
-      TabIndex        =   26
+      TabIndex        =   24
       ToolTipText     =   "Diminuir Recuo"
       Top             =   0
       Width           =   375
@@ -423,7 +434,7 @@ Begin VB.Form FrmRTf
       Left            =   8760
       Picture         =   "FrmRtf.frx":EB3A
       Style           =   1  'Graphical
-      TabIndex        =   25
+      TabIndex        =   23
       ToolTipText     =   "Aumentar Recuo"
       Top             =   0
       Width           =   375
@@ -433,27 +444,27 @@ Begin VB.Form FrmRTf
       Left            =   8400
       Picture         =   "FrmRtf.frx":EEC4
       Style           =   1  'Graphical
-      TabIndex        =   24
+      TabIndex        =   22
       ToolTipText     =   "Marcadores"
       Top             =   0
       Width           =   375
    End
    Begin VB.CommandButton Command22 
       Height          =   315
-      Left            =   1920
+      Left            =   1560
       Picture         =   "FrmRtf.frx":F24E
       Style           =   1  'Graphical
-      TabIndex        =   23
+      TabIndex        =   21
       ToolTipText     =   "Selecionar Fonte"
       Top             =   360
       Width           =   360
    End
    Begin VB.CommandButton Command21 
       Height          =   315
-      Left            =   1560
+      Left            =   1200
       Picture         =   "FrmRtf.frx":F398
       Style           =   1  'Graphical
-      TabIndex        =   22
+      TabIndex        =   20
       ToolTipText     =   "Cortado"
       Top             =   360
       Width           =   360
@@ -463,7 +474,7 @@ Begin VB.Form FrmRTf
       Left            =   7800
       Picture         =   "FrmRtf.frx":F722
       Style           =   1  'Graphical
-      TabIndex        =   21
+      TabIndex        =   19
       ToolTipText     =   "Localizar Proxima"
       Top             =   0
       Width           =   360
@@ -471,7 +482,7 @@ Begin VB.Form FrmRTf
    Begin VB.TextBox texto 
       Height          =   285
       Left            =   5400
-      TabIndex        =   20
+      TabIndex        =   18
       Tag             =   "Texto"
       ToolTipText     =   "Texto Para Localizar"
       Top             =   0
@@ -482,7 +493,7 @@ Begin VB.Form FrmRTf
       Left            =   7440
       Picture         =   "FrmRtf.frx":FAAC
       Style           =   1  'Graphical
-      TabIndex        =   19
+      TabIndex        =   17
       ToolTipText     =   "Localizar"
       Top             =   0
       Width           =   360
@@ -492,7 +503,7 @@ Begin VB.Form FrmRTf
       Left            =   3840
       Picture         =   "FrmRtf.frx":FE36
       Style           =   1  'Graphical
-      TabIndex        =   18
+      TabIndex        =   16
       ToolTipText     =   "Copiar Texto Selecionado"
       Top             =   0
       Width           =   360
@@ -502,7 +513,7 @@ Begin VB.Form FrmRTf
       Left            =   3480
       Picture         =   "FrmRtf.frx":103C0
       Style           =   1  'Graphical
-      TabIndex        =   17
+      TabIndex        =   15
       ToolTipText     =   "Recortar Texto Selecionado"
       Top             =   0
       Width           =   360
@@ -512,7 +523,7 @@ Begin VB.Form FrmRTf
       Left            =   4200
       Picture         =   "FrmRtf.frx":1074A
       Style           =   1  'Graphical
-      TabIndex        =   16
+      TabIndex        =   14
       ToolTipText     =   "Colar Texto "
       Top             =   0
       Width           =   360
@@ -522,7 +533,7 @@ Begin VB.Form FrmRTf
       Left            =   7560
       Picture         =   "FrmRtf.frx":10CD4
       Style           =   1  'Graphical
-      TabIndex        =   15
+      TabIndex        =   13
       ToolTipText     =   "Escolher Cor"
       Top             =   360
       Width           =   495
@@ -532,7 +543,7 @@ Begin VB.Form FrmRTf
       Left            =   11160
       Picture         =   "FrmRtf.frx":1105E
       Style           =   1  'Graphical
-      TabIndex        =   14
+      TabIndex        =   12
       ToolTipText     =   "Sair"
       Top             =   120
       Width           =   495
@@ -542,107 +553,97 @@ Begin VB.Form FrmRTf
       Left            =   2760
       Picture         =   "FrmRtf.frx":115E8
       Style           =   1  'Graphical
-      TabIndex        =   13
+      TabIndex        =   11
       ToolTipText     =   "Configurar Impressoras"
       Top             =   0
       Width           =   360
    End
    Begin VB.CommandButton Command12 
       Height          =   315
-      Left            =   10320
+      Left            =   10440
       Picture         =   "FrmRtf.frx":11972
       Style           =   1  'Graphical
-      TabIndex        =   12
+      TabIndex        =   10
       ToolTipText     =   "Alinhar a Direita"
       Top             =   0
       Width           =   375
    End
    Begin VB.CommandButton Command11 
       Height          =   315
-      Left            =   9960
+      Left            =   10080
       Picture         =   "FrmRtf.frx":11CFC
       Style           =   1  'Graphical
-      TabIndex        =   11
+      TabIndex        =   9
       ToolTipText     =   "Centralizar"
       Top             =   0
       Width           =   375
    End
    Begin VB.CommandButton Command10 
       Height          =   315
-      Left            =   9600
+      Left            =   9720
       Picture         =   "FrmRtf.frx":12086
       Style           =   1  'Graphical
-      TabIndex        =   10
+      TabIndex        =   8
       ToolTipText     =   "Alinhar a Esquerda"
       Top             =   0
       Width           =   360
    End
    Begin VB.CommandButton Command9 
       Height          =   315
-      Left            =   1200
+      Left            =   840
       Picture         =   "FrmRtf.frx":12410
       Style           =   1  'Graphical
-      TabIndex        =   9
+      TabIndex        =   7
       ToolTipText     =   "Sublinhado"
       Top             =   360
       Width           =   360
    End
    Begin VB.CommandButton Command8 
       Height          =   315
-      Left            =   840
+      Left            =   480
       Picture         =   "FrmRtf.frx":1279A
       Style           =   1  'Graphical
-      TabIndex        =   8
+      TabIndex        =   6
       ToolTipText     =   "Italico"
       Top             =   360
       Width           =   360
    End
    Begin VB.CommandButton Command7 
       Height          =   315
-      Left            =   480
+      Left            =   120
       Picture         =   "FrmRtf.frx":12B24
       Style           =   1  'Graphical
-      TabIndex        =   7
+      TabIndex        =   5
       ToolTipText     =   "Negrito/Bold"
-      Top             =   360
-      Width           =   360
-   End
-   Begin VB.CommandButton Command6 
-      Height          =   315
-      Left            =   0
-      Picture         =   "FrmRtf.frx":12EAE
-      Style           =   1  'Graphical
-      TabIndex        =   6
-      ToolTipText     =   "Checar Ortografia"
       Top             =   360
       Width           =   360
    End
    Begin VB.CommandButton Command5 
       Height          =   315
       Left            =   4920
-      Picture         =   "FrmRtf.frx":13238
+      Picture         =   "FrmRtf.frx":12EAE
       Style           =   1  'Graphical
-      TabIndex        =   5
+      TabIndex        =   4
       ToolTipText     =   "Desfazer"
       Top             =   0
       Width           =   360
    End
    Begin VB.CommandButton Command4 
       Height          =   315
-      Left            =   2100
-      Picture         =   "FrmRtf.frx":135C2
+      Left            =   2280
+      Picture         =   "FrmRtf.frx":13238
       Style           =   1  'Graphical
-      TabIndex        =   4
+      TabIndex        =   3
       ToolTipText     =   "Imprimir Documento Atual"
       Top             =   0
       Width           =   360
    End
    Begin VB.CommandButton Command3 
       Height          =   315
-      Left            =   960
-      Picture         =   "FrmRtf.frx":13B4C
+      Left            =   1080
+      Picture         =   "FrmRtf.frx":137C2
       Style           =   1  'Graphical
-      TabIndex        =   3
+      TabIndex        =   2
       ToolTipText     =   "Salvar Documento Atual"
       Top             =   0
       Width           =   360
@@ -650,31 +651,40 @@ Begin VB.Form FrmRTf
    Begin VB.CommandButton Command2 
       Height          =   315
       Left            =   480
-      Picture         =   "FrmRtf.frx":13ED6
+      Picture         =   "FrmRtf.frx":13B4C
       Style           =   1  'Graphical
-      TabIndex        =   2
+      TabIndex        =   1
       ToolTipText     =   "Abrir Documento Existente"
       Top             =   0
       Width           =   360
    End
    Begin VB.CommandButton Command1 
       Height          =   315
-      Left            =   0
-      Picture         =   "FrmRtf.frx":14460
+      Left            =   120
+      Picture         =   "FrmRtf.frx":140D6
       Style           =   1  'Graphical
-      TabIndex        =   1
+      TabIndex        =   0
       ToolTipText     =   "Iniciar Documento Em Branco"
       Top             =   0
       Width           =   360
    End
-   Begin VB.ComboBox cmbfontcolor 
+   Begin VBCCR18.ComboBoxW Combo1 
       Height          =   315
-      Left            =   5760
-      TabIndex        =   0
-      Text            =   "Combo1"
-      ToolTipText     =   "Escolher Cor"
+      Left            =   6120
+      TabIndex        =   40
+      ToolTipText     =   "Linguagem do Corretor"
       Top             =   360
-      Width           =   1695
+      Width           =   1215
+      _ExtentX        =   2143
+      _ExtentY        =   556
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Lang:"
+      Height          =   255
+      Left            =   5520
+      TabIndex        =   41
+      Top             =   360
+      Width           =   495
    End
    Begin VB.Image Image1 
       BorderStyle     =   1  'Fixed Single
@@ -957,6 +967,7 @@ Const cFORMID = "Editor de Textos"
 Private WithEvents MenuEvents As CEvents
 Attribute MenuEvents.VB_VarHelpID = -1
 Option Explicit
+Dim cSP1 As ClsSpellCheck
 
 Private Sub ABRIR()
   On Error Resume Next
@@ -1026,8 +1037,8 @@ Private Sub cmbFontColor_Click()
     Case 3
       .SelColor = vbGreen
     End Select
+    
   End With
-
 
 End Sub
 
@@ -1060,6 +1071,10 @@ End Sub
 
 Private Sub CmdExpPdf_Click()
   mnusaveasPDF_Click
+End Sub
+
+Private Sub Combo1_Change()
+cSP1.Language = Combo1.tEXT
 End Sub
 
 '***************************************************************************
@@ -1353,6 +1368,10 @@ Private Sub Command5_Click()
   mnuundo_Click
 End Sub
 
+Private Sub Command6_Click()
+
+End Sub
+
 '***************************************************************************
 '*  Name         : Command7_Click
 '*  Description  :
@@ -1417,7 +1436,7 @@ End Sub
 
 
 Private Sub Form_Load()
-
+Dim i As Integer
   CenterFormToScreen Me
 
 
@@ -1489,7 +1508,7 @@ Private Sub Form_Load()
   ''Abre o Arquivo se passado cARQRTF
   ABRIR
 
-  StatusBar1.Panels(6).Text = zUSER
+  StatusBar1.Panels(6).tEXT = zUSER
 
   ' cmbfontname.tEXT = RichTextbox1.SelFontName
 
@@ -1499,8 +1518,21 @@ Private Sub Form_Load()
   PrintPreview1.AuxiliaryButtonVisible = PrintPreview1.PrinterExists("Microsoft Print to PDF")
   PrintPreview1.AuxiliaryButtonToolTipText = "Salvar como PDF"
 
-  ' RichTextbox1.
-  ' richTest1.SpellChecking("en-US") = True
+Set cSP1 = New ClsSpellCheck
+  
+  cSP1.Language = "pt-BR"
+    
+  cSP1.Init RichTextbox1.hwnd
+  
+   For i = 1 To cSP1.cSupportedLanguages.Count
+        Combo1.AddItem cSP1.cSupportedLanguages.Item(i)
+        If cSP1.cSupportedLanguages.Item(i) = "pt-BR" Then
+           Combo1.ListIndex = i - 1
+        End If
+    Next
+    
+    
+
 
 End Sub
 
@@ -1755,7 +1787,7 @@ Private Sub mnuinsimg_Click()
   If Not Len(sFileName) = 0 Then
     Image1.Picture = LoadPicture(sFileName)
     Clipboard.SetData Image1.Picture
-    SendMessage RichTextbox1.hWnd, WM_PASTE, 0, 0
+    SendMessage RichTextbox1.hwnd, WM_PASTE, 0, 0
   End If
 End Sub
 
@@ -1798,7 +1830,7 @@ End Sub
 '***************************************************************************
 
 Private Sub mnunew_Click()
-  RichTextbox1.Text = ""
+  RichTextbox1.tEXT = ""
   RichTextbox1.SetFocus
 End Sub
 
@@ -2007,7 +2039,7 @@ Private Sub mnuscrsup_Click()
 End Sub
 Private Sub mnuselectall_Click()
   RichTextbox1.SelStart = 0
-  RichTextbox1.SelLength = Len(RichTextbox1.Text)
+  RichTextbox1.SelLength = Len(RichTextbox1.tEXT)
   RichTextbox1.SetFocus
 End Sub
 Private Sub mnuselectline_Click()
@@ -2081,7 +2113,7 @@ End Sub
 
 Private Sub mnuundo_Click()
   Dim Success
-  Success = SendMessage(RichTextbox1.hWnd, WM_UNDO, 0&, 0&)
+  Success = SendMessage(RichTextbox1.hwnd, WM_UNDO, 0&, 0&)
   RichTextbox1.SetFocus
 End Sub
 
@@ -2174,23 +2206,25 @@ Public Sub SubClassMenuXP()
 
   Set MenuEvents = New CEvents
   Set objMenuEx = New cMenuEx
-  Call objMenuEx.Install(CLng(Me.hWnd), App.Path & "\" & Me.Name, ImgMenu, 2, MenuEvents)
+  Call objMenuEx.Install(CLng(Me.hwnd), App.Path & "\" & Me.Name, ImgMenu, 2, MenuEvents)
 
 End Sub
 
 Public Sub MenuDesigner()
 '/ Open Menu Designer tool
-  objMenuEx.MenuDesigner CLng(Me.hWnd)
+  objMenuEx.MenuDesigner CLng(Me.hwnd)
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
+   cSP1.Terminate
+
 '/ This Form_UnLoad is add by MenuCreator
 
   If gbSubClassMenu Then
     '/ prevent error if the menu is not subclassed
     On Error Resume Next
     '/ release object
-    Call objMenuEx.Uninstall(CLng(Me.hWnd), ImgMenu, MenuEvents)
+    Call objMenuEx.Uninstall(CLng(Me.hwnd), ImgMenu, MenuEvents)
     Set MenuEvents = Nothing
     Set objMenuEx = Nothing
   End If

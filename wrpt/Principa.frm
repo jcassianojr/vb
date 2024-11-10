@@ -348,6 +348,7 @@ Private Sub MDIForm_Load()
   Dim nRETU
   Dim cmdline As String
   Dim bACESSO As Boolean
+  
   Dim nPOS As Long
   Dim sSQL As String
   Dim cARQ As String
@@ -362,6 +363,11 @@ Private Sub MDIForm_Load()
   On Error GoTo ErrorHandler
 
   CenterFormToScreen Me
+  
+  ' teste frmrtf
+ '  aDIREITOS = Array(True, True, True, True, True, True, True, True)
+  ' FrmRTf.Show vbModal
+  ' End
 
 
   If App.PrevInstance Then
@@ -560,7 +566,7 @@ Private Sub MDIForm_Load()
 
 
   If Trim(PegPath("EMAILINT", zUSER, "S")) = "S" Then
-     ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hWnd
+     ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hwnd
   End If
 
 
@@ -665,7 +671,7 @@ Private Sub MDIForm_Unload(Cancel As Integer)
     '/ prevent error if the menu is not subclassed
     On Error Resume Next
     '/ release object
-    Call objMenuEx.Uninstall(Me.hWnd, ImgMenu, MenuEvents)
+    Call objMenuEx.Uninstall(Me.hwnd, ImgMenu, MenuEvents)
     Set MenuEvents = Nothing
     Set objMenuEx = Nothing
   End If
@@ -828,11 +834,11 @@ Public Sub SubClassMenuXP()
 
   Set MenuEvents = New CEvents
   Set objMenuEx = New cMenuEx
-  Call objMenuEx.Install(Me.hWnd, App.Path & "\" & Me.Name, ImgMenu, 2, MenuEvents)
+  Call objMenuEx.Install(Me.hwnd, App.Path & "\" & Me.Name, ImgMenu, 2, MenuEvents)
 
 End Sub
 
 Public Sub MenuDesigner()
 '/ Open Menu Designer tool
-  objMenuEx.MenuDesigner Me.hWnd
+  objMenuEx.MenuDesigner Me.hwnd
 End Sub

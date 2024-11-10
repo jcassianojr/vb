@@ -1070,6 +1070,8 @@ Dim cARQ As String
 Dim cSQL As String
 Dim nITEM As Long
 Dim nCAMPOS As Long
+Dim cSP1 As ClsSpellCheck
+Dim cSP2 As ClsSpellCheck
 Option Explicit
 
 Private Sub CmdAbrirCom_Click(Index As Integer)
@@ -1099,9 +1101,9 @@ Dim cEXTENSAO As String
     Select Case cEXTENSAO
       Case "RPT"
         If Index = 0 Then
-          ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
+          ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
         Else
-          ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
+          ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
         End If
     End Select
   End If
@@ -1195,6 +1197,7 @@ End Sub
 Private Sub Form_Load()
 
   CenterFormToScreen Me
+  
   ''Configura Help
   Me.Caption = cFORMID
   HelpContextID = nFORMID
@@ -1233,6 +1236,19 @@ Private Sub Form_Load()
   For nITEM = 24 To 26
     chkFields(nITEM) = aVAL(nITEM)
   Next nITEM
+  
+  Set cSP1 = New ClsSpellCheck
+  Set cSP2 = New ClsSpellCheck
+  
+  cSP1.Language = "pt-BR"
+  cSP2.Language = "pt-BR"
+    
+  cSP1.Init text(7).hwnd
+  cSP2.Init text(8).hwnd
 End Sub
 
 
+Private Sub Form_Unload(Cancel As Integer)
+    cSP1.Terminate
+    cSP2.Terminate
+End Sub
