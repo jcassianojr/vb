@@ -365,7 +365,7 @@ Private Sub MDIForm_Load()
   CenterFormToScreen Me
   
   ' teste frmrtf
- '  aDIREITOS = Array(True, True, True, True, True, True, True, True)
+ ' aDIREITOS = Array(True, True, True, True, True, True, True, True)
   ' FrmRTf.Show vbModal
   ' End
 
@@ -598,7 +598,7 @@ Private Sub MDIForm_Load()
 
 
 
-  StatusBar1.Panels(6).tEXT = zUSER
+  StatusBar1.Panels(6).Text = zUSER
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If
