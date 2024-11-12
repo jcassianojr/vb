@@ -368,7 +368,11 @@ Private Sub MDIForm_Load()
  ' aDIREITOS = Array(True, True, True, True, True, True, True, True)
   ' FrmRTf.Show vbModal
   ' End
-
+   
+   'teste frmprevies
+   'cARQRTF = "d:\temp\xharbour320.avi"
+   'FrmPreview.Show vbModal, Me
+   'End
 
   If App.PrevInstance Then
 
@@ -598,7 +602,7 @@ Private Sub MDIForm_Load()
 
 
 
-  StatusBar1.Panels(6).Text = zUSER
+  StatusBar1.Panels(6).tEXT = zUSER
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If
