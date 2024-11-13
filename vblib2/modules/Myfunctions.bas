@@ -40,27 +40,27 @@ Private Const PTR_SIZE As Long = 4
 
 Private CurMBTitle As String
 
-Public Const COLOR_SCROLLBAR = 0  'The Scrollbar color
-Public Const COLOR_BACKGROUND = 1  'Colour of the background with no wallpaper
-Public Const COLOR_ACTIVECAPTION = 2  'Caption of Active Window
-Public Const COLOR_INACTIVECAPTION = 3  'Caption of Inactive window
-Public Const COLOR_MENU = 4  'Menu
-Public Const COLOR_WINDOW = 5  'Windows background
-Public Const COLOR_WINDOWFRAME = 6  'Window frame
-Public Const COLOR_MENUTEXT = 7  'Window Text
-Public Const COLOR_WINDOWTEXT = 8  '3D dark shadow (Win95)
-Public Const COLOR_CAPTIONTEXT = 9  'Text in window caption
-Public Const COLOR_ACTIVEBORDER = 10  'Border of active window
-Public Const COLOR_INACTIVEBORDER = 11  'Border of inactive window
-Public Const COLOR_APPWORKSPACE = 12  'Background of MDI desktop
-Public Const COLOR_HIGHLIGHT = 13  'Selected item background
-Public Const COLOR_HIGHLIGHTTEXT = 14  'Selected menu item
-Public Const COLOR_BTNFACE = 15  'Button
-Public Const COLOR_BTNSHADOW = 16  '3D shading of button
-Public Const COLOR_GRAYTEXT = 17  'Grey text of zero if dithering is used.
-Public Const COLOR_BTNTEXT = 18  'Button text
-Public Const COLOR_INACTIVECAPTIONTEXT = 19  'Text of inactive window
-Public Const COLOR_BTNHIGHLIGHT = 20  '3D highlight of button
+'Public Const COLOR_SCROLLBAR = 0  'The Scrollbar color
+'Public Const COLOR_BACKGROUND = 1  'Colour of the background with no wallpaper
+'Public Const COLOR_ACTIVECAPTION = 2  'Caption of Active Window
+'Public Const COLOR_INACTIVECAPTION = 3  'Caption of Inactive window
+'Public Const COLOR_MENU = 4  'Menu
+'Public Const COLOR_WINDOW = 5  'Windows background
+'Public Const COLOR_WINDOWFRAME = 6  'Window frame
+'Public Const COLOR_MENUTEXT = 7  'Window Text
+'Public Const COLOR_WINDOWTEXT = 8  '3D dark shadow (Win95)
+'Public Const COLOR_CAPTIONTEXT = 9  'Text in window caption
+'Public Const COLOR_ACTIVEBORDER = 10  'Border of active window
+'Public Const COLOR_INACTIVEBORDER = 11  'Border of inactive window
+'Public Const COLOR_APPWORKSPACE = 12  'Background of MDI desktop
+'Public Const COLOR_HIGHLIGHT = 13  'Selected item background
+'Public Const COLOR_HIGHLIGHTTEXT = 14  'Selected menu item
+'Public Const COLOR_BTNFACE = 15  'Button
+'Public Const COLOR_BTNSHADOW = 16  '3D shading of button
+'Public Const COLOR_GRAYTEXT = 17  'Grey text of zero if dithering is used.
+'Public Const COLOR_BTNTEXT = 18  'Button text
+'Public Const COLOR_INACTIVECAPTIONTEXT = 19  'Text of inactive window
+'Public Const COLOR_BTNHIGHLIGHT = 20  '3D highlight of button
 
 'Constante para pegar formato data hora do sistema
 Public Const LOCALE_SDECIMAL = &HE               '---------------------------------- AGRUPAMENTO DE DIGITOS NORMAL
@@ -80,6 +80,7 @@ Public Const WM_CLOSE = &H10
 Public Const WM_UNDO = &H304
 Public Const WM_PASTE = &H302
 
+
 Private Const FO_COPY = &H2
 Private Const FOF_ALLOWUNDO = &H40
 Public Const HTCAPTION = 2
@@ -87,20 +88,20 @@ Public Const WM_NCLBUTTONDOWN = &HA1
 Public Const CB_FINDSTRING As Long = &H14C
 Public Const CB_ERR As Long = (-1)
 'Tirar botao maximar minizar
-Public Const WS_MINIMIZEBOX As Long = &H20000
-Public Const WS_MAXIMIZEBOX As Long = &H10000
+'Public Const WS_MINIMIZEBOX As Long = &H20000
+'Public Const WS_MAXIMIZEBOX As Long = &H10000
 Public Const GWL_STYLE As Long = (-16)
 
-Private Type SHFILEOPSTRUCT
-  hWnd As Long
-  wFunc As Long
-  pFrom As String
-  pTo As String
-  fFlags As Integer
-  fAnyOperationsAborted As Boolean
-  hNameMappings As Long
-  lpszProgressTitle As String
-End Type
+'Private Type SHFILEOPSTRUCT
+'  hwnd As Long
+'  wFunc As Long
+'  pFrom As String
+'  pTo As String
+'  fFlags As Integer
+'  fAnyOperationsAborted As Boolean
+'  hNameMappings As Long
+'  lpszProgressTitle As String
+'End Type
 
 Public Enum EShellShowConstants
   essSW_HIDE = 0
@@ -119,17 +120,12 @@ End Enum
 
 
 #If VBA7 Then
-'Private Declare  PtrSafe Function SetTimer Lib "user32" (ByVal hWnd As LongPtr, ByVal nIDEvent As LongPtr, ByVal uElapse As LongPtr, ByVal lpTimerFunc As LongPtr) As Long
-'Private Declare  PtrSafe Function KillTimer Lib "user32" (ByVal hWnd As LongPtr, ByVal nIDEvent As LongPtr) As Long
-'Declare  PtrSafe Function SetSysColors Lib "user32" (ByVal nChanges As LongPtr, lpSysColor As LongPtr, lpColorValues As LongPtr) As Long
 Public Declare  PtrSafe Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As LongPtr) As Long
 Private Declare  PtrSafe Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As LongPtr, ByVal dwReserved As LongPtr) As Long
 Public Declare  PtrSafe Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As LongPtr, ByVal Unknownn1 As LongPtr, ByVal Unknownn2 As LongPtr, ByVal fCheckOnly As LongPtr) As Long
 Public Declare  PtrSafe Function ReleaseCapture Lib "user32" () As Long
-'Public Declare  PtrSafe Function SHFileOperation Lib "shell32.dll" Alias "SHFileOperationA" (lpFileOp As SHFILEOPSTRUCT) As Long
 Public Declare  PtrSafe Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As LongPtr, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As LongPtr) As Long
 Public Declare  PtrSafe Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As LongPtr, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As LongPtr) As Long
-'Public Declare  PtrSafe Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As LongPtr, ByVal wMsg As LongPtr, ByVal wParam As LongPtr, ByVal lParam As LongPtr) As Long
 Public Declare  PtrSafe Function GetPrivateProfileString Lib "kernel32" Alias _
                                                 "GetPrivateProfileStringA" (ByVal lpApplicationName As String, _
                                                                             ByVal lpKeyName As Any, ByVal lpDefault As String, _
@@ -140,22 +136,6 @@ Public Declare  PtrSafe Function WritePrivateProfileString Lib "kernel32" Alias 
                                                   "WritePrivateProfileStringA" (ByVal lpApplicationName As String, _
                                                                                 ByVal lpKeyName As Any, ByVal lpString As Any, _
                                                                                 ByVal lpFileName As String) As Long
-'Public Declare  PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
-'Public Declare  PtrSafe Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (hpvDest As Any, ByVal hpvSource As LongPtr, ByVal cbCopy As LongPtr)
-'Private Declare  PtrSafe Sub keybd_event Lib "user32" (ByVal bVk As Byte, ByVal bScan As Byte, ByVal dwFlags As LongPtr, ByVal dwExtraInfo As LongPtr)
-'Private Declare  PtrSafe Function PlaySound Lib "winmm.dll" (ByVal lpszName As String, ByVal hModule As LongPtr, ByVal dwFlags As LongPtr) As Long
-'Public Declare  PtrSafe Function SetWindowLong Lib "user32" _
-                                      Alias "SetWindowLongA" (ByVal hWnd As LongPtr, _
-                                                              ByVal nIndex As LongPtr, ByVal dwNewLong As _
-                                                                                    Long) As Long
-'Public Declare  PtrSafe Function GetWindowLong Lib "user32" _
-                                      Alias "GetWindowLongA" (ByVal hWnd As LongPtr, _
-                                                              ByVal nIndex As LongPtr) As Long
-
-'Private Declare  PtrSafe Function PostMessage Lib "user32" Alias _
-                                     "PostMessageA" (ByVal hWnd As LongPtr, ByVal wMsg As LongPtr, _
-                                                     ByVal wParam As LongPtr, ByVal lParam As LongPtr) As Long
-
 Public Declare ptrsafe Function GetLocaleInfo Lib "kernel32" _
 Alias "GetLocaleInfoA" _
   (ByVal Locale As Longptr, _
@@ -168,22 +148,15 @@ Public Declare ptrsafe Function SetLocaleInfo Lib "kernel32" _
 (ByVal Locale As Longptr, _
  ByVal LCType As Longptr, _
  ByVal lpLCData As String) As Long
-'Declare Function  PtrSafe GetUserDefaultLCID% Lib "kernel32" ()
-'Declare Function  PtrSafe GetSystemDefaultLCID Lib "kernel32" () As Long
 Public Declare  PtrSafe Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
 Public Declare  PtrSafe Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
 #Else
-'Private Declare Function SetTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
-'Private Declare Function KillTimer Lib "user32" (ByVal hWnd As Long, ByVal nIDEvent As Long) As Long
-'Declare Function SetSysColors Lib "user32" (ByVal nChanges As Long, lpSysColor As Long, lpColorValues As Long) As Long
 Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
 Private Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
 Public Declare Function ReleaseCapture Lib "user32" () As Long
-'Public Declare Function SHFileOperation Lib "shell32.dll" Alias "SHFileOperationA" (lpFileOp As SHFILEOPSTRUCT) As Long
-Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
-Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
-'Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
 Public Declare Function GetPrivateProfileString Lib "kernel32" Alias _
                                                 "GetPrivateProfileStringA" (ByVal lpApplicationName As String, _
                                                                             ByVal lpKeyName As Any, ByVal lpDefault As String, _
@@ -194,37 +167,20 @@ Public Declare Function WritePrivateProfileString Lib "kernel32" Alias _
                                                   "WritePrivateProfileStringA" (ByVal lpApplicationName As String, _
                                                                                 ByVal lpKeyName As Any, ByVal lpString As Any, _
                                                                                 ByVal lpFileName As String) As Long
-'Public Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
-'Public Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (hpvDest As Any, ByVal hpvSource As Long, ByVal cbCopy As Long)
-'Private Declare Sub keybd_event Lib "user32" (ByVal bVk As Byte, ByVal bScan As Byte, ByVal dwFlags As Long, ByVal dwExtraInfo As Long)
-'Private Declare Function PlaySound Lib "winmm.dll" (ByVal lpszName As String, ByVal hModule As Long, ByVal dwFlags As Long) As Long
-'Public Declare Function SetWindowLong Lib "user32" _
-                                      Alias "SetWindowLongA" (ByVal hWnd As Long, _
-                                                              ByVal nIndex As Long, ByVal dwNewLong As _
-                                                                                    Long) As Long
-'Public Declare Function GetWindowLong Lib "user32" _
-                                      Alias "GetWindowLongA" (ByVal hWnd As Long, _
-                                                              ByVal nIndex As Long) As Long
-
-'Private Declare Function PostMessage Lib "user32" Alias _
-                                     "PostMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, _
-                                                     ByVal wParam As Long, ByVal lParam As Long) As Long
 
 Public Declare Function GetLocaleInfo Lib "kernel32" _
 Alias "GetLocaleInfoA" _
   (ByVal Locale As Long, _
-ByVal LCTYPE As Long, _
+ByVal LCType As Long, _
 ByVal lpLCData As String, _
 ByVal cchData As Long) As Long
 
 Public Declare Function SetLocaleInfo Lib "kernel32" _
  Alias "SetLocaleInfoA" _
 (ByVal Locale As Long, _
- ByVal LCTYPE As Long, _
+ ByVal LCType As Long, _
  ByVal lpLCData As String) As Long
  
-'Declare Function GetUserDefaultLCID% Lib "kernel32" ()
-'Declare Function GetSystemDefaultLCID Lib "kernel32" () As Long
 Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
 Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
 #End If
@@ -287,10 +243,10 @@ Public Function ComboLostFocus(ByRef Combo1)
 Dim strPartial
 Dim i
   With Combo1
-    If Len(.tEXT) Then
+    If Len(.Text) Then
       'Procura pelo texto digitado
-      strPartial = .tEXT
-      i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
+      strPartial = .Text
+      i = SendMessage(.hwnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
     End If
@@ -357,8 +313,8 @@ Dim J
 Dim m_bEditFromCode
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .tEXT
-    i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
+    strPartial = .Text
+    i = SendMessage(.hwnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
     'Se achou, adiciona o resto do Texto
@@ -383,7 +339,7 @@ End Function
 
 Public Sub MoveObject(ByRef Obj As Control)
   Screen.MousePointer = vbSizeAll
-  SendMessage Obj.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 1
+  SendMessage Obj.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 1
   ReleaseCapture
   Screen.MousePointer = vbDefault
 End Sub
@@ -1929,7 +1885,7 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
   End If
 End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
@@ -1990,7 +1946,7 @@ Public Function TiraOutAlf(ByVal eVAR As Variant) As String
                                             "", "", "", "", "", "", ""))
 End Function
 
-Public Function Extenso(ByVal valor As Double, _
+Public Function Extenso(ByVal Valor As Double, _
                         Optional ByVal MoedaPlural As String = "Reais", _
                         Optional ByVal MoedaSingular As String = "Real") As String
   Dim StrValor As String
@@ -2004,9 +1960,9 @@ Public Function Extenso(ByVal valor As Double, _
   Dim PotenciasSingular As Variant
   Dim PotenciasPlural As Variant
 
-  Negativo = (valor < 0)
-  valor = Abs(CDec(valor))
-  If valor Then
+  Negativo = (Valor < 0)
+  Valor = Abs(CDec(Valor))
+  If Valor Then
     Unidades = Array(vbNullString, "Um", "Dois", _
                      "Tres", "Quatro", "Cinco", _
                      "Seis", "Sete", "Oito", "Nove", _
@@ -2029,7 +1985,7 @@ Public Function Extenso(ByVal valor As Double, _
                           " Milhoes", " Bilhoes", _
                           " Trilhoes", " Quatrilhoes")
 
-    StrValor = Left(Format(valor, String(18, "0") & _
+    StrValor = Left(Format(Valor, String(18, "0") & _
                                   ".000"), 18)
     For Posicao = 1 To 18 Step 3
       Parcial = Val(Mid(StrValor, Posicao, 3))
@@ -2076,13 +2032,13 @@ Public Function Extenso(ByVal valor As Double, _
       If Negativo Then
         Extenso = "Menos " & Extenso
       End If
-      If Int(valor) = 1 Then
+      If Int(Valor) = 1 Then
         Extenso = Extenso & " " & MoedaSingular
       Else
         Extenso = Extenso & " " & MoedaPlural
       End If
     End If
-    Parcial = Int((valor - Int(valor)) * _
+    Parcial = Int((Valor - Int(Valor)) * _
                   100 + 0.1)
     If Parcial Then
       buf = Extenso(Parcial, "Centavos", _
@@ -2307,16 +2263,16 @@ Public Function HtmlToText(sHTML) As String
 End Function
 Public Function FindInList(ByRef cList As ListBox, sSearch As String) As Long
   Dim sString As String
-  Dim id As Integer
+  Dim ID As Integer
 
   On Error Resume Next
   Err.Clear
   FindInList = -1
 
-  For id = 0 To cList.ListCount - 1
-    sString = UCase$(cList.List(id))
+  For ID = 0 To cList.ListCount - 1
+    sString = UCase$(cList.List(ID))
     If sString = UCase$(sSearch) Then
-      FindInList = id
+      FindInList = ID
       Exit For
     End If
   Next
@@ -2385,12 +2341,12 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef tEXT As String) As Long
+Public Function WordLen(ByRef Text As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
+  Bytes = StrConv(UCase$(Text), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next
@@ -2467,7 +2423,7 @@ Public Function TimedMsgBox(Prompt As String, Optional ByVal TimeOut As Long = 0
 
 End Function
 
-Private Sub TimeOutMB(hWnd As Long, uMsg As Long, idEvent As Long, dwTime As Long)
+Private Sub TimeOutMB(hwnd As Long, uMsg As Long, idEvent As Long, dwTime As Long)
 
   SendMessage FindWindow(vbNullString, CurMBTitle), WM_CLOSE, 0&, 0&
 

@@ -66,7 +66,15 @@ Public Const OFN_SHAREWARN As Long = 0
 Public Const OFN_SHARENOWARN As Long = 1
 Public Const OFN_SHOWHELP As Long = &H10
 Public Const OFS_MAXPATHNAME As Long = 260
+
 Private Const FO_COPY = &H2
+Private Const FO_DELETE = &H3
+Private Const FO_ALLOWUNDO = &H40
+
+Private Const FO_MOVE As Long = &H1
+Private Const FO_RENAME As Long = &H4
+
+
 
 Private Const GCT_LFNCHAR = &H1
 Private Const GCT_SHORTCHAR = &H2
@@ -81,8 +89,6 @@ Public Const OFS_FILE_SAVE_FLAGS = OFN_EXPLORER _
        Or OFN_OVERWRITEPROMPT _
        Or OFN_HIDEREADONLY
 
-Private Const FO_DELETE = &H3
-Private Const FOF_ALLOWUNDO = &H40
 
 Public Type OPENFILENAME
   nStructSize As Long
@@ -127,9 +133,19 @@ Private Type SHFILEOPSTRUCT
   lpszProgressTitle As String
 End Type
 
+
+
 Public OFN As OPENFILENAME
 
-
+Enum TFileFlags
+    FOF_ALLOWUNDO = &H40
+    FOF_FILESONLY = &H80
+    FOF_MULTIDESTFILES = &H1
+    FOF_NOCONFIRMATION = &H10
+    FOF_NOCONFIRMMKDIR = &H200
+    FOF_SIMPLEPROGRESS = &H100
+    FOF_SILENT = &H4
+End Enum
 
 #If (VBA7 = 0) Then
 Private Enum LongPtr
@@ -169,6 +185,8 @@ Public Declare PtrSafe Function GetTempPath Lib "kernel32" Alias "GetTempPathA" 
 Private Declare PtrSafe Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As LongPtr, ByVal lpszShortPath As LongPtr, ByVal cchBuffer As LongPtr) As Long
 
 Private Declare prtsafe Function PathGetCharType Lib "shlwapi.dll" Alias "PathGetCharTypeW" (ByVal ch As Longptr) As Long
+Private Declare prtsafe Function GetDesktopWindow Lib "user32.dll" () As Long
+
 
 #Else
 
@@ -196,7 +214,58 @@ Private Declare Function SHFileOperation _
 Public Declare Function CreateDirectory Lib "kernel32" Alias "CreateDirectoryA" (ByVal lpPathName As String, lpSecurityAttributes As SECURITY_ATTRIBUTES) As Long
 Public Declare Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As Long, ByVal lpBuffer As String) As Long
 Private Declare Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As Long, ByVal lpszShortPath As Long, ByVal cchBuffer As Long) As Long
+Private Declare Function GetDesktopWindow Lib "user32.dll" () As Long
 #End If
+
+Public Function SH_Copy(src As String, dest As String, cFlags As TFileFlags) As Long
+Dim shFileOp As SHFILEOPSTRUCT
+    'Copy files or folders
+    shFileOp.hWnd = GetDesktopWindow
+    shFileOp.wFunc = FO_COPY
+    shFileOp.pFrom = src
+    shFileOp.pTo = dest
+    shFileOp.fFlags = cFlags
+    
+    SH_Copy = SHFileOperation(shFileOp)
+    
+End Function
+Public Function SH_Move(src As String, dest As String, cFlags As TFileFlags) As Long
+Dim shFileOp As SHFILEOPSTRUCT
+    'Move files or folders
+    shFileOp.hWnd = GetDesktopWindow
+    shFileOp.wFunc = FO_MOVE
+    shFileOp.pFrom = src
+    shFileOp.pTo = dest
+    shFileOp.fFlags = cFlags
+    
+    SH_Move = SHFileOperation(shFileOp)
+    
+End Function
+
+Public Function SH_Rename(src As String, dest As String, cFlags As TFileFlags) As Long
+Dim shFileOp As SHFILEOPSTRUCT
+    'Rename files or folders
+    shFileOp.hWnd = GetDesktopWindow
+    shFileOp.wFunc = FO_RENAME
+    shFileOp.pFrom = src
+    shFileOp.pTo = dest
+    shFileOp.fFlags = cFlags
+    
+    SH_Rename = SHFileOperation(shFileOp)
+    
+End Function
+
+Public Function SH_Delete(src As String, cFlags As TFileFlags) As Long
+Dim shFileOp As SHFILEOPSTRUCT
+    'Delete files or folders
+    shFileOp.hWnd = GetDesktopWindow
+    shFileOp.wFunc = FO_DELETE
+    shFileOp.pFrom = src
+    shFileOp.fFlags = cFlags
+    
+    SH_Delete = SHFileOperation(shFileOp)
+    
+End Function
 
 Public Function FileExists(ByRef sFileName As String) As Boolean
     On Error Resume Next
@@ -208,9 +277,6 @@ Public Function IsExtensao(ByVal cARQ As String, cEXT As String) As Boolean
  IsExtensao = False
   cARQ = UCase(FixStr(cARQ))
   cEXT = UCase(cEXT)
-'  If InStr(1, cARQ, cEXT, vbTextCompare) > 0 Then
-'    Extensao = True
-'  End If
    If parsefile(cARQ, "E") = cEXT Then
       IsExtensao = True
    End If
@@ -243,7 +309,7 @@ Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal Destination
     .wFunc = FO_COPY
     .pFrom = SourceFile & vbNullChar & vbNullChar  'source file
     .pTo = DestinationFile & vbNullChar & vbNullChar  'destination file
-    .fFlags = FOF_ALLOWUNDO
+    .fFlags = FO_ALLOWUNDO
   End With
   lngReturn = SHFileOperation(typFileOperation)
 
@@ -733,7 +799,7 @@ Public Function DeleteFile(ByVal sFileName As String, Optional vRecycleBin As Bo
   With fo
     .pFrom = sFileName & vbNullChar
     .wFunc = FO_DELETE
-    If vRecycleBin Then .fFlags = FOF_ALLOWUNDO    ' Send to RecycleBin
+    If vRecycleBin Then .fFlags = FO_ALLOWUNDO    ' Send to RecycleBin
   End With
 
   Call SHFileOperation(fo)
@@ -876,14 +942,14 @@ End Function
 
 'Returns the contents of file FName as a string
 Function FileRead(FName As String) As String
-Dim FNum As Integer, Result As String
+Dim FNum As Integer, result As String
     
-    Result = Space(FileLen(FName))
+    result = Space(FileLen(FName))
     FNum = FreeFile
     Open FName For Binary Access Read As #FNum
-    Get #FNum, , Result
+    Get #FNum, , result
     Close FNum
-    FileRead = Result
+    FileRead = result
 
 End Function
 
