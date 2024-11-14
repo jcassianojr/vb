@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form formConvertToPDF 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Text-PDF v1.0"
@@ -50,43 +51,43 @@ Begin VB.Form formConvertToPDF
    End
    Begin VBCCR18.ComboBoxW cmbPageSize 
       Height          =   315
-      ItemData        =   "formPDF.frx":0E64
       Left            =   3720
-      List            =   "formPDF.frx":0E71
-      Style           =   2  'Dropdown List
       TabIndex        =   17
       Top             =   2400
       Width           =   1305
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Style           =   2
    End
    Begin VBCCR18.ComboBoxW cmbFontSize 
       Height          =   315
-      ItemData        =   "formPDF.frx":0E98
       Left            =   2280
-      List            =   "formPDF.frx":0EB4
-      Style           =   2  'Dropdown List
       TabIndex        =   15
       Top             =   2400
       Width           =   690
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Style           =   2
    End
    Begin VBCCR18.ComboBoxW cmbRotation 
       Height          =   315
-      ItemData        =   "formPDF.frx":0EE6
       Left            =   3000
-      List            =   "formPDF.frx":0EF6
-      Style           =   2  'Dropdown List
       TabIndex        =   16
       Top             =   2400
       Width           =   690
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Style           =   2
    End
    Begin VBCCR18.ComboBoxW cmbFont 
       Height          =   315
-      ItemData        =   "formPDF.frx":0F0F
       Left            =   120
-      List            =   "formPDF.frx":0F1C
-      Style           =   2  'Dropdown List
       TabIndex        =   14
       Top             =   2400
       Width           =   2055
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Style           =   2
    End
    Begin VB.TextBox txtTitle 
       Height          =   375
@@ -145,7 +146,7 @@ Begin VB.Form formConvertToPDF
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "formPDF.frx":0F3D
+      Picture         =   "formPDF.frx":0E64
       Caption         =   "Visualizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -165,7 +166,7 @@ Begin VB.Form formConvertToPDF
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "formPDF.frx":14D7
+      Picture         =   "formPDF.frx":13FE
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -185,7 +186,7 @@ Begin VB.Form formConvertToPDF
       Width           =   1935
       _ExtentX        =   3413
       _ExtentY        =   767
-      Picture         =   "formPDF.frx":1A71
+      Picture         =   "formPDF.frx":1998
       Caption         =   "Salvar &PDF Como"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -205,7 +206,7 @@ Begin VB.Form formConvertToPDF
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   767
-      Picture         =   "formPDF.frx":200B
+      Picture         =   "formPDF.frx":1F32
       Caption         =   "Abrir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -225,7 +226,7 @@ Begin VB.Form formConvertToPDF
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "formPDF.frx":25A5
+      Picture         =   "formPDF.frx":24CC
       Caption         =   "EnviarEmail"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -246,7 +247,7 @@ Begin VB.Form formConvertToPDF
       Width           =   1335
       _ExtentX        =   2355
       _ExtentY        =   767
-      Picture         =   "formPDF.frx":2B3F
+      Picture         =   "formPDF.frx":2A66
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -266,7 +267,7 @@ Begin VB.Form formConvertToPDF
       Width           =   1875
       _ExtentX        =   3307
       _ExtentY        =   767
-      Picture         =   "formPDF.frx":30D9
+      Picture         =   "formPDF.frx":3000
       Caption         =   "Visualizar Origem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -286,7 +287,7 @@ Begin VB.Form formConvertToPDF
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "formPDF.frx":3673
+      Picture         =   "formPDF.frx":359A
       Caption         =   "Imprimir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -306,7 +307,7 @@ Begin VB.Form formConvertToPDF
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   979
-      Picture         =   "formPDF.frx":3C0D
+      Picture         =   "formPDF.frx":3B34
       Caption         =   "Cria Pdf   (Preview)"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -326,7 +327,7 @@ Begin VB.Form formConvertToPDF
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   767
-      Picture         =   "formPDF.frx":41A7
+      Picture         =   "formPDF.frx":40CE
       Caption         =   "Abrir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -442,7 +443,7 @@ Const AppName = "Text-PDF v1.0"
 
 Private Sub CmdAbrirCom_Click()
   If FileConnExist(txtFilename.Text, True) Then
-    Call OpenWith(txtFilename.Text, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hWnd))
+    Call OpenWith(txtFilename.Text, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
   End If
 End Sub
 
@@ -450,13 +451,13 @@ Private Sub CmdAbrirPdf_Click()
   Dim cARQSHELL As String
   cARQSHELL = FixStr(txtOutputFile.Text)
   If FileConnExist(cARQSHELL) Then
-    ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
+    ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
   End If
 End Sub
 
 Private Sub CmdGeraPorPreview_Click()
  If PrintPreview1.PrinterExists("Microsoft Print to PDF") Then
-        PrintPreview1.SaveToFile "Microsoft Print to PDF", txtOutputFile.Text
+        PrintPreview1.ShowSaveToFile "Microsoft Print to PDF", "*.pdf"
         If PrintPreview1.Canceled Then
             MsgBox "Error, could not save the file, check if to are allowed to write at that location", vbExclamation
             Exit Sub
@@ -472,7 +473,7 @@ Private Sub cmdimp_Click()
   Dim cARQSHELL As String
   cARQSHELL = FixStr(txtOutputFile.Text)
   If FileConnExist(cARQSHELL) Then
-    ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , "print", CLng(Me.hWnd)
+    ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , "print", CLng(Me.hwnd)
   End If
 End Sub
 
@@ -510,7 +511,7 @@ End Sub
 Private Sub Form_Load()
 
   CenterFormToScreen Me
-  cmbFont.ListIndex = 1                        ' 10 pt
+  cmbFont.ListIndex = 1                        ' 10
   cmbFontSize.ListIndex = 0
   cmbRotation.ListIndex = 0
   cmbPageSize.ListIndex = 0
