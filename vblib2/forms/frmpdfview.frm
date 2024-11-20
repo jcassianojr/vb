@@ -1,5 +1,4 @@
 VERSION 5.00
-Object = "{7E9995B7-C8C4-4CF8-997D-AEA8489ADBBC}#1.3#0"; "OrdoPDFReader.ocx"
 Begin VB.Form frmPDFView 
    Caption         =   "PDFReader"
    ClientHeight    =   7380
@@ -15,21 +14,9 @@ Begin VB.Form frmPDFView
       Caption         =   "Carregar Pdf"
       Height          =   375
       Left            =   11400
-      TabIndex        =   1
+      TabIndex        =   0
       Top             =   240
       Width           =   1335
-   End
-   Begin OrdoPDF_Reader.OrdoPDFReader PDFReader1 
-      Height          =   6975
-      Left            =   120
-      TabIndex        =   0
-      Top             =   120
-      Width           =   11055
-      _ExtentX        =   19500
-      _ExtentY        =   12303
-      BorderStyle     =   1
-      IsPDFButtonVisible=   0   'False
-      LanguageUsed    =   "auto"
    End
 End
 Attribute VB_Name = "frmPDFView"
@@ -93,7 +80,7 @@ Private Sub Form_Resize()
 
 '    On Error Resume Next
    PDFReader1.Height = Me.ScaleHeight
-   PDFReader1.Width = Me.ScaleWidth - PDFReader1.Left - 1700 '1700 espacaos dos comandos a direita
+   PDFReader1.Width = Me.ScaleWidth - PDFReader1.left - 1700 '1700 espacaos dos comandos a direita
 End Sub
 
 'Private Sub Option1_Click(Index As Integer)
