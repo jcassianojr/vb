@@ -376,9 +376,9 @@ Private Sub MDIForm_Load()
    
 '   OrdoPDFReader1.SelectPDFFile "c:\temp\", True
 
-  cARQRTF = "c:\temp\SQLRDD Manual - EN.pdf"
-   frmPDFView.Show vbModal, Me
-  End
+ ' cARQRTF = "c:\temp\SQLRDD Manual - EN.pdf"
+ '  frmPDFView.Show vbModal, Me
+ ' End
 
   If App.PrevInstance Then
 
