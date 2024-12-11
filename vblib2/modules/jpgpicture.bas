@@ -152,6 +152,7 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
        DeleteFile sTEMPFILE, True
     End If
   
+ 'Oracle 8.1 to store image you need to create a field of LongRAW type
   cSQL = cTable
   If cWHERE <> "" Then
      Select Case aRETU(2)
@@ -279,6 +280,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
     cSQL = "select " + cCAMPO + " from " + cTable + "  WHERE " & cWHERE
   End If
   
+  'Oracle 8.1 to store image you need to create a field of LongRAW type
   If aRETU(2) = "MYSQL" Or aRETU(2) = "MYSQL" Then ' chave indice precisam estar o recordset
       cSQL = "select * from " + cTable + "  WHERE " & cWHERE
   End If
