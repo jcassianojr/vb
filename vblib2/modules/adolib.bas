@@ -256,6 +256,13 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
   
+  If InStr(LCase(cARQ), ".oracle") > 0 Then
+    GeraConn = "[ORACLE]" & cARQ
+    Exit Function
+  End If
+  
+  
+  
   If InStr(LCase(cARQ), ".pgsql") > 0 Or InStr(LCase(cARQ), ".postgresql") > 0 Then
     GeraConn = "[PGSQL]" & cARQ
     Exit Function
@@ -267,6 +274,10 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
       
+  If InStr(LCase(cARQ), ".oracle") > 0 Then
+    GeraConn = "[ORACLE]" & cARQ
+    Exit Function
+  End If
     
 
   
@@ -327,6 +338,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   Dim lTEMMARIADB As Boolean
   Dim lTEMPG As Boolean
   Dim lTEMMYSQL As Boolean
+  Dim lTEMORACLE As Boolean
   
   Dim cADSTIP As String
   Dim cADSNOM As String
@@ -339,6 +351,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   lTEMMARIADB = False
   lTEMMYSQL = False
   lTEMPG = False
+  lTEMORACLE = False
   
   
   'inicial valores padrao
@@ -359,14 +372,23 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     lTEMSQLITE = True
     TipoConn = Array("ADO", cARQ, "SQLITE")
   End If
-   '
+  '
   'mariadb
   '
   If InStr(cARQTMP, ".MARIADB") > 0 Or InStr(cARQTMP, "{MARIADB") > 0 Then
     lTEMMARIADB = True
     TipoConn = Array("ADO", cARQ, "MARIADB")
   End If
-    '
+  
+  '
+  'mariadb
+  '
+  If InStr(cARQTMP, ".ORACLE") > 0 Or InStr(cARQTMP, "{ORACLE") > 0 Then
+    lTEMORACLE = True
+    TipoConn = Array("ADO", cARQ, "ORACLE")
+  End If
+   
+  '
   'mysql
   '
   If InStr(cARQTMP, ".MYSQL") > 0 Or InStr(cARQTMP, "{MYSQL") > 0 Then
@@ -400,6 +422,10 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     End If
     If lTEMMARIADB Then
       cARQ = "[MARIADB]" & cARQ
+      cARQTMP = UCase(cARQ)
+    End If
+   If lTEMORACLE Then
+      cARQ = "[ORACLE]" & cARQ
       cARQTMP = UCase(cARQ)
     End If
     If lTEMMYSQL Then
@@ -457,6 +483,29 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     TipoConn = Array("ADO", cARQ, "MARIADB")
     Exit Function
   End If
+  
+  
+  
+ If lTEMORACLE Then
+'    "Provider=OraOLEDB.Oracle;data source=" & _
+ '   sWorld & ".World;User id=" & sUID & ";password=" & sPWD & ";"
+
+    cARQ = Replace(cARQ, "[ORACLE]", "")
+    If InStr(cARQTMP, "ODBC For Oracle") = 0 Then 'geracom se nao passado
+       aCONN = Split(cARQ, ".") 'localhost.port.mariadb.banco 'localhost.3306.mariadb.citacao
+       If Len(cUSER) > 0 Then
+         cARQ = "DRIVER={Microsoft ODBC For Oracle};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PWD=" + cPASS + ";"
+       Else
+         cARQ = "DRIVER={Microsoft ODBC For Oracle};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=root;PASSWORD=admin;"
+       End If
+    End If
+    TipoConn = Array("ADO", cARQ, "ORACLE")
+    Exit Function
+  End If
+  
+  
+  
+  
 
   If lTEMMYSQL Then
     cARQ = Replace(cARQ, "[MYSQL]", "")
