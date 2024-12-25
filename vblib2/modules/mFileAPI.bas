@@ -120,7 +120,7 @@ Private Type SECURITY_ATTRIBUTES
 End Type
 
 Private Type SHFILEOPSTRUCT
-  hWnd As Long
+  hwnd As Long
   wFunc As Long
   pFrom As String
   pTo As String
@@ -184,8 +184,8 @@ Public Declare PtrSafe Function CreateDirectory Lib "kernel32" Alias "CreateDire
 Public Declare PtrSafe Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As LongPtr, ByVal lpBuffer As String) As Long
 Private Declare PtrSafe Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As LongPtr, ByVal lpszShortPath As LongPtr, ByVal cchBuffer As LongPtr) As Long
 
-Private Declare prtsafe Function PathGetCharType Lib "shlwapi.dll" Alias "PathGetCharTypeW" (ByVal ch As Longptr) As Long
-Private Declare prtsafe Function GetDesktopWindow Lib "user32.dll" () As Long
+Private Declare PtrSafe Function PathGetCharType Lib "shlwapi.dll" Alias "PathGetCharTypeW" (ByVal ch As Longptr) As Long
+Private Declare PtrSafe Function GetDesktopWindow Lib "user32.dll" () As Long
 
 
 #Else
@@ -220,7 +220,7 @@ Private Declare Function GetDesktopWindow Lib "user32.dll" () As Long
 Public Function SH_Copy(src As String, dest As String, cFlags As TFileFlags) As Long
 Dim shFileOp As SHFILEOPSTRUCT
     'Copy files or folders
-    shFileOp.hWnd = GetDesktopWindow
+    shFileOp.hwnd = GetDesktopWindow
     shFileOp.wFunc = FO_COPY
     shFileOp.pFrom = src
     shFileOp.pTo = dest
@@ -232,7 +232,7 @@ End Function
 Public Function SH_Move(src As String, dest As String, cFlags As TFileFlags) As Long
 Dim shFileOp As SHFILEOPSTRUCT
     'Move files or folders
-    shFileOp.hWnd = GetDesktopWindow
+    shFileOp.hwnd = GetDesktopWindow
     shFileOp.wFunc = FO_MOVE
     shFileOp.pFrom = src
     shFileOp.pTo = dest
@@ -245,7 +245,7 @@ End Function
 Public Function SH_Rename(src As String, dest As String, cFlags As TFileFlags) As Long
 Dim shFileOp As SHFILEOPSTRUCT
     'Rename files or folders
-    shFileOp.hWnd = GetDesktopWindow
+    shFileOp.hwnd = GetDesktopWindow
     shFileOp.wFunc = FO_RENAME
     shFileOp.pFrom = src
     shFileOp.pTo = dest
@@ -258,7 +258,7 @@ End Function
 Public Function SH_Delete(src As String, cFlags As TFileFlags) As Long
 Dim shFileOp As SHFILEOPSTRUCT
     'Delete files or folders
-    shFileOp.hWnd = GetDesktopWindow
+    shFileOp.hwnd = GetDesktopWindow
     shFileOp.wFunc = FO_DELETE
     shFileOp.pFrom = src
     shFileOp.fFlags = cFlags
@@ -305,7 +305,7 @@ Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal Destination
       Exit Function
   End If
   With typFileOperation
-    .hWnd = 0
+    .hwnd = 0
     .wFunc = FO_COPY
     .pFrom = SourceFile & vbNullChar & vbNullChar  'source file
     .pTo = DestinationFile & vbNullChar & vbNullChar  'destination file
@@ -374,7 +374,7 @@ Public Function FileOpen(frmOwner As Form, _
 
   With OFN
     .nStructSize = Len(OFN)
-    .hWndOwner = CLng(frmOwner.hWnd)
+    .hWndOwner = CLng(frmOwner.hwnd)
     .sFILTER = sFilters & vbNullChar & vbNullChar
     .nFilterIndex = nFilterIndex
     .sFile = sDefaultFileName & Space$(1024) & vbNullChar & vbNullChar
@@ -406,7 +406,7 @@ Public Function FileSave(frmOwner As Form, _
   With OFN
 
     .nStructSize = Len(OFN)
-    .hWndOwner = CLng(frmOwner.hWnd)
+    .hWndOwner = CLng(frmOwner.hwnd)
     .sFILTER = sFilters & vbNullChar & vbNullChar
     .nFilterIndex = nFilterIndex
     .sFile = sDefaultFileName & Space$(1024) & _
