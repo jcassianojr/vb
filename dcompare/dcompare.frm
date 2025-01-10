@@ -535,13 +535,17 @@ End Sub
 Private Sub Form_Load()
 'Center Me
   CenterFormToScreen Me
+  
+   'Alert (infosistema)
+  '
+  'SayErro "teste", True
 End Sub
 
 
 Private Sub listTables(dbNameWithPath As String)
 Dim dbConn As ADODB.Connection
 Dim rs As ADODB.Recordset
-Dim cTABLE As String
+Dim cTable As String
     Set dbConn = New ADODB.Connection
     
     dbConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" _
@@ -559,10 +563,10 @@ Dim cTABLE As String
     Set rs = dbConn.OpenSchema(adSchemaTables, Array(Empty, Empty, Empty, "Table"))
     Do Until rs.EOF
        ' Me.lstTables.AddItem (rs!Table_Name)
-       cTABLE = rs!Table_Name
-       Debug.Print cTABLE
-       ListFields dbNameWithPath, cTABLE
-       Listindexes dbNameWithPath, cTABLE
+       cTable = rs!Table_Name
+       Debug.Print cTable
+       ListFields dbNameWithPath, cTable
+       Listindexes dbNameWithPath, cTable
         rs.MoveNext
     Loop
     rs.Close
