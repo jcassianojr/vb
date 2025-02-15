@@ -65,6 +65,6 @@ cZipArchive = 0, 0, 0, 0, C
 PicSaveLoad = 0, 0, 0, 0, C
 frmIMAGENS = 156, 156, 1152, 589, C, 182, 182, 1178, 615, C
 Datas = 78, 78, 1072, 511, C
-FrmRtfView = 0, 0, 994, 433, C, 104, 104, 1100, 537, C
+FrmRtfView = 0, 0, 994, 433, , 104, 104, 1100, 537, C
 wrptxvars = 0, 0, 0, 0, C
 ClsSpellCheck = 0, 0, 0, 0, C
