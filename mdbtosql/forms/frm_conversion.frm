@@ -27,70 +27,6 @@ Begin VB.Form Frm_Conversion
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame fra_progress 
       BorderStyle     =   0  'None
-      Height          =   3300
-      Index           =   2
-      Left            =   210
-      TabIndex        =   15
-      Top             =   1080
-      Visible         =   0   'False
-      Width           =   7200
-      Begin VB.CheckBox ChkDropTables 
-         Caption         =   "Drop Table(s)"
-         ForeColor       =   &H00000000&
-         Height          =   255
-         Left            =   2700
-         TabIndex        =   41
-         Top             =   3000
-         Width           =   1335
-      End
-      Begin VB.CommandButton cmdSelect 
-         Caption         =   "Select &All"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   315
-         Left            =   5490
-         TabIndex        =   39
-         Top             =   2970
-         Width           =   1065
-      End
-      Begin VB.CheckBox ChkNoData 
-         Caption         =   "Copy Only Structure"
-         ForeColor       =   &H00000000&
-         Height          =   255
-         Left            =   600
-         TabIndex        =   36
-         Top             =   3000
-         Width           =   1815
-      End
-      Begin VB.ListBox LstTables 
-         Appearance      =   0  'Flat
-         Height          =   2280
-         Left            =   600
-         Style           =   1  'Checkbox
-         TabIndex        =   35
-         Top             =   480
-         Width           =   5955
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "Select MS Access table(s) to convert into MySQL format"
-         Height          =   195
-         Left            =   600
-         TabIndex        =   37
-         Top             =   150
-         Width           =   4005
-      End
-   End
-   Begin VB.Frame fra_progress 
-      BorderStyle     =   0  'None
       Height          =   3330
       Index           =   1
       Left            =   -30
@@ -103,7 +39,7 @@ Begin VB.Form Frm_Conversion
          Height          =   885
          Left            =   120
          TabIndex        =   20
-         Top             =   2340
+         Top             =   2400
          Width           =   6975
          Begin VB.CommandButton CmdSaveDumpFile 
             Caption         =   "&Browse"
@@ -135,18 +71,30 @@ Begin VB.Form Frm_Conversion
       End
       Begin VB.Frame FraMySQL 
          Caption         =   "Provide necessary information to establish connection with MySQL server "
-         Height          =   2085
+         Height          =   2205
          Left            =   120
          TabIndex        =   19
-         Top             =   210
+         Top             =   120
          Width           =   6975
+         Begin VB.TextBox TxtMySQLInfo 
+            Appearance      =   0  'Flat
+            BackColor       =   &H00FFFFFF&
+            Height          =   315
+            IMEMode         =   3  'DISABLE
+            Index           =   5
+            Left            =   1440
+            TabIndex        =   45
+            Text            =   "latin1_swedish_ci"
+            Top             =   1680
+            Width           =   1935
+         End
          Begin VB.CheckBox UseMariadb 
             Caption         =   "Usar Mariadb Driver"
             Height          =   255
-            Left            =   360
+            Left            =   4560
             TabIndex        =   43
-            Top             =   1680
-            Width           =   3015
+            Top             =   1800
+            Width           =   1935
          End
          Begin VB.ComboBox CboType 
             Height          =   315
@@ -213,6 +161,17 @@ Begin VB.Form Frm_Conversion
             Text            =   "test"
             Top             =   810
             Width           =   1725
+         End
+         Begin VB.Label LblMySQLInfo 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "Colecao:"
+            Height          =   195
+            Index           =   6
+            Left            =   360
+            TabIndex        =   44
+            Top             =   1680
+            Width           =   630
          End
          Begin VB.Label LblMySQLInfo 
             AutoSize        =   -1  'True
@@ -284,6 +243,70 @@ Begin VB.Form Frm_Conversion
    End
    Begin VB.Frame fra_progress 
       BorderStyle     =   0  'None
+      Height          =   3300
+      Index           =   2
+      Left            =   210
+      TabIndex        =   15
+      Top             =   1080
+      Visible         =   0   'False
+      Width           =   7200
+      Begin VB.CheckBox ChkDropTables 
+         Caption         =   "Drop Table(s)"
+         ForeColor       =   &H00000000&
+         Height          =   255
+         Left            =   2700
+         TabIndex        =   41
+         Top             =   3000
+         Width           =   1335
+      End
+      Begin VB.CommandButton cmdSelect 
+         Caption         =   "Select &All"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Left            =   5490
+         TabIndex        =   39
+         Top             =   2970
+         Width           =   1065
+      End
+      Begin VB.CheckBox ChkNoData 
+         Caption         =   "Copy Only Structure"
+         ForeColor       =   &H00000000&
+         Height          =   255
+         Left            =   600
+         TabIndex        =   36
+         Top             =   3000
+         Width           =   1815
+      End
+      Begin VB.ListBox LstTables 
+         Appearance      =   0  'Flat
+         Height          =   2280
+         Left            =   600
+         Style           =   1  'Checkbox
+         TabIndex        =   35
+         Top             =   480
+         Width           =   5955
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Select MS Access table(s) to convert into MySQL format"
+         Height          =   195
+         Left            =   600
+         TabIndex        =   37
+         Top             =   150
+         Width           =   4005
+      End
+   End
+   Begin VB.Frame fra_progress 
+      BorderStyle     =   0  'None
       Height          =   3345
       Index           =   3
       Left            =   180
@@ -324,8 +347,8 @@ Begin VB.Form Frm_Conversion
       End
    End
    Begin MSComDlg.CommonDialog MyDlg 
-      Left            =   750
-      Top             =   4560
+      Left            =   840
+      Top             =   4680
       _ExtentX        =   847
       _ExtentY        =   847
       _Version        =   393216
@@ -1034,7 +1057,7 @@ Private Sub ConversionData()
             If MyScenario <> 1 Then
                 ' CREATE MYSQL DATABASE
                 MyConversion.createDB TxtMySQLInfo(4).Text
-                StrInfo = StrInfo & getmyTime & " Create database if not exists '" & TxtMySQLInfo(4).Text & "'" & vbCrLf & vbCrLf
+                StrInfo = StrInfo & getmyTime & " Create database if not exists " & TxtMySQLInfo(4).Text & vbCrLf & vbCrLf
             End If
             
             For i = 0 To LstTables.ListCount - 1
@@ -1046,7 +1069,8 @@ Private Sub ConversionData()
                     If ChkNoData.Value = True Then
                        lDATA = False
                     End If
-                    MyConversion.ConvTable strTable, lDATA, ChkDropTables.Value, IIf(MyScenario = 1, 1, 0), TxtSourceDB.Text
+                    MyConversion.ConvTable strTable, lDATA, ChkDropTables.Value, IIf(MyScenario = 1, 1, 0), TxtSourceDB.Text, TxtMySQLInfo(5).Text
+                    
                     If bFinish Then
                         StrInfo = StrInfo & vbCrLf & getmyTime & " Canceled by user ....." & vbCrLf
                         Exit For

@@ -430,7 +430,6 @@ Public Function OpenDestinationDB(Optional host As String = "localhost", _
          ";PWD=" & pwd & ";PORT=" & port
     End If
     
-    scolecao = colecao
 
     ' check connection state
     If MyCN.State Then
