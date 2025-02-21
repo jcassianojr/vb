@@ -17,6 +17,7 @@ Option Explicit
 Private CN_source                    As ADODB.Connection
 Private MyCN                         As ADODB.Connection
 Private sMySQLTableType              As String
+Private scolecao                     As String
 
 ' added 2004-11-02 {to respon cancel event}
 Public EndProgress                   As Boolean
@@ -98,7 +99,9 @@ End Function
 Public Sub ConvTable(ByVal sTableName As String, _
     Optional WithData As Boolean = False, _
     Optional DropTable As Boolean = True, _
-    Optional DumpSQLonly As Boolean = False, Optional ByVal TableSource As String)
+    Optional DumpSQLonly As Boolean = False, _
+    Optional ByVal TableSource As String, _
+    Optional colecao As String = "latin1_swedish_ci")
     On Error Resume Next
     
     ' declare variable
@@ -121,6 +124,9 @@ Public Sub ConvTable(ByVal sTableName As String, _
     Dim Indices As String
     Dim SQL_Template As String
     Dim Campitos As String
+    
+    
+    scolecao = colecao
     
     ' create SQL statement to open access table
     StrAccess = "select * from [" & sTableName & "]"
@@ -173,6 +179,8 @@ Public Sub ConvTable(ByVal sTableName As String, _
         ExecuteSQL StrMySQL
     End If
     
+    StrMySQL = StrMySQL & " COLLATE='" & scolecao & "'"
+    
     StrMySQL = StrMySQL & " ;"
     RaiseEvent ExecuteInfo(StrMySQL)
     DoEvents
@@ -189,7 +197,7 @@ Public Sub ConvTable(ByVal sTableName As String, _
                         
                         If RstSchema.Fields!PRIMARY_KEY = True Then
                             Ant_Primary = True
-                            ' El Ã­ndice es la clave principal de la tabla
+                            ' El índice es la clave principal de la tabla
                             'ALTER TABLE `trn01` ADD PRIMARY KEY (nrosocio)
                             
                             If Campitos = "" Then
@@ -204,7 +212,7 @@ Public Sub ConvTable(ByVal sTableName As String, _
                              
                         ElseIf RstSchema.Fields!Unique = True Then
                             Ant_Primary = False
-                            ' El Ã­ndice es Ãºnico
+                            ' El índice es único
                             '
                             SQL = 1
                             
@@ -219,7 +227,7 @@ Public Sub ConvTable(ByVal sTableName As String, _
                                   "(CAMPOS)"
                 
                         Else
-                            ' Cualquier otro Ã­ndice existente en la tabla
+                            ' Cualquier otro índice existente en la tabla
                             '
                             Ant_Primary = False
                             
@@ -273,6 +281,10 @@ Public Sub ConvTable(ByVal sTableName As String, _
     
     'check with insert statement or not (include data or not)
     If WithData Then
+        
+        StrMySQL = "SET autocommit=1;"
+        ExecuteSQL StrMySQL
+        RaiseEvent ExecuteInfo(StrMySQL)
         
         ' check recordset
         If Not (Rst.EOF And Rst.BOF) Then ' make sure recordset not empty
@@ -402,7 +414,8 @@ End Function
 ' Purpose: Open Destination Database (MySQL database)
 '************************************************************************
 Public Function OpenDestinationDB(Optional host As String = "localhost", _
-       Optional user As String = "root", Optional pwd As String, Optional port As Long = 3306, Optional MARIADBDRIVER As Boolean = False) As Boolean
+       Optional user As String = "root", Optional pwd As String, Optional port As Long = 3306, _
+       Optional MARIADBDRIVER As Boolean = False) As Boolean
   ' declare local variable
   On Error GoTo err_exit_mycnconn
   Dim sConn As String
@@ -416,6 +429,8 @@ Public Function OpenDestinationDB(Optional host As String = "localhost", _
          "SERVER=" & host & ";UID=" & user & _
          ";PWD=" & pwd & ";PORT=" & port
     End If
+    
+    scolecao = colecao
 
     ' check connection state
     If MyCN.State Then
@@ -453,6 +468,7 @@ Public Sub createDB(sDBName As String)
 
     ' create database
     MyCN.Execute "create database if not exists `" & sDBName & "`;"
+    MyCN.Execute "USE `" & sDBName & "`;"
     ' Use these database
     SelectDB sDBName
     DoEvents
@@ -519,6 +535,7 @@ Private Function GetValue(IsField As ADODB.Field) As String
             GetValue = Replace(GetValue, "(", " ") 'remover parentes
             GetValue = Replace(GetValue, ")", " ") 'remover parentes
             GetValue = Replace(GetValue, ",", " ") 'remover virgula
+            GetValue = Replace(GetValue, "\", "\\") 'inclui nova barra pois e considerada escape no insert into
             GetValue = Trim(GetValue)
             GetValue = "'" & GetValue & "'"
         End If
