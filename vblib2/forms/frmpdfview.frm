@@ -1,4 +1,5 @@
 VERSION 5.00
+Object = "{C7880F7C-F318-471C-8BB7-25660C4BE24A}#1.1#0"; "OrdoPDFReader.v3.ocx"
 Begin VB.Form frmPDFView 
    Caption         =   "PDFReader"
    ClientHeight    =   7380
@@ -10,13 +11,16 @@ Begin VB.Form frmPDFView
    ScaleHeight     =   7380
    ScaleWidth      =   12945
    StartUpPosition =   2  'CenterScreen
-   Begin VB.CommandButton Command1 
-      Caption         =   "Carregar Pdf"
-      Height          =   375
-      Left            =   11400
+   Begin OrdoPDF_Reader_3.OrdoPDFReaderV3 PDFReader1 
+      Height          =   6855
+      Left            =   360
       TabIndex        =   0
       Top             =   240
-      Width           =   1335
+      Width           =   10695
+      _ExtentX        =   18865
+      _ExtentY        =   12091
+      BorderStyle     =   1
+      LanguageUsed    =   "auto"
    End
 End
 Attribute VB_Name = "frmPDFView"
@@ -26,16 +30,19 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Sub Command1_Click()
-  PDFReader1.Load cARQRTF
-  PDFReader1.FitControl
-End Sub
+'Private Sub Command1_Click()
+'  cARQRTF = "C:/temp/citacao.pdf"
+'  PDFReader1.Load cARQRTF
+'  PDFReader1.FitControl
+'End Sub
  
    
 Private Sub Form_Load()
   'da erro quando load aqui
   'da erro quando chama command1_click
-  'deixando inicialmente para o usuario carregar o dbf
+  'deixando inicialmente para o usuario carregar o pdf
+  PDFReader1.Load cARQRTF
+  PDFReader1.FitControl
 End Sub
 
 'End Sub
@@ -80,7 +87,7 @@ Private Sub Form_Resize()
 
 '    On Error Resume Next
    PDFReader1.Height = Me.ScaleHeight
-   PDFReader1.Width = Me.ScaleWidth - PDFReader1.left - 1700 '1700 espacaos dos comandos a direita
+   PDFReader1.Width = Me.ScaleWidth - PDFReader1.Left - 1700 '1700 espacaos dos comandos a direita
 End Sub
 
 'Private Sub Option1_Click(Index As Integer)

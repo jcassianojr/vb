@@ -364,6 +364,10 @@ Private Sub MDIForm_Load()
 
   CenterFormToScreen Me
   
+  'cARQRTF = "C:/temp/citacao.pdf"
+  'frmPDFView.Show vbModal
+  'End
+  
   ' teste frmrtf
  ' aDIREITOS = Array(True, True, True, True, True, True, True, True)
   ' FrmRTf.Show vbModal
@@ -374,7 +378,6 @@ Private Sub MDIForm_Load()
    'FrmPreview.Show vbModal, Me
    'End
    
-'   OrdoPDFReader1.SelectPDFFile "c:\temp\", True
 
  ' cARQRTF = "c:\temp\SQLRDD Manual - EN.pdf"
  '  frmPDFView.Show vbModal, Me
