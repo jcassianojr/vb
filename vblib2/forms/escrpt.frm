@@ -112,7 +112,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.text
+    zRPT = Grid.tEXT
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -128,7 +128,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.text
+    zRPT = Grid.tEXT
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -159,7 +159,7 @@ Private Sub Form_Load()
   End If
   If InStr(UCase(cARQRTF), ".RTF") Then
      If FileConnExist(cARQRTF, True) Then
-        RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
+        RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
         ePASS03 = 2
         PrintPreview1.ShowPreview
      End If
@@ -234,7 +234,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.text
+  zRPT = Grid.tEXT
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -387,14 +387,17 @@ Private Sub imprima_click()
     Case "INI"
       aRELCFG(1) = "FRMINIEDITOR"
     Case "PDF"
-          ePASS01 = Array("Externo", "Interno")
+          ePASS01 = Array("Externo", "Interno", "Interno Browser")
       escOrdem.Show vbModal, Me
       eRETU01 = FixInt(eRETU01, 0)
       Select Case eRETU01
       Case 0
         aRELCFG(1) = "SHELL"
       Case 1
-         aRELCFG(1) = "FRMPREVIEW"
+         frmPDFView.Show vbModal, Me
+      Case 2
+         FrmPreview.Show vbModal, Me
+         
       End Select
     Case "TXT", "MAN", "ZPL"
       If cEXTENSAO = "ZPL" Then
@@ -558,7 +561,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.text
+    zRPT = Grid.tEXT
     escrptusr.Show vbModal
   End If
 End Sub
@@ -659,7 +662,7 @@ Public Sub MyPrintinghtml()
   Next
 End Sub
 Public Sub MyPrintingRTF()
-  PrinterEx.PrintRichTextBox RichTextbox1
+  PrinterEx.PrintRichTextBox RichTextBox1
 End Sub
 Public Sub MyPrintingJPG()
   Select Case ePASS02

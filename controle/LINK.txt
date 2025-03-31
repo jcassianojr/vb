@@ -12,3 +12,5 @@ L1NK "D:\develop\vb\controle\controlE.OBJ"    /ENTRY:__vbaS /OUT:"D:\develop\vb\
 L1NK "D:\develop\vb\controle\controlE.OBJ"    /ENTRY:__vbaS /OUT:"D:\develop\vb\controle\controlE.exe" /BASE:0x400000 /SUBSYSTEM:WINDOWS,4.0 /VERSION:1.14   /INCREMENTAL:NO /OPT:REF /MERGE:.rdata=.text /IGNORE:4078 
 ****** Run at 09/01/2025 16:57:26
 L1NK "D:\develop\vb\controle\controlE.OBJ"    /ENTRY:__vbaS /OUT:"D:\develop\vb\controle\controlE.exe" /BASE:0x400000 /SUBSYSTEM:WINDOWS,4.0 /VERSION:1.14   /INCREMENTAL:NO /OPT:REF /MERGE:.rdata=.text /IGNORE:4078 
+****** Run at 31/03/2025 17:05:24
+L1NK "D:\develop\vb\controle\controlE.OBJ"    /ENTRY:__vbaS /OUT:"D:\develop\vb\controle\controlE.exe" /BASE:0x400000 /SUBSYSTEM:WINDOWS,4.0 /VERSION:1.14   /INCREMENTAL:NO /OPT:REF /MERGE:.rdata=.text /IGNORE:4078 
