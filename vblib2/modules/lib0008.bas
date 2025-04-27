@@ -17,10 +17,10 @@ Public Function pegdizseqssq(ByVal cDIZPAD, ByVal cARQ, _
   cDIZ = cDIZPAD
   cDIZOPER = ""
   cDIZFLUXO = ""
-  nTMPSEQ = FixInt(Val(Busca("Nº SEQ", "Incluindo", CStr(nTMPSEQ), 8)))
-  nTMPSSQ = FixInt(Val(Busca("Nº SSQ", "Incluindo", CStr(nTMPSSQ), 8)))
-  nTMPORD = FixInt(Val(Busca("Nº Ordem Fluxo II", "Incluindo", CStr(nTMPORD), 8)))
-  nTMPORS = FixInt(Val(Busca("Nº Sub Ordem Fluxo II", "Incluindo", CStr(nTMPORS), 8)))
+  nTMPSEQ = FixInt(Val(Busca("NÂº SEQ", "Incluindo", CStr(nTMPSEQ), 8)))
+  nTMPSSQ = FixInt(Val(Busca("NÂº SSQ", "Incluindo", CStr(nTMPSSQ), 8)))
+  nTMPORD = FixInt(Val(Busca("NÂº Ordem Fluxo II", "Incluindo", CStr(nTMPORD), 8)))
+  nTMPORS = FixInt(Val(Busca("NÂº Sub Ordem Fluxo II", "Incluindo", CStr(nTMPORS), 8)))
 
   If nTMPSEQ > 0 And nTMPSSQ > 0 Then
     cSQL = "select * from PFS WHERE PF=" & nPF & " AND SEQ=" & nTMPSEQ & " AND SSQ=" & nTMPSSQ
@@ -74,7 +74,7 @@ Public Function GERAFEMEAPAD(ByVal nPRO, ByVal nFAL, ByVal nPFVAL, Optional ByVa
   'arquivo destino
   DB2.ConnectionTimeout = 120
   DB2.Open GeracArq(cARQTMPFEM, , True)
-  'origem duplicaçao
+  'origem duplicaÃ§ao
   DB3.ConnectionTimeout = 120
   DB3.Open GeracArq(cARQTMPFEM, , False)
   RSTA3.Open "select * from FEMCAU WHERE PRONUM=" & nPRO & " AND FALNUM=" & nFAL, DB3, adOpenForwardOnly, adLockReadOnly
@@ -149,7 +149,7 @@ Function ATUPFPG()
   Dim aCAM As Variant
   Dim aPAD As Variant
 
-  DizerBarra "Gravando Informações Complementares Femea/Pre/GP12"
+  DizerBarra "Gravando InformaÃ§Ãµes Complementares Femea/Pre/GP12"
   cARQPF = PegPath("PATH", "PF")
   cARQPFP = PegPath("PATH", "PFP")
   cARQPFG = PegPath("PATH", "PFG")
@@ -236,7 +236,7 @@ Public Function importa2(ByVal cDUPARQ, ByVal cDUPSQL, ByVal cORIARQ, ByVal cORI
   End If
 
   If RSTA3.EOF Then
-    Alert ("Sua Selecão nao tem informações para importar")
+    Alert ("Sua SelecÃ£o nao tem informaÃ§Ãµes para importar")
     RSTAB.Close
     RSTA2.Close
     RSTA3.Close
