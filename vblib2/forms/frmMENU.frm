@@ -35,7 +35,7 @@ Begin VB.Form frmMENU
       Left            =   3840
       TabIndex        =   2
       TabStop         =   0   'False
-      Tag             =   "PosiÁao no Menu"
+      Tag             =   "Posi√ßao no Menu"
       Text            =   "0"
       Top             =   1200
       Visible         =   0   'False
@@ -47,7 +47,7 @@ Begin VB.Form frmMENU
       Left            =   1200
       MaxLength       =   50
       TabIndex        =   1
-      Tag             =   "DescriÁao a ser exibida no Menu"
+      Tag             =   "Descri√ßao a ser exibida no Menu"
       Top             =   840
       Width           =   3375
    End
@@ -167,7 +167,7 @@ Begin VB.Form frmMENU
    End
    Begin VB.Label Label1 
       Alignment       =   2  'Center
-      Caption         =   "Õndice"
+      Caption         =   "√çndice"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -243,7 +243,7 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraÁÙes") Then
+  If MDG("Gravar altera√ß√¥es") Then
     txtFields(1) = indice.Value
     txtFields(3) = Cadastro.Value
 

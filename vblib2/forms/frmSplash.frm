@@ -88,7 +88,7 @@ Begin VB.Form FrmSplash
       Begin VB.Label lbl6 
          Alignment       =   2  'Center
          BackColor       =   &H00C0C0C0&
-         Caption         =   "Atenção! Copia e Distribuição     Não Autorizada."
+         Caption         =   "AtenÃ§Ã£o! Copia e DistribuiÃ§Ã£o     NÃ£o Autorizada."
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -134,7 +134,7 @@ Attribute VB_Exposed = False
 Option Explicit
 Const nFORMID = 1002
 
-Const cFORMID = "Tela de Apresentaçao"
+Const cFORMID = "Tela de ApresentaÃ§ao"
 
 Private Sub Form_KeyPress(KeyAscii As Integer)
 

@@ -150,7 +150,7 @@ Begin VB.Form FrmSendMail
       Width           =   1095
       _ExtentX        =   0
       _ExtentY        =   0
-      Caption         =   "Limpar Informaçoes"
+      Caption         =   "Limpar InformaÃ§oes"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -447,7 +447,7 @@ Private Sub mapienviar_Click()
   MAPIMessages1.Compose
 
   '////////////////////////////////////////
-  '// Informa o email, se enviar para mais de 1 email é separar com(;)e ir informando
+  '// Informa o email, se enviar para mais de 1 email Ã© separar com(;)e ir informando
   '////////////////////////////////////////
   MAPIMessages1.RecipIndex = 0
   MAPIMessages1.RecipAddress = txt_email_to.tEXT
