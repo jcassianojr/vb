@@ -326,7 +326,7 @@ Private Declare Function MultiByteToWideChar Lib "kernel32" (ByVal CodePage As L
 #End If
 
 ' (VB-Overwrite)
-Public Function MsgBox(ByVal Prompt As String, Optional ByVal Buttons As VbMsgBoxStyle = vbOKOnly, Optional ByVal Title As Variant) As VbMsgBoxResult
+Public Function MsgBox(ByVal Prompt As String, Optional ByVal Buttons As VbMsgBoxStyle = vbOKOnly, Optional ByVal Title As String) As VbMsgBoxResult
 Dim MSGBOXP As MSGBOXPARAMS
 With MSGBOXP
 .cbSize = LenB(MSGBOXP)
@@ -341,14 +341,8 @@ Else
 End If
 .hInstance = App.hInstance
 .lpszText = StrPtr(Prompt)
-Dim Caption As String
-If IsMissing(Title) Then
-    Caption = App.Title
-Else
-    Caption = Title
-End If
-If StrPtr(Caption) = NULL_PTR Then Caption = ""
-.lpszCaption = StrPtr(Caption)
+If Title = vbNullString Then Title = App.Title
+.lpszCaption = StrPtr(Title)
 .dwStyle = Buttons
 End With
 MsgBox = MessageBoxIndirect(MSGBOXP)
