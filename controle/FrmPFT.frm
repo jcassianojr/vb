@@ -56,7 +56,7 @@ Begin VB.Form FrmPFT
       Width           =   1095
    End
    Begin VB.CommandButton CmdTipo 
-      Caption         =   "(P)rodução"
+      Caption         =   "(P)roduÃ§Ã£o"
       Height          =   315
       Index           =   1
       Left            =   960

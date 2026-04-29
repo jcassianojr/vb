@@ -297,7 +297,7 @@ Begin VB.Form frmPFMS03
       EndProperty
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Produçâo"
+      Caption         =   "ProduÃ§Ã¢o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   11
@@ -307,7 +307,7 @@ Begin VB.Form frmPFMS03
       Width           =   855
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Opção"
+      Caption         =   "OpÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   10
@@ -357,7 +357,7 @@ Begin VB.Form frmPFMS03
       Width           =   855
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Preço"
+      Caption         =   "PreÃ§o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   5
@@ -377,7 +377,7 @@ Begin VB.Form frmPFMS03
       Width           =   1095
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Descrição"
+      Caption         =   "DescriÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   3
@@ -434,7 +434,7 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = txtFields(iLOOP)
     Next iLOOP

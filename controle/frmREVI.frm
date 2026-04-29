@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form frmREVI 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Revis‚o"
+   Caption         =   "Revis√¢o"
    ClientHeight    =   3330
    ClientLeft      =   1095
    ClientTop       =   330

@@ -116,7 +116,7 @@ Begin VB.Form FrmMsrd
       Width           =   855
    End
    Begin VB.Label Label3 
-      Caption         =   "Descrição"
+      Caption         =   "DescriÃ§Ã£o"
       Height          =   255
       Left            =   120
       TabIndex        =   3
@@ -157,7 +157,7 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
       aVAL(iLOOP) = TXTFIELDS(iLOOP)       ''vb matriz zero
     Next iLOOP

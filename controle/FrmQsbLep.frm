@@ -672,7 +672,7 @@ Begin VB.Form FrmQsbLep
       Width           =   1215
    End
    Begin VB.CommandButton Command2 
-      Caption         =   "(I)dentificação"
+      Caption         =   "(I)dentificaÃ§Ã£o"
       Height          =   255
       Index           =   4
       Left            =   4680
@@ -827,7 +827,7 @@ Begin VB.Form FrmQsbLep
       EndProperty
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Inspeção"
+      Caption         =   "InspeÃ§Ã£o"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   8
@@ -837,7 +837,7 @@ Begin VB.Form FrmQsbLep
       Width           =   795
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Mudança"
+      Caption         =   "MudanÃ§a"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   4
@@ -877,7 +877,7 @@ Begin VB.Form FrmQsbLep
       Width           =   615
    End
    Begin VB.Label lblLabels 
-      Caption         =   "Descrição:"
+      Caption         =   "DescriÃ§Ã£o:"
       ForeColor       =   &H00C00000&
       Height          =   255
       Index           =   1
@@ -914,7 +914,7 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP

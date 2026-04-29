@@ -28,7 +28,7 @@ Begin VB.Form frmPFD
       Width           =   375
    End
    Begin VB.CommandButton Setor 
-      Caption         =   "Produção"
+      Caption         =   "ProduÃ§Ã£o"
       Height          =   315
       Index           =   0
       Left            =   600
@@ -167,7 +167,7 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   On Error Resume Next
-  If MDG("Gravar alteraçôes") Then
+  If MDG("Gravar alteraÃ§Ã´es") Then
     For iLOOP = 0 To nCAMPOS - 1
       aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
