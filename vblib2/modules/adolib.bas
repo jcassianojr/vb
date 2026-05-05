@@ -187,8 +187,66 @@ Public Function SQLDialeto(ByVal cSQLCNV As String, cDIALETO As String) As Strin
    
      End Select
 End Function
-
+' ==============================================================================
+' FUNÇÃO: SQLPGSQLDOUBLEQUOTES
+' DESCRIÇÃO: Converte identificadores (tabelas/campos) para o padrão PostgreSQL
+'            utilizando aspas duplas, preservando literais em aspas simples.
+'
+' EXEMPLOS DE PARSE (TESTES):
+'
+' 1. SQL Simples:
+'    Entrada: SELECT Codigo, Nome FROM Clientes
+'    Saída:   SELECT "Codigo", "Nome" FROM "Clientes"
+'
+' 2. Proteção de Literais (Lookahead):
+'    Entrada: SELECT Nome FROM Usuarios WHERE Perfil = 'ADMIN' AND Acao = 'SELECT'
+'    Saída:   SELECT "Nome" FROM "Usuarios" WHERE "Perfil" = 'ADMIN' AND "Acao" = 'SELECT'
+'    (Nota: O valor 'SELECT' não recebe aspas duplas por estar dentro de aspas simples)
+'
+' 3. Funções e Agregações:
+'    Entrada: SELECT SUM(Total), Data FROM Vendas GROUP BY Data
+'    Saída:   SELECT SUM("Total"), "Data" FROM "Vendas" GROUP BY "Data"
+'
+' 4. Operadores e Datas:
+'    Entrada: SELECT * FROM Movimentos WHERE DtLanc = '2023-01-01'
+'    Saída:   SELECT * FROM "Movimentos" WHERE "DtLanc" = '2023-01-01'
+' ==============================================================================
 Public Function SQLPGSQLDOUBLEQUOTES(ByVal cSQL As String) As String
+    Dim regEx As Object
+    Set regEx = CreateObject("VBScript.RegExp")
+    
+    regEx.Global = True
+    regEx.IgnoreCase = True
+    
+    ' Padrão: Identifica palavras que são seguidas por vírgula ou espaço,
+    ' mas ignora palavras reservadas (simplificado para o exemplo)
+    ' O padrão abaixo busca palavras que NÃO estão entre aspas simples.
+    regEx.Pattern = "\b([a-z_][a-z0-9_]*)\b(?=(?:[^']*'[^']*')*[^']*$)"
+    
+    ' Aqui usamos o método do objeto regEx
+    ' O "$1" refere-se ao que foi encontrado no primeiro parênteses do Pattern
+    Dim sResult As String
+    sResult = regEx.Replace(cSQL, """$1""")
+    
+    ' Limpeza de palavras reservadas que não devem ter aspas
+    ' (Regex também pode fazer isso, mas aqui ilustro o ajuste pós-processo)
+    sResult = Replace(sResult, """SELECT""", "SELECT")
+    sResult = Replace(sResult, """FROM""", "FROM")
+    sResult = Replace(sResult, """WHERE""", "WHERE")
+    sResult = Replace(sResult, " ""SUM""(", " SUM(")
+    sResult = Replace(sResult, " ""COUNT""(", " COUNT(")
+    sResult = Replace(sResult, """SUM""", "SUM")
+    sResult = Replace(sResult, """COUNT""", "COUNT")
+    sResult = Replace(sResult, """GROUP""", "GROUP")
+    sResult = Replace(sResult, """BY""", "BY")
+    sResult = Replace(sResult, """AND""", "AND")
+    sResult = Replace(sResult, """OR""", "OR")
+    sResult = Replace(sResult, """ORDER""", "ORDER")
+    
+    SQLPGSQLDOUBLEQUOTES = sResult
+End Function
+
+Public Function SQLPGSQLDOUBLEQUOTES_antiga(ByVal cSQL As String) As String
 cSQL = UCase(cSQL)
     cSQL = Replace(cSQL, "  ", " ")
     cSQL = Replace(cSQL, " ,", ",")
@@ -208,7 +266,7 @@ cSQL = UCase(cSQL)
     cSQL = Replace(cSQL, Chr(34) + Chr(34), Chr(34))
     cSQL = Replace(cSQL, Chr(34) + "*" + Chr(34), "*") 'astericos nao requer double quotes
     
-    SQLPGSQLDOUBLEQUOTES = cSQL
+    SQLPGSQLDOUBLEQUOTES_antiga = cSQL
 End Function
 Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As String
   Dim nPOS As Long
@@ -246,7 +304,7 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
 
-  If InStr(LCase(cARQ), ".accdb") > 0 Then
+  If LCase(Right(cARQ, 6)) = ".accdb" Then  'InStr(LCase(cARQ), ".accdb")>0
     GeraConn = "[ACCDB]" & cARQ
     Exit Function
   End If
@@ -1035,17 +1093,25 @@ Public Function ADO_IsOpen(ByRef oADOObject As Object) As Boolean
 '   2004-Feb-20 10:47 [Michael Johnson] Initial creation
 'Call TraceEnters(MODULE_NAME & "::ADO_IsOpen")
 'TraceDetail = "To determine if a connection or a recordset is open"
-  On Error GoTo trataerro
 
-  ADO_IsOpen = False
-  If oADOObject Is Nothing Then
-    Exit Function
-  End If
+    On Error GoTo trataerro  'resume Next 'Evita quebra se o objeto estiver em estado inválido
+        ADO_IsOpen = False
+    If oADOObject Is Nothing Then Exit Function
+    
+    'Verifica se o estado tem o bit de "Open" ligado
+    ADO_IsOpen = ((oADOObject.State And adStateOpen) = adStateOpen)
+        
+ ' On Error GoTo trataerro
 
-  If oADOObject.State = adStateOpen Then
-    ADO_IsOpen = True
-    Exit Function
-  End If
+ ' ADO_IsOpen = False
+ ' If oADOObject Is Nothing Then
+ '   Exit Function
+ ' End If
+
+ ' If oADOObject.State = adStateOpen Then
+ '   ADO_IsOpen = True
+ '   Exit Function
+ ' End If
   Exit Function
 
 trataerro:
