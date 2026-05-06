@@ -260,50 +260,43 @@ End Function
 Public Function PegCampoSQLite(ByVal cCON As String, ByVal cSQL As String) As Variant
     PegCampoSQLite = PegOperSQLite(cCON, cSQL)
 End Function
-'---------------------------------------------------------------------------------------
-' EQUIVALENTE A: PegSQLDeliAdo
-'---------------------------------------------------------------------------------------
 Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
-                             ByVal aCAM As Variant, Optional ByVal cDELI As String = ",") As Variant
+                             ByVal aCAM As Variant, ByVal aFOR As Variant, _
+                             ByVal aPAD As Variant, Optional ByVal cDELI As String = ",") As Variant
     Dim loConn As New SQLiteConnection
     Dim loCursor As SQLiteCursor
-    Dim i As Integer
-    Dim cRET As String
+    Dim i As Integer, cRET As String
     
     On Error GoTo Erro
-    
     cCON = LimpaTag(cCON)
     loConn.OpenDB cCON
-    
-    ' Abre o cursor com o SQL original (já traduzido pelo dialeto se necessário)
     Set loCursor = loConn.CreateCursor(SQLDialeto(cSQL, "SQLITE"))
     
     If Not loCursor.EOF Then
-        ' Faz o loop baseado estritamente no array aCAM (campos solicitados)
-        ' Assim como na sua PegSQLDeliAdo original
         For i = LBound(aCAM) To UBound(aCAM)
-            ' No VBSQLite, podemos acessar pelo nome do campo se a DLL permitir: loCursor.Value(aCAM(i))
-            ' Ou, se o SELECT for específico, usamos o índice i
-            cRET = cRET & FVar(loCursor.Value(i)) & IIf(i < UBound(aCAM), cDELI, "")
+            Dim vVal As Variant
+            vVal = loCursor.Value(i)
+            
+            ' Aplica Padrão se Null
+            If IsNull(vVal) Or vVal = "" Then vVal = aPAD(i)
+            
+            ' Formatação simplificada para string delimitada
+            If UCase(aFOR(i)) = "N" Then
+                vVal = Replace(CStr(vVal), ",", ".") ' Garante ponto em números
+            End If
+            
+            cRET = cRET & CStr(vVal) & IIf(i < UBound(aCAM), cDELI, "")
         Next
         PegSQLiteDeli = cRET
     Else
         PegSQLiteDeli = ""
     End If
     
-    ' Ordem correta de fechamento para evitar Database Locked
     loConn.CloseDB
-    Set loCursor = Nothing
-    Set loConn = Nothing
+    Set loCursor = Nothing: Set loConn = Nothing
     Exit Function
-
 Erro:
     PegSQLiteDeli = ""
-    If Not loConn Is Nothing Then
-        On Error Resume Next
-        loConn.CloseDB
-        Set loConn = Nothing
-    End If
 End Function
 
 Public Function PegUltSQLite(ByVal cCON As String, ByVal cTABELA As String, ByVal cCAMPO As String) As Long
