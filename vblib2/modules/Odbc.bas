@@ -95,3 +95,41 @@ Hell:
 End Function
 
 
+' Adicione este código a um Módulo ou ao seu Form
+Public Function IsSQLiteDriverInstalled() As Boolean
+    Dim shell As Object
+    Dim driverName As String
+    Dim registryPath As String
+    Dim checkValue As String
+    
+    On Error Resume Next
+    
+    Set shell = CreateObject("WScript.Shell")
+    
+    ' O nome padrão do driver instalado pelo pacote de Christian Werner
+    driverName = "SQLite3 ODBC Driver"
+    
+    ' Caminho no registro onde os drivers ODBC ficam listados
+    registryPath = "HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\ODBC Drivers\" & driverName
+    
+    ' Tenta ler o valor. Se o driver existir, retornará "Installed"
+    checkValue = shell.RegRead(registryPath)
+    
+    If Err.Number = 0 Then
+        IsSQLiteDriverInstalled = True
+    Else
+        ' Se falhou, pode ser que o Windows seja 64-bit e o VB6 (32-bit) precise olhar o Wow6432Node
+        Err.Clear
+        registryPath = "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\ODBC\ODBCINST.INI\ODBC Drivers\" & driverName
+        checkValue = shell.RegRead(registryPath)
+        
+        If Err.Number = 0 Then
+            IsSQLiteDriverInstalled = True
+        Else
+            IsSQLiteDriverInstalled = False
+        End If
+    End If
+    
+    Set shell = Nothing
+End Function
+

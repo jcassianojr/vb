@@ -1,28 +1,28 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.2#0"; "vbccr18.ocx"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
    Caption         =   " "
-   ClientHeight    =   6390
-   ClientLeft      =   1575
-   ClientTop       =   1890
-   ClientWidth     =   10875
+   ClientHeight    =   6384
+   ClientLeft      =   1572
+   ClientTop       =   1896
+   ClientWidth     =   10884
    Icon            =   "Principal.frx":0000
    StartUpPosition =   2  'CenterScreen
    WindowState     =   2  'Maximized
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   480
       Top             =   960
-      _ExtentX        =   1191
-      _ExtentY        =   1191
+      _ExtentX        =   953
+      _ExtentY        =   953
    End
    Begin MSComctlLib.ImageList ImageList1 
       Left            =   780
       Top             =   60
-      _ExtentX        =   1005
-      _ExtentY        =   1005
+      _ExtentX        =   995
+      _ExtentY        =   995
       BackColor       =   -2147483643
       ImageWidth      =   16
       ImageHeight     =   16
@@ -32,8 +32,8 @@ Begin VB.MDIForm frmPRINCIPAL
    Begin MSComctlLib.ImageList ImgMenu 
       Left            =   0
       Top             =   0
-      _ExtentX        =   1005
-      _ExtentY        =   1005
+      _ExtentX        =   995
+      _ExtentY        =   995
       BackColor       =   -2147483643
       ImageWidth      =   16
       ImageHeight     =   16
@@ -241,12 +241,12 @@ Begin VB.MDIForm frmPRINCIPAL
    End
    Begin VBCCR18.StatusBar StatusBar1 
       Align           =   2  'Align Bottom
-      Height          =   375
+      Height          =   372
       Left            =   0
-      Top             =   6015
-      Width           =   10875
-      _ExtentX        =   19182
-      _ExtentY        =   661
+      Top             =   6012
+      Width           =   10884
+      _ExtentX        =   19198
+      _ExtentY        =   656
       InitPanels      =   "Principal.frx":C784
    End
    Begin VB.Menu mnuMENU 
@@ -346,11 +346,18 @@ Private Sub MDIForm_Load()
   Dim carqhelp As String
 
 
-  StatusBar1.Panels(5).tEXT = ""
+  StatusBar1.Panels(5).Text = ""
 
 
 
   CenterFormToScreen Me
+  
+  If IsSQLiteDriverInstalled() Then
+       ' MsgBox "O driver SQLite ODBC está pronto para uso!", vbInformation
+    Else
+        MsgBox "Driver SQLite ODBC não encontrado. Por favor, instale o driver para continuar.", vbCritical
+        End
+    End If
 
   On Error GoTo ErrorHandler
 
@@ -462,7 +469,7 @@ Private Sub MDIForm_Load()
   rs.Close
   DB.Close
 
-  StatusBar1.Panels(6).tEXT = zUSER
+  StatusBar1.Panels(6).Text = zUSER
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If
@@ -533,15 +540,15 @@ Private Sub mnuSUBMENU2_Click(Index As Integer)
     escDes.Show vbModal
   Case 7
     ZENGTIP = "DES"
-    ESCCLI.Show vbModal
+    escCLI.Show vbModal
   Case 8
-    ESCpro.Show vbModal
+    escPRO.Show vbModal
   Case 9
     iPPAP = 3
     escPPAP.Show vbModal
   Case 10
     ZENGTIP = "PRO"
-    ESCCLI.Show vbModal
+    escCLI.Show vbModal
   Case 11
     zPFTIPO = "POA"
     Sdb = PegPath("PATH", "POA")
@@ -608,7 +615,7 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
     ShellEx "calc"
     Exit Sub
   Case 9
-    ShellEx "emailprg.exe", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , CLng(Me.hWnd)
+    ShellEx "emailprg.exe", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , CLng(Me.hwnd)
     Exit Sub
   End Select
 
@@ -819,7 +826,7 @@ Private Sub Relat_Click(Index As Integer)
   Case 6
     FrmLstView.Show vbModal, Me
   Case 7
-    ShellEx "WRPT", essSW_SHOWDEFAULT, "$" + Trim(zUSER) + "%#", PegPath("PATH", "WRPTX"), , CLng(Me.hWnd)
+    ShellEx "WRPT", essSW_SHOWDEFAULT, "$" + Trim(zUSER) + "%#", PegPath("PATH", "WRPTX"), , CLng(Me.hwnd)
   End Select
 End Sub
 
