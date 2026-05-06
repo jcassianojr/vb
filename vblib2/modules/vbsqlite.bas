@@ -27,77 +27,132 @@ Erro:
 End Function
 
 '---------------------------------------------------------------------------------------
-' EQUIVALENTE A: PegSQLAdo[cite: 2]
+' EQUIVALENTE A: PegSQLAdo (Espelho Fiel)
 '---------------------------------------------------------------------------------------
-Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, ByRef aDados As Variant) As Boolean
+Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
+                         ByVal nITEM As Long, ByVal aCAM As Variant, _
+                         ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim loConn As New SQLiteConnection
     Dim loCursor As SQLiteCursor
     Dim i As Integer
+    Dim aVAL() As Variant
     
     On Error GoTo Erro
     
-    cCON = LimpaTag(cCON)
-    cSQL = SQLDialeto(cSQL, "SQLITE")
+    ' 1. Inicializa o array de retorno com o tamanho de nITEM (ou baseado no aCAM)
+    ReDim aVAL(nITEM)
     
+    cCON = LimpaTag(cCON)
     loConn.OpenDB cCON
-    Set loCursor = loConn.CreateCursor(cSQL)
+    
+    ' 2. Abre o cursor (o SQL deve solicitar as colunas na ordem do aCAM)
+    Set loCursor = loConn.CreateCursor(SQLDialeto(cSQL, "SQLITE"))
     
     If Not loCursor.EOF Then
-        ReDim aDados(loCursor.columnCount - 1)
-        For i = 0 To loCursor.columnCount - 1
-            ' FVar é sua função de tratamento de dados[cite: 2]
-            aDados(i) = FVar(loCursor.Value(i))
+        ' 3. Loop de processamento de campos, formatos e padrões
+        For i = 0 To nITEM
+            Dim vValor As Variant
+            vValor = loCursor.Value(i)
+            
+            ' Tratamento de NULL ou Vazio usando o valor padrão (aPAD)
+            If IsNull(vValor) Or vValor = "" Then
+                vValor = aPAD(i)
+            End If
+            
+            ' Tipagem baseada no array de formatos (aFOR)
+            ' C = Caracter, N = Numérico, D = Data, etc.
+            Select Case UCase(aFOR(i))
+                Case "C", "S" ' String / Caracter
+                    aVAL(i) = CStr(vValor)
+                Case "N", "I", "NI", "R" ' Numérico (Inteiro ou Real)
+                    aVAL(i) = Val(Replace(CStr(vValor), ",", "."))
+                Case "D" ' Data
+                    If IsDate(vValor) Then aVAL(i) = CDate(vValor) Else aVAL(i) = aPAD(i)
+                Case Else
+                    aVAL(i) = FVar(vValor)
+            End Select
         Next
-        PegSQLite = True
+        PegSQLite = aVAL ' Retorna o array preenchido
     Else
-        PegSQLite = False
+        ' Se não encontrar registro, retorna o array preenchido com os padrões (aPAD)
+        PegSQLite = aPAD
     End If
     
+    ' Limpeza de memória e fechamento
     loConn.CloseDB
+    Set loCursor = Nothing
+    Set loConn = Nothing
     Exit Function
+
 Erro:
-    PegSQLite = False
+    PegSQLite = aPAD ' Em caso de erro, retorna os valores padrão por segurança
+    If Not loConn Is Nothing Then
+        On Error Resume Next
+        loConn.CloseDB
+        Set loConn = Nothing
+    End If
 End Function
 
 '---------------------------------------------------------------------------------------
-' EQUIVALENTE A: GrvSQLado[cite: 2]
+' EQUIVALENTE A: GrvSQLado (Revisado para suportar arrays de campos e valores)
 '---------------------------------------------------------------------------------------
-Public Function GrvSQLite(ByVal cCON As String, ByVal cSQL As String, ByRef aDados As Variant) As Boolean
-    Dim loConn As New cSQLiteConnection
-    Dim loCursor As cSQLiteCursor
+Public Function GrvSQLite(ByVal cCON As String, ByVal cSQL_SELECT As String, _
+                         ByVal aCAM As Variant, ByVal aVAL As Variant) As Boolean
+    Dim loConn As New SQLiteConnection
+    Dim cSQL_UPDATE As String
+    Dim cTABELA As String
+    Dim cWHERE As String
     Dim i As Integer
+    Dim nPosFrom As Long, nPosWhere As Long
     
     On Error GoTo Erro
     
-    cCON = LimpaTag(cCON)
-    cSQL = SQLDialeto(cSQL, "SQLITE")
+    ' 1. Extração da Tabela e do WHERE a partir do SELECT enviado
+    nPosFrom = InStr(1, UCase(cSQL_SELECT), " FROM ") + 6
+    nPosWhere = InStr(1, UCase(cSQL_SELECT), " WHERE ")
     
-    loConn.OpenDB cCON
-    ' Abre um cursor editável (Updateable)
-    Set loCursor = loConn.CreateCursor(cSQL)
-    
-    If Not loCursor.EOF Then
-        For i = 0 To loCursor.columnCount - 1
-            ' Simula o preenchimento de campos do ADO[cite: 2]
-            loCursor.Value(i) = aDados(i)
-        Next
-        ' No VBSQLite, a gravação pode exigir um comando UPDATE manual ou método da classe
-        ' Dependendo da versão da classe, usamos Execute:
-        loConn.Execute GerarUpdateManual(cSQL, aDados, loCursor)
-        GrvSQLite = True
+    If nPosWhere > 0 Then
+        cTABELA = Trim(Mid(cSQL_SELECT, nPosFrom, nPosWhere - nPosFrom))
+        cWHERE = Mid(cSQL_SELECT, nPosWhere) ' Captura o "WHERE ..."
+    Else
+        ' Segurança: não permite update sem WHERE para não afetar a tabela toda
+        Exit Function
     End If
     
+    ' 2. Montagem do comando UPDATE dinâmico
+    cSQL_UPDATE = "UPDATE " & cTABELA & " SET "
+    For i = LBound(aCAM) To UBound(aCAM)
+        ' Usa a sua função FormataParaSQL para tratar Aspas, Datas e Decimais
+        cSQL_UPDATE = cSQL_UPDATE & aCAM(i) & " = " & FormataParaSQL(aVAL(i)) & _
+                      IIf(i < UBound(aCAM), ", ", " ")
+    Next
+    cSQL_UPDATE = cSQL_UPDATE & cWHERE
+    
+    ' 3. Execução direta na conexão
+    cCON = LimpaTag(cCON)
+    loConn.OpenDB cCON
+    loConn.Execute SQLDialeto(cSQL_UPDATE, "SQLITE")
+    
+    GrvSQLite = True
+    
+    ' 4. Fechamento correto: Primeiro Close, depois Nothing
     loConn.CloseDB
+    Set loConn = Nothing
     Exit Function
+    
 Erro:
     GrvSQLite = False
+    If Not loConn Is Nothing Then
+        On Error Resume Next
+        loConn.CloseDB
+        Set loConn = Nothing
+    End If
 End Function
-
 '---------------------------------------------------------------------------------------
 ' EQUIVALENTE A: IncluiSQLAdo[cite: 2]
 '---------------------------------------------------------------------------------------
 Public Function IncluiSQLite(ByVal cCON As String, ByVal cTABELA As String, ByVal aCAMPOS As Variant, ByVal aVALORES As Variant, Optional ByRef nID As Long) As Boolean
-    Dim loConn As New cSQLiteConnection
+    Dim loConn As New SQLiteConnection
     Dim cSQL As String
     Dim i As Integer
     
@@ -124,6 +179,8 @@ Public Function IncluiSQLite(ByVal cCON As String, ByVal cTABELA As String, ByVa
     
     IncluiSQLite = True
     loConn.CloseDB
+    
+    Set loConn = Nothing   ' Adicione isso
     Exit Function
 Erro:
     IncluiSQLite = False
@@ -152,8 +209,104 @@ Private Function FormataParaSQL(ByVal vValor As Variant) As String
     End If
 End Function
 
-Private Function GerarUpdateManual(cSQL_Original As String, aDados As Variant, loCursor As Object) As String
-    ' Função interna para converter um comando SELECT em UPDATE caso a classe não suporte .Update direto
-    ' Baseado na lógica de GrvSQLado[cite: 2]
-    ' ... lógica de parsing de string aqui ...
+'---------------------------------------------------------------------------------------
+' EQUIVALENTES A: SomaSQLAdo, PegCountSQLADO, PegMINSQLADO, PegMAXSQLADO, PegSUMSQLADO
+'---------------------------------------------------------------------------------------
+Public Function PegSomaSQLite(ByVal cCON As String, ByVal cSQL As String) As Double
+    PegSomaSQLite = PegOperSQLite(cCON, cSQL)
+End Function
+
+Public Function PegCountSQLite(ByVal cCON As String, ByVal cSQL As String) As Long
+    PegCountSQLite = CLng(PegOperSQLite(cCON, cSQL))
+End Function
+
+Public Function PegMinSQLite(ByVal cCON As String, ByVal cSQL As String) As Variant
+    PegMinSQLite = PegOperSQLite(cCON, cSQL)
+End Function
+
+Public Function PegMaxSQLite(ByVal cCON As String, ByVal cSQL As String) As Variant
+    PegMaxSQLite = PegOperSQLite(cCON, cSQL)
+End Function
+
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE A: PegOperSQLADO e PegCampoSQLADO
+'---------------------------------------------------------------------------------------
+Public Function PegOperSQLite(ByVal cCON As String, ByVal cSQL As String) As Variant
+    Dim loConn As New SQLiteConnection
+    Dim loCursor As SQLiteCursor
+    
+    On Error GoTo Erro
+    cCON = LimpaTag(cCON)
+    cSQL = SQLDialeto(cSQL, "SQLITE")
+    
+    loConn.OpenDB cCON
+    Set loCursor = loConn.CreateCursor(cSQL)
+    
+    If Not loCursor.EOF Then
+        PegOperSQLite = FVar(loCursor.Value(0))
+    Else
+        PegOperSQLite = 0
+    End If
+    
+    loConn.CloseDB
+    Set loCursor = Nothing
+    Set loConn = Nothing
+    Exit Function
+Erro:
+    PegOperSQLite = 0
+    If Not loConn Is Nothing Then Set loConn = Nothing
+End Function
+
+Public Function PegCampoSQLite(ByVal cCON As String, ByVal cSQL As String) As Variant
+    PegCampoSQLite = PegOperSQLite(cCON, cSQL)
+End Function
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE A: PegSQLDeliAdo
+'---------------------------------------------------------------------------------------
+Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
+                             ByVal aCAM As Variant, Optional ByVal cDELI As String = ",") As Variant
+    Dim loConn As New SQLiteConnection
+    Dim loCursor As SQLiteCursor
+    Dim i As Integer
+    Dim cRET As String
+    
+    On Error GoTo Erro
+    
+    cCON = LimpaTag(cCON)
+    loConn.OpenDB cCON
+    
+    ' Abre o cursor com o SQL original (já traduzido pelo dialeto se necessário)
+    Set loCursor = loConn.CreateCursor(SQLDialeto(cSQL, "SQLITE"))
+    
+    If Not loCursor.EOF Then
+        ' Faz o loop baseado estritamente no array aCAM (campos solicitados)
+        ' Assim como na sua PegSQLDeliAdo original
+        For i = LBound(aCAM) To UBound(aCAM)
+            ' No VBSQLite, podemos acessar pelo nome do campo se a DLL permitir: loCursor.Value(aCAM(i))
+            ' Ou, se o SELECT for específico, usamos o índice i
+            cRET = cRET & FVar(loCursor.Value(i)) & IIf(i < UBound(aCAM), cDELI, "")
+        Next
+        PegSQLiteDeli = cRET
+    Else
+        PegSQLiteDeli = ""
+    End If
+    
+    ' Ordem correta de fechamento para evitar Database Locked
+    loConn.CloseDB
+    Set loCursor = Nothing
+    Set loConn = Nothing
+    Exit Function
+
+Erro:
+    PegSQLiteDeli = ""
+    If Not loConn Is Nothing Then
+        On Error Resume Next
+        loConn.CloseDB
+        Set loConn = Nothing
+    End If
+End Function
+
+Public Function PegUltSQLite(ByVal cCON As String, ByVal cTABELA As String, ByVal cCAMPO As String) As Long
+    ' Simula o PegUltSQLAdo usando a sintaxe de Max do SQLite
+    PegUltSQLite = CLng(PegOperSQLite(cCON, "SELECT MAX(" & cCAMPO & ") FROM " & cTABELA))
 End Function

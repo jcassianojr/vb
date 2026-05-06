@@ -418,7 +418,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim nLENVAR As Long
   Dim nLENCAM As Long
   Dim lGRAVA As Boolean
-  Dim cTabela As String
+  Dim cTABELA As String
   Dim eVAZIO As Variant
   Dim cTIPO As String
   Dim aRETU As Variant
@@ -433,7 +433,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   lOPEN = False
   lRSOP = False
   GrvSQLado = False
-  cTabela = NomeTableSql(cSQL)
+  cTABELA = NomeTableSql(cSQL)
 
   aARQ = TipoConn(cARQ)
   cARQCON = aARQ(1)
@@ -1046,4 +1046,5 @@ Case Else
    Exit Function
 End Select
 End Function
+
 
