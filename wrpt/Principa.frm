@@ -1,20 +1,20 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.2#0"; "vbccr18.ocx"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
    Caption         =   " Menu Inicial"
-   ClientHeight    =   3984
-   ClientLeft      =   1572
-   ClientTop       =   1896
-   ClientWidth     =   10536
+   ClientHeight    =   3990
+   ClientLeft      =   1575
+   ClientTop       =   1890
+   ClientWidth     =   10530
    Icon            =   "Principa.frx":0000
    WindowState     =   2  'Maximized
    Begin MSComctlLib.ImageList ImageList1 
       Left            =   780
       Top             =   180
-      _ExtentX        =   995
-      _ExtentY        =   995
+      _ExtentX        =   1005
+      _ExtentY        =   1005
       BackColor       =   -2147483643
       ImageWidth      =   16
       ImageHeight     =   16
@@ -24,8 +24,8 @@ Begin VB.MDIForm frmPRINCIPAL
    Begin MSComctlLib.ImageList ImgMenu 
       Left            =   5850
       Top             =   180
-      _ExtentX        =   995
-      _ExtentY        =   995
+      _ExtentX        =   1005
+      _ExtentY        =   1005
       BackColor       =   -2147483643
       ImageWidth      =   16
       ImageHeight     =   16
@@ -233,12 +233,12 @@ Begin VB.MDIForm frmPRINCIPAL
    End
    Begin VBCCR18.StatusBar StatusBar1 
       Align           =   2  'Align Bottom
-      Height          =   372
+      Height          =   375
       Left            =   0
       Top             =   3615
       Width           =   10530
-      _ExtentX        =   18584
-      _ExtentY        =   656
+      _ExtentX        =   18574
+      _ExtentY        =   661
       InitPanels      =   "Principa.frx":C784
    End
    Begin VB.Menu Menu1 
@@ -364,12 +364,7 @@ Private Sub MDIForm_Load()
 
   CenterFormToScreen Me
   
-  If IsSQLiteDriverInstalled() Then
-       ' MsgBox "O driver SQLite ODBC está pronto para uso!", vbInformation
-    Else
-        MsgBox "Driver SQLite ODBC não encontrado. Por favor, instale o driver para continuar.", vbCritical
-        End
-    End If
+ 
   
   'cARQRTF = "C:/temp/citacao.pdf"
   'frmPDFView.Show vbModal
@@ -427,6 +422,17 @@ Private Sub MDIForm_Load()
     End
   End If
 
+  'se sql lite verifica se odbc esta instalado
+ If InStr(LCase(dbuser), ".sqlite") > 0 Or InStr(LCase(dbuser), ".sqlite3") > 0 _
+                 Or InStr(LCase(dbuser), ".fossil") > 0 Or InStr(LCase(dbuser), ".db3") > 0 _
+                 Or (InStr(LCase(dbuser), ".db") > 0) Then
+     If IsSQLiteDriverInstalled() Then
+       ' MsgBox "O driver SQLite ODBC está pronto para uso!", vbInformation
+     Else
+        MsgBox "Driver SQLite ODBC não encontrado. Por favor, instale o driver para continuar.", vbCritical
+        End
+     End If
+ End If
 
   carqhelp = PegPath("PATH", "HELP")
   If FileConnExist(carqhelp) Then
@@ -618,7 +624,7 @@ Private Sub MDIForm_Load()
 
 
 
-  StatusBar1.Panels(6).tEXT = zUSER
+  StatusBar1.Panels(6).Text = zUSER
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If

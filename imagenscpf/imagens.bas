@@ -25,6 +25,20 @@ Public Sub Cmdiniciar_Click()
   cCAMPO = "IMAGEM"
   DBCONNSTR = PegPath("PATH", "IMGCOM")
   cCAMJPG = PegPath("PATH", "IMGJPG")
+  
+  
+    'se sql lite verifica se odbc esta instalado
+ If InStr(LCase(DBCONNSTR), ".sqlite") > 0 Or InStr(LCase(DBCONNSTR), ".sqlite3") > 0 _
+                 Or InStr(LCase(DBCONNSTR), ".fossil") > 0 Or InStr(LCase(DBCONNSTR), ".db3") > 0 _
+                 Or (InStr(LCase(DBCONNSTR), ".db") > 0) Then
+     If IsSQLiteDriverInstalled() Then
+       ' MsgBox "O driver SQLite ODBC está pronto para uso!", vbInformation
+     Else
+        MsgBox "Driver SQLite ODBC não encontrado. Por favor, instale o driver para continuar.", vbCritical
+        End
+     End If
+ End If
+
  ' DBCONNSTR = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=d:\modelos\PECAS\FMP04CPF.MDB;Mode=Share Deny None"
  ' cCAMJPG = "d:\modelos\rh\fotoscpf\"
   OBJCONN.Open DBCONNSTR

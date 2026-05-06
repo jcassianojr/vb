@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escIMG 
    Caption         =   "Escolha o Codigo da Imagem"
    ClientHeight    =   6675
@@ -459,6 +459,18 @@ Private Sub Form_Load()
   End If
 
   Text1.Text = cARQRTF
+  
+   'se sql lite verifica se odbc esta instalado
+ If InStr(LCase(cARQRTF), ".sqlite") > 0 Or InStr(LCase(cARQRTF), ".sqlite3") > 0 _
+                 Or InStr(LCase(cARQRTF), ".fossil") > 0 Or InStr(LCase(cARQRTF), ".db3") > 0 _
+                 Or (InStr(LCase(cARQRTF), ".db") > 0) Then
+     If IsSQLiteDriverInstalled() Then
+       ' MsgBox "O driver SQLite ODBC está pronto para uso!", vbInformation
+     Else
+        MsgBox "Driver SQLite ODBC não encontrado. Por favor, instale o driver para continuar.", vbCritical
+        End
+     End If
+ End If
 
   If Len(ZGRP) > 0 Then
 

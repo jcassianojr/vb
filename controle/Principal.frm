@@ -1,28 +1,28 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.2#0"; "vbccr18.ocx"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
    Caption         =   " "
-   ClientHeight    =   6384
-   ClientLeft      =   1572
-   ClientTop       =   1896
-   ClientWidth     =   10884
+   ClientHeight    =   6390
+   ClientLeft      =   1575
+   ClientTop       =   1890
+   ClientWidth     =   10875
    Icon            =   "Principal.frx":0000
    StartUpPosition =   2  'CenterScreen
    WindowState     =   2  'Maximized
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   480
       Top             =   960
-      _ExtentX        =   953
-      _ExtentY        =   953
+      _ExtentX        =   1191
+      _ExtentY        =   1191
    End
    Begin MSComctlLib.ImageList ImageList1 
       Left            =   780
       Top             =   60
-      _ExtentX        =   995
-      _ExtentY        =   995
+      _ExtentX        =   1005
+      _ExtentY        =   1005
       BackColor       =   -2147483643
       ImageWidth      =   16
       ImageHeight     =   16
@@ -32,8 +32,8 @@ Begin VB.MDIForm frmPRINCIPAL
    Begin MSComctlLib.ImageList ImgMenu 
       Left            =   0
       Top             =   0
-      _ExtentX        =   995
-      _ExtentY        =   995
+      _ExtentX        =   1005
+      _ExtentY        =   1005
       BackColor       =   -2147483643
       ImageWidth      =   16
       ImageHeight     =   16
@@ -241,12 +241,12 @@ Begin VB.MDIForm frmPRINCIPAL
    End
    Begin VBCCR18.StatusBar StatusBar1 
       Align           =   2  'Align Bottom
-      Height          =   372
+      Height          =   375
       Left            =   0
-      Top             =   6012
-      Width           =   10884
-      _ExtentX        =   19198
-      _ExtentY        =   656
+      Top             =   6015
+      Width           =   10875
+      _ExtentX        =   19182
+      _ExtentY        =   661
       InitPanels      =   "Principal.frx":C784
    End
    Begin VB.Menu mnuMENU 
@@ -352,12 +352,6 @@ Private Sub MDIForm_Load()
 
   CenterFormToScreen Me
   
-  If IsSQLiteDriverInstalled() Then
-       ' MsgBox "O driver SQLite ODBC está pronto para uso!", vbInformation
-    Else
-        MsgBox "Driver SQLite ODBC não encontrado. Por favor, instale o driver para continuar.", vbCritical
-        End
-    End If
 
   On Error GoTo ErrorHandler
 
@@ -380,6 +374,18 @@ Private Sub MDIForm_Load()
   zusalx = PegPath("PATH", "USALX")
   zusamc = PegPath("PATH", "USAMC")
   cTIPORPT = "R"
+
+ 'se sql lite verifica se odbc esta instalado
+ If InStr(LCase(dbuser), ".sqlite") > 0 Or InStr(LCase(dbuser), ".sqlite3") > 0 _
+                 Or InStr(LCase(dbuser), ".fossil") > 0 Or InStr(LCase(dbuser), ".db3") > 0 _
+                 Or (InStr(LCase(dbuser), ".db") > 0) Then
+     If IsSQLiteDriverInstalled() Then
+       ' MsgBox "O driver SQLite ODBC está pronto para uso!", vbInformation
+     Else
+        MsgBox "Driver SQLite ODBC não encontrado. Por favor, instale o driver para continuar.", vbCritical
+        End
+     End If
+ End If
 
   carqhelp = PegPath("PATH", "HELP")
   If FileConnExist(carqhelp) Then
