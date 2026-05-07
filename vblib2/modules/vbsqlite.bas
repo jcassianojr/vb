@@ -275,64 +275,6 @@ Private Function FormataParaSQL(ByVal vValor As Variant) As String
         FormataParaSQL = "'" & Replace(vValor, "'", "''") & "'"
     End If
 End Function
-
-'---------------------------------------------------------------------------------------
-' EQUIVALENTES A: SomaSQLAdo, PegCountSQLADO, PegMINSQLADO, PegMAXSQLADO, PegSUMSQLADO
-'---------------------------------------------------------------------------------------
-'---------------------------------------------------------------------------------------
-' EQUIVALENTE A: SomaSQLAdo
-'---------------------------------------------------------------------------------------
-'---------------------------------------------------------------------------------------
-' EQUIVALENTE FIEL A: SomaSQLAdo (Com lógica SepSqlOpe e MathOper)
-'---------------------------------------------------------------------------------------
-Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
-                           ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-    Dim loConn As New SQLiteConnection
-    Dim loCursor As SQLiteCursor
-    Dim cSQL As String
-    Dim aOPER() As String
-    Dim cCAMPO_PROC As String
-    
-    On Error GoTo Erro
-    
-    ' REPLICAÇÃO DA LÓGICA ORIGINAL:
-    ' SepSqlOpe divide a string se houver operadores (ex: "PRECO*QTD" -> ["PRECO", "QTD", "*"])
-    aOPER = SepSqlOpe(cCAMPO)
-    
-    ' MathOper reconstrói a expressão de forma que o banco de dados entenda a operação
-    ' ou trata prioridades de cálculo conforme a lógica da sua biblioteca original.
-    cCAMPO_PROC = MathOper(aOPER)
-    
-    ' Monta o SQL com o campo processado
-    cSQL = "SELECT SUM(" & cCAMPO_PROC & ") FROM " & cTABLEWHERE
-    cSQL = SQLDialeto(cSQL, "SQLITE")
-    
-    loConn.OpenDB LimpaTag(cCON)
-    Set loCursor = loConn.CreateCursor(cSQL)
-    
-    If Not loCursor.EOF Then
-        If IsNull(loCursor.Value(0)) Then
-            SomaSQLite = eDEFAULT
-        Else
-            SomaSQLite = loCursor.Value(0)
-        End If
-    Else
-        SomaSQLite = eDEFAULT
-    End If
-    
-    loConn.CloseDB
-    Set loCursor = Nothing
-    Exit Function
-
-Erro:
-    SomaSQLite = eDEFAULT
-    If Not loConn Is Nothing Then loConn.CloseDB
-End Function
-
-
-
-
-
 '---------------------------------------------------------------------------------------
 ' EQUIVALENTE A: PegCampoSQLADO / PegCampoSQL
 '---------------------------------------------------------------------------------------
@@ -405,4 +347,52 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cTABELA As String) As L
     End If
 End Function
 
-
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE FIEL A: SomaSQLAdo
+'---------------------------------------------------------------------------------------
+Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                           ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
+                           Optional ByVal nDEC As Integer = 2) As Variant
+    Dim loConn As New SQLiteConnection
+    Dim loCursor As SQLiteCursor
+    Dim nSoma As Double
+    Dim aOPER As Variant
+    Dim aVALORES_LINHA() As String
+    Dim x As Integer
+    
+    On Error GoTo Erro
+    
+    ' SepSqlOpe prepara o array de campos/operadores
+    aOPER = SepSqlOpe(cCAMPO)
+    
+    loConn.OpenDB LimpaTag(cCON)
+    ' Busca todos os registros para processamento linha a linha (como a original)
+    Set loCursor = loConn.CreateCursor("SELECT * FROM " & cTABLEWHERE)
+    
+    nSoma = 0
+    While Not loCursor.EOF
+        ReDim aVALORES_LINHA(UBound(aOPER))
+        For x = 0 To UBound(aOPER)
+            ' Se não for operador, extrai o valor do campo do cursor
+            If InStr("+-*/()", aOPER(x)) = 0 And aOPER(x) <> "" Then
+                aVALORES_LINHA(x) = loCursor.Value(aOPER(x)) & ""
+            Else
+                aVALORES_LINHA(x) = aOPER(x)
+            End If
+        Next x
+        
+        ' CHAMA MATHOPER COM OS DOIS PARAMETROS: o array e as decimais
+        nSoma = nSoma + Val(MathOper(aVALORES_LINHA, nDEC))
+        
+        loCursor.MoveNext
+    Wend
+    
+    SomaSQLite = IIf(nSoma = 0, eDEFAULT, nSoma)
+    
+    loConn.CloseDB
+    Set loCursor = Nothing
+    Exit Function
+Erro:
+    SomaSQLite = eDEFAULT
+    If Not loConn Is Nothing Then loConn.CloseDB
+End Function

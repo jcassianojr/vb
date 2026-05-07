@@ -67,20 +67,49 @@ Erro:
 End Function
 
 '---------------------------------------------------------------------------------------
-' EQUIVALENTE A: SomaSQLAdo
+' EQUIVALENTE FIEL A: SomaSQLAdo
 '---------------------------------------------------------------------------------------
 Public Function SomaSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As String, _
-                              ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-    Dim vRet As Variant
+                              ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
+                              Optional ByVal nDEC As Integer = 2) As Variant
+    Dim loConn As RC6.cConnection
+    Dim loRS As RC6.cRecordset
+    Dim nSoma As Double
+    Dim aOPER As Variant
+    Dim aVALORES_LINHA() As String
+    Dim x As Integer
     
-    ' Replica a lógica de agregação do RC6 chamando a PegOperSQLiteRC6
-    vRet = PegOperSQLiteRC6(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "SUM")
+    On Error GoTo Erro
     
-    If IsNull(vRet) Or vRet = "" Then
-        SomaSQLiteRC6 = eDEFAULT
-    Else
-        SomaSQLiteRC6 = vRet
-    End If
+    aOPER = SepSqlOpe(cCAMPO)
+    
+    Set loConn = New_c.Connection(LimpaTagRC6(cCON))
+    Set loRS = loConn.OpenRecordset("SELECT * FROM " & cTABLEWHERE)
+    
+    nSoma = 0
+    Do While Not loRS.EOF
+        ReDim aVALORES_LINHA(UBound(aOPER))
+        For x = 0 To UBound(aOPER)
+            If InStr("+-*/()", aOPER(x)) = 0 And aOPER(x) <> "" Then
+                aVALORES_LINHA(x) = loRS.Fields(aOPER(x)).Value & ""
+            Else
+                aVALORES_LINHA(x) = aOPER(x)
+            End If
+        Next x
+        
+        ' REPASSA nDEC PARA A LOGICA DE CALCULO DA MYFUNCTIONS
+        nSoma = nSoma + Val(MathOper(aVALORES_LINHA, nDEC))
+        
+        loRS.MoveNext
+    Loop
+    
+    SomaSQLiteRC6 = IIf(nSoma = 0, eDEFAULT, nSoma)
+    
+    Set loRS = Nothing: Set loConn = Nothing
+    Exit Function
+Erro:
+    SomaSQLiteRC6 = eDEFAULT
+    Set loConn = Nothing
 End Function
 
 '---------------------------------------------------------------------------------------
@@ -95,8 +124,13 @@ Public Function PegCampoSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As Str
     
 End Function
 
-Public Function PegCountSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Long
-    PegCountSQLiteRC6 = CLng(PegOperSQLiteRC6(cCON, cSQL))
+Public Function PegCountSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                                 ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    
+    ' Repassa para a Oper com o comando "COUNT"
+    ' cCAMPO normalmente será "*" nesta chamada
+    PegCountSQLiteRC6 = PegOperSQLiteRC6(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "COUNT")
+    
 End Function
 
 
@@ -253,7 +287,36 @@ Public Function ApagaSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Bo
         ApagaSQLiteRC6 = SQLiteComandoRC6(cCON, cSQL)
     End If
 End Function
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE A: ADOComando / SQLiteComando
+' Objetivo: Executar comandos SQL (Action Queries) via RC6 sem retorno de recordset
+'---------------------------------------------------------------------------------------
+Public Function SQLiteComandoRC6(ByVal cCON As String, ByVal cSQL As String) As Boolean
+    Dim loConn As RC6.cConnection
+    
+    On Error GoTo Erro
+    
+    ' 1. Limpa a Tag da conexão (Ex: tira o "SQLITE:")
+    cCON = LimpaTagRC6(cCON)
+    
+    ' 2. Traduz o dialeto (converte sintaxe Access/VFP para SQLite se necessário)
+    cSQL = SQLDialeto(cSQL, "SQLITE")
+    
+    ' 3. Abre a conexão e executa o comando
+    Set loConn = New_c.Connection(cCON)
+    loConn.Execute cSQL
+    
+    SQLiteComandoRC6 = True
+    
+    ' Limpeza
+    Set loConn = Nothing
+    Exit Function
 
+Erro:
+    ' Em caso de erro (ex: base de dados bloqueada ou erro de sintaxe SQL)
+    SQLiteComandoRC6 = False
+    Set loConn = Nothing
+End Function
 '---------------------------------------------------------------------------------------
 ' EQUIVALENTE A: PegUltSQLAdo
 '---------------------------------------------------------------------------------------
