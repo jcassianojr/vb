@@ -108,6 +108,11 @@ Public Function PegSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
   Select Case aRETU(0)
   Case "ADO"
     PegSQL = PegSQLAdo(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
+ Case "SQLITERC6"
+            PegSQL = PegSQLiteRC6(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
+        Case "VBSQLITE"
+            PegSQL = PegSQLite(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
+    
   End Select
 End Function
 
@@ -167,6 +172,13 @@ Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
   Select Case aRETU(0)
   Case "ADO"
     PegSQLDeli = PegSQLDeliAdo(cARQ, cSQL, aCAM, cDELI)
+    
+    
+ Case "SQLITERC6"
+      'PegSQLDeli = PegSQLiteDeliRC6(cARQ, cSQL, aCAM, , , cDELI)
+        Case "VBSQLITE"
+       ' PegSQLDeli = PegSQLiteDeli(cARQ, cSQL, aCAM, , , cDELI)
+    
   End Select
 End Function
 

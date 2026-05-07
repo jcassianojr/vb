@@ -64,10 +64,9 @@ End Function
 Public Function SQLDialeto(ByVal cSQLCNV As String, cDIALETO As String) As String
 'SQLDialeto = SQLDIAPAR(SQLDialeto, "FUNCAO(", ")", "", "")
      SQLDialeto = cSQLCNV
+     SQLDialeto = Replace(SQLDialeto, "  ", " ")
      Select Case cDIALETO
             Case "SQLITE"
-                 '"LOWER(%1%)"        ,"LOWER(%1%)"
-                 '"UPPER(%1%)"        ,"UPPER(%1%)"
                  SQLDialeto = Replace(SQLDialeto, "CURRENTDATETIME", " current_timestamp ")
                  SQLDialeto = Replace(SQLDialeto, "TODAY()", "CURRENT_DATE ")
                  SQLDialeto = Replace(SQLDialeto, "CHR(", "CHAR(")
@@ -75,14 +74,33 @@ Public Function SQLDialeto(ByVal cSQLCNV As String, cDIALETO As String) As Strin
                  SQLDialeto = Replace(SQLDialeto, "TRIM(", "RTRIM(")
                  SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(")
                  SQLDialeto = Replace(SQLDialeto, "LEN(", "LENGTH(")
-                 
                  SQLDialeto = SQLDIAPAR(SQLDialeto, "DTOS(", ")", "strftime('%Y%m%d',", ")")
                  SQLDialeto = SQLDIAPAR(SQLDialeto, "DAY((", ")", "cast(strftime('%d',", ") as int)")
                  SQLDialeto = SQLDIAPAR(SQLDialeto, "MONTH(", ")", "cast(strftime('%m',", ") as int)")
                  SQLDialeto = SQLDIAPAR(SQLDialeto, "YEAR(", ")", "cast(strftime('%Y'", ") as int)")
                  
-                '  {"LEFT(%1%,%2%)"      ,"SUBSTR(%1%,1,%2%)"},;
-                '  {"REPL(%1%,%2%)"      ,"FORMAT('%.*c',%2%,%1%)"},;
+                 ' 1. Concatenação: & para ||
+                ' Cuidado para não trocar o & dentro de strings literais
+                SQLDialeto = Replace(SQLDialeto, " & ", " || ")
+                
+                ' 2. Datas: Access (#12/31/2023#) para SQLite ('2023-12-31')
+            ' Aqui você precisaria de uma Regex ou função auxiliar para pegar o valor entre #
+            ' Simplificando: troca delimitador
+            SQLDialeto = Replace(SQLDialeto, "#", "'")
+            ' 3. Booleanos
+            SQLDialeto = Replace(SQLDialeto, " = True", " = 1")
+            SQLDialeto = Replace(SQLDialeto, " = False", " = 0")
+            SQLDialeto = Replace(SQLDialeto, "LEFT(", "SUBSTR(", , , vbTextCompare)
+            SQLDialeto = Replace(SQLDialeto, "RIGHT(", "SUBSTR(", , , vbTextCompare)
+            
+            ' 4. Funções comuns
+            SQLDialeto = Replace(SQLDialeto, "IIF(", "CASE WHEN ") ' Requer lógica de fechamento complexa
+            ' Nota: SQLite suporta IIF() a partir da versão 3.32.0.
+            ' Se usar RC6 (que é atualizada), o IIF funciona!
+                
+                
+                
+               
                 
             Case "MYSQL", "MARIADB"
                  '"LOWER(%1%)"        ,"LOWER(%1%)"
@@ -91,6 +109,10 @@ Public Function SQLDialeto(ByVal cSQLCNV As String, cDIALETO As String) As Strin
                  '"DAY(%1%)"         ,"DAY(%1%)"
                  '"MONTH(%1%)"       ,"MONTH(%1%)"}
                  '"YEAR(%1%)"        ,"YEAR(%1%)"
+                 SQLDialeto = Replace(SQLDialeto, "#", "'")
+                 SQLDialeto = Replace(SQLDialeto, " & ", " || ")
+            ' MariaDB usa backticks para nomes de campos com espaço
+               SQLDialeto = Replace(Replace(SQLDialeto, "[", "`"), "]", "`")
                  SQLDialeto = Replace(SQLDialeto, "TODAY()", "SYSDATE()")
                  SQLDialeto = Replace(SQLDialeto, "CHR(", "CHAR(")
                  SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
@@ -98,7 +120,14 @@ Public Function SQLDialeto(ByVal cSQLCNV As String, cDIALETO As String) As Strin
                  SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(")
                  SQLDialeto = Replace(SQLDialeto, "REPL(", "REPEAT(")
                  SQLDialeto = SQLDIAPAR(SQLDialeto, "DTOS(", ")", "DATE_FORMAT(", ",'%Y%m%d')")
+                 
             Case "PGSQL", "POSTGRESQL"
+                SQLDialeto = Replace(SQLDialeto, " & ", " || ")
+                SQLDialeto = Replace(SQLDialeto, "#", "'")
+                ' Postgres é rigoroso: True/False são 't'/'f' ou booleanos reais sem aspas
+                SQLDialeto = Replace(SQLDialeto, "True", "TRUE")
+                SQLDialeto = Replace(SQLDialeto, "False", "FALSE")
+            
                  '"LOWER(%1%)"        ,"LOWER(%1%)"
                  '"UPPER(%1%)"        ,"UPPER(%1%)"
                  '"LEFT(%1%,%2%)"      ,"LEFT(%1%,%2%)"
@@ -112,6 +141,9 @@ Public Function SQLDialeto(ByVal cSQLCNV As String, cDIALETO As String) As Strin
                  SQLDialeto = Replace(SQLDialeto, "MONTH(", "EXTRACT('MONTH' FROM ")
                  SQLDialeto = Replace(SQLDialeto, "YEAR(", "EXTRACT('YEAR' FROM ")
                  SQLDialeto = Replace(SQLDialeto, "REPL(", "REPEAT(")
+                ' Tradução de Mid para Substring (Postgres usa Substring)
+                 SQLDialeto = Replace(SQLDialeto, "MID(", "SUBSTRING(", , , vbTextCompare)
+                 
             Case "MSSQL", "SQLSERVER"
             
                  SQLDialeto = Replace(SQLDialeto, "TODAY()", "GETDATE() ")
@@ -1186,7 +1218,7 @@ trataerro:
   BytesToHexString = ""
   Exit Function
 End Function
-Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTabela As String, Optional ByVal lMES As Boolean = True) As Boolean
+Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTABELA As String, Optional ByVal lMES As Boolean = True) As Boolean
   Dim oCat As ADOX.Catalog
   Dim oTabela As ADOX.Table
   On Error GoTo trataerro
@@ -1196,19 +1228,19 @@ Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTabela As String, Opti
   oCat.ActiveConnection = cARQ
 
   For Each oTabela In oCat.Tables
-    If UCase(oTabela.Name) = UCase(cTabela) Then
+    If UCase(oTabela.Name) = UCase(cTABELA) Then
       TemTabelaADO = True
       Exit For
     End If
   Next
 
   If lMES And Not TemTabelaADO Then
-    Alert ("Tabela nao Encontrada" & cTabela & Chr(13) & Chr(10) & cARQ)
+    Alert ("Tabela nao Encontrada" & cTABELA & Chr(13) & Chr(10) & cARQ)
   End If
 trataerro:
   Select Case Err.Number
   Case Else
-    SayErro "Tem Tabela Ado :" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTabela & Chr(13) & Chr(10)
+    SayErro "Tem Tabela Ado :" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTABELA & Chr(13) & Chr(10)
     Exit Function
   End Select
 
@@ -1273,17 +1305,17 @@ Public Function MSSqlOdbcDriver() As String
     
     Dim i As Long
     For i = 0 To UBound(SupportedDrivers)
-        Dim DriverName As String: DriverName = SupportedDrivers(i)
+        Dim driverName As String: driverName = SupportedDrivers(i)
         
         Dim KeyExists As Boolean, RegValue As String
-        KeyExists = (oReg.GetStringValue(HKEY_LOCAL_MACHINE, RegPath, DriverName, RegValue) = 0)
+        KeyExists = (oReg.GetStringValue(HKEY_LOCAL_MACHINE, RegPath, driverName, RegValue) = 0)
         
         Dim DriverIsInstalled
         DriverIsInstalled = (KeyExists And (RegValue = "Installed"))
         
         If DriverIsInstalled Then
             'Return the first Driver from the list that is installed on the computer
-            MSSqlOdbcDriver = DriverName
+            MSSqlOdbcDriver = driverName
             Set oReg = Nothing
             Exit Function
         End If
