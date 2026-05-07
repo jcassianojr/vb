@@ -14,8 +14,16 @@ Public Function PegMaxSQLiteRC6(cCON, cTW, cCP, eDF)
     PegMaxSQLiteRC6 = PegOperSQLiteRC6(cCON, cTW, cCP, eDF, "MAX")
 End Function
 
-Public Function PegSumSQLiteRC6(cCON, cTW, cCP, eDF)
-    PegSumSQLiteRC6 = PegOperSQLiteRC6(cCON, cTW, cCP, eDF, "SUM")
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE A: PegSUMSQLADO
+'---------------------------------------------------------------------------------------
+Public Function PegSumSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                               ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    
+    ' Utiliza a PegOperSQLiteRC6 com o operador SUM.
+    ' Garante que o motor do RC6 execute a soma nativa.
+    PegSumSQLiteRC6 = PegOperSQLiteRC6(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "SUM")
+    
 End Function
 '---------------------------------------------------------------------------------------
 ' EQUIVALENTE A: PegSQLAdo
@@ -276,17 +284,6 @@ Private Function LimpaTagRC6(ByVal cCON As String) As String
     LimpaTagRC6 = Replace(cCON, "[SQLITERC6]", "")
 End Function
 
-' EQUIVALENTE A: APAGASQLADO [cite: 7]
-Public Function ApagaSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Boolean
-    Dim nPOS As Integer
-    ' Converte SELECT ou strings parciais em DELETE funcional como na ADO [cite: 8]
-    cSQL = UCase(cSQL)
-    nPOS = InStr(cSQL, "FROM")
-    If nPOS > 0 Then
-        cSQL = "DELETE FROM " & Mid(cSQL, nPOS + 5)
-        ApagaSQLiteRC6 = SQLiteComandoRC6(cCON, cSQL)
-    End If
-End Function
 '---------------------------------------------------------------------------------------
 ' EQUIVALENTE A: ADOComando / SQLiteComando
 ' Objetivo: Executar comandos SQL (Action Queries) via RC6 sem retorno de recordset
@@ -317,6 +314,8 @@ Erro:
     SQLiteComandoRC6 = False
     Set loConn = Nothing
 End Function
+
+
 '---------------------------------------------------------------------------------------
 ' EQUIVALENTE A: PegUltSQLAdo
 '---------------------------------------------------------------------------------------
@@ -337,7 +336,34 @@ Public Function PegUltSQLiteRC6(ByVal cCON As String, ByVal cTABELA As String) A
 End Function
 
 
-
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE FIEL A: ApagaSQLpAdo / APAGASQLADO
+'---------------------------------------------------------------------------------------
+Public Function ApagaSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Boolean
+    Dim nPOS As Long
+    Dim cSQL_FINAL As String
+    
+    On Error GoTo Erro
+    
+    cSQL_FINAL = Trim(cSQL)
+    
+    ' Checagem From/Where idêntica à lógica ADO
+    If UCase(Left(cSQL_FINAL, 6)) <> "DELETE" Then
+        nPOS = InStr(1, UCase(cSQL_FINAL), "FROM")
+        If nPOS > 0 Then
+            cSQL_FINAL = "DELETE " & Mid(cSQL_FINAL, nPOS)
+        Else
+            cSQL_FINAL = "DELETE FROM " & cSQL_FINAL
+        End If
+    End If
+    
+    ' Utiliza a SQLiteComandoRC6 que criamos anteriormente
+    ApagaSQLiteRC6 = SQLiteComandoRC6(cCON, cSQL_FINAL)
+    
+    Exit Function
+Erro:
+    ApagaSQLiteRC6 = False
+End Function
 
 
 

@@ -396,3 +396,39 @@ Erro:
     SomaSQLite = eDEFAULT
     If Not loConn Is Nothing Then loConn.CloseDB
 End Function
+
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE FIEL A: ApagaSQLpAdo / APAGASQLADO
+' Conceito: Checa se existe DELETE, se não, monta a partir do FROM/WHERE
+'---------------------------------------------------------------------------------------
+Public Function ApagaSQLite(ByVal cCON As String, ByVal cSQL As String) As Boolean
+    Dim nPOS As Long
+    Dim cSQL_FINAL As String
+    
+    On Error GoTo Erro
+    
+    cSQL_FINAL = Trim(cSQL)
+    
+    ' Lógica de espelhamento: Se não começa com DELETE, mas tem FROM, reconstrói
+    If UCase(Left(cSQL_FINAL, 6)) <> "DELETE" Then
+        nPOS = InStr(1, UCase(cSQL_FINAL), "FROM")
+        If nPOS > 0 Then
+            ' Pega do FROM em diante e adiciona o DELETE
+            cSQL_FINAL = "DELETE " & Mid(cSQL_FINAL, nPOS)
+        Else
+            ' Se for apenas "TABELA WHERE...", tenta montar
+            cSQL_FINAL = "DELETE FROM " & cSQL_FINAL
+        End If
+    End If
+    
+    ' Executa através do comando padrão que já trata Dialeto e Conexão
+    ApagaSQLite = SQLiteComando(cCON, cSQL_FINAL)
+    
+    Exit Function
+Erro:
+    ApagaSQLite = False
+End Function
+
+
+
+

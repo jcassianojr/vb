@@ -85,6 +85,10 @@ Public Function GrvSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
   Select Case aRETU(0)
   Case "ADO"
     GrvSQL = GrvSQLado(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
+  Case "SQLITEDIRETO"
+    'GrvSQL = GrvSQLite(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
+  Case "SQLITERC6"
+    ' GrvSQL = GrvSQLiteRC6(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
   End Select
 End Function
 
@@ -162,6 +166,10 @@ Public Function SomaSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM A
   Select Case aRETU(0)
   Case "ADO"
     SomaSQL = SomaSQLAdo(cARQ, cSQL, aCAM)
+    
+    
+    
+    
   End Select
 End Function
 
