@@ -1,0 +1,19 @@
+adosql 				vbsqlite12  				SQLITERC6
+ADOComando			SQLiteComando
+APAGASQLADO
+SomaSQLAdo          PegSomaSQLite				SomaSQLiteRC6
+PegSQLDeliAdo       PegSQLiteDeli				SomaSQLiteRC6
+GrvSQLado			GrvSQLite					GrvSQLiteRC6
+ApagaSQLpAdo
+IncluiSQLAdo		IncluiSQLite				IncluiSQLiteRC6
+PegSQLAdo			PegSQLite					PegSQLiteRC6
+PegCountSQLADO      PegCountSQLite				PegCountSQLiteRC6
+PegMINSQLADO		PegMinSQLite				PegMinSQLiteRC6
+PegMAXSQLADO        PegMaxSQLite				PegMAXSQLiteRC6
+PegSUMSQLADO
+PegCampoSQLADO      PegCampoSQLite
+PegOperSQLADO		PegOperSQLite				PegOperSQLiteRC6
+PegUltSQLAdo        PegUltSQLite
+SQLMoveRegADO
+
+

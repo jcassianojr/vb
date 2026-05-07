@@ -6,6 +6,73 @@ Option Explicit
 ' 2. Mantém compatibilidade com a função SQLDialeto do adolib.bas.
 
 '---------------------------------------------------------------------------------------
+' WRAPPERS DE OPERAÇÃO - ESPELHOS DA SQLFUNCOESADO
+'---------------------------------------------------------------------------------------
+
+' EQUIVALENTE A: PegMINSQLADO
+Public Function PegMinSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                            ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    PegMinSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "MIN")
+End Function
+
+' EQUIVALENTE A: PegMAXSQLADO
+Public Function PegMaxSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                            ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    PegMaxSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "MAX")
+End Function
+
+' EQUIVALENTE A: PegSUMSQLADO
+Public Function PegSumSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                            ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    PegSumSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "SUM")
+End Function
+
+' EQUIVALENTE A: PegCountSQLADO
+Public Function PegCountSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                              ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    ' No Count, se o campo for *, ele conta todos os registos
+    PegCountSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "COUNT")
+End Function
+
+'---------------------------------------------------------------------------------------
+' FUNÇÃO CORE (Ajustada para aceitar os parâmetros do ADO)
+'---------------------------------------------------------------------------------------
+Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                             ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
+                             ByVal coper As String) As Variant
+    Dim loConn As New SQLiteConnection
+    Dim loCursor As SQLiteCursor
+    Dim cSQL As String
+    
+    On Error GoTo Erro
+    
+    ' Montagem da query idêntica ao processo ADO
+    ' Ex: SELECT SUM(VALOR) FROM MOVI WHERE CODIGO = 10
+    cSQL = "SELECT " & coper & "(" & cCAMPO & ") FROM " & cTABLEWHERE
+    cSQL = SQLDialeto(cSQL, "SQLITE")
+    
+    loConn.OpenDB LimpaTag(cCON)
+    Set loCursor = loConn.CreateCursor(cSQL)
+    
+    If Not loCursor.EOF Then
+        If IsNull(loCursor.Value(0)) Then
+            PegOperSQLite = eDEFAULT
+        Else
+            PegOperSQLite = loCursor.Value(0)
+        End If
+    Else
+        PegOperSQLite = eDEFAULT
+    End If
+    
+    loConn.CloseDB
+    Set loCursor = Nothing: Set loConn = Nothing
+    Exit Function
+
+Erro:
+    PegOperSQLite = eDEFAULT
+    If Not loConn Is Nothing Then loConn.CloseDB
+End Function
+'---------------------------------------------------------------------------------------
 ' EQUIVALENTE A: ADOComando
 '---------------------------------------------------------------------------------------
 Public Function SQLiteComando(ByVal cCON As String, ByVal cSQL As String) As Boolean
@@ -212,53 +279,73 @@ End Function
 '---------------------------------------------------------------------------------------
 ' EQUIVALENTES A: SomaSQLAdo, PegCountSQLADO, PegMINSQLADO, PegMAXSQLADO, PegSUMSQLADO
 '---------------------------------------------------------------------------------------
-Public Function PegSomaSQLite(ByVal cCON As String, ByVal cSQL As String) As Double
-    PegSomaSQLite = PegOperSQLite(cCON, cSQL)
-End Function
-
-Public Function PegCountSQLite(ByVal cCON As String, ByVal cSQL As String) As Long
-    PegCountSQLite = CLng(PegOperSQLite(cCON, cSQL))
-End Function
-
-Public Function PegMinSQLite(ByVal cCON As String, ByVal cSQL As String) As Variant
-    PegMinSQLite = PegOperSQLite(cCON, cSQL)
-End Function
-
-Public Function PegMaxSQLite(ByVal cCON As String, ByVal cSQL As String) As Variant
-    PegMaxSQLite = PegOperSQLite(cCON, cSQL)
-End Function
-
 '---------------------------------------------------------------------------------------
-' EQUIVALENTE A: PegOperSQLADO e PegCampoSQLADO
+' EQUIVALENTE A: SomaSQLAdo
 '---------------------------------------------------------------------------------------
-Public Function PegOperSQLite(ByVal cCON As String, ByVal cSQL As String) As Variant
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE FIEL A: SomaSQLAdo (Com lógica SepSqlOpe e MathOper)
+'---------------------------------------------------------------------------------------
+Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                           ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     Dim loConn As New SQLiteConnection
     Dim loCursor As SQLiteCursor
+    Dim cSQL As String
+    Dim aOPER() As String
+    Dim cCAMPO_PROC As String
     
     On Error GoTo Erro
-    cCON = LimpaTag(cCON)
+    
+    ' REPLICAÇÃO DA LÓGICA ORIGINAL:
+    ' SepSqlOpe divide a string se houver operadores (ex: "PRECO*QTD" -> ["PRECO", "QTD", "*"])
+    aOPER = SepSqlOpe(cCAMPO)
+    
+    ' MathOper reconstrói a expressão de forma que o banco de dados entenda a operação
+    ' ou trata prioridades de cálculo conforme a lógica da sua biblioteca original.
+    cCAMPO_PROC = MathOper(aOPER)
+    
+    ' Monta o SQL com o campo processado
+    cSQL = "SELECT SUM(" & cCAMPO_PROC & ") FROM " & cTABLEWHERE
     cSQL = SQLDialeto(cSQL, "SQLITE")
     
-    loConn.OpenDB cCON
+    loConn.OpenDB LimpaTag(cCON)
     Set loCursor = loConn.CreateCursor(cSQL)
     
     If Not loCursor.EOF Then
-        PegOperSQLite = FVar(loCursor.Value(0))
+        If IsNull(loCursor.Value(0)) Then
+            SomaSQLite = eDEFAULT
+        Else
+            SomaSQLite = loCursor.Value(0)
+        End If
     Else
-        PegOperSQLite = 0
+        SomaSQLite = eDEFAULT
     End If
     
     loConn.CloseDB
     Set loCursor = Nothing
-    Set loConn = Nothing
     Exit Function
+
 Erro:
-    PegOperSQLite = 0
-    If Not loConn Is Nothing Then Set loConn = Nothing
+    SomaSQLite = eDEFAULT
+    If Not loConn Is Nothing Then loConn.CloseDB
 End Function
 
-Public Function PegCampoSQLite(ByVal cCON As String, ByVal cSQL As String) As Variant
-    PegCampoSQLite = PegOperSQLite(cCON, cSQL)
+
+
+
+
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE A: PegCampoSQLADO / PegCampoSQL
+'---------------------------------------------------------------------------------------
+Public Function PegCampoSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                               ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    
+    ' O PegCampo no ADO nada mais é do que uma operação de busca simples.
+    ' Usamos a lógica de "MAX" ou apenas o campo puro se a função PegOper aceitar.
+    ' Para garantir compatibilidade total, chamamos a PegOper sem função agregadora
+    ' ou simulamos via MAX para pegar o valor único.
+    
+    PegCampoSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "")
+    
 End Function
 Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
                              ByVal aCAM As Variant, ByVal aFOR As Variant, _
@@ -299,7 +386,23 @@ Erro:
     PegSQLiteDeli = ""
 End Function
 
-Public Function PegUltSQLite(ByVal cCON As String, ByVal cTABELA As String, ByVal cCAMPO As String) As Long
-    ' Simula o PegUltSQLAdo usando a sintaxe de Max do SQLite
-    PegUltSQLite = CLng(PegOperSQLite(cCON, "SELECT MAX(" & cCAMPO & ") FROM " & cTABELA))
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE A: PegUltSQLAdo
+'---------------------------------------------------------------------------------------
+Public Function PegUltSQLite(ByVal cCON As String, ByVal cTABELA As String) As Long
+    Dim vRet As Variant
+    
+    ' No SQLite, last_insert_rowid() retorna o último ID da conexão atual.
+    ' O parâmetro cTABELA é mantido para manter a assinatura idêntica ao ADO,
+    ' embora o SQLite não exija o nome da tabela para esta função específica.
+    
+    vRet = PegOperSQLite(cCON, cTABELA, "last_insert_rowid()", 0, "")
+    
+    If IsNumeric(vRet) Then
+        PegUltSQLite = CLng(vRet)
+    Else
+        PegUltSQLite = 0
+    End If
 End Function
+
+

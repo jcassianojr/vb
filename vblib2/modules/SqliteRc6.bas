@@ -5,7 +5,18 @@ Option Explicit
 ' Biblioteca: sqliterc6 (Baseada em vbRichClient6 - New_c)
 ' Objetivo: Espelho funcional completo da SqlFuncoesAdo para SQLite Nativo
 '---------------------------------------------------------------------------------------
+' Exemplo para RC6
+Public Function PegMinSQLiteRC6(cCON, cTW, cCP, eDF)
+    PegMinSQLiteRC6 = PegOperSQLiteRC6(cCON, cTW, cCP, eDF, "MIN")
+End Function
 
+Public Function PegMaxSQLiteRC6(cCON, cTW, cCP, eDF)
+    PegMaxSQLiteRC6 = PegOperSQLiteRC6(cCON, cTW, cCP, eDF, "MAX")
+End Function
+
+Public Function PegSumSQLiteRC6(cCON, cTW, cCP, eDF)
+    PegSumSQLiteRC6 = PegOperSQLiteRC6(cCON, cTW, cCP, eDF, "SUM")
+End Function
 '---------------------------------------------------------------------------------------
 ' EQUIVALENTE A: PegSQLAdo
 '---------------------------------------------------------------------------------------
@@ -56,50 +67,77 @@ Erro:
 End Function
 
 '---------------------------------------------------------------------------------------
-' EQUIVALENTES ÀS FUNÇÕES DE AGREGAÇÃO (Soma, Count, Min, Max)
+' EQUIVALENTE A: SomaSQLAdo
 '---------------------------------------------------------------------------------------
-
-Public Function SomaSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Double
-    SomaSQLiteRC6 = CDbl(PegOperSQLiteRC6(cCON, cSQL))
+Public Function SomaSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                              ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    Dim vRet As Variant
+    
+    ' Replica a lógica de agregação do RC6 chamando a PegOperSQLiteRC6
+    vRet = PegOperSQLiteRC6(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "SUM")
+    
+    If IsNull(vRet) Or vRet = "" Then
+        SomaSQLiteRC6 = eDEFAULT
+    Else
+        SomaSQLiteRC6 = vRet
+    End If
 End Function
 
-Public Function PegSumSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Double
-    PegSumSQLiteRC6 = CDbl(PegOperSQLiteRC6(cCON, cSQL))
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE A: PegCampoSQLADO / PegCampoSQL
+'---------------------------------------------------------------------------------------
+Public Function PegCampoSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                                  ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    
+    ' Chama a função mestre de operação passando a string vazia para o operador
+    ' para que ela execute um SELECT [cCAMPO] FROM [cTABLEWHERE]
+    PegCampoSQLiteRC6 = PegOperSQLiteRC6(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "")
+    
 End Function
 
 Public Function PegCountSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Long
     PegCountSQLiteRC6 = CLng(PegOperSQLiteRC6(cCON, cSQL))
 End Function
 
-Public Function PegMinSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Variant
-    PegMinSQLiteRC6 = PegOperSQLiteRC6(cCON, cSQL)
-End Function
 
-Public Function PegMAXSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Variant
-    PegMAXSQLiteRC6 = PegOperSQLiteRC6(cCON, cSQL)
-End Function
+
+
 
 '---------------------------------------------------------------------------------------
 ' MOTOR DE OPERAÇÃO SCALAR (Equivalente a PegOperSQLADO)
 '---------------------------------------------------------------------------------------
-Public Function PegOperSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Variant
-    Dim loConn As RC6.cConnection, loRS As RC6.cRecordset
+Public Function PegOperSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                                ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
+                                ByVal coper As String) As Variant
+    Dim loConn As RC6.cConnection
+    Dim loRS As RC6.cRecordset
+    Dim cSQL As String
+    
     On Error GoTo Erro
     
-    Set loConn = New_c.Connection(LimpaTagRC6(cCON))
-    Set loRS = loConn.OpenRecordset(SQLDialeto(cSQL, "SQLITE"))
+    ' Monta a query dinamicamente como no ADO
+    ' Ex: SELECT MIN(Preco) FROM Produtos WHERE Categoria = 1
+    cSQL = "SELECT " & coper & "(" & cCAMPO & ") FROM " & cTABLEWHERE
+    cSQL = SQLDialeto(cSQL, "SQLITE")
     
-    If loRS.RecordCount > 0 Then
-        PegOperSQLiteRC6 = loRS.Fields(0).Value 'loRS.Value(0)
+    Set loConn = New_c.Connection(LimpaTagRC6(cCON))
+    Set loRS = loConn.OpenRecordset(cSQL)
+    
+    If Not loRS.EOF Then
+        If IsNull(loRS.Fields(0).Value) Then
+            PegOperSQLiteRC6 = eDEFAULT
+        Else
+            PegOperSQLiteRC6 = loRS.Fields(0).Value
+        End If
     Else
-        PegOperSQLiteRC6 = 0
+        PegOperSQLiteRC6 = eDEFAULT
     End If
     
-    Set loRS = Nothing
-    Set loConn = Nothing
+    Set loRS = Nothing: Set loConn = Nothing
     Exit Function
+
 Erro:
-    PegOperSQLiteRC6 = 0
+    PegOperSQLiteRC6 = eDEFAULT
     Set loConn = Nothing
 End Function
 
@@ -203,5 +241,42 @@ End Function
 Private Function LimpaTagRC6(ByVal cCON As String) As String
     LimpaTagRC6 = Replace(cCON, "[SQLITERC6]", "")
 End Function
+
+' EQUIVALENTE A: APAGASQLADO [cite: 7]
+Public Function ApagaSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Boolean
+    Dim nPOS As Integer
+    ' Converte SELECT ou strings parciais em DELETE funcional como na ADO [cite: 8]
+    cSQL = UCase(cSQL)
+    nPOS = InStr(cSQL, "FROM")
+    If nPOS > 0 Then
+        cSQL = "DELETE FROM " & Mid(cSQL, nPOS + 5)
+        ApagaSQLiteRC6 = SQLiteComandoRC6(cCON, cSQL)
+    End If
+End Function
+
+'---------------------------------------------------------------------------------------
+' EQUIVALENTE A: PegUltSQLAdo
+'---------------------------------------------------------------------------------------
+Public Function PegUltSQLiteRC6(ByVal cCON As String, ByVal cTABELA As String) As Long
+    Dim vRet As Variant
+    
+    ' Chama a PegOperSQLiteRC6 sem operador para executar:
+    ' SELECT last_insert_rowid() FROM [cTABELA] LIMIT 1
+    ' Nota: No SQLite o last_insert_rowid é global por conexão.
+    
+    vRet = PegOperSQLiteRC6(cCON, cTABELA, "last_insert_rowid()", 0, "")
+    
+    If IsNumeric(vRet) Then
+        PegUltSQLiteRC6 = CLng(vRet)
+    Else
+        PegUltSQLiteRC6 = 0
+    End If
+End Function
+
+
+
+
+
+
 
 
