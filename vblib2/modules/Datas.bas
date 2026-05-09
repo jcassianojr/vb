@@ -66,7 +66,7 @@ Public Function DataBranco(ByVal eVAR As Variant) As Boolean
     Exit Function
   End If
   If IsDate(eVAR) Then                         ''Corrige Erro data null voltando 31/12/1899
-    If Year(Date) <= 1899 Then
+    If Year(eVAR) <= 1899 Then
       DataBranco = True
       Exit Function
     End If
@@ -164,7 +164,7 @@ Public Function NumToData(ByVal nNUM As Variant) As Date
   If Len(cData) = 6 Then                       ''yymmdd
     dDATA = DateSerial(Mid(cData, 1, 2), Mid(cData, 3, 2), Mid(cData, 5, 2))
   End If
-  If Len(cData) - 8 Then                       ''8 ''yyyymmdd
+  If Len(cData) = 8 Then                       ''8 ''yyyymmdd
     dDATA = DateSerial(Mid(cData, 1, 4), Mid(cData, 5, 2), Mid(cData, 7, 2))
   End If
   NumToData = Fdata(dDATA)
@@ -189,7 +189,7 @@ Public Function DataToLit(ByVal dDATA As Variant, Optional ByVal cTIPO As String
     cTIPO = aRETU(2)
   End If
   Select Case cTIPO
-  Case "ACESSS"                                ''access
+  Case "ACESS"                                ''access
     DataToLit = "#" & Year(dDATA) & "/" & Month(dDATA) & "/" & Day(dDATA) & "#"
   Case "CRYSTAL"
     DataToLit = "CDATE(" & Year(dDATA) & "," & Month(dDATA) & "," & Day(dDATA) & ")"

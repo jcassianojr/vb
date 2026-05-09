@@ -113,9 +113,9 @@ Public Function PegSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
   Case "ADO"
     PegSQL = PegSQLAdo(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
  Case "SQLITERC6"
-            PegSQL = PegSQLiteRC6(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
+            'PegSQL = PegSQLiteRC6(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
         Case "VBSQLITE"
-            PegSQL = PegSQLite(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
+            'PegSQL = PegSQLite(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
     
   End Select
 End Function

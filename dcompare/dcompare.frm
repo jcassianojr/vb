@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.2#0"; "vbccr18.ocx"
 Begin VB.Form dCompare 
    Caption         =   "Database Comparador/Corretor"
    ClientHeight    =   5805
@@ -307,49 +307,49 @@ Private Sub CmdExportarSqlite_Click()
    End If
    
 End Sub
+' Refatoração do método Convert para garantir fechamento de conexões [cite: 49, 50]
 Private Sub Convert(NWindMDBFileName$, SQLiteFileName$)
+    Dim aCnn As ADODB.Connection
+    Dim sCnn As cConnection
+    Dim cconn As String
 
-Dim aCnn As ADODB.Connection
-Dim sCnn As cConnection
-Dim cconn As String
+    On Error GoTo ErrHandler ' Substitui On Error Resume Next [cite: 49]
+    
+    lProgress.Caption = "Iniciando conexão..."
+    Set aCnn = New ADODB.Connection
+    aCnn.CursorLocation = adUseClient
+    cconn = GeracArq(NWindMDBFileName)
+    aCnn.Open cconn
+    
+    If InStr(UCase(SQLiteFileName), ".SQLITE") = 0 Then
+        MsgBox "Destino não é um arquivo SQLite válido.", vbExclamation
+        GoTo Cleanup
+    End If
+    
+    Set sCnn = New_c.Connection
+    sCnn.OpenDB SQLiteFileName
+    
+    Set C = New cConverter
+    lProgress.Caption = "Transferindo dados das tabelas..."
+    C.ConvertDatabase aCnn, sCnn
+    
+    lProgress.Caption = "Criando índices..."
+    C.ConvertIndexes aCnn, sCnn
+    
+    lProgress.Caption = "Conversão concluída com sucesso!"
+    MsgBox "Processo finalizado!", vbInformation
 
-  On Error Resume Next
-  
-  Set aCnn = New ADODB.Connection
-  aCnn.CursorLocation = adUseClient
-  cconn = GeracArq(NWindMDBFileName)
-  aCnn.Open cconn
-  
-  If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
- 
-  Err.Clear
-  
-  If InStr(UCase(SQLiteFileName), ".SQLITE") = 0 Then
-     Alert "Destino nao e sql lite"
-     Exit Sub
-  End If
-  
-  Set sCnn = New_c.Connection
-  sCnn.OpenDB SQLiteFileName
-  
-  If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
-  
-  Set C = New cConverter
-  C.ConvertDatabase aCnn, sCnn
-  
-  If Err Then MsgBox Err.Description: Err.Clear: Exit Sub
-  lProgress.Caption = "Table-Schemas created, Table-Data transferred!"
-  
-  C.ConvertIndexes aCnn, sCnn
-  
-  If Err Then MsgBox Err.Description
-  lProgress.Caption = "Index-Import finished!"
-  
-  Err.Clear
-  
-  If Err Then MsgBox Err.Description: Err.Clear
+Cleanup:
+    ' Garante que os objetos sejam liberados mesmo em erro [cite: 51]
+    If Not aCnn Is Nothing Then If aCnn.State = adStateOpen Then aCnn.Close
+    Set aCnn = Nothing
+    Set sCnn = Nothing
+    Set C = Nothing
+    Exit Sub
 
-  Set C = Nothing
+ErrHandler:
+    MsgBox "Erro na conversão: " & Err.Description, vbCritical
+    Resume Cleanup
 End Sub
 
 Private Sub CmdTeste_Click()
@@ -420,9 +420,9 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
   Dim r_type As Variant
   Dim R_size As Variant
   Dim i As Integer
-  Dim x As Integer
+  Dim X As Integer
 
-  On Error GoTo errhandler
+  On Error GoTo ErrHandler
   Set WrkSpace = DBEngine.CreateWorkspace("Compare", "Admin", "")
   If Not FileExists(Text1.Text) Then
      Alert ("Falta arquivo " + Text1.Text)
@@ -500,7 +500,7 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
   End If
 
   Exit Sub
-errhandler:
+ErrHandler:
   Select Case Err.Number
   Case 3422, 3078, 3265
     nERRO = FixInt(Err.Number)

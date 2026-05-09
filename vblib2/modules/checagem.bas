@@ -72,29 +72,26 @@ End Function
 
 
 
-Public Function IsValidIP(Test As String) As Boolean
-  Dim SubNets() As String
-  Dim i As Integer
-  If LCase(Test) = "localhost" Then
-    IsValidIP = True
-    Exit Function
-  End If
-  If Len(Test) > 16 Then
-    IsValidIP = False
-    Exit Function
-  End If
-  SubNets = Split(Test, ".")
-  If UBound(SubNets) > 3 Then
-    IsValidIP = False
-    Exit Function
-  End If
-  For i = 0 To 3
-    If Not IsNumeric(SubNets(i)) Or SubNets(i) < 0 Or SubNets(i) > 255 Then
-      IsValidIP = False
-      Exit Function
+Public Function IsValidIP(ByVal IPAddress As String) As Boolean
+    If IPAddress = "localhost" Then IsValidIP = True: Exit Function
+    
+    Dim SubNets() As String
+    SubNets = Split(IPAddress, ".")
+    
+    ' Verifica se tem exatamente 4 octetos
+    If UBound(SubNets) <> 3 Then
+        IsValidIP = False
+        Exit Function
     End If
-  Next
-  IsValidIP = True
+    
+    Dim i As Integer, valOcteto As Long
+    For i = 0 To 3
+        If Not IsNumeric(SubNets(i)) Then IsValidIP = False: Exit Function
+        valOcteto = CLng(SubNets(i))
+        If valOcteto < 0 Or valOcteto > 255 Then IsValidIP = False: Exit Function
+    Next i
+    
+    IsValidIP = True
 End Function
 
 Public Function formataTelefone(ByVal cNUMERO As String) As String
@@ -321,7 +318,7 @@ End Function
 
 Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optional lMES As Boolean = True, Optional cUF As String = "") As Boolean
 ''cTIPO= M-Matriz F-Filial X-Nao Checar nao mais usado a matriz pode ser diferente 0001 agora
-  Dim x As Integer
+  Dim X As Integer
   Dim aUF As Variant
 
   CheckCNPJ = False
@@ -352,12 +349,12 @@ Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optio
   End If
 
 
-  For x = 0 To 14
-    If cCGC = String(14, CStr(x)) Then
-      If lMES Then Alert ("CNPJ Invalido - Sequencia Repetitiva de " + Str(x))
+  For X = 0 To 14
+    If cCGC = String(14, CStr(X)) Then
+      If lMES Then Alert ("CNPJ Invalido - Sequencia Repetitiva de " + Str(X))
       Exit Function
     End If
-  Next x
+  Next X
 
 
   If Left(funNumeroPuro(cCGC), 8) = "99999997" Then
@@ -518,7 +515,7 @@ Function FormataCPF(ByVal pCPF As String) As String
 End Function
 
 Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean = True) As Boolean
-  Dim x As Integer
+  Dim X As Integer
   Dim P1 As String
   CheckCPF = False
   P1 = Trim(TiraOut(xCPF))
@@ -535,12 +532,12 @@ Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean =
     Exit Function
   End If
 
-  For x = 0 To 9
-    If P1 = String(11, CStr(x)) Then
-      If lMES Then Alert ("CPF Invalido - Sequencia Repetitiva de " + Str(x))
+  For X = 0 To 9
+    If P1 = String(11, CStr(X)) Then
+      If lMES Then Alert ("CPF Invalido - Sequencia Repetitiva de " + Str(X))
       Exit Function
     End If
-  Next x
+  Next X
   If Mod11(P1, 10, 10) Then
     If Mod11(P1, 11, 11) Then
       CheckCPF = True
@@ -562,7 +559,7 @@ Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As
   Dim xrdig As String
   Dim y1 As Integer
   Dim dv_base As String
-  Dim x As Integer
+  Dim X As Integer
   Dim y2 As Integer
   Dim dv_p2 As String
   Dim tam_chave As Integer
@@ -583,9 +580,9 @@ Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As
   y1 = 0
   dv_base = "8923456789"
   y1 = 0
-  For x = 1 To tam_chave
-    dv_d3 = Val(Mid(dv_p1, x, 1))
-    y1 = y1 + (dv_d3 * Val(Mid(dv_base, x, 1)))
+  For X = 1 To tam_chave
+    dv_d3 = Val(Mid(dv_p1, X, 1))
+    y1 = y1 + (dv_d3 * Val(Mid(dv_base, X, 1)))
     ''y2 = mod(y1,11)
     y2 = y1 Mod 11
   Next
@@ -1026,7 +1023,7 @@ Public Function CheckCTA(ByVal cBANCO As Variant, ByVal cAGENCIA As Variant, ByV
   Dim eTOt As Long
   Dim nFIM As Integer
   Dim nINI As Integer
-  Dim x As Integer
+  Dim X As Integer
   Dim nRES As Integer
   eTOt = 0
   cBANCO = StrZero(FixInt(cBANCO), 3)
@@ -1076,10 +1073,10 @@ Public Function CheckCTA(ByVal cBANCO As Variant, ByVal cAGENCIA As Variant, ByV
     nFIM = Len(cCONTA)
     nINI = nFIM
     nFIM = nFIM - 1
-    For x = 1 To nFIM
-      eTOt = eTOt + nINI * Val(Mid(cCONTA, x, 1))
+    For X = 1 To nFIM
+      eTOt = eTOt + nINI * Val(Mid(cCONTA, X, 1))
       nINI = nINI - 1
-    Next x
+    Next X
     nRES = eTOt Mod 11
     nRES = 11 - nRES
     nRES = IIf(nRES = 10, "P", StrZero(nRES, 1))
@@ -1107,17 +1104,17 @@ Public Function DAC10(ByVal Arg1)
   Dim ninicio As Integer
   Dim ntotal As Integer
   Dim ccpoaux As String
-  Dim x As Integer
+  Dim X As Integer
   ninicio = Len(Trim(Arg1)) + 1
   ntotal = 0
   If (ninicio < 2) Then
     ninicio = 2
   End If
   ccpoaux = "0" + Trim(Arg1)
-  For x = ninicio To 1 Step -2
-    cNUMERO = Mid(ccpoaux, x, 1)
+  For X = ninicio To 1 Step -2
+    cNUMERO = Mid(ccpoaux, X, 1)
     ntotal = ntotal + InStr("516273849", cNUMERO)
-    ntotal = ntotal + Val(Mid(ccpoaux, x - 1, 1))
+    ntotal = ntotal + Val(Mid(ccpoaux, X - 1, 1))
   Next
   DAC10 = Trim(Str(InStr("987654321", Mid(StrZero(ntotal, 3), 3, 1))))
 End Function
@@ -1700,7 +1697,7 @@ End Function
 Function checkCEI(ByVal pCEI As String) As Boolean
   Dim nTot As Byte
   Dim cAux As String
-  Dim lRet As Boolean
+  Dim lret As Boolean
   Dim i As Byte
   Dim pNu_cei As String
 
@@ -1710,7 +1707,7 @@ Function checkCEI(ByVal pCEI As String) As Boolean
 
   nTot = 0
   cAux = ""
-  lRet = True
+  lret = True
   i = 0
   pNu_cei = ""
 
@@ -1727,9 +1724,9 @@ Function checkCEI(ByVal pCEI As String) As Boolean
   cAux = Right$(Str(nTot), 2)
   nTot = Val(Left$(cAux, 1)) + Val(Right$(cAux, 1))
   nTot = IIf(nTot > 9, 0, 10 - nTot)
-  lRet = IIf(Val(Right$(pNu_cei, 1)) = nTot, True, False)
+  lret = IIf(Val(Right$(pNu_cei, 1)) = nTot, True, False)
 
-  If lRet = False Then
+  If lret = False Then
     MsgBox "Codigo CEI incorreto - Tecle <Enter>"
   Else
     checkCEI = True
