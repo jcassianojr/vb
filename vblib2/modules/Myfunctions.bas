@@ -151,12 +151,12 @@ Public Declare ptrsafe Function SetLocaleInfo Lib "kernel32" _
 Public Declare  PtrSafe Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
 Public Declare  PtrSafe Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
 #Else
-Public Declare Function WinAPI_GetUserName Lib "Advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
+Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
 Private Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
 Public Declare Function ReleaseCapture Lib "user32" () As Long
-Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
-Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
+Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
 Public Declare Function GetPrivateProfileString Lib "kernel32" Alias _
                                                 "GetPrivateProfileStringA" (ByVal lpApplicationName As String, _
                                                                             ByVal lpKeyName As Any, ByVal lpDefault As String, _
@@ -171,14 +171,14 @@ Public Declare Function WritePrivateProfileString Lib "kernel32" Alias _
 Public Declare Function GetLocaleInfo Lib "kernel32" _
 Alias "GetLocaleInfoA" _
   (ByVal Locale As Long, _
-ByVal LCTYPE As Long, _
+ByVal LCType As Long, _
 ByVal lpLCData As String, _
 ByVal cchData As Long) As Long
 
 Public Declare Function SetLocaleInfo Lib "kernel32" _
  Alias "SetLocaleInfoA" _
 (ByVal Locale As Long, _
- ByVal LCTYPE As Long, _
+ ByVal LCType As Long, _
  ByVal lpLCData As String) As Long
  
 Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
@@ -231,7 +231,7 @@ Public Function ExecutarDLL(ByVal cDLL As String) As Double
 ' outra dll que possa ser executada via rundll32
 '  Dim RetVal
   On Error Resume Next
-  ExecutarDLL = Shell("rundll32.exe shell32.dll,Control_RunDLL " & cDLL & ",,3", 1)
+  ExecutarDLL = shell("rundll32.exe shell32.dll,Control_RunDLL " & cDLL & ",,3", 1)
   
 End Function
 
@@ -246,7 +246,7 @@ Dim i
     If Len(.Text) Then
       'Procura pelo texto digitado
       strPartial = .Text
-      i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
+      i = SendMessage(.hwnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
     End If
@@ -314,7 +314,7 @@ Dim m_bEditFromCode
   With Combo1
     'Procura pelo texto já digitado
     strPartial = .Text
-    i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
+    i = SendMessage(.hwnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
     'Se achou, adiciona o resto do Texto
@@ -339,7 +339,7 @@ End Function
 
 Public Sub MoveObject(ByRef Obj As Control)
   Screen.MousePointer = vbSizeAll
-  SendMessage Obj.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 1
+  SendMessage Obj.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 1
   ReleaseCapture
   Screen.MousePointer = vbDefault
 End Sub
@@ -499,7 +499,7 @@ Dim aRETU As Variant
     CharToLit = GeraSplit(aVAL, "", " + ", "")
   End Select
   Exit Function
-erro:
+Erro:
   Select Case Err.Number
   Case Else
     SayErro "ChartoLit"
@@ -1976,7 +1976,7 @@ Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eD
   Dim nLEN As Integer
   Dim nTEXTO As Integer
   Dim x As Integer
-  Dim Y As Integer
+  Dim y As Integer
   Dim aORI As Variant
   Dim aDES As Variant
   Dim aTEXTO As Variant
@@ -1990,18 +1990,18 @@ Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eD
   aTEXTO = StrToArray(cTEXTO)
   nLEN = UBound(aORI)
   nTEXTO = UBound(aTEXTO)
-  For Y = 0 To nTEXTO
+  For y = 0 To nTEXTO
     For x = 0 To nLEN
-      If aTEXTO(Y) = aORI(x) Then          ''Encerra Analise Para Evitar
-        aTEXTO(Y) = aDES(x)              ''Loop de Troca
+      If aTEXTO(y) = aORI(x) Then          ''Encerra Analise Para Evitar
+        aTEXTO(y) = aDES(x)              ''Loop de Troca
         Exit For
       End If
     Next
   Next
   CharConv = ""
-  For Y = 0 To nTEXTO
-    CharConv = CharConv & aTEXTO(Y)
-  Next Y
+  For y = 0 To nTEXTO
+    CharConv = CharConv & aTEXTO(y)
+  Next y
 End Function
 Public Function TiraOut(ByVal eVAR As Variant) As String
   Dim cTEXTO As String
@@ -2030,7 +2030,7 @@ Public Function TiraOutAlf(ByVal eVAR As Variant) As String
                                             "", "", "", "", "", "", ""))
 End Function
 
-Public Function Extenso(ByVal valor As Double, _
+Public Function Extenso(ByVal Valor As Double, _
                         Optional ByVal MoedaPlural As String = "Reais", _
                         Optional ByVal MoedaSingular As String = "Real") As String
   Dim StrValor As String
@@ -2044,9 +2044,9 @@ Public Function Extenso(ByVal valor As Double, _
   Dim PotenciasSingular As Variant
   Dim PotenciasPlural As Variant
 
-  Negativo = (valor < 0)
-  valor = Abs(CDec(valor))
-  If valor Then
+  Negativo = (Valor < 0)
+  Valor = Abs(CDec(Valor))
+  If Valor Then
     Unidades = Array(vbNullString, "Um", "Dois", _
                      "Tres", "Quatro", "Cinco", _
                      "Seis", "Sete", "Oito", "Nove", _
@@ -2069,7 +2069,7 @@ Public Function Extenso(ByVal valor As Double, _
                           " Milhoes", " Bilhoes", _
                           " Trilhoes", " Quatrilhoes")
 
-    StrValor = Left(Format(valor, String(18, "0") & _
+    StrValor = Left(Format(Valor, String(18, "0") & _
                                   ".000"), 18)
     For Posicao = 1 To 18 Step 3
       Parcial = Val(Mid(StrValor, Posicao, 3))
@@ -2116,13 +2116,13 @@ Public Function Extenso(ByVal valor As Double, _
       If Negativo Then
         Extenso = "Menos " & Extenso
       End If
-      If Int(valor) = 1 Then
+      If Int(Valor) = 1 Then
         Extenso = Extenso & " " & MoedaSingular
       Else
         Extenso = Extenso & " " & MoedaPlural
       End If
     End If
-    Parcial = Int((valor - Int(valor)) * _
+    Parcial = Int((Valor - Int(Valor)) * _
                   100 + 0.1)
     If Parcial Then
       buf = Extenso(Parcial, "Centavos", _
@@ -2312,7 +2312,7 @@ Public Function CharCodesToHTML(ByVal iString As String) As String
   Dim iXml As New MSXML2.DOMDocument60
 
   With iXml.createTextNode(iString)
-    CharCodesToHTML = .xml
+    CharCodesToHTML = .Xml
   End With
 End Function
 
@@ -2507,7 +2507,7 @@ Public Function TimedMsgBox(Prompt As String, Optional ByVal TimeOut As Long = 0
 
 End Function
 
-Private Sub TimeOutMB(hWnd As Long, uMsg As Long, idEvent As Long, dwTime As Long)
+Private Sub TimeOutMB(hwnd As Long, uMsg As Long, idEvent As Long, dwTime As Long)
 
   SendMessage FindWindow(vbNullString, CurMBTitle), WM_CLOSE, 0&, 0&
 
@@ -2546,7 +2546,7 @@ Function CheckRegEx(texto As String, padrao As String)
     ' valor = "Comparacao falhou !"
   End If
 
-
+Set objRegExp = Nothing ' Adicione isto para boa gestão de memória
 
 End Function
 
