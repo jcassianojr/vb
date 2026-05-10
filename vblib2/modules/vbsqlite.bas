@@ -479,6 +479,94 @@ Erro:
     ApagaSQLite = False
 End Function
 
+Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As String, _
+   Optional ByVal cOPEORI As String = "", Optional ByVal aCAMORI As Variant = 0, _
+   Optional ByVal aOUTORI As Variant = 0, Optional ByVal cCONDES As String = "", _
+   Optional ByVal cSQLDES As String = "", Optional ByVal cOPEDES As String = "", _
+   Optional ByVal aCAMDES As Variant = 0, Optional ByVal aOUTDES As Variant = 0, _
+   Optional ByVal aIDDES As Variant = 0) As Boolean
 
+    Dim loConnOri As New SQLiteConnection, loConnDes As New SQLiteConnection
+    Dim loCurOri As SQLiteCursor, loCurDes As SQLiteCursor
+    Dim x As Long, nCAMPOS As Long
+    Dim aVALORI As Variant, aRETUID As Variant, aOPE As Variant, eVAL As Variant
+
+    On Error GoTo Erro
+    SQLMoveRegSQLite = False
+
+    ' 1. Abre Conexões
+    loConnOri.OpenDB cCONORI
+    loConnDes.OpenDB cCONDES
+
+    ' 2. Processa Origem
+    Set loCurOri = loConnOri.CreateCursor(cSQLORI)
+    If Not loCurOri.EOF Then
+        ' Extrai valores usando a lógica SepSqlOpe/MathOper conforme a Mestre
+        nCAMPOS = UBound(aCAMORI)
+        ReDim aVALORI(nCAMPOS)
+        For x = 0 To nCAMPOS
+            aOPE = SepSqlOpe(aCAMORI(x))
+            If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
+                aVALORI(x) = loCurOri.Value(aCAMORI(x))
+            Else
+                aVALORI(x) = MathOper(loCurOri.Value(aOPE(1)), loCurOri.Value(aOPE(2)), aOPE(0))
+            End If
+        Next x
+
+        ' --- INÍCIO DA GRAVAÇÃO NO DESTINO ---
+        ' Tenta localizar o registro no destino
+        Set loCurDes = loConnDes.CreateCursor(cSQLDES)
+        
+        If loCurDes.EOF Then
+            ' Se não existe, extraímos o nome da tabela do cSQLDES para dar um INSERT
+            ' Ou, se o seu cSQLDES for simples, podemos tentar o método Execute direto
+            ' Aqui usamos a estratégia de INSERT direto para evitar o erro de .AddNew
+            
+            Dim cTABELA As String
+            cTABELA = ExtraiTabela(cSQLDES) ' Função auxiliar para pegar o nome da tabela
+            
+            ' Insere um registro vazio ou com o campo ID/Chave se disponível
+            loConnDes.Execute "INSERT INTO " & cTABELA & " DEFAULT VALUES"
+            
+            ' Reabre o cursor agora que o registro existe
+            Set loCurDes = loConnDes.CreateCursor(cSQLDES)
+        End If
+
+        ' Agora que temos um registro (novo ou existente), entramos em modo de edição
+        loCurDes.Edit
+
+        ' 1. Popular campos mapeados (aCAMDES)
+        If IsArray(aCAMDES) Then
+            For x = 0 To UBound(aCAMDES)
+                loCurDes.Value(aCAMDES(x)) = aVALORI(x)
+            Next x
+        End If
+
+        ' 2. Popular campos adicionais (aOUTDES)
+        If IsArray(aOUTDES) Then
+            For x = 0 To UBound(aOUTDES)
+                loCurDes.Value(aOUTDES(x)) = aOUTORI(x)
+            Next x
+        End If
+
+        ' Salva os dados de forma definitiva
+        loCurDes.Post
+
+        ' 4. Retorno de IDs na Global eRETU01
+        If IsArray(aIDDES) Then
+            ReDim aRETUID(UBound(aIDDES))
+            For x = 0 To UBound(aIDDES)
+                aRETUID(x) = loCurDes.Value(aIDDES(x))
+            Next x
+            eRETU01 = aRETUID
+        End If
+        SQLMoveRegSQLite = True
+    End If
+
+    loConnOri.CloseDB: loConnDes.CloseDB
+    Exit Function
+Erro:
+    SQLMoveRegSQLite = False
+End Function
 
 
