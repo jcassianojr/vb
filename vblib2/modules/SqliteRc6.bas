@@ -359,7 +359,7 @@ End Function
 ' EQUIVALENTE FIEL A: ApagaSQLpAdo / APAGASQLADO
 '---------------------------------------------------------------------------------------
 Public Function ApagaSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Boolean
-    Dim nPos As Long
+    Dim nPOS As Long
     Dim cSQL_FINAL As String
     
     On Error GoTo Erro
@@ -368,9 +368,9 @@ Public Function ApagaSQLiteRC6(ByVal cCON As String, ByVal cSQL As String) As Bo
     
     ' Checagem From/Where idêntica à lógica ADO
     If UCase(Left(cSQL_FINAL, 6)) <> "DELETE" Then
-        nPos = InStr(1, UCase(cSQL_FINAL), "FROM")
-        If nPos > 0 Then
-            cSQL_FINAL = "DELETE " & Mid(cSQL_FINAL, nPos)
+        nPOS = InStr(1, UCase(cSQL_FINAL), "FROM")
+        If nPOS > 0 Then
+            cSQL_FINAL = "DELETE " & Mid(cSQL_FINAL, nPOS)
         Else
             cSQL_FINAL = "DELETE FROM " & cSQL_FINAL
         End If
@@ -441,7 +441,6 @@ Public Function PegSQLiteDeliRC6(ByVal cCON As String, ByVal cSQL As String, _
 Erro:
     PegSQLiteDeliRC6 = aRETU
 End Function
-
 Public Function SQLMoveRegSQLiteRC6(ByVal cCONORI As String, ByVal cSQLORI As String, _
    Optional ByVal cOPEORI As String = "", Optional ByVal aCAMORI As Variant = 0, _
    Optional ByVal aOUTORI As Variant = 0, Optional ByVal cCONDES As String = "", _
@@ -449,21 +448,28 @@ Public Function SQLMoveRegSQLiteRC6(ByVal cCONORI As String, ByVal cSQLORI As St
    Optional ByVal aCAMDES As Variant = 0, Optional ByVal aOUTDES As Variant = 0, _
    Optional ByVal aIDDES As Variant = 0) As Boolean
 
-    Dim loCnnOri As Object, loCnnDes As Object
-    Dim loRsOri As Object, loRsDes As Object
-    Dim x As Long, aVALORI As Variant, aOPE As Variant
-    Dim cTABELA As String, cWHERE As String, cSQL_FINAL As String
+    Dim loCnnOri As Object, loCnnDes As Object ' cConnection
+    Dim loRsOri As Object, loRsDes As Object  ' cRecordset
+    Dim x As Long, nCAMPOS As Long
+    Dim aVALORI As Variant, aRETUID As Variant, aOPE As Variant
+    Dim cTABELA As String, cWHERE As String, cSET As String, cINS_C As String, cINS_V As String
+    Dim nRegs As Long
 
     On Error GoTo Erro
-    
+    SQLMoveRegSQLiteRC6 = False
+
+    ' 1. Inicializa Conexões (Usa literal 1 para indicar SQLite nativo/memória conforme o caso)
     Set loCnnOri = New_c.Connection(cCONORI, 1)
     Set loCnnDes = New_c.Connection(cCONDES, 1)
 
-    ' 1. Origem
+    ' 2. Coleta dados da Origem
     Set loRsOri = loCnnOri.OpenRecordset(cSQLORI)
+    
     If loRsOri.RecordCount > 0 Then
-        ReDim aVALORI(UBound(aCAMORI))
-        For x = 0 To UBound(aCAMORI)
+        nCAMPOS = UBound(aCAMORI)
+        ReDim aVALORI(nCAMPOS)
+        
+        For x = 0 To nCAMPOS
             aOPE = SepSqlOpe(aCAMORI(x))
             If aOPE(0) = "" Then
                 aVALORI(x) = loRsOri(aCAMORI(x)).Value
@@ -472,28 +478,62 @@ Public Function SQLMoveRegSQLiteRC6(ByVal cCONORI As String, ByVal cSQLORI As St
             End If
         Next x
 
-        ' 2. Destino - Lógica de Update/Insert via Execute
+        ' 3. Metadados do Destino
         cTABELA = ExtraiTabela(cSQLDES)
         cWHERE = ExtraiWhere(cSQLDES)
 
-        If loCnnDes.OpenRecordset("SELECT count(*) FROM " & cTABELA & " " & cWHERE).Fields(0).Value > 0 Then
-            ' Montagem dinâmica do UPDATE (omitida por brevidade, mesma lógica acima)
-            ' loCnnDes.Execute "UPDATE..."
-        Else
-            ' loCnnDes.Execute "INSERT..."
-        End If
+        ' 4. Lógica de Gravação via Execute (SQL Puro)
+        ' Verifica existência
+        nRegs = loCnnDes.OpenRecordset("SELECT count(*) FROM " & cTABELA & " " & cWHERE).Fields(0).Value
         
-        ' 3. eRETU01
+        If nRegs > 0 Then
+            ' --- UPDATE ---
+            cSET = ""
+            For x = 0 To UBound(aCAMDES)
+                cSET = cSET & IIf(cSET = "", "", ", ") & aCAMDES(x) & " = " & PrepararValorSQL(aVALORI(x))
+            Next x
+            
+            If IsArray(aOUTDES) Then
+                For x = 0 To UBound(aOUTDES)
+                    cSET = cSET & ", " & aOUTDES(x) & " = " & PrepararValorSQL(aOUTORI(x))
+                Next x
+            End If
+            
+            loCnnDes.Execute "UPDATE " & cTABELA & " SET " & cSET & " " & cWHERE
+        Else
+            ' --- INSERT ---
+            cINS_C = "": cINS_V = ""
+            For x = 0 To UBound(aCAMDES)
+                cINS_C = cINS_C & IIf(cINS_C = "", "", ", ") & aCAMDES(x)
+                cINS_V = cINS_V & IIf(cINS_V = "", "", ", ") & PrepararValorSQL(aVALORI(x))
+            Next x
+            
+            If IsArray(aOUTDES) Then
+                For x = 0 To UBound(aOUTDES)
+                    cINS_C = cINS_C & ", " & aOUTDES(x)
+                    cINS_V = cINS_V & ", " & PrepararValorSQL(aOUTORI(x))
+                Next x
+            End If
+            
+            loCnnDes.Execute "INSERT INTO " & cTABELA & " (" & cINS_C & ") VALUES (" & cINS_V & ")"
+        End If
+
+        ' 5. Captura de IDs para eRETU01 (Global)
         If IsArray(aIDDES) Then
             Set loRsDes = loCnnDes.OpenRecordset(cSQLDES)
-            ' ... preenche aRETUID ...
-            eRETU01 = aRETUID
+            If Not loRsDes.EOF Then
+                ReDim aRETUID(UBound(aIDDES))
+                For x = 0 To UBound(aIDDES)
+                    aRETUID(x) = loRsDes(aIDDES(x)).Value
+                Next x
+                eRETU01 = aRETUID
+            End If
         End If
+        
         SQLMoveRegSQLiteRC6 = True
     End If
+
     Exit Function
 Erro:
     SQLMoveRegSQLiteRC6 = False
 End Function
-
-

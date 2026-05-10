@@ -452,7 +452,7 @@ End Function
 ' Conceito: Checa se existe DELETE, se não, monta a partir do FROM/WHERE
 '---------------------------------------------------------------------------------------
 Public Function ApagaSQLite(ByVal cCON As String, ByVal cSQL As String) As Boolean
-    Dim nPos As Long
+    Dim nPOS As Long
     Dim cSQL_FINAL As String
     
     On Error GoTo Erro
@@ -461,10 +461,10 @@ Public Function ApagaSQLite(ByVal cCON As String, ByVal cSQL As String) As Boole
     
     ' Lógica de espelhamento: Se não começa com DELETE, mas tem FROM, reconstrói
     If UCase(Left(cSQL_FINAL, 6)) <> "DELETE" Then
-        nPos = InStr(1, UCase(cSQL_FINAL), "FROM")
-        If nPos > 0 Then
+        nPOS = InStr(1, UCase(cSQL_FINAL), "FROM")
+        If nPOS > 0 Then
             ' Pega do FROM em diante e adiciona o DELETE
-            cSQL_FINAL = "DELETE " & Mid(cSQL_FINAL, nPos)
+            cSQL_FINAL = "DELETE " & Mid(cSQL_FINAL, nPOS)
         Else
             ' Se for apenas "TABELA WHERE...", tenta montar
             cSQL_FINAL = "DELETE FROM " & cSQL_FINAL
@@ -486,21 +486,19 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
    Optional ByVal aCAMDES As Variant = 0, Optional ByVal aOUTDES As Variant = 0, _
    Optional ByVal aIDDES As Variant = 0) As Boolean
 
-    Dim loConnOri As New cSQLiteConnection, loConnDes As New cSQLiteConnection
-    Dim loCurOri As cSQLiteCursor, loCurDes As cSQLiteCursor
-    Dim x As Long, nCAMPOS As Long
+    Dim loConnOri As New SQLiteConnection, loConnDes As New SQLiteConnection
+    Dim loCurOri As SQLiteCursor, loCurDes As SQLiteCursor
+    Dim x As Long, nCAMPOS As Long, nRegs As Long
     Dim aVALORI As Variant, aRETUID As Variant, aOPE As Variant
     Dim cTABELA As String, cWHERE As String, cSET As String, cINS_C As String, cINS_V As String
-    Dim nRegs As Long
 
     On Error GoTo Erro
     SQLMoveRegSQLite = False
 
-    ' Garante que as strings de conexão estão limpas
     loConnOri.OpenDB cCONORI
     loConnDes.OpenDB cCONDES
 
-    ' 1. Coleta dados da Origem
+    ' 1. Coleta dados da Origem (Passo Matriz)
     Set loCurOri = loConnOri.CreateCursor(cSQLORI)
     If Not loCurOri.EOF Then
         nCAMPOS = UBound(aCAMORI)
@@ -514,11 +512,11 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
             End If
         Next x
 
-        ' 2. Extração de Metadados
+        ' 2. Metadados do Destino
         cTABELA = ExtraiTabela(cSQLDES)
         cWHERE = ExtraiWhere(cSQLDES)
 
-        ' 3. Verificação de Existência (Usando um Cursor rápido em vez de Execute)
+        ' 3. Lógica de Gravação via Execute
         Set loCurDes = loConnDes.CreateCursor("SELECT count(*) FROM " & cTABELA & " " & cWHERE)
         nRegs = loCurDes.Value(0)
         
@@ -526,32 +524,35 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
             ' --- UPDATE ---
             cSET = ""
             For x = 0 To UBound(aCAMDES)
-                cSET = cSET & IIf(cSET = "", "", ", ") & aCAMDES(x) & " = " & PegSQLiteDeli(aVALORI(x), "C")
+                cSET = cSET & IIf(cSET = "", "", ", ") & aCAMDES(x) & " = " & PrepararValorSQL(aVALORI(x))
             Next x
+            
             If IsArray(aOUTDES) Then
                 For x = 0 To UBound(aOUTDES)
-                    cSET = cSET & ", " & aOUTDES(x) & " = " & PegSQLiteDeli(aOUTORI(x), "C")
+                    cSET = cSET & ", " & aOUTDES(x) & " = " & PrepararValorSQL(aOUTORI(x))
                 Next x
             End If
-            ' Tentativa com Execute (se falhar, verifique se o método é .ExecuteSQL)
+            
             loConnDes.Execute "UPDATE " & cTABELA & " SET " & cSET & " " & cWHERE
         Else
             ' --- INSERT ---
             cINS_C = "": cINS_V = ""
             For x = 0 To UBound(aCAMDES)
                 cINS_C = cINS_C & IIf(cINS_C = "", "", ", ") & aCAMDES(x)
-                cINS_V = cINS_V & IIf(cINS_V = "", "", ", ") & PegSQLiteDeli(aVALORI(x), "C")
+                cINS_V = cINS_V & IIf(cINS_V = "", "", ", ") & PrepararValorSQL(aVALORI(x))
             Next x
+            
             If IsArray(aOUTDES) Then
                 For x = 0 To UBound(aOUTDES)
                     cINS_C = cINS_C & ", " & aOUTDES(x)
-                    cINS_V = cINS_V & ", " & PegSQLiteDeli(aOUTORI(x), "C")
+                    cINS_V = cINS_V & ", " & PrepararValorSQL(aOUTORI(x))
                 Next x
             End If
+            
             loConnDes.Execute "INSERT INTO " & cTABELA & " (" & cINS_C & ") VALUES (" & cINS_V & ")"
         End If
 
-        ' 4. Captura de IDs
+        ' 4. Captura de IDs para eRETU01
         If IsArray(aIDDES) Then
             Set loCurDes = loConnDes.CreateCursor(cSQLDES)
             ReDim aRETUID(UBound(aIDDES))
@@ -566,7 +567,5 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
     loConnOri.CloseDB: loConnDes.CloseDB
     Exit Function
 Erro:
-    ' Se o erro for aqui, imprima Err.Description para depurar
-    MsgBox "Erro no Move: " & Err.Description
     SQLMoveRegSQLite = False
 End Function

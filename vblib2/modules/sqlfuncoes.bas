@@ -192,22 +192,26 @@ Public Function SomaSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM A
     
   End Select
 End Function
-
 Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
-                           ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", Optional ByVal lWRITE As Boolean = False) As Variant
-  Dim aRETU As Variant
-  aRETU = TipoConn(cARQ, , , lWRITE)
+                           ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
+                           Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
+    
+    Dim aRETU As Variant
+  aRETU = TipoConn(cARQ)
   Select Case aRETU(0)
-  Case "ADO"
-    PegSQLDeli = PegSQLDeliAdo(cARQ, cSQL, aCAM, cDELI)
     
-    
- Case "SQLITERC6"
-      'PegSQLDeli = PegSQLiteDeliRC6(cARQ, cSQL, aCAM, , , cDELI)
-        Case "VBSQLITE"
-       ' PegSQLDeli = PegSQLiteDeli(cARQ, cSQL, aCAM, , , cDELI)
-    
-  End Select
+        Case "ADO"
+             PegSQLDeli = PegSQLDeliAdo(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
+        Case "SQLITE"
+            ' Chama a versão VBSQLite12
+            PegSQLDeli = PegSQLiteDeli(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
+            
+        Case "RC6"
+            ' Chama a versão vbRichClient6
+            PegSQLDeli = PegSQLiteDeliRC6(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
+            
+      
+    End Select
 End Function
 
 Public Function ApagaSQLP(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusão")
@@ -252,9 +256,16 @@ Public Function SqlMoveReg(ByVal cARQORI As String, _
   ''cARQ = aRETU(1)
   Select Case aRETU(0)
   Case "ADO"
-    SQLMoveRegADO cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
+    SqlMoveReg = SqlMoveRegADO(cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
                   cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, _
-                  aIDDES
+                  aIDDES)
+   Case "SQLITE"
+            SqlMoveReg = SQLMoveRegSQLite(cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
+                                          cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, aIDDES)
+        Case "RC6"
+            SqlMoveReg = SQLMoveRegSQLiteRC6(cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
+                                             cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, aIDDES)
+                  
   End Select
 End Function
 
