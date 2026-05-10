@@ -301,7 +301,7 @@ cSQL = UCase(cSQL)
     SQLPGSQLDOUBLEQUOTES_antiga = cSQL
 End Function
 Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As String
-  Dim nPOS As Long
+  Dim nPos As Long
   Dim cARQTMP As String
   
   GeraConn = cARQ
@@ -323,8 +323,8 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
 '
   
   If InStr(cARQTMP, ".DBF") > 0 Then  'DBF
-    nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
-    cARQ = Mid(cARQ, 1, nPOS)
+    nPos = InStrRev(cARQ, "\")               ''retira no nome do arquivo
+    cARQ = Mid(cARQ, 1, nPos)
     GeraConn = "[JETFOX]" & cARQ
     Exit Function
   End If
@@ -372,8 +372,8 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
 
   
   If InStr(cARQTMP, ".PD") > 0 Then   ' paradox
-    nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
-    cARQ = Mid(cARQ, 1, nPOS)
+    nPos = InStrRev(cARQ, "\")               ''retira no nome do arquivo
+    cARQ = Mid(cARQ, 1, nPos)
     GeraConn = "[JETPDX5]" & cARQ
     Exit Function
   End If
@@ -1433,4 +1433,34 @@ Function ado_GetLockType(LockType As Integer) As String
             ado_GetLockType = "Unspecified"
     End Select
 
+End Function
+Public Function ExtraiWhere(ByVal cSQL As String) As String
+    Dim nPos As Long
+    Dim sUpperSQL As String
+    
+    sUpperSQL = UCase(cSQL)
+    nPos = InStr(sUpperSQL, "WHERE ")
+    
+    If nPos > 0 Then
+        ' Retorna do "WHERE" até ao fim da string
+        ExtraiWhere = Trim(Mid(cSQL, nPos))
+    Else
+        ' Se não houver WHERE, retorna vazio (CUIDADO: isso afetaria a tabela toda)
+        ExtraiWhere = ""
+    End If
+End Function
+
+
+Public Function ExtraiTabela(ByVal cSQL As String) As String
+    ' Busca o nome da tabela após o "FROM"
+    Dim nPos As Long
+    cSQL = UCase(cSQL)
+    nPos = InStr(cSQL, "FROM ")
+    If nPos > 0 Then
+        ExtraiTabela = Trim(Mid(cSQL, nPos + 5))
+        ' Remove o resto se houver WHERE ou ORDER
+        If InStr(ExtraiTabela, " ") > 0 Then
+            ExtraiTabela = Left(ExtraiTabela, InStr(ExtraiTabela, " ") - 1)
+        End If
+    End If
 End Function
