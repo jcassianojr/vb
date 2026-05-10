@@ -259,7 +259,7 @@ End Function
 
 Private Function LimpaTag(ByVal cCON As String) As String
     ' Remove a tag customizada para obter o path puro do arquivo
-    LimpaTag = Replace(cCON, "[SQLITEDIRETO]", "")
+    LimpaTag = Replace(cCON, "[VBSQLITE]", "")
 End Function
 
 Private Function FormataParaSQL(ByVal vValor As Variant) As String
@@ -331,7 +331,7 @@ End Function
 '---------------------------------------------------------------------------------------
 ' EQUIVALENTE A: PegUltSQLAdo
 '---------------------------------------------------------------------------------------
-Public Function PegUltSQLite(ByVal cCON As String, ByVal cTABELA As String) As Long
+Public Function PegLastidbsqLite(ByVal cCON As String, ByVal cTABELA As String) As Long
     Dim vRet As Variant
     
     ' No SQLite, last_insert_rowid() retorna o último ID da conexão atual.
@@ -341,9 +341,9 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cTABELA As String) As L
     vRet = PegOperSQLite(cCON, cTABELA, "last_insert_rowid()", 0, "")
     
     If IsNumeric(vRet) Then
-        PegUltSQLite = CLng(vRet)
+        PegLastidbsqLite = CLng(vRet)
     Else
-        PegUltSQLite = 0
+        PegLastidbsqLite = 0
     End If
 End Function
 

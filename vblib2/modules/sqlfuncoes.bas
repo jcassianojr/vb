@@ -85,10 +85,10 @@ Public Function GrvSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
   Select Case aRETU(0)
   Case "ADO"
     GrvSQL = GrvSQLado(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
-  Case "SQLITEDIRETO"
-    'GrvSQL = GrvSQLite(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
+  Case "VBSQLITE"
+  '  GrvSQL = GrvSQLite(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
   Case "SQLITERC6"
-    ' GrvSQL = GrvSQLiteRC6(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
+   '  GrvSQL = GrvSQLiteRC6(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
   End Select
 End Function
 
@@ -102,6 +102,11 @@ Public Function IncluiSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Select Case aRETU(0)
   Case "ADO"
     IncluiSQL = IncluiSQLAdo(cARQ, cSQL, nITEM, aCAM, aVAL, lCHECK, lMES, aIDDES)
+  Case "VBSQLITE"
+     ' IncluiSQL = IncluiSQLite(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR)
+  Case "SQLITERC6"
+      '  IncluiSQL = IncluiSQLiteRC6(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR)
+    
   End Select
 End Function
 
@@ -110,12 +115,12 @@ Public Function PegSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
   aRETU = TipoConn(cARQ, , , lWRITE)
   cARQ = aRETU(1)
   Select Case aRETU(0)
-  Case "ADO"
-    PegSQL = PegSQLAdo(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
- Case "SQLITERC6"
-            'PegSQL = PegSQLiteRC6(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
+       Case "ADO"
+           PegSQL = PegSQLAdo(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
         Case "VBSQLITE"
-            'PegSQL = PegSQLite(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
+            PegSQL = PegSQLite(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
+        Case "SQLITERC6"
+            PegSQL = PegSQLiteRC6(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
     
   End Select
 End Function
@@ -127,6 +132,10 @@ Public Function PegUltSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal cCAM
   Select Case aRETU(0)
   Case "ADO"
     PegUltSQL = PegUltSQLAdo(cARQ, cSQL, cCAMPO, eDEFAULT)
+    Case "VBSQLITE"
+      '  PegUltSQL = PegUltSQLite(cCON, cTAB)
+    Case "SQLITERC6"
+      '  PegUltSQL = PegUltSQLiteRC6(cCON, cTAB)
   End Select
 End Function
 
@@ -147,6 +156,10 @@ Public Function PegCountSQL(ByVal cARQ As String, ByVal cTable As String, ByVal 
   Select Case aRETU(0)
   Case "ADO"
     PegCountSQL = PegCountSQLADO(cARQ, cTable, cCAMPO, eDEFAULT)
+ Case "VBSQLITE"
+ 'PegCountSQL = PegCountSQLite(cCON, cTW, eDF)
+        Case "SQLITERC6"
+  '      PegCountSQL = PegCountSQLiteRC6(cCON, cTW, eDF)
   End Select
 End Function
 
@@ -156,7 +169,11 @@ Public Function ApagaSQL(ByVal cARQ As String, ByVal cSQL As String) As Boolean
   cARQ = aRETU(1)
   Select Case aRETU(0)
   Case "ADO"
-    ApagaSQL = APAGASQLADO(cARQ, cSQL)
+       ApagaSQL = APAGASQLADO(cARQ, cSQL)
+  Case "VBSQLITE"
+       ApagaSQL = ApagaSQLite(cARQ, cSQL)
+   Case "SQLITERC6"
+        ApagaSQL = ApagaSQLiteRC6(cARQ, cSQL)
   End Select
 End Function
 
@@ -165,10 +182,13 @@ Public Function SomaSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM A
   aRETU = TipoConn(cARQ, , , lWRITE)
   Select Case aRETU(0)
   Case "ADO"
-    SomaSQL = SomaSQLAdo(cARQ, cSQL, aCAM)
-    
-    
-    
+       SomaSQL = SomaSQLAdo(cARQ, cSQL, aCAM)
+   Case "VBSQLITE"
+            ' Note que o retorno agora é um Array, espelhando o ADO
+ '        SomaSQL = SomaSQLite(cARQ, cSQL, aCAM)
+          
+        Case "SQLITERC6"
+  '          SomaSQL = SomaSQLiteRC6(cARQ, cSQL, aCAM)
     
   End Select
 End Function
@@ -343,6 +363,23 @@ Public Function Mana5Fec() As Boolean
     End If
     Mana5Fec = True
   End If
+End Function
+
+
+Public Function PegOperSQL(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, ByVal coper As String) As Variant
+  Dim aRETU As Variant
+
+  aRETU = TipoConn(cARQ)
+  Select Case aRETU(0)
+  Case "ADO"
+    PegOperSQL = PegOperSQLADO(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, coper)
+ Case "SQLITERC6"
+      PegOperSQL = PegOperSQLiteRC6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, coper)
+        Case "VBSQLITE"
+      PegOperSQL = PegOperSQLite(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, coper)
+    
+  End Select
+
 End Function
 
 

@@ -319,7 +319,7 @@ End Function
 '---------------------------------------------------------------------------------------
 ' EQUIVALENTE A: PegUltSQLAdo
 '---------------------------------------------------------------------------------------
-Public Function PegUltSQLiteRC6(ByVal cCON As String, ByVal cTABELA As String) As Long
+Public Function PegLastIDSQLiteRC6(ByVal cCON As String, ByVal cTABELA As String) As Long
     Dim vRet As Variant
     
     ' Chama a PegOperSQLiteRC6 sem operador para executar:
@@ -329,9 +329,9 @@ Public Function PegUltSQLiteRC6(ByVal cCON As String, ByVal cTABELA As String) A
     vRet = PegOperSQLiteRC6(cCON, cTABELA, "last_insert_rowid()", 0, "")
     
     If IsNumeric(vRet) Then
-        PegUltSQLiteRC6 = CLng(vRet)
+        PegLastIDSQLiteRC6 = CLng(vRet)
     Else
-        PegUltSQLiteRC6 = 0
+        PegLastIDSQLiteRC6 = 0
     End If
 End Function
 
