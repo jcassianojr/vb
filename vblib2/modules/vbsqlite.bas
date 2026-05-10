@@ -8,8 +8,39 @@ Option Explicit
 '---------------------------------------------------------------------------------------
 ' WRAPPERS DE OPERAÇÃO - ESPELHOS DA SQLFUNCOESADO
 '---------------------------------------------------------------------------------------
-
-' EQUIVALENTE A: PegMINSQLADO
+Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    Dim loConn As New SQLiteConnection
+    Dim loCursor As SQLiteCursor
+    Dim vUltimo As Variant
+    
+    On Error GoTo Erro
+    vUltimo = eDEFAULT
+    
+    loConn.OpenDB cCON
+    ' O método correto é CreateCursor
+    Set loCursor = loConn.CreateCursor(cSQL)
+    
+    If Not loCursor.EOF Then
+        ' Como cursores SQLite são geralmente forward-only,
+        ' percorremos até o final para pegar o último registro da consulta
+        While Not loCursor.EOF
+            vUltimo = loCursor.Value(cCAMPO)
+            loCursor.MoveNext
+        Wend
+    End If
+    
+    ' Trata nulo se o campo existir mas estiver vazio
+    PegUltSQLite = IIf(IsNull(vUltimo), eDEFAULT, vUltimo)
+    
+    loConn.CloseDB
+    Set loCursor = Nothing
+    Set loConn = Nothing
+    Exit Function
+    
+Erro:
+    PegUltSQLite = eDEFAULT
+    If Not loConn Is Nothing Then loConn.CloseDB
+End Function ' EQUIVALENTE A: PegMINSQLADO
 Public Function PegMinSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                             ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegMinSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "MIN")
@@ -290,42 +321,61 @@ Public Function PegCampoSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String
     
 End Function
 Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
-                             ByVal aCAM As Variant, ByVal aFOR As Variant, _
-                             ByVal aPAD As Variant, Optional ByVal cDELI As String = ",") As Variant
-    Dim loConn As New SQLiteConnection
-    Dim loCursor As SQLiteCursor
-    Dim i As Integer, cRET As String
-    
+                             ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
+                             Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
+    Dim loConn As New SQLiteConnection, loCursor As SQLiteCursor
+    Dim x As Long, nCAMPOS As Integer
+    Dim aRETU As Variant, aOPE As Variant, eVAL As Variant
+
     On Error GoTo Erro
-    cCON = LimpaTag(cCON)
+
+    nCAMPOS = UBound(aCAM) + 1
+    ReDim aRETU(nCAMPOS - 1)
+    For x = 0 To nCAMPOS - 1: aRETU(x) = "": Next x
+
     loConn.OpenDB cCON
-    Set loCursor = loConn.CreateCursor(SQLDialeto(cSQL, "SQLITE"))
-    
+    Set loCursor = loConn.CreateCursor(cSQL)
+
     If Not loCursor.EOF Then
-        For i = LBound(aCAM) To UBound(aCAM)
-            Dim vVal As Variant
-            vVal = loCursor.Value(i)
-            
-            ' Aplica Padrão se Null
-            If IsNull(vVal) Or vVal = "" Then vVal = aPAD(i)
-            
-            ' Formatação simplificada para string delimitada
-            If UCase(aFOR(i)) = "N" Then
-                vVal = Replace(CStr(vVal), ",", ".") ' Garante ponto em números
+        While Not loCursor.EOF
+            For x = 0 To nCAMPOS - 1
+                ' Lógica de Operações (SepSqlOpe / MathOper)
+                aOPE = SepSqlOpe(aCAM(x))
+                If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
+                    eVAL = loCursor.Value(aCAM(x))
+                Else
+                    eVAL = MathOper(loCursor.Value(aOPE(1)), loCursor.Value(aOPE(2)), aOPE(0))
+                End If
+
+                ' Tratamento de Nulo
+                If IsNull(eVAL) Then
+                    If IsArray(aPAD) Then eVAL = aPAD(x) Else eVAL = aPAD
+                End If
+
+                ' Formatação com FVar (MyFunctions)
+                If IsArray(aFOR) Then
+                    If IsArray(aPAD) Then
+                        eVAL = FVar(eVAL, aFOR(x), aPAD(x))
+                    Else
+                        eVAL = FVar(eVAL, aFOR(x))
+                    End If
+                End If
+
+                aRETU(x) = aRETU(x) & FixStr(eVAL)
+            Next x
+
+            loCursor.MoveNext
+            If Not loCursor.EOF Then
+                For x = 0 To nCAMPOS - 1: aRETU(x) = aRETU(x) & cDELI: Next x
             End If
-            
-            cRET = cRET & CStr(vVal) & IIf(i < UBound(aCAM), cDELI, "")
-        Next
-        PegSQLiteDeli = cRET
-    Else
-        PegSQLiteDeli = ""
+        Wend
     End If
-    
+
     loConn.CloseDB
-    Set loCursor = Nothing: Set loConn = Nothing
+    PegSQLiteDeli = aRETU
     Exit Function
 Erro:
-    PegSQLiteDeli = ""
+    PegSQLiteDeli = aRETU
 End Function
 
 '---------------------------------------------------------------------------------------

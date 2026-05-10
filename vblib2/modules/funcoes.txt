@@ -1,19 +1,35 @@
-adosql 				vbsqlite12  				SQLITERC6
-ADOComando			SQLiteComando
-APAGASQLADO
+--adosql 				vbsqlite12  				SQLITERC6
+--ADOComando			SQLiteComando               sqliterc6Comando
+
+
 SomaSQLAdo          PegSomaSQLite				SomaSQLiteRC6
-PegSQLDeliAdo       PegSQLiteDeli				SomaSQLiteRC6
-GrvSQLado			GrvSQLite					GrvSQLiteRC6
-ApagaSQLpAdo
-IncluiSQLAdo		IncluiSQLite				IncluiSQLiteRC6
-PegSQLAdo			PegSQLite					PegSQLiteRC6
-PegCountSQLADO      PegCountSQLite				PegCountSQLiteRC6
-PegMINSQLADO		PegMinSQLite				PegMinSQLiteRC6
-PegMAXSQLADO        PegMaxSQLite				PegMAXSQLiteRC6
-PegSUMSQLADO
-PegCampoSQLADO      PegCampoSQLite
-PegOperSQLADO		PegOperSQLite				PegOperSQLiteRC6
-PegUltSQLAdo        PegUltSQLite
+PegSQLDeliAdo       PegSQLiteDeli				
+
+--GrvSQLado			GrvSQLite					GrvSQLiteRC6
+--ApagaSQLpAdo        ApagaSQLite                 apagsliterc6
+--IncluiSQLAdo		IncluiSQLite				IncluiSQLiteRC6
+--PegSQLAdo			PegSQLite					PegSQLiteRC6
+--PegOperSQLADO		PegOperSQLite				PegOperSQLiteRC6
+--PegCountSQLADO      PegCountSQLite				PegCountSQLiteRC6
+--PegMINSQLADO		PegMinSQLite				PegMinSQLiteRC6
+--PegMAXSQLADO        PegMaxSQLite				PegMAXSQLiteRC6
+--PegSUMSQLADO        PegSumsqlite                pegsumsqliterc6
+--PegCampoSQLADO      PegCampoSQLite              pegcamposqliterc6
+--PegUltSQLAdo        PegUltSQLite               pegultsliterc6
+
+
 SQLMoveRegADO
 
+
+vamos checar os parametros e funcionalidade 
+os parametros precisam estar mesma sequencia typo byval e byref 
+pois elas precisam ser um replace
+a funcoesql sao a mestre conforme a tag chamarao
+funcoes adosql e a referencia vbsqlite12 e sqliterc6 as espelhos
+iremos verificar uma a uma
+
+comecando pela
+ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolean
+carq=string conexao
+csql=comando a ser executado
 

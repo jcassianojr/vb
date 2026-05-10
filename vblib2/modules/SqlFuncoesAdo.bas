@@ -307,7 +307,7 @@ errhandler:
 End Function
 
 Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
-                              ByVal aCAM As Variant, Optional ByVal cDELI As String = ",") As Variant
+                              ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
 
   Dim oDB As ADODB.Connection
   Dim oRS As ADODB.Recordset
@@ -368,6 +368,23 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
         Else
           eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
         End If
+        
+        
+            If IsNull(eVAL) Then
+                If IsArray(aPAD) Then eVAL = aPAD(x) Else eVAL = aPAD
+                
+            End If
+            
+            ' Tratamento de Formato com aFOR (C=Texto, N=Numero, D=Data)
+            If IsArray(aFOR) And IsArray(aPAD) Then
+                eVAL = FVar(eVAL, aFOR(x), aPAD(x))
+            End If
+            
+             If IsArray(aFOR) And Not IsArray(aPAD) Then
+                eVAL = FVar(eVAL, aFOR(x))
+            End If
+            
+        
         aRETU(x) = aRETU(x) & FixStr(eVAL)
       Next x
       oRS.MoveNext
@@ -773,6 +790,7 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
       End If
 
       aRETU(x) = FVar(eVAL, aFOR(x), aPAD(x))
+      
     Next
   Else
     lRETU = False

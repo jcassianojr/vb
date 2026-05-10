@@ -1,6 +1,25 @@
 Attribute VB_Name = "SqliteRc6"
 Option Explicit
-
+Public Function pegultsliterc6(ByVal cCON As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    Dim loRs As Object ' cRecordset
+    On Error GoTo Erro
+    
+    ' O valor 1 é o equivalente interno a SQLiteConn no RC6
+    ' Usamos o valor direto para evitar erro de "variável não encontrada"
+    Set loRs = New_c.Connection(cCON, 1).OpenRecordset(cSQL)
+    
+    If loRs.RecordCount > 0 Then
+        loRs.MoveLast
+        pegultsliterc6 = IIf(IsNull(loRs(cCAMPO).Value), eDEFAULT, loRs(cCAMPO).Value)
+    Else
+        pegultsliterc6 = eDEFAULT
+    End If
+    
+    Set loRs = Nothing
+    Exit Function
+Erro:
+    pegultsliterc6 = eDEFAULT
+End Function
 '---------------------------------------------------------------------------------------
 ' Biblioteca: sqliterc6 (Baseada em vbRichClient6 - New_c)
 ' Objetivo: Espelho funcional completo da SqlFuncoesAdo para SQLite Nativo
@@ -32,7 +51,7 @@ Public Function PegSQLiteRC6(ByVal cCON As String, ByVal cSQL As String, _
                             ByVal nITEM As Long, ByVal aCAM As Variant, _
                             ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim loConn As RC6.cConnection
-    Dim loRS As RC6.cRecordset
+    Dim loRs As RC6.cRecordset
     Dim i As Long
     Dim aVAL() As Variant
     
@@ -41,12 +60,12 @@ Public Function PegSQLiteRC6(ByVal cCON As String, ByVal cSQL As String, _
     
     ' Abre a conexão e o recordset via RC6
     Set loConn = New_c.Connection(LimpaTagRC6(cCON), DBCreateInMemory)
-    Set loRS = loConn.OpenRecordset(SQLDialeto(cSQL, "SQLITE"))
+    Set loRs = loConn.OpenRecordset(SQLDialeto(cSQL, "SQLITE"))
     
-    If loRS.RecordCount > 0 Then
+    If loRs.RecordCount > 0 Then
         For i = 0 To nITEM
             Dim vValor As Variant
-            vValor = loRS.Fields(i).Value
+            vValor = loRs.Fields(i).Value
             'vValor = loRS.Value(i)
             
             ' 1. Tratamento de Padrões (aPAD) se Nulo ou Vazio
@@ -66,7 +85,7 @@ Public Function PegSQLiteRC6(ByVal cCON As String, ByVal cSQL As String, _
         PegSQLiteRC6 = aPAD
     End If
     
-    Set loRS = Nothing
+    Set loRs = Nothing
     Set loConn = Nothing
     Exit Function
 Erro:
@@ -81,7 +100,7 @@ Public Function SomaSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As String,
                               ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
                               Optional ByVal nDEC As Integer = 2) As Variant
     Dim loConn As RC6.cConnection
-    Dim loRS As RC6.cRecordset
+    Dim loRs As RC6.cRecordset
     Dim nSoma As Double
     Dim aOPER As Variant
     Dim aVALORES_LINHA() As String
@@ -92,14 +111,14 @@ Public Function SomaSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As String,
     aOPER = SepSqlOpe(cCAMPO)
     
     Set loConn = New_c.Connection(LimpaTagRC6(cCON))
-    Set loRS = loConn.OpenRecordset("SELECT * FROM " & cTABLEWHERE)
+    Set loRs = loConn.OpenRecordset("SELECT * FROM " & cTABLEWHERE)
     
     nSoma = 0
-    Do While Not loRS.EOF
+    Do While Not loRs.EOF
         ReDim aVALORES_LINHA(UBound(aOPER))
         For x = 0 To UBound(aOPER)
             If InStr("+-*/()", aOPER(x)) = 0 And aOPER(x) <> "" Then
-                aVALORES_LINHA(x) = loRS.Fields(aOPER(x)).Value & ""
+                aVALORES_LINHA(x) = loRs.Fields(aOPER(x)).Value & ""
             Else
                 aVALORES_LINHA(x) = aOPER(x)
             End If
@@ -108,12 +127,12 @@ Public Function SomaSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As String,
         ' REPASSA nDEC PARA A LOGICA DE CALCULO DA MYFUNCTIONS
         nSoma = nSoma + Val(MathOper(aVALORES_LINHA, nDEC))
         
-        loRS.MoveNext
+        loRs.MoveNext
     Loop
     
     SomaSQLiteRC6 = IIf(nSoma = 0, eDEFAULT, nSoma)
     
-    Set loRS = Nothing: Set loConn = Nothing
+    Set loRs = Nothing: Set loConn = Nothing
     Exit Function
 Erro:
     SomaSQLiteRC6 = eDEFAULT
@@ -152,7 +171,7 @@ Public Function PegOperSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As Stri
                                 ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
                                 ByVal coper As String) As Variant
     Dim loConn As RC6.cConnection
-    Dim loRS As RC6.cRecordset
+    Dim loRs As RC6.cRecordset
     Dim cSQL As String
     
     On Error GoTo Erro
@@ -163,19 +182,19 @@ Public Function PegOperSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As Stri
     cSQL = SQLDialeto(cSQL, "SQLITE")
     
     Set loConn = New_c.Connection(LimpaTagRC6(cCON))
-    Set loRS = loConn.OpenRecordset(cSQL)
+    Set loRs = loConn.OpenRecordset(cSQL)
     
-    If Not loRS.EOF Then
-        If IsNull(loRS.Fields(0).Value) Then
+    If Not loRs.EOF Then
+        If IsNull(loRs.Fields(0).Value) Then
             PegOperSQLiteRC6 = eDEFAULT
         Else
-            PegOperSQLiteRC6 = loRS.Fields(0).Value
+            PegOperSQLiteRC6 = loRs.Fields(0).Value
         End If
     Else
         PegOperSQLiteRC6 = eDEFAULT
     End If
     
-    Set loRS = Nothing: Set loConn = Nothing
+    Set loRs = Nothing: Set loConn = Nothing
     Exit Function
 
 Erro:
@@ -231,7 +250,7 @@ Public Function IncluiSQLiteRC6(ByVal cCON As String, ByVal cTABELA As String, _
                                ByVal aCAMPOS As Variant, ByVal aVALORES As Variant, _
                                Optional ByRef nID As Long) As Boolean
     Dim loConn As RC6.cConnection
-    Dim loRS As RC6.cRecordset
+    Dim loRs As RC6.cRecordset
     Dim cSQL As String, i As Long
     
     On Error GoTo Erro
@@ -248,15 +267,15 @@ Public Function IncluiSQLiteRC6(ByVal cCON As String, ByVal cTABELA As String, _
     Set loConn = New_c.Connection(LimpaTagRC6(cCON))
     loConn.Execute cSQL
     
-    Set loRS = loConn.OpenRecordset("SELECT last_insert_rowid()")
+    Set loRs = loConn.OpenRecordset("SELECT last_insert_rowid()")
     
-    If Not loRS.EOF Then
+    If Not loRs.EOF Then
         ' Usamos Val e concatenamos com "" para evitar qualquer erro de tipo (Null ou Decimal)
-        nID = Val(loRS.Fields(0).Value & "")
+        nID = Val(loRs.Fields(0).Value & "")
     Else
         nID = 0
     End If
-    Set loRS = Nothing
+    Set loRs = Nothing
     IncluiSQLiteRC6 = True
     Set loConn = Nothing
     Exit Function
@@ -366,6 +385,61 @@ Erro:
 End Function
 
 
+Public Function PegSQLiteDeliRC6(ByVal cCON As String, ByVal cSQL As String, _
+                                ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
+                                Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
+    Dim loRs As Object ' cRecordset
+    Dim x As Long, nCAMPOS As Integer
+    Dim aRETU As Variant, aOPE As Variant, eVAL As Variant
 
+    On Error GoTo Erro
+
+    nCAMPOS = UBound(aCAM) + 1
+    ReDim aRETU(nCAMPOS - 1)
+    For x = 0 To nCAMPOS - 1: aRETU(x) = "": Next x
+
+    Set loRs = New_c.Connection(cCON, 1).OpenRecordset(cSQL)
+
+    If loRs.RecordCount > 0 Then
+        loRs.MoveFirst
+        Do Until loRs.EOF
+            For x = 0 To nCAMPOS - 1
+                ' Lógica de Operações
+                aOPE = SepSqlOpe(aCAM(x))
+                If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
+                    eVAL = loRs(aCAM(x)).Value
+                Else
+                    eVAL = MathOper(loRs(aOPE(1)).Value, loRs(aOPE(2)).Value, aOPE(0))
+                End If
+
+                ' Tratamento de Nulo
+                If IsNull(eVAL) Then
+                    If IsArray(aPAD) Then eVAL = aPAD(x) Else eVAL = aPAD
+                End If
+
+                ' Formatação com FVar
+                If IsArray(aFOR) Then
+                    If IsArray(aPAD) Then
+                        eVAL = FVar(eVAL, aFOR(x), aPAD(x))
+                    Else
+                        eVAL = FVar(eVAL, aFOR(x))
+                    End If
+                End If
+
+                aRETU(x) = aRETU(x) & FixStr(eVAL)
+            Next x
+
+            loRs.MoveNext
+            If Not loRs.EOF Then
+                For x = 0 To nCAMPOS - 1: aRETU(x) = aRETU(x) & cDELI: Next x
+            End If
+        Loop
+    End If
+
+    PegSQLiteDeliRC6 = aRETU
+    Exit Function
+Erro:
+    PegSQLiteDeliRC6 = aRETU
+End Function
 
 
