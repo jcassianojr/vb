@@ -2,6 +2,8 @@ Attribute VB_Name = "dcompareMain"
 Sub Main()
 'InitXPStyles
 
+
+
   '''DAO.DBEngine.SetOption dbExclusiveAsyncDelay, 2000
   '''DAO.DBEngine.SetOption dbSharedAsyncDelay, 0
   '''DAO.DBEngine.SetOption dbFlushTransactionTimeout, 500

@@ -6,6 +6,8 @@ Public Enum enumDatabaseType
   [MSAccess2007] ' .accdb
 End Enum
 
+
+
 ''' <summary>
 ''' Compacta e repara uma base de dados Access (.mdb ou .accdb)
 ''' </summary>

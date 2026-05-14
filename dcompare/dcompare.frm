@@ -53,7 +53,7 @@ Begin VB.Form dCompare
    Begin VB.CommandButton Encerrar 
       Caption         =   "Encerrar"
       Height          =   375
-      Left            =   8640
+      Left            =   8520
       TabIndex        =   9
       Top             =   1200
       Width           =   1215
@@ -343,6 +343,8 @@ End Sub
 Private Sub Form_Load()
 'Center Me
   CenterFormToScreen Me
+  
+  
   
    'Alert (infosistema)
   '

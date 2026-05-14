@@ -8,6 +8,8 @@ Attribute VB_Name = "criamdbaccdb"
   'Microsoft Jet 3.x(97)        4
   'Microsoft Jet 4.x(2000)      5
   'JetEngineType_Ace12 =        6         accdb
+  
+  
                             
                             
 
