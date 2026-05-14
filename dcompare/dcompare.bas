@@ -28,7 +28,7 @@ Sub Main()
    ' DAO.DBEngine.setOption dbMaxLocksPerFile, 15000
    ' On Error GoTo 0
 
-  EnabledVisualStyles
+ ' EnabledVisualStyles
   dCompare.Show
 End Sub
 
