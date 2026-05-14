@@ -7,6 +7,7 @@ Form=frmmain.frm
 Startup="Sub Main"
 HelpFile=""
 Title="Migrador Access"
+ExeName32="migracao.exe"
 Command32=""
 Name="ProjetoMigracao"
 HelpContextID="0"

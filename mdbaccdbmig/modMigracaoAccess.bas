@@ -7,7 +7,7 @@ Option Explicit
 ' Desenvolvido para: VB6 (Visual Basic 6.0)
 ' ===========================================================================
 
-Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As String, ByVal sPathSQL As String)
+Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As String, ByVal sPathSQL As String, ByVal bExecutarAoFinal As Boolean)
     Dim dbOrigem As DAO.Database
     Dim dbDestino As DAO.Database
     Dim tdfOrigem As DAO.TableDef
@@ -102,6 +102,11 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
     dbDestino.Close
     
     MsgBox "Processo concluído!" & vbCrLf & "Script gerado em: " & sPathSQL, vbInformation, "Migração Access"
+    
+    ' CHAMADA DA NOVA FUNÇÃO:
+    If bExecutarAoFinal Then
+        Call ExecutarArquivoSQL(sPathSQL, dbDestino)
+    End If
     Exit Sub
 
 Err_Handle:
@@ -127,3 +132,32 @@ Private Function GetSQLType(ByRef fld As DAO.Field) As String
         Case Else: GetSQLType = "TEXT(255)"
     End Select
 End Function
+
+Função para executar o conteúdo de um arquivo .sql no banco de destino
+Public Sub ExecutarArquivoSQL(ByVal sPathSQL As String, ByRef dbDestino As DAO.Database)
+    Dim fFile As Integer
+    Dim sLinha As String
+    Dim sComando As String
+    
+    fFile = FreeFile
+    Open sPathSQL For Input As #fFile
+    
+    On Error Resume Next ' Para ignorar comentários e erros individuais de execução
+    Do While Not EOF(fFile)
+        Line Input #fFile, sLinha
+        sLinha = Trim(sLinha)
+        
+        ' Ignora linhas vazias ou comentários do script
+        If sLinha <> "" And Left(sLinha, 2) <> "--" Then
+            ' Executa o comando SQL diretamente no banco
+            dbDestino.Execute sLinha, dbFailOnError
+            
+            If Err.Number <> 0 Then
+                Debug.Print "Erro ao executar: " & sLinha & " -> " & Err.Description
+                Err.Clear
+            End If
+        End If
+    Loop
+    
+    Close #fFile
+End Sub
