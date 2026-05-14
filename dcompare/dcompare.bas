@@ -32,5 +32,33 @@ Sub Main()
   dCompare.Show
 End Sub
 
+Public Function MDG(ByVal cMEnSSAGEM As String, Optional cTITULO = "Confirme")
+  Dim eRESP As Variant
+  MDG = False
+  eRESP = MsgBox(cMEnSSAGEM, vbYesNo + vbDefaultButton1, cTITULO)
+  If eRESP = vbYes Then
+    MDG = True
+  End If
+End Function
+
+
+Public Function GeraConexao(ByVal Caminho As String)
+    Dim sProvider As String
+    If LCase(Right(Caminho, 5)) = "accdb" Then
+        sProvider = "Microsoft.ACE.OLEDB.12.0"
+    Else
+        sProvider = "Microsoft.Jet.OLEDB.4.0"
+    End If
+    GeraConexao = "Provider=" & sProvider & ";Data Source=" & Caminho
+End Function
+
+Public Function Alert(ByVal cDIZ As String, Optional ByVal cTITLE As String = "Informacao")
+  MsgBox cDIZ, vbOKOnly, cTITLE
+End Function
+
+Public Function ArquivoExiste(ByVal FilePath As String) As Boolean
+    ArquivoExiste = (Dir(FilePath, vbNormal + vbHidden + vbSystem) <> "")
+End Function
+
 
 

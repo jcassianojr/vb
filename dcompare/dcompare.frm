@@ -1,233 +1,124 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.2#0"; "vbccr18.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form dCompare 
    Caption         =   "Database Comparador/Corretor"
    ClientHeight    =   5805
    ClientLeft      =   60
    ClientTop       =   345
-   ClientWidth     =   8955
+   ClientWidth     =   10350
    Icon            =   "dcompare.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5805
-   ScaleWidth      =   8955
+   ScaleWidth      =   10350
    StartUpPosition =   3  'Windows Default
-   Begin VBCCR18.CommandButtonW CmdTeste 
+   Begin VB.TextBox Text2 
       Height          =   375
-      Left            =   6240
+      Left            =   1080
       TabIndex        =   14
-      Top             =   1200
-      Width           =   975
-      _ExtentX        =   1720
-      _ExtentY        =   661
-      Caption         =   "TableInfo"
+      Top             =   600
+      Width           =   7215
    End
-   Begin XPControls.XPButton CmdExportarSqlite 
+   Begin VB.TextBox Text1 
       Height          =   375
-      Left            =   4920
+      Left            =   1080
+      TabIndex        =   13
+      Top             =   120
+      Width           =   7215
+   End
+   Begin VB.TextBox Text3 
+      Height          =   3285
+      Left            =   240
+      MultiLine       =   -1  'True
+      ScrollBars      =   3  'Both
       TabIndex        =   12
+      Top             =   2280
+      Width           =   8055
+   End
+   Begin VB.CommandButton cmdCompactar 
+      Caption         =   "Compactar"
+      Height          =   255
+      Left            =   2400
+      TabIndex        =   11
+      Top             =   1800
+      Width           =   2295
+   End
+   Begin VB.CommandButton Command5 
+      Caption         =   "Criar Tabela de Destino"
+      Height          =   255
+      Left            =   240
+      TabIndex        =   10
+      Top             =   1800
+      Width           =   2055
+   End
+   Begin VB.CommandButton Encerrar 
+      Caption         =   "Encerrar"
+      Height          =   375
+      Left            =   8640
+      TabIndex        =   9
       Top             =   1200
       Width           =   1215
-      _ExtentX        =   2143
-      _ExtentY        =   661
-      Caption         =   "Exportar Sqlite"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
    End
-   Begin VBCCR18.TextBoxW Text3 
-      Height          =   2895
-      Left            =   120
-      TabIndex        =   10
-      TabStop         =   0   'False
-      Top             =   2280
-      Width           =   8535
-      _ExtentX        =   15055
-      _ExtentY        =   5106
-      Text            =   "dcompare.frx":058A
-      MultiLine       =   -1  'True
-      ScrollBars      =   2
-   End
-   Begin VBCCR18.TextBoxW Text2 
+   Begin VB.CommandButton CmdTeste 
+      Caption         =   "TableInfo"
       Height          =   375
-      Left            =   960
-      TabIndex        =   9
-      Top             =   600
-      Width           =   7455
-      _ExtentX        =   13150
-      _ExtentY        =   661
-   End
-   Begin VBCCR18.TextBoxW Text1 
-      Height          =   375
-      Left            =   960
+      Left            =   5160
       TabIndex        =   8
-      Top             =   120
-      Width           =   7455
-      _ExtentX        =   13150
-      _ExtentY        =   661
-   End
-   Begin XPControls.XPButton Command3 
-      Height          =   375
-      Left            =   120
-      TabIndex        =   4
       Top             =   1200
-      Width           =   2295
-      _ExtentX        =   4048
-      _ExtentY        =   661
+      Width           =   855
+   End
+   Begin VB.CommandButton CmdExportarSqlite 
+      Caption         =   "Exportar Sqlite"
+      Height          =   375
+      Left            =   3720
+      TabIndex        =   7
+      Top             =   1200
+      Width           =   1215
+   End
+   Begin VB.CommandButton Command4 
+      Caption         =   "Comparar e Corrigir"
+      Height          =   375
+      Left            =   1800
+      TabIndex        =   6
+      Top             =   1200
+      Width           =   1695
+   End
+   Begin VB.CommandButton Command3 
       Caption         =   "Compare Arquivos"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ColorScheme     =   1
-      ColorBegin      =   8454143
-      ColorEnd        =   8454143
-   End
-   Begin XPControls.XPButton Command2 
       Height          =   375
-      Left            =   8520
-      TabIndex        =   3
-      Top             =   600
-      Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "dcompare.frx":05B0
-      Caption         =   ""
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton Command1 
-      Height          =   375
-      Left            =   8520
-      TabIndex        =   2
-      Top             =   120
-      Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "dcompare.frx":0B4A
-      Caption         =   ""
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton Command4 
-      Height          =   375
-      Left            =   2520
+      Left            =   240
       TabIndex        =   5
       Top             =   1200
-      Width           =   2295
-      _ExtentX        =   4048
-      _ExtentY        =   661
-      Caption         =   "Comparar e Corrigir"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ColorScheme     =   1
-      ColorBegin      =   8454143
-      ColorEnd        =   8454143
+      Width           =   1455
    End
-   Begin XPControls.XPButton Command5 
-      Height          =   375
-      Left            =   120
-      TabIndex        =   6
-      Top             =   1680
-      Width           =   2295
-      _ExtentX        =   4048
-      _ExtentY        =   661
-      Picture         =   "dcompare.frx":10E4
-      Caption         =   "Criar Tabela de Destino"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ColorScheme     =   1
-      ColorBegin      =   8454143
-      ColorEnd        =   8454143
+   Begin MSComDlg.CommonDialog CommonDialog1 
+      Left            =   9240
+      Top             =   1800
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   375
-      Left            =   7560
-      TabIndex        =   7
-      Top             =   1080
-      Width           =   1335
-      _ExtentX        =   2355
-      _ExtentY        =   661
-      Picture         =   "dcompare.frx":167E
-      Caption         =   "&Encerrar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+   Begin VB.CommandButton Command2 
+      Caption         =   "Destino"
+      Height          =   255
+      Left            =   8520
+      TabIndex        =   4
+      Top             =   720
+      Width           =   975
    End
-   Begin XPControls.XPButton CmdCompactar 
-      Height          =   375
-      Left            =   2520
-      TabIndex        =   11
-      Top             =   1680
-      Width           =   2295
-      _ExtentX        =   4048
-      _ExtentY        =   661
-      Picture         =   "dcompare.frx":1C18
-      Caption         =   "Compactar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ColorScheme     =   1
-      ColorBegin      =   8454143
-      ColorEnd        =   8454143
+   Begin VB.CommandButton Command1 
+      Caption         =   "Origem"
+      Height          =   255
+      Left            =   8520
+      TabIndex        =   3
+      Top             =   240
+      Width           =   975
    End
    Begin VB.Label lProgress 
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   1  'Fixed Single
       Height          =   375
       Left            =   4920
-      TabIndex        =   13
+      TabIndex        =   2
       Top             =   1680
       Width           =   3360
       WordWrap        =   -1  'True
@@ -313,12 +204,12 @@ Private Sub Convert(NWindMDBFileName$, SQLiteFileName$)
     Dim sCnn As cConnection
     Dim cconn As String
 
-    On Error GoTo ErrHandler ' Substitui On Error Resume Next [cite: 49]
+    On Error GoTo errhandler ' Substitui On Error Resume Next [cite: 49]
     
     lProgress.Caption = "Iniciando conexão..."
     Set aCnn = New ADODB.Connection
     aCnn.CursorLocation = adUseClient
-    cconn = GeracArq(NWindMDBFileName)
+    cconn = GeraConexao(NWindMDBFileName)
     aCnn.Open cconn
     
     If InStr(UCase(SQLiteFileName), ".SQLITE") = 0 Then
@@ -347,7 +238,7 @@ Cleanup:
     Set C = Nothing
     Exit Sub
 
-ErrHandler:
+errhandler:
     MsgBox "Erro na conversão: " & Err.Description, vbCritical
     Resume Cleanup
 End Sub
@@ -359,35 +250,41 @@ ListFields Text1.Text, "RPT"
 End Sub
 
 Private Sub Command1_Click()
-  Dim sFileName As String
-  Dim sPath As String
-  Dim sRECENTFILE As String
-  Dim sFILTER As String
+ On Error GoTo Erro_Cancel
+    
+    With CommonDialog1
+        .CancelError = True
+        ' Filtro para aceitar os dois tipos de banco Access
+        .Filter = "Banco de Dados Access (*.mdb;*.accdb)|*.mdb;*.accdb|Todos os Arquivos (*.*)|*.*"
+        .DialogTitle = "Selecione o Banco de Dados de ORIGEM"
+        .InitDir = App.Path
+        .ShowOpen
+        
+        ' Joga o caminho para o seu TextBox de origem
+        Text1.Text = .FileName
+    End With
+Exit Sub
 
-  sPath = App.Path
-  sFILTER = "Access mdb" & vbNullChar & "*.mdb" & vbNullChar & "DBF" & vbNullChar & "*.DBF"
-  sFileName = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
-  If Len(sFileName) = 0 Then
-    Text1.Text = ""
-    Exit Sub
-  End If
-  Text1.Text = sFileName
+Erro_Cancel:
+    ' Se o usuário clicar em cancelar, não faz nada
+    
 End Sub
 Private Sub Command2_Click()
-  Dim sFileName As String
-  Dim sPath As String
-  Dim sRECENTFILE As String
-  Dim sFILTER As String
-
-
-  sPath = App.Path
-  sFILTER = "Access mdb" & vbNullChar & "*.mdb" & vbNullChar & "Sqlite" & vbNullChar & "*.sqlite"
-  sFileName = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
-  If Len(sFileName) = 0 Then
-    Text2.Text = ""
+ On Error GoTo Erro_Cancel
+    
+    With CommonDialog1
+        .CancelError = True
+        .Filter = "Banco de Dados Access (*.mdb;*.accdb)|*.mdb;*.accdb"
+        .DialogTitle = "Selecione o Banco de Dados de DESTINO"
+        .ShowOpen
+        
+        ' Joga o caminho para o seu TextBox de destino
+        Text2.Text = .FileName
+    End With
+    
     Exit Sub
-  End If
-  Text2.Text = sFileName
+
+Erro_Cancel:
   
 End Sub
 Private Sub Command3_Click()
@@ -422,13 +319,13 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
   Dim i As Integer
   Dim X As Integer
 
-  On Error GoTo ErrHandler
+  On Error GoTo errhandler
   Set WrkSpace = DBEngine.CreateWorkspace("Compare", "Admin", "")
-  If Not FileExists(Text1.Text) Then
+  If Not ArquivoExiste(Text1.Text) Then
      Alert ("Falta arquivo " + Text1.Text)
      Exit Sub
   End If
-  If Not FileExists(Text2.Text) Then
+  If Not ArquivoExiste(Text2.Text) Then
      Alert ("Falta arquivo " + Text2.Text)
      Exit Sub
   End If
@@ -448,38 +345,38 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
         If lGRAVA Then
           Set NewTable = Baza2.CreateTableDef(T_Ime)
           With NewTable
-            For m = 0 To rec1.Fields.Count - 1
-              R_Ime = rec1.Fields(m).Name
-              r_type = rec1.Fields(m).Type
-              R_size = rec1.Fields(m).Size
+            For m = 0 To rec1.fields.Count - 1
+              R_Ime = rec1.fields(m).Name
+              r_type = rec1.fields(m).Type
+              R_size = rec1.fields(m).Size
               Set fldTemp = NewTable.CreateField(R_Ime, r_type, R_size)
               If r_type = dbText Or r_type = dbMemo Then
                 fldTemp.AllowZeroLength = True
               End If
-              .Fields.Append fldTemp
+              .fields.Append fldTemp
             Next m
           End With
           Baza2.TableDefs.Append NewTable
         End If
       Else
-        For m = 0 To rec1.Fields.Count - 1
+        For m = 0 To rec1.fields.Count - 1
           nERRO = 0
-          R_Ime = rec1.Fields(m).Name
-          nekej = rec2.Fields(R_Ime).Name
+          R_Ime = rec1.fields(m).Name
+          nekej = rec2.fields(R_Ime).Name
           If nERRO = 3265 Then
             Text3.Text = Text3.Text & "Falta Campo: " & T_Ime & "." & R_Ime & vbNewLine
             If lGRAVA Then
               Set NewTable = Baza2.TableDefs(T_Ime)
               rec2.Close
               With NewTable
-                R_Ime = rec1.Fields(m).Name
-                r_type = rec1.Fields(m).Type
-                R_size = rec1.Fields(m).Size
+                R_Ime = rec1.fields(m).Name
+                r_type = rec1.fields(m).Type
+                R_size = rec1.fields(m).Size
                 Set fldTemp = NewTable.CreateField(R_Ime, r_type, R_size)
                 If r_type = dbText Or r_type = dbMemo Then
                   fldTemp.AllowZeroLength = True
                 End If
-                .Fields.Append fldTemp
+                .fields.Append fldTemp
               End With
               Set rec2 = Baza2.OpenRecordset(T_Ime)
             End If
@@ -500,32 +397,52 @@ Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional 
   End If
 
   Exit Sub
-ErrHandler:
+errhandler:
   Select Case Err.Number
   Case 3422, 3078, 3265
-    nERRO = FixInt(Err.Number)
+    nERRO = Err.Number
     Resume Next
   Case 3219, 91
     Resume Next
   Case Else
-    SayErro "Dcompare"
+    Alert "Dcompare"
     Exit Sub
   End Select
 End Sub
 
 Private Sub Command5_Click()
-  Dim sFILTER  As String
-  Dim sFileName As String
-  sFILTER = "Arquivos Access (*.MDB)" & vbNullChar & "*.MDB" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-  sFileName = FileSave(Me, sFILTER, 1, "MDB", "", "", "Criar Access Como")
-  If Not Len(sFileName) = 0 Then
-    If FileConnExist(sFileName) Then
-      ''nAO GRAVA EM CIMA
-    Else
-      CriaMdbAccess sFileName, False, 5
-      Text2.Text = sFileName
+Dim cARQUIVONOVO As String
+
+On Error GoTo Erro_Cancel
+    
+    With CommonDialog1
+        .CancelError = True
+        ' Filtro para os formatos de salvamento do Access
+        .Filter = "Banco de Dados Access (*.mdb)|*.mdb|Banco de Dados Access (*.accdb)|*.accdb"
+        .DialogTitle = "Selecione o local para SALVAR o Banco de Dados"
+        .InitDir = App.Path
+        
+        ' Avisa o usuário se o arquivo já existir antes de sobrescrever
+        .Flags = cdlOFNOverwritePrompt
+        
+        .ShowSave
+        
+        ' Joga o caminho para o seu TextBox de destino
+        cARQUIVONOVO = .FileName
+        If Not ArquivoExiste(cARQUIVONOVO) Then
+           CriaMdbAccess cARQUIVONOVO, False, 5
+        End If
+        
+        
+    End With
+Exit Sub
+
+Erro_Cancel:
+    ' Entra aqui se o usuário clicar em "Cancelar"
+    If Err.Number <> cdlCancel Then
+        MsgBox "Erro ao selecionar destino: " & Err.Description, vbCritical
     End If
-  End If
+
 End Sub
 
 Private Sub Encerrar_Click()
@@ -658,7 +575,7 @@ Dim cCOLUNAS As String
     cINDEX = ""
     cCOLUNAS = ""
     Do Until rs.EOF
-       If UCase(rs.Fields!Table_Name) = UCase(dbTableName) Then
+       If UCase(rs.fields!Table_Name) = UCase(dbTableName) Then
         Debug.Print
         Debug.Print "Table         :" & rs("table_name")
         Debug.Print "Indice        :" & rs("INDEX_NAME")

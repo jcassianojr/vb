@@ -1,16 +1,4 @@
-dCompare = 156, 26, 1128, 468, C, 104, 104, 1025, 597, C
-Myfunctions = 52, 52, 1179, 393, C
-AdoLib = 26, 26, 1153, 514, 
-mFileAPI = 0, 0, 1127, 341, C
+dCompare = 393, 35, 1365, 477, C, 162, 31, 1083, 524, C
 dcompareMain = 26, 26, 1153, 367, 
-GeralVars = 182, 182, 1178, 615, C
-SqlFuncoesAdo = -53, 164, 803, 479, C
-clsOSInfo = 27, 94, 1172, 528, C
 Common = 44, 86, 911, 375, C
 MdbRepComSimples = 242, 228, 1132, 543, 
-VisualStyles = 9, 99, 1163, 540, C
-Strings = 115, 154, 1071, 469, C
-sqlfuncoes = 78, 78, 1224, 512, C
-frmcomp = 104, 104, 1100, 537, C, 78, 78, 1074, 511, C
-checagem = 132, 70, 1128, 503, C
-Datas = 104, 104, 1250, 538, C
