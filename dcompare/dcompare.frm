@@ -301,115 +301,6 @@ Private Sub Command4_Click()
   End If
   corrige Text1.Text, Text2.Text, True
 End Sub
-Private Sub corrige(ByVal cORIGEM As String, ByVal cDESTINO As String, Optional ByVal lGRAVA As Boolean = False)
-  Dim WrkSpace As DAO.Workspace
-  Dim Baza1 As DAO.Database
-  Dim Baza2 As DAO.Database
-  Dim rec1 As DAO.Recordset
-  Dim rec2 As DAO.Recordset
-  Dim NewTable As DAO.TableDef
-  Dim fldTemp As DAO.Field
-  Dim N  As Integer
-  Dim m As Integer
-  Dim T_Ime As Variant
-  Dim R_Ime As Variant
-  Dim nekej As Variant
-  Dim r_type As Variant
-  Dim R_size As Variant
-  Dim i As Integer
-  Dim X As Integer
-
-  On Error GoTo errhandler
-  Set WrkSpace = DBEngine.CreateWorkspace("Compare", "Admin", "")
-  If Not ArquivoExiste(Text1.Text) Then
-     Alert ("Falta arquivo " + Text1.Text)
-     Exit Sub
-  End If
-  If Not ArquivoExiste(Text2.Text) Then
-     Alert ("Falta arquivo " + Text2.Text)
-     Exit Sub
-  End If
-  Set Baza1 = WrkSpace.OpenDatabase(Text1.Text)
-  Set Baza2 = WrkSpace.OpenDatabase(Text2.Text)
-  ''On Error Resume Next
-  Text3.Text = ""
-  For N = 0 To Baza1.TableDefs.Count - 1
-    If Baza1.TableDefs(N).Properties(5) = 0 Then
-      nERRO = 0
-      DoEvents
-      T_Ime = Baza1.TableDefs(N).Name
-      Set rec1 = Baza1.OpenRecordset(T_Ime)
-      Set rec2 = Baza2.OpenRecordset(T_Ime)
-      If nERRO = 3078 Then
-        Text3.Text = Text3.Text & "Falta Tabela: " & T_Ime & vbNewLine
-        If lGRAVA Then
-          Set NewTable = Baza2.CreateTableDef(T_Ime)
-          With NewTable
-            For m = 0 To rec1.fields.Count - 1
-              R_Ime = rec1.fields(m).Name
-              r_type = rec1.fields(m).Type
-              R_size = rec1.fields(m).Size
-              Set fldTemp = NewTable.CreateField(R_Ime, r_type, R_size)
-              If r_type = dbText Or r_type = dbMemo Then
-                fldTemp.AllowZeroLength = True
-              End If
-              .fields.Append fldTemp
-            Next m
-          End With
-          Baza2.TableDefs.Append NewTable
-        End If
-      Else
-        For m = 0 To rec1.fields.Count - 1
-          nERRO = 0
-          R_Ime = rec1.fields(m).Name
-          nekej = rec2.fields(R_Ime).Name
-          If nERRO = 3265 Then
-            Text3.Text = Text3.Text & "Falta Campo: " & T_Ime & "." & R_Ime & vbNewLine
-            If lGRAVA Then
-              Set NewTable = Baza2.TableDefs(T_Ime)
-              rec2.Close
-              With NewTable
-                R_Ime = rec1.fields(m).Name
-                r_type = rec1.fields(m).Type
-                R_size = rec1.fields(m).Size
-                Set fldTemp = NewTable.CreateField(R_Ime, r_type, R_size)
-                If r_type = dbText Or r_type = dbMemo Then
-                  fldTemp.AllowZeroLength = True
-                End If
-                .fields.Append fldTemp
-              End With
-              Set rec2 = Baza2.OpenRecordset(T_Ime)
-            End If
-          End If
-        Next m
-      End If
-    End If
-  Next N
-  If lGRAVA Then
-    rec2.Close
-    rec1.Close
-  End If
-  Baza2.Close
-  Baza1.Close
-  WrkSpace.Close
-  If Text3.Text = "" Then
-    Text3.Text = "Arquivos sem diferencas"
-  End If
-
-  Exit Sub
-errhandler:
-  Select Case Err.Number
-  Case 3422, 3078, 3265
-    nERRO = Err.Number
-    Resume Next
-  Case 3219, 91
-    Resume Next
-  Case Else
-    Alert "Dcompare"
-    Exit Sub
-  End Select
-End Sub
-
 Private Sub Command5_Click()
 Dim cARQUIVONOVO As String
 
@@ -464,10 +355,11 @@ Dim dbConn As ADODB.Connection
 Dim rs As ADODB.Recordset
 Dim cTable As String
     Set dbConn = New ADODB.Connection
+    dbConn.ConnectionString = GeraConexao(dbNameWithPath)
     
-    dbConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" _
-    & dbNameWithPath & ";" _
-    & "Persist Security Info=False"
+   ' dbConn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" & "Data Source=" _
+   ' & dbNameWithPath & ";" _
+   ' & "Persist Security Info=False"
     dbConn.Open
 
    ' lstTables.Clear
@@ -575,7 +467,7 @@ Dim cCOLUNAS As String
     cINDEX = ""
     cCOLUNAS = ""
     Do Until rs.EOF
-       If UCase(rs.fields!Table_Name) = UCase(dbTableName) Then
+       If UCase(rs.Fields!Table_Name) = UCase(dbTableName) Then
         Debug.Print
         Debug.Print "Table         :" & rs("table_name")
         Debug.Print "Indice        :" & rs("INDEX_NAME")
@@ -598,6 +490,198 @@ Dim cCOLUNAS As String
     rs.Close
     dbConn.Close
 End Sub
+Public Function FixStr(ByVal eVAR As Variant, _
+                       Optional ByVal ePAD As Variant = "", _
+                       Optional ByVal coper As String = "", _
+                       Optional ByVal nLEN As Integer = 0) As Variant
+  On Error GoTo errhandler
+  If IsNull(eVAR) Then
+    If ePAD <> "" Then
+      eVAR = ePAD
+    End If
+  End If
+  If Not IsNull(eVAR) Then
+     FixStr = CStr(eVAR)
+  End If
+  If UCase(eVAR) = "NULL" Then
+    FixStr = ePAD
+  End If
+  If InStr(coper, "TRIM") > 0 Then
+    eVAR = Trim(eVAR)
+    FixStr = eVAR
+  End If
+  If nLEN > 0 And Len(eVAR) > nLEN Then
+    eVAR = Mid(eVAR, 1, nLEN)
+    FixStr = eVAR
+  End If
+  Exit Function
+errhandler:
+  FixStr = ""
+  Resume Next
+End Function
+Public Function funNumeroPuro(ByVal pNumero) As String
+  Dim i As Integer
+  pNumero = FixStr(pNumero)
+  funNumeroPuro = ""
+  For i = 1 To Len(pNumero)
+    If InStr("0123456789", Mid(pNumero, i, 1)) > 0 Then
+      funNumeroPuro = funNumeroPuro & Mid(pNumero, i, 1)
+    End If
+  Next
+End Function
+Public Function FixInt(ByVal cUSO As Variant, Optional ByVal ePAD As Variant = 0)
+  If IsNull(ePAD) Or ePAD = "" Then            'necessario pois pode ser passado outros tipos
+    ePAD = 0
+  End If
+  If IsNull(cUSO) Or cUSO = "" Then
+    FixInt = ePAD
+    Exit Function
+  End If
+  If Not IsNumeric(cUSO) Then
+    cUSO = funNumeroPuro(cUSO)
+  End If
+  If IsNull(cUSO) Or cUSO = "" Then            'necessario apos funnumeropuro
+    FixInt = ePAD
+    Exit Function
+  End If
+  FixInt = Int(cUSO)
+End Function
+
+' Função auxiliar para definir o Provider correto
+Private Function MontaStringConexao(cPath As String) As String
+    If InStr(LCase(cPath), ".accdb") > 0 Then
+        MontaStringConexao = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & cPath
+    Else
+        MontaStringConexao = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & cPath
+    End If
+End Function
 
 
+''' <summary>
+''' Compara e sincroniza dois bancos de dados.
+''' </summary>
+''' <param name="cPathOri">Caminho do banco Modelo (Origem)</param>
+''' <param name="cPathDest">Caminho do banco a ser Corrigido (Destino)</param>
+''' <param name="lGrava">Se True, aplica as mudanças. Se False, apenas gera o log.</param>
+Public Sub corrige(ByVal cPathOri As String, ByVal cPathDest As String, ByVal lGrava As Boolean)
+    Dim catOri As Object
+    Dim catDest As Object
+    Dim tblOri As Object
+    Dim tblDest As Object
+    Dim colOri As Object
+    Dim idxOri As Object
+    Dim idxDest As Object
+    Dim fldIdx As Object
+    
+    Dim strConnOri As String
+    Dim strConnDest As String
+    Dim existeTabela As Boolean
+    Dim existeCampo As Boolean
+    Dim existeIdx As Boolean
 
+    On Error GoTo err_Geral
+
+    ' Limpa o log e avisa o início
+    Text3.Text = ""
+    lProgress.Caption = "Analisando estruturas..."
+    DoEvents
+
+    ' Validação básica dos parâmetros recebidos
+    If cPathOri = "" Or cPathDest = "" Then
+        MsgBox "Caminhos de origem ou destino inválidos!", vbExclamation
+        Exit Sub
+    End If
+
+    ' 1. Monta as strings de conexão dinamicamente
+    strConnOri = MontaStringConexao(cPathOri)
+    strConnDest = MontaStringConexao(cPathDest)
+
+    Set catOri = CreateObject("ADOX.Catalog")
+    Set catDest = CreateObject("ADOX.Catalog")
+
+    ' Abre as conexões
+    catOri.ActiveConnection = strConnOri
+    catDest.ActiveConnection = strConnDest
+
+    ' 2. Loop pelas tabelas da ORIGEM
+    For Each tblOri In catOri.Tables
+        ' Filtra apenas tabelas reais (ignora views, links e tabelas de sistema)
+        If UCase(tblOri.Type) = "TABLE" Then
+            lProgress.Caption = "Tabela: " & tblOri.Name
+            DoEvents
+            
+            existeTabela = False
+            On Error Resume Next
+            Set tblDest = catDest.Tables(tblOri.Name)
+            If Err.Number = 0 Then existeTabela = True
+            On Error GoTo err_Geral
+
+            If Not existeTabela Then
+                Text3.Text = Text3.Text & " -> Tabela faltante: " & tblOri.Name & vbCrLf
+                
+                If lGrava Then
+                    Set tblDest = CreateObject("ADOX.Table")
+                    tblDest.Name = tblOri.Name
+                    ' Copia colunas para a nova tabela
+                    For Each colOri In tblOri.Columns
+                        tblDest.Columns.Append colOri.Name, colOri.Type, colOri.DefinedSize
+                    Next
+                    catDest.Tables.Append tblDest
+                    Text3.Text = Text3.Text & "    [OK] Tabela criada." & vbCrLf
+                End If
+            Else
+                ' --- VERIFICAÇÃO DE CAMPOS ---
+                For Each colOri In tblOri.Columns
+                    existeCampo = False
+                    On Error Resume Next
+                    Dim vCol As Object
+                    Set vCol = tblDest.Columns(colOri.Name)
+                    If Err.Number = 0 Then existeCampo = True
+                    On Error GoTo err_Geral
+
+                    If Not existeCampo Then
+                        Text3.Text = Text3.Text & " -> [" & tblOri.Name & "] Campo faltante: " & colOri.Name & vbCrLf
+                        If lGrava Then
+                            tblDest.Columns.Append colOri.Name, colOri.Type, colOri.DefinedSize
+                            Text3.Text = Text3.Text & "    [OK] Campo adicionado." & vbCrLf
+                        End If
+                    End If
+                Next
+
+                ' --- VERIFICAÇÃO DE ÍNDICES ---
+                For Each idxOri In tblOri.Indexes
+                    existeIdx = False
+                    On Error Resume Next
+                    Set idxDest = tblDest.Indexes(idxOri.Name)
+                    If Err.Number = 0 Then existeIdx = True
+                    On Error GoTo err_Geral
+
+                    If Not existeIdx Then
+                        Text3.Text = Text3.Text & " -> [" & tblOri.Name & "] Índice faltante: " & idxOri.Name & vbCrLf
+                        If lGrava Then
+                            Set idxDest = CreateObject("ADOX.Index")
+                            idxDest.Name = idxOri.Name
+                            idxDest.PrimaryKey = idxOri.PrimaryKey
+                            idxDest.Unique = idxOri.Unique
+                            
+                            For Each fldIdx In idxOri.Columns
+                                idxDest.Columns.Append fldIdx.Name
+                            Next
+                            tblDest.Indexes.Append idxDest
+                            Text3.Text = Text3.Text & "    [OK] Índice criado." & vbCrLf
+                        End If
+                    End If
+                Next
+            End If
+        End If
+    Next
+
+    lProgress.Caption = "Finalizado."
+    MsgBox "Processo concluído com sucesso!", vbInformation
+    Exit Sub
+
+err_Geral:
+    MsgBox "Erro ao processar: " & Err.Description, vbCritical
+    Set catOri = Nothing
+    Set catDest = Nothing
+End Sub
