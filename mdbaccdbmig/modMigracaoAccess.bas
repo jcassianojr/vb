@@ -15,8 +15,27 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
     Dim fld As DAO.Field
     Dim idx As DAO.Index
     Dim fFile As Integer
+    Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
     
     On Error GoTo Err_Handle
+    
+    ' --- NOVA LÓGICA: VERIFICAÇÃO DO DESTINO ---
+    If Not fso.FileExists(sPathACCDB) Then
+        Dim resp As VbMsgBoxResult
+        resp = MsgBox("O arquivo de destino não existe:" & vbCrLf & sPathACCDB & _
+                      vbCrLf & vbCrLf & "Deseja criar um banco de dados novo em branco?", _
+                      vbQuestion + vbYesNo, "Destino não encontrado")
+        
+        If resp = vbYes Then
+            If Not CriarBancoAcessoEmBranco(sPathACCDB) Then Exit Sub
+        Else
+            Exit Sub ' Usuário cancelou
+        End If
+    End If
+    
+    
     
     ' Abre os bancos de dados
     ' Nota: O motor ACE (para .accdb) é aberto corretamente via DAO 12.0+
@@ -45,6 +64,14 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
                 ' Se a tabela nem existir no destino
                 Print #fFile, "-- ATENÇÃO: Tabela [" & tdfOrigem.Name & "] não encontrada no destino."
                 Err.Clear
+                
+                Dim sSqlCreate As String
+                sSqlCreate = GerarSqlCriacaoTabela(tdfOrigem) ' Nova função
+    
+                Print #fFile, "-- Criando tabela inexistente: " & tdfOrigem.Name
+                Print #fFile, sSqlCreate
+                
+                
             Else
                 ' --- 1. VERIFICAÇÃO DE CAMPOS ---
                 For Each fld In tdfOrigem.Fields
@@ -98,16 +125,17 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
     Print #fFile, "-- Fim do Script"
     Close #fFile
     
+    ' CHAMADA DA NOVA FUNÇÃO:
+    If bExecutarAoFinal Then
+        Call ExecutarArquivoSQL(sPathSQL, dbDestino)
+    End If
+    
     dbOrigem.Close
     dbDestino.Close
     
     MsgBox "Processo concluído!" & vbCrLf & "Script gerado em: " & sPathSQL, vbInformation, "Migração Access"
     
-    ' CHAMADA DA NOVA FUNÇÃO:
-    If bExecutarAoFinal Then
-        Call ExecutarArquivoSQL(sPathSQL, dbDestino)
-    End If
-    Exit Sub
+       Exit Sub
 
 Err_Handle:
     MsgBox "Erro: " & Err.Number & " - " & Err.Description, vbCritical, "Erro de Processamento"
@@ -133,7 +161,7 @@ Private Function GetSQLType(ByRef fld As DAO.Field) As String
     End Select
 End Function
 
-Função para executar o conteúdo de um arquivo .sql no banco de destino
+
 Public Sub ExecutarArquivoSQL(ByVal sPathSQL As String, ByRef dbDestino As DAO.Database)
     Dim fFile As Integer
     Dim sLinha As String
@@ -161,3 +189,39 @@ Public Sub ExecutarArquivoSQL(ByVal sPathSQL As String, ByRef dbDestino As DAO.D
     
     Close #fFile
 End Sub
+
+
+' Adicione esta função auxiliar para criar o banco vazio
+Private Function CriarBancoAcessoEmBranco(ByVal sPath As String) As Boolean
+    On Error GoTo Err_Criar
+    Dim cat As Object ' ADOX.Catalog
+    Set cat = CreateObject("ADOX.Catalog")
+    
+    ' String de conexão para o motor ACE (ACCDB)
+    cat.Create "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sPath
+    
+    Set cat = Nothing
+    CriarBancoAcessoEmBranco = True
+    Exit Function
+
+Err_Criar:
+    MsgBox "Erro ao criar banco de destino: " & Err.Description, vbCritical
+    CriarBancoAcessoEmBranco = False
+End Function
+
+
+Private Function GerarSqlCriacaoTabela(ByRef tdf As DAO.TableDef) As String
+    Dim sSql As String
+    Dim fld As DAO.Field
+    
+    sSql = "CREATE TABLE [" & tdf.Name & "] ("
+    
+    For Each fld In tdf.Fields
+        sSql = sSql & "[" & fld.Name & "] " & GetSQLType(fld) & ", "
+    Next
+    
+    ' Remove a última vírgula e fecha parênteses
+    sSql = Left(sSql, Len(sSql) - 2) & ");"
+    
+    GerarSqlCriacaoTabela = sSql
+End Function
