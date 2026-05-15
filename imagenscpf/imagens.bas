@@ -18,16 +18,44 @@ Public Sub Cmdiniciar_Click()
   Dim cCAMPO As String
   Dim cCAMJPG As String
   Dim cCODIGO As String
+  Dim rawPath As String
+  
   Set OBJCONN = New ADODB.Connection  'Create a new object
   Set OBJRSGLOB = New ADODB.Recordset
+
 
 
   cCAMPO = "IMAGEM"
   DBCONNSTR = PegPath("PATH", "IMGCOM")
   cCAMJPG = PegPath("PATH", "IMGJPG")
+  rawPath = PegPath("PATH", "IMGCOM")
   
-  
-    'se sql lite verifica se odbc esta instalado
+  ' LÓGICA DE CONSTRUÇÃO DA CONNECTION STRING
+  If InStr(1, rawPath, "Provider=", vbTextCompare) > 0 Or _
+     InStr(1, rawPath, "Driver=", vbTextCompare) > 0 Then
+      ' Se já for uma string de conexão completa, usa como está
+      DBCONNSTR = rawPath
+  Else
+      ' Se for apenas o caminho de um arquivo, identifica a extensão
+      Dim ext As String
+      ext = LCase(Right(rawPath, 7)) ' Pega o final para extensões como .sqlite
+
+      If InStr(ext, ".sqlite") > 0 Or InStr(ext, ".db") > 0 Then
+          ' Monta string para SQLite3 ODBC [cite: 11]
+          DBCONNSTR = "Driver={SQLite3 ODBC Driver};Database=" & rawPath & ";"
+      ElseIf InStr(ext, ".accdb") > 0 Then
+          ' Monta string para Access 2007-2016 (Engine ACE)
+          DBCONNSTR = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & rawPath & ";Persist Security Info=False;"
+      ElseIf InStr(ext, ".mdb") > 0 Then
+          ' Monta string para Access antigo (Jet)
+          DBCONNSTR = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & rawPath & ";Mode=Share Deny None;"
+      Else
+          ' Fallback ou erro caso não reconheça a extensão
+          DBCONNSTR = rawPath
+      End If
+  End If
+
+     'se sql lite verifica se odbc esta instalado
  If InStr(LCase(DBCONNSTR), ".sqlite") > 0 Or InStr(LCase(DBCONNSTR), ".sqlite3") > 0 _
                  Or InStr(LCase(DBCONNSTR), ".fossil") > 0 Or InStr(LCase(DBCONNSTR), ".db3") > 0 _
                  Or (InStr(LCase(DBCONNSTR), ".db") > 0) Then
