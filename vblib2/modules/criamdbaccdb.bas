@@ -27,12 +27,13 @@ Public Function CriaMdbAccess(ByVal cARQORI As String, _
     ' Definições de Engine Type:
     ' 5 = Microsoft Jet 4.x (formato 2000/2003 .mdb)
     ' 6 = Microsoft Access 2007-2016 (formato .accdb)
-                            
-    Dim cat As Object
+                            'Dim cat As Object
+    Dim cat As ADOX.Catalog
     Dim sConn As String
     
     On Error GoTo trataerro
     CriaMdbAccess = False
+    Set cat = New ADOX.Catalog
     
     ' Verifica se o arquivo já existe antes de tentar criar
     If Not ArquivoExiste(cARQORI) Then
@@ -41,7 +42,8 @@ Public Function CriaMdbAccess(ByVal cARQORI As String, _
         If lCRIA Then
             
             ' Instancia o catálogo usando Late Binding para evitar crashes de DLL
-            Set cat = CreateObject("ADOX.Catalog")
+            'Set cat = CreateObject("ADOX.Catalog")
+            'acima com new
             
             ' Define a String de Conexão baseada na extensão ou no tipo solicitado
             If nTIPO = 6 Or InStr(LCase(cARQORI), ".accdb") > 0 Then
