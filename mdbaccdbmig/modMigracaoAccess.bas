@@ -16,7 +16,10 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
     Dim idx As DAO.Index
     Dim fFile As Integer
     Dim fso As Object
+    
+    Dim iContagemIndices As Integer
     Set fso = CreateObject("Scripting.FileSystemObject")
+    iContagemIndices = 0
     
     
     On Error GoTo Err_Handle
@@ -54,6 +57,9 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
     For Each tdfOrigem In dbOrigem.TableDefs
         ' Ignora tabelas ocultas do sistema Access
         If Left(tdfOrigem.Name, 4) <> "MSys" Then
+        
+           ' RESET DO CONTADOR PARA CADA TABELA
+            iContagemIndices = 0
             
             Debug.Print "Analisando tabela: " & tdfOrigem.Name
             
@@ -76,12 +82,33 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
                 ' --- 1. VERIFICAÇÃO DE CAMPOS ---
                 For Each fld In tdfOrigem.Fields
                     Dim fldDest As DAO.Field
+                    Dim sDefault As String
+                    Dim sDefaultOrigem As String
+                    sDefault = ""
                     Set fldDest = tdfDestino.Fields(fld.Name)
                     
+                    sDefaultOrigem = fld.DefaultValue
+                    
                     If Err.Number <> 0 Then
-                        ' Campo não existe: Gera ALTER TABLE
-                        Print #fFile, "ALTER TABLE [" & tdfOrigem.Name & "] ADD COLUMN [" & fld.Name & "] " & GetSQLType(fld) & ";"
+                    
+                        ' CENÁRIO A: O campo não existe no destino
                         Err.Clear
+                        Dim sSqlAdd As String
+                        sSqlAdd = "ALTER TABLE [" & tdfOrigem.Name & "] ADD COLUMN [" & fld.Name & "] " & GetSQLType(fld)
+                        
+                        If sDefaultOrigem <> "" Then
+                            sSqlAdd = sSqlAdd & " DEFAULT " & sDefaultOrigem
+                        End If
+                        
+                        Print #fFile, sSqlAdd & ";"
+                    Else
+                    ' CENÁRIO B: O campo existe, mas vamos comparar o DefaultValue
+                        ' Se a origem tem default e o destino não (ou se forem diferentes)
+                        If sDefaultOrigem <> fldDest.DefaultValue Then
+                            ' Gera alteração apenas para o valor padrão
+                            ' Nota: No Access SQL, usamos SET DEFAULT
+                            Print #fFile, "ALTER TABLE [" & tdfOrigem.Name & "] ALTER COLUMN [" & fld.Name & "] SET DEFAULT " & IIf(sDefaultOrigem = "", "NULL", sDefaultOrigem) & ";"
+                        End If
                     End If
                 Next fld
                 
@@ -89,6 +116,7 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
                 For Each idx In tdfOrigem.Indexes
                     ' Ignora índices criados automaticamente pelo Access para campos simples (opcional)
                     ' Se quiser ser rigoroso, verificamos todos.
+                    iContagemIndices = iContagemIndices + 1
                     
                     Dim idxDest As DAO.Index
                     Set idxDest = tdfDestino.Indexes(idx.Name)
@@ -116,11 +144,17 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
                         Err.Clear
                     End If
                 Next idx
+                
+                ' Verifica se a contagem é zero antes de passar para a próxima tabela
+                If iContagemIndices = 0 Then
+                    Print #fFile, "-- OBSERVAÇÃO: A tabela [" & tdfOrigem.Name & "] não possui índices definidos na origem."
+                End If
             End If
             On Error GoTo Err_Handle
         End If
     Next tdfOrigem
 
+   
     Print #fFile, ""
     Print #fFile, "-- Fim do Script"
     Close #fFile
@@ -130,10 +164,16 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
         Call ExecutarArquivoSQL(sPathSQL, dbDestino)
     End If
     
-    dbOrigem.Close
-    dbDestino.Close
-    
+      
     MsgBox "Processo concluído!" & vbCrLf & "Script gerado em: " & sPathSQL, vbInformation, "Migração Access"
+    
+    'LIMPEZA OBRIGATÓRIA PARA EVITAR QUE O PROGRAMA FECHE NA PRÓXIMA EXECUÇÃO
+    If Not dbOrigem Is Nothing Then dbOrigem.Close
+    If Not dbDestino Is Nothing Then dbDestino.Close
+    
+    Set dbOrigem = Nothing
+    Set dbDestino = Nothing
+    Set fso = Nothing
     
        Exit Sub
 
@@ -225,3 +265,45 @@ Private Function GerarSqlCriacaoTabela(ByRef tdf As DAO.TableDef) As String
     
     GerarSqlCriacaoTabela = sSql
 End Function
+
+
+' Nova rotina para processar uma pasta inteira
+Public Sub ProcessarPastaCompleta(ByVal sFolder As String, ByVal bExecutarAoFinal As Boolean)
+    Dim fso As Object
+    Dim oFolder As Object
+    Dim oFile As Object
+    Dim sPathMDB As String
+    Dim sPathACCDB As String
+    Dim sPathSQL As String
+    
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    If Not fso.FolderExists(sFolder) Then
+        MsgBox "Diretório não encontrado!", vbCritical
+        Exit Sub
+    End If
+    
+    Set oFolder = fso.GetFolder(sFolder)
+    
+    ' Itera por todos os arquivos da pasta
+    For Each oFile In oFolder.Files
+        ' Verifica se é um arquivo .mdb
+        If LCase(fso.GetExtensionName(oFile.Path)) = "mdb" Then
+            sPathMDB = oFile.Path
+            ' Define o destino como o mesmo nome mas com extensão .accdb
+            sPathACCDB = fso.BuildPath(sFolder, fso.GetBaseName(oFile.Name) & ".accdb")
+            ' Define o nome do script SQL
+            sPathSQL = fso.BuildPath(sFolder, fso.GetBaseName(oFile.Name) & "_correcao.sql")
+            
+            ' Chama a lógica de comparação existente para cada par de arquivos
+            ' Nota: A lógica interna já pergunta se deseja criar o .accdb se ele não existir
+            Debug.Print "Processando: " & oFile.Name
+            Call GerarScriptCorrecao(sPathMDB, sPathACCDB, sPathSQL, bExecutarAoFinal)
+        End If
+    Next oFile
+    
+    MsgBox "Processamento da pasta concluído!", vbInformation
+    
+    Set oFolder = Nothing
+    Set fso = Nothing
+End Sub

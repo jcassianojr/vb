@@ -2,21 +2,29 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmMain 
    Caption         =   "Comparador de Estrutura Access (MDB vs ACCDB)"
-   ClientHeight    =   4128
+   ClientHeight    =   4140
    ClientLeft      =   60
-   ClientTop       =   456
+   ClientTop       =   450
    ClientWidth     =   7500
    BeginProperty Font 
       Name            =   "Tahoma"
-      Size            =   8.4
+      Size            =   8.25
       Charset         =   0
       Weight          =   400
       Underline       =   0   'False
       Italic          =   0   'False
       Strikethrough   =   0   'False
    EndProperty
-   ScaleHeight     =   4128
+   ScaleHeight     =   4140
    ScaleWidth      =   7500
+   Begin VB.CommandButton CmdGeraPasta 
+      Caption         =   "GERAR SCRIPT DE CORREÇÃO Pasta"
+      Height          =   615
+      Left            =   2880
+      TabIndex        =   13
+      Top             =   3240
+      Width           =   3255
+   End
    Begin VB.CommandButton CmdEscdir 
       Caption         =   "..."
       Height          =   372
@@ -43,10 +51,10 @@ Begin VB.Form frmMain
    Begin VB.CommandButton cmdProcessar 
       Caption         =   "GERAR SCRIPT DE CORREÇÃO"
       Height          =   615
-      Left            =   2280
+      Left            =   240
       TabIndex        =   8
       Top             =   3240
-      Width           =   3015
+      Width           =   2415
    End
    Begin VB.CommandButton cmdSelSQL 
       Caption         =   "..."
@@ -136,6 +144,25 @@ Private Sub cmdSelMDB_Click()
 
 End Sub
 
+Private Sub CmdEscdir_Click()
+Dim sCaminho As String
+    sCaminho = SelecionarPasta("Selecione a pasta contendo dos arquivos MDB:")
+    
+    If sCaminho <> "" Then
+        Diretorio.Text = sCaminho
+    End If
+End Sub
+
+Private Sub CmdGeraPasta_Click()
+If Diretorio.Text = "" Then
+        MsgBox "Por favor, selecione o diretório dos arquivos MDB.", vbExclamation
+        Exit Sub
+    End If
+    
+    ' Executa a nova rotina do módulo
+    Call ProcessarPastaCompleta(Diretorio.Text, Check1.Value)
+End Sub
+
 Private Sub cmdSelMDB_Fix_Click()
     On Error Resume Next
     dlg.Filter = "Access Antigo (*.mdb)|*.mdb"
@@ -182,3 +209,22 @@ Private Sub cmdProcessar_Click()
     ' Chama a rotina do módulo .bas
     Call GerarScriptCorrecao(txtMDB.Text, txtACCDB.Text, txtSQL.Text, Check1.Value)
 End Sub
+
+' Declaração para a Shell API no topo do módulo
+Public Function SelecionarPasta(ByVal Titulo As String) As String
+    Dim objShell As Object
+    Dim objFolder As Object
+    
+    Set objShell = CreateObject("Shell.Application")
+    ' 1 = BIF_RETURNONLYFSDIRS (Apenas pastas do sistema de arquivos)
+    Set objFolder = objShell.BrowseForFolder(0, Titulo, 1)
+    
+    If Not objFolder Is Nothing Then
+        SelecionarPasta = objFolder.Items.Item.Path
+    Else
+        SelecionarPasta = ""
+    End If
+    
+    Set objFolder = Nothing
+    Set objShell = Nothing
+End Function
