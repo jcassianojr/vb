@@ -217,4 +217,198 @@ trataerro:
     SayErro "DatatoLit"
   End Select
 End Function
+' +--------------------------------------------------------------------
+' +  Função: UniversalToDate
+' +  Objetivo: Garantir a leitura correta de datas em múltiplos formatos
+' +            (DD/MM/YY, DD-MM-YYYY, DD.MM.YY, AAAAMMDD, YYYY-MM-DD)
+' +  Retorno:  Date (Retorna a data correspondente ou 0 se for inválida/vazia)
+' +--------------------------------------------------------------------
+Public Function UniversalToDate(ByVal xData As Variant) As Date
+    Dim cData As String
+    Dim cLimpa As String
+    Dim nLen As Integer
+    
+    ' 1. Se já for do tipo Date nativo do VB6, retorna ela mesma
+    If VarType(xData) = vbDate Then
+        UniversalToDate = CDate(xData)
+        Exit Function
+    End If
+    
+    ' 2. Se for nulo ou não for conversível para string, retorna data vazia (0)
+    If IsNull(xData) Or IsEmpty(xData) Then
+        UniversalToDate = CDate(0)
+        Exit Function
+    End If
+    
+    cData = UCase$(Trim$(CStr(xData)))
+    
+    If cData = "" Or cData = "01/01/1900" Or cData = "0000-00-00" Or Left$(cData, 4) = "0000" Then
+        UniversalToDate = CDate(0)
+        Exit Function
+    End If
+    
+    ' 3. Trata o formato ISO comum em bancos de dados (YYYY-MM-DD)
+    '    Exemplo: "2026-05-16" ou "2026-05-16 00:00:00"
+    If Len(cData) >= 10 Then
+        If Mid$(cData, 5, 1) = "-" And Mid$(cData, 8, 1) = "-" Then
+            UniversalToDate = DateSerial(Val(Left$(cData, 4)), Val(Mid$(cData, 6, 2)), Val(Mid$(cData, 9, 2)))
+            Exit Function
+        End If
+    End If
+    
+    ' 4. Remove separadores comuns para analisar a sequência numérica pura
+    cLimpa = Replace(cData, "/", "")
+    cLimpa = Replace(cLimpa, "-", "")
+    cLimpa = Replace(cLimpa, ".", "")
+    cLimpa = Trim$(cLimpa)
+    
+    ' Se houver hora grudada na string limpa, pega apenas os primeiros 6 ou 8 dígitos da data
+    If Len(cLimpa) > 8 Then
+        cLimpa = Left$(cLimpa, 8)
+    End If
+    
+    nLen = Len(cLimpa)
+    
+    ' 5. Identifica o formato pelo tamanho da string resultante
+    Select Case nLen
+        Case 8
+            ' Pode ser AAAAMMDD (banco/perfil) ou DDMMYYYY (padrão local)
+            ' Se os 4 primeiros dígitos formarem um ano válido (ex: > 1900)
+            If Val(Left$(cLimpa, 4)) > 1900 Then
+                UniversalToDate = DateSerial(Val(Left$(cLimpa, 4)), Val(Mid$(cLimpa, 5, 2)), Val(Right$(cLimpa, 2)))
+            Else
+                ' Caso contrário, assume DDMMYYYY
+                UniversalToDate = DateSerial(Val(Right$(cLimpa, 4)), Val(Mid$(cLimpa, 3, 2)), Val(Left$(cLimpa, 2)))
+            End If
+            
+        Case 6
+            ' Formato DDMMYY (Ano com 2 dígitos)
+            ' O VB6 resolve o centenário automaticamente com base nas configurações do Windows
+            UniversalToDate = DateSerial(Val(Right$(cLimpa, 2)), Val(Mid$(cLimpa, 3, 2)), Val(Left$(cLimpa, 2)))
+            
+        Case Else
+            ' Fallback: Se o VB6 conseguir converter nativamente, usa. Se não, retorna data vazia.
+            If IsDate(cData) Then
+                UniversalToDate = CDate(cData)
+            Else
+                UniversalToDate = CDate(0)
+            End If
+    End Select
+End Function
 
+' +--------------------------------------------------------------------
+' +  Função: C_Data
+' +  Objetivo: Nova função para converter e validar strings de data com segurança.
+' +  Retorno:  Date
+' +--------------------------------------------------------------------
+Public Function C_Data(ByVal mDATA As String) As Date
+    C_Data = UniversalToDate(mDATA)
+End Function
+
+' +--------------------------------------------------------------------
+' +  Função: DigaData
+' +  Objetivo: Retorna a data formatada por extenso (DD de Mês de AAAA)
+' +--------------------------------------------------------------------
+Public Function DigaData(ByVal mDATA As Variant) As String
+    Dim dReal As Date
+    
+    dReal = UniversalToDate(mDATA)
+    
+    If dReal = CDate(0) Then
+        DigaData = ""
+        Exit Function
+    End If
+    
+    ' Usamos Trim$ nativo do VB6 combinado com Str$ para evitar erros de tipo
+    DigaData = Trim$(Str$(Day(dReal))) & " de " & CMes(dReal) & " de " & Trim$(Str$(Year(dReal)))
+End Function
+
+' +--------------------------------------------------------------------
+' +  Função: CMes
+' +  Objetivo: Retorna o nome do mês por extenso a partir de uma data ou string.
+' +--------------------------------------------------------------------
+Public Function CMes(ByVal mDATA As Variant) As String
+    Dim dReal As Date
+    
+    ' Intercepta e garante que seja uma data real antes de usar o Month()
+    dReal = UniversalToDate(mDATA)
+    
+    If dReal = CDate(0) Then
+        CMes = ""
+        Exit Function
+    End If
+    
+    ' CORRIGIDO: Chama MMes (com dois Ms) que existe no seu arquivo Datas.bas
+    CMes = MMes(Month(dReal))
+End Function
+
+' +--------------------------------------------------------------------
+' +  Função: CDia
+' +  Objetivo: Retorna o nome do dia da semana por extenso a partir de uma data ou string.
+' +--------------------------------------------------------------------
+Public Function CDia(ByVal mDATA As Variant) As String
+    Dim dReal As Date
+    
+    ' Intercepta e garante que seja uma data real antes de usar o Weekday()
+    dReal = UniversalToDate(mDATA)
+    
+    If dReal = CDate(0) Then
+        CDia = ""
+        Exit Function
+    End If
+    
+    ' CORRIGIDO: Chama DDia (com dois Ds) que existe no seu arquivo Datas.bas
+    CDia = DDia(Weekday(dReal))
+End Function
+
+' +--------------------------------------------------------------------
+' +  Função: MMes
+' +  Objetivo: Recebe o número do mês (1 a 12) e retorna o nome por extenso.
+' +  Retorno:  String
+' +--------------------------------------------------------------------
+Public Function MMes(ByVal nMES As Integer) As String
+    Dim cNomMes As String
+    
+    cNomMes = ""
+    
+    Select Case nMES
+        Case 1:  cNomMes = "Janeiro"
+        Case 2:  cNomMes = "Fevereiro"
+        Case 3:  cNomMes = "Março"
+        Case 4:  cNomMes = "Abril"
+        Case 5:  cNomMes = "Maio"
+        Case 6:  cNomMes = "Junho"
+        Case 7:  cNomMes = "Julho"
+        Case 8:  cNomMes = "Agosto"
+        Case 9:  cNomMes = "Setembro"
+        Case 10: cNomMes = "Outubro"
+        Case 11: cNomMes = "Novembro"
+        Case 12: cNomMes = "Dezembro"
+    End Select
+    
+    MMes = cNomMes
+End Function
+
+' +--------------------------------------------------------------------
+' +  Função: DDia
+' +  Objetivo: Recebe o número do dia da semana (1 a 7) e retorna o nome por extenso.
+' +            (1 = Domingo, 2 = Segunda-Feira, ..., 7 = Sábado)
+' +  Retorno:  String
+' +--------------------------------------------------------------------
+Public Function DDia(ByVal nDIA As Integer) As String
+    Dim cNomDia As String
+    
+    cNomDia = ""
+    
+    Select Case nDIA
+        Case 1: cNomDia = "Domingo"
+        Case 2: cNomDia = "Segunda-Feira"
+        Case 3: cNomDia = "Terça-Feira"
+        Case 4: cNomDia = "Quarta-Feira"
+        Case 5: cNomDia = "Quinta-Feira"
+        Case 6: cNomDia = "Sexta-Feira"
+        Case 7: cNomDia = "Sábado"
+    End Select
+    
+    DDia = cNomDia
+End Function

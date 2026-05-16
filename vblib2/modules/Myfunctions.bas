@@ -2188,16 +2188,37 @@ Public Function FixNumBol(ByVal nBOL As Integer) As Boolean
 End Function
 
 Public Function FixStrBol(ByVal cCHAR As String) As Boolean
-  Select Case cCHAR
-  Case ""
-    FixStrBol = Null
-  Case "S"
-    FixStrBol = True
-  Case "N"
-    FixStrBol = False
-  End Select
+ FixStrBol = StrLogic(cCHAR)
 End Function
 
+' +--------------------------------------------------------------------
+' +  Função: StrLogic
+' +  Objetivo: Converte uma string alfanumérica em valor lógico booleano,
+' +            espelhando a mesma inteligência usada no Harbour.
+' +  Retorno:  Variant (Pode retornar True, False, ou Null para nulos)
+' +--------------------------------------------------------------------
+Public Function StrLogic(ByVal cVAL As String) As Variant
+    ' Limpa espaços em branco e padroniza em maiúsculo
+    cVAL = UCase$(Trim$(cVAL))
+    
+    Select Case cVAL
+        ' Casos que retornam Nulo/Vazio
+        Case "", "NULL", "<NULL>", "NIL", "NUL"
+            StrLogic = Null
+            
+        ' Casos que retornam VERDADEIRO (.T.)
+        Case "S", "SIM", "T", ".T.", "TRUE", "YES", "ON", "Y", "1"
+            StrLogic = True
+            
+        ' Casos que retornam FALSO (.F.)
+        Case "N", "NAO", "F", ".F.", "FALSE", "NO", "OFF", "0"
+            StrLogic = False
+            
+        ' Fallback de segurança (Caso não combine com nenhum)
+        Case Else
+            StrLogic = False
+    End Select
+End Function
 Public Function Count_Lines_In_File(ByVal strFilePath As String, Optional ByVal lMES As Boolean = True) As Long
 
 '     'delcare variables
