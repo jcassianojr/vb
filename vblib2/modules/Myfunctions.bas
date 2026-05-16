@@ -243,9 +243,9 @@ Public Function ComboLostFocus(ByRef Combo1)
 Dim strPartial
 Dim i
   With Combo1
-    If Len(.Text) Then
+    If Len(.tEXT) Then
       'Procura pelo texto digitado
-      strPartial = .Text
+      strPartial = .tEXT
       i = SendMessage(.hwnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
@@ -313,7 +313,7 @@ Dim J
 Dim m_bEditFromCode
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .Text
+    strPartial = .tEXT
     i = SendMessage(.hwnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
@@ -519,9 +519,9 @@ Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVAL As 
 End Function
 
 Public Function Caminex(ByVal cARQ As String, Optional ByVal nANO As Integer = 0, Optional ByVal nMES As Integer = 0, Optional ByVal nEMP = 1)
-  Dim cANO As String
+  Dim cAno As String
   Dim cEMP As String
-  Dim cMES As String
+  Dim cMes As String
   Dim cTMPVAR As String
   Dim nPOS  As Integer
   Dim nPOS2 As Integer
@@ -564,17 +564,17 @@ Public Function Caminex(ByVal cARQ As String, Optional ByVal nANO As Integer = 0
   End If
 
   If InStr(cARQ, "[MM]") > 0 Then
-    cMES = StrZero(nMES, 2)
-    cARQ = Replace(cARQ, "[MM]", cMES)
+    cMes = StrZero(nMES, 2)
+    cARQ = Replace(cARQ, "[MM]", cMes)
   End If
   If InStr(cARQ, "[AAAA]") > 0 Then
-    cANO = StrZero(nANO, 4)
-    cARQ = Replace(cARQ, "[AAAA]", cANO)
+    cAno = StrZero(nANO, 4)
+    cARQ = Replace(cARQ, "[AAAA]", cAno)
   End If
   If InStr(cARQ, "[AA]") > 0 Then
-    cANO = StrZero(nANO, 4)
-    cANO = Right(cANO, 2)
-    cARQ = Replace(cARQ, "[AA]", cANO)
+    cAno = StrZero(nANO, 4)
+    cAno = Right(cAno, 2)
+    cARQ = Replace(cARQ, "[AA]", cAno)
   End If
   If InStr(cARQ, "[ZZZ]") > 0 Then
     cEMP = StrZero(nEMP, 3)
@@ -603,7 +603,7 @@ End Function
 
 Public Function FileConnExist(ByVal cARQ As Variant, _
                           Optional ByVal lMES As Boolean = False, _
-                          Optional ByVal cMES As String = "Arquivo Não Encontrado ", _
+                          Optional ByVal cMes As String = "Arquivo Não Encontrado ", _
                           Optional ByVal cSQL As String = "")
   Dim cARQUIVO As String
   Dim nFILELEN
@@ -694,7 +694,7 @@ Public Function FileConnExist(ByVal cARQ As Variant, _
 NotExist:
   FileConnExist = False
   If lMES Then
-    Alert cMES & cARQUIVO, "Erro Arquivo"
+    Alert cMes & cARQUIVO, "Erro Arquivo"
   End If
 End Function
 
@@ -1969,7 +1969,7 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
   End If
 End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
@@ -2251,7 +2251,132 @@ Public Function Count_Lines_In_File(ByVal strFilePath As String, Optional ByVal 
   'return value
   Count_Lines_In_File = intLinesReadCount
 End Function
+' +--------------------------------------------------------------------
+' +  Função: Count_Lines_In_File
+' +  Objetivo: Conta linhas em arquivos Gigantescos usando a técnica do
+' +            BLOCO ELÁSTICO (Recuo de ponteiro de leitura na emenda).
+' +            100% à prova de falhas para os 3 cenários (CR, LF, CRLF).
+' +  Retorno:  Long
+' +--------------------------------------------------------------------
+Public Function Count_Lines_In_Filev2(ByVal cCaminhoArquivo As String) As Long
+    On Error GoTo TrataErro
+    
+    Dim nFile As Integer
+    Dim nTamArquivo As Long
+    Dim nTamBloco As Long
+    Dim abBuffer() As Byte
+    
+    Dim i As Long
+    Dim nLinhas As Long
+    Dim nRestante As Long
+    Dim nBytesLidos As Long
+    Dim nPonteiroAtual As Long
+    Dim bUltimoByteArquivo As Byte
+    
+    ' Se o arquivo não existir ou estiver vazio
+    If Dir(cCaminhoArquivo) = "" Then
+        Count_Lines_In_Filev2 = 0
+        Exit Function
+    End If
+    
+    nTamArquivo = FileLen(cCaminhoArquivo)
+    If nTamArquivo = 0 Then
+        Count_Lines_In_Filev2 = 0
+        Exit Function
+    End If
+    
+    ' 1 MB de Buffer estático na RAM
+    nTamBloco = 1024 * 1024
+    ReDim abBuffer(0 To nTamBloco - 1)
+    
+    nFile = FreeFile
+    Open cCaminhoArquivo For Binary Access Read As #nFile
+    
+    nLinhas = 0
+    nPonteiroAtual = 1 ' No VB6, o Seek do modo Binary começa em 1
+    
+    Do While nPonteiroAtual <= nTamArquivo
+        ' Calcula quantos bytes faltam ler
+        nRestante = (nTamArquivo - nPonteiroAtual) + 1
+        
+        ' Ajusta o tamanho do bloco se for o final do arquivo
+        If nRestante < nTamBloco Then
+            nTamBloco = nRestante
+            ReDim abBuffer(0 To nTamBloco - 1)
+        End If
+        
+        ' Posiciona o ponteiro do arquivo e faz a leitura
+        Seek #nFile, nPonteiroAtual
+        Get #nFile, , abBuffer
+        nBytesLidos = nTamBloco
+        
+        ' Se for o último pedaço do arquivo, guarda o último byte real
+        If (nPonteiroAtual + nBytesLidos - 1) = nTamArquivo Then
+            bUltimoByteArquivo = abBuffer(nBytesLidos - 1)
+        End If
+        
+        ' --- AQUI ENTRA A LÓGICA DO BLOCO ELÁSTICO ---
+        ' Se o bloco NÃO for o final do arquivo, vamos analisar onde ele cortou
+        If (nPonteiroAtual + nBytesLidos - 1) < nTamArquivo Then
+            
+            ' Caso A: O bloco terminou exatamente em Chr(13) (Pode ser um CRLF cortado)
+            If abBuffer(nBytesLidos - 1) = 13 Then
+                ' Encolhe o bloco logicamente em 1 byte (ignora o 13 neste turno)
+                nBytesLidos = nBytesLidos - 1
+                
+            ' Caso B: O bloco terminou em Chr(10) e o anterior a ele era Chr(13)
+            ' (O par CRLF ficou inteiro dentro do bloco, então está tudo bem)
+            ElseIf abBuffer(nBytesLidos - 1) = 10 Then
+                If abBuffer(nBytesLidos - 2) = 13 Then
+                    ' Par CRLF fechado com sucesso, não mexe em nada.
+                Else
+                    ' É um LF isolado (Unix), pode processar normal.
+                End If
+            End If
+        End If
+        
+        ' Varre o bloco ajustado (Sem risco de pegar caractere partido)
+        For i = 0 To nBytesLidos - 1
+            If abBuffer(i) = 13 Then
+                nLinhas = nLinhas + 1
+            ElseIf abBuffer(i) = 10 Then
+                ' Se o anterior imediato foi 13, faz parte do par. Não conta.
+                ' Caso contrário, é uma quebra pura Unix (10), conta nova linha.
+                If i > 0 Then
+                    If abBuffer(i - 1) <> 13 Then
+                        nLinhas = nLinhas + 1
+                    End If
+                Else
+                    ' Se for o primeiro byte do bloco e for 10, como o bloco elástico
+                    ' evitou deixar o 13 no bloco anterior, este 10 é uma linha pura Unix.
+                    nLinhas = nLinhas + 1
+                End If
+            End If
+        Next i
+        
+        ' Atualiza o ponteiro real com base nos bytes que nós REALMENTE processamos
+        nPonteiroAtual = nPonteiroAtual + nBytesLidos
+    Loop
+    
+    Close #nFile
+    nFile = 0
+    
+    ' Ajuste final da última linha (Caso o arquivo não termine com quebra)
+    If nLinhas > 0 Then
+        If bUltimoByteArquivo <> 10 And bUltimoByteArquivo <> 13 Then
+            nLinhas = nLinhas + 1
+        End If
+    Else
+        If nTamArquivo > 0 Then nLinhas = 1
+    End If
+    
+    Count_Lines_In_Filev2 = nLinhas
+    Exit Function
 
+TrataErro:
+    If nFile > 0 Then Close #nFile
+    Count_Lines_In_Filev2 = 0
+End Function
 Public Sub OpenUrl(ByVal strURL As String)
   ShellExecute 0, "Open", strURL, 0&, 0&, SW_SHOWNORMAL
 End Sub
@@ -2446,12 +2571,12 @@ Public Function NetworkUserName() As String
 
 End Function
 
-Public Function WordLen(ByRef Text As String) As Long
+Public Function WordLen(ByRef tEXT As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(Text), vbFromUnicode)
+  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next
