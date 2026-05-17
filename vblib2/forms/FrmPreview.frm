@@ -136,11 +136,12 @@ Unload Me
 End Sub
 
 Private Sub Form_Load()
+  DoEvents
   OrdoWebView1.NavigateToFile cARQRTF
 End Sub
-
-
-
-
-
- 
+Private Sub Form_Resize()
+On Error Resume Next
+    ' Redimensionamento dinâmico responsivo: o preview acompanha o tamanho da janela do utilizador
+    OrdoWebView1.Height = Me.ScaleHeight - OrdoWebView1.Top - 200
+    OrdoWebView1.Width = Me.ScaleWidth - OrdoWebView1.Left - 1800 ' Reserva o espaço dos botões à direita
+End Sub

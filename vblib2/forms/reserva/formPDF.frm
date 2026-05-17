@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
 Begin VB.Form formConvertToPDF 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Text-PDF v1.0"
@@ -442,14 +442,14 @@ Dim cache As String
 Const AppName = "Text-PDF v1.0"
 
 Private Sub CmdAbrirCom_Click()
-  If FileConnExist(txtFilename.tEXT, True) Then
-    Call OpenWith(txtFilename.tEXT, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
+  If FileConnExist(txtFilename.Text, True) Then
+    Call OpenWith(txtFilename.Text, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
   End If
 End Sub
 
 Private Sub CmdAbrirPdf_Click()
   Dim cARQSHELL As String
-  cARQSHELL = FixStr(txtOutputFile.tEXT)
+  cARQSHELL = FixStr(txtOutputFile.Text)
   If FileConnExist(cARQSHELL) Then
     ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
   End If
@@ -471,7 +471,7 @@ End Sub
 
 Private Sub cmdimp_Click()
   Dim cARQSHELL As String
-  cARQSHELL = FixStr(txtOutputFile.tEXT)
+  cARQSHELL = FixStr(txtOutputFile.Text)
   If FileConnExist(cARQSHELL) Then
     ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , "print", CLng(Me.hwnd)
   End If
@@ -487,7 +487,7 @@ End Sub
 
 Private Sub CmdSendMail_Click()
   Dim cARQUIVO As String
-  cARQUIVO = FixStr(txtOutputFile.tEXT)
+  cARQUIVO = FixStr(txtOutputFile.Text)
   'servidor,porta,from,to,assunto,anexos,mensagem,enviar e sair
   ePASS01 = Array("", _
                   "", _
@@ -501,7 +501,7 @@ Private Sub CmdSendMail_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
- cARQRTF = FixStr(txtOutputFile.tEXT)
+ cARQRTF = FixStr(txtOutputFile.Text)
  FrmPreview.Show vbModal, Me
 End Sub
 
@@ -516,15 +516,15 @@ Private Sub Form_Load()
   cmbRotation.ListIndex = 0
   cmbPageSize.ListIndex = 0
 
-  txtCreator.tEXT = zNOMEFOLHA
+  txtCreator.Text = zNOMEFOLHA
 
 
 
   If Len(ePASS01) > 0 Then
     If FileConnExist(ePASS01) Then
-      txtTitle.tEXT = NomeArq(ePASS01, True)
-      txtFilename.tEXT = ePASS01
-      txtOutputFile.tEXT = TrocaExt(ePASS01, "PDF")
+      txtTitle.Text = NomeArq(ePASS01, True)
+      txtFilename.Text = ePASS01
+      txtOutputFile.Text = TrocaExt(ePASS01, "PDF")
       btnOpen.Enabled = False
       txtFilename.Enabled = False
     End If
@@ -545,36 +545,36 @@ Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
 End Sub
 Private Sub txtAuthor_GotFocus()
   txtAuthor.SelStart = 0
-  txtAuthor.SelLength = Len(txtAuthor.tEXT)
+  txtAuthor.SelLength = Len(txtAuthor.Text)
 End Sub
 Private Sub txtCreator_GotFocus()
   txtCreator.SelStart = 0
-  txtCreator.SelLength = Len(txtCreator.tEXT)
+  txtCreator.SelLength = Len(txtCreator.Text)
 End Sub
 
 Private Sub txtSubject_GotFocus()
   txtSubject.SelStart = 0
-  txtSubject.SelLength = Len(txtSubject.tEXT)
+  txtSubject.SelLength = Len(txtSubject.Text)
 End Sub
 
 Private Sub txtTitle_GotFocus()
   txtTitle.SelStart = 0
-  txtTitle.SelLength = Len(txtTitle.tEXT)
+  txtTitle.SelLength = Len(txtTitle.Text)
 End Sub
 
 Private Sub txtKeywords_GotFocus()
   txtKeywords.SelStart = 0
-  txtKeywords.SelLength = Len(txtKeywords.tEXT)
+  txtKeywords.SelLength = Len(txtKeywords.Text)
 End Sub
 
 Private Sub txtFilename_GotFocus()
   txtFilename.SelStart = 0
-  txtFilename.SelLength = Len(txtFilename.tEXT)
+  txtFilename.SelLength = Len(txtFilename.Text)
 End Sub
 
 Private Sub txtOutputFile_GotFocus()
   txtOutputFile.SelStart = 0
-  txtOutputFile.SelLength = Len(txtOutputFile.tEXT)
+  txtOutputFile.SelLength = Len(txtOutputFile.Text)
 End Sub
 
 Private Sub btnClose_Click()
@@ -583,10 +583,10 @@ End Sub
 
 Private Sub btnOpen_Click()
   On Local Error Resume Next
-  txtFilename.tEXT = OpenArqExt(Me, txtFilename.tEXT, "txt", "Arquivos txt")
+  txtFilename.Text = OpenArqExt(Me, txtFilename.Text, "txt", "Arquivos txt")
 
-  If Not Len(txtFilename.tEXT) = 0 Then
-    txtOutputFile.tEXT = TrocaExt(txtFilename.tEXT, "pdf")
+  If Not Len(txtFilename.Text) = 0 Then
+    txtOutputFile.Text = TrocaExt(txtFilename.Text, "pdf")
   End If
 
 
@@ -598,7 +598,7 @@ Private Sub btnSave_Click()
   sFILTER = "Arquivos PDF (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
   FileName = FileSave(Me, sFILTER, 1, "PDF", cARQRTF, cARQRTF, "Salvar PDF")
   If Not Len(FileName) = 0 Then
-    txtOutputFile.tEXT = FileName
+    txtOutputFile.Text = FileName
   End If
 End Sub
 
@@ -616,157 +616,369 @@ Private Sub btnfalse()
        txtOutputFile.Enabled = False
 End Sub
 Private Sub btnConvert_Click()
-' Desativa os controles para proteção visual durante o processo
-   ' cmdGerar.Enabled = False
-    Screen.MousePointer = vbHourglass
-
-    ' A SUA CHAMADA ORIGINAL FICA ASSIM, PERFEITA:
-    ConvertToPDF txtFilename.tEXT, txtOutputFile.tEXT, _
-                 txtAuthor.tEXT, txtCreator.tEXT, txtKeywords.tEXT, _
-                 txtSubject.tEXT, txtTitle.tEXT, _
-                 cmbFont.tEXT, Val(cmbFontSize.tEXT), Val(cmbRotation.tEXT), _
-                 Val(cmbPageSize.tEXT), Val(Right(cmbPageSize.tEXT, 3)), ChkPaisagem.Value
-
-    ' Restaura os controles
-    Screen.MousePointer = vbDefault
-   ' cmdGerar.Enabled = True
+  If txtFilename.Text <> "" And txtOutputFile.Text <> "" Then
+    ConvertToPDF txtFilename.Text, txtOutputFile.Text, _
+                 txtAuthor.Text, txtCreator.Text, txtKeywords.Text, _
+                 txtSubject.Text, txtTitle.Text, _
+                 cmbFont.Text, Val(cmbFontSize.Text), Val(cmbRotation.Text), _
+                 Val(cmbPageSize.Text), Val(Right(cmbPageSize.Text, 3)), ChkPaisagem.Value
+    If FileConnExist(txtOutputFile.Text) Then
+      Alert "Conversao Concluida"
+      btnfalse
+    End If
+  Else
+    MsgBox "Informe o nome do arquivo."
+  End If
 End Sub
-Public Sub ConvertToPDF(ByVal strSourceFile As String, _
-                         ByVal strOutputFile As String, _
-                         Optional ByVal strAuthor As String = "", _
-                         Optional ByVal strCreator As String = "", _
-                         Optional ByVal strKeywords As String = "", _
-                         Optional ByVal strSubject As String = "", _
-                         Optional ByVal strTitle As String = "", _
-                         Optional ByVal strFontName As String = "Arial", _
-                         Optional ByVal sngFontSize As Single = 10, _
-                         Optional ByVal lRotation As Long = 0, _
-                         Optional ByVal lPageSizeCode As Long = 0, _
-                         Optional ByVal lPageSizeVal As Long = 0, _
-                         Optional ByVal iPaisagemValue As Integer = 0)
 
-    Dim fso As Object
-    Dim streamIn As Object
-    Dim cLINHA As String
-    Dim pdf As ClsFPDF
-    
-    ' Variáveis de paginação e controle vertical
-    Dim nMargemEsquerda As Single
-    Dim nLinhaAtual As Single
-    Dim nLimiteInferior As Single
-    Dim nAlturaLinha As Single
-    Dim cOrientacao As String
-    
-    ' Validações padrão que você já possui
-    If Not FileConnExist(strSourceFile, True) Then Exit Sub
-    If Len(strOutputFile) = 0 Then strOutputFile = TrocaExt(strSourceFile, "PDF")
-    
-    If FileConnExist(strOutputFile, False) Then
-        Alert ("Arquivo Destino Ja existe")
-        Exit Sub
+Public Function ConvertToPDF(FileName As String, outputfile As String, _
+                             Optional TextAuthor As String, Optional TextCreator As String, Optional TextKeywords As String, _
+                             Optional TextSubject As String, Optional TextTitle As String, _
+                             Optional FontName As String = "Courier", Optional FontSize As Integer = 10, Optional Rotation As Integer, _
+                             Optional pwidth As Single = 8.5, Optional pheight As Single = 11, _
+                             Optional lPAISAGEM As Boolean = False)
+
+  Dim tpwidth As Long
+  Dim tpheight As Long
+  On Error GoTo er
+  If Not FileConnExist(FileName) Then
+    MsgBox "Arquivo '" & FileName & "' não existe."
+    Exit Function
+  ElseIf FileConnExist(outputfile) Then
+    If MDG("Arquivo Ja Existente" & outputfile, "Confirma Exclusao") Then
+      DeleteFile outputfile  'Kill outputfile
     End If
-    
-    On Error GoTo TrataErro
-    
-    ' 1. Determina a orientação ("L" para Paisagem, "P" para Retrato)
-    ' No VB6, um CheckBox marcado (vbChecked) tem o valor 1
-    If iPaisagemValue = 1 Then
-        cOrientacao = "L"
-        nLimiteInferior = 190 ' Limite em milímetros para folha deitada (A4 menor eixo)
-    Else
-        cOrientacao = "P"
-        nLimiteInferior = 275 ' Limite padrão para folha em pé
+  End If
+
+  If lPAISAGEM Then
+    tpwidth = pwidth
+    tpheight = pheight
+    pwidth = tpheight
+    pheight = tpwidth
+  End If
+
+
+  initialize FontName, FontSize, Rotation, pwidth, pheight
+
+  author = TextAuthor
+  creator = TextCreator
+  keywords = TextKeywords
+  subject = TextSubject
+  Title = TextTitle
+  filetxt = FileName
+  filepdf = outputfile
+
+  Call WriteStart
+  Call WriteHead
+  Call WritePages
+  Call endpdf
+  Exit Function
+er:
+  MsgBox Err.Description
+End Function
+
+Private Sub initialize(FontName As String, FontSize As Integer, Rotation As Integer, pwidth As Single, pheight As Single)
+  pageHeight = 72 * pheight
+  pageWidth = 72 * pwidth
+
+  BaseFont = FontName                          ' Courier, Times-Roman, Arial
+  pointSize = FontSize                         ' Font Size; não altere
+  vertSpace = FontSize * 1.2                   ' Vertical spacing
+  rotate = Rotation                            ' degrees to rotate; try setting 90,180,etc
+  LINES = (pageHeight - 72) / vertSpace        ' no of lines on one page
+
+  Select Case LCase(FontName)
+  Case "courier": linelen = 1.5 * pageWidth / pointSize
+  Case "arial": linelen = 2 * pageWidth / pointSize
+    'Case "Times-Roman": linelen = 2.2 * pageWidth / pointSize
+  Case Else: linelen = 2.2 * pageWidth / pointSize
+  End Select
+
+  Obj = 0
+  npagex = pageWidth / 2
+  npagey = 25
+  pageNo = 0
+  Position = 0
+  cache = ""
+End Sub
+
+Private Sub writepdf(stre As String, Optional flush As Boolean)
+  On Local Error Resume Next
+  Position = Position + Len(stre)
+  cache = cache & stre & vbCr
+  If Len(cache) > 32000 Or flush Then
+    Open filepdf For Append As #1
+    Print #1, cache;
+    Close #1
+    cache = ""
+  End If
+End Sub
+
+Private Sub WriteStart()
+  writepdf ("%PDF-1.2")
+  writepdf ("%âãÏÓ")
+End Sub
+
+Private Sub WriteHead()
+  Dim CreationDate As String
+  On Error GoTo er
+  CreationDate = "D:" & Format(Now, "YYYYMMDDHHNNSS")
+  Obj = Obj + 1
+  location(Obj) = Position
+  info = Obj
+
+  writepdf (Obj & " 0 obj")
+  writepdf ("<<")
+  writepdf ("/Author (" & author & ")")
+  writepdf ("/CreationDate (" & CreationDate & ")")
+  writepdf ("/Creator (" & creator & ")")
+  writepdf ("/Producer (" & AppName & ")")
+  writepdf ("/Title (" & Title & ")")
+  writepdf ("/Subject (" & subject & ")")
+  writepdf ("/Keywords (" & keywords & ")")
+  writepdf (">>")
+  writepdf ("endobj")
+
+  Obj = Obj + 1
+  root = Obj
+  Obj = Obj + 1
+  Tpages = Obj
+  encoding = Obj + 2
+  resources = Obj + 3
+
+  Obj = Obj + 1
+  location(Obj) = Position
+  writepdf (Obj & " 0 obj")
+  writepdf ("<<")
+  writepdf ("/Type /Font")
+  writepdf ("/Subtype /Type1")
+  writepdf ("/Name /F1")
+  writepdf ("/Encoding " & encoding & " 0 R")
+  writepdf ("/BaseFont /" & BaseFont)
+  writepdf (">>")
+  writepdf ("endobj")
+
+  Obj = Obj + 1
+  location(Obj) = Position
+  writepdf (Obj & " 0 obj")
+  writepdf ("<<")
+  writepdf ("/Type /Encoding")
+  writepdf ("/BaseEncoding /WinAnsiEncoding")
+  writepdf (">>")
+  writepdf ("endobj")
+
+  Obj = Obj + 1
+  location(Obj) = Position
+  writepdf (Obj & " 0 obj")
+  writepdf ("<<")
+  writepdf ("  /Font << /F1 " & Obj - 2 & " 0 R >>")
+  writepdf ("  /ProcSet [ /PDF /Text ]")
+  writepdf (">>")
+  writepdf ("endobj")
+  Exit Sub
+er:
+  MsgBox Err.Description
+End Sub
+
+Private Sub WritePages()
+  Dim i As Integer
+  Dim line As String
+  Dim tmpline As String
+  Dim beginstream As String
+  On Error GoTo er
+  Open filetxt For Input As #2
+  beginstream = StartPage
+  lineNo = -1
+  Do Until EOF(2)
+    Line Input #2, line
+    lineNo = lineNo + 1
+
+    'quebra de página
+    If lineNo >= LINES Or InStr(line, Chr(12)) > 0 Then
+      writepdf ("1 0 0 1 " & npagex & " " & npagey & " Tm")
+      writepdf ("(" & pageNo & ") Tj")
+      writepdf ("/F1 " & pointSize & " Tf")
+      endpage (beginstream)
+      beginstream = StartPage
     End If
-    
-    ' 2. Abre o arquivo texto via FSO (Streaming rápido por linha)
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    Set streamIn = fso.OpenTextFile(strSourceFile, 1, False)
-    
-    ' 3. Inicializa o motor da classe ClsFPDF
-    Set pdf = New ClsFPDF
-    pdf.CreatePDF cOrientacao, "mm"
-    pdf.AddPage
-    
-    ' Aplica a fonte e tamanho capturados do Combo da sua tela
-    pdf.SetFont strFontName, sngFontSize
-    
-    ' 4. Configuração das margens e espaçamento proporcional dinâmico
-    nMargemEsquerda = 15
-    nLinhaAtual = 15
-    
-    ' Calcula a altura ideal de cada linha para o texto não sobrepor
-    nAlturaLinha = (sngFontSize * 1.3) / (72 / 25.4)
-    
-    ' 5. Loop de leitura e escrita
-    Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        
-        ' Desenha o texto no PDF
-        pdf.Cell cLINHA, nMargemEsquerda, nLinhaAtual
-        nLinhaAtual = nLinhaAtual + nAlturaLinha
-        
-        ' Se estourar a margem inferior, quebra a página mantendo a fonte definida
-        If nLinhaAtual > nLimiteInferior Then
-            pdf.AddPage
-            pdf.SetFont strFontName, sngFontSize
-            nLinhaAtual = 15
+
+    line = ReplaceText(ReplaceText(line, "(", "\("), ")", "\)")
+    line = Trim(line)
+
+    If Len(line) > linelen Then
+
+      'quebra de linha
+      Do While Len(line) > linelen
+        tmpline = Left(line, linelen)
+        For i = Len(tmpline) To Len(tmpline) \ 2 Step -1
+          If InStr("*&^%$#,. ;<=>[])}!""", Mid(tmpline, i, 1)) Then
+            tmpline = Left(tmpline, i)
+            Exit For
+          End If
+        Next
+
+        line = Mid$(line, Len(tmpline) + 1)
+        writepdf ("T* (" & tmpline & vbCrLf & ") Tj")
+        lineNo = lineNo + 1
+
+        'quebra de página
+        If lineNo >= LINES Or InStr(line, Chr(12)) > 0 Then
+          writepdf ("1 0 0 1 " & npagex & " " & npagey & " Tm")
+          writepdf ("(" & pageNo & ") Tj")
+          writepdf ("/F1 " & pointSize & " Tf")
+          endpage (beginstream)
+          beginstream = StartPage
         End If
-    Loop
-    
-    ' 6. Salva o arquivo finalizado
-    pdf.Output strOutputFile
-    
-    ' Opcional: Feedback que seu sistema costuma dar
-    ' Alert "Conversão concluída com sucesso!"
+      Loop
 
-Fim:
-    If Not streamIn Is Nothing Then streamIn.Close
-    Set streamIn = Nothing
-    Set fso = Nothing
-    Set pdf = Nothing
-    Exit Sub
+      lineNo = lineNo + 1
+      writepdf ("T* (" & line & vbCrLf & ") Tj")
 
-TrataErro:
-    Alert "Erro na conversão para PDF: " & Err.Description
-    Resume Fim
+    Else
+
+      writepdf ("T* (" & line & vbCrLf & ") Tj")
+
+    End If
+  Loop
+  Close #2
+  writepdf ("1 0 0 1 " & npagex & " " & npagey & " Tm")
+  writepdf ("(" & pageNo & ") Tj")
+  writepdf ("/F1 " & pointSize & " Tf")
+  endpage (beginstream)
+  Exit Sub
+er:
+  MsgBox Err.Description
+  Close
 End Sub
+
+Private Function StartPage() As String
+  Dim strmpos As Long
+  On Error GoTo er
+  Obj = Obj + 1
+  location(Obj) = Position
+  pageNo = pageNo + 1
+  pageObj(pageNo) = Obj
+
+  writepdf (Obj & " 0 obj")
+  writepdf ("<<")
+  writepdf ("/Type /Page")
+  writepdf ("/Parent " & Tpages & " 0 R")
+  writepdf ("/Resources " & resources & " 0 R")
+  Obj = Obj + 1
+  writepdf ("/Contents " & Obj & " 0 R")
+  writepdf ("/Rotate " & rotate)
+  writepdf (">>")
+  writepdf ("endobj")
+
+  location(Obj) = Position
+  writepdf (Obj & " 0 obj")
+  writepdf ("<<")
+  writepdf ("/Length " & Obj + 1 & " 0 R")
+  writepdf (">>")
+  writepdf ("stream")
+  strmpos = Position
+  writepdf ("BT")
+  writepdf ("/F1 " & pointSize & " Tf")
+  writepdf ("1 0 0 1 50 " & pageHeight - 40 & " Tm")
+  writepdf (vertSpace & " TL")
+
+  StartPage = strmpos
+  Exit Function
+er:
+  MsgBox Err.Description
+End Function
+
+Function endpage(streamstart As Long) As String
+  Dim streamEnd As Long
+  On Error GoTo er
+  writepdf ("ET")
+  streamEnd = Position
+  writepdf ("endstream")
+  writepdf ("endobj")
+  Obj = Obj + 1
+  location(Obj) = Position
+  writepdf (Obj & " 0 obj")
+  writepdf (streamEnd - streamstart)
+  writepdf "endobj"
+  lineNo = 0
+  Exit Function
+er:
+  MsgBox Err.Description
+End Function
+
+Sub endpdf()
+  Dim ty As String
+  Dim i As Integer
+  Dim xreF As Long
+  
+  On Error GoTo er
+  location(root) = Position
+  writepdf (root & " 0 obj")
+  writepdf ("<<")
+  writepdf ("/Type /Catalog")
+  writepdf ("/Pages " & Tpages & " 0 R")
+  writepdf (">>")
+  writepdf ("endobj")
+  location(Tpages) = Position
+  writepdf (Tpages & " 0 obj")
+  writepdf ("<<")
+  writepdf ("/Type /Pages")
+  writepdf ("/Count " & pageNo)
+  writepdf ("/MediaBox [ 0 0 " & pageWidth & " " & pageHeight & " ]")
+  ty = ("/Kids [ ")
+  For i = 1 To pageNo
+    ty = ty & pageObj(i) & " 0 R "
+  Next i
+  ty = ty & "]"
+  writepdf (ty)
+  writepdf (">>")
+  writepdf ("endobj")
+  xreF = Position
+  writepdf ("0 " & Obj + 1)
+  writepdf ("0000000000 65535 f ")
+  For i = 1 To Obj
+    writepdf (Format(location(i), "0000000000") & " 00000 n ")
+  Next i
+  writepdf ("trailer")
+  writepdf ("<<")
+  writepdf ("/Size " & Obj + 1)
+  writepdf ("/Root " & root & " 0 R")
+  writepdf ("/Info " & info & " 0 R")
+  writepdf (">>")
+  writepdf ("startxref")
+  writepdf (xreF)
+  writepdf "%%EOF", True
+  Exit Sub
+er:
+  MsgBox Err.Description
+End Sub
+
+Public Function ReplaceText(Text As String, TextToReplace As String, NewText As String) As String
+  Dim mtext As String
+  Dim SpacePos As Long
+  mtext = Text
+  SpacePos = InStr(mtext, TextToReplace)
+  Do While SpacePos
+    mtext = Left(mtext, SpacePos - 1) & NewText & Mid(mtext, SpacePos + Len(TextToReplace))
+    SpacePos = InStr(SpacePos + Len(NewText), mtext, TextToReplace)
+  Loop
+  ReplaceText = mtext
+End Function
 Public Sub MyPrintingTXT()
-  Dim fso As Object
-  Dim streamIn As Object
+  Dim fileFile As Integer
   Dim STRBUFFER As String
   Dim cARQOPEN As String
-  
-  cARQOPEN = txtFilename.tEXT
+  cARQOPEN = txtFilename.Text
   If Not FileConnExist(cARQOPEN, True) Then
     Exit Sub
   End If
-  
-  On Error GoTo TrataErro
-
-  ' SUBSTITUIÇÃO DO OPEN: Inicializa o fluxo contínuo via FSO
-  Set fso = CreateObject("Scripting.FileSystemObject")
-  Set streamIn = fso.OpenTextFile(cARQOPEN, 1, False)
-  
-  ' SUBSTITUIÇÃO DO DO WHILE NOT EOF: Loop usando o Stream
-  Do While Not streamIn.AtEndOfStream
-    
-    ' SUBSTITUIÇÃO DO INPUT: Pega a linha a linha na mesma variável STRBUFFER
-    STRBUFFER = streamIn.ReadLine
-    
-    ' MANTIDO EXATAMENTE IGUAL: Envia a linha para a impressão/componente
+  fileFile = FreeFile
+  Open cARQOPEN For Input As #fileFile
+  Do While Not EOF(fileFile)
+    'read line
+    Input #fileFile, STRBUFFER
     Printer.Print STRBUFFER
-    
   Loop
-  
-Fim:
-  ' SUBSTITUIÇÃO DO CLOSE: Fecha o arquivo e limpa a memória de forma segura
-  If Not streamIn Is Nothing Then streamIn.Close
-  Set streamIn = Nothing
-  Set fso = Nothing
-  Exit Sub
-
-TrataErro:
-  MsgBox "Erro na leitura do arquivo para impressão: " & Err.Description, vbCritical
-  Resume Fim
+  Close fileFile
 End Sub
 

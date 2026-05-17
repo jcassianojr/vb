@@ -51,6 +51,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Private m_bPrimeiraCarga As Boolean
 
 Private Sub Encerrar_Click()
  Screen.MousePointer = vbDefault
@@ -63,13 +64,57 @@ End Sub
 '  PDFReader1.FitControl
 'End Sub
  
+ Private Sub Form_Activate()
+    ' Se não for a primeira vez que a tela ganha foco (ex: o usuário minimizou e maximizou),
+    ' ignora para não recarregar o PDF à toa.
+    If Not m_bPrimeiraCarga Then Exit Sub
+    m_bPrimeiraCarga = False
+    
+    On Error GoTo TrataErro
+    
+    ' Dá um pequeno respiro de milissegundos para o Windows estabilizar os ponteiros da DLL
+    DoEvents
+    
+    ' 1. Validação básica de preenchimento do caminho do arquivo
+    If Len(Trim(cARQRTF)) = 0 Then
+        MsgBox "Nenhum arquivo PDF foi especificado para visualização.", vbExclamation, "Aviso"
+        Exit Sub
+    End If
+    
+    ' 2. Verifica se o arquivo gerado pela ClsFPDF está pronto no disco
+    If Dir(cARQRTF) = "" Then
+        MsgBox "O arquivo PDF não foi localizado no caminho:" & vbCrLf & cARQRTF, vbCritical, "Erro de Arquivo"
+        Exit Sub
+    End If
+    
+    ' 3. BLINDAGEM CONTRA ARQUIVOS FALSOS: Testa a assinatura binária do PDF
+    If Not IsValidPDF(cARQRTF) Then
+        MsgBox "O arquivo selecionado não é um documento PDF válido!" & vbCrLf & _
+               "Pode tratar-se de um arquivo de texto (TXT) ou documento (DOC) renomeado indevidamente.", _
+               vbCritical, "Erro de Validação de Formato"
+        Exit Sub
+    End If
+    
+    ' 3. Agora sim, com o componente 100% carregado e ativo, faz o Load seguro
+    Screen.MousePointer = vbHourglass
+    PDFReader1.Load cARQRTF
+    PDFReader1.FitControl
+    Screen.MousePointer = vbDefault
+    
+    Exit Sub
+
+TrataErro:
+    Screen.MousePointer = vbDefault
+    MsgBox "Erro ao carregar o visualizador de PDF: " & Err.Description, vbCritical, "Erro de Inicialização"
+End Sub
    
 Private Sub Form_Load()
   'da erro quando load aqui
   'da erro quando chama command1_click
   'deixando inicialmente para o usuario carregar o pdf
-  PDFReader1.Load cARQRTF
-  PDFReader1.FitControl
+  m_bPrimeiraCarga = True
+  'PDFReader1.Load cARQRTF
+  'PDFReader1.FitControl
 End Sub
 
 'End Sub
@@ -111,12 +156,13 @@ End Sub
 'End Sub
 
 Private Sub Form_Resize()
-
-'    On Error Resume Next
+   On Error Resume Next
    PDFReader1.Height = Me.ScaleHeight
    PDFReader1.Width = Me.ScaleWidth - PDFReader1.Left - 1700 '1700 espacaos dos comandos a direita
 End Sub
-
+Private Sub PDFReader1_PageChanged(PageViewed As Integer)
+    Debug.Print PageViewed
+End Sub
 'Private Sub Option1_Click(Index As Integer)
 '    If Option1(0).Value Then PDFReader1.IsToolbarVisible = True
 '    If Option1(1).Value Then PDFReader1.IsToolbarVisible = False
@@ -125,16 +171,45 @@ End Sub
 '    If Option1(4).Value Then PDFReader1.IsPDFButtonVisible = True
 '    If Option1(5).Value Then PDFReader1.IsPDFButtonVisible = False
 'End Sub
-
-Private Sub PDFReader1_PageChanged(PageViewed As Integer)
-    Debug.Print PageViewed
-End Sub
-
-Private Sub PDFReader1_PDFLoaded(FileName As String, FilePath As String)
-    Debug.Print FileName, FilePath
-    Me.Caption = "PDFReader" & " : " & FileName & " (" & FilePath & ")"
+Private Sub PDFReader1_PDFLoaded(filename As String, FilePath As String)
+    Debug.Print filename, FilePath
+    Me.Caption = "PDFReader" & " : " & filename & " (" & FilePath & ")"
 End Sub
 
 'Private Sub Picture1_Click(Index As Integer)
 '    PDFReader1.BackColor = Picture1(Index).BackColor
 'End Sub
+Public Function IsValidPDF(ByVal strFilePath As String) As Boolean
+    Dim fNum As Integer
+    Dim strHeader As String * 4
+    
+    ' Se o arquivo não existir fisicamente, já aborta
+    If Dir(strFilePath) = "" Then
+        IsValidPDF = False
+        Exit Function
+    End If
+    
+    On Error GoTo Erro
+    
+    ' Abre o arquivo em modo binário puro para leitura rápida
+    fNum = FreeFile
+    Open strFilePath For Binary Access Read As #fNum
+    
+    ' Lê apenas os primeiros 4 bytes do arquivo
+    Get #fNum, 1, strHeader
+    Close #fNum
+    
+    ' Verifica se o cabeçalho começa com a assinatura mundial do PDF: "%PDF"
+    If strHeader = "%PDF" Then
+        IsValidPDF = True
+    Else
+        IsValidPDF = False
+    End If
+    
+    Exit Function
+
+Erro:
+    ' Se der erro ao abrir (arquivo bloqueado, etc), assume falso por segurança
+    If fNum > 0 Then Close #fNum
+    IsValidPDF = False
+End Function

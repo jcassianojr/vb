@@ -193,11 +193,11 @@ Private Sub ForceSystemDecimalToPeriod()
     Const LOCALE_SDECIMAL   As Long = &HE&
     Const LOCALE_SGROUPING  As Long = &H10&
     Const Eng_LCID          As Long = 1033&
-    Dim S                   As String
+    Dim s                   As String
     '
-    S = String$(GetLocaleInfo(Eng_LCID, LOCALE_SDECIMAL, vbNullString, 0&), 0)
-    GetLocaleInfo Eng_LCID, LOCALE_SDECIMAL, S, Len(S)
-    If RTrimNull(S) <> "." Then
+    s = String$(GetLocaleInfo(Eng_LCID, LOCALE_SDECIMAL, vbNullString, 0&), 0)
+    GetLocaleInfo Eng_LCID, LOCALE_SDECIMAL, s, Len(s)
+    If RTrimNull(s) <> "." Then
         SetLocaleInfo Eng_LCID, LOCALE_SDECIMAL, "."
         SetLocaleInfo Eng_LCID, LOCALE_SGROUPING, ","
     End If
@@ -1422,74 +1422,74 @@ Dim osver As clsOSInfo
 
     Set osver = New clsOSInfo
 
-    Dim S As String
+    Dim s As String
     With osver
     
     
       ' S = S & vbCrLf & "IP         : " & .IPAddress
       ' S = S & vbCrLf & "Local      : " & .IPHostName
-        S = "Equipamento: " & .ComputerName
-        S = S & vbCrLf & "Usuario: " & .UserName
-        S = S & vbCrLf & "Grupo do Usuario: " & .UserType
-        S = S & vbCrLf & "Is in Admin group? " & .IsAdminGroup
-        S = S & vbCrLf & "OS Name: " & .OSName
-        S = S & vbCrLf & "Service Pack ver.: " & .SPVer
-        S = S & vbCrLf & "Is Server? " & .IsServer
-        S = S & vbCrLf & "Bitness: " & .Bitness
-        S = S & vbCrLf & "Is Win x64: " & .IsWin64
-        S = S & vbCrLf & "Is Win x32: " & .IsWin32
-        S = S & vbCrLf & "Edition: " & .Edition
-        S = S & vbCrLf & "Suite mask: " & .SuiteMask
-        S = S & vbCrLf & "ProductType: " & .ProductType
-        S = S & vbCrLf & "PlatformID: " & .PlatformID & " (" & .Platform & ")"
-        S = S & vbCrLf & "Is Domain controller: " & .IsDomainController
-        S = S & vbCrLf & "Is Embedded: " & .IsEmbedded
-        S = S & vbCrLf & "Language in dialogues: " & .LangDisplayCode & " " & .LangDisplayName & " " & .LangDisplayNameFull
-        S = S & vbCrLf & "Language of OS inslallation: " & .LangSystemCode & " " & .LangSystemName & " " & .LangSystemNameFull
-        S = S & vbCrLf & "Language for non-Unicode programs: " & .LangNonUnicodeCode & " " & .LangNonUnicodeName & " " & .LangNonUnicodeNameFull
-        S = S & vbCrLf & "ID of default locale: " & .LCID_UserDefault
-        S = S & vbCrLf & "File System Case sensitive? " & .IsFileSystemCaseSensitive
-        S = S & vbCrLf & "OEM Codepage: " & .CodepageOEM & " (" & .CodepageOEM_File & ")"
-        S = S & vbCrLf & "ANSI Codepage: " & .CodepageANSI & " (" & .CodepageANSI_File & ")"
+        s = "Equipamento: " & .ComputerName
+        s = s & vbCrLf & "Usuario: " & .UserName
+        s = s & vbCrLf & "Grupo do Usuario: " & .UserType
+        s = s & vbCrLf & "Is in Admin group? " & .IsAdminGroup
+        s = s & vbCrLf & "OS Name: " & .OSName
+        s = s & vbCrLf & "Service Pack ver.: " & .SPVer
+        s = s & vbCrLf & "Is Server? " & .IsServer
+        s = s & vbCrLf & "Bitness: " & .Bitness
+        s = s & vbCrLf & "Is Win x64: " & .IsWin64
+        s = s & vbCrLf & "Is Win x32: " & .IsWin32
+        s = s & vbCrLf & "Edition: " & .Edition
+        s = s & vbCrLf & "Suite mask: " & .SuiteMask
+        s = s & vbCrLf & "ProductType: " & .ProductType
+        s = s & vbCrLf & "PlatformID: " & .PlatformID & " (" & .Platform & ")"
+        s = s & vbCrLf & "Is Domain controller: " & .IsDomainController
+        s = s & vbCrLf & "Is Embedded: " & .IsEmbedded
+        s = s & vbCrLf & "Language in dialogues: " & .LangDisplayCode & " " & .LangDisplayName & " " & .LangDisplayNameFull
+        s = s & vbCrLf & "Language of OS inslallation: " & .LangSystemCode & " " & .LangSystemName & " " & .LangSystemNameFull
+        s = s & vbCrLf & "Language for non-Unicode programs: " & .LangNonUnicodeCode & " " & .LangNonUnicodeName & " " & .LangNonUnicodeNameFull
+        s = s & vbCrLf & "ID of default locale: " & .LCID_UserDefault
+        s = s & vbCrLf & "File System Case sensitive? " & .IsFileSystemCaseSensitive
+        s = s & vbCrLf & "OEM Codepage: " & .CodepageOEM & " (" & .CodepageOEM_File & ")"
+        s = s & vbCrLf & "ANSI Codepage: " & .CodepageANSI & " (" & .CodepageANSI_File & ")"
 
         
-        S = S & vbCrLf & "Major: " & .Major
-        S = S & vbCrLf & "Minor: " & .Minor
-        S = S & vbCrLf & "Major + Minor:         " & .MajorMinor
-        S = S & vbCrLf & "Major + Minor (NtDll): " & .MajorMinorNTDLL
-        S = S & vbCrLf & "Build: " & .Build
-        S = S & vbCrLf & "NT Dll Major.Minor.Rev: " & .NtDllVersion
-        S = S & vbCrLf & "Revision: " & .Revision
-        S = S & vbCrLf & "ReleaseId: " & .ReleaseId
-        S = S & vbCrLf & "DisplayVersion: " & .DisplayVersion
-        S = S & vbCrLf & "Process integrity level: " & .IntegrityLevel
-        S = S & vbCrLf & "Elevated process? " & .IsElevated
-        S = S & vbCrLf & "Is Local system context? " & .IsLocalSystemContext
-        S = S & vbCrLf & "User sid of current process owner: " & .SID_CurrentProcess
-        S = S & vbCrLf & "Safe boot? " & .IsSafeBoot & " (" & .SafeBootMode & ")"
-        S = S & vbCrLf & "Secure Boot supported? " & .SecureBootSupported & " (Enabled? " & .SecureBoot & ")"
-        S = S & vbCrLf & "TestSigning: " & .TestSigning
-        S = S & vbCrLf & "DebugMode: " & .DebugMode
-        S = S & vbCrLf & "CodeIntegrity: " & .CodeIntegrity
-        S = S & vbCrLf & "Memory MiB (Free/Total): " & .MemoryFree & "/" & .MemoryTotal & " (Loaded: " & .MemoryLoad & "%)"
+        s = s & vbCrLf & "Major: " & .Major
+        s = s & vbCrLf & "Minor: " & .Minor
+        s = s & vbCrLf & "Major + Minor:         " & .MajorMinor
+        s = s & vbCrLf & "Major + Minor (NtDll): " & .MajorMinorNTDLL
+        s = s & vbCrLf & "Build: " & .Build
+        s = s & vbCrLf & "NT Dll Major.Minor.Rev: " & .NtDllVersion
+        s = s & vbCrLf & "Revision: " & .Revision
+        s = s & vbCrLf & "ReleaseId: " & .ReleaseId
+        s = s & vbCrLf & "DisplayVersion: " & .DisplayVersion
+        s = s & vbCrLf & "Process integrity level: " & .IntegrityLevel
+        s = s & vbCrLf & "Elevated process? " & .IsElevated
+        s = s & vbCrLf & "Is Local system context? " & .IsLocalSystemContext
+        s = s & vbCrLf & "User sid of current process owner: " & .SID_CurrentProcess
+        s = s & vbCrLf & "Safe boot? " & .IsSafeBoot & " (" & .SafeBootMode & ")"
+        s = s & vbCrLf & "Secure Boot supported? " & .SecureBootSupported & " (Enabled? " & .SecureBoot & ")"
+        s = s & vbCrLf & "TestSigning: " & .TestSigning
+        s = s & vbCrLf & "DebugMode: " & .DebugMode
+        s = s & vbCrLf & "CodeIntegrity: " & .CodeIntegrity
+        s = s & vbCrLf & "Memory MiB (Free/Total): " & .MemoryFree & "/" & .MemoryTotal & " (Loaded: " & .MemoryLoad & "%)"
         
-              S = S & vbCrLf & "OS - XP/Server 2003(R2)? " & .IsWindowsXP
-        S = S & vbCrLf & "OS - Vista/Server 2008? " & .IsWindowsVista
-        S = S & vbCrLf & "OS - 7/Server 2008R2? " & .IsWindows7
-        S = S & vbCrLf & "OS - 8/Server 2012? " & .IsWindows8
-        S = S & vbCrLf & "OS - 8.1/Server 2012R2? " & .IsWindows8OrGreater
-        S = S & vbCrLf & "OS - 10/Server 2016? " & .IsWindows10
-        S = S & vbCrLf & "OS - XP or newer? " & .IsWindowsXPOrGreater
-        S = S & vbCrLf & "OS - XP SP3 or newer? " & .IsWindowsXP_SP3OrGreater
-        S = S & vbCrLf & "OS - Vista or newer? " & .IsWindowsVistaOrGreater
-        S = S & vbCrLf & "OS - 7 or newer? " & .IsWindows7OrGreater
-        S = S & vbCrLf & "OS - 8 or newer? " & .IsWindows8OrGreater
-        S = S & vbCrLf & "OS - 8.1 or newer? " & .IsWindows8Point1OrGreater
-        S = S & vbCrLf & "OS - 10 or newer? " & .IsWindows10OrGreater
-        S = S & vbCrLf & "OS - 11 or newer? " & .IsWindows11OrGreater
+              s = s & vbCrLf & "OS - XP/Server 2003(R2)? " & .IsWindowsXP
+        s = s & vbCrLf & "OS - Vista/Server 2008? " & .IsWindowsVista
+        s = s & vbCrLf & "OS - 7/Server 2008R2? " & .IsWindows7
+        s = s & vbCrLf & "OS - 8/Server 2012? " & .IsWindows8
+        s = s & vbCrLf & "OS - 8.1/Server 2012R2? " & .IsWindows8OrGreater
+        s = s & vbCrLf & "OS - 10/Server 2016? " & .IsWindows10
+        s = s & vbCrLf & "OS - XP or newer? " & .IsWindowsXPOrGreater
+        s = s & vbCrLf & "OS - XP SP3 or newer? " & .IsWindowsXP_SP3OrGreater
+        s = s & vbCrLf & "OS - Vista or newer? " & .IsWindowsVistaOrGreater
+        s = s & vbCrLf & "OS - 7 or newer? " & .IsWindows7OrGreater
+        s = s & vbCrLf & "OS - 8 or newer? " & .IsWindows8OrGreater
+        s = s & vbCrLf & "OS - 8.1 or newer? " & .IsWindows8Point1OrGreater
+        s = s & vbCrLf & "OS - 10 or newer? " & .IsWindows10OrGreater
+        s = s & vbCrLf & "OS - 11 or newer? " & .IsWindows11OrGreater
   
         'Debug.Print s
-        infosistema = S
+        infosistema = s
     End With
     
 End Function
@@ -2221,7 +2221,7 @@ Public Function StrLogic(ByVal cVAL As String) As Variant
 End Function
 Public Function Count_Lines_In_File(ByVal strFilePath As String, Optional ByVal lMES As Boolean = True) As Long
     Dim fso As Object
-    Dim stream As Object
+    Dim Stream As Object
     
     ' Mantém a sua validação original usando o seu FileConnExist
     If Not FileConnExist(strFilePath, lMES) Then
@@ -2234,19 +2234,19 @@ Public Function Count_Lines_In_File(ByVal strFilePath As String, Optional ByVal 
     Set fso = CreateObject("Scripting.FileSystemObject")
     
     ' Abre o arquivo em modo leitura (1 = ForReading)
-    Set stream = fso.OpenTextFile(strFilePath, 1, False)
+    Set Stream = fso.OpenTextFile(strFilePath, 1, False)
     
     ' TRUQUE DE ALTA PERFORMANCE DO FSO:
     ' Em vez de ler linha por linha em um loop, o .SkipLine pula as linhas na velocidade do Kernel.
     ' .ReadAll joga o ponteiro direto para o fim do arquivo lendo o buffer de uma vez só.
-    stream.ReadAll
+    Stream.ReadAll
     
     ' A propriedade .Line nos dá exatamente o número total de linhas do arquivo
-    Count_Lines_In_File = stream.line
+    Count_Lines_In_File = Stream.Line
     
 Fim:
-    If Not stream Is Nothing Then stream.Close
-    Set stream = Nothing
+    If Not Stream Is Nothing Then Stream.Close
+    Set Stream = Nothing
     Set fso = Nothing
     Exit Function
 
@@ -2415,6 +2415,74 @@ End Function
 Public Sub OpenUrl(ByVal strURL As String)
   ShellExecute 0, "Open", strURL, 0&, 0&, SW_SHOWNORMAL
 End Sub
+
+Public Function txttopdf(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
+    Dim fso As Object
+    Dim streamIn As Object
+    Dim cLINHA As String
+    Dim pdf As ClsFPDF
+    
+    ' Validações estruturais padrões do seu sistema
+    If Not FileConnExist(cORIGEM, True) Then Exit Function
+    If Len(cDESTINO) = 0 Then cDESTINO = TrocaExt(cORIGEM, "PDF")
+    
+    If FileConnExist(cDESTINO, False) Then
+        Alert ("Arquivo Destino Ja existe")
+        Exit Function
+    End If
+    
+    On Error GoTo TrataErro
+    
+    ' 1. Abre o arquivo de texto em modo Fluxo contínuo (Segurança contra arquivos gigantes)
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set streamIn = fso.OpenTextFile(cORIGEM, 1, False)
+    
+    ' 2. Inicializa o motor do FPDF
+    Set pdf = New ClsFPDF
+    pdf.CreatePDF "P", "mm"
+    pdf.AddPage
+    pdf.SetFont "Arial", 10
+    
+    ' 3. Configura a paginação e margens (em milímetros)
+    Dim nMargemEsquerda As Single: nMargemEsquerda = 15
+    Dim nLinhaAtual As Single: nLinhaAtual = 15
+    Dim nAlturaLinha As Single: nAlturaLinha = 5 ' Espaçamento de 5mm entre as linhas
+    Dim nLimiteInferior As Single: nLimiteInferior = 275 ' Altura máxima da folha A4 antes de quebrar a página
+    
+    ' 4. Loop de streaming de performance: lê e grava em tempo real
+    Do While Not streamIn.AtEndOfStream
+        cLINHA = streamIn.ReadLine
+        
+        ' Desenha a linha atual de texto no documento PDF
+        pdf.Cell cLINHA, nMargemEsquerda, nLinhaAtual
+        
+        ' Avança o cursor vertical para a próxima linha
+        nLinhaAtual = nLinhaAtual + nAlturaLinha
+        
+        ' QUEBRA DE PÁGINA AUTOMÁTICA: Se o texto atingir o rodapé da folha, abre uma página nova
+        If nLinhaAtual > nLimiteInferior Then
+            pdf.AddPage
+            pdf.SetFont "Arial", 10 ' Reaplica a fonte na nova página
+            nLinhaAtual = 15        ' Reinicia o cursor no topo da nova folha
+        End If
+    Loop
+    
+    ' 5. Compila e descarrega o arquivo final no disco
+    pdf.Output cDESTINO
+    txttopdf = True
+
+Fim:
+    ' Destrói os ponteiros e liberta totalmente a memória RAM do computador
+    If Not streamIn Is Nothing Then streamIn.Close
+    Set streamIn = Nothing
+    Set fso = Nothing
+    Set pdf = Nothing
+    Exit Function
+
+TrataErro:
+    Alert "Erro na rotina de geração do PDF: " & Err.Description
+    Resume Fim
+End Function
 'Public Function txttohtml_old(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "")
 '  Dim nORIGEM As Integer
 '  Dim nDESTINO As Integer
@@ -2510,10 +2578,10 @@ Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean
   cTEXTO = CharCodesToHTML(cTEXTO)
   str2html = cTEXTO
 End Function
-Function FileText(ByVal FileName As String) As String
+Function FileText(ByVal filename As String) As String
   Dim Handle As Integer
   Handle = FreeFile
-  Open FileName$ For Input As #Handle
+  Open filename$ For Input As #Handle
   FileText = Input$(LOF(Handle), Handle)
   Close #Handle
 End Function
@@ -2739,6 +2807,96 @@ Isvba64 = False
     #If Win64 Then
         Isvba64 = True
     #End If
+End Function
+
+Public Function ConvertTxtToWordHTML(ByVal cORIGEM As String, _
+                                     Optional ByVal cDESTINO As String = "", _
+                                     Optional ByVal cTITULO As String = "", _
+                                     Optional ByVal cAUTOR As String = "") As Boolean
+    Dim fso As Object
+    Dim streamIn As Object
+    Dim streamOut As Object
+    Dim cLINHA As String
+    Dim strOutputFile As String
+    
+    ' 1. Validação inicial: se o arquivo de origem não existir, aborta retornando False
+    If Dir(cORIGEM) = "" Then
+        ConvertTxtToWordHTML = False
+        Exit Function
+    End If
+    
+    ' 2. Regra do Destino: Se não foi passado, gera o .doc baseado no arquivo de origem
+    If Trim(cDESTINO) = "" Then
+        strOutputFile = Replace(LCase(cORIGEM), ".txt", ".doc")
+    Else
+        strOutputFile = cDESTINO
+    End If
+    
+    On Error GoTo TrataErro
+    
+    ' 3. Inicializa o FSO para o processamento em Streaming (Leve e rápido)
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set streamIn = fso.OpenTextFile(cORIGEM, 1, False)
+    Set streamOut = fso.OpenTextFile(strOutputFile, 2, True)
+    
+    ' 4. Escreve o cabeçalho HTML com suporte a metadados de Título e Autor para o Word
+    streamOut.WriteLine "<html>"
+    streamOut.WriteLine "<head>"
+    streamOut.WriteLine "<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"">"
+    
+    ' Injeta o Autor e Título se eles tiverem sido informados por parâmetro
+    If Trim(cAUTOR) <> "" Then
+        streamOut.WriteLine "<meta name=""author"" content=""" & cAUTOR & """>"
+    End If
+    If Trim(cTITULO) <> "" Then
+        streamOut.WriteLine "<title>" & cTITULO & "</title>"
+    End If
+    
+    ' Estilização CSS para o Word manter as fontes monoespaçadas e respeitar os espaços em branco do TXT
+    streamOut.WriteLine "<style>"
+    streamOut.WriteLine "body { font-family: 'Courier New', Courier, monospace; font-size: 10pt; line-height: 1.2; }"
+    streamOut.WriteLine "p { margin: 0; padding: 0; white-space: pre; }"
+    streamOut.WriteLine "</style>"
+    streamOut.WriteLine "</head>"
+    streamOut.WriteLine "<body>"
+    
+    ' 5. Loop de Leitura/Escrita linha por linha
+    Do While Not streamIn.AtEndOfStream
+        cLINHA = streamIn.ReadLine
+        
+        ' Escapa caracteres que podem quebrar a sintaxe do HTML
+        cLINHA = Replace(cLINHA, "&", "&amp;")
+        cLINHA = Replace(cLINHA, "<", "&lt;")
+        cLINHA = Replace(cLINHA, ">", "&gt;")
+        
+        ' Se for linha vazia, adiciona o espaço fixo para o Word não "engolir" a linha
+        If Len(Trim(cLINHA)) = 0 Then
+            streamOut.WriteLine "<p>&nbsp;</p>"
+        Else
+            streamOut.WriteLine "<p>" & cLINHA & "</p>"
+        End If
+    Loop
+    
+    ' 6. Fecha as tags do documento
+    streamOut.WriteLine "</body>"
+    streamOut.WriteLine "</html>"
+    
+    ' Se chegou até aqui sem erros, operação concluída com sucesso!
+    ConvertTxtToWordHTML = True
+
+Fim:
+    ' Liberação e fechamento seguro de canais de memória
+    If Not streamIn Is Nothing Then streamIn.Close
+    If Not streamOut Is Nothing Then streamOut.Close
+    Set streamIn = Nothing
+    Set streamOut = Nothing
+    Set fso = Nothing
+    Exit Function
+
+TrataErro:
+    ' Em caso de qualquer falha (permissão de escrita, arquivo travado), retorna False
+    ConvertTxtToWordHTML = False
+    Resume Fim
 End Function
 Public Function txttortf(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
     Dim fso As Object
