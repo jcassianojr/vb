@@ -2220,37 +2220,72 @@ Public Function StrLogic(ByVal cVAL As String) As Variant
     End Select
 End Function
 Public Function Count_Lines_In_File(ByVal strFilePath As String, Optional ByVal lMES As Boolean = True) As Long
+    Dim fso As Object
+    Dim stream As Object
+    
+    ' Mantém a sua validação original usando o seu FileConnExist
+    If Not FileConnExist(strFilePath, lMES) Then
+        Count_Lines_In_File = -1
+        Exit Function
+    End If
+    
+    On Error GoTo TrataErro
+    
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' Abre o arquivo em modo leitura (1 = ForReading)
+    Set stream = fso.OpenTextFile(strFilePath, 1, False)
+    
+    ' TRUQUE DE ALTA PERFORMANCE DO FSO:
+    ' Em vez de ler linha por linha em um loop, o .SkipLine pula as linhas na velocidade do Kernel.
+    ' .ReadAll joga o ponteiro direto para o fim do arquivo lendo o buffer de uma vez só.
+    stream.ReadAll
+    
+    ' A propriedade .Line nos dá exatamente o número total de linhas do arquivo
+    Count_Lines_In_File = stream.line
+    
+Fim:
+    If Not stream Is Nothing Then stream.Close
+    Set stream = Nothing
+    Set fso = Nothing
+    Exit Function
+
+TrataErro:
+    Count_Lines_In_File = 0
+    Resume Fim
+End Function
+'Public Function Count_Lines_In_File_old(ByVal strFilePath As String, Optional ByVal lMES As Boolean = True) As Long
 
 '     'delcare variables
-  Dim fileFile As Integer
-  Dim intLinesReadCount As Integer
-  Dim STRBUFFER As String
+'  Dim fileFile As Integer
+'  Dim intLinesReadCount As Integer
+'  Dim STRBUFFER As String
 
-  intLinesReadCount = 0
+'  intLinesReadCount = 0
   '     'open file
-  fileFile = FreeFile
+'  fileFile = FreeFile
 
 
-  If Not FileConnExist(strFilePath, lMES) Then
-    Count_Lines_In_File = -1
-    Exit Function
-  End If
+ ' If Not FileConnExist(strFilePath, lMES) Then
+ '   Count_Lines_In_File = -1
+ '   Exit Function
+ ' End If
 
   'loop through file
-  Open strFilePath For Input As #fileFile
+  'Open strFilePath For Input As #fileFile
 
 
-  Do While Not EOF(fileFile)
+  'Do While Not EOF(fileFile)
     'read line
-    Input #fileFile, STRBUFFER
+   ' Input #fileFile, STRBUFFER
     'update count
-    intLinesReadCount = intLinesReadCount + 1
-  Loop
+    'intLinesReadCount = intLinesReadCount + 1
+  'Loop
   'close file
-  Close fileFile
+  'Close fileFile
   'return value
-  Count_Lines_In_File = intLinesReadCount
-End Function
+  'Count_Lines_In_File = intLinesReadCount
+'End Function
 ' +--------------------------------------------------------------------
 ' +  Função: Count_Lines_In_File
 ' +  Objetivo: Conta linhas em arquivos Gigantescos usando a técnica do
@@ -2267,7 +2302,7 @@ Public Function Count_Lines_In_Filev2(ByVal cCaminhoArquivo As String) As Long
     Dim abBuffer() As Byte
     
     Dim i As Long
-    Dim nLinhas As Long
+    Dim nLINHAS As Long
     Dim nRestante As Long
     Dim nBytesLidos As Long
     Dim nPonteiroAtual As Long
@@ -2292,7 +2327,7 @@ Public Function Count_Lines_In_Filev2(ByVal cCaminhoArquivo As String) As Long
     nFile = FreeFile
     Open cCaminhoArquivo For Binary Access Read As #nFile
     
-    nLinhas = 0
+    nLINHAS = 0
     nPonteiroAtual = 1 ' No VB6, o Seek do modo Binary começa em 1
     
     Do While nPonteiroAtual <= nTamArquivo
@@ -2338,18 +2373,18 @@ Public Function Count_Lines_In_Filev2(ByVal cCaminhoArquivo As String) As Long
         ' Varre o bloco ajustado (Sem risco de pegar caractere partido)
         For i = 0 To nBytesLidos - 1
             If abBuffer(i) = 13 Then
-                nLinhas = nLinhas + 1
+                nLINHAS = nLINHAS + 1
             ElseIf abBuffer(i) = 10 Then
                 ' Se o anterior imediato foi 13, faz parte do par. Não conta.
                 ' Caso contrário, é uma quebra pura Unix (10), conta nova linha.
                 If i > 0 Then
                     If abBuffer(i - 1) <> 13 Then
-                        nLinhas = nLinhas + 1
+                        nLINHAS = nLINHAS + 1
                     End If
                 Else
                     ' Se for o primeiro byte do bloco e for 10, como o bloco elástico
                     ' evitou deixar o 13 no bloco anterior, este 10 é uma linha pura Unix.
-                    nLinhas = nLinhas + 1
+                    nLINHAS = nLINHAS + 1
                 End If
             End If
         Next i
@@ -2362,15 +2397,15 @@ Public Function Count_Lines_In_Filev2(ByVal cCaminhoArquivo As String) As Long
     nFile = 0
     
     ' Ajuste final da última linha (Caso o arquivo não termine com quebra)
-    If nLinhas > 0 Then
+    If nLINHAS > 0 Then
         If bUltimoByteArquivo <> 10 And bUltimoByteArquivo <> 13 Then
-            nLinhas = nLinhas + 1
+            nLINHAS = nLINHAS + 1
         End If
     Else
-        If nTamArquivo > 0 Then nLinhas = 1
+        If nTamArquivo > 0 Then nLINHAS = 1
     End If
     
-    Count_Lines_In_Filev2 = nLinhas
+    Count_Lines_In_Filev2 = nLINHAS
     Exit Function
 
 TrataErro:
@@ -2380,80 +2415,80 @@ End Function
 Public Sub OpenUrl(ByVal strURL As String)
   ShellExecute 0, "Open", strURL, 0&, 0&, SW_SHOWNORMAL
 End Sub
-Public Function txttohtml(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "")
-  Dim nORIGEM As Integer
-  Dim nDESTINO As Integer
-  Dim STRBUFFER
-  Dim cLINHA As String
-  If Not FileConnExist(cORIGEM, True) Then
-    Exit Function
-  End If
-  If Len(cDESTINO) = 0 Then
-    cDESTINO = TrocaExt(cORIGEM, "HTML")
-  End If
-  If FileConnExist(cDESTINO, False) Then
-    Alert ("Arquivo Destino Ja existe")
-    Exit Function
-  End If
-  If Len(cAUTOR) = 0 Then
-    cAUTOR = zNOMEFOLHA
-  End If
-  If Len(cTITULO) = 0 Then
-    cTITULO = NomeArq(cORIGEM, True)
-  End If
-  nORIGEM = FreeFile
-  nDESTINO = FreeFile + 1
-  Open cDESTINO For Output As #nDESTINO
-  Open cORIGEM For Input As #nORIGEM
-  Print #nDESTINO, "<html>" & Chr(13) & Chr(10)
-  Print #nDESTINO, "<head>" & Chr(13) & Chr(10)
-  Print #nDESTINO, "<meta http-equiv=" & Chr(34) & "Content-Type" & Chr(34) & Chr(13) & Chr(10)
-  Print #nDESTINO, "content=" & Chr(34) & "text/html; charset=iso-8859-1" & Chr(34) & ">" & Chr(13) & Chr(10)
-  Print #nDESTINO, "<meta name=" & Chr(34) & "GENERATOR" & Chr(34) & "content=" & Chr(34) & cAUTOR & Chr(34) & ">" & Chr(13) & Chr(10)
-  Print #nDESTINO, "<title>" & cTITULO & "</title>" & Chr(13) & Chr(10)
-  Print #nDESTINO, "</head>" & Chr(13) & Chr(10)
-  Print #nDESTINO, "<body>" & Chr(13) & Chr(10)
-  Do While Not EOF(nORIGEM)
-    Input #nORIGEM, STRBUFFER
-    cLINHA = STRBUFFER
-    cLINHA = str2html(cLINHA)
-    Print #nDESTINO, cLINHA & "<BR>"
-  Loop
-  Print #nDESTINO, "</body>" & Chr(13) & Chr(10) & "</html>" & Chr(13) & Chr(10)
-  Close nORIGEM
-  Close nDESTINO
-End Function
+'Public Function txttohtml_old(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "")
+'  Dim nORIGEM As Integer
+'  Dim nDESTINO As Integer
+'  Dim STRBUFFER
+'  Dim cLINHA As String
+'  If Not FileConnExist(cORIGEM, True) Then
+'    Exit Function
+'  End If
+'  If Len(cDESTINO) = 0 Then
+'    cDESTINO = TrocaExt(cORIGEM, "HTML")
+'  End If
+'  If FileConnExist(cDESTINO, False) Then
+'    Alert ("Arquivo Destino Ja existe")
+'    Exit Function
+'  End If
+'  If Len(cAUTOR) = 0 Then
+'    cAUTOR = zNOMEFOLHA
+'  End If
+'  If Len(cTITULO) = 0 Then
+'    cTITULO = NomeArq(cORIGEM, True)
+'  End If
+'  nORIGEM = FreeFile
+'  nDESTINO = FreeFile + 1
+'  Open cDESTINO For Output As #nDESTINO
+'  Open cORIGEM For Input As #nORIGEM
+'  Print #nDESTINO, "<html>" & Chr(13) & Chr(10)
+'  Print #nDESTINO, "<head>" & Chr(13) & Chr(10)
+'  Print #nDESTINO, "<meta http-equiv=" & Chr(34) & "Content-Type" & Chr(34) & Chr(13) & Chr(10)
+'  Print #nDESTINO, "content=" & Chr(34) & "text/html; charset=iso-8859-1" & Chr(34) & ">" & Chr(13) & Chr(10)
+'  Print #nDESTINO, "<meta name=" & Chr(34) & "GENERATOR" & Chr(34) & "content=" & Chr(34) & cAUTOR & Chr(34) & ">" & Chr(13) & Chr(10)
+'  Print #nDESTINO, "<title>" & cTITULO & "</title>" & Chr(13) & Chr(10)
+'  Print #nDESTINO, "</head>" & Chr(13) & Chr(10)
+'  Print #nDESTINO, "<body>" & Chr(13) & Chr(10)
+'  Do While Not EOF(nORIGEM)
+'    Input #nORIGEM, STRBUFFER
+'    cLINHA = STRBUFFER
+'    cLINHA = str2html(cLINHA)
+'    Print #nDESTINO, cLINHA & "<BR>"
+'  Loop
+'  Print #nDESTINO, "</body>" & Chr(13) & Chr(10) & "</html>" & Chr(13) & Chr(10)
+'  Close nORIGEM
+'  Close nDESTINO
+'End Function
 
-Public Function txttoRTF(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "")
-  Dim nORIGEM As Integer
-  Dim nDESTINO As Integer
-  Dim STRBUFFER
-  Dim cLINHA As String
-  If Not FileConnExist(cORIGEM, True) Then
-    Exit Function
-  End If
-  If Len(cDESTINO) = 0 Then
-    cDESTINO = TrocaExt(cORIGEM, "RTF")
-  End If
-  If FileConnExist(cDESTINO, False) Then
-    Alert ("Arquivo Destino Ja existe")
-    Exit Function
-  End If
-  nORIGEM = FreeFile
-  nDESTINO = FreeFile + 1
-  Open cDESTINO For Output As #nDESTINO
-  Open cORIGEM For Input As #nORIGEM
-  Print #nDESTINO, "{\rtf1\ansi\ansicpg1252\deff0\deflang1031{\fonttbl{\f0\fnil\fcharset0 "
-  Print #nDESTINO, "Arial;}}\viewkind4\uc1\pard\f0\fs20 "
-  Do While Not EOF(nORIGEM)
-    Input #nORIGEM, STRBUFFER
-    cLINHA = STRBUFFER
-    Print #nDESTINO, cLINHA & "\par" & Chr(13)
-  Loop
-  Print #nDESTINO, "\par}"
-  Close nORIGEM
-  Close nDESTINO
-End Function
+'Public Function txttoRTF_old(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "")
+'  Dim nORIGEM As Integer
+'  Dim nDESTINO As Integer
+'  Dim STRBUFFER
+'  Dim cLINHA As String
+'  If Not FileConnExist(cORIGEM, True) Then
+'    Exit Function
+'  End If
+'  If Len(cDESTINO) = 0 Then
+'    cDESTINO = TrocaExt(cORIGEM, "RTF")
+'  End If
+'  If FileConnExist(cDESTINO, False) Then
+'    Alert ("Arquivo Destino Ja existe")
+'    Exit Function
+'  End If
+'  nORIGEM = FreeFile
+'  nDESTINO = FreeFile + 1
+'  Open cDESTINO For Output As #nDESTINO
+'  Open cORIGEM For Input As #nORIGEM
+'  Print #nDESTINO, "{\rtf1\ansi\ansicpg1252\deff0\deflang1031{\fonttbl{\f0\fnil\fcharset0 "
+'  Print #nDESTINO, "Arial;}}\viewkind4\uc1\pard\f0\fs20 "
+'  Do While Not EOF(nORIGEM)
+'    Input #nORIGEM, STRBUFFER
+'    cLINHA = STRBUFFER
+'    Print #nDESTINO, cLINHA & "\par" & Chr(13)
+'  Loop
+'  Print #nDESTINO, "\par}"
+'  Close nORIGEM
+'  Close nDESTINO
+'End Function
 Public Function CharCodesToHTML(ByVal iString As String) As String
   Dim iXml As New MSXML2.DOMDocument60
 
@@ -2704,4 +2739,153 @@ Isvba64 = False
     #If Win64 Then
         Isvba64 = True
     #End If
+End Function
+Public Function txttortf(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
+    Dim fso As Object
+    Dim streamIn As Object
+    Dim streamOut As Object
+    Dim cLINHA As String
+    Dim cBlocoInfo As String
+    
+    ' Mantém a sua validação original usando FileConnExist
+    If Not FileConnExist(cORIGEM, True) Then Exit Function
+    
+    ' Mantém a sua lógica original para caminhos e extensões padrões
+    If Len(cDESTINO) = 0 Then cDESTINO = TrocaExt(cORIGEM, "RTF")
+    
+    ' Impede a sobreescrita acidental conforme o seu padrão
+    If FileConnExist(cDESTINO, False) Then
+        Alert ("Arquivo Destino Ja existe")
+        Exit Function
+    End If
+    
+    ' Mantém os valores padrões vindos do seu sistema, idêntico à sua txttohtml
+    If Len(cAUTOR) = 0 Then cAUTOR = zNOMEFOLHA
+    If Len(cTITULO) = 0 Then cTITULO = NomeArq(cORIGEM, True)
+    
+    On Error GoTo TrataErro
+    
+    ' Inicializa o FileSystemObject para leitura e gravação em fluxo (streaming)
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' Abre o arquivo de origem para leitura (1 = ForReading)
+    Set streamIn = fso.OpenTextFile(cORIGEM, 1, False)
+    ' Cria o arquivo de destino para escrita (True = Sobreescrever)
+    Set streamOut = fso.CreateTextFile(cDESTINO, True)
+    
+    ' --- CONSTRUÇÃO DOS METADADOS (BLOCO INFO) ---
+    ' Monta a tag {\info} se houver título ou autor preenchidos
+    cBlocoInfo = ""
+    If Len(cTITULO) > 0 Or Len(cAUTOR) > 0 Then
+        cBlocoInfo = "{\info"
+        If Len(cTITULO) > 0 Then cBlocoInfo = cBlocoInfo & "{\title " & cTITULO & "}"
+        If Len(cAUTOR) > 0 Then cBlocoInfo = cBlocoInfo & "{\author " & cAUTOR & "}"
+        cBlocoInfo = cBlocoInfo & "}"
+    End If
+    
+    ' Escreve o cabeçalho de inicialização do formato RTF juntamente com os metadados
+    streamOut.Write "{\rtf1\ansi\ansicpg1252\deff0\deflang1031" & cBlocoInfo & "{\fonttbl{\f0\fnil\fcharset0 Arial;}}\viewkind4\uc1\pard\f0\fs20 "
+    
+    ' Loop de streaming otimizado por linha para arquivos gigantes
+    Do While Not streamIn.AtEndOfStream
+        cLINHA = streamIn.ReadLine
+        
+        ' Proteção para que caracteres de controle do RTF presentes no texto original não corrompam o arquivo
+        If InStr(cLINHA, "\") > 0 Then cLINHA = Replace(cLINHA, "\", "\\")
+        If InStr(cLINHA, "{") > 0 Then cLINHA = Replace(cLINHA, "{", "\{")
+        If InStr(cLINHA, "}") > 0 Then cLINHA = Replace(cLINHA, "}", "\}")
+        
+        ' Grava no arquivo adicionando o controle de fim de parágrafo (\par) do RTF
+        streamOut.Write cLINHA & "\par " & vbCrLf
+    Loop
+    
+    ' Escreve a tag de encerramento do documento RTF
+    streamOut.Write "\par}"
+    
+    txttortf = True
+
+Fim:
+    ' Garante a desconexão dos arquivos e liberação completa dos objetos de streaming da memória
+    If Not streamIn Is Nothing Then streamIn.Close
+    If Not streamOut Is Nothing Then streamOut.Close
+    Set streamIn = Nothing
+    Set streamOut = Nothing
+    Set fso = Nothing
+    Exit Function
+
+TrataErro:
+    Alert "Erro na gravação/leitura do arquivo RTF: " & Err.Description
+    Resume Fim
+End Function
+Public Function txttohtml(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
+    Dim fso As Object
+    Dim streamIn As Object
+    Dim streamOut As Object
+    Dim cLINHA As String
+    
+    ' Mantém a sua validação original usando FileConnExist
+    If Not FileConnExist(cORIGEM, True) Then Exit Function
+    
+    ' Mantém a sua lógica original para caminhos e extensões padrões
+    If Len(cDESTINO) = 0 Then cDESTINO = TrocaExt(cORIGEM, "HTML")
+    
+    ' Impede a sobreescrita acidental conforme seu código original
+    If FileConnExist(cDESTINO, False) Then
+        Alert ("Arquivo Destino Ja existe")
+        Exit Function
+    End If
+    
+    ' Mantém os valores padrões vindos das suas variáveis globais e funções de string
+    If Len(cAUTOR) = 0 Then cAUTOR = zNOMEFOLHA
+    If Len(cTITULO) = 0 Then cTITULO = NomeArq(cORIGEM, True)
+    
+    On Error GoTo TrataErro
+    
+    ' Inicializa o FileSystemObject para ler e gravar em fluxo de buffer
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' Abre o arquivo de origem para leitura (1 = ForReading)
+    Set streamIn = fso.OpenTextFile(cORIGEM, 1, False)
+    ' Cria o arquivo de destino para escrita (True = Sobreescrever)
+    Set streamOut = fso.CreateTextFile(cDESTINO, True)
+    
+    ' Escreve exatamente a mesma estrutura de cabeçalho que o seu Print original fazia
+    streamOut.Write "<html>" & vbCrLf
+    streamOut.Write "<head>" & vbCrLf
+    streamOut.Write "<meta http-equiv=" & Chr(34) & "Content-Type" & Chr(34) & vbCrLf
+    streamOut.Write "content=" & Chr(34) & "text/html; charset=iso-8859-1" & Chr(34) & ">" & vbCrLf
+    streamOut.Write "<meta name=" & Chr(34) & "GENERATOR" & Chr(34) & "content=" & Chr(34) & cAUTOR & Chr(34) & ">" & vbCrLf
+    streamOut.Write "<title>" & cTITULO & "</title>" & vbCrLf
+    streamOut.Write "</head>" & vbCrLf
+    streamOut.Write "<body>" & vbCrLf
+    
+    ' Loop de streaming otimizado linha por linha para arquivos gigantes
+    Do While Not streamIn.AtEndOfStream
+        cLINHA = streamIn.ReadLine
+        
+        ' AQUI: Aplica a função original str2html para tratar acentos e caracteres especiais
+        cLINHA = str2html(cLINHA)
+        
+        ' Joga no arquivo destino adicionando a quebra de linha do HTML
+        streamOut.Write cLINHA & "<br>" & vbCrLf
+    Loop
+    
+    ' Fecha a estrutura do documento exatamente como o seu original
+    streamOut.Write "</body>" & vbCrLf
+    streamOut.Write "</html>" & vbCrLf
+    
+    txttohtml = True
+
+Fim:
+    ' Garante o fechamento correto dos arquivos e liberação da RAM
+    If Not streamIn Is Nothing Then streamIn.Close
+    If Not streamOut Is Nothing Then streamOut.Close
+    Set streamIn = Nothing
+    Set streamOut = Nothing
+    Set fso = Nothing
+    Exit Function
+
+TrataErro:
+    Alert "Erro na gravação/leitura do arquivo: " & Err.Description
+    Resume Fim
 End Function
