@@ -161,12 +161,6 @@ Private Function GerarSqlIndicesTabela(ByRef tdf As DAO.TableDef) As String
     GerarSqlIndicesTabela = sSql
 End Function
 
-' ===========================================================================
-' Módulo: modMigracaoAccess
-' Finalidade: Comparar estrutura entre MDB e ACCDB e gerar script de correção
-' Desenvolvido para: VB6 (Visual Basic 6.0)
-' ===========================================================================
-
 Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As String, ByVal sPathSQL As String, ByVal bExecutarAoFinal As Boolean)
     Dim dbOrigem As DAO.Database
     Dim dbDestino As DAO.Database
@@ -176,8 +170,8 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
     Dim idx As DAO.Index
     Dim fFile As Integer
     Dim fso As Object
- 
     Dim iContagemIndices As Integer
+    
     Set fso = CreateObject("Scripting.FileSystemObject")
     iContagemIndices = 0
     
@@ -193,7 +187,7 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
         If resp = vbYes Then
             If Not CriarBancoAcessoEmBranco(sPathACCDB) Then Exit Sub
         Else
-            Exit Sub ' Usuário cancelou [cite: 4]
+            Exit Sub
         End If
     End If
     
@@ -204,45 +198,62 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
     fFile = FreeFile
     Open sPathSQL For Output As #fFile
     
-    Print #fFile, "-- ======================================================"
-    Print #fFile, "-- SCRIPT DE CORREÇÃO DE ESTRUTURA (MDB -> ACCDB)"
-    Print #fFile, "-- Gerado em: " & Now
-    Print #fFile, "-- ======================================================";
-    Print #fFile, ""
+    ' Nota: Removidos cabeçalhos de comentários antigos para evitar falhas no interpretador SQL
 
     For Each tdfOrigem In dbOrigem.TableDefs
         ' Ignora tabelas ocultas do sistema Access
         If Left(tdfOrigem.Name, 4) <> "MSys" Then
         
-            ' RESET DO CONTADOR PARA CADA TABELA
             iContagemIndices = 0
-            
-            Debug.Print "Analisando tabela: " & tdfOrigem.Name;
+            Debug.Print "Analisando tabela: " & tdfOrigem.Name
             
             On Error Resume Next
             Set tdfDestino = dbDestino.TableDefs(tdfOrigem.Name)
      
             If Err.Number <> 0 Then
-                ' Se a tabela nem existir no destino
-                Print #fFile, "-- ATENÇÃO: Tabela [" & tdfOrigem.Name & "] não encontrada no destino.";
+                ' ==============================================================================
+                ' CENÁRIO: A tabela não existe no destino. Criamos a tabela e os índices.
+                ' ==============================================================================
                 Err.Clear
                 
                 Dim sSqlCreate As String
                 sSqlCreate = GerarSqlCriacaoTabela(tdfOrigem)
     
-                Print #fFile, "-- Criando tabela inexistente: " & tdfOrigem.Name;
-                Print #fFile, sSqlCreate;
+                ' Grava estritamente a instrução SQL de criação com ponto e vírgula no arquivo
+                Print #fFile, sSqlCreate & ";"
+                
+                ' Gera e grava os índices da nova tabela no arquivo (instruções puras)
+                Dim sSqlIndicesNovos As String
+                sSqlIndicesNovos = GerarSqlIndicesTabela(tdfOrigem)
+                If sSqlIndicesNovos <> "" Then
+                    Print #fFile, sSqlIndicesNovos
+                End If
+                
+                ' Executa a criação IMEDIATA no banco para que as próximas checagens funcionem
+                If bExecutarAoFinal Then
+                    On Error Resume Next
+                    dbDestino.Execute sSqlCreate, dbFailOnError
+                    
+                    ' Aplica os índices da nova tabela imediatamente no banco de dados
+                    If sSqlIndicesNovos <> "" Then
+                        Dim arrCmd() As String
+                        Dim vCmd As Variant
+                        arrCmd = Split(sSqlIndicesNovos, vbCrLf)
+                        For Each vCmd In arrCmd
+                            If Trim(vCmd) <> "" Then dbDestino.Execute vCmd, dbFailOnError
+                        Next vCmd
+                    End If
+                    On Error GoTo Err_Handle
+                End If
+                ' ==============================================================================
                 
             Else
-                ' --- 1. VERIFICAÇÃO DE CAMPOS ---
+                ' --- 1. VERIFICAÇÃO DE CAMPOS INEXISTENTES OU DIFERENTES ---
                 For Each fld In tdfOrigem.Fields
-            
                     Dim fldDest As DAO.Field
-                    Dim sDefault As String
                     Dim sDefaultOrigem As String
-                    sDefault = ""
-                    Set fldDest = tdfDestino.Fields(fld.Name)
                     
+                    Set fldDest = tdfDestino.Fields(fld.Name)
                     sDefaultOrigem = fld.DefaultValue
                     
                     If Err.Number <> 0 Then
@@ -250,32 +261,30 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
                         Err.Clear
                         Dim sSqlAdd As String
                         sSqlAdd = "ALTER TABLE [" & tdfOrigem.Name & "] ADD COLUMN [" & fld.Name & "] " & GetSQLType(fld)
-                        
+                  
                         If sDefaultOrigem <> "" Then
                             sSqlAdd = sSqlAdd & " DEFAULT " & sDefaultOrigem
                         End If
-                        
-                        Print #fFile, sSqlAdd & ";";
+     
+                        Print #fFile, sSqlAdd & ";"
                     Else
                         ' CENÁRIO B: O campo existe, mas vamos comparar o DefaultValue
                         If sDefaultOrigem <> fldDest.DefaultValue Then
-                            ' Nota: No Access SQL, usamos SET DEFAULT
-                            Print #fFile, "ALTER TABLE [" & tdfOrigem.Name & "] ALTER COLUMN [" & fld.Name & "] SET DEFAULT " & IIf(sDefaultOrigem = "", "NULL", sDefaultOrigem) & ";";
+                            Print #fFile, "ALTER TABLE [" & tdfOrigem.Name & "] ALTER COLUMN [" & fld.Name & "] SET DEFAULT " & IIf(sDefaultOrigem = "", "NULL", sDefaultOrigem) & ";"
                         End If
                     End If
                 Next fld
                 
-                ' --- 2. VERIFICAÇÃO DE ÍNDICES (CORRIGIDA) ---
+                ' --- 2. VERIFICAÇÃO DE ÍNDICES FALTANTES ---
                 Dim idxDest As DAO.Index
                 For Each idx In tdfOrigem.Indexes
-                    ' Força o reset do mecanismo de erro do VB6 a cada iteração do loop
                     On Error Resume Next
                     
                     iContagemIndices = iContagemIndices + 1
                     Set idxDest = tdfDestino.Indexes(idx.Name)
                     
                     If Err.Number <> 0 Then
-                        ' Índice não existe: Gera comando de criação
+                        ' Índice não existe no destino: Gera comando de criação puro
                         Dim sCampos As String
                         Dim fldIdx As DAO.Field
                         
@@ -288,42 +297,35 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
                             sCampos = Left(sCampos, Len(sCampos) - 2)
                             
                             If idx.Primary Then
-                                ' Se for Chave Primária
-                                Print #fFile, "ALTER TABLE [" & tdfOrigem.Name & "] ADD CONSTRAINT [" & idx.Name & "] PRIMARY KEY (" & sCampos & ");";
+                                Print #fFile, "ALTER TABLE [" & tdfOrigem.Name & "] ADD CONSTRAINT [" & idx.Name & "] PRIMARY KEY (" & sCampos & ");"
                             Else
-                                ' Índice Comum ou Unique
                                 Dim sUnique As String
                                 sUnique = IIf(idx.Unique, "UNIQUE ", "")
-                                Print #fFile, "CREATE " & sUnique & "INDEX [" & idx.Name & "] ON [" & tdfOrigem.Name & "] (" & sCampos & ");";
+                                Print #fFile, "CREATE " & sUnique & "INDEX [" & idx.Name & "] ON [" & tdfOrigem.Name & "] (" & sCampos & ");"
                             End If
                         End If
                         Err.Clear
                     End If
                 Next idx
-                
-                ' Verifica se a contagem é zero antes de passar para a próxima tabela
-                If iContagemIndices = 0 Then
-                    Print #fFile, "-- OBSERVAÇÃO: A tabela [" & tdfOrigem.Name & "] não possui índices definidos na origem.";
-                End If
             End If
             On Error GoTo Err_Handle
         End If
     Next tdfOrigem
 
-    Print #fFile, "";
-    Print #fFile, "-- Fim do Script";
     Close #fFile
     
-    ' 1. EXECUTA AS MUDANÇAS NO DESTINO PRIMEIRO (Se selecionado)
+    ' Força o sistema operacional a salvar e fechar o arquivo fisicamente antes da leitura
+    DoEvents
+    
+    ' 1. EXECUTA AS MUDANÇAS NO DESTINO VIA SCRIPT (Lendo o arquivo limpo)
     If bExecutarAoFinal Then
         Call ExecutarArquivoSQL(sPathSQL, dbDestino)
     End If
  
-    ' 2. AGORA QUE O DESTINO JÁ INCORPOROU AS MUDANÇAS, GERA OS SCRIPTS INTEGRAIS
+    ' 2. GERA OS SCRIPTS INTEGRAIS ATUALIZADOS
     Dim sPathSQLOrigem As String
     Dim sPathSQLDestino As String
     
-    ''wrpt_correcao.sql -13 digitos retirar a palavra correcao e a extensao
     sPathSQLOrigem = Left(sPathSQL, Len(sPathSQL) - 13) & "__MDB.sql"
     sPathSQLDestino = Left(sPathSQL, Len(sPathSQL) - 13) & "_ACCDB.sql"
     
@@ -331,10 +333,10 @@ Public Sub GerarScriptCorrecao(ByVal sPathMDB As String, ByVal sPathACCDB As Str
     Call ExportarEstruturaCompleta(dbDestino, sPathSQLDestino, "DESTINO (ACCDB)")
       
     ' 3. MENSAGEM FINAL E LIMPEZA
-    MsgBox "Processo concluído!" & vbCrLf & _
+    MsgBox "Processo concluído com sucesso!" & vbCrLf & _
            "Script Diferencial: " & sPathSQL & vbCrLf & _
            "Script Total MDB: " & sPathSQLOrigem & vbCrLf & _
-           "Script Total ACCDB (Atualizado): " & sPathSQLDestino, vbInformation, "Migração Access"
+           "Script Total ACCDB: " & sPathSQLDestino, vbInformation, "Migração Access"
     
     If Not dbOrigem Is Nothing Then dbOrigem.Close
     If Not dbDestino Is Nothing Then dbDestino.Close
@@ -349,7 +351,6 @@ Err_Handle:
     MsgBox "Erro: " & Err.Number & " - " & Err.Description, vbCritical, "Erro de Processamento"
     If fFile > 0 Then Close #fFile
 End Sub
-
 ' ===========================================================================
 ' Nova Rotina Pública: Exporta a estrutura completa de um banco para SQL DDL
 ' ===========================================================================
