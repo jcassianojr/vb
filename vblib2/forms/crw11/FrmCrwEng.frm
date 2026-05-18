@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form FrmCrwENG 
    Caption         =   "Crystal Report Relatorio"
    ClientHeight    =   5955
@@ -512,9 +512,9 @@ Const nFORMID = 1069
 Const cFORMID = "Imprimir Relatorios Crystal-Engine 10"
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If FileConnExist(cARQRTF, True) Then
-    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hWnd))
+    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
   End If
 
 End Sub
@@ -524,7 +524,7 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.Text, "RTF") Or IsExtensao(TxtArquivo.Text, "TXT") Then
+  If IsExtensao(TxtArquivo.tEXT, "RTF") Or IsExtensao(TxtArquivo.tEXT, "TXT") Then
     cARQRTF = TxtArquivo
     FrmRtfView.Show
   End If
@@ -573,7 +573,7 @@ Private Sub CmdFiltro_Click()
     FrmFiltro.Show vbModal, Me
     FILTRO = eRETU01
   End If
-  cFILTRO = CStr(FILTRO.Text)
+  cFILTRO = CStr(FILTRO.tEXT)
 
   If Len(cFILTRO) > 0 Then
     CrystalReport.RecordSelectionFormula = cFILTRO
@@ -615,7 +615,7 @@ Private Sub CmdMudaFec_Click()
 End Sub
 
 Private Sub CmdPreview_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -624,9 +624,9 @@ Private Sub CmdPreview_Click()
     PrintPreview1.ShowPreview
   End If
   If IsExtensao(cARQRTF, "PDF") Then
-    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
+    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
   End If
-  If IsExtensao(TxtArquivo.Text, "HTML") Then
+  If IsExtensao(TxtArquivo.tEXT, "HTML") Then
      ePASS01 = Array("Navegador Externo", "Preview Interno", "Navegador Interno")
     escOrdem.Show vbModal, Me
     eRETU01 = FixInt(eRETU01, 0)
@@ -644,7 +644,7 @@ Private Sub CmdPreview_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  '/ rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.Text = ""
+    RichTextBox1.tEXT = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -697,7 +697,7 @@ End Sub
 Private Sub CmdShell_Click()
   Dim cARQSHELL As String
   cARQSHELL = FixStr(TxtArquivo)
-  ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
+  ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
 End Sub
 
 Private Sub CmdVisua_Click()
@@ -737,7 +737,7 @@ Private Sub Form_Load()
     TxtComp.Visible = True
     CmdMudaFec.Visible = True
     CmdMudaFec.Enabled = True
-    TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
+    TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
   End If
 
   If Len(aRELCFG(6)) = 0 Then
@@ -845,7 +845,9 @@ Private Sub Salvar_Click(Index As Integer)
   On Error GoTo Error
   Dim cARQUIVO As String
   Dim cEXTENSAO As String
-  Dim sFILTER As String
+  Dim sFilter As String
+  Dim nPosPonto As Long
+  
   If CmdEmail.Value = 1 Then
     CrystalExportOptions.DestinationType = crEDTEMailMAPI
     CrystalExportOptions.MailMessage = FixStr(TxtTexto)
@@ -873,18 +875,20 @@ Private Sub Salvar_Click(Index As Integer)
 
   End Select
 
+' 3. Abre a janela para salvar o arquivo através da sua mFileAPI
+    sFilter = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
+    cARQUIVO = FileSave(Me, sFilter, 1, cEXTENSAO, "", App.Path, "Salvar " & cEXTENSAO & " Como")
 
+    ' [BLINDAGEM] Se o usuário cancelou a janela de salvamento, aborta silenciosamente
+    If Len(Trim(cARQUIVO)) = 0 Then Exit Sub
 
-  sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-  cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
-
-
-
-  If InStr(cARQUIVO, ".") Then
-    cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO
-  Else
-    cARQUIVO = cARQUIVO & cEXTENSAO
-  End If
+    ' [BLINDAGEM] Ajuste cirúrgico de extensão (Ignora pontos em nomes de pastas)
+    nPosPonto = InStrRev(cARQUIVO, ".")
+    If nPosPonto > 0 And nPosPonto > InStrRev(cARQUIVO, "\") Then
+        cARQUIVO = Left(cARQUIVO, nPosPonto - 1) + "." & cEXTENSAO
+    Else
+        cARQUIVO = cARQUIVO & "." & cEXTENSAO
+    End If
 
   If Len(cARQUIVO) > 0 Then
     CrystalExportOptions.DiskFileName = cARQUIVO

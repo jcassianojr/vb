@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
+Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "CRYSTL32.OCX"
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form FrmCrw 
    Caption         =   "Crystal Report Relatorio"
    ClientHeight    =   6000
@@ -538,9 +538,9 @@ Const cFORMID = "Imprimir Relatorios Crystal-OCX"
 Option Explicit
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If FileConnExist(cARQRTF, True) Then
-    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hWnd))
+    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
   End If
 End Sub
 
@@ -549,7 +549,7 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.Text, "RTF") Or IsExtensao(TxtArquivo.Text, "TXT") Then
+  If IsExtensao(TxtArquivo.tEXT, "RTF") Or IsExtensao(TxtArquivo.tEXT, "TXT") Then
     cARQRTF = TxtArquivo
     FrmRtfView.Show
   End If
@@ -591,9 +591,9 @@ Private Sub CmdFiltro_Click()
   If aRELCFG(11) Then
     ePASS01 = "CRYSTAL"
     FrmFiltro.Show vbModal, Me
-    filtro = eRETU01
+    FILTRO = eRETU01
   End If
-  cFILTRO = CStr(filtro.Text)
+  cFILTRO = CStr(FILTRO.tEXT)
 
   If Len(cFILTRO) > 0 Then
     RPT.ReplaceSelectionFormula (cFILTRO)
@@ -622,7 +622,7 @@ Dim nARQUIVOS As Integer
 Dim x As Integer
 
   Mana5Fec
-  TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
+  TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
   With RPT
     nARQUIVOS = UBound(aARQUIVOS)
     For x = 0 To nARQUIVOS
@@ -638,7 +638,7 @@ Dim x As Integer
 End Sub
 
 Private Sub CmdPreview_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -647,7 +647,7 @@ Private Sub CmdPreview_Click()
     PrintPreview1.ShowPreview
   End If
   If IsExtensao(cARQRTF, "PDF") Then
-    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
+    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
   End If
   If IsExtensao(cARQRTF, "HTML") Then
     ePASS01 = Array("Navegador Externo", "Preview Interno", "Navegador Interno")
@@ -664,11 +664,11 @@ Private Sub CmdPreview_Click()
     End Select
   End If
   If IsExtensao(cARQRTF, "RTF") Then
-    cARQRTF = TxtArquivo.Text
+    cARQRTF = TxtArquivo.tEXT
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.Text = ""
+    RichTextBox1.tEXT = ""
   End If
 End Sub
 Public Sub MyPrintinghtml()
@@ -722,15 +722,15 @@ End Sub
 Private Sub CmdShell_Click()
   Dim cARQSHELL As String
   cARQSHELL = FixStr(TxtArquivo)
-  ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
+  ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
 End Sub
 
 Private Sub CmdVisua_Click()
-  On Error GoTo erro
+  On Error GoTo Erro
   RPT.Destination = crptToWindow
   RPT.PrintReport
   Exit Sub
-erro:
+Erro:
   SayErro
 End Sub
 
@@ -768,7 +768,7 @@ Private Sub Form_Load()
     TxtComp.Visible = True
     CmdMudaFec.Visible = True
     CmdMudaFec.Enabled = True
-    TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
+    TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
   End If
 
   If Len(aRELCFG(6)) = 0 Then
@@ -783,10 +783,10 @@ Private Sub Form_Load()
   If Not aDIREITOS(6) Then cmdimp.Visible = False
   If Not aDIREITOS(6) Then CmdConfImp.Visible = False
   If Not aDIREITOS(5) Then CmdVisua.Visible = False
-  If Not aDIREITOS(7) Then Salvar(2).Visible = False
-  If Not aDIREITOS(7) Then Salvar(3).Visible = False
-  If Not aDIREITOS(7) Then Salvar(0).Visible = False
-  If Not aDIREITOS(7) Then Salvar(1).Visible = False
+  If Not aDIREITOS(7) Then salvar(2).Visible = False
+  If Not aDIREITOS(7) Then salvar(3).Visible = False
+  If Not aDIREITOS(7) Then salvar(0).Visible = False
+  If Not aDIREITOS(7) Then salvar(1).Visible = False
   If Not aDIREITOS(7) Then CmdExport.Visible = False
 
   If Not aDIREITOS(7) Then CmdEmail1.Visible = False
@@ -805,7 +805,7 @@ Private Sub Form_Load()
   CmdEmail_Click
 
   If Not aRELCFG(11) Then CmdFiltro.Visible = False
-  If Not aRELCFG(11) Then filtro.Visible = False
+  If Not aRELCFG(11) Then FILTRO.Visible = False
 
 
 
@@ -839,7 +839,7 @@ Private Sub Form_Load()
   aRELCFG(14) = FixStr(aRELCFG(14))
   If Len(aRELCFG(14)) > 0 Then
     cFILTRO = aRELCFG(14)
-    filtro = cFILTRO
+    FILTRO = cFILTRO
 
     RPT.ReplaceSelectionFormula (cFILTRO)
   Else
@@ -862,7 +862,7 @@ End Sub
 Private Sub Salvar_Click(Index As Integer)
   Dim cARQUIVO As String
   Dim cEXTENSAO As String
-  Dim sFILTER As String
+  Dim sFilter As String
 
   If CmdEmail.Value = 1 Then
     RPT.Destination = crptMapi
@@ -902,14 +902,22 @@ Private Sub Salvar_Click(Index As Integer)
     cEXTENSAO = "XLS"
   End Select
 
-  sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-  cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
+' ... [Mantém o seu Select Case Index original que define cEXTENSAO e RPT.PrintFileType] ...
 
+  sFilter = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
+  cARQUIVO = FileSave(Me, sFilter, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
 
-  If InStr(cARQUIVO, ".") > 0 Then
-    cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO
+  ' [CORREÇÃO 1] Se o usuário clicou em Cancelar na janela, aborta silenciosamente sem gerar erro
+  If Len(Trim(cARQUIVO)) = 0 Then Exit Sub
+
+  ' [CORREÇÃO 2] Procura o ponto de trás para frente para não quebrar pastas com ponto (Ex: C:\Empresa.S.A\)
+  Dim nPosPonto As Long
+  nPosPonto = InStrRev(cARQUIVO, ".")
+  
+  If nPosPonto > 0 And nPosPonto > InStrRev(cARQUIVO, "\") Then
+    cARQUIVO = Left(cARQUIVO, nPosPonto - 1) + "." & cEXTENSAO
   Else
-    cARQUIVO = cARQUIVO & cEXTENSAO
+    cARQUIVO = cARQUIVO & "." & cEXTENSAO
   End If
 
   If Len(cARQUIVO) > 0 Then

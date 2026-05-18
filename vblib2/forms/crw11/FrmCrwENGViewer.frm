@@ -54,47 +54,140 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+' Declaração dos objetos no escopo global do Form para que fiquem acessíveis
+' caso você crie botões de exportação customizados posteriormente.
+Private MyApp As CRAXDRT.Application
+Private MyRpt As CRAXDRT.Report
+
 Private Sub Form_Load()
-  Dim MyApp As New CRAXDRT.Application
-  Dim MyRpt As New CRAXDRT.Report
- ' Dim CRViewer1 As New CrystalActiveXReportViewerLib11_5Ctl.CrystalActiveXReportViewer
-  
-  'Center Me
-  Me.Height = Screen.Height - 1200
-  Me.Width = Screen.Width - 1200
-  Me.Top = 100
-  Me.Left = 100
-  
+    On Error GoTo ErroLoad11
+    
+    ' ==========================================================================
+    ' 1. DIMENSIONAMENTO E POSICIONAMENTO DA TELA
+    ' ==========================================================================
+    Me.Height = Screen.Height - 1200
+    Me.Width = Screen.Width - 1200
+    Me.Top = 100
+    Me.Left = 100
+    
+    ' ==========================================================================
+    ' 2. INICIALIZAÇÃO DA ENGINE DO CRYSTAL 11.5 (RDC)
+    ' ==========================================================================
+    ' Instancia o aplicativo do Crystal em tempo de execução
+    Set MyApp = New CRAXDRT.Application
+    
+    ' Abre o arquivo .rpt contido na sua variável global de transporte (cARQRTF)
+    ' O parâmetro 1 indica abertura normal de leitura
+    Set MyRpt = MyApp.OpenReport(cARQRTF, 1)
+    
+    ' ==========================================================================
+    ' PASSO A: APLICA O FILTRO (SELECTION FORMULA) -> PRIMEIRO!
+    ' ==========================================================================
+    If Len(Trim(cFILTRO)) > 0 Then
+        MyRpt.RecordSelectionFormula = cFILTRO
+    End If
+    
+  ' --------------------------------------------------------------------------
+    ' [NOVA LOGICA CRYSTAL 11]: SUBSTITUIÇÃO DE ARQUIVOS LOCAIS (.MDB, .DBF, ETC)
+    ' --------------------------------------------------------------------------
+    Dim nARQUIVOS As Long
+    Dim x         As Long
+    Dim oTable    As CRAXDRT.DatabaseTable
+    
+    nARQUIVOS = UBound(aARQUIVOS)
+    
+    ' Loop pelos arquivos passados pelo seu sistema
+    For x = 0 To nARQUIVOS
+        If Len(aARQUIVOS(x)) > 0 Then
+            ' [BLINDAGEM] Mantém a sua checagem de existência original
+            If Not FileConnExist(aARQUIVOS(x)) Then
+                Alert "Arquivo nao Encontrado: " + aARQUIVOS(x)
+                Exit Sub
+            End If
+            
+            ' No Crystal 11, nós precisamos mapear o índice (x) para a tabela correspondente do RPT.
+            ' Adicionamos + 1 porque a coleção de tabelas do Crystal inicia em 1 (base 1)
+            If (x + 1) <= MyRpt.Database.Tables.Count Then
+                Set oTable = MyRpt.Database.Tables(x + 1)
+                
+                ' Atualiza a propriedade Location com o novo caminho físico do banco/tabela
+                oTable.location = aARQUIVOS(x)
+            End If
+        End If
+    Next x
+    
+    
+    ' Associa o relatório processado como a fonte oficial do visualizador de tela
+    CRViewer1.ReportSource = MyRpt
 
-  Set MyRpt = MyApp.OpenReport(cARQRTF, 1)
-  CRViewer1.ReportSource = MyRpt
+    ' ==========================================================================
+    ' 3. AJUSTE DE REDIMENSIONAMENTO DO COMPONENTE EM TELA
+    ' ==========================================================================
+    CRViewer1.Top = 0
+    CRViewer1.Left = 0
+    CRViewer1.Width = ScaleWidth
+    CRViewer1.Height = ScaleHeight
+    
+    ' ==========================================================================
+    ' 4. CONTROLE SEGURO DA BARRA DE FERRAMENTAS (DIREITOS E CONFIGURAÇÕES)
+    ' ==========================================================================
+    With CRViewer1
+        ' --- Recursos Fixos Operacionais (Sempre Ativos) ---
+        .DisplayToolbar = -1                ' True (Exibe a barra superior)
+        .EnableStopButton = -1              ' True (Permite parar carregamento travado)
+        .EnableNavigationControls = -1      ' True (Setas de avançar/voltar página)
+        .EnableZoomControl = -1             ' True (Controle de zoom da folha)
+        .EnableRefreshButton = -1           ' True (Botão de recarregar dados)
+        .EnablePopupMenu = -1               ' True (Menu de clique direito sobre as células)
+        .LaunchHTTPHyperlinksInNewBrowser = -1 ' True (Links web abrem fora do sistema)
+        .EnableLogonPrompts = -1            ' True (Permite tela de login caso o banco exija)
+        .EnableInteractiveParameterPrompting = 0 ' False (Evita pedir parâmetros repetidos se já enviados)
+        
+        ' --- Segurança de Direitos por Usuário (aDIREITOS) ---
+        ' Índice 6 controla se o operador pode imprimir relatórios no sistema
+        .EnablePrintButton = aDIREITOS(6)
+        
+        ' Índice 7 controla se o operador pode exportar para PDF/Excel/Word
+        .EnableExportButton = aDIREITOS(7)
+        
+        ' --- Configurações Específicas do Layout do Relatório (aRELCFG) ---
+        ' Índice 4 define se exibe a árvore de navegação lateral (Group Tree)
+        .EnableGroupTree = aRELCFG(4)
+        .DisplayGroupTree = aRELCFG(4)
+        
+        ' Índice 5 define se ativa o botão de busca interna (Binóculo / Search Expert)
+        .EnableSearchExpertButton = aRELCFG(5)
+        
+        ' Desativa recursos irrelevantes para o seu fluxo atual (Evita poluição visual)
+        .EnableHelpButton = 0               ' False
+    End With
+    
+    ' ==========================================================================
+    ' 5. DISPARO FINAL DE RENDERIZAÇÃO
+    ' ==========================================================================
+    ' Dá a ordem para o componente processar e desenhar as páginas na tela do usuário
+    CRViewer1.ViewReport
+    
+    Exit Sub
 
-
-  CRViewer1.Top = 0
-  CRViewer1.Left = 0
-  CRViewer1.Height = ScaleHeight - 200
-  CRViewer1.Width = ScaleWidth - 200
-  CRViewer1.Visible = True
-
-  CRViewer1.EnablePrintButton = aDIREITOS(6)
-  CRViewer1.EnableGroupTree = aRELCFG(4)
-  CRViewer1.EnableSearchControl = aRELCFG(5)
-  CRViewer1.EnableExportButton = aDIREITOS(7)
-
-  CRViewer1.ViewReport
-  
-  
-
-
+ErroLoad11:
+    MsgBox "Falha crítica ao inicializar visualizador Crystal XI: " & Err.Description, vbCritical, "Erro de Inicialização"
 End Sub
 
 Private Sub Form_Resize()
-  CRViewer1.Top = 0
-
-  CRViewer1.Left = 0
-
-  CRViewer1.Height = ScaleHeight
-
-  CRViewer1.Width = ScaleWidth
+    ' Bloco de segurança para que o componente acompanhe o redimensionamento
+    ' da janela caso o usuário maximize ou arraste as bordas do formulário
+    On Error Resume Next
+    CRViewer1.Width = ScaleWidth
+    CRViewer1.Height = ScaleHeight
 End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+    ' Limpeza estrita da memória ao fechar a tela para evitar travar processos
+    ' do Crystal Reports em background no Gerenciador de Tarefas do Windows
+    On Error Resume Next
+    Set MyRpt = Nothing
+    Set MyApp = Nothing
+End Sub
+
 
