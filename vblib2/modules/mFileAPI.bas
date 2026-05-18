@@ -94,7 +94,7 @@ Public Type OPENFILENAME
   nStructSize As Long
   hWndOwner As Long
   hInstance As Long
-  sFILTER As String
+  SFILTER As String
   sCustomFilter As String
   nMaxCustFilter As Long
   nFilterIndex As Long
@@ -375,7 +375,7 @@ Public Function FileOpen(frmOwner As Form, _
   With OFN
     .nStructSize = Len(OFN)
     .hWndOwner = CLng(frmOwner.hwnd)
-    .sFILTER = sFilters & vbNullChar & vbNullChar
+    .SFILTER = sFilters & vbNullChar & vbNullChar
     .nFilterIndex = nFilterIndex
     .sFile = sDefaultFileName & Space$(1024) & vbNullChar & vbNullChar
     .nMaxFile = Len(.sFile)
@@ -407,7 +407,7 @@ Public Function FileSave(frmOwner As Form, _
 
     .nStructSize = Len(OFN)
     .hWndOwner = CLng(frmOwner.hwnd)
-    .sFILTER = sFilters & vbNullChar & vbNullChar
+    .SFILTER = sFilters & vbNullChar & vbNullChar
     .nFilterIndex = nFilterIndex
     .sFile = sDefaultFileName & Space$(1024) & _
              vbNullChar & vbNullChar
@@ -432,15 +432,15 @@ Function OpenArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
   Dim sFileName As String
   Dim sPath As String
   Dim sRECENTFILE As String
-  Dim sFILTER As String
+  Dim SFILTER As String
   OpenArqExt = ""
   If Len(cARQ) > 0 Then
     sRECENTFILE = cARQ
   Else
     sPath = App.Path
   End If
-  sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
-  sFileName = FileOpen(oFORM, sFILTER, 1, sRECENTFILE, cEXT, sPath, "Escolher " & cTITULO)
+  SFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
+  sFileName = FileOpen(oFORM, SFILTER, 1, sRECENTFILE, cEXT, sPath, "Escolher " & cTITULO)
   If Len(sFileName) = 0 Then
     lRETU = False
     Exit Function
@@ -453,15 +453,15 @@ Function SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
   Dim sFileName As String
   Dim sPath As String
   Dim sRECENTFILE As String
-  Dim sFILTER As String
+  Dim SFILTER As String
   SaveArqExt = ""
   If Len(cARQ) > 0 Then
     sRECENTFILE = cARQ
   Else
     sPath = App.Path
   End If
-  sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
-  sFileName = FileSave(oFORM, sFILTER, 1, cEXT, "Novo", sPath, cTITULO)
+  SFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
+  sFileName = FileSave(oFORM, SFILTER, 1, cEXT, "Novo", sPath, cTITULO)
   If Len(sFileName) = 0 Then
     lRETU = False
     Exit Function
@@ -471,44 +471,44 @@ Function SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
 End Function
 
 Public Function ImgFILTER() As String
-  Dim sFILTER As String
-  sFILTER = "Windows ou OS/2 Bitmap File (*.BMP)" & vbNullChar & "*.BMP" & vbNullChar
-  sFILTER = sFILTER & "Independent JPEG Group (*.JPG, *.JIF, *.JPEG, *.JPE)" & vbNullChar & "*.JPG;*.JIF;*.JPEG;*.JPE" & vbNullChar
-  sFILTER = sFILTER & "Portable Network Graphics (*.PNG)" & vbNullChar & "*.PNG" & vbNullChar
-  sFILTER = sFILTER & "Tagged Imag (*.TIF, *.TIFF)" & vbNullChar & "*.TIF;*.TIFF" & vbNullChar
-  sFILTER = sFILTER & "Zsoft Paintbrush PCX bitmap format (*.PCX)" & vbNullChar & "*.PCX" & vbNullChar
-  sFILTER = sFILTER & "Windows Icon (*.ICO)" & vbNullChar & "*.ICO" & vbNullChar
-  sFILTER = sFILTER & "Graphics Interchange Format (*.GIF)" & vbNullChar & "*.GIF" & vbNullChar
-  sFILTER = sFILTER & "Adobe Photoshop (*.PSD)" & vbNullChar & "*.PSD" & vbNullChar
-  sFILTER = sFILTER & "Dr. Halo (*.CUT)" & vbNullChar & "*.CUT" & vbNullChar
-  sFILTER = sFILTER & "DirectDraw Surface (*.DDS)" & vbNullChar & "*.DDS" & vbNullChar
-  sFILTER = sFILTER & "High Dynamic Range (*.HDR)" & vbNullChar & "*.HDR" & vbNullChar
-  sFILTER = sFILTER & "Amiga IFF (*.IFF, *.LBM)" & vbNullChar & "*.IFF;*.LBM" & vbNullChar
-  sFILTER = sFILTER & "JPEG Network Graphics (*.JNG)" & vbNullChar & "*.JPG" & vbNullChar
-  sFILTER = sFILTER & "Commodore 64 Koala format (*.KOA)" & vbNullChar & "*.KOA" & vbNullChar
-  sFILTER = sFILTER & "Multiple Network Graphics (*.MNG)" & vbNullChar & "*.MNG" & vbNullChar
-  sFILTER = sFILTER & "Portable Bitmap (ASCII) (*.PBM)" & vbNullChar & "*.PBM" & vbNullChar
-  sFILTER = sFILTER & "Portable Bitmap (BINARY) (*.PBM)" & vbNullChar & "*.OBM" & vbNullChar
-  sFILTER = sFILTER & "Kodak PhotoCD (*.PCD)" & vbNullChar & "*.PCD" & vbNullChar
-  sFILTER = sFILTER & "Portable Graymap (ASCII) (*.PGM)" & vbNullChar & "*.PGM" & vbNullChar
-  sFILTER = sFILTER & "Portable Graymap (BINARY) (*.PGM)" & vbNullChar & "*.PGM" & vbNullChar
-  sFILTER = sFILTER & "Portable Pixelmap (ASCII) (*.PPM)" & vbNullChar & "*.PPM" & vbNullChar
-  sFILTER = sFILTER & "Portable Pixelmap (BINARY) (*.PPM)" & vbNullChar & "*.PPM" & vbNullChar
-  sFILTER = sFILTER & "Sun Rasterfile (*.RAS)" & vbNullChar & "*.RAS" & vbNullChar
-  sFILTER = sFILTER & "Truevision Targa files (*.TGA, *.TARGA)" & vbNullChar & "*.TGA" & vbNullChar
-  sFILTER = sFILTER & "Wireless Bitmap (*.WBMP)" & vbNullChar & "*.WBMP" & vbNullChar
-  sFILTER = sFILTER & "X11 Bitmap Format (*.XBM)" & vbNullChar & "*.XBM" & vbNullChar
-  sFILTER = sFILTER & "X11 Pixmap Format (*.XPM)" & vbNullChar & "*.XPM" & vbNullChar
-  sFILTER = sFILTER & "All Files" & vbNullChar & "*.*"
-  ImgFILTER = sFILTER
+  Dim SFILTER As String
+  SFILTER = "Windows ou OS/2 Bitmap File (*.BMP)" & vbNullChar & "*.BMP" & vbNullChar
+  SFILTER = SFILTER & "Independent JPEG Group (*.JPG, *.JIF, *.JPEG, *.JPE)" & vbNullChar & "*.JPG;*.JIF;*.JPEG;*.JPE" & vbNullChar
+  SFILTER = SFILTER & "Portable Network Graphics (*.PNG)" & vbNullChar & "*.PNG" & vbNullChar
+  SFILTER = SFILTER & "Tagged Imag (*.TIF, *.TIFF)" & vbNullChar & "*.TIF;*.TIFF" & vbNullChar
+  SFILTER = SFILTER & "Zsoft Paintbrush PCX bitmap format (*.PCX)" & vbNullChar & "*.PCX" & vbNullChar
+  SFILTER = SFILTER & "Windows Icon (*.ICO)" & vbNullChar & "*.ICO" & vbNullChar
+  SFILTER = SFILTER & "Graphics Interchange Format (*.GIF)" & vbNullChar & "*.GIF" & vbNullChar
+  SFILTER = SFILTER & "Adobe Photoshop (*.PSD)" & vbNullChar & "*.PSD" & vbNullChar
+  SFILTER = SFILTER & "Dr. Halo (*.CUT)" & vbNullChar & "*.CUT" & vbNullChar
+  SFILTER = SFILTER & "DirectDraw Surface (*.DDS)" & vbNullChar & "*.DDS" & vbNullChar
+  SFILTER = SFILTER & "High Dynamic Range (*.HDR)" & vbNullChar & "*.HDR" & vbNullChar
+  SFILTER = SFILTER & "Amiga IFF (*.IFF, *.LBM)" & vbNullChar & "*.IFF;*.LBM" & vbNullChar
+  SFILTER = SFILTER & "JPEG Network Graphics (*.JNG)" & vbNullChar & "*.JPG" & vbNullChar
+  SFILTER = SFILTER & "Commodore 64 Koala format (*.KOA)" & vbNullChar & "*.KOA" & vbNullChar
+  SFILTER = SFILTER & "Multiple Network Graphics (*.MNG)" & vbNullChar & "*.MNG" & vbNullChar
+  SFILTER = SFILTER & "Portable Bitmap (ASCII) (*.PBM)" & vbNullChar & "*.PBM" & vbNullChar
+  SFILTER = SFILTER & "Portable Bitmap (BINARY) (*.PBM)" & vbNullChar & "*.OBM" & vbNullChar
+  SFILTER = SFILTER & "Kodak PhotoCD (*.PCD)" & vbNullChar & "*.PCD" & vbNullChar
+  SFILTER = SFILTER & "Portable Graymap (ASCII) (*.PGM)" & vbNullChar & "*.PGM" & vbNullChar
+  SFILTER = SFILTER & "Portable Graymap (BINARY) (*.PGM)" & vbNullChar & "*.PGM" & vbNullChar
+  SFILTER = SFILTER & "Portable Pixelmap (ASCII) (*.PPM)" & vbNullChar & "*.PPM" & vbNullChar
+  SFILTER = SFILTER & "Portable Pixelmap (BINARY) (*.PPM)" & vbNullChar & "*.PPM" & vbNullChar
+  SFILTER = SFILTER & "Sun Rasterfile (*.RAS)" & vbNullChar & "*.RAS" & vbNullChar
+  SFILTER = SFILTER & "Truevision Targa files (*.TGA, *.TARGA)" & vbNullChar & "*.TGA" & vbNullChar
+  SFILTER = SFILTER & "Wireless Bitmap (*.WBMP)" & vbNullChar & "*.WBMP" & vbNullChar
+  SFILTER = SFILTER & "X11 Bitmap Format (*.XBM)" & vbNullChar & "*.XBM" & vbNullChar
+  SFILTER = SFILTER & "X11 Pixmap Format (*.XPM)" & vbNullChar & "*.XPM" & vbNullChar
+  SFILTER = SFILTER & "All Files" & vbNullChar & "*.*"
+  ImgFILTER = SFILTER
 End Function
 
 Public Function ImgFILTER2() As String
-  Dim sFILTER As String
-  sFILTER = "Independent JPEG Group (*.JPG, *.JIF, *.JPEG, *.JPE)" & vbNullChar & "*.JPG;*.JIF;*.JPEG;*.JPE" & vbNullChar
-  sFILTER = sFILTER & "Portable Network Graphics (*.PNG)" & vbNullChar & "*.PNG" & vbNullChar
-  sFILTER = sFILTER & "GIF (*.GIF)" & vbNullChar & "*.GIF" & vbNullChar
-  ImgFILTER2 = sFILTER
+  Dim SFILTER As String
+  SFILTER = "Independent JPEG Group (*.JPG, *.JIF, *.JPEG, *.JPE)" & vbNullChar & "*.JPG;*.JIF;*.JPEG;*.JPE" & vbNullChar
+  SFILTER = SFILTER & "Portable Network Graphics (*.PNG)" & vbNullChar & "*.PNG" & vbNullChar
+  SFILTER = SFILTER & "GIF (*.GIF)" & vbNullChar & "*.GIF" & vbNullChar
+  ImgFILTER2 = SFILTER
 End Function
 
 Public Function parsefile(ByVal archivo As String, ByVal parte As String) As String
@@ -640,18 +640,18 @@ Public Function ShortSpec(ByVal sFileSpec As String) As String
   End If
 End Function
 Public Function FolderExists(sDir As String) As Boolean
-  Dim S As String
-  S = sDir
-  If Right$(S, 1) = "\" Then S = Left$(S, Len(S) - 1)
+  Dim s As String
+  s = sDir
+  If Right$(s, 1) = "\" Then s = Left$(s, Len(s) - 1)
   On Error GoTo FileExistsError
   ' If no error then something existed.
-  FolderExists = ((GetAttr(S) And vbDirectory) = vbDirectory)
+  FolderExists = ((GetAttr(s) And vbDirectory) = vbDirectory)
   Exit Function
 FileExistsError:
   FolderExists = False
   Exit Function
 End Function
-Public Function OpenStreamFile(FileName$, Mode%, RLock%, RecordLen%) As Integer
+Public Function OpenStreamFile(filename$, Mode%, RLock%, RecordLen%) As Integer
   Const REPLACEFILE = 1, READAFILE = 2, ADDTOFILE = 3
   Const RANDOMFILE = 4, BINARYFILE = 5
   Const NOLOCK = 0, RDLOCK = 1, WRLOCK = 2, RWLOCK = 3
@@ -663,57 +663,57 @@ Public Function OpenStreamFile(FileName$, Mode%, RLock%, RecordLen%) As Integer
   Case REPLACEFILE
     Select Case RLock%
     Case NOLOCK
-      Open FileName For Output Shared As FileNum%
+      Open filename For Output Shared As FileNum%
     Case RDLOCK
-      Open FileName For Output Lock Read As FileNum%
+      Open filename For Output Lock Read As FileNum%
     Case WRLOCK
-      Open FileName For Output Lock Write As FileNum%
+      Open filename For Output Lock Write As FileNum%
     Case RWLOCK
-      Open FileName For Output Lock Read Write As FileNum%
+      Open filename For Output Lock Read Write As FileNum%
     End Select
   Case READAFILE
     Select Case RLock%
     Case NOLOCK
-      Open FileName For Input Shared As FileNum%
+      Open filename For Input Shared As FileNum%
     Case RDLOCK
-      Open FileName For Input Lock Read As FileNum%
+      Open filename For Input Lock Read As FileNum%
     Case WRLOCK
-      Open FileName For Input Lock Write As FileNum%
+      Open filename For Input Lock Write As FileNum%
     Case RWLOCK
-      Open FileName For Input Lock Read Write As FileNum%
+      Open filename For Input Lock Read Write As FileNum%
     End Select
   Case ADDTOFILE
     Select Case RLock%
     Case NOLOCK
-      Open FileName For Append Shared As FileNum%
+      Open filename For Append Shared As FileNum%
     Case RDLOCK
-      Open FileName For Append Lock Read As FileNum%
+      Open filename For Append Lock Read As FileNum%
     Case WRLOCK
-      Open FileName For Append Lock Write As FileNum%
+      Open filename For Append Lock Write As FileNum%
     Case RWLOCK
-      Open FileName For Append Lock Read Write As FileNum%
+      Open filename For Append Lock Read Write As FileNum%
     End Select
   Case RANDOMFILE
     Select Case RLock%
     Case NOLOCK
-      Open FileName For Random Shared As FileNum% Len = RecordLen%
+      Open filename For Random Shared As FileNum% Len = RecordLen%
     Case RDLOCK
-      Open FileName For Random Lock Read As FileNum% Len = RecordLen%
+      Open filename For Random Lock Read As FileNum% Len = RecordLen%
     Case WRLOCK
-      Open FileName For Random Lock Write As FileNum% Len = RecordLen%
+      Open filename For Random Lock Write As FileNum% Len = RecordLen%
     Case RWLOCK
-      Open FileName For Random Lock Read Write As FileNum% Len = RecordLen%
+      Open filename For Random Lock Read Write As FileNum% Len = RecordLen%
     End Select
   Case BINARYFILE
     Select Case RLock%
     Case NOLOCK
-      Open FileName For Binary Shared As FileNum%
+      Open filename For Binary Shared As FileNum%
     Case RDLOCK
-      Open FileName For Binary Lock Read As FileNum%
+      Open filename For Binary Lock Read As FileNum%
     Case WRLOCK
-      Open FileName For Binary Lock Write As FileNum%
+      Open filename For Binary Lock Write As FileNum%
     Case RWLOCK
-      Open FileName For Binary Lock Read Write As FileNum%
+      Open filename For Binary Lock Read Write As FileNum%
     End Select
   Case Else
     Exit Function
@@ -940,53 +940,115 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
 
 End Function
 
-'Returns the contents of file FName as a string
+'Reads a text file and returns the contents as a string
+' - Returns an empty string if the file does not exist or is empty
 Function FileRead(FName As String) As String
-Dim FNum As Integer, result As String
+    On Error GoTo ErroRead
+    Dim fso As Object
+    Dim streamIn As Object
     
-    result = Space(FileLen(FName))
-    FNum = FreeFile
-    Open FName For Binary Access Read As #FNum
-    Get #FNum, , result
-    Close FNum
-    FileRead = result
+    FileRead = ""
+    
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' Se o arquivo não existir, sai da função retornando vazio com segurança
+    If Not fso.FileExists(FName) Then
+        Set fso = Nothing
+        Exit Function
+    End If
+    
+    ' Abre o arquivo no modo de leitura (1 = ForReading)
+    Set streamIn = fso.OpenTextFile(FName, 1, False)
+    
+    ' Lê todo o conteúdo de uma vez só
+    FileRead = streamIn.ReadAll
+    
+    ' Fecha e limpa os objetos da memória
+    streamIn.Close
+    Set streamIn = Nothing
+    Set fso = Nothing
+    Exit Function
 
+ErroRead:
+    Set streamIn = Nothing
+    Set fso = Nothing
 End Function
-
 'Writes a text file with the contents of a string
 '   - Creates the file if it does not exist
 '   - Overwrites the contents of an existing file without warning
 '   - Returns true if successful
-Function FileWrite(FName As String, Contents As String) As Boolean
-    If Not DeleteFile(FName) Then Exit Function
-    Dim FNum As Integer
-    FNum = FreeFile()
-    Open FName For Output As FNum
-    'trailing semi-colon needed to prevent adding blank line at end of file
-    '  see: http://stackoverflow.com/a/9445141/154439
-    Print #FNum, Contents;
-    Close #FNum
-    FileWrite = True
-End Function
 
 'Appends the contents to the end of a file
 ' - if the file does not exist, it is created
 ' - a new line is implicitly added after the contents
 '   `- this means that FileAppend may be repeatedly called without passing any vbCrLf's
+'Appends the contents to the end of a file
+' - If the file does not exist, it is created automatically
+' - A new line is implicitly added after the contents
+' - Returns true if successful
 Function FileAppend(FName As String, Contents As String) As Boolean
+    On Error GoTo ErroAppend
+    Dim fso As Object
+    Dim streamOut As Object
+    
     FileAppend = False
-    If Not FileExists(FName) Then
-        'File does not exist, create new via FileWrite
-        FileWrite FName, Contents & vbCrLf
-        FileAppend = True
-    Else
-        Dim FNum As Integer
-        FNum = FreeFile()
-        Open FName For Append Access Write As #FNum
-        Print #FNum, Contents
-        Close #FNum
-        FileAppend = True
-    End If
+    
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' Abre no modo de anexo (8 = ForAppending), e o parâmetro True garante
+    ' que o FSO criará o arquivo do zero caso ele ainda não exista!
+    Set streamOut = fso.OpenTextFile(FName, 8, True)
+    
+    ' Grava o conteúdo seguido de uma quebra de linha (conforme a lógica original da sua função)
+    streamOut.WriteLine Contents
+    
+    ' Fecha e encerra o canal de I/O
+    streamOut.Close
+    Set streamOut = Nothing
+    Set fso = Nothing
+    
+    FileAppend = True
+    Exit Function
+
+ErroAppend:
+    Set streamOut = Nothing
+    Set fso = Nothing
 End Function
+'Writes a text file with the contents of a string
+'   - Creates the file if it does not exist
+'   - Overwrites the contents of an existing file safely using FSO
+'   - Returns true if successful
+Function FileWrite(FName As String, Contents As String) As Boolean
+    On Error GoTo ErroWrite
+    Dim fso As Object
+    Dim streamOut As Object
+    
+    FileWrite = False
+    
+    ' Instancia o FileSystemObject
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' O parâmetro "True" no final força o FSO a sobrescrever o arquivo
+    ' automaticamente se ele já existir, sem necessidade de apagá-lo antes!
+    Set streamOut = fso.OpenTextFile(FName, 2, True)
+    
+    ' Grava o conteúdo de forma limpa
+    streamOut.Write Contents
+    
+    ' Fecha o canal de escrita com segurança
+    streamOut.Close
+    
+    ' Libera os objetos da memória
+    Set streamOut = Nothing
+    Set fso = Nothing
+    
+    FileWrite = True
+    Exit Function
 
-
+ErroWrite:
+    ' Tratamento preventivo de objetos em caso de erro físico de disco (ex: falta de permissão)
+    Set streamOut = Nothing
+    Set fso = Nothing
+    ' Opcional: Se quiser debugar em tempo de desenvolvimento, descomente a linha abaixo:
+    ' Debug.Print "Erro FileWrite: " & Err.Description
+End Function
