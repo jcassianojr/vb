@@ -256,12 +256,12 @@ Public Function pegue2delimitado(ByVal ctmpline As String, ByVal cDelimIni As St
 Dim nPOS As Integer
 Dim nPOS2 As Integer
 Dim nPOS3 As Integer
-Dim cVALOR As String
+Dim cValor As String
 Dim cINICIO As String
 nPOS = 0
 nPOS2 = 0
 nPOS3 = 0
-cVALOR = ""
+cValor = ""
 cINICIO = ""
 If Len(ctmpline) = 0 Then
    pegue2delimitado = Array("", "")
@@ -281,19 +281,19 @@ End If
     If nPOS > 1 Then
       cINICIO = Mid(ctmpline, nPOS - 1)
     End If
-    cVALOR = Mid(ctmpline, nPOS + Len(cDelimIni))
+    cValor = Mid(ctmpline, nPOS + Len(cDelimIni))
     ctmpline = ""
   End If
   If nPOS > 0 And nPOS2 > 0 Then
     cINICIO = Mid(ctmpline, 1, nPOS + Len(cDelimIni) - 1)
-    cVALOR = Mid(ctmpline, nPOS + Len(cDelimIni))
-    nPOS3 = InStr(cVALOR, cdelifim)
+    cValor = Mid(ctmpline, nPOS + Len(cDelimIni))
+    nPOS3 = InStr(cValor, cdelifim)
     If nPOS3 > 1 Then
-       cVALOR = Mid(cVALOR, 1, nPOS3 - 1)
+       cValor = Mid(cValor, 1, nPOS3 - 1)
     End If
     
-    If Right(cVALOR, Len(cdelifim)) = cdelifim Then
-       cVALOR = Left(cVALOR, Len(cVALOR) - Len(cdelifim))
+    If Right(cValor, Len(cdelifim)) = cdelifim Then
+       cValor = Left(cValor, Len(cValor) - Len(cdelifim))
     End If
     ctmpline = Mid(ctmpline, nPOS2)
     If Left(ctmpline, Len(cdelifim)) = cdelifim Then
@@ -303,7 +303,7 @@ End If
        ctmpline = ""
     End If
   End If
-pegue2delimitado = Array(cVALOR, ctmpline, cINICIO)
+pegue2delimitado = Array(cValor, ctmpline, cINICIO)
 End Function
 Public Function ComboChange(ByRef Combo1)
 Dim strPartial
@@ -3045,5 +3045,126 @@ Fim:
 
 TrataErro:
     Alert "Erro na gravação/leitura do arquivo: " & Err.Description
+    Resume Fim
+End Function
+' ==============================================================================
+' MOTOR 4: CONVERSÃO DE TXT PARA EXCEL - TRATAMENTO MULTI-DELIMITADORES EM STREAM
+' ==============================================================================
+Public Function txttoxls(ByVal cORIGEM As String, _
+                                      Optional ByVal cDESTINO As String = "", _
+                                      Optional ByVal cTITULO As String = "", _
+                                      Optional ByVal cAUTOR As String = "", _
+                                      Optional ByVal cDELIMITADOR As String = ";") As Boolean
+    Dim fso As Object
+    Dim streamIn As Object
+    Dim streamOut As Object
+    Dim cLINHA As String
+    Dim strOutputFile As String
+    Dim arrCampos() As String
+    Dim i As Long
+    Dim cDelimReal As String
+    Dim bPrimeiraLinha As Boolean
+    Dim cValor As String
+    
+    ' 1. Validação inicial: se o arquivo de origem não existir, aborta
+    If Dir(cORIGEM) = "" Then
+        txttoxls = False
+        Exit Function
+    End If
+    
+    ' 2. Regra do Destino: Se não foi passado, gera o .xls baseado no nome do TXT
+    If Trim(cDESTINO) = "" Then
+        strOutputFile = Replace(LCase(cORIGEM), ".txt", ".xls")
+    Else
+        strOutputFile = cDESTINO
+    End If
+    
+    ' 3. TRATAMENTO DOS DELIMITADORES DO SEU FORMULÁRIO (tab, ;,  ,, |, ~#)
+    cDELIMITADOR = Trim(LCase(cDELIMITADOR))
+    
+    Select Case cDELIMITADOR
+        Case "<tab>", "tab", Chr(9)
+            cDelimReal = Chr(9)   ' Tabulação Real
+        Case ""
+            cDelimReal = ";"      ' Fallback padrão se vier vazio
+        Case Else
+            cDelimReal = cDELIMITADOR ' Captura ;, ,, |, ~# exatamente como estão no Form
+    End Select
+    
+    On Error GoTo TrataErro
+    
+    ' 4. Inicializa o FileSystemObject para processamento leve (Streaming)
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set streamIn = fso.OpenTextFile(cORIGEM, 1, False)       ' 1 = ForReading
+    Set streamOut = fso.OpenTextFile(strOutputFile, 2, True) ' 2 = ForWriting
+    
+    ' 5. Escreve o cabeçalho HTML formatado para Excel e LibreOffice
+    streamOut.WriteLine "<html>"
+    streamOut.WriteLine "<head>"
+    streamOut.WriteLine "<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"">"
+    
+    ' Metadados do documento
+    If Trim(cAUTOR) <> "" Then streamOut.WriteLine "<meta name=""author"" content=""" & cAUTOR & """>"
+    If Trim(cTITULO) <> "" Then streamOut.WriteLine "<title>" & cTITULO & "</title>"
+    
+    ' CSS para forçar linhas e bordas visíveis no Excel/Calc
+    streamOut.WriteLine "<style>"
+    streamOut.WriteLine "table { border-collapse: collapse; }"
+    streamOut.WriteLine "td, th { border: 1px solid #A0A0A0; font-family: Calibri, Arial, sans-serif; font-size: 11pt; padding: 5px; }"
+    streamOut.WriteLine "th { background-color: #EFEFEF; font-weight: bold; }"
+    streamOut.WriteLine "</style>"
+    streamOut.WriteLine "</head>"
+    streamOut.WriteLine "<body>"
+    streamOut.WriteLine "<table>"
+    
+    bPrimeiraLinha = True
+    
+    ' 6. Loop de Performance: Separa as colunas com base no delimitador tratado
+    Do While Not streamIn.AtEndOfStream
+        cLINHA = streamIn.ReadLine
+        
+        ' Faz a divisão da linha usando o delimitador correto correspondente ao do Form
+        arrCampos = Split(cLINHA, cDelimReal)
+        
+        streamOut.WriteLine "  <tr>"
+        For i = LBound(arrCampos) To UBound(arrCampos)
+            
+            ' Isola o conteúdo da célula tirando espaços extras
+            cValor = Trim(CStr(arrCampos(i)))
+            
+            ' Aplica a sua função nativa str2html para tratar acentos e caracteres especiais
+            cValor = str2html(cValor)
+            
+            ' Se for a primeira linha do TXT, vira cabeçalho destacado (th)
+            If bPrimeiraLinha Then
+                streamOut.WriteLine "    <th>" & cValor & "</th>"
+            Else
+                ' Gravação correta da célula de dados (td)
+                streamOut.WriteLine "    <td>" & cValor & "</td>"
+            End If
+        Next i
+        streamOut.WriteLine "  </tr>"
+        
+        bPrimeiraLinha = False
+    Loop
+    
+    ' 7. Fecha o arquivo de forma íntegra
+    streamOut.WriteLine "</table>"
+    streamOut.WriteLine "</body>"
+    streamOut.WriteLine "</html>"
+    
+    txttoxls = True
+
+Fim:
+    ' Destruição rigorosa de objetos para não prender memória RAM
+    If Not streamIn Is Nothing Then streamIn.Close
+    If Not streamOut Is Nothing Then streamOut.Close
+    Set streamIn = Nothing
+    Set streamOut = Nothing
+    Set fso = Nothing
+    Exit Function
+
+TrataErro:
+    txttoxls = False
     Resume Fim
 End Function

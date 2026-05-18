@@ -1,6 +1,6 @@
 Type=Exe
 Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
-Reference=*\G{CE4F61C1-7072-4180-9107-B38562AB6ABE}#167.0#0#C:\WINDOWS\SysWow64\rc6.dll#RC6
+Reference=*\G{CE4F61C1-7072-4180-9107-B38562AB6ABE}#167.0#0#C:\WINDOWS\RC6.dll#RC6
 Reference=*\G{B691E011-1797-432E-907A-4D8C69339129}#6.1#0#C:\Program Files (x86)\Common Files\System\ado\msado15.dll#Microsoft ActiveX Data Objects 6.1 Library
 Reference=*\G{00000600-0000-0010-8000-00AA006D2EA4}#6.0#0#C:\Program Files (x86)\Common Files\System\ado\msadox.dll#Microsoft ADO Ext. 6.0 for DDL and Security
 Reference=*\G{4AC9E1DA-5BAD-4AC7-86E3-24F4CDCECA28}#c.0#0#C:\Program Files (x86)\Common Files\Microsoft Shared\OFFICE16\ACEDAO.DLL#Microsoft Office 16.0 Access database engine Object Library

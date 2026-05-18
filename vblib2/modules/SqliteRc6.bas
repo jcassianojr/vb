@@ -54,13 +54,15 @@ Public Function PegSQLiteRC6(ByVal cCON As String, ByVal cSQL As String, _
     Dim loRs As RC6.cRecordset
     Dim i As Long
     Dim aVAL() As Variant
+    Dim cCONN As String
     
     On Error GoTo Erro
     ReDim aVAL(nITEM)
     
+    cCONN = sqldialeto(cSQL, "SQLITE")
     ' Abre a conexão e o recordset via RC6
     Set loConn = New_c.Connection(LimpaTagRC6(cCON), DBCreateInMemory)
-    Set loRs = loConn.OpenRecordset(SQLDialeto(cSQL, "SQLITE"))
+    Set loRs = loConn.OpenRecordset(cCONN)
     
     If loRs.RecordCount > 0 Then
         For i = 0 To nITEM
@@ -179,7 +181,7 @@ Public Function PegOperSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As Stri
     ' Monta a query dinamicamente como no ADO
     ' Ex: SELECT MIN(Preco) FROM Produtos WHERE Categoria = 1
     cSQL = "SELECT " & coper & "(" & cCAMPO & ") FROM " & cTABLEWHERE
-    cSQL = SQLDialeto(cSQL, "SQLITE")
+    cSQL = sqldialeto(cSQL, "SQLITE")
     
     Set loConn = New_c.Connection(LimpaTagRC6(cCON))
     Set loRs = loConn.OpenRecordset(cSQL)
@@ -233,7 +235,7 @@ Public Function GrvSQLiteRC6(ByVal cCON As String, ByVal cSQL_SELECT As String, 
     cSQL_UP = cSQL_UP & cWHE
     
     Set loConn = New_c.Connection(LimpaTagRC6(cCON))
-    loConn.Execute SQLDialeto(cSQL_UP, "SQLITE")
+    loConn.Execute sqldialeto(cSQL_UP, "SQLITE")
     
     GrvSQLiteRC6 = True
     Set loConn = Nothing
@@ -316,7 +318,7 @@ Public Function SQLiteComandoRC6(ByVal cCON As String, ByVal cSQL As String) As 
     cCON = LimpaTagRC6(cCON)
     
     ' 2. Traduz o dialeto (converte sintaxe Access/VFP para SQLite se necessário)
-    cSQL = SQLDialeto(cSQL, "SQLITE")
+    cSQL = sqldialeto(cSQL, "SQLITE")
     
     ' 3. Abre a conexão e executa o comando
     Set loConn = New_c.Connection(cCON)
