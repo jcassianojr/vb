@@ -124,25 +124,39 @@ Public Function SQLDialeto(ByVal cSQLCNV As String, cDIALETO As String) As Strin
             Case "PGSQL", "POSTGRESQL"
                 SQLDialeto = Replace(SQLDialeto, " & ", " || ")
                 SQLDialeto = Replace(SQLDialeto, "#", "'")
-                ' Postgres é rigoroso: True/False são 't'/'f' ou booleanos reais sem aspas
-                SQLDialeto = Replace(SQLDialeto, "True", "TRUE")
-                SQLDialeto = Replace(SQLDialeto, "False", "FALSE")
-            
-                 '"LOWER(%1%)"        ,"LOWER(%1%)"
-                 '"UPPER(%1%)"        ,"UPPER(%1%)"
-                 '"LEFT(%1%,%2%)"      ,"LEFT(%1%,%2%)"
-                 '"CHR(%1%)"         ,"CHR(%1%)"
-                 SQLDialeto = Replace(SQLDialeto, "TODAY()", "CURRENT_DATE ")
-                 SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
-                 SQLDialeto = Replace(SQLDialeto, "TRIM(", "RTRIM(")
-                 SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(")
-                 SQLDialeto = Replace(SQLDialeto, "LEN(", "LENGTH(")
-                 SQLDialeto = Replace(SQLDialeto, "DAY(", "EXTRACT('DAY' FROM ")
-                 SQLDialeto = Replace(SQLDialeto, "MONTH(", "EXTRACT('MONTH' FROM ")
-                 SQLDialeto = Replace(SQLDialeto, "YEAR(", "EXTRACT('YEAR' FROM ")
-                 SQLDialeto = Replace(SQLDialeto, "REPL(", "REPEAT(")
-                ' Tradução de Mid para Substring (Postgres usa Substring)
-                 SQLDialeto = Replace(SQLDialeto, "MID(", "SUBSTRING(", , , vbTextCompare)
+              
+               ' 1. Tratamento seguro dos literais lógicos (.T. e .F.) vindos do seu gerador
+        SQLDialeto = Replace(SQLDialeto, ".T.", "TRUE")
+        SQLDialeto = Replace(SQLDialeto, ".F.", "FALSE")
+        
+        ' 2. TRADUÇÃO DAS FUNÇÕES DE DATA E HORA (Access/VB6 para Postgres)
+        ' Amarrando o "(" para blindar campos como 'day_total', 'month_saldo', etc.
+        ' O Postgres aceita DATE_PART para extrair partes de uma data de forma direta
+        SQLDialeto = Replace(SQLDialeto, "DAY(", "DATE_PART('day', ")
+        SQLDialeto = Replace(SQLDialeto, "MONTH(", "DATE_PART('month', ")
+        SQLDialeto = Replace(SQLDialeto, "YEAR(", "DATE_PART('year', ")
+        SQLDialeto = Replace(SQLDialeto, "HOUR(", "DATE_PART('hour', ")
+        SQLDialeto = Replace(SQLDialeto, "MINUTE(", "DATE_PART('minute', ")
+        SQLDialeto = Replace(SQLDialeto, "SECOND(", "DATE_PART('second', ")
+        
+        ' 3. OUTRAS FUNÇÕES DE DATA E DATA ATUAL
+        SQLDialeto = Replace(SQLDialeto, "TODAY()", "CURRENT_DATE")
+        SQLDialeto = Replace(SQLDialeto, "DATE()", "CURRENT_DATE")
+        SQLDialeto = Replace(SQLDialeto, "NOW()", "CURRENT_TIMESTAMP")
+        
+        ' 4. FUNÇÕES DE STRING E MANIPULAÇÃO (Com o "(" colado para proteção)
+        SQLDialeto = Replace(SQLDialeto, "SUBSTR(", "SUBSTRING(")
+        SQLDialeto = Replace(SQLDialeto, "LEN(", "LENGTH(")
+        SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(") ' O TRIM() do Postgres limpa esquerda e direita
+        SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
+        
+        ' 5. MÁSCARAS E CONDICIONAIS DO DIALETO JET/ACCESS
+        SQLDialeto = Replace(SQLDialeto, "IIF(", "CASE WHEN ")
+        SQLDialeto = Replace(SQLDialeto, "IFNULL(", "COALESCE(")
+        
+        ' 6. PURGA RADICAL DE DATAS VAZIAS (Padrão string que o rigor do Postgres rejeita)
+        SQLDialeto = Replace(SQLDialeto, "'  /  /  '", "NULL")
+        SQLDialeto = Replace(SQLDialeto, "'00/00/0000'", "NULL")
                  
             Case "MSSQL", "SQLSERVER"
             
@@ -1048,7 +1062,7 @@ End Function
 
 Public Function ADO_IsRecordsetEmpty(ByRef oRS As ADODB.Recordset) As Boolean
   Dim cERRO As String
-  On Error GoTo trataerro
+  On Error GoTo TrataErro
   ADO_IsRecordsetEmpty = False
   If Not ADO_IsOpen(oRS) Then
     ADO_IsRecordsetEmpty = True
@@ -1063,7 +1077,7 @@ Public Function ADO_IsRecordsetEmpty(ByRef oRS As ADODB.Recordset) As Boolean
     Exit Function
   End If
   Exit Function
-trataerro:
+TrataErro:
   cERRO = "ADO_IsRecordsetEmpty"
   cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
   Select Case Err.Number
@@ -1075,7 +1089,7 @@ End Function
 Public Function ADO_FieldValueToString(ByRef FLD As ADODB.Field, Optional ByVal sNullRepresentation As String = "(null)") As String
 'Call TraceEnters(MODULE_NAME & "::ADO_FieldValueToString")
 'TraceDetail = "To convert the value of a field into a string"
-  On Error GoTo trataerro
+  On Error GoTo TrataErro
 
   ADO_FieldValueToString = ""
   Select Case (FLD.Type)
@@ -1099,7 +1113,7 @@ Public Function ADO_FieldValueToString(ByRef FLD As ADODB.Field, Optional ByVal 
     'Err.Raise 13, MODULE_NAME & "::ADO_FieldValueToString", "Sorry, unable to convert fields of type " & fld.Type & ", (" & ADO_DataTypeEnumToEnglish(fld.Type) & ") to string."
   End Select
   Exit Function
-trataerro:
+TrataErro:
   SayErro "ADO_FieldValueToString"
   Exit Function
 End Function
@@ -1126,7 +1140,7 @@ Public Function ADO_IsOpen(ByRef oADOObject As Object) As Boolean
 'Call TraceEnters(MODULE_NAME & "::ADO_IsOpen")
 'TraceDetail = "To determine if a connection or a recordset is open"
 
-    On Error GoTo trataerro  'resume Next 'Evita quebra se o objeto estiver em estado inválido
+    On Error GoTo TrataErro  'resume Next 'Evita quebra se o objeto estiver em estado inválido
         ADO_IsOpen = False
     If oADOObject Is Nothing Then Exit Function
     
@@ -1146,7 +1160,7 @@ Public Function ADO_IsOpen(ByRef oADOObject As Object) As Boolean
  ' End If
   Exit Function
 
-trataerro:
+TrataErro:
   SayErro "ADO_ISOPEN"
 
 End Function
@@ -1193,7 +1207,7 @@ Public Function BytesToHexString(vaBytes As Variant) As String
 '        mod->Sub
 ' Revision history:
 '   Michael Johnson     2000/Aug/01 13:51     Initial creation
-  On Error GoTo trataerro
+  On Error GoTo TrataErro
 
   Dim sAccumulator As String
   Dim lCtr As Long
@@ -1214,14 +1228,14 @@ Public Function BytesToHexString(vaBytes As Variant) As String
   sAccumulator = "0x" & sAccumulator
   BytesToHexString = sAccumulator
   Exit Function
-trataerro:
+TrataErro:
   BytesToHexString = ""
   Exit Function
 End Function
 Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTABELA As String, Optional ByVal lMES As Boolean = True) As Boolean
   Dim oCat As ADOX.Catalog
   Dim oTabela As ADOX.Table
-  On Error GoTo trataerro
+  On Error GoTo TrataErro
 
   TemTabelaADO = False
   Set oCat = New ADOX.Catalog
@@ -1237,7 +1251,7 @@ Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTABELA As String, Opti
   If lMES And Not TemTabelaADO Then
     Alert ("Tabela nao Encontrada" & cTABELA & Chr(13) & Chr(10) & cARQ)
   End If
-trataerro:
+TrataErro:
   Select Case Err.Number
   Case Else
     SayErro "Tem Tabela Ado :" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTABELA & Chr(13) & Chr(10)
@@ -1260,7 +1274,7 @@ Public Function CriaMdbAccess(ByVal cARQORI As String, Optional ByVal lCRIA As B
                             
                             
   Dim cat As New ADOX.Catalog
-  On Error GoTo trataerro
+  On Error GoTo TrataErro
   CriaMdbAccess = False
   If Not FileConnExist(cARQORI, True) Then
     If lCRIA Or MDG("Criar Arquivo " & cARQORI) Then
@@ -1276,7 +1290,7 @@ Public Function CriaMdbAccess(ByVal cARQORI As String, Optional ByVal lCRIA As B
     End If
   End If
   Exit Function
-trataerro:
+TrataErro:
   Select Case Err.Number
   Case Else
     SayErro "ADO Novo Arquivo Access/MDB:" & Chr(13) & Chr(10) & cARQORI
