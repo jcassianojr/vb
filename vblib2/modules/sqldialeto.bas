@@ -1,4 +1,4 @@
-Attribute VB_Name = "sqldialeto"
+Attribute VB_Name = "sqldialetofuncoes"
 ' ==============================================================================
 ' FUNÇÃO: SQLPGSQLDOUBLEQUOTES
 ' DESCRIÇÃO: Converte identificadores (tabelas/campos) para o padrão PostgreSQL
@@ -94,35 +94,35 @@ End Function
 ' Retorna o comando exato para iniciar uma transação conforme o banco
 ' -------------------------------------------------------------------------
 Public Function Dialeto_begin(ByVal cTIPO As String) As String
-    Dim cCOMANDO As String
+    Dim CCOMANDO As String
     cTIPO = Trim(UCase(cTIPO))
     
-    cCOMANDO = "BEGIN TRANSACTION"
+    CCOMANDO = "BEGIN TRANSACTION"
     
     Select Case cTIPO
         Case "MSSQL", "SQLSERVER"
-            cCOMANDO = "BEGIN TRANSACTION"
+            CCOMANDO = "BEGIN TRANSACTION"
             
         Case "MYSQL", "MYSQL64", "MARIADB"
-            cCOMANDO = "START TRANSACTION;"
+            CCOMANDO = "START TRANSACTION;"
             
         Case "FIREBIRD"
-            cCOMANDO = "SET TRANSACTION"
+            CCOMANDO = "SET TRANSACTION"
             
         Case "PGSQL", "POSTGRESQL", "PGSQL64"
-            cCOMANDO = "BEGIN;"
+            CCOMANDO = "BEGIN;"
             
         Case "ORACLE", "OCI"
-            cCOMANDO = "" ' Oracle inicia transações implicitamente no primeiro comando DML
+            CCOMANDO = "" ' Oracle inicia transações implicitamente no primeiro comando DML
             
         Case "SQLITE"
-            cCOMANDO = "BEGIN TRANSACTION;"
+            CCOMANDO = "BEGIN TRANSACTION;"
             
         Case "ACCESS"
-            cCOMANDO = "BEGIN TRANSACTION"
+            CCOMANDO = "BEGIN TRANSACTION"
     End Select
     
-    Dialeto_begin = cCOMANDO
+    Dialeto_begin = CCOMANDO
 End Function
 
 ' -------------------------------------------------------------------------
@@ -130,29 +130,29 @@ End Function
 ' Retorna o comando exato para confirmar uma transação conforme o banco
 ' -------------------------------------------------------------------------
 Public Function Dialeto_commit(ByVal cTIPO As String) As String
-    Dim cCOMANDO As String
+    Dim CCOMANDO As String
     cTIPO = Trim(UCase(cTIPO))
     
-    cCOMANDO = "COMMIT"
+    CCOMANDO = "COMMIT"
     
     Select Case cTIPO
         Case "MSSQL", "SQLSERVER"
-            cCOMANDO = "IF @@TRANCOUNT > 0 COMMIT"
+            CCOMANDO = "IF @@TRANCOUNT > 0 COMMIT"
             
         Case "MYSQL", "MYSQL64", "MARIADB"
-            cCOMANDO = "COMMIT;"
+            CCOMANDO = "COMMIT;"
             
         Case "PGSQL", "POSTGRESQL", "PGSQL64"
-            cCOMANDO = "COMMIT;"
+            CCOMANDO = "COMMIT;"
             
         Case "SQLITE"
-            cCOMANDO = "end transaction"
+            CCOMANDO = "end transaction"
             
         Case "FIREBIRD", "ORACLE", "OCI", "ACCESS"
-            cCOMANDO = "COMMIT"
+            CCOMANDO = "COMMIT"
     End Select
     
-    Dialeto_commit = cCOMANDO
+    Dialeto_commit = CCOMANDO
 End Function
 
 ' -------------------------------------------------------------------------
@@ -160,29 +160,29 @@ End Function
 ' Retorna o comando exato para anular uma transação conforme o banco
 ' -------------------------------------------------------------------------
 Public Function Dialeto_rollback(ByVal cTIPO As String) As String
-    Dim cCOMANDO As String
+    Dim CCOMANDO As String
     cTIPO = Trim(UCase(cTIPO))
     
-    cCOMANDO = "ROLLBACK"
+    CCOMANDO = "ROLLBACK"
     
     Select Case cTIPO
         Case "MSSQL", "SQLSERVER"
-            cCOMANDO = "IF @@TRANCOUNT > 0 ROLLBACK"
+            CCOMANDO = "IF @@TRANCOUNT > 0 ROLLBACK"
             
         Case "MYSQL", "MYSQL64", "MARIADB"
-            cCOMANDO = "ROLLBACK;"
+            CCOMANDO = "ROLLBACK;"
             
         Case "PGSQL", "POSTGRESQL", "PGSQL64"
-            cCOMANDO = "ROLLBACK;"
+            CCOMANDO = "ROLLBACK;"
             
         Case "SQLITE"
-            cCOMANDO = "ROLLBACK;"
+            CCOMANDO = "ROLLBACK;"
             
         Case "FIREBIRD", "ORACLE", "OCI", "ACCESS"
-            cCOMANDO = "ROLLBACK"
+            CCOMANDO = "ROLLBACK"
     End Select
     
-    Dialeto_rollback = cCOMANDO
+    Dialeto_rollback = CCOMANDO
 End Function
 
 ' -------------------------------------------------------------------------
@@ -190,29 +190,29 @@ End Function
 ' Retorna a Query para recuperar o ID Auto-Incremento gerado na sessão
 ' -------------------------------------------------------------------------
 Public Function Dialeto_GetIdentity(ByVal cTIPO As String) As String
-    Dim cCOMANDO As String
+    Dim CCOMANDO As String
     cTIPO = Trim(UCase(cTIPO))
     
-    cCOMANDO = ""
+    CCOMANDO = ""
     
     Select Case cTIPO
         Case "SQLITE"
-            cCOMANDO = "SELECT last_insert_rowid();"
+            CCOMANDO = "SELECT last_insert_rowid();"
             
         Case "PGSQL", "POSTGRESQL", "PGSQL64"
-            cCOMANDO = "SELECT lastval();"
+            CCOMANDO = "SELECT lastval();"
             
         Case "MSSQL", "SQLSERVER"
-            cCOMANDO = "SELECT @@IDENTITY;"
+            CCOMANDO = "SELECT @@IDENTITY;"
             
         Case "MYSQL", "MYSQL64", "MARIADB"
-            cCOMANDO = "SELECT LAST_INSERT_ID();"
+            CCOMANDO = "SELECT LAST_INSERT_ID();"
             
         Case "ACCESS"
-            cCOMANDO = "SELECT @@IDENTITY;"
+            CCOMANDO = "SELECT @@IDENTITY;"
     End Select
     
-    Dialeto_GetIdentity = cCOMANDO
+    Dialeto_GetIdentity = CCOMANDO
 End Function
 
 ' -------------------------------------------------------------------------
