@@ -1,16 +1,16 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form FrmRtfView 
    Caption         =   "FrmRtfView"
-   ClientHeight    =   6315
+   ClientHeight    =   6312
    ClientLeft      =   60
-   ClientTop       =   405
-   ClientWidth     =   13170
+   ClientTop       =   408
+   ClientWidth     =   13176
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6315
-   ScaleWidth      =   13170
+   ScaleHeight     =   6312
+   ScaleWidth      =   13176
    StartUpPosition =   3  'Windows Default
    Begin VBCCR18.RichTextBox RichTextbox1 
       Height          =   6015
@@ -18,8 +18,8 @@ Begin VB.Form FrmRtfView
       TabIndex        =   0
       Top             =   120
       Width           =   11415
-      _ExtentX        =   20135
-      _ExtentY        =   10610
+      _ExtentX        =   20130
+      _ExtentY        =   10605
       MultiLine       =   -1  'True
       ScrollBars      =   3
       TextRTF         =   "FrmRtfView.frx":0000
@@ -27,8 +27,8 @@ Begin VB.Form FrmRtfView
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   12480
       Top             =   5040
-      _ExtentX        =   1191
-      _ExtentY        =   1191
+      _ExtentX        =   953
+      _ExtentY        =   953
    End
    Begin XPControls.XPButton cmdimp 
       Height          =   435
@@ -36,13 +36,13 @@ Begin VB.Form FrmRtfView
       TabIndex        =   1
       Top             =   240
       Width           =   1215
-      _ExtentX        =   2143
-      _ExtentY        =   767
+      _ExtentX        =   2138
+      _ExtentY        =   762
       Picture         =   "FrmRtfView.frx":0166
       Caption         =   "Imprimir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -56,13 +56,13 @@ Begin VB.Form FrmRtfView
       TabIndex        =   2
       Top             =   1680
       Width           =   1215
-      _ExtentX        =   2143
-      _ExtentY        =   767
+      _ExtentX        =   2138
+      _ExtentY        =   762
       Picture         =   "FrmRtfView.frx":0700
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -76,13 +76,13 @@ Begin VB.Form FrmRtfView
       TabIndex        =   3
       Top             =   720
       Width           =   1215
-      _ExtentX        =   2143
-      _ExtentY        =   1402
+      _ExtentX        =   2138
+      _ExtentY        =   1397
       Picture         =   "FrmRtfView.frx":0C9A
       Caption         =   "Imprimir Direto (Porta)"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -97,13 +97,13 @@ Begin VB.Form FrmRtfView
       TabStop         =   0   'False
       Top             =   2280
       Width           =   795
-      _ExtentX        =   1402
-      _ExtentY        =   661
+      _ExtentX        =   1397
+      _ExtentY        =   656
       Picture         =   "FrmRtfView.frx":1234
       Caption         =   "TXT"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -118,13 +118,13 @@ Begin VB.Form FrmRtfView
       TabStop         =   0   'False
       Top             =   2760
       Width           =   855
-      _ExtentX        =   1508
-      _ExtentY        =   661
+      _ExtentX        =   1503
+      _ExtentY        =   656
       Picture         =   "FrmRtfView.frx":15CE
       Caption         =   "Html"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -139,13 +139,13 @@ Begin VB.Form FrmRtfView
       TabStop         =   0   'False
       Top             =   3240
       Width           =   795
-      _ExtentX        =   1402
-      _ExtentY        =   661
+      _ExtentX        =   1397
+      _ExtentY        =   656
       Picture         =   "FrmRtfView.frx":1B68
       Caption         =   "PDF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -160,13 +160,34 @@ Begin VB.Form FrmRtfView
       TabStop         =   0   'False
       Top             =   3720
       Width           =   795
-      _ExtentX        =   1402
-      _ExtentY        =   661
+      _ExtentX        =   1397
+      _ExtentY        =   656
       Picture         =   "FrmRtfView.frx":1F02
       Caption         =   "RTF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton Cmdsalvadoc 
+      Height          =   372
+      Left            =   11880
+      TabIndex        =   8
+      TabStop         =   0   'False
+      Top             =   4200
+      Width           =   792
+      _ExtentX        =   1397
+      _ExtentY        =   656
+      Picture         =   "FrmRtfView.frx":229C
+      Caption         =   "doc"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -187,6 +208,28 @@ Private Sub cmdimp_Click()
   RichTextbox1.SetFocus
 End Sub
 
+
+Private Sub Cmdsalvadoc_Click()
+ Dim sFILTER As String
+  Dim sFileName As String
+  Dim stmp As String
+  stmp = TrocaExt(cARQRTF, "DOC")
+  sFILTER = "Arquivos de Textos (*.DOC)" & vbNullChar & "*.DOC" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, sFILTER, 1, "DOC", stmp, stmp, "Salvar DOC Como")
+  If Not Len(sFileName) = 0 Then
+    If FileConnExist(sFileName) Then
+      If MDG("Arquivo ja Existe Sobrepor") Then
+        DeleteFile sFileName  'Kill sFILENAME
+        Exit Sub
+      End If
+    End If
+    stmp = TrocaExt(sFileName, "TMP")
+    RichTextbox1.SaveFile stmp, RtfLoadSaveFormatText
+    ePASS01 = stmp
+    txttodoc stmp, sFileName
+    DeleteFile stmp  'Kill stmp
+  End If
+End Sub
 
 Private Sub CmdSalvarComoPdf_Click()
   Dim sFILTER As String

@@ -2809,7 +2809,7 @@ Isvba64 = False
     #End If
 End Function
 
-Public Function ConvertTxtToWordHTML(ByVal cORIGEM As String, _
+Public Function txttodoc(ByVal cORIGEM As String, _
                                      Optional ByVal cDESTINO As String = "", _
                                      Optional ByVal cTITULO As String = "", _
                                      Optional ByVal cAUTOR As String = "") As Boolean
@@ -2821,7 +2821,7 @@ Public Function ConvertTxtToWordHTML(ByVal cORIGEM As String, _
     
     ' 1. Validação inicial: se o arquivo de origem não existir, aborta retornando False
     If Dir(cORIGEM) = "" Then
-        ConvertTxtToWordHTML = False
+        txttodoc = False
         Exit Function
     End If
     
@@ -2882,7 +2882,7 @@ Public Function ConvertTxtToWordHTML(ByVal cORIGEM As String, _
     streamOut.WriteLine "</html>"
     
     ' Se chegou até aqui sem erros, operação concluída com sucesso!
-    ConvertTxtToWordHTML = True
+    txttodoc = True
 
 Fim:
     ' Liberação e fechamento seguro de canais de memória
@@ -2895,7 +2895,7 @@ Fim:
 
 TrataErro:
     ' Em caso de qualquer falha (permissão de escrita, arquivo travado), retorna False
-    ConvertTxtToWordHTML = False
+    txttodoc = False
     Resume Fim
 End Function
 Public Function txttortf(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
