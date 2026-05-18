@@ -46,275 +46,15 @@ Public Const JET_ENGINETYPE_HTML1X = 70
 ''Tipo con gera a matrix com o tipo conecao,string concecao,tipo interno conecao
 ''Tipodado2 retorna o tipo C aracter D ata ...
 ''Tipodado retorno o tipo conforme o padrao ado
-Public Function GeracArq(ByVal cARQ As String, Optional ByVal cTIPO As String = "", Optional ByVal lWRITE As Boolean = True) As String
+Public Function GeracArq(ByVal cARQ As String, Optional ByVal cTipo As String = "", Optional ByVal lWRITE As Boolean = True) As String
   Dim aRETU As Variant
-  cARQ = GeraConn(cARQ, cTIPO)
+  cARQ = GeraConn(cARQ, cTipo)
   aRETU = TipoConn(cARQ, , , lWRITE)
   GeracArq = aRETU(1)
 End Function
-Public Function SQLDIAPAR(ByVal cSQLCNV As String, cDelimIni As String, cDelimFim As String, cREPINI As String, cREPFIM As String) As String
-Dim aRETU
-SQLDIAPAR = cSQLCNV
-aRETU = pegue2delimitado(cSQLCNV, cDelimIni, cDelimFim)
-If Len(aRETU(0)) > 0 Then
-   SQLDIAPAR = Replace(aRETU(2), cDelimIni, "")
-   SQLDIAPAR = SQLDIAPAR & cREPINI & aRETU(0) & cREPFIM & aRETU(1)
-End If
-End Function
-Public Function SQLDialeto(ByVal cSQLCNV As String, cDIALETO As String) As String
-'SQLDialeto = SQLDIAPAR(SQLDialeto, "FUNCAO(", ")", "", "")
-     SQLDialeto = cSQLCNV
-     SQLDialeto = Replace(SQLDialeto, "  ", " ")
-     Select Case cDIALETO
-            Case "SQLITE"
-                 SQLDialeto = Replace(SQLDialeto, "CURRENTDATETIME", " current_timestamp ")
-                 SQLDialeto = Replace(SQLDialeto, "TODAY()", "CURRENT_DATE ")
-                 SQLDialeto = Replace(SQLDialeto, "CHR(", "CHAR(")
-                 SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
-                 SQLDialeto = Replace(SQLDialeto, "TRIM(", "RTRIM(")
-                 SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(")
-                 SQLDialeto = Replace(SQLDialeto, "LEN(", "LENGTH(")
-                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DTOS(", ")", "strftime('%Y%m%d',", ")")
-                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DAY((", ")", "cast(strftime('%d',", ") as int)")
-                 SQLDialeto = SQLDIAPAR(SQLDialeto, "MONTH(", ")", "cast(strftime('%m',", ") as int)")
-                 SQLDialeto = SQLDIAPAR(SQLDialeto, "YEAR(", ")", "cast(strftime('%Y'", ") as int)")
-                 
-                 ' 1. Concatenação: & para ||
-                ' Cuidado para não trocar o & dentro de strings literais
-                SQLDialeto = Replace(SQLDialeto, " & ", " || ")
-                
-                ' 2. Datas: Access (#12/31/2023#) para SQLite ('2023-12-31')
-            ' Aqui você precisaria de uma Regex ou função auxiliar para pegar o valor entre #
-            ' Simplificando: troca delimitador
-            SQLDialeto = Replace(SQLDialeto, "#", "'")
-            ' 3. Booleanos
-            SQLDialeto = Replace(SQLDialeto, " = True", " = 1")
-            SQLDialeto = Replace(SQLDialeto, " = False", " = 0")
-            SQLDialeto = Replace(SQLDialeto, "LEFT(", "SUBSTR(", , , vbTextCompare)
-            SQLDialeto = Replace(SQLDialeto, "RIGHT(", "SUBSTR(", , , vbTextCompare)
-            
-            ' 4. Funções comuns
-            SQLDialeto = Replace(SQLDialeto, "IIF(", "CASE WHEN ") ' Requer lógica de fechamento complexa
-            ' Nota: SQLite suporta IIF() a partir da versão 3.32.0.
-            ' Se usar RC6 (que é atualizada), o IIF funciona!
-                
-                
-                
-               
-                
-            Case "MYSQL", "MARIADB"
-                 '"LOWER(%1%)"        ,"LOWER(%1%)"
-                 '"UPPER(%1%)"        ,"UPPER(%1%)"
-                 '"LEFT(%1%,%2%)"     ,"LEFT(%1%,%2%)"
-                 '"DAY(%1%)"         ,"DAY(%1%)"
-                 '"MONTH(%1%)"       ,"MONTH(%1%)"}
-                 '"YEAR(%1%)"        ,"YEAR(%1%)"
-                 SQLDialeto = Replace(SQLDialeto, "#", "'")
-                 SQLDialeto = Replace(SQLDialeto, " & ", " || ")
-            ' MariaDB usa backticks para nomes de campos com espaço
-               SQLDialeto = Replace(Replace(SQLDialeto, "[", "`"), "]", "`")
-                 SQLDialeto = Replace(SQLDialeto, "TODAY()", "SYSDATE()")
-                 SQLDialeto = Replace(SQLDialeto, "CHR(", "CHAR(")
-                 SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
-                 SQLDialeto = Replace(SQLDialeto, "TRIM(", "RTRIM(")
-                 SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(")
-                 SQLDialeto = Replace(SQLDialeto, "REPL(", "REPEAT(")
-                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DTOS(", ")", "DATE_FORMAT(", ",'%Y%m%d')")
-                 
-            Case "PGSQL", "POSTGRESQL"
-                SQLDialeto = Replace(SQLDialeto, " & ", " || ")
-                SQLDialeto = Replace(SQLDialeto, "#", "'")
-              
-               ' 1. Tratamento seguro dos literais lógicos (.T. e .F.) vindos do seu gerador
-        SQLDialeto = Replace(SQLDialeto, ".T.", "TRUE")
-        SQLDialeto = Replace(SQLDialeto, ".F.", "FALSE")
-        
-        ' 2. TRADUÇÃO DAS FUNÇÕES DE DATA E HORA (Access/VB6 para Postgres)
-        ' Amarrando o "(" para blindar campos como 'day_total', 'month_saldo', etc.
-        ' O Postgres aceita DATE_PART para extrair partes de uma data de forma direta
-        SQLDialeto = Replace(SQLDialeto, "DAY(", "DATE_PART('day', ")
-        SQLDialeto = Replace(SQLDialeto, "MONTH(", "DATE_PART('month', ")
-        SQLDialeto = Replace(SQLDialeto, "YEAR(", "DATE_PART('year', ")
-        SQLDialeto = Replace(SQLDialeto, "HOUR(", "DATE_PART('hour', ")
-        SQLDialeto = Replace(SQLDialeto, "MINUTE(", "DATE_PART('minute', ")
-        SQLDialeto = Replace(SQLDialeto, "SECOND(", "DATE_PART('second', ")
-        
-        ' 3. OUTRAS FUNÇÕES DE DATA E DATA ATUAL
-        SQLDialeto = Replace(SQLDialeto, "TODAY()", "CURRENT_DATE")
-        SQLDialeto = Replace(SQLDialeto, "DATE()", "CURRENT_DATE")
-        SQLDialeto = Replace(SQLDialeto, "NOW()", "CURRENT_TIMESTAMP")
-        
-        ' 4. FUNÇÕES DE STRING E MANIPULAÇÃO (Com o "(" colado para proteção)
-        SQLDialeto = Replace(SQLDialeto, "SUBSTR(", "SUBSTRING(")
-        SQLDialeto = Replace(SQLDialeto, "LEN(", "LENGTH(")
-        SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(") ' O TRIM() do Postgres limpa esquerda e direita
-        SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
-        
-        ' 5. MÁSCARAS E CONDICIONAIS DO DIALETO JET/ACCESS
-        SQLDialeto = Replace(SQLDialeto, "IIF(", "CASE WHEN ")
-        SQLDialeto = Replace(SQLDialeto, "IFNULL(", "COALESCE(")
-        
-        ' 6. PURGA RADICAL DE DATAS VAZIAS (Padrão string que o rigor do Postgres rejeita)
-        SQLDialeto = Replace(SQLDialeto, "'  /  /  '", "NULL")
-        SQLDialeto = Replace(SQLDialeto, "'00/00/0000'", "NULL")
-                 
-            Case "MSSQL", "SQLSERVER"
-            
-                 SQLDialeto = Replace(SQLDialeto, "TODAY()", "GETDATE() ")
-                 SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
-                 SQLDialeto = Replace(SQLDialeto, "TRIM(", "RTRIM(")
-                 SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "TRIM(")
-                 SQLDialeto = Replace(SQLDialeto, "REPL(", "REPLICATE(")
-                 SQLDialeto = Replace(SQLDialeto, "CHR(", "CHAR(")
-                 SQLDialeto = Replace(SQLDialeto, "SUBSTR(", "SUBSTRING(")
-                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DTOS(", ")", "CONVERT(char(8),", ",11)")
-                 '  {"STR(%1%,%2%,%3%)"      ,"STR(%1%,%2%,%3%)"},;
-                 '       {"STR(%1%,%2%)"       ,"STR(%1%,%2%,0)"},;
-                  '      {"IIF(%1%,%2%,%3%)"     ,"CASE WHEN %1% THEN %2% ELSE %3% END"},;
-            
-            Case "ODBC"
-        '       {"STR(%1%,%2%,%3%)"      ,"{fn RIGHT({fn SPACE(%2%)}+{fn CONVERT({fn ROUND(%1%,%3%)},SQL_VARCHAR)},%2%)}"},;
-        '                {"STR(%1%,%2%)"       ,"{fn RIGHT({fn SPACE(%2%)}+{fn CONVERT({fn ROUND(%1%,0)},SQL_VARCHAR)},%2%)}"},;
-         '               {"SUBSTR(%1%,%2%,%3%)"    ,"{fn SUBSTRING(%1%,%2%,%3%)}"},;
-          '              {"DTOS(%1%)"        ,"{fn CONVERT({fn YEAR(%1%)}, SQL_VARCHAR)}+{fn RIGHT('0'+ {fn CONVERT({fn MONTH(%1%)},SQL_VARCHAR)},2)}+{fn RIGHT('0'+ {fn CONVERT({fn DAYOFMONTH(%1%)},SQL_VARCHAR)},2)}"},;
-      '                  {"DAY(%1%)"         ,"{fn DAYOFMONTH(%1%)}"},;
-     '                   {"MONTH(%1%)"       ,"{fn MONTH(%1%)}"},;
-      '                  {"YEAR(%1%)"        ,"{fn YEAR(%1%)}"},;
-         '               {"UPPER(%1%)"       ,"{fn UCASE(%1%)}"},;
-         '               {"LOWER(%1%)"       ,"{fn LCASE(%1%)}"},;
-         '               {"LEFT(%1%,%2%)"      ,"{fn LEFT(%1%,%2%)}"},;
-          '              {"LEN(%1%)"         ,"{fn LENGTH(%1%)}"},;
-         '               {"CHR(%1%)"         ,"{fn CHAR(%1%)}"},;
-         '               {"ASC(%1%)"         ,"{fn ASCII(%1%)}"},;
-         '               {"TODAY()"          ,"{fn CURDATE()}"},;
-         '               {"REPL(%1%,%2%)"      ,"{fn REPEAT(%1%,%2%)}"},;
-         '               {"TRIM(%1%)"        ,"{fn RTRIM(%1%)}"},;
-         ''               {"ALLTRIM(%1%)"       ,"{fn LTRIM( {fn RTRIM(%1%) } )}"},;
-         '               {"RIGHT(%1%)"       ,"{fn RIGHT(%1%)}"},;
-            
-            Case "ADS", "ADVANTAGE"
-            Case "OLEDB"
-   '    {"STR(%1%,%2%,%3%)"      ,"{fn RIGHT({fn SPACE(%2%)}+{fn CONVERT({fn ROUND(%1%,%3%)},SQL_VARCHAR)},%2%)}"},;
-   '                     {"STR(%1%,%2%)"       ,"{fn RIGHT({fn SPACE(%2%)}+{fn CONVERT({fn ROUND(%1%,0)},SQL_VARCHAR)},%2%)}"},;
-   '                     {"SUBSTR(%1%,%2%,%3%)"    ,"{fn SUBSTRING(%1%,%2%,%3%)}"},;
-   '                     {"DTOS(%1%)"        ,"{fn CONVERT({fn YEAR(%1%)}, SQL_VARCHAR)}+{fn RIGHT('0'+ {fn CONVERT({fn MONTH(%1%)},SQL_VARCHAR)},2)}+{fn RIGHT('0'+ {fn CONVERT({fn DAYOFMONTH(%1%)},SQL_VARCHAR)},2)}"},;
-   '                     {"DAY(%1%)"         ,"{fn DAYOFMONTH(%1%)}"},;
-   '                     {"MONTH(%1%)"       ,"{fn MONTH(%1%)}"},;
-   '                     {"YEAR(%1%)"        ,"{fn YEAR(%1%)}"},;
-   '                     {"UPPER(%1%)"       ,"{fn UCASE(%1%)}"},;
-   '                     {"LOWER(%1%)"       ,"{fn LCASE(%1%)}"},;
-   '                     {"LEN(%1%)"         ,"{fn LENGTH(%1%)}"},;
-   '                     {"CHR(%1%)"         ,"{fn CHAR(%1%)}"},;
-   '                     {"ASC(%1%)"         ,"{fn ASCII(%1%)}"},;
-   '                     {"TODAY()"          ,"{fn CURDATE()}"},;
-   '                     {"REPL(%1%,%2%)"      ,"{fn REPEAT(%1%,%2%)}"},;
-   '                     {"TRIM(%1%)"        ,"{fn RTRIM(%1%)}"},;
-   '                     {"ALLTRIM(%1%)"       ,"{fn LTRIM( {fn RTRIM(%1%) } )}"},;
-   '                     {"LEFT(%1%,%2%)"      ,"{fn LEFT(%1%,%2%)}"},;
-   '                     {"RIGHT(%1%)"       ,"{fn RIGHT(%1%)}"},;
-            
-            Case "ORACLE", "OCI"
-                 SQLDialeto = Replace(SQLDialeto, "TODAY()", "SYSDATE ")
-                 SQLDialeto = Replace(SQLDialeto, "CHR(", "CHAR(")
-                 SQLDialeto = Replace(SQLDialeto, "ASC(", "ASCII(")
-                 SQLDialeto = Replace(SQLDialeto, "TRIM(", "RTRIM(")
-                 SQLDialeto = Replace(SQLDialeto, "ALLTRIM(", "LTRIM(RTRIM(")
-                 SQLDialeto = Replace(SQLDialeto, "LEN(", "LENGTH(")
-                 SQLDialeto = Replace(SQLDialeto, "REPL(", "REPLICATE(")
-                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DTOS(", ")", "TO_CHAR(", ",'YYYYMMDD')")
-                 SQLDialeto = SQLDIAPAR(SQLDialeto, "DAY(", ")", "TO_NUM(TO_CHAR(", ",'DD'))")
-                 SQLDialeto = SQLDIAPAR(SQLDialeto, "MONTH(", ")", "TO_NUM(TO_CHAR(", ",'MM'))")
-                 SQLDialeto = SQLDIAPAR(SQLDialeto, "YEAR(", ")", "TO_NUM(TO_CHAR(", "'YYYY'))")
-                 
-             '  {"LEFT(%1%,%2%)"     ,"SUBSTR(%1%,1,%2%)"},;
-            
-            Case "MDB", "ACCESS", "ACCDB"
-                 SQLDialeto = Replace(SQLDialeto, "CURRENTDATETIME", " now ")
-   
-     End Select
-End Function
-' ==============================================================================
-' FUNÇÃO: SQLPGSQLDOUBLEQUOTES
-' DESCRIÇÃO: Converte identificadores (tabelas/campos) para o padrão PostgreSQL
-'            utilizando aspas duplas, preservando literais em aspas simples.
-'
-' EXEMPLOS DE PARSE (TESTES):
-'
-' 1. SQL Simples:
-'    Entrada: SELECT Codigo, Nome FROM Clientes
-'    Saída:   SELECT "Codigo", "Nome" FROM "Clientes"
-'
-' 2. Proteção de Literais (Lookahead):
-'    Entrada: SELECT Nome FROM Usuarios WHERE Perfil = 'ADMIN' AND Acao = 'SELECT'
-'    Saída:   SELECT "Nome" FROM "Usuarios" WHERE "Perfil" = 'ADMIN' AND "Acao" = 'SELECT'
-'    (Nota: O valor 'SELECT' não recebe aspas duplas por estar dentro de aspas simples)
-'
-' 3. Funções e Agregações:
-'    Entrada: SELECT SUM(Total), Data FROM Vendas GROUP BY Data
-'    Saída:   SELECT SUM("Total"), "Data" FROM "Vendas" GROUP BY "Data"
-'
-' 4. Operadores e Datas:
-'    Entrada: SELECT * FROM Movimentos WHERE DtLanc = '2023-01-01'
-'    Saída:   SELECT * FROM "Movimentos" WHERE "DtLanc" = '2023-01-01'
-' ==============================================================================
-Public Function SQLPGSQLDOUBLEQUOTES(ByVal cSQL As String) As String
-    Dim regEx As Object
-    Set regEx = CreateObject("VBScript.RegExp")
-    
-    regEx.Global = True
-    regEx.IgnoreCase = True
-    
-    ' Padrão: Identifica palavras que são seguidas por vírgula ou espaço,
-    ' mas ignora palavras reservadas (simplificado para o exemplo)
-    ' O padrão abaixo busca palavras que NÃO estão entre aspas simples.
-    regEx.Pattern = "\b([a-z_][a-z0-9_]*)\b(?=(?:[^']*'[^']*')*[^']*$)"
-    
-    ' Aqui usamos o método do objeto regEx
-    ' O "$1" refere-se ao que foi encontrado no primeiro parênteses do Pattern
-    Dim sResult As String
-    sResult = regEx.Replace(cSQL, """$1""")
-    
-    ' Limpeza de palavras reservadas que não devem ter aspas
-    ' (Regex também pode fazer isso, mas aqui ilustro o ajuste pós-processo)
-    sResult = Replace(sResult, """SELECT""", "SELECT")
-    sResult = Replace(sResult, """FROM""", "FROM")
-    sResult = Replace(sResult, """WHERE""", "WHERE")
-    sResult = Replace(sResult, " ""SUM""(", " SUM(")
-    sResult = Replace(sResult, " ""COUNT""(", " COUNT(")
-    sResult = Replace(sResult, """SUM""", "SUM")
-    sResult = Replace(sResult, """COUNT""", "COUNT")
-    sResult = Replace(sResult, """GROUP""", "GROUP")
-    sResult = Replace(sResult, """BY""", "BY")
-    sResult = Replace(sResult, """AND""", "AND")
-    sResult = Replace(sResult, """OR""", "OR")
-    sResult = Replace(sResult, """ORDER""", "ORDER")
-    
-    SQLPGSQLDOUBLEQUOTES = sResult
-End Function
 
-Public Function SQLPGSQLDOUBLEQUOTES_antiga(ByVal cSQL As String) As String
-cSQL = UCase(cSQL)
-    cSQL = Replace(cSQL, "  ", " ")
-    cSQL = Replace(cSQL, " ,", ",")
-    cSQL = Replace(cSQL, ", ", ",")
-    cSQL = Replace(cSQL, "SELECT ", "SELECT " + Chr(34))
-    cSQL = Replace(cSQL, ",", Chr(34) + "," + Chr(34))
-    cSQL = Replace(cSQL, " FROM ", Chr(34) + " FROM " + Chr(34))
-    If InStr(cSQL, " WHERE ") > 0 Then
-      cSQL = Replace(cSQL, " WHERE ", Chr(34) + " WHERE " + Chr(34))
-      cSQL = Replace(cSQL, "=", Chr(34) + "=")
-    End If
-    If InStr(cSQL, " ORDER BY ") > 0 Then
-      cSQL = Replace(cSQL, " ORDER BY ", Chr(34) + " ORDER BY " + Chr(34))
-    End If
-    cSQL = cSQL + Chr(34)
-    cSQL = Replace(cSQL, Chr(39) + Chr(34), Chr(39))
-    cSQL = Replace(cSQL, Chr(34) + Chr(34), Chr(34))
-    cSQL = Replace(cSQL, Chr(34) + "*" + Chr(34), "*") 'astericos nao requer double quotes
-    
-    SQLPGSQLDOUBLEQUOTES_antiga = cSQL
-End Function
-Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As String
+
+Public Function GeraConn(ByVal cARQ As String, Optional cTipo As String = "") As String
   Dim nPOS As Long
   Dim cARQTMP As String
   
@@ -323,11 +63,11 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
   If InStr(cARQTMP, "[") > 0 Then                 ''ja e uma connecao
     Exit Function
   End If
-  If cTIPO = "JETMDB" Or cTIPO = "MDB" Or InStr(cARQTMP, ".MDB") > 0 Then
+  If cTipo = "JETMDB" Or cTipo = "MDB" Or InStr(cARQTMP, ".MDB") > 0 Then
     GeraConn = "[JETMDB]" & cARQ
     Exit Function
   End If
-  If cTIPO = "JETFOX" Or cTIPO = "FOX" Or cTIPO = "DBF" Or InStr(cARQTMP, ".DBF") > 0 Then
+  If cTipo = "JETFOX" Or cTipo = "FOX" Or cTipo = "DBF" Or InStr(cARQTMP, ".DBF") > 0 Then
     GeraConn = "[JETFOX]" & cARQ
     Exit Function
   End If
@@ -343,7 +83,7 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
   
-  If cTIPO = "SQLITE" Or InStr(LCase(cARQ), ".sqlite") > 0 Or InStr(LCase(cARQ), ".sqlite3") > 0 _
+  If cTipo = "SQLITE" Or InStr(LCase(cARQ), ".sqlite") > 0 Or InStr(LCase(cARQ), ".sqlite3") > 0 _
                  Or InStr(LCase(cARQ), ".fossil") > 0 Or InStr(LCase(cARQ), ".db3") > 0 _
                  Or (InStr(LCase(cARQ), ".db") > 0 And InStr(cARQTMP, ".DBF") = 0) Then
     GeraConn = "[SQLITE]" & cARQ
@@ -392,17 +132,17 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
   
-  If Mid(cTIPO, 1, 5) = "ACCDB" Then ' ACCDBDBFIII  ACCDBMDB PX3 PX4 PX5 XLS XLXS XLXB, CSV... _
+  If Mid(cTipo, 1, 5) = "ACCDB" Then ' ACCDBDBFIII  ACCDBMDB PX3 PX4 PX5 XLS XLXS XLXB, CSV... _
                                    cada versao jet suporta extensoes em outros formatos de arquivos _
                                    posicao 2,3 versao 12,13,14,115 _
                                    posicao 4 MDB ACCDB formato extensao
-     GeraConn = "[ACCDB" & Mid(cTIPO, 6) & "]"
+     GeraConn = "[ACCDB" & Mid(cTipo, 6) & "]"
      Exit Function
   End If
  
   
-If Len(cTIPO) > 0 Then
-  Select Case cTIPO
+If Len(cTipo) > 0 Then
+  Select Case cTipo
       Case "XLS"
         GeraConn = "[XLS]" & cARQ
       Case "XLSX"
