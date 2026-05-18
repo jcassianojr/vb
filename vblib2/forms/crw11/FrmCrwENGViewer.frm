@@ -2,13 +2,13 @@ VERSION 5.00
 Object = "{F62B9FA4-455F-4FE3-8A2D-205E4F0BCAFB}#11.5#0"; "CRViewer.dll"
 Begin VB.Form FrmCrwENGViewer 
    Caption         =   "Visualizador de Relatorios"
-   ClientHeight    =   5415
+   ClientHeight    =   5412
    ClientLeft      =   60
-   ClientTop       =   405
+   ClientTop       =   408
    ClientWidth     =   14700
    Icon            =   "FrmCrwENGViewer.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5415
+   ScaleHeight     =   5412
    ScaleWidth      =   14700
    StartUpPosition =   3  'Windows Default
    Begin CrystalActiveXReportViewerLib11_5Ctl.CrystalActiveXReportViewer CRViewer1 
@@ -60,7 +60,9 @@ Private MyApp As CRAXDRT.Application
 Private MyRpt As CRAXDRT.Report
 
 Private Sub Form_Load()
+    Dim cFILTRO As String
     On Error GoTo ErroLoad11
+    
     
     ' ==========================================================================
     ' 1. DIMENSIONAMENTO E POSICIONAMENTO DA TELA
@@ -83,6 +85,7 @@ Private Sub Form_Load()
     ' ==========================================================================
     ' PASSO A: APLICA O FILTRO (SELECTION FORMULA) -> PRIMEIRO!
     ' ==========================================================================
+    cFILTRO = aRELCFG(14)
     If Len(Trim(cFILTRO)) > 0 Then
         MyRpt.RecordSelectionFormula = cFILTRO
     End If

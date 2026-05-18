@@ -46,15 +46,15 @@ Public Const JET_ENGINETYPE_HTML1X = 70
 ''Tipo con gera a matrix com o tipo conecao,string concecao,tipo interno conecao
 ''Tipodado2 retorna o tipo C aracter D ata ...
 ''Tipodado retorno o tipo conforme o padrao ado
-Public Function GeracArq(ByVal cARQ As String, Optional ByVal cTipo As String = "", Optional ByVal lWRITE As Boolean = True) As String
+Public Function GeracArq(ByVal cARQ As String, Optional ByVal cTIPO As String = "", Optional ByVal lWRITE As Boolean = True) As String
   Dim aRETU As Variant
-  cARQ = GeraConn(cARQ, cTipo)
+  cARQ = GeraConn(cARQ, cTIPO)
   aRETU = TipoConn(cARQ, , , lWRITE)
   GeracArq = aRETU(1)
 End Function
 
 
-Public Function GeraConn(ByVal cARQ As String, Optional cTipo As String = "") As String
+Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As String
   Dim nPOS As Long
   Dim cARQTMP As String
   
@@ -63,11 +63,11 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTipo As String = "") As
   If InStr(cARQTMP, "[") > 0 Then                 ''ja e uma connecao
     Exit Function
   End If
-  If cTipo = "JETMDB" Or cTipo = "MDB" Or InStr(cARQTMP, ".MDB") > 0 Then
+  If cTIPO = "JETMDB" Or cTIPO = "MDB" Or InStr(cARQTMP, ".MDB") > 0 Then
     GeraConn = "[JETMDB]" & cARQ
     Exit Function
   End If
-  If cTipo = "JETFOX" Or cTipo = "FOX" Or cTipo = "DBF" Or InStr(cARQTMP, ".DBF") > 0 Then
+  If cTIPO = "JETFOX" Or cTIPO = "FOX" Or cTIPO = "DBF" Or InStr(cARQTMP, ".DBF") > 0 Then
     GeraConn = "[JETFOX]" & cARQ
     Exit Function
   End If
@@ -83,7 +83,7 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTipo As String = "") As
     Exit Function
   End If
   
-  If cTipo = "SQLITE" Or InStr(LCase(cARQ), ".sqlite") > 0 Or InStr(LCase(cARQ), ".sqlite3") > 0 _
+  If cTIPO = "SQLITE" Or InStr(LCase(cARQ), ".sqlite") > 0 Or InStr(LCase(cARQ), ".sqlite3") > 0 _
                  Or InStr(LCase(cARQ), ".fossil") > 0 Or InStr(LCase(cARQ), ".db3") > 0 _
                  Or (InStr(LCase(cARQ), ".db") > 0 And InStr(cARQTMP, ".DBF") = 0) Then
     GeraConn = "[SQLITE]" & cARQ
@@ -132,17 +132,17 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTipo As String = "") As
     Exit Function
   End If
   
-  If Mid(cTipo, 1, 5) = "ACCDB" Then ' ACCDBDBFIII  ACCDBMDB PX3 PX4 PX5 XLS XLXS XLXB, CSV... _
+  If Mid(cTIPO, 1, 5) = "ACCDB" Then ' ACCDBDBFIII  ACCDBMDB PX3 PX4 PX5 XLS XLXS XLXB, CSV... _
                                    cada versao jet suporta extensoes em outros formatos de arquivos _
                                    posicao 2,3 versao 12,13,14,115 _
                                    posicao 4 MDB ACCDB formato extensao
-     GeraConn = "[ACCDB" & Mid(cTipo, 6) & "]"
+     GeraConn = "[ACCDB" & Mid(cTIPO, 6) & "]"
      Exit Function
   End If
  
   
-If Len(cTipo) > 0 Then
-  Select Case cTipo
+If Len(cTIPO) > 0 Then
+  Select Case cTIPO
       Case "XLS"
         GeraConn = "[XLS]" & cARQ
       Case "XLSX"
@@ -174,7 +174,7 @@ End If
 End Function
 
 Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = "", _
-                         Optional ByVal cPASS As String = "", Optional ByVal lWRITE As Boolean = True) As Variant
+                         Optional ByVal cPASS As String = "", Optional ByVal lWRITE As Boolean = True, Optional ByVal cDATABASE As String = "") As Variant
   Dim cARQTMP As String
   Dim cJETUSO As String
   Dim lTEMMDB As Boolean
@@ -188,6 +188,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   Dim cADSNOM As String
   Dim cXLSVER As String '
   Dim aCONN As Variant
+  Dim cSecaoCofre As String
   
   'usa boolean para agilizar if,case... no lugar de comparacao com string
   lTEMMDB = False
@@ -202,6 +203,24 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   TipoConn = Array("ADO", cARQ, "???")
   cARQTMP = UCase(cARQ)
   
+  
+  ' -----------------------------------------------------------------
+    ' INTEGRAÇÃO COM O COFRE (modSeguranca.bas):
+    ' Se os parâmetros opcionais vierem vazios, busca no config.dat
+    ' -----------------------------------------------------------------
+    cSecaoCofre = UCase(Trim(cDATABASE))
+    If Trim(cUSER) = "" Then
+        cUSER = LerDoCofre(cSecaoCofre, "User")
+    End If
+
+    If Trim(cPASS) = "" Then
+        cPASS = LerDoCofre(cSecaoCofre, "Password")
+    End If
+
+   ' cserver e o carq coneccao
+   ' If Trim(cServer) = "" Then
+   '     cServer = LerDoCofre(cSecaoCofre, "Server")
+   ' End If
   '
   'access
   '
