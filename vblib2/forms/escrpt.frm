@@ -2,8 +2,8 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escRPT 
    Caption         =   "Escolha o grupo de Relatorio"
    ClientHeight    =   6675
@@ -669,14 +669,14 @@ Public Sub MyPrintingJPG()
    Case 1
        Printer.PaintPicture Picture1.Picture, 0, 0
    Case 1
-       Printer.PaintPicture Picture1.Picture, Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode), 0
+       Printer.PaintPicture Picture1.Picture, Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.width, vbHimetric, Printer.ScaleMode), 0
   Case 2
-    Printer.PaintPicture Picture1.Picture, 0, Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)
+    Printer.PaintPicture Picture1.Picture, 0, Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.height, vbHimetric, Printer.ScaleMode)
   Case 3
-    Printer.PaintPicture Picture1.Picture, Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode), Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)
+    Printer.PaintPicture Picture1.Picture, Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.width, vbHimetric, Printer.ScaleMode), Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.height, vbHimetric, Printer.ScaleMode)
 
   Case 4
-    Printer.PaintPicture Picture1.Picture, (Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.Width, vbHimetric, Printer.ScaleMode)) / 2, (Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.Height, vbHimetric, Printer.ScaleMode)) / 2
+    Printer.PaintPicture Picture1.Picture, (Printer.ScaleWidth - Picture1.ScaleX(Picture1.Picture.width, vbHimetric, Printer.ScaleMode)) / 2, (Printer.ScaleHeight - Picture1.ScaleY(Picture1.Picture.height, vbHimetric, Printer.ScaleMode)) / 2
 
   
   Case Else
@@ -699,23 +699,8 @@ Public Sub MyPrintingTXT()
 End Sub
 
 Public Function PRINTZPLONLINE()
-Dim fileFile As Integer
-  Dim STRBUFFER As String
-  Dim cLINHA As String
-  
-  fileFile = FreeFile
-      Open cARQRTF For Input As #fileFile
-      Do While Not EOF(fileFile)
-        'read line
-        Input #fileFile, STRBUFFER
-        cLINHA = cLINHA + STRBUFFER
-      Loop
-      Close fileFile
-      cLINHA = Replace(cLINHA, Chr(13), "")
-      cLINHA = Replace(cLINHA, Chr(10), "")
-      ePASS02 = "http://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/"
-      ePASS02 = ePASS02 + Chr(34) + cLINHA + Chr(34)
-      OpenUrl (ePASS02)
+      ePASS01 = cARQRTF
+      FrmZplPreview.Show
 End Function
 
 
