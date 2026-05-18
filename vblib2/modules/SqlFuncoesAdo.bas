@@ -1,5 +1,36 @@
 Attribute VB_Name = "SqlFuncoesAdo"
 Option Explicit
+
+Public Function pgSetValues(ByRef oCON As Object) As Boolean
+    Dim cCOM As String
+    Dim oCOMANDO As Object ' Usando Object para manter o padrão flexível do seu projeto
+    
+    On Error GoTo ErroPostgres
+    pgSetValues = False
+    
+    ' Se a conexão não estiver ativa, sai para evitar travamentos
+    If oCON Is Nothing Then Exit Function
+    
+    ' Cria o objeto de comando ADO dinamicamente
+    Set oCOMANDO = CreateObject("ADODB.Command")
+    oCOMANDO.CommandType = 1 ' adCmdText = 1
+    Set oCOMANDO.ActiveConnection = oCON
+
+    ' INJEÇÃO DO SCHEMA E ENCODING ANSI (Porto Seguro)
+    ' Configura o search_path para o seu esquema e garante tráfego em WIN1252
+    cCOM = "SET search_path TO myschema, public; SET client_encoding TO 'WIN1252';"
+    oCOMANDO.CommandText = cCOM
+    oCOMANDO.Execute
+
+    pgSetValues = True
+    Set oCOMANDO = Nothing
+    Exit Function
+
+ErroPostgres:
+    ' Se falhar (ex: banco temporariamente fora ou string malformada), limpa a memória
+    Set oCOMANDO = Nothing
+    pgSetValues = False
+End Function
 Public Function VFPSetValues(ByRef oCON As Object) As Boolean  ''como objeto nao gerou erro como byref ADODB.Connection as object
 'exemplos copia e cola
 'VFPSetValues DB
@@ -34,7 +65,7 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTable As String, ByVa
   Dim cCOM As String
   Dim oCON As ADODB.Connection
   Dim oCOMANDO As ADODB.Command
-  On Error GoTo trataerro
+  On Error GoTo TrataErro
 
   'ZAP PACK
   'delete from mail where numero=1
@@ -102,7 +133,7 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTable As String, ByVa
   AdoComandodbf = True
 
   Exit Function
-trataerro:
+TrataErro:
   On Error Resume Next
   Select Case Err.Number
   Case Else
@@ -116,7 +147,7 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
   Dim oCOM As ADODB.Command
   Dim cconn As String
 
-  On Error GoTo trataerro
+  On Error GoTo TrataErro
   ADOComando = False
   cARQ = GeraConn(cARQ)
   aRETU = TipoConn(cARQ)  ''Gera string conneccao
@@ -166,7 +197,7 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
     Set oDB = Nothing
   
   Exit Function
-trataerro:
+TrataErro:
   Select Case Err.Number
   Case Else
     SayErro "SQL ADO Comando:" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL
@@ -256,7 +287,9 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
   If InStr(UCase(cARQ), "VFPOLEDB") > 0 Then  ''delete on para foxpro nao usar registro deletados
     VFPSetValues oDB
   End If
-
+  If InStr(UCase(cARQ), "PGSQL") > 0 Or InStr(UCase(cARQ), "POSTGRESQL") > 0 Then
+        pgSetValues oDB
+  End If
 
   Set oRS = New ADODB.Recordset
   If aARQ(2) = "SQLITE" Then
@@ -349,7 +382,9 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
   If InStr(cARQ, "VFPOLEDB") > 0 Then  ''delete on para foxpro nao usar registro deletados
     VFPSetValues oDB
   End If
-
+If InStr(UCase(cARQ), "PGSQL") > 0 Or InStr(UCase(cARQ), "POSTGRESQL") > 0 Then
+        pgSetValues oDB
+  End If
 
   lOPEN = True
 
@@ -466,6 +501,9 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
 
   If InStr(cARQ, "VFPOLEDB") Then
     VFPSetValues oDB
+  End If
+  If InStr(UCase(cARQ), "PGSQL") > 0 Or InStr(UCase(cARQ), "POSTGRESQL") > 0 Then
+        pgSetValues oDB
   End If
 
   lOPEN = True
@@ -644,6 +682,9 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
   If InStr(cARQ1, "VFPOLEDB") Then
     VFPSetValues oDB
   End If
+  If InStr(UCase(cARQ1), "PGSQL") > 0 Or InStr(UCase(cARQ1), "POSTGRESQL") > 0 Then
+        pgSetValues oDB
+  End If
 
   Set oRS = New ADODB.Recordset
   If aRETU(1) = "SQLITE" Then
@@ -770,6 +811,9 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   'na string de conecao delete =yes
   If InStr(cARQ, "VFPOLEDB") > 0 Then  ''delete on para foxpro nao usar registro deletados
     VFPSetValues oDB
+  End If
+  If InStr(UCase(cARQ), "PGSQL") > 0 Or InStr(UCase(cARQ), "POSTGRESQL") > 0 Then
+        pgSetValues oDB
   End If
 
   lOPEN = True
@@ -979,7 +1023,10 @@ oDBDES.Open cARQDES1
 If InStr(cARQDES1, "VFPOLEDB") Then
    VFPSetValues oDBDES
 End If
-
+If InStr(UCase(cARQDES1), "PGSQL") > 0 Or InStr(UCase(cARQDES1), "POSTGRESQL") > 0 Then
+        pgSetValues oDB
+End If
+  
 lOPEN = True
 
 Set oRS = New ADODB.Recordset
