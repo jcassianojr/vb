@@ -6,10 +6,10 @@ Begin VB.Form FrmPreview
    ClientHeight    =   5124
    ClientLeft      =   60
    ClientTop       =   408
-   ClientWidth     =   12852
+   ClientWidth     =   13188
    LinkTopic       =   "Form1"
    ScaleHeight     =   5124
-   ScaleWidth      =   12852
+   ScaleWidth      =   13188
    StartUpPosition =   3  'Windows Default
    Begin OrdoWebView2.OrdoWebView OrdoWebView1 
       Height          =   4695
@@ -103,6 +103,48 @@ Begin VB.Form FrmPreview
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin XPControls.XPButton cmdSavePNG 
+      Height          =   312
+      Left            =   11520
+      TabIndex        =   5
+      TabStop         =   0   'False
+      Top             =   2520
+      Width           =   1212
+      _ExtentX        =   2138
+      _ExtentY        =   550
+      Picture         =   "FrmPreview.frx":1468
+      Caption         =   "PNG"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton cmdSavejpg 
+      Height          =   312
+      Left            =   11520
+      TabIndex        =   6
+      TabStop         =   0   'False
+      Top             =   2880
+      Width           =   1212
+      _ExtentX        =   2138
+      _ExtentY        =   550
+      Picture         =   "FrmPreview.frx":1902
+      Caption         =   "JPG"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
 End
 Attribute VB_Name = "FrmPreview"
 Attribute VB_GlobalNameSpace = False
@@ -117,17 +159,53 @@ End Sub
 
 Private Sub cmdSavehtml_Click()
 Dim sFileName As String
-Dim sFILTER As String
-  sFILTER = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-  sFileName = FileSave(Me, sFILTER, 1, "HTML", , , "Salvar HTML Como")
+Dim SFILTER As String
+  SFILTER = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, SFILTER, 1, "HTML", , , "Salvar HTML Como")
   FileWrite sFileName, OrdoWebView1.GetInnerHTML
+End Sub
+
+Private Sub cmdSavejpg_Click()
+Dim SFILTER As String
+    Dim sFileName As String
+    Dim sSugestaoNome As String
+    
+    ' Extrai o nome do arquivo atual para sugerir na caixa de diálogo (ex: "etiqueta")
+    sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
+    
+    ' Filtro formatado usando "|" conforme exigido pela sua função mFileAPI
+    SFILTER = "Imagem JPG (*.jpg;*.jpeg)|*.jpg;*.jpeg|Todos Arquivos (*.*)|*.*"
+    
+    sFileName = FileSave(Me, SFILTER, 1, "JPG", sSugestaoNome, , "Salvar Etiqueta Como Imagem JPG")
+    
+    If sFileName <> "" Then
+        Call SalvarPreviewComoImagem(sFileName)
+    End If
+End Sub
+
+Private Sub cmdSavePNG_Click()
+Dim SFILTER As String
+    Dim sFileName As String
+    Dim sSugestaoNome As String
+    
+    ' Extrai o nome do arquivo atual para sugerir na caixa de diálogo
+    sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
+    
+    ' Filtro formatado usando "|" conforme exigido pela sua função mFileAPI
+    SFILTER = "Imagem PNG (*.png)|*.png|Todos Arquivos (*.*)|*.*"
+    
+    sFileName = FileSave(Me, SFILTER, 1, "PNG", sSugestaoNome, , "Salvar Etiqueta Como Imagem PNG")
+    
+    If sFileName <> "" Then
+        Call SalvarPreviewComoImagem(sFileName)
+    End If
 End Sub
 
 Private Sub cmdSaveTXT_Click()
 Dim sFileName As String
-Dim sFILTER As String
-  sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-  sFileName = FileSave(Me, sFILTER, 1, "HTML", , , "Salvar TXT Como")
+Dim SFILTER As String
+  SFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, SFILTER, 1, "HTML", , , "Salvar TXT Como")
   FileWrite sFileName, OrdoWebView1.GetInnerText
 End Sub
 
@@ -143,6 +221,8 @@ Private Sub Form_Load()
     ' Se encontrar ".zpl" (seja no nome de um arquivo local ou em uma URL de etiqueta),
     ' desvia para o motor de renderização local offline.
     If InStr(1, mvarCaminhoArquivo, ".zpl", vbTextCompare) > 0 Then
+        cmdSavehtml.Visible = False
+        cmdSaveTXT.Visible = False
         Call RenderizarMotorZplLocal
     Else
         ' ROTA NORMAL LIVRE: Se for .html, .txt, ou qualquer URL externa, o WebView2 abre direto
@@ -225,6 +305,7 @@ Private Sub RenderizarMotorZplLocal()
     streamOut.WriteLine "</html>"
     streamOut.Close
     
+    OrdoWebView1.IsScriptEnabled = True
     ' Executa a navegação estável para o motor gerado localmente
     OrdoWebView1.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
     
@@ -250,3 +331,66 @@ Private Sub Form_Unload(Cancel As Integer)
         Set fso = Nothing
     End If
 End Sub
+
+' ==============================================================================
+' FUNÇÃO: Força o navegador a extrair o Canvas (PNG ou JPG) e dispara o download
+' ==============================================================================
+Public Sub SalvarPreviewComoImagem(ByVal cCaminhoDestino As String)
+    On Error GoTo ErroSalvar
+    Dim fso As Object
+    Dim cNomeArquivo As String
+    Dim cExtensao As String
+    Dim cMimeType As String
+    Dim cScript As String
+    
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    cNomeArquivo = fso.GetFileName(cCaminhoDestino)
+    cExtensao = LCase(fso.GetExtensionName(cCaminhoDestino))
+    Set fso = Nothing
+    
+    ' Define o MimeType correto com base na escolha do utilizador
+    If cExtensao = "jpg" Or cExtensao = "jpeg" Then
+        cMimeType = "image/jpeg"
+    Else
+        cMimeType = "image/png"
+    End If
+    
+    ' Garante que o motor aceita a execução de scripts antes de rodar
+    OrdoWebView1.IsScriptEnabled = True
+    
+    ' Monta o script JavaScript adaptado. Se for JPEG, ele cria um canvas temporário
+    ' com fundo branco para evitar que a transparência por trás da etiqueta fique preta.
+    cScript = "(function() {" & _
+              "  var canvas = document.getElementById('canvas');" & _
+              "  if (canvas) {" & _
+              "    var finalDataUrl;" & _
+              "    if ('" & cMimeType & "' === 'image/jpeg') {" & _
+              "      var tempCanvas = document.createElement('canvas');" & _
+              "      tempCanvas.width = canvas.width;" & _
+              "      tempCanvas.height = canvas.height;" & _
+              "      var ctx = tempCanvas.getContext('2d');" & _
+              "      ctx.fillStyle = '#FFFFFF';" & _
+              "      ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);" & _
+              "      ctx.drawImage(canvas, 0, 0);" & _
+              "      finalDataUrl = tempCanvas.toDataURL('image/jpeg', 0.9);" & _
+              "    } else {" & _
+              "      finalDataUrl = canvas.toDataURL('image/png');" & _
+              "    }" & _
+              "    var lnk = document.createElement('a');" & _
+              "    lnk.download = '" & cNomeArquivo & "';" & _
+              "    lnk.href = finalDataUrl;" & _
+              "    document.body.appendChild(lnk);" & _
+              "    lnk.click();" & _
+              "    document.body.removeChild(lnk);" & _
+              "  }" & _
+              "})();"
+              
+    ' Executa o script de download nativo do Chromium sem travar o VB6
+    OrdoWebView1.ExecuteScript cScript
+    
+    Exit Sub
+
+ErroSalvar:
+    MsgBox "Falha ao exportar imagem da etiqueta: " & Err.Description, vbCritical, "Erro de Salvamento"
+End Sub
+
