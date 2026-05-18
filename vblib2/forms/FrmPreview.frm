@@ -3,13 +3,13 @@ Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F74FE4B4-2AF4-4F6A-B323-05690FDB6730}#1.3#0"; "OrdoWebView2.OCX"
 Begin VB.Form FrmPreview 
    Caption         =   "FrmPreview"
-   ClientHeight    =   5124
+   ClientHeight    =   5130
    ClientLeft      =   60
-   ClientTop       =   408
-   ClientWidth     =   13188
+   ClientTop       =   405
+   ClientWidth     =   13185
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5124
-   ScaleWidth      =   13188
+   ScaleHeight     =   5130
+   ScaleWidth      =   13185
    StartUpPosition =   3  'Windows Default
    Begin OrdoWebView2.OrdoWebView OrdoWebView1 
       Height          =   4695
@@ -17,8 +17,8 @@ Begin VB.Form FrmPreview
       TabIndex        =   0
       Top             =   120
       Width           =   10815
-      _ExtentX        =   19071
-      _ExtentY        =   8276
+      _ExtentX        =   19076
+      _ExtentY        =   8281
       Search_URL      =   ""
       IsScriptEnabled =   0   'False
       UseEdgeFixedVersion=   -1  'True
@@ -29,13 +29,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   1
       Top             =   720
       Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   762
+      _ExtentX        =   2143
+      _ExtentY        =   767
       Picture         =   "FrmPreview.frx":0000
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -49,13 +49,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   2
       Top             =   240
       Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   762
+      _ExtentX        =   2143
+      _ExtentY        =   767
       Picture         =   "FrmPreview.frx":059A
       Caption         =   "Imprimir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -69,13 +69,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   3
       Top             =   1560
       Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   656
+      _ExtentX        =   2143
+      _ExtentY        =   661
       Picture         =   "FrmPreview.frx":0B34
       Caption         =   "Html"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -89,13 +89,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   4
       Top             =   2040
       Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   656
+      _ExtentX        =   2143
+      _ExtentY        =   661
       Picture         =   "FrmPreview.frx":10CE
       Caption         =   "TXT"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -110,13 +110,13 @@ Begin VB.Form FrmPreview
       TabStop         =   0   'False
       Top             =   2520
       Width           =   1212
-      _ExtentX        =   2138
-      _ExtentY        =   550
+      _ExtentX        =   2143
+      _ExtentY        =   556
       Picture         =   "FrmPreview.frx":1468
       Caption         =   "PNG"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -131,13 +131,53 @@ Begin VB.Form FrmPreview
       TabStop         =   0   'False
       Top             =   2880
       Width           =   1212
-      _ExtentX        =   2138
-      _ExtentY        =   550
+      _ExtentX        =   2143
+      _ExtentY        =   556
       Picture         =   "FrmPreview.frx":1902
       Caption         =   "JPG"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton cmdsavedoc 
+      Height          =   375
+      Left            =   11520
+      TabIndex        =   7
+      Top             =   3240
+      Width           =   1215
+      _ExtentX        =   2143
+      _ExtentY        =   661
+      Picture         =   "FrmPreview.frx":1D9C
+      Caption         =   "DOC"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton CmdSavePDF 
+      Height          =   375
+      Left            =   11520
+      TabIndex        =   8
+      Top             =   3720
+      Width           =   1215
+      _ExtentX        =   2143
+      _ExtentY        =   661
+      Picture         =   "FrmPreview.frx":2136
+      Caption         =   "PDF"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -159,14 +199,14 @@ End Sub
 
 Private Sub cmdSavehtml_Click()
 Dim sFileName As String
-Dim SFILTER As String
-  SFILTER = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-  sFileName = FileSave(Me, SFILTER, 1, "HTML", , , "Salvar HTML Como")
+Dim sFilter As String
+  sFilter = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, sFilter, 1, "HTML", , , "Salvar HTML Como")
   FileWrite sFileName, OrdoWebView1.GetInnerHTML
 End Sub
 
 Private Sub cmdSavejpg_Click()
-Dim SFILTER As String
+Dim sFilter As String
     Dim sFileName As String
     Dim sSugestaoNome As String
     
@@ -174,17 +214,19 @@ Dim SFILTER As String
     sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
     
     ' Filtro formatado usando "|" conforme exigido pela sua função mFileAPI
-    SFILTER = "Imagem JPG (*.jpg;*.jpeg)|*.jpg;*.jpeg|Todos Arquivos (*.*)|*.*"
+    sFilter = "Imagem JPG (*.jpg;*.jpeg)|*.jpg;*.jpeg|Todos Arquivos (*.*)|*.*"
     
-    sFileName = FileSave(Me, SFILTER, 1, "JPG", sSugestaoNome, , "Salvar Etiqueta Como Imagem JPG")
+    sFileName = FileSave(Me, sFilter, 1, "JPG", sSugestaoNome, , "Salvar Etiqueta Como Imagem JPG")
     
     If sFileName <> "" Then
         Call SalvarPreviewComoImagem(sFileName)
     End If
 End Sub
 
+
+
 Private Sub cmdSavePNG_Click()
-Dim SFILTER As String
+Dim sFilter As String
     Dim sFileName As String
     Dim sSugestaoNome As String
     
@@ -192,9 +234,9 @@ Dim SFILTER As String
     sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
     
     ' Filtro formatado usando "|" conforme exigido pela sua função mFileAPI
-    SFILTER = "Imagem PNG (*.png)|*.png|Todos Arquivos (*.*)|*.*"
+    sFilter = "Imagem PNG (*.png)|*.png|Todos Arquivos (*.*)|*.*"
     
-    sFileName = FileSave(Me, SFILTER, 1, "PNG", sSugestaoNome, , "Salvar Etiqueta Como Imagem PNG")
+    sFileName = FileSave(Me, sFilter, 1, "PNG", sSugestaoNome, , "Salvar Etiqueta Como Imagem PNG")
     
     If sFileName <> "" Then
         Call SalvarPreviewComoImagem(sFileName)
@@ -203,9 +245,9 @@ End Sub
 
 Private Sub cmdSaveTXT_Click()
 Dim sFileName As String
-Dim SFILTER As String
-  SFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-  sFileName = FileSave(Me, SFILTER, 1, "HTML", , , "Salvar TXT Como")
+Dim sFilter As String
+  sFilter = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, sFilter, 1, "HTML", , , "Salvar TXT Como")
   FileWrite sFileName, OrdoWebView1.GetInnerText
 End Sub
 
@@ -214,21 +256,87 @@ Unload Me
 End Sub
 
 Private Sub Form_Load()
- ' 1. Captura o destino passado pela variável global (pode ser "C:\arq.txt" ou "http://...")
-    mvarCaminhoArquivo = Trim(CStr(cARQRTF)) '//Trim(CStr(ePASS01))
+    ' 1. Captura o destino passado pela variável global de transporte
+    mvarCaminhoArquivo = Trim(CStr(cARQRTF))
     
-    ' 2. IF SIMPLES POR SUBSTRING:
-    ' Se encontrar ".zpl" (seja no nome de um arquivo local ou em uma URL de etiqueta),
-    ' desvia para o motor de renderização local offline.
+    ' 2. CONTROLE DE INTERFACE DINÂMICO
     If InStr(1, mvarCaminhoArquivo, ".zpl", vbTextCompare) > 0 Then
+        ' --- MODO ETIQUETA ZPL ---
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
+        cmdSavePNG.Visible = True
+        cmdSavejpg.Visible = True
+        
+        cmdSavePNG.Top = cmdSavehtml.Top
+        cmdSavejpg.Top = cmdSavePNG.Top + cmdSavePNG.Height + 120
+        
         Call RenderizarMotorZplLocal
+    ElseIf InStr(1, mvarCaminhoArquivo, ".xlsx", vbTextCompare) > 0 Or _
+           InStr(1, mvarCaminhoArquivo, ".xls", vbTextCompare) > 0 Or _
+           InStr(1, mvarCaminhoArquivo, ".ods", vbTextCompare) > 0 Then
+        ' --- MODO LEITOR DE PLANILHAS (EXCEL / CALC) ---
+        cmdSavehtml.Visible = False
+        cmdSaveTXT.Visible = False
+        cmdSavePNG.Visible = False
+        cmdSavejpg.Visible = False
+        
+        Me.Caption = "Visualizador de Planilhas - " & NomeArq(mvarCaminhoArquivo, False)
+        
+        ' Dispara o motor de renderização de planilhas local
+        Call RenderizarMotorPlanilhaLocal
+        
+   ElseIf InStr(1, mvarCaminhoArquivo, ".rtf", vbTextCompare) > 0 Then
+        ' --- MODO LEITOR DE RTF MODERNO ---
+        cmdSavehtml.Visible = False
+        cmdSaveTXT.Visible = False
+        cmdSavePNG.Visible = False
+        cmdSavejpg.Visible = False
+        
+        Me.Caption = "Visualizador RTF - " & NomeArq(mvarCaminhoArquivo, False)
+        
+        ' Dispara a renderização e conversão do RTF para HTML local
+        Call RenderizarMotorRtfLocal
+        
+   ElseIf InStr(1, mvarCaminhoArquivo, ".docx", vbTextCompare) > 0 Or _
+           InStr(1, mvarCaminhoArquivo, ".doc", vbTextCompare) > 0 Or _
+           InStr(1, mvarCaminhoArquivo, ".odt", vbTextCompare) > 0 Then
+        ' --- MODO LEITOR DE DOCUMENTOS (WORD / ODT) ---
+        ' Escondemos os botões de gravação de texto padrão do VB6 por enquanto
+        cmdSavehtml.Visible = False
+        cmdSaveTXT.Visible = False
+        cmdSavePNG.Visible = False
+        cmdSavejpg.Visible = False
+        
+        Me.Caption = "Visualizador de Documentos - " & NomeArq(mvarCaminhoArquivo, False)
+        
+        ' Dispara a renderização e conversão do Word para HTML local
+        Call RenderizarMotorDocLocal
+        
+    ElseIf InStr(1, mvarCaminhoArquivo, ".pdf", vbTextCompare) > 0 Then
+        ' --- MODO LEITOR DE PDF ---
+        ' No modo PDF, os botões de salvar texto/HTML do VB6 não fazem sentido,
+        ' pois o próprio leitor do Chromium já tem botões internos de download/print.
+        cmdSavehtml.Visible = False
+        cmdSaveTXT.Visible = False
+        cmdSavePNG.Visible = False
+        cmdSavejpg.Visible = False
+        
+        ' Altera o título da tela com o nome do PDF
+        Me.Caption = "Leitor de PDF - " & NomeArq(mvarCaminhoArquivo, False)
+        
+        ' Ativa o motor e navega para o arquivo PDF local usando o protocolo correto
+        OrdoWebView1.IsScriptEnabled = True
+        OrdoWebView1.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\", "/")
+        
     Else
-        ' ROTA NORMAL LIVRE: Se for .html, .txt, ou qualquer URL externa, o WebView2 abre direto
+        ' --- MODO RELATÓRIO NORMAL (HTML, TXT, URL) ---
+        cmdSavehtml.Visible = True
+        cmdSaveTXT.Visible = True
+        cmdSavePNG.Visible = False
+        cmdSavejpg.Visible = False
+        
         Me.Caption = "Visualizador - " & mvarCaminhoArquivo
         
-        ' Se for um arquivo local, adicionamos o protocolo file:///, se for URL o Navigate resolve direto
         If InStr(1, mvarCaminhoArquivo, "://", vbTextCompare) = 0 Then
             OrdoWebView1.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\", "/")
         Else
@@ -339,17 +447,17 @@ Public Sub SalvarPreviewComoImagem(ByVal cCaminhoDestino As String)
     On Error GoTo ErroSalvar
     Dim fso As Object
     Dim cNomeArquivo As String
-    Dim cExtensao As String
+    Dim cEXTENSAO As String
     Dim cMimeType As String
     Dim cScript As String
     
     Set fso = CreateObject("Scripting.FileSystemObject")
     cNomeArquivo = fso.GetFileName(cCaminhoDestino)
-    cExtensao = LCase(fso.GetExtensionName(cCaminhoDestino))
+    cEXTENSAO = LCase(fso.GetExtensionName(cCaminhoDestino))
     Set fso = Nothing
     
     ' Define o MimeType correto com base na escolha do utilizador
-    If cExtensao = "jpg" Or cExtensao = "jpeg" Then
+    If cEXTENSAO = "jpg" Or cEXTENSAO = "jpeg" Then
         cMimeType = "image/jpeg"
     Else
         cMimeType = "image/png"
@@ -394,3 +502,265 @@ ErroSalvar:
     MsgBox "Falha ao exportar imagem da etiqueta: " & Err.Description, vbCritical, "Erro de Salvamento"
 End Sub
 
+Private Sub RenderizarMotorDocLocal()
+    On Error GoTo ErroDoc
+    Dim cHtmlTempPath As String
+    Dim cHtmlContent As String
+    Dim cCaminhoDocFormatado As String
+    
+    ' Define o caminho do arquivo temporário do motor do Word
+    cHtmlTempPath = App.Path & "\~doc_view_engine.html"
+    
+    ' Guarda o caminho do documento real formatando as barras para o JavaScript
+    cCaminhoDocFormatado = Replace(mvarCaminhoArquivo, "\", "/")
+    
+    ' --- CONSTRUÇÃO DA STRING CONCATENADA (Evita o erro 'Too many line continuations') ---
+    cHtmlContent = "<!DOCTYPE html>" & vbCrLf
+    cHtmlContent = cHtmlContent & "<html>" & vbCrLf
+    cHtmlContent = cHtmlContent & "<head>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <meta charset='utf-8'>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <style>" & vbCrLf
+    cHtmlContent = cHtmlContent & "    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 30px; background-color: #f4f4f9; color: #333; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "    #document-container { max-width: 800px; margin: 0 auto; background: #fff; padding: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 4px; min-height: 1000px; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "    table { border-collapse: collapse; width: 100%; margin: 20px 0; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "    img { max-width: 100%; height: auto; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "  </style>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  " & vbCrLf
+    cHtmlContent = cHtmlContent & "  <script src='https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js'></script>" & vbCrLf
+    cHtmlContent = cHtmlContent & "</head>" & vbCrLf
+    cHtmlContent = cHtmlContent & "<body>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <div id='document-container'>Carregando e processando documento...</div>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <script>" & vbCrLf
+    cHtmlContent = cHtmlContent & "    // Faz a requisição local do binário mapeado em formato ArrayBuffer para o parser" & vbCrLf
+    cHtmlContent = cHtmlContent & "    fetch('file:///" & cCaminhoDocFormatado & "')" & vbCrLf
+    cHtmlContent = cHtmlContent & "      .then(response => response.arrayBuffer())" & vbCrLf
+    cHtmlContent = cHtmlContent & "      .then(arrayBuffer => {" & vbCrLf
+    cHtmlContent = cHtmlContent & "        // Converte o binário (.docx/.doc) diretamente em HTML sem depender do Office" & vbCrLf
+    cHtmlContent = cHtmlContent & "        return mammoth.convertToHtml({arrayBuffer: arrayBuffer});" & vbCrLf
+    cHtmlContent = cHtmlContent & "      })" & vbCrLf
+    cHtmlContent = cHtmlContent & "      .then(result => {" & vbCrLf
+    cHtmlContent = cHtmlContent & "        document.getElementById('document-container').innerHTML = result.value;" & vbCrLf
+    cHtmlContent = cHtmlContent & "      })" & vbCrLf
+    cHtmlContent = cHtmlContent & "      .catch(err => {" & vbCrLf
+    cHtmlContent = cHtmlContent & "        document.getElementById('document-container').innerHTML = '<h2>Erro ao carregar o documento.</h2><p>' + err.message + '</p>';" & vbCrLf
+    cHtmlContent = cHtmlContent & "      });" & vbCrLf
+    cHtmlContent = cHtmlContent & "  </script>" & vbCrLf
+    cHtmlContent = cHtmlContent & "</body>" & vbCrLf
+    cHtmlContent = cHtmlContent & "</html>"
+
+    ' Grava fisicamente a casca do motor usando a sua FileWrite do FSO
+    If FileWrite(cHtmlTempPath, cHtmlContent) Then
+        OrdoWebView1.IsScriptEnabled = True
+        OrdoWebView1.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
+    End If
+    Exit Sub
+
+ErroDoc:
+    MsgBox "Falha ao instanciar motor de leitura de documentos: " & Err.Description, vbCritical, "Erro"
+End Sub
+Private Sub RenderizarMotorRtfLocal()
+    On Error GoTo ErroRtf
+    Dim cHtmlTempPath As String
+    Dim cHtmlContent As String
+    Dim cCaminhoRtfFormatado As String
+    
+    cHtmlTempPath = App.Path & "\~rtf_view_engine.html"
+    cCaminhoRtfFormatado = Replace(mvarCaminhoArquivo, "\", "/")
+    
+    ' Constrói a string de forma acumulativa para garantir estabilidade no compilador VB6
+    cHtmlContent = "<!DOCTYPE html>" & vbCrLf
+    cHtmlContent = cHtmlContent & "<html>" & vbCrLf
+    cHtmlContent = cHtmlContent & "<head>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <meta charset='utf-8'>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <style>" & vbCrLf
+    cHtmlContent = cHtmlContent & "    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 30px; background-color: #f4f4f9; color: #333; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "    #rtf-container { max-width: 800px; margin: 0 auto; background: #fff; padding: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 4px; min-height: 800px; white-space: pre-wrap; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "  </style>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  " & vbCrLf
+    cHtmlContent = cHtmlContent & "  <script src='https://cdn.jsdelivr.net/npm/rtf-parser@1.3.0/dist/rtf-parser.min.js'></script>" & vbCrLf
+    cHtmlContent = cHtmlContent & "</head>" & vbCrLf
+    cHtmlContent = cHtmlContent & "<body>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <div id='rtf-container'>Processando documento formatado RTF...</div>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <script>" & vbCrLf
+    cHtmlContent = cHtmlContent & "    // Lê o conteúdo bruto do RTF do disco rígido" & vbCrLf
+    cHtmlContent = cHtmlContent & "    fetch('file:///" & cCaminhoRtfFormatado & "')" & vbCrLf
+    cHtmlContent = cHtmlContent & "      .then(response => response.text())" & vbCrLf
+    cHtmlContent = cHtmlContent & "      .then(rtfText => {" & vbCrLf
+    cHtmlContent = cHtmlContent & "        // Função simplificada de fallback para limpar metadados de controle RTF" & vbCrLf
+    cHtmlContent = cHtmlContent & "        // e converter quebras antigas \par em tags web funcionais" & vbCrLf
+    cHtmlContent = cHtmlContent & "        let htmlResult = rtfText" & vbCrLf
+    cHtmlContent = cHtmlContent & "          .replace(/\\par/g, '<br>')" & vbCrLf
+    cHtmlContent = cHtmlContent & "          .replace(/\\b\s+(.*?)\\b0/g, '<b>$1</b>')" & vbCrLf
+    cHtmlContent = cHtmlContent & "          .replace(/\\i\s+(.*?)\\i0/g, '<i>$1</i>')" & vbCrLf
+    cHtmlContent = cHtmlContent & "          .replace(/\\{[^{}]*\\}/g, ''); // Remove blocos de cabeçalho brutos" & vbCrLf
+    cHtmlContent = cHtmlContent & "        " & vbCrLf
+    cHtmlContent = cHtmlContent & "        // Remove quaisquer tags residuais de formatação interna do RTF" & vbCrLf
+    cHtmlContent = cHtmlContent & "        htmlResult = htmlResult.replace(/\\[a-z0-9-]+/g, '');" & vbCrLf
+    cHtmlContent = cHtmlContent & "        htmlResult = htmlResult.replace(/[{}]/g, '');" & vbCrLf
+    cHtmlContent = cHtmlContent & "        " & vbCrLf
+    cHtmlContent = cHtmlContent & "        document.getElementById('rtf-container').innerHTML = htmlResult.trim();" & vbCrLf
+    cHtmlContent = cHtmlContent & "      })" & vbCrLf
+    cHtmlContent = cHtmlContent & "      .catch(err => {" & vbCrLf
+    cHtmlContent = cHtmlContent & "        document.getElementById('rtf-container').innerHTML = '<h2>Erro ao processar o RTF.</h2><p>' + err.message + '</p>';" & vbCrLf
+    cHtmlContent = cHtmlContent & "      });" & vbCrLf
+    cHtmlContent = cHtmlContent & "  </script>" & vbCrLf
+    cHtmlContent = cHtmlContent & "</body>" & vbCrLf
+    cHtmlContent = cHtmlContent & "</html>"
+
+    ' Grava o arquivo temporário usando a sua FileWrite do FSO
+    If FileWrite(cHtmlTempPath, cHtmlContent) Then
+        OrdoWebView1.IsScriptEnabled = True
+        OrdoWebView1.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
+    End If
+    Exit Sub
+
+ErroRtf:
+    MsgBox "Falha ao instanciar leitor de arquivos RTF: " & Err.Description, vbCritical, "Erro"
+End Sub
+
+Private Sub RenderizarMotorPlanilhaLocal()
+    On Error GoTo ErroPlanilha
+    Dim cHtmlTempPath As String
+    Dim cHtmlContent As String
+    Dim cCaminhoPlanilhaFormatado As String
+    
+    cHtmlTempPath = App.Path & "\~sheet_view_engine.html"
+    cCaminhoPlanilhaFormatado = Replace(mvarCaminhoArquivo, "\", "/")
+    
+    ' Constrói a estrutura do motor HTML de forma acumulativa
+    cHtmlContent = "<!DOCTYPE html>" & vbCrLf
+    cHtmlContent = cHtmlContent & "<html>" & vbCrLf
+    cHtmlContent = cHtmlContent & "<head>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <meta charset='utf-8'>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <style>" & vbCrLf
+    cHtmlContent = cHtmlContent & "    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background-color: #f4f4f9; color: #333; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "    #sheet-container { background: #fff; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 4px; overflow-x: auto; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "    table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 14px; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "    th { background-color: #107c41; color: white; font-weight: bold; padding: 10px; border: 1px solid #ddd; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "    td { padding: 8px; border: 1px solid #ddd; text-align: left; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "    tr:nth-child(even) { background-color: #f9f9f9; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "    tr:hover { background-color: #f1f1f1; }" & vbCrLf
+    cHtmlContent = cHtmlContent & "  </style>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  " & vbCrLf
+    cHtmlContent = cHtmlContent & "  <script src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'></script>" & vbCrLf
+    cHtmlContent = cHtmlContent & "</head>" & vbCrLf
+    cHtmlContent = cHtmlContent & "<body>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <div id='sheet-container'>Processando dados da planilha...</div>" & vbCrLf
+    cHtmlContent = cHtmlContent & "  <script>" & vbCrLf
+    cHtmlContent = cHtmlContent & "    // Carrega o arquivo binário direto do HD" & vbCrLf
+    cHtmlContent = cHtmlContent & "    fetch('file:///" & cCaminhoPlanilhaFormatado & "')" & vbCrLf
+    cHtmlContent = cHtmlContent & "      .then(response => response.arrayBuffer())" & vbCrLf
+    cHtmlContent = cHtmlContent & "      .then(arrayBuffer => {" & vbCrLf
+    cHtmlContent = cHtmlContent & "        // Lê o array de bytes da planilha (detecta automaticamente se é XLS, XLSX ou ODS)" & vbCrLf
+    cHtmlContent = cHtmlContent & "        let workbook = XLSX.read(new Uint8Array(arrayBuffer), {type: 'array'});" & vbCrLf
+    cHtmlContent = cHtmlContent & "        " & vbCrLf
+    cHtmlContent = cHtmlContent & "        // Pega o nome da primeira aba ativa" & vbCrLf
+    cHtmlContent = cHtmlContent & "        let firstSheetName = workbook.SheetNames[0];" & vbCrLf
+    cHtmlContent = cHtmlContent & "        let worksheet = workbook.Sheets[firstSheetName];" & vbCrLf
+    cHtmlContent = cHtmlContent & "        " & vbCrLf
+    cHtmlContent = cHtmlContent & "        // Converte a aba interna em uma tabela HTML pura" & vbCrLf
+    cHtmlContent = cHtmlContent & "        let htmlTable = XLSX.utils.sheet_to_html(worksheet);" & vbCrLf
+    cHtmlContent = cHtmlContent & "        " & vbCrLf
+    cHtmlContent = cHtmlContent & "        document.getElementById('sheet-container').innerHTML = htmlTable;" & vbCrLf
+    cHtmlContent = cHtmlContent & "      })" & vbCrLf
+    cHtmlContent = cHtmlContent & "      .catch(err => {" & vbCrLf
+    cHtmlContent = cHtmlContent & "        document.getElementById('sheet-container').innerHTML = '<h2>Erro ao processar a planilha.</h2><p>' + err.message + '</p>';" & vbCrLf
+    cHtmlContent = cHtmlContent & "      });" & vbCrLf
+    cHtmlContent = cHtmlContent & "  </script>" & vbCrLf
+    cHtmlContent = cHtmlContent & "</body>" & vbCrLf
+    cHtmlContent = cHtmlContent & "</html>"
+
+    ' Grava o arquivo temporário do motor usando a sua FileWrite do FSO
+    If FileWrite(cHtmlTempPath, cHtmlContent) Then
+        OrdoWebView1.IsScriptEnabled = True
+        OrdoWebView1.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
+    End If
+    Exit Sub
+
+ErroPlanilha:
+    MsgBox "Falha ao instanciar motor de leitura de planilhas: " & Err.Description, vbCritical, "Erro"
+End Sub
+
+Private Sub cmdSaveDoc_Click()
+    On Error GoTo ErroSaveDoc
+    Dim sFilter As String
+    Dim sFileName As String
+    Dim sSugestaoNome As String
+    
+    ' 1. Extrai o nome atual do ficheiro para sugerir na caixa de diálogo
+    sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
+    
+    ' 2. Define os filtros de salvamento (Permite salvar como Documento Word ou PDF)
+    ' Usamos a barra vertical "|" que a sua função FileSave exige para converter para o Windows
+    sFilter = "Documento do Word (*.doc)|*.doc|Documento PDF (*.pdf)|*.pdf|Todos Arquivos (*.*)|*.*"
+    
+    ' 3. Abre a caixa de diálogo nativa da sua mFileAPI
+    sFileName = FileSave(Me, sFilter, 1, "DOC", sSugestaoNome, , "Salvar Documento Como")
+    
+    ' Se o utilizador cancelou a janela, sai da sub-rotina
+    If sFileName = "" Then Exit Sub
+    
+    ' 4. Identifica a extensão que o utilizador escolheu para aplicar a lógica correta
+    If InStr(1, sFileName, ".pdf", vbTextCompare) > 0 Then
+        ' --- EXPORTAR COMO PDF ---
+        ' Dispara o comando de impressão nativo do Edge Chromium.
+        ' O utilizador poderá escolher "Salvar como PDF" com fidelidade gráfica total.
+        OrdoWebView1.ExecuteScript "window.print();"
+        
+    Else
+        ' --- EXPORTAR COMO DOCUMENTO (.DOC) ---
+        ' Solicitamos ao WebView2 que nos devolva o HTML exato que está dentro do container do documento
+        ' Usamos uma técnica de callback assíncrona ou captura direta se o seu componente suportar,
+        ' ou injetamos um script para iniciar o download do blob modificado de texto:
+        
+        Dim cScript As String
+        cScript = "(function() {" & _
+                  "  var conteudo = document.getElementById('document-container').innerHTML;" & _
+                  "  var blob = new Blob(['<html><head><meta charset='utf-8'></head><body>' + conteudo + '</body></html>'], {type: 'application/msword'});" & _
+                  "  var lnk = document.createElement('a');" & _
+                  "  lnk.download = '" & NomeArq(sFileName, False) & "';" & _
+                  "  lnk.href = window.URL.createObjectURL(blob);" & _
+                  "  document.body.appendChild(lnk);" & _
+                  "  lnk.click();" & _
+                  "  document.body.removeChild(lnk);" & _
+                  "})();"
+                  
+        OrdoWebView1.ExecuteScript cScript
+    End If
+    
+    Exit Sub
+
+ErroSaveDoc:
+    MsgBox "Erro ao exportar o documento: " & Err.Description, vbCritical, "Erro de Exportação"
+End Sub
+
+Private Sub cmdSavePDF_Click()
+    On Error GoTo ErroSavePDF
+    Dim sFilter As String
+    Dim sFileName As String
+    Dim sSugestaoNome As String
+    
+    ' 1. Extrai o nome atual do arquivo para sugerir na caixa de diálogo
+    sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
+    
+    ' 2. Define o filtro específico para salvar em PDF
+    ' Usamos a barra vertical "|" que a sua função FileSave exige para converter internamente
+    sFilter = "Documento PDF (*.pdf)|*.pdf|Todos Arquivos (*.*)|*.*"
+    
+    ' 3. Abre a caixa de diálogo nativa do Windows através da sua mFileAPI
+    sFileName = FileSave(Me, sFilter, 1, "PDF", sSugestaoNome, , "Salvar Como PDF")
+    
+    ' Se o usuário cancelou a janela de salvamento, aborta a operação
+    If sFileName = "" Then Exit Sub
+    
+    ' 4. Dispara a conversão nativa do Chromium
+    ' Isso abre a janela moderna de impressão do Edge configurada para "Salvar como PDF"
+    ' garantindo fidelidade total de cores, tabelas e fontes.
+    OrdoWebView1.ExecuteScript "window.print();"
+    
+    Exit Sub
+
+ErroSavePDF:
+    MsgBox "Erro ao exportar o arquivo para PDF: " & Err.Description, vbCritical, "Erro de Exportação"
+End Sub
