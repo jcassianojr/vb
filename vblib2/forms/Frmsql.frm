@@ -7,17 +7,17 @@ Begin VB.Form FrmSql
    ClientHeight    =   7140
    ClientLeft      =   60
    ClientTop       =   420
-   ClientWidth     =   12225
+   ClientWidth     =   12228
    Icon            =   "Frmsql.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7140
-   ScaleWidth      =   12225
+   ScaleWidth      =   12228
    StartUpPosition =   3  'Windows Default
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   5520
       Top             =   6240
-      _ExtentX        =   1191
-      _ExtentY        =   1191
+      _ExtentX        =   953
+      _ExtentY        =   953
    End
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   255
@@ -27,8 +27,8 @@ Begin VB.Form FrmSql
       Top             =   6480
       Visible         =   0   'False
       Width           =   1335
-      _ExtentX        =   2355
-      _ExtentY        =   450
+      _ExtentX        =   2350
+      _ExtentY        =   445
       MultiLine       =   -1  'True
       Text            =   "Frmsql.frx":058A
       TextRTF         =   "Frmsql.frx":05C2
@@ -55,13 +55,13 @@ Begin VB.Form FrmSql
          TabIndex        =   25
          Top             =   360
          Width           =   1275
-         _ExtentX        =   2249
-         _ExtentY        =   767
+         _ExtentX        =   2244
+         _ExtentY        =   762
          Picture         =   "Frmsql.frx":0742
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -75,13 +75,13 @@ Begin VB.Form FrmSql
          TabIndex        =   26
          Top             =   960
          Width           =   1275
-         _ExtentX        =   2249
-         _ExtentY        =   767
+         _ExtentX        =   2244
+         _ExtentY        =   762
          Picture         =   "Frmsql.frx":0CDC
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -95,13 +95,13 @@ Begin VB.Form FrmSql
          TabIndex        =   27
          Top             =   360
          Width           =   1455
-         _ExtentX        =   2566
-         _ExtentY        =   767
+         _ExtentX        =   2561
+         _ExtentY        =   762
          Picture         =   "Frmsql.frx":1276
          Caption         =   "Retornar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -115,13 +115,13 @@ Begin VB.Form FrmSql
          TabIndex        =   28
          Top             =   960
          Width           =   1455
-         _ExtentX        =   2566
-         _ExtentY        =   767
+         _ExtentX        =   2561
+         _ExtentY        =   762
          Picture         =   "Frmsql.frx":1810
          Caption         =   "Propriedades"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -145,13 +145,13 @@ Begin VB.Form FrmSql
          TabIndex        =   8
          Top             =   720
          Width           =   855
-         _ExtentX        =   1508
-         _ExtentY        =   661
+         _ExtentX        =   1503
+         _ExtentY        =   656
          Picture         =   "Frmsql.frx":1DAA
          Caption         =   "xml"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -166,13 +166,13 @@ Begin VB.Form FrmSql
          TabIndex        =   9
          Top             =   720
          Width           =   1095
-         _ExtentX        =   1931
-         _ExtentY        =   661
+         _ExtentX        =   1926
+         _ExtentY        =   656
          Picture         =   "Frmsql.frx":2344
          Caption         =   "xls(TAB)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -187,12 +187,12 @@ Begin VB.Form FrmSql
          TabIndex        =   10
          Top             =   240
          Width           =   195
-         _ExtentX        =   344
-         _ExtentY        =   661
+         _ExtentX        =   339
+         _ExtentY        =   656
          Caption         =   " "
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -206,13 +206,13 @@ Begin VB.Form FrmSql
          TabIndex        =   11
          Top             =   240
          Width           =   675
-         _ExtentX        =   1191
-         _ExtentY        =   661
+         _ExtentX        =   1185
+         _ExtentY        =   656
          Text            =   "|"
          Alignment       =   2
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -227,13 +227,13 @@ Begin VB.Form FrmSql
          TabIndex        =   12
          Top             =   1200
          Width           =   855
-         _ExtentX        =   1508
-         _ExtentY        =   661
+         _ExtentX        =   1503
+         _ExtentY        =   656
          Picture         =   "Frmsql.frx":28DE
          Caption         =   "Html"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -248,13 +248,13 @@ Begin VB.Form FrmSql
          TabIndex        =   13
          Top             =   1200
          Width           =   915
-         _ExtentX        =   1614
-         _ExtentY        =   661
+         _ExtentX        =   1609
+         _ExtentY        =   656
          Picture         =   "Frmsql.frx":2E78
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -269,13 +269,13 @@ Begin VB.Form FrmSql
          TabIndex        =   14
          Top             =   1200
          Width           =   915
-         _ExtentX        =   1614
-         _ExtentY        =   661
+         _ExtentX        =   1609
+         _ExtentY        =   656
          Picture         =   "Frmsql.frx":3212
          Caption         =   "PDF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -290,12 +290,12 @@ Begin VB.Form FrmSql
          TabIndex        =   15
          Top             =   240
          Width           =   195
-         _ExtentX        =   344
-         _ExtentY        =   661
+         _ExtentX        =   339
+         _ExtentY        =   656
          Caption         =   "|"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -311,12 +311,12 @@ Begin VB.Form FrmSql
          TabIndex        =   16
          Top             =   240
          Width           =   195
-         _ExtentX        =   344
-         _ExtentY        =   661
+         _ExtentX        =   339
+         _ExtentY        =   656
          Caption         =   ","
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -332,12 +332,12 @@ Begin VB.Form FrmSql
          TabIndex        =   17
          Top             =   240
          Width           =   195
-         _ExtentX        =   344
-         _ExtentY        =   661
+         _ExtentX        =   339
+         _ExtentY        =   656
          Caption         =   ";"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -352,12 +352,12 @@ Begin VB.Form FrmSql
          TabIndex        =   18
          Top             =   240
          Width           =   195
-         _ExtentX        =   344
-         _ExtentY        =   661
+         _ExtentX        =   339
+         _ExtentY        =   656
          Caption         =   "#"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -372,12 +372,12 @@ Begin VB.Form FrmSql
          TabIndex        =   19
          Top             =   240
          Width           =   195
-         _ExtentX        =   344
-         _ExtentY        =   661
+         _ExtentX        =   339
+         _ExtentY        =   656
          Caption         =   "~"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -392,13 +392,13 @@ Begin VB.Form FrmSql
          TabIndex        =   22
          Top             =   1200
          Width           =   915
-         _ExtentX        =   1614
-         _ExtentY        =   661
+         _ExtentX        =   1609
+         _ExtentY        =   656
          Picture         =   "Frmsql.frx":35AC
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -413,13 +413,13 @@ Begin VB.Form FrmSql
          TabIndex        =   24
          Top             =   720
          Width           =   1095
-         _ExtentX        =   1931
-         _ExtentY        =   661
+         _ExtentX        =   1926
+         _ExtentY        =   656
          Picture         =   "Frmsql.frx":3946
          Caption         =   "xls(TR)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -434,12 +434,12 @@ Begin VB.Form FrmSql
          TabIndex        =   34
          Top             =   240
          Width           =   555
-         _ExtentX        =   979
-         _ExtentY        =   661
+         _ExtentX        =   974
+         _ExtentY        =   656
          Caption         =   "<tab>"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -454,13 +454,13 @@ Begin VB.Form FrmSql
          TabIndex        =   36
          Top             =   1200
          Width           =   915
-         _ExtentX        =   1614
-         _ExtentY        =   661
+         _ExtentX        =   1609
+         _ExtentY        =   656
          Picture         =   "Frmsql.frx":3EE0
          Caption         =   "DOC"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -475,13 +475,13 @@ Begin VB.Form FrmSql
          TabIndex        =   37
          Top             =   720
          Width           =   1095
-         _ExtentX        =   1931
-         _ExtentY        =   661
+         _ExtentX        =   1926
+         _ExtentY        =   656
          Picture         =   "Frmsql.frx":427A
          Caption         =   "xls(TD)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -511,7 +511,7 @@ Begin VB.Form FrmSql
          Caption         =   "Label1 - Nome do Relatorio que Estamos Imprimindo"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -539,12 +539,12 @@ Begin VB.Form FrmSql
       TabIndex        =   7
       Top             =   5520
       Width           =   10095
-      _ExtentX        =   17806
-      _ExtentY        =   714
+      _ExtentX        =   17801
+      _ExtentY        =   720
       Text            =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -559,12 +559,12 @@ Begin VB.Form FrmSql
       TabIndex        =   21
       Top             =   6000
       Width           =   2415
-      _ExtentX        =   4260
-      _ExtentY        =   714
+      _ExtentX        =   4255
+      _ExtentY        =   720
       Text            =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -578,12 +578,12 @@ Begin VB.Form FrmSql
       TabIndex        =   23
       Top             =   4200
       Width           =   10095
-      _ExtentX        =   17806
-      _ExtentY        =   2196
+      _ExtentX        =   17801
+      _ExtentY        =   2201
       Text            =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -598,13 +598,13 @@ Begin VB.Form FrmSql
       TabIndex        =   29
       Top             =   3600
       Width           =   1275
-      _ExtentX        =   2249
-      _ExtentY        =   767
+      _ExtentX        =   2244
+      _ExtentY        =   762
       Picture         =   "Frmsql.frx":4814
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -618,13 +618,13 @@ Begin VB.Form FrmSql
       TabIndex        =   30
       Top             =   3120
       Width           =   1275
-      _ExtentX        =   2249
-      _ExtentY        =   767
+      _ExtentX        =   2244
+      _ExtentY        =   762
       Picture         =   "Frmsql.frx":4DAE
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -639,13 +639,13 @@ Begin VB.Form FrmSql
       TabStop         =   0   'False
       Top             =   2760
       Width           =   975
-      _ExtentX        =   1720
-      _ExtentY        =   556
+      _ExtentX        =   1715
+      _ExtentY        =   550
       Picture         =   "Frmsql.frx":5348
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -660,13 +660,13 @@ Begin VB.Form FrmSql
       TabStop         =   0   'False
       Top             =   2760
       Width           =   1335
-      _ExtentX        =   2355
-      _ExtentY        =   556
+      _ExtentX        =   2350
+      _ExtentY        =   550
       Picture         =   "Frmsql.frx":58E2
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -680,12 +680,12 @@ Begin VB.Form FrmSql
       TabIndex        =   33
       Top             =   2760
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   556
+      _ExtentX        =   656
+      _ExtentY        =   550
       Caption         =   "S"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -748,10 +748,8 @@ Private Sub CmdEditar_Click()
     FrmRtfView.Show vbModal, Me
   End If
 End Sub
-
 Private Sub cmdexportar_Click(Index As Integer)
     On Error GoTo TrataErro
-    
     Dim cARQUIVO As String
     Dim cEXT As String
     Dim cSQL As String
@@ -759,15 +757,18 @@ Private Sub cmdexportar_Click(Index As Integer)
     Dim DBEXP As ADODB.Connection
     Dim sFILTER As String
     Dim cconn As String
-    
     ' Variáveis do motor FSO.Stream
     Dim fso As Object
     Dim streamOut As Object
-    
     Dim i As Long
     Dim cLINHA As String
     Dim cDelim As String
     
+    ' --- NOVAS VARIÁVEIS PARA A LOGICA SELETIVA DE ASPAS ---
+    Dim cValorCampo As String
+    Dim bDelimSensivel As Boolean
+    ' -------------------------------------------------------
+
     ' Validação de tabela de origem
     If Len(Trim(tabela.tEXT)) = 0 Then
         Alert ("Escolha Uma Tabela Antes")
@@ -776,7 +777,7 @@ Private Sub cmdexportar_Click(Index As Integer)
     
     cSQL = CStr(sql.tEXT)
     
-    ' Define a extensão baseada no botão clicado
+    ' Define a extensão baseada no botão clicado (Sua lógica de Index original mantida)
     Select Case Index
         Case 0: cEXT = "XML"
         Case 1, 6, 8: cEXT = "XLS"
@@ -801,7 +802,6 @@ Private Sub cmdexportar_Click(Index As Integer)
     cconn = GeracArq(arquivo.tEXT, , False)
     Set DBEXP = New ADODB.Connection
     Set RsExp = New ADODB.Recordset
-    
     DBEXP.ConnectionTimeout = 120
     DBEXP.Open cconn
     RsExp.Open cSQL, DBEXP, adOpenStatic, adLockReadOnly
@@ -815,8 +815,6 @@ Private Sub cmdexportar_Click(Index As Integer)
     ' Inicializa o FileSystemObject de forma global para os Cases que precisam dele
     If Index <> 0 Then
         Set fso = CreateObject("Scripting.FileSystemObject")
-        ' Parâmetros: 2 = ForWriting, True = Create (Cria se não existir)
-        ' O terceiro parâmetro em False define a gravação como ASCII/ANSI padrão do Windows
         Set streamOut = fso.OpenTextFile(cARQUIVO, 2, True, False)
     End If
     
@@ -830,47 +828,37 @@ Private Sub cmdexportar_Click(Index As Integer)
             ' ==================================================================
             ' MOTOR EXCEL AVANÇADO: HTML TABULAR DISFARÇADO DE .XLS (VIA FSO)
             ' ==================================================================
-            
-            ' Cabeçalho do arquivo com Codificação UTF-8 para evitar erros de acentos no Excel
             streamOut.WriteLine "<html>"
             streamOut.WriteLine "<head><meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8""></head>"
-            ' Estilo CSS básico para deixar a planilha bonita ao abrir no Excel
             streamOut.WriteLine "<style>table { border-collapse: collapse; } th { background-color: #D3D3D3; font-weight: bold; } td, th { border: 1px solid #A0A0A0; font-family: Calibri, Arial; font-size: 11pt; }</style>"
             streamOut.WriteLine "<body>"
             streamOut.WriteLine "<table>"
             
-            ' Escreve os Títulos das Colunas (Th)
-            streamOut.WriteLine "  <tr>"
+            streamOut.WriteLine " <tr>"
             For i = 0 To RsExp.Fields.Count - 1
-                streamOut.WriteLine "    <th>" & RsExp.Fields(i).Name & "</th>"
+                streamOut.WriteLine " <th>" & RsExp.Fields(i).Name & "</th>"
             Next i
-            streamOut.WriteLine "  </tr>"
+            streamOut.WriteLine " </tr>"
             
-            ' Varre o Recordset escrevendo as Linhas e Células (Tr / Td)
             RsExp.MoveFirst
             Do While Not RsExp.EOF
-                streamOut.WriteLine "  <tr>"
+                streamOut.WriteLine " <tr>"
                 For i = 0 To RsExp.Fields.Count - 1
-                    ' Trata nulos e limpa quebras de linha indesejadas que quebram células
                     cLINHA = Replace(Replace(CheckNullStr(RsExp.Fields(i).Value), vbCr, ""), vbLf, " ")
-                    streamOut.WriteLine "    <td>" & cLINHA & "</td>"
+                    streamOut.WriteLine " <td>" & cLINHA & "</td>"
                 Next i
-                streamOut.WriteLine "  </tr>"
+                streamOut.WriteLine " </tr>"
                 RsExp.MoveNext
             Loop
-            
             streamOut.WriteLine "</table>"
             streamOut.WriteLine "</body>"
             streamOut.WriteLine "</html>"
-            
-            ' Fecha o fluxo de escrita
             streamOut.Close
-
+            
         Case 1, 2, 3, 4, 5, 7
             ' ==================================================================
             ' MOTOR CSV / DELIMITADORES / OUTROS FORMATOS (VIA FSO)
             ' ==================================================================
-            
             ' Define o delimitador de colunas baseado na interface
             If Index = 1 Then
                 cDelim = Chr(9) ' Tabulação para o xls(TAB)
@@ -880,37 +868,80 @@ Private Sub cmdexportar_Click(Index As Integer)
                 cDelim = FixStr(TxtDeli.tEXT, " ") ' Usa o caracter informado na caixa de texto
             End If
             
+            ' --- VERIFICA SE O DELIMITADOR É SENSÍVEL (, ou ;) ---
+            If cDelim = "," Or cDelim = ";" Then
+                bDelimSensivel = True
+            Else
+                bDelimSensivel = False
+            End If
+            ' -----------------------------------------------------
+            
             ' 1. Escreve a linha de cabeçalho com os nomes das colunas
             cLINHA = ""
             For i = 0 To RsExp.Fields.Count - 1
-                cLINHA = cLINHA & RsExp.Fields(i).Name & cDelim
+                cValorCampo = RsExp.Fields(i).Name
+                
+                ' Protege cabeçalhos caso contenham o delimitador sensível
+                If bDelimSensivel Then
+                    If InStr(cValorCampo, cDelim) > 0 Or InStr(cValorCampo, """") > 0 Then
+                        cValorCampo = """" & Replace(cValorCampo, """", """""") & """"
+                    End If
+                End If
+                
+                cLINHA = cLINHA & cValorCampo & cDelim
             Next i
-            If Len(cLINHA) > 0 Then cLINHA = Left(cLINHA, Len(cLINHA) - Len(cDelim))
-            streamOut.WriteLine cLINHA
+            
+            If Len(cLINHA) > 0 Then
+                cLINHA = Left(cLINHA, Len(cLINHA) - Len(cDelim))
+                streamOut.WriteLine cLINHA
+            End If
             
             ' 2. Escreve os registros em streaming de alta velocidade
             RsExp.MoveFirst
             Do While Not RsExp.EOF
                 cLINHA = ""
                 For i = 0 To RsExp.Fields.Count - 1
-                    cLINHA = cLINHA & Replace(Replace(CheckNullStr(RsExp.Fields(i).Value), cDelim, " "), vbCrLf, " ") & cDelim
+                    ' Captura o valor puro da célula blindado contra nulos
+                    cValorCampo = CheckNullStr(RsExp.Fields(i).Value)
+                    
+                    ' --- NOVA RAMIFICAÇÃO TRATADA POR DELIMITADOR ---
+                    If bDelimSensivel Then
+                        ' FLUXO A: Se for Vírgula ou Ponto e Vírgula, escapa aspas internas e envolve com aspas duplas ("...")
+                        ' Remove apenas quebras de linha para manter o registro linear
+                        cValorCampo = Replace(Replace(cValorCampo, vbCr, ""), vbLf, " ")
+                        
+                        ' Se contiver o delimitador ou aspas na string, envelopa
+                        If InStr(cValorCampo, cDelim) > 0 Or InStr(cValorCampo, """") > 0 Then
+                            cValorCampo = """" & Replace(cValorCampo, """", """""") & """"
+                        End If
+                    Else
+                        ' FLUXO B: Mantém a sua lógica original idêntica para Pipe, #, ~, Tab
+                        ' Substitui o delimitador por espaço caso ele exista no texto para evitar desalinhamento de colunas
+                        cValorCampo = Replace(Replace(CheckNullStr(RsExp.Fields(i).Value), cDelim, " "), vbCrLf, " ")
+                    End If
+                    ' ------------------------------------------------
+                    
+                    cLINHA = cLINHA & cValorCampo & cDelim
                 Next i
-                If Len(cLINHA) > 0 Then cLINHA = Left(cLINHA, Len(cLINHA) - Len(cDelim))
-                streamOut.WriteLine cLINHA
+                
+                If Len(cLINHA) > 0 Then
+                    cLINHA = Left(cLINHA, Len(cLINHA) - Len(cDelim))
+                    streamOut.WriteLine cLINHA
+                End If
                 RsExp.MoveNext
             Loop
             
             ' Fecha o fluxo de escrita antes de chamar as funções legadas de conversão
             streamOut.Close
             
-            ' Tratamentos pós-escrita baseados nas suas funções globais
+            ' Tratamentos pós-escrita originais mantidos por Index
             If Index = 2 Then txttohtml cARQUIVO, cARQUIVO
             If Index = 4 Then ePASS01 = cARQUIVO: formConvertToPDF.Show
             If Index = 5 Then txttortf cARQUIVO, cARQUIVO
             If Index = 7 Then txttodoc cARQUIVO, cARQUIVO
             If Index = 8 Then txttoxls cARQUIVO, cARQUIVO, , , TxtDeli
     End Select
-
+    
     Alert "Exportacao Concluida com Sucesso!"
     
     ' Fluxo nativo de envio de e-mail se a checkbox estiver marcada
@@ -918,20 +949,22 @@ Private Sub cmdexportar_Click(Index As Integer)
         ePASS01 = Array("", "", "", "", "", cARQUIVO, "", False)
         FrmSendMail.Show vbModal, Me
     End If
-
+    
 Fim:
     On Error Resume Next
-    ' Garante o fecho dos fluxos e a destruição de objetos para liberar memória RAM
     If Not streamOut Is Nothing Then streamOut.Close
     Set streamOut = Nothing
     Set fso = Nothing
-    
-    If Not RsExp Is Nothing Then If RsExp.State = adStateOpen Then RsExp.Close
-    If Not DBEXP Is Nothing Then If DBEXP.State = adStateOpen Then DBEXP.Close
+    If Not RsExp Is Nothing Then
+        If RsExp.State = adStateOpen Then RsExp.Close
+    End If
+    If Not DBEXP Is Nothing Then
+        If DBEXP.State = adStateOpen Then DBEXP.Close
+    End If
     Set RsExp = Nothing
     Set DBEXP = Nothing
     Exit Sub
-
+    
 TrataErro:
     MsgBox "Erro na exportacao: " & Err.Description, vbCritical, "Erro"
     Resume Fim
@@ -1107,13 +1140,13 @@ Public Sub MyPrintingRTF()
 End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
-  Dim STRBUFFER As String
+  Dim strBuffer As String
   fileFile = FreeFile
   Open cARQRTF For Input As #fileFile
   Do While Not EOF(fileFile)
     'read line
-    Input #fileFile, STRBUFFER
-    Printer.Print STRBUFFER
+    Input #fileFile, strBuffer
+    Printer.Print strBuffer
   Loop
   Close fileFile
 End Sub

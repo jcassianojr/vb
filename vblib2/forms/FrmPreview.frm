@@ -3,13 +3,13 @@ Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F74FE4B4-2AF4-4F6A-B323-05690FDB6730}#1.3#0"; "OrdoWebView2.OCX"
 Begin VB.Form FrmPreview 
    Caption         =   "FrmPreview"
-   ClientHeight    =   5130
+   ClientHeight    =   5124
    ClientLeft      =   60
-   ClientTop       =   405
-   ClientWidth     =   13185
+   ClientTop       =   408
+   ClientWidth     =   13188
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5130
-   ScaleWidth      =   13185
+   ScaleHeight     =   5124
+   ScaleWidth      =   13188
    StartUpPosition =   3  'Windows Default
    Begin OrdoWebView2.OrdoWebView OrdoWebView1 
       Height          =   4695
@@ -17,8 +17,8 @@ Begin VB.Form FrmPreview
       TabIndex        =   0
       Top             =   120
       Width           =   10815
-      _ExtentX        =   19076
-      _ExtentY        =   8281
+      _ExtentX        =   19071
+      _ExtentY        =   8276
       Search_URL      =   ""
       IsScriptEnabled =   0   'False
       UseEdgeFixedVersion=   -1  'True
@@ -29,13 +29,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   1
       Top             =   720
       Width           =   1215
-      _ExtentX        =   2143
-      _ExtentY        =   767
+      _ExtentX        =   2138
+      _ExtentY        =   762
       Picture         =   "FrmPreview.frx":0000
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -49,13 +49,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   2
       Top             =   240
       Width           =   1215
-      _ExtentX        =   2143
-      _ExtentY        =   767
+      _ExtentX        =   2138
+      _ExtentY        =   762
       Picture         =   "FrmPreview.frx":059A
       Caption         =   "Imprimir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -69,13 +69,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   3
       Top             =   1560
       Width           =   1215
-      _ExtentX        =   2143
-      _ExtentY        =   661
+      _ExtentX        =   2138
+      _ExtentY        =   656
       Picture         =   "FrmPreview.frx":0B34
       Caption         =   "Html"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -89,13 +89,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   4
       Top             =   2040
       Width           =   1215
-      _ExtentX        =   2143
-      _ExtentY        =   661
+      _ExtentX        =   2138
+      _ExtentY        =   656
       Picture         =   "FrmPreview.frx":10CE
       Caption         =   "TXT"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -110,13 +110,13 @@ Begin VB.Form FrmPreview
       TabStop         =   0   'False
       Top             =   2520
       Width           =   1212
-      _ExtentX        =   2143
-      _ExtentY        =   556
+      _ExtentX        =   2138
+      _ExtentY        =   550
       Picture         =   "FrmPreview.frx":1468
       Caption         =   "PNG"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -131,13 +131,13 @@ Begin VB.Form FrmPreview
       TabStop         =   0   'False
       Top             =   2880
       Width           =   1212
-      _ExtentX        =   2143
-      _ExtentY        =   556
+      _ExtentX        =   2138
+      _ExtentY        =   550
       Picture         =   "FrmPreview.frx":1902
       Caption         =   "JPG"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -151,13 +151,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   7
       Top             =   3240
       Width           =   1215
-      _ExtentX        =   2143
-      _ExtentY        =   661
+      _ExtentX        =   2138
+      _ExtentY        =   656
       Picture         =   "FrmPreview.frx":1D9C
       Caption         =   "DOC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -171,13 +171,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   8
       Top             =   3720
       Width           =   1215
-      _ExtentX        =   2143
-      _ExtentY        =   661
+      _ExtentX        =   2138
+      _ExtentY        =   656
       Picture         =   "FrmPreview.frx":2136
       Caption         =   "PDF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -199,14 +199,14 @@ End Sub
 
 Private Sub cmdSavehtml_Click()
 Dim sFileName As String
-Dim sFilter As String
-  sFilter = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-  sFileName = FileSave(Me, sFilter, 1, "HTML", , , "Salvar HTML Como")
+Dim sFILTER As String
+  sFILTER = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, sFILTER, 1, "HTML", , , "Salvar HTML Como")
   FileWrite sFileName, OrdoWebView1.GetInnerHTML
 End Sub
 
 Private Sub cmdSavejpg_Click()
-Dim sFilter As String
+Dim sFILTER As String
     Dim sFileName As String
     Dim sSugestaoNome As String
     
@@ -214,9 +214,9 @@ Dim sFilter As String
     sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
     
     ' Filtro formatado usando "|" conforme exigido pela sua função mFileAPI
-    sFilter = "Imagem JPG (*.jpg;*.jpeg)|*.jpg;*.jpeg|Todos Arquivos (*.*)|*.*"
+    sFILTER = "Imagem JPG (*.jpg;*.jpeg)|*.jpg;*.jpeg|Todos Arquivos (*.*)|*.*"
     
-    sFileName = FileSave(Me, sFilter, 1, "JPG", sSugestaoNome, , "Salvar Etiqueta Como Imagem JPG")
+    sFileName = FileSave(Me, sFILTER, 1, "JPG", sSugestaoNome, , "Salvar Etiqueta Como Imagem JPG")
     
     If sFileName <> "" Then
         Call SalvarPreviewComoImagem(sFileName)
@@ -226,7 +226,7 @@ End Sub
 
 
 Private Sub cmdSavePNG_Click()
-Dim sFilter As String
+Dim sFILTER As String
     Dim sFileName As String
     Dim sSugestaoNome As String
     
@@ -234,9 +234,9 @@ Dim sFilter As String
     sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
     
     ' Filtro formatado usando "|" conforme exigido pela sua função mFileAPI
-    sFilter = "Imagem PNG (*.png)|*.png|Todos Arquivos (*.*)|*.*"
+    sFILTER = "Imagem PNG (*.png)|*.png|Todos Arquivos (*.*)|*.*"
     
-    sFileName = FileSave(Me, sFilter, 1, "PNG", sSugestaoNome, , "Salvar Etiqueta Como Imagem PNG")
+    sFileName = FileSave(Me, sFILTER, 1, "PNG", sSugestaoNome, , "Salvar Etiqueta Como Imagem PNG")
     
     If sFileName <> "" Then
         Call SalvarPreviewComoImagem(sFileName)
@@ -245,9 +245,9 @@ End Sub
 
 Private Sub cmdSaveTXT_Click()
 Dim sFileName As String
-Dim sFilter As String
-  sFilter = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
-  sFileName = FileSave(Me, sFilter, 1, "HTML", , , "Salvar TXT Como")
+Dim sFILTER As String
+  sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
+  sFileName = FileSave(Me, sFILTER, 1, "HTML", , , "Salvar TXT Como")
   FileWrite sFileName, OrdoWebView1.GetInnerText
 End Sub
 
@@ -284,7 +284,9 @@ Private Sub Form_Load()
         
         ' Dispara o motor de renderização de planilhas local
         Call RenderizarMotorPlanilhaLocal
-        
+   ElseIf InStr(1, mvarCaminhoArquivo, ".csv", vbTextCompare) > 0 Then
+      ' Tanto arquivos Markdown quanto textos puros ganham o tratamento visual moderno
+       RenderizarMotorDelimitadoLocal mvarCaminhoArquivo
    ElseIf InStr(1, mvarCaminhoArquivo, ".rtf", vbTextCompare) > 0 Then
         ' --- MODO LEITOR DE RTF MODERNO ---
         cmdSavehtml.Visible = False
@@ -501,7 +503,63 @@ Public Sub SalvarPreviewComoImagem(ByVal cCaminhoDestino As String)
 ErroSalvar:
     MsgBox "Falha ao exportar imagem da etiqueta: " & Err.Description, vbCritical, "Erro de Salvamento"
 End Sub
+Public Sub RenderizarMotorMDLocal(ByVal cCaminhoArquivo As String)
+    On Error GoTo ErroRenderMD
+    
+    Dim fNum            As Integer
+    Dim cConteudoMD     As String
+    Dim cHTMLTemplate   As String
+    
+    ' 1. Validação de segurança do arquivo físico
+    If Dir(cCaminhoArquivo) = "" Then
+        MsgBox "O arquivo especificado não foi encontrado: " & cCaminhoArquivo, vbExclamation, "Aviso"
+        Exit Sub
+    End If
+    
+    ' 2. Captura o conteúdo do arquivo de texto bruto
+    fNum = FreeFile
+    Open cCaminhoArquivo For Input As #fNum
+        cConteudoMD = Input(LOF(fNum), #fNum)
+    Close #fNum
+    
+    ' 3. Sanitização estrita para não quebrar o JavaScript do WebView2
+    cConteudoMD = Replace(cConteudoMD, vbCrLf, "\n")
+    cConteudoMD = Replace(cConteudoMD, vbCr, "\n")
+    cConteudoMD = Replace(cConteudoMD, vbLf, "\n")
+    cConteudoMD = Replace(cConteudoMD, "'", "\'")
+    
+    ' 4. Montagem estruturada do HTML (Acumulando em blocos para evitar o erro de limite de linhas)
+    cHTMLTemplate = "<html><head><meta charset='utf-8'>"
+    cHTMLTemplate = cHTMLTemplate & "<script src='https://cdn.jsdelivr.net/npm/marked/marked.min.js'></script>"
+    
+    ' Injeção de Estilos (CSS padrão GitHub)
+    cHTMLTemplate = cHTMLTemplate & "<style>"
+    cHTMLTemplate = cHTMLTemplate & "  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; padding: 35px; background-color: #ffffff; color: #24292f; line-height: 1.6; }"
+    cHTMLTemplate = cHTMLTemplate & "  code { background-color: rgba(175,184,193,0.2); padding: 2px 5px; border-radius: 6px; font-family: monospace; font-size: 85%; }"
+    cHTMLTemplate = cHTMLTemplate & "  pre { background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow: auto; }"
+    cHTMLTemplate = cHTMLTemplate & "  table { border-collapse: collapse; width: 100%; margin-top: 0; margin-bottom: 16px; font-size: 14px; }"
+    cHTMLTemplate = cHTMLTemplate & "  th, td { border: 1px solid #d0d7de; padding: 6px 13px; }"
+    cHTMLTemplate = cHTMLTemplate & "  th { background-color: #f6f8fa; font-weight: 600; }"
+    cHTMLTemplate = cHTMLTemplate & "  tr:nth-child(even) { background-color: #f6f8fa; }"
+    cHTMLTemplate = cHTMLTemplate & "  h1, h2, h3 { border-bottom: 1px solid #d8dee4; padding-bottom: .3em; color: #1f2328; }"
+    cHTMLTemplate = cHTMLTemplate & "</style></head>"
+    
+    ' Injeção do Corpo e do Motor JavaScript (Marked.js)
+    cHTMLTemplate = cHTMLTemplate & "<body>"
+    cHTMLTemplate = cHTMLTemplate & "  <div id='content'></div>"
+    cHTMLTemplate = cHTMLTemplate & "  <script>"
+    cHTMLTemplate = cHTMLTemplate & "    document.getElementById('content').innerHTML = marked.parse('" & cConteudoMD & "');"
+    cHTMLTemplate = cHTMLTemplate & "  </script>"
+    cHTMLTemplate = cHTMLTemplate & "</body></html>"
+                 
+    ' 5. Alimenta o componente Chromium diretamente através da string consolidada
+    OrdoWebView1.NavigateToString cHTMLTemplate
+    Exit Sub
 
+ErroRenderMD:
+    MsgBox "Falha crítica no motor RenderizarMotorMDLocal: " & Err.Description, vbCritical, "Erro de Engine"
+    If fNum > 0 Then Close #fNum
+End Sub
 Private Sub RenderizarMotorDocLocal()
     On Error GoTo ErroDoc
     Dim cHtmlTempPath As String
@@ -684,7 +742,7 @@ End Sub
 
 Private Sub cmdSaveDoc_Click()
     On Error GoTo ErroSaveDoc
-    Dim sFilter As String
+    Dim sFILTER As String
     Dim sFileName As String
     Dim sSugestaoNome As String
     
@@ -693,10 +751,10 @@ Private Sub cmdSaveDoc_Click()
     
     ' 2. Define os filtros de salvamento (Permite salvar como Documento Word ou PDF)
     ' Usamos a barra vertical "|" que a sua função FileSave exige para converter para o Windows
-    sFilter = "Documento do Word (*.doc)|*.doc|Documento PDF (*.pdf)|*.pdf|Todos Arquivos (*.*)|*.*"
+    sFILTER = "Documento do Word (*.doc)|*.doc|Documento PDF (*.pdf)|*.pdf|Todos Arquivos (*.*)|*.*"
     
     ' 3. Abre a caixa de diálogo nativa da sua mFileAPI
-    sFileName = FileSave(Me, sFilter, 1, "DOC", sSugestaoNome, , "Salvar Documento Como")
+    sFileName = FileSave(Me, sFILTER, 1, "DOC", sSugestaoNome, , "Salvar Documento Como")
     
     ' Se o utilizador cancelou a janela, sai da sub-rotina
     If sFileName = "" Then Exit Sub
@@ -737,7 +795,7 @@ End Sub
 
 Private Sub cmdSavePDF_Click()
     On Error GoTo ErroSavePDF
-    Dim sFilter As String
+    Dim sFILTER As String
     Dim sFileName As String
     Dim sSugestaoNome As String
     
@@ -746,10 +804,10 @@ Private Sub cmdSavePDF_Click()
     
     ' 2. Define o filtro específico para salvar em PDF
     ' Usamos a barra vertical "|" que a sua função FileSave exige para converter internamente
-    sFilter = "Documento PDF (*.pdf)|*.pdf|Todos Arquivos (*.*)|*.*"
+    sFILTER = "Documento PDF (*.pdf)|*.pdf|Todos Arquivos (*.*)|*.*"
     
     ' 3. Abre a caixa de diálogo nativa do Windows através da sua mFileAPI
-    sFileName = FileSave(Me, sFilter, 1, "PDF", sSugestaoNome, , "Salvar Como PDF")
+    sFileName = FileSave(Me, sFILTER, 1, "PDF", sSugestaoNome, , "Salvar Como PDF")
     
     ' Se o usuário cancelou a janela de salvamento, aborta a operação
     If sFileName = "" Then Exit Sub
@@ -763,4 +821,144 @@ Private Sub cmdSavePDF_Click()
 
 ErroSavePDF:
     MsgBox "Erro ao exportar o arquivo para PDF: " & Err.Description, vbCritical, "Erro de Exportação"
+End Sub
+
+Public Sub RenderizarMotorDelimitadoLocal(ByVal cCaminhoArquivo As String)
+    On Error GoTo ErroRenderDelimitado
+    
+    Dim fNum            As Integer
+    Dim cConteudoBruto  As String
+    Dim cConteudoMD     As String
+    Dim cHTMLTemplate   As String
+    Dim sDelimitador    As String
+    Dim vLinhas         As Variant
+    Dim vColunas        As Variant
+    Dim i               As Long
+    Dim j               As Long
+    Dim nMaxColunas     As Long
+    Dim cLinhaSeparador As String
+    
+    ' Variáveis do motor de identificação automática
+    Dim sPrimeiraLinha  As String
+    Dim lContador       As Long
+    Dim lMaxRepeticoes  As Long
+    
+    ' 1. Validação de segurança do arquivo físico
+    If Dir(cCaminhoArquivo) = "" Then
+        MsgBox "O arquivo especificado não foi encontrado: " & cCaminhoArquivo, vbExclamation, "Aviso"
+        Exit Sub
+    End If
+    
+    ' 2. Captura o conteúdo do arquivo de texto bruto
+    fNum = FreeFile
+    Open cCaminhoArquivo For Input As #fNum
+        cConteudoBruto = Input(LOF(fNum), #fNum)
+    Close #fNum
+    
+    vLinhas = Split(cConteudoBruto, vbCrLf)
+    If UBound(vLinhas) < 0 Then Exit Sub
+    sPrimeiraLinha = vLinhas(0)
+    
+    ' 3. MOTOR DE INTELIGÊNCIA: Identifica qual delimitador venceu na amostragem
+    ' Definimos o seu favorito (Pipe) como o Fallback padrão inicial
+    sDelimitador = "|"
+    lMaxRepeticoes = 0
+    
+    ' Teste 1: Pipe (|) - Seu delimitador principal e mais seguro
+    lContador = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, "|", ""))
+    If lContador > lMaxRepeticoes Then lMaxRepeticoes = lContador: sDelimitador = "|"
+    
+    ' Teste 2: Ponto e Vírgula (;)
+    lContador = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, ";", ""))
+    If lContador > lMaxRepeticoes Then lMaxRepeticoes = lContador: sDelimitador = ";"
+    
+    ' Teste 3: Vírgula (,)
+    lContador = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, ",", ""))
+    If lContador > lMaxRepeticoes Then lMaxRepeticoes = lContador: sDelimitador = ","
+    
+    ' Teste 4: Cerquilha (#)
+    lContador = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, "#", ""))
+    If lContador > lMaxRepeticoes Then lMaxRepeticoes = lContador: sDelimitador = "#"
+    
+    ' Teste 5: Til (~)
+    lContador = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, "~", ""))
+    If lContador > lMaxRepeticoes Then lMaxRepeticoes = lContador: sDelimitador = "~"
+    
+    ' Teste 6: Tabulação (vbTab)
+    lContador = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, vbTab, ""))
+    If lContador > lMaxRepeticoes Then lMaxRepeticoes = lContador: sDelimitador = vbTab
+
+    ' 4. Processamento dos vetores (A primeira linha já contém dados válidos)
+    vColunas = Split(sPrimeiraLinha, sDelimitador)
+    nMaxColunas = UBound(vColunas)
+    
+    ' Como não há cabeçalho textual enviado, geramos a linha técnica de títulos: | Coluna 1 | Coluna 2 |
+    cConteudoMD = "|"
+    For j = 0 To nMaxColunas
+        cConteudoMD = cConteudoMD & " Coluna " & (j + 1) & " |"
+    Next j
+    cConteudoMD = cConteudoMD & vbCrLf
+    
+    ' Linha de marcação estrutural exigida pelo interpretador Markdown
+    cLinhaSeparador = "|"
+    For j = 0 To nMaxColunas
+        cLinhaSeparador = cLinhaSeparador & "---| "
+    Next j
+    cConteudoMD = cConteudoMD & cLinhaSeparador & vbCrLf
+    
+    ' 5. Varre todas as linhas incluindo o índice 0 (garante que o primeiro registro apareça na tabela)
+    For i = 0 To UBound(vLinhas)
+        If Trim(vLinhas(i)) <> "" Then
+            vColunas = Split(vLinhas(i), sDelimitador)
+            cConteudoMD = cConteudoMD & "|"
+            For j = 0 To nMaxColunas
+                If j <= UBound(vColunas) Then
+                    ' Limpa possíveis aspas residuais (" ou ') que tenham vindo no dado bruto
+                    Dim sDadoLimpo As String
+                    sDadoLimpo = Trim(vColunas(j))
+                    If Left(sDadoLimpo, 1) = """" And Right(sDadoLimpo, 1) = """" Then
+                        sDadoLimpo = Mid(sDadoLimpo, 2, Len(sDadoLimpo) - 2)
+                    ElseIf Left(sDadoLimpo, 1) = "'" And Right(sDadoLimpo, 1) = "'" Then
+                        sDadoLimpo = Mid(sDadoLimpo, 2, Len(sDadoLimpo) - 2)
+                    End If
+                    
+                    cConteudoMD = cConteudoMD & " " & sDadoLimpo & " |"
+                Else
+                    cConteudoMD = cConteudoMD & "  |" ' Previne falhas se faltar coluna em linhas incompletas
+                End If
+            Next j
+            cConteudoMD = cConteudoMD & vbCrLf
+        End If
+    Next i
+    
+    ' 6. Sanitização de escape para segurança de injeção JavaScript no WebView2
+    cConteudoMD = Replace(cConteudoMD, vbCrLf, "\n")
+    cConteudoMD = Replace(cConteudoMD, vbCr, "\n")
+    cConteudoMD = Replace(cConteudoMD, vbLf, "\n")
+    cConteudoMD = Replace(cConteudoMD, "'", "\'")
+    
+    ' 7. Montagem do HTML em blocos (Evita o limite oculto de linhas do VB6)
+    cHTMLTemplate = "<html><head><meta charset='utf-8'>"
+    cHTMLTemplate = cHTMLTemplate & "<script src='https://cdn.jsdelivr.net/npm/marked/marked.min.js'></script>"
+    cHTMLTemplate = cHTMLTemplate & "<style>"
+    cHTMLTemplate = cHTMLTemplate & "  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; padding: 35px; background-color: #ffffff; color: #24292f; line-height: 1.6; }"
+    cHTMLTemplate = cHTMLTemplate & "  table { border-collapse: collapse; width: 100%; margin-top: 0; margin-bottom: 16px; font-size: 14px; }"
+    cHTMLTemplate = cHTMLTemplate & "  th, td { border: 1px solid #d0d7de; padding: 8px 13px; }"
+    cHTMLTemplate = cHTMLTemplate & "  th { background-color: #f6f8fa; font-weight: 600; color: #57606a; }"
+    cHTMLTemplate = cHTMLTemplate & "  tr:nth-child(even) { background-color: #f6f8fa; }"
+    cHTMLTemplate = cHTMLTemplate & "</style></head>"
+    cHTMLTemplate = cHTMLTemplate & "<body>"
+    cHTMLTemplate = cHTMLTemplate & "  <div id='content'></div>"
+    cHTMLTemplate = cHTMLTemplate & "  <script>"
+    cHTMLTemplate = cHTMLTemplate & "    document.getElementById('content').innerHTML = marked.parse('" & cConteudoMD & "');"
+    cHTMLTemplate = cHTMLTemplate & "  </script>"
+    cHTMLTemplate = cHTMLTemplate & "</body></html>"
+                 
+    ' 8. Renderiza a tabela limpa e formatada na janela do Chromium
+    OrdoWebView1.NavigateToString cHTMLTemplate
+    Exit Sub
+
+ErroRenderDelimitado:
+    MsgBox "Falha no motor RenderizarMotorDelimitadoLocal: " & Err.Description, vbCritical, "Erro de Engine"
+    If fNum > 0 Then Close #fNum
 End Sub

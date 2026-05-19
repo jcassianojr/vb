@@ -159,7 +159,7 @@ Private Sub Form_Load()
   End If
   If InStr(UCase(cARQRTF), ".RTF") Then
      If FileConnExist(cARQRTF, True) Then
-        RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
+        RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
         ePASS03 = 2
         PrintPreview1.ShowPreview
      End If
@@ -392,7 +392,10 @@ Private Sub imprima_click()
     Case "EXE"
       aRELCFG(1) = "SHELL"
     Case "INI"
-      aRELCFG(1) = "FRMINIEDITOR"
+          aRELCFG(1) = "FRMINIEDITOR"
+    Case "CSV"
+         FrmPreview.Show
+         
     Case "PDF"
           ePASS01 = Array("Externo", "Interno", "Interno Browser")
       escOrdem.Show vbModal, Me
@@ -682,7 +685,7 @@ Public Sub MyPrintinghtml()
   Next
 End Sub
 Public Sub MyPrintingRTF()
-  PrinterEx.PrintRichTextBox RichTextbox1
+  PrinterEx.PrintRichTextBox RichTextBox1
 End Sub
 Public Sub MyPrintingJPG()
   Select Case ePASS02
