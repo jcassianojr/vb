@@ -255,11 +255,24 @@ Private Sub Encerrar_Click()
 Unload Me
 End Sub
 
+Private Sub Form_Resize()
+On Error Resume Next
+    ' Redimensionamento dinâmico responsivo: o preview acompanha o tamanho da janela do utilizador
+    OrdoWebView1.Height = Me.ScaleHeight - OrdoWebView1.Top - 200
+    OrdoWebView1.Width = Me.ScaleWidth - OrdoWebView1.Left - 1800 ' Reserva o espaço dos botões à direita
+End Sub
 Private Sub Form_Load()
+    On Error GoTo TrataErro
+    
+    Dim bLinkValido As Boolean
+    
+    ' Habilita explicitamente a execução de scripts no componente Chromium
+    OrdoWebView1.IsScriptEnabled = True
+    
     ' 1. Captura o destino passado pela variável global de transporte
     mvarCaminhoArquivo = Trim(CStr(cARQRTF))
     
-    ' 2. CONTROLE DE INTERFACE DINÂMICO
+    ' 2. CONTROLE DE INTERFACE DINÂMICO E DIRECIONAMENTO DE MOTORES
     If InStr(1, mvarCaminhoArquivo, ".zpl", vbTextCompare) > 0 Then
         ' --- MODO ETIQUETA ZPL ---
         cmdSavehtml.Visible = False
@@ -270,7 +283,13 @@ Private Sub Form_Load()
         cmdSavePNG.Top = cmdSavehtml.Top
         cmdSavejpg.Top = cmdSavePNG.Top + cmdSavePNG.Height + 120
         
+        ' Check Link específico para o motor ZPL
+        bLinkValido = TestarLinkMotorJS("https://cdn.jsdelivr.net/npm/zpl-image@0.1.3/zpl-image.min.js")
+        If Not bLinkValido Then NotificarModoOffline "ZPL"
+        
+        ' Passa o parâmetro de offline para o seu método (ajuste a assinatura do seu método se necessário)
         Call RenderizarMotorZplLocal
+        
     ElseIf InStr(1, mvarCaminhoArquivo, ".xlsx", vbTextCompare) > 0 Or _
            InStr(1, mvarCaminhoArquivo, ".xls", vbTextCompare) > 0 Or _
            InStr(1, mvarCaminhoArquivo, ".ods", vbTextCompare) > 0 Then
@@ -282,12 +301,29 @@ Private Sub Form_Load()
         
         Me.Caption = "Visualizador de Planilhas - " & NomeArq(mvarCaminhoArquivo, False)
         
-        ' Dispara o motor de renderização de planilhas local
+        ' Check Link específico para o SheetJS (Excel)
+        bLinkValido = TestarLinkMotorJS("https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js")
+        If Not bLinkValido Then NotificarModoOffline "Excel"
+        
         Call RenderizarMotorPlanilhaLocal
-   ElseIf InStr(1, mvarCaminhoArquivo, ".csv", vbTextCompare) > 0 Then
-      ' Tanto arquivos Markdown quanto textos puros ganham o tratamento visual moderno
-       RenderizarMotorDelimitadoLocal mvarCaminhoArquivo
-   ElseIf InStr(1, mvarCaminhoArquivo, ".rtf", vbTextCompare) > 0 Then
+        
+    ElseIf InStr(1, mvarCaminhoArquivo, ".csv", vbTextCompare) > 0 Then
+        ' --- MODO LEITOR DE DADOS DELIMITADOS (CSV) ---
+        cmdSavehtml.Visible = False
+        cmdSaveTXT.Visible = False
+        cmdSavePNG.Visible = False
+        cmdSavejpg.Visible = False
+        
+        Me.Caption = "Visualizador de Dados - " & NomeArq(mvarCaminhoArquivo, False)
+        
+        ' Check Link específico para o Marked (Markdown/CSV)
+        bLinkValido = TestarLinkMotorJS("https://cdn.jsdelivr.net/npm/marked/marked.min.js")
+        If Not bLinkValido Then NotificarModoOffline "Tabelas de Dados"
+        
+        ' Chama o motor global no módulo .bas passando o status
+        RenderizarMotorDelimitadoLocal mvarCaminhoArquivo
+        
+    ElseIf InStr(1, mvarCaminhoArquivo, ".rtf", vbTextCompare) > 0 Then
         ' --- MODO LEITOR DE RTF MODERNO ---
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
@@ -296,14 +332,16 @@ Private Sub Form_Load()
         
         Me.Caption = "Visualizador RTF - " & NomeArq(mvarCaminhoArquivo, False)
         
-        ' Dispara a renderização e conversão do RTF para HTML local
+        ' Check Link específico para o parser de RTF
+        bLinkValido = TestarLinkMotorJS("https://cdn.jsdelivr.net/npm/rtf-parser@1.3.0/dist/rtf-parser.min.js")
+        If Not bLinkValido Then NotificarModoOffline "RTF"
+        
         Call RenderizarMotorRtfLocal
         
-   ElseIf InStr(1, mvarCaminhoArquivo, ".docx", vbTextCompare) > 0 Or _
+    ElseIf InStr(1, mvarCaminhoArquivo, ".docx", vbTextCompare) > 0 Or _
            InStr(1, mvarCaminhoArquivo, ".doc", vbTextCompare) > 0 Or _
            InStr(1, mvarCaminhoArquivo, ".odt", vbTextCompare) > 0 Then
         ' --- MODO LEITOR DE DOCUMENTOS (WORD / ODT) ---
-        ' Escondemos os botões de gravação de texto padrão do VB6 por enquanto
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
@@ -311,23 +349,22 @@ Private Sub Form_Load()
         
         Me.Caption = "Visualizador de Documentos - " & NomeArq(mvarCaminhoArquivo, False)
         
-        ' Dispara a renderização e conversão do Word para HTML local
+        ' Check Link específico para o Mammoth (.docx)
+        bLinkValido = TestarLinkMotorJS("https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js")
+        If Not bLinkValido Then NotificarModoOffline "Word"
+        
         Call RenderizarMotorDocLocal
         
     ElseIf InStr(1, mvarCaminhoArquivo, ".pdf", vbTextCompare) > 0 Then
         ' --- MODO LEITOR DE PDF ---
-        ' No modo PDF, os botões de salvar texto/HTML do VB6 não fazem sentido,
-        ' pois o próprio leitor do Chromium já tem botões internos de download/print.
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
         
-        ' Altera o título da tela com o nome do PDF
         Me.Caption = "Leitor de PDF - " & NomeArq(mvarCaminhoArquivo, False)
         
-        ' Ativa o motor e navega para o arquivo PDF local usando o protocolo correto
-        OrdoWebView1.IsScriptEnabled = True
+        ' O PDF usa o leitor nativo interno do Chromium (100% offline, não precisa de teste)
         OrdoWebView1.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\", "/")
         
     Else
@@ -340,21 +377,60 @@ Private Sub Form_Load()
         Me.Caption = "Visualizador - " & mvarCaminhoArquivo
         
         If InStr(1, mvarCaminhoArquivo, "://", vbTextCompare) = 0 Then
-            OrdoWebView1.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\", "/")
+            ' Tratamento de arquivos de texto comuns que usam o motor delimitador
+            If InStr(1, mvarCaminhoArquivo, ".html", vbTextCompare) = 0 And _
+               InStr(1, mvarCaminhoArquivo, ".htm", vbTextCompare) = 0 Then
+                
+                bLinkValido = TestarLinkMotorJS("https://cdn.jsdelivr.net/npm/marked/marked.min.js")
+                If Not bLinkValido Then NotificarModoOffline "Texto"
+                
+                RenderizarMotorDelimitadoLocal mvarCaminhoArquivo
+            Else
+                ' HTML puro local roda offline
+                OrdoWebView1.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\", "/")
+            End If
         Else
+            ' URL externa direta
             OrdoWebView1.Navigate mvarCaminhoArquivo
         End If
     End If
     
     DoEvents
-End Sub
-Private Sub Form_Resize()
-On Error Resume Next
-    ' Redimensionamento dinâmico responsivo: o preview acompanha o tamanho da janela do utilizador
-    OrdoWebView1.Height = Me.ScaleHeight - OrdoWebView1.Top - 200
-    OrdoWebView1.Width = Me.ScaleWidth - OrdoWebView1.Left - 1800 ' Reserva o espaço dos botões à direita
+    Exit Sub
+
+TrataErro:
+    MsgBox "Erro crítico ao inicializar os motores no Load: " & Err.Description, vbCritical, "Erro de Interface"
 End Sub
 
+' ==================================================================
+' ROTINA DE VALIDAÇÃO DE CONECTIVIDADE DA URL (TIMEOUT ULTRA-CURTO 800ms)
+' ==================================================================
+Private Function TestarLinkMotorJS(ByVal sURL As String) As Boolean
+    On Error GoTo ErroLink
+    Dim oHttp As Object
+    
+    Set oHttp = CreateObject("MSXML2.ServerXMLHTTP.6.0")
+    oHttp.setTimeouts 800, 800, 800, 800 ' Evita travamento da tela se o cliente estiver sem rede
+    
+    oHttp.Open "HEAD", sURL, False
+    oHttp.Send
+    
+    If oHttp.Status = 200 Then TestarLinkMotorJS = True Else TestarLinkMotorJS = False
+    Set oHttp = Nothing
+    Exit Function
+
+ErroLink:
+    TestarLinkMotorJS = False
+    Set oHttp = Nothing
+End Function
+
+' ==================================================================
+' SUB AUXILIAR PARA PADRONIZAR AS MENSAGENS DE AVISO OFFLINE
+' ==================================================================
+Private Sub NotificarModoOffline(ByVal sNomeMotor As String)
+    MsgBox "Aviso: O componente web para visualização de [" & sNomeMotor & "] está inacessível." & vbCrLf & _
+           "O sistema tentará exibir os dados em modo de contingência local.", vbInformation, "Status da Rede"
+End Sub
 '==============================================================================
 ' FUNÇÃO ISOLADA: Só é acionada se a string contiver a marcação ".zpl"
 ' ==============================================================================
@@ -962,3 +1038,5 @@ ErroRenderDelimitado:
     MsgBox "Falha no motor RenderizarMotorDelimitadoLocal: " & Err.Description, vbCritical, "Erro de Engine"
     If fNum > 0 Then Close #fNum
 End Sub
+
+
