@@ -382,8 +382,11 @@ Private Sub imprima_click()
        'escolha no case abaixo
       'FrmPreview.Show
     Case "CHM", "HLP"
-         WinHelp Me.hwnd, cARQRTF, HELP_CONTENTS, 0
-       'aRELCFG(1) = "SHELL"
+         'WinHelp Me.hwnd, cARQRTF, HELP_CONTENTS, 0 o windows novo diz formato descuntinuado
+       'aRELCFG(1) = "SHELL" 'no shell o mesmo problema
+          'usando os motores no preview
+         FrmPreview.Show
+         
     Case "XLS", "XLS", "ODC"
          aRELCFG(1) = "PADRAOPREVIEW"
     Case "DOC", "DOCX", "ODT"
