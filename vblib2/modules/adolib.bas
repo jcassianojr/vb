@@ -204,6 +204,11 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   cARQTMP = UCase(cARQ)
   
   
+  If cDATABASE = "" Then
+    cDATABASE = TratarParametrosCofre(cDATABASE)
+  End If
+  
+  If cDATABASE <> "" Then
   ' -----------------------------------------------------------------
     ' INTEGRAÇÃO COM O COFRE (modSeguranca.bas):
     ' Se os parâmetros opcionais vierem vazios, busca no config.dat
@@ -216,6 +221,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     If Trim(cPASS) = "" Then
         cPASS = LerDoCofre(cSecaoCofre, "Password")
     End If
+  End If
 
    ' cserver e o carq coneccao
    ' If Trim(cServer) = "" Then
@@ -1251,4 +1257,100 @@ Public Function PrepararValorSQL(ByVal v As Variant) As String
         ' Texto: dobra as aspas simples para não quebrar o SQL
         PrepararValorSQL = "'" & Replace(v, "'", "''") & "'"
     End If
+End Function
+
+Public Function TratarParametrosCofre(ByVal cARQ As String) As String
+    Dim cBancoPuro As String
+    Dim cUpperARQ As String
+    Dim aCONN() As String
+    Dim nPosStart As Long
+    Dim nPosEnd As Long
+    
+    cBancoPuro = ""
+    cUpperARQ = UCase(Trim(cARQ))
+    
+    ' -------------------------------------------------------------------------
+    ' CASO 1: Arquivos locais com caminho (\pasta\arquivo.sqlite, .mdb, .accdb)
+    ' -------------------------------------------------------------------------
+    If InStr(cUpperARQ, ".SQLITE") > 0 Or InStr(cUpperARQ, ".MDB") > 0 Or InStr(cUpperARQ, ".ACCDB") > 0 Then
+        Dim nPosBarra As Long
+        Dim nPosPonto As Long
+        Dim cNomeComExtensao As String
+        
+        ' Acha a última barra do caminho
+        nPosBarra = InStrRev(cARQ, "\")
+        If nPosBarra = 0 Then nPosBarra = InStrRev(cARQ, "/")
+        
+        cNomeComExtensao = Mid(cARQ, nPosBarra + 1)
+        
+        ' Remove a extensão para pegar só o nome limpo do banco
+        nPosPonto = InStrRev(cNomeComExtensao, ".")
+        If nPosPonto > 0 Then
+            cBancoPuro = Left(cNomeComExtensao, nPosPonto - 1)
+        Else
+            cBancoPuro = cNomeComExtensao
+        End If
+
+    ' -------------------------------------------------------------------------
+    ' CASO 2: String delimitada por pontos (ex: localhost.3306.mariadb.citacao)
+    ' -------------------------------------------------------------------------
+    ElseIf InStr(cARQ, ".") > 0 And InStr(cUpperARQ, "DRIVER=") = 0 Then
+        aCONN = Split(cARQ, ".")
+        If UBound(aCONN) >= 3 Then
+            cBancoPuro = aCONN(3) ' Pega o quarto elemento (o nome do banco)
+            
+            ' Aproveita e captura o Servidor se ele estiver vazio
+            'If Trim(cSERVER) = "" Then cSERVER = aCONN(0)
+        End If
+
+    ' -------------------------------------------------------------------------
+    ' CASO 3: String de conexão ODBC Padrão (Ex: DRIVER={...};DATABASE=nomebanco)
+    ' Trata variações normais de mercado como DATABASE= ou DB=
+    ' -------------------------------------------------------------------------
+    ElseIf InStr(cUpperARQ, "DATABASE=") > 0 Or InStr(cUpperARQ, "DB=") > 0 Then
+        
+        ' Identifica qual marcador foi utilizado na string
+        If InStr(cUpperARQ, "DATABASE=") > 0 Then
+            nPosStart = InStr(cUpperARQ, "DATABASE=") + 9
+        Else
+            nPosStart = InStr(cUpperARQ, "DB=") + 3
+        End If
+        
+        ' Procura o próximo ponto e vírgula que encerra o nome do banco
+        nPosEnd = InStr(nPosStart, cUpperARQ, ";")
+        
+        If nPosEnd > 0 Then
+            cBancoPuro = Mid(cARQ, nPosStart, nPosEnd - nPosStart)
+        Else
+            cBancoPuro = Mid(cARQ, nPosStart)
+        End If
+        
+        ' Limpa aspas ou caracteres residuais que algumas strings ODBC podem conter
+        cBancoPuro = Replace(cBancoPuro, """", "")
+        cBancoPuro = Replace(cBancoPuro, "'", "")
+    End If
+    
+    ' Limpa espaços em branco e garante caixa alta para casar com o Harbour
+    cBancoPuro = UCase(Trim(cBancoPuro))
+    
+    ' -------------------------------------------------------------------------
+    ' CONSULTA AO COFRE (modSeguranca.bas)
+    ' Se as variáveis opcionais vierem vazias, busca usando o banco extraído
+    ' -------------------------------------------------------------------------
+    'If cBancoPuro <> "" Then
+    '    If Trim(cUSER) = "" Then
+    '        cUSER = LerDoCofre(cBancoPuro, "User")
+    '    End If
+        
+    '    If Trim(cPASS) = "" Then
+    '        cPASS = LerDoCofre(cBancoPuro, "Password")
+    '    End If
+        
+    '    If Trim(cSERVER) = "" Then
+    '        cSERVER = LerDoCofre(cBancoPuro, "Server")
+    '    End If
+    'End If
+
+    ' Retorna o nome do banco identificado (caso precise usar na tipoconn)
+    TratarParametrosCofre = cBancoPuro
 End Function
