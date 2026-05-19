@@ -3,13 +3,13 @@ Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F74FE4B4-2AF4-4F6A-B323-05690FDB6730}#1.3#0"; "OrdoWebView2.OCX"
 Begin VB.Form FrmPreview 
    Caption         =   "FrmPreview"
-   ClientHeight    =   5124
+   ClientHeight    =   5130
    ClientLeft      =   60
-   ClientTop       =   408
-   ClientWidth     =   13188
+   ClientTop       =   405
+   ClientWidth     =   13185
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5124
-   ScaleWidth      =   13188
+   ScaleHeight     =   5130
+   ScaleWidth      =   13185
    StartUpPosition =   3  'Windows Default
    Begin OrdoWebView2.OrdoWebView OrdoWebView1 
       Height          =   4695
@@ -17,8 +17,8 @@ Begin VB.Form FrmPreview
       TabIndex        =   0
       Top             =   120
       Width           =   10815
-      _ExtentX        =   19071
-      _ExtentY        =   8276
+      _ExtentX        =   19076
+      _ExtentY        =   8281
       Search_URL      =   ""
       IsScriptEnabled =   0   'False
       UseEdgeFixedVersion=   -1  'True
@@ -29,13 +29,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   1
       Top             =   720
       Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   762
+      _ExtentX        =   2143
+      _ExtentY        =   767
       Picture         =   "FrmPreview.frx":0000
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -49,13 +49,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   2
       Top             =   240
       Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   762
+      _ExtentX        =   2143
+      _ExtentY        =   767
       Picture         =   "FrmPreview.frx":059A
       Caption         =   "Imprimir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -69,13 +69,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   3
       Top             =   1560
       Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   656
+      _ExtentX        =   2143
+      _ExtentY        =   661
       Picture         =   "FrmPreview.frx":0B34
       Caption         =   "Html"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -89,13 +89,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   4
       Top             =   2040
       Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   656
+      _ExtentX        =   2143
+      _ExtentY        =   661
       Picture         =   "FrmPreview.frx":10CE
       Caption         =   "TXT"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -110,13 +110,13 @@ Begin VB.Form FrmPreview
       TabStop         =   0   'False
       Top             =   2520
       Width           =   1212
-      _ExtentX        =   2138
-      _ExtentY        =   550
+      _ExtentX        =   2143
+      _ExtentY        =   556
       Picture         =   "FrmPreview.frx":1468
       Caption         =   "PNG"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -131,13 +131,13 @@ Begin VB.Form FrmPreview
       TabStop         =   0   'False
       Top             =   2880
       Width           =   1212
-      _ExtentX        =   2138
-      _ExtentY        =   550
+      _ExtentX        =   2143
+      _ExtentY        =   556
       Picture         =   "FrmPreview.frx":1902
       Caption         =   "JPG"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -151,13 +151,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   7
       Top             =   3240
       Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   656
+      _ExtentX        =   2143
+      _ExtentY        =   661
       Picture         =   "FrmPreview.frx":1D9C
       Caption         =   "DOC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -171,13 +171,13 @@ Begin VB.Form FrmPreview
       TabIndex        =   8
       Top             =   3720
       Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   656
+      _ExtentX        =   2143
+      _ExtentY        =   661
       Picture         =   "FrmPreview.frx":2136
       Caption         =   "PDF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -289,6 +289,35 @@ Private Sub Form_Load()
         
         ' Passa o parâmetro de offline para o seu método (ajuste a assinatura do seu método se necessário)
         Call RenderizarMotorZplLocal
+        
+   ElseIf InStr(1, mvarCaminhoArquivo, ".chm", vbTextCompare) > 0 Then
+        ' --- MODO MOTOR DE AJUDA CHM ---
+        cmdSavehtml.Visible = False
+        cmdSaveTXT.Visible = False
+        cmdSavePNG.Visible = False
+        cmdSavejpg.Visible = False
+        
+        Me.Caption = "Manual de Ajuda - " & NomeArq(mvarCaminhoArquivo, False)
+        
+        ' O protocolo its: nativo do Windows funciona localmente e offline no Chromium
+        OrdoWebView1.Navigate "its:" & mvarCaminhoArquivo & "::/"
+        
+   ElseIf InStr(1, mvarCaminhoArquivo, ".hlp", vbTextCompare) > 0 Then
+        ' --- MODO MOTOR DE AJUDA HLP LEGADO (FALLBACK SEGURO) ---
+        cmdSavehtml.Visible = False
+        cmdSaveTXT.Visible = False
+        cmdSavePNG.Visible = False
+        cmdSavejpg.Visible = False
+        
+        ' Testa se o arquivo começa com o cabeçalho 'ITSF' (característico de arquivos CHM)
+        If IsArquivoChmDisfarcado(mvarCaminhoArquivo) Then
+            Me.Caption = "Manual de Ajuda - " & NomeArq(mvarCaminhoArquivo, False)
+            ' Abre o arquivo .hlp usando o protocolo do CHM!
+            OrdoWebView1.Navigate "its:" & mvarCaminhoArquivo & "::/"
+        Else
+            ' Se for um HLP antigo de verdade, exibe o aviso moderno
+            Call RenderizarMotorHlpLocal
+        End If
         
     ElseIf InStr(1, mvarCaminhoArquivo, ".xlsx", vbTextCompare) > 0 Or _
            InStr(1, mvarCaminhoArquivo, ".xls", vbTextCompare) > 0 Or _
@@ -910,7 +939,7 @@ Public Sub RenderizarMotorDelimitadoLocal(ByVal cCaminhoArquivo As String)
     Dim vLinhas         As Variant
     Dim vColunas        As Variant
     Dim i               As Long
-    Dim j               As Long
+    Dim J               As Long
     Dim nMaxColunas     As Long
     Dim cLinhaSeparador As String
     
@@ -970,16 +999,16 @@ Public Sub RenderizarMotorDelimitadoLocal(ByVal cCaminhoArquivo As String)
     
     ' Como não há cabeçalho textual enviado, geramos a linha técnica de títulos: | Coluna 1 | Coluna 2 |
     cConteudoMD = "|"
-    For j = 0 To nMaxColunas
-        cConteudoMD = cConteudoMD & " Coluna " & (j + 1) & " |"
-    Next j
+    For J = 0 To nMaxColunas
+        cConteudoMD = cConteudoMD & " Coluna " & (J + 1) & " |"
+    Next J
     cConteudoMD = cConteudoMD & vbCrLf
     
     ' Linha de marcação estrutural exigida pelo interpretador Markdown
     cLinhaSeparador = "|"
-    For j = 0 To nMaxColunas
+    For J = 0 To nMaxColunas
         cLinhaSeparador = cLinhaSeparador & "---| "
-    Next j
+    Next J
     cConteudoMD = cConteudoMD & cLinhaSeparador & vbCrLf
     
     ' 5. Varre todas as linhas incluindo o índice 0 (garante que o primeiro registro apareça na tabela)
@@ -987,11 +1016,11 @@ Public Sub RenderizarMotorDelimitadoLocal(ByVal cCaminhoArquivo As String)
         If Trim(vLinhas(i)) <> "" Then
             vColunas = Split(vLinhas(i), sDelimitador)
             cConteudoMD = cConteudoMD & "|"
-            For j = 0 To nMaxColunas
-                If j <= UBound(vColunas) Then
+            For J = 0 To nMaxColunas
+                If J <= UBound(vColunas) Then
                     ' Limpa possíveis aspas residuais (" ou ') que tenham vindo no dado bruto
                     Dim sDadoLimpo As String
-                    sDadoLimpo = Trim(vColunas(j))
+                    sDadoLimpo = Trim(vColunas(J))
                     If Left(sDadoLimpo, 1) = """" And Right(sDadoLimpo, 1) = """" Then
                         sDadoLimpo = Mid(sDadoLimpo, 2, Len(sDadoLimpo) - 2)
                     ElseIf Left(sDadoLimpo, 1) = "'" And Right(sDadoLimpo, 1) = "'" Then
@@ -1002,7 +1031,7 @@ Public Sub RenderizarMotorDelimitadoLocal(ByVal cCaminhoArquivo As String)
                 Else
                     cConteudoMD = cConteudoMD & "  |" ' Previne falhas se faltar coluna em linhas incompletas
                 End If
-            Next j
+            Next J
             cConteudoMD = cConteudoMD & vbCrLf
         End If
     Next i
@@ -1039,4 +1068,46 @@ ErroRenderDelimitado:
     If fNum > 0 Then Close #fNum
 End Sub
 
+' ==================================================================
+' 3. MOTOR LOCAL DE TRATAMENTO PARA FORMATO LEGADO .HLP
+' ==================================================================
+Private Sub RenderizarMotorHlpLocal()
+    Dim cHTMLAviso As String
+    
+    cHTMLAviso = "<html><head><meta charset='utf-8'>" & _
+                 "<style>" & _
+                 "  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; padding: 50px; text-align: center; background-color: #fafafa; color: #333; }" & _
+                 "  .card { background: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 500px; margin: 0 auto; border-top: 4px solid #e67e22; }" & _
+                 "  h3 { color: #d35400; margin-top: 0; }" & _
+                 "  p { font-size: 14px; line-height: 1.5; color: #555; }" & _
+                 "  .file-name { font-family: monospace; background: #f1f2f6; padding: 4px 8px; border-radius: 4px; color: #c0392b; }" & _
+                 "</style></head><body>" & _
+                 "  <div class='card'>" & _
+                 "    <h3>?? Formato de Ajuda Incompatível</h3>" & _
+                 "    <p>O ficheiro <span class='file-name'>" & NomeArq(mvarCaminhoArquivo, True) & "</span> está num formato legado (.hlp) cujo motor de renderização foi descontinuado pela Microsoft no Windows 10/11.</p>" & _
+                 "    <p>Recomenda-se a conversão deste manual para formatos suportados como <b>.CHM</b> ou <b>.PDF</b> para exibição integrada.</p>" & _
+                 "  </div>" & _
+                 "</body></html>"
+                 
+    OrdoWebView1.NavigateToString cHTMLAviso
+End Sub
 
+Private Function IsArquivoChmDisfarcado(ByVal cCaminho As String) As Boolean
+    On Error GoTo Sair
+    Dim fNum As Integer
+    Dim sHeader As String * 4
+    
+    If Dir(cCaminho) <> "" Then
+        fNum = FreeFile
+        Open cCaminho For Binary As #fNum
+            Get #fNum, 1, sHeader
+        Close #fNum
+        
+        ' 'ITSF' é a assinatura mágica de todo arquivo de ajuda CHM compilado
+        If sHeader = "ITSF" Then IsArquivoChmDisfarcado = True
+    End If
+    Exit Function
+Sair:
+    IsArquivoChmDisfarcado = False
+    If fNum > 0 Then Close #fNum
+End Function

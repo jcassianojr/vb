@@ -91,6 +91,7 @@ Public Const CB_ERR As Long = (-1)
 'Public Const WS_MINIMIZEBOX As Long = &H20000
 'Public Const WS_MAXIMIZEBOX As Long = &H10000
 Public Const GWL_STYLE As Long = (-16)
+Public Const HELP_CONTENTS = &H3&
 
 'Private Type SHFILEOPSTRUCT
 '  hwnd As Long
@@ -183,6 +184,8 @@ Public Declare Function SetLocaleInfo Lib "kernel32" _
  
 Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
 Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+Public Declare Function WinHelp Lib "user32" Alias "WinHelpA" (ByVal hwnd As Long, ByVal lpHelpFile As String, ByVal wCommand As Long, ByVal dwData As Long) As Long
+
 #End If
 
 

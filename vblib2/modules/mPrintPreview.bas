@@ -1,6 +1,7 @@
 Attribute VB_Name = "mPrintPreview"
 Option Explicit
 
+
 'Needed for print preview:
 Public Property Get Printer() As Printer
   Set Printer = PrinterReplacement
