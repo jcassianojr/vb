@@ -159,7 +159,7 @@ Private Sub Form_Load()
   End If
   If InStr(UCase(cARQRTF), ".RTF") Then
      If FileConnExist(cARQRTF, True) Then
-        RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
+        RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
         ePASS03 = 2
         PrintPreview1.ShowPreview
      End If
@@ -378,30 +378,15 @@ Private Sub imprima_click()
     Case "M5M"                               ''Mana5 Padrao /Mana5 Manrel
       aRELCFG(1) = "IMPRELM5M"             ''MANREL
     Case "HTM", "HTML", "XML", "MD", "MARKDOWN"
-      aRELCFG(1) = "FRMHTML"
+       aRELCFG(1) = "FRMHTML"
+       'escolha no case abaixo
+      'FrmPreview.Show
     Case "CHM", "HLP"
       aRELCFG(1) = "SHELL"
     Case "XLS", "XLS", "ODC"
-         ePASS01 = Array("Externo", "Interno Browser")
-          escOrdem.Show vbModal, Me
-          eRETU01 = FixInt(eRETU01, 0)
-          Select Case eRETU01
-          Case 0
-            aRELCFG(1) = "SHELL"
-          Case 1
-             FrmPreview.Show vbModal, Me
-          End Select
+         aRELCFG(1) = "PADRAOPREVIEW"
     Case "DOC", "DOCX", "ODT"
-         ePASS01 = Array("Externo", "Interno Browser")
-          escOrdem.Show vbModal, Me
-          eRETU01 = FixInt(eRETU01, 0)
-          Select Case eRETU01
-          Case 0
-            aRELCFG(1) = "SHELL"
-          Case 1
-             FrmPreview.Show vbModal, Me
-          End Select
-   
+         aRELCFG(1) = "PADRAOPREVIEW"
     Case "PPS", "PPT"
       aRELCFG(1) = "SHELL"
     Case "EXE"
@@ -547,6 +532,17 @@ Select Case aRELCFG(1)
   '  frmIniEditor.Show vbModal, Me
   Case "FRMCRWENG"
     FrmCrwENG.Show vbModal, Me
+  Case "PADRAOPREVIEW"
+       ePASS01 = Array("Padrao sistema(SHELL)", "Interno Browser")
+        escOrdem.Show vbModal, Me
+        eRETU01 = FixInt(eRETU01, 0)
+        Select Case eRETU01
+          Case 0
+            aRELCFG(1) = "SHELL"
+          Case 1
+             FrmPreview.Show vbModal, Me
+          End Select
+  
   Case "FRMHTML"
     ePASS01 = Array("Navegador Externo", "Preview Interno", "Navegador Interno")
     escOrdem.Show vbModal, Me
@@ -686,7 +682,7 @@ Public Sub MyPrintinghtml()
   Next
 End Sub
 Public Sub MyPrintingRTF()
-  PrinterEx.PrintRichTextBox RichTextBox1
+  PrinterEx.PrintRichTextBox RichTextbox1
 End Sub
 Public Sub MyPrintingJPG()
   Select Case ePASS02
