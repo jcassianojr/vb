@@ -63,8 +63,8 @@ Public Function AddDSN(ByVal strDSN As String, ByVal strDescription As String, _
   cData = strAttributes & "DATABASE=" & strDB & Chr(0)
   'Set the Driver Name
   Select Case StrDriver
-  Case "MDB"
-    StrDriver = "Microsoft Access Driver (*.mdb)"
+  Case "MDB", "ACCDB"
+    StrDriver = "Microsoft Access Driver (*.mdb, *.accdb)" '"Microsoft Access Driver (*.mdb)"
     cData = "DBQ=" & strDB & Chr(0)
   Case "DBF"
     StrDriver = "Microsoft Visual FoxPro Driver"
@@ -73,6 +73,27 @@ Public Function AddDSN(ByVal strDSN As String, ByVal strDescription As String, _
     StrDriver = "SQLite3 ODBC Driver"
     cData = "Database=" & strDB & Chr(0)
   End Select
+  
+  'Select Case sTipo
+  '  Case "DBF"
+  '      StrDriver = "Microsoft Visual FoxPro Driver"
+  '      strAttributes = "DSN=" & sDsnName & Chr(0) & "SourceType=DBF" & Chr(0) & _
+  '                      "SourceDB=" & sPath & Chr(0) & "Exclusive=0" & Chr(0)
+
+  '  Case "SQLITE"
+  '      StrDriver = "SQLite3 ODBC Driver"
+  '      strAttributes = "DSN=" & sDsnName & Chr(0) & "Database=" & sPath & Chr(0)
+
+   ' Case "ACCDB"
+        ' Novo Case para Access
+   '     StrDriver = "Microsoft Access Driver (*.mdb, *.accdb)"
+        ' No Access, DBQ deve ser o caminho completo do arquivo .accdb
+    '    strAttributes = "DSN=" & sDsnName & Chr(0) & "DBQ=" & sPath & Chr(0) & _
+                        "Exclusive=0" & Chr(0) & "ReadOnly=0" & Chr(0)
+                        
+    'Case Else
+        ' Tratamento de erro ou driver padrão
+'End Select
 
   'Build the attributes - Attributes must be Null separated
 
@@ -94,42 +115,86 @@ Hell:
 
 End Function
 
+' Dentro da sua função AddDSN no Odbc.bas
 
-' Adicione este código a um Módulo ou ao seu Form
-Public Function IsSQLiteDriverInstalled() As Boolean
+'Select Case UCase(StrDriver)
+    ' ... cases existentes (MDB, DBF, SQLITE)
+
+ '   Case "MYSQL"
+ '       ' Mantenha o padrão ANSI que você usa no AdoLib
+ '       StrDriver = "MySQL ODBC 8.0 ANSI Driver"
+        ' Atributos para o SQLConfigDataSource (separados por Chr(0))
+'        strAttributes = "DSN=" & strDSN & Chr(0) & _
+'                        "DESCRIPTION=" & strDescription & Chr(0) & _
+'                        "SERVER=" & sHost & Chr(0) & _
+'                        "DATABASE=" & strDB & Chr(0) & _
+'                        "USER=" & sUser & Chr(0) & _
+'                        "PASSWORD=" & sPass & Chr(0) & _
+'                        "PORT=3306" & Chr(0) & _
+'                        "OPTION=3" & Chr(0) ' OPTION=3 habilita flags de compatibilidade comuns
+
+ '   Case "MARIADB"
+ '       StrDriver = "MariaDB ODBC 3.0 Driver" ' Ou a versão que você usa
+ '       strAttributes = "DSN=" & strDSN & Chr(0) & _
+                        "DESCRIPTION=" & strDescription & Chr(0) & _
+                        "SERVER=" & sHost & Chr(0) & _
+                        "DATABASE=" & strDB & Chr(0) & _
+                        "USER=" & sUser & Chr(0) & _
+                        "PASSWORD=" & sPass & Chr(0) & _
+                        "PORT=3306" & Chr(0)
+
+'    Case "POSTGRESQL", "PGSQL"
+        ' Mantenha o padrão ANSI que você usa no AdoLib
+'        StrDriver = "PostgreSQL ANSI"
+'        strAttributes = "DSN=" & strDSN & Chr(0) & _
+'                        "DESCRIPTION=" & strDescription & Chr(0) & _
+                        "SERVER=" & sHost & Chr(0) & _
+                        "DATABASE=" & strDB & Chr(0) & _
+                        "UID=" & sUser & Chr(0) & _
+                        "PWD=" & sPass & Chr(0) & _
+                        "PORT=5432" & Chr(0)
+
+'    Case "ORACLE"
+        ' Oracle usa TNSNAMES.ORA, então strDB deve ser o Alias do TNS
+'        StrDriver = "Oracle in OraClient19Home1" ' Nome varia conforme instalação
+'        strAttributes = "DSN=" & strDSN & Chr(0) & _
+'                        "DESCRIPTION=" & strDescription & Chr(0) & _
+'                        "DBQ=" & strDB & Chr(0) & _
+'                        "UID=" & sUser & Chr(0) & _
+'                        "PWD=" & sPass & Chr(0)
+'End Select
+
+
+' Função única para verificar qualquer driver ODBC pelo nome
+'IsDriverInstalled("SQLite3 ODBC Driver")
+'IsDriverInstalled("Microsoft Access Driver (*.mdb, *.accdb)")
+'IsDriverInstalled("Microsoft Visual FoxPro Driver")
+Public Function IsDriverInstalled(ByVal sDriverName As String) As Boolean
     Dim shell As Object
-    Dim driverName As String
-    Dim registryPath As String
-    Dim checkValue As String
+    Dim sRegKey As String
     
     On Error Resume Next
     
     Set shell = CreateObject("WScript.Shell")
     
-    ' O nome padrão do driver instalado pelo pacote de Christian Werner
-    driverName = "SQLite3 ODBC Driver"
-    
-    ' Caminho no registro onde os drivers ODBC ficam listados
-    registryPath = "HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\ODBC Drivers\" & driverName
-    
-    ' Tenta ler o valor. Se o driver existir, retornará "Installed"
-    checkValue = shell.RegRead(registryPath)
+    ' 1. Tenta buscar na chave padrão (32-bit ou 64-bit dependendo do contexto)
+    sRegKey = "HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\ODBC Drivers\" & sDriverName
+    shell.RegRead sRegKey
     
     If Err.Number = 0 Then
-        IsSQLiteDriverInstalled = True
+        IsDriverInstalled = True
     Else
-        ' Se falhou, pode ser que o Windows seja 64-bit e o VB6 (32-bit) precise olhar o Wow6432Node
+        ' 2. Fallback: Se não achou, busca no Wow6432Node (específico para apps 32-bit em Windows 64-bit)
         Err.Clear
-        registryPath = "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\ODBC\ODBCINST.INI\ODBC Drivers\" & driverName
-        checkValue = shell.RegRead(registryPath)
+        sRegKey = "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\ODBC\ODBCINST.INI\ODBC Drivers\" & sDriverName
+        shell.RegRead sRegKey
         
         If Err.Number = 0 Then
-            IsSQLiteDriverInstalled = True
+            IsDriverInstalled = True
         Else
-            IsSQLiteDriverInstalled = False
+            IsDriverInstalled = False
         End If
     End If
     
     Set shell = Nothing
 End Function
-

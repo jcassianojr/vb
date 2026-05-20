@@ -426,7 +426,7 @@ Private Sub MDIForm_Load()
  If InStr(LCase(dbuser), ".sqlite") > 0 Or InStr(LCase(dbuser), ".sqlite3") > 0 _
                  Or InStr(LCase(dbuser), ".fossil") > 0 Or InStr(LCase(dbuser), ".db3") > 0 _
                  Or (InStr(LCase(dbuser), ".db") > 0) Then
-     If IsSQLiteDriverInstalled() Then
+     If IsDriverInstalled("SQLite3 ODBC Driver") Then
        ' MsgBox "O driver SQLite ODBC está pronto para uso!", vbInformation
      Else
         MsgBox "Driver SQLite ODBC não encontrado. Por favor, instale o driver para continuar.", vbCritical
