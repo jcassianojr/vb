@@ -80,6 +80,9 @@ End Function
 Public Function GrvSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, _
                        ByVal aVAL As Variant, ByVal aFOR As Variant, Optional ByVal nStartItem = 0)
   Dim aRETU As Variant
+If IsQueryDestructive(cSQL) Then
+     Exit Function
+  End If
   aRETU = TipoConn(cARQ)
   cARQ = aRETU(1)
   Select Case aRETU(0)
@@ -97,6 +100,9 @@ Public Function IncluiSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
                           Optional ByVal lCHECK As Boolean = False, _
                           Optional ByVal lMES As Boolean = True, Optional ByVal aIDDES As Variant = 0)
   Dim aRETU As Variant
+  If IsQueryDestructive(cSQL) Then
+     Exit Function
+  End If
   aRETU = TipoConn(cARQ)
   cARQ = aRETU(1)
   Select Case aRETU(0)
@@ -112,6 +118,9 @@ End Function
 
 Public Function PegSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant, Optional ByVal lWRITE As Boolean = False) As Variant
   Dim aRETU As Variant
+  If Not IsQuerySafe(cSQL) Then
+     Exit Function
+  End If
   aRETU = TipoConn(cARQ, , , lWRITE)
   cARQ = aRETU(1)
   Select Case aRETU(0)
@@ -127,6 +136,9 @@ End Function
 
 Public Function PegUltSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, Optional ByVal lWRITE As Boolean = False) As Variant
   Dim aRETU As Variant
+   If Not IsQuerySafe(cSQL) Then
+     Exit Function
+  End If
   aRETU = TipoConn(cARQ, , , lWRITE)
   cARQ = aRETU(1)
   Select Case aRETU(0)
@@ -141,6 +153,9 @@ End Function
 
 Public Function PegMAXSQL(ByVal cARQ As String, ByVal cTable As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, Optional ByVal lWRITE As Boolean = False) As Variant
   Dim aRETU As Variant
+ 'If Not IsQuerySafe(cSQL) Then
+ '    Exit Function
+ ' End If
   aRETU = TipoConn(cARQ, , , lWRITE)
   cARQ = aRETU(1)
   Select Case aRETU(0)
@@ -151,6 +166,9 @@ End Function
 
 Public Function PegCountSQL(ByVal cARQ As String, ByVal cTable As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, Optional ByVal lWRITE As Boolean = False) As Variant
   Dim aRETU As Variant
+' If Not IsQuerySafe(cSQL) Then
+'     Exit Function
+'  End If
   aRETU = TipoConn(cARQ, , , lWRITE)
   cARQ = aRETU(1)
   Select Case aRETU(0)
@@ -165,6 +183,9 @@ End Function
 
 Public Function ApagaSQL(ByVal cARQ As String, ByVal cSQL As String) As Boolean
   Dim aRETU As Variant
+  If IsQueryDestructive(cSQL) Then
+     Exit Function
+  End If
   aRETU = TipoConn(cARQ)
   cARQ = aRETU(1)
   Select Case aRETU(0)
@@ -179,6 +200,9 @@ End Function
 
 Public Function SomaSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM As Variant, Optional ByVal lWRITE As Boolean = False) As Variant
   Dim aRETU As Variant
+ If Not IsQuerySafe(cSQL) Then
+     Exit Function
+  End If
   aRETU = TipoConn(cARQ, , , lWRITE)
   Select Case aRETU(0)
   Case "ADO"
@@ -197,6 +221,9 @@ Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
                            Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
     
     Dim aRETU As Variant
+    If Not IsQuerySafe(cSQL) Then
+     Exit Function
+  End If
   aRETU = TipoConn(cARQ)
   Select Case aRETU(0)
     
@@ -236,6 +263,13 @@ Public Function SqlMoveReg(ByVal cARQORI As String, _
                            Optional ByVal aOUTDES As Variant = 0, _
                            Optional ByVal aIDDES As Variant = 0)
 
+ If IsQueryDestructive(cSQLORI) Then
+     Exit Function
+  End If
+
+ If IsQueryDestructive(cSQLDES) Then
+     Exit Function
+  End If
 
 ''cARQORI arquivo origem
 ''csqlori sql origem
@@ -252,11 +286,14 @@ Public Function SqlMoveReg(ByVal cARQORI As String, _
 ''aIDDES  id que acabou de criar
 
   Dim aRETU As Variant
+
+  
+  
   aRETU = TipoConn(cARQORI)
   ''cARQ = aRETU(1)
   Select Case aRETU(0)
   Case "ADO"
-    SqlMoveReg = SqlMoveRegADO(cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
+    SqlMoveReg = SQLMoveRegADO(cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
                   cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, _
                   aIDDES)
    Case "SQLITE"
@@ -273,8 +310,8 @@ Public Function Mana5Fec() As Boolean
   Dim cDIZBX As String
   Dim cARQUSO As String
   Dim cARQNOME As String
-  Dim cMES As String
-  Dim cANO As String
+  Dim cMes As String
+  Dim cAno As String
   Dim lSEGUNDO As Boolean
   Dim aSEGUNDO As Variant
   Dim cSQLSEG As String
@@ -321,14 +358,14 @@ Public Function Mana5Fec() As Boolean
       Exit Function
     End If
     If cCAMFEC = "F" Then
-      cANO = Busca("Digite o Ano AAAA", "Competencia Ano", CStr(Format(Date, "yyyy")), 4)
-      cMES = Busca("Digite o Mes MM", "Competencia Mes", "01", 2)
-      cARQUSO = PegCamini("{MANA5}") & "E" & cANO & "\" & aARQFEC(2) & Right(cANO, 2) & cMES & ".DBF"
+      cAno = Busca("Digite o Ano AAAA", "Competencia Ano", CStr(Format(Date, "yyyy")), 4)
+      cMes = Busca("Digite o Mes MM", "Competencia Mes", "01", 2)
+      cARQUSO = PegCamini("{MANA5}") & "E" & cAno & "\" & aARQFEC(2) & Right(cAno, 2) & cMes & ".DBF"
       If lSEGUNDO Then
-        cARQUS2 = PegCamini("{MANA5}") & "E" & cANO & "\" & Trim(aSEGUNDO(2)) & Right(cANO, 2) & cMES & ".DBF"
+        cARQUS2 = PegCamini("{MANA5}") & "E" & cAno & "\" & Trim(aSEGUNDO(2)) & Right(cAno, 2) & cMes & ".DBF"
       End If
       cARQNOME = aARQFEC(2)
-      cFECDIZ = Right(cANO, 2) & cMES & "-" & cMES & "/" & cANO
+      cFECDIZ = Right(cAno, 2) & cMes & "-" & cMes & "/" & cAno
     Else
       Select Case cCAMFEC
       Case "A"
@@ -379,7 +416,9 @@ End Function
 
 Public Function PegOperSQL(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, ByVal coper As String) As Variant
   Dim aRETU As Variant
-
+ 'If Not IsQuerySafe(cSQL) Then
+ '    Exit Function
+ ' End If
   aRETU = TipoConn(cARQ)
   Select Case aRETU(0)
   Case "ADO"
@@ -392,5 +431,114 @@ Public Function PegOperSQL(ByVal cARQ As String, ByVal cTABLEWHERE As String, By
   End Select
 
 End Function
+Public Function IsQuerySafe(ByVal sql As String) As Boolean
+    Dim cleanSQL As String
+    Dim i As Integer
+    Dim charCode As Integer
+    Dim currentChar As String
+    Dim forbiddenWords As Variant
+    
+    ' 1. Normaliza para maiúsculas
+    cleanSQL = UCase(sql)
+    
+    ' 2. Substitui caracteres não-alfabéticos por espaços
+    ' Isso separa as palavras que o atacante tentou colar
+    For i = 1 To Len(cleanSQL)
+        currentChar = Mid(cleanSQL, i, 1)
+        charCode = Asc(currentChar)
+        ' Mantém A-Z e números
+        If Not ((charCode >= 65 And charCode <= 90) Or (charCode >= 48 And charCode <= 57)) Then
+            Mid(cleanSQL, i, 1) = " "
+        End If
+    Next i
+    
+    ' 3. Remove excesso de espaços para facilitar a análise
+    cleanSQL = Trim(Replace(Replace(cleanSQL, "  ", " "), "  ", " "))
+    
+    ' 4. Verifica se a primeira palavra é SELECT
+    ' Dividimos para pegar apenas a primeira parte
+    If Split(cleanSQL, " ")(0) <> "SELECT" Then
+        IsQuerySafe = False
+        Exit Function
+    End If
+    
+    ' 5. Lista de palavras proibidas (sem espaços nas pontas)
+    forbiddenWords = Array("DELETE", "DROP", "UPDATE", "INSERT", _
+                           "CREATE", "ALTER", "TRUNCATE", "EXEC", _
+                           "EXECUTE", "GRANT", "REVOKE", "INTO")
+    
+    ' 6. Verifica se alguma palavra proibida existe na string processada
+    ' Como limpamos a string no passo 2, o InStr encontrará a palavra
+    ' mesmo que ela estivesse grudada originalmente
+    For i = LBound(forbiddenWords) To UBound(forbiddenWords)
+        If InStr(cleanSQL, forbiddenWords(i)) > 0 Then
+            IsQuerySafe = False
+            RegistrarLogSeguranca (sql)
+            Exit Function
+        End If
+    Next i
+    
+    IsQuerySafe = True
+End Function
 
+Public Function IsQueryDestructive(ByVal sql As String) As Boolean
+    Dim cleanSQL As String
+    Dim i As Integer, charCode As Integer
+    Dim destrutivos As Variant
+    
+    ' 1. Normaliza para maiúsculas
+    cleanSQL = UCase(sql)
+    
+    ' 2. Limpeza profunda: substitui tudo que não é letra ou número por espaço
+    ' Isso garante que "DELETE;" ou "DROP--" virem "DELETE " ou "DROP "
+    For i = 1 To Len(cleanSQL)
+        charCode = Asc(Mid(cleanSQL, i, 1))
+        If Not ((charCode >= 65 And charCode <= 90) Or (charCode >= 48 And charCode <= 57)) Then
+            Mid(cleanSQL, i, 1) = " "
+        End If
+    Next i
+    
+    ' 3. Remove espaços extras para deixar a string "limpa"
+    cleanSQL = Trim(Replace(Replace(cleanSQL, "  ", " "), "  ", " "))
+    
+    ' 4. Lista do que é proibido
+    ' Como removemos os símbolos, basta buscar a palavra pura
+    destrutivos = Array("DROP", "ALTER", "CREATE", "TRUNCATE", "GRANT", "REVOKE")
+    
+    ' 5. Verifica se alguma palavra proibida existe dentro da string limpa
+    ' O InStr encontrará "DROP" mesmo se estiver no meio da frase ou sem espaços
+    For i = LBound(destrutivos) To UBound(destrutivos)
+        If InStr(cleanSQL, destrutivos(i)) > 0 Then
+            IsQueryDestructive = True ' É destrutivo!
+            RegistrarLogSeguranca (sql)
+            Exit Function
+        End If
+    Next i
+    
+    IsQueryDestructive = False ' É seguro para prosseguir
+End Function
 
+Public Sub RegistrarLogSeguranca(ByVal cSQL As String)
+    Dim fso As Object
+    Dim ts As Object
+    Dim cLogPath As String
+    
+    cLogPath = App.Path & "\log_seguranca.txt"
+    
+    ' Cria o objeto FSO
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' O parâmetro 8 indica "ForAppending" (Adicionar ao final)
+    ' O True indica que ele deve criar o arquivo caso ele não exista
+    Set ts = fso.OpenTextFile(cLogPath, 8, True)
+    
+    ' Escreve as linhas de log
+    ts.WriteLine "DATA: " & Now
+    ts.WriteLine "SQL: " & cSQL
+    ts.WriteLine "--------------------------------------------------------"
+    
+    ' Fecha e limpa
+    ts.Close
+    Set ts = Nothing
+    Set fso = Nothing
+End Sub

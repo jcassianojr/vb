@@ -893,17 +893,6 @@ Public Sub ADO_FreeRecordset(ByRef rs As ADODB.Recordset)
 End Sub
 
 Public Function ADO_IsOpen(ByRef oADOObject As Object) As Boolean
-' Purpose: To determine if a connection or a recordset is open
-' !! Assumes/Pre: Nothing
-' Parameters:
-'  oADOObject as Object  -
-' Returns: Boolean
-'       Success-
-'       Failure- Raises error on failure
-' Revision history:
-'   2004-Feb-20 10:47 [Michael Johnson] Initial creation
-'Call TraceEnters(MODULE_NAME & "::ADO_IsOpen")
-'TraceDetail = "To determine if a connection or a recordset is open"
 
     On Error GoTo TrataErro  'resume Next 'Evita quebra se o objeto estiver em estado inválido
         ADO_IsOpen = False
@@ -912,91 +901,13 @@ Public Function ADO_IsOpen(ByRef oADOObject As Object) As Boolean
     'Verifica se o estado tem o bit de "Open" ligado
     ADO_IsOpen = ((oADOObject.State And adStateOpen) = adStateOpen)
         
- ' On Error GoTo trataerro
-
- ' ADO_IsOpen = False
- ' If oADOObject Is Nothing Then
- '   Exit Function
- ' End If
-
- ' If oADOObject.State = adStateOpen Then
- '   ADO_IsOpen = True
- '   Exit Function
- ' End If
   Exit Function
 
 TrataErro:
   SayErro "ADO_ISOPEN"
 
 End Function
-'existe na commom.bas
-'Public Function Nz( _
-'       vValue As Variant, _
-'       Optional vReplacementIfNull As Variant = 0 _
-'     ) As Variant
-' Purpose: To replace a NULL with another value, if the value is Null.
-' Example/Note:     sResult = Nz(rs.Fields(sFieldName), "") ' See MS Access VBA for Nz documentation
-' !! Assumes/Pre: Nothing
-' Parameters:
-'   vValue- Value to evaluate if null
-'   vReplacementIfNull - What should replace a Null value
-' Returns: Variant
-'       Success- If not null, returns the supplied value, else returns the replacement
-'       Failure- Raises error on failure
-' Revision history:
-'   Michael Johnson     2002-Mar-12 1243     Initial creation
-'   2003-Aug-22 10:17 [Michael B. Johnson] Abreviated and changed to variants
-'   2004-Feb-18 16:36 [Michael B. Johnson] Changed from using TypeName() to IsNull()
-'Call TraceEnters(MODULE_NAME & "::Nz")
-'TraceDetail = "To replace a NULL with a string, if the value is Null."
 
- ' If IsNull(vValue) Then
- '   Nz = vReplacementIfNull
- ' Else
- '   Nz = vValue
- ' End If
-
-  'Exit Function
-'End Function
-
-Public Function BytesToHexString(vaBytes As Variant) As String
-' Purpose: To translate a Byte() Array into human readable Format
-' Example/Note: BytesToHexString
-' !! Assumes/Pre: Nothing
-' Parameters:
-'   vaBytes - Variant byte array
-' Returns: String
-'       Success- String with leading "0x" to denote hexadecimal format.
-'       Failure- Raises error on failure
-' Dependencies: None
-'        mod->Sub
-' Revision history:
-'   Michael Johnson     2000/Aug/01 13:51     Initial creation
-  On Error GoTo TrataErro
-
-  Dim sAccumulator As String
-  Dim lCtr As Long
-  Dim sHex As String
-  Dim sFormatted As String
-
-  BytesToHexString = ""
-  If Not TypeName(vaBytes) = "Byte()" Then
-    BytesToHexString = ""
-    Exit Function
-  End If
-
-  For lCtr = 0 To UBound(vaBytes)
-    sHex = Hex(vaBytes(lCtr))
-    sFormatted = Format(sHex, "@@")
-    sAccumulator = sAccumulator & Replace(sFormatted, " ", "0")
-  Next
-  sAccumulator = "0x" & sAccumulator
-  BytesToHexString = sAccumulator
-  Exit Function
-TrataErro:
-  BytesToHexString = ""
-  Exit Function
-End Function
 Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTABELA As String, Optional ByVal lMES As Boolean = True) As Boolean
   Dim oCat As ADOX.Catalog
   Dim oTabela As ADOX.Table
@@ -1024,45 +935,6 @@ TrataErro:
   End Select
 
 End Function
-
-Public Function CriaMdbAccess(ByVal cARQORI As String, Optional ByVal lCRIA As Boolean = False, _
-                            Optional ByVal nTIPO As Integer = 5) As Boolean
-                            
-    'OLEDB:Engine Type=5
-  'Unknown                      0
-  'Microsoft Jet 1.0            1
-  'Microsoft Jet 1.1            2
-  'Microsoft Jet 2.0            3
-  'Microsoft Jet 3.x(97)        4
-  'Microsoft Jet 4.x(2000)      5
-  'JetEngineType_Ace12 =        6         accdb
-                            
-                            
-  Dim cat As New ADOX.Catalog
-  On Error GoTo TrataErro
-  CriaMdbAccess = False
-  If Not FileConnExist(cARQORI, True) Then
-    If lCRIA Or MDG("Criar Arquivo " & cARQORI) Then
-      If nTIPO = 6 Or InStr(LCase(cARQORI), ".accdb") > 0 Then
-           cat.Create ("Provider=Microsoft.ACE.OLEDB.12;" & _
-                        "Data Source=" & cARQORI & ";" & _
-                        "JET OLEDB:Engine Type=6;")
-      Else
-          cat.Create "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & cARQORI & _
-                  ";Jet OLEDB:Engine Type=" & nTIPO & ";"
-      End If
-      CriaMdbAccess = True
-    End If
-  End If
-  Exit Function
-TrataErro:
-  Select Case Err.Number
-  Case Else
-    SayErro "ADO Novo Arquivo Access/MDB:" & Chr(13) & Chr(10) & cARQORI
-    Exit Function
-  End Select
-End Function
-
 
 Public Function MSSqlOdbcDriver() As String
     
@@ -1353,4 +1225,43 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
 
     ' Retorna o nome do banco identificado (caso precise usar na tipoconn)
     TratarParametrosCofre = cBancoPuro
+End Function
+
+Public Function BytesToHexString(vaBytes As Variant) As String
+' Purpose: To translate a Byte() Array into human readable Format
+' Example/Note: BytesToHexString
+' !! Assumes/Pre: Nothing
+' Parameters:
+'   vaBytes - Variant byte array
+' Returns: String
+'       Success- String with leading "0x" to denote hexadecimal format.
+'       Failure- Raises error on failure
+' Dependencies: None
+'        mod->Sub
+' Revision history:
+'   Michael Johnson     2000/Aug/01 13:51     Initial creation
+  On Error GoTo TrataErro
+
+  Dim sAccumulator As String
+  Dim lCtr As Long
+  Dim sHex As String
+  Dim sFormatted As String
+
+  BytesToHexString = ""
+  If Not TypeName(vaBytes) = "Byte()" Then
+    BytesToHexString = ""
+    Exit Function
+  End If
+
+  For lCtr = 0 To UBound(vaBytes)
+    sHex = Hex(vaBytes(lCtr))
+    sFormatted = Format(sHex, "@@")
+    sAccumulator = sAccumulator & Replace(sFormatted, " ", "0")
+  Next
+  sAccumulator = "0x" & sAccumulator
+  BytesToHexString = sAccumulator
+  Exit Function
+TrataErro:
+  BytesToHexString = ""
+  Exit Function
 End Function
