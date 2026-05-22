@@ -145,7 +145,7 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
   Dim aRETU As Variant
   Dim oDB As ADODB.Connection
   Dim oCOM As ADODB.Command
-  Dim cconn As String
+  Dim cCONN As String
 
   On Error GoTo TrataErro
   ADOComando = False
@@ -180,12 +180,12 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
     End If
     
     
-    cconn = aRETU(1)
+    cCONN = aRETU(1)
     Set oDB = New ADODB.Connection
     Set oCOM = New ADODB.Command
     
     oDB.ConnectionTimeout = 120
-    oDB.Open cconn
+    oDB.Open cCONN
 
     oCOM.ActiveConnection = oDB
     oCOM.CommandText = cSQL
@@ -288,7 +288,7 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     VFPSetValues oDB
   End If
   If InStr(UCase(cARQ), "PGSQL") > 0 Or InStr(UCase(cARQ), "POSTGRESQL") > 0 Then
-        pgSetValues oDB
+    pgSetValues oDB
   End If
 
   Set oRS = New ADODB.Recordset

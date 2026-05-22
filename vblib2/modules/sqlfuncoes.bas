@@ -180,6 +180,22 @@ Public Function PegCountSQL(ByVal cARQ As String, ByVal cTable As String, ByVal 
   '      PegCountSQL = PegCountSQLiteRC6(cCON, cTW, eDF)
   End Select
 End Function
+Public Function ComandoSQL(ByVal cARQ As String, ByVal cSQL As String) As Boolean
+  Dim aRETU As Variant
+  aRETU = TipoConn(cARQ)
+  cARQ = aRETU(1)
+  If InStr(UCase(cARQ), "VFPOLEDB") Then
+      ComandoSQL = AdoComandodbf(cARQ, "", cSQL)
+  End If
+  Select Case aRETU(0)
+  Case "ADO"
+       ComandoSQL = ADOComando(cARQ, cSQL)
+  Case "VBSQLITE"
+       ComandoSQL = SQLiteComando(cARQ, cSQL)
+   Case "SQLITERC6"
+        ComandoSQL = SQLiteComandoRC6(cARQ, cSQL)
+  End Select
+End Function
 
 Public Function ApagaSQL(ByVal cARQ As String, ByVal cSQL As String) As Boolean
   Dim aRETU As Variant
