@@ -11,6 +11,15 @@ Public Const cJetADV = "Provider=Advantage.OLEDB.1;Data Source="
 Public Const cJetExt = ";Extended Properties="
 Public Const cJetPro = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
 
+  'OLEDB:Engine Type=5
+  'Unknown                      0
+  'Microsoft Jet 1.0            1
+  'Microsoft Jet 1.1            2
+  'Microsoft Jet 2.0            3
+  'Microsoft Jet 3.x(97)        4
+  'Microsoft Jet 4.x(2000)      5
+  'JetEngineType_Ace12 =        6         accdb
+  
 Public Const JET_ENGINETYPE_UNKNOWN = 0
 Public Const JET_ENGINETYPE_JET10 = 1
 Public Const JET_ENGINETYPE_JET11 = 2
@@ -18,6 +27,7 @@ Public Const JET_ENGINETYPE_JET2X = 3
 Public Const JET_ENGINETYPE_JET3X = 4
 Public Const JET_ENGINETYPE_JET4X = 5
 Public Const Jet_EngineType_Ace12 = 6 'accdb
+
 Public Const JET_ENGINETYPE_DBASE3 = 10
 Public Const JET_ENGINETYPE_DBASE4 = 11
 Public Const JET_ENGINETYPE_DBASE5 = 12
