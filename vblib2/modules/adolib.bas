@@ -20,32 +20,50 @@ Public Const cJetPro = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
   'Microsoft Jet 4.x(2000)      5
   'JetEngineType_Ace12 =        6         accdb
   
+' --- Suas existentes (Corretas) ---
 Public Const JET_ENGINETYPE_UNKNOWN = 0
 Public Const JET_ENGINETYPE_JET10 = 1
 Public Const JET_ENGINETYPE_JET11 = 2
 Public Const JET_ENGINETYPE_JET2X = 3
 Public Const JET_ENGINETYPE_JET3X = 4
 Public Const JET_ENGINETYPE_JET4X = 5
-Public Const Jet_EngineType_Ace12 = 6 'accdb
+Public Const Jet_EngineType_Ace12 = 6 ' .accdb
 
+' --- DBase ---
 Public Const JET_ENGINETYPE_DBASE3 = 10
 Public Const JET_ENGINETYPE_DBASE4 = 11
 Public Const JET_ENGINETYPE_DBASE5 = 12
+
+' --- Excel ---
 Public Const JET_ENGINETYPE_EXCEL30 = 20
 Public Const JET_ENGINETYPE_EXCEL40 = 21
 Public Const JET_ENGINETYPE_EXCEL50 = 22
 Public Const JET_ENGINETYPE_EXCEL80 = 23
 Public Const JET_ENGINETYPE_EXCEL90 = 24
+
+' --- Complementos Importantes (Faltantes) ---
+Public Const JET_ENGINETYPE_EXCEL12 = 25  ' Excel 2007-2016 (.xlsx)
+Public Const JET_ENGINETYPE_EXCEL12BIN = 26 ' Excel 2007-2016 (.xlsb)
+
+' --- Exchange/Lotus ---
 Public Const JET_ENGINETYPE_EXCHANGE4 = 30
 Public Const JET_ENGINETYPE_LOTUSWK1 = 40
 Public Const JET_ENGINETYPE_LOTUSWK3 = 41
 Public Const JET_ENGINETYPE_LOTUSWK4 = 42
+
+' --- Paradox ---
 Public Const JET_ENGINETYPE_PARADOX3X = 50
 Public Const JET_ENGINETYPE_PARADOX4X = 51
 Public Const JET_ENGINETYPE_PARADOX5X = 52
 Public Const JET_ENGINETYPE_PARADOX7X = 53
+
+' --- Texto e HTML ---
 Public Const JET_ENGINETYPE_TEXT1X = 60
 Public Const JET_ENGINETYPE_HTML1X = 70
+
+' --- Adicionais para Cobrir Lacunas ---
+Public Const JET_ENGINETYPE_HTMLIMPORT = 71
+Public Const JET_ENGINETYPE_XBASE = 12 ' Comumente usado como alias para DBase 5
 
 '' rs.Open "SELECT * FROM [Salary$A1:B2] ", cn, adOpenDynamic, adLockOptimistic excel select
 ''                         pasta$faixa
@@ -568,59 +586,58 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     cXLSVER = "16.0"
   End If
   
-  If InStr(cARQTMP, "[XLS]") > 0 Then
-    cARQ = Replace(cARQ, "[XLS]", "")
-    cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "Excel " + cXLSVER + ";HDR=Yes" & Chr(34) & ";"
+  
+  
+  If InStr(cARQTMP, "[XLS") > 0 Then
+    Dim cExtProp As String
+    cExtProp = "Excel " & cXLSVER & ";HDR=Yes;IMEX=1"
+    
+    ' Limpeza de todas as tags de Excel possíveis
+    cARQ = Replace(Replace(Replace(Replace(Replace(cARQ, "[XLSX]", ""), "[XLSM]", ""), "[XLSB]", ""), "[XLS]", ""), "[XLSB]", "")
+    cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & cExtProp & Chr(34) & ";"
+    
     TipoConn = Array("ADO", cARQ, "XLS")
     Exit Function
   End If
-  If InStr(cARQTMP, "[XLSX]") > 0 Then
-    cARQ = Replace(cARQ, "[XLSX]", "")
-    cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "Excel " + cXLSVER + ";HDR=Yes" & Chr(34) & ";"
-    TipoConn = Array("ADO", cARQ, "XLSX")
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[XLSM]") > 0 Then
-    cARQ = Replace(cARQ, "[XLSM]", "")
-    cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "Excel " + cXLSVER + ";HDR=Yes" & Chr(34) & ";"
-    TipoConn = Array("ADO", cARQ, "XLSM")
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[XLSB]") > 0 Then
-    cARQ = Replace(cARQ, "[XLSB]", "")
-    cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "Excel 12.0;HDR=Yes" & Chr(34) & ";"
-    TipoConn = Array("ADO", cARQ, "XLSB")
-    Exit Function
-  End If
 
-  If InStr(cARQTMP, "[JETTXTPIPE]") > 0 Then
-    'Delimited(x)   File is considered as a delimited file with delimited character ‘x’.
-    cARQ = Replace(cARQ, "[JETTXT]", "")
-    cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;FMT=Delimited(|)" & Chr(34) & ";"
+  ' 2. Tratamento de Texto/CSV (JETTXT, JETTXTPIPE, JETTXTCSV, CSV, etc)
+  If InStr(cARQTMP, "[JETTXT") > 0 Or InStr(cARQTMP, "[CSV]") > 0 Then
+    Dim cFmt As String
+    
+    ' Define o formato baseado na tag específica
+    If InStr(cARQTMP, "[JETTXTPIPE]") > 0 Then
+        cFmt = "FMT=Delimited(|)"
+    ElseIf InStr(cARQTMP, "[JETTXTTAB]") > 0 Then
+        cFmt = "FMT=TabDelimited"
+    Else
+        ' Cobre: [JETTXT], [JETTXTCSV] e a nova tag [CSV]
+        cFmt = "FMT=Delimited"
+    End If
+    
+    ' Limpeza de todas as tags de texto/csv possíveis
+    cARQ = Replace(Replace(Replace(Replace(Replace(cARQ, "[JETTXTPIPE]", ""), "[JETTXTTAB]", ""), "[JETTXTCSV]", ""), "[JETTXT]", ""), "[CSV]", "")
+    
+    cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;" & cFmt & ";IMEX=1" & Chr(34) & ";"
+    
     TipoConn = Array("ADO", cARQ, "JETXT")
     Exit Function
   End If
-  If InStr(cARQTMP, "[JETTXTTAB]") > 0 Then
-    'TabDelimited   File is considered as a tab delimited file.
-    cARQ = Replace(cARQ, "[JETTXT]", "")
-    cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;FMT=TabDelimited" & Chr(34) & ";"
-    TipoConn = Array("ADO", cARQ, "JETXT")
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[JETTXTCSV]") > 0 Or InStr(cARQTMP, "[JETTXT]") > 0 Then
-    'Delimited      File is considered as a comma delimited file. Comma is the default delimited character.
-    cARQ = Replace(cARQ, "[JETTXT]", "")
-    cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;FMT=Delimited" & Chr(34) & ";"
-    TipoConn = Array("ADO", cARQ, "JETXT")
-    Exit Function
-  End If
-  'dbfiii com jet a12 ou a16
+  
+  
+  
+ ' 3. Tratamento de DBF (dBase III)
   If InStr(cARQTMP, "[JETDBFIII]") > 0 Then
+    ' Limpa a tag do nome do arquivo
     cARQ = Replace(cARQ, "[JETDBFIII]", "")
-    cARQ = cJETUSO & cARQ & cJetExt & "DBASE III" & ";"
+    
+    ' Para DBF, não se usa delimitadores ou HDR=Yes,
+    ' a estrutura já é interpretada pelo motor dBase IV/III
+    cARQ = cJETUSO & cARQ & cJetExt & "DBASE III;"
+    
     TipoConn = Array("ADO", cARQ, "DBF")
     Exit Function
   End If
+  
   'paradox com jet a12 ou a16
   If InStr(cARQTMP, "[JETPD") > 0 Then
     If InStr(cARQTMP, "[JETPDX3]") > 0 Then
@@ -1274,4 +1291,12 @@ Public Function BytesToHexString(vaBytes As Variant) As String
 TrataErro:
   BytesToHexString = ""
   Exit Function
+End Function
+
+' Exemplo de função auxiliar para padronizar
+Private Function GetJetExtendedProperties(cFormato As String, Optional lIMEX As Boolean = False) As String
+    Dim sProps As String
+    sProps = cFormato & ";HDR=Yes"
+    If lIMEX Then sProps = sProps & ";IMEX=1"
+    GetJetExtendedProperties = ";Extended Properties='" & sProps & "';"
 End Function
