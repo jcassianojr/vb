@@ -24,7 +24,50 @@ Private Const CALG_RC2 As Long = 26114
 
 ' Chave Mestra para derivar a chave de criptografia
 Private Const CHAVE_MESTRA As String = "Diretoria@Segura#2026!bancos"
+Public Sub ParametrosEnviarDados(ByVal cCaminhoDestino As String, ByVal cDados As String)
+    Dim wsh As Object
+    Dim execComo As Object
+    
+    On Error GoTo TrataErro
+    
+    ' Cria o objeto do Windows Script Host
+    Set wsh = CreateObject("WScript.Shell")
+    
+    ' Executa o programa destino abrindo os canais de comunicação por memória
+    Set execComo = wsh.Exec(cCaminhoDestino)
+    
+    ' Grava a string de dados diretamente no Standard Input do destino
+    execComo.StdIn.Write cDados
+    
+    ' Fecha o canal para que o destino saiba que o envio terminou
+    execComo.StdIn.Close
+    
+    ' Aguarda a execução terminar para liberar a CPU de forma segura
+    Do While execComo.Status = 0
+        DoEvents
+    Loop
+    
+    Set execComo = Nothing
+    Set wsh = Nothing
+    Exit Sub
 
+TrataErro:
+    MsgBox "Erro VB6 ao enviar: " & Err.Description, vbCritical
+End Sub
+Public Function ParametrosLerDados() As String
+    Dim fso As Object
+    Dim cResultado As String
+    
+    On Error Resume Next
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' Abre o fluxo de entrada padrão (GetStandardStream 0 = StdIn)
+    ' Lê todo o conteúdo da memória até o fim do canal
+    cResultado = fso.GetStandardStream(0).ReadAll
+    
+    Set fso = Nothing
+    ParametrosLerDados = cResultado
+End Function
 Public Function CaminhoArquivoCofre() As String
     Dim Caminho As String
     Caminho = App.Path
