@@ -199,10 +199,16 @@ If Len(cTIPO) > 0 Then
         GeraConn = "[JETPDX5]" & cARQ
   End Select
 End If
+
+If InStr(LCase(cARQ), ".fdb") > 0 Or InStr(LCase(cARQ), ".gdb") > 0 Then
+    GeraConn = "[FIREBIRD]" & cARQ
+    Exit Function
+End If
 End Function
 
 Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = "", _
-                         Optional ByVal cPASS As String = "", Optional ByVal lWRITE As Boolean = True, Optional ByVal cDATABASE As String = "") As Variant
+                         Optional ByVal cPASS As String = "", Optional ByVal lWRITE As Boolean = True, _
+                         Optional ByVal cDATABASE As String = "", Optional ByVal cowner As String = "", Optional cPADTIPOCON = "P") As Variant
   Dim cARQTMP As String
   Dim cJETUSO As String
   Dim lTEMMDB As Boolean
@@ -211,12 +217,14 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   Dim lTEMPG As Boolean
   Dim lTEMMYSQL As Boolean
   Dim lTEMORACLE As Boolean
+  Dim lTEMFIREBIRD As Boolean
   
   Dim cADSTIP As String
   Dim cADSNOM As String
   Dim cXLSVER As String '
   Dim aCONN As Variant
   Dim cSecaoCofre As String
+  Dim cAuth As String
   
   'usa boolean para agilizar if,case... no lugar de comparacao com string
   lTEMMDB = False
@@ -225,6 +233,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   lTEMMYSQL = False
   lTEMPG = False
   lTEMORACLE = False
+  lTEMFIREBIRD = False
   
   
   'inicial valores padrao
@@ -233,7 +242,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   
   
   If cDATABASE = "" Then
-    cDATABASE = TratarParametrosCofre(cDATABASE)
+          cDATABASE = TratarParametrosCofre(cDATABASE)
   End If
   
   If cDATABASE <> "" Then
@@ -249,20 +258,18 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     If Trim(cPASS) = "" Then
         cPASS = LerDoCofre(cSecaoCofre, "Password")
     End If
+         If Trim(cowner) = "" Then
+            cowner = LerDoCofre(cSecaoCofre, "Owner")
+         End If
+
+
   End If
 
-   ' cserver e o carq coneccao
-   ' If Trim(cServer) = "" Then
-   '     cServer = LerDoCofre(cSecaoCofre, "Server")
-   ' End If
-  '
-  'access
-  '
-  If InStr(cARQTMP, ".MDB") > 0 Then
-    lTEMMDB = True
-    TipoConn = Array("ADO", cARQ, "MDB")
-  End If
-  '
+     If InStr(cARQTMP, ".MDB") > 0 Then
+        lTEMMDB = True
+        TipoConn = Array("ADO", cARQ, "MDB")
+   End If
+
   'sqlite
   '
   If InStr(cARQTMP, ".SQLITE") > 0 Then
@@ -302,6 +309,12 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   End If
     '
  
+' 2. No bloco de detecção de tipo (após a checagem do SQLite):
+   If InStr(cARQTMP, ".FIREBIRD") > 0 Or InStr(cARQTMP, "{FIREBIRD") > 0 Or InStr(cARQTMP, "[FIREBIRD") > 0 Then
+       lTEMFIREBIRD = True
+     TipoConn = Array("ADO", cARQ, "FIREBIRD")
+   End If
+
   '
   'checando provider,driver connecao
   '
@@ -358,11 +371,25 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   '
   ' SQLITE
   '
-  If lTEMSQLITE Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
-    cARQ = Replace(cARQ, "[SQLITE]", "")
-    If InStr(cARQTMP, "SQLITE3 ODBC DRIVER") = 0 Then
-       cARQ = "Driver={SQLite3 ODBC Driver};Database=" + cARQ + ";"
-    End If
+     If lTEMSQLITE Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
+        cARQ = Replace(cARQ, "[SQLITE]", "")
+        
+        
+      cAuth = ""
+      If Trim(cUSER) <> "" Then cAuth = ";UID=" & cUSER
+      If Trim(cPASS) <> "" Then cAuth = cAuth & ";PWD=" & cPASS
+
+      Select Case UCase(cPADTIPOCON)
+         Case "D"
+            ' Driver ODBC geralmente usa UID e PWD
+            cARQ = "Driver={SQLite3 ODBC Driver};Database=" & cARQ & cAuth & ";"
+            
+         Case "P", "N" ' Case Else tratado aqui para simplificar
+            ' Provider OLEDB pode variar, mas segue a lógica comum de user/password
+            cARQ = "Provider=SQLite3OLEDB.1;Data Source=" & cARQ & IIf(cAuth <> "", ";" & Mid(cAuth, 2), "") & ";"
+      End Select
+
+
     TipoConn = Array("ADO", cARQ, "SQLITE")
     Exit Function
   End If
@@ -371,15 +398,24 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     cARQ = Replace(cARQ, "[MARIADB]", "")
     If InStr(cARQTMP, "MARIADB ODBC") = 0 Then 'geracom se nao passado
        aCONN = Split(cARQ, ".") 'localhost.port.mariadb.banco 'localhost.3306.mariadb.citacao
-       If Len(cUSER) > 0 Then
-         cARQ = "DRIVER={MariaDB ODBC 3.2 Driver};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PASSWORD=" + cPASS + ";"
-       Else
-         cARQ = "DRIVER={MariaDB ODBC 3.2 Driver};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=root;PASSWORD=admin;"
-       End If
-    End If
-    TipoConn = Array("ADO", cARQ, "MARIADB")
-    Exit Function
-  End If
+             'inclui  a padrao caso seja um banco de teste mas pega as corretas pelo cofre acima
+            If cPASS = "" Then
+               cPASS = "admin"
+            End If
+            If cUSER = "" Then
+               cUSER = "root"
+            End If
+  
+
+            Select Case UCase(cPADTIPOCON)
+                    Case "D": cARQ = "Driver={MariaDB ODBC 3.2 Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
+                    Case "P": cARQ = "Provider=MSDASQL;Data Source=" & aCONN(3) & ";User Id=" & cUSER & ";Password=" & cPASS & ";"
+                    Case Else: cARQ = "Provider=MSDASQL;Driver={MariaDB ODBC 3.2 Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
+            End Select
+         End If
+     TipoConn = Array("ADO", cARQ, "MARIADB")
+     Exit Function
+   End If
   
   
   
@@ -387,14 +423,34 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
 '    "Provider=OraOLEDB.Oracle;data source=" & _
  '   sWorld & ".World;User id=" & sUID & ";password=" & sPWD & ";"
 
-    cARQ = Replace(cARQ, "[ORACLE]", "")
+     cARQ = Replace(cARQ, "[ORACLE]", "")
     If InStr(cARQTMP, "ODBC For Oracle") = 0 Then 'geracom se nao passado
-       aCONN = Split(cARQ, ".") 'localhost.port.mariadb.banco 'localhost.3306.mariadb.citacao
-       If Len(cUSER) > 0 Then
-         cARQ = "DRIVER={Microsoft ODBC For Oracle};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PWD=" + cPASS + ";"
-       Else
-         cARQ = "DRIVER={Microsoft ODBC For Oracle};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=root;PASSWORD=admin;"
-       End If
+        aCONN = Split(cARQ, ".") 'localhost.port.mariadb.banco 'localhost.3306.mariadb.citacao
+            Dim cDefSchema As String
+            cDefSchema = IIf(Trim(cowner) <> "", ";DefaultSchema=" & cowner, "")
+               'inclui  a padrao caso seja um banco de teste mas pega as corretas pelo cofre acima
+            If cPASS = "" Then
+               cPASS = "admin"
+            End If
+            If cUSER = "" Then
+               cUSER = "root"
+            End If
+    
+            Select Case UCase(cPADTIPOCON)
+                    Case "D": cARQ = "Driver={Oracle in OraClient11g_home1};Dbq=" & aCONN(0) & ";Uid=" & cUSER & ";Pwd=" & cPASS & cDefSchema
+                    Case "P": cARQ = "Provider=OraOLEDB.Oracle;Data Source=" & aCONN(0) & ";User Id=" & cUSER & ";Password=" & cPASS & cDefSchema
+                    Case Else: cARQ = "Provider=MSDASQL;Driver={Oracle in OraClient11g_home1};Dbq=" & aCONN(0) & ";Uid=" & cUSER & ";Pwd=" & cPASS & cDefSchema
+            End Select
+
+
+            'If Len(cUSER) > 0 Then
+            '  cARQ = "DRIVER={Microsoft ODBC For Oracle};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PWD=" + cPASS + ";"
+            'Else
+            '  cARQ = "DRIVER={Microsoft ODBC For Oracle};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=root;PASSWORD=admin;"
+            'End If
+            'If Trim(cowner) <> "" Then
+            '  cARQ = cARQ & ";DefaultSchema=" & cowner
+            'End If
     End If
     TipoConn = Array("ADO", cARQ, "ORACLE")
     Exit Function
@@ -404,16 +460,24 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   
   
 
-  If lTEMMYSQL Then
-    cARQ = Replace(cARQ, "[MYSQL]", "")
-    If InStr(cARQTMP, "MYSQL ODBC") = 0 Then 'geracom se nao passado
-       aCONN = Split(cARQ, ".") 'localhost.port.mysql.banco 'localhost.5432.mysql.citacao
-       If Len(cUSER) > 0 Then
-          cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"     '32 driver versao 8
-       Else
-         cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=root;Pwd=admin;"    '32 driver versao 8
-       End If
-    End If
+   If lTEMMYSQL Then
+     cARQ = Replace(cARQ, "[MYSQL]", "")
+      If InStr(cARQTMP, "MYSQL ODBC") = 0 Then 'geracom se nao passado
+          aCONN = Split(cARQ, ".") 'localhost.port.mysql.banco 'localhost.5432.mysql.citacao
+            If cPASS = "" Then
+               cPASS = "admin"
+            End If
+            If cUSER = "" Then
+               cUSER = "root"
+            End If
+
+            Select Case UCase(cPADTIPOCON)
+                    Case "D": cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
+                    Case "P": cARQ = "Provider=MySQLProv;Data Source=" & aCONN(0) & ";User Id=" & cUSER & ";Password=" & cPASS & ";"
+                    Case Else: cARQ = "Provider=MSDASQL;Driver={MySQL ODBC 8.0 ANSI Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
+                End Select
+
+         End If
     TipoConn = Array("ADO", cARQ, "MYSQL")
     Exit Function
   End If
@@ -423,21 +487,52 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     cARQ = Replace(cARQ, "[POSTGRESQL]", "")
     If InStr(cARQTMP, "POSTGRESQL ANSI") = 0 Then 'geracom se nao passado
        aCONN = Split(cARQ, ".") 'localhost.port.postgresql.banco 'localhost.5432.postgresql.citacao
-       If Len(cUSER) > 0 Then
-          cARQ = "Driver={PostgreSQL ANSI};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"
-       Else
-          cARQ = "Driver={PostgreSQL ANSI};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=postgres;Pwd=admin;"
-       End If
-    End If
-    TipoConn = Array("ADO", cARQ, "PGSQL")
-    Exit Function
-  End If
+            'inclui  a padrao caso seja um banco de teste mas pega as corretas pelo cofre acima
+            If cPASS = "" Then
+               cPASS = "admin"
+            End If
+            If cUSER = "" Then
+               cUSER = "postgres"
+            End If
+            Dim cSchema As String
+                cSchema = IIf(Trim(cowner) <> "", ";SearchPath=" & cowner, "")
+                
+                Select Case UCase(cPADTIPOCON)
+                    Case "D": cARQ = "Driver={PostgreSQL Unicode};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";UID=" & cUSER & ";PWD=" & cPASS & cSchema
+                    Case "P": cARQ = "Provider=PostgreSQLOLEDBSample;Data Source=" & aCONN(0) & ";Initial Catalog=" & cARQ & ";User ID=" & cUSER & ";Password=" & cPASS & cSchema
+                    Case Else: cARQ = "Driver={PostgreSQL Unicode};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";UID=" & cUSER & ";PWD=" & cPASS & cSchema
+                End Select
 
+      '    cARQ = "Driver={PostgreSQL ANSI};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=postgres;Pwd=admin;"
+    End If
+      TipoConn = Array("ADO", cARQ, "PGSQL")
+     Exit Function
+    End If
+
+' 3. No bloco que aplica a string de conexão (após a checagem do SQLite/MariaDB):
+If lTEMFIREBIRD Then
+    cARQ = Replace(cARQ, "[FIREBIRD]", "")
+    ' Ajuste o Provider conforme a instalação do driver Firebird no seu ambiente
+    'cARQ = "Provider=MSDASQL;Driver={Firebird/InterBase driver};DbName=" + cARQ + ";UID=" + cUSER + ";PWD=" + cPASS + ";"
+    TipoConn = Array("ADO", cARQ, "FIREBIRD")
+    
+    Select Case UCase(cPADTIPOCON)
+        Case "D" ' Driver
+            cARQ = "Driver={Firebird/InterBase driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
+        Case "P" ' Provider
+            cARQ = "Provider=LCPI.IBProvider;Location=" & cARQ & ";User ID=" & cUSER & ";Password=" & cPASS & ";"
+        Case Else ' Normal (N)
+            cARQ = "Provider=MSDASQL;Driver={Firebird/InterBase driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
+    End Select
+    
+    
+    Exit Function
+End If
   '
   'jetfox
   '
-  If InStr(cARQTMP, "[JETFOX]") > 0 Then
-    cARQ = Replace(cARQ, "[JETFOX]", "")
+   If InStr(cARQTMP, "[JETFOX]") > 0 Then
+     cARQ = Replace(cARQ, "[JETFOX]", "")
 
     ' PROVIDER=VFPOLEDB.1;Data Source=caminho
     ' ;SourceType=dbf;Deleted=Yes;Mode=ReadWrite|Share Deny None;Mode=Share Deny None
@@ -464,36 +559,51 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   End If
   If InStr(cARQTMP, "[XLSDRV]") > 0 Then
     cARQ = Replace(cARQ, "[XLSDRV]", "")
-    cARQ = "DRIVER=Microsoft Excel Driver (*.xls);" & "DBQ=" & cARQ
-    TipoConn = Array("ADO", cARQ, "XLSDRV")
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[CONN]") > 0 Then
-    cARQ = Replace(cARQ, "[CONN]", "")
-    If lTEMMDB Then
-      TipoConn = Array("ADO", cARQ, "MDB")
-    Else
-      TipoConn = Array("ADO", cARQ, "CONN")
-    End If
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[SQLSERVER]") > 0 Or InStr(cARQTMP, "[MSSQL]") > 0 Then
-     cARQ = Replace(cARQ, "[SQLSERVER]", "")
-     cARQ = Replace(cARQ, "[MSSQL]", "")
-       If Len(cUSER) > 0 Then
-         cARQ = "Provider=" + MSSqlOledbProvider(1) + ";Server=" + cARQ + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"
-       Else
-         cARQ = "Provider=" + MSSqlOledbProvider(1) + ";Server=" + cARQ + ";"
+         cARQ = "DRIVER=Microsoft Excel Driver (*.xls);" & "DBQ=" & cARQ
+        TipoConn = Array("ADO", cARQ, "XLSDRV")
+      Exit Function
+     End If
+    If InStr(cARQTMP, "[CONN]") > 0 Then
+     cARQ = Replace(cARQ, "[CONN]", "")
+     If lTEMMDB Then
+        TipoConn = Array("ADO", cARQ, "MDB")
+      Else
+        TipoConn = Array("ADO", cARQ, "CONN")
        End If
+      Exit Function
+    End If
+     If InStr(cARQTMP, "[SQLSERVER]") > 0 Or InStr(cARQTMP, "[MSSQL]") > 0 Then
+        cARQ = Replace(cARQ, "[SQLSERVER]", "")
+        cARQ = Replace(cARQ, "[MSSQL]", "")
+          aCONN = Split(cARQ, ".") 'localhost.port.mysdql.banco 'localhost.5432.mssql.citacao
+
+            cAuth = IIf(Trim(cUSER) <> "", ";UID=" & cUSER, "") & IIf(Trim(cPASS) <> "", ";PWD=" & cPASS, "")
+        
+            Select Case UCase(cPADTIPOCON)
+                Case "D"
+                    cARQ = "Driver={" & GetBestMSSQL("D") & "};Server=" & aCONN(0) & ";Database=" & cARQ & cAuth & ";"
+                Case "P"
+                    cARQ = "Provider=" & GetBestMSSQL("P") & ";Data Source=" & aCONN(0) & ";Initial Catalog=" & aCONN(3) & cAuth & ";"
+                Case Else ' N: Escolhe o melhor entre Provider (P) e Driver (D)
+                    Dim cMelhorP As String
+                    cMelhorP = GetBestMSSQL("P")
+                    If cMelhorP <> "" Then
+                        cARQ = "Provider=" & cMelhorP & ";Data Source=" & aCONN(0) & ";Initial Catalog=" & aCONN(3) & cAuth & ";"
+                    Else
+                        cARQ = "Driver={" & GetBestMSSQL("D") & "};Server=" & aCONN(0) & ";Database=" & aCONN(3) & cAuth & ";"
+                    End If
+            End Select
+
+       
     TipoConn = Array("ADO", cARQ, "SQLSERVER")
     Exit Function
   End If
 
-  If InStr(cARQTMP, "[ACCDB") > 0 Then
-    cJETUSO = cJetA12
-    cARQ = Replace(cARQ, "[ACCDB", "")
-    cARQ = Replace(cARQ, "MDB]", "")
-    cARQ = Replace(cARQ, "]", "")
+    If InStr(cARQTMP, "[ACCDB") > 0 Then
+      cJETUSO = cJetA12
+      cARQ = Replace(cARQ, "[ACCDB", "")
+      cARQ = Replace(cARQ, "MDB]", "")
+     cARQ = Replace(cARQ, "]", "")
     If Len(cUSER) > 0 Then
       cARQ = cJETUSO & cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
     Else
@@ -660,7 +770,33 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     End If
   End If
 End Function
+Public Function DriverExisteOdbc(cNOME As String, bE_DriverODBC As Boolean) As Boolean
+    On Error GoTo TrataErro
+    
+    If bE_DriverODBC Then
+        ' Verifica Driver ODBC via Registro
+        Dim oShell As Object
+        Set oShell = CreateObject("WScript.Shell")
+        ' Tenta ler a subchave padrão de Drivers ODBC
+        Dim sReg As String
+        sReg = "HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\" & cNOME & "\Driver"
+        oShell.RegRead sReg
+        DriverExisteOdbc = True
+        Set oShell = Nothing
+    Else
+        ' Verifica Provider OLEDB via criação de objeto COM
+        Dim oCONN As Object
+        Set oCONN = CreateObject(cNOME)
+        DriverExisteOdbc = True
+        Set oCONN = Nothing
+    End If
+    Exit Function
 
+TrataErro:
+    DriverExisteOdbc = False
+    Resume Proximo
+Proximo:
+End Function
 Public Function TipoDado2(ByVal intType As Integer) As String
   Select Case intType
   Case adSmallInt, adInteger, adSingle, adDouble, adCurrency, adBigInt, adBinary, _
@@ -1006,6 +1142,13 @@ Public Function MSSqlOdbcDriver() As String
     MsgBox "No ODBC Drivers found (not even the default that ships with Windows!)"
 End Function
 
+Private Function DriverExiste(cNOME As String) As Boolean
+    On Error Resume Next
+    Dim oCONN As Object
+    Set oCONN = CreateObject(cNOME)
+    DriverExiste = (Err.Number = 0)
+    Set oCONN = Nothing
+End Function
 ' ----------------------------------------------------------------
 ' Procedure : GetLatestOledbProvider --MSSqlOledbProvider
 ' Date      : 12/14/2022
@@ -1166,12 +1309,14 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
     Dim nPosEnd As Long
     
     cBancoPuro = ""
-    cUpperARQ = UCase(Trim(cARQ))
+     cUpperARQ = UCase(Trim(cARQ))
     
     ' -------------------------------------------------------------------------
     ' CASO 1: Arquivos locais com caminho (\pasta\arquivo.sqlite, .mdb, .accdb)
     ' -------------------------------------------------------------------------
-    If InStr(cUpperARQ, ".SQLITE") > 0 Or InStr(cUpperARQ, ".MDB") > 0 Or InStr(cUpperARQ, ".ACCDB") > 0 Then
+    If InStr(cUpperARQ, ".SQLITE") > 0 Or InStr(cUpperARQ, ".MDB") > 0 _
+             Or InStr(cUpperARQ, ".FDB") > 0 Or InStr(cUpperARQ, ".GDB") > 0 _
+                                        Or InStr(cUpperARQ, ".ACCDB") > 0 Then
         Dim nPosBarra As Long
         Dim nPosPonto As Long
         Dim cNomeComExtensao As String
@@ -1299,4 +1444,31 @@ Private Function GetJetExtendedProperties(cFormato As String, Optional lIMEX As 
     sProps = cFormato & ";HDR=Yes"
     If lIMEX Then sProps = sProps & ";IMEX=1"
     GetJetExtendedProperties = ";Extended Properties='" & sProps & "';"
+End Function
+
+
+Public Function GetBestMSSQL(TIPO As String) As String
+    Dim SupportedDrivers, SupportedProviders
+    Dim item As Variant
+    
+    SupportedDrivers = Array("ODBC Driver 17 for SQL Server", "ODBC Driver 13 for SQL Server", "SQL Server Native Client 11.0", "SQL Server")
+    SupportedProviders = Array("MSOLEDBSQL19", "MSOLEDBSQL", "SQLNCLI11", "SQLOLEDB")
+
+    If TIPO = "D" Then
+        For Each item In SupportedDrivers
+            ' AQUI: Você deve passar o nome (item) e True (pois é driver ODBC)
+            If DriverExisteOdbc(CStr(item), True) Then
+                GetBestMSSQL = CStr(item)
+                Exit Function
+            End If
+        Next
+    Else
+        For Each item In SupportedProviders
+            ' AQUI: Você deve passar o nome (item) e False (pois é Provider OLEDB)
+            If DriverExisteOdbc(CStr(item), False) Then
+                GetBestMSSQL = CStr(item)
+                Exit Function
+            End If
+        Next
+    End If
 End Function
