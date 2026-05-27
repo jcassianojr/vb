@@ -1,4 +1,5 @@
 VERSION 5.00
+Object = "{EA6F8A1C-8599-4982-A762-DE32D2ED8173}#1.0#0"; "ucPrinterComboEx.ocx"
 Begin VB.Form Form1 
    Caption         =   "Form1"
    ClientHeight    =   5592
@@ -9,27 +10,36 @@ Begin VB.Form Form1
    ScaleHeight     =   5592
    ScaleWidth      =   8736
    StartUpPosition =   3  'Windows Default
-   Begin VB.ListBox List1 
-      Height          =   3888
+   Begin VB.CommandButton Command3 
+      Caption         =   "Info printer ocx"
+      Height          =   492
+      Left            =   5640
+      TabIndex        =   4
+      Top             =   1800
+      Width           =   2292
+   End
+   Begin ucPrinterComboEx.ucPrinterComboEx ucPrinterComboEx1 
+      Height          =   348
       Left            =   480
       TabIndex        =   3
+      Top             =   3360
+      Width           =   5292
+      _ExtentX        =   9334
+      _ExtentY        =   614
+   End
+   Begin VB.ListBox List1 
+      Height          =   2160
+      Left            =   480
+      TabIndex        =   2
       Top             =   840
       Width           =   4452
    End
    Begin VB.CommandButton Command2 
-      Caption         =   "Command2"
-      Height          =   252
-      Left            =   5520
-      TabIndex        =   2
-      Top             =   960
-      Width           =   1692
-   End
-   Begin VB.CommandButton Command1 
-      Caption         =   "Command1"
+      Caption         =   "Obter listas via profile"
       Height          =   252
       Left            =   5520
       TabIndex        =   1
-      Top             =   480
+      Top             =   960
       Width           =   1692
    End
    Begin VB.ComboBox Combo1 
@@ -39,6 +49,14 @@ Begin VB.Form Form1
       Text            =   "Combo1"
       Top             =   360
       Width           =   4212
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Necessario servico spool printer rodando"
+      Height          =   612
+      Left            =   600
+      TabIndex        =   5
+      Top             =   4080
+      Width           =   6612
    End
 End
 Attribute VB_Name = "Form1"
@@ -101,6 +119,7 @@ Public Function ObterListaImpressoras() As String()
     ObterListaImpressoras = aResultado
 End Function
 
+
 Private Sub Command2_Click()
 Dim aLista() As String
     Dim i As Long
@@ -117,4 +136,9 @@ Dim aLista() As String
             List1.AddItem aLista(i)
         Next i
     End If
+End Sub
+
+Private Sub Command3_Click()
+MsgBox ucPrinterComboEx1.SelectedPrinter
+
 End Sub
