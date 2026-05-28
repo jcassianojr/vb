@@ -17,6 +17,8 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal c
     vUltimo = eDEFAULT
     
     loConn.OpenDB cCON
+    
+    VBSQLiteSetValues loConn
     ' O método correto é CreateCursor
     Set loCursor = loConn.CreateCursor(cSQL)
     
@@ -80,9 +82,12 @@ Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String,
     ' Montagem da query idêntica ao processo ADO
     ' Ex: SELECT SUM(VALOR) FROM MOVI WHERE CODIGO = 10
     cSQL = "SELECT " & coper & "(" & cCAMPO & ") FROM " & cTABLEWHERE
-    cSQL = SQLDialeto(cSQL, "SQLITE")
+    cSQL = sqldialeto(cSQL, "SQLITE")
     
     loConn.OpenDB LimpaTag(cCON)
+    
+    VBSQLiteSetValues loConn
+    
     Set loCursor = loConn.CreateCursor(cSQL)
     
     If Not loCursor.EOF Then
@@ -112,9 +117,10 @@ Public Function SQLiteComando(ByVal cCON As String, ByVal cSQL As String) As Boo
     
     ' Limpeza da Tag e tradução do dialeto
     cCON = LimpaTag(cCON)
-    cSQL = SQLDialeto(cSQL, "SQLITE")
+    cSQL = sqldialeto(cSQL, "SQLITE")
     
     loConn.OpenDB cCON
+    VBSQLiteSetValues loConn
     loConn.Execute cSQL
     
     SQLiteComando = True
@@ -143,8 +149,10 @@ Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
     cCON = LimpaTag(cCON)
     loConn.OpenDB cCON
     
+    VBSQLiteSetValues loConn
+    
     ' 2. Abre o cursor (o SQL deve solicitar as colunas na ordem do aCAM)
-    Set loCursor = loConn.CreateCursor(SQLDialeto(cSQL, "SQLITE"))
+    Set loCursor = loConn.CreateCursor(sqldialeto(cSQL, "SQLITE"))
     
     If Not loCursor.EOF Then
         ' 3. Loop de processamento de campos, formatos e padrões
@@ -194,8 +202,14 @@ End Function
 '---------------------------------------------------------------------------------------
 ' EQUIVALENTE A: GrvSQLado (Revisado para suportar arrays de campos e valores)
 '---------------------------------------------------------------------------------------
-Public Function GrvSQLite(ByVal cCON As String, ByVal cSQL_SELECT As String, _
-                         ByVal aCAM As Variant, ByVal aVAL As Variant) As Boolean
+Public Function GrvSQLite(ByVal cARQ As String, _
+                         ByVal cSQL_SELECT As String, _
+                         ByVal nITEM As Long, _
+                         ByVal aCAM As Variant, _
+                         ByVal aVAL As Variant, _
+                         ByVal aFOR As Variant, _
+                         Optional ByVal nStartItem As Long = 0) As Boolean
+    
     Dim loConn As New SQLiteConnection
     Dim cSQL_UPDATE As String
     Dim cTABELA As String
@@ -211,29 +225,35 @@ Public Function GrvSQLite(ByVal cCON As String, ByVal cSQL_SELECT As String, _
     
     If nPosWhere > 0 Then
         cTABELA = Trim(Mid(cSQL_SELECT, nPosFrom, nPosWhere - nPosFrom))
-        cWHERE = Mid(cSQL_SELECT, nPosWhere) ' Captura o "WHERE ..."
+        cWHERE = Mid(cSQL_SELECT, nPosWhere)
     Else
-        ' Segurança: não permite update sem WHERE para não afetar a tabela toda
         Exit Function
     End If
     
     ' 2. Montagem do comando UPDATE dinâmico
+    ' Note que agora usamos os parâmetros aCAM e aVAL que chegaram na função
     cSQL_UPDATE = "UPDATE " & cTABELA & " SET "
-    For i = LBound(aCAM) To UBound(aCAM)
-        ' Usa a sua função FormataParaSQL para tratar Aspas, Datas e Decimais
-        cSQL_UPDATE = cSQL_UPDATE & aCAM(i) & " = " & FormataParaSQL(aVAL(i)) & _
-                      IIf(i < UBound(aCAM), ", ", " ")
+    
+    ' Usamos nStartItem para que o loop comece de onde o sistema espera
+    For i = nStartItem To (nITEM - 1)
+        ' Aqui chamamos a função que trata o valor conforme o dialeto
+        cSQL_UPDATE = cSQL_UPDATE & aCAM(i) & " = " & TratarValorParaSQL(aVAL(i), aFOR(i), "SQLITE") & _
+                      IIf(i < (nITEM - 1), ", ", " ")
     Next
+    
     cSQL_UPDATE = cSQL_UPDATE & cWHERE
     
     ' 3. Execução direta na conexão
-    cCON = LimpaTag(cCON)
-    loConn.OpenDB cCON
-    loConn.Execute SQLDialeto(cSQL_UPDATE, "SQLITE")
+    ' (Mantendo sua lógica de limpeza de tag)
+    cARQ = LimpaTag(cARQ)
+    loConn.OpenDB cARQ
+    VBSQLiteSetValues loConn
+    
+    loConn.Execute cSQL_UPDATE
     
     GrvSQLite = True
     
-    ' 4. Fechamento correto: Primeiro Close, depois Nothing
+    ' 4. Fechamento correto
     loConn.CloseDB
     Set loConn = Nothing
     Exit Function
@@ -247,43 +267,64 @@ Erro:
     End If
 End Function
 '---------------------------------------------------------------------------------------
-' EQUIVALENTE A: IncluiSQLAdo[cite: 2]
-'---------------------------------------------------------------------------------------
-Public Function IncluiSQLite(ByVal cCON As String, ByVal cTABELA As String, ByVal aCAMPOS As Variant, ByVal aVALORES As Variant, Optional ByRef nID As Long) As Boolean
+Public Function IncluiSQLite(ByVal cARQ As String, _
+                             ByVal cSQL_SELECT As String, _
+                             ByVal nITEM As Long, _
+                             ByVal aCAM As Variant, _
+                             ByVal aVAL As Variant, _
+                             ByVal lCHECK As Boolean, _
+                             ByVal lMES As Boolean, _
+                             ByVal aIDDES As Variant) As Boolean
+    
     Dim loConn As New SQLiteConnection
-    Dim cSQL As String
+    Dim loCursor As SQLiteCursor
+    Dim cTABELA As String
     Dim i As Integer
+    Dim cCampos As String, cValores As String
     
     On Error GoTo Erro
     
-    cCON = LimpaTag(cCON)
+    ' 1. Extração da Tabela (O ADO provavelmente usa um SELECT fake como "SELECT * FROM Tabela WHERE 1=0")
+    ' Vamos extrair o nome da tabela do seu cSQL
+    cTABELA = ExtrairNomeTabela(cSQL_SELECT)
     
-    ' Montagem do INSERT manual (mais seguro para SQLite Nativo)
-    cSQL = "INSERT INTO " & cTABELA & " ("
-    For i = LBound(aCAMPOS) To UBound(aCAMPOS)
-        cSQL = cSQL & aCAMPOS(i) & IIf(i < UBound(aCAMPOS), ",", "")
-    Next
-    cSQL = cSQL & ") VALUES ("
-    For i = LBound(aVALORES) To UBound(aVALORES)
-        cSQL = cSQL & FormataParaSQL(aVALORES(i)) & IIf(i < UBound(aVALORES), ",", "")
-    Next
-    cSQL = cSQL & ")"
+    ' 2. Checagem (lCHECK)
+    If lCHECK Then
+        ' Aqui você implementaria a lógica de verificar se o registro já existe
+        ' antes de prosseguir com o INSERT.
+    End If
     
-    loConn.OpenDB cCON
-    loConn.Execute cSQL
+    ' 3. Montagem do INSERT
+    ' O padrão é: "INSERT INTO Tabela (Campos) VALUES (Valores)"
+    cCampos = ""
+    cValores = ""
+    For i = 0 To nITEM - 1
+        cCampos = cCampos & IIf(cCampos = "", "", ", ") & aCAM(i)
+        cValores = cValores & IIf(cValores = "", "", ", ") & TratarValorParaSQL(aVAL(i), "C", "SQLITE")
+    Next i
     
-    ' Captura o ID gerado automaticamente
-    nID = loConn.LastInsertRowID
+    ' 4. Execução
+    loConn.OpenDB cARQ
+    VBSQLiteSetValues loConn
+    loConn.Execute "INSERT INTO " & cTABELA & " (" & cCampos & ") VALUES (" & cValores & ")"
+    
+    ' 5. Captura do ID (aIDDES) - Equivalente ao que o seu ADO faz
+    ' SQLite tem o comando last_insert_rowid()
+    If Not IsNumeric(aIDDES) Then
+        ' Se aIDDES for uma matriz de campos de ID, buscamos o último valor inserido
+        ' ... lógica para popular o retorno conforme seu padrão ...
+    End If
     
     IncluiSQLite = True
     loConn.CloseDB
-    
-    Set loConn = Nothing   ' Adicione isso
+    Set loConn = Nothing
     Exit Function
-Erro:
-    IncluiSQLite = False
-End Function
 
+Erro:
+    If lMES Then MsgBox "Erro ao incluir: " & Err.Description
+    IncluiSQLite = False
+    ' ... fechar conexões ...
+End Function
 '---------------------------------------------------------------------------------------
 ' FUNÇÕES AUXILIARES DE SUPORTE
 '---------------------------------------------------------------------------------------
@@ -334,6 +375,7 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
     For x = 0 To nCAMPOS - 1: aRETU(x) = "": Next x
 
     loConn.OpenDB cCON
+    VBSQLiteSetValues loConn
     Set loCursor = loConn.CreateCursor(cSQL)
 
     If Not loCursor.EOF Then
@@ -401,7 +443,7 @@ End Function
 ' EQUIVALENTE FIEL A: SomaSQLAdo
 '---------------------------------------------------------------------------------------
 Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
-                           ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
+                           ByVal cCAMPO As String, Optional ByVal eDEFAULT As Variant, _
                            Optional ByVal nDEC As Integer = 2) As Variant
     Dim loConn As New SQLiteConnection
     Dim loCursor As SQLiteCursor
@@ -416,6 +458,7 @@ Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
     aOPER = SepSqlOpe(cCAMPO)
     
     loConn.OpenDB LimpaTag(cCON)
+    VBSQLiteSetValues loConn
     ' Busca todos os registros para processamento linha a linha (como a original)
     Set loCursor = loConn.CreateCursor("SELECT * FROM " & cTABLEWHERE)
     
@@ -496,7 +539,9 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
     SQLMoveRegSQLite = False
 
     loConnOri.OpenDB cCONORI
+    VBSQLiteSetValues loConnOri
     loConnDes.OpenDB cCONDES
+    VBSQLiteSetValues loConnDes
 
     ' 1. Coleta dados da Origem (Passo Matriz)
     Set loCurOri = loConnOri.CreateCursor(cSQLORI)
@@ -568,4 +613,55 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
     Exit Function
 Erro:
     SQLMoveRegSQLite = False
+End Function
+
+Public Function VBSQLiteSetValues(ByRef oCONN As SQLiteConnection) As Boolean
+    On Error GoTo Erro
+    
+    ' A VBSQLite permite aplicar configurações diretamente via Execute
+    ' Algumas destas configurações são específicas para esta biblioteca
+    
+    ' 1. Aumenta a performance de escrita
+    oCONN.Execute "PRAGMA journal_mode = WAL;"
+    
+    ' 2. Ajusta o tamanho da cache (em páginas)
+    oCONN.Execute "PRAGMA cache_size = 2000;"
+    
+    ' 3. Melhora a segurança de escrita com performance otimizada
+    oCONN.Execute "PRAGMA synchronous = NORMAL;"
+    
+    ' 4. Define o modo de armazenamento temporário
+    oCONN.Execute "PRAGMA temp_store = MEMORY;"
+    
+    VBSQLiteSetValues = True
+    Exit Function
+    
+Erro:
+    VBSQLiteSetValues = False
+End Function
+
+Public Function TratarValorParaSQL(ByVal vValor As Variant, ByVal cTipo As String, ByVal cDialeto As String) As String
+    ' cTipo: "C" para Caractere, "N" para Número, "D" para Data
+    ' cDialeto: "SQLITE", "PGSQL", "VFP"
+    
+    If IsNull(vValor) Or vValor = "" Then
+        TratarValorParaSQL = "NULL"
+        Exit Function
+    End If
+    
+    Select Case UCase(cDialeto)
+        Case "SQLITE"
+            If UCase(cTipo) = "D" Then
+                ' SQLite armazena datas como string YYYY-MM-DD
+                TratarValorParaSQL = "'" & Format(vValor, "yyyy-mm-dd") & "'"
+            ElseIf UCase(cTipo) = "N" Then
+                TratarValorParaSQL = Replace(vValor, ",", ".") ' Garante ponto decimal
+            Else
+                TratarValorParaSQL = "'" & Replace(vValor, "'", "''") & "'" ' Escapa aspas simples
+            End If
+            
+        Case "PGSQL", "VFP"
+            ' Aqui você mantém a lógica que já funcionava para os outros bancos
+            TratarValorParaSQL = "'" & vValor & "'"
+    End Select
 End Function

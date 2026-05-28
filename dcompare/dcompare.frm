@@ -2,14 +2,14 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form dCompare 
    Caption         =   "Database Comparador/Corretor"
-   ClientHeight    =   5805
+   ClientHeight    =   5808
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   10350
+   ClientTop       =   348
+   ClientWidth     =   10356
    Icon            =   "dcompare.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5805
-   ScaleWidth      =   10350
+   ScaleHeight     =   5808
+   ScaleWidth      =   10356
    StartUpPosition =   3  'Windows Default
    Begin VB.TextBox Text2 
       Height          =   375
@@ -128,7 +128,7 @@ Begin VB.Form dCompare
       Caption         =   "Destino"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -147,7 +147,7 @@ Begin VB.Form dCompare
       Caption         =   "Origem"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -223,6 +223,16 @@ Private Sub Convert(NWindMDBFileName$, SQLiteFileName$)
     Set C = New cConverter
     lProgress.Caption = "Transferindo dados das tabelas..."
     C.ConvertDatabase aCnn, sCnn
+    
+    
+'   2. Migra apenas as Tabelas, Campos e Tipos (sem os dados)
+    'C.ConvertSchema aCnn, sCnn
+    
+    'ConvertQuery (Migração baseada em SQL)
+
+'Este é um dos mais poderosos: ele permite que você execute uma consulta SQL na origem e converta o resultado dessa consulta em uma tabela no destino.
+
+ '   Exemplo: Você pode fazer um SELECT * FROM Pedidos WHERE Data > '2025-01-01'
     
     lProgress.Caption = "Criando índices..."
     C.ConvertIndexes aCnn, sCnn

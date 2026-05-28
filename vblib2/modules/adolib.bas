@@ -1472,3 +1472,36 @@ Public Function GetBestMSSQL(TIPO As String) As String
         Next
     End If
 End Function
+
+Public Function ExtrairNomeTabela(ByVal cSQL As String) As String
+    Dim nPosFrom As Long
+    Dim nPosWhere As Long
+    Dim nPosOrder As Long
+    Dim cTemp As String
+    
+    ' Converte para maiúsculas para facilitar a busca
+    cTemp = " " & UCase(cSQL) & " "
+    
+    ' Localiza a posição do " FROM "
+    nPosFrom = InStr(1, cTemp, " FROM ")
+    If nPosFrom = 0 Then
+        ExtrairNomeTabela = ""
+        Exit Function
+    End If
+    
+    nPosFrom = nPosFrom + 6 ' Tamanho da string " FROM "
+    
+    ' Localiza o primeiro limitador após o FROM (WHERE, ORDER BY, GROUP BY)
+    nPosWhere = InStr(nPosFrom, cTemp, " WHERE ")
+    nPosOrder = InStr(nPosFrom, cTemp, " ORDER BY ")
+    
+    ' Define o fim do nome da tabela (o menor valor entre os delimitadores)
+    Dim nFim As Long
+    nFim = Len(cTemp)
+    
+    If nPosWhere > 0 And nPosWhere < nFim Then nFim = nPosWhere
+    If nPosOrder > 0 And nPosOrder < nFim Then nFim = nPosOrder
+    
+    ' Extrai e limpa o nome da tabela
+    ExtrairNomeTabela = Trim(Mid(cSQL, nPosFrom - 1, nFim - nPosFrom + 1))
+End Function

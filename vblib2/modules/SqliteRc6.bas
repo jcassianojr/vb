@@ -62,6 +62,9 @@ Public Function PegSQLiteRC6(ByVal cCON As String, ByVal cSQL As String, _
     cCONN = sqldialeto(cSQL, "SQLITE")
     ' Abre a conexão e o recordset via RC6
     Set loConn = New_c.Connection(LimpaTagRC6(cCON), DBCreateInMemory)
+    
+    SQLiteSetValuesrc6 loConn
+    
     Set loRs = loConn.OpenRecordset(cCONN)
     
     If loRs.RecordCount > 0 Then
@@ -113,6 +116,9 @@ Public Function SomaSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As String,
     aOPER = SepSqlOpe(cCAMPO)
     
     Set loConn = New_c.Connection(LimpaTagRC6(cCON))
+    
+    SQLiteSetValuesrc6 loConn
+    
     Set loRs = loConn.OpenRecordset("SELECT * FROM " & cTABLEWHERE)
     
     nSoma = 0
@@ -184,6 +190,9 @@ Public Function PegOperSQLiteRC6(ByVal cCON As String, ByVal cTABLEWHERE As Stri
     cSQL = sqldialeto(cSQL, "SQLITE")
     
     Set loConn = New_c.Connection(LimpaTagRC6(cCON))
+    
+    SQLiteSetValuesrc6 loConn
+    
     Set loRs = loConn.OpenRecordset(cSQL)
     
     If Not loRs.EOF Then
@@ -235,6 +244,9 @@ Public Function GrvSQLiteRC6(ByVal cCON As String, ByVal cSQL_SELECT As String, 
     cSQL_UP = cSQL_UP & cWHE
     
     Set loConn = New_c.Connection(LimpaTagRC6(cCON))
+    
+    SQLiteSetValuesrc6 loConn
+    
     loConn.Execute sqldialeto(cSQL_UP, "SQLITE")
     
     GrvSQLiteRC6 = True
@@ -267,6 +279,8 @@ Public Function IncluiSQLiteRC6(ByVal cCON As String, ByVal cTABELA As String, _
     cSQL = cSQL & ")"
     
     Set loConn = New_c.Connection(LimpaTagRC6(cCON))
+    SQLiteSetValuesrc6 loConn
+    
     loConn.Execute cSQL
     
     Set loRs = loConn.OpenRecordset("SELECT last_insert_rowid()")
@@ -322,6 +336,7 @@ Public Function SQLiteComandoRC6(ByVal cCON As String, ByVal cSQL As String) As 
     
     ' 3. Abre a conexão e executa o comando
     Set loConn = New_c.Connection(cCON)
+    SQLiteSetValuesrc6 loConn
     loConn.Execute cSQL
     
     SQLiteComandoRC6 = True
@@ -463,6 +478,10 @@ Public Function SQLMoveRegSQLiteRC6(ByVal cCONORI As String, ByVal cSQLORI As St
     ' 1. Inicializa Conexões (Usa literal 1 para indicar SQLite nativo/memória conforme o caso)
     Set loCnnOri = New_c.Connection(cCONORI, 1)
     Set loCnnDes = New_c.Connection(cCONDES, 1)
+    
+    
+    SQLiteSetValuesrc6 loCnnOri
+    SQLiteSetValuesrc6 loCnnDes
 
     ' 2. Coleta dados da Origem
     Set loRsOri = loCnnOri.OpenRecordset(cSQLORI)
@@ -545,6 +564,7 @@ Public Function CriaBancoSQLiteRC6(ByVal cCaminho As String) As Boolean
     ' O RC6 cria o arquivo físico automaticamente ao conectar se ele não existir
     Dim oDB As RC6.cConnection
     Set oDB = New_c.Connection(cCaminho)
+    
     
     ' Fecha a conexão logo em seguida para liberar o arquivo
     Set oDB = Nothing
