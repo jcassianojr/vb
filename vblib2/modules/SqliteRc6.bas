@@ -539,3 +539,59 @@ Public Function SQLMoveRegSQLiteRC6(ByVal cCONORI As String, ByVal cSQLORI As St
 Erro:
     SQLMoveRegSQLiteRC6 = False
 End Function
+
+Public Function CriaBancoSQLiteRC6(ByVal cCaminho As String) As Boolean
+    On Error GoTo Erro
+    ' O RC6 cria o arquivo físico automaticamente ao conectar se ele não existir
+    Dim oDB As RC6.cConnection
+    Set oDB = New_c.Connection(cCaminho)
+    
+    ' Fecha a conexão logo em seguida para liberar o arquivo
+    Set oDB = Nothing
+    CriaBancoSQLiteRC6 = True
+    Exit Function
+Erro:
+    CriaBancoSQLiteRC6 = False
+End Function
+
+
+Public Function CompactarBancoSQLiteRC6(ByVal cCaminho As String) As Boolean
+    Dim oDB As RC6.cConnection
+    On Error GoTo Erro
+    
+    ' Abre a conexão
+    Set oDB = New_c.Connection(cCaminho)
+    ' O comando VACUUM compacta o banco e libera espaço em disco
+    oDB.Execute "VACUUM"
+    
+    Set oDB = Nothing
+    CompactarBancoSQLiteRC6 = True
+    Exit Function
+Erro:
+    CompactarBancoSQLiteRC6 = False
+End Function
+
+
+Public Function VerificarIntegridadeSQLiteRC6(ByVal cCaminho As String) As Boolean
+    Dim oDB As RC6.cConnection
+    Dim oRS As RC6.cRecordset
+    On Error GoTo Erro
+    
+    Set oDB = New_c.Connection(cCaminho)
+    ' O PRAGMA retorna "ok" se tudo estiver correto
+    Set oRS = oDB.OpenRecordset("PRAGMA integrity_check")
+    
+    If Not oRS.EOF Then
+        If LCase(oRS(0).Value) = "ok" Then
+            VerificarIntegridadeSQLiteRC6 = True
+        Else
+            VerificarIntegridadeSQLiteRC6 = False
+        End If
+    End If
+    
+    Set oRS = Nothing
+    Set oDB = Nothing
+    Exit Function
+Erro:
+    VerificarIntegridadeSQLiteRC6 = False
+End Function

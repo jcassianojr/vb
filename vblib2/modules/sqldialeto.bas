@@ -351,3 +351,55 @@ Public Function SQLDIAPAR(ByVal cSQLCNV As String, cDelimIni As String, cDelimFi
     End If
 End Function
 
+' ==============================================================================
+' FUNÇÃO: dialetoDataParaSQL
+' Objetivo: Normaliza e formata datas para o formato de cada motor SQL,
+'           respeitando as TAGS retornadas pela função TipoConn.
+' ==============================================================================
+Public Function dialetoDataParaSQL(ByVal vData As Variant, ByVal cTipoBanco As String) As Variant
+    
+    ' 1. Definição do que é considerado "Vazio" (Limpeza padrão)
+    Dim bEhVazio As Boolean
+    bEhVazio = IsNull(vData) Or DataBranco(vData) Or Trim(vData & "") = "" Or vData = "  /  /    "
+    
+    ' 2. Lógica específica por Banco de Dados (Dialetos)
+    Select Case UCase(cTipoBanco)
+        
+        Case "SQLITE"
+            If bEhVazio Then dialetoDataParaSQL = Null Else dialetoDataParaSQL = Format(vData, "yyyy-mm-dd hh:nn:ss")
+            
+        Case "MDB", "ACCDB"
+            ' Access/Jet exige o delimitador #
+            If bEhVazio Then dialetoDataParaSQL = Null Else dialetoDataParaSQL = "#" & Format(vData, "mm/dd/yyyy") & "#"
+            
+        Case "PGSQL", "POSTGRESQL"
+            If bEhVazio Then dialetoDataParaSQL = Null Else dialetoDataParaSQL = "'" & Format(vData, "yyyy-mm-dd hh:nn:ss") & "'"
+            
+        Case "MYSQL", "MARIADB"
+            If bEhVazio Then dialetoDataParaSQL = Null Else dialetoDataParaSQL = "'" & Format(vData, "yyyy-mm-dd hh:nn:ss") & "'"
+            
+        Case "FIREBIRD"
+            If bEhVazio Then dialetoDataParaSQL = Null Else dialetoDataParaSQL = "'" & Format(vData, "yyyy-mm-dd hh:nn:ss") & "'"
+            
+        Case "ORACLE"
+            ' Oracle exige o TO_DATE para garantir precisão e evitar erros de NLS
+            If bEhVazio Then
+                dialetoDataParaSQL = Null
+            Else
+                dialetoDataParaSQL = "TO_DATE('" & Format(vData, "yyyy-mm-dd hh:nn:ss") & "', 'YYYY-MM-DD HH24:MI:SS')"
+            End If
+            
+        Case "VFPOLEDB", "FOXPRO"
+            ' FoxPro é sensível a NULL, retornamos vazio para evitar erros de Constraint
+            If bEhVazio Then
+                dialetoDataParaSQL = ""
+            Else
+                dialetoDataParaSQL = "{^" & Format(vData, "yyyy-mm-dd hh:nn:ss") & "}"
+            End If
+            
+        Case Else
+            ' Comportamento genérico ANSI (Data simples)
+            If bEhVazio Then dialetoDataParaSQL = Null Else dialetoDataParaSQL = "'" & Format(vData, "yyyy-mm-dd") & "'"
+            
+    End Select
+End Function

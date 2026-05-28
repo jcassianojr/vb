@@ -1,6 +1,39 @@
 Attribute VB_Name = "SqlFuncoesAdo"
 Option Explicit
 
+Public Function SQLiteSetValuesADO(ByRef oCON As Object) As Boolean
+    Dim oCOMANDO As Object ' ADODB.Command
+    
+    On Error GoTo ErroSQLite
+    SQLiteSetValuesADO = False
+    
+    ' 1. Verifica se a conexão é válida
+    If oCON Is Nothing Then Exit Function
+    
+    ' 2. Cria objeto de comando ADO
+    Set oCOMANDO = CreateObject("ADODB.Command")
+    Set oCOMANDO.ActiveConnection = oCON
+    oCOMANDO.CommandType = 1 ' adCmdText
+    
+    ' 3. Aplica as configurações de alta performance do SQLite
+    ' O SQLite permite executar múltiplos comandos separados por ponto e vírgula
+    oCOMANDO.CommandText = "PRAGMA temp_store = MEMORY;" & _
+                           "PRAGMA cache_size = 2000;" & _
+                           "PRAGMA journal_mode = WAL;" & _
+                           "PRAGMA synchronous = NORMAL;" & _
+                           "PRAGMA auto_vacuum = INCREMENTAL;"
+    
+    oCOMANDO.Execute
+    
+    SQLiteSetValuesADO = True
+    Set oCOMANDO = Nothing
+    Exit Function
+
+ErroSQLite:
+    Set oCOMANDO = Nothing
+    SQLiteSetValuesADO = False
+End Function
+
 Public Function pgSetValues(ByRef oCON As Object) As Boolean
     Dim cCOM As String
     Dim oCOMANDO As Object ' Usando Object para manter o padrão flexível do seu projeto
@@ -257,7 +290,7 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
   Dim aOPE As Variant
   Dim eVAL As Variant
   Dim cERRO As String
-  Dim cARQCON As String
+  Dim carqcon As String
 
   On Error GoTo errhandler
 
@@ -275,12 +308,12 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
   End If
 
   aARQ = TipoConn(cARQ, , , False)
-  cARQCON = aARQ(1) 'GeracArq(cARQ, , False)
+  carqcon = aARQ(1) 'GeracArq(cARQ, , False)
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open cARQCON
+  oDB.Open carqcon
   lOPEN = True
 
   'na string de conecao delete =yes
@@ -352,7 +385,7 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
-  Dim cARQCON As String
+  Dim carqcon As String
 
   On Error GoTo errhandler
 
@@ -371,12 +404,12 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
 
   aARQ = TipoConn(cARQ, , , False)
   'ARQ = GeracArq(cARQ, , False)
-  cARQCON = aARQ(1)
+  carqcon = aARQ(1)
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open cARQCON
+  oDB.Open carqcon
 
   'na string de conecao delete =yes
   If InStr(cARQ, "VFPOLEDB") > 0 Then  ''delete on para foxpro nao usar registro deletados
@@ -479,7 +512,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim lRSOP As Boolean
   Dim cERRO As String
   Dim oFIELD As ADODB.Field
-  Dim cARQCON As String
+  Dim carqcon As String
 
   On Error GoTo errhandler
   lOPEN = False
@@ -488,7 +521,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   cTABELA = NomeTableSql(cSQL)
 
   aARQ = TipoConn(cARQ)
-  cARQCON = aARQ(1)
+  carqcon = aARQ(1)
 
   If aARQ(2) = "PGSQL" Then
      cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
@@ -497,7 +530,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open cARQCON
+  oDB.Open carqcon
 
   If InStr(cARQ, "VFPOLEDB") Then
     VFPSetValues oDB
