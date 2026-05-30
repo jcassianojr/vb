@@ -4,16 +4,6 @@ Option Explicit
 ' http://www.codenewsgroups.net/group/microsoft.public.vb.general.discussion/topic3286.aspx
 ' http://edais.mvps.org/
 
-'---------------------------------Start Code------------------
-Private Type BITMAP                              '14 bytes
-  bmType As Long
-  bmWidth As Long
-  bmHeight As Long
-  bmWidthBytes As Long
-  bmPlanes As Integer
-  bmBitsPixel As Integer
-  bmBits As Long
-End Type
 
 #If (VBA7 = 0) Then
 Private Enum LongPtr
@@ -27,98 +17,74 @@ Private Const PTR_SIZE As Long = 8
 Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
-
-#If VBA7 Then
-
-Private Declare  PtrSafe Function CreateCompatibleDC _
-                          Lib "gdi32" (ByVal hDC As LongPtr) As Long
-
-Private Declare  PtrSafe Function DeleteDC _
-                          Lib "gdi32" (ByVal hDC As LongPtr) As Long
-
-Private Declare  PtrSafe Function DeleteObject _
-                          Lib "gdi32" (ByVal hObject As LongPtr) As Long
-
-Private Declare  PtrSafe Function GetDC _
-                          Lib "user32" (ByVal hWnd As LongPtr) As Long
-
-Private Declare  PtrSafe Function GetDesktopWindow _
-                          Lib "user32" () As Long
-
-Private Declare  PtrSafe Function GetObject _
-                          Lib "gdi32" _
-                              Alias "GetObjectA" (ByVal hObject As LongPtr, _
-                                                  ByVal nCount As LongPtr, _
-                                                  lpObject As Any) As Long
-
-Private Declare  PtrSafe Function SelectObject _
-                          Lib "gdi32" (ByVal hDC As LongPtr, _
-                                       ByVal hObject As LongPtr) As Long
-
-Private Declare  PtrSafe Function SetStretchBltMode _
-                          Lib "gdi32" (ByVal hDC As LongPtr, _
-                                       ByVal nStretchMode As LongPtr) As Long
-
-Private Declare  PtrSafe Function StretchBlt _
-                          Lib "gdi32" (ByVal hDC As LongPtr, _
-                                       ByVal x As LongPtr, _
-                                       ByVal y As LongPtr, _
-                                       ByVal nWidth As LongPtr, _
-                                       ByVal nHeight As LongPtr, _
-                                       ByVal hSrcDC As LongPtr, _
-                                       ByVal XSrc As LongPtr, _
-                                       ByVal YSrc As LongPtr, _
-                                       ByVal nSrcWidth As LongPtr, _
-                                       ByVal nSrcHeight As LongPtr, ByVal dwRop As LongPtr) As Long
-
-
-#Else
-
-'Win32 API Function Declarations
-Private Declare Function CreateCompatibleDC _
-                          Lib "gdi32" (ByVal hDC As Long) As Long
-
-Private Declare Function DeleteDC _
-                          Lib "gdi32" (ByVal hDC As Long) As Long
-
-Private Declare Function DeleteObject _
-                          Lib "gdi32" (ByVal hObject As Long) As Long
-
-Private Declare Function GetDC _
-                          Lib "user32" (ByVal hWnd As Long) As Long
-
-Private Declare Function GetDesktopWindow _
-                          Lib "user32" () As Long
-
-Private Declare Function GetObject _
-                          Lib "gdi32" _
-                              Alias "GetObjectA" (ByVal hObject As Long, _
-                                                  ByVal nCount As Long, _
-                                                  lpObject As Any) As Long
-
-Private Declare Function SelectObject _
-                          Lib "gdi32" (ByVal hDC As Long, _
-                                       ByVal hObject As Long) As Long
-
-Private Declare Function SetStretchBltMode _
-                          Lib "gdi32" (ByVal hDC As Long, _
-                                       ByVal nStretchMode As Long) As Long
-
-Private Declare Function StretchBlt _
-                          Lib "gdi32" (ByVal hDC As Long, _
-                                       ByVal x As Long, _
-                                       ByVal y As Long, _
-                                       ByVal nWidth As Long, _
-                                       ByVal nHeight As Long, _
-                                       ByVal hSrcDC As Long, _
-                                       ByVal XSrc As Long, _
-                                       ByVal YSrc As Long, _
-                                       ByVal nSrcWidth As Long, _
-                                       ByVal nSrcHeight As Long, ByVal dwRop As Long) As Long
-
-'Win32 API Constant Declarations
-#End If
 Private Const STRETCH_HALFTONE = 4
+' --- ESTRUTURA DE COMPATIBILIDADE ---
+#If VBA7 Or Win64 Then
+    ' --- VERSÃO 64-BIT / TWINBASIC / VBA7 ---
+    Private Type BITMAP
+        bmType As Long
+        bmWidth As Long
+        bmHeight As Long
+        bmWidthBytes As Long
+        bmPlanes As Integer
+        bmBitsPixel As Integer
+        bmBits As LongPtr ' Ajustado para LongPtr em 64-bit
+    End Type
+
+    Private Declare PtrSafe Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As LongPtr) As LongPtr
+    Private Declare PtrSafe Function DeleteDC Lib "gdi32" (ByVal hDC As LongPtr) As Long
+    Private Declare PtrSafe Function DeleteObject Lib "gdi32" (ByVal hObject As LongPtr) As Long
+    Private Declare PtrSafe Function GetDC Lib "user32" (ByVal hWnd As LongPtr) As LongPtr
+    Private Declare PtrSafe Function SelectObject Lib "gdi32" (ByVal hDC As LongPtr, ByVal hObject As LongPtr) As LongPtr
+    Private Declare PtrSafe Function ReleaseDC Lib "user32" (ByVal hWnd As LongPtr, ByVal hDC As LongPtr) As Long
+    Public Declare PtrSafe Function GetDesktopWindow Lib "user32" () As LongPtr
+    Private Declare PtrSafe Function GetObject Lib "gdi32" Alias "GetObjectA" _
+        (ByVal hObject As LongPtr, ByVal nCount As Long, ByRef lpObject As Any) As Long
+        Public Declare PtrSafe Function SetStretchBltMode Lib "gdi32" _
+        (ByVal hDC As LongPtr, ByVal nStretchMode As Long) As Long
+   Public Declare PtrSafe Function StretchBlt Lib "gdi32" _
+        (ByVal hdcDest As LongPtr, _
+         ByVal xDest As Long, ByVal yDest As Long, _
+         ByVal nWidthDest As Long, ByVal nHeightDest As Long, _
+         ByVal hdcSrc As LongPtr, _
+         ByVal xSrc As Long, ByVal ySrc As Long, _
+         ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, _
+         ByVal dwRop As Long) As Long
+#Else
+    ' --- VERSÃO 32-BIT CLÁSSICA (VB6) ---
+    Private Type BITMAP
+        bmType As Long
+        bmWidth As Long
+        bmHeight As Long
+        bmWidthBytes As Long
+        bmPlanes As Integer
+        bmBitsPixel As Integer
+        bmBits As Long
+    End Type
+
+    Private Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
+    Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
+    Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
+    Private Declare Function GetDC Lib "user32" (ByVal hWnd As Long) As Long
+    Private Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
+    Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
+    Public Declare Function GetDesktopWindow Lib "user32" () As Long
+    Private Declare Function GetObject Lib "gdi32" Alias "GetObjectA" _
+        (ByVal hObject As Long, ByVal nCount As Long, ByRef lpObject As Any) As Long
+    Public Declare Function SetStretchBltMode Lib "gdi32" _
+        (ByVal hDC As Long, ByVal nStretchMode As Long) As Long
+    Public Declare Function StretchBlt Lib "gdi32" _
+        (ByVal hdcDest As Long, _
+         ByVal xDest As Long, ByVal yDest As Long, _
+         ByVal nWidthDest As Long, ByVal nHeightDest As Long, _
+         ByVal hdcSrc As Long, _
+         ByVal xSrc As Long, ByVal ySrc As Long, _
+         ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, _
+         ByVal dwRop As Long) As Long
+#End If
+
+
+
 
 Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As String, Optional ByVal cWHERE As String, _
                            Optional ByVal cCAMPO As String = "IMAGEM") As Boolean
@@ -383,7 +349,7 @@ errhandler:
 
 End Function
 
-Public Function StretchSourcePictureFromFile(ByVal FileName As String, ByRef picDest As PictureBox) As StdPicture
+Public Function StretchSourcePictureFromFile(ByVal filename As String, ByRef picDest As PictureBox) As StdPicture
   Dim hMemDC As Long
   Dim hOldBmp As Long
   Dim hMemWdth As Long
@@ -399,7 +365,7 @@ Public Function StretchSourcePictureFromFile(ByVal FileName As String, ByRef pic
   Dim ShowWidth As Long
   Dim ShowHeight As Long
 
-  If Len(FileName) = 0 Then
+  If Len(filename) = 0 Then
     Beep
     Exit Function
   End If
@@ -408,7 +374,7 @@ Public Function StretchSourcePictureFromFile(ByVal FileName As String, ByRef pic
   hMemDC = CreateCompatibleDC(GetDC(GetDesktopWindow()))
   'Load the picture
   'Set picSrc = LoadPictureEx(FileName)
-  Set picSrc = LoadPicture(FileName)
+  Set picSrc = LoadPicture(filename)
 
   'Assign the picture to the memory DC
   hOldBmp = SelectObject(hMemDC, picSrc.Handle)

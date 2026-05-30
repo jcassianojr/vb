@@ -11,19 +11,6 @@ Private Const MIIM_ID As Long = &H2&
 Private Const MFS_GRAYED As Long = &H3&
 Private Const WM_NCACTIVATE As Long = &H86
 
-Private Type MENUITEMINFO
-  cbSize As Long
-  fMask As Long
-  fType As Long
-  fState As Long
-  wID As Long
-  hSubMenu As Long
-  hbmpChecked As Long
-  hbmpUnchecked As Long
-  dwItemData As Long
-  dwTypeData As String
-  cch As Long
-End Type
 
 #If (VBA7 = 0) Then
 Private Enum LongPtr
@@ -38,19 +25,25 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
+#If VBA7 Or Win64 Then
+    ' --- ESTRUTURA PARA 64-BIT ---
+    Private Type MENUITEMINFO
+        cbSize As Long
+        fMask As Long
+        fType As Long
+        fState As Long
+        wID As Long
+        hSubMenu As LongPtr
+        hbmpChecked As LongPtr
+        hbmpUnchecked As LongPtr
+        dwItemData As LongPtr
+        dwTypeData As LongPtr
+        cch As Long
+    End Type
 
-#If VBA7 Then
-Private Declare  PtrSafe Function GetSystemMenu Lib "user32" ( _
-                                       ByVal hWnd As LongPtr, ByVal bRevert As LongPtr) As Long
-
-Private Declare  PtrSafe Function GetMenuItemInfo Lib "user32" Alias _
-                                         "GetMenuItemInfoA" (ByVal hMenu As LongPtr, ByVal un As LongPtr, _
-                                                             ByVal B As Boolean, lpMenuItemInfo As MENUITEMINFO) As Long
-
-Private Declare  PtrSafe Function SetMenuItemInfo Lib "user32" Alias _
-                                         "SetMenuItemInfoA" (ByVal hMenu As LongPtr, ByVal un As LongPtr, _
-                                                             ByVal bool As Boolean, lpcMenuItemInfo As MENUITEMINFO) As Long
-
+    Private Declare PtrSafe Function GetSystemMenu Lib "user32" (ByVal hWnd As LongPtr, ByVal bRevert As Long) As LongPtr
+    Private Declare PtrSafe Function GetMenuItemInfo Lib "user32" Alias "GetMenuItemInfoA" (ByVal hMenu As LongPtr, ByVal uItem As Long, ByVal fByPosition As Long, lpmii As MENUITEMINFO) As Long
+    Private Declare PtrSafe Function SetMenuItemInfo Lib "user32" Alias "SetMenuItemInfoA" (ByVal hMenu As LongPtr, ByVal uItem As Long, ByVal fByPosition As Long, lpmii As MENUITEMINFO) As Long
 Private Declare  PtrSafe Function SendMessage Lib "user32" Alias _
                                      "SendMessageA" (ByVal hWnd As LongPtr, ByVal wMsg As LongPtr, _
                                                      ByVal wParam As LongPtr, lParam As Any) As Long
@@ -58,28 +51,35 @@ Private Declare  PtrSafe Function SendMessage Lib "user32" Alias _
 Private Declare  PtrSafe Function IsWindow Lib "user32" _
                                   (ByVal hWnd As LongPtr) As Long
 
-
 #Else
-Private Declare Function GetSystemMenu Lib "user32" ( _
-                                       ByVal hWnd As Long, ByVal bRevert As Long) As Long
+    ' --- ESTRUTURA PARA 32-BIT (VB6) ---
+    Private Type MENUITEMINFO
+        cbSize As Long
+        fMask As Long
+        fType As Long
+        fState As Long
+        wID As Long
+        hSubMenu As Long
+        hbmpChecked As Long
+        hbmpUnchecked As Long
+        dwItemData As Long
+        dwTypeData As Long
+        cch As Long
+    End Type
 
-Private Declare Function GetMenuItemInfo Lib "user32" Alias _
-                                         "GetMenuItemInfoA" (ByVal hMenu As Long, ByVal un As Long, _
-                                                             ByVal B As Boolean, lpMenuItemInfo As MENUITEMINFO) As Long
-
-Private Declare Function SetMenuItemInfo Lib "user32" Alias _
-                                         "SetMenuItemInfoA" (ByVal hMenu As Long, ByVal un As Long, _
-                                                             ByVal bool As Boolean, lpcMenuItemInfo As MENUITEMINFO) As Long
-
+    Private Declare Function GetSystemMenu Lib "user32" (ByVal hWnd As Long, ByVal bRevert As Long) As Long
+    Private Declare Function GetMenuItemInfo Lib "user32" Alias "GetMenuItemInfoA" (ByVal hMenu As Long, ByVal uItem As Long, ByVal fByPosition As Long, lpmii As MENUITEMINFO) As Long
+    Private Declare Function SetMenuItemInfo Lib "user32" Alias "SetMenuItemInfoA" (ByVal hMenu As Long, ByVal uItem As Long, ByVal fByPosition As Long, lpmii As MENUITEMINFO) As Long
 Private Declare Function SendMessage Lib "user32" Alias _
                                      "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, _
                                                      ByVal wParam As Long, lParam As Any) As Long
 
 Private Declare Function IsWindow Lib "user32" _
                                   (ByVal hWnd As Long) As Long
- #End If
-                                  
-                                  
+
+#End If
+
+                                 
 
 '*******************************************************************************
 ' Enables / Disables the close button on the titlebar and in the system menu

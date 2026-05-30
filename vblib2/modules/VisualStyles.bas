@@ -12,14 +12,14 @@ Private Const PTR_SIZE As Long = 8
 Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
-#If VBA7 Then
+#If VBA7 Or Win64 Then
 Public Declare PtrSafe Function ActivateVisualStyles Lib "uxtheme" Alias "SetWindowTheme" (ByVal hWnd As LongPtr, Optional ByVal pszSubAppName As LongPtr = 0, Optional ByVal pszSubIdList As LongPtr = 0) As Long
 Public Declare PtrSafe Function RemoveVisualStyles Lib "uxtheme" Alias "SetWindowTheme" (ByVal hWnd As LongPtr, Optional ByRef pszSubAppName As String = " ", Optional ByRef pszSubIdList As String = " ") As Long
 Public Declare PtrSafe Function GetVisualStyles Lib "uxtheme" Alias "GetWindowTheme" (ByVal hWnd As LongPtr) As LongPtr
 #Else
-Public Declare Function ActivateVisualStyles Lib "uxtheme" Alias "SetWindowTheme" (ByVal hWnd As Long, Optional ByVal pszSubAppName As Long = 0, Optional ByVal pszSubIdList As Long = 0) As Long
-Public Declare Function RemoveVisualStyles Lib "uxtheme" Alias "SetWindowTheme" (ByVal hWnd As Long, Optional ByRef pszSubAppName As String = " ", Optional ByRef pszSubIdList As String = " ") As Long
-Public Declare Function GetVisualStyles Lib "uxtheme" Alias "GetWindowTheme" (ByVal hWnd As Long) As Long
+Public Declare Function ActivateVisualStyles Lib "uxtheme" Alias "SetWindowTheme" (ByVal hwnd As Long, Optional ByVal pszSubAppName As Long = 0, Optional ByVal pszSubIdList As Long = 0) As Long
+Public Declare Function RemoveVisualStyles Lib "uxtheme" Alias "SetWindowTheme" (ByVal hwnd As Long, Optional ByRef pszSubAppName As String = " ", Optional ByRef pszSubIdList As String = " ") As Long
+Public Declare Function GetVisualStyles Lib "uxtheme" Alias "GetWindowTheme" (ByVal hwnd As Long) As Long
 #End If
 Private Type TINITCOMMONCONTROLSEX
 dwSize As Long
@@ -51,8 +51,8 @@ PBS_DISABLED = 4
 PBS_DEFAULTED = 5
 End Enum
 Private Type POINTAPI
-X As Long
-Y As Long
+x As Long
+y As Long
 End Type
 Private Type RECT
 Left As Long
@@ -66,7 +66,7 @@ fErase As Long
 RCPaint As RECT
 fRestore As Long
 fIncUpdate As Long
-RGBReserved(0 To 31) As Byte
+rgbReserved(0 To 31) As Byte
 End Type
 Private Type DLLVERSIONINFO
 cbSize As Long
@@ -125,46 +125,46 @@ Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByRef Desti
 Private Declare Function InitCommonControlsEx Lib "comctl32" (ByRef ICCEX As TINITCOMMONCONTROLSEX) As Long
 Private Declare Function SetErrorMode Lib "kernel32" (ByVal wMode As Long) As Long
 Private Declare Function DllGetVersion Lib "comctl32" (ByRef pdvi As DLLVERSIONINFO) As Long
-Private Declare Function IsWindowVisible Lib "user32" (ByVal hWnd As Long) As Long
-Private Declare Function IsWindow Lib "user32" (ByVal hWnd As Long) As Long
+Private Declare Function IsWindowVisible Lib "user32" (ByVal hwnd As Long) As Long
+Private Declare Function IsWindow Lib "user32" (ByVal hwnd As Long) As Long
 Private Declare Function GetFocus Lib "user32" () As Long
 Private Declare Function ExtSelectClipRgn Lib "gdi32" (ByVal hDC As Long, ByVal hRgn As Long, ByVal fnMode As Long) As Long
-Private Declare Function DrawState Lib "user32" Alias "DrawStateW" (ByVal hDC As Long, ByVal hBrush As Long, ByVal lpDrawStateProc As Long, ByVal lData As Long, ByVal wData As Long, ByVal X As Long, ByVal Y As Long, ByVal CX As Long, ByVal CY As Long, ByVal fFlags As Long) As Long
-Private Declare Function GetProp Lib "user32" Alias "GetPropW" (ByVal hWnd As Long, ByVal lpString As Long) As Long
-Private Declare Function SetProp Lib "user32" Alias "SetPropW" (ByVal hWnd As Long, ByVal lpString As Long, ByVal hData As Long) As Long
-Private Declare Function RemoveProp Lib "user32" Alias "RemovePropW" (ByVal hWnd As Long, ByVal lpString As Long) As Long
-Private Declare Function BeginPaint Lib "user32" (ByVal hWnd As Long, ByRef lpPaint As PAINTSTRUCT) As Long
-Private Declare Function EndPaint Lib "user32" (ByVal hWnd As Long, ByRef lpPaint As PAINTSTRUCT) As Long
-Private Declare Function GetClientRect Lib "user32" (ByVal hWnd As Long, ByRef lpRect As RECT) As Long
-Private Declare Function InvalidateRect Lib "user32" (ByVal hWnd As Long, ByRef lpRect As Any, ByVal bErase As Long) As Long
+Private Declare Function DrawState Lib "user32" Alias "DrawStateW" (ByVal hDC As Long, ByVal hBrush As Long, ByVal lpDrawStateProc As Long, ByVal lData As Long, ByVal wData As Long, ByVal x As Long, ByVal y As Long, ByVal cx As Long, ByVal cy As Long, ByVal fFlags As Long) As Long
+Private Declare Function GetProp Lib "user32" Alias "GetPropW" (ByVal hwnd As Long, ByVal lpString As Long) As Long
+Private Declare Function SetProp Lib "user32" Alias "SetPropW" (ByVal hwnd As Long, ByVal lpString As Long, ByVal hData As Long) As Long
+Private Declare Function RemoveProp Lib "user32" Alias "RemovePropW" (ByVal hwnd As Long, ByVal lpString As Long) As Long
+Private Declare Function BeginPaint Lib "user32" (ByVal hwnd As Long, ByRef lpPaint As PAINTSTRUCT) As Long
+Private Declare Function EndPaint Lib "user32" (ByVal hwnd As Long, ByRef lpPaint As PAINTSTRUCT) As Long
+Private Declare Function GetClientRect Lib "user32" (ByVal hwnd As Long, ByRef lpRect As RECT) As Long
+Private Declare Function InvalidateRect Lib "user32" (ByVal hwnd As Long, ByRef lpRect As Any, ByVal bErase As Long) As Long
 Private Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As Long
 Private Declare Function FillRect Lib "user32" (ByVal hDC As Long, ByRef lpRect As RECT, ByVal hBrush As Long) As Long
 Private Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
-Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
+Private Declare Function ReleaseDC Lib "user32" (ByVal hwnd As Long, ByVal hDC As Long) As Long
 Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
 Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
 Private Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
 Private Declare Function DrawFocusRect Lib "user32" (ByVal hDC As Long, ByRef lpRect As RECT) As Long
-Private Declare Function GetDC Lib "user32" (ByVal hWnd As Long) As Long
+Private Declare Function GetDC Lib "user32" (ByVal hwnd As Long) As Long
 Private Declare Function DrawText Lib "user32" Alias "DrawTextW" (ByVal hDC As Long, ByVal lpStr As Long, ByVal nCount As Long, ByRef lpRect As RECT, ByVal wFormat As Long) As Long
 Private Declare Function TrackMouseEvent Lib "user32" (ByRef lpEventTrack As TRACKMOUSEEVENTSTRUCT) As Long
-Private Declare Function TransparentBlt Lib "msimg32" (ByVal hDestDC As Long, ByVal X As Long, ByVal Y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, ByVal XSrc As Long, ByVal YSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal crTransparent As Long) As Long
+Private Declare Function TransparentBlt Lib "msimg32" (ByVal hDestDC As Long, ByVal x As Long, ByVal y As Long, ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, ByVal XSrc As Long, ByVal YSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal crTransparent As Long) As Long
 Private Declare Function IsThemeBackgroundPartiallyTransparent Lib "uxtheme" (ByVal Theme As Long, ByVal iPartId As Long, ByVal iStateId As Long) As Long
-Private Declare Function DrawThemeParentBackground Lib "uxtheme" (ByVal hWnd As Long, ByVal hDC As Long, ByRef pRect As RECT) As Long
+Private Declare Function DrawThemeParentBackground Lib "uxtheme" (ByVal hwnd As Long, ByVal hDC As Long, ByRef pRect As RECT) As Long
 Private Declare Function DrawThemeBackground Lib "uxtheme" (ByVal Theme As Long, ByVal hDC As Long, ByVal iPartId As Long, ByVal iStateId As Long, ByRef pRect As RECT, ByRef pClipRect As RECT) As Long
 Private Declare Function DrawThemeText Lib "uxtheme" (ByVal Theme As Long, ByVal hDC As Long, ByVal iPartId As Long, ByVal iStateId As Long, ByVal pszText As Long, ByVal iCharCount As Long, ByVal dwTextFlags As Long, ByVal dwTextFlags2 As Long, ByRef pRect As RECT) As Long
 Private Declare Function GetThemeBackgroundRegion Lib "uxtheme" (ByVal Theme As Long, ByVal hDC As Long, ByVal iPartId As Long, ByVal iStateId As Long, ByRef pRect As RECT, ByRef hRgn As Long) As Long
 Private Declare Function GetThemeBackgroundContentRect Lib "uxtheme" (ByVal Theme As Long, ByVal hDC As Long, ByVal iPartId As Long, ByVal iStateId As Long, ByRef pBoundingRect As RECT, ByRef pContentRect As RECT) As Long
-Private Declare Function OpenThemeData Lib "uxtheme" (ByVal hWnd As Long, ByVal lpszClassList As Long) As Long
+Private Declare Function OpenThemeData Lib "uxtheme" (ByVal hwnd As Long, ByVal lpszClassList As Long) As Long
 Private Declare Function CloseThemeData Lib "uxtheme" (ByVal Theme As Long) As Long
 Private Declare Function IsAppThemed Lib "uxtheme" () As Long
 Private Declare Function IsThemeActive Lib "uxtheme" () As Long
 Private Declare Function GetThemeAppProperties Lib "uxtheme" () As Long
-Private Declare Function SendMessage Lib "user32" Alias "SendMessageW" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByRef lParam As Any) As Long
-Private Declare Function SetWindowSubclass Lib "comctl32" (ByVal hWnd As Long, ByVal pfnSubclass As Long, ByVal uIdSubclass As Long, ByVal dwRefData As Long) As Long
-Private Declare Function RemoveWindowSubclass Lib "comctl32" (ByVal hWnd As Long, ByVal pfnSubclass As Long, ByVal uIdSubclass As Long) As Long
-Private Declare Function DefSubclassProc Lib "comctl32" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
-Private Declare Function DefWindowProc Lib "user32" Alias "DefWindowProcW" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Private Declare Function SendMessage Lib "user32" Alias "SendMessageW" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByRef lParam As Any) As Long
+Private Declare Function SetWindowSubclass Lib "comctl32" (ByVal hwnd As Long, ByVal pfnSubclass As Long, ByVal uIdSubclass As Long, ByVal dwRefData As Long) As Long
+Private Declare Function RemoveWindowSubclass Lib "comctl32" (ByVal hwnd As Long, ByVal pfnSubclass As Long, ByVal uIdSubclass As Long) As Long
+Private Declare Function DefSubclassProc Lib "comctl32" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Private Declare Function DefWindowProc Lib "user32" Alias "DefWindowProcW" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
 #End If
 Private Const ICC_STANDARD_CLASSES As Long = &H4000
 Private Const STAP_ALLOW_CONTROLS As Long = (1 * (2 ^ 1))
@@ -227,18 +227,18 @@ SetErrorMode SEM_NOGPFAULTERRORBOX
 End Function
 
 Public Sub SetupVisualStylesFixes(ByVal Form As VB.Form)
-If GetComCtlVersion() >= 6 Then SendMessage Form.hWnd, WM_UPDATEUISTATE, MakeDWord(UIS_CLEAR, UISF_HIDEFOCUS Or UISF_HIDEACCEL), ByVal 0&
+If GetComCtlVersion() >= 6 Then SendMessage Form.hwnd, WM_UPDATEUISTATE, MakeDWord(UIS_CLEAR, UISF_HIDEFOCUS Or UISF_HIDEACCEL), ByVal 0&
 If EnabledVisualStyles() = False Then Exit Sub
 Dim CurrControl As VB.Control
 For Each CurrControl In Form.Controls
     Select Case TypeName(CurrControl)
         Case "Frame"
-            SetWindowSubclass CurrControl.hWnd, AddressOf RedirectFrame, ObjPtr(CurrControl), 0
+            SetWindowSubclass CurrControl.hwnd, AddressOf RedirectFrame, ObjPtr(CurrControl), 0
         Case "CommandButton", "OptionButton", "CheckBox"
-            If CurrControl.Style = vbButtonGraphical Then
-                SetProp CurrControl.hWnd, StrPtr("VisualStyles"), GetVisualStyles(CurrControl.hWnd)
-                If CurrControl.Enabled = True Then SetProp CurrControl.hWnd, StrPtr("Enabled"), 1
-                SetWindowSubclass CurrControl.hWnd, AddressOf RedirectButton, ObjPtr(CurrControl), ObjPtr(CurrControl)
+            If CurrControl.style = vbButtonGraphical Then
+                SetProp CurrControl.hwnd, StrPtr("VisualStyles"), GetVisualStyles(CurrControl.hwnd)
+                If CurrControl.Enabled = True Then SetProp CurrControl.hwnd, StrPtr("Enabled"), 1
+                SetWindowSubclass CurrControl.hwnd, AddressOf RedirectButton, ObjPtr(CurrControl), ObjPtr(CurrControl)
             End If
     End Select
 Next CurrControl
@@ -250,15 +250,15 @@ Dim CurrControl As VB.Control
 For Each CurrControl In Form.Controls
     Select Case TypeName(CurrControl)
         Case "Frame"
-            RemoveWindowSubclass CurrControl.hWnd, AddressOf RedirectFrame, ObjPtr(CurrControl)
+            RemoveWindowSubclass CurrControl.hwnd, AddressOf RedirectFrame, ObjPtr(CurrControl)
         Case "CommandButton", "OptionButton", "CheckBox"
-            If CurrControl.Style = vbButtonGraphical Then
-                RemoveProp CurrControl.hWnd, StrPtr("VisualStyles")
-                RemoveProp CurrControl.hWnd, StrPtr("Enabled")
-                RemoveProp CurrControl.hWnd, StrPtr("Hot")
-                RemoveProp CurrControl.hWnd, StrPtr("Painted")
-                RemoveProp CurrControl.hWnd, StrPtr("ButtonPart")
-                RemoveWindowSubclass CurrControl.hWnd, AddressOf RedirectButton, ObjPtr(CurrControl)
+            If CurrControl.style = vbButtonGraphical Then
+                RemoveProp CurrControl.hwnd, StrPtr("VisualStyles")
+                RemoveProp CurrControl.hwnd, StrPtr("Enabled")
+                RemoveProp CurrControl.hwnd, StrPtr("Hot")
+                RemoveProp CurrControl.hwnd, StrPtr("Painted")
+                RemoveProp CurrControl.hwnd, StrPtr("ButtonPart")
+                RemoveWindowSubclass CurrControl.hwnd, AddressOf RedirectButton, ObjPtr(CurrControl)
             End If
     End Select
 Next CurrControl
@@ -288,77 +288,77 @@ End If
 GetComCtlVersion = Value
 End Function
 
-Private Function RedirectFrame(ByVal hWnd As LongPtr, ByVal wMsg As Long, ByVal wParam As LongPtr, ByVal lParam As LongPtr, ByVal uIdSubclass As LongPtr, ByVal dwRefData As LongPtr) As LongPtr
+Private Function RedirectFrame(ByVal hwnd As LongPtr, ByVal wMsg As Long, ByVal wParam As LongPtr, ByVal lParam As LongPtr, ByVal uIdSubclass As LongPtr, ByVal dwRefData As LongPtr) As LongPtr
 Select Case wMsg
     Case WM_PRINTCLIENT, WM_MOUSELEAVE
-        RedirectFrame = DefWindowProc(hWnd, wMsg, wParam, lParam)
+        RedirectFrame = DefWindowProc(hwnd, wMsg, wParam, lParam)
         Exit Function
 End Select
-RedirectFrame = DefSubclassProc(hWnd, wMsg, wParam, lParam)
-If wMsg = WM_NCDESTROY Then Call RemoveRedirectFrame(hWnd, uIdSubclass)
+RedirectFrame = DefSubclassProc(hwnd, wMsg, wParam, lParam)
+If wMsg = WM_NCDESTROY Then Call RemoveRedirectFrame(hwnd, uIdSubclass)
 End Function
 
-Private Sub RemoveRedirectFrame(ByVal hWnd As LongPtr, ByVal uIdSubclass As LongPtr)
-RemoveWindowSubclass hWnd, AddressOf RedirectFrame, uIdSubclass
+Private Sub RemoveRedirectFrame(ByVal hwnd As LongPtr, ByVal uIdSubclass As LongPtr)
+RemoveWindowSubclass hwnd, AddressOf RedirectFrame, uIdSubclass
 End Sub
 
-Private Function RedirectButton(ByVal hWnd As LongPtr, ByVal wMsg As Long, ByVal wParam As LongPtr, ByVal lParam As LongPtr, ByVal uIdSubclass As LongPtr, ByVal Button As Object) As LongPtr
+Private Function RedirectButton(ByVal hwnd As LongPtr, ByVal wMsg As Long, ByVal wParam As LongPtr, ByVal lParam As LongPtr, ByVal uIdSubclass As LongPtr, ByVal Button As Object) As LongPtr
 Dim SetRedraw As Boolean
 Select Case wMsg
     Case WM_NCPAINT
         Exit Function
     Case WM_PAINT
-        If IsWindowVisible(hWnd) <> 0 And GetProp(hWnd, StrPtr("VisualStyles")) <> 0 Then
+        If IsWindowVisible(hwnd) <> 0 And GetProp(hwnd, StrPtr("VisualStyles")) <> 0 Then
             Dim PS As PAINTSTRUCT
-            SetProp hWnd, StrPtr("Painted"), 1
-            Call DrawButton(hWnd, BeginPaint(hWnd, PS), Button)
-            EndPaint hWnd, PS
+            SetProp hwnd, StrPtr("Painted"), 1
+            Call DrawButton(hwnd, BeginPaint(hwnd, PS), Button)
+            EndPaint hwnd, PS
             Exit Function
         End If
     Case WM_SETFOCUS, WM_ENABLE
-        If IsWindowVisible(hWnd) <> 0 Then
+        If IsWindowVisible(hwnd) <> 0 Then
             SetRedraw = True
-            SendMessage hWnd, WM_SETREDRAW, 0, ByVal 0&
+            SendMessage hwnd, WM_SETREDRAW, 0, ByVal 0&
         End If
 End Select
-RedirectButton = DefSubclassProc(hWnd, wMsg, wParam, lParam)
+RedirectButton = DefSubclassProc(hwnd, wMsg, wParam, lParam)
 If wMsg = WM_NCDESTROY Then
-    Call RemoveRedirectButton(hWnd, uIdSubclass)
-    RemoveProp hWnd, StrPtr("VisualStyles")
-    RemoveProp hWnd, StrPtr("Enabled")
-    RemoveProp hWnd, StrPtr("Hot")
-    RemoveProp hWnd, StrPtr("Painted")
-    RemoveProp hWnd, StrPtr("ButtonPart")
-ElseIf IsWindow(hWnd) <> 0 Then
+    Call RemoveRedirectButton(hwnd, uIdSubclass)
+    RemoveProp hwnd, StrPtr("VisualStyles")
+    RemoveProp hwnd, StrPtr("Enabled")
+    RemoveProp hwnd, StrPtr("Hot")
+    RemoveProp hwnd, StrPtr("Painted")
+    RemoveProp hwnd, StrPtr("ButtonPart")
+ElseIf IsWindow(hwnd) <> 0 Then
     Select Case wMsg
         Case WM_THEMECHANGED
-            SetProp hWnd, StrPtr("VisualStyles"), GetVisualStyles(hWnd)
+            SetProp hwnd, StrPtr("VisualStyles"), GetVisualStyles(hwnd)
             Button.Refresh
         Case WM_MOUSELEAVE
-            SetProp hWnd, StrPtr("Hot"), 0
+            SetProp hwnd, StrPtr("Hot"), 0
             Button.Refresh
         Case WM_MOUSEMOVE
-            If GetProp(hWnd, StrPtr("Hot")) = 0 Then
-                SetProp hWnd, StrPtr("Hot"), 1
-                InvalidateRect hWnd, ByVal NULL_PTR, 0
+            If GetProp(hwnd, StrPtr("Hot")) = 0 Then
+                SetProp hwnd, StrPtr("Hot"), 1
+                InvalidateRect hwnd, ByVal NULL_PTR, 0
                 Dim TME As TRACKMOUSEEVENTSTRUCT
                 With TME
                 .cbSize = LenB(TME)
-                .hWndTrack = hWnd
+                .hWndTrack = hwnd
                 .dwFlags = TME_LEAVE
                 End With
                 TrackMouseEvent TME
-            ElseIf GetProp(hWnd, StrPtr("Painted")) = 0 Then
+            ElseIf GetProp(hwnd, StrPtr("Painted")) = 0 Then
                 Button.Refresh
             End If
         Case WM_SETFOCUS, WM_ENABLE
             If SetRedraw = True Then
-                SendMessage hWnd, WM_SETREDRAW, 1, ByVal 0&
+                SendMessage hwnd, WM_SETREDRAW, 1, ByVal 0&
                 If wMsg = WM_ENABLE Then
-                    SetProp hWnd, StrPtr("Enabled"), 0
-                    InvalidateRect hWnd, ByVal NULL_PTR, 0
+                    SetProp hwnd, StrPtr("Enabled"), 0
+                    InvalidateRect hwnd, ByVal NULL_PTR, 0
                 Else
-                    SetProp hWnd, StrPtr("Enabled"), 1
+                    SetProp hwnd, StrPtr("Enabled"), 1
                     Button.Refresh
                 End If
             End If
@@ -368,18 +368,18 @@ ElseIf IsWindow(hWnd) <> 0 Then
 End If
 End Function
 
-Private Sub RemoveRedirectButton(ByVal hWnd As LongPtr, ByVal uIdSubclass As LongPtr)
-RemoveWindowSubclass hWnd, AddressOf RedirectButton, uIdSubclass
+Private Sub RemoveRedirectButton(ByVal hwnd As LongPtr, ByVal uIdSubclass As LongPtr)
+RemoveWindowSubclass hwnd, AddressOf RedirectButton, uIdSubclass
 End Sub
 
-Private Sub DrawButton(ByVal hWnd As LongPtr, ByVal hDC As LongPtr, ByVal Button As Object)
+Private Sub DrawButton(ByVal hwnd As LongPtr, ByVal hDC As LongPtr, ByVal Button As Object)
 Dim Theme As LongPtr, ButtonPart As Long, ButtonState As Long, UIState As Long
 Dim Enabled As Boolean, Checked As Boolean, Default As Boolean, Hot As Boolean, Pushed As Boolean, Focused As Boolean
 Dim hFontOld As LongPtr, ButtonFont As IFont
 Dim ButtonPicture As IPictureDisp, DisabledPictureAvailable As Boolean
 Dim ClientRect As RECT, TextRect As RECT, RgnClip As LongPtr
-Dim CX As Long, CY As Long, X As Long, Y As Long
-ButtonPart = CLng(GetProp(hWnd, StrPtr("ButtonPart")))
+Dim cx As Long, cy As Long, x As Long, y As Long
+ButtonPart = CLng(GetProp(hwnd, StrPtr("ButtonPart")))
 If ButtonPart = 0 Then
     Select Case TypeName(Button)
         Case "CommandButton"
@@ -389,12 +389,12 @@ If ButtonPart = 0 Then
         Case "CheckBox"
             ButtonPart = BP_CHECKBOX
     End Select
-    If ButtonPart <> 0 Then SetProp hWnd, StrPtr("ButtonPart"), ButtonPart
+    If ButtonPart <> 0 Then SetProp hwnd, StrPtr("ButtonPart"), ButtonPart
 End If
 Select Case ButtonPart
     Case BP_PUSHBUTTON
         Default = Button.Default
-        If GetFocus() <> hWnd Then
+        If GetFocus() <> hwnd Then
             On Error Resume Next
             If CLng(Button.Parent.ActiveControl.Default) > 0 Then Else Default = False
             On Error GoTo 0
@@ -407,10 +407,10 @@ Select Case ButtonPart
         Default = False
 End Select
 ButtonPart = BP_PUSHBUTTON
-ButtonState = CLng(SendMessage(hWnd, BM_GETSTATE, 0, ByVal 0&))
-UIState = CLng(SendMessage(hWnd, WM_QUERYUISTATE, 0, ByVal 0&))
-Enabled = IIf(GetProp(hWnd, StrPtr("Enabled")) = 1, True, Button.Enabled)
-Hot = IIf(GetProp(hWnd, StrPtr("Hot")) = 0, False, True)
+ButtonState = CLng(SendMessage(hwnd, BM_GETSTATE, 0, ByVal 0&))
+UIState = CLng(SendMessage(hwnd, WM_QUERYUISTATE, 0, ByVal 0&))
+Enabled = IIf(GetProp(hwnd, StrPtr("Enabled")) = 1, True, Button.Enabled)
+Hot = IIf(GetProp(hwnd, StrPtr("Hot")) = 0, False, True)
 If Checked = True Then Hot = False
 Pushed = IIf((ButtonState And BST_PUSHED) = 0, False, True)
 Focused = IIf((ButtonState And BST_FOCUS) = 0, False, True)
@@ -440,8 +440,8 @@ End If
 If Not ButtonPicture Is Nothing Then
     If ButtonPicture.Handle = NULL_PTR Then Set ButtonPicture = Nothing
 End If
-GetClientRect hWnd, ClientRect
-Theme = OpenThemeData(hWnd, StrPtr("Button"))
+GetClientRect hwnd, ClientRect
+Theme = OpenThemeData(hwnd, StrPtr("Button"))
 If Theme <> NULL_PTR Then
     GetThemeBackgroundRegion Theme, hDC, ButtonPart, ButtonState, ClientRect, RgnClip
     ExtSelectClipRgn hDC, RgnClip, RGN_DIFF
@@ -449,7 +449,7 @@ If Theme <> NULL_PTR Then
     Brush = CreateSolidBrush(WinColor(Button.BackColor))
     FillRect hDC, ClientRect, Brush
     DeleteObject Brush
-    If IsThemeBackgroundPartiallyTransparent(Theme, ButtonPart, ButtonState) <> 0 Then DrawThemeParentBackground hWnd, hDC, ClientRect
+    If IsThemeBackgroundPartiallyTransparent(Theme, ButtonPart, ButtonState) <> 0 Then DrawThemeParentBackground hwnd, hDC, ClientRect
     ExtSelectClipRgn hDC, NULL_PTR, RGN_COPY
     DeleteObject RgnClip
     DrawThemeBackground Theme, hDC, ButtonPart, ButtonState, ClientRect, ClientRect
@@ -479,10 +479,10 @@ If Theme <> NULL_PTR Then
     CloseThemeData Theme
 End If
 If Not ButtonPicture Is Nothing Then
-    CX = CHimetricToPixel_X(ButtonPicture.Width)
-    CY = CHimetricToPixel_Y(ButtonPicture.Height)
-    X = ClientRect.Left + ((ClientRect.Right - ClientRect.Left - CX) \ 2)
-    Y = ClientRect.Top + ((ClientRect.Bottom - ClientRect.Top - CY) \ 2)
+    cx = CHimetricToPixel_X(ButtonPicture.Width)
+    cy = CHimetricToPixel_Y(ButtonPicture.Height)
+    x = ClientRect.Left + ((ClientRect.Right - ClientRect.Left - cx) \ 2)
+    y = ClientRect.Top + ((ClientRect.Bottom - ClientRect.Top - cy) \ 2)
     If Enabled = True Or DisabledPictureAvailable = True Then
         If ButtonPicture.Type = vbPicTypeBitmap And Button.UseMaskColor = True Then
             Dim hDCScreen As LongPtr
@@ -492,7 +492,7 @@ If Not ButtonPicture Is Nothing Then
                 hDC1 = CreateCompatibleDC(hDCScreen)
                 If hDC1 <> NULL_PTR Then
                     hBmpOld1 = SelectObject(hDC1, ButtonPicture.Handle)
-                    TransparentBlt hDC, X, Y, CX, CY, hDC1, 0, 0, CX, CY, WinColor(Button.MaskColor)
+                    TransparentBlt hDC, x, y, cx, cy, hDC1, 0, 0, cx, cy, WinColor(Button.MaskColor)
                     SelectObject hDC1, hBmpOld1
                     DeleteDC hDC1
                 End If
@@ -503,21 +503,21 @@ If Not ButtonPicture Is Nothing Then
             #If Win64 Then
             Dim hDC32 As Long
             CopyMemory ByVal VarPtr(hDC32), ByVal VarPtr(hDC), 4
-            .Render hDC32 Or 0&, X Or 0&, Y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
+            .Render hDC32 Or 0&, x Or 0&, y Or 0&, cx Or 0&, cy Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
             #Else
-            .Render hDC Or 0&, X Or 0&, Y Or 0&, CX Or 0&, CY Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
+            .Render hDC Or 0&, x Or 0&, y Or 0&, cx Or 0&, cy Or 0&, 0&, .Height, .Width, -.Height, ByVal 0&
             #End If
             End With
         End If
     Else
         If ButtonPicture.Type = vbPicTypeIcon Then
-            DrawState hDC, NULL_PTR, NULL_PTR, ButtonPicture.Handle, NULL_PTR, X, Y, CX, CY, DST_ICON Or DSS_DISABLED
+            DrawState hDC, NULL_PTR, NULL_PTR, ButtonPicture.Handle, NULL_PTR, x, y, cx, cy, DST_ICON Or DSS_DISABLED
         Else
             Dim hImage As LongPtr
             hImage = BitmapHandleFromPicture(ButtonPicture, vbWhite)
             ' The DrawState API with DSS_DISABLED will draw white as transparent.
             ' This will ensure GIF bitmaps or metafiles are better drawn.
-            DrawState hDC, NULL_PTR, NULL_PTR, hImage, NULL_PTR, X, Y, CX, CY, DST_BITMAP Or DSS_DISABLED
+            DrawState hDC, NULL_PTR, NULL_PTR, hImage, NULL_PTR, x, y, cx, cy, DST_BITMAP Or DSS_DISABLED
             DeleteObject hImage
         End If
     End If

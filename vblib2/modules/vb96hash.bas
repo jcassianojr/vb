@@ -13,7 +13,7 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
-#If VBA7 Then
+#If VBA7 Or Win64 Then
 Private Declare PtrSafe  Function CryptAcquireContext Lib "advapi32.dll" Alias "CryptAcquireContextA" _
                                              (ByRef phProv As LongPtr, ByVal pszContainer As String, ByVal pszProvider As String, _
                                               ByVal dwProvType As LongPtr, ByVal dwFlags As LongPtr) As Long

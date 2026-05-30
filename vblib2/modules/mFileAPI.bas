@@ -94,7 +94,7 @@ Public Type OPENFILENAME
   nStructSize As Long
   hWndOwner As Long
   hInstance As Long
-  SFILTER As String
+  sFILTER As String
   sCustomFilter As String
   nMaxCustFilter As Long
   nFilterIndex As Long
@@ -120,7 +120,7 @@ Private Type SECURITY_ATTRIBUTES
 End Type
 
 Private Type SHFILEOPSTRUCT
-  hwnd As Long
+  hWnd As Long
   wFunc As Long
   pFrom As String
   pTo As String
@@ -160,7 +160,7 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
-#If VBA7 Then
+#If VBA7 Or Win64 Then
 Public Declare PtrSafe Function GetOpenFileName Lib "comdlg32.dll" _
                                         Alias "GetOpenFileNameA" _
                                         (pOpenfilename As OPENFILENAME) As Long
@@ -181,13 +181,12 @@ Private Declare PtrSafe Function SHFileOperation _
                             ) As Long
 
 Public Declare PtrSafe Function CreateDirectory Lib "kernel32" Alias "CreateDirectoryA" (ByVal lpPathName As String, lpSecurityAttributes As SECURITY_ATTRIBUTES) As Long
-Public Declare PtrSafe Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As LongPtr, ByVal lpBuffer As String) As Long
 Private Declare PtrSafe Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As LongPtr, ByVal lpszShortPath As LongPtr, ByVal cchBuffer As LongPtr) As Long
 
 Private Declare PtrSafe Function PathGetCharType Lib "shlwapi.dll" Alias "PathGetCharTypeW" (ByVal ch As Longptr) As Long
 Private Declare PtrSafe Function GetDesktopWindow Lib "user32.dll" () As Long
 
-
+Public Declare PtrSafe Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As Long, ByVal lpBuffer As String) As Long
 #Else
 
 Private Declare Function PathGetCharType Lib "shlwapi.dll" Alias "PathGetCharTypeW" (ByVal ch As Long) As Long
@@ -212,15 +211,15 @@ Private Declare Function SHFileOperation _
                             ) As Long
 
 Public Declare Function CreateDirectory Lib "kernel32" Alias "CreateDirectoryA" (ByVal lpPathName As String, lpSecurityAttributes As SECURITY_ATTRIBUTES) As Long
-Public Declare Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As Long, ByVal lpBuffer As String) As Long
 Private Declare Function GetShortPathNameW Lib "kernel32" (ByVal lpszLongPath As Long, ByVal lpszShortPath As Long, ByVal cchBuffer As Long) As Long
 Private Declare Function GetDesktopWindow Lib "user32.dll" () As Long
+Public Declare Function GetTempPath Lib "kernel32" Alias "GetTempPathA" (ByVal nBufferLength As Long, ByVal lpBuffer As String) As Long
 #End If
 
 Public Function SH_Copy(src As String, dest As String, cFlags As TFileFlags) As Long
 Dim shFileOp As SHFILEOPSTRUCT
     'Copy files or folders
-    shFileOp.hwnd = GetDesktopWindow
+    shFileOp.hWnd = GetDesktopWindow
     shFileOp.wFunc = FO_COPY
     shFileOp.pFrom = src
     shFileOp.pTo = dest
@@ -232,7 +231,7 @@ End Function
 Public Function SH_Move(src As String, dest As String, cFlags As TFileFlags) As Long
 Dim shFileOp As SHFILEOPSTRUCT
     'Move files or folders
-    shFileOp.hwnd = GetDesktopWindow
+    shFileOp.hWnd = GetDesktopWindow
     shFileOp.wFunc = FO_MOVE
     shFileOp.pFrom = src
     shFileOp.pTo = dest
@@ -245,7 +244,7 @@ End Function
 Public Function SH_Rename(src As String, dest As String, cFlags As TFileFlags) As Long
 Dim shFileOp As SHFILEOPSTRUCT
     'Rename files or folders
-    shFileOp.hwnd = GetDesktopWindow
+    shFileOp.hWnd = GetDesktopWindow
     shFileOp.wFunc = FO_RENAME
     shFileOp.pFrom = src
     shFileOp.pTo = dest
@@ -258,7 +257,7 @@ End Function
 Public Function SH_Delete(src As String, cFlags As TFileFlags) As Long
 Dim shFileOp As SHFILEOPSTRUCT
     'Delete files or folders
-    shFileOp.hwnd = GetDesktopWindow
+    shFileOp.hWnd = GetDesktopWindow
     shFileOp.wFunc = FO_DELETE
     shFileOp.pFrom = src
     shFileOp.fFlags = cFlags
@@ -305,7 +304,7 @@ Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal Destination
       Exit Function
   End If
   With typFileOperation
-    .hwnd = 0
+    .hWnd = 0
     .wFunc = FO_COPY
     .pFrom = SourceFile & vbNullChar & vbNullChar  'source file
     .pTo = DestinationFile & vbNullChar & vbNullChar  'destination file
@@ -374,8 +373,8 @@ Public Function FileOpen(frmOwner As Form, _
 
   With OFN
     .nStructSize = Len(OFN)
-    .hWndOwner = CLng(frmOwner.hwnd)
-    .SFILTER = sFilters & vbNullChar & vbNullChar
+    .hWndOwner = CLng(frmOwner.hWnd)
+    .sFILTER = sFilters & vbNullChar & vbNullChar
     .nFilterIndex = nFilterIndex
     .sFile = sDefaultFileName & Space$(1024) & vbNullChar & vbNullChar
     .nMaxFile = Len(.sFile)
@@ -406,8 +405,8 @@ Public Function FileSave(frmOwner As Form, _
   With OFN
 
     .nStructSize = Len(OFN)
-    .hWndOwner = CLng(frmOwner.hwnd)
-    .SFILTER = sFilters & vbNullChar & vbNullChar
+    .hWndOwner = CLng(frmOwner.hWnd)
+    .sFILTER = sFilters & vbNullChar & vbNullChar
     .nFilterIndex = nFilterIndex
     .sFile = sDefaultFileName & Space$(1024) & _
              vbNullChar & vbNullChar
@@ -432,15 +431,15 @@ Function OpenArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
   Dim sFileName As String
   Dim sPath As String
   Dim sRECENTFILE As String
-  Dim SFILTER As String
+  Dim sFILTER As String
   OpenArqExt = ""
   If Len(cARQ) > 0 Then
     sRECENTFILE = cARQ
   Else
     sPath = App.Path
   End If
-  SFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
-  sFileName = FileOpen(oFORM, SFILTER, 1, sRECENTFILE, cEXT, sPath, "Escolher " & cTITULO)
+  sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
+  sFileName = FileOpen(oFORM, sFILTER, 1, sRECENTFILE, cEXT, sPath, "Escolher " & cTITULO)
   If Len(sFileName) = 0 Then
     lRETU = False
     Exit Function
@@ -453,15 +452,15 @@ Function SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
   Dim sFileName As String
   Dim sPath As String
   Dim sRECENTFILE As String
-  Dim SFILTER As String
+  Dim sFILTER As String
   SaveArqExt = ""
   If Len(cARQ) > 0 Then
     sRECENTFILE = cARQ
   Else
     sPath = App.Path
   End If
-  SFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
-  sFileName = FileSave(oFORM, SFILTER, 1, cEXT, "Novo", sPath, cTITULO)
+  sFILTER = cTITULO & vbNullChar & "*." & cEXT & vbNullChar
+  sFileName = FileSave(oFORM, sFILTER, 1, cEXT, "Novo", sPath, cTITULO)
   If Len(sFileName) = 0 Then
     lRETU = False
     Exit Function
@@ -471,44 +470,44 @@ Function SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
 End Function
 
 Public Function ImgFILTER() As String
-  Dim SFILTER As String
-  SFILTER = "Windows ou OS/2 Bitmap File (*.BMP)" & vbNullChar & "*.BMP" & vbNullChar
-  SFILTER = SFILTER & "Independent JPEG Group (*.JPG, *.JIF, *.JPEG, *.JPE)" & vbNullChar & "*.JPG;*.JIF;*.JPEG;*.JPE" & vbNullChar
-  SFILTER = SFILTER & "Portable Network Graphics (*.PNG)" & vbNullChar & "*.PNG" & vbNullChar
-  SFILTER = SFILTER & "Tagged Imag (*.TIF, *.TIFF)" & vbNullChar & "*.TIF;*.TIFF" & vbNullChar
-  SFILTER = SFILTER & "Zsoft Paintbrush PCX bitmap format (*.PCX)" & vbNullChar & "*.PCX" & vbNullChar
-  SFILTER = SFILTER & "Windows Icon (*.ICO)" & vbNullChar & "*.ICO" & vbNullChar
-  SFILTER = SFILTER & "Graphics Interchange Format (*.GIF)" & vbNullChar & "*.GIF" & vbNullChar
-  SFILTER = SFILTER & "Adobe Photoshop (*.PSD)" & vbNullChar & "*.PSD" & vbNullChar
-  SFILTER = SFILTER & "Dr. Halo (*.CUT)" & vbNullChar & "*.CUT" & vbNullChar
-  SFILTER = SFILTER & "DirectDraw Surface (*.DDS)" & vbNullChar & "*.DDS" & vbNullChar
-  SFILTER = SFILTER & "High Dynamic Range (*.HDR)" & vbNullChar & "*.HDR" & vbNullChar
-  SFILTER = SFILTER & "Amiga IFF (*.IFF, *.LBM)" & vbNullChar & "*.IFF;*.LBM" & vbNullChar
-  SFILTER = SFILTER & "JPEG Network Graphics (*.JNG)" & vbNullChar & "*.JPG" & vbNullChar
-  SFILTER = SFILTER & "Commodore 64 Koala format (*.KOA)" & vbNullChar & "*.KOA" & vbNullChar
-  SFILTER = SFILTER & "Multiple Network Graphics (*.MNG)" & vbNullChar & "*.MNG" & vbNullChar
-  SFILTER = SFILTER & "Portable Bitmap (ASCII) (*.PBM)" & vbNullChar & "*.PBM" & vbNullChar
-  SFILTER = SFILTER & "Portable Bitmap (BINARY) (*.PBM)" & vbNullChar & "*.OBM" & vbNullChar
-  SFILTER = SFILTER & "Kodak PhotoCD (*.PCD)" & vbNullChar & "*.PCD" & vbNullChar
-  SFILTER = SFILTER & "Portable Graymap (ASCII) (*.PGM)" & vbNullChar & "*.PGM" & vbNullChar
-  SFILTER = SFILTER & "Portable Graymap (BINARY) (*.PGM)" & vbNullChar & "*.PGM" & vbNullChar
-  SFILTER = SFILTER & "Portable Pixelmap (ASCII) (*.PPM)" & vbNullChar & "*.PPM" & vbNullChar
-  SFILTER = SFILTER & "Portable Pixelmap (BINARY) (*.PPM)" & vbNullChar & "*.PPM" & vbNullChar
-  SFILTER = SFILTER & "Sun Rasterfile (*.RAS)" & vbNullChar & "*.RAS" & vbNullChar
-  SFILTER = SFILTER & "Truevision Targa files (*.TGA, *.TARGA)" & vbNullChar & "*.TGA" & vbNullChar
-  SFILTER = SFILTER & "Wireless Bitmap (*.WBMP)" & vbNullChar & "*.WBMP" & vbNullChar
-  SFILTER = SFILTER & "X11 Bitmap Format (*.XBM)" & vbNullChar & "*.XBM" & vbNullChar
-  SFILTER = SFILTER & "X11 Pixmap Format (*.XPM)" & vbNullChar & "*.XPM" & vbNullChar
-  SFILTER = SFILTER & "All Files" & vbNullChar & "*.*"
-  ImgFILTER = SFILTER
+  Dim sFILTER As String
+  sFILTER = "Windows ou OS/2 Bitmap File (*.BMP)" & vbNullChar & "*.BMP" & vbNullChar
+  sFILTER = sFILTER & "Independent JPEG Group (*.JPG, *.JIF, *.JPEG, *.JPE)" & vbNullChar & "*.JPG;*.JIF;*.JPEG;*.JPE" & vbNullChar
+  sFILTER = sFILTER & "Portable Network Graphics (*.PNG)" & vbNullChar & "*.PNG" & vbNullChar
+  sFILTER = sFILTER & "Tagged Imag (*.TIF, *.TIFF)" & vbNullChar & "*.TIF;*.TIFF" & vbNullChar
+  sFILTER = sFILTER & "Zsoft Paintbrush PCX bitmap format (*.PCX)" & vbNullChar & "*.PCX" & vbNullChar
+  sFILTER = sFILTER & "Windows Icon (*.ICO)" & vbNullChar & "*.ICO" & vbNullChar
+  sFILTER = sFILTER & "Graphics Interchange Format (*.GIF)" & vbNullChar & "*.GIF" & vbNullChar
+  sFILTER = sFILTER & "Adobe Photoshop (*.PSD)" & vbNullChar & "*.PSD" & vbNullChar
+  sFILTER = sFILTER & "Dr. Halo (*.CUT)" & vbNullChar & "*.CUT" & vbNullChar
+  sFILTER = sFILTER & "DirectDraw Surface (*.DDS)" & vbNullChar & "*.DDS" & vbNullChar
+  sFILTER = sFILTER & "High Dynamic Range (*.HDR)" & vbNullChar & "*.HDR" & vbNullChar
+  sFILTER = sFILTER & "Amiga IFF (*.IFF, *.LBM)" & vbNullChar & "*.IFF;*.LBM" & vbNullChar
+  sFILTER = sFILTER & "JPEG Network Graphics (*.JNG)" & vbNullChar & "*.JPG" & vbNullChar
+  sFILTER = sFILTER & "Commodore 64 Koala format (*.KOA)" & vbNullChar & "*.KOA" & vbNullChar
+  sFILTER = sFILTER & "Multiple Network Graphics (*.MNG)" & vbNullChar & "*.MNG" & vbNullChar
+  sFILTER = sFILTER & "Portable Bitmap (ASCII) (*.PBM)" & vbNullChar & "*.PBM" & vbNullChar
+  sFILTER = sFILTER & "Portable Bitmap (BINARY) (*.PBM)" & vbNullChar & "*.OBM" & vbNullChar
+  sFILTER = sFILTER & "Kodak PhotoCD (*.PCD)" & vbNullChar & "*.PCD" & vbNullChar
+  sFILTER = sFILTER & "Portable Graymap (ASCII) (*.PGM)" & vbNullChar & "*.PGM" & vbNullChar
+  sFILTER = sFILTER & "Portable Graymap (BINARY) (*.PGM)" & vbNullChar & "*.PGM" & vbNullChar
+  sFILTER = sFILTER & "Portable Pixelmap (ASCII) (*.PPM)" & vbNullChar & "*.PPM" & vbNullChar
+  sFILTER = sFILTER & "Portable Pixelmap (BINARY) (*.PPM)" & vbNullChar & "*.PPM" & vbNullChar
+  sFILTER = sFILTER & "Sun Rasterfile (*.RAS)" & vbNullChar & "*.RAS" & vbNullChar
+  sFILTER = sFILTER & "Truevision Targa files (*.TGA, *.TARGA)" & vbNullChar & "*.TGA" & vbNullChar
+  sFILTER = sFILTER & "Wireless Bitmap (*.WBMP)" & vbNullChar & "*.WBMP" & vbNullChar
+  sFILTER = sFILTER & "X11 Bitmap Format (*.XBM)" & vbNullChar & "*.XBM" & vbNullChar
+  sFILTER = sFILTER & "X11 Pixmap Format (*.XPM)" & vbNullChar & "*.XPM" & vbNullChar
+  sFILTER = sFILTER & "All Files" & vbNullChar & "*.*"
+  ImgFILTER = sFILTER
 End Function
 
 Public Function ImgFILTER2() As String
-  Dim SFILTER As String
-  SFILTER = "Independent JPEG Group (*.JPG, *.JIF, *.JPEG, *.JPE)" & vbNullChar & "*.JPG;*.JIF;*.JPEG;*.JPE" & vbNullChar
-  SFILTER = SFILTER & "Portable Network Graphics (*.PNG)" & vbNullChar & "*.PNG" & vbNullChar
-  SFILTER = SFILTER & "GIF (*.GIF)" & vbNullChar & "*.GIF" & vbNullChar
-  ImgFILTER2 = SFILTER
+  Dim sFILTER As String
+  sFILTER = "Independent JPEG Group (*.JPG, *.JIF, *.JPEG, *.JPE)" & vbNullChar & "*.JPG;*.JIF;*.JPEG;*.JPE" & vbNullChar
+  sFILTER = sFILTER & "Portable Network Graphics (*.PNG)" & vbNullChar & "*.PNG" & vbNullChar
+  sFILTER = sFILTER & "GIF (*.GIF)" & vbNullChar & "*.GIF" & vbNullChar
+  ImgFILTER2 = sFILTER
 End Function
 
 Public Function parsefile(ByVal archivo As String, ByVal parte As String) As String
@@ -1051,4 +1050,11 @@ ErroWrite:
     Set fso = Nothing
     ' Opcional: Se quiser debugar em tempo de desenvolvimento, descomente a linha abaixo:
     ' Debug.Print "Erro FileWrite: " & Err.Description
+End Function
+Public Function GetFullPath(ByVal cPath As String) As String
+    ' Garante que caminhos relativos não falhem em 64-bit
+    Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    GetFullPath = fso.GetAbsolutePathName(cPath)
+    Set fso = Nothing
 End Function

@@ -5,8 +5,8 @@ Begin VB.Form FrmSendMail
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Enviando Email"
    ClientHeight    =   7020
-   ClientLeft      =   45
-   ClientTop       =   315
+   ClientLeft      =   48
+   ClientTop       =   312
    ClientWidth     =   10080
    Icon            =   "frmSendMail.frx":0000
    LinkTopic       =   "Form1"
@@ -17,7 +17,7 @@ Begin VB.Form FrmSendMail
    Begin VB.TextBox txtFromName 
       BeginProperty Font 
          Name            =   "Tahoma"
-         Size            =   8.25
+         Size            =   8.4
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -57,10 +57,10 @@ Begin VB.Form FrmSendMail
       Width           =   1065
    End
    Begin VB.ListBox Lista 
-      Height          =   1035
+      Height          =   1008
       ItemData        =   "frmSendMail.frx":038A
       Left            =   6240
-      List            =   "frmSendMail.frx":0397
+      List            =   "frmSendMail.frx":0391
       TabIndex        =   18
       Top             =   360
       Width           =   1935
@@ -70,7 +70,7 @@ Begin VB.Form FrmSendMail
       Caption         =   "cdo"
       Height          =   615
       Left            =   2040
-      Picture         =   "frmSendMail.frx":03AD
+      Picture         =   "frmSendMail.frx":039A
       Style           =   1  'Graphical
       TabIndex        =   17
       Top             =   6240
@@ -101,8 +101,8 @@ Begin VB.Form FrmSendMail
    Begin MSMAPI.MAPIMessages MAPIMessages1 
       Left            =   8760
       Top             =   6360
-      _ExtentX        =   1005
-      _ExtentY        =   1005
+      _ExtentX        =   974
+      _ExtentY        =   974
       _Version        =   393216
       AddressEditFieldCount=   1
       AddressModifiable=   0   'False
@@ -113,8 +113,8 @@ Begin VB.Form FrmSendMail
    Begin MSMAPI.MAPISession MAPISession1 
       Left            =   8160
       Top             =   6360
-      _ExtentX        =   1005
-      _ExtentY        =   1005
+      _ExtentX        =   974
+      _ExtentY        =   974
       _Version        =   393216
       DownloadMail    =   -1  'True
       LogonUI         =   -1  'True
@@ -125,7 +125,7 @@ Begin VB.Form FrmSendMail
       Caption         =   "Mapl"
       Height          =   615
       Left            =   120
-      Picture         =   "frmSendMail.frx":0737
+      Picture         =   "frmSendMail.frx":0724
       Style           =   1  'Graphical
       TabIndex        =   15
       Top             =   6240
@@ -136,7 +136,7 @@ Begin VB.Form FrmSendMail
       Caption         =   "Shell"
       Height          =   615
       Left            =   1080
-      Picture         =   "frmSendMail.frx":0AC1
+      Picture         =   "frmSendMail.frx":0AAE
       Style           =   1  'Graphical
       TabIndex        =   14
       Top             =   6240
@@ -153,7 +153,7 @@ Begin VB.Form FrmSendMail
       Caption         =   "Limpar Informaçoes"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -217,13 +217,13 @@ Begin VB.Form FrmSendMail
       TabIndex        =   20
       Top             =   240
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmSendMail.frx":0E4B
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "frmSendMail.frx":0E38
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -237,13 +237,13 @@ Begin VB.Form FrmSendMail
       TabIndex        =   21
       Top             =   840
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
-      Picture         =   "frmSendMail.frx":13E5
+      _ExtentX        =   2773
+      _ExtentY        =   656
+      Picture         =   "frmSendMail.frx":13D2
       Caption         =   "EnviarEmail"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -258,12 +258,12 @@ Begin VB.Form FrmSendMail
       TabStop         =   0   'False
       Top             =   1560
       Width           =   855
-      _ExtentX        =   1508
-      _ExtentY        =   450
+      _ExtentX        =   1503
+      _ExtentY        =   445
       Caption         =   "ZIP"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -286,7 +286,7 @@ Begin VB.Form FrmSendMail
       Caption         =   "Password"
       BeginProperty Font 
          Name            =   "Tahoma"
-         Size            =   8.25
+         Size            =   8.4
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -306,7 +306,7 @@ Begin VB.Form FrmSendMail
       Caption         =   "Username"
       BeginProperty Font 
          Name            =   "Tahoma"
-         Size            =   8.25
+         Size            =   8.4
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -401,13 +401,14 @@ Private Sub CmdCancelar_Click()
 End Sub
 Private Sub CmdEnviar_Click()
   Select Case Lista.ListIndex
+ ' mapi e shell estao com problemas de seguranca deixando so cdo
 
-  Case 0
-    mapienviar_Click  ''mapi
-  Case 1
-    shellenviar_Click  ''shell
-  Case 2
-    cdoenviar_Click  ''cdo
+'  Case 0
+'    mapienviar_Click  ''mapi
+'  Case 1
+'    shellenviar_Click  ''shell
+'  Case 2
+ '   cdoenviar_Click  ''cdo
   End Select
 
 End Sub
@@ -416,57 +417,57 @@ Private Sub CmdLimpa_Click()
 End Sub
 
 Private Sub Command9_Click()
-  Dim cORIGEM As String
-  Dim cDESTINO As String
-  cORIGEM = txt_attach.tEXT
-  If InStr(UCase(cORIGEM), ".ZIP") > 0 Then
+  Dim cOrigem As String
+  Dim cDestino As String
+  cOrigem = txt_attach.tEXT
+  If InStr(UCase(cOrigem), ".ZIP") > 0 Then
     Alert ("Ja e um zip")
   Else
-    cDESTINO = TrocaExt(cORIGEM, "ZIP")
+    cDestino = TrocaExt(cOrigem, "ZIP")
     With New cZipArchive
-      .AddFile cORIGEM
-       .CompressArchive cDESTINO
+      .AddFile cOrigem
+       .CompressArchive cDestino
     End With
-    txt_attach.tEXT = cDESTINO
+    txt_attach.tEXT = cDestino
   End If
 
 End Sub
 
-Private Sub shellenviar_Click()
-  If campos_checagem Then
-    SendEmailShell txt_email_to.tEXT, txt_subject.tEXT, txt_message_text.tEXT, txt_attach.tEXT
-  End If
-End Sub
-Private Sub mapienviar_Click()
-  If Not campos_checagem Then
-    Exit Sub
-  End If
-  MAPISession1.LogonUI = True
-  MAPISession1.SignOn
-  MAPIMessages1.sessionID = MAPISession1.sessionID
-  MAPIMessages1.Compose
+'Private Sub shellenviar_Click()
+'  If campos_checagem Then
+'    SendEmailShell txt_email_to.tEXT, txt_subject.tEXT, txt_message_text.tEXT, txt_attach.tEXT
+'  End If
+'End Sub
+'Private Sub mapienviar_Click()
+'  If Not campos_checagem Then
+'    Exit Sub
+'  End If
+'  MAPISession1.LogonUI = True
+'  MAPISession1.SignOn
+'  MAPIMessages1.sessionID = MAPISession1.sessionID
+'  MAPIMessages1.Compose
 
   '////////////////////////////////////////
   '// Informa o email, se enviar para mais de 1 email é separar com(;)e ir informando
   '////////////////////////////////////////
-  MAPIMessages1.RecipIndex = 0
-  MAPIMessages1.RecipAddress = txt_email_to.tEXT
-  MAPIMessages1.RecipType = 1
+ ' MAPIMessages1.RecipIndex = 0
+ ' MAPIMessages1.RecipAddress = txt_email_to.tEXT
+ ' MAPIMessages1.RecipType = 1
 
   '////////////////////////////////////////
   '// Assunto
   '////////////////////////////////////////
-  MAPIMessages1.MsgSubject = txt_subject.tEXT
+  'MAPIMessages1.MsgSubject = txt_subject.tEXT
   '////////////////////////////////////////
   '// Conteudo da mens
   '////////////////////////////////////////
-  MAPIMessages1.MsgNoteText = txt_message_text.tEXT
+  'MAPIMessages1.MsgNoteText = txt_message_text.tEXT
   '////////////////////////////////////////
   '// Informa anexo
   '////////////////////////////////////////
-  MAPIMessages1.AttachmentIndex = 0
-  MAPIMessages1.AttachmentPathName = txt_attach.tEXT
-  MAPIMessages1.AttachmentPosition = 0
+  'MAPIMessages1.AttachmentIndex = 0
+  'MAPIMessages1.AttachmentPathName = txt_attach.tEXT
+  'MAPIMessages1.AttachmentPosition = 0
   '////////////////////////////////////////////////
   '// Se existir outros anexos alterar os valores
   '////////////////////////////////////////////////
@@ -474,9 +475,9 @@ Private Sub mapienviar_Click()
   'MAPIMessages1.AttachmentPathName = app.path & "\Leia.doc"
   'MAPIMessages1.AttachmentPosition = 1
 
-  MAPIMessages1.Send False
-  MAPISession1.SignOff
-End Sub
+  'MAPIMessages1.Send False
+  'MAPISession1.SignOff
+'End Sub
 
 
 Private Sub cdoenviar_Click()

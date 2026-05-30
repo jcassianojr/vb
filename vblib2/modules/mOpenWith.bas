@@ -34,23 +34,33 @@ Public Enum OPEN_AS_INFO_FLAGS
   OAIF_FILE_IS_URI = &H80  'Introduced in Windows 8. The location pointed to by the pcszFile parameter is given as a URI.
 End Enum
 
-Public Type OPENASINFO
-  pcszFile As Long
-  pcszClass As Long  'file type description for registering the type with 'always open', if not set uses extension, as in 'XYZ File'
-  oafInFlags As OPEN_AS_INFO_FLAGS
-End Type
 
 ' Esta funcao abre o openwith do windows deixando escolher qual aplicativos cadastrados para a extensao
 ' nao pode ser trocada por shellexecute pois ela abre o programa padrao para a extensao
 ' Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, clng(Me.hwnd) 'escolhe o aplicativo da extensao
 ' ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , clng(Me.hwnd) 'abre o aplicativo padrao da extensao
 
-#If VBA7 Then
-Public Declare  PtrSafe Function SHOpenWithDialog Lib "shell32" (ByVal hWnd  As LongPtr, poainfo As OPENASINFO) As Long
-Public Declare  PtrSafe Function GetBinaryType Lib "kernel32" Alias "GetBinaryTypeW" (ByVal lpApplicationName  As LongPtr, lpBinaryType  As LongPtr) As Long
+' --- ESTRUTURA DE COMPATIBILIDADE ---
+#If VBA7 Or Win64 Then
+    ' --- VERSÃO 64-BIT / TWINBASIC / VBA7 ---
+    Private Type OPENASINFO
+        pcszFile As LongPtr
+        pcszClass As LongPtr
+        oafInFlags As Long
+    End Type
+
+    Public Declare PtrSafe Function SHOpenWithDialog Lib "shell32.dll" (ByVal hWnd As LongPtr, poainfo As OPENASINFO) As Long
+    Public Declare PtrSafe Function GetBinaryType Lib "kernel32" Alias "GetBinaryTypeW" (ByVal lpApplicationName As LongPtr, ByRef lpBinaryType As Long) As Long
 #Else
-Public Declare Function SHOpenWithDialog Lib "shell32" (ByVal hWnd As Long, poainfo As OPENASINFO) As Long
-Public Declare Function GetBinaryType Lib "kernel32" Alias "GetBinaryTypeW" (ByVal lpApplicationName As Long, lpBinaryType As Long) As Long
+    ' --- VERSÃO 32-BIT CLÁSSICA (VB6) ---
+    Private Type OPENASINFO
+        pcszFile As Long
+        pcszClass As Long
+        oafInFlags As Long
+    End Type
+
+    Public Declare Function SHOpenWithDialog Lib "shell32.dll" (ByVal hwnd As Long, poainfo As OPENASINFO) As Long
+    Public Declare Function GetBinaryType Lib "kernel32" Alias "GetBinaryTypeW" (ByVal lpApplicationName As Long, ByRef lpBinaryType As Long) As Long
 #End If
 
 Public Const SCS_32BIT_BINARY = 0
@@ -63,23 +73,23 @@ Public Const SCS_WOW_BINARY = 2
 
 Public Function OpenWith(sFile As String, lFlags As OPEN_AS_INFO_FLAGS, Optional hWndParent As Long, Optional sClass As String) As Long
   Dim oai As OPENASINFO
-  oai.pcszFile = StrPtr(sFile)
-  oai.oafInFlags = lFlags
-  If sClass <> "" Then oai.pcszClass = CLng(StrPtr(sClass))
-  OpenWith = SHOpenWithDialog(hWndParent, oai)
+75:   oai.pcszFile = StrPtr(sFile)
+76:   oai.oafInFlags = lFlags
+77:   If sClass <> "" Then oai.pcszClass = CLng(StrPtr(sClass))
+78:   OpenWith = SHOpenWithDialog(hWndParent, oai)
 End Function
 
 Public Function IsExecutable(sFile As String) As Boolean
   Dim lType As Long
   Dim hr As Long
 
-  hr = GetBinaryType(StrPtr(sFile), CLng(lType))
-  Debug.Print "hr=" & hr & "; lType=" & lType
-  If hr = 0 Then
-    IsExecutable = False
-  Else
-    IsExecutable = True
-  End If
+85:   hr = GetBinaryType(StrPtr(sFile), CLng(lType))
+86:   Debug.Print "hr=" & hr & "; lType=" & lType
+87:   If hr = 0 Then
+88:     IsExecutable = False
+89:   Else
+90:     IsExecutable = True
+91:   End If
 
 End Function
 Public Sub DisplayOpenWith(strFile As String)
@@ -89,7 +99,7 @@ Public Sub DisplayOpenWith(strFile As String)
 ' e.g., DisplayOpenWith "C:\FileWithNoDefaultApplication.bvq"
 '**************************************
 
-  On Error Resume Next
-  Shell "rundll32.exe shell32.dll, OpenAs_RunDLL " & strFile
+101:   On Error Resume Next
+102:   shell "rundll32.exe shell32.dll, OpenAs_RunDLL " & strFile
 
 End Sub

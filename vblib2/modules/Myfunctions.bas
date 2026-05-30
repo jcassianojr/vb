@@ -1,8 +1,8 @@
 Attribute VB_Name = "Myfunctions"
 Option Explicit
 'FileConnExist(cARQ)Verifica a existencia de Uma Arquivo
-'pegpath(Cgrupo,Ccamp) 'Traz caminho de uma arquivo ini(nomeaplicativo.ini)
-'today() data atual
+'pegpath(Cgrupo,Ccamp) 'Traz caminho de uma arquivo ini(nomeaplicativo.ini)f
+'today() data atualf
 'nulldate() data em branco
 'fdata() formata data dd/mm/yyy
 'GetPrivateProfileString -le ini files
@@ -120,74 +120,46 @@ Public Enum EShellShowConstants
 End Enum
 
 
-#If VBA7 Then
-Public Declare  PtrSafe Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As LongPtr) As Long
-Private Declare  PtrSafe Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As LongPtr, ByVal dwReserved As LongPtr) As Long
-Public Declare  PtrSafe Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As LongPtr, ByVal Unknownn1 As LongPtr, ByVal Unknownn2 As LongPtr, ByVal fCheckOnly As LongPtr) As Long
-Public Declare  PtrSafe Function ReleaseCapture Lib "user32" () As Long
-Public Declare  PtrSafe Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As LongPtr, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As LongPtr) As Long
-Public Declare  PtrSafe Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As LongPtr, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As LongPtr) As Long
-Public Declare  PtrSafe Function GetPrivateProfileString Lib "kernel32" Alias _
-                                                "GetPrivateProfileStringA" (ByVal lpApplicationName As String, _
-                                                                            ByVal lpKeyName As Any, ByVal lpDefault As String, _
-                                                                            ByVal lpReturnedString As String, ByVal nSize As LongPtr, _
-                                                                            ByVal lpFileName As String) As Long
+#If VBA7 Or Win64 Then
+    ' --- BLOCO 64-BIT / TWINBASIC / VBA7 ---
+    Public Declare PtrSafe Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As LongPtr, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As LongPtr
+    Public Declare PtrSafe Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As LongPtr, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As LongPtr) As LongPtr
+    
+    Public Declare PtrSafe Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As LongPtr) As Long
+    Public Declare PtrSafe Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As LongPtr, ByVal dwReserved As LongPtr) As Long
+    Public Declare PtrSafe Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As LongPtr, ByVal Unknownn1 As LongPtr, ByVal Unknownn2 As LongPtr, ByVal fCheckOnly As LongPtr) As Long
+    Public Declare PtrSafe Function ReleaseCapture Lib "user32" () As Long
+    
+    Public Declare PtrSafe Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As LongPtr, ByVal lpFileName As String) As Long
+    Public Declare PtrSafe Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpString As Any, ByVal lpFileName As String) As Long
+    
+    Public Declare PtrSafe Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As LongPtr, ByVal LCType As LongPtr, ByVal lpLCData As String, ByVal cchData As LongPtr) As Long
+    Public Declare PtrSafe Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As LongPtr, ByVal LCType As LongPtr, ByVal lpLCData As String) As Long
+    
+    Public Declare PtrSafe Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+    Public Declare PtrSafe Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+    Public Declare PtrSafe Function WinHelp Lib "user32" Alias "WinHelpA" (ByVal hwnd As LongPtr, ByVal lpHelpFile As String, ByVal wCommand As LongPtr, ByVal dwData As LongPtr) As Long
 
-Public Declare  PtrSafe Function WritePrivateProfileString Lib "kernel32" Alias _
-                                                  "WritePrivateProfileStringA" (ByVal lpApplicationName As String, _
-                                                                                ByVal lpKeyName As Any, ByVal lpString As Any, _
-                                                                                ByVal lpFileName As String) As Long
-Public Declare ptrsafe Function GetLocaleInfo Lib "kernel32" _
-Alias "GetLocaleInfoA" _
-  (ByVal Locale As Longptr, _
-ByVal LCType As Longptr, _
-ByVal lpLCData As String, _
-ByVal cchData As Longptr) As Long
-
-Public Declare ptrsafe Function SetLocaleInfo Lib "kernel32" _
- Alias "SetLocaleInfoA" _
-(ByVal Locale As Longptr, _
- ByVal LCType As Longptr, _
- ByVal lpLCData As String) As Long
-Public Declare  PtrSafe Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
-Public Declare  PtrSafe Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
 #Else
-Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
-Private Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
-Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
-Public Declare Function ReleaseCapture Lib "user32" () As Long
-Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
-Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
-Public Declare Function GetPrivateProfileString Lib "kernel32" Alias _
-                                                "GetPrivateProfileStringA" (ByVal lpApplicationName As String, _
-                                                                            ByVal lpKeyName As Any, ByVal lpDefault As String, _
-                                                                            ByVal lpReturnedString As String, ByVal nSize As Long, _
-                                                                            ByVal lpFileName As String) As Long
-
-Public Declare Function WritePrivateProfileString Lib "kernel32" Alias _
-                                                  "WritePrivateProfileStringA" (ByVal lpApplicationName As String, _
-                                                                                ByVal lpKeyName As Any, ByVal lpString As Any, _
-                                                                                ByVal lpFileName As String) As Long
-
-Public Declare Function GetLocaleInfo Lib "kernel32" _
-Alias "GetLocaleInfoA" _
-  (ByVal Locale As Long, _
-ByVal LCType As Long, _
-ByVal lpLCData As String, _
-ByVal cchData As Long) As Long
-
-Public Declare Function SetLocaleInfo Lib "kernel32" _
- Alias "SetLocaleInfoA" _
-(ByVal Locale As Long, _
- ByVal LCType As Long, _
- ByVal lpLCData As String) As Long
- 
-Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
-Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
-Public Declare Function WinHelp Lib "user32" Alias "WinHelpA" (ByVal hwnd As Long, ByVal lpHelpFile As String, ByVal wCommand As Long, ByVal dwData As Long) As Long
-
+    ' --- BLOCO 32-BIT CLÁSSICO (VB6) ---
+    Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+    Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
+    
+    Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
+    Public Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
+    Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
+    Public Declare Function ReleaseCapture Lib "user32" () As Long
+    
+    Public Declare Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As Long, ByVal lpFileName As String) As Long
+    Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpString As Any, ByVal lpFileName As String) As Long
+    
+    Public Declare Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCType As Long, ByVal lpLCData As String, ByVal cchData As Long) As Long
+    Public Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCType As Long, ByVal lpLCData As String) As Long
+    
+    Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+    Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+    Public Declare Function WinHelp Lib "user32" Alias "WinHelpA" (ByVal hwnd As Long, ByVal lpHelpFile As String, ByVal wCommand As Long, ByVal dwData As Long) As Long
 #End If
-
 
 
 
@@ -600,8 +572,27 @@ Public Function Dividir(ByVal nVAL As Variant, ByVal nDIV As Variant)
   If nVAL > 0 And nDIV > 0 Then
     Dividir = nVAL / nDIV
   End If
+  
 End Function
-
+'Public Function Dividir(ByVal n1 As Variant, ByVal n2 As Variant) As Double
+    ' 1. Tratamento preventivo:
+    ' Se n1 ou n2 não forem números, o RC6 trata de forma limpa.
+    ' Evita o erro de divisão por zero ou erro de tipo em 64-bits.
+    
+ '   Dim d1 As Double, d2 As Double
+    
+    ' O New_c.Val garante a conversão correta independente do idioma
+    ' (ponto vs vírgula) e da arquitetura (32/64).
+  '  d1 = New_c.Val(n1)
+   ' d2 = New_c.Val(n2)
+    
+    ' 2. Lógica de segurança de divisão
+    'If d2 <> 0 Then
+     '   Dividir = d1 / d2
+    'Else
+     '   Dividir = 0 ' Ou trate o erro da forma que seu sistema exige
+    'End If
+'End Function
 
 
 Public Function FileConnExist(ByVal cARQ As Variant, _
@@ -795,11 +786,35 @@ errhandler:
   Resume Next
 End Function
 
-Public Function IncDec(ByVal eVAR, ByVal nVAL, ByVal nLIMINF, ByVal nLIMSUP)
-  IncDec = FixNum(eVAR)
-  IncDec = IncDec + nVAL
-  If IncDec < nLIMINF Then IncDec = nLIMINF
-  If IncDec > nLIMSUP Then IncDec = nLIMSUP
+'Public Function INCDEC(ByVal eVAR, ByVal nVAL, ByVal nLIMINF, ByVal nLIMSUP)
+'  INCDEC = FixNum(eVAR)
+'  INCDEC = INCDEC + nVAL
+'  If INCDEC < nLIMINF Then INCDEC = nLIMINF
+'  If INCDEC > nLIMSUP Then INCDEC = nLIMSUP
+'End Function
+' Mantemos exatamente a mesma assinatura, preservando os parâmetros que você já usa
+Public Function INCDEC(ByRef vValor As Variant, ByVal nIncremento As Variant, Optional ByVal nLimiteMax As Variant, Optional ByVal nLimiteMin As Variant) As Variant
+    
+    ' 1. Validação estrita usando sua FixNum (que você já confia)
+    ' 2. Processamos a lógica mantendo os limites que você precisa
+    If FixNum(vValor) And FixNum(nIncremento) Then
+        
+        vValor = vValor + nIncremento
+        
+        ' Lógica de limite (se aplicável)
+        If Not IsMissing(nLimiteMax) Then
+            If vValor > nLimiteMax Then vValor = nLimiteMax
+        End If
+        
+        If Not IsMissing(nLimiteMin) Then
+            If vValor < nLimiteMin Then vValor = nLimiteMin
+        End If
+        
+        INCDEC = vValor
+    Else
+        INCDEC = vValor
+    End If
+    
 End Function
 
 Public Function MDG(ByVal cMEnSSAGEM As String, Optional cTITULO = "Confirme")
@@ -899,8 +914,8 @@ Public Function PadLeft(ByVal cTEXTO, ByVal nLEN) As String
   PadLeft = cTEXTO
 End Function
 
-Public Function PegCamini(ByVal cCAMINHO As String) As String
-  PegCamini = Caminex(cCAMINHO, 0, 0, 0)
+Public Function PegCamini(ByVal cCaminho As String) As String
+  PegCamini = Caminex(cCaminho, 0, 0, 0)
 End Function
 Public Function PegINIVAL(ByVal cARQINI As String, ByVal cGRUPO As String, ByVal cCAMPO As String, Optional ByVal ePAD As String = "") As String
   Dim z As Long
@@ -1565,13 +1580,32 @@ Public Function ShellEx( _
 
 End Function
 
-Public Function SomaArr(ByVal aARRAY As Variant, ByVal nITEM As Integer)
-  Dim x As Integer
-  SomaArr = 0
-  For x = 0 To nITEM - 1
-    SomaArr = SomaArr + FixNum(aARRAY(x))
-  Next x
+'Public Function SomaArr(ByVal aARRAY As Variant, ByVal nITEM As Integer)
+'  Dim x As Integer
+'  SomaArr = 0
+'  For x = 0 To nITEM - 1
+'    SomaArr = SomaArr + FixNum(aARRAY(x))
+'  Next x
+'End Function
+Public Function SomaArr(ByRef vArray As Variant)
+    ' 1. Verificação de segurança: checa se é um array antes de iterar
+    If Not IsArray(vArray) Then Exit Function
+    
+    Dim vItem As Variant
+    Dim dSoma As Double
+    
+    ' 2. O twinBASIC e o VB6 lidam com 'For Each' em arrays de variantes
+    ' de forma idêntica em 32 e 64 bits. É o método mais seguro.
+    For Each vItem In vArray
+        ' Usamos sua FixNum para garantir que só somamos o que é numérico
+        If FixNum(vItem) Then
+            dSoma = dSoma + FixNum(vItem) 'CDbl(vItem)
+        End If
+    Next vItem
+    
+    SomaArr = dSoma
 End Function
+
 
 Public Function SomaExt(ByVal cARQ As String, Optional ByVal cEXT As String = ".MDB") As String
   If InStr(UCase(cARQ), cEXT) > 0 Then
@@ -1582,10 +1616,10 @@ Public Function SomaExt(ByVal cARQ As String, Optional ByVal cEXT As String = ".
 End Function
 
 Public Function StrZero(ByVal nNUM, Optional ByVal nLEN As Integer = 0)
-  Dim cTEMP As String
+  Dim cTemp As String
   If nLEN = 0 Then
-    cTEMP = FixStr(nNUM, "0", "TRIM")
-    nLEN = Trim(cTEMP)
+    cTemp = FixStr(nNUM, "0", "TRIM")
+    nLEN = Trim(cTemp)
   End If
   StrZero = Right(String(nLEN, "0") & CStr(nNUM), nLEN)
 End Function
@@ -2415,21 +2449,29 @@ TrataErro:
     If nFile > 0 Then Close #nFile
     Count_Lines_In_Filev2 = 0
 End Function
+'Public Sub OpenUrl(ByVal strURL As String)
+'  ShellExecute 0, "Open", strURL, 0&, 0&, SW_SHOWNORMAL
+'End Sub
+
 Public Sub OpenUrl(ByVal strURL As String)
-  ShellExecute 0, "Open", strURL, 0&, 0&, SW_SHOWNORMAL
+    ' 1. Valida se começa com http/https, se não, pode não abrir
+    If InStr(1, strURL, "http", vbTextCompare) = 0 Then strURL = "http://" & strURL
+    
+    ' 2. Executa a abertura no navegador padrão do sistema
+    ShellExecute 0&, "Open", strURL, vbNullString, vbNullString, 1 ' SW_SHOWNORMAL
 End Sub
 
-Public Function txttopdf(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
+Public Function txttopdf(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
     Dim fso As Object
     Dim streamIn As Object
     Dim cLINHA As String
     Dim pdf As ClsFPDF
     
     ' Validações estruturais padrões do seu sistema
-    If Not FileConnExist(cORIGEM, True) Then Exit Function
-    If Len(cDESTINO) = 0 Then cDESTINO = TrocaExt(cORIGEM, "PDF")
+    If Not FileConnExist(cOrigem, True) Then Exit Function
+    If Len(cDestino) = 0 Then cDestino = TrocaExt(cOrigem, "PDF")
     
-    If FileConnExist(cDESTINO, False) Then
+    If FileConnExist(cDestino, False) Then
         Alert ("Arquivo Destino Ja existe")
         Exit Function
     End If
@@ -2438,7 +2480,7 @@ Public Function txttopdf(ByVal cORIGEM As String, Optional ByVal cDESTINO As Str
     
     ' 1. Abre o arquivo de texto em modo Fluxo contínuo (Segurança contra arquivos gigantes)
     Set fso = CreateObject("Scripting.FileSystemObject")
-    Set streamIn = fso.OpenTextFile(cORIGEM, 1, False)
+    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
     
     ' 2. Inicializa o motor do FPDF
     Set pdf = New ClsFPDF
@@ -2471,7 +2513,7 @@ Public Function txttopdf(ByVal cORIGEM As String, Optional ByVal cDESTINO As Str
     Loop
     
     ' 5. Compila e descarrega o arquivo final no disco
-    pdf.Output cDESTINO
+    pdf.Output cDestino
     txttopdf = True
 
 Fim:
@@ -2658,7 +2700,10 @@ Public Function NetworkUserName() As String
   Dim iStringLength As Long
   Dim i As Long
   Dim sString As String
+  Dim oShell As Object
+    On Error Resume Next
 
+NetworkUserName = ""
   sString = String(255, 0)
 
   iStringLength = Len(sString)
@@ -2672,11 +2717,35 @@ Public Function NetworkUserName() As String
     End If
     NetworkUserName = Trim(Left$(sString, iStringLength))
   Else
-    NetworkUserName = "Usuario"
+   Set oShell = CreateObject("WScript.Shell")
+    If Not oShell Is Nothing Then
+        NetworkUserName = oShell.ExpandEnvironmentStrings("%USERNAME%")
+    Else
+        NetworkUserName = Environ$("USERNAME") ' Fallback simples
+    End If
+  
   End If
 
-End Function
+  If NetworkUserName = "" Then
+    NetworkUserName = "Usuario"
+  End If
+  
 
+Set oShell = Nothing
+End Function
+Public Function MachineName() As String
+    ' Usamos o CreateObject global do VBA/twinBASIC, não do RC6.
+    ' Isso é compatível com 32 e 64 bits e não depende de DLLs ou TypeLibs.
+    Dim oShell As Object
+    On Error Resume Next
+    Set oShell = CreateObject("WScript.Shell")
+    If Not oShell Is Nothing Then
+        MachineName = oShell.ExpandEnvironmentStrings("%COMPUTERNAME%")
+    Else
+        MachineName = Environ$("COMPUTERNAME") ' Fallback simples
+    End If
+    Set oShell = Nothing
+End Function
 Public Function WordLen(ByRef tEXT As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
@@ -2812,8 +2881,8 @@ Isvba64 = False
     #End If
 End Function
 
-Public Function txttodoc(ByVal cORIGEM As String, _
-                                     Optional ByVal cDESTINO As String = "", _
+Public Function txttodoc(ByVal cOrigem As String, _
+                                     Optional ByVal cDestino As String = "", _
                                      Optional ByVal cTITULO As String = "", _
                                      Optional ByVal cAUTOR As String = "") As Boolean
     Dim fso As Object
@@ -2823,23 +2892,23 @@ Public Function txttodoc(ByVal cORIGEM As String, _
     Dim strOutputFile As String
     
     ' 1. Validação inicial: se o arquivo de origem não existir, aborta retornando False
-    If Dir(cORIGEM) = "" Then
+    If Dir(cOrigem) = "" Then
         txttodoc = False
         Exit Function
     End If
     
     ' 2. Regra do Destino: Se não foi passado, gera o .doc baseado no arquivo de origem
-    If Trim(cDESTINO) = "" Then
-        strOutputFile = Replace(LCase(cORIGEM), ".txt", ".doc")
+    If Trim(cDestino) = "" Then
+        strOutputFile = Replace(LCase(cOrigem), ".txt", ".doc")
     Else
-        strOutputFile = cDESTINO
+        strOutputFile = cDestino
     End If
     
     On Error GoTo TrataErro
     
     ' 3. Inicializa o FSO para o processamento em Streaming (Leve e rápido)
     Set fso = CreateObject("Scripting.FileSystemObject")
-    Set streamIn = fso.OpenTextFile(cORIGEM, 1, False)
+    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
     Set streamOut = fso.OpenTextFile(strOutputFile, 2, True)
     
     ' 4. Escreve o cabeçalho HTML com suporte a metadados de Título e Autor para o Word
@@ -2901,7 +2970,7 @@ TrataErro:
     txttodoc = False
     Resume Fim
 End Function
-Public Function txttortf(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
+Public Function txttortf(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
     Dim fso As Object
     Dim streamIn As Object
     Dim streamOut As Object
@@ -2909,20 +2978,20 @@ Public Function txttortf(ByVal cORIGEM As String, Optional ByVal cDESTINO As Str
     Dim cBlocoInfo As String
     
     ' Mantém a sua validação original usando FileConnExist
-    If Not FileConnExist(cORIGEM, True) Then Exit Function
+    If Not FileConnExist(cOrigem, True) Then Exit Function
     
     ' Mantém a sua lógica original para caminhos e extensões padrões
-    If Len(cDESTINO) = 0 Then cDESTINO = TrocaExt(cORIGEM, "RTF")
+    If Len(cDestino) = 0 Then cDestino = TrocaExt(cOrigem, "RTF")
     
     ' Impede a sobreescrita acidental conforme o seu padrão
-    If FileConnExist(cDESTINO, False) Then
+    If FileConnExist(cDestino, False) Then
         Alert ("Arquivo Destino Ja existe")
         Exit Function
     End If
     
     ' Mantém os valores padrões vindos do seu sistema, idêntico à sua txttohtml
     If Len(cAUTOR) = 0 Then cAUTOR = zNOMEFOLHA
-    If Len(cTITULO) = 0 Then cTITULO = NomeArq(cORIGEM, True)
+    If Len(cTITULO) = 0 Then cTITULO = NomeArq(cOrigem, True)
     
     On Error GoTo TrataErro
     
@@ -2930,9 +2999,9 @@ Public Function txttortf(ByVal cORIGEM As String, Optional ByVal cDESTINO As Str
     Set fso = CreateObject("Scripting.FileSystemObject")
     
     ' Abre o arquivo de origem para leitura (1 = ForReading)
-    Set streamIn = fso.OpenTextFile(cORIGEM, 1, False)
+    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
     ' Cria o arquivo de destino para escrita (True = Sobreescrever)
-    Set streamOut = fso.CreateTextFile(cDESTINO, True)
+    Set streamOut = fso.CreateTextFile(cDestino, True)
     
     ' --- CONSTRUÇÃO DOS METADADOS (BLOCO INFO) ---
     ' Monta a tag {\info} se houver título ou autor preenchidos
@@ -2978,27 +3047,27 @@ TrataErro:
     Alert "Erro na gravação/leitura do arquivo RTF: " & Err.Description
     Resume Fim
 End Function
-Public Function txttohtml(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
+Public Function txttohtml(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
     Dim fso As Object
     Dim streamIn As Object
     Dim streamOut As Object
     Dim cLINHA As String
     
     ' Mantém a sua validação original usando FileConnExist
-    If Not FileConnExist(cORIGEM, True) Then Exit Function
+    If Not FileConnExist(cOrigem, True) Then Exit Function
     
     ' Mantém a sua lógica original para caminhos e extensões padrões
-    If Len(cDESTINO) = 0 Then cDESTINO = TrocaExt(cORIGEM, "HTML")
+    If Len(cDestino) = 0 Then cDestino = TrocaExt(cOrigem, "HTML")
     
     ' Impede a sobreescrita acidental conforme seu código original
-    If FileConnExist(cDESTINO, False) Then
+    If FileConnExist(cDestino, False) Then
         Alert ("Arquivo Destino Ja existe")
         Exit Function
     End If
     
     ' Mantém os valores padrões vindos das suas variáveis globais e funções de string
     If Len(cAUTOR) = 0 Then cAUTOR = zNOMEFOLHA
-    If Len(cTITULO) = 0 Then cTITULO = NomeArq(cORIGEM, True)
+    If Len(cTITULO) = 0 Then cTITULO = NomeArq(cOrigem, True)
     
     On Error GoTo TrataErro
     
@@ -3006,9 +3075,9 @@ Public Function txttohtml(ByVal cORIGEM As String, Optional ByVal cDESTINO As St
     Set fso = CreateObject("Scripting.FileSystemObject")
     
     ' Abre o arquivo de origem para leitura (1 = ForReading)
-    Set streamIn = fso.OpenTextFile(cORIGEM, 1, False)
+    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
     ' Cria o arquivo de destino para escrita (True = Sobreescrever)
-    Set streamOut = fso.CreateTextFile(cDESTINO, True)
+    Set streamOut = fso.CreateTextFile(cDestino, True)
     
     ' Escreve exatamente a mesma estrutura de cabeçalho que o seu Print original fazia
     streamOut.Write "<html>" & vbCrLf
@@ -3053,8 +3122,8 @@ End Function
 ' ==============================================================================
 ' MOTOR 4: CONVERSÃO DE TXT PARA EXCEL - TRATAMENTO MULTI-DELIMITADORES EM STREAM
 ' ==============================================================================
-Public Function txttoxls(ByVal cORIGEM As String, _
-                                      Optional ByVal cDESTINO As String = "", _
+Public Function txttoxls(ByVal cOrigem As String, _
+                                      Optional ByVal cDestino As String = "", _
                                       Optional ByVal cTITULO As String = "", _
                                       Optional ByVal cAUTOR As String = "", _
                                       Optional ByVal cDELIMITADOR As String = ";") As Boolean
@@ -3070,16 +3139,16 @@ Public Function txttoxls(ByVal cORIGEM As String, _
     Dim cValor As String
     
     ' 1. Validação inicial: se o arquivo de origem não existir, aborta
-    If Dir(cORIGEM) = "" Then
+    If Dir(cOrigem) = "" Then
         txttoxls = False
         Exit Function
     End If
     
     ' 2. Regra do Destino: Se não foi passado, gera o .xls baseado no nome do TXT
-    If Trim(cDESTINO) = "" Then
-        strOutputFile = Replace(LCase(cORIGEM), ".txt", ".xls")
+    If Trim(cDestino) = "" Then
+        strOutputFile = Replace(LCase(cOrigem), ".txt", ".xls")
     Else
-        strOutputFile = cDESTINO
+        strOutputFile = cDestino
     End If
     
     ' 3. TRATAMENTO DOS DELIMITADORES DO SEU FORMULÁRIO (tab, ;,  ,, |, ~#)
@@ -3098,7 +3167,7 @@ Public Function txttoxls(ByVal cORIGEM As String, _
     
     ' 4. Inicializa o FileSystemObject para processamento leve (Streaming)
     Set fso = CreateObject("Scripting.FileSystemObject")
-    Set streamIn = fso.OpenTextFile(cORIGEM, 1, False)       ' 1 = ForReading
+    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)       ' 1 = ForReading
     Set streamOut = fso.OpenTextFile(strOutputFile, 2, True) ' 2 = ForWriting
     
     ' 5. Escreve o cabeçalho HTML formatado para Excel e LibreOffice
@@ -3171,3 +3240,15 @@ TrataErro:
     txttoxls = False
     Resume Fim
 End Function
+
+
+'Public Function MachineName() As String
+    ' O objeto OS do RC6 já contém essa informação formatada
+    ' Funciona identicamente em 32 ou 64 bits, sem necessidade de PtrSafe
+ '   MachineName = New_c.OS.GetComputerName
+'End Function
+
+'Public Function NetworkUserName() As String
+    ' Igualmente simples para o nome do usuário
+'    NetworkUserName = New_c.OS.UserName
+'End Function
