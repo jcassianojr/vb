@@ -11,6 +11,19 @@ Private Const MIIM_ID As Long = &H2&
 Private Const MFS_GRAYED As Long = &H3&
 Private Const WM_NCACTIVATE As Long = &H86
 
+Private Type MENUITEMINFO
+  cbSize As Long
+  fMask As Long
+  fType As Long
+  fState As Long
+  wID As Long
+  hSubMenu As Long
+  hbmpChecked As Long
+  hbmpUnchecked As Long
+  dwItemData As Long
+  dwTypeData As String
+  cch As Long
+End Type
 
 #If (VBA7 = 0) Then
 Private Enum LongPtr
@@ -25,25 +38,19 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
-#If VBA7 Or Win64 Then
-    ' --- ESTRUTURA PARA 64-BIT ---
-    Private Type MENUITEMINFO
-        cbSize As Long
-        fMask As Long
-        fType As Long
-        fState As Long
-        wID As Long
-        hSubMenu As LongPtr
-        hbmpChecked As LongPtr
-        hbmpUnchecked As LongPtr
-        dwItemData As LongPtr
-        dwTypeData As LongPtr
-        cch As Long
-    End Type
 
-    Private Declare PtrSafe Function GetSystemMenu Lib "user32" (ByVal hWnd As LongPtr, ByVal bRevert As Long) As LongPtr
-    Private Declare PtrSafe Function GetMenuItemInfo Lib "user32" Alias "GetMenuItemInfoA" (ByVal hMenu As LongPtr, ByVal uItem As Long, ByVal fByPosition As Long, lpmii As MENUITEMINFO) As Long
-    Private Declare PtrSafe Function SetMenuItemInfo Lib "user32" Alias "SetMenuItemInfoA" (ByVal hMenu As LongPtr, ByVal uItem As Long, ByVal fByPosition As Long, lpmii As MENUITEMINFO) As Long
+#If VBA7 Or Win64 Then
+Private Declare  PtrSafe Function GetSystemMenu Lib "user32" ( _
+                                       ByVal hWnd As LongPtr, ByVal bRevert As LongPtr) As Long
+
+Private Declare  PtrSafe Function GetMenuItemInfo Lib "user32" Alias _
+                                         "GetMenuItemInfoA" (ByVal hMenu As LongPtr, ByVal un As LongPtr, _
+                                                             ByVal B As Boolean, lpMenuItemInfo As MENUITEMINFO) As Long
+
+Private Declare  PtrSafe Function SetMenuItemInfo Lib "user32" Alias _
+                                         "SetMenuItemInfoA" (ByVal hMenu As LongPtr, ByVal un As LongPtr, _
+                                                             ByVal bool As Boolean, lpcMenuItemInfo As MENUITEMINFO) As Long
+
 Private Declare  PtrSafe Function SendMessage Lib "user32" Alias _
                                      "SendMessageA" (ByVal hWnd As LongPtr, ByVal wMsg As LongPtr, _
                                                      ByVal wParam As LongPtr, lParam As Any) As Long
@@ -51,35 +58,28 @@ Private Declare  PtrSafe Function SendMessage Lib "user32" Alias _
 Private Declare  PtrSafe Function IsWindow Lib "user32" _
                                   (ByVal hWnd As LongPtr) As Long
 
-#Else
-    ' --- ESTRUTURA PARA 32-BIT (VB6) ---
-    Private Type MENUITEMINFO
-        cbSize As Long
-        fMask As Long
-        fType As Long
-        fState As Long
-        wID As Long
-        hSubMenu As Long
-        hbmpChecked As Long
-        hbmpUnchecked As Long
-        dwItemData As Long
-        dwTypeData As Long
-        cch As Long
-    End Type
 
-    Private Declare Function GetSystemMenu Lib "user32" (ByVal hWnd As Long, ByVal bRevert As Long) As Long
-    Private Declare Function GetMenuItemInfo Lib "user32" Alias "GetMenuItemInfoA" (ByVal hMenu As Long, ByVal uItem As Long, ByVal fByPosition As Long, lpmii As MENUITEMINFO) As Long
-    Private Declare Function SetMenuItemInfo Lib "user32" Alias "SetMenuItemInfoA" (ByVal hMenu As Long, ByVal uItem As Long, ByVal fByPosition As Long, lpmii As MENUITEMINFO) As Long
+#Else
+Private Declare Function GetSystemMenu Lib "user32" ( _
+                                       ByVal hwnd As Long, ByVal bRevert As Long) As Long
+
+Private Declare Function GetMenuItemInfo Lib "user32" Alias _
+                                         "GetMenuItemInfoA" (ByVal hMenu As Long, ByVal un As Long, _
+                                                             ByVal B As Boolean, lpMenuItemInfo As MENUITEMINFO) As Long
+
+Private Declare Function SetMenuItemInfo Lib "user32" Alias _
+                                         "SetMenuItemInfoA" (ByVal hMenu As Long, ByVal un As Long, _
+                                                             ByVal bool As Boolean, lpcMenuItemInfo As MENUITEMINFO) As Long
+
 Private Declare Function SendMessage Lib "user32" Alias _
-                                     "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, _
+                                     "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, _
                                                      ByVal wParam As Long, lParam As Any) As Long
 
 Private Declare Function IsWindow Lib "user32" _
-                                  (ByVal hWnd As Long) As Long
-
-#End If
-
-                                 
+                                  (ByVal hwnd As Long) As Long
+ #End If
+                                  
+                                  
 
 '*******************************************************************************
 ' Enables / Disables the close button on the titlebar and in the system menu
@@ -129,71 +129,71 @@ Private Declare Function IsWindow Lib "user32" _
 '
 '-------------------------------------------------------------------------------
 
-Public Function EnableCloseButton(ByVal hWnd As Long, Enable As Boolean) _
+Public Function EnableCloseButton(ByVal hwnd As Long, Enable As Boolean) _
        As Integer
   Const xSC_CLOSE As Long = -10
 
   ' Check that the window handle passed is valid
 
-  EnableCloseButton = -1
-  If IsWindow(hWnd) = 0 Then Exit Function
+137:   EnableCloseButton = -1
+138:   If IsWindow(hwnd) = 0 Then Exit Function
 
   ' Retrieve a handle to the window's system menu
 
   Dim hMenu As Long
-  hMenu = GetSystemMenu(hWnd, 0)
+143:   hMenu = GetSystemMenu(hwnd, 0)
 
   ' Retrieve the menu item information for the close menu item/button
 
   Dim MII As MENUITEMINFO
-  MII.cbSize = Len(MII)
-  MII.dwTypeData = String(80, 0)
-  MII.cch = Len(MII.dwTypeData)
-  MII.fMask = MIIM_STATE
+148:   MII.cbSize = Len(MII)
+149:   MII.dwTypeData = String(80, 0)
+150:   MII.cch = Len(MII.dwTypeData)
+151:   MII.fMask = MIIM_STATE
 
-  If Enable Then
-    MII.wID = xSC_CLOSE
-  Else
-    MII.wID = SC_CLOSE
-  End If
+153:   If Enable Then
+154:     MII.wID = xSC_CLOSE
+155:   Else
+156:     MII.wID = SC_CLOSE
+157:   End If
 
-  EnableCloseButton = -0
-  If GetMenuItemInfo(hMenu, MII.wID, False, MII) = 0 Then Exit Function
+159:   EnableCloseButton = -0
+160:   If GetMenuItemInfo(hMenu, MII.wID, False, MII) = 0 Then Exit Function
 
   ' Switch the ID of the menu item so that VB can not undo the action itself
 
   Dim lngMenuID As Long
-  lngMenuID = MII.wID
+165:   lngMenuID = MII.wID
 
-  If Enable Then
-    MII.wID = SC_CLOSE
-  Else
-    MII.wID = xSC_CLOSE
-  End If
+167:   If Enable Then
+168:     MII.wID = SC_CLOSE
+169:   Else
+170:     MII.wID = xSC_CLOSE
+171:   End If
 
-  MII.fMask = MIIM_ID
-  EnableCloseButton = -2
-  If SetMenuItemInfo(hMenu, lngMenuID, False, MII) = 0 Then Exit Function
+173:   MII.fMask = MIIM_ID
+174:   EnableCloseButton = -2
+175:   If SetMenuItemInfo(hMenu, lngMenuID, False, MII) = 0 Then Exit Function
 
   ' Set the enabled / disabled state of the menu item
 
-  If Enable Then
-    MII.fState = (MII.fState Or MFS_GRAYED)
-    MII.fState = MII.fState - MFS_GRAYED
-  Else
-    MII.fState = (MII.fState Or MFS_GRAYED)
-  End If
+179:   If Enable Then
+180:     MII.fState = (MII.fState Or MFS_GRAYED)
+181:     MII.fState = MII.fState - MFS_GRAYED
+182:   Else
+183:     MII.fState = (MII.fState Or MFS_GRAYED)
+184:   End If
 
-  MII.fMask = MIIM_STATE
-  EnableCloseButton = -3
-  If SetMenuItemInfo(hMenu, MII.wID, False, MII) = 0 Then Exit Function
+186:   MII.fMask = MIIM_STATE
+187:   EnableCloseButton = -3
+188:   If SetMenuItemInfo(hMenu, MII.wID, False, MII) = 0 Then Exit Function
 
   ' Activate the non-client area of the window to update the titlebar, and
   ' draw the close button in its new state.
 
-  SendMessage hWnd, WM_NCACTIVATE, True, 0
+193:   SendMessage hwnd, WM_NCACTIVATE, True, 0
 
-  EnableCloseButton = 0
+195:   EnableCloseButton = 0
 
 End Function
 

@@ -208,7 +208,7 @@ End Function
 
 Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = "", _
                          Optional ByVal cPASS As String = "", Optional ByVal lWRITE As Boolean = True, _
-                         Optional ByVal cDATABASE As String = "", Optional ByVal cowner As String = "", Optional cPADTIPOCON As String = "P") As Variant
+                         Optional ByVal cDATABASE As String = "", Optional ByVal cowner As String = "", Optional cPADTIPOCON As String = "N") As Variant
   Dim cARQTMP As String
   Dim cJETUSO As String
   Dim lTEMMDB As Boolean
@@ -380,11 +380,11 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
       If Trim(cPASS) <> "" Then cAuth = cAuth & ";PWD=" & cPASS
 
       Select Case UCase(cPADTIPOCON)
-         Case "D"
+         Case "D", "N"
             ' Driver ODBC geralmente usa UID e PWD
             cARQ = "Driver={SQLite3 ODBC Driver};Database=" & cARQ & cAuth & ";"
             
-         Case "P", "N" ' Case Else tratado aqui para simplificar
+         Case "P" ' Case Else tratado aqui para simplificar
             ' Provider OLEDB pode variar, mas segue a lógica comum de user/password
             cARQ = "Provider=SQLite3OLEDB.1;Data Source=" & cARQ & IIf(cAuth <> "", ";" & Mid(cAuth, 2), "") & ";"
       End Select
