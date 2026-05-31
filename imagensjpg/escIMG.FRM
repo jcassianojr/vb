@@ -4,15 +4,15 @@ Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escIMG 
    Caption         =   "Escolha o Codigo da Imagem"
-   ClientHeight    =   6675
+   ClientHeight    =   6672
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   9945
+   ClientTop       =   348
+   ClientWidth     =   9948
    HelpContextID   =   1001
    Icon            =   "escIMG.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6675
-   ScaleWidth      =   9945
+   ScaleHeight     =   6672
+   ScaleWidth      =   9948
    StartUpPosition =   3  'Windows Default
    Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5655
@@ -20,17 +20,17 @@ Begin VB.Form escIMG
       TabIndex        =   11
       Top             =   120
       Width           =   7575
-      _ExtentX        =   13361
-      _ExtentY        =   9975
+      _ExtentX        =   13356
+      _ExtentY        =   9970
    End
    Begin vbExtra.FlexFn FlexFn1 
-      Height          =   405
+      Height          =   396
       Left            =   8040
       TabIndex        =   10
       Top             =   120
-      Width           =   1725
-      _ExtentX        =   3043
-      _ExtentY        =   714
+      Width           =   1680
+      _ExtentX        =   2963
+      _ExtentY        =   699
       PageNumbersFormat=   ""
       PageNumbersFormatIndex=   0
       BeginProperty PageNumbersFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -54,7 +54,7 @@ Begin VB.Form escIMG
       Caption         =   "Exportar Todas Imagens jpg"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -68,12 +68,12 @@ Begin VB.Form escIMG
       TabIndex        =   1
       Top             =   6000
       Width           =   7575
-      _ExtentX        =   13361
-      _ExtentY        =   661
+      _ExtentX        =   13356
+      _ExtentY        =   656
       Text            =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -88,13 +88,13 @@ Begin VB.Form escIMG
       TabIndex        =   2
       Top             =   4320
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "escIMG.frx":058A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -108,13 +108,13 @@ Begin VB.Form escIMG
       TabIndex        =   3
       Top             =   2640
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "escIMG.frx":0B24
       Caption         =   "Localizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -128,13 +128,13 @@ Begin VB.Form escIMG
       TabIndex        =   5
       Top             =   3600
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "escIMG.frx":10BE
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -148,13 +148,13 @@ Begin VB.Form escIMG
       TabIndex        =   6
       Top             =   3120
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "escIMG.frx":1658
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -168,13 +168,13 @@ Begin VB.Form escIMG
       TabIndex        =   7
       Top             =   6000
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "escIMG.frx":1BF2
       Caption         =   "Abrir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -188,13 +188,13 @@ Begin VB.Form escIMG
       TabIndex        =   8
       Top             =   720
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "escIMG.frx":218C
       Caption         =   "Novo"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -208,13 +208,13 @@ Begin VB.Form escIMG
       TabIndex        =   9
       Top             =   1200
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "escIMG.frx":2726
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -228,13 +228,13 @@ Begin VB.Form escIMG
       TabIndex        =   4
       Top             =   1920
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "escIMG.frx":2CC0
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -261,12 +261,12 @@ Dim cBASEDADOS As String
 
 Private Sub Apaga_Click()
 ' Dim eRESP As Variant
-  Dim SQL As String
+  Dim sql As String
   Dim ZGRP As String
   Grid.Col = 0
   ZGRP = Grid
-  SQL = "select * from IMAGENS WHERE CODIGO='" & ZGRP & "'"
-  If ApagaSQLP(cARQRTF, SQL) Then
+  sql = "select * from IMAGENS WHERE CODIGO='" & ZGRP & "'"
+  If ApagaSQLP(cARQRTF, sql) Then
     FilRelat
   End If
 End Sub
@@ -464,7 +464,7 @@ Private Sub Form_Load()
  If InStr(LCase(cARQRTF), ".sqlite") > 0 Or InStr(LCase(cARQRTF), ".sqlite3") > 0 _
                  Or InStr(LCase(cARQRTF), ".fossil") > 0 Or InStr(LCase(cARQRTF), ".db3") > 0 _
                  Or (InStr(LCase(cARQRTF), ".db") > 0) Then
-     If IsSQLiteDriverInstalled() Then
+     If IsDriverInstalled("SQLite3 ODBC Driver") Then
        ' MsgBox "O driver SQLite ODBC está pronto para uso!", vbInformation
      Else
         MsgBox "Driver SQLite ODBC não encontrado. Por favor, instale o driver para continuar.", vbCritical

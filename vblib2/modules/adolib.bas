@@ -208,7 +208,7 @@ End Function
 
 Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = "", _
                          Optional ByVal cPASS As String = "", Optional ByVal lWRITE As Boolean = True, _
-                         Optional ByVal cDATABASE As String = "", Optional ByVal cowner As String = "", Optional cPADTIPOCON = "P") As Variant
+                         Optional ByVal cDATABASE As String = "", Optional ByVal cowner As String = "", Optional cPADTIPOCON As String = "P") As Variant
   Dim cARQTMP As String
   Dim cJETUSO As String
   Dim lTEMMDB As Boolean
@@ -1496,12 +1496,12 @@ Public Function ExtrairNomeTabela(ByVal cSQL As String) As String
     nPosOrder = InStr(nPosFrom, cTemp, " ORDER BY ")
     
     ' Define o fim do nome da tabela (o menor valor entre os delimitadores)
-    Dim nFim As Long
-    nFim = Len(cTemp)
+    Dim nFIM As Long
+    nFIM = Len(cTemp)
     
-    If nPosWhere > 0 And nPosWhere < nFim Then nFim = nPosWhere
-    If nPosOrder > 0 And nPosOrder < nFim Then nFim = nPosOrder
+    If nPosWhere > 0 And nPosWhere < nFIM Then nFIM = nPosWhere
+    If nPosOrder > 0 And nPosOrder < nFIM Then nFIM = nPosOrder
     
     ' Extrai e limpa o nome da tabela
-    ExtrairNomeTabela = Trim(Mid(cSQL, nPosFrom - 1, nFim - nPosFrom + 1))
+    ExtrairNomeTabela = Trim(Mid(cSQL, nPosFrom - 1, nFIM - nPosFrom + 1))
 End Function

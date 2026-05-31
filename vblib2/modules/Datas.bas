@@ -54,7 +54,7 @@ Public Function DataBranco(ByVal eVAR As Variant) As Boolean
   End If
 End Function
 Public Function Fdata(ByVal Data As Variant, _
-                      Optional ByVal cTipoData = "", _
+                      Optional ByVal cTipoData As String = "", _
                       Optional ByVal ePAD As Variant, _
                       Optional ByVal cTipoDataNull As String = "", _
                       Optional ByVal cMASCARA As String = "dd/mm/yyyy") As Variant
