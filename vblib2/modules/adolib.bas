@@ -408,9 +408,11 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   
 
             Select Case UCase(cPADTIPOCON)
-                    Case "D": cARQ = "Driver={MariaDB ODBC 3.2 Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
+      '       cARQ = "DRIVER={MariaDB ODBC 3.2 Driver};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PASSWORD=" + cPASS + ";"
+      
+            
+                    Case "D", "N": cARQ = "Driver={MariaDB ODBC 3.2 Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
                     Case "P": cARQ = "Provider=MSDASQL;Data Source=" & aCONN(3) & ";User Id=" & cUSER & ";Password=" & cPASS & ";"
-                    Case Else: cARQ = "Provider=MSDASQL;Driver={MariaDB ODBC 3.2 Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
             End Select
          End If
      TipoConn = Array("ADO", cARQ, "MARIADB")
@@ -436,10 +438,12 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
                cUSER = "root"
             End If
     
+ '           cARQ = "DRIVER={Microsoft ODBC For Oracle};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PWD=" + cPASS + ";"
+ 
             Select Case UCase(cPADTIPOCON)
+                    Case "N": cARQ = "DRIVER={Microsoft ODBC For Oracle};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PWD=" + cPASS + ";"
                     Case "D": cARQ = "Driver={Oracle in OraClient11g_home1};Dbq=" & aCONN(0) & ";Uid=" & cUSER & ";Pwd=" & cPASS & cDefSchema
                     Case "P": cARQ = "Provider=OraOLEDB.Oracle;Data Source=" & aCONN(0) & ";User Id=" & cUSER & ";Password=" & cPASS & cDefSchema
-                    Case Else: cARQ = "Provider=MSDASQL;Driver={Oracle in OraClient11g_home1};Dbq=" & aCONN(0) & ";Uid=" & cUSER & ";Pwd=" & cPASS & cDefSchema
             End Select
 
 
@@ -471,10 +475,10 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
                cUSER = "root"
             End If
 
+    '  cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"     '32 driver versao 8
             Select Case UCase(cPADTIPOCON)
-                    Case "D": cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
+                    Case "D", "N": cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
                     Case "P": cARQ = "Provider=MySQLProv;Data Source=" & aCONN(0) & ";User Id=" & cUSER & ";Password=" & cPASS & ";"
-                    Case Else: cARQ = "Provider=MSDASQL;Driver={MySQL ODBC 8.0 ANSI Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
                 End Select
 
          End If
@@ -496,11 +500,10 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
             End If
             Dim cSchema As String
                 cSchema = IIf(Trim(cowner) <> "", ";SearchPath=" & cowner, "")
-                
+        '        cARQ = "Driver={PostgreSQL ANSI};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"
                 Select Case UCase(cPADTIPOCON)
-                    Case "D": cARQ = "Driver={PostgreSQL Unicode};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";UID=" & cUSER & ";PWD=" & cPASS & cSchema
+                    Case "D", "N": cARQ = "Driver={PostgreSQL ANSI};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";UID=" & cUSER & ";PWD=" & cPASS & cSchema
                     Case "P": cARQ = "Provider=PostgreSQLOLEDBSample;Data Source=" & aCONN(0) & ";Initial Catalog=" & cARQ & ";User ID=" & cUSER & ";Password=" & cPASS & cSchema
-                    Case Else: cARQ = "Driver={PostgreSQL Unicode};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";UID=" & cUSER & ";PWD=" & cPASS & cSchema
                 End Select
 
       '    cARQ = "Driver={PostgreSQL ANSI};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=postgres;Pwd=admin;"
@@ -517,12 +520,10 @@ If lTEMFIREBIRD Then
     TipoConn = Array("ADO", cARQ, "FIREBIRD")
     
     Select Case UCase(cPADTIPOCON)
-        Case "D" ' Driver
+        Case "D", "N" ' Driver
             cARQ = "Driver={Firebird/InterBase driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
         Case "P" ' Provider
             cARQ = "Provider=LCPI.IBProvider;Location=" & cARQ & ";User ID=" & cUSER & ";Password=" & cPASS & ";"
-        Case Else ' Normal (N)
-            cARQ = "Provider=MSDASQL;Driver={Firebird/InterBase driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
     End Select
     
     
@@ -580,11 +581,11 @@ End If
             cAuth = IIf(Trim(cUSER) <> "", ";UID=" & cUSER, "") & IIf(Trim(cPASS) <> "", ";PWD=" & cPASS, "")
         
             Select Case UCase(cPADTIPOCON)
-                Case "D"
+                Case "D", "N"
                     cARQ = "Driver={" & GetBestMSSQL("D") & "};Server=" & aCONN(0) & ";Database=" & cARQ & cAuth & ";"
                 Case "P"
                     cARQ = "Provider=" & GetBestMSSQL("P") & ";Data Source=" & aCONN(0) & ";Initial Catalog=" & aCONN(3) & cAuth & ";"
-                Case Else ' N: Escolhe o melhor entre Provider (P) e Driver (D)
+                Case Else
                     Dim cMelhorP As String
                     cMelhorP = GetBestMSSQL("P")
                     If cMelhorP <> "" Then
