@@ -73,7 +73,7 @@ cbSize As Long
 dwMajor As Long
 dwMinor As Long
 dwBuildNumber As Long
-dwPlatformID As Long
+dwPlatformId As Long
 End Type
 #If VBA7 Then
 Private Declare PtrSafe Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByRef Destination As Any, ByRef Source As Any, ByVal Length As Long)

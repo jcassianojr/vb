@@ -1,18 +1,17 @@
 Attribute VB_Name = "checagem"
 Option Explicit
 
+
 Public Function CNPJ_Novo(ByVal pCNPJ As String) As Boolean
-
-  Dim lResult As Boolean
-  Dim soma As Integer
-  Dim dv As String
-  Dim digito As Integer
-  Dim num As Integer
-  Dim wCGC
-  Dim i As Integer
-  Dim J As Integer
-  Dim Validos As String
-
+    Dim lResult As Boolean
+    Dim soma As Integer
+    Dim dv As String
+    Dim digito As Integer
+    Dim num As Integer
+    Dim wCGC As String
+    Dim i As Integer
+    Dim J As Integer
+    Dim Validos As String
 
   lResult = True
   soma = 0
@@ -151,45 +150,45 @@ Public Function FormataTelfon2(ByVal cNUMERO As String) As String
   End If
 End Function
 
-Public Function FormataRG(ByVal valor As String) As String
+Public Function FormataRG(ByVal Valor As String) As String
   Dim nPOS As String
   Dim cDAC As String
-  FormataRG = FixStr(valor)
+  FormataRG = FixStr(Valor)
   cDAC = ""
-  If InStr(UCase(valor), "ISENT") > 0 Or InStr(UCase(valor), "RIC") > 0 Or InStr(UCase(valor), "RNE") > 0 Then
+  If InStr(UCase(Valor), "ISENT") > 0 Or InStr(UCase(Valor), "RIC") > 0 Or InStr(UCase(Valor), "RNE") > 0 Then
     Exit Function
   End If
-  If InStr(UCase(valor), "CPF") > 0 Then
-    valor = Replace(valor, "CPF", "")
+  If InStr(UCase(Valor), "CPF") > 0 Then
+    Valor = Replace(Valor, "CPF", "")
   End If
-  If CheckCPF(valor, False) Then
+  If CheckCPF(Valor, False) Then
     Exit Function
   End If
-  valor = Trim(valor)
-  nPOS = InStr(valor, "-")
+  Valor = Trim(Valor)
+  nPOS = InStr(Valor, "-")
   If nPOS = 0 Then
-    valor = TiraOut(valor)
-    valor = Trim(valor)
-    If Len(valor) >= 9 Then
-      cDAC = Mid(valor, 9, 1)
+    Valor = TiraOut(Valor)
+    Valor = Trim(Valor)
+    If Len(Valor) >= 9 Then
+      cDAC = Mid(Valor, 9, 1)
     End If
   Else
-    cDAC = Mid(valor, nPOS + 1, 1)
-    valor = Mid(valor, 1, nPOS - 1)
+    cDAC = Mid(Valor, nPOS + 1, 1)
+    Valor = Mid(Valor, 1, nPOS - 1)
     If cDAC = "x" Then cDAC = "X"
     If cDAC <> "X" Then                      ''evita erros como -- -. -/ caracter inves de numero no dac
       cDAC = funNumeroPuro(cDAC)
     End If
   End If
-  valor = funNumeroPuro(valor)
-  Select Case Len(valor)
+  Valor = funNumeroPuro(Valor)
+  Select Case Len(Valor)
     ''Case Is >= 8 ric=11
   Case 8
-    FormataRG = Trim(Mid(valor, 1, 2) + "." + Mid(valor, 3, 3) + "." + Mid(valor, 6))
+    FormataRG = Trim(Mid(Valor, 1, 2) + "." + Mid(Valor, 3, 3) + "." + Mid(Valor, 6))
   Case 7
-    FormataRG = Trim(Mid(valor, 1, 1) + "." + Mid(valor, 2, 3) + "." + Mid(valor, 5))
+    FormataRG = Trim(Mid(Valor, 1, 1) + "." + Mid(Valor, 2, 3) + "." + Mid(Valor, 5))
   Case Else
-    FormataRG = valor
+    FormataRG = Valor
   End Select
   If cDAC <> "" Then
     FormataRG = FormataRG & "-" & cDAC
@@ -318,7 +317,7 @@ End Function
 
 Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optional lMES As Boolean = True, Optional cUF As String = "") As Boolean
 ''cTIPO= M-Matriz F-Filial X-Nao Checar nao mais usado a matriz pode ser diferente 0001 agora
-  Dim X As Integer
+  Dim x As Integer
   Dim aUF As Variant
 
   CheckCNPJ = False
@@ -349,12 +348,12 @@ Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optio
   End If
 
 
-  For X = 0 To 14
-    If cCGC = String(14, CStr(X)) Then
-      If lMES Then Alert ("CNPJ Invalido - Sequencia Repetitiva de " + Str(X))
+  For x = 0 To 14
+    If cCGC = String(14, CStr(x)) Then
+      If lMES Then Alert ("CNPJ Invalido - Sequencia Repetitiva de " + Str(x))
       Exit Function
     End If
-  Next X
+  Next x
 
 
   If Left(funNumeroPuro(cCGC), 8) = "99999997" Then
@@ -515,7 +514,7 @@ Function FormataCPF(ByVal pCPF As String) As String
 End Function
 
 Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean = True) As Boolean
-  Dim X As Integer
+  Dim x As Integer
   Dim P1 As String
   CheckCPF = False
   P1 = Trim(TiraOut(xCPF))
@@ -532,12 +531,12 @@ Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean =
     Exit Function
   End If
 
-  For X = 0 To 9
-    If P1 = String(11, CStr(X)) Then
-      If lMES Then Alert ("CPF Invalido - Sequencia Repetitiva de " + Str(X))
+  For x = 0 To 9
+    If P1 = String(11, CStr(x)) Then
+      If lMES Then Alert ("CPF Invalido - Sequencia Repetitiva de " + Str(x))
       Exit Function
     End If
-  Next X
+  Next x
   If Mod11(P1, 10, 10) Then
     If Mod11(P1, 11, 11) Then
       CheckCPF = True
@@ -559,7 +558,7 @@ Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As
   Dim xrdig As String
   Dim y1 As Integer
   Dim dv_base As String
-  Dim X As Integer
+  Dim x As Integer
   Dim y2 As Integer
   Dim dv_p2 As String
   Dim tam_chave As Integer
@@ -580,9 +579,9 @@ Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As
   y1 = 0
   dv_base = "8923456789"
   y1 = 0
-  For X = 1 To tam_chave
-    dv_d3 = Val(Mid(dv_p1, X, 1))
-    y1 = y1 + (dv_d3 * Val(Mid(dv_base, X, 1)))
+  For x = 1 To tam_chave
+    dv_d3 = Val(Mid(dv_p1, x, 1))
+    y1 = y1 + (dv_d3 * Val(Mid(dv_base, x, 1)))
     ''y2 = mod(y1,11)
     y2 = y1 Mod 11
   Next
@@ -683,7 +682,7 @@ Function ValiText(KeyIN As Integer, Optional ByVal eTipo As String = "#N", _
   ValiText = KeyOut
 End Function
 
-Public Function CheckRG(ByVal valor As String, Optional ByVal lMES As Boolean = True) As Boolean
+Public Function CheckRG(ByVal Valor As String, Optional ByVal lMES As Boolean = True) As Boolean
   Dim n1 As Integer
   Dim n2 As Integer
   Dim n3 As Integer
@@ -705,25 +704,25 @@ Public Function CheckRG(ByVal valor As String, Optional ByVal lMES As Boolean = 
   ZNERRO = 0
 
   CheckRG = True
-  If valor = "ISENT" Or InStr(valor, "RNE") Or InStr(valor, "RIC") > 0 Then  'isento ou registro nacional de estrangeiro RIC(outra formula checagem)
+  If Valor = "ISENT" Or InStr(Valor, "RNE") Or InStr(Valor, "RIC") > 0 Then  'isento ou registro nacional de estrangeiro RIC(outra formula checagem)
     Exit Function
   End If
-  If Len(valor) = 0 Then
+  If Len(Valor) = 0 Then
     Exit Function
   End If
-  If CheckCPF(valor, False) Then
+  If CheckCPF(Valor, False) Then
     Exit Function
   End If
-  valor = Replace(valor, ".", "")  'tiraout tambem tira - nao pode ser usada
-  nPOS = InStr(valor, "-")
+  Valor = Replace(Valor, ".", "")  'tiraout tambem tira - nao pode ser usada
+  nPOS = InStr(Valor, "-")
   If nPOS = 0 Then
     cDAC = " "
   Else
-    cDAC = Mid(valor, nPOS + 1, 1)
-    valor = Mid(valor, 1, nPOS - 1)
+    cDAC = Mid(Valor, nPOS + 1, 1)
+    Valor = Mid(Valor, 1, nPOS - 1)
   End If
-  valor = Str(Val(valor))
-  If Len(Trim(valor)) <= 7 Then
+  Valor = Str(Val(Valor))
+  If Len(Trim(Valor)) <= 7 Then
     CheckRG = False
     ZERRO = "RG com Menos de 7 Digitos"
     ZNERRO = 3
@@ -732,15 +731,15 @@ Public Function CheckRG(ByVal valor As String, Optional ByVal lMES As Boolean = 
     End If
     Exit Function
   End If
-  valor = StrZero(Val(valor), 8)
-  n1 = Val(Mid(valor, 1, 1)) * 9
-  n2 = Val(Mid(valor, 2, 1)) * 8
-  n3 = Val(Mid(valor, 3, 1)) * 7
-  n4 = Val(Mid(valor, 4, 1)) * 6
-  n5 = Val(Mid(valor, 5, 1)) * 5
-  n6 = Val(Mid(valor, 6, 1)) * 4
-  n7 = Val(Mid(valor, 7, 1)) * 3
-  n8 = Val(Mid(valor, 8, 1)) * 2
+  Valor = StrZero(Val(Valor), 8)
+  n1 = Val(Mid(Valor, 1, 1)) * 9
+  n2 = Val(Mid(Valor, 2, 1)) * 8
+  n3 = Val(Mid(Valor, 3, 1)) * 7
+  n4 = Val(Mid(Valor, 4, 1)) * 6
+  n5 = Val(Mid(Valor, 5, 1)) * 5
+  n6 = Val(Mid(Valor, 6, 1)) * 4
+  n7 = Val(Mid(Valor, 7, 1)) * 3
+  n8 = Val(Mid(Valor, 8, 1)) * 2
   soma = n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8
   D = soma Mod 11
   If cDAC = "X" Or cDAC = "x" Or cDAC = " " Then
@@ -820,7 +819,7 @@ Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
   Case "CNPJ", "CGC"                           '' 11.222.333/4444-55 18 digitos
     nTAM = 18
   End Select
-  nLEN = Len(Trim(FixStr(Screen.ActiveControl.Text)))
+  nLEN = Len(Trim(FixStr(Screen.ActiveControl.tEXT)))
   If KeyAscii <> 8 And nLEN >= nTAM And _
      KeyAscii <> 13 And Screen.ActiveControl.SelStart > 0 _
      And Screen.ActiveControl.SelLength = 0 Then
@@ -844,16 +843,16 @@ Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
         End If
       End If
       If nLEN = 2 Or (nLEN = 5 And eTipo = "HORAL") Then
-        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "."
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "."
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
       End If
 
     Case "PLACA"                             ''traco na posicao 4
       If nLEN = 3 Then
-        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
         nLEN = nLEN + 1
       End If
       If nLEN < 3 Then
@@ -877,48 +876,48 @@ Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
         End If
       End If
       If nLEN = 2 Or nLEN = 5 Then
-        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "/"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "/"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
       End If
     Case "CEP"                               ''traco na posicao 6
       If nLEN = 5 Then
-        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
       End If
     Case "TEL"                               ''traco na posicao 5
       If nLEN = 4 Then
-        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
       End If
     Case "CPF", "CIC"                        ''ponto 4 e 8
       If nLEN = 3 Or nLEN = 7 Then
-        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "."
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "."
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
       End If
       If nLEN = 11 Then                    ''TRaco na 12
-        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
       End If
     Case "CNPJ", "CGC"                       ''ponto 3 e 7
       If nLEN = 2 Or nLEN = 6 Then
-        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "."
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "."
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
       End If
       If nLEN = 10 Then                    ''barra na 11
-        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "/"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "/"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
       End If
       If nLEN = 15 Then                    ''TRaco na 16
-        Screen.ActiveControl.Text = Screen.ActiveControl.Text & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.Text) + 1
+        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
+        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
       End If
     End Select
   End If
@@ -1023,7 +1022,7 @@ Public Function CheckCTA(ByVal cBANCO As Variant, ByVal cAGENCIA As Variant, ByV
   Dim eTOt As Long
   Dim nFIM As Integer
   Dim nINI As Integer
-  Dim X As Integer
+  Dim x As Integer
   Dim nRES As Integer
   eTOt = 0
   cBANCO = StrZero(FixInt(cBANCO), 3)
@@ -1073,10 +1072,10 @@ Public Function CheckCTA(ByVal cBANCO As Variant, ByVal cAGENCIA As Variant, ByV
     nFIM = Len(cCONTA)
     nINI = nFIM
     nFIM = nFIM - 1
-    For X = 1 To nFIM
-      eTOt = eTOt + nINI * Val(Mid(cCONTA, X, 1))
+    For x = 1 To nFIM
+      eTOt = eTOt + nINI * Val(Mid(cCONTA, x, 1))
       nINI = nINI - 1
-    Next X
+    Next x
     nRES = eTOt Mod 11
     nRES = 11 - nRES
     nRES = IIf(nRES = 10, "P", StrZero(nRES, 1))
@@ -1104,17 +1103,17 @@ Public Function DAC10(ByVal Arg1)
   Dim ninicio As Integer
   Dim ntotal As Integer
   Dim ccpoaux As String
-  Dim X As Integer
+  Dim x As Integer
   ninicio = Len(Trim(Arg1)) + 1
   ntotal = 0
   If (ninicio < 2) Then
     ninicio = 2
   End If
   ccpoaux = "0" + Trim(Arg1)
-  For X = ninicio To 1 Step -2
-    cNUMERO = Mid(ccpoaux, X, 1)
+  For x = ninicio To 1 Step -2
+    cNUMERO = Mid(ccpoaux, x, 1)
     ntotal = ntotal + InStr("516273849", cNUMERO)
-    ntotal = ntotal + Val(Mid(ccpoaux, X - 1, 1))
+    ntotal = ntotal + Val(Mid(ccpoaux, x - 1, 1))
   Next
   DAC10 = Trim(Str(InStr("987654321", Mid(StrZero(ntotal, 3), 3, 1))))
 End Function
@@ -1197,7 +1196,7 @@ Public Function Ano_Bissexto(ByVal AnoPass As Integer) As Boolean
   End If
 End Function
 
-Public Function CheckTitulo(ByVal S As String, Optional ByVal lMES As Boolean = True) As Boolean
+Public Function CheckTitulo(ByVal s As String, Optional ByVal lMES As Boolean = True) As Boolean
   Dim DV1 As Integer
   Dim DV2 As Integer
   Dim i As Integer
@@ -1207,11 +1206,11 @@ Public Function CheckTitulo(ByVal S As String, Optional ByVal lMES As Boolean = 
 
   Numero = ""
 
-  For i = Len(S) To 12
+  For i = Len(s) To 12
     Numero = Numero + "0"
   Next
 
-  Numero = Numero + S
+  Numero = Numero + s
   CheckTitulo = False
 
   DV1 = ((CInt(Mid(Numero, 1, 1)) * 2) + _
@@ -1458,18 +1457,18 @@ Public Function checkcep(ByVal cCEP As String, Optional ByVal lMES As Boolean = 
   checkcep = True
 End Function
 
-Public Function FormataIE(ByVal valor As String, ByVal cUF As String, Optional ByVal cPESSOA As String = "J") As String
+Public Function FormataIE(ByVal Valor As String, ByVal cUF As String, Optional ByVal cPESSOA As String = "J") As String
   Dim cMASK As String
-  valor = FixStr(valor, "")
-  FormataIE = valor
+  Valor = FixStr(Valor, "")
+  FormataIE = Valor
   cMASK = ""
-  If valor = "ISENTO" Or valor = "00000000000000" Then
+  If Valor = "ISENTO" Or Valor = "00000000000000" Then
     Exit Function
   End If
   If cPESSOA = "F" Then
     Exit Function
   End If
-  If Len(valor) = 0 Then
+  If Len(Valor) = 0 Then
     Exit Function
   End If
   If cUF = "EX" Or cUF = "XX" Then
@@ -1537,9 +1536,9 @@ Public Function FormataIE(ByVal valor As String, ByVal cUF As String, Optional B
 
 
   If Len(cMASK) > 0 Then
-    valor = funNumeroPuro(valor)
-    valor = Format(valor, cMASK)
-    FormataIE = Replace(valor, "|", ".")
+    Valor = funNumeroPuro(Valor)
+    Valor = Format(Valor, cMASK)
+    FormataIE = Replace(Valor, "|", ".")
   End If
 End Function
 
@@ -1553,12 +1552,12 @@ Public Function FeriadoMovel(pdatPesquisa As Date) As Boolean
   Dim E As Integer
   Dim F As Integer
   Dim G As Integer
-  Dim H As Integer
+  Dim h As Integer
   Dim i As Integer
-  Dim K As Integer
+  Dim k As Integer
   Dim L As Integer
   Dim m As Integer
-  Dim P As Integer
+  Dim p As Integer
   Dim Q As Integer
   FeriadoMovel = False
   ano = Year(pdatPesquisa)
@@ -1569,14 +1568,14 @@ Public Function FeriadoMovel(pdatPesquisa As Date) As Boolean
   E = (B Mod 4)
   F = Int((B + 8) / 25)
   G = Int((B - F + 1) / 3)
-  H = ((19 * A + B - D - G + 15) Mod 30)
+  h = ((19 * A + B - D - G + 15) Mod 30)
   i = Int(C / 4)
-  K = (C Mod 4)
-  L = ((32 + 2 * E + 2 * i - H - K) Mod 7)
-  m = Int((A + 11 * H + 22 * L) / 451)
-  P = Int((H + L - 7 * m + 114) / 31)
-  Q = ((H + L - 7 * m + 114) Mod 31)
-  datData = Format(Str(Q + 1) & "/" & Str(P) & "/" & Str(ano), "dd/mm/yyyy")
+  k = (C Mod 4)
+  L = ((32 + 2 * E + 2 * i - h - k) Mod 7)
+  m = Int((A + 11 * h + 22 * L) / 451)
+  p = Int((h + L - 7 * m + 114) / 31)
+  Q = ((h + L - 7 * m + 114) Mod 31)
+  datData = Format(Str(Q + 1) & "/" & Str(p) & "/" & Str(ano), "dd/mm/yyyy")
   If pdatPesquisa = datData Then
     '+ Pascoa
     FeriadoMovel = True
@@ -1697,7 +1696,7 @@ End Function
 Function checkCEI(ByVal pCEI As String) As Boolean
   Dim nTot As Byte
   Dim cAux As String
-  Dim lret As Boolean
+  Dim lRet As Boolean
   Dim i As Byte
   Dim pNu_cei As String
 
@@ -1707,7 +1706,7 @@ Function checkCEI(ByVal pCEI As String) As Boolean
 
   nTot = 0
   cAux = ""
-  lret = True
+  lRet = True
   i = 0
   pNu_cei = ""
 
@@ -1724,9 +1723,9 @@ Function checkCEI(ByVal pCEI As String) As Boolean
   cAux = Right$(Str(nTot), 2)
   nTot = Val(Left$(cAux, 1)) + Val(Right$(cAux, 1))
   nTot = IIf(nTot > 9, 0, 10 - nTot)
-  lret = IIf(Val(Right$(pNu_cei, 1)) = nTot, True, False)
+  lRet = IIf(Val(Right$(pNu_cei, 1)) = nTot, True, False)
 
-  If lret = False Then
+  If lRet = False Then
     MsgBox "Codigo CEI incorreto - Tecle <Enter>"
   Else
     checkCEI = True
