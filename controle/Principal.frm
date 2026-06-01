@@ -12,11 +12,13 @@ Begin VB.MDIForm frmPRINCIPAL
    Icon            =   "Principal.frx":0000
    StartUpPosition =   2  'CenterScreen
    WindowState     =   2  'Maximized
-   Begin VBCCR18.ImageList Imgmenu 
+   Begin VBCCR18.ImageList Imgmenunew 
       Left            =   2040
       Top             =   840
       _ExtentX        =   804
       _ExtentY        =   804
+      ImageWidth      =   16
+      ImageHeight     =   16
       InitListImages  =   "Principal.frx":058A
    End
    Begin BSPrinter.PrintPreview PrintPreview1 
@@ -45,6 +47,216 @@ Begin VB.MDIForm frmPRINCIPAL
       _ExtentX        =   19198
       _ExtentY        =   656
       InitPanels      =   "Principal.frx":05AA
+   End
+   Begin MSComctlLib.ImageList ImgMenu 
+      Left            =   3600
+      Top             =   1440
+      _ExtentX        =   995
+      _ExtentY        =   995
+      BackColor       =   -2147483643
+      ImageWidth      =   16
+      ImageHeight     =   16
+      MaskColor       =   12632256
+      _Version        =   393216
+      BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
+         NumListImages   =   49
+         BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":0C3E
+            Key             =   "center"
+         EndProperty
+         BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":0FD8
+            Key             =   "justificado"
+         EndProperty
+         BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":1372
+            Key             =   "left"
+         EndProperty
+         BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":170C
+            Key             =   "right"
+         EndProperty
+         BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":1AA6
+            Key             =   "Bold"
+         EndProperty
+         BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":1E40
+            Key             =   "copy"
+         EndProperty
+         BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":23DA
+            Key             =   "cut"
+         EndProperty
+         BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":2774
+            Key             =   "diahora"
+         EndProperty
+         BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":2B0E
+            Key             =   "editor"
+         EndProperty
+         BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":30A8
+            Key             =   "find"
+         EndProperty
+         BeginProperty ListImage11 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":3442
+            Key             =   "marcado"
+         EndProperty
+         BeginProperty ListImage12 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":359C
+            Key             =   "letra01"
+         EndProperty
+         BeginProperty ListImage13 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":3936
+            Key             =   "tamanho"
+         EndProperty
+         BeginProperty ListImage14 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":3CD0
+            Key             =   "paragro"
+         EndProperty
+         BeginProperty ListImage15 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":406A
+            Key             =   "decrese"
+         EndProperty
+         BeginProperty ListImage16 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":4404
+            Key             =   "incrise"
+         EndProperty
+         BeginProperty ListImage17 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":479E
+            Key             =   "imagem"
+         EndProperty
+         BeginProperty ListImage18 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":4B38
+            Key             =   "italico"
+         EndProperty
+         BeginProperty ListImage19 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":4ED2
+            Key             =   "s_Key19"
+         EndProperty
+         BeginProperty ListImage20 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":526C
+            Key             =   "mail"
+         EndProperty
+         BeginProperty ListImage21 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":5806
+            Key             =   "new"
+         EndProperty
+         BeginProperty ListImage22 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":5BA0
+            Key             =   "open"
+         EndProperty
+         BeginProperty ListImage23 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":613A
+            Key             =   "xxx"
+         EndProperty
+         BeginProperty ListImage24 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":64D4
+            Key             =   "imagem2"
+         EndProperty
+         BeginProperty ListImage25 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":686E
+            Key             =   "colar"
+         EndProperty
+         BeginProperty ListImage26 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":6E08
+            Key             =   "printer"
+         EndProperty
+         BeginProperty ListImage27 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":73A2
+            Key             =   "printcfg"
+         EndProperty
+         BeginProperty ListImage28 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":773C
+            Key             =   "sair"
+         EndProperty
+         BeginProperty ListImage29 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":7AD6
+            Key             =   "salvar"
+         EndProperty
+         BeginProperty ListImage30 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":7E70
+            Key             =   "busca"
+         EndProperty
+         BeginProperty ListImage31 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":820A
+            Key             =   "proximabusca"
+         EndProperty
+         BeginProperty ListImage32 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":85A4
+            Key             =   "letra"
+         EndProperty
+         BeginProperty ListImage33 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":893E
+            Key             =   "abc"
+         EndProperty
+         BeginProperty ListImage34 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":8CD8
+            Key             =   "riscado"
+         EndProperty
+         BeginProperty ListImage35 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":9072
+            Key             =   "sub"
+         EndProperty
+         BeginProperty ListImage36 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":940C
+            Key             =   "sob"
+         EndProperty
+         BeginProperty ListImage37 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":97A6
+            Key             =   "minusculas"
+         EndProperty
+         BeginProperty ListImage38 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":9B40
+            Key             =   "maisculas"
+         EndProperty
+         BeginProperty ListImage39 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":9EDA
+            Key             =   "underline"
+         EndProperty
+         BeginProperty ListImage40 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":A274
+            Key             =   "refazer"
+         EndProperty
+         BeginProperty ListImage41 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":A60E
+            Key             =   "info"
+         EndProperty
+         BeginProperty ListImage42 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":ABA8
+            Key             =   "exit"
+         EndProperty
+         BeginProperty ListImage43 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":B142
+            Key             =   "calc"
+         EndProperty
+         BeginProperty ListImage44 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":B6DC
+            Key             =   "menusa"
+         EndProperty
+         BeginProperty ListImage45 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":BA76
+            Key             =   "usuerchave"
+         EndProperty
+         BeginProperty ListImage46 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":BE10
+            Key             =   "odbcinfo"
+         EndProperty
+         BeginProperty ListImage47 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":BF6A
+            Key             =   "todo"
+         EndProperty
+         BeginProperty ListImage48 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":C404
+            Key             =   "lampada"
+         EndProperty
+         BeginProperty ListImage49 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "Principal.frx":C89E
+            Key             =   "user"
+         EndProperty
+      EndProperty
    End
    Begin VB.Menu mnuMENU 
       Caption         =   "&Tabelas"
@@ -143,7 +355,7 @@ Private Sub MDIForm_Load()
   Dim carqhelp As String
 
 
-  StatusBar1.Panels(5).text = ""
+  StatusBar1.Panels(5).Text = ""
 
   'CopiarImageList ImgMenuold, Imgmenu
 
@@ -272,7 +484,7 @@ Private Sub MDIForm_Load()
   rs.Close
   DB.Close
 
-  StatusBar1.Panels(6).text = zUSER
+  StatusBar1.Panels(6).Text = zUSER
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If
@@ -343,15 +555,15 @@ Private Sub mnuSUBMENU2_Click(Index As Integer)
     escDes.Show vbModal
   Case 7
     ZENGTIP = "DES"
-    ESCCLI.Show vbModal
+    escCLI.Show vbModal
   Case 8
-    ESCpro.Show vbModal
+    escPRO.Show vbModal
   Case 9
     iPPAP = 3
     escPPAP.Show vbModal
   Case 10
     ZENGTIP = "PRO"
-    ESCCLI.Show vbModal
+    escCLI.Show vbModal
   Case 11
     zPFTIPO = "POA"
     Sdb = PegPath("PATH", "POA")
@@ -670,8 +882,8 @@ End Sub
 
 Public Sub CopiarImageList(Origem, Destino)
     Dim i As Long
-    Dim pic As StdPicture
-    Dim chave As String
+    Dim Pic As StdPicture
+    Dim Chave As String
     
     ' Limpa o destino antes de copiar (opcional)
     Destino.ListImages.Clear
@@ -679,12 +891,12 @@ Public Sub CopiarImageList(Origem, Destino)
     ' Loop por todos os ícones da origem
     For i = 1 To Origem.ListImages.Count
         ' Pega a imagem da origem
-        Set pic = Origem.ListImages(i).Picture
-        chave = Origem.ListImages(i).Key
+        Set Pic = Origem.ListImages(i).Picture
+        Chave = Origem.ListImages(i).Key
         
         ' Adiciona ao vbCCR.ImageList
         ' O vbCCR.ImageList é muito mais flexível com formatos de imagem
-        Destino.ListImages.Add , chave, pic
+        Destino.ListImages.Add , Chave, Pic
     Next i
     
     MsgBox "Cópia concluída! " & Destino.ListImages.Count & " ícones migrados.", vbInformation
