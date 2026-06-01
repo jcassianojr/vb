@@ -1,17 +1,16 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form Form1 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "DBFix 1.0"
-   ClientHeight    =   4710
-   ClientLeft      =   45
-   ClientTop       =   330
-   ClientWidth     =   9420
+   ClientHeight    =   4704
+   ClientLeft      =   48
+   ClientTop       =   336
+   ClientWidth     =   10356
    BeginProperty Font 
       Name            =   "Arial"
-      Size            =   8.25
+      Size            =   8.4
       Charset         =   0
       Weight          =   700
       Underline       =   0   'False
@@ -21,70 +20,40 @@ Begin VB.Form Form1
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   4710
-   ScaleWidth      =   9420
+   ScaleHeight     =   4704
+   ScaleWidth      =   10356
    StartUpPosition =   2  'CenterScreen
-   Begin XPControls.XPButton cmdCompare 
-      Height          =   375
-      Left            =   5520
-      TabIndex        =   8
-      Top             =   1920
-      Width           =   3375
-      _ExtentX        =   0
-      _ExtentY        =   0
-      Caption         =   "Compare &Database with Schema"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Arial"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton cmdCreate 
-      Height          =   375
-      Left            =   5520
-      TabIndex        =   7
-      Top             =   1440
-      Width           =   3375
-      _ExtentX        =   0
-      _ExtentY        =   0
-      Caption         =   "&Create Master Schema Database"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Arial"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton Command2 
-      Height          =   375
-      Left            =   5520
-      TabIndex        =   5
+   Begin VBCCR18.CommandButtonW Command2 
+      Height          =   372
+      Left            =   6000
+      TabIndex        =   6
       Top             =   960
-      Width           =   3375
-      _ExtentX        =   0
-      _ExtentY        =   0
+      Width           =   3252
+      _ExtentX        =   5736
+      _ExtentY        =   656
       Caption         =   "&Fix Corrupt Database"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Arial"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+   End
+   Begin VBCCR18.CommandButtonW Command1 
+      Height          =   492
+      Left            =   8520
+      TabIndex        =   5
+      Top             =   360
+      Width           =   852
+      _ExtentX        =   1503
+      _ExtentY        =   868
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      Picture         =   "Form1.frx":058A
+      PictureAndCaption=   -1  'True
+      Style           =   1
    End
    Begin VB.TextBox Text2 
       BeginProperty Font 
          Name            =   "Courier New"
-         Size            =   8.25
+         Size            =   8.4
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -96,9 +65,9 @@ Begin VB.Form Form1
       Locked          =   -1  'True
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Both
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   960
-      Width           =   5055
+      Width           =   5652
    End
    Begin VB.CheckBox chkNoMods 
       Caption         =   "Do not modify database"
@@ -110,10 +79,10 @@ Begin VB.Form Form1
       Width           =   2295
    End
    Begin VB.TextBox Text1 
-      Height          =   315
+      Height          =   432
       Left            =   240
       TabIndex        =   1
-      Top             =   480
+      Top             =   360
       Width           =   8100
    End
    Begin VBCCR18.ProgressBar PB1 
@@ -121,45 +90,45 @@ Begin VB.Form Form1
       Left            =   240
       Top             =   3120
       Width           =   8895
-      _ExtentX        =   15690
-      _ExtentY        =   873
+      _ExtentX        =   15685
+      _ExtentY        =   868
       Step            =   10
-      Text            =   "Form1.frx":058A
+      Text            =   "Form1.frx":0B24
    End
    Begin vbExtra.CommonDialogEx CDL1 
-      Left            =   8880
-      Top             =   120
-      _ExtentX        =   900
-      _ExtentY        =   900
+      Left            =   8640
+      Top             =   2400
+      _ExtentX        =   720
+      _ExtentY        =   720
       MaxFileSize     =   255
       FontName        =   ""
    End
-   Begin XPControls.XPButton Command1 
-      Height          =   405
-      Left            =   8400
-      TabIndex        =   3
-      Top             =   480
-      Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   714
-      Picture         =   "Form1.frx":05BE
-      Caption         =   ""
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+   Begin VBCCR18.CommandButtonW cmdCreate 
+      Height          =   372
+      Left            =   6000
+      TabIndex        =   7
+      Top             =   1440
+      Width           =   3252
+      _ExtentX        =   5736
+      _ExtentY        =   656
+      Caption         =   "&Create Master Schema Database"
+   End
+   Begin VBCCR18.CommandButtonW cmdCompare 
+      Height          =   372
+      Left            =   6000
+      TabIndex        =   8
+      Top             =   1920
+      Width           =   3252
+      _ExtentX        =   5736
+      _ExtentY        =   656
+      Caption         =   "Compare &Database with Schema"
    End
    Begin VB.Label lblStatus 
       BackStyle       =   0  'Transparent
       Caption         =   "..."
       BeginProperty Font 
          Name            =   "Arial"
-         Size            =   9.75
+         Size            =   9.6
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -169,7 +138,7 @@ Begin VB.Form Form1
       ForeColor       =   &H000000C0&
       Height          =   375
       Left            =   240
-      TabIndex        =   6
+      TabIndex        =   4
       Top             =   3720
       Width           =   8895
    End
@@ -230,7 +199,7 @@ Private Declare  PtrSafe Function GetDiskFreeSpace Lib "kernel32" Alias "GetDisk
 Private Declare Function GetDriveType Lib "kernel32" Alias "GetDriveTypeA" (ByVal nDrive As String) As Long
 
 Private Declare Function ShellExecute Lib "shell32.dll" Alias _
-                                      "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation _
+                                      "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation _
                                                                            As String, ByVal lpFile As String, ByVal lpParameters _
                                                                                                               As String, ByVal lpDirectory As String, ByVal nShowCmd _
                                                                                                                                                       As Long) As Long
@@ -281,7 +250,7 @@ Private Sub cmdCreate_Click()
     CDL1.DefaultExt = "mdb"
     CDL1.InitDir = sPath
     CDL1.Filter = "Microsoft Access (*.mdb)|*.mdb|All Files (*.*)|*.*"
-    CDL1.FileName = S
+    CDL1.filename = S
     CDL1.CancelError = True
     CDL1.ShowSave
     If Err.Number Then  'Cancel selected
@@ -291,7 +260,7 @@ Private Sub cmdCreate_Click()
 
 
 
-    sSchemaDB = CDL1.FileName
+    sSchemaDB = CDL1.filename
 
     If LCase(Right(sSchemaDB, 11)) <> "_schema.mdb" Then
       MsgBox "The master schema database name must end with '_schema.mdb'.", vbExclamation
@@ -721,7 +690,7 @@ If iMode = 0 Then
    CDL1.DefaultExt = "mdb"
    CDL1.InitDir = sPath
    CDL1.Filter = "Microsoft Access (*.mdb)|*.mdb|All Files (*.*)|*.*"
-   CDL1.FileName = S
+   CDL1.filename = S
 
    CDL1.ShowOpen
 
@@ -729,12 +698,12 @@ If iMode = 0 Then
       Exit Sub
    End If
 
-   If LCase(Right(CDL1.FileName, 11)) <> "_schema.mdb" Then
+   If LCase(Right(CDL1.filename, 11)) <> "_schema.mdb" Then
       MsgBox "The master schema database name must end with '_schema.mdb'.", vbExclamation
       Exit Sub
    End If
 
-   sSchemaDB = CDL1.FileName
+   sSchemaDB = CDL1.filename
 
 ElseIf FileExists(sSchemaDB) = False Then
    If iMode = 2 Then
@@ -1565,6 +1534,7 @@ Private Sub Form_Load()
 
   On Error Resume Next
   CenterFormToScreen Me
+
 
   Me.Caption = App.Title & " " & App.Major & "." & App.Minor & "." & App.Revision
   Text1.Text = ""
