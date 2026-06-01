@@ -1,6 +1,5 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{20C62CAE-15DA-101B-B9A8-444553540000}#1.1#0"; "MSMAPI32.OCX"
 Begin VB.Form FrmSendMail 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Enviando Email"
@@ -26,7 +25,7 @@ Begin VB.Form FrmSendMail
       EndProperty
       Height          =   315
       Left            =   1200
-      TabIndex        =   28
+      TabIndex        =   23
       Top             =   120
       Width           =   4815
    End
@@ -35,14 +34,14 @@ Begin VB.Form FrmSendMail
       IMEMode         =   3  'DISABLE
       Left            =   5280
       PasswordChar    =   "*"
-      TabIndex        =   26
+      TabIndex        =   21
       Top             =   5040
       Width           =   1800
    End
    Begin VB.TextBox txtUsername 
       Height          =   300
       Left            =   2520
-      TabIndex        =   24
+      TabIndex        =   19
       Top             =   5040
       Width           =   1800
    End
@@ -52,29 +51,9 @@ Begin VB.Form FrmSendMail
       ForeColor       =   &H00C00000&
       Height          =   315
       Left            =   240
-      TabIndex        =   22
+      TabIndex        =   17
       Top             =   5040
       Width           =   1065
-   End
-   Begin VB.ListBox Lista 
-      Height          =   1008
-      ItemData        =   "frmSendMail.frx":038A
-      Left            =   6240
-      List            =   "frmSendMail.frx":0391
-      TabIndex        =   18
-      Top             =   360
-      Width           =   1935
-   End
-   Begin VB.CommandButton cdoenviar 
-      BackColor       =   &H00C0FFFF&
-      Caption         =   "cdo"
-      Height          =   615
-      Left            =   2040
-      Picture         =   "frmSendMail.frx":039A
-      Style           =   1  'Graphical
-      TabIndex        =   17
-      Top             =   6240
-      Width           =   855
    End
    Begin VB.TextBox txt_status 
       Appearance      =   0  'Flat
@@ -83,7 +62,7 @@ Begin VB.Form FrmSendMail
       Locked          =   -1  'True
       MultiLine       =   -1  'True
       ScrollBars      =   2  'Vertical
-      TabIndex        =   16
+      TabIndex        =   14
       TabStop         =   0   'False
       Top             =   5520
       Width           =   7515
@@ -97,50 +76,6 @@ Begin VB.Form FrmSendMail
       TabIndex        =   5
       Top             =   1920
       Width           =   9615
-   End
-   Begin MSMAPI.MAPIMessages MAPIMessages1 
-      Left            =   8760
-      Top             =   6360
-      _ExtentX        =   974
-      _ExtentY        =   974
-      _Version        =   393216
-      AddressEditFieldCount=   1
-      AddressModifiable=   0   'False
-      AddressResolveUI=   0   'False
-      FetchSorted     =   0   'False
-      FetchUnreadOnly =   0   'False
-   End
-   Begin MSMAPI.MAPISession MAPISession1 
-      Left            =   8160
-      Top             =   6360
-      _ExtentX        =   974
-      _ExtentY        =   974
-      _Version        =   393216
-      DownloadMail    =   -1  'True
-      LogonUI         =   -1  'True
-      NewSession      =   0   'False
-   End
-   Begin VB.CommandButton mapienviar 
-      BackColor       =   &H00C0FFFF&
-      Caption         =   "Mapl"
-      Height          =   615
-      Left            =   120
-      Picture         =   "frmSendMail.frx":0724
-      Style           =   1  'Graphical
-      TabIndex        =   15
-      Top             =   6240
-      Width           =   855
-   End
-   Begin VB.CommandButton shellenviar 
-      BackColor       =   &H00C0FFFF&
-      Caption         =   "Shell"
-      Height          =   615
-      Left            =   1080
-      Picture         =   "frmSendMail.frx":0AAE
-      Style           =   1  'Graphical
-      TabIndex        =   14
-      Top             =   6240
-      Width           =   855
    End
    Begin XPControls.XPButton CmdLimpa 
       Height          =   615
@@ -214,12 +149,12 @@ Begin VB.Form FrmSendMail
    Begin XPControls.XPButton CmdCancelar 
       Height          =   435
       Left            =   8280
-      TabIndex        =   20
+      TabIndex        =   15
       Top             =   240
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "frmSendMail.frx":0E38
+      Picture         =   "frmSendMail.frx":038A
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -234,12 +169,12 @@ Begin VB.Form FrmSendMail
    Begin XPControls.XPButton CmdEnviar 
       Height          =   375
       Left            =   8280
-      TabIndex        =   21
+      TabIndex        =   16
       Top             =   840
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   656
-      Picture         =   "frmSendMail.frx":13D2
+      Picture         =   "frmSendMail.frx":0924
       Caption         =   "EnviarEmail"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -254,7 +189,7 @@ Begin VB.Form FrmSendMail
    Begin XPControls.XPButton Command9 
       Height          =   255
       Left            =   6240
-      TabIndex        =   29
+      TabIndex        =   24
       TabStop         =   0   'False
       Top             =   1560
       Width           =   855
@@ -277,7 +212,7 @@ Begin VB.Form FrmSendMail
       ForeColor       =   &H00C00000&
       Height          =   195
       Left            =   0
-      TabIndex        =   27
+      TabIndex        =   22
       Top             =   120
       Width           =   1005
    End
@@ -297,7 +232,7 @@ Begin VB.Form FrmSendMail
       Height          =   195
       Index           =   6
       Left            =   4440
-      TabIndex        =   25
+      TabIndex        =   20
       Top             =   5040
       Width           =   690
    End
@@ -317,17 +252,9 @@ Begin VB.Form FrmSendMail
       Height          =   195
       Index           =   5
       Left            =   1680
-      TabIndex        =   23
+      TabIndex        =   18
       Top             =   5040
       Width           =   720
-   End
-   Begin VB.Label Label7 
-      Caption         =   "Enviar Usando"
-      Height          =   255
-      Left            =   6240
-      TabIndex        =   19
-      Top             =   120
-      Width           =   2055
    End
    Begin VB.Label Label6 
       Caption         =   "Porta:"
@@ -400,16 +327,8 @@ Private Sub CmdCancelar_Click()
   Unload Me
 End Sub
 Private Sub CmdEnviar_Click()
-  Select Case Lista.ListIndex
- ' mapi e shell estao com problemas de seguranca deixando so cdo
-
-'  Case 0
-'    mapienviar_Click  ''mapi
-'  Case 1
-'    shellenviar_Click  ''shell
-'  Case 2
- '   cdoenviar_Click  ''cdo
-  End Select
+ 
+ cdoenviar_Click  ''cdo
 
 End Sub
 Private Sub CmdLimpa_Click()
@@ -432,53 +351,6 @@ Private Sub Command9_Click()
   End If
 
 End Sub
-
-'Private Sub shellenviar_Click()
-'  If campos_checagem Then
-'    SendEmailShell txt_email_to.tEXT, txt_subject.tEXT, txt_message_text.tEXT, txt_attach.tEXT
-'  End If
-'End Sub
-'Private Sub mapienviar_Click()
-'  If Not campos_checagem Then
-'    Exit Sub
-'  End If
-'  MAPISession1.LogonUI = True
-'  MAPISession1.SignOn
-'  MAPIMessages1.sessionID = MAPISession1.sessionID
-'  MAPIMessages1.Compose
-
-  '////////////////////////////////////////
-  '// Informa o email, se enviar para mais de 1 email é separar com(;)e ir informando
-  '////////////////////////////////////////
- ' MAPIMessages1.RecipIndex = 0
- ' MAPIMessages1.RecipAddress = txt_email_to.tEXT
- ' MAPIMessages1.RecipType = 1
-
-  '////////////////////////////////////////
-  '// Assunto
-  '////////////////////////////////////////
-  'MAPIMessages1.MsgSubject = txt_subject.tEXT
-  '////////////////////////////////////////
-  '// Conteudo da mens
-  '////////////////////////////////////////
-  'MAPIMessages1.MsgNoteText = txt_message_text.tEXT
-  '////////////////////////////////////////
-  '// Informa anexo
-  '////////////////////////////////////////
-  'MAPIMessages1.AttachmentIndex = 0
-  'MAPIMessages1.AttachmentPathName = txt_attach.tEXT
-  'MAPIMessages1.AttachmentPosition = 0
-  '////////////////////////////////////////////////
-  '// Se existir outros anexos alterar os valores
-  '////////////////////////////////////////////////
-  'MAPIMessages1.AttachmentIndex = 1
-  'MAPIMessages1.AttachmentPathName = app.path & "\Leia.doc"
-  'MAPIMessages1.AttachmentPosition = 1
-
-  'MAPIMessages1.Send False
-  'MAPISession1.SignOff
-'End Sub
-
 
 Private Sub cdoenviar_Click()
   Dim RetVal As String
@@ -523,7 +395,6 @@ Private Sub Form_Load()
       txt_email_from.tEXT = PegPath("EMAIL", "FROM", "@.com.br")
     End If
   End If
-  Lista.ListIndex = 0
 
   If ePASS01(7) = True Then
     'enviaresair

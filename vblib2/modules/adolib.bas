@@ -76,9 +76,9 @@ Public Const JET_ENGINETYPE_XBASE = 12 ' Comumente usado como alias para DBase 5
 ''Tipodado retorno o tipo conforme o padrao ado
 Public Function GeracArq(ByVal cARQ As String, Optional ByVal cTIPO As String = "", Optional ByVal lWRITE As Boolean = True) As String
   Dim aRETU As Variant
-  cARQ = GeraConn(cARQ, cTIPO)
-  aRETU = TipoConn(cARQ, , , lWRITE)
-  GeracArq = aRETU(1)
+78:   cARQ = GeraConn(cARQ, cTIPO)
+79:   aRETU = TipoConn(cARQ, , , lWRITE)
+80:   GeracArq = aRETU(1)
 End Function
 
 
@@ -86,124 +86,124 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
   Dim nPOS As Long
   Dim cARQTMP As String
   
-  GeraConn = cARQ
-  cARQTMP = UCase(cARQ) 'usado no instr maiscula mas sempre atribui na carq conecao e case sensitive
-  If InStr(cARQTMP, "[") > 0 Then                 ''ja e uma connecao
-    Exit Function
-  End If
-  If cTIPO = "JETMDB" Or cTIPO = "MDB" Or InStr(cARQTMP, ".MDB") > 0 Then
-    GeraConn = "[JETMDB]" & cARQ
-    Exit Function
-  End If
-  If cTIPO = "JETFOX" Or cTIPO = "FOX" Or cTIPO = "DBF" Or InStr(cARQTMP, ".DBF") > 0 Then
-    GeraConn = "[JETFOX]" & cARQ
-    Exit Function
-  End If
+88:   GeraConn = cARQ
+89:   cARQTMP = UCase(cARQ) 'usado no instr maiscula mas sempre atribui na carq conecao e case sensitive
+90:   If InStr(cARQTMP, "[") > 0 Then                 ''ja e uma connecao
+91:     Exit Function
+92:   End If
+93:   If cTIPO = "JETMDB" Or cTIPO = "MDB" Or InStr(cARQTMP, ".MDB") > 0 Then
+94:     GeraConn = "[JETMDB]" & cARQ
+95:     Exit Function
+96:   End If
+97:   If cTIPO = "JETFOX" Or cTIPO = "FOX" Or cTIPO = "DBF" Or InStr(cARQTMP, ".DBF") > 0 Then
+98:     GeraConn = "[JETFOX]" & cARQ
+99:     Exit Function
+100:   End If
   
 '
 ' foxpro .dbf 'vir antes do sqlite para nao confundir com .db tambem paradox.db
 '
   
-  If InStr(cARQTMP, ".DBF") > 0 Then  'DBF
-    nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
-    cARQ = Mid(cARQ, 1, nPOS)
-    GeraConn = "[JETFOX]" & cARQ
-    Exit Function
-  End If
+106:   If InStr(cARQTMP, ".DBF") > 0 Then  'DBF
+107:     nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
+108:     cARQ = Mid(cARQ, 1, nPOS)
+109:     GeraConn = "[JETFOX]" & cARQ
+110:     Exit Function
+111:   End If
   
   If cTIPO = "SQLITE" Or InStr(LCase(cARQ), ".sqlite") > 0 Or InStr(LCase(cARQ), ".sqlite3") > 0 _
                  Or InStr(LCase(cARQ), ".fossil") > 0 Or InStr(LCase(cARQ), ".db3") > 0 _
                  Or (InStr(LCase(cARQ), ".db") > 0 And InStr(cARQTMP, ".DBF") = 0) Then
-    GeraConn = "[SQLITE]" & cARQ
-    Exit Function
-  End If
+116:     GeraConn = "[SQLITE]" & cARQ
+117:     Exit Function
+118:   End If
 
-  If LCase(Right(cARQ, 6)) = ".accdb" Then  'InStr(LCase(cARQ), ".accdb")>0
-    GeraConn = "[ACCDB]" & cARQ
-    Exit Function
-  End If
+120:   If LCase(Right(cARQ, 6)) = ".accdb" Then  'InStr(LCase(cARQ), ".accdb")>0
+121:     GeraConn = "[ACCDB]" & cARQ
+122:     Exit Function
+123:   End If
   
-  If InStr(LCase(cARQ), ".mariadb") > 0 Then
-    GeraConn = "[MARIADB]" & cARQ
-    Exit Function
-  End If
+125:   If InStr(LCase(cARQ), ".mariadb") > 0 Then
+126:     GeraConn = "[MARIADB]" & cARQ
+127:     Exit Function
+128:   End If
   
-  If InStr(LCase(cARQ), ".oracle") > 0 Then
-    GeraConn = "[ORACLE]" & cARQ
-    Exit Function
-  End If
-  
-  
-  
-  If InStr(LCase(cARQ), ".pgsql") > 0 Or InStr(LCase(cARQ), ".postgresql") > 0 Then
-    GeraConn = "[PGSQL]" & cARQ
-    Exit Function
-  End If
+130:   If InStr(LCase(cARQ), ".oracle") > 0 Then
+131:     GeraConn = "[ORACLE]" & cARQ
+132:     Exit Function
+133:   End If
   
   
-  If InStr(LCase(cARQ), ".mysql") > 0 Then
-    GeraConn = "[MYSQL]" & cARQ
-    Exit Function
-  End If
+  
+137:   If InStr(LCase(cARQ), ".pgsql") > 0 Or InStr(LCase(cARQ), ".postgresql") > 0 Then
+138:     GeraConn = "[PGSQL]" & cARQ
+139:     Exit Function
+140:   End If
+  
+  
+143:   If InStr(LCase(cARQ), ".mysql") > 0 Then
+144:     GeraConn = "[MYSQL]" & cARQ
+145:     Exit Function
+146:   End If
       
-  If InStr(LCase(cARQ), ".oracle") > 0 Then
-    GeraConn = "[ORACLE]" & cARQ
-    Exit Function
-  End If
+148:   If InStr(LCase(cARQ), ".oracle") > 0 Then
+149:     GeraConn = "[ORACLE]" & cARQ
+150:     Exit Function
+151:   End If
     
 
   
-  If InStr(cARQTMP, ".PD") > 0 Then   ' paradox
-    nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
-    cARQ = Mid(cARQ, 1, nPOS)
-    GeraConn = "[JETPDX5]" & cARQ
-    Exit Function
-  End If
+155:   If InStr(cARQTMP, ".PD") > 0 Then   ' paradox
+156:     nPOS = InStrRev(cARQ, "\")               ''retira no nome do arquivo
+157:     cARQ = Mid(cARQ, 1, nPOS)
+158:     GeraConn = "[JETPDX5]" & cARQ
+159:     Exit Function
+160:   End If
   
   If Mid(cTIPO, 1, 5) = "ACCDB" Then ' ACCDBDBFIII  ACCDBMDB PX3 PX4 PX5 XLS XLXS XLXB, CSV... _
                                    cada versao jet suporta extensoes em outros formatos de arquivos _
                                    posicao 2,3 versao 12,13,14,115 _
                                    posicao 4 MDB ACCDB formato extensao
-     GeraConn = "[ACCDB" & Mid(cTIPO, 6) & "]"
-     Exit Function
-  End If
+166:      GeraConn = "[ACCDB" & Mid(cTIPO, 6) & "]"
+167:      Exit Function
+168:   End If
  
   
-If Len(cTIPO) > 0 Then
-  Select Case cTIPO
+171: If Len(cTIPO) > 0 Then
+172:   Select Case cTIPO
       Case "XLS"
-        GeraConn = "[XLS]" & cARQ
+174:         GeraConn = "[XLS]" & cARQ
       Case "XLSX"
-        GeraConn = "[XLSX]" & cARQ
+176:         GeraConn = "[XLSX]" & cARQ
       Case "XLSDRV"
-        GeraConn = "[XLSDRV]" & cARQ
+178:         GeraConn = "[XLSDRV]" & cARQ
       Case "SQLITE"
-        GeraConn = "[SQLITE]" & cARQ
+180:         GeraConn = "[SQLITE]" & cARQ
       Case "JETTXT"
-        GeraConn = "[JETTXT]" & cARQ
+182:         GeraConn = "[JETTXT]" & cARQ
       Case "DBFIII"
-        GeraConn = "[JETDBFIII]" & cARQ
+184:         GeraConn = "[JETDBFIII]" & cARQ
       Case "ADSDX"
-        GeraConn = "[ADSCDX]" & cARQ
+186:         GeraConn = "[ADSCDX]" & cARQ
       Case "ADSNTX"
-        GeraConn = "[ADSNTX]" & cARQ
+188:         GeraConn = "[ADSNTX]" & cARQ
       Case "ADSADT"
-        GeraConn = "[ADSADT]" & cARQ
+190:         GeraConn = "[ADSADT]" & cARQ
       Case "ADSVFP"
-        GeraConn = "[ADSVFP]" & cARQ
+192:         GeraConn = "[ADSVFP]" & cARQ
       Case "PDX3"
-        GeraConn = "[JETPDX3]" & cARQ
+194:         GeraConn = "[JETPDX3]" & cARQ
       Case "PDX4"
-        GeraConn = "[JETPDX4]" & cARQ
+196:         GeraConn = "[JETPDX4]" & cARQ
       Case "PDX5"
-        GeraConn = "[JETPDX5]" & cARQ
-  End Select
-End If
+198:         GeraConn = "[JETPDX5]" & cARQ
+199:   End Select
+200: End If
 
-If InStr(LCase(cARQ), ".fdb") > 0 Or InStr(LCase(cARQ), ".gdb") > 0 Then
-    GeraConn = "[FIREBIRD]" & cARQ
-    Exit Function
-End If
+202: If InStr(LCase(cARQ), ".fdb") > 0 Or InStr(LCase(cARQ), ".gdb") > 0 Then
+203:     GeraConn = "[FIREBIRD]" & cARQ
+204:     Exit Function
+205: End If
 End Function
 
 Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = "", _
@@ -227,224 +227,224 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   Dim cAuth As String
   
   'usa boolean para agilizar if,case... no lugar de comparacao com string
-  lTEMMDB = False
-  lTEMSQLITE = False
-  lTEMMARIADB = False
-  lTEMMYSQL = False
-  lTEMPG = False
-  lTEMORACLE = False
-  lTEMFIREBIRD = False
+229:   lTEMMDB = False
+230:   lTEMSQLITE = False
+231:   lTEMMARIADB = False
+232:   lTEMMYSQL = False
+233:   lTEMPG = False
+234:   lTEMORACLE = False
+235:   lTEMFIREBIRD = False
   
   
   'inicial valores padrao
-  TipoConn = Array("ADO", cARQ, "???")
-  cARQTMP = UCase(cARQ)
+239:   TipoConn = Array("ADO", cARQ, "???")
+240:   cARQTMP = UCase(cARQ)
   
   
-  If cDATABASE = "" Then
-          cDATABASE = TratarParametrosCofre(cDATABASE)
-  End If
+243:   If cDATABASE = "" Then
+244:           cDATABASE = TratarParametrosCofre(cDATABASE)
+245:   End If
   
-  If cDATABASE <> "" Then
+247:   If cDATABASE <> "" Then
   ' -----------------------------------------------------------------
     ' INTEGRAÇÃO COM O COFRE (modSeguranca.bas):
     ' Se os parâmetros opcionais vierem vazios, busca no config.dat
     ' -----------------------------------------------------------------
-    cSecaoCofre = UCase(Trim(cDATABASE))
-    If Trim(cUSER) = "" Then
-        cUSER = LerDoCofre(cSecaoCofre, "User")
-    End If
+252:     cSecaoCofre = UCase(Trim(cDATABASE))
+253:     If Trim(cUSER) = "" Then
+254:         cUSER = LerDoCofre(cSecaoCofre, "User")
+255:     End If
 
-    If Trim(cPASS) = "" Then
-        cPASS = LerDoCofre(cSecaoCofre, "Password")
-    End If
-         If Trim(cowner) = "" Then
-            cowner = LerDoCofre(cSecaoCofre, "Owner")
-         End If
+257:     If Trim(cPASS) = "" Then
+258:         cPASS = LerDoCofre(cSecaoCofre, "Password")
+259:     End If
+260:          If Trim(cowner) = "" Then
+261:             cowner = LerDoCofre(cSecaoCofre, "Owner")
+262:          End If
 
 
-  End If
+265:   End If
 
-     If InStr(cARQTMP, ".MDB") > 0 Then
-        lTEMMDB = True
-        TipoConn = Array("ADO", cARQ, "MDB")
-   End If
+267:      If InStr(cARQTMP, ".MDB") > 0 Then
+268:         lTEMMDB = True
+269:         TipoConn = Array("ADO", cARQ, "MDB")
+270:    End If
 
   'sqlite
   '
-  If InStr(cARQTMP, ".SQLITE") > 0 Then
-    lTEMSQLITE = True
-    TipoConn = Array("ADO", cARQ, "SQLITE")
-  End If
+274:   If InStr(cARQTMP, ".SQLITE") > 0 Then
+275:     lTEMSQLITE = True
+276:     TipoConn = Array("ADO", cARQ, "SQLITE")
+277:   End If
   '
   'mariadb
   '
-  If InStr(cARQTMP, ".MARIADB") > 0 Or InStr(cARQTMP, "{MARIADB") > 0 Then
-    lTEMMARIADB = True
-    TipoConn = Array("ADO", cARQ, "MARIADB")
-  End If
+281:   If InStr(cARQTMP, ".MARIADB") > 0 Or InStr(cARQTMP, "{MARIADB") > 0 Then
+282:     lTEMMARIADB = True
+283:     TipoConn = Array("ADO", cARQ, "MARIADB")
+284:   End If
   
   '
   'mariadb
   '
-  If InStr(cARQTMP, ".ORACLE") > 0 Or InStr(cARQTMP, "{ORACLE") > 0 Then
-    lTEMORACLE = True
-    TipoConn = Array("ADO", cARQ, "ORACLE")
-  End If
+289:   If InStr(cARQTMP, ".ORACLE") > 0 Or InStr(cARQTMP, "{ORACLE") > 0 Then
+290:     lTEMORACLE = True
+291:     TipoConn = Array("ADO", cARQ, "ORACLE")
+292:   End If
    
   '
   'mysql
   '
-  If InStr(cARQTMP, ".MYSQL") > 0 Or InStr(cARQTMP, "{MYSQL") > 0 Then
-    lTEMMYSQL = True
-    TipoConn = Array("ADO", cARQ, "MYSQL")
-  End If
+297:   If InStr(cARQTMP, ".MYSQL") > 0 Or InStr(cARQTMP, "{MYSQL") > 0 Then
+298:     lTEMMYSQL = True
+299:     TipoConn = Array("ADO", cARQ, "MYSQL")
+300:   End If
   
     '
   'postgresql pgsql
   '
-  If InStr(cARQTMP, ".PGSQL") > 0 Or InStr(cARQTMP, ".POSTGRESQL") > 0 Or InStr(cARQTMP, "{POSTGRESQL") > 0 Then
-    lTEMPG = True
-    TipoConn = Array("ADO", cARQ, "PGSQL")
-  End If
+305:   If InStr(cARQTMP, ".PGSQL") > 0 Or InStr(cARQTMP, ".POSTGRESQL") > 0 Or InStr(cARQTMP, "{POSTGRESQL") > 0 Then
+306:     lTEMPG = True
+307:     TipoConn = Array("ADO", cARQ, "PGSQL")
+308:   End If
     '
  
 ' 2. No bloco de detecção de tipo (após a checagem do SQLite):
-   If InStr(cARQTMP, ".FIREBIRD") > 0 Or InStr(cARQTMP, "{FIREBIRD") > 0 Or InStr(cARQTMP, "[FIREBIRD") > 0 Then
-       lTEMFIREBIRD = True
-     TipoConn = Array("ADO", cARQ, "FIREBIRD")
-   End If
+312:    If InStr(cARQTMP, ".FIREBIRD") > 0 Or InStr(cARQTMP, "{FIREBIRD") > 0 Or InStr(cARQTMP, "[FIREBIRD") > 0 Then
+313:        lTEMFIREBIRD = True
+314:      TipoConn = Array("ADO", cARQ, "FIREBIRD")
+315:    End If
 
   '
   'checando provider,driver connecao
   '
-  If InStr(cARQ, "[") = 0 Then 'inclui se nao tiver [ evita duplicar [USO][USO]
-    If InStr(cARQTMP, "PROVIDER") > 0 Then
-      Exit Function
-    End If
-    If lTEMMDB Then
-      cARQ = "[JETMDB]" & cARQ
-      cARQTMP = UCase(cARQ)
-    End If
-    If lTEMSQLITE Then
-      cARQ = "[SQLITE]" & cARQ
-      cARQTMP = UCase(cARQ)
-    End If
-    If lTEMMARIADB Then
-      cARQ = "[MARIADB]" & cARQ
-      cARQTMP = UCase(cARQ)
-    End If
-   If lTEMORACLE Then
-      cARQ = "[ORACLE]" & cARQ
-      cARQTMP = UCase(cARQ)
-    End If
-    If lTEMMYSQL Then
-      cARQ = "[MYSQL]" & cARQ
-      cARQTMP = UCase(cARQ)
-    End If
-    If lTEMPG Then
-      cARQ = "[PGSQL]" & cARQ
-      cARQTMP = UCase(cARQ)
-    End If
+320:   If InStr(cARQ, "[") = 0 Then 'inclui se nao tiver [ evita duplicar [USO][USO]
+321:     If InStr(cARQTMP, "PROVIDER") > 0 Then
+322:       Exit Function
+323:     End If
+324:     If lTEMMDB Then
+325:       cARQ = "[JETMDB]" & cARQ
+326:       cARQTMP = UCase(cARQ)
+327:     End If
+328:     If lTEMSQLITE Then
+329:       cARQ = "[SQLITE]" & cARQ
+330:       cARQTMP = UCase(cARQ)
+331:     End If
+332:     If lTEMMARIADB Then
+333:       cARQ = "[MARIADB]" & cARQ
+334:       cARQTMP = UCase(cARQ)
+335:     End If
+336:    If lTEMORACLE Then
+337:       cARQ = "[ORACLE]" & cARQ
+338:       cARQTMP = UCase(cARQ)
+339:     End If
+340:     If lTEMMYSQL Then
+341:       cARQ = "[MYSQL]" & cARQ
+342:       cARQTMP = UCase(cARQ)
+343:     End If
+344:     If lTEMPG Then
+345:       cARQ = "[PGSQL]" & cARQ
+346:       cARQTMP = UCase(cARQ)
+347:     End If
     
-  End If
+349:   End If
 '
 'access
 '
-  If lTEMMDB Then
-    cARQ = Replace(cARQ, "[JETMDB]", "")
-    If InStr("PROVIDER", cARQTMP) = 0 Then
-       cARQ = cJetPro & cARQ
-    End If
-    If Len(cUSER) > 0 Then
-      cARQ = cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
-    End If
-    If Not lWRITE Then
-      cARQ = cARQ & ";Mode=Share Deny Write"  '";Mode=Read"
-    Else
-      cARQ = cARQ & ";Mode=Share Deny None"  '";Mode=Read"
-    End If
-    TipoConn = Array("ADO", cARQ, "MDB")
-    Exit Function                            '' encerra agilizar
-  End If
+353:   If lTEMMDB Then
+354:     cARQ = Replace(cARQ, "[JETMDB]", "")
+355:     If InStr("PROVIDER", cARQTMP) = 0 Then
+356:        cARQ = cJetPro & cARQ
+357:     End If
+358:     If Len(cUSER) > 0 Then
+359:       cARQ = cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
+360:     End If
+361:     If Not lWRITE Then
+362:       cARQ = cARQ & ";Mode=Share Deny Write"  '";Mode=Read"
+363:     Else
+364:       cARQ = cARQ & ";Mode=Share Deny None"  '";Mode=Read"
+365:     End If
+366:     TipoConn = Array("ADO", cARQ, "MDB")
+367:     Exit Function                            '' encerra agilizar
+368:   End If
   
   '
   ' SQLITE
   '
-     If lTEMSQLITE Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
-        cARQ = Replace(cARQ, "[SQLITE]", "")
+373:      If lTEMSQLITE Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
+374:         cARQ = Replace(cARQ, "[SQLITE]", "")
         
         
-      cAuth = ""
-      If Trim(cUSER) <> "" Then cAuth = ";UID=" & cUSER
-      If Trim(cPASS) <> "" Then cAuth = cAuth & ";PWD=" & cPASS
+377:       cAuth = ""
+378:       If Trim(cUSER) <> "" Then cAuth = ";UID=" & cUSER
+379:       If Trim(cPASS) <> "" Then cAuth = cAuth & ";PWD=" & cPASS
 
-      Select Case UCase(cPADTIPOCON)
+381:       Select Case UCase(cPADTIPOCON)
          Case "D", "N"
             ' Driver ODBC geralmente usa UID e PWD
-            cARQ = "Driver={SQLite3 ODBC Driver};Database=" & cARQ & cAuth & ";"
+384:             cARQ = "Driver={SQLite3 ODBC Driver};Database=" & cARQ & cAuth & ";"
             
          Case "P" ' Case Else tratado aqui para simplificar
             ' Provider OLEDB pode variar, mas segue a lógica comum de user/password
-            cARQ = "Provider=SQLite3OLEDB.1;Data Source=" & cARQ & IIf(cAuth <> "", ";" & Mid(cAuth, 2), "") & ";"
-      End Select
+388:             cARQ = "Provider=SQLite3OLEDB.1;Data Source=" & cARQ & IIf(cAuth <> "", ";" & Mid(cAuth, 2), "") & ";"
+389:       End Select
 
 
-    TipoConn = Array("ADO", cARQ, "SQLITE")
-    Exit Function
-  End If
+392:     TipoConn = Array("ADO", cARQ, "SQLITE")
+393:     Exit Function
+394:   End If
   
-  If lTEMMARIADB Then
-    cARQ = Replace(cARQ, "[MARIADB]", "")
-    If InStr(cARQTMP, "MARIADB ODBC") = 0 Then 'geracom se nao passado
-       aCONN = Split(cARQ, ".") 'localhost.port.mariadb.banco 'localhost.3306.mariadb.citacao
+396:   If lTEMMARIADB Then
+397:     cARQ = Replace(cARQ, "[MARIADB]", "")
+398:     If InStr(cARQTMP, "MARIADB ODBC") = 0 Then 'geracom se nao passado
+399:        aCONN = Split(cARQ, ".") 'localhost.port.mariadb.banco 'localhost.3306.mariadb.citacao
              'inclui  a padrao caso seja um banco de teste mas pega as corretas pelo cofre acima
-            If cPASS = "" Then
-               cPASS = "admin"
-            End If
-            If cUSER = "" Then
-               cUSER = "root"
-            End If
+401:             If cPASS = "" Then
+402:                cPASS = "admin"
+403:             End If
+404:             If cUSER = "" Then
+405:                cUSER = "root"
+406:             End If
   
 
-            Select Case UCase(cPADTIPOCON)
+409:             Select Case UCase(cPADTIPOCON)
       '       cARQ = "DRIVER={MariaDB ODBC 3.2 Driver};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PASSWORD=" + cPASS + ";"
       
             
                     Case "D", "N": cARQ = "Driver={MariaDB ODBC 3.2 Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
                     Case "P": cARQ = "Provider=MSDASQL;Data Source=" & aCONN(3) & ";User Id=" & cUSER & ";Password=" & cPASS & ";"
-            End Select
-         End If
-     TipoConn = Array("ADO", cARQ, "MARIADB")
-     Exit Function
-   End If
+415:             End Select
+416:          End If
+417:      TipoConn = Array("ADO", cARQ, "MARIADB")
+418:      Exit Function
+419:    End If
   
   
   
- If lTEMORACLE Then
+423:  If lTEMORACLE Then
 '    "Provider=OraOLEDB.Oracle;data source=" & _
  '   sWorld & ".World;User id=" & sUID & ";password=" & sPWD & ";"
 
-     cARQ = Replace(cARQ, "[ORACLE]", "")
-    If InStr(cARQTMP, "ODBC For Oracle") = 0 Then 'geracom se nao passado
-        aCONN = Split(cARQ, ".") 'localhost.port.mariadb.banco 'localhost.3306.mariadb.citacao
+427:      cARQ = Replace(cARQ, "[ORACLE]", "")
+428:     If InStr(cARQTMP, "ODBC For Oracle") = 0 Then 'geracom se nao passado
+429:         aCONN = Split(cARQ, ".") 'localhost.port.mariadb.banco 'localhost.3306.mariadb.citacao
             Dim cDefSchema As String
-            cDefSchema = IIf(Trim(cowner) <> "", ";DefaultSchema=" & cowner, "")
+431:             cDefSchema = IIf(Trim(cowner) <> "", ";DefaultSchema=" & cowner, "")
                'inclui  a padrao caso seja um banco de teste mas pega as corretas pelo cofre acima
-            If cPASS = "" Then
-               cPASS = "admin"
-            End If
-            If cUSER = "" Then
-               cUSER = "root"
-            End If
+433:             If cPASS = "" Then
+434:                cPASS = "admin"
+435:             End If
+436:             If cUSER = "" Then
+437:                cUSER = "root"
+438:             End If
     
  '           cARQ = "DRIVER={Microsoft ODBC For Oracle};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PWD=" + cPASS + ";"
  
-            Select Case UCase(cPADTIPOCON)
+442:             Select Case UCase(cPADTIPOCON)
                     Case "N": cARQ = "DRIVER={Microsoft ODBC For Oracle};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PWD=" + cPASS + ";"
                     Case "D": cARQ = "Driver={Oracle in OraClient11g_home1};Dbq=" & aCONN(0) & ";Uid=" & cUSER & ";Pwd=" & cPASS & cDefSchema
                     Case "P": cARQ = "Provider=OraOLEDB.Oracle;Data Source=" & aCONN(0) & ";User Id=" & cUSER & ";Password=" & cPASS & cDefSchema
-            End Select
+446:             End Select
 
 
             'If Len(cUSER) > 0 Then
@@ -455,85 +455,85 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
             'If Trim(cowner) <> "" Then
             '  cARQ = cARQ & ";DefaultSchema=" & cowner
             'End If
-    End If
-    TipoConn = Array("ADO", cARQ, "ORACLE")
-    Exit Function
-  End If
+457:     End If
+458:     TipoConn = Array("ADO", cARQ, "ORACLE")
+459:     Exit Function
+460:   End If
   
   
   
   
 
-   If lTEMMYSQL Then
-     cARQ = Replace(cARQ, "[MYSQL]", "")
-      If InStr(cARQTMP, "MYSQL ODBC") = 0 Then 'geracom se nao passado
-          aCONN = Split(cARQ, ".") 'localhost.port.mysql.banco 'localhost.5432.mysql.citacao
-            If cPASS = "" Then
-               cPASS = "admin"
-            End If
-            If cUSER = "" Then
-               cUSER = "root"
-            End If
+466:    If lTEMMYSQL Then
+467:      cARQ = Replace(cARQ, "[MYSQL]", "")
+468:       If InStr(cARQTMP, "MYSQL ODBC") = 0 Then 'geracom se nao passado
+469:           aCONN = Split(cARQ, ".") 'localhost.port.mysql.banco 'localhost.5432.mysql.citacao
+470:             If cPASS = "" Then
+471:                cPASS = "admin"
+472:             End If
+473:             If cUSER = "" Then
+474:                cUSER = "root"
+475:             End If
 
     '  cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"     '32 driver versao 8
-            Select Case UCase(cPADTIPOCON)
+478:             Select Case UCase(cPADTIPOCON)
                     Case "D", "N": cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
                     Case "P": cARQ = "Provider=MySQLProv;Data Source=" & aCONN(0) & ";User Id=" & cUSER & ";Password=" & cPASS & ";"
-                End Select
+481:                 End Select
 
-         End If
-    TipoConn = Array("ADO", cARQ, "MYSQL")
-    Exit Function
-  End If
+483:          End If
+484:     TipoConn = Array("ADO", cARQ, "MYSQL")
+485:     Exit Function
+486:   End If
 
-   If lTEMPG Then
-    cARQ = Replace(cARQ, "[PGSQL]", "")
-    cARQ = Replace(cARQ, "[POSTGRESQL]", "")
-    If InStr(cARQTMP, "POSTGRESQL ANSI") = 0 Then 'geracom se nao passado
-       aCONN = Split(cARQ, ".") 'localhost.port.postgresql.banco 'localhost.5432.postgresql.citacao
+488:    If lTEMPG Then
+489:     cARQ = Replace(cARQ, "[PGSQL]", "")
+490:     cARQ = Replace(cARQ, "[POSTGRESQL]", "")
+491:     If InStr(cARQTMP, "POSTGRESQL ANSI") = 0 Then 'geracom se nao passado
+492:        aCONN = Split(cARQ, ".") 'localhost.port.postgresql.banco 'localhost.5432.postgresql.citacao
             'inclui  a padrao caso seja um banco de teste mas pega as corretas pelo cofre acima
-            If cPASS = "" Then
-               cPASS = "admin"
-            End If
-            If cUSER = "" Then
-               cUSER = "postgres"
-            End If
+494:             If cPASS = "" Then
+495:                cPASS = "admin"
+496:             End If
+497:             If cUSER = "" Then
+498:                cUSER = "postgres"
+499:             End If
             Dim cSchema As String
-                cSchema = IIf(Trim(cowner) <> "", ";SearchPath=" & cowner, "")
+501:                 cSchema = IIf(Trim(cowner) <> "", ";SearchPath=" & cowner, "")
         '        cARQ = "Driver={PostgreSQL ANSI};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"
-                Select Case UCase(cPADTIPOCON)
+503:                 Select Case UCase(cPADTIPOCON)
                     Case "D", "N": cARQ = "Driver={PostgreSQL ANSI};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";UID=" & cUSER & ";PWD=" & cPASS & cSchema
                     Case "P": cARQ = "Provider=PostgreSQLOLEDBSample;Data Source=" & aCONN(0) & ";Initial Catalog=" & cARQ & ";User ID=" & cUSER & ";Password=" & cPASS & cSchema
-                End Select
+506:                 End Select
 
       '    cARQ = "Driver={PostgreSQL ANSI};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=postgres;Pwd=admin;"
-    End If
-      TipoConn = Array("ADO", cARQ, "PGSQL")
-     Exit Function
-    End If
+509:     End If
+510:       TipoConn = Array("ADO", cARQ, "PGSQL")
+511:      Exit Function
+512:     End If
 
 ' 3. No bloco que aplica a string de conexão (após a checagem do SQLite/MariaDB):
-If lTEMFIREBIRD Then
-    cARQ = Replace(cARQ, "[FIREBIRD]", "")
+515: If lTEMFIREBIRD Then
+516:     cARQ = Replace(cARQ, "[FIREBIRD]", "")
     ' Ajuste o Provider conforme a instalação do driver Firebird no seu ambiente
     'cARQ = "Provider=MSDASQL;Driver={Firebird/InterBase driver};DbName=" + cARQ + ";UID=" + cUSER + ";PWD=" + cPASS + ";"
-    TipoConn = Array("ADO", cARQ, "FIREBIRD")
+519:     TipoConn = Array("ADO", cARQ, "FIREBIRD")
     
-    Select Case UCase(cPADTIPOCON)
+521:     Select Case UCase(cPADTIPOCON)
         Case "D", "N" ' Driver
-            cARQ = "Driver={Firebird/InterBase driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
+523:             cARQ = "Driver={Firebird/InterBase driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
         Case "P" ' Provider
-            cARQ = "Provider=LCPI.IBProvider;Location=" & cARQ & ";User ID=" & cUSER & ";Password=" & cPASS & ";"
-    End Select
+525:             cARQ = "Provider=LCPI.IBProvider;Location=" & cARQ & ";User ID=" & cUSER & ";Password=" & cPASS & ";"
+526:     End Select
     
     
-    Exit Function
-End If
+529:     Exit Function
+530: End If
   '
   'jetfox
   '
-   If InStr(cARQTMP, "[JETFOX]") > 0 Then
-     cARQ = Replace(cARQ, "[JETFOX]", "")
+534:    If InStr(cARQTMP, "[JETFOX]") > 0 Then
+535:      cARQ = Replace(cARQ, "[JETFOX]", "")
 
     ' PROVIDER=VFPOLEDB.1;Data Source=caminho
     ' ;SourceType=dbf;Deleted=Yes;Mode=ReadWrite|Share Deny None;Mode=Share Deny None
@@ -550,121 +550,121 @@ End If
     '   CODEPAGE=nnnn
     '   VARCHARMAPPING=true/false
     '   Collating Sequence=cSequenceName
-    If lWRITE Then  'deleted=true tambem no where pode incluir  and deleted()
-      cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=ReadWrite|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE;DELETED=True;"  'NULL=NO"
-    Else
-      cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=Read|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE;DELETED=True;"  'NULL=NO"
-    End If
-    TipoConn = Array("ADO", cARQ, "DBF")
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[XLSDRV]") > 0 Then
-    cARQ = Replace(cARQ, "[XLSDRV]", "")
-         cARQ = "DRIVER=Microsoft Excel Driver (*.xls);" & "DBQ=" & cARQ
-        TipoConn = Array("ADO", cARQ, "XLSDRV")
-      Exit Function
-     End If
-    If InStr(cARQTMP, "[CONN]") > 0 Then
-     cARQ = Replace(cARQ, "[CONN]", "")
-     If lTEMMDB Then
-        TipoConn = Array("ADO", cARQ, "MDB")
-      Else
-        TipoConn = Array("ADO", cARQ, "CONN")
-       End If
-      Exit Function
-    End If
-     If InStr(cARQTMP, "[SQLSERVER]") > 0 Or InStr(cARQTMP, "[MSSQL]") > 0 Then
-        cARQ = Replace(cARQ, "[SQLSERVER]", "")
-        cARQ = Replace(cARQ, "[MSSQL]", "")
-          aCONN = Split(cARQ, ".") 'localhost.port.mysdql.banco 'localhost.5432.mssql.citacao
+552:     If lWRITE Then  'deleted=true tambem no where pode incluir  and deleted()
+553:       cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=ReadWrite|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE;DELETED=True;"  'NULL=NO"
+554:     Else
+555:       cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=Read|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE;DELETED=True;"  'NULL=NO"
+556:     End If
+557:     TipoConn = Array("ADO", cARQ, "DBF")
+558:     Exit Function
+559:   End If
+560:   If InStr(cARQTMP, "[XLSDRV]") > 0 Then
+561:     cARQ = Replace(cARQ, "[XLSDRV]", "")
+562:          cARQ = "DRIVER=Microsoft Excel Driver (*.xls);" & "DBQ=" & cARQ
+563:         TipoConn = Array("ADO", cARQ, "XLSDRV")
+564:       Exit Function
+565:      End If
+566:     If InStr(cARQTMP, "[CONN]") > 0 Then
+567:      cARQ = Replace(cARQ, "[CONN]", "")
+568:      If lTEMMDB Then
+569:         TipoConn = Array("ADO", cARQ, "MDB")
+570:       Else
+571:         TipoConn = Array("ADO", cARQ, "CONN")
+572:        End If
+573:       Exit Function
+574:     End If
+575:      If InStr(cARQTMP, "[SQLSERVER]") > 0 Or InStr(cARQTMP, "[MSSQL]") > 0 Then
+576:         cARQ = Replace(cARQ, "[SQLSERVER]", "")
+577:         cARQ = Replace(cARQ, "[MSSQL]", "")
+578:           aCONN = Split(cARQ, ".") 'localhost.port.mysdql.banco 'localhost.5432.mssql.citacao
 
-            cAuth = IIf(Trim(cUSER) <> "", ";UID=" & cUSER, "") & IIf(Trim(cPASS) <> "", ";PWD=" & cPASS, "")
+580:             cAuth = IIf(Trim(cUSER) <> "", ";UID=" & cUSER, "") & IIf(Trim(cPASS) <> "", ";PWD=" & cPASS, "")
         
-            Select Case UCase(cPADTIPOCON)
+582:             Select Case UCase(cPADTIPOCON)
                 Case "D", "N"
-                    cARQ = "Driver={" & GetBestMSSQL("D") & "};Server=" & aCONN(0) & ";Database=" & cARQ & cAuth & ";"
+584:                     cARQ = "Driver={" & GetBestMSSQL("D") & "};Server=" & aCONN(0) & ";Database=" & cARQ & cAuth & ";"
                 Case "P"
-                    cARQ = "Provider=" & GetBestMSSQL("P") & ";Data Source=" & aCONN(0) & ";Initial Catalog=" & aCONN(3) & cAuth & ";"
+586:                     cARQ = "Provider=" & GetBestMSSQL("P") & ";Data Source=" & aCONN(0) & ";Initial Catalog=" & aCONN(3) & cAuth & ";"
                 Case Else
                     Dim cMelhorP As String
-                    cMelhorP = GetBestMSSQL("P")
-                    If cMelhorP <> "" Then
-                        cARQ = "Provider=" & cMelhorP & ";Data Source=" & aCONN(0) & ";Initial Catalog=" & aCONN(3) & cAuth & ";"
-                    Else
-                        cARQ = "Driver={" & GetBestMSSQL("D") & "};Server=" & aCONN(0) & ";Database=" & aCONN(3) & cAuth & ";"
-                    End If
-            End Select
+589:                     cMelhorP = GetBestMSSQL("P")
+590:                     If cMelhorP <> "" Then
+591:                         cARQ = "Provider=" & cMelhorP & ";Data Source=" & aCONN(0) & ";Initial Catalog=" & aCONN(3) & cAuth & ";"
+592:                     Else
+593:                         cARQ = "Driver={" & GetBestMSSQL("D") & "};Server=" & aCONN(0) & ";Database=" & aCONN(3) & cAuth & ";"
+594:                     End If
+595:             End Select
 
        
-    TipoConn = Array("ADO", cARQ, "SQLSERVER")
-    Exit Function
-  End If
+598:     TipoConn = Array("ADO", cARQ, "SQLSERVER")
+599:     Exit Function
+600:   End If
 
-    If InStr(cARQTMP, "[ACCDB") > 0 Then
-      cJETUSO = cJetA12
-      cARQ = Replace(cARQ, "[ACCDB", "")
-      cARQ = Replace(cARQ, "MDB]", "")
-     cARQ = Replace(cARQ, "]", "")
-    If Len(cUSER) > 0 Then
-      cARQ = cJETUSO & cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
-    Else
-      cARQ = cJETUSO & cARQ                ''& ";Persist Security Info=False"
-    End If
-    If Not lWRITE Then
-      cARQ = cARQ & ";Mode=Share Deny Write"  '";Mode=Read"
-    Else
-      cARQ = cARQ & ";Mode=Share Deny None"  '";Mode=Read"
-    End If
-    TipoConn = Array("ADO", cARQ, "ACEOLEDB")
-    Exit Function
-  End If
+602:     If InStr(cARQTMP, "[ACCDB") > 0 Then
+603:       cJETUSO = cJetA12
+604:       cARQ = Replace(cARQ, "[ACCDB", "")
+605:       cARQ = Replace(cARQ, "MDB]", "")
+606:      cARQ = Replace(cARQ, "]", "")
+607:     If Len(cUSER) > 0 Then
+608:       cARQ = cJETUSO & cARQ & "; User Id=" & cUSER & "; Password=" & cPASS
+609:     Else
+610:       cARQ = cJETUSO & cARQ                ''& ";Persist Security Info=False"
+611:     End If
+612:     If Not lWRITE Then
+613:       cARQ = cARQ & ";Mode=Share Deny Write"  '";Mode=Read"
+614:     Else
+615:       cARQ = cARQ & ";Mode=Share Deny None"  '";Mode=Read"
+616:     End If
+617:     TipoConn = Array("ADO", cARQ, "ACEOLEDB")
+618:     Exit Function
+619:   End If
 
-  If InStr(cARQTMP, "[INFORMIX]") > 0 Then
-    cARQ = Replace(cARQ, "[INFORMIX]", "")
-    TipoConn = Array("ADO", cARQ, "INFORMIX")
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[FIREBIRD]") > 0 Then
-    cARQ = Replace(cARQ, "[FIREBIRD]", "")
-    TipoConn = Array("ADO", cARQ, "FIREBIRD")
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[INTERBASE]") > 0 Then
-    cARQ = Replace(cARQ, "[INTERBASE]", "")
-    TipoConn = Array("ADO", cARQ, "INTERBASE")
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[POSTGRESQL]") > 0 Then
-    cARQ = Replace(cARQ, "[POSTGRESQL]", "")
-    TipoConn = Array("ADO", cARQ, "POSTGRESQL")
-    Exit Function
-  End If
-  If InStr(cARQTMP, "[UDL]") > 0 Then
-    cARQ = Replace(cARQ, "[UDL]", "")
-    cARQ = "File Name=" & cARQ & ";"
-    TipoConn = Array("ADO", cARQ, "UDL")
-    Exit Function
-  End If
+621:   If InStr(cARQTMP, "[INFORMIX]") > 0 Then
+622:     cARQ = Replace(cARQ, "[INFORMIX]", "")
+623:     TipoConn = Array("ADO", cARQ, "INFORMIX")
+624:     Exit Function
+625:   End If
+626:   If InStr(cARQTMP, "[FIREBIRD]") > 0 Then
+627:     cARQ = Replace(cARQ, "[FIREBIRD]", "")
+628:     TipoConn = Array("ADO", cARQ, "FIREBIRD")
+629:     Exit Function
+630:   End If
+631:   If InStr(cARQTMP, "[INTERBASE]") > 0 Then
+632:     cARQ = Replace(cARQ, "[INTERBASE]", "")
+633:     TipoConn = Array("ADO", cARQ, "INTERBASE")
+634:     Exit Function
+635:   End If
+636:   If InStr(cARQTMP, "[POSTGRESQL]") > 0 Then
+637:     cARQ = Replace(cARQ, "[POSTGRESQL]", "")
+638:     TipoConn = Array("ADO", cARQ, "POSTGRESQL")
+639:     Exit Function
+640:   End If
+641:   If InStr(cARQTMP, "[UDL]") > 0 Then
+642:     cARQ = Replace(cARQ, "[UDL]", "")
+643:     cARQ = "File Name=" & cARQ & ";"
+644:     TipoConn = Array("ADO", cARQ, "UDL")
+645:     Exit Function
+646:   End If
   'ADS
-  If InStr(cARQTMP, "[ADS") > 0 Then
-    If InStr(cARQTMP, "[ADSCDX]") > 0 Then
-      cADSTIP = "ADS_CDX"
-      cADSNOM = "ADSCDX"
-    End If
-    If InStr(cARQTMP, "[ADSNTX]") > 0 Then
-      cADSTIP = "ADS_NTX"
-      cADSNOM = "ADSCDX"
-    End If
-    If InStr(cARQTMP, "[ADSADT]") > 0 Then
-      cADSTIP = "ADS_ADT"
-      cADSNOM = "ADSADT"
-    End If
-    If InStr(cARQTMP, "[ADSVFP]") > 0 Then
-      cADSTIP = "ADS_VFP"
-      cADSNOM = "ADSVFP"
-    End If
+648:   If InStr(cARQTMP, "[ADS") > 0 Then
+649:     If InStr(cARQTMP, "[ADSCDX]") > 0 Then
+650:       cADSTIP = "ADS_CDX"
+651:       cADSNOM = "ADSCDX"
+652:     End If
+653:     If InStr(cARQTMP, "[ADSNTX]") > 0 Then
+654:       cADSTIP = "ADS_NTX"
+655:       cADSNOM = "ADSCDX"
+656:     End If
+657:     If InStr(cARQTMP, "[ADSADT]") > 0 Then
+658:       cADSTIP = "ADS_ADT"
+659:       cADSNOM = "ADSADT"
+660:     End If
+661:     If InStr(cARQTMP, "[ADSVFP]") > 0 Then
+662:       cADSTIP = "ADS_VFP"
+663:       cADSNOM = "ADSVFP"
+664:     End If
 
-    cARQ = Replace(cARQ, "[" + cADSNOM + "]", "")
+666:     cARQ = Replace(cARQ, "[" + cADSNOM + "]", "")
     cARQ = "Provider=Advantage.OLEDB.1;" & _
            "Mode=Share Deny None;" & _
            "Show Deleted Records in DBF Tables with Advantage=False;" & _
@@ -674,157 +674,157 @@ End If
            "Use NULL values in DBF Tables with Advantage=True;" & _
            "Exclusive=No;Deleted=No;" & _
            "Persist Security Info=False;Advantage Character Data Type=ADS_OEM;"
-    TipoConn = Array("ADO", cARQ, cADSNOM)
-    Exit Function
-  End If
+676:     TipoConn = Array("ADO", cARQ, cADSNOM)
+677:     Exit Function
+678:   End If
   'tratamentos JET
-  cJETUSO = cJetPro
-  cXLSVER = "8.0"
-  If InStr(cARQTMP, "12") > 0 Then
-    cJETUSO = cJetA12
-    cXLSVER = "12.0"
-  End If
-  If InStr(cARQTMP, "14") > 0 Then
-    cJETUSO = cJetA12
-    cXLSVER = "14.0"
-  End If
-  If InStr(cARQTMP, "15") > 0 Then
-    cJETUSO = cJetA12
-    cXLSVER = "15.0"
-  End If
-  If InStr(cARQTMP, "16") > 0 Then
-    cJETUSO = cJetA12
-    cXLSVER = "16.0"
-  End If
+680:   cJETUSO = cJetPro
+681:   cXLSVER = "8.0"
+682:   If InStr(cARQTMP, "12") > 0 Then
+683:     cJETUSO = cJetA12
+684:     cXLSVER = "12.0"
+685:   End If
+686:   If InStr(cARQTMP, "14") > 0 Then
+687:     cJETUSO = cJetA12
+688:     cXLSVER = "14.0"
+689:   End If
+690:   If InStr(cARQTMP, "15") > 0 Then
+691:     cJETUSO = cJetA12
+692:     cXLSVER = "15.0"
+693:   End If
+694:   If InStr(cARQTMP, "16") > 0 Then
+695:     cJETUSO = cJetA12
+696:     cXLSVER = "16.0"
+697:   End If
   
   
   
-  If InStr(cARQTMP, "[XLS") > 0 Then
+701:   If InStr(cARQTMP, "[XLS") > 0 Then
     Dim cExtProp As String
-    cExtProp = "Excel " & cXLSVER & ";HDR=Yes;IMEX=1"
+703:     cExtProp = "Excel " & cXLSVER & ";HDR=Yes;IMEX=1"
     
     ' Limpeza de todas as tags de Excel possíveis
-    cARQ = Replace(Replace(Replace(Replace(Replace(cARQ, "[XLSX]", ""), "[XLSM]", ""), "[XLSB]", ""), "[XLS]", ""), "[XLSB]", "")
-    cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & cExtProp & Chr(34) & ";"
+706:     cARQ = Replace(Replace(Replace(Replace(Replace(cARQ, "[XLSX]", ""), "[XLSM]", ""), "[XLSB]", ""), "[XLS]", ""), "[XLSB]", "")
+707:     cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & cExtProp & Chr(34) & ";"
     
-    TipoConn = Array("ADO", cARQ, "XLS")
-    Exit Function
-  End If
+709:     TipoConn = Array("ADO", cARQ, "XLS")
+710:     Exit Function
+711:   End If
 
   ' 2. Tratamento de Texto/CSV (JETTXT, JETTXTPIPE, JETTXTCSV, CSV, etc)
-  If InStr(cARQTMP, "[JETTXT") > 0 Or InStr(cARQTMP, "[CSV]") > 0 Then
+714:   If InStr(cARQTMP, "[JETTXT") > 0 Or InStr(cARQTMP, "[CSV]") > 0 Then
     Dim cFmt As String
     
     ' Define o formato baseado na tag específica
-    If InStr(cARQTMP, "[JETTXTPIPE]") > 0 Then
-        cFmt = "FMT=Delimited(|)"
-    ElseIf InStr(cARQTMP, "[JETTXTTAB]") > 0 Then
-        cFmt = "FMT=TabDelimited"
-    Else
+718:     If InStr(cARQTMP, "[JETTXTPIPE]") > 0 Then
+719:         cFmt = "FMT=Delimited(|)"
+720:     ElseIf InStr(cARQTMP, "[JETTXTTAB]") > 0 Then
+721:         cFmt = "FMT=TabDelimited"
+722:     Else
         ' Cobre: [JETTXT], [JETTXTCSV] e a nova tag [CSV]
-        cFmt = "FMT=Delimited"
-    End If
+724:         cFmt = "FMT=Delimited"
+725:     End If
     
     ' Limpeza de todas as tags de texto/csv possíveis
-    cARQ = Replace(Replace(Replace(Replace(Replace(cARQ, "[JETTXTPIPE]", ""), "[JETTXTTAB]", ""), "[JETTXTCSV]", ""), "[JETTXT]", ""), "[CSV]", "")
+728:     cARQ = Replace(Replace(Replace(Replace(Replace(cARQ, "[JETTXTPIPE]", ""), "[JETTXTTAB]", ""), "[JETTXTCSV]", ""), "[JETTXT]", ""), "[CSV]", "")
     
-    cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;" & cFmt & ";IMEX=1" & Chr(34) & ";"
+730:     cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;" & cFmt & ";IMEX=1" & Chr(34) & ";"
     
-    TipoConn = Array("ADO", cARQ, "JETXT")
-    Exit Function
-  End If
+732:     TipoConn = Array("ADO", cARQ, "JETXT")
+733:     Exit Function
+734:   End If
   
   
   
  ' 3. Tratamento de DBF (dBase III)
-  If InStr(cARQTMP, "[JETDBFIII]") > 0 Then
+739:   If InStr(cARQTMP, "[JETDBFIII]") > 0 Then
     ' Limpa a tag do nome do arquivo
-    cARQ = Replace(cARQ, "[JETDBFIII]", "")
+741:     cARQ = Replace(cARQ, "[JETDBFIII]", "")
     
     ' Para DBF, não se usa delimitadores ou HDR=Yes,
     ' a estrutura já é interpretada pelo motor dBase IV/III
-    cARQ = cJETUSO & cARQ & cJetExt & "DBASE III;"
+745:     cARQ = cJETUSO & cARQ & cJetExt & "DBASE III;"
     
-    TipoConn = Array("ADO", cARQ, "DBF")
-    Exit Function
-  End If
+747:     TipoConn = Array("ADO", cARQ, "DBF")
+748:     Exit Function
+749:   End If
   
   'paradox com jet a12 ou a16
-  If InStr(cARQTMP, "[JETPD") > 0 Then
-    If InStr(cARQTMP, "[JETPDX3]") > 0 Then
-      cARQ = Replace(cARQ, "[JETPDX3]", "")
-      cARQ = cJETUSO & cARQ & cJetExt & "Paradox 3.X" & ";"
-      TipoConn = Array("ADO", cARQ, "DB")
-      Exit Function
-    End If
-    If InStr(cARQTMP, "[JETPDX4]") > 0 Then
-      cARQ = Replace(cARQ, "[JETPDX4]", "")
-      cARQ = cJETUSO & cARQ & cJetExt & "Paradox 4.X" & ";"
-      TipoConn = Array("ADO", cARQ, "DB")
-      Exit Function
-    End If
-    If InStr(cARQTMP, "[JETPDX5]") > 0 Then
-      cARQ = Replace(cARQ, "[JETPDX5]", "")
-      cARQ = cJETUSO & cARQ & cJetExt & "Paradox 5.X" & ";"
-      TipoConn = Array("ADO", cARQ, "DB")
-      Exit Function
-    End If
-  End If
+752:   If InStr(cARQTMP, "[JETPD") > 0 Then
+753:     If InStr(cARQTMP, "[JETPDX3]") > 0 Then
+754:       cARQ = Replace(cARQ, "[JETPDX3]", "")
+755:       cARQ = cJETUSO & cARQ & cJetExt & "Paradox 3.X" & ";"
+756:       TipoConn = Array("ADO", cARQ, "DB")
+757:       Exit Function
+758:     End If
+759:     If InStr(cARQTMP, "[JETPDX4]") > 0 Then
+760:       cARQ = Replace(cARQ, "[JETPDX4]", "")
+761:       cARQ = cJETUSO & cARQ & cJetExt & "Paradox 4.X" & ";"
+762:       TipoConn = Array("ADO", cARQ, "DB")
+763:       Exit Function
+764:     End If
+765:     If InStr(cARQTMP, "[JETPDX5]") > 0 Then
+766:       cARQ = Replace(cARQ, "[JETPDX5]", "")
+767:       cARQ = cJETUSO & cARQ & cJetExt & "Paradox 5.X" & ";"
+768:       TipoConn = Array("ADO", cARQ, "DB")
+769:       Exit Function
+770:     End If
+771:   End If
 End Function
 Public Function DriverExisteOdbc(cNOME As String, bE_DriverODBC As Boolean) As Boolean
-    On Error GoTo TrataErro
+774:     On Error GoTo TrataErro
     
-    If bE_DriverODBC Then
+776:     If bE_DriverODBC Then
         ' Verifica Driver ODBC via Registro
         Dim oShell As Object
-        Set oShell = CreateObject("WScript.Shell")
+779:         Set oShell = CreateObject("WScript.Shell")
         ' Tenta ler a subchave padrão de Drivers ODBC
         Dim sReg As String
-        sReg = "HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\" & cNOME & "\Driver"
-        oShell.RegRead sReg
-        DriverExisteOdbc = True
-        Set oShell = Nothing
-    Else
+782:         sReg = "HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\" & cNOME & "\Driver"
+783:         oShell.RegRead sReg
+784:         DriverExisteOdbc = True
+785:         Set oShell = Nothing
+786:     Else
         ' Verifica Provider OLEDB via criação de objeto COM
         Dim oCONN As Object
-        Set oCONN = CreateObject(cNOME)
-        DriverExisteOdbc = True
-        Set oCONN = Nothing
-    End If
-    Exit Function
+789:         Set oCONN = CreateObject(cNOME)
+790:         DriverExisteOdbc = True
+791:         Set oCONN = Nothing
+792:     End If
+793:     Exit Function
 
 TrataErro:
-    DriverExisteOdbc = False
-    Resume Proximo
+796:     DriverExisteOdbc = False
+797:     Resume Proximo
 Proximo:
 End Function
 Public Function TipoDado2(ByVal intType As Integer) As String
-  Select Case intType
+801:   Select Case intType
   Case adSmallInt, adInteger, adSingle, adDouble, adCurrency, adBigInt, adBinary, _
        adDecimal, adNumeric, adTinyInt, adUnsignedBigInt, adUnsignedInt, _
        adUnsignedSmallInt, adUnsignedTinyInt
-    TipoDado2 = "N"                          ''E um Numero
+805:     TipoDado2 = "N"                          ''E um Numero
   Case adDate, adDBDate, adDBTimeStamp
-    TipoDado2 = "D"                          ''Tipos Data
+807:     TipoDado2 = "D"                          ''Tipos Data
   Case adBoolean
-    TipoDado2 = "B"                          ''Tipos Boolean
+809:     TipoDado2 = "B"                          ''Tipos Boolean
   Case adVarChar, adLongVarChar, adChar, adLongVarWChar, adVarWChar, adWChar
-    TipoDado2 = "S"                          ''Tipos String
+811:     TipoDado2 = "S"                          ''Tipos String
   Case adDBTime
-    TipoDado2 = "T"                          ''Tipos Time
+813:     TipoDado2 = "T"                          ''Tipos Time
   Case adBSTR, adChapter, adFileTime, adGUID, adIDispatch, adUserDefined
-    TipoDado2 = "X"                          ''Outros Tipos
+815:     TipoDado2 = "X"                          ''Outros Tipos
   Case adEmpty
-    TipoDado2 = "U"                          ''uNDEFINIDOS VAZIOS
+817:     TipoDado2 = "U"                          ''uNDEFINIDOS VAZIOS
   Case adError, adIUnknown
-    TipoDado2 = "E"                          ''Erros
+819:     TipoDado2 = "E"                          ''Erros
   Case adLongVarBinary
-    TipoDado2 = "O"                          ''Ole
+821:     TipoDado2 = "O"                          ''Ole
   Case adPropVariant, adVarBinary, adVariant   ''Variantes
-    TipoDado2 = "V"
+823:     TipoDado2 = "V"
   Case Else
-    TipoDado2 = "U"
-  End Select
+825:     TipoDado2 = "U"
+826:   End Select
 End Function
 
 Public Function TipoDados(ByVal intType As Integer) As String
@@ -845,258 +845,258 @@ Public Function TipoDados(ByVal intType As Integer) As String
 ''DOUBLE 5 DBDATE 133 LONGVARBINARY 205
 ''CURRENCY 6 DBTIME 134 CHAPTER 136
 
-  Select Case intType
+847:   Select Case intType
   Case adSmallInt
-    TipoDados = "SmallInt"
+849:     TipoDados = "SmallInt"
   Case adInteger
-    TipoDados = "Integer"
+851:     TipoDados = "Integer"
   Case adSingle
-    TipoDados = "Single"
+853:     TipoDados = "Single"
   Case adDouble
-    TipoDados = "Double"
+855:     TipoDados = "Double"
   Case adDate
-    TipoDados = "Date"
+857:     TipoDados = "Date"
   Case adBoolean
-    TipoDados = "Boolean"
+859:     TipoDados = "Boolean"
   Case adVarChar
-    TipoDados = "VarChar"
+861:     TipoDados = "VarChar"
   Case adLongVarChar
-    TipoDados = "LongVarChar"
+863:     TipoDados = "LongVarChar"
   Case adBigInt
-    TipoDados = "BigInt"
+865:     TipoDados = "BigInt"
   Case adChar
-    TipoDados = "Char"
+867:     TipoDados = "Char"
   Case adDBDate
-    TipoDados = "DBDate"
+869:     TipoDados = "DBDate"
   Case adDBTime
-    TipoDados = "DBTime"
+871:     TipoDados = "DBTime"
   Case adDBTimeStamp
-    TipoDados = "DBTimeStamp"
+873:     TipoDados = "DBTimeStamp"
   Case adDecimal
-    TipoDados = "Decimal"
+875:     TipoDados = "Decimal"
   Case adFileTime
-    TipoDados = "FileTime"
+877:     TipoDados = "FileTime"
   Case adNumeric
-    TipoDados = "Numeric"
+879:     TipoDados = "Numeric"
   Case adPropVariant
-    TipoDados = "PropVariant"
+881:     TipoDados = "PropVariant"
   Case adTinyInt
-    TipoDados = "TinyInt"
+883:     TipoDados = "TinyInt"
   Case adUnsignedBigInt
-    TipoDados = "UnsignedBigInt"
+885:     TipoDados = "UnsignedBigInt"
   Case adUnsignedInt
-    TipoDados = "UnsignedInt"
+887:     TipoDados = "UnsignedInt"
   Case adUnsignedSmallInt
-    TipoDados = "UnsignedSmallInt"
+889:     TipoDados = "UnsignedSmallInt"
   Case adUnsignedTinyInt
-    TipoDados = "UnsignedTinyInt"
+891:     TipoDados = "UnsignedTinyInt"
   Case adLongVarBinary
-    TipoDados = "LongVarBinary(Ole)"
+893:     TipoDados = "LongVarBinary(Ole)"
   Case adLongVarWChar
-    TipoDados = "LongVarWChar(Memo)"
+895:     TipoDados = "LongVarWChar(Memo)"
   Case adVarNumeric
-    TipoDados = "VarNumeric"
+897:     TipoDados = "VarNumeric"
   Case adVarWChar
-    TipoDados = "VarWChar"
+899:     TipoDados = "VarWChar"
   Case adWChar
-    TipoDados = "WChar"
+901:     TipoDados = "WChar"
   Case adCurrency
-    TipoDados = "Currency"
+903:     TipoDados = "Currency"
   Case adBinary
-    TipoDados = "Binary"
+905:     TipoDados = "Binary"
   Case adBSTR
-    TipoDados = "BSTR"
+907:     TipoDados = "BSTR"
   Case adChapter
-    TipoDados = "Chapter"
+909:     TipoDados = "Chapter"
   Case adBinary
-    TipoDados = "Binary"
+911:     TipoDados = "Binary"
   Case adBSTR
-    TipoDados = "BSTR"
+913:     TipoDados = "BSTR"
   Case adChapter
-    TipoDados = "Chapter"
+915:     TipoDados = "Chapter"
   Case adGUID
-    TipoDados = "GUID"
+917:     TipoDados = "GUID"
   Case adIDispatch
-    TipoDados = "IDispatch"
+919:     TipoDados = "IDispatch"
   Case adIUnknown
-    TipoDados = "IUnknown"
+921:     TipoDados = "IUnknown"
   Case adGUID
-    TipoDados = "GUID"
+923:     TipoDados = "GUID"
   Case adIDispatch
-    TipoDados = "IDispatch"
+925:     TipoDados = "IDispatch"
   Case adIUnknown
-    TipoDados = "IUnknown"
+927:     TipoDados = "IUnknown"
 
   Case Else
-    TipoDados = "Tipo de dados não reconhecido"
-  End Select
+930:     TipoDados = "Tipo de dados não reconhecido"
+931:   End Select
 End Function
 
 Public Function ADORsStatus(ByRef eSTATUS) As String
-  ADORsStatus = "Status Nao Especificado"
-  Select Case eSTATUS
+935:   ADORsStatus = "Status Nao Especificado"
+936:   Select Case eSTATUS
   Case adRecOK
-    ADORsStatus = "Registro Gravado Corretamente"
+938:     ADORsStatus = "Registro Gravado Corretamente"
   Case adRecNew
-    ADORsStatus = "Novo Registro"
+940:     ADORsStatus = "Novo Registro"
   Case adRecModified
-    ADORsStatus = "Registro Modificado"
+942:     ADORsStatus = "Registro Modificado"
   Case adRecDeleted
-    ADORsStatus = "Registro Deletado"
+944:     ADORsStatus = "Registro Deletado"
   Case adRecUnmodified
-    ADORsStatus = "Registro nao modificado"
+946:     ADORsStatus = "Registro nao modificado"
   Case adRecInvalid
-    ADORsStatus = "Nao Salvo - Invalido BookMark"
+948:     ADORsStatus = "Nao Salvo - Invalido BookMark"
   Case adRecMultipleChanges
-    ADORsStatus = "Nao Salvo - Afetou muitos Registro"
+950:     ADORsStatus = "Nao Salvo - Afetou muitos Registro"
   Case adRecPendingChanges
-    ADORsStatus = "Nao Salvo - Insercao Pendente"
+952:     ADORsStatus = "Nao Salvo - Insercao Pendente"
   Case adRecCanceled
-    ADORsStatus = "Nao Salvo - Operacao Cancelada"
+954:     ADORsStatus = "Nao Salvo - Operacao Cancelada"
   Case adRecCantRelease
-    ADORsStatus = "Nao Salvo - Existe registro travado"
+956:     ADORsStatus = "Nao Salvo - Existe registro travado"
   Case adRecConcurrencyViolation
-    ADORsStatus = "Nao Salvo - Cursor Optimista em Uso"
+958:     ADORsStatus = "Nao Salvo - Cursor Optimista em Uso"
   Case adRecIntegrityViolation
-    ADORsStatus = "Nao Salvo - Violacao de Integridade"
+960:     ADORsStatus = "Nao Salvo - Violacao de Integridade"
   Case adRecMaxChangesExceeded
-    ADORsStatus = "Nao Salvo - Muitas Pendencias"
+962:     ADORsStatus = "Nao Salvo - Muitas Pendencias"
   Case adRecObjectOpen
-    ADORsStatus = "Nao Salvo - Falha no meio de Armazenamento"
+964:     ADORsStatus = "Nao Salvo - Falha no meio de Armazenamento"
   Case adRecOutOfMemory
-    ADORsStatus = "Nao Salvo - Erro Memoria Computador"
+966:     ADORsStatus = "Nao Salvo - Erro Memoria Computador"
   Case adRecPermissionDenied
-    ADORsStatus = "Nao Salvo - Falta permissao"
+968:     ADORsStatus = "Nao Salvo - Falta permissao"
   Case adRecSchemaViolation
-    ADORsStatus = "Nao Salvo - Violacao da Estrutura do Arquivo"
+970:     ADORsStatus = "Nao Salvo - Violacao da Estrutura do Arquivo"
   Case adRecDBDeleted
-    ADORsStatus = "Registro Ja Deletado"
+972:     ADORsStatus = "Registro Ja Deletado"
   Case Else
-    ADORsStatus = "Status Nao Especificado"
-  End Select
+974:     ADORsStatus = "Status Nao Especificado"
+975:   End Select
 
 End Function
 
 Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String = "")
   Dim errorObject As ADODB.Error
-  For Each errorObject In oErro
-    cERRO = cERRO & " Ado Erro Numero: " & errorObject.Number & vbCrLf
-    cERRO = cERRO & " Ado Descricao  : " & errorObject.Description & vbCrLf
-    cERRO = cERRO & " Ado Fonte      : " & errorObject.Source & vbCrLf
-    cERRO = cERRO & " Ado SQL        : " & errorObject.SQLState & vbCrLf
-    cERRO = cERRO & " Ado Erro Nativo: " & errorObject.NativeError & vbCrLf
-  Next
-  SayErro cERRO, True
+981:   For Each errorObject In oErro
+982:     cERRO = cERRO & " Ado Erro Numero: " & errorObject.Number & vbCrLf
+983:     cERRO = cERRO & " Ado Descricao  : " & errorObject.Description & vbCrLf
+984:     cERRO = cERRO & " Ado Fonte      : " & errorObject.Source & vbCrLf
+985:     cERRO = cERRO & " Ado SQL        : " & errorObject.SQLState & vbCrLf
+986:     cERRO = cERRO & " Ado Erro Nativo: " & errorObject.NativeError & vbCrLf
+987:   Next
+988:   SayErro cERRO, True
 End Function
 
 Public Function ADO_IsRecordsetEmpty(ByRef oRS As ADODB.Recordset) As Boolean
   Dim cERRO As String
-  On Error GoTo TrataErro
-  ADO_IsRecordsetEmpty = False
-  If Not ADO_IsOpen(oRS) Then
-    ADO_IsRecordsetEmpty = True
-    Exit Function
-  End If
-  If oRS.EOF And oRS.BOF Then
-    ADO_IsRecordsetEmpty = True
-    Exit Function
-  End If
-  If oRS.RecordCount = 0 Then
-    ADO_IsRecordsetEmpty = True
-    Exit Function
-  End If
-  Exit Function
+993:   On Error GoTo TrataErro
+994:   ADO_IsRecordsetEmpty = False
+995:   If Not ADO_IsOpen(oRS) Then
+996:     ADO_IsRecordsetEmpty = True
+997:     Exit Function
+998:   End If
+999:   If oRS.EOF And oRS.BOF Then
+1000:     ADO_IsRecordsetEmpty = True
+1001:     Exit Function
+1002:   End If
+1003:   If oRS.RecordCount = 0 Then
+1004:     ADO_IsRecordsetEmpty = True
+1005:     Exit Function
+1006:   End If
+1007:   Exit Function
 TrataErro:
-  cERRO = "ADO_IsRecordsetEmpty"
-  cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
-  Select Case Err.Number
+1009:   cERRO = "ADO_IsRecordsetEmpty"
+1010:   cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
+1011:   Select Case Err.Number
   Case Else
-    ADOErro oRS.ActiveConnection.Errors, cERRO
-  End Select
+1013:     ADOErro oRS.ActiveConnection.Errors, cERRO
+1014:   End Select
 End Function
 
 Public Function ADO_FieldValueToString(ByRef FLD As ADODB.Field, Optional ByVal sNullRepresentation As String = "(null)") As String
 'Call TraceEnters(MODULE_NAME & "::ADO_FieldValueToString")
 'TraceDetail = "To convert the value of a field into a string"
-  On Error GoTo TrataErro
+1020:   On Error GoTo TrataErro
 
-  ADO_FieldValueToString = ""
-  Select Case (FLD.Type)
+1022:   ADO_FieldValueToString = ""
+1023:   Select Case (FLD.Type)
     '~~~~~~
   Case adBSTR, adChar, adVarChar, adVarWChar, adWChar, adLongVarChar, adLongVarWChar, adGUID:
-    ADO_FieldValueToString = Nz(FLD.Value, sNullRepresentation)
+1026:     ADO_FieldValueToString = Nz(FLD.Value, sNullRepresentation)
     '~~~~~~
   Case adBigInt, adCurrency, adDecimal, adDouble, adInteger, adNumeric, adSingle, adSmallInt, adTinyInt, adUnsignedBigInt, adUnsignedInt, adUnsignedSmallInt, adUnsignedTinyInt, adBoolean:
-    ADO_FieldValueToString = Format(Nz(FLD.Value, sNullRepresentation))
+1029:     ADO_FieldValueToString = Format(Nz(FLD.Value, sNullRepresentation))
     '~~~~~~
   Case adVariant:
-    ADO_FieldValueToString = Format(Nz(FLD.Value, sNullRepresentation))
+1032:     ADO_FieldValueToString = Format(Nz(FLD.Value, sNullRepresentation))
     '~~~~~~
   Case adDate, adDBDate, adDBTime, adDBTimeStamp:
-    ADO_FieldValueToString = Format(Nz(FLD.Value, sNullRepresentation))
+1035:     ADO_FieldValueToString = Format(Nz(FLD.Value, sNullRepresentation))
     '~~~~~~
   Case adBinary, adVarBinary, adLongVarBinary:
-    ADO_FieldValueToString = IIf(IsNull(FLD.Value), sNullRepresentation, BytesToHexString(FLD.Value))
+1038:     ADO_FieldValueToString = IIf(IsNull(FLD.Value), sNullRepresentation, BytesToHexString(FLD.Value))
     '~~~~~~
   Case Else:
     'Err.Raise 13, MODULE_NAME & "::ADO_FieldValueToString", "Sorry, unable to convert fields of type " & fld.Type & ", (" & ADO_DataTypeEnumToEnglish(fld.Type) & ") to string."
-  End Select
-  Exit Function
+1042:   End Select
+1043:   Exit Function
 TrataErro:
-  SayErro "ADO_FieldValueToString"
-  Exit Function
+1045:   SayErro "ADO_FieldValueToString"
+1046:   Exit Function
 End Function
 
 Public Sub ADO_FreeRecordset(ByRef rs As ADODB.Recordset)
-  On Error Resume Next
-  If rs.State = adStateOpen Then
-    rs.Close
-  End If
-  Set rs = Nothing
-  On Error GoTo 0
+1050:   On Error Resume Next
+1051:   If rs.State = adStateOpen Then
+1052:     rs.Close
+1053:   End If
+1054:   Set rs = Nothing
+1055:   On Error GoTo 0
 End Sub
 
 Public Function ADO_IsOpen(ByRef oADOObject As Object) As Boolean
 
-    On Error GoTo TrataErro  'resume Next 'Evita quebra se o objeto estiver em estado inválido
-        ADO_IsOpen = False
-    If oADOObject Is Nothing Then Exit Function
+1060:     On Error GoTo TrataErro  'resume Next 'Evita quebra se o objeto estiver em estado inválido
+1061:         ADO_IsOpen = False
+1062:     If oADOObject Is Nothing Then Exit Function
     
     'Verifica se o estado tem o bit de "Open" ligado
-    ADO_IsOpen = ((oADOObject.State And adStateOpen) = adStateOpen)
+1065:     ADO_IsOpen = ((oADOObject.State And adStateOpen) = adStateOpen)
         
-  Exit Function
+1067:   Exit Function
 
 TrataErro:
-  SayErro "ADO_ISOPEN"
+1070:   SayErro "ADO_ISOPEN"
 
 End Function
 
 Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTABELA As String, Optional ByVal lMES As Boolean = True) As Boolean
   Dim oCat As ADOX.Catalog
   Dim oTabela As ADOX.Table
-  On Error GoTo TrataErro
+1077:   On Error GoTo TrataErro
 
-  TemTabelaADO = False
-  Set oCat = New ADOX.Catalog
-  oCat.ActiveConnection = cARQ
+1079:   TemTabelaADO = False
+1080:   Set oCat = New ADOX.Catalog
+1081:   oCat.ActiveConnection = cARQ
 
-  For Each oTabela In oCat.Tables
-    If UCase(oTabela.Name) = UCase(cTABELA) Then
-      TemTabelaADO = True
-      Exit For
-    End If
-  Next
+1083:   For Each oTabela In oCat.Tables
+1084:     If UCase(oTabela.Name) = UCase(cTABELA) Then
+1085:       TemTabelaADO = True
+1086:       Exit For
+1087:     End If
+1088:   Next
 
-  If lMES And Not TemTabelaADO Then
-    Alert ("Tabela nao Encontrada" & cTABELA & Chr(13) & Chr(10) & cARQ)
-  End If
+1090:   If lMES And Not TemTabelaADO Then
+1091:     Alert ("Tabela nao Encontrada" & cTABELA & Chr(13) & Chr(10) & cARQ)
+1092:   End If
 TrataErro:
-  Select Case Err.Number
+1094:   Select Case Err.Number
   Case Else
-    SayErro "Tem Tabela Ado :" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTABELA & Chr(13) & Chr(10)
-    Exit Function
-  End Select
+1096:     SayErro "Tem Tabela Ado :" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTABELA & Chr(13) & Chr(10)
+1097:     Exit Function
+1098:   End Select
 
 End Function
 
@@ -1113,42 +1113,42 @@ Public Function MSSqlOdbcDriver() As String
     'We're using the registry to check for Drivers, so we'll just create the registry object
     '   once and use it each time through the loop below
     Dim oReg As Object
-    Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
+1115:     Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
     Const RegPath As String = "SOFTWARE\ODBC\ODBCINST.INI\ODBC Drivers"
     Const HKEY_LOCAL_MACHINE = &H80000002
     
     
     Dim i As Long
-    For i = 0 To UBound(SupportedDrivers)
+1121:     For i = 0 To UBound(SupportedDrivers)
         Dim driverName As String: driverName = SupportedDrivers(i)
         
         Dim KeyExists As Boolean, RegValue As String
-        KeyExists = (oReg.GetStringValue(HKEY_LOCAL_MACHINE, RegPath, driverName, RegValue) = 0)
+1125:         KeyExists = (oReg.GetStringValue(HKEY_LOCAL_MACHINE, RegPath, driverName, RegValue) = 0)
         
         Dim DriverIsInstalled
-        DriverIsInstalled = (KeyExists And (RegValue = "Installed"))
+1128:         DriverIsInstalled = (KeyExists And (RegValue = "Installed"))
         
-        If DriverIsInstalled Then
+1130:         If DriverIsInstalled Then
             'Return the first Driver from the list that is installed on the computer
-            MSSqlOdbcDriver = driverName
-            Set oReg = Nothing
-            Exit Function
-        End If
-    Next i
-    Set oReg = Nothing
+1132:             MSSqlOdbcDriver = driverName
+1133:             Set oReg = Nothing
+1134:             Exit Function
+1135:         End If
+1136:     Next i
+1137:     Set oReg = Nothing
     
     'If we get here it means there were no matches found;
     '   until we work out all the kinks, we may be better served by returning the default Driver
     '   here rather than throwing an error
-    MsgBox "No ODBC Drivers found (not even the default that ships with Windows!)"
+1142:     MsgBox "No ODBC Drivers found (not even the default that ships with Windows!)"
 End Function
 
 Private Function DriverExiste(cNOME As String) As Boolean
-    On Error Resume Next
+1146:     On Error Resume Next
     Dim oCONN As Object
-    Set oCONN = CreateObject(cNOME)
-    DriverExiste = (Err.Number = 0)
-    Set oCONN = Nothing
+1148:     Set oCONN = CreateObject(cNOME)
+1149:     DriverExiste = (Err.Number = 0)
+1150:     Set oCONN = Nothing
 End Function
 ' ----------------------------------------------------------------
 ' Procedure : GetLatestOledbProvider --MSSqlOledbProvider
@@ -1170,37 +1170,37 @@ Public Function MSSqlOledbProvider(Optional ByVal nTIPO As Integer = 1) As Strin
     'We're using the registry to check for providers, so we'll just create the registry object
     '   once and use it each time through the loop below
     Dim oReg As Object
-    Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
+1172:     Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
     Const HKEY_CLASSES_ROOT = &H80000000
     
     Dim i As Long
-    For i = 0 To UBound(SupportedProviders) Step 3
+1176:     For i = 0 To UBound(SupportedProviders) Step 3
         Dim ProviderName As String: ProviderName = SupportedProviders(i)
         Dim ProviderDesc As String: ProviderDesc = SupportedProviders(i + 1)
         Dim ProviderUID As String: ProviderUID = SupportedProviders(i + 2)
         
         Dim ProviderIsInstalled As Boolean, SubkeyPath As String
-        SubkeyPath = "CLSID\{" & ProviderUID & "}\"
-        ProviderIsInstalled = (oReg.EnumKey(HKEY_CLASSES_ROOT, SubkeyPath, "", "") = 0)
+1182:         SubkeyPath = "CLSID\{" & ProviderUID & "}\"
+1183:         ProviderIsInstalled = (oReg.EnumKey(HKEY_CLASSES_ROOT, SubkeyPath, "", "") = 0)
         
-        If ProviderIsInstalled Then
+1185:         If ProviderIsInstalled Then
             'Return the first provider from the list that is installed on the computer
-            Select Case nTIPO
+1187:             Select Case nTIPO
                    Case 1
-                       MSSqlOledbProvider = ProviderName
+1189:                        MSSqlOledbProvider = ProviderName
                    Case 2
-                       MSSqlOledbProvider = ProviderDesc
+1191:                        MSSqlOledbProvider = ProviderDesc
                    Case 3
-                       MSSqlOledbProvider = ProviderUID
-            End Select
-            Set oReg = Nothing
-            Exit Function
-        End If
-    Next i
-    Set oReg = Nothing
+1193:                        MSSqlOledbProvider = ProviderUID
+1194:             End Select
+1195:             Set oReg = Nothing
+1196:             Exit Function
+1197:         End If
+1198:     Next i
+1199:     Set oReg = Nothing
     
     'If we get here it means there were no matches found
-    MsgBox "No OLE DB providers found (not even the default that ships with Windows!)"
+1202:     MsgBox "No OLE DB providers found (not even the default that ships with Windows!)"
 End Function
 
 
@@ -1216,18 +1216,18 @@ Public Function ado_GetCursorType(CursorType As Integer) As String
     ' adOpenUnspecified = -1
     '*******************
     
-    Select Case CursorType
+1218:     Select Case CursorType
         Case 2
-            ado_GetCursorType = "Dynamic"
+1220:             ado_GetCursorType = "Dynamic"
         Case 0
-            ado_GetCursorType = "ForwardOnly"
+1222:             ado_GetCursorType = "ForwardOnly"
        Case 1
-            ado_GetCursorType = "Keyset"
+1224:             ado_GetCursorType = "Keyset"
         Case 3
-            ado_GetCursorType = "Static"
+1226:             ado_GetCursorType = "Static"
         Case -1
-            ado_GetCursorType = "Unspecified"
-    End Select
+1228:             ado_GetCursorType = "Unspecified"
+1229:     End Select
 End Function
 
 Function ado_GetLockType(LockType As Integer) As String
@@ -1242,64 +1242,64 @@ Function ado_GetLockType(LockType As Integer) As String
     ' adLockUnspecified = -1
     '*******************
     
-    Select Case LockType
+1244:     Select Case LockType
         Case 4
-            ado_GetLockType = "BatchOptimistic"
+1246:             ado_GetLockType = "BatchOptimistic"
         Case 3
-            ado_GetLockType = "Optimistic"
+1248:             ado_GetLockType = "Optimistic"
        Case 2
-            ado_GetLockType = "Pessimistic"
+1250:             ado_GetLockType = "Pessimistic"
         Case 1
-            ado_GetLockType = "ReadOnly "
+1252:             ado_GetLockType = "ReadOnly "
         Case -1
-            ado_GetLockType = "Unspecified"
-    End Select
+1254:             ado_GetLockType = "Unspecified"
+1255:     End Select
 
 End Function
 Public Function ExtraiWhere(ByVal cSQL As String) As String
     Dim nPOS As Long
     Dim sUpperSQL As String
     
-    sUpperSQL = UCase(cSQL)
-    nPOS = InStr(sUpperSQL, "WHERE ")
+1262:     sUpperSQL = UCase(cSQL)
+1263:     nPOS = InStr(sUpperSQL, "WHERE ")
     
-    If nPOS > 0 Then
+1265:     If nPOS > 0 Then
         ' Retorna do "WHERE" até ao fim da string
-        ExtraiWhere = Trim(Mid(cSQL, nPOS))
-    Else
+1267:         ExtraiWhere = Trim(Mid(cSQL, nPOS))
+1268:     Else
         ' Se não houver WHERE, retorna vazio (CUIDADO: isso afetaria a tabela toda)
-        ExtraiWhere = ""
-    End If
+1270:         ExtraiWhere = ""
+1271:     End If
 End Function
 
 
 Public Function ExtraiTabela(ByVal cSQL As String) As String
     ' Busca o nome da tabela após o "FROM"
     Dim nPOS As Long
-    cSQL = UCase(cSQL)
-    nPOS = InStr(cSQL, "FROM ")
-    If nPOS > 0 Then
-        ExtraiTabela = Trim(Mid(cSQL, nPOS + 5))
+1278:     cSQL = UCase(cSQL)
+1279:     nPOS = InStr(cSQL, "FROM ")
+1280:     If nPOS > 0 Then
+1281:         ExtraiTabela = Trim(Mid(cSQL, nPOS + 5))
         ' Remove o resto se houver WHERE ou ORDER
-        If InStr(ExtraiTabela, " ") > 0 Then
-            ExtraiTabela = Left(ExtraiTabela, InStr(ExtraiTabela, " ") - 1)
-        End If
-    End If
+1283:         If InStr(ExtraiTabela, " ") > 0 Then
+1284:             ExtraiTabela = Left(ExtraiTabela, InStr(ExtraiTabela, " ") - 1)
+1285:         End If
+1286:     End If
 End Function
 
 
 Public Function PrepararValorSQL(ByVal v As Variant) As String
-    If IsNull(v) Then
-        PrepararValorSQL = "NULL"
-    ElseIf IsNumeric(v) Then
+1291:     If IsNull(v) Then
+1292:         PrepararValorSQL = "NULL"
+1293:     ElseIf IsNumeric(v) Then
         ' No SQLite, decimais devem usar PONTO, não vírgula
-        PrepararValorSQL = Replace(CStr(v), ",", ".")
-    ElseIf IsDate(v) Then
-        PrepararValorSQL = "'" & Format(v, "yyyy-mm-dd") & "'"
-    Else
+1295:         PrepararValorSQL = Replace(CStr(v), ",", ".")
+1296:     ElseIf IsDate(v) Then
+1297:         PrepararValorSQL = "'" & Format(v, "yyyy-mm-dd") & "'"
+1298:     Else
         ' Texto: dobra as aspas simples para não quebrar o SQL
-        PrepararValorSQL = "'" & Replace(v, "'", "''") & "'"
-    End If
+1300:         PrepararValorSQL = "'" & Replace(v, "'", "''") & "'"
+1301:     End If
 End Function
 
 Public Function TratarParametrosCofre(ByVal cARQ As String) As String
@@ -1309,8 +1309,8 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
     Dim nPosStart As Long
     Dim nPosEnd As Long
     
-    cBancoPuro = ""
-     cUpperARQ = UCase(Trim(cARQ))
+1311:     cBancoPuro = ""
+1312:      cUpperARQ = UCase(Trim(cARQ))
     
     ' -------------------------------------------------------------------------
     ' CASO 1: Arquivos locais com caminho (\pasta\arquivo.sqlite, .mdb, .accdb)
@@ -1323,60 +1323,60 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
         Dim cNomeComExtensao As String
         
         ' Acha a última barra do caminho
-        nPosBarra = InStrRev(cARQ, "\")
-        If nPosBarra = 0 Then nPosBarra = InStrRev(cARQ, "/")
+1325:         nPosBarra = InStrRev(cARQ, "\")
+1326:         If nPosBarra = 0 Then nPosBarra = InStrRev(cARQ, "/")
         
-        cNomeComExtensao = Mid(cARQ, nPosBarra + 1)
+1328:         cNomeComExtensao = Mid(cARQ, nPosBarra + 1)
         
         ' Remove a extensão para pegar só o nome limpo do banco
-        nPosPonto = InStrRev(cNomeComExtensao, ".")
-        If nPosPonto > 0 Then
-            cBancoPuro = Left(cNomeComExtensao, nPosPonto - 1)
-        Else
-            cBancoPuro = cNomeComExtensao
-        End If
+1331:         nPosPonto = InStrRev(cNomeComExtensao, ".")
+1332:         If nPosPonto > 0 Then
+1333:             cBancoPuro = Left(cNomeComExtensao, nPosPonto - 1)
+1334:         Else
+1335:             cBancoPuro = cNomeComExtensao
+1336:         End If
 
     ' -------------------------------------------------------------------------
     ' CASO 2: String delimitada por pontos (ex: localhost.3306.mariadb.citacao)
     ' -------------------------------------------------------------------------
-    ElseIf InStr(cARQ, ".") > 0 And InStr(cUpperARQ, "DRIVER=") = 0 Then
-        aCONN = Split(cARQ, ".")
-        If UBound(aCONN) >= 3 Then
-            cBancoPuro = aCONN(3) ' Pega o quarto elemento (o nome do banco)
+1341:     ElseIf InStr(cARQ, ".") > 0 And InStr(cUpperARQ, "DRIVER=") = 0 Then
+1342:         aCONN = Split(cARQ, ".")
+1343:         If UBound(aCONN) >= 3 Then
+1344:             cBancoPuro = aCONN(3) ' Pega o quarto elemento (o nome do banco)
             
             ' Aproveita e captura o Servidor se ele estiver vazio
             'If Trim(cSERVER) = "" Then cSERVER = aCONN(0)
-        End If
+1348:         End If
 
     ' -------------------------------------------------------------------------
     ' CASO 3: String de conexão ODBC Padrão (Ex: DRIVER={...};DATABASE=nomebanco)
     ' Trata variações normais de mercado como DATABASE= ou DB=
     ' -------------------------------------------------------------------------
-    ElseIf InStr(cUpperARQ, "DATABASE=") > 0 Or InStr(cUpperARQ, "DB=") > 0 Then
+1354:     ElseIf InStr(cUpperARQ, "DATABASE=") > 0 Or InStr(cUpperARQ, "DB=") > 0 Then
         
         ' Identifica qual marcador foi utilizado na string
-        If InStr(cUpperARQ, "DATABASE=") > 0 Then
-            nPosStart = InStr(cUpperARQ, "DATABASE=") + 9
-        Else
-            nPosStart = InStr(cUpperARQ, "DB=") + 3
-        End If
+1357:         If InStr(cUpperARQ, "DATABASE=") > 0 Then
+1358:             nPosStart = InStr(cUpperARQ, "DATABASE=") + 9
+1359:         Else
+1360:             nPosStart = InStr(cUpperARQ, "DB=") + 3
+1361:         End If
         
         ' Procura o próximo ponto e vírgula que encerra o nome do banco
-        nPosEnd = InStr(nPosStart, cUpperARQ, ";")
+1364:         nPosEnd = InStr(nPosStart, cUpperARQ, ";")
         
-        If nPosEnd > 0 Then
-            cBancoPuro = Mid(cARQ, nPosStart, nPosEnd - nPosStart)
-        Else
-            cBancoPuro = Mid(cARQ, nPosStart)
-        End If
+1366:         If nPosEnd > 0 Then
+1367:             cBancoPuro = Mid(cARQ, nPosStart, nPosEnd - nPosStart)
+1368:         Else
+1369:             cBancoPuro = Mid(cARQ, nPosStart)
+1370:         End If
         
         ' Limpa aspas ou caracteres residuais que algumas strings ODBC podem conter
-        cBancoPuro = Replace(cBancoPuro, """", "")
-        cBancoPuro = Replace(cBancoPuro, "'", "")
-    End If
+1373:         cBancoPuro = Replace(cBancoPuro, """", "")
+1374:         cBancoPuro = Replace(cBancoPuro, "'", "")
+1375:     End If
     
     ' Limpa espaços em branco e garante caixa alta para casar com o Harbour
-    cBancoPuro = UCase(Trim(cBancoPuro))
+1378:     cBancoPuro = UCase(Trim(cBancoPuro))
     
     ' -------------------------------------------------------------------------
     ' CONSULTA AO COFRE (modSeguranca.bas)
@@ -1397,7 +1397,7 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
     'End If
 
     ' Retorna o nome do banco identificado (caso precise usar na tipoconn)
-    TratarParametrosCofre = cBancoPuro
+1399:     TratarParametrosCofre = cBancoPuro
 End Function
 
 Public Function BytesToHexString(vaBytes As Variant) As String
@@ -1413,38 +1413,38 @@ Public Function BytesToHexString(vaBytes As Variant) As String
 '        mod->Sub
 ' Revision history:
 '   Michael Johnson     2000/Aug/01 13:51     Initial creation
-  On Error GoTo TrataErro
+1415:   On Error GoTo TrataErro
 
   Dim sAccumulator As String
   Dim lCtr As Long
   Dim sHex As String
   Dim sFormatted As String
 
-  BytesToHexString = ""
-  If Not TypeName(vaBytes) = "Byte()" Then
-    BytesToHexString = ""
-    Exit Function
-  End If
+1422:   BytesToHexString = ""
+1423:   If Not TypeName(vaBytes) = "Byte()" Then
+1424:     BytesToHexString = ""
+1425:     Exit Function
+1426:   End If
 
-  For lCtr = 0 To UBound(vaBytes)
-    sHex = Hex(vaBytes(lCtr))
-    sFormatted = Format(sHex, "@@")
-    sAccumulator = sAccumulator & Replace(sFormatted, " ", "0")
-  Next
-  sAccumulator = "0x" & sAccumulator
-  BytesToHexString = sAccumulator
-  Exit Function
+1428:   For lCtr = 0 To UBound(vaBytes)
+1429:     sHex = Hex(vaBytes(lCtr))
+1430:     sFormatted = Format(sHex, "@@")
+1431:     sAccumulator = sAccumulator & Replace(sFormatted, " ", "0")
+1432:   Next
+1433:   sAccumulator = "0x" & sAccumulator
+1434:   BytesToHexString = sAccumulator
+1435:   Exit Function
 TrataErro:
-  BytesToHexString = ""
-  Exit Function
+1437:   BytesToHexString = ""
+1438:   Exit Function
 End Function
 
 ' Exemplo de função auxiliar para padronizar
 Private Function GetJetExtendedProperties(cFormato As String, Optional lIMEX As Boolean = False) As String
     Dim sProps As String
-    sProps = cFormato & ";HDR=Yes"
-    If lIMEX Then sProps = sProps & ";IMEX=1"
-    GetJetExtendedProperties = ";Extended Properties='" & sProps & "';"
+1444:     sProps = cFormato & ";HDR=Yes"
+1445:     If lIMEX Then sProps = sProps & ";IMEX=1"
+1446:     GetJetExtendedProperties = ";Extended Properties='" & sProps & "';"
 End Function
 
 
@@ -1452,26 +1452,26 @@ Public Function GetBestMSSQL(TIPO As String) As String
     Dim SupportedDrivers, SupportedProviders
     Dim item As Variant
     
-    SupportedDrivers = Array("ODBC Driver 17 for SQL Server", "ODBC Driver 13 for SQL Server", "SQL Server Native Client 11.0", "SQL Server")
-    SupportedProviders = Array("MSOLEDBSQL19", "MSOLEDBSQL", "SQLNCLI11", "SQLOLEDB")
+1454:     SupportedDrivers = Array("ODBC Driver 17 for SQL Server", "ODBC Driver 13 for SQL Server", "SQL Server Native Client 11.0", "SQL Server")
+1455:     SupportedProviders = Array("MSOLEDBSQL19", "MSOLEDBSQL", "SQLNCLI11", "SQLOLEDB")
 
-    If TIPO = "D" Then
-        For Each item In SupportedDrivers
+1457:     If TIPO = "D" Then
+1458:         For Each item In SupportedDrivers
             ' AQUI: Você deve passar o nome (item) e True (pois é driver ODBC)
-            If DriverExisteOdbc(CStr(item), True) Then
-                GetBestMSSQL = CStr(item)
-                Exit Function
-            End If
-        Next
-    Else
-        For Each item In SupportedProviders
+1460:             If DriverExisteOdbc(CStr(item), True) Then
+1461:                 GetBestMSSQL = CStr(item)
+1462:                 Exit Function
+1463:             End If
+1464:         Next
+1465:     Else
+1466:         For Each item In SupportedProviders
             ' AQUI: Você deve passar o nome (item) e False (pois é Provider OLEDB)
-            If DriverExisteOdbc(CStr(item), False) Then
-                GetBestMSSQL = CStr(item)
-                Exit Function
-            End If
-        Next
-    End If
+1468:             If DriverExisteOdbc(CStr(item), False) Then
+1469:                 GetBestMSSQL = CStr(item)
+1470:                 Exit Function
+1471:             End If
+1472:         Next
+1473:     End If
 End Function
 
 Public Function ExtrairNomeTabela(ByVal cSQL As String) As String
@@ -1481,28 +1481,28 @@ Public Function ExtrairNomeTabela(ByVal cSQL As String) As String
     Dim cTemp As String
     
     ' Converte para maiúsculas para facilitar a busca
-    cTemp = " " & UCase(cSQL) & " "
+1483:     cTemp = " " & UCase(cSQL) & " "
     
     ' Localiza a posição do " FROM "
-    nPosFrom = InStr(1, cTemp, " FROM ")
-    If nPosFrom = 0 Then
-        ExtrairNomeTabela = ""
-        Exit Function
-    End If
+1486:     nPosFrom = InStr(1, cTemp, " FROM ")
+1487:     If nPosFrom = 0 Then
+1488:         ExtrairNomeTabela = ""
+1489:         Exit Function
+1490:     End If
     
-    nPosFrom = nPosFrom + 6 ' Tamanho da string " FROM "
+1492:     nPosFrom = nPosFrom + 6 ' Tamanho da string " FROM "
     
     ' Localiza o primeiro limitador após o FROM (WHERE, ORDER BY, GROUP BY)
-    nPosWhere = InStr(nPosFrom, cTemp, " WHERE ")
-    nPosOrder = InStr(nPosFrom, cTemp, " ORDER BY ")
+1495:     nPosWhere = InStr(nPosFrom, cTemp, " WHERE ")
+1496:     nPosOrder = InStr(nPosFrom, cTemp, " ORDER BY ")
     
     ' Define o fim do nome da tabela (o menor valor entre os delimitadores)
     Dim nFIM As Long
-    nFIM = Len(cTemp)
+1500:     nFIM = Len(cTemp)
     
-    If nPosWhere > 0 And nPosWhere < nFIM Then nFIM = nPosWhere
-    If nPosOrder > 0 And nPosOrder < nFIM Then nFIM = nPosOrder
+1502:     If nPosWhere > 0 And nPosWhere < nFIM Then nFIM = nPosWhere
+1503:     If nPosOrder > 0 And nPosOrder < nFIM Then nFIM = nPosOrder
     
     ' Extrai e limpa o nome da tabela
-    ExtrairNomeTabela = Trim(Mid(cSQL, nPosFrom - 1, nFIM - nPosFrom + 1))
+1506:     ExtrairNomeTabela = Trim(Mid(cSQL, nPosFrom - 1, nFIM - nPosFrom + 1))
 End Function
