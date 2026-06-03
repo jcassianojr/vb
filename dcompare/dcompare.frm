@@ -329,6 +329,14 @@ Private Sub CmdTableInfo_Click()
     End If
 End Sub
 
+Private Sub Command3_Click()
+GerarScriptAlteracoes TxTArquivoOrigem.Text, txtArquivoDestino.Text, False
+End Sub
+
+Private Sub Command4_Click()
+GerarScriptAlteracoes TxTArquivoOrigem.Text, txtArquivoDestino.Text, True
+End Sub
+
 Private Sub Command5_Click()
 If Not ValidarOuCriarDestino(txtArquivoDestino.Text) Then
         MsgBox "O destino é inválido ou não foi criado."

@@ -573,4 +573,205 @@ Dim cconn As String
   Set C = Nothing
 End Sub
 
+Public Sub GerarScriptAlteracoes(ByVal sPathOrigem As String, ByVal sPathDestino As String, ByVal bExecutar As Boolean)
+    Dim catOrigem As Object, catDestino As Object
+    Dim tblOrigem As Object
+    Dim connOrigem As New ADODB.Connection
+    Dim connDestino As New ADODB.Connection
+    Dim sPathSQL As String
+    Dim fFile As Integer
+    
+    ' 1. Define o caminho do SQL (Destino + .sql)
+    sPathSQL = sPathDestino & ".sql"
+    
+    ' 2. Abre o arquivo SQL para escrita (sobrescreve se já existir)
+    fFile = FreeFile
+    Open sPathSQL For Output As #fFile
+    
+    ' 3. Conexões
+    connOrigem.Open GeraConexao(sPathOrigem)
+    connDestino.Open GeraConexao(sPathDestino)
+    
+    Set catOrigem = CreateObject("ADOX.Catalog")
+    Set catDestino = CreateObject("ADOX.Catalog")
+    catOrigem.ActiveConnection = connOrigem
+    catDestino.ActiveConnection = connDestino
+    
+    Debug.Print "--- Iniciando Comparação e Gerando Script em: " & sPathSQL & " ---"
+    
+    ' 4. Itera nas tabelas
+    For Each tblOrigem In catOrigem.Tables
+        If tblOrigem.Type = "TABLE" And Left(tblOrigem.Name, 4) <> "MSys" Then
+            
+            On Error Resume Next
+            Dim objTemp As Object
+            Set objTemp = catDestino.Tables(tblOrigem.Name)
+            
+            If Err.Number <> 0 Then
+                ' Tabela não existe: Escreve no arquivo SQL
+                Print #fFile, "-- Tabela ausente: " & tblOrigem.Name
+                GerarCreateTabelaSQL tblOrigem, fFile
+            Else
+               ' PASSO DE SEGURANÇA:
+                ' Garante que o catálogo destino está com a estrutura mais recente
+                catDestino.Tables.Refresh
+                
+                ' Re-atribui a tabela para garantir a referência
+                Dim tblDestino As Object
+                Set tblDestino = catDestino.Tables(tblOrigem.Name)
+                
+                ' Agora chama a rotina de comparação
+                GerarCamposAusentes tblOrigem, tblDestino, fFile
+                
+                Print #fFile, "-- Verificando índices da tabela: " & tblOrigem.Name
+                GerarIndicesAusentes tblOrigem, tblDestino, fFile
+                
+            End If
+            On Error GoTo 0
+        End If
+    Next
+    
+    ' 5. Limpeza e FECHAMENTO do arquivo
+    Close #fFile
+    
+    Set catOrigem = Nothing
+    Set catDestino = Nothing
+    connOrigem.Close
+    connDestino.Close
+    
+    If bExecutar Then
+        Call ExecutarSQL(sPathDestino, sPathSQL)
+    End If
+    
+    
+    
+    MsgBox "Script gerado com sucesso em: " & sPathSQL, vbInformation
+End Sub
 
+Public Sub GerarCreateTabelaSQL(ByRef tblOrigem As Object, ByVal fFile As Integer)
+    Dim sSQL As String
+    Dim col As Object
+    Dim bPrimeiro As Boolean
+    
+    sSQL = "CREATE TABLE [" & tblOrigem.Name & "] ("
+    bPrimeiro = True
+    
+    ' Percorre colunas
+    For Each col In tblOrigem.Columns
+        If Not bPrimeiro Then sSQL = sSQL & ", "
+        
+        ' Aqui você usa sua lógica de conversão de tipo (GetSQLType que já tem no módulo)
+        sSQL = sSQL & "[" & col.Name & "] " & GetTipoADOX(col.Type)
+        bPrimeiro = False
+    Next
+    
+    sSQL = sSQL & ");"
+    
+    ' Grava no handle de gravação já aberto
+    Print #fFile, sSQL
+    Print #fFile, "" ' Linha em branco para organização
+End Sub
+
+Public Sub GerarCamposAusentes(ByRef tblOrigem As Object, ByRef tblDestino As Object, ByVal fFile As Integer)
+    Dim colOrigem As Object
+    Dim colDestino As Object
+    
+    ' Percorre cada coluna da tabela de origem
+    For Each colOrigem In tblOrigem.Columns
+        On Error Resume Next
+        ' Tenta acessar a coluna correspondente no destino
+        Set colDestino = tblDestino.Columns(colOrigem.Name)
+        
+        ' Se Err.Number <> 0, significa que o campo não existe no destino
+        If Err.Number <> 0 Then
+            Err.Clear
+            
+            ' Gera o comando ALTER TABLE e escreve no arquivo SQL
+            ' Nota: MapearTipoADOX é a função que você já deve ter configurada
+            Dim sSQL As String
+            sSQL = "ALTER TABLE [" & tblOrigem.Name & "] ADD COLUMN [" & colOrigem.Name & "] " & GetTipoADOX(colOrigem.Type) & ";"
+            
+            Print #fFile, sSQL
+            Debug.Print "Campo ausente encontrado: " & colOrigem.Name & " na tabela " & tblOrigem.Name
+        End If
+        On Error GoTo 0
+    Next
+End Sub
+Public Sub GerarIndicesAusentes(ByRef tblOrigem As Object, ByRef tblDestino As Object, ByVal fFile As Integer)
+    Dim idxOrigem As Object
+    Dim idxDestino As Object
+    Dim colIdx As Object
+    Dim sCampos As String
+    Dim sSQL As String
+    
+    ' O Refresh é CRUCIAL para garantir que a coleção de índices está atualizada
+    tblDestino.Indexes.Refresh
+    
+    For Each idxOrigem In tblOrigem.Indexes
+        ' Se o seu MENU-1 for uma Chave Primária, esta verificação o está pulando
+        ' Vamos remover o "If Not idxOrigem.PrimaryKey" temporariamente para testar
+        
+        On Error Resume Next
+        Set idxDestino = tblDestino.Indexes(idxOrigem.Name)
+        
+        ' Se Err.Number <> 0, o índice realmente não existe no destino
+        If Err.Number <> 0 Then
+            Err.Clear
+            
+            ' Monta os campos
+            sCampos = ""
+            For Each colIdx In idxOrigem.Columns
+                sCampos = sCampos & "[" & colIdx.Name & "], "
+            Next
+            If Len(sCampos) > 2 Then sCampos = Left(sCampos, Len(sCampos) - 2)
+            
+            ' Verifica se é Primário ou Único
+            If idxOrigem.PrimaryKey Then
+                sSQL = "ALTER TABLE [" & tblOrigem.Name & "] ADD CONSTRAINT [" & idxOrigem.Name & "] PRIMARY KEY (" & sCampos & ");"
+            Else
+                Dim sUnique As String
+                sUnique = IIf(idxOrigem.Unique, "UNIQUE ", "")
+                sSQL = "CREATE " & sUnique & "INDEX [" & idxOrigem.Name & "] ON [" & tblOrigem.Name & "] (" & sCampos & ");"
+            End If
+            
+            Print #fFile, sSQL
+            Debug.Print "Gerando índice: " & idxOrigem.Name
+        End If
+        On Error GoTo 0
+    Next
+End Sub
+
+
+Public Sub ExecutarSQL(ByVal sPathDestino As String, ByVal sPathSQL As String)
+    Dim connDestino As New ADODB.Connection
+    Dim fFile As Integer
+    Dim sLinha As String
+    Dim sComando As String
+    
+    ' Abre conexão com o destino
+    connDestino.Open GeraConexao(sPathDestino)
+    
+    fFile = FreeFile
+    Open sPathSQL For Input As #fFile
+    
+    On Error Resume Next ' Ignora erros caso um comando falhe (ex: índice já existe)
+    Do While Not EOF(fFile)
+        Line Input #fFile, sLinha
+        
+        ' Ignora comentários e linhas em branco
+        If Trim(sLinha) <> "" And Left(sLinha, 2) <> "--" Then
+            sComando = sComando & " " & sLinha
+            
+            ' Se a linha termina com ponto e vírgula, executa o comando acumulado
+            If InStr(sLinha, ";") > 0 Then
+                connDestino.Execute sComando
+                sComando = "" ' Reseta para o próximo comando
+            End If
+        End If
+    Loop
+    
+    Close #fFile
+    connDestino.Close
+    
+    MsgBox "Script executado com sucesso no destino!", vbInformation
+End Sub
