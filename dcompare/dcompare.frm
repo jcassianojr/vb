@@ -5,12 +5,28 @@ Begin VB.Form dCompare
    ClientHeight    =   5808
    ClientLeft      =   60
    ClientTop       =   348
-   ClientWidth     =   11892
+   ClientWidth     =   12768
    Icon            =   "dcompare.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   5808
-   ScaleWidth      =   11892
+   ScaleWidth      =   12768
    StartUpPosition =   3  'Windows Default
+   Begin VB.CommandButton CmdSchemaDestino 
+      Caption         =   "Recria do Schema"
+      Height          =   252
+      Left            =   10440
+      TabIndex        =   19
+      Top             =   720
+      Width           =   1452
+   End
+   Begin VB.CommandButton CmdSchemaOrigem 
+      Caption         =   "Schema"
+      Height          =   252
+      Left            =   10440
+      TabIndex        =   18
+      Top             =   240
+      Width           =   732
+   End
    Begin VB.CommandButton CmdSqlDestino 
       Caption         =   "sql"
       Height          =   252
@@ -191,6 +207,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private Sub cmdCompactar_Click()
 Dim sCaminho As String
     sCaminho = txtArquivoDestino.Text ' Assumindo que o alvo da compactação é o destino
@@ -206,21 +223,7 @@ Dim sCaminho As String
         End If
     End If
 End Sub
-Public Function EArquivoSQLite(ByVal cCaminho As String) As Boolean
-    Dim sExt As String
-    sExt = LCase(Right(cCaminho, 6)) ' Pega a extensão final
-    
-    ' Lista de extensões que o seu sistema aceita como SQLite
-    If InStr(cCaminho, ".sqlite") > 0 Or _
-       InStr(cCaminho, ".db") > 0 Or _
-       InStr(cCaminho, ".db3") > 0 Or _
-       InStr(cCaminho, ".fossil") > 0 Then
-       
-       EArquivoSQLite = True
-    Else
-       EArquivoSQLite = False
-    End If
-End Function
+
 Private Sub CmdEscolheDestino_Click()
     On Error GoTo Erro
     
@@ -305,14 +308,71 @@ Private Sub CmdExportarSqlite_Click()
     End If
 End Sub
 
-Public Function MDG(ByVal cMEnSSAGEM As String, Optional cTITULO = "Confirme")
-  Dim eRESP As Variant
-  MDG = False
-  eRESP = MsgBox(cMEnSSAGEM, vbYesNo + vbDefaultButton1, cTITULO)
-  If eRESP = vbYes Then
-    MDG = True
-  End If
-End Function
+
+
+Private Sub CmdSchemaDestino_Click()
+    Dim sPathSchema As String
+    Dim sPathRecriado As String
+    Dim sPasta As String
+    Dim sNomeBase As String
+    
+    ' O Schema está onde o usuário apontou em TxTArquivoOrigem
+    sPathSchema = Me.TxTArquivoOrigem.Text
+    
+    If Dir(sPathSchema) = "" Then
+        MsgBox "O arquivo de Schema não foi encontrado no caminho especificado!", vbCritical
+        Exit Sub
+    End If
+    
+    ' Define o nome do destino baseado no arquivo de schema
+    sPasta = Left(sPathSchema, InStrRev(sPathSchema, "\"))
+    sNomeBase = Mid(sPathSchema, InStrRev(sPathSchema, "\") + 1)
+    
+    ' Remove a extensão para criar o novo nome
+    sNomeBase = Left(sNomeBase, InStrRev(sNomeBase, ".") - 1)
+    
+    ' Define o destino como o mesmo nome + _recriado.mdb
+    sPathRecriado = sPasta & sNomeBase & "_recriado.mdb"
+    
+    Me.txtArquivoDestino.Text = sPathRecriado
+    
+    ' Executa a reconstrução
+    Call RecriarBancoDoSchema(sPathSchema, sPathRecriado)
+    Call RecriarIndicesDoSchema(sPathSchema, sPathRecriado)
+    
+End Sub
+
+Private Sub CmdSchemaOrigem_Click()
+    Dim sCaminhoOrigem As String
+    Dim sCaminhoDestino As String
+    Dim sPasta As String
+    Dim sNomeArquivo As String
+    
+    sCaminhoOrigem = Me.TxTArquivoOrigem.Text
+    
+    If sCaminhoOrigem = "" Then
+        MsgBox "Selecione o arquivo de origem primeiro!", vbExclamation
+        Exit Sub
+    End If
+    
+    ' 1. Extrai o caminho da pasta e o nome do arquivo (sem a extensão)
+    sPasta = Left(sCaminhoOrigem, InStrRev(sCaminhoOrigem, "\"))
+    sNomeArquivo = Mid(sCaminhoOrigem, InStrRev(sCaminhoOrigem, "\") + 1)
+    
+    ' Remove a extensão (.mdb ou .accdb)
+    sNomeArquivo = Left(sNomeArquivo, InStrRev(sNomeArquivo, ".") - 1)
+    
+    ' 2. Monta o caminho do destino com _schema.mdb
+    sCaminhoDestino = sPasta & sNomeArquivo & "_schema.mdb"
+    
+    ' 3. Atualiza o campo de destino (opcional)
+    Me.txtArquivoDestino.Text = sCaminhoDestino
+    
+    GarantirSchemaExistente sCaminhoDestino
+    ' 4. Chama a rotina que criamos anteriormente
+    Call GerarArquivoSchemaADO(sCaminhoOrigem, sCaminhoDestino)
+    Call RecriarIndicesDoSchema(sPathSchema, sPathRecriado)
+End Sub
 
 Private Sub CmdTableInfo_Click()
 ' Verifica se um arquivo foi selecionado
@@ -371,5 +431,4 @@ Private Sub cmdSqlDestino_Click()
     ' Gera o script baseado no arquivo selecionado no destino
     GerarScriptsSQL txtArquivoDestino.Text, (CheckIncDados.Value = vbChecked)
 End Sub
-
 

@@ -117,7 +117,14 @@ Public Function EArquivoSQLite(ByVal cCaminho As String) As Boolean
        EArquivoSQLite = False
     End If
 End Function
-
+Public Function MDG(ByVal cMEnSSAGEM As String, Optional cTITULO = "Confirme")
+  Dim eRESP As Variant
+  MDG = False
+  eRESP = MsgBox(cMEnSSAGEM, vbYesNo + vbDefaultButton1, cTITULO)
+  If eRESP = vbYes Then
+    MDG = True
+  End If
+End Function
 Public Function CriarSqlite(ByVal cCaminho As String) As Boolean
     On Error GoTo Erro
     Dim fso As Object
@@ -774,4 +781,266 @@ Public Sub ExecutarSQL(ByVal sPathDestino As String, ByVal sPathSQL As String)
     connDestino.Close
     
     MsgBox "Script executado com sucesso no destino!", vbInformation
+End Sub
+
+Public Sub GerarArquivoSchemaADO(ByVal sPathOrigem As String, ByVal sPathDestinoSchema As String)
+    Dim cat As Object
+    Dim tbl As Object, col As Object, idx As Object, idxCol As Object
+    Dim connSchema As ADODB.Connection
+    Dim rsTb As ADODB.Recordset, rsIx As ADODB.Recordset
+    
+    ' 1. Conectar ao banco de origem via ADOX
+    Set cat = CreateObject("ADOX.Catalog")
+    cat.ActiveConnection = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sPathOrigem
+    
+    ' 2. Conectar ao banco que guarda o Schema
+    Set connSchema = New ADODB.Connection
+    connSchema.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sPathDestinoSchema
+    
+    ' 3. Preparar Recordsets
+    Set rsTb = New ADODB.Recordset
+    rsTb.Open "SELECT * FROM [myTABLE]", connSchema, adOpenDynamic, adLockOptimistic
+    
+    Set rsIx = New ADODB.Recordset
+    rsIx.Open "SELECT * FROM [myINDEX]", connSchema, adOpenDynamic, adLockOptimistic
+    
+    ' Limpar dados anteriores
+    connSchema.Execute "DELETE FROM [myTABLE]"
+    connSchema.Execute "DELETE FROM [myINDEX]"
+    
+    ' 4. Processar Tabelas e Colunas
+    For Each tbl In cat.Tables
+        If tbl.Type = "TABLE" And Left(tbl.Name, 4) <> "MSys" Then
+            
+            Dim seq As Long: seq = 1
+            For Each col In tbl.Columns
+                rsTb.AddNew
+                rsTb("TableName") = tbl.Name
+                rsTb("SeqNum") = seq
+                rsTb("FieldName") = col.Name
+                rsTb("FieldType") = col.Type
+                
+                ' Campos novos e propriedades avançadas via Properties
+                rsTb("DefinedSize") = col.DefinedSize
+                rsTb("Size") = col.DefinedSize
+                
+                On Error Resume Next
+                rsTb("NumericPrecision") = col.Properties("Precision").Value
+                rsTb("NumericScale") = col.Properties("Scale").Value
+                rsTb("Required") = Not col.Properties("Nullable").Value
+                rsTb("AllowZeroLength") = col.Properties("Jet OLEDB:Allow Zero Length").Value
+                rsTb("DefaultValue") = col.Properties("Default").Value
+                rsTb("Attributes") = col.Attributes
+                On Error GoTo 0
+                
+                ' Usando sua função existente para definir o nome do tipo
+                rsTb("TipoNome") = GetTipoNome(col.Type)
+                rsTb("Status") = "OK"
+                
+                rsTb.Update
+                seq = seq + 1
+            Next
+            
+            ' 5. Processar Índices
+            For Each idx In tbl.Indexes
+                rsIx.AddNew
+                rsIx("TableName") = tbl.Name
+                rsIx("IndexName") = idx.Name
+                rsIx("Primary") = idx.PrimaryKey
+                rsIx("Unique") = idx.Unique
+                rsIx("Status") = "OK"
+                
+                ' Concatenação de campos no formato +CAMPO;
+                Dim sCampos As String: sCampos = ""
+                For Each idxCol In idx.Columns
+                    sCampos = sCampos & "+" & idxCol.Name & ";"
+                Next
+                rsIx("Fields") = sCampos
+                rsIx.Update
+            Next
+        End If
+    Next
+    
+    ' Limpeza
+    rsTb.Close: Set rsTb = Nothing
+    rsIx.Close: Set rsIx = Nothing
+    connSchema.Close: Set connSchema = Nothing
+    Set cat = Nothing
+    
+    MsgBox "Arquivo de Schema gerado com sucesso via ADO/ADOX!", vbInformation
+End Sub
+
+
+Public Sub GarantirSchemaExistente(ByVal sPathDestinoSchema As String)
+    Dim cat As Object
+    Dim conn As ADODB.Connection
+    
+    ' 1. Cria o banco de dados .mdb caso não exista
+    If Dir(sPathDestinoSchema) = "" Then
+        Set cat = CreateObject("ADOX.Catalog")
+        cat.Create GeraConexao(sPathDestinoSchema)
+        Set cat = Nothing
+    End If
+    
+    ' 2. Conecta e cria as tabelas
+    Set conn = New ADODB.Connection
+    conn.Open GeraConexao(sPathDestinoSchema)
+    
+    ' Executa os comandos de criação das 3 tabelas
+    conn.Execute "CREATE TABLE [myINDEX] ([Fields] MEMO, [IndexName] TEXT(255), [Primary] BIT, [Status] TEXT(255), [TableName] TEXT(255), [Unique] BIT);"
+    conn.Execute "CREATE TABLE [myQUERY] ([QueryDef] MEMO, [QueryName] TEXT(255), [Status] TEXT(255));"
+    conn.Execute "CREATE TABLE [myTABLE] ([AllowZeroLength] BIT, [Attributes] LONG, [DefaultValue] TEXT(255), [DefinedSize] LONG, [FieldName] TEXT(255), [FieldType] LONG, [NumericPrecision] LONG, [NumericScale] LONG, [Required] BIT, [SeqNum] LONG, [Size] LONG, [Status] TEXT(255), [TableName] TEXT(255), [TipoNome] TEXT(255));"
+    
+    conn.Close
+    Set conn = Nothing
+End Sub
+
+
+Public Sub RecriarBancoDoSchema(ByVal sPathSchema As String, ByVal sPathDestino As String)
+    Dim connSchema As ADODB.Connection
+    Dim connDestino As ADODB.Connection
+    Dim rsTb As ADODB.Recordset
+    Dim sSQL As String
+    Dim sTabelaAtual As String
+    Dim sTipoSQL As String
+    
+    ' 1. Conexões
+    Set connSchema = New ADODB.Connection
+    connSchema.Open GeraConexao(sPathSchema)
+    
+    ' Cria o destino se não existir
+    If Dir(sPathDestino) = "" Then
+        Dim cat As Object: Set cat = CreateObject("ADOX.Catalog")
+        cat.Create GeraConexao(sPathDestino)
+    End If
+    
+    Set connDestino = New ADODB.Connection
+    connDestino.Open GeraConexao(sPathDestino)
+    
+    ' 2. Ler todas as tabelas registradas no Schema
+    ' Lemos ordenado por TableName e SeqNum para garantir a ordem das colunas
+    Set rsTb = New ADODB.Recordset
+    rsTb.Open "SELECT * FROM [myTABLE] ORDER BY [TableName], [SeqNum]", connSchema, adOpenStatic
+    
+    sTabelaAtual = ""
+    
+    Do While Not rsTb.EOF
+        ' Se mudou de tabela, fechamos a anterior (se houver) e iniciamos a nova
+        If rsTb("TableName") <> sTabelaAtual Then
+            If sTabelaAtual <> "" Then
+                sSQL = Left(sSQL, Len(sSQL) - 2) & ");" ' Remove última vírgula e fecha
+                connDestino.Execute sSQL
+            End If
+            
+            sTabelaAtual = rsTb("TableName")
+            sSQL = "CREATE TABLE [" & sTabelaAtual & "] ("
+        End If
+        
+        ' Monta a definição do campo
+        'sSQL = sSQL & "[" & rsTb("FieldName") & "] " & rsTb("TipoNome") & ", "
+        sTipoSQL = ConverterParaSQL(rsTb("FieldType"), rsTb("DefinedSize"))
+        sSQL = sSQL & "[" & rsTb("FieldName") & "] " & sTipoSQL & ", "
+        
+        rsTb.MoveNext
+    Loop
+    
+    ' Executa a última tabela do loop
+    If sSQL <> "CREATE TABLE [" & sTabelaAtual & "] (" Then
+        sSQL = Left(sSQL, Len(sSQL) - 2) & ");"
+        connDestino.Execute sSQL
+    End If
+    
+    rsTb.Close
+    connSchema.Close
+    connDestino.Close
+    
+    MsgBox "Banco de dados recriado com sucesso a partir do Schema!", vbInformation
+End Sub
+
+
+Private Function ConverterParaSQL(ByVal iFieldType As Long, ByVal iSize As Long) As String
+    Select Case iFieldType
+        Case 11           ' adBoolean
+            ConverterParaSQL = "BIT"
+        Case 2            ' adSmallInt
+            ConverterParaSQL = "SMALLINT"
+        Case 3            ' adInteger
+            ConverterParaSQL = "LONG"
+        Case 20           ' adBigInt
+            ConverterParaSQL = "LONG"
+        Case 4            ' adSingle
+            ConverterParaSQL = "SINGLE"
+        Case 5            ' adDouble
+            ConverterParaSQL = "DOUBLE"
+        Case 6            ' adCurrency
+            ConverterParaSQL = "CURRENCY"
+        Case 7            ' adDate
+            ConverterParaSQL = "DATETIME"
+        Case 131, 139     ' adNumeric, adDecimal
+            ConverterParaSQL = "DECIMAL"
+        Case 130, 202     ' adWChar, adVarWChar
+            ' Se o tamanho for muito grande, vira MEMO, senão TEXT
+            If iSize > 255 Or iSize <= 0 Then
+                ConverterParaSQL = "MEMO"
+            Else
+                ConverterParaSQL = "TEXT(" & iSize & ")"
+            End If
+        Case 128, 204     ' adBinary, adVarBinary
+            ConverterParaSQL = "BINARY"
+        Case 203, 205     ' adLongVarWChar, adLongVarBinary (Memo/OLE)
+            ConverterParaSQL = "MEMO"
+        Case Else
+            ' Fallback para segurança
+            ConverterParaSQL = "TEXT(255)"
+    End Select
+End Function
+Public Sub RecriarIndicesDoSchema(ByVal sPathSchema As String, ByVal sPathDestino As String)
+    Dim connSchema As ADODB.Connection, connDestino As ADODB.Connection
+    Dim rsIx As ADODB.Recordset
+    Dim sSQL As String, sCamposFinal As String
+    Dim vCampos As Variant, i As Long
+    
+    Set connSchema = New ADODB.Connection: connSchema.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sPathSchema
+    Set connDestino = New ADODB.Connection: connDestino.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sPathDestino
+    
+    Set rsIx = New ADODB.Recordset
+    rsIx.Open "SELECT * FROM [myINDEX]", connSchema, adOpenStatic, adLockReadOnly
+    
+    Do While Not rsIx.EOF
+        ' 1. Limpa a string original para facilitar o split
+        ' Remove o + inicial e o ; final
+        Dim sRaw As String
+        sRaw = Replace(rsIx("Fields"), "+", "")
+        If Right(sRaw, 1) = ";" Then sRaw = Left(sRaw, Len(sRaw) - 1)
+        
+        ' 2. Split pelos pontos e vírgulas
+        vCampos = Split(sRaw, ";")
+        sCamposFinal = ""
+        
+        ' 3. Reconstrói os campos com colchetes e vírgulas
+        For i = LBound(vCampos) To UBound(vCampos)
+            sCamposFinal = sCamposFinal & "[" & vCampos(i) & "]"
+            If i < UBound(vCampos) Then sCamposFinal = sCamposFinal & ", "
+        Next i
+        
+        ' 4. Monta o comando
+        If rsIx("Primary") = True Then
+            sSQL = "ALTER TABLE [" & rsIx("TableName") & "] ADD CONSTRAINT [" & rsIx("IndexName") & "] PRIMARY KEY (" & sCamposFinal & ")"
+        Else
+            Dim sUnique As String: sUnique = IIf(rsIx("Unique") = True, "UNIQUE ", "")
+            sSQL = "CREATE " & sUnique & "INDEX [" & rsIx("IndexName") & "] ON [" & rsIx("TableName") & "] (" & sCamposFinal & ")"
+        End If
+        
+        ' Execução com log de erro para debug
+        On Error Resume Next
+        connDestino.Execute sSQL
+        If Err.Number <> 0 Then
+            Debug.Print "Erro no índice " & rsIx("IndexName") & ": " & Err.Description & " | SQL: " & sSQL
+        End If
+        On Error GoTo 0
+        
+        rsIx.MoveNext
+    Loop
+    
+    rsIx.Close: connSchema.Close: connDestino.Close
 End Sub
