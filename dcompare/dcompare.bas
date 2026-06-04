@@ -3,7 +3,24 @@ Attribute VB_Name = "dcompareMain"
 ' 1. Microsoft ADO Ext. 6.0 for DDL and Security (ADOX)
 ' 2. Microsoft ActiveX Data Objects 6.1 (ADO)
 ' 3. RC6 (vbRichClient6)
-
+' Declaração para a Shell API no topo do módulo
+Public Function SelecionarPasta(ByVal Titulo As String) As String
+    Dim objShell As Object
+    Dim objFolder As Object
+    
+    Set objShell = CreateObject("Shell.Application")
+    ' 1 = BIF_RETURNONLYFSDIRS (Apenas pastas do sistema de arquivos)
+    Set objFolder = objShell.BrowseForFolder(0, Titulo, 1)
+    
+    If Not objFolder Is Nothing Then
+        SelecionarPasta = objFolder.Items.Item.Path
+    Else
+        SelecionarPasta = ""
+    End If
+    
+    Set objFolder = Nothing
+    Set objShell = Nothing
+End Function
 Sub Main()
   dCompare.Show
 End Sub
@@ -12,22 +29,35 @@ Public Function ArquivoExiste(ByVal FilePath As String) As Boolean
     ArquivoExiste = (Dir(FilePath, vbNormal + vbHidden + vbSystem) <> "")
 End Function
 
-Public Function GeraConexao(ByVal Caminho As String)
+Public Function GeraConexao(ByVal Caminho As String) As String
     Dim sProvider As String
-    If LCase(Right(Caminho, 5)) = "accdb" Then
-        sProvider = "Microsoft.ACE.OLEDB.12.0"
+    
+    ' 1. Verifica se é SQLite (via sua função EArquivoSQLite)
+    If EArquivoSQLite(Caminho) Then
+        ' Conexão via Driver ODBC para SQLite
+        GeraConexao = "Driver={SQLite3 ODBC Driver};Database=" & Caminho
+        
     Else
-        sProvider = "Microsoft.Jet.OLEDB.4.0"
+        ' 2. Prioridade para Jet 4.0 para arquivos .mdb (Mais estável para ADOX/OpenSchema em .mdb)
+        ' Se for .accdb, é obrigado a usar o ACE 12.0
+        If LCase(Right(Caminho, 5)) = "accdb" Then
+            sProvider = "Microsoft.ACE.OLEDB.12.0"
+        Else
+            ' Para .mdb, força o uso do Jet 4.0 que você confirmou ser mais estável
+            sProvider = "Microsoft.Jet.OLEDB.4.0"
+        End If
+        
+        GeraConexao = "Provider=" & sProvider & ";Data Source=" & Caminho & ";Persist Security Info=False;"
     End If
-    GeraConexao = "Provider=" & sProvider & ";Data Source=" & Caminho
 End Function
+
 Public Function AbrirCatalog(ByVal sCaminho As String) As Object
     ' Retorna um objeto ADOX.Catalog para ler a estrutura do MDB
     Dim cat As Object
     Set cat = CreateObject("ADOX.Catalog")
     
     ' String de conexão genérica para MDB/ACCDB
-    cat.ActiveConnection = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sCaminho
+    cat.ActiveConnection = GeraConexao(sCaminho)
     Set AbrirCatalog = cat
 End Function
 
@@ -183,7 +213,7 @@ Public Sub GerarInfoTabelasAccess(ByVal sCaminho As String, ByRef txtDestino As 
     
     ' Conexão via ADO
     Set conn = CreateObject("ADODB.Connection")
-    conn.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sCaminho & ";"
+    conn.Open GeraConexao(sCaminho)
     
     ' Usamos o ADOX para ler a estrutura (Catalog)
     Set cat = CreateObject("ADOX.Catalog")
@@ -478,7 +508,7 @@ Public Sub GerarScriptAccess(ByVal sCaminho As String, ByVal bIncluirDados As Bo
     Open sSqlPath For Output As #fNum
     
     Set cat = CreateObject("ADOX.Catalog")
-    cat.ActiveConnection = GeraConexao(sCaminho) '"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sCaminho & ";"
+    cat.ActiveConnection = GeraConexao(sCaminho)
     Set conn = cat.ActiveConnection
     
     For Each tbl In cat.Tables
@@ -791,11 +821,11 @@ Public Sub GerarArquivoSchemaADO(ByVal sPathOrigem As String, ByVal sPathDestino
     
     ' 1. Conectar ao banco de origem via ADOX
     Set cat = CreateObject("ADOX.Catalog")
-    cat.ActiveConnection = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sPathOrigem
+    cat.ActiveConnection = GeraConexao(sPathOrigem)
     
     ' 2. Conectar ao banco que guarda o Schema
     Set connSchema = New ADODB.Connection
-    connSchema.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sPathDestinoSchema
+    connSchema.Open GeraConexao(sPathDestinoSchema)
     
     ' 3. Preparar Recordsets
     Set rsTb = New ADODB.Recordset
@@ -1000,8 +1030,8 @@ Public Sub RecriarIndicesDoSchema(ByVal sPathSchema As String, ByVal sPathDestin
     Dim sSQL As String, sCamposFinal As String
     Dim vCampos As Variant, i As Long
     
-    Set connSchema = New ADODB.Connection: connSchema.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sPathSchema
-    Set connDestino = New ADODB.Connection: connDestino.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & sPathDestino
+    Set connSchema = New ADODB.Connection: connSchema.Open GeraConexao(sPathSchema)
+    Set connDestino = New ADODB.Connection: connDestino.Open GeraConexao(sPathDestino)
     
     Set rsIx = New ADODB.Recordset
     rsIx.Open "SELECT * FROM [myINDEX]", connSchema, adOpenStatic, adLockReadOnly
@@ -1043,4 +1073,238 @@ Public Sub RecriarIndicesDoSchema(ByVal sPathSchema As String, ByVal sPathDestin
     Loop
     
     rsIx.Close: connSchema.Close: connDestino.Close
+End Sub
+
+'Public Sub CompararSchemaComDestino(ByVal sPathSchema As String, ByVal sPathDestino As String)
+'    Dim connSchema As ADODB.Connection, connDestino As ADODB.Connection
+'    Dim rsSchema As ADODB.Recordset, rsDestino As ADODB.Recordset
+'    Dim sSQL As String
+    
+ '   Set connSchema = New ADODB.Connection: connSchema.Open GeraConexao(sPathSchema)
+ '   Set connDestino = New ADODB.Connection: connDestino.Open GeraConexao(sPathDestino)
+    
+    ' 1. Seleciona tabelas únicas no Schema
+  '  Set rsSchema = connSchema.Execute("SELECT DISTINCT [TableName] FROM [myTABLE] ORDER BY [TableName]")
+    
+   ' Do While Not rsSchema.EOF
+    '    Dim sTabela As String: sTabela = rsSchema("TableName")
+        
+        ' Verifica se a tabela existe no destino
+     '   If TabelaExiste(connDestino, sTabela) Then
+            ' 2. Compara campos do Schema com os campos do Destino
+      '      CompararCamposTabela sTabela, connSchema, connDestino
+      '  Else
+            ' Tabela ausente: Adicionar lógica para recriar a tabela inteira (CREATE TABLE)
+       '     Debug.Print "Tabela " & sTabela & " ausente no destino."
+       ' End If
+        
+       ' rsSchema.MoveNext
+    'Loop
+    
+    'connSchema.Close: connDestino.Close
+'End Sub
+'Private Sub CompararCamposTabela(ByVal sTabela As String, ByVal connSchema As ADODB.Connection, ByVal connDestino As ADODB.Connection)
+'    Dim rsCampos As ADODB.Recordset
+'    Dim sCampo As String
+    
+    ' Pega a lista de campos que DEVERIAM existir
+'    Set rsCampos = connSchema.Execute("SELECT * FROM [myTABLE] WHERE [TableName] = '" & sTabela & "' ORDER BY [SeqNum]")
+    
+'    Do While Not rsCampos.EOF
+ '       sCampo = rsCampos("FieldName")
+        
+        ' Verifica se este campo existe na tabela destino (via OpenSchema do ADO)
+ '       If Not CampoExiste(connDestino, sTabela, sCampo) Then
+            ' O CAMPO FALTA! Gerar o script de alteração
+  '          Dim sSQL As String
+   '         sSQL = "ALTER TABLE [" & sTabela & "] ADD COLUMN [" & sCampo & "] " & rsCampos("TipoNome")
+            
+            ' Grava esse script em um arquivo .sql ou executa direto
+    '        Debug.Print "Script Gerado: " & sSQL
+    '        connDestino.Execute sSQL
+    '    End If
+        
+     '   rsCampos.MoveNext
+    'Loop
+'End Sub
+Private Function TabelaExiste(conn As ADODB.Connection, sTabela As String) As Boolean
+    Dim rs As ADODB.Recordset
+    Set rs = conn.OpenSchema(adSchemaTables, Array(Empty, Empty, sTabela, "TABLE"))
+    TabelaExiste = Not rs.EOF
+    rs.Close
+End Function
+
+Private Function CampoExiste(conn As ADODB.Connection, sTabela As String, sCampo As String) As Boolean
+    Dim rs As ADODB.Recordset
+    Set rs = conn.OpenSchema(adSchemaColumns, Array(Empty, Empty, sTabela, sCampo))
+    CampoExiste = Not rs.EOF
+    rs.Close
+End Function
+Private Function IndiceExiste(conn As ADODB.Connection, sTabela As String, sIndice As String) As Boolean
+    Dim rs As ADODB.Recordset
+    ' O OpenSchema de Indexes retorna todos os índices da tabela
+    Set rs = conn.OpenSchema(adSchemaIndexes, Array(Empty, Empty, sTabela))
+    
+    IndiceExiste = False
+    Do While Not rs.EOF
+        If rs("INDEX_NAME") = sIndice Then
+            IndiceExiste = True
+            Exit Do
+        End If
+        rs.MoveNext
+    Loop
+    rs.Close
+End Function
+
+Public Function FormatarCamposParaSQL(ByVal sFieldsRaw As String) As String
+    Dim vCampos As Variant
+    Dim i As Long
+    Dim sResult As String
+    
+    ' 1. Limpeza inicial
+    ' Remove o '+' se existir e o ';' final para facilitar o split
+    Dim sClean As String
+    sClean = Replace(sFieldsRaw, "+", "")
+    If Right(sClean, 1) = ";" Then
+        sClean = Left(sClean, Len(sClean) - 1)
+    End If
+    
+    ' 2. Divide os campos usando o ';' como delimitador
+    vCampos = Split(sClean, ";")
+    
+    ' 3. Reconstrói com colchetes e vírgulas
+    sResult = ""
+    For i = LBound(vCampos) To UBound(vCampos)
+        If Trim(vCampos(i)) <> "" Then
+            sResult = sResult & "[" & Trim(vCampos(i)) & "]"
+            ' Adiciona a vírgula se não for o último elemento
+            If i < UBound(vCampos) Then
+                sResult = sResult & ", "
+            End If
+        End If
+    Next i
+    
+    FormatarCamposParaSQL = sResult
+End Function
+
+Public Sub GerarTabelasAusentesViaSchema(ByVal sTabela As String, ByVal connSchema As ADODB.Connection, ByVal ts As Object)
+    Dim rsCampos As ADODB.Recordset
+    Dim sSQL As String, sCamposDef As String
+    
+    ' Busca os campos da tabela no schema, ordenados pela sequência
+    Set rsCampos = connSchema.Execute("SELECT * FROM [myTABLE] WHERE [TableName]='" & sTabela & "' ORDER BY [SeqNum]")
+    
+    sCamposDef = ""
+    Do While Not rsCampos.EOF
+        ' Monta a string: [Campo] Tipo,
+        sCamposDef = sCamposDef & "[" & rsCampos("FieldName") & "] " & rsCampos("TipoNome") & ", "
+        rsCampos.MoveNext
+    Loop
+    
+    ' Remove a última vírgula e espaço
+    If Len(sCamposDef) > 0 Then
+        sCamposDef = Left(sCamposDef, Len(sCamposDef) - 2)
+        sSQL = "CREATE TABLE [" & sTabela & "] (" & sCamposDef & ");"
+        ts.WriteLine sSQL
+    End If
+    
+    rsCampos.Close
+    Set rsCampos = Nothing
+End Sub
+
+Public Sub GerarCamposAusentesViaSchema(ByVal sTabela As String, ByVal connSchema As ADODB.Connection, ByVal connDestino As ADODB.Connection, ByVal ts As Object)
+    Dim rsSchema As ADODB.Recordset
+    
+    Set rsSchema = connSchema.Execute("SELECT * FROM [myTABLE] WHERE [TableName]='" & sTabela & "' ORDER BY [SeqNum]")
+    
+    Do While Not rsSchema.EOF
+        ' Verifica se o campo existe no catálogo do banco destino
+        If Not CampoExiste(connDestino, sTabela, rsSchema("FieldName")) Then
+            ' Campo ausente: gera o script de adição
+            ts.WriteLine "ALTER TABLE [" & sTabela & "] ADD COLUMN [" & rsSchema("FieldName") & "] " & rsSchema("TipoNome") & ";"
+        End If
+        rsSchema.MoveNext
+    Loop
+    rsSchema.Close
+    Set rsSchema = Nothing
+End Sub
+
+Public Sub GerarIndicesAusentesViaSchema(ByVal sTabela As String, ByVal connSchema As ADODB.Connection, ByVal connDestino As ADODB.Connection, ByVal ts As Object)
+    Dim rsIdx As ADODB.Recordset
+    
+    Set rsIdx = connSchema.Execute("SELECT * FROM [myINDEX] WHERE [TableName]='" & sTabela & "'")
+    
+    Do While Not rsIdx.EOF
+        ' Verifica se o índice já existe no destino
+        If Not IndiceExiste(connDestino, sTabela, rsIdx("IndexName")) Then
+            Dim sCampos As String: sCampos = FormatarCamposParaSQL(rsIdx("Fields"))
+            Dim sSQL As String
+            
+            ' Se for Primary Key, o tratamento é diferenciado
+            If rsIdx("Primary") = True Then
+                sSQL = "ALTER TABLE [" & sTabela & "] ADD CONSTRAINT [" & rsIdx("IndexName") & "] PRIMARY KEY (" & sCampos & ");"
+            Else
+                Dim sUnique As String: sUnique = IIf(rsIdx("Unique") = True, "UNIQUE ", "")
+                sSQL = "CREATE " & sUnique & "INDEX [" & rsIdx("IndexName") & "] ON [" & sTabela & "] (" & sCampos & ");"
+            End If
+            
+            ts.WriteLine sSQL
+        End If
+        rsIdx.MoveNext
+    Loop
+    rsIdx.Close
+    Set rsIdx = Nothing
+End Sub
+
+
+Public Sub GerarScriptAlteracoesViaSchema(ByVal sPathSchema As String, ByVal sPathDestino As String, ByVal bExecutar As Boolean)
+    Dim connSchema As ADODB.Connection
+    Dim connDestino As ADODB.Connection
+    Dim rsTabelas As ADODB.Recordset
+    Dim sPathSQL As String
+    Dim fso As Object, ts As Object ' Usando FSO em vez de Open For Output
+    
+    ' 1. Configurações de arquivo (usando FSO para evitar erros de I/O)
+    sPathSQL = sPathDestino & "_atualizacao.sql"
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set ts = fso.CreateTextFile(sPathSQL, True)
+    
+    ' 2. Conexões
+    Set connSchema = New ADODB.Connection
+    connSchema.Open GeraConexao(sPathSchema)
+    
+    Set connDestino = New ADODB.Connection
+    connDestino.Open GeraConexao(sPathDestino)
+    
+    ' 3. Lê a lista de tabelas registradas no Schema
+    Set rsTabelas = connSchema.Execute("SELECT DISTINCT [TableName] FROM [myTABLE] ORDER BY [TableName]")
+    
+    Do While Not rsTabelas.EOF
+        Dim sTabela As String: sTabela = rsTabelas("TableName")
+        
+        ' Verifica se a tabela existe no destino
+        If Not TabelaExiste(connDestino, sTabela) Then
+            ' Se não existe, gera o CREATE TABLE (você precisará de uma função para isso)
+            ts.WriteLine "-- Tabela ausente: " & sTabela
+            ' GerarCreateTabelaDoSchema sTabela, connSchema, ts
+            GerarTabelasAusentesViaSchema sTabela, connSchema, ts
+        Else
+            ' Se a tabela existe, compara os campos gravados no Schema com o destino
+            ts.WriteLine "-- Verificando campos da tabela: " & sTabela
+            GerarCamposAusentesViaSchema sTabela, connSchema, connDestino, ts
+            
+            ts.WriteLine "-- Verificando índices da tabela: " & sTabela
+            GerarIndicesAusentesViaSchema sTabela, connSchema, connDestino, ts
+        End If
+        
+        rsTabelas.MoveNext
+    Loop
+    
+    ' 4. Finalização
+    ts.Close
+    connSchema.Close
+    connDestino.Close
+    
+    If bExecutar Then Call ExecutarSQL(sPathDestino, sPathSQL)
+    MsgBox "Script de atualização gerado: " & sPathSQL, vbInformation
 End Sub

@@ -2,60 +2,106 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form dCompare 
    Caption         =   "Database Comparador/Corretor"
-   ClientHeight    =   5808
+   ClientHeight    =   7908
    ClientLeft      =   60
    ClientTop       =   348
-   ClientWidth     =   12768
+   ClientWidth     =   13248
    Icon            =   "dcompare.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5808
-   ScaleWidth      =   12768
+   ScaleHeight     =   7908
+   ScaleWidth      =   13248
    StartUpPosition =   3  'Windows Default
+   Begin VB.CheckBox CheckEfetua 
+      Caption         =   "Efetua  correcao"
+      Height          =   252
+      Left            =   5160
+      TabIndex        =   26
+      Top             =   1560
+      Width           =   1572
+   End
+   Begin VB.CommandButton CmdEscdir 
+      Caption         =   "..."
+      Height          =   372
+      Left            =   6360
+      TabIndex        =   25
+      Top             =   3000
+      Width           =   492
+   End
+   Begin VB.CommandButton CmdGeraPasta 
+      Caption         =   "GerarScript mdb accdb pasta"
+      Height          =   372
+      Left            =   6960
+      TabIndex        =   24
+      Top             =   3000
+      Width           =   2412
+   End
+   Begin VB.TextBox Diretorio 
+      Height          =   372
+      Left            =   240
+      TabIndex        =   23
+      Top             =   3000
+      Width           =   6012
+   End
+   Begin VB.CommandButton cmdSelSQL 
+      Caption         =   "..."
+      Height          =   315
+      Left            =   7800
+      TabIndex        =   21
+      Top             =   2520
+      Width           =   495
+   End
+   Begin VB.TextBox txtSQL 
+      Height          =   315
+      Left            =   1200
+      TabIndex        =   20
+      Top             =   2520
+      Width           =   6495
+   End
    Begin VB.CommandButton CmdSchemaDestino 
       Caption         =   "Recria do Schema"
-      Height          =   252
-      Left            =   10440
+      Height          =   372
+      Left            =   3480
       TabIndex        =   19
-      Top             =   720
+      Top             =   1920
       Width           =   1452
    End
    Begin VB.CommandButton CmdSchemaOrigem 
       Caption         =   "Schema"
-      Height          =   252
-      Left            =   10440
+      Height          =   372
+      Left            =   1800
       TabIndex        =   18
-      Top             =   240
+      Top             =   480
       Width           =   732
    End
    Begin VB.CommandButton CmdSqlDestino 
       Caption         =   "sql"
-      Height          =   252
-      Left            =   9600
+      Height          =   372
+      Left            =   1080
       TabIndex        =   17
-      Top             =   720
+      Top             =   1440
       Width           =   612
    End
    Begin VB.CommandButton CmdSqlOrigem 
       Caption         =   "sql"
-      Height          =   252
-      Left            =   9600
+      Height          =   372
+      Left            =   1080
       TabIndex        =   16
-      Top             =   240
+      Top             =   480
       Width           =   612
    End
    Begin VB.CheckBox CheckIncDados 
       Caption         =   "Incluir dados"
       Height          =   252
-      Left            =   6240
+      Left            =   6960
       TabIndex        =   15
-      Top             =   1200
-      Width           =   1692
+      Top             =   1560
+      Width           =   1332
    End
    Begin VB.TextBox txtArquivoDestino 
       Height          =   375
       Left            =   1080
       TabIndex        =   14
-      Top             =   600
+      Top             =   1080
       Width           =   7215
    End
    Begin VB.TextBox TxTArquivoOrigem 
@@ -67,99 +113,118 @@ Begin VB.Form dCompare
    End
    Begin VB.TextBox TxtInfo 
       Height          =   3285
-      Left            =   240
+      Left            =   120
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Both
       TabIndex        =   12
-      Top             =   2280
+      Top             =   3480
       Width           =   8055
    End
    Begin VB.CommandButton cmdCompactar 
       Caption         =   "Compactar"
-      Height          =   255
-      Left            =   2400
+      Height          =   372
+      Left            =   3600
       TabIndex        =   11
-      Top             =   1800
-      Width           =   2295
+      Top             =   480
+      Width           =   1332
    End
    Begin VB.CommandButton Command5 
       Caption         =   "Criar Tabela de Destino"
-      Height          =   255
-      Left            =   240
+      Height          =   372
+      Left            =   1080
       TabIndex        =   10
-      Top             =   1800
-      Width           =   2055
+      Top             =   1920
+      Width           =   2172
    End
    Begin VB.CommandButton Encerrar 
       Caption         =   "Encerrar"
       Height          =   375
-      Left            =   8520
+      Left            =   9480
       TabIndex        =   9
-      Top             =   1200
+      Top             =   600
       Width           =   1215
    End
    Begin VB.CommandButton CmdTableInfo 
       Caption         =   "TableInfo"
       Height          =   375
-      Left            =   5160
+      Left            =   2640
       TabIndex        =   8
-      Top             =   1200
+      Top             =   480
       Width           =   855
    End
    Begin VB.CommandButton CmdExportarSqlite 
       Caption         =   "Exportar Sqlite"
       Height          =   375
-      Left            =   3720
+      Left            =   5040
       TabIndex        =   7
-      Top             =   1200
+      Top             =   480
       Width           =   1215
    End
-   Begin VB.CommandButton Command4 
-      Caption         =   "Comparar e Corrigir"
+   Begin VB.CommandButton CmdCompareSchema 
+      Caption         =   "Comparar Shema"
       Height          =   375
-      Left            =   1800
+      Left            =   3480
       TabIndex        =   6
-      Top             =   1200
-      Width           =   1695
+      Top             =   1440
+      Width           =   1452
    End
    Begin VB.CommandButton Command3 
       Caption         =   "Compare Arquivos"
       Height          =   375
-      Left            =   240
+      Left            =   1800
       TabIndex        =   5
-      Top             =   1200
+      Top             =   1440
       Width           =   1455
    End
    Begin MSComDlg.CommonDialog CommonDialog1 
-      Left            =   9240
-      Top             =   1800
+      Left            =   8640
+      Top             =   1560
       _ExtentX        =   847
       _ExtentY        =   847
       _Version        =   393216
    End
    Begin VB.CommandButton CmdEscolheDestino 
       Caption         =   "Destino"
-      Height          =   255
+      Height          =   372
       Left            =   8400
       TabIndex        =   4
-      Top             =   720
-      Width           =   975
+      Top             =   1080
+      Width           =   852
    End
    Begin VB.CommandButton CmdEscolheOrigem 
       Caption         =   "Origem"
-      Height          =   255
+      Height          =   372
       Left            =   8400
       TabIndex        =   3
-      Top             =   240
-      Width           =   975
+      Top             =   120
+      Width           =   852
+   End
+   Begin VB.Label Label3 
+      Alignment       =   2  'Center
+      Caption         =   "SqlScript"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00008000&
+      Height          =   252
+      Left            =   240
+      TabIndex        =   22
+      Top             =   2520
+      Width           =   792
    End
    Begin VB.Label lProgress 
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   1  'Fixed Single
-      Height          =   375
-      Left            =   4920
+      Height          =   372
+      Left            =   5160
       TabIndex        =   2
-      Top             =   1680
+      Top             =   1920
       Width           =   3360
       WordWrap        =   -1  'True
    End
@@ -176,11 +241,11 @@ Begin VB.Form dCompare
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00008000&
-      Height          =   255
+      Height          =   252
       Left            =   120
       TabIndex        =   1
-      Top             =   600
-      Width           =   795
+      Top             =   1200
+      Width           =   792
    End
    Begin VB.Label Label1 
       Alignment       =   2  'Center
@@ -208,6 +273,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+Private Sub Check1_Click()
+
+End Sub
+
 Private Sub cmdCompactar_Click()
 Dim sCaminho As String
     sCaminho = txtArquivoDestino.Text ' Assumindo que o alvo da compactação é o destino
@@ -221,6 +290,19 @@ Dim sCaminho As String
         If CompactAccess(sCaminho) Then
             MsgBox "Access compactado com sucesso (JRO executado).", vbInformation
         End If
+    End If
+End Sub
+
+Private Sub CmdCompareSchema_Click()
+GerarScriptAlteracoesViaSchema TxTArquivoOrigem.Text, txtArquivoDestino.Text, (CheckEfetua.Value = vbChecked)
+End Sub
+
+Private Sub CmdEscdir_Click()
+Dim sCaminho As String
+    sCaminho = SelecionarPasta("Selecione a pasta contendo dos arquivos MDB:")
+    
+    If sCaminho <> "" Then
+        Diretorio.Text = sCaminho
     End If
 End Sub
 
@@ -374,6 +456,14 @@ Private Sub CmdSchemaOrigem_Click()
     Call RecriarIndicesDoSchema(sPathSchema, sPathRecriado)
 End Sub
 
+Private Sub cmdSelSQL_Click()
+  On Error Resume Next
+    CommonDialog1.Filter = "Script SQL (*.sql)|*.sql"
+    CommonDialog1.FileName = "correcao_indices.sql"
+    CommonDialog1.ShowSave
+    If CommonDialog1.FileName <> "" Then txtSQL.Text = CommonDialog1.FileName
+End Sub
+
 Private Sub CmdTableInfo_Click()
 ' Verifica se um arquivo foi selecionado
     If Trim(TxTArquivoOrigem.Text) = "" Then
@@ -390,11 +480,11 @@ Private Sub CmdTableInfo_Click()
 End Sub
 
 Private Sub Command3_Click()
-GerarScriptAlteracoes TxTArquivoOrigem.Text, txtArquivoDestino.Text, False
+GerarScriptAlteracoes TxTArquivoOrigem.Text, txtArquivoDestino.Text, (CheckEfetua.Value = vbChecked)
 End Sub
 
 Private Sub Command4_Click()
-GerarScriptAlteracoes TxTArquivoOrigem.Text, txtArquivoDestino.Text, True
+GerarScriptAlteracoes TxTArquivoOrigem.Text, txtArquivoDestino.Text, (CheckEfetua.Value = vbChecked)
 End Sub
 
 Private Sub Command5_Click()
@@ -420,6 +510,7 @@ Public Sub GerarScriptsSQL(ByVal sCaminho As String, ByVal bIncluirDados As Bool
     ' Após preencher a coleção, você pode exibir no TxtInfo ou salvar em arquivo
     MsgBox "Scripts gerados! Total: " ' & colScriptsPendentes.Count
 End Sub
+
 
 
 Private Sub cmdSqlOrigem_Click()
