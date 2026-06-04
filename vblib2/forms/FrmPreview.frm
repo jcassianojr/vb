@@ -11,6 +11,14 @@ Begin VB.Form FrmPreview
    ScaleHeight     =   5124
    ScaleWidth      =   13188
    StartUpPosition =   3  'Windows Default
+   Begin VB.CommandButton Chamamotor 
+      Caption         =   "motor"
+      Height          =   372
+      Left            =   11640
+      TabIndex        =   9
+      Top             =   1080
+      Width           =   1212
+   End
    Begin OrdoWebView2.OrdoWebView OrdoWebView1 
       Height          =   4695
       Left            =   240
@@ -255,6 +263,11 @@ End Sub
 Private Sub Encerrar_Click()
 Unload Me
 End Sub
+
+Private Sub Form_Activate()
+   bJaInicializado = True
+End Sub
+
 Private Sub Form_Load()
    bJaInicializado = False 'flag para evitar chamar recursivamente no active apenas uma vez
    'necessario ser no activate pois o controle ainda pode estar carregando
@@ -266,13 +279,9 @@ On Error Resume Next
     OrdoWebView1.Height = Me.ScaleHeight - OrdoWebView1.Top - 200
     OrdoWebView1.Width = Me.ScaleWidth - OrdoWebView1.Left - 1800 ' Reserva o espaço dos botões à direita
 End Sub
-Private Sub Form_Activate()
+Private Sub chamamotor_click()
     On Error GoTo TrataErro
     
-    If bJaInicializado Then
-       Exit Sub
-    End If
-    bJaInicializado = True
     Dim bLinkValido As Boolean
     
     ' Habilita explicitamente a execução de scripts no componente Chromium
@@ -556,28 +565,49 @@ End Function
 Private Sub RenderizarMotorZplLocal()
     Dim fso As Object, streamOut As Object
     Dim cHtmlTempPath As String, cJsLocal As String
+    Dim cConteudoZpl As String
     
-    ' Define o caminho do motor JS local
+    On Error GoTo ErroHandler
+    
     cJsLocal = App.Path & "\WebResources\bwip-js-min.js"
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    
-    If Not fso.FileExists(cJsLocal) Then
-        MsgBox "Motor ZPL não encontrado em: " & cJsLocal, vbCritical
-        Exit Sub
-    End If
-    
     cHtmlTempPath = App.Path & "\~zpl_view_engine.html"
+    
+    ' 1. LER O CONTEÚDO DO ARQUIVO ZPL
+    cConteudoZpl = LerArquivoTexto(mvarCaminhoArquivo)
+    
+    ' Tratamento para evitar quebras de string no JS
+    cConteudoZpl = Replace(cConteudoZpl, "\", "\\")
+    cConteudoZpl = Replace(cConteudoZpl, vbCrLf, "\n")
+    cConteudoZpl = Replace(cConteudoZpl, "'", "\'")
+    
+    Set fso = CreateObject("Scripting.FileSystemObject")
     Set streamOut = fso.OpenTextFile(cHtmlTempPath, 2, True)
     
-    ' Estrutura HTML que consome o motor local
-    streamOut.WriteLine "<html><head><meta charset='utf-8'>"
+    ' 2. ESTRUTURA HTML COM INJEÇÃO DO ZPL
+    streamOut.WriteLine "<html><head><meta charset='utf-8'></head>"
+    streamOut.WriteLine "<body>"
+    streamOut.WriteLine "<canvas id='zplCanvas'></canvas>"
     streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\", "/") & "'></script>"
-    ' Adicione aqui a lógica de carregamento do seu arquivo .zpl (via fetch ou injeção de string)
-    streamOut.WriteLine "</head><body>...</body></html>"
+    streamOut.WriteLine "<script>"
+    ' Injeção do conteúdo e comando de renderização
+    streamOut.WriteLine "try {"
+    streamOut.WriteLine "  bwipjs.toCanvas('zplCanvas', {"
+    streamOut.WriteLine "    bcid: 'code128', "
+    streamOut.WriteLine "    text: '" & cConteudoZpl & "'"
+    streamOut.WriteLine "  });"
+    streamOut.WriteLine "} catch(e) { document.body.innerHTML = 'Erro JS: ' + e; }"
+    streamOut.WriteLine "</script>"
+    streamOut.WriteLine "</body></html>"
     streamOut.Close
     
+    ' 3. NAVEGAÇÃO
     OrdoWebView1.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
+    
     Set fso = Nothing
+    Exit Sub
+
+ErroHandler:
+    MsgBox "Erro ao renderizar motor: " & Err.Description, vbCritical
 End Sub
 ' ==============================================================================
 ' FUNÇÃO: Força o navegador a extrair o Canvas (PNG ou JPG) e dispara o download
