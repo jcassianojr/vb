@@ -193,6 +193,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Private mvarCaminhoArquivo As String
+Dim bJaInicializado As Boolean
 Private Sub cmdimp_Click()
 OrdoWebView1.showPrintDialog
 End Sub
@@ -254,6 +255,10 @@ End Sub
 Private Sub Encerrar_Click()
 Unload Me
 End Sub
+Private Sub Form_Load()
+   bJaInicializado = False 'flag para evitar chamar recursivamente no active apenas uma vez
+   'necessario ser no activate pois o controle ainda pode estar carregando
+End Sub
 
 Private Sub Form_Resize()
 On Error Resume Next
@@ -261,9 +266,13 @@ On Error Resume Next
     OrdoWebView1.Height = Me.ScaleHeight - OrdoWebView1.Top - 200
     OrdoWebView1.Width = Me.ScaleWidth - OrdoWebView1.Left - 1800 ' Reserva o espaço dos botões à direita
 End Sub
-Private Sub Form_Load()
+Private Sub Form_Activate()
     On Error GoTo TrataErro
     
+    If bJaInicializado Then
+       Exit Sub
+    End If
+    bJaInicializado = True
     Dim bLinkValido As Boolean
     
     ' Habilita explicitamente a execução de scripts no componente Chromium
@@ -549,7 +558,7 @@ Private Sub RenderizarMotorZplLocal()
     Dim cHtmlTempPath As String, cJsLocal As String
     
     ' Define o caminho do motor JS local
-    cJsLocal = App.Path & "\WebResources\zpl-image.min.js"
+    cJsLocal = App.Path & "\WebResources\bwip-js-min.js"
     Set fso = CreateObject("Scripting.FileSystemObject")
     
     If Not fso.FileExists(cJsLocal) Then
