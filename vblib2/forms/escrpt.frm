@@ -1,19 +1,19 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escRPT 
    Caption         =   "Escolha o grupo de Relatorio"
-   ClientHeight    =   6675
-   ClientLeft      =   165
-   ClientTop       =   450
-   ClientWidth     =   10785
+   ClientHeight    =   6672
+   ClientLeft      =   168
+   ClientTop       =   456
+   ClientWidth     =   10788
    Icon            =   "escrpt.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6675
-   ScaleWidth      =   10785
+   ScaleHeight     =   6672
+   ScaleWidth      =   10788
    StartUpPosition =   2  'CenterScreen
    Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5775
@@ -21,14 +21,14 @@ Begin VB.Form escRPT
       TabIndex        =   4
       Top             =   600
       Width           =   9015
-      _ExtentX        =   15901
-      _ExtentY        =   10186
+      _ExtentX        =   15896
+      _ExtentY        =   10181
    End
    Begin vbExtra.CommonDialogEx CommonDialogEx1 
       Left            =   2400
       Top             =   0
-      _ExtentX        =   900
-      _ExtentY        =   900
+      _ExtentX        =   720
+      _ExtentY        =   720
       MaxFileSize     =   255
       FontName        =   ""
    End
@@ -36,8 +36,8 @@ Begin VB.Form escRPT
       AutoRedraw      =   -1  'True
       Height          =   375
       Left            =   6840
-      ScaleHeight     =   315
-      ScaleWidth      =   1875
+      ScaleHeight     =   324
+      ScaleWidth      =   1884
       TabIndex        =   3
       Top             =   120
       Visible         =   0   'False
@@ -46,8 +46,8 @@ Begin VB.Form escRPT
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   3840
       Top             =   0
-      _ExtentX        =   1191
-      _ExtentY        =   1191
+      _ExtentX        =   953
+      _ExtentY        =   953
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
@@ -56,22 +56,22 @@ Begin VB.Form escRPT
       TabIndex        =   0
       Top             =   0
       Width           =   1470
-      _ExtentX        =   2593
-      _ExtentY        =   11774
-      ButtonWidth     =   1138
-      ButtonHeight    =   582
+      _ExtentX        =   2604
+      _ExtentY        =   11769
+      ButtonWidth     =   1143
+      ButtonHeight    =   572
       Appearance      =   1
       TextAlignment   =   1
       _Version        =   393216
    End
    Begin vbExtra.FlexFn FlexFn1 
-      Height          =   405
+      Height          =   396
       Left            =   0
       TabIndex        =   1
       Top             =   0
-      Width           =   1725
-      _ExtentX        =   3043
-      _ExtentY        =   714
+      Width           =   1680
+      _ExtentX        =   2963
+      _ExtentY        =   699
       PageNumbersFormat=   ""
       PageNumbersFormatIndex=   0
       BeginProperty PageNumbersFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -92,8 +92,8 @@ Begin VB.Form escRPT
       Top             =   120
       Visible         =   0   'False
       Width           =   1335
-      _ExtentX        =   2355
-      _ExtentY        =   450
+      _ExtentX        =   2350
+      _ExtentY        =   445
       MultiLine       =   -1  'True
       TextRTF         =   "escrpt.frx":058A
    End
@@ -112,7 +112,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -128,7 +128,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -166,14 +166,15 @@ Private Sub Form_Load()
      End
      'Unload Me
   End If
-  If InStr(UCase(cARQRTF), ".ZPL") Then
-     If FileExists(cARQRTF) Then
-        FrmPreview.Show
+  ' fechando analisar depois o porque frmpreview erro ao chamar o motorzpl aborta
+'  If InStr(UCase(cARQRTF), ".ZPL") Then
+ '    If FileExists(cARQRTF) Then
+ '       FrmPreview.Show
         
-     End If
-     End
+ '    End If
+ '    End
      'Unload Me
-  End If
+ ' End If
   
   
   
@@ -235,7 +236,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.tEXT
+  zRPT = Grid.Text
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -588,7 +589,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.tEXT
+    zRPT = Grid.Text
     escrptusr.Show vbModal
   End If
 End Sub

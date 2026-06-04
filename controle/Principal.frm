@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
    Caption         =   " "
@@ -385,9 +385,7 @@ Private Sub MDIForm_Load()
   cTIPORPT = "R"
 
  'se sql lite verifica se odbc esta instalado
- If InStr(LCase(dbuser), ".sqlite") > 0 Or InStr(LCase(dbuser), ".sqlite3") > 0 _
-                 Or InStr(LCase(dbuser), ".fossil") > 0 Or InStr(LCase(dbuser), ".db3") > 0 _
-                 Or (InStr(LCase(dbuser), ".db") > 0) Then
+ If EArquivoSQLite(dbuser) Then
      If IsDriverInstalled("SQLite3 ODBC Driver") Then
        ' MsgBox "O driver SQLite ODBC está pronto para uso!", vbInformation
      Else

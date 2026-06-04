@@ -461,9 +461,7 @@ Private Sub Form_Load()
   Text1.Text = cARQRTF
   
    'se sql lite verifica se odbc esta instalado
- If InStr(LCase(cARQRTF), ".sqlite") > 0 Or InStr(LCase(cARQRTF), ".sqlite3") > 0 _
-                 Or InStr(LCase(cARQRTF), ".fossil") > 0 Or InStr(LCase(cARQRTF), ".db3") > 0 _
-                 Or (InStr(LCase(cARQRTF), ".db") > 0) Then
+ If EArquivoSQLite(cARQRTF) Then
      If IsDriverInstalled("SQLite3 ODBC Driver") Then
        ' MsgBox "O driver SQLite ODBC está pronto para uso!", vbInformation
      Else

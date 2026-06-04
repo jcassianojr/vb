@@ -111,9 +111,7 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
   
-  If cTIPO = "SQLITE" Or InStr(LCase(cARQ), ".sqlite") > 0 Or InStr(LCase(cARQ), ".sqlite3") > 0 _
-                 Or InStr(LCase(cARQ), ".fossil") > 0 Or InStr(LCase(cARQ), ".db3") > 0 _
-                 Or (InStr(LCase(cARQ), ".db") > 0 And InStr(cARQTMP, ".DBF") = 0) Then
+  If cTIPO = "SQLITE" Or (EArquivoSQLite(cARQ) And InStr(cARQTMP, ".DBF") = 0) Then
     GeraConn = "[SQLITE]" & cARQ
     Exit Function
   End If
@@ -1506,3 +1504,22 @@ Public Function ExtrairNomeTabela(ByVal cSQL As String) As String
     ' Extrai e limpa o nome da tabela
     ExtrairNomeTabela = Trim(Mid(cSQL, nPosFrom - 1, nFIM - nPosFrom + 1))
 End Function
+
+
+Public Function EArquivoSQLite(ByVal cCaminho As String) As Boolean
+  
+     cCaminho = LCase(cCaminho)
+    ' Lista de extensões que o seu sistema aceita como SQLite
+    If InStr(cCaminho, ".sqlite") > 0 Or _
+       InStr(cCaminho, ".sqlite3") > 0 Or _
+       InStr(cCaminho, ".db") > 0 Or _
+       InStr(cCaminho, ".db3") > 0 Or _
+       InStr(cCaminho, ".fossil") > 0 Then
+       
+       EArquivoSQLite = True
+    Else
+       EArquivoSQLite = False
+    End If
+End Function
+
+

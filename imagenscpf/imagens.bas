@@ -40,7 +40,7 @@ Public Sub Cmdiniciar_Click()
       Dim ext As String
       ext = LCase(Right(rawPath, 7)) ' Pega o final para extensões como .sqlite
 
-      If InStr(ext, ".sqlite") > 0 Or InStr(ext, ".db") > 0 Then
+      If EArquivoSQLite(rawPath) Then
           ' Monta string para SQLite3 ODBC [cite: 11]
           DBCONNSTR = "Driver={SQLite3 ODBC Driver};Database=" & rawPath & ";"
       ElseIf InStr(ext, ".accdb") > 0 Then
@@ -148,6 +148,22 @@ Public Function FixStr(ByVal eVAR As Variant, _
 errhandler:
   FixStr = ""
   Resume Next
+End Function
+
+Public Function EArquivoSQLite(ByVal cCaminho As String) As Boolean
+  
+     cCaminho = LCase(cCaminho)
+    ' Lista de extensões que o seu sistema aceita como SQLite
+    If InStr(cCaminho, ".sqlite") > 0 Or _
+       InStr(cCaminho, ".sqlite3") > 0 Or _
+       InStr(cCaminho, ".db") > 0 Or _
+       InStr(cCaminho, ".db3") > 0 Or _
+       InStr(cCaminho, ".fossil") > 0 Then
+       
+       EArquivoSQLite = True
+    Else
+       EArquivoSQLite = False
+    End If
 End Function
 
 
