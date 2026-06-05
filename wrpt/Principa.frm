@@ -638,7 +638,7 @@ Private Sub MDIForm_Load()
 
 
 
-  StatusBar1.Panels(6).Text = zUSER
+  StatusBar1.Panels(6).tEXT = zUSER
   If Trim(PegPath("CITACAO", zUSER, "S")) = "S" Then
     frmDica.Show
   End If

@@ -88,7 +88,7 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
   
   GeraConn = cARQ
   cARQTMP = UCase(cARQ) 'usado no instr maiscula mas sempre atribui na carq conecao e case sensitive
-  If InStr(cARQTMP, "[") > 0 Then                 ''ja e uma connecao
+  If InStr(cARQTMP, "[") > 0 Then                 ''ja e uma connecao nao chama variantes como [SQLITERC6] [ADORC6] [CONN]
     Exit Function
   End If
   If cTIPO = "JETMDB" Or cTIPO = "MDB" Or InStr(cARQTMP, ".MDB") > 0 Then
@@ -111,10 +111,16 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
     Exit Function
   End If
   
-  If cTIPO = "SQLITE" Or (EArquivoSQLite(cARQ) And InStr(cARQTMP, ".DBF") = 0) Then
+  If cTIPO = "SQLITE" Or EArquivoSQLite(cARQ) Then
     GeraConn = "[SQLITE]" & cARQ
     Exit Function
   End If
+
+  If cTIPO = "FIREBIRD" Or EArquivofirebird(cARQ) Then
+    GeraConn = "[FIREBIRD]" & cARQ
+    Exit Function
+  End If
+
 
   If LCase(Right(cARQ, 6)) = ".accdb" Then  'InStr(LCase(cARQ), ".accdb")>0
     GeraConn = "[ACCDB]" & cARQ
@@ -198,10 +204,6 @@ If Len(cTIPO) > 0 Then
   End Select
 End If
 
-If InStr(LCase(cARQ), ".fdb") > 0 Or InStr(LCase(cARQ), ".gdb") > 0 Then
-    GeraConn = "[FIREBIRD]" & cARQ
-    Exit Function
-End If
 End Function
 
 Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = "", _
@@ -216,13 +218,15 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   Dim lTEMMYSQL As Boolean
   Dim lTEMORACLE As Boolean
   Dim lTEMFIREBIRD As Boolean
-  
+  Dim lTEMRC6 As Boolean
+  Dim lTEMVBSQLITE As Boolean
   Dim cADSTIP As String
   Dim cADSNOM As String
   Dim cXLSVER As String '
   Dim aCONN As Variant
   Dim cSecaoCofre As String
   Dim cAuth As String
+  Dim cTIPOPADRAO As String
   
   'usa boolean para agilizar if,case... no lugar de comparacao com string
   lTEMMDB = False
@@ -232,7 +236,9 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   lTEMPG = False
   lTEMORACLE = False
   lTEMFIREBIRD = False
-  
+  lTEMRC6 = False
+  lTEMVBSQLITE = False
+  cTIPOPADRAO = "ADO"
   
   'inicial valores padrao
   TipoConn = Array("ADO", cARQ, "???")
@@ -263,23 +269,36 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
 
   End If
 
+   If InStr(cARQTMP, "RC6") > 0 Then
+        lTEMRC6 = True
+        cTIPOPADRAO = "ADORC6"
+   End If
+
+   If InStr(cARQTMP, "VBSQLITE") > 0 Then
+        lTEMVBSQLITE = True
+        cTIPOPADRAO = "VBSQLITE"
+   End If
+
+
+
      If InStr(cARQTMP, ".MDB") > 0 Then
         lTEMMDB = True
-        TipoConn = Array("ADO", cARQ, "MDB")
+        TipoConn = Array(cTIPOPADRAO, cARQ, "MDB")
    End If
 
   'sqlite
   '
-  If InStr(cARQTMP, ".SQLITE") > 0 Then
+  If EArquivoSQLite(cARQTMP) Or InStr(cARQTMP, "[SQLITE") Or InStr(cARQTMP, "{SQLite3") Then
     lTEMSQLITE = True
-    TipoConn = Array("ADO", cARQ, "SQLITE")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "SQLITE")
   End If
+  
   '
   'mariadb
   '
   If InStr(cARQTMP, ".MARIADB") > 0 Or InStr(cARQTMP, "{MARIADB") > 0 Then
     lTEMMARIADB = True
-    TipoConn = Array("ADO", cARQ, "MARIADB")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "MARIADB")
   End If
   
   '
@@ -287,7 +306,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   '
   If InStr(cARQTMP, ".ORACLE") > 0 Or InStr(cARQTMP, "{ORACLE") > 0 Then
     lTEMORACLE = True
-    TipoConn = Array("ADO", cARQ, "ORACLE")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "ORACLE")
   End If
    
   '
@@ -295,7 +314,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   '
   If InStr(cARQTMP, ".MYSQL") > 0 Or InStr(cARQTMP, "{MYSQL") > 0 Then
     lTEMMYSQL = True
-    TipoConn = Array("ADO", cARQ, "MYSQL")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "MYSQL")
   End If
   
     '
@@ -303,14 +322,14 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   '
   If InStr(cARQTMP, ".PGSQL") > 0 Or InStr(cARQTMP, ".POSTGRESQL") > 0 Or InStr(cARQTMP, "{POSTGRESQL") > 0 Then
     lTEMPG = True
-    TipoConn = Array("ADO", cARQ, "PGSQL")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "PGSQL")
   End If
     '
  
 ' 2. No bloco de detecção de tipo (após a checagem do SQLite):
-   If InStr(cARQTMP, ".FIREBIRD") > 0 Or InStr(cARQTMP, "{FIREBIRD") > 0 Or InStr(cARQTMP, "[FIREBIRD") > 0 Then
+   If EArquivofirebird(cARQTMP) Or InStr(cARQTMP, "{FIREBIRD") > 0 Or InStr(cARQTMP, "[FIREBIRD") > 0 Then
        lTEMFIREBIRD = True
-     TipoConn = Array("ADO", cARQ, "FIREBIRD")
+     TipoConn = Array(cTIPOPADRAO, cARQ, "FIREBIRD")
    End If
 
   '
@@ -362,7 +381,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     Else
       cARQ = cARQ & ";Mode=Share Deny None"  '";Mode=Read"
     End If
-    TipoConn = Array("ADO", cARQ, "MDB")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "MDB")
     Exit Function                            '' encerra agilizar
   End If
   
@@ -371,8 +390,11 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   '
      If lTEMSQLITE Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
         cARQ = Replace(cARQ, "[SQLITE]", "")
-        
-        
+        If InStr(cARQ, "[VBSQLITE]") > 0 Then
+           cARQ = Replace(cARQ, "[VBSQLITE]", "")
+           TipoConn = Array(cTIPOPADRAO, cARQ, "SQLITE")
+           Exit Function
+        End If
       cAuth = ""
       If Trim(cUSER) <> "" Then cAuth = ";UID=" & cUSER
       If Trim(cPASS) <> "" Then cAuth = cAuth & ";PWD=" & cPASS
@@ -388,7 +410,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
       End Select
 
 
-    TipoConn = Array("ADO", cARQ, "SQLITE")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "SQLITE")
     Exit Function
   End If
   
@@ -413,7 +435,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
                     Case "P": cARQ = "Provider=MSDASQL;Data Source=" & aCONN(3) & ";User Id=" & cUSER & ";Password=" & cPASS & ";"
             End Select
          End If
-     TipoConn = Array("ADO", cARQ, "MARIADB")
+     TipoConn = Array(cTIPOPADRAO, cARQ, "MARIADB")
      Exit Function
    End If
   
@@ -454,7 +476,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
             '  cARQ = cARQ & ";DefaultSchema=" & cowner
             'End If
     End If
-    TipoConn = Array("ADO", cARQ, "ORACLE")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "ORACLE")
     Exit Function
   End If
   
@@ -480,7 +502,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
                 End Select
 
          End If
-    TipoConn = Array("ADO", cARQ, "MYSQL")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "MYSQL")
     Exit Function
   End If
 
@@ -506,20 +528,18 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
 
       '    cARQ = "Driver={PostgreSQL ANSI};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=postgres;Pwd=admin;"
     End If
-      TipoConn = Array("ADO", cARQ, "PGSQL")
+      TipoConn = Array(cTIPOPADRAO, cARQ, "PGSQL")
      Exit Function
     End If
 
 ' 3. No bloco que aplica a string de conexão (após a checagem do SQLite/MariaDB):
 If lTEMFIREBIRD Then
     cARQ = Replace(cARQ, "[FIREBIRD]", "")
-    ' Ajuste o Provider conforme a instalação do driver Firebird no seu ambiente
-    'cARQ = "Provider=MSDASQL;Driver={Firebird/InterBase driver};DbName=" + cARQ + ";UID=" + cUSER + ";PWD=" + cPASS + ";"
-    TipoConn = Array("ADO", cARQ, "FIREBIRD")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "FIREBIRD")
     
     Select Case UCase(cPADTIPOCON)
         Case "D", "N" ' Driver
-            cARQ = "Driver={Firebird/InterBase driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
+            cARQ = "Driver={Firebird ODBC Driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
         Case "P" ' Provider
             cARQ = "Provider=LCPI.IBProvider;Location=" & cARQ & ";User ID=" & cUSER & ";Password=" & cPASS & ";"
     End Select
@@ -553,21 +573,21 @@ End If
     Else
       cARQ = "Provider=VFPOLEDB.1;Data Source=" & cARQ & ";Mode=Read|Share Deny None;Persist Security Info=False;Collating Sequence=MACHINE;DELETED=True;"  'NULL=NO"
     End If
-    TipoConn = Array("ADO", cARQ, "DBF")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "DBF")
     Exit Function
   End If
   If InStr(cARQTMP, "[XLSDRV]") > 0 Then
     cARQ = Replace(cARQ, "[XLSDRV]", "")
          cARQ = "DRIVER=Microsoft Excel Driver (*.xls);" & "DBQ=" & cARQ
-        TipoConn = Array("ADO", cARQ, "XLSDRV")
+        TipoConn = Array(cTIPOPADRAO, cARQ, "XLSDRV")
       Exit Function
      End If
     If InStr(cARQTMP, "[CONN]") > 0 Then
      cARQ = Replace(cARQ, "[CONN]", "")
      If lTEMMDB Then
-        TipoConn = Array("ADO", cARQ, "MDB")
+        TipoConn = Array(cTIPOPADRAO, cARQ, "MDB")
       Else
-        TipoConn = Array("ADO", cARQ, "CONN")
+        TipoConn = Array(cTIPOPADRAO, cARQ, "CONN")
        End If
       Exit Function
     End If
@@ -594,7 +614,7 @@ End If
             End Select
 
        
-    TipoConn = Array("ADO", cARQ, "SQLSERVER")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "SQLSERVER")
     Exit Function
   End If
 
@@ -613,34 +633,34 @@ End If
     Else
       cARQ = cARQ & ";Mode=Share Deny None"  '";Mode=Read"
     End If
-    TipoConn = Array("ADO", cARQ, "ACEOLEDB")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "ACEOLEDB")
     Exit Function
   End If
 
   If InStr(cARQTMP, "[INFORMIX]") > 0 Then
     cARQ = Replace(cARQ, "[INFORMIX]", "")
-    TipoConn = Array("ADO", cARQ, "INFORMIX")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "INFORMIX")
     Exit Function
   End If
   If InStr(cARQTMP, "[FIREBIRD]") > 0 Then
     cARQ = Replace(cARQ, "[FIREBIRD]", "")
-    TipoConn = Array("ADO", cARQ, "FIREBIRD")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "FIREBIRD")
     Exit Function
   End If
   If InStr(cARQTMP, "[INTERBASE]") > 0 Then
     cARQ = Replace(cARQ, "[INTERBASE]", "")
-    TipoConn = Array("ADO", cARQ, "INTERBASE")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "INTERBASE")
     Exit Function
   End If
   If InStr(cARQTMP, "[POSTGRESQL]") > 0 Then
     cARQ = Replace(cARQ, "[POSTGRESQL]", "")
-    TipoConn = Array("ADO", cARQ, "POSTGRESQL")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "POSTGRESQL")
     Exit Function
   End If
   If InStr(cARQTMP, "[UDL]") > 0 Then
     cARQ = Replace(cARQ, "[UDL]", "")
     cARQ = "File Name=" & cARQ & ";"
-    TipoConn = Array("ADO", cARQ, "UDL")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "UDL")
     Exit Function
   End If
   'ADS
@@ -672,7 +692,7 @@ End If
            "Use NULL values in DBF Tables with Advantage=True;" & _
            "Exclusive=No;Deleted=No;" & _
            "Persist Security Info=False;Advantage Character Data Type=ADS_OEM;"
-    TipoConn = Array("ADO", cARQ, cADSNOM)
+    TipoConn = Array(cTIPOPADRAO, cARQ, cADSNOM)
     Exit Function
   End If
   'tratamentos JET
@@ -705,7 +725,7 @@ End If
     cARQ = Replace(Replace(Replace(Replace(Replace(cARQ, "[XLSX]", ""), "[XLSM]", ""), "[XLSB]", ""), "[XLS]", ""), "[XLSB]", "")
     cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & cExtProp & Chr(34) & ";"
     
-    TipoConn = Array("ADO", cARQ, "XLS")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "XLS")
     Exit Function
   End If
 
@@ -728,7 +748,7 @@ End If
     
     cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;" & cFmt & ";IMEX=1" & Chr(34) & ";"
     
-    TipoConn = Array("ADO", cARQ, "JETXT")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "JETXT")
     Exit Function
   End If
   
@@ -743,7 +763,7 @@ End If
     ' a estrutura já é interpretada pelo motor dBase IV/III
     cARQ = cJETUSO & cARQ & cJetExt & "DBASE III;"
     
-    TipoConn = Array("ADO", cARQ, "DBF")
+    TipoConn = Array(cTIPOPADRAO, cARQ, "DBF")
     Exit Function
   End If
   
@@ -752,19 +772,19 @@ End If
     If InStr(cARQTMP, "[JETPDX3]") > 0 Then
       cARQ = Replace(cARQ, "[JETPDX3]", "")
       cARQ = cJETUSO & cARQ & cJetExt & "Paradox 3.X" & ";"
-      TipoConn = Array("ADO", cARQ, "DB")
+      TipoConn = Array(cTIPOPADRAO, cARQ, "DB")
       Exit Function
     End If
     If InStr(cARQTMP, "[JETPDX4]") > 0 Then
       cARQ = Replace(cARQ, "[JETPDX4]", "")
       cARQ = cJETUSO & cARQ & cJetExt & "Paradox 4.X" & ";"
-      TipoConn = Array("ADO", cARQ, "DB")
+      TipoConn = Array(cTIPOPADRAO, cARQ, "DB")
       Exit Function
     End If
     If InStr(cARQTMP, "[JETPDX5]") > 0 Then
       cARQ = Replace(cARQ, "[JETPDX5]", "")
       cARQ = cJETUSO & cARQ & cJetExt & "Paradox 5.X" & ";"
-      TipoConn = Array("ADO", cARQ, "DB")
+      TipoConn = Array(cTIPOPADRAO, cARQ, "DB")
       Exit Function
     End If
   End If
@@ -1520,6 +1540,23 @@ Public Function EArquivoSQLite(ByVal cCaminho As String) As Boolean
     Else
        EArquivoSQLite = False
     End If
+    
+    'verifique se um .db e nao um ponto .dbf
+    If InStr(cCaminho, ".dbf") > 0 Then
+       EArquivoSQLite = False
+    End If
 End Function
 
+Public Function EArquivofirebird(ByVal cCaminho As String) As Boolean
+  
+     cCaminho = LCase(cCaminho)
+    ' Lista de extensões que o seu sistema aceita como SQLite
+    If InStr(cCaminho, ".gdb") > 0 Or _
+       InStr(cCaminho, ".fdb") > 0 Then
+       
+       EArquivofirebird = True
+    Else
+       EArquivofirebird = False
+    End If
+End Function
 
