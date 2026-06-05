@@ -11,30 +11,30 @@ Begin VB.Form FrmPreview
    ScaleHeight     =   5124
    ScaleWidth      =   13188
    StartUpPosition =   3  'Windows Default
-   Begin VB.CommandButton Chamamotor 
-      Caption         =   "motor"
-      Height          =   372
-      Left            =   11640
-      TabIndex        =   9
-      Top             =   1080
-      Width           =   1212
-   End
    Begin OrdoWebView2.OrdoWebView OrdoWebView1 
-      Height          =   4695
-      Left            =   240
-      TabIndex        =   0
-      Top             =   120
-      Width           =   10815
+      Height          =   4092
+      Left            =   360
+      TabIndex        =   9
+      Top             =   360
+      Width           =   10812
       _ExtentX        =   19071
-      _ExtentY        =   8276
+      _ExtentY        =   7218
       Search_URL      =   ""
       IsScriptEnabled =   0   'False
       UseEdgeFixedVersion=   -1  'True
    End
+   Begin VB.CommandButton Chamamotor 
+      Caption         =   "motor"
+      Height          =   372
+      Left            =   11640
+      TabIndex        =   8
+      Top             =   1080
+      Width           =   1212
+   End
    Begin XPControls.XPButton Encerrar 
       Height          =   435
       Left            =   11520
-      TabIndex        =   1
+      TabIndex        =   0
       Top             =   720
       Width           =   1215
       _ExtentX        =   2138
@@ -54,7 +54,7 @@ Begin VB.Form FrmPreview
    Begin XPControls.XPButton cmdimp 
       Height          =   435
       Left            =   11520
-      TabIndex        =   2
+      TabIndex        =   1
       Top             =   240
       Width           =   1215
       _ExtentX        =   2138
@@ -74,7 +74,7 @@ Begin VB.Form FrmPreview
    Begin XPControls.XPButton cmdSavehtml 
       Height          =   375
       Left            =   11520
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   1560
       Width           =   1215
       _ExtentX        =   2138
@@ -94,7 +94,7 @@ Begin VB.Form FrmPreview
    Begin XPControls.XPButton cmdSaveTXT 
       Height          =   375
       Left            =   11520
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   2040
       Width           =   1215
       _ExtentX        =   2138
@@ -114,7 +114,7 @@ Begin VB.Form FrmPreview
    Begin XPControls.XPButton cmdSavePNG 
       Height          =   312
       Left            =   11520
-      TabIndex        =   5
+      TabIndex        =   4
       TabStop         =   0   'False
       Top             =   2520
       Width           =   1212
@@ -135,7 +135,7 @@ Begin VB.Form FrmPreview
    Begin XPControls.XPButton cmdSavejpg 
       Height          =   312
       Left            =   11520
-      TabIndex        =   6
+      TabIndex        =   5
       TabStop         =   0   'False
       Top             =   2880
       Width           =   1212
@@ -156,7 +156,7 @@ Begin VB.Form FrmPreview
    Begin XPControls.XPButton cmdsavedoc 
       Height          =   375
       Left            =   11520
-      TabIndex        =   7
+      TabIndex        =   6
       Top             =   3240
       Width           =   1215
       _ExtentX        =   2138
@@ -176,7 +176,7 @@ Begin VB.Form FrmPreview
    Begin XPControls.XPButton CmdSavePDF 
       Height          =   375
       Left            =   11520
-      TabIndex        =   8
+      TabIndex        =   7
       Top             =   3720
       Width           =   1215
       _ExtentX        =   2138
@@ -202,8 +202,9 @@ Attribute VB_Exposed = False
 Option Explicit
 Private mvarCaminhoArquivo As String
 Dim bJaInicializado As Boolean
+
 Private Sub cmdimp_Click()
-OrdoWebView1.showPrintDialog
+OrdoWebView1.ShowPrintDialog
 End Sub
 
 Private Sub cmdSavehtml_Click()
@@ -271,27 +272,52 @@ End Sub
 Private Sub Form_Load()
    bJaInicializado = False 'flag para evitar chamar recursivamente no active apenas uma vez
    'necessario ser no activate pois o controle ainda pode estar carregando
+   If carqrtf = "" Then
+     carqrtf = "c:\develop\modelos\wrpt\teste.zpl"
+      'carqrtf = "c:\temp\vb6.iss.txt"
+   End If
 End Sub
 
 Private Sub Form_Resize()
 On Error Resume Next
     ' Redimensionamento dinâmico responsivo: o preview acompanha o tamanho da janela do utilizador
-    OrdoWebView1.Height = Me.ScaleHeight - OrdoWebView1.Top - 200
-    OrdoWebView1.Width = Me.ScaleWidth - OrdoWebView1.Left - 1800 ' Reserva o espaço dos botões à direita
+    If bJaInicializado Then
+        OrdoWebView1.Height = Me.ScaleHeight - OrdoWebView1.Top - 200
+        OrdoWebView1.Width = Me.ScaleWidth - OrdoWebView1.Left - 1800 ' Reserva o espaço dos botões à direita
+     End If
 End Sub
 Private Sub chamamotor_click()
     On Error GoTo TrataErro
     
     Dim bLinkValido As Boolean
+    Dim cEXT As String
     
-    ' Habilita explicitamente a execução de scripts no componente Chromium
-    OrdoWebView1.IsScriptEnabled = True
+    ' 1. Verifica se o objeto foi instanciado pelo VB6
+    If OrdoWebView1 Is Nothing Then
+        MsgBox "Erro: O componente OrdoWebView1 não foi criado no formulário!", vbCritical
+        Exit Sub
+    End If
+    
+    
+    Me.SetFocus
+    DoEvents
+    
+    ' 3. Pausa maior para garantir a estabilidade do processo
+    ' Às vezes, o WebView2 leva um tempo para "anexar" ao controle
+   ' Sleep 500
+   
+   
     
     ' 1. Captura o destino passado pela variável global de transporte
-    mvarCaminhoArquivo = Trim(CStr(cARQRTF))
+    mvarCaminhoArquivo = Trim(CStr(carqrtf))
+    cEXT = parsefile(mvarCaminhoArquivo, "E")
+    
     
     ' 2. CONTROLE DE INTERFACE DINÂMICO E DIRECIONAMENTO DE MOTORES
-    If InStr(1, mvarCaminhoArquivo, ".zpl", vbTextCompare) > 0 Then
+    If cEXT = "zpl" Then
+      ' Habilita explicitamente a execução de scripts no componente Chromium
+       OrdoWebView1.IsScriptEnabled = True
+    
         ' --- MODO ETIQUETA ZPL ---
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
@@ -305,25 +331,30 @@ Private Sub chamamotor_click()
         ' Renderização do motor local
         Call RenderizarMotorZplLocal
             
-   ElseIf InStr(1, mvarCaminhoArquivo, ".chm", vbTextCompare) > 0 Then
+   ElseIf cEXT = "chm" Then
         ' --- MODO MOTOR DE AJUDA CHM ---
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
         
+       ' Habilita explicitamente a execução de scripts no componente Chromium
+        OrdoWebView1.IsScriptEnabled = True
+     
         Me.Caption = "Manual de Ajuda - " & NomeArq(mvarCaminhoArquivo, False)
         
         ' O protocolo its: nativo do Windows funciona localmente e offline no Chromium
         OrdoWebView1.Navigate "its:" & mvarCaminhoArquivo & "::/"
         
-   ElseIf InStr(1, mvarCaminhoArquivo, ".hlp", vbTextCompare) > 0 Then
+   ElseIf cEXT = "hlp" Then
         ' --- MODO MOTOR DE AJUDA HLP LEGADO (FALLBACK SEGURO) ---
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
-        
+        ' Habilita explicitamente a execução de scripts no componente Chromium
+        OrdoWebView1.IsScriptEnabled = True
+    
         ' Testa se o arquivo começa com o cabeçalho 'ITSF' (característico de arquivos CHM)
         If IsArquivoChmDisfarcado(mvarCaminhoArquivo) Then
             Me.Caption = "Manual de Ajuda - " & NomeArq(mvarCaminhoArquivo, False)
@@ -334,14 +365,17 @@ Private Sub chamamotor_click()
             Call RenderizarMotorHlpLocal
         End If
         
-    ElseIf InStr(1, mvarCaminhoArquivo, ".xlsx", vbTextCompare) > 0 Or _
-           InStr(1, mvarCaminhoArquivo, ".xls", vbTextCompare) > 0 Or _
-           InStr(1, mvarCaminhoArquivo, ".ods", vbTextCompare) > 0 Then
+    ElseIf cEXT = "xlsx" Or _
+           cEXT = "xls" Or _
+           cEXT = "ods" Then
         ' --- MODO LEITOR DE PLANILHAS (EXCEL / CALC) ---
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
+        ' Habilita explicitamente a execução de scripts no componente Chromium
+        OrdoWebView1.IsScriptEnabled = True
+    
         
         Me.Caption = "Visualizador de Planilhas - " & NomeArq(mvarCaminhoArquivo, False)
         
@@ -351,13 +385,15 @@ Private Sub chamamotor_click()
         
         Call RenderizarMotorPlanilhaLocal
         
-    ElseIf InStr(1, mvarCaminhoArquivo, ".csv", vbTextCompare) > 0 Then
+    ElseIf cEXT = "csv" Then
         ' --- MODO LEITOR DE DADOS DELIMITADOS (CSV) ---
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
-        
+        ' Habilita explicitamente a execução de scripts no componente Chromium
+        OrdoWebView1.IsScriptEnabled = True
+    
         Me.Caption = "Visualizador de Dados - " & NomeArq(mvarCaminhoArquivo, False)
         
         ' Check Link específico para o Marked (Markdown/CSV)
@@ -368,13 +404,15 @@ Private Sub chamamotor_click()
         RenderizarMotorDelimitadoLocal mvarCaminhoArquivo
         
         
-    ElseIf InStr(1, mvarCaminhoArquivo, ".rtf", vbTextCompare) > 0 Then
+    ElseIf cEXT = "rtf" Then
         ' --- MODO LEITOR DE RTF MODERNO ---
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
-        
+        ' Habilita explicitamente a execução de scripts no componente Chromium
+        OrdoWebView1.IsScriptEnabled = True
+    
         Me.Caption = "Visualizador RTF - " & NomeArq(mvarCaminhoArquivo, False)
         
         ' Check Link específico para o parser de RTF
@@ -383,14 +421,17 @@ Private Sub chamamotor_click()
         
         Call RenderizarMotorRtfLocal
         
-    ElseIf InStr(1, mvarCaminhoArquivo, ".docx", vbTextCompare) > 0 Or _
-           InStr(1, mvarCaminhoArquivo, ".doc", vbTextCompare) > 0 Or _
-           InStr(1, mvarCaminhoArquivo, ".odt", vbTextCompare) > 0 Then
+    ElseIf cEXT = "docx" Or _
+           cEXT = "doc" Or _
+           cEXT = "odt" Then
         ' --- MODO LEITOR DE DOCUMENTOS (WORD / ODT) ---
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
+        ' Habilita explicitamente a execução de scripts no componente Chromium
+        OrdoWebView1.IsScriptEnabled = True
+    
         
         Me.Caption = "Visualizador de Documentos - " & NomeArq(mvarCaminhoArquivo, False)
         
@@ -399,56 +440,50 @@ Private Sub chamamotor_click()
         If Not bLinkValido Then NotificarModoOffline "Word"
         
         Call RenderizarMotorDocLocal
-  ElseIf InStr(1, mvarCaminhoArquivo, ".md", vbTextCompare) > 0 Or _
-           InStr(1, mvarCaminhoArquivo, ".markdown", vbTextCompare) > 0 Then
+  ElseIf cEXT = "md" Or _
+          cEXT = "markdown" Then
         ' --- MODO LEITOR DE DOCUMENTOS (md) ---
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
-        
+        ' Habilita explicitamente a execução de scripts no componente Chromium
+        OrdoWebView1.IsScriptEnabled = True
+    
         Me.Caption = "Visualizador de Documentos - " & NomeArq(mvarCaminhoArquivo, False)
         
         Call RenderizarMotorMarked
         
-    ElseIf InStr(1, mvarCaminhoArquivo, ".pdf", vbTextCompare) > 0 Then
+    ElseIf cEXT = "pdf" Then
         ' --- MODO LEITOR DE PDF ---
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
-        
+        ' Habilita explicitamente a execução de scripts no componente Chromium
+        OrdoWebView1.IsScriptEnabled = True
+    
         Me.Caption = "Leitor de PDF - " & NomeArq(mvarCaminhoArquivo, False)
         
         ' O PDF usa o leitor nativo interno do Chromium (100% offline, não precisa de teste)
         OrdoWebView1.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\", "/")
         
-    Else
+    ElseIf cEXT = "html" And _
+               cEXT = ".htm" Then
+        
         ' --- MODO RELATÓRIO NORMAL (HTML, TXT, URL) ---
         cmdSavehtml.Visible = True
         cmdSaveTXT.Visible = True
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
-        
+        ' Habilita explicitamente a execução de scripts no componente Chromium
+        OrdoWebView1.IsScriptEnabled = True
+    
         Me.Caption = "Visualizador - " & mvarCaminhoArquivo
         
-        If InStr(1, mvarCaminhoArquivo, "://", vbTextCompare) = 0 Then
-            ' Tratamento de arquivos de texto comuns que usam o motor delimitador
-            If InStr(1, mvarCaminhoArquivo, ".html", vbTextCompare) = 0 And _
-               InStr(1, mvarCaminhoArquivo, ".htm", vbTextCompare) = 0 Then
                 
-                bLinkValido = TestarLinkMotorJS("https://cdn.jsdelivr.net/npm/marked/marked.min.js")
-                If Not bLinkValido Then NotificarModoOffline "Texto"
-                
-                RenderizarMotorDelimitadoLocal mvarCaminhoArquivo
-            Else
-                ' HTML puro local roda offline
-                OrdoWebView1.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\", "/")
-            End If
-        Else
-            ' URL externa direta
-            OrdoWebView1.Navigate mvarCaminhoArquivo
-        End If
+    Else
+        'OrdoWebView1.Navigate mvarCaminhoArquivo
     End If
     
     DoEvents
@@ -567,7 +602,8 @@ Private Sub RenderizarMotorZplLocal()
     Dim cHtmlTempPath As String, cJsLocal As String
     Dim cConteudoZpl As String
     
-    On Error GoTo ErroHandler
+    'On Error GoTo ErroHandler
+    On Error Resume Next
     
     cJsLocal = App.Path & "\WebResources\bwip-js-min.js"
     cHtmlTempPath = App.Path & "\~zpl_view_engine.html"
@@ -606,8 +642,8 @@ Private Sub RenderizarMotorZplLocal()
     Set fso = Nothing
     Exit Sub
 
-ErroHandler:
-    MsgBox "Erro ao renderizar motor: " & Err.Description, vbCritical
+'ErroHandler:
+'    MsgBox "Erro ao renderizar motor: " & Err.Description, vbCritical
 End Sub
 ' ==============================================================================
 ' FUNÇÃO: Força o navegador a extrair o Canvas (PNG ou JPG) e dispara o download
