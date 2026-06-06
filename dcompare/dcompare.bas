@@ -133,11 +133,12 @@ Public Function CriarNovoDestino(ByVal cCaminho As String) As Boolean
     End If
 End Function
 Public Function EArquivoSQLite(ByVal cCaminho As String) As Boolean
-    Dim sExt As String
-    sExt = LCase(Right(cCaminho, 6)) ' Pega a extensão final
+    
+     cCaminho = LCase(cCaminho)
     
     ' Lista de extensões que o seu sistema aceita como SQLite
     If InStr(cCaminho, ".sqlite") > 0 Or _
+       InStr(cCaminho, ".sqlite3") > 0 Or _
        InStr(cCaminho, ".db") > 0 Or _
        InStr(cCaminho, ".db3") > 0 Or _
        InStr(cCaminho, ".fossil") > 0 Then

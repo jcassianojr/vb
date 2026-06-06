@@ -447,7 +447,23 @@ Function OpenArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, B
   lRETU = True
   OpenArqExt = sFileName
 End Function
-
+Public Function SelecionarPasta(ByVal Titulo As String) As String
+    Dim objShell As Object
+    Dim objFolder As Object
+    
+    Set objShell = CreateObject("Shell.Application")
+    ' 1 = BIF_RETURNONLYFSDIRS (Apenas pastas do sistema de arquivos)
+    Set objFolder = objShell.BrowseForFolder(0, Titulo, 1)
+    
+    If Not objFolder Is Nothing Then
+        SelecionarPasta = objFolder.Items.Item.Path
+    Else
+        SelecionarPasta = ""
+    End If
+    
+    Set objFolder = Nothing
+    Set objShell = Nothing
+End Function
 Function SaveArqExt(oFORM As Form, ByVal cARQ As String, ByVal cEXT As String, ByVal cTITULO As String) As String
   Dim sFileName As String
   Dim sPath As String
