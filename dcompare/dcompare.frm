@@ -11,6 +11,14 @@ Begin VB.Form dCompare
    ScaleHeight     =   7908
    ScaleWidth      =   13248
    StartUpPosition =   3  'Windows Default
+   Begin VB.CommandButton CmdGeraPastaSql 
+      Caption         =   "SQL"
+      Height          =   372
+      Left            =   1200
+      TabIndex        =   27
+      Top             =   3360
+      Width           =   852
+   End
    Begin VB.CheckBox CheckEfetua 
       Caption         =   "Efetua  correcao"
       Height          =   252
@@ -28,12 +36,12 @@ Begin VB.Form dCompare
       Width           =   492
    End
    Begin VB.CommandButton CmdGeraPasta 
-      Caption         =   "GerarScript mdb accdb pasta"
+      Caption         =   "Schema"
       Height          =   372
-      Left            =   6960
+      Left            =   240
       TabIndex        =   24
-      Top             =   3000
-      Width           =   2412
+      Top             =   3360
+      Width           =   852
    End
    Begin VB.TextBox Diretorio 
       Height          =   372
@@ -112,12 +120,12 @@ Begin VB.Form dCompare
       Width           =   7215
    End
    Begin VB.TextBox TxtInfo 
-      Height          =   3285
+      Height          =   2808
       Left            =   120
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Both
       TabIndex        =   12
-      Top             =   3480
+      Top             =   3960
       Width           =   8055
    End
    Begin VB.CommandButton cmdCompactar 
@@ -396,6 +404,10 @@ Private Sub CmdGeraPasta_Click()
 ProcessarPastaCompletaSchema (Diretorio.Text)
 End Sub
 
+Private Sub CmdGeraPastaSql_Click()
+   ProcessarPastaCompletaSql Diretorio.Text, (CheckIncDados.Value = vbChecked)
+End Sub
+
 Private Sub CmdSchemaDestino_Click()
     Dim sPathSchema As String
     Dim sPathRecriado As String
@@ -505,22 +517,6 @@ If Not ValidarOuCriarDestino(txtArquivoDestino.Text) Then
         Exit Sub
     End If
     
-End Sub
-' Função principal que orquestra a geração de SQL
-Public Sub GerarScriptsSQL(ByVal sCaminho As String, ByVal bIncluirDados As Boolean)
-    
-    If EArquivoSQLite(sCaminho) Then
-        ' Lógica para SQLite
-        ' Aqui você chamaria uma rotina que percorre o Schema do SQLite
-        ' e monta as strings de CREATE/INSERT usando colScriptsPendentes.Add
-        GerarScriptSQLite sCaminho, bIncluirDados
-    Else
-        ' Lógica para Access (ADOX)
-        GerarScriptAccess sCaminho, bIncluirDados
-    End If
-    
-    ' Após preencher a coleção, você pode exibir no TxtInfo ou salvar em arquivo
-    MsgBox "Scripts gerados! Total: " ' & colScriptsPendentes.Count
 End Sub
 
 

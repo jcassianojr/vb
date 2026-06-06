@@ -1472,4 +1472,51 @@ Public Sub ProcessarPastaCompletaSchema(ByVal sFolder As String)
     Set oFolder = Nothing
     Set fso = Nothing
 End Sub
+' Função principal que orquestra a geração de SQL
+Public Sub GerarScriptsSQL(ByVal sCaminho As String, ByVal bIncluirDados As Boolean)
+    
+    If EArquivoSQLite(sCaminho) Then
+        ' Lógica para SQLite
+        ' Aqui você chamaria uma rotina que percorre o Schema do SQLite
+        ' e monta as strings de CREATE/INSERT usando colScriptsPendentes.Add
+        GerarScriptSQLite sCaminho, bIncluirDados
+    Else
+        ' Lógica para Access (ADOX)
+        GerarScriptAccess sCaminho, bIncluirDados
+    End If
+    
+    ' Após preencher a coleção, você pode exibir no TxtInfo ou salvar em arquivo
+    MsgBox "Scripts gerados! Total: " ' & colScriptsPendentes.Count
+End Sub
+
+Public Sub ProcessarPastaCompletaSql(ByVal sFolder As String, ByVal lINCLUI As Boolean)
+    Dim fso As Object
+    Dim oFolder As Object
+    Dim oFile As Object
+    Dim cEXT As String
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+       
+    If Not fso.FolderExists(sFolder) Then
+        MsgBox "Diretório não encontrado!", vbCritical
+        Exit Sub
+    End If
+    
+    Set oFolder = fso.GetFolder(sFolder)
+    
+    ' Itera por todos os arquivos da pasta
+    For Each oFile In oFolder.Files
+        ' Verifica se é um arquivo .mdb
+        sCaminhoOrigem = oFile.Path
+        sNomeArquivo = fso.GetBaseName(oFile.Name)
+        cEXT = LCase(fso.GetExtensionName(sCaminhoOrigem))
+        If cEXT = "mdb" Or cEXT = "accdb" Or cEXT = "sqlite" Then
+           GerarScriptsSQL sCaminhoOrigem, lINCLUI '(CheckIncDados.Value = vbChecked)
+        End If
+    Next oFile
+    MsgBox "Processamento da pasta concluído!", vbInformation
+    
+    Set oFolder = Nothing
+    Set fso = Nothing
+End Sub
 
