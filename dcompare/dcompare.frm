@@ -392,6 +392,10 @@ End Sub
 
 
 
+Private Sub CmdGeraPasta_Click()
+ProcessarPastaCompletaSchema (Diretorio.Text)
+End Sub
+
 Private Sub CmdSchemaDestino_Click()
     Dim sPathSchema As String
     Dim sPathRecriado As String

@@ -144,16 +144,16 @@ Public Function CriarNovoDestino(ByVal cCaminho As String) As Boolean
     ' 3. Se existe (arquivo vazio de 0 bytes) ou não existe, vamos criar
     If lExiste Then Kill cCaminho
     
-    Dim sExt As String
-    sExt = LCase(cCaminho)
+    Dim sEXT As String
+    sEXT = LCase(cCaminho)
     
-    If EArquivoSQLite(sExt) Then
+    If EArquivoSQLite(sEXT) Then
         ' Cria via motor RC6
         CriarNovoDestino = CriarSqlite(cCaminho)
     Else
         ' Cria via ADOX (MDB ou ACCDB)
         Dim nTIPO As Integer
-        nTIPO = IIf(InStr(sExt, ".accdb") > 0, 6, 5)
+        nTIPO = IIf(InStr(sEXT, ".accdb") > 0, 6, 5)
         CriarNovoDestino = CriaMdbAccess(cCaminho, True, nTIPO)
     End If
 End Function
@@ -844,9 +844,22 @@ Public Sub GerarArquivoSchemaADO(ByVal sPathOrigem As String, ByVal sPathDestino
     Dim tbl As Object, col As Object, idx As Object, idxCol As Object
     Dim connSchema As ADODB.Connection
     Dim rsTb As ADODB.Recordset, rsIx As ADODB.Recordset
-    Dim CEXT As String
+    Dim cEXT As String
+    Dim rsTabelas As ADODB.Recordset
+    Dim rsPragmaColunas As ADODB.Recordset
+    Dim rsPragmaIndices As ADODB.Recordset
+    Dim sTabela As String
+    Dim seq As Long
+    Dim sCampos As String
+    Dim cmd As ADODB.Command
+    Dim connOrigem As ADODB.Connection
+    Dim nSize As Long, nPrec As Long, nScale As Long
+    Dim sTipoCompleto As String
+    Dim sConteudo As String
+    Dim vPartes As Variant
     
-    CEXT = UCase(EXTENSAO(sPathOrigem))
+    
+    cEXT = UCase(EXTENSAO(sPathOrigem))
     
     
     ' 1. Conectar ao banco de origem via ADOX
@@ -865,64 +878,182 @@ Public Sub GerarArquivoSchemaADO(ByVal sPathOrigem As String, ByVal sPathDestino
     rsIx.Open "SELECT * FROM [myINDEX]", connSchema, adOpenDynamic, adLockOptimistic
     
     ' Limpar dados anteriores
-    connSchema.Execute "DELETE FROM [myTABLE] WHERE TABLETIPO='" & CEXT & "'"
-    connSchema.Execute "DELETE FROM [myINDEX] WHERE TABLETIPO='" & CEXT & "'"
+    connSchema.Execute "DELETE FROM [myTABLE] WHERE TABLETIPO='" & cEXT & "'"
+    connSchema.Execute "DELETE FROM [myINDEX] WHERE TABLETIPO='" & cEXT & "'"
     
     ' 4. Processar Tabelas e Colunas
-    For Each tbl In cat.Tables
-        If tbl.Type = "TABLE" And Left(tbl.Name, 4) <> "MSys" Then
+    If EArquivoSQLite(sPathOrigem) Then
+       Set connOrigem = New ADODB.Connection
+       connOrigem.ConnectionString = GeraConexao(sPathOrigem)
+    
+       On Error Resume Next ' Captura erro de abertura
+       connOrigem.Open
+    
+    ' 1. Instancia o objeto de comando
+        Set cmd = New ADODB.Command
+        Set cmd.ActiveConnection = connOrigem ' Define a conexão ativa
+        
+        ' 2. Define o SQL
+        cmd.CommandText = "SELECT name FROM sqlite_master WHERE type = 'table' AND SUBSTR(name, 1, 7) <> 'sqlite_'"
+        cmd.CommandType = adCmdText
+        
+        ' 3. Executa e recebe o Recordset
+        ' O parâmetro 'Set' é obrigatório aqui
+        Set rsTabelas = cmd.Execute()
+    
+        ' Consulta a lista de tabelas no SQLite
+        'Set rsTabelas = connOrigem.Execute("SELECT name FROM sqlite_master WHERE type = 'table' AND SUBSTR(name, 1, 7) <> 'sqlite_'")
+        
+        Do While Not rsTabelas.EOF
+            sTabela = rsTabelas("name").Value
             
-            Dim seq As Long: seq = 1
-            For Each col In tbl.Columns
+            ' --- A. Processar Colunas (Substitui For Each col In tbl.Columns) ---
+            Set rsPragmaColunas = connOrigem.Execute("PRAGMA table_info([" & sTabela & "])")
+            seq = 1
+            
+            Do While Not rsPragmaColunas.EOF
                 rsTb.AddNew
-                rsTb("TableName") = tbl.Name
-                rsTb("SeqNum") = seq
-                rsTb("FieldName") = col.Name
-                rsTb("FieldType") = col.Type
+                rsTb("TableName") = sTabela
+                rsTb("SeqNum") = rsPragmaColunas("cid").Value 'seq
+                rsTb("FieldName") = rsPragmaColunas("name").Value
+                rsTb("DefaultValue") = rsPragmaColunas("dflt_value").Value
+                rsTb("notnull") = rsPragmaColunas("notnull").Value
+                rsTb("Required") = CBool(rsPragmaColunas("notnull").Value)
+                rsTb("AllowZeroLength") = True
                 
-                ' Campos novos e propriedades avançadas via Properties
-                rsTb("DefinedSize") = col.DefinedSize
-                rsTb("Size") = col.DefinedSize
+                'rsTb("") = rsPragmaColunas("").Value
                 
-                On Error Resume Next
-                rsTb("NumericPrecision") = col.Properties("Precision").Value
-                rsTb("NumericScale") = col.Properties("Scale").Value
-                rsTb("Required") = Not col.Properties("Nullable").Value
-                rsTb("AllowZeroLength") = col.Properties("Jet OLEDB:Allow Zero Length").Value
-                rsTb("DefaultValue") = col.Properties("Default").Value
-                rsTb("Attributes") = col.Attributes
-                On Error GoTo 0
+                sTipoCompleto = rsPragmaColunas("type").Value
+                ' O SQLite retorna o tipo como texto (ex: TEXT, INTEGER, REAL)
+                rsTb("TipoNome") = sTipoCompleto 'rsPragmaColunas("type").Value
+                nSize = 0
+                nPrec = 0
+                nScale = 0
                 
-                ' Usando sua função existente para definir o nome do tipo
-                rsTb("TipoNome") = GetTipoNome(col.Type)
-                rsTb("TABLETIPO") = CEXT
+                
+                If InStr(sTipoCompleto, "(") > 0 Then
+                    sConteudo = Mid(sTipoCompleto, InStr(sTipoCompleto, "(") + 1, InStr(sTipoCompleto, ")") - InStr(sTipoCompleto, "(") - 1)
+                    If InStr(sConteudo, ",") > 0 Then
+                        ' Caso: NUMERIC(10,2)
+                        vPartes = Split(sConteudo, ",")
+                        nPrec = CLng(vPartes(0))
+                        nScale = CLng(vPartes(1))
+                    Else
+                        ' Caso: VARCHAR(200)
+                        nSize = CLng(sConteudo)
+                    End If
+                End If
+                            
+                
+                
+                ' Aplica os valores extraídos
+                If nSize > 0 Then rsTb("DefinedSize") = nSize
+                If nPrec > 0 Then rsTb("NumericPrecision") = nPrec
+                If nScale > 0 Then rsTb("NumericScale") = nScale
+                
+                
+                rsTb("TABLETIPO") = cEXT
                 rsTb("Status") = "OK"
                 
+                ' Nota: SQLite não tem propriedades complexas como Jet (Precision, Scale)
+                ' da mesma forma, mas você pode salvar o 'notnull' ou 'pk' aqui se desejar
                 rsTb.Update
+                
                 seq = seq + 1
-            Next
+                rsPragmaColunas.MoveNext
+            Loop
+            rsPragmaColunas.Close
             
-            ' 5. Processar Índices
-            For Each idx In tbl.Indexes
+            ' --- B. Processar Índices (Substitui For Each idx In tbl.Indexes) ---
+            Set rsPragmaIndices = connOrigem.Execute("PRAGMA index_list([" & sTabela & "])")
+            
+            Do While Not rsPragmaIndices.EOF
+                Dim sIdxName As String: sIdxName = rsPragmaIndices("name").Value
+                
                 rsIx.AddNew
-                rsIx("TableName") = tbl.Name
-                rsIx("IndexName") = idx.Name
-                rsIx("Primary") = idx.PrimaryKey
-                rsIx("Unique") = idx.Unique
-                rsIx("TABLETIPO") = CEXT
+                rsIx("TableName") = sTabela
+                rsIx("IndexName") = sIdxName
+                rsIx("Unique") = CBool(rsPragmaIndices("unique").Value)
+                rsIx("TABLETIPO") = cEXT
                 rsIx("Status") = "OK"
                 
-                ' Concatenação de campos no formato +CAMPO;
-                Dim sCampos As String: sCampos = ""
-                For Each idxCol In idx.Columns
-                    sCampos = sCampos & "+" & idxCol.Name & ";"
-                Next
+                ' Para pegar os campos do índice, precisamos de outra query PRAGMA
+                Dim rsIdxInfo As ADODB.Recordset
+                Set rsIdxInfo = connOrigem.Execute("PRAGMA index_info([" & sIdxName & "])")
+                
+                sCampos = ""
+                Do While Not rsIdxInfo.EOF
+                    sCampos = sCampos & "+" & rsIdxInfo("name").Value & ";"
+                    rsIdxInfo.MoveNext
+                Loop
+                rsIdxInfo.Close
+                
                 rsIx("Fields") = sCampos
                 rsIx.Update
-            Next
-        End If
-    Next
-    
+                
+                rsPragmaIndices.MoveNext
+            Loop
+            rsPragmaIndices.Close
+            
+            rsTabelas.MoveNext
+        Loop
+        rsTabelas.Close
+    Else
+        For Each tbl In cat.Tables
+            If tbl.Type = "TABLE" And Left(tbl.Name, 4) <> "MSys" Then
+                
+                seq = 1
+                For Each col In tbl.Columns
+                    rsTb.AddNew
+                    rsTb("TableName") = tbl.Name
+                    rsTb("SeqNum") = seq
+                    rsTb("FieldName") = col.Name
+                    rsTb("FieldType") = col.Type
+                    
+                    ' Campos novos e propriedades avançadas via Properties
+                    rsTb("DefinedSize") = col.DefinedSize
+                    rsTb("Size") = col.DefinedSize
+                    
+                    On Error Resume Next
+                    rsTb("NumericPrecision") = col.Properties("Precision").Value
+                    rsTb("NumericScale") = col.Properties("Scale").Value
+                    rsTb("Required") = Not col.Properties("Nullable").Value
+                    rsTb("AllowZeroLength") = col.Properties("Jet OLEDB:Allow Zero Length").Value
+                    rsTb("DefaultValue") = col.Properties("Default").Value
+                    rsTb("Attributes") = col.Attributes
+                    rsTb("notnull") = Not col.Properties("Nullable").Value
+                    On Error GoTo 0
+                    
+                    ' Usando sua função existente para definir o nome do tipo
+                    rsTb("TipoNome") = GetTipoNome(col.Type)
+                    rsTb("TABLETIPO") = cEXT
+                    rsTb("Status") = "OK"
+                    
+                    rsTb.Update
+                    seq = seq + 1
+                Next
+                
+                ' 5. Processar Índices
+                For Each idx In tbl.Indexes
+                    rsIx.AddNew
+                    rsIx("TableName") = tbl.Name
+                    rsIx("IndexName") = idx.Name
+                    rsIx("Primary") = idx.PrimaryKey
+                    rsIx("Unique") = idx.Unique
+                    rsIx("TABLETIPO") = cEXT
+                    rsIx("Status") = "OK"
+                    
+                    ' Concatenação de campos no formato +CAMPO;
+                     sCampos = ""
+                    For Each idxCol In idx.Columns
+                        sCampos = sCampos & "+" & idxCol.Name & ";"
+                    Next
+                    rsIx("Fields") = sCampos
+                    rsIx.Update
+                Next
+            End If
+        Next
+    End If
     ' Limpeza
     rsTb.Close: Set rsTb = Nothing
     rsIx.Close: Set rsIx = Nothing
@@ -937,20 +1068,28 @@ Public Sub GarantirSchemaExistente(ByVal sPathDestinoSchema As String)
     Dim conn As ADODB.Connection
     Dim cCONEXAO As String
    
+       
     ValidarOuCriarDestino (sPathDestinoSchema)
     
-    
-    ' 2. Conecta e cria as tabelas
-    Set conn = New ADODB.Connection
-    conn.Open GeraConexao(sPathDestinoSchema)
-    
-    ' Executa os comandos de criação das 3 tabelas
-    conn.Execute "CREATE TABLE [myINDEX] ([TableTipo] TEXT(255),[Fields] MEMO, [IndexName] TEXT(255), [Primary] BIT, [Status] TEXT(255), [TableName] TEXT(255), [Unique] BIT);"
-    conn.Execute "CREATE TABLE [myQUERY] ([TableTipo] TEXT(255),[QueryDef] MEMO, [QueryName] TEXT(255), [Status] TEXT(255));"
-    conn.Execute "CREATE TABLE [myTABLE] ([TableTipo] TEXT(255),[AllowZeroLength] BIT, [Attributes] LONG, [DefaultValue] TEXT(255), [DefinedSize] LONG, [FieldName] TEXT(255), [FieldType] LONG, [NumericPrecision] LONG, [NumericScale] LONG, [Required] BIT, [SeqNum] LONG, [Size] LONG, [Status] TEXT(255), [TableName] TEXT(255), [TipoNome] TEXT(255));"
-    
-    conn.Close
-    Set conn = Nothing
+    If ArquivoExiste(sPathDestinoSchema) Then
+        ' 2. Conecta e cria as tabelas
+        Set conn = New ADODB.Connection
+        conn.Open GeraConexao(sPathDestinoSchema)
+        
+        If Not TabelaExiste(conn, "myINDEX") Then
+           ' Executa os comandos de criação das 3 tabelas
+            conn.Execute "CREATE TABLE [myINDEX] ([TableTipo] TEXT(255),[Fields] MEMO, [IndexName] TEXT(255), [Primary] BIT, [Status] TEXT(255), [TableName] TEXT(255), [Unique] BIT);"
+        End If
+        
+        If Not TabelaExiste(conn, "myQUERY") Then
+          conn.Execute "CREATE TABLE [myQUERY] ([TableTipo] TEXT(255),[QueryDef] MEMO, [QueryName] TEXT(255), [Status] TEXT(255));"
+        End If
+        If Not TabelaExiste(conn, "myTABLE") Then
+           conn.Execute "CREATE TABLE [myTABLE] ([TableTipo] TEXT(255),[notnull] BIT,[AllowZeroLength] BIT, [Attributes] LONG, [DefaultValue] TEXT(255), [DefinedSize] LONG, [FieldName] TEXT(255), [FieldType] LONG, [NumericPrecision] LONG, [NumericScale] LONG, [Required] BIT, [SeqNum] LONG, [Size] LONG, [Status] TEXT(255), [TableName] TEXT(255), [TipoNome] TEXT(255));"
+        End If
+        conn.Close
+        Set conn = Nothing
+    End If
 End Sub
 
 
@@ -1240,11 +1379,11 @@ Public Sub GerarScriptAlteracoesViaSchema(ByVal sPathSchema As String, ByVal sPa
     Dim connDestino As ADODB.Connection
     Dim rsTabelas As ADODB.Recordset
     Dim sPathSQL As String
-    Dim CEXT As String
+    Dim cEXT As String
     Dim fso As Object, ts As Object ' Usando FSO em vez de Open For Output
     
     
-    CEXT = UCase(EXTENSAO(sPathDestino))
+    cEXT = UCase(EXTENSAO(sPathDestino))
     
     ' 1. Configurações de arquivo (usando FSO para evitar erros de I/O)
     sPathSQL = sPathDestino & "_atualizacao.sql"
@@ -1259,7 +1398,7 @@ Public Sub GerarScriptAlteracoesViaSchema(ByVal sPathSchema As String, ByVal sPa
     connDestino.Open GeraConexao(sPathDestino)
     
     ' 3. Lê a lista de tabelas registradas no Schema
-    Set rsTabelas = connSchema.Execute("SELECT DISTINCT [TableName] FROM [myTABLE]  WHERE TABLETIPO='" & CEXT & "' ORDER BY [TableName]")
+    Set rsTabelas = connSchema.Execute("SELECT DISTINCT [TableName] FROM [myTABLE]  WHERE TABLETIPO='" & cEXT & "' ORDER BY [TableName]")
     
     Do While Not rsTabelas.EOF
         Dim sTabela As String: sTabela = rsTabelas("TableName")
@@ -1290,3 +1429,47 @@ Public Sub GerarScriptAlteracoesViaSchema(ByVal sPathSchema As String, ByVal sPa
     If bExecutar Then Call ExecutarSQL(sPathDestino, sPathSQL)
     MsgBox "Script de atualização gerado: " & sPathSQL, vbInformation
 End Sub
+
+
+Public Sub ProcessarPastaCompletaSchema(ByVal sFolder As String)
+    Dim fso As Object
+    Dim oFolder As Object
+    Dim oFile As Object
+    Dim cEXT As String
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+       
+    If Not fso.FolderExists(sFolder) Then
+        MsgBox "Diretório não encontrado!", vbCritical
+        Exit Sub
+    End If
+    
+    Set oFolder = fso.GetFolder(sFolder)
+    
+    ' Itera por todos os arquivos da pasta
+    For Each oFile In oFolder.Files
+        ' Verifica se é um arquivo .mdb
+        sCaminhoOrigem = oFile.Path
+        sNomeArquivo = fso.GetBaseName(oFile.Name)
+        cEXT = LCase(fso.GetExtensionName(sCaminhoOrigem))
+        If cEXT = "mdb" Or cEXT = "accdb" Or cEXT = "sqlite" Then
+        
+            sCaminhoDestino = sFolder & "\" & sNomeArquivo & "_schema.mdb"
+    
+            
+            GarantirSchemaExistente sCaminhoDestino
+            ' 4. Chama a rotina que criamos anteriormente
+            Call GerarArquivoSchemaADO(sCaminhoOrigem, sCaminhoDestino)
+
+        
+        
+        
+        End If
+    Next oFile
+    
+    MsgBox "Processamento da pasta concluído!", vbInformation
+    
+    Set oFolder = Nothing
+    Set fso = Nothing
+End Sub
+
