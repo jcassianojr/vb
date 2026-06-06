@@ -317,13 +317,13 @@ Private Sub CmdEscolheDestino_Click()
         .FilterIndex = 1
         .DialogTitle = "Selecione ou crie o ficheiro de Destino"
        '.Flags = cdlOFNOverwritePrompt Or cdlOFNPathMustExist ' Avisa se sobrescrever
-        .FileName = ""
+        .filename = ""
         .ShowSave ' Usamos ShowSave em vez de ShowOpen para permitir indicar novos nomes
     End With
     
     ' Grava o caminho no TextBox
-    If CommonDialog1.FileName <> "" Then
-        txtArquivoDestino.Text = CommonDialog1.FileName
+    If CommonDialog1.filename <> "" Then
+        txtArquivoDestino.Text = CommonDialog1.filename
     End If
     
     If Not ValidarOuCriarDestino(txtArquivoDestino.Text) Then
@@ -348,12 +348,12 @@ Private Sub CmdEscolheOrigem_Click()
                            
     CommonDialog1.FilterIndex = 1
     CommonDialog1.DialogTitle = "Selecione o arquivo de Origem"
-    CommonDialog1.FileName = ""
+    CommonDialog1.filename = ""
     CommonDialog1.ShowOpen
     
     ' Verifica se o usuário selecionou um arquivo e cancelou
-    If CommonDialog1.FileName <> "" Then
-        TxTArquivoOrigem.Text = CommonDialog1.FileName
+    If CommonDialog1.filename <> "" Then
+        TxTArquivoOrigem.Text = CommonDialog1.filename
     End If
     
     Exit Sub
@@ -397,7 +397,7 @@ Private Sub CmdSchemaDestino_Click()
     Dim sPathRecriado As String
     Dim sPasta As String
     Dim sNomeBase As String
-    
+    Dim sEXT As String
     ' O Schema está onde o usuário apontou em TxTArquivoOrigem
     sPathSchema = Me.TxTArquivoOrigem.Text
     
@@ -406,17 +406,25 @@ Private Sub CmdSchemaDestino_Click()
         Exit Sub
     End If
     
-    ' Define o nome do destino baseado no arquivo de schema
-    sPasta = Left(sPathSchema, InStrRev(sPathSchema, "\"))
-    sNomeBase = Mid(sPathSchema, InStrRev(sPathSchema, "\") + 1)
     
-    ' Remove a extensão para criar o novo nome
-    sNomeBase = Left(sNomeBase, InStrRev(sNomeBase, ".") - 1)
-    
-    ' Define o destino como o mesmo nome + _recriado.mdb
-    sPathRecriado = sPasta & sNomeBase & "_recriado.mdb"
-    
-    Me.txtArquivoDestino.Text = sPathRecriado
+    sPathRecriado = Me.txtArquivoDestino.Text
+    If Me.txtArquivoDestino.Text = "" Then
+        ' Define o nome do destino baseado no arquivo de schema
+        sPasta = parsefile(sPathSchema, "C") 'Left(sPathSchema, InStrRev(sPathSchema, "\"))
+        sEXT = EXTENSAO(sPathSchema)
+        sPathRecriado = sPasta & "_recriado." & sEXT
+        sPathRecriado = Replace(sPathRecriado, "_schema", "")
+        
+    '    sNomeBase = Mid(sPathSchema, InStrRev(sPathSchema, "\") + 1)
+        
+        ' Remove a extensão para criar o novo nome
+     '   sNomeBase = Left(sNomeBase, InStrRev(sNomeBase, ".") - 1)
+        
+        ' Define o destino como o mesmo nome + _recriado.mdb
+      '  sPathRecriado = sPasta & sNomeBase & "_recriado.mdb"
+        
+        Me.txtArquivoDestino.Text = sPathRecriado
+    End If
     
     ' Executa a reconstrução
     Call RecriarBancoDoSchema(sPathSchema, sPathRecriado)
@@ -453,15 +461,15 @@ Private Sub CmdSchemaOrigem_Click()
     GarantirSchemaExistente sCaminhoDestino
     ' 4. Chama a rotina que criamos anteriormente
     Call GerarArquivoSchemaADO(sCaminhoOrigem, sCaminhoDestino)
-    Call RecriarIndicesDoSchema(sPathSchema, sPathRecriado)
+'    Call RecriarIndicesDoSchema(sPathSchema, sPathRecriado)
 End Sub
 
 Private Sub cmdSelSQL_Click()
   On Error Resume Next
     CommonDialog1.Filter = "Script SQL (*.sql)|*.sql"
-    CommonDialog1.FileName = "correcao_indices.sql"
+    CommonDialog1.filename = "correcao_indices.sql"
     CommonDialog1.ShowSave
-    If CommonDialog1.FileName <> "" Then txtSQL.Text = CommonDialog1.FileName
+    If CommonDialog1.filename <> "" Then txtSQL.Text = CommonDialog1.filename
 End Sub
 
 Private Sub CmdTableInfo_Click()

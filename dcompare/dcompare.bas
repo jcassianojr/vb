@@ -1,26 +1,11 @@
 Attribute VB_Name = "dcompareMain"
+Public lRETU As Boolean
 ' Bibliotecas necessárias no seu VBP:
 ' 1. Microsoft ADO Ext. 6.0 for DDL and Security (ADOX)
 ' 2. Microsoft ActiveX Data Objects 6.1 (ADO)
 ' 3. RC6 (vbRichClient6)
 ' Declaração para a Shell API no topo do módulo
-Public Function SelecionarPasta(ByVal Titulo As String) As String
-    Dim objShell As Object
-    Dim objFolder As Object
-    
-    Set objShell = CreateObject("Shell.Application")
-    ' 1 = BIF_RETURNONLYFSDIRS (Apenas pastas do sistema de arquivos)
-    Set objFolder = objShell.BrowseForFolder(0, Titulo, 1)
-    
-    If Not objFolder Is Nothing Then
-        SelecionarPasta = objFolder.Items.Item.Path
-    Else
-        SelecionarPasta = ""
-    End If
-    
-    Set objFolder = Nothing
-    Set objShell = Nothing
-End Function
+
 Sub Main()
   dCompare.Show
 End Sub
@@ -28,7 +13,47 @@ End Sub
 Public Function ArquivoExiste(ByVal FilePath As String) As Boolean
     ArquivoExiste = (Dir(FilePath, vbNormal + vbHidden + vbSystem) <> "")
 End Function
-
+Public Function PathFileExists(ByVal FilePath As String) As Boolean
+    PathFileExists = (Dir(FilePath, vbNormal + vbHidden + vbSystem) <> "")
+End Function
+Public Function FixStr(ByVal eVAR As Variant, _
+                       Optional ByVal ePAD As Variant = "", _
+                       Optional ByVal coper As String = "", _
+                       Optional ByVal nLEN As Integer = 0) As Variant
+  On Error GoTo errhandler
+  If IsNull(eVAR) Then
+    If ePAD <> "" Then
+      eVAR = ePAD
+    End If
+  End If
+  If Not IsNull(eVAR) Then
+     FixStr = CStr(eVAR)
+  End If
+  If UCase(eVAR) = "NULL" Then
+    FixStr = ePAD
+  End If
+  If InStr(coper, "TRIM") > 0 Then
+    eVAR = Trim(eVAR)
+    FixStr = eVAR
+  End If
+  If nLEN > 0 And Len(eVAR) > nLEN Then
+    eVAR = Mid(eVAR, 1, nLEN)
+    FixStr = eVAR
+  End If
+  Exit Function
+errhandler:
+  FixStr = ""
+  Resume Next
+End Function
+Public Function TrimNull(ByVal sTxt As String) As String
+  Dim Arr() As String
+  Arr() = Split(sTxt, Chr$(0))
+  If UBound(Arr) >= 0 Then
+    TrimNull = Arr(0)
+  Else
+    TrimNull = sTxt
+  End If
+End Function
 Public Function GeraConexao(ByVal Caminho As String) As String
     Dim sProvider As String
     
@@ -260,10 +285,10 @@ For Each col In tbl.Columns
         
     ' Caso 2: Se for Texto/Char (Tratamento conforme sua regra de 250)
     ElseIf col.Type = 129 Or col.Type = 200 Or col.Type = 202 Or col.Type = 203 Then
-        Dim nLen As Long
-        nLen = col.DefinedSize
-        If nLen <= 0 Or nLen > 250 Then nLen = 250
-        sDetalhe = "(" & nLen & ")"
+        Dim nLEN As Long
+        nLEN = col.DefinedSize
+        If nLEN <= 0 Or nLEN > 250 Then nLEN = 250
+        sDetalhe = "(" & nLEN & ")"
         
     ' Caso 3: Campos Lógicos (L)
     ElseIf col.Type = 11 Then
@@ -819,6 +844,10 @@ Public Sub GerarArquivoSchemaADO(ByVal sPathOrigem As String, ByVal sPathDestino
     Dim tbl As Object, col As Object, idx As Object, idxCol As Object
     Dim connSchema As ADODB.Connection
     Dim rsTb As ADODB.Recordset, rsIx As ADODB.Recordset
+    Dim CEXT As String
+    
+    CEXT = UCase(EXTENSAO(sPathOrigem))
+    
     
     ' 1. Conectar ao banco de origem via ADOX
     Set cat = CreateObject("ADOX.Catalog")
@@ -836,8 +865,8 @@ Public Sub GerarArquivoSchemaADO(ByVal sPathOrigem As String, ByVal sPathDestino
     rsIx.Open "SELECT * FROM [myINDEX]", connSchema, adOpenDynamic, adLockOptimistic
     
     ' Limpar dados anteriores
-    connSchema.Execute "DELETE FROM [myTABLE]"
-    connSchema.Execute "DELETE FROM [myINDEX]"
+    connSchema.Execute "DELETE FROM [myTABLE] WHERE TABLETIPO='" & CEXT & "'"
+    connSchema.Execute "DELETE FROM [myINDEX] WHERE TABLETIPO='" & CEXT & "'"
     
     ' 4. Processar Tabelas e Colunas
     For Each tbl In cat.Tables
@@ -866,6 +895,7 @@ Public Sub GerarArquivoSchemaADO(ByVal sPathOrigem As String, ByVal sPathDestino
                 
                 ' Usando sua função existente para definir o nome do tipo
                 rsTb("TipoNome") = GetTipoNome(col.Type)
+                rsTb("TABLETIPO") = CEXT
                 rsTb("Status") = "OK"
                 
                 rsTb.Update
@@ -879,6 +909,7 @@ Public Sub GerarArquivoSchemaADO(ByVal sPathOrigem As String, ByVal sPathDestino
                 rsIx("IndexName") = idx.Name
                 rsIx("Primary") = idx.PrimaryKey
                 rsIx("Unique") = idx.Unique
+                rsIx("TABLETIPO") = CEXT
                 rsIx("Status") = "OK"
                 
                 ' Concatenação de campos no formato +CAMPO;
@@ -903,24 +934,20 @@ End Sub
 
 
 Public Sub GarantirSchemaExistente(ByVal sPathDestinoSchema As String)
-    Dim cat As Object
     Dim conn As ADODB.Connection
+    Dim cCONEXAO As String
+   
+    ValidarOuCriarDestino (sPathDestinoSchema)
     
-    ' 1. Cria o banco de dados .mdb caso não exista
-    If Dir(sPathDestinoSchema) = "" Then
-        Set cat = CreateObject("ADOX.Catalog")
-        cat.Create GeraConexao(sPathDestinoSchema)
-        Set cat = Nothing
-    End If
     
     ' 2. Conecta e cria as tabelas
     Set conn = New ADODB.Connection
     conn.Open GeraConexao(sPathDestinoSchema)
     
     ' Executa os comandos de criação das 3 tabelas
-    conn.Execute "CREATE TABLE [myINDEX] ([Fields] MEMO, [IndexName] TEXT(255), [Primary] BIT, [Status] TEXT(255), [TableName] TEXT(255), [Unique] BIT);"
-    conn.Execute "CREATE TABLE [myQUERY] ([QueryDef] MEMO, [QueryName] TEXT(255), [Status] TEXT(255));"
-    conn.Execute "CREATE TABLE [myTABLE] ([AllowZeroLength] BIT, [Attributes] LONG, [DefaultValue] TEXT(255), [DefinedSize] LONG, [FieldName] TEXT(255), [FieldType] LONG, [NumericPrecision] LONG, [NumericScale] LONG, [Required] BIT, [SeqNum] LONG, [Size] LONG, [Status] TEXT(255), [TableName] TEXT(255), [TipoNome] TEXT(255));"
+    conn.Execute "CREATE TABLE [myINDEX] ([TableTipo] TEXT(255),[Fields] MEMO, [IndexName] TEXT(255), [Primary] BIT, [Status] TEXT(255), [TableName] TEXT(255), [Unique] BIT);"
+    conn.Execute "CREATE TABLE [myQUERY] ([TableTipo] TEXT(255),[QueryDef] MEMO, [QueryName] TEXT(255), [Status] TEXT(255));"
+    conn.Execute "CREATE TABLE [myTABLE] ([TableTipo] TEXT(255),[AllowZeroLength] BIT, [Attributes] LONG, [DefaultValue] TEXT(255), [DefinedSize] LONG, [FieldName] TEXT(255), [FieldType] LONG, [NumericPrecision] LONG, [NumericScale] LONG, [Required] BIT, [SeqNum] LONG, [Size] LONG, [Status] TEXT(255), [TableName] TEXT(255), [TipoNome] TEXT(255));"
     
     conn.Close
     Set conn = Nothing
@@ -939,11 +966,13 @@ Public Sub RecriarBancoDoSchema(ByVal sPathSchema As String, ByVal sPathDestino 
     Set connSchema = New ADODB.Connection
     connSchema.Open GeraConexao(sPathSchema)
     
+    
+    ValidarOuCriarDestino (sPathDestino)
     ' Cria o destino se não existir
-    If Dir(sPathDestino) = "" Then
-        Dim cat As Object: Set cat = CreateObject("ADOX.Catalog")
-        cat.Create GeraConexao(sPathDestino)
-    End If
+'    If Dir(sPathDestino) = "" Then
+'        Dim cat As Object: Set cat = CreateObject("ADOX.Catalog")
+ '       cat.Create GeraConexao(sPathDestino)
+ '   End If
     
     Set connDestino = New ADODB.Connection
     connDestino.Open GeraConexao(sPathDestino)
@@ -1075,59 +1104,6 @@ Public Sub RecriarIndicesDoSchema(ByVal sPathSchema As String, ByVal sPathDestin
     
     rsIx.Close: connSchema.Close: connDestino.Close
 End Sub
-
-'Public Sub CompararSchemaComDestino(ByVal sPathSchema As String, ByVal sPathDestino As String)
-'    Dim connSchema As ADODB.Connection, connDestino As ADODB.Connection
-'    Dim rsSchema As ADODB.Recordset, rsDestino As ADODB.Recordset
-'    Dim sSQL As String
-    
- '   Set connSchema = New ADODB.Connection: connSchema.Open GeraConexao(sPathSchema)
- '   Set connDestino = New ADODB.Connection: connDestino.Open GeraConexao(sPathDestino)
-    
-    ' 1. Seleciona tabelas únicas no Schema
-  '  Set rsSchema = connSchema.Execute("SELECT DISTINCT [TableName] FROM [myTABLE] ORDER BY [TableName]")
-    
-   ' Do While Not rsSchema.EOF
-    '    Dim sTabela As String: sTabela = rsSchema("TableName")
-        
-        ' Verifica se a tabela existe no destino
-     '   If TabelaExiste(connDestino, sTabela) Then
-            ' 2. Compara campos do Schema com os campos do Destino
-      '      CompararCamposTabela sTabela, connSchema, connDestino
-      '  Else
-            ' Tabela ausente: Adicionar lógica para recriar a tabela inteira (CREATE TABLE)
-       '     Debug.Print "Tabela " & sTabela & " ausente no destino."
-       ' End If
-        
-       ' rsSchema.MoveNext
-    'Loop
-    
-    'connSchema.Close: connDestino.Close
-'End Sub
-'Private Sub CompararCamposTabela(ByVal sTabela As String, ByVal connSchema As ADODB.Connection, ByVal connDestino As ADODB.Connection)
-'    Dim rsCampos As ADODB.Recordset
-'    Dim sCampo As String
-    
-    ' Pega a lista de campos que DEVERIAM existir
-'    Set rsCampos = connSchema.Execute("SELECT * FROM [myTABLE] WHERE [TableName] = '" & sTabela & "' ORDER BY [SeqNum]")
-    
-'    Do While Not rsCampos.EOF
- '       sCampo = rsCampos("FieldName")
-        
-        ' Verifica se este campo existe na tabela destino (via OpenSchema do ADO)
- '       If Not CampoExiste(connDestino, sTabela, sCampo) Then
-            ' O CAMPO FALTA! Gerar o script de alteração
-  '          Dim sSQL As String
-   '         sSQL = "ALTER TABLE [" & sTabela & "] ADD COLUMN [" & sCampo & "] " & rsCampos("TipoNome")
-            
-            ' Grava esse script em um arquivo .sql ou executa direto
-    '        Debug.Print "Script Gerado: " & sSQL
-    '        connDestino.Execute sSQL
-    '    End If
-        
-     '   rsCampos.MoveNext
-    'Loop
-'End Sub
 Private Function TabelaExiste(conn As ADODB.Connection, sTabela As String) As Boolean
     Dim rs As ADODB.Recordset
     Set rs = conn.OpenSchema(adSchemaTables, Array(Empty, Empty, sTabela, "TABLE"))
@@ -1258,12 +1234,17 @@ Public Sub GerarIndicesAusentesViaSchema(ByVal sTabela As String, ByVal connSche
 End Sub
 
 
-Public Sub GerarScriptAlteracoesViaSchema(ByVal sPathSchema As String, ByVal sPathDestino As String, ByVal bExecutar As Boolean)
+Public Sub GerarScriptAlteracoesViaSchema(ByVal sPathSchema As String, ByVal sPathDestino As String, _
+                                         ByVal bExecutar As Boolean)
     Dim connSchema As ADODB.Connection
     Dim connDestino As ADODB.Connection
     Dim rsTabelas As ADODB.Recordset
     Dim sPathSQL As String
+    Dim CEXT As String
     Dim fso As Object, ts As Object ' Usando FSO em vez de Open For Output
+    
+    
+    CEXT = UCase(EXTENSAO(sPathDestino))
     
     ' 1. Configurações de arquivo (usando FSO para evitar erros de I/O)
     sPathSQL = sPathDestino & "_atualizacao.sql"
@@ -1278,7 +1259,7 @@ Public Sub GerarScriptAlteracoesViaSchema(ByVal sPathSchema As String, ByVal sPa
     connDestino.Open GeraConexao(sPathDestino)
     
     ' 3. Lê a lista de tabelas registradas no Schema
-    Set rsTabelas = connSchema.Execute("SELECT DISTINCT [TableName] FROM [myTABLE] ORDER BY [TableName]")
+    Set rsTabelas = connSchema.Execute("SELECT DISTINCT [TableName] FROM [myTABLE]  WHERE TABLETIPO='" & CEXT & "' ORDER BY [TableName]")
     
     Do While Not rsTabelas.EOF
         Dim sTabela As String: sTabela = rsTabelas("TableName")

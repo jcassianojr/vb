@@ -8,6 +8,7 @@ Form=dcompare.frm
 Module=dcompareMain; dcompare.bas
 Module=criamdbaccdb; criamdbaccdb.bas
 Module=MdbRepComSimples; MdbRepComSimples.bas
+Module=mFileAPI; ..\..\..\develop\vb\vblib2\modules\mFileAPI.bas
 IconForm="dCompare"
 Startup="Sub Main"
 HelpFile=""
