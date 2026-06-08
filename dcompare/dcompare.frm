@@ -504,11 +504,11 @@ Private Sub CmdTableInfo_Click()
 End Sub
 
 Private Sub Command3_Click()
-GerarScriptAlteracoes TxTArquivoOrigem.Text, txtArquivoDestino.Text, (CheckEfetua.Value = vbChecked)
-End Sub
-
-Private Sub Command4_Click()
-GerarScriptAlteracoes TxTArquivoOrigem.Text, txtArquivoDestino.Text, (CheckEfetua.Value = vbChecked)
+If EArquivoSQLite(txtArquivoDestino.Text) Then
+   GerarScriptAlteracoesAccessParaSqlite TxTArquivoOrigem.Text, txtArquivoDestino.Text, (CheckEfetua.Value = vbChecked)
+Else
+   GerarScriptAlteracoes TxTArquivoOrigem.Text, txtArquivoDestino.Text, (CheckEfetua.Value = vbChecked)
+End If
 End Sub
 
 Private Sub Command5_Click()

@@ -838,6 +838,47 @@ Public Sub ExecutarSQL(ByVal sPathDestino As String, ByVal sPathSQL As String)
     
     MsgBox "Script executado com sucesso no destino!", vbInformation
 End Sub
+Public Sub ExecutarSQLite(ByVal sPathDestino As String, ByVal sPathSQL As String)
+    Dim conn As New ADODB.Connection
+    Dim fso As Object
+    Dim sSQLConteudo As String
+    Dim vComandos As Variant, i As Long
+    
+    ' 1. Verifica se o arquivo de script existe
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    If Not fso.FileExists(sPathSQL) Then
+        MsgBox "Arquivo de script SQL não encontrado: " & sPathSQL, vbCritical
+        Exit Sub
+    End If
+    
+    ' 2. Lê todo o conteúdo do arquivo
+    sSQLConteudo = fso.OpenTextFile(sPathSQL, 1).ReadAll
+    
+    ' 3. Abre a conexão com o banco SQLite
+    ' Certifique-se de que a função GeraConexao suporte SQLite
+    conn.Open GeraConexao(sPathDestino)
+    
+    ' 4. Divide e Executa
+    ' O SQLite geralmente aceita múltiplos comandos separados por ';'
+    ' Mas executar um por um garante que você possa tratar erros individualmente
+    vComandos = Split(sSQLConteudo, ";")
+    
+    On Error Resume Next ' Inicia tratamento de erro para os comandos
+    For i = LBound(vComandos) To UBound(vComandos)
+        If Trim(vComandos(i)) <> "" Then
+            conn.Execute vComandos(i)
+            If Err.Number <> 0 Then
+                Debug.Print "Erro ao executar comando: " & vComandos(i) & " | Erro: " & Err.Description
+                Err.Clear
+            End If
+        End If
+    Next
+    On Error GoTo 0
+    
+    conn.Close
+    Set conn = Nothing
+    Set fso = Nothing
+End Sub
 
 Public Sub GerarArquivoSchemaADO(ByVal sPathOrigem As String, ByVal sPathDestinoSchema As String)
     Dim cat As Object
@@ -1519,4 +1560,114 @@ Public Sub ProcessarPastaCompletaSql(ByVal sFolder As String, ByVal lINCLUI As B
     Set oFolder = Nothing
     Set fso = Nothing
 End Sub
+Public Sub GerarScriptAlteracoesAccessParaSqlite(ByVal sPathOrigem As String, ByVal sPathDestinoSqlite As String, ByVal bExecutar As Boolean)
+    Dim catOrigem As Object
+    Dim tblOrigem As Object
+    Dim connOrigem As New ADODB.Connection
+    Dim sPathSQL As String
+    Dim fFile As Integer
+    
+    ' 1. Caminho para o arquivo de script
+    sPathSQL = sPathDestinoSqlite & ".sql"
+    fFile = FreeFile
+    Open sPathSQL For Output As #fFile
+    
+    ' 2. Conecta ao Access (Origem)
+    connOrigem.Open GeraConexao(sPathOrigem)
+    Set catOrigem = CreateObject("ADOX.Catalog")
+    catOrigem.ActiveConnection = connOrigem
+    
+    Print #fFile, "-- Script de Migração Access -> SQLite" & vbCrLf
+    
+    ' 3. Itera sobre as tabelas do Access
+    For Each tblOrigem In catOrigem.Tables
+        If tblOrigem.Type = "TABLE" And Left(tblOrigem.Name, 4) <> "MSys" Then
+            
+            ' Gerar o comando CREATE TABLE com tipos compatíveis
+            GerarCreateTabelaSqlite tblOrigem, fFile
+            
+            ' Gerar os Índices compatíveis
+            GerarIndicesSqlite tblOrigem, connOrigem, fFile
+            
+        End If
+    Next
+    
+    Close #fFile
+    connOrigem.Close
+    If bExecutar Then
+        Call ExecutarSQLite(sPathDestino, sPathSQL)
+    End If
 
+    
+    MsgBox "Script para SQLite gerado com sucesso em: " & sPathSQL, vbInformation
+    
+    
+End Sub
+Public Sub GerarCreateTabelaSqlite(ByRef tbl As Object, ByVal fFile As Integer)
+    Dim sSQL As String, col As Object
+    sSQL = "CREATE TABLE [" & tbl.Name & "] ("
+    
+    Dim bPrimeiro As Boolean: bPrimeiro = True
+    For Each col In tbl.Columns
+        If Not bPrimeiro Then sSQL = sSQL & ", "
+        sSQL = sSQL & "[" & col.Name & "] " & GetTipoSqlite(col.Type)
+        bPrimeiro = False
+    Next
+    sSQL = sSQL & ");"
+    Print #fFile, sSQL
+End Sub
+
+Public Function GetTipoSqlite(ByVal adType As Long) As String
+    Select Case adType
+        Case 3, 20:          GetTipoSqlite = "INTEGER"
+        Case 129, 200, 202:  GetTipoSqlite = "TEXT"
+        Case 7, 133, 135:    GetTipoSqlite = "DATETIME"
+        Case 11:             GetTipoSqlite = "BOOLEAN"
+        Case 4, 5:           GetTipoSqlite = "REAL"
+        Case Else:           GetTipoSqlite = "TEXT"
+    End Select
+End Function
+
+Public Sub GerarIndicesSqlite(ByVal sTabela As String, ByVal conn As ADODB.Connection, ByVal fFile As Integer)
+    Dim rsIndices As ADODB.Recordset
+    Dim sSQLIdx As String
+    Dim sIdxName As String
+    Dim sCampos As String
+    Dim rsColunasIdx As ADODB.Recordset
+    
+    ' 1. Lista todos os índices da tabela
+    ' PRAGMA index_list retorna: seq, name, unique, origin, partial
+    Set rsIndices = conn.Execute("PRAGMA index_list([" & sTabela & "])")
+    
+    Do While Not rsIndices.EOF
+        sIdxName = rsIndices("name").Value
+        
+        ' Ignora índices automáticos (como os de Primary Key implícitos do SQLite)
+        If Left(sIdxName, 4) <> "sqlite" Then
+            
+            ' 2. Para cada índice, pega os campos
+            ' PRAGMA index_info retorna: seqno, cid, name
+            Set rsColunasIdx = conn.Execute("PRAGMA index_info([" & sIdxName & "])")
+            
+            sCampos = ""
+            Do While Not rsColunasIdx.EOF
+                sCampos = sCampos & "[" & rsColunasIdx("name").Value & "], "
+                rsColunasIdx.MoveNext
+            Loop
+            rsColunasIdx.Close
+            
+            ' Remove a última vírgula e espaço
+            If Len(sCampos) > 2 Then sCampos = Left(sCampos, Len(sCampos) - 2)
+            
+            ' 3. Monta o script de criação do índice
+            sSQLIdx = "CREATE "
+            If rsIndices("unique").Value = 1 Then sSQLIdx = sSQLIdx & "UNIQUE "
+            sSQLIdx = sSQLIdx & "INDEX [" & sIdxName & "] ON [" & sTabela & "] (" & sCampos & ");"
+            
+            Print #fFile, sSQLIdx
+        End If
+        
+        rsIndices.MoveNext
+    Loop
+    rsIndices.Close
+End Sub
