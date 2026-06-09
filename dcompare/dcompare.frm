@@ -11,6 +11,14 @@ Begin VB.Form dCompare
    ScaleHeight     =   7908
    ScaleWidth      =   13248
    StartUpPosition =   3  'Windows Default
+   Begin VB.CommandButton cmdCompareMdbSqlite 
+      Caption         =   "CompareMdbSqlite"
+      Height          =   375
+      Left            =   2160
+      TabIndex        =   28
+      Top             =   3360
+      Width           =   1812
+   End
    Begin VB.CommandButton CmdGeraPastaSql 
       Caption         =   "SQL"
       Height          =   372
@@ -301,6 +309,10 @@ Dim sCaminho As String
     End If
 End Sub
 
+Private Sub cmdCompareMdbSqlite_Click()
+ ProcessarPastaCompletaMDBSqlite Diretorio.Text, (CheckEfetua.Value = vbChecked)
+End Sub
+
 Private Sub CmdCompareSchema_Click()
 GerarScriptAlteracoesViaSchema TxTArquivoOrigem.Text, txtArquivoDestino.Text, (CheckEfetua.Value = vbChecked)
 End Sub
@@ -501,6 +513,24 @@ Private Sub CmdTableInfo_Click()
         ' Chama sua rotina antiga para Access
         GerarInfoTabelasAccess TxTArquivoOrigem.Text, TxtInfo
     End If
+End Sub
+
+Private Sub Command1_Click()
+RenomearIndice "c:\temp\desenho.mdb", "atual", "conjunto", "conjunto_atual"
+RenomearIndice "c:\temp\desenho.mdb", "baixado", "conjunto", "conjunto_baixado"
+RenomearIndice "c:\temp\desenho.mdb", "CLIENTE", "cliente", "cliente_cliente"
+RenomearIndice "c:\temp\desenho.mdb", "conjunto", "conjunto", "conjunto_conjunto"
+RenomearIndice "c:\temp\desenho.mdb", "PRODENG", "produto", "produto_prodeng"
+RenomearIndice "c:\temp\desenho.mdb", "PRODUTO", "cliente", "cliente_produto"
+
+
+'CREATE INDEX [conjunto] ON [atual] ([conjunto]);
+'CREATE INDEX [conjunto] ON [baixado] ([conjunto]);
+'CREATE INDEX [CLIENTE] ON [CLIENTE] ([CLIENTE]);
+'CREATE INDEX [conjunto] ON [conjunto] ([conjunto]);
+'CREATE INDEX [PRODUTO] ON [PRODENG] ([PRODUTO]);
+'CREATE INDEX [CLIENTE] ON [PRODUTO] ([CLIENTE]);
+
 End Sub
 
 Private Sub Command3_Click()

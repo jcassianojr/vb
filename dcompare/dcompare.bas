@@ -86,10 +86,10 @@ Public Function AbrirCatalog(ByVal sCaminho As String) As Object
     Set AbrirCatalog = cat
 End Function
 
-Public Sub AdicionarScript(ByVal sSQL As String)
+Public Sub AdicionarScript(ByVal ssql As String)
     If colScriptsPendentes Is Nothing Then Set colScriptsPendentes = New Collection
-    colScriptsPendentes.Add sSQL
-    Debug.Print "Script Adicionado: " & sSQL
+    colScriptsPendentes.Add ssql
+    Debug.Print "Script Adicionado: " & ssql
 End Sub
 
 Public Function ValidarOuCriarDestino(ByVal cCaminho As String) As Boolean
@@ -365,15 +365,15 @@ Public Sub GerarInfoTabelasSQLite(ByVal sCaminho As String, ByRef txtDestino As 
     Dim oRS As RC6.cRecordset
     Dim oFldRS As RC6.cRecordset
     Dim oIdxRS As RC6.cRecordset
-    Dim sSQL As String
+    Dim ssql As String
     Dim sTabela As String
     
     Set oConn = New_c.Connection(sCaminho)
     txtDestino.Text = "Estrutura Completa: " & sCaminho & vbCrLf & String(40, "-") & vbCrLf
 
     ' 1. Lista tabelas (Com a query que já validamos)
-    sSQL = "SELECT name FROM sqlite_master WHERE type = 'table' AND SUBSTR(name, 1, 7) <> 'sqlite_'"
-    Set oRS = oConn.OpenRecordset(sSQL)
+    ssql = "SELECT name FROM sqlite_master WHERE type = 'table' AND SUBSTR(name, 1, 7) <> 'sqlite_'"
+    Set oRS = oConn.OpenRecordset(ssql)
     
     Do While Not oRS.EOF
         sTabela = oRS!Name
@@ -636,7 +636,7 @@ Dim cconn As String
   Set C = Nothing
 End Sub
 
-Public Sub GerarScriptAlteracoes(ByVal sPathOrigem As String, ByVal sPathDestino As String, ByVal bexecutar As Boolean)
+Public Sub GerarScriptAlteracoes(ByVal sPathOrigem As String, ByVal sPathDestino As String, ByVal bExecutar As Boolean)
     Dim catOrigem As Object, catDestino As Object
     Dim tblOrigem As Object
     Dim connOrigem As New ADODB.Connection
@@ -702,7 +702,7 @@ Public Sub GerarScriptAlteracoes(ByVal sPathOrigem As String, ByVal sPathDestino
     connOrigem.Close
     connDestino.Close
     
-    If bexecutar Then
+    If bExecutar Then
         Call ExecutarSQL(sPathDestino, sPathSQL)
     End If
     
@@ -712,26 +712,26 @@ Public Sub GerarScriptAlteracoes(ByVal sPathOrigem As String, ByVal sPathDestino
 End Sub
 
 Public Sub GerarCreateTabelaSQL(ByRef tblOrigem As Object, ByVal fFile As Integer)
-    Dim sSQL As String
+    Dim ssql As String
     Dim col As Object
     Dim bPrimeiro As Boolean
     
-    sSQL = "CREATE TABLE [" & tblOrigem.Name & "] ("
+    ssql = "CREATE TABLE [" & tblOrigem.Name & "] ("
     bPrimeiro = True
     
     ' Percorre colunas
     For Each col In tblOrigem.Columns
-        If Not bPrimeiro Then sSQL = sSQL & ", "
+        If Not bPrimeiro Then ssql = ssql & ", "
         
         ' Aqui você usa sua lógica de conversão de tipo (GetSQLType que já tem no módulo)
-        sSQL = sSQL & "[" & col.Name & "] " & GetTipoADOX(col.Type)
+        ssql = ssql & "[" & col.Name & "] " & GetTipoADOX(col.Type)
         bPrimeiro = False
     Next
     
-    sSQL = sSQL & ");"
+    ssql = ssql & ");"
     
     ' Grava no handle de gravação já aberto
-    Print #fFile, sSQL
+    Print #fFile, ssql
     Print #fFile, "" ' Linha em branco para organização
 End Sub
 
@@ -751,10 +751,10 @@ Public Sub GerarCamposAusentes(ByRef tblOrigem As Object, ByRef tblDestino As Ob
             
             ' Gera o comando ALTER TABLE e escreve no arquivo SQL
             ' Nota: MapearTipoADOX é a função que você já deve ter configurada
-            Dim sSQL As String
-            sSQL = "ALTER TABLE [" & tblOrigem.Name & "] ADD COLUMN [" & colOrigem.Name & "] " & GetTipoADOX(colOrigem.Type) & ";"
+            Dim ssql As String
+            ssql = "ALTER TABLE [" & tblOrigem.Name & "] ADD COLUMN [" & colOrigem.Name & "] " & GetTipoADOX(colOrigem.Type) & ";"
             
-            Print #fFile, sSQL
+            Print #fFile, ssql
             Debug.Print "Campo ausente encontrado: " & colOrigem.Name & " na tabela " & tblOrigem.Name
         End If
         On Error GoTo 0
@@ -765,7 +765,7 @@ Public Sub GerarIndicesAusentes(ByRef tblOrigem As Object, ByRef tblDestino As O
     Dim idxDestino As Object
     Dim colIdx As Object
     Dim sCampos As String
-    Dim sSQL As String
+    Dim ssql As String
     
     ' O Refresh é CRUCIAL para garantir que a coleção de índices está atualizada
     tblDestino.Indexes.Refresh
@@ -790,14 +790,14 @@ Public Sub GerarIndicesAusentes(ByRef tblOrigem As Object, ByRef tblDestino As O
             
             ' Verifica se é Primário ou Único
             If idxOrigem.PrimaryKey Then
-                sSQL = "ALTER TABLE [" & tblOrigem.Name & "] ADD CONSTRAINT [" & idxOrigem.Name & "] PRIMARY KEY (" & sCampos & ");"
+                ssql = "ALTER TABLE [" & tblOrigem.Name & "] ADD CONSTRAINT [" & idxOrigem.Name & "] PRIMARY KEY (" & sCampos & ");"
             Else
                 Dim sUnique As String
                 sUnique = IIf(idxOrigem.Unique, "UNIQUE ", "")
-                sSQL = "CREATE " & sUnique & "INDEX [" & idxOrigem.Name & "] ON [" & tblOrigem.Name & "] (" & sCampos & ");"
+                ssql = "CREATE " & sUnique & "INDEX [" & idxOrigem.Name & "] ON [" & tblOrigem.Name & "] (" & sCampos & ");"
             End If
             
-            Print #fFile, sSQL
+            Print #fFile, ssql
             Debug.Print "Gerando índice: " & idxOrigem.Name
         End If
         On Error GoTo 0
@@ -839,6 +839,58 @@ Public Sub ExecutarSQL(ByVal sPathDestino As String, ByVal sPathSQL As String)
     MsgBox "Script executado com sucesso no destino!", vbInformation
 End Sub
 Public Sub ExecutarSQLite(ByVal sPathDestino As String, ByVal sPathSQL As String)
+    Dim conn As Object
+    Dim fFile As Integer
+    Dim sLinha As String, sComando As String
+    
+    Set conn = CreateObject("ADODB.Connection")
+    conn.Open GeraConexao(sPathDestino)
+    
+    fFile = FreeFile
+    Open sPathSQL For Input As #fFile
+    
+    sComando = ""
+    
+    Do While Not EOF(fFile)
+        Line Input #fFile, sLinha
+        sLinha = Trim(sLinha)
+        
+        ' 1. Ignora linhas vazias
+        ' 2. Ignora linhas que começam com "--" (comentários padrão SQL)
+        If sLinha <> "" And Left(sLinha, 2) <> "--" Then
+            
+            ' Adiciona a linha ao buffer de comando
+            sComando = sComando & " " & sLinha
+            
+            ' Se encontrar o ponto e vírgula, o comando está completo
+            If InStr(sComando, ";") > 0 Then
+                ' Executa apenas a parte até o primeiro ";" encontrado
+                ' Isso evita erros se houver lixo após o ";"
+                Dim sExec As String
+                sExec = Left(sComando, InStr(sComando, ";") - 1)
+                
+                On Error Resume Next
+                conn.Execute sExec
+                If Err.Number <> 0 Then
+                    Debug.Print "Erro no comando: " & sExec & " | Detalhe: " & Err.Description
+                    Err.Clear
+                End If
+                On Error GoTo 0
+                
+                ' Limpa o buffer para o próximo comando
+                sComando = ""
+            End If
+        End If
+    Loop
+    
+    Close #fFile
+    conn.Close
+    Set conn = Nothing
+    
+    MsgBox "Script executado linha a linha com sucesso!", vbInformation
+End Sub
+
+Public Sub ExecutarSQLiteold(ByVal sPathDestino As String, ByVal sPathSQL As String)
     Dim conn As New ADODB.Connection
     Dim fso As Object
     Dim sSQLConteudo As String
@@ -1138,7 +1190,7 @@ Public Sub RecriarBancoDoSchema(ByVal sPathSchema As String, ByVal sPathDestino 
     Dim connSchema As ADODB.Connection
     Dim connDestino As ADODB.Connection
     Dim rsTb As ADODB.Recordset
-    Dim sSQL As String
+    Dim ssql As String
     Dim sTabelaAtual As String
     Dim sTipoSQL As String
     
@@ -1168,26 +1220,26 @@ Public Sub RecriarBancoDoSchema(ByVal sPathSchema As String, ByVal sPathDestino 
         ' Se mudou de tabela, fechamos a anterior (se houver) e iniciamos a nova
         If rsTb("TableName") <> sTabelaAtual Then
             If sTabelaAtual <> "" Then
-                sSQL = Left(sSQL, Len(sSQL) - 2) & ");" ' Remove última vírgula e fecha
-                connDestino.Execute sSQL
+                ssql = Left(ssql, Len(ssql) - 2) & ");" ' Remove última vírgula e fecha
+                connDestino.Execute ssql
             End If
             
             sTabelaAtual = rsTb("TableName")
-            sSQL = "CREATE TABLE [" & sTabelaAtual & "] ("
+            ssql = "CREATE TABLE [" & sTabelaAtual & "] ("
         End If
         
         ' Monta a definição do campo
         'sSQL = sSQL & "[" & rsTb("FieldName") & "] " & rsTb("TipoNome") & ", "
         sTipoSQL = ConverterParaSQL(rsTb("FieldType"), rsTb("DefinedSize"))
-        sSQL = sSQL & "[" & rsTb("FieldName") & "] " & sTipoSQL & ", "
+        ssql = ssql & "[" & rsTb("FieldName") & "] " & sTipoSQL & ", "
         
         rsTb.MoveNext
     Loop
     
     ' Executa a última tabela do loop
-    If sSQL <> "CREATE TABLE [" & sTabelaAtual & "] (" Then
-        sSQL = Left(sSQL, Len(sSQL) - 2) & ");"
-        connDestino.Execute sSQL
+    If ssql <> "CREATE TABLE [" & sTabelaAtual & "] (" Then
+        ssql = Left(ssql, Len(ssql) - 2) & ");"
+        connDestino.Execute ssql
     End If
     
     rsTb.Close
@@ -1237,7 +1289,7 @@ End Function
 Public Sub RecriarIndicesDoSchema(ByVal sPathSchema As String, ByVal sPathDestino As String)
     Dim connSchema As ADODB.Connection, connDestino As ADODB.Connection
     Dim rsIx As ADODB.Recordset
-    Dim sSQL As String, sCamposFinal As String
+    Dim ssql As String, sCamposFinal As String
     Dim vCampos As Variant, i As Long
     
     Set connSchema = New ADODB.Connection: connSchema.Open GeraConexao(sPathSchema)
@@ -1265,17 +1317,17 @@ Public Sub RecriarIndicesDoSchema(ByVal sPathSchema As String, ByVal sPathDestin
         
         ' 4. Monta o comando
         If rsIx("Primary") = True Then
-            sSQL = "ALTER TABLE [" & rsIx("TableName") & "] ADD CONSTRAINT [" & rsIx("IndexName") & "] PRIMARY KEY (" & sCamposFinal & ")"
+            ssql = "ALTER TABLE [" & rsIx("TableName") & "] ADD CONSTRAINT [" & rsIx("IndexName") & "] PRIMARY KEY (" & sCamposFinal & ")"
         Else
             Dim sUnique As String: sUnique = IIf(rsIx("Unique") = True, "UNIQUE ", "")
-            sSQL = "CREATE " & sUnique & "INDEX [" & rsIx("IndexName") & "] ON [" & rsIx("TableName") & "] (" & sCamposFinal & ")"
+            ssql = "CREATE " & sUnique & "INDEX [" & rsIx("IndexName") & "] ON [" & rsIx("TableName") & "] (" & sCamposFinal & ")"
         End If
         
         ' Execução com log de erro para debug
         On Error Resume Next
-        connDestino.Execute sSQL
+        connDestino.Execute ssql
         If Err.Number <> 0 Then
-            Debug.Print "Erro no índice " & rsIx("IndexName") & ": " & Err.Description & " | SQL: " & sSQL
+            Debug.Print "Erro no índice " & rsIx("IndexName") & ": " & Err.Description & " | SQL: " & ssql
         End If
         On Error GoTo 0
         
@@ -1346,7 +1398,7 @@ End Function
 
 Public Sub GerarTabelasAusentesViaSchema(ByVal sTabela As String, ByVal connSchema As ADODB.Connection, ByVal ts As Object)
     Dim rsCampos As ADODB.Recordset
-    Dim sSQL As String, sCamposDef As String
+    Dim ssql As String, sCamposDef As String
     
     ' Busca os campos da tabela no schema, ordenados pela sequência
     Set rsCampos = connSchema.Execute("SELECT * FROM [myTABLE] WHERE [TableName]='" & sTabela & "' ORDER BY [SeqNum]")
@@ -1361,8 +1413,8 @@ Public Sub GerarTabelasAusentesViaSchema(ByVal sTabela As String, ByVal connSche
     ' Remove a última vírgula e espaço
     If Len(sCamposDef) > 0 Then
         sCamposDef = Left(sCamposDef, Len(sCamposDef) - 2)
-        sSQL = "CREATE TABLE [" & sTabela & "] (" & sCamposDef & ");"
-        ts.WriteLine sSQL
+        ssql = "CREATE TABLE [" & sTabela & "] (" & sCamposDef & ");"
+        ts.WriteLine ssql
     End If
     
     rsCampos.Close
@@ -1395,17 +1447,17 @@ Public Sub GerarIndicesAusentesViaSchema(ByVal sTabela As String, ByVal connSche
         ' Verifica se o índice já existe no destino
         If Not IndiceExiste(connDestino, sTabela, rsIdx("IndexName")) Then
             Dim sCampos As String: sCampos = FormatarCamposParaSQL(rsIdx("Fields"))
-            Dim sSQL As String
+            Dim ssql As String
             
             ' Se for Primary Key, o tratamento é diferenciado
             If rsIdx("Primary") = True Then
-                sSQL = "ALTER TABLE [" & sTabela & "] ADD CONSTRAINT [" & rsIdx("IndexName") & "] PRIMARY KEY (" & sCampos & ");"
+                ssql = "ALTER TABLE [" & sTabela & "] ADD CONSTRAINT [" & rsIdx("IndexName") & "] PRIMARY KEY (" & sCampos & ");"
             Else
                 Dim sUnique As String: sUnique = IIf(rsIdx("Unique") = True, "UNIQUE ", "")
-                sSQL = "CREATE " & sUnique & "INDEX [" & rsIdx("IndexName") & "] ON [" & sTabela & "] (" & sCampos & ");"
+                ssql = "CREATE " & sUnique & "INDEX [" & rsIdx("IndexName") & "] ON [" & sTabela & "] (" & sCampos & ");"
             End If
             
-            ts.WriteLine sSQL
+            ts.WriteLine ssql
         End If
         rsIdx.MoveNext
     Loop
@@ -1415,7 +1467,7 @@ End Sub
 
 
 Public Sub GerarScriptAlteracoesViaSchema(ByVal sPathSchema As String, ByVal sPathDestino As String, _
-                                         ByVal bexecutar As Boolean)
+                                         ByVal bExecutar As Boolean)
     Dim connSchema As ADODB.Connection
     Dim connDestino As ADODB.Connection
     Dim rsTabelas As ADODB.Recordset
@@ -1467,7 +1519,7 @@ Public Sub GerarScriptAlteracoesViaSchema(ByVal sPathSchema As String, ByVal sPa
     connSchema.Close
     connDestino.Close
     
-    If bexecutar Then Call ExecutarSQL(sPathDestino, sPathSQL)
+    If bExecutar Then Call ExecutarSQL(sPathDestino, sPathSQL)
     MsgBox "Script de atualização gerado: " & sPathSQL, vbInformation
 End Sub
 
@@ -1562,41 +1614,55 @@ Public Sub ProcessarPastaCompletaSql(ByVal sFolder As String, ByVal lINCLUI As B
 End Sub
 Public Function GetTipoSqlite(ByVal adType As Long) As String
     Select Case adType
+        ' Inteiros
         Case 3, 20:          GetTipoSqlite = "INTEGER"
+        
+        ' Texto
         Case 129, 200, 202:  GetTipoSqlite = "TEXT"
-        Case 7, 133, 135:
-        GetTipoSqlite = "DATETIME"
+        
+        ' Data/Hora
+        Case 7, 133, 135:    GetTipoSqlite = "DATETIME"
+        
+        ' Booleano
         Case 11:             GetTipoSqlite = "BOOLEAN"
+        
+        ' Reais / Ponto Flutuante
         Case 4, 5:           GetTipoSqlite = "REAL"
+        
+        ' Binários / Imagens (LongVarBinary / LongBinary)
+        ' O valor 205 corresponde a adLongVarBinary
+        Case 205, 128:       GetTipoSqlite = "BLOB"
+        
+        ' Padrão para tipos não listados
         Case Else:           GetTipoSqlite = "TEXT"
     End Select
 End Function
 
 Public Sub GerarCreateTabelaSqlite(tblOrigem As Object, fFile As Integer)
-    Dim sSQL As String
+    Dim ssql As String
     Dim col As Object
     Dim bPrimeira As Boolean
     
     ' Como a checagem já foi feita na função mãe, aqui só geramos o comando
-    sSQL = "CREATE TABLE [" & tblOrigem.Name & "] ("
+    ssql = "CREATE TABLE [" & tblOrigem.Name & "] ("
     bPrimeira = True
     
     ' Iteramos sobre as colunas da origem (MDB)
     For Each col In tblOrigem.Columns
-        If Not bPrimeira Then sSQL = sSQL & ", "
+        If Not bPrimeira Then ssql = ssql & ", "
         
         ' Converte o tipo ADOX do Access para SQLite
-        sSQL = sSQL & "[" & col.Name & "] " & GetTipoSqlite(col.Type)
+        ssql = ssql & "[" & col.Name & "] " & GetTipoSqlite(col.Type)
         
         bPrimeira = False
     Next
     
-    sSQL = sSQL & ");"
+    ssql = ssql & ");"
     
     ' Grava o comando no arquivo
-    Print #fFile, sSQL
+    Print #fFile, ssql
 End Sub
-Public Sub GerarScriptAlteracoesAccessParaSqlite(ByVal sPathOrigem As String, ByVal sPathDestino As String, ByVal bexecutar As Boolean)
+Public Sub GerarScriptAlteracoesAccessParaSqlite(ByVal sPathOrigem As String, ByVal sPathDestino As String, ByVal bExecutar As Boolean)
     Dim catOrigem As Object
     Dim tblOrigem As Object
     Dim connOrigem As New ADODB.Connection
@@ -1638,7 +1704,7 @@ Public Sub GerarScriptAlteracoesAccessParaSqlite(ByVal sPathOrigem As String, By
     connDestino.Close
     
     ' 5. IMPLEMENTAÇÃO DO TERCEIRO PARÂMETRO
-    If bexecutar Then
+    If bExecutar Then
         ' Verifica se o arquivo não está vazio antes de tentar executar
         If FileLen(sPathSQL) > 0 Then
             Call ExecutarSQLite(sPathDestino, sPathSQL)
@@ -1654,7 +1720,7 @@ End Sub
 Public Sub GerarCamposAusentesSqlite(tblOrigem As Object, connDestino As ADODB.Connection, fFile As Integer)
     Dim colOrigem As Object
     Dim rsCampo As ADODB.Recordset
-    Dim sSQL As String
+    Dim ssql As String
     
     ' Percorre cada coluna da tabela origem (Access)
     For Each colOrigem In tblOrigem.Columns
@@ -1675,8 +1741,8 @@ Public Sub GerarCamposAusentesSqlite(tblOrigem As Object, connDestino As ADODB.C
         
         ' Se o campo NÃO existe no destino, gera o comando ALTER TABLE
         If Not bCampoExiste Then
-            sSQL = "ALTER TABLE [" & tblOrigem.Name & "] ADD COLUMN [" & colOrigem.Name & "] " & GetTipoSqlite(colOrigem.Type) & ";"
-            Print #fFile, sSQL
+            ssql = "ALTER TABLE [" & tblOrigem.Name & "] ADD COLUMN [" & colOrigem.Name & "] " & GetTipoSqlite(colOrigem.Type) & ";"
+            Print #fFile, ssql
         End If
         
     Next
@@ -1688,43 +1754,320 @@ Public Function TabelaExisteNoSQLite(ByVal sTabela As String, ByVal connDestino 
     TabelaExisteNoSQLite = (rs(0).Value > 0)
     rs.Close
 End Function
-
-Public Sub GerarIndicesSqlite(tblOrigem As Object, connDestino As ADODB.Connection, fFile As Integer)
-    Dim idx As Object
+Public Function ObterAssinaturaIndice(idx As Object) As String
     Dim col As Object
-    Dim rsExiste As ADODB.Recordset
-    Dim sSQL As String, sCampos As String
-    Dim bPrimeiro As Boolean
+    Dim sAssinatura As String
+    For Each col In idx.Columns
+        sAssinatura = sAssinatura & col.Name & "|"
+    Next
+    ObterAssinaturaIndice = sAssinatura
+End Function
+' Função auxiliar para limpar a assinatura (remove colchetes, espaços e normaliza)
+Public Function LimparAssinatura(ByVal sCampos As String) As String
+    Dim sTemp As String
+    sTemp = LCase(sCampos)
+    sTemp = Replace(sTemp, "[", "")
+    sTemp = Replace(sTemp, "]", "")
+    sTemp = Replace(sTemp, " ", "")
+    LimparAssinatura = sTemp
+End Function
+Public Function ExisteIndiceComMesmaAssinatura(tblOrigem As Object, idxOrigem As Object, connDestino As ADODB.Connection) As Boolean
+    Dim rs As ADODB.Recordset
+    Dim sIdxSql As String
+    Dim sAssinaturaOrigem As String
+    
+    sAssinaturaOrigem = ObterAssinaturaIndice(idxOrigem)
+    
+    ' Pega todos os índices da tabela no SQLite
+    Set rs = connDestino.Execute("PRAGMA index_list([" & tblOrigem.Name & "])")
+    
+    Do While Not rs.EOF
+        ' Pega o SQL de criação do índice (o que mostra as colunas que ele indexa)
+        Dim rsInfo As ADODB.Recordset
+        Set rsInfo = connDestino.Execute("SELECT sql FROM sqlite_master WHERE name='" & rs("name").Value & "'")
+        
+        If Not rsInfo.EOF Then
+            sIdxSql = LCase(rsInfo("sql").Value)
+            ' Verifica se todas as colunas da origem estão na string SQL do índice do destino
+            Dim col As Object
+            Dim bTodasPresentes As Boolean: bTodasPresentes = True
+            For Each col In idxOrigem.Columns
+                If InStr(sIdxSql, LCase(col.Name)) = 0 Then
+                    bTodasPresentes = False
+                    Exit For
+                End If
+            Next
+            
+            If bTodasPresentes Then
+                ExisteIndiceComMesmaAssinatura = True
+                rsInfo.Close
+                rs.Close
+                Exit Function
+            End If
+        End If
+        rsInfo.Close
+        rs.MoveNext
+    Loop
+    
+    rs.Close
+    ExisteIndiceComMesmaAssinatura = False
+End Function
 
-    ' Itera sobre a coleção de índices do Access (ADOX)
-    For Each idx In tblOrigem.Indexes
-        ' Ignora Chave Primária (geralmente tratada no CREATE TABLE)
-        If Not idx.PrimaryKey Then
+Public Function GerarNomeUnicoParaIndice(sNomeBase As String, connDestino As ADODB.Connection) As String
+    Dim iSeq As Integer
+    Dim sNovoNome As String
+    Dim rsExiste As ADODB.Recordset
+    
+    iSeq = 1
+    sNovoNome = sNomeBase & "-" & iSeq
+    
+    ' Loop: verifica em TUDO (tabelas, índices, etc.) se o nome já está em uso
+    Do
+        ' Removemos o filtro 'type' para checar o banco inteiro
+        Set rsExiste = connDestino.Execute("SELECT count(*) FROM sqlite_master WHERE name='" & sNovoNome & "'")
+        
+        If rsExiste(0).Value = 0 Then
+            ' Nome livre de conflitos com qualquer objeto
+            Exit Do
+        End If
+        
+        iSeq = iSeq + 1
+        sNovoNome = sNomeBase & "-" & iSeq
+        rsExiste.Close
+    Loop
+    
+    GerarNomeUnicoParaIndice = sNovoNome
+End Function
+Public Sub ProcessarPastaCompletaMDBSqlite(ByVal sFolder As String, ByVal bExecutar As Boolean)
+    Dim fso As Object
+    Dim oFolder As Object
+    Dim oFile As Object
+    Dim sCaminhoMDB As String
+    Dim sCaminhoSQLite As String
+    Dim sNomeBase As String
+    
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    If Not fso.FolderExists(sFolder) Then
+        MsgBox "Diretório não encontrado!", vbCritical
+        Exit Sub
+    End If
+    
+    Set oFolder = fso.GetFolder(sFolder)
+    
+    ' Itera por todos os arquivos da pasta
+    For Each oFile In oFolder.Files
+        ' Filtra apenas arquivos Access (.mdb ou .accdb)
+        If LCase(fso.GetExtensionName(oFile.Name)) = "mdb" Or _
+           LCase(fso.GetExtensionName(oFile.Name)) = "accdb" Then
+           
+            sCaminhoMDB = oFile.Path
+            sNomeBase = fso.GetParentFolderName(sCaminhoMDB) & "\" & fso.GetBaseName(oFile.Name)
             
-            ' Verifica se o índice já existe no SQLite antes de gerar o comando
-            Set rsExiste = connDestino.Execute("SELECT count(*) FROM sqlite_master WHERE type='index' AND name='" & idx.Name & "'")
+            ' Constrói o caminho do contraparte (ex: C:\Pasta\vendas.sqlite)
+            sCaminhoSQLite = sNomeBase & ".sqlite"
             
-            ' Só gera o script se o count for 0 (índice inexistente)
-            If rsExiste(0).Value = 0 Then
-                sCampos = ""
-                bPrimeiro = True
+            ' Verifica se o par existe antes de chamar a migração
+            If fso.FileExists(sCaminhoSQLite) Then
+                Debug.Print "Migrando: " & oFile.Name & " -> " & fso.GetFileName(sCaminhoSQLite)
                 
-                For Each col In idx.Columns
-                    If Not bPrimeiro Then sCampos = sCampos & ", "
-                    sCampos = sCampos & "[" & col.Name & "]"
-                    bPrimeiro = False
-                Next
-                
-                sSQL = "CREATE "
-                If idx.Unique Then sSQL = sSQL & "UNIQUE "
-                sSQL = sSQL & "INDEX [" & idx.Name & "] ON [" & tblOrigem.Name & "] (" & sCampos & ");"
-                
-                Print #fFile, sSQL
+                ' Chama sua rotina principal de comparação
+                Call GerarScriptAlteracoesAccessParaSqlite(sCaminhoMDB, sCaminhoSQLite, bExecutar)
+            Else
+                Debug.Print "Contraparte não encontrado para: " & oFile.Name
             End If
             
-            rsExiste.Close
-            Set rsExiste = Nothing
+        End If
+    Next oFile
+    
+    MsgBox "Processamento em lote concluído!", vbInformation
+    
+    Set oFolder = Nothing
+    Set fso = Nothing
+End Sub
+
+Public Sub RenomearIndice(ByVal sPathMDB As String, ByVal sTabelaAlvo As String, ByVal sNomeAntigo As String, ByVal sNomeNovo As String)
+    Dim conn As Object, cat As Object, tbl As Object, idx As Object
+    Dim bTabelaEncontrada As Boolean
+    
+    Set conn = CreateObject("ADODB.Connection")
+    conn.Open GeraConexao(sPathMDB)
+    
+    Set cat = CreateObject("ADOX.Catalog")
+    Set cat.ActiveConnection = conn
+    
+    ' 1. A MESMA LÓGICA DE BUSCA QUE FUNCIONA NA GERARINFO
+    bTabelaEncontrada = False
+    For Each tbl In cat.Tables
+        ' Compara o nome da mesma forma que você faz no relatório
+        If tbl.Type = "TABLE" Then
+            If LCase(Trim(tbl.Name)) = LCase(Trim(sTabelaAlvo)) Then
+                bTabelaEncontrada = True
+                Exit For
+            End If
+        End If
+    Next
+    
+    If Not bTabelaEncontrada Then
+        MsgBox "Tabela '" & sTabelaAlvo & "' não encontrada na coleção de tabelas.", vbCritical
+        GoTo Finalizar
+    End If
+    
+    ' 2. A MESMA LÓGICA DE BUSCA DE ÍNDICE
+    Dim bEncontrouIdx As Boolean: bEncontrouIdx = False
+    For Each idx In tbl.Indexes
+        If LCase(Trim(idx.Name)) = LCase(Trim(sNomeAntigo)) Then
+            bEncontrouIdx = True
+            Exit For
+        End If
+    Next
+    
+    If Not bEncontrouIdx Then
+        MsgBox "Índice '" & sNomeAntigo & "' não encontrado nesta tabela.", vbExclamation
+        GoTo Finalizar
+    End If
+    
+    ' 3. COLETA OS DADOS (Campos)
+    Dim sCampos As String, col As Object
+    For Each col In idx.Columns
+        sCampos = sCampos & "[" & col.Name & "], "
+    Next
+    sCampos = Left(sCampos, Len(sCampos) - 2) ' Remove a última vírgula
+    
+    ' 4. AÇÃO: DROP E CREATE (SQL DIRETO)
+    On Error Resume Next
+    conn.Execute "DROP INDEX [" & sNomeAntigo & "] ON [" & sTabelaAlvo & "]"
+    
+    Dim ssql As String
+    ssql = "CREATE " & IIf(idx.Unique, "UNIQUE ", "") & _
+           "INDEX [" & sNomeNovo & "] ON [" & sTabelaAlvo & "] (" & sCampos & ")"
+    
+    conn.Execute ssql
+    
+    If Err.Number = 0 Then
+        MsgBox "Índice renomeado com sucesso via SQL!", vbInformation
+    Else
+        MsgBox "Erro ao executar SQL: " & Err.Description, vbCritical
+    End If
+    On Error GoTo 0
+    
+Finalizar:
+    conn.Close
+    Set cat = Nothing
+    Set conn = Nothing
+End Sub
+
+' Esta função limpa o SQL do SQLite e retorna os campos: "[campo1], [campo2]"
+Public Function ExtrairCamposDoSqlite(ByVal sSqlIndex As Variant) As String
+    If IsNull(sSqlIndex) Then Exit Function
+    
+    Dim sClean As String
+    sClean = CStr(sSqlIndex)
+    
+    ' 1. Remove quebras de linha e tabulações que podem confundir o processamento
+    sClean = Replace(sClean, vbCr, " ")
+    sClean = Replace(sClean, vbLf, " ")
+    sClean = Replace(sClean, vbTab, " ")
+    
+    ' 2. Extrai o conteúdo entre parênteses
+    Dim iInicio As Integer, iFim As Integer
+    iInicio = InStr(sClean, "(")
+    iFim = InStrRev(sClean, ")")
+    
+    If iInicio > 0 And iFim > iInicio Then
+        ExtrairCamposDoSqlite = Mid(sClean, iInicio + 1, iFim - iInicio - 1)
+    End If
+End Function
+
+' Esta função gera a assinatura do índice do MDB para comparar
+Public Function GerarAssinaturaMdb(idxMdb As Object) As String
+    Dim col As Object, sAssin As String
+    For Each col In idxMdb.Columns
+        sAssin = sAssin & "[" & LCase(col.Name) & "], "
+    Next
+    ' Remove a última vírgula e espaço
+    If Len(sAssin) > 2 Then sAssin = Left(sAssin, Len(sAssin) - 2)
+    GerarAssinaturaMdb = sAssin
+End Function
+
+Public Function IndiceJaExiste(tblOrigem As Object, idxOrigem As Object, connDestino As ADODB.Connection) As Boolean
+    Dim rs As ADODB.Recordset
+    Dim sAssinaturaMdb As String
+    Dim sAssinaturaSqlite As String
+    
+    sAssinaturaMdb = GerarAssinaturaMdb(idxOrigem)
+    
+    ' Busca os índices da tabela destino no sqlite_master
+    Set rs = connDestino.Execute("SELECT sql FROM sqlite_master WHERE type='index' AND tbl_name='" & tblOrigem.Name & "'")
+    
+    Do While Not rs.EOF
+        sAssinaturaSqlite = ExtrairCamposDoSqlite(rs("sql").Value)
+        
+        ' Compara se a assinatura do MDB está contida na do SQLite
+        ' Remove espaços extras para garantir a igualdade
+        If Replace(sAssinaturaMdb, " ", "") = Replace(sAssinaturaSqlite, " ", "") Then
+            IndiceJaExiste = True
+            Exit Do
+        End If
+        rs.MoveNext
+    Loop
+    
+    rs.Close
+    IndiceJaExiste = IndiceJaExiste
+End Function
+Public Sub GerarIndicesSqlite(tblOrigem As Object, connDestino As ADODB.Connection, fFile As Integer)
+    Dim idx As Object, col As Object
+    Dim sCamposMdb As String, ssql As String
+    Dim bExiste As Boolean
+    Dim rs As ADODB.Recordset
+    
+    For Each idx In tblOrigem.Indexes
+        If Not idx.PrimaryKey Then
+            ' 1. Assinatura do MDB
+            sCamposMdb = ""
+            For Each col In idx.Columns
+                If sCamposMdb <> "" Then sCamposMdb = sCamposMdb & ", "
+                sCamposMdb = sCamposMdb & "[" & col.Name & "]"
+            Next
+            
+            ' 2. Verifica índices existentes no SQLite
+            bExiste = False
+            'Dim ssql As String
+            ssql = "SELECT replace(replace(replace(sql, char(10), ' '), char(13), ' '), char(9), ' ') AS sql " & _
+               "FROM sqlite_master WHERE type='index' AND tbl_name='" & tblOrigem.Name & "'"
+            Set rs = connDestino.Execute(ssql)
+            
+            ' Se o Recordset estiver vazio (EOF), o Loop nem começa, bExiste continua False.
+            ' O código entende que não existe índice e vai para o passo 3 (CRIAÇÃO).
+            Do While Not rs.EOF
+                If Not IsNull(rs("sql").Value) Then
+                    Dim sSqliteCampos As String
+                    Dim SSQQLUSO As String
+                    SSQQLUSO = rs("sql").Value
+                    sSqliteCampos = ExtrairCamposDoSqlite(SSQQLUSO)
+                    sCamposMdb = LimparAssinatura(sCamposMdb)
+                    sSqliteCampos = LimparAssinatura(sSqliteCampos)
+                    ' Compara assinaturas
+                    If Replace(LCase(sCamposMdb), " ", "") = Replace(LCase(sSqliteCampos), " ", "") Then
+                        bExiste = True
+                        Exit Do
+                    End If
+                End If
+                rs.MoveNext
+            Loop
+            rs.Close
+            
+            ' 3. Criação
+            If Not bExiste Then
+                ssql = "CREATE "
+                If idx.Unique Then ssql = ssql & "UNIQUE "
+                ssql = ssql & "INDEX [IDX_" & tblOrigem.Name & "_" & idx.Name & "] " & _
+                       "ON [" & tblOrigem.Name & "] (" & sCamposMdb & ");"
+                
+                Print #fFile, ssql
+            End If
         End If
     Next
 End Sub
+
 
