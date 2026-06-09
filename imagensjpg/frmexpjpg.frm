@@ -1,24 +1,24 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form Frmexpjpg 
    Caption         =   "Exportando "
-   ClientHeight    =   5955
+   ClientHeight    =   5952
    ClientLeft      =   60
-   ClientTop       =   450
-   ClientWidth     =   8370
+   ClientTop       =   456
+   ClientWidth     =   8376
    Icon            =   "frmexpjpg.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5955
-   ScaleWidth      =   8370
+   ScaleHeight     =   5952
+   ScaleWidth      =   8376
    StartUpPosition =   3  'Windows Default
    Begin VB.PictureBox Picture1 
       AutoRedraw      =   -1  'True
       Height          =   1935
       Left            =   120
-      ScaleHeight     =   1875
-      ScaleWidth      =   1515
-      TabIndex        =   11
+      ScaleHeight     =   1884
+      ScaleWidth      =   1524
+      TabIndex        =   10
       Top             =   2880
       Visible         =   0   'False
       Width           =   1575
@@ -26,11 +26,11 @@ Begin VB.Form Frmexpjpg
    Begin VBCCR18.SpinBox QtdeDigitos 
       Height          =   375
       Left            =   3000
-      TabIndex        =   6
+      TabIndex        =   5
       Top             =   480
       Width           =   615
-      _ExtentX        =   1085
-      _ExtentY        =   661
+      _ExtentX        =   1080
+      _ExtentY        =   656
       Min             =   1
       Max             =   20
       Value           =   8
@@ -39,85 +39,65 @@ Begin VB.Form Frmexpjpg
    Begin VBCCR18.FrameW FrameW1 
       Height          =   2055
       Left            =   240
-      TabIndex        =   12
+      TabIndex        =   11
       Top             =   120
       Width           =   4455
-      _ExtentX        =   7858
-      _ExtentY        =   3625
+      _ExtentX        =   7853
+      _ExtentY        =   3620
       Caption         =   "Exportar Usando"
       Begin VB.CheckBox SepararEmpresa 
          Caption         =   "Codigo contem empresa"
          Height          =   375
          Left            =   240
-         TabIndex        =   10
+         TabIndex        =   9
          Top             =   1320
          Width           =   2295
       End
       Begin VBCCR18.CheckBoxW TiraCaracter 
          Height          =   375
          Left            =   240
-         TabIndex        =   7
+         TabIndex        =   6
          Top             =   840
          Width           =   2415
-         _ExtentX        =   4260
-         _ExtentY        =   661
+         _ExtentX        =   4255
+         _ExtentY        =   656
          Value           =   1
          Caption         =   "Tira Caracters Pontuacao"
       End
       Begin VBCCR18.OptionButtonW PorNumero 
          Height          =   375
          Left            =   1560
-         TabIndex        =   5
+         TabIndex        =   4
          Top             =   360
          Width           =   1095
-         _ExtentX        =   1931
-         _ExtentY        =   661
+         _ExtentX        =   1926
+         _ExtentY        =   656
          Caption         =   "Numero"
       End
       Begin VBCCR18.OptionButtonW PorCodigo 
          Height          =   375
          Left            =   240
-         TabIndex        =   4
+         TabIndex        =   3
          Top             =   360
          Width           =   1095
-         _ExtentX        =   1931
-         _ExtentY        =   661
+         _ExtentX        =   1926
+         _ExtentY        =   656
          Caption         =   "Codigo"
       End
-   End
-   Begin XPControls.XPButton CmdEncerrar 
-      Height          =   495
-      Left            =   6720
-      TabIndex        =   2
-      Top             =   240
-      Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   873
-      Picture         =   "frmexpjpg.frx":038A
-      Caption         =   "&Sair"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
    End
    Begin XPControls.XPButton Cmdiniciar 
       Height          =   495
       Left            =   5040
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   240
       Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   873
-      Picture         =   "frmexpjpg.frx":0924
+      _ExtentX        =   2561
+      _ExtentY        =   868
+      Picture         =   "frmexpjpg.frx":038A
       Caption         =   "&Exportar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -128,16 +108,16 @@ Begin VB.Form Frmexpjpg
    Begin XPControls.XPButton CmdImportar 
       Height          =   495
       Left            =   5040
-      TabIndex        =   9
+      TabIndex        =   8
       Top             =   840
       Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   873
-      Picture         =   "frmexpjpg.frx":0CBE
+      _ExtentX        =   2561
+      _ExtentY        =   868
+      Picture         =   "frmexpjpg.frx":0724
       Caption         =   "&Importar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -148,17 +128,17 @@ Begin VB.Form Frmexpjpg
    Begin XPControls.XPButton cmdBrowseFolder 
       Height          =   675
       Left            =   6720
-      TabIndex        =   13
+      TabIndex        =   12
       TabStop         =   0   'False
       Top             =   2160
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   1191
-      Picture         =   "frmexpjpg.frx":1058
+      _ExtentX        =   2773
+      _ExtentY        =   1185
+      Picture         =   "frmexpjpg.frx":0ABE
       Caption         =   "Buscar Pasta"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -166,10 +146,30 @@ Begin VB.Form Frmexpjpg
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR18.CommandButtonW cmdencerrar 
+      Height          =   612
+      Left            =   7080
+      TabIndex        =   13
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmexpjpg.frx":1058
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
    Begin VB.Label Caminho 
       Height          =   375
       Left            =   240
-      TabIndex        =   8
+      TabIndex        =   7
       Top             =   2280
       Width           =   6255
    End

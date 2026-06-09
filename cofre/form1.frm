@@ -2,14 +2,14 @@ VERSION 5.00
 Begin VB.Form Form1 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Gerador de Cofre de Senhas - VB96/VB6"
-   ClientHeight    =   5805
-   ClientLeft      =   45
-   ClientTop       =   390
-   ClientWidth     =   5415
+   ClientHeight    =   5796
+   ClientLeft      =   48
+   ClientTop       =   396
+   ClientWidth     =   5412
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   5805
-   ScaleWidth      =   5415
+   ScaleHeight     =   5796
+   ScaleWidth      =   5412
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton cmdAtualizar 
       Caption         =   "Atualizar Lista"
@@ -136,7 +136,7 @@ Begin VB.Form Form1
       Width           =   1215
    End
    Begin VB.Label Label3 
-      Caption         =   "UsuÃ¡rio:"
+      Caption         =   "Usuario:"
       Height          =   255
       Left            =   240
       TabIndex        =   14
@@ -173,7 +173,7 @@ Begin VB.Form Form1
    End
    Begin VB.Label lblStatus 
       Alignment       =   2  'Center
-      Caption         =   "Cofre pronto para operaÃ§Ã£o."
+      Caption         =   "Cofre pronto para operacao"
       ForeColor       =   &H00800000&
       Height          =   255
       Left            =   240

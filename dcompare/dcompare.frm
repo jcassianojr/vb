@@ -401,7 +401,7 @@ End Sub
 
 
 Private Sub CmdGeraPasta_Click()
-ProcessarPastaCompletaSchema (Diretorio.Text)
+    ProcessarPastaCompletaSchema (Diretorio.Text)
 End Sub
 
 Private Sub CmdGeraPastaSql_Click()

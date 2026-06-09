@@ -1,23 +1,24 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escIMG 
    Caption         =   "Escolha o Codigo da Imagem"
    ClientHeight    =   6672
    ClientLeft      =   60
    ClientTop       =   348
-   ClientWidth     =   9948
+   ClientWidth     =   10608
    HelpContextID   =   1001
    Icon            =   "escIMG.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   6672
-   ScaleWidth      =   9948
+   ScaleWidth      =   10608
    StartUpPosition =   3  'Windows Default
    Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5655
       Left            =   120
-      TabIndex        =   11
+      TabIndex        =   10
       Top             =   120
       Width           =   7575
       _ExtentX        =   13356
@@ -26,7 +27,7 @@ Begin VB.Form escIMG
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   396
       Left            =   8040
-      TabIndex        =   10
+      TabIndex        =   9
       Top             =   120
       Width           =   1680
       _ExtentX        =   2963
@@ -82,35 +83,15 @@ Begin VB.Form escIMG
       EndProperty
       Enabled         =   0   'False
    End
-   Begin XPControls.XPButton cmdsair 
-      Height          =   435
-      Left            =   8040
-      TabIndex        =   2
-      Top             =   4320
-      Width           =   1575
-      _ExtentX        =   2773
-      _ExtentY        =   762
-      Picture         =   "escIMG.frx":058A
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton cmdlocalizar 
       Height          =   435
       Left            =   8040
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   2640
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "escIMG.frx":0B24
+      Picture         =   "escIMG.frx":058A
       Caption         =   "Localizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -125,12 +106,12 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton CmdFiltro 
       Height          =   435
       Left            =   8040
-      TabIndex        =   5
+      TabIndex        =   4
       Top             =   3600
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "escIMG.frx":10BE
+      Picture         =   "escIMG.frx":0B24
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -145,12 +126,12 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton CmdOrdem 
       Height          =   435
       Left            =   8040
-      TabIndex        =   6
+      TabIndex        =   5
       Top             =   3120
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "escIMG.frx":1658
+      Picture         =   "escIMG.frx":10BE
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -165,12 +146,12 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton Command1 
       Height          =   435
       Left            =   7920
-      TabIndex        =   7
+      TabIndex        =   6
       Top             =   6000
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "escIMG.frx":1BF2
+      Picture         =   "escIMG.frx":1658
       Caption         =   "Abrir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -185,12 +166,12 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton novo 
       Height          =   435
       Left            =   8040
-      TabIndex        =   8
+      TabIndex        =   7
       Top             =   720
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "escIMG.frx":218C
+      Picture         =   "escIMG.frx":1BF2
       Caption         =   "Novo"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -205,12 +186,12 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton cmdEditar 
       Height          =   435
       Left            =   8040
-      TabIndex        =   9
+      TabIndex        =   8
       Top             =   1200
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "escIMG.frx":2726
+      Picture         =   "escIMG.frx":218C
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -225,12 +206,12 @@ Begin VB.Form escIMG
    Begin XPControls.XPButton apaga 
       Height          =   435
       Left            =   8040
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   1920
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "escIMG.frx":2CC0
+      Picture         =   "escIMG.frx":2726
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -241,6 +222,26 @@ Begin VB.Form escIMG
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW cmdsair 
+      Height          =   612
+      Left            =   9480
+      TabIndex        =   11
+      Top             =   720
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "escIMG.frx":2CC0
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
 End
 Attribute VB_Name = "escIMG"
