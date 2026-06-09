@@ -1,48 +1,49 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Object = "{C7880F7C-F318-471C-8BB7-25660C4BE24A}#1.1#0"; "OrdoPDFReader.v3.ocx"
 Begin VB.Form frmPDFView 
+   Appearance      =   0  'Flat
+   BackColor       =   &H80000005&
    Caption         =   "PDFReader"
    ClientHeight    =   7380
    ClientLeft      =   60
-   ClientTop       =   405
-   ClientWidth     =   13095
+   ClientTop       =   408
+   ClientWidth     =   13092
    Icon            =   "frmpdfview.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7380
-   ScaleWidth      =   13095
+   ScaleWidth      =   13092
    StartUpPosition =   2  'CenterScreen
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   732
+      Left            =   11400
+      TabIndex        =   1
+      Top             =   240
+      Width           =   1212
+      _ExtentX        =   2138
+      _ExtentY        =   1291
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmpdfview.frx":038A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
    Begin OrdoPDF_Reader_3.OrdoPDFReaderV3 PDFReader1 
       Height          =   6855
       Left            =   0
       TabIndex        =   0
       Top             =   0
       Width           =   11145
-      _ExtentX        =   19659
-      _ExtentY        =   12091
+      _ExtentX        =   19664
+      _ExtentY        =   12086
       BorderStyle     =   1
       LanguageUsed    =   "auto"
-   End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   11280
-      TabIndex        =   1
-      TabStop         =   0   'False
-      Top             =   240
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmpdfview.frx":038A
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
    End
 End
 Attribute VB_Name = "frmPDFView"

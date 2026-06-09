@@ -1,17 +1,17 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escuser 
    Caption         =   "Selecione o Usuario Desejado"
-   ClientHeight    =   6075
-   ClientLeft      =   165
-   ClientTop       =   450
-   ClientWidth     =   8475
+   ClientHeight    =   6072
+   ClientLeft      =   168
+   ClientTop       =   456
+   ClientWidth     =   8472
    Icon            =   "escuser.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6075
-   ScaleWidth      =   8475
+   ScaleHeight     =   6072
+   ScaleWidth      =   8472
    StartUpPosition =   2  'CenterScreen
    Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5415
@@ -19,17 +19,17 @@ Begin VB.Form escuser
       TabIndex        =   2
       Top             =   480
       Width           =   6735
-      _ExtentX        =   11880
-      _ExtentY        =   9551
+      _ExtentX        =   11875
+      _ExtentY        =   9546
    End
    Begin vbExtra.FlexFn FlexFn1 
-      Height          =   405
+      Height          =   396
       Left            =   240
       TabIndex        =   1
       Top             =   0
-      Width           =   1725
-      _ExtentX        =   3043
-      _ExtentY        =   714
+      Width           =   1680
+      _ExtentX        =   2963
+      _ExtentY        =   699
       PageNumbersFormat=   ""
       PageNumbersFormatIndex=   0
       BeginProperty PageNumbersFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -44,25 +44,25 @@ Begin VB.Form escuser
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
-      Height          =   6075
-      Left            =   7005
+      Height          =   6072
+      Left            =   6996
       TabIndex        =   0
       Top             =   0
-      Width           =   1470
-      _ExtentX        =   2593
-      _ExtentY        =   10716
-      ButtonWidth     =   609
+      Width           =   1476
+      _ExtentX        =   2604
+      _ExtentY        =   10710
+      ButtonWidth     =   614
       ButtonHeight    =   953
       Appearance      =   1
       TextAlignment   =   1
       _Version        =   393216
       Begin vbExtra.SizeGrip SizeGrip1 
          Height          =   285
-         Left            =   1185
-         Top             =   5790
+         Left            =   1248
+         Top             =   5844
          Width           =   285
-         _ExtentX        =   503
-         _ExtentY        =   503
+         _ExtentX        =   402
+         _ExtentY        =   402
       End
    End
 End

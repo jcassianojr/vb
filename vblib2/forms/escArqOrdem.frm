@@ -1,15 +1,16 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form EscArqOrdem 
    Caption         =   "Escolher Ordem"
    ClientHeight    =   3480
    ClientLeft      =   60
-   ClientTop       =   450
-   ClientWidth     =   6525
+   ClientTop       =   456
+   ClientWidth     =   6528
    Icon            =   "escArqOrdem.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3480
-   ScaleWidth      =   6525
+   ScaleWidth      =   6528
    StartUpPosition =   3  'Windows Default
    Begin XPControls.XPButton CmdEscolher 
       Height          =   495
@@ -22,7 +23,7 @@ Begin VB.Form EscArqOrdem
       Caption         =   "Escolher Ordem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -41,7 +42,7 @@ Begin VB.Form EscArqOrdem
       Caption         =   "Apagar Ordem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -58,31 +59,31 @@ Begin VB.Form EscArqOrdem
       Width           =   4815
    End
    Begin VB.ListBox List 
-      Height          =   2595
+      Height          =   2544
       Left            =   120
       TabIndex        =   0
       Top             =   600
       Width           =   4815
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
+   Begin VBCCR18.CommandButtonW encerrar 
+      Height          =   492
       Left            =   5040
       TabIndex        =   4
-      Top             =   2280
-      Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   767
-      Picture         =   "escArqOrdem.frx":058A
+      Top             =   1440
+      Width           =   1212
+      _ExtentX        =   2138
+      _ExtentY        =   868
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "escArqOrdem.frx":058A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
 End
 Attribute VB_Name = "EscArqOrdem"
@@ -100,11 +101,15 @@ Private Sub CmdEscolher_Click()
   Unload Me
 End Sub
 
+Private Sub cmdsair_Click()
+
+End Sub
+
 Private Sub CmdZerar_Click()
   TxtOrdem = ""
 End Sub
 
-Private Sub Encerrar_Click()
+Private Sub encerrar_Click()
   lRETU = False
   eRETU01 = ""
   Unload Me

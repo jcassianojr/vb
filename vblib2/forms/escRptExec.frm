@@ -1,18 +1,18 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form EscRptExec 
    Caption         =   "Selecione o Desejado"
-   ClientHeight    =   5775
+   ClientHeight    =   5772
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   9105
+   ClientTop       =   348
+   ClientWidth     =   9108
    HelpContextID   =   6
    Icon            =   "escRptExec.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5775
-   ScaleWidth      =   9105
+   ScaleHeight     =   5772
+   ScaleWidth      =   9108
    StartUpPosition =   3  'Windows Default
    Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5175
@@ -20,8 +20,8 @@ Begin VB.Form EscRptExec
       TabIndex        =   2
       Top             =   480
       Width           =   7335
-      _ExtentX        =   12938
-      _ExtentY        =   9128
+      _ExtentX        =   12933
+      _ExtentY        =   9123
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
@@ -32,21 +32,21 @@ Begin VB.Form EscRptExec
       Top             =   0
       Width           =   1500
       _ExtentX        =   2646
-      _ExtentY        =   10186
-      ButtonWidth     =   714
-      ButtonHeight    =   714
+      _ExtentY        =   10181
+      ButtonWidth     =   720
+      ButtonHeight    =   720
       Appearance      =   1
       TextAlignment   =   1
       _Version        =   393216
    End
    Begin vbExtra.FlexFn FlexFn1 
-      Height          =   405
+      Height          =   396
       Left            =   240
       TabIndex        =   1
       Top             =   0
-      Width           =   1725
-      _ExtentX        =   3043
-      _ExtentY        =   714
+      Width           =   1680
+      _ExtentX        =   2963
+      _ExtentY        =   699
       PageNumbersFormat=   ""
       PageNumbersFormatIndex=   0
       BeginProperty PageNumbersFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 

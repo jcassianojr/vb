@@ -1,5 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form FrmSendMail 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Enviando Email"
@@ -25,7 +26,7 @@ Begin VB.Form FrmSendMail
       EndProperty
       Height          =   315
       Left            =   1200
-      TabIndex        =   23
+      TabIndex        =   22
       Top             =   120
       Width           =   4815
    End
@@ -34,14 +35,14 @@ Begin VB.Form FrmSendMail
       IMEMode         =   3  'DISABLE
       Left            =   5280
       PasswordChar    =   "*"
-      TabIndex        =   21
+      TabIndex        =   20
       Top             =   5040
       Width           =   1800
    End
    Begin VB.TextBox txtUsername 
       Height          =   300
       Left            =   2520
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   5040
       Width           =   1800
    End
@@ -51,7 +52,7 @@ Begin VB.Form FrmSendMail
       ForeColor       =   &H00C00000&
       Height          =   315
       Left            =   240
-      TabIndex        =   17
+      TabIndex        =   16
       Top             =   5040
       Width           =   1065
    End
@@ -146,35 +147,15 @@ Begin VB.Form FrmSendMail
       Top             =   4560
       Width           =   4215
    End
-   Begin XPControls.XPButton CmdCancelar 
-      Height          =   435
-      Left            =   8280
-      TabIndex        =   15
-      Top             =   240
-      Width           =   1575
-      _ExtentX        =   2773
-      _ExtentY        =   762
-      Picture         =   "frmSendMail.frx":038A
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton CmdEnviar 
-      Height          =   375
-      Left            =   8280
-      TabIndex        =   16
-      Top             =   840
-      Width           =   1575
+      Height          =   372
+      Left            =   6240
+      TabIndex        =   15
+      Top             =   360
+      Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   656
-      Picture         =   "frmSendMail.frx":0924
+      Picture         =   "frmSendMail.frx":038A
       Caption         =   "EnviarEmail"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -189,7 +170,7 @@ Begin VB.Form FrmSendMail
    Begin XPControls.XPButton Command9 
       Height          =   255
       Left            =   6240
-      TabIndex        =   24
+      TabIndex        =   23
       TabStop         =   0   'False
       Top             =   1560
       Width           =   855
@@ -206,13 +187,33 @@ Begin VB.Form FrmSendMail
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR18.CommandButtonW retornar 
+      Height          =   612
+      Left            =   8520
+      TabIndex        =   24
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmSendMail.frx":0924
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
    Begin VB.Label Label8 
       Alignment       =   1  'Right Justify
       Caption         =   "Nome"
       ForeColor       =   &H00C00000&
       Height          =   195
       Left            =   0
-      TabIndex        =   22
+      TabIndex        =   21
       Top             =   120
       Width           =   1005
    End
@@ -232,7 +233,7 @@ Begin VB.Form FrmSendMail
       Height          =   195
       Index           =   6
       Left            =   4440
-      TabIndex        =   20
+      TabIndex        =   19
       Top             =   5040
       Width           =   690
    End
@@ -252,7 +253,7 @@ Begin VB.Form FrmSendMail
       Height          =   195
       Index           =   5
       Left            =   1680
-      TabIndex        =   18
+      TabIndex        =   17
       Top             =   5040
       Width           =   720
    End
@@ -332,13 +333,13 @@ Private Sub CmdEnviar_Click()
 
 End Sub
 Private Sub CmdLimpa_Click()
-  txt_status.tEXT = ""
+  txt_status.Text = ""
 End Sub
 
 Private Sub Command9_Click()
   Dim cOrigem As String
   Dim cDestino As String
-  cOrigem = txt_attach.tEXT
+  cOrigem = txt_attach.Text
   If InStr(UCase(cOrigem), ".ZIP") > 0 Then
     Alert ("Ja e um zip")
   Else
@@ -347,24 +348,24 @@ Private Sub Command9_Click()
       .AddFile cOrigem
        .CompressArchive cDestino
     End With
-    txt_attach.tEXT = cDestino
+    txt_attach.Text = cDestino
   End If
 
 End Sub
 
 Private Sub cdoenviar_Click()
   Dim RetVal As String
-  RetVal = SendMailCDO(Trim$(txt_email_to.tEXT), _
-                       Trim$(txt_subject.tEXT), _
-                       Trim$(txtFromName.tEXT) & "<" & Trim$(txt_email_from.tEXT) & ">", _
-                       Trim$(txt_message_text.tEXT), _
-                       Trim$(txt_smtp_server.tEXT), _
-                       CInt(Trim$(Txt_Porta.tEXT)), _
-                       Trim$(txtUsername.tEXT), _
-                       Trim$(txtPassword.tEXT), _
-                       Trim$(txt_attach.tEXT), _
+  RetVal = SendMailCDO(Trim$(txt_email_to.Text), _
+                       Trim$(txt_subject.Text), _
+                       Trim$(txtFromName.Text) & "<" & Trim$(txt_email_from.Text) & ">", _
+                       Trim$(txt_message_text.Text), _
+                       Trim$(txt_smtp_server.Text), _
+                       CInt(Trim$(Txt_Porta.Text)), _
+                       Trim$(txtUsername.Text), _
+                       Trim$(txtPassword.Text), _
+                       Trim$(txt_attach.Text), _
                        CBool(chkSSL.Value))
-  txt_status.tEXT = RetVal
+  txt_status.Text = RetVal
 
 End Sub
 
@@ -375,24 +376,24 @@ End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
-  txt_status.tEXT = "Pronto." & vbCrLf
-  txt_smtp_server.tEXT = ePASS01(0)
-  Txt_Porta.tEXT = ePASS01(1)
-  txt_email_from.tEXT = ePASS01(2)
-  txt_email_to.tEXT = ePASS01(3)
-  txt_subject.tEXT = ePASS01(4)
-  txt_attach.tEXT = ePASS01(5)
-  txt_message_text.tEXT = ePASS01(6)
-  If Len(txt_smtp_server.tEXT) = 0 Then
-    txt_smtp_server.tEXT = PegPath("EMAIL", "SERVER", "stmp..com.br")
+  txt_status.Text = "Pronto." & vbCrLf
+  txt_smtp_server.Text = ePASS01(0)
+  Txt_Porta.Text = ePASS01(1)
+  txt_email_from.Text = ePASS01(2)
+  txt_email_to.Text = ePASS01(3)
+  txt_subject.Text = ePASS01(4)
+  txt_attach.Text = ePASS01(5)
+  txt_message_text.Text = ePASS01(6)
+  If Len(txt_smtp_server.Text) = 0 Then
+    txt_smtp_server.Text = PegPath("EMAIL", "SERVER", "stmp..com.br")
   End If
-  If Len(Txt_Porta.tEXT) = 0 Then
-    Txt_Porta.tEXT = PegPath("EMAIL", "PORTA", "25")
+  If Len(Txt_Porta.Text) = 0 Then
+    Txt_Porta.Text = PegPath("EMAIL", "PORTA", "25")
   End If
-  If Len(txt_email_from.tEXT) = 0 Then
-    txt_email_from.tEXT = PegPath("EMAIL", UCase(zNOMEFOLHA), " ")
-    If Len(Trim(txt_email_from.tEXT)) = 0 Then
-      txt_email_from.tEXT = PegPath("EMAIL", "FROM", "@.com.br")
+  If Len(txt_email_from.Text) = 0 Then
+    txt_email_from.Text = PegPath("EMAIL", UCase(zNOMEFOLHA), " ")
+    If Len(Trim(txt_email_from.Text)) = 0 Then
+      txt_email_from.Text = PegPath("EMAIL", "FROM", "@.com.br")
     End If
   End If
 
@@ -406,6 +407,10 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 Private Sub Lista_Click()
   CmdEnviar_Click
+End Sub
+
+Private Sub retornar_Click()
+  Unload Me
 End Sub
 
 Private Sub txt_email_from_LostFocus()
@@ -428,30 +433,30 @@ End Sub
 
 Function campos_checagem() As Boolean
   campos_checagem = False
-  If Len(txt_subject.tEXT) = 0 Then
+  If Len(txt_subject.Text) = 0 Then
     If Not MDG("Enviar Sem Assunto") Then
       Exit Function
     End If
   End If
-  If Len(txt_email_to.tEXT) = 0 Then
+  If Len(txt_email_to.Text) = 0 Then
     Alert ("Sem Destinatario")
     Exit Function
   End If
-  If Len(txt_email_from.tEXT) = 0 Then
+  If Len(txt_email_from.Text) = 0 Then
     Alert ("Sem Remetente")
     Exit Function
   End If
-  If Not CheckEmail(txt_email_from.tEXT) Then
-    txt_status.tEXT = "Erro: " & txt_email_from.tEXT & "." & vbCrLf & txt_status.tEXT & vbCrLf
+  If Not CheckEmail(txt_email_from.Text) Then
+    txt_status.Text = "Erro: " & txt_email_from.Text & "." & vbCrLf & txt_status.Text & vbCrLf
     Alert ("Email Origem Invalido")
     Exit Function
   End If
-  If Not CheckEmail(txt_email_to.tEXT) Then
-    txt_status.tEXT = "Erro: " & txt_email_to.tEXT & "." & vbCrLf & txt_status.tEXT & vbCrLf
+  If Not CheckEmail(txt_email_to.Text) Then
+    txt_status.Text = "Erro: " & txt_email_to.Text & "." & vbCrLf & txt_status.Text & vbCrLf
     Alert ("Email Destino Invalido")
     Exit Function
   End If
-  If Len(txt_smtp_server.tEXT) = 0 Then
+  If Len(txt_smtp_server.Text) = 0 Then
     Alert ("Servidor de Envio Nao Preenchido")
     Exit Function
   End If

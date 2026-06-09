@@ -1,26 +1,26 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form frmBTN 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Botoes"
    ClientHeight    =   2760
-   ClientLeft      =   1095
-   ClientTop       =   330
-   ClientWidth     =   8250
+   ClientLeft      =   1092
+   ClientTop       =   336
+   ClientWidth     =   8256
    Icon            =   "frmBTN.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   2760
-   ScaleWidth      =   8250
+   ScaleWidth      =   8256
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.CheckBox Check2 
       Caption         =   "Liberar  Botão para todos Usuários"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -97,39 +97,19 @@ Begin VB.Form frmBTN
       Top             =   360
       Width           =   1695
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   6360
-      TabIndex        =   13
-      Top             =   720
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmBTN.frx":058A
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton cmdClose 
       Height          =   435
       Left            =   6360
-      TabIndex        =   14
+      TabIndex        =   13
       Top             =   240
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmBTN.frx":0B24
+      _ExtentX        =   2667
+      _ExtentY        =   762
+      Picture         =   "frmBTN.frx":058A
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -140,14 +120,14 @@ Begin VB.Form frmBTN
    Begin VBCCR18.SpinBox indice 
       Height          =   495
       Left            =   3480
-      TabIndex        =   15
+      TabIndex        =   14
       Top             =   360
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   873
+      _ExtentX        =   1291
+      _ExtentY        =   868
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   9.75
+         Size            =   9.6
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -162,14 +142,14 @@ Begin VB.Form frmBTN
    Begin VBCCR18.SpinBox icone 
       Height          =   495
       Left            =   4560
-      TabIndex        =   16
+      TabIndex        =   15
       Top             =   360
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   873
+      _ExtentX        =   1291
+      _ExtentY        =   868
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   9.75
+         Size            =   9.6
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -180,11 +160,31 @@ Begin VB.Form frmBTN
       Max             =   999
       Value           =   1
    End
+   Begin VBCCR18.CommandButtonW encerrar 
+      Height          =   612
+      Left            =   6480
+      TabIndex        =   16
+      Top             =   960
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmBTN.frx":0B24
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
    Begin VB.Label Label1 
       Caption         =   "Nome do Botão"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -203,7 +203,7 @@ Begin VB.Form frmBTN
       Caption         =   "ToolTip => o que deve aparecer quando o mouse fica sobre o botão"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -223,7 +223,7 @@ Begin VB.Form frmBTN
       Caption         =   "Ícone"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -243,7 +243,7 @@ Begin VB.Form frmBTN
       Caption         =   "Índice"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -263,7 +263,7 @@ Begin VB.Form frmBTN
       Caption         =   "Controle"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -283,7 +283,7 @@ Begin VB.Form frmBTN
       Caption         =   "Formulario"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False

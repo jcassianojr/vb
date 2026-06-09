@@ -2,18 +2,18 @@ VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form FrmLstView 
    Caption         =   "Visualizador de LST"
    ClientHeight    =   7476
    ClientLeft      =   60
    ClientTop       =   456
-   ClientWidth     =   10368
+   ClientWidth     =   12012
    Icon            =   "FrmLstView.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7476
-   ScaleWidth      =   10368
+   ScaleWidth      =   12012
    StartUpPosition =   3  'Windows Default
    Begin VBCCR18.DTPicker DTPicker1 
       Height          =   375
@@ -607,6 +607,26 @@ Begin VB.Form FrmLstView
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR18.CommandButtonW retornar 
+      Height          =   612
+      Left            =   9960
+      TabIndex        =   31
+      Top             =   600
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmLstView.frx":5C2A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
 End
 Attribute VB_Name = "FrmLstView"
 Attribute VB_GlobalNameSpace = False
@@ -620,11 +640,11 @@ Dim cSUBWHERE As String
 Dim nSUBWHERE As Long
 
 Private Sub btnOpen_Click()
-  TxtExecutar.tEXT = OpenArqExt(Me, TxtExecutar.tEXT, "*", "Executarcom")
+  TxtExecutar.Text = OpenArqExt(Me, TxtExecutar.Text, "*", "Executarcom")
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = Txtcaminho.tEXT & Trim(Grid)
+  cARQRTF = Txtcaminho.Text & Trim(Grid)
   If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
   End If
@@ -639,7 +659,7 @@ Private Sub CmdExcluir_Click()
   Grid.Col = 0
   cARQUIVO = Grid
   If Len(cARQUIVO) > 0 Then
-    cARQUIVO = Txtcaminho.tEXT & Grid
+    cARQUIVO = Txtcaminho.Text & Grid
     If MDG("Excluir " & cARQUIVO) Then
       DeleteFile cARQUIVO  'Kill cARQUIVO
       Command1_Click
@@ -667,12 +687,12 @@ End Sub
 
 Private Sub cmdGeraDoc_Click()
   Dim cNOME As String
-  Dim cORIGEM As String
+  Dim cOrigem As String
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = Txtcaminho.tEXT & cNOME
+  cOrigem = Txtcaminho.Text & cNOME
   If IsExtensao(cNOME, "TXT") Or InStr(UCase(cNOME), ".LST") > 0 Then
-    txttodoc cORIGEM, TrocaExt(cORIGEM, "DOC")
+    txttodoc cOrigem, TrocaExt(cOrigem, "DOC")
     
     Command1_Click
   Else
@@ -692,13 +712,13 @@ Private Sub CmdIni_Click(Index As Integer)
   Case 3
     cCHAVE = "USO02"
   End Select
-  Txtcaminho.tEXT = PegPath(cCHAVE, UCase(cNOMEFOLHA), " ")
-  If Len(Trim(Txtcaminho.tEXT)) = 0 Then
-    Txtcaminho.tEXT = PegPath(cCHAVE, "CAMINHO", "C:\TEMP")
+  Txtcaminho.Text = PegPath(cCHAVE, UCase(cNOMEFOLHA), " ")
+  If Len(Trim(Txtcaminho.Text)) = 0 Then
+    Txtcaminho.Text = PegPath(cCHAVE, "CAMINHO", "C:\TEMP")
   End If
 
-  If InStr(Txtcaminho.tEXT, "%USUARIO%") > 0 Then
-    Txtcaminho.tEXT = Replace(Txtcaminho.tEXT, "%USUARIO%", cNOMEFOLHA)
+  If InStr(Txtcaminho.Text, "%USUARIO%") > 0 Then
+    Txtcaminho.Text = Replace(Txtcaminho.Text, "%USUARIO%", cNOMEFOLHA)
   End If
   Command1_Click
 End Sub
@@ -713,7 +733,7 @@ End Sub
 
 Private Sub CmdPrinterPort_Click()
   Grid.Col = 0
-  cARQRTF = Txtcaminho.tEXT & Trim(Grid)
+  cARQRTF = Txtcaminho.Text & Trim(Grid)
   If Right(UCase(cARQRTF), 4) = ".PSR" Or Right(UCase(cARQRTF), 4) = ".QRP" Then
     Alert "Somente LST/TXT"
     Exit Sub
@@ -751,7 +771,7 @@ End Sub
 Private Sub CmdSendMail_Click()
   Dim cARQUIVO As String
   Grid.Col = 0
-  cARQUIVO = Txtcaminho.tEXT & Trim(Grid)
+  cARQUIVO = Txtcaminho.Text & Trim(Grid)
   'servidor,porta,from,to,assunto,anexos,mensagem,enviar e sair
   ePASS01 = Array("", _
                   "", _
@@ -783,9 +803,9 @@ Private Sub Command1_Click()
   
   
 
-  cDRIVE = Left(Txtcaminho.tEXT, 1)
+  cDRIVE = Left(Txtcaminho.Text, 1)
   ChDrive (cDRIVE)
-  cDIRER = Mid(Txtcaminho.tEXT, 3)
+  cDIRER = Mid(Txtcaminho.Text, 3)
   ChDir cDIRER
 
   Grid.Rows = 1
@@ -799,13 +819,13 @@ Private Sub Command1_Click()
   Grid.ColWidth(0) = 3000
   Grid.ColWidth(1) = 2000
   Grid.Col = 0
- Grid.tEXT = "Arquivo"
+ Grid.Text = "Arquivo"
  Grid.Col = 1
- Grid.tEXT = "Data Hora"
-  If Right(Txtcaminho.tEXT, 1) <> "\" Then
-    Txtcaminho.tEXT = Txtcaminho.tEXT + "\"
+ Grid.Text = "Data Hora"
+  If Right(Txtcaminho.Text, 1) <> "\" Then
+    Txtcaminho.Text = Txtcaminho.Text + "\"
   End If
-  Set thisFolder = FS.GetFolder(Txtcaminho.tEXT)
+  Set thisFolder = FS.GetFolder(Txtcaminho.Text)
   Set allfiles = thisFolder.Files
   For Each thisFile In allfiles
     cFileName = UCase(thisFile.Name)
@@ -836,12 +856,12 @@ End Sub
 
 Private Sub Command10_Click()
   Dim cNOME As String
-  Dim cORIGEM As String
+  Dim cOrigem As String
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = Txtcaminho.tEXT & cNOME
+  cOrigem = Txtcaminho.Text & cNOME
   If IsExtensao(cNOME, "TXT") Or InStr(UCase(cNOME), ".LST") > 0 Then
-    txttortf cORIGEM, TrocaExt(cORIGEM, "RTF")
+    txttortf cOrigem, TrocaExt(cOrigem, "RTF")
     
     Command1_Click
   Else
@@ -850,17 +870,17 @@ Private Sub Command10_Click()
 End Sub
 
 Private Sub Command2_Click()
-  Dim cORIGEM As String
-  Dim cDESTINO As String
+  Dim cOrigem As String
+  Dim cDestino As String
   Dim cNOME As String
   Dim nRETU As Integer
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = Txtcaminho.tEXT & cNOME
-  cDESTINO = Txtcaminho.tEXT & NomeArq(cNOME, True) & ".txt"
-  nRETU = CopyFileWindowsWay(cORIGEM, cDESTINO)
+  cOrigem = Txtcaminho.Text & cNOME
+  cDestino = Txtcaminho.Text & NomeArq(cNOME, True) & ".txt"
+  nRETU = CopyFileWindowsWay(cOrigem, cDestino)
   If nRETU = 0 And MDG("Apagar arquivo lst") Then
-    DeleteFile cORIGEM  'Kill cORIGEM
+    DeleteFile cOrigem  'Kill cORIGEM
   End If
   Command1_Click
 End Sub
@@ -868,7 +888,7 @@ End Sub
 Private Sub Command3_Click()
 
 CommonDialogEx1.ShowFolder
-Txtcaminho.tEXT = FixPath(CommonDialogEx1.FolderName)
+Txtcaminho.Text = FixPath(CommonDialogEx1.FolderName)
 'relendo os arquivos da pasta escolhida
 Command1_Click
 End Sub
@@ -876,18 +896,18 @@ End Sub
 Private Sub Command4_Click()
   Dim cNOME As String
   Grid.Col = 0
-  cNOME = Txtcaminho.tEXT & Trim(Grid)
+  cNOME = Txtcaminho.Text & Trim(Grid)
   ShellEx cNOME, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
 End Sub
 
 Private Sub Command5_Click()
   Dim cNOME As String
-  Dim cORIGEM As String
+  Dim cOrigem As String
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = Txtcaminho.tEXT & cNOME
+  cOrigem = Txtcaminho.Text & cNOME
   If IsExtensao(cNOME, "TXT") Or InStr(UCase(cNOME), ".LST") > 0 Then
-    txttohtml cORIGEM, TrocaExt(cORIGEM, "htm")
+    txttohtml cOrigem, TrocaExt(cOrigem, "htm")
     Command1_Click
   Else
     Alert ("Nao e TXT ou Lst")
@@ -899,7 +919,7 @@ Private Sub Command6_Click()
   Grid.Col = 0
   cNOME = Trim(Grid)
   If IsExtensao(cNOME, "TXT") Or InStr(UCase(cNOME), ".LST") > 0 Then
-    ePASS01 = Txtcaminho.tEXT & cNOME
+    ePASS01 = Txtcaminho.Text & cNOME
     formConvertToPDF.Show vbModal, Me
     Command1_Click
   Else
@@ -922,18 +942,18 @@ End Sub
 
 Private Sub Command9_Click()
   Dim cNOME As String
-  Dim cORIGEM As String
-  Dim cDESTINO As String
+  Dim cOrigem As String
+  Dim cDestino As String
   Grid.Col = 0
   cNOME = Trim(Grid)
-  cORIGEM = Txtcaminho.tEXT & cNOME
+  cOrigem = Txtcaminho.Text & cNOME
   If IsExtensao(cNOME, "ZIP") Then
     Alert ("Ja e um zip")
   Else
-    cDESTINO = TrocaExt(cORIGEM, "ZIP")
+    cDestino = TrocaExt(cOrigem, "ZIP")
     With New cZipArchive
-      .AddFile cORIGEM
-       .CompressArchive cDESTINO
+      .AddFile cOrigem
+       .CompressArchive cDestino
     End With
     Command1_Click
   End If
@@ -948,7 +968,7 @@ Private Sub Form_Load()
   aORDES = Array("Relatório", "Data")
   cSUBWHERE = ""
   cNOMEFOLHA = NetworkUserName()
-  TxtExecutar.tEXT = PegPath("LSTVIEW", "VIEW", "C:\plugin\lstview\log0290.exe")
+  TxtExecutar.Text = PegPath("LSTVIEW", "VIEW", "C:\plugin\lstview\log0290.exe")
   CmdIni_Click 0
 End Sub
 
@@ -966,7 +986,7 @@ Private Sub Grid_DblClick()
   Grid.Col = 0
   cNOME = Trim(Grid)
   cCOMP = UCase(Trim(Grid))
-  cARQRTF = Txtcaminho.tEXT & cNOME
+  cARQRTF = Txtcaminho.Text & cNOME
   
   cEXTENSAO = EXTENSAO(cARQRTF)
   
@@ -974,20 +994,20 @@ Private Sub Grid_DblClick()
          Case "ZIP"
               Alert ("Sem Visualizacao para Zip")
          Case "PSR"
-              cARQ = "rptview " & Txtcaminho.tEXT & cNOME
+              cARQ = "rptview " & Txtcaminho.Text & cNOME
               shell cARQ, vbMaximizedFocus
          Case "QRP"
-              cARQ = "qrpview " & Txtcaminho.tEXT & cNOME
+              cARQ = "qrpview " & Txtcaminho.Text & cNOME
               shell cARQ, vbMaximizedFocus
          Case "PDF"
-              cARQ = Txtcaminho.tEXT & cNOME
+              cARQ = Txtcaminho.Text & cNOME
               ShellEx cARQ, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
          Case "HTM"
               If MDG("Usar Interno") Then
                  ePASS03 = 3
                  PrintPreview1.ShowPreview
               Else
-                cARQ = Txtcaminho.tEXT & cNOME
+                cARQ = Txtcaminho.Text & cNOME
                 ShellEx cARQ, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
               End If
           Case "RTF"
@@ -1004,7 +1024,7 @@ Private Sub Grid_DblClick()
                  ePASS03 = 1
                  PrintPreview1.ShowPreview
               Else
-                cARQ = Trim(TxtExecutar.tEXT) & " " & Txtcaminho.tEXT & cNOME
+                cARQ = Trim(TxtExecutar.Text) & " " & Txtcaminho.Text & cNOME
                 shell cARQ, vbMaximizedFocus
               End If
   End Select
@@ -1033,13 +1053,13 @@ Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
 End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
-  Dim STRBUFFER As String
+  Dim strBuffer As String
   fileFile = FreeFile
   Open cARQRTF For Input As #fileFile
   Do While Not EOF(fileFile)
     'read line
-    Input #fileFile, STRBUFFER
-    Printer.Print STRBUFFER
+    Input #fileFile, strBuffer
+    Printer.Print strBuffer
   Loop
   Close fileFile
 End Sub
@@ -1058,6 +1078,11 @@ End Sub
 Public Sub MyPrintingRTF()
   PrinterEx.PrintRichTextBox RichTextBox1
 End Sub
+
+Private Sub retornar_Click()
+ Unload Me
+End Sub
+
 Private Sub Txtcaminho_LostFocus()
   Command1_Click
 End Sub

@@ -1,25 +1,26 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form FrmFiltro 
    Caption         =   "Filtro"
-   ClientHeight    =   5895
+   ClientHeight    =   5892
    ClientLeft      =   60
-   ClientTop       =   345
+   ClientTop       =   348
    ClientWidth     =   9360
    Icon            =   "FrmFiltro.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5895
+   ScaleHeight     =   5892
    ScaleWidth      =   9360
    StartUpPosition =   3  'Windows Default
    Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   2415
       Left            =   120
-      TabIndex        =   33
+      TabIndex        =   32
       Top             =   3360
       Width           =   6495
-      _ExtentX        =   11456
-      _ExtentY        =   4260
+      _ExtentX        =   11451
+      _ExtentY        =   4255
    End
    Begin XPControls.XPButton oper 
       Height          =   375
@@ -33,7 +34,7 @@ Begin VB.Form FrmFiltro
       Caption         =   ">="
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -53,7 +54,7 @@ Begin VB.Form FrmFiltro
       Caption         =   "LIKE"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -84,7 +85,7 @@ Begin VB.Form FrmFiltro
       Caption         =   "OU"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -104,7 +105,7 @@ Begin VB.Form FrmFiltro
       Caption         =   "E"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -135,7 +136,7 @@ Begin VB.Form FrmFiltro
       Caption         =   "<>"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -155,7 +156,7 @@ Begin VB.Form FrmFiltro
       Caption         =   "="
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -175,7 +176,7 @@ Begin VB.Form FrmFiltro
       Caption         =   "<"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -195,7 +196,7 @@ Begin VB.Form FrmFiltro
       Caption         =   ">"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -215,7 +216,7 @@ Begin VB.Form FrmFiltro
       Caption         =   "<="
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -348,33 +349,13 @@ Begin VB.Form FrmFiltro
       TabIndex        =   29
       Top             =   4200
       Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   661
+      _ExtentX        =   2561
+      _ExtentY        =   656
       Picture         =   "FrmFiltro.frx":058A
       Caption         =   "Abrir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   7680
-      TabIndex        =   30
-      Top             =   120
-      Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   767
-      Picture         =   "FrmFiltro.frx":0B24
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -385,16 +366,16 @@ Begin VB.Form FrmFiltro
    Begin XPControls.XPButton ok 
       Height          =   435
       Left            =   7560
-      TabIndex        =   31
+      TabIndex        =   30
       Top             =   1920
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "FrmFiltro.frx":10BE
+      _ExtentX        =   2667
+      _ExtentY        =   762
+      Picture         =   "FrmFiltro.frx":0B24
       Caption         =   "Confirmar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -405,23 +386,43 @@ Begin VB.Form FrmFiltro
    Begin XPControls.XPButton CmdZerar 
       Height          =   435
       Left            =   7680
-      TabIndex        =   32
+      TabIndex        =   31
       TabStop         =   0   'False
       Top             =   960
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "FrmFiltro.frx":1658
+      _ExtentX        =   2667
+      _ExtentY        =   762
+      Picture         =   "FrmFiltro.frx":10BE
       Caption         =   "Apagar Filtro"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW encerrar 
+      Height          =   612
+      Left            =   8040
+      TabIndex        =   33
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmFiltro.frx":1458
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label Label6 
       Caption         =   "Lista Use (;) Ex: SP;RJ 0;20"
@@ -557,7 +558,7 @@ Private Sub CmdGera_Click()
   DB.Open cCAM
 
 
-  cSQL = tabela.text
+  cSQL = tabela.Text
   Grid.Clear
 
 
@@ -569,19 +570,19 @@ Private Sub CmdGera_Click()
     .Rows = 1
     .Row = 0
     .Col = 0
-    .text = "Campo"
+    .Text = "Campo"
     .ColWidth(0) = 2000
 
     .Col = 1
-    .text = "Tipo"
+    .Text = "Tipo"
     .ColWidth(1) = 400
 
     .Col = 2
-    .text = "Tipo"
+    .Text = "Tipo"
     .ColWidth(2) = 1400
 
     .Col = 3
-    .text = "Tamanho"
+    .Text = "Tamanho"
     .ColWidth(3) = 800
 
 
@@ -590,7 +591,7 @@ Private Sub CmdGera_Click()
 
 
   'Adicionar campos das tabelas
-  Set RstCampos = DB.OpenSchema(adSchemaColumns, Array(Empty, Empty, tabela.text, Empty))
+  Set RstCampos = DB.OpenSchema(adSchemaColumns, Array(Empty, Empty, tabela.Text, Empty))
   Do While Not RstCampos.EOF
     STRCAMPO = RstCampos!Column_Name
     strtipo = FixStr((TipoDados(RstCampos!DATA_TYPE)))
@@ -611,7 +612,7 @@ Private Sub CmdGera_Click()
   Exit Sub
 
 
-trataerro:
+TrataErro:
   Select Case Err.Number
   Case -2147217887
     GoTo monta02
@@ -641,7 +642,7 @@ Private Sub CmdSair_Click()
 End Sub
 
 Private Sub CmdZerar_Click()
-  FILTRO.text = ""
+  FILTRO.Text = ""
 End Sub
 
 Private Sub Encerrar_Click()
@@ -651,7 +652,7 @@ End Sub
 
 Private Sub Form_Load()
 ''Dim nPOS As Integer
-  On Error GoTo trataerro
+  On Error GoTo TrataErro
 
   'CentralizaJanela Me
 
@@ -692,7 +693,7 @@ Private Sub Form_Load()
   End If
 
   Exit Sub
-trataerro:
+TrataErro:
   Select Case Err.Number
   Case Else
     SayErro "Filtro Load"
@@ -709,7 +710,7 @@ Private Sub grid_Click()
   ValINI.Enabled = True
   ValFim.Enabled = True
   ok.Enabled = True
-  Encerrar.Enabled = False
+  encerrar.Enabled = False
   ValINI.SetFocus
   Vazio.Enabled = True
   TIPOFIL(3).Enabled = True
@@ -792,7 +793,7 @@ Private Sub ok_ClickX(lZERA As Boolean)
   ValINI.Enabled = False
   ValFim.Enabled = False
   ok.Enabled = False
-  Encerrar.Enabled = True
+  encerrar.Enabled = True
   Vazio.Enabled = False
   TIPOFIL(3).Enabled = False
   TIPOFIL(2).Enabled = False
@@ -816,7 +817,7 @@ Private Sub ok_ClickX(lZERA As Boolean)
   cDIZ = "{" & Trim(UCase(CStr(Alias))) & "." & Trim(UCase(campo)) & "}"
 
   cTIPDIZ = " AND "
-  If cTIPO.text = "OU" Then cTIPDIZ = " OR "
+  If cTIPO.Text = "OU" Then cTIPDIZ = " OR "
 
   Select Case camtip
   Case "N"
@@ -905,11 +906,15 @@ Private Sub oper_Click(Index As Integer)
       Exit Sub
     End If
   End If
-  coper.text = oper(Index).Caption
+  coper.Text = oper(Index).Caption
+End Sub
+
+Private Sub retornar_Click()
+ Unload Me
 End Sub
 
 Private Sub TIPOFIL_Click(Index As Integer)
-  cTIPO.text = TIPOFIL(Index).Caption
+  cTIPO.Text = TIPOFIL(Index).Caption
 End Sub
 
 Private Sub ValFim_GotFocus()

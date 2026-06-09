@@ -1,14 +1,14 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form FrmPicturePrinter 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Print a StdPicture centered within margins on a selected printer, paper, resolution, and orientation"
-   ClientHeight    =   6975
-   ClientLeft      =   45
-   ClientTop       =   345
-   ClientWidth     =   11250
+   ClientHeight    =   6972
+   ClientLeft      =   48
+   ClientTop       =   348
+   ClientWidth     =   11244
    BeginProperty Font 
       Name            =   "Tahoma"
       Size            =   9
@@ -20,17 +20,17 @@ Begin VB.Form FrmPicturePrinter
    EndProperty
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   6975
-   ScaleWidth      =   11250
+   ScaleHeight     =   6972
+   ScaleWidth      =   11244
    StartUpPosition =   2  'CenterScreen
    Begin VB.PictureBox Picture1 
       AutoRedraw      =   -1  'True
       Height          =   495
       Left            =   10200
-      ScaleHeight     =   435
-      ScaleWidth      =   675
-      TabIndex        =   13
-      Top             =   2280
+      ScaleHeight     =   444
+      ScaleWidth      =   684
+      TabIndex        =   12
+      Top             =   2880
       Visible         =   0   'False
       Width           =   735
    End
@@ -38,17 +38,17 @@ Begin VB.Form FrmPicturePrinter
       AutoRedraw      =   -1  'True
       Height          =   3735
       Left            =   120
-      ScaleHeight     =   3675
-      ScaleWidth      =   4875
-      TabIndex        =   12
+      ScaleHeight     =   3684
+      ScaleWidth      =   4884
+      TabIndex        =   11
       Top             =   2880
       Width           =   4935
    End
    Begin vbExtra.CommonDialogEx CommonDialogEx1 
       Left            =   9600
-      Top             =   2280
-      _ExtentX        =   900
-      _ExtentY        =   900
+      Top             =   2880
+      _ExtentX        =   720
+      _ExtentY        =   720
       MaxFileSize     =   255
       FontName        =   ""
    End
@@ -75,7 +75,7 @@ Begin VB.Form FrmPicturePrinter
    End
    Begin VB.ListBox lstPrinters 
       CausesValidation=   0   'False
-      Height          =   2370
+      Height          =   2208
       Left            =   60
       TabIndex        =   0
       Top             =   360
@@ -84,7 +84,7 @@ Begin VB.Form FrmPicturePrinter
    Begin VB.ListBox lstPapers 
       CausesValidation=   0   'False
       Enabled         =   0   'False
-      Height          =   2370
+      Height          =   2208
       Left            =   4320
       TabIndex        =   1
       Top             =   360
@@ -93,7 +93,7 @@ Begin VB.Form FrmPicturePrinter
    Begin VB.ListBox lstResolutions 
       CausesValidation=   0   'False
       Enabled         =   0   'False
-      Height          =   2370
+      Height          =   2208
       Left            =   7200
       TabIndex        =   2
       Top             =   360
@@ -106,34 +106,13 @@ Begin VB.Form FrmPicturePrinter
       TabStop         =   0   'False
       Top             =   1200
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "FrmPicturePrinter.frx":0000
       Caption         =   "Imprimir "
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   9480
-      TabIndex        =   10
-      TabStop         =   0   'False
-      Top             =   1680
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "FrmPicturePrinter.frx":059A
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -144,14 +123,34 @@ Begin VB.Form FrmPicturePrinter
    Begin VBCCR18.RichTextBox RichTextbox1 
       Height          =   3615
       Left            =   240
-      TabIndex        =   11
+      TabIndex        =   10
       Top             =   2880
       Width           =   9135
-      _ExtentX        =   16113
-      _ExtentY        =   6376
+      _ExtentX        =   16108
+      _ExtentY        =   6371
       MultiLine       =   -1  'True
       ScrollBars      =   3
-      TextRTF         =   "FrmPicturePrinter.frx":0B34
+      TextRTF         =   "FrmPicturePrinter.frx":059A
+   End
+   Begin VBCCR18.CommandButtonW encerrar 
+      Height          =   612
+      Left            =   9720
+      TabIndex        =   13
+      Top             =   1680
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmPicturePrinter.frx":0700
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label Label5 
       Caption         =   "Orientacao"
@@ -263,9 +262,9 @@ Private Sub PRINTIMG()
                                                                      'value DPI value, just
                                                                      'use X here.
         If optOrientation(1).Value Then
-            .Orientation = vbPRORLandscape
+            .orientation = vbPRORLandscape
         Else
-            .Orientation = vbPRORPortrait
+            .orientation = vbPRORPortrait
         End If
         
         'Scale to paper, using 0.5" margins all around.  Could also crop
@@ -305,7 +304,7 @@ Private Sub cmdPrint_Click()
 End Sub
 Private Sub PrintTXT()
 Dim fileFile As Integer
-Dim STRBUFFER As String
+Dim strBuffer As String
   If cEXTENSAO <> "ZPL" Then 'zpl ja tem informacao papel fontes etc...
    CommonDialogEx1.Flags = cdlCFPrinterFonts
    CommonDialogEx1.ShowFont
@@ -317,9 +316,9 @@ Dim STRBUFFER As String
 
     
     If optOrientation(1).Value Then
-       Printer.Orientation = vbPRORLandscape 'PrinterObjectConstants.vbPRORPortrait
+       Printer.orientation = vbPRORLandscape 'PrinterObjectConstants.vbPRORPortrait
     Else
-      Printer.Orientation = vbPRORPortrait
+      Printer.orientation = vbPRORPortrait
     End If
     Printer.PaperSize = intPaperIds(lstPapers.ListIndex) 'PrinterObjectConstants.vbPRPSA4
     Printer.ColorMode = PrinterObjectConstants.vbPRCMMonochrome
@@ -329,8 +328,8 @@ Dim STRBUFFER As String
   Open cARQRTF For Input As #fileFile
   Do While Not EOF(fileFile)
     'read line
-    Input #fileFile, STRBUFFER
-    Printer.Print STRBUFFER
+    Input #fileFile, strBuffer
+    Printer.Print strBuffer
   Loop
   Close fileFile
   Printer.EndDoc

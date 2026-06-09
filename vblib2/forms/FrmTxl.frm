@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form FrmTxl 
    ClientHeight    =   7536
@@ -16,7 +16,7 @@ Begin VB.Form FrmTxl
    Begin VBFLXGRD18.VBFlexGrid Listview1 
       Height          =   1335
       Left            =   120
-      TabIndex        =   31
+      TabIndex        =   30
       Top             =   6000
       Width           =   9855
       _ExtentX        =   17378
@@ -31,7 +31,7 @@ Begin VB.Form FrmTxl
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   10080
-      TabIndex        =   29
+      TabIndex        =   28
       TabStop         =   0   'False
       Top             =   2280
       Visible         =   0   'False
@@ -104,7 +104,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.SpinBox LptPort 
          Height          =   375
          Left            =   1080
-         TabIndex        =   32
+         TabIndex        =   31
          Top             =   240
          Width           =   735
          _ExtentX        =   1291
@@ -125,7 +125,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.SpinBox comport 
          Height          =   375
          Left            =   3240
-         TabIndex        =   33
+         TabIndex        =   32
          Top             =   240
          Width           =   735
          _ExtentX        =   1291
@@ -229,35 +229,15 @@ Begin VB.Form FrmTxl
             Strikethrough   =   0   'False
          EndProperty
       End
-      Begin XPControls.XPButton Encerrar 
-         Height          =   675
-         Left            =   5880
-         TabIndex        =   25
-         Top             =   240
-         Width           =   1215
-         _ExtentX        =   2138
-         _ExtentY        =   1185
-         Picture         =   "FrmTxl.frx":17BE
-         Caption         =   "Retornar"
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   7.8
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-      End
       Begin XPControls.XPButton XPButton1 
          Height          =   675
          Left            =   3120
-         TabIndex        =   30
+         TabIndex        =   29
          Top             =   240
          Width           =   1275
          _ExtentX        =   2244
          _ExtentY        =   1185
-         Picture         =   "FrmTxl.frx":1D58
+         Picture         =   "FrmTxl.frx":17BE
          Caption         =   "Imprimir (Impressora)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -268,6 +248,26 @@ Begin VB.Form FrmTxl
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+      End
+      Begin VBCCR18.CommandButtonW Encerrar 
+         Height          =   612
+         Left            =   5880
+         TabIndex        =   34
+         Top             =   240
+         Width           =   1212
+         _ExtentX        =   2138
+         _ExtentY        =   1080
+         Appearance      =   0
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         ImageListAlignment=   1
+         Caption         =   "Retornar"
+         Alignment       =   0
+         VerticalAlignment=   0
+         Picture         =   "FrmTxl.frx":1D58
+         PictureAndCaption=   -1  'True
+         WordWrap        =   0   'False
+         Style           =   1
       End
    End
    Begin VB.Frame Frame2 
@@ -370,7 +370,7 @@ Begin VB.Form FrmTxl
          Height          =   372
          Index           =   4
          Left            =   3240
-         TabIndex        =   34
+         TabIndex        =   33
          TabStop         =   0   'False
          Top             =   360
          Width           =   792
@@ -459,7 +459,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdEditar 
       Height          =   315
       Left            =   960
-      TabIndex        =   27
+      TabIndex        =   26
       TabStop         =   0   'False
       Top             =   2280
       Width           =   975
@@ -480,7 +480,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   315
       Left            =   2040
-      TabIndex        =   26
+      TabIndex        =   25
       TabStop         =   0   'False
       Top             =   2280
       Width           =   1335
@@ -501,7 +501,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdShell 
       Height          =   315
       Left            =   3480
-      TabIndex        =   28
+      TabIndex        =   27
       Top             =   2280
       Width           =   375
       _ExtentX        =   656
@@ -557,7 +557,7 @@ Dim oTXT As New Criatxt
 Dim nQTDELAY As Long
 Dim nLINHAS As Long
 Dim nCOLUNAS As Long
-Dim cDESTINO As String
+Dim cDestino As String
 Dim aLAY As Variant
 Dim oCONN As New ADODB.Connection
 Dim oRS As New ADODB.Recordset
@@ -578,16 +578,16 @@ Private Sub gerar(ByVal cOPE As String)
 
   oTXT.nCOL = nCOLUNAS
   oTXT.nROW = nLINHAS
-  oTXT.Destino = cDESTINO
+  oTXT.Destino = cDestino
   If cOPE = "A" Or cOPE = "P" Then
     oTXT.Destino = "ARQ"
     oTXT.arquivo = TxtArquivo
   End If
-  If cDESTINO = "ARQ" Then
+  If cDestino = "ARQ" Then
     oTXT.arquivo = TxtArquivo
   End If
-  If cDESTINO = "IMPNET" Then
-    oTXT.caminho = TxtCaminho
+  If cDestino = "IMPNET" Then
+    oTXT.Caminho = TxtCaminho
   End If
   If cSETUP <> "" Then
     oTXT.impsetup cSETUP
@@ -634,7 +634,7 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.Text
   If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
   End If
@@ -645,8 +645,8 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.tEXT, "RTF") Or larqtxt Then
-    cARQRTF = TxtArquivo.tEXT
+  If IsExtensao(TxtArquivo.Text, "RTF") Or larqtxt Then
+    cARQRTF = TxtArquivo.Text
     FrmRtfView.Show vbModal, Me
   End If
 End Sub
@@ -684,7 +684,7 @@ Private Sub cmdimp_Click()
     imptxt  'Aqui e direct print com1,COM2.. lpt1,LPT2.. no pode ser usado preview aqui
     Exit Sub
   End If
-  If IsExtensao(TxtArquivo.tEXT, "PDF") Or IsExtensao(TxtArquivo.tEXT, "HTML") Or IsExtensao(TxtArquivo.tEXT, "RTF") Then
+  If IsExtensao(TxtArquivo.Text, "PDF") Or IsExtensao(TxtArquivo.Text, "HTML") Or IsExtensao(TxtArquivo.Text, "RTF") Then
     CmdVisua_Click
     Exit Sub
   End If
@@ -693,25 +693,25 @@ End Sub
 Private Sub imptxt()  'Aqui e direct print com1,COM2.. lpt1,LPT2.. no pode ser usado preview aqui
   Dim cLINHA As String
   Dim fileFile As Integer
-  Dim STRBUFFER As String
+  Dim strBuffer As String
 
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
   cLINHA = ""
   fileFile = FreeFile + 1
-  oTXT.Destino = cDESTINO
+  oTXT.Destino = cDestino
   oTXT.ABRIR
-  If cDESTINO = "IMPNET" Then
-    oTXT.caminho = TxtCaminho
+  If cDestino = "IMPNET" Then
+    oTXT.Caminho = TxtCaminho
   End If
   If cSETUP <> "" Then
     oTXT.impsetup cSETUP
   End If
   Open cARQRTF For Input As #fileFile
   Do While Not EOF(fileFile)
-    Input #fileFile, STRBUFFER
-    cLINHA = STRBUFFER
+    Input #fileFile, strBuffer
+    cLINHA = strBuffer
     oTXT.implinha (cLINHA)
   Loop
   oTXT.fechar
@@ -736,7 +736,7 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.tEXT
+  cARQRTF = TxtArquivo.Text
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -765,7 +765,7 @@ Private Sub CmdVisua_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.tEXT = ""
+    RichTextBox1.Text = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -803,7 +803,7 @@ Public Sub MyPrintingRTF()
 End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
-  Dim STRBUFFER As String
+  Dim strBuffer As String
   'If Not FileConnExist(cARQRTF, True) Then 'ja checado na cmdvisual click
   '    Exit Sub
   ' End If
@@ -811,8 +811,8 @@ Public Sub MyPrintingTXT()
   Open cARQRTF For Input As #fileFile
   Do While Not EOF(fileFile)
     'read line
-    Input #fileFile, STRBUFFER
-    Printer.Print STRBUFFER
+    Input #fileFile, strBuffer
+    Printer.Print strBuffer
   Loop
   Close fileFile
 End Sub
@@ -858,21 +858,21 @@ Private Sub Form_Load()
     Next x
     nCOLUNAS = PegINIVAL(cARQINI, "CONFIGURACAO", "COLUNAS", 80)
     nLINHAS = PegINIVAL(cARQINI, "CONFIGURACAO", "LINHAS", 60)
-    cDESTINO = PegINIVAL(cARQINI, "CONFIGURACAO", "DESTINO", "ARQ")
+    cDestino = PegINIVAL(cARQINI, "CONFIGURACAO", "DESTINO", "ARQ")
     TxtCaminho = PegINIVAL(cARQINI, "CONFIGURACAO", "CAMINHO", "LPT1")
 
-    If Mid(cDESTINO, 1, 3) = "LPT" Then
+    If Mid(cDestino, 1, 3) = "LPT" Then
        OptDestino(0).Value = True
-       LptPort.Value = Mid(cDESTINO, 4)
+       LptPort.Value = Mid(cDestino, 4)
     End If
     
-    If Mid(cDESTINO, 1, 3) = "COM" Then
+    If Mid(cDestino, 1, 3) = "COM" Then
        OptDestino(3).Value = True
-       comport.Value = Mid(cDESTINO, 4)
+       comport.Value = Mid(cDestino, 4)
     End If
     
 
-    Select Case cDESTINO
+    Select Case cDestino
         Case "ARQ", "ARQUIVO"
           OptDestino(5).Value = True
         Case "PRINTER"
@@ -931,7 +931,7 @@ Private Sub Form_Load()
     aRELCFG(11) = False
     CmdOrdem.Visible = False
     TxtArquivo.Locked = True
-    cDESTINO = "LPT1"
+    cDestino = "LPT1"
     OptDestino(5).Enabled = False
     OptDestino(0).Value = True
   End If
@@ -994,18 +994,18 @@ End Sub
 Private Sub OptDestino_Click(Index As Integer)
   TxtCaminho.Enabled = False
   If Index = 0 Then
-     cDESTINO = "LPT" & LptPort.Value
+     cDestino = "LPT" & LptPort.Value
   End If
   If Index = 3 Then
-     cDESTINO = "COM" & comport.Value
+     cDestino = "COM" & comport.Value
   End If
   Select Case Index
       Case 5
-        cDESTINO = "ARQ"
+        cDestino = "ARQ"
       Case 6
-        cDESTINO = "PRINTER"
+        cDestino = "PRINTER"
       Case 7
-        cDESTINO = "IMPNET"
+        cDestino = "IMPNET"
         TxtCaminho.Enabled = True
   End Select
 End Sub
@@ -1034,7 +1034,7 @@ Private Sub Salvar_Click(Index As Integer)
     End Select
 
     sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
+    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
 
     If InStr(cARQUIVO, ".") > 0 Then
       cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO

@@ -1,12 +1,13 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{2DA70529-3366-414A-B408-46083BCD481B}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escbtnusr 
    Caption         =   "Liberação Usuario"
    ClientHeight    =   5040
    ClientLeft      =   60
-   ClientTop       =   345
+   ClientTop       =   348
    ClientWidth     =   9000
    Icon            =   "escbtnusr.frx":0000
    LinkTopic       =   "Form1"
@@ -16,54 +17,34 @@ Begin VB.Form escbtnusr
    Begin VBFLXGRD18.VBFlexGrid gridrptusr 
       Height          =   4335
       Left            =   5280
-      TabIndex        =   7
+      TabIndex        =   6
       Top             =   480
       Width           =   3495
-      _ExtentX        =   6165
-      _ExtentY        =   7646
+      _ExtentX        =   6160
+      _ExtentY        =   7641
    End
    Begin VBFLXGRD18.VBFlexGrid gridusr 
       Height          =   4455
       Left            =   120
-      TabIndex        =   6
+      TabIndex        =   5
       Top             =   480
       Width           =   3375
-      _ExtentX        =   5953
-      _ExtentY        =   7858
+      _ExtentX        =   5948
+      _ExtentY        =   7853
    End
    Begin XPControls.XPButton incusrrpt 
       Height          =   375
       Left            =   3720
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   480
       Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   661
+      _ExtentX        =   2561
+      _ExtentY        =   656
       Picture         =   "escbtnusr.frx":038A
       Caption         =   "incluir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton cmdSair 
-      Height          =   435
-      Left            =   3720
-      TabIndex        =   2
-      Top             =   4440
-      Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   767
-      Picture         =   "escbtnusr.frx":0724
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -74,16 +55,16 @@ Begin VB.Form escbtnusr
    Begin XPControls.XPButton excrptusr 
       Height          =   375
       Left            =   3720
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   960
       Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   661
-      Picture         =   "escbtnusr.frx":0CBE
+      _ExtentX        =   2561
+      _ExtentY        =   656
+      Picture         =   "escbtnusr.frx":0724
       Caption         =   "excluir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -92,13 +73,13 @@ Begin VB.Form escbtnusr
       EndProperty
    End
    Begin vbExtra.FlexFn FlexFn1 
-      Height          =   405
+      Height          =   396
       Left            =   3600
-      TabIndex        =   5
+      TabIndex        =   4
       Top             =   0
-      Width           =   1725
-      _ExtentX        =   3043
-      _ExtentY        =   714
+      Width           =   1680
+      _ExtentX        =   2963
+      _ExtentY        =   699
       PageNumbersFormat=   ""
       PageNumbersFormatIndex=   0
       BeginProperty PageNumbersFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -111,11 +92,31 @@ Begin VB.Form escbtnusr
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR18.CommandButtonW cmdsair 
+      Height          =   492
+      Left            =   3720
+      TabIndex        =   7
+      Top             =   1440
+      Width           =   1212
+      _ExtentX        =   2138
+      _ExtentY        =   868
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "escbtnusr.frx":0ABE
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
    Begin VB.Label Label2 
       Caption         =   "Usuario Liberados"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   13.5
+         Size            =   13.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -132,7 +133,7 @@ Begin VB.Form escbtnusr
       Caption         =   "Usuario Disponiveis"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   13.5
+         Size            =   13.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -153,7 +154,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Sub CmdSair_Click()
+Private Sub cmdsair_Click()
 
   Unload Me
 
@@ -202,10 +203,10 @@ Private Sub filrptusr()
     .Rows = 1
     .Row = 0
     .Col = 0
-    .tEXT = "ID"
+    .Text = "ID"
     .ColWidth(0) = 500
     .Col = 1
-    .tEXT = "Nome"
+    .Text = "Nome"
     .ColWidth(1) = 2000
     If Not daors2.EOF Then
       daors2.MoveFirst

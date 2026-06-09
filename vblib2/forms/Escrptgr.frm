@@ -1,17 +1,17 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escRPTGRP 
    Caption         =   "Escolha o grupo de Relatorio"
-   ClientHeight    =   6135
-   ClientLeft      =   165
-   ClientTop       =   450
-   ClientWidth     =   9345
+   ClientHeight    =   6132
+   ClientLeft      =   168
+   ClientTop       =   456
+   ClientWidth     =   9348
    Icon            =   "Escrptgr.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6135
-   ScaleWidth      =   9345
+   ScaleHeight     =   6132
+   ScaleWidth      =   9348
    StartUpPosition =   2  'CenterScreen
    Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5415
@@ -19,17 +19,17 @@ Begin VB.Form escRPTGRP
       TabIndex        =   2
       Top             =   480
       Width           =   7575
-      _ExtentX        =   13361
-      _ExtentY        =   9551
+      _ExtentX        =   13356
+      _ExtentY        =   9546
    End
    Begin vbExtra.FlexFn FlexFn1 
-      Height          =   405
+      Height          =   396
       Left            =   120
       TabIndex        =   1
       Top             =   0
-      Width           =   1725
-      _ExtentX        =   3043
-      _ExtentY        =   714
+      Width           =   1680
+      _ExtentX        =   2963
+      _ExtentY        =   699
       PageNumbersFormat=   ""
       PageNumbersFormatIndex=   0
       BeginProperty PageNumbersFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -49,9 +49,9 @@ Begin VB.Form escRPTGRP
       TabIndex        =   0
       Top             =   0
       Width           =   1470
-      _ExtentX        =   2593
-      _ExtentY        =   10821
-      ButtonWidth     =   609
+      _ExtentX        =   2604
+      _ExtentY        =   10816
+      ButtonWidth     =   614
       ButtonHeight    =   953
       Appearance      =   1
       TextAlignment   =   1
@@ -70,7 +70,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    cGRUPO = FixStr(Grid.tEXT)
+    cGRUPO = FixStr(Grid.Text)
     '******************************************************************
     'RPTGRP
     sSQL = "select * from RPTGRP WHERE GRP='" & cGRUPO & "'"
@@ -96,7 +96,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    zgrp = Grid.tEXT
+    zgrp = Grid.Text
     frmRPTGRP.Show vbModal
     FilRelat
   End If
@@ -105,7 +105,7 @@ End Sub
 Private Sub Escolher_Click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    zgrp = Grid.tEXT
+    zgrp = Grid.Text
     escRPT.Show vbModal, Me
   End If
 End Sub
