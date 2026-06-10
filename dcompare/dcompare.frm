@@ -6,87 +6,71 @@ Begin VB.Form dCompare
    ClientHeight    =   7908
    ClientLeft      =   60
    ClientTop       =   348
-   ClientWidth     =   13248
+   ClientWidth     =   10428
    Icon            =   "dcompare.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7908
-   ScaleWidth      =   13248
+   ScaleWidth      =   10428
    StartUpPosition =   3  'Windows Default
    Begin VB.CommandButton cmdCompareMdbAccdb 
       Caption         =   "CompareMdbAccdb"
       Height          =   375
-      Left            =   4200
-      TabIndex        =   22
-      Top             =   3960
+      Left            =   5160
+      TabIndex        =   18
+      Top             =   3720
       Width           =   1812
    End
    Begin VB.CommandButton cmdCompareMdbSqlite 
       Caption         =   "CompareMdbSqlite"
       Height          =   375
-      Left            =   2280
-      TabIndex        =   21
-      Top             =   3960
+      Left            =   3240
+      TabIndex        =   17
+      Top             =   3720
       Width           =   1812
    End
    Begin VB.CheckBox CheckEfetua 
       Caption         =   "Efetua  correcao"
       Height          =   252
       Left            =   6720
-      TabIndex        =   20
+      TabIndex        =   16
       Top             =   1680
       Width           =   1572
-   End
-   Begin VB.CommandButton CmdEscdir 
-      Caption         =   "..."
-      Height          =   372
-      Left            =   6360
-      TabIndex        =   19
-      Top             =   3600
-      Width           =   492
    End
    Begin VB.CommandButton CmdGeraPasta 
       Caption         =   "Schema"
       Height          =   372
-      Left            =   1320
-      TabIndex        =   18
-      Top             =   3960
+      Left            =   2280
+      TabIndex        =   15
+      Top             =   3720
       Width           =   852
    End
    Begin VB.TextBox Diretorio 
       Height          =   372
-      Left            =   240
-      TabIndex        =   17
-      Top             =   3600
-      Width           =   6012
-   End
-   Begin VB.CommandButton cmdSelSQL 
-      Caption         =   "..."
-      Height          =   315
-      Left            =   7800
-      TabIndex        =   15
-      Top             =   3120
-      Width           =   495
+      Left            =   1200
+      TabIndex        =   14
+      Top             =   3360
+      Width           =   7092
    End
    Begin VB.TextBox txtSQL 
       Height          =   315
       Left            =   1200
-      TabIndex        =   14
-      Top             =   3120
-      Width           =   6495
+      TabIndex        =   12
+      Top             =   2880
+      Width           =   7092
    End
    Begin VB.CommandButton CmdSchemaDestino 
       Caption         =   "Recria do Schema"
       Height          =   372
-      Left            =   4440
-      TabIndex        =   13
-      Top             =   2520
+      Left            =   3360
+      TabIndex        =   11
+      Top             =   2280
       Width           =   1452
    End
    Begin VB.CommandButton CmdSchemaOrigem 
       Caption         =   "Schema"
       Height          =   372
-      Left            =   4800
-      TabIndex        =   12
+      Left            =   6240
+      TabIndex        =   10
       Top             =   480
       Width           =   732
    End
@@ -94,21 +78,21 @@ Begin VB.Form dCompare
       Caption         =   "Incluir dados"
       Height          =   252
       Left            =   6720
-      TabIndex        =   11
+      TabIndex        =   9
       Top             =   2160
-      Width           =   1692
+      Width           =   1332
    End
    Begin VB.TextBox txtArquivoDestino 
       Height          =   375
       Left            =   1080
-      TabIndex        =   10
+      TabIndex        =   8
       Top             =   1200
       Width           =   7215
    End
    Begin VB.TextBox TxTArquivoOrigem 
       Height          =   375
       Left            =   1080
-      TabIndex        =   9
+      TabIndex        =   7
       Top             =   120
       Width           =   7215
    End
@@ -117,49 +101,33 @@ Begin VB.Form dCompare
       Left            =   120
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Both
-      TabIndex        =   8
-      Top             =   4920
-      Width           =   8055
-   End
-   Begin VB.CommandButton cmdCompactar 
-      Caption         =   "Compactar"
-      Height          =   372
-      Left            =   5640
-      TabIndex        =   7
-      Top             =   480
-      Width           =   1332
+      TabIndex        =   6
+      Top             =   4800
+      Width           =   8172
    End
    Begin VB.CommandButton Command5 
       Caption         =   "Criar Tabela de Destino"
       Height          =   372
-      Left            =   2160
-      TabIndex        =   6
-      Top             =   2520
+      Left            =   1080
+      TabIndex        =   5
+      Top             =   2280
       Width           =   2172
    End
    Begin VB.CommandButton CmdExportarSqlite 
       Caption         =   "Exportar Sqlite"
       Height          =   375
       Left            =   7080
-      TabIndex        =   5
+      TabIndex        =   4
       Top             =   480
       Width           =   1215
    End
    Begin VB.CommandButton CmdCompareSchema 
       Caption         =   "Comparar Shema"
       Height          =   375
-      Left            =   4440
-      TabIndex        =   4
-      Top             =   2040
-      Width           =   1452
-   End
-   Begin VB.CommandButton Command3 
-      Caption         =   "Compare Arquivos"
-      Height          =   375
-      Left            =   480
+      Left            =   4920
       TabIndex        =   3
       Top             =   2280
-      Width           =   1455
+      Width           =   1452
    End
    Begin MSComDlg.CommonDialog CommonDialog1 
       Left            =   8760
@@ -170,8 +138,8 @@ Begin VB.Form dCompare
    End
    Begin VBCCR18.CommandButtonW cmdsair 
       Height          =   612
-      Left            =   10200
-      TabIndex        =   23
+      Left            =   9240
+      TabIndex        =   19
       Top             =   120
       Width           =   972
       _ExtentX        =   1715
@@ -190,9 +158,9 @@ Begin VB.Form dCompare
    End
    Begin VBCCR18.CommandButtonW CommandButtonW1 
       Height          =   612
-      Left            =   9720
-      TabIndex        =   24
-      Top             =   2040
+      Left            =   8520
+      TabIndex        =   20
+      Top             =   6840
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -210,9 +178,9 @@ Begin VB.Form dCompare
    End
    Begin VBCCR18.CommandButtonW CommandButtonW2 
       Height          =   372
-      Left            =   9720
-      TabIndex        =   25
-      Top             =   2880
+      Left            =   8520
+      TabIndex        =   21
+      Top             =   6360
       Width           =   612
       _ExtentX        =   1080
       _ExtentY        =   656
@@ -229,7 +197,7 @@ Begin VB.Form dCompare
    Begin VBCCR18.CommandButtonW CmdEscolheDestino 
       Height          =   372
       Left            =   8400
-      TabIndex        =   26
+      TabIndex        =   22
       Top             =   1200
       Width           =   612
       _ExtentX        =   1080
@@ -247,7 +215,7 @@ Begin VB.Form dCompare
    Begin VBCCR18.CommandButtonW CmdEscolheOrigem 
       Height          =   372
       Left            =   8400
-      TabIndex        =   27
+      TabIndex        =   23
       Top             =   120
       Width           =   612
       _ExtentX        =   1080
@@ -264,9 +232,9 @@ Begin VB.Form dCompare
    End
    Begin VBCCR18.CommandButtonW CmdGeraPastaSql 
       Height          =   612
-      Left            =   240
-      TabIndex        =   28
-      Top             =   3960
+      Left            =   1200
+      TabIndex        =   24
+      Top             =   3720
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -285,7 +253,7 @@ Begin VB.Form dCompare
    Begin VBCCR18.CommandButtonW CmdSqlOrigem 
       Height          =   612
       Left            =   1080
-      TabIndex        =   29
+      TabIndex        =   25
       Top             =   480
       Width           =   972
       _ExtentX        =   1715
@@ -305,7 +273,7 @@ Begin VB.Form dCompare
    Begin VBCCR18.CommandButtonW CmdSqlDestino 
       Height          =   612
       Left            =   1080
-      TabIndex        =   30
+      TabIndex        =   26
       Top             =   1560
       Width           =   972
       _ExtentX        =   1715
@@ -322,10 +290,10 @@ Begin VB.Form dCompare
       WordWrap        =   0   'False
       Style           =   1
    End
-   Begin VBCCR18.CommandButtonW CommandButtonW3 
+   Begin VBCCR18.CommandButtonW cmdCompactarDestino 
       Height          =   612
       Left            =   3240
-      TabIndex        =   31
+      TabIndex        =   27
       Top             =   1560
       Width           =   972
       _ExtentX        =   1715
@@ -342,10 +310,10 @@ Begin VB.Form dCompare
       WordWrap        =   0   'False
       Style           =   1
    End
-   Begin VBCCR18.CommandButtonW CommandButtonW4 
+   Begin VBCCR18.CommandButtonW cmdCompactarOrigem 
       Height          =   612
       Left            =   3240
-      TabIndex        =   32
+      TabIndex        =   28
       Top             =   480
       Width           =   972
       _ExtentX        =   1715
@@ -365,7 +333,7 @@ Begin VB.Form dCompare
    Begin VBCCR18.CommandButtonW CmdTableDestinoInfo 
       Height          =   612
       Left            =   2160
-      TabIndex        =   33
+      TabIndex        =   29
       Top             =   1560
       Width           =   972
       _ExtentX        =   1715
@@ -385,7 +353,7 @@ Begin VB.Form dCompare
    Begin VBCCR18.CommandButtonW CmdTableOrigemInfo 
       Height          =   612
       Left            =   2160
-      TabIndex        =   34
+      TabIndex        =   30
       Top             =   480
       Width           =   972
       _ExtentX        =   1715
@@ -402,6 +370,81 @@ Begin VB.Form dCompare
       WordWrap        =   0   'False
       Style           =   1
    End
+   Begin VBCCR18.CommandButtonW CmdEscdir 
+      Height          =   372
+      Left            =   8400
+      TabIndex        =   31
+      Top             =   3360
+      Width           =   612
+      _ExtentX        =   1080
+      _ExtentY        =   656
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "dcompare.frx":3FC2
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdSelSQL 
+      Height          =   372
+      Left            =   8400
+      TabIndex        =   33
+      Top             =   2880
+      Width           =   612
+      _ExtentX        =   1080
+      _ExtentY        =   656
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "dcompare.frx":455C
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW Command3 
+      Height          =   612
+      Left            =   4320
+      TabIndex        =   34
+      Top             =   1560
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Comparar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "dcompare.frx":49F6
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VB.Label Label4 
+      Alignment       =   2  'Center
+      Caption         =   "Caminho"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00008000&
+      Height          =   252
+      Left            =   240
+      TabIndex        =   32
+      Top             =   3480
+      Width           =   792
+   End
    Begin VB.Label Label3 
       Alignment       =   2  'Center
       Caption         =   "SqlScript"
@@ -417,17 +460,17 @@ Begin VB.Form dCompare
       ForeColor       =   &H00008000&
       Height          =   252
       Left            =   240
-      TabIndex        =   16
-      Top             =   3000
+      TabIndex        =   13
+      Top             =   2880
       Width           =   792
    End
    Begin VB.Label lProgress 
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   1  'Fixed Single
       Height          =   372
-      Left            =   4680
+      Left            =   4920
       TabIndex        =   2
-      Top             =   4440
+      Top             =   4320
       Width           =   3360
       WordWrap        =   -1  'True
    End
@@ -480,9 +523,24 @@ Private Sub Check1_Click()
 
 End Sub
 
-Private Sub cmdCompactar_Click()
+Private Sub cmdCompactarDestino_Click()
 Dim sCaminho As String
     sCaminho = txtArquivoDestino.Text ' Assumindo que o alvo da compactação é o destino
+    
+    If EArquivoSQLite(sCaminho) Then
+        If CompactarSQLite(sCaminho) Then
+            MsgBox "SQLite compactado com sucesso (VACUUM executado).", vbInformation
+        End If
+    Else
+        ' Chama a sua função antiga de compactação do Access
+        If CompactAccess(sCaminho) Then
+            MsgBox "Access compactado com sucesso (JRO executado).", vbInformation
+        End If
+    End If
+End Sub
+Private Sub cmdCompactarOrigem_Click()
+Dim sCaminho As String
+    sCaminho = TxTArquivoOrigem.Text ' Assumindo que o alvo da compactação é o destino
     
     If EArquivoSQLite(sCaminho) Then
         If CompactarSQLite(sCaminho) Then
@@ -742,6 +800,7 @@ RenomearIndice "c:\temp\desenho.mdb", "PRODUTO", "cliente", "cliente_produto"
 End Sub
 
 Private Sub Command3_Click()
+
 If EArquivoSQLite(txtArquivoDestino.Text) Then
    GerarScriptAlteracoesAccessParaSqlite TxTArquivoOrigem.Text, txtArquivoDestino.Text, (CheckEfetua.Value = vbChecked)
 Else
@@ -769,6 +828,3 @@ Private Sub cmdSqlDestino_Click()
     GerarScriptsSQL txtArquivoDestino.Text, (CheckIncDados.Value = vbChecked)
 End Sub
 
-Private Sub Form_Load()
-
-End Sub
