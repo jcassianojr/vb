@@ -156,9 +156,9 @@ Begin VB.Form dCompare
    Begin VB.CommandButton Command3 
       Caption         =   "Compare Arquivos"
       Height          =   375
-      Left            =   2160
+      Left            =   480
       TabIndex        =   3
-      Top             =   2040
+      Top             =   2280
       Width           =   1455
    End
    Begin MSComDlg.CommonDialog CommonDialog1 
@@ -226,31 +226,29 @@ Begin VB.Form dCompare
       WordWrap        =   0   'False
       Style           =   1
    End
-   Begin VBCCR18.CommandButtonW CmdTableInfo 
-      Height          =   612
-      Left            =   2160
+   Begin VBCCR18.CommandButtonW CmdEscolheDestino 
+      Height          =   372
+      Left            =   8400
       TabIndex        =   26
-      Top             =   480
-      Width           =   972
-      _ExtentX        =   1715
-      _ExtentY        =   1080
+      Top             =   1200
+      Width           =   612
+      _ExtentX        =   1080
+      _ExtentY        =   656
       Appearance      =   0
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
       ImageListAlignment=   1
-      Caption         =   "Informacao"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "dcompare.frx":1658
-      PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
    End
-   Begin VBCCR18.CommandButtonW CmdEscolheDestino 
+   Begin VBCCR18.CommandButtonW CmdEscolheOrigem 
       Height          =   372
       Left            =   8400
       TabIndex        =   27
-      Top             =   1200
+      Top             =   120
       Width           =   612
       _ExtentX        =   1080
       _ExtentY        =   656
@@ -264,29 +262,31 @@ Begin VB.Form dCompare
       WordWrap        =   0   'False
       Style           =   1
    End
-   Begin VBCCR18.CommandButtonW CmdEscolheOrigem 
-      Height          =   372
-      Left            =   8400
+   Begin VBCCR18.CommandButtonW CmdGeraPastaSql 
+      Height          =   612
+      Left            =   240
       TabIndex        =   28
-      Top             =   120
-      Width           =   612
-      _ExtentX        =   1080
-      _ExtentY        =   656
+      Top             =   3960
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
       Appearance      =   0
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
       ImageListAlignment=   1
+      Caption         =   "sql"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "dcompare.frx":1F8C
+      PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
    End
-   Begin VBCCR18.CommandButtonW CmdGeraPastaSql 
+   Begin VBCCR18.CommandButtonW CmdSqlOrigem 
       Height          =   612
-      Left            =   240
+      Left            =   1080
       TabIndex        =   29
-      Top             =   3960
+      Top             =   480
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -302,11 +302,11 @@ Begin VB.Form dCompare
       WordWrap        =   0   'False
       Style           =   1
    End
-   Begin VBCCR18.CommandButtonW CmdSqlOrigem 
+   Begin VBCCR18.CommandButtonW CmdSqlDestino 
       Height          =   612
       Left            =   1080
       TabIndex        =   30
-      Top             =   480
+      Top             =   1560
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -322,9 +322,9 @@ Begin VB.Form dCompare
       WordWrap        =   0   'False
       Style           =   1
    End
-   Begin VBCCR18.CommandButtonW CmdSqlDestino 
+   Begin VBCCR18.CommandButtonW CommandButtonW3 
       Height          =   612
-      Left            =   1080
+      Left            =   3240
       TabIndex        =   31
       Top             =   1560
       Width           =   972
@@ -334,10 +334,70 @@ Begin VB.Form dCompare
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
       ImageListAlignment=   1
-      Caption         =   "sql"
+      Caption         =   "Compactar"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "dcompare.frx":2D5A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CommandButtonW4 
+      Height          =   612
+      Left            =   3240
+      TabIndex        =   32
+      Top             =   480
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Compactar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "dcompare.frx":31F4
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdTableDestinoInfo 
+      Height          =   612
+      Left            =   2160
+      TabIndex        =   33
+      Top             =   1560
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Informacao"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "dcompare.frx":368E
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdTableOrigemInfo 
+      Height          =   612
+      Left            =   2160
+      TabIndex        =   34
+      Top             =   480
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Informacao"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "dcompare.frx":3B28
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -634,8 +694,21 @@ Private Sub cmdSelSQL_Click()
     CommonDialog1.ShowSave
     If CommonDialog1.filename <> "" Then txtSQL.Text = CommonDialog1.filename
 End Sub
-
-Private Sub CmdTableInfo_Click()
+Private Sub CmdTableDestinoInfo_Click()
+' Verifica se um arquivo foi selecionado
+    If Trim(txtArquivoDestino.Text) = "" Then
+        MsgBox "Selecione o arquivo de origem primeiro!", vbExclamation
+        Exit Sub
+    End If
+    
+ If EArquivoSQLite(txtArquivoDestino.Text) Then
+        GerarInfoTabelasSQLite txtArquivoDestino.Text, TxtInfo
+    Else
+        ' Chama sua rotina antiga para Access
+        GerarInfoTabelasAccess txtArquivoDestino.Text, TxtInfo
+    End If
+End Sub
+Private Sub CmdTableOrigemInfo_Click()
 ' Verifica se um arquivo foi selecionado
     If Trim(TxTArquivoOrigem.Text) = "" Then
         MsgBox "Selecione o arquivo de origem primeiro!", vbExclamation
