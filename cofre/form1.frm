@@ -1,64 +1,76 @@
 VERSION 5.00
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form Form1 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Gerador de Cofre de Senhas - VB96/VB6"
    ClientHeight    =   5796
    ClientLeft      =   48
    ClientTop       =   396
-   ClientWidth     =   5412
+   ClientWidth     =   5952
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    ScaleHeight     =   5796
-   ScaleWidth      =   5412
+   ScaleWidth      =   5952
    StartUpPosition =   2  'CenterScreen
-   Begin VB.CommandButton cmdAtualizar 
+   Begin VBCCR18.CommandButtonW cmdAtualizar 
+      Height          =   612
+      Left            =   3720
+      TabIndex        =   15
+      Top             =   240
+      Width           =   2052
+      _ExtentX        =   3620
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
       Caption         =   "Atualizar Lista"
-      Height          =   375
-      Left            =   3840
-      TabIndex        =   1
-      Top             =   480
-      Width           =   1215
+      Picture         =   "form1.frx":0000
+      PictureAndCaption=   -1  'True
+      Style           =   1
    End
-   Begin VB.ComboBox cmbBancos 
-      Height          =   315
-      Left            =   1680
-      Style           =   2  'Dropdown List
-      TabIndex        =   0
-      Top             =   480
-      Width           =   2055
+   Begin VBCCR18.ComboBoxW cmbBancos 
+      Height          =   288
+      Left            =   1560
+      TabIndex        =   14
+      Tag             =   "cmbBancos"
+      Top             =   360
+      Width           =   2052
+      _ExtentX        =   3620
+      _ExtentY        =   508
+      Text            =   "cmbBancos"
    End
    Begin VB.TextBox txtBanco 
       Height          =   285
       Left            =   1680
-      TabIndex        =   2
+      TabIndex        =   0
       Top             =   1200
       Width           =   2055
    End
    Begin VB.TextBox txtServer 
       Height          =   285
       Left            =   1680
-      TabIndex        =   3
+      TabIndex        =   1
       Top             =   1680
       Width           =   2055
    End
    Begin VB.TextBox txtPorta 
       Height          =   285
       Left            =   1680
-      TabIndex        =   4
+      TabIndex        =   2
       Top             =   2160
       Width           =   1200
    End
    Begin VB.TextBox txtOwner 
       Height          =   285
       Left            =   1680
-      TabIndex        =   5
+      TabIndex        =   3
       Top             =   2640
       Width           =   2055
    End
    Begin VB.TextBox txtUser 
       Height          =   285
       Left            =   1680
-      TabIndex        =   6
+      TabIndex        =   4
       Top             =   3120
       Width           =   2055
    End
@@ -67,47 +79,79 @@ Begin VB.Form Form1
       IMEMode         =   3  'DISABLE
       Left            =   1680
       PasswordChar    =   "*"
-      TabIndex        =   7
+      TabIndex        =   5
       Top             =   3600
       Width           =   2055
    End
-   Begin VB.CommandButton cmdRevelar 
-      Caption         =   "Ver"
-      Height          =   315
-      Left            =   3840
-      TabIndex        =   8
-      Top             =   3600
-      Width           =   615
+   Begin VBCCR18.CommandButtonW cmdRevelar 
+      Height          =   612
+      Left            =   3960
+      TabIndex        =   16
+      Top             =   3360
+      Width           =   1212
+      _ExtentX        =   2138
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Caption         =   "Exibir Senha"
+      Picture         =   "form1.frx":049A
+      PictureAndCaption=   -1  'True
+      Style           =   1
    End
-   Begin VB.CommandButton cmdSalvar 
+   Begin VBCCR18.CommandButtonW cmdSalvar 
+      Height          =   612
+      Left            =   1680
+      TabIndex        =   17
+      Top             =   4080
+      Width           =   1332
+      _ExtentX        =   2350
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
       Caption         =   "Salvar"
-      Height          =   495
-      Left            =   480
-      TabIndex        =   9
-      Top             =   4320
-      Width           =   1335
+      Picture         =   "form1.frx":0934
+      PictureAndCaption=   -1  'True
+      Style           =   1
    End
-   Begin VB.CommandButton cmdLimpar 
+   Begin VBCCR18.CommandButtonW cmdLimpar 
+      Height          =   612
+      Left            =   240
+      TabIndex        =   18
+      Top             =   4080
+      Width           =   1332
+      _ExtentX        =   2350
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
       Caption         =   "Limpar Campos"
-      Height          =   495
-      Left            =   2040
-      TabIndex        =   10
-      Top             =   4320
-      Width           =   1335
+      Picture         =   "form1.frx":0DCE
+      PictureAndCaption=   -1  'True
+      Style           =   1
    End
-   Begin VB.CommandButton cmdExcluir 
+   Begin VBCCR18.CommandButtonW cmdExcluir 
+      Height          =   612
+      Left            =   3120
+      TabIndex        =   19
+      Top             =   4080
+      Width           =   1332
+      _ExtentX        =   2350
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
       Caption         =   "Excluir Banco"
-      Height          =   495
-      Left            =   3600
-      TabIndex        =   11
-      Top             =   4320
-      Width           =   1335
+      Picture         =   "form1.frx":1268
+      PictureAndCaption=   -1  'True
+      Style           =   1
    End
    Begin VB.Label Label7 
       Caption         =   "Owner / Esquema:"
       Height          =   255
       Left            =   240
-      TabIndex        =   18
+      TabIndex        =   12
       Top             =   2640
       Width           =   1455
    End
@@ -115,23 +159,23 @@ Begin VB.Form Form1
       Caption         =   "Porta Banco:"
       Height          =   255
       Left            =   240
-      TabIndex        =   17
+      TabIndex        =   11
       Top             =   2160
       Width           =   1215
    End
    Begin VB.Label Label5 
       Caption         =   "Bancos Salvos:"
-      Height          =   255
+      Height          =   252
       Left            =   240
-      TabIndex        =   16
-      Top             =   480
-      Width           =   1215
+      TabIndex        =   10
+      Top             =   360
+      Width           =   1212
    End
    Begin VB.Label Label4 
       Caption         =   "Senha:"
       Height          =   255
       Left            =   240
-      TabIndex        =   15
+      TabIndex        =   9
       Top             =   3600
       Width           =   1215
    End
@@ -139,7 +183,7 @@ Begin VB.Form Form1
       Caption         =   "Usuario:"
       Height          =   255
       Left            =   240
-      TabIndex        =   14
+      TabIndex        =   8
       Top             =   3120
       Width           =   1215
    End
@@ -147,7 +191,7 @@ Begin VB.Form Form1
       Caption         =   "Servidor / IP:"
       Height          =   255
       Left            =   240
-      TabIndex        =   13
+      TabIndex        =   7
       Top             =   1680
       Width           =   1215
    End
@@ -155,19 +199,19 @@ Begin VB.Form Form1
       Caption         =   "Nome do Banco:"
       Height          =   255
       Left            =   240
-      TabIndex        =   12
+      TabIndex        =   6
       Top             =   1200
       Width           =   1215
    End
    Begin VB.Line Line1 
       X1              =   240
-      X2              =   5160
-      Y1              =   1000
-      Y2              =   1000
+      X2              =   5760
+      Y1              =   996
+      Y2              =   996
    End
    Begin VB.Line Line2 
       X1              =   240
-      X2              =   5160
+      X2              =   5640
       Y1              =   5100
       Y2              =   5100
    End
@@ -175,11 +219,11 @@ Begin VB.Form Form1
       Alignment       =   2  'Center
       Caption         =   "Cofre pronto para operacao"
       ForeColor       =   &H00800000&
-      Height          =   255
+      Height          =   252
       Left            =   240
-      TabIndex        =   19
-      Top             =   5300
-      Width           =   4935
+      TabIndex        =   13
+      Top             =   5304
+      Width           =   5292
    End
 End
 Attribute VB_Name = "Form1"
@@ -188,6 +232,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+
+Private Sub CommandButtonW5_Click()
+
+End Sub
 
 Private Sub Form_Load()
     Call AtualizarLista
