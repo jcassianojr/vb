@@ -2070,4 +2070,49 @@ Public Sub GerarIndicesSqlite(tblOrigem As Object, connDestino As ADODB.Connecti
     Next
 End Sub
 
+Public Sub ProcessarPastaCompletaMDBaccdb(ByVal sFolder As String, ByVal bExecutar As Boolean)
+    Dim fso As Object
+    Dim oFolder As Object
+    Dim oFile As Object
+    Dim sCaminhoMDB As String
+    Dim sCaminhoaccdb As String
+    Dim sNomeBase As String
+    
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    If Not fso.FolderExists(sFolder) Then
+        MsgBox "Diretório não encontrado!", vbCritical
+        Exit Sub
+    End If
+    
+    Set oFolder = fso.GetFolder(sFolder)
+    
+    ' Itera por todos os arquivos da pasta
+    For Each oFile In oFolder.Files
+        ' Filtra apenas arquivos Access (.mdb ou .accdb)
+        If LCase(fso.GetExtensionName(oFile.Name)) = "mdb" Then
+            sCaminhoMDB = oFile.Path
+            sNomeBase = fso.GetParentFolderName(sCaminhoMDB) & "\" & fso.GetBaseName(oFile.Name)
+            
+            ' Constrói o caminho do contraparte (ex: C:\Pasta\vendas.sqlite)
+            sCaminhoaccdb = sNomeBase & ".accdb"
+            
+            ' Verifica se o par existe antes de chamar a migração
+            If fso.FileExists(sCaminhoaccdb) Then
+                Debug.Print "Migrando: " & oFile.Name & " -> " & fso.GetFileName(sCaminhoaccdb)
+                
+                ' Chama sua rotina principal de comparação
+                Call GerarScriptAlteracoes(sCaminhoMDB, sCaminhoaccdb, bExecutar)
+            Else
+                Debug.Print "Contraparte não encontrado para: " & oFile.Name
+            End If
+            
+        End If
+    Next oFile
+    
+    MsgBox "Processamento em lote concluído!", vbInformation
+    
+    Set oFolder = Nothing
+    Set fso = Nothing
+End Sub
 

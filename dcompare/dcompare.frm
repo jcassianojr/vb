@@ -11,6 +11,14 @@ Begin VB.Form dCompare
    ScaleHeight     =   7908
    ScaleWidth      =   13248
    StartUpPosition =   3  'Windows Default
+   Begin VB.CommandButton cmdCompareMdbAccdb 
+      Caption         =   "CompareMdbAccdb"
+      Height          =   375
+      Left            =   4080
+      TabIndex        =   29
+      Top             =   3360
+      Width           =   1812
+   End
    Begin VB.CommandButton cmdCompareMdbSqlite 
       Caption         =   "CompareMdbSqlite"
       Height          =   375
@@ -307,6 +315,10 @@ Dim sCaminho As String
             MsgBox "Access compactado com sucesso (JRO executado).", vbInformation
         End If
     End If
+End Sub
+
+Private Sub cmdCompareMdbAccdb_Click()
+ProcessarPastaCompletaMDBAccdb Diretorio.Text, (CheckEfetua.Value = vbChecked)
 End Sub
 
 Private Sub cmdCompareMdbSqlite_Click()
