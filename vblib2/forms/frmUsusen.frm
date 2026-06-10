@@ -1,33 +1,34 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form frmUSUSENHA 
    Caption         =   "Troca de Senha"
-   ClientHeight    =   2265
+   ClientHeight    =   2268
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   5655
+   ClientTop       =   348
+   ClientWidth     =   5652
    Icon            =   "frmUsusen.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   2265
-   ScaleWidth      =   5655
+   ScaleHeight     =   2268
+   ScaleWidth      =   5652
    StartUpPosition =   2  'CenterScreen
    Begin vbExtra.SizeGrip SizeGrip1 
       Height          =   285
-      Left            =   5370
-      Top             =   1980
+      Left            =   5424
+      Top             =   2040
       Width           =   285
-      _ExtentX        =   503
-      _ExtentY        =   503
+      _ExtentX        =   402
+      _ExtentY        =   402
    End
    Begin VB.PictureBox Picture1 
       BorderStyle     =   0  'None
       Height          =   375
       Left            =   240
       Picture         =   "frmUsusen.frx":038A
-      ScaleHeight     =   375
-      ScaleWidth      =   615
-      TabIndex        =   8
+      ScaleHeight     =   372
+      ScaleWidth      =   612
+      TabIndex        =   7
       Top             =   600
       Width           =   615
    End
@@ -62,18 +63,18 @@ Begin VB.Form frmUSUSENHA
       Width           =   1095
    End
    Begin XPControls.XPButton cmdCANCELAR 
-      Height          =   435
+      Height          =   432
       Left            =   3840
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   1200
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+      Width           =   1512
+      _ExtentX        =   2667
+      _ExtentY        =   762
       Picture         =   "frmUsusen.frx":07CC
       Caption         =   "Cancelar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -81,30 +82,30 @@ Begin VB.Form frmUSUSENHA
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin XPControls.XPButton cmdOK 
-      Height          =   435
+   Begin VBCCR18.CommandButtonW cmdOK 
+      Height          =   612
       Left            =   3840
-      TabIndex        =   3
+      TabIndex        =   11
       Top             =   480
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Confimar"
+      Alignment       =   0
+      VerticalAlignment=   0
       Picture         =   "frmUsusen.frx":0D66
-      Caption         =   "Confirmar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label Label4 
       Height          =   255
       Left            =   1440
-      TabIndex        =   10
+      TabIndex        =   9
       Top             =   120
       Width           =   1815
    End
@@ -114,7 +115,7 @@ Begin VB.Form frmUSUSENHA
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   240
-      TabIndex        =   9
+      TabIndex        =   8
       Top             =   120
       Width           =   855
    End
@@ -124,7 +125,7 @@ Begin VB.Form frmUSUSENHA
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   240
-      TabIndex        =   7
+      TabIndex        =   6
       Top             =   1440
       Width           =   1695
    End
@@ -134,7 +135,7 @@ Begin VB.Form frmUSUSENHA
       ForeColor       =   &H00C00000&
       Height          =   255
       Left            =   600
-      TabIndex        =   6
+      TabIndex        =   5
       Top             =   960
       Width           =   1335
    End
@@ -145,7 +146,7 @@ Begin VB.Form frmUSUSENHA
       Height          =   255
       Index           =   1
       Left            =   1080
-      TabIndex        =   5
+      TabIndex        =   4
       Top             =   480
       Width           =   855
    End
@@ -169,44 +170,44 @@ Private Sub cmdOK_Click()
   eRETU03 = ""
 
   lRETU = True
-  TXTFIELDS(0) = Trim(TXTFIELDS(0))
-  TXTFIELDS(1) = Trim(TXTFIELDS(1))
-  TXTFIELDS(2) = Trim(TXTFIELDS(2))
+  txtFields(0) = Trim(txtFields(0))
+  txtFields(1) = Trim(txtFields(1))
+  txtFields(2) = Trim(txtFields(2))
 
 
-  If TXTFIELDS(0) = TXTFIELDS(1) Then
+  If txtFields(0) = txtFields(1) Then
     Alert "Senha Precisa ser Diferente da Anterior"
-    TXTFIELDS(1).tEXT = ""
-    TXTFIELDS(2).tEXT = ""
-    TXTFIELDS(1).SetFocus
+    txtFields(1).Text = ""
+    txtFields(2).Text = ""
+    txtFields(1).SetFocus
     lRETU = False
     Exit Sub
   End If
 
-  If Len(TXTFIELDS(1)) <> 8 Then
+  If Len(txtFields(1)) <> 8 Then
     Alert "8 digitos para a Senha"
-    TXTFIELDS(1).tEXT = ""
-    TXTFIELDS(2).tEXT = ""
-    TXTFIELDS(1).SetFocus
+    txtFields(1).Text = ""
+    txtFields(2).Text = ""
+    txtFields(1).SetFocus
     lRETU = False
     Exit Sub
   End If
 
-  If Len(TXTFIELDS(1)) <> Len(TXTFIELDS(2)) Then
+  If Len(txtFields(1)) <> Len(txtFields(2)) Then
     Alert "Senha diferente da de confirmacao"
-    TXTFIELDS(1).tEXT = ""
-    TXTFIELDS(2).tEXT = ""
-    TXTFIELDS(1).SetFocus
+    txtFields(1).Text = ""
+    txtFields(2).Text = ""
+    txtFields(1).SetFocus
     lRETU = False
     Exit Sub
   End If
 
   'faze inicial acostumar os usuarios
-  If Not CheckPass(TXTFIELDS(1)) Then
+  If Not CheckPass(txtFields(1)) Then
     If Not MDG("Senha Fraca , gravar mesmo assim") Then
-      TXTFIELDS(1).tEXT = ""
-      TXTFIELDS(2).tEXT = ""
-      TXTFIELDS(1).SetFocus
+      txtFields(1).Text = ""
+      txtFields(2).Text = ""
+      txtFields(1).SetFocus
       lRETU = False
       Exit Sub
     End If
@@ -223,19 +224,19 @@ Private Sub cmdOK_Click()
 
   With RSSENHA
     If Not .EOF Then
-      strEncryptedText = XOREncryption(strCodeKey, TXTFIELDS(0))
+      strEncryptedText = XOREncryption(strCodeKey, txtFields(0))
       If strEncryptedText = "" & !Senha Then
-        If TXTFIELDS(1) = TXTFIELDS(2) Then
-          strEncryptedText = XOREncryption(strCodeKey, TXTFIELDS(1))
+        If txtFields(1) = txtFields(2) Then
+          strEncryptedText = XOREncryption(strCodeKey, txtFields(1))
           RSSENHA("SENHA") = strEncryptedText
           RSSENHA("TROCAR") = Date + 90
 
 
-          RSSENHA("CHAVEV") = UCase(CreateSHA256HashString(UCase(Trim(RSSENHA("usuario"))) + Trim(TXTFIELDS(1))))
+          RSSENHA("CHAVEV") = UCase(CreateSHA256HashString(UCase(Trim(RSSENHA("usuario"))) + Trim(txtFields(1))))
 
           .Update
           eRETU01 = strEncryptedText
-          eRETU02 = TXTFIELDS(1)
+          eRETU02 = txtFields(1)
         Else
           Alert "Confirmação nao confere! A Senha nao foi alterada.", "Alteracao de senha"
         End If

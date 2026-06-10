@@ -16,7 +16,7 @@ Begin VB.Form FrmFiltro
    Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   2415
       Left            =   120
-      TabIndex        =   32
+      TabIndex        =   31
       Top             =   3360
       Width           =   6495
       _ExtentX        =   11451
@@ -363,36 +363,16 @@ Begin VB.Form FrmFiltro
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin XPControls.XPButton ok 
-      Height          =   435
-      Left            =   7560
-      TabIndex        =   30
-      Top             =   1920
-      Width           =   1515
-      _ExtentX        =   2667
-      _ExtentY        =   762
-      Picture         =   "FrmFiltro.frx":0B24
-      Caption         =   "Confirmar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton CmdZerar 
       Height          =   435
       Left            =   7680
-      TabIndex        =   31
+      TabIndex        =   30
       TabStop         =   0   'False
       Top             =   960
       Width           =   1515
       _ExtentX        =   2667
       _ExtentY        =   762
-      Picture         =   "FrmFiltro.frx":10BE
+      Picture         =   "FrmFiltro.frx":0B24
       Caption         =   "Apagar Filtro"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -407,7 +387,7 @@ Begin VB.Form FrmFiltro
    Begin VBCCR18.CommandButtonW encerrar 
       Height          =   612
       Left            =   8040
-      TabIndex        =   33
+      TabIndex        =   32
       Top             =   120
       Width           =   972
       _ExtentX        =   1715
@@ -417,6 +397,26 @@ Begin VB.Form FrmFiltro
       ForeColor       =   -2147483640
       ImageListAlignment=   1
       Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmFiltro.frx":0EBE
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW ok 
+      Height          =   612
+      Left            =   8040
+      TabIndex        =   33
+      Top             =   2040
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Confimar"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "FrmFiltro.frx":1458
@@ -639,6 +639,10 @@ End Sub
 
 Private Sub CmdSair_Click()
   Unload Me
+End Sub
+
+Private Sub CmdCancelar_Click()
+
 End Sub
 
 Private Sub CmdZerar_Click()

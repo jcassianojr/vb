@@ -1,43 +1,42 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form escOrdem 
    Caption         =   "Escolha a Ordem"
-   ClientHeight    =   3195
+   ClientHeight    =   3192
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   5985
+   ClientTop       =   348
+   ClientWidth     =   5988
    Icon            =   "escOrdem.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   3195
-   ScaleWidth      =   5985
+   ScaleHeight     =   3192
+   ScaleWidth      =   5988
    StartUpPosition =   3  'Windows Default
    Begin VB.ListBox List 
-      Height          =   2790
+      Height          =   2928
       Left            =   120
       TabIndex        =   0
       Top             =   120
-      Width           =   4095
+      Width           =   4452
    End
-   Begin XPControls.XPButton CmdCancelar 
-      Height          =   435
-      Left            =   4320
+   Begin VBCCR18.CommandButtonW CmdCancelar 
+      Height          =   612
+      Left            =   4800
       TabIndex        =   1
-      TabStop         =   0   'False
-      Top             =   240
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Confimar"
+      Alignment       =   0
+      VerticalAlignment=   0
       Picture         =   "escOrdem.frx":058A
-      Caption         =   "Confirmar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
 End
 Attribute VB_Name = "escOrdem"
@@ -56,7 +55,7 @@ End Sub
 
 Private Sub Form_Load()
   Dim nLEN As Integer
-  Dim X As Integer
+  Dim x As Integer
 
 
   CenterFormToScreen Me
@@ -70,9 +69,9 @@ Private Sub Form_Load()
   nLEN = UBound(ePASS01)
   ''nLEN = nLEN ''aRRAY comeca 0
   List.Clear
-  For X = 0 To nLEN
-    List.AddItem ePASS01(X)
-  Next X
+  For x = 0 To nLEN
+    List.AddItem ePASS01(x)
+  Next x
   HelpContextID = nFORMID
   Me.Caption = cFORMID
 
