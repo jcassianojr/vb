@@ -1,5 +1,4 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form FrmPicturePrinter 
@@ -29,7 +28,7 @@ Begin VB.Form FrmPicturePrinter
       Left            =   10200
       ScaleHeight     =   444
       ScaleWidth      =   684
-      TabIndex        =   12
+      TabIndex        =   11
       Top             =   2880
       Visible         =   0   'False
       Width           =   735
@@ -40,7 +39,7 @@ Begin VB.Form FrmPicturePrinter
       Left            =   120
       ScaleHeight     =   3684
       ScaleWidth      =   4884
-      TabIndex        =   11
+      TabIndex        =   10
       Top             =   2880
       Width           =   4935
    End
@@ -99,44 +98,23 @@ Begin VB.Form FrmPicturePrinter
       Top             =   360
       Width           =   2115
    End
-   Begin XPControls.XPButton cmdPrint 
-      Height          =   435
-      Left            =   9480
-      TabIndex        =   9
-      TabStop         =   0   'False
-      Top             =   1200
-      Width           =   1575
-      _ExtentX        =   2773
-      _ExtentY        =   762
-      Picture         =   "FrmPicturePrinter.frx":0000
-      Caption         =   "Imprimir "
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin VBCCR18.RichTextBox RichTextbox1 
       Height          =   3615
       Left            =   240
-      TabIndex        =   10
+      TabIndex        =   9
       Top             =   2880
       Width           =   9135
       _ExtentX        =   16108
       _ExtentY        =   6371
       MultiLine       =   -1  'True
       ScrollBars      =   3
-      TextRTF         =   "FrmPicturePrinter.frx":059A
+      TextRTF         =   "FrmPicturePrinter.frx":0000
    End
    Begin VBCCR18.CommandButtonW encerrar 
       Height          =   612
       Left            =   9720
-      TabIndex        =   13
-      Top             =   1680
+      TabIndex        =   12
+      Top             =   2040
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -145,6 +123,26 @@ Begin VB.Form FrmPicturePrinter
       ForeColor       =   -2147483640
       ImageListAlignment=   1
       Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmPicturePrinter.frx":0166
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdPrint 
+      Height          =   612
+      Left            =   9720
+      TabIndex        =   13
+      Top             =   1320
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Imprimir"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "FrmPicturePrinter.frx":0700

@@ -22,7 +22,7 @@ Begin VB.Form FrmSql
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   3960
-      TabIndex        =   34
+      TabIndex        =   33
       TabStop         =   0   'False
       Top             =   6480
       Visible         =   0   'False
@@ -45,10 +45,10 @@ Begin VB.Form FrmSql
    Begin VB.Frame Frame1 
       BackColor       =   &H00C0E0FF&
       Height          =   1635
-      Left            =   7200
+      Left            =   6240
       TabIndex        =   5
       Top             =   720
-      Width           =   3045
+      Width           =   3972
       Begin XPControls.XPButton CmdVisua 
          Height          =   435
          Left            =   120
@@ -69,35 +69,15 @@ Begin VB.Form FrmSql
             Strikethrough   =   0   'False
          EndProperty
       End
-      Begin XPControls.XPButton cmdimp 
-         Height          =   435
-         Left            =   120
-         TabIndex        =   26
-         Top             =   960
-         Width           =   1275
-         _ExtentX        =   2244
-         _ExtentY        =   762
-         Picture         =   "Frmsql.frx":0CDC
-         Caption         =   "Imprimir"
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   7.8
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-      End
       Begin XPControls.XPButton CmdConfImp 
          Height          =   435
          Left            =   1440
-         TabIndex        =   27
+         TabIndex        =   26
          Top             =   960
          Width           =   1455
          _ExtentX        =   2561
          _ExtentY        =   762
-         Picture         =   "Frmsql.frx":1276
+         Picture         =   "Frmsql.frx":0CDC
          Caption         =   "Propriedades"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -111,8 +91,8 @@ Begin VB.Form FrmSql
       End
       Begin VBCCR18.CommandButtonW Encerrar 
          Height          =   612
-         Left            =   1440
-         TabIndex        =   37
+         Left            =   2520
+         TabIndex        =   36
          Top             =   240
          Width           =   1212
          _ExtentX        =   2138
@@ -122,6 +102,26 @@ Begin VB.Form FrmSql
          ForeColor       =   -2147483640
          ImageListAlignment=   1
          Caption         =   "Retornar"
+         Alignment       =   0
+         VerticalAlignment=   0
+         Picture         =   "Frmsql.frx":1276
+         PictureAndCaption=   -1  'True
+         WordWrap        =   0   'False
+         Style           =   1
+      End
+      Begin VBCCR18.CommandButtonW cmdimp 
+         Height          =   612
+         Left            =   1440
+         TabIndex        =   37
+         Top             =   240
+         Width           =   972
+         _ExtentX        =   1715
+         _ExtentY        =   1080
+         Appearance      =   0
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         ImageListAlignment=   1
+         Caption         =   "Imprimir"
          Alignment       =   0
          VerticalAlignment=   0
          Picture         =   "Frmsql.frx":1810
@@ -137,7 +137,7 @@ Begin VB.Form FrmSql
       Left            =   120
       TabIndex        =   4
       Top             =   720
-      Width           =   6975
+      Width           =   6012
       Begin XPControls.XPButton cmdexportar 
          Height          =   375
          Index           =   0
@@ -431,7 +431,7 @@ Begin VB.Form FrmSql
          Height          =   375
          Index           =   6
          Left            =   5160
-         TabIndex        =   33
+         TabIndex        =   32
          Top             =   240
          Width           =   555
          _ExtentX        =   974
@@ -451,7 +451,7 @@ Begin VB.Form FrmSql
          Height          =   375
          Index           =   7
          Left            =   2040
-         TabIndex        =   35
+         TabIndex        =   34
          Top             =   1200
          Width           =   915
          _ExtentX        =   1609
@@ -472,7 +472,7 @@ Begin VB.Form FrmSql
          Height          =   375
          Index           =   8
          Left            =   3480
-         TabIndex        =   36
+         TabIndex        =   35
          Top             =   720
          Width           =   1095
          _ExtentX        =   1926
@@ -595,7 +595,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdOrdem 
       Height          =   435
       Left            =   9000
-      TabIndex        =   28
+      TabIndex        =   27
       Top             =   3600
       Width           =   1275
       _ExtentX        =   2244
@@ -615,7 +615,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdFiltro 
       Height          =   435
       Left            =   9000
-      TabIndex        =   29
+      TabIndex        =   28
       Top             =   3120
       Width           =   1275
       _ExtentX        =   2244
@@ -635,7 +635,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdEditar 
       Height          =   315
       Left            =   120
-      TabIndex        =   31
+      TabIndex        =   30
       TabStop         =   0   'False
       Top             =   2760
       Width           =   975
@@ -656,7 +656,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   315
       Left            =   1200
-      TabIndex        =   30
+      TabIndex        =   29
       TabStop         =   0   'False
       Top             =   2760
       Width           =   1335
@@ -677,7 +677,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdShell 
       Height          =   315
       Left            =   2640
-      TabIndex        =   32
+      TabIndex        =   31
       Top             =   2760
       Width           =   375
       _ExtentX        =   656
@@ -983,13 +983,13 @@ Private Sub CmdFiltro_Click()
   On Error GoTo errhandler
   Dim cFILTRO As String
 
-  cFILTRO = FixStr(filtro)
+  cFILTRO = FixStr(FILTRO)
   If aRELCFG(11) Then
     ePASS01 = ""
     FrmFiltro.Show vbModal, Me
-    filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
+    FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
     If lRETU And Len(aRELCFG(15)) > 0 Then
-      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
       sql.Text = aRELCFG(15)
     End If
   End If
@@ -1100,10 +1100,10 @@ Private Sub CmdVisua_Click()
     End Select
   End If
   If IsExtensao(cARQRTF, "RTF") Then
-    RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
+    RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS02 = 3
     PrintPreview1.ShowPreview
-    RichTextBox1.Text = ""
+    RichTextbox1.Text = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -1136,7 +1136,7 @@ Public Sub MyPrintinghtml()
   Next
 End Sub
 Public Sub MyPrintingRTF()
-  PrinterEx.PrintRichTextBox RichTextBox1
+  PrinterEx.PrintRichTextBox RichTextbox1
 End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
@@ -1167,7 +1167,7 @@ Private Sub Form_Load()
   ''Configura Help
   Me.Caption = cFORMID
   HelpContextID = nFORMID
-  filtro = ""
+  FILTRO = ""
 
   Label1 = aRELCFG(6)
 
@@ -1179,7 +1179,7 @@ Private Sub Form_Load()
   If Not aDIREITOS(5) Then CmdVisua.Visible = False
   If Not aDIREITOS(7) Then CmdEmail.Visible = False
   If Not aRELCFG(11) Then CmdFiltro.Visible = False
-  If Not aRELCFG(11) Then filtro.Visible = False
+  If Not aRELCFG(11) Then FILTRO.Visible = False
   If Not aDIREITOS(4) Then CmdEditar.Visible = False
   If Not aDIREITOS(4) Then CmdShell.Visible = False
 
@@ -1195,15 +1195,15 @@ Private Sub Form_Load()
   aRELCFG(14) = FixStr(aRELCFG(14))
   If Len(aRELCFG(14)) > 0 Then
     cFILTRO = aRELCFG(14)
-    filtro = cFILTRO
+    FILTRO = cFILTRO
   Else
     If aRELCFG(11) Then
       CmdFiltro_Click
     End If
   End If
   If Len(aRELCFG(15)) > 0 Then
-    If Len(filtro) > 0 Then
-      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+    If Len(FILTRO) > 0 Then
+      aRELCFG(15) = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
     End If
     sql.Text = aRELCFG(15)
   End If

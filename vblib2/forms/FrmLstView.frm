@@ -275,7 +275,7 @@ Begin VB.Form FrmLstView
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin XPControls.XPButton CmdPrinterPort 
+   Begin XPControls.XPButton CmdPrinterPortold 
       Height          =   375
       Left            =   8040
       TabIndex        =   10
@@ -1012,7 +1012,7 @@ Private Sub Grid_DblClick()
               End If
           Case "RTF"
                ePASS03 = 2
-               RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
+               RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
               PrintPreview1.ShowPreview
           Case "JPG"
                ePASS03 = 4
@@ -1076,7 +1076,7 @@ Public Sub MyPrintinghtml()
   Next
 End Sub
 Public Sub MyPrintingRTF()
-  PrinterEx.PrintRichTextBox RichTextBox1
+  PrinterEx.PrintRichTextBox RichTextbox1
 End Sub
 
 Private Sub retornar_Click()

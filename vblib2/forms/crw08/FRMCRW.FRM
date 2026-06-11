@@ -23,7 +23,7 @@ Begin VB.Form FrmCrw
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   375
       Left            =   10200
-      TabIndex        =   30
+      TabIndex        =   29
       TabStop         =   0   'False
       Top             =   4200
       Visible         =   0   'False
@@ -37,7 +37,7 @@ Begin VB.Form FrmCrw
    Begin XPControls.XPButton CmdShell 
       Height          =   315
       Left            =   10080
-      TabIndex        =   28
+      TabIndex        =   27
       Top             =   1920
       Width           =   375
       _ExtentX        =   656
@@ -168,7 +168,7 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   0
          Left            =   120
-         TabIndex        =   20
+         TabIndex        =   19
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
@@ -190,7 +190,7 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   1
          Left            =   960
-         TabIndex        =   21
+         TabIndex        =   20
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
@@ -212,7 +212,7 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   2
          Left            =   1800
-         TabIndex        =   22
+         TabIndex        =   21
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
@@ -234,7 +234,7 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   3
          Left            =   2640
-         TabIndex        =   23
+         TabIndex        =   22
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
@@ -280,35 +280,15 @@ Begin VB.Form FrmCrw
             Strikethrough   =   0   'False
          EndProperty
       End
-      Begin XPControls.XPButton cmdimp 
-         Height          =   435
-         Left            =   1680
-         TabIndex        =   17
-         Top             =   120
-         Width           =   1515
-         _ExtentX        =   2667
-         _ExtentY        =   762
-         Picture         =   "FRMCRW.frx":1F44
-         Caption         =   "Imprimir"
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   7.8
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-      End
       Begin XPControls.XPButton CmdConfImp 
          Height          =   432
          Left            =   1560
-         TabIndex        =   18
+         TabIndex        =   17
          Top             =   600
          Width           =   1572
          _ExtentX        =   2773
          _ExtentY        =   762
-         Picture         =   "FRMCRW.frx":24DE
+         Picture         =   "FRMCRW.frx":1F44
          Caption         =   "Propriedades"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -323,13 +303,13 @@ Begin VB.Form FrmCrw
       Begin XPControls.XPButton Command2 
          Height          =   432
          Left            =   120
-         TabIndex        =   26
+         TabIndex        =   25
          TabStop         =   0   'False
          Top             =   600
          Width           =   1512
          _ExtentX        =   2667
          _ExtentY        =   762
-         Picture         =   "FRMCRW.frx":2A78
+         Picture         =   "FRMCRW.frx":24DE
          Caption         =   "selecionar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -344,7 +324,7 @@ Begin VB.Form FrmCrw
       Begin VBCCR18.CommandButtonW encerrar 
          Height          =   612
          Left            =   4320
-         TabIndex        =   31
+         TabIndex        =   30
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -354,6 +334,26 @@ Begin VB.Form FrmCrw
          ForeColor       =   -2147483640
          ImageListAlignment=   1
          Caption         =   "Retornar"
+         Alignment       =   0
+         VerticalAlignment=   0
+         Picture         =   "FRMCRW.frx":2A78
+         PictureAndCaption=   -1  'True
+         WordWrap        =   0   'False
+         Style           =   1
+      End
+      Begin VBCCR18.CommandButtonW cmdimp 
+         Height          =   612
+         Left            =   3240
+         TabIndex        =   31
+         Top             =   240
+         Width           =   972
+         _ExtentX        =   1715
+         _ExtentY        =   1080
+         Appearance      =   0
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         ImageListAlignment=   1
+         Caption         =   "Imprimir"
          Alignment       =   0
          VerticalAlignment=   0
          Picture         =   "FRMCRW.frx":3012
@@ -399,7 +399,7 @@ Begin VB.Form FrmCrw
    Begin XPControls.XPButton CmdFiltro 
       Height          =   435
       Left            =   7800
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   2400
       Width           =   1515
       _ExtentX        =   2667
@@ -419,7 +419,7 @@ Begin VB.Form FrmCrw
    Begin XPControls.XPButton CmdEditar 
       Height          =   315
       Left            =   7680
-      TabIndex        =   24
+      TabIndex        =   23
       TabStop         =   0   'False
       Top             =   1920
       Width           =   975
@@ -440,7 +440,7 @@ Begin VB.Form FrmCrw
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   315
       Left            =   8760
-      TabIndex        =   25
+      TabIndex        =   24
       TabStop         =   0   'False
       Top             =   1920
       Width           =   1215
@@ -461,7 +461,7 @@ Begin VB.Form FrmCrw
    Begin XPControls.XPButton CmdMudaFec 
       Height          =   495
       Left            =   8880
-      TabIndex        =   27
+      TabIndex        =   26
       TabStop         =   0   'False
       Top             =   3360
       Width           =   1755
@@ -482,7 +482,7 @@ Begin VB.Form FrmCrw
    Begin XPControls.XPButton CmdPreview 
       Height          =   315
       Left            =   10560
-      TabIndex        =   29
+      TabIndex        =   28
       TabStop         =   0   'False
       Top             =   1920
       Width           =   1155
@@ -665,10 +665,10 @@ Private Sub CmdPreview_Click()
   End If
   If IsExtensao(cARQRTF, "RTF") Then
     cARQRTF = TxtArquivo.Text
-    RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
+    RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.Text = ""
+    RichTextbox1.Text = ""
   End If
 End Sub
 Public Sub MyPrintinghtml()
@@ -702,7 +702,7 @@ Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
 End Sub
 
 Public Sub MyPrintingRTF()
-  PrinterEx.PrintRichTextBox RichTextBox1
+  PrinterEx.PrintRichTextBox RichTextbox1
 End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer

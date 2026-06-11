@@ -153,12 +153,12 @@ Begin VB.Form frmIMAGENS
       Width           =   2655
    End
    Begin XPControls.XPButton CmdConfImp 
-      Height          =   435
+      Height          =   432
       Left            =   5280
       TabIndex        =   6
       TabStop         =   0   'False
-      Top             =   4080
-      Width           =   1575
+      Top             =   4200
+      Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   762
       Picture         =   "Frmpecasjpg.frx":15F2
@@ -195,12 +195,12 @@ Begin VB.Form frmIMAGENS
       EndProperty
    End
    Begin XPControls.XPButton cmdimprimir 
-      Height          =   435
+      Height          =   432
       Left            =   5280
       TabIndex        =   8
       TabStop         =   0   'False
-      Top             =   3120
-      Width           =   1575
+      Top             =   2640
+      Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   762
       Picture         =   "Frmpecasjpg.frx":2126
@@ -299,31 +299,10 @@ Begin VB.Form frmIMAGENS
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin XPControls.XPButton XPButton1 
-      Height          =   435
-      Left            =   5280
-      TabIndex        =   17
-      TabStop         =   0   'False
-      Top             =   3600
-      Width           =   1575
-      _ExtentX        =   2773
-      _ExtentY        =   762
-      Picture         =   "Frmpecasjpg.frx":3D28
-      Caption         =   "Imprimir (Impressora)"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin VBCCR18.CommandButtonW encerrar 
       Height          =   612
       Left            =   5640
-      TabIndex        =   18
+      TabIndex        =   17
       Top             =   840
       Width           =   972
       _ExtentX        =   1715
@@ -335,7 +314,7 @@ Begin VB.Form frmIMAGENS
       Caption         =   "Retornar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "Frmpecasjpg.frx":42C2
+      Picture         =   "Frmpecasjpg.frx":3D28
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -343,7 +322,7 @@ Begin VB.Form frmIMAGENS
    Begin VBCCR18.CommandButtonW cmdClose 
       Height          =   612
       Left            =   5640
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   120
       Width           =   972
       _ExtentX        =   1715
@@ -353,6 +332,26 @@ Begin VB.Form frmIMAGENS
       ForeColor       =   -2147483640
       ImageListAlignment=   1
       Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "Frmpecasjpg.frx":42C2
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW XPButton1 
+      Height          =   612
+      Left            =   5640
+      TabIndex        =   19
+      Top             =   3480
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Imprimir"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "Frmpecasjpg.frx":485C

@@ -16,7 +16,7 @@ Begin VB.Form FrmTxl
    Begin VBFLXGRD18.VBFlexGrid Listview1 
       Height          =   1335
       Left            =   120
-      TabIndex        =   30
+      TabIndex        =   29
       Top             =   6000
       Width           =   9855
       _ExtentX        =   17378
@@ -31,7 +31,7 @@ Begin VB.Form FrmTxl
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   10080
-      TabIndex        =   28
+      TabIndex        =   27
       TabStop         =   0   'False
       Top             =   2280
       Visible         =   0   'False
@@ -104,7 +104,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.SpinBox LptPort 
          Height          =   375
          Left            =   1080
-         TabIndex        =   31
+         TabIndex        =   30
          Top             =   240
          Width           =   735
          _ExtentX        =   1291
@@ -125,7 +125,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.SpinBox comport 
          Height          =   375
          Left            =   3240
-         TabIndex        =   32
+         TabIndex        =   31
          Top             =   240
          Width           =   735
          _ExtentX        =   1291
@@ -168,35 +168,15 @@ Begin VB.Form FrmTxl
       TabIndex        =   4
       Top             =   720
       Width           =   7305
-      Begin XPControls.XPButton cmdimp 
-         Height          =   675
-         Left            =   1680
+      Begin XPControls.XPButton CmdVisua 
+         Height          =   672
+         Left            =   2760
          TabIndex        =   16
          Top             =   240
-         Width           =   1395
-         _ExtentX        =   2455
-         _ExtentY        =   1185
-         Picture         =   "FrmTxl.frx":06F0
-         Caption         =   "Imprimir (Destino)"
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   7.8
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-      End
-      Begin XPControls.XPButton CmdVisua 
-         Height          =   675
-         Left            =   4440
-         TabIndex        =   17
-         Top             =   240
-         Width           =   1275
+         Width           =   1272
          _ExtentX        =   2244
          _ExtentY        =   1185
-         Picture         =   "FrmTxl.frx":0C8A
+         Picture         =   "FrmTxl.frx":06F0
          Caption         =   "Visualizar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -211,13 +191,13 @@ Begin VB.Form FrmTxl
       Begin XPControls.XPButton CmdConfImp 
          Height          =   675
          Left            =   120
-         TabIndex        =   24
+         TabIndex        =   23
          TabStop         =   0   'False
          Top             =   240
          Width           =   1455
          _ExtentX        =   2561
          _ExtentY        =   1185
-         Picture         =   "FrmTxl.frx":1224
+         Picture         =   "FrmTxl.frx":0C8A
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -230,14 +210,14 @@ Begin VB.Form FrmTxl
          EndProperty
       End
       Begin XPControls.XPButton XPButton1 
-         Height          =   675
-         Left            =   3120
-         TabIndex        =   29
+         Height          =   672
+         Left            =   1320
+         TabIndex        =   28
          Top             =   240
-         Width           =   1275
+         Width           =   1272
          _ExtentX        =   2244
          _ExtentY        =   1185
-         Picture         =   "FrmTxl.frx":17BE
+         Picture         =   "FrmTxl.frx":1224
          Caption         =   "Imprimir (Impressora)"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -251,17 +231,37 @@ Begin VB.Form FrmTxl
       End
       Begin VBCCR18.CommandButtonW Encerrar 
          Height          =   612
-         Left            =   5880
-         TabIndex        =   34
+         Left            =   6240
+         TabIndex        =   33
          Top             =   240
-         Width           =   1212
-         _ExtentX        =   2138
+         Width           =   972
+         _ExtentX        =   1715
          _ExtentY        =   1080
          Appearance      =   0
          BackColor       =   -2147483643
          ForeColor       =   -2147483640
          ImageListAlignment=   1
          Caption         =   "Retornar"
+         Alignment       =   0
+         VerticalAlignment=   0
+         Picture         =   "FrmTxl.frx":17BE
+         PictureAndCaption=   -1  'True
+         WordWrap        =   0   'False
+         Style           =   1
+      End
+      Begin VBCCR18.CommandButtonW cmdimp 
+         Height          =   612
+         Left            =   5040
+         TabIndex        =   34
+         Top             =   240
+         Width           =   1092
+         _ExtentX        =   1926
+         _ExtentY        =   1080
+         Appearance      =   0
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         ImageListAlignment=   1
+         Caption         =   "Imprimir Porta"
          Alignment       =   0
          VerticalAlignment=   0
          Picture         =   "FrmTxl.frx":1D58
@@ -282,7 +282,7 @@ Begin VB.Form FrmTxl
          Height          =   375
          Index           =   0
          Left            =   120
-         TabIndex        =   20
+         TabIndex        =   19
          TabStop         =   0   'False
          Top             =   360
          Width           =   795
@@ -304,7 +304,7 @@ Begin VB.Form FrmTxl
          Height          =   372
          Index           =   1
          Left            =   840
-         TabIndex        =   21
+         TabIndex        =   20
          TabStop         =   0   'False
          Top             =   360
          Width           =   852
@@ -326,7 +326,7 @@ Begin VB.Form FrmTxl
          Height          =   372
          Index           =   2
          Left            =   1800
-         TabIndex        =   22
+         TabIndex        =   21
          TabStop         =   0   'False
          Top             =   360
          Width           =   792
@@ -348,7 +348,7 @@ Begin VB.Form FrmTxl
          Height          =   372
          Index           =   3
          Left            =   2520
-         TabIndex        =   23
+         TabIndex        =   22
          TabStop         =   0   'False
          Top             =   360
          Width           =   792
@@ -370,7 +370,7 @@ Begin VB.Form FrmTxl
          Height          =   372
          Index           =   4
          Left            =   3240
-         TabIndex        =   33
+         TabIndex        =   32
          TabStop         =   0   'False
          Top             =   360
          Width           =   792
@@ -419,7 +419,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdFiltro 
       Height          =   435
       Left            =   10080
-      TabIndex        =   18
+      TabIndex        =   17
       Top             =   3960
       Width           =   1215
       _ExtentX        =   2138
@@ -439,7 +439,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdOrdem 
       Height          =   435
       Left            =   10080
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   4920
       Width           =   1275
       _ExtentX        =   2244
@@ -459,7 +459,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdEditar 
       Height          =   315
       Left            =   960
-      TabIndex        =   26
+      TabIndex        =   25
       TabStop         =   0   'False
       Top             =   2280
       Width           =   975
@@ -480,7 +480,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   315
       Left            =   2040
-      TabIndex        =   25
+      TabIndex        =   24
       TabStop         =   0   'False
       Top             =   2280
       Width           =   1335
@@ -501,7 +501,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdShell 
       Height          =   315
       Left            =   3480
-      TabIndex        =   27
+      TabIndex        =   26
       Top             =   2280
       Width           =   375
       _ExtentX        =   656
@@ -728,6 +728,10 @@ Private Sub CmdOrdem_Click()
   End If
 End Sub
 
+
+Private Sub cmdPrint_Click()
+
+End Sub
 
 Private Sub CmdShell_Click()
   Dim cARQSHELL As String

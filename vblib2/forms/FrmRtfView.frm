@@ -30,35 +30,15 @@ Begin VB.Form FrmRtfView
       _ExtentX        =   953
       _ExtentY        =   953
    End
-   Begin XPControls.XPButton cmdimp 
-      Height          =   435
+   Begin XPControls.XPButton ImpDireto 
+      Height          =   792
       Left            =   11760
       TabIndex        =   1
-      Top             =   240
-      Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   762
-      Picture         =   "FrmRtfView.frx":0166
-      Caption         =   "Imprimir"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton ImpDireto 
-      Height          =   795
-      Left            =   11760
-      TabIndex        =   2
-      Top             =   720
-      Width           =   1215
+      Top             =   960
+      Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   1397
-      Picture         =   "FrmRtfView.frx":0700
+      Picture         =   "FrmRtfView.frx":0166
       Caption         =   "Imprimir Direto (Porta)"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -71,15 +51,15 @@ Begin VB.Form FrmRtfView
       EndProperty
    End
    Begin XPControls.XPButton SalvarComoTxt 
-      Height          =   375
+      Height          =   372
       Left            =   11880
-      TabIndex        =   3
+      TabIndex        =   2
       TabStop         =   0   'False
-      Top             =   2280
-      Width           =   795
+      Top             =   3840
+      Width           =   792
       _ExtentX        =   1397
       _ExtentY        =   656
-      Picture         =   "FrmRtfView.frx":0C9A
+      Picture         =   "FrmRtfView.frx":0700
       Caption         =   "TXT"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -92,15 +72,15 @@ Begin VB.Form FrmRtfView
       EndProperty
    End
    Begin XPControls.XPButton SalvarComoHTML 
-      Height          =   375
+      Height          =   372
       Left            =   11880
-      TabIndex        =   4
+      TabIndex        =   3
       TabStop         =   0   'False
-      Top             =   2760
-      Width           =   855
+      Top             =   4320
+      Width           =   852
       _ExtentX        =   1503
       _ExtentY        =   656
-      Picture         =   "FrmRtfView.frx":1034
+      Picture         =   "FrmRtfView.frx":0A9A
       Caption         =   "Html"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -113,15 +93,15 @@ Begin VB.Form FrmRtfView
       EndProperty
    End
    Begin XPControls.XPButton CmdSalvarComoPdf 
-      Height          =   375
+      Height          =   372
       Left            =   11880
-      TabIndex        =   5
+      TabIndex        =   4
       TabStop         =   0   'False
-      Top             =   3240
-      Width           =   795
+      Top             =   4680
+      Width           =   792
       _ExtentX        =   1397
       _ExtentY        =   656
-      Picture         =   "FrmRtfView.frx":15CE
+      Picture         =   "FrmRtfView.frx":1034
       Caption         =   "PDF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -134,15 +114,15 @@ Begin VB.Form FrmRtfView
       EndProperty
    End
    Begin XPControls.XPButton SalvarComoRTF 
-      Height          =   375
+      Height          =   372
       Left            =   11880
-      TabIndex        =   6
+      TabIndex        =   5
       TabStop         =   0   'False
-      Top             =   3720
-      Width           =   795
+      Top             =   5640
+      Width           =   792
       _ExtentX        =   1397
       _ExtentY        =   656
-      Picture         =   "FrmRtfView.frx":1968
+      Picture         =   "FrmRtfView.frx":13CE
       Caption         =   "RTF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -157,13 +137,13 @@ Begin VB.Form FrmRtfView
    Begin XPControls.XPButton Cmdsalvadoc 
       Height          =   372
       Left            =   11880
-      TabIndex        =   7
+      TabIndex        =   6
       TabStop         =   0   'False
-      Top             =   4200
+      Top             =   5160
       Width           =   792
       _ExtentX        =   1397
       _ExtentY        =   656
-      Picture         =   "FrmRtfView.frx":1D02
+      Picture         =   "FrmRtfView.frx":1768
       Caption         =   "doc"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -178,8 +158,8 @@ Begin VB.Form FrmRtfView
    Begin VBCCR18.CommandButtonW retornar 
       Height          =   612
       Left            =   11760
-      TabIndex        =   8
-      Top             =   1440
+      TabIndex        =   7
+      Top             =   1680
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -188,6 +168,26 @@ Begin VB.Form FrmRtfView
       ForeColor       =   -2147483640
       ImageListAlignment=   1
       Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmRtfView.frx":1B02
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdPrint 
+      Height          =   612
+      Left            =   11760
+      TabIndex        =   8
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Imprimir"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "FrmRtfView.frx":209C
@@ -203,11 +203,13 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Dim larqtxt As Boolean
-Private Sub cmdimp_Click()
+
+
+Private Sub cmdPrint_Click()
   PrintPreview1.ShowPreview
   RichTextbox1.SetFocus
-End Sub
 
+End Sub
 
 Private Sub Cmdsalvadoc_Click()
  Dim sFILTER As String
