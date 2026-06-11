@@ -1,20 +1,21 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
 Begin VB.Form FrmRpt 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Relatórios /Documentos"
-   ClientHeight    =   4590
-   ClientLeft      =   1095
-   ClientTop       =   330
-   ClientWidth     =   11325
+   ClientHeight    =   4584
+   ClientLeft      =   1092
+   ClientTop       =   336
+   ClientWidth     =   11328
    HelpContextID   =   7
    Icon            =   "frmRPT.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   4590
-   ScaleWidth      =   11325
+   ScaleHeight     =   4584
+   ScaleWidth      =   11328
    ShowInTaskbar   =   0   'False
    Begin VB.TextBox text 
       BackColor       =   &H00C0FFFF&
@@ -98,12 +99,12 @@ Begin VB.Form FrmRpt
       TabIndex        =   0
       Top             =   900
       Width           =   9615
-      _ExtentX        =   16960
-      _ExtentY        =   6165
+      _ExtentX        =   16955
+      _ExtentY        =   6160
       ControlJustAdded=   0   'False
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -177,7 +178,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Limpar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -241,7 +242,7 @@ Begin VB.Form FrmRpt
          Caption         =   "*..."
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -263,7 +264,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Ext..."
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -430,17 +431,17 @@ Begin VB.Form FrmRpt
       Begin XPControls.XPButton escolherrpt 
          Height          =   315
          Left            =   8760
-         TabIndex        =   55
+         TabIndex        =   54
          TabStop         =   0   'False
          Top             =   240
          Width           =   735
-         _ExtentX        =   1296
-         _ExtentY        =   556
+         _ExtentX        =   1291
+         _ExtentY        =   550
          Picture         =   "frmRPT.frx":0F80
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -452,17 +453,17 @@ Begin VB.Form FrmRpt
          Height          =   315
          Index           =   0
          Left            =   8760
-         TabIndex        =   56
+         TabIndex        =   55
          TabStop         =   0   'False
          Top             =   600
          Width           =   735
-         _ExtentX        =   1296
-         _ExtentY        =   556
+         _ExtentX        =   1291
+         _ExtentY        =   550
          Picture         =   "frmRPT.frx":151A
          Caption         =   "E.."
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -474,17 +475,17 @@ Begin VB.Form FrmRpt
          Height          =   315
          Index           =   1
          Left            =   8760
-         TabIndex        =   57
+         TabIndex        =   56
          TabStop         =   0   'False
          Top             =   960
          Width           =   735
-         _ExtentX        =   1296
-         _ExtentY        =   556
+         _ExtentX        =   1291
+         _ExtentY        =   550
          Picture         =   "frmRPT.frx":1AB4
          Caption         =   "E.."
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -496,17 +497,17 @@ Begin VB.Form FrmRpt
          Height          =   315
          Index           =   0
          Left            =   -67440
-         TabIndex        =   59
+         TabIndex        =   58
          TabStop         =   0   'False
          Top             =   225
          Width           =   495
-         _ExtentX        =   873
-         _ExtentY        =   556
+         _ExtentX        =   868
+         _ExtentY        =   550
          Picture         =   "frmRPT.frx":204E
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -518,17 +519,17 @@ Begin VB.Form FrmRpt
          Height          =   315
          Index           =   1
          Left            =   -67440
-         TabIndex        =   60
+         TabIndex        =   59
          TabStop         =   0   'False
          Top             =   585
          Width           =   495
-         _ExtentX        =   873
-         _ExtentY        =   556
+         _ExtentX        =   868
+         _ExtentY        =   550
          Picture         =   "frmRPT.frx":25E8
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -540,17 +541,17 @@ Begin VB.Form FrmRpt
          Height          =   315
          Index           =   2
          Left            =   -67440
-         TabIndex        =   61
+         TabIndex        =   60
          TabStop         =   0   'False
          Top             =   945
          Width           =   495
-         _ExtentX        =   873
-         _ExtentY        =   556
+         _ExtentX        =   868
+         _ExtentY        =   550
          Picture         =   "frmRPT.frx":2B82
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -562,17 +563,17 @@ Begin VB.Form FrmRpt
          Height          =   315
          Index           =   3
          Left            =   -67440
-         TabIndex        =   54
+         TabIndex        =   53
          TabStop         =   0   'False
          Top             =   1305
          Width           =   495
-         _ExtentX        =   873
-         _ExtentY        =   556
+         _ExtentX        =   868
+         _ExtentY        =   550
          Picture         =   "frmRPT.frx":311C
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -585,7 +586,7 @@ Begin VB.Form FrmRpt
          Caption         =   "SQL"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -605,7 +606,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Obs:"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -625,7 +626,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Título"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -645,7 +646,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Mensagem"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -665,7 +666,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Abrir Com"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -685,7 +686,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Arquivo"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -705,7 +706,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Prefiltro"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -725,7 +726,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Acumulado"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -745,7 +746,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Fechado"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -765,7 +766,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Baixa"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -785,7 +786,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Atual"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -805,7 +806,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Tabela"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -825,7 +826,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Alias"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -846,7 +847,7 @@ Begin VB.Form FrmRpt
          Caption         =   "Arquivo Caminhos Parâmetros"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -862,19 +863,19 @@ Begin VB.Form FrmRpt
          Width           =   1035
       End
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   9480
-      TabIndex        =   53
-      Top             =   120
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+   Begin XPControls.XPButton Command1 
+      Height          =   372
+      Left            =   9840
+      TabIndex        =   57
+      Top             =   960
+      Width           =   1092
+      _ExtentX        =   1926
+      _ExtentY        =   656
       Picture         =   "frmRPT.frx":36B6
-      Caption         =   "Salvar"
+      Caption         =   "Liberar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -882,31 +883,31 @@ Begin VB.Form FrmRpt
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin XPControls.XPButton Command1 
-      Height          =   375
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
       Left            =   9840
-      TabIndex        =   58
-      Top             =   840
-      Width           =   1095
-      _ExtentX        =   1931
-      _ExtentY        =   661
+      TabIndex        =   61
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
       Picture         =   "frmRPT.frx":3C50
-      Caption         =   "Liberar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "Prefiltro"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -925,7 +926,7 @@ Begin VB.Form FrmRpt
       Caption         =   "Inclusão Alteracao"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -944,7 +945,7 @@ Begin VB.Form FrmRpt
       Caption         =   "Qtde"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -963,7 +964,7 @@ Begin VB.Form FrmRpt
       Caption         =   "Ultilizado"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -982,7 +983,7 @@ Begin VB.Form FrmRpt
       Caption         =   "Cód.Interno"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -1001,7 +1002,7 @@ Begin VB.Form FrmRpt
       Caption         =   "Descrição"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -1020,7 +1021,7 @@ Begin VB.Form FrmRpt
       Caption         =   "Sub-Grupo"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -1039,7 +1040,7 @@ Begin VB.Form FrmRpt
       Caption         =   "Código"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -1076,14 +1077,14 @@ Option Explicit
 
 Private Sub CmdAbrirCom_Click(Index As Integer)
 
-  eLOCALIZA = Text(5).Text
+  eLOCALIZA = tEXT(5).tEXT
   ePASS01 = ""
   If Index = 0 Then
-    ePASS01 = EXTENSAO(FixStr(Text(4).Text))
+    ePASS01 = EXTENSAO(FixStr(tEXT(4).tEXT))
   End If
   EscRptExec.Show vbModal, Me
   If lRETU Then
-    Text(5).Text = eRETU02
+    tEXT(5).tEXT = eRETU02
   End If
 
 End Sub
@@ -1094,9 +1095,9 @@ End Sub
 
 Private Sub CmdEDIT_Click(Index As Integer)
 Dim cEXTENSAO As String
-  eLOCALIZA = Text(5).Text
+  eLOCALIZA = tEXT(5).tEXT
   If Index = 0 Then
-    cARQRTF = Text(4).Text
+    cARQRTF = tEXT(4).tEXT
     cEXTENSAO = EXTENSAO(cARQRTF)
     Select Case cEXTENSAO
       Case "RPT"
@@ -1114,22 +1115,22 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub Command2_Click()
-  Text(5).Text = ""
+  tEXT(5).tEXT = ""
 End Sub
 
 Private Sub escarq_Click(Index As Integer)
   Index = Index + 18
-  ePASS01 = Text(Index)
+  ePASS01 = tEXT(Index)
  ' FrmPegdb.Show vbModal, Me
   If lRETU Then
-    Text(Index) = eRETU01
+    tEXT(Index) = eRETU01
   End If
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   If MDG("Gravar e Sair", "Gravando ") Then
     For nITEM = 0 To 23
-      aVAL(nITEM) = Text(nITEM)
+      aVAL(nITEM) = tEXT(nITEM)
     Next nITEM
     For nITEM = 24 To 26
       aVAL(nITEM) = FixNumBol(chkFields(nITEM).Value)
@@ -1186,7 +1187,7 @@ Private Sub escolherrpt_Click()
       sPath = Caminex(zRPTCAM)
     End If
   End If
-  Text(4).Text = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
+  tEXT(4).tEXT = FileOpen(Me, cFILTER, 1, "", "*", sPath, "Escolher Arquivo")
 
 End Sub
 
@@ -1231,7 +1232,7 @@ Private Sub Form_Load()
                "", "", "", "", False, False, False)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 23
-    Text(nITEM) = aVAL(nITEM)
+    tEXT(nITEM) = aVAL(nITEM)
   Next nITEM
   For nITEM = 24 To 26
     chkFields(nITEM) = aVAL(nITEM)
@@ -1243,8 +1244,8 @@ Private Sub Form_Load()
   cSP1.Language = "pt-BR"
   cSP2.Language = "pt-BR"
     
-  cSP1.Init Text(7).hwnd
-  cSP2.Init Text(8).hwnd
+  cSP1.Init tEXT(7).hwnd
+  cSP2.Init tEXT(8).hwnd
 End Sub
 
 

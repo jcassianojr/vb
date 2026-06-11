@@ -1,5 +1,4 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form frmMENU 
    BorderStyle     =   3  'Fixed Dialog
@@ -105,31 +104,11 @@ Begin VB.Form frmMENU
       Max             =   999
       Value           =   1
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   6360
-      TabIndex        =   10
-      Top             =   120
-      Width           =   1515
-      _ExtentX        =   2667
-      _ExtentY        =   762
-      Picture         =   "frmMENU.frx":058A
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin VBCCR18.CommandButtonW encerrar 
       Height          =   612
       Left            =   6600
-      TabIndex        =   11
-      Top             =   600
+      TabIndex        =   10
+      Top             =   840
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -138,6 +117,26 @@ Begin VB.Form frmMENU
       ForeColor       =   -2147483640
       ImageListAlignment=   1
       Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmMENU.frx":058A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   6600
+      TabIndex        =   11
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "frmMENU.frx":0B24

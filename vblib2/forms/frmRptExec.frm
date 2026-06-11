@@ -1,19 +1,20 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form frmRptExec 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Tipos de Execuçao Gerenciador Relatorio/Documentos"
-   ClientHeight    =   2505
-   ClientLeft      =   1095
-   ClientTop       =   330
-   ClientWidth     =   8235
+   ClientHeight    =   2496
+   ClientLeft      =   1092
+   ClientTop       =   336
+   ClientWidth     =   8244
    HelpContextID   =   7
    Icon            =   "frmRptExec.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2505
-   ScaleWidth      =   8235
+   ScaleHeight     =   2496
+   ScaleWidth      =   8244
    ShowInTaskbar   =   0   'False
    Begin VB.CommandButton cmdescexe 
       Caption         =   "Executavel"
@@ -36,7 +37,7 @@ Begin VB.Form frmRptExec
       Caption         =   "Formulario"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -56,7 +57,7 @@ Begin VB.Form frmRptExec
       Caption         =   "Conf.Sis.Opr."
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -120,19 +121,19 @@ Begin VB.Form frmRptExec
       Top             =   360
       Width           =   1335
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   6600
+   Begin XPControls.XPButton CmdEscExt 
+      Height          =   375
+      Left            =   6180
       TabIndex        =   13
       Top             =   240
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+      Width           =   375
+      _ExtentX        =   656
+      _ExtentY        =   656
       Picture         =   "frmRptExec.frx":058A
-      Caption         =   "Salvar"
+      Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -140,25 +141,25 @@ Begin VB.Form frmRptExec
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin XPControls.XPButton CmdEscExt 
-      Height          =   375
-      Left            =   6180
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   6960
       TabIndex        =   14
       Top             =   240
-      Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
       Picture         =   "frmRptExec.frx":0B24
-      Caption         =   ""
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label Label1 
       Caption         =   "Extensao"
@@ -235,7 +236,7 @@ End Sub
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   If MDG("Gravar e Sair", "Gravando ") Then
     For nITEM = 0 To nCAMPOS - 1
-      aVAL(nITEM) = Text(nITEM)
+      aVAL(nITEM) = tEXT(nITEM)
     Next nITEM
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 'comeca com 1 numero e chave
     GravaLog nFORMID, 0, "Gravou "
@@ -250,17 +251,17 @@ Private Sub cmdescexe_Click()
   Dim sPath As String
   Dim sFILTER As String
   Dim sFileName As String
-  sRECENTFILE = Text(2)
-  sPath = Text(2)
+  sRECENTFILE = tEXT(2)
+  sPath = tEXT(2)
   sFILTER = "Executáveis" & vbNullChar & "*.exe" & vbNullChar & "Todos os Arquivos" & vbNullChar & "*.*"
   sFileName = FileOpen(Me, sFILTER, 1, sRECENTFILE, "ini", sPath, "Open Ini File")
   If Not Len(sFileName) = 0 Then
-    Text(2) = NomeArq(sFileName)
+    tEXT(2) = NomeArq(sFileName)
   End If
 End Sub
 
 Private Sub CmdEscExt_Click()
-  eLOCALIZA = Text(3)
+  eLOCALIZA = tEXT(3)
   aTABELA = Array(1061, "Tipos Arquivos (Extensoes)", "TIPOSARQ", 8, 1062, "SYSCONF")
 '  EscCodNome.Show vbModal, Me
 '  If lRETU Then
@@ -269,7 +270,7 @@ Private Sub CmdEscExt_Click()
 End Sub
 
 Private Sub CmdEscform_Click()
-  eLOCALIZA = Text(2)
+  eLOCALIZA = tEXT(2)
   ePASS01 = 0
   'EscForm.Show vbModal, Me
   'If lRETU Then
@@ -279,7 +280,7 @@ Private Sub CmdEscform_Click()
 End Sub
 
 Private Sub CmdShell_Click()
-  Text(2) = "SHELL"
+  tEXT(2) = "SHELL"
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
@@ -308,7 +309,7 @@ Private Sub Form_Load()
   aPAD = Array(0, "", "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To nCAMPOS - 1
-    Text(nITEM) = aVAL(nITEM)
+    tEXT(nITEM) = aVAL(nITEM)
   Next nITEM
 
 End Sub

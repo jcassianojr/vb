@@ -1,17 +1,18 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form frmRPTUSR 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Direitos de Uso Relatorio"
-   ClientHeight    =   2205
-   ClientLeft      =   1095
-   ClientTop       =   330
+   ClientHeight    =   2196
+   ClientLeft      =   1092
+   ClientTop       =   336
    ClientWidth     =   8340
    Icon            =   "frmRPTUSR.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2205
+   ScaleHeight     =   2196
    ScaleWidth      =   8340
    ShowInTaskbar   =   0   'False
    Begin XPControls.XPButton CmdLibTudo 
@@ -25,7 +26,7 @@ Begin VB.Form frmRPTUSR
       Caption         =   "Liberar Tudo"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -47,7 +48,7 @@ Begin VB.Form frmRPTUSR
       Caption         =   "Ext..."
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -69,7 +70,7 @@ Begin VB.Form frmRPTUSR
       Caption         =   "*..."
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -230,25 +231,25 @@ Begin VB.Form frmRPTUSR
       Top             =   120
       Width           =   855
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   6720
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   7080
       TabIndex        =   22
-      Top             =   120
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmRPTUSR.frx":038A
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmRPTUSR.frx":038A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "Codigo"
@@ -321,14 +322,14 @@ Dim x As Integer
 Attribute x.VB_VarUserMemId = 1073938440
 
 Private Sub CmdAbrirCom_Click(Index As Integer)
-  eLOCALIZA = TXTFIELDS(5).tEXT
+  eLOCALIZA = txtFields(5).tEXT
   ePASS01 = ""
   If Index = 0 Then
     ePASS01 = EXTENSAO(cARQUIVO)
   End If
   EscRptExec.Show vbModal, Me
   If lRETU Then
-    TXTFIELDS(5) = eRETU02
+    txtFields(5) = eRETU02
   End If
 End Sub
 
@@ -351,11 +352,11 @@ Private Sub Form_Load()
   CenterFormToScreen Me
 
   cSQL = "select * from " & ArqRPTUsr() & " WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "' AND IDUSUARIO=" & zIDRPTUSR
-  TXTFIELDS(0) = zIDRPTUSR
-  TXTFIELDS(1) = ePASS03
+  txtFields(0) = zIDRPTUSR
+  txtFields(1) = ePASS03
   'txtFields(2) = "" codigo
-  TXTFIELDS(3) = zgrp
-  TXTFIELDS(4) = zRPT
+  txtFields(3) = zgrp
+  txtFields(4) = zRPT
 
   cARQUSR = DBWRPT
   aCAM = Array("IMPRIME", "EXPORTA", "VISUALIZA", "SALVARTF", "SALVATXT", _
@@ -368,7 +369,7 @@ Private Sub Form_Load()
   For x = 0 To 7
     chkFields(x) = aVAL(x)
   Next x
-  TXTFIELDS(5) = aVAL(8)
+  txtFields(5) = aVAL(8)
   nFORMID = 998
 End Sub
 
@@ -378,7 +379,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     For x = 0 To 7
       aVAL(x) = FixNumBol(chkFields(x))
     Next x
-    aVAL(8) = TXTFIELDS(5)
+    aVAL(8) = txtFields(5)
     GrvSQL cARQUSR, cSQL, 9, aCAM, aVAL, aFOR
     GravaLog nFORMID, 0, "Gravou "
   Else

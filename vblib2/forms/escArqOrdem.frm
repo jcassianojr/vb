@@ -12,33 +12,14 @@ Begin VB.Form EscArqOrdem
    ScaleHeight     =   3480
    ScaleWidth      =   6528
    StartUpPosition =   3  'Windows Default
-   Begin XPControls.XPButton CmdEscolher 
-      Height          =   495
-      Left            =   5040
-      TabIndex        =   3
-      Top             =   120
-      Width           =   1335
-      _ExtentX        =   0
-      _ExtentY        =   0
-      Caption         =   "Escolher Ordem"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton CmdZerar 
-      Height          =   495
-      Left            =   5040
+      Height          =   852
+      Left            =   5160
       TabIndex        =   2
-      Top             =   840
-      Width           =   1335
-      _ExtentX        =   0
-      _ExtentY        =   0
+      Top             =   1680
+      Width           =   1092
+      _ExtentX        =   1926
+      _ExtentY        =   1503
       Caption         =   "Apagar Ordem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -66,13 +47,13 @@ Begin VB.Form EscArqOrdem
       Width           =   4815
    End
    Begin VBCCR18.CommandButtonW encerrar 
-      Height          =   492
-      Left            =   5040
-      TabIndex        =   4
-      Top             =   1440
-      Width           =   1212
-      _ExtentX        =   2138
-      _ExtentY        =   868
+      Height          =   612
+      Left            =   5160
+      TabIndex        =   3
+      Top             =   840
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
       Appearance      =   0
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
@@ -81,6 +62,26 @@ Begin VB.Form EscArqOrdem
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "escArqOrdem.frx":058A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdEscolher 
+      Height          =   612
+      Left            =   5160
+      TabIndex        =   4
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Escolher"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "escArqOrdem.frx":0B24
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -101,7 +102,7 @@ Private Sub CmdEscolher_Click()
   Unload Me
 End Sub
 
-Private Sub cmdsair_Click()
+Private Sub CmdSair_Click()
 
 End Sub
 
@@ -109,7 +110,7 @@ Private Sub CmdZerar_Click()
   TxtOrdem = ""
 End Sub
 
-Private Sub encerrar_Click()
+Private Sub Encerrar_Click()
   lRETU = False
   eRETU01 = ""
   Unload Me

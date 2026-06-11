@@ -1,21 +1,21 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form frmLocalizar 
    Caption         =   "Localizar"
-   ClientHeight    =   2025
+   ClientHeight    =   2028
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   6345
+   ClientTop       =   348
+   ClientWidth     =   6348
    Icon            =   "frmlocalizar.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   2025
-   ScaleWidth      =   6345
+   ScaleHeight     =   2028
+   ScaleWidth      =   6348
    StartUpPosition =   3  'Windows Default
    Begin VB.TextBox cBUSCA 
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -29,37 +29,17 @@ Begin VB.Form frmLocalizar
       Top             =   480
       Width           =   4395
    End
-   Begin XPControls.XPButton Command2 
-      Height          =   435
-      Left            =   4680
-      TabIndex        =   3
-      Top             =   600
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmlocalizar.frx":058A
-      Caption         =   "Cancelar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin VBCCR18.SpinBox nIND 
       Height          =   615
       Left            =   2160
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   1200
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   1085
+      _ExtentX        =   1291
+      _ExtentY        =   1080
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   13.5
+         Size            =   13.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -73,17 +53,17 @@ Begin VB.Form frmLocalizar
    Begin XPControls.XPButton Command1 
       Height          =   375
       Left            =   4680
-      TabIndex        =   5
+      TabIndex        =   4
       TabStop         =   0   'False
       Top             =   120
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
-      Picture         =   "frmlocalizar.frx":0B24
+      _ExtentX        =   2773
+      _ExtentY        =   656
+      Picture         =   "frmlocalizar.frx":058A
       Caption         =   "Localizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -91,11 +71,31 @@ Begin VB.Form frmLocalizar
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR18.CommandButtonW Command2 
+      Height          =   612
+      Left            =   4680
+      TabIndex        =   5
+      Top             =   1080
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Cancelar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmlocalizar.frx":0B24
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
    Begin VB.Label Label2 
       Caption         =   "Digite a Coluna de Busca"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -113,7 +113,7 @@ Begin VB.Form frmLocalizar
       Caption         =   "Digite a Chave de Busca"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
