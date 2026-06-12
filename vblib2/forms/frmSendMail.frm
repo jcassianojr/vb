@@ -324,22 +324,26 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+
+' Defina aqui o nome da conta que o formulário deve carregar por padrão
+Private Const CONTA_PADRAO As String = "PADRAO"
+
 Private Sub CmdCancelar_Click()
   Unload Me
 End Sub
-Private Sub CmdEnviar_Click()
- 
- cdoenviar_Click  ''cdo
 
+Private Sub CmdEnviar_Click()
+  cdoenviar_Click
 End Sub
+
 Private Sub CmdLimpa_Click()
-  txt_status.Text = ""
+  txt_status.tEXT = ""
 End Sub
 
 Private Sub Command9_Click()
   Dim cOrigem As String
   Dim cDestino As String
-  cOrigem = txt_attach.Text
+  cOrigem = txt_attach.tEXT
   If InStr(UCase(cOrigem), ".ZIP") > 0 Then
     Alert ("Ja e um zip")
   Else
@@ -348,27 +352,24 @@ Private Sub Command9_Click()
       .AddFile cOrigem
        .CompressArchive cDestino
     End With
-    txt_attach.Text = cDestino
+    txt_attach.tEXT = cDestino
   End If
-
 End Sub
 
 Private Sub cdoenviar_Click()
   Dim RetVal As String
-  RetVal = SendMailCDO(Trim$(txt_email_to.Text), _
-                       Trim$(txt_subject.Text), _
-                       Trim$(txtFromName.Text) & "<" & Trim$(txt_email_from.Text) & ">", _
-                       Trim$(txt_message_text.Text), _
-                       Trim$(txt_smtp_server.Text), _
-                       CInt(Trim$(Txt_Porta.Text)), _
-                       Trim$(txtUsername.Text), _
-                       Trim$(txtPassword.Text), _
-                       Trim$(txt_attach.Text), _
+  RetVal = SendMailCDO(Trim$(txt_email_to.tEXT), _
+                       Trim$(txt_subject.tEXT), _
+                       Trim$(txtFromName.tEXT) & "<" & Trim$(txt_email_from.tEXT) & ">", _
+                       Trim$(txt_message_text.tEXT), _
+                       Trim$(txt_smtp_server.tEXT), _
+                       CInt(Trim$(Txt_Porta.tEXT)), _
+                       Trim$(txtUsername.tEXT), _
+                       Trim$(txtPassword.tEXT), _
+                       Trim$(txt_attach.tEXT), _
                        CBool(chkSSL.Value))
-  txt_status.Text = RetVal
-
+  txt_status.tEXT = RetVal
 End Sub
-
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
   TeclaEnter KeyCode
@@ -376,35 +377,95 @@ End Sub
 
 Private Sub Form_Load()
   CenterFormToScreen Me
-  txt_status.Text = "Pronto." & vbCrLf
-  txt_smtp_server.Text = ePASS01(0)
-  Txt_Porta.Text = ePASS01(1)
-  txt_email_from.Text = ePASS01(2)
-  txt_email_to.Text = ePASS01(3)
-  txt_subject.Text = ePASS01(4)
-  txt_attach.Text = ePASS01(5)
-  txt_message_text.Text = ePASS01(6)
-  If Len(txt_smtp_server.Text) = 0 Then
-    txt_smtp_server.Text = PegPath("EMAIL", "SERVER", "stmp..com.br")
+  txt_status.tEXT = "Pronto." & vbCrLf
+  
+  ' --- IDENTIFICAÇÃO DINÂMICA DA CONTA ---
+  Dim sContaAtiva As String
+  
+  ' Tenta obter o nome da conta associada ao usuário/folha atual
+  sContaAtiva = Trim(PegPath("EMAIL", UCase(zNOMEFOLHA), ""))
+  
+  ' Caso o INI retorne vazio, define uma conta padrão para não quebrar a busca no cofre
+  If sContaAtiva = "" Then
+    sContaAtiva = "PADRAO"
   End If
-  If Len(Txt_Porta.Text) = 0 Then
-    Txt_Porta.Text = PegPath("EMAIL", "PORTA", "25")
+  
+  ' --- CARREGAMENTO INDEPENDENTE ELEMENTO POR ELEMENTO ---
+  
+  ' 0 - Servidor SMTP
+  If Trim(ePASS01(0)) <> "" Then
+    txt_smtp_server.tEXT = ePASS01(0)
+  Else
+    txt_smtp_server.tEXT = LerDoCofre(sContaAtiva, "SmtpServer")
   End If
-  If Len(txt_email_from.Text) = 0 Then
-    txt_email_from.Text = PegPath("EMAIL", UCase(zNOMEFOLHA), " ")
-    If Len(Trim(txt_email_from.Text)) = 0 Then
-      txt_email_from.Text = PegPath("EMAIL", "FROM", "@.com.br")
-    End If
+
+  ' 1 - Porta SMTP
+  If Trim(ePASS01(1)) <> "" Then
+    Txt_Porta.tEXT = ePASS01(1)
+  Else
+    Txt_Porta.tEXT = LerDoCofre(sContaAtiva, "SmtpPort")
+  End If
+
+  ' 2 - Email Remetente (From) e Usuário
+  If Trim(ePASS01(2)) <> "" Then
+    txt_email_from.tEXT = ePASS01(2)
+    txtUsername.tEXT = ePASS01(2)
+  Else
+    txt_email_from.tEXT = LerDoCofre(sContaAtiva, "EmailUser")
+    txtUsername.tEXT = LerDoCofre(sContaAtiva, "EmailUser")
+  End If
+
+  ' Senha (Buscada do cofre se não estiver preenchida na tela)
+  If Trim(txtUsername.tEXT) <> "" And Trim(txtPassword.tEXT) = "" Then
+    txtPassword.tEXT = LerDoCofre(sContaAtiva, "EmailPassword")
+  End If
+
+  ' 3 - Destinatário (To)
+  If Trim(ePASS01(3)) <> "" Then
+    txt_email_to.tEXT = ePASS01(3)
+  End If
+
+  ' 4 - Assunto (Subject)
+  If Trim(ePASS01(4)) <> "" Then
+    txt_subject.tEXT = ePASS01(4)
+  End If
+
+  ' 5 - Anexo (Attach)
+  If Trim(ePASS01(5)) <> "" Then
+    txt_attach.tEXT = ePASS01(5)
+  End If
+
+  ' 6 - Corpo da Mensagem (Message Text)
+  If Trim(ePASS01(6)) <> "" Then
+    txt_message_text.tEXT = ePASS01(6)
+  End If
+
+  ' --- GERENCIAMENTO DO CHECKBOX SSL ---
+  ' Busca a segurança configurada para esta conta específica no cofre
+  Dim sSeguranca As String
+  sSeguranca = UCase(Trim(LerDoCofre(sContaAtiva, "SslTls")))
+  If sSeguranca = "SSL" Or sSeguranca = "TLS" Or sSeguranca = "STARTTLS" Then
+      chkSSL.Value = vbChecked
+  Else
+      chkSSL.Value = vbUnchecked
+  End If
+
+  ' --- FALLBACKS SE CONDICIONAIS FAIHAREM ---
+  If Len(txt_smtp_server.tEXT) = 0 Then
+    txt_smtp_server.tEXT = "smtp.com.br"
+  End If
+  If Len(Txt_Porta.tEXT) = 0 Then
+    Txt_Porta.tEXT = "25"
   End If
 
   If ePASS01(7) = True Then
-    'enviaresair
+    CmdEnviar_Click
   End If
-  ''txt
 End Sub
 Private Sub Form_Unload(Cancel As Integer)
   Unload Me
 End Sub
+
 Private Sub Lista_Click()
   CmdEnviar_Click
 End Sub
@@ -429,34 +490,32 @@ Private Sub txt_porta_KeyPress(KeyAscii As Integer)
   KeyAscii = ValiText(KeyAscii, "#NI")
 End Sub
 
-
-
 Function campos_checagem() As Boolean
   campos_checagem = False
-  If Len(txt_subject.Text) = 0 Then
+  If Len(txt_subject.tEXT) = 0 Then
     If Not MDG("Enviar Sem Assunto") Then
       Exit Function
     End If
   End If
-  If Len(txt_email_to.Text) = 0 Then
+  If Len(txt_email_to.tEXT) = 0 Then
     Alert ("Sem Destinatario")
     Exit Function
   End If
-  If Len(txt_email_from.Text) = 0 Then
+  If Len(txt_email_from.tEXT) = 0 Then
     Alert ("Sem Remetente")
     Exit Function
   End If
-  If Not CheckEmail(txt_email_from.Text) Then
-    txt_status.Text = "Erro: " & txt_email_from.Text & "." & vbCrLf & txt_status.Text & vbCrLf
+  If Not CheckEmail(txt_email_from.tEXT) Then
+    txt_status.tEXT = "Erro: " & txt_email_from.tEXT & "." & vbCrLf & txt_status.tEXT & vbCrLf
     Alert ("Email Origem Invalido")
     Exit Function
   End If
-  If Not CheckEmail(txt_email_to.Text) Then
-    txt_status.Text = "Erro: " & txt_email_to.Text & "." & vbCrLf & txt_status.Text & vbCrLf
+  If Not CheckEmail(txt_email_to.tEXT) Then
+    txt_status.tEXT = "Erro: " & txt_email_to.tEXT & "." & vbCrLf & txt_status.tEXT & vbCrLf
     Alert ("Email Destino Invalido")
     Exit Function
   End If
-  If Len(txt_smtp_server.Text) = 0 Then
+  If Len(txt_smtp_server.tEXT) = 0 Then
     Alert ("Servidor de Envio Nao Preenchido")
     Exit Function
   End If
@@ -467,5 +526,3 @@ Function campos_checagem() As Boolean
   End If
   campos_checagem = True
 End Function
-
-
