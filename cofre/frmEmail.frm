@@ -24,7 +24,7 @@ Begin VB.Form frmEmail
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
       Caption         =   "Atualizar Lista"
-      Picture         =   "form1.frx":0000
+      Picture         =   "frmbancos.frx":0000
       PictureAndCaption=   -1  'True
       Style           =   1
    End
@@ -96,7 +96,7 @@ Begin VB.Form frmEmail
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
       Caption         =   "Exibir Senha"
-      Picture         =   "form1.frx":049A
+      Picture         =   "frmbancos.frx":049A
       PictureAndCaption=   -1  'True
       Style           =   1
    End
@@ -112,7 +112,7 @@ Begin VB.Form frmEmail
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
       Caption         =   "Salvar"
-      Picture         =   "form1.frx":0934
+      Picture         =   "frmbancos.frx":0934
       PictureAndCaption=   -1  'True
       Style           =   1
    End
@@ -128,7 +128,7 @@ Begin VB.Form frmEmail
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
       Caption         =   "Limpar Campos"
-      Picture         =   "form1.frx":0DCE
+      Picture         =   "frmbancos.frx":0DCE
       PictureAndCaption=   -1  'True
       Style           =   1
    End
@@ -144,7 +144,7 @@ Begin VB.Form frmEmail
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
       Caption         =   "Excluir Conta"
-      Picture         =   "form1.frx":1268
+      Picture         =   "frmbancos.frx":1268
       PictureAndCaption=   -1  'True
       Style           =   1
    End
