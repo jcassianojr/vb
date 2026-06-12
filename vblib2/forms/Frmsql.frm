@@ -22,7 +22,7 @@ Begin VB.Form FrmSql
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   3960
-      TabIndex        =   33
+      TabIndex        =   32
       TabStop         =   0   'False
       Top             =   6480
       Visible         =   0   'False
@@ -48,36 +48,16 @@ Begin VB.Form FrmSql
       Left            =   6240
       TabIndex        =   5
       Top             =   720
-      Width           =   3972
-      Begin XPControls.XPButton CmdVisua 
-         Height          =   435
-         Left            =   120
-         TabIndex        =   25
-         Top             =   360
-         Width           =   1275
-         _ExtentX        =   2244
-         _ExtentY        =   762
-         Picture         =   "Frmsql.frx":0742
-         Caption         =   "Visualizar"
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   7.8
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-      End
+      Width           =   4212
       Begin XPControls.XPButton CmdConfImp 
-         Height          =   435
-         Left            =   1440
-         TabIndex        =   26
+         Height          =   432
+         Left            =   360
+         TabIndex        =   25
          Top             =   960
-         Width           =   1455
+         Width           =   1452
          _ExtentX        =   2561
          _ExtentY        =   762
-         Picture         =   "Frmsql.frx":0CDC
+         Picture         =   "Frmsql.frx":0742
          Caption         =   "Propriedades"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -91,11 +71,11 @@ Begin VB.Form FrmSql
       End
       Begin VBCCR18.CommandButtonW Encerrar 
          Height          =   612
-         Left            =   2520
-         TabIndex        =   36
+         Left            =   3120
+         TabIndex        =   35
          Top             =   240
-         Width           =   1212
-         _ExtentX        =   2138
+         Width           =   972
+         _ExtentX        =   1715
          _ExtentY        =   1080
          Appearance      =   0
          BackColor       =   -2147483643
@@ -104,15 +84,15 @@ Begin VB.Form FrmSql
          Caption         =   "Retornar"
          Alignment       =   0
          VerticalAlignment=   0
-         Picture         =   "Frmsql.frx":1276
+         Picture         =   "Frmsql.frx":0CDC
          PictureAndCaption=   -1  'True
          WordWrap        =   0   'False
          Style           =   1
       End
       Begin VBCCR18.CommandButtonW cmdimp 
          Height          =   612
-         Left            =   1440
-         TabIndex        =   37
+         Left            =   2040
+         TabIndex        =   36
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -122,6 +102,26 @@ Begin VB.Form FrmSql
          ForeColor       =   -2147483640
          ImageListAlignment=   1
          Caption         =   "Imprimir"
+         Alignment       =   0
+         VerticalAlignment=   0
+         Picture         =   "Frmsql.frx":1276
+         PictureAndCaption=   -1  'True
+         WordWrap        =   0   'False
+         Style           =   1
+      End
+      Begin VBCCR18.CommandButtonW CmdVisua 
+         Height          =   612
+         Left            =   960
+         TabIndex        =   37
+         Top             =   240
+         Width           =   972
+         _ExtentX        =   1715
+         _ExtentY        =   1080
+         Appearance      =   0
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         ImageListAlignment=   1
+         Caption         =   "Visualizar"
          Alignment       =   0
          VerticalAlignment=   0
          Picture         =   "Frmsql.frx":1810
@@ -431,7 +431,7 @@ Begin VB.Form FrmSql
          Height          =   375
          Index           =   6
          Left            =   5160
-         TabIndex        =   32
+         TabIndex        =   31
          Top             =   240
          Width           =   555
          _ExtentX        =   974
@@ -451,7 +451,7 @@ Begin VB.Form FrmSql
          Height          =   375
          Index           =   7
          Left            =   2040
-         TabIndex        =   34
+         TabIndex        =   33
          Top             =   1200
          Width           =   915
          _ExtentX        =   1609
@@ -472,7 +472,7 @@ Begin VB.Form FrmSql
          Height          =   375
          Index           =   8
          Left            =   3480
-         TabIndex        =   35
+         TabIndex        =   34
          Top             =   720
          Width           =   1095
          _ExtentX        =   1926
@@ -504,7 +504,7 @@ Begin VB.Form FrmSql
       Left            =   120
       TabIndex        =   2
       Top             =   0
-      Width           =   10155
+      Width           =   10392
       Begin VB.Label Label1 
          Alignment       =   2  'Center
          BackColor       =   &H00C0FFFF&
@@ -595,7 +595,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdOrdem 
       Height          =   435
       Left            =   9000
-      TabIndex        =   27
+      TabIndex        =   26
       Top             =   3600
       Width           =   1275
       _ExtentX        =   2244
@@ -615,7 +615,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdFiltro 
       Height          =   435
       Left            =   9000
-      TabIndex        =   28
+      TabIndex        =   27
       Top             =   3120
       Width           =   1275
       _ExtentX        =   2244
@@ -635,7 +635,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdEditar 
       Height          =   315
       Left            =   120
-      TabIndex        =   30
+      TabIndex        =   29
       TabStop         =   0   'False
       Top             =   2760
       Width           =   975
@@ -656,7 +656,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   315
       Left            =   1200
-      TabIndex        =   29
+      TabIndex        =   28
       TabStop         =   0   'False
       Top             =   2760
       Width           =   1335
@@ -677,7 +677,7 @@ Begin VB.Form FrmSql
    Begin XPControls.XPButton CmdShell 
       Height          =   315
       Left            =   2640
-      TabIndex        =   31
+      TabIndex        =   30
       Top             =   2760
       Width           =   375
       _ExtentX        =   656
@@ -1100,10 +1100,10 @@ Private Sub CmdVisua_Click()
     End Select
   End If
   If IsExtensao(cARQRTF, "RTF") Then
-    RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
+    RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS02 = 3
     PrintPreview1.ShowPreview
-    RichTextbox1.Text = ""
+    RichTextBox1.Text = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -1136,7 +1136,7 @@ Public Sub MyPrintinghtml()
   Next
 End Sub
 Public Sub MyPrintingRTF()
-  PrinterEx.PrintRichTextBox RichTextbox1
+  PrinterEx.PrintRichTextBox RichTextBox1
 End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer

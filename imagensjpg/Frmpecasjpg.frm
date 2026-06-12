@@ -8,14 +8,14 @@ Begin VB.Form frmIMAGENS
    ClientHeight    =   6432
    ClientLeft      =   1092
    ClientTop       =   336
-   ClientWidth     =   7056
+   ClientWidth     =   8352
    HelpContextID   =   1002
    Icon            =   "Frmpecasjpg.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6432
-   ScaleWidth      =   7056
+   ScaleWidth      =   8352
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin BSPrinter.PrintPreview PrintPreview1 
@@ -27,9 +27,9 @@ Begin VB.Form frmIMAGENS
    Begin XPControls.XPButton ximgsave 
       Height          =   432
       Left            =   5280
-      TabIndex        =   12
+      TabIndex        =   11
       TabStop         =   0   'False
-      Top             =   2280
+      Top             =   2040
       Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   762
@@ -46,12 +46,12 @@ Begin VB.Form frmIMAGENS
       EndProperty
    End
    Begin XPControls.XPButton DelImg 
-      Height          =   435
+      Height          =   432
       Left            =   5280
-      TabIndex        =   11
+      TabIndex        =   10
       TabStop         =   0   'False
-      Top             =   1920
-      Width           =   1575
+      Top             =   1680
+      Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   762
       Picture         =   "Frmpecasjpg.frx":0824
@@ -69,9 +69,9 @@ Begin VB.Form frmIMAGENS
    Begin XPControls.XPButton IncImg 
       Height          =   432
       Left            =   5280
-      TabIndex        =   10
+      TabIndex        =   9
       TabStop         =   0   'False
-      Top             =   1560
+      Top             =   1320
       Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   762
@@ -90,7 +90,7 @@ Begin VB.Form frmIMAGENS
    Begin XPControls.XPButton VerImg 
       Height          =   495
       Left            =   5280
-      TabIndex        =   9
+      TabIndex        =   8
       TabStop         =   0   'False
       Top             =   5760
       Width           =   1575
@@ -194,37 +194,16 @@ Begin VB.Form frmIMAGENS
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin XPControls.XPButton cmdimprimir 
-      Height          =   432
-      Left            =   5280
-      TabIndex        =   8
-      TabStop         =   0   'False
-      Top             =   2640
-      Width           =   1572
-      _ExtentX        =   2773
-      _ExtentY        =   762
-      Picture         =   "Frmpecasjpg.frx":2126
-      Caption         =   "Imprimir (Preview)"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   435
       Left            =   5280
-      TabIndex        =   13
+      TabIndex        =   12
       TabStop         =   0   'False
       Top             =   5280
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "Frmpecasjpg.frx":26C0
+      Picture         =   "Frmpecasjpg.frx":2126
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -238,9 +217,9 @@ Begin VB.Form frmIMAGENS
    End
    Begin VBCCR18.CommandButtonW encerrar 
       Height          =   612
-      Left            =   5640
-      TabIndex        =   14
-      Top             =   840
+      Left            =   6720
+      TabIndex        =   13
+      Top             =   120
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -251,7 +230,7 @@ Begin VB.Form frmIMAGENS
       Caption         =   "Retornar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "Frmpecasjpg.frx":2C5A
+      Picture         =   "Frmpecasjpg.frx":26C0
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -259,7 +238,7 @@ Begin VB.Form frmIMAGENS
    Begin VBCCR18.CommandButtonW cmdClose 
       Height          =   612
       Left            =   5640
-      TabIndex        =   15
+      TabIndex        =   14
       Top             =   120
       Width           =   972
       _ExtentX        =   1715
@@ -271,7 +250,7 @@ Begin VB.Form frmIMAGENS
       Caption         =   "Salvar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "Frmpecasjpg.frx":31F4
+      Picture         =   "Frmpecasjpg.frx":2C5A
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -279,8 +258,8 @@ Begin VB.Form frmIMAGENS
    Begin VBCCR18.CommandButtonW XPButton1 
       Height          =   612
       Left            =   5640
-      TabIndex        =   16
-      Top             =   3480
+      TabIndex        =   15
+      Top             =   2520
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -291,7 +270,7 @@ Begin VB.Form frmIMAGENS
       Caption         =   "Imprimir"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "Frmpecasjpg.frx":378E
+      Picture         =   "Frmpecasjpg.frx":31F4
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -300,7 +279,7 @@ Begin VB.Form frmIMAGENS
       Height          =   492
       Index           =   0
       Left            =   840
-      TabIndex        =   17
+      TabIndex        =   16
       Top             =   120
       Width           =   372
       _ExtentX        =   656
@@ -311,7 +290,7 @@ Begin VB.Form frmIMAGENS
       ImageListAlignment=   1
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "Frmpecasjpg.frx":3D28
+      Picture         =   "Frmpecasjpg.frx":378E
       WordWrap        =   0   'False
       Style           =   1
    End
@@ -319,7 +298,7 @@ Begin VB.Form frmIMAGENS
       Height          =   492
       Index           =   1
       Left            =   1320
-      TabIndex        =   18
+      TabIndex        =   17
       Top             =   120
       Width           =   492
       _ExtentX        =   868
@@ -331,7 +310,7 @@ Begin VB.Form frmIMAGENS
       Caption         =   "LX"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "Frmpecasjpg.frx":42C2
+      Picture         =   "Frmpecasjpg.frx":3D28
       WordWrap        =   0   'False
       Style           =   1
    End
@@ -339,7 +318,7 @@ Begin VB.Form frmIMAGENS
       Height          =   492
       Index           =   2
       Left            =   1920
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   120
       Width           =   492
       _ExtentX        =   868
@@ -351,7 +330,27 @@ Begin VB.Form frmIMAGENS
       Caption         =   "MC"
       Alignment       =   0
       VerticalAlignment=   0
+      Picture         =   "Frmpecasjpg.frx":42C2
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdimprimir 
+      Height          =   612
+      Left            =   6720
+      TabIndex        =   19
+      Top             =   2520
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Visualizar"
+      Alignment       =   0
+      VerticalAlignment=   0
       Picture         =   "Frmpecasjpg.frx":485C
+      PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
    End

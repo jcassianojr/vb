@@ -5,15 +5,23 @@ Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form FrmCrw 
    Caption         =   "Crystal Report Relatorio"
-   ClientHeight    =   6000
+   ClientHeight    =   7296
    ClientLeft      =   60
    ClientTop       =   456
    ClientWidth     =   11868
    Icon            =   "FRMCRW.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6000
+   ScaleHeight     =   7296
    ScaleWidth      =   11868
    WindowState     =   2  'Maximized
+   Begin VB.CheckBox CmdEmail 
+      Caption         =   "EnviarEmail"
+      Height          =   252
+      Left            =   7320
+      TabIndex        =   30
+      Top             =   4320
+      Width           =   1932
+   End
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   11160
       Top             =   2520
@@ -21,25 +29,25 @@ Begin VB.Form FrmCrw
       _ExtentY        =   953
    End
    Begin VBCCR18.RichTextBox RichTextBox1 
-      Height          =   375
-      Left            =   10200
-      TabIndex        =   29
+      Height          =   372
+      Left            =   9000
+      TabIndex        =   26
       TabStop         =   0   'False
-      Top             =   4200
+      Top             =   5280
       Visible         =   0   'False
-      Width           =   1335
-      _ExtentX        =   2350
+      Width           =   2412
+      _ExtentX        =   4255
       _ExtentY        =   656
       MultiLine       =   -1  'True
       Text            =   "FRMCRW.frx":058A
-      TextRTF         =   "FRMCRW.frx":05C2
+      TextRTF         =   "FRMCRW.frx":05DA
    End
    Begin XPControls.XPButton CmdShell 
-      Height          =   315
-      Left            =   10080
-      TabIndex        =   27
-      Top             =   1920
-      Width           =   375
+      Height          =   312
+      Left            =   1800
+      TabIndex        =   24
+      Top             =   2280
+      Width           =   372
       _ExtentX        =   656
       _ExtentY        =   550
       Caption         =   "S"
@@ -54,20 +62,12 @@ Begin VB.Form FrmCrw
       EndProperty
    End
    Begin VB.TextBox TxtArquivo 
-      Height          =   285
-      Left            =   240
-      TabIndex        =   15
+      Height          =   372
+      Left            =   120
+      TabIndex        =   13
       Text            =   "TxtArquivo"
       Top             =   1920
-      Width           =   7455
-   End
-   Begin VB.CheckBox CmdEmail1 
-      Caption         =   "Enviar Email (Winsock)"
-      Height          =   555
-      Left            =   120
-      TabIndex        =   14
-      Top             =   4080
-      Width           =   1215
+      Width           =   7572
    End
    Begin VB.TextBox TxtTexto 
       Enabled         =   0   'False
@@ -81,43 +81,35 @@ Begin VB.Form FrmCrw
          Strikethrough   =   0   'False
       EndProperty
       Height          =   870
-      Left            =   2640
+      Left            =   1320
       Locked          =   -1  'True
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Both
-      TabIndex        =   13
+      TabIndex        =   12
       TabStop         =   0   'False
       ToolTipText     =   "Filtro"
-      Top             =   4800
+      Top             =   5280
       Width           =   7500
    End
    Begin VB.TextBox TxtDestino 
       Height          =   375
-      Left            =   2640
-      TabIndex        =   12
-      Top             =   4320
+      Left            =   1320
+      TabIndex        =   11
+      Top             =   4800
       Width           =   5775
    End
    Begin VB.TextBox TxtAssunto 
       Height          =   375
-      Left            =   2640
-      TabIndex        =   11
-      Top             =   3840
-      Width           =   5775
-   End
-   Begin VB.CheckBox CmdEmail 
-      Caption         =   "Enviar Email MAPI"
-      Height          =   435
-      Left            =   120
+      Left            =   1320
       TabIndex        =   10
-      Top             =   3480
-      Width           =   1335
+      Top             =   4320
+      Width           =   5775
    End
    Begin VB.TextBox TxtComp 
       Height          =   375
-      Left            =   2640
+      Left            =   240
       TabIndex        =   6
-      Top             =   3360
+      Top             =   2640
       Width           =   6135
    End
    Begin VB.Frame Frame3 
@@ -152,10 +144,10 @@ Begin VB.Form FrmCrw
       BackColor       =   &H00C0FFFF&
       Caption         =   "Exportar/Salvar Como"
       Height          =   1155
-      Left            =   240
+      Left            =   120
       TabIndex        =   2
       Top             =   720
-      Width           =   4815
+      Width           =   4932
       Begin VB.CommandButton CmdExport 
          Caption         =   "Exportar Outros Formatos"
          Height          =   735
@@ -168,13 +160,13 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   0
          Left            =   120
-         TabIndex        =   19
+         TabIndex        =   16
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
          _ExtentX        =   1397
          _ExtentY        =   656
-         Picture         =   "FRMCRW.frx":0742
+         Picture         =   "FRMCRW.frx":0772
          Caption         =   "RTF"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -190,13 +182,13 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   1
          Left            =   960
-         TabIndex        =   20
+         TabIndex        =   17
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
          _ExtentX        =   1397
          _ExtentY        =   656
-         Picture         =   "FRMCRW.frx":0ADC
+         Picture         =   "FRMCRW.frx":0B0C
          Caption         =   "TXT"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -212,13 +204,13 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   2
          Left            =   1800
-         TabIndex        =   21
+         TabIndex        =   18
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
          _ExtentX        =   1397
          _ExtentY        =   656
-         Picture         =   "FRMCRW.frx":0E76
+         Picture         =   "FRMCRW.frx":0EA6
          Caption         =   "doc"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -234,13 +226,13 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   3
          Left            =   2640
-         TabIndex        =   22
+         TabIndex        =   19
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
          _ExtentX        =   1397
          _ExtentY        =   656
-         Picture         =   "FRMCRW.frx":1410
+         Picture         =   "FRMCRW.frx":1440
          Caption         =   "xls"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -260,35 +252,15 @@ Begin VB.Form FrmCrw
       TabIndex        =   1
       Top             =   720
       Width           =   5505
-      Begin XPControls.XPButton CmdVisua 
-         Height          =   435
-         Left            =   120
-         TabIndex        =   16
-         Top             =   120
-         Width           =   1515
-         _ExtentX        =   2667
-         _ExtentY        =   762
-         Picture         =   "FRMCRW.frx":19AA
-         Caption         =   "Visualizar"
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   7.8
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-      End
       Begin XPControls.XPButton CmdConfImp 
          Height          =   432
-         Left            =   1560
-         TabIndex        =   17
-         Top             =   600
+         Left            =   120
+         TabIndex        =   14
+         Top             =   720
          Width           =   1572
          _ExtentX        =   2773
          _ExtentY        =   762
-         Picture         =   "FRMCRW.frx":1F44
+         Picture         =   "FRMCRW.frx":19DA
          Caption         =   "Propriedades"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -303,13 +275,13 @@ Begin VB.Form FrmCrw
       Begin XPControls.XPButton Command2 
          Height          =   432
          Left            =   120
-         TabIndex        =   25
+         TabIndex        =   22
          TabStop         =   0   'False
-         Top             =   600
+         Top             =   240
          Width           =   1512
          _ExtentX        =   2667
          _ExtentY        =   762
-         Picture         =   "FRMCRW.frx":24DE
+         Picture         =   "FRMCRW.frx":1F74
          Caption         =   "selecionar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -324,7 +296,7 @@ Begin VB.Form FrmCrw
       Begin VBCCR18.CommandButtonW encerrar 
          Height          =   612
          Left            =   4320
-         TabIndex        =   30
+         TabIndex        =   27
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -336,7 +308,7 @@ Begin VB.Form FrmCrw
          Caption         =   "Retornar"
          Alignment       =   0
          VerticalAlignment=   0
-         Picture         =   "FRMCRW.frx":2A78
+         Picture         =   "FRMCRW.frx":250E
          PictureAndCaption=   -1  'True
          WordWrap        =   0   'False
          Style           =   1
@@ -344,7 +316,7 @@ Begin VB.Form FrmCrw
       Begin VBCCR18.CommandButtonW cmdimp 
          Height          =   612
          Left            =   3240
-         TabIndex        =   31
+         TabIndex        =   28
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -356,7 +328,27 @@ Begin VB.Form FrmCrw
          Caption         =   "Imprimir"
          Alignment       =   0
          VerticalAlignment=   0
-         Picture         =   "FRMCRW.frx":3012
+         Picture         =   "FRMCRW.frx":2AA8
+         PictureAndCaption=   -1  'True
+         WordWrap        =   0   'False
+         Style           =   1
+      End
+      Begin VBCCR18.CommandButtonW CmdVisua 
+         Height          =   612
+         Left            =   2160
+         TabIndex        =   29
+         Top             =   240
+         Width           =   972
+         _ExtentX        =   1715
+         _ExtentY        =   1080
+         Appearance      =   0
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         ImageListAlignment=   1
+         Caption         =   "Visualizar"
+         Alignment       =   0
+         VerticalAlignment=   0
+         Picture         =   "FRMCRW.frx":3042
          PictureAndCaption=   -1  'True
          WordWrap        =   0   'False
          Style           =   1
@@ -374,14 +366,14 @@ Begin VB.Form FrmCrw
          Strikethrough   =   0   'False
       EndProperty
       Height          =   870
-      Left            =   120
+      Left            =   240
       Locked          =   -1  'True
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Both
       TabIndex        =   0
       TabStop         =   0   'False
       ToolTipText     =   "Filtro"
-      Top             =   2280
+      Top             =   3120
       Width           =   7500
    End
    Begin Crystal.CrystalReport RPT 
@@ -397,14 +389,14 @@ Begin VB.Form FrmCrw
       WindowShowRefreshBtn=   -1  'True
    End
    Begin XPControls.XPButton CmdFiltro 
-      Height          =   435
-      Left            =   7800
-      TabIndex        =   18
-      Top             =   2400
-      Width           =   1515
+      Height          =   432
+      Left            =   7920
+      TabIndex        =   15
+      Top             =   3120
+      Width           =   1512
       _ExtentX        =   2667
       _ExtentY        =   762
-      Picture         =   "FRMCRW.frx":35AC
+      Picture         =   "FRMCRW.frx":35DC
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -417,15 +409,15 @@ Begin VB.Form FrmCrw
       EndProperty
    End
    Begin XPControls.XPButton CmdEditar 
-      Height          =   315
-      Left            =   7680
-      TabIndex        =   23
+      Height          =   312
+      Left            =   120
+      TabIndex        =   20
       TabStop         =   0   'False
-      Top             =   1920
-      Width           =   975
+      Top             =   2280
+      Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   550
-      Picture         =   "FRMCRW.frx":3B46
+      Picture         =   "FRMCRW.frx":3B76
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -438,15 +430,15 @@ Begin VB.Form FrmCrw
       EndProperty
    End
    Begin XPControls.XPButton CmdAbrirCom 
-      Height          =   315
-      Left            =   8760
-      TabIndex        =   24
+      Height          =   312
+      Left            =   840
+      TabIndex        =   21
       TabStop         =   0   'False
-      Top             =   1920
-      Width           =   1215
+      Top             =   2280
+      Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   550
-      Picture         =   "FRMCRW.frx":40E0
+      Picture         =   "FRMCRW.frx":4110
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -459,16 +451,16 @@ Begin VB.Form FrmCrw
       EndProperty
    End
    Begin XPControls.XPButton CmdMudaFec 
-      Height          =   495
-      Left            =   8880
-      TabIndex        =   26
+      Height          =   492
+      Left            =   7920
+      TabIndex        =   23
       TabStop         =   0   'False
-      Top             =   3360
-      Width           =   1755
-      _ExtentX        =   3090
+      Top             =   2640
+      Width           =   1872
+      _ExtentX        =   3302
       _ExtentY        =   868
-      Picture         =   "FRMCRW.frx":467A
-      Caption         =   "Competência "
+      Picture         =   "FRMCRW.frx":46AA
+      Caption         =   "Competência"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   7.8
@@ -480,15 +472,15 @@ Begin VB.Form FrmCrw
       EndProperty
    End
    Begin XPControls.XPButton CmdPreview 
-      Height          =   315
-      Left            =   10560
-      TabIndex        =   28
+      Height          =   312
+      Left            =   2160
+      TabIndex        =   25
       TabStop         =   0   'False
-      Top             =   1920
-      Width           =   1155
+      Top             =   2280
+      Width           =   1152
       _ExtentX        =   2032
       _ExtentY        =   550
-      Picture         =   "FRMCRW.frx":4A14
+      Picture         =   "FRMCRW.frx":4A44
       Caption         =   "Visualizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -503,29 +495,29 @@ Begin VB.Form FrmCrw
    Begin VB.Label Label4 
       Caption         =   "Texto"
       ForeColor       =   &H00C00000&
-      Height          =   315
-      Left            =   1560
+      Height          =   312
+      Left            =   120
       TabIndex        =   9
-      Top             =   4680
-      Width           =   1035
+      Top             =   5280
+      Width           =   1032
    End
    Begin VB.Label Label3 
       Caption         =   "Destinatario(s)"
       ForeColor       =   &H00C00000&
-      Height          =   315
-      Left            =   1500
+      Height          =   312
+      Left            =   120
       TabIndex        =   8
-      Top             =   4320
-      Width           =   1095
+      Top             =   4800
+      Width           =   1092
    End
    Begin VB.Label Label2 
       Caption         =   "Assunto"
       ForeColor       =   &H00C00000&
-      Height          =   315
-      Left            =   1500
+      Height          =   312
+      Left            =   120
       TabIndex        =   7
-      Top             =   3720
-      Width           =   1095
+      Top             =   4200
+      Width           =   1092
    End
 End
 Attribute VB_Name = "FrmCrw"
@@ -538,18 +530,18 @@ Const cFORMID = "Imprimir Relatorios Crystal-OCX"
 Option Explicit
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
   End If
 End Sub
 
 Private Sub CmdConfImp_Click()
- ' FrmPrintSetup.Show vbModal, Me
+ '
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.Text, "RTF") Or IsExtensao(TxtArquivo.Text, "TXT") Then
+  If IsExtensao(TxtArquivo.tEXT, "RTF") Or IsExtensao(TxtArquivo.tEXT, "TXT") Then
     cARQRTF = TxtArquivo
     FrmRtfView.Show
   End If
@@ -560,27 +552,12 @@ Private Sub CmdEmail_Click()
     TxtAssunto.Enabled = True
     TxtTexto.Enabled = True
     TxtDestino.Enabled = True
-    CmdEmail1.Value = 0
   Else
     TxtAssunto.Enabled = False
     TxtTexto.Enabled = False
     TxtDestino.Enabled = False
   End If
 End Sub
-
-Private Sub CmdEmail1_Click()
-  If CmdEmail1.Value = 1 Then
-    TxtAssunto.Enabled = True
-    TxtTexto.Enabled = True
-    TxtDestino.Enabled = True
-    CmdEmail.Value = 0
-  Else
-    TxtAssunto.Enabled = False
-    TxtTexto.Enabled = False
-    TxtDestino.Enabled = False
-  End If
-End Sub
-
 Private Sub CmdExport_Click()
   Alert ("Em Implantaçao")
 End Sub
@@ -593,7 +570,7 @@ Private Sub CmdFiltro_Click()
     FrmFiltro.Show vbModal, Me
     FILTRO = eRETU01
   End If
-  cFILTRO = CStr(FILTRO.Text)
+  cFILTRO = CStr(FILTRO.tEXT)
 
   If Len(cFILTRO) > 0 Then
     RPT.ReplaceSelectionFormula (cFILTRO)
@@ -622,7 +599,7 @@ Dim nARQUIVOS As Integer
 Dim x As Integer
 
   Mana5Fec
-  TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
+  TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
   With RPT
     nARQUIVOS = UBound(aARQUIVOS)
     For x = 0 To nARQUIVOS
@@ -638,7 +615,7 @@ Dim x As Integer
 End Sub
 
 Private Sub CmdPreview_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -664,11 +641,11 @@ Private Sub CmdPreview_Click()
     End Select
   End If
   If IsExtensao(cARQRTF, "RTF") Then
-    cARQRTF = TxtArquivo.Text
-    RichTextbox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
+    cARQRTF = TxtArquivo.tEXT
+    RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextbox1.Text = ""
+    RichTextBox1.tEXT = ""
   End If
 End Sub
 Public Sub MyPrintinghtml()
@@ -702,7 +679,7 @@ Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
 End Sub
 
 Public Sub MyPrintingRTF()
-  PrinterEx.PrintRichTextBox RichTextbox1
+  PrinterEx.PrintRichTextBox RichTextBox1
 End Sub
 Public Sub MyPrintingTXT()
   Dim fileFile As Integer
@@ -768,7 +745,7 @@ Private Sub Form_Load()
     TxtComp.Visible = True
     CmdMudaFec.Visible = True
     CmdMudaFec.Enabled = True
-    TxtComp.Text = aARQFEC(4) & " - " & aARQUIVOS(0)
+    TxtComp.tEXT = aARQFEC(4) & " - " & aARQUIVOS(0)
   End If
 
   If Len(aRELCFG(6)) = 0 Then
@@ -789,7 +766,6 @@ Private Sub Form_Load()
   If Not aDIREITOS(7) Then salvar(1).Visible = False
   If Not aDIREITOS(7) Then CmdExport.Visible = False
 
-  If Not aDIREITOS(7) Then CmdEmail1.Visible = False
   If Not aDIREITOS(7) Then CmdEmail.Visible = False
   If Not aDIREITOS(7) Then TxtAssunto.Visible = False
   If Not aDIREITOS(7) Then TxtDestino.Visible = False
@@ -905,7 +881,7 @@ Private Sub Salvar_Click(Index As Integer)
 ' ... [Mantém o seu Select Case Index original que define cEXTENSAO e RPT.PrintFileType] ...
 
   sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-  cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
+  cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
 
   ' [CORREÇÃO 1] Se o usuário clicou em Cancelar na janela, aborta silenciosamente sem gerar erro
   If Len(Trim(cARQUIVO)) = 0 Then Exit Sub
@@ -929,7 +905,7 @@ Private Sub Salvar_Click(Index As Integer)
 
   TxtArquivo = cARQUIVO
 
-  If CmdEmail1.Value = 1 Then
+  If CmdEmail.Value = 1 Then
     'servidor,porta,from,to,assunto,anexos,mensagem,enviar e sair
     ePASS01 = Array("", _
                     "", _

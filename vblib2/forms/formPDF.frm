@@ -24,7 +24,7 @@ Begin VB.Form formConvertToPDF
    Begin XPControls.XPButton btnConvert 
       Height          =   555
       Left            =   6960
-      TabIndex        =   23
+      TabIndex        =   22
       Top             =   0
       Width           =   1575
       _ExtentX        =   2773
@@ -100,14 +100,14 @@ Begin VB.Form formConvertToPDF
       Height          =   345
       Left            =   120
       TabIndex        =   13
-      Top             =   4320
+      Top             =   4440
       Width           =   6480
    End
    Begin VB.TextBox txtFilename 
       Height          =   345
-      Left            =   120
+      Left            =   1920
       TabIndex        =   11
-      Top             =   3360
+      Top             =   2880
       Width           =   6480
    End
    Begin VB.TextBox txtSubject 
@@ -138,35 +138,15 @@ Begin VB.Form formConvertToPDF
       Top             =   45
       Width           =   5100
    End
-   Begin XPControls.XPButton CmdVisua 
-      Height          =   435
-      Left            =   6960
-      TabIndex        =   19
-      Top             =   1800
-      Width           =   1575
-      _ExtentX        =   2773
-      _ExtentY        =   762
-      Picture         =   "formPDF.frx":0E64
-      Caption         =   "Visualizar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton btnSave 
-      Height          =   435
-      Left            =   1800
-      TabIndex        =   20
-      Top             =   3840
-      Width           =   1935
+      Height          =   432
+      Left            =   1560
+      TabIndex        =   19
+      Top             =   4080
+      Width           =   1932
       _ExtentX        =   3408
       _ExtentY        =   762
-      Picture         =   "formPDF.frx":13FE
+      Picture         =   "formPDF.frx":0E64
       Caption         =   "Salvar &PDF Como"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -179,14 +159,14 @@ Begin VB.Form formConvertToPDF
       EndProperty
    End
    Begin XPControls.XPButton btnOpen 
-      Height          =   435
-      Left            =   1920
-      TabIndex        =   21
-      Top             =   2880
-      Width           =   1335
+      Height          =   432
+      Left            =   4080
+      TabIndex        =   20
+      Top             =   3720
+      Width           =   1332
       _ExtentX        =   2350
       _ExtentY        =   762
-      Picture         =   "formPDF.frx":1998
+      Picture         =   "formPDF.frx":13FE
       Caption         =   "Abrir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -201,12 +181,12 @@ Begin VB.Form formConvertToPDF
    Begin XPControls.XPButton CmdSendMail 
       Height          =   435
       Left            =   6960
-      TabIndex        =   22
+      TabIndex        =   21
       Top             =   2400
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "formPDF.frx":1F32
+      Picture         =   "formPDF.frx":1998
       Caption         =   "EnviarEmail"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -219,36 +199,16 @@ Begin VB.Form formConvertToPDF
       EndProperty
    End
    Begin XPControls.XPButton CmdAbrirCom 
-      Height          =   435
-      Left            =   3360
-      TabIndex        =   24
+      Height          =   432
+      Left            =   5160
+      TabIndex        =   23
       TabStop         =   0   'False
-      Top             =   2880
-      Width           =   1335
+      Top             =   3720
+      Width           =   1332
       _ExtentX        =   2350
       _ExtentY        =   762
-      Picture         =   "formPDF.frx":24CC
+      Picture         =   "formPDF.frx":1F32
       Caption         =   "Abrir Com"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton cmdPreviewOrigem 
-      Height          =   435
-      Left            =   4800
-      TabIndex        =   25
-      Top             =   2880
-      Width           =   1875
-      _ExtentX        =   3302
-      _ExtentY        =   762
-      Picture         =   "formPDF.frx":2A66
-      Caption         =   "Visualizar Origem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   7.8
@@ -262,12 +222,12 @@ Begin VB.Form formConvertToPDF
    Begin XPControls.XPButton CmdGeraPorPreview 
       Height          =   555
       Left            =   6960
-      TabIndex        =   26
+      TabIndex        =   24
       Top             =   600
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   974
-      Picture         =   "formPDF.frx":3000
+      Picture         =   "formPDF.frx":24CC
       Caption         =   "Cria Pdf   (Preview)"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -282,12 +242,12 @@ Begin VB.Form formConvertToPDF
    Begin XPControls.XPButton CmdAbrirPdf 
       Height          =   435
       Left            =   6960
-      TabIndex        =   27
+      TabIndex        =   25
       Top             =   1320
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "formPDF.frx":359A
+      Picture         =   "formPDF.frx":2A66
       Caption         =   "Abrir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -301,8 +261,8 @@ Begin VB.Form formConvertToPDF
    End
    Begin VBCCR18.CommandButtonW btnclose 
       Height          =   612
-      Left            =   8520
-      TabIndex        =   28
+      Left            =   8640
+      TabIndex        =   26
       Top             =   120
       Width           =   972
       _ExtentX        =   1715
@@ -314,16 +274,16 @@ Begin VB.Form formConvertToPDF
       Caption         =   "Retornar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "formPDF.frx":3B34
+      Picture         =   "formPDF.frx":3000
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
    End
    Begin VBCCR18.CommandButtonW cmdimp 
       Height          =   612
-      Left            =   8400
-      TabIndex        =   29
-      Top             =   2880
+      Left            =   8640
+      TabIndex        =   27
+      Top             =   1680
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -332,6 +292,46 @@ Begin VB.Form formConvertToPDF
       ForeColor       =   -2147483640
       ImageListAlignment=   1
       Caption         =   "Imprimir"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "formPDF.frx":359A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdVisua 
+      Height          =   612
+      Left            =   8640
+      TabIndex        =   28
+      Top             =   960
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Visualizar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "formPDF.frx":3B34
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdPreviewOrigem 
+      Height          =   612
+      Left            =   1920
+      TabIndex        =   29
+      Top             =   3240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Visualizar"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "formPDF.frx":40CE
@@ -350,11 +350,11 @@ Begin VB.Form formConvertToPDF
    End
    Begin VB.Label lblOutputFile 
       Caption         =   "Arquivo Destino"
-      Height          =   225
+      Height          =   228
       Left            =   120
       TabIndex        =   12
-      Top             =   3840
-      Width           =   1215
+      Top             =   4080
+      Width           =   1212
    End
    Begin VB.Label lblFilename 
       Caption         =   "Arquivo para converter"
@@ -442,14 +442,14 @@ Dim cache As String
 Const AppName = "Text-PDF v1.0"
 
 Private Sub CmdAbrirCom_Click()
-  If FileConnExist(txtFilename.tEXT, True) Then
-    Call OpenWith(txtFilename.tEXT, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
+  If FileConnExist(txtFilename.Text, True) Then
+    Call OpenWith(txtFilename.Text, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
   End If
 End Sub
 
 Private Sub CmdAbrirPdf_Click()
   Dim cARQSHELL As String
-  cARQSHELL = FixStr(txtOutputFile.tEXT)
+  cARQSHELL = FixStr(txtOutputFile.Text)
   If FileConnExist(cARQSHELL) Then
     ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
   End If
@@ -471,7 +471,7 @@ End Sub
 
 Private Sub cmdimp_Click()
   Dim cARQSHELL As String
-  cARQSHELL = FixStr(txtOutputFile.tEXT)
+  cARQSHELL = FixStr(txtOutputFile.Text)
   If FileConnExist(cARQSHELL) Then
     ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , "print", CLng(Me.hwnd)
   End If
@@ -487,7 +487,7 @@ End Sub
 
 Private Sub CmdSendMail_Click()
   Dim cARQUIVO As String
-  cARQUIVO = FixStr(txtOutputFile.tEXT)
+  cARQUIVO = FixStr(txtOutputFile.Text)
   'servidor,porta,from,to,assunto,anexos,mensagem,enviar e sair
   ePASS01 = Array("", _
                   "", _
@@ -501,7 +501,7 @@ Private Sub CmdSendMail_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
- cARQRTF = FixStr(txtOutputFile.tEXT)
+ cARQRTF = FixStr(txtOutputFile.Text)
  FrmPreview.Show vbModal, Me
 End Sub
 
@@ -516,15 +516,15 @@ Private Sub Form_Load()
   cmbRotation.ListIndex = 0
   cmbPageSize.ListIndex = 0
 
-  txtCreator.tEXT = zNOMEFOLHA
+  txtCreator.Text = zNOMEFOLHA
 
 
 
   If Len(ePASS01) > 0 Then
     If FileConnExist(ePASS01) Then
-      txtTitle.tEXT = NomeArq(ePASS01, True)
-      txtFilename.tEXT = ePASS01
-      txtOutputFile.tEXT = TrocaExt(ePASS01, "PDF")
+      txtTitle.Text = NomeArq(ePASS01, True)
+      txtFilename.Text = ePASS01
+      txtOutputFile.Text = TrocaExt(ePASS01, "PDF")
       btnOpen.Enabled = False
       txtFilename.Enabled = False
     End If
@@ -545,36 +545,36 @@ Public Sub PrintPreview1_AuxiliaryButtonClick(UpdateReport As Boolean)
 End Sub
 Private Sub txtAuthor_GotFocus()
   txtAuthor.SelStart = 0
-  txtAuthor.SelLength = Len(txtAuthor.tEXT)
+  txtAuthor.SelLength = Len(txtAuthor.Text)
 End Sub
 Private Sub txtCreator_GotFocus()
   txtCreator.SelStart = 0
-  txtCreator.SelLength = Len(txtCreator.tEXT)
+  txtCreator.SelLength = Len(txtCreator.Text)
 End Sub
 
 Private Sub txtSubject_GotFocus()
   txtSubject.SelStart = 0
-  txtSubject.SelLength = Len(txtSubject.tEXT)
+  txtSubject.SelLength = Len(txtSubject.Text)
 End Sub
 
 Private Sub txtTitle_GotFocus()
   txtTitle.SelStart = 0
-  txtTitle.SelLength = Len(txtTitle.tEXT)
+  txtTitle.SelLength = Len(txtTitle.Text)
 End Sub
 
 Private Sub txtKeywords_GotFocus()
   txtKeywords.SelStart = 0
-  txtKeywords.SelLength = Len(txtKeywords.tEXT)
+  txtKeywords.SelLength = Len(txtKeywords.Text)
 End Sub
 
 Private Sub txtFilename_GotFocus()
   txtFilename.SelStart = 0
-  txtFilename.SelLength = Len(txtFilename.tEXT)
+  txtFilename.SelLength = Len(txtFilename.Text)
 End Sub
 
 Private Sub txtOutputFile_GotFocus()
   txtOutputFile.SelStart = 0
-  txtOutputFile.SelLength = Len(txtOutputFile.tEXT)
+  txtOutputFile.SelLength = Len(txtOutputFile.Text)
 End Sub
 
 Private Sub btnClose_Click()
@@ -583,10 +583,10 @@ End Sub
 
 Private Sub btnOpen_Click()
   On Local Error Resume Next
-  txtFilename.tEXT = OpenArqExt(Me, txtFilename.tEXT, "txt", "Arquivos txt")
+  txtFilename.Text = OpenArqExt(Me, txtFilename.Text, "txt", "Arquivos txt")
 
-  If Not Len(txtFilename.tEXT) = 0 Then
-    txtOutputFile.tEXT = TrocaExt(txtFilename.tEXT, "pdf")
+  If Not Len(txtFilename.Text) = 0 Then
+    txtOutputFile.Text = TrocaExt(txtFilename.Text, "pdf")
   End If
 
 
@@ -598,7 +598,7 @@ Private Sub btnSave_Click()
   sFILTER = "Arquivos PDF (*.PDF)" & vbNullChar & "*.PDF" & vbNullChar & "Todos Arquivo" & vbNullChar & "*.*"
   filename = FileSave(Me, sFILTER, 1, "PDF", cARQRTF, cARQRTF, "Salvar PDF")
   If Not Len(filename) = 0 Then
-    txtOutputFile.tEXT = filename
+    txtOutputFile.Text = filename
   End If
 End Sub
 
@@ -621,11 +621,11 @@ Private Sub btnConvert_Click()
     Screen.MousePointer = vbHourglass
 
     ' A SUA CHAMADA ORIGINAL FICA ASSIM, PERFEITA:
-    ConvertToPDF txtFilename.tEXT, txtOutputFile.tEXT, _
-                 txtAuthor.tEXT, txtCreator.tEXT, txtKeywords.tEXT, _
-                 txtSubject.tEXT, txtTitle.tEXT, _
-                 cmbFont.tEXT, Val(cmbFontSize.tEXT), Val(cmbRotation.tEXT), _
-                 Val(cmbPageSize.tEXT), Val(Right(cmbPageSize.tEXT, 3)), ChkPaisagem.Value
+    ConvertToPDF txtFilename.Text, txtOutputFile.Text, _
+                 txtAuthor.Text, txtCreator.Text, txtKeywords.Text, _
+                 txtSubject.Text, txtTitle.Text, _
+                 cmbFont.Text, Val(cmbFontSize.Text), Val(cmbRotation.Text), _
+                 Val(cmbPageSize.Text), Val(Right(cmbPageSize.Text, 3)), ChkPaisagem.Value
 
     ' Restaura os controles
     Screen.MousePointer = vbDefault
@@ -736,7 +736,7 @@ Public Sub MyPrintingTXT()
   Dim strBuffer As String
   Dim cARQOPEN As String
   
-  cARQOPEN = txtFilename.tEXT
+  cARQOPEN = txtFilename.Text
   If Not FileConnExist(cARQOPEN, True) Then
     Exit Sub
   End If

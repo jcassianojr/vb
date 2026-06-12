@@ -132,9 +132,9 @@ Begin VB.Form FormIcones
    End
    Begin VBCCR18.CommandButtonW CommandButtonW1 
       Height          =   252
-      Left            =   0
+      Left            =   4320
       TabIndex        =   6
-      Top             =   0
+      Top             =   1200
       Width           =   372
       _ExtentX        =   656
       _ExtentY        =   445
@@ -165,6 +165,26 @@ Begin VB.Form FormIcones
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "FormIcones.frx":2536
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CommandButtonW2 
+      Height          =   612
+      Left            =   5520
+      TabIndex        =   8
+      Top             =   1080
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Visualizar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FormIcones.frx":2AD0
+      PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
    End
