@@ -455,6 +455,7 @@ Public Function SelecionarPasta(ByVal Titulo As String) As String
     ' 1 = BIF_RETURNONLYFSDIRS (Apenas pastas do sistema de arquivos)
     Set objFolder = objShell.BrowseForFolder(0, Titulo, 1)
     
+    
     If Not objFolder Is Nothing Then
         SelecionarPasta = objFolder.Items.Item.Path
     Else

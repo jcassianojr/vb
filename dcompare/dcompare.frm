@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
+Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form dCompare 
    Caption         =   "Database Comparador/Corretor"
    ClientHeight    =   7908
@@ -12,6 +12,14 @@ Begin VB.Form dCompare
    ScaleHeight     =   7908
    ScaleWidth      =   10428
    StartUpPosition =   3  'Windows Default
+   Begin vbExtra.CommonDialogEx CommonDialog1 
+      Left            =   9600
+      Top             =   2400
+      _ExtentX        =   720
+      _ExtentY        =   720
+      MaxFileSize     =   255
+      FontName        =   ""
+   End
    Begin VB.CommandButton cmdCompareMdbAccdb 
       Caption         =   "CompareMdbAccdb"
       Height          =   375
@@ -129,13 +137,6 @@ Begin VB.Form dCompare
       Top             =   2280
       Width           =   1452
    End
-   Begin MSComDlg.CommonDialog CommonDialog1 
-      Left            =   8760
-      Top             =   1920
-      _ExtentX        =   847
-      _ExtentY        =   847
-      _Version        =   393216
-   End
    Begin VBCCR18.CommandButtonW cmdsair 
       Height          =   612
       Left            =   9240
@@ -156,48 +157,10 @@ Begin VB.Form dCompare
       WordWrap        =   0   'False
       Style           =   1
    End
-   Begin VBCCR18.CommandButtonW CommandButtonW1 
-      Height          =   612
-      Left            =   8520
-      TabIndex        =   20
-      Top             =   6840
-      Width           =   972
-      _ExtentX        =   1715
-      _ExtentY        =   1080
-      Appearance      =   0
-      BackColor       =   -2147483643
-      ForeColor       =   -2147483640
-      ImageListAlignment=   1
-      Caption         =   "o"
-      Alignment       =   0
-      VerticalAlignment=   0
-      Picture         =   "dcompare.frx":0B24
-      PictureAndCaption=   -1  'True
-      WordWrap        =   0   'False
-      Style           =   1
-   End
-   Begin VBCCR18.CommandButtonW CommandButtonW2 
-      Height          =   372
-      Left            =   8520
-      TabIndex        =   21
-      Top             =   6360
-      Width           =   612
-      _ExtentX        =   1080
-      _ExtentY        =   656
-      Appearance      =   0
-      BackColor       =   -2147483643
-      ForeColor       =   -2147483640
-      ImageListAlignment=   1
-      Alignment       =   0
-      VerticalAlignment=   0
-      Picture         =   "dcompare.frx":10BE
-      WordWrap        =   0   'False
-      Style           =   1
-   End
    Begin VBCCR18.CommandButtonW CmdEscolheDestino 
       Height          =   372
       Left            =   8400
-      TabIndex        =   22
+      TabIndex        =   20
       Top             =   1200
       Width           =   612
       _ExtentX        =   1080
@@ -208,14 +171,14 @@ Begin VB.Form dCompare
       ImageListAlignment=   1
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "dcompare.frx":1658
+      Picture         =   "dcompare.frx":0B24
       WordWrap        =   0   'False
       Style           =   1
    End
    Begin VBCCR18.CommandButtonW CmdEscolheOrigem 
       Height          =   372
       Left            =   8400
-      TabIndex        =   23
+      TabIndex        =   21
       Top             =   120
       Width           =   612
       _ExtentX        =   1080
@@ -226,14 +189,14 @@ Begin VB.Form dCompare
       ImageListAlignment=   1
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "dcompare.frx":1AF2
+      Picture         =   "dcompare.frx":0FBE
       WordWrap        =   0   'False
       Style           =   1
    End
    Begin VBCCR18.CommandButtonW CmdGeraPastaSql 
       Height          =   612
       Left            =   1200
-      TabIndex        =   24
+      TabIndex        =   22
       Top             =   3720
       Width           =   972
       _ExtentX        =   1715
@@ -245,7 +208,7 @@ Begin VB.Form dCompare
       Caption         =   "sql"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "dcompare.frx":1F8C
+      Picture         =   "dcompare.frx":1458
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -253,7 +216,7 @@ Begin VB.Form dCompare
    Begin VBCCR18.CommandButtonW CmdSqlOrigem 
       Height          =   612
       Left            =   1080
-      TabIndex        =   25
+      TabIndex        =   23
       Top             =   480
       Width           =   972
       _ExtentX        =   1715
@@ -265,7 +228,7 @@ Begin VB.Form dCompare
       Caption         =   "sql"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "dcompare.frx":2426
+      Picture         =   "dcompare.frx":18F2
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -273,7 +236,7 @@ Begin VB.Form dCompare
    Begin VBCCR18.CommandButtonW CmdSqlDestino 
       Height          =   612
       Left            =   1080
-      TabIndex        =   26
+      TabIndex        =   24
       Top             =   1560
       Width           =   972
       _ExtentX        =   1715
@@ -285,7 +248,7 @@ Begin VB.Form dCompare
       Caption         =   "sql"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "dcompare.frx":28C0
+      Picture         =   "dcompare.frx":1D8C
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -293,6 +256,46 @@ Begin VB.Form dCompare
    Begin VBCCR18.CommandButtonW cmdCompactarDestino 
       Height          =   612
       Left            =   3240
+      TabIndex        =   25
+      Top             =   1560
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Compactar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "dcompare.frx":2226
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdCompactarOrigem 
+      Height          =   612
+      Left            =   3240
+      TabIndex        =   26
+      Top             =   480
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Compactar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "dcompare.frx":26C0
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdTableDestinoInfo 
+      Height          =   612
+      Left            =   2160
       TabIndex        =   27
       Top             =   1560
       Width           =   972
@@ -302,17 +305,17 @@ Begin VB.Form dCompare
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
       ImageListAlignment=   1
-      Caption         =   "Compactar"
+      Caption         =   "Informacao"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "dcompare.frx":2D5A
+      Picture         =   "dcompare.frx":2B5A
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
    End
-   Begin VBCCR18.CommandButtonW cmdCompactarOrigem 
+   Begin VBCCR18.CommandButtonW CmdTableOrigemInfo 
       Height          =   612
-      Left            =   3240
+      Left            =   2160
       TabIndex        =   28
       Top             =   480
       Width           =   972
@@ -322,50 +325,10 @@ Begin VB.Form dCompare
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
       ImageListAlignment=   1
-      Caption         =   "Compactar"
-      Alignment       =   0
-      VerticalAlignment=   0
-      Picture         =   "dcompare.frx":31F4
-      PictureAndCaption=   -1  'True
-      WordWrap        =   0   'False
-      Style           =   1
-   End
-   Begin VBCCR18.CommandButtonW CmdTableDestinoInfo 
-      Height          =   612
-      Left            =   2160
-      TabIndex        =   29
-      Top             =   1560
-      Width           =   972
-      _ExtentX        =   1715
-      _ExtentY        =   1080
-      Appearance      =   0
-      BackColor       =   -2147483643
-      ForeColor       =   -2147483640
-      ImageListAlignment=   1
       Caption         =   "Informacao"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "dcompare.frx":368E
-      PictureAndCaption=   -1  'True
-      WordWrap        =   0   'False
-      Style           =   1
-   End
-   Begin VBCCR18.CommandButtonW CmdTableOrigemInfo 
-      Height          =   612
-      Left            =   2160
-      TabIndex        =   30
-      Top             =   480
-      Width           =   972
-      _ExtentX        =   1715
-      _ExtentY        =   1080
-      Appearance      =   0
-      BackColor       =   -2147483643
-      ForeColor       =   -2147483640
-      ImageListAlignment=   1
-      Caption         =   "Informacao"
-      Alignment       =   0
-      VerticalAlignment=   0
-      Picture         =   "dcompare.frx":3B28
+      Picture         =   "dcompare.frx":2FF4
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -373,7 +336,7 @@ Begin VB.Form dCompare
    Begin VBCCR18.CommandButtonW CmdEscdir 
       Height          =   372
       Left            =   8400
-      TabIndex        =   31
+      TabIndex        =   29
       Top             =   3360
       Width           =   612
       _ExtentX        =   1080
@@ -384,14 +347,14 @@ Begin VB.Form dCompare
       ImageListAlignment=   1
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "dcompare.frx":3FC2
+      Picture         =   "dcompare.frx":348E
       WordWrap        =   0   'False
       Style           =   1
    End
    Begin VBCCR18.CommandButtonW cmdSelSQL 
       Height          =   372
       Left            =   8400
-      TabIndex        =   33
+      TabIndex        =   31
       Top             =   2880
       Width           =   612
       _ExtentX        =   1080
@@ -402,14 +365,14 @@ Begin VB.Form dCompare
       ImageListAlignment=   1
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "dcompare.frx":455C
+      Picture         =   "dcompare.frx":3A28
       WordWrap        =   0   'False
       Style           =   1
    End
    Begin VBCCR18.CommandButtonW Command3 
       Height          =   612
       Left            =   4320
-      TabIndex        =   34
+      TabIndex        =   32
       Top             =   1560
       Width           =   972
       _ExtentX        =   1715
@@ -421,7 +384,7 @@ Begin VB.Form dCompare
       Caption         =   "Comparar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "dcompare.frx":49F6
+      Picture         =   "dcompare.frx":3EC2
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -441,7 +404,7 @@ Begin VB.Form dCompare
       ForeColor       =   &H00008000&
       Height          =   252
       Left            =   240
-      TabIndex        =   32
+      TabIndex        =   30
       Top             =   3480
       Width           =   792
    End
@@ -519,9 +482,6 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
-Private Sub Check1_Click()
-
-End Sub
 
 Private Sub cmdCompactarDestino_Click()
 Dim sCaminho As String
@@ -568,9 +528,11 @@ End Sub
 
 Private Sub CmdEscdir_Click()
 Dim sCaminho As String
-    sCaminho = SelecionarPasta("Selecione a pasta contendo dos arquivos MDB:")
+'    sCaminho = SelecionarPasta("Selecione a pasta contendo dos arquivos MDB:")
+    CommonDialog1.ShowFolder
+    sCaminho = CommonDialog1.FolderName
     
-    If sCaminho <> "" Then
+   If sCaminho <> "" Then
         Diretorio.Text = sCaminho
     End If
 End Sub
@@ -625,6 +587,7 @@ Private Sub CmdEscolheOrigem_Click()
         TxTArquivoOrigem.Text = CommonDialog1.filename
     End If
     
+        
     Exit Sub
 Erro:
     ' Captura o erro caso o usuário aperte Cancelar
@@ -781,21 +744,11 @@ Private Sub CmdTableOrigemInfo_Click()
     End If
 End Sub
 
+
 Private Sub Command1_Click()
-RenomearIndice "c:\temp\desenho.mdb", "atual", "conjunto", "conjunto_atual"
-RenomearIndice "c:\temp\desenho.mdb", "baixado", "conjunto", "conjunto_baixado"
-RenomearIndice "c:\temp\desenho.mdb", "CLIENTE", "cliente", "cliente_cliente"
-RenomearIndice "c:\temp\desenho.mdb", "conjunto", "conjunto", "conjunto_conjunto"
-RenomearIndice "c:\temp\desenho.mdb", "PRODENG", "produto", "produto_prodeng"
-RenomearIndice "c:\temp\desenho.mdb", "PRODUTO", "cliente", "cliente_produto"
-
-
-'CREATE INDEX [conjunto] ON [atual] ([conjunto]);
-'CREATE INDEX [conjunto] ON [baixado] ([conjunto]);
-'CREATE INDEX [CLIENTE] ON [CLIENTE] ([CLIENTE]);
-'CREATE INDEX [conjunto] ON [conjunto] ([conjunto]);
-'CREATE INDEX [PRODUTO] ON [PRODENG] ([PRODUTO]);
-'CREATE INDEX [CLIENTE] ON [PRODUTO] ([CLIENTE]);
+CommonDialog1.ShowFolder
+'CommonDialog1.ShowPrinter
+MsgBox CommonDialog1.FolderName
 
 End Sub
 
