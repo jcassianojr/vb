@@ -1,13 +1,13 @@
 VERSION 5.00
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
-Begin VB.Form Form1 
+Begin VB.Form frmEmail 
    BorderStyle     =   1  'Fixed Single
-   Caption         =   "Gerador de Cofre de Senhas - VB96/VB6"
+   Caption         =   "Gerador de Cofre de E-mails - VB96/VB6"
    ClientHeight    =   5796
    ClientLeft      =   48
    ClientTop       =   396
    ClientWidth     =   5952
-   LinkTopic       =   "Form1"
+   LinkTopic       =   "frmEmail"
    MaxButton       =   0   'False
    ScaleHeight     =   5796
    ScaleWidth      =   5952
@@ -28,25 +28,25 @@ Begin VB.Form Form1
       PictureAndCaption=   -1  'True
       Style           =   1
    End
-   Begin VBCCR18.ComboBoxW cmbBancos 
+   Begin VBCCR18.ComboBoxW cmbEmails 
       Height          =   288
       Left            =   1560
       TabIndex        =   14
-      Tag             =   "cmbBancos"
+      Tag             =   "cmbEmails"
       Top             =   360
       Width           =   2052
       _ExtentX        =   3620
       _ExtentY        =   508
-      Text            =   "cmbBancos"
+      Text            =   "cmbEmails"
    End
-   Begin VB.TextBox txtBanco 
+   Begin VB.TextBox txtConta 
       Height          =   285
       Left            =   1680
       TabIndex        =   0
       Top             =   1200
       Width           =   2055
    End
-   Begin VB.TextBox txtServer 
+   Begin VB.TextBox txtSmtp 
       Height          =   285
       Left            =   1680
       TabIndex        =   1
@@ -60,12 +60,13 @@ Begin VB.Form Form1
       Top             =   2160
       Width           =   1200
    End
-   Begin VB.TextBox txtOwner 
+   Begin VB.TextBox txtSslTls 
       Height          =   285
       Left            =   1680
       TabIndex        =   3
       Top             =   2640
       Width           =   2055
+      Text            =   "STARTTLS" ' Valor padrão sugerido
    End
    Begin VB.TextBox txtUser 
       Height          =   285
@@ -142,13 +143,13 @@ Begin VB.Form Form1
       Appearance      =   0
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
-      Caption         =   "Excluir Banco"
+      Caption         =   "Excluir Conta"
       Picture         =   "form1.frx":1268
       PictureAndCaption=   -1  'True
       Style           =   1
    End
    Begin VB.Label Label7 
-      Caption         =   "Owner / Esquema:"
+      Caption         =   "SSL / TLS:"
       Height          =   255
       Left            =   240
       TabIndex        =   12
@@ -156,7 +157,7 @@ Begin VB.Form Form1
       Width           =   1455
    End
    Begin VB.Label Label6 
-      Caption         =   "Porta Banco:"
+      Caption         =   "Porta SMTP:"
       Height          =   255
       Left            =   240
       TabIndex        =   11
@@ -164,7 +165,7 @@ Begin VB.Form Form1
       Width           =   1215
    End
    Begin VB.Label Label5 
-      Caption         =   "Bancos Salvos:"
+      Caption         =   "Contas Salvas:"
       Height          =   252
       Left            =   240
       TabIndex        =   10
@@ -180,7 +181,7 @@ Begin VB.Form Form1
       Width           =   1215
    End
    Begin VB.Label Label3 
-      Caption         =   "Usuario:"
+      Caption         =   "Usuário / Email:"
       Height          =   255
       Left            =   240
       TabIndex        =   8
@@ -188,7 +189,7 @@ Begin VB.Form Form1
       Width           =   1215
    End
    Begin VB.Label Label2 
-      Caption         =   "Servidor / IP:"
+      Caption         =   "Servidor SMTP:"
       Height          =   255
       Left            =   240
       TabIndex        =   7
@@ -196,7 +197,7 @@ Begin VB.Form Form1
       Width           =   1215
    End
    Begin VB.Label Label1 
-      Caption         =   "Nome do Banco:"
+      Caption         =   "Nome da Conta:"
       Height          =   255
       Left            =   240
       TabIndex        =   6
@@ -217,7 +218,7 @@ Begin VB.Form Form1
    End
    Begin VB.Label lblStatus 
       Alignment       =   2  'Center
-      Caption         =   "Cofre pronto para operacao"
+      Caption         =   "Cofre de e-mails pronto para operação"
       ForeColor       =   &H00800000&
       Height          =   252
       Left            =   240
@@ -226,96 +227,88 @@ Begin VB.Form Form1
       Width           =   5292
    End
 End
-Attribute VB_Name = "Form1"
+Attribute VB_Name = "frmEmail"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Sub CommandButtonW5_Click()
-
-End Sub
-
 Private Sub Form_Load()
     Call AtualizarLista
 End Sub
 
-' --- BOTÃƒO ATUALIZAR LISTA ---
+' --- BOTÃO ATUALIZAR LISTA ---
 Private Sub cmdAtualizar_Click()
     Call AtualizarLista
 End Sub
 
-' --- EVENTO CLIQUE NA LISTA DE BANCOS ---
-Private Sub cmbBancos_Click()
-    Dim BancoSelecionado As String
-    If cmbBancos.ListIndex = -1 Then Exit Sub
+' --- EVENTO CLIQUE NA LISTA DE EMAILS ---
+Private Sub cmbEmails_Click()
+    Dim ContaSelecionada As String
+    If cmbEmails.ListIndex = -1 Then Exit Sub
     
-    BancoSelecionado = cmbBancos.List(cmbBancos.ListIndex)
-    txtBanco.Text = BancoSelecionado
+    ContaSelecionada = cmbEmails.List(cmbEmails.ListIndex)
+    txtConta.Text = ContaSelecionada
     
-    ' LÃª as credenciais tradicionais
-    txtServer.Text = LerDoCofre(BancoSelecionado, "Server")
-    txtUser.Text = LerDoCofre(BancoSelecionado, "User")
-    txtPassword.Text = LerDoCofre(BancoSelecionado, "Password")
+    ' Lê as configurações do E-mail mapeando a mesma lógica do seu cofre
+    txtSmtp.Text = LerDoCofre(ContaSelecionada, "SmtpServer")
+    txtPorta.Text = LerDoCofre(ContaSelecionada, "SmtpPort")
+    txtSslTls.Text = LerDoCofre(ContaSelecionada, "SslTls")
+    txtUser.Text = LerDoCofre(ContaSelecionada, "EmailUser")
+    txtPassword.Text = LerDoCofre(ContaSelecionada, "EmailPassword")
     
-    ' LÃª os novos parÃ¢metros adicionados
-    txtPorta.Text = LerDoCofre(BancoSelecionado, "Port")
-    txtOwner.Text = LerDoCofre(BancoSelecionado, "Owner")
-    
-    lblStatus.Caption = "Dados de [" & BancoSelecionado & "] carregados."
+    lblStatus.Caption = "Dados de [" & ContaSelecionada & "] carregados."
 End Sub
 
-' --- BOTÃƒO SALVAR ---
+' --- BOTÃO SALVAR ---
 Private Sub cmdSalvar_Click()
-    Dim Banco As String
-    Banco = UCase(Trim(txtBanco.Text))
+    Dim Conta As String
+    Conta = UCase(Trim(txtConta.Text))
     
-    If Banco = "" Then
-        MsgBox "O nome do banco Ã© obrigatÃ³rio para salvar!", vbExclamation, "Aviso"
-        txtBanco.SetFocus
+    If Conta = "" Then
+        MsgBox "O nome da conta é obrigatório para salvar!", vbExclamation, "Aviso"
+        txtConta.SetFocus
         Exit Sub
     End If
     
-    ' Salva os parÃ¢metros tradicionais
-    Call GravarNoCofre(Banco, "Server", txtServer.Text)
-    Call GravarNoCofre(Banco, "User", txtUser.Text)
-    Call GravarNoCofre(Banco, "Password", txtPassword.Text)
+    ' Grava os parâmetros no seu arquivo/banco cofre criptografado
+    Call GravarNoCofre(Conta, "SmtpServer", txtSmtp.Text)
+    Call GravarNoCofre(Conta, "SmtpPort", txtPorta.Text)
+    Call GravarNoCofre(Conta, "SslTls", txtSslTls.Text)
+    Call GravarNoCofre(Conta, "EmailUser", txtUser.Text)
+    Call GravarNoCofre(Conta, "EmailPassword", txtPassword.Text)
     
-    ' Salva os dois parÃ¢metros novos
-    Call GravarNoCofre(Banco, "Port", txtPorta.Text)
-    Call GravarNoCofre(Banco, "Owner", txtOwner.Text)
-    
-    lblStatus.Caption = "Banco [" & Banco & "] gravado com sucesso!"
-    MsgBox "Dados gravados com sucesso no cofre criptografado!", vbInformation, "Sucesso"
+    lblStatus.Caption = "Conta [" & Conta & "] gravada com sucesso!"
+    MsgBox "Dados de e-mail gravados com sucesso no cofre!", vbInformation, "Sucesso"
     
     Call AtualizarLista
     
-    ' Seleciona automaticamente o banco recÃ©m-salvo no combo
+    ' Seleciona automaticamente o e-mail recém-salvo no combo
     Dim i As Integer
-    For i = 0 To cmbBancos.ListCount - 1
-        If cmbBancos.List(i) = Banco Then
-            cmbBancos.ListIndex = i
+    For i = 0 To cmbEmails.ListCount - 1
+        If cmbEmails.List(i) = Conta Then
+            cmbEmails.ListIndex = i
             Exit For
         End If
     Next i
 End Sub
 
-' --- BOTÃƒO LIMPAR CAMPOS / NOVO ---
+' --- BOTÃO LIMPAR CAMPOS / NOVO ---
 Private Sub cmdLimpar_Click()
-    txtBanco.Text = ""
-    txtServer.Text = ""
+    txtConta.Text = ""
+    txtSmtp.Text = ""
     txtPorta.Text = ""
-    txtOwner.Text = ""
+    txtSslTls.Text = "STARTTLS"
     txtUser.Text = ""
     txtPassword.Text = ""
     
-    cmbBancos.ListIndex = -1
-    lblStatus.Caption = "Campos limpos. Pronto para novo cadastro."
-    txtBanco.SetFocus
+    cmbEmails.ListIndex = -1
+    lblStatus.Caption = "Campos limpos. Pronto para nova configuração de e-mail."
+    txtConta.SetFocus
 End Sub
 
-' --- BOTÃƒO REVELAR / OCULTAR SENHA ---
+' --- BOTÃO REVELAR / OCULTAR SENHA ---
 Private Sub cmdRevelar_Click()
     If txtPassword.PasswordChar = "*" Then
         txtPassword.PasswordChar = ""
@@ -327,24 +320,26 @@ Private Sub cmdRevelar_Click()
     txtPassword.SetFocus
 End Sub
 
-' --- BOTÃƒO EXCLUIR BANCO ---
+' --- BOTÃO EXCLUIR CONTA ---
 Private Sub cmdExcluir_Click()
     Dim Resposta As VbMsgBoxResult
-    Dim BancoParaExcluir As String
+    Dim ContaParaExcluir As String
     
-    BancoParaExcluir = UCase(Trim(txtBanco.Text))
+    ContaParaExcluir = UCase(Trim(txtConta.Text))
     
-    If BancoParaExcluir = "" Then
-        MsgBox "Selecione ou digite o nome do banco que deseja excluir!", vbExclamation, "Aviso"
+    If ContaParaExcluir = "" Then
+        MsgBox "Selecione ou digite o nome da conta que deseja excluir!", vbExclamation, "Aviso"
         Exit Sub
     End If
     
-    Resposta = MsgBox("Tem certeza que deseja apagar o banco [" & BancoParaExcluir & "] permanentemente?", _
-                      vbQuestion + vbYesNo + vbDefaultButton2, "Confirmar ExclusÃ£o")
+    Resposta = MsgBox("Tem certeza que deseja apagar a conta [" & ContaParaExcluir & "] permanentemente?", _
+                      vbQuestion + vbYesNo + vbDefaultButton2, "Confirmar Exclusão")
                       
     If Resposta = vbYes Then
-        Call ExcluirBanco(BancoParaExcluir)
-        MsgBox "Banco [" & BancoParaExcluir & "] excluÃ­do com sucesso!", vbInformation, "ConcluÃ­do"
+        ' Se a sua função ExcluirBanco for genérica para chaves do cofre, pode usá-la.
+        ' Caso contrário, adapte para a rotina correta de deleção do seu sistema.
+        Call ExcluirBanco(ContaParaExcluir) 
+        MsgBox "Conta [" & ContaParaExcluir & "] excluída com sucesso!", vbInformation, "Concluído"
         Call cmdLimpar_Click
         Call AtualizarLista
     End If
@@ -352,7 +347,6 @@ End Sub
 
 ' --- ROTINAS AUXILIARES ---
 Private Sub ProfilerCheck()
-    ' Verifica se a pasta existe antes de listar
     Dim fso As Object
     Set fso = CreateObject("Scripting.FileSystemObject")
     Dim sPasta As String
@@ -368,12 +362,9 @@ Private Sub ProfilerCheck()
     Set fso = Nothing
 End Sub
 
-Private Sub CleanIniGarbage()
-    ' Esta rotina opcional limpa chaves vazias se necessÃ¡rio
-End Sub
-
 Private Sub AtualizarLista()
     On Error Resume Next
     Call ProfilerCheck
-    Call ListarBancosNoCombo(cmbBancos)
+    ' Passa o novo ComboBox modificado como parâmetro
+    Call ListarBancosNoCombo(cmbEmails) 
 End Sub
