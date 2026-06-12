@@ -1,16 +1,15 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form frmLocalizar 
    Caption         =   "Localizar"
    ClientHeight    =   2028
    ClientLeft      =   60
    ClientTop       =   348
-   ClientWidth     =   6348
+   ClientWidth     =   5880
    Icon            =   "frmlocalizar.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   2028
-   ScaleWidth      =   6348
+   ScaleWidth      =   5880
    StartUpPosition =   3  'Windows Default
    Begin VB.TextBox cBUSCA 
       BeginProperty Font 
@@ -50,31 +49,10 @@ Begin VB.Form frmLocalizar
       Max             =   99
       Value           =   1
    End
-   Begin XPControls.XPButton Command1 
-      Height          =   375
-      Left            =   4680
-      TabIndex        =   4
-      TabStop         =   0   'False
-      Top             =   120
-      Width           =   1575
-      _ExtentX        =   2773
-      _ExtentY        =   656
-      Picture         =   "frmlocalizar.frx":058A
-      Caption         =   "Localizar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin VBCCR18.CommandButtonW Command2 
       Height          =   612
       Left            =   4680
-      TabIndex        =   5
+      TabIndex        =   4
       Top             =   1080
       Width           =   972
       _ExtentX        =   1715
@@ -86,7 +64,27 @@ Begin VB.Form frmLocalizar
       Caption         =   "Cancelar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "frmlocalizar.frx":0B24
+      Picture         =   "frmlocalizar.frx":058A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW Command1 
+      Height          =   612
+      Left            =   4680
+      TabIndex        =   5
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Localizar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmlocalizar.frx":0A24
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1

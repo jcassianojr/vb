@@ -1,26 +1,26 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form frmUSER 
    Caption         =   "Cadastro de Usuário"
    ClientHeight    =   7500
-   ClientLeft      =   1110
-   ClientTop       =   345
-   ClientWidth     =   10515
+   ClientLeft      =   1116
+   ClientTop       =   348
+   ClientWidth     =   10512
    HelpContextID   =   12
    Icon            =   "frmUSER.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7500
-   ScaleWidth      =   10515
+   ScaleWidth      =   10512
    WindowState     =   2  'Maximized
    Begin vbExtra.SizeGrip SizeGrip1 
       Height          =   285
-      Left            =   10230
-      Top             =   7215
+      Left            =   10284
+      Top             =   7272
       Width           =   285
-      _ExtentX        =   503
-      _ExtentY        =   503
+      _ExtentX        =   402
+      _ExtentY        =   402
    End
    Begin XPControls.XPButton CmdLibGrp 
       Height          =   375
@@ -34,7 +34,7 @@ Begin VB.Form frmUSER
       Caption         =   "Integrados"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -54,7 +54,7 @@ Begin VB.Form frmUSER
       Caption         =   "Folha"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -74,7 +74,7 @@ Begin VB.Form frmUSER
       Caption         =   "Documentos"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -89,13 +89,13 @@ Begin VB.Form frmUSER
       Top             =   120
       Width           =   10275
       Begin VBCCR18.ComboBoxW cboEQUIVALENTE 
-         Height          =   315
+         Height          =   288
          Left            =   5400
-         TabIndex        =   61
+         TabIndex        =   60
          Top             =   420
          Width           =   1455
-         _ExtentX        =   2566
-         _ExtentY        =   556
+         _ExtentX        =   2561
+         _ExtentY        =   550
          Text            =   "ComboBoxW1"
       End
       Begin VB.TextBox tEXT 
@@ -103,7 +103,7 @@ Begin VB.Form frmUSER
          Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -114,7 +114,7 @@ Begin VB.Form frmUSER
          Index           =   13
          Left            =   240
          Locked          =   -1  'True
-         TabIndex        =   60
+         TabIndex        =   59
          TabStop         =   0   'False
          ToolTipText     =   "Senha"
          Top             =   6360
@@ -125,27 +125,27 @@ Begin VB.Form frmUSER
          Left            =   5520
          Top             =   4680
          Width           =   3255
-         _ExtentX        =   5741
-         _ExtentY        =   661
+         _ExtentX        =   5736
+         _ExtentY        =   656
       End
       Begin VBCCR18.DTPicker DTPicker2 
          Height          =   375
          Left            =   240
-         TabIndex        =   54
+         TabIndex        =   53
          Top             =   2520
          Width           =   1695
-         _ExtentX        =   2990
-         _ExtentY        =   661
+         _ExtentX        =   2985
+         _ExtentY        =   656
          Value           =   44285
       End
       Begin VBCCR18.DTPicker DTPicker1 
          Height          =   375
          Left            =   1440
-         TabIndex        =   53
+         TabIndex        =   52
          Top             =   960
          Width           =   1815
-         _ExtentX        =   3201
-         _ExtentY        =   661
+         _ExtentX        =   3196
+         _ExtentY        =   656
          Value           =   44285
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
@@ -153,16 +153,16 @@ Begin VB.Form frmUSER
       Begin XPControls.XPButton cmdZeraSenha 
          Height          =   495
          Left            =   2280
-         TabIndex        =   52
+         TabIndex        =   51
          Top             =   3120
          Width           =   1095
-         _ExtentX        =   1931
-         _ExtentY        =   873
+         _ExtentX        =   1926
+         _ExtentY        =   868
          Picture         =   "frmUSER.frx":038A
          Caption         =   "zerar senha"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -173,16 +173,16 @@ Begin VB.Form frmUSER
       Begin XPControls.XPButton cmdTroca 
          Height          =   495
          Left            =   2280
-         TabIndex        =   51
+         TabIndex        =   50
          Top             =   2520
          Width           =   1095
-         _ExtentX        =   1931
-         _ExtentY        =   873
+         _ExtentX        =   1926
+         _ExtentY        =   868
          Picture         =   "frmUSER.frx":0924
          Caption         =   "trocar senha"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -201,7 +201,7 @@ Begin VB.Form frmUSER
          Caption         =   "ApagarTudo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -221,7 +221,7 @@ Begin VB.Form frmUSER
          Caption         =   "Relatorios"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -241,7 +241,7 @@ Begin VB.Form frmUSER
          Caption         =   "Integrados"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -261,7 +261,7 @@ Begin VB.Form frmUSER
          Caption         =   "Integrados"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -281,7 +281,7 @@ Begin VB.Form frmUSER
          Caption         =   "Folha"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -301,7 +301,7 @@ Begin VB.Form frmUSER
          Caption         =   "Folha"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -322,7 +322,7 @@ Begin VB.Form frmUSER
          Caption         =   "Integrados"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -343,7 +343,7 @@ Begin VB.Form frmUSER
          Caption         =   "Folha"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -355,7 +355,7 @@ Begin VB.Form frmUSER
          Caption         =   "Ativo"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -383,7 +383,7 @@ Begin VB.Form frmUSER
          Caption         =   "Relatorios"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -404,7 +404,7 @@ Begin VB.Form frmUSER
          Caption         =   "Documentos"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -424,7 +424,7 @@ Begin VB.Form frmUSER
          Caption         =   "Importar Direito Menus"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -444,7 +444,7 @@ Begin VB.Form frmUSER
          Caption         =   "Importar Direito Botoes"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -464,7 +464,7 @@ Begin VB.Form frmUSER
          Caption         =   "Relatorios"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -484,7 +484,7 @@ Begin VB.Form frmUSER
          Caption         =   "Documentos"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -504,7 +504,7 @@ Begin VB.Form frmUSER
          Caption         =   "Documentos"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -524,7 +524,7 @@ Begin VB.Form frmUSER
          Caption         =   "Relatorios"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -573,7 +573,7 @@ Begin VB.Form frmUSER
          Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -595,7 +595,7 @@ Begin VB.Form frmUSER
          Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -608,13 +608,13 @@ Begin VB.Form frmUSER
          TabIndex        =   3
          Text            =   "0"
          ToolTipText     =   "Nº Folha Pagamento"
-         Top             =   1740
+         Top             =   1680
          Width           =   735
       End
       Begin VB.TextBox tEXT 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -635,7 +635,7 @@ Begin VB.Form frmUSER
          Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -657,7 +657,7 @@ Begin VB.Form frmUSER
          Caption         =   "Horarios Permitidos de Uso"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -674,7 +674,7 @@ Begin VB.Form frmUSER
             Caption         =   "Acesso no fim-de-semana"
             BeginProperty Font 
                Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Size            =   7.8
                Charset         =   0
                Weight          =   700
                Underline       =   0   'False
@@ -692,11 +692,11 @@ Begin VB.Form frmUSER
          Begin VBCCR18.DTPicker DTPicker3 
             Height          =   375
             Left            =   1320
-            TabIndex        =   55
+            TabIndex        =   54
             Top             =   240
             Width           =   1335
-            _ExtentX        =   2355
-            _ExtentY        =   661
+            _ExtentX        =   2350
+            _ExtentY        =   656
             Value           =   44285
             Format          =   2
             CheckBox        =   -1  'True
@@ -705,11 +705,11 @@ Begin VB.Form frmUSER
          Begin VBCCR18.DTPicker DTPicker4 
             Height          =   375
             Left            =   3600
-            TabIndex        =   56
+            TabIndex        =   55
             Top             =   240
             Width           =   1335
-            _ExtentX        =   2355
-            _ExtentY        =   661
+            _ExtentX        =   2350
+            _ExtentY        =   656
             Value           =   44285
             Format          =   2
             CheckBox        =   -1  'True
@@ -720,7 +720,7 @@ Begin VB.Form frmUSER
             Caption         =   "Hora inicial :"
             BeginProperty Font 
                Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Size            =   7.8
                Charset         =   0
                Weight          =   700
                Underline       =   0   'False
@@ -740,7 +740,7 @@ Begin VB.Form frmUSER
             Caption         =   "Hora final :"
             BeginProperty Font 
                Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Size            =   7.8
                Charset         =   0
                Weight          =   700
                Underline       =   0   'False
@@ -761,7 +761,7 @@ Begin VB.Form frmUSER
          Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -781,7 +781,7 @@ Begin VB.Form frmUSER
       Begin VB.TextBox tEXT 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -803,7 +803,7 @@ Begin VB.Form frmUSER
          Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -820,40 +820,20 @@ Begin VB.Form frmUSER
          Top             =   420
          Width           =   1365
       End
-      Begin XPControls.XPButton CmdClose 
-         Height          =   435
-         Left            =   8520
-         TabIndex        =   47
-         Top             =   360
-         Width           =   1515
-         _ExtentX        =   2672
-         _ExtentY        =   767
-         Picture         =   "frmUSER.frx":0DBE
-         Caption         =   "Salvar"
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-      End
       Begin XPControls.XPButton escidfolha 
          Height          =   375
          Index           =   0
          Left            =   1920
-         TabIndex        =   48
+         TabIndex        =   47
          Top             =   1680
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
-         Picture         =   "frmUSER.frx":1358
+         _ExtentX        =   656
+         _ExtentY        =   656
+         Picture         =   "frmUSER.frx":0DBE
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -865,16 +845,16 @@ Begin VB.Form frmUSER
          Height          =   375
          Index           =   1
          Left            =   2400
-         TabIndex        =   49
+         TabIndex        =   48
          Top             =   1680
          Width           =   855
-         _ExtentX        =   1508
-         _ExtentY        =   661
-         Picture         =   "frmUSER.frx":18F2
+         _ExtentX        =   1503
+         _ExtentY        =   656
+         Picture         =   "frmUSER.frx":1358
          Caption         =   "LX"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -885,16 +865,16 @@ Begin VB.Form frmUSER
       Begin XPControls.XPButton Command1 
          Height          =   375
          Left            =   3360
-         TabIndex        =   50
+         TabIndex        =   49
          Top             =   1680
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
-         Picture         =   "frmUSER.frx":1E8C
+         _ExtentX        =   656
+         _ExtentY        =   656
+         Picture         =   "frmUSER.frx":18F2
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -902,12 +882,32 @@ Begin VB.Form frmUSER
             Strikethrough   =   0   'False
          EndProperty
       End
+      Begin VBCCR18.CommandButtonW CmdClose 
+         Height          =   612
+         Left            =   8760
+         TabIndex        =   61
+         Top             =   240
+         Width           =   972
+         _ExtentX        =   1715
+         _ExtentY        =   1080
+         Appearance      =   0
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         ImageListAlignment=   1
+         Caption         =   "Salvar"
+         Alignment       =   0
+         VerticalAlignment=   0
+         Picture         =   "frmUSER.frx":1E8C
+         PictureAndCaption=   -1  'True
+         WordWrap        =   0   'False
+         Style           =   1
+      End
       Begin VB.Label Lblchaveh 
          BackColor       =   &H00C0FFFF&
          Caption         =   "chaveh"
          Height          =   255
          Left            =   240
-         TabIndex        =   59
+         TabIndex        =   58
          Top             =   6000
          Width           =   9615
       End
@@ -916,7 +916,7 @@ Begin VB.Form frmUSER
          Caption         =   "postelab"
          Height          =   255
          Left            =   3360
-         TabIndex        =   58
+         TabIndex        =   57
          Top             =   5640
          Width           =   2655
       End
@@ -925,7 +925,7 @@ Begin VB.Form frmUSER
          Caption         =   "postelaa"
          Height          =   255
          Left            =   240
-         TabIndex        =   57
+         TabIndex        =   56
          Top             =   5640
          Width           =   3015
       End
@@ -973,7 +973,7 @@ Begin VB.Form frmUSER
          Caption         =   "Id Folha"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -981,19 +981,19 @@ Begin VB.Form frmUSER
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00C00000&
-         Height          =   255
+         Height          =   252
          Index           =   10
-         Left            =   300
+         Left            =   240
          TabIndex        =   17
          Top             =   1680
-         Width           =   735
+         Width           =   732
       End
       Begin VB.Label lblLabels 
          Alignment       =   1  'Right Justify
          Caption         =   "Usuário Equivalente"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -1012,7 +1012,7 @@ Begin VB.Form frmUSER
          Caption         =   "Data Para Troca Senha"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -1032,7 +1032,7 @@ Begin VB.Form frmUSER
          Caption         =   "Data Limite Para Acessar o Sistema"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -1051,7 +1051,7 @@ Begin VB.Form frmUSER
          Caption         =   "Nrº Usuário"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -1070,7 +1070,7 @@ Begin VB.Form frmUSER
          Caption         =   "Cognome do Usuário"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -1090,7 +1090,7 @@ Begin VB.Form frmUSER
          Caption         =   "Último Acesso em :"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -1125,7 +1125,7 @@ Dim nCAMPOS As Long
 Option Explicit
 
 Private Sub cboEQUIVALENTE_Click()
-   tEXT(3) = cboEQUIVALENTE.tEXT
+   Text(3) = cboEQUIVALENTE.Text
 End Sub
 
 Private Sub cboEQUIVALENTE_GotFocus()
@@ -1161,16 +1161,16 @@ End Sub
 Private Sub CmdApaAll_Click()
 Dim sSQL As String
 ''RTFUSR
-  sSQL = "select * from RTFUSR WHERE IDUSUARIO=" & tEXT(0)
+  sSQL = "select * from RTFUSR WHERE IDUSUARIO=" & Text(0)
   ApagaSQL DBWRPT, sSQL
   'RPTUSR
-  sSQL = "select * from RPTUSR WHERE IDUSUARIO=" & tEXT(0)
+  sSQL = "select * from RPTUSR WHERE IDUSUARIO=" & Text(0)
   ApagaSQL DBWRPT, sSQL
   'RPTFOLUSR
-  sSQL = "select * from RPTFOLUSR WHERE IDUSUARIO=" & tEXT(0)
+  sSQL = "select * from RPTFOLUSR WHERE IDUSUARIO=" & Text(0)
   ApagaSQL DBWRPT, sSQL
   'RPTINTUSR
-  sSQL = "select * from RPTINTUSR WHERE IDUSUARIO=" & tEXT(0)
+  sSQL = "select * from RPTINTUSR WHERE IDUSUARIO=" & Text(0)
   ApagaSQL DBWRPT, sSQL
   Alert "exclusao concluida"
 End Sub
@@ -1318,14 +1318,14 @@ Private Sub Cmdimpwrpt_Click(Index As Integer)
   Dim cSQLDES As String
   Dim cGRP As String
   Dim cRPT As String
-  Dim cTabela As String
+  Dim cTABELA As String
 
   On Error Resume Next
 
-  cTabela = "RPTUSR"
-  If Index = 1 Then cTabela = "RTFUSR"
-  If Index = 2 Then cTabela = "RPTFOLUSR"
-  If Index = 3 Then cTabela = "RPTINTUSR"
+  cTABELA = "RPTUSR"
+  If Index = 1 Then cTABELA = "RTFUSR"
+  If Index = 2 Then cTABELA = "RPTFOLUSR"
+  If Index = 3 Then cTABELA = "RPTINTUSR"
 
   nORIGEM = Val(Busca("Digite o Numero de Origem", "Numero de Origem", "0", 8))
   nDESTINO = Val(Busca("Digite O Numero de destino", "Numero de Destino", CStr(zIDTEMP), 8))
@@ -1334,7 +1334,7 @@ Private Sub Cmdimpwrpt_Click(Index As Integer)
   End If
 
   Screen.MousePointer = vbHourglass
-  cSQLORI = "select * from " & cTabela & " WHERE IDUSUARIO=" & nORIGEM
+  cSQLORI = "select * from " & cTABELA & " WHERE IDUSUARIO=" & nORIGEM
   Set oDBORI = New ADODB.Connection
   oDBORI.CursorLocation = adUseClient
   oDBORI.ConnectionTimeout = 120
@@ -1357,7 +1357,7 @@ Private Sub Cmdimpwrpt_Click(Index As Integer)
       cRPT = oRSORI("RPT")
       DIZAPU = cGRP & "/" & cRPT
       BARPOS
-      cSQLDES = "select * from " & cTabela & " WHERE GRP='" & cGRP & "' AND RPT='" & cRPT & "' AND IDUSUARIO=" & nDESTINO
+      cSQLDES = "select * from " & cTABELA & " WHERE GRP='" & cGRP & "' AND RPT='" & cRPT & "' AND IDUSUARIO=" & nDESTINO
       oRSDES.Open cSQLDES, oDBORI, adOpenKeyset, adLockOptimistic  ' adOpenStatic
       If oRSDES.EOF Then
         oRSDES.AddNew
@@ -1395,56 +1395,56 @@ Private Sub CmdLibGrp_Click(Index As Integer)
   Dim oRSORI As ADODB.Recordset
   Dim oRSDES As ADODB.Recordset
   Dim oDBDES As ADODB.Connection
-  Dim cORIGEM As String
+  Dim cOrigem As String
   Dim cSQLORI As String
   Dim cSQLDES As String
   Dim cGRP As String
   Dim cRPT As String
-  Dim cTabela As String
+  Dim cTABELA As String
   Dim nBARPOS As Integer
   Dim nROWREC As Integer
 
   '   On Error Resume Next
 
-  cTabela = "RPTUSR"
+  cTABELA = "RPTUSR"
   zRPTARQ = PegPath("PATH", "RPT") + "RPT.MDB"
   If Index = 1 Or Index = 2 Or Index = 9 Then
     zRPTARQ = PegPath("PATH", "RTF") + "RTF.MDB"
-    cTabela = "RTFUSR"
+    cTABELA = "RTFUSR"
   End If
 
 
   If Index = 4 Or Index = 5 Or Index = 10 Then
     zRPTARQ = PegPath("PATH", "FOL") + "RPTFOL.MDB"
-    cTabela = "RPTFOLUSR"
+    cTABELA = "RPTFOLUSR"
   End If
 
 
   If Index = 6 Or Index = 7 Or Index = 11 Then
     zRPTARQ = PegPath("PATH", "INT") + "RPTINT.MDB"
-    cTabela = "RPTINTUSR"
+    cTABELA = "RPTINTUSR"
   End If
 
 
   If Index = 0 Or Index = 1 Or Index = 4 Or Index = 6 Or Index >= 8 Then
-    cORIGEM = UCase(Busca("Digite o Grupo", "Codigo do Grupo", "", 8))
+    cOrigem = UCase(Busca("Digite o Grupo", "Codigo do Grupo", "", 8))
   Else
-    cORIGEM = "Todos"
+    cOrigem = "Todos"
   End If
-  nDESTINO = FixInt(Busca("Digite O Numero de destino", "Numero de Destino", tEXT(0), 8))
-  If nDESTINO = 0 Or (Index < 2 And Len(cORIGEM) = 0) Then
+  nDESTINO = FixInt(Busca("Digite O Numero de destino", "Numero de Destino", Text(0), 8))
+  If nDESTINO = 0 Or (Index < 2 And Len(cOrigem) = 0) Then
     Alert ("Necessario Preencher Origem e Destino")
     Exit Sub
   End If
   If Index >= 8 Then
-    If Not MDG("Apagar " & cORIGEM & " para " & CStr(nDESTINO), "Confirmar Exclusao") Then
+    If Not MDG("Apagar " & cOrigem & " para " & CStr(nDESTINO), "Confirmar Exclusao") Then
       Exit Sub
     End If
-    cSQLDES = "select * from " & cTabela & " WHERE GRP='" & cORIGEM & "' AND IDUSUARIO=" & nDESTINO
+    cSQLDES = "select * from " & cTABELA & " WHERE GRP='" & cOrigem & "' AND IDUSUARIO=" & nDESTINO
     ApagaSQL DBWRPT, cSQLDES
     Exit Sub
   Else
-    If Not MDG("Liberar " & cORIGEM & " para " & CStr(nDESTINO), "Confirme Liberacao") Then
+    If Not MDG("Liberar " & cOrigem & " para " & CStr(nDESTINO), "Confirme Liberacao") Then
       Exit Sub
     End If
   End If
@@ -1452,7 +1452,7 @@ Private Sub CmdLibGrp_Click(Index As Integer)
 
   Screen.MousePointer = vbHourglass
   If Index = 0 Or Index = 1 Or Index = 4 Or Index = 6 Then
-    cSQLORI = "select * from RPT WHERE GRP='" & cORIGEM & "'"
+    cSQLORI = "select * from RPT WHERE GRP='" & cOrigem & "'"
   Else
     cSQLORI = "select * from RPT"
   End If
@@ -1484,7 +1484,7 @@ Private Sub CmdLibGrp_Click(Index As Integer)
       cRPT = oRSORI("RPT")
       DIZAPU = cGRP & "/" & cRPT
       BARPOS
-      cSQLDES = "select * from " & cTabela & " WHERE GRP='" & cGRP & "' AND RPT='" & cRPT & "' AND IDUSUARIO=" & nDESTINO
+      cSQLDES = "select * from " & cTABELA & " WHERE GRP='" & cGRP & "' AND RPT='" & cRPT & "' AND IDUSUARIO=" & nDESTINO
 
       oRSDES.Open cSQLDES, oDBDES, adOpenKeyset, adLockOptimistic  'adOpenStatic
       If oRSDES.EOF Then
@@ -1549,19 +1549,19 @@ Private Sub DTPicker4_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-  If FixInt(tEXT(5)) = 0 Then
+  If FixInt(Text(5)) = 0 Then
     If MDG("Colocar o numero do seu Funcionario na folha") Then
       Cancel = 1
       Exit Sub
     End If
   End If
 
-  If Len(Trim(tEXT(2))) = 0 Then
+  If Len(Trim(Text(2))) = 0 Then
     If MDG("Senha nao Colocada deseja Colocar ? ", "Gravar Senha") Then
-      zIDTEMP = tEXT(0)
+      zIDTEMP = Text(0)
       frmUSUSENHA.Show vbModal, Me
       If lRETU Then
-        tEXT(2) = eRETU01
+        Text(2) = eRETU01
         DTPicker2.Value = Date + 60
       End If
     End If
@@ -1570,7 +1570,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   ' CHAVEH POSTELAA POSTELAB nao sao gravados por isso nao sao atribuidos abaixo
   If MDG("Gravar e Sair", "Gravando Usuarios") Then
     For nITEM = 0 To 6                       'Array comeca 0
-      aVAL(nITEM) = tEXT(nITEM)
+      aVAL(nITEM) = Text(nITEM)
     Next nITEM
     aVAL(9) = FixNumBol(chkAtivo)
     aVAL(10) = FixNumBol(chkweekend)
@@ -1578,7 +1578,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     aVAL(12) = DTPicker2
     aVAL(7) = DTPicker3 'DTPicker3.Hour & ":" & DTPicker3.Minute
     aVAL(8) = DTPicker4 'DTPicker4.Hour & ":" & DTPicker4.Minute
-    aVAL(13) = tEXT(13)  ' CHAVEV
+    aVAL(13) = Text(13)  ' CHAVEV
     'volta para 14 para nao gravar postelaa postelab chaveh estao apenas para exibir no label
     nCAMPOS = 14
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 2 'comeca gravar do 2 0=idusuario chave da tabela 1 datault no login
@@ -1595,7 +1595,7 @@ Private Sub Command1_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim nNUMERO As Long
-  nNUMERO = FixInt(tEXT(5), 0)
+  nNUMERO = FixInt(Text(5), 0)
   If demitido(nNUMERO) Then
     If lRETU Then
       If MDG("bloquear acesso e Zerar Senha") Then
@@ -1603,10 +1603,10 @@ Private Sub Command1_Click()
         chkweekend.Value = 0
         DTPicker1.Value = eRETU01
         DTPicker2.Value = eRETU01
-        tEXT(2) = ""                     ''zERA SeNHA
+        Text(2) = ""                     ''zERA SeNHA
       End If
       If MDG("zerar matricula") Then
-        tEXT(5) = 0
+        Text(5) = 0
       End If
     End If
     Exit Sub
@@ -1625,25 +1625,25 @@ Private Sub Command1_Click()
     aRETU = PegSQL(cARQ, sSQL, 2, Array("NOMTEC", "DEMITIDO"), Array("C", "DN"), Array("", Today()))
   End If
   If lRETU Then
-    tEXT(6) = aRETU(0)
+    Text(6) = aRETU(0)
   End If
 
 End Sub
 
 Private Sub cmdTroca_Click()
-  zIDTEMP = tEXT(0)
+  zIDTEMP = Text(0)
   frmUSUSENHA.Show vbModal, Me
   If lRETU Then
-    tEXT(2) = eRETU01
+    Text(2) = eRETU01
     DTPicker2.Value = Date + 60
-    tEXT(13) = UCase(CreateSHA256HashString(UCase(Trim(tEXT(1))) + UCase(Trim(eRETU02))))
+    Text(13) = UCase(CreateSHA256HashString(UCase(Trim(Text(1))) + UCase(Trim(eRETU02))))
   End If
 
 End Sub
 
 Private Sub cmdZeraSenha_Click()
-  tEXT(2) = " "
-  tEXT(13) = " "
+  Text(2) = " "
+  Text(13) = " "
   cmdClose_Click
 End Sub
 
@@ -1658,8 +1658,8 @@ Private Sub escidfolha_Click(Index As Integer)
 
   If lRETU Then
 
-    frmUSER.tEXT(5) = eRETU01
-    frmUSER.tEXT(6) = eRETU02
+    frmUSER.Text(5) = eRETU01
+    frmUSER.Text(6) = eRETU02
     Command1_Click
 
   End If
@@ -1721,7 +1721,7 @@ Private Sub Form_Load()
   aPAD = Array(0, Now, "", "", "", 0, "", Now, Now, False, False, Today() + 30, Today() + 60, "", "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 6                           '' array comeca 0
-    tEXT(nITEM) = aVAL(nITEM)
+    Text(nITEM) = aVAL(nITEM)
   Next nITEM
   If aVAL(7) <> "" Then DTPicker3 = aVAL(7) 'Date + aVAL(7)  ''Adciona date pois o datapicker nao aceita vazio
   If aVAL(8) <> "" Then DTPicker4 = aVAL(8) 'Date + aVAL(8)  ''na mascara datapicker fica so  a hora
@@ -1734,7 +1734,7 @@ Private Sub Form_Load()
   If IsDate(aVAL(12)) Then
     DTPicker2 = aVAL(12)
   End If
-  tEXT(13) = aVAL(13)
+  Text(13) = aVAL(13)
   Lblpostelaa.Caption = aVAL(14)
   LblpostelaB.Caption = aVAL(15)
   Lblchaveh.Caption = aVAL(16)

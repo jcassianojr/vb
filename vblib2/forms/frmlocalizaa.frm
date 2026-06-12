@@ -1,23 +1,22 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
 Begin VB.Form frmLocalizaa 
    Caption         =   "Localizar"
    ClientHeight    =   3168
    ClientLeft      =   60
    ClientTop       =   348
-   ClientWidth     =   6288
+   ClientWidth     =   5652
    Icon            =   "frmlocalizaa.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3168
-   ScaleWidth      =   6288
+   ScaleWidth      =   5652
    StartUpPosition =   3  'Windows Default
    Begin VB.ListBox List 
       Height          =   1776
       Left            =   240
       TabIndex        =   2
       Top             =   1080
-      Width           =   3975
+      Width           =   4092
    End
    Begin VB.TextBox cBUSCA 
       BeginProperty Font 
@@ -34,34 +33,13 @@ Begin VB.Form frmLocalizaa
       TabIndex        =   0
       ToolTipText     =   "Preencha com A Chave de Busca"
       Top             =   600
-      Width           =   4035
-   End
-   Begin XPControls.XPButton Command1 
-      Height          =   375
-      Left            =   4440
-      TabIndex        =   3
-      TabStop         =   0   'False
-      Top             =   600
-      Width           =   1575
-      _ExtentX        =   2773
-      _ExtentY        =   656
-      Picture         =   "frmlocalizaa.frx":058A
-      Caption         =   "Localizar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Width           =   4032
    End
    Begin VBCCR18.CommandButtonW Command2 
       Height          =   612
-      Left            =   4560
-      TabIndex        =   4
-      Top             =   1560
+      Left            =   4440
+      TabIndex        =   3
+      Top             =   1320
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -72,7 +50,27 @@ Begin VB.Form frmLocalizaa
       Caption         =   "Cancelar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "frmlocalizaa.frx":0B24
+      Picture         =   "frmlocalizaa.frx":058A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW Command1 
+      Height          =   612
+      Left            =   4440
+      TabIndex        =   4
+      Top             =   480
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Localizar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmlocalizaa.frx":0A24
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
