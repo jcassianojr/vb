@@ -75,6 +75,24 @@ Begin VB.Form frmLocalizaa
       WordWrap        =   0   'False
       Style           =   1
    End
+   Begin VBCCR18.CommandButtonW CommandButtonW1 
+      Height          =   252
+      Left            =   4560
+      TabIndex        =   5
+      Top             =   2280
+      Width           =   372
+      _ExtentX        =   656
+      _ExtentY        =   445
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmlocalizaa.frx":0FBE
+      WordWrap        =   0   'False
+      Style           =   1
+   End
    Begin VB.Label Label1 
       Caption         =   "Digite a Chave de Busca"
       BeginProperty Font 

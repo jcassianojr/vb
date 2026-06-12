@@ -121,30 +121,10 @@ Begin VB.Form frmRptExec
       Top             =   360
       Width           =   1335
    End
-   Begin XPControls.XPButton CmdEscExt 
-      Height          =   375
-      Left            =   6180
-      TabIndex        =   13
-      Top             =   240
-      Width           =   375
-      _ExtentX        =   656
-      _ExtentY        =   656
-      Picture         =   "frmRptExec.frx":058A
-      Caption         =   ""
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin VBCCR18.CommandButtonW cmdClose 
       Height          =   612
       Left            =   6960
-      TabIndex        =   14
+      TabIndex        =   13
       Top             =   240
       Width           =   972
       _ExtentX        =   1715
@@ -156,8 +136,26 @@ Begin VB.Form frmRptExec
       Caption         =   "Salvar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "frmRptExec.frx":0B24
+      Picture         =   "frmRptExec.frx":058A
       PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdEscExt 
+      Height          =   252
+      Left            =   6240
+      TabIndex        =   14
+      Top             =   360
+      Width           =   372
+      _ExtentX        =   656
+      _ExtentY        =   445
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmRptExec.frx":0B24
       WordWrap        =   0   'False
       Style           =   1
    End

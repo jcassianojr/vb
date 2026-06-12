@@ -91,7 +91,7 @@ Begin VB.Form frmUSER
       Begin VBCCR18.ComboBoxW cboEQUIVALENTE 
          Height          =   288
          Left            =   5400
-         TabIndex        =   60
+         TabIndex        =   58
          Top             =   420
          Width           =   1455
          _ExtentX        =   2561
@@ -114,7 +114,7 @@ Begin VB.Form frmUSER
          Index           =   13
          Left            =   240
          Locked          =   -1  'True
-         TabIndex        =   59
+         TabIndex        =   57
          TabStop         =   0   'False
          ToolTipText     =   "Senha"
          Top             =   6360
@@ -131,7 +131,7 @@ Begin VB.Form frmUSER
       Begin VBCCR18.DTPicker DTPicker2 
          Height          =   375
          Left            =   240
-         TabIndex        =   53
+         TabIndex        =   51
          Top             =   2520
          Width           =   1695
          _ExtentX        =   2985
@@ -141,7 +141,7 @@ Begin VB.Form frmUSER
       Begin VBCCR18.DTPicker DTPicker1 
          Height          =   375
          Left            =   1440
-         TabIndex        =   52
+         TabIndex        =   50
          Top             =   960
          Width           =   1815
          _ExtentX        =   3196
@@ -153,7 +153,7 @@ Begin VB.Form frmUSER
       Begin XPControls.XPButton cmdZeraSenha 
          Height          =   495
          Left            =   2280
-         TabIndex        =   51
+         TabIndex        =   49
          Top             =   3120
          Width           =   1095
          _ExtentX        =   1926
@@ -173,7 +173,7 @@ Begin VB.Form frmUSER
       Begin XPControls.XPButton cmdTroca 
          Height          =   495
          Left            =   2280
-         TabIndex        =   50
+         TabIndex        =   48
          Top             =   2520
          Width           =   1095
          _ExtentX        =   1926
@@ -623,7 +623,7 @@ Begin VB.Form frmUSER
          EndProperty
          Height          =   285
          Index           =   6
-         Left            =   3840
+         Left            =   3960
          MaxLength       =   50
          TabIndex        =   4
          ToolTipText     =   "Nome do Usuario"
@@ -692,7 +692,7 @@ Begin VB.Form frmUSER
          Begin VBCCR18.DTPicker DTPicker3 
             Height          =   375
             Left            =   1320
-            TabIndex        =   54
+            TabIndex        =   52
             Top             =   240
             Width           =   1335
             _ExtentX        =   2350
@@ -705,7 +705,7 @@ Begin VB.Form frmUSER
          Begin VBCCR18.DTPicker DTPicker4 
             Height          =   375
             Left            =   3600
-            TabIndex        =   55
+            TabIndex        =   53
             Top             =   240
             Width           =   1335
             _ExtentX        =   2350
@@ -820,13 +820,12 @@ Begin VB.Form frmUSER
          Top             =   420
          Width           =   1365
       End
-      Begin XPControls.XPButton escidfolha 
-         Height          =   375
-         Index           =   0
-         Left            =   1920
+      Begin XPControls.XPButton Command1 
+         Height          =   372
+         Left            =   3480
          TabIndex        =   47
          Top             =   1680
-         Width           =   375
+         Width           =   372
          _ExtentX        =   656
          _ExtentY        =   656
          Picture         =   "frmUSER.frx":0DBE
@@ -841,51 +840,10 @@ Begin VB.Form frmUSER
             Strikethrough   =   0   'False
          EndProperty
       End
-      Begin XPControls.XPButton escidfolha 
-         Height          =   375
-         Index           =   1
-         Left            =   2400
-         TabIndex        =   48
-         Top             =   1680
-         Width           =   855
-         _ExtentX        =   1503
-         _ExtentY        =   656
-         Picture         =   "frmUSER.frx":1358
-         Caption         =   "LX"
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   7.8
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-      End
-      Begin XPControls.XPButton Command1 
-         Height          =   375
-         Left            =   3360
-         TabIndex        =   49
-         Top             =   1680
-         Width           =   375
-         _ExtentX        =   656
-         _ExtentY        =   656
-         Picture         =   "frmUSER.frx":18F2
-         Caption         =   ""
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   7.8
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-      End
       Begin VBCCR18.CommandButtonW CmdClose 
          Height          =   612
          Left            =   8760
-         TabIndex        =   61
+         TabIndex        =   59
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -897,8 +855,68 @@ Begin VB.Form frmUSER
          Caption         =   "Salvar"
          Alignment       =   0
          VerticalAlignment=   0
-         Picture         =   "frmUSER.frx":1E8C
+         Picture         =   "frmUSER.frx":1358
          PictureAndCaption=   -1  'True
+         WordWrap        =   0   'False
+         Style           =   1
+      End
+      Begin VBCCR18.CommandButtonW escidfolha 
+         Height          =   492
+         Index           =   1
+         Left            =   2400
+         TabIndex        =   60
+         Top             =   1560
+         Width           =   372
+         _ExtentX        =   656
+         _ExtentY        =   868
+         Appearance      =   0
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         ImageListAlignment=   1
+         Caption         =   "LX"
+         Alignment       =   0
+         VerticalAlignment=   0
+         Picture         =   "frmUSER.frx":18F2
+         WordWrap        =   0   'False
+         Style           =   1
+      End
+      Begin VBCCR18.CommandButtonW escidfolha 
+         Height          =   492
+         Index           =   0
+         Left            =   1920
+         TabIndex        =   61
+         Top             =   1560
+         Width           =   372
+         _ExtentX        =   656
+         _ExtentY        =   868
+         Appearance      =   0
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         ImageListAlignment=   1
+         Caption         =   "  "
+         Alignment       =   0
+         VerticalAlignment=   0
+         Picture         =   "frmUSER.frx":1E8C
+         WordWrap        =   0   'False
+         Style           =   1
+      End
+      Begin VBCCR18.CommandButtonW escidfolha 
+         Height          =   492
+         Index           =   2
+         Left            =   2880
+         TabIndex        =   62
+         Top             =   1560
+         Width           =   372
+         _ExtentX        =   656
+         _ExtentY        =   868
+         Appearance      =   0
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         ImageListAlignment=   1
+         Caption         =   "MC"
+         Alignment       =   0
+         VerticalAlignment=   0
+         Picture         =   "frmUSER.frx":2426
          WordWrap        =   0   'False
          Style           =   1
       End
@@ -907,7 +925,7 @@ Begin VB.Form frmUSER
          Caption         =   "chaveh"
          Height          =   255
          Left            =   240
-         TabIndex        =   58
+         TabIndex        =   56
          Top             =   6000
          Width           =   9615
       End
@@ -916,7 +934,7 @@ Begin VB.Form frmUSER
          Caption         =   "postelab"
          Height          =   255
          Left            =   3360
-         TabIndex        =   57
+         TabIndex        =   55
          Top             =   5640
          Width           =   2655
       End
@@ -925,7 +943,7 @@ Begin VB.Form frmUSER
          Caption         =   "postelaa"
          Height          =   255
          Left            =   240
-         TabIndex        =   56
+         TabIndex        =   54
          Top             =   5640
          Width           =   3015
       End
@@ -1125,7 +1143,7 @@ Dim nCAMPOS As Long
 Option Explicit
 
 Private Sub cboEQUIVALENTE_Click()
-   Text(3) = cboEQUIVALENTE.Text
+   tEXT(3) = cboEQUIVALENTE.tEXT
 End Sub
 
 Private Sub cboEQUIVALENTE_GotFocus()
@@ -1161,16 +1179,16 @@ End Sub
 Private Sub CmdApaAll_Click()
 Dim sSQL As String
 ''RTFUSR
-  sSQL = "select * from RTFUSR WHERE IDUSUARIO=" & Text(0)
+  sSQL = "select * from RTFUSR WHERE IDUSUARIO=" & tEXT(0)
   ApagaSQL DBWRPT, sSQL
   'RPTUSR
-  sSQL = "select * from RPTUSR WHERE IDUSUARIO=" & Text(0)
+  sSQL = "select * from RPTUSR WHERE IDUSUARIO=" & tEXT(0)
   ApagaSQL DBWRPT, sSQL
   'RPTFOLUSR
-  sSQL = "select * from RPTFOLUSR WHERE IDUSUARIO=" & Text(0)
+  sSQL = "select * from RPTFOLUSR WHERE IDUSUARIO=" & tEXT(0)
   ApagaSQL DBWRPT, sSQL
   'RPTINTUSR
-  sSQL = "select * from RPTINTUSR WHERE IDUSUARIO=" & Text(0)
+  sSQL = "select * from RPTINTUSR WHERE IDUSUARIO=" & tEXT(0)
   ApagaSQL DBWRPT, sSQL
   Alert "exclusao concluida"
 End Sub
@@ -1431,7 +1449,7 @@ Private Sub CmdLibGrp_Click(Index As Integer)
   Else
     cOrigem = "Todos"
   End If
-  nDESTINO = FixInt(Busca("Digite O Numero de destino", "Numero de Destino", Text(0), 8))
+  nDESTINO = FixInt(Busca("Digite O Numero de destino", "Numero de Destino", tEXT(0), 8))
   If nDESTINO = 0 Or (Index < 2 And Len(cOrigem) = 0) Then
     Alert ("Necessario Preencher Origem e Destino")
     Exit Sub
@@ -1548,20 +1566,24 @@ Private Sub DTPicker4_KeyUp(KeyCode As Integer, Shift As Integer)
  TeclaEnter KeyCode
 End Sub
 
+Private Sub Escolher_Click(Index As Integer)
+
+End Sub
+
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-  If FixInt(Text(5)) = 0 Then
+  If FixInt(tEXT(5)) = 0 Then
     If MDG("Colocar o numero do seu Funcionario na folha") Then
       Cancel = 1
       Exit Sub
     End If
   End If
 
-  If Len(Trim(Text(2))) = 0 Then
+  If Len(Trim(tEXT(2))) = 0 Then
     If MDG("Senha nao Colocada deseja Colocar ? ", "Gravar Senha") Then
-      zIDTEMP = Text(0)
+      zIDTEMP = tEXT(0)
       frmUSUSENHA.Show vbModal, Me
       If lRETU Then
-        Text(2) = eRETU01
+        tEXT(2) = eRETU01
         DTPicker2.Value = Date + 60
       End If
     End If
@@ -1570,7 +1592,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   ' CHAVEH POSTELAA POSTELAB nao sao gravados por isso nao sao atribuidos abaixo
   If MDG("Gravar e Sair", "Gravando Usuarios") Then
     For nITEM = 0 To 6                       'Array comeca 0
-      aVAL(nITEM) = Text(nITEM)
+      aVAL(nITEM) = tEXT(nITEM)
     Next nITEM
     aVAL(9) = FixNumBol(chkAtivo)
     aVAL(10) = FixNumBol(chkweekend)
@@ -1578,7 +1600,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     aVAL(12) = DTPicker2
     aVAL(7) = DTPicker3 'DTPicker3.Hour & ":" & DTPicker3.Minute
     aVAL(8) = DTPicker4 'DTPicker4.Hour & ":" & DTPicker4.Minute
-    aVAL(13) = Text(13)  ' CHAVEV
+    aVAL(13) = tEXT(13)  ' CHAVEV
     'volta para 14 para nao gravar postelaa postelab chaveh estao apenas para exibir no label
     nCAMPOS = 14
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 2 'comeca gravar do 2 0=idusuario chave da tabela 1 datault no login
@@ -1595,7 +1617,7 @@ Private Sub Command1_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim nNUMERO As Long
-  nNUMERO = FixInt(Text(5), 0)
+  nNUMERO = FixInt(tEXT(5), 0)
   If demitido(nNUMERO) Then
     If lRETU Then
       If MDG("bloquear acesso e Zerar Senha") Then
@@ -1603,10 +1625,10 @@ Private Sub Command1_Click()
         chkweekend.Value = 0
         DTPicker1.Value = eRETU01
         DTPicker2.Value = eRETU01
-        Text(2) = ""                     ''zERA SeNHA
+        tEXT(2) = ""                     ''zERA SeNHA
       End If
       If MDG("zerar matricula") Then
-        Text(5) = 0
+        tEXT(5) = 0
       End If
     End If
     Exit Sub
@@ -1625,25 +1647,25 @@ Private Sub Command1_Click()
     aRETU = PegSQL(cARQ, sSQL, 2, Array("NOMTEC", "DEMITIDO"), Array("C", "DN"), Array("", Today()))
   End If
   If lRETU Then
-    Text(6) = aRETU(0)
+    tEXT(6) = aRETU(0)
   End If
 
 End Sub
 
 Private Sub cmdTroca_Click()
-  zIDTEMP = Text(0)
+  zIDTEMP = tEXT(0)
   frmUSUSENHA.Show vbModal, Me
   If lRETU Then
-    Text(2) = eRETU01
+    tEXT(2) = eRETU01
     DTPicker2.Value = Date + 60
-    Text(13) = UCase(CreateSHA256HashString(UCase(Trim(Text(1))) + UCase(Trim(eRETU02))))
+    tEXT(13) = UCase(CreateSHA256HashString(UCase(Trim(tEXT(1))) + UCase(Trim(eRETU02))))
   End If
 
 End Sub
 
 Private Sub cmdZeraSenha_Click()
-  Text(2) = " "
-  Text(13) = " "
+  tEXT(2) = " "
+  tEXT(13) = " "
   cmdClose_Click
 End Sub
 
@@ -1658,8 +1680,8 @@ Private Sub escidfolha_Click(Index As Integer)
 
   If lRETU Then
 
-    frmUSER.Text(5) = eRETU01
-    frmUSER.Text(6) = eRETU02
+    frmUSER.tEXT(5) = eRETU01
+    frmUSER.tEXT(6) = eRETU02
     Command1_Click
 
   End If
@@ -1721,7 +1743,7 @@ Private Sub Form_Load()
   aPAD = Array(0, Now, "", "", "", 0, "", Now, Now, False, False, Today() + 30, Today() + 60, "", "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 6                           '' array comeca 0
-    Text(nITEM) = aVAL(nITEM)
+    tEXT(nITEM) = aVAL(nITEM)
   Next nITEM
   If aVAL(7) <> "" Then DTPicker3 = aVAL(7) 'Date + aVAL(7)  ''Adciona date pois o datapicker nao aceita vazio
   If aVAL(8) <> "" Then DTPicker4 = aVAL(8) 'Date + aVAL(8)  ''na mascara datapicker fica so  a hora
@@ -1734,7 +1756,7 @@ Private Sub Form_Load()
   If IsDate(aVAL(12)) Then
     DTPicker2 = aVAL(12)
   End If
-  Text(13) = aVAL(13)
+  tEXT(13) = aVAL(13)
   Lblpostelaa.Caption = aVAL(14)
   LblpostelaB.Caption = aVAL(15)
   Lblchaveh.Caption = aVAL(16)

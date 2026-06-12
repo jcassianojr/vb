@@ -6,19 +6,19 @@ Begin VB.Form FrmPreview
    ClientHeight    =   5124
    ClientLeft      =   60
    ClientTop       =   408
-   ClientWidth     =   13188
+   ClientWidth     =   14316
    LinkTopic       =   "Form1"
    ScaleHeight     =   5124
-   ScaleWidth      =   13188
+   ScaleWidth      =   14316
    StartUpPosition =   3  'Windows Default
    Begin OrdoWebView2.OrdoWebView OrdoWebView1 
-      Height          =   4092
+      Height          =   4692
       Left            =   360
       TabIndex        =   9
       Top             =   360
       Width           =   10812
       _ExtentX        =   19071
-      _ExtentY        =   7218
+      _ExtentY        =   8276
       Search_URL      =   ""
       IsScriptEnabled =   0   'False
       UseEdgeFixedVersion=   -1  'True
@@ -26,9 +26,9 @@ Begin VB.Form FrmPreview
    Begin VB.CommandButton Chamamotor 
       Caption         =   "motor"
       Height          =   372
-      Left            =   11640
+      Left            =   11760
       TabIndex        =   8
-      Top             =   1080
+      Top             =   2040
       Width           =   1212
    End
    Begin XPControls.XPButton Encerrar 
@@ -72,11 +72,11 @@ Begin VB.Form FrmPreview
       EndProperty
    End
    Begin XPControls.XPButton cmdSavehtml 
-      Height          =   375
+      Height          =   372
       Left            =   11520
       TabIndex        =   2
-      Top             =   1560
-      Width           =   1215
+      Top             =   2520
+      Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   656
       Picture         =   "FrmPreview.frx":0B34
@@ -92,11 +92,11 @@ Begin VB.Form FrmPreview
       EndProperty
    End
    Begin XPControls.XPButton cmdSaveTXT 
-      Height          =   375
+      Height          =   372
       Left            =   11520
       TabIndex        =   3
-      Top             =   2040
-      Width           =   1215
+      Top             =   3000
+      Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   656
       Picture         =   "FrmPreview.frx":10CE
@@ -116,7 +116,7 @@ Begin VB.Form FrmPreview
       Left            =   11520
       TabIndex        =   4
       TabStop         =   0   'False
-      Top             =   2520
+      Top             =   3480
       Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   550
@@ -137,7 +137,7 @@ Begin VB.Form FrmPreview
       Left            =   11520
       TabIndex        =   5
       TabStop         =   0   'False
-      Top             =   2880
+      Top             =   3840
       Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   550
@@ -154,11 +154,11 @@ Begin VB.Form FrmPreview
       EndProperty
    End
    Begin XPControls.XPButton cmdsavedoc 
-      Height          =   375
+      Height          =   372
       Left            =   11520
       TabIndex        =   6
-      Top             =   3240
-      Width           =   1215
+      Top             =   4200
+      Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   656
       Picture         =   "FrmPreview.frx":1D9C
@@ -174,11 +174,11 @@ Begin VB.Form FrmPreview
       EndProperty
    End
    Begin XPControls.XPButton CmdSavePDF 
-      Height          =   375
+      Height          =   372
       Left            =   11520
       TabIndex        =   7
-      Top             =   3720
-      Width           =   1215
+      Top             =   4680
+      Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   656
       Picture         =   "FrmPreview.frx":2136
@@ -204,7 +204,7 @@ Private mvarCaminhoArquivo As String
 Dim bJaInicializado As Boolean
 
 Private Sub cmdimp_Click()
-OrdoWebView1.ShowPrintDialog
+OrdoWebView1.showPrintDialog
 End Sub
 
 Private Sub cmdSavehtml_Click()
@@ -272,8 +272,8 @@ End Sub
 Private Sub Form_Load()
    bJaInicializado = False 'flag para evitar chamar recursivamente no active apenas uma vez
    'necessario ser no activate pois o controle ainda pode estar carregando
-   If carqrtf = "" Then
-     carqrtf = "c:\develop\modelos\wrpt\teste.zpl"
+   If cARQRTF = "" Then
+     cARQRTF = "c:\develop\modelos\wrpt\teste.zpl"
       'carqrtf = "c:\temp\vb6.iss.txt"
    End If
 End Sub
@@ -309,7 +309,7 @@ Private Sub chamamotor_click()
    
     
     ' 1. Captura o destino passado pela variável global de transporte
-    mvarCaminhoArquivo = Trim(CStr(carqrtf))
+    mvarCaminhoArquivo = Trim(CStr(cARQRTF))
     cEXT = parsefile(mvarCaminhoArquivo, "E")
     
     

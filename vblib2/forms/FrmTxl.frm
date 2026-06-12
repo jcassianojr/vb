@@ -16,7 +16,7 @@ Begin VB.Form FrmTxl
    Begin VBFLXGRD18.VBFlexGrid Listview1 
       Height          =   1335
       Left            =   120
-      TabIndex        =   29
+      TabIndex        =   28
       Top             =   6000
       Width           =   9855
       _ExtentX        =   17378
@@ -104,7 +104,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.SpinBox LptPort 
          Height          =   375
          Left            =   1080
-         TabIndex        =   30
+         TabIndex        =   29
          Top             =   240
          Width           =   735
          _ExtentX        =   1291
@@ -125,7 +125,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.SpinBox comport 
          Height          =   375
          Left            =   3240
-         TabIndex        =   31
+         TabIndex        =   30
          Top             =   240
          Width           =   735
          _ExtentX        =   1291
@@ -170,7 +170,7 @@ Begin VB.Form FrmTxl
       Width           =   7305
       Begin XPControls.XPButton CmdVisua 
          Height          =   672
-         Left            =   2760
+         Left            =   1440
          TabIndex        =   16
          Top             =   240
          Width           =   1272
@@ -209,30 +209,10 @@ Begin VB.Form FrmTxl
             Strikethrough   =   0   'False
          EndProperty
       End
-      Begin XPControls.XPButton XPButton1 
-         Height          =   672
-         Left            =   1320
-         TabIndex        =   28
-         Top             =   240
-         Width           =   1272
-         _ExtentX        =   2244
-         _ExtentY        =   1185
-         Picture         =   "FrmTxl.frx":1224
-         Caption         =   "Imprimir (Impressora)"
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   7.8
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-      End
       Begin VBCCR18.CommandButtonW Encerrar 
          Height          =   612
          Left            =   6240
-         TabIndex        =   33
+         TabIndex        =   32
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -244,7 +224,7 @@ Begin VB.Form FrmTxl
          Caption         =   "Retornar"
          Alignment       =   0
          VerticalAlignment=   0
-         Picture         =   "FrmTxl.frx":17BE
+         Picture         =   "FrmTxl.frx":1224
          PictureAndCaption=   -1  'True
          WordWrap        =   0   'False
          Style           =   1
@@ -252,7 +232,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.CommandButtonW cmdimp 
          Height          =   612
          Left            =   5040
-         TabIndex        =   34
+         TabIndex        =   33
          Top             =   240
          Width           =   1092
          _ExtentX        =   1926
@@ -262,6 +242,26 @@ Begin VB.Form FrmTxl
          ForeColor       =   -2147483640
          ImageListAlignment=   1
          Caption         =   "Imprimir Porta"
+         Alignment       =   0
+         VerticalAlignment=   0
+         Picture         =   "FrmTxl.frx":17BE
+         PictureAndCaption=   -1  'True
+         WordWrap        =   0   'False
+         Style           =   1
+      End
+      Begin VBCCR18.CommandButtonW XPButton1 
+         Height          =   612
+         Left            =   3120
+         TabIndex        =   34
+         Top             =   240
+         Width           =   1812
+         _ExtentX        =   3196
+         _ExtentY        =   1080
+         Appearance      =   0
+         BackColor       =   -2147483643
+         ForeColor       =   -2147483640
+         ImageListAlignment=   1
+         Caption         =   "Imprimir Impressora"
          Alignment       =   0
          VerticalAlignment=   0
          Picture         =   "FrmTxl.frx":1D58
@@ -370,7 +370,7 @@ Begin VB.Form FrmTxl
          Height          =   372
          Index           =   4
          Left            =   3240
-         TabIndex        =   32
+         TabIndex        =   31
          TabStop         =   0   'False
          Top             =   360
          Width           =   792
@@ -634,7 +634,7 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If FileConnExist(cARQRTF, True) Then
     Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
   End If
@@ -645,8 +645,8 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.Text, "RTF") Or larqtxt Then
-    cARQRTF = TxtArquivo.Text
+  If IsExtensao(TxtArquivo.tEXT, "RTF") Or larqtxt Then
+    cARQRTF = TxtArquivo.tEXT
     FrmRtfView.Show vbModal, Me
   End If
 End Sub
@@ -684,7 +684,7 @@ Private Sub cmdimp_Click()
     imptxt  'Aqui e direct print com1,COM2.. lpt1,LPT2.. no pode ser usado preview aqui
     Exit Sub
   End If
-  If IsExtensao(TxtArquivo.Text, "PDF") Or IsExtensao(TxtArquivo.Text, "HTML") Or IsExtensao(TxtArquivo.Text, "RTF") Then
+  If IsExtensao(TxtArquivo.tEXT, "PDF") Or IsExtensao(TxtArquivo.tEXT, "HTML") Or IsExtensao(TxtArquivo.tEXT, "RTF") Then
     CmdVisua_Click
     Exit Sub
   End If
@@ -740,7 +740,7 @@ Private Sub CmdShell_Click()
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -769,7 +769,7 @@ Private Sub CmdVisua_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.Text = ""
+    RichTextBox1.tEXT = ""
   End If
 End Sub
 Private Sub PrintPreview1_PrepareReport(Cancel As Boolean)
@@ -1038,7 +1038,7 @@ Private Sub Salvar_Click(Index As Integer)
     End Select
 
     sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
+    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
 
     If InStr(cARQUIVO, ".") > 0 Then
       cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO
