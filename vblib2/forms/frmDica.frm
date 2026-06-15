@@ -1,6 +1,5 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form frmDica 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Frase do dia"
@@ -15,33 +14,13 @@ Begin VB.Form frmDica
    MinButton       =   0   'False
    ScaleHeight     =   3444
    ScaleWidth      =   7512
-   Begin XPControls.XPButton cmdProxima 
-      Height          =   492
-      Left            =   5760
-      TabIndex        =   7
-      Top             =   960
-      Width           =   1212
-      _ExtentX        =   2138
-      _ExtentY        =   868
-      Picture         =   "frmDica.frx":058A
-      Caption         =   "Proxima"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000003&
       ForeColor       =   &H80000008&
       Height          =   3015
       Left            =   120
-      Picture         =   "frmDica.frx":0B24
+      Picture         =   "frmDica.frx":058A
       ScaleHeight     =   2988
       ScaleWidth      =   708
       TabIndex        =   1
@@ -62,13 +41,13 @@ Begin VB.Form frmDica
       Height          =   375
       Left            =   5760
       TabIndex        =   0
-      Top             =   1560
+      Top             =   1920
       Width           =   1452
    End
    Begin VBCCR18.CommandButtonW cmdok 
       Height          =   612
       Left            =   5760
-      TabIndex        =   8
+      TabIndex        =   7
       Top             =   240
       Width           =   972
       _ExtentX        =   1715
@@ -78,6 +57,26 @@ Begin VB.Form frmDica
       ForeColor       =   -2147483640
       ImageListAlignment=   1
       Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmDica.frx":06A4
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdProxima 
+      Height          =   612
+      Left            =   5760
+      TabIndex        =   8
+      Top             =   1080
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Seguinte"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "frmDica.frx":0C3E
