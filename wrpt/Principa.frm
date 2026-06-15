@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.MDIForm frmPRINCIPAL 
    BackColor       =   &H8000000A&
    Caption         =   " Menu Inicial"
@@ -795,7 +795,9 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
     escBTN.Show vbModal
 
   Case 5
-    configuraodbc
+    If zUSER = "ADMIN" Or AcessaMenu("frmCadastroDSN", 0) Then
+       frmCadastroDSN.Show vbModal, Me
+    End If
   Case 6
     zIDTEMP = zUSERID
     frmUSUSENHA.Show vbModal
@@ -811,26 +813,6 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
 
 
 
-
-End Sub
-
-Private Sub configuraodbc()
-  Dim lCONTINUA As Boolean
-  Dim cCFG As String
-  Dim aDAD As Variant
-  Dim x As Integer
-  lCONTINUA = True
-  x = 1
-  While lCONTINUA
-    cCFG = FixStr(PegPath("ODBCCFG", "ODBCCFG" & StrZero(x, 3)))
-    If InStr(cCFG, "|") = 0 Then
-      lCONTINUA = False
-    Else
-      aDAD = Split(cCFG, "|")
-      AddDSN aDAD(0), aDAD(1), aDAD(2), aDAD(3), True
-    End If
-    x = x + 1
-  Wend
 
 End Sub
 
