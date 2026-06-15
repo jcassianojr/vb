@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form formConvertToPDF 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Text-PDF v1.0"
@@ -24,7 +24,7 @@ Begin VB.Form formConvertToPDF
    Begin XPControls.XPButton btnConvert 
       Height          =   555
       Left            =   6960
-      TabIndex        =   22
+      TabIndex        =   21
       Top             =   0
       Width           =   1575
       _ExtentX        =   2773
@@ -178,36 +178,16 @@ Begin VB.Form formConvertToPDF
          Strikethrough   =   0   'False
       EndProperty
    End
-   Begin XPControls.XPButton CmdSendMail 
-      Height          =   435
-      Left            =   6960
-      TabIndex        =   21
-      Top             =   2400
-      Width           =   1575
-      _ExtentX        =   2773
-      _ExtentY        =   762
-      Picture         =   "formPDF.frx":1998
-      Caption         =   "EnviarEmail"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   432
       Left            =   5160
-      TabIndex        =   23
+      TabIndex        =   22
       TabStop         =   0   'False
       Top             =   3720
       Width           =   1332
       _ExtentX        =   2350
       _ExtentY        =   762
-      Picture         =   "formPDF.frx":1F32
+      Picture         =   "formPDF.frx":1998
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -222,12 +202,12 @@ Begin VB.Form formConvertToPDF
    Begin XPControls.XPButton CmdGeraPorPreview 
       Height          =   555
       Left            =   6960
-      TabIndex        =   24
+      TabIndex        =   23
       Top             =   600
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   974
-      Picture         =   "formPDF.frx":24CC
+      Picture         =   "formPDF.frx":1F32
       Caption         =   "Cria Pdf   (Preview)"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -242,12 +222,12 @@ Begin VB.Form formConvertToPDF
    Begin XPControls.XPButton CmdAbrirPdf 
       Height          =   435
       Left            =   6960
-      TabIndex        =   25
+      TabIndex        =   24
       Top             =   1320
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   762
-      Picture         =   "formPDF.frx":2A66
+      Picture         =   "formPDF.frx":24CC
       Caption         =   "Abrir"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -262,7 +242,7 @@ Begin VB.Form formConvertToPDF
    Begin VBCCR18.CommandButtonW btnclose 
       Height          =   612
       Left            =   8640
-      TabIndex        =   26
+      TabIndex        =   25
       Top             =   120
       Width           =   972
       _ExtentX        =   1715
@@ -274,7 +254,7 @@ Begin VB.Form formConvertToPDF
       Caption         =   "Retornar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "formPDF.frx":3000
+      Picture         =   "formPDF.frx":2A66
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -282,7 +262,7 @@ Begin VB.Form formConvertToPDF
    Begin VBCCR18.CommandButtonW cmdimp 
       Height          =   612
       Left            =   8640
-      TabIndex        =   27
+      TabIndex        =   26
       Top             =   1680
       Width           =   972
       _ExtentX        =   1715
@@ -294,7 +274,7 @@ Begin VB.Form formConvertToPDF
       Caption         =   "Imprimir"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "formPDF.frx":359A
+      Picture         =   "formPDF.frx":3000
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -302,8 +282,28 @@ Begin VB.Form formConvertToPDF
    Begin VBCCR18.CommandButtonW CmdVisua 
       Height          =   612
       Left            =   8640
-      TabIndex        =   28
+      TabIndex        =   27
       Top             =   960
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Visualizar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "formPDF.frx":359A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdPreviewOrigem 
+      Height          =   612
+      Left            =   1920
+      TabIndex        =   28
+      Top             =   3240
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -319,11 +319,11 @@ Begin VB.Form formConvertToPDF
       WordWrap        =   0   'False
       Style           =   1
    End
-   Begin VBCCR18.CommandButtonW cmdPreviewOrigem 
+   Begin VBCCR18.CommandButtonW CmdSendMail 
       Height          =   612
-      Left            =   1920
+      Left            =   6960
       TabIndex        =   29
-      Top             =   3240
+      Top             =   1920
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -331,7 +331,7 @@ Begin VB.Form formConvertToPDF
       BackColor       =   -2147483643
       ForeColor       =   -2147483640
       ImageListAlignment=   1
-      Caption         =   "Visualizar"
+      Caption         =   "Email"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "formPDF.frx":40CE

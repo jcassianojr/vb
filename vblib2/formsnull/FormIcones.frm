@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form FormIcones 
    Caption         =   "Form1"
    ClientHeight    =   4824
@@ -184,6 +184,62 @@ Begin VB.Form FormIcones
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "FormIcones.frx":2AD0
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CommandButtonW3 
+      Height          =   252
+      Left            =   3720
+      TabIndex        =   9
+      Top             =   1200
+      Width           =   372
+      _ExtentX        =   656
+      _ExtentY        =   445
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FormIcones.frx":306A
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CommandButtonW4 
+      Height          =   252
+      Left            =   3720
+      TabIndex        =   10
+      Top             =   1560
+      Width           =   372
+      _ExtentX        =   656
+      _ExtentY        =   445
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FormIcones.frx":3604
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CMDX 
+      Height          =   612
+      Left            =   5520
+      TabIndex        =   11
+      Top             =   1800
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Email"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FormIcones.frx":399E
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1

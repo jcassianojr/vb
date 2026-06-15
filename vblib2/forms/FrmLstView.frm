@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form FrmLstView 
    Caption         =   "Visualizador de LST"
@@ -18,7 +18,7 @@ Begin VB.Form FrmLstView
    Begin VBCCR18.DTPicker DTPicker1 
       Height          =   375
       Left            =   8040
-      TabIndex        =   26
+      TabIndex        =   25
       Top             =   4440
       Width           =   1455
       _ExtentX        =   2561
@@ -36,7 +36,7 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton XPButton1 
       Height          =   375
       Left            =   2400
-      TabIndex        =   25
+      TabIndex        =   24
       Top             =   1200
       Width           =   1095
       _ExtentX        =   1926
@@ -58,7 +58,7 @@ Begin VB.Form FrmLstView
       Left            =   3840
       ScaleHeight     =   204
       ScaleWidth      =   1404
-      TabIndex        =   24
+      TabIndex        =   23
       Top             =   1200
       Visible         =   0   'False
       Width           =   1455
@@ -66,7 +66,7 @@ Begin VB.Form FrmLstView
    Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5655
       Left            =   120
-      TabIndex        =   21
+      TabIndex        =   20
       Top             =   1680
       Width           =   7575
       _ExtentX        =   13356
@@ -78,7 +78,7 @@ Begin VB.Form FrmLstView
    Begin vbExtra.FlexFn FlexFn1 
       Height          =   396
       Left            =   120
-      TabIndex        =   20
+      TabIndex        =   19
       Top             =   1080
       Width           =   1680
       _ExtentX        =   2963
@@ -215,36 +215,16 @@ Begin VB.Form FrmLstView
       Top             =   120
       Width           =   7515
    End
-   Begin XPControls.XPButton CmdSendMail 
-      Height          =   375
-      Left            =   8040
-      TabIndex        =   7
-      Top             =   5400
-      Width           =   2055
-      _ExtentX        =   3620
-      _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":058A
-      Caption         =   "EnviarEmail"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton Command5 
       Height          =   375
       Left            =   8040
-      TabIndex        =   8
+      TabIndex        =   7
       TabStop         =   0   'False
       Top             =   6360
       Width           =   855
       _ExtentX        =   1503
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":0B24
+      Picture         =   "FrmLstView.frx":058A
       Caption         =   "Html"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -259,13 +239,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command6 
       Height          =   375
       Left            =   8040
-      TabIndex        =   9
+      TabIndex        =   8
       TabStop         =   0   'False
       Top             =   6840
       Width           =   855
       _ExtentX        =   1503
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":10BE
+      Picture         =   "FrmLstView.frx":0B24
       Caption         =   "PDF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -280,13 +260,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command10 
       Height          =   372
       Left            =   8760
-      TabIndex        =   10
+      TabIndex        =   9
       TabStop         =   0   'False
       Top             =   6360
       Width           =   852
       _ExtentX        =   1503
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":1458
+      Picture         =   "FrmLstView.frx":0EBE
       Caption         =   "RTF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -301,13 +281,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command4 
       Height          =   375
       Left            =   8040
-      TabIndex        =   11
+      TabIndex        =   10
       TabStop         =   0   'False
       Top             =   3000
       Width           =   2055
       _ExtentX        =   3620
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":17F2
+      Picture         =   "FrmLstView.frx":1258
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -322,13 +302,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   375
       Left            =   8040
-      TabIndex        =   12
+      TabIndex        =   11
       TabStop         =   0   'False
       Top             =   3480
       Width           =   2055
       _ExtentX        =   3620
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":1D8C
+      Picture         =   "FrmLstView.frx":17F2
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -343,13 +323,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdExcluir 
       Height          =   375
       Left            =   8040
-      TabIndex        =   13
+      TabIndex        =   12
       TabStop         =   0   'False
       Top             =   1560
       Width           =   2055
       _ExtentX        =   3620
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":2326
+      Picture         =   "FrmLstView.frx":1D8C
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -364,13 +344,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton btnOpen 
       Height          =   375
       Left            =   8040
-      TabIndex        =   14
+      TabIndex        =   13
       TabStop         =   0   'False
       Top             =   1080
       Width           =   2055
       _ExtentX        =   3620
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":28C0
+      Picture         =   "FrmLstView.frx":2326
       Caption         =   "Ver Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -385,13 +365,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command3 
       Height          =   375
       Left            =   7800
-      TabIndex        =   15
+      TabIndex        =   14
       TabStop         =   0   'False
       Top             =   120
       Width           =   1575
       _ExtentX        =   2773
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":2E5A
+      Picture         =   "FrmLstView.frx":28C0
       Caption         =   "Buscar Pasta"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -406,13 +386,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command1 
       Height          =   375
       Left            =   8040
-      TabIndex        =   16
+      TabIndex        =   15
       TabStop         =   0   'False
       Top             =   600
       Width           =   2055
       _ExtentX        =   3620
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":33F4
+      Picture         =   "FrmLstView.frx":2E5A
       Caption         =   "Atualizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -427,13 +407,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton CmdFiltra 
       Height          =   375
       Left            =   8040
-      TabIndex        =   17
+      TabIndex        =   16
       TabStop         =   0   'False
       Top             =   3960
       Width           =   1035
       _ExtentX        =   1820
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":398E
+      Picture         =   "FrmLstView.frx":33F4
       Caption         =   "filtrar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -448,13 +428,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command7 
       Height          =   372
       Left            =   9600
-      TabIndex        =   18
+      TabIndex        =   17
       TabStop         =   0   'False
       Top             =   4440
       Width           =   552
       _ExtentX        =   974
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":3F28
+      Picture         =   "FrmLstView.frx":398E
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -469,13 +449,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton Command8 
       Height          =   375
       Left            =   9120
-      TabIndex        =   19
+      TabIndex        =   18
       TabStop         =   0   'False
       Top             =   3960
       Width           =   915
       _ExtentX        =   1609
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":42C2
+      Picture         =   "FrmLstView.frx":3D28
       Caption         =   "limpar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -496,7 +476,7 @@ Begin VB.Form FrmLstView
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   5520
-      TabIndex        =   22
+      TabIndex        =   21
       TabStop         =   0   'False
       Top             =   1200
       Visible         =   0   'False
@@ -504,12 +484,12 @@ Begin VB.Form FrmLstView
       _ExtentX        =   1503
       _ExtentY        =   445
       MultiLine       =   -1  'True
-      TextRTF         =   "FrmLstView.frx":465C
+      TextRTF         =   "FrmLstView.frx":40C2
    End
    Begin XPControls.XPButton Command9 
       Height          =   375
       Left            =   9240
-      TabIndex        =   23
+      TabIndex        =   22
       TabStop         =   0   'False
       Top             =   6840
       Width           =   855
@@ -529,13 +509,13 @@ Begin VB.Form FrmLstView
    Begin XPControls.XPButton cmdGeraDoc 
       Height          =   372
       Left            =   9480
-      TabIndex        =   27
+      TabIndex        =   26
       TabStop         =   0   'False
       Top             =   6360
       Width           =   852
       _ExtentX        =   1503
       _ExtentY        =   656
-      Picture         =   "FrmLstView.frx":47C2
+      Picture         =   "FrmLstView.frx":4228
       Caption         =   "DOC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -550,7 +530,7 @@ Begin VB.Form FrmLstView
    Begin VBCCR18.CommandButtonW retornar 
       Height          =   612
       Left            =   9960
-      TabIndex        =   28
+      TabIndex        =   27
       Top             =   600
       Width           =   972
       _ExtentX        =   1715
@@ -562,7 +542,7 @@ Begin VB.Form FrmLstView
       Caption         =   "Retornar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "FrmLstView.frx":4B5C
+      Picture         =   "FrmLstView.frx":45C2
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -570,7 +550,7 @@ Begin VB.Form FrmLstView
    Begin VBCCR18.CommandButtonW CmdLocaliza 
       Height          =   612
       Left            =   9960
-      TabIndex        =   29
+      TabIndex        =   28
       Top             =   2280
       Width           =   972
       _ExtentX        =   1715
@@ -582,7 +562,7 @@ Begin VB.Form FrmLstView
       Caption         =   "Localizar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "FrmLstView.frx":50F6
+      Picture         =   "FrmLstView.frx":4B5C
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -590,7 +570,7 @@ Begin VB.Form FrmLstView
    Begin VBCCR18.CommandButtonW CmdVisual 
       Height          =   612
       Left            =   9960
-      TabIndex        =   30
+      TabIndex        =   29
       Top             =   1560
       Width           =   972
       _ExtentX        =   1715
@@ -602,7 +582,7 @@ Begin VB.Form FrmLstView
       Caption         =   "Visualizar"
       Alignment       =   0
       VerticalAlignment=   0
-      Picture         =   "FrmLstView.frx":5690
+      Picture         =   "FrmLstView.frx":50F6
       PictureAndCaption=   -1  'True
       WordWrap        =   0   'False
       Style           =   1
@@ -610,7 +590,7 @@ Begin VB.Form FrmLstView
    Begin VBCCR18.CommandButtonW CmdPrinterPort 
       Height          =   612
       Left            =   9840
-      TabIndex        =   31
+      TabIndex        =   30
       Top             =   5520
       Width           =   1092
       _ExtentX        =   1926
@@ -620,6 +600,26 @@ Begin VB.Form FrmLstView
       ForeColor       =   -2147483640
       ImageListAlignment=   1
       Caption         =   "Imprimir Porta"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmLstView.frx":5690
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdSendMail 
+      Height          =   612
+      Left            =   9840
+      TabIndex        =   31
+      Top             =   4800
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Email"
       Alignment       =   0
       VerticalAlignment=   0
       Picture         =   "FrmLstView.frx":5C2A
