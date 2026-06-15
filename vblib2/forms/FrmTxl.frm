@@ -16,7 +16,7 @@ Begin VB.Form FrmTxl
    Begin VBFLXGRD18.VBFlexGrid Listview1 
       Height          =   1335
       Left            =   120
-      TabIndex        =   26
+      TabIndex        =   25
       Top             =   6000
       Width           =   9855
       _ExtentX        =   17378
@@ -31,7 +31,7 @@ Begin VB.Form FrmTxl
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   255
       Left            =   10080
-      TabIndex        =   25
+      TabIndex        =   24
       TabStop         =   0   'False
       Top             =   2280
       Visible         =   0   'False
@@ -104,7 +104,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.SpinBox LptPort 
          Height          =   375
          Left            =   1080
-         TabIndex        =   27
+         TabIndex        =   26
          Top             =   240
          Width           =   735
          _ExtentX        =   1291
@@ -125,7 +125,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.SpinBox comport 
          Height          =   375
          Left            =   3240
-         TabIndex        =   28
+         TabIndex        =   27
          Top             =   240
          Width           =   735
          _ExtentX        =   1291
@@ -171,7 +171,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.CommandButtonW Encerrar 
          Height          =   612
          Left            =   5400
-         TabIndex        =   30
+         TabIndex        =   29
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -191,7 +191,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.CommandButtonW cmdimp 
          Height          =   612
          Left            =   4200
-         TabIndex        =   31
+         TabIndex        =   30
          Top             =   240
          Width           =   1092
          _ExtentX        =   1926
@@ -211,7 +211,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.CommandButtonW XPButton1 
          Height          =   612
          Left            =   2280
-         TabIndex        =   32
+         TabIndex        =   31
          Top             =   240
          Width           =   1812
          _ExtentX        =   3196
@@ -231,7 +231,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.CommandButtonW CmdVisua 
          Height          =   612
          Left            =   1200
-         TabIndex        =   33
+         TabIndex        =   32
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -251,7 +251,7 @@ Begin VB.Form FrmTxl
       Begin VBCCR18.CommandButtonW CmdConfImp 
          Height          =   612
          Left            =   120
-         TabIndex        =   34
+         TabIndex        =   33
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -281,7 +281,7 @@ Begin VB.Form FrmTxl
          Height          =   375
          Index           =   0
          Left            =   120
-         TabIndex        =   18
+         TabIndex        =   17
          TabStop         =   0   'False
          Top             =   360
          Width           =   795
@@ -303,7 +303,7 @@ Begin VB.Form FrmTxl
          Height          =   372
          Index           =   1
          Left            =   840
-         TabIndex        =   19
+         TabIndex        =   18
          TabStop         =   0   'False
          Top             =   360
          Width           =   852
@@ -325,7 +325,7 @@ Begin VB.Form FrmTxl
          Height          =   372
          Index           =   2
          Left            =   1800
-         TabIndex        =   20
+         TabIndex        =   19
          TabStop         =   0   'False
          Top             =   360
          Width           =   792
@@ -347,7 +347,7 @@ Begin VB.Form FrmTxl
          Height          =   372
          Index           =   3
          Left            =   2520
-         TabIndex        =   21
+         TabIndex        =   20
          TabStop         =   0   'False
          Top             =   360
          Width           =   792
@@ -369,7 +369,7 @@ Begin VB.Form FrmTxl
          Height          =   372
          Index           =   4
          Left            =   3240
-         TabIndex        =   29
+         TabIndex        =   28
          TabStop         =   0   'False
          Top             =   360
          Width           =   792
@@ -415,35 +415,15 @@ Begin VB.Form FrmTxl
          Width           =   8775
       End
    End
-   Begin XPControls.XPButton CmdFiltro 
-      Height          =   435
-      Left            =   10080
-      TabIndex        =   16
-      Top             =   3960
-      Width           =   1215
-      _ExtentX        =   2138
-      _ExtentY        =   762
-      Picture         =   "FrmTxl.frx":36F4
-      Caption         =   "filtrar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton CmdOrdem 
       Height          =   435
       Left            =   10080
-      TabIndex        =   17
+      TabIndex        =   16
       Top             =   4920
       Width           =   1275
       _ExtentX        =   2244
       _ExtentY        =   762
-      Picture         =   "FrmTxl.frx":3C8E
+      Picture         =   "FrmTxl.frx":36F4
       Caption         =   "ordernar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -458,13 +438,13 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdEditar 
       Height          =   315
       Left            =   960
-      TabIndex        =   23
+      TabIndex        =   22
       TabStop         =   0   'False
       Top             =   2280
       Width           =   975
       _ExtentX        =   1715
       _ExtentY        =   550
-      Picture         =   "FrmTxl.frx":4228
+      Picture         =   "FrmTxl.frx":3C8E
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -479,13 +459,13 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   315
       Left            =   2040
-      TabIndex        =   22
+      TabIndex        =   21
       TabStop         =   0   'False
       Top             =   2280
       Width           =   1335
       _ExtentX        =   2350
       _ExtentY        =   550
-      Picture         =   "FrmTxl.frx":47C2
+      Picture         =   "FrmTxl.frx":4228
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -500,7 +480,7 @@ Begin VB.Form FrmTxl
    Begin XPControls.XPButton CmdShell 
       Height          =   315
       Left            =   3480
-      TabIndex        =   24
+      TabIndex        =   23
       Top             =   2280
       Width           =   375
       _ExtentX        =   656
@@ -515,6 +495,26 @@ Begin VB.Form FrmTxl
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW CmdFiltro 
+      Height          =   612
+      Left            =   10080
+      TabIndex        =   34
+      Top             =   4080
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Filtrar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmTxl.frx":47C2
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label Label2 
       Caption         =   "Arquivo"
@@ -586,7 +586,7 @@ Private Sub gerar(ByVal cOPE As String)
     oTXT.arquivo = TxtArquivo
   End If
   If cDestino = "IMPNET" Then
-    oTXT.Caminho = TxtCaminho
+    oTXT.Caminho = Txtcaminho
   End If
   If cSETUP <> "" Then
     oTXT.impsetup cSETUP
@@ -657,11 +657,11 @@ Private Sub CmdFiltro_Click()
   If aRELCFG(11) Then
     ePASS01 = ""
     FrmFiltro.Show vbModal, Me
-    filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
+    FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
   End If
-  cFILTRO = FixStr(filtro)
+  cFILTRO = FixStr(FILTRO)
   If Len(aRELCFG(15)) > 0 Then
-    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
     Lblsql = cSQL
   End If
 
@@ -702,7 +702,7 @@ Private Sub imptxt()  'Aqui e direct print com1,COM2.. lpt1,LPT2.. no pode ser u
   oTXT.Destino = cDestino
   oTXT.ABRIR
   If cDestino = "IMPNET" Then
-    oTXT.Caminho = TxtCaminho
+    oTXT.Caminho = Txtcaminho
   End If
   If cSETUP <> "" Then
     oTXT.impsetup cSETUP
@@ -838,9 +838,9 @@ Private Sub Form_Load()
   Dim cTMP As String
   Dim cARQINI As String
   CenterFormToScreen Me
-  filtro = ""
-  TxtCaminho = ""
-  TxtCaminho.Enabled = False
+  FILTRO = ""
+  Txtcaminho = ""
+  Txtcaminho.Enabled = False
   OptDestino(6).Value = True
   montaimp
 
@@ -867,7 +867,7 @@ Private Sub Form_Load()
     nCOLUNAS = PegINIVAL(cARQINI, "CONFIGURACAO", "COLUNAS", 80)
     nLINHAS = PegINIVAL(cARQINI, "CONFIGURACAO", "LINHAS", 60)
     cDestino = PegINIVAL(cARQINI, "CONFIGURACAO", "DESTINO", "ARQ")
-    TxtCaminho = PegINIVAL(cARQINI, "CONFIGURACAO", "CAMINHO", "LPT1")
+    Txtcaminho = PegINIVAL(cARQINI, "CONFIGURACAO", "CAMINHO", "LPT1")
 
     If Mid(cDestino, 1, 3) = "LPT" Then
        OptDestino(0).Value = True
@@ -887,7 +887,7 @@ Private Sub Form_Load()
           OptDestino(6).Value = True
         Case "IMPNET"
           OptDestino(7).Value = True
-          TxtCaminho.Enabled = True
+          Txtcaminho.Enabled = True
     End Select
 
 
@@ -896,7 +896,7 @@ Private Sub Form_Load()
     If aRELCFG(14) = "" Then
       aRELCFG(14) = PegINIVAL(cARQINI, "CONFIGURACAO", "FILTRO", 1)
     End If
-    filtro = aRELCFG(14)
+    FILTRO = aRELCFG(14)
     If aRELCFG(15) = "" Then
       aRELCFG(15) = PegINIVAL(cARQINI, "CONFIGURACAO", "SQL", 1)
     End If
@@ -947,10 +947,10 @@ Private Sub Form_Load()
   If Not aDIREITOS(6) Then cmdimp.Visible = False
   If Not aDIREITOS(6) Then CmdConfImp.Visible = False
   If Not aDIREITOS(5) Then CmdVisua.Visible = False
-  If Not aDIREITOS(7) Then Salvar(0).Visible = False
+  If Not aDIREITOS(7) Then salvar(0).Visible = False
   If Not aDIREITOS(7) Then CmdEmail.Visible = False
   If Not aRELCFG(11) Then CmdFiltro.Visible = False
-  If Not aRELCFG(11) Then filtro.Visible = False
+  If Not aRELCFG(11) Then FILTRO.Visible = False
 
   If Not aDIREITOS(4) Then CmdEditar.Visible = False
   If Not aDIREITOS(4) Then CmdShell.Visible = False
@@ -963,7 +963,7 @@ Private Sub Form_Load()
     End If
   End If
   If Len(aRELCFG(15)) > 0 Then
-    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
+    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
   End If
 
   Lblsql = cSQL
@@ -1000,7 +1000,7 @@ Private Sub Listview1_Click()
 End Sub
 
 Private Sub OptDestino_Click(Index As Integer)
-  TxtCaminho.Enabled = False
+  Txtcaminho.Enabled = False
   If Index = 0 Then
      cDestino = "LPT" & LptPort.Value
   End If
@@ -1014,7 +1014,7 @@ Private Sub OptDestino_Click(Index As Integer)
         cDestino = "PRINTER"
       Case 7
         cDestino = "IMPNET"
-        TxtCaminho.Enabled = True
+        Txtcaminho.Enabled = True
   End Select
 End Sub
 

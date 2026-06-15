@@ -264,6 +264,46 @@ Begin VB.Form FormIcones
       WordWrap        =   0   'False
       Style           =   1
    End
+   Begin VBCCR18.CommandButtonW CommandButtonW6 
+      Height          =   612
+      Left            =   5520
+      TabIndex        =   13
+      Top             =   2520
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Filtrar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FormIcones.frx":44D2
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW Command8 
+      Height          =   612
+      Left            =   6600
+      TabIndex        =   14
+      Top             =   2520
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Limpar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FormIcones.frx":496C
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
 End
 Attribute VB_Name = "FormIcones"
 Attribute VB_GlobalNameSpace = False

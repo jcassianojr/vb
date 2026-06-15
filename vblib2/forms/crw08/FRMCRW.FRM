@@ -18,7 +18,7 @@ Begin VB.Form FrmCrw
       Caption         =   "EnviarEmail"
       Height          =   252
       Left            =   7320
-      TabIndex        =   29
+      TabIndex        =   28
       Top             =   4320
       Width           =   1932
    End
@@ -31,7 +31,7 @@ Begin VB.Form FrmCrw
    Begin VBCCR18.RichTextBox RichTextBox1 
       Height          =   372
       Left            =   9000
-      TabIndex        =   25
+      TabIndex        =   24
       TabStop         =   0   'False
       Top             =   5280
       Visible         =   0   'False
@@ -45,7 +45,7 @@ Begin VB.Form FrmCrw
    Begin XPControls.XPButton CmdShell 
       Height          =   312
       Left            =   1800
-      TabIndex        =   23
+      TabIndex        =   22
       Top             =   2280
       Width           =   372
       _ExtentX        =   656
@@ -160,7 +160,7 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   0
          Left            =   120
-         TabIndex        =   15
+         TabIndex        =   14
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
@@ -182,7 +182,7 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   1
          Left            =   960
-         TabIndex        =   16
+         TabIndex        =   15
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
@@ -204,7 +204,7 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   2
          Left            =   1800
-         TabIndex        =   17
+         TabIndex        =   16
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
@@ -226,7 +226,7 @@ Begin VB.Form FrmCrw
          Height          =   375
          Index           =   3
          Left            =   2640
-         TabIndex        =   18
+         TabIndex        =   17
          TabStop         =   0   'False
          Top             =   240
          Width           =   795
@@ -255,7 +255,7 @@ Begin VB.Form FrmCrw
       Begin XPControls.XPButton Command2 
          Height          =   432
          Left            =   120
-         TabIndex        =   21
+         TabIndex        =   20
          TabStop         =   0   'False
          Top             =   240
          Width           =   1512
@@ -276,7 +276,7 @@ Begin VB.Form FrmCrw
       Begin VBCCR18.CommandButtonW encerrar 
          Height          =   612
          Left            =   5160
-         TabIndex        =   26
+         TabIndex        =   25
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -296,7 +296,7 @@ Begin VB.Form FrmCrw
       Begin VBCCR18.CommandButtonW cmdimp 
          Height          =   612
          Left            =   4080
-         TabIndex        =   27
+         TabIndex        =   26
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -316,7 +316,7 @@ Begin VB.Form FrmCrw
       Begin VBCCR18.CommandButtonW CmdVisua 
          Height          =   612
          Left            =   3000
-         TabIndex        =   28
+         TabIndex        =   27
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -336,7 +336,7 @@ Begin VB.Form FrmCrw
       Begin VBCCR18.CommandButtonW CmdConfImp 
          Height          =   612
          Left            =   1920
-         TabIndex        =   30
+         TabIndex        =   29
          Top             =   240
          Width           =   972
          _ExtentX        =   1715
@@ -388,36 +388,16 @@ Begin VB.Form FrmCrw
       PrintFileLinesPerPage=   60
       WindowShowRefreshBtn=   -1  'True
    End
-   Begin XPControls.XPButton CmdFiltro 
-      Height          =   432
-      Left            =   7920
-      TabIndex        =   14
-      Top             =   3120
-      Width           =   1512
-      _ExtentX        =   2667
-      _ExtentY        =   762
-      Picture         =   "FRMCRW.frx":35DC
-      Caption         =   "filtrar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   7.8
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton CmdEditar 
       Height          =   312
       Left            =   120
-      TabIndex        =   19
+      TabIndex        =   18
       TabStop         =   0   'False
       Top             =   2280
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   550
-      Picture         =   "FRMCRW.frx":3B76
+      Picture         =   "FRMCRW.frx":35DC
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -432,13 +412,13 @@ Begin VB.Form FrmCrw
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   312
       Left            =   840
-      TabIndex        =   20
+      TabIndex        =   19
       TabStop         =   0   'False
       Top             =   2280
       Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   550
-      Picture         =   "FRMCRW.frx":4110
+      Picture         =   "FRMCRW.frx":3B76
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -453,13 +433,13 @@ Begin VB.Form FrmCrw
    Begin XPControls.XPButton CmdMudaFec 
       Height          =   492
       Left            =   7920
-      TabIndex        =   22
+      TabIndex        =   21
       TabStop         =   0   'False
       Top             =   2640
       Width           =   1872
       _ExtentX        =   3302
       _ExtentY        =   868
-      Picture         =   "FRMCRW.frx":46AA
+      Picture         =   "FRMCRW.frx":4110
       Caption         =   "Competência"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -474,13 +454,13 @@ Begin VB.Form FrmCrw
    Begin XPControls.XPButton CmdPreview 
       Height          =   312
       Left            =   2160
-      TabIndex        =   24
+      TabIndex        =   23
       TabStop         =   0   'False
       Top             =   2280
       Width           =   1152
       _ExtentX        =   2032
       _ExtentY        =   550
-      Picture         =   "FRMCRW.frx":4A44
+      Picture         =   "FRMCRW.frx":44AA
       Caption         =   "Visualizar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -491,6 +471,26 @@ Begin VB.Form FrmCrw
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW CmdFiltro 
+      Height          =   612
+      Left            =   7920
+      TabIndex        =   30
+      Top             =   3120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Filtrar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FRMCRW.frx":4A44
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label Label4 
       Caption         =   "Texto"

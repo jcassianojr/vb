@@ -5,28 +5,28 @@ Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form formConvertToPDF 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Text-PDF v1.0"
-   ClientHeight    =   5028
+   ClientHeight    =   5772
    ClientLeft      =   2628
    ClientTop       =   1392
-   ClientWidth     =   9960
+   ClientWidth     =   11004
    Icon            =   "formPDF.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5028
-   ScaleWidth      =   9960
+   ScaleHeight     =   5772
+   ScaleWidth      =   11004
    Begin BSPrinter.PrintPreview PrintPreview1 
-      Left            =   7200
-      Top             =   4080
+      Left            =   9360
+      Top             =   4320
       _ExtentX        =   953
       _ExtentY        =   953
    End
    Begin XPControls.XPButton btnConvert 
-      Height          =   555
-      Left            =   6960
+      Height          =   552
+      Left            =   6720
       TabIndex        =   21
-      Top             =   0
-      Width           =   1575
+      Top             =   3240
+      Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   974
       Picture         =   "formPDF.frx":08CA
@@ -98,9 +98,9 @@ Begin VB.Form formConvertToPDF
    End
    Begin VB.TextBox txtOutputFile 
       Height          =   345
-      Left            =   120
+      Left            =   1800
       TabIndex        =   13
-      Top             =   4440
+      Top             =   3960
       Width           =   6480
    End
    Begin VB.TextBox txtFilename 
@@ -140,14 +140,14 @@ Begin VB.Form formConvertToPDF
    End
    Begin XPControls.XPButton btnSave 
       Height          =   432
-      Left            =   1560
+      Left            =   8400
       TabIndex        =   19
-      Top             =   4080
-      Width           =   1932
-      _ExtentX        =   3408
+      Top             =   3960
+      Width           =   2172
+      _ExtentX        =   3831
       _ExtentY        =   762
       Picture         =   "formPDF.frx":0E64
-      Caption         =   "Salvar &PDF Como"
+      Caption         =   "Salvar Como"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   7.8
@@ -160,9 +160,9 @@ Begin VB.Form formConvertToPDF
    End
    Begin XPControls.XPButton btnOpen 
       Height          =   432
-      Left            =   4080
+      Left            =   3000
       TabIndex        =   20
-      Top             =   3720
+      Top             =   3240
       Width           =   1332
       _ExtentX        =   2350
       _ExtentY        =   762
@@ -180,10 +180,10 @@ Begin VB.Form formConvertToPDF
    End
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   432
-      Left            =   5160
+      Left            =   4200
       TabIndex        =   22
       TabStop         =   0   'False
-      Top             =   3720
+      Top             =   3240
       Width           =   1332
       _ExtentX        =   2350
       _ExtentY        =   762
@@ -200,11 +200,11 @@ Begin VB.Form formConvertToPDF
       EndProperty
    End
    Begin XPControls.XPButton CmdGeraPorPreview 
-      Height          =   555
-      Left            =   6960
+      Height          =   552
+      Left            =   5400
       TabIndex        =   23
-      Top             =   600
-      Width           =   1575
+      Top             =   3240
+      Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   974
       Picture         =   "formPDF.frx":1F32
@@ -220,11 +220,11 @@ Begin VB.Form formConvertToPDF
       EndProperty
    End
    Begin XPControls.XPButton CmdAbrirPdf 
-      Height          =   435
-      Left            =   6960
+      Height          =   432
+      Left            =   2040
       TabIndex        =   24
-      Top             =   1320
-      Width           =   1575
+      Top             =   4320
+      Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   762
       Picture         =   "formPDF.frx":24CC
@@ -241,9 +241,9 @@ Begin VB.Form formConvertToPDF
    End
    Begin VBCCR18.CommandButtonW btnclose 
       Height          =   612
-      Left            =   8640
+      Left            =   9000
       TabIndex        =   25
-      Top             =   120
+      Top             =   240
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -261,9 +261,9 @@ Begin VB.Form formConvertToPDF
    End
    Begin VBCCR18.CommandButtonW cmdimp 
       Height          =   612
-      Left            =   8640
+      Left            =   5040
       TabIndex        =   26
-      Top             =   1680
+      Top             =   4320
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -281,9 +281,9 @@ Begin VB.Form formConvertToPDF
    End
    Begin VBCCR18.CommandButtonW CmdVisua 
       Height          =   612
-      Left            =   8640
+      Left            =   3840
       TabIndex        =   27
-      Top             =   960
+      Top             =   4320
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
@@ -321,9 +321,9 @@ Begin VB.Form formConvertToPDF
    End
    Begin VBCCR18.CommandButtonW CmdSendMail 
       Height          =   612
-      Left            =   6960
+      Left            =   6240
       TabIndex        =   29
-      Top             =   1920
+      Top             =   4320
       Width           =   972
       _ExtentX        =   1715
       _ExtentY        =   1080
