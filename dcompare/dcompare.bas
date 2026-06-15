@@ -1,4 +1,47 @@
 Attribute VB_Name = "dcompareMain"
+
+#If VBA7 Or Win64 Then
+    ' --- BLOCO 64-BIT / TWINBASIC / VBA7 ---
+    Public Declare PtrSafe Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As LongPtr, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As LongPtr
+    Public Declare PtrSafe Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As LongPtr, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As LongPtr) As LongPtr
+    
+    Public Declare PtrSafe Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As LongPtr) As Long
+    Public Declare PtrSafe Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As LongPtr, ByVal dwReserved As LongPtr) As Long
+    Public Declare PtrSafe Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As LongPtr, ByVal Unknownn1 As LongPtr, ByVal Unknownn2 As LongPtr, ByVal fCheckOnly As LongPtr) As Long
+    Public Declare PtrSafe Function ReleaseCapture Lib "user32" () As Long
+    
+    Public Declare PtrSafe Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As LongPtr, ByVal lpFileName As String) As Long
+    Public Declare PtrSafe Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpString As Any, ByVal lpFileName As String) As Long
+    
+    Public Declare PtrSafe Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As LongPtr, ByVal LCType As LongPtr, ByVal lpLCData As String, ByVal cchData As LongPtr) As Long
+    Public Declare PtrSafe Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As LongPtr, ByVal LCType As LongPtr, ByVal lpLCData As String) As Long
+    
+    Public Declare PtrSafe Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+    Public Declare PtrSafe Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+    Public Declare PtrSafe Function WinHelp Lib "user32" Alias "WinHelpA" (ByVal hwnd As LongPtr, ByVal lpHelpFile As String, ByVal wCommand As LongPtr, ByVal dwData As LongPtr) As Long
+
+#Else
+    ' --- BLOCO 32-BIT CLÁSSICO (VB6) ---
+    Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+    Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
+    
+    Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
+    Public Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
+    Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
+    Public Declare Function ReleaseCapture Lib "user32" () As Long
+    
+    Public Declare Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As Long, ByVal lpFileName As String) As Long
+    Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpString As Any, ByVal lpFileName As String) As Long
+    
+    Public Declare Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String, ByVal cchData As Long) As Long
+    Public Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String) As Long
+    
+    Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+    Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+    Public Declare Function WinHelp Lib "user32" Alias "WinHelpA" (ByVal hWnd As Long, ByVal lpHelpFile As String, ByVal wCommand As Long, ByVal dwData As Long) As Long
+#End If
+
+
 Public lRETU As Boolean
 ' Bibliotecas necessárias no seu VBP:
 ' 1. Microsoft ADO Ext. 6.0 for DDL and Security (ADOX)
@@ -9,7 +52,29 @@ Public lRETU As Boolean
 Sub Main()
   dCompare.Show
 End Sub
+Public Function PegPath(ByVal cGRUPO As String, ByVal cCAMPO As String, Optional ByVal ePAD As String = "" _
+                       , Optional ByVal cARQINI As String = "") As String
+  Dim z As Long
+  Dim scaminho As String * 255
+  If cARQINI = "" Then
+     cARQINI = App.Path & "\" & App.EXEName & ".INI"
+  End If
+  z = GetPrivateProfileString(cGRUPO, cCAMPO, "", scaminho, 150, cARQINI)
+  If Len(ePAD) = 0 Then
+    ePAD = App.Path & "\"
+  End If
+  PegPath = IIf(Asc(Left(scaminho, 1)) = "0", ePAD, Left(scaminho, z))
 
+End Function
+
+Public Function StrZero(ByVal nNUM, Optional ByVal nLEN As Integer = 0)
+  Dim cTemp As String
+  If nLEN = 0 Then
+    cTemp = FixStr(nNUM, "0", "TRIM")
+    nLEN = Trim(cTemp)
+  End If
+  StrZero = Right(String(nLEN, "0") & CStr(nNUM), nLEN)
+End Function
 Public Function ArquivoExiste(ByVal FilePath As String) As Boolean
     ArquivoExiste = (Dir(FilePath, vbNormal + vbHidden + vbSystem) <> "")
 End Function
@@ -76,13 +141,13 @@ Public Function GeraConexao(ByVal Caminho As String) As String
     End If
 End Function
 
-Public Function AbrirCatalog(ByVal sCaminho As String) As Object
+Public Function AbrirCatalog(ByVal scaminho As String) As Object
     ' Retorna um objeto ADOX.Catalog para ler a estrutura do MDB
     Dim cat As Object
     Set cat = CreateObject("ADOX.Catalog")
     
     ' String de conexão genérica para MDB/ACCDB
-    cat.ActiveConnection = GeraConexao(sCaminho)
+    cat.ActiveConnection = GeraConexao(scaminho)
     Set AbrirCatalog = cat
 End Function
 
@@ -100,12 +165,12 @@ Public Function ValidarOuCriarDestino(ByVal cCaminho As String) As Boolean
     If fso.FileExists(cCaminho) Then
         ' Se existe, perguntamos se o usuário quer APENAS abrir para comparar
         ' ou se ele tem certeza que é o destino correto.
-        Dim resposta As VbMsgBoxResult
-        resposta = MsgBox("O arquivo de destino já existe." & vbCrLf & _
+        Dim Resposta As VbMsgBoxResult
+        Resposta = MsgBox("O arquivo de destino já existe." & vbCrLf & _
                           "Deseja utilizá-lo para sincronização?" & vbCrLf & vbCrLf & _
                           "Atenção: A estrutura pode ser alterada.", vbYesNo + vbInformation, "Confirmação")
         
-        If resposta = vbYes Then
+        If Resposta = vbYes Then
             ValidarOuCriarDestino = True
         Else
             ValidarOuCriarDestino = False
@@ -209,12 +274,12 @@ Erro:
     MsgBox "Erro ao criar arquivo via FSO: " & Err.Description, vbCritical
     CriarSqlite = False
 End Function
-Public Function CompactarSQLite(ByVal sCaminho As String) As Boolean
+Public Function CompactarSQLite(ByVal scaminho As String) As Boolean
     On Error GoTo Erro
     Dim oConn As New RC6.cConnection
     
     ' 1. Abre o banco de dados
-    oConn.OpenDB sCaminho
+    oConn.OpenDB scaminho
     
     ' 2. O comando VACUUM reorganiza e compacta o ficheiro
     oConn.Execute "VACUUM"
@@ -228,7 +293,7 @@ Erro:
     CompactarSQLite = False
 End Function
 
-Public Sub GerarInfoTabelasAccess(ByVal sCaminho As String, ByRef txtDestino As TextBox)
+Public Sub GerarInfoTabelasAccess(ByVal scaminho As String, ByRef txtDestino As TextBox)
     Dim conn As Object
     Dim cat As Object ' ADOX.Catalog
     Dim tbl As Object ' ADOX.Table
@@ -239,13 +304,13 @@ Public Sub GerarInfoTabelasAccess(ByVal sCaminho As String, ByRef txtDestino As 
     
     ' Conexão via ADO
     Set conn = CreateObject("ADODB.Connection")
-    conn.Open GeraConexao(sCaminho)
+    conn.Open GeraConexao(scaminho)
     
     ' Usamos o ADOX para ler a estrutura (Catalog)
     Set cat = CreateObject("ADOX.Catalog")
     Set cat.ActiveConnection = conn
     
-    txtDestino.Text = "Estrutura Access (ADOX): " & sCaminho & vbCrLf & String(60, "-") & vbCrLf
+    txtDestino.Text = "Estrutura Access (ADOX): " & scaminho & vbCrLf & String(60, "-") & vbCrLf
     
     For Each tbl In cat.Tables
         If tbl.Type = "TABLE" Then
@@ -360,7 +425,7 @@ Public Function GetTipoNome(ByVal nTIPO As Integer) As String
     End Select
 End Function
 
-Public Sub GerarInfoTabelasSQLite(ByVal sCaminho As String, ByRef txtDestino As TextBox)
+Public Sub GerarInfoTabelasSQLite(ByVal scaminho As String, ByRef txtDestino As TextBox)
     Dim oConn As RC6.cConnection
     Dim oRS As RC6.cRecordset
     Dim oFldRS As RC6.cRecordset
@@ -368,8 +433,8 @@ Public Sub GerarInfoTabelasSQLite(ByVal sCaminho As String, ByRef txtDestino As 
     Dim ssql As String
     Dim sTabela As String
     
-    Set oConn = New_c.Connection(sCaminho)
-    txtDestino.Text = "Estrutura Completa: " & sCaminho & vbCrLf & String(40, "-") & vbCrLf
+    Set oConn = New_c.Connection(scaminho)
+    txtDestino.Text = "Estrutura Completa: " & scaminho & vbCrLf & String(40, "-") & vbCrLf
 
     ' 1. Lista tabelas (Com a query que já validamos)
     ssql = "SELECT name FROM sqlite_master WHERE type = 'table' AND SUBSTR(name, 1, 7) <> 'sqlite_'"
@@ -442,15 +507,15 @@ End Function
 
 
 
-Public Sub GerarScriptSQLite(ByVal sCaminho As String, ByVal bIncluirDados As Boolean)
+Public Sub GerarScriptSQLite(ByVal scaminho As String, ByVal bIncluirDados As Boolean)
     Dim oConn As New RC6.cConnection, oRsTabelas As RC6.cRecordset
     Dim sSqlPath As String, fNum As Integer
     
-    sSqlPath = Left(sCaminho, InStrRev(sCaminho, ".")) & "sql"
+    sSqlPath = Left(scaminho, InStrRev(scaminho, ".")) & "sql"
     fNum = FreeFile
     Open sSqlPath For Output As #fNum
     
-    oConn.OpenDB sCaminho
+    oConn.OpenDB scaminho
     
     Print #fNum, "BEGIN TRANSACTION;"
     
@@ -524,17 +589,17 @@ Public Function GetTipoADOX(ByVal adType As Long) As String
         Case Else:           GetTipoADOX = "TEXT(255)"
     End Select
 End Function
-Public Sub GerarScriptAccess(ByVal sCaminho As String, ByVal bIncluirDados As Boolean)
+Public Sub GerarScriptAccess(ByVal scaminho As String, ByVal bIncluirDados As Boolean)
     Dim cat As Object, tbl As Object, col As Object, idx As Object, fld As Object
     Dim conn As Object, rs As Object
     Dim sSqlPath As String, fNum As Integer
     
-    sSqlPath = Left(sCaminho, InStrRev(sCaminho, ".")) & "sql"
+    sSqlPath = Left(scaminho, InStrRev(scaminho, ".")) & "sql"
     fNum = FreeFile
     Open sSqlPath For Output As #fNum
     
     Set cat = CreateObject("ADOX.Catalog")
-    cat.ActiveConnection = GeraConexao(sCaminho)
+    cat.ActiveConnection = GeraConexao(scaminho)
     Set conn = cat.ActiveConnection
     
     For Each tbl In cat.Tables
@@ -1566,16 +1631,16 @@ Public Sub ProcessarPastaCompletaSchema(ByVal sFolder As String)
     Set fso = Nothing
 End Sub
 ' Função principal que orquestra a geração de SQL
-Public Sub GerarScriptsSQL(ByVal sCaminho As String, ByVal bIncluirDados As Boolean)
+Public Sub GerarScriptsSQL(ByVal scaminho As String, ByVal bIncluirDados As Boolean)
     
-    If EArquivoSQLite(sCaminho) Then
+    If EArquivoSQLite(scaminho) Then
         ' Lógica para SQLite
         ' Aqui você chamaria uma rotina que percorre o Schema do SQLite
         ' e monta as strings de CREATE/INSERT usando colScriptsPendentes.Add
-        GerarScriptSQLite sCaminho, bIncluirDados
+        GerarScriptSQLite scaminho, bIncluirDados
     Else
         ' Lógica para Access (ADOX)
-        GerarScriptAccess sCaminho, bIncluirDados
+        GerarScriptAccess scaminho, bIncluirDados
     End If
     
     ' Após preencher a coleção, você pode exibir no TxtInfo ou salvar em arquivo

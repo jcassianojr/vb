@@ -1,24 +1,24 @@
 VERSION 5.00
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form Frmbancos 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Gerador de Cofre de Senhas - VB96/VB6"
    ClientHeight    =   5796
    ClientLeft      =   48
    ClientTop       =   396
-   ClientWidth     =   5952
+   ClientWidth     =   6612
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    ScaleHeight     =   5796
-   ScaleWidth      =   5952
+   ScaleWidth      =   6612
    StartUpPosition =   2  'CenterScreen
    Begin VBCCR18.CommandButtonW cmdAtualizar 
       Height          =   612
-      Left            =   3720
+      Left            =   4080
       TabIndex        =   15
       Top             =   240
-      Width           =   2052
-      _ExtentX        =   3620
+      Width           =   1212
+      _ExtentX        =   2138
       _ExtentY        =   1080
       Appearance      =   0
       BackColor       =   -2147483643
@@ -34,8 +34,8 @@ Begin VB.Form Frmbancos
       TabIndex        =   14
       Tag             =   "cmbBancos"
       Top             =   360
-      Width           =   2052
-      _ExtentX        =   3620
+      Width           =   2292
+      _ExtentX        =   4043
       _ExtentY        =   508
       Text            =   "cmbBancos"
    End
@@ -87,7 +87,7 @@ Begin VB.Form Frmbancos
       Height          =   612
       Left            =   3960
       TabIndex        =   16
-      Top             =   3360
+      Top             =   3480
       Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   1080
@@ -103,7 +103,7 @@ Begin VB.Form Frmbancos
       Height          =   612
       Left            =   1680
       TabIndex        =   17
-      Top             =   4080
+      Top             =   4200
       Width           =   1332
       _ExtentX        =   2350
       _ExtentY        =   1080
@@ -119,7 +119,7 @@ Begin VB.Form Frmbancos
       Height          =   612
       Left            =   240
       TabIndex        =   18
-      Top             =   4080
+      Top             =   4200
       Width           =   1332
       _ExtentX        =   2350
       _ExtentY        =   1080
@@ -135,7 +135,7 @@ Begin VB.Form Frmbancos
       Height          =   612
       Left            =   3120
       TabIndex        =   19
-      Top             =   4080
+      Top             =   4200
       Width           =   1332
       _ExtentX        =   2350
       _ExtentY        =   1080
@@ -145,6 +145,46 @@ Begin VB.Form Frmbancos
       Caption         =   "Excluir Banco"
       Picture         =   "frmbancos.frx":1268
       PictureAndCaption=   -1  'True
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmddsn 
+      Height          =   612
+      Left            =   5400
+      TabIndex        =   20
+      Top             =   1080
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Dsn(ODBC)"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmbancos.frx":1702
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdsair 
+      Height          =   612
+      Left            =   5400
+      TabIndex        =   21
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmbancos.frx":185C
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
       Style           =   1
    End
    Begin VB.Label Label7 
@@ -205,15 +245,15 @@ Begin VB.Form Frmbancos
    End
    Begin VB.Line Line1 
       X1              =   240
-      X2              =   5760
+      X2              =   5280
       Y1              =   996
       Y2              =   996
    End
    Begin VB.Line Line2 
       X1              =   240
-      X2              =   5640
+      X2              =   5280
       Y1              =   5100
-      Y2              =   5100
+      Y2              =   5040
    End
    Begin VB.Label lblStatus 
       Alignment       =   2  'Center
@@ -235,6 +275,15 @@ Option Explicit
 
 Private Sub CommandButtonW5_Click()
 
+End Sub
+
+Private Sub cmddsn_Click()
+  frmCadastroDSN.Show vbModal, Me
+   
+End Sub
+
+Private Sub cmdsair_Click()
+  Unload Me
 End Sub
 
 Private Sub Form_Load()

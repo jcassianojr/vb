@@ -1,5 +1,6 @@
 VERSION 5.00
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
+Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Begin VB.Form frmCadastroDSN 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Assistente de Configuração de DSN"
@@ -148,6 +149,50 @@ Begin VB.Form frmCadastroDSN
       PictureAndCaption=   -1  'True
       Style           =   1
    End
+   Begin VBCCR18.CommandButtonW CmdEscdir 
+      Height          =   372
+      Left            =   7200
+      TabIndex        =   24
+      Top             =   2280
+      Width           =   612
+      _ExtentX        =   1080
+      _ExtentY        =   656
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmCadastroDSN.frx":0A34
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdEscolheOrigem 
+      Height          =   372
+      Left            =   6480
+      TabIndex        =   25
+      Top             =   2280
+      Width           =   612
+      _ExtentX        =   1080
+      _ExtentY        =   656
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmCadastroDSN.frx":0FCE
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin vbExtra.CommonDialogEx CommonDialog1 
+      Left            =   7800
+      Top             =   3000
+      _ExtentX        =   720
+      _ExtentY        =   720
+      MaxFileSize     =   255
+      FontName        =   ""
+   End
    Begin VB.Label lblStatus 
       Caption         =   "Label1"
       Height          =   372
@@ -242,6 +287,44 @@ End Sub
 
 Private Sub CmdConfigurarPeloIni_Click()
    configuraodbc
+End Sub
+
+Private Sub CmdEscdir_Click()
+Dim sCaminho As String
+'    sCaminho = SelecionarPasta("Selecione a pasta contendo dos arquivos MDB:")
+    CommonDialog1.ShowFolder
+    sCaminho = CommonDialog1.FolderName
+    
+   If sCaminho <> "" Then
+        txtDB.Text = sCaminho
+    End If
+End Sub
+
+Private Sub CmdEscolheOrigem_Click()
+   On Error GoTo Erro
+    
+    CommonDialog1.Filter = "Bancos de Dados (*.mdb;*.accdb;*.sqlite;*.db;*.db3;*.fossil)|*.mdb;*.accdb;*.sqlite;*.db;*.db3;*.fossil|" & _
+                  "Access (*.mdb;*.accdb)|*.mdb;*.accdb|" & _
+                  "SQLite (*.sqlite;*.db;*.db3;*.fossil)|*.sqlite;*.db;*.db3;*.fossil|" & _
+                  "Todos os Ficheiros (*.*)|*.*"
+                           
+    CommonDialog1.FilterIndex = 1
+    CommonDialog1.DialogTitle = "Selecione o arquivo de Origem"
+    CommonDialog1.filename = ""
+    CommonDialog1.ShowOpen
+    
+    ' Verifica se o usuário selecionou um arquivo e cancelou
+    If CommonDialog1.filename <> "" Then
+        txtDB.Text = CommonDialog1.filename
+    End If
+    
+        
+    Exit Sub
+Erro:
+    ' Captura o erro caso o usuário aperte Cancelar
+    If Err.Number <> 32755 Then ' 32755 é o código do botão cancelar
+        MsgBox "Erro ao selecionar arquivo: " & Err.Description, vbCritical
+    End If
 End Sub
 
 Private Sub cmdRevelar_Click()
