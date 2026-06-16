@@ -1,38 +1,38 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmFemeaApu 
    Caption         =   "Apuracao Femea"
-   ClientHeight    =   6630
+   ClientHeight    =   6624
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   9615
+   ClientTop       =   348
+   ClientWidth     =   9612
    Icon            =   "frmFemeaApu.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6630
-   ScaleWidth      =   9615
+   ScaleHeight     =   6624
+   ScaleWidth      =   9612
    StartUpPosition =   2  'CenterScreen
    Begin VBCCR18.DTPicker DTPicker2 
       Height          =   375
       Left            =   4200
-      TabIndex        =   47
+      TabIndex        =   46
       Top             =   120
       Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   661
+      _ExtentX        =   2561
+      _ExtentY        =   656
       Value           =   44285
       AllowUserInput  =   -1  'True
    End
    Begin VBCCR18.DTPicker DTPicker1 
       Height          =   375
       Left            =   2520
-      TabIndex        =   46
+      TabIndex        =   45
       Top             =   120
       Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   661
+      _ExtentX        =   2561
+      _ExtentY        =   656
       Value           =   44285
       AllowUserInput  =   -1  'True
    End
@@ -41,8 +41,8 @@ Begin VB.Form frmFemeaApu
       Left            =   5760
       Top             =   960
       Width           =   2535
-      _ExtentX        =   4471
-      _ExtentY        =   450
+      _ExtentX        =   4466
+      _ExtentY        =   445
    End
    Begin VB.CommandButton CmdApurar 
       Caption         =   "Checagem "
@@ -70,11 +70,11 @@ Begin VB.Form frmFemeaApu
       TabIndex        =   14
       Top             =   1440
       Width           =   9255
-      _ExtentX        =   16325
-      _ExtentY        =   8916
+      _ExtentX        =   16320
+      _ExtentY        =   8911
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -82,7 +82,7 @@ Begin VB.Form frmFemeaApu
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
-      ControlVersion  =   9
+      ControlVersion  =   13
       TabCaption(0)   =   "SAC RDP FAIXAS"
       Tab(0).ControlCount=   22
       Tab(0).Control(0)=   "text(4)"
@@ -226,8 +226,8 @@ Begin VB.Form frmFemeaApu
          TabStop         =   0   'False
          Top             =   1320
          Width           =   7155
-         _ExtentX        =   12621
-         _ExtentY        =   4471
+         _ExtentX        =   12615
+         _ExtentY        =   4466
       End
       Begin VBFLXGRD18.VBFlexGrid Grid10 
          Height          =   4335
@@ -236,8 +236,8 @@ Begin VB.Form frmFemeaApu
          TabStop         =   0   'False
          Top             =   480
          Width           =   7635
-         _ExtentX        =   13467
-         _ExtentY        =   7646
+         _ExtentX        =   13462
+         _ExtentY        =   7641
       End
       Begin VBFLXGRD18.VBFlexGrid GridOpe 
          Height          =   4335
@@ -246,23 +246,23 @@ Begin VB.Form frmFemeaApu
          TabStop         =   0   'False
          Top             =   480
          Width           =   7635
-         _ExtentX        =   13467
-         _ExtentY        =   7646
+         _ExtentX        =   13462
+         _ExtentY        =   7641
       End
       Begin XPControls.XPButton Cmdeditar 
          Height          =   435
          Left            =   -67200
-         TabIndex        =   41
+         TabIndex        =   40
          TabStop         =   0   'False
          Top             =   480
          Width           =   1275
-         _ExtentX        =   2249
-         _ExtentY        =   767
+         _ExtentX        =   2244
+         _ExtentY        =   762
          Picture         =   "frmFemeaApu.frx":058A
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -273,17 +273,17 @@ Begin VB.Form frmFemeaApu
       Begin XPControls.XPButton Command3 
          Height          =   435
          Left            =   -67200
-         TabIndex        =   42
+         TabIndex        =   41
          TabStop         =   0   'False
          Top             =   480
          Width           =   1275
-         _ExtentX        =   2249
-         _ExtentY        =   767
+         _ExtentX        =   2244
+         _ExtentY        =   762
          Picture         =   "frmFemeaApu.frx":0B24
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -294,17 +294,17 @@ Begin VB.Form frmFemeaApu
       Begin XPControls.XPButton EditSeq 
          Height          =   435
          Left            =   7440
-         TabIndex        =   43
+         TabIndex        =   42
          TabStop         =   0   'False
          Top             =   2040
          Width           =   1275
-         _ExtentX        =   2249
-         _ExtentY        =   767
+         _ExtentX        =   2244
+         _ExtentY        =   762
          Picture         =   "frmFemeaApu.frx":10BE
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -315,17 +315,17 @@ Begin VB.Form frmFemeaApu
       Begin XPControls.XPButton Command2 
          Height          =   435
          Left            =   7440
-         TabIndex        =   44
+         TabIndex        =   43
          TabStop         =   0   'False
          Top             =   1560
          Width           =   1275
-         _ExtentX        =   2249
-         _ExtentY        =   767
+         _ExtentX        =   2244
+         _ExtentY        =   762
          Picture         =   "frmFemeaApu.frx":1658
          Caption         =   "Apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -336,17 +336,17 @@ Begin VB.Form frmFemeaApu
       Begin XPControls.XPButton Command1 
          Height          =   435
          Left            =   7440
-         TabIndex        =   45
+         TabIndex        =   44
          TabStop         =   0   'False
          Top             =   1080
          Width           =   1275
-         _ExtentX        =   2249
-         _ExtentY        =   767
+         _ExtentX        =   2244
+         _ExtentY        =   762
          Picture         =   "frmFemeaApu.frx":1BF2
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -540,7 +540,7 @@ Begin VB.Form frmFemeaApu
       Enabled         =   0   'False
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   9.75
+         Size            =   9.6
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -556,37 +556,17 @@ Begin VB.Form frmFemeaApu
       Top             =   120
       Width           =   975
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   8160
-      TabIndex        =   38
-      Top             =   120
-      Width           =   1155
-      _ExtentX        =   2037
-      _ExtentY        =   767
-      Picture         =   "frmFemeaApu.frx":218C
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin VBCCR18.SpinBox mes 
       Height          =   495
       Left            =   120
-      TabIndex        =   39
+      TabIndex        =   38
       Top             =   840
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   873
+      _ExtentX        =   1291
+      _ExtentY        =   868
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   13.5
+         Size            =   13.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -600,14 +580,14 @@ Begin VB.Form frmFemeaApu
    Begin VBCCR18.SpinBox ano 
       Height          =   495
       Left            =   1080
-      TabIndex        =   40
+      TabIndex        =   39
       Top             =   840
       Width           =   975
-      _ExtentX        =   1720
-      _ExtentY        =   873
+      _ExtentX        =   1715
+      _ExtentY        =   868
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   13.5
+         Size            =   13.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -618,6 +598,26 @@ Begin VB.Form frmFemeaApu
       Max             =   2200
       Value           =   1950
       ThousandsSeparator=   0   'False
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   8400
+      TabIndex        =   47
+      Top             =   0
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmFemeaApu.frx":218C
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
@@ -756,7 +756,7 @@ Private Sub CmdApurar_Click(Index As Integer)
   Dim cSQLSAC, cSQL2 As String
   Dim cARQ As String
   Dim cSQL As String
-  Dim cTabela As String
+  Dim cTABELA As String
   Dim cCODIGO As String
 '  Dim lPULA As Variant
   Dim dINI As Date
@@ -772,7 +772,7 @@ Private Sub CmdApurar_Click(Index As Integer)
   lRDP = False
   dINI = DTPicker1.Value
   dFIM = DTPicker2.Value
-  nSEQ = FixInt(tEXT(0))
+  nSEQ = FixInt(Text(0))
   nMES = FixInt(mes.Value)
   nANO = FixInt(ano.Value)
 
@@ -817,7 +817,7 @@ Private Sub CmdApurar_Click(Index As Integer)
     While Not oRSFEMEA.EOF
       nPF = oRSFEMEA("PF")
       nPRONUM = FixNum(oRSFEMEA("PRONUM"))
-      DIZAPU.tEXT = nPF & "/" & nPRONUM
+      DIZAPU.Text = nPF & "/" & nPRONUM
       DIZAPU.Refresh
       cSQL = "SELECT PF,PRONUM FROM FEMPF WHERE PF=" & nPF & " and pronum=" & nPRONUM
       oRSFEME2.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
@@ -841,7 +841,7 @@ Private Sub CmdApurar_Click(Index As Integer)
     oRSPF.Open cSQL, oDBPF
     While Not oRSPF.EOF
       nPF = oRSPF("PF")
-      DIZAPU.tEXT = nPF
+      DIZAPU.Text = nPF
       DIZAPU.Refresh
       'cSQL = "DELETE FROM FEMEA WHERE PF=" & nPF
       cSQL = "DELETE FROM FEMEAPAD WHERE PF=" & nPF
@@ -914,19 +914,19 @@ Private Sub CmdApurar_Click(Index As Integer)
   'rpn faixas
   If MDG("Apurar Femea RPN-Faixas") Then
     '        cSQL = "SELECT PF,EXCRPN FROM PF WHERE PF=" & nPF checar excprn/bloqueados melhorar selects abaixo
-    tEXT(4) = 0
-    tEXT(5) = 0
-    tEXT(6) = 0
-    tEXT(7) = 0
-    tEXT(8) = 0
-    tEXT(9) = 0
-    tEXT(10) = 0
-    tEXT(11) = 0
+    Text(4) = 0
+    Text(5) = 0
+    Text(6) = 0
+    Text(7) = 0
+    Text(8) = 0
+    Text(9) = 0
+    Text(10) = 0
+    Text(11) = 0
 
     Set oDBFEMEA = New ADODB.Connection
     Set oRSFEMEA = New ADODB.Recordset
     For x = 1 To 3
-      cTabela = "FEMEA"
+      cTABELA = "FEMEA"
       oDBFEMEA.ConnectionTimeout = 120
       If x = 1 Or x = 3 Then
         oDBFEMEA.Open GeracArq(cARQFEMEA)
@@ -934,53 +934,53 @@ Private Sub CmdApurar_Click(Index As Integer)
         oDBFEMEA.Open GeracArq(cARQPF)
       End If
       If x = 1 Then
-        cTabela = "FEMEAPAD"             '1 Femea Padrao
+        cTABELA = "FEMEAPAD"             '1 Femea Padrao
       End If
       If x = 2 Then
-        cTabela = "FEMEA"                '2 femea normal
+        cTABELA = "FEMEA"                '2 femea normal
       End If
       If x = 3 Then
-        cTabela = "FEMAVU"               '3 Femea Avulso
+        cTABELA = "FEMAVU"               '3 Femea Avulso
       End If
       DizerBarra "carregando femea,indices <21"
-      cSQL = "SELECT count(indris) FROM " & cTabela & " where indris<21 AND NOT BLOQUEADO"
+      cSQL = "SELECT count(indris) FROM " & cTABELA & " where indris<21 AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(4) = tEXT(4) + FixInt(oRSFEMEA(0))
+      Text(4) = Text(4) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >21 <41"
-      cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>21 AND indris<41 AND NOT BLOQUEADO"
+      cSQL = "SELECT count(indris) FROM " & cTABELA & " where indris>21 AND indris<41 AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(5) = tEXT(5) + FixInt(oRSFEMEA(0))
+      Text(5) = Text(5) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >40 <61"
-      cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>40 AND indris<61 AND NOT BLOQUEADO"
+      cSQL = "SELECT count(indris) FROM " & cTABELA & " where indris>40 AND indris<61 AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(6) = tEXT(6) + FixInt(oRSFEMEA(0))
+      Text(6) = Text(6) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >60 <81"
-      cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>60 AND indris<81 AND NOT BLOQUEADO"
+      cSQL = "SELECT count(indris) FROM " & cTABELA & " where indris>60 AND indris<81 AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(7) = tEXT(7) + FixInt(oRSFEMEA(0))
+      Text(7) = Text(7) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >80 <101"
-      cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>80 AND indris<101 AND NOT BLOQUEADO"
+      cSQL = "SELECT count(indris) FROM " & cTABELA & " where indris>80 AND indris<101 AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(8) = tEXT(8) + FixInt(oRSFEMEA(0))
+      Text(8) = Text(8) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >100 <121"
-      cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>100 AND indris<121  AND NOT BLOQUEADO"
+      cSQL = "SELECT count(indris) FROM " & cTABELA & " where indris>100 AND indris<121  AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(9) = tEXT(9) + FixInt(oRSFEMEA(0))
+      Text(9) = Text(9) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >120 <141"
-      cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>120 AND indris<141  AND NOT BLOQUEADO"
+      cSQL = "SELECT count(indris) FROM " & cTABELA & " where indris>120 AND indris<141  AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(10) = tEXT(10) + FixInt(oRSFEMEA(0))
+      Text(10) = Text(10) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       DizerBarra "carregando femea,indices >140"
-      cSQL = "SELECT count(indris) FROM " & cTabela & " where indris>140  AND NOT BLOQUEADO"
+      cSQL = "SELECT count(indris) FROM " & cTABELA & " where indris>140  AND NOT BLOQUEADO"
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
-      tEXT(11) = tEXT(11) + FixInt(oRSFEMEA(0))
+      Text(11) = Text(11) + FixInt(oRSFEMEA(0))
       oRSFEMEA.Close
       oDBFEMEA.Close
     Next x
@@ -1010,18 +1010,18 @@ Private Sub CmdApurar_Click(Index As Integer)
       End If
       If x = 1 Then                        '1 Femea Padrao
         cTIPO = "P"
-        cTabela = "FEMCAU"
+        cTABELA = "FEMCAU"
       End If
       If x = 2 Then                        '2 femea normal
         cTIPO = "N"
-        cTabela = "FEMEA"
+        cTABELA = "FEMEA"
       End If
       If x = 3 Then                        ' 3 Femea Avulso/complemtar
-        cTabela = "FEMAVU"
+        cTABELA = "FEMAVU"
         cTIPO = "C"
       End If
-      DizerBarra "Apurando 10 Mais " & cTabela
-      cSQL = "SELECT TOP 10 * FROM " & cTabela & " WHERE NOT BLOQUEADO ORDER BY INDRIS DESC "
+      DizerBarra "Apurando 10 Mais " & cTABELA
+      cSQL = "SELECT TOP 10 * FROM " & cTABELA & " WHERE NOT BLOQUEADO ORDER BY INDRIS DESC "
       oRSFEMEA.Open cSQL, oDBFEMEA, adOpenForwardOnly, adLockReadOnly
       oRSFEME2.Open "FEMRPNT", oDBPF, adOpenDynamic, adLockOptimistic
       While Not oRSFEMEA.EOF
@@ -1455,7 +1455,7 @@ Private Sub CmdApurar_Click(Index As Integer)
     oRSPF.Close
   End If
 
-  tEXT(12) = Today()
+  Text(12) = Today()
   apurado = 1
   Screen.MousePointer = vbDefault
   Barra.Value = 0
@@ -1641,7 +1641,7 @@ Private Sub Command3_Click()
   nPFTMP = FixInt(GridOpe)
   GridOpe.Col = 1
   nPROTMP = FixInt(GridOpe)
-  ePASS01 = "SELECT * FROM FEMRPNO WHERE SEQ=" & FixInt(tEXT(0)) & " AND PF=" & nPFTMP & " AND PRONUM=" & nPROTMP
+  ePASS01 = "SELECT * FROM FEMRPNO WHERE SEQ=" & FixInt(Text(0)) & " AND PF=" & nPFTMP & " AND PRONUM=" & nPROTMP
   FrmFEMRPNO.Show vbModal, Me
 
 End Sub
@@ -1664,7 +1664,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 
   If MDG("Gravar e Sair", "Gravando ") Then
     For nITEM = 0 To 12
-      aVAL(nITEM) = tEXT(nITEM)
+      aVAL(nITEM) = Text(nITEM)
     Next nITEM
     aVAL(13) = DTPicker1
     aVAL(14) = DTPicker2
@@ -1704,12 +1704,12 @@ Private Sub Form_Load()
   aPAD = Array(0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, "", "", "", False, False, False)
   aVAL = PegSQL(cARQFEMEA, cSQLUSO, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To 12
-    tEXT(nITEM) = aVAL(nITEM)
+    Text(nITEM) = aVAL(nITEM)
   Next nITEM
   If aVAL(13) <> "" Then DTPicker1 = aVAL(13)
   If aVAL(14) <> "" Then DTPicker2 = aVAL(14)
-  mes.Value = tEXT(1)
-  ano.Value = tEXT(2)
+  mes.Value = Text(1)
+  ano.Value = Text(2)
   Anual = aVAL(15)
   Semestral = aVAL(16)
   apurado = aVAL(17)
@@ -1746,7 +1746,7 @@ End Sub
 Private Sub filgrid10()
   Dim cSQL As String
   DizerBarra "Carregando RPNT"
-  cSQL = "SELECT TIPOAPU, PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU,50 FROM FEMRPNT WHERE SEQ=" & FixInt(tEXT(0)) & " ORDER BY INDRIS DESC"
+  cSQL = "SELECT TIPOAPU, PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU,50 FROM FEMRPNT WHERE SEQ=" & FixInt(Text(0)) & " ORDER BY INDRIS DESC"
   MontaGrid Grid10, 11, Array(400, 400, 400, 400, 400, 400, 400, 400, 300, 2500, 2500), Array("TIPOAPU", "PF", "ITEM", "RPN", "Pro", "Fal", "Efe", "Cau", "Man", "Efeito", "Causa"), Array("TIPOAPU", "PF", "ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub
@@ -1754,7 +1754,7 @@ End Sub
 Private Sub filgridope()
   Dim cSQL As String
   DizerBarra "Carregando RPNO"
-  cSQL = "SELECT PF, PRONUM, TOTRPN, TOTCAU, TOTM40, MAIRPN, TOTFX01, TOTFX02, TOTFX03, TOTRPN01, TOTRPN02, TOTRPN03 FROM FEMRPNO WHERE SEQ=" & FixInt(tEXT(0)) & " ORDER BY PF,PRONUM"
+  cSQL = "SELECT PF, PRONUM, TOTRPN, TOTCAU, TOTM40, MAIRPN, TOTFX01, TOTFX02, TOTFX03, TOTRPN01, TOTRPN02, TOTRPN03 FROM FEMRPNO WHERE SEQ=" & FixInt(Text(0)) & " ORDER BY PF,PRONUM"
   MontaGridUltra GridOpe, 12, Array(500, 500, 800, 500, 500, 500, 500, 500, 500, 800, 800, 800), Array("PF", "Pro", "Tot RPN", "Cau", ">40", "Maior", "<40", "40-100", ">100", "Ant", "Ant", "Ant"), Array("PF", "PRONUM", "TOTRPN", "TOTCAU", "TOTM40", "MAIRPN", "TOTFX01", "TOTFX02", "TOTFX03", "TOTRPN01", "TOTRPN02", "TOTRPN03"), cARQFEMEA, cSQL
   DizerBarra ""
 End Sub

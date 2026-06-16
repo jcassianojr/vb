@@ -1,21 +1,20 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmfemea 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PF/FMEA"
    ClientHeight    =   9600
-   ClientLeft      =   1095
-   ClientTop       =   330
-   ClientWidth     =   12765
+   ClientLeft      =   1092
+   ClientTop       =   336
+   ClientWidth     =   12768
    Icon            =   "Frmfemea.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   9600
-   ScaleWidth      =   12765
+   ScaleWidth      =   12768
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox Txtfields 
@@ -229,12 +228,12 @@ Begin VB.Form frmfemea
       TabIndex        =   28
       Top             =   1680
       Width           =   12375
-      _ExtentX        =   21828
-      _ExtentY        =   13361
+      _ExtentX        =   21823
+      _ExtentY        =   13356
       Tabs            =   17
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -243,7 +242,7 @@ Begin VB.Form frmfemea
       EndProperty
       TabsPerRow      =   6
       TabHeight       =   529
-      ControlVersion  =   9
+      ControlVersion  =   13
       TabCaption(0)   =   "Producao"
       Tab(0).ControlCount=   19
       Tab(0).Control(0)=   "CmdOrdFem(11)"
@@ -508,11 +507,11 @@ Begin VB.Form frmfemea
       Begin VBCCR18.DTPicker DTPicker2 
          Height          =   375
          Left            =   -72960
-         TabIndex        =   256
+         TabIndex        =   254
          Top             =   2400
          Width           =   1695
-         _ExtentX        =   2990
-         _ExtentY        =   661
+         _ExtentX        =   2985
+         _ExtentY        =   656
          Value           =   44285
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
@@ -520,11 +519,11 @@ Begin VB.Form frmfemea
       Begin VBCCR18.DTPicker DTPicker1 
          Height          =   375
          Left            =   -68880
-         TabIndex        =   255
+         TabIndex        =   253
          Top             =   1920
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   661
+         _ExtentX        =   2773
+         _ExtentY        =   656
          Value           =   44285
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
@@ -534,7 +533,7 @@ Begin VB.Form frmfemea
          Index           =   33
          Left            =   -73800
          MaxLength       =   100
-         TabIndex        =   252
+         TabIndex        =   250
          Top             =   3840
          Width           =   8055
       End
@@ -543,7 +542,7 @@ Begin VB.Form frmfemea
          Index           =   32
          Left            =   -73800
          MaxLength       =   100
-         TabIndex        =   251
+         TabIndex        =   249
          Top             =   3360
          Width           =   2415
       End
@@ -551,7 +550,7 @@ Begin VB.Form frmfemea
          Caption         =   "Desconsiderar Apuraçao RPN"
          Height          =   255
          Left            =   -67080
-         TabIndex        =   250
+         TabIndex        =   248
          TabStop         =   0   'False
          Top             =   2760
          Width           =   2475
@@ -1450,8 +1449,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   3420
          Width           =   8655
-         _ExtentX        =   15266
-         _ExtentY        =   2143
+         _ExtentX        =   15261
+         _ExtentY        =   2138
       End
       Begin VB.CommandButton escidfolha 
          Height          =   495
@@ -1543,7 +1542,7 @@ Begin VB.Form frmfemea
       Begin VB.TextBox txtRPN 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   400
             Underline       =   0   'False
@@ -2073,7 +2072,7 @@ Begin VB.Form frmfemea
          Caption         =   "Efeitos"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   13.5
+            Size            =   13.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -2238,7 +2237,7 @@ Begin VB.Form frmfemea
       Begin VB.CommandButton CMDSIG 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -2325,8 +2324,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1380
          Width           =   9255
-         _ExtentX        =   16325
-         _ExtentY        =   5741
+         _ExtentX        =   16320
+         _ExtentY        =   5736
          Cols            =   8
       End
       Begin VBFLXGRD18.VBFlexGrid gridrev 
@@ -2336,8 +2335,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   3360
          Width           =   7455
-         _ExtentX        =   13150
-         _ExtentY        =   2355
+         _ExtentX        =   13145
+         _ExtentY        =   2350
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1095
@@ -2347,8 +2346,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   4680
          Width           =   7455
-         _ExtentX        =   13150
-         _ExtentY        =   1931
+         _ExtentX        =   13145
+         _ExtentY        =   1926
       End
       Begin VBFLXGRD18.VBFlexGrid gridopr 
          Height          =   2955
@@ -2357,8 +2356,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1140
          Width           =   9075
-         _ExtentX        =   16007
-         _ExtentY        =   5212
+         _ExtentX        =   16002
+         _ExtentY        =   5207
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   2115
@@ -2368,8 +2367,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1140
          Width           =   8655
-         _ExtentX        =   15266
-         _ExtentY        =   3731
+         _ExtentX        =   15261
+         _ExtentY        =   3725
       End
       Begin VBFLXGRD18.VBFlexGrid gridmsrd 
          Height          =   2955
@@ -2378,8 +2377,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1200
          Width           =   8715
-         _ExtentX        =   15372
-         _ExtentY        =   5212
+         _ExtentX        =   15367
+         _ExtentY        =   5207
       End
       Begin VBFLXGRD18.VBFlexGrid GridPRO 
          Height          =   1155
@@ -2388,8 +2387,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1380
          Width           =   4875
-         _ExtentX        =   8599
-         _ExtentY        =   2037
+         _ExtentX        =   8594
+         _ExtentY        =   2032
       End
       Begin VBFLXGRD18.VBFlexGrid GRIDFAL 
          Height          =   1155
@@ -2398,8 +2397,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   2820
          Width           =   4875
-         _ExtentX        =   8599
-         _ExtentY        =   2037
+         _ExtentX        =   8594
+         _ExtentY        =   2032
       End
       Begin VBFLXGRD18.VBFlexGrid GridPadPF 
          Height          =   2715
@@ -2408,8 +2407,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1380
          Width           =   2115
-         _ExtentX        =   3731
-         _ExtentY        =   4789
+         _ExtentX        =   3725
+         _ExtentY        =   4784
       End
       Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3375
@@ -2419,8 +2418,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1380
          Width           =   9375
-         _ExtentX        =   16536
-         _ExtentY        =   5953
+         _ExtentX        =   16531
+         _ExtentY        =   5948
       End
       Begin VBFLXGRD18.VBFlexGrid Gridfemprecad 
          Height          =   4095
@@ -2429,8 +2428,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1020
          Width           =   8175
-         _ExtentX        =   14420
-         _ExtentY        =   7223
+         _ExtentX        =   14415
+         _ExtentY        =   7218
       End
       Begin VBFLXGRD18.VBFlexGrid GridPad 
          Height          =   4095
@@ -2439,8 +2438,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1980
          Width           =   10575
-         _ExtentX        =   18653
-         _ExtentY        =   7223
+         _ExtentX        =   18648
+         _ExtentY        =   7218
       End
       Begin VBFLXGRD18.VBFlexGrid Grid10 
          Height          =   1695
@@ -2449,8 +2448,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1500
          Width           =   8835
-         _ExtentX        =   15584
-         _ExtentY        =   2990
+         _ExtentX        =   15579
+         _ExtentY        =   2985
       End
       Begin VBFLXGRD18.VBFlexGrid GridOpe 
          Height          =   1695
@@ -2459,8 +2458,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   3420
          Width           =   8835
-         _ExtentX        =   15584
-         _ExtentY        =   2990
+         _ExtentX        =   15579
+         _ExtentY        =   2985
       End
       Begin VBFLXGRD18.VBFlexGrid GrdQsbLep 
          Height          =   5115
@@ -2469,8 +2468,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1020
          Width           =   8955
-         _ExtentX        =   15796
-         _ExtentY        =   9022
+         _ExtentX        =   15790
+         _ExtentY        =   9017
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1995
@@ -2480,8 +2479,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   5040
          Width           =   9195
-         _ExtentX        =   16219
-         _ExtentY        =   3519
+         _ExtentX        =   16214
+         _ExtentY        =   3514
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1515
@@ -2491,8 +2490,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   4740
          Width           =   9315
-         _ExtentX        =   16431
-         _ExtentY        =   2672
+         _ExtentX        =   16425
+         _ExtentY        =   2667
       End
       Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3255
@@ -2502,8 +2501,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1380
          Width           =   9255
-         _ExtentX        =   16325
-         _ExtentY        =   5741
+         _ExtentX        =   16320
+         _ExtentY        =   5736
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1635
@@ -2513,8 +2512,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   4620
          Width           =   9315
-         _ExtentX        =   16431
-         _ExtentY        =   2884
+         _ExtentX        =   16425
+         _ExtentY        =   2879
       End
       Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3255
@@ -2524,8 +2523,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1380
          Width           =   9255
-         _ExtentX        =   16325
-         _ExtentY        =   5741
+         _ExtentX        =   16320
+         _ExtentY        =   5736
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1635
@@ -2535,8 +2534,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   4620
          Width           =   9315
-         _ExtentX        =   16431
-         _ExtentY        =   2884
+         _ExtentX        =   16425
+         _ExtentY        =   2879
       End
       Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3255
@@ -2546,8 +2545,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1140
          Width           =   9255
-         _ExtentX        =   16325
-         _ExtentY        =   5741
+         _ExtentX        =   16320
+         _ExtentY        =   5736
       End
       Begin VBFLXGRD18.VBFlexGrid gridpfpadhist 
          Height          =   2715
@@ -2556,8 +2555,8 @@ Begin VB.Form frmfemea
          TabStop         =   0   'False
          Top             =   1140
          Width           =   2115
-         _ExtentX        =   3731
-         _ExtentY        =   4789
+         _ExtentX        =   3725
+         _ExtentY        =   4784
       End
       Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3255
@@ -2566,8 +2565,8 @@ Begin VB.Form frmfemea
          TabIndex        =   233
          Top             =   1440
          Width           =   9255
-         _ExtentX        =   16325
-         _ExtentY        =   5741
+         _ExtentX        =   16320
+         _ExtentY        =   5736
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1515
@@ -2576,15 +2575,15 @@ Begin VB.Form frmfemea
          TabIndex        =   236
          Top             =   4800
          Width           =   9255
-         _ExtentX        =   16325
-         _ExtentY        =   2672
+         _ExtentX        =   16320
+         _ExtentY        =   2667
       End
       Begin VB.Label Label14 
          Caption         =   "Projeto:"
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -74880
-         TabIndex        =   254
+         TabIndex        =   252
          Top             =   3840
          Width           =   855
       End
@@ -2593,7 +2592,7 @@ Begin VB.Form frmfemea
          ForeColor       =   &H00C00000&
          Height          =   255
          Left            =   -74880
-         TabIndex        =   253
+         TabIndex        =   251
          Top             =   3360
          Width           =   855
       End
@@ -2798,47 +2797,45 @@ Begin VB.Form frmfemea
          Width           =   975
       End
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   8760
-      TabIndex        =   248
-      TabStop         =   0   'False
-      Top             =   240
-      Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   767
-      Picture         =   "Frmfemea.frx":3CEE
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
       Left            =   10320
-      TabIndex        =   249
-      TabStop         =   0   'False
+      TabIndex        =   255
       Top             =   240
-      Width           =   1395
-      _ExtentX        =   2461
-      _ExtentY        =   767
-      Picture         =   "Frmfemea.frx":4288
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "Frmfemea.frx":3CEE
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   11520
+      TabIndex        =   256
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "Frmfemea.frx":4288
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "Tipo"
@@ -3298,7 +3295,7 @@ Private Sub CmdEdiPad_Click(Index As Integer)
   Dim cDIZ As String
 
   If Index = 6 Or Index = 7 Or Index = 8 Then
-    cSIG = txtsigi.tEXT
+    cSIG = txtsigi.Text
     If Len(cSIG) = 0 Then
       Alert ("Siginificativa Nao Escolhida")
       Exit Sub
@@ -3739,7 +3736,7 @@ Private Sub CmdNovaREV_Click()
   End If
 
 
-  If Len(TXTFIELDS(23).tEXT) > 0 Then          'corrige erro importacao protheus data em branco
+  If Len(TXTFIELDS(23).Text) > 0 Then          'corrige erro importacao protheus data em branco
     If TXTFIELDS(23) > Today() Then
       Alert ("Data Revisao Anterior Maior que Data do Sistema")
       Exit Sub
@@ -3777,7 +3774,7 @@ Private Sub CmdNovaREV_Click()
 
 
 
-  eRETU02 = "PF:" & TXTPF.tEXT & Chr(13) & Chr(10)
+  eRETU02 = "PF:" & TXTPF.Text & Chr(13) & Chr(10)
   eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
   eRETU02 = eRETU02 & " Data:" & Fdata(dDATAREV) & Chr(13) & Chr(10)
   MAILENV "FEM00001", eRETU02
@@ -4050,7 +4047,7 @@ Private Sub RevisaoFemea(ByVal Index As Integer)
     'End If
 
     If FixNum(aVAL(52)) = 0 Then             'revisao do femea checar em branco pois historio pode ter varias versoes
-      aVAL(52) = FixNum(TXTFIELDS(12).tEXT)
+      aVAL(52) = FixNum(TXTFIELDS(12).Text)
     End If
 
 
@@ -4305,8 +4302,8 @@ Private Sub CmdVerApu_Click()
   Dim nMES As Integer
   Dim nANO As Integer
   DizerBarra "carregando apuracoes"
-  nMES = FixInt(tEXT(1))
-  nANO = FixInt(tEXT(2))
+  nMES = FixInt(Text(1))
+  nANO = FixInt(Text(2))
   cSQL = "SELECT PF, ITEM, INDRIS, PRONUM, FALNUM, EFENUM, CAUNUM, ALTMAN, FALEFE, FALCAU FROM FEMRPNT WHERE ANO=" & nANO & " AND MES=" & nMES & " AND PF=" & nPF & " ORDER BY PF,INDRIS"
   MontaGridFast Grid10, 10, Array(400, 400, 400, 400, 400, 400, 400, 300, 2500, 2500), Array("PF", "ITEM", "RPN", "NºPro", "NºFal", "NºEfe", "NºCau", "Man", "Efeito", "Causa"), Array("PF", "ITEM", "INDRIS", "PRONUM", "FALNUM", "EFENUM", "CAUNUM", "ALTMAN", "FALEFE", "FALCAU"), cARQFEMEA, cSQL
   DizerBarra "carregando apuracoes RPN"
@@ -5089,9 +5086,9 @@ Private Sub escidfolha_Click(Index As Integer)
   If lRETU Then
     Select Case Index
     Case 0, 10
-      TXTFIELDS(7).tEXT = TXTFIELDS(7).tEXT & " , " & Trim(MMCase(eRETU02))
+      TXTFIELDS(7).Text = TXTFIELDS(7).Text & " , " & Trim(MMCase(eRETU02))
     Case 1, 11
-      TXTFIELDS(8).tEXT = TXTFIELDS(8).tEXT & " , " & Trim(MMCase(eRETU02))
+      TXTFIELDS(8).Text = TXTFIELDS(8).Text & " , " & Trim(MMCase(eRETU02))
     End Select
   End If
 End Sub
@@ -5187,8 +5184,8 @@ Private Sub Form_Load()
   cORDREVI = "FXSEQ,FXSSQ,FXITEM,FXITEMS,FEMEAREV"
 
   Filopr                                       'antes das relat
-  tEXT(1) = CStr(Month(Date))
-  tEXT(2) = CStr(Year(Date))
+  Text(1) = CStr(Month(Date))
+  Text(2) = CStr(Year(Date))
   FilQSBLEP
   FilRelat (0)
   FilRelat (1)
@@ -5384,19 +5381,19 @@ Private Sub FILGRIdPAD()
 End Sub
 
 Private Sub maisano_Click()
-  tEXT(2) = CStr(IncDec(tEXT(2), 1, 1900, 2300))
+  Text(2) = CStr(INCDEC(Text(2), 1, 1900, 2300))
 End Sub
 
 Private Sub maismes_Click()
-  tEXT(1) = CStr(IncDec(tEXT(1), 1, 1, 12))
+  Text(1) = CStr(INCDEC(Text(1), 1, 1, 12))
 End Sub
 
 Private Sub menosano_Click()
-  tEXT(2) = CStr(IncDec(tEXT(2), -1, 1900, 2300))
+  Text(2) = CStr(INCDEC(Text(2), -1, 1900, 2300))
 End Sub
 
 Private Sub menosmes_Click()
-  tEXT(1) = CStr(IncDec(tEXT(1), -1, 1, 12))
+  Text(1) = CStr(INCDEC(Text(1), -1, 1, 12))
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -5455,7 +5452,7 @@ Private Function eproducao()
     Alert "Ja Passou para producao"
     eproducao = True
   Else
-    If TXTFIELDS(26).tEXT = "P" Then
+    If TXTFIELDS(26).Text = "P" Then
       Alert "O Processo de Fabricao ja e TIPO (P) producao"
       eproducao = True
     End If

@@ -1,17 +1,18 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmDes 
    Caption         =   "Controle de Desenho"
-   ClientHeight    =   6135
-   ClientLeft      =   165
-   ClientTop       =   450
-   ClientWidth     =   10965
+   ClientHeight    =   6132
+   ClientLeft      =   168
+   ClientTop       =   456
+   ClientWidth     =   10968
    Icon            =   "frmDes.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6135
-   ScaleWidth      =   10965
+   ScaleHeight     =   6132
+   ScaleWidth      =   10968
    StartUpPosition =   2  'CenterScreen
    Begin NewTabCtl.NewTab SSTab1 
       Height          =   4095
@@ -19,13 +20,13 @@ Begin VB.Form frmDes
       TabIndex        =   8
       Top             =   1680
       Width           =   10455
-      _ExtentX        =   18441
-      _ExtentY        =   7223
+      _ExtentX        =   18436
+      _ExtentY        =   7218
       ControlJustAdded=   0   'False
       Tabs            =   2
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -34,7 +35,7 @@ Begin VB.Form frmDes
       EndProperty
       TabsPerRow      =   2
       TabHeight       =   520
-      ControlVersion  =   9
+      ControlVersion  =   13
       TabCaption(0)   =   "Atual"
       Tab(0).ControlCount=   6
       Tab(0).Control(0)=   "arquivar"
@@ -49,16 +50,16 @@ Begin VB.Form frmDes
       Begin XPControls.XPButton arquivar 
          Height          =   375
          Left            =   8520
-         TabIndex        =   21
+         TabIndex        =   19
          Top             =   2040
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   661
+         _ExtentX        =   2773
+         _ExtentY        =   656
          Picture         =   "frmDes.frx":058A
          Caption         =   "Arquivar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -82,8 +83,8 @@ Begin VB.Form frmDes
          TabStop         =   0   'False
          Top             =   480
          Width           =   8175
-         _ExtentX        =   14420
-         _ExtentY        =   5530
+         _ExtentX        =   14415
+         _ExtentY        =   5525
       End
       Begin VBFLXGRD18.VBFlexGrid GridArq 
          Height          =   2535
@@ -92,23 +93,23 @@ Begin VB.Form frmDes
          TabStop         =   0   'False
          Top             =   600
          Width           =   8175
-         _ExtentX        =   14420
-         _ExtentY        =   4471
+         _ExtentX        =   14415
+         _ExtentY        =   4466
       End
       Begin XPControls.XPButton novo 
          Height          =   435
          Left            =   8520
-         TabIndex        =   17
+         TabIndex        =   15
          TabStop         =   0   'False
          Top             =   480
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDes.frx":0B24
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -119,17 +120,17 @@ Begin VB.Form frmDes
       Begin XPControls.XPButton editar 
          Height          =   435
          Left            =   8520
-         TabIndex        =   18
+         TabIndex        =   16
          TabStop         =   0   'False
          Top             =   960
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDes.frx":10BE
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -140,17 +141,17 @@ Begin VB.Form frmDes
       Begin XPControls.XPButton excluir 
          Height          =   435
          Left            =   8520
-         TabIndex        =   19
+         TabIndex        =   17
          TabStop         =   0   'False
          Top             =   1440
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDes.frx":1658
          Caption         =   "Apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -199,63 +200,21 @@ Begin VB.Form frmDes
       Top             =   960
       Width           =   5535
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   420
-      Left            =   9120
-      TabIndex        =   12
-      TabStop         =   0   'False
-      Top             =   120
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   741
-      Picture         =   "frmDes.frx":1BF2
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton CmdClose 
-      Height          =   420
-      Left            =   9120
-      TabIndex        =   13
-      TabStop         =   0   'False
-      Top             =   600
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   741
-      Picture         =   "frmDes.frx":218C
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton ESCCLI 
       Height          =   375
       Index           =   0
       Left            =   1320
-      TabIndex        =   14
+      TabIndex        =   12
       TabStop         =   0   'False
       Top             =   720
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "frmDes.frx":2726
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "frmDes.frx":1BF2
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -267,17 +226,17 @@ Begin VB.Form frmDes
       Height          =   375
       Index           =   1
       Left            =   1800
-      TabIndex        =   15
+      TabIndex        =   13
       TabStop         =   0   'False
       Top             =   720
       Width           =   1095
-      _ExtentX        =   1931
-      _ExtentY        =   661
-      Picture         =   "frmDes.frx":2CC0
+      _ExtentX        =   1926
+      _ExtentY        =   656
+      Picture         =   "frmDes.frx":218C
       Caption         =   "LX Cli"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -289,17 +248,17 @@ Begin VB.Form frmDes
       Height          =   375
       Index           =   2
       Left            =   1800
-      TabIndex        =   16
+      TabIndex        =   14
       TabStop         =   0   'False
       Top             =   1200
       Width           =   1095
-      _ExtentX        =   1931
-      _ExtentY        =   661
-      Picture         =   "frmDes.frx":325A
+      _ExtentX        =   1926
+      _ExtentY        =   656
+      Picture         =   "frmDes.frx":2726
       Caption         =   "LX 2dig"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -310,23 +269,63 @@ Begin VB.Form frmDes
    Begin XPControls.XPButton Command7 
       Height          =   375
       Left            =   1320
-      TabIndex        =   20
+      TabIndex        =   18
       TabStop         =   0   'False
       Top             =   1080
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "frmDes.frx":37F4
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "frmDes.frx":2CC0
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   8760
+      TabIndex        =   20
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmDes.frx":325A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   9840
+      TabIndex        =   21
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmDes.frx":37F4
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "Conjunto"

@@ -1,49 +1,30 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form ExpMS03 
    Caption         =   "Transferencias Operacação/Sequencia"
    ClientHeight    =   4200
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   6735
+   ClientTop       =   348
+   ClientWidth     =   6732
    Icon            =   "expms03.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   4200
-   ScaleWidth      =   6735
+   ScaleWidth      =   6732
    StartUpPosition =   2  'CenterScreen
    Begin XPControls.XPText Text 
-      Height          =   315
+      Height          =   312
       Index           =   0
-      Left            =   300
-      TabIndex        =   7
+      Left            =   240
+      TabIndex        =   3
       Top             =   420
-      Width           =   2655
-      _ExtentX        =   4683
-      _ExtentY        =   556
+      Width           =   2652
+      _ExtentX        =   4678
+      _ExtentY        =   550
       Text            =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton CmdEscMs01 
-      Height          =   375
-      Left            =   3060
-      TabIndex        =   4
-      Top             =   1560
-      Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "expms03.frx":058A
-      Caption         =   ""
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -57,75 +38,13 @@ Begin VB.Form ExpMS03
       TabIndex        =   2
       Top             =   960
       Width           =   2115
-      _ExtentX        =   3731
-      _ExtentY        =   661
-      Picture         =   "expms03.frx":0B24
+      _ExtentX        =   3725
+      _ExtentY        =   656
+      Picture         =   "expms03.frx":058A
       Caption         =   "Transferir Composição"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton CmdCancel 
-      Height          =   435
-      Left            =   3840
-      TabIndex        =   3
-      Top             =   420
-      Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   767
-      Picture         =   "expms03.frx":10BE
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton CmdEscPfim 
-      Height          =   375
-      Index           =   0
-      Left            =   3060
-      TabIndex        =   5
-      Top             =   420
-      Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "expms03.frx":1658
-      Caption         =   ""
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton CmdEscPfim 
-      Height          =   375
-      Index           =   1
-      Left            =   3060
-      TabIndex        =   6
-      Top             =   900
-      Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "expms03.frx":1BF2
-      Caption         =   ""
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -134,18 +53,18 @@ Begin VB.Form ExpMS03
       EndProperty
    End
    Begin XPControls.XPText Text 
-      Height          =   315
+      Height          =   312
       Index           =   1
-      Left            =   360
-      TabIndex        =   8
+      Left            =   240
+      TabIndex        =   4
       Top             =   1620
-      Width           =   2655
-      _ExtentX        =   4683
-      _ExtentY        =   556
+      Width           =   2652
+      _ExtentX        =   4678
+      _ExtentY        =   550
       Text            =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -154,18 +73,18 @@ Begin VB.Form ExpMS03
       EndProperty
    End
    Begin XPControls.XPText Text 
-      Height          =   315
+      Height          =   312
       Index           =   2
-      Left            =   300
-      TabIndex        =   9
+      Left            =   240
+      TabIndex        =   5
       Top             =   960
-      Width           =   2655
-      _ExtentX        =   4683
-      _ExtentY        =   556
+      Width           =   2652
+      _ExtentX        =   4678
+      _ExtentY        =   550
       Text            =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -176,16 +95,16 @@ Begin VB.Form ExpMS03
    Begin XPControls.XPButton XPButton1 
       Height          =   375
       Left            =   3780
-      TabIndex        =   10
+      TabIndex        =   6
       Top             =   1380
       Width           =   2115
-      _ExtentX        =   3731
-      _ExtentY        =   661
-      Picture         =   "expms03.frx":218C
+      _ExtentX        =   3725
+      _ExtentY        =   656
+      Picture         =   "expms03.frx":0B24
       Caption         =   "Transferir Sequencia"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -196,16 +115,16 @@ Begin VB.Form ExpMS03
    Begin XPControls.XPButton XPButton2 
       Height          =   375
       Left            =   120
-      TabIndex        =   11
+      TabIndex        =   7
       Top             =   2160
       Width           =   3195
-      _ExtentX        =   5636
-      _ExtentY        =   661
-      Picture         =   "expms03.frx":2726
+      _ExtentX        =   5630
+      _ExtentY        =   656
+      Picture         =   "expms03.frx":10BE
       Caption         =   "Sincronizar Cod.Interno PFS-->MS06"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -216,16 +135,16 @@ Begin VB.Form ExpMS03
    Begin XPControls.XPButton XPButton3 
       Height          =   375
       Left            =   120
-      TabIndex        =   12
+      TabIndex        =   8
       Top             =   2640
       Width           =   3195
-      _ExtentX        =   5636
-      _ExtentY        =   661
-      Picture         =   "expms03.frx":2CC0
+      _ExtentX        =   5630
+      _ExtentY        =   656
+      Picture         =   "expms03.frx":1658
       Caption         =   "Sincronizar Cod.Interno PF-->MS01"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -236,16 +155,16 @@ Begin VB.Form ExpMS03
    Begin XPControls.XPButton XPButton4 
       Height          =   375
       Left            =   3360
-      TabIndex        =   13
+      TabIndex        =   9
       Top             =   2160
       Width           =   3195
-      _ExtentX        =   5636
-      _ExtentY        =   661
-      Picture         =   "expms03.frx":325A
+      _ExtentX        =   5630
+      _ExtentY        =   656
+      Picture         =   "expms03.frx":1BF2
       Caption         =   "Sincronizar Cod.Cliente MA01-->PF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -256,16 +175,16 @@ Begin VB.Form ExpMS03
    Begin XPControls.XPButton XPButton5 
       Height          =   375
       Left            =   3360
-      TabIndex        =   15
+      TabIndex        =   11
       Top             =   2640
       Width           =   3195
-      _ExtentX        =   5636
-      _ExtentY        =   661
-      Picture         =   "expms03.frx":37F4
+      _ExtentX        =   5630
+      _ExtentY        =   656
+      Picture         =   "expms03.frx":218C
       Caption         =   "Sincronizar Pesos PF-->MS01"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -276,16 +195,16 @@ Begin VB.Form ExpMS03
    Begin XPControls.XPButton XPButton6 
       Height          =   375
       Left            =   120
-      TabIndex        =   16
+      TabIndex        =   12
       Top             =   3120
       Width           =   3195
-      _ExtentX        =   5636
-      _ExtentY        =   661
-      Picture         =   "expms03.frx":3D8E
+      _ExtentX        =   5630
+      _ExtentY        =   656
+      Picture         =   "expms03.frx":2726
       Caption         =   "Sincronizar  PFS-->Ferramenta"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -293,10 +212,87 @@ Begin VB.Form ExpMS03
          Strikethrough   =   0   'False
       EndProperty
    End
+   Begin VBCCR18.CommandButtonW CmdCancel 
+      Height          =   612
+      Left            =   5520
+      TabIndex        =   13
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "expms03.frx":2CC0
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdEscPfim 
+      Height          =   252
+      Index           =   0
+      Left            =   3000
+      TabIndex        =   14
+      Top             =   480
+      Width           =   372
+      _ExtentX        =   656
+      _ExtentY        =   445
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "expms03.frx":325A
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdEscPfim 
+      Height          =   252
+      Index           =   1
+      Left            =   3000
+      TabIndex        =   15
+      Top             =   960
+      Width           =   372
+      _ExtentX        =   656
+      _ExtentY        =   445
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "expms03.frx":37F4
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdEscPfim 
+      Height          =   252
+      Index           =   2
+      Left            =   3000
+      TabIndex        =   16
+      Top             =   1680
+      Width           =   372
+      _ExtentX        =   656
+      _ExtentY        =   445
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "expms03.frx":3D8E
+      WordWrap        =   0   'False
+      Style           =   1
+   End
    Begin VB.Label LblDiz 
       Height          =   255
       Left            =   120
-      TabIndex        =   14
+      TabIndex        =   10
       Top             =   3780
       Width           =   6555
    End
@@ -337,15 +333,15 @@ Private Sub CmdEscMs01_Click()
   ePASS01 = "MANA5"
   escms01.Show vbModal, Me
   If lRETU Then
-    tEXT(1).tEXT = eRETU01
+    Text(1).Text = eRETU01
   End If
 End Sub
 
 Private Sub CmdEscPfim_Click(Index As Integer)
   escpffim.Show vbModal, Me
   If lRETU Then
-    If Index = 0 Then tEXT(0).tEXT = eRETU01
-    If Index = 1 Then tEXT(2).tEXT = eRETU01
+    If Index = 0 Then Text(0).Text = eRETU01
+    If Index = 1 Then Text(2).Text = eRETU01
   End If
 End Sub
 
@@ -373,13 +369,13 @@ Private Sub CmdTransfer_Click()
   dbPF.ConnectionTimeout = 120
   dbPF.Open GeracArq(cARQ, , False)
 
-  If tEXT(2).tEXT = "" Then
+  If Text(2).Text = "" Then
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' AND NOT BLOQUEADO ORDER BY PF"
 
   Else
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' OR CODFINAL='" & Trim(tEXT(2).tEXT) & "'AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' OR CODFINAL='" & Trim(Text(2).Text) & "'AND NOT BLOQUEADO ORDER BY PF"
 
   End If
 
@@ -413,7 +409,7 @@ Private Sub CmdTransfer_Click()
   CON.ConnectionTimeout = 120
   CON.Open "mana5emp"
 
-  sqlMS03 = "DELETE FROM MS03 where codigo='" & tEXT(1).tEXT & "'"
+  sqlMS03 = "DELETE FROM MS03 where codigo='" & Text(1).Text & "'"
   CON.Execute sqlMS03
 
   Set rs = New ADODB.Recordset
@@ -603,7 +599,7 @@ Private Sub GRAVAMS03(aCAMPOS As Variant, rs As Variant)
   sDESCRI = Tirace(sDESCRI)
 
   rs.AddNew
-  rs("codigo") = tEXT(1).tEXT
+  rs("codigo") = Text(1).Text
   rs("TIPOENT") = aCAMPOS(0)
   rs("CODCOMP") = aCAMPOS(1)
   rs("NOMECOMP") = sDESCRI
@@ -700,13 +696,13 @@ Private Sub XPButton1_Click()
   dbPF.ConnectionTimeout = 120
   dbPF.Open GeracArq(cARQ, , False)
 
-  If tEXT(2) = "" Then
+  If Text(2) = "" Then
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' AND NOT BLOQUEADO ORDER BY PF"
 
   Else
 
-    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(tEXT(0).tEXT) & "' OR CODFINAL='" & Trim(tEXT(2).tEXT) & "'AND NOT BLOQUEADO ORDER BY PF"
+    sqlPF = "SELECT * FROM PF WHERE CODFINAL='" & Trim(Text(0).Text) & "' OR CODFINAL='" & Trim(Text(2).Text) & "'AND NOT BLOQUEADO ORDER BY PF"
 
   End If
 
@@ -746,7 +742,7 @@ Private Sub XPButton1_Click()
   CON.ConnectionTimeout = 120
   CON.Open "mana5emp"
 
-  sqlms06 = "DELETE FROM MS06 where codigo='" & tEXT(1).tEXT & "'"
+  sqlms06 = "DELETE FROM MS06 where codigo='" & Text(1).Text & "'"
 
   CON.Execute sqlms06
 
@@ -801,7 +797,7 @@ Private Sub XPButton1_Click()
         sDESCRI = LCase(sDESCRI)
         sDESCRI = Left(sDESCRI, 70)
         sDESCRI = Tirace(sDESCRI)
-        rs("codigo") = tEXT(1).tEXT
+        rs("codigo") = Text(1).Text
         rs("SEQ") = aPFI(0)
         rs("SSQ") = aPFI(1)
         rs("DESCRI") = sDESCRI
@@ -833,11 +829,11 @@ Private Sub XPButton1_Click()
       Wend
 
       rs.AddNew
-      rs("codigo") = tEXT(1).tEXT
+      rs("codigo") = Text(1).Text
       rs("SEQ") = aPFI(0)
       rs("SSQ") = 99
       rs("TIPFEC") = "0"
-      rs("CODFEC") = tEXT(0).tEXT
+      rs("CODFEC") = Text(0).Text
       rs("DESCRI") = "Final"
       rs.Update
 

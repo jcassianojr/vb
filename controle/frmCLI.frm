@@ -1,12 +1,13 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmCLI 
    Caption         =   "Controle de Desenho"
    ClientHeight    =   3840
-   ClientLeft      =   165
-   ClientTop       =   450
+   ClientLeft      =   168
+   ClientTop       =   456
    ClientWidth     =   10200
    Icon            =   "frmCLI.frx":0000
    LinkTopic       =   "Form1"
@@ -14,13 +15,13 @@ Begin VB.Form frmCLI
    ScaleWidth      =   10200
    StartUpPosition =   2  'CenterScreen
    Begin vbExtra.FlexFn FlexFn1 
-      Height          =   405
+      Height          =   396
       Left            =   5880
-      TabIndex        =   9
+      TabIndex        =   8
       Top             =   480
-      Width           =   1725
-      _ExtentX        =   3043
-      _ExtentY        =   714
+      Width           =   1680
+      _ExtentX        =   2963
+      _ExtentY        =   699
       PageNumbersFormat=   ""
       PageNumbersFormatIndex=   0
       BeginProperty PageNumbersFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -67,43 +68,23 @@ Begin VB.Form frmCLI
       ToolTipText     =   "Lista de Desenhos"
       Top             =   960
       Width           =   8175
-      _ExtentX        =   14420
-      _ExtentY        =   4683
-   End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   8400
-      TabIndex        =   5
-      Top             =   240
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmCLI.frx":058A
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      _ExtentX        =   14415
+      _ExtentY        =   4678
    End
    Begin XPControls.XPButton novo 
       Height          =   435
       Left            =   8400
-      TabIndex        =   6
+      TabIndex        =   5
       TabStop         =   0   'False
       Top             =   1080
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmCLI.frx":0B24
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "frmCLI.frx":058A
       Caption         =   "Novo"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -114,17 +95,17 @@ Begin VB.Form frmCLI
    Begin XPControls.XPButton editar 
       Height          =   435
       Left            =   8400
-      TabIndex        =   7
+      TabIndex        =   6
       TabStop         =   0   'False
       Top             =   1680
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmCLI.frx":10BE
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "frmCLI.frx":0B24
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -135,23 +116,43 @@ Begin VB.Form frmCLI
    Begin XPControls.XPButton excluir 
       Height          =   435
       Left            =   8400
-      TabIndex        =   8
+      TabIndex        =   7
       TabStop         =   0   'False
       Top             =   2280
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmCLI.frx":1658
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "frmCLI.frx":10BE
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   8640
+      TabIndex        =   9
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmCLI.frx":1658
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "Cliente:"

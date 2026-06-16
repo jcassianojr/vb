@@ -1,27 +1,28 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
 Begin VB.Form frmDISPOI 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFI"
-   ClientHeight    =   6255
-   ClientLeft      =   1095
-   ClientTop       =   330
-   ClientWidth     =   10395
+   ClientHeight    =   6252
+   ClientLeft      =   1092
+   ClientTop       =   336
+   ClientWidth     =   10404
    Icon            =   "frmDISPOI.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6255
-   ScaleWidth      =   10395
+   ScaleHeight     =   6252
+   ScaleWidth      =   10404
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   7800
       Top             =   840
-      _ExtentX        =   1191
-      _ExtentY        =   1191
+      _ExtentX        =   953
+      _ExtentY        =   953
    End
    Begin NewTabCtl.NewTab SSTab1 
       Height          =   4815
@@ -29,12 +30,12 @@ Begin VB.Form frmDISPOI
       TabIndex        =   4
       Top             =   1200
       Width           =   9615
-      _ExtentX        =   16960
-      _ExtentY        =   8493
+      _ExtentX        =   16955
+      _ExtentY        =   8488
       Tabs            =   1
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -42,7 +43,7 @@ Begin VB.Form frmDISPOI
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
-      ControlVersion  =   9
+      ControlVersion  =   13
       TabCaption(0)   =   "Item"
       Tab(0).ControlCount=   9
       Tab(0).Control(0)=   "Picture1"
@@ -57,8 +58,8 @@ Begin VB.Form frmDISPOI
       Begin VB.PictureBox Picture1 
          Height          =   495
          Left            =   3840
-         ScaleHeight     =   435
-         ScaleWidth      =   555
+         ScaleHeight     =   444
+         ScaleWidth      =   564
          TabIndex        =   6
          Top             =   3360
          Visible         =   0   'False
@@ -67,8 +68,8 @@ Begin VB.Form frmDISPOI
       Begin VB.PictureBox Picture2 
          Height          =   3375
          Left            =   120
-         ScaleHeight     =   3315
-         ScaleWidth      =   3555
+         ScaleHeight     =   3324
+         ScaleWidth      =   3564
          TabIndex        =   5
          Top             =   600
          Width           =   3615
@@ -76,16 +77,16 @@ Begin VB.Form frmDISPOI
       Begin XPControls.XPButton CmdConfImp 
          Height          =   435
          Left            =   120
-         TabIndex        =   9
+         TabIndex        =   7
          Top             =   4080
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDISPOI.frx":058A
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -96,16 +97,16 @@ Begin VB.Form frmDISPOI
       Begin XPControls.XPButton cmdimprimir 
          Height          =   435
          Left            =   1800
-         TabIndex        =   10
+         TabIndex        =   8
          Top             =   4080
          Width           =   1515
-         _ExtentX        =   2672
-         _ExtentY        =   767
+         _ExtentX        =   2667
+         _ExtentY        =   762
          Picture         =   "frmDISPOI.frx":0B24
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -116,16 +117,16 @@ Begin VB.Form frmDISPOI
       Begin XPControls.XPButton CmdPaste 
          Height          =   435
          Left            =   3480
-         TabIndex        =   11
+         TabIndex        =   9
          Top             =   4080
          Width           =   1335
-         _ExtentX        =   2355
-         _ExtentY        =   767
+         _ExtentX        =   2350
+         _ExtentY        =   762
          Picture         =   "frmDISPOI.frx":10BE
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -136,17 +137,17 @@ Begin VB.Form frmDISPOI
       Begin XPControls.XPButton Incluirimagem 
          Height          =   435
          Left            =   4200
-         TabIndex        =   12
+         TabIndex        =   10
          TabStop         =   0   'False
          Top             =   480
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDISPOI.frx":1658
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -157,17 +158,17 @@ Begin VB.Form frmDISPOI
       Begin XPControls.XPButton DelImg 
          Height          =   435
          Left            =   4200
-         TabIndex        =   14
+         TabIndex        =   12
          TabStop         =   0   'False
          Top             =   1200
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDISPOI.frx":1AF2
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -178,17 +179,17 @@ Begin VB.Form frmDISPOI
       Begin XPControls.XPButton VerImg 
          Height          =   495
          Left            =   4200
-         TabIndex        =   15
+         TabIndex        =   13
          TabStop         =   0   'False
          Top             =   2400
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmDISPOI.frx":1F8C
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -199,17 +200,17 @@ Begin VB.Form frmDISPOI
       Begin XPControls.XPButton Command4 
          Height          =   435
          Left            =   4200
-         TabIndex        =   13
+         TabIndex        =   11
          TabStop         =   0   'False
          Top             =   1800
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDISPOI.frx":2426
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -221,12 +222,12 @@ Begin VB.Form frmDISPOI
    Begin VB.TextBox TXTFIELDS 
       Height          =   555
       Index           =   1
-      Left            =   2400
+      Left            =   1080
       MaxLength       =   255
       MultiLine       =   -1  'True
       ScrollBars      =   2  'Vertical
       TabIndex        =   1
-      Top             =   120
+      Top             =   360
       Width           =   6135
    End
    Begin VB.TextBox TXTFIELDS 
@@ -234,62 +235,62 @@ Begin VB.Form frmDISPOI
       Enabled         =   0   'False
       Height          =   405
       Index           =   0
-      Left            =   720
+      Left            =   120
       Locked          =   -1  'True
       TabIndex        =   0
       TabStop         =   0   'False
-      Top             =   120
+      Top             =   360
       Width           =   735
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   8760
-      TabIndex        =   7
-      Top             =   600
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmDISPOI.frx":28C0
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   7560
+      TabIndex        =   14
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmDISPOI.frx":28C0
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   8760
-      TabIndex        =   8
-      Top             =   120
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmDISPOI.frx":2E5A
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   9000
+      TabIndex        =   15
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmDISPOI.frx":2E5A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "Descrição:"
       ForeColor       =   &H00C00000&
-      Height          =   255
+      Height          =   252
       Index           =   1
-      Left            =   1560
+      Left            =   1200
       TabIndex        =   3
       Top             =   120
-      Width           =   855
+      Width           =   852
    End
    Begin VB.Label lblLabels 
       Caption         =   "ORD:"

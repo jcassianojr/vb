@@ -1,15 +1,15 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form FrmClii 
    Caption         =   "Itens "
-   ClientHeight    =   2085
+   ClientHeight    =   2088
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   8430
+   ClientTop       =   348
+   ClientWidth     =   8436
    Icon            =   "FrmClii.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   2085
-   ScaleWidth      =   8430
+   ScaleHeight     =   2088
+   ScaleWidth      =   8436
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox txtFields 
       BackColor       =   &H00C0FFFF&
@@ -66,45 +66,45 @@ Begin VB.Form FrmClii
       Top             =   240
       Width           =   1095
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   4560
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   5760
       TabIndex        =   8
-      Top             =   240
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "FrmClii.frx":058A
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmClii.frx":058A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
-   Begin XPControls.XPButton CmdClose 
-      Height          =   435
-      Left            =   6360
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   7080
       TabIndex        =   9
-      Top             =   240
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "FrmClii.frx":0B24
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmClii.frx":0B24
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "Cliente"
@@ -155,7 +155,7 @@ Dim iLOOP As Integer
 
 Private Sub cmdClose_Click()
   For iLOOP = 0 To nCAMPOS - 2
-    aVAL(iLOOP) = txtFields(iLOOP)
+    aVAL(iLOOP) = TXTFIELDS(iLOOP)
   Next iLOOP
   aVAL(4) = FixNumBol(inativo.Value)
   GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 2 '0 item 1 cliente chaves
@@ -186,7 +186,7 @@ Private Sub Form_Load()
   aPAD = Array(0, 0, "", "", False)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 2
-    txtFields(iLOOP) = aVAL(iLOOP)
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   inativo.Value = aVAL(4)
 End Sub

@@ -1,17 +1,17 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form frmCFLX 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "CFLX"
-   ClientHeight    =   8145
-   ClientLeft      =   1095
-   ClientTop       =   330
+   ClientHeight    =   8136
+   ClientLeft      =   1092
+   ClientTop       =   336
    ClientWidth     =   8400
    Icon            =   "frmCFLX.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8145
+   ScaleHeight     =   8136
    ScaleWidth      =   8400
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -31,7 +31,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -50,7 +50,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -69,7 +69,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -88,7 +88,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -107,7 +107,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -126,7 +126,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -145,7 +145,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -164,7 +164,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -183,7 +183,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -202,7 +202,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -221,7 +221,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -240,7 +240,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -259,7 +259,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -278,7 +278,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -297,7 +297,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -316,7 +316,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -335,7 +335,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -354,7 +354,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -373,7 +373,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -392,7 +392,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -411,7 +411,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -430,7 +430,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -449,7 +449,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -468,7 +468,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -487,7 +487,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -506,7 +506,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -525,7 +525,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -544,7 +544,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -563,7 +563,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -582,7 +582,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -601,7 +601,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -620,7 +620,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -639,7 +639,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -658,7 +658,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -677,7 +677,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -696,7 +696,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -715,7 +715,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -734,7 +734,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -753,7 +753,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -772,7 +772,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -791,7 +791,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -810,7 +810,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -829,7 +829,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -848,7 +848,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -867,7 +867,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -886,7 +886,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -905,7 +905,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -924,7 +924,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -943,7 +943,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -962,7 +962,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -981,7 +981,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1000,7 +1000,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1019,7 +1019,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1038,7 +1038,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1057,7 +1057,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1076,7 +1076,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1095,7 +1095,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1114,7 +1114,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1133,7 +1133,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1152,7 +1152,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1171,7 +1171,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1190,7 +1190,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1209,7 +1209,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1228,7 +1228,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1247,7 +1247,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1266,7 +1266,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1285,7 +1285,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1304,7 +1304,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1323,7 +1323,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1342,7 +1342,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1361,7 +1361,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1380,7 +1380,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1399,7 +1399,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1418,7 +1418,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1437,7 +1437,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1456,7 +1456,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1475,7 +1475,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1494,7 +1494,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1513,7 +1513,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1532,7 +1532,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1551,7 +1551,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1570,7 +1570,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1589,7 +1589,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1608,7 +1608,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1627,7 +1627,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1646,7 +1646,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1665,7 +1665,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1684,7 +1684,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1703,7 +1703,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1722,7 +1722,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1741,7 +1741,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1760,7 +1760,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1779,7 +1779,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1798,7 +1798,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1817,7 +1817,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1836,7 +1836,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1855,7 +1855,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1874,7 +1874,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1893,7 +1893,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1912,7 +1912,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1931,7 +1931,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1950,7 +1950,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1969,7 +1969,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -1988,7 +1988,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2007,7 +2007,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2026,7 +2026,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2045,7 +2045,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2064,7 +2064,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2083,7 +2083,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2102,7 +2102,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2121,7 +2121,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2140,7 +2140,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2159,7 +2159,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2178,7 +2178,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2197,7 +2197,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2216,7 +2216,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2235,7 +2235,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2254,7 +2254,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2273,7 +2273,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2292,7 +2292,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2311,7 +2311,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2330,7 +2330,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2349,7 +2349,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2368,7 +2368,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2387,7 +2387,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2406,7 +2406,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2425,7 +2425,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2444,7 +2444,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2463,7 +2463,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2482,7 +2482,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2501,7 +2501,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2520,7 +2520,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2539,7 +2539,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2558,7 +2558,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2577,7 +2577,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2596,7 +2596,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2615,7 +2615,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2634,7 +2634,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2653,7 +2653,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2672,7 +2672,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2691,7 +2691,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2710,7 +2710,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2729,7 +2729,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2748,7 +2748,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2767,7 +2767,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2786,7 +2786,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2805,7 +2805,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2824,7 +2824,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2843,7 +2843,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2862,7 +2862,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2881,7 +2881,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2900,7 +2900,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2919,7 +2919,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2938,7 +2938,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2957,7 +2957,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2976,7 +2976,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -2995,7 +2995,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3014,7 +3014,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3033,7 +3033,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3052,7 +3052,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3071,7 +3071,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3090,7 +3090,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3109,7 +3109,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3128,7 +3128,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3147,7 +3147,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3166,7 +3166,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3185,7 +3185,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3204,7 +3204,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3223,7 +3223,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3242,7 +3242,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3261,7 +3261,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3280,7 +3280,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3299,7 +3299,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3318,7 +3318,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3337,7 +3337,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3356,7 +3356,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3375,7 +3375,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3394,7 +3394,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3413,7 +3413,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3432,7 +3432,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3451,7 +3451,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3470,7 +3470,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3489,7 +3489,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3508,7 +3508,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3527,7 +3527,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3546,7 +3546,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3565,7 +3565,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3584,7 +3584,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3603,7 +3603,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3622,7 +3622,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3641,7 +3641,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3660,7 +3660,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3679,7 +3679,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3698,7 +3698,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3717,7 +3717,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3736,7 +3736,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3755,7 +3755,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3774,7 +3774,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3793,7 +3793,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3812,7 +3812,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3831,7 +3831,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3850,7 +3850,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3869,7 +3869,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3888,7 +3888,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3907,7 +3907,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3926,7 +3926,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3945,7 +3945,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3964,7 +3964,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -3983,7 +3983,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4002,7 +4002,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4021,7 +4021,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4040,7 +4040,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4059,7 +4059,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4078,7 +4078,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4097,7 +4097,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4116,7 +4116,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4135,7 +4135,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4154,7 +4154,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4173,7 +4173,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4192,7 +4192,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4211,7 +4211,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4230,7 +4230,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4249,7 +4249,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4268,7 +4268,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4287,7 +4287,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4306,7 +4306,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4325,7 +4325,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4344,7 +4344,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4363,7 +4363,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4382,7 +4382,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4401,7 +4401,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4420,7 +4420,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4439,7 +4439,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4458,7 +4458,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4477,7 +4477,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4496,7 +4496,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4515,7 +4515,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4534,7 +4534,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4553,7 +4553,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4572,7 +4572,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4591,7 +4591,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4610,7 +4610,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4629,7 +4629,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4648,7 +4648,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4667,7 +4667,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4686,7 +4686,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4705,7 +4705,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4724,7 +4724,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4743,7 +4743,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4762,7 +4762,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4781,7 +4781,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4800,7 +4800,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4819,7 +4819,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4838,7 +4838,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4857,7 +4857,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4876,7 +4876,7 @@ Begin VB.Form frmCFLX
       Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4904,7 +4904,7 @@ Begin VB.Form frmCFLX
       BackColor       =   &H00C0FFFF&
       BeginProperty Font 
          Name            =   "Wingdings"
-         Size            =   14.25
+         Size            =   14.4
          Charset         =   2
          Weight          =   700
          Underline       =   0   'False
@@ -4921,45 +4921,45 @@ Begin VB.Form frmCFLX
       Top             =   120
       Width           =   495
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   4560
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   6840
       TabIndex        =   261
-      Top             =   240
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmCFLX.frx":058A
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmCFLX.frx":058A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   6480
-      TabIndex        =   262
-      Top             =   240
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmCFLX.frx":0B24
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   5760
+      TabIndex        =   263
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmCFLX.frx":0B24
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "DESCRICAO:"
@@ -5002,7 +5002,7 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = txtFields(iLOOP)
+      aVAL(iLOOP) = TXTFIELDS(iLOOP)
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
   End If
@@ -5032,9 +5032,9 @@ Private Sub Form_Load()
   aPAD = Array("", "", 32)
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    txtFields(iLOOP) = aVAL(iLOOP)
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)
   Next iLOOP
-  txtFields(0).Font = "isoqsymbol"
+  TXTFIELDS(0).Font = "isoqsymbol"
   For iLOOP = 0 To 255
     letra(iLOOP).Font = "isoqsymbol"
     letra(iLOOP).Text = Chr(iLOOP)
@@ -5052,8 +5052,8 @@ Private Sub letra_Click(Index As Integer)
 End Sub
 
 Private Sub TXTFIELDS_Change(Index As Integer)
-  If Len(txtFields(0).Text) > 0 Then
-    txtFields(2).Text = Asc(txtFields(0).Text)
+  If Len(TXTFIELDS(0).Text) > 0 Then
+    TXTFIELDS(2).Text = Asc(TXTFIELDS(0).Text)
   End If
 End Sub
 

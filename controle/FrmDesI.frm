@@ -1,16 +1,15 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form FrmDesI 
    Caption         =   "Controle de Desenhos"
-   ClientHeight    =   3735
+   ClientHeight    =   3732
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   8610
+   ClientTop       =   348
+   ClientWidth     =   8616
    Icon            =   "FrmDesI.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   3735
-   ScaleWidth      =   8610
+   ScaleHeight     =   3732
+   ScaleWidth      =   8616
    StartUpPosition =   2  'CenterScreen
    Begin VBCCR18.DTPicker DTPicker2 
       Height          =   375
@@ -18,8 +17,8 @@ Begin VB.Form FrmDesI
       TabIndex        =   6
       Top             =   1680
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
+      _ExtentX        =   2773
+      _ExtentY        =   656
       Value           =   44285
       CheckBox        =   -1  'True
       AllowUserInput  =   -1  'True
@@ -30,8 +29,8 @@ Begin VB.Form FrmDesI
       TabIndex        =   4
       Top             =   1680
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
+      _ExtentX        =   2773
+      _ExtentY        =   656
       Value           =   44285
       CheckBox        =   -1  'True
       AllowUserInput  =   -1  'True
@@ -137,47 +136,45 @@ Begin VB.Form FrmDesI
       Top             =   360
       Width           =   2535
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   6840
-      TabIndex        =   22
-      TabStop         =   0   'False
-      Top             =   840
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "FrmDesI.frx":058A
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   6360
+      TabIndex        =   21
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmDesI.frx":058A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   6840
-      TabIndex        =   11
-      TabStop         =   0   'False
-      Top             =   240
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "FrmDesI.frx":0B24
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   7440
+      TabIndex        =   22
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmDesI.frx":0B24
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "Car."
@@ -185,7 +182,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   10
       Left            =   720
-      TabIndex        =   21
+      TabIndex        =   20
       Top             =   1500
       Width           =   435
    End
@@ -195,7 +192,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   9
       Left            =   120
-      TabIndex        =   20
+      TabIndex        =   19
       Top             =   1500
       Width           =   435
    End
@@ -205,7 +202,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   8
       Left            =   7320
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   1440
       Width           =   975
    End
@@ -215,7 +212,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   7
       Left            =   6240
-      TabIndex        =   18
+      TabIndex        =   17
       Top             =   1440
       Width           =   975
    End
@@ -225,7 +222,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   6
       Left            =   120
-      TabIndex        =   17
+      TabIndex        =   16
       Top             =   2160
       Width           =   975
    End
@@ -235,7 +232,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   4
       Left            =   1320
-      TabIndex        =   16
+      TabIndex        =   15
       Top             =   1440
       Width           =   615
    End
@@ -245,7 +242,7 @@ Begin VB.Form FrmDesI
       Height          =   195
       Index           =   1
       Left            =   120
-      TabIndex        =   15
+      TabIndex        =   14
       Top             =   1320
       Width           =   675
    End
@@ -255,7 +252,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   0
       Left            =   120
-      TabIndex        =   14
+      TabIndex        =   13
       Top             =   720
       Width           =   975
    End
@@ -265,7 +262,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   3
       Left            =   2880
-      TabIndex        =   13
+      TabIndex        =   12
       Top             =   720
       Width           =   1815
    End
@@ -275,7 +272,7 @@ Begin VB.Form FrmDesI
       Height          =   255
       Index           =   2
       Left            =   120
-      TabIndex        =   12
+      TabIndex        =   11
       Top             =   0
       Width           =   975
    End

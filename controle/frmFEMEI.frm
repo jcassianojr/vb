@@ -1,20 +1,19 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
 Begin VB.Form frmFEMEI 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "FMEA"
-   ClientHeight    =   8130
-   ClientLeft      =   1095
-   ClientTop       =   330
-   ClientWidth     =   12945
+   ClientHeight    =   8124
+   ClientLeft      =   1092
+   ClientTop       =   336
+   ClientWidth     =   12948
    Icon            =   "frmFEMEI.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8130
-   ScaleWidth      =   12945
+   ScaleHeight     =   8124
+   ScaleWidth      =   12948
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox txtFields 
@@ -24,7 +23,7 @@ Begin VB.Form frmFEMEI
       Index           =   46
       Left            =   8400
       Locked          =   -1  'True
-      TabIndex        =   87
+      TabIndex        =   85
       TabStop         =   0   'False
       Top             =   120
       Width           =   735
@@ -32,10 +31,10 @@ Begin VB.Form frmFEMEI
    Begin VB.CommandButton cmdpeg 
       Height          =   360
       Index           =   44
-      Left            =   10560
+      Left            =   10440
       Picture         =   "frmFEMEI.frx":058A
       Style           =   1  'Graphical
-      TabIndex        =   85
+      TabIndex        =   83
       TabStop         =   0   'False
       Top             =   120
       Width           =   375
@@ -47,7 +46,7 @@ Begin VB.Form frmFEMEI
       Index           =   44
       Left            =   9960
       Locked          =   -1  'True
-      TabIndex        =   84
+      TabIndex        =   82
       TabStop         =   0   'False
       Top             =   120
       Width           =   495
@@ -56,7 +55,7 @@ Begin VB.Form frmFEMEI
       Caption         =   "GravarPre"
       Height          =   375
       Left            =   11040
-      TabIndex        =   51
+      TabIndex        =   49
       TabStop         =   0   'False
       Top             =   1800
       Width           =   1275
@@ -67,7 +66,7 @@ Begin VB.Form frmFEMEI
       Height          =   435
       Index           =   1
       Left            =   11040
-      TabIndex        =   50
+      TabIndex        =   48
       TabStop         =   0   'False
       Top             =   2280
       Width           =   1335
@@ -78,7 +77,7 @@ Begin VB.Form frmFEMEI
       Height          =   435
       Index           =   0
       Left            =   11040
-      TabIndex        =   49
+      TabIndex        =   47
       TabStop         =   0   'False
       Top             =   2880
       Width           =   1335
@@ -221,12 +220,12 @@ Begin VB.Form frmFEMEI
       TabIndex        =   0
       Top             =   720
       Width           =   10695
-      _ExtentX        =   18865
-      _ExtentY        =   12303
+      _ExtentX        =   18860
+      _ExtentY        =   12298
       Tabs            =   6
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -234,7 +233,7 @@ Begin VB.Form frmFEMEI
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
-      ControlVersion  =   9
+      ControlVersion  =   13
       TabCaption(0)   =   "Passo 2"
       Tab(0).ControlCount=   6
       Tab(0).Control(0)=   "txtFields(49)"
@@ -379,11 +378,11 @@ Begin VB.Form frmFEMEI
       Begin VBCCR18.DTPicker DTPicker4 
          Height          =   375
          Left            =   -66360
-         TabIndex        =   157
+         TabIndex        =   155
          Top             =   4680
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   661
+         _ExtentX        =   2773
+         _ExtentY        =   656
          Value           =   44285
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
@@ -391,11 +390,11 @@ Begin VB.Form frmFEMEI
       Begin VBCCR18.DTPicker DTPicker3 
          Height          =   375
          Left            =   -66360
-         TabIndex        =   156
+         TabIndex        =   154
          Top             =   4320
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   661
+         _ExtentX        =   2773
+         _ExtentY        =   656
          Value           =   44285
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
@@ -403,11 +402,11 @@ Begin VB.Form frmFEMEI
       Begin VBCCR18.DTPicker DTPicker2 
          Height          =   375
          Left            =   -66360
-         TabIndex        =   155
+         TabIndex        =   153
          Top             =   3960
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   661
+         _ExtentX        =   2773
+         _ExtentY        =   656
          Value           =   44285
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
@@ -415,11 +414,11 @@ Begin VB.Form frmFEMEI
       Begin VBCCR18.DTPicker DTPicker1 
          Height          =   375
          Left            =   -66120
-         TabIndex        =   154
+         TabIndex        =   152
          Top             =   3000
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   661
+         _ExtentX        =   2773
+         _ExtentY        =   656
          Value           =   44285
          CheckBox        =   -1  'True
          AllowUserInput  =   -1  'True
@@ -476,7 +475,7 @@ Begin VB.Form frmFEMEI
          Index           =   58
          Left            =   -68640
          MaxLength       =   1
-         TabIndex        =   148
+         TabIndex        =   146
          TabStop         =   0   'False
          Top             =   5280
          Width           =   495
@@ -487,7 +486,7 @@ Begin VB.Form frmFEMEI
          Index           =   53
          Left            =   -69360
          MaxLength       =   1
-         TabIndex        =   146
+         TabIndex        =   144
          TabStop         =   0   'False
          Top             =   4080
          Width           =   495
@@ -557,7 +556,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   0
          Left            =   -72000
-         TabIndex        =   138
+         TabIndex        =   136
          TabStop         =   0   'False
          Top             =   5880
          Width           =   495
@@ -567,7 +566,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   2
          Left            =   -72600
-         TabIndex        =   137
+         TabIndex        =   135
          TabStop         =   0   'False
          Top             =   5880
          Width           =   495
@@ -577,7 +576,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   1
          Left            =   -73200
-         TabIndex        =   136
+         TabIndex        =   134
          TabStop         =   0   'False
          Top             =   5880
          Width           =   495
@@ -589,7 +588,7 @@ Begin VB.Form frmFEMEI
          Index           =   23
          Left            =   -73560
          Locked          =   -1  'True
-         TabIndex        =   135
+         TabIndex        =   133
          TabStop         =   0   'False
          Top             =   5880
          Width           =   255
@@ -601,7 +600,7 @@ Begin VB.Form frmFEMEI
          Index           =   20
          Left            =   -69720
          Locked          =   -1  'True
-         TabIndex        =   133
+         TabIndex        =   131
          TabStop         =   0   'False
          Top             =   5280
          Width           =   855
@@ -612,7 +611,7 @@ Begin VB.Form frmFEMEI
          Left            =   -70080
          Picture         =   "frmFEMEI.frx":0B14
          Style           =   1  'Graphical
-         TabIndex        =   131
+         TabIndex        =   129
          TabStop         =   0   'False
          Top             =   5280
          Width           =   255
@@ -622,7 +621,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   19
          Left            =   -70320
-         TabIndex        =   130
+         TabIndex        =   128
          TabStop         =   0   'False
          ToolTipText     =   "Diminui um mes"
          Top             =   5520
@@ -633,7 +632,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   19
          Left            =   -70320
-         TabIndex        =   129
+         TabIndex        =   127
          TabStop         =   0   'False
          ToolTipText     =   "Aumenta um mes"
          Top             =   5280
@@ -653,7 +652,7 @@ Begin VB.Form frmFEMEI
          Left            =   -71520
          Picture         =   "frmFEMEI.frx":109E
          Style           =   1  'Graphical
-         TabIndex        =   127
+         TabIndex        =   125
          TabStop         =   0   'False
          Top             =   5280
          Width           =   255
@@ -663,7 +662,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   17
          Left            =   -71760
-         TabIndex        =   126
+         TabIndex        =   124
          TabStop         =   0   'False
          ToolTipText     =   "Diminui um mes"
          Top             =   5520
@@ -674,7 +673,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   17
          Left            =   -71760
-         TabIndex        =   125
+         TabIndex        =   123
          TabStop         =   0   'False
          ToolTipText     =   "Aumenta um mes"
          Top             =   5280
@@ -694,7 +693,7 @@ Begin VB.Form frmFEMEI
          Left            =   -72960
          Picture         =   "frmFEMEI.frx":1628
          Style           =   1  'Graphical
-         TabIndex        =   123
+         TabIndex        =   121
          TabStop         =   0   'False
          Top             =   5280
          Width           =   255
@@ -704,7 +703,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   18
          Left            =   -73200
-         TabIndex        =   122
+         TabIndex        =   120
          TabStop         =   0   'False
          ToolTipText     =   "Diminui um mes"
          Top             =   5520
@@ -715,7 +714,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   18
          Left            =   -73200
-         TabIndex        =   121
+         TabIndex        =   119
          TabStop         =   0   'False
          ToolTipText     =   "Aumenta um mes"
          Top             =   5280
@@ -761,7 +760,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   5
          Left            =   -72240
-         TabIndex        =   117
+         TabIndex        =   115
          TabStop         =   0   'False
          Top             =   4680
          Width           =   375
@@ -771,7 +770,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   4
          Left            =   -72240
-         TabIndex        =   116
+         TabIndex        =   114
          TabStop         =   0   'False
          Top             =   4320
          Width           =   375
@@ -781,7 +780,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   3
          Left            =   -72240
-         TabIndex        =   115
+         TabIndex        =   113
          TabStop         =   0   'False
          Top             =   3960
          Width           =   375
@@ -791,7 +790,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   2
          Left            =   -72720
-         TabIndex        =   114
+         TabIndex        =   112
          TabStop         =   0   'False
          Top             =   4680
          Width           =   375
@@ -801,7 +800,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   1
          Left            =   -72720
-         TabIndex        =   113
+         TabIndex        =   111
          TabStop         =   0   'False
          Top             =   4320
          Width           =   375
@@ -811,7 +810,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   0
          Left            =   -72720
-         TabIndex        =   112
+         TabIndex        =   110
          TabStop         =   0   'False
          Top             =   3960
          Width           =   375
@@ -823,7 +822,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73200
          Picture         =   "frmFEMEI.frx":1BB2
          Style           =   1  'Graphical
-         TabIndex        =   111
+         TabIndex        =   109
          TabStop         =   0   'False
          Top             =   4680
          Width           =   375
@@ -835,7 +834,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73200
          Picture         =   "frmFEMEI.frx":213C
          Style           =   1  'Graphical
-         TabIndex        =   110
+         TabIndex        =   108
          TabStop         =   0   'False
          Top             =   4320
          Width           =   375
@@ -847,7 +846,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73200
          Picture         =   "frmFEMEI.frx":26C6
          Style           =   1  'Graphical
-         TabIndex        =   109
+         TabIndex        =   107
          TabStop         =   0   'False
          Top             =   3960
          Width           =   375
@@ -858,7 +857,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73680
          Picture         =   "frmFEMEI.frx":2C50
          Style           =   1  'Graphical
-         TabIndex        =   108
+         TabIndex        =   106
          TabStop         =   0   'False
          Top             =   4680
          Width           =   375
@@ -869,7 +868,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73680
          Picture         =   "frmFEMEI.frx":31DA
          Style           =   1  'Graphical
-         TabIndex        =   107
+         TabIndex        =   105
          TabStop         =   0   'False
          Top             =   4320
          Width           =   375
@@ -880,7 +879,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73680
          Picture         =   "frmFEMEI.frx":3764
          Style           =   1  'Graphical
-         TabIndex        =   106
+         TabIndex        =   104
          TabStop         =   0   'False
          Top             =   3960
          Width           =   375
@@ -931,7 +930,7 @@ Begin VB.Form frmFEMEI
          Caption         =   "Não"
          Height          =   255
          Left            =   -74160
-         TabIndex        =   102
+         TabIndex        =   100
          TabStop         =   0   'False
          Top             =   2280
          Width           =   495
@@ -940,7 +939,7 @@ Begin VB.Form frmFEMEI
          Caption         =   "Sim"
          Height          =   255
          Left            =   -74760
-         TabIndex        =   101
+         TabIndex        =   99
          TabStop         =   0   'False
          Top             =   2280
          Width           =   495
@@ -960,7 +959,7 @@ Begin VB.Form frmFEMEI
          Enabled         =   0   'False
          Height          =   195
          Left            =   -74760
-         TabIndex        =   100
+         TabIndex        =   98
          TabStop         =   0   'False
          Top             =   2040
          Width           =   1095
@@ -969,7 +968,7 @@ Begin VB.Form frmFEMEI
          Caption         =   "Desconsiderar Apuraçao RPN"
          Height          =   255
          Left            =   -72480
-         TabIndex        =   99
+         TabIndex        =   97
          TabStop         =   0   'False
          Top             =   5640
          Width           =   2715
@@ -978,7 +977,7 @@ Begin VB.Form frmFEMEI
          Caption         =   "Modificacao Padrao"
          Height          =   255
          Left            =   -74640
-         TabIndex        =   98
+         TabIndex        =   96
          TabStop         =   0   'False
          Top             =   5640
          Width           =   1755
@@ -989,7 +988,7 @@ Begin VB.Form frmFEMEI
          Left            =   -65520
          Picture         =   "frmFEMEI.frx":3CEE
          Style           =   1  'Graphical
-         TabIndex        =   97
+         TabIndex        =   95
          TabStop         =   0   'False
          Top             =   4200
          Width           =   375
@@ -1000,7 +999,7 @@ Begin VB.Form frmFEMEI
          Left            =   -65520
          Picture         =   "frmFEMEI.frx":4278
          Style           =   1  'Graphical
-         TabIndex        =   96
+         TabIndex        =   94
          TabStop         =   0   'False
          Top             =   3840
          Width           =   375
@@ -1009,7 +1008,7 @@ Begin VB.Form frmFEMEI
          BackColor       =   &H00C0FFFF&
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   400
             Underline       =   0   'False
@@ -1020,7 +1019,7 @@ Begin VB.Form frmFEMEI
          Index           =   43
          Left            =   -66120
          MaxLength       =   1
-         TabIndex        =   95
+         TabIndex        =   93
          TabStop         =   0   'False
          Top             =   4200
          Width           =   495
@@ -1031,7 +1030,7 @@ Begin VB.Form frmFEMEI
          Left            =   -66600
          Picture         =   "frmFEMEI.frx":4802
          Style           =   1  'Graphical
-         TabIndex        =   94
+         TabIndex        =   92
          TabStop         =   0   'False
          Top             =   4200
          Width           =   375
@@ -1042,7 +1041,7 @@ Begin VB.Form frmFEMEI
          Left            =   -66600
          Picture         =   "frmFEMEI.frx":4D8C
          Style           =   1  'Graphical
-         TabIndex        =   93
+         TabIndex        =   91
          TabStop         =   0   'False
          Top             =   3840
          Width           =   375
@@ -1051,7 +1050,7 @@ Begin VB.Form frmFEMEI
          BackColor       =   &H00C0FFFF&
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   400
             Underline       =   0   'False
@@ -1062,7 +1061,7 @@ Begin VB.Form frmFEMEI
          Index           =   42
          Left            =   -67080
          MaxLength       =   1
-         TabIndex        =   92
+         TabIndex        =   90
          TabStop         =   0   'False
          Top             =   4200
          Width           =   495
@@ -1073,7 +1072,7 @@ Begin VB.Form frmFEMEI
          Left            =   -67560
          Picture         =   "frmFEMEI.frx":5316
          Style           =   1  'Graphical
-         TabIndex        =   91
+         TabIndex        =   89
          TabStop         =   0   'False
          Top             =   4200
          Width           =   375
@@ -1084,7 +1083,7 @@ Begin VB.Form frmFEMEI
          Left            =   -67560
          Picture         =   "frmFEMEI.frx":58A0
          Style           =   1  'Graphical
-         TabIndex        =   90
+         TabIndex        =   88
          TabStop         =   0   'False
          Top             =   3840
          Width           =   375
@@ -1093,7 +1092,7 @@ Begin VB.Form frmFEMEI
          BackColor       =   &H00C0FFFF&
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   400
             Underline       =   0   'False
@@ -1104,7 +1103,7 @@ Begin VB.Form frmFEMEI
          Index           =   24
          Left            =   -68160
          MaxLength       =   1
-         TabIndex        =   89
+         TabIndex        =   87
          TabStop         =   0   'False
          Top             =   4200
          Width           =   495
@@ -1116,7 +1115,7 @@ Begin VB.Form frmFEMEI
          Index           =   10
          Left            =   -70320
          Locked          =   -1  'True
-         TabIndex        =   82
+         TabIndex        =   80
          TabStop         =   0   'False
          Top             =   4080
          Width           =   855
@@ -1128,7 +1127,7 @@ Begin VB.Form frmFEMEI
          Left            =   -70680
          Picture         =   "frmFEMEI.frx":5E2A
          Style           =   1  'Graphical
-         TabIndex        =   80
+         TabIndex        =   78
          TabStop         =   0   'False
          Top             =   3840
          Width           =   255
@@ -1138,7 +1137,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   9
          Left            =   -70920
-         TabIndex        =   79
+         TabIndex        =   77
          TabStop         =   0   'False
          ToolTipText     =   "Diminui um mes"
          Top             =   4080
@@ -1149,7 +1148,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   9
          Left            =   -70920
-         TabIndex        =   78
+         TabIndex        =   76
          TabStop         =   0   'False
          ToolTipText     =   "Aumenta um mes"
          Top             =   3840
@@ -1169,7 +1168,7 @@ Begin VB.Form frmFEMEI
          Left            =   -72120
          Picture         =   "frmFEMEI.frx":63B4
          Style           =   1  'Graphical
-         TabIndex        =   76
+         TabIndex        =   74
          TabStop         =   0   'False
          Top             =   3840
          Width           =   255
@@ -1179,7 +1178,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   7
          Left            =   -72360
-         TabIndex        =   75
+         TabIndex        =   73
          TabStop         =   0   'False
          ToolTipText     =   "Diminui um mes"
          Top             =   4080
@@ -1190,7 +1189,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   7
          Left            =   -72360
-         TabIndex        =   74
+         TabIndex        =   72
          TabStop         =   0   'False
          ToolTipText     =   "Aumenta um mes"
          Top             =   3840
@@ -1210,7 +1209,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73560
          Picture         =   "frmFEMEI.frx":693E
          Style           =   1  'Graphical
-         TabIndex        =   72
+         TabIndex        =   70
          TabStop         =   0   'False
          Top             =   3840
          Width           =   255
@@ -1220,7 +1219,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   8
          Left            =   -73800
-         TabIndex        =   71
+         TabIndex        =   69
          TabStop         =   0   'False
          ToolTipText     =   "Diminui um mes"
          Top             =   4080
@@ -1231,7 +1230,7 @@ Begin VB.Form frmFEMEI
          Height          =   240
          Index           =   8
          Left            =   -73800
-         TabIndex        =   70
+         TabIndex        =   68
          TabStop         =   0   'False
          ToolTipText     =   "Aumenta um mes"
          Top             =   3840
@@ -1261,7 +1260,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73680
          Picture         =   "frmFEMEI.frx":6EC8
          Style           =   1  'Graphical
-         TabIndex        =   67
+         TabIndex        =   65
          TabStop         =   0   'False
          Top             =   3120
          Width           =   255
@@ -1282,7 +1281,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73680
          Picture         =   "frmFEMEI.frx":7452
          Style           =   1  'Graphical
-         TabIndex        =   66
+         TabIndex        =   64
          TabStop         =   0   'False
          Top             =   2640
          Width           =   255
@@ -1303,7 +1302,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73680
          Picture         =   "frmFEMEI.frx":79DC
          Style           =   1  'Graphical
-         TabIndex        =   63
+         TabIndex        =   61
          TabStop         =   0   'False
          Top             =   2160
          Width           =   255
@@ -1315,7 +1314,7 @@ Begin VB.Form frmFEMEI
          Index           =   41
          Left            =   -74280
          Locked          =   -1  'True
-         TabIndex        =   62
+         TabIndex        =   60
          TabStop         =   0   'False
          Top             =   2160
          Width           =   495
@@ -1336,7 +1335,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73680
          Picture         =   "frmFEMEI.frx":7F66
          Style           =   1  'Graphical
-         TabIndex        =   60
+         TabIndex        =   58
          TabStop         =   0   'False
          Top             =   1800
          Width           =   255
@@ -1348,7 +1347,7 @@ Begin VB.Form frmFEMEI
          Index           =   40
          Left            =   -74280
          Locked          =   -1  'True
-         TabIndex        =   59
+         TabIndex        =   57
          TabStop         =   0   'False
          Top             =   1800
          Width           =   495
@@ -1369,7 +1368,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73680
          Picture         =   "frmFEMEI.frx":84F0
          Style           =   1  'Graphical
-         TabIndex        =   57
+         TabIndex        =   55
          TabStop         =   0   'False
          Top             =   1320
          Width           =   255
@@ -1381,7 +1380,7 @@ Begin VB.Form frmFEMEI
          Index           =   39
          Left            =   -74280
          Locked          =   -1  'True
-         TabIndex        =   56
+         TabIndex        =   54
          TabStop         =   0   'False
          Top             =   1320
          Width           =   495
@@ -1402,7 +1401,7 @@ Begin VB.Form frmFEMEI
          Left            =   -73680
          Picture         =   "frmFEMEI.frx":8A7A
          Style           =   1  'Graphical
-         TabIndex        =   54
+         TabIndex        =   52
          TabStop         =   0   'False
          Top             =   840
          Width           =   255
@@ -1414,7 +1413,7 @@ Begin VB.Form frmFEMEI
          Index           =   38
          Left            =   -74280
          Locked          =   -1  'True
-         TabIndex        =   53
+         TabIndex        =   51
          TabStop         =   0   'False
          Top             =   840
          Width           =   495
@@ -1425,7 +1424,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   34
          Left            =   -74640
-         TabIndex        =   153
+         TabIndex        =   151
          Top             =   4920
          Width           =   1575
       End
@@ -1435,7 +1434,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   33
          Left            =   -74640
-         TabIndex        =   152
+         TabIndex        =   150
          Top             =   4560
          Width           =   2175
       End
@@ -1446,7 +1445,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   3
          Left            =   -74760
-         TabIndex        =   151
+         TabIndex        =   149
          Top             =   6240
          Width           =   975
       End
@@ -1456,7 +1455,7 @@ Begin VB.Form frmFEMEI
          Height          =   495
          Index           =   32
          Left            =   -74760
-         TabIndex        =   150
+         TabIndex        =   148
          Top             =   1320
          Width           =   1095
       End
@@ -1466,7 +1465,7 @@ Begin VB.Form frmFEMEI
          Height          =   495
          Index           =   31
          Left            =   -74760
-         TabIndex        =   149
+         TabIndex        =   147
          Top             =   840
          Width           =   1095
       End
@@ -1476,7 +1475,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   30
          Left            =   -68640
-         TabIndex        =   147
+         TabIndex        =   145
          Top             =   5040
          Width           =   495
       End
@@ -1486,7 +1485,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   29
          Left            =   -69360
-         TabIndex        =   145
+         TabIndex        =   143
          Top             =   3840
          Width           =   495
       End
@@ -1496,7 +1495,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   28
          Left            =   -74760
-         TabIndex        =   144
+         TabIndex        =   142
          Top             =   2880
          Width           =   4095
       End
@@ -1506,7 +1505,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   27
          Left            =   -74760
-         TabIndex        =   143
+         TabIndex        =   141
          Top             =   2160
          Width           =   4095
       End
@@ -1516,7 +1515,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   26
          Left            =   -74760
-         TabIndex        =   142
+         TabIndex        =   140
          Top             =   1320
          Width           =   4095
       End
@@ -1527,7 +1526,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   25
          Left            =   240
-         TabIndex        =   141
+         TabIndex        =   139
          Top             =   2400
          Width           =   4095
       End
@@ -1538,7 +1537,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   24
          Left            =   240
-         TabIndex        =   140
+         TabIndex        =   138
          Top             =   1680
          Width           =   4095
       End
@@ -1549,7 +1548,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   23
          Left            =   240
-         TabIndex        =   139
+         TabIndex        =   137
          Top             =   960
          Width           =   4095
       End
@@ -1559,7 +1558,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   11
          Left            =   -74400
-         TabIndex        =   134
+         TabIndex        =   132
          Top             =   5880
          Width           =   735
       End
@@ -1569,7 +1568,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   20
          Left            =   -69720
-         TabIndex        =   132
+         TabIndex        =   130
          Top             =   5040
          Width           =   735
       End
@@ -1579,7 +1578,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   19
          Left            =   -71160
-         TabIndex        =   128
+         TabIndex        =   126
          Top             =   5160
          Width           =   735
       End
@@ -1589,7 +1588,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   17
          Left            =   -72600
-         TabIndex        =   124
+         TabIndex        =   122
          Top             =   5160
          Width           =   855
       End
@@ -1599,7 +1598,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   18
          Left            =   -74040
-         TabIndex        =   120
+         TabIndex        =   118
          Top             =   5160
          Width           =   855
       End
@@ -1610,7 +1609,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   2
          Left            =   -74880
-         TabIndex        =   119
+         TabIndex        =   117
          Top             =   5160
          Width           =   735
       End
@@ -1620,7 +1619,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   13
          Left            =   -71760
-         TabIndex        =   118
+         TabIndex        =   116
          Top             =   3720
          Width           =   855
       End
@@ -1630,7 +1629,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   12
          Left            =   -74760
-         TabIndex        =   105
+         TabIndex        =   103
          Top             =   3720
          Width           =   1095
       End
@@ -1640,7 +1639,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   21
          Left            =   -69480
-         TabIndex        =   104
+         TabIndex        =   102
          Top             =   5640
          Width           =   495
       End
@@ -1650,7 +1649,7 @@ Begin VB.Form frmFEMEI
          Height          =   495
          Index           =   15
          Left            =   -74760
-         TabIndex        =   103
+         TabIndex        =   101
          Top             =   2880
          Width           =   735
       End
@@ -1660,7 +1659,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   14
          Left            =   -68520
-         TabIndex        =   88
+         TabIndex        =   86
          Top             =   3840
          Width           =   855
       End
@@ -1670,7 +1669,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   10
          Left            =   -70320
-         TabIndex        =   81
+         TabIndex        =   79
          Top             =   3840
          Width           =   735
       End
@@ -1680,7 +1679,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   9
          Left            =   -71760
-         TabIndex        =   77
+         TabIndex        =   75
          Top             =   3840
          Width           =   735
       End
@@ -1690,7 +1689,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   7
          Left            =   -73200
-         TabIndex        =   73
+         TabIndex        =   71
          Top             =   3840
          Width           =   855
       End
@@ -1700,7 +1699,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   8
          Left            =   -74640
-         TabIndex        =   69
+         TabIndex        =   67
          Top             =   3840
          Width           =   855
       End
@@ -1711,7 +1710,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   1
          Left            =   -74760
-         TabIndex        =   68
+         TabIndex        =   66
          Top             =   3480
          Width           =   735
       End
@@ -1721,7 +1720,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   6
          Left            =   -74880
-         TabIndex        =   65
+         TabIndex        =   63
          Top             =   3120
          Width           =   615
       End
@@ -1731,7 +1730,7 @@ Begin VB.Form frmFEMEI
          Height          =   375
          Index           =   16
          Left            =   -74880
-         TabIndex        =   64
+         TabIndex        =   62
          Top             =   2640
          Width           =   615
       End
@@ -1741,7 +1740,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   5
          Left            =   -74880
-         TabIndex        =   61
+         TabIndex        =   59
          Top             =   2280
          Width           =   495
       End
@@ -1751,7 +1750,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   4
          Left            =   -74880
-         TabIndex        =   58
+         TabIndex        =   56
          Top             =   1800
          Width           =   495
       End
@@ -1761,7 +1760,7 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   0
          Left            =   -74880
-         TabIndex        =   55
+         TabIndex        =   53
          Top             =   1320
          Width           =   495
       End
@@ -1771,52 +1770,50 @@ Begin VB.Form frmFEMEI
          Height          =   255
          Index           =   2
          Left            =   -74880
-         TabIndex        =   52
+         TabIndex        =   50
          Top             =   840
          Width           =   495
       End
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   11040
-      TabIndex        =   47
-      TabStop         =   0   'False
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   10920
+      TabIndex        =   156
       Top             =   120
-      Width           =   1335
-      _ExtentX        =   2355
-      _ExtentY        =   767
-      Picture         =   "frmFEMEI.frx":9004
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   11040
-      TabIndex        =   48
-      TabStop         =   0   'False
-      Top             =   600
-      Width           =   1335
-      _ExtentX        =   2355
-      _ExtentY        =   767
-      Picture         =   "frmFEMEI.frx":959E
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmFEMEI.frx":9004
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   11880
+      TabIndex        =   157
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmFEMEI.frx":959E
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "RevFemea"
@@ -1824,7 +1821,7 @@ Begin VB.Form frmFEMEI
       Height          =   255
       Index           =   22
       Left            =   7440
-      TabIndex        =   86
+      TabIndex        =   84
       Top             =   120
       Width           =   855
    End
@@ -1834,7 +1831,7 @@ Begin VB.Form frmFEMEI
       Height          =   375
       Index           =   3
       Left            =   9240
-      TabIndex        =   83
+      TabIndex        =   81
       Top             =   120
       Width           =   615
    End
@@ -1945,33 +1942,33 @@ Private Sub cmddizsessq_Click(Index As Integer)
   Dim cARQ As String
   cARQ = PegPath("PATH", "PF")
 
-  cDIZ = pegdizseqssq(TXTFIELDS(2), cARQ, FixInt(TXTFIELDS(35).text), FixInt(TXTFIELDS(36).text), FixInt(TXTFIELDS(37).text), FixInt(TXTFIELDS(45).text))
+  cDIZ = pegdizseqssq(TXTFIELDS(2), cARQ, FixInt(TXTFIELDS(35).Text), FixInt(TXTFIELDS(36).Text), FixInt(TXTFIELDS(37).Text), FixInt(TXTFIELDS(45).Text))
 
   If Index = 0 Then
-    TXTFIELDS(2).text = eRETU01(5)
+    TXTFIELDS(2).Text = eRETU01(5)
   End If
   If Index = 1 Then
-    TXTFIELDS(2).text = eRETU01(4)
+    TXTFIELDS(2).Text = eRETU01(4)
   End If
 
 
-  TXTFIELDS(35).text = eRETU01(0)
-  TXTFIELDS(36).text = eRETU01(1)
-  TXTFIELDS(37).text = eRETU01(2)
-  TXTFIELDS(45).text = eRETU01(3)
+  TXTFIELDS(35).Text = eRETU01(0)
+  TXTFIELDS(36).Text = eRETU01(1)
+  TXTFIELDS(37).Text = eRETU01(2)
+  TXTFIELDS(45).Text = eRETU01(3)
 
 
 End Sub
 
 Private Sub cmdmais_Click(Index As Integer)
 
-  TXTFIELDS(Index) = CStr(IncDec(TXTFIELDS(Index), 1, 1, 10))
+  TXTFIELDS(Index) = CStr(INCDEC(TXTFIELDS(Index), 1, 1, 10))
 
 End Sub
 
 Private Sub cmdmenos_Click(Index As Integer)
 
-  TXTFIELDS(Index) = CStr(IncDec(TXTFIELDS(Index), -1, 1, 10))
+  TXTFIELDS(Index) = CStr(INCDEC(TXTFIELDS(Index), -1, 1, 10))
 
 End Sub
 
@@ -2094,7 +2091,7 @@ Private Sub CmdRetornaAcao_Click(Index As Integer)
   Dim nTMPGRA As Integer
   nCAMUSO = 17
   If Index = 0 Then
-    cREVFEM = TXTFIELDS(46).text
+    cREVFEM = TXTFIELDS(46).Text
     cREVFEM = Busca("Qual Revisao Femeao", "Retornar Revisao Femea", cREVFEM, 3)
     sSQL = "select * from FEMrevi WHERE  TIPOAPU='N' AND PF=" & nPF & " AND FEMEAREV=" & FixNum(cREVFEM)
     sSQL = sSQL & " AND FXSEQ=" & TXTFIELDS(35)

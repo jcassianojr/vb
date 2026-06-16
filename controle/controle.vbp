@@ -184,6 +184,7 @@ Class=ClsFPDF; ..\vblib2\class\ClsFPDF.cls
 Module=modSeguranca; ..\vblib2\modules\modSeguranca.bas
 Module=SqlFuncoesrc6; ..\vblib2\modules\SqlFuncoesrc6.bas
 Form=..\vblib2\forms\frmCadastroDSN.frm
+Form=..\vblib2\formsnull\FormIcones.frm
 IconForm="frmPRINCIPAL"
 Startup="Sub Main"
 HelpFile=""

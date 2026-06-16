@@ -1,27 +1,27 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmETI 
    Caption         =   "Cadastro ETI"
-   ClientHeight    =   6285
-   ClientLeft      =   165
-   ClientTop       =   450
-   ClientWidth     =   10170
+   ClientHeight    =   6276
+   ClientLeft      =   168
+   ClientTop       =   456
+   ClientWidth     =   10164
    Icon            =   "frmETI.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6285
-   ScaleWidth      =   10170
+   ScaleHeight     =   6276
+   ScaleWidth      =   10164
    StartUpPosition =   2  'CenterScreen
    Begin VBCCR18.DTPicker DTPicker1 
       Height          =   375
       Left            =   2160
-      TabIndex        =   28
+      TabIndex        =   26
       TabStop         =   0   'False
       Top             =   2520
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   661
+      _ExtentX        =   2773
+      _ExtentY        =   656
       Enabled         =   0   'False
       Value           =   44285
       CheckBox        =   -1  'True
@@ -136,8 +136,8 @@ Begin VB.Form frmETI
       TabStop         =   0   'False
       Top             =   3120
       Width           =   7455
-      _ExtentX        =   13150
-      _ExtentY        =   1931
+      _ExtentX        =   13145
+      _ExtentY        =   1926
    End
    Begin VBFLXGRD18.VBFlexGrid gridrevi 
       Height          =   1575
@@ -146,63 +146,23 @@ Begin VB.Form frmETI
       TabStop         =   0   'False
       Top             =   4320
       Width           =   7455
-      _ExtentX        =   13150
-      _ExtentY        =   2778
-   End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   8280
-      TabIndex        =   23
-      Top             =   840
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmETI.frx":058A
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   8280
-      TabIndex        =   24
-      Top             =   240
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmETI.frx":0B24
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      _ExtentX        =   13145
+      _ExtentY        =   2773
    End
    Begin XPControls.XPButton ComMotInc 
       Height          =   435
       Left            =   7800
-      TabIndex        =   25
+      TabIndex        =   23
       TabStop         =   0   'False
       Top             =   4320
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmETI.frx":10BE
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "frmETI.frx":058A
       Caption         =   "Novo"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -213,17 +173,17 @@ Begin VB.Form frmETI
    Begin XPControls.XPButton ComMotAlt 
       Height          =   435
       Left            =   7800
-      TabIndex        =   26
+      TabIndex        =   24
       TabStop         =   0   'False
       Top             =   4800
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmETI.frx":1658
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "frmETI.frx":0B24
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -234,23 +194,63 @@ Begin VB.Form frmETI
    Begin XPControls.XPButton ComMotExc 
       Height          =   435
       Left            =   7800
-      TabIndex        =   27
+      TabIndex        =   25
       TabStop         =   0   'False
       Top             =   5280
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmETI.frx":1BF2
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "frmETI.frx":10BE
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   8880
+      TabIndex        =   27
+      Top             =   1080
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmETI.frx":1658
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   8880
+      TabIndex        =   28
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmETI.frx":1BF2
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label Label 
       Caption         =   "Cognome"

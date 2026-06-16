@@ -1,19 +1,20 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmDISPO 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MENU"
-   ClientHeight    =   7590
-   ClientLeft      =   1095
-   ClientTop       =   330
+   ClientHeight    =   7584
+   ClientLeft      =   1092
+   ClientTop       =   336
    ClientWidth     =   11760
    Icon            =   "frmDISPO.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7590
+   ScaleHeight     =   7584
    ScaleWidth      =   11760
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -53,12 +54,12 @@ Begin VB.Form frmDISPO
       TabIndex        =   11
       Top             =   2400
       Width           =   11415
-      _ExtentX        =   20135
-      _ExtentY        =   8493
+      _ExtentX        =   20130
+      _ExtentY        =   8488
       Tabs            =   2
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -66,7 +67,7 @@ Begin VB.Form frmDISPO
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
-      ControlVersion  =   9
+      ControlVersion  =   13
       TabCaption(0)   =   "Colaborador Elabarador"
       Tab(0).ControlCount=   12
       Tab(0).Control(0)=   "Duplicar(13)"
@@ -105,7 +106,7 @@ Begin VB.Form frmDISPO
          Caption         =   "Reordenar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -125,7 +126,7 @@ Begin VB.Form frmDISPO
          Caption         =   "Duplicar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -144,7 +145,7 @@ Begin VB.Form frmDISPO
          Caption         =   "Distribuicao"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -164,7 +165,7 @@ Begin VB.Form frmDISPO
          Caption         =   "Motivos"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -208,7 +209,7 @@ Begin VB.Form frmDISPO
          Caption         =   "Nova Revisão"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -259,8 +260,8 @@ Begin VB.Form frmDISPO
          TabStop         =   0   'False
          Top             =   1020
          Width           =   7515
-         _ExtentX        =   13256
-         _ExtentY        =   3201
+         _ExtentX        =   13250
+         _ExtentY        =   3196
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1575
@@ -269,8 +270,8 @@ Begin VB.Form frmDISPO
          TabStop         =   0   'False
          Top             =   2940
          Width           =   7515
-         _ExtentX        =   13256
-         _ExtentY        =   2778
+         _ExtentX        =   13250
+         _ExtentY        =   2773
       End
       Begin VBFLXGRD18.VBFlexGrid GridPla 
          Height          =   2895
@@ -278,23 +279,23 @@ Begin VB.Form frmDISPO
          TabIndex        =   27
          Top             =   1080
          Width           =   7815
-         _ExtentX        =   13785
-         _ExtentY        =   5106
+         _ExtentX        =   13780
+         _ExtentY        =   5101
       End
       Begin XPControls.XPButton ComMotInc 
          Height          =   435
          Left            =   -67200
-         TabIndex        =   32
+         TabIndex        =   30
          TabStop         =   0   'False
          Top             =   3000
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDISPO.frx":058A
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -305,17 +306,17 @@ Begin VB.Form frmDISPO
       Begin XPControls.XPButton ComMotAlt 
          Height          =   435
          Left            =   -67200
-         TabIndex        =   33
+         TabIndex        =   31
          TabStop         =   0   'False
          Top             =   3480
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDISPO.frx":0B24
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -326,17 +327,17 @@ Begin VB.Form frmDISPO
       Begin XPControls.XPButton ComMotExc 
          Height          =   435
          Left            =   -67200
-         TabIndex        =   34
+         TabIndex        =   32
          TabStop         =   0   'False
          Top             =   3960
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDISPO.frx":10BE
          Caption         =   "Apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -347,17 +348,17 @@ Begin VB.Form frmDISPO
       Begin XPControls.XPButton Command7 
          Height          =   375
          Left            =   2520
-         TabIndex        =   35
+         TabIndex        =   33
          TabStop         =   0   'False
          Top             =   600
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
+         _ExtentX        =   656
+         _ExtentY        =   656
          Picture         =   "frmDISPO.frx":1658
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -368,17 +369,17 @@ Begin VB.Form frmDISPO
       Begin XPControls.XPButton Command8 
          Height          =   435
          Left            =   8160
-         TabIndex        =   36
+         TabIndex        =   34
          TabStop         =   0   'False
          Top             =   1080
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDISPO.frx":1BF2
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -389,17 +390,17 @@ Begin VB.Form frmDISPO
       Begin XPControls.XPButton Command4 
          Height          =   435
          Left            =   8160
-         TabIndex        =   37
+         TabIndex        =   35
          TabStop         =   0   'False
          Top             =   1560
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDISPO.frx":218C
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -410,17 +411,17 @@ Begin VB.Form frmDISPO
       Begin XPControls.XPButton Command9 
          Height          =   435
          Left            =   8160
-         TabIndex        =   38
+         TabIndex        =   36
          TabStop         =   0   'False
          Top             =   2040
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmDISPO.frx":2726
          Caption         =   "Apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -510,61 +511,21 @@ Begin VB.Form frmDISPO
       Top             =   120
       Width           =   1095
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   10080
-      TabIndex        =   30
-      Top             =   960
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmDISPO.frx":2CC0
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   10080
-      TabIndex        =   31
-      Top             =   240
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmDISPO.frx":325A
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton ESCMS01A 
       Height          =   375
       Index           =   0
       Left            =   4560
-      TabIndex        =   39
+      TabIndex        =   37
       TabStop         =   0   'False
       Top             =   960
       Width           =   975
-      _ExtentX        =   1720
-      _ExtentY        =   661
-      Picture         =   "frmDISPO.frx":37F4
+      _ExtentX        =   1715
+      _ExtentY        =   656
+      Picture         =   "frmDISPO.frx":2CC0
       Caption         =   "MANA"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -576,23 +537,63 @@ Begin VB.Form frmDISPO
       Height          =   375
       Index           =   1
       Left            =   5640
-      TabIndex        =   40
+      TabIndex        =   38
       TabStop         =   0   'False
       Top             =   960
       Width           =   975
-      _ExtentX        =   1720
-      _ExtentY        =   661
-      Picture         =   "frmDISPO.frx":3D8E
+      _ExtentX        =   1715
+      _ExtentY        =   656
+      Picture         =   "frmDISPO.frx":325A
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   10440
+      TabIndex        =   39
+      Top             =   840
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmDISPO.frx":37F4
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   10440
+      TabIndex        =   40
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmDISPO.frx":3D8E
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label Label2 
       Caption         =   "SSQ"
@@ -667,7 +668,7 @@ Private Sub cmdClose_Click()
   Dim i As Integer
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = TXT(iLOOP)
+      aVAL(iLOOP) = txt(iLOOP)
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 '0 numero chave
   End If
@@ -703,9 +704,9 @@ Private Sub Command6_Click()
 End Sub
 
 Private Sub Command7_Click()
-  TXT(5) = zIDFOLHA
-  TXT(6) = zNOMEFOLHA
-  TXT(7) = Date
+  txt(5) = zIDFOLHA
+  txt(6) = zNOMEFOLHA
+  txt(7) = Date
 End Sub
 
 Private Sub PegCodigoDescricaoPf()
@@ -876,7 +877,7 @@ Private Sub ESCMS01A_Click(Index As Integer)
     iMU01 = 12
     escmp.Show vbModal
     If lRETU Then
-      TXT(8) = eRETU01
+      txt(8) = eRETU01
     End If
   End Select
 End Sub
@@ -888,9 +889,9 @@ End Sub
 Private Sub Form_Load()
   Dim i As Integer
   CenterFormToScreen Me
-  PF.tEXT = nPF
-  SEQ.tEXT = nSEQ
-  SSQ.tEXT = nSSQ
+  PF.Text = nPF
+  SEQ.Text = nSEQ
+  SSQ.Text = nSSQ
   cARQPF = PegPath("PATH", "PF")
   cARQ = PegPath("PATH", "DISPO")
   cSQL = "select * from DISPO WHERE numero=" & nPPAP
@@ -900,7 +901,7 @@ Private Sub Form_Load()
   aPAD = Array(0, "", "", "", "", 0, "", "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXT(iLOOP) = aVAL(iLOOP)
+    txt(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   If nPF > 0 Then
     PegCodigoDescricaoPf
@@ -919,18 +920,18 @@ End Sub
 
 Private Sub NovaRev_Click()
   Dim nREV As Integer
-  If Len(TXT(4)) > 0 Then
-    If TXT(4) > Today() Then
+  If Len(txt(4)) > 0 Then
+    If txt(4) > Today() Then
       Alert ("Data Revisao Anterior Maior que Data do Sistema")
       Exit Sub
     End If
   End If
   If MDG("Fazer Nova Revisao") Then
-    nREV = FixNum(TXT(3)) + 1
+    nREV = FixNum(txt(3)) + 1
     IncluiSQL cARQPF, "SELECT * FROM REV WHERE PF=" & nPF & " AND TIPO='DIS' AND REVISAO=" & nREV, 4, Array("PF", "REVISAO", "TIPO", "DATA"), _
               Array(nPPAP, nREV, "DIS", Today()), False, False
-    TXT(3) = nREV
-    TXT(4) = Date
+    txt(3) = nREV
+    txt(4) = Date
   End If
 End Sub
 
