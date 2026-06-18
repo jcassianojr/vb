@@ -1,15 +1,15 @@
 VERSION 5.00
-Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form FrmFEMRPNO 
    Caption         =   "Femea Apurado Operacoes"
    ClientHeight    =   2220
    ClientLeft      =   60
-   ClientTop       =   345
-   ClientWidth     =   8430
+   ClientTop       =   348
+   ClientWidth     =   8436
    Icon            =   "FrmFemRPNO.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   2220
-   ScaleWidth      =   8430
+   ScaleWidth      =   8436
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox text 
       Alignment       =   1  'Right Justify
@@ -181,45 +181,45 @@ Begin VB.Form FrmFEMRPNO
       Top             =   360
       Width           =   810
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   6240
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   7320
       TabIndex        =   28
-      Top             =   240
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "FrmFemRPNO.frx":058A
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmFemRPNO.frx":058A
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   4560
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   7320
       TabIndex        =   29
-      Top             =   240
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "FrmFemRPNO.frx":0B24
+      Top             =   840
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
       Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmFemRPNO.frx":0B24
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
@@ -407,7 +407,7 @@ End Sub
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
   If MDG("Gravar e Sair", "Gravando ") Then
     For nITEM = 0 To nCAMPOS - 1
-      aVAL(nITEM) = text(nITEM)
+      aVAL(nITEM) = Text(nITEM)
     Next nITEM
     GrvSQL cARQFEMEA, cSQLUSO, nCAMPOS, aCAM, aVAL, aFOR
     GravaLog 999, 0, "Gravou "
@@ -450,7 +450,7 @@ Private Sub Form_Load()
                0, 0, 0, 0, 0)
   aVAL = PegSQL(cARQFEMEA, cSQLUSO, nCAMPOS, aCAM, aFOR, aPAD)
   For nITEM = 0 To nCAMPOS - 1
-    text(nITEM) = aVAL(nITEM)
+    Text(nITEM) = aVAL(nITEM)
   Next nITEM
 End Sub
 

@@ -1,19 +1,20 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form frmMe04 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Me04"
-   ClientHeight    =   6135
-   ClientLeft      =   45
-   ClientTop       =   330
-   ClientWidth     =   11775
+   ClientHeight    =   6132
+   ClientLeft      =   48
+   ClientTop       =   336
+   ClientWidth     =   11772
    Icon            =   "frmMe04.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Me04"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6135
-   ScaleWidth      =   11775
+   ScaleHeight     =   6132
+   ScaleWidth      =   11772
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton escCodInt 
@@ -521,65 +522,65 @@ Begin VB.Form frmMe04
       Top             =   4740
       Width           =   1410
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   10080
-      TabIndex        =   83
-      Top             =   3600
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmMe04.frx":26C6
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   10080
-      TabIndex        =   84
-      Top             =   3000
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmMe04.frx":2C60
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton cmdFOTO 
       Height          =   435
       Left            =   6720
-      TabIndex        =   85
+      TabIndex        =   83
       Top             =   5400
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "frmMe04.frx":31FA
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "frmMe04.frx":26C6
       Caption         =   "Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   10560
+      TabIndex        =   84
+      Top             =   2640
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmMe04.frx":2C60
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   10560
+      TabIndex        =   85
+      Top             =   3360
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmMe04.frx":31FA
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lbl 
       AutoSize        =   -1  'True
@@ -918,20 +919,20 @@ Dim iLOOP As Integer
 
 Private Sub Cmd_Click()
   cmdgrvdata.Visible = True
-  TXT(23).Locked = False
-  TXT(24).Locked = False
-  TXT(26).Locked = False
+  txt(23).Locked = False
+  txt(24).Locked = False
+  txt(26).Locked = False
   Cmd.Visible = False
 End Sub
 
 Private Sub CmdCalib_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXT(22).tEXT = "I"
+    txt(22).Text = "I"
   Case 1
-    TXT(22).tEXT = "E"
+    txt(22).Text = "E"
   Case 2
-    TXT(22).tEXT = "C"
+    txt(22).Text = "C"
   End Select
 
 End Sub
@@ -940,7 +941,7 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1             ''tira o campos  nao gravar o numero,nome
-      aVAL(iLOOP) = TXT(iLOOP)             ''vb matriz zero
+      aVAL(iLOOP) = txt(iLOOP)             ''vb matriz zero
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR
   End If
@@ -951,16 +952,16 @@ End Sub
 Private Sub CmdCadTip_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXT(0).tEXT = "C"
+    txt(0).Text = "C"
   Case 1
-    TXT(0).tEXT = "I"
+    txt(0).Text = "I"
 
   End Select
 End Sub
 
 Private Sub cmdFOTO_Click()
   Dim cSQL As String
-  zgrp = FixStr(TxtCodigo.tEXT)
+  zgrp = FixStr(txtcodigo.Text)
   If Len(zgrp) = 0 Then
     Alert "Codigo nao preenchido"
     Exit Sub
@@ -977,11 +978,11 @@ End Sub
 
 Private Sub cmdgrvdata_Click()
   cmdgrvdata.Visible = False
-  TXT(23).Locked = True
-  TXT(24).Locked = True
-  TXT(26).Locked = True
-  If IsDate(TXT(24)) And TXT(23) > 0 Then
-    TXT(25).tEXT = DateAdd("m", TXT(23), TXT(24))
+  txt(23).Locked = True
+  txt(24).Locked = True
+  txt(26).Locked = True
+  If IsDate(txt(24)) And txt(23) > 0 Then
+    txt(25).Text = DateAdd("m", txt(23), txt(24))
   End If
   Cmd.Visible = True
 End Sub
@@ -989,9 +990,9 @@ End Sub
 Private Sub CmdNorma_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXT(8).tEXT = "CONFORME DESENHO"
+    txt(8).Text = "CONFORME DESENHO"
   Case 1
-    TXT(8).tEXT = "CONFORME CERTIFICADO"
+    txt(8).Text = "CONFORME CERTIFICADO"
   End Select
 
 End Sub
@@ -999,15 +1000,15 @@ End Sub
 Private Sub Cmdsitu_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXT(19).tEXT = "A"
+    txt(19).Text = "A"
   Case 1
-    TXT(19).tEXT = "C"
+    txt(19).Text = "C"
   Case 2
-    TXT(19).tEXT = "E"
+    txt(19).Text = "E"
   Case 3
-    TXT(19).tEXT = "I"
+    txt(19).Text = "I"
   Case 4
-    TXT(19).tEXT = "M"
+    txt(19).Text = "M"
   End Select
 End Sub
 
@@ -1017,12 +1018,12 @@ Private Sub Command6_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim nNUMERO As Long
-  nNUMERO = FixInt(TXT(14), 0)
+  nNUMERO = FixInt(txt(14), 0)
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   sSQL = "SELECT NOME FROM MB01 WHERE NUMERO=" & nNUMERO
   aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
   If lRETU Then
-    TXT(15) = aRETU(0)
+    txt(15) = aRETU(0)
   End If
 End Sub
 
@@ -1041,8 +1042,8 @@ Private Sub Command7_Click()
   cARQESC = "MB01"
   escNUMNOM.Show vbModal, Me
   If lRETU Then
-    TXT(14) = eRETU01
-    TXT(15) = eRETU02
+    txt(14) = eRETU01
+    txt(15) = eRETU02
   End If
 End Sub
 
@@ -1050,14 +1051,14 @@ Private Sub escCodInt_Click()
   iMU01 = 12
   escmp.Show vbModal
   If lRETU Then
-    TXT(31) = eRETU01
+    txt(31) = eRETU01
   End If
 End Sub
 
 Private Sub EscPFx_Click()
   escpf.Show vbModal
   If lRETU Then
-    TXT(3) = eRETU01
+    txt(3) = eRETU01
   End If
 End Sub
 
@@ -1074,12 +1075,12 @@ Private Sub EscTipIns_Click(Index As Integer)
   If lRETU Then
     Select Case Index
     Case 0
-      TXT(4).tEXT = eRETU01
-      TXT(5).tEXT = eRETU02
+      txt(4).Text = eRETU01
+      txt(5).Text = eRETU02
     Case 1
-      TXT(10).tEXT = eRETU01
+      txt(10).Text = eRETU01
     Case 2
-      TXT(7).tEXT = eRETU02
+      txt(7).Text = eRETU02
 
     End Select
 
@@ -1106,7 +1107,7 @@ Private Sub Form_Load()
   cSQL = cSQL & " DATAUSO , DATAFIM, TIPCAL, CALIBRAR, CALULT,"
   cSQL = cSQL & " CALPRO , DATAEXT, OBS01, OBS02, OBS03, PRECO, CODIGOINT "
   cSQL = cSQL & " FROM ME04 WHERE CODIGO='" & Trim(ePASS01) & "'"
-  TxtCodigo.tEXT = ePASS01
+  txtcodigo.Text = ePASS01
   nCAMPOS = 32
   aCAM = Array("CADTIP", "NOMTIPO", "APLICACAO", "PF", "CODTIPO", _
                "TIPO", "DESENHO", "APLIC", "NORMA", "MODELO", _
@@ -1128,7 +1129,7 @@ Private Sub Form_Load()
                "", "", "", "", "", 0, "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXT(iLOOP) = aVAL(iLOOP)
+    txt(iLOOP) = aVAL(iLOOP)
   Next iLOOP
 End Sub
 

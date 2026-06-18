@@ -1,15 +1,16 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form FrmMP03 
    Caption         =   "Tratamentos"
-   ClientHeight    =   3285
+   ClientHeight    =   3276
    ClientLeft      =   60
-   ClientTop       =   450
-   ClientWidth     =   10275
+   ClientTop       =   456
+   ClientWidth     =   10272
    Icon            =   "FrmMP03.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   3285
-   ScaleWidth      =   10275
+   ScaleHeight     =   3276
+   ScaleWidth      =   10272
    StartUpPosition =   3  'Windows Default
    Begin VB.CommandButton Command1 
       Caption         =   "Mao (O)bra"
@@ -133,66 +134,66 @@ Begin VB.Form FrmMP03
       Top             =   360
       Width           =   2055
    End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   8280
-      TabIndex        =   23
-      Top             =   1560
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "FrmMP03.frx":058A
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   8280
-      TabIndex        =   24
-      Top             =   1080
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "FrmMP03.frx":0B24
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton ESCMP03 
       Height          =   375
       Left            =   3480
-      TabIndex        =   25
+      TabIndex        =   23
       TabStop         =   0   'False
       Top             =   0
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "FrmMP03.frx":10BE
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "FrmMP03.frx":058A
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   8520
+      TabIndex        =   24
+      Top             =   1080
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmMP03.frx":0B24
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   8520
+      TabIndex        =   25
+      Top             =   1800
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FrmMP03.frx":10BE
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label Label 
       Caption         =   "Tipo"
@@ -315,11 +316,11 @@ End Sub
 Private Sub Command1_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXTFIELDS(9).tEXT = "S"
+    TXTFIELDS(9).Text = "S"
   Case 1
-    TXTFIELDS(9).tEXT = "T"
+    TXTFIELDS(9).Text = "T"
   Case 2
-    TXTFIELDS(9).tEXT = "O"
+    TXTFIELDS(9).Text = "O"
   End Select
 End Sub
 
@@ -350,7 +351,7 @@ Private Sub Form_Load()
   CenterFormToScreen Me
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   cSQL = "select * from MP03 WHERE CODIGO='" & Trim(ePASS01) & "'"
-  TxtCodigo = ePASS01
+  txtcodigo = ePASS01
   nCAMPOS = 10
   aCAM = Array("NORMA", "NOME", "NOM2", "APLICACAO", "COGNOME", "OBS01", "OBS02", "OBS03", "CODIGOINT", "TIPTRA")
   aFOR = Array("C", "C", "C", "C", "C", "C", "C", "C", "C", "C")

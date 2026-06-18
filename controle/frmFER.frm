@@ -1,15 +1,16 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
 Begin VB.Form frmFER 
    Caption         =   "Cadastro Ferramenta"
-   ClientHeight    =   6405
+   ClientHeight    =   6408
    ClientLeft      =   60
-   ClientTop       =   345
+   ClientTop       =   348
    ClientWidth     =   9900
    Icon            =   "frmFER.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6405
+   ScaleHeight     =   6408
    ScaleWidth      =   9900
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox TxtNumero 
@@ -29,12 +30,12 @@ Begin VB.Form frmFER
       TabIndex        =   8
       Top             =   1560
       Width           =   7935
-      _ExtentX        =   13996
-      _ExtentY        =   7435
+      _ExtentX        =   13991
+      _ExtentY        =   7430
       Tabs            =   5
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -43,7 +44,7 @@ Begin VB.Form frmFER
       EndProperty
       TabsPerRow      =   5
       TabHeight       =   794
-      ControlVersion  =   9
+      ControlVersion  =   13
       TabCaption(0)   =   "Basica"
       TabCaption(1)   =   "Preventiva Vida Util"
       Tab(1).ControlCount=   8
@@ -144,7 +145,7 @@ Begin VB.Form frmFER
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -162,7 +163,7 @@ Begin VB.Form frmFER
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -221,7 +222,7 @@ Begin VB.Form frmFER
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -239,7 +240,7 @@ Begin VB.Form frmFER
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -257,7 +258,7 @@ Begin VB.Form frmFER
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -275,7 +276,7 @@ Begin VB.Form frmFER
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -293,7 +294,7 @@ Begin VB.Form frmFER
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -311,7 +312,7 @@ Begin VB.Form frmFER
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -329,7 +330,7 @@ Begin VB.Form frmFER
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -347,7 +348,7 @@ Begin VB.Form frmFER
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -366,7 +367,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -384,7 +385,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -402,7 +403,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -420,7 +421,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -438,7 +439,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -456,7 +457,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -474,7 +475,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -492,7 +493,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -510,7 +511,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -528,7 +529,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -546,7 +547,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -564,7 +565,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -582,7 +583,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -600,7 +601,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -618,7 +619,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -636,7 +637,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -654,7 +655,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -672,7 +673,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -690,7 +691,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -708,7 +709,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -726,7 +727,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -744,7 +745,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -762,7 +763,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -780,7 +781,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -798,7 +799,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -816,7 +817,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -834,7 +835,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -852,7 +853,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -870,7 +871,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -888,7 +889,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -906,7 +907,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -924,7 +925,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -942,7 +943,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -960,7 +961,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -978,7 +979,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -996,7 +997,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1014,7 +1015,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1032,7 +1033,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1050,7 +1051,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1068,7 +1069,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1086,7 +1087,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1104,7 +1105,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1122,7 +1123,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1140,7 +1141,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1158,7 +1159,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1176,7 +1177,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1194,7 +1195,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1212,7 +1213,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1230,7 +1231,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1248,7 +1249,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1266,7 +1267,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1284,7 +1285,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1302,7 +1303,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1320,7 +1321,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1338,7 +1339,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1356,7 +1357,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1374,7 +1375,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1392,7 +1393,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1410,7 +1411,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1428,7 +1429,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1446,7 +1447,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1464,7 +1465,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1482,7 +1483,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1500,7 +1501,7 @@ Begin VB.Form frmFER
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1668,59 +1669,19 @@ Begin VB.Form frmFER
       Top             =   240
       Width           =   4215
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
+   Begin XPControls.XPButton cmdFOTO 
+      Height          =   492
       Left            =   8280
       TabIndex        =   101
-      Top             =   240
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+      Top             =   1680
+      Width           =   1512
+      _ExtentX        =   2667
+      _ExtentY        =   868
       Picture         =   "frmFER.frx":058A
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   8280
-      TabIndex        =   102
-      Top             =   960
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "frmFER.frx":0B24
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton cmdFOTO 
-      Height          =   495
-      Left            =   8280
-      TabIndex        =   103
-      Top             =   1560
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   873
-      Picture         =   "frmFER.frx":10BE
       Caption         =   "Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1731,17 +1692,17 @@ Begin VB.Form frmFER
    Begin XPControls.XPButton Command4 
       Height          =   375
       Left            =   3240
-      TabIndex        =   104
+      TabIndex        =   102
       TabStop         =   0   'False
       Top             =   600
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "frmFER.frx":1658
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "frmFER.frx":0B24
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1753,17 +1714,17 @@ Begin VB.Form frmFER
       Height          =   375
       Index           =   0
       Left            =   1200
-      TabIndex        =   105
+      TabIndex        =   103
       TabStop         =   0   'False
       Top             =   600
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "frmFER.frx":1BF2
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "frmFER.frx":10BE
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1775,17 +1736,17 @@ Begin VB.Form frmFER
       Height          =   375
       Index           =   1
       Left            =   1680
-      TabIndex        =   106
+      TabIndex        =   104
       TabStop         =   0   'False
       Top             =   600
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
-      Picture         =   "frmFER.frx":218C
+      _ExtentX        =   1291
+      _ExtentY        =   656
+      Picture         =   "frmFER.frx":1658
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1797,23 +1758,63 @@ Begin VB.Form frmFER
       Height          =   375
       Index           =   2
       Left            =   2400
-      TabIndex        =   107
+      TabIndex        =   105
       TabStop         =   0   'False
       Top             =   600
       Width           =   855
-      _ExtentX        =   1508
-      _ExtentY        =   661
-      Picture         =   "frmFER.frx":2726
+      _ExtentX        =   1503
+      _ExtentY        =   656
+      Picture         =   "frmFER.frx":1BF2
       Caption         =   "LX2"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   8400
+      TabIndex        =   106
+      Top             =   240
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmFER.frx":218C
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   8400
+      TabIndex        =   107
+      Top             =   960
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmFER.frx":2726
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label Label 
       Caption         =   "Numero"
@@ -1894,7 +1895,7 @@ Private Sub cmdClose_Click()
 End Sub
 
 Private Sub cmdFOTO_Click()
-  zgrp = TxtCodigo.text
+  zgrp = txtcodigo.Text
   iImage = 3
   cARQRTF = PegPath("PATH", "IMGFER")
   Load frmIMAGENS
@@ -1905,25 +1906,25 @@ End Sub
 
 Private Sub Command20_Click()
   Dim x As Integer
-  Dim cTEMP As String
+  Dim cTemp As String
   If Not MDG("Trocar Tipo Almofada") Then
     Exit Sub
   End If
-  If TXTFIELDS(6).text = "6" Then
-    TXTFIELDS(6).text = "8"
+  If TXTFIELDS(6).Text = "6" Then
+    TXTFIELDS(6).Text = "8"
   Else
-    TXTFIELDS(6).text = "6"
+    TXTFIELDS(6).Text = "6"
   End If
   For x = 1 To 8
-    If TXTFIELDS(6).text = "6" Then
-      cTEMP = String(6, "¡") + Space(2)
+    If TXTFIELDS(6).Text = "6" Then
+      cTemp = String(6, "¡") + Space(2)
       If x >= 5 Then
-        cTEMP = Space(8)
+        cTemp = Space(8)
       End If
     Else
-      cTEMP = String(8, "¡")
+      cTemp = String(8, "¡")
     End If
-    TXTFIELDS(10 + x).text = cTEMP
+    TXTFIELDS(10 + x).Text = cTemp
   Next
 End Sub
 
@@ -1952,23 +1953,23 @@ End Sub
 Private Sub esc1_Click(Index As Integer)
   Dim linha As Integer
   Dim coluna As Integer
-  Dim cTEMP As String
+  Dim cTemp As String
   Dim cDIG As String
   Dim cGRV As String
   linha = (Int((Index - 1) / 8)) + 1
   coluna = (Index + 8) - (linha * 8)
   'Alert coluna
   'ALERT LINHA
-  If TXTFIELDS(6).text = "6" And linha > 4 Then
+  If TXTFIELDS(6).Text = "6" And linha > 4 Then
     Alert ("Linha Incorreta para Formato 4x6")
     Exit Sub
   End If
-  If TXTFIELDS(6).text = "6" And coluna > 6 Then
+  If TXTFIELDS(6).Text = "6" And coluna > 6 Then
     Alert ("Coluna Incorreta para Formato 4x6")
     Exit Sub
   End If
-  cTEMP = TXTFIELDS(10 + linha).text
-  cDIG = Mid(cTEMP, coluna, 1)
+  cTemp = TXTFIELDS(10 + linha).Text
+  cDIG = Mid(cTemp, coluna, 1)
   If cDIG = "l" Then
     cDIG = "¡"
   Else
@@ -1976,13 +1977,13 @@ Private Sub esc1_Click(Index As Integer)
   End If
   Select Case coluna
   Case 1
-    cGRV = cDIG & Mid(cTEMP, 2, 7)
+    cGRV = cDIG & Mid(cTemp, 2, 7)
   Case 8
-    cGRV = Mid(cTEMP, 1, 7) + cDIG
+    cGRV = Mid(cTemp, 1, 7) + cDIG
   Case Else
-    cGRV = Mid(cTEMP, 1, coluna - 1) + cDIG + Mid(cTEMP, coluna + 1)
+    cGRV = Mid(cTemp, 1, coluna - 1) + cDIG + Mid(cTemp, coluna + 1)
   End Select
-  TXTFIELDS(10 + linha).text = cGRV
+  TXTFIELDS(10 + linha).Text = cGRV
   TXTFIELDS(10 + linha).Refresh
 End Sub
 
@@ -2024,9 +2025,9 @@ Private Sub Form_Load()
   cSQL = cSQL & " FERRAM , QTDEBASE, HRBAS, VDBAS, VDHBAS, COGCLI, CLIENTE, ESQTIP, USADEMI, USADISP, PRATILE, OBST01,"
   cSQL = cSQL & " ESQL01 , ESQL02, ESQL03, ESQL04, ESQL05, ESQL06, ESQL07, ESQL08"
   cSQL = cSQL & " FROM FERRAM WHERE FERRAM='" & LTrim(RTrim(ePASS01)) & "'"
-  TxtCodigo.text = ePASS01
-  TxtNumero.text = ePASS02
-  TxtNome.text = ePASS03
+  txtcodigo.Text = ePASS01
+  TxtNumero.Text = ePASS02
+  txtNome.Text = ePASS03
   nCAMPOS = 18
   aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "COGCLI", "CLIENTE", "ESQTIP", "USADEMI", "USADISP", "PRATILE", "OBST01", _
                "ESQL01", "ESQL02", "ESQL03", "ESQL04", "ESQL05", "ESQL06", "ESQL07", "ESQL08")

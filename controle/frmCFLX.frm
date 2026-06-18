@@ -4944,7 +4944,7 @@ Begin VB.Form frmCFLX
    Begin VBCCR18.CommandButtonW cmdClose 
       Height          =   612
       Left            =   5760
-      TabIndex        =   263
+      TabIndex        =   262
       Top             =   120
       Width           =   972
       _ExtentX        =   1715

@@ -1,30 +1,31 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmGp11 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PPAP"
    ClientHeight    =   5580
-   ClientLeft      =   1095
-   ClientTop       =   330
-   ClientWidth     =   10485
+   ClientLeft      =   1092
+   ClientTop       =   336
+   ClientWidth     =   10488
    Icon            =   "Frmgp11.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   5580
-   ScaleWidth      =   10485
+   ScaleWidth      =   10488
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin vbExtra.FlexFn FlexFn1 
-      Height          =   405
+      Height          =   396
       Left            =   8520
-      TabIndex        =   31
+      TabIndex        =   29
       Top             =   1800
-      Width           =   1725
-      _ExtentX        =   3043
-      _ExtentY        =   714
+      Width           =   1680
+      _ExtentX        =   2963
+      _ExtentY        =   699
       PageNumbersFormat=   ""
       PageNumbersFormatIndex=   0
       BeginProperty PageNumbersFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -84,7 +85,7 @@ Begin VB.Form frmGp11
       Height          =   0
       Left            =   0
       ScaleHeight     =   0
-      ScaleWidth      =   10485
+      ScaleWidth      =   10488
       TabIndex        =   8
       Top             =   5580
       Width           =   10485
@@ -144,63 +145,23 @@ Begin VB.Form frmGp11
       TabIndex        =   14
       Top             =   1800
       Width           =   8235
-      _ExtentX        =   14526
-      _ExtentY        =   6165
-   End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   8520
-      TabIndex        =   17
-      Top             =   4560
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "Frmgp11.frx":058A
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   8520
-      TabIndex        =   18
-      Top             =   4080
-      Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "Frmgp11.frx":0B24
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
+      _ExtentX        =   14520
+      _ExtentY        =   6160
    End
    Begin XPControls.XPButton CmdNovo 
       Height          =   435
       Left            =   8520
-      TabIndex        =   19
+      TabIndex        =   17
       TabStop         =   0   'False
       Top             =   2400
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "Frmgp11.frx":10BE
+      _ExtentX        =   2667
+      _ExtentY        =   762
+      Picture         =   "Frmgp11.frx":058A
       Caption         =   "Novo"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -211,17 +172,17 @@ Begin VB.Form frmGp11
    Begin XPControls.XPButton CmdEditar 
       Height          =   435
       Left            =   8520
-      TabIndex        =   20
+      TabIndex        =   18
       TabStop         =   0   'False
       Top             =   3000
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "Frmgp11.frx":1658
+      _ExtentX        =   2667
+      _ExtentY        =   762
+      Picture         =   "Frmgp11.frx":0B24
       Caption         =   "Editar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -232,17 +193,17 @@ Begin VB.Form frmGp11
    Begin XPControls.XPButton CmdExcluir 
       Height          =   435
       Left            =   8520
-      TabIndex        =   21
+      TabIndex        =   19
       TabStop         =   0   'False
       Top             =   3600
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
-      Picture         =   "Frmgp11.frx":1BF2
+      _ExtentX        =   2667
+      _ExtentY        =   762
+      Picture         =   "Frmgp11.frx":10BE
       Caption         =   "Apagar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -254,17 +215,17 @@ Begin VB.Form frmGp11
       Height          =   375
       Index           =   0
       Left            =   2880
-      TabIndex        =   22
+      TabIndex        =   20
       TabStop         =   0   'False
       Top             =   0
       Width           =   1095
-      _ExtentX        =   1931
-      _ExtentY        =   661
-      Picture         =   "Frmgp11.frx":218C
+      _ExtentX        =   1926
+      _ExtentY        =   656
+      Picture         =   "Frmgp11.frx":1658
       Caption         =   "mana5"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -276,17 +237,17 @@ Begin VB.Form frmGp11
       Height          =   375
       Index           =   1
       Left            =   3360
-      TabIndex        =   23
+      TabIndex        =   21
       TabStop         =   0   'False
       Top             =   360
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
-      Picture         =   "Frmgp11.frx":2726
+      _ExtentX        =   1291
+      _ExtentY        =   656
+      Picture         =   "Frmgp11.frx":1BF2
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -298,17 +259,17 @@ Begin VB.Form frmGp11
       Height          =   375
       Index           =   2
       Left            =   4080
-      TabIndex        =   24
+      TabIndex        =   22
       TabStop         =   0   'False
       Top             =   360
       Width           =   855
-      _ExtentX        =   1508
-      _ExtentY        =   661
-      Picture         =   "Frmgp11.frx":2CC0
+      _ExtentX        =   1503
+      _ExtentY        =   656
+      Picture         =   "Frmgp11.frx":218C
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -320,17 +281,17 @@ Begin VB.Form frmGp11
       Height          =   375
       Index           =   0
       Left            =   2400
-      TabIndex        =   25
+      TabIndex        =   23
       TabStop         =   0   'False
       Top             =   1320
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "Frmgp11.frx":325A
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "Frmgp11.frx":2726
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -341,17 +302,17 @@ Begin VB.Form frmGp11
    Begin XPControls.XPButton Command1 
       Height          =   375
       Left            =   1560
-      TabIndex        =   26
+      TabIndex        =   24
       TabStop         =   0   'False
       Top             =   840
       Width           =   855
-      _ExtentX        =   1508
-      _ExtentY        =   661
-      Picture         =   "Frmgp11.frx":37F4
+      _ExtentX        =   1503
+      _ExtentY        =   656
+      Picture         =   "Frmgp11.frx":2CC0
       Caption         =   "PF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -363,17 +324,17 @@ Begin VB.Form frmGp11
       Height          =   375
       Index           =   1
       Left            =   2760
-      TabIndex        =   27
+      TabIndex        =   25
       TabStop         =   0   'False
       Top             =   1320
       Width           =   855
-      _ExtentX        =   1508
-      _ExtentY        =   661
-      Picture         =   "Frmgp11.frx":3D8E
+      _ExtentX        =   1503
+      _ExtentY        =   656
+      Picture         =   "Frmgp11.frx":325A
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -384,17 +345,17 @@ Begin VB.Form frmGp11
    Begin XPControls.XPButton Command5 
       Height          =   375
       Left            =   2880
-      TabIndex        =   28
+      TabIndex        =   26
       TabStop         =   0   'False
       Top             =   360
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "Frmgp11.frx":4328
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "Frmgp11.frx":37F4
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -405,17 +366,17 @@ Begin VB.Form frmGp11
    Begin XPControls.XPButton Command3 
       Height          =   375
       Left            =   2040
-      TabIndex        =   29
+      TabIndex        =   27
       TabStop         =   0   'False
       Top             =   1320
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "Frmgp11.frx":48C2
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "Frmgp11.frx":3D8E
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -427,23 +388,63 @@ Begin VB.Form frmGp11
       Height          =   375
       Index           =   2
       Left            =   3600
-      TabIndex        =   30
+      TabIndex        =   28
       TabStop         =   0   'False
       Top             =   1320
       Width           =   855
-      _ExtentX        =   1508
-      _ExtentY        =   661
-      Picture         =   "Frmgp11.frx":4E5C
+      _ExtentX        =   1503
+      _ExtentY        =   656
+      Picture         =   "Frmgp11.frx":4328
       Caption         =   "LX2"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   8880
+      TabIndex        =   30
+      Top             =   4080
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "Frmgp11.frx":48C2
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   8880
+      TabIndex        =   31
+      Top             =   4800
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "Frmgp11.frx":4E5C
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "SSMT"

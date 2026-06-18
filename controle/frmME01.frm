@@ -1,16 +1,17 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmME01 
    Caption         =   "Equipamento"
-   ClientHeight    =   6915
+   ClientHeight    =   6912
    ClientLeft      =   60
-   ClientTop       =   345
+   ClientTop       =   348
    ClientWidth     =   11280
    Icon            =   "frmME01.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6915
+   ScaleHeight     =   6912
    ScaleWidth      =   11280
    StartUpPosition =   2  'CenterScreen
    Begin NewTabCtl.NewTab SSTab1 
@@ -20,12 +21,12 @@ Begin VB.Form frmME01
       TabIndex        =   5
       Top             =   840
       Width           =   10935
-      _ExtentX        =   19288
-      _ExtentY        =   10398
+      _ExtentX        =   19283
+      _ExtentY        =   10393
       Tabs            =   2
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -33,7 +34,7 @@ Begin VB.Form frmME01
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
-      ControlVersion  =   9
+      ControlVersion  =   13
       TabCaption(0)   =   "Preventiva"
       Tab(0).ControlCount=   26
       Tab(0).Control(0)=   "txtFields(11)"
@@ -332,8 +333,8 @@ Begin VB.Form frmME01
          TabStop         =   0   'False
          Top             =   840
          Width           =   9255
-         _ExtentX        =   16325
-         _ExtentY        =   5741
+         _ExtentX        =   16320
+         _ExtentY        =   5736
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevcau 
          Height          =   1515
@@ -341,8 +342,8 @@ Begin VB.Form frmME01
          TabIndex        =   16
          Top             =   4080
          Width           =   9255
-         _ExtentX        =   16325
-         _ExtentY        =   2672
+         _ExtentX        =   16320
+         _ExtentY        =   2667
       End
       Begin VB.Label Label 
          BackStyle       =   0  'Transparent
@@ -499,65 +500,65 @@ Begin VB.Form frmME01
       Top             =   360
       Width           =   2055
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   9720
-      TabIndex        =   45
-      Top             =   120
-      Width           =   1155
-      _ExtentX        =   2037
-      _ExtentY        =   767
-      Picture         =   "frmME01.frx":109E
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   8400
-      TabIndex        =   46
-      Top             =   120
-      Width           =   1215
-      _ExtentX        =   2143
-      _ExtentY        =   767
-      Picture         =   "frmME01.frx":1638
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton cmdFOTO 
       Height          =   435
       Left            =   6840
-      TabIndex        =   47
+      TabIndex        =   45
       Top             =   120
       Width           =   1335
-      _ExtentX        =   2355
-      _ExtentY        =   767
-      Picture         =   "frmME01.frx":1BD2
+      _ExtentX        =   2350
+      _ExtentY        =   762
+      Picture         =   "frmME01.frx":109E
       Caption         =   "Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   8280
+      TabIndex        =   46
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmME01.frx":1638
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   9360
+      TabIndex        =   47
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmME01.frx":1BD2
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label Label 
       Caption         =   "Nome"
@@ -684,7 +685,7 @@ End Sub
 
 Private Sub cmdFOTO_Click()
   Dim cSQL As String
-  zgrp = TxtCodigo.tEXT
+  zgrp = txtcodigo.Text
   iImage = 4
   cARQRTF = PegPath("PATH", "IMGME01")
   cSQL = "select * from IMAGENS WHERE CODIGO='" & zgrp & "'"
@@ -883,11 +884,11 @@ Private Sub EscTipIns_Click(Index As Integer)
   If lRETU Then
     Select Case Index
     Case 0
-      TXTFIELDS(4).tEXT = eRETU01
-      TXTFIELDS(6).tEXT = eRETU03
+      TXTFIELDS(4).Text = eRETU01
+      TXTFIELDS(6).Text = eRETU03
       '                txt(5).Text = eRETU02
     Case 1
-      TXTFIELDS(5).tEXT = eRETU01
+      TXTFIELDS(5).Text = eRETU01
     End Select
   End If
 End Sub
@@ -913,8 +914,8 @@ Private Sub Form_Load()
   cSQL = cSQL & " FROM ME01 WHERE NUMERO='" & Trim(ePASS01) & "'"
   cARQFEMEA = PegPath("PATH", "FEMEA")
 
-  TxtCodigo.tEXT = ePASS01
-  TxtNome.tEXT = ePASS02
+  txtcodigo.Text = ePASS01
+  txtNome.Text = ePASS02
   nCAMPOS = 12
   aCAM = Array("QTDEBASE", "HRBAS", "VDBAS", "VDHBAS", "GRUPO", "TIPO", "FEMEA", "CONTABIL", "FABRICANTE", "MODELO", "NUMFAB", "ANO")
   aFOR = Array("N", "N", "N", "N", "C", "C", "N", "C", "C", "C", "C", "N")

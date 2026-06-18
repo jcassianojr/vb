@@ -1,42 +1,43 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form frmIMAGENS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "IMAGENS"
-   ClientHeight    =   6435
-   ClientLeft      =   1095
-   ClientTop       =   330
-   ClientWidth     =   7050
+   ClientHeight    =   6432
+   ClientLeft      =   1092
+   ClientTop       =   336
+   ClientWidth     =   7368
    HelpContextID   =   1002
    Icon            =   "Frmpecasjpg.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6435
-   ScaleWidth      =   7050
+   ScaleHeight     =   6432
+   ScaleWidth      =   7368
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   3720
       Top             =   5400
-      _ExtentX        =   1191
-      _ExtentY        =   1191
+      _ExtentX        =   953
+      _ExtentY        =   953
    End
    Begin XPControls.XPButton ximgsave 
       Height          =   435
       Left            =   5280
-      TabIndex        =   17
+      TabIndex        =   15
       TabStop         =   0   'False
       Top             =   2520
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "Frmpecasjpg.frx":038A
       Caption         =   "Salvar Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -47,17 +48,17 @@ Begin VB.Form frmIMAGENS
    Begin XPControls.XPButton DelImg 
       Height          =   435
       Left            =   5280
-      TabIndex        =   16
+      TabIndex        =   14
       TabStop         =   0   'False
       Top             =   1920
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "Frmpecasjpg.frx":0824
       Caption         =   "Excluir Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -66,19 +67,19 @@ Begin VB.Form frmIMAGENS
       EndProperty
    End
    Begin XPControls.XPButton IncImg 
-      Height          =   435
+      Height          =   432
       Left            =   5280
-      TabIndex        =   15
+      TabIndex        =   13
       TabStop         =   0   'False
-      Top             =   1320
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      Top             =   1440
+      Width           =   1572
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "Frmpecasjpg.frx":0CBE
       Caption         =   "Incluir Imagem"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -89,17 +90,17 @@ Begin VB.Form frmIMAGENS
    Begin XPControls.XPButton VerImg 
       Height          =   495
       Left            =   5280
-      TabIndex        =   14
+      TabIndex        =   12
       TabStop         =   0   'False
       Top             =   5760
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   873
+      _ExtentX        =   2773
+      _ExtentY        =   868
       Picture         =   "Frmpecasjpg.frx":1158
       Caption         =   "Navegar Imagens"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -111,8 +112,8 @@ Begin VB.Form frmIMAGENS
       AutoRedraw      =   -1  'True
       Height          =   3735
       Left            =   120
-      ScaleHeight     =   3675
-      ScaleWidth      =   4875
+      ScaleHeight     =   3684
+      ScaleWidth      =   4884
       TabIndex        =   5
       Top             =   1080
       Width           =   4935
@@ -121,8 +122,8 @@ Begin VB.Form frmIMAGENS
       AutoRedraw      =   -1  'True
       Height          =   735
       Left            =   120
-      ScaleHeight     =   675
-      ScaleWidth      =   3435
+      ScaleHeight     =   684
+      ScaleWidth      =   3444
       TabIndex        =   4
       Top             =   5400
       Visible         =   0   'False
@@ -158,55 +159,13 @@ Begin VB.Form frmIMAGENS
       TabStop         =   0   'False
       Top             =   4080
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "Frmpecasjpg.frx":15F2
       Caption         =   "Propriedades"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   5280
-      TabIndex        =   7
-      TabStop         =   0   'False
-      Top             =   720
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":1B8C
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   5280
-      TabIndex        =   8
-      TabStop         =   0   'False
-      Top             =   120
-      Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":2126
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -217,17 +176,17 @@ Begin VB.Form frmIMAGENS
    Begin XPControls.XPButton CmdPaste 
       Height          =   435
       Left            =   5280
-      TabIndex        =   9
+      TabIndex        =   7
       TabStop         =   0   'False
       Top             =   4680
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":26C0
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "Frmpecasjpg.frx":1B8C
       Caption         =   "Copia"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -238,17 +197,17 @@ Begin VB.Form frmIMAGENS
    Begin XPControls.XPButton cmdimprimir 
       Height          =   435
       Left            =   5280
-      TabIndex        =   10
+      TabIndex        =   8
       TabStop         =   0   'False
       Top             =   3120
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":2C5A
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "Frmpecasjpg.frx":2126
       Caption         =   "Imprimir (Preview)"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -260,16 +219,16 @@ Begin VB.Form frmIMAGENS
       Height          =   375
       Index           =   0
       Left            =   840
-      TabIndex        =   11
+      TabIndex        =   9
       Top             =   120
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "Frmpecasjpg.frx":31F4
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "Frmpecasjpg.frx":26C0
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -281,16 +240,16 @@ Begin VB.Form frmIMAGENS
       Height          =   375
       Index           =   1
       Left            =   1200
-      TabIndex        =   12
+      TabIndex        =   10
       Top             =   120
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
-      Picture         =   "Frmpecasjpg.frx":378E
+      _ExtentX        =   1291
+      _ExtentY        =   656
+      Picture         =   "Frmpecasjpg.frx":2C5A
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -302,16 +261,16 @@ Begin VB.Form frmIMAGENS
       Height          =   375
       Index           =   2
       Left            =   1920
-      TabIndex        =   13
+      TabIndex        =   11
       Top             =   120
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
-      Picture         =   "Frmpecasjpg.frx":3D28
+      _ExtentX        =   1291
+      _ExtentY        =   656
+      Picture         =   "Frmpecasjpg.frx":31F4
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -322,17 +281,17 @@ Begin VB.Form frmIMAGENS
    Begin XPControls.XPButton CmdAbrirCom 
       Height          =   435
       Left            =   5280
-      TabIndex        =   18
+      TabIndex        =   16
       TabStop         =   0   'False
       Top             =   5280
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":42C2
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "Frmpecasjpg.frx":378E
       Caption         =   "Abrir Com"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -343,23 +302,63 @@ Begin VB.Form frmIMAGENS
    Begin XPControls.XPButton XPButton1 
       Height          =   435
       Left            =   5280
-      TabIndex        =   19
+      TabIndex        =   17
       TabStop         =   0   'False
       Top             =   3600
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
-      Picture         =   "Frmpecasjpg.frx":485C
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "Frmpecasjpg.frx":3D28
       Caption         =   "Imprimir (Impressora)"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   5160
+      TabIndex        =   18
+      Top             =   360
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "Frmpecasjpg.frx":42C2
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   6240
+      TabIndex        =   19
+      Top             =   360
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "Frmpecasjpg.frx":485C
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "Numero"

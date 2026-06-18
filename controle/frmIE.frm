@@ -1,28 +1,29 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmIE 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "IE"
-   ClientHeight    =   9045
-   ClientLeft      =   1095
-   ClientTop       =   330
-   ClientWidth     =   11445
+   ClientHeight    =   9036
+   ClientLeft      =   1092
+   ClientTop       =   336
+   ClientWidth     =   11448
    Icon            =   "frmIE.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   9045
-   ScaleWidth      =   11445
+   ScaleHeight     =   9036
+   ScaleWidth      =   11448
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   7920
       Top             =   960
-      _ExtentX        =   1191
-      _ExtentY        =   1191
+      _ExtentX        =   953
+      _ExtentY        =   953
    End
    Begin VB.TextBox TXTFIELDS 
       Height          =   375
@@ -47,13 +48,13 @@ Begin VB.Form frmIE
       TabIndex        =   8
       Top             =   1560
       Width           =   11055
-      _ExtentX        =   19500
-      _ExtentY        =   13150
+      _ExtentX        =   19495
+      _ExtentY        =   13145
       ControlJustAdded=   0   'False
       Tabs            =   4
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -62,7 +63,7 @@ Begin VB.Form frmIE
       EndProperty
       TabsPerRow      =   4
       TabHeight       =   520
-      ControlVersion  =   9
+      ControlVersion  =   13
       TabCaption(0)   =   "Dizeres"
       Tab(0).ControlCount=   19
       Tab(0).Control(0)=   "cmdescIED(5)"
@@ -160,7 +161,7 @@ Begin VB.Form frmIE
          Caption         =   "Distribuicao"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -181,7 +182,7 @@ Begin VB.Form frmIE
          Caption         =   "..."
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -205,8 +206,8 @@ Begin VB.Form frmIE
          Height          =   495
          Index           =   2
          Left            =   -66960
-         ScaleHeight     =   435
-         ScaleWidth      =   315
+         ScaleHeight     =   444
+         ScaleWidth      =   324
          TabIndex        =   61
          Top             =   3960
          Visible         =   0   'False
@@ -216,8 +217,8 @@ Begin VB.Form frmIE
          Height          =   2535
          Index           =   2
          Left            =   -68760
-         ScaleHeight     =   2475
-         ScaleWidth      =   2835
+         ScaleHeight     =   2484
+         ScaleWidth      =   2844
          TabIndex        =   60
          Top             =   1320
          Width           =   2895
@@ -226,8 +227,8 @@ Begin VB.Form frmIE
          Height          =   495
          Index           =   1
          Left            =   -69960
-         ScaleHeight     =   435
-         ScaleWidth      =   315
+         ScaleHeight     =   444
+         ScaleWidth      =   324
          TabIndex        =   59
          Top             =   3960
          Visible         =   0   'False
@@ -237,8 +238,8 @@ Begin VB.Form frmIE
          Height          =   2535
          Index           =   1
          Left            =   -71760
-         ScaleHeight     =   2475
-         ScaleWidth      =   2835
+         ScaleHeight     =   2484
+         ScaleWidth      =   2844
          TabIndex        =   58
          Top             =   1320
          Width           =   2895
@@ -247,8 +248,8 @@ Begin VB.Form frmIE
          Height          =   495
          Index           =   0
          Left            =   -72960
-         ScaleHeight     =   435
-         ScaleWidth      =   315
+         ScaleHeight     =   444
+         ScaleWidth      =   324
          TabIndex        =   57
          Top             =   3960
          Visible         =   0   'False
@@ -258,8 +259,8 @@ Begin VB.Form frmIE
          Height          =   2535
          Index           =   0
          Left            =   -74760
-         ScaleHeight     =   2475
-         ScaleWidth      =   2835
+         ScaleHeight     =   2484
+         ScaleWidth      =   2844
          TabIndex        =   56
          Top             =   1320
          Width           =   2895
@@ -414,7 +415,7 @@ Begin VB.Form frmIE
          Caption         =   "Nova Revisão"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -434,7 +435,7 @@ Begin VB.Form frmIE
          Caption         =   "Motivos"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -467,7 +468,7 @@ Begin VB.Form frmIE
          Caption         =   "..."
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -488,7 +489,7 @@ Begin VB.Form frmIE
          Caption         =   "..."
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -509,7 +510,7 @@ Begin VB.Form frmIE
          Caption         =   "..."
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -530,7 +531,7 @@ Begin VB.Form frmIE
          Caption         =   "..."
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -615,8 +616,8 @@ Begin VB.Form frmIE
          TabStop         =   0   'False
          Top             =   1200
          Width           =   7515
-         _ExtentX        =   13256
-         _ExtentY        =   3201
+         _ExtentX        =   13250
+         _ExtentY        =   3196
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1575
@@ -625,23 +626,23 @@ Begin VB.Form frmIE
          TabStop         =   0   'False
          Top             =   3120
          Width           =   7515
-         _ExtentX        =   13256
-         _ExtentY        =   2778
+         _ExtentX        =   13250
+         _ExtentY        =   2773
       End
       Begin XPControls.XPButton cmdimprimir 
          Height          =   375
          Index           =   0
          Left            =   -74760
-         TabIndex        =   70
+         TabIndex        =   68
          Top             =   5400
          Width           =   1275
-         _ExtentX        =   2249
-         _ExtentY        =   661
+         _ExtentX        =   2244
+         _ExtentY        =   656
          Picture         =   "frmIE.frx":058A
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -653,16 +654,16 @@ Begin VB.Form frmIE
          Height          =   375
          Index           =   1
          Left            =   -71760
-         TabIndex        =   71
+         TabIndex        =   69
          Top             =   5400
          Width           =   1275
-         _ExtentX        =   2249
-         _ExtentY        =   661
+         _ExtentX        =   2244
+         _ExtentY        =   656
          Picture         =   "frmIE.frx":0B24
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -674,16 +675,16 @@ Begin VB.Form frmIE
          Height          =   375
          Index           =   2
          Left            =   -68640
-         TabIndex        =   72
+         TabIndex        =   70
          Top             =   5400
          Width           =   1275
-         _ExtentX        =   2249
-         _ExtentY        =   661
+         _ExtentX        =   2244
+         _ExtentY        =   656
          Picture         =   "frmIE.frx":10BE
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -695,16 +696,16 @@ Begin VB.Form frmIE
          Height          =   375
          Index           =   0
          Left            =   -73320
-         TabIndex        =   73
+         TabIndex        =   71
          Top             =   5400
          Width           =   1215
-         _ExtentX        =   2143
-         _ExtentY        =   661
+         _ExtentX        =   2138
+         _ExtentY        =   656
          Picture         =   "frmIE.frx":1658
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -716,16 +717,16 @@ Begin VB.Form frmIE
          Height          =   375
          Index           =   1
          Left            =   -70320
-         TabIndex        =   74
+         TabIndex        =   72
          Top             =   5400
          Width           =   1215
-         _ExtentX        =   2143
-         _ExtentY        =   661
+         _ExtentX        =   2138
+         _ExtentY        =   656
          Picture         =   "frmIE.frx":1BF2
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -737,16 +738,16 @@ Begin VB.Form frmIE
          Height          =   375
          Index           =   2
          Left            =   -67200
-         TabIndex        =   75
+         TabIndex        =   73
          Top             =   5400
          Width           =   1215
-         _ExtentX        =   2143
-         _ExtentY        =   661
+         _ExtentX        =   2138
+         _ExtentY        =   656
          Picture         =   "frmIE.frx":218C
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -757,16 +758,16 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton CmdConfImp 
          Height          =   435
          Left            =   -66000
-         TabIndex        =   76
+         TabIndex        =   74
          Top             =   720
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":2726
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -777,17 +778,17 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton pegelaborador 
          Height          =   375
          Left            =   -70920
-         TabIndex        =   77
+         TabIndex        =   75
          TabStop         =   0   'False
          Top             =   600
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
+         _ExtentX        =   656
+         _ExtentY        =   656
          Picture         =   "frmIE.frx":2CC0
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -798,17 +799,17 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton ComMotInc 
          Height          =   435
          Left            =   -66960
-         TabIndex        =   78
+         TabIndex        =   76
          TabStop         =   0   'False
          Top             =   3120
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":325A
          Caption         =   "Novo"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -819,17 +820,17 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton ComMotAlt 
          Height          =   435
          Left            =   -66960
-         TabIndex        =   79
+         TabIndex        =   77
          TabStop         =   0   'False
          Top             =   3600
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":37F4
          Caption         =   "Editar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -840,17 +841,17 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton ComMotExc 
          Height          =   435
          Left            =   -66960
-         TabIndex        =   80
+         TabIndex        =   78
          TabStop         =   0   'False
          Top             =   4080
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":3D8E
          Caption         =   "Apagar"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -862,17 +863,17 @@ Begin VB.Form frmIE
          Height          =   435
          Index           =   0
          Left            =   -74760
-         TabIndex        =   90
+         TabIndex        =   88
          TabStop         =   0   'False
          Top             =   3960
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":4328
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -884,17 +885,17 @@ Begin VB.Form frmIE
          Height          =   435
          Index           =   1
          Left            =   -71760
-         TabIndex        =   91
+         TabIndex        =   89
          TabStop         =   0   'False
          Top             =   3960
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":47C2
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -906,17 +907,17 @@ Begin VB.Form frmIE
          Height          =   435
          Index           =   2
          Left            =   -68640
-         TabIndex        =   92
+         TabIndex        =   90
          TabStop         =   0   'False
          Top             =   3960
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":4C5C
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -928,17 +929,17 @@ Begin VB.Form frmIE
          Height          =   435
          Index           =   0
          Left            =   -74760
-         TabIndex        =   93
+         TabIndex        =   91
          TabStop         =   0   'False
          Top             =   4440
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":50F6
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -950,17 +951,17 @@ Begin VB.Form frmIE
          Height          =   435
          Index           =   1
          Left            =   -71760
-         TabIndex        =   94
+         TabIndex        =   92
          TabStop         =   0   'False
          Top             =   4440
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":5590
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -972,17 +973,17 @@ Begin VB.Form frmIE
          Height          =   435
          Index           =   2
          Left            =   -68640
-         TabIndex        =   95
+         TabIndex        =   93
          TabStop         =   0   'False
          Top             =   4440
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":5A2A
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -994,17 +995,17 @@ Begin VB.Form frmIE
          Height          =   435
          Index           =   0
          Left            =   -74760
-         TabIndex        =   96
+         TabIndex        =   94
          TabStop         =   0   'False
          Top             =   4920
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":5EC4
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -1016,17 +1017,17 @@ Begin VB.Form frmIE
          Height          =   435
          Index           =   1
          Left            =   -71760
-         TabIndex        =   97
+         TabIndex        =   95
          TabStop         =   0   'False
          Top             =   4920
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":635E
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -1038,17 +1039,17 @@ Begin VB.Form frmIE
          Height          =   435
          Index           =   2
          Left            =   -68640
-         TabIndex        =   98
+         TabIndex        =   96
          TabStop         =   0   'False
          Top             =   4920
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmIE.frx":67F8
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -1060,17 +1061,17 @@ Begin VB.Form frmIE
          Height          =   495
          Index           =   0
          Left            =   -74760
-         TabIndex        =   99
+         TabIndex        =   97
          TabStop         =   0   'False
          Top             =   5880
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmIE.frx":6C92
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -1082,17 +1083,17 @@ Begin VB.Form frmIE
          Height          =   495
          Index           =   1
          Left            =   -71760
-         TabIndex        =   100
+         TabIndex        =   98
          TabStop         =   0   'False
          Top             =   5880
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmIE.frx":712C
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -1104,17 +1105,17 @@ Begin VB.Form frmIE
          Height          =   495
          Index           =   2
          Left            =   -68640
-         TabIndex        =   101
+         TabIndex        =   99
          TabStop         =   0   'False
          Top             =   5880
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmIE.frx":75C6
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -1306,7 +1307,7 @@ Begin VB.Form frmIE
       Enabled         =   0   'False
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   13.5
+         Size            =   13.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1346,60 +1347,20 @@ Begin VB.Form frmIE
       Top             =   1080
       Width           =   1875
    End
-   Begin XPControls.XPButton cmdClose 
-      Height          =   435
-      Left            =   10080
-      TabIndex        =   68
-      Top             =   120
-      Width           =   1155
-      _ExtentX        =   2037
-      _ExtentY        =   767
-      Picture         =   "frmIE.frx":7A60
-      Caption         =   "Salvar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
-   Begin XPControls.XPButton Encerrar 
-      Height          =   435
-      Left            =   10080
-      TabIndex        =   69
-      Top             =   720
-      Width           =   1155
-      _ExtentX        =   2037
-      _ExtentY        =   767
-      Picture         =   "frmIE.frx":7FFA
-      Caption         =   "Retornar"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
    Begin XPControls.XPButton Cmdescmr 
       Height          =   375
       Left            =   2520
-      TabIndex        =   81
+      TabIndex        =   79
       TabStop         =   0   'False
       Top             =   600
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "frmIE.frx":8594
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "frmIE.frx":7A60
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1410,17 +1371,17 @@ Begin VB.Form frmIE
    Begin XPControls.XPButton Cmdbusmr 
       Height          =   375
       Left            =   2880
-      TabIndex        =   82
+      TabIndex        =   80
       TabStop         =   0   'False
       Top             =   600
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "frmIE.frx":8B2E
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "frmIE.frx":7FFA
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1432,17 +1393,17 @@ Begin VB.Form frmIE
       Height          =   375
       Index           =   0
       Left            =   7800
-      TabIndex        =   83
+      TabIndex        =   81
       TabStop         =   0   'False
       Top             =   120
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "frmIE.frx":90C8
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "frmIE.frx":8594
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1454,17 +1415,17 @@ Begin VB.Form frmIE
       Height          =   375
       Index           =   6
       Left            =   8880
-      TabIndex        =   84
+      TabIndex        =   82
       TabStop         =   0   'False
       Top             =   120
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
-      Picture         =   "frmIE.frx":9662
+      _ExtentX        =   1291
+      _ExtentY        =   656
+      Picture         =   "frmIE.frx":8B2E
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1476,17 +1437,17 @@ Begin VB.Form frmIE
       Height          =   375
       Index           =   2
       Left            =   8160
-      TabIndex        =   85
+      TabIndex        =   83
       TabStop         =   0   'False
       Top             =   120
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
-      Picture         =   "frmIE.frx":9BFC
+      _ExtentX        =   1291
+      _ExtentY        =   656
+      Picture         =   "frmIE.frx":90C8
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1498,17 +1459,17 @@ Begin VB.Form frmIE
       Height          =   375
       Index           =   4
       Left            =   3480
-      TabIndex        =   86
+      TabIndex        =   84
       TabStop         =   0   'False
       Top             =   1080
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
-      Picture         =   "frmIE.frx":A196
+      _ExtentX        =   656
+      _ExtentY        =   656
+      Picture         =   "frmIE.frx":9662
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1520,17 +1481,17 @@ Begin VB.Form frmIE
       Height          =   375
       Index           =   3
       Left            =   3840
-      TabIndex        =   87
+      TabIndex        =   85
       TabStop         =   0   'False
       Top             =   1080
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
-      Picture         =   "frmIE.frx":A730
+      _ExtentX        =   1291
+      _ExtentY        =   656
+      Picture         =   "frmIE.frx":9BFC
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1542,17 +1503,17 @@ Begin VB.Form frmIE
       Height          =   375
       Index           =   7
       Left            =   4560
-      TabIndex        =   88
+      TabIndex        =   86
       TabStop         =   0   'False
       Top             =   1080
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
-      Picture         =   "frmIE.frx":ACCA
+      _ExtentX        =   1291
+      _ExtentY        =   656
+      Picture         =   "frmIE.frx":A196
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1564,23 +1525,63 @@ Begin VB.Form frmIE
       Height          =   375
       Index           =   1
       Left            =   3240
-      TabIndex        =   89
+      TabIndex        =   87
       TabStop         =   0   'False
       Top             =   600
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
-      Picture         =   "frmIE.frx":B264
+      _ExtentX        =   1291
+      _ExtentY        =   656
+      Picture         =   "frmIE.frx":A730
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VBCCR18.CommandButtonW cmdClose 
+      Height          =   612
+      Left            =   10320
+      TabIndex        =   100
+      Top             =   120
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Salvar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmIE.frx":ACCA
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW Encerrar 
+      Height          =   612
+      Left            =   10320
+      TabIndex        =   101
+      Top             =   840
+      Width           =   972
+      _ExtentX        =   1715
+      _ExtentY        =   1080
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Caption         =   "Retornar"
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "frmIE.frx":B264
+      PictureAndCaption=   -1  'True
+      WordWrap        =   0   'False
+      Style           =   1
    End
    Begin VB.Label lblLabels 
       Caption         =   "Codigo:"
@@ -1683,7 +1684,7 @@ Private Sub cmdClose_Click()
     If gridrev.Rows > 1 Then
       gridrev.Row = gridrev.Rows - 1
       gridrev.Col = 3
-      TXTFIELDS(21).text = gridrev
+      TXTFIELDS(21).Text = gridrev
     Else
       TXTFIELDS(21) = TXTFIELDS(24)
     End If
@@ -1921,7 +1922,7 @@ End Sub
 Private Sub Form_Load()
 
   CenterFormToScreen Me
-  TXTPF.text = nPF
+  TXTPF.Text = nPF
   lTROCOU = Array(False, False, False)
   aCAMIMG = Array("IMAGEM", "FOTOESQ", "FOTODIR")
 
@@ -2038,9 +2039,9 @@ Private Sub TXTFIELDS_Change(Index As Integer)
   Select Case Index
   Case 10, 11, 12, 13
     'Peso Liquido=Peso Unitario * N Peca por Embalagem
-    TXTFIELDS(12).text = CDbl(FixNum(TXTFIELDS(10))) * CDbl(FixNum(TXTFIELDS(11)))
+    TXTFIELDS(12).Text = CDbl(FixNum(TXTFIELDS(10))) * CDbl(FixNum(TXTFIELDS(11)))
     'Peso Bruto Peso Liquido + Tara
-    TXTFIELDS(14).text = CDbl(FixNum(TXTFIELDS(12))) + CDbl(FixNum(TXTFIELDS(13)))
+    TXTFIELDS(14).Text = CDbl(FixNum(TXTFIELDS(12))) + CDbl(FixNum(TXTFIELDS(13)))
   End Select
 End Sub
 
