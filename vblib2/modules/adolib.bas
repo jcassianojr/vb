@@ -208,7 +208,8 @@ End Function
 
 Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = "", _
                          Optional ByVal cPASS As String = "", Optional ByVal lWRITE As Boolean = True, _
-                         Optional ByVal cDATABASE As String = "", Optional ByVal cowner As String = "", Optional cPADTIPOCON As String = "N") As Variant
+                         Optional ByVal cDATABASE As String = "", Optional ByVal cowner As String = "", _
+                         Optional cPADTIPOCON As String = "N", Optional ByVal cPORTA As String = "") As Variant
   Dim cARQTMP As String
   Dim cJETUSO As String
   Dim lTEMMDB As Boolean
@@ -246,7 +247,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   
   
   If cDATABASE = "" Then
-          cDATABASE = TratarParametrosCofre(cDATABASE)
+     cDATABASE = TratarParametrosCofre(cDATABASE)
   End If
   
   If cDATABASE <> "" Then
@@ -262,10 +263,12 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     If Trim(cPASS) = "" Then
         cPASS = LerDoCofre(cSecaoCofre, "Password")
     End If
-         If Trim(cowner) = "" Then
-            cowner = LerDoCofre(cSecaoCofre, "Owner")
-         End If
-
+    If Trim(cowner) = "" Then
+        cowner = LerDoCofre(cSecaoCofre, "Owner")
+     End If
+     If Trim(cPORTA) = "" Then
+        cPORTA = LerDoCofre(cSecaoCofre, "Porta")
+     End If
 
   End If
 
@@ -425,7 +428,9 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
             If cUSER = "" Then
                cUSER = "root"
             End If
-  
+            If cPORTA = "" Then
+               cPORTA = "3306"
+            End If
 
             Select Case UCase(cPADTIPOCON)
       '       cARQ = "DRIVER={MariaDB ODBC 3.2 Driver};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PASSWORD=" + cPASS + ";"
@@ -456,6 +461,9 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
             End If
             If cUSER = "" Then
                cUSER = "root"
+            End If
+            If cPORTA = "" Then
+               cPORTA = "1521"
             End If
     
  '           cARQ = "DRIVER={Microsoft ODBC For Oracle};DATABASE=" + aCONN(3) + ";SERVER=" + aCONN(0) + ";UID=" + cUSER + ";PWD=" + cPASS + ";"
@@ -494,7 +502,9 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
             If cUSER = "" Then
                cUSER = "root"
             End If
-
+            If cPORTA = "" Then
+               cPORTA = "3306"
+            End If
     '  cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"     '32 driver versao 8
             Select Case UCase(cPADTIPOCON)
                     Case "D", "N": cARQ = "Driver={MySQL ODBC 8.0 ANSI Driver};Server=" & aCONN(0) & ";Database=" & aCONN(3) & ";User=" & cUSER & ";Password=" & cPASS & ";Option=3;"
@@ -518,6 +528,9 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
             If cUSER = "" Then
                cUSER = "postgres"
             End If
+              If cPORTA = "" Then
+               cPORTA = "5432"
+            End If
             Dim cSchema As String
                 cSchema = IIf(Trim(cowner) <> "", ";SearchPath=" & cowner, "")
         '        cARQ = "Driver={PostgreSQL ANSI};Server=" + aCONN(0) + ";Database=" + aCONN(3) + ";Uid=" + cUSER + ";Pwd=" + cPASS + ";"
@@ -532,28 +545,31 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
      Exit Function
     End If
 
-' 3. No bloco que aplica a string de conexão (após a checagem do SQLite/MariaDB):
-If lTEMFIREBIRD Then
-    cARQ = Replace(cARQ, "[FIREBIRD]", "")
-    TipoConn = Array(cTIPOPADRAO, cARQ, "FIREBIRD")
-    cARQ = "Driver={Firebird ODBC Driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
-    If IsDriverInstalled("Firebird ODBC Driver") Then
-       cARQ = "Driver={Firebird ODBC Driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
-    Else
-       If IsDriverInstalled("Firebird/InterBase(r) driver") Then
-          cARQ = "Driver={Firebird/InterBase(r) driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
-       End If
+    If lTEMFIREBIRD Then
+    
+            If cPASS = "" Then
+               cPASS = "masterkey"
+            End If
+            If cUSER = "" Then
+               cUSER = "SYSDBA"
+            End If
+            If cPORTA = "" Then
+               cPORTA = "3050"
+            End If
+    
+    
+        cARQ = Replace(cARQ, "[FIREBIRD]", "")
+        TipoConn = Array(cTIPOPADRAO, cARQ, "FIREBIRD")
+        cARQ = "Driver={Firebird ODBC Driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
+        If IsDriverInstalled("Firebird ODBC Driver") Then
+           cARQ = "Driver={Firebird ODBC Driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
+        Else
+           If IsDriverInstalled("Firebird/InterBase(r) driver") Then
+              cARQ = "Driver={Firebird/InterBase(r) driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
+           End If
+        End If
+        Exit Function
     End If
-    'Select Case UCase(cPADTIPOCON)
-     '   Case "D", "N" ' Driver
-     '       cARQ = "Driver={Firebird ODBC Driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
-     '   Case "P" ' Provider
-     '       cARQ = "Provider=LCPI.IBProvider;Location=" & cARQ & ";User ID=" & cUSER & ";Password=" & cPASS & ";"
-    'End Select
-    
-    
-    Exit Function
-End If
   '
   'jetfox
   '
@@ -599,6 +615,10 @@ End If
       Exit Function
     End If
      If InStr(cARQTMP, "[SQLSERVER]") > 0 Or InStr(cARQTMP, "[MSSQL]") > 0 Then
+         If cPORTA = "" Then
+               cPORTA = "1433"
+            End If
+     
         cARQ = Replace(cARQ, "[SQLSERVER]", "")
         cARQ = Replace(cARQ, "[MSSQL]", "")
           aCONN = Split(cARQ, ".") 'localhost.port.mysdql.banco 'localhost.5432.mssql.citacao

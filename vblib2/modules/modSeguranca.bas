@@ -161,13 +161,16 @@ Public Sub GravarNoCofre(ByVal SecaoBanco As String, ByVal Chave As String, ByVa
     Call WritePrivateProfileString(SecaoBanco, Chave, ValorCripto, CaminhoArquivoCofre)
 End Sub
 
-Public Function LerDoCofre(ByVal SecaoBanco As String, ByVal Chave As String) As String
+Public Function LerDoCofre(ByVal SecaoBanco As String, ByVal Chave As String, Optional ByVal cPADRAO As String = "") As String
     Dim Retorno As String * 255
     Dim QtdCaracteres As Long
     QtdCaracteres = GetPrivateProfileString(SecaoBanco, Chave, "", Retorno, 255, CaminhoArquivoCofre)
     Dim ValorCripto As String
     ValorCripto = Left$(Retorno, QtdCaracteres)
     LerDoCofre = DescriptografarForte(ValorCripto)
+    If LerDoCofre = "" Then
+       LerDoCofre = cPADRAO
+    End If
 End Function
 
 ' Adicione esta declaração no topo
