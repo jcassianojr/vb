@@ -536,13 +536,20 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
 If lTEMFIREBIRD Then
     cARQ = Replace(cARQ, "[FIREBIRD]", "")
     TipoConn = Array(cTIPOPADRAO, cARQ, "FIREBIRD")
-    
-    Select Case UCase(cPADTIPOCON)
-        Case "D", "N" ' Driver
-            cARQ = "Driver={Firebird ODBC Driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
-        Case "P" ' Provider
-            cARQ = "Provider=LCPI.IBProvider;Location=" & cARQ & ";User ID=" & cUSER & ";Password=" & cPASS & ";"
-    End Select
+    cARQ = "Driver={Firebird ODBC Driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
+    If IsDriverInstalled("Firebird ODBC Driver") Then
+       cARQ = "Driver={Firebird ODBC Driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
+    Else
+       If IsDriverInstalled("Firebird/InterBase(r) driver") Then
+          cARQ = "Driver={Firebird/InterBase(r) driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
+       End If
+    End If
+    'Select Case UCase(cPADTIPOCON)
+     '   Case "D", "N" ' Driver
+     '       cARQ = "Driver={Firebird ODBC Driver};DbName=" & cARQ & ";UID=" & cUSER & ";PWD=" & cPASS & ";"
+     '   Case "P" ' Provider
+     '       cARQ = "Provider=LCPI.IBProvider;Location=" & cARQ & ";User ID=" & cUSER & ";Password=" & cPASS & ";"
+    'End Select
     
     
     Exit Function
@@ -1559,4 +1566,57 @@ Public Function EArquivofirebird(ByVal cCaminho As String) As Boolean
        EArquivofirebird = False
     End If
 End Function
+
+Public Function FirebirdODBC() As String
+    Dim shell As Object
+    Dim sRegKey As String
+    Dim bAchouV3 As Boolean
+    Dim bAchouV2 As Boolean
+    
+    Set shell = CreateObject("WScript.Shell")
+    
+    ' 1. TESTA SE A VERSÃO 3 ESTÁ INSTALADA
+    On Error Resume Next
+    sRegKey = "HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\ODBC Drivers\Firebird ODBC Driver"
+    shell.RegRead sRegKey
+    bAchouV3 = (Err.Number = 0)
+    
+    If Not bAchouV3 Then
+        Err.Clear
+        sRegKey = "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\ODBC\ODBCINST.INI\ODBC Drivers\Firebird ODBC Driver"
+        shell.RegRead sRegKey
+        bAchouV3 = (Err.Number = 0)
+    End If
+    
+    ' Se achou a Versão 3, retorna a string correspondente imediatamente
+    If bAchouV3 Then
+        FirebirdODBC = "Firebird ODBC Driver"
+        Set shell = Nothing
+        Exit Function
+    End If
+
+    ' 2. TESTA SE A VERSÃO 2 ESTÁ INSTALADA (CASO NÃO TENHA A V3)
+    Err.Clear
+    sRegKey = "HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\ODBC Drivers\Firebird/InterBase(r) driver"
+    shell.RegRead sRegKey
+    bAchouV2 = (Err.Number = 0)
+    
+    If Not bAchouV2 Then
+        Err.Clear
+        sRegKey = "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\ODBC\ODBCINST.INI\ODBC Drivers\Firebird/InterBase(r) driver"
+        shell.RegRead sRegKey
+        bAchouV2 = (Err.Number = 0)
+    End If
+    
+    ' Se achou a Versão 2, retorna a string dela
+    If bAchouV2 Then
+        FirebirdODBC = "Firebird/InterBase(r) driver"
+    Else
+        ' Se nenhum driver for localizado no Windows
+        FirebirdODBC = ""
+    End If
+    
+    Set shell = Nothing
+End Function
+
 
