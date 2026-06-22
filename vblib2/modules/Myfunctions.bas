@@ -93,6 +93,9 @@ Public Const CB_ERR As Long = (-1)
 Public Const GWL_STYLE As Long = (-16)
 Public Const HELP_CONTENTS = &H3&
 
+Public Const CP_UTF8 As Long = 65001
+Public Const MB_ERR_INVALID_CHARS As Long = &H8
+
 'Private Type SHFILEOPSTRUCT
 '  hwnd As Long
 '  wFunc As Long
@@ -139,11 +142,18 @@ End Enum
     Public Declare PtrSafe Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
     Public Declare PtrSafe Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
     Public Declare PtrSafe Function WinHelp Lib "user32" Alias "WinHelpA" (ByVal hwnd As LongPtr, ByVal lpHelpFile As String, ByVal wCommand As LongPtr, ByVal dwData As LongPtr) As Long
+   Public Declare PtrSafe Function MultiByteToWideChar Lib "kernel32" ( _
+        ByVal CodePage As Long, _
+        ByVal dwFlags As Long, _
+        ByVal lpMultiByteStr As LongPtr, _
+        ByVal cbMultiByte As Long, _
+        ByVal lpWideCharStr As LongPtr, _
+        ByVal cchWideChar As Long) As Long
 
 #Else
     ' --- BLOCO 32-BIT CLÁSSICO (VB6) ---
-    Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
-    Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
+    Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+    Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
     
     Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
     Public Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
@@ -153,15 +163,37 @@ End Enum
     Public Declare Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As Long, ByVal lpFileName As String) As Long
     Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpString As Any, ByVal lpFileName As String) As Long
     
-    Public Declare Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String, ByVal cchData As Long) As Long
-    Public Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String) As Long
+    Public Declare Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCType As Long, ByVal lpLCData As String, ByVal cchData As Long) As Long
+    Public Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCType As Long, ByVal lpLCData As String) As Long
     
     Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
     Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
-    Public Declare Function WinHelp Lib "user32" Alias "WinHelpA" (ByVal hWnd As Long, ByVal lpHelpFile As String, ByVal wCommand As Long, ByVal dwData As Long) As Long
+    Public Declare Function WinHelp Lib "user32" Alias "WinHelpA" (ByVal hwnd As Long, ByVal lpHelpFile As String, ByVal wCommand As Long, ByVal dwData As Long) As Long
+    Public Declare Function MultiByteToWideChar Lib "kernel32" (ByVal CodePage As Long, ByVal dwFlags As Long, ByVal lpMultiByteStr As Long, ByVal cbMultiByte As Long, ByVal lpWideCharStr As Long, ByVal cchWideChar As Long) As Long
+
 #End If
-
-
+Public Function UTF8ToVBString(ByVal sUTF8 As String) As String
+    Dim nLen As Long
+    Dim sBuffer As String
+    
+    ' Obtém o tamanho necessário para o buffer Unicode
+    nLen = MultiByteToWideChar(CP_UTF8, 0, StrPtr(sUTF8), -1, 0, 0)
+    If nLen > 0 Then
+        sBuffer = String$(nLen - 1, 0)
+        MultiByteToWideChar CP_UTF8, 0, StrPtr(sUTF8), -1, StrPtr(sBuffer), nLen
+        UTF8ToVBString = sBuffer
+    Else
+        UTF8ToVBString = sUTF8 ' Retorna original se falhar
+    End If
+End Function
+Public Function IsUTF8(ByVal sInput As String) As Boolean
+    ' Tenta converter o buffer para Unicode forçando erro se encontrar bytes inválidos
+    Dim nResult As Long
+    nResult = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, StrPtr(sInput), -1, 0, 0)
+    
+    ' Se nResult > 0, o Windows conseguiu validar como UTF-8
+    IsUTF8 = (nResult > 0)
+End Function
 
 Private Sub ForceSystemDecimalToPeriod()
     ' We MUST use the ANSI API version so it's an ANSI character that's used for the actual decimal character.
@@ -218,10 +250,10 @@ Public Function ComboLostFocus(ByRef Combo1)
 Dim strPartial
 Dim i
   With Combo1
-    If Len(.Text) Then
+    If Len(.tEXT) Then
       'Procura pelo texto digitado
-      strPartial = .Text
-      i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
+      strPartial = .tEXT
+      i = SendMessage(.hwnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
     End If
@@ -284,12 +316,12 @@ Public Function ComboChange(ByRef Combo1)
 Dim strPartial
 Dim i
 Dim strTotal
-Dim j
+Dim J
 Dim m_bEditFromCode
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .Text
-    i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
+    strPartial = .tEXT
+    i = SendMessage(.hwnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
     'Se achou, adiciona o resto do Texto
@@ -298,15 +330,15 @@ Dim m_bEditFromCode
       strTotal = .List(i)
 
       'Compute number of unmatched characters
-      j = Len(strTotal) - Len(strPartial)
-      If j <> 0 Then
+      J = Len(strTotal) - Len(strPartial)
+      If J <> 0 Then
         'Adiciona o resto da string encontrada
         m_bEditFromCode = True
-        .SelText = Right$(strTotal, j)
+        .SelText = Right$(strTotal, J)
 
         'Marca os caracteres adicionados
         .SelStart = Len(strPartial)
-        .SelLength = j
+        .SelLength = J
       End If
     End If
   End With
@@ -314,7 +346,7 @@ End Function
 
 Public Sub MoveObject(ByRef Obj As Control)
   Screen.MousePointer = vbSizeAll
-  SendMessage Obj.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 1
+  SendMessage Obj.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 1
   ReleaseCapture
   Screen.MousePointer = vbDefault
 End Sub
@@ -486,10 +518,10 @@ Public Function Alert(ByVal cDIZ As String, Optional ByVal cTITLE As String = "I
   MsgBox cDIZ, vbOKOnly, cTITLE
 End Function
 
-Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVAL As String, Optional ByVal nLEN As Integer = 0) As String
+Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVAL As String, Optional ByVal nLen As Integer = 0) As String
   Busca = InputBox(cDIZ, cCAB, cVAL)
-  If nLEN > 0 Then
-     Busca = Left$(Busca, nLEN)
+  If nLen > 0 Then
+     Busca = Left$(Busca, nLen)
   End If
 End Function
 
@@ -759,7 +791,7 @@ End Function
 Public Function FixStr(ByVal eVAR As Variant, _
                        Optional ByVal ePAD As Variant = "", _
                        Optional ByVal coper As String = "", _
-                       Optional ByVal nLEN As Integer = 0) As Variant
+                       Optional ByVal nLen As Integer = 0) As Variant
   On Error GoTo errhandler
   If IsNull(eVAR) Then
     If ePAD <> "" Then
@@ -776,8 +808,8 @@ Public Function FixStr(ByVal eVAR As Variant, _
     eVAR = Trim(eVAR)
     FixStr = eVAR
   End If
-  If nLEN > 0 And Len(eVAR) > nLEN Then
-    eVAR = Mid(eVAR, 1, nLEN)
+  If nLen > 0 And Len(eVAR) > nLen Then
+    eVAR = Mid(eVAR, 1, nLen)
     FixStr = eVAR
   End If
   Exit Function
@@ -902,15 +934,15 @@ Public Function Multiplicar(ByVal nVAL As Variant, ByVal nMUL As Variant)
 End Function
 
 
-Public Function PadRight(ByVal cTEXTO, ByVal nLEN) As String
-  cTEXTO = cTEXTO & Space(nLEN)
-  cTEXTO = Left(cTEXTO, nLEN)
+Public Function PadRight(ByVal cTEXTO, ByVal nLen) As String
+  cTEXTO = cTEXTO & Space(nLen)
+  cTEXTO = Left(cTEXTO, nLen)
   PadRight = cTEXTO
 End Function
 
-Public Function PadLeft(ByVal cTEXTO, ByVal nLEN) As String
-  cTEXTO = Space(nLEN) & cTEXTO
-  cTEXTO = Right(cTEXTO, nLEN)
+Public Function PadLeft(ByVal cTEXTO, ByVal nLen) As String
+  cTEXTO = Space(nLen) & cTEXTO
+  cTEXTO = Right(cTEXTO, nLen)
   PadLeft = cTEXTO
 End Function
 
@@ -919,33 +951,33 @@ Public Function PegCamini(ByVal cCaminho As String) As String
 End Function
 Public Function PegINIVAL(ByVal cARQINI As String, ByVal cGRUPO As String, ByVal cCAMPO As String, Optional ByVal ePAD As String = "") As String
   Dim z As Long
-  Dim scaminho As String * 255
-  z = GetPrivateProfileString(cGRUPO, cCAMPO, "", scaminho, 150, cARQINI)
-  PegINIVAL = IIf(Asc(Left(scaminho, 1)) = "0", ePAD, Left(scaminho, z))
+  Dim sCaminho As String * 255
+  z = GetPrivateProfileString(cGRUPO, cCAMPO, "", sCaminho, 150, cARQINI)
+  PegINIVAL = IIf(Asc(Left(sCaminho, 1)) = "0", ePAD, Left(sCaminho, z))
 
 End Function
 
 Public Function PegPath(ByVal cGRUPO As String, ByVal cCAMPO As String, Optional ByVal ePAD As String = "" _
                        , Optional ByVal cARQINI As String = "") As String
   Dim z As Long
-  Dim scaminho As String * 255
+  Dim sCaminho As String * 255
   If cARQINI = "" Then
      cARQINI = App.Path & "\" & App.EXEName & ".INI"
   End If
-  z = GetPrivateProfileString(cGRUPO, cCAMPO, "", scaminho, 150, cARQINI)
+  z = GetPrivateProfileString(cGRUPO, cCAMPO, "", sCaminho, 150, cARQINI)
   If Len(ePAD) = 0 Then
     ePAD = App.Path & "\"
   End If
-  PegPath = IIf(Asc(Left(scaminho, 1)) = "0", ePAD, Left(scaminho, z))
+  PegPath = IIf(Asc(Left(sCaminho, 1)) = "0", ePAD, Left(sCaminho, z))
 
 End Function
 
 Public Function PegTable(ByVal cGRUPO As String, ByVal cCAMPO As String)
   Dim z As Long
-  Dim scaminho As String * 255
+  Dim sCaminho As String * 255
   Dim cTMP As String
-  z = GetPrivateProfileString(cGRUPO, cCAMPO, "", scaminho, 150, App.Path + "\" & App.EXEName & ".INI")
-  cTMP = IIf(Asc(Left(scaminho, 1)) = "0", App.Path & "\", Left(scaminho, z))
+  z = GetPrivateProfileString(cGRUPO, cCAMPO, "", sCaminho, 150, App.Path + "\" & App.EXEName & ".INI")
+  cTMP = IIf(Asc(Left(sCaminho, 1)) = "0", App.Path & "\", Left(sCaminho, z))
   PegTable = PegPath("PATH", cTMP)
 End Function
 
@@ -1615,13 +1647,13 @@ Public Function SomaExt(ByVal cARQ As String, Optional ByVal cEXT As String = ".
   End If
 End Function
 
-Public Function StrZero(ByVal nNUM, Optional ByVal nLEN As Integer = 0)
+Public Function StrZero(ByVal nNUM, Optional ByVal nLen As Integer = 0)
   Dim cTemp As String
-  If nLEN = 0 Then
+  If nLen = 0 Then
     cTemp = FixStr(nNUM, "0", "TRIM")
-    nLEN = Trim(cTemp)
+    nLen = Trim(cTemp)
   End If
-  StrZero = Right(String(nLEN, "0") & CStr(nNUM), nLEN)
+  StrZero = Right(String(nLen, "0") & CStr(nNUM), nLen)
 End Function
 
 Function Convert2ansi(ByVal in_string As String) As String
@@ -1656,7 +1688,7 @@ Public Function Tirace(ByVal texto As String) As String
 End Function
 Public Function StrToArray(ByVal cGRUPO As String) As Variant
   Dim x As Integer
-  Dim nLEN As Integer
+  Dim nLen As Integer
   Dim aUSO As Variant
   Dim cCHAR As String
   Dim eCNV As String
@@ -1666,9 +1698,9 @@ Public Function StrToArray(ByVal cGRUPO As String) As Variant
     eCNV = cGRUPO
   End Select
 
-  nLEN = Len(eCNV)
-  ReDim aUSO(nLEN)
-  For x = 1 To nLEN
+  nLen = Len(eCNV)
+  ReDim aUSO(nLen)
+  For x = 1 To nLen
     cCHAR = Mid(eCNV, x, 1)
     Select Case cCHAR
     Case "ª"
@@ -2006,11 +2038,11 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
   End If
 End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
-  Dim nLEN As Integer
+  Dim nLen As Integer
   Dim nTEXTO As Integer
   Dim x As Integer
   Dim y As Integer
@@ -2025,10 +2057,10 @@ Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eD
     aDES = StrToArray(CStr(eDES))
   End If
   aTEXTO = StrToArray(cTEXTO)
-  nLEN = UBound(aORI)
+  nLen = UBound(aORI)
   nTEXTO = UBound(aTEXTO)
   For y = 0 To nTEXTO
-    For x = 0 To nLEN
+    For x = 0 To nLen
       If aTEXTO(y) = aORI(x) Then          ''Encerra Analise Para Evitar
         aTEXTO(y) = aDES(x)              ''Loop de Troca
         Exit For
@@ -2746,12 +2778,12 @@ Public Function MachineName() As String
     End If
     Set oShell = Nothing
 End Function
-Public Function WordLen(ByRef Text As String) As Long
+Public Function WordLen(ByRef tEXT As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(Text), vbFromUnicode)
+  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next
@@ -2828,7 +2860,7 @@ Public Function TimedMsgBox(Prompt As String, Optional ByVal TimeOut As Long = 0
 
 End Function
 
-Private Sub TimeOutMB(hWnd As Long, uMsg As Long, idEvent As Long, dwTime As Long)
+Private Sub TimeOutMB(hwnd As Long, uMsg As Long, idEvent As Long, dwTime As Long)
 
   SendMessage FindWindow(vbNullString, CurMBTitle), WM_CLOSE, 0&, 0&
 
