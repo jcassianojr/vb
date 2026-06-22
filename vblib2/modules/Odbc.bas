@@ -161,11 +161,12 @@ Private Sub RemoverDSN(ByVal dsnName As String, ByVal strDriverType As String)
         Case "MDB", "ACCDB": StrDriver = "Microsoft Access Driver (*.mdb, *.accdb)"
         Case "DBF":          StrDriver = "Microsoft Visual FoxPro Driver"
         Case "SQLITE":       StrDriver = "SQLite3 ODBC Driver"
-        Case "SQLSERVER", "MSSQL": StrDriver = "SQL Server"
+        Case "SQLSERVER", "MSSQL": StrDriver = GetBestMSSQL("D") '"SQL Server"
         Case "MYSQL":        StrDriver = "MySQL ODBC 8.0 ANSI Driver"
         Case "MARIADB":      StrDriver = "MariaDB ODBC 3.0 Driver"
         Case "POSTGRESQL", "PGSQL": StrDriver = "PostgreSQL ANSI"
         Case "ORACLE":       StrDriver = "Oracle in OraClient19Home1"
+        Case "FIREBIRD":     StrDriver = FirebirdODBC()
     End Select
     Call SQLConfigDataSource(0&, ODBC_REMOVE_DSN, StrDriver, "DSN=" & dsnName & Chr$(0) & Chr$(0))
 End Sub

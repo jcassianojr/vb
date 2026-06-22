@@ -1559,6 +1559,7 @@ Public Function EArquivofirebird(ByVal cCaminho As String) As Boolean
      cCaminho = LCase(cCaminho)
     ' Lista de extensões que o seu sistema aceita como SQLite
     If InStr(cCaminho, ".gdb") > 0 Or _
+       InStr(cCaminho, ".ib") > 0 Or _
        InStr(cCaminho, ".fdb") > 0 Then
        
        EArquivofirebird = True
