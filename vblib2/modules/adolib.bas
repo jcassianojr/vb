@@ -816,33 +816,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     End If
   End If
 End Function
-Public Function DriverExisteOdbc(cNOME As String, bE_DriverODBC As Boolean) As Boolean
-    On Error GoTo TrataErro
-    
-    If bE_DriverODBC Then
-        ' Verifica Driver ODBC via Registro
-        Dim oShell As Object
-        Set oShell = CreateObject("WScript.Shell")
-        ' Tenta ler a subchave padrão de Drivers ODBC
-        Dim sReg As String
-        sReg = "HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\" & cNOME & "\Driver"
-        oShell.RegRead sReg
-        DriverExisteOdbc = True
-        Set oShell = Nothing
-    Else
-        ' Verifica Provider OLEDB via criação de objeto COM
-        Dim oCONN As Object
-        Set oCONN = CreateObject(cNOME)
-        DriverExisteOdbc = True
-        Set oCONN = Nothing
-    End If
-    Exit Function
 
-TrataErro:
-    DriverExisteOdbc = False
-    Resume Proximo
-Proximo:
-End Function
 Public Function TipoDado2(ByVal intType As Integer) As String
   Select Case intType
   Case adSmallInt, adInteger, adSingle, adDouble, adCurrency, adBigInt, adBinary, _
@@ -1492,33 +1466,6 @@ Private Function GetJetExtendedProperties(cFormato As String, Optional lIMEX As 
     GetJetExtendedProperties = ";Extended Properties='" & sProps & "';"
 End Function
 
-
-Public Function GetBestMSSQL(TIPO As String) As String
-    Dim SupportedDrivers, SupportedProviders
-    Dim item As Variant
-    
-    SupportedDrivers = Array("ODBC Driver 17 for SQL Server", "ODBC Driver 13 for SQL Server", "SQL Server Native Client 11.0", "SQL Server")
-    SupportedProviders = Array("MSOLEDBSQL19", "MSOLEDBSQL", "SQLNCLI11", "SQLOLEDB")
-
-    If TIPO = "D" Then
-        For Each item In SupportedDrivers
-            ' AQUI: Você deve passar o nome (item) e True (pois é driver ODBC)
-            If DriverExisteOdbc(CStr(item), True) Then
-                GetBestMSSQL = CStr(item)
-                Exit Function
-            End If
-        Next
-    Else
-        For Each item In SupportedProviders
-            ' AQUI: Você deve passar o nome (item) e False (pois é Provider OLEDB)
-            If DriverExisteOdbc(CStr(item), False) Then
-                GetBestMSSQL = CStr(item)
-                Exit Function
-            End If
-        Next
-    End If
-End Function
-
 Public Function ExtrairNomeTabela(ByVal cSQL As String) As String
     Dim nPosFrom As Long
     Dim nPosWhere As Long
@@ -1588,56 +1535,5 @@ Public Function EArquivofirebird(ByVal cCaminho As String) As Boolean
     End If
 End Function
 
-Public Function FirebirdODBC() As String
-    Dim shell As Object
-    Dim sRegKey As String
-    Dim bAchouV3 As Boolean
-    Dim bAchouV2 As Boolean
-    
-    Set shell = CreateObject("WScript.Shell")
-    
-    ' 1. TESTA SE A VERSÃO 3 ESTÁ INSTALADA
-    On Error Resume Next
-    sRegKey = "HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\ODBC Drivers\Firebird ODBC Driver"
-    shell.RegRead sRegKey
-    bAchouV3 = (Err.Number = 0)
-    
-    If Not bAchouV3 Then
-        Err.Clear
-        sRegKey = "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\ODBC\ODBCINST.INI\ODBC Drivers\Firebird ODBC Driver"
-        shell.RegRead sRegKey
-        bAchouV3 = (Err.Number = 0)
-    End If
-    
-    ' Se achou a Versão 3, retorna a string correspondente imediatamente
-    If bAchouV3 Then
-        FirebirdODBC = "Firebird ODBC Driver"
-        Set shell = Nothing
-        Exit Function
-    End If
-
-    ' 2. TESTA SE A VERSÃO 2 ESTÁ INSTALADA (CASO NÃO TENHA A V3)
-    Err.Clear
-    sRegKey = "HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\ODBC Drivers\Firebird/InterBase(r) driver"
-    shell.RegRead sRegKey
-    bAchouV2 = (Err.Number = 0)
-    
-    If Not bAchouV2 Then
-        Err.Clear
-        sRegKey = "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\ODBC\ODBCINST.INI\ODBC Drivers\Firebird/InterBase(r) driver"
-        shell.RegRead sRegKey
-        bAchouV2 = (Err.Number = 0)
-    End If
-    
-    ' Se achou a Versão 2, retorna a string dela
-    If bAchouV2 Then
-        FirebirdODBC = "Firebird/InterBase(r) driver"
-    Else
-        ' Se nenhum driver for localizado no Windows
-        FirebirdODBC = ""
-    End If
-    
-    Set shell = Nothing
-End Function
 
 
