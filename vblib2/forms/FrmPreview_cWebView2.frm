@@ -379,26 +379,27 @@ Private Sub chamamotor_click()
         cmdSavejpg.Top = cmdSavePNG.Top + cmdSavePNG.Height + 120
         Call RenderizarMotorZplLocal
             
-    ElseIf cEXT = "chm" Then
+      ElseIf cEXT = "chm" Then
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
         Me.Caption = "Manual de Ajuda - " & NomeArq(mvarCaminhoArquivo, False)
-        m_oWebView2.Navigate "its:" & mvarCaminhoArquivo & "::/"
+        Call RenderizarMotorChmLocal(mvarCaminhoArquivo)
+        'm_oWebView2.Navigate "its:" & mvarCaminhoArquivo & "::/"
         
     ElseIf cEXT = "hlp" Then
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
+        Me.Caption = "Manual de Ajuda - " & NomeArq(mvarCaminhoArquivo, False)
         If IsArquivoChmDisfarcado(mvarCaminhoArquivo) Then
-            Me.Caption = "Manual de Ajuda - " & NomeArq(mvarCaminhoArquivo, False)
-            m_oWebView2.Navigate "its:" & mvarCaminhoArquivo & "::/"
-        Else
-            Call RenderizarMotorHlpLocal
+           Call RenderizarMotorChmLocal(mvarCaminhoArquivo)
+           '    m_oWebView2.Navigate "its:" & mvarCaminhoArquivo & "::/"
+           Call RenderizarMotorHlpLocal
         End If
-        
+      
     ElseIf cEXT = "xlsx" Or cEXT = "xls" Or cEXT = "ods" Then
         cmdSavehtml.Visible = False
         cmdSaveTXT.Visible = False
@@ -868,3 +869,27 @@ Sair:
     If fNum > 0 Then Close #fNum
 End Function
 
+Private Sub RenderizarMotorChmLocal(ByVal cCaminhoCHM As String)
+    Dim sTempPath As String
+    Dim objShell As Object
+    Dim objFSO As Object
+    
+    ' Define uma pasta temporária para descompactar o CHM
+    sTempPath = Environ("TEMP") & "\~chm_view_temp"
+    
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+    If Not objFSO.FolderExists(sTempPath) Then objFSO.CreateFolder sTempPath
+    
+    ' Usa o Shell.Application para descompactar o CHM (o CHM é tecnicamente um arquivo cab/zipado)
+    Set objShell = CreateObject("Shell.Application")
+    ' Copia tudo de dentro do CHM para a pasta temporária
+    objShell.NameSpace(sTempPath).CopyHere objShell.NameSpace(cCaminhoCHM).Items
+    
+    ' Após extrair, navegamos para o primeiro arquivo encontrado ou um índice padrão
+    ' Nota: Muitos CHMs têm um arquivo chamado 'index.html' ou 'default.html' na raiz
+    ' Se não souber o nome, você pode listar os arquivos da pasta temporária.
+    m_oWebView2.Navigate "file:///" & Replace(sTempPath & "\index.html", "\", "/")
+    
+    Set objShell = Nothing
+    Set objFSO = Nothing
+End Sub
