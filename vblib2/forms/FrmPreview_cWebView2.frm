@@ -202,7 +202,7 @@ Private Sub Form_Load()
     bJaInicializado = False
     If cARQRTF = "" Then
         'Carqrtf = "c:\temp\uso.txt"
-        cARQRTF = "c:\temp\README.md"
+        'cARQRTF = "c:\temp\README.md"
         'Carqrtf = "c:\temp\totalcmd.chm"
     End If
     
@@ -428,6 +428,7 @@ Private Sub chamamotor_click()
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
+        cmdsavedoc.Visible = False
         Me.Caption = "Visualizador de Documentos - " & NomeArq(mvarCaminhoArquivo, False)
         Call RenderizarMotorDocLocal
         
@@ -444,6 +445,7 @@ Private Sub chamamotor_click()
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
+        CmdSavePDF.Visible = False
         Me.Caption = "Leitor de PDF - " & NomeArq(mvarCaminhoArquivo, False)
         m_oWebView2.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\\", "/")
          
@@ -866,17 +868,3 @@ Sair:
     If fNum > 0 Then Close #fNum
 End Function
 
-' ====================================================================================
-' ATENCAO: MANTENHA AS ROTINAS ABAIXO INTACTAS EM RELACAO AO SEU CODIGO ORIGINAL:
-' - RenderizarMotorHlpLocal
-' - RenderizarMotorPlanilhaLocal
-' - RenderizarMotorRtfLocal
-' - RenderizarMotorDelimitadoLocal
-' - RenderizarMotorDocxLocal
-' - NotificarModoOffline
-'
-' APENAS LEMBRE-SE DE SUBSTITUIR DENTRO DELAS:
-' 1. OrdoWebView1.Navigate  => m_oWebView2.Navigate
-' 2. OrdoWebView1.NavigateToString => m_oWebView2.NavigateToString (Se houver)
-' 3. OrdoWebView1.ExecuteScript => m_oWebView2.ExecuteScript
-' ====================================================================================
