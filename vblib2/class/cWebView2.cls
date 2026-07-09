@@ -161,6 +161,7 @@ Private m_oController               As IVBCoreWebView2Controller
 Private m_oWebView                  As IVBCoreWebView2
 Private m_oWebView4                 As IVBCoreWebView2_4
 Private m_oWebView11                As IVBCoreWebView2_11
+Private m_oWebView13                As IVBCoreWebView2_13
 Private m_oSettings                 As IVBCoreWebView2Settings
 Private m_oSettings6                As IVBCoreWebView2Settings6
 Private m_oEventSink                As cWebView2Callback
@@ -176,8 +177,9 @@ Private m_lNavErrorStatus           As Long
 Private m_bShuttingDown             As Boolean
 Private m_dbljsCallTimeOutSeconds   As Double
 Private m_cTokenSeq                 As Currency
+'--- keys are prefixed by entry kind: "T" & token - completed result, "P" &
+'--- token - sync waiter pending, "A" & token - async result expected
 Private m_cScriptResults            As Collection
-Private m_cAsyncTokens              As Collection
 Private m_sJsLastError              As String
 
 '=========================================================================
@@ -231,75 +233,111 @@ Public Property Get HosthWnd() As Long
 End Property
 
 Public Property Get ZoomFactor() As Double
-    ZoomFactor = m_oController.ZoomFactor
+    If Not m_oController Is Nothing Then
+        ZoomFactor = m_oController.ZoomFactor
+    End If
 End Property
 
 Public Property Let ZoomFactor(ByVal dblValue As Double)
-    m_oController.ZoomFactor = dblValue
+    If Not m_oController Is Nothing Then
+        m_oController.ZoomFactor = dblValue
+    End If
 End Property
 
 Public Property Get IsZoomControlEnabled() As Boolean
-    IsZoomControlEnabled = m_oSettings.IsZoomControlEnabled
+    If Not m_oSettings Is Nothing Then
+        IsZoomControlEnabled = m_oSettings.IsZoomControlEnabled
+    End If
 End Property
 
 Public Property Let IsZoomControlEnabled(ByVal bValue As Boolean)
-    m_oSettings.IsZoomControlEnabled = -bValue
+    If Not m_oSettings Is Nothing Then
+        m_oSettings.IsZoomControlEnabled = -bValue
+    End If
 End Property
 
 Public Property Get IsScriptEnabled() As Boolean
-    IsScriptEnabled = m_oSettings.IsScriptEnabled
+    If Not m_oSettings Is Nothing Then
+        IsScriptEnabled = m_oSettings.IsScriptEnabled
+    End If
 End Property
 
 Public Property Let IsScriptEnabled(ByVal bValue As Boolean)
-    m_oSettings.IsScriptEnabled = -bValue
+    If Not m_oSettings Is Nothing Then
+        m_oSettings.IsScriptEnabled = -bValue
+    End If
 End Property
 
 Public Property Get IsWebMessageEnabled() As Boolean
-    IsWebMessageEnabled = m_oSettings.IsWebMessageEnabled
+    If Not m_oSettings Is Nothing Then
+        IsWebMessageEnabled = m_oSettings.IsWebMessageEnabled
+    End If
 End Property
 
 Public Property Let IsWebMessageEnabled(ByVal bValue As Boolean)
-    m_oSettings.IsWebMessageEnabled = -bValue
+    If Not m_oSettings Is Nothing Then
+        m_oSettings.IsWebMessageEnabled = -bValue
+    End If
 End Property
 
 Public Property Get AreDefaultScriptDialogsEnabled() As Boolean
-    AreDefaultScriptDialogsEnabled = m_oSettings.AreDefaultScriptDialogsEnabled
+    If Not m_oSettings Is Nothing Then
+        AreDefaultScriptDialogsEnabled = m_oSettings.AreDefaultScriptDialogsEnabled
+    End If
 End Property
 
 Public Property Let AreDefaultScriptDialogsEnabled(ByVal bValue As Boolean)
-    m_oSettings.AreDefaultScriptDialogsEnabled = -bValue
+    If Not m_oSettings Is Nothing Then
+        m_oSettings.AreDefaultScriptDialogsEnabled = -bValue
+    End If
 End Property
 
 Public Property Get IsStatusBarEnabled() As Boolean
-    IsStatusBarEnabled = m_oSettings.IsStatusBarEnabled
+    If Not m_oSettings Is Nothing Then
+        IsStatusBarEnabled = m_oSettings.IsStatusBarEnabled
+    End If
 End Property
 
 Public Property Let IsStatusBarEnabled(ByVal bValue As Boolean)
-    m_oSettings.IsStatusBarEnabled = -bValue
+    If Not m_oSettings Is Nothing Then
+        m_oSettings.IsStatusBarEnabled = -bValue
+    End If
 End Property
 
 Public Property Get AreDevToolsEnabled() As Boolean
-    AreDevToolsEnabled = m_oSettings.AreDevToolsEnabled
+    If Not m_oSettings Is Nothing Then
+        AreDevToolsEnabled = m_oSettings.AreDevToolsEnabled
+    End If
 End Property
 
 Public Property Let AreDevToolsEnabled(ByVal bValue As Boolean)
-    m_oSettings.AreDevToolsEnabled = -bValue
+    If Not m_oSettings Is Nothing Then
+        m_oSettings.AreDevToolsEnabled = -bValue
+    End If
 End Property
 
 Public Property Get AreDefaultContextMenusEnabled() As Boolean
-    AreDefaultContextMenusEnabled = m_oSettings.AreDefaultContextMenusEnabled
+    If Not m_oSettings Is Nothing Then
+        AreDefaultContextMenusEnabled = m_oSettings.AreDefaultContextMenusEnabled
+    End If
 End Property
 
 Public Property Let AreDefaultContextMenusEnabled(ByVal bValue As Boolean)
-    m_oSettings.AreDefaultContextMenusEnabled = -bValue
+    If Not m_oSettings Is Nothing Then
+        m_oSettings.AreDefaultContextMenusEnabled = -bValue
+    End If
 End Property
 
 Public Property Get AreHostObjectsAllowed() As Boolean
-    AreHostObjectsAllowed = m_oSettings.AreHostObjectsAllowed
+    If Not m_oSettings Is Nothing Then
+        AreHostObjectsAllowed = m_oSettings.AreHostObjectsAllowed
+    End If
 End Property
 
 Public Property Let AreHostObjectsAllowed(ByVal bValue As Boolean)
-    m_oSettings.AreHostObjectsAllowed = -bValue
+    If Not m_oSettings Is Nothing Then
+        m_oSettings.AreHostObjectsAllowed = -bValue
+    End If
 End Property
 
 Public Property Get jsCallTimeOutSeconds() As Double
@@ -325,51 +363,75 @@ Public Property Get jsLastError() As String
 End Property
 
 Public Property Get UserAgent() As String
-    UserAgent = pvToString(m_oSettings6.UserAgent)
+    If Not m_oSettings6 Is Nothing Then
+        UserAgent = pvToString(m_oSettings6.UserAgent)
+    End If
 End Property
 
 Public Property Let UserAgent(ByVal sValue As String)
-    m_oSettings6.UserAgent = StrPtr(sValue)
+    If Not m_oSettings6 Is Nothing Then
+        m_oSettings6.UserAgent = StrPtr(sValue)
+    End If
 End Property
 
 Public Property Get AreBrowserAcceleratorKeysEnabled() As Boolean
-    AreBrowserAcceleratorKeysEnabled = m_oSettings6.AreBrowserAcceleratorKeysEnabled
+    If Not m_oSettings6 Is Nothing Then
+        AreBrowserAcceleratorKeysEnabled = m_oSettings6.AreBrowserAcceleratorKeysEnabled
+    End If
 End Property
 
 Public Property Let AreBrowserAcceleratorKeysEnabled(ByVal bValue As Boolean)
-    m_oSettings6.AreBrowserAcceleratorKeysEnabled = -bValue
+    If Not m_oSettings6 Is Nothing Then
+        m_oSettings6.AreBrowserAcceleratorKeysEnabled = -bValue
+    End If
 End Property
 
 Public Property Get IsPasswordAutosaveEnabled() As Boolean
-    IsPasswordAutosaveEnabled = m_oSettings6.IsPasswordAutosaveEnabled
+    If Not m_oSettings6 Is Nothing Then
+        IsPasswordAutosaveEnabled = m_oSettings6.IsPasswordAutosaveEnabled
+    End If
 End Property
 
 Public Property Let IsPasswordAutosaveEnabled(ByVal bValue As Boolean)
-    m_oSettings6.IsPasswordAutosaveEnabled = -bValue
+    If Not m_oSettings6 Is Nothing Then
+        m_oSettings6.IsPasswordAutosaveEnabled = -bValue
+    End If
 End Property
 
 Public Property Get IsGeneralAutofillEnabled() As Boolean
-    IsGeneralAutofillEnabled = m_oSettings6.IsGeneralAutofillEnabled
+    If Not m_oSettings6 Is Nothing Then
+        IsGeneralAutofillEnabled = m_oSettings6.IsGeneralAutofillEnabled
+    End If
 End Property
 
 Public Property Let IsGeneralAutofillEnabled(ByVal bValue As Boolean)
-    m_oSettings6.IsGeneralAutofillEnabled = -bValue
+    If Not m_oSettings6 Is Nothing Then
+        m_oSettings6.IsGeneralAutofillEnabled = -bValue
+    End If
 End Property
 
 Public Property Get IsPinchZoomEnabled() As Boolean
-    IsPinchZoomEnabled = m_oSettings6.IsPinchZoomEnabled
+    If Not m_oSettings6 Is Nothing Then
+        IsPinchZoomEnabled = m_oSettings6.IsPinchZoomEnabled
+    End If
 End Property
 
 Public Property Let IsPinchZoomEnabled(ByVal bValue As Boolean)
-    m_oSettings6.IsPinchZoomEnabled = -bValue
+    If Not m_oSettings6 Is Nothing Then
+        m_oSettings6.IsPinchZoomEnabled = -bValue
+    End If
 End Property
 
 Public Property Get IsSwipeNavigationEnabled() As Boolean
-    IsSwipeNavigationEnabled = m_oSettings6.IsSwipeNavigationEnabled
+    If Not m_oSettings6 Is Nothing Then
+        IsSwipeNavigationEnabled = m_oSettings6.IsSwipeNavigationEnabled
+    End If
 End Property
 
 Public Property Let IsSwipeNavigationEnabled(ByVal bValue As Boolean)
-    m_oSettings6.IsSwipeNavigationEnabled = -bValue
+    If Not m_oSettings6 Is Nothing Then
+        m_oSettings6.IsSwipeNavigationEnabled = -bValue
+    End If
 End Property
 
 '=========================================================================
@@ -385,14 +447,17 @@ Public Function BindTo( _
         Optional ByVal AllowSingleSignOnUsingOSPrimaryAccount As Boolean, _
         Optional ByVal ExclusiveUserDataFolderAccess As Boolean, _
         Optional ByVal IsCustomCrashReportingEnabled As Boolean, _
-        Optional ByVal EnableTrackingPrevention As Boolean = True) As Long
-    Const E_FAIL_TIMEOUT                As Long = &H80040154
+        Optional ByVal EnableTrackingPrevention As Boolean = True, _
+        Optional ByVal AreBrowserExtensionsEnabled As Boolean) As Long
+    Const RPC_E_TIMEOUT                 As Long = &H8001011F
     Dim oOptions        As cWebView2Callback
     Dim oHandler        As cWebView2Callback
     Dim hResult         As Long
 
     On Error GoTo EH
     m_hWndHost = HosthWnd
+    '--- allow re-binding after a previous Shutdown on this instance
+    m_bShuttingDown = False
     m_bInitComplete = False
     m_hInitError = 0
     Set oOptions = New cWebView2Callback
@@ -401,6 +466,7 @@ Public Function BindTo( _
     oOptions.ExclusiveUserDataFolderAccess = ExclusiveUserDataFolderAccess
     oOptions.IsCustomCrashReportingEnabled = IsCustomCrashReportingEnabled
     oOptions.EnableTrackingPrevention = EnableTrackingPrevention
+    oOptions.AreBrowserExtensionsEnabled = AreBrowserExtensionsEnabled
     Set oHandler = New cWebView2Callback
     oHandler.Init Me
     hResult = pvCreateWebView2Environment(browserInstallPath, userDataFolder, oOptions, oHandler)
@@ -409,7 +475,7 @@ Public Function BindTo( _
         Exit Function
     End If
     If Not pvPumpUntil(m_bInitComplete, SecondsToWaitForInitComplete) Then
-        BindTo = E_FAIL_TIMEOUT
+        BindTo = RPC_E_TIMEOUT
         Exit Function
     End If
     BindTo = m_hInitError
@@ -509,19 +575,27 @@ EH:
 End Function
 
 Public Sub Reload()
-    m_oWebView.Reload
+    If Not m_oWebView Is Nothing Then
+        m_oWebView.Reload
+    End If
 End Sub
 
 Public Sub GoBack()
-    m_oWebView.GoBack
+    If Not m_oWebView Is Nothing Then
+        m_oWebView.GoBack
+    End If
 End Sub
 
 Public Sub GoForward()
-    m_oWebView.GoForward
+    If Not m_oWebView Is Nothing Then
+        m_oWebView.GoForward
+    End If
 End Sub
 
 Public Sub OpenDevToolsWindow()
-    m_oWebView.OpenDevToolsWindow
+    If Not m_oWebView Is Nothing Then
+        m_oWebView.OpenDevToolsWindow
+    End If
 End Sub
 
 Public Function GetMostRecentInstallPath(Optional ByVal EdgeChannel As String = "EdgeWebView", Optional VersionString As String) As String
@@ -670,7 +744,14 @@ Public Function CallDevToolsProtocolMethod(ByVal MethodName As String, ByVal Par
     Set oHandler = New cWebView2Callback
     oHandler.Init Me, cToken
     m_oWebView.CallDevToolsProtocolMethod StrPtr(MethodName), StrPtr(ParamsAsJSON), oHandler
+    '--- jsCallTimeOutSeconds 0 (or less) means fire-and-forget: CDP response
+    '--- is discarded on arrival
+    If m_dbljsCallTimeOutSeconds <= 0 Then
+        Exit Function
+    End If
+    m_cScriptResults.Add True, "P" & cToken
     If Not pvPumpUntilKey(m_cScriptResults, sKey, m_dbljsCallTimeOutSeconds) Then
+        m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
     vItem = m_cScriptResults.item(sKey)
@@ -708,7 +789,12 @@ Public Function CapturePreview(Optional ByVal ImageFormat As eWebView2ImageCaptu
     Set oHandler = New cWebView2Callback
     oHandler.Init Me, cToken
     m_oWebView.CapturePreview ImageFormat, oStream, oHandler
+    If m_dbljsCallTimeOutSeconds <= 0 Then
+        Exit Function
+    End If
+    m_cScriptResults.Add True, "P" & cToken
     If Not pvPumpUntilKey(m_cScriptResults, sKey, m_dbljsCallTimeOutSeconds) Then
+        m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
     vItem = m_cScriptResults.item(sKey)
@@ -728,6 +814,170 @@ Public Function CapturePreview(Optional ByVal ImageFormat As eWebView2ImageCaptu
     Exit Function
 EH:
     PrintError "CapturePreview"
+End Function
+
+Public Function PrintToPdf( _
+        ByVal ResultFilePath As String, _
+        Optional ByVal SecondsToWaitForPrintComplete As Double = 8, _
+        Optional ByVal Landscape As Boolean, _
+        Optional ByVal ScaleFactor As Double, _
+        Optional ByVal pageWidth As Double, _
+        Optional ByVal pageHeight As Double, _
+        Optional ByVal MarginTop As Double = -1, _
+        Optional ByVal MarginBottom As Double = -1, _
+        Optional ByVal MarginLeft As Double = -1, _
+        Optional ByVal MarginRight As Double = -1, _
+        Optional ByVal ShouldPrintBackgrounds As Boolean, _
+        Optional ByVal ShouldPrintSelectionOnly As Boolean, _
+        Optional ByVal ShouldPrintHeaderAndFooter As Boolean = True, _
+        Optional ByVal HeaderTitle As String, _
+        Optional ByVal FooterUri As String) As Variant
+    Const ORIENT_LANDSCAPE              As Long = 1
+    Dim oEnv6           As IVBCoreWebView2Environment6
+    Dim oSettings       As IVBCoreWebView2PrintSettings
+    Dim oHandler        As cWebView2Callback
+    Dim cToken          As Currency
+    Dim sKey            As String
+    Dim vItem           As Variant
+
+    On Error GoTo EH
+    If m_oWebView11 Is Nothing Then
+        Exit Function
+    End If
+    On Error Resume Next
+    Set oEnv6 = m_oEnvironment
+    On Error GoTo EH
+    If Not oEnv6 Is Nothing Then
+        Set oSettings = oEnv6.CreatePrintSettings()
+        If Landscape Then
+            oSettings.orientation = ORIENT_LANDSCAPE
+        End If
+        If ScaleFactor > 0 Then
+            oSettings.ScaleFactor = ScaleFactor
+        End If
+        If pageWidth > 0 Then
+            oSettings.pageWidth = pageWidth
+        End If
+        If pageHeight > 0 Then
+            oSettings.pageHeight = pageHeight
+        End If
+        If MarginTop >= 0 Then
+            oSettings.MarginTop = MarginTop
+        End If
+        If MarginBottom >= 0 Then
+            oSettings.MarginBottom = MarginBottom
+        End If
+        If MarginLeft >= 0 Then
+            oSettings.MarginLeft = MarginLeft
+        End If
+        If MarginRight >= 0 Then
+            oSettings.MarginRight = MarginRight
+        End If
+        oSettings.ShouldPrintBackgrounds = -ShouldPrintBackgrounds
+        oSettings.ShouldPrintSelectionOnly = -ShouldPrintSelectionOnly
+        oSettings.ShouldPrintHeaderAndFooter = -ShouldPrintHeaderAndFooter
+        If LenB(HeaderTitle) <> 0 Then
+            oSettings.HeaderTitle = StrPtr(HeaderTitle)
+        End If
+        If LenB(FooterUri) <> 0 Then
+            oSettings.FooterUri = StrPtr(FooterUri)
+        End If
+    End If
+    cToken = pvNextToken()
+    sKey = "T" & cToken
+    Set oHandler = New cWebView2Callback
+    oHandler.Init Me, cToken
+    m_oWebView11.PrintToPdf StrPtr(ResultFilePath), oSettings, oHandler
+    If SecondsToWaitForPrintComplete <= 0 Then
+        PrintToPdf = True
+        Exit Function
+    End If
+    m_cScriptResults.Add True, "P" & cToken
+    If Not pvPumpUntilKey(m_cScriptResults, sKey, SecondsToWaitForPrintComplete) Then
+        m_cScriptResults.Remove "P" & cToken
+        Exit Function
+    End If
+    vItem = m_cScriptResults.item(sKey)
+    m_cScriptResults.Remove sKey
+    If vItem(0) < 0 Then
+        Exit Function
+    End If
+    PrintToPdf = (vItem(1) = "true")
+    Exit Function
+EH:
+    PrintError "PrintToPdf"
+End Function
+
+Public Function AddBrowserExtension(ByVal ExtensionFolderPath As String, Optional ByVal SecondsToWaitForComplete As Double = 8) As String
+    Dim oProfile        As IVBCoreWebView2Profile7
+    Dim oHandler        As cWebView2Callback
+    Dim cToken          As Currency
+    Dim sKey            As String
+    Dim vItem           As Variant
+
+    On Error GoTo EH
+    Set oProfile = pvGetProfile7()
+    If oProfile Is Nothing Then
+        Exit Function
+    End If
+    cToken = pvNextToken()
+    sKey = "T" & cToken
+    Set oHandler = New cWebView2Callback
+    oHandler.Init Me, cToken
+    oProfile.AddBrowserExtension StrPtr(ExtensionFolderPath), oHandler
+    If SecondsToWaitForComplete <= 0 Then
+        Exit Function
+    End If
+    m_cScriptResults.Add True, "P" & cToken
+    If Not pvPumpUntilKey(m_cScriptResults, sKey, SecondsToWaitForComplete) Then
+        m_cScriptResults.Remove "P" & cToken
+        Exit Function
+    End If
+    vItem = m_cScriptResults.item(sKey)
+    m_cScriptResults.Remove sKey
+    If vItem(0) < 0 Then
+        Exit Function
+    End If
+    AddBrowserExtension = vItem(1)
+    Exit Function
+EH:
+    PrintError "AddBrowserExtension"
+End Function
+
+Public Function GetBrowserExtensions(Optional ByVal SecondsToWaitForComplete As Double = 8) As Collection
+    Dim oProfile        As IVBCoreWebView2Profile7
+    Dim oHandler        As cWebView2Callback
+    Dim cToken          As Currency
+    Dim sKey            As String
+    Dim vItem           As Variant
+
+    On Error GoTo EH
+    Set oProfile = pvGetProfile7()
+    If oProfile Is Nothing Then
+        Exit Function
+    End If
+    cToken = pvNextToken()
+    sKey = "T" & cToken
+    Set oHandler = New cWebView2Callback
+    oHandler.Init Me, cToken
+    oProfile.GetBrowserExtensions oHandler
+    If SecondsToWaitForComplete <= 0 Then
+        Exit Function
+    End If
+    m_cScriptResults.Add True, "P" & cToken
+    If Not pvPumpUntilKey(m_cScriptResults, sKey, SecondsToWaitForComplete) Then
+        m_cScriptResults.Remove "P" & cToken
+        Exit Function
+    End If
+    vItem = m_cScriptResults.item(sKey)
+    m_cScriptResults.Remove sKey
+    If vItem(0) < 0 Then
+        Exit Function
+    End If
+    Set GetBrowserExtensions = vItem(1)
+    Exit Function
+EH:
+    PrintError "GetBrowserExtensions"
 End Function
 
 Public Function CallByName(ByVal Obj As Object, ByVal ProcName As String, ByVal CallType As VbCallType, ParamArray p() As Variant) As Variant
@@ -775,21 +1025,30 @@ Public Function jsRunAsync(ByVal FuncName As String, ParamArray p() As Variant) 
     On Error GoTo EH
     vArgs = p
     jsRunAsync = pvNextToken()
-    m_cAsyncTokens.Add True, "T" & jsRunAsync
     Set oHandler = New cWebView2Callback
     oHandler.Init Me, jsRunAsync
     m_oWebView.ExecuteScript StrPtr(pvJsBuildCall(FuncName, vArgs)), oHandler
+    '--- registered after ExecuteScript so a raised error cannot leak the token
+    m_cScriptResults.Add True, "A" & jsRunAsync
     Exit Function
 EH:
     PrintError "jsRunAsync"
 End Function
 
 Public Sub Shutdown()
+    On Error Resume Next
     m_bShuttingDown = True
-    Set m_oWebView = Nothing
+    If Not m_oWebView Is Nothing Then
+        m_oWebView.RemoveHostObjectFromScript StrPtr("vbHost")
+        Set m_oWebView = Nothing
+    End If
     Set m_oWebView4 = Nothing
     Set m_oWebView11 = Nothing
-    Set m_oController = Nothing
+    Set m_oWebView13 = Nothing
+    If Not m_oController Is Nothing Then
+        m_oController.Close
+        Set m_oController = Nothing
+    End If
     Set m_oEnvironment = Nothing
     If Not m_oEventSink Is Nothing Then
         m_oEventSink.Terminate
@@ -814,9 +1073,21 @@ Private Function pvCreateWebView2Environment( _
             ByVal sUserDataFolder As String, _
             oOptions As IVBWebView2EnvironmentOptions, _
             oHandler As IVBWebView2CreateEnvironmentCompletedHandler) As Long
+    Const E_MOD_NOT_FOUND               As Long = &H8007007E
+    Dim sLoader         As String
+
     On Error GoTo EH
     If GetModuleHandle(StrPtr("WebView2Loader.dll")) = 0 Then
-        Call LoadLibrary(StrPtr(LocateFile(App.Path & "\External\WebView2Loader.dll")))
+        sLoader = LocateFile(App.Path & "\External\WebView2Loader.dll")
+        '--- fail fast so a missing loader is not masked as BindTo timeout
+        If LenB(sLoader) = 0 Then
+            pvCreateWebView2Environment = E_MOD_NOT_FOUND
+            Exit Function
+        End If
+        If LoadLibrary(StrPtr(sLoader)) = 0 Then
+            pvCreateWebView2Environment = E_MOD_NOT_FOUND
+            Exit Function
+        End If
     End If
     '--- match RC6's default user data folder (%LOCALAPPDATA%\<EXEName>) instead
     '--- of the native default of "<exe>.WebView2" next to the executable
@@ -826,6 +1097,7 @@ Private Function pvCreateWebView2Environment( _
     pvCreateWebView2Environment = CreateCoreWebView2EnvironmentWithOptions(StrPtr(sBrowserExecutableFolder), StrPtr(sUserDataFolder), ObjPtr(oOptions), ObjPtr(oHandler))
     Exit Function
 EH:
+    pvCreateWebView2Environment = Err.Number
     PrintError "pvCreateWebView2Environment"
 End Function
 
@@ -901,6 +1173,15 @@ Private Function pvNextToken() As Currency
     pvNextToken = m_cTokenSeq
 End Function
 
+Private Function pvGetProfile7() As IVBCoreWebView2Profile7
+    '--- the Set QIs the raw profile pointer for Profile7's IID and fails
+    '--- soft on runtimes without browser extension support
+    On Error Resume Next
+    If Not m_oWebView13 Is Nothing Then
+        Set pvGetProfile7 = m_oWebView13.Profile
+    End If
+End Function
+
 Private Function pvExecScriptSync(sScript As String, vResult As Variant) As Boolean
     Dim oHandler        As cWebView2Callback
     Dim cToken          As Currency
@@ -916,7 +1197,15 @@ Private Function pvExecScriptSync(sScript As String, vResult As Variant) As Bool
     Set oHandler = New cWebView2Callback
     oHandler.Init Me, cToken
     m_oWebView.ExecuteScript StrPtr(sScript), oHandler
+    '--- jsCallTimeOutSeconds 0 (or less) means fire-and-forget: report success
+    '--- and continue, the result (if any) is discarded on arrival
+    If m_dbljsCallTimeOutSeconds <= 0 Then
+        pvExecScriptSync = True
+        Exit Function
+    End If
+    m_cScriptResults.Add True, "P" & cToken
     If Not pvPumpUntilKey(m_cScriptResults, sKey, m_dbljsCallTimeOutSeconds) Then
+        m_cScriptResults.Remove "P" & cToken
         m_sJsLastError = "Timeout waiting for script result"
         Exit Function
     End If
@@ -1085,6 +1374,11 @@ Private Sub pvJsonParseValue(sText As String, lIdx As Long, vResult As Variant)
                 '--- skip ":"
                 lIdx = lIdx + 1
                 pvJsonParseValue sText, lIdx, vItem
+                '--- Collection keys are case-insensitive so "a" vs "A" (or a
+                '--- plain duplicate key) would raise 457 - make last one win
+                If pvSearchCollection(cDict, sKey) Then
+                    cDict.Remove sKey
+                End If
                 cDict.Add vItem, sKey
                 pvJsonSkipSpace sText, lIdx
                 If Mid$(sText, lIdx, 1) <> "," Then
@@ -1290,6 +1584,7 @@ Friend Sub OnControllerCreated(ByVal hResult As Long, ByVal oCtrl As IVBCoreWebV
     Set m_oSettings6 = m_oSettings
     Set m_oWebView4 = m_oWebView
     Set m_oWebView11 = m_oWebView
+    Set m_oWebView13 = m_oWebView
     On Error GoTo EH
     Set m_oEventSink = New cWebView2Callback
     m_oEventSink.Init Me
@@ -1536,8 +1831,8 @@ Friend Sub OnExecuteScriptCompleted(ByVal hResult As Long, sResultJson As String
     On Error GoTo EH
     If cToken = 0 Then
         '--- fire-and-forget ExecuteScript
-    ElseIf pvSearchCollection(m_cAsyncTokens, "T" & cToken) Then
-        m_cAsyncTokens.Remove "T" & cToken
+    ElseIf pvSearchCollection(m_cScriptResults, "A" & cToken) Then
+        m_cScriptResults.Remove "A" & cToken
         If hResult < 0 Then
             sError = "Error &H" & Hex$(hResult) & " executing script"
             m_sJsLastError = sError
@@ -1545,12 +1840,44 @@ Friend Sub OnExecuteScriptCompleted(ByVal hResult As Long, sResultJson As String
             pvJsonParseValue sResultJson, 1, vResult
         End If
         RaiseEvent JSAsyncResult(vResult, cToken, sError)
-    Else
+    ElseIf pvSearchCollection(m_cScriptResults, "P" & cToken) Then
+        m_cScriptResults.Remove "P" & cToken
         m_cScriptResults.Add Array(hResult, sResultJson), "T" & cToken
+    Else
+        '--- unknown token (timed-out or fire-and-forget call) - discard result
     End If
     Exit Sub
 EH:
     PrintError "OnExecuteScriptCompleted"
+End Sub
+
+Friend Sub OnGetBrowserExtensions(ByVal hResult As Long, oList As IVBCoreWebView2BrowserExtensionList, ByVal cToken As Currency)
+    Dim cResult         As Collection
+    Dim cItem           As Collection
+    Dim oExt            As IVBCoreWebView2BrowserExtension
+    Dim lIdx            As Long
+
+    On Error GoTo EH
+    If Not pvSearchCollection(m_cScriptResults, "P" & cToken) Then
+        '--- unknown token (timed-out or fire-and-forget call) - discard result
+        Exit Sub
+    End If
+    m_cScriptResults.Remove "P" & cToken
+    Set cResult = New Collection
+    If hResult >= 0 And Not oList Is Nothing Then
+        For lIdx = 0 To oList.Count - 1
+            Set oExt = oList.GetValueAtIndex(lIdx)
+            Set cItem = New Collection
+            cItem.Add pvToString(oExt.id), "Id"
+            cItem.Add pvToString(oExt.Name), "Name"
+            cItem.Add CBool(oExt.IsEnabled), "IsEnabled"
+            cResult.Add cItem, cItem.item("Id")
+        Next
+    End If
+    m_cScriptResults.Add Array(hResult, cResult), "T" & cToken
+    Exit Sub
+EH:
+    PrintError "OnGetBrowserExtensions"
 End Sub
 
 '=========================================================================
@@ -1560,7 +1887,6 @@ End Sub
 Private Sub Class_Initialize()
     m_dbljsCallTimeOutSeconds = 8
     Set m_cScriptResults = New Collection
-    Set m_cAsyncTokens = New Collection
 End Sub
 
 Private Sub Class_Terminate()

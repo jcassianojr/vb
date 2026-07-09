@@ -316,6 +316,8 @@ Private Sub CmdSavePDF_Click()
     Dim sFILTER As String
     Dim sFileName As String
     Dim sSugestaoNome As String
+    Dim vResult         As Variant
+
     
     On Error GoTo ErroSavePDF
     sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
@@ -324,11 +326,15 @@ Private Sub CmdSavePDF_Click()
     
     If sFileName = "" Then Exit Sub
     
-    ' Dispara a impressao do Chromium configurada para salvar em PDF
-    If Not m_oWebView2 Is Nothing Then
-        m_oWebView2.ExecuteScript "window.print();"
+    vResult = m_oWebView2.PrintToPdf(sFileName)
+    If vResult = True Then
+     ' lblStatus.Caption = "Saved " & sFileName & " (" & FileLen(sFileName) & " bytes)"
+    Else
+      '  lblStatus.Caption = "PrintToPdf failed"
     End If
     Exit Sub
+
+
 ErroSavePDF:
     MsgBox "Erro ao exportar o arquivo para PDF: " & Err.Description, vbCritical, "Erro de Exportacao"
 End Sub
