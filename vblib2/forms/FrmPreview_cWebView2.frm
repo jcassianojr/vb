@@ -200,17 +200,10 @@ Attribute m_oWebView2.VB_VarHelpID = -1
 Private Sub Form_Load()
     Dim hResult
     bJaInicializado = False
-    If cARQRTF = "" Then
-        'Carqrtf = "c:\temp\uso.txt"
-        'cARQRTF = "c:\temp\README.md"
-        'Carqrtf = "c:\temp\totalcmd.chm"
-    End If
     
-    ' 2) Inicializa o cWebView2 e vincula ao PictureBox host (picHost)
     Set m_oWebView2 = New cWebView2
 '    m_oWebView2.BindTo picHost.hwnd, , , , "--allow-run-as-system", , False, True, False
      hResult = m_oWebView2.BindTo(picHost.hwnd, , , , "--allow-run-as-system --allow-file-access-from-files --disable-web-security", , False, True, False)
-
 End Sub
 
 Private Sub Form_Activate()
@@ -374,7 +367,8 @@ Private Sub chamamotor_click()
     DoEvents
     
     mvarCaminhoArquivo = Trim(CStr(cARQRTF))
-    cEXT = parsefile(mvarCaminhoArquivo, "E")
+    cEXT = LCase(parsefile(mvarCaminhoArquivo, "E"))
+    
     
     If cEXT = "zpl" Then
         cmdSavehtml.Visible = False

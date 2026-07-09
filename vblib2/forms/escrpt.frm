@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "VBCCR18.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escRPT 
    Caption         =   "Escolha o grupo de Relatorio"
@@ -112,7 +112,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     sSQL = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     If ApagaSQLP(zRPTARQ, sSQL) Then
       FilRelat
@@ -128,7 +128,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  'And Grid.Row <= Grid.Rows Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     ePASS02 = zRPTARQ
     ePASS01 = "select * from RPT WHERE GRP='" & zgrp & "' AND RPT='" & zRPT & "'"
     FrmRpt.Show vbModal
@@ -236,7 +236,7 @@ Private Sub imprima_click()
   End If
   ''Pega Nome Relatorio
   Grid.Col = 2
-  zRPT = Grid.Text
+  zRPT = Grid.tEXT
 
   cARQ = zRPTARQ
   cSQL = "select CAMINHO,LIBERAR from RPTGRP WHERE GRP='" & zgrp & "'"
@@ -409,7 +409,8 @@ Private Sub imprima_click()
       Case 0
         aRELCFG(1) = "SHELL"
       Case 1
-         frmPDFView.Show vbModal, Me
+         'frmPDFView.Show vbModal, Me
+         FrmPreview.Show vbModal, Me
       Case 2
          FrmPreview.Show vbModal, Me
          
@@ -589,7 +590,7 @@ End Sub
 Private Sub liberar_click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 2
-    zRPT = Grid.Text
+    zRPT = Grid.tEXT
     escrptusr.Show vbModal
   End If
 End Sub
