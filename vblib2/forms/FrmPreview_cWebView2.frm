@@ -756,80 +756,92 @@ Private Sub RenderizarMotorDelimitadoLocal(ByVal cCaminhoTxt As String)
     Dim lContador As Long, lMaxRepeticoes As Long, nMaxColunas As Long, i As Long, J As Long
     Dim cConteudoBruto As String, cConteudoMD As String, cLinhaSeparador As String
     
-    cJsLocal = App.Path & "\\WebResources\\marked.min.js"
-    cHtmlTempPath = App.Path & "\\~marked_engine.html"
+    ' Caminho local do arquivo JS
+    cJsLocal = App.Path & "\WebResources\marked.min.js"
+    cHtmlTempPath = App.Path & "\~marked_engine.html"
     
+    ' 1. Leitura do arquivo
     cConteudoBruto = LerArquivoTexto(cCaminhoTxt)
     sLinhas = Split(cConteudoBruto, vbCrLf)
     If UBound(sLinhas) < 0 Then Exit Sub
+    
+    ' 2. Identificação automática do delimitador
     sPrimeiraLinha = sLinhas(0)
+    sDelimitador = "," ' Padrão
+    lMaxRepeticoes = 0
     
-    sDelimitador = "|"
-    lMaxRepeticoes = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, "|", ""))
+    ' Testa os delimitadores mais comuns
+    Dim testDelims As Variant
+    testDelims = Array("|", ";", ",", vbTab)
     
-    lContador = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, ";", ""))
-    If lContador > lMaxRepeticoes Then lMaxRepeticoes = lContador: sDelimitador = ";"
-    lContador = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, ",", ""))
-    If lContador > lMaxRepeticoes Then lMaxRepeticoes = lContador: sDelimitador = ","
-    lContador = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, vbTab, ""))
-    If lContador > lMaxRepeticoes Then lMaxRepeticoes = lContador: sDelimitador = vbTab
+    Dim d As Variant
+    For Each d In testDelims
+        lContador = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, d, ""))
+        If lContador > lMaxRepeticoes Then
+            lMaxRepeticoes = lContador
+            sDelimitador = d
+        End If
+    Next d
 
+    ' 3. Montagem do Markdown Table
     Dim vColunas As Variant
     vColunas = Split(sPrimeiraLinha, sDelimitador)
     nMaxColunas = UBound(vColunas)
     
+    ' Cabeçalho
     cConteudoMD = "|"
     For J = 0 To nMaxColunas
-        cConteudoMD = cConteudoMD & " Coluna " & (J + 1) & " |"
+        cConteudoMD = cConteudoMD & " Col " & (J + 1) & " |"
+    Next J
+    cConteudoMD = cConteudoMD & vbCrLf & "|"
+    
+    ' Separador
+    For J = 0 To nMaxColunas
+        cConteudoMD = cConteudoMD & " --- |"
     Next J
     cConteudoMD = cConteudoMD & vbCrLf
     
-    cLinhaSeparador = "|"
-    For J = 0 To nMaxColunas
-        cLinhaSeparador = cLinhaSeparador & "---| "
-    Next J
-    cConteudoMD = cConteudoMD & cLinhaSeparador & vbCrLf
-    
+    ' Linhas de dados
     For i = 0 To UBound(sLinhas)
         If Trim(sLinhas(i)) <> "" Then
             vColunas = Split(sLinhas(i), sDelimitador)
             cConteudoMD = cConteudoMD & "|"
             For J = 0 To nMaxColunas
                 If J <= UBound(vColunas) Then
-                    Dim sDadoLimpo As String
-                    sDadoLimpo = Trim(vColunas(J))
-                    If Left(sDadoLimpo, 1) = """" And Right(sDadoLimpo, 1) = """" Then
-                        sDadoLimpo = Mid(sDadoLimpo, 2, Len(sDadoLimpo) - 2)
-                    End If
-                    cConteudoMD = cConteudoMD & " " & sDadoLimpo & " |"
+                    cConteudoMD = cConteudoMD & " " & Trim(vColunas(J)) & " |"
                 Else
-                    cConteudoMD = cConteudoMD & "  |"
+                    cConteudoMD = cConteudoMD & " |"
                 End If
             Next J
             cConteudoMD = cConteudoMD & vbCrLf
         End If
     Next i
     
-    cConteudoMD = Replace(cConteudoMD, "\\", "\\\\")
-    cConteudoMD = Replace(cConteudoMD, "`", "\\`")
-    cConteudoMD = Replace(cConteudoMD, "'", "\\'")
-    cConteudoMD = Replace(cConteudoMD, vbCrLf, "\\n")
+    ' 4. Sanitização para injeção no JS (Template Literal)
+    cConteudoMD = Replace(cConteudoMD, "\", "\\")
+    cConteudoMD = Replace(cConteudoMD, "`", "\`")
+    cConteudoMD = Replace(cConteudoMD, "'", "\'")
     
+    ' 5. Gravação do arquivo temporário com o renderizador
     Set fso = CreateObject("Scripting.FileSystemObject")
     Set streamOut = fso.OpenTextFile(cHtmlTempPath, 2, True)
     
     streamOut.WriteLine "<html><head><meta charset='utf-8'>"
-    streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\\", "/") & "'></script>"
-    streamOut.WriteLine "<style>body{font-family:sans-serif;padding:35px;background:#fff;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #d0d7de;padding:8px 13px;} th{background:#f6f8fa;font-weight:600;}</style></head>"
-    streamOut.WriteLine "<body><div id='content'></div><script>"
+    ' Carregamento 100% local do arquivo JS
+    streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\", "/") & "'></script>"
+    streamOut.WriteLine "<style>body{font-family:sans-serif;padding:20px;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ddd;padding:8px;} th{background:#eee;}</style></head>"
+    streamOut.WriteLine "<body><div id='content'></div>"
+    streamOut.WriteLine "<script>"
+    ' Processamento via marked
     streamOut.WriteLine "document.getElementById('content').innerHTML = marked.parse(`" & cConteudoMD & "`);"
     streamOut.WriteLine "</script></body></html>"
     streamOut.Close
     
-    m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\\", "/")
+    ' 6. Navegação
+    m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
+    
     Set fso = Nothing
 End Sub
-
 Private Sub RenderizarMotorDocLocal()
     Dim fso As Object, streamOut As Object
     Dim cHtmlTempPath As String, cJsLocal As String
