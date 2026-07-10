@@ -65,9 +65,9 @@ Private Const STRETCH_HALFTONE = 4
     Private Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
     Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
     Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
-    Private Declare Function GetDC Lib "user32" (ByVal hWnd As Long) As Long
+    Private Declare Function GetDC Lib "user32" (ByVal hwnd As Long) As Long
     Private Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
-    Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
+    Private Declare Function ReleaseDC Lib "user32" (ByVal hwnd As Long, ByVal hDC As Long) As Long
     Public Declare Function GetDesktopWindow Lib "user32" () As Long
     Private Declare Function GetObject Lib "gdi32" Alias "GetObjectA" _
         (ByVal hObject As Long, ByVal nCount As Long, ByRef lpObject As Any) As Long
@@ -78,7 +78,7 @@ Private Const STRETCH_HALFTONE = 4
          ByVal xDest As Long, ByVal yDest As Long, _
          ByVal nWidthDest As Long, ByVal nHeightDest As Long, _
          ByVal hdcSrc As Long, _
-         ByVal xSrc As Long, ByVal ySrc As Long, _
+         ByVal XSrc As Long, ByVal YSrc As Long, _
          ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, _
          ByVal dwRop As Long) As Long
 #End If
@@ -577,5 +577,38 @@ Public Function salvarpict(oFORM As Form, ByVal Picture1 As Variant, _
     SavePicture Picture1.Picture, sFileName
   End Select
 End Function
-
-
+Private Function Base64ToByte(ByVal sBase64 As String) As Byte()
+    Dim oXML As Object
+    Dim oNode As Object
+    
+    Set oXML = CreateObject("MSXML2.DOMDocument")
+    Set oNode = oXML.createElement("b64")
+    oNode.DataType = "bin.base64"
+    oNode.tEXT = sBase64
+    Base64ToByte = oNode.nodeTypedValue
+    Set oNode = Nothing
+    Set oXML = Nothing
+End Function
+Public Sub SalvarBase64ComoImagem(ByVal sBase64 As String, ByVal sCaminhoDestino As String)
+    Dim sDados As String
+    Dim baImagem() As Byte
+    Dim hFile As Integer
+    
+    ' 1. Remove o prefixo (ex: "data:image/png;base64,")
+    ' Encontra a posição da vírgula
+    If InStr(sBase64, ",") > 0 Then
+        sDados = Mid(sBase64, InStr(sBase64, ",") + 1)
+    Else
+        sDados = sBase64
+    End If
+    
+    ' 2. Converte a string Base64 para Array de Bytes
+    ' Nota: Você precisará de uma função "Base64ToByte" (abaixo)
+    baImagem = Base64ToByte(sDados)
+    
+    ' 3. Grava no disco
+    hFile = FreeFile
+    Open sCaminhoDestino For Binary Access Write As #hFile
+    Put #hFile, , baImagem
+    Close #hFile
+End Sub

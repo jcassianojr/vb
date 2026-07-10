@@ -2,12 +2,12 @@ VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Begin VB.Form FrmPreview 
    Caption         =   "FrmPreview - cWebView2"
-   ClientHeight    =   5124
+   ClientHeight    =   5568
    ClientLeft      =   60
    ClientTop       =   408
    ClientWidth     =   14316
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5124
+   ScaleHeight     =   5568
    ScaleWidth      =   14316
    StartUpPosition =   3  'Windows Default
    Begin VB.PictureBox picHost 
@@ -72,7 +72,7 @@ Begin VB.Form FrmPreview
       Height          =   372
       Left            =   12600
       TabIndex        =   2
-      Top             =   4200
+      Top             =   3960
       Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   656
@@ -91,7 +91,7 @@ Begin VB.Form FrmPreview
       Height          =   372
       Left            =   12600
       TabIndex        =   3
-      Top             =   3840
+      Top             =   3600
       Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   656
@@ -110,7 +110,7 @@ Begin VB.Form FrmPreview
       Height          =   312
       Left            =   12600
       TabIndex        =   4
-      Top             =   2280
+      Top             =   2160
       Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   550
@@ -129,7 +129,7 @@ Begin VB.Form FrmPreview
       Height          =   312
       Left            =   12600
       TabIndex        =   5
-      Top             =   2640
+      Top             =   2520
       Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   550
@@ -148,7 +148,7 @@ Begin VB.Form FrmPreview
       Height          =   372
       Left            =   12600
       TabIndex        =   6
-      Top             =   3000
+      Top             =   2880
       Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   656
@@ -167,11 +167,49 @@ Begin VB.Form FrmPreview
       Height          =   372
       Left            =   12600
       TabIndex        =   7
-      Top             =   3480
+      Top             =   3240
       Width           =   1212
       _ExtentX        =   2138
       _ExtentY        =   656
       Caption         =   "PDF"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton CmdSavejson 
+      Height          =   372
+      Left            =   12600
+      TabIndex        =   10
+      Top             =   4320
+      Width           =   1212
+      _ExtentX        =   2138
+      _ExtentY        =   656
+      Caption         =   "json"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton CmdSavemd 
+      Height          =   372
+      Left            =   12600
+      TabIndex        =   11
+      Top             =   4680
+      Width           =   1212
+      _ExtentX        =   2138
+      _ExtentY        =   656
+      Caption         =   "md"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   7.8
@@ -209,6 +247,29 @@ End Sub
 Private Sub Form_Activate()
     bJaInicializado = True
     chamamotor_click
+End Sub
+Private Sub cmdSavejson_Click()
+    Dim sFileName As String
+    Dim sFILTER As String
+    Dim sJson As String
+    sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
+    sFileName = FileSave(Me, sFILTER, 1, "json", , , "Salvar json Como")
+    
+    sJson = m_oWebView2.jsProp("JSON.stringify(Array.from(document.querySelectorAll('tr')).map(r => Array.from(r.querySelectorAll('td')).map(c => c.innerText)))")
+    If sFileName <> "" Then
+        FileWrite sFileName, sJson
+    End If
+End Sub
+Private Sub cmdSaveMD_Click()
+    Dim sFileName As String
+    Dim sFILTER As String
+    Dim sMarkdown As String
+    sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
+    sFileName = FileSave(Me, sFILTER, 1, "md", , , "Salvar md Como")
+    sMarkdown = m_oWebView2.jsProp("turndownService.turndown(document.getElementById('content').innerHTML)")
+    If sFileName <> "" Then
+        FileWrite sFileName, sMarkdown
+    End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -283,12 +344,15 @@ Private Sub cmdSavejpg_Click()
     Dim sFILTER As String
     Dim sFileName As String
     Dim sSugestaoNome As String
+    Dim sBase64JPG As String
+    
     sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
     sFILTER = "Imagem JPG (*.jpg;*.jpeg)|*.jpg;*.jpeg|Todos Arquivos (*.*)|*.*"
-    sFileName = FileSave(Me, sFILTER, 1, "JPG", sSugestaoNome, , "Salvar Etiqueta Como Imagem JPG")
+    sFileName = FileSave(Me, sFILTER, 1, "JPG", sSugestaoNome, , "Salvar Como Imagem JPG")
     
     If sFileName <> "" Then
-       ' Call SalvarPreviewComoImagem(sFileName)
+        sBase64JPG = m_oWebView2.jsProp("document.getElementById('zplCanvas').toDataURL('image/jpeg', 0.9)")
+        Call SalvarBase64ComoImagem(sBase64JPG, sFileName)
     End If
 End Sub
 
@@ -296,12 +360,15 @@ Private Sub cmdSavePNG_Click()
     Dim sFILTER As String
     Dim sFileName As String
     Dim sSugestaoNome As String
+    Dim sBase64PNG As String
+    
     sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
     sFILTER = "Imagem PNG (*.png)|*.png|Todos Arquivos (*.*)|*.*"
-    sFileName = FileSave(Me, sFILTER, 1, "PNG", sSugestaoNome, , "Salvar Etiqueta Como Imagem PNG")
+    sFileName = FileSave(Me, sFILTER, 1, "PNG", sSugestaoNome, , "Salvar Como Imagem PNG")
     
     If sFileName <> "" Then
-      '  Call SalvarPreviewComoImagem(sFileName)
+        sBase64PNG = m_oWebView2.jsProp("document.getElementById('zplCanvas').toDataURL('image/png')")
+        Call SalvarBase64ComoImagem(sBase64PNG, sFileName)
     End If
 End Sub
 
@@ -417,16 +484,16 @@ Private Sub chamamotor_click()
         Call RenderizarMotorDelimitadoLocal(mvarCaminhoArquivo)
         
     ElseIf cEXT = "rtf" Then
-        cmdSavehtml.Visible = False
-        cmdSaveTXT.Visible = False
+        cmdSavehtml.Visible = True
+        cmdSaveTXT.Visible = True
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
         Me.Caption = "Visualizador RTF - " & NomeArq(mvarCaminhoArquivo, False)
         Call RenderizarMotorRtfLocal
         
     ElseIf cEXT = "docx" Or cEXT = "doc" Or cEXT = "odt" Then
-        cmdSavehtml.Visible = False
-        cmdSaveTXT.Visible = False
+        cmdSavehtml.Visible = True
+        cmdSaveTXT.Visible = True
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
         cmdsavedoc.Visible = False
@@ -434,16 +501,16 @@ Private Sub chamamotor_click()
         Call RenderizarMotorDocLocal
         
     ElseIf cEXT = "md" Or cEXT = "markdown" Then
-        cmdSavehtml.Visible = False
-        cmdSaveTXT.Visible = False
+        cmdSavehtml.Visible = True
+        cmdSaveTXT.Visible = True
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
         Me.Caption = "Visualizador de Documentos - " & NomeArq(mvarCaminhoArquivo, False)
         Call RenderizarMotorMarked
         
     ElseIf cEXT = "pdf" Then
-        cmdSavehtml.Visible = False
-        cmdSaveTXT.Visible = False
+        cmdSavehtml.Visible = True
+        cmdSaveTXT.Visible = True
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
         CmdSavePDF.Visible = False
@@ -810,49 +877,6 @@ Private Sub RenderizarMotorHlpLocal()
                  
     m_oWebView2.NavigateToString cHTMLAviso
 End Sub
-
-Private Sub SalvarPreviewComoImagem(ByVal cCaminhoDestino As String)
-    Dim cNomeArquivo As String, cEXTENSAO As String, cMimeType As String, cScript As String
-    Dim fso As Object
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    cNomeArquivo = fso.GetFileName(cCaminhoDestino)
-    cEXTENSAO = LCase(fso.GetExtensionName(cCaminhoDestino))
-    Set fso = Nothing
-    
-    If cEXTENSAO = "jpg" Or cEXTENSAO = "jpeg" Then
-        cMimeType = "image/jpeg"
-    Else
-        cMimeType = "image/png"
-    End If
-    
-    cScript = "(function() {" & _
-              "  var canvas = document.getElementById('zplCanvas');" & _
-              "  if (canvas) {" & _
-              "    var finalDataUrl;" & _
-              "    if ('" & cMimeType & "' === 'image/jpeg') {" & _
-              "      var tempCanvas = document.createElement('canvas');" & _
-              "      tempCanvas.width = canvas.width;" & _
-              "      tempCanvas.height = canvas.height;" & _
-              "      var ctx = tempCanvas.getContext('2d');" & _
-              "      ctx.fillStyle = '#FFFFFF';" & _
-              "      ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);" & _
-              "      ctx.drawImage(canvas, 0, 0);" & _
-              "      finalDataUrl = tempCanvas.toDataURL('image/jpeg', 0.9);" & _
-              "    } else {" & _
-              "      finalDataUrl = canvas.toDataURL('image/png');" & _
-              "    }" & _
-              "    var lnk = document.createElement('a');" & _
-              "    lnk.download = '" & cNomeArquivo & "';" & _
-              "    lnk.href = finalDataUrl;" & _
-              "    document.body.appendChild(lnk);" & _
-              "    lnk.click();" & _
-              "    document.body.removeChild(lnk);" & _
-              "  }" & _
-              "})();"
-              
-    m_oWebView2.ExecuteScript cScript
-End Sub
-
 Private Function IsArquivoChmDisfarcado(ByVal cCaminho As String) As Boolean
     On Error GoTo Sair
     Dim fNum As Integer
