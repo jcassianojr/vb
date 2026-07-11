@@ -92,6 +92,8 @@ If IsQueryDestructive(cSQL) Then
       GrvSQL = GrvSQLite(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
   Case "SQLITERC6", "ADORC6"
       GrvSQL = GrvSQLrc6(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
+  Case "TC6SQLITE"
+      GrvSQL = GrvSQLTC6(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
   End Select
 End Function
 
@@ -112,7 +114,8 @@ Public Function IncluiSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
        IncluiSQL = IncluiSQLite(cARQ, cSQL, nITEM, aCAM, aVAL, lCHECK, lMES, aIDDES)
   Case "SQLITERC6", "ADORC6"
         IncluiSQL = IncluiSQLrc6(cARQ, cSQL, nITEM, aCAM, aVAL, lCHECK, lMES, aIDDES)
-    
+   Case "TC6SQLITE"
+       IncluiSQL = IncluiSQLTC6(cARQ, cSQL, nITEM, aCAM, aVAL, lCHECK, lMES, aIDDES)
   End Select
 End Function
 
@@ -130,7 +133,9 @@ Public Function PegSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
             PegSQL = PegSQLite(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
         Case "SQLITERC6", "ADORC6"
             PegSQL = PegSQLrc6(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
-    
+    Case "TC6SQLITE"
+    PegSQL = PegSQLTC6(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
+            
   End Select
 End Function
 
@@ -148,6 +153,8 @@ Public Function PegUltSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal cCAM
          PegUltSQL = PegUltSQLite(cARQ, cSQL, cCAMPO, eDEFAULT)
     Case "SQLITERC6", "ADORC6"
          PegUltSQL = PegUltSQLrc6(cARQ, cSQL, cCAMPO, eDEFAULT)
+ Case "TC6SQLITE"
+ PegUltSQL = PegUltSQLTC6(cARQ, cSQL, cCAMPO, eDEFAULT)
   End Select
 End Function
 
@@ -165,7 +172,8 @@ Public Function PegMAXSQL(ByVal cARQ As String, ByVal cTable As String, ByVal cC
          PegMAXSQL = PegMaxSQLite(cARQ, cTable, cCAMPO, eDEFAULT)
     Case "SQLITERC6", "ADORC6"
          PegMAXSQL = PegMAXSQLrc6(cARQ, cTable, cCAMPO, eDEFAULT)
-    
+    Case "TC6SQLITE"
+    PegMAXSQL = PegMAXSQLTC6(cARQ, cTable, cCAMPO, eDEFAULT)
   End Select
 End Function
 
@@ -183,6 +191,8 @@ Public Function PegCountSQL(ByVal cARQ As String, ByVal cTable As String, ByVal 
      PegCountSQL = PegCountSQLite(cARQ, cTable, cCAMPO, eDEFAULT)
        Case "SQLITERC6", "ADORC6"
         PegCountSQL = PegCountSQLrc6(cARQ, cTable, cCAMPO, eDEFAULT)
+ Case "TC6SQLITE"
+       PegCountSQL = PegCountSQLTC6(cARQ, cTable, cCAMPO, eDEFAULT)
   End Select
 End Function
 Public Function ComandoSQL(ByVal cARQ As String, ByVal cSQL As String) As Boolean
@@ -199,6 +209,8 @@ Public Function ComandoSQL(ByVal cARQ As String, ByVal cSQL As String) As Boolea
        ComandoSQL = SQLiteComando(cARQ, cSQL)
    Case "SQLITERC6", "ADORC6"
         ComandoSQL = ADOComandorc6(cARQ, cSQL)
+ Case "TC6SQLITE"
+ ComandoSQL = ADOComandoTC6(cARQ, cSQL)
   End Select
 End Function
 
@@ -216,6 +228,8 @@ Public Function ApagaSQL(ByVal cARQ As String, ByVal cSQL As String) As Boolean
        ApagaSQL = ApagaSQLite(cARQ, cSQL)
    Case "SQLITERC6", "ADORC6"
         ApagaSQL = APAGASQLrc6(cARQ, cSQL)
+ Case "TC6SQLITE"
+  ApagaSQL = APAGASQLTC6(cARQ, cSQL)
   End Select
 End Function
 
@@ -234,7 +248,8 @@ Public Function SomaSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM A
           
         Case "SQLITERC6", "ADORC6"
             SomaSQL = SomaSQLrc6(cARQ, cSQL, aCAM)
-    
+  Case "TC6SQLITE"
+      SomaSQL = SomaSQLTC6(cARQ, cSQL, aCAM)
   End Select
 End Function
 Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
@@ -257,7 +272,8 @@ Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
         Case "SQLITERC6", "ADORC6"
             ' Chama a versão vbRichClient6
             PegSQLDeli = PegSQLDelirc6(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
-            
+      Case "TC6SQLITE"
+      PegSQLDeli = PegSQLDeliTC6(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
       
     End Select
 End Function
@@ -323,7 +339,9 @@ Public Function SqlMoveReg(ByVal cARQORI As String, _
         Case "SQLITERC6", "ADORC6"
             SqlMoveReg = SQLMoveRegrc6(cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
                                              cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, aIDDES)
-                  
+      Case "TC6SQLITE"
+       SqlMoveReg = SQLMoveRegTC6(cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
+                                             cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, aIDDES)
   End Select
 End Function
 
@@ -446,9 +464,10 @@ Public Function PegOperSQL(ByVal cARQ As String, ByVal cTABLEWHERE As String, By
     PegOperSQL = PegOperSQLADO(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, coper)
  Case "SQLITERC6", "ADORC6"
       PegOperSQL = PegOperSQLrc6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, coper)
-        Case "VBSQLITE"
+  Case "VBSQLITE"
       PegOperSQL = PegOperSQLite(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, coper)
-    
+  Case "TC6SQLITE"
+        PegOperSQL = PegOperSQLTC6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, coper)
   End Select
 
 End Function
