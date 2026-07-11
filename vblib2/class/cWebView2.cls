@@ -10,7 +10,7 @@ Attribute VB_Name = "cWebView2"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
-Attribute VB_Exposed = True
+Attribute VB_Exposed = False
 '=========================================================================
 ' CLASS: cWebView2
 ' RC6-compatible replacement of vbRichClient6's cWebView2, built directly
@@ -157,7 +157,7 @@ Public Event NavigationStarting(ByVal IsUserInitiated As Boolean, ByVal IsRedire
 Public Event NavigationCompleted(ByVal IsSuccess As Boolean, ByVal WebErrorStatus As Long)
 Public Event UserContextMenu(ByVal ScreenX As Long, ByVal ScreenY As Long)
 Public Event JSMessage(ByVal sMsg As String, ByVal sMsgContent As String, oJSONContent As Collection)
-Public Event JSAsyncResult(Result As Variant, ByVal Token As Currency, ByVal ErrString As String)
+Public Event JSAsyncResult(result As Variant, ByVal Token As Currency, ByVal ErrString As String)
 Public Event GotFocus(ByVal Reason As eWebView2FocusReason)
 Public Event LostFocus(ByVal Reason As eWebView2FocusReason)
 Public Event AcceleratorKeyPressed(ByVal KeyState As eWebView2AccKeyState, ByVal IsExtendedKey As Boolean, ByVal WasKeyDown As Boolean, ByVal IsKeyReleased As Boolean, ByVal IsMenuKeyDown As Boolean, ByVal RepeatCount As Long, ByVal ScanCode As Long, IsHandled As Boolean)
@@ -187,7 +187,7 @@ Public Event BasicAuthenticationRequested(ByVal URI As String, ByVal Challenge A
 Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As Long)
 Private Declare Function GetModuleHandle Lib "kernel32" Alias "GetModuleHandleW" (ByVal lpModuleName As Long) As Long
 Private Declare Function LoadLibrary Lib "kernel32" Alias "LoadLibraryW" (ByVal lpLibFileName As Long) As Long
-Private Declare Function GetClientRect Lib "user32" (ByVal hWnd As Long, lpRect As APIRECT) As Long
+Private Declare Function GetClientRect Lib "user32" (ByVal hwnd As Long, lpRect As APIRECT) As Long
 Private Declare Function SysReAllocString Lib "oleaut32" (ByVal pBSTR As Long, ByVal lpsz As Long) As Long
 Private Declare Sub CoTaskMemFree Lib "ole32" (ByVal pv As Long)
 Private Declare Function CreateCoreWebView2EnvironmentWithOptions Lib "WebView2Loader" (ByVal browserExecutableFolder As Long, ByVal userDataFolder As Long, ByVal environmentOptions As Long, ByVal environmentCreatedHandler As Long) As Long
@@ -196,7 +196,7 @@ Private Declare Function QueryPerformanceCounter Lib "kernel32" (lpPerformanceCo
 Private Declare Function QueryPerformanceFrequency Lib "kernel32" (lpFrequency As Currency) As Long
 Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
 Private Declare Function CoWaitForMultipleHandles Lib "ole32" (ByVal dwFlags As Long, ByVal dwTimeout As Long, ByVal cHandles As Long, pHandles As Any, lpdwindex As Long) As Long
-Private Declare Function PeekMessage Lib "user32" Alias "PeekMessageW" (ByVal lpMsg As Long, ByVal hWnd As Long, ByVal wMsgFilterMin As Long, ByVal wMsgFilterMax As Long, ByVal wRemoveMsg As Long) As Long
+Private Declare Function PeekMessage Lib "user32" Alias "PeekMessageW" (ByVal lpMsg As Long, ByVal hwnd As Long, ByVal wMsgFilterMin As Long, ByVal wMsgFilterMax As Long, ByVal wRemoveMsg As Long) As Long
 Private Declare Function TranslateMessage Lib "user32" (ByVal lpMsg As Long) As Long
 Private Declare Function DispatchMessage Lib "user32" Alias "DispatchMessageW" (ByVal lpMsg As Long) As Long
 Private Declare Sub VariantClear Lib "oleaut32" (pvarg As Variant)
@@ -204,12 +204,12 @@ Private Declare Function CreateStreamOnHGlobal Lib "ole32" (ByVal hGlobal As Lon
 Private Declare Function GetFileAttributes Lib "kernel32" Alias "GetFileAttributesW" (ByVal lpFileName As Long) As Long
 
 Private Type APIMSG
-    hWnd                As Long
+    hwnd                As Long
     lMessage            As Long
     wParam              As Long
     lParam              As Long
     time                As Long
-    pt                  As APIPOINT
+    PT                  As APIPOINT
 End Type
 
 '=========================================================================
@@ -867,17 +867,17 @@ EH:
     PrintError "NavigateWithWebResourceRequest"
 End Function
 
-Public Sub AddWebResourceRequestedFilter(ByVal sFilter As String, Optional ByVal FilterContext As eWebView2ResourceFilter = Filter_ALL)
+Public Sub AddWebResourceRequestedFilter(ByVal sFILTER As String, Optional ByVal FilterContext As eWebView2ResourceFilter = Filter_ALL)
     On Error GoTo EH
-    m_oWebView.AddWebResourceRequestedFilter StrPtr(sFilter), FilterContext
+    m_oWebView.AddWebResourceRequestedFilter StrPtr(sFILTER), FilterContext
     Exit Sub
 EH:
     PrintError "AddWebResourceRequestedFilter"
 End Sub
 
-Public Sub RemoveWebResourceRequestedFilter(ByVal sFilter As String, ByVal FilterContext As eWebView2ResourceFilter)
+Public Sub RemoveWebResourceRequestedFilter(ByVal sFILTER As String, ByVal FilterContext As eWebView2ResourceFilter)
     On Error GoTo EH
-    m_oWebView.RemoveWebResourceRequestedFilter StrPtr(sFilter), FilterContext
+    m_oWebView.RemoveWebResourceRequestedFilter StrPtr(sFILTER), FilterContext
     Exit Sub
 EH:
     PrintError "RemoveWebResourceRequestedFilter"
@@ -1011,7 +1011,7 @@ Public Function TrySuspend(Optional ByVal SecondsToWaitForComplete As Double = 8
         m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
-    vItem = m_cScriptResults.Item(sKey)
+    vItem = m_cScriptResults.item(sKey)
     m_cScriptResults.Remove sKey
     If vItem(0) < 0 Then
         Exit Function
@@ -1172,7 +1172,7 @@ Public Function CallDevToolsProtocolMethod(ByVal MethodName As String, ByVal Par
         m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
-    vItem = m_cScriptResults.Item(sKey)
+    vItem = m_cScriptResults.item(sKey)
     m_cScriptResults.Remove sKey
     If vItem(0) < 0 Then
         Exit Function
@@ -1212,7 +1212,7 @@ Public Function CallDevToolsProtocolMethodForSession(ByVal SessionId As String, 
         m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
-    vItem = m_cScriptResults.Item(sKey)
+    vItem = m_cScriptResults.item(sKey)
     m_cScriptResults.Remove sKey
     If vItem(0) < 0 Then
         Exit Function
@@ -1255,7 +1255,7 @@ Public Function CapturePreview(Optional ByVal ImageFormat As eWebView2ImageCaptu
         m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
-    vItem = m_cScriptResults.Item(sKey)
+    vItem = m_cScriptResults.item(sKey)
     m_cScriptResults.Remove sKey
     If vItem(0) < 0 Then
         Exit Function
@@ -1279,8 +1279,8 @@ Public Function PrintToPdf( _
         Optional ByVal SecondsToWaitForPrintComplete As Double = 8, _
         Optional ByVal Landscape As Boolean, _
         Optional ByVal ScaleFactor As Double, _
-        Optional ByVal PageWidth As Double, _
-        Optional ByVal PageHeight As Double, _
+        Optional ByVal pageWidth As Double, _
+        Optional ByVal pageHeight As Double, _
         Optional ByVal MarginTop As Double = -1, _
         Optional ByVal MarginBottom As Double = -1, _
         Optional ByVal MarginLeft As Double = -1, _
@@ -1300,7 +1300,7 @@ Public Function PrintToPdf( _
     If m_oWebView11 Is Nothing Then
         Exit Function
     End If
-    Set oSettings = pvBuildPrintSettings(Landscape, ScaleFactor, PageWidth, PageHeight, MarginTop, MarginBottom, MarginLeft, MarginRight, ShouldPrintBackgrounds, ShouldPrintSelectionOnly, ShouldPrintHeaderAndFooter, HeaderTitle, FooterUri)
+    Set oSettings = pvBuildPrintSettings(Landscape, ScaleFactor, pageWidth, pageHeight, MarginTop, MarginBottom, MarginLeft, MarginRight, ShouldPrintBackgrounds, ShouldPrintSelectionOnly, ShouldPrintHeaderAndFooter, HeaderTitle, FooterUri)
     cToken = pvNextToken()
     sKey = "T" & cToken
     Set oHandler = New cWebView2Callback
@@ -1315,7 +1315,7 @@ Public Function PrintToPdf( _
         m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
-    vItem = m_cScriptResults.Item(sKey)
+    vItem = m_cScriptResults.item(sKey)
     m_cScriptResults.Remove sKey
     If vItem(0) < 0 Then
         Exit Function
@@ -1330,8 +1330,8 @@ Public Function PrintToPdfStream( _
         Optional ByVal SecondsToWaitForPrintComplete As Double = 8, _
         Optional ByVal Landscape As Boolean, _
         Optional ByVal ScaleFactor As Double, _
-        Optional ByVal PageWidth As Double, _
-        Optional ByVal PageHeight As Double, _
+        Optional ByVal pageWidth As Double, _
+        Optional ByVal pageHeight As Double, _
         Optional ByVal MarginTop As Double = -1, _
         Optional ByVal MarginBottom As Double = -1, _
         Optional ByVal MarginLeft As Double = -1, _
@@ -1351,7 +1351,7 @@ Public Function PrintToPdfStream( _
     If m_oWebView16 Is Nothing Then
         Exit Function
     End If
-    Set oSettings = pvBuildPrintSettings(Landscape, ScaleFactor, PageWidth, PageHeight, MarginTop, MarginBottom, MarginLeft, MarginRight, ShouldPrintBackgrounds, ShouldPrintSelectionOnly, ShouldPrintHeaderAndFooter, HeaderTitle, FooterUri)
+    Set oSettings = pvBuildPrintSettings(Landscape, ScaleFactor, pageWidth, pageHeight, MarginTop, MarginBottom, MarginLeft, MarginRight, ShouldPrintBackgrounds, ShouldPrintSelectionOnly, ShouldPrintHeaderAndFooter, HeaderTitle, FooterUri)
     cToken = pvNextToken()
     sKey = "T" & cToken
     Set oHandler = New cWebView2Callback
@@ -1365,7 +1365,7 @@ Public Function PrintToPdfStream( _
         m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
-    vItem = m_cScriptResults.Item(sKey)
+    vItem = m_cScriptResults.item(sKey)
     m_cScriptResults.Remove sKey
     If vItem(0) < 0 Then
         Exit Function
@@ -1411,7 +1411,7 @@ Public Function GetCookies(Optional ByVal URI As String, Optional ByVal SecondsT
         m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
-    vItem = m_cScriptResults.Item(sKey)
+    vItem = m_cScriptResults.item(sKey)
     m_cScriptResults.Remove sKey
     If vItem(0) < 0 Then
         Exit Function
@@ -1507,7 +1507,7 @@ Public Function AddBrowserExtension(ByVal ExtensionFolderPath As String, Optiona
         m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
-    vItem = m_cScriptResults.Item(sKey)
+    vItem = m_cScriptResults.item(sKey)
     m_cScriptResults.Remove sKey
     If vItem(0) < 0 Then
         Exit Function
@@ -1543,7 +1543,7 @@ Public Function GetBrowserExtensions(Optional ByVal SecondsToWaitForComplete As 
         m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
-    vItem = m_cScriptResults.Item(sKey)
+    vItem = m_cScriptResults.item(sKey)
     m_cScriptResults.Remove sKey
     If vItem(0) < 0 Then
         Exit Function
@@ -1554,50 +1554,50 @@ EH:
     PrintError "GetBrowserExtensions"
 End Function
 
-Public Function CallByName(ByVal Obj As Object, ByVal ProcName As String, ByVal CallType As VbCallType, ParamArray P() As Variant) As Variant
-    Select Case UBound(P)
+Public Function CallByName(ByVal Obj As Object, ByVal ProcName As String, ByVal CallType As VbCallType, ParamArray p() As Variant) As Variant
+    Select Case UBound(p)
     Case -1
         pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType)
     Case 0
-        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, P(0))
+        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, p(0))
     Case 1
-        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, P(0), P(1))
+        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, p(0), p(1))
     Case 2
-        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, P(0), P(1), P(2))
+        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, p(0), p(1), p(2))
     Case 3
-        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, P(0), P(1), P(2), P(3))
+        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, p(0), p(1), p(2), p(3))
     Case 4
-        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, P(0), P(1), P(2), P(3), P(4))
+        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, p(0), p(1), p(2), p(3), p(4))
     Case 5
-        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, P(0), P(1), P(2), P(3), P(4), P(5))
+        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, p(0), p(1), p(2), p(3), p(4), p(5))
     Case 6
-        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, P(0), P(1), P(2), P(3), P(4), P(5), P(6))
+        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, p(0), p(1), p(2), p(3), p(4), p(5), p(6))
     Case 7
-        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, P(0), P(1), P(2), P(3), P(4), P(5), P(6), P(7))
+        pvAssignVariant CallByName, VBA.CallByName(Obj, ProcName, CallType, p(0), p(1), p(2), p(3), p(4), p(5), p(6), p(7))
     Case Else
         Err.Raise 450                               '--- wrong number of arguments
     End Select
 End Function
 
-Public Function jsCallByName(ByVal Obj As Object, ByVal MethodName As String, ByVal CallType As VbCallType, ParamArray P() As Variant) As Variant
-    #If Obj And MethodName And CallType And P Then
+Public Function jsCallByName(ByVal Obj As Object, ByVal MethodName As String, ByVal CallType As VbCallType, ParamArray p() As Variant) As Variant
+    #If Obj And MethodName And CallType And p Then
     #End If
     pvNotImplemented "jsCallByName"
 End Function
 
-Public Function jsRun(ByVal FuncName As String, ParamArray P() As Variant) As Variant
+Public Function jsRun(ByVal FuncName As String, ParamArray p() As Variant) As Variant
     Dim vArgs           As Variant
 
-    vArgs = P
+    vArgs = p
     pvExecScriptSync pvJsBuildCall(FuncName, vArgs), jsRun
 End Function
 
-Public Function jsRunAsync(ByVal FuncName As String, ParamArray P() As Variant) As Currency
+Public Function jsRunAsync(ByVal FuncName As String, ParamArray p() As Variant) As Currency
     Dim vArgs           As Variant
     Dim oHandler        As cWebView2Callback
 
     On Error GoTo EH
-    vArgs = P
+    vArgs = p
     jsRunAsync = pvNextToken()
     Set oHandler = New cWebView2Callback
     oHandler.Init Me, jsRunAsync
@@ -1694,7 +1694,7 @@ EH:
     PrintError "pvPumpUntil"
 End Function
 
-Private Sub SpinThreadMessagePump(Optional ByVal Flush As Boolean, Optional ByVal hWnd As Long, Optional ByVal FromMsg As Long, Optional ByVal ToMsg As Long)
+Private Sub SpinThreadMessagePump(Optional ByVal Flush As Boolean, Optional ByVal hwnd As Long, Optional ByVal FromMsg As Long, Optional ByVal ToMsg As Long)
     Const PM_REMOVE     As Long = 1
     Const WM_NCMOUSEFIRST As Long = &HA0
     Const WM_NCMOUSELAST As Long = &HA9
@@ -1708,7 +1708,7 @@ Private Sub SpinThreadMessagePump(Optional ByVal Flush As Boolean, Optional ByVa
         Call Sleep(1)
     End If
     Call CoWaitForMultipleHandles(0, 0, 0, 0, 0)
-    Do While PeekMessage(VarPtr(uMsg), hWnd, FromMsg, ToMsg, PM_REMOVE) <> 0
+    Do While PeekMessage(VarPtr(uMsg), hwnd, FromMsg, ToMsg, PM_REMOVE) <> 0
         Call TranslateMessage(VarPtr(uMsg))
         If Flush And (uMsg.lMessage >= WM_KEYFIRST And uMsg.lMessage <= WM_KEYLAST _
                         Or uMsg.lMessage >= WM_MOUSEFIRST And uMsg.lMessage <= WM_MOUSELAST _
@@ -1785,7 +1785,7 @@ Private Function pvClearBrowsingData(ByVal lDataKinds As Long, ByVal dblStartTim
         m_cScriptResults.Remove "P" & cToken
         Exit Function
     End If
-    vItem = m_cScriptResults.Item(sKey)
+    vItem = m_cScriptResults.item(sKey)
     m_cScriptResults.Remove sKey
     pvClearBrowsingData = (vItem(0) >= 0)
     Exit Function
@@ -1835,16 +1835,16 @@ Private Function pvBuildPrintSettings( _
     End If
     Set oSettings = oEnv6.CreatePrintSettings()
     If bLandscape Then
-        oSettings.Orientation = ORIENT_LANDSCAPE
+        oSettings.orientation = ORIENT_LANDSCAPE
     End If
     If dblScaleFactor > 0 Then
         oSettings.ScaleFactor = dblScaleFactor
     End If
     If dblPageWidth > 0 Then
-        oSettings.PageWidth = dblPageWidth
+        oSettings.pageWidth = dblPageWidth
     End If
     If dblPageHeight > 0 Then
-        oSettings.PageHeight = dblPageHeight
+        oSettings.pageHeight = dblPageHeight
     End If
     If dblMarginTop >= 0 Then
         oSettings.MarginTop = dblMarginTop
@@ -1900,7 +1900,7 @@ Private Function pvExecScriptSync(sScript As String, vResult As Variant) As Bool
         m_sJsLastError = "Timeout waiting for script result"
         Exit Function
     End If
-    vItem = m_cScriptResults.Item(sKey)
+    vItem = m_cScriptResults.item(sKey)
     m_cScriptResults.Remove sKey
     If vItem(0) < 0 Then
         m_sJsLastError = "Error &H" & Hex$(vItem(0)) & " executing script"
@@ -1950,7 +1950,7 @@ EH:
 End Function
 
 Private Function pvSearchCollection(cCol As IVbCollection, sKey As String) As Boolean
-    pvSearchCollection = (cCol.Item(sKey) >= 0)
+    pvSearchCollection = (cCol.item(sKey) >= 0)
 End Function
 
 Private Sub pvAssignVariant(vDest As Variant, vSrc As Variant)
@@ -1986,7 +1986,7 @@ Private Function pvJsonEncode(vValue As Variant) As String
                 If LenB(sResult) <> 0 Then
                     sResult = sResult & ","
                 End If
-                sResult = sResult & pvJsonEncodeString(aKeys(lIdx - 1)) & ":" & pvJsonEncode(cCol.Item(lIdx))
+                sResult = sResult & pvJsonEncodeString(aKeys(lIdx - 1)) & ":" & pvJsonEncode(cCol.item(lIdx))
             Next
             pvJsonEncode = "{" & sResult & "}"
         Else
@@ -2105,7 +2105,7 @@ Private Sub pvJsonParseValue(sText As String, lIdx As Long, vResult As Variant)
         Else
             ReDim vResult(0 To cItems.Count - 1)
             For lJdx = 1 To cItems.Count
-                pvAssignVariant vResult(lJdx - 1), cItems.Item(lJdx)
+                pvAssignVariant vResult(lJdx - 1), cItems.item(lJdx)
             Next
         End If
     Case """"
@@ -2417,11 +2417,11 @@ Friend Sub SinkWebResourceResponseReceived(oArgs As IVBCoreWebView2WebResourceRe
         oIter.GetCurrentHeader lName, lValue
         sKey = pvToString(lName)
         If pvSearchCollection(cHeaders, sKey) Then
-            If IsObject(cHeaders.Item(sKey)) Then
-                Set oTemp = cHeaders.Item(sKey)
+            If IsObject(cHeaders.item(sKey)) Then
+                Set oTemp = cHeaders.item(sKey)
             Else
                 Set oTemp = New Collection
-                oTemp.Add cHeaders.Item(sKey)
+                oTemp.Add cHeaders.item(sKey)
                 cHeaders.Remove sKey
                 cHeaders.Add oTemp, sKey
             End If
@@ -2578,10 +2578,10 @@ Friend Sub OnGetBrowserExtensions(ByVal hResult As Long, oList As IVBCoreWebView
         For lIdx = 0 To oList.Count - 1
             Set oExt = oList.GetValueAtIndex(lIdx)
             Set cItem = New Collection
-            cItem.Add pvToString(oExt.Id), "Id"
+            cItem.Add pvToString(oExt.id), "Id"
             cItem.Add pvToString(oExt.Name), "Name"
             cItem.Add CBool(oExt.IsEnabled), "IsEnabled"
-            cResult.Add cItem, cItem.Item("Id")
+            cResult.Add cItem, cItem.item("Id")
         Next
     End If
     m_cScriptResults.Add Array(hResult, cResult), "T" & cToken
@@ -2592,17 +2592,17 @@ End Sub
 
 Friend Sub SinkBasicAuthenticationRequested(oArgs As IVBCoreWebView2BasicAuthenticationRequestedEventArgs)
     Dim oResponse       As IVBCoreWebView2BasicAuthenticationResponse
-    Dim sUserName       As String
+    Dim sUsername       As String
     Dim sPassword       As String
     Dim bCancel         As Boolean
 
     On Error GoTo EH
     bCancel = oArgs.Cancel
-    RaiseEvent BasicAuthenticationRequested(pvToString(oArgs.Uri), pvToString(oArgs.Challenge), sUserName, sPassword, bCancel)
+    RaiseEvent BasicAuthenticationRequested(pvToString(oArgs.URI), pvToString(oArgs.Challenge), sUsername, sPassword, bCancel)
     oArgs.Cancel = -bCancel
-    If LenB(sUserName) <> 0 Or LenB(sPassword) <> 0 Then
+    If LenB(sUsername) <> 0 Or LenB(sPassword) <> 0 Then
         Set oResponse = oArgs.Response
-        oResponse.UserName = StrPtr(sUserName)
+        oResponse.UserName = StrPtr(sUsername)
         oResponse.Password = StrPtr(sPassword)
     End If
     Exit Sub
