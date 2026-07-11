@@ -297,7 +297,8 @@ Public Function PegSQLDelirc6(ByVal cARQ As String, ByVal cSQL As String, _
 
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
-    Dim x As Integer, nCAMPOS As Integer
+    Dim x As Integer
+    Dim nCAMPOS As Integer
     Dim aRETU As Variant
     Dim aARQ As Variant
     Dim aOPE As Variant
@@ -392,7 +393,8 @@ Public Function GrvSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
     Dim x As Long
-    Dim eVAL As Variant, aOPE As Variant
+    Dim eVAL As Variant
+    Dim aOPE As Variant
     Dim aARQ As Variant
     Dim carqcon As String
     
@@ -474,8 +476,10 @@ Public Function IncluiSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
                              Optional ByVal aIDDES As Variant = 0) As Boolean
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
-    Dim x As Long, aRETU As Variant
-    Dim lTEM As Boolean, lRETU As Boolean
+    Dim x As Long
+    Dim aRETU As Variant
+    Dim lTEM As Boolean
+    Dim lRETU As Boolean
     Dim carqcon As String
     
     IncluiSQLrc6 = False
@@ -728,11 +732,16 @@ Public Function SQLMoveRegrc6(ByVal cARQORI As String, _
                               Optional ByVal aOUTDES As Variant = 0, _
                               Optional ByVal aIDDES As Variant = 0) As Boolean
 
-    Dim oDB As RC6.cConnection, oDBDES As RC6.cConnection
-    Dim oRS As RC6.cRecordset, oRSDES As RC6.cRecordset
-    Dim aRetuOri As Variant, aRetuDes As Variant
-    Dim x As Integer, nCAMPOS As Integer
-    Dim aVALORI As Variant, aRETUID As Variant
+    Dim oDB As RC6.cConnection
+    Dim oDBDES As RC6.cConnection
+    Dim oRS As RC6.cRecordset
+    Dim oRSDES As RC6.cRecordset
+    Dim aRetuOri As Variant
+    Dim aRetuDes As Variant
+    Dim x As Integer
+    Dim nCAMPOS As Integer
+    Dim aVALORI As Variant
+    Dim aRETUID As Variant
     Dim cCONORI As String
     Dim cCONDES As String
 
@@ -829,37 +838,37 @@ errhandler:
     SQLMoveRegrc6 = False
 End Function
 
-Public Function CriaMdbAccessRC6(ByVal cCaminho As String) As Boolean
+'Public Function CriaMdbAccessRC6(ByVal cCaminho As String) As Boolean
     ' Usamos Late Binding para não precisar da referência ao ADOX no projeto RC6
-    Dim cat As Object
-    On Error GoTo Erro
+ '   Dim cat As Object
+  '  On Error GoTo Erro
     
-    Set cat = CreateObject("ADOX.Catalog")
+   ' Set cat = CreateObject("ADOX.Catalog")
     ' Cria o arquivo .accdb (o Provider ACE.OLEDB.12.0 cria o arquivo fisicamente)
-    cat.Create "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & cCaminho
+    'cat.Create "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & cCaminho
     
-    CriaMdbAccessRC6 = True
-    Exit Function
-Erro:
-    CriaMdbAccessRC6 = False
-End Function
+    'CriaMdbAccessRC6 = True
+    'Exit Function
+'Erro:
+ '   CriaMdbAccessRC6 = False
+'End Function
 
-Public Function CompactarMdbAccessRC6(ByVal cOrigem As String, ByVal cDestino As String) As Boolean
-    Dim jro As Object
-    On Error GoTo Erro
+'Public Function CompactarMdbAccessRC6(ByVal cOrigem As String, ByVal cDestino As String) As Boolean
+'    Dim jro As Object
+'    On Error GoTo Erro
     
     ' O JRO.JetEngine faz o trabalho pesado de compactação do Access
-    Set jro = CreateObject("JRO.JetEngine")
+'    Set jro = CreateObject("JRO.JetEngine")
     
     ' Compacta a origem para um arquivo temporário (cDestino)
-    jro.CompactDatabase "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & cOrigem, _
+ '   jro.CompactDatabase "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & cOrigem, _
                         "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & cDestino & ";Jet OLEDB:Engine Type=6"
     
-    CompactarMdbAccessRC6 = True
-    Exit Function
-Erro:
-    CompactarMdbAccessRC6 = False
-End Function
+  '  CompactarMdbAccessRC6 = True
+   ' Exit Function
+'Erro:
+ '   CompactarMdbAccessRC6 = False
+'End Function
 
 ' ==============================================================================
 ' FUNÇÃO: ConfigurarConexaoRC6
@@ -921,18 +930,18 @@ ErroSQLite:
     ' Aqui você pode registrar o erro se desejar
     SQLiteSetValuesrc6 = False
 End Function
-Public Function RepararMdbAccessRC6(ByVal cCaminho As String) As Boolean
+'Public Function RepararMdbAccessRC6(ByVal cCaminho As String) As Boolean
     ' A estratégia padrão para reparar MDB/ACCDB é tentar compactá-lo.
     ' Se houver corrupção física, a função de compactação retornará erro.
-    Dim cTemp As String
-    cTemp = cCaminho & ".tmp"
+ '   Dim cTemp As String
+  '  cTemp = cCaminho & ".tmp"
     
-    If CompactarMdbAccessRC6(cCaminho, cTemp) Then
+   ' If CompactarMdbAccessRC6(cCaminho, cTemp) Then
         ' Se deu certo, substitui o corrompido pelo reparado
-        Kill cCaminho
-        Name cTemp As cCaminho
-        RepararMdbAccessRC6 = True
-    Else
-        RepararMdbAccessRC6 = False
-    End If
-End Function
+    '    Kill cCaminho
+     '   Name cTemp As cCaminho
+     '   RepararMdbAccessRC6 = True
+    'Else
+     '   RepararMdbAccessRC6 = False
+    'End If
+'End Function
