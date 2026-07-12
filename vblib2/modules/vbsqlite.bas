@@ -1,16 +1,9 @@
 Attribute VB_Name = "sqlvbsqlite"
 Option Explicit
 ' Reference=*\G{7CC1A5F1-A0FF-4546-A0F1-FBFE744A4522}#1.1#0#..\..\..\..\..\..\WINDOWS\system32\VBSQLite12.DLL#VB SQLite Library 1.2
-' Notas de Implementação:
-' 1. Requer as classes cSQLiteConnection e cSQLiteCursor do projeto VBSQLite.
-' 2. Mantém compatibilidade com a função SQLDialeto do adolib.bas.
-
-'---------------------------------------------------------------------------------------
-' WRAPPERS DE OPERAÇÃO - ESPELHOS DA SQLFUNCOESADO
-'---------------------------------------------------------------------------------------
 Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     Dim loConn As New SQLiteConnection
-   Dim DataSet As SQLiteDataSet
+    Dim DataSet As SQLiteDataSet
     Dim vUltimo As Variant
     
 
@@ -24,10 +17,8 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal c
     Set DataSet = loConn.OpenDataSet(cSQL)
     
     If Not DataSet.EOF Then
-        ' Como cursores SQLite são geralmente forward-only,
-        ' percorremos até o final para pegar o último registro da consulta
         While Not DataSet.EOF
-            vUltimo = DataSet.ValueMatrix(0, 1) ' .Value(cCAMPO)
+            vUltimo = DataSet(cCAMPO)
             DataSet.MoveNext
         Wend
     End If
@@ -43,48 +34,35 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal c
 Erro:
     PegUltSQLite = eDEFAULT
     If Not loConn Is Nothing Then loConn.CloseDB
-End Function ' EQUIVALENTE A: PegMINSQLADO
+End Function
 Public Function PegMinSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                             ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegMinSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "MIN")
 End Function
-
-' EQUIVALENTE A: PegMAXSQLADO
 Public Function PegMaxSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                             ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegMaxSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "MAX")
 End Function
-
-' EQUIVALENTE A: PegSUMSQLADO
 Public Function PegSumSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                             ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegSumSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "SUM")
 End Function
-
-' EQUIVALENTE A: PegCountSQLADO
 Public Function PegCountSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                               ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-    ' No Count, se o campo for *, ele conta todos os registos
     PegCountSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "COUNT")
 End Function
-
-'---------------------------------------------------------------------------------------
-' FUNÇÃO CORE (Ajustada para aceitar os parâmetros do ADO)
-'---------------------------------------------------------------------------------------
 Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                              ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
                              ByVal coper As String) As Variant
     Dim loConn As New SQLiteConnection
-   ' Dim loCursor As SQLiteCursor
    Dim DataSet As SQLiteDataSet
     Dim cSQL As String
-    Dim eVALUE
+    Dim eValue
     
     On Error GoTo Erro
     
-    ' Montagem da query idêntica ao processo ADO
     ' Ex: SELECT SUM(VALOR) FROM MOVI WHERE CODIGO = 10
-    cSQL = "SELECT " & coper & "(" & cCAMPO & ") FROM " & cTABLEWHERE
+    cSQL = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
     cSQL = sqldialeto(cSQL, "SQLITE")
     
     cCON = LimpaTag(cCON)
@@ -92,17 +70,16 @@ Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String,
     
     VBSQLiteSetValues loConn
     
-   ' Set loCursor = loConn.CreateCursor(cSQL)
     Set DataSet = loConn.OpenDataSet(cSQL)
     
     
     If Not DataSet.EOF Then
-        eVALUE = DataSet.ValueMatrix(0, 0)
+        eValue = DataSet(1)  '//ordenal 1 e nao 0 AS CAMPO DATASET("CAMPO")
         
-        If IsNull(eVALUE) Then
+        If IsNull(eValue) Then
             PegOperSQLite = eDEFAULT
         Else
-            PegOperSQLite = eVALUE
+            PegOperSQLite = eValue
         End If
     Else
         PegOperSQLite = eDEFAULT
@@ -116,9 +93,6 @@ Erro:
     PegOperSQLite = eDEFAULT
     If Not loConn Is Nothing Then loConn.CloseDB
 End Function
-'---------------------------------------------------------------------------------------
-' EQUIVALENTE A: ADOComando
-'---------------------------------------------------------------------------------------
 Public Function SQLiteComando(ByVal cCON As String, ByVal cSQL As String) As Boolean
     Dim loConn As New SQLiteConnection
     On Error GoTo Erro
@@ -138,15 +112,10 @@ Public Function SQLiteComando(ByVal cCON As String, ByVal cSQL As String) As Boo
 Erro:
     SQLiteComando = False
 End Function
-
-'---------------------------------------------------------------------------------------
-' EQUIVALENTE A: PegSQLAdo (Espelho Fiel)
-'---------------------------------------------------------------------------------------
 Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
                          ByVal nITEM As Long, ByVal aCAM As Variant, _
                          ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim loConn As New SQLiteConnection
-    'Dim loCursor As SQLiteCursor
     Dim i As Integer
     Dim aVAL() As Variant
     Dim DataSet As SQLiteDataSet
@@ -164,23 +133,15 @@ Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
     
     cSQL = sqldialeto(cSQL, "SQLITE")
     
-    ' 2. Abre o cursor (o SQL deve solicitar as colunas na ordem do aCAM)
-    'Set loCursor = loConn.CreateCursor(cSQL)
     
     Set DataSet = loConn.OpenDataSet(cSQL)
     
     
     If Not DataSet.EOF Then
         ' 3. Loop de processamento de campos, formatos e padrões
-        For i = 0 To nITEM - 1
+        For i = 1 To nITEM  ''i = 0 To nITEM - 1 ordinal 1 e nao 0
             Dim vValor As Variant
-            vValor = DataSet.ValueMatrix(0, i)
-            
-            
-            
-            
-            
-            
+            vValor = DataSet(i)
             ' Tratamento de NULL ou Vazio usando o valor padrão (aPAD)
             If IsNull(vValor) Or vValor = "" Then
                 vValor = aPAD(i)
@@ -219,10 +180,6 @@ Erro:
         Set loConn = Nothing
     End If
 End Function
-
-'---------------------------------------------------------------------------------------
-' EQUIVALENTE A: GrvSQLado (Revisado para suportar arrays de campos e valores)
-'---------------------------------------------------------------------------------------
 Public Function GrvSQLite(ByVal cARQ As String, _
                          ByVal cSQL_SELECT As String, _
                          ByVal nITEM As Long, _
@@ -289,7 +246,6 @@ Erro:
         Set loConn = Nothing
     End If
 End Function
-'---------------------------------------------------------------------------------------
 Public Function IncluiSQLite(ByVal cARQ As String, _
                              ByVal cSQL_SELECT As String, _
                              ByVal nITEM As Long, _
@@ -300,7 +256,6 @@ Public Function IncluiSQLite(ByVal cARQ As String, _
                              ByVal aIDDES As Variant) As Boolean
     
     Dim loConn As New SQLiteConnection
-    'Dim loCursor As SQLiteCursor
     Dim cTABELA As String
     Dim i As Integer
     Dim cCampos As String
@@ -350,9 +305,6 @@ Erro:
     IncluiSQLite = False
     ' ... fechar conexões ...
 End Function
-'---------------------------------------------------------------------------------------
-' FUNÇÕES AUXILIARES DE SUPORTE
-'---------------------------------------------------------------------------------------
 
 Private Function LimpaTag(ByVal cCON As String) As String
     ' Remove a tag customizada para obter o path puro do arquivo
@@ -372,9 +324,6 @@ Private Function FormataParaSQL(ByVal vValor As Variant) As String
         FormataParaSQL = "'" & Replace(vValor, "'", "''") & "'"
     End If
 End Function
-'---------------------------------------------------------------------------------------
-' EQUIVALENTE A: PegCampoSQLADO / PegCampoSQL
-'---------------------------------------------------------------------------------------
 Public Function PegCampoSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                                ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     
@@ -390,8 +339,7 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
                              ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
                              Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
     Dim loConn As New SQLiteConnection
-  '  Dim loCursor As SQLiteCursor
-  Dim DataSet As SQLiteDataSet
+    Dim DataSet As SQLiteDataSet
     Dim x As Long
     Dim nCAMPOS As Integer
     Dim aRETU As Variant
@@ -413,13 +361,13 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
 
     If Not DataSet.EOF Then
         While Not DataSet.EOF
-            For x = 0 To nCAMPOS - 1
+            For x = 1 To nCAMPOS  '0 To nCAMPOS - 1 ordinal inicial 1 e nao zero
                 ' Lógica de Operações (SepSqlOpe / MathOper)
                 aOPE = SepSqlOpe(aCAM(x))
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
-                   ''** eVAL = DataSet.valoCursor.Value(aCAM(x))
+                   eVAL = DataSet(aCAM(x))
                 Else
-                   ''** eVAL = MathOper(loCursor.Value(aOPE(1)), loCursor.Value(aOPE(2)), aOPE(0))
+                   eVAL = MathOper(DataSet(aOPE(1)), DataSet(aOPE(2)), aOPE(0))
                 End If
 
                 ' Tratamento de Nulo
@@ -452,10 +400,6 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
 Erro:
     PegSQLiteDeli = aRETU
 End Function
-
-'---------------------------------------------------------------------------------------
-' EQUIVALENTE A: PegUltSQLAdo
-'---------------------------------------------------------------------------------------
 Public Function PegLastidbsqLite(ByVal cCON As String, ByVal cTABELA As String) As Long
     Dim vRet As Variant
     
@@ -471,10 +415,6 @@ Public Function PegLastidbsqLite(ByVal cCON As String, ByVal cTABELA As String) 
         PegLastidbsqLite = 0
     End If
 End Function
-
-'---------------------------------------------------------------------------------------
-' EQUIVALENTE FIEL A: SomaSQLAdo
-'---------------------------------------------------------------------------------------
 Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                            ByVal cCAMPO As String, Optional ByVal eDEFAULT As Variant, _
                            Optional ByVal nDEC As Integer = 2) As Variant
@@ -501,12 +441,12 @@ Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
     nSoma = 0
     While Not DataSet.EOF
         ReDim aVALORES_LINHA(UBound(aOPER))
-        For x = 0 To UBound(aOPER)
+        For x = 1 To UBound(aOPER) '0 To UBound(aOPER)
             ' Se não for operador, extrai o valor do campo do cursor
             If InStr("+-*/()", aOPER(x)) = 0 And aOPER(x) <> "" Then
-                ''** aVALORES_LINHA(x) = loCursor.Value(aOPER(x)) & ""
+                aVALORES_LINHA(x) = DataSet(aOPER(x)) & ""
             Else
-                ''** aVALORES_LINHA(x) = aOPER(x)
+                aVALORES_LINHA(x) = aOPER(x)
             End If
         Next x
         
@@ -526,10 +466,6 @@ Erro:
     If Not loConn Is Nothing Then loConn.CloseDB
 End Function
 
-'---------------------------------------------------------------------------------------
-' EQUIVALENTE FIEL A: ApagaSQLpAdo / APAGASQLADO
-' Conceito: Checa se existe DELETE, se não, monta a partir do FROM/WHERE
-'---------------------------------------------------------------------------------------
 Public Function ApagaSQLite(ByVal cCON As String, ByVal cSQL As String) As Boolean
     Dim nPOS As Long
     Dim cSQL_FINAL As String
@@ -569,8 +505,6 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
     Dim loConnDes As New SQLiteConnection
     Dim DataSetORI As SQLiteDataSet
     Dim DataSetDES As SQLiteDataSet
-   ' Dim loCurOri As SQLiteCursor
-   ' Dim loCurDes As SQLiteCursor
     Dim x As Long
     Dim nCAMPOS As Long
     Dim nRegs As Long
@@ -597,12 +531,12 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
     If Not DataSetORI.EOF Then
         nCAMPOS = UBound(aCAMORI)
         ReDim aVALORI(nCAMPOS)
-        For x = 0 To nCAMPOS
+        For x = 1 To nCAMPOS '0 To nCAMPOS
             aOPE = SepSqlOpe(aCAMORI(x))
             If aOPE(0) = "" Then
-                ''**aVALORI(x) = loCurOri.Value(aCAMORI(x))
+                aVALORI(x) = DataSetORI(aCAMORI(x))
             Else
-                ''** aVALORI(x) = MathOper(loCurOri.Value(aOPE(1)), loCurOri.Value(aOPE(2)), aOPE(0))
+                aVALORI(x) = MathOper(DataSetORI(aOPE(1)), DataSetORI(aOPE(2)), aOPE(0))
             End If
         Next x
 
@@ -611,9 +545,9 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
         cWHERE = ExtraiWhere(cSQLDES)
 
         ' 3. Lógica de Gravação via Execute
-        'Set loCurDes = loConnDes.CreateCursor("SELECT count(*) FROM " & cTABELA & " " & cWHERE)
         Set DataSetDES = loConnDes.OpenDataSet("SELECT count(*) FROM " & cTABELA & " " & cWHERE)
-       ''** nRegs = loCurDes.Value(0)
+        nRegs = DataSetDES(0)
+       
         
         If nRegs > 0 Then
             ' --- UPDATE ---
