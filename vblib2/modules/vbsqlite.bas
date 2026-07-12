@@ -17,6 +17,7 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal c
     On Error GoTo Erro
     vUltimo = eDEFAULT
     
+    cCON = LimpaTag(cCON)
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
@@ -140,9 +141,11 @@ Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
                          ByVal nITEM As Long, ByVal aCAM As Variant, _
                          ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim loConn As New SQLiteConnection
-    Dim loCursor As SQLiteCursor
+    'Dim loCursor As SQLiteCursor
     Dim i As Integer
     Dim aVAL() As Variant
+    Dim DataSet As SQLiteDataSet
+    
     
     On Error GoTo Erro
     
@@ -154,14 +157,24 @@ Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
     
     VBSQLiteSetValues loConn
     
-    ' 2. Abre o cursor (o SQL deve solicitar as colunas na ordem do aCAM)
-    Set loCursor = loConn.CreateCursor(sqldialeto(cSQL, "SQLITE"))
+    cSQL = sqldialeto(cSQL, "SQLITE")
     
-    If Not loCursor.EOF Then
+    ' 2. Abre o cursor (o SQL deve solicitar as colunas na ordem do aCAM)
+    'Set loCursor = loConn.CreateCursor(cSQL)
+    
+    Set DataSet = loConn.OpenDataSet(cSQL)
+    
+    
+    If Not DataSet.EOF Then
         ' 3. Loop de processamento de campos, formatos e padrões
-        For i = 0 To nITEM
+        For i = 0 To nITEM - 1
             Dim vValor As Variant
-            vValor = loCursor.Value(i)
+            vValor = DataSet.ValueMatrix(0, i)
+            
+            
+            
+            
+            
             
             ' Tratamento de NULL ou Vazio usando o valor padrão (aPAD)
             If IsNull(vValor) Or vValor = "" Then
@@ -189,7 +202,7 @@ Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
     
     ' Limpeza de memória e fechamento
     loConn.CloseDB
-    Set loCursor = Nothing
+    Set DataSet = Nothing
     Set loConn = Nothing
     Exit Function
 
@@ -309,6 +322,7 @@ Public Function IncluiSQLite(ByVal cARQ As String, _
         cValores = cValores & IIf(cValores = "", "", ", ") & TratarValorParaSQL(aVAL(i), "C", "SQLITE")
     Next i
     
+    cARQ = LimpaTag(cARQ)
     ' 4. Execução
     loConn.OpenDB cARQ, SQLiteReadWrite
     VBSQLiteSetValues loConn
