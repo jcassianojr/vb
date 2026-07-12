@@ -272,13 +272,9 @@ Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
 End Function
 
 Public Function ApagaSQLP(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusão")
-  Dim aRETU As Variant
-  aRETU = TipoConn(cARQ)
-  'cARQ = aRETU(1)
-  Select Case aRETU(0)
-  Case "ADO"
-    ApagaSQLP = ApagaSQLpAdo(cARQ, cSQL, cTEXTO)
-  End Select
+   If MDG(cTEXTO, "Exclusão Registro") Then
+      ApagaSQLP = ApagaSQL(cARQ, cSQL)
+   End If
 End Function
 
 Public Function SqlMoveReg(ByVal cARQORI As String, _

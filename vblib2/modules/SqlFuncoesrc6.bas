@@ -133,9 +133,9 @@ Public Function ADOComandorc6(ByVal cARQ As String, ByVal cSQL As String) As Boo
     
     ' Se a lógica ditar que não é para rodar via RC6, sai
     ' (Ajuste a condição conforme o seu novo identificador de tag, ex: "ADORC6")
-    If aRETU(0) <> "ADORC6" Then
-        Exit Function
-    End If
+    'If aRETU(0) <> "ADORC6" Then
+    '    Exit Function
+    'End If
     
     ' Mantém a compatibilidade com VFP se necessário
     If InStr(UCase(cARQ), "VFPOLEDB") Then
@@ -226,7 +226,7 @@ Public Function SomaSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     Dim aARQ As Variant
     Dim aOPE As Variant
     Dim eVAL As Variant
-    Dim cARQCON As String
+    Dim carqcon As String
 
     On Error GoTo errhandler
 
@@ -246,13 +246,13 @@ Public Function SomaSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     aARQ = TipoConn(cARQ, , , False)
     
     If EArquivoSQLite(cARQ) And InStr(cARQ, "[") = 0 Then
-      cARQCON = cARQ
+      carqcon = cARQ
     Else
-       cARQCON = aARQ(1)
+       carqcon = aARQ(1)
     End If
     
     ' Inicialização simplificada no RC6
-    Set oDB = New_c.Connection(cARQCON)
+    Set oDB = New_c.Connection(carqcon)
     lOPEN = True
   
   
@@ -312,7 +312,7 @@ Public Function PegSQLDelirc6(ByVal cARQ As String, ByVal cSQL As String, _
     Dim eVAL As Variant
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
-    Dim cARQCON As String
+    Dim carqcon As String
 
     On Error GoTo errhandler
 
@@ -332,12 +332,12 @@ Public Function PegSQLDelirc6(ByVal cARQ As String, ByVal cSQL As String, _
     aARQ = TipoConn(cARQ, , , False)
     
     If EArquivoSQLite(cARQ) And InStr(cARQ, "[") = 0 Then
-      cARQCON = cARQ
+      carqcon = cARQ
     Else
-      cARQCON = aARQ(1)
+      carqcon = aARQ(1)
     End If
     ' Inicialização do RC6 (Substitui o .Open e propriedades ADO)
-    Set oDB = New_c.Connection(cARQCON)
+    Set oDB = New_c.Connection(carqcon)
     lOPEN = True
 
     ' Ajustes de ambiente
@@ -407,7 +407,7 @@ Public Function GrvSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Dim eVAL As Variant
     Dim aOPE As Variant
     Dim aARQ As Variant
-    Dim cARQCON As String
+    Dim carqcon As String
     
     On Error GoTo errhandler
     GrvSQLrc6 = False
@@ -415,11 +415,11 @@ Public Function GrvSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     ' 1. Identifica o dialeto/conexão
     aARQ = TipoConn(cARQ)
     If EArquivoSQLite(cARQ) And InStr(cARQ, "[") = 0 Then
-      cARQCON = cARQ
+      carqcon = cARQ
     Else
-      cARQCON = aARQ(1)
+      carqcon = aARQ(1)
     End If
-    Set oDB = New_c.Connection(cARQCON)
+    Set oDB = New_c.Connection(carqcon)
 
     ' 2. Ajustes de ambiente
     ConfigurarConexaoRC6 oDB, cARQ
@@ -495,7 +495,7 @@ Public Function IncluiSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     Dim aRETU As Variant
     Dim lTEM As Boolean
     Dim lRETU As Boolean
-    Dim cARQCON As String
+    Dim carqcon As String
     
     IncluiSQLrc6 = False
     On Error GoTo errhandler
@@ -504,19 +504,19 @@ Public Function IncluiSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     lRETU = False
     aRETU = TipoConn(cARQ) ' Retorna Array (Tag, StringConn, TipoBanco)
     If EArquivoSQLite(cARQ) And InStr(cARQ, "[") = 0 Then
-      cARQCON = cARQ
+      carqcon = cARQ
     Else
-      cARQCON = aRETU(1)
+      carqcon = aRETU(1)
     End If
 
         
 
     
     ' Inicializa Conexão RC6
-    Set oDB = New_c.Connection(cARQCON)
+    Set oDB = New_c.Connection(carqcon)
 
     ' Ajustes de ambiente
-    ConfigurarConexaoRC6 oDB, cARQCON
+    ConfigurarConexaoRC6 oDB, carqcon
     'If InStr(aRETU(1), "VFPOLEDB") > 0 Then VFPSetValuesrc6 oDB
     'If InStr(UCase(aRETU(1)), "PGSQL") > 0 Or InStr(UCase(aRETU(1)), "POSTGRESQL") > 0 Then pgSetValuesrc6 oDB
 
@@ -582,10 +582,10 @@ Public Function PegSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Dim oRS As RC6.cRecordset
     Dim x As Long
     Dim aRETU As Variant
-    Dim acon As Variant
+    Dim aCON As Variant
     Dim aOPE As Variant
     Dim eVAL As Variant
-    Dim cARQCON As String
+    Dim carqcon As String
 
     On Error GoTo errhandler
     
@@ -593,25 +593,25 @@ Public Function PegSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     ReDim aRETU(0 To nITEM - 1)
     
     ' Identifica a conexão
-    acon = TipoConn(cARQ, , , False)
+    aCON = TipoConn(cARQ, , , False)
     
     ' Ajuste de dialeto PGSQL (se necessário)
-    If acon(2) = "PGSQL" Then
+    If aCON(2) = "PGSQL" Then
         cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
     End If
 
     If EArquivoSQLite(cARQ) And InStr(cARQ, "[") = 0 Then
-      cARQCON = cARQ
+      carqcon = cARQ
     Else
-      cARQCON = acon(1)
+      carqcon = aCON(1)
     End If
 
 
     ' Inicialização do RC6 (cConnection não precisa de Open com timeout)
-    Set oDB = New_c.Connection(cARQCON)
+    Set oDB = New_c.Connection(carqcon)
 
     ' Ajustes de ambiente
-    ConfigurarConexaoRC6 oDB, cARQCON
+    ConfigurarConexaoRC6 oDB, carqcon
    ' If InStr(cARQ, "VFPOLEDB") > 0 Then VFPSetValuesrc6 oDB
    ' If InStr(UCase(cARQ), "PGSQL") > 0 Or InStr(UCase(cARQ), "POSTGRESQL") > 0 Then pgSetValuesrc6 oDB
 
@@ -708,8 +708,8 @@ End Function
 Public Function PegUltSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
-    Dim cARQCON As String
-    Dim acon
+    Dim carqcon As String
+    Dim aCON
     
     On Error GoTo errhandler
     
@@ -718,22 +718,22 @@ Public Function PegUltSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal c
     
     
 ' Identifica a conexão
-    acon = TipoConn(cARQ, , , False)
+    aCON = TipoConn(cARQ, , , False)
     
     ' Ajuste de dialeto PGSQL (se necessário)
-    If acon(2) = "PGSQL" Then
+    If aCON(2) = "PGSQL" Then
         cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
     End If
 
     If EArquivoSQLite(cARQ) And InStr(cARQ, "[") = 0 Then
-      cARQCON = cARQ
+      carqcon = cARQ
     Else
-      cARQCON = acon(1)
+      carqcon = aCON(1)
     End If
     
     
     ' Inicializa a conexão (O RC6 abre a conexão ao instanciar com o caminho)
-    Set oDB = New_c.Connection(cARQCON)
+    Set oDB = New_c.Connection(carqcon)
     
     ' Abre o Recordset nativo do RC6
     ' O RC6 gerencia o cursor automaticamente conforme o driver (SQLite/Outros)
