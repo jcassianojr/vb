@@ -1,4 +1,4 @@
-Attribute VB_Name = "AdoLib"
+Attribute VB_Name = "sqlAdoLib"
 Option Explicit
 '
 'There is no provider named 'Microsoft.ACE.OLEDB.14.0' even though it's Access 2010 (aka version number 14) the provider
@@ -282,7 +282,15 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
         cTIPOPADRAO = "VBSQLITE"
    End If
 
+  If InStr(cARQTMP, "SQLITERC6") > 0 Then
+        lTEMVBSQLITE = True
+        cTIPOPADRAO = "SQLITERC6"
+   End If
 
+  If InStr(cARQTMP, "TC6SQLITE") > 0 Then
+        lTEMVBSQLITE = True
+        cTIPOPADRAO = "TC6SQLITE"
+   End If
 
      If InStr(cARQTMP, ".MDB") > 0 Then
         lTEMMDB = True
@@ -291,7 +299,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
 
   'sqlite
   '
-  If EArquivoSQLite(cARQTMP) Or InStr(cARQTMP, "[SQLITE") Or InStr(cARQTMP, "{SQLite3") Then
+  If EArquivoSQLite(cARQTMP) Or InStr(cARQTMP, "SQLITE") > 0 Or InStr(cARQTMP, "{SQLite3") > 0 Then
     lTEMSQLITE = True
     TipoConn = Array(cTIPOPADRAO, cARQ, "SQLITE")
   End If
@@ -393,9 +401,11 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   '
      If lTEMSQLITE Then  'c:\Program Files (x86)\SQLite ODBC Driver\readme.txt http://www.ch-werner.de/sqliteodbc/sqliteodbc.exe
         cARQ = Replace(cARQ, "[SQLITE]", "")
-        If InStr(cARQ, "[VBSQLITE]") > 0 Then
+        If InStr(cARQ, "[VBSQLITE]") > 0 Or InStr(cARQ, "[SQLITERC6]") > 0 Or InStr(cARQ, "[TC6SQLITE]") > 0 Then 'VBSQLITE nao usa driver e provider abaixo
            cARQ = Replace(cARQ, "[VBSQLITE]", "")
-           TipoConn = Array(cTIPOPADRAO, cARQ, "SQLITE")
+           cARQ = Replace(cARQ, "[SQLITERC6]", "")
+           cARQ = Replace(cARQ, "[TC6SQLITE]", "")
+           TipoConn = Array(cTIPOPADRAO, cARQ, "SQLITE") 'abre o arquivo direto nao precisa driver ou provider
            Exit Function
         End If
       cAuth = ""

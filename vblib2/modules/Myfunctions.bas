@@ -173,14 +173,14 @@ End Enum
 
 #End If
 Public Function UTF8ToVBString(ByVal sUTF8 As String) As String
-    Dim nLen As Long
+    Dim nLEN As Long
     Dim sBuffer As String
     
     ' Obtém o tamanho necessário para o buffer Unicode
-    nLen = MultiByteToWideChar(CP_UTF8, 0, StrPtr(sUTF8), -1, 0, 0)
-    If nLen > 0 Then
-        sBuffer = String$(nLen - 1, 0)
-        MultiByteToWideChar CP_UTF8, 0, StrPtr(sUTF8), -1, StrPtr(sBuffer), nLen
+    nLEN = MultiByteToWideChar(CP_UTF8, 0, StrPtr(sUTF8), -1, 0, 0)
+    If nLEN > 0 Then
+        sBuffer = String$(nLEN - 1, 0)
+        MultiByteToWideChar CP_UTF8, 0, StrPtr(sUTF8), -1, StrPtr(sBuffer), nLEN
         UTF8ToVBString = sBuffer
     Else
         UTF8ToVBString = sUTF8 ' Retorna original se falhar
@@ -518,10 +518,10 @@ Public Function Alert(ByVal cDIZ As String, Optional ByVal cTITLE As String = "I
   MsgBox cDIZ, vbOKOnly, cTITLE
 End Function
 
-Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVAL As String, Optional ByVal nLen As Integer = 0) As String
+Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVAL As String, Optional ByVal nLEN As Integer = 0) As String
   Busca = InputBox(cDIZ, cCAB, cVAL)
-  If nLen > 0 Then
-     Busca = Left$(Busca, nLen)
+  If nLEN > 0 Then
+     Busca = Left$(Busca, nLEN)
   End If
 End Function
 
@@ -644,9 +644,12 @@ Public Function FileConnExist(ByVal cARQ As Variant, _
 
   If InStr(cARQUIVO, "[") > 0 Then
      
-    If InStr(cARQUIVO, "[JET") > 0 Or InStr(cARQUIVO, "[SQLITE]") Or InStr(cARQUIVO, "[ACCDB") > 0 Then
+    If InStr(cARQUIVO, "[JET") > 0 Or InStr(cARQUIVO, "SQLITE") > 0 Or InStr(cARQUIVO, "[ACCDB") > 0 Then
       cARQUIVO = Replace(cARQUIVO, "[JET", "")
       cARQUIVO = Replace(cARQUIVO, "[SQLITE]", "")
+      cARQUIVO = Replace(cARQUIVO, "[VBSQLITE]", "")
+      cARQUIVO = Replace(cARQUIVO, "[SQLITERC6]", "")
+      cARQUIVO = Replace(cARQUIVO, "[TC6SQLITE]", "")
       cARQUIVO = Replace(cARQUIVO, "[ACCDB", "")
       cARQUIVO = Replace(cARQUIVO, "MDB]", "")
       cARQUIVO = Replace(cARQUIVO, "]", "")
@@ -791,7 +794,7 @@ End Function
 Public Function FixStr(ByVal eVAR As Variant, _
                        Optional ByVal ePAD As Variant = "", _
                        Optional ByVal coper As String = "", _
-                       Optional ByVal nLen As Integer = 0) As Variant
+                       Optional ByVal nLEN As Integer = 0) As Variant
   On Error GoTo errhandler
   If IsNull(eVAR) Then
     If ePAD <> "" Then
@@ -808,8 +811,8 @@ Public Function FixStr(ByVal eVAR As Variant, _
     eVAR = Trim(eVAR)
     FixStr = eVAR
   End If
-  If nLen > 0 And Len(eVAR) > nLen Then
-    eVAR = Mid(eVAR, 1, nLen)
+  If nLEN > 0 And Len(eVAR) > nLEN Then
+    eVAR = Mid(eVAR, 1, nLEN)
     FixStr = eVAR
   End If
   Exit Function
@@ -934,15 +937,15 @@ Public Function Multiplicar(ByVal nVAL As Variant, ByVal nMUL As Variant)
 End Function
 
 
-Public Function PadRight(ByVal cTEXTO, ByVal nLen) As String
-  cTEXTO = cTEXTO & Space(nLen)
-  cTEXTO = Left(cTEXTO, nLen)
+Public Function PadRight(ByVal cTEXTO, ByVal nLEN) As String
+  cTEXTO = cTEXTO & Space(nLEN)
+  cTEXTO = Left(cTEXTO, nLEN)
   PadRight = cTEXTO
 End Function
 
-Public Function PadLeft(ByVal cTEXTO, ByVal nLen) As String
-  cTEXTO = Space(nLen) & cTEXTO
-  cTEXTO = Right(cTEXTO, nLen)
+Public Function PadLeft(ByVal cTEXTO, ByVal nLEN) As String
+  cTEXTO = Space(nLEN) & cTEXTO
+  cTEXTO = Right(cTEXTO, nLEN)
   PadLeft = cTEXTO
 End Function
 
@@ -1647,13 +1650,13 @@ Public Function SomaExt(ByVal cARQ As String, Optional ByVal cEXT As String = ".
   End If
 End Function
 
-Public Function StrZero(ByVal nNUM, Optional ByVal nLen As Integer = 0)
+Public Function StrZero(ByVal nNUM, Optional ByVal nLEN As Integer = 0)
   Dim cTemp As String
-  If nLen = 0 Then
+  If nLEN = 0 Then
     cTemp = FixStr(nNUM, "0", "TRIM")
-    nLen = Trim(cTemp)
+    nLEN = Trim(cTemp)
   End If
-  StrZero = Right(String(nLen, "0") & CStr(nNUM), nLen)
+  StrZero = Right(String(nLEN, "0") & CStr(nNUM), nLEN)
 End Function
 
 Function Convert2ansi(ByVal in_string As String) As String
@@ -1688,7 +1691,7 @@ Public Function Tirace(ByVal texto As String) As String
 End Function
 Public Function StrToArray(ByVal cGRUPO As String) As Variant
   Dim x As Integer
-  Dim nLen As Integer
+  Dim nLEN As Integer
   Dim aUSO As Variant
   Dim cCHAR As String
   Dim eCNV As String
@@ -1698,9 +1701,9 @@ Public Function StrToArray(ByVal cGRUPO As String) As Variant
     eCNV = cGRUPO
   End Select
 
-  nLen = Len(eCNV)
-  ReDim aUSO(nLen)
-  For x = 1 To nLen
+  nLEN = Len(eCNV)
+  ReDim aUSO(nLEN)
+  For x = 1 To nLEN
     cCHAR = Mid(eCNV, x, 1)
     Select Case cCHAR
     Case "ª"
@@ -2042,7 +2045,7 @@ Public Sub FocusMe()
   End If
 End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
-  Dim nLen As Integer
+  Dim nLEN As Integer
   Dim nTEXTO As Integer
   Dim x As Integer
   Dim y As Integer
@@ -2057,10 +2060,10 @@ Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eD
     aDES = StrToArray(CStr(eDES))
   End If
   aTEXTO = StrToArray(cTEXTO)
-  nLen = UBound(aORI)
+  nLEN = UBound(aORI)
   nTEXTO = UBound(aTEXTO)
   For y = 0 To nTEXTO
-    For x = 0 To nLen
+    For x = 0 To nLEN
       If aTEXTO(y) = aORI(x) Then          ''Encerra Analise Para Evitar
         aTEXTO(y) = aDES(x)              ''Loop de Troca
         Exit For
@@ -2673,16 +2676,16 @@ Public Function HtmlToText(sHTML) As String
 End Function
 Public Function FindInList(ByRef cList As ListBox, sSearch As String) As Long
   Dim sString As String
-  Dim ID As Integer
+  Dim id As Integer
 
   On Error Resume Next
   Err.Clear
   FindInList = -1
 
-  For ID = 0 To cList.ListCount - 1
-    sString = UCase$(cList.List(ID))
+  For id = 0 To cList.ListCount - 1
+    sString = UCase$(cList.List(id))
     If sString = UCase$(sSearch) Then
-      FindInList = ID
+      FindInList = id
       Exit For
     End If
   Next

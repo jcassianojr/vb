@@ -1,4 +1,4 @@
-Attribute VB_Name = "Odbc"
+Attribute VB_Name = "sqlOdbc"
 Option Explicit
 
 #If (VBA7 = 0) Then

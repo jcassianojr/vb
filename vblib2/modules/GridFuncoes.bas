@@ -71,7 +71,7 @@ Public Function LocalizaGrid(ByRef oGRID As Variant, Optional ByVal eBUSCA As Va
 70:   eBUSCA = UCase(eBUSCA)
 71:   For x = 0 To nROWS
 72:     oGRID.Row = x
-73:     cCOMPARE = UCase(Left(FixStr(oGRID.Text), nTAM))
+73:     cCOMPARE = UCase(Left(FixStr(oGRID.tEXT), nTAM))
 74:     If cCOMPARE = eBUSCA Then
 75:       lFOUND = True
 76:       oGRID.Col = oGRID.cols - 1
@@ -101,7 +101,7 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
                      ByVal cSQL As String, _
                      Optional ByVal aFOR As Variant = 0)
 
-103:   On Error GoTo errhandler
+  On Error GoTo errhandler
   Dim x As Integer
   Dim cDIZ As Variant
   Dim oDB As New ADODB.Connection
@@ -114,42 +114,50 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
   Dim cERRO As String
 
 
-116:   l3265 = True
+l3265 = True
+
+If Not FileConnExist(cARQ, True, , cSQL) Then
+     Exit Sub
+End If
+
+'Muda so aqui ate usar outros tipos  aqui nas grid esta usando ado fixo
+If InStr(cARQ, "[VBSQLITE]") > 0 Or InStr(cARQ, "[SQLITERC6]") > 0 Or InStr(cARQ, "[TC6SQLITE]") > 0 Then
+           cARQ = Replace(cARQ, "[VBSQLITE]", "[SQLITE]")
+           cARQ = Replace(cARQ, "[SQLITERC6]", "[SQLITE]")
+           cARQ = Replace(cARQ, "[TC6SQLITE]", "[SQLITE]")
+End If
+
+   aRETU = TipoConn(cARQ, , , False)
+
+   cARQTMP = aRETU(1)
+
+   If aRETU(2) <> "MDB" Then
+     cSQL = Replace(cSQL, "[", "")
+     cSQL = Replace(cSQL, "]", "")
+   End If
+
+   If aRETU(2) = "PGSQL" Then
+      cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
+   End If
 
 
-119:   If Not FileConnExist(cARQ, True, , cSQL) Then
-120:     Exit Sub
-121:   End If
-
-123:   aRETU = TipoConn(cARQ, , , False)
-
-125:   cARQTMP = aRETU(1)
-
-127:   If aRETU(2) <> "MDB" Then
-128:     cSQL = Replace(cSQL, "[", "")
-129:     cSQL = Replace(cSQL, "]", "")
-130:   End If
-
-132:   If aRETU(2) = "PGSQL" Then
-133:      cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
-134:   End If
-
-
-137:   Select Case aRETU(0)
-  Case "ADO"
-139:     Set oDB = New ADODB.Connection
-140:     oDB.ConnectionTimeout = 120
-141:     oDB.Open cARQTMP
+'no momento fixado em ado expandir para outros removendo case por enquanto
+'
+'Select Case aRETU(0)
+ '  Case "ADO"
+     Set oDB = New ADODB.Connection
+     oDB.ConnectionTimeout = 120
+     oDB.Open cARQTMP
 
 
    'sqlite nao tem cursor forwardonly openstatic ou adOpenUnspecified
-145:     Set oRS = New ADODB.Recordset
-146:     If aRETU(2) = "SQLITE" Then
-147:       oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
-148:     Else
-149:       oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
-150:     End If
-151:   End Select
+     Set oRS = New ADODB.Recordset
+     If InStr(aRETU(2), "SQLITE") > 0 Then '//aRETU(2) = "SQLITE" Or aRETU(2) = "VBSQLITE" Or aRETU(2) = "SQLITERC6" Or aRETU(2) = "TC6SQLITE" Then
+       oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
+     Else
+       oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+   End If
+'End Select
 
   
 154:   oGRID.Visible = False
@@ -160,7 +168,7 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
 159:     .Row = 0
 160:     For x = 0 To nITEM - 1
 161:       .Col = x
-162:       .Text = aDIZ(x)
+162:       .tEXT = aDIZ(x)
 163:       .ColWidth(x) = aTAM(x)
 164:       If InStr(aCAM(x), "$") > 0 Then
 165:         Select Case Mid(aCAM(x), 1, 1)  ' FlexAlignmentCENTERCenter FlexAlignmentRIGHTCenter FlexAlignmentLeftCenter
@@ -204,7 +212,7 @@ Public Sub MontaGrid(ByRef oGRID As Variant, _
 203:             eVAR = Mid(eVAR, 1, 100)
 204:           End If
 205:           eVAR = Replace(eVAR, Chr(13) & Chr(10), " ")
-206:           If aRETU(2) = "SQLITE" Then
+206:           If InStr(aRETU(2), "SQLITE") > 0 Then 'aRETU(2) = "SQLITE" Then
 207:              If Mid(eVAR, 5, 1) = "-" And Mid(eVAR, 8, 1) = "-" Then 'datetime no sqlite vem no texto yyyy-mm-dd hh:mm:ss
 208:                 eVAR = Mid(eVAR, 9, 2) + "/" + Mid(eVAR, 6, 2) + "/" + Mid(eVAR, 1, 4)
 209:              End If
@@ -305,6 +313,13 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
 304:     Exit Sub
 305:   End If
 
+'Muda so aqui ate usar outros tipos  aqui nas grid esta usando ado fixo
+If InStr(cARQ, "[VBSQLITE]") > 0 Or InStr(cARQ, "[SQLITERC6]") > 0 Or InStr(cARQ, "[TC6SQLITE]") > 0 Then
+           cARQ = Replace(cARQ, "[VBSQLITE]", "[SQLITE]")
+           cARQ = Replace(cARQ, "[SQLITERC6]", "[SQLITE]")
+           cARQ = Replace(cARQ, "[TC6SQLITE]", "[SQLITE]")
+End If
+
 307:   aRETU = TipoConn(cARQ, , , False)
 
 309:   cARQTMP = aRETU(1)
@@ -323,7 +338,7 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
 
 323:   lOPEN = True
 
-325:   If aRETU(2) = "SQLITE" Then 'sqlite nao tem curos forwardonly usar static ou adOpenUnspecified
+325:   If InStr(aRETU(2), "SQLITE") > 0 Then 'aRETU(2) = "SQLITE" Then 'sqlite nao tem curos forwardonly usar static ou adOpenUnspecified
 326:      oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
 327:   Else
 328:      oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
@@ -337,7 +352,7 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
 336:     .Row = 0
 337:     For x = 0 To nITEM - 1
 338:       .Col = x
-339:       .Text = aDIZ(x)
+339:       .tEXT = aDIZ(x)
 340:       .ColWidth(x) = aTAM(x)
 341:       If InStr(aCAM(x), "$") > 0 Then
 342:         Select Case Mid(aCAM(x), 1, 1)  ' FlexAlignmentCENTERCenter FlexAlignmentRIGHTCenter FlexAlignmentLeftCenter
@@ -430,7 +445,7 @@ Public Sub MontaGridFast(ByRef oGRID As Variant, _
 429:             eVAR = Mid(eVAR, 1, 100)
 430:           End If
 431:           eVAR = Replace(eVAR, Chr(13) & Chr(10), " ")
-432:           If aRETU(2) = "SQLITE" Then
+432:           If InStr(aRETU(2), "SQLITE") > 0 Then 'aRETU(2) = "SQLITE" Then
 433:              If Mid(eVAR, 5, 1) = "-" And Mid(eVAR, 8, 1) = "-" Then 'datetime no sqlite vem no texto yyyy-mm-dd hh:mm:ss
 434:                 eVAR = Mid(eVAR, 9, 2) + "/" + Mid(eVAR, 6, 2) + "/" + Mid(eVAR, 1, 4)
 435:              End If
@@ -526,6 +541,13 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
 525:     Exit Sub
 526:   End If
 
+'Muda so aqui ate usar outros tipos  aqui nas grid esta usando ado fixo
+If InStr(cARQ, "[VBSQLITE]") > 0 Or InStr(cARQ, "[SQLITERC6]") > 0 Or InStr(cARQ, "[TC6SQLITE]") > 0 Then
+           cARQ = Replace(cARQ, "[VBSQLITE]", "[SQLITE]")
+           cARQ = Replace(cARQ, "[SQLITERC6]", "[SQLITE]")
+           cARQ = Replace(cARQ, "[TC6SQLITE]", "[SQLITE]")
+End If
+
 528:   aRETU = TipoConn(cARQ, , , False)
 
 530:   cARQTMP = aRETU(1)
@@ -547,7 +569,7 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
 546:   lOPEN = True
 
   ' sqlite nao tem adOpenForwardOnly mudado para static ou adOpenUnspecified
-549:   If aRETU(2) = "SQLITE" Then
+549:   If InStr(aRETU(2), "SQLITE") > 0 Then 'aRETU(2) = "SQLITE" Then
 550:     oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
 551:   Else
 552:     oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
@@ -593,7 +615,7 @@ Public Sub MontaGridUltra(ByRef oGRID As Variant, _
 592:   With oGRID
 593:     For x = 0 To nITEM - 1
 594:       .Col = x
-595:       .Text = aDIZ(x)
+595:       .tEXT = aDIZ(x)
 596:     Next x
 597:   End With
 598:   oGRID.Visible = True
@@ -667,7 +689,7 @@ Public Function CloneGrid(ByRef oGRIDORI As Variant, ByRef oGRIDDES As Variant)
 666:     For x = 0 To nCOLS
 667:       oGRIDORI.Col = x
 668:       .Col = x
-669:       .Text = oGRIDORI
+669:       .tEXT = oGRIDORI
 670:       .ColWidth(x) = oGRIDORI.ColWidth(x)
 671:       .ColAlignment(x) = oGRIDORI.ColAlignment(x)
 672:     Next
