@@ -10,7 +10,7 @@ Option Explicit
 '---------------------------------------------------------------------------------------
 Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     Dim loConn As New SQLiteConnection
-    Dim loCursor As SQLiteCursor
+   Dim DataSet As SQLiteDataSet
     Dim vUltimo As Variant
     
 
@@ -21,15 +21,14 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal c
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
-    ' O método correto é CreateCursor
-    Set loCursor = loConn.CreateCursor(cSQL)
+    Set DataSet = loConn.OpenDataSet(cSQL)
     
-    If Not loCursor.EOF Then
+    If Not DataSet.EOF Then
         ' Como cursores SQLite são geralmente forward-only,
         ' percorremos até o final para pegar o último registro da consulta
-        While Not loCursor.EOF
-            vUltimo = loCursor.Value(cCAMPO)
-            loCursor.MoveNext
+        While Not DataSet.EOF
+            vUltimo = DataSet.ValueMatrix(0, 1) ' .Value(cCAMPO)
+            DataSet.MoveNext
         Wend
     End If
     
@@ -37,7 +36,7 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal c
     PegUltSQLite = IIf(IsNull(vUltimo), eDEFAULT, vUltimo)
     
     loConn.CloseDB
-    Set loCursor = Nothing
+    Set DataSet = Nothing
     Set loConn = Nothing
     Exit Function
     
@@ -76,8 +75,10 @@ Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String,
                              ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
                              ByVal coper As String) As Variant
     Dim loConn As New SQLiteConnection
-    Dim loCursor As SQLiteCursor
+   ' Dim loCursor As SQLiteCursor
+   Dim DataSet As SQLiteDataSet
     Dim cSQL As String
+    Dim eVALUE
     
     On Error GoTo Erro
     
@@ -91,20 +92,24 @@ Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String,
     
     VBSQLiteSetValues loConn
     
-    Set loCursor = loConn.CreateCursor(cSQL)
+   ' Set loCursor = loConn.CreateCursor(cSQL)
+    Set DataSet = loConn.OpenDataSet(cSQL)
     
-    If Not loCursor.EOF Then
-        If IsNull(loCursor.Value(0)) Then
+    
+    If Not DataSet.EOF Then
+        eVALUE = DataSet.ValueMatrix(0, 0)
+        
+        If IsNull(eVALUE) Then
             PegOperSQLite = eDEFAULT
         Else
-            PegOperSQLite = loCursor.Value(0)
+            PegOperSQLite = eVALUE
         End If
     Else
         PegOperSQLite = eDEFAULT
     End If
     
     loConn.CloseDB
-    Set loCursor = Nothing: Set loConn = Nothing
+    Set DataSet = Nothing: Set loConn = Nothing
     Exit Function
 
 Erro:
@@ -295,7 +300,7 @@ Public Function IncluiSQLite(ByVal cARQ As String, _
                              ByVal aIDDES As Variant) As Boolean
     
     Dim loConn As New SQLiteConnection
-    Dim loCursor As SQLiteCursor
+    'Dim loCursor As SQLiteCursor
     Dim cTABELA As String
     Dim i As Integer
     Dim cCampos As String
@@ -385,12 +390,14 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
                              ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
                              Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
     Dim loConn As New SQLiteConnection
-    Dim loCursor As SQLiteCursor
+  '  Dim loCursor As SQLiteCursor
+  Dim DataSet As SQLiteDataSet
     Dim x As Long
     Dim nCAMPOS As Integer
     Dim aRETU As Variant
     Dim aOPE As Variant
     Dim eVAL As Variant
+    
 
     On Error GoTo Erro
 
@@ -401,17 +408,18 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
-    Set loCursor = loConn.CreateCursor(cSQL)
+    'Set loCursor = loConn.CreateCursor(cSQL)
+    Set DataSet = loConn.OpenDataSet(cSQL)
 
-    If Not loCursor.EOF Then
-        While Not loCursor.EOF
+    If Not DataSet.EOF Then
+        While Not DataSet.EOF
             For x = 0 To nCAMPOS - 1
                 ' Lógica de Operações (SepSqlOpe / MathOper)
                 aOPE = SepSqlOpe(aCAM(x))
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
-                    eVAL = loCursor.Value(aCAM(x))
+                   ''** eVAL = DataSet.valoCursor.Value(aCAM(x))
                 Else
-                    eVAL = MathOper(loCursor.Value(aOPE(1)), loCursor.Value(aOPE(2)), aOPE(0))
+                   ''** eVAL = MathOper(loCursor.Value(aOPE(1)), loCursor.Value(aOPE(2)), aOPE(0))
                 End If
 
                 ' Tratamento de Nulo
@@ -431,8 +439,8 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
                 aRETU(x) = aRETU(x) & FixStr(eVAL)
             Next x
 
-            loCursor.MoveNext
-            If Not loCursor.EOF Then
+            DataSet.MoveNext
+            If Not DataSet.EOF Then
                 For x = 0 To nCAMPOS - 1: aRETU(x) = aRETU(x) & cDELI: Next x
             End If
         Wend
@@ -471,7 +479,8 @@ Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                            ByVal cCAMPO As String, Optional ByVal eDEFAULT As Variant, _
                            Optional ByVal nDEC As Integer = 2) As Variant
     Dim loConn As New SQLiteConnection
-    Dim loCursor As SQLiteCursor
+    Dim DataSet As SQLiteDataSet
+  '  Dim loCursor As SQLiteCursor
     Dim nSoma As Double
     Dim aOPER As Variant
     Dim aVALORES_LINHA() As String
@@ -486,30 +495,31 @@ Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
     loConn.OpenDB cCON, SQLiteReadWrite
     VBSQLiteSetValues loConn
     ' Busca todos os registros para processamento linha a linha (como a original)
-    Set loCursor = loConn.CreateCursor("SELECT * FROM " & cTABLEWHERE)
+    'Set loCursor = loConn.CreateCursor("SELECT * FROM " & cTABLEWHERE)
+    Set DataSet = loConn.OpenDataSet("SELECT * FROM " & cTABLEWHERE)
     
     nSoma = 0
-    While Not loCursor.EOF
+    While Not DataSet.EOF
         ReDim aVALORES_LINHA(UBound(aOPER))
         For x = 0 To UBound(aOPER)
             ' Se não for operador, extrai o valor do campo do cursor
             If InStr("+-*/()", aOPER(x)) = 0 And aOPER(x) <> "" Then
-                aVALORES_LINHA(x) = loCursor.Value(aOPER(x)) & ""
+                ''** aVALORES_LINHA(x) = loCursor.Value(aOPER(x)) & ""
             Else
-                aVALORES_LINHA(x) = aOPER(x)
+                ''** aVALORES_LINHA(x) = aOPER(x)
             End If
         Next x
         
         ' CHAMA MATHOPER COM OS DOIS PARAMETROS: o array e as decimais
         nSoma = nSoma + Val(MathOper(aVALORES_LINHA, nDEC))
         
-        loCursor.MoveNext
+        DataSet.MoveNext
     Wend
     
     SomaSQLite = IIf(nSoma = 0, eDEFAULT, nSoma)
     
     loConn.CloseDB
-    Set loCursor = Nothing
+    Set DataSet = Nothing
     Exit Function
 Erro:
     SomaSQLite = eDEFAULT
@@ -557,8 +567,10 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
 
     Dim loConnOri As New SQLiteConnection
     Dim loConnDes As New SQLiteConnection
-    Dim loCurOri As SQLiteCursor
-    Dim loCurDes As SQLiteCursor
+    Dim DataSetORI As SQLiteDataSet
+    Dim DataSetDES As SQLiteDataSet
+   ' Dim loCurOri As SQLiteCursor
+   ' Dim loCurDes As SQLiteCursor
     Dim x As Long
     Dim nCAMPOS As Long
     Dim nRegs As Long
@@ -580,16 +592,17 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
     VBSQLiteSetValues loConnDes
 
     ' 1. Coleta dados da Origem (Passo Matriz)
-    Set loCurOri = loConnOri.CreateCursor(cSQLORI)
-    If Not loCurOri.EOF Then
+    'Set loCurOri = loConnOri.CreateCursor(cSQLORI)
+    Set DataSetORI = loConnOri.OpenDataSet(cSQLORI)
+    If Not DataSetORI.EOF Then
         nCAMPOS = UBound(aCAMORI)
         ReDim aVALORI(nCAMPOS)
         For x = 0 To nCAMPOS
             aOPE = SepSqlOpe(aCAMORI(x))
             If aOPE(0) = "" Then
-                aVALORI(x) = loCurOri.Value(aCAMORI(x))
+                ''**aVALORI(x) = loCurOri.Value(aCAMORI(x))
             Else
-                aVALORI(x) = MathOper(loCurOri.Value(aOPE(1)), loCurOri.Value(aOPE(2)), aOPE(0))
+                ''** aVALORI(x) = MathOper(loCurOri.Value(aOPE(1)), loCurOri.Value(aOPE(2)), aOPE(0))
             End If
         Next x
 
@@ -598,8 +611,9 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
         cWHERE = ExtraiWhere(cSQLDES)
 
         ' 3. Lógica de Gravação via Execute
-        Set loCurDes = loConnDes.CreateCursor("SELECT count(*) FROM " & cTABELA & " " & cWHERE)
-        nRegs = loCurDes.Value(0)
+        'Set loCurDes = loConnDes.CreateCursor("SELECT count(*) FROM " & cTABELA & " " & cWHERE)
+        Set DataSetDES = loConnDes.OpenDataSet("SELECT count(*) FROM " & cTABELA & " " & cWHERE)
+       ''** nRegs = loCurDes.Value(0)
         
         If nRegs > 0 Then
             ' --- UPDATE ---
@@ -635,10 +649,11 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
 
         ' 4. Captura de IDs para eRETU01
         If IsArray(aIDDES) Then
-            Set loCurDes = loConnDes.CreateCursor(cSQLDES)
+           ' Set loCurDes = loConnDes.CreateCursor(cSQLDES)
+            Set DataSetDES = loConnDes.OpenDataSet(cSQLDES)
             ReDim aRETUID(UBound(aIDDES))
             For x = 0 To UBound(aIDDES)
-                aRETUID(x) = loCurDes.Value(aIDDES(x))
+                'aRETUID(x) = loCurDes.Value(aIDDES(x))
             Next x
             eRETU01 = aRETUID
         End If
