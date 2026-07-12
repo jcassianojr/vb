@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.6#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escRPTGRP 
    Caption         =   "Escolha o grupo de Relatorio"
    ClientHeight    =   6132
@@ -44,11 +44,11 @@ Begin VB.Form escRPTGRP
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   4  'Align Right
-      Height          =   6135
-      Left            =   7875
+      Height          =   6132
+      Left            =   7872
       TabIndex        =   0
       Top             =   0
-      Width           =   1470
+      Width           =   1476
       _ExtentX        =   2604
       _ExtentY        =   10816
       ButtonWidth     =   614
@@ -70,7 +70,7 @@ Private Sub Apaga_Click()
   Dim sSQL As String
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    cGRUPO = FixStr(Grid.Text)
+    cGRUPO = FixStr(Grid.tEXT)
     '******************************************************************
     'RPTGRP
     sSQL = "select * from RPTGRP WHERE GRP='" & cGRUPO & "'"
@@ -96,7 +96,7 @@ End Sub
 Private Sub Edit_Click()
   If Grid.Row > 0 Then  ''And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    zgrp = Grid.Text
+    zgrp = Grid.tEXT
     frmRPTGRP.Show vbModal
     FilRelat
   End If
@@ -105,7 +105,7 @@ End Sub
 Private Sub Escolher_Click()
   If Grid.Row > 0 Then  'And Grid.Row < Grid.Rows - 1 Then
     Grid.Col = 0
-    zgrp = Grid.Text
+    zgrp = Grid.tEXT
     escRPT.Show vbModal, Me
   End If
 End Sub

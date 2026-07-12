@@ -491,8 +491,8 @@ Public Function IncluiSQLTC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     aRETU = TipoConn(cARQ) ' Retorna Array (Tag, StringConn, TipoBanco)
     carqcon = aRETU(1)
     ' Inicializa Conexão TC6
-    Set oDB = New_c.Connection(carqcon)
-
+   ' Set oDB = New_c.Connection(carqcon)
+    Set oDB = New_c.Connection(carqcon, DBOpenFromFile)
     ' Ajustes de ambiente
     ConfigurarConexaoTC6 oDB, carqcon
     'If InStr(aRETU(1), "VFPOLEDB") > 0 Then VFPSetValuesTC6 oDB
