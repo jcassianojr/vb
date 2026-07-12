@@ -1,4 +1,4 @@
-Attribute VB_Name = "vbsqlite"
+Attribute VB_Name = "sqlvbsqlite"
 Option Explicit
 ' Reference=*\G{7CC1A5F1-A0FF-4546-A0F1-FBFE744A4522}#1.1#0#..\..\..\..\..\..\WINDOWS\system32\VBSQLite12.DLL#VB SQLite Library 1.2
 ' Notas de Implementação:
@@ -13,6 +13,7 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal c
     Dim loCursor As SQLiteCursor
     Dim vUltimo As Variant
     
+
     On Error GoTo Erro
     vUltimo = eDEFAULT
     
@@ -215,7 +216,8 @@ Public Function GrvSQLite(ByVal cARQ As String, _
     Dim cTABELA As String
     Dim cWHERE As String
     Dim i As Integer
-    Dim nPosFrom As Long, nPosWhere As Long
+    Dim nPosFrom As Long
+    Dim nPosWhere As Long
     
     On Error GoTo Erro
     
@@ -280,7 +282,8 @@ Public Function IncluiSQLite(ByVal cARQ As String, _
     Dim loCursor As SQLiteCursor
     Dim cTABELA As String
     Dim i As Integer
-    Dim cCampos As String, cValores As String
+    Dim cCampos As String
+    Dim cValores As String
     
     On Error GoTo Erro
     
@@ -364,9 +367,13 @@ End Function
 Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
                              ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
                              Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
-    Dim loConn As New SQLiteConnection, loCursor As SQLiteCursor
-    Dim x As Long, nCAMPOS As Integer
-    Dim aRETU As Variant, aOPE As Variant, eVAL As Variant
+    Dim loConn As New SQLiteConnection
+    Dim loCursor As SQLiteCursor
+    Dim x As Long
+    Dim nCAMPOS As Integer
+    Dim aRETU As Variant
+    Dim aOPE As Variant
+    Dim eVAL As Variant
 
     On Error GoTo Erro
 
@@ -529,11 +536,21 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
    Optional ByVal aCAMDES As Variant = 0, Optional ByVal aOUTDES As Variant = 0, _
    Optional ByVal aIDDES As Variant = 0) As Boolean
 
-    Dim loConnOri As New SQLiteConnection, loConnDes As New SQLiteConnection
-    Dim loCurOri As SQLiteCursor, loCurDes As SQLiteCursor
-    Dim x As Long, nCAMPOS As Long, nRegs As Long
-    Dim aVALORI As Variant, aRETUID As Variant, aOPE As Variant
-    Dim cTABELA As String, cWHERE As String, cSET As String, cINS_C As String, cINS_V As String
+    Dim loConnOri As New SQLiteConnection
+    Dim loConnDes As New SQLiteConnection
+    Dim loCurOri As SQLiteCursor
+    Dim loCurDes As SQLiteCursor
+    Dim x As Long
+    Dim nCAMPOS As Long
+    Dim nRegs As Long
+    Dim aVALORI As Variant
+    Dim aRETUID As Variant
+    Dim aOPE As Variant
+    Dim cTABELA As String
+    Dim cWHERE As String
+    Dim cSET As String
+    Dim cINS_C As String
+    Dim cINS_V As String
 
     On Error GoTo Erro
     SQLMoveRegSQLite = False
