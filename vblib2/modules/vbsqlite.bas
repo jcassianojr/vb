@@ -17,7 +17,7 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal c
     On Error GoTo Erro
     vUltimo = eDEFAULT
     
-    loConn.OpenDB cCON
+    loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
     ' O método correto é CreateCursor
@@ -85,7 +85,8 @@ Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String,
     cSQL = "SELECT " & coper & "(" & cCAMPO & ") FROM " & cTABLEWHERE
     cSQL = sqldialeto(cSQL, "SQLITE")
     
-    loConn.OpenDB LimpaTag(cCON)
+    cCON = LimpaTag(cCON)
+    loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
     
@@ -120,7 +121,8 @@ Public Function SQLiteComando(ByVal cCON As String, ByVal cSQL As String) As Boo
     cCON = LimpaTag(cCON)
     cSQL = sqldialeto(cSQL, "SQLITE")
     
-    loConn.OpenDB cCON
+    loConn.OpenDB cCON, SQLiteReadWrite
+    
     VBSQLiteSetValues loConn
     loConn.Execute cSQL
     
@@ -148,7 +150,7 @@ Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
     ReDim aVAL(nITEM)
     
     cCON = LimpaTag(cCON)
-    loConn.OpenDB cCON
+    loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
     
@@ -248,7 +250,8 @@ Public Function GrvSQLite(ByVal cARQ As String, _
     ' 3. Execução direta na conexão
     ' (Mantendo sua lógica de limpeza de tag)
     cARQ = LimpaTag(cARQ)
-    loConn.OpenDB cARQ
+    loConn.OpenDB cARQ, SQLiteReadWrite
+    
     VBSQLiteSetValues loConn
     
     loConn.Execute cSQL_UPDATE
@@ -307,7 +310,7 @@ Public Function IncluiSQLite(ByVal cARQ As String, _
     Next i
     
     ' 4. Execução
-    loConn.OpenDB cARQ
+    loConn.OpenDB cARQ, SQLiteReadWrite
     VBSQLiteSetValues loConn
     loConn.Execute "INSERT INTO " & cTABELA & " (" & cCampos & ") VALUES (" & cValores & ")"
     
@@ -381,7 +384,8 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
     ReDim aRETU(nCAMPOS - 1)
     For x = 0 To nCAMPOS - 1: aRETU(x) = "": Next x
 
-    loConn.OpenDB cCON
+    loConn.OpenDB cCON, SQLiteReadWrite
+    
     VBSQLiteSetValues loConn
     Set loCursor = loConn.CreateCursor(cSQL)
 
@@ -464,7 +468,8 @@ Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
     ' SepSqlOpe prepara o array de campos/operadores
     aOPER = SepSqlOpe(cCAMPO)
     
-    loConn.OpenDB LimpaTag(cCON)
+    cCON = LimpaTag(cCON)
+    loConn.OpenDB cCON, SQLiteReadWrite
     VBSQLiteSetValues loConn
     ' Busca todos os registros para processamento linha a linha (como a original)
     Set loCursor = loConn.CreateCursor("SELECT * FROM " & cTABLEWHERE)
@@ -555,9 +560,9 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
     On Error GoTo Erro
     SQLMoveRegSQLite = False
 
-    loConnOri.OpenDB cCONORI
+    loConnOri.OpenDB cCONORI, SQLiteReadWrite
     VBSQLiteSetValues loConnOri
-    loConnDes.OpenDB cCONDES
+    loConnDes.OpenDB cCONDES, SQLiteReadWrite
     VBSQLiteSetValues loConnDes
 
     ' 1. Coleta dados da Origem (Passo Matriz)
