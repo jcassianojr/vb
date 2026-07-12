@@ -10,7 +10,7 @@ Public Sub xmontatoolbar(ByRef vFormtool As Variant, _
   Dim sSQL As String
   Dim aRETU As Variant
   Dim cCOM As String
-  
+  Dim cARQ As String
 
   'On Error Resume Next
   On Error GoTo errhandler
@@ -21,7 +21,17 @@ Public Sub xmontatoolbar(ByRef vFormtool As Variant, _
   vFormtool.ImageList = Nothing
   vFormtool.ImageList = frmPRINCIPAL.ImageList1
   
- aRETU = TipoConn(Dbname, , False)
+   cARQ = Dbname
+  'Muda so aqui ate usar outros tipos  aqui nas grid esta usando ado fixo
+If InStr(cARQ, "[VBSQLITE]") > 0 Or InStr(cARQ, "[SQLITERC6]") > 0 Or InStr(cARQ, "[TC6SQLITE]") > 0 Then
+           cARQ = Replace(cARQ, "[VBSQLITE]", "[SQLITE]")
+           cARQ = Replace(cARQ, "[SQLITERC6]", "[SQLITE]")
+           cARQ = Replace(cARQ, "[TC6SQLITE]", "[SQLITE]")
+End If
+
+  
+  
+ aRETU = TipoConn(cARQ, , False)
  cCOM = aRETU(1)
 
   sSQL = "SELECT * FROM CONTROLE WHERE FORM = '" & VNome & "' and controle='" & vCONTROL & "' order by indice"

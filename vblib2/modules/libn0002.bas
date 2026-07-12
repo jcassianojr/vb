@@ -23,6 +23,14 @@ Public Sub MontaToolbar(ByRef vFormtool As Variant, ByVal nFORM As Long)
     Exit Sub
   End If
 
+'Muda so aqui ate usar outros tipos  aqui nas grid esta usando ado fixo
+If InStr(cCAM, "[VBSQLITE]") > 0 Or InStr(cCAM, "[SQLITERC6]") > 0 Or InStr(cCAM, "[TC6SQLITE]") > 0 Then
+           cCAM = Replace(cCAM, "[VBSQLITE]", "[SQLITE]")
+           cCAM = Replace(cCAM, "[SQLITERC6]", "[SQLITE]")
+           cCAM = Replace(cCAM, "[TC6SQLITE]", "[SQLITE]")
+End If
+
+
   cSQL = "SELECT * FROM BOTOES WHERE FORM = " & nFORM & " ORDER BY INDICE"
   cCAM = GeracArq(cCAM, , False)
   Set oDB = New ADODB.Connection

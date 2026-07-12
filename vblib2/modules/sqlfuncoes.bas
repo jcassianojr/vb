@@ -84,7 +84,7 @@ If IsQueryDestructive(cSQL) Then
      Exit Function
   End If
   aRETU = TipoConn(cARQ)
-  cARQ = aRETU(1)
+  'cARQ = aRETU(1)'mantem com as [ as funcoes tratam
   Select Case aRETU(0)
   Case "ADO"
     GrvSQL = GrvSQLado(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
@@ -106,7 +106,7 @@ Public Function IncluiSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
      Exit Function
   End If
   aRETU = TipoConn(cARQ)
-  cARQ = aRETU(1)
+  'cARQ = aRETU(1)'mantem com as [ as funcoes tratam
   Select Case aRETU(0)
   Case "ADO"
     IncluiSQL = IncluiSQLAdo(cARQ, cSQL, nITEM, aCAM, aVAL, lCHECK, lMES, aIDDES)
@@ -125,7 +125,7 @@ Public Function PegSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
      Exit Function
   End If
   aRETU = TipoConn(cARQ, , , lWRITE)
-  cARQ = aRETU(1)
+  'cARQ = aRETU(1)'mantem com as [ as funcoes tratam
   Select Case aRETU(0)
        Case "ADO"
            PegSQL = PegSQLAdo(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
@@ -134,7 +134,7 @@ Public Function PegSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
         Case "SQLITERC6", "ADORC6"
             PegSQL = PegSQLrc6(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
     Case "TC6SQLITE"
-    PegSQL = PegSQLTC6(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
+            PegSQL = PegSQLTC6(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
             
   End Select
 End Function
@@ -145,7 +145,7 @@ Public Function PegUltSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal cCAM
      Exit Function
   End If
   aRETU = TipoConn(cARQ, , , lWRITE)
-  cARQ = aRETU(1)
+  'cARQ = aRETU(1) 'mantem com as [ as funcoes tratam
   Select Case aRETU(0)
   Case "ADO"
     PegUltSQL = PegUltSQLAdo(cARQ, cSQL, cCAMPO, eDEFAULT)
@@ -164,7 +164,7 @@ Public Function PegMAXSQL(ByVal cARQ As String, ByVal cTable As String, ByVal cC
  '    Exit Function
  ' End If
   aRETU = TipoConn(cARQ, , , lWRITE)
-  cARQ = aRETU(1)
+  'cARQ = aRETU(1) 'mantem com as [ as funcoes tratam
   Select Case aRETU(0)
   Case "ADO"
     PegMAXSQL = PegMAXSQLADO(cARQ, cTable, cCAMPO, eDEFAULT)
@@ -183,7 +183,7 @@ Public Function PegCountSQL(ByVal cARQ As String, ByVal cTable As String, ByVal 
 '     Exit Function
 '  End If
   aRETU = TipoConn(cARQ, , , lWRITE)
-  cARQ = aRETU(1)
+  'cARQ = aRETU(1) 'mantem com as [ as funcoes tratam
   Select Case aRETU(0)
   Case "ADO"
     PegCountSQL = PegCountSQLADO(cARQ, cTable, cCAMPO, eDEFAULT)
@@ -198,7 +198,7 @@ End Function
 Public Function ComandoSQL(ByVal cARQ As String, ByVal cSQL As String) As Boolean
   Dim aRETU As Variant
   aRETU = TipoConn(cARQ)
-  cARQ = aRETU(1)
+  'cARQ = aRETU(1) 'mantem com as [ as funcoes tratam
   If InStr(UCase(cARQ), "VFPOLEDB") Then
       ComandoSQL = AdoComandodbf(cARQ, "", cSQL)
   End If
@@ -220,7 +220,7 @@ Public Function ApagaSQL(ByVal cARQ As String, ByVal cSQL As String) As Boolean
      Exit Function
   End If
   aRETU = TipoConn(cARQ)
-  cARQ = aRETU(1)
+  'cARQ = aRETU(1) 'mantem com as [ as funcoes tratam
   Select Case aRETU(0)
   Case "ADO"
        ApagaSQL = APAGASQLADO(cARQ, cSQL)
@@ -240,16 +240,14 @@ Public Function SomaSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM A
   End If
   aRETU = TipoConn(cARQ, , , lWRITE)
   Select Case aRETU(0)
-  Case "ADO"
-       SomaSQL = SomaSQLAdo(cARQ, cSQL, aCAM)
-   Case "VBSQLITE"
-            ' Note que o retorno agora é um Array, espelhando o ADO
+      Case "ADO"
+         SomaSQL = SomaSQLAdo(cARQ, cSQL, aCAM)
+      Case "VBSQLITE"
          SomaSQL = SomaSQLite(cARQ, cSQL, aCAM)
-          
-        Case "SQLITERC6", "ADORC6"
+      Case "SQLITERC6", "ADORC6"
             SomaSQL = SomaSQLrc6(cARQ, cSQL, aCAM)
-  Case "TC6SQLITE"
-      SomaSQL = SomaSQLTC6(cARQ, cSQL, aCAM)
+      Case "TC6SQLITE"
+            SomaSQL = SomaSQLTC6(cARQ, cSQL, aCAM)
   End Select
 End Function
 Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
@@ -262,26 +260,21 @@ Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
   End If
   aRETU = TipoConn(cARQ)
   Select Case aRETU(0)
-    
         Case "ADO"
              PegSQLDeli = PegSQLDeliAdo(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
         Case "VBSQLITE"
-            ' Chama a versão VBSQLite12
             PegSQLDeli = PegSQLiteDeli(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
-            
         Case "SQLITERC6", "ADORC6"
-            ' Chama a versão vbRichClient6
             PegSQLDeli = PegSQLDelirc6(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
-      Case "TC6SQLITE"
-      PegSQLDeli = PegSQLDeliTC6(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
-      
+        Case "TC6SQLITE"
+            PegSQLDeli = PegSQLDeliTC6(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
     End Select
 End Function
 
 Public Function ApagaSQLP(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusão")
   Dim aRETU As Variant
   aRETU = TipoConn(cARQ)
-  cARQ = aRETU(1)
+  'cARQ = aRETU(1)
   Select Case aRETU(0)
   Case "ADO"
     ApagaSQLP = ApagaSQLpAdo(cARQ, cSQL, cTEXTO)

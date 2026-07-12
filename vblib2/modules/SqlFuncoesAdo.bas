@@ -321,7 +321,7 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
   Dim aOPE As Variant
   Dim eVAL As Variant
   Dim cERRO As String
-  Dim carqcon As String
+  Dim cARQCON As String
 
   On Error GoTo errhandler
 
@@ -339,12 +339,12 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
   End If
 
   aARQ = TipoConn(cARQ, , , False)
-  carqcon = aARQ(1) 'GeracArq(cARQ, , False)
+  cARQCON = aARQ(1) 'GeracArq(cARQ, , False)
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open carqcon
+  oDB.Open cARQCON
   lOPEN = True
 
 
@@ -418,7 +418,7 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
-  Dim carqcon As String
+  Dim cARQCON As String
 
   On Error GoTo errhandler
 
@@ -437,12 +437,12 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
 
   aARQ = TipoConn(cARQ, , , False)
   'ARQ = GeracArq(cARQ, , False)
-  carqcon = aARQ(1)
+  cARQCON = aARQ(1)
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open carqcon
+  oDB.Open cARQCON
 
   'na string de conecao delete =yes
   ConfigurarConexaoADO oDB, cARQ
@@ -546,7 +546,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim lRSOP As Boolean
   Dim cERRO As String
   Dim oFIELD As ADODB.Field
-  Dim carqcon As String
+  Dim cARQCON As String
 
   On Error GoTo errhandler
   lOPEN = False
@@ -555,7 +555,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   cTABELA = NomeTableSql(cSQL)
 
   aARQ = TipoConn(cARQ)
-  carqcon = aARQ(1)
+  cARQCON = aARQ(1)
 
   If aARQ(2) = "PGSQL" Then
      cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
@@ -564,7 +564,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open carqcon
+  oDB.Open cARQCON
  
   ConfigurarConexaoADO oDB, cARQ
   'If InStr(cARQ, "VFPOLEDB") Then
@@ -860,6 +860,7 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim aOPE As Variant
   Dim eVAL As Variant
   Dim aCON As Variant
+  Dim cCONN As String
 
   On Error GoTo errhandler
   ReDim aRETU(nITEM)
@@ -867,6 +868,7 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   lRSOP = False
   
   aCON = TipoConn(cARQ, , , False)
+  cCONN = aCON(1)
   
    If aCON(2) = "PGSQL" Then
      cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
@@ -875,7 +877,7 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open cARQ
+  oDB.Open cCONN 'cARQ
 
   'na string de conecao delete =yes
   'ConfigurarConexaoADO oDB, cARQ
@@ -990,17 +992,23 @@ Public Function PegUltSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal c
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
+  Dim aCON
+  Dim cCONN As String
 
   On Error GoTo errhandler
 
   PegUltSQLAdo = eDEFAULT
+
+  aCON = TipoConn(cARQ, , , False)
+  cCONN = aCON(1)
+
 
   lOPEN = False
   lRSOP = False
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open cARQ
+  oDB.Open cCONN 'cARQ
 
 
   lOPEN = True
