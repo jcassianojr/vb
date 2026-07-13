@@ -1,19 +1,17 @@
 Attribute VB_Name = "SqlTC6SQLite"
 Option Explicit
 Public Function ADOComandoTC6(ByVal cARQ As String, ByVal cSql As String) As Boolean
-   ' Dim aRETU As Variant
     Dim oDB As New TC6SQLite.cConnection
-   ' Dim cCONN As String
 
     On Error GoTo TrataErro
     ADOComandoTC6 = False
-    
     
     ' Ajustes de dialeto (Mantido conforme original)
     If InStr(cSql, "CURRENTDATETIME") > 0 Then
           cSql = Replace(cSql, "CURRENTDATETIME", " current_timestamp ")
     End If
     
+    cARQ = LimpaTag(cARQ)
     ' Inicialização simplificada no TC6
     oDB.OpenDB cARQ  'New_c.Connection(cCONN)
     
@@ -80,10 +78,8 @@ Public Function SomaSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal aCA
     Dim x As Integer
     Dim nCAMPOS As Integer
     Dim aRETU As Variant
-    'Dim aARQ As Variant
     Dim aOPE As Variant
     Dim eVAL As Variant
-    'Dim carqcon As String
 
     On Error GoTo errhandler
 
@@ -100,11 +96,7 @@ Public Function SomaSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal aCA
         Exit Function
     End If
 
-    'aARQ = TipoConn(cARQ, , , False)
-    'carqcon = aARQ(1)
-
-    ' Inicialização simplificada no TC6
-    'Set oDB = New_c.Connection(carqcon)
+    cARQ = LimpaTag(cARQ)
     oDB.OpenDB cARQ
     
     lOPEN = True
@@ -155,12 +147,10 @@ Public Function PegSQLDeliTC6(ByVal cARQ As String, ByVal cSql As String, _
     Dim x As Integer
     Dim nCAMPOS As Integer
     Dim aRETU As Variant
-    'Dim aARQ As Variant
     Dim aOPE As Variant
     Dim eVAL As Variant
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
-    'Dim carqcon As String
 
     On Error GoTo errhandler
 
@@ -177,11 +167,7 @@ Public Function PegSQLDeliTC6(ByVal cARQ As String, ByVal cSql As String, _
         Exit Function
     End If
 
-    'aARQ = TipoConn(cARQ, , , False)
-    'carqcon = aARQ(1)
-
-    ' Inicialização do TC6 (Substitui o .Open e propriedades ADO)
-    'Set oDB = New_c.Connection(carqcon)
+    cARQ = LimpaTag(cARQ)
     oDB.OpenDB cARQ
     
     lOPEN = True
@@ -250,17 +236,12 @@ Public Function GrvSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal nITE
     Dim x As Long
     Dim eVAL As Variant
     Dim aOPE As Variant
-'    Dim aARQ As Variant
-'    Dim carqcon As String
     
     On Error GoTo errhandler
     GrvSQLTC6 = False
 
-    ' 1. Identifica o dialeto/conexão
- '   aARQ = TipoConn(cARQ)
- '   carqcon = aARQ(1)
- '   Set oDB = New_c.Connection(carqcon)
-
+    
+    cARQ = LimpaTag(cARQ)
     oDB.OpenDB cARQ
     
     ' 2. Ajustes de ambiente
@@ -334,8 +315,6 @@ Public Function IncluiSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal n
     Dim x As Long
     Dim aRETU As Variant
     Dim lTEM As Boolean
-    'Dim lRETU As Boolean
-    'Dim carqcon As String
     
     IncluiSQLTC6 = False
     On Error GoTo errhandler
@@ -343,6 +322,7 @@ Public Function IncluiSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal n
     lTEM = False
     lRETU = False
     
+    cARQ = LimpaTag(cARQ)
     oDB.OpenDB cARQ
     
     ' Ajustes de ambiente
@@ -409,21 +389,15 @@ Public Function PegSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal nITE
     Dim oRS As TC6SQLite.cRecordset
     Dim x As Long
     Dim aRETU As Variant
-    'Dim aCON As Variant
     Dim aOPE As Variant
     Dim eVAL As Variant
-    'Dim carqcon As String
 
     On Error GoTo errhandler
     
     ' Inicializa o array de retorno
     ReDim aRETU(0 To nITEM - 1)
     
-    ' Identifica a conexão
-    'aCON = TipoConn(cARQ, , , False)
-    
-    ' Inicialização do TC6 (cConnection não precisa de Open com timeout)
-'    Set oDB = New_c.Connection(carqcon)
+    cARQ = LimpaTag(cARQ)
    oDB.OpenDB cARQ
    
 
@@ -530,7 +504,8 @@ Public Function PegUltSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal c
     PegUltSQLTC6 = eDEFAULT
     
     ' Inicializa a conexão (O TC6 abre a conexão ao instanciar com o caminho)
-    oDB.OpenDB cARQ 'New_c.Connection(cARQ)
+    cARQ = LimpaTag(cARQ)
+    oDB.OpenDB cARQ
     
     ' Abre o Recordset nativo do TC6
     ' O TC6 gerencia o cursor automaticamente conforme o driver (SQLite/Outros)
@@ -580,29 +555,16 @@ Public Function SQLMoveRegTC6(ByVal cARQORI As String, _
     Dim oDBDES As New TC6SQLite.cConnection
     Dim oRS As TC6SQLite.cRecordset
     Dim oRSDES As TC6SQLite.cRecordset
-    'Dim aRetuOri As Variant
-    'Dim aRetuDes As Variant
     Dim x As Integer
     Dim nCAMPOS As Integer
     Dim aVALORI As Variant
     Dim aRETUID As Variant
-    'Dim cCONORI As String
-    'Dim cCONDES As String
 
     On Error GoTo errhandler
     SQLMoveRegTC6 = False
 
-    ' 1. Identifica Conexões
-    'aRetuOri = TipoConn(cARQORI)
-    'aRetuDes = TipoConn(cARQDES)
-    
-   'cCONORI = aRetuOri(1)
-   'cCONDES = aRetuDes(1)
-   
-   
-    ' 2. Inicializa Conexões TC6 (New_c.Connection já abre a conexão)
-    'Set oDB = New_c.Connection(cCONORI)
-    'Set oDBDES = New_c.Connection(cCONDES)
+    cARQORI = LimpaTag(cARQORI)
+    cARQDES = LimpaTag(cARQDES)
     oDB.OpenDB cARQORI
     oDBDES.OpenDB cARQDES
 
@@ -681,9 +643,6 @@ errhandler:
     Set oDB = Nothing: Set oDBDES = Nothing
     SQLMoveRegTC6 = False
 End Function
-
-'        SQLiteSetValuesTC6 oCON
-
 Public Function SqliteSetValuesTC6(ByRef oCON As Object) As Boolean
     On Error GoTo ErroSQLite
     SqliteSetValuesTC6 = False
