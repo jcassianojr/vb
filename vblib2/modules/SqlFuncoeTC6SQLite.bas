@@ -1,7 +1,7 @@
 Attribute VB_Name = "SqlTC6SQLite"
 Option Explicit
 Public Function ADOComandoTC6(ByVal cARQ As String, ByVal cSql As String) As Boolean
-    Dim oDB As New TC6SQLite.cConnection
+    Dim oDB As New TC6SQLITE.cConnection
 
     On Error GoTo TrataErro
     ADOComandoTC6 = False
@@ -71,8 +71,8 @@ Public Function APAGASQLTC6(ByVal cARQ As String, ByVal cSql As String) As Boole
 End Function
 
 Public Function SomaSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal aCAM As Variant) As Variant
-    Dim oDB As New TC6SQLite.cConnection
-    Dim oRS As TC6SQLite.cRecordset
+    Dim oDB As New TC6SQLITE.cConnection
+    Dim oRS As TC6SQLITE.cRecordset
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
     Dim x As Integer
@@ -142,8 +142,8 @@ Public Function PegSQLDeliTC6(ByVal cARQ As String, ByVal cSql As String, _
                               ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
                               Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
 
-    Dim oDB As New TC6SQLite.cConnection
-    Dim oRS As TC6SQLite.cRecordset
+    Dim oDB As New TC6SQLITE.cConnection
+    Dim oRS As TC6SQLITE.cRecordset
     Dim x As Integer
     Dim nCAMPOS As Integer
     Dim aRETU As Variant
@@ -231,8 +231,8 @@ errhandler:
 End Function
 Public Function GrvSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal nITEM As Long, ByVal aCAM As Variant, _
                           ByVal aVAL As Variant, ByVal aFOR As Variant, Optional ByVal nSTARITEM As Long = 0) As Boolean
-    Dim oDB As New TC6SQLite.cConnection
-    Dim oRS As TC6SQLite.cRecordset
+    Dim oDB As New TC6SQLITE.cConnection
+    Dim oRS As TC6SQLITE.cRecordset
     Dim x As Long
     Dim eVAL As Variant
     Dim aOPE As Variant
@@ -310,8 +310,8 @@ Public Function IncluiSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal n
                              Optional ByVal lCHECK As Boolean = False, _
                              Optional ByVal lMES As Boolean = True, _
                              Optional ByVal aIDDES As Variant = 0) As Boolean
-    Dim oDB As New TC6SQLite.cConnection
-    Dim oRS As TC6SQLite.cRecordset
+    Dim oDB As New TC6SQLITE.cConnection
+    Dim oRS As TC6SQLITE.cRecordset
     Dim x As Long
     Dim aRETU As Variant
     Dim lTEM As Boolean
@@ -385,8 +385,8 @@ errhandler:
 End Function
 
 Public Function PegSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
-    Dim oDB As New TC6SQLite.cConnection
-    Dim oRS As TC6SQLite.cRecordset
+    Dim oDB As New TC6SQLITE.cConnection
+    Dim oRS As TC6SQLITE.cRecordset
     Dim x As Long
     Dim aRETU As Variant
     Dim aOPE As Variant
@@ -495,8 +495,8 @@ Public Function PegOperSQLTC6(ByVal cARQ As String, ByVal cTABLEWHERE As String,
   End If
 End Function
 Public Function PegUltSQLTC6(ByVal cARQ As String, ByVal cSql As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-    Dim oDB As New TC6SQLite.cConnection
-    Dim oRS As TC6SQLite.cRecordset
+    Dim oDB As New TC6SQLITE.cConnection
+    Dim oRS As TC6SQLITE.cRecordset
     
     On Error GoTo errhandler
     
@@ -551,10 +551,10 @@ Public Function SQLMoveRegTC6(ByVal cARQORI As String, _
                               Optional ByVal aOUTDES As Variant = 0, _
                               Optional ByVal aIDDES As Variant = 0) As Boolean
 
-    Dim oDB As New TC6SQLite.cConnection
-    Dim oDBDES As New TC6SQLite.cConnection
-    Dim oRS As TC6SQLite.cRecordset
-    Dim oRSDES As TC6SQLite.cRecordset
+    Dim oDB As New TC6SQLITE.cConnection
+    Dim oDBDES As New TC6SQLITE.cConnection
+    Dim oRS As TC6SQLITE.cRecordset
+    Dim oRSDES As TC6SQLITE.cRecordset
     Dim x As Integer
     Dim nCAMPOS As Integer
     Dim aVALORI As Variant
