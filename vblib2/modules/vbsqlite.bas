@@ -1,7 +1,7 @@
 Attribute VB_Name = "sqlvbsqlite"
 Option Explicit
 ' Reference=*\G{7CC1A5F1-A0FF-4546-A0F1-FBFE744A4522}#1.1#0#..\..\..\..\..\..\WINDOWS\system32\VBSQLite12.DLL#VB SQLite Library 1.2
-Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+Public Function PegUltSQLite(ByVal cCON As String, ByVal cSql As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     Dim loConn As New SQLiteConnection
     Dim DataSet As SQLiteDataSet
     Dim vUltimo As Variant
@@ -14,7 +14,7 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal c
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
-    Set DataSet = loConn.OpenDataSet(cSQL)
+    Set DataSet = loConn.OpenDataSet(cSql)
     
     If Not DataSet.EOF Then
         While Not DataSet.EOF
@@ -56,21 +56,21 @@ Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String,
                              ByVal coper As String) As Variant
     Dim loConn As New SQLiteConnection
    Dim DataSet As SQLiteDataSet
-    Dim cSQL As String
+    Dim cSql As String
     Dim eValue
     
     On Error GoTo Erro
     
     ' Ex: SELECT SUM(VALOR) FROM MOVI WHERE CODIGO = 10
-    cSQL = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
-    cSQL = sqldialeto(cSQL, "SQLITE")
+    cSql = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
+    cSql = sqldialeto(cSql, "SQLITE")
     
     cCON = LimpaTag(cCON)
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
     
-    Set DataSet = loConn.OpenDataSet(cSQL)
+    Set DataSet = loConn.OpenDataSet(cSql)
     
     
     If Not DataSet.EOF Then
@@ -93,18 +93,18 @@ Erro:
     PegOperSQLite = eDEFAULT
     If Not loConn Is Nothing Then loConn.CloseDB
 End Function
-Public Function SQLiteComando(ByVal cCON As String, ByVal cSQL As String) As Boolean
+Public Function SQLiteComando(ByVal cCON As String, ByVal cSql As String) As Boolean
     Dim loConn As New SQLiteConnection
     On Error GoTo Erro
     
     ' Limpeza da Tag e tradução do dialeto
     cCON = LimpaTag(cCON)
-    cSQL = sqldialeto(cSQL, "SQLITE")
+    cSql = sqldialeto(cSql, "SQLITE")
     
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
-    loConn.Execute cSQL
+    loConn.Execute cSql
     
     SQLiteComando = True
     loConn.CloseDB
@@ -112,7 +112,7 @@ Public Function SQLiteComando(ByVal cCON As String, ByVal cSQL As String) As Boo
 Erro:
     SQLiteComando = False
 End Function
-Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
+Public Function PegSQLite(ByVal cCON As String, ByVal cSql As String, _
                          ByVal nITEM As Long, ByVal aCAM As Variant, _
                          ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim loConn As New SQLiteConnection
@@ -131,10 +131,10 @@ Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
     
     VBSQLiteSetValues loConn
     
-    cSQL = sqldialeto(cSQL, "SQLITE")
+    cSql = sqldialeto(cSql, "SQLITE")
     
     
-    Set DataSet = loConn.OpenDataSet(cSQL)
+    Set DataSet = loConn.OpenDataSet(cSql)
     
     
     If Not DataSet.EOF Then
@@ -260,6 +260,8 @@ Public Function IncluiSQLite(ByVal cARQ As String, _
     Dim i As Integer
     Dim cCampos As String
     Dim cValores As String
+    Dim oRS As SQLiteDataSet
+    Dim lTEM
     
     On Error GoTo Erro
     
@@ -269,8 +271,18 @@ Public Function IncluiSQLite(ByVal cARQ As String, _
     
     ' 2. Checagem (lCHECK)
     If lCHECK Then
-        ' Aqui você implementaria a lógica de verificar se o registro já existe
-        ' antes de prosseguir com o INSERT.
+       cARQ = LimpaTag(cARQ)
+        loConn.OpenDB cARQ, SQLiteReadWrite
+        VBSQLiteSetValues loConn
+        
+        Set oRS = loConn.OpenDataSet(cSQL_SELECT)
+        If Not oRS.EOF Then lTEM = True ' Se o registro existe, lTEM se torna True
+        
+        Set oRS = Nothing
+        loConn.CloseDB
+        If lTEM Then
+           Exit Function
+        End If
     End If
     
     ' 3. Montagem do INSERT
@@ -306,9 +318,12 @@ Erro:
     ' ... fechar conexões ...
 End Function
 
-Private Function LimpaTag(ByVal cCON As String) As String
+Public Function LimpaTag(ByVal cCON As String) As String
     ' Remove a tag customizada para obter o path puro do arquivo
     LimpaTag = Replace(cCON, "[VBSQLITE]", "")
+    LimpaTag = Replace(cCON, "[SQLITERC6]", "")
+    LimpaTag = Replace(cCON, "[TC6SQLITE]", "")
+    LimpaTag = Replace(cCON, "[SQLITE4VB]", "")
 End Function
 
 Private Function FormataParaSQL(ByVal vValor As Variant) As String
@@ -335,7 +350,7 @@ Public Function PegCampoSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String
     PegCampoSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "")
     
 End Function
-Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
+Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSql As String, _
                              ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
                              Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
     Dim loConn As New SQLiteConnection
@@ -358,7 +373,7 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
-    Set DataSet = loConn.OpenDataSet(cSQL)
+    Set DataSet = loConn.OpenDataSet(cSql)
 
     If Not DataSet.EOF Then
         While Not DataSet.EOF
@@ -467,13 +482,13 @@ Erro:
     If Not loConn Is Nothing Then loConn.CloseDB
 End Function
 
-Public Function ApagaSQLite(ByVal cCON As String, ByVal cSQL As String) As Boolean
+Public Function ApagaSQLite(ByVal cCON As String, ByVal cSql As String) As Boolean
     Dim nPOS As Long
     Dim cSQL_FINAL As String
     
     On Error GoTo Erro
     
-    cSQL_FINAL = Trim(cSQL)
+    cSQL_FINAL = Trim(cSql)
     
     ' Lógica de espelhamento: Se não começa com DELETE, mas tem FROM, reconstrói
     If UCase(Left(cSQL_FINAL, 6)) <> "DELETE" Then
