@@ -320,10 +320,11 @@ End Function
 
 Public Function LimpaTag(ByVal cCON As String) As String
     ' Remove a tag customizada para obter o path puro do arquivo
-    LimpaTag = Replace(cCON, "[VBSQLITE]", "")
-    LimpaTag = Replace(cCON, "[SQLITERC6]", "")
-    LimpaTag = Replace(cCON, "[TC6SQLITE]", "")
-    LimpaTag = Replace(cCON, "[SQLITE4VB]", "")
+    LimpaTag = cCON
+    LimpaTag = Replace(LimpaTag, "[VBSQLITE]", "")
+    LimpaTag = Replace(LimpaTag, "[SQLITERC6]", "")
+    LimpaTag = Replace(LimpaTag, "[TC6SQLITE]", "")
+    LimpaTag = Replace(LimpaTag, "[SQLITE4VB]", "")
 End Function
 
 Private Function FormataParaSQL(ByVal vValor As Variant) As String

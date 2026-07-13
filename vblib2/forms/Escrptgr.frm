@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.6#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escRPTGRP 
@@ -111,10 +111,10 @@ Private Sub Escolher_Click()
 End Sub
 
 Private Sub FilRelat()
-  Dim cSQL As String
-  cSQL = "SELECT GRP,NOME FROM rptgrp ORDER BY grp"
+  Dim cSql As String
+  cSql = "SELECT GRP,NOME FROM rptgrp ORDER BY grp"
   MontaGridUltra Grid, 2, Array(800, 4000), Array("GRP", "Nome"), _
-                 Array("grp", "nome"), zRPTARQ, cSQL
+                 Array("grp", "nome"), zRPTARQ, cSql
 End Sub
 
 Private Sub Form_Load()
@@ -142,11 +142,11 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
 
 End Sub
 Private Sub Novo_Click()
-  Dim cSQL As String
+  Dim cSql As String
   zgrp = InputBox("Digite o Codigo", "Inclusão Relatorio", "____")
   zgrp = FixStr(zgrp, "", "TRIM", 4)
-  cSQL = "select * from RPTGRP WHERE GRP='" & zgrp & "'"
-  If IncluiSQL(zRPTARQ, cSQL, 1, Array("GRP"), Array(zgrp), True, True) Then
+  cSql = "select * from RPTGRP WHERE GRP='" & zgrp & "'"
+  If IncluiSQL(zRPTARQ, cSql, 1, Array("GRP"), Array(zgrp), True, True) Then
     frmRPTGRP.Show vbModal
     FilRelat
   End If
