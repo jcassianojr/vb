@@ -74,7 +74,7 @@ Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String,
     
     
     If Not DataSet.EOF Then
-        eValue = DataSet(1)  '//ordenal 1 e nao 0 AS CAMPO DATASET("CAMPO")
+        eValue = DataSet("CAMPO")  '//dataset(1) ordenal 1 e nao 0 AS CAMPO DATASET("CAMPO")
         
         If IsNull(eValue) Then
             PegOperSQLite = eDEFAULT
@@ -139,9 +139,9 @@ Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
     
     If Not DataSet.EOF Then
         ' 3. Loop de processamento de campos, formatos e padrões
-        For i = 1 To nITEM  ''i = 0 To nITEM - 1 ordinal 1 e nao 0
+        For i = 0 To nITEM - 1
             Dim vValor As Variant
-            vValor = DataSet(i)
+            vValor = DataSet(aCAM(i))
             ' Tratamento de NULL ou Vazio usando o valor padrão (aPAD)
             If IsNull(vValor) Or vValor = "" Then
                 vValor = aPAD(i)
@@ -349,19 +349,20 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
 
     On Error GoTo Erro
 
-    nCAMPOS = UBound(aCAM) + 1
-    ReDim aRETU(nCAMPOS - 1)
-    For x = 0 To nCAMPOS - 1: aRETU(x) = "": Next x
+    nCAMPOS = UBound(aCAM)
+    ReDim aRETU(nCAMPOS + 1)
+    For x = 0 To nCAMPOS
+        aRETU(x) = ""
+    Next x
 
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
-    'Set loCursor = loConn.CreateCursor(cSQL)
     Set DataSet = loConn.OpenDataSet(cSQL)
 
     If Not DataSet.EOF Then
         While Not DataSet.EOF
-            For x = 1 To nCAMPOS  '0 To nCAMPOS - 1 ordinal inicial 1 e nao zero
+            For x = 0 To nCAMPOS
                 ' Lógica de Operações (SepSqlOpe / MathOper)
                 aOPE = SepSqlOpe(aCAM(x))
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
@@ -441,7 +442,7 @@ Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
     nSoma = 0
     While Not DataSet.EOF
         ReDim aVALORES_LINHA(UBound(aOPER))
-        For x = 1 To UBound(aOPER) '0 To UBound(aOPER)
+        For x = 0 To UBound(aOPER)
             ' Se não for operador, extrai o valor do campo do cursor
             If InStr("+-*/()", aOPER(x)) = 0 And aOPER(x) <> "" Then
                 aVALORES_LINHA(x) = DataSet(aOPER(x)) & ""
@@ -531,7 +532,7 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
     If Not DataSetORI.EOF Then
         nCAMPOS = UBound(aCAMORI)
         ReDim aVALORI(nCAMPOS)
-        For x = 1 To nCAMPOS '0 To nCAMPOS
+        For x = 0 To nCAMPOS
             aOPE = SepSqlOpe(aCAMORI(x))
             If aOPE(0) = "" Then
                 aVALORI(x) = DataSetORI(aCAMORI(x))
@@ -583,11 +584,10 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
 
         ' 4. Captura de IDs para eRETU01
         If IsArray(aIDDES) Then
-           ' Set loCurDes = loConnDes.CreateCursor(cSQLDES)
             Set DataSetDES = loConnDes.OpenDataSet(cSQLDES)
             ReDim aRETUID(UBound(aIDDES))
             For x = 0 To UBound(aIDDES)
-                'aRETUID(x) = loCurDes.Value(aIDDES(x))
+                aRETUID(x) = DataSetDES(aIDDES(x))
             Next x
             eRETU01 = aRETUID
         End If
