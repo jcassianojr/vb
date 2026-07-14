@@ -62,7 +62,15 @@ Private CurMBTitle As String
 'Public Const COLOR_INACTIVECAPTIONTEXT = 19  'Text of inactive window
 'Public Const COLOR_BTNHIGHLIGHT = 20  '3D highlight of button
 
-'Constante para pegar formato data hora do sistema
+'Constante para pegar formato data hora do sistemaPrivate Const FORMAT_MESSAGE_MAX_WIDTH_MASK  As Long = &HFF&
+Private Const FORMAT_MESSAGE_ALLOCATE_BUFFER As Long = &H100
+Private Const FORMAT_MESSAGE_IGNORE_INSERTS  As Long = &H200
+Private Const FORMAT_MESSAGE_FROM_STRING     As Long = &H400
+Private Const FORMAT_MESSAGE_FROM_HMODULE    As Long = &H800
+Private Const FORMAT_MESSAGE_FROM_SYSTEM     As Long = &H1000
+Private Const FORMAT_MESSAGE_ARGUMENT_ARRAY  As Long = &H2000
+
+
 Public Const LOCALE_SDECIMAL = &HE               '---------------------------------- AGRUPAMENTO DE DIGITOS NORMAL
 Public Const LOCALE_STHOUSAND = &HF              '----------------------------------------- SEPARADOR DECIMAL MONETÁRIO
 Public Const LOCALE_SMONDECIMALSEP = &H16        '------------------------------------------ AGRUPAMENTO DE DIGITOS MONETÁRIOS
@@ -149,11 +157,13 @@ End Enum
         ByVal cbMultiByte As Long, _
         ByVal lpWideCharStr As LongPtr, _
         ByVal cchWideChar As Long) As Long
-
+    Private Declare PtrSafe Function GetLastError Lib "kernel32" () As Long
+    Private Declare PtrSafe Function FormatMessageW Lib "kernel32.dll" (ByVal dwFlags As Long, ByRef lpSource As Any, ByVal dwMessageId As Long, ByVal dwLanguageId As Long, ByVal lpBuffer As LongPtr, ByVal nSize As Long, ByRef Arguments As Long) As Long
+     
 #Else
     ' --- BLOCO 32-BIT CLÁSSICO (VB6) ---
-    Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
-    Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
+    Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+    Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
     
     Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
     Public Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
@@ -163,14 +173,15 @@ End Enum
     Public Declare Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As Long, ByVal lpFileName As String) As Long
     Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpString As Any, ByVal lpFileName As String) As Long
     
-    Public Declare Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCType As Long, ByVal lpLCData As String, ByVal cchData As Long) As Long
-    Public Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCType As Long, ByVal lpLCData As String) As Long
+    Public Declare Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String, ByVal cchData As Long) As Long
+    Public Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String) As Long
     
     Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
     Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
-    Public Declare Function WinHelp Lib "user32" Alias "WinHelpA" (ByVal hwnd As Long, ByVal lpHelpFile As String, ByVal wCommand As Long, ByVal dwData As Long) As Long
+    Public Declare Function WinHelp Lib "user32" Alias "WinHelpA" (ByVal hWnd As Long, ByVal lpHelpFile As String, ByVal wCommand As Long, ByVal dwData As Long) As Long
     Public Declare Function MultiByteToWideChar Lib "kernel32" (ByVal CodePage As Long, ByVal dwFlags As Long, ByVal lpMultiByteStr As Long, ByVal cbMultiByte As Long, ByVal lpWideCharStr As Long, ByVal cchWideChar As Long) As Long
-
+    Private Declare Function GetLastError Lib "kernel32" () As Long
+    Private Declare Function FormatMessageW Lib "kernel32.dll" (ByVal dwFlags As Long, ByRef lpSource As Any, ByVal dwMessageId As Long, ByVal dwLanguageId As Long, ByVal lpBuffer As Long, ByVal nSize As Long, ByRef Arguments As Long) As Long
 #End If
 Public Function UTF8ToVBString(ByVal sUTF8 As String) As String
     Dim nLEN As Long
@@ -250,10 +261,10 @@ Public Function ComboLostFocus(ByRef Combo1)
 Dim strPartial
 Dim i
   With Combo1
-    If Len(.tEXT) Then
+    If Len(.Text) Then
       'Procura pelo texto digitado
-      strPartial = .tEXT
-      i = SendMessage(.hwnd, CB_FINDSTRING, -1, ByVal strPartial)
+      strPartial = .Text
+      i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
     End If
@@ -316,12 +327,12 @@ Public Function ComboChange(ByRef Combo1)
 Dim strPartial
 Dim i
 Dim strTotal
-Dim J
+Dim j
 Dim m_bEditFromCode
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .tEXT
-    i = SendMessage(.hwnd, CB_FINDSTRING, -1, _
+    strPartial = .Text
+    i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
     'Se achou, adiciona o resto do Texto
@@ -330,15 +341,15 @@ Dim m_bEditFromCode
       strTotal = .List(i)
 
       'Compute number of unmatched characters
-      J = Len(strTotal) - Len(strPartial)
-      If J <> 0 Then
+      j = Len(strTotal) - Len(strPartial)
+      If j <> 0 Then
         'Adiciona o resto da string encontrada
         m_bEditFromCode = True
-        .SelText = Right$(strTotal, J)
+        .SelText = Right$(strTotal, j)
 
         'Marca os caracteres adicionados
         .SelStart = Len(strPartial)
-        .SelLength = J
+        .SelLength = j
       End If
     End If
   End With
@@ -346,7 +357,7 @@ End Function
 
 Public Sub MoveObject(ByRef Obj As Control)
   Screen.MousePointer = vbSizeAll
-  SendMessage Obj.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 1
+  SendMessage Obj.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 1
   ReleaseCapture
   Screen.MousePointer = vbDefault
 End Sub
@@ -1008,466 +1019,6 @@ Public Function MMCase(ByVal texto As String) As String
   MMCase = Trim(sResultado)
 End Function
 
-Public Sub SayErro(Optional ByVal cERROUSO As String = "", Optional ByVal lMES As Boolean = True)
-  Dim nHANDLE As Long
-  Dim cARQ As String
-  Dim cERRO As String
-     Dim osver
-  cERRO = ""
-  On Error Resume Next
-  If Err.Number <> 0 Then
-    Screen.MousePointer = vbDefault
-    cARQ = zUSER & Format(Now, "_DDMMYYYY_HHMMSS") & ".TXT"
-
-    cERRO = " No.        : " & Err.Number & Chr(13) & Chr(10) & _
-          " Fonte      : " & Err.Source & Chr(13) & Chr(10) & _
-          " Descricao  : " & Err.Description & Chr(13) & Chr(10) & _
-          " Aplicativo : " & App.EXEName & " " & App.Major & "." & App.Minor & ". " & App.Revision & Chr(13) & Chr(10)
-    '           " Linha      : " & Erl & Chr(13) & Chr(10) & _
-
-
-                If Not IsNull(Err.LastDllError) And Err.LastDllError <> 0 Then
-    cERRO = cERRO & " DLL        : " & Err.LastDllError & Chr(13) & Chr(10)
-  End If
-  If IsObject(Screen.ActiveForm) Then
-    '' cERRO = cERRO & " Formulario : " & Screen.ActiveForm.Name
-    '' If Not IsNull(Screen.ActiveForm.HelpContextID) Then
-    ''    cERRO = cERRO & " ID         : " & Screen.ActiveForm.HelpContextID
-    '' End If
-  End If
-
-  If IsObject(Screen.ActiveControl) Then
-    ''cERRO = cERRO & " Em Uso     : " & Screen.ActiveControl
-  End If
-
-
-  'cERRO = cERRO & " Equipamento: " & MachineName & vbCrLf 'abaixo classe
-  cERRO = cERRO & " Usuario    : " & NetworkUserName & vbCrLf
-  'cERRO = cERRO & " IP         : " & GetIPAddress & vbCrLf  'abaixo classe
-  'cERRO = cERRO & " Local      : " & GetIPHostName & vbCrLf 'abaixo classe
-
-  cERRO = cERRO & " Erro       : " & cERROUSO
-  If lMES Then
-    TimedMsgBox cERRO, , , "Mensagem Sistema"  ''usuario ficavam pendurados travando registros agora com timeout
-    'Alert cERRO, "Informacao de Erro "
-  End If
-
-
-  Select Case Err.Number
-  Case -2147483647
-    cERRO = cERRO & vbCrLf & "not implemented"
-  Case -2147483646
-    cERRO = cERRO & vbCrLf & "ran out of memory"
-  Case -2147483645
-    cERRO = cERRO & vbCrLf & "one or more arguments are invalid"
-  Case -2147483644
-    cERRO = cERRO & vbCrLf & "no such interface supported"
-  Case -2147483643
-    cERRO = cERRO & vbCrLf & "invalid pointer"
-  Case -2147483642
-    cERRO = cERRO & vbCrLf & "invalid handle"
-  Case -2147483641
-    cERRO = cERRO & vbCrLf & "operation aborted"
-  Case -2147483640
-    cERRO = cERRO & vbCrLf & "unspecified error"
-  Case -2147483639
-    cERRO = cERRO & vbCrLf & "general access denied error"
-  Case -2147483638
-    cERRO = cERRO & vbCrLf & "the data necessary to complete this operation is not yet available."
-  Case -2147467263
-    cERRO = cERRO & vbCrLf & "not implemented"
-  Case -2147467262
-    cERRO = cERRO & vbCrLf & "no such interface supported"
-  Case -2147467261
-    cERRO = cERRO & vbCrLf & "invalid pointer"
-  Case -2147467260
-    cERRO = cERRO & vbCrLf & "operation aborted"
-  Case -2147467259
-    cERRO = cERRO & vbCrLf & "unspecified error"
-  Case -2147467258
-    cERRO = cERRO & vbCrLf & "thread local storage failure"
-  Case -2147467257
-    cERRO = cERRO & vbCrLf & "get shared memory allocator failure"
-  Case -2147467256
-    cERRO = cERRO & vbCrLf & "get memory allocator failure"
-  Case -2147467255
-    cERRO = cERRO & vbCrLf & "unable to initialize class cache"
-  Case -2147467254
-    cERRO = cERRO & vbCrLf & "unable to initialize rpc services"
-  Case -2147467253
-    cERRO = cERRO & vbCrLf & "cannot set thread local storage channel control"
-  Case -2147467252
-    cERRO = cERRO & vbCrLf & "could not allocate thread local storage channel control"
-  Case -2147467251
-    cERRO = cERRO & vbCrLf & "the user supplied memory allocator is unacceptable"
-  Case -2147467250
-    cERRO = cERRO & vbCrLf & "the ole service mutex already exists"
-  Case -2147467249
-    cERRO = cERRO & vbCrLf & "the ole service file mapping already exists"
-  Case -2147467248
-    cERRO = cERRO & vbCrLf & "unable to map view of file for ole service"
-  Case -2147467247
-    cERRO = cERRO & vbCrLf & "failure attempting to launch ole service"
-  Case -2147467246
-    cERRO = cERRO & vbCrLf & "there was an attempt to call coinitialize a second time while single threaded"
-  Case -2147467245
-    cERRO = cERRO & vbCrLf & "a remote activation was necessary but was not allowed"
-  Case -2147467244
-    cERRO = cERRO & vbCrLf & "a remote activation was necessary but the server name provided was invalid"
-  Case -2147467243
-    cERRO = cERRO & vbCrLf & "the class is configured to run as a security id different from the caller"
-  Case -2147467242
-    cERRO = cERRO & vbCrLf & "use of ole1 services requiring dde windows is disabled"
-  Case -2147467241
-    cERRO = cERRO & vbCrLf & "a runas specification must be \ or simply 0x80004018 -2147467240 the server process could not be started. the pathname may be incorrect."
-  Case -2147467239
-    cERRO = cERRO & vbCrLf & "the server process could not be started as the configured identity. the pathname may be incorrect or unavailable."
-  Case -2147467238
-    cERRO = cERRO & vbCrLf & "the server process could not be started because the configured identity is incorrect. check the username and password."
-  Case -2147467237
-    cERRO = cERRO & vbCrLf & "the client is not allowed to launch this server."
-  Case -2147467236
-    cERRO = cERRO & vbCrLf & "the service providing this server could not be started."
-  Case -2147467235
-    cERRO = cERRO & vbCrLf & "this computer was unable to communicate with the computer providing the server."
-  Case -2147467234
-    cERRO = cERRO & vbCrLf & "the server did not respond after being launched."
-  Case -2147467233
-    cERRO = cERRO & vbCrLf & "the registration information for this server is inconsistent or incomplete."
-  Case -2147467232
-    cERRO = cERRO & vbCrLf & "the registration information for this interface is inconsistent or incomplete."
-  Case -2147467231
-    cERRO = cERRO & vbCrLf & "the operation attempted is not supported."
-  Case -2147418113
-    cERRO = cERRO & vbCrLf & "catastrophic failure"
-  Case -2147024891
-    cERRO = cERRO & vbCrLf & "general access denied error"
-  Case -2147024890
-    cERRO = cERRO & vbCrLf & "invalid handle"
-  Case -2147024882
-    cERRO = cERRO & vbCrLf & "ran out of memory"
-  Case -2147024809
-    cERRO = cERRO & vbCrLf & "one or more arguments are invalid"
-  Case -2147217920
-    cERRO = cERRO & vbCrLf & "invalid accessor"
-  Case -2147217919
-    cERRO = cERRO & vbCrLf & "creating another row would have exceeded the total number of active rows supported by the rowset"
-  Case -2147217918
-    cERRO = cERRO & vbCrLf & "unable to write with a read-only accessor"
-  Case -2147217917
-    cERRO = cERRO & vbCrLf & "given values violate the database schema"
-  Case -2147217916
-    cERRO = cERRO & vbCrLf & "invalid row handle"
-  Case -2147217915
-    cERRO = cERRO & vbCrLf & "an object was open"
-  Case -2147217914
-    cERRO = cERRO & vbCrLf & "invalid chapter"
-  Case -2147217913
-    cERRO = cERRO & vbCrLf & "a literal value in the command could not be converted to the correct type due to a reason other than data overflow"
-  Case -2147217912
-    cERRO = cERRO & vbCrLf & "invalid binding info"
-  Case -2147217911
-    cERRO = cERRO & vbCrLf & "permission denied"
-  Case -2147217910
-    cERRO = cERRO & vbCrLf & "specified column does not contain bookmarks or chapters"
-  Case -2147217909
-    cERRO = cERRO & vbCrLf & "some cost limits were rejected"
-  Case -2147217908
-    cERRO = cERRO & vbCrLf & "no command has been set for the command object"
-  Case -2147217907
-    cERRO = cERRO & vbCrLf & "unable to find a query plan within the given cost limit"
-  Case -2147217906
-    cERRO = cERRO & vbCrLf & "invalid bookmark"
-  Case -2147217905
-    cERRO = cERRO & vbCrLf & "invalid lock mode"
-  Case -2147217904
-    cERRO = cERRO & vbCrLf & "no value given for one or more required parameters"
-  Case -2147217903
-    cERRO = cERRO & vbCrLf & "invalid column id"
-  Case -2147217902
-    cERRO = cERRO & vbCrLf & "invalid ratio"
-  Case -2147217901
-    cERRO = cERRO & vbCrLf & "invalid value"
-  Case -2147217900
-    cERRO = cERRO & vbCrLf & "the command contained one or more errors"
-  Case -2147217899
-    cERRO = cERRO & vbCrLf & "the executing command cannot be canceled"
-  Case -2147217898
-    cERRO = cERRO & vbCrLf & "the provider does not support the specified dialect"
-  Case -2147217897
-    cERRO = cERRO & vbCrLf & "a data source with the specified name already exists"
-  Case -2147217896
-    cERRO = cERRO & vbCrLf & "the rowset was built over a live data feed and cannot be restarted"
-  Case -2147217895
-    cERRO = cERRO & vbCrLf & "no key matching the described characteristics could be found within the current range"
-  Case -2147217894
-    cERRO = cERRO & vbCrLf & "ownership of this tree has been given to the provider"
-  Case -2147217893
-    cERRO = cERRO & vbCrLf & "the provider is unable to determine identity for newly inserted rows"
-  Case -2147217892
-    cERRO = cERRO & vbCrLf & "no nonzero weights specified for any goals supported, so goal was rejected; current goal was not changed"
-  Case -2147217891
-    cERRO = cERRO & vbCrLf & "requested conversion is not supported"
-  Case -2147217890
-    cERRO = cERRO & vbCrLf & "lrowsoffset would position you past either end of the rowset, regardless of the crows value specified; crowsobtained is 0"
-  Case -2147217889
-    cERRO = cERRO & vbCrLf & "information was requested for a query, and the query was not set"
-  Case -2147217888
-    cERRO = cERRO & vbCrLf & "provider called a method from irowsetnotify in the consumer and nt"
-  Case -2147217887
-    cERRO = cERRO & vbCrLf & "errors occurred"
-  Case -2147217886
-    cERRO = cERRO & vbCrLf & "a non-null controlling iunknown was specified and the object being created does not support aggregation"
-  Case -2147217885
-    cERRO = cERRO & vbCrLf & "a given hrow referred to a hard- or soft- deleted row"
-  Case -2147217884
-    cERRO = cERRO & vbCrLf & "the rowset does not support fetching backwards"
-  Case -2147217883
-    cERRO = cERRO & vbCrLf & "all hrows must be released before new ones can be obtained"
-  Case -2147217882
-    cERRO = cERRO & vbCrLf & "one of the specified storage flags was not supported"
-  Case -2147217881
-    cERRO = cERRO & vbCrLf & "the comparison operator was invalid"
-  Case -2147217880
-    cERRO = cERRO & vbCrLf & "the specified status flag was neither dbcolumnstatus_ok nor dbcolumnstatus_isnull"
-  Case -2147217879
-    cERRO = cERRO & vbCrLf & "the rowset cannot scroll backwards"
-  Case -2147217878
-    cERRO = cERRO & vbCrLf & "invalid region handle"
-  Case -2147217877
-    cERRO = cERRO & vbCrLf & "the specified set of rows was not contiguous to or overlapping the rows in the specified watch region"
-  Case -2147217876
-    cERRO = cERRO & vbCrLf & "a transition from all* to move* or extend* was specified"
-  Case -2147217875
-    cERRO = cERRO & vbCrLf & "the specified region is not a proper subregion of the region identified by the given watch region handle"
-  Case -2147217874
-    cERRO = cERRO & vbCrLf & "the provider does not support multi-statement commands"
-  Case -2147217873
-    cERRO = cERRO & vbCrLf & "a specified value violated the integrity constraints for a column or table"
-  Case -2147217872
-    cERRO = cERRO & vbCrLf & "the given type name was unrecognized"
-  Case -2147217871
-    cERRO = cERRO & vbCrLf & "execution aborted because a resource limit has been reached; no results have been returned"
-  Case -2147217870
-    cERRO = cERRO & vbCrLf & "cannot clone a command object whose command tree contains a rowset or rowsets"
-  Case -2147217869
-    cERRO = cERRO & vbCrLf & "cannot represent the current tree as text"
-  Case -2147217868
-    cERRO = cERRO & vbCrLf & "the specified index already exists"
-  Case -2147217867
-    cERRO = cERRO & vbCrLf & "the specified index does not exist"
-  Case -2147217866
-    cERRO = cERRO & vbCrLf & "the specified index was in use"
-  Case -2147217865
-    cERRO = cERRO & vbCrLf & "the specified table does not exist"
-  Case -2147217864
-    cERRO = cERRO & vbCrLf & "the rowset was using optimistic concurrency and the value of a column has been changed since it was last read"
-  Case -2147217863
-    cERRO = cERRO & vbCrLf & "errors were detected during the copy"
-  Case -2147217862
-    cERRO = cERRO & vbCrLf & "a specified precision was invalid"
-  Case -2147217861
-    cERRO = cERRO & vbCrLf & "a specified scale was invalid"
-  Case -2147217860
-    cERRO = cERRO & vbCrLf & "invalid table id"
-  Case -2147217859
-    cERRO = cERRO & vbCrLf & "a specified type was invalid"
-  Case -2147217858
-    cERRO = cERRO & vbCrLf & "a column id was occurred more than once in the specification"
-  Case -2147217857
-    cERRO = cERRO & vbCrLf & "the specified table already exists"
-  Case -2147217856
-    cERRO = cERRO & vbCrLf & "the specified table was in use"
-  Case -2147217855
-    cERRO = cERRO & vbCrLf & "the specified locale id was not supported"
-  Case -2147217854
-    cERRO = cERRO & vbCrLf & "the specified record number is invalid"
-  Case -2147217853
-    cERRO = cERRO & vbCrLf & "although the bookmark was validly formed, no row could be found to match it"
-  Case -2147217852
-    cERRO = cERRO & vbCrLf & "the value of a property was invalid"
-  Case -2147217851
-    cERRO = cERRO & vbCrLf & "the rowset was not chaptered"
-  Case -2147217850
-    cERRO = cERRO & vbCrLf & "invalid accessor"
-  Case -2147217849
-    cERRO = cERRO & vbCrLf & "invalid storage flags"
-  Case -2147217848
-    cERRO = cERRO & vbCrLf & "by-ref accessors are not supported by this provider"
-  Case -2147217847
-    cERRO = cERRO & vbCrLf & "null accessors are not supported by this provider"
-  Case -2147217846
-    cERRO = cERRO & vbCrLf & "the command was not prepared"
-  Case -2147217845
-    cERRO = cERRO & vbCrLf & "the specified accessor was not a parameter accessor"
-  Case -2147217844
-    cERRO = cERRO & vbCrLf & "the given accessor was write-only"
-  Case -2147217843
-    cERRO = cERRO & vbCrLf & "authentication failed"
-  Case -2147217842
-    cERRO = cERRO & vbCrLf & "the change was canceled during notification; no columns are changed"
-  Case -2147217841
-    cERRO = cERRO & vbCrLf & "the rowset was single-chaptered and the chapter was not released"
-  Case -2147217840
-    cERRO = cERRO & vbCrLf & "invalid source handle"
-  Case -2147217839
-    cERRO = cERRO & vbCrLf & "the provider cannot derive parameter info and setparameterinfo has not been called"
-  Case -2147217838
-    cERRO = cERRO & vbCrLf & "the data source object is already initialized"
-  Case -2147217837
-    cERRO = cERRO & vbCrLf & "the provider does not support this method"
-  Case -2147217836
-    cERRO = cERRO & vbCrLf & "the number of rows with pending changes has exceeded the set limit"
-  Case -2147217835
-    cERRO = cERRO & vbCrLf & "the specified column did not exist"
-  Case -2147217834
-    cERRO = cERRO & vbCrLf & "there are pending changes on a row with a reference count of zero"
-  Case -2147217833
-    cERRO = cERRO & vbCrLf & "a literal value in the command overflowed the range of the type of the associated column"
-  Case -2147217832
-    cERRO = cERRO & vbCrLf & "the supplied hresult was invalid"
-  Case -2147217831
-    cERRO = cERRO & vbCrLf & "the supplied lookupid was invalid"
-  Case -2147217830
-    cERRO = cERRO & vbCrLf & "the supplied dynamicerrorid was invalid"
-  Case -2147217829
-    cERRO = cERRO & vbCrLf & "unable to get visible data for a newly-inserted row that has not yet been updated"
-  Case -2147217828
-    cERRO = cERRO & vbCrLf & "invalid conversion flag"
-  Case -2147217827
-    cERRO = cERRO & vbCrLf & "the given parameter name was unrecognized"
-  Case -2147217826
-    cERRO = cERRO & vbCrLf & "multiple storage objects can not be open simultaneously"
-  Case -2147217825
-    cERRO = cERRO & vbCrLf & "the requested filter could not be opened"
-  Case -2147217824
-    cERRO = cERRO & vbCrLf & "the requested order could not be opened"
-  Case -2147217823
-    cERRO = cERRO & vbCrLf & "bad tuple"
-  Case -2147217822
-    cERRO = cERRO & vbCrLf & "bad coordinate"
-  Case -2147217821
-    cERRO = cERRO & vbCrLf & "the given axis was not valid for this dataset"
-  Case -2147217820
-    cERRO = cERRO & vbCrLf & "one or more of the given cell ordinals was invalid"
-  Case -2147217819
-    cERRO = cERRO & vbCrLf & "the supplied columnid was invalid"
-  Case -2147217817
-    cERRO = cERRO & vbCrLf & "the supplied command does not have a dbid"
-  Case -2147217816
-    cERRO = cERRO & vbCrLf & "the supplied dbid already exists"
-  Case -2147217815
-    cERRO = cERRO & vbCrLf & "the maximum number of sessions supported by the provider has already been created. the consumer must release one or more currently held sessions before obtaining a new session object"
-  Case -2147217806
-    cERRO = cERRO & vbCrLf & "the index id is invalid"
-  Case -2147217805
-    cERRO = cERRO & vbCrLf & "the initialization string does not conform to specification"
-  Case -2147217804
-    cERRO = cERRO & vbCrLf & "the ole db root enumerator did not return any providers that matched an of the sources_types requested"
-  Case -2147217803
-    cERRO = cERRO & vbCrLf & "the initialization string specifies a provider which does not match the currently active provider."
-  Case -2147217802
-    cERRO = cERRO & vbCrLf & "the specified dbid is invalid"
-  Case -2147217814
-    cERRO = cERRO & vbCrLf & "invalid trustee value"
-  Case -2147217813
-    cERRO = cERRO & vbCrLf & "the trustee is not for the current data source"
-  Case -2147217812
-    cERRO = cERRO & vbCrLf & "the trustee does not support memberships/ collections"
-  Case -2147217811
-    cERRO = cERRO & vbCrLf & "the object is invalid or unknown to the provider"
-  Case -2147217810
-    cERRO = cERRO & vbCrLf & "no owner exists for the object"
-  Case -2147217809
-    cERRO = cERRO & vbCrLf & "the access entry list supplied is invalid"
-  Case -2147217808
-    cERRO = cERRO & vbCrLf & "the trustee supplied as owner is invalid or unknown to the provider"
-  Case -2147217807
-    cERRO = cERRO & vbCrLf & "the permission supplied in the access entry list is invalid"
-  Case -2147217801
-    cERRO = cERRO & vbCrLf & "the constrainttype was invalid or not supported by the provider."
-  Case -2147217800
-    cERRO = cERRO & vbCrLf & "the constrainttype was not constrainttype_foreignkey and cforeignkeycolumns was not zero"
-  Case -2147217799
-    cERRO = cERRO & vbCrLf & "the deferrability was invalid or the value was not supported by the provider"
-  Case -2147217792
-    cERRO = cERRO & vbCrLf & "the matchtype was invalid or the value was not supported by the provider"
-  Case -2147217782
-    cERRO = cERRO & vbCrLf & "the updaterule or deleterule was invalid or the value was not supported by the provider"
-  Case -2147217781
-    cERRO = cERRO & vbCrLf & "the pconstraintid did not exist in the data source"
-  Case -2147217780
-    cERRO = cERRO & vbCrLf & "the dwflags was invalid"
-  Case -2147217779
-    cERRO = cERRO & vbCrLf & "the rguidcolumntype pointed to a guid that does not match the object type of this column or this column was not set"
-  Case -2147217778
-    cERRO = cERRO & vbCrLf & "the requested url was out-of-scope"
-  Case -2147217776
-    cERRO = cERRO & vbCrLf & "the provider could not drop the object"
-  Case -2147217775
-    cERRO = cERRO & vbCrLf & "there is no source row"
-  Case -2147217774
-    cERRO = cERRO & vbCrLf & "the ole db object represented by this url is locked by one or more other processes"
-  Case -2147217773
-    cERRO = cERRO & vbCrLf & "the client requested an object type that is only valid for a collection"
-  Case -2147217772
-    cERRO = cERRO & vbCrLf & "the caller requested write access to a read-only object"
-  Case -2147217771
-    cERRO = cERRO & vbCrLf & "the provider could not connect to the server for this object"
-  Case -2147217770
-    cERRO = cERRO & vbCrLf & "the provider could not connect to the server for this object"
-  Case -2147217769
-    cERRO = cERRO & vbCrLf & "the attempt to bind to the object timed out"
-  Case -2147217768
-    cERRO = cERRO & vbCrLf & "the provider was unable to create an object at this url because an object named by this url already exists"
-  Case -2147217767
-    cERRO = cERRO & vbCrLf & "the provider could not drop the object"
-  Case -2147217766
-    cERRO = cERRO & vbCrLf & "the provider was unable to create an object at this url because the server was out of physical storage"
-  End Select
-
- cERRO = cERRO & vbCrLf & infosistema
-
- '' Set oSVER = New clsOSInfo
- '' With oSVER
-  ''  cERRO = cERRO & vbCrLf & "IP         : " & .IPAddress
-  ''  cERRO = cERRO & vbCrLf & "Local      : " & .IPHostName
-  ''  cERRO = cERRO & vbCrLf & "Equipamento: " & .MachineName
-  ''  cERRO = cERRO & vbCrLf & "Usuario    : " & .UserName
-  ''  cERRO = cERRO & vbCrLf & "OS Name    : " & .OSName
-  ''  cERRO = cERRO & vbCrLf & "Service Pack ver.: " & .SPVer
-  ''  cERRO = cERRO & vbCrLf & "Bitness    : " & .Bitness
-  ''  cERRO = cERRO & vbCrLf & "Edition    : " & .Edition
-  ''  cERRO = cERRO & vbCrLf & "Family     : " & .Family
- ''   cERRO = cERRO & vbCrLf & "Suite mask : " & .SuiteMask
-''    cERRO = cERRO & vbCrLf & "ProductType: " & .ProductType
-''    cERRO = cERRO & vbCrLf & "OS - Vista or newer? " & .IsVistaOrLater
-''    cERRO = cERRO & vbCrLf & "Major      : " & .Major
- ''   cERRO = cERRO & vbCrLf & "Minor      : " & .Minor
- ''   cERRO = cERRO & vbCrLf & "Major + Minor: " & .MajorMinor
-''    cERRO = cERRO & vbCrLf & "Build: " & .Build
-''    cERRO = cERRO & vbCrLf & "ReleaseId: " & .ReleaseId
-''    cERRO = cERRO & vbCrLf & "Language in dialogues: " & .LangDisplayCode & " " & .LangDisplayName & " " & .LangDisplayNameFull
-''    cERRO = cERRO & vbCrLf & "Language of OS inslallation: " & .LangSystemCode & " " & .LangSystemName & " " & .LangSystemNameFull
-''    cERRO = cERRO & vbCrLf & "Language for non-Unicode programs: " & .LangNonUnicodeCode & " " & .LangNonUnicodeName & " " & .LangNonUnicodeNameFull
- ''   cERRO = cERRO & vbCrLf & "Process integrity level: " & .IntegrityLevel
- ''   cERRO = cERRO & vbCrLf & "Elevated process? " & .IsElevated
- ''   cERRO = cERRO & vbCrLf & "User group: " & .UserType
- ''   cERRO = cERRO & vbCrLf & "Safe boot? " & .IsSafeBoot & " (" & .SafeBootMode & ")"
-''    cERRO = cERRO & vbCrLf & "OEM Codepage: " & .CodepageOEM & " (" & .CodepageOEM_File & ")"
-''    cERRO = cERRO & vbCrLf & "ANSI Codepage: " & .CodepageANSI & " (" & .CodepageANSI_File & ")"
-    
- '' End With
-  
-
-
-  nHANDLE = FreeFile
-  Open cARQ For Output As #nHANDLE
-  Print #nHANDLE, cERRO
-  Close (nHANDLE)
-
-End If
-End Sub
 
 Public Function infosistema()
 Dim osver As clsOSInfo
@@ -2041,7 +1592,7 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
   End If
 End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
@@ -2781,12 +2332,12 @@ Public Function MachineName() As String
     End If
     Set oShell = Nothing
 End Function
-Public Function WordLen(ByRef tEXT As String) As Long
+Public Function WordLen(ByRef Text As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
+  Bytes = StrConv(UCase$(Text), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next
@@ -2863,7 +2414,7 @@ Public Function TimedMsgBox(Prompt As String, Optional ByVal TimeOut As Long = 0
 
 End Function
 
-Private Sub TimeOutMB(hwnd As Long, uMsg As Long, idEvent As Long, dwTime As Long)
+Private Sub TimeOutMB(hWnd As Long, uMsg As Long, idEvent As Long, dwTime As Long)
 
   SendMessage FindWindow(vbNullString, CurMBTitle), WM_CLOSE, 0&, 0&
 
@@ -3275,6 +2826,50 @@ TrataErro:
     txttoxls = False
     Resume Fim
 End Function
+
+' --- Função de suporte para tradução ---
+Private Function WinApiError_ToStr(ByVal MessageID As Long) As String
+    Dim l As Long, s As String
+    s = Space(1024)
+    l = FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM Or FORMAT_MESSAGE_IGNORE_INSERTS, 0&, MessageID, 0&, StrPtr(s), Len(s), ByVal 0&)
+    If l Then WinApiError_ToStr = Left$(s, l)
+End Function
+
+' --- Sub-rotina Principal Aprimorada ---
+Public Sub SayErro(Optional ByVal cERROUSO As String = "", Optional ByVal lMES As Boolean = True)
+    Dim nHANDLE As Long, cARQ As String, cERRO As String
+    
+    If Err.Number = 0 Then Exit Sub
+    
+    Screen.MousePointer = vbDefault
+    cARQ = zUSER & Format(Now, "_DDMMYYYY_HHMMSS") & ".TXT"
+
+    ' Construção do log
+    cERRO = "No.        : " & Err.Number & vbCrLf & _
+            "Fonte      : " & Err.Source & vbCrLf & _
+            "Descricao  : " & Err.Description & vbCrLf & _
+            "Aplicativo : " & App.EXEName & " " & App.Major & "." & App.Minor & "." & App.Revision & vbCrLf
+    
+    If Err.LastDllError <> 0 Then
+        cERRO = cERRO & "DLL Error  : " & Err.LastDllError & " - " & WinApiError_ToStr(Err.LastDllError) & vbCrLf
+    End If
+    
+    cERRO = cERRO & "Usuario    : " & NetworkUserName & vbCrLf & _
+            "Erro Extra : " & cERROUSO & vbCrLf & _
+            "Detalhe    : " & WinApiError_ToStr(Err.Number) & vbCrLf & _
+            "Info Sist  : " & infosistema
+
+    ' Exibição
+    If lMES Then
+        TimedMsgBox cERRO, , , "Mensagem Sistema"
+    End If
+
+    ' Gravação do Arquivo
+    nHANDLE = FreeFile
+    Open cARQ For Output As #nHANDLE
+    Print #nHANDLE, cERRO
+    Close #nHANDLE
+End Sub
 
 
 'Public Function MachineName() As String
