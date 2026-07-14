@@ -1006,16 +1006,21 @@ Public Function ADORsStatus(ByRef eSTATUS) As String
 
 End Function
 
-Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String = "")
-  Dim errorObject As ADODB.Error
-  For Each errorObject In oErro
-    cERRO = cERRO & " Ado Erro Numero: " & errorObject.Number & vbCrLf
-    cERRO = cERRO & " Ado Descricao  : " & errorObject.Description & vbCrLf
-    cERRO = cERRO & " Ado Fonte      : " & errorObject.Source & vbCrLf
-    cERRO = cERRO & " Ado SQL        : " & errorObject.SQLState & vbCrLf
-    cERRO = cERRO & " Ado Erro Nativo: " & errorObject.NativeError & vbCrLf
-  Next
-  SayErro cERRO, True
+Public Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String = "")
+    Dim errorObject As ADODB.Error
+    
+    For Each errorObject In oErro
+        cERRO = cERRO & "--- Erro ADO ---" & vbCrLf & _
+                "Número     : " & errorObject.Number & vbCrLf & _
+                "Descrição  : " & errorObject.Description & vbCrLf & _
+                "Fonte      : " & errorObject.Source & vbCrLf & _
+                "SQLState   : " & errorObject.SQLState & vbCrLf & _
+                "Erro Nativo: " & errorObject.NativeError & vbCrLf & _
+                "Trad. Nativa: " & WinApiError_ToStr(errorObject.NativeError) & vbCrLf & vbCrLf
+    Next
+    
+    ' Chama a função SayErro que já está configurada para exibir o log
+    SayErro cERRO, True
 End Function
 
 Public Function ADO_IsRecordsetEmpty(ByRef oRS As ADODB.Recordset) As Boolean
@@ -1076,12 +1081,12 @@ TrataErro:
   Exit Function
 End Function
 
-Public Sub ADO_FreeRecordset(ByRef rs As ADODB.Recordset)
+Public Sub ADO_FreeRecordset(ByRef RS As ADODB.Recordset)
   On Error Resume Next
-  If rs.State = adStateOpen Then
-    rs.Close
+  If RS.State = adStateOpen Then
+    RS.Close
   End If
-  Set rs = Nothing
+  Set RS = Nothing
   On Error GoTo 0
 End Sub
 

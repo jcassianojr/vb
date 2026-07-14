@@ -617,27 +617,6 @@ Public Function Dividir(ByVal nVAL As Variant, ByVal nDIV As Variant)
   End If
   
 End Function
-'Public Function Dividir(ByVal n1 As Variant, ByVal n2 As Variant) As Double
-    ' 1. Tratamento preventivo:
-    ' Se n1 ou n2 não forem números, o RC6 trata de forma limpa.
-    ' Evita o erro de divisão por zero ou erro de tipo em 64-bits.
-    
- '   Dim d1 As Double, d2 As Double
-    
-    ' O New_c.Val garante a conversão correta independente do idioma
-    ' (ponto vs vírgula) e da arquitetura (32/64).
-  '  d1 = New_c.Val(n1)
-   ' d2 = New_c.Val(n2)
-    
-    ' 2. Lógica de segurança de divisão
-    'If d2 <> 0 Then
-     '   Dividir = d1 / d2
-    'Else
-     '   Dividir = 0 ' Ou trate o erro da forma que seu sistema exige
-    'End If
-'End Function
-
-
 Public Function FileConnExist(ByVal cARQ As Variant, _
                           Optional ByVal lMES As Boolean = False, _
                           Optional ByVal cMes As String = "Arquivo Não Encontrado ", _
@@ -655,12 +634,15 @@ Public Function FileConnExist(ByVal cARQ As Variant, _
 
   If InStr(cARQUIVO, "[") > 0 Then
      
-    If InStr(cARQUIVO, "[JET") > 0 Or InStr(cARQUIVO, "SQLITE") > 0 Or InStr(cARQUIVO, "[ACCDB") > 0 Then
+    If InStr(cARQUIVO, "[JET") > 0 Or EArquivofirebird(cARQUIVO) Or EArquivoSQLite(cARQUIVO) Or InStr(cARQUIVO, "[ACCDB") > 0 Then
       cARQUIVO = Replace(cARQUIVO, "[JET", "")
       cARQUIVO = Replace(cARQUIVO, "[SQLITE]", "")
       cARQUIVO = Replace(cARQUIVO, "[VBSQLITE]", "")
       cARQUIVO = Replace(cARQUIVO, "[SQLITERC6]", "")
       cARQUIVO = Replace(cARQUIVO, "[TC6SQLITE]", "")
+      cARQUIVO = Replace(cARQUIVO, "[ADORC6]", "")
+      cARQUIVO = Replace(cARQUIVO, "[FIREBIRD]", "")
+      cARQUIVO = Replace(cARQUIVO, "[SQLITE4VB]", "")
       cARQUIVO = Replace(cARQUIVO, "[ACCDB", "")
       cARQUIVO = Replace(cARQUIVO, "MDB]", "")
       cARQUIVO = Replace(cARQUIVO, "]", "")
@@ -832,13 +814,6 @@ errhandler:
   Resume Next
 End Function
 
-'Public Function INCDEC(ByVal eVAR, ByVal nVAL, ByVal nLIMINF, ByVal nLIMSUP)
-'  INCDEC = FixNum(eVAR)
-'  INCDEC = INCDEC + nVAL
-'  If INCDEC < nLIMINF Then INCDEC = nLIMINF
-'  If INCDEC > nLIMSUP Then INCDEC = nLIMSUP
-'End Function
-' Mantemos exatamente a mesma assinatura, preservando os parâmetros que você já usa
 Public Function INCDEC(ByRef vValor As Variant, ByVal nIncremento As Variant, Optional ByVal nLimiteMax As Variant, Optional ByVal nLimiteMin As Variant) As Variant
     
     ' 1. Validação estrita usando sua FixNum (que você já confia)
@@ -1100,79 +1075,42 @@ End Function
 
 
 
-Public Function ShellEx( _
-       ByVal sFile As String, _
-       Optional ByVal eShowCmd As EShellShowConstants = essSW_SHOWDEFAULT, _
-       Optional ByVal sParameters As String = "", _
-       Optional ByVal sDefaultDir As String = "", _
-       Optional sOperation As String = "open", _
-       Optional Owner As Long = 0 _
-     ) As Boolean
-  Dim lr As Long
-  Dim lErr As Long
-  Dim sErr As String
-  If (InStr(UCase$(sFile), ".EXE") <> 0) Then
-    eShowCmd = 0
-  End If
-  On Error Resume Next
-  If (sParameters = "") And (sDefaultDir = "") Then
-    lr = ShellExecuteForExplore(Owner, sOperation, sFile, 0, 0, essSW_SHOWNORMAL)
-  Else
-    lr = ShellExecute(Owner, sOperation, sFile, sParameters, sDefaultDir, eShowCmd)
-  End If
-  If (lr < 0) Or (lr > 32) Then
-    ShellEx = True
-  Else
-    ' raise an appropriate error:
-    lErr = vbObjectError + 1048 + lr
-    Select Case lr
-    Case 0
-      lErr = 7: sErr = "Sem Memoria"
-  '  Case ERROR  'ERROR_FILE_NOT_FOUND
-  '    lErr = 53: sErr = "Arquivo nao encontrado"
-  '  Case ERROR_PATH_NOT_FOUND
-  '    lErr = 76: sErr = "Caminho nao encontrado"
-  '  Case ERROR_BAD_FORMAT
-  '    sErr = "Executavel invalido ou corrompido"
-    Case SE_ERR_ACCESSDENIED
-      lErr = 75: sErr = "Caminho ou arquivo sem acesso "
-    Case SE_ERR_ASSOCINCOMPLETE
-      sErr = "Executavel nao associado a esta extensao."
-    Case SE_ERR_DDEBUSY
-      lErr = 285: sErr = "O Executavel nao pode ser aberto no momento, tente outra vez."
-    Case SE_ERR_DDEFAIL
-      lErr = 285: sErr = "Falha na transacao DDE, tente outra vez."
-    Case SE_ERR_DDETIMEOUT
-      lErr = 286: sErr = "Tempo esgotado, tente outra vez."
-    Case SE_ERR_DLLNOTFOUND
-      lErr = 48: sErr = "Biblioteca nao encotrada."
-    Case SE_ERR_FNF
-      lErr = 53: sErr = "Arquivo nao encontrado"
-    Case SE_ERR_NOASSOC
-      sErr = "Executavel nao associado a esta extensao."
-    Case SE_ERR_OOM
-      lErr = 7: sErr = "Sem memoria"
-    Case SE_ERR_PNF
-      lErr = 76: sErr = "Caminho nao encontrado"
-    Case SE_ERR_SHARE
-      lErr = 75: sErr = "Violacao de Acesso."
-    Case Else
-      sErr = "Erro nao especificado."
-    End Select
-
-  '  Err.Raise lErr, , App.EXEName & ".GShell", sErr
-    ShellEx = False
-  End If
-
+Public Function ShellEx(ByVal sFile As String, _
+                        Optional ByVal eShowCmd As EShellShowConstants = essSW_SHOWDEFAULT, _
+                        Optional ByVal sParameters As String = "", _
+                        Optional ByVal sDefaultDir As String = "", _
+                        Optional sOperation As String = "open", _
+                        Optional Owner As Long = 0) As Boolean
+    
+    Dim lr As Long
+    
+    If (InStr(UCase$(sFile), ".EXE") <> 0) Then eShowCmd = 0
+    
+    ' Execução da chamada
+    If (sParameters = "") And (sDefaultDir = "") Then
+        lr = ShellExecuteForExplore(Owner, sOperation, sFile, 0, 0, essSW_SHOWNORMAL)
+    Else
+        lr = ShellExecute(Owner, sOperation, sFile, sParameters, sDefaultDir, eShowCmd)
+    End If
+    
+    ' Validação do resultado
+    If (lr > 32) Then
+        ShellEx = True
+    Else
+        ' Se lr <= 32, houve um erro.
+        ' Usamos a API para traduzir o código de erro retornado pelo Windows.
+        Dim sMsg As String
+        sMsg = "Erro ao executar arquivo: " & sFile & vbCrLf & _
+               "Código: " & lr & vbCrLf & _
+               "Descrição: " & WinApiError_ToStr(lr)
+               
+        ' Opcional: Você pode chamar sua nova SayErro aqui ou apenas um MsgBox
+        MsgBox sMsg, vbCritical, "Erro de Execução"
+        
+        ShellEx = False
+    End If
 End Function
 
-'Public Function SomaArr(ByVal aARRAY As Variant, ByVal nITEM As Integer)
-'  Dim x As Integer
-'  SomaArr = 0
-'  For x = 0 To nITEM - 1
-'    SomaArr = SomaArr + FixNum(aARRAY(x))
-'  Next x
-'End Function
 Public Function SomaArr(ByRef vArray As Variant)
     ' 1. Verificação de segurança: checa se é um array antes de iterar
     If Not IsArray(vArray) Then Exit Function
@@ -1222,21 +1160,6 @@ Function Convert2oem(ByVal in_string As String) As String
   t = CharToOem(in_string, Out_String)
   Convert2oem = Out_String
 End Function
-'Public Function ConvOEM(ByVal cTEXTO As String) As String
-'  ConvOEM = Convert2oem(cTEXTO)
-'End Function
-
-'Public Function ConvOEM2(ByVal cTEXTO As String) As String
-'  ConvOEM2 = Convert2oem(cTEXTO)
-'End Function
-
-'Public Function ConvAnsi2(ByVal cTEXTO As String) As String
-'  ConvAnsi2 = Convert2ansi(cTEXTO)
-'End Function
-
-'Public Function ConvAnsi(ByVal texto As String) As String
-'  ConvAnsi = Convert2ansi(texto)
-'End Function
 Public Function Tirace(ByVal texto As String) As String
   Tirace = tirace2(texto)
 End Function
@@ -1877,38 +1800,6 @@ TrataErro:
     Count_Lines_In_File = 0
     Resume Fim
 End Function
-'Public Function Count_Lines_In_File_old(ByVal strFilePath As String, Optional ByVal lMES As Boolean = True) As Long
-
-'     'delcare variables
-'  Dim fileFile As Integer
-'  Dim intLinesReadCount As Integer
-'  Dim STRBUFFER As String
-
-'  intLinesReadCount = 0
-  '     'open file
-'  fileFile = FreeFile
-
-
- ' If Not FileConnExist(strFilePath, lMES) Then
- '   Count_Lines_In_File = -1
- '   Exit Function
- ' End If
-
-  'loop through file
-  'Open strFilePath For Input As #fileFile
-
-
-  'Do While Not EOF(fileFile)
-    'read line
-   ' Input #fileFile, STRBUFFER
-    'update count
-    'intLinesReadCount = intLinesReadCount + 1
-  'Loop
-  'close file
-  'Close fileFile
-  'return value
-  'Count_Lines_In_File = intLinesReadCount
-'End Function
 ' +--------------------------------------------------------------------
 ' +  Função: Count_Lines_In_File
 ' +  Objetivo: Conta linhas em arquivos Gigantescos usando a técnica do
@@ -2035,9 +1926,6 @@ TrataErro:
     If nFile > 0 Then Close #nFile
     Count_Lines_In_Filev2 = 0
 End Function
-'Public Sub OpenUrl(ByVal strURL As String)
-'  ShellExecute 0, "Open", strURL, 0&, 0&, SW_SHOWNORMAL
-'End Sub
 
 Public Sub OpenUrl(ByVal strURL As String)
     ' 1. Valida se começa com http/https, se não, pode não abrir
@@ -2114,80 +2002,6 @@ TrataErro:
     Alert "Erro na rotina de geração do PDF: " & Err.Description
     Resume Fim
 End Function
-'Public Function txttohtml_old(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "")
-'  Dim nORIGEM As Integer
-'  Dim nDESTINO As Integer
-'  Dim STRBUFFER
-'  Dim cLINHA As String
-'  If Not FileConnExist(cORIGEM, True) Then
-'    Exit Function
-'  End If
-'  If Len(cDESTINO) = 0 Then
-'    cDESTINO = TrocaExt(cORIGEM, "HTML")
-'  End If
-'  If FileConnExist(cDESTINO, False) Then
-'    Alert ("Arquivo Destino Ja existe")
-'    Exit Function
-'  End If
-'  If Len(cAUTOR) = 0 Then
-'    cAUTOR = zNOMEFOLHA
-'  End If
-'  If Len(cTITULO) = 0 Then
-'    cTITULO = NomeArq(cORIGEM, True)
-'  End If
-'  nORIGEM = FreeFile
-'  nDESTINO = FreeFile + 1
-'  Open cDESTINO For Output As #nDESTINO
-'  Open cORIGEM For Input As #nORIGEM
-'  Print #nDESTINO, "<html>" & Chr(13) & Chr(10)
-'  Print #nDESTINO, "<head>" & Chr(13) & Chr(10)
-'  Print #nDESTINO, "<meta http-equiv=" & Chr(34) & "Content-Type" & Chr(34) & Chr(13) & Chr(10)
-'  Print #nDESTINO, "content=" & Chr(34) & "text/html; charset=iso-8859-1" & Chr(34) & ">" & Chr(13) & Chr(10)
-'  Print #nDESTINO, "<meta name=" & Chr(34) & "GENERATOR" & Chr(34) & "content=" & Chr(34) & cAUTOR & Chr(34) & ">" & Chr(13) & Chr(10)
-'  Print #nDESTINO, "<title>" & cTITULO & "</title>" & Chr(13) & Chr(10)
-'  Print #nDESTINO, "</head>" & Chr(13) & Chr(10)
-'  Print #nDESTINO, "<body>" & Chr(13) & Chr(10)
-'  Do While Not EOF(nORIGEM)
-'    Input #nORIGEM, STRBUFFER
-'    cLINHA = STRBUFFER
-'    cLINHA = str2html(cLINHA)
-'    Print #nDESTINO, cLINHA & "<BR>"
-'  Loop
-'  Print #nDESTINO, "</body>" & Chr(13) & Chr(10) & "</html>" & Chr(13) & Chr(10)
-'  Close nORIGEM
-'  Close nDESTINO
-'End Function
-
-'Public Function txttoRTF_old(ByVal cORIGEM As String, Optional ByVal cDESTINO As String = "")
-'  Dim nORIGEM As Integer
-'  Dim nDESTINO As Integer
-'  Dim STRBUFFER
-'  Dim cLINHA As String
-'  If Not FileConnExist(cORIGEM, True) Then
-'    Exit Function
-'  End If
-'  If Len(cDESTINO) = 0 Then
-'    cDESTINO = TrocaExt(cORIGEM, "RTF")
-'  End If
-'  If FileConnExist(cDESTINO, False) Then
-'    Alert ("Arquivo Destino Ja existe")
-'    Exit Function
-'  End If
-'  nORIGEM = FreeFile
-'  nDESTINO = FreeFile + 1
-'  Open cDESTINO For Output As #nDESTINO
-'  Open cORIGEM For Input As #nORIGEM
-'  Print #nDESTINO, "{\rtf1\ansi\ansicpg1252\deff0\deflang1031{\fonttbl{\f0\fnil\fcharset0 "
-'  Print #nDESTINO, "Arial;}}\viewkind4\uc1\pard\f0\fs20 "
-'  Do While Not EOF(nORIGEM)
-'    Input #nORIGEM, STRBUFFER
-'    cLINHA = STRBUFFER
-'    Print #nDESTINO, cLINHA & "\par" & Chr(13)
-'  Loop
-'  Print #nDESTINO, "\par}"
-'  Close nORIGEM
-'  Close nDESTINO
-'End Function
 Public Function CharCodesToHTML(ByVal iString As String) As String
   Dim iXml As New MSXML2.DOMDocument60
 
@@ -2828,7 +2642,7 @@ TrataErro:
 End Function
 
 ' --- Função de suporte para tradução ---
-Private Function WinApiError_ToStr(ByVal MessageID As Long) As String
+Public Function WinApiError_ToStr(ByVal MessageID As Long) As String
     Dim l As Long, s As String
     s = Space(1024)
     l = FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM Or FORMAT_MESSAGE_IGNORE_INSERTS, 0&, MessageID, 0&, StrPtr(s), Len(s), ByVal 0&)

@@ -321,7 +321,7 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
   Dim aOPE As Variant
   Dim eVAL As Variant
   Dim cERRO As String
-  Dim cARQCON As String
+  Dim carqcon As String
 
   On Error GoTo errhandler
 
@@ -339,23 +339,16 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
   End If
 
   aARQ = TipoConn(cARQ, , , False)
-  cARQCON = aARQ(1) 'GeracArq(cARQ, , False)
+  carqcon = aARQ(1) 'GeracArq(cARQ, , False)
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open cARQCON
+  oDB.Open carqcon
   lOPEN = True
 
 
   ConfigurarConexaoADO oDB, cARQ
-  'na string de conecao delete =yes
-  'If InStr(UCase(cARQ), "VFPOLEDB") > 0 Then  ''delete on para foxpro nao usar registro deletados
-  '  VFPSetValues oDB
-  'End If
-  'If InStr(UCase(cARQ), "PGSQL") > 0 Or InStr(UCase(cARQ), "POSTGRESQL") > 0 Then
-  '  pgSetValues oDB
-  'End If
 
   Set oRS = New ADODB.Recordset
   If aARQ(2) = "SQLITE" Then
@@ -418,7 +411,7 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
-  Dim cARQCON As String
+  Dim carqcon As String
 
   On Error GoTo errhandler
 
@@ -437,12 +430,12 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
 
   aARQ = TipoConn(cARQ, , , False)
   'ARQ = GeracArq(cARQ, , False)
-  cARQCON = aARQ(1)
+  carqcon = aARQ(1)
 
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open cARQCON
+  oDB.Open carqcon
 
   'na string de conecao delete =yes
   ConfigurarConexaoADO oDB, cARQ
@@ -546,7 +539,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim lRSOP As Boolean
   Dim cERRO As String
   Dim oFIELD As ADODB.Field
-  Dim cARQCON As String
+  Dim carqcon As String
 
   On Error GoTo errhandler
   lOPEN = False
@@ -555,7 +548,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   cTABELA = NomeTableSql(cSQL)
 
   aARQ = TipoConn(cARQ)
-  cARQCON = aARQ(1)
+  carqcon = aARQ(1)
 
   If aARQ(2) = "PGSQL" Then
      cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
@@ -564,7 +557,7 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Set oDB = New ADODB.Connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
-  oDB.Open cARQCON
+  oDB.Open carqcon
  
   ConfigurarConexaoADO oDB, cARQ
   'If InStr(cARQ, "VFPOLEDB") Then
