@@ -304,12 +304,45 @@ Begin VB.Form FormIcones
       WordWrap        =   0   'False
       Style           =   1
    End
+   Begin VBCCR18.CommandButtonW CommandButtonW7 
+      Height          =   252
+      Left            =   960
+      TabIndex        =   15
+      Top             =   960
+      Width           =   372
+      _ExtentX        =   656
+      _ExtentY        =   445
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FormIcones.frx":4E06
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CmdPreviewGRID 
+      Height          =   372
+      Left            =   1560
+      TabIndex        =   16
+      Top             =   960
+      Width           =   612
+      _ExtentX        =   1080
+      _ExtentY        =   656
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "FormIcones.frx":53A0
+      WordWrap        =   0   'False
+      Style           =   1
+   End
 End
 Attribute VB_Name = "FormIcones"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Private Sub cmdCANCELAR_Click()
-
-End Sub

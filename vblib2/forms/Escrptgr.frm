@@ -1,6 +1,8 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.OCX"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.6#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escRPTGRP 
    Caption         =   "Escolha o grupo de Relatorio"
@@ -13,6 +15,12 @@ Begin VB.Form escRPTGRP
    ScaleHeight     =   6132
    ScaleWidth      =   9348
    StartUpPosition =   2  'CenterScreen
+   Begin BSPrinter.PrintPreview PrintPreview1 
+      Left            =   2640
+      Top             =   0
+      _ExtentX        =   953
+      _ExtentY        =   953
+   End
    Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5415
       Left            =   120
@@ -56,6 +64,42 @@ Begin VB.Form escRPTGRP
       Appearance      =   1
       TextAlignment   =   1
       _Version        =   393216
+   End
+   Begin VBCCR18.CommandButtonW CmdPreviewGRID 
+      Height          =   372
+      Left            =   2040
+      TabIndex        =   3
+      Top             =   0
+      Width           =   612
+      _ExtentX        =   1080
+      _ExtentY        =   656
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "Escrptgr.frx":058A
+      WordWrap        =   0   'False
+      Style           =   1
+   End
+   Begin VBCCR18.CommandButtonW CommandButtonW7 
+      Height          =   252
+      Left            =   0
+      TabIndex        =   4
+      Top             =   0
+      Width           =   372
+      _ExtentX        =   656
+      _ExtentY        =   445
+      Appearance      =   0
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      ImageListAlignment=   1
+      Alignment       =   0
+      VerticalAlignment=   0
+      Picture         =   "Escrptgr.frx":0B24
+      WordWrap        =   0   'False
+      Style           =   1
    End
 End
 Attribute VB_Name = "escRPTGRP"
@@ -111,12 +155,34 @@ Private Sub Escolher_Click()
 End Sub
 
 Private Sub FilRelat()
-  Dim cSql As String
-  cSql = "SELECT GRP,NOME FROM rptgrp ORDER BY grp"
+  Dim cSQL As String
+  cSQL = "SELECT GRP,NOME FROM rptgrp ORDER BY grp"
   MontaGridUltra Grid, 2, Array(800, 4000), Array("GRP", "Nome"), _
-                 Array("grp", "nome"), zRPTARQ, cSql
+                 Array("grp", "nome"), zRPTARQ, cSQL
 End Sub
 
+Private Sub CmdPreviewGRID_Click()
+   PrintPreview1.ShowPreview
+   'PrintPreview1.PrintGrid Grid
+End Sub
+Public Sub PrintPreview1_PrepareReport(Cancel As Boolean)
+    ' Title
+   ' Printer.FontSize = 18
+   ' Printer.FontBold = True
+   ' Printer.Print lblTitle.Caption
+   ' Printer.FontSize = 12
+   ' Printer.Print lblTitle2.Caption
+   ' Printer.Print
+   ' Printer.FontBold = False
+    
+    ' Print the grid
+    PrintPreview1.PrintGrid Grid ' (this is the only code line needed for printing the grid)
+    
+   ' Printer.Print
+   ' Printer.Print "Data published by United Nations"
+   ' Printer.FontSize = 10
+   ' Printer.Print "https://population.un.org/wpp/Download/Standard/Population/"
+End Sub
 Private Sub Form_Load()
   CenterFormToScreen Me
   zgrp = ""
@@ -142,11 +208,11 @@ Private Sub Grid_KeyPress(KeyAscii As Integer)
 
 End Sub
 Private Sub Novo_Click()
-  Dim cSql As String
+  Dim cSQL As String
   zgrp = InputBox("Digite o Codigo", "Inclusão Relatorio", "____")
   zgrp = FixStr(zgrp, "", "TRIM", 4)
-  cSql = "select * from RPTGRP WHERE GRP='" & zgrp & "'"
-  If IncluiSQL(zRPTARQ, cSql, 1, Array("GRP"), Array(zgrp), True, True) Then
+  cSQL = "select * from RPTGRP WHERE GRP='" & zgrp & "'"
+  If IncluiSQL(zRPTARQ, cSQL, 1, Array("GRP"), Array(zgrp), True, True) Then
     frmRPTGRP.Show vbModal
     FilRelat
   End If
