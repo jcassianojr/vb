@@ -1,14 +1,14 @@
 Attribute VB_Name = "SqlRC6SQLite"
 Option Explicit
-Public Function ComandoSQLITERC6(ByVal cARQ As String, ByVal cSql As String) As Boolean
+Public Function ComandoSQLITERC6(ByVal cARQ As String, ByVal cSQL As String) As Boolean
     Dim oDB As New RC6.cConnection
 
     On Error GoTo TrataErro
     ComandoSQLITERC6 = False
     
     ' Ajustes de dialeto (Mantido conforme original)
-    If InStr(cSql, "CURRENTDATETIME") > 0 Then
-          cSql = Replace(cSql, "CURRENTDATETIME", " current_timestamp ")
+    If InStr(cSQL, "CURRENTDATETIME") > 0 Then
+          cSQL = Replace(cSQL, "CURRENTDATETIME", " current_timestamp ")
     End If
     
     cARQ = LimpaTag(cARQ)
@@ -17,7 +17,7 @@ Public Function ComandoSQLITERC6(ByVal cARQ As String, ByVal cSql As String) As 
     
     ' O método Execute da conexão substitui a necessidade do objeto Command
     ' para comandos simples (sem parâmetros).
-    oDB.Execute cSql
+    oDB.Execute cSQL
     
     ' Fechamento simplificado (apenas limpa o objeto)
     Set oDB = Nothing
@@ -26,12 +26,12 @@ Public Function ComandoSQLITERC6(ByVal cARQ As String, ByVal cSql As String) As 
     Exit Function
 
 TrataErro:
-    SayErro "SQL RC6 Comando:" & vbCrLf & cARQ & vbCrLf & cSql & vbCrLf & Err.Description
+    SayErro "SQL RC6 Comando:" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oDB Is Nothing Then Set oDB = Nothing
     ComandoSQLITERC6 = False
 End Function
 
-Public Function APAGASQLITERC6(ByVal cARQ As String, ByVal cSql As String) As Boolean
+Public Function APAGASQLITERC6(ByVal cARQ As String, ByVal cSQL As String) As Boolean
   Dim nPOS As Integer
   Dim cNOME As String
   'select * from tabela where campo=valorcampo ....
@@ -44,7 +44,7 @@ Public Function APAGASQLITERC6(ByVal cARQ As String, ByVal cSql As String) As Bo
 
   APAGASQLITERC6 = False
   'Muda para maiscula para o instr usar em maiscula
-  cNOME = UCase(cSql)
+  cNOME = UCase(cSQL)
   cNOME = Replace(cNOME, Chr(13), " ")
   cNOME = Replace(cNOME, Chr(10), " ")
 
@@ -61,16 +61,16 @@ Public Function APAGASQLITERC6(ByVal cARQ As String, ByVal cSql As String) As Bo
   'efetua substituicao se estiver com select * from  ou outros casos --> delete from usando mid
   'todos os csql viram delete from tabela where campo=valorcampo .... opcoes de passagem csql acima
   If nPOS > 0 Then
-    cSql = "DELETE FROM " & Mid(cSql, nPOS + 5)
-    APAGASQLITERC6 = ADOComandoRC6(cARQ, cSql)
+    cSQL = "DELETE FROM " & Mid(cSQL, nPOS + 5)
+    APAGASQLITERC6 = Comandorc6(cARQ, cSQL)
   Else
     If InStr(cNOME, "DELETE") > 0 Then  'so executa se tiver delete
-      APAGASQLITERC6 = ADOComandoRC6(cARQ, cSql)
+      APAGASQLITERC6 = Comandorc6(cARQ, cSQL)
     End If
   End If
 End Function
 
-Public Function SomaSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVal aCAM As Variant) As Variant
+Public Function SomaSQLITERC6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM As Variant) As Variant
     Dim oDB As New RC6.cConnection
     Dim oRS As RC6.cRecordset
     Dim lOPEN As Boolean
@@ -105,7 +105,7 @@ Public Function SomaSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVal 
 
     ' Abertura do Recordset no RC6:
     ' No RC6, o método é oDB.OpenRecordset(cSQL)
-    Set oRS = oDB.OpenRecordset(cSql)
+    Set oRS = oDB.OpenRecordset(cSQL)
     lRSOP = True
 
     If Not oRS.EOF Then
@@ -133,12 +133,12 @@ Public Function SomaSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVal 
 
 errhandler:
     ' Ajustado para Logar erros do RC6
-    SayErro "Erro SomaSQLITERC6:" & vbCrLf & cARQ & vbCrLf & cSql & vbCrLf & Err.Description
+    SayErro "Erro SomaSQLITERC6:" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
     SomaSQLITERC6 = aRETU
 End Function
-Public Function PegSQLDeliSQLITERC6(ByVal cARQ As String, ByVal cSql As String, _
+Public Function PegSQLDeliSQLITERC6(ByVal cARQ As String, ByVal cSQL As String, _
                               ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
                               Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
 
@@ -177,7 +177,7 @@ Public Function PegSQLDeliSQLITERC6(ByVal cARQ As String, ByVal cSql As String, 
 
     ' Abertura do Recordset (RC6 usa apenas o SQL e a Conexão)
     ' O método OpenRecordset é o padrão do RC6
-    Set oRS = oDB.OpenRecordset(cSql)
+    Set oRS = oDB.OpenRecordset(cSQL)
     lRSOP = True
 
     If Not oRS.EOF Then
@@ -224,12 +224,12 @@ Public Function PegSQLDeliSQLITERC6(ByVal cARQ As String, ByVal cSql As String, 
     Exit Function
 
 errhandler:
-    SayErro "Peg SQL DELI RC6:" & vbCrLf & cARQ & vbCrLf & cSql & vbCrLf & Err.Description
+    SayErro "Peg SQL DELI RC6:" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
     PegSQLDeliSQLITERC6 = aRETU
 End Function
-Public Function GrvSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVal nITEM As Long, ByVal aCAM As Variant, _
+Public Function GrvSQLITERC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, _
                           ByVal aVAL As Variant, ByVal aFOR As Variant, Optional ByVal nSTARITEM As Long = 0) As Boolean
     Dim oDB As New RC6.cConnection
     Dim oRS As RC6.cRecordset
@@ -248,7 +248,7 @@ Public Function GrvSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVal n
     SqliteSetValuesRC6 oDB
 
     ' 3. Abertura do Recordset RC6
-    Set oRS = oDB.OpenRecordset(cSql)
+    Set oRS = oDB.OpenRecordset(cSQL)
 
     If oRS.EOF Then
         Set oRS = Nothing: Set oDB = Nothing
@@ -291,21 +291,21 @@ Public Function GrvSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVal n
     Exit Function
 
 errhandler:
-    SayErro "Erro na Gravação (RC6):" & vbCrLf & cARQ & vbCrLf & cSql & vbCrLf & Err.Description
+    SayErro "Erro na Gravação (RC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
     GrvSQLITERC6 = False
 End Function
 
-Public Function ApagaSQLpRC6(ByVal cARQ As String, ByVal cSql As String, Optional ByVal cTEXTO As String = "Confirme Exclusão") As Boolean
+Public Function ApagaSQLpRC6(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusão") As Boolean
   ApagaSQLpRC6 = False
   If MDG(cTEXTO, "Exclusão Registro") Then
-    ApagaSQLpRC6 = APAGASQLITERC6(cARQ, cSql)
+    ApagaSQLpRC6 = APAGASQLITERC6(cARQ, cSQL)
   End If
 End Function
 
 
-Public Function IncluiSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVal nITEM As Long, _
+Public Function IncluiSQLITERC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, _
                              Optional ByVal aCAM As Variant = 0, Optional ByVal aVAL As Variant = 0, _
                              Optional ByVal lCHECK As Boolean = False, _
                              Optional ByVal lMES As Boolean = True, _
@@ -329,7 +329,7 @@ Public Function IncluiSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVa
     SqliteSetValuesRC6 oDB
     
     
-    Set oRS = oDB.OpenRecordset(cSql)
+    Set oRS = oDB.OpenRecordset(cSQL)
 
     ' Verifica se já existe (Check)
     If lCHECK And Not oRS.EOF Then
@@ -378,13 +378,13 @@ Public Function IncluiSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVa
     Exit Function
 
 errhandler:
-    SayErro "Erro na Inclusão (RC6):" & vbCrLf & cARQ & vbCrLf & cSql & vbCrLf & Err.Description
+    SayErro "Erro na Inclusão (RC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
     IncluiSQLITERC6 = False
 End Function
 
-Public Function PegSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
+Public Function PegSQLITERC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim oDB As New RC6.cConnection
     Dim oRS As RC6.cRecordset
     Dim x As Long
@@ -405,7 +405,7 @@ Public Function PegSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVal n
     SqliteSetValuesRC6 oDB
 
     ' Abertura do Recordset no RC6
-    Set oRS = oDB.OpenRecordset(cSql)
+    Set oRS = oDB.OpenRecordset(cSQL)
 
     If Not oRS.EOF Then
         For x = 0 To nITEM - 1
@@ -441,7 +441,7 @@ Public Function PegSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVal n
 errhandler:
     ' Captura de erro simplificada para RC6
     Dim cERRO As String
-    cERRO = "Peg SQL RC6:" & vbCrLf & cARQ & vbCrLf & cSql & vbCrLf & "Erro: " & Err.Description
+    cERRO = "Peg SQL RC6:" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & "Erro: " & Err.Description
     
     ' Se ocorrer erro em um campo, tenta usar o valor padrão
     If Err.Number = 3265 Or Err.Number = 5 Or Err.Number = 94 Then
@@ -471,30 +471,30 @@ Public Function PegCampoSQLITERC6(ByVal cARQ As String, ByVal cTABLEWHERE As Str
 End Function
 Public Function PegOperSQLITERC6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, ByVal coper As String) As Variant
   Dim aRETU As Variant
-  Dim cSql As String
+  Dim cSQL As String
   PegOperSQLITERC6 = eDEFAULT
 
 
   If coper = "CAMPO" Then
     If Len(cCAMPO) = 0 Then  'Passado a string ja com o campo select numero from tabela where numero=999999
       cTABLEWHERE = UCase(cTABLEWHERE)
-      cSql = Replace(cTABLEWHERE, " FROM ", " AS CAMPO FROM ")  'inclui as campo variavel padrao no pegsql abaixo
+      cSQL = Replace(cTABLEWHERE, " FROM ", " AS CAMPO FROM ")  'inclui as campo variavel padrao no pegsql abaixo
     Else
-      cSql = "SELECT " & cCAMPO & " AS CAMPO FROM " & cTABLEWHERE
+      cSQL = "SELECT " & cCAMPO & " AS CAMPO FROM " & cTABLEWHERE
     End If
   Else
-    cSql = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
+    cSQL = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
   End If
   If coper = "SUM" Or coper = "COUNT" Or coper = "MAX" Or coper = "MIN" Or IsNumeric(eDEFAULT) Then
-    aRETU = PegSQLITERC6(cARQ, cSql, 1, Array("CAMPO"), Array("N"), Array(eDEFAULT))  ''array retorno tipo N numerico
+    aRETU = PegSQLITERC6(cARQ, cSQL, 1, Array("CAMPO"), Array("N"), Array(eDEFAULT))  ''array retorno tipo N numerico
   Else
-    aRETU = PegSQLITERC6(cARQ, cSql, 1, Array("CAMPO"), Array(""), Array(eDEFAULT))
+    aRETU = PegSQLITERC6(cARQ, cSQL, 1, Array("CAMPO"), Array(""), Array(eDEFAULT))
   End If
   If lRETU Then
     PegOperSQLITERC6 = aRETU(0)
   End If
 End Function
-Public Function PegUltSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+Public Function PegUltSQLITERC6(ByVal cARQ As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     Dim oDB As New RC6.cConnection
     Dim oRS As RC6.cRecordset
     
@@ -509,7 +509,7 @@ Public Function PegUltSQLITERC6(ByVal cARQ As String, ByVal cSql As String, ByVa
     
     ' Abre o Recordset nativo do RC6
     ' O RC6 gerencia o cursor automaticamente conforme o driver (SQLite/Outros)
-    Set oRS = oDB.OpenRecordset(cSql)
+    Set oRS = oDB.OpenRecordset(cSQL)
     
     If Not oRS.EOF Then
         ' Move para o último registro para pegar o "último" valor
@@ -531,7 +531,7 @@ errhandler:
     ' Registro de erro centralizado
     SayErro "PegUltSQLITERC6 - Erro: " & Err.Description & vbCrLf & _
             "Arquivo: " & cARQ & vbCrLf & _
-            "SQL: " & cSql
+            "SQL: " & cSQL
             
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing

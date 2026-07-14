@@ -57,15 +57,15 @@ Public Function PegOperSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As Stri
 Erro: PegOperSQLite4vb = eDEFAULT
 End Function
 
-Public Function SQLiteComando4vb(ByVal cCON As String, ByVal cSQL As String) As Boolean
+Public Function ComandoSqlite4VB(ByVal cCON As String, ByVal cSQL As String) As Boolean
     Dim db As New cSQLite
     On Error GoTo Erro
     db.OpenDB LimpaTag(cCON)
     db.Execute cSQL
-    SQLiteComando4vb = True
+    ComandoSqlite4VB = True
     db.CloseDB: Set db = Nothing
     Exit Function
-Erro: SQLiteComando4vb = False
+Erro: ComandoSqlite4VB = False
 End Function
 
 Public Function PegSQLite4vb(ByVal cCON As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
@@ -275,7 +275,7 @@ Public Function ApagaSQLite4vb(ByVal cCON As String, ByVal cSQL As String) As Bo
     ' 2. Execução utilizando a lógica do sqlite4vb
     ' Chamamos a função de comando já adaptada que abre a conexão,
     ' aplica VBSQLiteSetValues4vb e executa o comando
-    ApagaSQLite4vb = SQLiteComando4vb(cCON, cSQL_FINAL)
+    ApagaSQLite4vb = ComandoSqlite4VB(cCON, cSQL_FINAL)
     
     Exit Function
 

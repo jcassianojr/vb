@@ -227,15 +227,15 @@ Select Case aRETU(0)
   Case "ADO"
        ComandoSQL = ADOComando(cARQ, cSQL)
   Case "VBSQLITE"
-       ComandoSQL = SQLiteComando(cARQ, cSQL)
+       ComandoSQL = ComandoSQLite(cARQ, cSQL)
    Case "ADORC6"
-        ComandoSQL = ADOComandoRC6(cARQ, cSQL)
+        ComandoSQL = ComandoRC6(cARQ, cSQL)
     Case "SQLITERC6"
         ComandoSQL = ComandoSQLITERC6(cARQ, cSQL)
  Case "TC6SQLITE"
-     ComandoSQL = ADOComandoTC6(cARQ, cSQL)
+     ComandoSQL = ComandoTC6(cARQ, cSQL)
  Case "SQLITE4VB"
-    ComandoSQL = SQLiteComando4vb(cARQ, cSQL) ' Nova integração
+    ComandoSQL = ComandoSQLite4vb(cARQ, cSQL) ' Nova integração
 End Select
 End Function
 

@@ -60,7 +60,7 @@ ErroVFP:
 End Function
 
 
-Public Function ADOComandoDBFrc6(ByVal cARQ As String, ByVal cTable As String, ByVal CCOMANDO As String) As Boolean
+Public Function ComandoDBFrc6(ByVal cARQ As String, ByVal cTable As String, ByVal CCOMANDO As String) As Boolean
     Dim cCOM As String
     Dim oCON As RC6.cConnection
     
@@ -71,7 +71,7 @@ Public Function ADOComandoDBFrc6(ByVal cARQ As String, ByVal cTable As String, B
         cTable = NomeTableSql(CCOMANDO)
     End If
     
-    ADOComandoDBFrc6 = False
+    ComandoDBFrc6 = False
     cCOM = ""
     
     ' Inicializa Conexão RC6
@@ -107,7 +107,7 @@ Public Function ADOComandoDBFrc6(ByVal cARQ As String, ByVal cTable As String, B
     End If
 
     Set oCON = Nothing
-    ADOComandoDBFrc6 = True
+    ComandoDBFrc6 = True
     Exit Function
 
 TrataErro:
@@ -118,15 +118,15 @@ TrataErro:
     
     ' Limpeza em caso de erro
     Set oCON = Nothing
-    ADOComandoDBFrc6 = False
+    ComandoDBFrc6 = False
 End Function
-Public Function ADOComandorc6(ByVal cARQ As String, ByVal cSQL As String) As Boolean
+Public Function Comandorc6(ByVal cARQ As String, ByVal cSQL As String) As Boolean
     Dim aRETU As Variant
     Dim oDB As RC6.cConnection
     Dim cCONN As String
 
     On Error GoTo TrataErro
-    ADOComandorc6 = False
+    Comandorc6 = False
     
     cARQ = GeraConn(cARQ)
     aRETU = TipoConn(cARQ)
@@ -139,7 +139,7 @@ Public Function ADOComandorc6(ByVal cARQ As String, ByVal cSQL As String) As Boo
     
     ' Mantém a compatibilidade com VFP se necessário
     If InStr(UCase(cARQ), "VFPOLEDB") Then
-        ADOComandorc6 = AdoComandodbf(cARQ, "", cSQL)
+        Comandorc6 = AdoComandodbf(cARQ, "", cSQL)
         Exit Function
     End If
     
@@ -167,16 +167,16 @@ Public Function ADOComandorc6(ByVal cARQ As String, ByVal cSQL As String) As Boo
     ' Fechamento simplificado (apenas limpa o objeto)
     Set oDB = Nothing
     
-    ADOComandorc6 = True
+    Comandorc6 = True
     Exit Function
 
 TrataErro:
     SayErro "SQL RC6 Comando:" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oDB Is Nothing Then Set oDB = Nothing
-    ADOComandorc6 = False
+    Comandorc6 = False
 End Function
 
-Public Function APAGASQLrc6(ByVal cARQ As String, ByVal cSQL As String) As Boolean
+Public Function APAGASQLRC6(ByVal cARQ As String, ByVal cSQL As String) As Boolean
   Dim nPOS As Integer
   Dim cNOME As String
   'select * from tabela where campo=valorcampo ....
@@ -187,7 +187,7 @@ Public Function APAGASQLrc6(ByVal cARQ As String, ByVal cSQL As String) As Boole
   'requer from e where no csql
 
 
-  APAGASQLrc6 = False
+  APAGASQLRC6 = False
   'Muda para maiscula para o instr usar em maiscula
   cNOME = UCase(cSQL)
   cNOME = Replace(cNOME, Chr(13), " ")
@@ -207,15 +207,15 @@ Public Function APAGASQLrc6(ByVal cARQ As String, ByVal cSQL As String) As Boole
   'todos os csql viram delete from tabela where campo=valorcampo .... opcoes de passagem csql acima
   If nPOS > 0 Then
     cSQL = "DELETE FROM " & Mid(cSQL, nPOS + 5)
-    APAGASQLrc6 = ADOComandorc6(cARQ, cSQL)
+    APAGASQLRC6 = Comandorc6(cARQ, cSQL)
   Else
     If InStr(cNOME, "DELETE") > 0 Then  'so executa se tiver delete
-      APAGASQLrc6 = ADOComandorc6(cARQ, cSQL)
+      APAGASQLRC6 = Comandorc6(cARQ, cSQL)
     End If
   End If
 End Function
 
-Public Function SomaSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM As Variant) As Variant
+Public Function SomaSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM As Variant) As Variant
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
     Dim lOPEN As Boolean
@@ -239,7 +239,7 @@ Public Function SomaSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     Next x
 
     If Not FileConnExist(SomaExt(cARQ), True) Then
-        SomaSQLrc6 = aRETU
+        SomaSQLRC6 = aRETU
         Exit Function
     End If
 
@@ -288,7 +288,7 @@ Public Function SomaSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     Set oRS = Nothing
     Set oDB = Nothing
     
-    SomaSQLrc6 = aRETU
+    SomaSQLRC6 = aRETU
     Exit Function
 
 errhandler:
@@ -296,9 +296,9 @@ errhandler:
     SayErro "Erro SomaSQLrc6:" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
-    SomaSQLrc6 = aRETU
+    SomaSQLRC6 = aRETU
 End Function
-Public Function PegSQLDelirc6(ByVal cARQ As String, ByVal cSQL As String, _
+Public Function PegSQLDeliRC6(ByVal cARQ As String, ByVal cSQL As String, _
                               ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
                               Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
 
@@ -325,7 +325,7 @@ Public Function PegSQLDelirc6(ByVal cARQ As String, ByVal cSQL As String, _
     Next x
 
     If Not FileConnExist(SomaExt(cARQ), True) Then
-        PegSQLDelirc6 = aRETU
+        PegSQLDeliRC6 = aRETU
         Exit Function
     End If
 
@@ -390,16 +390,16 @@ Public Function PegSQLDelirc6(ByVal cARQ As String, ByVal cSQL As String, _
     Set oRS = Nothing
     Set oDB = Nothing
     
-    PegSQLDelirc6 = aRETU
+    PegSQLDeliRC6 = aRETU
     Exit Function
 
 errhandler:
     SayErro "Peg SQL DELI RC6:" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
-    PegSQLDelirc6 = aRETU
+    PegSQLDeliRC6 = aRETU
 End Function
-Public Function GrvSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, _
+Public Function GrvSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, _
                           ByVal aVAL As Variant, ByVal aFOR As Variant, Optional ByVal nSTARITEM As Long = 0) As Boolean
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
@@ -410,7 +410,7 @@ Public Function GrvSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Dim carqcon As String
     
     On Error GoTo errhandler
-    GrvSQLrc6 = False
+    GrvSQLRC6 = False
 
     ' 1. Identifica o dialeto/conexão
     aARQ = TipoConn(cARQ)
@@ -466,25 +466,25 @@ Public Function GrvSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
 
     Set oRS = Nothing
     Set oDB = Nothing
-    GrvSQLrc6 = True
+    GrvSQLRC6 = True
     Exit Function
 
 errhandler:
     SayErro "Erro na Gravação (RC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
-    GrvSQLrc6 = False
+    GrvSQLRC6 = False
 End Function
 
-Public Function ApagaSQLprc6(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusão") As Boolean
-  ApagaSQLprc6 = False
+Public Function ApagaSQLpRC6(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusão") As Boolean
+  ApagaSQLpRC6 = False
   If MDG(cTEXTO, "Exclusão Registro") Then
-    ApagaSQLprc6 = APAGASQLrc6(cARQ, cSQL)
+    ApagaSQLpRC6 = APAGASQLRC6(cARQ, cSQL)
   End If
 End Function
 
 
-Public Function IncluiSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, _
+Public Function IncluiSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, _
                              Optional ByVal aCAM As Variant = 0, Optional ByVal aVAL As Variant = 0, _
                              Optional ByVal lCHECK As Boolean = False, _
                              Optional ByVal lMES As Boolean = True, _
@@ -497,7 +497,7 @@ Public Function IncluiSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     Dim lRETU As Boolean
     Dim carqcon As String
     
-    IncluiSQLrc6 = False
+    IncluiSQLRC6 = False
     On Error GoTo errhandler
 
     lTEM = False
@@ -567,17 +567,17 @@ Public Function IncluiSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
         Alert "Item já Cadastrado Com Esta Chave"
     End If
 
-    IncluiSQLrc6 = lRETU
+    IncluiSQLRC6 = lRETU
     Exit Function
 
 errhandler:
     SayErro "Erro na Inclusão (RC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
-    IncluiSQLrc6 = False
+    IncluiSQLRC6 = False
 End Function
 
-Public Function PegSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
+Public Function PegSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
     Dim x As Long
@@ -646,7 +646,7 @@ Public Function PegSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Set oDB = Nothing
     
     ' Retorno da função
-    PegSQLrc6 = aRETU
+    PegSQLRC6 = aRETU
     Exit Function
 
 errhandler:
@@ -663,27 +663,27 @@ errhandler:
     SayErro cERRO
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
-    PegSQLrc6 = aPAD
+    PegSQLRC6 = aPAD
 End Function
-Public Function PegCountSQLrc6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-  PegCountSQLrc6 = PegOperSQLrc6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "COUNT")
+Public Function PegCountSQLRC6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+  PegCountSQLRC6 = PegOperSQLRC6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "COUNT")
 End Function
-Public Function PegMINSQLrc6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-  PegMINSQLrc6 = PegOperSQLrc6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "MIN")
+Public Function PegMINSQLRC6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+  PegMINSQLRC6 = PegOperSQLRC6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "MIN")
 End Function
-Public Function PegMAXSQLrc6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-  PegMAXSQLrc6 = PegOperSQLrc6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "MAX")
+Public Function PegMAXSQLRC6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+  PegMAXSQLRC6 = PegOperSQLRC6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "MAX")
 End Function
-Public Function PegSUMSQLrc6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-  PegSUMSQLrc6 = PegOperSQLrc6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "SUM")
+Public Function PegSUMSQLRC6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+  PegSUMSQLRC6 = PegOperSQLRC6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "SUM")
 End Function
-Public Function PegCampoSQLrc6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-  PegCampoSQLrc6 = PegOperSQLrc6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "CAMPO")
+Public Function PegCampoSQLRC6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+  PegCampoSQLRC6 = PegOperSQLRC6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "CAMPO")
 End Function
-Public Function PegOperSQLrc6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, ByVal coper As String) As Variant
+Public Function PegOperSQLRC6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, ByVal coper As String) As Variant
   Dim aRETU As Variant
   Dim cSQL As String
-  PegOperSQLrc6 = eDEFAULT
+  PegOperSQLRC6 = eDEFAULT
 
 
   If coper = "CAMPO" Then
@@ -697,15 +697,15 @@ Public Function PegOperSQLrc6(ByVal cARQ As String, ByVal cTABLEWHERE As String,
     cSQL = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
   End If
   If coper = "SUM" Or coper = "COUNT" Or coper = "MAX" Or coper = "MIN" Or IsNumeric(eDEFAULT) Then
-    aRETU = PegSQLrc6(cARQ, cSQL, 1, Array("CAMPO"), Array("N"), Array(eDEFAULT))  ''array retorno tipo N numerico
+    aRETU = PegSQLRC6(cARQ, cSQL, 1, Array("CAMPO"), Array("N"), Array(eDEFAULT))  ''array retorno tipo N numerico
   Else
-    aRETU = PegSQLrc6(cARQ, cSQL, 1, Array("CAMPO"), Array(""), Array(eDEFAULT))
+    aRETU = PegSQLRC6(cARQ, cSQL, 1, Array("CAMPO"), Array(""), Array(eDEFAULT))
   End If
   If lRETU Then
-    PegOperSQLrc6 = aRETU(0)
+    PegOperSQLRC6 = aRETU(0)
   End If
 End Function
-Public Function PegUltSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+Public Function PegUltSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
     Dim carqcon As String
@@ -714,7 +714,7 @@ Public Function PegUltSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal c
     On Error GoTo errhandler
     
     ' Valor padrão inicial
-    PegUltSQLrc6 = eDEFAULT
+    PegUltSQLRC6 = eDEFAULT
     
     
 ' Identifica a conexão
@@ -745,7 +745,7 @@ Public Function PegUltSQLrc6(ByVal cARQ As String, ByVal cSQL As String, ByVal c
         
         ' Verifica se o campo não é nulo antes de atribuir
         If Not IsNull(oRS(cCAMPO).Value) Then
-            PegUltSQLrc6 = oRS(cCAMPO).Value
+            PegUltSQLRC6 = oRS(cCAMPO).Value
         End If
     End If
     
@@ -765,9 +765,9 @@ errhandler:
     If Not oDB Is Nothing Then Set oDB = Nothing
     
     ' Retorna o padrão em caso de erro
-    PegUltSQLrc6 = eDEFAULT
+    PegUltSQLRC6 = eDEFAULT
 End Function
-Public Function SQLMoveRegrc6(ByVal cARQORI As String, _
+Public Function SQLMoveRegRC6(ByVal cARQORI As String, _
                               ByVal cSQLORI As String, _
                               Optional ByVal cOPEORI As String = "", _
                               Optional ByVal aCAMORI As Variant = 0, _
@@ -793,7 +793,7 @@ Public Function SQLMoveRegrc6(ByVal cARQORI As String, _
     Dim cCONDES As String
 
     On Error GoTo errhandler
-    SQLMoveRegrc6 = False
+    SQLMoveRegRC6 = False
 
     ' 1. Identifica Conexões
     aRetuOri = TipoConn(cARQORI)
@@ -883,7 +883,7 @@ Public Function SQLMoveRegrc6(ByVal cARQORI As String, _
     Set oDB = Nothing
     Set oDBDES = Nothing
 
-    SQLMoveRegrc6 = True
+    SQLMoveRegRC6 = True
     Exit Function
 
 errhandler:
@@ -891,7 +891,7 @@ errhandler:
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oRSDES Is Nothing Then Set oRSDES = Nothing
     Set oDB = Nothing: Set oDBDES = Nothing
-    SQLMoveRegrc6 = False
+    SQLMoveRegRC6 = False
 End Function
 
 'Public Function CriaMdbAccessRC6(ByVal cCaminho As String) As Boolean
@@ -948,7 +948,7 @@ Public Function ConfigurarConexaoRC6(ByRef oCON As Object, ByVal cStringConexao 
     ' --- 3. SQLite (Nativo RC6) ---
     ElseIf InStr(cBUSCA, "SQLITE") > 0 Then
         ' Assumindo que oCON seja RC6.cConnection ou compatível
-        SQLiteSetValuesrc6 oCON
+        SqliteSetValuesRC6 oCON
     End If
     
     ConfigurarConexaoRC6 = True
@@ -958,9 +958,9 @@ ErroConfig:
     ConfigurarConexaoRC6 = False
 End Function
 
-Public Function SQLiteSetValuesrc6(ByRef oCON As Object) As Boolean
+Public Function SqliteSetValuesRC6(ByRef oCON As Object) As Boolean
     On Error GoTo ErroSQLite
-    SQLiteSetValuesrc6 = False
+    SqliteSetValuesRC6 = False
     
     If oCON Is Nothing Then Exit Function
     
@@ -979,12 +979,12 @@ Public Function SQLiteSetValuesrc6(ByRef oCON As Object) As Boolean
     ' 5. Auto Vacuum Incremental
     oCON.Execute "PRAGMA auto_vacuum = INCREMENTAL;"
     
-    SQLiteSetValuesrc6 = True
+    SqliteSetValuesRC6 = True
     Exit Function
 
 ErroSQLite:
     ' Aqui você pode registrar o erro se desejar
-    SQLiteSetValuesrc6 = False
+    SqliteSetValuesRC6 = False
 End Function
 'Public Function RepararMdbAccessRC6(ByVal cCaminho As String) As Boolean
     ' A estratégia padrão para reparar MDB/ACCDB é tentar compactá-lo.

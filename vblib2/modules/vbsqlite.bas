@@ -102,7 +102,7 @@ Erro:
     PegOperSQLite = eDEFAULT
     If Not loConn Is Nothing Then loConn.CloseDB
 End Function
-Public Function SQLiteComando(ByVal cCON As String, ByVal cSQL As String) As Boolean
+Public Function ComandoSqlite(ByVal cCON As String, ByVal cSQL As String) As Boolean
     Dim loConn As New SQLiteConnection
     On Error GoTo Erro
     
@@ -115,11 +115,11 @@ Public Function SQLiteComando(ByVal cCON As String, ByVal cSQL As String) As Boo
     VBSQLiteSetValues loConn
     loConn.Execute cSQL
     
-    SQLiteComando = True
+    ComandoSqlite = True
     loConn.CloseDB
     Exit Function
 Erro:
-    SQLiteComando = False
+    ComandoSqlite = False
 End Function
 Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
                          ByVal nITEM As Long, ByVal aCAM As Variant, _
@@ -513,7 +513,7 @@ Public Function ApagaSQLite(ByVal cCON As String, ByVal cSQL As String) As Boole
     End If
     
     ' Executa através do comando padrão que já trata Dialeto e Conexão
-    ApagaSQLite = SQLiteComando(cCON, cSQL_FINAL)
+    ApagaSQLite = ComandoSqlite(cCON, cSQL_FINAL)
     
     Exit Function
 Erro:
