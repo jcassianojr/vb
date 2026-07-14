@@ -1,7 +1,7 @@
 Attribute VB_Name = "sqlvbsqlite"
 Option Explicit
 ' Reference=*\G{7CC1A5F1-A0FF-4546-A0F1-FBFE744A4522}#1.1#0#..\..\..\..\..\..\WINDOWS\system32\VBSQLite12.DLL#VB SQLite Library 1.2
-Public Function PegUltSQLite(ByVal cCON As String, ByVal cSql As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     Dim loConn As New SQLiteConnection
     Dim DataSet As SQLiteDataSet
     Dim vUltimo As Variant
@@ -14,7 +14,7 @@ Public Function PegUltSQLite(ByVal cCON As String, ByVal cSql As String, ByVal c
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
-    Set DataSet = loConn.OpenDataSet(cSql)
+    Set DataSet = loConn.OpenDataSet(cSQL)
     
     If Not DataSet.EOF Then
         While Not DataSet.EOF
@@ -56,21 +56,30 @@ Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String,
                              ByVal coper As String) As Variant
     Dim loConn As New SQLiteConnection
    Dim DataSet As SQLiteDataSet
-    Dim cSql As String
+    Dim cSQL As String
     Dim eValue
     
     On Error GoTo Erro
     
-    ' Ex: SELECT SUM(VALOR) FROM MOVI WHERE CODIGO = 10
-    cSql = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
-    cSql = sqldialeto(cSql, "SQLITE")
+If coper = "CAMPO" Then
+    If Len(cCAMPO) = 0 Then  'Passado a string ja com o campo select numero from tabela where numero=999999
+      cTABLEWHERE = UCase(cTABLEWHERE)
+      cSQL = Replace(cTABLEWHERE, " FROM ", " AS CAMPO FROM ")  'inclui as campo variavel padrao no pegsql abaixo
+    Else
+      cSQL = "SELECT " & cCAMPO & " AS CAMPO FROM " & cTABLEWHERE
+    End If
+  Else
+    cSQL = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
+  End If
+  
+    cSQL = sqldialeto(cSQL, "SQLITE")
     
     cCON = LimpaTag(cCON)
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
     
-    Set DataSet = loConn.OpenDataSet(cSql)
+    Set DataSet = loConn.OpenDataSet(cSQL)
     
     
     If Not DataSet.EOF Then
@@ -93,18 +102,18 @@ Erro:
     PegOperSQLite = eDEFAULT
     If Not loConn Is Nothing Then loConn.CloseDB
 End Function
-Public Function SQLiteComando(ByVal cCON As String, ByVal cSql As String) As Boolean
+Public Function SQLiteComando(ByVal cCON As String, ByVal cSQL As String) As Boolean
     Dim loConn As New SQLiteConnection
     On Error GoTo Erro
     
     ' Limpeza da Tag e tradução do dialeto
     cCON = LimpaTag(cCON)
-    cSql = sqldialeto(cSql, "SQLITE")
+    cSQL = sqldialeto(cSQL, "SQLITE")
     
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
-    loConn.Execute cSql
+    loConn.Execute cSQL
     
     SQLiteComando = True
     loConn.CloseDB
@@ -112,7 +121,7 @@ Public Function SQLiteComando(ByVal cCON As String, ByVal cSql As String) As Boo
 Erro:
     SQLiteComando = False
 End Function
-Public Function PegSQLite(ByVal cCON As String, ByVal cSql As String, _
+Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
                          ByVal nITEM As Long, ByVal aCAM As Variant, _
                          ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim loConn As New SQLiteConnection
@@ -131,10 +140,10 @@ Public Function PegSQLite(ByVal cCON As String, ByVal cSql As String, _
     
     VBSQLiteSetValues loConn
     
-    cSql = sqldialeto(cSql, "SQLITE")
+    cSQL = sqldialeto(cSQL, "SQLITE")
     
     
-    Set DataSet = loConn.OpenDataSet(cSql)
+    Set DataSet = loConn.OpenDataSet(cSQL)
     
     
     If Not DataSet.EOF Then
@@ -348,10 +357,10 @@ Public Function PegCampoSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String
     ' Para garantir compatibilidade total, chamamos a PegOper sem função agregadora
     ' ou simulamos via MAX para pegar o valor único.
     
-    PegCampoSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "")
+    PegCampoSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "CAMPO")
     
 End Function
-Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSql As String, _
+Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
                              ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
                              Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
     Dim loConn As New SQLiteConnection
@@ -374,7 +383,7 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSql As String, _
     loConn.OpenDB cCON, SQLiteReadWrite
     
     VBSQLiteSetValues loConn
-    Set DataSet = loConn.OpenDataSet(cSql)
+    Set DataSet = loConn.OpenDataSet(cSQL)
 
     If Not DataSet.EOF Then
         While Not DataSet.EOF
@@ -483,13 +492,13 @@ Erro:
     If Not loConn Is Nothing Then loConn.CloseDB
 End Function
 
-Public Function ApagaSQLite(ByVal cCON As String, ByVal cSql As String) As Boolean
+Public Function ApagaSQLite(ByVal cCON As String, ByVal cSQL As String) As Boolean
     Dim nPOS As Long
     Dim cSQL_FINAL As String
     
     On Error GoTo Erro
     
-    cSQL_FINAL = Trim(cSql)
+    cSQL_FINAL = Trim(cSQL)
     
     ' Lógica de espelhamento: Se não começa com DELETE, mas tem FROM, reconstrói
     If UCase(Left(cSQL_FINAL, 6)) <> "DELETE" Then

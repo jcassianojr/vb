@@ -1,11 +1,11 @@
 Attribute VB_Name = "sqlsqlite4vb"
 Option Explicit
-Public Function PegUltSQLite4vb(ByVal cCON As String, ByVal cSql As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+Public Function PegUltSQLite4vb(ByVal cCON As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     Dim db As New cSQLite, RS As cSQLiteResults, vUltimo As Variant
     On Error GoTo Erro
     vUltimo = eDEFAULT
     db.OpenDB LimpaTag(cCON)
-    Set RS = db.Query(cSql)
+    Set RS = db.Query(cSQL)
     Do While RS.MoveNext()
         vUltimo = RS(cCAMPO)
     Loop
@@ -32,34 +32,49 @@ Public Function PegCountSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As Str
 End Function
 
 Public Function PegOperSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, ByVal coper As String) As Variant
-    Dim db As New cSQLite, eValue As Variant
+    Dim db As New cSQLite
+    Dim eValue As Variant
+    Dim cSQL As String
     On Error GoTo Erro
+    
+ If coper = "CAMPO" Then
+    If Len(cCAMPO) = 0 Then  'Passado a string ja com o campo select numero from tabela where numero=999999
+      cTABLEWHERE = UCase(cTABLEWHERE)
+      cSQL = Replace(cTABLEWHERE, " FROM ", " AS CAMPO FROM ")  'inclui as campo variavel padrao no pegsql abaixo
+    Else
+      cSQL = "SELECT " & cCAMPO & " AS CAMPO FROM " & cTABLEWHERE
+    End If
+  Else
+    cSQL = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
+  End If
+
+    
     db.OpenDB LimpaTag(cCON)
-    eValue = db.Scalar("SELECT " & coper & "(" & cCAMPO & ") FROM " & cTABLEWHERE)
+    eValue = db.Scalar(cSQL)
     PegOperSQLite4vb = IIf(IsNull(eValue) Or IsEmpty(eValue), eDEFAULT, eValue)
     db.CloseDB: Set db = Nothing
     Exit Function
 Erro: PegOperSQLite4vb = eDEFAULT
 End Function
 
-Public Function SQLiteComando4vb(ByVal cCON As String, ByVal cSql As String) As Boolean
+Public Function SQLiteComando4vb(ByVal cCON As String, ByVal cSQL As String) As Boolean
     Dim db As New cSQLite
     On Error GoTo Erro
     db.OpenDB LimpaTag(cCON)
-    db.Execute cSql
+    db.Execute cSQL
     SQLiteComando4vb = True
     db.CloseDB: Set db = Nothing
     Exit Function
 Erro: SQLiteComando4vb = False
 End Function
 
-Public Function PegSQLite4vb(ByVal cCON As String, ByVal cSql As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
+Public Function PegSQLite4vb(ByVal cCON As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim db As New cSQLite, RS As cSQLiteResults, i As Integer, aVAL() As Variant
     On Error GoTo Erro
     ReDim aVAL(nITEM - 1)
     db.OpenDB LimpaTag(cCON)
     
-    Set RS = db.Query(cSql)
+    Set RS = db.Query(cSQL)
     If RS.MoveNext() Then
         For i = 0 To nITEM - 1
             aVAL(i) = IIf(IsNull(RS(aCAM(i))), aPAD(i), RS(aCAM(i)))
@@ -124,7 +139,7 @@ Erro:
     GrvSQLite4vb = False
     If Not db Is Nothing Then db.CloseDB
 End Function
-Public Function ExecuteScalarSQLite4vb(ByVal cARQ As String, ByVal cSql As String) As Variant
+Public Function ExecuteScalarSQLite4vb(ByVal cARQ As String, ByVal cSQL As String) As Variant
     Dim db As New cSQLite
     On Error GoTo Erro
     
@@ -132,7 +147,7 @@ Public Function ExecuteScalarSQLite4vb(ByVal cARQ As String, ByVal cSql As Strin
     VBSQLiteSetValues4vb db
     
     ' db.Scalar retorna o primeiro campo da primeira linha
-    ExecuteScalarSQLite4vb = db.Scalar(cSql)
+    ExecuteScalarSQLite4vb = db.Scalar(cSQL)
     
     db.CloseDB
     Set db = Nothing
@@ -236,13 +251,13 @@ Public Function VBSQLiteSetValues4vb(ByRef db As cSQLite) As Boolean
 Erro:
     VBSQLiteSetValues4vb = False
 End Function
-Public Function ApagaSQLite4vb(ByVal cCON As String, ByVal cSql As String) As Boolean
+Public Function ApagaSQLite4vb(ByVal cCON As String, ByVal cSQL As String) As Boolean
     Dim nPOS As Long
     Dim cSQL_FINAL As String
     
     On Error GoTo Erro
     
-    cSQL_FINAL = Trim(cSql)
+    cSQL_FINAL = Trim(cSQL)
     
     ' 1. Lógica de espelhamento original:
     ' Garante que o comando inicie com DELETE FROM, tratando entradas parciais
