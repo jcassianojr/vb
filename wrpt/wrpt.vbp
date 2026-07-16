@@ -1,7 +1,7 @@
 Type=Exe
 Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
 Reference=*\G{B691E011-1797-432E-907A-4D8C69339129}#6.1#0#..\..\..\Program Files (x86)\Common Files\System\ado\msado15.dll#Microsoft ActiveX Data Objects 6.1 Library
-Reference=*\G{00000600-0000-0010-8000-00AA006D2EA4}#2.8#0#..\..\..\Program Files (x86)\Common Files\System\ado\msadox28.tlb#Microsoft ADO Ext. 2.8 for DDL and Security
+Reference=*\G{00000600-0000-0010-8000-00AA006D2EA4}#6.0#0#..\..\..\Program Files (x86)\Common Files\System\ado\msadox.dll#Microsoft ADO Ext. 6.0 for DDL and Security
 Reference=*\G{AC3B8B4C-B6CA-11D1-9F31-00C04FC29D52}#2.6#0#..\..\..\Program Files (x86)\Common Files\System\ado\msjro.dll#Microsoft Jet and Replication Objects 2.6 Library
 Reference=*\G{E7413FF9-D52D-4D6C-B2D1-2A96CFA1E004}#2.9#0#..\..\..\WINDOWS\SysWow64\MenuExtended.dll#Menu Extended v.0.8.0 - Advanced menu
 Reference=*\G{CD000000-8B95-11D1-82DB-00C04FB1625D}#1.0#0#..\..\..\Windows\SysWOW64\cdosys.dll#Microsoft CDO for Windows 2000 Library
@@ -119,7 +119,7 @@ Description="WRPT  - Relatorios  & Documentos"
 CompatibleMode="0"
 MajorVer=1
 MinorVer=8
-RevisionVer=509
+RevisionVer=510
 AutoIncrementVer=1
 ServerSupportFiles=0
 VersionComments="X__$admin%__CU#VIA_FOL00001   __$admin%__                                  c:\develop\modelos\wrpt\teste.zpl"
