@@ -1,10 +1,10 @@
-vb flexgrid
+vb flexgrid common.bas
 https://github.com/Kr00l/VBFLXGRD.git
-vb common controls
+vb common controls common.bas
 https://github.com/Kr00l/VBCCR.git
 vb extra
 https://github.com/xxdoc/vbExtra 
-vb sqllite
+vb sqllite common.bas
 https://github.com/Kr00l/VBSQLite
 vb newtab
 https://github.com/EduardoVB/NewTab
