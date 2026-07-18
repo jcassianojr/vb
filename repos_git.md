@@ -30,3 +30,6 @@ https://github.com/fafalone/WinDevLib
 
 cziparchive
 https://github.com/wqweto/ZipArchive
+
+clsosinfo
+https://github.com/fafalone/OSInfo
