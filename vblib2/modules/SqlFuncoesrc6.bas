@@ -220,7 +220,7 @@ Public Function SomaSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     Dim oRS As RC6.cRecordset
     Dim lOPEN As Boolean
     Dim lRSOP As Boolean
-    Dim x As Integer
+    Dim X As Integer
     Dim nCAMPOS As Integer
     Dim aRETU As Variant
     Dim aARQ As Variant
@@ -234,9 +234,9 @@ Public Function SomaSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     lRSOP = False
     nCAMPOS = UBound(aCAM) + 1
     ReDim aRETU(nCAMPOS - 1) ' Ajustado para base 0
-    For x = 0 To nCAMPOS - 1
-        aRETU(x) = 0
-    Next x
+    For X = 0 To nCAMPOS - 1
+        aRETU(X) = 0
+    Next X
 
     If Not FileConnExist(SomaExt(cARQ), True) Then
         SomaSQLRC6 = aRETU
@@ -270,15 +270,15 @@ Public Function SomaSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
 
     If Not oRS.EOF Then
         While Not oRS.EOF
-            For x = 0 To nCAMPOS - 1
-                aOPE = SepSqlOpe(aCAM(x))
+            For X = 0 To nCAMPOS - 1
+                aOPE = SepSqlOpe(aCAM(X))
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
-                    eVAL = oRS(aCAM(x)).Value
+                    eVAL = oRS(aCAM(X)).Value
                 Else
                     eVAL = MathOper(oRS(aOPE(1)).Value, oRS(aOPE(2)).Value, aOPE(0))
                 End If
-                aRETU(x) = aRETU(x) + eVAL
-            Next x
+                aRETU(X) = aRETU(X) + eVAL
+            Next X
             oRS.MoveNext
         Wend
     End If
@@ -304,7 +304,7 @@ Public Function PegSQLDeliRC6(ByVal cARQ As String, ByVal cSQL As String, _
 
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
-    Dim x As Integer
+    Dim X As Integer
     Dim nCAMPOS As Integer
     Dim aRETU As Variant
     Dim aARQ As Variant
@@ -320,9 +320,9 @@ Public Function PegSQLDeliRC6(ByVal cARQ As String, ByVal cSQL As String, _
     lRSOP = False
     nCAMPOS = UBound(aCAM) + 1
     ReDim aRETU(nCAMPOS - 1)
-    For x = 0 To nCAMPOS - 1
-        aRETU(x) = ""
-    Next x
+    For X = 0 To nCAMPOS - 1
+        aRETU(X) = ""
+    Next X
 
     If Not FileConnExist(SomaExt(cARQ), True) Then
         PegSQLDeliRC6 = aRETU
@@ -352,35 +352,35 @@ Public Function PegSQLDeliRC6(ByVal cARQ As String, ByVal cSQL As String, _
 
     If Not oRS.EOF Then
         While Not oRS.EOF
-            For x = 0 To nCAMPOS - 1
-                aOPE = SepSqlOpe(aCAM(x))
+            For X = 0 To nCAMPOS - 1
+                aOPE = SepSqlOpe(aCAM(X))
                 
                 ' Extração do valor
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
-                    eVAL = oRS(aCAM(x)).Value
+                    eVAL = oRS(aCAM(X)).Value
                 Else
                     eVAL = MathOper(oRS(aOPE(1)).Value, oRS(aOPE(2)).Value, aOPE(0))
                 End If
                 
                 ' Tratamentos (Pad, For, FVar)
                 If IsNull(eVAL) Then
-                    If IsArray(aPAD) Then eVAL = aPAD(x) Else eVAL = aPAD
+                    If IsArray(aPAD) Then eVAL = aPAD(X) Else eVAL = aPAD
                 End If
                 
                 If IsArray(aFOR) Then
-                    If IsArray(aPAD) Then eVAL = FVar(eVAL, aFOR(x), aPAD(x)) Else eVAL = FVar(eVAL, aFOR(x))
+                    If IsArray(aPAD) Then eVAL = FVar(eVAL, aFOR(X), aPAD(X)) Else eVAL = FVar(eVAL, aFOR(X))
                 End If
                 
-                aRETU(x) = aRETU(x) & FixStr(eVAL)
-            Next x
+                aRETU(X) = aRETU(X) & FixStr(eVAL)
+            Next X
             
             oRS.MoveNext
             
             ' Adiciona o delimitador se não for o último
             If Not oRS.EOF Then
-                For x = 0 To nCAMPOS - 1
-                    aRETU(x) = aRETU(x) & cDELI
-                Next x
+                For X = 0 To nCAMPOS - 1
+                    aRETU(X) = aRETU(X) & cDELI
+                Next X
             End If
         Wend
     End If
@@ -403,7 +403,7 @@ Public Function GrvSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
                           ByVal aVAL As Variant, ByVal aFOR As Variant, Optional ByVal nSTARITEM As Long = 0) As Boolean
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
-    Dim x As Long
+    Dim X As Long
     Dim eVAL As Variant
     Dim aOPE As Variant
     Dim aARQ As Variant
@@ -435,29 +435,29 @@ Public Function GrvSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     End If
 
     While Not oRS.EOF
-        For x = nSTARITEM To nITEM - 1
+        For X = nSTARITEM To nITEM - 1
             ' Resolve o valor
-            If IsNull(aVAL(x)) Then
-                oRS(aCAM(x)).Value = Null
+            If IsNull(aVAL(X)) Then
+                oRS(aCAM(X)).Value = Null
             Else
-                aOPE = SepSqlOpe(aCAM(x))
+                aOPE = SepSqlOpe(aCAM(X))
                 If aOPE(0) = "" Then
-                    eVAL = aVAL(x)
+                    eVAL = aVAL(X)
                 Else
                     eVAL = MathOper(oRS(aOPE(1)).Value, oRS(aOPE(2)).Value, aOPE(0))
                 End If
 
                 ' --- INTEGRAÇÃO COM DIALETO DE DATA ---
-                If Mid(aFOR(x), 1, 1) = "D" Then
+                If Mid(aFOR(X), 1, 1) = "D" Then
                     ' Usa a função dialetoDataParaSQL do seu sqldialeto.bas
                     ' aARQ(2) contém o identificador do tipo de banco
-                    oRS(aCAM(x)).Value = dialetoDataParaSQL(eVAL, aARQ(2))
+                    oRS(aCAM(X)).Value = dialetoDataParaSQL(eVAL, aARQ(2))
                 Else
                     ' Tratamento padrão (Texto/Número)
-                    oRS(aCAM(x)).Value = FVar(eVAL, aFOR(x), "")
+                    oRS(aCAM(X)).Value = FVar(eVAL, aFOR(X), "")
                 End If
             End If
-        Next x
+        Next X
         
         ' Gravação em lote (nativa RC6)
         oRS.UpdateBatch
@@ -491,7 +491,7 @@ Public Function IncluiSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
                              Optional ByVal aIDDES As Variant = 0) As Boolean
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
-    Dim x As Long
+    Dim X As Long
     Dim aRETU As Variant
     Dim lTEM As Boolean
     Dim lRETU As Boolean
@@ -531,16 +531,16 @@ Public Function IncluiSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
 
     If Not lTEM Then
         oRS.AddNew
-        For x = 0 To nITEM - 1
-            If Not IsNull(aVAL(x)) Then
+        For X = 0 To nITEM - 1
+            If Not IsNull(aVAL(X)) Then
                 ' Tratamento de Datas para o RC6/Dialetos
-                If Mid(aCAM(x), 1, 1) = "D" Then ' Ou a lógica de aFOR que você usa
-                    oRS(aCAM(x)).Value = dialetoDataParaSQL(aVAL(x), aRETU(2))
+                If Mid(aCAM(X), 1, 1) = "D" Then ' Ou a lógica de aFOR que você usa
+                    oRS(aCAM(X)).Value = dialetoDataParaSQL(aVAL(X), aRETU(2))
                 Else
-                    oRS(aCAM(x)).Value = aVAL(x)
+                    oRS(aCAM(X)).Value = aVAL(X)
                 End If
             End If
-        Next x
+        Next X
 
         ' Gravação
         oRS.UpdateBatch
@@ -551,9 +551,9 @@ Public Function IncluiSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
             Dim nCAMPOS As Long
             nCAMPOS = UBound(aIDDES)
             ReDim eRETU01(nCAMPOS)
-            For x = 0 To nCAMPOS
-                eRETU01(x) = oRS(aIDDES(x)).Value
-            Next x
+            For X = 0 To nCAMPOS
+                eRETU01(X) = oRS(aIDDES(X)).Value
+            Next X
         End If
         
         lRETU = True
@@ -580,7 +580,7 @@ End Function
 Public Function PegSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
     Dim oDB As RC6.cConnection
     Dim oRS As RC6.cRecordset
-    Dim x As Long
+    Dim X As Long
     Dim aRETU As Variant
     Dim aCON As Variant
     Dim aOPE As Variant
@@ -619,23 +619,23 @@ Public Function PegSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Set oRS = oDB.OpenRecordset(cSQL)
 
     If Not oRS.EOF Then
-        For x = 0 To nITEM - 1
-            aOPE = SepSqlOpe(aCAM(x))
+        For X = 0 To nITEM - 1
+            aOPE = SepSqlOpe(aCAM(X))
             
             ' Extração do valor
             If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
-                eVAL = oRS(aCAM(x)).Value
+                eVAL = oRS(aCAM(X)).Value
             Else
                 eVAL = MathOper(oRS(aOPE(1)).Value, oRS(aOPE(2)).Value, aOPE(0))
             End If
 
             ' Formatação (FVar) e tratamento de Nulo
             If IsNull(eVAL) Then
-                aRETU(x) = aPAD(x)
+                aRETU(X) = aPAD(X)
             Else
-                aRETU(x) = FVar(eVAL, aFOR(x), aPAD(x))
+                aRETU(X) = FVar(eVAL, aFOR(X), aPAD(X))
             End If
-        Next x
+        Next X
     Else
         ' Se não encontrar registros, retorna o padrão
         aRETU = aPAD
@@ -656,7 +656,7 @@ errhandler:
     
     ' Se ocorrer erro em um campo, tenta usar o valor padrão
     If Err.Number = 3265 Or Err.Number = 5 Or Err.Number = 94 Then
-        If x >= 0 And x < nITEM Then aRETU(x) = aPAD(x)
+        If X >= 0 And X < nITEM Then aRETU(X) = aPAD(X)
         Resume Next
     End If
     
@@ -785,7 +785,7 @@ Public Function SQLMoveRegRC6(ByVal cARQORI As String, _
     Dim oRSDES As RC6.cRecordset
     Dim aRetuOri As Variant
     Dim aRetuDes As Variant
-    Dim x As Integer
+    Dim X As Integer
     Dim nCAMPOS As Integer
     Dim aVALORI As Variant
     Dim aRETUID As Variant
@@ -833,9 +833,9 @@ Public Function SQLMoveRegRC6(ByVal cARQORI As String, _
             If Not IsNumeric(aCAMORI) Then
                 nCAMPOS = UBound(aCAMORI)
                 ReDim aVALORI(nCAMPOS)
-                For x = 0 To nCAMPOS
-                    aVALORI(x) = oRS(aCAMORI(x)).Value
-                Next x
+                For X = 0 To nCAMPOS
+                    aVALORI(X) = oRS(aCAMORI(X)).Value
+                Next X
             End If
 
             ' Operação Origem (Delete)
@@ -848,16 +848,16 @@ Public Function SQLMoveRegRC6(ByVal cARQORI As String, _
 
             ' Preenche campos do destino
             If Not IsNumeric(aCAMDES) Then
-                For x = 0 To UBound(aCAMDES)
-                    oRSDES(aCAMDES(x)).Value = aVALORI(x)
-                Next x
+                For X = 0 To UBound(aCAMDES)
+                    oRSDES(aCAMDES(X)).Value = aVALORI(X)
+                Next X
             End If
             
             ' Preenche campos externos (Outros)
             If Not IsNumeric(aOUTDES) Then
-                For x = 0 To UBound(aOUTDES)
-                    oRSDES(aOUTDES(x)).Value = aOUTORI(x)
-                Next x
+                For X = 0 To UBound(aOUTDES)
+                    oRSDES(aOUTDES(X)).Value = aOUTORI(X)
+                Next X
             End If
 
             ' Gravação em Lote
@@ -867,9 +867,9 @@ Public Function SQLMoveRegRC6(ByVal cARQORI As String, _
             If Not IsNumeric(aIDDES) Then
                 nCAMPOS = UBound(aIDDES)
                 ReDim aRETUID(nCAMPOS)
-                For x = 0 To nCAMPOS
-                    aRETUID(x) = oRSDES(aIDDES(x)).Value
-                Next x
+                For X = 0 To nCAMPOS
+                    aRETUID(X) = oRSDES(aIDDES(X)).Value
+                Next X
                 eRETU01 = aRETUID
             End If
 
@@ -893,38 +893,6 @@ errhandler:
     Set oDB = Nothing: Set oDBDES = Nothing
     SQLMoveRegRC6 = False
 End Function
-
-'Public Function CriaMdbAccessRC6(ByVal cCaminho As String) As Boolean
-    ' Usamos Late Binding para não precisar da referência ao ADOX no projeto RC6
- '   Dim cat As Object
-  '  On Error GoTo Erro
-    
-   ' Set cat = CreateObject("ADOX.Catalog")
-    ' Cria o arquivo .accdb (o Provider ACE.OLEDB.12.0 cria o arquivo fisicamente)
-    'cat.Create "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & cCaminho
-    
-    'CriaMdbAccessRC6 = True
-    'Exit Function
-'Erro:
- '   CriaMdbAccessRC6 = False
-'End Function
-
-'Public Function CompactarMdbAccessRC6(ByVal cOrigem As String, ByVal cDestino As String) As Boolean
-'    Dim jro As Object
-'    On Error GoTo Erro
-    
-    ' O JRO.JetEngine faz o trabalho pesado de compactação do Access
-'    Set jro = CreateObject("JRO.JetEngine")
-    
-    ' Compacta a origem para um arquivo temporário (cDestino)
- '   jro.CompactDatabase "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & cOrigem, _
-                        "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & cDestino & ";Jet OLEDB:Engine Type=6"
-    
-  '  CompactarMdbAccessRC6 = True
-   ' Exit Function
-'Erro:
- '   CompactarMdbAccessRC6 = False
-'End Function
 
 ' ==============================================================================
 ' FUNÇÃO: ConfigurarConexaoRC6

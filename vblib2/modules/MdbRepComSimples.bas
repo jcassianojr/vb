@@ -5,65 +5,57 @@ Public Enum enumDatabaseType
   [MSAccess2000] ' .mdb
   [MSAccess2007] ' .accdb
 End Enum
-
-
-
 ''' <summary>
-''' Compacta e repara uma base de dados Access (.mdb ou .accdb)
+''' Compacta e repara uma base de dados Access (.mdb ou .accdb) usando a tecnologia adequada
 ''' </summary>
 Public Function CompactAccess(xDatabaseLocation As String, _
-                              Optional xDatabasePassword As String, _
-                              Optional DatabaseType As enumDatabaseType = MSAccess2000) As Boolean
+                              Optional xDatabasePassword As String) As Boolean
 
     Dim jro As Object
-    Dim strSource As String
-    Dim strDest As String
+    Dim daoEngine As Object
     Dim strTempFile As String
-    Dim strProvider As String
     Dim strPass As String
+    Dim isAccdb As Boolean
 
     On Error GoTo CompactAccess_Err
     CompactAccess = False
 
-    ' 1. Definir o Provedor e Extensão
-    If DatabaseType = MSAccess2007 Or InStr(LCase(xDatabaseLocation), ".accdb") > 0 Then
-        strProvider = "Microsoft.ACE.OLEDB.12.0"
-    Else
-        strProvider = "Microsoft.Jet.OLEDB.4.0"
-    End If
-
-    ' 2. Configurar a senha se existir
-    If Len(xDatabasePassword) > 0 Then
-        strPass = ";Jet OLEDB:Database Password=" & xDatabasePassword
-    Else
-        strPass = ""
-    End If
-
-    ' 3. Definir ficheiro temporário
+    ' 1. Verifica a extensão para definir o tipo
+    isAccdb = (InStr(LCase(xDatabaseLocation), ".accdb") > 0)
     strTempFile = xDatabaseLocation & ".temp"
+    
     If Dir(strTempFile) <> "" Then Kill strTempFile
 
-    ' 4. Montar strings de conexão
-    strSource = "Provider=" & strProvider & ";Data Source=" & xDatabaseLocation & strPass
-    strDest = "Provider=" & strProvider & ";Data Source=" & strTempFile & strPass
+    ' 2. Executa a compactação condicional
+    If Not isAccdb Then
+        ' Usa JRO para .mdb
+        strPass = IIf(Len(xDatabasePassword) > 0, ";Jet OLEDB:Database Password=" & xDatabasePassword, "")
+        Set jro = CreateObject("JRO.JetEngine")
+        jro.CompactDataBase "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & xDatabaseLocation & strPass, _
+                           "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strTempFile & strPass
+    Else
+        ' Usa DAO para .accdb
+        strPass = IIf(Len(xDatabasePassword) > 0, ";PWD=" & xDatabasePassword, "")
+        Set daoEngine = CreateObject("DAO.DBEngine.120")
+        daoEngine.CompactDataBase xDatabaseLocation, strTempFile, , , strPass
+    End If
 
-    ' 5. Instanciar JRO via Late Binding (Evita fechar o programa por DLL)
-    Set jro = CreateObject("JRO.JetEngine")
-    
-    ' Executa a compactação
-    jro.CompactDataBase strSource, strDest
-    
-    ' 6. Substituir o original pelo compactado
+    ' 3. Substitui o original pelo compactado
     Kill xDatabaseLocation
     Name strTempFile As xDatabaseLocation
 
     CompactAccess = True
+    
+CleanExit:
     Set jro = Nothing
+    Set daoEngine = Nothing
     Exit Function
 
 CompactAccess_Err:
     MsgBox "Erro ao compactar base de dados:" & vbCrLf & Err.Description, vbCritical, "Compactação"
     If Dir(strTempFile) <> "" Then Kill strTempFile
-    Set jro = Nothing
+    Resume CleanExit
 End Function
+
+
 
