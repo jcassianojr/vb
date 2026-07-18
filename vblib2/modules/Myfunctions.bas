@@ -173,8 +173,8 @@ End Enum
     Public Declare Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As Long, ByVal lpFileName As String) As Long
     Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpString As Any, ByVal lpFileName As String) As Long
     
-    Public Declare Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String, ByVal cchData As Long) As Long
-    Public Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String) As Long
+    Public Declare Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCType As Long, ByVal lpLCData As String, ByVal cchData As Long) As Long
+    Public Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCType As Long, ByVal lpLCData As String) As Long
     
     Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
     Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
@@ -261,9 +261,9 @@ Public Function ComboLostFocus(ByRef Combo1)
 Dim strPartial
 Dim i
   With Combo1
-    If Len(.Text) Then
+    If Len(.tEXT) Then
       'Procura pelo texto digitado
-      strPartial = .Text
+      strPartial = .tEXT
       i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
@@ -331,7 +331,7 @@ Dim j
 Dim m_bEditFromCode
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .Text
+    strPartial = .tEXT
     i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
@@ -484,12 +484,12 @@ Public Function GeraSplit(ByVal aVAR As Variant, Optional ByVal cINI As String =
                           Optional ByVal cMID As String = "", _
                           Optional ByVal cFIM As String = "") As String
   Dim nUSO As Long
-  Dim x As Long
+  Dim X As Long
   nUSO = UBound(aVAR) - 1
   GeraSplit = cINI & aVAR(0) & cMID
-  For x = 1 To nUSO
-    GeraSplit = GeraSplit & aVAR(x) & cMID
-  Next x
+  For X = 1 To nUSO
+    GeraSplit = GeraSplit & aVAR(X) & cMID
+  Next X
   GeraSplit = GeraSplit & aVAR(nUSO + 1)
   GeraSplit = GeraSplit & cFIM
 End Function
@@ -1164,7 +1164,7 @@ Public Function Tirace(ByVal texto As String) As String
   Tirace = tirace2(texto)
 End Function
 Public Function StrToArray(ByVal cGRUPO As String) As Variant
-  Dim x As Integer
+  Dim X As Integer
   Dim nLEN As Integer
   Dim aUSO As Variant
   Dim cCHAR As String
@@ -1177,77 +1177,77 @@ Public Function StrToArray(ByVal cGRUPO As String) As Variant
 
   nLEN = Len(eCNV)
   ReDim aUSO(nLEN)
-  For x = 1 To nLEN
-    cCHAR = Mid(eCNV, x, 1)
+  For X = 1 To nLEN
+    cCHAR = Mid(eCNV, X, 1)
     Select Case cCHAR
     Case "ª"
-      aUSO(x - 1) = "a."
+      aUSO(X - 1) = "a."
 
     Case "º"
-      aUSO(x - 1) = "o."
+      aUSO(X - 1) = "o."
 
     Case Else
-      aUSO(x - 1) = cCHAR
+      aUSO(X - 1) = cCHAR
 
     End Select
-  Next x
+  Next X
   StrToArray = aUSO
 End Function
 
 Public Function TiraSin(ByVal texto As String, Optional ByVal RemoveUp As Boolean = True) As String
-Dim x As Integer
+Dim X As Integer
   'https://www.ascii-code.com/pt
   'Caracteres de controle ASCII (código de caractere 0-31)
-  For x = 0 To 31 'nao caracteres padrao
-    texto = Replace(texto, Chr(x), "")
-  Next x
+  For X = 0 To 31 'nao caracteres padrao
+    texto = Replace(texto, Chr(X), "")
+  Next X
   'Caracteres imprimiveis ASCII (código de caractere 32-127)
   '32 espaco
-  For x = 33 To 38                 '33! 34" 35# 36$ 37% 38&
-    texto = Replace(texto, Chr(x), "")
-  Next x
-  For x = 39 To 47                 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
-    texto = Replace(texto, Chr(x), "")
-  Next x
+  For X = 33 To 38                 '33! 34" 35# 36$ 37% 38&
+    texto = Replace(texto, Chr(X), "")
+  Next X
+  For X = 39 To 47                 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
+    texto = Replace(texto, Chr(X), "")
+  Next X
   '48 a 57 numeros 0-9
-  For x = 58 To 64                 '58: 59: 60< 61= 62> 63? 64@
-    texto = Replace(texto, Chr(x), "")
-  Next x
+  For X = 58 To 64                 '58: 59: 60< 61= 62> 63? 64@
+    texto = Replace(texto, Chr(X), "")
+  Next X
   '65 a 90 maisculas
-  For x = 91 To 96                 '91[ 92\ 93] 94^ 95_ 96`
-    texto = Replace(texto, Chr(x), "")
-  Next x
+  For X = 91 To 96                 '91[ 92\ 93] 94^ 95_ 96`
+    texto = Replace(texto, Chr(X), "")
+  Next X
   '97 a 122 minusculas
-  For x = 123 To 126                '123{ 124| 125} 126~
-    texto = Replace(texto, Chr(x), "")
-  Next x
-  For x = 127 To 127                 '127 del
-    texto = Replace(texto, Chr(x), "")
-  Next x
+  For X = 123 To 126                '123{ 124| 125} 126~
+    texto = Replace(texto, Chr(X), "")
+  Next X
+  For X = 127 To 127                 '127 del
+    texto = Replace(texto, Chr(X), "")
+  Next X
   'Códigos ASCII estendidos (código de caracteres 128-255)
   If RemoveUp Then
-    For x = 128 To 255
-      texto = Replace(texto, Chr(x), "")
-    Next x
+    For X = 128 To 255
+      texto = Replace(texto, Chr(X), "")
+    Next X
   Else 'matem caracteres de acentuacao uso tirace caso queira manter sem acentuacao
-    For x = 155 To 159
-      texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 168 To 180
-      texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 184 To 197
-      texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 200 To 209
-      texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 217 To 223
-      texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 238 To 255
-      texto = Replace(texto, Chr(x), "")
-    Next x
+    For X = 155 To 159
+      texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 168 To 180
+      texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 184 To 197
+      texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 200 To 209
+      texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 217 To 223
+      texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 238 To 255
+      texto = Replace(texto, Chr(X), "")
+    Next X
   End If
   TiraSin = texto
 End Function
@@ -1515,14 +1515,14 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
   End If
 End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
   Dim nLEN As Integer
   Dim nTEXTO As Integer
-  Dim x As Integer
-  Dim y As Integer
+  Dim X As Integer
+  Dim Y As Integer
   Dim aORI As Variant
   Dim aDES As Variant
   Dim aTEXTO As Variant
@@ -1536,18 +1536,18 @@ Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eD
   aTEXTO = StrToArray(cTEXTO)
   nLEN = UBound(aORI)
   nTEXTO = UBound(aTEXTO)
-  For y = 0 To nTEXTO
-    For x = 0 To nLEN
-      If aTEXTO(y) = aORI(x) Then          ''Encerra Analise Para Evitar
-        aTEXTO(y) = aDES(x)              ''Loop de Troca
+  For Y = 0 To nTEXTO
+    For X = 0 To nLEN
+      If aTEXTO(Y) = aORI(X) Then          ''Encerra Analise Para Evitar
+        aTEXTO(Y) = aDES(X)              ''Loop de Troca
         Exit For
       End If
     Next
   Next
   CharConv = ""
-  For y = 0 To nTEXTO
-    CharConv = CharConv & aTEXTO(y)
-  Next y
+  For Y = 0 To nTEXTO
+    CharConv = CharConv & aTEXTO(Y)
+  Next Y
 End Function
 Public Function TiraOut(ByVal eVAR As Variant) As String
   Dim cTEXTO As String
@@ -1682,7 +1682,7 @@ Public Function Extenso(ByVal Valor As Double, _
 End Function
 
 Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer = 80) As Variant
-  Dim nLIN, x As Integer
+  Dim nLIN, X As Integer
   Dim aRETU As Variant
   cTEXTO = FixStr(cTEXTO)
   If nCOL < 1 Then nCOL = 80                   'Evita Erros Divisao
@@ -1692,9 +1692,9 @@ Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer =
     nLIN = nLIN + 1                          ''Soma mais um pois e necesario
   End If
   ReDim aRETU(nLIN)
-  For x = 1 To nLIN
-    aRETU(x - 1) = Mid(cTEXTO, ((x - 1) * nCOL) + 1, nCOL)
-  Next x
+  For X = 1 To nLIN
+    aRETU(X - 1) = Mid(cTEXTO, ((X - 1) * nCOL) + 1, nCOL)
+  Next X
   Txt2Lin = aRETU
   eRETU01 = nLIN
 End Function
@@ -2003,18 +2003,37 @@ TrataErro:
     Resume Fim
 End Function
 Public Function CharCodesToHTML(ByVal iString As String) As String
-  Dim iXml As New MSXML2.DOMDocument60
-
-  With iXml.createTextNode(iString)
-    CharCodesToHTML = .Xml
-  End With
+    Dim iXml As Object
+    
+    ' Instancia o objeto via Late Binding
+    Set iXml = CreateObject("MSXML2.DOMDocument.6.0")
+    
+    ' Utiliza o textNode para codificar caracteres especiais
+    With iXml.createTextNode(iString)
+        CharCodesToHTML = .Xml
+    End With
+    
+    ' Limpeza
+    Set iXml = Nothing
 End Function
 
 Public Function HTMLToCharCodes(ByVal iString As String) As String
-  With New MSXML2.DOMDocument60
-    .loadXML "<p>" & iString & "</p>"
-    HTMLToCharCodes = .selectSingleNode("p").nodeTypedValue
-  End With
+    Dim iXml As Object
+    
+    ' Instancia o DOMDocument via Late Binding
+    Set iXml = CreateObject("MSXML2.DOMDocument.6.0")
+    
+    ' Carrega o XML com o conteúdo enviado
+    If iXml.loadXML("<p>" & iString & "</p>") Then
+        ' Extrai o valor do nó (decodificando as entidades HTML/XML automaticamente)
+        HTMLToCharCodes = iXml.selectSingleNode("p").nodeTypedValue
+    Else
+        ' Caso o carregamento falhe, retorna a string original ou trata o erro
+        HTMLToCharCodes = iString
+    End If
+    
+    ' Limpeza
+    Set iXml = Nothing
 End Function
 Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean = False) As String
   If lAnsi Then
@@ -2023,21 +2042,32 @@ Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean
   cTEXTO = CharCodesToHTML(cTEXTO)
   str2html = cTEXTO
 End Function
-Function FileText(ByVal filename As String) As String
+Function FileText(ByVal FileName As String) As String
   Dim Handle As Integer
   Handle = FreeFile
-  Open filename$ For Input As #Handle
+  Open FileName$ For Input As #Handle
   FileText = Input$(LOF(Handle), Handle)
   Close #Handle
 End Function
 Public Function Html2Str(ByVal cTEXTO As String) As String
   Html2Str = HtmlToText(cTEXTO)  'HTMLToCharCodes(cTexto)
 End Function
-Public Function HtmlToText(sHTML) As String
-  Dim oDoc As HTMLDocument
-  Set oDoc = New HTMLDocument
-  oDoc.Body.innerHTML = sHTML
-  HtmlToText = oDoc.Body.innerText
+Public Function HtmlToText(sHTML As String) As String
+    Dim oDoc As Object
+    
+    ' Cria o objeto HTML via Late Binding
+    Set oDoc = CreateObject("htmlfile")
+    
+    ' Abre o documento para escrita
+    oDoc.Open
+    oDoc.Write sHTML
+    oDoc.Close
+    
+    ' Extrai o texto limpo
+    HtmlToText = oDoc.Body.innerText
+    
+    ' Limpeza
+    Set oDoc = Nothing
 End Function
 Public Function FindInList(ByRef cList As ListBox, sSearch As String) As Long
   Dim sString As String
@@ -2146,12 +2176,12 @@ Public Function MachineName() As String
     End If
     Set oShell = Nothing
 End Function
-Public Function WordLen(ByRef Text As String) As Long
+Public Function WordLen(ByRef tEXT As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(Text), vbFromUnicode)
+  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next
@@ -2233,44 +2263,25 @@ Private Sub TimeOutMB(hWnd As Long, uMsg As Long, idEvent As Long, dwTime As Lon
   SendMessage FindWindow(vbNullString, CurMBTitle), WM_CLOSE, 0&, 0&
 
 End Sub
-Function CheckRegEx(texto As String, padrao As String)
-
-  Dim objRegExp As RegExp
-
-  'cria um objeto expressão regular
-  Set objRegExp = New RegExp
-
-  'define o padrão - Pattern
-  objRegExp.Pattern = padrao
-
-  'define IgnoreCase
-  objRegExp.IgnoreCase = True
-
-  'define a propriedade global
-  objRegExp.Global = True
-
-  'verifica se a string pode ser comparada
-  CheckRegEx = False
-  If (objRegExp.Test(texto) = True) Then
-    CheckRegEx = True
-
-    'obtem as coincidencias
-    '' Set colMatch = objRegExp.Execute(texto)   'executa a busca
-
-
-    'For Each objMatch In colMatch
-    ''   valor = valor & " padrao encontrado na posição "
-    ''   valor = valor & objMatch.FirstIndex & ". o valor é '"
-    ''   valor = valor & objMatch.Value & " '." & vbCrLf
-    'Next
-  Else
-    ' valor = "Comparacao falhou !"
-  End If
-
-Set objRegExp = Nothing ' Adicione isto para boa gestão de memória
-
+Public Function CheckRegEx(texto As String, padrao As String) As Boolean
+    Dim objRegExp As Object
+    
+    ' Cria o objeto via Late Binding para não precisar de referência fixa
+    Set objRegExp = CreateObject("VBScript.RegExp")
+    
+    ' Configurações do objeto
+    With objRegExp
+        .Pattern = padrao
+        .IgnoreCase = True
+        .Global = True
+        
+        ' Verifica se o padrão foi encontrado
+        CheckRegEx = .Test(texto)
+    End With
+    
+    ' Limpeza de memória
+    Set objRegExp = Nothing
 End Function
-
 'Returns True if the user is running 64-bit *VBA*
 '   This is *NOT* the same as the Windows bitness;
 '   64-bit Windows can (and often does) run 32-bit VBA
@@ -2643,10 +2654,10 @@ End Function
 
 ' --- Função de suporte para tradução ---
 Public Function WinApiError_ToStr(ByVal MessageID As Long) As String
-    Dim l As Long, s As String
+    Dim L As Long, s As String
     s = Space(1024)
-    l = FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM Or FORMAT_MESSAGE_IGNORE_INSERTS, 0&, MessageID, 0&, StrPtr(s), Len(s), ByVal 0&)
-    If l Then WinApiError_ToStr = Left$(s, l)
+    L = FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM Or FORMAT_MESSAGE_IGNORE_INSERTS, 0&, MessageID, 0&, StrPtr(s), Len(s), ByVal 0&)
+    If L Then WinApiError_ToStr = Left$(s, L)
 End Function
 
 ' --- Sub-rotina Principal Aprimorada ---
