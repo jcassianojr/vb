@@ -1,6 +1,5 @@
 # controle
 
-modulo controle
+modulo controle qualidade
 
-***
-_Created with the Personal Edition of HelpNDoc: [Free HTML Help documentation generator](<https://www.helpndoc.com>)_
+

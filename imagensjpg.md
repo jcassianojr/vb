@@ -1,6 +1,5 @@
 # imagensjpg
 
-modulo edicao de imagens arquivos mdb
+modulo edicao de imagens em arquivos
 
-***
-_Created with the Personal Edition of HelpNDoc: [iPhone web sites made easy](<https://www.helpndoc.com/feature-tour/iphone-website-generation>)_
+
