@@ -33,3 +33,6 @@ https://github.com/wqweto/ZipArchive
 
 clsosinfo
 https://github.com/fafalone/OSInfo
+
+vbrichclient RC6
+https://www.vbrichclient.com/en/Downloads.htm
