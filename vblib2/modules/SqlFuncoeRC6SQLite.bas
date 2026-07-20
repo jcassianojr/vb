@@ -1,5 +1,6 @@
 Attribute VB_Name = "SqlRC6SQLite"
 Option Explicit
+'vbrichclient RC6 https://www.vbrichclient.com/en/Downloads.htm
 Public Function ComandoSQLITERC6(ByVal cARQ As String, ByVal cSQL As String) As Boolean
     Dim oDB As New RC6.cConnection
 

@@ -227,6 +227,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+'cWEBIEW2 https://github.com/wqweto/cWebView2
 
 Private mvarCaminhoArquivo As String
 Dim bJaInicializado As Boolean

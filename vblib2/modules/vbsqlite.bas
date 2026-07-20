@@ -1,6 +1,7 @@
 Attribute VB_Name = "sqlvbsqlite"
 Option Explicit
 ' Reference=*\G{7CC1A5F1-A0FF-4546-A0F1-FBFE744A4522}#1.1#0#..\..\..\..\..\..\WINDOWS\system32\VBSQLite12.DLL#VB SQLite Library 1.2
+'vb sqllite common.bas https://github.com/Kr00l/VBSQLite
 Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     Dim loConn As New SQLiteConnection
     Dim DataSet As SQLiteDataSet

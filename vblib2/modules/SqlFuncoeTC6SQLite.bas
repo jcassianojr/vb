@@ -1,5 +1,6 @@
 Attribute VB_Name = "SqlTC6SQLite"
 Option Explicit
+'TC6 https://github.com/wqweto/TC6
 Public Function ComandoTC6(ByVal cARQ As String, ByVal cSQL As String) As Boolean
     Dim oDB As New TC6SQLITE.cConnection
 

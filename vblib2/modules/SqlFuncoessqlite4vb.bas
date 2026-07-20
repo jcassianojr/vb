@@ -1,5 +1,6 @@
 Attribute VB_Name = "sqlsqlite4vb"
 Option Explicit
+'sqlite4vb https://github.com/dzzie/sqllite4vb
 Public Function PegUltSQLite4vb(ByVal cCON As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     Dim db As New cSQLite, RS As cSQLiteResults, vUltimo As Variant
     On Error GoTo Erro

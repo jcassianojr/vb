@@ -1,6 +1,8 @@
 Attribute VB_Name = "SqlFuncoesrc6"
 Option Explicit
 
+'vbrichclient RC6 https://www.vbrichclient.com/en/Downloads.htm
+
 Public Function pgSetValuesrc6(ByRef oCON As Object) As Boolean
     ' Não precisamos declarar oCOMANDO como cCommand, pois usaremos
     ' a execução direta na conexão, que é o padrão nativo e veloz do RC6.
