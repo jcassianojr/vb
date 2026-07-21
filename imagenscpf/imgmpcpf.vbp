@@ -18,7 +18,7 @@ HelpContextID="0"
 CompatibleMode="0"
 MajorVer=1
 MinorVer=2
-RevisionVer=129
+RevisionVer=130
 AutoIncrementVer=1
 ServerSupportFiles=0
 VersionComments="1.1 Incluir Opcao caminho zzz  1.2 Inclusao de Help"
@@ -48,3 +48,6 @@ AutoRefresh=1
 
 [Form Designer]
 ReferenceAdded=1
+
+[Rubberduck]
+ProjectId=3e1948f4-e4d8-4257-b030-7a68372c13c4

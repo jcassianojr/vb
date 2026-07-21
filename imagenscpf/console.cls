@@ -13,46 +13,46 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 'LinearConnections 2002
 
-
 Public Function CloseConsole() As Boolean
-  If CloseHandle(hConsole) <> 0 Then hConsole = 0
-  FreeConsole
+    If CloseHandle(hConsole) <> 0 Then hConsole = 0
+    FreeConsole
 
 End Function
 
 Public Function OpenConsole() As Boolean
 
-'We open the Window
-  If AllocConsole() Then
-    hConsole = GetStdHandle(STD_OUTPUT_HANDLE)
-    If hConsole = 0 Then
-      FreeConsole
-    Else
-      SetConsoleCtrlHandler AddressOf ConsoleHandler, True
-      OpenConsole = True
-    End If
+    'We open the Window
+    If AllocConsole() Then
+        hConsole = GetStdHandle(STD_OUTPUT_HANDLE)
+        If hConsole = 0 Then
+            FreeConsole
+        Else
+            SetConsoleCtrlHandler AddressOf ConsoleHandler, True
+            OpenConsole = True
+        End If
 
-  End If
+    End If
 
 End Function
 
 Public Function SendText(sText As String) As Boolean
 
-  Dim sOut As String
-  Dim cWritten As Long
+    Dim sOut As String
+    Dim cWritten As Long
 
-  sOut = sText & vbCrLf
-  'Write the text to the console
-  SendText = WriteConsole(CLng(hConsole), ByVal sOut, Len(sOut), CLng(cWritten), ByVal 0&)
+    sOut = sText & vbCrLf
+    'Write the text to the console
+    SendText = WriteConsole(CLng(hConsole), ByVal sOut, Len(sOut), CLng(cWritten), ByVal 0&)
 
 End Function
 
 Private Sub Class_Terminate()
-'If a console is open then
-  If hConsole <> 0 Then
-    'close our handle to it and
-    CloseHandle hConsole
-    'disconnect it from the process.
-    FreeConsole
-  End If
+    'If a console is open then
+    If hConsole <> 0 Then
+        'close our handle to it and
+        CloseHandle hConsole
+        'disconnect it from the process.
+        FreeConsole
+    End If
 End Sub
+
