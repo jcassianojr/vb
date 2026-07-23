@@ -159,7 +159,6 @@ Module=mOpenWith; ..\vblib2\modules\mOpenWith.bas
 Module=MyFunctionsMail; ..\vblib2\modules\myFuntionsMail.bas
 Module=vb96hash; ..\vblib2\modules\vb96hash.bas
 Module=mPrintPreview; ..\vblib2\modules\mPrintPreview.bas
-Module=modMenuXP; ..\wrpt\modMenuXP.bas
 Form=..\vblib2\forms\FrmPicturePrinter.frm
 Class=PicSaveLoad; ..\vblib2\class\PicSavev11.cls
 Module=Datas; ..\vblib2\modules\Datas.bas
