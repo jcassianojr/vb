@@ -1,5 +1,0 @@
-# controle
-
-modulo controle qualidade
-
-
