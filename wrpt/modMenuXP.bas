@@ -10,7 +10,7 @@ Option Explicit
 ' Web site (Italian)  : http://www.vbcorner.net
 ' -----------------------------------------------------------------
 'Option Explicit
-Public objMenuEx As cMenuEx
-Public glMenuStyle As EnumStyleMenu  '/ style for menuXP
-Public gbSubClassMenu As Boolean
+'Public objMenuEx As cMenuEx
+'Public glMenuStyle As EnumStyleMenu  '/ style for menuXP
+'Public gbSubClassMenu As Boolean
 
