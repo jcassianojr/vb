@@ -11,8 +11,8 @@ Begin VB.MDIForm frmPRINCIPAL
    Icon            =   "PrincipaMENU.frx":0000
    WindowState     =   2  'Maximized
    Begin MSComctlLib.ImageList ImageList1 
-      Left            =   1560
-      Top             =   2520
+      Left            =   4560
+      Top             =   360
       _ExtentX        =   995
       _ExtentY        =   995
       BackColor       =   -2147483643
@@ -32,8 +32,8 @@ Begin VB.MDIForm frmPRINCIPAL
       InitPanels      =   "PrincipaMENU.frx":058A
    End
    Begin MSComctlLib.ImageList Imagemenu 
-      Left            =   5760
-      Top             =   840
+      Left            =   5280
+      Top             =   360
       _ExtentX        =   995
       _ExtentY        =   995
       BackColor       =   -2147483643
@@ -44,35 +44,35 @@ Begin VB.MDIForm frmPRINCIPAL
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   8
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "PrincipaMENU.frx":0BEA
+            Picture         =   "PrincipaMENU.frx":0BB6
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "PrincipaMENU.frx":113C
+            Picture         =   "PrincipaMENU.frx":1108
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "PrincipaMENU.frx":168E
+            Picture         =   "PrincipaMENU.frx":165A
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "PrincipaMENU.frx":1BE0
+            Picture         =   "PrincipaMENU.frx":1BAC
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "PrincipaMENU.frx":1F32
+            Picture         =   "PrincipaMENU.frx":1EFE
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "PrincipaMENU.frx":2484
+            Picture         =   "PrincipaMENU.frx":2450
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "PrincipaMENU.frx":2596
+            Picture         =   "PrincipaMENU.frx":2562
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "PrincipaMENU.frx":26A8
+            Picture         =   "PrincipaMENU.frx":2674
             Key             =   ""
          EndProperty
       EndProperty
@@ -166,9 +166,9 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Private Declare Function GetMenu Lib "user32" (ByVal hwnd As Long) As Long
-Private Declare Function GetMenuItemID Lib "user32" (ByVal menu As Long, ByVal nPos As Long) As Long
-Private Declare Function GetSubMenu Lib "user32" (ByVal menu As Long, ByVal nPos As Long) As Long
+Private Declare Function GetMenu Lib "user32" (ByVal hWnd As Long) As Long
+Private Declare Function GetMenuItemID Lib "user32" (ByVal menu As Long, ByVal nPOS As Long) As Long
+Private Declare Function GetSubMenu Lib "user32" (ByVal menu As Long, ByVal nPOS As Long) As Long
 Private Declare Function SetMenuItemBitmaps Lib "user32" (ByVal menu As Long, _
   ByVal posisi As Long, ByVal wFlags As Long, ByVal hBitmapUnchecked As Long, _
   ByVal hBitmapChecked As Long) As Long
@@ -178,7 +178,7 @@ Const MF_BYPOSITION = &H400&
 'Private WithEvents MenuEvents As CEvents
 Private Sub MDIForm_Load()
 Dim hMenu As Long, aSubmenu As Long, bSubmenu As Long, POSi As Long
-Dim i As Long, x As Long
+Dim i As Long, X As Long
 
 
 
@@ -192,7 +192,7 @@ Dim i As Long, x As Long
   Dim cmdline As String
   Dim bACESSO As Boolean
   
-  Dim nPos As Long
+  Dim nPOS As Long
   Dim sSQL As String
   Dim cARQ As String
   Dim aRETU As Variant
@@ -207,7 +207,7 @@ Dim i As Long, x As Long
 
   CenterFormToScreen Me
   
-hMenu = GetMenu(Me.hwnd)
+hMenu = GetMenu(Me.hWnd)
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     'Column 0 Submenu with subsubmenu - Use MF_BYPOSITION to add icon in subSubmenu
     aSubmenu = GetSubMenu(hMenu, 6)
@@ -217,7 +217,7 @@ hMenu = GetMenu(Me.hwnd)
         ' Use Picture Box control
        ' x = SetMenuItemBitmaps(aSubmenu, i, MF_BYPOSITION, CLng(Picture1(i).Picture), CLng(Picture1(i).Picture))
         ' Use Image List control
-        x = SetMenuItemBitmaps(aSubmenu, i, MF_BYPOSITION, CLng(Imagemenu.ListImages.item(i + 1).Picture), CLng(Imagemenu.ListImages.item(i + 1).Picture))
+        X = SetMenuItemBitmaps(aSubmenu, i, MF_BYPOSITION, CLng(Imagemenu.ListImages.item(i + 1).Picture), CLng(Imagemenu.ListImages.item(i + 1).Picture))
     Next
 
   
@@ -445,7 +445,7 @@ hMenu = GetMenu(Me.hwnd)
 
 
   If Trim(PegPath("EMAILINT", zUSER, "S")) = "S" Then
-     ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hwnd
+     ShellEx "MAIL", essSW_SHOWDEFAULT, "$" & UCase(zUSER), PegPath("PATH", "MAIL"), , Me.hWnd
   End If
 
 
@@ -617,10 +617,10 @@ Private Sub mnuSUBMENU4_Click(Index As Integer)
    ' FrmPrintSetup.Show vbModal, Me
 
   Case 1
-    cARQRTF = PegPath("HELP", "CAMINHO") + "WRPT.txt"
+    cARQRTF = PegPath("HELP", "ALTERADO")
     ' 0-Novo,1-Abrir,2-Salvar,3-Salvacomo
     ' 4-Editar,5-Visualizar,6-Imprimir,7-Exportar
-    aDIREITOS = Array(False, False, False, False, True, True, True, False)
+    aDIREITOS = Array(False, False, False, False, False, True, True, False)
     FrmRtfView.Show vbModal, Me
 
   Case 2
