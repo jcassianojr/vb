@@ -22,13 +22,13 @@ Private Const STRETCH_HALFTONE = 4
 #If VBA7 Or Win64 Then
     ' --- VERSÃO 64-BIT / TWINBASIC / VBA7 ---
     Private Type BITMAP
-        bmType As Long
-        bmWidth As Long
-        bmHeight As Long
-        bmWidthBytes As Long
-        bmPlanes As Integer
-        bmBitsPixel As Integer
-        bmBits As LongPtr ' Ajustado para LongPtr em 64-bit
+        BMType As Long
+        BMWidth As Long
+        BMHeight As Long
+        BMWidthBytes As Long
+        BMPlanes As Integer
+        BMBitsPixel As Integer
+        BMBits As LongPtr ' Ajustado para LongPtr em 64-bit
     End Type
 
     Private Declare PtrSafe Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As LongPtr) As LongPtr
@@ -53,21 +53,21 @@ Private Const STRETCH_HALFTONE = 4
 #Else
     ' --- VERSÃO 32-BIT CLÁSSICA (VB6) ---
     Private Type BITMAP
-        bmType As Long
-        bmWidth As Long
-        bmHeight As Long
-        bmWidthBytes As Long
-        bmPlanes As Integer
-        bmBitsPixel As Integer
-        bmBits As Long
+        BMType As Long
+        BMWidth As Long
+        BMHeight As Long
+        BMWidthBytes As Long
+        BMPlanes As Integer
+        BMBitsPixel As Integer
+        BMBits As Long
     End Type
 
     Private Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
     Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
     Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
-    Private Declare Function GetDC Lib "user32" (ByVal hwnd As Long) As Long
+    Private Declare Function GetDC Lib "user32" (ByVal hWnd As Long) As Long
     Private Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
-    Private Declare Function ReleaseDC Lib "user32" (ByVal hwnd As Long, ByVal hDC As Long) As Long
+    Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
     Public Declare Function GetDesktopWindow Lib "user32" () As Long
     Private Declare Function GetObject Lib "gdi32" Alias "GetObjectA" _
         (ByVal hObject As Long, ByVal nCount As Long, ByRef lpObject As Any) As Long
@@ -381,8 +381,8 @@ Public Function StretchSourcePictureFromFile(ByVal filename As String, ByRef pic
 
   'Get the sizes of the picture
   nRetVal = GetObject(picSrc.Handle, Len(Bmp), Bmp)
-  hMemWdth = Bmp.bmWidth
-  hMemHght = Bmp.bmHeight
+  hMemWdth = Bmp.BMWidth
+  hMemHght = Bmp.BMHeight
 
   'Make sure there is a picture
   If (hMemWdth > 0) And (hMemHght > 0) Then
@@ -455,6 +455,49 @@ Public Function lerarquivoimagem(ByVal STMPFILE, ByRef Picture1 As PictureBox, B
     lerarquivoimagem = True
   End If
 End Function
+Private Sub ScaleForBestFit(ByVal picSrc As StdPicture, _
+                                           ByRef picDest As PictureBox)
+    Dim aspRatio As Single, oWid As Long, oHgt As Long
+    Dim dWidth As Long, dHeight As Long
+
+ 'no form propriedades no componente ou no load
+ 'Picture1.ScaleMode = 3                            ' Pixels
+  '  Picture2.ScaleMode = 3
+ '   Picture1.AutoRedraw = True
+  
+
+    ' Get original image dimensions
+    oWid = picSrc.Picture.Width / Screen.TwipsPerPixelX ' Convert to pixels
+    oHgt = picSrc.Picture.Height / Screen.TwipsPerPixelY
+    
+    ' Desired dimensions (Picture1 area)
+    dWidth = picDest.ScaleWidth
+    dHeight = picDest.ScaleHeight
+   
+    ' Calculate aspect ratio
+    aspRatio = oWid / oHgt
+    
+    ' Calculate best fit
+    If oWid > dWidth Or oHgt > dHeight Then
+        If dWidth / dHeight > aspRatio Then
+            dWidth = aspRatio * dHeight
+        Else
+            dHeight = dWidth / aspRatio
+        End If
+    Else
+        dWidth = oWid
+        dHeight = oHgt
+    End If
+   
+   ' Draw result to destination picturebox (Picture1)
+   picDest.Cls
+   picDest.PaintPicture picSrc.Picture, 0, 0, dWidth, dHeight
+   picDest.Refresh
+
+End Sub
+
+
+
 
 Public Sub StretchSourcePictureFromPicture(ByVal picSrc As StdPicture, _
                                            ByRef picDest As PictureBox)
@@ -485,8 +528,8 @@ Public Sub StretchSourcePictureFromPicture(ByVal picSrc As StdPicture, _
 
   'Get the sizes of the picture
   nRetVal = GetObject(picSrc.Handle, Len(Bmp), Bmp)
-  hMemWdth = Bmp.bmWidth
-  hMemHght = Bmp.bmHeight
+  hMemWdth = Bmp.BMWidth
+  hMemHght = Bmp.BMHeight
 
   'Make sure there is a picture
   If (hMemWdth > 0) And (hMemHght > 0) Then
@@ -584,7 +627,7 @@ Private Function Base64ToByte(ByVal sBase64 As String) As Byte()
     Set oXML = CreateObject("MSXML2.DOMDocument")
     Set oNode = oXML.createElement("b64")
     oNode.DataType = "bin.base64"
-    oNode.tEXT = sBase64
+    oNode.Text = sBase64
     Base64ToByte = oNode.nodeTypedValue
     Set oNode = Nothing
     Set oXML = Nothing
