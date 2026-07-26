@@ -267,10 +267,99 @@ Dim shFileOp As SHFILEOPSTRUCT
 End Function
 
 Public Function FileExists(ByRef sFileName As String) As Boolean
+    Dim fAttr As VbFileAttribute
+    Const errBadFileNameOrNumber As Long = 52
+    
+    If LenB(sFileName) = 0 Then Exit Function
+    
     On Error Resume Next
-    FileExists = PathFileExists(sFileName)
+    ' Tenta o método nativo do VB6 primeiro
+    fAttr = GetAttr(sFileName)
+    
+    If Err.Number = 0 Then
+        ' Se não deu erro, verifica se é realmente um arquivo (e não um diretório)
+        FileExists = Not CBool(fAttr And vbDirectory)
+    ElseIf Err.Number = errBadFileNameOrNumber Then
+        ' Caso contenha caracteres Unicode ou inválidos para o Dir/GetAttr tradicional,
+        ' podemos usar o FSO como alternativa segura no Windows para VB6:
+        FileExists = GetFSOFileExists(sFileName)
+    Else
+        FileExists = False
+    End If
+    On Error GoTo 0
 End Function
 
+' Função auxiliar para usar o FileSystemObject de forma segura no VB6
+Private Function GetFSOFileExists(ByRef sFileName As String) As Boolean
+    Dim fso As Object
+    On Error Resume Next
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    If Not fso Is Nothing Then
+        GetFSOFileExists = fso.FileExists(sFileName)
+    End If
+    Set fso = Nothing
+    On Error GoTo 0
+End Function
+Public Function CopyFolder(ByRef sourcePath As String, ByRef destinationPath As String, Optional ByVal includeSubFolders As Boolean = True) As Boolean
+    Dim fso As Object
+    On Error GoTo ErrorHandler
+    
+    If LenB(sourcePath) = 0 Or LenB(destinationPath) = 0 Then Exit Function
+    
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' Garante que a pasta de destino existe (aproveitando sua função CreateNewDirectory ou FSO)
+    If Not fso.FolderExists(destinationPath) Then
+        CreateNewDirectory destinationPath
+    End If
+    
+    ' Copia a pasta e seu conteúdo (o parâmetro True sobrescreve se necessário)
+    fso.CopyFolder sourcePath, destinationPath, True
+    
+    Set fso = Nothing
+    CopyFolder = True
+    Exit Function
+
+ErrorHandler:
+    Set fso = Nothing
+    CopyFolder = False
+End Function
+Public Function DeleteFolder(ByRef FolderPath As String, Optional ByVal deleteContents As Boolean = True, Optional ByVal failIfMissing As Boolean = False) As Boolean
+    Dim fso As Object
+    Dim fixedPath As String
+    
+    DeleteFolder = False
+    If LenB(FolderPath) = 0 Then Exit Function
+    
+    On Error GoTo ErrorHandler
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' Padroniza o caminho usando sua função FixPath existente
+    fixedPath = FixPath(FolderPath)
+    
+    ' Remove a barra final exigida pelo FSO em alguns contextos de verificação
+    If Right$(fixedPath, 1) = "\" And Len(fixedPath) > 3 Then
+        fixedPath = Left$(fixedPath, Len(fixedPath) - 1)
+    End If
+    
+    If Not fso.FolderExists(fixedPath) Then
+        DeleteFolder = Not failIfMissing
+        Set fso = Nothing
+        Exit Function
+    End If
+    
+    ' Se deleteContents for True, força a exclusão mesmo se houver arquivos/subpastas
+    ' O parâmetro True no final do DeleteFolder do FSO indica "force" (ignora atributos de somente leitura)
+    fso.DeleteFolder fixedPath, True
+    
+    Set fso = Nothing
+    DeleteFolder = True
+    Exit Function
+
+ErrorHandler:
+    Set fso = Nothing
+    DeleteFolder = False
+End Function
 
 Public Function IsExtensao(ByVal cARQ As String, cEXT As String) As Boolean
  IsExtensao = False
@@ -323,44 +412,62 @@ Public Function CopyFileWindowsWay(ByVal SourceFile As String, ByVal Destination
   End If
 End Function
 
-Public Sub CreateNewDirectory(ByVal NewDirectory As String)
-  Dim sDirTest As String
-  Dim SecAttrib As SECURITY_ATTRIBUTES
-  Dim bSuccess As Boolean
-  Dim sPath As String
-  Dim iCounter As Integer
-  Dim sTempDir As String
-  Dim iFlag As Integer
-  iFlag = 0
-  sPath = NewDirectory
-
-  If Right(sPath, Len(sPath)) <> "\" Then
-    sPath = sPath & "\"
-  End If
-
-  iCounter = 1
-  Do Until InStr(iCounter, sPath, "\") = 0
-    iCounter = InStr(iCounter, sPath, "\")
-    sTempDir = Left(sPath, iCounter)
-    sDirTest = Dir(sTempDir)
-    iCounter = iCounter + 1
-
-    SecAttrib.lpSecurityDescriptor = &O0
-    SecAttrib.bInheritHandle = False
-    SecAttrib.nLength = Len(SecAttrib)
-    bSuccess = CreateDirectory(sTempDir, SecAttrib)
-  Loop
-End Sub
 
 Public Function GetTempDirectory() As String
-  Dim tempPath As String
-  Dim sLen As Integer
-  tempPath = String(255, 0)
-  sLen = GetTempPath(256, tempPath)
-  tempPath = Left(tempPath, sLen)
-  GetTempDirectory = tempPath
+    Dim bufferSize As Long
+    Dim tempPath As String
+    
+    ' 1. Descobre o tamanho exato do buffer necessário chamando a API com tamanho 0
+    bufferSize = GetTempPath(0, vbNullString)
+    
+    If bufferSize > 0 Then
+        ' 2. Aloca a string com o tamanho exato retornado pela API
+        tempPath = Space$(bufferSize)
+        
+        ' 3. Preenche o buffer com o caminho real da pasta temporária
+        If GetTempPath(bufferSize, tempPath) > 0 Then
+            ' Remove o caractere nulo de terminação padrão do Windows
+            GetTempDirectory = TrimNull(tempPath)
+            
+            ' Garante que o caminho retorne padronizado com a barra no final (utilizando sua função FixPath)
+            If LenB(GetTempDirectory) > 0 Then
+                GetTempDirectory = FixPath(GetTempDirectory)
+            End If
+            Exit Function
+        End If
+    End If
+    
+    ' Fallback de segurança caso a API falhe por algum motivo crítico
+    GetTempDirectory = "C:\Temp\"
 End Function
+Public Sub CreateNewDirectory(ByVal NewDirectory As String)
+    Dim fso As Object
+    Dim fixedPath As String
+    
+    NewDirectory = Trim$(NewDirectory)
+    If LenB(NewDirectory) = 0 Then Exit Sub
+    
+    On Error GoTo ErrorHandler
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' Padroniza o caminho
+    fixedPath = NewDirectory
+    If Right$(fixedPath, 1) = "\" And Len(fixedPath) > 3 Then
+        fixedPath = Left$(fixedPath, Len(fixedPath) - 1)
+    End If
+    
+    ' Se a pasta ainda não existir, o FSO cria toda a árvore hierárquica de uma só vez
+    If Not fso.FolderExists(fixedPath) Then
+        fso.CreateFolder fixedPath
+    End If
+    
+    Set fso = Nothing
+    Exit Sub
 
+ErrorHandler:
+    Set fso = Nothing
+    ' Opcional: Tratar erro de permissão caso necessário
+End Sub
 Public Function FileOpen(frmOwner As Form, _
                          Optional ByVal sFilters As String, _
                          Optional ByVal nFilterIndex As Long = 1, _
@@ -457,7 +564,7 @@ Public Function SelecionarPasta(ByVal Titulo As String) As String
     
     
     If Not objFolder Is Nothing Then
-        SelecionarPasta = objFolder.Items.Item.Path
+        SelecionarPasta = objFolder.Items.item.Path
     Else
         SelecionarPasta = ""
     End If
@@ -573,101 +680,133 @@ Public Function parsefile(ByVal archivo As String, ByVal parte As String) As Str
   End Select
 End Function
 
-Function FixPath(ByVal cARQ As String) As String
-  If Right(cARQ, 1) = "\" Then
-    FixPath = cARQ
-  Else
-    FixPath = cARQ + "\"
-  End If
+Public Function FixPath(ByVal pathToFix As String) As String
+    Const PS As String = "\"
+    Dim resultPath As String
+    Dim isUNC As Boolean
+    
+    If LenB(pathToFix) = 0 Then Exit Function
+    
+    ' Padroniza todas as barras para o formato do Windows (\) e identifica se é UNC (ex: \\servidor\pasta)
+    resultPath = Replace(pathToFix, "/", PS)
+    isUNC = (Left$(resultPath, 2) = "\\")
+    
+    ' Remove duplicidades excessivas de separadores, preservando o prefixo UNC se houver
+    resultPath = RemoveDuplicatePS(resultPath, isUNC)
+    
+    ' Garante que o caminho termine com a barra separadora padrão
+    If Right$(resultPath, 1) <> PS Then
+        resultPath = resultPath & PS
+    End If
+    
+    FixPath = resultPath
 End Function
-Function GetDriveUNC(DriveString As String) As String
-'GetDriveUNC by Gavin Bollard 2000
-'---------------------------------
-'This function is designed to be used when you want
-'your program to be network aware and be able to use
-'either the drive letter reference or the UNC Name.
-'For example when creating a CD that needs to
-'reference it's own drive letter, you might use this
-'code to anticipate it being shared on a Network CD
-'Tower or Drive.
-'
-'Example Usage:  sDriveLetter = GetDriveUNC(App.Path)
-'
-'Reads a String and Returns either...
-'1. Drive Letter,Colon, backslash
-'2. UNC Name ending in Backslash
-'3. Empty String (if not a drive letter or UNC Name)
 
-  Dim DriveText As String
-  Dim ThirdSlashPos As Integer
-  Dim FourthSlashPos As Integer
-
-  DriveString = Trim$(DriveString)
-  If Mid$(DriveString, 2, 1) = ":" Then
-    DriveText = Left$(DriveString, 2) + "\"
-  Else
-    If Left$(DriveString, 2) = "\\" Then
-      ThirdSlashPos = InStr(3, DriveString, "\", _
-                            vbTextCompare)
-      FourthSlashPos = InStr(ThirdSlashPos + 1, _
-                             DriveString, "\", vbTextCompare)
-      If FourthSlashPos > 5 Then
-        DriveText = Left$(DriveString, FourthSlashPos)
-      Else
-        If (FourthSlashPos = 0) And (ThirdSlashPos > 3) _
-           Then
-          DriveText = DriveString + "\"
-        Else
-          DriveText = ""
+' Função auxiliar inspirada diretamente na lógica de remoção de duplicidade da LibFileTools
+Private Function RemoveDuplicatePS(ByVal pathToFix As String, ByVal isUNC As Boolean) As String
+    Const PS As String = "\"
+    Dim startPos As Long
+    Dim currPos As Long
+    Dim prevPos As Long
+    Dim diff As Long
+    Dim i As Long
+    
+    If isUNC Then currPos = 2 ' Pula o prefixo UNC inicial: \\
+    RemoveDuplicatePS = pathToFix
+    
+    Do
+        prevPos = currPos
+        currPos = InStr(currPos + 1, pathToFix, PS)
+        If startPos = 0 Then startPos = prevPos + 1
+        If currPos - prevPos <= 1 Then
+            diff = currPos - startPos
+            If currPos = 0 Then diff = diff + Len(pathToFix) + 1
+            If startPos * Sgn(i * diff) > 1 Then
+                Mid$(RemoveDuplicatePS, i) = Mid$(pathToFix, startPos, diff)
+                i = i + diff
+            End If
+            If i = 0 Then i = (startPos + diff) * Sgn(prevPos)
+            startPos = 0
         End If
-      End If
-    Else
-      DriveText = ""
+    Loop Until currPos = 0
+    
+    If i > 1 Then RemoveDuplicatePS = Left$(RemoveDuplicatePS, i - 1)
+End Function
+Public Function GetDriveUNC(ByVal DriveString As String) As String
+    Dim fso As Object
+    Dim driveName As String
+    Dim fsDrive As Object
+    
+    DriveString = Trim$(DriveString)
+    If LenB(DriveString) = 0 Then Exit Function
+    
+    On Error GoTo ErrorHandler
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' Extrai a raiz/drive (ex: "C:" ou "\\servidor\compartilhamento")
+    driveName = fso.GetDriveName(DriveString)
+    
+    If LenB(driveName) = 0 Then
+        ' Se não conseguir pelo FSO, tenta padronizar via string limpa
+        GetDriveUNC = ""
+        Set fso = Nothing
+        Exit Function
     End If
-  End If
-  GetDriveUNC = DriveText
-End Function
-Public Function ShortSpec(ByVal sFileSpec As String) As String
-' This works with drive assignments or UNC paths.
-' If it fails, an empty string is returned.
-' Not designed to work with "relative" or "partial" paths.
-  Dim lRet As Long
-  Dim bUnc As Boolean
-  '
-  If Left$(sFileSpec, 2) = "\\" Then
-    sFileSpec = "\\?\UNC\" & Mid$(sFileSpec, 3)
-    bUnc = True
-  Else
-    sFileSpec = "\\?\" & sFileSpec
-  End If
-  lRet = GetShortPathNameW(StrPtr(sFileSpec), 0, 0)
-  If lRet Then
-    ShortSpec = Space$(lRet - 1)
-    lRet = GetShortPathNameW(StrPtr(sFileSpec), StrPtr(ShortSpec), lRet)
-    If lRet Then
-      If bUnc Then
-        ShortSpec = "\\" & Mid$(ShortSpec, 9)  ' Strip the "\\?\UNC\".
-      Else
-        ShortSpec = Mid$(ShortSpec, 5)   ' Strip the "\\?\".
-      End If
-    Else
-      ShortSpec = vbNullString
+    
+    ' Se começar com \\, já é um caminho UNC válido
+    If Left$(driveName, 2) = "\\" Then
+        GetDriveUNC = FixPath(driveName)
+        Set fso = Nothing
+        Exit Function
     End If
-  End If
+    
+    ' Verifica se é uma unidade mapeada (ex: Z:) para buscar o ShareName correspondente
+    Set fsDrive = fso.GetDrive(driveName)
+    If Not fsDrive Is Nothing Then
+        If LenB(fsDrive.shareName) > 0 Then
+            GetDriveUNC = FixPath(fsDrive.shareName)
+        Else
+            ' Se for uma unidade local pura (ex: C:\), retorna a letra com barra
+            GetDriveUNC = FixPath(fsDrive.driveLetter & ":")
+        End If
+    End If
+    
+    Set fsDrive = Nothing
+    Set fso = Nothing
+    Exit Function
+
+ErrorHandler:
+    Set fsDrive = Nothing
+    Set fso = Nothing
+    GetDriveUNC = ""
 End Function
-Public Function FolderExists(sDir As String) As Boolean
-  Dim s As String
-  s = sDir
-  If Right$(s, 1) = "\" Then s = Left$(s, Len(s) - 1)
-  On Error GoTo FileExistsError
-  ' If no error then something existed.
-  FolderExists = ((GetAttr(s) And vbDirectory) = vbDirectory)
-  Exit Function
-FileExistsError:
-  FolderExists = False
-  Exit Function
+
+Public Function FolderExists(ByRef sDir As String) As Boolean
+    Dim fso As Object
+    Dim fixedPath As String
+    
+    FolderExists = False
+    If LenB(sDir) = 0 Then Exit Function
+    
+    On Error GoTo ErrorHandler
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' Padroniza o caminho removendo barra final excessiva para o FSO validar corretamente
+    fixedPath = Trim$(sDir)
+    If Right$(fixedPath, 1) = "\" And Len(fixedPath) > 3 Then
+        fixedPath = Left$(fixedPath, Len(fixedPath) - 1)
+    End If
+    
+    FolderExists = fso.FolderExists(fixedPath)
+    
+    Set fso = Nothing
+    Exit Function
+
+ErrorHandler:
+    Set fso = Nothing
+    FolderExists = False
 End Function
-Public Function OpenStreamFile(filename$, Mode%, RLock%, RecordLen%) As Integer
+Public Function OpenStreamFile(FileName$, Mode%, RLock%, RecordLen%) As Integer
   Const REPLACEFILE = 1, READAFILE = 2, ADDTOFILE = 3
   Const RANDOMFILE = 4, BINARYFILE = 5
   Const NOLOCK = 0, RDLOCK = 1, WRLOCK = 2, RWLOCK = 3
@@ -679,57 +818,57 @@ Public Function OpenStreamFile(filename$, Mode%, RLock%, RecordLen%) As Integer
   Case REPLACEFILE
     Select Case RLock%
     Case NOLOCK
-      Open filename For Output Shared As FileNum%
+      Open FileName For Output Shared As FileNum%
     Case RDLOCK
-      Open filename For Output Lock Read As FileNum%
+      Open FileName For Output Lock Read As FileNum%
     Case WRLOCK
-      Open filename For Output Lock Write As FileNum%
+      Open FileName For Output Lock Write As FileNum%
     Case RWLOCK
-      Open filename For Output Lock Read Write As FileNum%
+      Open FileName For Output Lock Read Write As FileNum%
     End Select
   Case READAFILE
     Select Case RLock%
     Case NOLOCK
-      Open filename For Input Shared As FileNum%
+      Open FileName For Input Shared As FileNum%
     Case RDLOCK
-      Open filename For Input Lock Read As FileNum%
+      Open FileName For Input Lock Read As FileNum%
     Case WRLOCK
-      Open filename For Input Lock Write As FileNum%
+      Open FileName For Input Lock Write As FileNum%
     Case RWLOCK
-      Open filename For Input Lock Read Write As FileNum%
+      Open FileName For Input Lock Read Write As FileNum%
     End Select
   Case ADDTOFILE
     Select Case RLock%
     Case NOLOCK
-      Open filename For Append Shared As FileNum%
+      Open FileName For Append Shared As FileNum%
     Case RDLOCK
-      Open filename For Append Lock Read As FileNum%
+      Open FileName For Append Lock Read As FileNum%
     Case WRLOCK
-      Open filename For Append Lock Write As FileNum%
+      Open FileName For Append Lock Write As FileNum%
     Case RWLOCK
-      Open filename For Append Lock Read Write As FileNum%
+      Open FileName For Append Lock Read Write As FileNum%
     End Select
   Case RANDOMFILE
     Select Case RLock%
     Case NOLOCK
-      Open filename For Random Shared As FileNum% Len = RecordLen%
+      Open FileName For Random Shared As FileNum% Len = RecordLen%
     Case RDLOCK
-      Open filename For Random Lock Read As FileNum% Len = RecordLen%
+      Open FileName For Random Lock Read As FileNum% Len = RecordLen%
     Case WRLOCK
-      Open filename For Random Lock Write As FileNum% Len = RecordLen%
+      Open FileName For Random Lock Write As FileNum% Len = RecordLen%
     Case RWLOCK
-      Open filename For Random Lock Read Write As FileNum% Len = RecordLen%
+      Open FileName For Random Lock Read Write As FileNum% Len = RecordLen%
     End Select
   Case BINARYFILE
     Select Case RLock%
     Case NOLOCK
-      Open filename For Binary Shared As FileNum%
+      Open FileName For Binary Shared As FileNum%
     Case RDLOCK
-      Open filename For Binary Lock Read As FileNum%
+      Open FileName For Binary Lock Read As FileNum%
     Case WRLOCK
-      Open filename For Binary Lock Write As FileNum%
+      Open FileName For Binary Lock Write As FileNum%
     Case RWLOCK
-      Open filename For Binary Lock Read Write As FileNum%
+      Open FileName For Binary Lock Read Write As FileNum%
     End Select
   Case Else
     Exit Function
@@ -821,24 +960,6 @@ Public Function DeleteFile(ByVal sFileName As String, Optional vRecycleBin As Bo
   Call SHFileOperation(fo)
   DeleteFile = Abs(fo.fAborted) - 1
 End Function
-
-
-'*****************************************
-' ValidFileName: returns a valid file name String
-
-' The cases where an invalid file name can be returned are:
-' 1) The DefaultFileName parameter is a null String ("") and ProposedFileName was completely invalid or also a null string.
-' 2) The DefaultFileName parameter is a null String ("") and ProposedFileName was only an extension (".something").
-' In both above cases it will return a null string (""). So if you set DefaultFileName to "" you should check that the returned value is not "". In all other cases some valid file name will be returned.
-
-' Parameters
-' ProposedFileName: the String that is proposed to use as file name
-' ReplacementChar (Optional): a character to be used as a replacement for invalid characters, the default is nothing (a null string)
-' DefaultFileName (Optional): the file name that will be used when the is not file name
-' ForOldFileFormat_8Dot3 (Optional): set it to True in the case that you need to support the old file format convention that was used in the D.O.S. or if for some reason you want to restrict the file name to that format
-' AllowExtension (Optional): specifies if the string can supply not only the file name but also the file extension. The default is True.
-' [out] HasExtension (Optional): It is a return value. It is passed ByRef, it returns if the file name included an Extension.
-'*****************************************
 Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal ReplacementChar As String = "", Optional DefaultFileName As String = "Untitled", Optional ForOldFileFormat_8Dot3 As Boolean = False, Optional AllowExtension As Boolean = True, Optional ByRef HasExtension As Boolean) As String
     Dim iChar As String
     Dim C  As Long
@@ -849,6 +970,8 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
     Dim iNameLen As Long
     Dim iExtLen As Long
     Dim iFileName As String
+    Dim nameLen As Long
+    Dim i As Long
     
     If ForOldFileFormat_8Dot3 Then
         iFlag = GCT_SHORTCHAR
@@ -856,7 +979,7 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
         iFlag = GCT_LFNCHAR
     End If
      
-     ' Validate the replacement char (thanks Lavolpe)
+    ' Valida o caractere de substituição
     If ReplacementChar <> "" Then
         If Not ((PathGetCharType(AscW(ReplacementChar)) And iFlag) = iFlag) Then
             Err.Raise 2069, App.Title & "ValidFileName", "ReplacementChar is not valid."
@@ -865,10 +988,10 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
     End If
    
     ProposedFileName = Trim$(ProposedFileName)
-    If InStr(ProposedFileName, "/") Then ProposedFileName = Replace(ProposedFileName, "/", "-")  ' to preserve a date formatting
-    If InStr(ProposedFileName, """") Then ProposedFileName = Replace(ProposedFileName, """", "'") ' convert double quotes to single quotes to preserve quotation
+    If InStr(ProposedFileName, "/") Then ProposedFileName = Replace(ProposedFileName, "/", "-")
+    If InStr(ProposedFileName, """") Then ProposedFileName = Replace(ProposedFileName, """", "'")
     
-    'strip out not allowed characters in all the file name:
+    ' Remove caracteres não permitidos em todo o nome do arquivo[cite: 1]
     iFileName = ""
     For C = 1 To Len(ProposedFileName)
         iChar = Mid$(ProposedFileName, C, 1)
@@ -879,18 +1002,24 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
         End If
     Next C
     
-    ' strip out illegal characters at the end:
-    Do
-        iChar = Right$(iFileName, 1)
-        Select Case iChar
-            Case " ", "."
-                iFileName = Left(iFileName, Len(iFileName) - 1)
-            Case Else
-                Exit Do
-        End Select
-    Loop
+    ' Remove caracteres ilegais ou espaços/pontos nas extremidades (melhoria inspirada na LibFileTools)[cite: 1, 2]
+    nameLen = Len(iFileName)
+    i = nameLen
+    If i > 0 Then
+        Do While i > 0
+            Select Case Mid$(iFileName, i, 1)
+                Case " ", "."
+                    i = i - 1
+                Case Else
+                    Exit Do
+            End Select
+        Loop
+        If i < nameLen Then
+            iFileName = Left$(iFileName, i)
+        End If
+    End If
     
-    ' separate name and (optional) extension
+    ' Separa nome e extensão (opcional)[cite: 1]
     iDotPos = InStrRev(iFileName, ".")
     If iDotPos > 0 Then
         iName = Left(iFileName, iDotPos - 1)
@@ -900,7 +1029,7 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
         iExt = ""
     End If
     
-    ' strip out illegal characters at the beginning of the name
+    ' Remove caracteres ilegais no início do nome[cite: 1]
     For C = 1 To Len(iName)
         iChar = Left(iName, 1)
         Select Case iChar
@@ -911,16 +1040,12 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
         End Select
     Next C
     
-    ' don't permit too long file names (or estensions in the case of ForOldFileFormat_8Dot3)
+    ' Impede nomes ou extensões longas demais[cite: 1]
     iNameLen = Len(iName)
     iExtLen = Len(iExt)
     If ForOldFileFormat_8Dot3 Then
-        If iNameLen > 8 Then
-            iName = Left(iName, 8)
-        End If
-        If iExtLen > 3 Then
-            iExt = Left(iExt, 3)
-        End If
+        If iNameLen > 8 Then iName = Left(iName, 8)
+        If iExtLen > 3 Then iExt = Left(iExt, 3)
     Else
         If iExtLen > 0 Then
             If iNameLen > 258 Then
@@ -933,17 +1058,16 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
         End If
     End If
     
-    ' don't permit forbidden file names
+    ' Protege contra nomes reservados do Windows[cite: 1]
     Select Case UCase(iName)
         Case "CON", "PRN", "AUX", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"
             iName = ""
     End Select
     If iName = "" Then
-        'if there is not a valid file name, then use the default
         iName = DefaultFileName
     End If
     
-    ' compose file name again
+    ' Reconstrói o nome final do arquivo[cite: 1]
     ValidFileName = iName
     If iDotPos > 0 Then
         If AllowExtension Then
@@ -953,7 +1077,6 @@ Public Function ValidFileName(ByVal ProposedFileName As String, Optional ByVal R
             End If
         End If
     End If
-
 End Function
 
 'Reads a text file and returns the contents as a string
