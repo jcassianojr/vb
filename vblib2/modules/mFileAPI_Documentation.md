@@ -34,10 +34,10 @@ O módulo declara flags padrão do Windows para caixas de diálogo comuns (`OPEN
 ## 📁 Funções de Manipulação de Caminhos e Nomes
 
 ### `FixPath(ByVal pathToFix As String) As String`
-Normaliza qualquer caminho de diretório, convertendo barras invertidas incorretas (`/` para `\`), removendo duplicidades excessivas (preservando o prefixo de rede `\\` UNC) e garantindo que o caminho termine com a barra separadora (`\`).
+Normaliza qualquer caminho de diretório, convertendo barras invertidas incorretas (`/` para `/`), removendo duplicidades excessivas (preservando o prefixo de rede `//` UNC) e garantindo que o caminho termine com a barra separadora (`/`).
 
 ### `GetDriveUNC(ByVal DriveString As String) As String`
-Identifica se uma unidade de disco (ex: `Z:`) está mapeada para um caminho de rede e retorna o endereço UNC correspondente (ex: `\\servidor\compartilhamento`), ou retorna a unidade local formatada.
+Identifica se uma unidade de disco (ex: `Z:`) está mapeada para um caminho de rede e retorna o endereço UNC correspondente (ex: `//servidor/compartilhamento`), ou retorna a unidade local formatada.
 
 ### `ValidFileName(...) As String`
 Sanitiza uma string proposta para garantir que se torne um nome de arquivo válido no Windows. 
@@ -49,7 +49,7 @@ Sanitiza uma string proposta para garantir que se torne um nome de arquivo váli
 ### `parsefile(ByVal archivo As String, ByVal parte As String) As String`
 Função modular que extrai partes específicas de um caminho completo com base em uma letra de parâmetro:
 * `"D"`: Drive (ex: `c:`)
-* `"R"`: Raiz (ex: `c:\Users\Download\`)
+* `"R"`: Raiz (ex: `c:/Users/Download/`)
 * `"C"`: Caminho completo sem extensão
 * `"N"`: Nome do arquivo sem extensão
 * `"A"`: Nome do arquivo com extensão (`arquivo.txt`)
@@ -68,7 +68,7 @@ Verifica se um arquivo existe de forma híbrida. Tenta primeiro a checagem nativ
 Valida a existência de um diretório no disco, limpando barras finais excedentes para garantir compatibilidade com o validador do FSO.
 
 ### `CreateNewDirectory(ByVal NewDirectory As String)`
-Cria uma árvore inteira de diretórios de forma recursiva (`C:\PastaA\PastaB\PastaC`) em uma única chamada, utilizando o FSO.
+Cria uma árvore inteira de diretórios de forma recursiva (`C:/PastaA/PastaB/PastaC`) em uma única chamada, utilizando o FSO.
 
 ### `CopyFolder(ByVal sourcePath As String, ByVal destinationPath As String, ...)`
 Clona pastas inteiras e subestruturas recursivamente, criando o destino automaticamente se ele não existir.

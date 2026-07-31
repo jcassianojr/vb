@@ -3,25 +3,25 @@
 ## Table of contents
 
 modulo controle de qualidade
-- [controle](<controle.md>)
+- [controle](controle.md)
 
 grava jpf em arquivos
-- [imagencpf](<imagencpf.md>)
+- [imagencpf](imagencpf.md)
 
 gerenciador de imagens em arquivos
-- [imagensjpg](<imagensjpg.md>)
+- [imagensjpg](imagensjpg.md)
 
 gerenciados de relatorios e arquivos
-- [wrpt](<wrpt.md>)
+- [wrpt](wrpt.md)
 
 comparador de tabelas mdb,accdb,sqlite e schema
-- [dcompare](<dcompare.md>)
+- [dcompare](dcompare.md)
 
 gerenciados de senhas 
-- [cofre](<cofre.md>)
+- [cofre](cofre.md)
 
 bibliotecas class e modules
-- [vblib](<vblib.md>)
+- [vblib](vblib.md)
 
 
 base de dados e ddl 

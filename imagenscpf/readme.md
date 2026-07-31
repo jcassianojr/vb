@@ -27,5 +27,5 @@ O sistema utiliza um ficheiro `.ini` para definir os caminhos de trabalho. Se ap
 
 ```ini
 [PATH]
-IMGJPG=C:\Fotos\          ; Pasta onde estão os ficheiros .JPG
-IMGCOM=C:\Dados\base.db   ; Caminho do ficheiro (MDB, ACCDB ou SQLite) ou String ADO completa
+IMGJPG=C:/Fotos/          ; Pasta onde estão os ficheiros .JPG
+IMGCOM=C:/Dados/base.db   ; Caminho do ficheiro (MDB, ACCDB ou SQLite) ou String ADO completa
