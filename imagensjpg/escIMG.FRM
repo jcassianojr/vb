@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.7#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form escIMG 
    Caption         =   "Escolha o Codigo da Imagem"
    ClientHeight    =   6672
@@ -15,14 +15,6 @@ Begin VB.Form escIMG
    ScaleHeight     =   6672
    ScaleWidth      =   10608
    StartUpPosition =   3  'Windows Default
-   Begin VB.CommandButton Command2 
-      Caption         =   "Command2"
-      Height          =   372
-      Left            =   9480
-      TabIndex        =   12
-      Top             =   6000
-      Width           =   732
-   End
    Begin VBFLXGRD18.VBFlexGrid Grid 
       Height          =   5655
       Left            =   120

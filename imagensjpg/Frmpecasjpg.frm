@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Begin VB.Form frmIMAGENS 
    BorderStyle     =   3  'Fixed Dialog
@@ -415,7 +415,7 @@ Private Sub cmdClose_Click()
       End If
       If lTROCOU Then
         'CSQLI = "select imagem from imagens  WHERE CODIGO='" & ZGRP & "'"
-        ADOGrvBlob cARQ, "imagens", Picture1, "imagem", "CODIGO='" & zgrp & "'"
+        ADOGrvBlob cARQ, "imagens", Picture1, "imagem", "CODIGO='" & ZGRP & "'"
       End If
     End If
   End If
@@ -445,6 +445,16 @@ Private Sub CmdPaste_Click()
     Clipboard.Clear
     Clipboard.SetData Picture1.Image, (vbCFBitmap)
   End If
+End Sub
+
+Private Sub Command1_Click()
+ Dim oCOM As New VBCCR18.CommonDialog
+ oCOM.ShowPrinter
+ oCOM.ShowFolderBrowser
+ oCOM.ShowPrinterEx
+ oCOM.ShowFont
+ oCOM.ShowColor
+ 
 End Sub
 
 Private Sub DelImg_Click()
@@ -565,7 +575,11 @@ End Sub
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
   TeclaEnter KeyCode
 End Sub
+Private Sub TESTE()
+Dim oCOM  As VBCCR18.CommonDialog
+oCOM.ShowPrinter
 
+End Sub
 Private Sub Form_Load()
   Dim nTMPNUMERO
   Dim nPOS
@@ -602,28 +616,28 @@ Private Sub Form_Load()
   End If
 
 
-  zgrp = FixStr(zgrp, "")
-  If Len(zgrp) = 0 Then
+  ZGRP = FixStr(ZGRP, "")
+  If Len(ZGRP) = 0 Then
     Alert ("Codigo em Branco")
     lABRE = False
   End If
 
   If lABRE Then
     cARQ = cARQRTF
-    nPOS = InStr(zgrp, "|")
+    nPOS = InStr(ZGRP, "|")
     If nPOS > 0 Then
-      nTMPNUMERO = Mid(zgrp, nPOS + 1)
-      zgrp = Mid(zgrp, 1, nPOS - 1)
+      nTMPNUMERO = Mid(ZGRP, nPOS + 1)
+      ZGRP = Mid(ZGRP, 1, nPOS - 1)
     Else
-      nTMPNUMERO = zgrp
+      nTMPNUMERO = ZGRP
     End If
     nTMPNUMERO = funNumeroPuro(nTMPNUMERO)
     nTMPNUMERO = Val(nTMPNUMERO)
 
 
-    cSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & zgrp & "'"
+    cSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & ZGRP & "'"
     If cBASEDADOS = "LOGIX" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
-      cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto  WHERE MATRICULA='" & zgrp & "'"
+      cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto  WHERE MATRICULA='" & ZGRP & "'"
       cSQL = cSQL & " and empresa=" & StrZero(zEMPRESA, 2)
     End If
 
@@ -634,14 +648,14 @@ Private Sub Form_Load()
       cSQL = cSQL & " FROM gip.fotos AS gip"
       cSQL = cSQL & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
       cSQL = cSQL & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
-      cSQL = cSQL & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(zgrp, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(zgrp, 8)
+      cSQL = cSQL & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(ZGRP, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(ZGRP, 8)
     End If
 
 
 
     If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
     Else
-      IncluiSQL cARQ, cSQL, 2, Array("CODIGO", "NUMERO"), Array(zgrp, nTMPNUMERO), True, False
+      IncluiSQL cARQ, cSQL, 2, Array("CODIGO", "NUMERO"), Array(ZGRP, nTMPNUMERO), True, False
     End If
 
 
@@ -662,9 +676,9 @@ Private Sub Form_Load()
     '
     '
     CSQLI = "imagens"
-    cWHERE = "CODIGO='" & zgrp & "'"
+    cWHERE = "CODIGO='" & ZGRP & "'"
     If cBASEDADOS = "LOGIX" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
-      CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & zgrp
+      CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & ZGRP
       CSQLI = CSQLI & " and empresa=" & StrZero(zEMPRESA, 2)
       cWHERE = ""
     End If
@@ -674,7 +688,7 @@ Private Sub Form_Load()
       CSQLI = CSQLI & " FROM gip.fotos AS gip"
       CSQLI = CSQLI & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
       CSQLI = CSQLI & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
-      CSQLI = CSQLI & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(zgrp, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(zgrp, 8)
+      CSQLI = CSQLI & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(ZGRP, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(ZGRP, 8)
       cWHERE = ""
     End If
 
@@ -683,7 +697,7 @@ Private Sub Form_Load()
       StretchSourcePictureFromPicture Picture1, Picture2
       If FixNum(eRETU01) > 500000 Then
         Alert ("Imagem Muito Grande,Ajuste o tamanho")
-        salvarpict Me, Picture1, "Imagem_" & zgrp
+        salvarpict Me, Picture1, "Imagem_" & ZGRP
         Set Picture1.Picture = Nothing
         Set Picture2.Picture = Nothing
         lTROCOU = True
