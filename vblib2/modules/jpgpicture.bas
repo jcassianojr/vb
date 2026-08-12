@@ -84,6 +84,59 @@ Private Const STRETCH_HALFTONE = 4
 #End If
 
 
+Public Enum ExifOrientationEnum
+  Exif_Orientation_Normal = 1
+  Exif_Orientation_MirrorHorizontal = 2
+  Exif_Orientation_Rotate180 = 3
+  Exif_Orientation_MirrorVertical = 4
+  Exif_Orientation_MirrorHorizontalRotate270 = 5
+  Exif_Orientation_Rotate90 = 6
+  Exif_Orientation_MirrorHorizontalRotate90 = 7
+  Exif_Orientation_Rotate270 = 8
+End Enum
+Public Const EXIF_ORIENTATION As Long = 274
+Public Enum RotationEnum
+    Rotate_0 = 0
+    Rotate_90 = 90
+    Rotate_180 = 180
+    Rotate_270 = 270
+End Enum
+
+Public Sub RotateJpegFile(ByVal FilePath As String, Optional ByVal DegreesRotate As RotationEnum = Rotate_0)
+
+    Dim img As Object
+    Dim proc As Object
+    Set img = CreateObject("WIA.ImageFile")
+    img.LoadFile FilePath
+
+    Set proc = CreateObject("WIA.ImageProcess")
+    proc.Filters.Add proc.FilterInfos("RotateFlip").FilterID
+    proc.Filters(1).Properties("RotationAngle").Value = DegreesRotate
+
+    Set img = proc.Apply(img)
+    img.SaveFile FilePath
+End Sub
+
+Public Function GetExifOrientation(ByVal FilePath As String) As ExifOrientationEnum
+  Dim img As Object
+  Dim prop As Object
+  On Error GoTo ErrHandler
+  
+  GetExifOrientation = -1
+  
+  Set img = CreateObject("WIA.ImageFile")
+  img.LoadFile FilePath
+  
+  For Each prop In img.Properties
+    If prop.propertyId = EXIF_ORIENTATION Then
+      GetExifOrientation = CLng(prop.Value)
+      Exit Function
+    End If
+  Next prop
+ErrHandler:
+  Debug.Print Err.Number & " - " & Err.Description
+End Function
+
 
 
 Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As String, Optional ByVal cWHERE As String, _
@@ -103,7 +156,7 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
   mystream.Type = adTypeBinary
 
 
-  On Error GoTo errhandler
+  On Error GoTo ErrHandler
 
   ADOPegBlob = False
 
@@ -194,7 +247,7 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
 
 
 
-errhandler:
+ErrHandler:
   cERRO = "AdoPegBlob" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL & Chr(13) & Chr(10)
   If lRSOP Then
     cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
@@ -231,7 +284,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
   mystream.Type = adTypeBinary
 
 
-  On Error GoTo errhandler
+  On Error GoTo ErrHandler
 
   ADOGrvBlob = False
 
@@ -332,7 +385,7 @@ Select Case aRETU(2)
   Set oDB = Nothing
   Exit Function
 
-errhandler:
+ErrHandler:
   cERRO = "AdoGRVBlob" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL & Chr(13) & Chr(10)
   If lRSOP Then
     cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
@@ -349,7 +402,7 @@ errhandler:
 
 End Function
 
-Public Function StretchSourcePictureFromFile(ByVal filename As String, ByRef picDest As PictureBox) As StdPicture
+Public Function StretchSourcePictureFromFile(ByVal FileName As String, ByRef picDest As PictureBox) As StdPicture
   Dim hMemDC As Long
   Dim hOldBmp As Long
   Dim hMemWdth As Long
@@ -365,7 +418,7 @@ Public Function StretchSourcePictureFromFile(ByVal filename As String, ByRef pic
   Dim ShowWidth As Long
   Dim ShowHeight As Long
 
-  If Len(filename) = 0 Then
+  If Len(FileName) = 0 Then
     Beep
     Exit Function
   End If
@@ -374,7 +427,7 @@ Public Function StretchSourcePictureFromFile(ByVal filename As String, ByRef pic
   hMemDC = CreateCompatibleDC(GetDC(GetDesktopWindow()))
   'Load the picture
   'Set picSrc = LoadPictureEx(FileName)
-  Set picSrc = LoadPicture(filename)
+  Set picSrc = LoadPicture(FileName)
 
   'Assign the picture to the memory DC
   hOldBmp = SelectObject(hMemDC, picSrc.Handle)
@@ -627,7 +680,7 @@ Private Function Base64ToByte(ByVal sBase64 As String) As Byte()
     Set oXML = CreateObject("MSXML2.DOMDocument")
     Set oNode = oXML.createElement("b64")
     oNode.DataType = "bin.base64"
-    oNode.Text = sBase64
+    oNode.tEXT = sBase64
     Base64ToByte = oNode.nodeTypedValue
     Set oNode = Nothing
     Set oXML = Nothing
