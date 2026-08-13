@@ -120,7 +120,7 @@ End Sub
 Public Function GetExifOrientation(ByVal FilePath As String) As ExifOrientationEnum
   Dim img As Object
   Dim prop As Object
-  On Error GoTo ErrHandler
+  On Error GoTo errhandler
   
   GetExifOrientation = -1
   
@@ -133,7 +133,7 @@ Public Function GetExifOrientation(ByVal FilePath As String) As ExifOrientationE
       Exit Function
     End If
   Next prop
-ErrHandler:
+errhandler:
   Debug.Print Err.Number & " - " & Err.Description
 End Function
 
@@ -156,7 +156,7 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
   mystream.Type = adTypeBinary
 
 
-  On Error GoTo ErrHandler
+  On Error GoTo errhandler
 
   ADOPegBlob = False
 
@@ -247,7 +247,7 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
 
 
 
-ErrHandler:
+errhandler:
   cERRO = "AdoPegBlob" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL & Chr(13) & Chr(10)
   If lRSOP Then
     cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
@@ -284,7 +284,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
   mystream.Type = adTypeBinary
 
 
-  On Error GoTo ErrHandler
+  On Error GoTo errhandler
 
   ADOGrvBlob = False
 
@@ -385,7 +385,7 @@ Select Case aRETU(2)
   Set oDB = Nothing
   Exit Function
 
-ErrHandler:
+errhandler:
   cERRO = "AdoGRVBlob" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL & Chr(13) & Chr(10)
   If lRSOP Then
     cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
@@ -402,7 +402,7 @@ ErrHandler:
 
 End Function
 
-Public Function StretchSourcePictureFromFile(ByVal FileName As String, ByRef picDest As PictureBox) As StdPicture
+Public Function StretchSourcePictureFromFile(ByVal filename As String, ByRef picDest As PictureBox) As StdPicture
   Dim hMemDC As Long
   Dim hOldBmp As Long
   Dim hMemWdth As Long
@@ -418,7 +418,7 @@ Public Function StretchSourcePictureFromFile(ByVal FileName As String, ByRef pic
   Dim ShowWidth As Long
   Dim ShowHeight As Long
 
-  If Len(FileName) = 0 Then
+  If Len(filename) = 0 Then
     Beep
     Exit Function
   End If
@@ -427,7 +427,7 @@ Public Function StretchSourcePictureFromFile(ByVal FileName As String, ByRef pic
   hMemDC = CreateCompatibleDC(GetDC(GetDesktopWindow()))
   'Load the picture
   'Set picSrc = LoadPictureEx(FileName)
-  Set picSrc = LoadPicture(FileName)
+  Set picSrc = LoadPicture(filename)
 
   'Assign the picture to the memory DC
   hOldBmp = SelectObject(hMemDC, picSrc.Handle)
@@ -680,7 +680,7 @@ Private Function Base64ToByte(ByVal sBase64 As String) As Byte()
     Set oXML = CreateObject("MSXML2.DOMDocument")
     Set oNode = oXML.createElement("b64")
     oNode.DataType = "bin.base64"
-    oNode.tEXT = sBase64
+    oNode.Text = sBase64
     Base64ToByte = oNode.nodeTypedValue
     Set oNode = Nothing
     Set oXML = Nothing
@@ -708,3 +708,15 @@ Public Sub SalvarBase64ComoImagem(ByVal sBase64 As String, ByVal sCaminhoDestino
     Put #hFile, , baImagem
     Close #hFile
 End Sub
+
+ Public Function RotateImg(ByVal sImgPath As String, ByVal angle As Long) As Boolean
+        Dim pFact As ShellImageDataFactory
+        Dim pShImg As IShellImageData
+        Set pFact = New ShellImageDataFactory
+        pFact.CreateImageFromFile StrPtr(sImgPath), pShImg
+        pShImg.Decode SHIMGDEC_DEFAULT, 0, 0
+        pShImg.Rotate angle
+        Dim ipf As IPersistFile
+        Set ipf = pShImg
+        ipf.Save sImgPath, 1
+    End Function
