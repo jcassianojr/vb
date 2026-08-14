@@ -36,3 +36,7 @@ https://github.com/fafalone/OSInfo
 
 vbrichclient RC6
 https://www.vbrichclient.com/en/Downloads.htm
+
+PCRE - Perl Compatible Regular Expressions
+https://github.com/PCRE2Project/pcre2
+https://www.pcre.org/
