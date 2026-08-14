@@ -172,6 +172,10 @@ Public Function GeraConn(ByVal cARQ As String, Optional cTIPO As String = "") As
      Exit Function
   End If
  
+ If InStr(cARQTMP, "[APOLLO]") > 0 Or InStr(cARQTMP, "[APOLLOREM]") > 0 Then
+    Exit Function
+  End If
+  
   
 If Len(cTIPO) > 0 Then
   Select Case cTIPO
@@ -221,6 +225,9 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   Dim lTEMFIREBIRD As Boolean
   Dim lTEMRC6 As Boolean
   Dim lTEMVBSQLITE As Boolean
+  Dim lTEMAPOLLO As Boolean
+  Dim lTEMAPOLLOREM As Boolean
+  
   Dim cADSTIP As String
   Dim cADSNOM As String
   Dim cXLSVER As String '
@@ -239,6 +246,8 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   lTEMFIREBIRD = False
   lTEMRC6 = False
   lTEMVBSQLITE = False
+  lTEMAPOLLO = False
+  lTEMAPOLLOREM = False
   cTIPOPADRAO = "ADO"
   
   'inicial valores padrao
@@ -341,6 +350,16 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
    If EArquivofirebird(cARQTMP) Or InStr(cARQTMP, "{FIREBIRD") > 0 Or InStr(cARQTMP, "[FIREBIRD") > 0 Then
        lTEMFIREBIRD = True
      TipoConn = Array(cTIPOPADRAO, cARQ, "FIREBIRD")
+   End If
+   
+   If InStr(cARQTMP, "APOLLOREM") > 0 Or InStr(cARQTMP, "[APOLLOREM]") > 0 Then
+        lTEMAPOLLOREM = True
+        TipoConn = Array(cTIPOPADRAO, cARQ, "APOLLOREM")
+   End If
+
+   If InStr(cARQTMP, "APOLLO") > 0 And Not lTEMAPOLLOREM Then
+        lTEMAPOLLO = True
+        TipoConn = Array(cTIPOPADRAO, cARQ, "APOLLO")
    End If
 
   '
@@ -609,6 +628,46 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     TipoConn = Array(cTIPOPADRAO, cARQ, "DBF")
     Exit Function
   End If
+  
+  ' -------------------------------------------------------------------------
+  ' APOLLO (Local e Remoto)
+  ' -------------------------------------------------------------------------
+  If lTEMAPOLLO Or lTEMAPOLLOREM Then
+        
+        ' Valores padrão caso o usuário/senha venham vazios (conforme documentação do Apollo)
+        If Trim(cUSER) = "" Then
+           cUSER = IIf(Len(cUSER) > 0, cUSER, "SYSDBA")
+        End If
+        If Trim(cPASS) = "" Then
+           cPASS = "masterkey"
+        End If
+        If Trim(cPORTA) = "" Then
+           cPORTA = "8121"
+        End If
+
+        If lTEMAPOLLOREM Then
+            cARQ = Replace(cARQ, "[APOLLOREM]", "")
+            ' Conexão Remota com o Apollo Database Server
+            cARQ = "Provider=ApolloOLEDB9.ApolloOLEDB9;" & _
+                   "Data Source=" & cDATABASE & ";" & _
+                   "ConnectionUser=" & cUSER & "; " & _
+                   "ConnectionPassword=" & cPASS & "; " & _
+                   "ConnectionHost=" & cARQ & ";" & _
+                   "ConnectionPort=" & cPORTA & ";" & _
+                   "TableType=ttSXFOX; FetchCount=50; AccessMethod=amServer; CommitLevel=clNormal;"
+        Else
+            cARQ = Replace(cARQ, "[APOLLO]", "")
+            ' Conexão Local baseada nos exemplos dos formulários
+            cARQ = "Provider=ApolloOLEDB9.ApolloOLEDB9;" & _
+                   "Data Source=" & cARQ & ";" & _
+                   "TableType=ttSXFOX; FetchCount=50; AccessMethod=amLocal; CommitLevel=clNormal;"
+        End If
+
+        TipoConn = Array(cTIPOPADRAO, cARQ, IIf(lTEMAPOLLOREM, "APOLLOREM", "APOLLO"))
+        Exit Function
+  End If
+  
+  
   If InStr(cARQTMP, "[XLSDRV]") > 0 Then
     cARQ = Replace(cARQ, "[XLSDRV]", "")
          cARQ = "DRIVER=Microsoft Excel Driver (*.xls);" & "DBQ=" & cARQ
