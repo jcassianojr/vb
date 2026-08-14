@@ -11,6 +11,7 @@ Form=frmEmail.frm
 Module=modstartup; modStartup.bas
 Form=..\vblib2\forms\frmCadastroDSN.frm
 Module=sqlOdbc; ..\vblib2\modules\Odbc.bas
+Module=Common; ..\..\vbpriv\vblib2\modules\Common.bas
 IconForm="Frmbancos"
 Startup="Sub Main"
 HelpFile=""

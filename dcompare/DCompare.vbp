@@ -17,6 +17,7 @@ Form=..\cofre\frmbancos.frm
 Form=..\vblib2\forms\frmCadastroDSN.frm
 Module=modSeguranca; ..\vblib2\modules\modSeguranca.bas
 Module=sqlOdbc; ..\vblib2\modules\Odbc.bas
+Module=Common; ..\..\vbpriv\vblib2\modules\Common.bas
 IconForm="dCompare"
 Startup="Sub Main"
 HelpFile=""
