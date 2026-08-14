@@ -1,29 +1,29 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
-Object = "{66E63055-5A66-4C79-9327-4BC077858695}#15.0#0"; "newtab01.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.8#0"; "VBFLXGRD18.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.1#0"; "vbccr18.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#9.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmPF 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Processo de Fabricação"
-   ClientHeight    =   8256
-   ClientLeft      =   1092
-   ClientTop       =   336
-   ClientWidth     =   12024
+   ClientHeight    =   8265
+   ClientLeft      =   1095
+   ClientTop       =   330
+   ClientWidth     =   12015
    Icon            =   "frmPF.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8256
-   ScaleWidth      =   12024
+   ScaleHeight     =   8265
+   ScaleWidth      =   12015
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   11160
       Top             =   3000
-      _ExtentX        =   953
-      _ExtentY        =   953
+      _ExtentX        =   1191
+      _ExtentY        =   1191
    End
    Begin VB.TextBox txtfields 
       Height          =   285
@@ -503,12 +503,12 @@ Begin VB.Form frmPF
       TabIndex        =   51
       Top             =   3720
       Width           =   11775
-      _ExtentX        =   20765
-      _ExtentY        =   7853
+      _ExtentX        =   20770
+      _ExtentY        =   7858
       Tabs            =   7
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   7.8
+         Size            =   8.25
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -518,7 +518,7 @@ Begin VB.Form frmPF
       TabsPerRow      =   7
       Tab             =   5
       TabHeight       =   520
-      ControlVersion  =   15
+      ControlVersion  =   9
       TabCaption(0)   =   "Matéria Prima 1"
       Tab(0).ControlCount=   28
       Tab(0).Control(0)=   "lblLabels(22)"
@@ -641,7 +641,7 @@ Begin VB.Form frmPF
       Tab(4).Control(22)=   "Label12"
       Tab(4).Control(23)=   "Label1"
       TabCaption(5)   =   "Sequencia"
-      Tab(5).ControlCount=   10
+      Tab(5).ControlCount=   11
       Tab(5).Control(0)=   "ESCpro(10)"
       Tab(5).Control(1)=   "Picture2(1)"
       Tab(5).Control(2)=   "CmdApagar(2)"
@@ -652,6 +652,7 @@ Begin VB.Form frmPF
       Tab(5).Control(7)=   "EditSeq"
       Tab(5).Control(8)=   "seqreo"
       Tab(5).Control(9)=   "GridSeq"
+      Tab(5).Control(10)=   "Label5"
       TabCaption(6)   =   "Fluxo Mat Prima"
       Tab(6).ControlCount=   30
       Tab(6).Control(0)=   "EscCodFlu(10)"
@@ -751,8 +752,8 @@ Begin VB.Form frmPF
          Height          =   2535
          Index           =   2
          Left            =   -74760
-         ScaleHeight     =   2484
-         ScaleWidth      =   2844
+         ScaleHeight     =   2475
+         ScaleWidth      =   2835
          TabIndex        =   177
          Top             =   600
          Width           =   2895
@@ -761,8 +762,8 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   2
          Left            =   -71520
-         ScaleHeight     =   204
-         ScaleWidth      =   564
+         ScaleHeight     =   195
+         ScaleWidth      =   555
          TabIndex        =   176
          Top             =   600
          Visible         =   0   'False
@@ -772,8 +773,8 @@ Begin VB.Form frmPF
          Height          =   2535
          Index           =   1
          Left            =   240
-         ScaleHeight     =   2484
-         ScaleWidth      =   2844
+         ScaleHeight     =   2475
+         ScaleWidth      =   2835
          TabIndex        =   175
          Top             =   480
          Width           =   2895
@@ -782,8 +783,8 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   1
          Left            =   -71640
-         ScaleHeight     =   204
-         ScaleWidth      =   324
+         ScaleHeight     =   195
+         ScaleWidth      =   315
          TabIndex        =   174
          Top             =   480
          Visible         =   0   'False
@@ -793,8 +794,8 @@ Begin VB.Form frmPF
          Height          =   2535
          Index           =   0
          Left            =   -74760
-         ScaleHeight     =   2484
-         ScaleWidth      =   2844
+         ScaleHeight     =   2475
+         ScaleWidth      =   2835
          TabIndex        =   173
          Top             =   480
          Width           =   2895
@@ -803,8 +804,8 @@ Begin VB.Form frmPF
          Height          =   255
          Index           =   0
          Left            =   -71760
-         ScaleHeight     =   204
-         ScaleWidth      =   564
+         ScaleHeight     =   195
+         ScaleWidth      =   555
          TabIndex        =   172
          Top             =   480
          Visible         =   0   'False
@@ -1738,8 +1739,8 @@ Begin VB.Form frmPF
          TabStop         =   0   'False
          Top             =   480
          Width           =   8055
-         _ExtentX        =   14203
-         _ExtentY        =   6371
+         _ExtentX        =   14208
+         _ExtentY        =   6376
       End
       Begin VBFLXGRD18.VBFlexGrid GridSeq 
          Height          =   3615
@@ -1748,8 +1749,8 @@ Begin VB.Form frmPF
          TabStop         =   0   'False
          Top             =   360
          Width           =   9795
-         _ExtentX        =   17272
-         _ExtentY        =   6371
+         _ExtentX        =   17277
+         _ExtentY        =   6376
       End
       Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1095
@@ -1758,8 +1759,8 @@ Begin VB.Form frmPF
          TabStop         =   0   'False
          Top             =   1680
          Width           =   7455
-         _ExtentX        =   13145
-         _ExtentY        =   1926
+         _ExtentX        =   13150
+         _ExtentY        =   1931
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1335
@@ -1768,9 +1769,1243 @@ Begin VB.Form frmPF
          TabStop         =   0   'False
          Top             =   2880
          Width           =   7455
-         _ExtentX        =   13145
-         _ExtentY        =   2350
+         _ExtentX        =   13150
+         _ExtentY        =   2355
       End
+      Begin XPControls.XPButton cmdFOTO 
+         Height          =   375
+         Index           =   2
+         Left            =   -66000
+         TabIndex        =   203
+         Top             =   840
+         Width           =   1095
+         _ExtentX        =   1931
+         _ExtentY        =   661
+         Picture         =   "frmPF.frx":7452
+         Caption         =   "Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton cmdFOTO 
+         Height          =   495
+         Index           =   3
+         Left            =   -65880
+         TabIndex        =   204
+         Top             =   600
+         Width           =   1095
+         _ExtentX        =   1931
+         _ExtentY        =   873
+         Picture         =   "frmPF.frx":79EC
+         Caption         =   "Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton cmdFOTO 
+         Height          =   495
+         Index           =   4
+         Left            =   -65640
+         TabIndex        =   205
+         Top             =   840
+         Width           =   1095
+         _ExtentX        =   1931
+         _ExtentY        =   873
+         Picture         =   "frmPF.frx":7F86
+         Caption         =   "Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton cmdFOTO 
+         Height          =   495
+         Index           =   5
+         Left            =   -66720
+         TabIndex        =   206
+         TabStop         =   0   'False
+         Top             =   3360
+         Width           =   1095
+         _ExtentX        =   1931
+         _ExtentY        =   873
+         Picture         =   "frmPF.frx":8520
+         Caption         =   "Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton cmdimprimir 
+         Height          =   435
+         Index           =   0
+         Left            =   -72960
+         TabIndex        =   207
+         Top             =   3120
+         Width           =   1515
+         _ExtentX        =   2672
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":8ABA
+         Caption         =   "Imprimir"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton cmdimprimir 
+         Height          =   435
+         Index           =   1
+         Left            =   -71640
+         TabIndex        =   208
+         Top             =   3120
+         Width           =   1515
+         _ExtentX        =   2672
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":9054
+         Caption         =   "Imprimir"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton cmdimprimir 
+         Height          =   435
+         Index           =   2
+         Left            =   -73080
+         TabIndex        =   209
+         Top             =   3720
+         Width           =   1515
+         _ExtentX        =   2672
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":95EE
+         Caption         =   "Imprimir"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton CmdPaste 
+         Height          =   435
+         Index           =   0
+         Left            =   -71280
+         TabIndex        =   210
+         Top             =   3120
+         Width           =   2415
+         _ExtentX        =   4260
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":9B88
+         Caption         =   "Copia Area Transferencia"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton CmdPaste 
+         Height          =   435
+         Index           =   1
+         Left            =   -70080
+         TabIndex        =   211
+         Top             =   3120
+         Width           =   2415
+         _ExtentX        =   4260
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":A122
+         Caption         =   "Copia Area Transferencia"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton CmdPaste 
+         Height          =   435
+         Index           =   2
+         Left            =   -71400
+         TabIndex        =   212
+         Top             =   3240
+         Width           =   2415
+         _ExtentX        =   4260
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":A6BC
+         Caption         =   "Copia Area Transferencia"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton Command6 
+         Height          =   435
+         Left            =   -66600
+         TabIndex        =   213
+         TabStop         =   0   'False
+         Top             =   600
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":AC56
+         Caption         =   "Novo"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton Command4 
+         Height          =   435
+         Left            =   -66600
+         TabIndex        =   214
+         TabStop         =   0   'False
+         Top             =   1080
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":B1F0
+         Caption         =   "Editar"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton Command5 
+         Height          =   435
+         Left            =   -66600
+         TabIndex        =   215
+         TabStop         =   0   'False
+         Top             =   1680
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":B78A
+         Caption         =   "Excluir"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton ComMotInc 
+         Height          =   435
+         Left            =   -67320
+         TabIndex        =   216
+         TabStop         =   0   'False
+         Top             =   2880
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":BD24
+         Caption         =   "Novo"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton ComMotAlt 
+         Height          =   435
+         Left            =   -67320
+         TabIndex        =   217
+         TabStop         =   0   'False
+         Top             =   3360
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":C2BE
+         Caption         =   "Editar"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton ComMotExc 
+         Height          =   435
+         Left            =   -67320
+         TabIndex        =   218
+         TabStop         =   0   'False
+         Top             =   3840
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":C858
+         Caption         =   "Apagar"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton Incimg 
+         Height          =   435
+         Index           =   1
+         Left            =   -74760
+         TabIndex        =   219
+         TabStop         =   0   'False
+         Top             =   3120
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":CDF2
+         Caption         =   "Incluir Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton Incimg 
+         Height          =   435
+         Index           =   0
+         Left            =   -74760
+         TabIndex        =   220
+         TabStop         =   0   'False
+         Top             =   3120
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":D28C
+         Caption         =   "Incluir Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton Incimg 
+         Height          =   435
+         Index           =   2
+         Left            =   -74760
+         TabIndex        =   221
+         TabStop         =   0   'False
+         Top             =   3240
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":D726
+         Caption         =   "Incluir Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton DelImg 
+         Height          =   435
+         Index           =   1
+         Left            =   -74760
+         TabIndex        =   223
+         TabStop         =   0   'False
+         Top             =   3600
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":DBC0
+         Caption         =   "Excluir Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton DelImg 
+         Height          =   435
+         Index           =   0
+         Left            =   -74760
+         TabIndex        =   224
+         TabStop         =   0   'False
+         Top             =   3600
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":E05A
+         Caption         =   "Excluir Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton DelImg 
+         Height          =   435
+         Index           =   2
+         Left            =   -74760
+         TabIndex        =   225
+         TabStop         =   0   'False
+         Top             =   3720
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":E4F4
+         Caption         =   "Excluir Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton CmdSaveimg 
+         Height          =   435
+         Index           =   1
+         Left            =   -72960
+         TabIndex        =   226
+         TabStop         =   0   'False
+         Top             =   3600
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":E98E
+         Caption         =   "Salvar Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton CmdSaveimg 
+         Height          =   435
+         Index           =   0
+         Left            =   -72960
+         TabIndex        =   227
+         TabStop         =   0   'False
+         Top             =   3600
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":EE28
+         Caption         =   "Salvar Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton CmdSaveimg 
+         Height          =   435
+         Index           =   2
+         Left            =   -73080
+         TabIndex        =   228
+         TabStop         =   0   'False
+         Top             =   3240
+         Width           =   1575
+         _ExtentX        =   2778
+         _ExtentY        =   767
+         Picture         =   "frmPF.frx":F2C2
+         Caption         =   "Salvar Imagem"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton VerImg 
+         Height          =   495
+         Index           =   1
+         Left            =   -71280
+         TabIndex        =   229
+         TabStop         =   0   'False
+         Top             =   3600
+         Width           =   2295
+         _ExtentX        =   4048
+         _ExtentY        =   873
+         Picture         =   "frmPF.frx":F75C
+         Caption         =   "Navegar Imagens"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton VerImg 
+         Height          =   375
+         Index           =   0
+         Left            =   -71280
+         TabIndex        =   230
+         TabStop         =   0   'False
+         Top             =   3600
+         Width           =   2415
+         _ExtentX        =   4260
+         _ExtentY        =   661
+         Picture         =   "frmPF.frx":FBF6
+         Caption         =   "Navegar Imagens"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin XPControls.XPButton VerImg 
+         Height          =   495
+         Index           =   2
+         Left            =   -71400
+         TabIndex        =   222
+         TabStop         =   0   'False
+         Top             =   3720
+         Width           =   2295
+         _ExtentX        =   4048
+         _ExtentY        =   873
+         Picture         =   "frmPF.frx":10090
+         Caption         =   "Navegar Imagens"
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin VB.Label Label5 
+         Caption         =   "SEQ=999 para operacao de controles"
+         Height          =   255
+         Left            =   240
+         TabIndex        =   189
+         Top             =   3960
+         Width           =   2895
+      End
+      Begin VB.Label Label4 
+         Caption         =   "takta"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Left            =   -72600
+         TabIndex        =   185
+         Top             =   960
+         Width           =   855
+      End
+      Begin VB.Label Label3 
+         Caption         =   "takt"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Left            =   -74880
+         TabIndex        =   184
+         Top             =   960
+         Width           =   855
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Sequencia"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   38
+         Left            =   -66660
+         TabIndex        =   126
+         Top             =   1740
+         Width           =   915
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Sequencia"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   37
+         Left            =   -66420
+         TabIndex        =   125
+         Top             =   1560
+         Width           =   915
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Sequencia"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   21
+         Left            =   -66480
+         TabIndex        =   124
+         Top             =   1620
+         Width           =   915
+      End
+      Begin VB.Label Label10 
+         Caption         =   "Elaborado"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Left            =   -74880
+         TabIndex        =   112
+         Top             =   540
+         Width           =   855
+      End
+      Begin VB.Label Label12 
+         Caption         =   "Em"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Left            =   -67560
+         TabIndex        =   111
+         Top             =   540
+         Width           =   375
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Rev.Processo"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Left            =   -74880
+         TabIndex        =   110
+         Top             =   1320
+         Width           =   1095
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Observações"
+         Height          =   255
+         Index           =   36
+         Left            =   -71400
+         TabIndex        =   101
+         Top             =   2280
+         Width           =   975
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Aprov. %"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   35
+         Left            =   -67680
+         TabIndex        =   100
+         Top             =   1740
+         Width           =   735
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Peso Bruto"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   34
+         Left            =   -69000
+         TabIndex        =   99
+         Top             =   1740
+         Width           =   975
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Qtde"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   33
+         Left            =   -70080
+         TabIndex        =   98
+         Top             =   1740
+         Width           =   735
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Passo"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   32
+         Left            =   -71400
+         TabIndex        =   97
+         Top             =   1740
+         Width           =   735
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Observações"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   31
+         Left            =   -71400
+         TabIndex        =   96
+         Top             =   2160
+         Width           =   975
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Aprov. %"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   30
+         Left            =   -67320
+         TabIndex        =   95
+         Top             =   1620
+         Width           =   735
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Peso Bruto"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   29
+         Left            =   -68760
+         TabIndex        =   94
+         Top             =   1620
+         Width           =   975
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Qtde"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   28
+         Left            =   -69960
+         TabIndex        =   93
+         Top             =   1620
+         Width           =   735
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Passo"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   27
+         Left            =   -71400
+         TabIndex        =   92
+         Top             =   1620
+         Width           =   735
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Observações"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   26
+         Left            =   -71520
+         TabIndex        =   91
+         Top             =   2220
+         Width           =   975
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Aprov. %"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   25
+         Left            =   -67440
+         TabIndex        =   90
+         Top             =   1620
+         Width           =   735
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Peso Bruto"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   24
+         Left            =   -68880
+         TabIndex        =   89
+         Top             =   1620
+         Width           =   975
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Qtde"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   23
+         Left            =   -70080
+         TabIndex        =   88
+         Top             =   1620
+         Width           =   735
+      End
+      Begin VB.Label lblLabels 
+         Caption         =   "Passo"
+         ForeColor       =   &H00C00000&
+         Height          =   255
+         Index           =   22
+         Left            =   -71520
+         TabIndex        =   87
+         Top             =   1620
+         Width           =   735
+      End
+   End
+   Begin XPControls.XPButton Encerrar 
+      Height          =   435
+      Left            =   9960
+      TabIndex        =   199
+      TabStop         =   0   'False
+      Top             =   720
+      Width           =   1575
+      _ExtentX        =   2778
+      _ExtentY        =   767
+      Picture         =   "frmPF.frx":1052A
+      Caption         =   "Retornar"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton cmdClose 
+      Height          =   435
+      Left            =   9960
+      TabIndex        =   200
+      TabStop         =   0   'False
+      Top             =   120
+      Width           =   1515
+      _ExtentX        =   2672
+      _ExtentY        =   767
+      Picture         =   "frmPF.frx":10AC4
+      Caption         =   "Salvar"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton CmdConfImp 
+      Height          =   435
+      Left            =   9960
+      TabIndex        =   141
+      TabStop         =   0   'False
+      Top             =   2160
+      Width           =   1575
+      _ExtentX        =   2778
+      _ExtentY        =   767
+      Picture         =   "frmPF.frx":1105E
+      Caption         =   "Configurar Impressora"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton cmdFOTO 
+      Height          =   375
+      Index           =   0
+      Left            =   2640
+      TabIndex        =   201
+      TabStop         =   0   'False
+      Top             =   840
+      Width           =   1095
+      _ExtentX        =   1931
+      _ExtentY        =   661
+      Picture         =   "frmPF.frx":115F8
+      Caption         =   "Imagem"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin XPControls.XPButton cmdFOTO 
+      Height          =   375
+      Index           =   1
+      Left            =   10320
+      TabIndex        =   202
+      TabStop         =   0   'False
+      Top             =   2640
+      Width           =   1095
+      _ExtentX        =   1931
+      _ExtentY        =   661
+      Picture         =   "frmPF.frx":11B92
+      Caption         =   "Imagem"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin VBCCR18.DTPicker DTPicker1 
+      Height          =   375
+      Left            =   4920
+      TabIndex        =   231
+      Top             =   1800
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
+   Begin VBCCR18.DTPicker DTPicker2 
+      Height          =   375
+      Left            =   3960
+      TabIndex        =   232
+      Top             =   2400
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
+   Begin VBCCR18.DTPicker DTPicker3 
+      Height          =   375
+      Left            =   3960
+      TabIndex        =   233
+      Top             =   3120
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      Value           =   44285
+      CheckBox        =   -1  'True
+      AllowUserInput  =   -1  'True
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "No.Versao"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   41
+      Left            =   3960
+      TabIndex        =   197
+      Top             =   1560
+      Width           =   855
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Cod Integrado"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   40
+      Left            =   7560
+      TabIndex        =   142
+      Top             =   840
+      Width           =   1095
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Fabrica"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   39
+      Left            =   9240
+      TabIndex        =   139
+      Top             =   240
+      Width           =   615
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Codigo Cliente"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   20
+      Left            =   7440
+      TabIndex        =   123
+      Top             =   240
+      Width           =   1095
+   End
+   Begin VB.Label Label2 
+      Caption         =   "Opção"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Left            =   8640
+      TabIndex        =   122
+      Top             =   240
+      Width           =   615
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Codigo Final"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   19
+      Left            =   8040
+      TabIndex        =   103
+      Top             =   2880
+      Width           =   975
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Tipo"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   0
+      Left            =   6600
+      TabIndex        =   83
+      Top             =   1560
+      Width           =   495
+   End
+   Begin VB.Label Label11 
+      Caption         =   "PF"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Left            =   120
+      TabIndex        =   82
+      Top             =   240
+      Width           =   615
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Motivo Revisão"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   18
+      Left            =   5640
+      TabIndex        =   79
+      Top             =   2160
+      Width           =   1395
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Peso Liquido"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   17
+      Left            =   10080
+      TabIndex        =   78
+      Top             =   1560
+      Width           =   915
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Qtde Conjunto"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   16
+      Left            =   6840
+      TabIndex        =   77
+      Top             =   2880
+      Width           =   1215
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Peso Conjunto"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   15
+      Left            =   5640
+      TabIndex        =   76
+      Top             =   2880
+      Width           =   1095
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Data Revisão Cjto"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   14
+      Left            =   3960
+      TabIndex        =   75
+      Top             =   2880
+      Width           =   1575
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Cjto Rev"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   13
+      Left            =   2760
+      TabIndex        =   74
+      Top             =   2880
+      Width           =   975
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Conjunto Desenho"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   12
+      Left            =   120
+      TabIndex        =   73
+      Top             =   2880
+      Width           =   1575
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Data Nossa Revisão"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   11
+      Left            =   3960
+      TabIndex        =   72
+      Top             =   2160
+      Width           =   1575
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Nossa Revisão"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   10
+      Left            =   2760
+      TabIndex        =   71
+      Top             =   2160
+      Width           =   1095
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Nosso Desenho"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   9
+      Left            =   120
+      TabIndex        =   70
+      Top             =   2160
+      Width           =   1455
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Data da Revisão"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   8
+      Left            =   4920
+      TabIndex        =   69
+      Top             =   1560
+      Width           =   1575
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Revisão Cliente"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   7
+      Left            =   2760
+      TabIndex        =   68
+      Top             =   1560
+      Width           =   1215
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Desenho Cliente"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   6
+      Left            =   120
+      TabIndex        =   67
+      Top             =   1560
+      Width           =   1455
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Nome:"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   5
+      Left            =   5400
+      TabIndex        =   66
+      Top             =   240
+      Width           =   735
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "CLIENTE:"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   4
+      Left            =   2040
+      TabIndex        =   65
+      Top             =   240
+      Width           =   975
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "Descrição"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   3
+      Left            =   4320
+      TabIndex        =   64
+      Top             =   840
+      Width           =   1095
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "CODIGO:"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   2
+      Left            =   120
+      TabIndex        =   63
+      Top             =   960
+      Width           =   855
+   End
+   Begin VB.Label lblLabels 
+      Caption         =   "CPF:"
+      ForeColor       =   &H00C00000&
+      Height          =   255
+      Index           =   1
+      Left            =   1200
+      TabIndex        =   62
+      Top             =   240
+      Width           =   375
    End
 End
 Attribute VB_Name = "frmPF"
@@ -1795,48 +3030,48 @@ Dim lTROCOU As Variant
 Dim aCAMIMG As Variant
 
 Private Sub cad_cjt_lx_Click()
-  gravacaddes txtfields(12).tEXT, txtfields(13).tEXT, DTPicker3.Value
+  gravacaddes TXTFIELDS(12).tEXT, TXTFIELDS(13).tEXT, DTPicker3.Value
 End Sub
 
 Private Sub CmdApagar_Click(Index As Integer)
   Select Case Index
   Case 1
-    txtfields(20) = ""
-    txtfields(24) = ""
-    txtfields(23) = 0
-    txtfields(27) = 0
-    txtfields(19) = 0
-    txtfields(35) = 0
-    txtfields(47) = 0
-    txtfields(48) = ""
+    TXTFIELDS(20) = ""
+    TXTFIELDS(24) = ""
+    TXTFIELDS(23) = 0
+    TXTFIELDS(27) = 0
+    TXTFIELDS(19) = 0
+    TXTFIELDS(35) = 0
+    TXTFIELDS(47) = 0
+    TXTFIELDS(48) = ""
   Case 2
-    txtfields(21) = ""
-    txtfields(25) = ""
-    txtfields(37) = 0
-    txtfields(38) = 0
-    txtfields(39) = 0
-    txtfields(40) = 0
-    txtfields(49) = 0
-    txtfields(50) = 0
-    txtfields(41) = ""
+    TXTFIELDS(21) = ""
+    TXTFIELDS(25) = ""
+    TXTFIELDS(37) = 0
+    TXTFIELDS(38) = 0
+    TXTFIELDS(39) = 0
+    TXTFIELDS(40) = 0
+    TXTFIELDS(49) = 0
+    TXTFIELDS(50) = 0
+    TXTFIELDS(41) = ""
   Case 3
-    txtfields(22) = ""
-    txtfields(26) = ""
-    txtfields(42) = 0
-    txtfields(43) = 0
-    txtfields(44) = 0
-    txtfields(45) = 0
-    txtfields(61) = 0
-    txtfields(62) = 0
-    txtfields(46) = ""
+    TXTFIELDS(22) = ""
+    TXTFIELDS(26) = ""
+    TXTFIELDS(42) = 0
+    TXTFIELDS(43) = 0
+    TXTFIELDS(44) = 0
+    TXTFIELDS(45) = 0
+    TXTFIELDS(61) = 0
+    TXTFIELDS(62) = 0
+    TXTFIELDS(46) = ""
   End Select
 End Sub
 
 Private Sub cmdcaddes_Click()
-  If Len(txtfields(66).tEXT) > 0 Then
-    gravacaddes txtfields(6).tEXT, txtfields(66).tEXT, DTPicker1.Value
+  If Len(TXTFIELDS(66).tEXT) > 0 Then
+    gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(66).tEXT, DTPicker1.Value
   Else
-    gravacaddes txtfields(6).tEXT, txtfields(7).tEXT, DTPicker1.Value
+    gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(7).tEXT, DTPicker1.Value
   End If
 End Sub
 
@@ -1849,7 +3084,7 @@ Private Sub cmdClose_Click()
   Dim cSQLUP As String
  ' Dim cSQLIMG As String
 
-  If Check1 And Len(txtfields(11)) = 0 Then
+  If Check1 And Len(TXTFIELDS(11)) = 0 Then
     Alert ("Preencher Motivo do Bloqueio")
     Exit Sub
   End If
@@ -1881,7 +3116,7 @@ Private Sub cmdClose_Click()
   End If
 
   For iLOOP = 0 To nCAMPOS - 5
-    aVAL(iLOOP) = txtfields(iLOOP)
+    aVAL(iLOOP) = TXTFIELDS(iLOOP)
   Next iLOOP
   GrvSQL cARQPF, cSQL, nCAMPOS, aCAM, aVAL, aFOR
 
@@ -1906,7 +3141,7 @@ Private Sub CmdcomIMp_Click()
   Dim sqlMS03 As String
   Dim sqlpfms03 As String
   Dim aCAMPOS As Variant
-  cCODIGO = frmPF.txtfields(14)
+  cCODIGO = frmPF.TXTFIELDS(14)
 
   If IsNull(cCODIGO) Then
 
@@ -1984,23 +3219,23 @@ End Sub
 Private Sub cmdFOTO_Click(Index As Integer)
   Select Case Index
   Case 0
-    zgrp = txtfields(2)
+    zgrp = TXTFIELDS(2)
     cARQRTF = PegPath("PATH", "IMGMS01")
     iImage = 2
   Case 1
-    zgrp = txtfields(14)
+    zgrp = TXTFIELDS(14)
     cARQRTF = PegPath("PATH", "IMGMS01")
     iImage = 2
   Case 2
-    zgrp = txtfields(20)
+    zgrp = TXTFIELDS(20)
     cARQRTF = PegPath("PATH", "IMGMU01")
     iImage = 7
   Case 3
-    zgrp = txtfields(21)
+    zgrp = TXTFIELDS(21)
     cARQRTF = PegPath("PATH", "IMGMU01")
     iImage = 7
   Case 4
-    zgrp = txtfields(22)
+    zgrp = TXTFIELDS(22)
     cARQRTF = PegPath("PATH", "IMGMU01")
     iImage = 7
   Case 5
@@ -2021,12 +3256,12 @@ Private Sub cmdFOTO_Click(Index As Integer)
     Exit Sub
   End If
   If Index = 0 Or Index = 1 Then
-    If Len(FixStr(txtfields(0))) > 0 Then
-      zgrp = zgrp & "|" & txtfields(0)
+    If Len(FixStr(TXTFIELDS(0))) > 0 Then
+      zgrp = zgrp & "|" & TXTFIELDS(0)
     End If
   End If
   Load frmIMAGENS
-  frmIMAGENS.txtfields(0).Enabled = False
+  frmIMAGENS.TXTFIELDS(0).Enabled = False
   frmIMAGENS.Escolher(0).Visible = False
   frmIMAGENS.Show vbModal, Me
 End Sub
@@ -2080,7 +3315,7 @@ Private Sub CMDSIG_Click(Index As Integer)
   ePASS02 = True
   frmCharacters.Show vbModal, Me
   If lRETU Then
-    txtfields(50 + Index) = eRETU01
+    TXTFIELDS(50 + Index) = eRETU01
   End If
 
 End Sub
@@ -2158,7 +3393,7 @@ Private Sub Command2_Click()
   FilRelat
 
   eRETU02 = "PF:" & TXTPF.tEXT & Chr(13) & Chr(10)
-  eRETU02 = eRETU02 & " Desenho:" & txtfields(2) & Chr(13) & Chr(10)
+  eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
   eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
   eRETU02 = eRETU02 & " SEQ=" & nSEQ & " SSQ=" & nSSQ
 
@@ -2246,23 +3481,23 @@ Private Sub Command7_Click(Index As Integer)
 
 
   If Index = 0 Or Index = 1 Then               '0 e 1 ma01 mana5
-    nNUMERO = FixInt(txtfields(4))
+    nNUMERO = FixInt(TXTFIELDS(4))
     cARQ = GeraConn(zMANA5EMP, "JETFOX")
     sSQL = "SELECT NOME,CODIGO FROM MA01 WHERE NUMERO=" & nNUMERO
   Else                                         '10 11  logix clientes/duns
-    nNUMERO = Trim(FixStr(txtfields(4)))
+    nNUMERO = Trim(FixStr(TXTFIELDS(4)))
     cARQ = PegPath("PATH", "LOGIXODBC")
-    sSQL = " SELECT clientes.nom_cliente as nome,duns_sistema.num_duns as codigo  FROM clientes"
-    sSQL = sSQL & " LEFT JOIN duns_sistema ON clientes.cod_cliente=duns_sistema.cod_cliente AND duns_sistema.cod_empresa='01'"
+    sSQL = " SELECT clientes.nom_cliente as nome,duns_itaesbra.num_duns as codigo  FROM clientes"
+    sSQL = sSQL & " LEFT JOIN duns_itaesbra ON clientes.cod_cliente=duns_itaesbra.cod_cliente AND duns_itaesbra.cod_empresa='01'"
     sSQL = sSQL & " Where clientes.cod_cliente = '" & nNUMERO & "'"
   End If
   aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGO"), Array("C", "C"), Array("", ""))
   If lRETU Then
     If Index = 0 Or Index = 10 Then          '0 10 nome e codigo cliente
-      txtfields(5) = aRETU(0)
-      txtfields(53) = aRETU(1)
+      TXTFIELDS(5) = aRETU(0)
+      TXTFIELDS(53) = aRETU(1)
     Else
-      txtfields(53) = aRETU(1)             '1,11 codigo cliente
+      TXTFIELDS(53) = aRETU(1)             '1,11 codigo cliente
     End If
   End If
 
@@ -2279,12 +3514,12 @@ Private Sub Command8_Click()
   Dim cCODIGO As String
   Dim aRETU As Variant
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
-  cCODIGO = FixStr(txtfields(2), "", "TRIM")
+  cCODIGO = FixStr(TXTFIELDS(2), "", "TRIM")
   sSQL = "SELECT NOME,CODIGOINT FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
   aRETU = PegSQL(cARQ, sSQL, 2, Array("NOME", "CODIGOINT"), Array("C", "C"), Array("", ""))
   If lRETU Then
-    txtfields(3) = aRETU(0)
-    txtfields(0) = aRETU(1)
+    TXTFIELDS(3) = aRETU(0)
+    TXTFIELDS(0) = aRETU(1)
   End If
 End Sub
 
@@ -2298,13 +3533,13 @@ Private Sub Command9_Click(Index As Integer)
   Select Case Index
 
   Case 0
-    cCODIGO = FixStr(txtfields(20))
+    cCODIGO = FixStr(TXTFIELDS(20))
 
   Case 1
-    cCODIGO = FixStr(txtfields(21))
+    cCODIGO = FixStr(TXTFIELDS(21))
 
   Case 2
-    cCODIGO = FixStr(txtfields(22))
+    cCODIGO = FixStr(TXTFIELDS(22))
 
   End Select
 
@@ -2316,11 +3551,11 @@ Private Sub Command9_Click(Index As Integer)
 
     Select Case Index
     Case 0
-      txtfields(24) = cNOME
+      TXTFIELDS(24) = cNOME
     Case 1
-      txtfields(25) = cNOME
+      TXTFIELDS(25) = cNOME
     Case 2
-      txtfields(26) = cNOME
+      TXTFIELDS(26) = cNOME
     End Select
   End If
 End Sub
@@ -2380,15 +3615,15 @@ Private Sub DelImg_Click(Index As Integer)
 End Sub
 
 Private Sub DTPicker1_LostFocus()
-  If Len(txtfields(66).tEXT) > 0 Then
-    gravacaddes txtfields(6).tEXT, txtfields(66).tEXT, DTPicker1.Value
+  If Len(TXTFIELDS(66).tEXT) > 0 Then
+    gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(66).tEXT, DTPicker1.Value
   Else
-    gravacaddes txtfields(6).tEXT, txtfields(7).tEXT, DTPicker1.Value
+    gravacaddes TXTFIELDS(6).tEXT, TXTFIELDS(7).tEXT, DTPicker1.Value
   End If
 End Sub
 
 Private Sub DTPicker3_LostFocus()
-  gravacaddes txtfields(12).tEXT, txtfields(13).tEXT, DTPicker3.Value
+  gravacaddes TXTFIELDS(12).tEXT, TXTFIELDS(13).tEXT, DTPicker3.Value
 End Sub
 
 Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVal dDATACLI As Variant)
@@ -2409,12 +3644,12 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
     Exit Sub
   End If
 
-  If Len(txtfields(0)) = 0 Then
+  If Len(TXTFIELDS(0)) = 0 Then
     Alert "codigo interno logix nao preenchido"
     Exit Sub
   End If
 
-  If Len(txtfields(3)) = 0 Then
+  If Len(TXTFIELDS(3)) = 0 Then
     Alert "descricao do item nao preenchido"
     Exit Sub
   End If
@@ -2425,7 +3660,7 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
   End If
 
 
-  cCODLOGIX = Trim(txtfields(0))
+  cCODLOGIX = Trim(TXTFIELDS(0))
   If Len(cCODLOGIX) > 0 Then
     nPOS = InStr(cCODLOGIX, "/")
     If nPOS > 0 Then
@@ -2457,9 +3692,9 @@ Private Sub gravacaddes(ByVal cDESCLI As Variant, ByVal cREVCLI As Variant, ByVa
     End If
 
 
-    IncluiSQLAdo PegPath("PATH", "LOGIXODBC"), "select * from cad_des where cod_empresa='01' and cod_item='" & cCODLOGIX & "' and num_versao='" & txtfields(7) & "'", 8, _
+    IncluiSQLAdo PegPath("PATH", "LOGIXODBC"), "select * from cad_des where cod_empresa='01' and cod_item='" & cCODLOGIX & "' and num_versao='" & TXTFIELDS(7) & "'", 8, _
                  Array("cod_empresa", "cod_item", "num_versao", "seq_versao", "cod_desen", "dat_desen", "den_desen", "cod_form_folha"), _
-                 Array("01", cCODLOGIX, cREVCLI, 1, cDESCLI, dDATACLI, txtfields(3).tEXT, "''"), _
+                 Array("01", cCODLOGIX, cREVCLI, 1, cDESCLI, dDATACLI, TXTFIELDS(3).tEXT, "''"), _
                  True, False
 
 
@@ -2504,8 +3739,8 @@ Private Sub ESCCLI_Click(Index As Integer)
   End Select
   escNUMNOM.Show vbModal, Me
   If lRETU Then
-    frmPF.txtfields(4) = eRETU01
-    frmPF.txtfields(5) = eRETU02
+    frmPF.TXTFIELDS(4) = eRETU01
+    frmPF.TXTFIELDS(5) = eRETU02
     If Index = 0 Then
       Command7_Click (1)
     End If
@@ -2521,7 +3756,7 @@ Private Sub EscCodFlu_Click(Index As Integer)
   eRETU02 = ""
   escFLX.Show vbModal, Me
   If lRETU Then
-    txtfields(50 + Index) = eRETU01
+    TXTFIELDS(50 + Index) = eRETU01
   End If
 End Sub
 
@@ -2529,15 +3764,15 @@ Private Sub esciedx_Click()
   iMU01 = 201
   escIED.Show vbModal, Me
   If lRETU Then
-    txtfields(1) = eRETU02
+    TXTFIELDS(1) = eRETU02
   End If
 End Sub
 
 Private Sub escmp04a_Click()
   If MDG("Gravar Elaborador", "Confirme Gravação") Then
-    frmPF.txtfields(30) = zIDFOLHA
-    frmPF.txtfields(31) = zNOMEFOLHA
-    frmPF.txtfields(63) = Date
+    frmPF.TXTFIELDS(30) = zIDFOLHA
+    frmPF.TXTFIELDS(31) = zNOMEFOLHA
+    frmPF.TXTFIELDS(63) = Date
   End If
 End Sub
 
@@ -2548,14 +3783,14 @@ Private Sub escmu_Click(Index As Integer)
   If Not lRETU Then Exit Sub
   Select Case Index
   Case 1
-    frmPF.txtfields(20) = eRETU01
-    frmPF.txtfields(24) = eRETU02
+    frmPF.TXTFIELDS(20) = eRETU01
+    frmPF.TXTFIELDS(24) = eRETU02
   Case 2
-    frmPF.txtfields(21) = eRETU01
-    frmPF.txtfields(25) = eRETU02
+    frmPF.TXTFIELDS(21) = eRETU01
+    frmPF.TXTFIELDS(25) = eRETU02
   Case 3
-    frmPF.txtfields(22) = eRETU01
-    frmPF.txtfields(26) = eRETU02
+    frmPF.TXTFIELDS(22) = eRETU01
+    frmPF.TXTFIELDS(26) = eRETU02
   End Select
 End Sub
 
@@ -2581,33 +3816,33 @@ Private Sub ESCpro_Click(Index As Integer)
       escms01.Show vbModal, Me
       If lRETU Then
         If Index = 2 Or Index = 0 Or Index = 6 Then
-          frmPF.txtfields(2) = eRETU01
-          frmPF.txtfields(3) = eRETU02
-          frmPF.txtfields(0) = eRETU03
+          frmPF.TXTFIELDS(2) = eRETU01
+          frmPF.TXTFIELDS(3) = eRETU02
+          frmPF.TXTFIELDS(0) = eRETU03
         End If
         If Index = 3 Or Index = 4 Or Index = 7 Then
-          frmPF.txtfields(0) = eRETU03
+          frmPF.TXTFIELDS(0) = eRETU03
         End If
         If Index = 9 Then
-          frmPF.txtfields(20) = eRETU01
-          frmPF.txtfields(24) = eRETU02
+          frmPF.TXTFIELDS(20) = eRETU01
+          frmPF.TXTFIELDS(24) = eRETU02
         End If
         If Index = 10 Then
-          frmPF.txtfields(21) = eRETU01
-          frmPF.txtfields(25) = eRETU02
+          frmPF.TXTFIELDS(21) = eRETU01
+          frmPF.TXTFIELDS(25) = eRETU02
         End If
         If Index = 11 Then
-          frmPF.txtfields(22) = eRETU01
-          frmPF.txtfields(26) = eRETU02
+          frmPF.TXTFIELDS(22) = eRETU01
+          frmPF.TXTFIELDS(26) = eRETU02
         End If
 
 
       End If
     Else                                     ''1-5-8
-      cCHAVEBUS = txtfields(2)
+      cCHAVEBUS = TXTFIELDS(2)
       escms01.Show vbModal, Me
       If lRETU Then
-        frmPF.txtfields(14) = eRETU01
+        frmPF.TXTFIELDS(14) = eRETU01
       End If
     End If
   End If
@@ -2661,7 +3896,7 @@ Private Sub FilRelat()
 End Sub
 
 Private Sub Esctipo_Click()
-  If txtfields(28) = "P" Then
+  If TXTFIELDS(28) = "P" Then
     Alert ("Ja e producao")
     Exit Sub
   End If
@@ -2693,15 +3928,15 @@ Private Sub Esctipo_Click()
   End Select
 
   If cTIPO = "P" Then
-    If txtfields(28) = "R" Or txtfields(28) = "I" Or txtfields(28) = "L" Or txtfields(28) = "P" _
-       Or txtfields(28) = "A" Or Len(txtfields(28)) = 0 Then
+    If TXTFIELDS(28) = "R" Or TXTFIELDS(28) = "I" Or TXTFIELDS(28) = "L" Or TXTFIELDS(28) = "P" _
+       Or TXTFIELDS(28) = "A" Or Len(TXTFIELDS(28)) = 0 Then
       If MDG("Mudar para Producao e gerar nova revisao") Then
         NovaRev_Click
       End If
     End If
   End If
 
-  txtfields(28) = cTIPO
+  TXTFIELDS(28) = cTIPO
   TIPOSAY
 
 End Sub
@@ -2711,7 +3946,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-  Dim X As Integer
+  Dim x As Integer
   Dim cSQLIMG As String
 
   nREV = 0
@@ -2725,8 +3960,8 @@ Private Sub Form_Load()
   cARQPFG = PegPath("PATH", "PFG")
   cARQFEMEA = PegPath("PATH", "FEMEA")
 
-  For X = 51 To 60
-    txtfields(X).Font = "isoqsymbol"
+  For x = 51 To 60
+    TXTFIELDS(x).Font = "isoqsymbol"
   Next
 
   TXTPF = nPF
@@ -2767,7 +4002,7 @@ Private Sub Form_Load()
 
   aVAL = PegSQL(cARQPF, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 6                 '
-    txtfields(iLOOP) = aVAL(iLOOP)           '
+    TXTFIELDS(iLOOP) = aVAL(iLOOP)           '
   Next iLOOP
 
 
@@ -2813,17 +4048,17 @@ Private Sub Form_Load()
   Filgridrev
 
   If zUSER = "ADMIN" Then
-    txtfields(8).Enabled = True
-    txtfields(8).Locked = False
-    txtfields(8).Visible = True
-    txtfields(29).Enabled = True
-    txtfields(29).Locked = False
-    txtfields(29).Visible = True
+    TXTFIELDS(8).Enabled = True
+    TXTFIELDS(8).Locked = False
+    TXTFIELDS(8).Visible = True
+    TXTFIELDS(29).Enabled = True
+    TXTFIELDS(29).Locked = False
+    TXTFIELDS(29).Visible = True
   End If
 
   DizerBarra ""
 
-  If Check1 And Len(txtfields(11)) = 0 Then
+  If Check1 And Len(TXTFIELDS(11)) = 0 Then
     Alert ("Preencher Motivo do Bloqueio")
   End If
 
@@ -2882,8 +4117,8 @@ Private Sub NovaRev_Click()
 
   On Error Resume Next
 
-  If Len(txtfields(29).tEXT) > 0 Then          ''corrige data protheus em branco
-    If txtfields(29) > Today() Then
+  If Len(TXTFIELDS(29).tEXT) > 0 Then          ''corrige data protheus em branco
+    If TXTFIELDS(29) > Today() Then
       Alert ("Data Revisao Anterior Maior que Data do Sistema")
       Exit Sub
     End If
@@ -2891,9 +4126,9 @@ Private Sub NovaRev_Click()
 
   If MDG("Fazer Nova Revisao", "Confirme Gravação") Then
     Encerrar.Visible = False
-    nrevisao = FixInt(txtfields(8)) + 1
-    txtfields(8) = nrevisao
-    txtfields(29) = Fdata(Date)
+    nrevisao = FixInt(TXTFIELDS(8)) + 1
+    TXTFIELDS(8) = nrevisao
+    TXTFIELDS(29) = Fdata(Date)
 
 
     cSQLTMP = "select * from PF WHERE PF=" & nPF
@@ -2923,7 +4158,7 @@ Private Sub NovaRev_Click()
 
 
     eRETU02 = "PF:" & TXTPF.tEXT & Chr(13) & Chr(10)
-    eRETU02 = eRETU02 & " Desenho:" & txtfields(2) & Chr(13) & Chr(10)
+    eRETU02 = eRETU02 & " Desenho:" & TXTFIELDS(2) & Chr(13) & Chr(10)
     eRETU02 = eRETU02 & " Data:" & Fdata(Date) & Chr(13) & Chr(10)
 
     MAILENV "PF000001", eRETU02
@@ -2962,7 +4197,7 @@ Private Sub txtFields_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Function valornum(Index As Integer)
-  valornum = Val(Replace(txtfields(Index), ",", "."))
+  valornum = Val(Replace(TXTFIELDS(Index), ",", "."))
 End Function
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -2974,7 +4209,7 @@ Private Sub TXTFIELDS_LostFocus(Index As Integer)
   Dim cCODLOGIX As String
   Dim nPOS As Integer
   If Index = 0 Then
-    cCODLOGIX = Trim(txtfields(0))
+    cCODLOGIX = Trim(TXTFIELDS(0))
     If Len(cCODLOGIX) > 0 Then
       nPOS = InStr(cCODLOGIX, "/")
       If nPOS > 0 Then
@@ -2997,7 +4232,7 @@ Private Sub TXTFIELDS_LostFocus(Index As Integer)
 End Sub
 
 Private Sub TIPOSAY()
-  Select Case txtfields(28)
+  Select Case TXTFIELDS(28)
   Case "P"
     TipoDescritivo.tEXT = "(P)roducao"
   Case "R"
