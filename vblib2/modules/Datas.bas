@@ -150,16 +150,22 @@ Public Function NumToData(ByVal nNUM As Variant) As Date
   End If
   NumToData = Fdata(dDATA)
 End Function
-
 ' +--------------------------------------------------------------------
 ' +  Função: UniversalToDate
 ' +  Objetivo: Garantir a leitura correta de datas em múltiplos formatos
 ' +            (DD/MM/YY, DD-MM-YYYY, DD.MM.YY, AAAAMMDD, YYYY-MM-DD)
+' +  Atualização: Inteligência para datas sem zeros (ex: 5/3/2021)
+' +               usando a matriz de separadores (Split).
 ' +  Retorno:  Date (Retorna a data correspondente ou 0 se for inválida/vazia)
 ' +--------------------------------------------------------------------
 Public Function UniversalToDate(ByVal xData As Variant) As Date
     Dim cData As String
     Dim cLimpa As String
+    Dim cTemp As String
+    Dim aParts() As String
+    Dim sAno As String
+    Dim sMes As String
+    Dim sDia As String
     Dim nLEN As Integer
     
     ' 1. Se já for do tipo Date nativo do VB6, retorna ela mesma
@@ -181,29 +187,63 @@ Public Function UniversalToDate(ByVal xData As Variant) As Date
         Exit Function
     End If
     
-    ' 3. Trata o formato ISO comum em bancos de dados (YYYY-MM-DD)
-    '    Exemplo: "2026-05-16" ou "2026-05-16 00:00:00"
-    If Len(cData) >= 10 Then
-        If Mid$(cData, 5, 1) = "-" And Mid$(cData, 8, 1) = "-" Then
-            UniversalToDate = DateSerial(Val(Left$(cData, 4)), Val(Mid$(cData, 6, 2)), Val(Mid$(cData, 9, 2)))
-            Exit Function
-        End If
+    ' Se houver hora grudada na string limpa (separada por espaço), pega apenas a parte da data
+    If InStr(cData, " ") > 0 Then
+        cData = Trim$(Split(cData, " ")(0))
     End If
+
+    ' >>> INÍCIO DA MELHORIA: Interceptação Inteligente com Separadores <<<
+    ' 3. Padroniza todos os separadores para barra "/"
+    cTemp = Replace(cData, "-", "/")
+    cTemp = Replace(cTemp, ".", "/")
     
-    ' 4. Remove separadores comuns para analisar a sequência numérica pura
+    ' Quebra a string usando a barra como delimitador
+    aParts = Split(cTemp, "/")
+    
+    ' Se a matriz tiver 3 elementos (índices 0, 1 e 2), significa que a data tem separadores!
+    If UBound(aParts) = 2 Then
+        If Len(aParts(0)) = 4 Then
+            ' Formato YYYY/MM/DD (O Ano veio primeiro)
+            sAno = aParts(0)
+            sMes = Right$("0" & aParts(1), 2)
+            sDia = Right$("0" & aParts(2), 2)
+        Else
+            ' Formato DD/MM/YYYY, DD/MM/YY ou D/M/YYYY (O Dia veio primeiro)
+            sDia = Right$("0" & aParts(0), 2)
+            sMes = Right$("0" & aParts(1), 2)
+            sAno = aParts(2)
+            
+            ' Lógica de Século para Anos com 2 dígitos (ex: 05/03/21)
+            If Len(sAno) = 2 Then
+                If Val(sAno) < 50 Then
+                    sAno = "20" & sAno
+                Else
+                    sAno = "19" & sAno
+                End If
+            End If
+        End If
+        
+        ' Evita datas zeradas que passaram pela separação
+        If (sAno & sMes & sDia) = "00000000" Then
+            UniversalToDate = CDate(0)
+        Else
+            UniversalToDate = DateSerial(Val(sAno), Val(sMes), Val(sDia))
+        End If
+        Exit Function
+    End If
+    ' >>> FIM DA MELHORIA <<<
+    
+    
+    ' 4. Se chegou aqui, não há separadores (veio tudo grudado).
+    ' Removemos as sobras e analisamos a sequência numérica pura.
     cLimpa = Replace(cData, "/", "")
     cLimpa = Replace(cLimpa, "-", "")
     cLimpa = Replace(cLimpa, ".", "")
     cLimpa = Trim$(cLimpa)
     
-    ' Se houver hora grudada na string limpa, pega apenas os primeiros 6 ou 8 dígitos da data
-    If Len(cLimpa) > 8 Then
-        cLimpa = Left$(cLimpa, 8)
-    End If
-    
     nLEN = Len(cLimpa)
     
-    ' 5. Identifica o formato pelo tamanho da string resultante
+    ' 5. Identifica o formato grudado pelo tamanho da string resultante
     Select Case nLEN
         Case 8
             ' Pode ser AAAAMMDD (banco/perfil) ou DDMMYYYY (padrão local)
@@ -217,7 +257,7 @@ Public Function UniversalToDate(ByVal xData As Variant) As Date
             
         Case 6
             ' Formato DDMMYY (Ano com 2 dígitos)
-            ' O VB6 resolve o centenário automaticamente com base nas configurações do Windows
+            ' O VB6 resolve o centenário automaticamente no DateSerial
             UniversalToDate = DateSerial(Val(Right$(cLimpa, 2)), Val(Mid$(cLimpa, 3, 2)), Val(Left$(cLimpa, 2)))
             
         Case Else
