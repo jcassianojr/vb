@@ -84,10 +84,10 @@ End Function
 
 ' Um limpador exclusivo para TXT. Tira lixo, mas NÃO DESTRÓI os colchetes do BBCode!
 Public Function TiraControlChars(ByVal texto As String) As String
-    Dim x As Integer
-    For x = 0 To 31
-        If x <> 10 And x <> 13 Then
-            texto = Replace(texto, Chr(x), "")
+    Dim X As Integer
+    For X = 0 To 31
+        If X <> 10 And X <> 13 Then
+            texto = Replace(texto, Chr(X), "")
         End If
     Next
     TiraControlChars = texto
@@ -441,5 +441,257 @@ Public Function txttodocx(ByVal cOrigem As String, Optional ByVal cDestino As St
     Exit Function
 TrataErro:
     txttodocx = False
+End Function
+Public Function txttoods(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "", Optional ByVal cDELIMITADOR As String = ";") As Boolean
+    Dim fso As Object, streamIn As Object
+    Dim cLINHA As String
+    Dim cTempDir As String, cContent As String
+    Dim oZip As cZipArchive
+    Dim vCols As Variant, j As Long
+    
+    If Dir(cOrigem) = "" Then Exit Function
+    If Trim(cDestino) = "" Then cDestino = Replace(LCase(cOrigem), ".txt", ".ods")
+    
+    On Error GoTo TrataErro
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' 1. Cria a estrutura temporária de pastas para o padrão ODS (OpenDocument)
+    Randomize
+    cTempDir = fso.GetSpecialFolder(2) & "\OdsVB_" & Format(Int((9999 - 1000 + 1) * Rnd + 1000), "0000")
+    If fso.FolderExists(cTempDir) Then fso.DeleteFolder cTempDir, True
+    
+    fso.CreateFolder cTempDir
+    fso.CreateFolder cTempDir & "\META-INF"
+    
+    ' 2. Arquivo mimetype (Obrigatório e sem quebra de linha no ODS)
+    Dim oStream As Object
+    Set oStream = CreateObject("ADODB.Stream")
+    oStream.Type = 2: oStream.Charset = "UTF-8": oStream.Open
+    oStream.WriteText "application/vnd.oasis.opendocument.spreadsheet"
+    oStream.SaveToFile cTempDir & "\mimetype", 2
+    oStream.Close
+    
+    ' 3. META-INF/manifest.xml
+    Dim cManifest As String
+    cManifest = "<?xml version=""1.0"" encoding=""UTF-8""?>" & vbCrLf & _
+                "<manifest:manifest xmlns:manifest=""urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"" manifest:version=""1.2"">" & vbCrLf & _
+                " <manifest:file-entry manifest:full-path=""/"" manifest:media-type=""application/vnd.oasis.opendocument.spreadsheet""/>" & vbCrLf & _
+                " <manifest:file-entry manifest:full-path=""content.xml"" manifest:media-type=""text/xml""/>" & vbCrLf & _
+                "</manifest:manifest>"
+    fso.CreateTextFile(cTempDir & "\META-INF\manifest.xml", True).Write cManifest
+    
+    ' 4. content.xml (Onde ficam os dados e metadados no ODS)
+    cContent = "<?xml version=""1.0"" encoding=""UTF-8""?>" & vbCrLf & _
+               "<office:document-content xmlns:office=""urn:oasis:names:tc:opendocument:xmlns:office:1.0"" " & _
+               "xmlns:table=""urn:oasis:names:tc:opendocument:xmlns:table:1.0"" " & _
+               "xmlns:text=""urn:oasis:names:tc:opendocument:xmlns:text:1.0"" office:version=""1.2"">" & vbCrLf & _
+               " <office:body>" & vbCrLf & _
+               "  <office:spreadsheet>" & vbCrLf & _
+               "   <table:table table:name=""Relatorio"">" & vbCrLf
+               
+    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
+    Do While Not streamIn.AtEndOfStream
+        cLINHA = streamIn.ReadLine
+        cLINHA = ParseEscapeToBBCode(cLINHA)
+        cLINHA = TiraControlChars(cLINHA)
+        
+        If Len(Trim(cLINHA)) > 0 Then
+            cContent = cContent & "    <table:table-row>" & vbCrLf
+            
+            ' Quebra os campos utilizando o delimitador (padrão ponto e vírgula)
+            vCols = Split(cLINHA, cDELIMITADOR)
+            For j = LBound(vCols) To UBound(vCols)
+                Dim cCellVal As String
+                cCellVal = Trim(vCols(j))
+                
+                ' Protege caracteres reservados do XML
+                cCellVal = Replace(cCellVal, "&", "&amp;")
+                cCellVal = Replace(cCellVal, "<", "&lt;")
+                cCellVal = Replace(cCellVal, ">", "&gt;")
+                
+                cContent = cContent & "     <table:table-cell office:value-type=""string"">" & vbCrLf & _
+                                      "      <text:p>" & cCellVal & "</text:p>" & vbCrLf & _
+                                      "     </table:table-cell>" & vbCrLf
+            Next j
+            
+            cContent = cContent & "    </table:table-row>" & vbCrLf
+        End If
+    Loop
+    streamIn.Close
+    
+    cContent = cContent & "   </table:table>" & vbCrLf & _
+               "  </office:spreadsheet>" & vbCrLf & _
+               " </office:body>" & vbCrLf & _
+               "</office:document-content>"
+               
+    ' Grava o content.xml em UTF-8 puro (sem BOM)
+    Dim oStreamNoBOM As Object
+    Set oStream = CreateObject("ADODB.Stream")
+    oStream.Type = 2: oStream.Charset = "UTF-8": oStream.Open
+    oStream.WriteText cContent
+    oStream.Position = 0: oStream.Type = 1: oStream.Position = 3
+    
+    Set oStreamNoBOM = CreateObject("ADODB.Stream")
+    oStreamNoBOM.Type = 1: oStreamNoBOM.Open
+    oStream.CopyTo oStreamNoBOM
+    oStreamNoBOM.SaveToFile cTempDir & "\content.xml", 2
+    oStream.Close: oStreamNoBOM.Close
+    
+    ' 5. Compacta utilizando a cZipArchive para formar o arquivo .ods final
+    If fso.FileExists(cDestino) Then fso.DeleteFile cDestino, True
+    Set oZip = New cZipArchive
+    oZip.AddFile cTempDir & "\mimetype", "mimetype"
+    oZip.AddFile cTempDir & "\content.xml", "content.xml"
+    oZip.AddFile cTempDir & "\META-INF\manifest.xml", "META-INF/manifest.xml"
+    oZip.CompressArchive cDestino
+    
+    fso.DeleteFolder cTempDir, True
+    txttoods = True
+    Exit Function
+TrataErro:
+    txttoods = False
+End Function
+Public Function txttoxls(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "", Optional ByVal cDELIMITADOR As String = ";") As Boolean
+    Dim fso As Object, streamIn As Object
+    Dim cLINHA As String
+    Dim cTempDir As String, cSheetData As String
+    Dim oZip As cZipArchive
+    Dim nRowIndex As Long
+    Dim vCols As Variant, j As Long
+    
+    If Dir(cOrigem) = "" Then Exit Function
+    If Trim(cDestino) = "" Then cDestino = Replace(LCase(cOrigem), ".txt", ".xlsx")
+    
+    On Error GoTo TrataErro
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    ' 1. Cria a estrutura temporária de pastas para o formato OpenXML do Excel (.xlsx)
+    Randomize
+    cTempDir = fso.GetSpecialFolder(2) & "\XlsVB_" & Format(Int((9999 - 1000 + 1) * Rnd + 1000), "0000")
+    If fso.FolderExists(cTempDir) Then fso.DeleteFolder cTempDir, True
+    
+    fso.CreateFolder cTempDir
+    fso.CreateFolder cTempDir & "\_rels"
+    fso.CreateFolder cTempDir & "\docProps"
+    fso.CreateFolder cTempDir & "\xl"
+    fso.CreateFolder cTempDir & "\xl\_rels"
+    fso.CreateFolder cTempDir & "\xl\worksheets"
+    
+    ' 2. [Content_Types].xml
+    Dim cTypes As String
+    cTypes = "<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>" & vbCrLf & _
+             "<Types xmlns=""http://schemas.openxmlformats.org/package/2006/content-types"">" & vbCrLf & _
+             " <Default Extension=""rels"" ContentType=""application/vnd.openxmlformats-package.relationships+xml""/>" & vbCrLf & _
+             " <Default Extension=""xml"" ContentType=""application/xml""/>" & vbCrLf & _
+             " <Override PartName=""/xl/workbook.xml"" ContentType=""application/vnd.openxmlformats-officedocument.spreadsheetml.workbook+xml""/>" & vbCrLf & _
+             " <Override PartName=""/xl/worksheets/sheet1.xml"" ContentType=""application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml""/>" & vbCrLf & _
+             " <Override PartName=""/docProps/core.xml"" ContentType=""application/vnd.openxmlformats-package.relationships+xml""/>" & vbCrLf & _
+             "</Types>"
+    fso.CreateTextFile(cTempDir & "\[Content_Types].xml", True).Write cTypes
+    
+    ' 3. _rels/.rels
+    Dim cRels As String
+    cRels = "<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>" & vbCrLf & _
+            "<Relationships xmlns=""http://schemas.openxmlformats.org/package/2006/relationships"">" & vbCrLf & _
+            " <Relationship Id=""rId1"" Type=""http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"" Target=""xl/workbook.xml""/>" & vbCrLf & _
+            " <Relationship Id=""rId2"" Type=""http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties"" Target=""docProps/core.xml""/>" & vbCrLf & _
+            "</Relationships>"
+    fso.CreateTextFile(cTempDir & "\_rels\.rels", True).Write cRels
+    
+    ' 4. docProps/core.xml (Metadados de Título e Autor)
+    Dim cCoreProps As String
+    cCoreProps = "<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>" & vbCrLf & _
+                 "<cp:coreProperties xmlns:cp=""http://schemas.openxmlformats.org/package/2006/metadata/core-properties"" " & _
+                 "xmlns:dc=""http://purl.org/dc/elements/1.1/"">" & vbCrLf & _
+                 " <dc:title>" & cTITULO & "</dc:title>" & vbCrLf & _
+                 " <dc:creator>" & cAUTOR & "</dc:creator>" & vbCrLf & _
+                 "</cp:coreProperties>"
+    fso.CreateTextFile(cTempDir & "\docProps\core.xml", True).Write cCoreProps
+    
+    ' 5. xl/_rels/workbook.xml.rels
+    Dim cWbRels As String
+    cWbRels = "<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>" & vbCrLf & _
+              "<Relationships xmlns=""http://schemas.openxmlformats.org/package/2006/relationships"">" & vbCrLf & _
+              " <Relationship Id=""rId1"" Type=""http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet"" Target=""worksheets/sheet1.xml""/>" & vbCrLf & _
+              "</Relationships>"
+    fso.CreateTextFile(cTempDir & "\xl\_rels\workbook.xml.rels", True).Write cWbRels
+    
+    ' 6. xl/workbook.xml
+    Dim cWb As String
+    cWb = "<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>" & vbCrLf & _
+          "<workbook xmlns=""http://schemas.openxmlformats.org/spreadsheetml/2006/main"" xmlns:r=""http://schemas.openxmlformats.org/officeDocument/2006/relationships"">" & vbCrLf & _
+          " <sheets><sheet name=""Relatorio"" sheetId=""1"" r:id=""rId1""/></sheets>" & vbCrLf & _
+          "</workbook>"
+    fso.CreateTextFile(cTempDir & "\xl\workbook.xml", True).Write cWb
+    
+    ' 7. Processamento linha a linha do TXT para xl/worksheets/sheet1.xml
+    cSheetData = "<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>" & vbCrLf & _
+                 "<worksheet xmlns=""http://schemas.openxmlformats.org/spreadsheetml/2006/main""><sheetData>" & vbCrLf
+                 
+    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
+    nRowIndex = 0
+    
+    Do While Not streamIn.AtEndOfStream
+        cLINHA = streamIn.ReadLine
+        cLINHA = ParseEscapeToBBCode(cLINHA)
+        cLINHA = TiraControlChars(cLINHA)
+        
+        If Len(Trim(cLINHA)) > 0 Then
+            nRowIndex = nRowIndex + 1
+            cSheetData = cSheetData & "  <row r=""" & nRowIndex & """>" & vbCrLf
+            
+            ' Quebra os campos utilizando o delimitador (padrão ponto e vírgula)
+            vCols = Split(cLINHA, cDELIMITADOR)
+            For j = LBound(vCols) To UBound(vCols)
+                Dim cCellVal As String
+                cCellVal = Trim(vCols(j))
+                
+                ' Protege caracteres reservados do XML
+                cCellVal = Replace(cCellVal, "&", "&amp;")
+                cCellVal = Replace(cCellVal, "<", "&lt;")
+                cCellVal = Replace(cCellVal, ">", "&gt;")
+                
+                If Len(cCellVal) > 0 Then
+                    ' t="inlineStr" permite inserir o texto de forma limpa sem tabela de strings compartilhadas
+                    cSheetData = cSheetData & "    <c t=""inlineStr""><is><t>" & cCellVal & "</t></is></c>" & vbCrLf
+                End If
+            Next j
+            
+            cSheetData = cSheetData & "  </row>" & vbCrLf
+        End If
+    Loop
+    streamIn.Close
+    
+    cSheetData = cSheetData & "</sheetData></worksheet>"
+    
+    ' Grava o worksheet em UTF-8 puro (sem BOM)
+    Dim oStream As Object, oStreamNoBOM As Object
+    Set oStream = CreateObject("ADODB.Stream")
+    oStream.Type = 2: oStream.Charset = "UTF-8": oStream.Open
+    oStream.WriteText cSheetData
+    oStream.Position = 0: oStream.Type = 1: oStream.Position = 3
+    
+    Set oStreamNoBOM = CreateObject("ADODB.Stream")
+    oStreamNoBOM.Type = 1: oStreamNoBOM.Open
+    oStream.CopyTo oStreamNoBOM
+    oStreamNoBOM.SaveToFile cTempDir & "\xl\worksheets\sheet1.xml", 2
+    oStream.Close: oStreamNoBOM.Close
+    
+    ' 8. Compacta todos os arquivos XML gerados utilizando a cZipArchive
+    If fso.FileExists(cDestino) Then fso.DeleteFile cDestino, True
+    Set oZip = New cZipArchive
+    oZip.AddFile cTempDir & "\[Content_Types].xml", "[Content_Types].xml"
+    oZip.AddFile cTempDir & "\_rels\.rels", "_rels/.rels"
+    oZip.AddFile cTempDir & "\docProps\core.xml", "docProps/core.xml"
+    oZip.AddFile cTempDir & "\xl\workbook.xml", "xl/workbook.xml"
+    oZip.AddFile cTempDir & "\xl\_rels\workbook.xml.rels", "xl/_rels/workbook.xml.rels"
+    oZip.AddFile cTempDir & "\xl\worksheets\sheet1.xml", "xl/worksheets/sheet1.xml"
+    oZip.CompressArchive cDestino
+    
+    fso.DeleteFolder cTempDir, True
+    txttoxls = True
+    Exit Function
+TrataErro:
+    txttoxls = False
 End Function
 

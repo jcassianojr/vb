@@ -484,12 +484,12 @@ Public Function GeraSplit(ByVal aVAR As Variant, Optional ByVal cINI As String =
                           Optional ByVal cMID As String = "", _
                           Optional ByVal cFIM As String = "") As String
   Dim nUSO As Long
-  Dim x As Long
+  Dim X As Long
   nUSO = UBound(aVAR) - 1
   GeraSplit = cINI & aVAR(0) & cMID
-  For x = 1 To nUSO
-    GeraSplit = GeraSplit & aVAR(x) & cMID
-  Next x
+  For X = 1 To nUSO
+    GeraSplit = GeraSplit & aVAR(X) & cMID
+  Next X
   GeraSplit = GeraSplit & aVAR(nUSO + 1)
   GeraSplit = GeraSplit & cFIM
 End Function
@@ -1164,7 +1164,7 @@ Public Function Tirace(ByVal texto As String) As String
   Tirace = tirace2(texto)
 End Function
 Public Function StrToArray(ByVal cGRUPO As String) As Variant
-  Dim x As Integer
+  Dim X As Integer
   Dim nLEN As Integer
   Dim aUSO As Variant
   Dim cCHAR As String
@@ -1177,77 +1177,77 @@ Public Function StrToArray(ByVal cGRUPO As String) As Variant
 
   nLEN = Len(eCNV)
   ReDim aUSO(nLEN)
-  For x = 1 To nLEN
-    cCHAR = Mid(eCNV, x, 1)
+  For X = 1 To nLEN
+    cCHAR = Mid(eCNV, X, 1)
     Select Case cCHAR
     Case "ª"
-      aUSO(x - 1) = "a."
+      aUSO(X - 1) = "a."
 
     Case "º"
-      aUSO(x - 1) = "o."
+      aUSO(X - 1) = "o."
 
     Case Else
-      aUSO(x - 1) = cCHAR
+      aUSO(X - 1) = cCHAR
 
     End Select
-  Next x
+  Next X
   StrToArray = aUSO
 End Function
 
 Public Function TiraSin(ByVal texto As String, Optional ByVal RemoveUp As Boolean = True) As String
-Dim x As Integer
+Dim X As Integer
   'https://www.ascii-code.com/pt
   'Caracteres de controle ASCII (código de caractere 0-31)
-  For x = 0 To 31 'nao caracteres padrao
-    texto = Replace(texto, Chr(x), "")
-  Next x
+  For X = 0 To 31 'nao caracteres padrao
+    texto = Replace(texto, Chr(X), "")
+  Next X
   'Caracteres imprimiveis ASCII (código de caractere 32-127)
   '32 espaco
-  For x = 33 To 38                 '33! 34" 35# 36$ 37% 38&
-    texto = Replace(texto, Chr(x), "")
-  Next x
-  For x = 39 To 47                 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
-    texto = Replace(texto, Chr(x), "")
-  Next x
+  For X = 33 To 38                 '33! 34" 35# 36$ 37% 38&
+    texto = Replace(texto, Chr(X), "")
+  Next X
+  For X = 39 To 47                 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
+    texto = Replace(texto, Chr(X), "")
+  Next X
   '48 a 57 numeros 0-9
-  For x = 58 To 64                 '58: 59: 60< 61= 62> 63? 64@
-    texto = Replace(texto, Chr(x), "")
-  Next x
+  For X = 58 To 64                 '58: 59: 60< 61= 62> 63? 64@
+    texto = Replace(texto, Chr(X), "")
+  Next X
   '65 a 90 maisculas
-  For x = 91 To 96                 '91[ 92\ 93] 94^ 95_ 96`
-    texto = Replace(texto, Chr(x), "")
-  Next x
+  For X = 91 To 96                 '91[ 92\ 93] 94^ 95_ 96`
+    texto = Replace(texto, Chr(X), "")
+  Next X
   '97 a 122 minusculas
-  For x = 123 To 126                '123{ 124| 125} 126~
-    texto = Replace(texto, Chr(x), "")
-  Next x
-  For x = 127 To 127                 '127 del
-    texto = Replace(texto, Chr(x), "")
-  Next x
+  For X = 123 To 126                '123{ 124| 125} 126~
+    texto = Replace(texto, Chr(X), "")
+  Next X
+  For X = 127 To 127                 '127 del
+    texto = Replace(texto, Chr(X), "")
+  Next X
   'Códigos ASCII estendidos (código de caracteres 128-255)
   If RemoveUp Then
-    For x = 128 To 255
-      texto = Replace(texto, Chr(x), "")
-    Next x
+    For X = 128 To 255
+      texto = Replace(texto, Chr(X), "")
+    Next X
   Else 'matem caracteres de acentuacao uso tirace caso queira manter sem acentuacao
-    For x = 155 To 159
-      texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 168 To 180
-      texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 184 To 197
-      texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 200 To 209
-      texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 217 To 223
-      texto = Replace(texto, Chr(x), "")
-    Next x
-    For x = 238 To 255
-      texto = Replace(texto, Chr(x), "")
-    Next x
+    For X = 155 To 159
+      texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 168 To 180
+      texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 184 To 197
+      texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 200 To 209
+      texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 217 To 223
+      texto = Replace(texto, Chr(X), "")
+    Next X
+    For X = 238 To 255
+      texto = Replace(texto, Chr(X), "")
+    Next X
   End If
   TiraSin = texto
 End Function
@@ -1521,7 +1521,7 @@ End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
   Dim nLEN As Integer
   Dim nTEXTO As Integer
-  Dim x As Integer
+  Dim X As Integer
   Dim Y As Integer
   Dim aORI As Variant
   Dim aDES As Variant
@@ -1537,9 +1537,9 @@ Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eD
   nLEN = UBound(aORI)
   nTEXTO = UBound(aTEXTO)
   For Y = 0 To nTEXTO
-    For x = 0 To nLEN
-      If aTEXTO(Y) = aORI(x) Then          ''Encerra Analise Para Evitar
-        aTEXTO(Y) = aDES(x)              ''Loop de Troca
+    For X = 0 To nLEN
+      If aTEXTO(Y) = aORI(X) Then          ''Encerra Analise Para Evitar
+        aTEXTO(Y) = aDES(X)              ''Loop de Troca
         Exit For
       End If
     Next
@@ -1682,7 +1682,7 @@ Public Function Extenso(ByVal Valor As Double, _
 End Function
 
 Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer = 80) As Variant
-  Dim nLIN, x As Integer
+  Dim nLIN, X As Integer
   Dim aRETU As Variant
   cTEXTO = FixStr(cTEXTO)
   If nCOL < 1 Then nCOL = 80                   'Evita Erros Divisao
@@ -1692,9 +1692,9 @@ Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer =
     nLIN = nLIN + 1                          ''Soma mais um pois e necesario
   End If
   ReDim aRETU(nLIN)
-  For x = 1 To nLIN
-    aRETU(x - 1) = Mid(cTEXTO, ((x - 1) * nCOL) + 1, nCOL)
-  Next x
+  For X = 1 To nLIN
+    aRETU(X - 1) = Mid(cTEXTO, ((X - 1) * nCOL) + 1, nCOL)
+  Next X
   Txt2Lin = aRETU
   eRETU01 = nLIN
 End Function
@@ -1975,10 +1975,10 @@ Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean
   cTEXTO = CharCodesToHTML(cTEXTO)
   str2html = cTEXTO
 End Function
-Function FileText(ByVal filename As String) As String
+Function FileText(ByVal FileName As String) As String
   Dim Handle As Integer
   Handle = FreeFile
-  Open filename$ For Input As #Handle
+  Open FileName$ For Input As #Handle
   FileText = Input$(LOF(Handle), Handle)
   Close #Handle
 End Function
@@ -2223,128 +2223,6 @@ Isvba64 = False
     #If Win64 Then
         Isvba64 = True
     #End If
-End Function
-
-' ==============================================================================
-' MOTOR 4: CONVERSÃO DE TXT PARA EXCEL - TRATAMENTO MULTI-DELIMITADORES EM STREAM
-' ==============================================================================
-Public Function txttoxls(ByVal cOrigem As String, _
-                                      Optional ByVal cDestino As String = "", _
-                                      Optional ByVal cTITULO As String = "", _
-                                      Optional ByVal cAUTOR As String = "", _
-                                      Optional ByVal cDELIMITADOR As String = ";") As Boolean
-    Dim fso As Object
-    Dim streamIn As Object
-    Dim streamOut As Object
-    Dim cLINHA As String
-    Dim strOutputFile As String
-    Dim arrCampos() As String
-    Dim i As Long
-    Dim cDelimReal As String
-    Dim bPrimeiraLinha As Boolean
-    Dim cValor As String
-    
-    ' 1. Validação inicial: se o arquivo de origem não existir, aborta
-    If Dir(cOrigem) = "" Then
-        txttoxls = False
-        Exit Function
-    End If
-    
-    ' 2. Regra do Destino: Se não foi passado, gera o .xls baseado no nome do TXT
-    If Trim(cDestino) = "" Then
-        strOutputFile = Replace(LCase(cOrigem), ".txt", ".xls")
-    Else
-        strOutputFile = cDestino
-    End If
-    
-    ' 3. TRATAMENTO DOS DELIMITADORES DO SEU FORMULÁRIO (tab, ;,  ,, |, ~#)
-    cDELIMITADOR = Trim(LCase(cDELIMITADOR))
-    
-    Select Case cDELIMITADOR
-        Case "<tab>", "tab", Chr(9)
-            cDelimReal = Chr(9)   ' Tabulação Real
-        Case ""
-            cDelimReal = ";"      ' Fallback padrão se vier vazio
-        Case Else
-            cDelimReal = cDELIMITADOR ' Captura ;, ,, |, ~# exatamente como estão no Form
-    End Select
-    
-    On Error GoTo TrataErro
-    
-    ' 4. Inicializa o FileSystemObject para processamento leve (Streaming)
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)       ' 1 = ForReading
-    Set streamOut = fso.OpenTextFile(strOutputFile, 2, True) ' 2 = ForWriting
-    
-    ' 5. Escreve o cabeçalho HTML formatado para Excel e LibreOffice
-    streamOut.WriteLine "<html>"
-    streamOut.WriteLine "<head>"
-    streamOut.WriteLine "<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"">"
-    
-    ' Metadados do documento
-    If Trim(cAUTOR) <> "" Then streamOut.WriteLine "<meta name=""author"" content=""" & cAUTOR & """>"
-    If Trim(cTITULO) <> "" Then streamOut.WriteLine "<title>" & cTITULO & "</title>"
-    
-    ' CSS para forçar linhas e bordas visíveis no Excel/Calc
-    streamOut.WriteLine "<style>"
-    streamOut.WriteLine "table { border-collapse: collapse; }"
-    streamOut.WriteLine "td, th { border: 1px solid #A0A0A0; font-family: Calibri, Arial, sans-serif; font-size: 11pt; padding: 5px; }"
-    streamOut.WriteLine "th { background-color: #EFEFEF; font-weight: bold; }"
-    streamOut.WriteLine "</style>"
-    streamOut.WriteLine "</head>"
-    streamOut.WriteLine "<body>"
-    streamOut.WriteLine "<table>"
-    
-    bPrimeiraLinha = True
-    
-    ' 6. Loop de Performance: Separa as colunas com base no delimitador tratado
-    Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        
-        ' Faz a divisão da linha usando o delimitador correto correspondente ao do Form
-        arrCampos = Split(cLINHA, cDelimReal)
-        
-        streamOut.WriteLine "  <tr>"
-        For i = LBound(arrCampos) To UBound(arrCampos)
-            
-            ' Isola o conteúdo da célula tirando espaços extras
-            cValor = Trim(CStr(arrCampos(i)))
-            
-            ' Aplica a sua função nativa str2html para tratar acentos e caracteres especiais
-            cValor = str2html(cValor)
-            
-            ' Se for a primeira linha do TXT, vira cabeçalho destacado (th)
-            If bPrimeiraLinha Then
-                streamOut.WriteLine "    <th>" & cValor & "</th>"
-            Else
-                ' Gravação correta da célula de dados (td)
-                streamOut.WriteLine "    <td>" & cValor & "</td>"
-            End If
-        Next i
-        streamOut.WriteLine "  </tr>"
-        
-        bPrimeiraLinha = False
-    Loop
-    
-    ' 7. Fecha o arquivo de forma íntegra
-    streamOut.WriteLine "</table>"
-    streamOut.WriteLine "</body>"
-    streamOut.WriteLine "</html>"
-    
-    txttoxls = True
-
-Fim:
-    ' Destruição rigorosa de objetos para não prender memória RAM
-    If Not streamIn Is Nothing Then streamIn.Close
-    If Not streamOut Is Nothing Then streamOut.Close
-    Set streamIn = Nothing
-    Set streamOut = Nothing
-    Set fso = Nothing
-    Exit Function
-
-TrataErro:
-    txttoxls = False
-    Resume Fim
 End Function
 
 ' --- Função de suporte para tradução ---
