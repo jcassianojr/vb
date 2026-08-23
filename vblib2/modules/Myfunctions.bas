@@ -165,7 +165,7 @@ End Enum
     Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
     Public Declare Function ShellExecuteForExplore Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, lpParameters As Any, lpDirectory As Any, ByVal nShowCmd As Long) As Long
     
-    Public Declare Function WinAPI_GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
+    Public Declare Function WinAPI_GetUserName Lib "Advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, nSize As Long) As Long
     Public Declare Function InternetGetConnectedState Lib "wininet" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
     Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
     Public Declare Function ReleaseCapture Lib "user32" () As Long
@@ -173,8 +173,8 @@ End Enum
     Public Declare Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As Long, ByVal lpFileName As String) As Long
     Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpString As Any, ByVal lpFileName As String) As Long
     
-    Public Declare Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCType As Long, ByVal lpLCData As String, ByVal cchData As Long) As Long
-    Public Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCType As Long, ByVal lpLCData As String) As Long
+    Public Declare Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String, ByVal cchData As Long) As Long
+    Public Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String) As Long
     
     Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
     Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
@@ -484,12 +484,12 @@ Public Function GeraSplit(ByVal aVAR As Variant, Optional ByVal cINI As String =
                           Optional ByVal cMID As String = "", _
                           Optional ByVal cFIM As String = "") As String
   Dim nUSO As Long
-  Dim X As Long
+  Dim x As Long
   nUSO = UBound(aVAR) - 1
   GeraSplit = cINI & aVAR(0) & cMID
-  For X = 1 To nUSO
-    GeraSplit = GeraSplit & aVAR(X) & cMID
-  Next X
+  For x = 1 To nUSO
+    GeraSplit = GeraSplit & aVAR(x) & cMID
+  Next x
   GeraSplit = GeraSplit & aVAR(nUSO + 1)
   GeraSplit = GeraSplit & cFIM
 End Function
@@ -529,8 +529,8 @@ Public Function Alert(ByVal cDIZ As String, Optional ByVal cTITLE As String = "I
   MsgBox cDIZ, vbOKOnly, cTITLE
 End Function
 
-Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVAL As String, Optional ByVal nLEN As Integer = 0) As String
-  Busca = InputBox(cDIZ, cCAB, cVAL)
+Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVal As String, Optional ByVal nLEN As Integer = 0) As String
+  Busca = InputBox(cDIZ, cCAB, cVal)
   If nLEN > 0 Then
      Busca = Left$(Busca, nLEN)
   End If
@@ -1164,7 +1164,7 @@ Public Function Tirace(ByVal texto As String) As String
   Tirace = tirace2(texto)
 End Function
 Public Function StrToArray(ByVal cGRUPO As String) As Variant
-  Dim X As Integer
+  Dim x As Integer
   Dim nLEN As Integer
   Dim aUSO As Variant
   Dim cCHAR As String
@@ -1177,77 +1177,77 @@ Public Function StrToArray(ByVal cGRUPO As String) As Variant
 
   nLEN = Len(eCNV)
   ReDim aUSO(nLEN)
-  For X = 1 To nLEN
-    cCHAR = Mid(eCNV, X, 1)
+  For x = 1 To nLEN
+    cCHAR = Mid(eCNV, x, 1)
     Select Case cCHAR
     Case "ª"
-      aUSO(X - 1) = "a."
+      aUSO(x - 1) = "a."
 
     Case "º"
-      aUSO(X - 1) = "o."
+      aUSO(x - 1) = "o."
 
     Case Else
-      aUSO(X - 1) = cCHAR
+      aUSO(x - 1) = cCHAR
 
     End Select
-  Next X
+  Next x
   StrToArray = aUSO
 End Function
 
 Public Function TiraSin(ByVal texto As String, Optional ByVal RemoveUp As Boolean = True) As String
-Dim X As Integer
+Dim x As Integer
   'https://www.ascii-code.com/pt
   'Caracteres de controle ASCII (código de caractere 0-31)
-  For X = 0 To 31 'nao caracteres padrao
-    texto = Replace(texto, Chr(X), "")
-  Next X
+  For x = 0 To 31 'nao caracteres padrao
+    texto = Replace(texto, Chr(x), "")
+  Next x
   'Caracteres imprimiveis ASCII (código de caractere 32-127)
   '32 espaco
-  For X = 33 To 38                 '33! 34" 35# 36$ 37% 38&
-    texto = Replace(texto, Chr(X), "")
-  Next X
-  For X = 39 To 47                 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
-    texto = Replace(texto, Chr(X), "")
-  Next X
+  For x = 33 To 38                 '33! 34" 35# 36$ 37% 38&
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  For x = 39 To 47                 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
+    texto = Replace(texto, Chr(x), "")
+  Next x
   '48 a 57 numeros 0-9
-  For X = 58 To 64                 '58: 59: 60< 61= 62> 63? 64@
-    texto = Replace(texto, Chr(X), "")
-  Next X
+  For x = 58 To 64                 '58: 59: 60< 61= 62> 63? 64@
+    texto = Replace(texto, Chr(x), "")
+  Next x
   '65 a 90 maisculas
-  For X = 91 To 96                 '91[ 92\ 93] 94^ 95_ 96`
-    texto = Replace(texto, Chr(X), "")
-  Next X
+  For x = 91 To 96                 '91[ 92\ 93] 94^ 95_ 96`
+    texto = Replace(texto, Chr(x), "")
+  Next x
   '97 a 122 minusculas
-  For X = 123 To 126                '123{ 124| 125} 126~
-    texto = Replace(texto, Chr(X), "")
-  Next X
-  For X = 127 To 127                 '127 del
-    texto = Replace(texto, Chr(X), "")
-  Next X
+  For x = 123 To 126                '123{ 124| 125} 126~
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  For x = 127 To 127                 '127 del
+    texto = Replace(texto, Chr(x), "")
+  Next x
   'Códigos ASCII estendidos (código de caracteres 128-255)
   If RemoveUp Then
-    For X = 128 To 255
-      texto = Replace(texto, Chr(X), "")
-    Next X
+    For x = 128 To 255
+      texto = Replace(texto, Chr(x), "")
+    Next x
   Else 'matem caracteres de acentuacao uso tirace caso queira manter sem acentuacao
-    For X = 155 To 159
-      texto = Replace(texto, Chr(X), "")
-    Next X
-    For X = 168 To 180
-      texto = Replace(texto, Chr(X), "")
-    Next X
-    For X = 184 To 197
-      texto = Replace(texto, Chr(X), "")
-    Next X
-    For X = 200 To 209
-      texto = Replace(texto, Chr(X), "")
-    Next X
-    For X = 217 To 223
-      texto = Replace(texto, Chr(X), "")
-    Next X
-    For X = 238 To 255
-      texto = Replace(texto, Chr(X), "")
-    Next X
+    For x = 155 To 159
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 168 To 180
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 184 To 197
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 200 To 209
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 217 To 223
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 238 To 255
+      texto = Replace(texto, Chr(x), "")
+    Next x
   End If
   TiraSin = texto
 End Function
@@ -1521,7 +1521,7 @@ End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
   Dim nLEN As Integer
   Dim nTEXTO As Integer
-  Dim X As Integer
+  Dim x As Integer
   Dim Y As Integer
   Dim aORI As Variant
   Dim aDES As Variant
@@ -1537,9 +1537,9 @@ Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eD
   nLEN = UBound(aORI)
   nTEXTO = UBound(aTEXTO)
   For Y = 0 To nTEXTO
-    For X = 0 To nLEN
-      If aTEXTO(Y) = aORI(X) Then          ''Encerra Analise Para Evitar
-        aTEXTO(Y) = aDES(X)              ''Loop de Troca
+    For x = 0 To nLEN
+      If aTEXTO(Y) = aORI(x) Then          ''Encerra Analise Para Evitar
+        aTEXTO(Y) = aDES(x)              ''Loop de Troca
         Exit For
       End If
     Next
@@ -1682,7 +1682,7 @@ Public Function Extenso(ByVal Valor As Double, _
 End Function
 
 Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer = 80) As Variant
-  Dim nLIN, X As Integer
+  Dim nLIN, x As Integer
   Dim aRETU As Variant
   cTEXTO = FixStr(cTEXTO)
   If nCOL < 1 Then nCOL = 80                   'Evita Erros Divisao
@@ -1692,9 +1692,9 @@ Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer =
     nLIN = nLIN + 1                          ''Soma mais um pois e necesario
   End If
   ReDim aRETU(nLIN)
-  For X = 1 To nLIN
-    aRETU(X - 1) = Mid(cTEXTO, ((X - 1) * nCOL) + 1, nCOL)
-  Next X
+  For x = 1 To nLIN
+    aRETU(x - 1) = Mid(cTEXTO, ((x - 1) * nCOL) + 1, nCOL)
+  Next x
   Txt2Lin = aRETU
   eRETU01 = nLIN
 End Function
@@ -1743,11 +1743,11 @@ End Function
 ' +            espelhando a mesma inteligência usada no Harbour.
 ' +  Retorno:  Variant (Pode retornar True, False, ou Null para nulos)
 ' +--------------------------------------------------------------------
-Public Function StrLogic(ByVal cVAL As String) As Variant
+Public Function StrLogic(ByVal cVal As String) As Variant
     ' Limpa espaços em branco e padroniza em maiúsculo
-    cVAL = UCase$(Trim$(cVAL))
+    cVal = UCase$(Trim$(cVal))
     
-    Select Case cVAL
+    Select Case cVal
         ' Casos que retornam Nulo/Vazio
         Case "", "NULL", "<NULL>", "NIL", "NUL"
             StrLogic = Null
@@ -1935,73 +1935,6 @@ Public Sub OpenUrl(ByVal strURL As String)
     ShellExecute 0&, "Open", strURL, vbNullString, vbNullString, 1 ' SW_SHOWNORMAL
 End Sub
 
-Public Function txttopdf(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
-    Dim fso As Object
-    Dim streamIn As Object
-    Dim cLINHA As String
-    Dim pdf As ClsFPDF
-    
-    ' Validações estruturais padrões do seu sistema
-    If Not FileConnExist(cOrigem, True) Then Exit Function
-    If Len(cDestino) = 0 Then cDestino = TrocaExt(cOrigem, "PDF")
-    
-    If FileConnExist(cDestino, False) Then
-        Alert ("Arquivo Destino Ja existe")
-        Exit Function
-    End If
-    
-    On Error GoTo TrataErro
-    
-    ' 1. Abre o arquivo de texto em modo Fluxo contínuo (Segurança contra arquivos gigantes)
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
-    
-    ' 2. Inicializa o motor do FPDF
-    Set pdf = New ClsFPDF
-    pdf.CreatePDF "P", "mm"
-    pdf.AddPage
-    pdf.SetFont "Arial", 10
-    
-    ' 3. Configura a paginação e margens (em milímetros)
-    Dim nMargemEsquerda As Single: nMargemEsquerda = 15
-    Dim nLinhaAtual As Single: nLinhaAtual = 15
-    Dim nAlturaLinha As Single: nAlturaLinha = 5 ' Espaçamento de 5mm entre as linhas
-    Dim nLimiteInferior As Single: nLimiteInferior = 275 ' Altura máxima da folha A4 antes de quebrar a página
-    
-    ' 4. Loop de streaming de performance: lê e grava em tempo real
-    Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        
-        ' Desenha a linha atual de texto no documento PDF
-        pdf.Cell cLINHA, nMargemEsquerda, nLinhaAtual
-        
-        ' Avança o cursor vertical para a próxima linha
-        nLinhaAtual = nLinhaAtual + nAlturaLinha
-        
-        ' QUEBRA DE PÁGINA AUTOMÁTICA: Se o texto atingir o rodapé da folha, abre uma página nova
-        If nLinhaAtual > nLimiteInferior Then
-            pdf.AddPage
-            pdf.SetFont "Arial", 10 ' Reaplica a fonte na nova página
-            nLinhaAtual = 15        ' Reinicia o cursor no topo da nova folha
-        End If
-    Loop
-    
-    ' 5. Compila e descarrega o arquivo final no disco
-    pdf.Output cDestino
-    txttopdf = True
-
-Fim:
-    ' Destrói os ponteiros e liberta totalmente a memória RAM do computador
-    If Not streamIn Is Nothing Then streamIn.Close
-    Set streamIn = Nothing
-    Set fso = Nothing
-    Set pdf = Nothing
-    Exit Function
-
-TrataErro:
-    Alert "Erro na rotina de geração do PDF: " & Err.Description
-    Resume Fim
-End Function
 Public Function CharCodesToHTML(ByVal iString As String) As String
     Dim iXml As Object
     
@@ -2024,7 +1957,7 @@ Public Function HTMLToCharCodes(ByVal iString As String) As String
     Set iXml = CreateObject("MSXML2.DOMDocument.6.0")
     
     ' Carrega o XML com o conteúdo enviado
-    If iXml.loadXML("<p>" & iString & "</p>") Then
+    If iXml.LoadXML("<p>" & iString & "</p>") Then
         ' Extrai o valor do nó (decodificando as entidades HTML/XML automaticamente)
         HTMLToCharCodes = iXml.selectSingleNode("p").nodeTypedValue
     Else
@@ -2042,10 +1975,10 @@ Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean
   cTEXTO = CharCodesToHTML(cTEXTO)
   str2html = cTEXTO
 End Function
-Function FileText(ByVal FileName As String) As String
+Function FileText(ByVal filename As String) As String
   Dim Handle As Integer
   Handle = FreeFile
-  Open FileName$ For Input As #Handle
+  Open filename$ For Input As #Handle
   FileText = Input$(LOF(Handle), Handle)
   Close #Handle
 End Function
@@ -2107,16 +2040,16 @@ Function TiraEspaco(sNome As String) As String
 End Function
 
 Function FastArraySearch(SearchArray As Variant, SearchPhrase As String) As Long  'String
-  Dim Pos As Long
+  Dim pos As Long
   Dim i As Long
   Dim NumCharsProcessed As Long
  ' dim TXT As String
   FastArraySearch = -1
-  Pos = InStr(Join(SearchArray, "§"), SearchPhrase)
-  If Pos > 0 Then
+  pos = InStr(Join(SearchArray, "§"), SearchPhrase)
+  If pos > 0 Then
     For i = LBound(SearchArray) To UBound(SearchArray)
       NumCharsProcessed = NumCharsProcessed + Len(SearchArray(i)) + 1
-      If NumCharsProcessed >= Pos Then
+      If NumCharsProcessed >= pos Then
         FastArraySearch = i              ''SearchArray(i)
         Exit Function
       End If
@@ -2292,244 +2225,6 @@ Isvba64 = False
     #End If
 End Function
 
-Public Function txttodoc(ByVal cOrigem As String, _
-                                     Optional ByVal cDestino As String = "", _
-                                     Optional ByVal cTITULO As String = "", _
-                                     Optional ByVal cAUTOR As String = "") As Boolean
-    Dim fso As Object
-    Dim streamIn As Object
-    Dim streamOut As Object
-    Dim cLINHA As String
-    Dim strOutputFile As String
-    
-    ' 1. Validação inicial: se o arquivo de origem não existir, aborta retornando False
-    If Dir(cOrigem) = "" Then
-        txttodoc = False
-        Exit Function
-    End If
-    
-    ' 2. Regra do Destino: Se não foi passado, gera o .doc baseado no arquivo de origem
-    If Trim(cDestino) = "" Then
-        strOutputFile = Replace(LCase(cOrigem), ".txt", ".doc")
-    Else
-        strOutputFile = cDestino
-    End If
-    
-    On Error GoTo TrataErro
-    
-    ' 3. Inicializa o FSO para o processamento em Streaming (Leve e rápido)
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
-    Set streamOut = fso.OpenTextFile(strOutputFile, 2, True)
-    
-    ' 4. Escreve o cabeçalho HTML com suporte a metadados de Título e Autor para o Word
-    streamOut.WriteLine "<html>"
-    streamOut.WriteLine "<head>"
-    streamOut.WriteLine "<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"">"
-    
-    ' Injeta o Autor e Título se eles tiverem sido informados por parâmetro
-    If Trim(cAUTOR) <> "" Then
-        streamOut.WriteLine "<meta name=""author"" content=""" & cAUTOR & """>"
-    End If
-    If Trim(cTITULO) <> "" Then
-        streamOut.WriteLine "<title>" & cTITULO & "</title>"
-    End If
-    
-    ' Estilização CSS para o Word manter as fontes monoespaçadas e respeitar os espaços em branco do TXT
-    streamOut.WriteLine "<style>"
-    streamOut.WriteLine "body { font-family: 'Courier New', Courier, monospace; font-size: 10pt; line-height: 1.2; }"
-    streamOut.WriteLine "p { margin: 0; padding: 0; white-space: pre; }"
-    streamOut.WriteLine "</style>"
-    streamOut.WriteLine "</head>"
-    streamOut.WriteLine "<body>"
-    
-    ' 5. Loop de Leitura/Escrita linha por linha
-    Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        
-        ' Escapa caracteres que podem quebrar a sintaxe do HTML
-        cLINHA = Replace(cLINHA, "&", "&amp;")
-        cLINHA = Replace(cLINHA, "<", "&lt;")
-        cLINHA = Replace(cLINHA, ">", "&gt;")
-        
-        ' Se for linha vazia, adiciona o espaço fixo para o Word não "engolir" a linha
-        If Len(Trim(cLINHA)) = 0 Then
-            streamOut.WriteLine "<p>&nbsp;</p>"
-        Else
-            streamOut.WriteLine "<p>" & cLINHA & "</p>"
-        End If
-    Loop
-    
-    ' 6. Fecha as tags do documento
-    streamOut.WriteLine "</body>"
-    streamOut.WriteLine "</html>"
-    
-    ' Se chegou até aqui sem erros, operação concluída com sucesso!
-    txttodoc = True
-
-Fim:
-    ' Liberação e fechamento seguro de canais de memória
-    If Not streamIn Is Nothing Then streamIn.Close
-    If Not streamOut Is Nothing Then streamOut.Close
-    Set streamIn = Nothing
-    Set streamOut = Nothing
-    Set fso = Nothing
-    Exit Function
-
-TrataErro:
-    ' Em caso de qualquer falha (permissão de escrita, arquivo travado), retorna False
-    txttodoc = False
-    Resume Fim
-End Function
-Public Function txttortf(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
-    Dim fso As Object
-    Dim streamIn As Object
-    Dim streamOut As Object
-    Dim cLINHA As String
-    Dim cBlocoInfo As String
-    
-    ' Mantém a sua validação original usando FileConnExist
-    If Not FileConnExist(cOrigem, True) Then Exit Function
-    
-    ' Mantém a sua lógica original para caminhos e extensões padrões
-    If Len(cDestino) = 0 Then cDestino = TrocaExt(cOrigem, "RTF")
-    
-    ' Impede a sobreescrita acidental conforme o seu padrão
-    If FileConnExist(cDestino, False) Then
-        Alert ("Arquivo Destino Ja existe")
-        Exit Function
-    End If
-    
-    ' Mantém os valores padrões vindos do seu sistema, idêntico à sua txttohtml
-    If Len(cAUTOR) = 0 Then cAUTOR = zNOMEFOLHA
-    If Len(cTITULO) = 0 Then cTITULO = NomeArq(cOrigem, True)
-    
-    On Error GoTo TrataErro
-    
-    ' Inicializa o FileSystemObject para leitura e gravação em fluxo (streaming)
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    
-    ' Abre o arquivo de origem para leitura (1 = ForReading)
-    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
-    ' Cria o arquivo de destino para escrita (True = Sobreescrever)
-    Set streamOut = fso.CreateTextFile(cDestino, True)
-    
-    ' --- CONSTRUÇÃO DOS METADADOS (BLOCO INFO) ---
-    ' Monta a tag {\info} se houver título ou autor preenchidos
-    cBlocoInfo = ""
-    If Len(cTITULO) > 0 Or Len(cAUTOR) > 0 Then
-        cBlocoInfo = "{\info"
-        If Len(cTITULO) > 0 Then cBlocoInfo = cBlocoInfo & "{\title " & cTITULO & "}"
-        If Len(cAUTOR) > 0 Then cBlocoInfo = cBlocoInfo & "{\author " & cAUTOR & "}"
-        cBlocoInfo = cBlocoInfo & "}"
-    End If
-    
-    ' Escreve o cabeçalho de inicialização do formato RTF juntamente com os metadados
-    streamOut.Write "{\rtf1\ansi\ansicpg1252\deff0\deflang1031" & cBlocoInfo & "{\fonttbl{\f0\fnil\fcharset0 Arial;}}\viewkind4\uc1\pard\f0\fs20 "
-    
-    ' Loop de streaming otimizado por linha para arquivos gigantes
-    Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        
-        ' Proteção para que caracteres de controle do RTF presentes no texto original não corrompam o arquivo
-        If InStr(cLINHA, "\") > 0 Then cLINHA = Replace(cLINHA, "\", "\\")
-        If InStr(cLINHA, "{") > 0 Then cLINHA = Replace(cLINHA, "{", "\{")
-        If InStr(cLINHA, "}") > 0 Then cLINHA = Replace(cLINHA, "}", "\}")
-        
-        ' Grava no arquivo adicionando o controle de fim de parágrafo (\par) do RTF
-        streamOut.Write cLINHA & "\par " & vbCrLf
-    Loop
-    
-    ' Escreve a tag de encerramento do documento RTF
-    streamOut.Write "\par}"
-    
-    txttortf = True
-
-Fim:
-    ' Garante a desconexão dos arquivos e liberação completa dos objetos de streaming da memória
-    If Not streamIn Is Nothing Then streamIn.Close
-    If Not streamOut Is Nothing Then streamOut.Close
-    Set streamIn = Nothing
-    Set streamOut = Nothing
-    Set fso = Nothing
-    Exit Function
-
-TrataErro:
-    Alert "Erro na gravação/leitura do arquivo RTF: " & Err.Description
-    Resume Fim
-End Function
-Public Function txttohtml(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
-    Dim fso As Object
-    Dim streamIn As Object
-    Dim streamOut As Object
-    Dim cLINHA As String
-    
-    ' Mantém a sua validação original usando FileConnExist
-    If Not FileConnExist(cOrigem, True) Then Exit Function
-    
-    ' Mantém a sua lógica original para caminhos e extensões padrões
-    If Len(cDestino) = 0 Then cDestino = TrocaExt(cOrigem, "HTML")
-    
-    ' Impede a sobreescrita acidental conforme seu código original
-    If FileConnExist(cDestino, False) Then
-        Alert ("Arquivo Destino Ja existe")
-        Exit Function
-    End If
-    
-    ' Mantém os valores padrões vindos das suas variáveis globais e funções de string
-    If Len(cAUTOR) = 0 Then cAUTOR = zNOMEFOLHA
-    If Len(cTITULO) = 0 Then cTITULO = NomeArq(cOrigem, True)
-    
-    On Error GoTo TrataErro
-    
-    ' Inicializa o FileSystemObject para ler e gravar em fluxo de buffer
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    
-    ' Abre o arquivo de origem para leitura (1 = ForReading)
-    Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
-    ' Cria o arquivo de destino para escrita (True = Sobreescrever)
-    Set streamOut = fso.CreateTextFile(cDestino, True)
-    
-    ' Escreve exatamente a mesma estrutura de cabeçalho que o seu Print original fazia
-    streamOut.Write "<html>" & vbCrLf
-    streamOut.Write "<head>" & vbCrLf
-    streamOut.Write "<meta http-equiv=" & Chr(34) & "Content-Type" & Chr(34) & vbCrLf
-    streamOut.Write "content=" & Chr(34) & "text/html; charset=iso-8859-1" & Chr(34) & ">" & vbCrLf
-    streamOut.Write "<meta name=" & Chr(34) & "GENERATOR" & Chr(34) & "content=" & Chr(34) & cAUTOR & Chr(34) & ">" & vbCrLf
-    streamOut.Write "<title>" & cTITULO & "</title>" & vbCrLf
-    streamOut.Write "</head>" & vbCrLf
-    streamOut.Write "<body>" & vbCrLf
-    
-    ' Loop de streaming otimizado linha por linha para arquivos gigantes
-    Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        
-        ' AQUI: Aplica a função original str2html para tratar acentos e caracteres especiais
-        cLINHA = str2html(cLINHA)
-        
-        ' Joga no arquivo destino adicionando a quebra de linha do HTML
-        streamOut.Write cLINHA & "<br>" & vbCrLf
-    Loop
-    
-    ' Fecha a estrutura do documento exatamente como o seu original
-    streamOut.Write "</body>" & vbCrLf
-    streamOut.Write "</html>" & vbCrLf
-    
-    txttohtml = True
-
-Fim:
-    ' Garante o fechamento correto dos arquivos e liberação da RAM
-    If Not streamIn Is Nothing Then streamIn.Close
-    If Not streamOut Is Nothing Then streamOut.Close
-    Set streamIn = Nothing
-    Set streamOut = Nothing
-    Set fso = Nothing
-    Exit Function
-
-TrataErro:
-    Alert "Erro na gravação/leitura do arquivo: " & Err.Description
-    Resume Fim
-End Function
 ' ==============================================================================
 ' MOTOR 4: CONVERSÃO DE TXT PARA EXCEL - TRATAMENTO MULTI-DELIMITADORES EM STREAM
 ' ==============================================================================

@@ -1,4 +1,4 @@
-Criatxt = 224, 224, 1852, 859, C
+Criatxt = 185, 129, 1713, 764, 
 EscArqOrdem = 0, 0, 1393, 655, C, 156, 156, 1328, 529, C
 escOrdem = 0, 0, 0, 0, C, 182, 182, 1354, 555, C
 EscRptExec = 0, 0, 0, 0, C, 0, 0, 1172, 373, C
@@ -79,3 +79,4 @@ cWebView2 = 0, 0, 0, 0, C
 cWebView2Callback = 0, 0, 0, 0, C
 cZipArchive = 0, 0, 0, 0, C
 clsOSInfo = 64, 64, 1590, 577, C
+conversordeformatos = 160, 162, 1686, 673, C
