@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form FrmTxl 
    ClientHeight    =   7536
    ClientLeft      =   60
@@ -570,7 +570,7 @@ Private Sub gerar(ByVal cOPE As String)
   Dim cLINHA As String
   Dim aUSO As Variant
   Dim aREG As Variant
-  Dim cVAL As String
+  Dim cVal As String
   'Dim oREG As Variant
   Dim cREG As String
   cLINHA = ""
@@ -586,7 +586,7 @@ Private Sub gerar(ByVal cOPE As String)
     oTXT.arquivo = TxtArquivo
   End If
   If cDestino = "IMPNET" Then
-    oTXT.Caminho = Txtcaminho
+    oTXT.Caminho = TxtCaminho
   End If
   If cSETUP <> "" Then
     oTXT.impsetup cSETUP
@@ -616,9 +616,9 @@ Private Sub gerar(ByVal cOPE As String)
             aUSO(2) = Mid(aUSO(2), 2, Len(aUSO(2)) - 2)
             aREG = Split(aUSO(2), "_")
 
-            cVAL = aREG(2)
+            cVal = aREG(2)
             cREG = FixStr(oRS(aREG(1)))
-            aUSO(2) = FVar(cREG, cVAL)
+            aUSO(2) = FVar(cREG, cVal)
           Else
             aUSO(2) = ""
           End If
@@ -633,9 +633,9 @@ Private Sub gerar(ByVal cOPE As String)
 End Sub
 
 Private Sub CmdAbrirCom_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If FileConnExist(cARQRTF, True) Then
-    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hwnd))
+    Call OpenWith(cARQRTF, OAIF_ALLOW_REGISTRATION Or OAIF_EXEC Or OAIF_FORCE_REGISTRATION, CLng(Me.hWnd))
   End If
 End Sub
 
@@ -644,8 +644,8 @@ Private Sub CmdConfImp_Click()
 End Sub
 
 Private Sub CmdEditar_Click()
-  If IsExtensao(TxtArquivo.Text, "RTF") Or larqtxt Then
-    cARQRTF = TxtArquivo.Text
+  If IsExtensao(TxtArquivo.tEXT, "RTF") Or larqtxt Then
+    cARQRTF = TxtArquivo.tEXT
     FrmRtfView.Show vbModal, Me
   End If
 End Sub
@@ -657,11 +657,11 @@ Private Sub CmdFiltro_Click()
   If aRELCFG(11) Then
     ePASS01 = ""
     FrmFiltro.Show vbModal, Me
-    FILTRO = Replace(Replace(eRETU01, "{", ""), "}", "")
+    filtro = Replace(Replace(eRETU01, "{", ""), "}", "")
   End If
-  cFILTRO = FixStr(FILTRO)
+  cFILTRO = FixStr(filtro)
   If Len(aRELCFG(15)) > 0 Then
-    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
+    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
     Lblsql = cSQL
   End If
 
@@ -683,7 +683,7 @@ Private Sub cmdimp_Click()
     imptxt  'Aqui e direct print com1,COM2.. lpt1,LPT2.. no pode ser usado preview aqui
     Exit Sub
   End If
-  If IsExtensao(TxtArquivo.Text, "PDF") Or IsExtensao(TxtArquivo.Text, "HTML") Or IsExtensao(TxtArquivo.Text, "RTF") Then
+  If IsExtensao(TxtArquivo.tEXT, "PDF") Or IsExtensao(TxtArquivo.tEXT, "HTML") Or IsExtensao(TxtArquivo.tEXT, "RTF") Then
     CmdVisua_Click
     Exit Sub
   End If
@@ -702,7 +702,7 @@ Private Sub imptxt()  'Aqui e direct print com1,COM2.. lpt1,LPT2.. no pode ser u
   oTXT.Destino = cDestino
   oTXT.ABRIR
   If cDestino = "IMPNET" Then
-    oTXT.Caminho = Txtcaminho
+    oTXT.Caminho = TxtCaminho
   End If
   If cSETUP <> "" Then
     oTXT.impsetup cSETUP
@@ -735,11 +735,11 @@ End Sub
 Private Sub CmdShell_Click()
   Dim cARQSHELL As String
   cARQSHELL = FixStr(TxtArquivo)
-  ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
+  ShellEx cARQSHELL, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
 End Sub
 
 Private Sub CmdVisua_Click()
-  cARQRTF = TxtArquivo.Text
+  cARQRTF = TxtArquivo.tEXT
   If Not FileConnExist(cARQRTF, True) Then
     Exit Sub
   End If
@@ -748,7 +748,7 @@ Private Sub CmdVisua_Click()
     PrintPreview1.ShowPreview
   End If
   If IsExtensao(cARQRTF, "PDF") Then
-    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hwnd)
+    ShellEx cARQRTF, essSW_SHOWDEFAULT, , , , CLng(Me.hWnd)
   End If
   If IsExtensao(cARQRTF, "HTML") Then
     ePASS01 = Array("Navegador Externo", "Preview Interno", "Navegador Interno")
@@ -768,7 +768,7 @@ Private Sub CmdVisua_Click()
     RichTextBox1.LoadFile cARQRTF, RtfLoadSaveFormatRTF  'rtfRTF
     ePASS03 = 2
     PrintPreview1.ShowPreview
-    RichTextBox1.Text = ""
+    RichTextBox1.tEXT = ""
   End If
 End Sub
 
@@ -838,9 +838,9 @@ Private Sub Form_Load()
   Dim cTMP As String
   Dim cARQINI As String
   CenterFormToScreen Me
-  FILTRO = ""
-  Txtcaminho = ""
-  Txtcaminho.Enabled = False
+  filtro = ""
+  TxtCaminho = ""
+  TxtCaminho.Enabled = False
   OptDestino(6).Value = True
   montaimp
 
@@ -867,7 +867,7 @@ Private Sub Form_Load()
     nCOLUNAS = PegINIVAL(cARQINI, "CONFIGURACAO", "COLUNAS", 80)
     nLINHAS = PegINIVAL(cARQINI, "CONFIGURACAO", "LINHAS", 60)
     cDestino = PegINIVAL(cARQINI, "CONFIGURACAO", "DESTINO", "ARQ")
-    Txtcaminho = PegINIVAL(cARQINI, "CONFIGURACAO", "CAMINHO", "LPT1")
+    TxtCaminho = PegINIVAL(cARQINI, "CONFIGURACAO", "CAMINHO", "LPT1")
 
     If Mid(cDestino, 1, 3) = "LPT" Then
        OptDestino(0).Value = True
@@ -887,7 +887,7 @@ Private Sub Form_Load()
           OptDestino(6).Value = True
         Case "IMPNET"
           OptDestino(7).Value = True
-          Txtcaminho.Enabled = True
+          TxtCaminho.Enabled = True
     End Select
 
 
@@ -896,7 +896,7 @@ Private Sub Form_Load()
     If aRELCFG(14) = "" Then
       aRELCFG(14) = PegINIVAL(cARQINI, "CONFIGURACAO", "FILTRO", 1)
     End If
-    FILTRO = aRELCFG(14)
+    filtro = aRELCFG(14)
     If aRELCFG(15) = "" Then
       aRELCFG(15) = PegINIVAL(cARQINI, "CONFIGURACAO", "SQL", 1)
     End If
@@ -947,10 +947,10 @@ Private Sub Form_Load()
   If Not aDIREITOS(6) Then cmdimp.Visible = False
   If Not aDIREITOS(6) Then CmdConfImp.Visible = False
   If Not aDIREITOS(5) Then CmdVisua.Visible = False
-  If Not aDIREITOS(7) Then salvar(0).Visible = False
+  If Not aDIREITOS(7) Then Salvar(0).Visible = False
   If Not aDIREITOS(7) Then CmdEmail.Visible = False
   If Not aRELCFG(11) Then CmdFiltro.Visible = False
-  If Not aRELCFG(11) Then FILTRO.Visible = False
+  If Not aRELCFG(11) Then filtro.Visible = False
 
   If Not aDIREITOS(4) Then CmdEditar.Visible = False
   If Not aDIREITOS(4) Then CmdShell.Visible = False
@@ -963,7 +963,7 @@ Private Sub Form_Load()
     End If
   End If
   If Len(aRELCFG(15)) > 0 Then
-    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(FILTRO))
+    cSQL = TrocaSqlWhere(aRELCFG(15), FixStr(filtro))
   End If
 
   Lblsql = cSQL
@@ -1000,7 +1000,7 @@ Private Sub Listview1_Click()
 End Sub
 
 Private Sub OptDestino_Click(Index As Integer)
-  Txtcaminho.Enabled = False
+  TxtCaminho.Enabled = False
   If Index = 0 Then
      cDestino = "LPT" & LptPort.Value
   End If
@@ -1014,7 +1014,7 @@ Private Sub OptDestino_Click(Index As Integer)
         cDestino = "PRINTER"
       Case 7
         cDestino = "IMPNET"
-        Txtcaminho.Enabled = True
+        TxtCaminho.Enabled = True
   End Select
 End Sub
 
@@ -1037,12 +1037,12 @@ Private Sub Salvar_Click(Index As Integer)
     Case 3
       cEXTENSAO = "RTF"
     Case 4
-      cEXTENSAO = "DOC"
+      cEXTENSAO = "DOCX"
 
     End Select
 
     sFILTER = "Formato (*." & cEXTENSAO & ")" & vbNullChar & "*." & cEXTENSAO
-    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.Text, App.Path, "Salvar " & cEXTENSAO & " Como")
+    cARQUIVO = FileSave(Me, sFILTER, 1, cEXTENSAO, TxtArquivo.tEXT, App.Path, "Salvar " & cEXTENSAO & " Como")
 
     If InStr(cARQUIVO, ".") > 0 Then
       cARQUIVO = Left(cARQUIVO, InStr(cARQUIVO, ".") - 1) + "." & cEXTENSAO
@@ -1078,7 +1078,7 @@ Private Sub Salvar_Click(Index As Integer)
     Case 4
       TxtArquivo = TrocaExt(cARQUIVO, "TMP")
       gerar "A"
-      txttodoc TxtArquivo, cARQUIVO
+      txttodocx TxtArquivo, cARQUIVO
     End Select
   End If
 
@@ -1110,7 +1110,7 @@ Private Sub montaimp()
   Listview1.FixedCols = 0
   Listview1.Rows = 1
   Listview1.Row = 0
-  Listview1.cols = 3
+  Listview1.Cols = 3
   Listview1.ColWidth(0) = 3000
   Listview1.ColWidth(1) = 3000
   Listview1.ColWidth(2) = 3000

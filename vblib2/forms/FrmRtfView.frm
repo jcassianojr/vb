@@ -228,7 +228,7 @@ Private Sub Cmdsalvadoc_Click()
     stmp = TrocaExt(sFileName, "TMP")
     RichTextbox1.SaveFile stmp, RtfLoadSaveFormatText
     ePASS01 = stmp
-    txttodoc stmp, sFileName
+    txttodocx stmp, sFileName
     DeleteFile stmp  'Kill stmp
   End If
 End Sub

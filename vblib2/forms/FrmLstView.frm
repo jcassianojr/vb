@@ -3,7 +3,7 @@ Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
 Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.7#0"; "VBFLXGRD18.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form FrmLstView 
    Caption         =   "Visualizador de LST"
    ClientHeight    =   7476
@@ -690,7 +690,7 @@ Private Sub cmdGeraDoc_Click()
   cNOME = Trim(Grid)
   cOrigem = Txtcaminho.tEXT & cNOME
   If IsExtensao(cNOME, "TXT") Or InStr(UCase(cNOME), ".LST") > 0 Then
-    txttodoc cOrigem, TrocaExt(cOrigem, "DOC")
+    txttodocx cOrigem, TrocaExt(cOrigem, "DOC")
     
     Command1_Click
   Else
@@ -801,7 +801,7 @@ Private Sub Command1_Click()
     ' --- MANTIDO: Configuração do Grid (Fiel ao original) ---
     Grid.Rows = 1
     Grid.Clear
-    Grid.cols = 2
+    Grid.Cols = 2
     Grid.Col = 0
     Grid.AllowUserResizing = FlexAllowUserResizingBoth
     Grid.ColWidthMax = 3001

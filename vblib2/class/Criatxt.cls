@@ -25,12 +25,12 @@ Private mvarcaminho As String
 Private objFSO As Object
 Private objStreamOut As Object
 
-Public Property Let caminho(ByVal vData As String)
+Public Property Let Caminho(ByVal vData As String)
   mvarcaminho = vData
 End Property
 
-Public Property Get caminho() As String
-  caminho = mvarcaminho
+Public Property Get Caminho() As String
+  Caminho = mvarcaminho
 End Property
 
 Public Property Let Destino(ByVal vData As String)
@@ -184,14 +184,14 @@ Public Sub implinha(cLINHA As String)
 End Sub
 
 Public Sub destini(ByVal cGRUPO As String, ByVal cCHAVE As String)
-  Dim cDESTINO As String
-  cDESTINO = PegPath(cGRUPO, cCHAVE)
-  If Mid(cDESTINO, 1, 3) = "LPT" Or Mid(cDESTINO, 1, 3) = "COM" Or mvarDESTINO = "PRINTER" Then
-     Me.Destino = cDESTINO
+  Dim cDestino As String
+  cDestino = PegPath(cGRUPO, cCHAVE)
+  If Mid(cDestino, 1, 3) = "LPT" Or Mid(cDestino, 1, 3) = "COM" Or mvarDESTINO = "PRINTER" Then
+     Me.Destino = cDestino
   End If
-  If cDESTINO = "IMPNET" Then
+  If cDestino = "IMPNET" Then
       Me.Destino = "IMPNET"
-      Me.caminho = cDESTINO
+      Me.Caminho = cDestino
   End If
 End Sub
 
@@ -236,34 +236,34 @@ Public Sub ArqEdit()
   FrmRtfView.Show vbModal
 End Sub
 
-Public Sub GravaWord(Optional cDESTINO As String = "", Optional cTITULO As String = "", Optional cAUTOR As String = "")
-  If cDESTINO = "" Then cDESTINO = TrocaExt(mvarArquivo, "doc")
-  txttodoc mvarArquivo, cDESTINO, cTITULO, cAUTOR
+Public Sub GravaWord(Optional cDestino As String = "", Optional cTITULO As String = "", Optional cAUTOR As String = "")
+  If cDestino = "" Then cDestino = TrocaExt(mvarArquivo, "doc")
+  txttodocx mvarArquivo, cDestino, cTITULO, cAUTOR
 End Sub
 
-Public Sub GravaExcel(Optional cDESTINO As String = "", Optional cTITULO As String = "", Optional cAUTOR As String = "", Optional cDELIMITADOR As String = ";")
-  If cDESTINO = "" Then cDESTINO = TrocaExt(mvarArquivo, "xls")
-  txttoxls mvarArquivo, cDESTINO, cTITULO, cAUTOR, cDELIMITADOR
+Public Sub GravaExcel(Optional cDestino As String = "", Optional cTITULO As String = "", Optional cAUTOR As String = "", Optional cDELIMITADOR As String = ";")
+  If cDestino = "" Then cDestino = TrocaExt(mvarArquivo, "xls")
+  txttoxls mvarArquivo, cDestino, cTITULO, cAUTOR, cDELIMITADOR
 End Sub
 
-Public Sub GravaHtml(Optional cDESTINO As String = "", Optional cTITULO As String = "", Optional cAUTOR As String = "")
-  If cDESTINO = "" Then cDESTINO = TrocaExt(mvarArquivo, "html")
-  txttohtml mvarArquivo, cDESTINO, cTITULO, cAUTOR
+Public Sub GravaHtml(Optional cDestino As String = "", Optional cTITULO As String = "", Optional cAUTOR As String = "")
+  If cDestino = "" Then cDestino = TrocaExt(mvarArquivo, "html")
+  txttohtml mvarArquivo, cDestino, cTITULO, cAUTOR
 End Sub
 
-Public Sub GravaRTF(Optional cDESTINO As String = "")
-  If cDESTINO = "" Then cDESTINO = TrocaExt(mvarArquivo, "rtf")
-  txttortf mvarArquivo, cDESTINO
+Public Sub GravaRTF(Optional cDestino As String = "")
+  If cDestino = "" Then cDestino = TrocaExt(mvarArquivo, "rtf")
+  txttortf mvarArquivo, cDestino
 End Sub
 
-Public Sub GravaPDF(Optional cDESTINO As String = "")
+Public Sub GravaPDF(Optional cDestino As String = "")
   ePASS01 = mvarArquivo
   formConvertToPDF.Show
 End Sub
 
-Public Sub arqimpdos(Optional ByVal cDESTINO As String = ">PRN")
+Public Sub arqimpdos(Optional ByVal cDestino As String = ">PRN")
   If mvarDESTINO = "ARQ" Then
-    CopyFileWindowsWay mvarArquivo, cDESTINO
+    CopyFileWindowsWay mvarArquivo, cDestino
   End If
 End Sub
 
@@ -350,15 +350,15 @@ End Property
 
 Public Sub MyPrintingTXT()
   Dim objStreamIn As Object
-  Dim STRBUFFER As String
+  Dim strBuffer As String
   
   If Not objFSO Is Nothing Then
      If objFSO.FileExists(cARQRTF) Then
         Set objStreamIn = objFSO.OpenTextFile(cARQRTF, 1, False)
         Do While Not objStreamIn.AtEndOfStream
-           STRBUFFER = objStreamIn.ReadLine
+           strBuffer = objStreamIn.ReadLine
            ' Passa pelo motor de parser em vez de jogar cru no Printer.Print
-           PrintToVBPrinter STRBUFFER
+           PrintToVBPrinter strBuffer
         Loop
         objStreamIn.Close
         Set objStreamIn = Nothing
