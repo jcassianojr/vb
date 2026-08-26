@@ -287,7 +287,9 @@ Private Sub cmdsair_Click()
 End Sub
 
 Private Sub Form_Load()
-    Call AtualizarLista
+'https://www.vbforums.com/showthread.php?912221-Modernizing-standard-VB6-controls-without-external-OCXs-or-a-manifest
+'  ModernizeFormControls Me
+  Call AtualizarLista
 End Sub
 
 ' --- BOTÃƒO ATUALIZAR LISTA ---

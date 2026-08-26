@@ -310,12 +310,12 @@ Private Sub CmdEscolheOrigem_Click()
                            
     CommonDialog1.FilterIndex = 1
     CommonDialog1.DialogTitle = "Selecione o arquivo de Origem"
-    CommonDialog1.filename = ""
+    CommonDialog1.FileName = ""
     CommonDialog1.ShowOpen
     
     ' Verifica se o usuário selecionou um arquivo e cancelou
-    If CommonDialog1.filename <> "" Then
-        txtDB.Text = CommonDialog1.filename
+    If CommonDialog1.FileName <> "" Then
+        txtDB.Text = CommonDialog1.FileName
     End If
     
         
@@ -339,6 +339,8 @@ Private Sub cmdRevelar_Click()
 End Sub
 
 Private Sub Form_Load()
+'https://www.vbforums.com/showthread.php?912221-Modernizing-standard-VB6-controls-without-external-OCXs-or-a-manifest
+'  ModernizeFormControls Me
     ' Alimenta a ComboBox com os drivers mapeados na biblioteca mesclada
     With cboDriver
         .AddItem "MDB"
@@ -359,18 +361,18 @@ Public Sub configuraodbc()
   Dim lCONTINUA As Boolean
   Dim cCFG As String
   Dim aDAD As Variant
-  Dim x As Integer
+  Dim X As Integer
   lCONTINUA = True
-  x = 1
+  X = 1
   While lCONTINUA
-    cCFG = FixStr(PegPath("ODBCCFG", "ODBCCFG" & StrZero(x, 3)))
+    cCFG = FixStr(PegPath("ODBCCFG", "ODBCCFG" & StrZero(X, 3)))
     If InStr(cCFG, "|") = 0 Then
       lCONTINUA = False
     Else
       aDAD = Split(cCFG, "|")
       AddDSN aDAD(0), aDAD(1), aDAD(2), aDAD(3), True
     End If
-    x = x + 1
+    X = X + 1
   Wend
 
 End Sub
@@ -415,23 +417,23 @@ End Sub
 Private Sub CarregarComboIni()
     Dim lCONTINUA As Boolean
     Dim cCFG As String
-    Dim x As Integer
+    Dim X As Integer
     
     cmbConfig.Clear
     lCONTINUA = True
-    x = 1
+    X = 1
     
     While lCONTINUA
         ' Utiliza as suas funções nativas do sistema para extrair a linha do wrpt.ini
-        cCFG = FixStr(PegPath("ODBCCFG", "ODBCCFG" & StrZero(x, 3)))
+        cCFG = FixStr(PegPath("ODBCCFG", "ODBCCFG" & StrZero(X, 3)))
         
         If InStr(cCFG, "|") = 0 Then
             lCONTINUA = False
         Else
             ' Adiciona a string inteira na ComboBox para podermos desmembrá-la no clique
-            cmbConfig.AddItem "ODBCCFG" & StrZero(x, 3) & "=" & cCFG
+            cmbConfig.AddItem "ODBCCFG" & StrZero(X, 3) & "=" & cCFG
         End If
-        x = x + 1
+        X = X + 1
     Wend
     
     ' Se carregou itens, deixa o primeiro selecionado por padrão
