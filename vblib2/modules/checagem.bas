@@ -1,7 +1,237 @@
 Attribute VB_Name = "checagem"
 Option Explicit
+Public Enum TabOrder
+        NextControl = 0
+        PreviousControl = 1
+End Enum
+Public Function validaprocesso(ByVal cPROCESSO As String) As Boolean
+    Dim cNumero As String, cDD As String, cAno As String
+    Dim cJTR As String, cFinal As String
+    Dim resto1 As Long, resto2 As Long, resto3 As Long
+    
+    cPROCESSO = funNumeroPuro(cPROCESSO)
+    If Len(cPROCESSO) <> 20 Then
+        validaprocesso = False
+        Exit Function
+    End If
+    
+    cNumero = Mid(cPROCESSO, 1, 7)
+    cDD = Mid(cPROCESSO, 8, 2)
+    cAno = Mid(cPROCESSO, 10, 4)
+    cJTR = Mid(cPROCESSO, 14, 3)
+    cFinal = Mid(cPROCESSO, 17, 4)
+    
+    resto1 = Val(cNumero) Mod 97
+    resto2 = Val(Format(resto1, "00") & cAno & cJTR) Mod 97
+    resto3 = Val(Format(resto2, "00") & cFinal & cDD) Mod 97
+    
+    validaprocesso = (resto3 = 1)
+End Function
 
+Public Function formataprocesso(ByVal cPROCESSO As String) As String
+    If validaprocesso(cPROCESSO) Then
+        formataprocesso = Format(funNumeroPuro(cPROCESSO), "0000000-00.0000.0.00.0000")
+    Else
+        formataprocesso = cPROCESSO
+    End If
+End Function
+Public Function ValidaPlaca(ByVal cPlaca As String) As Boolean
+    Dim objRegExp As Object
+    
+    cPlaca = UCase(funNumeroPuro(cPlaca))
+    If Len(cPlaca) <> 7 Then
+        ValidaPlaca = False
+        Exit Function
+    End If
+    
+    ' Bloqueia placas genéricas apontadas no Harbour[cite: 5]
+    If cPlaca = "XXX9999" Or cPlaca = "XXX999" Then
+        ValidaPlaca = False
+        Exit Function
+    End If
+    
+    Set objRegExp = CreateObject("VBScript.RegExp")
+    objRegExp.IgnoreCase = True
+    
+    ' Padrão (Antigo OU Mercosul) unificado do Harbour[cite: 5]
+    objRegExp.Pattern = "^[A-Z]{3}[0-9]{4}$|^[A-Z]{3}[0-9][A-Z][0-9]{2}$"
+    
+    ValidaPlaca = objRegExp.Test(cPlaca)
+    Set objRegExp = Nothing
+End Function
+Public Function CheckIE(cIE As Variant, cUF As Variant, Optional lMES As Boolean = True, Optional ByVal cPESSOA As String = "J", Optional ByVal lOLD As Boolean = True) As Boolean
+    Dim zErro As String
+    Dim lTAM As Boolean
+    Dim nLen As Integer, cPref As String
+    
+    cIE = UCase(funNumeroPuro(cIE))
+    cUF = UCase(Trim(cUF))
+    nLen = Len(cIE)
+    
+    If cUF = "EX" Or cUF = "XX" Then
+        If Left(cIE, 5) = "ISENT" Or cIE = "00000000000000" Then
+            CheckIE = True
+            If lMES Then MsgBox "Inscricao OK-ISENTO-EXPORTACAO", vbInformation, "Checagem IE"
+        Else
+            CheckIE = False
+            If lMES Then MsgBox "Inscricao Invalida Use ISENTO para exportacao", vbExclamation, "Checagem IE"
+        End If
+        Exit Function
+    End If
+    
+    If Left(cIE, 5) = "ISENT" Or (InStr(cIE, "NAO") > 0 And InStr(cIE, "CONTRIB") > 0) Then
+        CheckIE = True ' Isento ou Não Contribuinte[cite: 6]
+        Exit Function
+    End If
+    
+    If cPESSOA <> "J" Then
+        CheckIE = True ' Não valida IE de Pessoa Física nesta etapa[cite: 6]
+        Exit Function
+    End If
+    
+    If nLen < 8 Then
+        CheckIE = False
+        If lMES Then MsgBox "IE Inválido - Menos de 8 dígitos", vbExclamation
+        Exit Function
+    End If
+    
+    ' Validação de Tamanhos Específicos por Estado[cite: 6]
+    lTAM = True
+    Select Case cUF
+        Case "AC", "DF", "MG": If nLen <> 13 And nLen <> 9 Then lTAM = False
+        Case "PE", "RO": If nLen <> 9 And nLen <> 14 Then lTAM = False
+        Case "TO": If nLen <> 9 And nLen <> 11 Then lTAM = False
+        Case "BA": If nLen <> 8 And nLen <> 9 Then lTAM = False
+        Case "SP": If nLen <> 12 And nLen <> 13 Then lTAM = False
+        Case "MT": If nLen <> 11 Then lTAM = False
+        Case "PR", "RS": If nLen <> 10 Then lTAM = False
+        Case "AL", "AM", "AP", "CE", "ES", "GO", "MA", "MS", "PA", "PB", "PI", "RN", "RR", "SC", "SE": If nLen <> 9 Then lTAM = False
+        Case "RJ": If nLen <> 8 Then lTAM = False
+        Case Else: lTAM = False
+    End Select
+    
+    If Not lTAM Then
+        CheckIE = False
+        If lMES Then MsgBox "Tamanho da Inscrição Inválido para o Estado " & cUF, vbExclamation
+        Exit Function
+    End If
+    
+    ' Validação de Prefixos (2 primeiros dígitos) para Estados Específicos[cite: 6]
+    lTAM = True
+    cPref = Left(cIE, 2)
+    Select Case cUF
+        Case "AC": If cPref <> "01" Then lTAM = False
+        Case "AL": If cPref <> "24" Then lTAM = False
+        Case "AP": If cPref <> "03" Then lTAM = False
+        Case "CE": If cPref <> "06" Then lTAM = False
+        Case "DF": If cPref <> "07" Then lTAM = False
+        Case "GO": If cPref <> "10" And cPref <> "11" And cPref <> "15" Then lTAM = False
+        Case "MA": If cPref <> "12" Then lTAM = False
+        Case "MT": If cPref <> "28" Then lTAM = False
+        Case "PA": If cPref <> "15" Then lTAM = False
+        Case "PB": If cPref <> "16" Then lTAM = False
+        Case "PE": If cPref <> "18" Then lTAM = False
+        Case "PI": If cPref <> "19" Then lTAM = False
+        Case "RN": If cPref <> "20" Then lTAM = False
+        Case "RR": If cPref <> "24" Then lTAM = False
+        Case "SC": If cPref <> "25" Then lTAM = False
+        Case "SE": If cPref <> "27" Then lTAM = False
+        Case "TO": If cPref <> "29" Then lTAM = False
+    End Select
+    
+    If Not lTAM Then
+        CheckIE = False
+        If lMES Then MsgBox "Início da Inscrição Inválido (" & cPref & ") para o Estado " & cUF, vbExclamation
+        Exit Function
+    End If
 
+    CheckIE = True
+End Function
+Public Function MascararNumGenerico(ByVal cNumero As String, Optional ByVal nExibeInicio As Integer = 2, Optional ByVal nExibeFinal As Integer = 2) As String
+    Dim cLimpo As String, nLen As Integer
+    cLimpo = Trim(cNumero)
+    nLen = Len(cLimpo)
+    
+    If nLen <= (nExibeInicio + nExibeFinal) Then
+        If nLen > 2 Then
+            MascararNumGenerico = Left(cLimpo, 1) & String(nLen - 2, "*") & Right(cLimpo, 1)
+        Else
+            MascararNumGenerico = String(nLen, "*")
+        End If
+        Exit Function
+    End If
+    
+    MascararNumGenerico = Left(cLimpo, nExibeInicio) & String(nLen - nExibeInicio - nExibeFinal, "*") & Right(cLimpo, nExibeFinal)
+End Function
+
+Public Function MascararCPF(ByVal cCPF As String) As String
+    Dim cLimpo As String
+    cLimpo = funNumeroPuro(cCPF)
+    
+    If Len(cLimpo) <> 11 Then
+        MascararCPF = cCPF
+        Exit Function
+    End If
+    
+    MascararCPF = Left(cLimpo, 3) & ".***.***-" & Right(cLimpo, 2)
+End Function
+
+Public Function MascararNome(ByVal cNomeRaw As String) As String
+    Dim czNomeTrimmed
+    Dim aPalavras As Variant
+    Dim nQtdPalavras As Integer, i As Integer
+    Dim cNomeMascarado As String
+    
+    czNomeTrimmed = Trim(cNomeRaw)
+    aPalavras = Split(Trim(cNomeRaw), " ")
+    nQtdPalavras = UBound(aPalavras) - LBound(aPalavras) + 1
+    
+    If nQtdPalavras <= 1 Then
+        MascararNome = cNomeRaw
+        Exit Function
+    End If
+    
+    If nQtdPalavras = 2 Then
+        MascararNome = aPalavras(0) & " " & String(Len(aPalavras(1)), "*")
+        Exit Function
+    End If
+    
+    cNomeMascarado = aPalavras(0) & " "
+    For i = 1 To nQtdPalavras - 2
+        cNomeMascarado = cNomeMascarado & String(Len(aPalavras(i)), "*") & " "
+    Next i
+    cNomeMascarado = cNomeMascarado & aPalavras(nQtdPalavras - 1)
+    
+    MascararNome = cNomeMascarado
+End Function
+Public Sub GetControlTABFocus(frmParent As Form, Optional TbNextControlOrder As TabOrder = 0)
+        Dim TabIndexControl As Long
+        Dim ctrlFormControl As Control
+        
+        TabIndexControl = frmParent.ActiveControl.TabIndex
+        If TbNextControlOrder = PreviousControl Then
+                If TabIndexControl <= 0 Then
+                        TabIndexControl = frmParent.Controls.Count - 1
+                Else
+                        TabIndexControl = frmParent.ActiveControl.TabIndex - 1
+                End If
+        ElseIf TbNextControlOrder = NextControl Then
+        
+                 If TabIndexControl >= frmParent.Controls.Count - 1 Then
+                        TabIndexControl = 0
+                Else
+                        TabIndexControl = frmParent.ActiveControl.TabIndex + 1
+                End If
+                                
+        End If
+      
+        For Each ctrlFormControl In frmParent.Controls
+                If ctrlFormControl.TabIndex = TabIndexControl Then
+                        ctrlFormControl.SetFocus
+                        Exit For
+                End If
+        Next
+End Sub
 Public Function CNPJ_Novo(ByVal pCNPJ As String) As Boolean
     Dim lResult As Boolean
     Dim soma As Integer
@@ -10,7 +240,7 @@ Public Function CNPJ_Novo(ByVal pCNPJ As String) As Boolean
     Dim num As Integer
     Dim wCGC As String
     Dim i As Integer
-    Dim J As Integer
+    Dim j As Integer
     Dim Validos As String
 
   lResult = True
@@ -20,7 +250,7 @@ Public Function CNPJ_Novo(ByVal pCNPJ As String) As Boolean
   num = 0
   wCGC = pCNPJ  ' iif(ValType(pCNPJ)="U", "", pCNPJ)
   i = 0
-  J = 0
+  j = 0
   Validos = "0123456789"
 
 
@@ -41,7 +271,7 @@ Public Function CNPJ_Novo(ByVal pCNPJ As String) As Boolean
       Next
       dv = ""
       num = 5
-      For J = 1 To 2
+      For j = 1 To 2
         soma = 0
         For i = 1 To 12
           soma = soma + ((Asc(Mid(wCGC, i, 1)) - 48) * num)
@@ -50,7 +280,7 @@ Public Function CNPJ_Novo(ByVal pCNPJ As String) As Boolean
             num = 9
           End If
         Next
-        If J = 2 Then
+        If j = 2 Then
           soma = soma + (2 * Val(dv))
         End If
         digito = soma - (Int(soma / 11) * 11)
@@ -93,114 +323,105 @@ Public Function IsValidIP(ByVal IPAddress As String) As Boolean
     IsValidIP = True
 End Function
 
-Public Function formataTelefone(ByVal cNUMERO As String) As String
-'Dim cTMP As String
-'formataTelefone ("99-12435678")->(99)1234-5678
-'formataTelefone ("99,12345678")->(99)1234-5678
-'formataTelefone ("099-12345678")->(99)1234-5678
-'formataTelefone ("(099)12345678")->(99)1234-5678
-'formataTelefone ("12345678")->1234-5678
-'formataTelefone ("1234567")->123-4567
-'formataTelefone ("99 12345678")->(99)1234-5678
-'formataTelefone ("099 12345678")->(99)1234-5678
-'formataTelefone ("(99)12345678")->(99)1234-5678
-'formataTelefone ("(99)1234567")->(99)123-4567
-  If Mid(cNUMERO, 1, 4) = "0300" Or Mid(cNUMERO, 1, 4) = "0800" Then
-    formataTelefone = cNUMERO
-    Exit Function
-  End If
-  If Mid(cNUMERO, 1, 1) = "(" And Mid(cNUMERO, 4, 1) = ")" Then  '(99)12345678
-    cNUMERO = Mid(cNUMERO, 1, 4) & FormataTelfon2(Mid(cNUMERO, 5))
-  End If
-  If Mid(cNUMERO, 3, 1) = "-" Then             '99-12345678
-    cNUMERO = "(" & Mid(cNUMERO, 1, 2) & ")" & FormataTelfon2(Mid(cNUMERO, 4))
-  End If
-  If Mid(cNUMERO, 3, 1) = "," Then             '99,12345678
-    cNUMERO = "(" & Mid(cNUMERO, 1, 2) & ")" & FormataTelfon2(Mid(cNUMERO, 4))
-  End If
-  If Mid(cNUMERO, 3, 1) = " " Then             '99 12345678
-    cNUMERO = "(" & Mid(cNUMERO, 1, 2) & ")" & FormataTelfon2(Mid(cNUMERO, 4))
-  End If
-  If Mid(cNUMERO, 4, 1) = "-" And Mid(cNUMERO, 1, 1) = "0" Then  '099-12345678
-    cNUMERO = "(" & Mid(cNUMERO, 2, 2) & ")" & FormataTelfon2(Mid(cNUMERO, 5))
-  End If
-
-  If Mid(cNUMERO, 4, 1) = " " And Mid(cNUMERO, 1, 1) = "0" Then  '099 12345678
-    cNUMERO = "(" & Mid(cNUMERO, 2, 2) & ")" & FormataTelfon2(Mid(cNUMERO, 5))
-  End If
-  If Mid(cNUMERO, 4, 1) = "-" And Mid(cNUMERO, 1, 1) = "0" Then  '99-12345678
-    cNUMERO = "(" & Mid(cNUMERO, 2, 2) & ")" & FormataTelfon2(Mid(cNUMERO, 5))
-  End If
-  If Mid(cNUMERO, 1, 1) = "(" And Mid(cNUMERO, 2, 1) = "0" And Mid(cNUMERO, 5, 1) = ")" Then  '(099)12345678
-    cNUMERO = "(" & Mid(cNUMERO, 3, 2) & ")" & FormataTelfon2(Mid(cNUMERO, 6))
-  End If
-  formataTelefone = FormataTelfon2(cNUMERO)
+Public Function formataTelefone(ByVal cNumero As String) As String
+    Dim lDDIBR As Boolean
+    cNumero = Trim(cNumero)
+    
+    ' Ignora formatação de 0800, 0300, 0303, 0500, 0900
+    If Left(cNumero, 4) = "0300" Or Left(cNumero, 4) = "0800" Or Left(cNumero, 4) = "0900" Or Left(cNumero, 4) = "0500" Or Left(cNumero, 4) = "0303" Then
+        formataTelefone = cNumero
+        Exit Function
+    End If
+    
+    ' Trata DDI Brasileiro (+55)[cite: 4]
+    If Left(cNumero, 1) = "+" Then
+        If Left(cNumero, 3) <> "+55" Then
+            formataTelefone = cNumero ' Se for de outro país, retorna como está
+            Exit Function
+        End If
+        lDDIBR = True
+        cNumero = Trim(Mid(cNumero, 4))
+    End If
+    
+    ' Limpa toda a pontuação suja que o usuário possa ter digitado
+    cNumero = funNumeroPuro(cNumero)
+    
+    ' Se tiver DDD (10 ou 11 dígitos no total)
+    If Len(cNumero) >= 10 Then
+        ' Remove o zero inicial do DDD se o usuário digitou (ex: 01199999999)[cite: 4]
+        If Left(cNumero, 1) = "0" And Len(cNumero) >= 11 Then
+            cNumero = Mid(cNumero, 2)
+        End If
+        ' Separa o DDD e joga o resto pra FormataTelfon2
+        cNumero = "(" & Left(cNumero, 2) & ")" & FormataTelfon2(Mid(cNumero, 3))
+    Else
+        cNumero = FormataTelfon2(cNumero)
+    End If
+    
+    If lDDIBR Then cNumero = "+55 " & cNumero
+    
+    formataTelefone = cNumero
 End Function
 
-Public Function FormataTelfon2(ByVal cNUMERO As String) As String
-  FormataTelfon2 = cNUMERO
-  cNUMERO = funNumeroPuro(cNUMERO)
-  If Len(cNUMERO) = 8 And Mid(cNUMERO, 4, 1) <> "-" Then  '123-4567
-    cNUMERO = Mid(cNUMERO, 1, 4) & "-" & Mid(cNUMERO, 5)
-    FormataTelfon2 = cNUMERO
-  End If
-  If Len(cNUMERO) = 7 Then
-    cNUMERO = Mid(cNUMERO, 1, 3) & "-" & Mid(cNUMERO, 4)
-    FormataTelfon2 = cNUMERO
-  End If
+Public Function FormataTelfon2(ByVal cNumero As String) As String
+    cNumero = funNumeroPuro(cNumero)
+    
+    ' Máscara para novo celular (9 dígitos)[cite: 4]
+    If Len(cNumero) = 9 Then
+        FormataTelfon2 = Left(cNumero, 5) & "-" & Mid(cNumero, 6)
+    ' Máscara para telefone padrão (8 dígitos)[cite: 1, 4]
+    ElseIf Len(cNumero) = 8 Then
+        FormataTelfon2 = Left(cNumero, 4) & "-" & Mid(cNumero, 5)
+    ' Máscara para formato muito antigo (7 dígitos)[cite: 1, 4]
+    ElseIf Len(cNumero) = 7 Then
+        FormataTelfon2 = Left(cNumero, 3) & "-" & Mid(cNumero, 4)
+    Else
+        FormataTelfon2 = cNumero
+    End If
 End Function
 
-Public Function FormataRG(ByVal Valor As String) As String
-  Dim nPOS As String
-  Dim cDAC As String
-  FormataRG = FixStr(Valor)
-  cDAC = ""
-  If InStr(UCase(Valor), "ISENT") > 0 Or InStr(UCase(Valor), "RIC") > 0 Or InStr(UCase(Valor), "RNE") > 0 Then
-    Exit Function
-  End If
-  If InStr(UCase(Valor), "CPF") > 0 Then
-    Valor = Replace(Valor, "CPF", "")
-  End If
-  If CheckCPF(Valor, False) Then
-    Exit Function
-  End If
-  Valor = Trim(Valor)
-  nPOS = InStr(Valor, "-")
-  If nPOS = 0 Then
-    Valor = TiraOut(Valor)
-    Valor = Trim(Valor)
-    If Len(Valor) >= 9 Then
-      cDAC = Mid(Valor, 9, 1)
-    End If
-  Else
-    cDAC = Mid(Valor, nPOS + 1, 1)
-    Valor = Mid(Valor, 1, nPOS - 1)
-    If cDAC = "x" Then cDAC = "X"
-    If cDAC <> "X" Then                      ''evita erros como -- -. -/ caracter inves de numero no dac
-      cDAC = funNumeroPuro(cDAC)
-    End If
-  End If
-  Valor = funNumeroPuro(Valor)
-  Select Case Len(Valor)
-    ''Case Is >= 8 ric=11
-  Case 8
-    FormataRG = Trim(Mid(Valor, 1, 2) + "." + Mid(Valor, 3, 3) + "." + Mid(Valor, 6))
-  Case 7
-    FormataRG = Trim(Mid(Valor, 1, 1) + "." + Mid(Valor, 2, 3) + "." + Mid(Valor, 5))
-  Case Else
+Public Function FormataRG(ByVal Valor As String, Optional ByVal cTIPO As String = "") As String
+    Dim cDAC As String, nPOS As Integer
     FormataRG = Valor
-  End Select
-  If cDAC <> "" Then
-    FormataRG = FormataRG & "-" & cDAC
-  End If
-  If Left(FormataRG, 1) = "0" Then
-    FormataRG = Mid(FormataRG, 2)
-  End If
-  If Left(FormataRG, 1) = "." Then
-    FormataRG = Mid(FormataRG, 2)
-  End If
-End Function
+    
+    If InStr(UCase(Valor), "ISENT") > 0 Or InStr(UCase(Valor), "RNE") > 0 Or InStr(UCase(Valor), "RIC") > 0 Then
+        Exit Function ' Não formata isentos e estrangeiros[cite: 4]
+    End If
+    
+    ' Se for CPF ou CNI digitado no campo de RG, redireciona para a máscara de CPF[cite: 4]
+    If InStr(UCase(Valor), "CPF") > 0 Or InStr(UCase(Valor), "CNI") > 0 Or cTIPO = "CPF" Or cTIPO = "CNI" Then
+        FormataRG = FormataCPF(Replace(Replace(UCase(Valor), "CPF", ""), "CNI", ""))
+        Exit Function
+    End If
 
+    If Val(funNumeroPuro(Valor)) = 0 Then Exit Function
+
+    Valor = Trim(Valor)
+    nPOS = InStr(Valor, "-")
+    
+    If nPOS = 0 Then
+        Valor = Trim(funNumeroPuro(Valor))
+        If Len(Valor) = 9 Then
+            cDAC = Mid(Valor, 9, 1)
+            Valor = Left(Valor, 8)
+        End If
+    Else
+        cDAC = UCase(Mid(Valor, nPOS + 1, 1))
+        Valor = Left(Valor, nPOS - 1)
+        If cDAC <> "X" Then cDAC = funNumeroPuro(cDAC)
+    End If
+    
+    Valor = funNumeroPuro(Valor)
+    
+    Select Case Len(Valor)
+        Case 8: FormataRG = Trim(Mid(Valor, 1, 2) & "." & Mid(Valor, 3, 3) & "." & Mid(Valor, 6))
+        Case 7: FormataRG = Trim(Mid(Valor, 1, 1) & "." & Mid(Valor, 2, 3) & "." & Mid(Valor, 5))
+        Case Else: FormataRG = Valor
+    End Select
+    
+    If cDAC <> "" Then FormataRG = FormataRG & "-" & cDAC
+    If Left(FormataRG, 1) = "0" Or Left(FormataRG, 1) = "." Then FormataRG = Mid(FormataRG, 2)
+End Function
 Public Function checkcfo(ByVal cCFO As String, ByVal cUFORI As String, ByVal cUFDES As String, ByVal cTIPO As String) As Boolean
   Dim cINISP As String
   Dim cINIFORA As String
@@ -298,26 +519,10 @@ Public Function CheckPIS(ByVal ePIS As Variant, Optional lMES As Boolean = True)
 
 End Function
 
-Public Function CheckIE(cIE As Variant, cUF As Variant, Optional lMES As Boolean = True) As Boolean
-  cIE = TiraOut(cIE)
-  cUF = FixStr(cUF)
-  If cUF = "EX" Or cUF = "XX" Then
-    If cIE = "ISENTO" Or cIE = "00000000000000" Then
-      If lMES Then Alert "Inscricao OK-ISENTO-EXPORTACAO", "Checagem IE"
-      CheckIE = True
-    Else
-      If lMES Then Alert "Inscricao Invalida Use ISENTO para exportacao", "Checagem IE"
-      CheckIE = False
-    End If
-  Else
-    '  //criar nova funcao dll nao mais atende novas checagens alguns estados
-    CheckIE = True
-  End If
-End Function
 
 Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optional lMES As Boolean = True, Optional cUF As String = "") As Boolean
 ''cTIPO= M-Matriz F-Filial X-Nao Checar nao mais usado a matriz pode ser diferente 0001 agora
-  Dim x As Integer
+  Dim X As Integer
   Dim aUF As Variant
 
   CheckCNPJ = False
@@ -348,12 +553,12 @@ Public Function CheckCNPJ(cCGC As Variant, Optional cTIPO As String = "X", Optio
   End If
 
 
-  For x = 0 To 14
-    If cCGC = String(14, CStr(x)) Then
-      If lMES Then Alert ("CNPJ Invalido - Sequencia Repetitiva de " + Str(x))
+  For X = 0 To 14
+    If cCGC = String(14, CStr(X)) Then
+      If lMES Then Alert ("CNPJ Invalido - Sequencia Repetitiva de " + Str(X))
       Exit Function
     End If
-  Next x
+  Next X
 
 
   If Left(funNumeroPuro(cCGC), 8) = "99999997" Then
@@ -514,31 +719,31 @@ Function FormataCPF(ByVal pCPF As String) As String
 End Function
 
 Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean = True) As Boolean
-  Dim x As Integer
-  Dim P1 As String
+  Dim X As Integer
+  Dim p1 As String
   CheckCPF = False
-  P1 = Trim(TiraOut(xCPF))
-  If Len(P1) = 0 Then
+  p1 = Trim(TiraOut(xCPF))
+  If Len(p1) = 0 Then
     If lMES Then Alert ("CPF Invalido - Em Branco")
     Exit Function
   End If
-  If Len(P1) < 11 Then
+  If Len(p1) < 11 Then
     If lMES Then Alert ("CPF Invalido - Menos de 11 Digitos")
     Exit Function
   End If
-  If Len(P1) > 11 Then
+  If Len(p1) > 11 Then
     If lMES Then Alert ("CPF Invalido - Mais de 11 Digitos")
     Exit Function
   End If
 
-  For x = 0 To 9
-    If P1 = String(11, CStr(x)) Then
-      If lMES Then Alert ("CPF Invalido - Sequencia Repetitiva de " + Str(x))
+  For X = 0 To 9
+    If p1 = String(11, CStr(X)) Then
+      If lMES Then Alert ("CPF Invalido - Sequencia Repetitiva de " + Str(X))
       Exit Function
     End If
-  Next x
-  If Mod11(P1, 10, 10) Then
-    If Mod11(P1, 11, 11) Then
+  Next X
+  If Mod11(p1, 10, 10) Then
+    If Mod11(p1, 11, 11) Then
       CheckCPF = True
     Else
       If lMES Then Alert ("CPF - Invalido")
@@ -552,13 +757,14 @@ Public Function CheckCPF(ByVal xCPF As Variant, Optional ByVal lMES As Boolean =
   End If
 End Function
 
+
 Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As Boolean
   Dim dv_d3 As Integer
   Dim tam_chav As Integer
   Dim xrdig As String
   Dim y1 As Integer
   Dim dv_base As String
-  Dim x As Integer
+  Dim X As Integer
   Dim y2 As Integer
   Dim dv_p2 As String
   Dim tam_chave As Integer
@@ -579,9 +785,9 @@ Public Function CheckRena(ByVal dv_p1, Optional ByVal lMES As Boolean = True) As
   y1 = 0
   dv_base = "8923456789"
   y1 = 0
-  For x = 1 To tam_chave
-    dv_d3 = Val(Mid(dv_p1, x, 1))
-    y1 = y1 + (dv_d3 * Val(Mid(dv_base, x, 1)))
+  For X = 1 To tam_chave
+    dv_d3 = Val(Mid(dv_p1, X, 1))
+    y1 = y1 + (dv_d3 * Val(Mid(dv_base, X, 1)))
     ''y2 = mod(y1,11)
     y2 = y1 Mod 11
   Next
@@ -598,7 +804,7 @@ End Function
 
 Function TeclaEnter(KeyIN As Integer) 'Enter vira tab e troca de campo
   TeclaEnter = KeyIN
-  If KeyIN = 13 Or KeyIN = 40 Then
+  If KeyIN = 13 Or KeyIN = 10 Or KeyIN = 40 Then
     SendKeys Chr(9)
     TeclaEnter = 0
     Exit Function
@@ -609,6 +815,14 @@ Function TeclaEnter(KeyIN As Integer) 'Enter vira tab e troca de campo
     Exit Function
   End If
 End Function
+'If ((Shift And vbCtrlMask) > 0) Then
+'    ' do something
+'End If
+'If Shift = vbCtrlMask Then
+    ' do something
+'End If
+'Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+'
 
 Function ValiText(KeyIN As Integer, Optional ByVal eTipo As String = "#N", _
                   Optional ByVal Editable As Boolean = True, _
@@ -682,97 +896,134 @@ Function ValiText(KeyIN As Integer, Optional ByVal eTipo As String = "#N", _
   ValiText = KeyOut
 End Function
 
-Public Function CheckRG(ByVal Valor As String, Optional ByVal lMES As Boolean = True) As Boolean
-  Dim n1 As Integer
-  Dim n2 As Integer
-  Dim n3 As Integer
-  Dim n4 As Integer
-  Dim n5 As Integer
-  Dim n6 As Integer
-  Dim n7 As Integer
-  Dim n8 As Integer
-  Dim D  As Integer
-  Dim soma  As Integer
-  Dim nPOS As Integer
-  Dim cDAC As String
-  Dim zDAC As String
-  Dim lRETU As Boolean
-  Dim ZNERRO As Integer
-  Dim ZERRO As String
-  
-  zDAC = " "
-  ZNERRO = 0
-
-  CheckRG = True
-  If Valor = "ISENT" Or InStr(Valor, "RNE") Or InStr(Valor, "RIC") > 0 Then  'isento ou registro nacional de estrangeiro RIC(outra formula checagem)
-    Exit Function
-  End If
-  If Len(Valor) = 0 Then
-    Exit Function
-  End If
-  If CheckCPF(Valor, False) Then
-    Exit Function
-  End If
-  Valor = Replace(Valor, ".", "")  'tiraout tambem tira - nao pode ser usada
-  nPOS = InStr(Valor, "-")
-  If nPOS = 0 Then
-    cDAC = " "
-  Else
-    cDAC = Mid(Valor, nPOS + 1, 1)
-    Valor = Mid(Valor, 1, nPOS - 1)
-  End If
-  Valor = Str(Val(Valor))
-  If Len(Trim(Valor)) <= 7 Then
-    CheckRG = False
-    ZERRO = "RG com Menos de 7 Digitos"
-    ZNERRO = 3
-    If lMES Then
-      Alert (ZERRO)
+Public Function CheckRG(ByVal Valor As String, Optional ByVal lMES As Boolean = True, Optional ByVal cTIPO As String = "", Optional ByVal dDATANASC As Variant, Optional ByVal cUF As String = "") As Boolean
+    Dim D As Integer, soma As Integer, nPOS As Integer
+    Dim cDAC As String, zDAC As String, p1 As String, X As Integer
+    Dim aPESOS As Variant
+    
+    CheckRG = True
+    zDAC = " "
+    
+    ' Libera isentos e registros estrangeiros diretamente
+    If UCase(cTIPO) = "ISENT" Or InStr(UCase(Valor), "ISENT") > 0 Then Exit Function
+    If UCase(cTIPO) = "RNE" Or InStr(UCase(Valor), "RNE") > 0 Then Exit Function
+    
+    If Len(Trim(Valor)) = 0 Then
+        CheckRG = False
+        If lMES Then MsgBox "RG/RNE/RIC/CPF/CNI em branco", vbExclamation
+        Exit Function
     End If
-    Exit Function
-  End If
-  Valor = StrZero(Val(Valor), 8)
-  n1 = Val(Mid(Valor, 1, 1)) * 9
-  n2 = Val(Mid(Valor, 2, 1)) * 8
-  n3 = Val(Mid(Valor, 3, 1)) * 7
-  n4 = Val(Mid(Valor, 4, 1)) * 6
-  n5 = Val(Mid(Valor, 5, 1)) * 5
-  n6 = Val(Mid(Valor, 6, 1)) * 4
-  n7 = Val(Mid(Valor, 7, 1)) * 3
-  n8 = Val(Mid(Valor, 8, 1)) * 2
-  soma = n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8
-  D = soma Mod 11
-  If cDAC = "X" Or cDAC = "x" Or cDAC = " " Then
-    If D = 10 Then
-      Exit Function
+    
+    ' Verifica se é CPF/CNI digitado no campo
+    If InStr(UCase(Valor), "CPF") > 0 Then
+        cTIPO = "CPF"
+        Valor = Replace(UCase(Valor), "CPF", "")
+    End If
+    
+    If CheckCPF(Valor, False) Then
+        If cTIPO <> "CPF" And cTIPO <> "CNI" Then
+            If lMES Then MsgBox "Preencha o tipo como CPF ou CNI", vbExclamation
+        End If
+        Exit Function
+    End If
+    
+    ' Verifica RIC
+    If InStr(UCase(Valor), "RIC") > 0 Then
+        cTIPO = "RIC"
+        Valor = Replace(UCase(Valor), "RIC", "")
+    End If
+    
+    If cTIPO = "" Then cTIPO = "RG"
+    
+    ' Proteção contra sequência repetitiva
+    p1 = funNumeroPuro(Valor)
+    For X = 0 To 9
+        If p1 = String(Len(p1), CStr(X)) Then
+            CheckRG = False
+            If lMES Then MsgBox "RG Inválido - Sequência Repetitiva de " & CStr(X), vbExclamation
+            Exit Function
+        End If
+    Next X
+    
+    ' Extração do DAC
+    Valor = Replace(Valor, ".", "")
+    nPOS = InStr(Valor, "-")
+    If nPOS = 0 Then
+        cDAC = " "
     Else
-      zDAC = StrZero(D, 1)
-      CheckRG = False
-      ZNERRO = 5
-      ZERRO = "Digito de Controle RG  " + cDAC + "  Nao Confere sugerido: " + zDAC
-      If lMES Then
-        Alert (ZERRO)
-      End If
+        cDAC = UCase(Mid(Valor, nPOS + 1, 1))
+        Valor = Left(Valor, nPOS - 1)
     End If
-  Else
-    If D = Val(cDAC) Or D = 0 Then
-    Else
-      CheckRG = False
-      If D = 10 Then
-        zDAC = "X"
-        ZERRO = "Digito de Controle RG Nao Confere sugerido: X"
-      Else
-        zDAC = StrZero(D, 1)
-        ZERRO = "Digito de Controle RG Nao Confere sugerido: " + zDAC
-      End If
-      ZNERRO = 4
-      If lMES Then
-        Alert (ZERRO)
-      End If
+    
+    Valor = CStr(Val(funNumeroPuro(Valor)))
+    
+    ' Validação de Tamanho RG com base na Data de Nascimento e UF
+    If Len(Trim(Valor)) <= 7 And cTIPO = "RG" And (cUF = "" Or cUF = "SP") Then
+        If IsMissing(dDATANASC) Or IsEmpty(dDATANASC) Or IsNull(dDATANASC) Then
+            CheckRG = False
+            If lMES Then MsgBox "RG com Menos de 7 Dígitos", vbExclamation
+            Exit Function
+        ElseIf IsDate(dDATANASC) Then
+            If CDate(dDATANASC) > CDate("31/12/1990") Then
+                CheckRG = False
+                If lMES Then MsgBox "RG com Menos de 7 Dígitos", vbExclamation
+                Exit Function
+            End If
+        End If
     End If
-  End If
+    
+    If Len(Trim(Valor)) > 9 And (cTIPO = "RG" Or cTIPO = "") And (cUF = "" Or cUF = "SP") Then
+        CheckRG = False
+        If lMES Then MsgBox "RG com Mais de 9 Dígitos", vbExclamation
+        Exit Function
+    End If
+    
+    ' Cálculo RIC (Padrão 11 dígitos)
+    If cTIPO = "RIC" Then
+        If Len(Trim(Valor)) <> 11 Then
+            CheckRG = False
+            If lMES Then MsgBox "RIC não tem 11 Dígitos", vbExclamation
+            Exit Function
+        Else
+            aPESOS = Array(8, 9, 2, 3, 4, 5, 6, 7, 8, 9)
+            soma = 0
+            For X = 1 To 10
+                soma = soma + (Val(Mid(Valor, X, 1)) * aPESOS(X - 1))
+            Next X
+            D = soma Mod 11
+            If D = 10 Then D = 0
+            If D <> Val(cDAC) Then
+                CheckRG = False
+                If lMES Then MsgBox "Dígito de Controle RIC Não Confere", vbExclamation
+                Exit Function
+            End If
+        End If
+    End If
+    
+    ' Cálculo RG (Otimizado com For...Next substituindo n1 a n8)
+    If cTIPO = "RG" And Len(Valor) = 8 Then
+        Valor = Format(Val(Valor), "00000000")
+        soma = 0
+        For X = 1 To 8
+            soma = soma + (Val(Mid(Valor, X, 1)) * (10 - X))
+        Next X
+        
+        D = soma Mod 11
+        
+        If cDAC = "X" Or cDAC = " " Then
+            If D <> 10 Then
+                CheckRG = False
+                If lMES Then MsgBox "Dígito de Controle RG Nao Confere", vbExclamation
+            End If
+        Else
+            If D <> Val(cDAC) And D <> 0 Then
+                CheckRG = False
+                If D = 10 Then zDAC = "X" Else zDAC = CStr(D)
+                If lMES Then MsgBox "Dígito de Controle RG Não Confere. Sugerido: " & zDAC, vbExclamation
+            End If
+        End If
+    End If
 End Function
-
 Public Function ChecaNumMaiorZero(ByVal nText As Variant, ByVal eTexto As String) As Boolean
 'nText = expressa o campo/numero/variavel
   nText = FixNum(nText)
@@ -787,10 +1038,12 @@ End Function
 
 Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
      , Optional ByVal lENTER As Boolean = True) As Integer
-''A Posicao comeca com zero
-''Porem o tamanho comeca com 1
+
   Dim nTAM As Integer
-  Dim nLEN As Integer
+  Dim nLen As Integer
+  Dim txtAtual As String
+  Dim selInicio As Integer
+
   If lENTER Then
     If TeclaEnter(KeyAscii) = 0 Then
       ValidaDados = 0
@@ -798,132 +1051,155 @@ Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
     End If
   End If
 
-  ''nLEN = Len(Screen.ActiveControl)
   Select Case eTipo
-  Case "PLACA"                                 ''###-####
+  Case "PLACA"
     nTAM = 8
-  Case "HORA"                                  ''##.##
+  Case "HORA"
     nTAM = 5
-  Case "HORAL"                                 ''##.##.##
+  Case "HORAL"
     nTAM = 8
-  Case "CEP"                                   ''#####-###
+  Case "CEP"
     nTAM = 9
-  Case "TEL"                                   ''####-####
-    nTAM = 9
-  Case "DC"                                    '' DD/MM/YY Data curta 8 digitos
-    nTAM = 8
-  Case "DL"                                    '' DD/MM/YYYY Data Longa 10 digitos
+  Case "TEL"
     nTAM = 10
-  Case "CPF", "CIC"                            '' 111.222.333-44   14 Digitos
+  Case "DC"
+    nTAM = 8
+  Case "DL"
+    nTAM = 10
+  Case "CPF", "CIC"
     nTAM = 14
-  Case "CNPJ", "CGC"                           '' 11.222.333/4444-55 18 digitos
+  Case "CNPJ", "CGC"
     nTAM = 18
+  
+  ' --- NOVOS TIPOS ADICIONADOS ---
+  Case "CARTAO"
+    nTAM = 19 ' 16 números + 3 espaços (0000 0000 0000 0000)
+  Case "BARRAS"
+    nTAM = 14 ' EAN/UPC máximo tratado na Validar_CodigoBarras é 14
+  Case "PIS"
+    nTAM = 14 ' 000.00000.00-0
+  Case "CEI"
+    nTAM = 15 ' 00.000.00000/00
+  Case "CFOP"
+    nTAM = 5  ' 0.000
+  Case "RENAVAM"
+    nTAM = 11 ' Apenas números
+  Case "TITULO"
+    nTAM = 12 ' Apenas números
   End Select
-  nLEN = Len(Trim(FixStr(Screen.ActiveControl.tEXT)))
-  If KeyAscii <> 8 And nLEN >= nTAM And _
-     KeyAscii <> 13 And Screen.ActiveControl.SelStart > 0 _
-     And Screen.ActiveControl.SelLength = 0 Then
-    KeyAscii = 0
+  
+  txtAtual = Trim(FixStr(Screen.ActiveControl.Text))
+  nLen = Len(txtAtual)
+  selInicio = Screen.ActiveControl.SelStart
+  
+  If KeyAscii <> 8 And nLen >= nTAM And _
+     KeyAscii <> 13 And Screen.ActiveControl.SelLength = 0 Then
+    ValidaDados = 0
+    Exit Function
   End If
-  If KeyAscii <> 13 And KeyAscii <> 8 And eTipo <> "PLACA" Then
-    KeyAscii = ValiText(KeyAscii, "#NI", True)  ''Numeros Inteiros pois o
-    ''a funcao poem a barra tracos pontos sozinha abaixo
+
+  If KeyAscii <> 13 And KeyAscii <> 8 And eTipo <> "PLACA" And eTipo <> "TEL" Then
+    KeyAscii = ValiText(KeyAscii, "#NI", True)
   End If
-  If KeyAscii <> 8 Then
-    Select Case eTipo                        ''A posicao de referencia e sempre uma antes do ponto barra traco
-    Case "HORA", "HORAL"                     ''PONTO na posicao 3
-      If nLEN = 0 Then
-        If KeyAscii > 50 Then            ''Hora so pode ser 012
-          KeyAscii = 0
-        End If
-      End If
-      If nLEN = 3 Or nLEN = 6 Then
-        If KeyAscii > 53 Then            ''minutos/segundos so pode ser ate 59
-          KeyAscii = 0
-        End If
-      End If
-      If nLEN = 2 Or (nLEN = 5 And eTipo = "HORAL") Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "."
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+
+  If KeyAscii <> 8 And selInicio = nLen Then
+    Select Case eTipo
+    Case "HORA", "HORAL"
+      If nLen = 0 And KeyAscii > 50 Then KeyAscii = 0
+      If (nLen = 3 Or nLen = 6) And KeyAscii > 53 Then KeyAscii = 0
+      If nLen = 2 Or (nLen = 5 And eTipo = "HORAL") Then
+        Screen.ActiveControl.Text = txtAtual & ":"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
       End If
 
-    Case "PLACA"                             ''traco na posicao 4
-      If nLEN = 3 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
-        nLEN = nLEN + 1
+    Case "PLACA"
+      If nLen = 3 Then
+        Screen.ActiveControl.Text = txtAtual & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
+        nLen = 4
       End If
-      If nLEN < 3 Then
+      If nLen < 3 Then
         KeyAscii = ValiText(KeyAscii, "#CU")
-      End If
-      If nLEN > 3 Then
+      ElseIf nLen = 4 Or nLen > 5 Then
         KeyAscii = ValiText(KeyAscii, "#NI")
+      ElseIf nLen = 5 Then
+        KeyAscii = ValiText(KeyAscii, "#CNU")
       End If
 
+    Case "DC", "DL"
+      If nLen = 0 And KeyAscii > 51 Then KeyAscii = 0
+      If nLen = 3 And KeyAscii > 49 Then KeyAscii = 0
+      If nLen = 2 Or nLen = 5 Then
+        Screen.ActiveControl.Text = txtAtual & "/"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
+      End If
 
+    Case "CEP"
+      If nLen = 5 Then
+        Screen.ActiveControl.Text = txtAtual & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
+      End If
 
-    Case "DC", "DL"                          ''Barra Posicao 3 e 6
-      If nLEN = 0 Then
-        If KeyAscii > 51 Then            ''1 digito dia so pode ser 0123
-          KeyAscii = 0
-        End If
+    Case "TEL"
+      If KeyAscii <> 8 Then KeyAscii = ValiText(KeyAscii, "#N-")
+
+    Case "CPF", "CIC"
+      If nLen = 3 Or nLen = 7 Then
+        Screen.ActiveControl.Text = txtAtual & "."
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
+      ElseIf nLen = 11 Then
+        Screen.ActiveControl.Text = txtAtual & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
       End If
-      If nLEN = 3 Then
-        If KeyAscii > 49 Then            ''1 digito mes so pode ser 01
-          KeyAscii = 0
-        End If
+
+    Case "CNPJ", "CGC"
+      If nLen = 2 Or nLen = 6 Then
+        Screen.ActiveControl.Text = txtAtual & "."
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
+      ElseIf nLen = 10 Then
+        Screen.ActiveControl.Text = txtAtual & "/"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
+      ElseIf nLen = 15 Then
+        Screen.ActiveControl.Text = txtAtual & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
       End If
-      If nLEN = 2 Or nLEN = 5 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "/"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+
+    ' --- MÁSCARAS PARA OS NOVOS TIPOS ---
+    Case "CARTAO"
+      If nLen = 4 Or nLen = 9 Or nLen = 14 Then
+        Screen.ActiveControl.Text = txtAtual & " "
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
       End If
-    Case "CEP"                               ''traco na posicao 6
-      If nLEN = 5 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+
+    Case "PIS"
+      If nLen = 3 Or nLen = 9 Then
+        Screen.ActiveControl.Text = txtAtual & "."
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
+      ElseIf nLen = 12 Then
+        Screen.ActiveControl.Text = txtAtual & "-"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
       End If
-    Case "TEL"                               ''traco na posicao 5
-      If nLEN = 4 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+
+    Case "CEI"
+      If nLen = 2 Or nLen = 6 Then
+        Screen.ActiveControl.Text = txtAtual & "."
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
+      ElseIf nLen = 12 Then
+        Screen.ActiveControl.Text = txtAtual & "/"
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
       End If
-    Case "CPF", "CIC"                        ''ponto 4 e 8
-      If nLEN = 3 Or nLEN = 7 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "."
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
+
+    Case "CFOP"
+      If nLen = 1 Then
+        Screen.ActiveControl.Text = txtAtual & "."
+        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
       End If
-      If nLEN = 11 Then                    ''TRaco na 12
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
-      End If
-    Case "CNPJ", "CGC"                       ''ponto 3 e 7
-      If nLEN = 2 Or nLEN = 6 Then
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "."
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
-      End If
-      If nLEN = 10 Then                    ''barra na 11
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "/"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
-      End If
-      If nLEN = 15 Then                    ''TRaco na 16
-        Screen.ActiveControl.tEXT = Screen.ActiveControl.tEXT & "-"
-        Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.tEXT) + 1
-        Screen.ActiveControl.SelLength = Len(Screen.ActiveControl.tEXT) + 1
-      End If
+
     End Select
   End If
+  
   ValidaDados = KeyAscii
 End Function
-
 Public Function ChecaSimNao(ByVal nText As Variant) As String
 'nText = expressa o campo/numero/variavel
   nText = UCase(nText)
@@ -1018,76 +1294,94 @@ Function CheckHora(ByVal eHORA As Variant, Optional ByVal lMES As Boolean = Fals
   End If
 End Function
 
-Public Function CheckCTA(ByVal cBANCO As Variant, ByVal cAGENCIA As Variant, ByVal cCONTA As Variant) As Boolean
-  Dim eTOt As Long
-  Dim nFIM As Integer
-  Dim nINI As Integer
-  Dim x As Integer
-  Dim nRES As Integer
-  eTOt = 0
-  cBANCO = StrZero(FixInt(cBANCO), 3)
-  If cBANCO <> "033" And cBANCO <> "237" And cBANCO <> "341" Then
-    CheckCTA = True
-    Exit Function
-  End If
-  cCONTA = Replace(cCONTA, " ", "")
-  cCONTA = TiraOut(cCONTA)
-  cAGENCIA = Replace(cAGENCIA, " ", "")
-  cAGENCIA = TiraOut(cAGENCIA)
-  Select Case cBANCO
-  Case "033"
-    If Len(cCONTA) <> 9 Then
-      Alert ("Quantidade de Digitos da Conta Diferente de 9")
-      CheckCTA = False
-      Exit Function
-    End If
-    cAGENCIA = Right(cAGENCIA, 3)
-    eTOt = eTOt + CalcDig(7, Mid(cAGENCIA, 1, 1))
-    eTOt = eTOt + CalcDig(3, Mid(cAGENCIA, 2, 1))
-    eTOt = eTOt + CalcDig(1, Mid(cAGENCIA, 3, 1))
-    eTOt = eTOt + CalcDig(9, Mid(cCONTA, 1, 1))
-    eTOt = eTOt + CalcDig(7, Mid(cCONTA, 2, 1))
-    eTOt = eTOt + CalcDig(1, Mid(cCONTA, 3, 1))
-    eTOt = eTOt + CalcDig(3, Mid(cCONTA, 4, 1))
-    eTOt = eTOt + CalcDig(1, Mid(cCONTA, 5, 1))
-    eTOt = eTOt + CalcDig(9, Mid(cCONTA, 6, 1))
-    eTOt = eTOt + CalcDig(7, Mid(cCONTA, 7, 1))
-    eTOt = eTOt + CalcDig(3, Mid(cCONTA, 8, 1))
-    eTOt = StrZero(eTOt)
-    eTOt = Right(eTOt, 1)
-    eTOt = IIf(Val(eTOt) > 0, 10 - Val(eTOt), 0)
-    If eTOt <> Val(Mid(cCONTA, 9, 1)) Then
-      Alert ("Checagem da Conta n„o Confere")
-      CheckCTA = False
-      Exit Function
-    End If
-  Case "341"
-    If (DAC10(cAGENCIA + Left(cCONTA, 5)) <> Right(cCONTA, 1)) Then
-      Alert ("Checagem da Conta n„o Confere")
-      CheckCTA = False
-      Exit Function
-    End If
-  Case "237"
-    eTOt = 0
-    nFIM = Len(cCONTA)
-    nINI = nFIM
-    nFIM = nFIM - 1
-    For x = 1 To nFIM
-      eTOt = eTOt + nINI * Val(Mid(cCONTA, x, 1))
-      nINI = nINI - 1
-    Next x
-    nRES = eTOt Mod 11
-    nRES = 11 - nRES
-    nRES = IIf(nRES = 10, "P", StrZero(nRES, 1))
-    If nRES <> Right(cCONTA, 1) Then
-      Alert ("Digito de Controle n„o confere")
-      CheckCTA = False
-      Exit Function
-    End If
-  End Select
-  CheckCTA = True
-End Function
+Public Function CheckCTA(ByVal cBANCO As Variant, ByVal cAGENCIA As Variant, ByVal cCONTA As Variant, Optional ByVal lMES As Boolean = True) As Boolean
+    Dim eTot As Long, nX As Integer, nPeso As Integer, nResto As Integer
+    Dim cDVCalc As String, cDVInformado As String, cCorpoConta As String
+    Dim cNumPuro As String
+    Dim strBanco As String
 
+    strBanco = Format(Val(funNumeroPuro(CStr(cBANCO))), "000")
+    cAGENCIA = funNumeroPuro(CStr(cAGENCIA))
+
+    cNumPuro = UCase(Replace(Replace(CStr(cCONTA), "-", ""), ".", ""))
+    If Len(cNumPuro) = 0 Then Exit Function
+
+    cCorpoConta = Left(cNumPuro, Len(cNumPuro) - 1)
+    cDVInformado = Right(cNumPuro, 1)
+
+    Select Case strBanco
+        Case "001" ' Banco do Brasil
+            eTot = 0: nPeso = 2
+            For nX = Len(cCorpoConta) To 1 Step -1
+                eTot = eTot + (Val(Mid(cCorpoConta, nX, 1)) * nPeso)
+                nPeso = nPeso + 1
+            Next nX
+            nResto = 11 - (eTot Mod 11)
+            If nResto = 10 Then cDVCalc = "X" Else If nResto = 11 Then cDVCalc = "0" Else cDVCalc = CStr(nResto)
+
+        Case "104" ' Caixa Econômica Federal
+            eTot = 0: nPeso = 2
+            cCorpoConta = Right("0000" & cAGENCIA, 4) & cCorpoConta
+            For nX = Len(cCorpoConta) To 1 Step -1
+                eTot = eTot + (Val(Mid(cCorpoConta, nX, 1)) * nPeso)
+                If nPeso = 9 Then nPeso = 2 Else nPeso = nPeso + 1
+            Next nX
+            cDVCalc = CStr((eTot * 10) Mod 11)
+            If cDVCalc = "10" Then cDVCalc = "0"
+
+        Case "260", "077", "336", "403", "323", "197", "290", "655", "212", "318" ' Fintechs
+            eTot = 0: nPeso = 2
+            For nX = Len(cCorpoConta) To 1 Step -1
+                eTot = eTot + (Val(Mid(cCorpoConta, nX, 1)) * nPeso)
+                If nPeso = 9 Then nPeso = 2 Else nPeso = nPeso + 1
+            Next nX
+            nResto = (eTot * 10) Mod 11
+            If nResto >= 10 Then cDVCalc = "0" Else cDVCalc = CStr(nResto)
+
+        Case "237" ' Bradesco
+            eTot = 0: nPeso = 2
+            For nX = Len(cCorpoConta) To 1 Step -1
+                eTot = eTot + (Val(Mid(cCorpoConta, nX, 1)) * nPeso)
+                If nPeso = 7 Then nPeso = 2 Else nPeso = nPeso + 1
+            Next nX
+            nResto = 11 - (eTot Mod 11)
+            If nResto = 10 Then cDVCalc = "P" Else If nResto = 11 Then cDVCalc = "0" Else cDVCalc = CStr(nResto)
+
+        Case "033" ' Santander
+            eTot = 0
+            cAGENCIA = Right(Right("0000" & cAGENCIA, 4), 3)
+            eTot = eTot + CalcDig(7, Mid(cAGENCIA, 1, 1))
+            eTot = eTot + CalcDig(3, Mid(cAGENCIA, 2, 1))
+            eTot = eTot + CalcDig(1, Mid(cAGENCIA, 3, 1))
+            
+            cCorpoConta = Right("00000000" & cCorpoConta, 8)
+            eTot = eTot + CalcDig(9, Mid(cCorpoConta, 1, 1))
+            eTot = eTot + CalcDig(7, Mid(cCorpoConta, 2, 1))
+            eTot = eTot + CalcDig(1, Mid(cCorpoConta, 3, 1))
+            eTot = eTot + CalcDig(3, Mid(cCorpoConta, 4, 1))
+            eTot = eTot + CalcDig(1, Mid(cCorpoConta, 5, 1))
+            eTot = eTot + CalcDig(9, Mid(cCorpoConta, 6, 1))
+            eTot = eTot + CalcDig(7, Mid(cCorpoConta, 7, 1))
+            eTot = eTot + CalcDig(3, Mid(cCorpoConta, 8, 1))
+            
+            nResto = eTot Mod 10
+            If nResto = 0 Then cDVCalc = "0" Else cDVCalc = CStr(10 - nResto)
+
+        Case "341" ' Itaú
+            cDVCalc = DAC10(cAGENCIA & cCorpoConta)
+
+        Case Else
+            CheckCTA = True
+            Exit Function
+    End Select
+
+    If UCase(cDVCalc) <> cDVInformado Then
+        CheckCTA = False
+        If lMES Then MsgBox "Dígito Verificador Inválido para o Banco " & strBanco, vbExclamation, "Checagem de Conta"
+    Else
+        CheckCTA = True
+    End If
+End Function
 Public Function CalcDig(ByVal n1, ByVal n2)
   Dim eRETU
   n2 = FixInt(n2)
@@ -1099,21 +1393,21 @@ Public Function CalcDig(ByVal n1, ByVal n2)
 End Function
 
 Public Function DAC10(ByVal Arg1)
-  Dim cNUMERO As String
+  Dim cNumero As String
   Dim ninicio As Integer
   Dim ntotal As Integer
   Dim ccpoaux As String
-  Dim x As Integer
+  Dim X As Integer
   ninicio = Len(Trim(Arg1)) + 1
   ntotal = 0
   If (ninicio < 2) Then
     ninicio = 2
   End If
   ccpoaux = "0" + Trim(Arg1)
-  For x = ninicio To 1 Step -2
-    cNUMERO = Mid(ccpoaux, x, 1)
-    ntotal = ntotal + InStr("516273849", cNUMERO)
-    ntotal = ntotal + Val(Mid(ccpoaux, x - 1, 1))
+  For X = ninicio To 1 Step -2
+    cNumero = Mid(ccpoaux, X, 1)
+    ntotal = ntotal + InStr("516273849", cNumero)
+    ntotal = ntotal + Val(Mid(ccpoaux, X - 1, 1))
   Next
   DAC10 = Trim(Str(InStr("987654321", Mid(StrZero(ntotal, 3), 3, 1))))
 End Function
@@ -1201,7 +1495,7 @@ Public Function CheckTitulo(ByVal s As String, Optional ByVal lMES As Boolean = 
   Dim DV2 As Integer
   Dim i As Integer
   Dim resto As Integer
-  Dim Resto2 As Integer
+  Dim resto2 As Integer
   Dim Numero As String
 
   Numero = ""
@@ -1239,19 +1533,19 @@ Public Function CheckTitulo(ByVal s As String, Optional ByVal lMES As Boolean = 
   End If
 
   DV2 = ((CInt(Mid(Numero, 10, 1)) * 4) + (CInt(Mid(Numero, 11, 1)) * 3) + (DV1 * 2))
-  Resto2 = DV2 Mod 11
+  resto2 = DV2 Mod 11
 
-  If Resto2 = 1 Then
+  If resto2 = 1 Then
     DV2 = 0
   Else
-    If Resto2 = 0 Then
+    If resto2 = 0 Then
       If (((Mid(Numero, 10, 2)) = "01") Or ((Mid(Numero, 10, 2)) = "02")) Then
         DV2 = 1
       Else
         DV2 = 0
       End If
     Else
-      DV2 = 11 - Resto2
+      DV2 = 11 - resto2
     End If
   End If
 
@@ -1270,164 +1564,97 @@ End Function
 Public Function CheckEmail(ByVal cEMAIL As String, _
                            Optional ByVal lVazio As Boolean = False, _
                            Optional ByVal lMES As Boolean = True) As Boolean
-  Dim nCharacter As Integer
-  Dim Count As Integer
-  Dim sLetra As String
-
 
   cEMAIL = FixStr(cEMAIL)
-  ''MsgBox "O e-mail nao digitado !!"
+  
   If Len(cEMAIL) = 0 Then
     If lVazio Then
       CheckEmail = True
     Else
       CheckEmail = False
-      If lMES Then
-        MsgBox "Email em branco"
-      End If
+      If lMES Then MsgBox "Email em branco"
     End If
     Exit Function
   End If
 
-  ''nao possue // nao tem //erro digitacao
   If Left(UCase(cEMAIL), 3) = "NAO" Then
     CheckEmail = True
     Exit Function
   End If
 
   If Len(cEMAIL) < 5 Then
-    'O e-mail é inválido, pois tem menos de 5 caracteres
     CheckEmail = False
-    If lMES Then
-      MsgBox "O e-mail digitado tem menos de 5 caracterec!!!"
-    End If
+    If lMES Then MsgBox "O e-mail digitado tem menos de 5 caracterec!!!"
     Exit Function
   End If
 
-  'Verificar a existencia de arrobas (@) no e-mail
-  For nCharacter = 1 To Len(cEMAIL)
-    If Mid(cEMAIL, nCharacter, 1) = "@" Then
-      'OPA!!! Achou uma arroba!!!
-      'Soma 1 ao contador
-      Count = Count + 1
-    End If
-  Next
-  'Verifica o número de arrobas.
-  'TEM que ter """UMA""" arroba
-
-  If Count <> 1 Then
-    'O e-mail é inválido, pois tem 0 ou mais de 1 arroba
+  ' Substitui o loop de contagem de arrobas pelo UBound(Split())
+  If UBound(Split(cEMAIL, "@")) <> 1 Then
     CheckEmail = False
-    If lMES Then
-      MsgBox "O no. de arrobas (@) do e-mail é inválido!!!"
-    End If
+    If lMES Then MsgBox "O no. de arrobas (@) do e-mail é inválido!!!"
     Exit Function
-  Else
-    'O e-mail tem 1 arroba.
-    'Verificar a posição da arroba
-
-    If InStr(cEMAIL, "@") = 1 Then
-      'O e-mail é inválido, pois começa com uma @
-      CheckEmail = False
-      If lMES Then
-        MsgBox "O e-mail foi iniciado com uma arroba (@)!!!"
-      End If
-      Exit Function
-
-    ElseIf InStr(cEMAIL, "@") = Len(cEMAIL) Then
-      'O e-mail é inválido, pois termina com uma @
-      CheckEmail = False
-      If lMES Then
-        MsgBox "O e-mail termina com uma arroba (@)!!!"
-      End If
-      Exit Function
-    End If
   End If
 
-  nCharacter = 0
-  Count = 0
-  'Verificar a existencia de pontos (.) no e-mail
-
-  For nCharacter = 1 To Len(cEMAIL)
-    If Mid(cEMAIL, nCharacter, 1) = "." Then
-      'OPA!!! Achou um ponto!!!
-      'Soma 1 ao contador
-      Count = Count + 1
-    End If
-  Next
-  'Verifica o número de pontos.
-  'TEM que ter PELO MENOS UM ponto.
-
-  If Count < 1 Then
-    'O e-mail é inválido, pois não tem pontos.
+  ' Funções Left e Right substituem o InStr para verificar as pontas
+  If Left(cEMAIL, 1) = "@" Then
     CheckEmail = False
-    If lMES Then
-      MsgBox "O e-mail é inválido, pois não contém pontos (.)!!!"
-    End If
+    If lMES Then MsgBox "O e-mail foi iniciado com uma arroba (@)!!!"
     Exit Function
-  Else
-    'O e-mail tem pelo menos 1 ponto.
-    'Verificar a posição do ponto:
-
-    If InStr(cEMAIL, ".") = 1 Then
-      'O e-mail é inválido, pois começa com um ponto
-      CheckEmail = False
-      If lMES Then
-        MsgBox "O e-mail foi iniciado com um ponto (.)!!!"
-      End If
-      Exit Function
-
-    ElseIf InStr(cEMAIL, ".") = Len(cEMAIL) Then
-      'O e-mail é inválido, pois termina com um ponto.
-      CheckEmail = False
-      If lMES Then
-        MsgBox "O e-mail termina com um ponto (.)!!!"
-      End If
-      Exit Function
-
-    ElseIf InStr(InStr(cEMAIL, "@"), cEMAIL, ".") = 0 Then
-      'O e-mail é inválido, pois termina com um ponto.
-      CheckEmail = False
-      If lMES Then
-        MsgBox "O e-mail não tem nenhum ponto (.) após a arroba (@)!!!"
-      End If
-      Exit Function
-    End If
+  ElseIf Right(cEMAIL, 1) = "@" Then
+    CheckEmail = False
+    If lMES Then MsgBox "O e-mail termina com uma arroba (@)!!!"
+    Exit Function
   End If
-  nCharacter = 0
-  Count = 0
-  'Verifica se o e-mail não tem pontos
-  'consecutivos (..) após a arroba (@).
+
+  ' Verifica a existência de pelo menos um ponto
+  If InStr(cEMAIL, ".") = 0 Then
+    CheckEmail = False
+    If lMES Then MsgBox "O e-mail é inválido, pois não contém pontos (.)!!!"
+    Exit Function
+  End If
+
+  If Left(cEMAIL, 1) = "." Then
+    CheckEmail = False
+    If lMES Then MsgBox "O e-mail foi iniciado com um ponto (.)!!!"
+    Exit Function
+  ElseIf Right(cEMAIL, 1) = "." Then
+    CheckEmail = False
+    If lMES Then MsgBox "O e-mail termina com um ponto (.)!!!"
+    Exit Function
+  ElseIf InStr(InStr(cEMAIL, "@"), cEMAIL, ".") = 0 Then
+    CheckEmail = False
+    If lMES Then MsgBox "O e-mail não tem nenhum ponto (.) após a arroba (@)!!!"
+    Exit Function
+  End If
 
   If InStr(cEMAIL, "..") > InStr(cEMAIL, "@") Then
-    'O e-mail é inválido, tem pontos consecutivos após o @.
     CheckEmail = False
-    If lMES Then
-      MsgBox "O e-mail contém pontos consecutivos (..) após o arroba (@)!!!"
-    End If
+    If lMES Then MsgBox "O e-mail contém pontos consecutivos (..) após o arroba (@)!!!"
     Exit Function
   End If
 
-  'Verifica se o e-mail tem caracteres inválidos
+  ' Substitui o loop For...Next de validação de caracteres por RegEx
+  Dim objRegExp As Object
+  Set objRegExp = CreateObject("VBScript.RegExp")
+  objRegExp.IgnoreCase = True
+  objRegExp.Global = False
+  
+  ' O padrão [^...] significa "procurar qualquer coisa que NÃO seja o que está aqui dentro"
+  ' Mantivemos a exata mesma lista de caracteres permitidos do seu código original
+  objRegExp.Pattern = "[^a-z0-9\-\.\_\/\~\@]"
+  
+  ' Se o RegEx encontrar qualquer caractere fora da lista permitida, ele falha
+  If objRegExp.Test(cEMAIL) Then
+    CheckEmail = False
+    If lMES Then MsgBox "Foi digitado um caracter inválido no e-mail!!!"
+    Set objRegExp = Nothing
+    Exit Function
+  End If
 
-  For nCharacter = 1 To Len(cEMAIL)
-    sLetra = Mid$(cEMAIL, nCharacter, 1)
-    ''-./@_~ Or sLetra Like "[0-9]" Or IsNumeric(sLetra)
-    If Not (LCase(sLetra) Like "[a-z]" Or sLetra = "@" Or sLetra = "." Or sLetra = "-" Or sLetra = "_" Or sLetra = "/" Or sLetra = "~" Or IsNumeric(sLetra)) Then
-      'O e-mail é inválido, pois tem caracteres inválidos
-      CheckEmail = False
-      If lMES Then
-        MsgBox "Foi digitado um caracter inválido no e-mail!!!"
-      End If
-      Exit Function
-    End If
-  Next
-  nCharacter = 0
-  'Bem, se a verificação chegou até aqui é porque o e-mail é válido, então...
+  Set objRegExp = Nothing
   CheckEmail = True
 
 End Function
-
 Public Function FormataHora(ByVal dTime As Variant, Optional ByVal cCEP As String = ":") As String
   dTime = Format(CStr(Int(dTime)), "00") & cCEP & Format(CStr(Int((dTime - Int(dTime)) * 100)), "00")
   FormataHora = CStr(dTime)
@@ -1458,90 +1685,82 @@ Public Function checkcep(ByVal cCEP As String, Optional ByVal lMES As Boolean = 
 End Function
 
 Public Function FormataIE(ByVal Valor As String, ByVal cUF As String, Optional ByVal cPESSOA As String = "J") As String
-  Dim cMASK As String
-  Valor = FixStr(Valor, "")
-  FormataIE = Valor
-  cMASK = ""
-  If Valor = "ISENTO" Or Valor = "00000000000000" Then
-    Exit Function
-  End If
-  If cPESSOA = "F" Then
-    Exit Function
-  End If
-  If Len(Valor) = 0 Then
-    Exit Function
-  End If
-  If cUF = "EX" Or cUF = "XX" Then
-    Exit Function
-  End If
-  '| no lugar do ponto depois sofre strtarn
-  Select Case cUF
-  Case "AC"                                    '"99.999.999/999-99" , 13
-    cMASK = "00|000|000/000-00"
-  Case "AM"                                    '"99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  Case "AP"                                    ' "99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  Case "DF"                                    '"99.999999.999-99"  , 13
-    cMASK = "00|000000|000-00"
-  Case "FN", "EX", "XX"
-    ''cMASK = ""
-  Case "MA"                                    '"99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  Case "MG"                                    '"999.999.999/9999"  , 13
-    cMASK = "000|000|000/0000"
-  Case "MT"                                    '"9999999999-9"      , 11
-    cMASK = "0000000000-0"
-  Case "PA"                                    '"99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  Case "PB"                                    '"99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  Case "PE"                                    '"99.9.999.9999999-9", 14
-    cMASK = "00|0|000|0000000-0"
-  Case "PI"                                    '"99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  Case "RN"                                    '"99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  Case "RO"                                    '"99999999.99999-9"  , 14
-    cMASK = "00000000|00000-0"
-  Case "RR"                                    '"99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  Case "SC"                                    ' "999.999.999"       ,  9
-    cMASK = "000|000|000"
-  Case "SP"                                    '"999.999.999.999"    , 12
-    cMASK = "000|000|000|000"
-  Case "TO"                                    '"99.999.999-9        , 9
-    cMASK = "00|000|000-0"
-  Case "AL"                                    '"99.9.99999-9"      ,  9
-    cMASK = "00|0|00000-0"
-  Case "BA"                                    '"99.999.999"        ,  8
-    cMASK = "00|000|000"
-  Case "CE"                                    '"99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  Case "ES"                                    '"99.999.999-9"      ,  9
-    cMASK = "000|000|00-0"
-  Case "GO"                                    '"99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  Case "MS"                                    '"99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  Case "PR"                                    '"999.99999-99"      , 10
-    cMASK = "000|00000-00"
-  Case "RJ"                                    '"99.999.99-9"       ,  8
-    cMASK = "00|000|00-0"
-  Case "RS"                                    '"999/999999-9"      , 10
-    cMASK = "000/000000-0"
-  Case "SE"                                    '"99.999.999-9"      ,  9
-    cMASK = "00|000|000-0"
-  End Select
-
-
-  If Len(cMASK) > 0 Then
+    Dim cMASK As String
+    
     Valor = funNumeroPuro(Valor)
-    Valor = Format(Valor, cMASK)
-    FormataIE = Replace(Valor, "|", ".")
-  End If
+    FormataIE = Valor
+    
+    If Left(UCase(Valor), 5) = "ISENT" Or (InStr(UCase(Valor), "NAO") > 0 And InStr(UCase(Valor), "CONTRIB") > 0) Then
+        Exit Function ' Não formata Isentos ou Não Contribuintes[cite: 6]
+    End If
+    If cPESSOA = "F" Or Len(Valor) = 0 Or cUF = "EX" Or cUF = "XX" Then
+        Exit Function
+    End If
+    
+    ' Máscaras unificadas do VB6 e atualizações do Harbour[cite: 1, 6]
+    Select Case cUF
+        Case "AC": cMASK = "00|000|000/00000"
+        Case "AL", "AP", "MA": cMASK = "000000000"
+        Case "AM", "PB", "PI", "SE", "GO", "MS": cMASK = "00|000|0000"
+        Case "BA"
+            If Len(Valor) = 8 Then cMASK = "00000000" Else cMASK = "000|000|000"
+        Case "DF": cMASK = "00|000000|00000"
+        Case "MG": cMASK = "000000000|00|00"
+        Case "MT": cMASK = "00000000000"
+        Case "PA", "CE", "RR": cMASK = "00|0000000"
+        Case "PE"
+            If Len(Valor) > 9 Then cMASK = "00|0|000|00000000" Else cMASK = "000000000"
+        Case "RN"
+            If Len(Valor) > 9 Then cMASK = "00|0|000|0000" Else cMASK = "00|000|0000"
+        Case "RO"
+            If Len(Valor) = 9 Then cMASK = "000|000000" Else cMASK = "00000000000000"
+        Case "SC": cMASK = "000|000|000"
+        Case "SP": cMASK = "000|000|000|000"
+        Case "TO"
+            If Len(Valor) = 11 Then cMASK = "00|00|0000000" Else cMASK = "00|000|0000"
+        Case "ES", "RJ": cMASK = "000|000|000"
+        Case "PR": cMASK = "000|0000000"
+        Case "RS": cMASK = "000/0000000"
+    End Select
+    
+    If Len(cMASK) > 0 Then
+        Valor = Format(Valor, cMASK)
+        FormataIE = Replace(Valor, "|", ".")
+    End If
+End Function
+Public Function validacnh(ByVal eVALOR As Variant) As Boolean
+    Dim cCNH As String
+    cCNH = funNumeroPuro(CStr(eVALOR))
+    
+    If Len(cCNH) = 9 Or Len(cCNH) = 11 Then
+        validacnh = True
+    Else
+        validacnh = False
+    End If
 End Function
 
+Public Function CheckCNHCat(ByVal cCNHCAT As String) As Boolean
+    Dim aCAT As Variant
+    Dim i As Integer, bValido As Boolean
+    
+    aCAT = Array("A", "B", "C", "D", "E", "AB", "AC", "AD", "AE", "ACC")
+    cCNHCAT = Trim(UCase(cCNHCAT))
+    
+    If Len(cCNHCAT) = 0 Then
+        CheckCNHCat = True
+        Exit Function
+    End If
+    
+    bValido = False
+    For i = LBound(aCAT) To UBound(aCAT)
+        If cCNHCAT = aCAT(i) Then
+            bValido = True
+            Exit For
+        End If
+    Next i
+    
+    CheckCNHCat = bValido
+End Function
 Public Function FeriadoMovel(pdatPesquisa As Date) As Boolean
   Dim datData As Date
   Dim ano As Integer
@@ -1557,7 +1776,7 @@ Public Function FeriadoMovel(pdatPesquisa As Date) As Boolean
   Dim k As Integer
   Dim L As Integer
   Dim m As Integer
-  Dim p As Integer
+  Dim P As Integer
   Dim Q As Integer
   FeriadoMovel = False
   ano = Year(pdatPesquisa)
@@ -1573,9 +1792,9 @@ Public Function FeriadoMovel(pdatPesquisa As Date) As Boolean
   k = (C Mod 4)
   L = ((32 + 2 * E + 2 * i - h - k) Mod 7)
   m = Int((A + 11 * h + 22 * L) / 451)
-  p = Int((h + L - 7 * m + 114) / 31)
+  P = Int((h + L - 7 * m + 114) / 31)
   Q = ((h + L - 7 * m + 114) Mod 31)
-  datData = Format(Str(Q + 1) & "/" & Str(p) & "/" & Str(ano), "dd/mm/yyyy")
+  datData = Format(Str(Q + 1) & "/" & Str(P) & "/" & Str(ano), "dd/mm/yyyy")
   If pdatPesquisa = datData Then
     '+ Pascoa
     FeriadoMovel = True
@@ -1594,48 +1813,73 @@ Public Function FeriadoMovel(pdatPesquisa As Date) As Boolean
   End If
 End Function
 
-Public Function CEP2UF(ByVal cCEPUSO As String, Optional ByVal cUF As String = "ZZ") As String
-  Dim CEPUSO As Long
-  cCEPUSO = TiraOut(cCEPUSO)
-  CEPUSO = Val(cCEPUSO)
-  CEP2UF = "EX"
-  If CEPUSO >= 1000000 And CEPUSO <= 19999999 Then CEP2UF = "SP"
-  If CEPUSO >= 20000000 And CEPUSO <= 28999999 Then CEP2UF = "RJ"
-  If CEPUSO >= 29000000 And CEPUSO <= 29999999 Then CEP2UF = "ES"
-  If CEPUSO >= 30000000 And CEPUSO <= 39999999 Then CEP2UF = "MG"
-  If CEPUSO >= 40000000 And CEPUSO <= 48999999 Then CEP2UF = "BA"
-  If CEPUSO >= 49000000 And CEPUSO <= 49999999 Then CEP2UF = "SE"
-  If CEPUSO >= 50000000 And CEPUSO <= 56999999 Then CEP2UF = "PE"
-  If CEPUSO >= 57000000 And CEPUSO <= 57999999 Then CEP2UF = "AL"
-  If CEPUSO >= 58000000 And CEPUSO <= 58999999 Then CEP2UF = "PB"
-  If CEPUSO >= 59000000 And CEPUSO <= 59999999 Then CEP2UF = "RN"
-  If CEPUSO >= 60000000 And CEPUSO <= 63999999 Then CEP2UF = "CE"
-  If CEPUSO >= 64000000 And CEPUSO <= 64999999 Then CEP2UF = "PI"
-  If CEPUSO >= 65000000 And CEPUSO <= 65999999 Then CEP2UF = "MA"
-  If CEPUSO >= 66000000 And CEPUSO <= 68899999 Then CEP2UF = "PA"
-  If CEPUSO >= 68900000 And CEPUSO <= 68999999 Then CEP2UF = "AP"
-  If CEPUSO >= 69000000 And CEPUSO <= 69299999 Then CEP2UF = "AM"  '1a. faixa amazonas
-  If CEPUSO >= 69300000 And CEPUSO <= 69399999 Then CEP2UF = "RR"
-  If CEPUSO >= 69400000 And CEPUSO <= 69899999 Then CEP2UF = "AM"  '2a. faixa amazonas
-  If CEPUSO >= 69900000 And CEPUSO <= 69999999 Then CEP2UF = "AC"
-  If CEPUSO >= 70000000 And CEPUSO <= 72799999 Then CEP2UF = "DF"  '1a. Faixa Distrito Federal
-  If CEPUSO >= 72800000 And CEPUSO <= 72999999 Then CEP2UF = "GO"  '1a. faixa de Goias
-  If CEPUSO >= 73000000 And CEPUSO <= 73699999 Then CEP2UF = "DF"  '2a. faixa distrito federal
-  If CEPUSO >= 73700000 And CEPUSO <= 76799999 Then CEP2UF = "GO"  '2a. faixa de Goias
-  If CEPUSO >= 77000000 And CEPUSO <= 77999999 Then CEP2UF = "TO"
-  If CEPUSO >= 78000000 And CEPUSO <= 78899999 Then CEP2UF = "MT"
-  If CEPUSO >= 78900000 And CEPUSO <= 78999999 Then CEP2UF = "RO"
-  If CEPUSO >= 79000000 And CEPUSO <= 79999999 Then CEP2UF = "MS"
-  If CEPUSO >= 80000000 And CEPUSO <= 87999999 Then CEP2UF = "PR"
-  If CEPUSO >= 88000000 And CEPUSO <= 89999999 Then CEP2UF = "SC"
-  If CEPUSO >= 90000000 And CEPUSO <= 99999999 Then CEP2UF = "RS"
-  eRETU01 = CEP2UF
-  lRETU = False
-  If cUF = CEP2UF Then
-    lRETU = True
-  End If
+Public Function chkufcep(ByVal cCEP As String, ByVal cUF As String, Optional ByVal lMES As Boolean = True) As Boolean
+    chkufcep = True
+    cUF = UCase(Trim(cUF))
+    
+    If cep2uf(cCEP) <> cUF Then
+        chkufcep = False
+        If lMES Then MsgBox "CEP: " & cCEP & " não é da UF: " & cUF, vbExclamation, "Validação de CEP/UF"
+    End If
 End Function
 
+Public Function cep2uf(ByVal cepuso As String) As String
+    Dim nCep As Long
+    
+    cepuso = funNumeroPuro(cepuso)
+    nCep = Val(cepuso)
+    cep2uf = "EX"
+    
+    Select Case nCep
+        Case 1000000 To 19999999: cep2uf = "SP"
+        Case 20000000 To 28999999: cep2uf = "RJ"
+        Case 29000000 To 29999999: cep2uf = "ES"
+        Case 30000000 To 39999999: cep2uf = "MG"
+        Case 40000000 To 48999999: cep2uf = "BA"
+        Case 49000000 To 49999999: cep2uf = "SE"
+        Case 50000000 To 56999999: cep2uf = "PE"
+        Case 57000000 To 57999999: cep2uf = "AL"
+        Case 58000000 To 58999999: cep2uf = "PB"
+        Case 59000000 To 59999999: cep2uf = "RN"
+        Case 60000000 To 63999999: cep2uf = "CE"
+        Case 64000000 To 64999999: cep2uf = "PI"
+        Case 65000000 To 65999999: cep2uf = "MA"
+        Case 66000000 To 68899999: cep2uf = "PA"
+        Case 68900000 To 68999999: cep2uf = "AP"
+        Case 69000000 To 69299999, 69400000 To 69899999: cep2uf = "AM"
+        Case 69300000 To 69399999: cep2uf = "RR"
+        Case 69900000 To 69999999: cep2uf = "AC"
+        Case 70000000 To 72799999, 73000000 To 73699999: cep2uf = "DF"
+        Case 72800000 To 72999999, 73700000 To 76799999: cep2uf = "GO"
+        Case 77000000 To 77999999: cep2uf = "TO"
+        Case 78000000 To 78899999: cep2uf = "MT"
+        Case 78900000 To 78999999: cep2uf = "RO"
+        Case 79000000 To 79999999: cep2uf = "MS"
+        Case 80000000 To 87999999: cep2uf = "PR"
+        Case 88000000 To 89999999: cep2uf = "SC"
+        Case 90000000 To 99999999: cep2uf = "RS"
+        Case Else: cep2uf = "EX"
+    End Select
+End Function
+Public Function CNPJCPFVAL(ByVal cCGC As String, ByVal cPESSOA As String, Optional ByVal cESTADO As String = "") As Boolean
+    Dim lRETU As Boolean
+    lRETU = True
+    
+    cPESSOA = UCase(Trim(cPESSOA))
+    
+    Select Case cPESSOA
+        Case "J" ' CNPJ
+            lRETU = CheckCNPJ(cCGC, "X", True, cESTADO)
+        Case "F" ' CPF
+            lRETU = CheckCPF(cCGC, True)
+        Case "C" ' CEI
+            lRETU = checkCEI(cCGC)
+        Case Else ' Tipo em branco: tenta validar por qualquer um dos três[cite: 2]
+            lRETU = CheckCNPJ(cCGC, "X", False, cESTADO) Or CheckCPF(cCGC, False) Or checkCEI(cCGC)
+    End Select
+    
+    CNPJCPFVAL = lRETU
+End Function
 Public Sub PreencheCboEstados(ByRef cbo)
   cbo.Clear
   cbo.AddItem "AC"
@@ -1696,7 +1940,7 @@ End Function
 Function checkCEI(ByVal pCEI As String) As Boolean
   Dim nTot As Byte
   Dim cAux As String
-  Dim lRet As Boolean
+  Dim lret As Boolean
   Dim i As Byte
   Dim pNu_cei As String
 
@@ -1706,7 +1950,7 @@ Function checkCEI(ByVal pCEI As String) As Boolean
 
   nTot = 0
   cAux = ""
-  lRet = True
+  lret = True
   i = 0
   pNu_cei = ""
 
@@ -1723,9 +1967,9 @@ Function checkCEI(ByVal pCEI As String) As Boolean
   cAux = Right$(Str(nTot), 2)
   nTot = Val(Left$(cAux, 1)) + Val(Right$(cAux, 1))
   nTot = IIf(nTot > 9, 0, 10 - nTot)
-  lRet = IIf(Val(Right$(pNu_cei, 1)) = nTot, True, False)
+  lret = IIf(Val(Right$(pNu_cei, 1)) = nTot, True, False)
 
-  If lRet = False Then
+  If lret = False Then
     MsgBox "Codigo CEI incorreto - Tecle <Enter>"
   Else
     checkCEI = True
@@ -1733,63 +1977,52 @@ Function checkCEI(ByVal pCEI As String) As Boolean
 
 End Function
 
-Public Function Validar_CartaoCredito(ByVal CartaoCredito As String) As Boolean
-  Dim bolRetorno As Boolean
+Public Function Validar_CartaoCredito(ByVal CartaoCredito As String, Optional ByVal lMES As Boolean = False, Optional ByRef cBandeira As String) As Boolean
+    Dim nSum As Integer, i As Integer, nDigit As Integer
+    Dim lEven As Boolean, nLen As Integer
+    Dim cPref2 As Integer, cPref4 As Integer, cPref6 As Long
 
-  bolRetorno = False
-
-  If Len(CartaoCredito) > 0 Then
-    'Retiramos possÝveis mîscaras
     CartaoCredito = funNumeroPuro(CartaoCredito)
+    nLen = Len(CartaoCredito)
+    If nLen = 0 Then Exit Function
 
-    If IsNumeric(CartaoCredito) Then
-
-      Dim intCont As Integer
-      Dim intDigito As Integer
-      Dim intResultado As Integer
-
-      intCont = 1
-      intDigito = 0
-      intResultado = 0
-
-      While intCont <= Len(CartaoCredito)
-        If Len(CartaoCredito) Mod 2 = 0 Then
-
-          intDigito = Val(Mid(CartaoCredito, intCont, 1))
-
-          If intCont Mod 2 <> 0 Then
-            intDigito = intDigito * 2
-            If intDigito > 9 Then intDigito = intDigito - 9
-          End If
-
-          intResultado = intResultado + intDigito
-          intCont = intCont + 1
-
-        Else
-
-          intDigito = Val(Mid(CartaoCredito, intCont, 1))
-
-          If intCont Mod 2 = 0 Then
-            intDigito = intDigito * 2
-            If intDigito > 9 Then intDigito = intDigito - 9
-          End If
-
-          intResultado = intResultado + intDigito
-          intCont = intCont + 1
-
+    lEven = False
+    For i = nLen To 1 Step -1
+        nDigit = Val(Mid(CartaoCredito, i, 1))
+        If lEven Then
+            nDigit = nDigit * 2
+            If nDigit > 9 Then nDigit = nDigit - 9
         End If
-      Wend
+        nSum = nSum + nDigit
+        lEven = Not lEven
+    Next
 
-      intResultado = intResultado Mod 10
+    If (nSum Mod 10 = 0) And (nSum > 0) Then
+        cPref2 = Val(Left(CartaoCredito, 2))
+        cPref4 = Val(Left(CartaoCredito, 4))
+        cPref6 = Val(Left(CartaoCredito, 6))
 
-      bolRetorno = (intResultado = 0)
-
+        Select Case True
+            Case (cPref2 = 34 Or cPref2 = 37) And nLen = 15: cBandeira = "AmEx"
+            Case Left(CartaoCredito, 1) = "4": cBandeira = "Visa"
+            Case (cPref2 >= 51 And cPref2 <= 55) Or (cPref6 >= 222100 And cPref6 <= 272099): cBandeira = "MasterCard"
+            Case cPref4 = 6011 Or (Val(Left(CartaoCredito, 3)) >= 644 And Val(Left(CartaoCredito, 3)) <= 649): cBandeira = "Discover"
+            Case Val(Left(CartaoCredito, 3)) >= 300 And Val(Left(CartaoCredito, 3)) <= 305: cBandeira = "Carte Blanche"
+            Case cPref2 = 30 Or cPref2 = 36 Or cPref2 = 38: cBandeira = "Diners"
+            Case cPref4 >= 3528 And cPref4 <= 3589: cBandeira = "JCB"
+            Case cPref4 = 4011 Or cPref4 = 4389 Or cPref4 = 4514 Or cPref4 = 4576 Or cPref4 = 5041 Or cPref4 = 5066 Or cPref4 = 5090 Or cPref4 = 6277 Or cPref4 = 6362: cBandeira = "Elo"
+            Case (cPref2 = 38 Or cPref2 = 60 Or cPref2 = 62) And nLen > 13: cBandeira = "Hipercard"
+            Case Else: cBandeira = "Desconhecida"
+        End Select
+        
+        Validar_CartaoCredito = True
+        If lMES Then MsgBox "Bandeira: " & cBandeira, vbInformation, "Validação de Cartão"
+    Else
+        Validar_CartaoCredito = False
+        cBandeira = ""
+        If lMES Then MsgBox "Número de Cartão Inválido", vbExclamation, "Validação de Cartão"
     End If
-  End If
-
-  Validar_CartaoCredito = bolRetorno
 End Function
-
 Public Function Validar_CodigoBarras(ByVal CodigoBarras As String) As Boolean
   Dim bolRetorno As Boolean
 
