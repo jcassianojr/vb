@@ -237,12 +237,12 @@ Private WithEvents m_oWebView2 As cWebView2
 Attribute m_oWebView2.VB_VarHelpID = -1
 
 Private Sub Form_Load()
-    Dim hResult
+    Dim HRESULT
     bJaInicializado = False
     
     Set m_oWebView2 = New cWebView2
 '    m_oWebView2.BindTo picHost.hwnd, , , , "--allow-run-as-system", , False, True, False
-     hResult = m_oWebView2.BindTo(picHost.hwnd, , , , "--allow-run-as-system --allow-file-access-from-files --disable-web-security", , False, True, False)
+     HRESULT = m_oWebView2.BindTo(picHost.hWnd, , , , "--allow-run-as-system --allow-file-access-from-files --disable-web-security", , False, True, False)
 End Sub
 
 Private Sub Form_Activate()
@@ -251,10 +251,10 @@ Private Sub Form_Activate()
 End Sub
 Private Sub cmdSavejson_Click()
     Dim sFileName As String
-    Dim sFILTER As String
+    Dim sFilter As String
     Dim sJson As String
-    sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
-    sFileName = FileSave(Me, sFILTER, 1, "json", , , "Salvar json Como")
+    sFilter = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
+    sFileName = FileSave(Me, sFilter, 1, "json", , , "Salvar json Como")
     
     sJson = m_oWebView2.jsProp("JSON.stringify(Array.from(document.querySelectorAll('tr')).map(r => Array.from(r.querySelectorAll('td')).map(c => c.innerText)))")
     If sFileName <> "" Then
@@ -263,10 +263,10 @@ Private Sub cmdSavejson_Click()
 End Sub
 Private Sub cmdSaveMD_Click()
     Dim sFileName As String
-    Dim sFILTER As String
+    Dim sFilter As String
     Dim sMarkdown As String
-    sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
-    sFileName = FileSave(Me, sFILTER, 1, "md", , , "Salvar md Como")
+    sFilter = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
+    sFileName = FileSave(Me, sFilter, 1, "md", , , "Salvar md Como")
     sMarkdown = m_oWebView2.jsProp("turndownService.turndown(document.getElementById('content').innerHTML)")
     If sFileName <> "" Then
         FileWrite sFileName, sMarkdown
@@ -321,9 +321,9 @@ End Sub
 
 Private Sub cmdSavehtml_Click()
     Dim sFileName As String
-    Dim sFILTER As String
-    sFILTER = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
-    sFileName = FileSave(Me, sFILTER, 1, "HTML", , , "Salvar HTML Como")
+    Dim sFilter As String
+    sFilter = "Arquivos de Textos (*.HTML)" & vbNullChar & "*.HTML" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
+    sFileName = FileSave(Me, sFilter, 1, "HTML", , , "Salvar HTML Como")
     
     If sFileName <> "" Then
         FileWrite sFileName, m_oWebView2.jsProp("document.documentElement.outerHTML")
@@ -332,9 +332,9 @@ End Sub
 
 Private Sub cmdSaveTXT_Click()
     Dim sFileName As String
-    Dim sFILTER As String
-    sFILTER = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
-    sFileName = FileSave(Me, sFILTER, 1, "TXT", , , "Salvar TXT Como")
+    Dim sFilter As String
+    sFilter = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
+    sFileName = FileSave(Me, sFilter, 1, "TXT", , , "Salvar TXT Como")
     
     If sFileName <> "" Then
         FileWrite sFileName, m_oWebView2.jsProp("document.body.innerText")
@@ -342,14 +342,14 @@ Private Sub cmdSaveTXT_Click()
 End Sub
 
 Private Sub cmdSavejpg_Click()
-    Dim sFILTER As String
+    Dim sFilter As String
     Dim sFileName As String
     Dim sSugestaoNome As String
     Dim sBase64JPG As String
     
     sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
-    sFILTER = "Imagem JPG (*.jpg;*.jpeg)|*.jpg;*.jpeg|Todos Arquivos (*.*)|*.*"
-    sFileName = FileSave(Me, sFILTER, 1, "JPG", sSugestaoNome, , "Salvar Como Imagem JPG")
+    sFilter = "Imagem JPG (*.jpg;*.jpeg)|*.jpg;*.jpeg|Todos Arquivos (*.*)|*.*"
+    sFileName = FileSave(Me, sFilter, 1, "JPG", sSugestaoNome, , "Salvar Como Imagem JPG")
     
     If sFileName <> "" Then
         sBase64JPG = m_oWebView2.jsProp("document.getElementById('zplCanvas').toDataURL('image/jpeg', 0.9)")
@@ -358,14 +358,14 @@ Private Sub cmdSavejpg_Click()
 End Sub
 
 Private Sub cmdSavePNG_Click()
-    Dim sFILTER As String
+    Dim sFilter As String
     Dim sFileName As String
     Dim sSugestaoNome As String
     Dim sBase64PNG As String
     
     sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
-    sFILTER = "Imagem PNG (*.png)|*.png|Todos Arquivos (*.*)|*.*"
-    sFileName = FileSave(Me, sFILTER, 1, "PNG", sSugestaoNome, , "Salvar Como Imagem PNG")
+    sFilter = "Imagem PNG (*.png)|*.png|Todos Arquivos (*.*)|*.*"
+    sFileName = FileSave(Me, sFilter, 1, "PNG", sSugestaoNome, , "Salvar Como Imagem PNG")
     
     If sFileName <> "" Then
         sBase64PNG = m_oWebView2.jsProp("document.getElementById('zplCanvas').toDataURL('image/png')")
@@ -374,7 +374,7 @@ Private Sub cmdSavePNG_Click()
 End Sub
 
 Private Sub CmdSavePDF_Click()
-    Dim sFILTER As String
+    Dim sFilter As String
     Dim sFileName As String
     Dim sSugestaoNome As String
     Dim vResult         As Variant
@@ -382,8 +382,8 @@ Private Sub CmdSavePDF_Click()
     
     On Error GoTo ErroSavePDF
     sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
-    sFILTER = "Documento PDF (*.pdf)|*.pdf|Todos Arquivos (*.*)|*.*"
-    sFileName = FileSave(Me, sFILTER, 1, "PDF", sSugestaoNome, , "Salvar Como PDF")
+    sFilter = "Documento PDF (*.pdf)|*.pdf|Todos Arquivos (*.*)|*.*"
+    sFileName = FileSave(Me, sFilter, 1, "PDF", sSugestaoNome, , "Salvar Como PDF")
     
     If sFileName = "" Then Exit Sub
     
@@ -401,12 +401,12 @@ ErroSavePDF:
 End Sub
 
 Private Sub cmdsavedoc_Click()
-    Dim sFILTER As String
+    Dim sFilter As String
     Dim sFileName As String
     Dim sSugestaoNome As String
     sSugestaoNome = NomeArq(mvarCaminhoArquivo, True)
-    sFILTER = "Documento do Word (*.doc)|*.doc|Documento PDF (*.pdf)|*.pdf|Todos Arquivos (*.*)|*.*"
-    sFileName = FileSave(Me, sFILTER, 1, "DOC", sSugestaoNome, , "Salvar Documento Como")
+    sFilter = "Documento do Word (*.doc)|*.doc|Documento PDF (*.pdf)|*.pdf|Todos Arquivos (*.*)|*.*"
+    sFileName = FileSave(Me, sFilter, 1, "DOC", sSugestaoNome, , "Salvar Documento Como")
     If sFileName = "" Then Exit Sub
     
     If InStr(1, sFileName, ".pdf", vbTextCompare) > 0 Then
@@ -461,10 +461,10 @@ Private Sub chamamotor_click()
         cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
-        Me.Caption = "Manual de Ajuda - " & NomeArq(mvarCaminhoArquivo, False)
+       Me.Caption = "Manual de Ajuda - " & NomeArq(mvarCaminhoArquivo, False)
         If IsArquivoChmDisfarcado(mvarCaminhoArquivo) Then
            Call RenderizarMotorChmLocal(mvarCaminhoArquivo)
-           '    m_oWebView2.Navigate "its:" & mvarCaminhoArquivo & "::/"
+        Else
            Call RenderizarMotorHlpLocal
         End If
       
@@ -492,13 +492,13 @@ Private Sub chamamotor_click()
         Me.Caption = "Visualizador RTF - " & NomeArq(mvarCaminhoArquivo, False)
         Call RenderizarMotorRtfLocal
         
-    ElseIf cEXT = "docx" Or cEXT = "doc" Or cEXT = "odt" Then
+    ElseIf cEXT = "docx" Then
         cmdSavehtml.Visible = True
         cmdSaveTXT.Visible = True
         cmdSavePNG.Visible = False
         cmdSavejpg.Visible = False
         cmdsavedoc.Visible = False
-        Me.Caption = "Visualizador de Documentos - " & NomeArq(mvarCaminhoArquivo, False)
+         Me.Caption = "Visualizador de Documentos - " & NomeArq(mvarCaminhoArquivo, False)
         Call RenderizarMotorDocLocal
         
     ElseIf cEXT = "md" Or cEXT = "markdown" Then
@@ -749,98 +749,39 @@ Private Sub RenderizarMotorRtfLocalold()
     m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\\", "/")
     Set fso = Nothing
 End Sub
-
 Private Sub RenderizarMotorDelimitadoLocal(ByVal cCaminhoTxt As String)
     Dim fso As Object, streamOut As Object
-    Dim cHtmlTempPath As String, cJsLocal As String
-    Dim sLinhas() As String, sPrimeiraLinha As String, sDelimitador As String
-    Dim lContador As Long, lMaxRepeticoes As Long, nMaxColunas As Long, i As Long, J As Long
-    Dim cConteudoBruto As String, cConteudoMD As String, cLinhaSeparador As String
+    Dim cHtmlTempPath As String
+    Dim cConteudoBruto As String, cConteudoTratado As String
     
-    ' Caminho local do arquivo JS
-    cJsLocal = App.Path & "\WebResources\marked.min.js"
-    cHtmlTempPath = App.Path & "\~marked_engine.html"
-    
-    ' 1. Leitura do arquivo
+    cHtmlTempPath = App.Path & "\~csv_engine.html"
     cConteudoBruto = LerArquivoTexto(cCaminhoTxt)
-    sLinhas = Split(cConteudoBruto, vbCrLf)
-    If UBound(sLinhas) < 0 Then Exit Sub
     
-    ' 2. Identificação automática do delimitador
-    sPrimeiraLinha = sLinhas(0)
-    sDelimitador = "," ' Padrão
-    lMaxRepeticoes = 0
+    ' Escapa caracteres para injeção no Template Literal do JS
+    cConteudoTratado = Replace(cConteudoBruto, "\", "\\")
+    cConteudoTratado = Replace(cConteudoTratado, "`", "\`")
+    cConteudoTratado = Replace(cConteudoTratado, "$", "\$")
     
-    ' Testa os delimitadores mais comuns
-    Dim testDelims As Variant
-    testDelims = Array("|", ";", ",", vbTab)
-    
-    Dim d As Variant
-    For Each d In testDelims
-        lContador = Len(sPrimeiraLinha) - Len(Replace(sPrimeiraLinha, d, ""))
-        If lContador > lMaxRepeticoes Then
-            lMaxRepeticoes = lContador
-            sDelimitador = d
-        End If
-    Next d
-
-    ' 3. Montagem do Markdown Table
-    Dim vColunas As Variant
-    vColunas = Split(sPrimeiraLinha, sDelimitador)
-    nMaxColunas = UBound(vColunas)
-    
-    ' Cabeçalho
-    cConteudoMD = "|"
-    For J = 0 To nMaxColunas
-        cConteudoMD = cConteudoMD & " Col " & (J + 1) & " |"
-    Next J
-    cConteudoMD = cConteudoMD & vbCrLf & "|"
-    
-    ' Separador
-    For J = 0 To nMaxColunas
-        cConteudoMD = cConteudoMD & " --- |"
-    Next J
-    cConteudoMD = cConteudoMD & vbCrLf
-    
-    ' Linhas de dados
-    For i = 0 To UBound(sLinhas)
-        If Trim(sLinhas(i)) <> "" Then
-            vColunas = Split(sLinhas(i), sDelimitador)
-            cConteudoMD = cConteudoMD & "|"
-            For J = 0 To nMaxColunas
-                If J <= UBound(vColunas) Then
-                    cConteudoMD = cConteudoMD & " " & Trim(vColunas(J)) & " |"
-                Else
-                    cConteudoMD = cConteudoMD & " |"
-                End If
-            Next J
-            cConteudoMD = cConteudoMD & vbCrLf
-        End If
-    Next i
-    
-    ' 4. Sanitização para injeção no JS (Template Literal)
-    cConteudoMD = Replace(cConteudoMD, "\", "\\")
-    cConteudoMD = Replace(cConteudoMD, "`", "\`")
-    cConteudoMD = Replace(cConteudoMD, "'", "\'")
-    
-    ' 5. Gravação do arquivo temporário com o renderizador
     Set fso = CreateObject("Scripting.FileSystemObject")
     Set streamOut = fso.OpenTextFile(cHtmlTempPath, 2, True)
     
-    streamOut.WriteLine "<html><head><meta charset='utf-8'>"
-    ' Carregamento 100% local do arquivo JS
-    streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\", "/") & "'></script>"
+    streamOut.WriteLine "<!DOCTYPE html><html><head><meta charset='utf-8'>"
     streamOut.WriteLine "<style>body{font-family:sans-serif;padding:20px;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ddd;padding:8px;} th{background:#eee;}</style></head>"
-    streamOut.WriteLine "<body><div id='content'></div>"
+    streamOut.WriteLine "<body><div id='content'>Gerando tabela...</div>"
     streamOut.WriteLine "<script>"
-    ' Processamento via marked
-    streamOut.WriteLine "document.getElementById('content').innerHTML = marked.parse(`" & cConteudoMD & "`);"
+    streamOut.WriteLine "const csvData = `" & cConteudoTratado & "`;"
+    ' Parser JS nativo para respeitar aspas duplas no CSV
+    streamOut.WriteLine "function parseCSV(text) { let p='', row=[''], ret=[row], i=0, r=0, s=!0, l; for (l of text) { if ('\" ' === l) { if (s && l === p) row[i] += l; s = !s; } else if (',' === l && s) l = row[++i] = ''; else if ('\\n' === l && s) { if ('\\r' === p) row[i] = row[i].slice(0, -1); row = ret[++r] = [l = '']; i = 0; } else row[i] += l; p = l; } return ret; }"
+    streamOut.WriteLine "const rows = parseCSV(csvData);"
+    streamOut.WriteLine "let html = '<table><thead><tr>';"
+    streamOut.WriteLine "if(rows.length > 0) { rows[0].forEach(h => html += '<th>' + h + '</th>'); html += '</tr></thead><tbody>'; }"
+    streamOut.WriteLine "for(let j=1; j<rows.length; j++) { if(rows[j].join('').trim() !== '') { html += '<tr>'; rows[j].forEach(c => html += '<td>' + c + '</td>'); html += '</tr>'; } }"
+    streamOut.WriteLine "html += '</tbody></table>';"
+    streamOut.WriteLine "document.getElementById('content').innerHTML = html;"
     streamOut.WriteLine "</script></body></html>"
     streamOut.Close
     
-    ' 6. Navegação
     m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
-    
     Set fso = Nothing
 End Sub
 Private Sub RenderizarMotorDocLocal()
@@ -907,25 +848,40 @@ Sair:
 End Function
 
 Private Sub RenderizarMotorChmLocal(ByVal cCaminhoCHM As String)
-    Dim sTempPath As String
-    Dim objShell As Object
-    Dim objFSO As Object
+    Dim sTempPath As String, sArquivoPrincipal As String
+    Dim objShell As Object, objFSO As Object, f As Object
     
-    ' Define uma pasta temporária para descompactar o CHM
     sTempPath = Environ("TEMP") & "\~chm_view_temp"
-    
     Set objFSO = CreateObject("Scripting.FileSystemObject")
     If Not objFSO.FolderExists(sTempPath) Then objFSO.CreateFolder sTempPath
     
-    ' Usa o Shell.Application para descompactar o CHM (o CHM é tecnicamente um arquivo cab/zipado)
     Set objShell = CreateObject("Shell.Application")
-    ' Copia tudo de dentro do CHM para a pasta temporária
     objShell.NameSpace(sTempPath).CopyHere objShell.NameSpace(cCaminhoCHM).Items
     
-    ' Após extrair, navegamos para o primeiro arquivo encontrado ou um índice padrão
-    ' Nota: Muitos CHMs têm um arquivo chamado 'index.html' ou 'default.html' na raiz
-    ' Se não souber o nome, você pode listar os arquivos da pasta temporária.
-    m_oWebView2.Navigate "file:///" & Replace(sTempPath & "\index.html", "\", "/")
+    ' Busca os arquivos padrões de entrada quebrando a linha após o "Then"
+    If objFSO.FileExists(sTempPath & "\index.html") Then
+        sArquivoPrincipal = "\index.html"
+    ElseIf objFSO.FileExists(sTempPath & "\default.html") Then
+        sArquivoPrincipal = "\default.html"
+    ElseIf objFSO.FileExists(sTempPath & "\default.htm") Then
+        sArquivoPrincipal = "\default.htm"
+    ElseIf objFSO.FileExists(sTempPath & "\index.htm") Then
+        sArquivoPrincipal = "\index.htm"
+    Else
+        ' Fallback genérico: pega o primeiro HTML que encontrar na raiz
+        For Each f In objFSO.GetFolder(sTempPath).Files
+            If LCase(objFSO.GetExtensionName(f.Name)) = "html" Or LCase(objFSO.GetExtensionName(f.Name)) = "htm" Then
+                sArquivoPrincipal = "\" & f.Name
+                Exit For
+            End If
+        Next f
+    End If
+    
+    If sArquivoPrincipal <> "" Then
+        m_oWebView2.Navigate "file:///" & Replace(sTempPath & sArquivoPrincipal, "\", "/")
+    Else
+        m_oWebView2.NavigateToString "<html><body><h3>Falha ao localizar índice do CHM.</h3></body></html>"
+    End If
     
     Set objShell = Nothing
     Set objFSO = Nothing
