@@ -154,8 +154,7 @@ End Function
 ' +  Função: UniversalToDate
 ' +  Objetivo: Garantir a leitura correta de datas em múltiplos formatos
 ' +            (DD/MM/YY, DD-MM-YYYY, DD.MM.YY, AAAAMMDD, YYYY-MM-DD)
-' +  Atualização: Inteligência para datas sem zeros (ex: 5/3/2021)
-' +               usando a matriz de separadores (Split).
+' +            e formatos HTTP/Extensos (Ex: Fri, 05 Jun 2026 ou 05 Junho 2026)
 ' +  Retorno:  Date (Retorna a data correspondente ou 0 se for inválida/vazia)
 ' +--------------------------------------------------------------------
 Public Function UniversalToDate(ByVal xData As Variant) As Date
@@ -167,6 +166,12 @@ Public Function UniversalToDate(ByVal xData As Variant) As Date
     Dim sMes As String
     Dim sDia As String
     Dim nLEN As Integer
+    
+    ' Variáveis para o bloco de datas Extensas/HTTP
+    Dim cHttpTemp As String
+    Dim aHttpParts() As String
+    Dim posVirgula As Integer
+    Dim cMesStr As String
     
     ' 1. Se já for do tipo Date nativo do VB6, retorna ela mesma
     If VarType(xData) = vbDate Then
@@ -187,6 +192,51 @@ Public Function UniversalToDate(ByVal xData As Variant) As Date
         Exit Function
     End If
     
+    ' -------------------------------------------------------------------------
+    ' >>> INÍCIO DO NOVO BLOCO: Trata formatos HTTP/Extensos <<<
+    ' (ex: "FRI, 05 JUN 2026...", "05 JUNHO 2026...")
+    ' -------------------------------------------------------------------------
+    cHttpTemp = cData
+    posVirgula = InStr(cHttpTemp, ",")
+    
+    ' Se tiver vírgula (ex: "FRI,"), removemos ela e o dia da semana
+    If posVirgula > 0 Then
+        cHttpTemp = Trim$(Mid$(cHttpTemp, posVirgula + 1))
+    End If
+    
+    ' Quebra pelos espaços
+    aHttpParts = Split(cHttpTemp, " ")
+    
+    ' Se tem pelo menos 3 partes (Dia, Mês, Ano), tentamos validar
+    If UBound(aHttpParts) >= 2 Then
+        cMesStr = UCase$(Left$(aHttpParts(1), 3))
+        sMes = "00"
+        
+        Select Case cMesStr
+            Case "JAN": sMes = "01"
+            Case "FEB", "FEV": sMes = "02"
+            Case "MAR": sMes = "03"
+            Case "APR", "ABR": sMes = "04"
+            Case "MAY", "MAI": sMes = "05"
+            Case "JUN": sMes = "06"
+            Case "JUL": sMes = "07"
+            Case "AUG", "AGO": sMes = "08"
+            Case "SEP", "SET": sMes = "09"
+            Case "OCT", "OUT": sMes = "10"
+            Case "NOV": sMes = "11"
+            Case "DEC", "DEZ": sMes = "12"
+        End Select
+        
+        ' Se encontrou um mês válido e o ano tem 4 dígitos, retorna direto
+        If sMes <> "00" And Len(aHttpParts(2)) = 4 Then
+            UniversalToDate = DateSerial(Val(aHttpParts(2)), Val(sMes), Val(aHttpParts(0)))
+            Exit Function
+        End If
+    End If
+    ' -------------------------------------------------------------------------
+    ' >>> FIM DO NOVO BLOCO <<<
+    ' -------------------------------------------------------------------------
+
     ' Se houver hora grudada na string limpa (separada por espaço), pega apenas a parte da data
     If InStr(cData, " ") > 0 Then
         cData = Trim$(Split(cData, " ")(0))
@@ -233,7 +283,6 @@ Public Function UniversalToDate(ByVal xData As Variant) As Date
     End If
     ' >>> FIM DA MELHORIA <<<
     
-    
     ' 4. Se chegou aqui, não há separadores (veio tudo grudado).
     ' Removemos as sobras e analisamos a sequência numérica pura.
     cLimpa = Replace(cData, "/", "")
@@ -269,7 +318,6 @@ Public Function UniversalToDate(ByVal xData As Variant) As Date
             End If
     End Select
 End Function
-
 ' +--------------------------------------------------------------------
 ' +  Função: C_Data
 ' +  Objetivo: Nova função para converter e validar strings de data com segurança.
