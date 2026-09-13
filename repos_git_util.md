@@ -1,46 +1,45 @@
-vb flexgrid common.bas
+vb flexgrid common.bas   
 https://github.com/Kr00l/VBFLXGRD.git
 
-vb common controls common.bas
+vb common controls common.bas   
 https://github.com/Kr00l/VBCCR.git
 
-vb extra
+vb extra   
 https://github.com/xxdoc/vbExtra 
 
-vb sqllite common.bas
+vb sqllite common.bas   
 https://github.com/Kr00l/VBSQLite
 
-vb newtab
+vb newtab   
 https://github.com/EduardoVB/NewTab
 
-cWEBIEW2
+cWEBIEW2   
 https://github.com/wqweto/cWebView2
 
-TC6
+TC6   
 https://github.com/wqweto/TC6
 
-Bsprinter
+Bsprinter   
 https://www.balkesoft.com/
 
-sqlite4vb
+sqlite4vb   
 https://github.com/dzzie/sqllite4vb
 
-oleexp olegui
+oleexp olegui   
 https://github.com/fafalone/WinDevLib
 
-cziparchive
+cziparchive   
 https://github.com/wqweto/ZipArchive
 
-clsosinfo
+clsosinfo   
 https://github.com/fafalone/OSInfo
 
-vbrichclient RC6
+vbrichclient RC6   
 https://www.vbrichclient.com/en/Downloads.htm
 
 PCRE - Perl Compatible Regular Expressions
-https://github.com/PCRE2Project/pcre2
-https://www.pcre.org/
+- https://github.com/PCRE2Project/pcre2
+- https://www.pcre.org/
 
-
-ZPL
+ZPL   
 https://github.com/brunoleocam/ZPL2PDF
