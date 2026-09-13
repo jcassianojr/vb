@@ -183,6 +183,8 @@ End Enum
     Private Declare Function GetLastError Lib "kernel32" () As Long
     Private Declare Function FormatMessageW Lib "kernel32.dll" (ByVal dwFlags As Long, ByRef lpSource As Any, ByVal dwMessageId As Long, ByVal dwLanguageId As Long, ByVal lpBuffer As Long, ByVal nSize As Long, ByRef Arguments As Long) As Long
 #End If
+Private Declare Function vbaStrComp Lib "msvbvm60" Alias "__vbaStrComp" (ByVal Compare As VbCompareMethod, ByVal String2 As LongPtr, ByVal String1 As LongPtr) As Long
+'
 Public Function UTF8ToVBString(ByVal sUTF8 As String) As String
     Dim nLEN As Long
     Dim sBuffer As String
@@ -261,9 +263,9 @@ Public Function ComboLostFocus(ByRef Combo1)
 Dim strPartial
 Dim i
   With Combo1
-    If Len(.tEXT) Then
+    If Len(.Text) Then
       'Procura pelo texto digitado
-      strPartial = .tEXT
+      strPartial = .Text
       i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
@@ -331,7 +333,7 @@ Dim j
 Dim m_bEditFromCode
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .tEXT
+    strPartial = .Text
     i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
@@ -1515,7 +1517,7 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
   End If
 End Sub
 Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
@@ -1975,10 +1977,10 @@ Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean
   cTEXTO = CharCodesToHTML(cTEXTO)
   str2html = cTEXTO
 End Function
-Function FileText(ByVal FileName As String) As String
+Function FileText(ByVal filename As String) As String
   Dim Handle As Integer
   Handle = FreeFile
-  Open FileName$ For Input As #Handle
+  Open filename$ For Input As #Handle
   FileText = Input$(LOF(Handle), Handle)
   Close #Handle
 End Function
@@ -2004,16 +2006,16 @@ Public Function HtmlToText(sHTML As String) As String
 End Function
 Public Function FindInList(ByRef cList As ListBox, sSearch As String) As Long
   Dim sString As String
-  Dim id As Integer
+  Dim ID As Integer
 
   On Error Resume Next
   Err.Clear
   FindInList = -1
 
-  For id = 0 To cList.ListCount - 1
-    sString = UCase$(cList.List(id))
+  For ID = 0 To cList.ListCount - 1
+    sString = UCase$(cList.List(ID))
     If sString = UCase$(sSearch) Then
-      FindInList = id
+      FindInList = ID
       Exit For
     End If
   Next
@@ -2109,12 +2111,12 @@ Public Function MachineName() As String
     End If
     Set oShell = Nothing
 End Function
-Public Function WordLen(ByRef tEXT As String) As Long
+Public Function WordLen(ByRef Text As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
+  Bytes = StrConv(UCase$(Text), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next
