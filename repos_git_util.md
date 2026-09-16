@@ -42,4 +42,5 @@ PCRE - Perl Compatible Regular Expressions
 - https://www.pcre.org/
 
 ZPL   
-https://github.com/brunoleocam/ZPL2PDF
+https://github.com/brunoleocam/ZPL2PDF  
+https://github.com/BinaryKits/BinaryKits.Zpl
