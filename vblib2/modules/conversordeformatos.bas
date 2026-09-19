@@ -1,48 +1,122 @@
 Attribute VB_Name = "conversordeformatos"
-' +--------------------------------------------------------------------
-' + Parsers Universais de BBCode (Semelhantes ao Harbour)
-' +--------------------------------------------------------------------
-Public Function ParseEscapeToBBCode(ByVal cLINHA As String) As String
+'Public Sub PrintRTF(RTF As RichTextBox, LeftMarginWidth As Long, _
+'   TopMarginHeight, RightMarginWidth, BottomMarginHeight)
+
+
+   
+   
+ '  Dim LeftOffset As Long, TopOffset As Long
+ '  Dim LeftMargin As Long, TopMargin As Long
+ '  Dim RightMargin As Long, BottomMargin As Long
+ '  Dim fr
+ '  Dim rcDrawTo As RECT
+ '  Dim rcPage As RECT
+ '  Dim TextLength As Long
+ '  Dim NextCharPosition As Long
+ '  Dim r As Long
+
+   ' Start a print job to get a valid Printer.hDC
+  ' Printer.Print Space(1)
+  ' Printer.ScaleMode = vbTwips
+
+   ' Get the offsett to the printable area on the page in twips
+  ' LeftOffset = Printer.ScaleX(GetDeviceCaps(Printer.hDC, _
+  '    PHYSICALOFFSETX), vbPixels, vbTwips)
+  ' TopOffset = Printer.ScaleY(GetDeviceCaps(Printer.hDC, _
+  '    PHYSICALOFFSETY), vbPixels, vbTwips)
+
+   ' Calculate the Left, Top, Right, and Bottom margins
+  ' LeftMargin = LeftMarginWidth - LeftOffset
+  ' TopMargin = TopMarginHeight - TopOffset
+  ' RightMargin = (Printer.Width - RightMarginWidth) - LeftOffset
+  ' BottomMargin = (Printer.Height - BottomMarginHeight) - TopOffset
+
+   ' Set printable area rect
+   'rcPage.Left = 0
+   'rcPage.Top = 0
+   'rcPage.Right = Printer.ScaleWidth
+   'rcPage.Bottom = Printer.ScaleHeight
+
+   ' Set rect in which to print (relative to printable area)
+   'rcDrawTo.Left = LeftMargin
+   'rcDrawTo.Top = TopMargin
+   'rcDrawTo.Right = RightMargin
+   'rcDrawTo.Bottom = BottomMargin
+
+   ' Set up the print instructions
+   'fr.hDC = Printer.hDC   ' Use the same DC for measuring and rendering
+   'fr.hdcTarget = Printer.hDC  ' Point at printer hDC
+   'fr.RC = rcDrawTo            ' Indicate the area on page to draw to
+   'fr.rcPage = rcPage          ' Indicate entire size of page
+   'fr.chrg.cpMin = 0           ' Indicate start of text through
+   'fr.chrg.cpMax = -1          ' end of the text
+
+   ' Get length of text in RTF
+   'TextLength = Len(RTF.tEXT)
+
+   ' Loop printing each page until done
+   'Do
+      ' Print the page by sending EM_FORMATRANGE message
+    '  NextCharPosition = SendMessage(RTF.hWnd, EM_FORMATRANGE, True, fr)
+    '  If NextCharPosition >= TextLength Then Exit Do  'If done then exit
+    '  fr.chrg.cpMin = NextCharPosition ' Starting position for next page
+    '  Printer.NewPage                  ' Move on to next page
+    '  Printer.Print Space(1) ' Re-initialize hDC
+    '  fr.hDC = Printer.hDC
+    '  fr.hdcTarget = Printer.hDC
+   'Loop
+
+   ' Commit the print job
+   'Printer.EndDoc
+
+   ' Allow the RTF to free up memory
+   'r = SendMessage(RTF.hWnd, EM_FORMATRANGE, False, ByVal CLng(0))
+
+
+
+'End Sub 'errorhandled
+
+Public Function ParseEscapeToBBCode(ByVal cLinha As String) As String
     ' 1. Epson / Genéricas Matriciais
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(69), "[B]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(70), "[/B]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(45) & Chr(0), "[U]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(45) & Chr(1), "[/U]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(52), "[I]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(53), "[/I]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(69), "[B]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(70), "[/B]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(45) & Chr(0), "[U]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(45) & Chr(1), "[/U]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(52), "[I]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(53), "[/I]")
     
     ' Tamanhos
-    cLINHA = Replace(cLINHA, Chr(14) & Chr(15), "[SIZE=12][B]")
-    cLINHA = Replace(cLINHA, Chr(15), "[SIZE=8]")
-    cLINHA = Replace(cLINHA, Chr(18), "[SIZE=12]")
-    cLINHA = Replace(cLINHA, Chr(14), "[SIZE=14]")
-    cLINHA = Replace(cLINHA, Chr(20), "[SIZE=12]")
+    cLinha = Replace(cLinha, Chr(14) & Chr(15), "[SIZE=12][B]")
+    cLinha = Replace(cLinha, Chr(15), "[SIZE=8]")
+    cLinha = Replace(cLinha, Chr(18), "[SIZE=12]")
+    cLinha = Replace(cLinha, Chr(14), "[SIZE=14]")
+    cLinha = Replace(cLinha, Chr(20), "[SIZE=12]")
     
     ' 2. HP Deskjet / Laser
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(40) & Chr(115) & "16" & Chr(72), "[SIZE=12]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(40) & Chr(115) & "12" & Chr(72), "[SIZE=8]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(40) & Chr(115) & "23" & Chr(72), "[SIZE=14]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(40) & Chr(115) & Chr(51) & Chr(66), "[B]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(40) & Chr(115) & Chr(45) & Chr(51) & Chr(66), "[/B]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(38) & Chr(107) & Chr(50) & Chr(83), "[SIZE=12]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(38) & Chr(107) & Chr(48) & Chr(83), "[SIZE=8]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(40) & Chr(115) & Chr(48) & Chr(66), "[/B]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(40) & Chr(115) & "16" & Chr(72), "[SIZE=12]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(40) & Chr(115) & "12" & Chr(72), "[SIZE=8]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(40) & Chr(115) & "23" & Chr(72), "[SIZE=14]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(40) & Chr(115) & Chr(51) & Chr(66), "[B]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(40) & Chr(115) & Chr(45) & Chr(51) & Chr(66), "[/B]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(38) & Chr(107) & Chr(50) & Chr(83), "[SIZE=12]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(38) & Chr(107) & Chr(48) & Chr(83), "[SIZE=8]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(40) & Chr(115) & Chr(48) & Chr(66), "[/B]")
 
     ' 3. Lexmark
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(38) & Chr(107) & Chr(50) & Chr(83) & Chr(27) & Chr(38) & Chr(108) & "8" & Chr(68) & Chr(27) & Chr(38) & Chr(108) & "90" & Chr(80), "[SIZE=12]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(38) & Chr(107) & Chr(52) & Chr(83) & Chr(27) & Chr(38) & Chr(108) & "5" & Chr(68) & Chr(27) & Chr(38) & Chr(108) & "66" & Chr(80), "[SIZE=8]")
-    cLINHA = Replace(cLINHA, Chr(27) & Chr(40) & Chr(115) & "23" & Chr(72) & Chr(27) & Chr(38) & Chr(108) & "10" & Chr(68) & Chr(27) & Chr(38) & Chr(108) & "90" & Chr(80), "[SIZE=14]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(38) & Chr(107) & Chr(50) & Chr(83) & Chr(27) & Chr(38) & Chr(108) & "8" & Chr(68) & Chr(27) & Chr(38) & Chr(108) & "90" & Chr(80), "[SIZE=12]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(38) & Chr(107) & Chr(52) & Chr(83) & Chr(27) & Chr(38) & Chr(108) & "5" & Chr(68) & Chr(27) & Chr(38) & Chr(108) & "66" & Chr(80), "[SIZE=8]")
+    cLinha = Replace(cLinha, Chr(27) & Chr(40) & Chr(115) & "23" & Chr(72) & Chr(27) & Chr(38) & Chr(108) & "10" & Chr(68) & Chr(27) & Chr(38) & Chr(108) & "90" & Chr(80), "[SIZE=14]")
 
     ' 4. Comandos de Estrutura
-    cLINHA = Replace(cLINHA, Chr(12), "[PAGE]")
-    cLINHA = Replace(cLINHA, "##page##", "[PAGE]", , , vbTextCompare)
+    cLinha = Replace(cLinha, Chr(12), "[PAGE]")
+    cLinha = Replace(cLinha, "##page##", "[PAGE]", , , vbTextCompare)
     
-    ParseEscapeToBBCode = cLINHA
+    ParseEscapeToBBCode = cLinha
 End Function
 
-Public Function ParseBBCodeToHTML(ByVal cLINHA As String) As String
+Public Function ParseBBCodeToHTML(ByVal cLinha As String) As String
     Dim cResult As String
-    cResult = cLINHA
+    cResult = cLinha
     
     ' Tags diretas
     cResult = Replace(cResult, "[B]", "<b>", , , vbTextCompare)
@@ -62,9 +136,9 @@ Public Function ParseBBCodeToHTML(ByVal cLINHA As String) As String
     ParseBBCodeToHTML = cResult
 End Function
 
-Public Function ParseBBCodeToRTF(ByVal cLINHA As String) As String
+Public Function ParseBBCodeToRTF(ByVal cLinha As String) As String
     Dim cResult As String
-    cResult = cLINHA
+    cResult = cLinha
     cResult = Replace(cResult, "[B]", "\b ", , , vbTextCompare)
     cResult = Replace(cResult, "[/B]", "\b0 ", , , vbTextCompare)
     cResult = Replace(cResult, "[I]", "\i ", , , vbTextCompare)
@@ -84,10 +158,10 @@ End Function
 
 ' Um limpador exclusivo para TXT. Tira lixo, mas NÃO DESTRÓI os colchetes do BBCode!
 Public Function TiraControlChars(ByVal texto As String) As String
-    Dim X As Integer
-    For X = 0 To 31
-        If X <> 10 And X <> 13 Then
-            texto = Replace(texto, Chr(X), "")
+    Dim x As Integer
+    For x = 0 To 31
+        If x <> 10 And x <> 13 Then
+            texto = Replace(texto, Chr(x), "")
         End If
     Next
     TiraControlChars = texto
@@ -96,7 +170,7 @@ End Function
 
 Public Function txttopdf(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
     Dim fso As Object, streamIn As Object, pdf As ClsFPDF
-    Dim cLINHA As String
+    Dim cLinha As String
     Dim nMargemEsquerda As Single, nLinhaAtual As Single
     Dim nAlturaLinha As Single, nLimiteInferior As Single
     
@@ -119,20 +193,20 @@ Public Function txttopdf(ByVal cOrigem As String, Optional ByVal cDestino As Str
     nAlturaLinha = 5: nLimiteInferior = 275
     
     Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
+        cLinha = streamIn.ReadLine
         
         ' 1. Converte lixo HP/Epson em [B], [PAGE], etc.
-        cLINHA = ParseEscapeToBBCode(cLINHA)
+        cLinha = ParseEscapeToBBCode(cLinha)
         ' 2. Limpa resto dos binarios preservando a formatação BBCode recém criada!
-        cLINHA = TiraControlChars(cLINHA)
+        cLinha = TiraControlChars(cLinha)
         
         ' 3. Aplica logica de salto de página
-        If InStr(1, cLINHA, "[PAGE]", vbTextCompare) > 0 Then
+        If InStr(1, cLinha, "[PAGE]", vbTextCompare) > 0 Then
             pdf.AddPage
             nLinhaAtual = 15
         Else
             ' Chama o novo metodo de parsing direto no motor do PDF
-            pdf.PrintBBCodeLine cLINHA, nMargemEsquerda, nLinhaAtual
+            pdf.PrintBBCodeLine cLinha, nMargemEsquerda, nLinhaAtual
             
             nLinhaAtual = nLinhaAtual + nAlturaLinha
             If nLinhaAtual > nLimiteInferior Then
@@ -155,7 +229,7 @@ End Function
 
 Public Function txttohtml(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
     Dim fso As Object, streamIn As Object, streamOut As Object
-    Dim cLINHA As String
+    Dim cLinha As String
     If Not FileConnExist(cOrigem, True) Then Exit Function
     If Len(cDestino) = 0 Then cDestino = TrocaExt(cOrigem, "HTML")
     If Len(cAUTOR) = 0 Then cAUTOR = "Sistema"
@@ -169,13 +243,13 @@ Public Function txttohtml(ByVal cOrigem As String, Optional ByVal cDestino As St
     streamOut.Write "<html><head><title>" & cTITULO & "</title></head><body><pre>" & vbCrLf
     
     Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        cLINHA = ParseEscapeToBBCode(cLINHA)
-        cLINHA = TiraControlChars(cLINHA)
-        cLINHA = str2html(cLINHA)
-        cLINHA = ParseBBCodeToHTML(cLINHA) ' Aplica estilos HTML <b>
+        cLinha = streamIn.ReadLine
+        cLinha = ParseEscapeToBBCode(cLinha)
+        cLinha = TiraControlChars(cLinha)
+        cLinha = str2html(cLinha)
+        cLinha = ParseBBCodeToHTML(cLinha) ' Aplica estilos HTML <b>
         
-        streamOut.Write cLINHA & vbCrLf
+        streamOut.Write cLinha & vbCrLf
     Loop
     streamOut.Write "</pre></body></html>"
     txttohtml = True
@@ -190,7 +264,7 @@ End Function
 
 Public Function txttortf(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
     Dim fso As Object, streamIn As Object, streamOut As Object
-    Dim cLINHA As String
+    Dim cLinha As String
     If Not FileConnExist(cOrigem, True) Then Exit Function
     If Len(cDestino) = 0 Then cDestino = TrocaExt(cOrigem, "RTF")
     
@@ -202,18 +276,18 @@ Public Function txttortf(ByVal cOrigem As String, Optional ByVal cDestino As Str
     streamOut.Write "{\rtf1\ansi\ansicpg1252\deff0\deflang1031{\fonttbl{\f0\fmodern\fprq1 Courier New;}}\viewkind4\uc1\pard\f0\fs20 "
     
     Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        cLINHA = ParseEscapeToBBCode(cLINHA)
-        cLINHA = TiraControlChars(cLINHA)
+        cLinha = streamIn.ReadLine
+        cLinha = ParseEscapeToBBCode(cLinha)
+        cLinha = TiraControlChars(cLinha)
         
         ' Escapes estruturais do RTF
-        If InStr(cLINHA, "\") > 0 Then cLINHA = Replace(cLINHA, "\", "\\")
-        If InStr(cLINHA, "{") > 0 Then cLINHA = Replace(cLINHA, "{", "\{")
-        If InStr(cLINHA, "}") > 0 Then cLINHA = Replace(cLINHA, "}", "\}")
+        If InStr(cLinha, "\") > 0 Then cLinha = Replace(cLinha, "\", "\\")
+        If InStr(cLinha, "{") > 0 Then cLinha = Replace(cLinha, "{", "\{")
+        If InStr(cLinha, "}") > 0 Then cLinha = Replace(cLinha, "}", "\}")
         
-        cLINHA = ParseBBCodeToRTF(cLINHA) ' Aplica estilos RTF \b
+        cLinha = ParseBBCodeToRTF(cLinha) ' Aplica estilos RTF \b
         
-        streamOut.Write cLINHA & "\par " & vbCrLf
+        streamOut.Write cLinha & "\par " & vbCrLf
     Loop
     streamOut.Write "\par}"
     txttortf = True
@@ -227,7 +301,7 @@ TrataErro:
 End Function
 Public Function txttoodt(ByVal cOrigem As String, Optional ByVal cDestino As String = "") As Boolean
     Dim fso As Object, streamIn As Object
-    Dim cLINHA As String
+    Dim cLinha As String
     Dim cTempDir As String, cContent As String, cManifest As String
     Dim oZip As cZipArchive
     
@@ -276,29 +350,29 @@ Public Function txttoodt(ByVal cOrigem As String, Optional ByVal cDestino As Str
                
     Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
     Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        cLINHA = ParseEscapeToBBCode(cLINHA)
-        cLINHA = TiraControlChars(cLINHA)
+        cLinha = streamIn.ReadLine
+        cLinha = ParseEscapeToBBCode(cLinha)
+        cLinha = TiraControlChars(cLinha)
         
         ' Limpeza e mapeamento básico XML
-        cLINHA = Replace(cLINHA, "&", "&amp;")
-        cLINHA = Replace(cLINHA, "<", "&lt;")
-        cLINHA = Replace(cLINHA, ">", "&gt;")
+        cLinha = Replace(cLinha, "&", "&amp;")
+        cLinha = Replace(cLinha, "<", "&lt;")
+        cLinha = Replace(cLinha, ">", "&gt;")
         
         Dim cParStyle As String
         cParStyle = ""
-        If InStr(1, cLINHA, "[PAGE]", vbTextCompare) > 0 Then
+        If InStr(1, cLinha, "[PAGE]", vbTextCompare) > 0 Then
             cParStyle = " text:style-name=""P_PageBreak"""
-            cLINHA = Replace(cLINHA, "[PAGE]", "", , , vbTextCompare)
+            cLinha = Replace(cLinha, "[PAGE]", "", , , vbTextCompare)
         End If
         
         ' Substituições rápidas de BBCode para ODT Span
-        cLINHA = Replace(cLINHA, "[B]", "<text:span text:style-name=""T_B"">", , , vbTextCompare)
-        cLINHA = Replace(cLINHA, "[/B]", "</text:span>", , , vbTextCompare)
-        cLINHA = Replace(cLINHA, "[I]", "<text:span text:style-name=""T_I"">", , , vbTextCompare)
-        cLINHA = Replace(cLINHA, "[/I]", "</text:span>", , , vbTextCompare)
+        cLinha = Replace(cLinha, "[B]", "<text:span text:style-name=""T_B"">", , , vbTextCompare)
+        cLinha = Replace(cLinha, "[/B]", "</text:span>", , , vbTextCompare)
+        cLinha = Replace(cLinha, "[I]", "<text:span text:style-name=""T_I"">", , , vbTextCompare)
+        cLinha = Replace(cLinha, "[/I]", "</text:span>", , , vbTextCompare)
         
-        cContent = cContent & "   <text:p" & cParStyle & ">" & cLINHA & "</text:p>" & vbCrLf
+        cContent = cContent & "   <text:p" & cParStyle & ">" & cLinha & "</text:p>" & vbCrLf
     Loop
     streamIn.Close
     
@@ -331,7 +405,7 @@ TrataErro:
 End Function
 Public Function txttodocx(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "") As Boolean
     Dim fso As Object, streamIn As Object
-    Dim cLINHA As String
+    Dim cLinha As String
     Dim cTempDir As String, cContent As String
     Dim oZip As cZipArchive
     
@@ -390,26 +464,26 @@ Public Function txttodocx(ByVal cOrigem As String, Optional ByVal cDestino As St
                
     Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
     Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        cLINHA = ParseEscapeToBBCode(cLINHA)
-        cLINHA = TiraControlChars(cLINHA)
+        cLinha = streamIn.ReadLine
+        cLinha = ParseEscapeToBBCode(cLinha)
+        cLinha = TiraControlChars(cLinha)
         
-        cLINHA = Replace(cLINHA, "&", "&amp;")
-        cLINHA = Replace(cLINHA, "<", "&lt;")
-        cLINHA = Replace(cLINHA, ">", "&gt;")
+        cLinha = Replace(cLinha, "&", "&amp;")
+        cLinha = Replace(cLinha, "<", "&lt;")
+        cLinha = Replace(cLinha, ">", "&gt;")
         
         Dim cRunProps As String
         cRunProps = "<w:rPr><w:rFonts w:ascii=""Courier New"" w:hAnsi=""Courier New""/></w:rPr>"
         
-        If InStr(1, cLINHA, "[B]", vbTextCompare) > 0 Then
+        If InStr(1, cLinha, "[B]", vbTextCompare) > 0 Then
             cRunProps = "<w:rPr><w:rFonts w:ascii=""Courier New"" w:hAnsi=""Courier New""/><w:b/></w:rPr>"
-            cLINHA = Replace(cLINHA, "[B]", "", , , vbTextCompare)
-            cLINHA = Replace(cLINHA, "[/B]", "", , , vbTextCompare)
+            cLinha = Replace(cLinha, "[B]", "", , , vbTextCompare)
+            cLinha = Replace(cLinha, "[/B]", "", , , vbTextCompare)
         End If
         
-        If Len(Trim(cLINHA)) = 0 Then cLINHA = " "
+        If Len(Trim(cLinha)) = 0 Then cLinha = " "
         
-        cContent = cContent & "  <w:p><w:r>" & cRunProps & "<w:t xml:space=""preserve"">" & cLINHA & "</w:t></w:r></w:p>" & vbCrLf
+        cContent = cContent & "  <w:p><w:r>" & cRunProps & "<w:t xml:space=""preserve"">" & cLinha & "</w:t></w:r></w:p>" & vbCrLf
     Loop
     streamIn.Close
     
@@ -444,7 +518,7 @@ TrataErro:
 End Function
 Public Function txttoods(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "", Optional ByVal cDELIMITADOR As String = ";") As Boolean
     Dim fso As Object, streamIn As Object
-    Dim cLINHA As String
+    Dim cLinha As String
     Dim cTempDir As String, cContent As String
     Dim oZip As cZipArchive
     Dim vCols As Variant, j As Long
@@ -491,15 +565,15 @@ Public Function txttoods(ByVal cOrigem As String, Optional ByVal cDestino As Str
                
     Set streamIn = fso.OpenTextFile(cOrigem, 1, False)
     Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        cLINHA = ParseEscapeToBBCode(cLINHA)
-        cLINHA = TiraControlChars(cLINHA)
+        cLinha = streamIn.ReadLine
+        cLinha = ParseEscapeToBBCode(cLinha)
+        cLinha = TiraControlChars(cLinha)
         
-        If Len(Trim(cLINHA)) > 0 Then
+        If Len(Trim(cLinha)) > 0 Then
             cContent = cContent & "    <table:table-row>" & vbCrLf
             
             ' Quebra os campos utilizando o delimitador (padrão ponto e vírgula)
-            vCols = Split(cLINHA, cDELIMITADOR)
+            vCols = Split(cLinha, cDELIMITADOR)
             For j = LBound(vCols) To UBound(vCols)
                 Dim cCellVal As String
                 cCellVal = Trim(vCols(j))
@@ -553,7 +627,7 @@ TrataErro:
 End Function
 Public Function txttoxls(ByVal cOrigem As String, Optional ByVal cDestino As String = "", Optional ByVal cTITULO As String = "", Optional ByVal cAUTOR As String = "", Optional ByVal cDELIMITADOR As String = ";") As Boolean
     Dim fso As Object, streamIn As Object
-    Dim cLINHA As String
+    Dim cLinha As String
     Dim cTempDir As String, cSheetData As String
     Dim oZip As cZipArchive
     Dim nRowIndex As Long
@@ -632,16 +706,16 @@ Public Function txttoxls(ByVal cOrigem As String, Optional ByVal cDestino As Str
     nRowIndex = 0
     
     Do While Not streamIn.AtEndOfStream
-        cLINHA = streamIn.ReadLine
-        cLINHA = ParseEscapeToBBCode(cLINHA)
-        cLINHA = TiraControlChars(cLINHA)
+        cLinha = streamIn.ReadLine
+        cLinha = ParseEscapeToBBCode(cLinha)
+        cLinha = TiraControlChars(cLinha)
         
-        If Len(Trim(cLINHA)) > 0 Then
+        If Len(Trim(cLinha)) > 0 Then
             nRowIndex = nRowIndex + 1
             cSheetData = cSheetData & "  <row r=""" & nRowIndex & """>" & vbCrLf
             
             ' Quebra os campos utilizando o delimitador (padrão ponto e vírgula)
-            vCols = Split(cLINHA, cDELIMITADOR)
+            vCols = Split(cLinha, cDELIMITADOR)
             For j = LBound(vCols) To UBound(vCols)
                 Dim cCellVal As String
                 cCellVal = Trim(vCols(j))
