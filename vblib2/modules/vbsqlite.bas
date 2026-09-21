@@ -1,524 +1,359 @@
 Attribute VB_Name = "sqlvbsqlite"
 Option Explicit
-' Reference=*\G{7CC1A5F1-A0FF-4546-A0F1-FBFE744A4522}#1.1#0#..\..\..\..\..\..\WINDOWS\system32\VBSQLite12.DLL#VB SQLite Library 1.2
-'vb sqllite common.bas https://github.com/Kr00l/VBSQLite
-Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-    Dim loConn As New SQLiteConnection
-    Dim DataSet As SQLiteDataSet
-    Dim vUltimo As Variant
-    
 
-    On Error GoTo Erro
-    vUltimo = eDEFAULT
-    
-    cCON = LimpaTag(cCON)
-    loConn.OpenDB cCON, SQLiteReadWrite
-    
-    VBSQLiteSetValues loConn
-    Set DataSet = loConn.OpenDataSet(cSQL)
-    
-    If Not DataSet.EOF Then
-        While Not DataSet.EOF
-            vUltimo = DataSet(cCAMPO)
-            DataSet.MoveNext
-        Wend
-    End If
-    
-    ' Trata nulo se o campo existir mas estiver vazio
-    PegUltSQLite = IIf(IsNull(vUltimo), eDEFAULT, vUltimo)
-    
-    loConn.CloseDB
-    Set DataSet = Nothing
-    Set loConn = Nothing
-    Exit Function
-    
-Erro:
+' Adaptador SQLite usado por sqlfuncoes.bas.
+' As assinaturas publicas sao mantidas compativeis com SqlFuncoesAdo.bas.
+
+Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, _
+                             ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    Dim db As SQLiteConnection
+    Dim RS As SQLiteDataSet
+    Dim v As Variant
+
+    On Error GoTo TrataErro
     PegUltSQLite = eDEFAULT
-    If Not loConn Is Nothing Then loConn.CloseDB
+    Set db = AbrirSQLite(cCON, True)
+    Set RS = db.OpenDataSet(sqldialeto(cSQL, "SQLITE"))
+    If Not RS.EOF Then
+        RS.MoveLast
+        v = RS(cCAMPO)
+        If Not IsNull(v) Then PegUltSQLite = v
+    End If
+Saida:
+    Set RS = Nothing
+    FecharSQLite db
+    Exit Function
+TrataErro:
+    PegUltSQLite = eDEFAULT
+    Resume Saida
 End Function
+
 Public Function PegMinSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
-                            ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+                             ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegMinSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "MIN")
 End Function
+
 Public Function PegMaxSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
-                            ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+                             ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegMaxSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "MAX")
 End Function
+
 Public Function PegSumSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
-                            ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+                             ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegSumSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "SUM")
 End Function
+
 Public Function PegCountSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
-                              ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+                               ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegCountSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "COUNT")
 End Function
-Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
-                             ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
-                             ByVal coper As String) As Variant
-    Dim loConn As New SQLiteConnection
-   Dim DataSet As SQLiteDataSet
-    Dim cSQL As String
-    Dim eValue
-    
-    On Error GoTo Erro
-    
-If coper = "CAMPO" Then
-    If Len(cCAMPO) = 0 Then  'Passado a string ja com o campo select numero from tabela where numero=999999
-      cTABLEWHERE = UCase(cTABLEWHERE)
-      cSQL = Replace(cTABLEWHERE, " FROM ", " AS CAMPO FROM ")  'inclui as campo variavel padrao no pegsql abaixo
-    Else
-      cSQL = "SELECT " & cCAMPO & " AS CAMPO FROM " & cTABLEWHERE
-    End If
-  Else
-    cSQL = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
-  End If
-  
-    cSQL = sqldialeto(cSQL, "SQLITE")
-    
-    cCON = LimpaTag(cCON)
-    loConn.OpenDB cCON, SQLiteReadWrite
-    
-    VBSQLiteSetValues loConn
-    
-    Set DataSet = loConn.OpenDataSet(cSQL)
-    
-    
-    If Not DataSet.EOF Then
-        eValue = DataSet("CAMPO")  '//dataset(1) ordenal 1 e nao 0 AS CAMPO DATASET("CAMPO")
-        
-        If IsNull(eValue) Then
-            PegOperSQLite = eDEFAULT
-        Else
-            PegOperSQLite = eValue
-        End If
-    Else
-        PegOperSQLite = eDEFAULT
-    End If
-    
-    loConn.CloseDB
-    Set DataSet = Nothing: Set loConn = Nothing
-    Exit Function
 
-Erro:
-    PegOperSQLite = eDEFAULT
-    If Not loConn Is Nothing Then loConn.CloseDB
-End Function
-Public Function ComandoSqlite(ByVal cCON As String, ByVal cSQL As String) As Boolean
-    Dim loConn As New SQLiteConnection
-    On Error GoTo Erro
-    
-    ' Limpeza da Tag e tradução do dialeto
-    cCON = LimpaTag(cCON)
-    cSQL = sqldialeto(cSQL, "SQLITE")
-    
-    loConn.OpenDB cCON, SQLiteReadWrite
-    
-    VBSQLiteSetValues loConn
-    loConn.Execute cSQL
-    
-    ComandoSqlite = True
-    loConn.CloseDB
-    Exit Function
-Erro:
-    ComandoSqlite = False
-End Function
-Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
-                         ByVal nITEM As Long, ByVal aCAM As Variant, _
-                         ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
-    Dim loConn As New SQLiteConnection
-    Dim i As Integer
-    Dim aVAL() As Variant
-    Dim DataSet As SQLiteDataSet
-    
-    
-    On Error GoTo Erro
-    
-    ' 1. Inicializa o array de retorno com o tamanho de nITEM (ou baseado no aCAM)
-    ReDim aVAL(nITEM)
-    
-    cCON = LimpaTag(cCON)
-    loConn.OpenDB cCON, SQLiteReadWrite
-    
-    VBSQLiteSetValues loConn
-    
-    cSQL = sqldialeto(cSQL, "SQLITE")
-    
-    
-    Set DataSet = loConn.OpenDataSet(cSQL)
-    
-    
-    If Not DataSet.EOF Then
-        ' 3. Loop de processamento de campos, formatos e padrões
-        For i = 0 To nITEM - 1
-            Dim vValor As Variant
-            vValor = DataSet(aCAM(i))
-            ' Tratamento de NULL ou Vazio usando o valor padrão (aPAD)
-            If IsNull(vValor) Or vValor = "" Then
-                vValor = aPAD(i)
-            End If
-            
-            ' Tipagem baseada no array de formatos (aFOR)
-            ' C = Caracter, N = Numérico, D = Data, etc.
-            Select Case UCase(aFOR(i))
-                Case "C", "S" ' String / Caracter
-                    aVAL(i) = CStr(vValor)
-                Case "N", "I", "NI", "R" ' Numérico (Inteiro ou Real)
-                    aVAL(i) = Val(Replace(CStr(vValor), ",", "."))
-                Case "D" ' Data
-                    If IsDate(vValor) Then aVAL(i) = CDate(vValor) Else aVAL(i) = aPAD(i)
-                Case Else
-                    aVAL(i) = FVar(vValor)
-            End Select
-        Next
-        PegSQLite = aVAL ' Retorna o array preenchido
-    Else
-        ' Se não encontrar registro, retorna o array preenchido com os padrões (aPAD)
-        PegSQLite = aPAD
-    End If
-    
-    ' Limpeza de memória e fechamento
-    loConn.CloseDB
-    Set DataSet = Nothing
-    Set loConn = Nothing
-    Exit Function
-
-Erro:
-    PegSQLite = aPAD ' Em caso de erro, retorna os valores padrão por segurança
-    If Not loConn Is Nothing Then
-        On Error Resume Next
-        loConn.CloseDB
-        Set loConn = Nothing
-    End If
-End Function
-Public Function GrvSQLite(ByVal cARQ As String, _
-                         ByVal cSQL_SELECT As String, _
-                         ByVal nITEM As Long, _
-                         ByVal aCAM As Variant, _
-                         ByVal aVAL As Variant, _
-                         ByVal aFOR As Variant, _
-                         Optional ByVal nStartItem As Long = 0) As Boolean
-    
-    Dim loConn As New SQLiteConnection
-    Dim cSQL_UPDATE As String
-    Dim cTABELA As String
-    Dim cWHERE As String
-    Dim i As Integer
-    Dim nPosFrom As Long
-    Dim nPosWhere As Long
-    
-    On Error GoTo Erro
-    
-    ' 1. Extração da Tabela e do WHERE a partir do SELECT enviado
-    nPosFrom = InStr(1, UCase(cSQL_SELECT), " FROM ") + 6
-    nPosWhere = InStr(1, UCase(cSQL_SELECT), " WHERE ")
-    
-    If nPosWhere > 0 Then
-        cTABELA = Trim(Mid(cSQL_SELECT, nPosFrom, nPosWhere - nPosFrom))
-        cWHERE = Mid(cSQL_SELECT, nPosWhere)
-    Else
-        Exit Function
-    End If
-    
-    ' 2. Montagem do comando UPDATE dinâmico
-    ' Note que agora usamos os parâmetros aCAM e aVAL que chegaram na função
-    cSQL_UPDATE = "UPDATE " & cTABELA & " SET "
-    
-    ' Usamos nStartItem para que o loop comece de onde o sistema espera
-    For i = nStartItem To (nITEM - 1)
-        ' Aqui chamamos a função que trata o valor conforme o dialeto
-        cSQL_UPDATE = cSQL_UPDATE & aCAM(i) & " = " & TratarValorParaSQL(aVAL(i), aFOR(i), "SQLITE") & _
-                      IIf(i < (nITEM - 1), ", ", " ")
-    Next
-    
-    cSQL_UPDATE = cSQL_UPDATE & cWHERE
-    
-    ' 3. Execução direta na conexão
-    ' (Mantendo sua lógica de limpeza de tag)
-    cARQ = LimpaTag(cARQ)
-    loConn.OpenDB cARQ, SQLiteReadWrite
-    
-    VBSQLiteSetValues loConn
-    
-    loConn.Execute cSQL_UPDATE
-    
-    GrvSQLite = True
-    
-    ' 4. Fechamento correto
-    loConn.CloseDB
-    Set loConn = Nothing
-    Exit Function
-    
-Erro:
-    GrvSQLite = False
-    If Not loConn Is Nothing Then
-        On Error Resume Next
-        loConn.CloseDB
-        Set loConn = Nothing
-    End If
-End Function
-Public Function IncluiSQLite(ByVal cARQ As String, _
-                             ByVal cSQL_SELECT As String, _
-                             ByVal nITEM As Long, _
-                             ByVal aCAM As Variant, _
-                             ByVal aVAL As Variant, _
-                             ByVal lCHECK As Boolean, _
-                             ByVal lMES As Boolean, _
-                             ByVal aIDDES As Variant) As Boolean
-    
-    Dim loConn As New SQLiteConnection
-    Dim cTABELA As String
-    Dim i As Integer
-    Dim cCampos As String
-    Dim cValores As String
-    Dim oRS As SQLiteDataSet
-    Dim lTEM
-    
-    On Error GoTo Erro
-    
-    ' 1. Extração da Tabela (O ADO provavelmente usa um SELECT fake como "SELECT * FROM Tabela WHERE 1=0")
-    ' Vamos extrair o nome da tabela do seu cSQL
-    cTABELA = ExtrairNomeTabela(cSQL_SELECT)
-    
-    ' 2. Checagem (lCHECK)
-    If lCHECK Then
-       cARQ = LimpaTag(cARQ)
-        loConn.OpenDB cARQ, SQLiteReadWrite
-        VBSQLiteSetValues loConn
-        
-        Set oRS = loConn.OpenDataSet(cSQL_SELECT)
-        If Not oRS.EOF Then lTEM = True ' Se o registro existe, lTEM se torna True
-        
-        Set oRS = Nothing
-        loConn.CloseDB
-        If lTEM Then
-           Exit Function
-        End If
-    End If
-    
-    ' 3. Montagem do INSERT
-    ' O padrão é: "INSERT INTO Tabela (Campos) VALUES (Valores)"
-    cCampos = ""
-    cValores = ""
-    For i = 0 To nITEM - 1
-        cCampos = cCampos & IIf(cCampos = "", "", ", ") & aCAM(i)
-        cValores = cValores & IIf(cValores = "", "", ", ") & TratarValorParaSQL(aVAL(i), "C", "SQLITE")
-    Next i
-    
-    cARQ = LimpaTag(cARQ)
-    ' 4. Execução
-    loConn.OpenDB cARQ, SQLiteReadWrite
-    VBSQLiteSetValues loConn
-    loConn.Execute "INSERT INTO " & cTABELA & " (" & cCampos & ") VALUES (" & cValores & ")"
-    
-    ' 5. Captura do ID (aIDDES) - Equivalente ao que o seu ADO faz
-    ' SQLite tem o comando last_insert_rowid()
-    If Not IsNumeric(aIDDES) Then
-        ' Se aIDDES for uma matriz de campos de ID, buscamos o último valor inserido
-        ' ... lógica para popular o retorno conforme seu padrão ...
-    End If
-    
-    IncluiSQLite = True
-    loConn.CloseDB
-    Set loConn = Nothing
-    Exit Function
-
-Erro:
-    If lMES Then MsgBox "Erro ao incluir: " & Err.Description
-    IncluiSQLite = False
-    ' ... fechar conexões ...
-End Function
-
-Public Function LimpaTag(ByVal cCON As String) As String
-    ' Remove a tag customizada para obter o path puro do arquivo
-    LimpaTag = cCON
-    LimpaTag = Replace(LimpaTag, "[VBSQLITE]", "")
-    LimpaTag = Replace(LimpaTag, "[SQLITERC6]", "")
-    LimpaTag = Replace(LimpaTag, "[TC6SQLITE]", "")
-    LimpaTag = Replace(LimpaTag, "[SQLITE4VB]", "")
-End Function
-
-Private Function FormataParaSQL(ByVal vValor As Variant) As String
-    ' Garante que o dado vá no formato correto para o SQLite[cite: 1, 2]
-    If IsNull(vValor) Or vValor = "" Then
-        FormataParaSQL = "NULL"
-    ElseIf IsDate(vValor) Then
-        FormataParaSQL = "'" & Format(vValor, "YYYY-MM-DD HH:MM:SS") & "'"
-    ElseIf IsNumeric(vValor) Then
-        FormataParaSQL = Replace(CStr(vValor), ",", ".")
-    Else
-        ' Trata aspas simples dentro de strings[cite: 1]
-        FormataParaSQL = "'" & Replace(vValor, "'", "''") & "'"
-    End If
-End Function
 Public Function PegCampoSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                                ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-    
-    ' O PegCampo no ADO nada mais é do que uma operação de busca simples.
-    ' Usamos a lógica de "MAX" ou apenas o campo puro se a função PegOper aceitar.
-    ' Para garantir compatibilidade total, chamamos a PegOper sem função agregadora
-    ' ou simulamos via MAX para pegar o valor único.
-    
     PegCampoSQLite = PegOperSQLite(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "CAMPO")
-    
 End Function
-Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
-                             ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
-                             Optional ByVal aPAD As Variant = "", Optional ByVal aFOR As Variant = "") As Variant
-    Dim loConn As New SQLiteConnection
-    Dim DataSet As SQLiteDataSet
-    Dim x As Long
-    Dim nCAMPOS As Integer
-    Dim aRETU As Variant
-    Dim aOPE As Variant
-    Dim eVAL As Variant
-    
 
-    On Error GoTo Erro
+Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                              ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
+                              ByVal coper As String) As Variant
+    Dim db As SQLiteConnection
+    Dim RS As SQLiteDataSet
+    Dim sql As String
+    Dim v As Variant
+    Dim op As String
 
-    nCAMPOS = UBound(aCAM)
-    ReDim aRETU(nCAMPOS + 1)
-    For x = 0 To nCAMPOS
-        aRETU(x) = ""
-    Next x
-
-    loConn.OpenDB cCON, SQLiteReadWrite
-    
-    VBSQLiteSetValues loConn
-    Set DataSet = loConn.OpenDataSet(cSQL)
-
-    If Not DataSet.EOF Then
-        While Not DataSet.EOF
-            For x = 0 To nCAMPOS
-                ' Lógica de Operações (SepSqlOpe / MathOper)
-                aOPE = SepSqlOpe(aCAM(x))
-                If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
-                   eVAL = DataSet(aCAM(x))
-                Else
-                   eVAL = MathOper(DataSet(aOPE(1)), DataSet(aOPE(2)), aOPE(0))
-                End If
-
-                ' Tratamento de Nulo
-                If IsNull(eVAL) Then
-                    If IsArray(aPAD) Then eVAL = aPAD(x) Else eVAL = aPAD
-                End If
-
-                ' Formatação com FVar (MyFunctions)
-                If IsArray(aFOR) Then
-                    If IsArray(aPAD) Then
-                        eVAL = FVar(eVAL, aFOR(x), aPAD(x))
-                    Else
-                        eVAL = FVar(eVAL, aFOR(x))
-                    End If
-                End If
-
-                aRETU(x) = aRETU(x) & FixStr(eVAL)
-            Next x
-
-            DataSet.MoveNext
-            If Not DataSet.EOF Then
-                For x = 0 To nCAMPOS - 1: aRETU(x) = aRETU(x) & cDELI: Next x
+    On Error GoTo TrataErro
+    PegOperSQLite = eDEFAULT
+    op = UCase$(Trim$(coper))
+    Select Case op
+        Case "MIN", "MAX", "SUM", "COUNT"
+            sql = "SELECT " & op & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
+        Case "CAMPO"
+            If Len(Trim$(cCAMPO)) = 0 Then
+                sql = Replace(UCase$(cTABLEWHERE), " FROM ", " AS CAMPO FROM ")
+            Else
+                sql = "SELECT " & cCAMPO & " AS CAMPO FROM " & cTABLEWHERE
             End If
-        Wend
+        Case Else
+            Err.Raise 5, "PegOperSQLite", "Operacao SQLite invalida: " & coper
+    End Select
+
+    Set db = AbrirSQLite(cCON, True)
+    Set RS = db.OpenDataSet(sqldialeto(sql, "SQLITE"))
+    If Not RS.EOF Then
+        v = RS("CAMPO")
+        If Not IsNull(v) Then PegOperSQLite = v
+    End If
+Saida:
+    Set RS = Nothing
+    FecharSQLite db
+    Exit Function
+TrataErro:
+    PegOperSQLite = eDEFAULT
+    Resume Saida
+End Function
+
+Public Function ComandoSqlite(ByVal cCON As String, ByVal cSQL As String) As Boolean
+    Dim db As SQLiteConnection
+    On Error GoTo TrataErro
+    Set db = AbrirSQLite(cCON, False)
+    db.Execute sqldialeto(cSQL, "SQLITE")
+    ComandoSqlite = True
+Saida:
+    FecharSQLite db
+    Exit Function
+TrataErro:
+    ComandoSqlite = False
+    Resume Saida
+End Function
+
+Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
+                          ByVal nITEM As Long, ByVal aCAM As Variant, _
+                          ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
+    Dim db As SQLiteConnection
+    Dim RS As SQLiteDataSet
+    Dim ret() As Variant
+    Dim i As Long
+    Dim v As Variant
+
+    On Error GoTo TrataErro
+    If nITEM <= 0 Then
+        PegSQLite = aPAD
+        Exit Function
+    End If
+    ReDim ret(0 To nITEM - 1)
+    For i = 0 To nITEM - 1
+        ret(i) = aPAD(i)
+    Next i
+
+    Set db = AbrirSQLite(cCON, True)
+    Set RS = db.OpenDataSet(sqldialeto(cSQL, "SQLITE"))
+    If Not RS.EOF Then
+        For i = 0 To nITEM - 1
+            v = ValorDeCampo(RS, aCAM(i))
+            If IsNull(v) Or IsEmpty(v) Then
+                ret(i) = aPAD(i)
+            Else
+                ret(i) = FVar(v, aFOR(i), aPAD(i))
+            End If
+        Next i
+        PegSQLite = ret
+    Else
+        PegSQLite = aPAD
+    End If
+Saida:
+    Set RS = Nothing
+    FecharSQLite db
+    Exit Function
+TrataErro:
+    PegSQLite = aPAD
+    Resume Saida
+End Function
+
+Public Function GrvSQLite(ByVal cARQ As String, ByVal cSQL_SELECT As String, _
+                          ByVal nITEM As Long, ByVal aCAM As Variant, _
+                          ByVal aVAL As Variant, ByVal aFOR As Variant, _
+                          Optional ByVal nStartItem As Long = 0) As Boolean
+    Dim db As SQLiteConnection
+    Dim RS As SQLiteDataSet
+    Dim cmd As SQLiteCommand
+    Dim tableName As String, whereSql As String, sql As String
+    Dim i As Long, firstItem As Long
+    Dim Value As Variant
+
+    On Error GoTo TrataErro
+    If nStartItem < 0 Then nStartItem = 0
+    If nStartItem >= nITEM Then Exit Function
+    If Not ExtrairUpdatePartes(cSQL_SELECT, tableName, whereSql) Then Exit Function
+
+    sql = "UPDATE " & tableName & " SET "
+    For i = nStartItem To nITEM - 1
+        If i > nStartItem Then sql = sql & ", "
+        sql = sql & CStr(aCAM(i)) & " = ?"
+    Next i
+    sql = sql & " " & whereSql
+
+    Set db = AbrirSQLite(cARQ, False)
+    Set cmd = db.CreateCommand(sql)
+    For i = nStartItem To nITEM - 1
+        Value = ValorParaGravar(aVAL(i), aFOR(i))
+        cmd.SetParameterValue i - nStartItem + 1, Value
+    Next i
+    cmd.Execute
+    GrvSQLite = True
+Saida:
+    Set cmd = Nothing
+    Set RS = Nothing
+    FecharSQLite db
+    Exit Function
+TrataErro:
+    GrvSQLite = False
+    Resume Saida
+End Function
+
+Public Function IncluiSQLite(ByVal cARQ As String, ByVal cSQL_SELECT As String, _
+                             ByVal nITEM As Long, Optional ByVal aCAM As Variant = 0, _
+                             Optional ByVal aVAL As Variant = 0, _
+                             Optional ByVal lCHECK As Boolean = False, _
+                             Optional ByVal lMES As Boolean = True, _
+                             Optional ByVal aIDDES As Variant = 0) As Boolean
+    Dim db As SQLiteConnection
+    Dim RS As SQLiteDataSet
+    Dim cmd As SQLiteCommand
+    Dim tableName As String, sql As String
+    Dim fields As String, marks As String
+    Dim i As Long, Value As Variant
+    Dim alreadyExists As Boolean
+
+    On Error GoTo TrataErro
+    tableName = ExtrairNomeTabela(cSQL_SELECT)
+    If Len(tableName) = 0 Or nITEM <= 0 Then Exit Function
+
+    Set db = AbrirSQLite(cARQ, False)
+    If lCHECK Then
+        Set RS = db.OpenDataSet(sqldialeto(cSQL_SELECT, "SQLITE"))
+        alreadyExists = Not RS.EOF
+        Set RS = Nothing
+        If alreadyExists Then
+            If lMES Then MsgBox "Item ja cadastrado com esta chave.", vbInformation
+            Exit Function
+        End If
     End If
 
-    loConn.CloseDB
-    PegSQLiteDeli = aRETU
-    Exit Function
-Erro:
-    PegSQLiteDeli = aRETU
-End Function
-Public Function PegLastidbsqLite(ByVal cCON As String, ByVal cTABELA As String) As Long
-    Dim vRet As Variant
-    
-    ' No SQLite, last_insert_rowid() retorna o último ID da conexão atual.
-    ' O parâmetro cTABELA é mantido para manter a assinatura idêntica ao ADO,
-    ' embora o SQLite não exija o nome da tabela para esta função específica.
-    
-    vRet = PegOperSQLite(cCON, cTABELA, "last_insert_rowid()", 0, "")
-    
-    If IsNumeric(vRet) Then
-        PegLastidbsqLite = CLng(vRet)
-    Else
-        PegLastidbsqLite = 0
+    For i = 0 To nITEM - 1
+        If i > 0 Then
+            fields = fields & ", "
+            marks = marks & ", "
+        End If
+        fields = fields & CStr(aCAM(i))
+        marks = marks & "?"
+    Next i
+
+    sql = "INSERT INTO " & tableName & " (" & fields & ") VALUES (" & marks & ")"
+    Set cmd = db.CreateCommand(sql)
+    For i = 0 To nITEM - 1
+        Value = ValorParaGravar(aVAL(i), "C")
+        cmd.SetParameterValue i + 1, Value
+    Next i
+    cmd.Execute
+
+    ' O valor deve ser consumido na mesma conexao que executou o INSERT.
+    If IsArray(aIDDES) Then
+        PreencherIDs db, tableName, aIDDES
     End If
+    IncluiSQLite = True
+Saida:
+    Set cmd = Nothing
+    Set RS = Nothing
+    FecharSQLite db
+    Exit Function
+TrataErro:
+    If lMES Then MsgBox "Erro ao incluir: " & Err.Description, vbExclamation
+    IncluiSQLite = False
+    Resume Saida
 End Function
+
+Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
+                              ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
+                              Optional ByVal aPAD As Variant = "", _
+                              Optional ByVal aFOR As Variant = "") As Variant
+    Dim db As SQLiteConnection
+    Dim RS As SQLiteDataSet
+    Dim ret() As String
+    Dim op As Variant, Value As Variant
+    Dim x As Long, count As Long
+
+    On Error GoTo TrataErro
+    count = UBound(aCAM)
+    ReDim ret(0 To count)
+    Set db = AbrirSQLite(cCON, True)
+    Set RS = db.OpenDataSet(sqldialeto(cSQL, "SQLITE"))
+
+    Do While Not RS.EOF
+        For x = 0 To count
+            op = SepSqlOpe(aCAM(x))
+            If IsArray(op) And op(0) <> "" And op(1) <> "" And op(2) <> "" Then
+                Value = MathOper(RS(op(1)), RS(op(2)), op(0))
+            Else
+                Value = ValorDeCampo(RS, aCAM(x))
+            End If
+            If IsNull(Value) Then Value = ValorDoArrayOuPadrao(aPAD, x)
+            If IsArray(aFOR) Then Value = FVar(Value, aFOR(x), ValorDoArrayOuPadrao(aPAD, x))
+            If Len(ret(x)) > 0 Then ret(x) = ret(x) & cDELI
+            ret(x) = ret(x) & FixStr(Value)
+        Next x
+        RS.MoveNext
+    Loop
+    PegSQLiteDeli = ret
+Saida:
+    Set RS = Nothing
+    FecharSQLite db
+    Exit Function
+TrataErro:
+    PegSQLiteDeli = ret
+    Resume Saida
+End Function
+
+Public Function PegLastidbsqLite(ByVal cCON As String, ByVal cTABELA As String) As Long
+    Dim db As SQLiteConnection
+    On Error GoTo TrataErro
+    Set db = AbrirSQLite(cCON, False)
+    PegLastidbsqLite = CLng(db.LastInsertRowID)
+Saida:
+    FecharSQLite db
+    Exit Function
+TrataErro:
+    PegLastidbsqLite = 0
+    Resume Saida
+End Function
+
 Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                            ByVal cCAMPO As String, Optional ByVal eDEFAULT As Variant, _
                            Optional ByVal nDEC As Integer = 2) As Variant
-    Dim loConn As New SQLiteConnection
-    Dim DataSet As SQLiteDataSet
-  '  Dim loCursor As SQLiteCursor
-    Dim nSoma As Double
-    Dim aOPER As Variant
-    Dim aVALORES_LINHA() As String
-    Dim x As Integer
-    
-    On Error GoTo Erro
-    
-    ' SepSqlOpe prepara o array de campos/operadores
-    aOPER = SepSqlOpe(cCAMPO)
-    
-    cCON = LimpaTag(cCON)
-    loConn.OpenDB cCON, SQLiteReadWrite
-    VBSQLiteSetValues loConn
-    ' Busca todos os registros para processamento linha a linha (como a original)
-    'Set loCursor = loConn.CreateCursor("SELECT * FROM " & cTABLEWHERE)
-    Set DataSet = loConn.OpenDataSet("SELECT * FROM " & cTABLEWHERE)
-    
-    nSoma = 0
-    While Not DataSet.EOF
-        ReDim aVALORES_LINHA(UBound(aOPER))
-        For x = 0 To UBound(aOPER)
-            ' Se não for operador, extrai o valor do campo do cursor
-            If InStr("+-*/()", aOPER(x)) = 0 And aOPER(x) <> "" Then
-                aVALORES_LINHA(x) = DataSet(aOPER(x)) & ""
+    Dim db As SQLiteConnection
+    Dim RS As SQLiteDataSet
+    Dim ops As Variant, lineValues() As String
+    Dim Total As Double, found As Boolean
+    Dim x As Long, Value As Variant
+
+    On Error GoTo TrataErro
+    ops = SepSqlOpe(cCAMPO)
+    Set db = AbrirSQLite(cCON, True)
+    Set RS = db.OpenDataSet("SELECT * FROM " & cTABLEWHERE)
+    Do While Not RS.EOF
+        found = True
+        ReDim lineValues(0 To UBound(ops))
+        For x = 0 To UBound(ops)
+            If InStr(1, "+-*/()", CStr(ops(x)), vbBinaryCompare) = 0 And ops(x) <> "" Then
+                Value = ValorDeCampo(RS, ops(x))
+                If IsNull(Value) Then Value = 0
+                lineValues(x) = CStr(Value)
             Else
-                aVALORES_LINHA(x) = aOPER(x)
+                lineValues(x) = CStr(ops(x))
             End If
         Next x
-        
-        ' CHAMA MATHOPER COM OS DOIS PARAMETROS: o array e as decimais
-        nSoma = nSoma + Val(MathOper(aVALORES_LINHA, nDEC))
-        
-        DataSet.MoveNext
-    Wend
-    
-    SomaSQLite = IIf(nSoma = 0, eDEFAULT, nSoma)
-    
-    loConn.CloseDB
-    Set DataSet = Nothing
+        Total = Total + CDbl(Val(MathOper(lineValues, nDEC)))
+        RS.MoveNext
+    Loop
+    If found Then SomaSQLite = Total Else SomaSQLite = eDEFAULT
+Saida:
+    Set RS = Nothing
+    FecharSQLite db
     Exit Function
-Erro:
+TrataErro:
     SomaSQLite = eDEFAULT
-    If Not loConn Is Nothing Then loConn.CloseDB
+    Resume Saida
 End Function
 
 Public Function ApagaSQLite(ByVal cCON As String, ByVal cSQL As String) As Boolean
-    Dim nPOS As Long
-    Dim cSQL_FINAL As String
-    
-    On Error GoTo Erro
-    
-    cSQL_FINAL = Trim(cSQL)
-    
-    ' Lógica de espelhamento: Se não começa com DELETE, mas tem FROM, reconstrói
-    If UCase(Left(cSQL_FINAL, 6)) <> "DELETE" Then
-        nPOS = InStr(1, UCase(cSQL_FINAL), "FROM")
-        If nPOS > 0 Then
-            ' Pega do FROM em diante e adiciona o DELETE
-            cSQL_FINAL = "DELETE " & Mid(cSQL_FINAL, nPOS)
-        Else
-            ' Se for apenas "TABELA WHERE...", tenta montar
-            cSQL_FINAL = "DELETE FROM " & cSQL_FINAL
-        End If
+    Dim tEXT As String, p As Long
+    tEXT = Trim$(cSQL)
+    If UCase$(Left$(tEXT, 6)) <> "DELETE" Then
+        p = InStr(1, UCase$(tEXT), "FROM", vbTextCompare)
+        If p > 0 Then tEXT = "DELETE " & Mid$(tEXT, p)
     End If
-    
-    ' Executa através do comando padrão que já trata Dialeto e Conexão
-    ApagaSQLite = ComandoSqlite(cCON, cSQL_FINAL)
-    
-    Exit Function
-Erro:
-    ApagaSQLite = False
+    If UCase$(Left$(Trim$(tEXT), 6)) <> "DELETE" Then Exit Function
+    ApagaSQLite = ComandoSqlite(cCON, tEXT)
 End Function
 
 Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As String, _
@@ -527,152 +362,205 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
    Optional ByVal cSQLDES As String = "", Optional ByVal cOPEDES As String = "", _
    Optional ByVal aCAMDES As Variant = 0, Optional ByVal aOUTDES As Variant = 0, _
    Optional ByVal aIDDES As Variant = 0) As Boolean
+    Dim Source As SQLiteConnection, target As SQLiteConnection
+    Dim RS As SQLiteDataSet, checkRs As SQLiteDataSet
+    Dim values() As Variant, ops As Variant, tableName As String, whereSql As String
+    Dim sql As String, fields As String, marks As String, sets As String
+    Dim x As Long, Value As Variant
+    Dim cmd As SQLiteCommand
 
-    Dim loConnOri As New SQLiteConnection
-    Dim loConnDes As New SQLiteConnection
-    Dim DataSetORI As SQLiteDataSet
-    Dim DataSetDES As SQLiteDataSet
-    Dim x As Long
-    Dim nCAMPOS As Long
-    Dim nRegs As Long
-    Dim aVALORI As Variant
-    Dim aRETUID As Variant
-    Dim aOPE As Variant
-    Dim cTABELA As String
-    Dim cWHERE As String
-    Dim cSET As String
-    Dim cINS_C As String
-    Dim cINS_V As String
+    On Error GoTo TrataErro
+    Set Source = AbrirSQLite(cCONORI, True)
+    Set target = AbrirSQLite(cCONDES, False)
+    Set RS = Source.OpenDataSet(sqldialeto(cSQLORI, "SQLITE"))
+    If RS.EOF Then GoTo Saida
 
-    On Error GoTo Erro
-    SQLMoveRegSQLite = False
-
-    loConnOri.OpenDB cCONORI, SQLiteReadWrite
-    VBSQLiteSetValues loConnOri
-    loConnDes.OpenDB cCONDES, SQLiteReadWrite
-    VBSQLiteSetValues loConnDes
-
-    ' 1. Coleta dados da Origem (Passo Matriz)
-    'Set loCurOri = loConnOri.CreateCursor(cSQLORI)
-    Set DataSetORI = loConnOri.OpenDataSet(cSQLORI)
-    If Not DataSetORI.EOF Then
-        nCAMPOS = UBound(aCAMORI)
-        ReDim aVALORI(nCAMPOS)
-        For x = 0 To nCAMPOS
-            aOPE = SepSqlOpe(aCAMORI(x))
-            If aOPE(0) = "" Then
-                aVALORI(x) = DataSetORI(aCAMORI(x))
+    If IsArray(aCAMORI) Then
+        ReDim values(0 To UBound(aCAMORI))
+        For x = 0 To UBound(aCAMORI)
+            ops = SepSqlOpe(aCAMORI(x))
+            If IsArray(ops) And ops(0) <> "" Then
+                values(x) = MathOper(RS(ops(1)), RS(ops(2)), ops(0))
             Else
-                aVALORI(x) = MathOper(DataSetORI(aOPE(1)), DataSetORI(aOPE(2)), aOPE(0))
+                values(x) = ValorDeCampo(RS, aCAMORI(x))
             End If
         Next x
-
-        ' 2. Metadados do Destino
-        cTABELA = ExtraiTabela(cSQLDES)
-        cWHERE = ExtraiWhere(cSQLDES)
-
-        ' 3. Lógica de Gravação via Execute
-        Set DataSetDES = loConnDes.OpenDataSet("SELECT count(*) FROM " & cTABELA & " " & cWHERE)
-        nRegs = DataSetDES(0)
-       
-        
-        If nRegs > 0 Then
-            ' --- UPDATE ---
-            cSET = ""
-            For x = 0 To UBound(aCAMDES)
-                cSET = cSET & IIf(cSET = "", "", ", ") & aCAMDES(x) & " = " & PrepararValorSQL(aVALORI(x))
-            Next x
-            
-            If IsArray(aOUTDES) Then
-                For x = 0 To UBound(aOUTDES)
-                    cSET = cSET & ", " & aOUTDES(x) & " = " & PrepararValorSQL(aOUTORI(x))
-                Next x
-            End If
-            
-            loConnDes.Execute "UPDATE " & cTABELA & " SET " & cSET & " " & cWHERE
-        Else
-            ' --- INSERT ---
-            cINS_C = "": cINS_V = ""
-            For x = 0 To UBound(aCAMDES)
-                cINS_C = cINS_C & IIf(cINS_C = "", "", ", ") & aCAMDES(x)
-                cINS_V = cINS_V & IIf(cINS_V = "", "", ", ") & PrepararValorSQL(aVALORI(x))
-            Next x
-            
-            If IsArray(aOUTDES) Then
-                For x = 0 To UBound(aOUTDES)
-                    cINS_C = cINS_C & ", " & aOUTDES(x)
-                    cINS_V = cINS_V & ", " & PrepararValorSQL(aOUTORI(x))
-                Next x
-            End If
-            
-            loConnDes.Execute "INSERT INTO " & cTABELA & " (" & cINS_C & ") VALUES (" & cINS_V & ")"
-        End If
-
-        ' 4. Captura de IDs para eRETU01
-        If IsArray(aIDDES) Then
-            Set DataSetDES = loConnDes.OpenDataSet(cSQLDES)
-            ReDim aRETUID(UBound(aIDDES))
-            For x = 0 To UBound(aIDDES)
-                aRETUID(x) = DataSetDES(aIDDES(x))
-            Next x
-            eRETU01 = aRETUID
-        End If
-        SQLMoveRegSQLite = True
     End If
 
-    loConnOri.CloseDB: loConnDes.CloseDB
+    tableName = ExtraiTabela(cSQLDES)
+    whereSql = ExtraiWhere(cSQLDES)
+    Set checkRs = target.OpenDataSet("SELECT count(*) AS N FROM " & tableName & " " & whereSql)
+    If checkRs(1) > 0 Then
+        For x = 0 To UBound(aCAMDES)
+            If Len(sets) > 0 Then sets = sets & ", "
+            sets = sets & CStr(aCAMDES(x)) & " = ?"
+        Next x
+        If IsArray(aOUTDES) Then
+            For x = 0 To UBound(aOUTDES)
+                sets = sets & ", " & CStr(aOUTDES(x)) & " = ?"
+            Next x
+        End If
+        sql = "UPDATE " & tableName & " SET " & sets & " " & whereSql
+    Else
+        For x = 0 To UBound(aCAMDES)
+            If x > 0 Then fields = fields & ", ": marks = marks & ", "
+            fields = fields & CStr(aCAMDES(x)): marks = marks & "?"
+        Next x
+        If IsArray(aOUTDES) Then
+            For x = 0 To UBound(aOUTDES)
+                fields = fields & ", " & CStr(aOUTDES(x))
+                marks = marks & ", ?"
+            Next x
+        End If
+        sql = "INSERT INTO " & tableName & " (" & fields & ") VALUES (" & marks & ")"
+    End If
+    Set cmd = target.CreateCommand(sql)
+    For x = 0 To UBound(aCAMDES)
+        Value = values(x)
+        cmd.SetParameterValue x + 1, Value
+    Next x
+    If IsArray(aOUTDES) Then
+        For x = 0 To UBound(aOUTDES)
+            Value = ValorDoArrayOuPadrao(aOUTORI, x)
+            cmd.SetParameterValue UBound(aCAMDES) + x + 2, Value
+        Next x
+    End If
+    cmd.Execute
+    SQLMoveRegSQLite = True
+Saida:
+    Set cmd = Nothing
+    Set RS = Nothing
+    Set checkRs = Nothing
+    FecharSQLite Source
+    FecharSQLite target
     Exit Function
-Erro:
+TrataErro:
     SQLMoveRegSQLite = False
+    Resume Saida
 End Function
 
 Public Function VBSQLiteSetValues(ByRef oCONN As SQLiteConnection) As Boolean
-    On Error GoTo Erro
-    
-    ' A VBSQLite permite aplicar configurações diretamente via Execute
-    ' Algumas destas configurações são específicas para esta biblioteca
-    
-    ' 1. Aumenta a performance de escrita
-    oCONN.Execute "PRAGMA journal_mode = WAL;"
-    
-    ' 2. Ajusta o tamanho da cache (em páginas)
-    oCONN.Execute "PRAGMA cache_size = 2000;"
-    
-    ' 3. Melhora a segurança de escrita com performance otimizada
-    oCONN.Execute "PRAGMA synchronous = NORMAL;"
-    
-    ' 4. Define o modo de armazenamento temporário
-    oCONN.Execute "PRAGMA temp_store = MEMORY;"
-    
+    On Error GoTo TrataErro
+    If oCONN Is Nothing Then Exit Function
+    oCONN.Execute "PRAGMA temp_store = MEMORY"
+    oCONN.Execute "PRAGMA cache_size = 2000"
+    oCONN.Execute "PRAGMA journal_mode = WAL"
+    oCONN.Execute "PRAGMA synchronous = NORMAL"
     VBSQLiteSetValues = True
     Exit Function
-    
-Erro:
+TrataErro:
     VBSQLiteSetValues = False
 End Function
 
-Public Function TratarValorParaSQL(ByVal vValor As Variant, ByVal cTIPO As String, ByVal cDIALETO As String) As String
-    ' cTipo: "C" para Caractere, "N" para Número, "D" para Data
-    ' cDialeto: "SQLITE", "PGSQL", "VFP"
-    
-    If IsNull(vValor) Or vValor = "" Then
-        TratarValorParaSQL = "NULL"
-        Exit Function
-    End If
-    
-    Select Case UCase(cDIALETO)
-        Case "SQLITE"
-            If UCase(cTIPO) = "D" Then
-                ' SQLite armazena datas como string YYYY-MM-DD
-                TratarValorParaSQL = "'" & Format(vValor, "yyyy-mm-dd") & "'"
-            ElseIf UCase(cTIPO) = "N" Then
-                TratarValorParaSQL = Replace(vValor, ",", ".") ' Garante ponto decimal
-            Else
-                TratarValorParaSQL = "'" & Replace(vValor, "'", "''") & "'" ' Escapa aspas simples
-            End If
-            
-        Case "PGSQL", "VFP"
-            ' Aqui você mantém a lógica que já funcionava para os outros bancos
-            TratarValorParaSQL = "'" & vValor & "'"
-    End Select
+Public Function LimpaTag(ByVal cCON As String) As String
+    LimpaTag = Replace(Replace(Replace(Replace(cCON, "[VBSQLITE]", ""), _
+        "[SQLITERC6]", ""), "[TC6SQLITE]", ""), "[SQLITE4VB]", "")
 End Function
+
+Public Function TratarValorParaSQL(ByVal vValor As Variant, ByVal cTIPO As String, _
+                                   ByVal cDIALETO As String) As String
+    If IsNull(vValor) Or IsEmpty(vValor) Or (VarType(vValor) = vbString And vValor = "") Then
+        TratarValorParaSQL = "NULL"
+    ElseIf UCase$(cDIALETO) = "SQLITE" Then
+        Select Case UCase$(Left$(cTIPO, 1))
+            Case "D": TratarValorParaSQL = "'" & format$(CDate(vValor), "yyyy-mm-dd hh:nn:ss") & "'"
+            Case "N": TratarValorParaSQL = Replace$(Trim$(CStr(vValor)), ",", ".")
+            Case Else: TratarValorParaSQL = "'" & Replace$(CStr(vValor), "'", "''") & "'"
+        End Select
+    Else
+        TratarValorParaSQL = "'" & Replace$(CStr(vValor), "'", "''") & "'"
+    End If
+End Function
+
+Private Function AbrirSQLite(ByVal cCON As String, ByVal lReadOnly As Boolean) As SQLiteConnection
+    Dim db As New SQLiteConnection
+    If lReadOnly Then
+        db.OpenDB LimpaTag(cCON), SQLiteReadOnly
+    Else
+        db.OpenDB LimpaTag(cCON), SQLiteReadWrite
+        If Not VBSQLiteSetValues(db) Then Err.Raise 5, "AbrirSQLite", "Falha ao configurar a conexao SQLite."
+    End If
+    Set AbrirSQLite = db
+End Function
+
+Private Sub FecharSQLite(ByRef db As SQLiteConnection)
+    On Error Resume Next
+    If Not db Is Nothing Then db.CloseDB
+    Set db = Nothing
+    On Error GoTo 0
+End Sub
+
+Private Function ValorDeCampo(ByVal RS As SQLiteDataSet, ByVal campo As Variant) As Variant
+    If IsNumeric(campo) And CLng(campo) = 0 Then
+        ValorDeCampo = RS(1)
+    Else
+        ValorDeCampo = RS(campo)
+    End If
+End Function
+
+Private Function ValorParaGravar(ByVal vValue As Variant, _
+                                 ByVal cFormat As Variant) As Variant
+    If IsNull(vValue) Or IsEmpty(vValue) Then
+        ValorParaGravar = Null
+    ElseIf Len(CStr(cFormat)) > 0 And _
+           UCase$(Left$(CStr(cFormat), 1)) = "D" Then
+
+        If IsDate(vValue) Then
+            ValorParaGravar = format$(CDate(vValue), _
+                                      "yyyy-mm-dd hh:nn:ss")
+        Else
+            ValorParaGravar = Null
+        End If
+    Else
+        Select Case VarType(vValue)
+            Case vbBoolean
+                ValorParaGravar = Abs(CLng(vValue))
+            Case vbSingle
+                ValorParaGravar = CDbl(vValue)
+            Case vbDate
+                ValorParaGravar = format$(CDate(vValue), _
+                                          "yyyy-mm-dd hh:nn:ss")
+            Case Else
+                ValorParaGravar = vValue
+        End Select
+    End If
+End Function
+
+Private Function ValorDoArrayOuPadrao(ByVal values As Variant, ByVal Index As Long) As Variant
+    If IsArray(values) Then ValorDoArrayOuPadrao = values(Index) Else ValorDoArrayOuPadrao = values
+End Function
+
+Private Function ExtrairUpdatePartes(ByVal sourceSql As String, ByRef tableName As String, ByRef whereSql As String) As Boolean
+    Dim pFrom As Long, pWhere As Long, upperSql As String
+    upperSql = UCase$(sourceSql)
+    pFrom = InStr(1, upperSql, " FROM ", vbBinaryCompare)
+    pWhere = InStr(1, upperSql, " WHERE ", vbBinaryCompare)
+    If pFrom = 0 Or pWhere = 0 Or pWhere <= pFrom Then Exit Function
+    tableName = Trim$(Mid$(sourceSql, pFrom + 6, pWhere - pFrom - 6))
+    whereSql = Mid$(sourceSql, pWhere)
+    ExtrairUpdatePartes = (Len(tableName) > 0)
+End Function
+
+Private Sub PreencherIDs(ByVal db As SQLiteConnection, ByVal tableName As String, ByVal ids As Variant)
+    Dim x As Long
+    Dim RS As SQLiteDataSet
+    Dim sql As String
+    Dim result() As Variant
+
+    sql = "SELECT "
+    For x = LBound(ids) To UBound(ids)
+        If x > LBound(ids) Then sql = sql & ", "
+        sql = sql & CStr(ids(x))
+    Next x
+    sql = sql & " FROM " & tableName & " WHERE rowid = last_insert_rowid()"
+    Set RS = db.OpenDataSet(sql)
+    If Not RS.EOF Then
+        ReDim result(LBound(ids) To UBound(ids))
+        For x = LBound(ids) To UBound(ids)
+            result(x) = RS(x - LBound(ids) + 1)
+        Next x
+        eRETU01 = result
+    Else
+        eRETU01 = db.LastInsertRowID
+    End If
+End Sub

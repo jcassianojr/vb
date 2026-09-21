@@ -13,11 +13,12 @@ Public Function ComandoTC6(ByVal cARQ As String, ByVal cSQL As String) As Boolea
     End If
     
     cARQ = LimpaTag(cARQ)
-    ' Inicialização simplificada no TC6
-    oDB.OpenDB cARQ  'New_c.Connection(cCONN)
+    ' Inicializaï¿½ï¿½o simplificada no TC6
+    If Not oDB.OpenDB(cARQ) Then Err.Raise vbObjectError + 1000, "ComandoTC6", _
+        "Nao foi possivel abrir o banco: " & cARQ
     
-    ' O método Execute da conexão substitui a necessidade do objeto Command
-    ' para comandos simples (sem parâmetros).
+    ' O mï¿½todo Execute da conexï¿½o substitui a necessidade do objeto Command
+    ' para comandos simples (sem parï¿½metros).
     oDB.Execute cSQL
     
     ' Fechamento simplificado (apenas limpa o objeto)
@@ -83,6 +84,7 @@ Public Function SomaSQLTC6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     Dim eVAL As Variant
 
     On Error GoTo errhandler
+    lRETU = False
 
     lOPEN = False
     lRSOP = False
@@ -98,14 +100,16 @@ Public Function SomaSQLTC6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     End If
 
     cARQ = LimpaTag(cARQ)
-    oDB.OpenDB cARQ
+    If Not oDB.OpenDB(cARQ) Then Err.Raise vbObjectError + 1000, "SomaSQLTC6", _
+        "Nao foi possivel abrir o banco: " & cARQ
     
     lOPEN = True
   
-    SqliteSetValuesTC6 oDB
+    If Not SqliteSetValuesTC6(oDB) Then Err.Raise vbObjectError + 1003, _
+        "SomaSQLTC6", "Falha ao configurar a conexao SQLite."
 
     ' Abertura do Recordset no TC6:
-    ' No TC6, o método é oDB.OpenRecordset(cSQL)
+    ' No TC6, o mï¿½todo ï¿½ oDB.OpenRecordset(cSQL)
     Set oRS = oDB.OpenRecordset(cSQL)
     lRSOP = True
 
@@ -118,13 +122,14 @@ Public Function SomaSQLTC6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
                 Else
                     eVAL = MathOper(oRS(aOPE(1)).Value, oRS(aOPE(2)).Value, aOPE(0))
                 End If
+                If IsNull(eVAL) Or IsEmpty(eVAL) Then eVAL = 0
                 aRETU(x) = aRETU(x) + eVAL
             Next x
             oRS.MoveNext
         Wend
     End If
     
-    ' Limpeza (TC6 não usa .Close para conexão, apenas para Recordset)
+    ' Limpeza (TC6 nï¿½o usa .Close para conexï¿½o, apenas para Recordset)
     
     Set oRS = Nothing
     Set oDB = Nothing
@@ -169,15 +174,17 @@ Public Function PegSQLDeliTC6(ByVal cARQ As String, ByVal cSQL As String, _
     End If
 
     cARQ = LimpaTag(cARQ)
-    oDB.OpenDB cARQ
+    If Not oDB.OpenDB(cARQ) Then Err.Raise vbObjectError + 1000, "PegSQLDeliTC6", _
+        "Nao foi possivel abrir o banco: " & cARQ
     
     lOPEN = True
 
     ' Ajustes de ambiente
-    SqliteSetValuesTC6 oDB
+    If Not SqliteSetValuesTC6(oDB) Then Err.Raise vbObjectError + 1003, _
+        "PegSQLDeliTC6", "Falha ao configurar a conexao SQLite."
 
-    ' Abertura do Recordset (TC6 usa apenas o SQL e a Conexão)
-    ' O método OpenRecordset é o padrão do TC6
+    ' Abertura do Recordset (TC6 usa apenas o SQL e a Conexï¿½o)
+    ' O mï¿½todo OpenRecordset ï¿½ o padrï¿½o do TC6
     Set oRS = oDB.OpenRecordset(cSQL)
     lRSOP = True
 
@@ -186,7 +193,7 @@ Public Function PegSQLDeliTC6(ByVal cARQ As String, ByVal cSQL As String, _
             For x = 0 To nCAMPOS - 1
                 aOPE = SepSqlOpe(aCAM(x))
                 
-                ' Extração do valor
+                ' Extraï¿½ï¿½o do valor
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
                     eVAL = oRS(aCAM(x)).Value
                 Else
@@ -207,7 +214,7 @@ Public Function PegSQLDeliTC6(ByVal cARQ As String, ByVal cSQL As String, _
             
             oRS.MoveNext
             
-            ' Adiciona o delimitador se não for o último
+            ' Adiciona o delimitador se nï¿½o for o ï¿½ltimo
             If Not oRS.EOF Then
                 For x = 0 To nCAMPOS - 1
                     aRETU(x) = aRETU(x) & cDELI
@@ -216,7 +223,7 @@ Public Function PegSQLDeliTC6(ByVal cARQ As String, ByVal cSQL As String, _
         Wend
     End If
 
-    ' Finalização (Lembre-se: oDB não tem .Close)
+    ' Finalizaï¿½ï¿½o (Lembre-se: oDB nï¿½o tem .Close)
     
     Set oRS = Nothing
     Set oDB = Nothing
@@ -243,10 +250,12 @@ Public Function GrvSQLTC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
 
     
     cARQ = LimpaTag(cARQ)
-    oDB.OpenDB cARQ
+    If Not oDB.OpenDB(cARQ) Then Err.Raise vbObjectError + 1000, "GrvSQLTC6", _
+        "Nao foi possivel abrir o banco: " & cARQ
     
     ' 2. Ajustes de ambiente
-    SqliteSetValuesTC6 oDB
+    If Not SqliteSetValuesTC6(oDB) Then Err.Raise vbObjectError + 1003, _
+        "GrvSQLTC6", "Falha ao configurar a conexao SQLite."
 
     ' 3. Abertura do Recordset TC6
     Set oRS = oDB.OpenRecordset(cSQL)
@@ -255,6 +264,8 @@ Public Function GrvSQLTC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         Set oRS = Nothing: Set oDB = Nothing
         Exit Function
     End If
+    If Not oRS.Updatable Then Err.Raise vbObjectError + 1001, "GrvSQLTC6", _
+        "O recordset nao e atualizavel."
 
     While Not oRS.EOF
         For x = nSTARITEM To nITEM - 1
@@ -269,19 +280,21 @@ Public Function GrvSQLTC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
                     eVAL = MathOper(oRS(aOPE(1)).Value, oRS(aOPE(2)).Value, aOPE(0))
                 End If
 
-                ' --- INTEGRAÇÃO COM DIALETO DE DATA ---
-                If Mid(aFOR(x), 1, 1) = "D" Then
-                    ' Usa a função dialetoDataParaSQL do seu sqldialeto.bas
-                    ' aARQ(2) contém o identificador do tipo de banco
-                    oRS(aCAM(x)).Value = dialetoDataParaSQL(eVAL, "SQLITE")
+                ' --- INTEGRAï¿½ï¿½O COM DIALETO DE DATA ---
+                If Mid$(CStr(aFOR(x)), 1, 1) = "D" Then
+                    If IsDate(eVAL) Then
+                        oRS(aCAM(x)).Value = CDate(eVAL)
+                    Else
+                        oRS(aCAM(x)).Value = Null
+                    End If
                 Else
-                    ' Tratamento padrão (Texto/Número)
+                    ' Tratamento padrï¿½o (Texto/Nï¿½mero)
                     oRS(aCAM(x)).Value = FVar(eVAL, aFOR(x), "")
                 End If
             End If
         Next x
         
-        ' Gravação em lote (nativa TC6)
+        ' Gravaï¿½ï¿½o em lote (nativa TC6)
         oRS.UpdateBatch
         oRS.MoveNext
     Wend
@@ -292,15 +305,15 @@ Public Function GrvSQLTC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Exit Function
 
 errhandler:
-    SayErro "Erro na Gravação (TC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
+    SayErro "Erro na Gravaï¿½ï¿½o (TC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
     GrvSQLTC6 = False
 End Function
 
-Public Function ApagaSQLpTC6(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusão") As Boolean
+Public Function ApagaSQLpTC6(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusï¿½o") As Boolean
   ApagaSQLpTC6 = False
-  If MDG(cTEXTO, "Exclusão Registro") Then
+  If MDG(cTEXTO, "Exclusï¿½o Registro") Then
     ApagaSQLpTC6 = APAGASQLTC6(cARQ, cSQL)
   End If
 End Function
@@ -324,62 +337,72 @@ Public Function IncluiSQLTC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     lRETU = False
     
     cARQ = LimpaTag(cARQ)
-    oDB.OpenDB cARQ
+    If Not oDB.OpenDB(cARQ) Then Err.Raise vbObjectError + 1000, "IncluiSQLTC6", _
+        "Nao foi possivel abrir o banco: " & cARQ
     
     ' Ajustes de ambiente
-    SqliteSetValuesTC6 oDB
+    If Not SqliteSetValuesTC6(oDB) Then Err.Raise vbObjectError + 1003, _
+        "IncluiSQLTC6", "Falha ao configurar a conexao SQLite."
     
     
     Set oRS = oDB.OpenRecordset(cSQL)
 
-    ' Verifica se já existe (Check)
+    ' Verifica se jï¿½ existe (Check)
     If lCHECK And Not oRS.EOF Then
         lTEM = True
     End If
 
     If Not lTEM Then
+        If Not oRS.Updatable Then Err.Raise vbObjectError + 1001, "IncluiSQLTC6", _
+            "O recordset nao e atualizavel."
         oRS.AddNew
         For x = 0 To nITEM - 1
             If Not IsNull(aVAL(x)) Then
                 ' Tratamento de Datas para o TC6/Dialetos
-                If Mid(aCAM(x), 1, 1) = "D" Then ' Ou a lógica de aFOR que você usa
-                    oRS(aCAM(x)).Value = dialetoDataParaSQL(aVAL(x), aRETU(2))
+                If Mid(aCAM(x), 1, 1) = "D" Then ' Ou a lï¿½gica de aFOR que vocï¿½ usa
+                    If IsDate(aVAL(x)) Then
+                        oRS(aCAM(x)).Value = CDate(aVAL(x))
+                    Else
+                        oRS(aCAM(x)).Value = Null
+                    End If
                 Else
                     oRS(aCAM(x)).Value = aVAL(x)
                 End If
             End If
         Next x
 
-        ' Gravação
+        ' Gravaï¿½ï¿½o
         oRS.UpdateBatch
         
-        ' Recupera IDs se necessário
-        If Not IsNumeric(aIDDES) Then
-            ' No TC6, o registro inserido está posicionado
+        ' Recupera IDs se necessï¿½rio
+        If IsArray(aIDDES) Then
+            ' No TC6, o registro inserido estï¿½ posicionado
             Dim nCAMPOS As Long
             nCAMPOS = UBound(aIDDES)
             ReDim eRETU01(nCAMPOS)
             For x = 0 To nCAMPOS
                 eRETU01(x) = oRS(aIDDES(x)).Value
             Next x
+        Else
+            eRETU01 = oDB.LastInsertAutoID
         End If
         
         lRETU = True
     End If
 
-    ' Limpeza (TC6 não usa .Close na conexão, apenas no Recordset)
+    ' Limpeza (TC6 nï¿½o usa .Close na conexï¿½o, apenas no Recordset)
     Set oRS = Nothing
     Set oDB = Nothing
 
     If lCHECK And lTEM And lMES Then
-        Alert "Item já Cadastrado Com Esta Chave"
+        Alert "Item jï¿½ Cadastrado Com Esta Chave"
     End If
 
     IncluiSQLTC6 = lRETU
     Exit Function
 
 errhandler:
-    SayErro "Erro na Inclusão (TC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
+    SayErro "Erro na Inclusï¿½o (TC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
     IncluiSQLTC6 = False
@@ -394,48 +417,58 @@ Public Function PegSQLTC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Dim eVAL As Variant
 
     On Error GoTo errhandler
+    lRETU = False
     
     ' Inicializa o array de retorno
+    If nITEM <= 0 Then
+        PegSQLTC6 = aPAD
+        Exit Function
+    End If
     ReDim aRETU(0 To nITEM - 1)
+    For x = 0 To nITEM - 1
+        aRETU(x) = ValorPadraoTC6(aPAD, x)
+    Next x
     
     cARQ = LimpaTag(cARQ)
-   oDB.OpenDB cARQ
+    If Not oDB.OpenDB(cARQ) Then Err.Raise vbObjectError + 1000, "PegSQLTC6", _
+        "Nao foi possivel abrir o banco: " & cARQ
    
 
     ' Ajustes de ambiente
-    SqliteSetValuesTC6 oDB
+    If Not SqliteSetValuesTC6(oDB) Then Err.Raise vbObjectError + 1003, _
+        "PegSQLTC6", "Falha ao configurar a conexao SQLite."
 
     ' Abertura do Recordset no TC6
     Set oRS = oDB.OpenRecordset(cSQL)
 
     If Not oRS.EOF Then
+        lRETU = True
         For x = 0 To nITEM - 1
             aOPE = SepSqlOpe(aCAM(x))
             
-            ' Extração do valor
+            ' Extraï¿½ï¿½o do valor
             If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
                 eVAL = oRS(aCAM(x)).Value
             Else
                 eVAL = MathOper(oRS(aOPE(1)).Value, oRS(aOPE(2)).Value, aOPE(0))
             End If
 
-            ' Formatação (FVar) e tratamento de Nulo
+            ' Formataï¿½ï¿½o (FVar) e tratamento de Nulo
             If IsNull(eVAL) Then
-                aRETU(x) = aPAD(x)
+                aRETU(x) = ValorPadraoTC6(aPAD, x)
             Else
-                aRETU(x) = FVar(eVAL, aFOR(x), aPAD(x))
+                aRETU(x) = FVar(eVAL, aFOR(x), ValorPadraoTC6(aPAD, x))
             End If
         Next x
     Else
-        ' Se não encontrar registros, retorna o padrão
-        aRETU = aPAD
+        ' Se nï¿½o encontrar registros, retorna o padrï¿½o
     End If
 
     ' Fechamento e Limpeza
     Set oRS = Nothing
     Set oDB = Nothing
     
-    ' Retorno da função
+    ' Retorno da funï¿½ï¿½o
     PegSQLTC6 = aRETU
     Exit Function
 
@@ -444,16 +477,11 @@ errhandler:
     Dim cERRO As String
     cERRO = "Peg SQL TC6:" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & "Erro: " & Err.Description
     
-    ' Se ocorrer erro em um campo, tenta usar o valor padrão
-    If Err.Number = 3265 Or Err.Number = 5 Or Err.Number = 94 Then
-        If x >= 0 And x < nITEM Then aRETU(x) = aPAD(x)
-        Resume Next
-    End If
-    
+    ' Se ocorrer erro em um campo, tenta usar o valor padrï¿½o
     SayErro cERRO
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
-    PegSQLTC6 = aPAD
+    PegSQLTC6 = aRETU
 End Function
 Public Function PegCountSQLTC6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
   PegCountSQLTC6 = PegOperSQLTC6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "COUNT")
@@ -474,6 +502,7 @@ Public Function PegOperSQLTC6(ByVal cARQ As String, ByVal cTABLEWHERE As String,
   Dim aRETU As Variant
   Dim cSQL As String
   PegOperSQLTC6 = eDEFAULT
+  lRETU = False
 
 
   If coper = "CAMPO" Then
@@ -501,28 +530,29 @@ Public Function PegUltSQLTC6(ByVal cARQ As String, ByVal cSQL As String, ByVal c
     
     On Error GoTo errhandler
     
-    ' Valor padrão inicial
+    ' Valor padrï¿½o inicial
     PegUltSQLTC6 = eDEFAULT
     
-    ' Inicializa a conexão (O TC6 abre a conexão ao instanciar com o caminho)
+    ' Inicializa a conexï¿½o (O TC6 abre a conexï¿½o ao instanciar com o caminho)
     cARQ = LimpaTag(cARQ)
-    oDB.OpenDB cARQ
+    If Not oDB.OpenDB(cARQ) Then Err.Raise vbObjectError + 1000, "PegUltSQLTC6", _
+        "Nao foi possivel abrir o banco: " & cARQ
     
     ' Abre o Recordset nativo do TC6
     ' O TC6 gerencia o cursor automaticamente conforme o driver (SQLite/Outros)
     Set oRS = oDB.OpenRecordset(cSQL)
     
     If Not oRS.EOF Then
-        ' Move para o último registro para pegar o "último" valor
+        ' Move para o ï¿½ltimo registro para pegar o "ï¿½ltimo" valor
         oRS.MoveLast
         
-        ' Verifica se o campo não é nulo antes de atribuir
+        ' Verifica se o campo nï¿½o ï¿½ nulo antes de atribuir
         If Not IsNull(oRS(cCAMPO).Value) Then
             PegUltSQLTC6 = oRS(cCAMPO).Value
         End If
     End If
     
-    ' Limpeza (TC6 não tem .Close em conexão)
+    ' Limpeza (TC6 nï¿½o tem .Close em conexï¿½o)
     Set oRS = Nothing
     Set oDB = Nothing
     
@@ -537,7 +567,7 @@ errhandler:
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
     
-    ' Retorna o padrão em caso de erro
+    ' Retorna o padrï¿½o em caso de erro
     PegUltSQLTC6 = eDEFAULT
 End Function
 Public Function SQLMoveRegTC6(ByVal cARQORI As String, _
@@ -566,16 +596,26 @@ Public Function SQLMoveRegTC6(ByVal cARQORI As String, _
 
     cARQORI = LimpaTag(cARQORI)
     cARQDES = LimpaTag(cARQDES)
-    oDB.OpenDB cARQORI
-    oDBDES.OpenDB cARQDES
+    If Not oDB.OpenDB(cARQORI) Then Err.Raise vbObjectError + 1000, "SQLMoveRegTC6", _
+        "Nao foi possivel abrir o banco de origem: " & cARQORI
+    If Not oDBDES.OpenDB(cARQDES) Then Err.Raise vbObjectError + 1000, "SQLMoveRegTC6", _
+        "Nao foi possivel abrir o banco de destino: " & cARQDES
 
     ' Ajustes de ambiente
-    SqliteSetValuesTC6 oDB
-    SqliteSetValuesTC6 oDBDES
+    If Not SqliteSetValuesTC6(oDB) Then Err.Raise vbObjectError + 1003, _
+        "SQLMoveRegTC6", "Falha ao configurar a conexao de origem."
+    If Not SqliteSetValuesTC6(oDBDES) Then Err.Raise vbObjectError + 1003, _
+        "SQLMoveRegTC6", "Falha ao configurar a conexao de destino."
 
     ' 3. Abre Recordsets
     Set oRS = oDB.OpenRecordset(cSQLORI)
     Set oRSDES = oDBDES.OpenRecordset(cSQLDES)
+    If Not oRS.Updatable And InStr(1, UCase$(cOPEORI), "DEL", vbTextCompare) > 0 Then _
+        Err.Raise vbObjectError + 1001, "SQLMoveRegTC6", "O recordset de origem nao e atualizavel."
+    If InStr(1, UCase$(cOPEDES), "INC", vbTextCompare) = 0 Then _
+        Err.Raise vbObjectError + 1002, "SQLMoveRegTC6", "A operacao de destino deve conter INC."
+    If Not oRSDES.Updatable Then _
+        Err.Raise vbObjectError + 1001, "SQLMoveRegTC6", "O recordset de destino nao e atualizavel."
 
     ' 4. Processamento
     If Not oRS.EOF Then
@@ -589,43 +629,49 @@ Public Function SQLMoveRegTC6(ByVal cARQORI As String, _
                 Next x
             End If
 
-            ' Operação Origem (Delete)
+            ' Operaï¿½ï¿½o Origem (Delete)
             If InStr(cOPEORI, "DEL") > 0 Then oRS.Delete
 
-            ' Operação Destino (Append)
+            ' Operaï¿½ï¿½o Destino (Append)
             If InStr(cOPEDES, "INC") > 0 Then
                 oRSDES.AddNew
             End If
 
             ' Preenche campos do destino
-            If Not IsNumeric(aCAMDES) Then
+            If IsArray(aCAMDES) And IsArray(aCAMORI) Then
                 For x = 0 To UBound(aCAMDES)
                     oRSDES(aCAMDES(x)).Value = aVALORI(x)
                 Next x
             End If
             
             ' Preenche campos externos (Outros)
-            If Not IsNumeric(aOUTDES) Then
+            If IsArray(aOUTDES) Then
                 For x = 0 To UBound(aOUTDES)
-                    oRSDES(aOUTDES(x)).Value = aOUTORI(x)
+                    oRSDES(aOUTDES(x)).Value = ValorArrayOuEscalarTC6(aOUTORI, x)
                 Next x
             End If
 
-            ' Gravação em Lote
+            ' Gravaï¿½ï¿½o em Lote
             oRSDES.UpdateBatch
 
             ' Captura IDs inseridos
-            If Not IsNumeric(aIDDES) Then
+            If IsArray(aIDDES) Then
                 nCAMPOS = UBound(aIDDES)
                 ReDim aRETUID(nCAMPOS)
                 For x = 0 To nCAMPOS
                     aRETUID(x) = oRSDES(aIDDES(x)).Value
                 Next x
                 eRETU01 = aRETUID
+            Else
+                eRETU01 = oDBDES.LastInsertAutoID
             End If
 
             oRS.MoveNext
         Wend
+    End If
+
+    If InStr(1, UCase$(cOPEORI), "DEL", vbTextCompare) > 0 Then
+        oRS.UpdateBatch
     End If
 
     ' Limpeza
@@ -644,31 +690,45 @@ errhandler:
     Set oDB = Nothing: Set oDBDES = Nothing
     SQLMoveRegTC6 = False
 End Function
-Public Function SqliteSetValuesTC6(ByRef oCON As Object) As Boolean
+Public Function SqliteSetValuesTC6(ByVal oCON As TC6SQLite.cConnection) As Boolean
     On Error GoTo ErroSQLite
     SqliteSetValuesTC6 = False
     
     If oCON Is Nothing Then Exit Function
     
-    ' 1. Armazena temporários na memória
+    ' 1. Armazena temporï¿½rios na memï¿½ria
     oCON.Execute "PRAGMA temp_store = MEMORY;"
     
-    ' 2. Cache de 2000 páginas (aprox. 8MB se a página for 4KB)
+    ' 2. Cache de 2000 pï¿½ginas (aprox. 8MB se a pï¿½gina for 4KB)
     oCON.Execute "PRAGMA cache_size = 2000;"
     
-    ' 3. Modo WAL: Essencial para performance em concorrência
+    ' 3. Modo WAL: Essencial para performance em concorrï¿½ncia
     oCON.Execute "PRAGMA journal_mode = WAL;"
     
-    ' 4. Sincronização NORMAL (seguro com WAL e muito mais rápido)
+    ' 4. Sincronizaï¿½ï¿½o NORMAL (seguro com WAL e muito mais rï¿½pido)
     oCON.Execute "PRAGMA synchronous = NORMAL;"
     
     ' 5. Auto Vacuum Incremental
-    oCON.Execute "PRAGMA auto_vacuum = INCREMENTAL;"
-    
     SqliteSetValuesTC6 = True
     Exit Function
 
 ErroSQLite:
-    ' Aqui você pode registrar o erro se desejar
+    ' Aqui vocï¿½ pode registrar o erro se desejar
     SqliteSetValuesTC6 = False
+End Function
+
+Private Function ValorPadraoTC6(ByVal aPAD As Variant, ByVal index As Long) As Variant
+    If IsArray(aPAD) Then
+        ValorPadraoTC6 = aPAD(index)
+    Else
+        ValorPadraoTC6 = aPAD
+    End If
+End Function
+
+Private Function ValorArrayOuEscalarTC6(ByVal values As Variant, ByVal index As Long) As Variant
+    If IsArray(values) Then
+        ValorArrayOuEscalarTC6 = values(index)
+    Else
+        ValorArrayOuEscalarTC6 = values
+    End If
 End Function
