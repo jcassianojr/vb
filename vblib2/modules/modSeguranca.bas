@@ -1,16 +1,28 @@
 Attribute VB_Name = "modSeguranca"
 Option Explicit
 
-' --- DECLARAÃ‡Ã•ES DA WINDOWS CRYPTOAPI (NATIVA) ---
-Private Declare Function CryptAcquireContext Lib "advapi32.dll" Alias "CryptAcquireContextA" (ByRef phProv As Long, ByVal pszContainer As String, ByVal pszProvider As String, ByVal dwProvType As Long, ByVal dwFlags As Long) As Long
-Private Declare Function CryptReleaseContext Lib "advapi32.dll" (ByVal hProv As Long, ByVal dwFlags As Long) As Long
-Private Declare Function CryptCreateHash Lib "advapi32.dll" (ByVal hProv As Long, ByVal Algid As Long, ByVal hKey As Long, ByVal dwFlags As Long, ByRef phHash As Long) As Long
-Private Declare Function CryptDestroyHash Lib "advapi32.dll" (ByVal hHash As Long) As Long
-Private Declare Function CryptHashData Lib "advapi32.dll" (ByVal hHash As Long, ByVal pbData As String, ByVal cbData As Long, ByVal dwFlags As Long) As Long
-Private Declare Function CryptDeriveKey Lib "advapi32.dll" (ByVal hProv As Long, ByVal Algid As Long, ByVal hBaseData As Long, ByVal dwFlags As Long, ByRef phKey As Long) As Long
-Private Declare Function CryptDestroyKey Lib "advapi32.dll" (ByVal hKey As Long) As Long
-Private Declare Function CryptEncrypt Lib "advapi32.dll" (ByVal hKey As Long, ByVal hHash As Long, ByVal Final As Long, ByVal dwFlags As Long, ByVal pbData As String, ByRef pdwDataLen As Long, ByVal dwBufLen As Long) As Long
-Private Declare Function CryptDecrypt Lib "advapi32.dll" (ByVal hKey As Long, ByVal hHash As Long, ByVal Final As Long, ByVal dwFlags As Long, ByVal pbData As String, ByRef pdwDataLen As Long) As Long
+' --- DECLARAÇÕES DA WINDOWS CRYPTOAPI (NATIVA - 32/64 BITS) ---
+#If VBA7 Or Win64 Then
+    Private Declare PtrSafe Function CryptAcquireContext Lib "advapi32.dll" Alias "CryptAcquireContextA" (ByRef phProv As LongPtr, ByVal pszContainer As String, ByVal pszProvider As String, ByVal dwProvType As Long, ByVal dwFlags As Long) As Long
+    Private Declare PtrSafe Function CryptReleaseContext Lib "advapi32.dll" (ByVal hProv As LongPtr, ByVal dwFlags As Long) As Long
+    Private Declare PtrSafe Function CryptCreateHash Lib "advapi32.dll" (ByVal hProv As LongPtr, ByVal Algid As Long, ByVal hKey As LongPtr, ByVal dwFlags As Long, ByRef phHash As LongPtr) As Long
+    Private Declare PtrSafe Function CryptDestroyHash Lib "advapi32.dll" (ByVal hHash As LongPtr) As Long
+    Private Declare PtrSafe Function CryptHashData Lib "advapi32.dll" (ByVal hHash As LongPtr, ByVal pbData As String, ByVal cbData As Long, ByVal dwFlags As Long) As Long
+    Private Declare PtrSafe Function CryptDeriveKey Lib "advapi32.dll" (ByVal hProv As LongPtr, ByVal Algid As Long, ByVal hBaseData As LongPtr, ByVal dwFlags As Long, ByRef phKey As LongPtr) As Long
+    Private Declare PtrSafe Function CryptDestroyKey Lib "advapi32.dll" (ByVal hKey As LongPtr) As Long
+    Private Declare PtrSafe Function CryptEncrypt Lib "advapi32.dll" (ByVal hKey As LongPtr, ByVal hHash As LongPtr, ByVal Final As Long, ByVal dwFlags As Long, ByVal pbData As String, ByRef pdwDataLen As Long, ByVal dwBufLen As Long) As Long
+    Private Declare PtrSafe Function CryptDecrypt Lib "advapi32.dll" (ByVal hKey As LongPtr, ByVal hHash As LongPtr, ByVal Final As Long, ByVal dwFlags As Long, ByVal pbData As String, ByRef pdwDataLen As Long) As Long
+#Else
+    Private Declare Function CryptAcquireContext Lib "advapi32.dll" Alias "CryptAcquireContextA" (ByRef phProv As Long, ByVal pszContainer As String, ByVal pszProvider As String, ByVal dwProvType As Long, ByVal dwFlags As Long) As Long
+    Private Declare Function CryptReleaseContext Lib "advapi32.dll" (ByVal hProv As Long, ByVal dwFlags As Long) As Long
+    Private Declare Function CryptCreateHash Lib "advapi32.dll" (ByVal hProv As Long, ByVal Algid As Long, ByVal hKey As Long, ByVal dwFlags As Long, ByRef phHash As Long) As Long
+    Private Declare Function CryptDestroyHash Lib "advapi32.dll" (ByVal hHash As Long) As Long
+    Private Declare Function CryptHashData Lib "advapi32.dll" (ByVal hHash As Long, ByVal pbData As String, ByVal cbData As Long, ByVal dwFlags As Long) As Long
+    Private Declare Function CryptDeriveKey Lib "advapi32.dll" (ByVal hProv As Long, ByVal Algid As Long, ByVal hBaseData As Long, ByVal dwFlags As Long, ByRef phKey As Long) As Long
+    Private Declare Function CryptDestroyKey Lib "advapi32.dll" (ByVal hKey As Long) As Long
+    Private Declare Function CryptEncrypt Lib "advapi32.dll" (ByVal hKey As Long, ByVal hHash As Long, ByVal Final As Long, ByVal dwFlags As Long, ByVal pbData As String, ByRef pdwDataLen As Long, ByVal dwBufLen As Long) As Long
+    Private Declare Function CryptDecrypt Lib "advapi32.dll" (ByVal hKey As Long, ByVal hHash As Long, ByVal Final As Long, ByVal dwFlags As Long, ByVal pbData As String, ByRef pdwDataLen As Long) As Long
+#End If
 
 ' Constantes da CryptoAPI
 Private Const PROV_RSA_FULL As Long = 1
@@ -20,25 +32,18 @@ Private Const CALG_RC2 As Long = 26114
 
 ' Chave Mestra para derivar a chave de criptografia
 Private Const CHAVE_MESTRA As String = "Diretoria@Segura#2026!bancos"
+
 Public Sub ParametrosEnviarDados(ByVal cCaminhoDestino As String, ByVal cDados As String)
     Dim wsh As Object
     Dim execComo As Object
     
     On Error GoTo TrataErro
     
-    ' Cria o objeto do Windows Script Host
     Set wsh = CreateObject("WScript.Shell")
-    
-    ' Executa o programa destino abrindo os canais de comunicação por memória
     Set execComo = wsh.Exec(cCaminhoDestino)
-    
-    ' Grava a string de dados diretamente no Standard Input do destino
     execComo.StdIn.Write cDados
-    
-    ' Fecha o canal para que o destino saiba que o envio terminou
     execComo.StdIn.Close
     
-    ' Aguarda a execução terminar para liberar a CPU de forma segura
     Do While execComo.Status = 0
         DoEvents
     Loop
@@ -50,20 +55,18 @@ Public Sub ParametrosEnviarDados(ByVal cCaminhoDestino As String, ByVal cDados A
 TrataErro:
     MsgBox "Erro VB6 ao enviar: " & Err.Description, vbCritical
 End Sub
+
 Public Function ParametrosLerDados() As String
     Dim fso As Object
     Dim cResultado As String
     
     On Error Resume Next
     Set fso = CreateObject("Scripting.FileSystemObject")
-    
-    ' Abre o fluxo de entrada padrão (GetStandardStream 0 = StdIn)
-    ' Lê todo o conteúdo da memória até o fim do canal
     cResultado = fso.GetStandardStream(0).ReadAll
-    
     Set fso = Nothing
     ParametrosLerDados = cResultado
 End Function
+
 Public Function CaminhoArquivoCofre() As String
     Dim Caminho As String
     Caminho = App.Path
@@ -71,31 +74,31 @@ Public Function CaminhoArquivoCofre() As String
     CaminhoArquivoCofre = Caminho & "config.dat"
 End Function
 
-' --- FUNÃ‡ÃƒO PARA CRIPTOGRAFAR (CryptoAPI) ---
+' --- FUNÇÃO PARA CRIPTOGRAFAR (CryptoAPI) ---
 Public Function CriptografarForte(ByVal TextoPuro As String) As String
     If TextoPuro = "" Then Exit Function
     
-    Dim hProv As Long, hHash As Long, hKey As Long
+    ' Handles devem ser LongPtr em 64-bit para evitar Access Violation
+    #If VBA7 Or Win64 Then
+        Dim hProv As LongPtr, hHash As LongPtr, hKey As LongPtr
+    #Else
+        Dim hProv As Long, hHash As Long, hKey As Long
+    #End If
+    
     Dim strBuffer As String
     Dim LngDataLen As Long, LngBufLen As Long
     Dim i As Long, StrHex As String
     
-    ' 1. Adquire o contexto criptogrÃ¡fico do Windows
     If CryptAcquireContext(hProv, vbNullString, vbNullString, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT) <> 0 Then
-        ' 2. Cria um hash MD5 para derivar a chave a partir da nossa string mestra
         If CryptCreateHash(hProv, CALG_MD5, 0, 0, hHash) <> 0 Then
             If CryptHashData(hHash, CHAVE_MESTRA, Len(CHAVE_MESTRA), 0) <> 0 Then
-                ' 3. Deriva uma chave RC2 estÃ¡vel baseada no Hash da chave mestra
                 If CryptDeriveKey(hProv, CALG_RC2, hHash, 0, hKey) <> 0 Then
                     
-                    ' Prepara o buffer preenchendo com espaÃ§os (mÃºltiplo de 8 bytes para cifra de bloco)
                     LngDataLen = Len(TextoPuro)
                     LngBufLen = ((LngDataLen \ 8) + 1) * 8
                     strBuffer = TextoPuro & Space$(LngBufLen - LngDataLen)
                     
-                    ' 4. Executa a criptografia nativa do Windows
                     If CryptEncrypt(hKey, 0, 1, 0, strBuffer, LngDataLen, LngBufLen) <> 0 Then
-                        ' Converte os caracteres resultantes para Hexadecimal limpo
                         For i = 1 To LngDataLen
                             StrHex = StrHex & Right$("00" & Hex$(Asc(Mid$(strBuffer, i, 1))), 2)
                         Next i
@@ -111,33 +114,32 @@ Public Function CriptografarForte(ByVal TextoPuro As String) As String
     End If
 End Function
 
-' --- FUNÃ‡ÃƒO PARA DESCRIPTOGRAFAR (CryptoAPI) ---
+' --- FUNÇÃO PARA DESCRIPTOGRAFAR (CryptoAPI) ---
 Public Function DescriptografarForte(ByVal TextoCriptografado As String) As String
     If TextoCriptografado = "" Then Exit Function
     
-    Dim hProv As Long, hHash As Long, hKey As Long
+    #If VBA7 Or Win64 Then
+        Dim hProv As LongPtr, hHash As LongPtr, hKey As LongPtr
+    #Else
+        Dim hProv As Long, hHash As Long, hKey As Long
+    #End If
+    
     Dim strBuffer As String
     Dim LngDataLen As Long
     Dim i As Long, ByteChar As String
     
-    ' Reverte a string Hexadecimal de volta para caracteres binÃ¡rios no buffer
     For i = 1 To Len(TextoCriptografado) Step 2
         ByteChar = Chr$(Val("&H" & Mid$(TextoCriptografado, i, 2)))
         strBuffer = strBuffer & ByteChar
     Next i
     LngDataLen = Len(strBuffer)
     
-    ' 1. Adquire o contexto criptogrÃ¡fico do Windows
     If CryptAcquireContext(hProv, vbNullString, vbNullString, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT) <> 0 Then
-        ' 2. Recria o mesmo hash MD5 da chave mestra
         If CryptCreateHash(hProv, CALG_MD5, 0, 0, hHash) <> 0 Then
             If CryptHashData(hHash, CHAVE_MESTRA, Len(CHAVE_MESTRA), 0) <> 0 Then
-                ' 3. Deriva a mesma chave RC2
                 If CryptDeriveKey(hProv, CALG_RC2, hHash, 0, hKey) <> 0 Then
                     
-                    ' 4. Executa a descriptografia nativa do Windows
                     If CryptDecrypt(hKey, 0, 1, 0, strBuffer, LngDataLen) <> 0 Then
-                        ' Retorna a string limpa (removendo os espaÃ§os de preenchimento do bloco)
                         DescriptografarForte = Left$(strBuffer, LngDataLen)
                     End If
                     
@@ -150,7 +152,7 @@ Public Function DescriptografarForte(ByVal TextoCriptografado As String) As Stri
     End If
 End Function
 
-' --- INTERFACE DE LEITURA E GRAVAÃ‡ÃƒO NO ARQUIVO ---
+' --- INTERFACE DE LEITURA E GRAVAÇÃO NO ARQUIVO ---
 Public Sub GravarNoCofre(ByVal SecaoBanco As String, ByVal Chave As String, ByVal Valor As String)
     Dim ValorCripto As String
     ValorCripto = CriptografarForte(Valor)
@@ -169,10 +171,6 @@ Public Function LerDoCofre(ByVal SecaoBanco As String, ByVal Chave As String, Op
     End If
 End Function
 
-' Adicione esta declaração no topo
-
-
-' Adicione esta função ao final do módulo
 Public Sub ListarBancosNoCombo(ByRef Combo As Object)
     Dim strBuffer As String * 1024
     Dim lngLen As Long
@@ -183,7 +181,6 @@ Public Sub ListarBancosNoCombo(ByRef Combo As Object)
     lngLen = GetPrivateProfileSectionNames(strBuffer, 1024, CaminhoArquivoCofre)
     
     If lngLen > 0 Then
-        ' A API retorna as seções separadas por um caractere nulo (Chr(0))
         vBancos = Split(Left$(strBuffer, lngLen - 1), Chr$(0))
         For i = LBound(vBancos) To UBound(vBancos)
             If vBancos(i) <> "" Then Combo.AddItem vBancos(i)
@@ -192,7 +189,5 @@ Public Sub ListarBancosNoCombo(ByRef Combo As Object)
 End Sub
 
 Public Sub ExcluirBanco(ByVal NomeSecao As String)
-    ' No Windows API, enviar vbNullString para a seção exclui a seção inteira
     Call WritePrivateProfileString(NomeSecao, vbNullString, vbNullString, CaminhoArquivoCofre)
 End Sub
-
