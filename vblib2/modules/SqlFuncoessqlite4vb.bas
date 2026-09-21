@@ -191,6 +191,41 @@ TrataErro:
     Resume Saida
 End Function
 
+Public Function SomaSQLite4vb(ByVal cCON As String, ByVal cSQL As String, _
+                               ByVal aCAM As Variant) As Variant
+    Dim db As cSQLite
+    Dim rs As cSQLiteResults
+    Dim result() As Variant
+    Dim i As Long
+    Dim value As Variant
+    Dim nFields As Long
+
+    On Error GoTo TrataErro
+    nFields = UBound(aCAM) - LBound(aCAM) + 1
+    ReDim result(LBound(aCAM) To UBound(aCAM))
+    For i = LBound(aCAM) To UBound(aCAM)
+        result(i) = 0
+    Next i
+
+    Set db = AbrirSQLite4vb(cCON, True)
+    Set rs = db.Query(cSQL)
+    Do While rs.MoveNext()
+        For i = LBound(aCAM) To UBound(aCAM)
+            value = ValorCampo4vb(rs, aCAM(i))
+            If Not IsNull(value) And Not IsEmpty(value) Then
+                result(i) = result(i) + value
+            End If
+        Next i
+    Loop
+    SomaSQLite4vb = result
+Saida:
+    FecharSQLite4vb db, rs
+    Exit Function
+TrataErro:
+    SomaSQLite4vb = result
+    Resume Saida
+End Function
+
 Public Function GrvSQLite4vb(ByVal cARQ As String, ByVal cSQL_SELECT As String, _
                              ByVal nITEM As Long, ByVal aCAM As Variant, _
                              ByVal aVAL As Variant, ByVal aFOR As Variant, _
@@ -308,6 +343,82 @@ Public Function ApagaSQLite4vb(ByVal cCON As String, ByVal cSQL As String) As Bo
     If p = 0 Then Exit Function
     sql = "DELETE " & Mid$(Trim$(cSQL), p)
     ApagaSQLite4vb = ComandoSqlite4VB(cCON, sql)
+End Function
+
+Public Function SQLMoveRegSQLite4vb(ByVal cARQORI As String, _
+                                    ByVal cSQLORI As String, _
+                                    Optional ByVal cOPEORI As String = "", _
+                                    Optional ByVal aCAMORI As Variant = 0, _
+                                    Optional ByVal aOUTORI As Variant = 0, _
+                                    Optional ByVal cARQDES As String = "", _
+                                    Optional ByVal cSQLDES As String = "", _
+                                    Optional ByVal cOPEDES As String = "", _
+                                    Optional ByVal aCAMDES As Variant = 0, _
+                                    Optional ByVal aOUTDES As Variant = 0, _
+                                    Optional ByVal aIDDES As Variant = 0) As Boolean
+    Dim source As cSQLite, target As cSQLite
+    Dim rs As cSQLiteResults, targetCheck As cSQLiteResults
+    Dim tableName As String, fields As String
+    Dim values() As Variant, extraValues() As Variant
+    Dim i As Long, nFields As Long, nExtra As Long
+    Dim insertedId As Currency
+    Dim operation As String
+
+    On Error GoTo TrataErro
+    operation = UCase$(Trim$(cOPEDES))
+    If InStr(1, operation, "INC", vbTextCompare) = 0 Then Exit Function
+    If InStr(1, UCase$(cOPEORI), "DEL", vbTextCompare) > 0 Then
+        ' A consulta legada nao fornece necessariamente a chave fisica da
+        ' linha; nao apagar a origem sem uma clausula segura e explicita.
+        Exit Function
+    End If
+
+    tableName = ExtrairTabela4vb(cSQLDES)
+    If Len(tableName) = 0 Or Not IsArray(aCAMDES) Then Exit Function
+    nFields = UBound(aCAMDES) - LBound(aCAMDES) + 1
+    If IsArray(aCAMORI) Then
+        If UBound(aCAMORI) - LBound(aCAMORI) + 1 <> nFields Then Exit Function
+    Else
+        Exit Function
+    End If
+
+    Set source = AbrirSQLite4vb(cARQORI, True)
+    Set target = AbrirSQLite4vb(cARQDES, False)
+    Set rs = source.Query(cSQLORI)
+    If rs.MoveNext() Then
+        ReDim values(0 To nFields - 1)
+        For i = 0 To nFields - 1
+            values(i) = ValorCampo4vb(rs, aCAMORI(LBound(aCAMORI) + i))
+        Next i
+        fields = CamposArray4vb(aCAMDES, nFields)
+
+        If IsArray(aOUTDES) Then
+            ReDim extraValues(0 To UBound(aOUTDES) - LBound(aOUTDES))
+            For i = LBound(extraValues) To UBound(extraValues)
+                extraValues(i) = ValorArrayOuEscalar4vb(aOUTORI, i)
+            Next i
+            nExtra = UBound(extraValues) - LBound(extraValues) + 1
+            fields = fields & ", " & CamposArray4vb(aOUTDES, UBound(aOUTDES) - LBound(aOUTDES) + 1)
+            ReDim values(0 To nFields + nExtra - 1)
+            For i = 0 To nFields - 1
+                values(i) = ValorCampo4vb(rs, aCAMORI(LBound(aCAMORI) + i))
+            Next i
+            For i = 0 To nExtra - 1
+                values(nFields + i) = extraValues(LBound(extraValues) + i)
+            Next i
+        End If
+
+        insertedId = target.ExecInsertArr(tableName, fields, values)
+        PreencherIDs4vb target, tableName, aIDDES, insertedId
+        SQLMoveRegSQLite4vb = True
+    End If
+Saida:
+    FecharSQLite4vb source, rs
+    FecharSQLite4vb target, targetCheck
+    Exit Function
+TrataErro:
+    SQLMoveRegSQLite4vb = False
+    Resume Saida
 End Function
 
 Public Function VBSQLiteSetValues4vb(ByVal db As cSQLite) As Boolean

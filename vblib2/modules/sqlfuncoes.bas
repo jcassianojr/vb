@@ -97,7 +97,7 @@ If IsQueryDestructive(cSQL) Then
   Case "TC6SQLITE"
       GrvSQL = GrvSQLTC6(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem)
  Case "SQLITE4VB"
-      GrvSQL = GrvSQLite4vb(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem) ' Nova integração
+      GrvSQL = GrvSQLite4vb(cARQ, cSQL, nITEM, aCAM, aVAL, aFOR, nStartItem) ' Nova integraï¿½ï¿½o
   End Select
 End Function
 
@@ -123,7 +123,7 @@ Public Function IncluiSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
    Case "TC6SQLITE"
        IncluiSQL = IncluiSQLTC6(cARQ, cSQL, nITEM, aCAM, aVAL, lCHECK, lMES, aIDDES)
    Case "SQLITE4VB"
-       IncluiSQL = IncluiSQLite4vb(cARQ, cSQL, nITEM, aCAM, aVAL, lCHECK, lMES, aIDDES) ' Nova integração
+       IncluiSQL = IncluiSQLite4vb(cARQ, cSQL, nITEM, aCAM, aVAL, lCHECK, lMES, aIDDES) ' Nova integraï¿½ï¿½o
   End Select
 End Function
 
@@ -146,7 +146,7 @@ Public Function PegSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal nITEM A
     Case "TC6SQLITE"
             PegSQL = PegSQLTC6(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD)
      Case "SQLITE4VB"
-          PegSQL = PegSQLite4vb(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD) ' Nova integração
+          PegSQL = PegSQLite4vb(cARQ, cSQL, nITEM, aCAM, aFOR, aPAD) ' Nova integraï¿½ï¿½o
   End Select
 End Function
 
@@ -213,7 +213,7 @@ Select Case aRETU(0)
  Case "TC6SQLITE"
        PegCountSQL = PegCountSQLTC6(cARQ, cTable, cCAMPO, eDEFAULT)
  Case "SQLITE4VB"
-      PegCountSQL = PegCountSQLite4vb(cARQ, cTable, cCAMPO, eDEFAULT) ' Nova integração
+      PegCountSQL = PegCountSQLite4vb(cARQ, cTable, cCAMPO, eDEFAULT) ' Nova integraï¿½ï¿½o
 End Select
 End Function
 Public Function ComandoSQL(ByVal cARQ As String, ByVal cSQL As String) As Boolean
@@ -235,7 +235,7 @@ Select Case aRETU(0)
  Case "TC6SQLITE"
      ComandoSQL = ComandoTC6(cARQ, cSQL)
  Case "SQLITE4VB"
-    ComandoSQL = ComandoSQLite4vb(cARQ, cSQL) ' Nova integração
+    ComandoSQL = ComandoSQLite4vb(cARQ, cSQL) ' Nova integraï¿½ï¿½o
 End Select
 End Function
 
@@ -280,6 +280,8 @@ Public Function SomaSQL(ByVal cARQ As String, ByVal cSQL As String, ByVal aCAM A
             
       Case "TC6SQLITE"
             SomaSQL = SomaSQLTC6(cARQ, cSQL, aCAM)
+      Case "SQLITE4VB"
+            SomaSQL = SomaSQLite4vb(cARQ, cSQL, aCAM)
   End Select
 End Function
 Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
@@ -302,11 +304,13 @@ Public Function PegSQLDeli(ByVal cARQ As String, ByVal cSQL As String, _
             PegSQLDeli = PegSQLDeliSQLITERC6(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
         Case "TC6SQLITE"
             PegSQLDeli = PegSQLDeliTC6(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
+        Case "SQLITE4VB"
+            PegSQLDeli = PegSQLiteDeli4vb(cARQ, cSQL, aCAM, cDELI, aPAD, aFOR)
     End Select
 End Function
 
-Public Function ApagaSQLP(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusão")
-   If MDG(cTEXTO, "Exclusão Registro") Then
+Public Function ApagaSQLP(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusï¿½o")
+   If MDG(cTEXTO, "Exclusï¿½o Registro") Then
       ApagaSQLP = ApagaSQL(cARQ, cSQL)
    End If
 End Function
@@ -368,6 +372,9 @@ Public Function SqlMoveReg(ByVal cARQORI As String, _
       Case "TC6SQLITE"
        SqlMoveReg = SQLMoveRegTC6(cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
                                              cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, aIDDES)
+      Case "SQLITE4VB"
+       SqlMoveReg = SQLMoveRegSQLite4vb(cARQORI, cSQLORI, cOPEORI, aCAMORI, aOUTORI, _
+                                             cARQDES, cSQLDES, cOPEDES, aCAMDES, aOUTDES, aIDDES)
   End Select
 End Function
 
@@ -411,15 +418,15 @@ Public Function Mana5Fec() As Boolean
     End If
     cCAMFEC = UCase(Busca(cDIZBX, "Utilizar", "A", 1))
     If Len(aARQFEC(1)) = 0 And cCAMFEC = "B" Then
-      Alert "Não Possue Baixa"
+      Alert "Nï¿½o Possue Baixa"
       Exit Function
     End If
     If Len(aARQFEC(2)) = 0 And cCAMFEC = "F" Then
-      Alert "Não Possue Fechamento"
+      Alert "Nï¿½o Possue Fechamento"
       Exit Function
     End If
     If Len(aARQFEC(3)) = 0 And cCAMFEC = "C" Then
-      Alert "Não Possue Acumulado"
+      Alert "Nï¿½o Possue Acumulado"
       Exit Function
     End If
     If cCAMFEC = "F" Then
@@ -457,10 +464,10 @@ Public Function Mana5Fec() As Boolean
       End Select
     End If
     If cCAMFEC = "C" Then
-      If Not MDG("Usar Acumulo Anterior", "Confirmaçao") Then
+      If Not MDG("Usar Acumulo Anterior", "Confirmaï¿½ao") Then
         ''Shell "somaano $" & UCase(aARQFEC(0)), vbNormalFocus
         ShellEx "SOMAANO", essSW_SHOWDEFAULT, "$" & UCase(aARQFEC(0)), PegPath("PATH", "SOMAANO")
-        Alert "Clique em Ok, Após o Termino do Acumulo", "Aguarde.."
+        Alert "Clique em Ok, Apï¿½s o Termino do Acumulo", "Aguarde.."
       End If
     End If
     aARQFEC(4) = cFECDIZ
@@ -506,37 +513,37 @@ Public Function IsQuerySafe(ByVal sql As String) As Boolean
     Dim currentChar As String
     Dim forbiddenWords As Variant
     
-    ' 1. Normaliza para maiúsculas
+    ' 1. Normaliza para maiï¿½sculas
     cleanSQL = UCase(sql)
     
-    ' 2. Substitui caracteres não-alfabéticos por espaços
+    ' 2. Substitui caracteres nï¿½o-alfabï¿½ticos por espaï¿½os
     ' Isso separa as palavras que o atacante tentou colar
     For i = 1 To Len(cleanSQL)
         currentChar = Mid(cleanSQL, i, 1)
         charCode = Asc(currentChar)
-        ' Mantém A-Z e números
+        ' Mantï¿½m A-Z e nï¿½meros
         If Not ((charCode >= 65 And charCode <= 90) Or (charCode >= 48 And charCode <= 57)) Then
             Mid(cleanSQL, i, 1) = " "
         End If
     Next i
     
-    ' 3. Remove excesso de espaços para facilitar a análise
+    ' 3. Remove excesso de espaï¿½os para facilitar a anï¿½lise
     cleanSQL = Trim(Replace(Replace(cleanSQL, "  ", " "), "  ", " "))
     
-    ' 4. Verifica se a primeira palavra é SELECT
+    ' 4. Verifica se a primeira palavra ï¿½ SELECT
     ' Dividimos para pegar apenas a primeira parte
     If Split(cleanSQL, " ")(0) <> "SELECT" Then
         IsQuerySafe = False
         Exit Function
     End If
     
-    ' 5. Lista de palavras proibidas (sem espaços nas pontas)
+    ' 5. Lista de palavras proibidas (sem espaï¿½os nas pontas)
     forbiddenWords = Array("DELETE", "DROP", "UPDATE", "INSERT", _
                            "CREATE", "ALTER", "TRUNCATE", "EXEC", _
                            "EXECUTE", "GRANT", "REVOKE", "INTO")
     
     ' 6. Verifica se alguma palavra proibida existe na string processada
-    ' Como limpamos a string no passo 2, o InStr encontrará a palavra
+    ' Como limpamos a string no passo 2, o InStr encontrarï¿½ a palavra
     ' mesmo que ela estivesse grudada originalmente
     For i = LBound(forbiddenWords) To UBound(forbiddenWords)
         If InStr(cleanSQL, forbiddenWords(i)) > 0 Then
@@ -554,10 +561,10 @@ Public Function IsQueryDestructive(ByVal sql As String) As Boolean
     Dim i As Integer, charCode As Integer
     Dim destrutivos As Variant
     
-    ' 1. Normaliza para maiúsculas
+    ' 1. Normaliza para maiï¿½sculas
     cleanSQL = UCase(sql)
     
-    ' 2. Limpeza profunda: substitui tudo que não é letra ou número por espaço
+    ' 2. Limpeza profunda: substitui tudo que nï¿½o ï¿½ letra ou nï¿½mero por espaï¿½o
     ' Isso garante que "DELETE;" ou "DROP--" virem "DELETE " ou "DROP "
     For i = 1 To Len(cleanSQL)
         charCode = Asc(Mid(cleanSQL, i, 1))
@@ -566,24 +573,24 @@ Public Function IsQueryDestructive(ByVal sql As String) As Boolean
         End If
     Next i
     
-    ' 3. Remove espaços extras para deixar a string "limpa"
+    ' 3. Remove espaï¿½os extras para deixar a string "limpa"
     cleanSQL = Trim(Replace(Replace(cleanSQL, "  ", " "), "  ", " "))
     
-    ' 4. Lista do que é proibido
-    ' Como removemos os símbolos, basta buscar a palavra pura
+    ' 4. Lista do que ï¿½ proibido
+    ' Como removemos os sï¿½mbolos, basta buscar a palavra pura
     destrutivos = Array("DROP", "ALTER", "CREATE", "TRUNCATE", "GRANT", "REVOKE")
     
     ' 5. Verifica se alguma palavra proibida existe dentro da string limpa
-    ' O InStr encontrará "DROP" mesmo se estiver no meio da frase ou sem espaços
+    ' O InStr encontrarï¿½ "DROP" mesmo se estiver no meio da frase ou sem espaï¿½os
     For i = LBound(destrutivos) To UBound(destrutivos)
         If InStr(cleanSQL, destrutivos(i)) > 0 Then
-            IsQueryDestructive = True ' É destrutivo!
+            IsQueryDestructive = True ' ï¿½ destrutivo!
             RegistrarLogSeguranca (sql)
             Exit Function
         End If
     Next i
     
-    IsQueryDestructive = False ' É seguro para prosseguir
+    IsQueryDestructive = False ' ï¿½ seguro para prosseguir
 End Function
 
 Public Sub RegistrarLogSeguranca(ByVal cSQL As String)
@@ -596,8 +603,8 @@ Public Sub RegistrarLogSeguranca(ByVal cSQL As String)
     ' Cria o objeto FSO
     Set fso = CreateObject("Scripting.FileSystemObject")
     
-    ' O parâmetro 8 indica "ForAppending" (Adicionar ao final)
-    ' O True indica que ele deve criar o arquivo caso ele não exista
+    ' O parï¿½metro 8 indica "ForAppending" (Adicionar ao final)
+    ' O True indica que ele deve criar o arquivo caso ele nï¿½o exista
     Set ts = fso.OpenTextFile(cLogPath, 8, True)
     
     ' Escreve as linhas de log
