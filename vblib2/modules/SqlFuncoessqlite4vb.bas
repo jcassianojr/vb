@@ -1,285 +1,461 @@
 Attribute VB_Name = "sqlsqlite4vb"
 Option Explicit
-'sqlite4vb https://github.com/dzzie/sqllite4vb
-Public Function PegUltSQLite4vb(ByVal cCON As String, ByVal cSQL As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-    Dim db As New cSQLite, RS As cSQLiteResults, vUltimo As Variant
-    On Error GoTo Erro
-    vUltimo = eDEFAULT
-    db.OpenDB LimpaTag(cCON)
-    Set RS = db.Query(cSQL)
-    Do While RS.MoveNext()
-        vUltimo = RS(cCAMPO)
+
+' Adaptador encapsulado para cSQLite (sqlite4vb).
+' Os valores sao ligados por parametros; nomes de tabela/campo continuam
+' sendo derivados do SQL legado e devem ser controlados pelo chamador.
+
+Public Function PegUltSQLite4vb(ByVal cCON As String, ByVal cSQL As String, _
+                                ByVal cCAMPO As String, _
+                                ByVal eDEFAULT As Variant) As Variant
+    Dim db As cSQLite
+    Dim rs As cSQLiteResults
+    Dim value As Variant
+
+    On Error GoTo TrataErro
+    Set db = AbrirSQLite4vb(cCON, True)
+    Set rs = db.Query(cSQL)
+    Do While rs.MoveNext()
+        value = rs(cCAMPO)
     Loop
-    PegUltSQLite4vb = IIf(IsNull(vUltimo), eDEFAULT, vUltimo)
-    db.CloseDB: Set RS = Nothing: Set db = Nothing
+    If IsNull(value) Or IsEmpty(value) Then value = eDEFAULT
+    PegUltSQLite4vb = value
+Saida:
+    FecharSQLite4vb db, rs
     Exit Function
-Erro: PegUltSQLite4vb = eDEFAULT
+TrataErro:
+    PegUltSQLite4vb = eDEFAULT
+    Resume Saida
 End Function
 
-Public Function PegMinSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+Public Function PegMinSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                                ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegMinSQLite4vb = PegOperSQLite4vb(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "MIN")
 End Function
 
-Public Function PegMaxSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+Public Function PegMaxSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                                ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegMaxSQLite4vb = PegOperSQLite4vb(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "MAX")
 End Function
 
-Public Function PegSumSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+Public Function PegSumSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                                ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegSumSQLite4vb = PegOperSQLite4vb(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "SUM")
 End Function
 
-Public Function PegCountSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+Public Function PegCountSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                                  ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
     PegCountSQLite4vb = PegOperSQLite4vb(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "COUNT")
 End Function
 
-Public Function PegOperSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant, ByVal coper As String) As Variant
-    Dim db As New cSQLite
-    Dim eValue As Variant
-    Dim cSQL As String
-    On Error GoTo Erro
-    
- If coper = "CAMPO" Then
-    If Len(cCAMPO) = 0 Then  'Passado a string ja com o campo select numero from tabela where numero=999999
-      cTABLEWHERE = UCase(cTABLEWHERE)
-      cSQL = Replace(cTABLEWHERE, " FROM ", " AS CAMPO FROM ")  'inclui as campo variavel padrao no pegsql abaixo
-    Else
-      cSQL = "SELECT " & cCAMPO & " AS CAMPO FROM " & cTABLEWHERE
-    End If
-  Else
-    cSQL = "SELECT " & coper & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
-  End If
+Public Function PegCampoSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                                  ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
+    PegCampoSQLite4vb = PegOperSQLite4vb(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "CAMPO")
+End Function
 
-    
-    db.OpenDB LimpaTag(cCON)
-    eValue = db.Scalar(cSQL)
-    PegOperSQLite4vb = IIf(IsNull(eValue) Or IsEmpty(eValue), eDEFAULT, eValue)
-    db.CloseDB: Set db = Nothing
+Public Function PegOperSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, _
+                                 ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
+                                 ByVal coper As String) As Variant
+    Dim db As cSQLite
+    Dim sql As String
+    Dim value As Variant
+    Dim op As String
+
+    On Error GoTo TrataErro
+    op = UCase$(Trim$(coper))
+    Select Case op
+        Case "CAMPO"
+            If Len(cCAMPO) = 0 Then
+                sql = AliasCampoSQLite4vb(cTABLEWHERE)
+            Else
+                sql = "SELECT " & cCAMPO & " AS CAMPO FROM " & cTABLEWHERE
+            End If
+        Case "MIN", "MAX", "SUM", "COUNT"
+            sql = "SELECT " & op & "(" & cCAMPO & ") AS CAMPO FROM " & cTABLEWHERE
+        Case Else
+            Exit Function
+    End Select
+
+    Set db = AbrirSQLite4vb(cCON, True)
+    value = db.Scalar(sql)
+    If IsNull(value) Or IsEmpty(value) Then value = eDEFAULT
+    PegOperSQLite4vb = value
+Saida:
+    FecharSQLite4vb db
     Exit Function
-Erro: PegOperSQLite4vb = eDEFAULT
+TrataErro:
+    PegOperSQLite4vb = eDEFAULT
+    Resume Saida
 End Function
 
 Public Function ComandoSqlite4VB(ByVal cCON As String, ByVal cSQL As String) As Boolean
-    Dim db As New cSQLite
-    On Error GoTo Erro
-    db.OpenDB LimpaTag(cCON)
-    db.Execute cSQL
+    Dim db As cSQLite
+    On Error GoTo TrataErro
+    Set db = AbrirSQLite4vb(cCON, False)
+    db.Execute DialetoSQLite4vb(cSQL)
     ComandoSqlite4VB = True
-    db.CloseDB: Set db = Nothing
+Saida:
+    FecharSQLite4vb db
     Exit Function
-Erro: ComandoSqlite4VB = False
+TrataErro:
+    ComandoSqlite4VB = False
+    Resume Saida
 End Function
 
-Public Function PegSQLite4vb(ByVal cCON As String, ByVal cSQL As String, ByVal nITEM As Long, ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
-    Dim db As New cSQLite, RS As cSQLiteResults, i As Integer, aVAL() As Variant
-    On Error GoTo Erro
-    ReDim aVAL(nITEM - 1)
-    db.OpenDB LimpaTag(cCON)
-    
-    Set RS = db.Query(cSQL)
-    If RS.MoveNext() Then
-        For i = 0 To nITEM - 1
-            aVAL(i) = IIf(IsNull(RS(aCAM(i))), aPAD(i), RS(aCAM(i)))
-        Next i
-        PegSQLite4vb = aVAL
-    Else
-        PegSQLite4vb = aPAD
-    End If
-    db.CloseDB: Set RS = Nothing: Set db = Nothing
-    Exit Function
-Erro: PegSQLite4vb = aPAD
-End Function
-
-' --- Função GrvSQLite4vb (Mantendo a lógica original) ---
-Public Function GrvSQLite4vb(ByVal cARQ As String, _
-                           ByVal cSQL_SELECT As String, _
-                           ByVal nITEM As Long, _
-                           ByVal aCAM As Variant, _
-                           ByVal aVAL As Variant, _
-                           ByVal aFOR As Variant, _
-                           Optional ByVal nStartItem As Long = 0) As Boolean
-    
-    Dim db As New cSQLite
-    Dim cSQL_UPDATE As String
-    Dim cTABELA As String, cWHERE As String
+Public Function PegSQLite4vb(ByVal cCON As String, ByVal cSQL As String, _
+                             ByVal nITEM As Long, ByVal aCAM As Variant, _
+                             ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
+    Dim db As cSQLite
+    Dim rs As cSQLiteResults
+    Dim result() As Variant
     Dim i As Long
-    Dim nPosFrom As Long, nPosWhere As Long
-    
-    On Error GoTo Erro
-    
-    ' 1. Extração da Tabela e do WHERE (Lógica idêntica à original)
-    nPosFrom = InStr(1, UCase(cSQL_SELECT), " FROM ") + 6
-    nPosWhere = InStr(1, UCase(cSQL_SELECT), " WHERE ")
-    
-    If nPosWhere > 0 Then
-        cTABELA = Trim(Mid(cSQL_SELECT, nPosFrom, nPosWhere - nPosFrom))
-        cWHERE = Mid(cSQL_SELECT, nPosWhere)
-    Else
+    Dim value As Variant
+
+    On Error GoTo TrataErro
+    If nITEM <= 0 Then
+        PegSQLite4vb = aPAD
         Exit Function
     End If
-    
-    ' 2. Montagem do comando UPDATE dinâmico
-    cSQL_UPDATE = "UPDATE " & cTABELA & " SET "
-    For i = nStartItem To (nITEM - 1)
-        cSQL_UPDATE = cSQL_UPDATE & aCAM(i) & " = " & TratarValorParaSQL(aVAL(i), aFOR(i), "SQLITE") & _
-                      IIf(i < (nITEM - 1), ", ", " ")
+
+    ReDim result(0 To nITEM - 1)
+    For i = 0 To nITEM - 1
+        result(i) = ValorArrayOuEscalar4vb(aPAD, i)
     Next i
-    cSQL_UPDATE = cSQL_UPDATE & cWHERE
-    
-    ' 3. Execução direta na conexão (sqlite4vb)
-    db.OpenDB LimpaTag(cARQ)
-    VBSQLiteSetValues4vb db ' Aplica configurações WAL/Cache
-    
-    db.Execute cSQL_UPDATE
-    
-    GrvSQLite4vb = True
-    db.CloseDB
-    Set db = Nothing
+
+    Set db = AbrirSQLite4vb(cCON, True)
+    Set rs = db.Query(cSQL)
+    If rs.MoveNext() Then
+        For i = 0 To nITEM - 1
+            value = ValorCampo4vb(rs, aCAM(i))
+            If IsNull(value) Or IsEmpty(value) Then
+                result(i) = ValorArrayOuEscalar4vb(aPAD, i)
+            Else
+                result(i) = FVar(value, ValorArrayOuEscalar4vb(aFOR, i), _
+                                 ValorArrayOuEscalar4vb(aPAD, i))
+            End If
+        Next i
+    End If
+    PegSQLite4vb = result
+Saida:
+    FecharSQLite4vb db, rs
     Exit Function
-    
-Erro:
-    GrvSQLite4vb = False
-    If Not db Is Nothing Then db.CloseDB
+TrataErro:
+    PegSQLite4vb = aPAD
+    Resume Saida
 End Function
-Public Function ExecuteScalarSQLite4vb(ByVal cARQ As String, ByVal cSQL As String) As Variant
-    Dim db As New cSQLite
-    On Error GoTo Erro
-    
-    db.OpenDB LimpaTag(cARQ)
-    VBSQLiteSetValues4vb db
-    
-    ' db.Scalar retorna o primeiro campo da primeira linha
-    ExecuteScalarSQLite4vb = db.Scalar(cSQL)
-    
-    db.CloseDB
-    Set db = Nothing
-    Exit Function
-Erro:
-    ExecuteScalarSQLite4vb = Null
-    If Not db Is Nothing Then db.CloseDB
-End Function
-Public Function IncluiSQLite4vb(ByVal cARQ As String, _
-                             ByVal cSQL_SELECT As String, _
-                             ByVal nITEM As Long, _
-                             ByVal aCAM As Variant, _
-                             ByVal aVAL As Variant, _
-                             ByVal lCHECK As Boolean, _
-                             ByVal lMES As Boolean, _
-                             ByVal aIDDES As Variant) As Boolean
-    
-    Dim db As New cSQLite
-    Dim cTABELA As String
+
+Public Function PegSQLiteDeli4vb(ByVal cCON As String, ByVal cSQL As String, _
+                                 ByVal aCAM As Variant, _
+                                 Optional ByVal cDELI As String = ",", _
+                                 Optional ByVal aPAD As Variant = "", _
+                                 Optional ByVal aFOR As Variant = "") As Variant
+    Dim db As cSQLite
+    Dim rs As cSQLiteResults
+    Dim result() As String
     Dim i As Long
-    Dim cCampos As String
-    Dim cValores As String
-    Dim lTEM
-    Dim RS
-    
-    On Error GoTo Erro
-    
-    ' 1. Extração da Tabela
-    cTABELA = ExtraiTabela(cSQL_SELECT)
-    
-    ' 2. Checagem (lCHECK)
-    ' Implementação da lógica de verificação se necessário
+    Dim value As Variant
+    Dim hasRow As Boolean
+    Dim rowCount As Long
+
+    On Error GoTo TrataErro
+    ReDim result(LBound(aCAM) To UBound(aCAM))
+    Set db = AbrirSQLite4vb(cCON, True)
+    Set rs = db.Query(cSQL)
+    Do While rs.MoveNext()
+        hasRow = True
+        rowCount = rowCount + 1
+        For i = LBound(aCAM) To UBound(aCAM)
+            value = ValorCampo4vb(rs, aCAM(i))
+            If IsNull(value) Or IsEmpty(value) Then
+                value = ValorArrayOuEscalar4vb(aPAD, i)
+            ElseIf IsArray(aFOR) Then
+                value = FVar(value, aFOR(i), ValorArrayOuEscalar4vb(aPAD, i))
+            End If
+            If rowCount > 1 Then
+                result(i) = result(i) & cDELI
+            End If
+            result(i) = result(i) & FixStr(value)
+        Next i
+    Loop
+    If Not hasRow Then
+        For i = LBound(aCAM) To UBound(aCAM)
+            result(i) = CStr(ValorArrayOuEscalar4vb(aPAD, i))
+        Next i
+    End If
+    PegSQLiteDeli4vb = result
+Saida:
+    FecharSQLite4vb db, rs
+    Exit Function
+TrataErro:
+    PegSQLiteDeli4vb = result
+    Resume Saida
+End Function
+
+Public Function GrvSQLite4vb(ByVal cARQ As String, ByVal cSQL_SELECT As String, _
+                             ByVal nITEM As Long, ByVal aCAM As Variant, _
+                             ByVal aVAL As Variant, ByVal aFOR As Variant, _
+                             Optional ByVal nStartItem As Long = 0) As Boolean
+    Dim db As cSQLite
+    Dim tableName As String, whereSql As String, sql As String
+    Dim values() As Variant
+    Dim i As Long, nValues As Long
+
+    On Error GoTo TrataErro
+    If nStartItem < 0 Then nStartItem = 0
+    If nStartItem >= nITEM Then Exit Function
+    If Not ExtrairUpdate4vb(cSQL_SELECT, tableName, whereSql) Then Exit Function
+
+    nValues = nITEM - nStartItem
+    ReDim values(0 To nValues - 1)
+    For i = 0 To nValues - 1
+        values(i) = ValorParaGravar4vb(ValorArrayOuEscalar4vb(aVAL, nStartItem + i), _
+                                        ValorArrayOuEscalar4vb(aFOR, nStartItem + i))
+    Next i
+
+    Set db = AbrirSQLite4vb(cARQ, False)
+    sql = MontarUpdate4vb(tableName, whereSql, aCAM, nStartItem, nITEM)
+    db.ExecUpdateArr tableName, whereSql, CamposUpdate4vb(aCAM, nStartItem, nITEM), values
+    GrvSQLite4vb = True
+Saida:
+    FecharSQLite4vb db
+    Exit Function
+TrataErro:
+    GrvSQLite4vb = False
+    Resume Saida
+End Function
+
+Public Function ExecuteScalarSQLite4vb(ByVal cARQ As String, ByVal cSQL As String) As Variant
+    Dim db As cSQLite
+    On Error GoTo TrataErro
+    Set db = AbrirSQLite4vb(cARQ, True)
+    ExecuteScalarSQLite4vb = db.Scalar(cSQL)
+Saida:
+    FecharSQLite4vb db
+    Exit Function
+TrataErro:
+    ExecuteScalarSQLite4vb = Null
+    Resume Saida
+End Function
+
+Public Function IncluiSQLite4vb(ByVal cARQ As String, ByVal cSQL_SELECT As String, _
+                                ByVal nITEM As Long, ByVal aCAM As Variant, _
+                                ByVal aVAL As Variant, ByVal lCHECK As Boolean, _
+                                ByVal lMES As Boolean, ByVal aIDDES As Variant) As Boolean
+    Dim db As cSQLite
+    Dim rs As cSQLiteResults
+    Dim tableName As String, fields As String
+    Dim values() As Variant
+    Dim i As Long
+    Dim existed As Boolean
+    Dim insertId As Currency
+
+    On Error GoTo TrataErro
+    tableName = ExtrairTabela4vb(cSQL_SELECT)
+    If Len(tableName) = 0 Then Exit Function
+
+    Set db = AbrirSQLite4vb(cARQ, False)
     If lCHECK Then
-       db.OpenDB LimpaTag(cARQ)
-        ' Usamos Query com a cSQL_SELECT completa para identificar se o registro já existe
-        Set RS = db.Query(cSQL_SELECT)
-        If RS.MoveNext() Then lTEM = True
-        Set RS = Nothing
-        db.CloseDB
-        If lTEM Then
-           Exit Function
+        Set rs = db.Query(cSQL_SELECT)
+        existed = rs.MoveNext()
+        Set rs = Nothing
+        If existed Then
+            If lMES Then Alert "Item ja Cadastrado Com Esta Chave"
+            Exit Function
         End If
     End If
-    
-    ' 3. Montagem do INSERT
-    cCampos = ""
-    cValores = ""
-    For i = 0 To nITEM - 1
-        cCampos = cCampos & IIf(cCampos = "", "", ", ") & aCAM(i)
-        cValores = cValores & IIf(cValores = "", "", ", ") & TratarValorParaSQL(aVAL(i), "C", "SQLITE")
-    Next i
-    
-    ' 4. Execução utilizando sqlite4vb
-    db.OpenDB LimpaTag(cARQ)
-    VBSQLiteSetValues4vb db ' Aplica configurações de performance
-    
-    db.Execute "INSERT INTO " & cTABELA & " (" & cCampos & ") VALUES (" & cValores & ")"
-    
-    ' 5. Captura do ID (Equivalente ao ADO)
-    ' SQLite utiliza db.LastInsertRowID
-    If Not IsNumeric(aIDDES) Then
-        ' Se aIDDES for uma matriz, popula conforme o padrão da vbsqlite original
-        ' Exemplo: aIDDES = Array(db.LastInsertRowID)
-    Else
-        aIDDES = CLng(db.LastInsertRowID)
-    End If
-    
-    IncluiSQLite4vb = True
-    db.CloseDB
-    Set db = Nothing
-    Exit Function
 
-Erro:
-    If lMES Then MsgBox "Erro ao incluir: " & Err.Description
+    If nITEM <= 0 Then Exit Function
+    ReDim values(0 To nITEM - 1)
+    For i = 0 To nITEM - 1
+        values(i) = ValorParaGravar4vb(ValorArrayOuEscalar4vb(aVAL, i), "C")
+    Next i
+    fields = CamposArray4vb(aCAM, nITEM)
+    insertId = db.ExecInsertArr(tableName, fields, values)
+    PreencherIDs4vb db, tableName, aIDDES, insertId
+    IncluiSQLite4vb = True
+Saida:
+    FecharSQLite4vb db, rs
+    Exit Function
+TrataErro:
+    If lMES Then SayErro "Inclui SQLite4VB: " & Err.Description
     IncluiSQLite4vb = False
-    If Not db Is Nothing Then
-        db.CloseDB
-        Set db = Nothing
-    End If
-End Function
-Public Function PegCampoSQLite4vb(ByVal cCON As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-    PegCampoSQLite4vb = PegOperSQLite4vb(cCON, cTABLEWHERE, cCAMPO, eDEFAULT, "")
+    Resume Saida
 End Function
 
 Public Function PegLastidbsqLite4vb(ByVal cCON As String, ByVal cTABELA As String) As Long
-    Dim db As New cSQLite
-    db.OpenDB LimpaTag(cCON)
-    PegLastidbsqLite4vb = CLng(db.LastInsertRowID)
-    db.CloseDB
+    Dim db As cSQLite
+    Dim value As Variant
+    On Error GoTo TrataErro
+    Set db = AbrirSQLite4vb(cCON, True)
+    value = db.Scalar("SELECT COALESCE(MAX(rowid), 0) FROM " & cTABELA)
+    If Not IsNull(value) And Not IsEmpty(value) Then PegLastidbsqLite4vb = CLng(value)
+Saida:
+    FecharSQLite4vb db
+    Exit Function
+TrataErro:
+    PegLastidbsqLite4vb = 0
+    Resume Saida
 End Function
 
-Public Function VBSQLiteSetValues4vb(ByRef db As cSQLite) As Boolean
-    On Error GoTo Erro
-    ' Configurações de performance para SQLite
-    db.Execute "PRAGMA journal_mode = WAL;"
-    db.Execute "PRAGMA cache_size = 2000;"
-    db.Execute "PRAGMA synchronous = NORMAL;"
-    db.Execute "PRAGMA temp_store = MEMORY;"
+Public Function ApagaSQLite4vb(ByVal cCON As String, ByVal cSQL As String) As Boolean
+    Dim sql As String
+    Dim p As Long
+    Dim upperSql As String
+
+    upperSql = UCase$(Trim$(cSQL))
+    If InStr(upperSql, "WHERE") = 0 Then Exit Function
+    p = InStr(upperSql, "FROM")
+    If p = 0 Then Exit Function
+    sql = "DELETE " & Mid$(Trim$(cSQL), p)
+    ApagaSQLite4vb = ComandoSqlite4VB(cCON, sql)
+End Function
+
+Public Function VBSQLiteSetValues4vb(ByVal db As cSQLite) As Boolean
+    On Error GoTo TrataErro
+    If db Is Nothing Then Exit Function
+    db.Execute "PRAGMA cache_size = 2000"
+    db.Execute "PRAGMA synchronous = NORMAL"
+    db.Execute "PRAGMA temp_store = MEMORY"
     VBSQLiteSetValues4vb = True
     Exit Function
-Erro:
+TrataErro:
     VBSQLiteSetValues4vb = False
 End Function
-Public Function ApagaSQLite4vb(ByVal cCON As String, ByVal cSQL As String) As Boolean
-    Dim nPOS As Long
-    Dim cSQL_FINAL As String
-    
-    On Error GoTo Erro
-    
-    cSQL_FINAL = Trim(cSQL)
-    
-    ' 1. Lógica de espelhamento original:
-    ' Garante que o comando inicie com DELETE FROM, tratando entradas parciais
-    If UCase(Left(cSQL_FINAL, 6)) <> "DELETE" Then
-        nPOS = InStr(1, UCase(cSQL_FINAL), "FROM")
-        If nPOS > 0 Then
-            ' Pega do FROM em diante e adiciona o DELETE
-            cSQL_FINAL = "DELETE " & Mid(cSQL_FINAL, nPOS)
-        Else
-            ' Se for apenas "TABELA WHERE...", reconstrói o comando
-            cSQL_FINAL = "DELETE FROM " & cSQL_FINAL
+
+Private Function AbrirSQLite4vb(ByVal connection As String, ByVal readOnly As Boolean) As cSQLite
+    Dim db As cSQLite
+    Set db = New cSQLite
+    db.OpenDB LimpaTag(connection), readOnly, Not readOnly
+    If Not readOnly Then
+        If Not VBSQLiteSetValues4vb(db) Then
+            Err.Raise vbObjectError + 30400, "AbrirSQLite4vb", _
+                      "Falha ao configurar a conexao SQLite."
         End If
     End If
-    
-    ' 2. Execução utilizando a lógica do sqlite4vb
-    ' Chamamos a função de comando já adaptada que abre a conexão,
-    ' aplica VBSQLiteSetValues4vb e executa o comando
-    ApagaSQLite4vb = ComandoSqlite4VB(cCON, cSQL_FINAL)
-    
-    Exit Function
-
-Erro:
-    ApagaSQLite4vb = False
+    Set AbrirSQLite4vb = db
 End Function
+
+Private Sub FecharSQLite4vb(ByRef db As cSQLite, Optional ByVal rs As cSQLiteResults)
+    On Error Resume Next
+    Set rs = Nothing
+    If Not db Is Nothing Then db.CloseDB
+    Set db = Nothing
+End Sub
+
+Private Function ValorCampo4vb(ByVal rs As cSQLiteResults, ByVal field As Variant) As Variant
+    ValorCampo4vb = rs(field)
+End Function
+
+Private Function ValorArrayOuEscalar4vb(ByVal value As Variant, ByVal index As Long) As Variant
+    If IsArray(value) Then
+        ValorArrayOuEscalar4vb = value(index)
+    Else
+        ValorArrayOuEscalar4vb = value
+    End If
+End Function
+
+Private Function ValorParaGravar4vb(ByVal value As Variant, ByVal cFormat As Variant) As Variant
+    If IsNull(value) Or IsEmpty(value) Then
+        ValorParaGravar4vb = Null
+    ElseIf Left$(UCase$(CStr(cFormat)), 1) = "D" Then
+        If IsDate(value) Then
+            ValorParaGravar4vb = Format$(CDate(value), "yyyy-mm-dd hh:nn:ss")
+        Else
+            ValorParaGravar4vb = Null
+        End If
+    Else
+        ValorParaGravar4vb = value
+    End If
+End Function
+
+Private Function CamposArray4vb(ByVal fields As Variant, ByVal count As Long) As String
+    Dim i As Long, result As String
+    For i = 0 To count - 1
+        If i > 0 Then result = result & ", "
+        result = result & CStr(fields(i))
+    Next i
+    CamposArray4vb = result
+End Function
+
+Private Function CamposUpdate4vb(ByVal fields As Variant, ByVal first As Long, _
+                                 ByVal last As Long) As String
+    Dim i As Long, result As String
+    For i = first To last - 1
+        If i > first Then result = result & ", "
+        result = result & CStr(fields(i))
+    Next i
+    CamposUpdate4vb = result
+End Function
+
+Private Function MontarUpdate4vb(ByVal tableName As String, ByVal whereSql As String, _
+                                 ByVal fields As Variant, ByVal first As Long, _
+                                 ByVal last As Long) As String
+    MontarUpdate4vb = "UPDATE " & tableName & " SET " & _
+                      CamposUpdate4vb(fields, first, last) & " " & whereSql
+End Function
+
+Private Function ExtrairTabela4vb(ByVal sourceSql As String) As String
+    Dim text As String, pFrom As Long, pWhere As Long
+    text = Replace(Replace(Trim$(sourceSql), vbCr, " "), vbLf, " ")
+    pFrom = InStr(1, UCase$(text), " FROM ", vbTextCompare)
+    If pFrom = 0 Then Exit Function
+    pFrom = pFrom + 6
+    pWhere = InStr(pFrom, UCase$(text), " WHERE ", vbTextCompare)
+    If pWhere = 0 Then
+        ExtrairTabela4vb = Trim$(Mid$(text, pFrom))
+    Else
+        ExtrairTabela4vb = Trim$(Mid$(text, pFrom, pWhere - pFrom))
+    End If
+End Function
+
+Private Function ExtrairUpdate4vb(ByVal sourceSql As String, ByRef tableName As String, _
+                                  ByRef whereSql As String) As Boolean
+    Dim text As String, pFrom As Long, pWhere As Long
+    text = Replace(Replace(Trim$(sourceSql), vbCr, " "), vbLf, " ")
+    pFrom = InStr(1, UCase$(text), " FROM ", vbTextCompare)
+    pWhere = InStr(1, UCase$(text), " WHERE ", vbTextCompare)
+    If pFrom = 0 Or pWhere = 0 Or pWhere <= pFrom Then Exit Function
+    tableName = Trim$(Mid$(text, pFrom + 6, pWhere - pFrom - 6))
+    whereSql = Mid$(text, pWhere)
+    ExtrairUpdate4vb = (Len(tableName) > 0)
+End Function
+
+Private Function AliasCampoSQLite4vb(ByVal sourceSql As String) As String
+    Dim text As String, p As Long
+    text = UCase$(sourceSql)
+    p = InStr(1, text, " FROM ", vbTextCompare)
+    If p = 0 Then
+        AliasCampoSQLite4vb = sourceSql
+    Else
+        AliasCampoSQLite4vb = Left$(sourceSql, p - 1) & " AS CAMPO" & Mid$(sourceSql, p)
+    End If
+End Function
+
+Private Function DialetoSQLite4vb(ByVal sourceSql As String) As String
+    DialetoSQLite4vb = Replace(sourceSql, "CURRENTDATETIME", "current_timestamp", 1, -1, vbTextCompare)
+End Function
+
+Private Sub PreencherIDs4vb(ByVal db As cSQLite, ByVal tableName As String, _
+                            ByVal ids As Variant, ByVal insertId As Currency)
+    Dim rs As cSQLiteResults
+    Dim result() As Variant
+    Dim i As Long
+
+    If Not IsArray(ids) Then
+        eRETU01 = insertId
+        Exit Sub
+    End If
+
+    Set rs = db.Query("SELECT " & CamposArray4vb(ids, UBound(ids) - LBound(ids) + 1) & _
+                      " FROM " & tableName & " WHERE rowid = ?", insertId)
+    If rs.MoveNext() Then
+        ReDim result(LBound(ids) To UBound(ids))
+        For i = LBound(ids) To UBound(ids)
+            result(i) = rs(ids(i))
+        Next i
+        eRETU01 = result
+    Else
+        eRETU01 = insertId
+    End If
+    Set rs = Nothing
+End Sub
