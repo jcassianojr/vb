@@ -49,6 +49,7 @@ Module=sqlsqlite4vb; ..\vblib2\modules\SqlFuncoessqlite4vb.bas
 Module=SqlRC6SQLite; ..\vblib2\modules\SqlFuncoeRC6SQLite.bas
 Module=Common; ..\..\vbpriv\vblib2\modules\Common.bas
 Class=clsOSInfo; ..\..\vbpriv\vblib2\class\clsOSInfo.cls
+Module=modIni; ..\vblib2\modules\modIni.bas
 IconForm="escIMG"
 Startup="Sub Main"
 HelpFile=""

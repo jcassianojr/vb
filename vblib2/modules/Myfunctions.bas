@@ -5,8 +5,6 @@ Option Explicit
 'today() data atualf
 'nulldate() data em branco
 'fdata() formata data dd/mm/yyy
-'GetPrivateProfileString -le ini files
-'WritePrivateProfileString - grava ini files
 'NetworkUserName Nome usuario rede
 'MachineName Nome do equipamento agora na classe osinfo
 'dividir divide dois numero com checagem tipo
@@ -141,8 +139,6 @@ End Enum
     Public Declare PtrSafe Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As LongPtr, ByVal Unknownn1 As LongPtr, ByVal Unknownn2 As LongPtr, ByVal fCheckOnly As LongPtr) As Long
     Public Declare PtrSafe Function ReleaseCapture Lib "user32" () As Long
     
-    Public Declare PtrSafe Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As LongPtr, ByVal lpFileName As String) As Long
-    Public Declare PtrSafe Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpString As Any, ByVal lpFileName As String) As Long
     
     Public Declare PtrSafe Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As LongPtr, ByVal LCType As LongPtr, ByVal lpLCData As String, ByVal cchData As LongPtr) As Long
     Public Declare PtrSafe Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As LongPtr, ByVal LCType As LongPtr, ByVal lpLCData As String) As Long
@@ -170,8 +166,6 @@ End Enum
     Public Declare Function EbExecuteLine Lib "vba6.dll" (ByVal pStringToExec As Long, ByVal Unknownn1 As Long, ByVal Unknownn2 As Long, ByVal fCheckOnly As Long) As Long
     Public Declare Function ReleaseCapture Lib "user32" () As Long
     
-    Public Declare Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As Long, ByVal lpFileName As String) As Long
-    Public Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpString As Any, ByVal lpFileName As String) As Long
     
     Public Declare Function GetLocaleInfo Lib "kernel32" Alias "GetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String, ByVal cchData As Long) As Long
     Public Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCTYPE As Long, ByVal lpLCData As String) As Long
@@ -531,8 +525,8 @@ Public Function Alert(ByVal cDIZ As String, Optional ByVal cTITLE As String = "I
   MsgBox cDIZ, vbOKOnly, cTITLE
 End Function
 
-Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVal As String, Optional ByVal nLEN As Integer = 0) As String
-  Busca = InputBox(cDIZ, cCAB, cVal)
+Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVAL As String, Optional ByVal nLEN As Integer = 0) As String
+  Busca = InputBox(cDIZ, cCAB, cVAL)
   If nLEN > 0 Then
      Busca = Left$(Busca, nLEN)
   End If
@@ -940,38 +934,6 @@ End Function
 Public Function PegCamini(ByVal cCaminho As String) As String
   PegCamini = Caminex(cCaminho, 0, 0, 0)
 End Function
-Public Function PegINIVAL(ByVal cARQINI As String, ByVal cGRUPO As String, ByVal cCAMPO As String, Optional ByVal ePAD As String = "") As String
-  Dim z As Long
-  Dim sCaminho As String * 255
-  z = GetPrivateProfileString(cGRUPO, cCAMPO, "", sCaminho, 150, cARQINI)
-  PegINIVAL = IIf(Asc(Left(sCaminho, 1)) = "0", ePAD, Left(sCaminho, z))
-
-End Function
-
-Public Function PegPath(ByVal cGRUPO As String, ByVal cCAMPO As String, Optional ByVal ePAD As String = "" _
-                       , Optional ByVal cARQINI As String = "") As String
-  Dim z As Long
-  Dim sCaminho As String * 255
-  If cARQINI = "" Then
-     cARQINI = App.Path & "\" & App.EXEName & ".INI"
-  End If
-  z = GetPrivateProfileString(cGRUPO, cCAMPO, "", sCaminho, 150, cARQINI)
-  If Len(ePAD) = 0 Then
-    ePAD = App.Path & "\"
-  End If
-  PegPath = IIf(Asc(Left(sCaminho, 1)) = "0", ePAD, Left(sCaminho, z))
-
-End Function
-
-Public Function PegTable(ByVal cGRUPO As String, ByVal cCAMPO As String)
-  Dim z As Long
-  Dim sCaminho As String * 255
-  Dim cTMP As String
-  z = GetPrivateProfileString(cGRUPO, cCAMPO, "", sCaminho, 150, App.Path + "\" & App.EXEName & ".INI")
-  cTMP = IIf(Asc(Left(sCaminho, 1)) = "0", App.Path & "\", Left(sCaminho, z))
-  PegTable = PegPath("PATH", cTMP)
-End Function
-
 Public Function MMCase(ByVal texto As String) As String
   Dim sPalavra As String
   Dim iPosIni As Integer
@@ -1745,11 +1707,11 @@ End Function
 ' +            espelhando a mesma inteligência usada no Harbour.
 ' +  Retorno:  Variant (Pode retornar True, False, ou Null para nulos)
 ' +--------------------------------------------------------------------
-Public Function StrLogic(ByVal cVal As String) As Variant
+Public Function StrLogic(ByVal cVAL As String) As Variant
     ' Limpa espaços em branco e padroniza em maiúsculo
-    cVal = UCase$(Trim$(cVal))
+    cVAL = UCase$(Trim$(cVAL))
     
-    Select Case cVal
+    Select Case cVAL
         ' Casos que retornam Nulo/Vazio
         Case "", "NULL", "<NULL>", "NIL", "NUL"
             StrLogic = Null
