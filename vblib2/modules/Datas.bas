@@ -150,6 +150,8 @@ Public Function NumToData(ByVal nNUM As Variant) As Date
   End If
   NumToData = Fdata(dDATA)
 End Function
+
+
 ' +--------------------------------------------------------------------
 ' +  Função: UniversalToDate
 ' +  Objetivo: Garantir a leitura correta de datas em múltiplos formatos
@@ -159,19 +161,20 @@ End Function
 ' +--------------------------------------------------------------------
 Public Function UniversalToDate(ByVal xData As Variant) As Date
     Dim cData As String
-    Dim cLimpa As String
     Dim cTemp As String
+    Dim cLimpa As String
     Dim aParts() As String
-    Dim sAno As String
-    Dim sMes As String
-    Dim sDia As String
-    Dim nLEN As Integer
-    
-    ' Variáveis para o bloco de datas Extensas/HTTP
-    Dim cHttpTemp As String
-    Dim aHttpParts() As String
-    Dim posVirgula As Integer
+    Dim i As Integer, j As Integer
+    Dim sAno As String, sMes As String, sDia As String
     Dim cMesStr As String
+    Dim nMes As Integer
+    Dim nAno As Integer
+    
+    ' Arrays para busca flexível de meses (Inglês e Português)
+    Dim aMonthsEN As Variant
+    Dim aMonthsPT As Variant
+    aMonthsEN = Array("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC")
+    aMonthsPT = Array("JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ")
     
     ' 1. Se já for do tipo Date nativo do VB6, retorna ela mesma
     If VarType(xData) = vbDate Then
@@ -187,83 +190,115 @@ Public Function UniversalToDate(ByVal xData As Variant) As Date
     
     cData = UCase$(Trim$(CStr(xData)))
     
-    If cData = "" Or cData = "01/01/1900" Or cData = "0000-00-00" Or Left$(cData, 4) = "0000" Then
+    ' Barreira contra literais nulos/vazios e máscaras corrompidas
+    If cData = "" Or cData = "NULL" Or cData = "NIL" Or cData = "<NULL>" Or cData = "NUL" Or _
+       cData = "/  /" Or cData = "-  -" Or cData = "01/01/1900" Or cData = "0000-00-00" Or Left$(cData, 4) = "0000" Then
         UniversalToDate = CDate(0)
         Exit Function
     End If
     
-    ' -------------------------------------------------------------------------
-    ' >>> INÍCIO DO NOVO BLOCO: Trata formatos HTTP/Extensos <<<
-    ' (ex: "FRI, 05 JUN 2026...", "05 JUNHO 2026...")
-    ' -------------------------------------------------------------------------
-    cHttpTemp = cData
-    posVirgula = InStr(cHttpTemp, ",")
+    cTemp = cData
     
-    ' Se tiver vírgula (ex: "FRI,"), removemos ela e o dia da semana
-    If posVirgula > 0 Then
-        cHttpTemp = Trim$(Mid$(cHttpTemp, posVirgula + 1))
+    ' -------------------------------------------------------------------------
+    ' Suporte a Formatos HTTP-date e Logs (Inglês e Português)
+    ' -------------------------------------------------------------------------
+    cTemp = Replace(cTemp, ",", " ")
+    cTemp = Replace(cTemp, "-", " ")
+    
+    ' Remove espaços duplos
+    Do While InStr(cTemp, "  ") > 0
+        cTemp = Replace(cTemp, "  ", " ")
+    Loop
+    
+    aParts = Split(cTemp, " ")
+    
+    ' Se houver pelo menos 4 blocos (ex: DayOfWeek DD MMM YYYY)
+    If UBound(aParts) >= 3 Then
+        For i = 0 To UBound(aParts)
+            If Len(aParts(i)) >= 3 Then
+                cMesStr = Left$(aParts(i), 3)
+                nMes = 0
+                
+                ' Busca em Inglês
+                For j = 0 To 11
+                    If aMonthsEN(j) = cMesStr Then
+                        nMes = j + 1
+                        Exit For
+                    End If
+                Next j
+                
+                ' Se não encontrar, tenta em Português
+                If nMes = 0 Then
+                    For j = 0 To 11
+                        If aMonthsPT(j) = cMesStr Then
+                            nMes = j + 1
+                            Exit For
+                        End If
+                    Next j
+                End If
+                
+                ' Se encontrou o mês, extrai os blocos correspondentes
+                If nMes > 0 Then
+                    sMes = Right$("0" & CStr(nMes), 2)
+                    
+                    ' Avalia a posição (ANSI C vs RFC)
+                    If i = 1 And UBound(aParts) >= 4 Then
+                        ' ANSI C asctime: "Sun Nov 6 08:49:37 1994"
+                        sDia = Right$("0" & aParts(2), 2)
+                        sAno = aParts(4)
+                    ElseIf i = 2 Then
+                        ' RFC 1123 / RFC 850: "Sun 06 Nov 1994"
+                        sDia = Right$("0" & aParts(1), 2)
+                        sAno = aParts(3)
+                        
+                        If Len(sAno) = 2 Then
+                            nAno = Val(sAno)
+                            If nAno < 50 Then
+                                sAno = "20" & sAno
+                            Else
+                                sAno = "19" & sAno
+                            End If
+                        End If
+                    Else
+                        GoTo ProximoBloco ' LOOP equivalente do Harbour
+                    End If
+                    
+                    If Val(sDia) >= 1 And Val(sDia) <= 31 And Val(sAno) >= 1000 And Len(sAno) = 4 Then
+                        UniversalToDate = DateSerial(Val(sAno), Val(sMes), Val(sDia))
+                        Exit Function
+                    End If
+                End If
+            End If
+ProximoBloco:
+        Next i
     End If
     
-    ' Quebra pelos espaços
-    aHttpParts = Split(cHttpTemp, " ")
-    
-    ' Se tem pelo menos 3 partes (Dia, Mês, Ano), tentamos validar
-    If UBound(aHttpParts) >= 2 Then
-        cMesStr = UCase$(Left$(aHttpParts(1), 3))
-        sMes = "00"
-        
-        Select Case cMesStr
-            Case "JAN": sMes = "01"
-            Case "FEB", "FEV": sMes = "02"
-            Case "MAR": sMes = "03"
-            Case "APR", "ABR": sMes = "04"
-            Case "MAY", "MAI": sMes = "05"
-            Case "JUN": sMes = "06"
-            Case "JUL": sMes = "07"
-            Case "AUG", "AGO": sMes = "08"
-            Case "SEP", "SET": sMes = "09"
-            Case "OCT", "OUT": sMes = "10"
-            Case "NOV": sMes = "11"
-            Case "DEC", "DEZ": sMes = "12"
-        End Select
-        
-        ' Se encontrou um mês válido e o ano tem 4 dígitos, retorna direto
-        If sMes <> "00" And Len(aHttpParts(2)) = 4 Then
-            UniversalToDate = DateSerial(Val(aHttpParts(2)), Val(sMes), Val(aHttpParts(0)))
-            Exit Function
-        End If
-    End If
-    ' -------------------------------------------------------------------------
-    ' >>> FIM DO NOVO BLOCO <<<
-    ' -------------------------------------------------------------------------
-
     ' Se houver hora grudada na string limpa (separada por espaço), pega apenas a parte da data
-    If InStr(cData, " ") > 0 Then
-        cData = Trim$(Split(cData, " ")(0))
+    cTemp = cData
+    If InStr(cTemp, " ") > 0 Then
+        cTemp = Trim$(Split(cTemp, " ")(0))
     End If
 
-    ' >>> INÍCIO DA MELHORIA: Interceptação Inteligente com Separadores <<<
-    ' 3. Padroniza todos os separadores para barra "/"
-    cTemp = Replace(cData, "-", "/")
+    ' -------------------------------------------------------------------------
+    ' Interceptação Inteligente com Separadores
+    ' -------------------------------------------------------------------------
+    cTemp = Replace(cTemp, "-", "/")
     cTemp = Replace(cTemp, ".", "/")
-    
-    ' Quebra a string usando a barra como delimitador
     aParts = Split(cTemp, "/")
     
-    ' Se a matriz tiver 3 elementos (índices 0, 1 e 2), significa que a data tem separadores!
+    ' Se possui 3 blocos
     If UBound(aParts) = 2 Then
         If Len(aParts(0)) = 4 Then
-            ' Formato YYYY/MM/DD (O Ano veio primeiro)
+            ' Formato YYYY/MM/DD
             sAno = aParts(0)
             sMes = Right$("0" & aParts(1), 2)
             sDia = Right$("0" & aParts(2), 2)
         Else
-            ' Formato DD/MM/YYYY, DD/MM/YY ou D/M/YYYY (O Dia veio primeiro)
+            ' Formato DD/MM/YYYY, DD/MM/YY ou D/M/YYYY
             sDia = Right$("0" & aParts(0), 2)
             sMes = Right$("0" & aParts(1), 2)
             sAno = aParts(2)
             
-            ' Lógica de Século para Anos com 2 dígitos (ex: 05/03/21)
             If Len(sAno) = 2 Then
                 If Val(sAno) < 50 Then
                     sAno = "20" & sAno
@@ -273,7 +308,6 @@ Public Function UniversalToDate(ByVal xData As Variant) As Date
             End If
         End If
         
-        ' Evita datas zeradas que passaram pela separação
         If (sAno & sMes & sDia) = "00000000" Then
             UniversalToDate = CDate(0)
         Else
@@ -281,42 +315,45 @@ Public Function UniversalToDate(ByVal xData As Variant) As Date
         End If
         Exit Function
     End If
-    ' >>> FIM DA MELHORIA <<<
     
-    ' 4. Se chegou aqui, não há separadores (veio tudo grudado).
-    ' Removemos as sobras e analisamos a sequência numérica pura.
+    ' -------------------------------------------------------------------------
+    ' Tudo grudado (sem separadores)
+    ' -------------------------------------------------------------------------
     cLimpa = Replace(cData, "/", "")
     cLimpa = Replace(cLimpa, "-", "")
     cLimpa = Replace(cLimpa, ".", "")
     cLimpa = Trim$(cLimpa)
     
-    nLEN = Len(cLimpa)
+    Dim nLenOriginal As Integer
+    nLenOriginal = Len(cLimpa)
     
-    ' 5. Identifica o formato grudado pelo tamanho da string resultante
-    Select Case nLEN
-        Case 8
-            ' Pode ser AAAAMMDD (banco/perfil) ou DDMMYYYY (padrão local)
-            ' Se os 4 primeiros dígitos formarem um ano válido (ex: > 1900)
-            If Val(Left$(cLimpa, 4)) > 1900 Then
-                UniversalToDate = DateSerial(Val(Left$(cLimpa, 4)), Val(Mid$(cLimpa, 5, 2)), Val(Right$(cLimpa, 2)))
-            Else
-                ' Caso contrário, assume DDMMYYYY
-                UniversalToDate = DateSerial(Val(Right$(cLimpa, 4)), Val(Mid$(cLimpa, 3, 2)), Val(Left$(cLimpa, 2)))
-            End If
-            
-        Case 6
-            ' Formato DDMMYY (Ano com 2 dígitos)
-            ' O VB6 resolve o centenário automaticamente no DateSerial
-            UniversalToDate = DateSerial(Val(Right$(cLimpa, 2)), Val(Mid$(cLimpa, 3, 2)), Val(Left$(cLimpa, 2)))
-            
-        Case Else
-            ' Fallback: Se o VB6 conseguir converter nativamente, usa. Se não, retorna data vazia.
-            If IsDate(cData) Then
-                UniversalToDate = CDate(cData)
-            Else
-                UniversalToDate = CDate(0)
-            End If
-    End Select
+    If nLenOriginal = 8 And IsNumeric(cLimpa) Then
+        If Val(Left$(cLimpa, 4)) > 1900 Then
+            ' Formato AAAAMMDD
+            UniversalToDate = DateSerial(Val(Left$(cLimpa, 4)), Val(Mid$(cLimpa, 5, 2)), Val(Right$(cLimpa, 2)))
+        Else
+            ' Formato DDMMYYYY
+            UniversalToDate = DateSerial(Val(Right$(cLimpa, 4)), Val(Mid$(cLimpa, 3, 2)), Val(Left$(cLimpa, 2)))
+        End If
+        
+    ElseIf nLenOriginal = 6 And IsNumeric(cLimpa) Then
+        ' Formato DDMMYY
+        nAno = Val(Right$(cLimpa, 2))
+        If nAno < 50 Then
+            nAno = 2000 + nAno
+        Else
+            nAno = 1900 + nAno
+        End If
+        UniversalToDate = DateSerial(nAno, Val(Mid$(cLimpa, 3, 2)), Val(Left$(cLimpa, 2)))
+        
+    Else
+        ' Fallback nativo
+        If IsDate(cData) Then
+            UniversalToDate = CDate(cData)
+        Else
+            UniversalToDate = CDate(0)
+        End If
+    End If
 End Function
 ' +--------------------------------------------------------------------
 ' +  Função: C_Data

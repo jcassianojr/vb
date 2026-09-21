@@ -162,23 +162,6 @@ Public Function ProfileNum(ByVal cFile As Variant, ByVal cSection As Variant, By
     End If
 End Function
 
-Public Function ProfileDate(ByVal cFile As Variant, ByVal cSection As Variant, ByVal cKey As Variant, Optional ByVal dDefault As Variant) As Date
-    Dim cValue As String
-    Dim cDefault As String
-    
-    If IsMissing(dDefault) Or Not IsDate(dDefault) Then
-        dDefault = CDate(0)
-    End If
-    
-    cDefault = Trim$(Format$(dDefault, "yyyymmdd"))
-    cValue = ProfileString(cFile, cSection, cKey, cDefault)
-    
-    If Len(Trim$(cValue)) = 8 And IsNumeric(cValue) Then
-        ProfileDate = DateSerial(Val(Left$(cValue, 4)), Val(Mid$(cValue, 5, 2)), Val(Right$(cValue, 2)))
-    Else
-        ProfileDate = dDefault
-    End If
-End Function
 
 Public Function ProfileLogical(ByVal cINIFile As Variant, ByVal cSection As Variant, ByVal cKey As Variant, Optional ByVal lDefault As Variant = False) As Boolean
     Dim cVAL As String
@@ -196,4 +179,110 @@ Public Function ProfileLogical(ByVal cINIFile As Variant, ByVal cSection As Vari
         Case Else
             ProfileLogical = False
     End Select
+End Function
+
+
+' ====================================================================
+' FUNÃ‡ÃƒO AUXILIAR DE DATA BASEADA EM UNIVERSALTODATE (HARBOUR)
+' ====================================================================
+Private Function CheckIniDate(ByVal cData As String) As Date
+    Dim dResult As Date
+    Dim cClean As String
+    Dim aParts() As String
+    
+    dResult = CDate(0)
+    cData = Trim$(cData)
+    
+    If Len(cData) = 0 Then
+        CheckIniDate = dResult
+        Exit Function
+    End If
+    
+    cClean = UCase$(cData)
+    If cClean = "NULL" Or cClean = "NIL" Or cClean = "<NULL>" Or cClean = "NUL" Or cClean = "/  /" Or cClean = "-  -" Then
+        CheckIniDate = dResult
+        Exit Function
+    End If
+
+    ' Uniformiza separadores
+    cClean = Replace(cClean, "-", "/")
+    cClean = Replace(cClean, ".", "/")
+    
+    ' Tenta converter via funÃ§Ã£o nativa do VB (que jÃ¡ trata muitos casos regionais e ISO)
+    If IsDate(cClean) Then
+        CheckIniDate = CDate(cClean)
+        Exit Function
+    End If
+
+    ' Tratamento de separadores explÃ­citos (DD/MM/YYYY ou YYYY/MM/DD)
+    If InStr(cClean, "/") > 0 Then
+        aParts = Split(cClean, "/")
+        If UBound(aParts) = 2 Then ' Se tem 3 partes
+            If Len(aParts(0)) = 4 Then
+                ' YYYY/MM/DD
+                dResult = DateSerial(Val(aParts(0)), Val(aParts(1)), Val(aParts(2)))
+            Else
+                ' DD/MM/YYYY (ou variaÃ§Ãµes curtas suportadas pelo Serial)
+                dResult = DateSerial(Val(aParts(2)), Val(aParts(1)), Val(aParts(0)))
+            End If
+            CheckIniDate = dResult
+            Exit Function
+        End If
+    End If
+    
+    ' Tratamento da lÃ³gica original "tudo grudado" (AAAAMMDD ou DDMMYYYY)
+    cClean = Replace(cClean, "/", "")
+    If Len(cClean) = 8 And IsNumeric(cClean) Then
+        ' Testa se os 4 primeiros dÃ­gitos sÃ£o um ano plausÃ­vel (ex: > 1900)
+        If Val(Left$(cClean, 4)) > 1900 Then
+            ' Formato AAAAMMDD
+            dResult = DateSerial(Val(Left$(cClean, 4)), Val(Mid$(cClean, 5, 2)), Val(Right$(cClean, 2)))
+        Else
+            ' Formato DDMMYYYY
+            dResult = DateSerial(Val(Right$(cClean, 4)), Val(Mid$(cClean, 3, 2)), Val(Left$(cClean, 2)))
+        End If
+    ElseIf Len(cClean) = 6 And IsNumeric(cClean) Then
+        ' Formato DDMMYY
+        ' O VB6 converte anos 2 dÃ­gitos baseado nas configs regionais, mas DateSerial Ã© manual.
+        ' Simula a lÃ³gica de EPOCH (geralmente cortes em 30 ou 50)
+        Dim nAno As Integer
+        nAno = Val(Right$(cClean, 2))
+        If nAno < 50 Then
+            nAno = 2000 + nAno
+        Else
+            nAno = 1900 + nAno
+        End If
+        dResult = DateSerial(nAno, Val(Mid$(cClean, 3, 2)), Val(Left$(cClean, 2)))
+    End If
+    
+    CheckIniDate = dResult
+End Function
+
+' ====================================================================
+' FUNÃ‡ÃƒO PROFILEDATE ATUALIZADA
+' ====================================================================
+Public Function ProfileDate(ByVal cFile As Variant, ByVal cSection As Variant, ByVal cKey As Variant, Optional ByVal dDefault As Variant) As Date
+    Dim cValue As String
+    Dim cDefault As String
+    Dim dResult As Date
+    
+    If IsMissing(dDefault) Or Not IsDate(dDefault) Then
+        dDefault = CDate(0)
+    End If
+    
+    ' Converte o default pro formato INI padrÃ£o (AAAAMMDD) para a busca
+    cDefault = Trim$(Format$(dDefault, "yyyymmdd"))
+    cValue = ProfileString(cFile, cSection, cKey, cDefault)
+    
+    If Len(Trim$(cValue)) > 0 Then
+        ' Usa a nova funÃ§Ã£o baseada em UniversalToDate para interpretar o retorno
+        dResult = CheckIniDate(cValue)
+        If dResult = CDate(0) And Trim$(cValue) <> cDefault Then
+             ProfileDate = dDefault ' Falhou a conversÃ£o, volta pro default real
+        Else
+             ProfileDate = dResult
+        End If
+    Else
+        ProfileDate = dDefault
+    End If
 End Function
