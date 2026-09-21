@@ -230,24 +230,59 @@ Option Explicit
 'cWEBIEW2 https://github.com/wqweto/cWebView2
 
 Private mvarCaminhoArquivo As String
-Dim bJaInicializado As Boolean
+Private m_bWebViewInicializado As Boolean
+Private m_bPreviewCarregado As Boolean
+Private m_bEncerrando As Boolean
+Private m_cArquivosTemporarios As Collection
+Private m_sPastaTemporaria As String
+Private m_sPastaChm As String
 
 ' 1) Instancia do novo motor Chromium cWebView2
 Private WithEvents m_oWebView2 As cWebView2
 Attribute m_oWebView2.VB_VarHelpID = -1
 
 Private Sub Form_Load()
-    Dim HRESULT
-    bJaInicializado = False
+    Dim lResultado As Long
+    m_bWebViewInicializado = False
+    m_bPreviewCarregado = False
+    m_bEncerrando = False
+    Set m_cArquivosTemporarios = New Collection
     
     Set m_oWebView2 = New cWebView2
-'    m_oWebView2.BindTo picHost.hwnd, , , , "--allow-run-as-system", , False, True, False
-     HRESULT = m_oWebView2.BindTo(picHost.hWnd, , , , "--allow-run-as-system --allow-file-access-from-files --disable-web-security", , False, True, False)
+    lResultado = m_oWebView2.BindTo(picHost.hWnd, , , , vbNullString, , False, True, False)
+    If lResultado = 0 Then
+        MsgBox "Nao foi possivel inicializar o WebView2. Verifique se o Runtime do WebView2 esta instalado.", vbCritical, "Preview"
+        Exit Sub
+    End If
+    m_bWebViewInicializado = True
 End Sub
 
 Private Sub Form_Activate()
-    bJaInicializado = True
-    chamamotor_click
+    If m_bWebViewInicializado And Not m_bPreviewCarregado Then
+        CarregarPreview
+    End If
+End Sub
+
+Private Sub m_oWebView2_InitComplete()
+    If m_bWebViewInicializado And Not m_bPreviewCarregado Then
+        CarregarPreview
+    End If
+End Sub
+
+Private Sub m_oWebView2_NavigationCompleted(ByVal IsSuccess As Boolean, ByVal WebErrorStatus As Long)
+    If Not IsSuccess And Not m_bEncerrando Then
+        MsgBox "Falha ao carregar o preview. Codigo WebView2: " & CStr(WebErrorStatus), vbExclamation, "Preview"
+    End If
+End Sub
+
+Private Sub m_oWebView2_ProcessFailed()
+    If Not m_bEncerrando Then
+        MsgBox "O processo do WebView2 foi encerrado inesperadamente.", vbCritical, "Preview"
+    End If
+End Sub
+
+Private Sub m_oWebView2_NewWindowRequested(ByVal IsUserInitiated As Boolean, IsHandled As Boolean, ByVal URI As String, NewWindowFeatures As Collection)
+    IsHandled = True
 End Sub
 Private Sub cmdSavejson_Click()
     Dim sFileName As String
@@ -256,8 +291,8 @@ Private Sub cmdSavejson_Click()
     sFilter = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
     sFileName = FileSave(Me, sFilter, 1, "json", , , "Salvar json Como")
     
-    sJson = m_oWebView2.jsProp("JSON.stringify(Array.from(document.querySelectorAll('tr')).map(r => Array.from(r.querySelectorAll('td')).map(c => c.innerText)))")
     If sFileName <> "" Then
+        sJson = m_oWebView2.jsProp("JSON.stringify(Array.from(document.querySelectorAll('tr')).map(r => Array.from(r.querySelectorAll('th,td')).map(c => c.innerText)))")
         FileWrite sFileName, sJson
     End If
 End Sub
@@ -267,40 +302,30 @@ Private Sub cmdSaveMD_Click()
     Dim sMarkdown As String
     sFilter = "Arquivos de Textos (*.TXT)" & vbNullChar & "*.TXT" & vbNullChar & "Todos Arquivos" & vbNullChar & "*.*"
     sFileName = FileSave(Me, sFilter, 1, "md", , , "Salvar md Como")
-    sMarkdown = m_oWebView2.jsProp("turndownService.turndown(document.getElementById('content').innerHTML)")
     If sFileName <> "" Then
+        sMarkdown = m_oWebView2.jsProp("window.turndownService ? window.turndownService.turndown(document.body.innerHTML) : ''")
+    End If
+    If sFileName <> "" And Len(sMarkdown) > 0 Then
         FileWrite sFileName, sMarkdown
+    ElseIf sFileName <> "" Then
+        MsgBox "A exportacao Markdown requer o servico Turndown no WebView2.", vbExclamation, "Preview"
     End If
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-       Dim fso As Object
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    Dim arTmp(4) As String
-    arTmp(0) = App.Path & "\\~doc_engine.html"
-    arTmp(1) = App.Path & "\\~xlsx_engine.html"
-    arTmp(2) = App.Path & "\\~marked_engine.html"
-    arTmp(3) = App.Path & "\\~zpl_view_engine.html"
-    arTmp(4) = App.Path & "\\~rtf_view_engine.html"
-    Dim i As Integer
-    For i = 0 To UBound(arTmp)
-        If fso.FileExists(arTmp(i)) Then
-            On Error Resume Next
-            fso.DeleteFile arTmp(i), True
-        End If
-    Next i
-    Set fso = Nothing
+    m_bEncerrando = True
 
     If Not m_oWebView2 Is Nothing Then
         m_oWebView2.Shutdown
         Set m_oWebView2 = Nothing
     End If
+    LimparArquivosTemporarios
     
 End Sub
 
 Private Sub Form_Resize()
-    On Error Resume Next
-    If bJaInicializado Then
+    On Error GoTo TrataErro
+    If m_bWebViewInicializado Then
         ' Redimensiona o PictureBox base
         picHost.Height = Me.ScaleHeight - picHost.Top - 200
         picHost.Width = Me.ScaleWidth - picHost.Left - 1800
@@ -310,6 +335,9 @@ Private Sub Form_Resize()
             m_oWebView2.SyncSizeToHostWindow
         End If
     End If
+    Exit Sub
+TrataErro:
+    Debug.Print "FrmPreview.Form_Resize: " & Err.Description
 End Sub
 
 Private Sub cmdimp_Click()
@@ -422,12 +450,16 @@ Private Sub Encerrar_Click()
     Unload Me
 End Sub
 
-Private Sub chamamotor_click()
+Private Sub Chamamotor_Click()
+    If m_bWebViewInicializado Then CarregarPreview
+End Sub
+
+Private Sub CarregarPreview()
    On Error GoTo TrataErro
     Dim cEXT As String
     
     If m_oWebView2 Is Nothing Then
-        MsgBox "Erro: O componente cWebView2 não foi inicializado!", vbCritical
+        MsgBox "O componente cWebView2 nao foi inicializado.", vbCritical, "Preview"
         Exit Sub
     End If
     
@@ -435,12 +467,15 @@ Private Sub chamamotor_click()
     DoEvents
     
     mvarCaminhoArquivo = Trim(CStr(cARQRTF))
+    If Len(mvarCaminhoArquivo) = 0 Or Dir$(mvarCaminhoArquivo) = vbNullString Then
+        MsgBox "O arquivo de preview nao foi encontrado.", vbExclamation, "Preview"
+        Exit Sub
+    End If
     cEXT = LCase(parsefile(mvarCaminhoArquivo, "E"))
-    
+    ConfigurarBotoesPreview cEXT
+    m_bPreviewCarregado = True
     
     If cEXT = "zpl" Then
-        cmdSavehtml.Visible = False
-        cmdSaveTXT.Visible = False
         cmdSavePNG.Visible = True
         cmdSavejpg.Visible = True
         cmdSavePNG.Top = cmdSavehtml.Top
@@ -448,19 +483,11 @@ Private Sub chamamotor_click()
         Call RenderizarMotorZplLocal
             
       ElseIf cEXT = "chm" Then
-        cmdSavehtml.Visible = False
-        cmdSaveTXT.Visible = False
-        cmdSavePNG.Visible = False
-        cmdSavejpg.Visible = False
         Me.Caption = "Manual de Ajuda - " & NomeArq(mvarCaminhoArquivo, False)
         Call RenderizarMotorChmLocal(mvarCaminhoArquivo)
         'm_oWebView2.Navigate "its:" & mvarCaminhoArquivo & "::/"
         
     ElseIf cEXT = "hlp" Then
-        cmdSavehtml.Visible = False
-        cmdSaveTXT.Visible = False
-        cmdSavePNG.Visible = False
-        cmdSavejpg.Visible = False
        Me.Caption = "Manual de Ajuda - " & NomeArq(mvarCaminhoArquivo, False)
         If IsArquivoChmDisfarcado(mvarCaminhoArquivo) Then
            Call RenderizarMotorChmLocal(mvarCaminhoArquivo)
@@ -469,71 +496,59 @@ Private Sub chamamotor_click()
         End If
       
     ElseIf cEXT = "xlsx" Or cEXT = "xls" Or cEXT = "ods" Then
-        cmdSavehtml.Visible = False
-        cmdSaveTXT.Visible = False
-        cmdSavePNG.Visible = False
-        cmdSavejpg.Visible = False
         Me.Caption = "Visualizador de Planilhas - " & NomeArq(mvarCaminhoArquivo, False)
         Call RenderizarMotorPlanilhaLocal
         
     ElseIf cEXT = "csv" Then
-        cmdSavehtml.Visible = False
-        cmdSaveTXT.Visible = False
-        cmdSavePNG.Visible = False
-        cmdSavejpg.Visible = False
         Me.Caption = "Visualizador de Dados - " & NomeArq(mvarCaminhoArquivo, False)
         Call RenderizarMotorDelimitadoLocal(mvarCaminhoArquivo)
         
     ElseIf cEXT = "rtf" Then
-        cmdSavehtml.Visible = True
-        cmdSaveTXT.Visible = True
-        cmdSavePNG.Visible = False
-        cmdSavejpg.Visible = False
         Me.Caption = "Visualizador RTF - " & NomeArq(mvarCaminhoArquivo, False)
         Call RenderizarMotorRtfLocal
         
     ElseIf cEXT = "docx" Then
-        cmdSavehtml.Visible = True
-        cmdSaveTXT.Visible = True
-        cmdSavePNG.Visible = False
-        cmdSavejpg.Visible = False
-        cmdsavedoc.Visible = False
          Me.Caption = "Visualizador de Documentos - " & NomeArq(mvarCaminhoArquivo, False)
         Call RenderizarMotorDocLocal
         
     ElseIf cEXT = "md" Or cEXT = "markdown" Then
-        cmdSavehtml.Visible = True
-        cmdSaveTXT.Visible = True
-        cmdSavePNG.Visible = False
-        cmdSavejpg.Visible = False
         Me.Caption = "Visualizador de Documentos - " & NomeArq(mvarCaminhoArquivo, False)
         Call RenderizarMotorMarked
         
     ElseIf cEXT = "pdf" Then
-        cmdSavehtml.Visible = True
-        cmdSaveTXT.Visible = True
-        cmdSavePNG.Visible = False
-        cmdSavejpg.Visible = False
-        CmdSavePDF.Visible = False
         Me.Caption = "Leitor de PDF - " & NomeArq(mvarCaminhoArquivo, False)
-        m_oWebView2.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\\", "/")
+        m_oWebView2.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\", "/")
          
     Else
         Me.Caption = "Visualizador - " & NomeArq(mvarCaminhoArquivo, False)
-        cmdSavehtml.Visible = True
-        cmdSaveTXT.Visible = True
-        cmdSavePNG.Visible = False
-        cmdSavejpg.Visible = False
-        m_oWebView2.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\\", "/")
+        m_oWebView2.Navigate "file:///" & Replace(mvarCaminhoArquivo, "\", "/")
     End If
     Exit Sub
 TrataErro:
-    MsgBox "Erro crítico ao inicializar os motores: " & Err.Description, vbCritical, "Erro de Interface"
+    m_bPreviewCarregado = False
+    MsgBox "Erro ao inicializar o preview: " & Err.Description, vbCritical, "Preview"
+End Sub
+
+Private Sub ConfigurarBotoesPreview(ByVal cEXT As String)
+    Dim lEhZpl As Boolean
+    Dim lEhDocumento As Boolean
+
+    lEhZpl = (cEXT = "zpl")
+    lEhDocumento = (cEXT = "rtf" Or cEXT = "docx" Or cEXT = "md" Or cEXT = "markdown")
+
+    cmdSavePNG.Visible = lEhZpl
+    cmdSavejpg.Visible = lEhZpl
+    cmdSavehtml.Visible = Not (cEXT = "zpl" Or cEXT = "chm" Or cEXT = "hlp" Or cEXT = "xlsx" Or cEXT = "xls" Or cEXT = "ods" Or cEXT = "csv")
+    cmdSaveTXT.Visible = lEhDocumento Or cmdSavehtml.Visible
+    CmdSavePDF.Visible = Not (cEXT = "pdf" Or cEXT = "chm" Or cEXT = "hlp")
+    CmdSavejson.Visible = (cEXT = "xlsx" Or cEXT = "xls" Or cEXT = "ods" Or cEXT = "csv")
+    CmdSavemd.Visible = False
+    cmdsavedoc.Visible = False
 End Sub
     
 
 ' ==================================================================
-' ROTINA DE VALIDAÇÃO DE CONECTIVIDADE DA URL (TIMEOUT ULTRA-CURTO 800ms)
+' ROTINA DE VALIDAï¿½ï¿½O DE CONECTIVIDADE DA URL (TIMEOUT ULTRA-CURTO 800ms)
 ' ==================================================================
 Private Function TestarLinkMotorJS(ByVal sURL As String) As Boolean
     On Error GoTo ErroLink
@@ -554,6 +569,45 @@ ErroLink:
     Set oHttp = Nothing
 End Function
 
+Private Function NovoArquivoHtmlTemporario(ByVal cNome As String) As String
+    Dim fso As Object
+
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    If Len(m_sPastaTemporaria) = 0 Then
+        m_sPastaTemporaria = Environ$("TEMP") & "\FrmPreview_" & _
+                             CStr(Hex$(CLng(Timer * 1000))) & "_" & CStr(App.hInstance)
+        If Not fso.FolderExists(m_sPastaTemporaria) Then
+            fso.CreateFolder m_sPastaTemporaria
+        End If
+    End If
+
+    NovoArquivoHtmlTemporario = m_sPastaTemporaria & "\" & cNome
+    If Not m_cArquivosTemporarios Is Nothing Then
+        m_cArquivosTemporarios.Add NovoArquivoHtmlTemporario
+    End If
+End Function
+
+Private Sub LimparArquivosTemporarios()
+    Dim fso As Object
+    Dim vArquivo As Variant
+
+    On Error GoTo Saida
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    If Not m_cArquivosTemporarios Is Nothing Then
+        For Each vArquivo In m_cArquivosTemporarios
+            If fso.FileExists(CStr(vArquivo)) Then fso.DeleteFile CStr(vArquivo), True
+        Next vArquivo
+    End If
+    If Len(m_sPastaTemporaria) > 0 Then
+        If fso.FolderExists(m_sPastaTemporaria) Then fso.DeleteFolder m_sPastaTemporaria, True
+    End If
+    If Len(m_sPastaChm) > 0 Then
+        If fso.FolderExists(m_sPastaChm) Then fso.DeleteFolder m_sPastaChm, True
+    End If
+Saida:
+    Set fso = Nothing
+End Sub
+
 Private Sub RenderizarMotorMarked()
     Dim fso As Object, streamOut As Object
     Dim cHtmlTempPath As String, cJsLocal As String
@@ -561,13 +615,13 @@ Private Sub RenderizarMotorMarked()
     Dim cConteudoTratado As String
     
     cJsLocal = App.Path & "\WebResources\marked.min.js"
-    cHtmlTempPath = App.Path & "\~marked_engine.html"
+    cHtmlTempPath = NovoArquivoHtmlTemporario("marked_engine.html")
     
-    ' 1. Lê o conteúdo do arquivo
+    ' 1. Lï¿½ o conteï¿½do do arquivo
     cConteudoMD = LerArquivoTexto(mvarCaminhoArquivo)
     
-    ' 2. TRATAMENTO DO CONTEÚDO (CRÍTICO)
-    ' Substituímos os caracteres que quebrariam a string do JavaScript
+    ' 2. TRATAMENTO DO CONTEï¿½DO (CRï¿½TICO)
+    ' Substituï¿½mos os caracteres que quebrariam a string do JavaScript
     cConteudoTratado = Replace(cConteudoMD, "\", "\\")      ' Escapa barras invertidas
     cConteudoTratado = Replace(cConteudoTratado, "`", "\`")  ' Escapa crases (fim da template literal)
     cConteudoTratado = Replace(cConteudoTratado, "'", "\'")  ' Escapa aspas simples
@@ -579,26 +633,26 @@ Private Sub RenderizarMotorMarked()
     Set fso = CreateObject("Scripting.FileSystemObject")
     Set streamOut = fso.OpenTextFile(cHtmlTempPath, 2, True)
     
-    ' 3. Geração do HTML temporário
+    ' 3. Geraï¿½ï¿½o do HTML temporï¿½rio
     streamOut.WriteLine "<html><head><meta charset='utf-8'>"
     streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\", "/") & "'></script>"
     streamOut.WriteLine "<style>body{font-family:sans-serif; padding:20px; word-wrap:break-word;}</style></head>"
     streamOut.WriteLine "<body><div id='content'></div>"
     streamOut.WriteLine "<script>"
     
-    ' Aqui injetamos o conteúdo já tratado
+    ' Aqui injetamos o conteï¿½do jï¿½ tratado
     streamOut.WriteLine "document.getElementById('content').innerHTML = marked.parse(`" & cConteudoTratado & "`);"
     
     streamOut.WriteLine "</script></body></html>"
     streamOut.Close
     
-    ' 4. Navegação segura
+    ' 4. Navegaï¿½ï¿½o segura
     m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
     
     Set fso = Nothing
 End Sub
 
-' Função auxiliar para leitura simples
+' Funï¿½ï¿½o auxiliar para leitura simples
 Private Function LerArquivoTexto(ByVal cCaminho As String) As String
     Dim fNum As Integer
     fNum = FreeFile
@@ -612,13 +666,12 @@ Private Sub RenderizarMotorZplLocal()
     Dim cHtmlTempPath As String, cJsLocal As String
     Dim cConteudoZpl As String
     
-    'On Error GoTo ErroHandler
-    On Error Resume Next
+    On Error GoTo TrataErro
     
     cJsLocal = App.Path & "\WebResources\bwip-js-min.js"
-    cHtmlTempPath = App.Path & "\~zpl_view_engine.html"
+    cHtmlTempPath = NovoArquivoHtmlTemporario("zpl_view_engine.html")
     
-    ' 1. LER O CONTEÚDO DO ARQUIVO ZPL
+    ' 1. LER O CONTEï¿½DO DO ARQUIVO ZPL
     cConteudoZpl = LerArquivoTexto(mvarCaminhoArquivo)
     
     ' Tratamento para evitar quebras de string no JS
@@ -629,13 +682,13 @@ Private Sub RenderizarMotorZplLocal()
     Set fso = CreateObject("Scripting.FileSystemObject")
     Set streamOut = fso.OpenTextFile(cHtmlTempPath, 2, True)
     
-    ' 2. ESTRUTURA HTML COM INJEÇÃO DO ZPL
+    ' 2. ESTRUTURA HTML COM INJEï¿½ï¿½O DO ZPL
     streamOut.WriteLine "<html><head><meta charset='utf-8'></head>"
     streamOut.WriteLine "<body>"
     streamOut.WriteLine "<canvas id='zplCanvas'></canvas>"
     streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\", "/") & "'></script>"
     streamOut.WriteLine "<script>"
-    ' Injeção do conteúdo e comando de renderização
+    ' Injeï¿½ï¿½o do conteï¿½do e comando de renderizaï¿½ï¿½o
     streamOut.WriteLine "try {"
     streamOut.WriteLine "  bwipjs.toCanvas('zplCanvas', {"
     streamOut.WriteLine "    bcid: 'code128', "
@@ -646,14 +699,17 @@ Private Sub RenderizarMotorZplLocal()
     streamOut.WriteLine "</body></html>"
     streamOut.Close
     
-    ' 3. NAVEGAÇÃO
+    ' 3. NAVEGAï¿½ï¿½O
     m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
     
     Set fso = Nothing
     Exit Sub
 
-'ErroHandler:
-'    MsgBox "Erro ao renderizar motor: " & Err.Description, vbCritical
+TrataErro:
+    If Not streamOut Is Nothing Then streamOut.Close
+    Set streamOut = Nothing
+    Set fso = Nothing
+    Err.Raise Err.Number, "RenderizarMotorZplLocal", Err.Description
 End Sub
 
 Private Sub RenderizarMotorPlanilhaLocal()
@@ -661,9 +717,9 @@ Private Sub RenderizarMotorPlanilhaLocal()
     Dim cHtmlTempPath As String, cJsLocal As String
     Dim cCaminhoPlanilhaFormatado As String
     
-    cJsLocal = App.Path & "\\WebResources\\xlsx.full.min.js"
-    cHtmlTempPath = App.Path & "\\~xlsx_engine.html"
-    cCaminhoPlanilhaFormatado = Replace(mvarCaminhoArquivo, "\\", "/")
+    cJsLocal = App.Path & "\WebResources\xlsx.full.min.js"
+    cHtmlTempPath = NovoArquivoHtmlTemporario("xlsx_engine.html")
+    cCaminhoPlanilhaFormatado = Replace(mvarCaminhoArquivo, "\", "/")
     
     Set fso = CreateObject("Scripting.FileSystemObject")
     Set streamOut = fso.OpenTextFile(cHtmlTempPath, 2, True)
@@ -674,7 +730,7 @@ Private Sub RenderizarMotorPlanilhaLocal()
     streamOut.WriteLine "table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px;}"
     streamOut.WriteLine "th{background-color:#107c41;color:white;font-weight:bold;padding:10px;border:1px solid #ddd;}"
     streamOut.WriteLine "td{padding:8px;border:1px solid #ddd;text-align:left;}tr:nth-child(even){background-color:#f9f9f9;}</style>"
-    streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\\", "/") & "'></script></head>"
+    streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\", "/") & "'></script></head>"
     streamOut.WriteLine "<body><div id='sheet-container'>Processando dados da planilha local...</div>"
     streamOut.WriteLine "<script>"
     streamOut.WriteLine "fetch('file:///" & cCaminhoPlanilhaFormatado & "')"
@@ -688,7 +744,7 @@ Private Sub RenderizarMotorPlanilhaLocal()
     streamOut.WriteLine "</script></body></html>"
     streamOut.Close
     
-    m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\\", "/")
+    m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
     Set fso = Nothing
 End Sub
 Private Sub RenderizarMotorRtfLocal()
@@ -696,7 +752,7 @@ Private Sub RenderizarMotorRtfLocal()
     Dim cHtmlTempPath As String
     Dim cCaminhoRtfFormatado As String
     
-    cHtmlTempPath = App.Path & "\~rtf_view_engine.html"
+    cHtmlTempPath = NovoArquivoHtmlTemporario("rtf_view_engine.html")
     cCaminhoRtfFormatado = Replace(mvarCaminhoArquivo, "\", "/")
     
     Set fso = CreateObject("Scripting.FileSystemObject")
@@ -708,9 +764,9 @@ Private Sub RenderizarMotorRtfLocal()
     streamOut.WriteLine "<body><div id='rtf-container'>Processando documento...</div>"
     streamOut.WriteLine "<script>"
     streamOut.WriteLine "fetch('file:///" & cCaminhoRtfFormatado & "').then(res => res.text()).then(rtfText => {"
-    ' Regex para limpeza básica de RTF: remove chaves, comandos e formatação técnica
-    streamOut.WriteLine "  let clean = rtfText.replace(/\\{[^}]*\\}/g, '').replace(/\\[a-z0-9]+/ig, '').replace(/[\r\n]+/g, '<br>');"
-    streamOut.WriteLine "  document.getElementById('rtf-container').innerHTML = clean;"
+    ' Regex para limpeza bï¿½sica de RTF: remove chaves, comandos e formataï¿½ï¿½o tï¿½cnica
+    streamOut.WriteLine "  let clean = rtfText.replace(/\\{[^}]*\\}/g, '').replace(/\\[a-z0-9]+/ig, '').replace(/[\r\n]+/g, '\n');"
+    streamOut.WriteLine "  document.getElementById('rtf-container').textContent = clean;"
     streamOut.WriteLine "}).catch(err => { document.getElementById('rtf-container').innerHTML = '<h2>Erro ao processar RTF.</h2><p>' + err.message + '</p>'; });"
     streamOut.WriteLine "</script></body></html>"
     streamOut.Close
@@ -723,9 +779,9 @@ Private Sub RenderizarMotorRtfLocalold()
     Dim cHtmlTempPath As String, cJsLocal As String
     Dim cCaminhoRtfFormatado As String
     
-    cJsLocal = App.Path & "\\WebResources\\rtf-parser.min.js"
-    cHtmlTempPath = App.Path & "\\~rtf_view_engine.html"
-    cCaminhoRtfFormatado = Replace(mvarCaminhoArquivo, "\\", "/")
+    cJsLocal = App.Path & "\WebResources\rtf-parser.min.js"
+    cHtmlTempPath = NovoArquivoHtmlTemporario("rtf_view_engine_old.html")
+    cCaminhoRtfFormatado = Replace(mvarCaminhoArquivo, "\", "/")
     
     Set fso = CreateObject("Scripting.FileSystemObject")
     Set streamOut = fso.OpenTextFile(cHtmlTempPath, 2, True)
@@ -733,7 +789,7 @@ Private Sub RenderizarMotorRtfLocalold()
     streamOut.WriteLine "<!DOCTYPE html><html><head><meta charset='utf-8'>"
     streamOut.WriteLine "<style>body{font-family:'Segoe UI',Arial,sans-serif;margin:30px;background-color:#f4f4f9;color:#333;}"
     streamOut.WriteLine "#rtf-container{max-width:800px;margin:0 auto;background:#fff;padding:40px;box-shadow:0 4px 15px rgba(0,0,0,0.1);border-radius:4px;min-height:600px;white-space:pre-wrap;}</style>"
-    streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\\", "/") & "'></script></head>"
+    streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\", "/") & "'></script></head>"
     streamOut.WriteLine "<body><div id='rtf-container'>Processando documento formatado RTF...</div>"
     streamOut.WriteLine "<script>"
     streamOut.WriteLine "fetch('file:///" & cCaminhoRtfFormatado & "')"
@@ -746,7 +802,7 @@ Private Sub RenderizarMotorRtfLocalold()
     streamOut.WriteLine "</script></body></html>"
     streamOut.Close
     
-    m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\\", "/")
+    m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
     Set fso = Nothing
 End Sub
 Private Sub RenderizarMotorDelimitadoLocal(ByVal cCaminhoTxt As String)
@@ -754,10 +810,10 @@ Private Sub RenderizarMotorDelimitadoLocal(ByVal cCaminhoTxt As String)
     Dim cHtmlTempPath As String
     Dim cConteudoBruto As String, cConteudoTratado As String
     
-    cHtmlTempPath = App.Path & "\~csv_engine.html"
+    cHtmlTempPath = NovoArquivoHtmlTemporario("csv_engine.html")
     cConteudoBruto = LerArquivoTexto(cCaminhoTxt)
     
-    ' Escapa caracteres para injeção no Template Literal do JS
+    ' Escapa caracteres para injeï¿½ï¿½o no Template Literal do JS
     cConteudoTratado = Replace(cConteudoBruto, "\", "\\")
     cConteudoTratado = Replace(cConteudoTratado, "`", "\`")
     cConteudoTratado = Replace(cConteudoTratado, "$", "\$")
@@ -773,9 +829,10 @@ Private Sub RenderizarMotorDelimitadoLocal(ByVal cCaminhoTxt As String)
     ' Parser JS nativo para respeitar aspas duplas no CSV
     streamOut.WriteLine "function parseCSV(text) { let p='', row=[''], ret=[row], i=0, r=0, s=!0, l; for (l of text) { if ('\" ' === l) { if (s && l === p) row[i] += l; s = !s; } else if (',' === l && s) l = row[++i] = ''; else if ('\\n' === l && s) { if ('\\r' === p) row[i] = row[i].slice(0, -1); row = ret[++r] = [l = '']; i = 0; } else row[i] += l; p = l; } return ret; }"
     streamOut.WriteLine "const rows = parseCSV(csvData);"
+    streamOut.WriteLine "const esc = value => String(value).replace(/[&<>]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[ch]));"
     streamOut.WriteLine "let html = '<table><thead><tr>';"
-    streamOut.WriteLine "if(rows.length > 0) { rows[0].forEach(h => html += '<th>' + h + '</th>'); html += '</tr></thead><tbody>'; }"
-    streamOut.WriteLine "for(let j=1; j<rows.length; j++) { if(rows[j].join('').trim() !== '') { html += '<tr>'; rows[j].forEach(c => html += '<td>' + c + '</td>'); html += '</tr>'; } }"
+    streamOut.WriteLine "if(rows.length > 0) { rows[0].forEach(h => html += '<th>' + esc(h) + '</th>'); html += '</tr></thead><tbody>'; }"
+    streamOut.WriteLine "for(let j=1; j<rows.length; j++) { if(rows[j].join('').trim() !== '') { html += '<tr>'; rows[j].forEach(c => html += '<td>' + esc(c) + '</td>'); html += '</tr>'; } }"
     streamOut.WriteLine "html += '</tbody></table>';"
     streamOut.WriteLine "document.getElementById('content').innerHTML = html;"
     streamOut.WriteLine "</script></body></html>"
@@ -789,9 +846,9 @@ Private Sub RenderizarMotorDocLocal()
     Dim cHtmlTempPath As String, cJsLocal As String
     Dim cCaminhoDocFormatado As String
     
-    cJsLocal = App.Path & "\\WebResources\\mammoth.browser.min.js"
-    cHtmlTempPath = App.Path & "\\~doc_engine.html"
-    cCaminhoDocFormatado = Replace(mvarCaminhoArquivo, "\\", "/")
+    cJsLocal = App.Path & "\WebResources\mammoth.browser.min.js"
+    cHtmlTempPath = NovoArquivoHtmlTemporario("doc_engine.html")
+    cCaminhoDocFormatado = Replace(mvarCaminhoArquivo, "\", "/")
     
     Set fso = CreateObject("Scripting.FileSystemObject")
     Set streamOut = fso.OpenTextFile(cHtmlTempPath, 2, True)
@@ -800,7 +857,7 @@ Private Sub RenderizarMotorDocLocal()
     streamOut.WriteLine "<style>body{font-family:'Segoe UI',Arial,sans-serif;margin:30px;background:#f4f4f9;}"
     streamOut.WriteLine "#document-container{max-width:800px;margin:0 auto;background:#fff;padding:40px;box-shadow:0 4px 15px rgba(0,0,0,0.1);border-radius:4px;}"
     streamOut.WriteLine "table{border-collapse:collapse;width:100%;}th,td{border:1px solid #ddd;padding:8px;}img{max-width:100%;height:auto;}</style>"
-    streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\\", "/") & "'></script></head>"
+    streamOut.WriteLine "<script src='file:///" & Replace(cJsLocal, "\", "/") & "'></script></head>"
     streamOut.WriteLine "<body><div id='document-container'>Carregando documento local...</div>"
     streamOut.WriteLine "<script>"
     streamOut.WriteLine "fetch('file:///" & cCaminhoDocFormatado & "')"
@@ -811,7 +868,7 @@ Private Sub RenderizarMotorDocLocal()
     streamOut.WriteLine "</script></body></html>"
     streamOut.Close
     
-    m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\\", "/")
+    m_oWebView2.Navigate "file:///" & Replace(cHtmlTempPath, "\", "/")
     Set fso = Nothing
 End Sub
 
@@ -823,9 +880,9 @@ Private Sub RenderizarMotorHlpLocal()
                  "h3{color:#d35400;margin-top:0;} p{font-size:14px;line-height:1.5;color:#555;}" & _
                  ".file-name{font-family:monospace;background:#f1f2f6;padding:4px 8px;border-radius:4px;color:#c0392b;}</style></head><body>" & _
                  "  <div class='card'>" & _
-                 "    <h3>Formato de Ajuda Incompatível</h3>" & _
-                 "    <p>O ficheiro <span class='file-name'>" & NomeArq(mvarCaminhoArquivo, True) & "</span> está num formato legado (.hlp) cujo motor de renderização foi descontinuado pela Microsoft no Windows 10/11.</p>" & _
-                 "    <p>Recomenda-se a conversão deste manual para formatos suportados como <b>.CHM</b> ou <b>.PDF</b> para exibição integrada.</p>" & _
+                 "    <h3>Formato de Ajuda Incompatï¿½vel</h3>" & _
+                 "    <p>O ficheiro <span class='file-name'>" & NomeArq(mvarCaminhoArquivo, True) & "</span> estï¿½ num formato legado (.hlp) cujo motor de renderizaï¿½ï¿½o foi descontinuado pela Microsoft no Windows 10/11.</p>" & _
+                 "    <p>Recomenda-se a conversï¿½o deste manual para formatos suportados como <b>.CHM</b> ou <b>.PDF</b> para exibiï¿½ï¿½o integrada.</p>" & _
                  "  </div>" & _
                  "</body></html>"
                  
@@ -851,14 +908,20 @@ Private Sub RenderizarMotorChmLocal(ByVal cCaminhoCHM As String)
     Dim sTempPath As String, sArquivoPrincipal As String
     Dim objShell As Object, objFSO As Object, f As Object
     
-    sTempPath = Environ("TEMP") & "\~chm_view_temp"
+    sTempPath = Environ$("TEMP") & "\FrmPreview_" & _
+                CStr(Hex$(CLng(Timer * 1000))) & "_" & CStr(App.hInstance) & "_chm"
+    m_sPastaChm = sTempPath
     Set objFSO = CreateObject("Scripting.FileSystemObject")
     If Not objFSO.FolderExists(sTempPath) Then objFSO.CreateFolder sTempPath
     
     Set objShell = CreateObject("Shell.Application")
     objShell.NameSpace(sTempPath).CopyHere objShell.NameSpace(cCaminhoCHM).Items
+    If Not AguardarExtracaoChm(objFSO, sTempPath, 10) Then
+        m_oWebView2.NavigateToString "<html><body><h3>Falha ao extrair o arquivo CHM.</h3></body></html>"
+        Exit Sub
+    End If
     
-    ' Busca os arquivos padrões de entrada quebrando a linha após o "Then"
+    ' Busca os arquivos padrï¿½es de entrada quebrando a linha apï¿½s o "Then"
     If objFSO.FileExists(sTempPath & "\index.html") Then
         sArquivoPrincipal = "\index.html"
     ElseIf objFSO.FileExists(sTempPath & "\default.html") Then
@@ -868,7 +931,7 @@ Private Sub RenderizarMotorChmLocal(ByVal cCaminhoCHM As String)
     ElseIf objFSO.FileExists(sTempPath & "\index.htm") Then
         sArquivoPrincipal = "\index.htm"
     Else
-        ' Fallback genérico: pega o primeiro HTML que encontrar na raiz
+        ' Fallback genï¿½rico: pega o primeiro HTML que encontrar na raiz
         For Each f In objFSO.GetFolder(sTempPath).Files
             If LCase(objFSO.GetExtensionName(f.Name)) = "html" Or LCase(objFSO.GetExtensionName(f.Name)) = "htm" Then
                 sArquivoPrincipal = "\" & f.Name
@@ -880,9 +943,22 @@ Private Sub RenderizarMotorChmLocal(ByVal cCaminhoCHM As String)
     If sArquivoPrincipal <> "" Then
         m_oWebView2.Navigate "file:///" & Replace(sTempPath & sArquivoPrincipal, "\", "/")
     Else
-        m_oWebView2.NavigateToString "<html><body><h3>Falha ao localizar índice do CHM.</h3></body></html>"
+        m_oWebView2.NavigateToString "<html><body><h3>Falha ao localizar ï¿½ndice do CHM.</h3></body></html>"
     End If
     
     Set objShell = Nothing
     Set objFSO = Nothing
 End Sub
+
+Private Function AguardarExtracaoChm(ByVal objFSO As Object, ByVal cPasta As String, ByVal nSegundos As Long) As Boolean
+    Dim dInicio As Double
+    dInicio = Timer
+    Do
+        If objFSO.GetFolder(cPasta).Files.Count > 0 Then
+            AguardarExtracaoChm = True
+            Exit Function
+        End If
+        DoEvents
+        If Timer - dInicio >= nSegundos Then Exit Do
+    Loop
+End Function
