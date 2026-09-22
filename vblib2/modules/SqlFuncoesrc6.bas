@@ -3,21 +3,21 @@ Option Explicit
 
 'vbrichclient RC6 https://www.vbrichclient.com/en/Downloads.htm
 
-Public Function pgSetValuesrc6(ByRef oCON As Object) As Boolean
-    ' Não precisamos declarar oCOMANDO como cCommand, pois usaremos
-    ' a execução direta na conexão, que é o padrão nativo e veloz do RC6.
+Public Function pgSetValuesrc6(ByVal oCON As RC6.cConnection) As Boolean
+    ' Nï¿½o precisamos declarar oCOMANDO como cCommand, pois usaremos
+    ' a execuï¿½ï¿½o direta na conexï¿½o, que ï¿½ o padrï¿½o nativo e veloz do RC6.
     
     On Error GoTo ErroPostgres
     pgSetValuesrc6 = False
     
-    ' 1. Verifica se a conexão é válida
+    ' 1. Verifica se a conexï¿½o ï¿½ vï¿½lida
     If oCON Is Nothing Then Exit Function
     
-    ' 2. Execução Direta: Substitui o CreateCommand + CommandText + Execute
-    ' O método Execute da conexão é o equivalente direto para comandos
-    ' sem parâmetros no RC6.
+    ' 2. Execuï¿½ï¿½o Direta: Substitui o CreateCommand + CommandText + Execute
+    ' O mï¿½todo Execute da conexï¿½o ï¿½ o equivalente direto para comandos
+    ' sem parï¿½metros no RC6.
     
-    ' Nota: O SQLite/RC6 pode não reconhecer "SET search_path" ou "client_encoding"
+    ' Nota: O SQLite/RC6 pode nï¿½o reconhecer "SET search_path" ou "client_encoding"
     ' dependendo do driver. Se for para configurar o ambiente do Postgres via RC6:
     oCON.Execute "SET search_path TO myschema, public;"
     oCON.Execute "SET client_encoding TO 'WIN1252';"
@@ -26,24 +26,24 @@ Public Function pgSetValuesrc6(ByRef oCON As Object) As Boolean
     Exit Function
 
 ErroPostgres:
-    ' Como não instanciamos objeto de comando, não há necessidade de limpeza de Set = Nothing
+    ' Como nï¿½o instanciamos objeto de comando, nï¿½o hï¿½ necessidade de limpeza de Set = Nothing
     pgSetValuesrc6 = False
 End Function
-Public Function VFPSetValuesrc6(ByRef oCON As Object) As Boolean
-    ' Não precisamos mais declarar o oCOMANDO como RC6.cCommand
-    ' pois não usaremos a propriedade CommandText.
+Public Function VFPSetValuesrc6(ByVal oCON As RC6.cConnection) As Boolean
+    ' Nï¿½o precisamos mais declarar o oCOMANDO como RC6.cCommand
+    ' pois nï¿½o usaremos a propriedade CommandText.
     
     On Error GoTo ErroVFP
     
-    ' Inicializa a função
+    ' Inicializa a funï¿½ï¿½o
     VFPSetValuesrc6 = False
     
-    ' Verifica se a conexão é válida
+    ' Verifica se a conexï¿½o ï¿½ vï¿½lida
     If oCON Is Nothing Then Exit Function
     
-    ' O RC6 permite executar comandos SQL diretamente através do objeto Connection.
+    ' O RC6 permite executar comandos SQL diretamente atravï¿½s do objeto Connection.
     ' Isso substitui perfeitamente a necessidade de um objeto Command para
-    ' configurações simples como "SET ...".
+    ' configuraï¿½ï¿½es simples como "SET ...".
     
     ' 1. Executa o SET DELETED
     oCON.Execute "set deleted on"
@@ -51,13 +51,13 @@ Public Function VFPSetValuesrc6(ByRef oCON As Object) As Boolean
     ' 2. Executa o SET NULL
     oCON.Execute "set null off"
     
-    ' Se chegou até aqui, sucesso
+    ' Se chegou atï¿½ aqui, sucesso
     VFPSetValuesrc6 = True
     
     Exit Function
 
 ErroVFP:
-    ' O tratamento de erro continua simples, pois não há objetos de comando para limpar
+    ' O tratamento de erro continua simples, pois nï¿½o hï¿½ objetos de comando para limpar
     VFPSetValuesrc6 = False
 End Function
 
@@ -76,13 +76,13 @@ Public Function ComandoDBFrc6(ByVal cARQ As String, ByVal cTable As String, ByVa
     ComandoDBFrc6 = False
     cCOM = ""
     
-    ' Inicializa Conexão RC6
+    ' Inicializa Conexï¿½o RC6
     Set oCON = New_c.Connection(cARQ)
     
-    ' --- SUBSTITUIÇÃO: Execução direta na conexão ---
+    ' --- SUBSTITUIï¿½ï¿½O: Execuï¿½ï¿½o direta na conexï¿½o ---
     ' Eliminamos o objeto cCommand para evitar erros de CommandText e melhorar a performance.
 
-    ' Configurações de ambiente (SETs)
+    ' Configuraï¿½ï¿½es de ambiente (SETs)
     If CCOMANDO = "ZAP" Or CCOMANDO = "PACK" Then
         oCON.Execute "set deleted off"
     Else
@@ -91,12 +91,12 @@ Public Function ComandoDBFrc6(ByVal cARQ As String, ByVal cTable As String, ByVa
 
     oCON.Execute "set null off"
 
-    ' "USE" (Emulação de ambiente DBF no SQLite)
+    ' "USE" (Emulaï¿½ï¿½o de ambiente DBF no SQLite)
     If Len(cTable) > 0 Then
         oCON.Execute "use " & cTable
     End If
 
-    ' Execução do comando principal
+    ' Execuï¿½ï¿½o do comando principal
     If CCOMANDO = "ZAP" Then
         oCON.Execute "DELETE FROM " & cTable & " WHERE 1=1"
     End If
@@ -133,13 +133,13 @@ Public Function Comandorc6(ByVal cARQ As String, ByVal cSQL As String) As Boolea
     cARQ = GeraConn(cARQ)
     aRETU = TipoConn(cARQ)
     
-    ' Se a lógica ditar que não é para rodar via RC6, sai
-    ' (Ajuste a condição conforme o seu novo identificador de tag, ex: "ADORC6")
+    ' Se a lï¿½gica ditar que nï¿½o ï¿½ para rodar via RC6, sai
+    ' (Ajuste a condiï¿½ï¿½o conforme o seu novo identificador de tag, ex: "ADORC6")
     'If aRETU(0) <> "ADORC6" Then
     '    Exit Function
     'End If
     
-    ' Mantém a compatibilidade com VFP se necessário
+    ' Mantï¿½m a compatibilidade com VFP se necessï¿½rio
     If InStr(UCase(cARQ), "VFPOLEDB") Then
         Comandorc6 = AdoComandodbf(cARQ, "", cSQL)
         Exit Function
@@ -159,11 +159,11 @@ Public Function Comandorc6(ByVal cARQ As String, ByVal cSQL As String) As Boolea
     Else
       cCONN = aRETU(1)
     End If
-    ' Inicialização simplificada no RC6
+    ' Inicializaï¿½ï¿½o simplificada no RC6
     Set oDB = New_c.Connection(cCONN)
     
-    ' O método Execute da conexão substitui a necessidade do objeto Command
-    ' para comandos simples (sem parâmetros).
+    ' O mï¿½todo Execute da conexï¿½o substitui a necessidade do objeto Command
+    ' para comandos simples (sem parï¿½metros).
     oDB.Execute cSQL
     
     ' Fechamento simplificado (apenas limpa o objeto)
@@ -253,7 +253,7 @@ Public Function SomaSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
        carqcon = aARQ(1)
     End If
     
-    ' Inicialização simplificada no RC6
+    ' Inicializaï¿½ï¿½o simplificada no RC6
     Set oDB = New_c.Connection(carqcon)
     lOPEN = True
   
@@ -266,7 +266,7 @@ Public Function SomaSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
     'If InStr(UCase(cARQ), "PGSQL") > 0 Or InStr(UCase(cARQ), "POSTGRESQL") > 0 Then pgSetValuesrc6 oDB
 
     ' Abertura do Recordset no RC6:
-    ' No RC6, o método é oDB.OpenRecordset(cSQL)
+    ' No RC6, o mï¿½todo ï¿½ oDB.OpenRecordset(cSQL)
     Set oRS = oDB.OpenRecordset(cSQL)
     lRSOP = True
 
@@ -279,13 +279,14 @@ Public Function SomaSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
                 Else
                     eVAL = MathOper(oRS(aOPE(1)).Value, oRS(aOPE(2)).Value, aOPE(0))
                 End If
+                If IsNull(eVAL) Or IsEmpty(eVAL) Then eVAL = 0
                 aRETU(X) = aRETU(X) + eVAL
             Next X
             oRS.MoveNext
         Wend
     End If
     
-    ' Limpeza (RC6 não usa .Close para conexão, apenas para Recordset)
+    ' Limpeza (RC6 nï¿½o usa .Close para conexï¿½o, apenas para Recordset)
     
     Set oRS = Nothing
     Set oDB = Nothing
@@ -338,7 +339,7 @@ Public Function PegSQLDeliRC6(ByVal cARQ As String, ByVal cSQL As String, _
     Else
       carqcon = aARQ(1)
     End If
-    ' Inicialização do RC6 (Substitui o .Open e propriedades ADO)
+    ' Inicializaï¿½ï¿½o do RC6 (Substitui o .Open e propriedades ADO)
     Set oDB = New_c.Connection(carqcon)
     lOPEN = True
 
@@ -347,8 +348,8 @@ Public Function PegSQLDeliRC6(ByVal cARQ As String, ByVal cSQL As String, _
     'If InStr(cARQ, "VFPOLEDB") > 0 Then VFPSetValuesrc6 oDB
     'If InStr(UCase(cARQ), "PGSQL") > 0 Or InStr(UCase(cARQ), "POSTGRESQL") > 0 Then pgSetValuesrc6 oDB
 
-    ' Abertura do Recordset (RC6 usa apenas o SQL e a Conexão)
-    ' O método OpenRecordset é o padrão do RC6
+    ' Abertura do Recordset (RC6 usa apenas o SQL e a Conexï¿½o)
+    ' O mï¿½todo OpenRecordset ï¿½ o padrï¿½o do RC6
     Set oRS = oDB.OpenRecordset(cSQL)
     lRSOP = True
 
@@ -357,7 +358,7 @@ Public Function PegSQLDeliRC6(ByVal cARQ As String, ByVal cSQL As String, _
             For X = 0 To nCAMPOS - 1
                 aOPE = SepSqlOpe(aCAM(X))
                 
-                ' Extração do valor
+                ' Extraï¿½ï¿½o do valor
                 If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
                     eVAL = oRS(aCAM(X)).Value
                 Else
@@ -378,7 +379,7 @@ Public Function PegSQLDeliRC6(ByVal cARQ As String, ByVal cSQL As String, _
             
             oRS.MoveNext
             
-            ' Adiciona o delimitador se não for o último
+            ' Adiciona o delimitador se nï¿½o for o ï¿½ltimo
             If Not oRS.EOF Then
                 For X = 0 To nCAMPOS - 1
                     aRETU(X) = aRETU(X) & cDELI
@@ -387,7 +388,7 @@ Public Function PegSQLDeliRC6(ByVal cARQ As String, ByVal cSQL As String, _
         Wend
     End If
 
-    ' Finalização (Lembre-se: oDB não tem .Close)
+    ' Finalizaï¿½ï¿½o (Lembre-se: oDB nï¿½o tem .Close)
     
     Set oRS = Nothing
     Set oDB = Nothing
@@ -414,7 +415,7 @@ Public Function GrvSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     On Error GoTo errhandler
     GrvSQLRC6 = False
 
-    ' 1. Identifica o dialeto/conexão
+    ' 1. Identifica o dialeto/conexï¿½o
     aARQ = TipoConn(cARQ)
     If EArquivoSQLite(cARQ) And InStr(cARQ, "[") = 0 Then
       carqcon = cARQ
@@ -435,6 +436,9 @@ Public Function GrvSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         Set oRS = Nothing: Set oDB = Nothing
         Exit Function
     End If
+    If Not oRS.Updatable Then
+        Err.Raise vbObjectError + 2101, "GrvSQLRC6", "O recordset nao permite atualizacao."
+    End If
 
     While Not oRS.EOF
         For X = nSTARITEM To nITEM - 1
@@ -449,19 +453,19 @@ Public Function GrvSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
                     eVAL = MathOper(oRS(aOPE(1)).Value, oRS(aOPE(2)).Value, aOPE(0))
                 End If
 
-                ' --- INTEGRAÇÃO COM DIALETO DE DATA ---
+                ' --- INTEGRAï¿½ï¿½O COM DIALETO DE DATA ---
                 If Mid(aFOR(X), 1, 1) = "D" Then
-                    ' Usa a função dialetoDataParaSQL do seu sqldialeto.bas
-                    ' aARQ(2) contém o identificador do tipo de banco
+                    ' Usa a funï¿½ï¿½o dialetoDataParaSQL do seu sqldialeto.bas
+                    ' aARQ(2) contï¿½m o identificador do tipo de banco
                     oRS(aCAM(X)).Value = dialetoDataParaSQL(eVAL, aARQ(2))
                 Else
-                    ' Tratamento padrão (Texto/Número)
+                    ' Tratamento padrï¿½o (Texto/Nï¿½mero)
                     oRS(aCAM(X)).Value = FVar(eVAL, aFOR(X), "")
                 End If
             End If
         Next X
         
-        ' Gravação em lote (nativa RC6)
+        ' Gravaï¿½ï¿½o em lote (nativa RC6)
         oRS.UpdateBatch
         oRS.MoveNext
     Wend
@@ -472,15 +476,15 @@ Public Function GrvSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     Exit Function
 
 errhandler:
-    SayErro "Erro na Gravação (RC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
+    SayErro "Erro na Gravaï¿½ï¿½o (RC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
     GrvSQLRC6 = False
 End Function
 
-Public Function ApagaSQLpRC6(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusão") As Boolean
+Public Function ApagaSQLpRC6(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusï¿½o") As Boolean
   ApagaSQLpRC6 = False
-  If MDG(cTEXTO, "Exclusão Registro") Then
+  If MDG(cTEXTO, "Exclusï¿½o Registro") Then
     ApagaSQLpRC6 = APAGASQLRC6(cARQ, cSQL)
   End If
 End Function
@@ -514,7 +518,7 @@ Public Function IncluiSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
         
 
     
-    ' Inicializa Conexão RC6
+    ' Inicializa Conexï¿½o RC6
     Set oDB = New_c.Connection(carqcon)
 
     ' Ajustes de ambiente
@@ -522,11 +526,14 @@ Public Function IncluiSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     'If InStr(aRETU(1), "VFPOLEDB") > 0 Then VFPSetValuesrc6 oDB
     'If InStr(UCase(aRETU(1)), "PGSQL") > 0 Or InStr(UCase(aRETU(1)), "POSTGRESQL") > 0 Then pgSetValuesrc6 oDB
 
-    ' Abertura do Recordset (O RC6 abre como ForwardOnly/ReadOnly se não especificado,
-    ' mas como vamos dar AddNew, ele precisa ser editável)
+    ' Abertura do Recordset (O RC6 abre como ForwardOnly/ReadOnly se nï¿½o especificado,
+    ' mas como vamos dar AddNew, ele precisa ser editï¿½vel)
     Set oRS = oDB.OpenRecordset(cSQL)
+    If Not oRS.Updatable Then
+        Err.Raise vbObjectError + 2102, "IncluiSQLRC6", "O recordset nao permite inclusao."
+    End If
 
-    ' Verifica se já existe (Check)
+    ' Verifica se jï¿½ existe (Check)
     If lCHECK And Not oRS.EOF Then
         lTEM = True
     End If
@@ -536,7 +543,7 @@ Public Function IncluiSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
         For X = 0 To nITEM - 1
             If Not IsNull(aVAL(X)) Then
                 ' Tratamento de Datas para o RC6/Dialetos
-                If Mid(aCAM(X), 1, 1) = "D" Then ' Ou a lógica de aFOR que você usa
+                If Mid(aCAM(X), 1, 1) = "D" Then ' Ou a lï¿½gica de aFOR que vocï¿½ usa
                     oRS(aCAM(X)).Value = dialetoDataParaSQL(aVAL(X), aRETU(2))
                 Else
                     oRS(aCAM(X)).Value = aVAL(X)
@@ -544,12 +551,12 @@ Public Function IncluiSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
             End If
         Next X
 
-        ' Gravação
+        ' Gravaï¿½ï¿½o
         oRS.UpdateBatch
         
-        ' Recupera IDs se necessário
-        If Not IsNumeric(aIDDES) Then
-            ' No RC6, o registro inserido está posicionado
+        ' Recupera IDs se necessï¿½rio
+        If IsArray(aIDDES) Then
+            ' No RC6, o registro inserido estï¿½ posicionado
             Dim nCAMPOS As Long
             nCAMPOS = UBound(aIDDES)
             ReDim eRETU01(nCAMPOS)
@@ -561,19 +568,19 @@ Public Function IncluiSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
         lRETU = True
     End If
 
-    ' Limpeza (RC6 não usa .Close na conexão, apenas no Recordset)
+    ' Limpeza (RC6 nï¿½o usa .Close na conexï¿½o, apenas no Recordset)
     Set oRS = Nothing
     Set oDB = Nothing
 
     If lCHECK And lTEM And lMES Then
-        Alert "Item já Cadastrado Com Esta Chave"
+        Alert "Item jï¿½ Cadastrado Com Esta Chave"
     End If
 
     IncluiSQLRC6 = lRETU
     Exit Function
 
 errhandler:
-    SayErro "Erro na Inclusão (RC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
+    SayErro "Erro na Inclusï¿½o (RC6):" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & Err.Description
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
     IncluiSQLRC6 = False
@@ -593,11 +600,14 @@ Public Function PegSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     
     ' Inicializa o array de retorno
     ReDim aRETU(0 To nITEM - 1)
+    For X = 0 To nITEM - 1
+        aRETU(X) = ValorPadraoRC6(aPAD, X)
+    Next X
     
-    ' Identifica a conexão
+    ' Identifica a conexï¿½o
     aCON = TipoConn(cARQ, , , False)
     
-    ' Ajuste de dialeto PGSQL (se necessário)
+    ' Ajuste de dialeto PGSQL (se necessï¿½rio)
     If aCON(2) = "PGSQL" Then
         cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
     End If
@@ -609,7 +619,7 @@ Public Function PegSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
     End If
 
 
-    ' Inicialização do RC6 (cConnection não precisa de Open com timeout)
+    ' Inicializaï¿½ï¿½o do RC6 (cConnection nï¿½o precisa de Open com timeout)
     Set oDB = New_c.Connection(carqcon)
 
     ' Ajustes de ambiente
@@ -624,30 +634,27 @@ Public Function PegSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         For X = 0 To nITEM - 1
             aOPE = SepSqlOpe(aCAM(X))
             
-            ' Extração do valor
+            ' Extraï¿½ï¿½o do valor
             If aOPE(0) = "" Or aOPE(1) = "" Or aOPE(2) = "" Then
                 eVAL = oRS(aCAM(X)).Value
             Else
                 eVAL = MathOper(oRS(aOPE(1)).Value, oRS(aOPE(2)).Value, aOPE(0))
             End If
 
-            ' Formatação (FVar) e tratamento de Nulo
+            ' Formataï¿½ï¿½o (FVar) e tratamento de Nulo
             If IsNull(eVAL) Then
-                aRETU(X) = aPAD(X)
+                aRETU(X) = ValorPadraoRC6(aPAD, X)
             Else
-                aRETU(X) = FVar(eVAL, aFOR(X), aPAD(X))
+                aRETU(X) = FVar(eVAL, aFOR(X), ValorPadraoRC6(aPAD, X))
             End If
         Next X
-    Else
-        ' Se não encontrar registros, retorna o padrão
-        aRETU = aPAD
     End If
 
     ' Fechamento e Limpeza
     Set oRS = Nothing
     Set oDB = Nothing
     
-    ' Retorno da função
+    ' Retorno da funï¿½ï¿½o
     PegSQLRC6 = aRETU
     Exit Function
 
@@ -656,16 +663,19 @@ errhandler:
     Dim cERRO As String
     cERRO = "Peg SQL RC6:" & vbCrLf & cARQ & vbCrLf & cSQL & vbCrLf & "Erro: " & Err.Description
     
-    ' Se ocorrer erro em um campo, tenta usar o valor padrão
-    If Err.Number = 3265 Or Err.Number = 5 Or Err.Number = 94 Then
-        If X >= 0 And X < nITEM Then aRETU(X) = aPAD(X)
-        Resume Next
-    End If
-    
+    ' Se ocorrer erro em um campo, tenta usar o valor padrï¿½o
     SayErro cERRO
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
-    PegSQLRC6 = aPAD
+    PegSQLRC6 = aRETU
+End Function
+
+Private Function ValorPadraoRC6(ByVal aPAD As Variant, ByVal nIndex As Long) As Variant
+    If IsArray(aPAD) Then
+        ValorPadraoRC6 = aPAD(nIndex)
+    Else
+        ValorPadraoRC6 = aPAD
+    End If
 End Function
 Public Function PegCountSQLRC6(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
   PegCountSQLRC6 = PegOperSQLRC6(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "COUNT")
@@ -703,7 +713,7 @@ Public Function PegOperSQLRC6(ByVal cARQ As String, ByVal cTABLEWHERE As String,
   Else
     aRETU = PegSQLRC6(cARQ, cSQL, 1, Array("CAMPO"), Array(""), Array(eDEFAULT))
   End If
-  If lRETU Then
+  If IsArray(aRETU) Then
     PegOperSQLRC6 = aRETU(0)
   End If
 End Function
@@ -715,14 +725,14 @@ Public Function PegUltSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal c
     
     On Error GoTo errhandler
     
-    ' Valor padrão inicial
+    ' Valor padrï¿½o inicial
     PegUltSQLRC6 = eDEFAULT
     
     
-' Identifica a conexão
+' Identifica a conexï¿½o
     aCON = TipoConn(cARQ, , , False)
     
-    ' Ajuste de dialeto PGSQL (se necessário)
+    ' Ajuste de dialeto PGSQL (se necessï¿½rio)
     If aCON(2) = "PGSQL" Then
         cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
     End If
@@ -734,7 +744,7 @@ Public Function PegUltSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal c
     End If
     
     
-    ' Inicializa a conexão (O RC6 abre a conexão ao instanciar com o caminho)
+    ' Inicializa a conexï¿½o (O RC6 abre a conexï¿½o ao instanciar com o caminho)
     Set oDB = New_c.Connection(carqcon)
     
     ' Abre o Recordset nativo do RC6
@@ -742,16 +752,16 @@ Public Function PegUltSQLRC6(ByVal cARQ As String, ByVal cSQL As String, ByVal c
     Set oRS = oDB.OpenRecordset(cSQL)
     
     If Not oRS.EOF Then
-        ' Move para o último registro para pegar o "último" valor
+        ' Move para o ï¿½ltimo registro para pegar o "ï¿½ltimo" valor
         oRS.MoveLast
         
-        ' Verifica se o campo não é nulo antes de atribuir
+        ' Verifica se o campo nï¿½o ï¿½ nulo antes de atribuir
         If Not IsNull(oRS(cCAMPO).Value) Then
             PegUltSQLRC6 = oRS(cCAMPO).Value
         End If
     End If
     
-    ' Limpeza (RC6 não tem .Close em conexão)
+    ' Limpeza (RC6 nï¿½o tem .Close em conexï¿½o)
     Set oRS = Nothing
     Set oDB = Nothing
     
@@ -766,7 +776,7 @@ errhandler:
     If Not oRS Is Nothing Then Set oRS = Nothing
     If Not oDB Is Nothing Then Set oDB = Nothing
     
-    ' Retorna o padrão em caso de erro
+    ' Retorna o padrï¿½o em caso de erro
     PegUltSQLRC6 = eDEFAULT
 End Function
 Public Function SQLMoveRegRC6(ByVal cARQORI As String, _
@@ -797,7 +807,7 @@ Public Function SQLMoveRegRC6(ByVal cARQORI As String, _
     On Error GoTo errhandler
     SQLMoveRegRC6 = False
 
-    ' 1. Identifica Conexões
+    ' 1. Identifica Conexï¿½es
     aRetuOri = TipoConn(cARQORI)
     aRetuDes = TipoConn(cARQDES)
     
@@ -814,7 +824,7 @@ Public Function SQLMoveRegRC6(ByVal cARQORI As String, _
 
     
    
-    ' 2. Inicializa Conexões RC6 (New_c.Connection já abre a conexão)
+    ' 2. Inicializa Conexï¿½es RC6 (New_c.Connection jï¿½ abre a conexï¿½o)
     Set oDB = New_c.Connection(cCONORI)
     Set oDBDES = New_c.Connection(cCONDES)
 
@@ -840,11 +850,11 @@ Public Function SQLMoveRegRC6(ByVal cARQORI As String, _
                 Next X
             End If
 
-            ' Operação Origem (Delete)
-            If InStr(cOPEORI, "DEL") > 0 Then oRS.Delete
-
-            ' Operação Destino (Append)
+            ' Operaï¿½ï¿½o Destino (Append)
             If InStr(cOPEDES, "INC") > 0 Then
+                If Not oRSDES.Updatable Then
+                    Err.Raise vbObjectError + 2103, "SQLMoveRegRC6", "O destino nao permite inclusao."
+                End If
                 oRSDES.AddNew
             End If
 
@@ -862,17 +872,26 @@ Public Function SQLMoveRegRC6(ByVal cARQORI As String, _
                 Next X
             End If
 
-            ' Gravação em Lote
+            ' Gravaï¿½ï¿½o em Lote
             oRSDES.UpdateBatch
 
             ' Captura IDs inseridos
-            If Not IsNumeric(aIDDES) Then
+            If IsArray(aIDDES) Then
                 nCAMPOS = UBound(aIDDES)
                 ReDim aRETUID(nCAMPOS)
                 For X = 0 To nCAMPOS
                     aRETUID(X) = oRSDES(aIDDES(X)).Value
                 Next X
                 eRETU01 = aRETUID
+            End If
+
+            ' A origem so e removida depois da confirmacao da gravacao no destino.
+            If InStr(cOPEORI, "DEL") > 0 Then
+                If Not oRS.Updatable Then
+                    Err.Raise vbObjectError + 2104, "SQLMoveRegRC6", "A origem nao permite exclusao."
+                End If
+                oRS.Delete
+                oRS.UpdateBatch
             End If
 
             oRS.MoveNext
@@ -897,11 +916,11 @@ errhandler:
 End Function
 
 ' ==============================================================================
-' FUNÇÃO: ConfigurarConexaoRC6
+' FUNï¿½ï¿½O: ConfigurarConexaoRC6
 ' Objetivo: Orquestrador central que aplica os SETs de performance e ambiente
-'           baseado na string de conexão fornecida.
+'           baseado na string de conexï¿½o fornecida.
 ' ==============================================================================
-Public Function ConfigurarConexaoRC6(ByRef oCON As Object, ByVal cStringConexao As String) As Boolean
+Public Function ConfigurarConexaoRC6(ByVal oCON As RC6.cConnection, ByVal cStringConexao As String) As Boolean
     Dim cBUSCA As String
     cBUSCA = UCase(cStringConexao)
     
@@ -917,7 +936,7 @@ Public Function ConfigurarConexaoRC6(ByRef oCON As Object, ByVal cStringConexao 
         
     ' --- 3. SQLite (Nativo RC6) ---
     ElseIf InStr(cBUSCA, "SQLITE") > 0 Then
-        ' Assumindo que oCON seja RC6.cConnection ou compatível
+        ' Assumindo que oCON seja RC6.cConnection ou compatï¿½vel
         SqliteSetValuesRC6 oCON
     End If
     
@@ -928,22 +947,22 @@ ErroConfig:
     ConfigurarConexaoRC6 = False
 End Function
 
-Public Function SqliteSetValuesRC6(ByRef oCON As Object) As Boolean
+Public Function SqliteSetValuesRC6(ByVal oCON As RC6.cConnection) As Boolean
     On Error GoTo ErroSQLite
     SqliteSetValuesRC6 = False
     
     If oCON Is Nothing Then Exit Function
     
-    ' 1. Armazena temporários na memória
+    ' 1. Armazena temporï¿½rios na memï¿½ria
     oCON.Execute "PRAGMA temp_store = MEMORY;"
     
-    ' 2. Cache de 2000 páginas (aprox. 8MB se a página for 4KB)
+    ' 2. Cache de 2000 pï¿½ginas (aprox. 8MB se a pï¿½gina for 4KB)
     oCON.Execute "PRAGMA cache_size = 2000;"
     
-    ' 3. Modo WAL: Essencial para performance em concorrência
+    ' 3. Modo WAL: Essencial para performance em concorrï¿½ncia
     oCON.Execute "PRAGMA journal_mode = WAL;"
     
-    ' 4. Sincronização NORMAL (seguro com WAL e muito mais rápido)
+    ' 4. Sincronizaï¿½ï¿½o NORMAL (seguro com WAL e muito mais rï¿½pido)
     oCON.Execute "PRAGMA synchronous = NORMAL;"
     
     ' 5. Auto Vacuum Incremental
@@ -953,12 +972,12 @@ Public Function SqliteSetValuesRC6(ByRef oCON As Object) As Boolean
     Exit Function
 
 ErroSQLite:
-    ' Aqui você pode registrar o erro se desejar
+    ' Aqui vocï¿½ pode registrar o erro se desejar
     SqliteSetValuesRC6 = False
 End Function
 'Public Function RepararMdbAccessRC6(ByVal cCaminho As String) As Boolean
-    ' A estratégia padrão para reparar MDB/ACCDB é tentar compactá-lo.
-    ' Se houver corrupção física, a função de compactação retornará erro.
+    ' A estratï¿½gia padrï¿½o para reparar MDB/ACCDB ï¿½ tentar compactï¿½-lo.
+    ' Se houver corrupï¿½ï¿½o fï¿½sica, a funï¿½ï¿½o de compactaï¿½ï¿½o retornarï¿½ erro.
  '   Dim cTemp As String
   '  cTemp = cCaminho & ".tmp"
     
