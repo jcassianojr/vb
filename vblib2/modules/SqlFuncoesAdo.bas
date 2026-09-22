@@ -7,7 +7,7 @@ Public Function SQLiteSetValuesADO(ByRef oCON As Object) As Boolean
     On Error GoTo ErroSQLite
     SQLiteSetValuesADO = False
     
-    ' 1. Verifica se a conexão é válida
+    ' 1. Verifica se a conexï¿½o ï¿½ vï¿½lida
     If oCON Is Nothing Then Exit Function
     
     ' 2. Cria objeto de comando ADO
@@ -15,14 +15,10 @@ Public Function SQLiteSetValuesADO(ByRef oCON As Object) As Boolean
     Set oCOMANDO.ActiveConnection = oCON
     oCOMANDO.CommandType = 1 ' adCmdText
     
-    ' 3. Aplica as configurações de alta performance do SQLite
-    ' O SQLite permite executar múltiplos comandos separados por ponto e vírgula
-    oCOMANDO.CommandText = "PRAGMA temp_store = MEMORY;" & _
-                           "PRAGMA cache_size = 2000;" & _
-                           "PRAGMA journal_mode = WAL;" & _
-                           "PRAGMA synchronous = NORMAL;" & _
-                           "PRAGMA auto_vacuum = INCREMENTAL;"
-    
+    ' 3. Aplica configuraï¿½ï¿½es de sessï¿½o compatï¿½veis com providers ADO SQLite.
+    oCOMANDO.CommandText = "PRAGMA temp_store = MEMORY"
+    oCOMANDO.Execute
+    oCOMANDO.CommandText = "PRAGMA cache_size = 2000"
     oCOMANDO.Execute
     
     SQLiteSetValuesADO = True
@@ -35,9 +31,9 @@ ErroSQLite:
 End Function
 
 ' ==============================================================================
-' FUNÇÃO: ConfigurarConexaoADO
+' FUNï¿½ï¿½O: ConfigurarConexaoADO
 ' Objetivo: Orquestrador central que aplica os SETs de performance e ambiente
-'           baseado na string de conexão fornecida, usando tecnologia ADO.
+'           baseado na string de conexï¿½o fornecida, usando tecnologia ADO.
 ' ==============================================================================
 Public Function ConfigurarConexaoADO(ByRef oCON As Object, ByVal cStringConexao As String) As Boolean
     Dim cBUSCA As String
@@ -46,20 +42,20 @@ Public Function ConfigurarConexaoADO(ByRef oCON As Object, ByVal cStringConexao 
     On Error GoTo ErroConfig
     
     ' --- 1. VFP / FoxPro (Configura SET DELETED ON / NULL OFF) ---
+    ConfigurarConexaoADO = True
     If InStr(cBUSCA, "VFPOLEDB") > 0 Then
-        VFPSetValues oCON
+        ConfigurarConexaoADO = VFPSetValues(oCON)
     
     ' --- 2. PostgreSQL (Configura search_path / encoding) ---
     ElseIf InStr(cBUSCA, "PGSQL") > 0 Or InStr(cBUSCA, "POSTGRESQL") > 0 Then
-        pgSetValues oCON
+        ConfigurarConexaoADO = pgSetValues(oCON)
         
     ' --- 3. SQLite (Configura WAL, Cache e Performance via ADO) ---
-    ElseIf InStr(cBUSCA, ".DB") > 0 Or InStr(cBUSCA, "SQLITE") > 0 Then
-        SQLiteSetValuesADO oCON
+    ElseIf InStr(cBUSCA, "SQLITE") > 0 Then
+        ConfigurarConexaoADO = SQLiteSetValuesADO(oCON)
         
     End If
     
-    ConfigurarConexaoADO = True
     Exit Function
 
 ErroConfig:
@@ -67,12 +63,12 @@ ErroConfig:
 End Function
 Public Function pgSetValues(ByRef oCON As Object) As Boolean
     Dim cCOM As String
-    Dim oCOMANDO As Object ' Usando Object para manter o padrão flexível do seu projeto
+    Dim oCOMANDO As Object ' Usando Object para manter o padrï¿½o flexï¿½vel do seu projeto
     
     On Error GoTo ErroPostgres
     pgSetValues = False
     
-    ' Se a conexão não estiver ativa, sai para evitar travamentos
+    ' Se a conexï¿½o nï¿½o estiver ativa, sai para evitar travamentos
     If oCON Is Nothing Then Exit Function
     
     ' Cria o objeto de comando ADO dinamicamente
@@ -80,8 +76,8 @@ Public Function pgSetValues(ByRef oCON As Object) As Boolean
     oCOMANDO.CommandType = 1 ' adCmdText = 1
     Set oCOMANDO.ActiveConnection = oCON
 
-    ' INJEÇÃO DO SCHEMA E ENCODING ANSI (Porto Seguro)
-    ' Configura o search_path para o seu esquema e garante tráfego em WIN1252
+    ' INJEï¿½ï¿½O DO SCHEMA E ENCODING ANSI (Porto Seguro)
+    ' Configura o search_path para o seu esquema e garante trï¿½fego em WIN1252
     cCOM = "SET search_path TO myschema, public; SET client_encoding TO 'WIN1252';"
     oCOMANDO.CommandText = cCOM
     oCOMANDO.Execute
@@ -91,7 +87,7 @@ Public Function pgSetValues(ByRef oCON As Object) As Boolean
     Exit Function
 
 ErroPostgres:
-    ' Se falhar (ex: banco temporariamente fora ou string malformada), limpa a memória
+    ' Se falhar (ex: banco temporariamente fora ou string malformada), limpa a memï¿½ria
     Set oCOMANDO = Nothing
     pgSetValues = False
 End Function
@@ -130,6 +126,7 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTable As String, ByVa
   Dim oCON As ADODB.Connection
   Dim oCOMANDO As ADODB.Command
   On Error GoTo TrataErro
+  CCOMANDO = UCase$(Trim$(CCOMANDO))
 
   'ZAP PACK
   'delete from mail where numero=1
@@ -194,16 +191,18 @@ Public Function AdoComandodbf(ByVal cARQ As String, ByVal cTable As String, ByVa
 
   'fecha a coneccao
   oCON.Close
+  Set oCOMANDO = Nothing
+  Set oCON = Nothing
   AdoComandodbf = True
 
   Exit Function
 TrataErro:
-  On Error Resume Next
-  Select Case Err.Number
-  Case Else
-    SayErro "ADO Comando DBF:" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTable & Chr(13) & Chr(10) & cCOM & Chr(13) & Chr(10)
-    Exit Function
-  End Select
+  SayErro "ADO Comando DBF:" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTable & Chr(13) & Chr(10) & cCOM & Chr(13) & Chr(10) & Err.Description
+  If Not oCON Is Nothing Then
+    If oCON.State <> 0 Then oCON.Close
+  End If
+  Set oCOMANDO = Nothing
+  Set oCON = Nothing
 End Function
 Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolean
   Dim aRETU As Variant
@@ -250,6 +249,7 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
     
     oDB.ConnectionTimeout = 120
     oDB.Open cCONN
+    ConfigurarConexaoADO oDB, cARQ
 
     oCOM.ActiveConnection = oDB
     oCOM.CommandText = cSQL
@@ -262,11 +262,12 @@ Public Function ADOComando(ByVal cARQ As String, ByVal cSQL As String) As Boolea
   
   Exit Function
 TrataErro:
-  Select Case Err.Number
-  Case Else
-    SayErro "SQL ADO Comando:" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL
-    Exit Function
-  End Select
+  SayErro "SQL ADO Comando:" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL & Chr(13) & Chr(10) & Err.Description
+  If Not oDB Is Nothing Then
+    If oDB.State <> 0 Then oDB.Close
+  End If
+  Set oCOM = Nothing
+  Set oDB = Nothing
 End Function
 Public Function APAGASQLADO(ByVal cARQ As String, ByVal cSQL As String) As Boolean
   Dim nPOS As Integer
@@ -354,7 +355,7 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
   If aARQ(2) = "SQLITE" Then
      oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
   Else
-     oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+     oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
   End If
   lRSOP = True
 
@@ -370,6 +371,7 @@ Public Function SomaSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal aCA
         Else
           eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
         End If
+        If IsNull(eVAL) Or IsEmpty(eVAL) Then eVAL = 0
         aRETU(x) = aRETU(x) + eVAL
       Next x
       oRS.MoveNext
@@ -450,7 +452,7 @@ Public Function PegSQLDeliAdo(ByVal cARQ As String, ByVal cSQL As String, _
 
   Set oRS = New ADODB.Recordset
 
-  oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+  oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
 
   lRSOP = True
   If Not oRS.EOF Then
@@ -514,9 +516,9 @@ errhandler:
   End Select
 End Function
 
-Public Function ApagaSQLpAdo(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusão") As Boolean
+Public Function ApagaSQLpAdo(ByVal cARQ As String, ByVal cSQL As String, Optional ByVal cTEXTO As String = "Confirme Exclusï¿½o") As Boolean
   ApagaSQLpAdo = False
-  If MDG(cTEXTO, "Exclusão Registro") Then
+  If MDG(cTEXTO, "Exclusï¿½o Registro") Then
     ApagaSQLpAdo = APAGASQLADO(cARQ, cSQL)
   End If
 End Function
@@ -639,10 +641,10 @@ Public Function GrvSQLado(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         aFOR(x) = ""
       End If
       
-      ''Efetua a Gravaçao
+      ''Efetua a Gravaï¿½ao
       If lGRAVA Then
          If aARQ(2) = "SQLITE" And Mid(aFOR(x), 1, 1) = "D" Then '(aFOR(x) = "DH" Or aFOR(x) = "D" Or aFOR(x) = "DC") Then
-             oRS(aCAM(x)) = CStr(Format(eVAL, "yyyy-mm-dd hh:ss:mm"))
+             oRS(aCAM(x)) = CStr(Format$(eVAL, "yyyy-mm-dd hh:nn:ss"))
 '             oRS(aCAM(x)) = eVAL 'FVar(eVAL, aFOR(x), eVAZIO)
 '            If aFOR(x) = "DH" Then
 '              oRS(aCAM(x)) = CStr(Now)
@@ -780,7 +782,7 @@ Public Function IncluiSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal n
       Case Else
          oRS.Update
     End Select
-    If Not IsNumeric(aIDDES) Then            ''Se for numerico nao e matriz
+    If IsArray(aIDDES) Then                  ''Se for matriz
       nCAMPOS = UBound(aIDDES)
       ReDim aRETUID(nCAMPOS + 1)
       For x = 0 To nCAMPOS
@@ -856,7 +858,10 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
   Dim cCONN As String
 
   On Error GoTo errhandler
-  ReDim aRETU(nITEM)
+  ReDim aRETU(0 To nITEM - 1)
+  For x = 0 To nITEM - 1
+    aRETU(x) = ValorPadraoAdo(aPAD, x)
+  Next x
   lOPEN = False
   lRSOP = False
   
@@ -883,7 +888,7 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
 
   lOPEN = True
   Set oRS = New ADODB.Recordset
-  oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+  oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
 
   lRSOP = True
 
@@ -898,12 +903,15 @@ Public Function PegSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal nITE
         eVAL = MathOper(oRS(aOPE(1)), oRS(aOPE(2)), aOPE(0))
       End If
 
-      aRETU(x) = FVar(eVAL, aFOR(x), aPAD(x))
+      If IsNull(eVAL) Then
+        aRETU(x) = ValorPadraoAdo(aPAD, x)
+      Else
+        aRETU(x) = FVar(eVAL, aFOR(x), ValorPadraoAdo(aPAD, x))
+      End If
       
     Next
   Else
     lRETU = False
-    aRETU = aPAD
   End If
   oRS.Close
   oDB.Close
@@ -919,13 +927,13 @@ errhandler:
   End If
   Select Case Err.Number
   Case 3265, 5
-    aRETU(x) = aPAD(x)
+    aRETU(x) = ValorPadraoAdo(aPAD, x)
     cERRO = cERRO & "Campo:" & aCAM(x) & Chr(13) & Chr(10)
     ADOErro oRS.ActiveConnection.Errors, cERRO
     Resume Next
   Case 94                                      ''Campo Esta com Null Pega Padrao
     ''SayErro (" PEGSQL Campo:" & aCAM(x))
-    aRETU(x) = aPAD(x)
+    aRETU(x) = ValorPadraoAdo(aPAD, x)
     Resume Next
   Case Else
     If lOPEN Then
@@ -933,9 +941,18 @@ errhandler:
     Else
       ADOErro oDB.Errors, cERRO
     End If
-    PegSQLAdo = aPAD
+    PegSQLAdo = aRETU
   End Select
 End Function
+
+Private Function ValorPadraoAdo(ByVal aPAD As Variant, ByVal nIndex As Long) As Variant
+  If IsArray(aPAD) Then
+    ValorPadraoAdo = aPAD(nIndex)
+  Else
+    ValorPadraoAdo = aPAD
+  End If
+End Function
+
 Public Function PegCountSQLADO(ByVal cARQ As String, ByVal cTABLEWHERE As String, ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
   PegCountSQLADO = PegOperSQLADO(cARQ, cTABLEWHERE, cCAMPO, eDEFAULT, "COUNT")
 End Function
@@ -972,7 +989,7 @@ Public Function PegOperSQLADO(ByVal cARQ As String, ByVal cTABLEWHERE As String,
   Else
     aRETU = PegSQLAdo(cARQ, cSQL, 1, Array("CAMPO"), Array(""), Array(eDEFAULT))
   End If
-  If lRETU Then
+  If IsArray(aRETU) Then
     PegOperSQLADO = aRETU(0)
   End If
 End Function
@@ -1007,7 +1024,7 @@ Public Function PegUltSQLAdo(ByVal cARQ As String, ByVal cSQL As String, ByVal c
   lOPEN = True
   Set oRS = New ADODB.Recordset
 
-  oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+  oRS.Open cSQL, oDB, adOpenStatic, adLockReadOnly
   lRSOP = True
 
 
@@ -1057,7 +1074,8 @@ Dim oRS As ADODB.Recordset
 Dim oRSDES As ADODB.Recordset
 Dim cARQORI1 As String
 Dim cARQDES1 As String
-Dim aRETU As Variant
+Dim aRETUORI As Variant
+Dim aRETUDES As Variant
 Dim x As Integer
 Dim nCAMPOS As Integer
 Dim aVALORI As Variant
@@ -1072,13 +1090,13 @@ SQLMoveRegADO = False
 lOPEN = False
 lRSOP = False
 
-aRETU = TipoConn(cARQORI)
+aRETUORI = TipoConn(cARQORI)
 
-cARQORI1 = aRETU(1)
+cARQORI1 = aRETUORI(1)
 
-aRETU = TipoConn(cARQDES)
+aRETUDES = TipoConn(cARQDES)
 
-cARQDES1 = aRETU(1)
+cARQDES1 = aRETUDES(1)
 
 Set oDB = New ADODB.Connection
 oDB.CursorLocation = adUseClient
@@ -1120,9 +1138,6 @@ If Not oRS.EOF Then
             aVALORI(x) = oRS(aCAMORI(x))
          Next x
       End If
-      If InStr(cOPEORI, "DEL") > 0 Then
-         oRS.Delete
-      End If
       If InStr(cOPEDES, "INC") > 0 Then
          oRSDES.AddNew
       Else
@@ -1141,13 +1156,13 @@ If Not oRS.EOF Then
             oRSDES(aOUTDES(x)) = aOUTORI(x)
          Next x
       End If
-      Select Case aRETU(2) 'alguns nao aceitam updade
+      Select Case aRETUDES(2) 'alguns nao aceitam updade
       Case Else
          oRSDES.Update
       End Select
 
       ' PEGAR O ID
-      If Not IsNumeric(aIDDES) Then        ''Se for numerico nao e matriz
+      If IsArray(aIDDES) Then              ''Se for matriz
          nCAMPOS = UBound(aIDDES)
          ReDim aRETUID(nCAMPOS + 1)
          For x = 0 To nCAMPOS
@@ -1155,18 +1170,22 @@ If Not oRS.EOF Then
          Next x
          eRETU01 = aRETUID
       End If
-      Select Case aRETU(2) 'alguns nao aceita updade
-      Case Else
-         oRSDES.Update
-      End Select
+      If InStr(cOPEORI, "DEL") > 0 Then
+         oRS.Delete
+         oRS.Update
+      End If
       oRS.MoveNext
    Wend
 End If
 oRS.Close
 oDB.Close
+oRSDES.Close
+oDBDES.Close
 
 Set oRS = Nothing
 Set oDB = Nothing
+Set oRSDES = Nothing
+Set oDBDES = Nothing
 SQLMoveRegADO = True
 Exit Function
 errhandler:
@@ -1181,8 +1200,18 @@ Case Else
    Else
       ADOErro oDB.Errors, cERRO
    End If
+   If Not oRS Is Nothing Then
+      If oRS.State <> 0 Then oRS.Close
+   End If
+   If Not oRSDES Is Nothing Then
+      If oRSDES.State <> 0 Then oRSDES.Close
+   End If
+   If Not oDB Is Nothing Then
+      If oDB.State <> 0 Then oDB.Close
+   End If
+   If Not oDBDES Is Nothing Then
+      If oDBDES.State <> 0 Then oDBDES.Close
+   End If
    Exit Function
 End Select
 End Function
-
-
