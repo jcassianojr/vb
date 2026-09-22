@@ -119,7 +119,7 @@ Public Function PegSQLite4vb(ByVal cCON As String, ByVal cSQL As String, _
 
     ReDim result(0 To nITEM - 1)
     For i = 0 To nITEM - 1
-        result(i) = ValorArrayOuEscalar4vb(aPAD, i)
+        result(i) = ObterValorArrayOuEscalar(aPAD, i)
     Next i
 
     Set db = AbrirSQLite4vb(cCON, True)
@@ -128,10 +128,10 @@ Public Function PegSQLite4vb(ByVal cCON As String, ByVal cSQL As String, _
         For i = 0 To nITEM - 1
             value = ValorCampo4vb(rs, aCAM(i))
             If IsNull(value) Or IsEmpty(value) Then
-                result(i) = ValorArrayOuEscalar4vb(aPAD, i)
+                result(i) = ObterValorArrayOuEscalar(aPAD, i)
             Else
-                result(i) = FVar(value, ValorArrayOuEscalar4vb(aFOR, i), _
-                                 ValorArrayOuEscalar4vb(aPAD, i))
+                result(i) = FVar(value, ObterValorArrayOuEscalar(aFOR, i), _
+                                 ObterValorArrayOuEscalar(aPAD, i))
             End If
         Next i
     End If
@@ -167,9 +167,9 @@ Public Function PegSQLiteDeli4vb(ByVal cCON As String, ByVal cSQL As String, _
         For i = LBound(aCAM) To UBound(aCAM)
             value = ValorCampo4vb(rs, aCAM(i))
             If IsNull(value) Or IsEmpty(value) Then
-                value = ValorArrayOuEscalar4vb(aPAD, i)
+                value = ObterValorArrayOuEscalar(aPAD, i)
             ElseIf IsArray(aFOR) Then
-                value = FVar(value, aFOR(i), ValorArrayOuEscalar4vb(aPAD, i))
+                value = FVar(value, aFOR(i), ObterValorArrayOuEscalar(aPAD, i))
             End If
             If rowCount > 1 Then
                 result(i) = result(i) & cDELI
@@ -179,7 +179,7 @@ Public Function PegSQLiteDeli4vb(ByVal cCON As String, ByVal cSQL As String, _
     Loop
     If Not hasRow Then
         For i = LBound(aCAM) To UBound(aCAM)
-            result(i) = CStr(ValorArrayOuEscalar4vb(aPAD, i))
+            result(i) = CStr(ObterValorArrayOuEscalar(aPAD, i))
         Next i
     End If
     PegSQLiteDeli4vb = result
@@ -238,13 +238,13 @@ Public Function GrvSQLite4vb(ByVal cARQ As String, ByVal cSQL_SELECT As String, 
     On Error GoTo TrataErro
     If nStartItem < 0 Then nStartItem = 0
     If nStartItem >= nITEM Then Exit Function
-    If Not ExtrairUpdate4vb(cSQL_SELECT, tableName, whereSql) Then Exit Function
+    If Not SqlExtrairUpdatePartes(cSQL_SELECT, tableName, whereSql) Then Exit Function
 
     nValues = nITEM - nStartItem
     ReDim values(0 To nValues - 1)
     For i = 0 To nValues - 1
-        values(i) = ValorParaGravar4vb(ValorArrayOuEscalar4vb(aVAL, nStartItem + i), _
-                                        ValorArrayOuEscalar4vb(aFOR, nStartItem + i))
+        values(i) = PrepararValorGravar(ObterValorArrayOuEscalar(aVAL, nStartItem + i), _
+                                        ObterValorArrayOuEscalar(aFOR, nStartItem + i))
     Next i
 
     Set db = AbrirSQLite4vb(cARQ, False)
@@ -285,7 +285,7 @@ Public Function IncluiSQLite4vb(ByVal cARQ As String, ByVal cSQL_SELECT As Strin
     Dim insertId As Currency
 
     On Error GoTo TrataErro
-    tableName = ExtrairTabela4vb(cSQL_SELECT)
+    tableName = SqlExtrairTabela(cSQL_SELECT)
     If Len(tableName) = 0 Then Exit Function
 
     Set db = AbrirSQLite4vb(cARQ, False)
@@ -302,9 +302,9 @@ Public Function IncluiSQLite4vb(ByVal cARQ As String, ByVal cSQL_SELECT As Strin
     If nITEM <= 0 Then Exit Function
     ReDim values(0 To nITEM - 1)
     For i = 0 To nITEM - 1
-        values(i) = ValorParaGravar4vb(ValorArrayOuEscalar4vb(aVAL, i), "C")
+        values(i) = PrepararValorGravar(ObterValorArrayOuEscalar(aVAL, i), "C")
     Next i
-    fields = CamposArray4vb(aCAM, nITEM)
+    fields = SqlConstruirCampos(aCAM, 0, nITEM)
     insertId = db.ExecInsertArr(tableName, fields, values)
     PreencherIDs4vb db, tableName, aIDDES, insertId
     IncluiSQLite4vb = True
@@ -373,7 +373,7 @@ Public Function SQLMoveRegSQLite4vb(ByVal cARQORI As String, _
         Exit Function
     End If
 
-    tableName = ExtrairTabela4vb(cSQLDES)
+    tableName = SqlExtrairTabela(cSQLDES)
     If Len(tableName) = 0 Or Not IsArray(aCAMDES) Then Exit Function
     nFields = UBound(aCAMDES) - LBound(aCAMDES) + 1
     If IsArray(aCAMORI) Then
@@ -390,15 +390,15 @@ Public Function SQLMoveRegSQLite4vb(ByVal cARQORI As String, _
         For i = 0 To nFields - 1
             values(i) = ValorCampo4vb(rs, aCAMORI(LBound(aCAMORI) + i))
         Next i
-        fields = CamposArray4vb(aCAMDES, nFields)
+        fields = SqlConstruirCampos(aCAMDES, 0, nFields)
 
         If IsArray(aOUTDES) Then
             ReDim extraValues(0 To UBound(aOUTDES) - LBound(aOUTDES))
             For i = LBound(extraValues) To UBound(extraValues)
-                extraValues(i) = ValorArrayOuEscalar4vb(aOUTORI, i)
+                extraValues(i) = ObterValorArrayOuEscalar(aOUTORI, i)
             Next i
             nExtra = UBound(extraValues) - LBound(extraValues) + 1
-            fields = fields & ", " & CamposArray4vb(aOUTDES, UBound(aOUTDES) - LBound(aOUTDES) + 1)
+            fields = fields & ", " & SqlConstruirCampos(aOUTDES, LBound(aOUTDES), UBound(aOUTDES) + 1)
             ReDim values(0 To nFields + nExtra - 1)
             For i = 0 To nFields - 1
                 values(i) = ValorCampo4vb(rs, aCAMORI(LBound(aCAMORI) + i))
@@ -457,36 +457,6 @@ Private Function ValorCampo4vb(ByVal rs As cSQLiteResults, ByVal field As Varian
     ValorCampo4vb = rs(field)
 End Function
 
-Private Function ValorArrayOuEscalar4vb(ByVal value As Variant, ByVal index As Long) As Variant
-    If IsArray(value) Then
-        ValorArrayOuEscalar4vb = value(index)
-    Else
-        ValorArrayOuEscalar4vb = value
-    End If
-End Function
-
-Private Function ValorParaGravar4vb(ByVal value As Variant, ByVal cFormat As Variant) As Variant
-    If IsNull(value) Or IsEmpty(value) Then
-        ValorParaGravar4vb = Null
-    ElseIf Left$(UCase$(CStr(cFormat)), 1) = "D" Then
-        If IsDate(value) Then
-            ValorParaGravar4vb = Format$(CDate(value), "yyyy-mm-dd hh:nn:ss")
-        Else
-            ValorParaGravar4vb = Null
-        End If
-    Else
-        ValorParaGravar4vb = value
-    End If
-End Function
-
-Private Function CamposArray4vb(ByVal fields As Variant, ByVal count As Long) As String
-    Dim i As Long, result As String
-    For i = 0 To count - 1
-        If i > 0 Then result = result & ", "
-        result = result & CStr(fields(i))
-    Next i
-    CamposArray4vb = result
-End Function
 
 Private Function CamposUpdate4vb(ByVal fields As Variant, ByVal first As Long, _
                                  ByVal last As Long) As String
@@ -505,31 +475,7 @@ Private Function MontarUpdate4vb(ByVal tableName As String, ByVal whereSql As St
                       CamposUpdate4vb(fields, first, last) & " " & whereSql
 End Function
 
-Private Function ExtrairTabela4vb(ByVal sourceSql As String) As String
-    Dim text As String, pFrom As Long, pWhere As Long
-    text = Replace(Replace(Trim$(sourceSql), vbCr, " "), vbLf, " ")
-    pFrom = InStr(1, UCase$(text), " FROM ", vbTextCompare)
-    If pFrom = 0 Then Exit Function
-    pFrom = pFrom + 6
-    pWhere = InStr(pFrom, UCase$(text), " WHERE ", vbTextCompare)
-    If pWhere = 0 Then
-        ExtrairTabela4vb = Trim$(Mid$(text, pFrom))
-    Else
-        ExtrairTabela4vb = Trim$(Mid$(text, pFrom, pWhere - pFrom))
-    End If
-End Function
 
-Private Function ExtrairUpdate4vb(ByVal sourceSql As String, ByRef tableName As String, _
-                                  ByRef whereSql As String) As Boolean
-    Dim text As String, pFrom As Long, pWhere As Long
-    text = Replace(Replace(Trim$(sourceSql), vbCr, " "), vbLf, " ")
-    pFrom = InStr(1, UCase$(text), " FROM ", vbTextCompare)
-    pWhere = InStr(1, UCase$(text), " WHERE ", vbTextCompare)
-    If pFrom = 0 Or pWhere = 0 Or pWhere <= pFrom Then Exit Function
-    tableName = Trim$(Mid$(text, pFrom + 6, pWhere - pFrom - 6))
-    whereSql = Mid$(text, pWhere)
-    ExtrairUpdate4vb = (Len(tableName) > 0)
-End Function
 
 Private Function AliasCampoSQLite4vb(ByVal sourceSql As String) As String
     Dim text As String, p As Long
@@ -557,8 +503,7 @@ Private Sub PreencherIDs4vb(ByVal db As cSQLite, ByVal tableName As String, _
         Exit Sub
     End If
 
-    Set rs = db.Query("SELECT " & CamposArray4vb(ids, UBound(ids) - LBound(ids) + 1) & _
-                      " FROM " & tableName & " WHERE rowid = ?", insertId)
+    Set rs = db.Query("SELECT " & SqlConstruirCampos(ids, LBound(ids), UBound(ids) + 1) & " FROM " & tableName & " WHERE rowid = ?", insertId)
     If rs.MoveNext() Then
         ReDim result(LBound(ids) To UBound(ids))
         For i = LBound(ids) To UBound(ids)

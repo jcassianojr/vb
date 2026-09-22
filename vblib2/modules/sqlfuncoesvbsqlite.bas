@@ -164,7 +164,7 @@ Public Function GrvSQLite(ByVal cARQ As String, ByVal cSQL_SELECT As String, _
     On Error GoTo TrataErro
     If nStartItem < 0 Then nStartItem = 0
     If nStartItem >= nITEM Then Exit Function
-    If Not ExtrairUpdatePartes(cSQL_SELECT, tableName, whereSql) Then Exit Function
+    If Not SqlExtrairUpdatePartes(cSQL_SELECT, tableName, whereSql) Then Exit Function
 
     sql = "UPDATE " & tableName & " SET "
     For i = nStartItem To nITEM - 1
@@ -176,7 +176,7 @@ Public Function GrvSQLite(ByVal cARQ As String, ByVal cSQL_SELECT As String, _
     Set db = AbrirSQLite(cARQ, False)
     Set cmd = db.CreateCommand(sql)
     For i = nStartItem To nITEM - 1
-        Value = ValorParaGravar(aVAL(i), aFOR(i))
+        Value = PrepararValorGravar(aVAL(i), aFOR(i))
         cmd.SetParameterValue i - nStartItem + 1, Value
     Next i
     cmd.Execute
@@ -206,7 +206,7 @@ Public Function IncluiSQLite(ByVal cARQ As String, ByVal cSQL_SELECT As String, 
     Dim alreadyExists As Boolean
 
     On Error GoTo TrataErro
-    tableName = ExtrairNomeTabela(cSQL_SELECT)
+    tableName = SqlExtrairTabela(cSQL_SELECT)
     If Len(tableName) = 0 Or nITEM <= 0 Then Exit Function
 
     Set db = AbrirSQLite(cARQ, False)
@@ -232,7 +232,7 @@ Public Function IncluiSQLite(ByVal cARQ As String, ByVal cSQL_SELECT As String, 
     sql = "INSERT INTO " & tableName & " (" & fields & ") VALUES (" & marks & ")"
     Set cmd = db.CreateCommand(sql)
     For i = 0 To nITEM - 1
-        Value = ValorParaGravar(aVAL(i), "C")
+        Value = PrepararValorGravar(aVAL(i), "C")
         cmd.SetParameterValue i + 1, Value
     Next i
     cmd.Execute
@@ -277,8 +277,8 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
             Else
                 Value = ValorDeCampo(RS, aCAM(x))
             End If
-            If IsNull(Value) Then Value = ValorDoArrayOuPadrao(aPAD, x)
-            If IsArray(aFOR) Then Value = FVar(Value, aFOR(x), ValorDoArrayOuPadrao(aPAD, x))
+            If IsNull(Value) Then Value = ObterValorArrayOuEscalar(aPAD, x)
+            If IsArray(aFOR) Then Value = FVar(Value, aFOR(x), ObterValorArrayOuEscalar(aPAD, x))
             If Len(ret(x)) > 0 Then ret(x) = ret(x) & cDELI
             ret(x) = ret(x) & FixStr(Value)
         Next x
@@ -387,8 +387,9 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
         Next x
     End If
 
-    tableName = ExtraiTabela(cSQLDES)
-    whereSql = ExtraiWhere(cSQLDES)
+   If Not SqlExtrairUpdatePartes(cSQLDES, tableName, whereSql) Then Exit Function
+  'tableName = SqlExtrairTabela(cSQLDES)
+   'whereSql = ExtraiWhere(cSQLDES)
     Set checkRs = target.OpenDataSet("SELECT count(*) AS N FROM " & tableName & " " & whereSql)
     If checkRs(1) > 0 Then
         For x = 0 To UBound(aCAMDES)
@@ -421,7 +422,7 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
     Next x
     If IsArray(aOUTDES) Then
         For x = 0 To UBound(aOUTDES)
-            Value = ValorDoArrayOuPadrao(aOUTORI, x)
+            Value = ObterValorArrayOuEscalar(aOUTORI, x)
             cmd.SetParameterValue UBound(aCAMDES) + x + 2, Value
         Next x
     End If
@@ -452,10 +453,10 @@ TrataErro:
     VBSQLiteSetValues = False
 End Function
 
-Public Function LimpaTag(ByVal cCON As String) As String
-    LimpaTag = Replace(Replace(Replace(Replace(cCON, "[VBSQLITE]", ""), _
-        "[SQLITERC6]", ""), "[TC6SQLITE]", ""), "[SQLITE4VB]", "")
-End Function
+'Public Function LimpaTag(ByVal cCON As String) As String
+''    LimpaTag = Replace(Replace(Replace(Replace(cCON, "[VBSQLITE]", ""), _
+''        "[SQLITERC6]", ""), "[TC6SQLITE]", ""), "[SQLITE4VB]", "")
+'End Function
 
 Public Function TratarValorParaSQL(ByVal vValor As Variant, ByVal cTIPO As String, _
                                    ByVal cDIALETO As String) As String
@@ -496,49 +497,6 @@ Private Function ValorDeCampo(ByVal RS As SQLiteDataSet, ByVal campo As Variant)
     Else
         ValorDeCampo = RS(campo)
     End If
-End Function
-
-Private Function ValorParaGravar(ByVal vValue As Variant, _
-                                 ByVal cFormat As Variant) As Variant
-    If IsNull(vValue) Or IsEmpty(vValue) Then
-        ValorParaGravar = Null
-    ElseIf Len(CStr(cFormat)) > 0 And _
-           UCase$(Left$(CStr(cFormat), 1)) = "D" Then
-
-        If IsDate(vValue) Then
-            ValorParaGravar = format$(CDate(vValue), _
-                                      "yyyy-mm-dd hh:nn:ss")
-        Else
-            ValorParaGravar = Null
-        End If
-    Else
-        Select Case VarType(vValue)
-            Case vbBoolean
-                ValorParaGravar = Abs(CLng(vValue))
-            Case vbSingle
-                ValorParaGravar = CDbl(vValue)
-            Case vbDate
-                ValorParaGravar = format$(CDate(vValue), _
-                                          "yyyy-mm-dd hh:nn:ss")
-            Case Else
-                ValorParaGravar = vValue
-        End Select
-    End If
-End Function
-
-Private Function ValorDoArrayOuPadrao(ByVal values As Variant, ByVal Index As Long) As Variant
-    If IsArray(values) Then ValorDoArrayOuPadrao = values(Index) Else ValorDoArrayOuPadrao = values
-End Function
-
-Private Function ExtrairUpdatePartes(ByVal sourceSql As String, ByRef tableName As String, ByRef whereSql As String) As Boolean
-    Dim pFrom As Long, pWhere As Long, upperSql As String
-    upperSql = UCase$(sourceSql)
-    pFrom = InStr(1, upperSql, " FROM ", vbBinaryCompare)
-    pWhere = InStr(1, upperSql, " WHERE ", vbBinaryCompare)
-    If pFrom = 0 Or pWhere = 0 Or pWhere <= pFrom Then Exit Function
-    tableName = Trim$(Mid$(sourceSql, pFrom + 6, pWhere - pFrom - 6))
-    whereSql = Mid$(sourceSql, pWhere)
-    ExtrairUpdatePartes = (Len(tableName) > 0)
 End Function
 
 Private Sub PreencherIDs(ByVal db As SQLiteConnection, ByVal tableName As String, ByVal ids As Variant)

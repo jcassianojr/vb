@@ -392,7 +392,7 @@ Public Function PegSQLITERC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
     End If
     ReDim aRETU(0 To nITEM - 1)
     For x = 0 To nITEM - 1
-        aRETU(x) = ValorPadraoRC6(aPAD, x)
+        aRETU(x) = ObterValorArrayOuEscalar(aPAD, x)
     Next x
     
     cARQ = LimpaTag(cARQ)
@@ -416,9 +416,9 @@ Public Function PegSQLITERC6(ByVal cARQ As String, ByVal cSQL As String, ByVal n
             End If
 
             If IsNull(eVAL) Then
-                aRETU(x) = ValorPadraoRC6(aPAD, x)
+                aRETU(x) = ObterValorArrayOuEscalar(aPAD, x)
             Else
-                aRETU(x) = FVar(eVAL, aFOR(x), ValorPadraoRC6(aPAD, x))
+                aRETU(x) = FVar(eVAL, aFOR(x), ObterValorArrayOuEscalar(aPAD, x))
             End If
         Next x
     End If
@@ -592,7 +592,7 @@ Public Function SQLMoveRegSQLITERC6(ByVal cARQORI As String, _
             
             If IsArray(aOUTDES) Then
                 For x = 0 To UBound(aOUTDES)
-                    oRSDES(aOUTDES(x)).Value = ValorArrayOuEscalarRC6(aOUTORI, x)
+                    oRSDES(aOUTDES(x)).Value = ObterValorArrayOuEscalar(aOUTORI, x)
                 Next x
             End If
 
@@ -651,19 +651,3 @@ ErroSQLite:
     SqliteSetValuesRC6 = False
 End Function
 
-' --- Funcoes auxiliares herdadas da versao aprimorada ---
-Private Function ValorPadraoRC6(ByVal aPAD As Variant, ByVal index As Long) As Variant
-    If IsArray(aPAD) Then
-        ValorPadraoRC6 = aPAD(index)
-    Else
-        ValorPadraoRC6 = aPAD
-    End If
-End Function
-
-Private Function ValorArrayOuEscalarRC6(ByVal values As Variant, ByVal index As Long) As Variant
-    If IsArray(values) Then
-        ValorArrayOuEscalarRC6 = values(index)
-    Else
-        ValorArrayOuEscalarRC6 = values
-    End If
-End Function
