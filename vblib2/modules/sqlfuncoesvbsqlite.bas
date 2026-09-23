@@ -6,22 +6,22 @@ Option Explicit
 
 Public Function PegUltSQLite(ByVal cCON As String, ByVal cSQL As String, _
                              ByVal cCAMPO As String, ByVal eDEFAULT As Variant) As Variant
-    Dim db As SQLiteConnection
-    Dim RS As SQLiteDataSet
+    Dim DB As SQLiteConnection
+    Dim rs As SQLiteDataSet
     Dim v As Variant
 
     On Error GoTo TrataErro
     PegUltSQLite = eDEFAULT
-    Set db = AbrirSQLite(cCON, True)
-    Set RS = db.OpenDataSet(sqldialeto(cSQL, "SQLITE"))
-    If Not RS.EOF Then
-        RS.MoveLast
-        v = RS(cCAMPO)
+    Set DB = AbrirSQLite(cCON, True)
+    Set rs = DB.OpenDataSet(sqldialeto(cSQL, "SQLITE"))
+    If Not rs.EOF Then
+        rs.MoveLast
+        v = rs(cCAMPO)
         If Not IsNull(v) Then PegUltSQLite = v
     End If
 Saida:
-    Set RS = Nothing
-    FecharSQLite db
+    Set rs = Nothing
+    FecharSQLite DB
     Exit Function
 TrataErro:
     PegUltSQLite = eDEFAULT
@@ -56,8 +56,8 @@ End Function
 Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                               ByVal cCAMPO As String, ByVal eDEFAULT As Variant, _
                               ByVal coper As String) As Variant
-    Dim db As SQLiteConnection
-    Dim RS As SQLiteDataSet
+    Dim DB As SQLiteConnection
+    Dim rs As SQLiteDataSet
     Dim sql As String
     Dim v As Variant
     Dim op As String
@@ -78,15 +78,15 @@ Public Function PegOperSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String,
             Err.Raise 5, "PegOperSQLite", "Operacao SQLite invalida: " & coper
     End Select
 
-    Set db = AbrirSQLite(cCON, True)
-    Set RS = db.OpenDataSet(sqldialeto(sql, "SQLITE"))
-    If Not RS.EOF Then
-        v = RS("CAMPO")
+    Set DB = AbrirSQLite(cCON, True)
+    Set rs = DB.OpenDataSet(sqldialeto(sql, "SQLITE"))
+    If Not rs.EOF Then
+        v = rs("CAMPO")
         If Not IsNull(v) Then PegOperSQLite = v
     End If
 Saida:
-    Set RS = Nothing
-    FecharSQLite db
+    Set rs = Nothing
+    FecharSQLite DB
     Exit Function
 TrataErro:
     PegOperSQLite = eDEFAULT
@@ -94,13 +94,13 @@ TrataErro:
 End Function
 
 Public Function ComandoSqlite(ByVal cCON As String, ByVal cSQL As String) As Boolean
-    Dim db As SQLiteConnection
+    Dim DB As SQLiteConnection
     On Error GoTo TrataErro
-    Set db = AbrirSQLite(cCON, False)
-    db.Execute sqldialeto(cSQL, "SQLITE")
+    Set DB = AbrirSQLite(cCON, False)
+    DB.Execute sqldialeto(cSQL, "SQLITE")
     ComandoSqlite = True
 Saida:
-    FecharSQLite db
+    FecharSQLite DB
     Exit Function
 TrataErro:
     ComandoSqlite = False
@@ -110,8 +110,8 @@ End Function
 Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
                           ByVal nITEM As Long, ByVal aCAM As Variant, _
                           ByVal aFOR As Variant, ByVal aPAD As Variant) As Variant
-    Dim db As SQLiteConnection
-    Dim RS As SQLiteDataSet
+    Dim DB As SQLiteConnection
+    Dim rs As SQLiteDataSet
     Dim ret() As Variant
     Dim i As Long
     Dim v As Variant
@@ -126,11 +126,11 @@ Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
         ret(i) = aPAD(i)
     Next i
 
-    Set db = AbrirSQLite(cCON, True)
-    Set RS = db.OpenDataSet(sqldialeto(cSQL, "SQLITE"))
-    If Not RS.EOF Then
+    Set DB = AbrirSQLite(cCON, True)
+    Set rs = DB.OpenDataSet(sqldialeto(cSQL, "SQLITE"))
+    If Not rs.EOF Then
         For i = 0 To nITEM - 1
-            v = ValorDeCampo(RS, aCAM(i))
+            v = ValorDeCampo(rs, aCAM(i))
             If IsNull(v) Or IsEmpty(v) Then
                 ret(i) = aPAD(i)
             Else
@@ -142,8 +142,8 @@ Public Function PegSQLite(ByVal cCON As String, ByVal cSQL As String, _
         PegSQLite = aPAD
     End If
 Saida:
-    Set RS = Nothing
-    FecharSQLite db
+    Set rs = Nothing
+    FecharSQLite DB
     Exit Function
 TrataErro:
     PegSQLite = aPAD
@@ -154,8 +154,8 @@ Public Function GrvSQLite(ByVal cARQ As String, ByVal cSQL_SELECT As String, _
                           ByVal nITEM As Long, ByVal aCAM As Variant, _
                           ByVal aVAL As Variant, ByVal aFOR As Variant, _
                           Optional ByVal nStartItem As Long = 0) As Boolean
-    Dim db As SQLiteConnection
-    Dim RS As SQLiteDataSet
+    Dim DB As SQLiteConnection
+    Dim rs As SQLiteDataSet
     Dim cmd As SQLiteCommand
     Dim tableName As String, whereSql As String, sql As String
     Dim i As Long, firstItem As Long
@@ -173,18 +173,18 @@ Public Function GrvSQLite(ByVal cARQ As String, ByVal cSQL_SELECT As String, _
     Next i
     sql = sql & " " & whereSql
 
-    Set db = AbrirSQLite(cARQ, False)
-    Set cmd = db.CreateCommand(sql)
+    Set DB = AbrirSQLite(cARQ, False)
+    Set cmd = DB.CreateCommand(sql)
     For i = nStartItem To nITEM - 1
-        Value = PrepararValorGravar(aVAL(i), aFOR(i))
+        Value = PrepararValorSQLite(aVAL(i), aFOR(i))
         cmd.SetParameterValue i - nStartItem + 1, Value
     Next i
     cmd.Execute
     GrvSQLite = True
 Saida:
     Set cmd = Nothing
-    Set RS = Nothing
-    FecharSQLite db
+    Set rs = Nothing
+    FecharSQLite DB
     Exit Function
 TrataErro:
     GrvSQLite = False
@@ -197,8 +197,8 @@ Public Function IncluiSQLite(ByVal cARQ As String, ByVal cSQL_SELECT As String, 
                              Optional ByVal lCHECK As Boolean = False, _
                              Optional ByVal lMES As Boolean = True, _
                              Optional ByVal aIDDES As Variant = 0) As Boolean
-    Dim db As SQLiteConnection
-    Dim RS As SQLiteDataSet
+    Dim DB As SQLiteConnection
+    Dim rs As SQLiteDataSet
     Dim cmd As SQLiteCommand
     Dim tableName As String, sql As String
     Dim fields As String, marks As String
@@ -206,14 +206,14 @@ Public Function IncluiSQLite(ByVal cARQ As String, ByVal cSQL_SELECT As String, 
     Dim alreadyExists As Boolean
 
     On Error GoTo TrataErro
-    tableName = SqlExtrairTabela(cSQL_SELECT)
+    tableName = NomeTableSql(cSQL_SELECT)
     If Len(tableName) = 0 Or nITEM <= 0 Then Exit Function
 
-    Set db = AbrirSQLite(cARQ, False)
+    Set DB = AbrirSQLite(cARQ, False)
     If lCHECK Then
-        Set RS = db.OpenDataSet(sqldialeto(cSQL_SELECT, "SQLITE"))
-        alreadyExists = Not RS.EOF
-        Set RS = Nothing
+        Set rs = DB.OpenDataSet(sqldialeto(cSQL_SELECT, "SQLITE"))
+        alreadyExists = Not rs.EOF
+        Set rs = Nothing
         If alreadyExists Then
             If lMES Then MsgBox "Item ja cadastrado com esta chave.", vbInformation
             Exit Function
@@ -230,22 +230,22 @@ Public Function IncluiSQLite(ByVal cARQ As String, ByVal cSQL_SELECT As String, 
     Next i
 
     sql = "INSERT INTO " & tableName & " (" & fields & ") VALUES (" & marks & ")"
-    Set cmd = db.CreateCommand(sql)
+    Set cmd = DB.CreateCommand(sql)
     For i = 0 To nITEM - 1
-        Value = PrepararValorGravar(aVAL(i), "C")
+        Value = PrepararValorSQLite(aVAL(i), "C")
         cmd.SetParameterValue i + 1, Value
     Next i
     cmd.Execute
 
     ' O valor deve ser consumido na mesma conexao que executou o INSERT.
     If IsArray(aIDDES) Then
-        PreencherIDs db, tableName, aIDDES
+        PreencherIDs DB, tableName, aIDDES
     End If
     IncluiSQLite = True
 Saida:
     Set cmd = Nothing
-    Set RS = Nothing
-    FecharSQLite db
+    Set rs = Nothing
+    FecharSQLite DB
     Exit Function
 TrataErro:
     If lMES Then MsgBox "Erro ao incluir: " & Err.Description, vbExclamation
@@ -257,50 +257,50 @@ Public Function PegSQLiteDeli(ByVal cCON As String, ByVal cSQL As String, _
                               ByVal aCAM As Variant, Optional ByVal cDELI As String = ",", _
                               Optional ByVal aPAD As Variant = "", _
                               Optional ByVal aFOR As Variant = "") As Variant
-    Dim db As SQLiteConnection
-    Dim RS As SQLiteDataSet
+    Dim DB As SQLiteConnection
+    Dim rs As SQLiteDataSet
     Dim ret() As String
     Dim op As Variant, Value As Variant
-    Dim x As Long, count As Long
+    Dim x As Long, Count As Long
 
     On Error GoTo TrataErro
-    count = UBound(aCAM)
-    ReDim ret(0 To count)
-    Set db = AbrirSQLite(cCON, True)
-    Set RS = db.OpenDataSet(sqldialeto(cSQL, "SQLITE"))
+    Count = UBound(aCAM)
+    ReDim ret(0 To Count)
+    Set DB = AbrirSQLite(cCON, True)
+    Set rs = DB.OpenDataSet(sqldialeto(cSQL, "SQLITE"))
 
-    Do While Not RS.EOF
-        For x = 0 To count
+    Do While Not rs.EOF
+        For x = 0 To Count
             op = SepSqlOpe(aCAM(x))
             If IsArray(op) And op(0) <> "" And op(1) <> "" And op(2) <> "" Then
-                Value = MathOper(RS(op(1)), RS(op(2)), op(0))
+                Value = MathOper(rs(op(1)), rs(op(2)), op(0))
             Else
-                Value = ValorDeCampo(RS, aCAM(x))
+                Value = ValorDeCampo(rs, aCAM(x))
             End If
             If IsNull(Value) Then Value = ObterValorArrayOuEscalar(aPAD, x)
             If IsArray(aFOR) Then Value = FVar(Value, aFOR(x), ObterValorArrayOuEscalar(aPAD, x))
             If Len(ret(x)) > 0 Then ret(x) = ret(x) & cDELI
             ret(x) = ret(x) & FixStr(Value)
         Next x
-        RS.MoveNext
+        rs.MoveNext
     Loop
     PegSQLiteDeli = ret
 Saida:
-    Set RS = Nothing
-    FecharSQLite db
+    Set rs = Nothing
+    FecharSQLite DB
     Exit Function
 TrataErro:
     PegSQLiteDeli = ret
     Resume Saida
 End Function
 
-Public Function PegLastidbsqLite(ByVal cCON As String, ByVal cTABELA As String) As Long
-    Dim db As SQLiteConnection
+Public Function PegLastidbsqLite(ByVal cCON As String, ByVal cTabela As String) As Long
+    Dim DB As SQLiteConnection
     On Error GoTo TrataErro
-    Set db = AbrirSQLite(cCON, False)
-    PegLastidbsqLite = CLng(db.LastInsertRowID)
+    Set DB = AbrirSQLite(cCON, False)
+    PegLastidbsqLite = CLng(DB.LastInsertRowID)
 Saida:
-    FecharSQLite db
+    FecharSQLite DB
     Exit Function
 TrataErro:
     PegLastidbsqLite = 0
@@ -310,22 +310,22 @@ End Function
 Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
                            ByVal cCAMPO As String, Optional ByVal eDEFAULT As Variant, _
                            Optional ByVal nDEC As Integer = 2) As Variant
-    Dim db As SQLiteConnection
-    Dim RS As SQLiteDataSet
+    Dim DB As SQLiteConnection
+    Dim rs As SQLiteDataSet
     Dim ops As Variant, lineValues() As String
     Dim Total As Double, found As Boolean
     Dim x As Long, Value As Variant
 
     On Error GoTo TrataErro
     ops = SepSqlOpe(cCAMPO)
-    Set db = AbrirSQLite(cCON, True)
-    Set RS = db.OpenDataSet("SELECT * FROM " & cTABLEWHERE)
-    Do While Not RS.EOF
+    Set DB = AbrirSQLite(cCON, True)
+    Set rs = DB.OpenDataSet("SELECT * FROM " & cTABLEWHERE)
+    Do While Not rs.EOF
         found = True
         ReDim lineValues(0 To UBound(ops))
         For x = 0 To UBound(ops)
             If InStr(1, "+-*/()", CStr(ops(x)), vbBinaryCompare) = 0 And ops(x) <> "" Then
-                Value = ValorDeCampo(RS, ops(x))
+                Value = ValorDeCampo(rs, ops(x))
                 If IsNull(Value) Then Value = 0
                 lineValues(x) = CStr(Value)
             Else
@@ -333,12 +333,12 @@ Public Function SomaSQLite(ByVal cCON As String, ByVal cTABLEWHERE As String, _
             End If
         Next x
         Total = Total + CDbl(Val(MathOper(lineValues, nDEC)))
-        RS.MoveNext
+        rs.MoveNext
     Loop
     If found Then SomaSQLite = Total Else SomaSQLite = eDEFAULT
 Saida:
-    Set RS = Nothing
-    FecharSQLite db
+    Set rs = Nothing
+    FecharSQLite DB
     Exit Function
 TrataErro:
     SomaSQLite = eDEFAULT
@@ -363,7 +363,7 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
    Optional ByVal aCAMDES As Variant = 0, Optional ByVal aOUTDES As Variant = 0, _
    Optional ByVal aIDDES As Variant = 0) As Boolean
     Dim Source As SQLiteConnection, target As SQLiteConnection
-    Dim RS As SQLiteDataSet, checkRs As SQLiteDataSet
+    Dim rs As SQLiteDataSet, checkRs As SQLiteDataSet
     Dim values() As Variant, ops As Variant, tableName As String, whereSql As String
     Dim sql As String, fields As String, marks As String, sets As String
     Dim x As Long, Value As Variant
@@ -372,17 +372,17 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
     On Error GoTo TrataErro
     Set Source = AbrirSQLite(cCONORI, True)
     Set target = AbrirSQLite(cCONDES, False)
-    Set RS = Source.OpenDataSet(sqldialeto(cSQLORI, "SQLITE"))
-    If RS.EOF Then GoTo Saida
+    Set rs = Source.OpenDataSet(sqldialeto(cSQLORI, "SQLITE"))
+    If rs.EOF Then GoTo Saida
 
     If IsArray(aCAMORI) Then
         ReDim values(0 To UBound(aCAMORI))
         For x = 0 To UBound(aCAMORI)
             ops = SepSqlOpe(aCAMORI(x))
             If IsArray(ops) And ops(0) <> "" Then
-                values(x) = MathOper(RS(ops(1)), RS(ops(2)), ops(0))
+                values(x) = MathOper(rs(ops(1)), rs(ops(2)), ops(0))
             Else
-                values(x) = ValorDeCampo(RS, aCAMORI(x))
+                values(x) = ValorDeCampo(rs, aCAMORI(x))
             End If
         Next x
     End If
@@ -430,7 +430,7 @@ Public Function SQLMoveRegSQLite(ByVal cCONORI As String, ByVal cSQLORI As Strin
     SQLMoveRegSQLite = True
 Saida:
     Set cmd = Nothing
-    Set RS = Nothing
+    Set rs = Nothing
     Set checkRs = Nothing
     FecharSQLite Source
     FecharSQLite target
@@ -464,7 +464,7 @@ Public Function TratarValorParaSQL(ByVal vValor As Variant, ByVal cTIPO As Strin
         TratarValorParaSQL = "NULL"
     ElseIf UCase$(cDIALETO) = "SQLITE" Then
         Select Case UCase$(Left$(cTIPO, 1))
-            Case "D": TratarValorParaSQL = "'" & format$(CDate(vValor), "yyyy-mm-dd hh:nn:ss") & "'"
+            Case "D": TratarValorParaSQL = "'" & Format$(CDate(vValor), "yyyy-mm-dd hh:nn:ss") & "'"
             Case "N": TratarValorParaSQL = Replace$(Trim$(CStr(vValor)), ",", ".")
             Case Else: TratarValorParaSQL = "'" & Replace$(CStr(vValor), "'", "''") & "'"
         End Select
@@ -474,34 +474,34 @@ Public Function TratarValorParaSQL(ByVal vValor As Variant, ByVal cTIPO As Strin
 End Function
 
 Private Function AbrirSQLite(ByVal cCON As String, ByVal lReadOnly As Boolean) As SQLiteConnection
-    Dim db As New SQLiteConnection
+    Dim DB As New SQLiteConnection
     If lReadOnly Then
-        db.OpenDB LimpaTag(cCON), SQLiteReadOnly
+        DB.OpenDB LimpaTag(cCON), SQLiteReadOnly
     Else
-        db.OpenDB LimpaTag(cCON), SQLiteReadWrite
-        If Not VBSQLiteSetValues(db) Then Err.Raise 5, "AbrirSQLite", "Falha ao configurar a conexao SQLite."
+        DB.OpenDB LimpaTag(cCON), SQLiteReadWrite
+        If Not VBSQLiteSetValues(DB) Then Err.Raise 5, "AbrirSQLite", "Falha ao configurar a conexao SQLite."
     End If
-    Set AbrirSQLite = db
+    Set AbrirSQLite = DB
 End Function
 
-Private Sub FecharSQLite(ByRef db As SQLiteConnection)
+Private Sub FecharSQLite(ByRef DB As SQLiteConnection)
     On Error Resume Next
-    If Not db Is Nothing Then db.CloseDB
-    Set db = Nothing
+    If Not DB Is Nothing Then DB.CloseDB
+    Set DB = Nothing
     On Error GoTo 0
 End Sub
 
-Private Function ValorDeCampo(ByVal RS As SQLiteDataSet, ByVal campo As Variant) As Variant
+Private Function ValorDeCampo(ByVal rs As SQLiteDataSet, ByVal campo As Variant) As Variant
     If IsNumeric(campo) And CLng(campo) = 0 Then
-        ValorDeCampo = RS(1)
+        ValorDeCampo = rs(1)
     Else
-        ValorDeCampo = RS(campo)
+        ValorDeCampo = rs(campo)
     End If
 End Function
 
-Private Sub PreencherIDs(ByVal db As SQLiteConnection, ByVal tableName As String, ByVal ids As Variant)
+Private Sub PreencherIDs(ByVal DB As SQLiteConnection, ByVal tableName As String, ByVal ids As Variant)
     Dim x As Long
-    Dim RS As SQLiteDataSet
+    Dim rs As SQLiteDataSet
     Dim sql As String
     Dim result() As Variant
 
@@ -511,14 +511,14 @@ Private Sub PreencherIDs(ByVal db As SQLiteConnection, ByVal tableName As String
         sql = sql & CStr(ids(x))
     Next x
     sql = sql & " FROM " & tableName & " WHERE rowid = last_insert_rowid()"
-    Set RS = db.OpenDataSet(sql)
-    If Not RS.EOF Then
+    Set rs = DB.OpenDataSet(sql)
+    If Not rs.EOF Then
         ReDim result(LBound(ids) To UBound(ids))
         For x = LBound(ids) To UBound(ids)
-            result(x) = RS(x - LBound(ids) + 1)
+            result(x) = rs(x - LBound(ids) + 1)
         Next x
         eRETU01 = result
     Else
-        eRETU01 = db.LastInsertRowID
+        eRETU01 = DB.LastInsertRowID
     End If
 End Sub

@@ -1108,7 +1108,7 @@ TrataErro:
   End Select
 End Function
 
-Public Function ADO_FieldValueToString(ByRef FLD As ADODB.Field, Optional ByVal sNullRepresentation As String = "(null)") As String
+Public Function ADO_FieldValueToString(ByRef FLD As ADODB.field, Optional ByVal sNullRepresentation As String = "(null)") As String
 'Call TraceEnters(MODULE_NAME & "::ADO_FieldValueToString")
 'TraceDetail = "To convert the value of a field into a string"
   On Error GoTo TrataErro
@@ -1140,12 +1140,12 @@ TrataErro:
   Exit Function
 End Function
 
-Public Sub ADO_FreeRecordset(ByRef RS As ADODB.Recordset)
+Public Sub ADO_FreeRecordset(ByRef rs As ADODB.Recordset)
   On Error Resume Next
-  If RS.State = adStateOpen Then
-    RS.Close
+  If rs.State = adStateOpen Then
+    rs.Close
   End If
-  Set RS = Nothing
+  Set rs = Nothing
   On Error GoTo 0
 End Sub
 
@@ -1165,7 +1165,7 @@ TrataErro:
 
 End Function
 
-Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTABELA As String, Optional ByVal lMES As Boolean = True) As Boolean
+Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTabela As String, Optional ByVal lMES As Boolean = True) As Boolean
   Dim oCat As ADOX.Catalog
   Dim oTabela As ADOX.Table
   On Error GoTo TrataErro
@@ -1175,19 +1175,19 @@ Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTABELA As String, Opti
   oCat.ActiveConnection = cARQ
 
   For Each oTabela In oCat.Tables
-    If UCase(oTabela.Name) = UCase(cTABELA) Then
+    If UCase(oTabela.Name) = UCase(cTabela) Then
       TemTabelaADO = True
       Exit For
     End If
   Next
 
   If lMES And Not TemTabelaADO Then
-    Alert ("Tabela nao Encontrada" & cTABELA & Chr(13) & Chr(10) & cARQ)
+    Alert ("Tabela nao Encontrada" & cTabela & Chr(13) & Chr(10) & cARQ)
   End If
 TrataErro:
   Select Case Err.Number
   Case Else
-    SayErro "Tem Tabela Ado :" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTABELA & Chr(13) & Chr(10)
+    SayErro "Tem Tabela Ado :" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTabela & Chr(13) & Chr(10)
     Exit Function
   End Select
 
@@ -1349,51 +1349,38 @@ Function ado_GetLockType(LockType As Integer) As String
     End Select
 
 End Function
-Public Function ExtraiWhere(ByVal cSQL As String) As String
-    Dim nPOS As Long
-    Dim sUpperSQL As String
+
+'Public Function ExtraiWhere(ByVal cSQL As String) As String
+''    Dim nPOS As Long
+''    Dim sUpperSQL As String
     
-    sUpperSQL = UCase(cSQL)
-    nPOS = InStr(sUpperSQL, "WHERE ")
+''    sUpperSQL = UCase(cSQL)
+''    nPOS = InStr(sUpperSQL, "WHERE ")
     
-    If nPOS > 0 Then
+''    If nPOS > 0 Then
         ' Retorna do "WHERE" até ao fim da string
-        ExtraiWhere = Trim(Mid(cSQL, nPOS))
-    Else
+''        ExtraiWhere = Trim(Mid(cSQL, nPOS))
+''    Else
         ' Se não houver WHERE, retorna vazio (CUIDADO: isso afetaria a tabela toda)
-        ExtraiWhere = ""
-    End If
-End Function
+''        ExtraiWhere = ""
+''    End If
+'End Function
 
 
-Public Function ExtraiTabela(ByVal cSQL As String) As String
+'Public Function ExtraiTabela(ByVal cSQL As String) As String
     ' Busca o nome da tabela após o "FROM"
-    Dim nPOS As Long
-    cSQL = UCase(cSQL)
-    nPOS = InStr(cSQL, "FROM ")
-    If nPOS > 0 Then
-        ExtraiTabela = Trim(Mid(cSQL, nPOS + 5))
-        ' Remove o resto se houver WHERE ou ORDER
-        If InStr(ExtraiTabela, " ") > 0 Then
-            ExtraiTabela = Left(ExtraiTabela, InStr(ExtraiTabela, " ") - 1)
-        End If
-    End If
-End Function
+''    Dim nPOS As Long
+''    cSQL = UCase(cSQL)
+''    nPOS = InStr(cSQL, "FROM ")
+''    If nPOS > 0 Then
+ ''       ExtraiTabela = Trim(Mid(cSQL, nPOS + 5))
+ ''       ' Remove o resto se houver WHERE ou ORDER
+ ''       If InStr(ExtraiTabela, " ") > 0 Then
+ ''           ExtraiTabela = Left(ExtraiTabela, InStr(ExtraiTabela, " ") - 1)
+ ''       End If
+ ''   End If
+'End Function
 
-
-Public Function PrepararValorSQL(ByVal v As Variant) As String
-    If IsNull(v) Then
-        PrepararValorSQL = "NULL"
-    ElseIf IsNumeric(v) Then
-        ' No SQLite, decimais devem usar PONTO, não vírgula
-        PrepararValorSQL = Replace(CStr(v), ",", ".")
-    ElseIf IsDate(v) Then
-        PrepararValorSQL = "'" & Format(v, "yyyy-mm-dd") & "'"
-    Else
-        ' Texto: dobra as aspas simples para não quebrar o SQL
-        PrepararValorSQL = "'" & Replace(v, "'", "''") & "'"
-    End If
-End Function
 
 Public Function TratarParametrosCofre(ByVal cARQ As String) As String
     Dim cBancoPuro As String
@@ -1540,38 +1527,6 @@ Private Function GetJetExtendedProperties(cFormato As String, Optional lIMEX As 
     GetJetExtendedProperties = ";Extended Properties='" & sProps & "';"
 End Function
 
-Public Function ExtrairNomeTabela(ByVal cSQL As String) As String
-    Dim nPosFrom As Long
-    Dim nPosWhere As Long
-    Dim nPosOrder As Long
-    Dim cTemp As String
-    
-    ' Converte para maiúsculas para facilitar a busca
-    cTemp = " " & UCase(cSQL) & " "
-    
-    ' Localiza a posição do " FROM "
-    nPosFrom = InStr(1, cTemp, " FROM ")
-    If nPosFrom = 0 Then
-        ExtrairNomeTabela = ""
-        Exit Function
-    End If
-    
-    nPosFrom = nPosFrom + 6 ' Tamanho da string " FROM "
-    
-    ' Localiza o primeiro limitador após o FROM (WHERE, ORDER BY, GROUP BY)
-    nPosWhere = InStr(nPosFrom, cTemp, " WHERE ")
-    nPosOrder = InStr(nPosFrom, cTemp, " ORDER BY ")
-    
-    ' Define o fim do nome da tabela (o menor valor entre os delimitadores)
-    Dim nFIM As Long
-    nFIM = Len(cTemp)
-    
-    If nPosWhere > 0 And nPosWhere < nFIM Then nFIM = nPosWhere
-    If nPosOrder > 0 And nPosOrder < nFIM Then nFIM = nPosOrder
-    
-    ' Extrai e limpa o nome da tabela
-    ExtrairNomeTabela = Trim(Mid(cSQL, nPosFrom - 1, nFIM - nPosFrom + 1))
-End Function
 
 
 Public Function EArquivoSQLite(ByVal cCaminho As String) As Boolean
@@ -1672,6 +1627,40 @@ Public Function NomeTableSql(ByVal cSQL As String, Optional ByVal cEXTENSAO As S
     End If
   End If
 End Function
+
+'Public Function ExtrairNomeTabela(ByVal cSQL As String) As String
+''    Dim nPosFrom As Long
+''    Dim nPosWhere As Long
+''    Dim nPosOrder As Long
+''    Dim cTemp As String
+    
+    ' Converte para maiúsculas para facilitar a busca
+ ''   cTemp = " " & UCase(cSQL) & " "
+    
+    ' Localiza a posição do " FROM "
+ ''   nPosFrom = InStr(1, cTemp, " FROM ")
+ ''   If nPosFrom = 0 Then
+ ''       ExtrairNomeTabela = ""
+ ''       Exit Function
+  ''  End If
+    
+  ''  nPosFrom = nPosFrom + 6 ' Tamanho da string " FROM "
+    
+    ' Localiza o primeiro limitador após o FROM (WHERE, ORDER BY, GROUP BY)
+  ''  nPosWhere = InStr(nPosFrom, cTemp, " WHERE ")
+  ''  nPosOrder = InStr(nPosFrom, cTemp, " ORDER BY ")
+    
+    ' Define o fim do nome da tabela (o menor valor entre os delimitadores)
+   '' Dim nFIM As Long
+   '' nFIM = Len(cTemp)
+    
+   '' If nPosWhere > 0 And nPosWhere < nFIM Then nFIM = nPosWhere
+   '' If nPosOrder > 0 And nPosOrder < nFIM Then nFIM = nPosOrder
+    
+    ' Extrai e limpa o nome da tabela
+    'ExtrairNomeTabela = Trim(Mid(cSQL, nPosFrom - 1, nFIM - nPosFrom + 1))
+'End Function
+
 
 Public Function MontaFiltro(ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal eBUSCA As Variant, ByVal nIndex As Integer)
   nIndex = nIndex - 1
