@@ -1061,7 +1061,7 @@ Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
   Case "CEP"
     nTAM = 9
   Case "TEL"
-    nTAM = 10
+    nTAM = 15
   Case "DC"
     nTAM = 8
   Case "DL"
@@ -1113,17 +1113,22 @@ Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
       End If
 
     Case "PLACA"
+      ' 1. Se estiver na posição 3 (indo para o 4º caractere), injeta o hífen e atualiza o tamanho
       If nLen = 3 Then
         Screen.ActiveControl.Text = txtAtual & "-"
         Screen.ActiveControl.SelStart = Len(Screen.ActiveControl.Text)
         nLen = 4
       End If
+      
+      ' 2. Regras de validação baseadas no Padrão Antigo / Mercosul
       If nLen < 3 Then
-        KeyAscii = ValiText(KeyAscii, "#CU")
-      ElseIf nLen = 4 Or nLen > 5 Then
-        KeyAscii = ValiText(KeyAscii, "#NI")
+        KeyAscii = ValiText(KeyAscii, "#CU") ' Posições 1 a 3: Obrigatório Letra
+      ElseIf nLen = 4 Then
+        KeyAscii = ValiText(KeyAscii, "#NI") ' Posição 5: Obrigatório Número
       ElseIf nLen = 5 Then
-        KeyAscii = ValiText(KeyAscii, "#CNU")
+        KeyAscii = ValiText(KeyAscii, "#CNU") ' Posição 6: Letra (Mercosul) ou Número (Antigo)
+      ElseIf nLen > 5 Then
+        KeyAscii = ValiText(KeyAscii, "#NI") ' Posições 7 e 8: Obrigatório Número
       End If
 
     Case "DC", "DL"
@@ -1141,7 +1146,8 @@ Public Function ValidaDados(ByVal KeyAscii As Integer, ByVal eTipo As String _
       End If
 
     Case "TEL"
-      If KeyAscii <> 8 Then KeyAscii = ValiText(KeyAscii, "#N-")
+    ''  If KeyAscii <> 8 Then KeyAscii = ValiText(KeyAscii, "#N-")
+      If KeyAscii <> 8 Then KeyAscii = ValiText(KeyAscii, "FONE")
 
     Case "CPF", "CIC"
       If nLen = 3 Or nLen = 7 Then
@@ -1250,9 +1256,12 @@ Function FormataPlaca(ByVal eCHAPA As String) As String
   cCHAPA = Replace(cCHAPA, " ", "")
   cCHAPA = Replace(cCHAPA, "-", "")
   cCHAPA = Replace(cCHAPA, ".", "")
-  If Len(cCHAPA) > 0 Then
+  
+  ' Ajuste: Inserir o hífen APENAS se a placa já tiver a parte alfabética completa
+  If Len(cCHAPA) > 3 Then
     cCHAPA = Mid(cCHAPA, 1, 3) & "-" & Mid(cCHAPA, 4)
   End If
+  
   FormataPlaca = cCHAPA
 End Function
 

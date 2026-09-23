@@ -371,6 +371,7 @@ End Function
 
 Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "", Optional ByVal ePAD As Variant)
   Dim vLogic As Variant
+  Dim dTmpDate As Date
   
   If cFORM <> "" Then
     Select Case cFORM
@@ -394,7 +395,16 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
     Case "D", "DN", "DS", "DC", "DF", "DH", "DD", "DZ", "D-"
       ' UniversalToDate converte qualquer formato (DD/MM/YY, YYYYMMDD, Extensos) em vbDate nativo
       ' Se inválida, ela retorna 0 (30/12/1899), valor que a Fdata já sabe tratar como "DataBranco"
-      FVar = Fdata(UniversalToDate(eVAR), cFORM, ePAD)
+      dTmpDate = UniversalToDate(eVAR)
+      
+      ' Se a UniversalToDate aprovar (data válida), repassamos a data formatada.
+      ' Caso contrário, repassamos o eVAR original intacto para que a Fdata
+      ' continue gerando os seus subtipos normais (DH, DC, DN, etc) sem bloqueios.
+      If dTmpDate <> CDate(0) Then
+        FVar = Fdata(dTmpDate, cFORM, ePAD)
+      Else
+        FVar = Fdata(eVAR, cFORM, ePAD)
+      End If
 
     ' =========================================================================
     ' APRIMORAMENTO PARA LÓGICOS / BOOLEANOS (StrLogic)
