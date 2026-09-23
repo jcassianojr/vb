@@ -489,31 +489,6 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
   End If
 End Function
 
-'Case "D", "DN", "DS", "DC", "DF", "DH", "DD", "DZ", "D-"
-''      FVar = Fdata(eVAR, cFORM, ePAD)
-      'Data dd/mm/yyyy
-      'se for null
-      'D OU DS  DateSerial(0, 0, 0)
-      'DN Campo Null
-      'DC Space(8)
-      'DZ ''
-      'DF mascara  "  /  /    "
-      'DH data de hoje
-      'DD date.
-
- ''   Case "B", "BF", "BT"                     ''Boleano Boleano se null (BF)false (BT)TRUE
- ''     If VarType(eVAR) = vbBoolean Then
- ''       FVar = eVAR
- ''     Else
- ''       If cFORM = "BF" Or cFORM = "B" Then
- ''         FVar = False
- ''       Else
- ''         FVar = True                  'BT
- ''       End If
-  ''    End If
-  ''  Case "BSN"                               'Converte boleano SN
-''      If VarType(eVAR) = vbBoolean Then
- ''       If eVAR Then
  ''         FVar = "S"
   ''      Else
   ''        FVar = "N"
@@ -522,13 +497,13 @@ End Function
    ''     If IsNull(ePAD) Then
    ''       FVar = " "
     ''    Else
-    ''      FVar = ePAD
     ''    End If
     ''  End If
     ''Case "BN"                                'Converte Boleano em Numerico
      '' If VarType(eVAR) = vbBoolean Then
      ''   If eVAR Then
-     ''     FVar = 1
+  
+   ''     FVar = 1
      ''   Else
      ''     FVar = 0
       ''  End If
@@ -539,7 +514,6 @@ End Function
       ''    FVar = ePAD
       ''  End If
       ''End If
-
 Public Function GeraSplit(ByVal aVAR As Variant, Optional ByVal cINI As String = "", _
                           Optional ByVal cMID As String = "", _
                           Optional ByVal cFIM As String = "") As String
@@ -2298,13 +2272,3 @@ Public Sub SayErro(Optional ByVal cERROUSO As String = "", Optional ByVal lMES A
 End Sub
 
 
-'Public Function MachineName() As String
-    ' O objeto OS do RC6 já contém essa informação formatada
-    ' Funciona identicamente em 32 ou 64 bits, sem necessidade de PtrSafe
- '   MachineName = New_c.OS.GetComputerName
-'End Function
-
-'Public Function NetworkUserName() As String
-    ' Igualmente simples para o nome do usuário
-'    NetworkUserName = New_c.OS.UserName
-'End Function
