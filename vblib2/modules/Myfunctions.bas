@@ -370,6 +370,8 @@ Public Function funNumeroPuro(ByVal pNumero) As String
 End Function
 
 Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "", Optional ByVal ePAD As Variant)
+  Dim vLogic As Variant
+  
   If cFORM <> "" Then
     Select Case cFORM
     Case "N"                                 'Numerico
@@ -385,58 +387,71 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
     Case "CC"                                'Caracter Capitalizado
       eVAR = FixStr(eVAR, ePAD)
       FVar = MMCase(eVAR)
+      
+    ' =========================================================================
+    ' APRIMORAMENTO PARA DATAS (Fdata + UniversalToDate)
+    ' =========================================================================
     Case "D", "DN", "DS", "DC", "DF", "DH", "DD", "DZ", "D-"
-      FVar = Fdata(eVAR, cFORM, ePAD)
-      'Data dd/mm/yyyy
-      'se for null
-      'D OU DS  DateSerial(0, 0, 0)
-      'DN Campo Null
-      'DC Space(8)
-      'DZ ''
-      'DF mascara  "  /  /    "
-      'DH data de hoje
-      'DD date.
-    Case "B", "BF", "BT"                     ''Boleano Boleano se null (BF)false (BT)TRUE
-      If VarType(eVAR) = vbBoolean Then
-        FVar = eVAR
+      ' UniversalToDate converte qualquer formato (DD/MM/YY, YYYYMMDD, Extensos) em vbDate nativo
+      ' Se inválida, ela retorna 0 (30/12/1899), valor que a Fdata já sabe tratar como "DataBranco"
+      FVar = Fdata(UniversalToDate(eVAR), cFORM, ePAD)
+
+    ' =========================================================================
+    ' APRIMORAMENTO PARA LÓGICOS / BOOLEANOS (StrLogic)
+    ' =========================================================================
+    Case "B", "BF", "BT" ,"L"                    '' Boleano (Se null: BF=false, BT=True)
+      ' Protege a variável antes de injetar na StrLogic para evitar o erro "Invalid Use Of Null"
+      If IsNull(eVAR) Or IsEmpty(eVAR) Then
+        vLogic = Null
+      ElseIf VarType(eVAR) = vbBoolean Then
+        vLogic = eVAR
       Else
-        If cFORM = "BF" Or cFORM = "B" Then
-          FVar = False
-        Else
-          FVar = True                  'BT
-        End If
+        vLogic = StrLogic(CStr(eVAR))
       End If
-    Case "BSN"                               'Converte boleano SN
-      If VarType(eVAR) = vbBoolean Then
-        If eVAR Then
-          FVar = "S"
-        Else
-          FVar = "N"
-        End If
+      
+      If IsNull(vLogic) Then
+        If cFORM = "BT" Then FVar = True Else FVar = False
       Else
-        If IsNull(ePAD) Then
-          FVar = " "
-        Else
-          FVar = ePAD
-        End If
+        FVar = CBool(vLogic)
       End If
-    Case "BN"                                'Converte Boleano em Numerico
-      If VarType(eVAR) = vbBoolean Then
-        If eVAR Then
-          FVar = 1
-        Else
-          FVar = 0
-        End If
+      
+    Case "BSN"                               ' Converte boleano para S/N
+      If IsNull(eVAR) Or IsEmpty(eVAR) Then
+        vLogic = Null
+      ElseIf VarType(eVAR) = vbBoolean Then
+        vLogic = eVAR
       Else
-        If IsNull(ePAD) Then
-          FVar = 0
-        Else
-          FVar = ePAD
-        End If
+        vLogic = StrLogic(CStr(eVAR))
       End If
+      
+      If IsNull(vLogic) Then
+        If IsNull(ePAD) Then FVar = " " Else FVar = ePAD
+      Else
+        If vLogic Then FVar = "S" Else FVar = "N"
+      End If
+      
+    Case "BN"                                ' Converte Boleano em Numerico 1/0
+      If IsNull(eVAR) Or IsEmpty(eVAR) Then
+        vLogic = Null
+      ElseIf VarType(eVAR) = vbBoolean Then
+        vLogic = eVAR
+      Else
+        vLogic = StrLogic(CStr(eVAR))
+      End If
+      
+      If IsNull(vLogic) Then
+        If IsNull(ePAD) Then FVar = 0 Else FVar = ePAD
+      Else
+        If vLogic Then FVar = 1 Else FVar = 0
+      End If
+
+    ' =========================================================================
+    ' DEMAIS FORMATAÇÕES ORIGINAIS (Inalteradas)
+    ' =========================================================================
     Case "CPF", "CIC"                        '' 111.222.333-44   14 Digitos
       eVAR = TiraOut(eVAR)
-      eVAR = Mid(eVAR, 1, 3) & "." & Mid(eVAR, 4, 3) & "." & _
+      ' Corrigido para assinalar no retorno "FVar" em vez de apenas modificar "eVAR"
+      FVar = Mid(eVAR, 1, 3) & "." & Mid(eVAR, 4, 3) & "." & _
              Mid(eVAR, 7, 3) & "-" & Mid(eVAR, 10, 2)
     Case "CNPJ", "CGC"                       '' 11.222.333/4444-55 18 digitos
       eVAR = TiraOut(eVAR)
@@ -444,8 +459,6 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
              Mid(eVAR, 6, 3) & "/" & Mid(eVAR, 9, 4) & "-" & Mid(eVAR, 13, 2)
     Case "RG"
       FVar = FormataRG(eVAR)
-      '            Case "IE" Precisa estado
-      '                FVar = FormataIE(eVAR)
     Case "CHAPA"
       eVAR = TiraOut(eVAR)
       FVar = Mid(eVAR, 1, 3) & "-" & Mid(eVAR, 4)
@@ -475,6 +488,57 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
     FVar = eVAR
   End If
 End Function
+
+'Case "D", "DN", "DS", "DC", "DF", "DH", "DD", "DZ", "D-"
+''      FVar = Fdata(eVAR, cFORM, ePAD)
+      'Data dd/mm/yyyy
+      'se for null
+      'D OU DS  DateSerial(0, 0, 0)
+      'DN Campo Null
+      'DC Space(8)
+      'DZ ''
+      'DF mascara  "  /  /    "
+      'DH data de hoje
+      'DD date.
+
+ ''   Case "B", "BF", "BT"                     ''Boleano Boleano se null (BF)false (BT)TRUE
+ ''     If VarType(eVAR) = vbBoolean Then
+ ''       FVar = eVAR
+ ''     Else
+ ''       If cFORM = "BF" Or cFORM = "B" Then
+ ''         FVar = False
+ ''       Else
+ ''         FVar = True                  'BT
+ ''       End If
+  ''    End If
+  ''  Case "BSN"                               'Converte boleano SN
+''      If VarType(eVAR) = vbBoolean Then
+ ''       If eVAR Then
+ ''         FVar = "S"
+  ''      Else
+  ''        FVar = "N"
+   ''     End If
+   ''   Else
+   ''     If IsNull(ePAD) Then
+   ''       FVar = " "
+    ''    Else
+    ''      FVar = ePAD
+    ''    End If
+    ''  End If
+    ''Case "BN"                                'Converte Boleano em Numerico
+     '' If VarType(eVAR) = vbBoolean Then
+     ''   If eVAR Then
+     ''     FVar = 1
+     ''   Else
+     ''     FVar = 0
+      ''  End If
+      ''Else
+      ''  If IsNull(ePAD) Then
+      ''    FVar = 0
+      ''  Else
+      ''    FVar = ePAD
+      ''  End If
+      ''End If
 
 Public Function GeraSplit(ByVal aVAR As Variant, Optional ByVal cINI As String = "", _
                           Optional ByVal cMID As String = "", _
