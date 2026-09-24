@@ -28,8 +28,9 @@ https://github.com/dzzie/sqllite4vb
 oleexp olegui   
 https://github.com/fafalone/WinDevLib
 
-cziparchive   
-https://github.com/wqweto/ZipArchive
+zip
+- https://github.com/wqweto/ZipArchive
+- https://github.com/KallunWillock/ChibiArc 
 
 clsosinfo   
 https://github.com/fafalone/OSInfo
@@ -45,3 +46,7 @@ ZPL
 - https://github.com/brunoleocam/ZPL2PDF
 - https://github.com/BinaryKits/BinaryKits.Zpl
 - https://app.zpldesigner.com/
+
+PDF
+https://github.com/KallunWillock/ChibiPDF
+
