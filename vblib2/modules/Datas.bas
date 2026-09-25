@@ -93,7 +93,7 @@ Public Function Fdata(ByVal Data As Variant, _
                       Optional ByVal ePAD As Variant, _
                       Optional ByVal cTipoDataNull As String = "", _
                       Optional ByVal cMASCARA As String = "dd/mm/yyyy") As Variant
-  Dim dDATA As Date
+  Dim dData As Date
   Fdata = ePAD
   If cTipoData = "D-" Then cMASCARA = "yyyy-mm-dd"
   
@@ -102,7 +102,7 @@ Public Function Fdata(ByVal Data As Variant, _
   Else
     Select Case cTipoData
     Case "", "D", "DS": Fdata = DateSerial(0, 0, 0)
-    Case "DD": Fdata = dDATA
+    Case "DD": Fdata = dData
     Case "DN": Fdata = NullDate(cTipoDataNull)
     Case "DC": Fdata = Space(8)
     Case "DZ": Fdata = ""
@@ -112,10 +112,10 @@ Public Function Fdata(ByVal Data As Variant, _
   End If
 End Function
 
-Public Function MesAnt(ByVal nMES As Integer, ByVal nANO As Long) As Variant
+Public Function MesAnt(ByVal nMES As Integer, ByVal nAno As Long) As Variant
   Dim nMESTMP As Integer, nANOTMP As Long
   nMESTMP = nMES - 1
-  nANOTMP = nANO
+  nANOTMP = nAno
   If nMESTMP = 0 Then
     nMESTMP = 12
     nANOTMP = nANOTMP - 1
@@ -156,11 +156,11 @@ Public Function Today() As Date
 End Function
 
 Public Function NumToData(ByVal nNUM As Variant) As Date
-  Dim dDATA As Date, cData As String
+  Dim dData As Date, cData As String
   cData = Trim(TiraOut(nNUM))
-  If Len(cData) = 6 Then dDATA = DateSerial(Mid(cData, 1, 2), Mid(cData, 3, 2), Mid(cData, 5, 2))
-  If Len(cData) = 8 Then dDATA = DateSerial(Mid(cData, 1, 4), Mid(cData, 5, 2), Mid(cData, 7, 2))
-  NumToData = Fdata(dDATA)
+  If Len(cData) = 6 Then dData = DateSerial(Mid(cData, 1, 2), Mid(cData, 3, 2), Mid(cData, 5, 2))
+  If Len(cData) = 8 Then dData = DateSerial(Mid(cData, 1, 4), Mid(cData, 5, 2), Mid(cData, 7, 2))
+  NumToData = Fdata(dData)
 End Function
 
 ' +--------------------------------------------------------------------
@@ -171,7 +171,7 @@ Public Function UniversalToDate(ByVal xData As Variant) As Date
     Dim cData As String, cTemp As String, cLimpa As String
     Dim aParts() As String, i As Integer
     Dim sAno As String, sMes As String, sDia As String, cMesStr As String
-    Dim nMes As Integer, nAno As Integer
+    Dim nMES As Integer, nAno As Integer
     
     If VarType(xData) = vbDate Then
         UniversalToDate = CDate(xData)
@@ -199,12 +199,12 @@ Public Function UniversalToDate(ByVal xData As Variant) As Date
         For i = 0 To UBound(aParts)
             If Len(aParts(i)) >= 3 Then
                 cMesStr = Left$(aParts(i), 3)
-                nMes = 0
+                nMES = 0
                 ' Substitui Loop de Arrays por busca instantÃ¢nea via DicionÃ¡rio
-                If p_dictMesesStr.Exists(cMesStr) Then nMes = p_dictMesesStr.Item(cMesStr)
+                If p_dictMesesStr.Exists(cMesStr) Then nMES = p_dictMesesStr.Item(cMesStr)
                 
-                If nMes > 0 Then
-                    sMes = Right$("0" & CStr(nMes), 2)
+                If nMES > 0 Then
+                    sMes = Right$("0" & CStr(nMES), 2)
                     If i = 1 And UBound(aParts) >= 4 Then
                         sDia = Right$("0" & aParts(2), 2): sAno = aParts(4)
                     ElseIf i = 2 Then
@@ -309,9 +309,9 @@ Public Function DDia(ByVal nDIA As Integer) As String
     End If
 End Function
 
-Public Function DataS(ByVal dDATA As Variant) As String
+Public Function DataS(ByVal dData As Variant) As String
     Dim dReal As Date
-    dReal = UniversalToDate(dDATA)
+    dReal = UniversalToDate(dData)
     If dReal = CDate(0) Then DataS = "": Exit Function
     DataS = Format(dReal, "dd/mm/yyyy")
 End Function
@@ -320,11 +320,11 @@ Public Function DataS2() As String
     DataS2 = Format(Date, "dd/mm/yyyy")
 End Function
 
-Public Function DataToLit(ByVal dDATA As Variant, Optional ByVal cTIPO As String = "", Optional ByVal cARQ As String = "") As String
+Public Function DataToLit(ByVal dData As Variant, Optional ByVal cTIPO As String = "", Optional ByVal cARQ As String = "") As String
     Dim dReal As Date, aRETU As Variant
     Dim cAno As String, cMes As String, cDia As String
     
-    dReal = UniversalToDate(dDATA)
+    dReal = UniversalToDate(dData)
     If dReal = CDate(0) Then DataToLit = "NULL": Exit Function
     
     If Len(cARQ) > 0 Then
@@ -382,9 +382,9 @@ Public Function SomaAno(ByVal mDATA As Variant, ByVal mANO As Integer) As Date
     SomaAno = DateAdd("yyyy", mANO, dReal)
 End Function
 
-Public Function Dia_Mes(ByVal nMES As Integer, ByVal nANO As Integer) As Integer
-    If nMES >= 1 And nMES <= 12 And nANO > 0 Then
-        Dia_Mes = Day(DateSerial(nANO, nMES + 1, 0))
+Public Function Dia_Mes(ByVal nMES As Integer, ByVal nAno As Integer) As Integer
+    If nMES >= 1 And nMES <= 12 And nAno > 0 Then
+        Dia_Mes = Day(DateSerial(nAno, nMES + 1, 0))
     Else
         Dia_Mes = 0
     End If
@@ -394,18 +394,18 @@ End Function
 ' +  FunÃ§Ã£o: Bissexto
 ' +  Aprimorada: CÃ¡lculo matemÃ¡tico exato com correÃ§Ã£o baseada no stdDate
 ' +--------------------------------------------------------------------
-Public Function Bissexto(ByVal nANO As Integer) As Boolean
-    If nANO <= 0 Then
+Public Function Bissexto(ByVal nAno As Integer) As Boolean
+    If nAno <= 0 Then
         Bissexto = False
         Exit Function
     End If
     ' Tratamento para manter retrocompatibilidade com o comportamento do VBA/Excel
-    If nANO = 1900 Then 
+    If nAno = 1900 Then
         Bissexto = True
         Exit Function
     End If
     ' LÃ³gica matemÃ¡tica correta (MÃºltiplo de 4, nÃ£o mÃºltiplo de 100 exceto mÃºltiplos de 400)
-    Bissexto = ((nANO Mod 4 = 0 And nANO Mod 100 <> 0) Or nANO Mod 400 = 0)
+    Bissexto = ((nAno Mod 4 = 0 And nAno Mod 100 <> 0) Or nAno Mod 400 = 0)
 End Function
 
 Public Function ValiData(ByVal mDATA As Variant) As Boolean
@@ -452,4 +452,83 @@ Public Function D_Extenso(ByVal mDATA As Variant) As String
     dReal = UniversalToDate(mDATA)
     If dReal = CDate(0) Then D_Extenso = "": Exit Function
     D_Extenso = cDia(dReal) & ", " & Trim$(Str$(Day(dReal))) & " de " & cMes(dReal) & " de " & Trim$(Str$(Year(dReal)))
+End Function
+
+' +--------------------------------------------------------------------
+' +  FunÃ§Ã£o: UniversalDateTime
+' +  Objetivo: Extrair e combinar data e hora de mÃºltiplos formatos,
+' +            corrigindo erros comuns de digitaÃ§Ã£o de hora.
+' +  Exemplos suportados:
+' +    "24-12-2026 12:00:01"
+' +    "2026-12-24 13:01;02"
+' +    "FEV 07 2026 14:02:04"
+' +  Retorno: Date (contendo a Data e a Hora embutidas)
+' +--------------------------------------------------------------------
+  ' +--------------------------------------------------------------------
+' +  Função: UniversalDateTime
+' +  Objetivo: Extrair e combinar data e hora de múltiplos formatos,
+' +            corrigindo erros comuns de digitação de hora.
+' +--------------------------------------------------------------------
+Public Function UniversalDateTime(ByVal xData As Variant) As Date
+    Dim cTexto As String
+    Dim cDataLimpa As String
+    Dim dData As Date
+    Dim dTime As Date
+    Dim aParts() As String
+    Dim i As Integer
+    
+    ' 1. Se já for do tipo Date nativo (já contém data e hora), retorna direto
+    If VarType(xData) = vbDate Then
+        UniversalDateTime = CDate(xData)
+        Exit Function
+    End If
+    
+    ' 2. Barreira contra nulos
+    If IsNull(xData) Or IsEmpty(xData) Then
+        UniversalDateTime = CDate(0)
+        Exit Function
+    End If
+    
+    ' 3. Limpa os espaços mortos do texto recebido (Usando a função CStr nativa)
+    cTexto = Trim$(CStr(xData))
+    
+    ' Corrige erros comuns de digitação na hora (ex: ";" ao invés de ":")
+    ' e o delimitador de data ISO ("T")
+    cTexto = Replace(cTexto, ";", ":")
+    cTexto = Replace(cTexto, "T", " ")
+    
+    ' 4. Separa a string em blocos a cada espaço para caçar a hora
+    aParts = Split(cTexto, " ")
+    cDataLimpa = ""
+    dTime = CDate(0) ' Inicializa a hora como zero
+    
+    For i = 0 To UBound(aParts)
+        ' Verifica se o bloco atual parece ser a hora (tem ":" e o VBA consegue ler)
+        If InStr(aParts(i), ":") > 0 And IsDate(aParts(i)) Then
+            dTime = CDate(aParts(i)) ' Armazena a hora isolada
+        Else
+            ' Se não for a hora, reconstrói a string apenas com a data
+            cDataLimpa = cDataLimpa & aParts(i) & " "
+        End If
+    Next i
+    
+    ' Tira o último espaço excedente
+    cDataLimpa = Trim$(cDataLimpa)
+    
+    ' 5. Passa APENAS a string de data para o motor do UniversalToDate processar
+    dData = UniversalToDate(cDataLimpa)
+    
+    ' Fallback de segurança: Caso o UniversalToDate retorne 0
+    If dData = CDate(0) And IsDate(cDataLimpa) Then
+        dData = CDate(cDataLimpa)
+    End If
+    
+    ' Se a data for realmente inválida, retorna zerado
+    If dData = CDate(0) Then
+        UniversalDateTime = CDate(0)
+        Exit Function
+    End If
+    
+    ' 6. Junta as partes! Data + Hora
+    UniversalDateTime = dData + dTime
 End Function

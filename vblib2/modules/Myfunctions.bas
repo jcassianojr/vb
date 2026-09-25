@@ -180,14 +180,14 @@ End Enum
 Private Declare Function vbaStrComp Lib "msvbvm60" Alias "__vbaStrComp" (ByVal Compare As VbCompareMethod, ByVal String2 As LongPtr, ByVal String1 As LongPtr) As Long
 '
 Public Function UTF8ToVBString(ByVal sUTF8 As String) As String
-    Dim nLEN As Long
+    Dim nLen As Long
     Dim sBuffer As String
     
     ' Obtém o tamanho necessário para o buffer Unicode
-    nLEN = MultiByteToWideChar(CP_UTF8, 0, StrPtr(sUTF8), -1, 0, 0)
-    If nLEN > 0 Then
-        sBuffer = String$(nLEN - 1, 0)
-        MultiByteToWideChar CP_UTF8, 0, StrPtr(sUTF8), -1, StrPtr(sBuffer), nLEN
+    nLen = MultiByteToWideChar(CP_UTF8, 0, StrPtr(sUTF8), -1, 0, 0)
+    If nLen > 0 Then
+        sBuffer = String$(nLen - 1, 0)
+        MultiByteToWideChar CP_UTF8, 0, StrPtr(sUTF8), -1, StrPtr(sBuffer), nLen
         UTF8ToVBString = sBuffer
     Else
         UTF8ToVBString = sUTF8 ' Retorna original se falhar
@@ -257,9 +257,9 @@ Public Function ComboLostFocus(ByRef Combo1)
 Dim strPartial
 Dim i
   With Combo1
-    If Len(.Text) Then
+    If Len(.tEXT) Then
       'Procura pelo texto digitado
-      strPartial = .Text
+      strPartial = .tEXT
       i = SendMessage(.hWnd, CB_FINDSTRING, -1, ByVal strPartial)
       'Se não achou, retorna      o focus para o Combo
       If i = CB_ERR Then .SetFocus
@@ -327,7 +327,7 @@ Dim j
 Dim m_bEditFromCode
   With Combo1
     'Procura pelo texto já digitado
-    strPartial = .Text
+    strPartial = .tEXT
     i = SendMessage(.hWnd, CB_FINDSTRING, -1, _
                     ByVal strPartial)
 
@@ -405,11 +405,23 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
       Else
         FVar = Fdata(eVAR, cFORM, ePAD)
       End If
+      
+   ' =========================================================================
+    ' BLOCO DATETIME (Preserva as horas e usa Fdatatime)
+    ' =========================================================================
+    Case "T", "TN", "TS", "TC", "TF", "TH", "TT", "TZ", "T-"
+      dTmpDate = UniversalDateTime(eVAR)
+      
+      If dTmpDate <> CDate(0) Then
+        FVar = Fdatatime(dTmpDate, cFORM, ePAD)
+      Else
+        FVar = Fdatatime(eVAR, cFORM, ePAD)
+      End If
 
     ' =========================================================================
     ' APRIMORAMENTO PARA LÓGICOS / BOOLEANOS (StrLogic)
     ' =========================================================================
-    Case "B", "BF", "BT" ,"L"                    '' Boleano (Se null: BF=false, BT=True)
+    Case "B", "BF", "BT", "L"                    '' Boleano (Se null: BF=false, BT=True)
       ' Protege a variável antes de injetar na StrLogic para evitar o erro "Invalid Use Of Null"
       If IsNull(eVAR) Or IsEmpty(eVAR) Then
         vLogic = Null
@@ -499,43 +511,60 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
   End If
 End Function
 
- ''         FVar = "S"
-  ''      Else
-  ''        FVar = "N"
-   ''     End If
-   ''   Else
-   ''     If IsNull(ePAD) Then
-   ''       FVar = " "
-    ''    Else
-    ''    End If
-    ''  End If
-    ''Case "BN"                                'Converte Boleano em Numerico
-     '' If VarType(eVAR) = vbBoolean Then
-     ''   If eVAR Then
+ 
+ ' +--------------------------------------------------------------------
+' +  Função: Fdatatime
+' +  Objetivo: Espelho da Fdata, porém focada em campos de Data e Hora.
+' +--------------------------------------------------------------------
+Public Function Fdatatime(ByVal Data As Variant, _
+                          Optional ByVal cTipoData As String = "", _
+                          Optional ByVal ePAD As Variant, _
+                          Optional ByVal cTipoDataNull As String = "", _
+                          Optional ByVal cMASCARA As String = "dd/mm/yyyy hh:nn:ss") As Variant
+  Dim dDATA As Date
+
+  ' Valor padrão de preenchimento
+  Fdatatime = ePAD
+
+  ' Máscara invertida para bancos como MySQL
+  If cTipoData = "T-" Then
+     cMASCARA = "yyyy-mm-dd hh:nn:ss"
+  End If
   
-   ''     FVar = 1
-     ''   Else
-     ''     FVar = 0
-      ''  End If
-      ''Else
-      ''  If IsNull(ePAD) Then
-      ''    FVar = 0
-      ''  Else
-      ''    FVar = ePAD
-      ''  End If
-      ''End If
-Public Function GeraSplit(ByVal aVAR As Variant, Optional ByVal cINI As String = "", _
+  ' Reutiliza DataBranco pois ela já prevê "0000-00-00 00:00:00" e "00:00:00"
+  If IsDate(Data) And Not DataBranco(Data) Then
+    Fdatatime = Format(Data, cMASCARA)
+  Else
+    Select Case cTipoData
+    Case "", "T", "TS"
+      Fdatatime = DateSerial(0, 0, 0)
+    Case "TT"
+      Fdatatime = dDATA
+    Case "TN"
+      Fdatatime = NullDateTime(cTipoDataNull) ' Usa a função DateTime nativa do seu sistema
+    Case "TC"
+      Fdatatime = Space(19)                   ' 19 espaços (DD/MM/YYYY HH:MM:SS) em vez de 8
+    Case "TZ"
+      Fdatatime = ""
+    Case "TF"
+      Fdatatime = "  /  /       :  :  "       ' Máscara vazia formatada
+    Case "TH"
+      Fdatatime = Format(Now, "dd/mm/yyyy hh:nn:ss") ' Data e Hora do momento
+    End Select
+  End If
+End Function
+Public Function GeraSplit(ByVal aVAR As Variant, Optional ByVal cIni As String = "", _
                           Optional ByVal cMID As String = "", _
-                          Optional ByVal cFIM As String = "") As String
+                          Optional ByVal cFim As String = "") As String
   Dim nUSO As Long
-  Dim X As Long
+  Dim x As Long
   nUSO = UBound(aVAR) - 1
-  GeraSplit = cINI & aVAR(0) & cMID
-  For X = 1 To nUSO
-    GeraSplit = GeraSplit & aVAR(X) & cMID
-  Next X
+  GeraSplit = cIni & aVAR(0) & cMID
+  For x = 1 To nUSO
+    GeraSplit = GeraSplit & aVAR(x) & cMID
+  Next x
   GeraSplit = GeraSplit & aVAR(nUSO + 1)
-  GeraSplit = GeraSplit & cFIM
+  GeraSplit = GeraSplit & cFim
 End Function
 
 Public Function SepSqlOpe(ByVal eEXP As String) As Variant
@@ -573,14 +602,14 @@ Public Function Alert(ByVal cDIZ As String, Optional ByVal cTITLE As String = "I
   MsgBox cDIZ, vbOKOnly, cTITLE
 End Function
 
-Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVAL As String, Optional ByVal nLEN As Integer = 0) As String
+Public Function Busca(ByVal cDIZ As String, ByVal cCAB As String, ByVal cVAL As String, Optional ByVal nLen As Integer = 0) As String
   Busca = InputBox(cDIZ, cCAB, cVAL)
-  If nLEN > 0 Then
-     Busca = Left$(Busca, nLEN)
+  If nLen > 0 Then
+     Busca = Left$(Busca, nLen)
   End If
 End Function
 
-Public Function Caminex(ByVal cARQ As String, Optional ByVal nANO As Integer = 0, Optional ByVal nMES As Integer = 0, Optional ByVal nEMP = 1)
+Public Function Caminex(ByVal cARQ As String, Optional ByVal nAno As Integer = 0, Optional ByVal nMES As Integer = 0, Optional ByVal nEMP = 1)
   Dim cAno As String
   Dim cEMP As String
   Dim cMes As String
@@ -597,30 +626,30 @@ Public Function Caminex(ByVal cARQ As String, Optional ByVal nANO As Integer = 0
     End If
   End If
 
-  If nANO = 0 And InStr(cARQ, "[A") > 0 Then
+  If nAno = 0 And InStr(cARQ, "[A") > 0 Then
     frmcomp.Show vbModal
-    nANO = Val(eRETU01)
+    nAno = Val(eRETU01)
     nMES = Val(eRETU02)
     nEMP = Val(eRETU03)
   End If
 
   If nMES = 0 And InStr(cARQ, "[M") > 0 Then
     frmcomp.Show vbModal
-    nANO = Val(eRETU01)
+    nAno = Val(eRETU01)
     nMES = Val(eRETU02)
     nEMP = Val(eRETU03)
   End If
 
   If nEMP = 0 And InStr(cARQ, "[Z") > 0 Then
     frmcomp.Show vbModal
-    nANO = Val(eRETU01)
+    nAno = Val(eRETU01)
     nMES = Val(eRETU02)
     nEMP = Val(eRETU03)
   End If
 
-  If nANO = 0 And InStr(cARQ, "[A") > 0 Then
+  If nAno = 0 And InStr(cARQ, "[A") > 0 Then
     frmcomp.Show vbModal
-    nANO = Val(eRETU01)
+    nAno = Val(eRETU01)
     nMES = Val(eRETU02)
     nEMP = Val(eRETU03)
   End If
@@ -630,11 +659,11 @@ Public Function Caminex(ByVal cARQ As String, Optional ByVal nANO As Integer = 0
     cARQ = Replace(cARQ, "[MM]", cMes)
   End If
   If InStr(cARQ, "[AAAA]") > 0 Then
-    cAno = StrZero(nANO, 4)
+    cAno = StrZero(nAno, 4)
     cARQ = Replace(cARQ, "[AAAA]", cAno)
   End If
   If InStr(cARQ, "[AA]") > 0 Then
-    cAno = StrZero(nANO, 4)
+    cAno = StrZero(nAno, 4)
     cAno = Right(cAno, 2)
     cARQ = Replace(cARQ, "[AA]", cAno)
   End If
@@ -831,7 +860,7 @@ End Function
 Public Function FixStr(ByVal eVAR As Variant, _
                        Optional ByVal ePAD As Variant = "", _
                        Optional ByVal coper As String = "", _
-                       Optional ByVal nLEN As Integer = 0) As Variant
+                       Optional ByVal nLen As Integer = 0) As Variant
   On Error GoTo errhandler
   If IsNull(eVAR) Then
     If ePAD <> "" Then
@@ -848,8 +877,8 @@ Public Function FixStr(ByVal eVAR As Variant, _
     eVAR = Trim(eVAR)
     FixStr = eVAR
   End If
-  If nLEN > 0 And Len(eVAR) > nLEN Then
-    eVAR = Mid(eVAR, 1, nLEN)
+  If nLen > 0 And Len(eVAR) > nLen Then
+    eVAR = Mid(eVAR, 1, nLen)
     FixStr = eVAR
   End If
   Exit Function
@@ -967,16 +996,16 @@ Public Function Multiplicar(ByVal nVAL As Variant, ByVal nMUL As Variant)
 End Function
 
 
-Public Function PadRight(ByVal cTEXTO, ByVal nLEN) As String
-  cTEXTO = cTEXTO & Space(nLEN)
-  cTEXTO = Left(cTEXTO, nLEN)
-  PadRight = cTEXTO
+Public Function PadRight(ByVal cTexto, ByVal nLen) As String
+  cTexto = cTexto & Space(nLen)
+  cTexto = Left(cTexto, nLen)
+  PadRight = cTexto
 End Function
 
-Public Function PadLeft(ByVal cTEXTO, ByVal nLEN) As String
-  cTEXTO = Space(nLEN) & cTEXTO
-  cTEXTO = Right(cTEXTO, nLEN)
-  PadLeft = cTEXTO
+Public Function PadLeft(ByVal cTexto, ByVal nLen) As String
+  cTexto = Space(nLen) & cTexto
+  cTexto = Right(cTexto, nLen)
+  PadLeft = cTexto
 End Function
 
 Public Function PegCamini(ByVal cCaminho As String) As String
@@ -1151,13 +1180,13 @@ Public Function SomaExt(ByVal cARQ As String, Optional ByVal cEXT As String = ".
   End If
 End Function
 
-Public Function StrZero(ByVal nNUM, Optional ByVal nLEN As Integer = 0)
+Public Function StrZero(ByVal nNUM, Optional ByVal nLen As Integer = 0)
   Dim cTemp As String
-  If nLEN = 0 Then
+  If nLen = 0 Then
     cTemp = FixStr(nNUM, "0", "TRIM")
-    nLEN = Trim(cTemp)
+    nLen = Trim(cTemp)
   End If
-  StrZero = Right(String(nLEN, "0") & CStr(nNUM), nLEN)
+  StrZero = Right(String(nLen, "0") & CStr(nNUM), nLen)
 End Function
 
 Function Convert2ansi(ByVal in_string As String) As String
@@ -1176,8 +1205,8 @@ Public Function Tirace(ByVal texto As String) As String
   Tirace = tirace2(texto)
 End Function
 Public Function StrToArray(ByVal cGRUPO As String) As Variant
-  Dim X As Integer
-  Dim nLEN As Integer
+  Dim x As Integer
+  Dim nLen As Integer
   Dim aUSO As Variant
   Dim cCHAR As String
   Dim eCNV As String
@@ -1187,83 +1216,83 @@ Public Function StrToArray(ByVal cGRUPO As String) As Variant
     eCNV = cGRUPO
   End Select
 
-  nLEN = Len(eCNV)
-  ReDim aUSO(nLEN)
-  For X = 1 To nLEN
-    cCHAR = Mid(eCNV, X, 1)
+  nLen = Len(eCNV)
+  ReDim aUSO(nLen)
+  For x = 1 To nLen
+    cCHAR = Mid(eCNV, x, 1)
     Select Case cCHAR
     Case "ª"
-      aUSO(X - 1) = "a."
+      aUSO(x - 1) = "a."
 
     Case "º"
-      aUSO(X - 1) = "o."
+      aUSO(x - 1) = "o."
 
     Case Else
-      aUSO(X - 1) = cCHAR
+      aUSO(x - 1) = cCHAR
 
     End Select
-  Next X
+  Next x
   StrToArray = aUSO
 End Function
 
 Public Function TiraSin(ByVal texto As String, Optional ByVal RemoveUp As Boolean = True) As String
-Dim X As Integer
+Dim x As Integer
   'https://www.ascii-code.com/pt
   'Caracteres de controle ASCII (código de caractere 0-31)
-  For X = 0 To 31 'nao caracteres padrao
-    texto = Replace(texto, Chr(X), "")
-  Next X
+  For x = 0 To 31 'nao caracteres padrao
+    texto = Replace(texto, Chr(x), "")
+  Next x
   'Caracteres imprimiveis ASCII (código de caractere 32-127)
   '32 espaco
-  For X = 33 To 38                 '33! 34" 35# 36$ 37% 38&
-    texto = Replace(texto, Chr(X), "")
-  Next X
-  For X = 39 To 47                 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
-    texto = Replace(texto, Chr(X), "")
-  Next X
+  For x = 33 To 38                 '33! 34" 35# 36$ 37% 38&
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  For x = 39 To 47                 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
+    texto = Replace(texto, Chr(x), "")
+  Next x
   '48 a 57 numeros 0-9
-  For X = 58 To 64                 '58: 59: 60< 61= 62> 63? 64@
-    texto = Replace(texto, Chr(X), "")
-  Next X
+  For x = 58 To 64                 '58: 59: 60< 61= 62> 63? 64@
+    texto = Replace(texto, Chr(x), "")
+  Next x
   '65 a 90 maisculas
-  For X = 91 To 96                 '91[ 92\ 93] 94^ 95_ 96`
-    texto = Replace(texto, Chr(X), "")
-  Next X
+  For x = 91 To 96                 '91[ 92\ 93] 94^ 95_ 96`
+    texto = Replace(texto, Chr(x), "")
+  Next x
   '97 a 122 minusculas
-  For X = 123 To 126                '123{ 124| 125} 126~
-    texto = Replace(texto, Chr(X), "")
-  Next X
-  For X = 127 To 127                 '127 del
-    texto = Replace(texto, Chr(X), "")
-  Next X
+  For x = 123 To 126                '123{ 124| 125} 126~
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  For x = 127 To 127                 '127 del
+    texto = Replace(texto, Chr(x), "")
+  Next x
   'Códigos ASCII estendidos (código de caracteres 128-255)
   If RemoveUp Then
-    For X = 128 To 255
-      texto = Replace(texto, Chr(X), "")
-    Next X
+    For x = 128 To 255
+      texto = Replace(texto, Chr(x), "")
+    Next x
   Else 'matem caracteres de acentuacao uso tirace caso queira manter sem acentuacao
-    For X = 155 To 159
-      texto = Replace(texto, Chr(X), "")
-    Next X
-    For X = 168 To 180
-      texto = Replace(texto, Chr(X), "")
-    Next X
-    For X = 184 To 197
-      texto = Replace(texto, Chr(X), "")
-    Next X
-    For X = 200 To 209
-      texto = Replace(texto, Chr(X), "")
-    Next X
-    For X = 217 To 223
-      texto = Replace(texto, Chr(X), "")
-    Next X
-    For X = 238 To 255
-      texto = Replace(texto, Chr(X), "")
-    Next X
+    For x = 155 To 159
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 168 To 180
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 184 To 197
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 200 To 209
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 217 To 223
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 238 To 255
+      texto = Replace(texto, Chr(x), "")
+    Next x
   End If
   TiraSin = texto
 End Function
-Function CheckPass(ByVal cTEXTO As String, Optional ByVal lMES As Boolean = True) As Boolean
+Function CheckPass(ByVal cTexto As String, Optional ByVal lMES As Boolean = True) As Boolean
 
   Dim lMAIS As Boolean
   Dim lMINUS As Boolean
@@ -1280,22 +1309,22 @@ Function CheckPass(ByVal cTEXTO As String, Optional ByVal lMES As Boolean = True
   l8DIG = False
 
 
-  For i = 1 To Len(cTEXTO)
-    If InStr("0123456789", Mid(cTEXTO, i, 1)) > 0 Then
+  For i = 1 To Len(cTexto)
+    If InStr("0123456789", Mid(cTexto, i, 1)) > 0 Then
       lDIG = True
     End If
-    If InStr("abcdefghijklmnopqrstuvwxyz", Mid(cTEXTO, i, 1)) > 0 Then
+    If InStr("abcdefghijklmnopqrstuvwxyz", Mid(cTexto, i, 1)) > 0 Then
       lMINUS = True
     End If
-    If InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", Mid(cTEXTO, i, 1)) > 0 Then
+    If InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", Mid(cTexto, i, 1)) > 0 Then
       lMAIS = True
     End If
-    If InStr("-+_!@#$%^&*., ?", Mid(cTEXTO, i, 1)) > 0 Then
+    If InStr("-+_!@#$%^&*., ?", Mid(cTexto, i, 1)) > 0 Then
       lSYMBOL = True
     End If
   Next
 
-  If Len(Trim(cTEXTO)) >= 8 Then
+  If Len(Trim(cTexto)) >= 8 Then
     l8DIG = True
   End If
 
@@ -1527,14 +1556,14 @@ Public Sub FocusMe()
      Or TypeOf Screen.ActiveControl Is ComboBox _
      Or TypeOf Screen.ActiveControl Is XPText Then
     Screen.ActiveControl.SelStart = 0
-    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.Text))
+    Screen.ActiveControl.SelLength = Len(Trim(Screen.ActiveControl.tEXT))
   End If
 End Sub
-Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
-  Dim nLEN As Integer
+Public Function CharConv(ByVal cTexto As String, ByVal eORI As Variant, ByVal eDES As Variant) As String
+  Dim nLen As Integer
   Dim nTEXTO As Integer
-  Dim X As Integer
-  Dim Y As Integer
+  Dim x As Integer
+  Dim y As Integer
   Dim aORI As Variant
   Dim aDES As Variant
   Dim aTEXTO As Variant
@@ -1545,40 +1574,40 @@ Public Function CharConv(ByVal cTEXTO As String, ByVal eORI As Variant, ByVal eD
     aORI = StrToArray(CStr(eORI))
     aDES = StrToArray(CStr(eDES))
   End If
-  aTEXTO = StrToArray(cTEXTO)
-  nLEN = UBound(aORI)
+  aTEXTO = StrToArray(cTexto)
+  nLen = UBound(aORI)
   nTEXTO = UBound(aTEXTO)
-  For Y = 0 To nTEXTO
-    For X = 0 To nLEN
-      If aTEXTO(Y) = aORI(X) Then          ''Encerra Analise Para Evitar
-        aTEXTO(Y) = aDES(X)              ''Loop de Troca
+  For y = 0 To nTEXTO
+    For x = 0 To nLen
+      If aTEXTO(y) = aORI(x) Then          ''Encerra Analise Para Evitar
+        aTEXTO(y) = aDES(x)              ''Loop de Troca
         Exit For
       End If
     Next
   Next
   CharConv = ""
-  For Y = 0 To nTEXTO
-    CharConv = CharConv & aTEXTO(Y)
-  Next Y
+  For y = 0 To nTEXTO
+    CharConv = CharConv & aTEXTO(y)
+  Next y
 End Function
 Public Function TiraOut(ByVal eVAR As Variant) As String
-  Dim cTEXTO As String
-  cTEXTO = FixStr(eVAR)
-  TiraOut = CharConv(cTEXTO, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
+  Dim cTexto As String
+  cTexto = FixStr(eVAR)
+  TiraOut = CharConv(cTexto, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
                      Array("", "", "", "", "", "", "", "", ""))
 End Function
 
 Public Function TiraOutNum(ByVal eVAR As Variant) As String  ' Mantem ', . que sao usadas nos numeros
-  Dim cTEXTO As String
-  cTEXTO = FixStr(eVAR)
-  TiraOutNum = CharConv(cTEXTO, Array("-", ":", "/", ";", "*", "(", ")"), _
+  Dim cTexto As String
+  cTexto = FixStr(eVAR)
+  TiraOutNum = CharConv(cTexto, Array("-", ":", "/", ";", "*", "(", ")"), _
                         Array("", "", "", "", "", "", ""))
 End Function
 
 Public Function TiraOutAlf(ByVal eVAR As Variant) As String
-  Dim cTEXTO As String
-  cTEXTO = FixStr(eVAR)
-  TiraOutAlf = CharConv(cTEXTO, Array("-", ".", ":", "/", ";", "*", "(", ")", _
+  Dim cTexto As String
+  cTexto = FixStr(eVAR)
+  TiraOutAlf = CharConv(cTexto, Array("-", ".", ":", "/", ";", "*", "(", ")", _
                                       "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", _
                                       "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", _
                                       "U", "V", "Y", "W", "X", "Z", ","), _
@@ -1693,20 +1722,20 @@ Public Function Extenso(ByVal Valor As Double, _
   End If
 End Function
 
-Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer = 80) As Variant
-  Dim nLIN, X As Integer
+Public Function Txt2Lin(ByVal cTexto As String, Optional ByVal nCOL As Integer = 80) As Variant
+  Dim nLIN, x As Integer
   Dim aRETU As Variant
-  cTEXTO = FixStr(cTEXTO)
+  cTexto = FixStr(cTexto)
   If nCOL < 1 Then nCOL = 80                   'Evita Erros Divisao
-  nLIN = Int(Len(cTEXTO) / nCOL)
-  If nLIN * nCOL = Len(cTEXTO) Then            ''Bate com o Multiplo
+  nLIN = Int(Len(cTexto) / nCOL)
+  If nLIN * nCOL = Len(cTexto) Then            ''Bate com o Multiplo
   Else
     nLIN = nLIN + 1                          ''Soma mais um pois e necesario
   End If
   ReDim aRETU(nLIN)
-  For X = 1 To nLIN
-    aRETU(X - 1) = Mid(cTEXTO, ((X - 1) * nCOL) + 1, nCOL)
-  Next X
+  For x = 1 To nLIN
+    aRETU(x - 1) = Mid(cTexto, ((x - 1) * nCOL) + 1, nCOL)
+  Next x
   Txt2Lin = aRETU
   eRETU01 = nLIN
 End Function
@@ -1980,22 +2009,22 @@ Public Function HTMLToCharCodes(ByVal iString As String) As String
     ' Limpeza
     Set iXml = Nothing
 End Function
-Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean = False) As String
+Public Function str2html(ByVal cTexto As String, Optional ByVal lAnsi As Boolean = False) As String
   If lAnsi Then
-    Convert2ansi (cTEXTO)
+    Convert2ansi (cTexto)
   End If
-  cTEXTO = CharCodesToHTML(cTEXTO)
-  str2html = cTEXTO
+  cTexto = CharCodesToHTML(cTexto)
+  str2html = cTexto
 End Function
-Function FileText(ByVal filename As String) As String
+Function FileText(ByVal FileName As String) As String
   Dim Handle As Integer
   Handle = FreeFile
-  Open filename$ For Input As #Handle
+  Open FileName$ For Input As #Handle
   FileText = Input$(LOF(Handle), Handle)
   Close #Handle
 End Function
-Public Function Html2Str(ByVal cTEXTO As String) As String
-  Html2Str = HtmlToText(cTEXTO)  'HTMLToCharCodes(cTexto)
+Public Function Html2Str(ByVal cTexto As String) As String
+  Html2Str = HtmlToText(cTexto)  'HTMLToCharCodes(cTexto)
 End Function
 Public Function HtmlToText(sHTML As String) As String
     Dim oDoc As Object
@@ -2016,16 +2045,16 @@ Public Function HtmlToText(sHTML As String) As String
 End Function
 Public Function FindInList(ByRef cList As ListBox, sSearch As String) As Long
   Dim sString As String
-  Dim ID As Integer
+  Dim id As Integer
 
   On Error Resume Next
   Err.Clear
   FindInList = -1
 
-  For ID = 0 To cList.ListCount - 1
-    sString = UCase$(cList.List(ID))
+  For id = 0 To cList.ListCount - 1
+    sString = UCase$(cList.List(id))
     If sString = UCase$(sSearch) Then
-      FindInList = ID
+      FindInList = id
       Exit For
     End If
   Next
@@ -2121,12 +2150,12 @@ Public Function MachineName() As String
     End If
     Set oShell = Nothing
 End Function
-Public Function WordLen(ByRef Text As String) As Long
+Public Function WordLen(ByRef tEXT As String) As Long
 'tamanho somente dos caracteres normal 65 a 90
   Dim Bytes() As Byte
   Dim i As Long
 
-  Bytes = StrConv(UCase$(Text), vbFromUnicode)
+  Bytes = StrConv(UCase$(tEXT), vbFromUnicode)
   For i = 0 To UBound(Bytes)
     If 65 <= Bytes(i) And Bytes(i) <= 90 Then WordLen = WordLen + 1
   Next
