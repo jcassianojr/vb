@@ -1473,7 +1473,7 @@ Public Function CheckData(ByVal eDATA As Variant, Optional ByVal lMES As Boolean
     Else
       nDIAMES = aMES(nMES - 1)             ''Array comeca com zero
       If nMES = 2 Then
-        If Len(cData) = 6 Or Ano_Bissexto(nANO) Then
+        If Len(cData) = 6 Or Bissexto(nANO) Then
           nDIAMES = 29
         End If
       End If
@@ -1492,12 +1492,6 @@ Public Function CheckData(ByVal eDATA As Variant, Optional ByVal lMES As Boolean
   End If
 End Function
 
-Public Function Ano_Bissexto(ByVal AnoPass As Integer) As Boolean
-  If AnoPass / 4 = AnoPass \ 4 Then            ' Se o resultado da divisão real "X/Y"
-    Ano_Bissexto = True                      ' for igual ao resultado da divisão inteira
-    Exit Function                            ' "X\Y" então é bissexto.
-  End If
-End Function
 
 Public Function CheckTitulo(ByVal s As String, Optional ByVal lMES As Boolean = True) As Boolean
   Dim DV1 As Integer
