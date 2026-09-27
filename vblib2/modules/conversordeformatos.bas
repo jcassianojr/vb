@@ -76,6 +76,357 @@ Attribute VB_Name = "conversordeformatos"
 
 'End Sub 'errorhandled
 
+#If VBA7 Or Win64 Then
+    Public Declare PtrSafe Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+    Public Declare PtrSafe Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+     Public Declare PtrSafe Function MultiByteToWideChar Lib "kernel32" ( _
+        ByVal CodePage As Long, _
+        ByVal dwFlags As Long, _
+        ByVal lpMultiByteStr As LongPtr, _
+        ByVal cbMultiByte As Long, _
+        ByVal lpWideCharStr As LongPtr, _
+        ByVal cchWideChar As Long) As Long
+#Else
+    Public Declare Function CharToOem Lib "user32" Alias "CharToOemA" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+    Public Declare Function OemToChar Lib "user32" (ByVal lpszSrc As String, ByVal lpszDst As String) As Long
+    Public Declare Function MultiByteToWideChar Lib "kernel32" (ByVal CodePage As Long, ByVal dwFlags As Long, ByVal lpMultiByteStr As Long, ByVal cbMultiByte As Long, ByVal lpWideCharStr As Long, ByVal cchWideChar As Long) As Long
+   
+#End If
+
+Public Function TiraSin(ByVal texto As String, Optional ByVal RemoveUp As Boolean = True) As String
+Dim x As Integer
+  'https://www.ascii-code.com/pt
+  'Caracteres de controle ASCII (código de caractere 0-31)
+  For x = 0 To 31 'nao caracteres padrao
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  'Caracteres imprimiveis ASCII (código de caractere 32-127)
+  '32 espaco
+  For x = 33 To 38                 '33! 34" 35# 36$ 37% 38&
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  For x = 39 To 47                 '39' 40( 41) 42* 43+ 44, 45- 46. 47/
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  '48 a 57 numeros 0-9
+  For x = 58 To 64                 '58: 59: 60< 61= 62> 63? 64@
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  '65 a 90 maisculas
+  For x = 91 To 96                 '91[ 92\ 93] 94^ 95_ 96`
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  '97 a 122 minusculas
+  For x = 123 To 126                '123{ 124| 125} 126~
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  For x = 127 To 127                 '127 del
+    texto = Replace(texto, Chr(x), "")
+  Next x
+  'Códigos ASCII estendidos (código de caracteres 128-255)
+  If RemoveUp Then
+    For x = 128 To 255
+      texto = Replace(texto, Chr(x), "")
+    Next x
+  Else 'matem caracteres de acentuacao uso tirace caso queira manter sem acentuacao
+    For x = 155 To 159
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 168 To 180
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 184 To 197
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 200 To 209
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 217 To 223
+      texto = Replace(texto, Chr(x), "")
+    Next x
+    For x = 238 To 255
+      texto = Replace(texto, Chr(x), "")
+    Next x
+  End If
+  TiraSin = texto
+End Function
+
+Public Function tirace2(ByVal cXml As String) As String
+  Dim nAscii As Integer
+  Dim ltroca As Boolean
+  Dim nCont As Integer
+  Dim cLETRA As String
+
+  For nCont = 1 To 2
+    cXml = Replace(cXml, Chr(26), "")
+    cXml = Replace(cXml, Chr(13), "")
+    cXml = Replace(cXml, Chr(10), "")
+    If InStr(Chr(239) + Chr(187) + Chr(191), Mid(cXml, 1, 1)) Then
+      cXml = Mid(cXml, 2)
+    End If
+    cXml = Replace(cXml, " />", "/>")
+    cXml = Replace(cXml, Chr(195) + Chr(173), "i")
+    cXml = Replace(cXml, Chr(195) + Chr(135), "C")
+    cXml = Replace(cXml, Chr(195) + Chr(141), "I")
+    cXml = Replace(cXml, Chr(195) + Chr(163), "a")
+    cXml = Replace(cXml, Chr(195) + Chr(167), "c")
+    cXml = Replace(cXml, Chr(195) + Chr(161), "a")
+    cXml = Replace(cXml, Chr(195) + Chr(131), "A")
+    cXml = Replace(cXml, Chr(194) + Chr(186), "o.")
+    cXml = Replace(cXml, Chr(195) + Chr(162), "a")
+    cXml = Replace(cXml, Chr(195) + Chr(161), "a")
+    cXml = Replace(cXml, Chr(195) + Chr(163), "a")
+    cXml = Replace(cXml, Chr(195) + Chr(173), "i")
+    cXml = Replace(cXml, Chr(195) + Chr(179), "o")
+    cXml = Replace(cXml, Chr(195) + Chr(167), "c")
+    cXml = Replace(cXml, Chr(195) + Chr(169), "e")
+    cXml = Replace(cXml, Chr(195) + Chr(170), "e")
+    cXml = Replace(cXml, Chr(195) + Chr(181), "o")
+    cXml = Replace(cXml, Chr(195) + Chr(160), "o")
+    cXml = Replace(cXml, Chr(195) + Chr(181), "o")
+    cXml = Replace(cXml, Chr(195) + Chr(129), "A")
+    cXml = Replace(cXml, Chr(226) + Chr(128) + Chr(156), "*")   '// aspas de destaque "cames"
+    cXml = Replace(cXml, Chr(226) + Chr(128) + Chr(157), "*")   '// aspas de destaque "cames"
+    cXml = Replace(cXml, Chr(195) + Chr(180), "o")
+    cXml = Replace(cXml, Chr(195) + Chr(186), "u")
+    cXml = Replace(cXml, Chr(195) + Chr(147), "O")
+    cXml = Replace(cXml, Chr(226) + Chr(128) + Chr(153), " ")   ' // caixa d'agua
+    cXml = Replace(cXml, Chr(226) + Chr(128) + Chr(147), "-")   '// - mesmo
+    cXml = Replace(cXml, Chr(194) + Chr(179), "3")   '// m3
+    '// so pra corrigir no MySql
+    cXml = Replace(cXml, "+" + Chr(129), "A")
+    cXml = Replace(cXml, "+" + Chr(137), "E")
+    cXml = Replace(cXml, "+" + Chr(131), "A")
+    cXml = Replace(cXml, "+" + Chr(135), "C")
+    cXml = Replace(cXml, "?" + Chr(167), "c")
+    cXml = Replace(cXml, "?" + Chr(163), "a")
+    cXml = Replace(cXml, "?" + Chr(173), "i")
+    cXml = Replace(cXml, "?" + Chr(131), "A")
+    cXml = Replace(cXml, "?" + Chr(161), "a")
+    cXml = Replace(cXml, "?" + Chr(141), "I")
+    cXml = Replace(cXml, "?" + Chr(135), "C")
+    cXml = Replace(cXml, Chr(195) + Chr(156), "a")
+    cXml = Replace(cXml, Chr(195) + Chr(159), "A")
+    cXml = Replace(cXml, "?" + Chr(129), "A")
+    cXml = Replace(cXml, "?" + Chr(137), "E")
+    cXml = Replace(cXml, Chr(195) + "?", "C")
+    cXml = Replace(cXml, "?" + Chr(149), "O")
+    cXml = Replace(cXml, "?" + Chr(154), "U")
+    cXml = Replace(cXml, "+" + Chr(170), "o")
+    cXml = Replace(cXml, "?" + Chr(128), "A")
+    cXml = Replace(cXml, Chr(195) + Chr(166), "e")
+    cXml = Replace(cXml, Chr(135) + Chr(227), "ca")
+    cXml = Replace(cXml, "n" + Chr(227), "na")
+    cXml = Replace(cXml, Chr(162), "o")
+    cXml = Replace(cXml, " " + Chr(241) + " ", " ")
+    cXml = Replace(cXml, Chr(176), "")   ' graus
+    cXml = Replace(cXml, Chr(186), "o")   ' numero
+    cXml = Replace(cXml, Chr(220), "U")   ' u com trema
+    cXml = Replace(cXml, Chr(170), "")   ' desconhecido
+  Next
+  For nCont = 1 To Len(cXml)
+    cLETRA = Mid(cXml, nCont, 1)
+    nAscii = Asc(cLETRA)
+    ltroca = True
+    If InStr("0123456789", cLETRA) > 0 Then
+      ltroca = False
+    End If
+    If InStr("abcdefghijklmnopqrstuvwxyz", cLETRA) > 0 Then
+      ltroca = False
+    End If
+    If InStr("ABCDEFGHIJKLMNOPQRSTUVWXYZ", cLETRA) > 0 Then
+      ltroca = False
+    End If
+    If InStr(",.:/;%*$@?<>()+-#=:_", cLETRA) > 0 Then
+      ltroca = False
+    End If
+    If nAscii = 231 Then
+      cLETRA = "c"
+    End If
+    If nAscii = 199 Then
+      cLETRA = "C"
+    End If
+    If nAscii = 193 Or nAscii = 194 Or nAscii = 195 Or nAscii = 192 Then
+      cLETRA = "A"
+    End If
+    If nAscii = 224 Or nAscii = 225 Or nAscii = 226 Or nAscii = 227 Or nAscii = 228 Or nAscii = 229 Then
+      cLETRA = "a"
+    End If
+    If nAscii = 242 Or nAscii = 243 Or nAscii = 244 Or nAscii = 245 Or nAscii = 246 Then
+      cLETRA = "o"
+    End If
+    If nAscii = 210 Or nAscii = 211 Or nAscii = 212 Or nAscii = 213 Or nAscii = 214 Then
+      cLETRA = "O"
+    End If
+    If nAscii = 200 Or nAscii = 201 Or nAscii = 202 Or nAscii = 203 Then
+      cLETRA = "E"
+    End If
+    If nAscii = 232 Or nAscii = 233 Or nAscii = 234 Or nAscii = 235 Then
+      cLETRA = "e"
+    End If
+    If nAscii = 236 Or nAscii = 237 Or nAscii = 238 Or nAscii = 239 Then
+      cLETRA = "i"
+    End If
+    If nAscii = 204 Or nAscii = 205 Or nAscii = 206 Or nAscii = 207 Then
+      cLETRA = "I"
+    End If
+    If nAscii = 249 Or nAscii = 250 Or nAscii = 251 Or nAscii = 252 Then
+      cLETRA = "u"
+    End If
+    If nAscii = 217 Or nAscii = 218 Or nAscii = 219 Then
+      cLETRA = "U"
+    End If
+    If nAscii = 128 Then
+      cLETRA = "C"
+    End If
+    If nAscii = 144 Then
+      cLETRA = "E"
+    End If
+    If nAscii = 248 Then
+      cLETRA = ""
+    End If
+    If nAscii = 167 Then
+      cLETRA = "o"
+    End If
+    If ltroca Then
+      cXml = Mid(cXml, 1, nCont - 1) + cLETRA + Mid(cXml, nCont + 1)
+    End If
+  Next
+  tirace2 = cXml
+End Function
+
+Public Function TiraOut(ByVal eVAR As Variant) As String
+  Dim cTEXTO As String
+  cTEXTO = FixStr(eVAR)
+  TiraOut = CharConv(cTEXTO, Array("-", ",", ".", ":", "/", ";", "*", "(", ")"), _
+                     Array("", "", "", "", "", "", "", "", ""))
+End Function
+
+Public Function TiraOutNum(ByVal eVAR As Variant) As String  ' Mantem ', . que sao usadas nos numeros
+  Dim cTEXTO As String
+  cTEXTO = FixStr(eVAR)
+  TiraOutNum = CharConv(cTEXTO, Array("-", ":", "/", ";", "*", "(", ")"), _
+                        Array("", "", "", "", "", "", ""))
+End Function
+
+Public Function CharCodesToHTML(ByVal iString As String) As String
+    Dim iXml As Object
+    
+    ' Instancia o objeto via Late Binding
+    Set iXml = CreateObject("MSXML2.DOMDocument.6.0")
+    
+    ' Utiliza o textNode para codificar caracteres especiais
+    With iXml.createTextNode(iString)
+        CharCodesToHTML = .Xml
+    End With
+    
+    ' Limpeza
+    Set iXml = Nothing
+End Function
+
+Public Function HTMLToCharCodes(ByVal iString As String) As String
+    Dim iXml As Object
+    
+    ' Instancia o DOMDocument via Late Binding
+    Set iXml = CreateObject("MSXML2.DOMDocument.6.0")
+    
+    ' Carrega o XML com o conteúdo enviado
+    If iXml.LoadXML("<p>" & iString & "</p>") Then
+        ' Extrai o valor do nó (decodificando as entidades HTML/XML automaticamente)
+        HTMLToCharCodes = iXml.selectSingleNode("p").nodeTypedValue
+    Else
+        ' Caso o carregamento falhe, retorna a string original ou trata o erro
+        HTMLToCharCodes = iString
+    End If
+    
+    ' Limpeza
+    Set iXml = Nothing
+End Function
+
+Public Function str2html(ByVal cTEXTO As String, Optional ByVal lAnsi As Boolean = False) As String
+  If lAnsi Then
+    Convert2ansi (cTEXTO)
+  End If
+  cTEXTO = CharCodesToHTML(cTEXTO)
+  str2html = cTEXTO
+End Function
+
+Public Function Html2Str(ByVal cTEXTO As String) As String
+  Html2Str = HtmlToText(cTEXTO)  'HTMLToCharCodes(cTexto)
+End Function
+
+Public Function HtmlToText(sHTML As String) As String
+    Dim oDoc As Object
+    
+    ' Cria o objeto HTML via Late Binding
+    Set oDoc = CreateObject("htmlfile")
+    
+    ' Abre o documento para escrita
+    oDoc.Open
+    oDoc.Write sHTML
+    oDoc.Close
+    
+    ' Extrai o texto limpo
+    HtmlToText = oDoc.Body.innerText
+    
+    ' Limpeza
+    Set oDoc = Nothing
+End Function
+
+Public Function TiraOutAlf(ByVal eVAR As Variant) As String
+  Dim cTEXTO As String
+  cTEXTO = FixStr(eVAR)
+  TiraOutAlf = CharConv(cTEXTO, Array("-", ".", ":", "/", ";", "*", "(", ")", _
+                                      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", _
+                                      "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", _
+                                      "U", "V", "Y", "W", "X", "Z", ","), _
+                                      Array("", "", "", "", "", "", "", "", _
+                                            "", "", "", "", "", "", "", "", "", "", _
+                                            "", "", "", "", "", "", "", "", "", "", _
+                                            "", "", "", "", "", "", ""))
+End Function
+
+Function Convert2ansi(ByVal in_string As String) As String
+  Dim Out_String As String * 256
+  Dim t As String
+  t = OemToChar(in_string, Out_String)
+  Convert2ansi = Out_String
+End Function
+
+Function Convert2oem(ByVal in_string As String) As String
+  Dim Out_String As String * 256
+  Dim t As String
+  t = CharToOem(in_string, Out_String)
+  Convert2oem = Out_String
+End Function
+
+Public Function Tirace(ByVal texto As String) As String
+  Tirace = tirace2(texto)
+End Function
+
+Public Function UTF8ToVBString(ByVal sUTF8 As String) As String
+    Dim nLen As Long
+    Dim sBuffer As String
+    
+    ' Obtém o tamanho necessário para o buffer Unicode
+    nLen = MultiByteToWideChar(CP_UTF8, 0, StrPtr(sUTF8), -1, 0, 0)
+    If nLen > 0 Then
+        sBuffer = String$(nLen - 1, 0)
+        MultiByteToWideChar CP_UTF8, 0, StrPtr(sUTF8), -1, StrPtr(sBuffer), nLen
+        UTF8ToVBString = sBuffer
+    Else
+        UTF8ToVBString = sUTF8 ' Retorna original se falhar
+    End If
+End Function
+Public Function IsUTF8(ByVal sInput As String) As Boolean
+    ' Tenta converter o buffer para Unicode forçando erro se encontrar bytes inválidos
+    Dim nResult As Long
+    nResult = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, StrPtr(sInput), -1, 0, 0)
+    
+    ' Se nResult > 0, o Windows conseguiu validar como UTF-8
+    IsUTF8 = (nResult > 0)
+End Function
+
 Public Function ParseEscapeToBBCode(ByVal cLinha As String) As String
     ' 1. Epson / Genéricas Matriciais
     cLinha = Replace(cLinha, Chr(27) & Chr(69), "[B]")

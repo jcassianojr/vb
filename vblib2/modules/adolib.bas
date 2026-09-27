@@ -1193,108 +1193,8 @@ TrataErro:
 
 End Function
 
-Public Function MSSqlOdbcDriver() As String
-    
-    'Customize this list to include the drivers you want to support
-    Dim SupportedDrivers As Variant
-    SupportedDrivers = Array( _
-        "ODBC Driver 17 for SQL Server", _
-        "ODBC Driver 13 for SQL Server", _
-        "SQL Server Native Client 11.0", _
-        "SQL Server")   'the "SQL Server" driver is the legacy driver that is included with Windows
-    
-    'We're using the registry to check for Drivers, so we'll just create the registry object
-    '   once and use it each time through the loop below
-    Dim oReg As Object
-    Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
-    Const RegPath As String = "SOFTWARE\ODBC\ODBCINST.INI\ODBC Drivers"
-    Const HKEY_LOCAL_MACHINE = &H80000002
-    
-    
-    Dim i As Long
-    For i = 0 To UBound(SupportedDrivers)
-        Dim driverName As String: driverName = SupportedDrivers(i)
-        
-        Dim KeyExists As Boolean, RegValue As String
-        KeyExists = (oReg.GetStringValue(HKEY_LOCAL_MACHINE, RegPath, driverName, RegValue) = 0)
-        
-        Dim DriverIsInstalled
-        DriverIsInstalled = (KeyExists And (RegValue = "Installed"))
-        
-        If DriverIsInstalled Then
-            'Return the first Driver from the list that is installed on the computer
-            MSSqlOdbcDriver = driverName
-            Set oReg = Nothing
-            Exit Function
-        End If
-    Next i
-    Set oReg = Nothing
-    
-    'If we get here it means there were no matches found;
-    '   until we work out all the kinks, we may be better served by returning the default Driver
-    '   here rather than throwing an error
-    MsgBox "No ODBC Drivers found (not even the default that ships with Windows!)"
-End Function
 
-Private Function DriverExiste(cNOME As String) As Boolean
-    On Error Resume Next
-    Dim oCONN As Object
-    Set oCONN = CreateObject(cNOME)
-    DriverExiste = (Err.Number = 0)
-    Set oCONN = Nothing
-End Function
-' ----------------------------------------------------------------
-' Procedure : GetLatestOledbProvider --MSSqlOledbProvider
-' Date      : 12/14/2022
-' Author    : Mike Wolfe
-' Source    : https://nolongerset.com/getlatestoledbprovider/
-' Purpose   : Iterates through a custom list of OLEDB providers
-'               and returns the first installed match.
-' ----------------------------------------------------------------
-Public Function MSSqlOledbProvider(Optional ByVal nTIPO As Integer = 1) As String
-    Dim SupportedProviders As Variant
-    SupportedProviders = Array( _
-        "MSOLEDBSQL19", "Microsoft OLE DB Driver 19 for SQL Server", "EE5DE99A-4453-4C96-861C-F8832A7F59FE", _
-        "MSOLEDBSQL", "Microsoft OLE DB Driver for SQL Server", "5A23DE84-1D7B-4A16-8DED-B29C09CB648D", _
-        "SQLNCLI11", "SQL Server Native Client 11.0", "397C2819-8272-4532-AD3A-FB5E43BEAA39", _
-        "SQLNCLI10", "SQL Server Native Client 10.0", "8F4A6B68-4F36-4e3c-BE81-BC7CA4E9C45C", _
-        "SQLOLEDB", "Microsoft OLE DB Provider for SQL Server", "0C7FF16C-38E3-11d0-97AB-00C04FC2AD98")
-    
-    'We're using the registry to check for providers, so we'll just create the registry object
-    '   once and use it each time through the loop below
-    Dim oReg As Object
-    Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
-    Const HKEY_CLASSES_ROOT = &H80000000
-    
-    Dim i As Long
-    For i = 0 To UBound(SupportedProviders) Step 3
-        Dim ProviderName As String: ProviderName = SupportedProviders(i)
-        Dim ProviderDesc As String: ProviderDesc = SupportedProviders(i + 1)
-        Dim ProviderUID As String: ProviderUID = SupportedProviders(i + 2)
-        
-        Dim ProviderIsInstalled As Boolean, SubkeyPath As String
-        SubkeyPath = "CLSID\{" & ProviderUID & "}\"
-        ProviderIsInstalled = (oReg.EnumKey(HKEY_CLASSES_ROOT, SubkeyPath, "", "") = 0)
-        
-        If ProviderIsInstalled Then
-            'Return the first provider from the list that is installed on the computer
-            Select Case nTIPO
-                   Case 1
-                       MSSqlOledbProvider = ProviderName
-                   Case 2
-                       MSSqlOledbProvider = ProviderDesc
-                   Case 3
-                       MSSqlOledbProvider = ProviderUID
-            End Select
-            Set oReg = Nothing
-            Exit Function
-        End If
-    Next i
-    Set oReg = Nothing
-    
-    'If we get here it means there were no matches found
-    MsgBox "No OLE DB providers found (not even the default that ships with Windows!)"
-End Function
+
 
 
 Public Function ado_GetCursorType(CursorType As Integer) As String
@@ -1349,37 +1249,6 @@ Function ado_GetLockType(LockType As Integer) As String
     End Select
 
 End Function
-
-'Public Function ExtraiWhere(ByVal cSQL As String) As String
-''    Dim nPOS As Long
-''    Dim sUpperSQL As String
-    
-''    sUpperSQL = UCase(cSQL)
-''    nPOS = InStr(sUpperSQL, "WHERE ")
-    
-''    If nPOS > 0 Then
-        ' Retorna do "WHERE" até ao fim da string
-''        ExtraiWhere = Trim(Mid(cSQL, nPOS))
-''    Else
-        ' Se não houver WHERE, retorna vazio (CUIDADO: isso afetaria a tabela toda)
-''        ExtraiWhere = ""
-''    End If
-'End Function
-
-
-'Public Function ExtraiTabela(ByVal cSQL As String) As String
-    ' Busca o nome da tabela após o "FROM"
-''    Dim nPOS As Long
-''    cSQL = UCase(cSQL)
-''    nPOS = InStr(cSQL, "FROM ")
-''    If nPOS > 0 Then
- ''       ExtraiTabela = Trim(Mid(cSQL, nPOS + 5))
- ''       ' Remove o resto se houver WHERE ou ORDER
- ''       If InStr(ExtraiTabela, " ") > 0 Then
- ''           ExtraiTabela = Left(ExtraiTabela, InStr(ExtraiTabela, " ") - 1)
- ''       End If
- ''   End If
-'End Function
 
 
 Public Function TratarParametrosCofre(ByVal cARQ As String) As String
@@ -1628,40 +1497,6 @@ Public Function NomeTableSql(ByVal cSQL As String, Optional ByVal cEXTENSAO As S
   End If
 End Function
 
-'Public Function ExtrairNomeTabela(ByVal cSQL As String) As String
-''    Dim nPosFrom As Long
-''    Dim nPosWhere As Long
-''    Dim nPosOrder As Long
-''    Dim cTemp As String
-    
-    ' Converte para maiúsculas para facilitar a busca
- ''   cTemp = " " & UCase(cSQL) & " "
-    
-    ' Localiza a posição do " FROM "
- ''   nPosFrom = InStr(1, cTemp, " FROM ")
- ''   If nPosFrom = 0 Then
- ''       ExtrairNomeTabela = ""
- ''       Exit Function
-  ''  End If
-    
-  ''  nPosFrom = nPosFrom + 6 ' Tamanho da string " FROM "
-    
-    ' Localiza o primeiro limitador após o FROM (WHERE, ORDER BY, GROUP BY)
-  ''  nPosWhere = InStr(nPosFrom, cTemp, " WHERE ")
-  ''  nPosOrder = InStr(nPosFrom, cTemp, " ORDER BY ")
-    
-    ' Define o fim do nome da tabela (o menor valor entre os delimitadores)
-   '' Dim nFIM As Long
-   '' nFIM = Len(cTemp)
-    
-   '' If nPosWhere > 0 And nPosWhere < nFIM Then nFIM = nPosWhere
-   '' If nPosOrder > 0 And nPosOrder < nFIM Then nFIM = nPosOrder
-    
-    ' Extrai e limpa o nome da tabela
-    'ExtrairNomeTabela = Trim(Mid(cSQL, nPosFrom - 1, nFIM - nPosFrom + 1))
-'End Function
-
-
 Public Function MontaFiltro(ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal eBUSCA As Variant, ByVal nIndex As Integer)
   nIndex = nIndex - 1
   MontaFiltro = ""
@@ -1894,4 +1729,269 @@ Public Function Mana5Fec() As Boolean
     End If
     Mana5Fec = True
   End If
+End Function
+
+
+Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As String, Optional ByVal cWHERE As String, _
+                           Optional ByVal cCAMPO As String = "IMAGEM") As Boolean
+  Dim oDB As ADODB.Connection
+  Dim oRS As ADODB.Recordset
+  Dim lOPEN As Boolean
+  Dim lRSOP As Boolean
+  Dim cERRO As String
+  Dim lFileLength As Long
+  Dim abBytes() As Byte
+  Dim iFileNum As Integer
+  Dim sTEMPFILE As String
+  Dim aRETU As Variant
+  Dim cSQL As String
+  Dim mystream As New ADODB.Stream
+  mystream.Type = adTypeBinary
+
+
+  On Error GoTo errhandler
+
+  ADOPegBlob = False
+
+  lOPEN = False
+  lRSOP = False
+
+  aRETU = TipoConn(cARQ)
+  cARQ = aRETU(1) '//GeracArq(cARQ, , False)
+  
+    sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
+    If FileExists(sTEMPFILE) Then 'arquivo temporario pode apagar
+       DeleteFile sTEMPFILE, True
+    End If
+  
+ 'Oracle 8.1 to store image you need to create a field of LongRAW type
+  cSQL = cTable
+  If cWHERE <> "" Then
+     Select Case aRETU(2)
+          Case "SQLITE"
+               cSQL = "select BLOB_EXPORT(" + cCAMPO + ",'" + sTEMPFILE + "' )  as imagem from " + cTable + "  WHERE " & cWHERE
+          Case Else
+               cSQL = "select " + cCAMPO + " from " + cTable + "  WHERE " & cWHERE
+     End Select
+  End If
+  
+  If aRETU(2) = "PGSQL" Then
+     cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
+  End If
+
+  Set oDB = New ADODB.Connection
+  oDB.CursorLocation = adUseClient
+  oDB.ConnectionTimeout = 120
+  oDB.Open cARQ
+  lOPEN = True
+  eRETU01 = 0
+
+  Set oRS = New ADODB.Recordset
+  oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
+  lRSOP = True
+  If Not oRS.EOF Then
+    If Not IsNull(oRS(cCAMPO)) Then
+    
+       Select Case aRETU(2)
+         Case "MYSQL", "MARIADB", "PGSQL"
+               mystream.Open
+               mystream.Write oRS.Fields(0)
+               mystream.SaveToFile sTEMPFILE, adSaveCreateOverWrite
+               If FileExists(sTEMPFILE) Then
+                 eRETU01 = FileLen(sTEMPFILE)
+                 Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
+                 ADOPegBlob = True
+                 Kill sTEMPFILE
+              End If
+              mystream.Close
+         Case "SQLITE"
+              If FileExists(sTEMPFILE) Then
+                 eRETU01 = FileLen(sTEMPFILE)
+                 Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
+                 ADOPegBlob = True
+                 Kill sTEMPFILE
+              End If
+         Case Else
+           lFileLength = LenB(oRS(cCAMPO))
+           If lFileLength > 1 Then
+              iFileNum = FreeFile
+              Open sTEMPFILE For Binary As #iFileNum
+              abBytes = oRS(cCAMPO).GetChunk(lFileLength)
+              Put #iFileNum, , abBytes()
+              Close #iFileNum
+      
+              If Not sTEMPFILE = "" Then
+                 Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
+                eRETU01 = FileLen(sTEMPFILE)
+                ADOPegBlob = True
+              End If
+             DeleteFile sTEMPFILE, True
+            End If
+        End Select
+    End If
+  End If
+
+  oRS.Close
+  oDB.Close
+  Set oRS = Nothing
+  Set oDB = Nothing
+  Exit Function
+
+
+
+
+errhandler:
+  cERRO = "AdoPegBlob" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL & Chr(13) & Chr(10)
+  If lRSOP Then
+    cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
+  End If
+  Select Case Err.Number
+  Case Else
+    If lOPEN Then
+      ADOErro oRS.ActiveConnection.Errors, cERRO
+    Else
+      ADOErro oDB.Errors, cERRO
+    End If
+    Exit Function
+  End Select
+
+End Function
+
+
+Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
+                           ByRef cPICTURE, Optional ByVal cCAMPO As String = "IMAGEM", _
+                           Optional ByVal cWHERE As String = "") As Boolean
+  Dim oDB As ADODB.Connection
+  Dim oRS As ADODB.Recordset
+  Dim oCMD As ADODB.Command
+  Dim lOPEN As Boolean
+  Dim lRSOP As Boolean
+  Dim cERRO As String
+  Dim lFileLength As Long
+  Dim abBytes() As Byte
+  Dim iFileNum As Integer
+  Dim sTEMPFILE As String
+  Dim aRETU As Variant
+  Dim cCMD As String
+  Dim cSQL As String
+  Dim mystream As New ADODB.Stream
+  mystream.Type = adTypeBinary
+
+
+  On Error GoTo errhandler
+
+  ADOGrvBlob = False
+
+  aRETU = TipoConn(cARQ)
+  cARQ = aRETU(1) ' GeracArq(cARQ)
+
+  lOPEN = False
+  lRSOP = False
+
+  cSQL = cTable
+  If cWHERE <> "" Then
+    cSQL = "select " + cCAMPO + " from " + cTable + "  WHERE " & cWHERE
+  End If
+  
+  'Oracle 8.1 to store image you need to create a field of LongRAW type
+  If aRETU(2) = "MYSQL" Or aRETU(2) = "MYSQL" Then ' chave indice precisam estar o recordset
+      cSQL = "select * from " + cTable + "  WHERE " & cWHERE
+  End If
+  
+  If aRETU(2) = "PGSQL" Then
+      cSQL = "select * from " + Chr(34) + UCase(cTable) + Chr(34) + "  WHERE " + Chr(34) + cWHERE 'fazendo double quotes
+      cSQL = Replace(cSQL, "=", Chr(34) + "=")
+  End If
+  
+  
+  If cPICTURE.Picture.Height > 0 Then
+     sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
+     PicSaveLoad.SavePicture cPICTURE.Picture, sTEMPFILE, fmtJPEG, 70
+  End If
+  
+  Set oDB = New ADODB.Connection
+  oDB.CursorLocation = adUseClient
+  oDB.ConnectionTimeout = 120
+  oDB.Open cARQ
+
+  lOPEN = True
+  
+Select Case aRETU(2)
+     Case "SQLITE"
+          '"Update IMAGENS  SET IMAGEM = blob_import('c:\temp\testered.jpg') where   codigo='red'"
+          If cPICTURE.Picture.Height = 0 Then
+             cCMD = "Update " + cSQL + "  SET " + cCAMPO + " = NULL where  " + cWHERE
+          Else
+             cCMD = "Update " + cSQL + "  SET " + cCAMPO + " = blob_import('" + sTEMPFILE + "') where  " + cWHERE
+          End If
+          Set oCMD = New ADODB.Command
+          oCMD.ActiveConnection = oDB
+          oCMD.CommandText = cCMD
+          oCMD.Execute
+          Set oCMD = Nothing
+     Case "MYSQL", "MARIADB", "PGSQL"
+        If FileExists(sTEMPFILE) Then
+          Set oRS = New ADODB.Recordset
+          oRS.Open cSQL, oDB, adOpenStatic, adLockOptimistic  ''adOpenStatic ADOPENKEYSET
+          lRSOP = True
+          If Not oRS.EOF Then
+             mystream.Open
+             mystream.LoadFromFile sTEMPFILE
+             oRS.Fields(cCAMPO) = mystream.Read
+             mystream.Close
+             oRS.Update
+             ADOGrvBlob = True
+          End If
+          DeleteFile sTEMPFILE, True
+          oRS.Close
+        End If
+     Case Else
+        Set oRS = New ADODB.Recordset
+        oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic  ''adOpenStatic
+      
+      
+        lRSOP = True
+        If Not oRS.EOF Then
+          If cPICTURE.Picture.Height = 0 Then
+            oRS.Fields(cCAMPO) = Null
+            oRS.Update
+            ADOGrvBlob = True
+          Else
+            iFileNum = FreeFile
+            Open sTEMPFILE For Binary Access Read As #iFileNum
+            lFileLength = LOF(iFileNum)
+            ReDim abBytes(lFileLength)
+            Get #iFileNum, , abBytes()
+            Close #iFileNum
+            'put byte array contents into db field
+            If Not sTEMPFILE = "" Then
+              oRS.Fields(cCAMPO).AppendChunk abBytes()
+              oRS.Update
+              ADOGrvBlob = True
+            End If
+            DeleteFile sTEMPFILE, True  'Kill sTEMPFILE
+          End If
+        End If
+        oRS.Close
+        Set oRS = Nothing
+  End Select
+  oDB.Close
+  Set oDB = Nothing
+  Exit Function
+
+errhandler:
+  cERRO = "AdoGRVBlob" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL & Chr(13) & Chr(10)
+  If lRSOP Then
+    cERRO = cERRO & ADORsStatus(oRS.Status) & Chr(13) & Chr(10)
+  End If
+  Select Case Err.Number
+  Case Else
+    If lOPEN Then
+      ADOErro oRS.ActiveConnection.Errors, cERRO
+    Else
+      ADOErro oDB.Errors, cERRO
+    End If
+    Exit Function
+  End Select
+
 End Function
