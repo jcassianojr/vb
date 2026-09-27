@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
 Object = "{F22668DE-E08D-467B-8E41-13900013BD5F}#2.7#0"; "VBextra2.OCX"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.4#0"; "vbccr18.ocx"
 Begin VB.Form frmCadastroDSN 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Assistente de Configuração de DSN"
@@ -296,7 +296,7 @@ Dim sCaminho As String
     sCaminho = CommonDialog1.FolderName
     
    If sCaminho <> "" Then
-        txtDB.Text = sCaminho
+        txtDB.tEXT = sCaminho
     End If
 End Sub
 
@@ -315,7 +315,7 @@ Private Sub CmdEscolheOrigem_Click()
     
     ' Verifica se o usuário selecionou um arquivo e cancelou
     If CommonDialog1.FileName <> "" Then
-        txtDB.Text = CommonDialog1.FileName
+        txtDB.tEXT = CommonDialog1.FileName
     End If
     
         
@@ -352,27 +352,28 @@ Private Sub Form_Load()
         .AddItem "MARIADB"
         .AddItem "PGSQL"
         .AddItem "ORACLE"
+        .AddItem "FIREBIRD"
         .ListIndex = 0 ' Define MDB como padrão
     End With
-    txtPort.Text = ""
+    txtPort.tEXT = ""
     CarregarComboIni
 End Sub
 Public Sub configuraodbc()
   Dim lCONTINUA As Boolean
   Dim cCFG As String
   Dim aDAD As Variant
-  Dim X As Integer
+  Dim x As Integer
   lCONTINUA = True
-  X = 1
+  x = 1
   While lCONTINUA
-    cCFG = FixStr(PegPath("ODBCCFG", "ODBCCFG" & StrZero(X, 3)))
+    cCFG = FixStr(PegPath("ODBCCFG", "ODBCCFG" & StrZero(x, 3)))
     If InStr(cCFG, "|") = 0 Then
       lCONTINUA = False
     Else
       aDAD = Split(cCFG, "|")
       AddDSN aDAD(0), aDAD(1), aDAD(2), aDAD(3), True
     End If
-    X = X + 1
+    x = x + 1
   Wend
 
 End Sub
@@ -386,7 +387,7 @@ Private Sub cmbConfig_Click()
     
     If cmbConfig.ListIndex = -1 Then Exit Sub
     
-    LinhaCompleta = cmbConfig.Text
+    LinhaCompleta = cmbConfig.tEXT
     PosIgual = InStr(LinhaCompleta, "=")
     
     If PosIgual > 0 Then
@@ -396,9 +397,9 @@ Private Sub cmbConfig_Click()
         
         ' Garante que a linha possui os 4 parâmetros obrigatórios da sua estrutura
         If UBound(aDAD) >= 3 Then
-            txtDSN.Text = Trim(aDAD(0))          ' nomedsn
-            txtDescription.Text = Trim(aDAD(1))  ' descricao
-            txtDB.Text = Trim(aDAD(2))           ' banco ou caminho
+            txtDSN.tEXT = Trim(aDAD(0))          ' nomedsn
+            txtDescription.tEXT = Trim(aDAD(1))  ' descricao
+            txtDB.tEXT = Trim(aDAD(2))           ' banco ou caminho
             
             Dim TIPO As String
             TIPO = UCase(Trim(aDAD(3)))          ' tipo (MDB, SQLITE, DBF...)
@@ -417,23 +418,23 @@ End Sub
 Private Sub CarregarComboIni()
     Dim lCONTINUA As Boolean
     Dim cCFG As String
-    Dim X As Integer
+    Dim x As Integer
     
     cmbConfig.Clear
     lCONTINUA = True
-    X = 1
+    x = 1
     
     While lCONTINUA
         ' Utiliza as suas funções nativas do sistema para extrair a linha do wrpt.ini
-        cCFG = FixStr(PegPath("ODBCCFG", "ODBCCFG" & StrZero(X, 3)))
+        cCFG = FixStr(PegPath("ODBCCFG", "ODBCCFG" & StrZero(x, 3)))
         
         If InStr(cCFG, "|") = 0 Then
             lCONTINUA = False
         Else
             ' Adiciona a string inteira na ComboBox para podermos desmembrá-la no clique
-            cmbConfig.AddItem "ODBCCFG" & StrZero(X, 3) & "=" & cCFG
+            cmbConfig.AddItem "ODBCCFG" & StrZero(x, 3) & "=" & cCFG
         End If
-        X = X + 1
+        x = x + 1
     Wend
     
     ' Se carregou itens, deixa o primeiro selecionado por padrão
@@ -444,7 +445,7 @@ Private Sub txtDSN_LostFocus()
     Dim DsnDigitado As String
     Dim i As Integer
     
-    DsnDigitado = UCase(Trim$(txtDSN.Text))
+    DsnDigitado = UCase(Trim$(txtDSN.tEXT))
     
     ' Se o campo estiver vazio, não faz nada
     If DsnDigitado = "" Then Exit Sub
@@ -454,17 +455,17 @@ Private Sub txtDSN_LostFocus()
     If LerDoCofre(DsnDigitado, "Server") <> "" Or LerDoCofre(DsnDigitado, "Database") <> "" Then
         
         ' 1. Recupera a descrição e o banco/arquivo
-        txtDescription.Text = LerDoCofre(DsnDigitado, "Description")
-        txtDB.Text = LerDoCofre(DsnDigitado, "Database")
+        txtDescription.tEXT = LerDoCofre(DsnDigitado, "Description")
+        txtDB.tEXT = LerDoCofre(DsnDigitado, "Database")
         
         ' Se o parâmetro "Database" retornar vazio, tenta buscar por "Server" (bancos relacionais)
-        If txtDB.Text = "" Then txtDB.Text = LerDoCofre(DsnDigitado, "Banco")
+        If txtDB.tEXT = "" Then txtDB.tEXT = LerDoCofre(DsnDigitado, "Banco")
         
         ' 2. Recupera os dados de conexão com o servidor remoto
-        txtHost.Text = LerDoCofre(DsnDigitado, "Server")
-        txtUser.Text = LerDoCofre(DsnDigitado, "User")
-        txtPass.Text = LerDoCofre(DsnDigitado, "Password")
-        txtPort.Text = LerDoCofre(DsnDigitado, "Port")
+        txtHost.tEXT = LerDoCofre(DsnDigitado, "Server")
+        txtUser.tEXT = LerDoCofre(DsnDigitado, "User")
+        txtPass.tEXT = LerDoCofre(DsnDigitado, "Password")
+        txtPort.tEXT = LerDoCofre(DsnDigitado, "Port")
         
         ' 3. Tenta recuperar e ajustar o Tipo de Driver no ComboBox
         Dim DriverGuardado As String
@@ -494,7 +495,7 @@ End Sub
 ' Liga/Desliga campos do formulário de acordo com a arquitetura do banco escolhido
 Private Sub cboDriver_Click()
     Dim driver As String
-    driver = UCase(cboDriver.Text)
+    driver = UCase(cboDriver.tEXT)
     
     ' Bancos de dados baseados em arquivos locais (Não usam rede/servidor)
     If driver = "MDB" Or driver = "ACCDB" Or driver = "DBF" Or driver = "SQLITE" Then
@@ -519,22 +520,22 @@ Private Sub cboDriver_Click()
         
         ' Sugestão de portas padrões para ajudar o usuário
         Select Case driver
-            Case "MYSQL", "MARIADB": txtPort.Text = "3306"
-            Case "PGSQL":            txtPort.Text = "5432"
-            Case "MSSQL":            txtPort.Text = ""
+            Case "MYSQL", "MARIADB": txtPort.tEXT = "3306"
+            Case "PGSQL":            txtPort.tEXT = "5432"
+            Case "MSSQL":            txtPort.tEXT = ""
         End Select
     End If
 End Sub
 
 ' Ação do Botão Salvar - Valida a tela e invoca o módulo Odbc.bas [cite: 1, 4]
 Private Sub btnSalvar_Click()
-    If Trim$(txtDSN.Text) = "" Then
+    If Trim$(txtDSN.tEXT) = "" Then
         MsgBox "Por favor, defina um nome para o seu DSN.", vbExclamation, "Validação"
         txtDSN.SetFocus
         Exit Sub
     End If
     
-    If Trim$(txtDB.Text) = "" Then
+    If Trim$(txtDB.tEXT) = "" Then
         MsgBox "Defina o banco de dados ou o caminho do arquivo destino.", vbExclamation, "Validação"
         txtDB.SetFocus
         Exit Sub
@@ -543,39 +544,39 @@ Private Sub btnSalvar_Click()
     Dim blnSucesso As Boolean
     
     ' Chama a rotina mesclada unificada que processa e trata os erros [cite: 4, 9, 25]
-    blnSucesso = AddDSN(txtDSN.Text, _
-                           txtDescription.Text, _
-                           txtDB.Text, _
-                           cboDriver.Text, _
+    blnSucesso = AddDSN(txtDSN.tEXT, _
+                           txtDescription.tEXT, _
+                           txtDB.tEXT, _
+                           cboDriver.tEXT, _
                            (chkUserDSN.Value = 1), _
-                           txtHost.Text, _
-                           txtUser.Text, _
-                           txtPass.Text, _
-                           txtPort.Text)
+                           txtHost.tEXT, _
+                           txtUser.tEXT, _
+                           txtPass.tEXT, _
+                           txtPort.tEXT)
                          
     If blnSucesso Then
         If MDG("Gravar no Cofre") Then
             Dim DsnNome As String
-            DsnNome = UCase(Trim$(txtDSN.Text))
+            DsnNome = UCase(Trim$(txtDSN.tEXT))
             
             ' Sincroniza salvando também no cofre de senhas local para redundância
             On Error Resume Next
-            Call GravarNoCofre(DsnNome, "Description", txtDescription.Text)
-            Call GravarNoCofre(DsnNome, "Database", txtDB.Text)
-            Call GravarNoCofre(DsnNome, "Server", txtHost.Text)
-            Call GravarNoCofre(DsnNome, "User", txtUser.Text)
-            Call GravarNoCofre(DsnNome, "Password", txtPass.Text)
-            Call GravarNoCofre(DsnNome, "Port", txtPort.Text)
-            Call GravarNoCofre(DsnNome, "DriverType", cboDriver.Text)
+            Call GravarNoCofre(DsnNome, "Description", txtDescription.tEXT)
+            Call GravarNoCofre(DsnNome, "Database", txtDB.tEXT)
+            Call GravarNoCofre(DsnNome, "Server", txtHost.tEXT)
+            Call GravarNoCofre(DsnNome, "User", txtUser.tEXT)
+            Call GravarNoCofre(DsnNome, "Password", txtPass.tEXT)
+            Call GravarNoCofre(DsnNome, "Port", txtPort.tEXT)
+            Call GravarNoCofre(DsnNome, "DriverType", cboDriver.tEXT)
             On Error GoTo 0
         End If
-        MsgBox "DSN '" & txtDSN.Text & "' registrado e sincronizado com sucesso!", vbInformation, "Sucesso"
+        MsgBox "DSN '" & txtDSN.tEXT & "' registrado e sincronizado com sucesso!", vbInformation, "Sucesso"
     End If
 End Sub
 
 ' Ação do Botão Testar - Executa um teste de conexão ADO ativo com o DSN recém mapeado
 Private Sub btnTestar_Click()
-    If Trim$(txtDSN.Text) = "" Then
+    If Trim$(txtDSN.tEXT) = "" Then
         MsgBox "Insira o nome do DSN que deseja testar.", vbExclamation, "Aviso"
         Exit Sub
     End If
@@ -585,11 +586,11 @@ Private Sub btnTestar_Click()
     Set cn = CreateObject("ADODB.Connection")
     
     Dim strConn As String
-    strConn = "DSN=" & txtDSN.Text & ";"
+    strConn = "DSN=" & txtDSN.tEXT & ";"
     
     ' Se for um banco remoto, adiciona as credenciais informadas na tela para o teste
-    If txtUser.Enabled And Trim$(txtUser.Text) <> "" Then
-        strConn = strConn & "UID=" & txtUser.Text & ";PWD=" & txtPass.Text & ";"
+    If txtUser.Enabled And Trim$(txtUser.tEXT) <> "" Then
+        strConn = strConn & "UID=" & txtUser.tEXT & ";PWD=" & txtPass.tEXT & ";"
     End If
     
     Screen.MousePointer = vbHourglass
