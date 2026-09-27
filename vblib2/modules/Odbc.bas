@@ -15,24 +15,41 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 
-' --- DECLARACOES DE API COM SUPORTE A 32-BIT / 64-BIT ---
+' --- DECLARAÇÕES DE API ODBC COM SUPORTE A 32-BIT / 64-BIT ---
 #If VBA7 Or Win64 Then
     Public Declare PtrSafe Function SQLConfigDataSource Lib "ODBCCP32.DLL" (ByVal hWndParent As LongPtr, ByVal fRequest As Integer, ByVal lpszDriver As String, ByVal lpszAttributes As String) As Long
     Private Declare PtrSafe Function SQLInstallerError Lib "odbccp32.dll" (ByVal iError As Integer, ByRef pfErrorCode As Long, ByVal lpszErrorMsg As String, ByVal cbErrorMsgMax As Integer, ByRef pcbErrorMsg As Integer) As Integer
+    
+    ' API do Registro do Windows (Substituindo WMI)
+    Private Declare PtrSafe Function RegOpenKeyEx Lib "advapi32.dll" Alias "RegOpenKeyExA" (ByVal hKey As LongPtr, ByVal lpSubKey As String, ByVal ulOptions As Long, ByVal samDesired As Long, phkResult As LongPtr) As Long
+    Private Declare PtrSafe Function RegQueryValueEx Lib "advapi32.dll" Alias "RegQueryValueExA" (ByVal hKey As LongPtr, ByVal lpValueName As String, ByVal lpReserved As LongPtr, lpType As Long, lpData As Any, lpcbData As Long) As Long
+    Private Declare PtrSafe Function RegEnumKeyEx Lib "advapi32.dll" Alias "RegEnumKeyExA" (ByVal hKey As LongPtr, ByVal dwIndex As Long, ByVal lpName As String, lpcbName As Long, ByVal lpReserved As LongPtr, ByVal lpClass As String, lpcbClass As Long, lpftLastWriteTime As Any) As Long
+    Private Declare PtrSafe Function RegCloseKey Lib "advapi32.dll" (ByVal hKey As LongPtr) As Long
 #Else
     Public Declare Function SQLConfigDataSource Lib "odbccp32.dll" (ByVal hWndParent As Long, ByVal fRequest As Integer, ByVal lpszDriver As String, ByVal lpszAttributes As String) As Long
     Private Declare Function SQLInstallerError Lib "odbccp32.dll" (ByVal iError As Integer, ByRef pfErrorCode As Long, ByVal lpszErrorMsg As String, ByVal cbErrorMsgMax As Integer, ByRef pcbErrorMsg As Integer) As Integer
+    
+    ' API do Registro do Windows (Substituindo WMI)
+    Private Declare Function RegOpenKeyEx Lib "advapi32.dll" Alias "RegOpenKeyExA" (ByVal hKey As Long, ByVal lpSubKey As String, ByVal ulOptions As Long, ByVal samDesired As Long, phkResult As Long) As Long
+    Private Declare Function RegQueryValueEx Lib "advapi32.dll" Alias "RegQueryValueExA" (ByVal hKey As Long, ByVal lpValueName As String, ByVal lpReserved As Long, lpType As Long, lpData As Any, lpcbData As Long) As Long
+    Private Declare Function RegEnumKeyEx Lib "advapi32.dll" Alias "RegEnumKeyExA" (ByVal hKey As Long, ByVal dwIndex As Long, ByVal lpName As String, lpcbName As Long, ByVal lpReserved As Long, ByVal lpClass As String, lpcbClass As Long, lpftLastWriteTime As Any) As Long
+    Private Declare Function RegCloseKey Lib "advapi32.dll" (ByVal hKey As Long) As Long
 #End If
 
+' Constantes ODBC
 Private Const ODBC_ADD_DSN As Integer = 1
 Private Const ODBC_CONFIG_DSN As Integer = 2
 Private Const ODBC_REMOVE_DSN As Integer = 3
 Private Const ODBC_ADD_SYS_DSN As Integer = 4
 Private Const ODBC_CONFIG_SYS_DSN As Integer = 5
 Private Const ODBC_REMOVE_SYS_DSN As Integer = 6
+
+' Constantes do Registro
 Private Const HKEY_CLASSES_ROOT As Long = &H80000000
 Private Const HKEY_CURRENT_USER As Long = &H80000001
 Private Const HKEY_LOCAL_MACHINE As Long = &H80000002
+Private Const KEY_READ As Long = &H20019
+Private Const REG_SZ As Long = 1
 
 Public Function DriverExisteOdbc(cNOME As String, bE_DriverODBC As Boolean) As Boolean
     If bE_DriverODBC Then
@@ -148,8 +165,10 @@ Private Function MontarAtributosDSN(ByVal strType As String, ByVal strDB As Stri
             If Len(sUser) > 0 Then strAttributes = strAttributes & "UID=" & sUser & Chr$(0)
             If Len(sPass) > 0 Then strAttributes = strAttributes & "PWD=" & sPass & Chr$(0)
         Case "ORACLE"
-            MsgBox "Tipo de driver nao suportado no assistente.", vbExclamation
-            Exit Function
+            strDriver = "Oracle in OraClient19Home1"
+            strAttributes = "DBQ=" & strDB & Chr$(0) & _
+                            "UID=" & sUser & Chr$(0) & _
+                            "PWD=" & sPass & Chr$(0)
         Case Else
             Exit Function
     End Select
@@ -175,6 +194,7 @@ Private Function DSNExistsEscopo(ByVal dsnName As String, ByVal lUSER As Boolean
         sBase = "Software\ODBC\ODBC.INI\"
         sWow = "Software\WOW6432Node\ODBC\ODBC.INI\"
     End If
+    
     DSNExistsEscopo = RegistryReadString(nRoot, sBase & dsnName, "Driver", sValue)
     If Not DSNExistsEscopo Then
         DSNExistsEscopo = RegistryReadString(nRoot, sWow & dsnName, "Driver", sValue)
@@ -204,6 +224,7 @@ Private Function GetDsnDriverName(ByVal dsnName As String, ByVal lUSER As Boolea
     Dim nRoot As Long
     Dim sDsnBase As String
     Dim sDsnDriver As String
+    
     If lUSER Then
         nRoot = HKEY_CURRENT_USER
         sDsnBase = "Software\ODBC\ODBC.INI\"
@@ -211,6 +232,7 @@ Private Function GetDsnDriverName(ByVal dsnName As String, ByVal lUSER As Boolea
         nRoot = HKEY_LOCAL_MACHINE
         sDsnBase = "Software\ODBC\ODBC.INI\"
     End If
+    
     If Not RegistryReadString(nRoot, sDsnBase & dsnName, "Driver", sDsnDriver) Then
         If Not RegistryReadString(nRoot, "Software\WOW6432Node\ODBC\ODBC.INI\" & dsnName, "Driver", sDsnDriver) Then Exit Function
     End If
@@ -222,28 +244,38 @@ Private Function GetDsnDriverName(ByVal dsnName As String, ByVal lUSER As Boolea
 End Function
 
 Private Function MatchOdbcDriverPath(ByVal sDsnDriver As String, ByVal sDriverList As String) As String
-    Dim oReg As Object
-    Dim vDrivers As Variant
-    Dim vDriver As Variant
+    #If VBA7 Or Win64 Then
+        Dim hKey As LongPtr
+    #Else
+        Dim hKey As Long
+    #End If
+    Dim lIndex As Long
+    Dim lNameSize As Long
+    Dim sSubKeyName As String
     Dim sRegisteredPath As String
-    Dim nResult As Long
-
-    On Error GoTo Done
-    Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
-    nResult = oReg.EnumKey(HKEY_LOCAL_MACHINE, sDriverList, vDrivers)
-    If nResult <> 0 Or Not IsArray(vDrivers) Then GoTo Done
-
-    For Each vDriver In vDrivers
-        If RegistryReadString(HKEY_LOCAL_MACHINE, sDriverList & "\" & CStr(vDriver), "Driver", sRegisteredPath) Then
-            If StrComp(Replace$(sRegisteredPath, "/", "\"), _
-                       Replace$(sDsnDriver, "/", "\"), vbTextCompare) = 0 Then
-                MatchOdbcDriverPath = CStr(vDriver)
-                Exit For
+    
+    If RegOpenKeyEx(HKEY_LOCAL_MACHINE, sDriverList, 0, KEY_READ, hKey) = 0 Then
+        lIndex = 0
+        lNameSize = 255
+        sSubKeyName = Space$(lNameSize)
+        
+        Do While RegEnumKeyEx(hKey, lIndex, sSubKeyName, lNameSize, 0, vbNullString, 0, ByVal 0&) = 0
+            sSubKeyName = Left$(sSubKeyName, lNameSize)
+            
+            If RegistryReadString(HKEY_LOCAL_MACHINE, sDriverList & "\" & sSubKeyName, "Driver", sRegisteredPath) Then
+                If StrComp(Replace$(sRegisteredPath, "/", "\"), Replace$(sDsnDriver, "/", "\"), vbTextCompare) = 0 Then
+                    MatchOdbcDriverPath = sSubKeyName
+                    RegCloseKey hKey
+                    Exit Function
+                End If
             End If
-        End If
-    Next vDriver
-Done:
-    Set oReg = Nothing
+            
+            lIndex = lIndex + 1
+            lNameSize = 255
+            sSubKeyName = Space$(lNameSize)
+        Loop
+        RegCloseKey hKey
+    End If
 End Function
 
 Public Function FirebirdODBC() As String
@@ -310,30 +342,49 @@ Public Function IsDriverInstalled(ByVal sDriverName As String) As Boolean
     If IsDriverInstalled Then IsDriverInstalled = (StrComp(sValue, "Installed", vbTextCompare) = 0)
 End Function
 
+' --- API NATIVA DO REGISTRO: Substituindo dependência de WMI ---
 Private Function RegistryReadString(ByVal nRoot As Long, ByVal sSubKey As String, _
                                     ByVal sValueName As String, ByRef sValue As String) As Boolean
-    Dim oReg As Object
-    Dim nResult As Long
+    #If VBA7 Or Win64 Then
+        Dim hKey As LongPtr
+    #Else
+        Dim hKey As Long
+    #End If
+    Dim lRet As Long
+    Dim lType As Long
+    Dim lDataSize As Long
+    Dim sData As String
 
-    On Error GoTo Done
-    Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
-    nResult = oReg.GetStringValue(nRoot, sSubKey, sValueName, sValue)
-    RegistryReadString = (nResult = 0)
-Done:
-    Set oReg = Nothing
+    lRet = RegOpenKeyEx(nRoot, sSubKey, 0, KEY_READ, hKey)
+    If lRet = 0 Then
+        lRet = RegQueryValueEx(hKey, sValueName, 0, lType, ByVal 0&, lDataSize)
+        If lRet = 0 And (lType = REG_SZ) Then
+            sData = Space$(lDataSize)
+            lRet = RegQueryValueEx(hKey, sValueName, 0, 0, ByVal sData, lDataSize)
+            If lRet = 0 Then
+                If InStr(sData, Chr$(0)) > 0 Then
+                    sValue = Left$(sData, InStr(sData, Chr$(0)) - 1)
+                Else
+                    sValue = Trim$(sData)
+                End If
+                RegistryReadString = True
+            End If
+        End If
+        RegCloseKey hKey
+    End If
 End Function
 
 Private Function RegistryKeyExists(ByVal nRoot As Long, ByVal sSubKey As String) As Boolean
-    Dim oReg As Object
-    Dim vSubKeys As Variant
-    Dim nResult As Long
-
-    On Error GoTo Done
-    Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
-    nResult = oReg.EnumKey(nRoot, sSubKey, vSubKeys)
-    RegistryKeyExists = (nResult = 0)
-Done:
-    Set oReg = Nothing
+    #If VBA7 Or Win64 Then
+        Dim hKey As LongPtr
+    #Else
+        Dim hKey As Long
+    #End If
+    
+    If RegOpenKeyEx(nRoot, sSubKey, 0, KEY_READ, hKey) = 0 Then
+        RegistryKeyExists = True
+        RegCloseKey hKey
+    End If
 End Function
 
 Private Function OleDbProviderExists(ByVal sProvider As String) As Boolean
