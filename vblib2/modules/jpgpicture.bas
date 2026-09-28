@@ -1,10 +1,32 @@
 Attribute VB_Name = "jpgpicture"
 Option Explicit
 
-' http://www.codenewsgroups.net/group/microsoft.public.vb.general.discussion/topic3286.aspx
-' http://edais.mvps.org/
+' ==============================================================================
+' ENUMS POSICIONADOS NO TOPO ABSOLUTO (Evita erro de compilação)
+' ==============================================================================
+Public Enum ExifOrientationEnum
+  Exif_Orientation_Normal = 1
+  Exif_Orientation_MirrorHorizontal = 2
+  Exif_Orientation_Rotate180 = 3
+  Exif_Orientation_MirrorVertical = 4
+  Exif_Orientation_MirrorHorizontalRotate270 = 5
+  Exif_Orientation_Rotate90 = 6
+  Exif_Orientation_MirrorHorizontalRotate90 = 7
+  Exif_Orientation_Rotate270 = 8
+End Enum
 
+Public Enum RotationEnum
+    Rotate_0 = 0
+    Rotate_90 = 90
+    Rotate_180 = 180
+    Rotate_270 = 270
+End Enum
 
+Public Const EXIF_ORIENTATION As Long = 274
+
+' ==============================================================================
+' MANUTENÇÃO DA RETROCOMPATIBILIDADE GDI (Para StretchSourcePictureFromPicture)
+' ==============================================================================
 #If (VBA7 = 0) Then
 Private Enum LongPtr
 [_]
@@ -18,19 +40,12 @@ Private Const NULL_PTR As Long = 0
 Private Const PTR_SIZE As Long = 4
 #End If
 Private Const STRETCH_HALFTONE = 4
-' --- ESTRUTURA DE COMPATIBILIDADE ---
-#If VBA7 Or Win64 Then
-    ' --- VERSÃO 64-BIT / TWINBASIC / VBA7 ---
-    Private Type BITMAP
-        BMType As Long
-        BMWidth As Long
-        BMHeight As Long
-        BMWidthBytes As Long
-        BMPlanes As Integer
-        BMBitsPixel As Integer
-        BMBits As LongPtr ' Ajustado para LongPtr em 64-bit
-    End Type
 
+#If VBA7 Or Win64 Then
+    Private Type BITMAP
+        BMType As Long: BMWidth As Long: BMHeight As Long: BMWidthBytes As Long
+        BMPlanes As Integer: BMBitsPixel As Integer: BMBits As LongPtr
+    End Type
     Private Declare PtrSafe Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As LongPtr) As LongPtr
     Private Declare PtrSafe Function DeleteDC Lib "gdi32" (ByVal hDC As LongPtr) As Long
     Private Declare PtrSafe Function DeleteObject Lib "gdi32" (ByVal hObject As LongPtr) As Long
@@ -38,30 +53,16 @@ Private Const STRETCH_HALFTONE = 4
     Private Declare PtrSafe Function SelectObject Lib "gdi32" (ByVal hDC As LongPtr, ByVal hObject As LongPtr) As LongPtr
     Private Declare PtrSafe Function ReleaseDC Lib "user32" (ByVal hWnd As LongPtr, ByVal hDC As LongPtr) As Long
     Public Declare PtrSafe Function GetDesktopWindow Lib "user32" () As LongPtr
-    Private Declare PtrSafe Function GetObject Lib "gdi32" Alias "GetObjectA" _
-        (ByVal hObject As LongPtr, ByVal nCount As Long, ByRef lpObject As Any) As Long
-        Public Declare PtrSafe Function SetStretchBltMode Lib "gdi32" _
-        (ByVal hDC As LongPtr, ByVal nStretchMode As Long) As Long
-   Public Declare PtrSafe Function StretchBlt Lib "gdi32" _
-        (ByVal hdcDest As LongPtr, _
-         ByVal xDest As Long, ByVal yDest As Long, _
-         ByVal nWidthDest As Long, ByVal nHeightDest As Long, _
-         ByVal hdcSrc As LongPtr, _
-         ByVal xSrc As Long, ByVal ySrc As Long, _
-         ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, _
-         ByVal dwRop As Long) As Long
+    Private Declare PtrSafe Function GetObject Lib "gdi32" Alias "GetObjectA" (ByVal hObject As LongPtr, ByVal nCount As Long, ByRef lpObject As Any) As Long
+    Public Declare PtrSafe Function SetStretchBltMode Lib "gdi32" (ByVal hDC As LongPtr, ByVal nStretchMode As Long) As Long
+    Public Declare PtrSafe Function StretchBlt Lib "gdi32" (ByVal hdcDest As LongPtr, _
+         ByVal xDest As Long, ByVal yDest As Long, ByVal nWidthDest As Long, ByVal nHeightDest As Long, _
+         ByVal hdcSrc As LongPtr, ByVal xSrc As Long, ByVal ySrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal dwRop As Long) As Long
 #Else
-    ' --- VERSÃO 32-BIT CLÁSSICA (VB6) ---
     Private Type BITMAP
-        BMType As Long
-        BMWidth As Long
-        BMHeight As Long
-        BMWidthBytes As Long
-        BMPlanes As Integer
-        BMBitsPixel As Integer
-        BMBits As Long
+        BMType As Long: BMWidth As Long: BMHeight As Long: BMWidthBytes As Long
+        BMPlanes As Integer: BMBitsPixel As Integer: BMBits As Long
     End Type
-
     Private Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
     Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
     Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
@@ -69,209 +70,167 @@ Private Const STRETCH_HALFTONE = 4
     Private Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
     Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
     Public Declare Function GetDesktopWindow Lib "user32" () As Long
-    Private Declare Function GetObject Lib "gdi32" Alias "GetObjectA" _
-        (ByVal hObject As Long, ByVal nCount As Long, ByRef lpObject As Any) As Long
-    Public Declare Function SetStretchBltMode Lib "gdi32" _
-        (ByVal hDC As Long, ByVal nStretchMode As Long) As Long
-    Public Declare Function StretchBlt Lib "gdi32" _
-        (ByVal hdcDest As Long, _
-         ByVal xDest As Long, ByVal yDest As Long, _
-         ByVal nWidthDest As Long, ByVal nHeightDest As Long, _
-         ByVal hdcSrc As Long, _
-         ByVal XSrc As Long, ByVal YSrc As Long, _
-         ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, _
-         ByVal dwRop As Long) As Long
+    Private Declare Function GetObject Lib "gdi32" Alias "GetObjectA" (ByVal hObject As Long, ByVal nCount As Long, ByRef lpObject As Any) As Long
+    Public Declare Function SetStretchBltMode Lib "gdi32" (ByVal hDC As Long, ByVal nStretchMode As Long) As Long
+    Public Declare Function StretchBlt Lib "gdi32" (ByVal hdcDest As Long, _
+         ByVal xDest As Long, ByVal yDest As Long, ByVal nWidthDest As Long, ByVal nHeightDest As Long, _
+         ByVal hdcSrc As Long, ByVal XSrc As Long, ByVal YSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal dwRop As Long) As Long
 #End If
 
+' ==============================================================================
+' 1. MÉTODOS REFATORADOS PARA USO DA CLASSE stdImage (Fim do PicSaveLoad)
+' ==============================================================================
 
-Public Enum ExifOrientationEnum
-  Exif_Orientation_Normal = 1
-  Exif_Orientation_MirrorHorizontal = 2
-  Exif_Orientation_Rotate180 = 3
-  Exif_Orientation_MirrorVertical = 4
-  Exif_Orientation_MirrorHorizontalRotate270 = 5
-  Exif_Orientation_Rotate90 = 6
-  Exif_Orientation_MirrorHorizontalRotate90 = 7
-  Exif_Orientation_Rotate270 = 8
-End Enum
-Public Const EXIF_ORIENTATION As Long = 274
-Public Enum RotationEnum
-    Rotate_0 = 0
-    Rotate_90 = 90
-    Rotate_180 = 180
-    Rotate_270 = 270
-End Enum
-
-Public Sub RotateJpegFile(ByVal FilePath As String, Optional ByVal DegreesRotate As RotationEnum = Rotate_0)
-
-    Dim img As Object
-    Dim proc As Object
-    Set img = CreateObject("WIA.ImageFile")
-    img.LoadFile FilePath
-
-    Set proc = CreateObject("WIA.ImageProcess")
-    proc.Filters.Add proc.FilterInfos("RotateFlip").FilterID
-    proc.Filters(1).Properties("RotationAngle").Value = DegreesRotate
-
-    Set img = proc.Apply(img)
-    img.SaveFile FilePath
-End Sub
-
-Public Function GetExifOrientation(ByVal FilePath As String) As ExifOrientationEnum
-  Dim img As Object
-  Dim prop As Object
-  On Error GoTo errhandler
+Public Function StretchSourcePictureFromFile(ByVal FileName As String, ByRef picDest As PictureBox) As StdPicture
+  Dim imgObj As Object
   
-  GetExifOrientation = -1
-  
-  Set img = CreateObject("WIA.ImageFile")
-  img.LoadFile FilePath
-  
-  For Each prop In img.Properties
-    If prop.propertyId = EXIF_ORIENTATION Then
-      GetExifOrientation = CLng(prop.Value)
-      Exit Function
-    End If
-  Next prop
-errhandler:
-  Debug.Print Err.Number & " - " & Err.Description
-End Function
-
-
-
-
-
-
-
-Public Function StretchSourcePictureFromFile(ByVal filename As String, ByRef picDest As PictureBox) As StdPicture
-  Dim hMemDC As Long
-  Dim hOldBmp As Long
-  Dim hMemWdth As Long
-  Dim hMemHght As Long
-  Dim Bmp As BITMAP
-  Dim nRetVal As Long
-  Dim picSrc As StdPicture
-  Dim OldSM As ScaleModeConstants
-  Dim OldAR As Boolean
-  Dim ScaleFactor As Double
-  Dim ShowLeft As Long
-  Dim ShowTop As Long
-  Dim ShowWidth As Long
-  Dim ShowHeight As Long
-
-  If Len(filename) = 0 Then
+  If Len(FileName) = 0 Then
     Beep
     Exit Function
   End If
 
-  'Create the memory DC
-  hMemDC = CreateCompatibleDC(GetDC(GetDesktopWindow()))
-  'Load the picture
-  'Set picSrc = LoadPictureEx(FileName)
-  Set picSrc = LoadPicture(filename)
+  Set imgObj = stdImage.CreateFromFile(FileName)
+  Set StretchSourcePictureFromFile = imgObj.ToStdPicture()
 
-  'Assign the picture to the memory DC
-  hOldBmp = SelectObject(hMemDC, picSrc.Handle)
-
-  'Get the sizes of the picture
-  nRetVal = GetObject(picSrc.Handle, Len(Bmp), Bmp)
-  hMemWdth = Bmp.BMWidth
-  hMemHght = Bmp.BMHeight
-
-  'Make sure there is a picture
-  If (hMemWdth > 0) And (hMemHght > 0) Then
-
-    'Stretch the picture to the picturebox
-    With picDest
-      'Save the PictureBox's ScaleMode and set it to vbPixels
-      OldSM = .ScaleMode
-      .ScaleMode = vbPixels
-
-      'Get the largest possible scaling factor
-      ScaleFactor = Biggest(hMemWdth / .ScaleWidth, hMemHght / _
-                                                    .ScaleHeight)
-
-      'Get the positions and sizes for the destination picture
-      ShowWidth = hMemWdth / ScaleFactor
-      ShowHeight = hMemHght / ScaleFactor
-      ShowLeft = (.ScaleWidth - ShowWidth) / 2
-      ShowTop = (.ScaleHeight - ShowHeight) / 2
-
-      'Save the PictureBox's AutoRedraw and set it to True
-      OldAR = .AutoRedraw
-      .AutoRedraw = True
-
-      '.Picture = LoadPictureEx()
-      .Picture = LoadPicture()
-      .Cls
-      nRetVal = SetStretchBltMode(.hDC, STRETCH_HALFTONE)
-      nRetVal = StretchBlt(.hDC, ShowLeft, ShowTop, ShowWidth, _
-                           ShowHeight, hMemDC, 0, 0, hMemWdth, hMemHght, _
-                           vbSrcCopy)
-
-      If (nRetVal = 0) Then
-        Debug.Print "StretchBlt() Error Code " & _
-                    Err.LastDllError
-      End If
-
-      .Refresh
-    End With
-
-    'Reset the PictureBox's ScaleMode
-    picDest.ScaleMode = OldSM
-
-    'Reset the PictureBox's AutoRedraw
-    picDest.AutoRedraw = OldAR
-  End If
-
-  'Return the picture object
-  Set StretchSourcePictureFromFile = picSrc
-
-  'Clean up the used memory
-  Call SelectObject(hMemDC, hOldBmp)
-  Call DeleteDC(hMemDC)
-  Set picSrc = Nothing
+  Call StretchSourcePictureFromPicture(StretchSourcePictureFromFile, picDest)
 End Function
 
-Public Function lerarquivoimagem(ByVal STMPFILE, ByRef Picture1 As PictureBox, ByRef Picture2 As PictureBox)
+Public Function lerarquivoimagem(ByVal STMPFILE As String, ByRef Picture1 As PictureBox, ByRef Picture2 As PictureBox) As Boolean
   lerarquivoimagem = False
   If Len(STMPFILE) > 0 Then
     If FixInt(FileLen(STMPFILE)) > 500000 Then
       Alert ("Imagem Muito Grande,Ajuste o tamanho")
-      If Not MDG("Anexar mesmo assim-NAO RECOMENDADO") Then
-        Exit Function
-      Else
-        Exit Function                    'nao permitindo aumentando o banco e travando relatorio crystal
-      End If
+      If Not MDG("Anexar mesmo assim-NAO RECOMENDADO") Then Exit Function
     End If
-    Picture1.Picture = LoadPicture(STMPFILE)
-    StretchSourcePictureFromPicture Picture1, Picture2
+    
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromFile(STMPFILE)
+    Set Picture1.Picture = imgObj.ToStdPicture()
+    
+    StretchSourcePictureFromPicture Picture1.Picture, Picture2
     lerarquivoimagem = True
   End If
 End Function
-Private Sub ScaleForBestFit(ByVal picSrc As StdPicture, _
-                                           ByRef picDest As PictureBox)
-    Dim aspRatio As Single, oWid As Long, oHgt As Long
-    Dim dWidth As Long, dHeight As Long
 
- 'no form propriedades no componente ou no load
- 'Picture1.ScaleMode = 3                            ' Pixels
-  '  Picture2.ScaleMode = 3
- '   Picture1.AutoRedraw = True
+Public Function salvarpict(oFORM As Form, ByVal Picture1 As Variant, _
+                           Optional ByVal sFileName As String = "imagem", _
+                           Optional ByVal sPath As String = "")
+  Dim sFilter As String, cEXTENSAO As String
+  Dim imgObj As Object
+
+  If Len(sPath) = 0 Then sPath = App.Path
   
+  sFilter = ImgFILTER2()
+  sFileName = FileSave(oFORM, sFilter, 1, , sFileName, sPath, "Salvar Imagem")
+  cEXTENSAO = parsefile(sFileName, "E")
 
-    ' Get original image dimensions
-    oWid = picSrc.Picture.Width / Screen.TwipsPerPixelX ' Convert to pixels
-    oHgt = picSrc.Picture.Height / Screen.TwipsPerPixelY
+  If Len(sFileName) <= 0 Then
+    Alert ("Nome do arquivo nao Preenchido")
+    Exit Function
+  End If
+  
+  If FileConnExist(sFileName, False) Then
+    If MDG("Arquivo de Destino Ja existe Sobrepor") Then
+      DeleteFile sFileName, True
+    Else
+      Exit Function
+    End If
+  End If
+
+  Set imgObj = stdImage.CreateFromStdPicture(Picture1.Picture)
+  
+  Select Case UCase(cEXTENSAO)
+    Case "JPG", "JPEG": imgObj.ToFile sFileName, stdImgFormatJPEG, 70
+    Case "PNG": imgObj.ToFile sFileName, stdImgFormatPNG
+    Case "GIF": imgObj.ToFile sFileName, stdImgFormatGIF
+    Case "BMP": imgObj.ToFile sFileName, stdImgFormatBMP
+    Case Else: imgObj.ToFile sFileName, stdImgFormatDefault
+  End Select
+End Function
+
+' ==============================================================================
+' 2. PROCESSAMENTO TOTAL EM MEMÓRIA (Base64 sem MSXML2)
+' ==============================================================================
+
+Public Sub SalvarBase64ComoImagem(ByVal sBase64 As String, ByVal sCaminhoDestino As String)
+    Dim imgObj As Object
     
-    ' Desired dimensions (Picture1 area)
-    dWidth = picDest.ScaleWidth
-    dHeight = picDest.ScaleHeight
-   
-    ' Calculate aspect ratio
+    If InStr(sBase64, "data:image") = 0 Then
+        sBase64 = "data:image/png;base64," & sBase64
+    End If
+    
+    Set imgObj = stdImage.CreateFromDataURL(sBase64)
+    imgObj.ToFile sCaminhoDestino
+End Sub
+
+Public Sub Base64ParaPictureBox(ByVal sBase64 As String, ByRef picDest As PictureBox)
+    Dim imgObj As Object
+    If InStr(sBase64, "data:image") = 0 Then sBase64 = "data:image/png;base64," & sBase64
+    
+    Set imgObj = stdImage.CreateFromDataURL(sBase64)
+    Set picDest.Picture = imgObj.ToStdPicture()
+End Sub
+
+' ==============================================================================
+' 3. EXPANSÃO DE CAPACIDADES (Pronto para Uso na UI)
+' ==============================================================================
+
+Public Sub AreaDeTransferenciaParaPictureBox(ByRef picDest As PictureBox)
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromClipboard()
+    Set picDest.Picture = imgObj.ToStdPicture()
+End Sub
+
+Public Sub CapturarTelaParaPictureBox(ByRef picDest As PictureBox)
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromScreen()
+    Set picDest.Picture = imgObj.ToStdPicture()
+End Sub
+
+' ==============================================================================
+' 4. MÉTODOS INTOCADOS PARA RETROCOMPATIBILIDADE EXATA
+' ==============================================================================
+
+Public Sub StretchSourcePictureFromPicture(ByVal picSrc As StdPicture, ByRef picDest As PictureBox)
+  Dim hMemDC As Long, hOldBmp As Long, hMemWdth As Long, hMemHght As Long
+  Dim Bmp As BITMAP, nRetVal As Long
+  Dim OldSM As ScaleModeConstants, OldAR As Boolean, ScaleFactor As Double
+  Dim ShowLeft As Long, ShowTop As Long, ShowWidth As Long, ShowHeight As Long
+
+  If picSrc.Handle = 0 Then Exit Sub
+
+  hMemDC = CreateCompatibleDC(GetDC(GetDesktopWindow()))
+  hOldBmp = SelectObject(hMemDC, picSrc.Handle)
+  nRetVal = GetObject(picSrc.Handle, Len(Bmp), Bmp)
+  hMemWdth = Bmp.BMWidth
+  hMemHght = Bmp.BMHeight
+
+  If (hMemWdth > 0) And (hMemHght > 0) Then
+    With picDest
+      OldSM = .ScaleMode: .ScaleMode = vbPixels
+      ScaleFactor = Biggest(hMemWdth / .ScaleWidth, hMemHght / .ScaleHeight)
+      ShowWidth = hMemWdth / ScaleFactor: ShowHeight = hMemHght / ScaleFactor
+      ShowLeft = (.ScaleWidth - ShowWidth) / 2: ShowTop = (.ScaleHeight - ShowHeight) / 2
+      OldAR = .AutoRedraw: .AutoRedraw = True
+      .Cls
+      nRetVal = SetStretchBltMode(.hDC, STRETCH_HALFTONE)
+      nRetVal = StretchBlt(.hDC, ShowLeft, ShowTop, ShowWidth, ShowHeight, hMemDC, 0, 0, hMemWdth, hMemHght, vbSrcCopy)
+      .Refresh
+    End With
+    picDest.ScaleMode = OldSM: picDest.AutoRedraw = OldAR
+  End If
+  Call SelectObject(hMemDC, hOldBmp)
+  Call DeleteDC(hMemDC)
+End Sub
+
+Private Sub ScaleForBestFit(ByVal picSrc As StdPicture, ByRef picDest As PictureBox)
+    Dim aspRatio As Single, oWid As Long, oHgt As Long, dWidth As Long, dHeight As Long
+
+    oWid = picSrc.Picture.Width / Screen.TwipsPerPixelX
+    oHgt = picSrc.Picture.Height / Screen.TwipsPerPixelY
+    dWidth = picDest.ScaleWidth: dHeight = picDest.ScaleHeight
     aspRatio = oWid / oHgt
     
-    ' Calculate best fit
     If oWid > dWidth Or oHgt > dHeight Then
         If dWidth / dHeight > aspRatio Then
             dWidth = aspRatio * dHeight
@@ -279,185 +238,64 @@ Private Sub ScaleForBestFit(ByVal picSrc As StdPicture, _
             dHeight = dWidth / aspRatio
         End If
     Else
-        dWidth = oWid
-        dHeight = oHgt
+        dWidth = oWid: dHeight = oHgt
     End If
    
-   ' Draw result to destination picturebox (Picture1)
    picDest.Cls
    picDest.PaintPicture picSrc.Picture, 0, 0, dWidth, dHeight
    picDest.Refresh
-
-End Sub
-
-
-
-
-Public Sub StretchSourcePictureFromPicture(ByVal picSrc As StdPicture, _
-                                           ByRef picDest As PictureBox)
-  Dim hMemDC As Long
-  Dim hOldBmp As Long
-  Dim hMemWdth As Long
-  Dim hMemHght As Long
-  Dim Bmp As BITMAP
-  Dim nRetVal As Long
-  Dim OldSM As ScaleModeConstants
-  Dim OldAR As Boolean
-  Dim ScaleFactor As Double
-  Dim ShowLeft As Long
-  Dim ShowTop As Long
-  Dim ShowWidth As Long
-  Dim ShowHeight As Long
-
-  'Make sure we have a valid picture
-  If picSrc.Handle = 0 Then
-    Beep
-    Exit Sub
-  End If
-
-  'Create the memory DC
-  hMemDC = CreateCompatibleDC(GetDC(GetDesktopWindow()))
-  'Assign the picture to the memory DC
-  hOldBmp = SelectObject(hMemDC, picSrc.Handle)
-
-  'Get the sizes of the picture
-  nRetVal = GetObject(picSrc.Handle, Len(Bmp), Bmp)
-  hMemWdth = Bmp.BMWidth
-  hMemHght = Bmp.BMHeight
-
-  'Make sure there is a picture
-  If (hMemWdth > 0) And (hMemHght > 0) Then
-
-    'Stretch the picture to the picturebox
-    With picDest
-      'Save the PictureBox's ScaleMode and set it to vbPixels
-      OldSM = .ScaleMode
-      .ScaleMode = vbPixels
-
-      'Get the largest possible scaling factor
-      ScaleFactor = Biggest(hMemWdth / .ScaleWidth, hMemHght / _
-                                                    .ScaleHeight)
-
-      'Get the positions and sizes for the destination picture
-      ShowWidth = hMemWdth / ScaleFactor
-      ShowHeight = hMemHght / ScaleFactor
-      ShowLeft = (.ScaleWidth - ShowWidth) / 2
-      ShowTop = (.ScaleHeight - ShowHeight) / 2
-
-      'Save the PictureBox's AutoRedraw and set it to True
-      OldAR = .AutoRedraw
-      .AutoRedraw = True
-
-      .Cls
-      nRetVal = SetStretchBltMode(.hDC, STRETCH_HALFTONE)
-      nRetVal = StretchBlt(.hDC, ShowLeft, ShowTop, ShowWidth, _
-                           ShowHeight, hMemDC, 0, 0, hMemWdth, hMemHght, _
-                           vbSrcCopy)
-
-      If (nRetVal = 0) Then
-        Debug.Print "StretchBlt() Error Code " & _
-                    Err.LastDllError
-      End If
-
-      .Refresh
-    End With
-
-    'Reset the PictureBox's ScaleMode
-    picDest.ScaleMode = OldSM
-
-    'Reset the PictureBox's AutoRedraw
-    picDest.AutoRedraw = OldAR
-  End If
-
-  'Clean up the used memory
-  Call SelectObject(hMemDC, hOldBmp)
-  Call DeleteDC(hMemDC)
 End Sub
 
 Private Function Biggest(Val1 As Double, Val2 As Double) As Double
   Biggest = IIf(Val1 >= Val2, Val1, Val2)
 End Function
 
-Public Function salvarpict(oFORM As Form, ByVal Picture1 As Variant, _
-                           Optional ByVal sFileName As String = "imagem", _
-                           Optional ByVal sPath As String = "")
-  Dim sFILTER As String
-  Dim cEXTENSAO As String
-
-  If Len(sPath) = 0 Then
-    sPath = App.Path
-  End If
-  sFILTER = ImgFILTER2()
-  sFileName = FileSave(oFORM, sFILTER, 1, , sFileName, sPath, "Salvar Imagem")
-
-  cEXTENSAO = parsefile(sFileName, "E")
-
-  If Len(sFileName) <= 0 Then
-    Alert ("Nome do arquivo nao Preenchido")
-    Exit Function
-  End If
-  If FileConnExist(sFileName, False) Then
-    If MDG("Arquivo de Destino Ja existe Sobrepor") Then
-      DeleteFile sFileName, True  'Kill sFILENAME
-    Else
-      Exit Function
-    End If
-  End If
-  Select Case cEXTENSAO
-  Case "JPG"
-    PicSaveLoad.SavePicture Picture1.Picture, sFileName, fmtJPEG, 70
-  Case "PNG"
-    PicSaveLoad.SavePicture Picture1.Picture, sFileName, fmtPNG
-  Case "GIF"
-    PicSaveLoad.SavePicture Picture1.Picture, sFileName, fmtGIF
-  Case Else 'usa default vb
-    SavePicture Picture1.Picture, sFileName
-  End Select
-End Function
-Private Function Base64ToByte(ByVal sBase64 As String) As Byte()
-    Dim oXML As Object
-    Dim oNode As Object
+Public Sub RotateJpegFile(ByVal FilePath As String, Optional ByVal DegreesRotate As RotationEnum = Rotate_0)
+    Dim img As Object, proc As Object
+    Set img = CreateObject("WIA.ImageFile")
+    img.LoadFile FilePath
     
-    Set oXML = CreateObject("MSXML2.DOMDocument")
-    Set oNode = oXML.createElement("b64")
-    oNode.DataType = "bin.base64"
-    oNode.Text = sBase64
-    Base64ToByte = oNode.nodeTypedValue
-    Set oNode = Nothing
-    Set oXML = Nothing
-End Function
-Public Sub SalvarBase64ComoImagem(ByVal sBase64 As String, ByVal sCaminhoDestino As String)
-    Dim sDados As String
-    Dim baImagem() As Byte
-    Dim hFile As Integer
+    Set proc = CreateObject("WIA.ImageProcess")
+    proc.Filters.Add proc.FilterInfos("RotateFlip").FilterID
+    proc.Filters(1).Properties("RotationAngle").Value = DegreesRotate
     
-    ' 1. Remove o prefixo (ex: "data:image/png;base64,")
-    ' Encontra a posição da vírgula
-    If InStr(sBase64, ",") > 0 Then
-        sDados = Mid(sBase64, InStr(sBase64, ",") + 1)
-    Else
-        sDados = sBase64
-    End If
-    
-    ' 2. Converte a string Base64 para Array de Bytes
-    ' Nota: Você precisará de uma função "Base64ToByte" (abaixo)
-    baImagem = Base64ToByte(sDados)
-    
-    ' 3. Grava no disco
-    hFile = FreeFile
-    Open sCaminhoDestino For Binary Access Write As #hFile
-    Put #hFile, , baImagem
-    Close #hFile
+    Set img = proc.Apply(img)
+    img.SaveFile FilePath
 End Sub
 
- Public Function RotateImg(ByVal sImgPath As String, ByVal angle As Long) As Boolean
-        Dim pFact As ShellImageDataFactory
-        Dim pShImg As IShellImageData
-        Set pFact = New ShellImageDataFactory
-        pFact.CreateImageFromFile StrPtr(sImgPath), pShImg
-        pShImg.Decode SHIMGDEC_DEFAULT, 0, 0
-        pShImg.Rotate angle
-        Dim ipf As IPersistFile
-        Set ipf = pShImg
-        ipf.Save sImgPath, 1
-    End Function
+Public Function RotateImg(ByVal sImgPath As String, ByVal angle As Long) As Boolean
+    On Error GoTo ErroHandler
+    Dim img As Object, proc As Object
+    
+    Set img = CreateObject("WIA.ImageFile")
+    img.LoadFile sImgPath
+    
+    Set proc = CreateObject("WIA.ImageProcess")
+    proc.Filters.Add proc.FilterInfos("RotateFlip").FilterID
+    proc.Filters(1).Properties("RotationAngle").Value = angle
+    
+    Set img = proc.Apply(img)
+    
+    If Len(Dir(sImgPath)) > 0 Then Kill sImgPath
+    img.SaveFile sImgPath
+    RotateImg = True
+    Exit Function
+
+ErroHandler:
+    RotateImg = False
+End Function
+
+Public Function GetExifOrientation(ByVal FilePath As String) As ExifOrientationEnum
+  Dim img As Object, prop As Object
+  On Error GoTo errhandler
+  GetExifOrientation = -1
+  Set img = CreateObject("WIA.ImageFile")
+  img.LoadFile FilePath
+  For Each prop In img.Properties
+    If prop.propertyId = EXIF_ORIENTATION Then
+      GetExifOrientation = CLng(prop.Value)
+      Exit Function
+    End If
+  Next prop
+errhandler:
+End Function

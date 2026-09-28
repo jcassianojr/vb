@@ -1114,19 +1114,19 @@ Public Function ADO_FieldValueToString(ByRef FLD As ADODB.field, Optional ByVal 
   On Error GoTo TrataErro
 
   ADO_FieldValueToString = ""
-  Select Case (FLD.Type)
+  Select Case (FLD.type)
     '~~~~~~
   Case adBSTR, adChar, adVarChar, adVarWChar, adWChar, adLongVarChar, adLongVarWChar, adGUID:
     ADO_FieldValueToString = Nz(FLD.Value, sNullRepresentation)
     '~~~~~~
   Case adBigInt, adCurrency, adDecimal, adDouble, adInteger, adNumeric, adSingle, adSmallInt, adTinyInt, adUnsignedBigInt, adUnsignedInt, adUnsignedSmallInt, adUnsignedTinyInt, adBoolean:
-    ADO_FieldValueToString = Format(Nz(FLD.Value, sNullRepresentation))
+    ADO_FieldValueToString = format(Nz(FLD.Value, sNullRepresentation))
     '~~~~~~
   Case adVariant:
-    ADO_FieldValueToString = Format(Nz(FLD.Value, sNullRepresentation))
+    ADO_FieldValueToString = format(Nz(FLD.Value, sNullRepresentation))
     '~~~~~~
   Case adDate, adDBDate, adDBTime, adDBTimeStamp:
-    ADO_FieldValueToString = Format(Nz(FLD.Value, sNullRepresentation))
+    ADO_FieldValueToString = format(Nz(FLD.Value, sNullRepresentation))
     '~~~~~~
   Case adBinary, adVarBinary, adLongVarBinary:
     ADO_FieldValueToString = IIf(IsNull(FLD.Value), sNullRepresentation, BytesToHexString(FLD.Value))
@@ -1377,7 +1377,7 @@ Public Function BytesToHexString(vaBytes As Variant) As String
 
   For lCtr = 0 To UBound(vaBytes)
     sHex = Hex(vaBytes(lCtr))
-    sFormatted = Format(sHex, "@@")
+    sFormatted = format(sHex, "@@")
     sAccumulator = sAccumulator & Replace(sFormatted, " ", "0")
   Next
   sAccumulator = "0x" & sAccumulator
@@ -1676,7 +1676,7 @@ Public Function Mana5Fec() As Boolean
       Exit Function
     End If
     If cCAMFEC = "F" Then
-      cAno = Busca("Digite o Ano AAAA", "Competencia Ano", CStr(Format(Date, "yyyy")), 4)
+      cAno = Busca("Digite o Ano AAAA", "Competencia Ano", CStr(format(Date, "yyyy")), 4)
       cMes = Busca("Digite o Mes MM", "Competencia Mes", "01", 2)
       cARQUSO = PegCamini("{MANA5}") & "E" & cAno & "\" & aARQFEC(2) & Right(cAno, 2) & cMes & ".DBF"
       If lSEGUNDO Then
@@ -1731,23 +1731,22 @@ Public Function Mana5Fec() As Boolean
   End If
 End Function
 
-
-Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As String, Optional ByVal cWHERE As String, _
+Public Function ADOPegBlob(ByRef cPICTURE As Variant, ByVal cARQ As String, ByVal cTable As String, Optional ByVal cWHERE As String, _
                            Optional ByVal cCAMPO As String = "IMAGEM") As Boolean
-  Dim oDB As ADODB.Connection
+  Dim oDB As ADODB.connection
   Dim oRS As ADODB.Recordset
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
   Dim lFileLength As Long
   Dim abBytes() As Byte
-  Dim iFileNum As Integer
   Dim sTEMPFILE As String
   Dim aRETU As Variant
   Dim cSQL As String
   Dim mystream As New ADODB.Stream
-  mystream.Type = adTypeBinary
+  Dim imgObj As Object ' stdImage Object
 
+  mystream.type = adTypeBinary
 
   On Error GoTo errhandler
 
@@ -1757,21 +1756,21 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
   lRSOP = False
 
   aRETU = TipoConn(cARQ)
-  cARQ = aRETU(1) '//GeracArq(cARQ, , False)
+  cARQ = aRETU(1)
   
-    sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
-    If FileExists(sTEMPFILE) Then 'arquivo temporario pode apagar
-       DeleteFile sTEMPFILE, True
-    End If
+  sTEMPFILE = App.Path & "\" & format(Now, "yyyymmddhhnnss") & ".jpg"
+  If FileExists(sTEMPFILE) Then 'arquivo temporario pode apagar
+     DeleteFile sTEMPFILE, True
+  End If
   
- 'Oracle 8.1 to store image you need to create a field of LongRAW type
+  'Oracle 8.1 to store image you need to create a field of LongRAW type
   cSQL = cTable
   If cWHERE <> "" Then
      Select Case aRETU(2)
           Case "SQLITE"
-               cSQL = "select BLOB_EXPORT(" + cCAMPO + ",'" + sTEMPFILE + "' )  as imagem from " + cTable + "  WHERE " & cWHERE
+               cSQL = "select BLOB_EXPORT(" + cCAMPO + ",'" + sTEMPFILE + "' ) as imagem from " + cTable + " WHERE " & cWHERE
           Case Else
-               cSQL = "select " + cCAMPO + " from " + cTable + "  WHERE " & cWHERE
+               cSQL = "select " + cCAMPO + " from " + cTable + " WHERE " & cWHERE
      End Select
   End If
   
@@ -1779,7 +1778,7 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
      cSQL = SQLPGSQLDOUBLEQUOTES(cSQL)
   End If
 
-  Set oDB = New ADODB.Connection
+  Set oDB = New ADODB.connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
   oDB.Open cARQ
@@ -1789,17 +1788,21 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
   Set oRS = New ADODB.Recordset
   oRS.Open cSQL, oDB, adOpenForwardOnly, adLockReadOnly
   lRSOP = True
+  
   If Not oRS.EOF Then
     If Not IsNull(oRS(cCAMPO)) Then
-    
        Select Case aRETU(2)
          Case "MYSQL", "MARIADB", "PGSQL"
                mystream.Open
-               mystream.Write oRS.Fields(0)
+               mystream.Write oRS.fields(0)
                mystream.SaveToFile sTEMPFILE, adSaveCreateOverWrite
                If FileExists(sTEMPFILE) Then
                  eRETU01 = FileLen(sTEMPFILE)
-                 Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
+                 
+                 ' SUBSTUI LoadPicture NATIVO POR stdImage PARA GARANTIR RETROCOMPATIBILIDADE VISUAL
+                 Set imgObj = stdImage.CreateFromFile(sTEMPFILE)
+                 Set cPICTURE.Picture = imgObj.ToStdPicture()
+                 
                  ADOPegBlob = True
                  Kill sTEMPFILE
               End If
@@ -1807,25 +1810,25 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
          Case "SQLITE"
               If FileExists(sTEMPFILE) Then
                  eRETU01 = FileLen(sTEMPFILE)
-                 Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
+                 
+                 ' SUBSTUI LoadPicture NATIVO POR stdImage PARA GARANTIR RETROCOMPATIBILIDADE VISUAL
+                 Set imgObj = stdImage.CreateFromFile(sTEMPFILE)
+                 Set cPICTURE.Picture = imgObj.ToStdPicture()
+                 
                  ADOPegBlob = True
                  Kill sTEMPFILE
               End If
          Case Else
            lFileLength = LenB(oRS(cCAMPO))
            If lFileLength > 1 Then
-              iFileNum = FreeFile
-              Open sTEMPFILE For Binary As #iFileNum
+              ' FIM DO ARQUIVO TEMPORÁRIO E FREEFILE:
+              ' Manipula e carrega a imagem na memória pelo stdImage
               abBytes = oRS(cCAMPO).GetChunk(lFileLength)
-              Put #iFileNum, , abBytes()
-              Close #iFileNum
-      
-              If Not sTEMPFILE = "" Then
-                 Set cPICTURE.Picture = LoadPicture(sTEMPFILE)
-                eRETU01 = FileLen(sTEMPFILE)
-                ADOPegBlob = True
-              End If
-             DeleteFile sTEMPFILE, True
+              Set imgObj = stdImage.CreateFromBinary(abBytes)
+              Set cPICTURE.Picture = imgObj.ToStdPicture()
+              
+              eRETU01 = UBound(abBytes) - LBound(abBytes) + 1
+              ADOPegBlob = True
             End If
         End Select
     End If
@@ -1836,9 +1839,6 @@ Public Function ADOPegBlob(ByRef cPICTURE, ByVal cARQ As String, ByVal cTable As
   Set oRS = Nothing
   Set oDB = Nothing
   Exit Function
-
-
-
 
 errhandler:
   cERRO = "AdoPegBlob" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cSQL & Chr(13) & Chr(10)
@@ -1854,81 +1854,80 @@ errhandler:
     End If
     Exit Function
   End Select
-
 End Function
 
 
 Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
-                           ByRef cPICTURE, Optional ByVal cCAMPO As String = "IMAGEM", _
+                           ByRef cPICTURE As Variant, Optional ByVal cCAMPO As String = "IMAGEM", _
                            Optional ByVal cWHERE As String = "") As Boolean
-  Dim oDB As ADODB.Connection
+  Dim oDB As ADODB.connection
   Dim oRS As ADODB.Recordset
   Dim oCMD As ADODB.Command
   Dim lOPEN As Boolean
   Dim lRSOP As Boolean
   Dim cERRO As String
-  Dim lFileLength As Long
   Dim abBytes() As Byte
-  Dim iFileNum As Integer
   Dim sTEMPFILE As String
   Dim aRETU As Variant
   Dim cCMD As String
   Dim cSQL As String
   Dim mystream As New ADODB.Stream
-  mystream.Type = adTypeBinary
+  Dim imgObj As Object ' stdImage Object
 
+  mystream.type = adTypeBinary
 
   On Error GoTo errhandler
 
   ADOGrvBlob = False
 
   aRETU = TipoConn(cARQ)
-  cARQ = aRETU(1) ' GeracArq(cARQ)
+  cARQ = aRETU(1)
 
   lOPEN = False
   lRSOP = False
 
   cSQL = cTable
   If cWHERE <> "" Then
-    cSQL = "select " + cCAMPO + " from " + cTable + "  WHERE " & cWHERE
+    cSQL = "select " + cCAMPO + " from " + cTable + " WHERE " & cWHERE
   End If
   
   'Oracle 8.1 to store image you need to create a field of LongRAW type
-  If aRETU(2) = "MYSQL" Or aRETU(2) = "MYSQL" Then ' chave indice precisam estar o recordset
-      cSQL = "select * from " + cTable + "  WHERE " & cWHERE
+  If aRETU(2) = "MYSQL" Or aRETU(2) = "MARIADB" Then ' chave indice precisam estar o recordset
+      cSQL = "select * from " + cTable + " WHERE " & cWHERE
   End If
   
   If aRETU(2) = "PGSQL" Then
-      cSQL = "select * from " + Chr(34) + UCase(cTable) + Chr(34) + "  WHERE " + Chr(34) + cWHERE 'fazendo double quotes
+      cSQL = "select * from " + Chr(34) + UCase(cTable) + Chr(34) + " WHERE " + Chr(34) + cWHERE 'fazendo double quotes
       cSQL = Replace(cSQL, "=", Chr(34) + "=")
   End If
   
-  
+  ' REMOVIDO PICSAVELOAD: Gravação em arquivo temporário feita através de stdImage quando necessário
   If cPICTURE.Picture.Height > 0 Then
-     sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
-     PicSaveLoad.SavePicture cPICTURE.Picture, sTEMPFILE, fmtJPEG, 70
+     Set imgObj = stdImage.CreateFromStdPicture(cPICTURE.Picture)
+     sTEMPFILE = imgObj.ToTempFile(stdImgFormatJPEG) ' A classe gera um UUID único no %temp% automaticamente
   End If
   
-  Set oDB = New ADODB.Connection
+  Set oDB = New ADODB.connection
   oDB.CursorLocation = adUseClient
   oDB.ConnectionTimeout = 120
   oDB.Open cARQ
 
   lOPEN = True
   
-Select Case aRETU(2)
+  Select Case aRETU(2)
      Case "SQLITE"
-          '"Update IMAGENS  SET IMAGEM = blob_import('c:\temp\testered.jpg') where   codigo='red'"
+          '"Update IMAGENS SET IMAGEM = blob_import('c:\temp\testered.jpg') where codigo='red'"
           If cPICTURE.Picture.Height = 0 Then
-             cCMD = "Update " + cSQL + "  SET " + cCAMPO + " = NULL where  " + cWHERE
+             cCMD = "Update " + cSQL + " SET " + cCAMPO + " = NULL where " + cWHERE
           Else
-             cCMD = "Update " + cSQL + "  SET " + cCAMPO + " = blob_import('" + sTEMPFILE + "') where  " + cWHERE
+             cCMD = "Update " + cSQL + " SET " + cCAMPO + " = blob_import('" + sTEMPFILE + "') where " + cWHERE
           End If
           Set oCMD = New ADODB.Command
           oCMD.ActiveConnection = oDB
           oCMD.CommandText = cCMD
           oCMD.Execute
           Set oCMD = Nothing
+          
      Case "MYSQL", "MARIADB", "PGSQL"
         If FileExists(sTEMPFILE) Then
           Set oRS = New ADODB.Recordset
@@ -1937,7 +1936,7 @@ Select Case aRETU(2)
           If Not oRS.EOF Then
              mystream.Open
              mystream.LoadFromFile sTEMPFILE
-             oRS.Fields(cCAMPO) = mystream.Read
+             oRS.fields(cCAMPO) = mystream.Read
              mystream.Close
              oRS.Update
              ADOGrvBlob = True
@@ -1945,36 +1944,32 @@ Select Case aRETU(2)
           DeleteFile sTEMPFILE, True
           oRS.Close
         End If
+        
      Case Else
         Set oRS = New ADODB.Recordset
         oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic  ''adOpenStatic
-      
-      
+        
         lRSOP = True
         If Not oRS.EOF Then
           If cPICTURE.Picture.Height = 0 Then
-            oRS.Fields(cCAMPO) = Null
+            oRS.fields(cCAMPO) = Null
             oRS.Update
             ADOGrvBlob = True
           Else
-            iFileNum = FreeFile
-            Open sTEMPFILE For Binary Access Read As #iFileNum
-            lFileLength = LOF(iFileNum)
-            ReDim abBytes(lFileLength)
-            Get #iFileNum, , abBytes()
-            Close #iFileNum
-            'put byte array contents into db field
-            If Not sTEMPFILE = "" Then
-              oRS.Fields(cCAMPO).AppendChunk abBytes()
-              oRS.Update
-              ADOGrvBlob = True
-            End If
-            DeleteFile sTEMPFILE, True  'Kill sTEMPFILE
+            ' FIM DO ARQUIVO TEMPORÁRIO: Grava direto em memória com AppendChunk!
+            abBytes = imgObj.ToBinary(stdImgFormatJPEG)
+            oRS.fields(cCAMPO).AppendChunk abBytes
+            oRS.Update
+            ADOGrvBlob = True
+            
+            ' Como geramos o ToTempFile acima para unificar o IF inicial, nós excluímos caso exista.
+            If sTEMPFILE <> "" And FileExists(sTEMPFILE) Then DeleteFile sTEMPFILE, True
           End If
         End If
         oRS.Close
         Set oRS = Nothing
   End Select
+  
   oDB.Close
   Set oDB = Nothing
   Exit Function
@@ -1994,4 +1989,8 @@ errhandler:
     Exit Function
   End Select
 
+
+
 End Function
+
+

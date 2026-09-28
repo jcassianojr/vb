@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
 Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.4#0"; "vbccr18.ocx"
 Begin VB.Form frmIMAGENS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "IMAGENS"
@@ -415,7 +415,7 @@ Private Sub cmdClose_Click()
       End If
       If lTROCOU Then
         'CSQLI = "select imagem from imagens  WHERE CODIGO='" & ZGRP & "'"
-        ADOGrvBlob cARQ, "imagens", Picture1, "imagem", "CODIGO='" & ZGRP & "'"
+        ADOGrvBlob cARQ, "imagens", Picture1, "imagem", "CODIGO='" & zgrp & "'"
       End If
     End If
   End If
@@ -583,7 +583,7 @@ End Sub
 Private Sub Form_Load()
   Dim nTMPNUMERO
   Dim nPOS
-  Dim cWHERE As String
+  Dim cWhere As String
   Dim STMPFILE As String
 
   CenterFormToScreen Me
@@ -616,28 +616,28 @@ Private Sub Form_Load()
   End If
 
 
-  ZGRP = FixStr(ZGRP, "")
-  If Len(ZGRP) = 0 Then
+  zgrp = FixStr(zgrp, "")
+  If Len(zgrp) = 0 Then
     Alert ("Codigo em Branco")
     lABRE = False
   End If
 
   If lABRE Then
     cARQ = cARQRTF
-    nPOS = InStr(ZGRP, "|")
+    nPOS = InStr(zgrp, "|")
     If nPOS > 0 Then
-      nTMPNUMERO = Mid(ZGRP, nPOS + 1)
-      ZGRP = Mid(ZGRP, 1, nPOS - 1)
+      nTMPNUMERO = Mid(zgrp, nPOS + 1)
+      zgrp = Mid(zgrp, 1, nPOS - 1)
     Else
-      nTMPNUMERO = ZGRP
+      nTMPNUMERO = zgrp
     End If
     nTMPNUMERO = funNumeroPuro(nTMPNUMERO)
     nTMPNUMERO = Val(nTMPNUMERO)
 
 
-    cSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & ZGRP & "'"
+    cSQL = "select codigo,numero from IMAGENS WHERE CODIGO='" & zgrp & "'"
     If cBASEDADOS = "LOGIX" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
-      cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto  WHERE MATRICULA='" & ZGRP & "'"
+      cSQL = "SELECT STRZERO(MATRICULA,8) AS CODIGO,MATRICULA AS NUMERO FROM rhu_funcio_foto  WHERE MATRICULA='" & zgrp & "'"
       cSQL = cSQL & " and empresa=" & StrZero(zEMPRESA, 2)
     End If
 
@@ -648,14 +648,14 @@ Private Sub Form_Load()
       cSQL = cSQL & " FROM gip.fotos AS gip"
       cSQL = cSQL & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
       cSQL = cSQL & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
-      cSQL = cSQL & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(ZGRP, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(ZGRP, 8)
+      cSQL = cSQL & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(zgrp, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(zgrp, 8)
     End If
 
 
 
     If cBASEDADOS = "LOGIX" Or cBASEDADOS = "DATAMACE" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
     Else
-      IncluiSQL cARQ, cSQL, 2, Array("CODIGO", "NUMERO"), Array(ZGRP, nTMPNUMERO), True, False
+      IncluiSQL cARQ, cSQL, 2, Array("CODIGO", "NUMERO"), Array(zgrp, nTMPNUMERO), True, False
     End If
 
 
@@ -671,16 +671,16 @@ Private Sub Form_Load()
       txtFields(1) = nTMPNUMERO
     End If
     
-    cWHERE = ""
+    cWhere = ""
     '
     '
     '
     CSQLI = "imagens"
-    cWHERE = "CODIGO='" & ZGRP & "'"
+    cWhere = "CODIGO='" & zgrp & "'"
     If cBASEDADOS = "LOGIX" Then  'InStr(UCase(cARQ), "OL_LOGIX") > 0 Then
-      CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & ZGRP
+      CSQLI = "SELECT FOTO AS IMAGEM FROM rhu_funcio_foto  WHERE MATRICULA=" & zgrp
       CSQLI = CSQLI & " and empresa=" & StrZero(zEMPRESA, 2)
-      cWHERE = ""
+      cWhere = ""
     End If
     If cBASEDADOS = "DATAMACE" Then
       CSQLI = " SELECT"
@@ -688,16 +688,16 @@ Private Sub Form_Load()
       CSQLI = CSQLI & " FROM gip.fotos AS gip"
       CSQLI = CSQLI & " LEFT JOIN Arquivos.FOTOS  AS fotos oN gip.cd_foto=FOTOS.cd_foto"
       CSQLI = CSQLI & " LEFT JOIN TAB_CADFUN ON gip.CD_FUN_KEY_NUMERO = TAB_CADFUN.FUN_KEY_NUMERO"
-      CSQLI = CSQLI & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(ZGRP, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(ZGRP, 8)
-      cWHERE = ""
+      CSQLI = CSQLI & " WHERE TAB_CADFUN.FUN_COD_EMP='0" & Left(zgrp, 2) & "' AND TAB_CADFUN.FUN_REGISTRO=" & Right(zgrp, 8)
+      cWhere = ""
     End If
 
 
-    If ADOPegBlob(Picture1, cARQ, CSQLI, cWHERE) Then 'ADOPegBlob(cARQ, CSQLI, Picture1)
+    If ADOPegBlob(Picture1, cARQ, CSQLI, cWhere) Then 'ADOPegBlob(cARQ, CSQLI, Picture1)
       StretchSourcePictureFromPicture Picture1, Picture2
       If FixNum(eRETU01) > 500000 Then
         Alert ("Imagem Muito Grande,Ajuste o tamanho")
-        salvarpict Me, Picture1, "Imagem_" & ZGRP
+        salvarpict Me, Picture1, "Imagem_" & zgrp
         Set Picture1.Picture = Nothing
         Set Picture2.Picture = Nothing
         lTROCOU = True
@@ -793,14 +793,19 @@ Private Sub ximgsave_Click()
     salvarpict Me, Picture1, txtFields(0)
   End If
 End Sub
-
 Private Sub XPButton1_Click()
   If Picture1.Height = 0 Then
     Alert ("Sem Imagem")
   Else
     cARQRTF = "temp_" + txtFields(0) + ".JPG"
-    PicSaveLoad.SavePicture Picture1.Picture, cARQRTF, fmtJPEG, 70
+    
+    ' [NOVA IMPLEMENTAÇÃO]: Substitui o PicSaveLoad pela classe stdImage
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromStdPicture(Picture1.Picture)
+    imgObj.ToFile cARQRTF, stdImgFormatJPEG, 70
+    
     FrmPicturePrinter.Show vbModal, Me
-    Kill cARQRTF
+    
+    If FileExists(cARQRTF) Then Kill cARQRTF
   End If
 End Sub
