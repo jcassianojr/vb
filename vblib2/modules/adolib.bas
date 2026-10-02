@@ -261,8 +261,8 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   
   If cDATABASE <> "" Then
   ' -----------------------------------------------------------------
-    ' INTEGRAÇÃO COM O COFRE (modSeguranca.bas):
-    ' Se os parâmetros opcionais vierem vazios, busca no config.dat
+    ' INTEGRAÃ‡ÃƒO COM O COFRE (modSeguranca.bas):
+    ' Se os parÃ¢metros opcionais vierem vazios, busca no config.dat
     ' -----------------------------------------------------------------
     cSecaoCofre = UCase(Trim(cDATABASE))
     If Trim(cUSER) = "" Then
@@ -346,7 +346,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   End If
     '
  
-' 2. No bloco de detecção de tipo (após a checagem do SQLite):
+' 2. No bloco de detecÃ§Ã£o de tipo (apÃ³s a checagem do SQLite):
    If EArquivofirebird(cARQTMP) Or InStr(cARQTMP, "{FIREBIRD") > 0 Or InStr(cARQTMP, "[FIREBIRD") > 0 Then
        lTEMFIREBIRD = True
      TipoConn = Array(cTIPOPADRAO, cARQ, "FIREBIRD")
@@ -437,7 +437,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
             cARQ = "Driver={SQLite3 ODBC Driver};Database=" & cARQ & cAuth & ";"
             
          Case "P" ' Case Else tratado aqui para simplificar
-            ' Provider OLEDB pode variar, mas segue a lógica comum de user/password
+            ' Provider OLEDB pode variar, mas segue a lÃ³gica comum de user/password
             cARQ = "Provider=SQLite3OLEDB.1;Data Source=" & cARQ & IIf(cAuth <> "", ";" & Mid(cAuth, 2), "") & ";"
       End Select
 
@@ -634,7 +634,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   ' -------------------------------------------------------------------------
   If lTEMAPOLLO Or lTEMAPOLLOREM Then
         
-        ' Valores padrão caso o usuário/senha venham vazios (conforme documentação do Apollo)
+        ' Valores padrÃ£o caso o usuÃ¡rio/senha venham vazios (conforme documentaÃ§Ã£o do Apollo)
         If Trim(cUSER) = "" Then
            cUSER = IIf(Len(cUSER) > 0, cUSER, "SYSDBA")
         End If
@@ -647,7 +647,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
 
         If lTEMAPOLLOREM Then
             cARQ = Replace(cARQ, "[APOLLOREM]", "")
-            ' Conexão Remota com o Apollo Database Server
+            ' ConexÃ£o Remota com o Apollo Database Server
             cARQ = "Provider=ApolloOLEDB9.ApolloOLEDB9;" & _
                    "Data Source=" & cDATABASE & ";" & _
                    "ConnectionUser=" & cUSER & "; " & _
@@ -657,7 +657,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
                    "TableType=ttSXFOX; FetchCount=50; AccessMethod=amServer; CommitLevel=clNormal;"
         Else
             cARQ = Replace(cARQ, "[APOLLO]", "")
-            ' Conexão Local baseada nos exemplos dos formulários
+            ' ConexÃ£o Local baseada nos exemplos dos formulÃ¡rios
             cARQ = "Provider=ApolloOLEDB9.ApolloOLEDB9;" & _
                    "Data Source=" & cARQ & ";" & _
                    "TableType=ttSXFOX; FetchCount=50; AccessMethod=amLocal; CommitLevel=clNormal;"
@@ -817,7 +817,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     Dim cExtProp As String
     cExtProp = "Excel " & cXLSVER & ";HDR=Yes;IMEX=1"
     
-    ' Limpeza de todas as tags de Excel possíveis
+    ' Limpeza de todas as tags de Excel possÃ­veis
     cARQ = Replace(Replace(Replace(Replace(Replace(cARQ, "[XLSX]", ""), "[XLSM]", ""), "[XLSB]", ""), "[XLS]", ""), "[XLSB]", "")
     cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & cExtProp & Chr(34) & ";"
     
@@ -829,7 +829,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   If InStr(cARQTMP, "[JETTXT") > 0 Or InStr(cARQTMP, "[CSV]") > 0 Then
     Dim cFmt As String
     
-    ' Define o formato baseado na tag específica
+    ' Define o formato baseado na tag especÃ­fica
     If InStr(cARQTMP, "[JETTXTPIPE]") > 0 Then
         cFmt = "FMT=Delimited(|)"
     ElseIf InStr(cARQTMP, "[JETTXTTAB]") > 0 Then
@@ -839,7 +839,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
         cFmt = "FMT=Delimited"
     End If
     
-    ' Limpeza de todas as tags de texto/csv possíveis
+    ' Limpeza de todas as tags de texto/csv possÃ­veis
     cARQ = Replace(Replace(Replace(Replace(Replace(cARQ, "[JETTXTPIPE]", ""), "[JETTXTTAB]", ""), "[JETTXTCSV]", ""), "[JETTXT]", ""), "[CSV]", "")
     
     cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;" & cFmt & ";IMEX=1" & Chr(34) & ";"
@@ -855,8 +855,8 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     ' Limpa a tag do nome do arquivo
     cARQ = Replace(cARQ, "[JETDBFIII]", "")
     
-    ' Para DBF, não se usa delimitadores ou HDR=Yes,
-    ' a estrutura já é interpretada pelo motor dBase IV/III
+    ' Para DBF, nÃ£o se usa delimitadores ou HDR=Yes,
+    ' a estrutura jÃ¡ Ã© interpretada pelo motor dBase IV/III
     cARQ = cJETUSO & cARQ & cJetExt & "DBASE III;"
     
     TipoConn = Array(cTIPOPADRAO, cARQ, "DBF")
@@ -1016,7 +1016,7 @@ Public Function TipoDados(ByVal intType As Integer) As String
     TipoDados = "IUnknown"
 
   Case Else
-    TipoDados = "Tipo de dados não reconhecido"
+    TipoDados = "Tipo de dados nÃ£o reconhecido"
   End Select
 End Function
 
@@ -1070,15 +1070,15 @@ Public Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String =
     
     For Each errorObject In oErro
         cERRO = cERRO & "--- Erro ADO ---" & vbCrLf & _
-                "Número     : " & errorObject.Number & vbCrLf & _
-                "Descrição  : " & errorObject.Description & vbCrLf & _
+                "NÃºmero     : " & errorObject.Number & vbCrLf & _
+                "DescriÃ§Ã£o  : " & errorObject.Description & vbCrLf & _
                 "Fonte      : " & errorObject.Source & vbCrLf & _
                 "SQLState   : " & errorObject.SQLState & vbCrLf & _
                 "Erro Nativo: " & errorObject.NativeError & vbCrLf & _
                 "Trad. Nativa: " & WinApiError_ToStr(errorObject.NativeError) & vbCrLf & vbCrLf
     Next
     
-    ' Chama a função SayErro que já está configurada para exibir o log
+    ' Chama a funÃ§Ã£o SayErro que jÃ¡ estÃ¡ configurada para exibir o log
     SayErro cERRO, True
 End Function
 
@@ -1151,7 +1151,7 @@ End Sub
 
 Public Function ADO_IsOpen(ByRef oADOObject As Object) As Boolean
 
-    On Error GoTo TrataErro  'resume Next 'Evita quebra se o objeto estiver em estado inválido
+    On Error GoTo TrataErro  'resume Next 'Evita quebra se o objeto estiver em estado invÃ¡lido
         ADO_IsOpen = False
     If oADOObject Is Nothing Then Exit Function
     
@@ -1184,13 +1184,14 @@ Public Function TemTabelaADO(ByVal cARQ As String, ByVal cTabela As String, Opti
   If lMES And Not TemTabelaADO Then
     Alert ("Tabela nao Encontrada" & cTabela & Chr(13) & Chr(10) & cARQ)
   End If
-TrataErro:
-  Select Case Err.Number
-  Case Else
-    SayErro "Tem Tabela Ado :" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTabela & Chr(13) & Chr(10)
-    Exit Function
-  End Select
+  Set oTabela = Nothing
+  Set oCat = Nothing
+  Exit Function
 
+TrataErro:
+  SayErro "Tem Tabela Ado :" & Chr(13) & Chr(10) & cARQ & Chr(13) & Chr(10) & cTabela & Chr(13) & Chr(10)
+  Set oTabela = Nothing
+  Set oCat = Nothing
 End Function
 
 
@@ -1271,13 +1272,13 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
         Dim nPosPonto As Long
         Dim cNomeComExtensao As String
         
-        ' Acha a última barra do caminho
+        ' Acha a Ãºltima barra do caminho
         nPosBarra = InStrRev(cARQ, "\")
         If nPosBarra = 0 Then nPosBarra = InStrRev(cARQ, "/")
         
         cNomeComExtensao = Mid(cARQ, nPosBarra + 1)
         
-        ' Remove a extensão para pegar só o nome limpo do banco
+        ' Remove a extensÃ£o para pegar sÃ³ o nome limpo do banco
         nPosPonto = InStrRev(cNomeComExtensao, ".")
         If nPosPonto > 0 Then
             cBancoPuro = Left(cNomeComExtensao, nPosPonto - 1)
@@ -1298,8 +1299,8 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
         End If
 
     ' -------------------------------------------------------------------------
-    ' CASO 3: String de conexão ODBC Padrão (Ex: DRIVER={...};DATABASE=nomebanco)
-    ' Trata variações normais de mercado como DATABASE= ou DB=
+    ' CASO 3: String de conexÃ£o ODBC PadrÃ£o (Ex: DRIVER={...};DATABASE=nomebanco)
+    ' Trata variaÃ§Ãµes normais de mercado como DATABASE= ou DB=
     ' -------------------------------------------------------------------------
     ElseIf InStr(cUpperARQ, "DATABASE=") > 0 Or InStr(cUpperARQ, "DB=") > 0 Then
         
@@ -1310,7 +1311,7 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
             nPosStart = InStr(cUpperARQ, "DB=") + 3
         End If
         
-        ' Procura o próximo ponto e vírgula que encerra o nome do banco
+        ' Procura o prÃ³ximo ponto e vÃ­rgula que encerra o nome do banco
         nPosEnd = InStr(nPosStart, cUpperARQ, ";")
         
         If nPosEnd > 0 Then
@@ -1324,12 +1325,12 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
         cBancoPuro = Replace(cBancoPuro, "'", "")
     End If
     
-    ' Limpa espaços em branco e garante caixa alta para casar com o Harbour
+    ' Limpa espaÃ§os em branco e garante caixa alta para casar com o Harbour
     cBancoPuro = UCase(Trim(cBancoPuro))
     
     ' -------------------------------------------------------------------------
     ' CONSULTA AO COFRE (modSeguranca.bas)
-    ' Se as variáveis opcionais vierem vazias, busca usando o banco extraído
+    ' Se as variÃ¡veis opcionais vierem vazias, busca usando o banco extraÃ­do
     ' -------------------------------------------------------------------------
     'If cBancoPuro <> "" Then
     '    If Trim(cUSER) = "" Then
@@ -1388,7 +1389,7 @@ TrataErro:
   Exit Function
 End Function
 
-' Exemplo de função auxiliar para padronizar
+' Exemplo de funÃ§Ã£o auxiliar para padronizar
 Private Function GetJetExtendedProperties(cFormato As String, Optional lIMEX As Boolean = False) As String
     Dim sProps As String
     sProps = cFormato & ";HDR=Yes"
@@ -1401,7 +1402,7 @@ End Function
 Public Function EArquivoSQLite(ByVal cCaminho As String) As Boolean
   
      cCaminho = LCase(cCaminho)
-    ' Lista de extensões que o seu sistema aceita como SQLite
+    ' Lista de extensÃµes que o seu sistema aceita como SQLite
     If InStr(cCaminho, ".sqlite") > 0 Or _
        InStr(cCaminho, ".sqlite3") > 0 Or _
        InStr(cCaminho, ".db") > 0 Or _
@@ -1422,7 +1423,7 @@ End Function
 Public Function EArquivofirebird(ByVal cCaminho As String) As Boolean
   
      cCaminho = LCase(cCaminho)
-    ' Lista de extensões que o seu sistema aceita como SQLite
+    ' Lista de extensÃµes que o seu sistema aceita como SQLite
     If InStr(cCaminho, ".gdb") > 0 Or _
        InStr(cCaminho, ".ib") > 0 Or _
        InStr(cCaminho, ".fdb") > 0 Then
@@ -1435,66 +1436,228 @@ End Function
 
 
 
+Private Function IsSqlWordCharacter(ByVal cCHAR As String) As Boolean
+  Dim nCHAR As Long
+
+  If Len(cCHAR) = 0 Then Exit Function
+  nCHAR = AscW(cCHAR)
+  If nCHAR < 0 Then nCHAR = nCHAR + 65536
+
+  IsSqlWordCharacter = _
+      (nCHAR >= 65 And nCHAR <= 90) Or _
+      (nCHAR >= 97 And nCHAR <= 122) Or _
+      (nCHAR >= 48 And nCHAR <= 57) Or _
+      cCHAR = "_" Or cCHAR = "$" Or cCHAR = "@" Or cCHAR = "#" Or _
+      nCHAR > 127
+End Function
+
+Private Function IsSqlWhitespace(ByVal cCHAR As String) As Boolean
+  IsSqlWhitespace = cCHAR = " " Or cCHAR = vbTab Or _
+                    cCHAR = vbCr Or cCHAR = vbLf
+End Function
+
+Private Sub SkipSqlDelimitedText(ByVal cSQL As String, ByRef nPOS As Long, _
+                                 ByVal cCLOSE As String)
+  Dim cCHAR As String
+
+  Do While nPOS <= Len(cSQL)
+    cCHAR = Mid$(cSQL, nPOS, 1)
+    If cCHAR = cCLOSE Then
+      If nPOS < Len(cSQL) And Mid$(cSQL, nPOS + 1, 1) = cCLOSE Then
+        nPOS = nPOS + 2
+      Else
+        nPOS = nPOS + 1
+        Exit Sub
+      End If
+    Else
+      nPOS = nPOS + 1
+    End If
+  Loop
+End Sub
+
+Private Function SqlKeywordMatchesAt(ByVal cSQL As String, ByVal nPOS As Long, _
+                                     ByVal cKEYWORD As String, _
+                                     ByRef nEND As Long) As Boolean
+  Dim nSQLPOS As Long
+  Dim nKEYPOS As Long
+  Dim cKEYCHAR As String
+
+  nSQLPOS = nPOS
+  nKEYPOS = 1
+  Do While nKEYPOS <= Len(cKEYWORD)
+    cKEYCHAR = Mid$(cKEYWORD, nKEYPOS, 1)
+    If cKEYCHAR = " " Then
+      If nSQLPOS > Len(cSQL) Or Not IsSqlWhitespace(Mid$(cSQL, nSQLPOS, 1)) Then Exit Function
+      Do While nSQLPOS <= Len(cSQL)
+        If Not IsSqlWhitespace(Mid$(cSQL, nSQLPOS, 1)) Then Exit Do
+        nSQLPOS = nSQLPOS + 1
+      Loop
+    Else
+      If nSQLPOS > Len(cSQL) Then Exit Function
+      If UCase$(Mid$(cSQL, nSQLPOS, 1)) <> UCase$(cKEYCHAR) Then Exit Function
+      nSQLPOS = nSQLPOS + 1
+    End If
+    nKEYPOS = nKEYPOS + 1
+  Loop
+
+  nEND = nSQLPOS - 1
+  SqlKeywordMatchesAt = True
+End Function
+
+Private Function FindSqlKeyword(ByVal cSQL As String, ByVal cKEYWORD As String) As Long
+  Dim nPOS As Long
+  Dim nDEPTH As Long
+  Dim nEND As Long
+  Dim cCHAR As String
+  Dim cNEXT As String
+
+  nPOS = 1
+  Do While nPOS <= Len(cSQL)
+    cCHAR = Mid$(cSQL, nPOS, 1)
+    If nPOS < Len(cSQL) Then
+      cNEXT = Mid$(cSQL, nPOS + 1, 1)
+    Else
+      cNEXT = ""
+    End If
+
+    If cCHAR = "'" Or cCHAR = Chr$(34) Or cCHAR = "`" Then
+      nPOS = nPOS + 1
+      SkipSqlDelimitedText cSQL, nPOS, cCHAR
+    ElseIf cCHAR = "[" Then
+      nPOS = nPOS + 1
+      SkipSqlDelimitedText cSQL, nPOS, "]"
+    ElseIf cCHAR = "-" And cNEXT = "-" Then
+      nPOS = nPOS + 2
+      Do While nPOS <= Len(cSQL) And Mid$(cSQL, nPOS, 1) <> vbCr And Mid$(cSQL, nPOS, 1) <> vbLf
+        nPOS = nPOS + 1
+      Loop
+    ElseIf cCHAR = "/" And cNEXT = "*" Then
+      nPOS = nPOS + 2
+      Do While nPOS < Len(cSQL)
+        If Mid$(cSQL, nPOS, 2) = "*/" Then Exit Do
+        nPOS = nPOS + 1
+      Loop
+      If nPOS < Len(cSQL) Then nPOS = nPOS + 2
+    ElseIf cCHAR = "(" Then
+      nDEPTH = nDEPTH + 1
+      nPOS = nPOS + 1
+    ElseIf cCHAR = ")" Then
+      If nDEPTH > 0 Then nDEPTH = nDEPTH - 1
+      nPOS = nPOS + 1
+    ElseIf nDEPTH = 0 And IsSqlWordCharacter(cCHAR) Then
+      If nPOS = 1 Then
+        If SqlKeywordMatchesAt(cSQL, nPOS, cKEYWORD, nEND) Then
+          If nEND = Len(cSQL) Or Not IsSqlWordCharacter(Mid$(cSQL, nEND + 1, 1)) Then
+            FindSqlKeyword = nPOS
+            Exit Function
+          End If
+        End If
+      ElseIf Not IsSqlWordCharacter(Mid$(cSQL, nPOS - 1, 1)) Then
+        If SqlKeywordMatchesAt(cSQL, nPOS, cKEYWORD, nEND) Then
+          If nEND = Len(cSQL) Or Not IsSqlWordCharacter(Mid$(cSQL, nEND + 1, 1)) Then
+            FindSqlKeyword = nPOS
+            Exit Function
+          End If
+        End If
+      End If
+      nPOS = nPOS + 1
+    Else
+      nPOS = nPOS + 1
+    End If
+  Loop
+End Function
+
 Public Function TrocaSQLOrder(ByVal cSQL As String, ByVal cSUBORDER As String) As String
   Dim nPOS As Long
-  Dim cSELECT As String
-  cSELECT = cSQL
-  nPOS = InStr(UCase(cSQL), "ORDER BY")
-  If nPOS > 0 Then
-    cSELECT = Mid(cSQL, 1, nPOS - 1)
+  Dim cBASE As String
+  Dim cFINAL As String
+
+  cSQL = Trim$(cSQL)
+  If Right$(cSQL, 1) = ";" Then
+    cFINAL = ";"
+    cSQL = Trim$(Left$(cSQL, Len(cSQL) - 1))
   End If
-  TrocaSQLOrder = cSELECT & " Order By " & cSUBORDER
+
+  nPOS = FindSqlKeyword(cSQL, "ORDER BY")
+  If nPOS > 0 Then
+    cBASE = Trim$(Left$(cSQL, nPOS - 1))
+  Else
+    cBASE = Trim$(cSQL)
+  End If
+  TrocaSQLOrder = cBASE & " Order By " & cSUBORDER & cFINAL
 End Function
 
 Public Function TrocaSqlWhere(ByVal cSQL As String, ByVal cSUBWHERE As String) As String
-  Dim nPOS As Long
-  Dim nPOS2 As Long
-  Dim cSELECT As String
+  Dim nWHERE As Long
+  Dim nORDER As Long
+  Dim cBASE As String
   Dim cORDER As String
-  cSELECT = ""
-  cORDER = ""
-  nPOS = InStr(UCase(cSQL), "WHERE")
-  nPOS2 = InStr(UCase(cSQL), "ORDER BY")
-  If nPOS > 0 Then
-    cSELECT = Mid(cSQL, 1, nPOS - 1)
+  Dim cFINAL As String
+
+  cSQL = Trim$(cSQL)
+  If Right$(cSQL, 1) = ";" Then
+    cFINAL = ";"
+    cSQL = Trim$(Left$(cSQL, Len(cSQL) - 1))
   End If
-  If nPOS2 > 0 Then
-    cORDER = Mid(cSQL, nPOS2 - 1)
-    If nPOS = 0 Then
-      cSELECT = Mid(cSQL, 1, nPOS2 - 1)
-    End If
-  End If
-  If nPOS = 0 And nPOS2 = 0 Then
-    cSELECT = cSQL
-  End If
-  If Len(cSUBWHERE) > 0 Then
-    TrocaSqlWhere = Trim(cSELECT) & " WHERE " & cSUBWHERE & cORDER
+
+  nWHERE = FindSqlKeyword(cSQL, "WHERE")
+  nORDER = FindSqlKeyword(cSQL, "ORDER BY")
+
+  If nWHERE > 0 Then
+    cBASE = Left$(cSQL, nWHERE - 1)
+  ElseIf nORDER > 0 Then
+    cBASE = Left$(cSQL, nORDER - 1)
   Else
-    TrocaSqlWhere = Trim(cSELECT) & " " & cORDER
+    cBASE = cSQL
+  End If
+
+  If nORDER > 0 Then cORDER = " " & Trim$(Mid$(cSQL, nORDER))
+  If Len(cSUBWHERE) > 0 Then
+    TrocaSqlWhere = Trim$(cBASE) & " WHERE " & cSUBWHERE & cORDER & cFINAL
+  Else
+    TrocaSqlWhere = Trim$(cBASE) & cORDER & cFINAL
   End If
 End Function
 
 Public Function NomeTableSql(ByVal cSQL As String, Optional ByVal cEXTENSAO As String = "") As String
-  Dim nPOS As Integer
+  Dim nPOS As Long
+  Dim nSTART As Long
   Dim cNOME As String
-  NomeTableSql = ""
-  cSQL = UCase(cSQL)
-  cSQL = Replace(cSQL, Chr(13), " ")
-  cSQL = Replace(cSQL, Chr(10), " ")
-  nPOS = InStr(cSQL, "FROM")
-  If nPOS > 0 Then
-    cNOME = Mid(cSQL, nPOS + 5)
-    nPOS = InStr(cNOME, " ")
-    If nPOS > 0 Then
-      cNOME = Mid(cNOME, 1, nPOS - 1)
+  Dim cCHAR As String
+
+  nPOS = FindSqlKeyword(cSQL, "FROM")
+  If nPOS = 0 Then
+    If UCase$(cEXTENSAO) = ".DBF" Then
+      NomeTableSql = UCase$(Trim$(cSQL)) & cEXTENSAO
     End If
-    cNOME = cNOME + cEXTENSAO
-    NomeTableSql = cNOME
-  Else
-    If cEXTENSAO = ".DBF" Then               ''passado no sql o nome da tabela direto exemplo bcofgts
-      NomeTableSql = cSQL + cEXTENSAO
-    End If
+    Exit Function
   End If
+
+  nSTART = nPOS + 4
+  Do While nSTART <= Len(cSQL)
+    If Not IsSqlWhitespace(Mid$(cSQL, nSTART, 1)) Then Exit Do
+    nSTART = nSTART + 1
+  Loop
+
+  If nSTART > Len(cSQL) Then Exit Function
+  nPOS = nSTART
+  Do While nPOS <= Len(cSQL)
+    cCHAR = Mid$(cSQL, nPOS, 1)
+    If cCHAR = "[" Then
+      nPOS = nPOS + 1
+      SkipSqlDelimitedText cSQL, nPOS, "]"
+    ElseIf cCHAR = Chr$(34) Or cCHAR = "`" Then
+      nPOS = nPOS + 1
+      SkipSqlDelimitedText cSQL, nPOS, cCHAR
+    ElseIf IsSqlWhitespace(cCHAR) Or cCHAR = "," Or cCHAR = ";" Or cCHAR = ")" Then
+      Exit Do
+    Else
+      nPOS = nPOS + 1
+    End If
+  Loop
+  cNOME = Mid$(cSQL, nSTART, nPOS - nSTART)
+
+  NomeTableSql = UCase$(cNOME) & cEXTENSAO
 End Function
 
 Public Function MontaFiltro(ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal eBUSCA As Variant, ByVal nIndex As Integer)
@@ -1512,91 +1675,98 @@ Public Function MontaFiltro(ByVal aCAM As Variant, ByVal aFOR As Variant, ByVal 
   End Select
 End Function
 
-Public Function IsQuerySafe(ByVal sql As String) As Boolean
-    Dim cleanSQL As String
-    Dim i As Integer
-    Dim charCode As Integer
-    Dim currentChar As String
-    Dim forbiddenWords As Variant
-    
-    ' 1. Normaliza para mai?sculas
-    cleanSQL = UCase(sql)
-    
-    ' 2. Substitui caracteres n?o-alfab?ticos por espa?os
-    ' Isso separa as palavras que o atacante tentou colar
-    For i = 1 To Len(cleanSQL)
-        currentChar = Mid(cleanSQL, i, 1)
-        charCode = Asc(currentChar)
-        ' Mant?m A-Z e n?meros
-        If Not ((charCode >= 65 And charCode <= 90) Or (charCode >= 48 And charCode <= 57)) Then
-            Mid(cleanSQL, i, 1) = " "
-        End If
-    Next i
-    
-    ' 3. Remove excesso de espa?os para facilitar a an?lise
-    cleanSQL = Trim(Replace(Replace(cleanSQL, "  ", " "), "  ", " "))
-    
-    ' 4. Verifica se a primeira palavra ? SELECT
-    ' Dividimos para pegar apenas a primeira parte
-    If Split(cleanSQL, " ")(0) <> "SELECT" Then
-        IsQuerySafe = False
+Private Function SqlHasKeyword(ByVal cSQL As String, ByVal aKEYWORDS As Variant) As Boolean
+  Dim nPOS As Long
+  Dim cTOKEN As String
+  Dim nITEM As Long
+
+  nPOS = 1
+  Do
+    cTOKEN = NextSqlKeyword(cSQL, nPOS)
+    If Len(cTOKEN) = 0 Then Exit Do
+    For nITEM = LBound(aKEYWORDS) To UBound(aKEYWORDS)
+      If cTOKEN = aKEYWORDS(nITEM) Then
+        SqlHasKeyword = True
         Exit Function
+      End If
+    Next nITEM
+  Loop
+End Function
+
+Private Function NextSqlKeyword(ByVal cSQL As String, ByRef nPOS As Long) As String
+  Dim nSTART As Long
+  Dim nLENGTH As Long
+  Dim cCHAR As String
+  Dim cNEXT As String
+
+  nLENGTH = Len(cSQL)
+  Do While nPOS <= nLENGTH
+    cCHAR = Mid$(cSQL, nPOS, 1)
+    If nPOS < nLENGTH Then
+      cNEXT = Mid$(cSQL, nPOS + 1, 1)
+    Else
+      cNEXT = ""
     End If
-    
-    ' 5. Lista de palavras proibidas (sem espa?os nas pontas)
-    forbiddenWords = Array("DELETE", "DROP", "UPDATE", "INSERT", _
-                           "CREATE", "ALTER", "TRUNCATE", "EXEC", _
-                           "EXECUTE", "GRANT", "REVOKE", "INTO")
-    
-    ' 6. Verifica se alguma palavra proibida existe na string processada
-    ' Como limpamos a string no passo 2, o InStr encontrar? a palavra
-    ' mesmo que ela estivesse grudada originalmente
-    For i = LBound(forbiddenWords) To UBound(forbiddenWords)
-        If InStr(cleanSQL, forbiddenWords(i)) > 0 Then
-            IsQuerySafe = False
-            RegistrarLogSeguranca (sql)
-            Exit Function
-        End If
-    Next i
-    
-    IsQuerySafe = True
+
+    If cCHAR = "'" Or cCHAR = Chr$(34) Or cCHAR = "`" Then
+      nPOS = nPOS + 1
+      SkipSqlDelimitedText cSQL, nPOS, cCHAR
+    ElseIf cCHAR = "[" Then
+      nPOS = nPOS + 1
+      SkipSqlDelimitedText cSQL, nPOS, "]"
+    ElseIf cCHAR = "-" And cNEXT = "-" Then
+      nPOS = nPOS + 2
+      Do While nPOS <= nLENGTH And Mid$(cSQL, nPOS, 1) <> vbCr And Mid$(cSQL, nPOS, 1) <> vbLf
+        nPOS = nPOS + 1
+      Loop
+    ElseIf cCHAR = "/" And cNEXT = "*" Then
+      nPOS = nPOS + 2
+      Do While nPOS < nLENGTH
+        If Mid$(cSQL, nPOS, 2) = "*/" Then Exit Do
+        nPOS = nPOS + 1
+      Loop
+      If nPOS < nLENGTH Then nPOS = nPOS + 2
+    ElseIf IsSqlWordCharacter(cCHAR) Then
+      nSTART = nPOS
+      Do While nPOS <= nLENGTH
+        If Not IsSqlWordCharacter(Mid$(cSQL, nPOS, 1)) Then Exit Do
+        nPOS = nPOS + 1
+      Loop
+      NextSqlKeyword = UCase$(Mid$(cSQL, nSTART, nPOS - nSTART))
+      Exit Function
+    Else
+      nPOS = nPOS + 1
+    End If
+  Loop
+End Function
+
+Public Function IsQuerySafe(ByVal sql As String) As Boolean
+  Dim nPOS As Long
+  Dim cTOKEN As String
+  Dim forbiddenWords As Variant
+
+  forbiddenWords = Array("DELETE", "DROP", "UPDATE", "INSERT", _
+                         "CREATE", "ALTER", "TRUNCATE", "EXEC", _
+                         "EXECUTE", "GRANT", "REVOKE", "INTO")
+
+  nPOS = 1
+  cTOKEN = NextSqlKeyword(sql, nPOS)
+  If cTOKEN <> "SELECT" Then Exit Function
+
+  If SqlHasKeyword(Mid$(sql, nPOS), forbiddenWords) Then
+    RegistrarLogSeguranca sql
+    Exit Function
+  End If
+
+  IsQuerySafe = True
 End Function
 
 Public Function IsQueryDestructive(ByVal sql As String) As Boolean
-    Dim cleanSQL As String
-    Dim i As Integer, charCode As Integer
-    Dim destrutivos As Variant
-    
-    ' 1. Normaliza para mai?sculas
-    cleanSQL = UCase(sql)
-    
-    ' 2. Limpeza profunda: substitui tudo que n?o ? letra ou n?mero por espa?o
-    ' Isso garante que "DELETE;" ou "DROP--" virem "DELETE " ou "DROP "
-    For i = 1 To Len(cleanSQL)
-        charCode = Asc(Mid(cleanSQL, i, 1))
-        If Not ((charCode >= 65 And charCode <= 90) Or (charCode >= 48 And charCode <= 57)) Then
-            Mid(cleanSQL, i, 1) = " "
-        End If
-    Next i
-    
-    ' 3. Remove espa?os extras para deixar a string "limpa"
-    cleanSQL = Trim(Replace(Replace(cleanSQL, "  ", " "), "  ", " "))
-    
-    ' 4. Lista do que ? proibido
-    ' Como removemos os s?mbolos, basta buscar a palavra pura
-    destrutivos = Array("DROP", "ALTER", "CREATE", "TRUNCATE", "GRANT", "REVOKE")
-    
-    ' 5. Verifica se alguma palavra proibida existe dentro da string limpa
-    ' O InStr encontrar? "DROP" mesmo se estiver no meio da frase ou sem espa?os
-    For i = LBound(destrutivos) To UBound(destrutivos)
-        If InStr(cleanSQL, destrutivos(i)) > 0 Then
-            IsQueryDestructive = True ' ? destrutivo!
-            RegistrarLogSeguranca (sql)
-            Exit Function
-        End If
-    Next i
-    
-    IsQueryDestructive = False ' ? seguro para prosseguir
+  Dim destrutivos As Variant
+
+  destrutivos = Array("DROP", "ALTER", "CREATE", "TRUNCATE", "GRANT", "REVOKE")
+  IsQueryDestructive = SqlHasKeyword(sql, destrutivos)
+  If IsQueryDestructive Then RegistrarLogSeguranca sql
 End Function
 
 Public Sub RegistrarLogSeguranca(ByVal cSQL As String)
@@ -1765,7 +1935,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
     cSQL = "select " + cCAMPO + " from " + cTable + " WHERE " & cWHERE
   End If
   
-  ' Ajustes específicos baseados no TipoConn para recordsets
+  ' Ajustes especÃ­ficos baseados no TipoConn para recordsets
   If UCase(aRETU(2)) = "MYSQL" Or UCase(aRETU(2)) = "MARIADB" Then
       cSQL = "select * from " + cTable + " WHERE " & cWHERE
   End If
@@ -1789,7 +1959,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
   
   Select Case UCase(aRETU(2))
      
-     ' ESTRATÉGIA 1: SQLite via comando SQL nativo (blob_import)
+     ' ESTRATÃ‰GIA 1: SQLite via comando SQL nativo (blob_import)
      Case "SQLITE"
           If cPICTURE.Picture.Height = 0 Then
              cCMD = "Update " + cSQL + " SET " + cCAMPO + " = NULL where " + cWHERE
@@ -1802,7 +1972,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
           oCMD.Execute
           Set oCMD = Nothing
           
-     ' ESTRATÉGIA 2: MySQL, MariaDB, PostgreSQL via ADODB.Stream
+     ' ESTRATÃ‰GIA 2: MySQL, MariaDB, PostgreSQL via ADODB.Stream
      Case "MYSQL", "MARIADB", "PGSQL"
         If FileExists(sTEMPFILE) Then
           Set oRS = New ADODB.Recordset
@@ -1820,8 +1990,8 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
           oRS.Close
         End If
         
-     ' ESTRATÉGIA 3: Bancos Nativos/Robustos (SQLSERVER, ORACLE, FIREBIRD, MDB, ACCDB, APOLLO, DBF)
-     ' Trabalha 100% em memória RAM. Alta velocidade e estabilidade.
+     ' ESTRATÃ‰GIA 3: Bancos Nativos/Robustos (SQLSERVER, ORACLE, FIREBIRD, MDB, ACCDB, APOLLO, DBF)
+     ' Trabalha 100% em memÃ³ria RAM. Alta velocidade e estabilidade.
      Case Else
         Set oRS = New ADODB.Recordset
         oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic
@@ -1838,7 +2008,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
             oRS.Update
             ADOGrvBlob = True
             
-            ' Como geramos o temp acima por precaução, nós o excluímos
+            ' Como geramos o temp acima por precauÃ§Ã£o, nÃ³s o excluÃ­mos
             If sTEMPFILE <> "" And FileExists(sTEMPFILE) Then DeleteFile sTEMPFILE, True
           End If
         End If
@@ -1921,7 +2091,7 @@ Public Function ADOPegBlob(ByRef cPICTURE As Variant, ByVal cARQ As String, ByVa
     If Not IsNull(oRS(cCAMPO)) Then
        Select Case UCase(aRETU(2))
          
-         ' ESTRATÉGIA 1: SGBDs Open Source baseados em ODBC (Uso de ADODB.Stream p/ evitar quebra de ponteiro)
+         ' ESTRATÃ‰GIA 1: SGBDs Open Source baseados em ODBC (Uso de ADODB.Stream p/ evitar quebra de ponteiro)
          Case "MYSQL", "MARIADB", "PGSQL"
                mystream.Open
                mystream.Write oRS.Fields(0)
@@ -1935,7 +2105,7 @@ Public Function ADOPegBlob(ByRef cPICTURE As Variant, ByVal cARQ As String, ByVa
               End If
               mystream.Close
          
-         ' ESTRATÉGIA 2: SQLite via comando nativo SQL (Arquivo gerado pela própria Engine)
+         ' ESTRATÃ‰GIA 2: SQLite via comando nativo SQL (Arquivo gerado pela prÃ³pria Engine)
          Case "SQLITE"
               If FileExists(sTEMPFILE) Then
                  eRETU01 = FileLen(sTEMPFILE)
@@ -1945,7 +2115,7 @@ Public Function ADOPegBlob(ByRef cPICTURE As Variant, ByVal cARQ As String, ByVa
                  Kill sTEMPFILE
               End If
          
-         ' ESTRATÉGIA 3: SGBDs Robustos / Nativos Microsoft (Memória RAM Pura via GetChunk)
+         ' ESTRATÃ‰GIA 3: SGBDs Robustos / Nativos Microsoft (MemÃ³ria RAM Pura via GetChunk)
          ' Cobre: SQLSERVER, ORACLE, FIREBIRD, INTERBASE, MDB, ACEOLEDB, DBF, APOLLO, etc.
          Case Else
            lFileLength = LenB(oRS(cCAMPO))
