@@ -41,6 +41,20 @@ Private Const PTR_SIZE As Long = 4
 #End If
 Private Const STRETCH_HALFTONE = 4
 
+Private Type GUID
+  Data1 As Long
+  Data2 As Integer
+  Data3 As Integer
+  Data4(0 To 7) As Byte
+End Type
+
+Private Type PICTDESC
+  Size As Long
+  PictureType As Long
+  hPic As LongPtr
+  hPal As LongPtr
+End Type
+
 #If VBA7 Or Win64 Then
     Private Type BITMAP
         BMType As Long: BMWidth As Long: BMHeight As Long: BMWidthBytes As Long
@@ -53,6 +67,9 @@ Private Const STRETCH_HALFTONE = 4
     Private Declare PtrSafe Function SelectObject Lib "gdi32" (ByVal hDC As LongPtr, ByVal hObject As LongPtr) As LongPtr
     Private Declare PtrSafe Function ReleaseDC Lib "user32" (ByVal hWnd As LongPtr, ByVal hDC As LongPtr) As Long
     Public Declare PtrSafe Function GetDesktopWindow Lib "user32" () As LongPtr
+    Private Declare PtrSafe Function CopyImage Lib "user32" (ByVal hImage As LongPtr, ByVal uType As Long, ByVal cx As Long, ByVal cy As Long, ByVal fuFlags As Long) As LongPtr
+    Private Declare PtrSafe Function IIDFromString Lib "ole32" (ByVal lpsz As LongPtr, ByRef lpiid As GUID) As Long
+    Private Declare PtrSafe Function OleCreatePictureIndirect Lib "oleaut32" (ByRef PicDesc As PICTDESC, ByRef RefIID As GUID, ByVal fPictureOwnsHandle As Long, ByRef iPic As StdPicture) As Long
     Private Declare PtrSafe Function GetObject Lib "gdi32" Alias "GetObjectA" (ByVal hObject As LongPtr, ByVal nCount As Long, ByRef lpObject As Any) As Long
     Public Declare PtrSafe Function SetStretchBltMode Lib "gdi32" (ByVal hDC As LongPtr, ByVal nStretchMode As Long) As Long
     Public Declare PtrSafe Function StretchBlt Lib "gdi32" (ByVal hdcDest As LongPtr, _
@@ -70,12 +87,53 @@ Private Const STRETCH_HALFTONE = 4
     Private Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
     Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
     Public Declare Function GetDesktopWindow Lib "user32" () As Long
+    Private Declare Function CopyImage Lib "user32" (ByVal hImage As Long, ByVal uType As Long, ByVal cx As Long, ByVal cy As Long, ByVal fuFlags As Long) As Long
+    Private Declare Function IIDFromString Lib "ole32" (ByVal lpsz As Long, ByRef lpiid As GUID) As Long
+    Private Declare Function OleCreatePictureIndirect Lib "oleaut32" (ByRef PicDesc As PICTDESC, ByRef RefIID As GUID, ByVal fPictureOwnsHandle As Long, ByRef iPic As StdPicture) As Long
     Private Declare Function GetObject Lib "gdi32" Alias "GetObjectA" (ByVal hObject As Long, ByVal nCount As Long, ByRef lpObject As Any) As Long
     Public Declare Function SetStretchBltMode Lib "gdi32" (ByVal hDC As Long, ByVal nStretchMode As Long) As Long
     Public Declare Function StretchBlt Lib "gdi32" (ByVal hdcDest As Long, _
          ByVal xDest As Long, ByVal yDest As Long, ByVal nWidthDest As Long, ByVal nHeightDest As Long, _
          ByVal hdcSrc As Long, ByVal XSrc As Long, ByVal YSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal dwRop As Long) As Long
 #End If
+
+Private Function PictureWithOwnedBitmap(ByVal sourcePicture As StdPicture) As StdPicture
+  Const IMAGE_BITMAP As Long = 0
+  Const LR_CREATEDIBSECTION As Long = &H2000
+  Const PICTYPE_BITMAP As Long = 1
+  Dim pictureIID As GUID
+  Dim pictureDesc As PICTDESC
+  Dim bitmapCopy As LongPtr
+  Dim result As Long
+
+  If sourcePicture Is Nothing Then
+    Err.Raise 5, "jpgpicture.PictureWithOwnedBitmap", "A source picture is required."
+  End If
+  If sourcePicture.Handle = 0 Then
+    Err.Raise 5, "jpgpicture.PictureWithOwnedBitmap", "The source picture has no bitmap handle."
+  End If
+  If IIDFromString(StrPtr("{7BF80980-BF32-101A-8BBB-00AA00300CAB}"), pictureIID) <> 0 Then
+    Err.Raise vbObjectError + 1000, "jpgpicture.PictureWithOwnedBitmap", "Could not resolve the StdPicture interface."
+  End If
+
+  bitmapCopy = CopyImage(sourcePicture.Handle, IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION)
+  If bitmapCopy = NULL_PTR Then
+    Err.Raise vbObjectError + 1001, "jpgpicture.PictureWithOwnedBitmap", "Could not duplicate the image bitmap."
+  End If
+
+  With pictureDesc
+    .Size = Len(pictureDesc)
+    .PictureType = PICTYPE_BITMAP
+    .hPic = bitmapCopy
+    .hPal = NULL_PTR
+  End With
+
+  result = OleCreatePictureIndirect(pictureDesc, pictureIID, 1, PictureWithOwnedBitmap)
+  If result <> 0 Then
+    Call DeleteObject(bitmapCopy)
+    Err.Raise vbObjectError + 1002, "jpgpicture.PictureWithOwnedBitmap", "Could not create an independently owned StdPicture."
+  End If
+End Function
 
 ' ==============================================================================
 ' 1. MÉTODOS REFATORADOS PARA USO DA CLASSE stdImage (Fim do PicSaveLoad)
@@ -90,7 +148,7 @@ Public Function StretchSourcePictureFromFile(ByVal FileName As String, ByRef pic
   End If
 
   Set imgObj = stdImage.CreateFromFile(FileName)
-  Set StretchSourcePictureFromFile = imgObj.ToStdPicture()
+  Set StretchSourcePictureFromFile = PictureWithOwnedBitmap(imgObj.ToStdPicture())
 
   Call StretchSourcePictureFromPicture(StretchSourcePictureFromFile, picDest)
 End Function
@@ -105,7 +163,7 @@ Public Function lerarquivoimagem(ByVal STMPFILE As String, ByRef Picture1 As Pic
     
     Dim imgObj As Object
     Set imgObj = stdImage.CreateFromFile(STMPFILE)
-    Set Picture1.Picture = imgObj.ToStdPicture()
+    Set Picture1.Picture = PictureWithOwnedBitmap(imgObj.ToStdPicture())
     
     StretchSourcePictureFromPicture Picture1.Picture, Picture2
     lerarquivoimagem = True
@@ -168,7 +226,7 @@ Public Sub Base64ParaPictureBox(ByVal sBase64 As String, ByRef picDest As Pictur
     If InStr(sBase64, "data:image") = 0 Then sBase64 = "data:image/png;base64," & sBase64
     
     Set imgObj = stdImage.CreateFromDataURL(sBase64)
-    Set picDest.Picture = imgObj.ToStdPicture()
+    Set picDest.Picture = PictureWithOwnedBitmap(imgObj.ToStdPicture())
 End Sub
 
 ' ==============================================================================
@@ -178,13 +236,13 @@ End Sub
 Public Sub AreaDeTransferenciaParaPictureBox(ByRef picDest As PictureBox)
     Dim imgObj As Object
     Set imgObj = stdImage.CreateFromClipboard()
-    Set picDest.Picture = imgObj.ToStdPicture()
+    Set picDest.Picture = PictureWithOwnedBitmap(imgObj.ToStdPicture())
 End Sub
 
 Public Sub CapturarTelaParaPictureBox(ByRef picDest As PictureBox)
     Dim imgObj As Object
     Set imgObj = stdImage.CreateFromScreen()
-    Set picDest.Picture = imgObj.ToStdPicture()
+    Set picDest.Picture = PictureWithOwnedBitmap(imgObj.ToStdPicture())
 End Sub
 
 ' ==============================================================================
@@ -192,15 +250,33 @@ End Sub
 ' ==============================================================================
 
 Public Sub StretchSourcePictureFromPicture(ByVal picSrc As StdPicture, ByRef picDest As PictureBox)
-  Dim hMemDC As Long, hOldBmp As Long, hMemWdth As Long, hMemHght As Long
+  Dim hMemDC As LongPtr, hDesktopDC As LongPtr, hOldBmp As LongPtr
+  Dim hDesktopWnd As LongPtr, hMemWdth As Long, hMemHght As Long
   Dim Bmp As BITMAP, nRetVal As Long
   Dim OldSM As ScaleModeConstants, OldAR As Boolean, ScaleFactor As Double
   Dim ShowLeft As Long, ShowTop As Long, ShowWidth As Long, ShowHeight As Long
+  Dim scaleModeChanged As Boolean, autoRedrawChanged As Boolean
+  Dim errorNumber As Long, errorSource As String, errorDescription As String
 
   If picSrc.Handle = 0 Then Exit Sub
 
-  hMemDC = CreateCompatibleDC(GetDC(GetDesktopWindow()))
+  On Error GoTo ErrorHandler
+  hDesktopWnd = GetDesktopWindow()
+  hDesktopDC = GetDC(hDesktopWnd)
+  If hDesktopDC = NULL_PTR Then Exit Sub
+
+  hMemDC = CreateCompatibleDC(hDesktopDC)
+  If hMemDC = NULL_PTR Then
+    Call ReleaseDC(hDesktopWnd, hDesktopDC)
+    Exit Sub
+  End If
+
   hOldBmp = SelectObject(hMemDC, picSrc.Handle)
+  If hOldBmp = NULL_PTR Or hOldBmp = -1 Then
+    Call DeleteDC(hMemDC)
+    Call ReleaseDC(hDesktopWnd, hDesktopDC)
+    Exit Sub
+  End If
   nRetVal = GetObject(picSrc.Handle, Len(Bmp), Bmp)
   hMemWdth = Bmp.BMWidth
   hMemHght = Bmp.BMHeight
@@ -208,19 +284,34 @@ Public Sub StretchSourcePictureFromPicture(ByVal picSrc As StdPicture, ByRef pic
   If (hMemWdth > 0) And (hMemHght > 0) Then
     With picDest
       OldSM = .ScaleMode: .ScaleMode = vbPixels
+      scaleModeChanged = True
       ScaleFactor = Biggest(hMemWdth / .ScaleWidth, hMemHght / .ScaleHeight)
       ShowWidth = hMemWdth / ScaleFactor: ShowHeight = hMemHght / ScaleFactor
       ShowLeft = (.ScaleWidth - ShowWidth) / 2: ShowTop = (.ScaleHeight - ShowHeight) / 2
       OldAR = .AutoRedraw: .AutoRedraw = True
+      autoRedrawChanged = True
       .Cls
       nRetVal = SetStretchBltMode(.hDC, STRETCH_HALFTONE)
       nRetVal = StretchBlt(.hDC, ShowLeft, ShowTop, ShowWidth, ShowHeight, hMemDC, 0, 0, hMemWdth, hMemHght, vbSrcCopy)
       .Refresh
     End With
-    picDest.ScaleMode = OldSM: picDest.AutoRedraw = OldAR
   End If
+
+CleanUp:
+  On Error GoTo 0
   Call SelectObject(hMemDC, hOldBmp)
   Call DeleteDC(hMemDC)
+  Call ReleaseDC(hDesktopWnd, hDesktopDC)
+  If autoRedrawChanged Then picDest.AutoRedraw = OldAR
+  If scaleModeChanged Then picDest.ScaleMode = OldSM
+  If errorNumber <> 0 Then Err.Raise errorNumber, errorSource, errorDescription
+  Exit Sub
+
+ErrorHandler:
+  errorNumber = Err.Number
+  errorSource = Err.Source
+  errorDescription = Err.Description
+  Resume CleanUp
 End Sub
 
 Private Sub ScaleForBestFit(ByVal picSrc As StdPicture, ByRef picDest As PictureBox)
