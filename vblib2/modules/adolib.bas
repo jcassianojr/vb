@@ -261,8 +261,8 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   
   If cDATABASE <> "" Then
   ' -----------------------------------------------------------------
-    ' INTEGRAÃ‡ÃƒO COM O COFRE (modSeguranca.bas):
-    ' Se os parÃ¢metros opcionais vierem vazios, busca no config.dat
+    ' INTEGRAÇÃO COM O COFRE (modSeguranca.bas):
+    ' Se os parâmetros opcionais vierem vazios, busca no config.dat
     ' -----------------------------------------------------------------
     cSecaoCofre = UCase(Trim(cDATABASE))
     If Trim(cUSER) = "" Then
@@ -346,7 +346,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   End If
     '
  
-' 2. No bloco de detecÃ§Ã£o de tipo (apÃ³s a checagem do SQLite):
+' 2. No bloco de detecção de tipo (após a checagem do SQLite):
    If EArquivofirebird(cARQTMP) Or InStr(cARQTMP, "{FIREBIRD") > 0 Or InStr(cARQTMP, "[FIREBIRD") > 0 Then
        lTEMFIREBIRD = True
      TipoConn = Array(cTIPOPADRAO, cARQ, "FIREBIRD")
@@ -437,7 +437,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
             cARQ = "Driver={SQLite3 ODBC Driver};Database=" & cARQ & cAuth & ";"
             
          Case "P" ' Case Else tratado aqui para simplificar
-            ' Provider OLEDB pode variar, mas segue a lÃ³gica comum de user/password
+            ' Provider OLEDB pode variar, mas segue a lógica comum de user/password
             cARQ = "Provider=SQLite3OLEDB.1;Data Source=" & cARQ & IIf(cAuth <> "", ";" & Mid(cAuth, 2), "") & ";"
       End Select
 
@@ -634,7 +634,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   ' -------------------------------------------------------------------------
   If lTEMAPOLLO Or lTEMAPOLLOREM Then
         
-        ' Valores padrÃ£o caso o usuÃ¡rio/senha venham vazios (conforme documentaÃ§Ã£o do Apollo)
+        ' Valores padrão caso o usuário/senha venham vazios (conforme documentação do Apollo)
         If Trim(cUSER) = "" Then
            cUSER = IIf(Len(cUSER) > 0, cUSER, "SYSDBA")
         End If
@@ -647,7 +647,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
 
         If lTEMAPOLLOREM Then
             cARQ = Replace(cARQ, "[APOLLOREM]", "")
-            ' ConexÃ£o Remota com o Apollo Database Server
+            ' Conexão Remota com o Apollo Database Server
             cARQ = "Provider=ApolloOLEDB9.ApolloOLEDB9;" & _
                    "Data Source=" & cDATABASE & ";" & _
                    "ConnectionUser=" & cUSER & "; " & _
@@ -657,7 +657,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
                    "TableType=ttSXFOX; FetchCount=50; AccessMethod=amServer; CommitLevel=clNormal;"
         Else
             cARQ = Replace(cARQ, "[APOLLO]", "")
-            ' ConexÃ£o Local baseada nos exemplos dos formulÃ¡rios
+            ' Conexão Local baseada nos exemplos dos formulários
             cARQ = "Provider=ApolloOLEDB9.ApolloOLEDB9;" & _
                    "Data Source=" & cARQ & ";" & _
                    "TableType=ttSXFOX; FetchCount=50; AccessMethod=amLocal; CommitLevel=clNormal;"
@@ -817,7 +817,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     Dim cExtProp As String
     cExtProp = "Excel " & cXLSVER & ";HDR=Yes;IMEX=1"
     
-    ' Limpeza de todas as tags de Excel possÃ­veis
+    ' Limpeza de todas as tags de Excel possíveis
     cARQ = Replace(Replace(Replace(Replace(Replace(cARQ, "[XLSX]", ""), "[XLSM]", ""), "[XLSB]", ""), "[XLS]", ""), "[XLSB]", "")
     cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & cExtProp & Chr(34) & ";"
     
@@ -829,7 +829,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
   If InStr(cARQTMP, "[JETTXT") > 0 Or InStr(cARQTMP, "[CSV]") > 0 Then
     Dim cFmt As String
     
-    ' Define o formato baseado na tag especÃ­fica
+    ' Define o formato baseado na tag específica
     If InStr(cARQTMP, "[JETTXTPIPE]") > 0 Then
         cFmt = "FMT=Delimited(|)"
     ElseIf InStr(cARQTMP, "[JETTXTTAB]") > 0 Then
@@ -839,7 +839,7 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
         cFmt = "FMT=Delimited"
     End If
     
-    ' Limpeza de todas as tags de texto/csv possÃ­veis
+    ' Limpeza de todas as tags de texto/csv possíveis
     cARQ = Replace(Replace(Replace(Replace(Replace(cARQ, "[JETTXTPIPE]", ""), "[JETTXTTAB]", ""), "[JETTXTCSV]", ""), "[JETTXT]", ""), "[CSV]", "")
     
     cARQ = cJETUSO & cARQ & cJetExt & Chr(34) & "text;HDR=Yes;" & cFmt & ";IMEX=1" & Chr(34) & ";"
@@ -855,8 +855,8 @@ Public Function TipoConn(ByVal cARQ As String, Optional ByVal cUSER As String = 
     ' Limpa a tag do nome do arquivo
     cARQ = Replace(cARQ, "[JETDBFIII]", "")
     
-    ' Para DBF, nÃ£o se usa delimitadores ou HDR=Yes,
-    ' a estrutura jÃ¡ Ã© interpretada pelo motor dBase IV/III
+    ' Para DBF, não se usa delimitadores ou HDR=Yes,
+    ' a estrutura já é interpretada pelo motor dBase IV/III
     cARQ = cJETUSO & cARQ & cJetExt & "DBASE III;"
     
     TipoConn = Array(cTIPOPADRAO, cARQ, "DBF")
@@ -1016,7 +1016,7 @@ Public Function TipoDados(ByVal intType As Integer) As String
     TipoDados = "IUnknown"
 
   Case Else
-    TipoDados = "Tipo de dados nÃ£o reconhecido"
+    TipoDados = "Tipo de dados não reconhecido"
   End Select
 End Function
 
@@ -1070,15 +1070,15 @@ Public Function ADOErro(ByRef oErro As Variant, Optional ByVal cERRO As String =
     
     For Each errorObject In oErro
         cERRO = cERRO & "--- Erro ADO ---" & vbCrLf & _
-                "NÃºmero     : " & errorObject.Number & vbCrLf & _
-                "DescriÃ§Ã£o  : " & errorObject.Description & vbCrLf & _
+                "Número     : " & errorObject.Number & vbCrLf & _
+                "Descrição  : " & errorObject.Description & vbCrLf & _
                 "Fonte      : " & errorObject.Source & vbCrLf & _
                 "SQLState   : " & errorObject.SQLState & vbCrLf & _
                 "Erro Nativo: " & errorObject.NativeError & vbCrLf & _
                 "Trad. Nativa: " & WinApiError_ToStr(errorObject.NativeError) & vbCrLf & vbCrLf
     Next
     
-    ' Chama a funÃ§Ã£o SayErro que jÃ¡ estÃ¡ configurada para exibir o log
+    ' Chama a função SayErro que já está configurada para exibir o log
     SayErro cERRO, True
 End Function
 
@@ -1151,7 +1151,7 @@ End Sub
 
 Public Function ADO_IsOpen(ByRef oADOObject As Object) As Boolean
 
-    On Error GoTo TrataErro  'resume Next 'Evita quebra se o objeto estiver em estado invÃ¡lido
+    On Error GoTo TrataErro  'resume Next 'Evita quebra se o objeto estiver em estado inválido
         ADO_IsOpen = False
     If oADOObject Is Nothing Then Exit Function
     
@@ -1272,13 +1272,13 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
         Dim nPosPonto As Long
         Dim cNomeComExtensao As String
         
-        ' Acha a Ãºltima barra do caminho
+        ' Acha a última barra do caminho
         nPosBarra = InStrRev(cARQ, "\")
         If nPosBarra = 0 Then nPosBarra = InStrRev(cARQ, "/")
         
         cNomeComExtensao = Mid(cARQ, nPosBarra + 1)
         
-        ' Remove a extensÃ£o para pegar sÃ³ o nome limpo do banco
+        ' Remove a extensão para pegar só o nome limpo do banco
         nPosPonto = InStrRev(cNomeComExtensao, ".")
         If nPosPonto > 0 Then
             cBancoPuro = Left(cNomeComExtensao, nPosPonto - 1)
@@ -1299,8 +1299,8 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
         End If
 
     ' -------------------------------------------------------------------------
-    ' CASO 3: String de conexÃ£o ODBC PadrÃ£o (Ex: DRIVER={...};DATABASE=nomebanco)
-    ' Trata variaÃ§Ãµes normais de mercado como DATABASE= ou DB=
+    ' CASO 3: String de conexão ODBC Padrão (Ex: DRIVER={...};DATABASE=nomebanco)
+    ' Trata variações normais de mercado como DATABASE= ou DB=
     ' -------------------------------------------------------------------------
     ElseIf InStr(cUpperARQ, "DATABASE=") > 0 Or InStr(cUpperARQ, "DB=") > 0 Then
         
@@ -1311,7 +1311,7 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
             nPosStart = InStr(cUpperARQ, "DB=") + 3
         End If
         
-        ' Procura o prÃ³ximo ponto e vÃ­rgula que encerra o nome do banco
+        ' Procura o próximo ponto e vírgula que encerra o nome do banco
         nPosEnd = InStr(nPosStart, cUpperARQ, ";")
         
         If nPosEnd > 0 Then
@@ -1325,12 +1325,12 @@ Public Function TratarParametrosCofre(ByVal cARQ As String) As String
         cBancoPuro = Replace(cBancoPuro, "'", "")
     End If
     
-    ' Limpa espaÃ§os em branco e garante caixa alta para casar com o Harbour
+    ' Limpa espaços em branco e garante caixa alta para casar com o Harbour
     cBancoPuro = UCase(Trim(cBancoPuro))
     
     ' -------------------------------------------------------------------------
     ' CONSULTA AO COFRE (modSeguranca.bas)
-    ' Se as variÃ¡veis opcionais vierem vazias, busca usando o banco extraÃ­do
+    ' Se as variáveis opcionais vierem vazias, busca usando o banco extraído
     ' -------------------------------------------------------------------------
     'If cBancoPuro <> "" Then
     '    If Trim(cUSER) = "" Then
@@ -1389,7 +1389,7 @@ TrataErro:
   Exit Function
 End Function
 
-' Exemplo de funÃ§Ã£o auxiliar para padronizar
+' Exemplo de função auxiliar para padronizar
 Private Function GetJetExtendedProperties(cFormato As String, Optional lIMEX As Boolean = False) As String
     Dim sProps As String
     sProps = cFormato & ";HDR=Yes"
@@ -1402,7 +1402,7 @@ End Function
 Public Function EArquivoSQLite(ByVal cCaminho As String) As Boolean
   
      cCaminho = LCase(cCaminho)
-    ' Lista de extensÃµes que o seu sistema aceita como SQLite
+    ' Lista de extensões que o seu sistema aceita como SQLite
     If InStr(cCaminho, ".sqlite") > 0 Or _
        InStr(cCaminho, ".sqlite3") > 0 Or _
        InStr(cCaminho, ".db") > 0 Or _
@@ -1423,7 +1423,7 @@ End Function
 Public Function EArquivofirebird(ByVal cCaminho As String) As Boolean
   
      cCaminho = LCase(cCaminho)
-    ' Lista de extensÃµes que o seu sistema aceita como SQLite
+    ' Lista de extensões que o seu sistema aceita como SQLite
     If InStr(cCaminho, ".gdb") > 0 Or _
        InStr(cCaminho, ".ib") > 0 Or _
        InStr(cCaminho, ".fdb") > 0 Then
@@ -1935,7 +1935,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
     cSQL = "select " + cCAMPO + " from " + cTable + " WHERE " & cWHERE
   End If
   
-  ' Ajustes especÃ­ficos baseados no TipoConn para recordsets
+  ' Ajustes específicos baseados no TipoConn para recordsets
   If UCase(aRETU(2)) = "MYSQL" Or UCase(aRETU(2)) = "MARIADB" Then
       cSQL = "select * from " + cTable + " WHERE " & cWHERE
   End If
@@ -1959,7 +1959,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
   
   Select Case UCase(aRETU(2))
      
-     ' ESTRATÃ‰GIA 1: SQLite via comando SQL nativo (blob_import)
+     ' ESTRATÉGIA 1: SQLite via comando SQL nativo (blob_import)
      Case "SQLITE"
           If cPICTURE.Picture.Height = 0 Then
              cCMD = "Update " + cSQL + " SET " + cCAMPO + " = NULL where " + cWHERE
@@ -1972,7 +1972,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
           oCMD.Execute
           Set oCMD = Nothing
           
-     ' ESTRATÃ‰GIA 2: MySQL, MariaDB, PostgreSQL via ADODB.Stream
+     ' ESTRATÉGIA 2: MySQL, MariaDB, PostgreSQL via ADODB.Stream
      Case "MYSQL", "MARIADB", "PGSQL"
         If FileExists(sTEMPFILE) Then
           Set oRS = New ADODB.Recordset
@@ -1990,8 +1990,8 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
           oRS.Close
         End If
         
-     ' ESTRATÃ‰GIA 3: Bancos Nativos/Robustos (SQLSERVER, ORACLE, FIREBIRD, MDB, ACCDB, APOLLO, DBF)
-     ' Trabalha 100% em memÃ³ria RAM. Alta velocidade e estabilidade.
+     ' ESTRATÉGIA 3: Bancos Nativos/Robustos (SQLSERVER, ORACLE, FIREBIRD, MDB, ACCDB, APOLLO, DBF)
+     ' Trabalha 100% em memória RAM. Alta velocidade e estabilidade.
      Case Else
         Set oRS = New ADODB.Recordset
         oRS.Open cSQL, oDB, adOpenKeyset, adLockOptimistic
@@ -2008,7 +2008,7 @@ Public Function ADOGrvBlob(ByVal cARQ As String, ByVal cTable As String, _
             oRS.Update
             ADOGrvBlob = True
             
-            ' Como geramos o temp acima por precauÃ§Ã£o, nÃ³s o excluÃ­mos
+            ' Como geramos o temp acima por precaução, nós o excluímos
             If sTEMPFILE <> "" And FileExists(sTEMPFILE) Then DeleteFile sTEMPFILE, True
           End If
         End If
@@ -2057,9 +2057,11 @@ Public Function ADOPegBlob(ByRef cPICTURE As Variant, ByVal cARQ As String, ByVa
   aRETU = TipoConn(cARQ)
   cARQ = aRETU(1)
   
-  sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
-  If FileExists(sTEMPFILE) Then 
-     DeleteFile sTEMPFILE, True
+  If UCase(aRETU(2)) = "SQLITE" Then
+     sTEMPFILE = App.Path & "\" & Format(Now, "yyyymmddhhnnss") & ".jpg"
+     If FileExists(sTEMPFILE) Then
+        DeleteFile sTEMPFILE, True
+     End If
   End If
   
   cSQL = cTable
@@ -2091,38 +2093,38 @@ Public Function ADOPegBlob(ByRef cPICTURE As Variant, ByVal cARQ As String, ByVa
     If Not IsNull(oRS(cCAMPO)) Then
        Select Case UCase(aRETU(2))
          
-         ' ESTRATÃ‰GIA 1: SGBDs Open Source baseados em ODBC (Uso de ADODB.Stream p/ evitar quebra de ponteiro)
+         ' ESTRATÉGIA 1: SGBDs Open Source baseados em ODBC (Uso de ADODB.Stream p/ evitar quebra de ponteiro)
          Case "MYSQL", "MARIADB", "PGSQL"
                mystream.Open
                mystream.Write oRS.Fields(0)
-               mystream.SaveToFile sTEMPFILE, adSaveCreateOverWrite
-               If FileExists(sTEMPFILE) Then
-                 eRETU01 = FileLen(sTEMPFILE)
-                 Set imgObj = stdImage.CreateFromFile(sTEMPFILE)
-                 Set cPICTURE.Picture = imgObj.ToStdPicture()
+               mystream.Position = 0
+               If mystream.Size > 0 Then
+                 abBytes = mystream.Read
+                 eRETU01 = UBound(abBytes) - LBound(abBytes) + 1
+                 Set imgObj = stdImage.CreateFromBinary(abBytes)
+                 Set cPICTURE.Picture = jpgpicture.PictureWithOwnedBitmap(imgObj.ToStdPicture())
                  ADOPegBlob = True
-                 Kill sTEMPFILE
               End If
               mystream.Close
          
-         ' ESTRATÃ‰GIA 2: SQLite via comando nativo SQL (Arquivo gerado pela prÃ³pria Engine)
+         ' ESTRATÉGIA 2: SQLite via comando nativo SQL (Arquivo gerado pela própria Engine)
          Case "SQLITE"
               If FileExists(sTEMPFILE) Then
                  eRETU01 = FileLen(sTEMPFILE)
                  Set imgObj = stdImage.CreateFromFile(sTEMPFILE)
-                 Set cPICTURE.Picture = imgObj.ToStdPicture()
+                 Set cPICTURE.Picture = jpgpicture.PictureWithOwnedBitmap(imgObj.ToStdPicture())
                  ADOPegBlob = True
                  Kill sTEMPFILE
               End If
          
-         ' ESTRATÃ‰GIA 3: SGBDs Robustos / Nativos Microsoft (MemÃ³ria RAM Pura via GetChunk)
+         ' ESTRATÉGIA 3: SGBDs Robustos / Nativos Microsoft (Memória RAM Pura via GetChunk)
          ' Cobre: SQLSERVER, ORACLE, FIREBIRD, INTERBASE, MDB, ACEOLEDB, DBF, APOLLO, etc.
          Case Else
            lFileLength = LenB(oRS(cCAMPO))
            If lFileLength > 1 Then
               abBytes = oRS(cCAMPO).GetChunk(lFileLength)
               Set imgObj = stdImage.CreateFromBinary(abBytes)
-              Set cPICTURE.Picture = imgObj.ToStdPicture()
+              Set cPICTURE.Picture = jpgpicture.PictureWithOwnedBitmap(imgObj.ToStdPicture())
               
               eRETU01 = UBound(abBytes) - LBound(abBytes) + 1
               ADOPegBlob = True
