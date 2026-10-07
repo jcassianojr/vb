@@ -88,12 +88,12 @@ Begin VB.Form frmIMAGENS
       EndProperty
    End
    Begin XPControls.XPButton VerImg 
-      Height          =   495
+      Height          =   492
       Left            =   5280
       TabIndex        =   12
       TabStop         =   0   'False
-      Top             =   5760
-      Width           =   1575
+      Top             =   6000
+      Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   868
       Picture         =   "Frmpecasjpg.frx":1158
@@ -174,16 +174,16 @@ Begin VB.Form frmIMAGENS
       EndProperty
    End
    Begin XPControls.XPButton CmdPaste 
-      Height          =   435
+      Height          =   432
       Left            =   5280
       TabIndex        =   7
       TabStop         =   0   'False
-      Top             =   4680
-      Width           =   1575
-      _ExtentX        =   2773
+      Top             =   4560
+      Width           =   1932
+      _ExtentX        =   3408
       _ExtentY        =   762
       Picture         =   "Frmpecasjpg.frx":1B8C
-      Caption         =   "Copia"
+      Caption         =   "Copia Area de Trabalho"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   7.8
@@ -279,12 +279,12 @@ Begin VB.Form frmIMAGENS
       EndProperty
    End
    Begin XPControls.XPButton CmdAbrirCom 
-      Height          =   435
+      Height          =   432
       Left            =   5280
       TabIndex        =   16
       TabStop         =   0   'False
-      Top             =   5280
-      Width           =   1575
+      Top             =   5400
+      Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   762
       Picture         =   "Frmpecasjpg.frx":378E
@@ -360,6 +360,27 @@ Begin VB.Form frmIMAGENS
       WordWrap        =   0   'False
       Style           =   1
    End
+   Begin XPControls.XPButton CmdColarArea 
+      Height          =   432
+      Left            =   5280
+      TabIndex        =   20
+      TabStop         =   0   'False
+      Top             =   4920
+      Width           =   1932
+      _ExtentX        =   3408
+      _ExtentY        =   762
+      Picture         =   "Frmpecasjpg.frx":4DF6
+      Caption         =   "Cola para Area de Trabalho"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
    Begin VB.Label lblLabels 
       Caption         =   "Numero"
       Height          =   255
@@ -430,6 +451,24 @@ Private Sub cmdClose_Click()
   Unload Me
 End Sub
 
+Private Sub CmdColarArea_Click()
+ On Error GoTo ErroClipboard
+  
+  ' 1. Carrega a imagem da área de transferência diretamente para o Picture1
+  ' Esta função do jpgpicture.bas já aplica automaticamente a proteção de memória (PictureWithOwnedBitmap)
+  Call AreaDeTransferenciaParaPictureBox(Picture1)
+  
+  ' 2. Redimensiona e exibe a imagem no Picture2 (controlo de pré-visualização)
+  Call StretchSourcePictureFromPicture(Picture1.Picture, Picture2)
+  
+  ' 3. Sinaliza ao formulário que a imagem foi alterada para que o processo de gravação atue
+  lTROCOU = True
+  Exit Sub
+  
+ErroClipboard:
+  Alert "Não existe nenhuma imagem válida na área de transferência para colar."
+End Sub
+
 Private Sub CmdConfImp_Click()
  ' FrmPrintSetup.Show vbModal, Me
 End Sub
@@ -446,11 +485,14 @@ Private Sub CmdImprimir_Click()
 End Sub
 
 Private Sub CmdPaste_Click()
-  If Picture1.Height = 0 Then
-    Alert ("Sem Imagem")
+ ' Verifica se existe uma imagem válida carregada no Picture1
+  If Picture1.Height = 0 Or Picture1.Picture = 0 Then
+    Alert "Sem Imagem"
   Else
-    Clipboard.Clear
-    Clipboard.SetData Picture1.Image, (vbCFBitmap)
+    ' Instancia a stdImage a partir da imagem atual e envia para a área de transferência
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromStdPicture(Picture1.Picture)
+    imgObj.ToClipboard
   End If
 End Sub
 
@@ -794,4 +836,8 @@ Private Sub XPButton1_Click()
     
     If Dir(cARQRTF) <> "" Then Kill cARQRTF
   End If
+End Sub
+
+Private Sub XPButton2_Click()
+
 End Sub
