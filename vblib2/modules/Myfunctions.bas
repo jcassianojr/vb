@@ -224,7 +224,7 @@ Public Function ExecutarDLL(ByVal cDLL As String) As Double
 ' outra dll que possa ser executada via rundll32
 '  Dim RetVal
   On Error Resume Next
-  ExecutarDLL = shell("rundll32.exe shell32.dll,Control_RunDLL " & cDLL & ",,3", 1)
+  ExecutarDLL = Shell("rundll32.exe shell32.dll,Control_RunDLL " & cDLL & ",,3", 1)
   
 End Function
 
@@ -470,7 +470,7 @@ Public Function FVar(ByVal eVAR As Variant, Optional ByVal cFORM As String = "",
       eVAR = TiraOut(eVAR)
       FVar = Mid(eVAR, 1, 4) & "-" & Mid(eVAR, 5)
     Case "H"
-      FVar = Format(eVAR, "HH.MM")
+      FVar = format(eVAR, "HH.MM")
     Case "MES"                               'Numerico Mes do Ano 1-12
       FVar = FixInt(eVAR, ePAD)
       If FVar < 1 And FVar > 12 Then
@@ -512,7 +512,7 @@ Public Function Fdatatime(ByVal Data As Variant, _
   
   ' Reutiliza DataBranco pois ela já prevê "0000-00-00 00:00:00" e "00:00:00"
   If IsDate(Data) And Not DataBranco(Data) Then
-    Fdatatime = Format(Data, cMASCARA)
+    Fdatatime = format(Data, cMASCARA)
   Else
     Select Case cTipoData
     Case "", "T", "TS"
@@ -528,7 +528,7 @@ Public Function Fdatatime(ByVal Data As Variant, _
     Case "TF"
       Fdatatime = "  /  /       :  :  "       ' Máscara vazia formatada
     Case "TH"
-      Fdatatime = Format(Now, "dd/mm/yyyy hh:nn:ss") ' Data e Hora do momento
+      Fdatatime = format(Now, "dd/mm/yyyy hh:nn:ss") ' Data e Hora do momento
     End Select
   End If
 End Function
@@ -923,9 +923,9 @@ Public Function MathOper(ByVal nVAL01 As Variant, ByVal nVAL02 As Variant, _
     End If
   Case "PCF"
     If FixStr(nVAL01) = "PC" Then
-      eVAL = Format(nVAL02, "###,###,##0")
+      eVAL = format(nVAL02, "###,###,##0")
     Else
-      eVAL = Format(nVAL02, "###,###,##0.00")
+      eVAL = format(nVAL02, "###,###,##0.00")
     End If
   Case "*"
     eVAL = Multiplicar(nVAL01, nVAL02)
@@ -1396,7 +1396,7 @@ Public Function Extenso(ByVal Valor As Double, _
                           " Milhoes", " Bilhoes", _
                           " Trilhoes", " Quatrilhoes")
 
-    StrValor = Left(Format(Valor, String(18, "0") & _
+    StrValor = Left(format(Valor, String(18, "0") & _
                                   ".000"), 18)
     For Posicao = 1 To 18 Step 3
       Parcial = Val(Mid(StrValor, Posicao, 3))
@@ -1957,15 +1957,27 @@ Public Function WinApiError_ToStr(ByVal MessageID As Long) As String
 End Function
 
 ' --- Sub-rotina Principal Aprimorada ---
+' --- Sub-rotina Principal Aprimorada ---
 Public Sub SayErro(Optional ByVal cERROUSO As String = "", Optional ByVal lMES As Boolean = True)
     Dim nHANDLE As Long, cARQ As String, cERRO As String
+    Dim cARQImg As String
+    Dim imgObj As Object
+    Dim baseName As String
     
     If Err.Number = 0 Then Exit Sub
     
     Screen.MousePointer = vbDefault
-    cARQ = zUSER & Format(Now, "_DDMMYYYY_HHMMSS") & ".TXT"
+    
+    ' Define os nomes dos ficheiros baseados na data/hora
+    baseName = zUSER & format(Now, "_DDMMYYYY_HHMMSS")
+    cARQ = baseName & ".TXT"
+    cARQImg = baseName & ".JPG"
 
-    ' Construção do log
+    ' =============================================================
+    ' FASE 1: GERA E GRAVA O FICHEIRO DE TEXTO (.TXT)
+    ' =============================================================
+    
+    ' 1.1 Constrói o texto do erro
     cERRO = "No.        : " & Err.Number & vbCrLf & _
             "Fonte      : " & Err.Source & vbCrLf & _
             "Descricao  : " & Err.Description & vbCrLf & _
@@ -1979,15 +1991,35 @@ Public Sub SayErro(Optional ByVal cERROUSO As String = "", Optional ByVal lMES A
             "Erro Extra : " & cERROUSO & vbCrLf & _
             "Detalhe    : " & WinApiError_ToStr(Err.Number) & vbCrLf & _
             "Info Sist  : " & infosistema
-
-    ' Exibição
-    If lMES Then
-        TimedMsgBox cERRO, , , "Mensagem Sistema"
-    End If
-
-    ' Gravação do Arquivo
+            
+    ' 1.2 Grava o ficheiro de texto imediatamente
     nHANDLE = FreeFile
     Open cARQ For Output As #nHANDLE
     Print #nHANDLE, cERRO
     Close #nHANDLE
+
+' =============================================================
+    ' FASE 2: GERA E GRAVA A IMAGEM DO ECRÃ (.JPG)
+    ' =============================================================
+    On Error Resume Next ' Garante que falhas não abortem o código
+    
+    ' 2.1 Tira a "fotografia" do ecrã usando a função nativa da classe stdImage
+    Set imgObj = stdImage.CreateFromScreen()
+    
+    ' 2.2 Se a captura foi bem-sucedida, grava em disco no formato JPEG
+    If Not imgObj Is Nothing Then
+        imgObj.SaveAs cARQImg, stdImgFormatJPEG
+    End If
+    
+    On Error GoTo 0 ' Restaura o tratamento de erros
+    
+    On Error GoTo 0 ' Restaura o tratamento de erros
+
+
+    ' =============================================================
+    ' FASE FINAL: EXIBE A MENSAGEM AO UTILIZADOR
+    ' =============================================================
+    If lMES Then
+        TimedMsgBox cERRO, , , "Mensagem Sistema"
+    End If
 End Sub
