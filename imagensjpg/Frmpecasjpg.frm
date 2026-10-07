@@ -153,16 +153,16 @@ Begin VB.Form frmIMAGENS
       Width           =   2655
    End
    Begin XPControls.XPButton CmdPaste 
-      Height          =   435
-      Left            =   5280
+      Height          =   432
+      Left            =   5400
       TabIndex        =   6
       TabStop         =   0   'False
-      Top             =   4680
-      Width           =   1575
+      Top             =   4200
+      Width           =   1572
       _ExtentX        =   2773
       _ExtentY        =   762
       Picture         =   "Frmpecasjpg.frx":15F2
-      Caption         =   "Copia"
+      Caption         =   "Colar do Clipbard"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   7.8
@@ -353,6 +353,27 @@ Begin VB.Form frmIMAGENS
       WordWrap        =   0   'False
       Style           =   1
    End
+   Begin XPControls.XPButton cmdcopy 
+      Height          =   432
+      Left            =   5400
+      TabIndex        =   20
+      TabStop         =   0   'False
+      Top             =   4560
+      Width           =   1572
+      _ExtentX        =   2773
+      _ExtentY        =   762
+      Picture         =   "Frmpecasjpg.frx":4DF6
+      Caption         =   "Copiar do  Clipboard"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
    Begin VB.Label lblLabels 
       Caption         =   "Numero"
       Height          =   255
@@ -427,6 +448,18 @@ Private Sub CmdConfImp_Click()
  ' FrmPrintSetup.Show vbModal, Me
 End Sub
 
+Private Sub cmdcopy_Click()
+' Verifica se existe uma imagem válida carregada no Picture1
+  If Picture1.Height = 0 Or Picture1.Picture = 0 Then
+    Alert "Sem Imagem"
+  Else
+    ' Instancia a stdImage a partir da imagem atual e envia para a área de transferência
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromStdPicture(Picture1.Picture)
+    imgObj.ToClipboard
+  End If
+End Sub
+
 Private Sub CmdImprimir_Click()
   If Picture1.Height = 0 Then
     Alert ("Sem Imagem")
@@ -439,12 +472,28 @@ Private Sub CmdImprimir_Click()
 End Sub
 
 Private Sub CmdPaste_Click()
-  If Picture1.Height = 0 Then
-    Alert ("Sem Imagem")
-  Else
-    Clipboard.Clear
-    Clipboard.SetData Picture1.Image, (vbCFBitmap)
-  End If
+  'If Picture1.Height = 0 Then
+  '  Alert ("Sem Imagem")
+  'Else
+  '  Clipboard.Clear
+  '  Clipboard.SetData Picture1.Image, (vbCFBitmap)
+  'End If
+  On Error GoTo ErroClipboard
+  
+  ' 1. Carrega a imagem da área de transferência diretamente para o Picture1
+  ' Esta função do jpgpicture.bas já aplica automaticamente a proteção de memória (PictureWithOwnedBitmap)
+  Call AreaDeTransferenciaParaPictureBox(Picture1)
+  
+  ' 2. Redimensiona e exibe a imagem no Picture2 (controlo de pré-visualização)
+  Call StretchSourcePictureFromPicture(Picture1.Picture, Picture2)
+  
+  ' 3. Sinaliza ao formulário que a imagem foi alterada para que o processo de gravação atue
+  lTROCOU = True
+  Exit Sub
+  
+ErroClipboard:
+  Alert "Não existe nenhuma imagem válida na área de transferência para colar."
+  
 End Sub
 
 Private Sub Command1_Click()

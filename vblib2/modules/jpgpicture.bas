@@ -87,7 +87,7 @@ End Type
     Private Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
     Private Declare Function ReleaseDC Lib "user32" (ByVal hWnd As Long, ByVal hDC As Long) As Long
     Public Declare Function GetDesktopWindow Lib "user32" () As Long
-    Private Declare Function CopyImage Lib "user32" (ByVal hImage As Long, ByVal uType As Long, ByVal cx As Long, ByVal cy As Long, ByVal fuFlags As Long) As Long
+    Private Declare Function CopyImage Lib "user32" (ByVal hImage As Long, ByVal uType As Long, ByVal CX As Long, ByVal CY As Long, ByVal fuFlags As Long) As Long
     Private Declare Function IIDFromString Lib "ole32" (ByVal lpsz As Long, ByRef lpiid As GUID) As Long
     Private Declare Function OleCreatePictureIndirect Lib "oleaut32" (ByRef PicDesc As PICTDESC, ByRef RefIID As GUID, ByVal fPictureOwnsHandle As Long, ByRef iPic As StdPicture) As Long
     Private Declare Function GetObject Lib "gdi32" Alias "GetObjectA" (ByVal hObject As Long, ByVal nCount As Long, ByRef lpObject As Any) As Long
@@ -97,7 +97,7 @@ End Type
          ByVal hdcSrc As Long, ByVal XSrc As Long, ByVal YSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal dwRop As Long) As Long
 #End If
 
-Private Function PictureWithOwnedBitmap(ByVal sourcePicture As StdPicture) As StdPicture
+Public Function PictureWithOwnedBitmap(ByVal sourcePicture As StdPicture) As StdPicture
   Const IMAGE_BITMAP As Long = 0
   Const LR_CREATEDIBSECTION As Long = &H2000
   Const PICTYPE_BITMAP As Long = 1
