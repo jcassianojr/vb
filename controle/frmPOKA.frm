@@ -1,14 +1,14 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#15.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmPOKA 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MENU"
    ClientHeight    =   9000
-   ClientLeft      =   1095
-   ClientTop       =   330
+   ClientLeft      =   1092
+   ClientTop       =   336
    ClientWidth     =   11760
    Icon            =   "frmPOKA.frx":0000
    LinkTopic       =   "Form1"
@@ -21,8 +21,8 @@ Begin VB.Form frmPOKA
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   8640
       Top             =   720
-      _ExtentX        =   1191
-      _ExtentY        =   1191
+      _ExtentX        =   953
+      _ExtentY        =   953
    End
    Begin VB.CommandButton CmdTrocaSequencia 
       Caption         =   "TrocarSequencia"
@@ -50,21 +50,22 @@ Begin VB.Form frmPOKA
       TabIndex        =   11
       Top             =   1680
       Width           =   11535
-      _ExtentX        =   20346
-      _ExtentY        =   12515
+      _ExtentX        =   20341
+      _ExtentY        =   12510
+      ControlJustAdded=   0   'False
       Tabs            =   6
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Tab             =   5
+      Tab             =   1
       TabHeight       =   520
-      ControlVersion  =   9
+      ControlVersion  =   15
       TabCaption(0)   =   "Colaborador Elabarador"
       Tab(0).ControlCount=   19
       Tab(0).Control(0)=   "Command2(2)"
@@ -154,7 +155,7 @@ Begin VB.Form frmPOKA
       Begin VB.CommandButton ComMotExc 
          Caption         =   "Excluir"
          Height          =   375
-         Left            =   8040
+         Left            =   -66960
          TabIndex        =   51
          TabStop         =   0   'False
          Top             =   4320
@@ -163,7 +164,7 @@ Begin VB.Form frmPOKA
       Begin VB.CommandButton ComMotInc 
          Caption         =   "Incluir"
          Height          =   375
-         Left            =   8040
+         Left            =   -66960
          TabIndex        =   50
          TabStop         =   0   'False
          Top             =   3840
@@ -172,7 +173,7 @@ Begin VB.Form frmPOKA
       Begin VB.CommandButton ComMotAlt 
          Caption         =   "Alterar"
          Height          =   375
-         Left            =   8040
+         Left            =   -66960
          TabIndex        =   49
          TabStop         =   0   'False
          Top             =   3360
@@ -181,7 +182,7 @@ Begin VB.Form frmPOKA
       Begin VB.CommandButton Command6 
          Caption         =   "Distribuicao"
          Height          =   495
-         Left            =   8040
+         Left            =   -66960
          TabIndex        =   48
          Top             =   1920
          Width           =   1335
@@ -189,7 +190,7 @@ Begin VB.Form frmPOKA
       Begin VB.CommandButton CmdMotRev 
          Caption         =   "Motivos"
          Height          =   375
-         Left            =   8040
+         Left            =   -66960
          TabIndex        =   47
          TabStop         =   0   'False
          Top             =   1440
@@ -200,7 +201,7 @@ Begin VB.Form frmPOKA
          Enabled         =   0   'False
          Height          =   330
          Index           =   15
-         Left            =   2760
+         Left            =   -72240
          Locked          =   -1  'True
          TabIndex        =   44
          TabStop         =   0   'False
@@ -212,7 +213,7 @@ Begin VB.Form frmPOKA
          Enabled         =   0   'False
          Height          =   330
          Index           =   13
-         Left            =   1560
+         Left            =   -73440
          Locked          =   -1  'True
          TabIndex        =   43
          TabStop         =   0   'False
@@ -222,7 +223,7 @@ Begin VB.Form frmPOKA
       Begin VB.CommandButton NovaRev 
          Caption         =   "Nova Revisão"
          Height          =   375
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   42
          TabStop         =   0   'False
          Top             =   840
@@ -260,9 +261,9 @@ Begin VB.Form frmPOKA
       Begin VB.PictureBox Picture1 
          Height          =   495
          Index           =   3
-         Left            =   3480
-         ScaleHeight     =   435
-         ScaleWidth      =   195
+         Left            =   -71520
+         ScaleHeight     =   444
+         ScaleWidth      =   204
          TabIndex        =   36
          Top             =   6000
          Visible         =   0   'False
@@ -271,9 +272,9 @@ Begin VB.Form frmPOKA
       Begin VB.PictureBox Picture1 
          Height          =   495
          Index           =   2
-         Left            =   3360
-         ScaleHeight     =   435
-         ScaleWidth      =   195
+         Left            =   -71640
+         ScaleHeight     =   444
+         ScaleWidth      =   204
          TabIndex        =   35
          Top             =   6000
          Visible         =   0   'False
@@ -283,8 +284,8 @@ Begin VB.Form frmPOKA
          Height          =   495
          Index           =   1
          Left            =   -71520
-         ScaleHeight     =   435
-         ScaleWidth      =   195
+         ScaleHeight     =   444
+         ScaleWidth      =   204
          TabIndex        =   34
          Top             =   6000
          Visible         =   0   'False
@@ -294,8 +295,8 @@ Begin VB.Form frmPOKA
          Height          =   3975
          Index           =   3
          Left            =   -74880
-         ScaleHeight     =   3915
-         ScaleWidth      =   4155
+         ScaleHeight     =   3924
+         ScaleWidth      =   4164
          TabIndex        =   33
          Top             =   720
          Width           =   4215
@@ -303,9 +304,9 @@ Begin VB.Form frmPOKA
       Begin VB.PictureBox Picture2 
          Height          =   3975
          Index           =   2
-         Left            =   120
-         ScaleHeight     =   3915
-         ScaleWidth      =   4155
+         Left            =   -74880
+         ScaleHeight     =   3924
+         ScaleWidth      =   4164
          TabIndex        =   32
          Top             =   840
          Width           =   4215
@@ -314,8 +315,8 @@ Begin VB.Form frmPOKA
          Height          =   3975
          Index           =   1
          Left            =   -74880
-         ScaleHeight     =   3915
-         ScaleWidth      =   4155
+         ScaleHeight     =   3924
+         ScaleWidth      =   4164
          TabIndex        =   31
          Top             =   840
          Width           =   4215
@@ -334,7 +335,7 @@ Begin VB.Form frmPOKA
       Begin VB.TextBox TXT 
          Height          =   1245
          Index           =   14
-         Left            =   4440
+         Left            =   -70560
          MaxLength       =   255
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -356,7 +357,7 @@ Begin VB.Form frmPOKA
       Begin VB.TextBox TXT 
          Height          =   1245
          Index           =   10
-         Left            =   -70560
+         Left            =   4440
          MaxLength       =   255
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -455,9 +456,9 @@ Begin VB.Form frmPOKA
       Begin VB.PictureBox Picture1 
          Height          =   495
          Index           =   0
-         Left            =   -71640
-         ScaleHeight     =   435
-         ScaleWidth      =   195
+         Left            =   3360
+         ScaleHeight     =   444
+         ScaleWidth      =   204
          TabIndex        =   13
          Top             =   6000
          Visible         =   0   'False
@@ -466,48 +467,48 @@ Begin VB.Form frmPOKA
       Begin VB.PictureBox Picture2 
          Height          =   3975
          Index           =   0
-         Left            =   -74880
-         ScaleHeight     =   3915
-         ScaleWidth      =   4155
+         Left            =   120
+         ScaleHeight     =   3924
+         ScaleWidth      =   4164
          TabIndex        =   12
          Top             =   780
          Width           =   4215
       End
       Begin VBFLXGRD18.VBFlexGrid gridrev 
          Height          =   1815
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   45
          TabStop         =   0   'False
          Top             =   1440
          Width           =   7515
-         _ExtentX        =   13256
-         _ExtentY        =   3201
+         _ExtentX        =   13250
+         _ExtentY        =   3196
       End
       Begin VBFLXGRD18.VBFlexGrid gridrevi 
          Height          =   1575
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   46
          TabStop         =   0   'False
          Top             =   3360
          Width           =   7515
-         _ExtentX        =   13256
-         _ExtentY        =   2778
+         _ExtentX        =   13250
+         _ExtentY        =   2773
       End
       Begin XPControls.XPButton Incluirimagem 
          Height          =   435
          Index           =   0
-         Left            =   -70440
+         Left            =   4560
          TabIndex        =   60
          TabStop         =   0   'False
          Top             =   2640
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":058A
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -523,13 +524,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   2520
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":0A24
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -545,13 +546,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   2640
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":0EBE
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -567,13 +568,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   2640
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":1358
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -584,18 +585,18 @@ Begin VB.Form frmPOKA
       Begin XPControls.XPButton DelImg 
          Height          =   435
          Index           =   0
-         Left            =   -70440
+         Left            =   4560
          TabIndex        =   64
          TabStop         =   0   'False
          Top             =   3120
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":17F2
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -611,13 +612,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   3000
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":1C8C
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -633,13 +634,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   3120
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":2126
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -655,13 +656,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   3120
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":25C0
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -672,18 +673,18 @@ Begin VB.Form frmPOKA
       Begin XPControls.XPButton ximgsave 
          Height          =   435
          Index           =   0
-         Left            =   -70440
+         Left            =   4560
          TabIndex        =   69
          TabStop         =   0   'False
          Top             =   3600
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":2A5A
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -699,13 +700,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   3480
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":2EF4
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -721,13 +722,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   3600
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":338E
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -743,13 +744,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   3600
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":3828
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -760,18 +761,18 @@ Begin VB.Form frmPOKA
       Begin XPControls.XPButton cmdimprimir 
          Height          =   435
          Index           =   0
-         Left            =   -70440
+         Left            =   4560
          TabIndex        =   73
          TabStop         =   0   'False
          Top             =   4080
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":3CC2
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -787,13 +788,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   3960
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":425C
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -809,13 +810,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   4080
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":47F6
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -831,13 +832,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   4080
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":4D90
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -848,18 +849,18 @@ Begin VB.Form frmPOKA
       Begin XPControls.XPButton CmdPaste 
          Height          =   435
          Index           =   0
-         Left            =   -70440
+         Left            =   4560
          TabIndex        =   78
          TabStop         =   0   'False
          Top             =   4560
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":532A
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -875,13 +876,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   4440
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":58C4
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -897,13 +898,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   4560
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":5E5E
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -919,13 +920,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   4560
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOKA.frx":63F8
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -936,18 +937,18 @@ Begin VB.Form frmPOKA
       Begin XPControls.XPButton VerImg 
          Height          =   495
          Index           =   0
-         Left            =   -70440
+         Left            =   4560
          TabIndex        =   82
          TabStop         =   0   'False
          Top             =   5040
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmPOKA.frx":6992
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -963,13 +964,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   4920
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmPOKA.frx":6E2C
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -985,13 +986,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   5040
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmPOKA.frx":72C6
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -1007,13 +1008,13 @@ Begin VB.Form frmPOKA
          TabStop         =   0   'False
          Top             =   5040
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmPOKA.frx":7760
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -1022,6 +1023,7 @@ Begin VB.Form frmPOKA
          EndProperty
       End
       Begin VB.Label Label8 
+         BackStyle       =   0  'Transparent
          Caption         =   "Obs"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -1031,6 +1033,7 @@ Begin VB.Form frmPOKA
          Width           =   735
       End
       Begin VB.Label Label5 
+         BackStyle       =   0  'Transparent
          Caption         =   "Quem?"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -1040,6 +1043,7 @@ Begin VB.Form frmPOKA
          Width           =   855
       End
       Begin VB.Label Label7 
+         BackStyle       =   0  'Transparent
          Caption         =   "Onde?"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -1049,6 +1053,7 @@ Begin VB.Form frmPOKA
          Width           =   855
       End
       Begin VB.Label Label6 
+         BackStyle       =   0  'Transparent
          Caption         =   "Por que?"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -1058,6 +1063,7 @@ Begin VB.Form frmPOKA
          Width           =   855
       End
       Begin VB.Label Label4 
+         BackStyle       =   0  'Transparent
          Caption         =   "O Que?"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -1067,6 +1073,7 @@ Begin VB.Form frmPOKA
          Width           =   855
       End
       Begin VB.Label Label12 
+         BackStyle       =   0  'Transparent
          Caption         =   "Em"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -1076,6 +1083,7 @@ Begin VB.Form frmPOKA
          Width           =   375
       End
       Begin VB.Label Label10 
+         BackStyle       =   0  'Transparent
          Caption         =   "Elaborador"
          ForeColor       =   &H00C00000&
          Height          =   255
@@ -1154,13 +1162,13 @@ Begin VB.Form frmPOKA
       TabIndex        =   56
       Top             =   600
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+      _ExtentX        =   2667
+      _ExtentY        =   762
       Picture         =   "frmPOKA.frx":7BFA
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1174,13 +1182,13 @@ Begin VB.Form frmPOKA
       TabIndex        =   57
       Top             =   120
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+      _ExtentX        =   2667
+      _ExtentY        =   762
       Picture         =   "frmPOKA.frx":8194
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1194,13 +1202,13 @@ Begin VB.Form frmPOKA
       TabIndex        =   58
       Top             =   1080
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "frmPOKA.frx":872E
       Caption         =   "Configurar Impressora"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1214,13 +1222,13 @@ Begin VB.Form frmPOKA
       TabIndex        =   59
       Top             =   720
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
+      _ExtentX        =   656
+      _ExtentY        =   656
       Picture         =   "frmPOKA.frx":8CC8
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1236,13 +1244,13 @@ Begin VB.Form frmPOKA
       TabStop         =   0   'False
       Top             =   720
       Width           =   975
-      _ExtentX        =   1720
-      _ExtentY        =   661
+      _ExtentX        =   1715
+      _ExtentY        =   656
       Picture         =   "frmPOKA.frx":9262
       Caption         =   "mana5"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1257,13 +1265,13 @@ Begin VB.Form frmPOKA
       TabStop         =   0   'False
       Top             =   720
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
+      _ExtentX        =   1291
+      _ExtentY        =   656
       Picture         =   "frmPOKA.frx":97FC
       Caption         =   "PF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1279,13 +1287,13 @@ Begin VB.Form frmPOKA
       TabStop         =   0   'False
       Top             =   720
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
+      _ExtentX        =   1291
+      _ExtentY        =   656
       Picture         =   "frmPOKA.frx":9D96
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1301,13 +1309,13 @@ Begin VB.Form frmPOKA
       TabStop         =   0   'False
       Top             =   720
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
+      _ExtentX        =   1291
+      _ExtentY        =   656
       Picture         =   "frmPOKA.frx":A330
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -1441,20 +1449,22 @@ Private Sub CmdMotRev_Click()
 End Sub
 
 Private Sub CmdPaste_Click(Index As Integer)
-  If Picture1(Index).Height = 0 Then
-    Alert ("Sem Imagem")
+ If Picture1(Index).Height = 0 Or Picture1(Index).Picture = 0 Then
+    Alert "Sem Imagem"
   Else
-    Clipboard.Clear
-    Clipboard.SetData Picture1(Index).Image, (vbCFBitmap)
+    ' Instancia a stdImage a partir da imagem atual e envia para a área de transferência
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromStdPicture(Picture1(Index).Picture)
+    imgObj.ToClipboard
   End If
 End Sub
 
 Private Sub CmdTrocaSequencia_Click()
   iMU01 = 4
   NewSeq.Show vbModal
-  SEQ.text = nSEQ
-  SSQ.text = nSSQ
-  item.text = nORD
+  SEQ.tEXT = nSEQ
+  SSQ.tEXT = nSSQ
+  item.tEXT = nORD
 End Sub
 
 Private Sub Command1_Click()
@@ -1468,11 +1478,11 @@ End Sub
 Private Sub Command2_Click(Index As Integer)
   Select Case Index
   Case 0
-    TXT(11).text = "SIMULAR AS FALHAS COM PEÇAS"
+    TXT(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS"
   Case 1
-    TXT(11).text = "SIMULAR AS FALHAS COM PEÇAS DA PRODUÇÃO"
+    TXT(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS DA PRODUÇÃO"
   Case 2
-    TXT(11).text = "SIMULAR AS FALHAS COM PEÇAS COELHO"
+    TXT(11).tEXT = "SIMULAR AS FALHAS COM PEÇAS COELHO"
   End Select
 End Sub
 
@@ -1629,10 +1639,10 @@ Private Sub Form_Load()
 
   CenterFormToScreen Me
 
-  PF.text = nPF
-  SEQ.text = nSEQ
-  SSQ.text = nSSQ
-  item.text = nORD
+  PF.tEXT = nPF
+  SEQ.tEXT = nSEQ
+  SSQ.tEXT = nSSQ
+  item.tEXT = nORD
 
   lTROCOU = Array(False, False, False, False)
 

@@ -1,13 +1,13 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#15.0#0"; "newtab01.OCX"
 Begin VB.Form frmPOA 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MENU"
    ClientHeight    =   9000
-   ClientLeft      =   1095
-   ClientTop       =   330
+   ClientLeft      =   1092
+   ClientTop       =   336
    ClientWidth     =   11760
    Icon            =   "frmPOA.frx":0000
    LinkTopic       =   "Form1"
@@ -20,8 +20,8 @@ Begin VB.Form frmPOA
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   8160
       Top             =   360
-      _ExtentX        =   1191
-      _ExtentY        =   1191
+      _ExtentX        =   953
+      _ExtentY        =   953
    End
    Begin NewTabCtl.NewTab SSTab1 
       Height          =   5175
@@ -29,20 +29,22 @@ Begin VB.Form frmPOA
       TabIndex        =   20
       Top             =   3240
       Width           =   11535
-      _ExtentX        =   20346
-      _ExtentY        =   9128
+      _ExtentX        =   20341
+      _ExtentY        =   9123
+      ControlJustAdded=   0   'False
       Tabs            =   2
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      Tab             =   1
       TabHeight       =   520
-      ControlVersion  =   9
+      ControlVersion  =   15
       TabCaption(0)   =   "Colaborador Elabarador"
       Tab(0).ControlCount=   12
       Tab(0).Control(0)=   "txt(12)"
@@ -73,7 +75,7 @@ Begin VB.Form frmPOA
          Enabled         =   0   'False
          Height          =   375
          Index           =   12
-         Left            =   8280
+         Left            =   -66720
          Locked          =   -1  'True
          TabIndex        =   30
          TabStop         =   0   'False
@@ -85,7 +87,7 @@ Begin VB.Form frmPOA
          Enabled         =   0   'False
          Height          =   375
          Index           =   11
-         Left            =   3720
+         Left            =   -71280
          Locked          =   -1  'True
          TabIndex        =   28
          TabStop         =   0   'False
@@ -97,7 +99,7 @@ Begin VB.Form frmPOA
          Enabled         =   0   'False
          Height          =   375
          Index           =   10
-         Left            =   1320
+         Left            =   -73680
          Locked          =   -1  'True
          TabIndex        =   27
          TabStop         =   0   'False
@@ -107,7 +109,7 @@ Begin VB.Form frmPOA
       Begin VB.TextBox txt 
          Height          =   375
          Index           =   5
-         Left            =   4320
+         Left            =   -70680
          TabIndex        =   25
          Top             =   720
          Width           =   4695
@@ -115,16 +117,16 @@ Begin VB.Form frmPOA
       Begin VB.TextBox txt 
          Height          =   375
          Index           =   4
-         Left            =   1320
+         Left            =   -73680
          TabIndex        =   24
          Top             =   720
          Width           =   1110
       End
       Begin VB.PictureBox Picture1 
          Height          =   495
-         Left            =   -70320
-         ScaleHeight     =   435
-         ScaleWidth      =   195
+         Left            =   4680
+         ScaleHeight     =   444
+         ScaleWidth      =   204
          TabIndex        =   22
          TabStop         =   0   'False
          Top             =   3360
@@ -133,9 +135,9 @@ Begin VB.Form frmPOA
       End
       Begin VB.PictureBox Picture2 
          Height          =   3975
-         Left            =   -74880
-         ScaleHeight     =   3915
-         ScaleWidth      =   4155
+         Left            =   120
+         ScaleHeight     =   3924
+         ScaleWidth      =   4164
          TabIndex        =   21
          TabStop         =   0   'False
          Top             =   480
@@ -143,18 +145,18 @@ Begin VB.Form frmPOA
       End
       Begin XPControls.XPButton CmdConfImp 
          Height          =   435
-         Left            =   -73080
+         Left            =   1920
          TabIndex        =   33
          TabStop         =   0   'False
          Top             =   4560
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOA.frx":058A
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -164,18 +166,18 @@ Begin VB.Form frmPOA
       End
       Begin XPControls.XPButton CmdImprimir 
          Height          =   435
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   34
          TabStop         =   0   'False
          Top             =   4560
          Width           =   1515
-         _ExtentX        =   2672
-         _ExtentY        =   767
+         _ExtentX        =   2667
+         _ExtentY        =   762
          Picture         =   "frmPOA.frx":0B24
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -186,18 +188,18 @@ Begin VB.Form frmPOA
       Begin XPControls.XPButton escidfolha 
          Height          =   375
          Index           =   0
-         Left            =   2520
+         Left            =   -72480
          TabIndex        =   36
          TabStop         =   0   'False
          Top             =   720
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
+         _ExtentX        =   656
+         _ExtentY        =   656
          Picture         =   "frmPOA.frx":10BE
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -208,18 +210,18 @@ Begin VB.Form frmPOA
       Begin XPControls.XPButton escidfolha 
          Height          =   375
          Index           =   1
-         Left            =   3000
+         Left            =   -72000
          TabIndex        =   37
          TabStop         =   0   'False
          Top             =   720
          Width           =   735
-         _ExtentX        =   1296
-         _ExtentY        =   661
+         _ExtentX        =   1291
+         _ExtentY        =   656
          Picture         =   "frmPOA.frx":1658
          Caption         =   "LX"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -229,18 +231,18 @@ Begin VB.Form frmPOA
       End
       Begin XPControls.XPButton Command6 
          Height          =   375
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   38
          TabStop         =   0   'False
          Top             =   720
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
+         _ExtentX        =   656
+         _ExtentY        =   656
          Picture         =   "frmPOA.frx":1BF2
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -250,18 +252,18 @@ Begin VB.Form frmPOA
       End
       Begin XPControls.XPButton Command7 
          Height          =   375
-         Left            =   2640
+         Left            =   -72360
          TabIndex        =   39
          TabStop         =   0   'False
          Top             =   1440
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
+         _ExtentX        =   656
+         _ExtentY        =   656
          Picture         =   "frmPOA.frx":218C
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -271,18 +273,18 @@ Begin VB.Form frmPOA
       End
       Begin XPControls.XPButton CmdPaste 
          Height          =   435
-         Left            =   -71280
+         Left            =   3720
          TabIndex        =   40
          TabStop         =   0   'False
          Top             =   4560
          Width           =   2415
-         _ExtentX        =   4260
-         _ExtentY        =   767
+         _ExtentX        =   4255
+         _ExtentY        =   762
          Picture         =   "frmPOA.frx":2726
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -292,17 +294,17 @@ Begin VB.Form frmPOA
       End
       Begin XPControls.XPButton Incluirimagem 
          Height          =   435
-         Left            =   -70440
+         Left            =   4560
          TabIndex        =   41
          Top             =   600
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOA.frx":2CC0
          Caption         =   "Incluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -312,17 +314,17 @@ Begin VB.Form frmPOA
       End
       Begin XPControls.XPButton DelImg 
          Height          =   435
-         Left            =   -70440
+         Left            =   4560
          TabIndex        =   42
          Top             =   1200
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOA.frx":315A
          Caption         =   "Excluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -332,17 +334,17 @@ Begin VB.Form frmPOA
       End
       Begin XPControls.XPButton VerImg 
          Height          =   495
-         Left            =   -70440
+         Left            =   4560
          TabIndex        =   43
          Top             =   1920
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmPOA.frx":35F4
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -352,17 +354,17 @@ Begin VB.Form frmPOA
       End
       Begin XPControls.XPButton Command4 
          Height          =   435
-         Left            =   -70440
+         Left            =   4560
          TabIndex        =   44
          Top             =   2520
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPOA.frx":3A8E
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -374,7 +376,7 @@ Begin VB.Form frmPOA
          Caption         =   "Em"
          ForeColor       =   &H00C00000&
          Height          =   255
-         Left            =   7920
+         Left            =   -67080
          TabIndex        =   29
          Top             =   1440
          Width           =   375
@@ -383,7 +385,7 @@ Begin VB.Form frmPOA
          Caption         =   "Elaborador"
          ForeColor       =   &H00C00000&
          Height          =   255
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   26
          Top             =   1440
          Width           =   855
@@ -395,7 +397,7 @@ Begin VB.Form frmPOA
          ForeColor       =   &H00C00000&
          Height          =   195
          Index           =   4
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   23
          Top             =   720
          Width           =   855
@@ -538,13 +540,13 @@ Begin VB.Form frmPOA
       TabStop         =   0   'False
       Top             =   600
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+      _ExtentX        =   2667
+      _ExtentY        =   762
       Picture         =   "frmPOA.frx":3F28
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -559,13 +561,13 @@ Begin VB.Form frmPOA
       TabStop         =   0   'False
       Top             =   120
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+      _ExtentX        =   2667
+      _ExtentY        =   762
       Picture         =   "frmPOA.frx":44C2
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -579,13 +581,13 @@ Begin VB.Form frmPOA
       TabIndex        =   35
       Top             =   600
       Width           =   375
-      _ExtentX        =   661
-      _ExtentY        =   661
+      _ExtentX        =   656
+      _ExtentY        =   656
       Picture         =   "frmPOA.frx":4A5C
       Caption         =   ""
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -601,13 +603,13 @@ Begin VB.Form frmPOA
       TabStop         =   0   'False
       Top             =   600
       Width           =   975
-      _ExtentX        =   1720
-      _ExtentY        =   661
+      _ExtentX        =   1715
+      _ExtentY        =   656
       Picture         =   "frmPOA.frx":4FF6
       Caption         =   "mana5"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -622,13 +624,13 @@ Begin VB.Form frmPOA
       TabStop         =   0   'False
       Top             =   600
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
+      _ExtentX        =   1291
+      _ExtentY        =   656
       Picture         =   "frmPOA.frx":5590
       Caption         =   "PF"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -644,13 +646,13 @@ Begin VB.Form frmPOA
       TabStop         =   0   'False
       Top             =   600
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
+      _ExtentX        =   1291
+      _ExtentY        =   656
       Picture         =   "frmPOA.frx":5B2A
       Caption         =   "LX"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -666,13 +668,13 @@ Begin VB.Form frmPOA
       TabStop         =   0   'False
       Top             =   600
       Width           =   735
-      _ExtentX        =   1296
-      _ExtentY        =   661
+      _ExtentX        =   1291
+      _ExtentY        =   656
       Picture         =   "frmPOA.frx":60C4
       Caption         =   "MC"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -788,7 +790,7 @@ Private Sub cmdClose_Click()
   On Error Resume Next
   If MDG("Gravar alteraçôes") Then
     For iLOOP = 0 To nCAMPOS - 1
-      aVAL(iLOOP) = TXT(iLOOP)
+      aVAL(iLOOP) = txt(iLOOP)
     Next iLOOP
     GrvSQL cARQ, cSQL, nCAMPOS, aCAM, aVAL, aFOR, 1 'pula 1 chave numero
     If lTROCOU Then
@@ -815,19 +817,22 @@ Private Sub CmdImprimir_Click()
 End Sub
 
 Private Sub CmdPaste_Click()
-  If Picture1.Height = 0 Then
-    Alert ("Sem Imagem")
+' Verifica se existe uma imagem válida carregada no Picture1
+  If Picture1.Height = 0 Or Picture1.Picture = 0 Then
+    Alert "Sem Imagem"
   Else
-    Clipboard.Clear
-    Clipboard.SetData Picture1.Image, (vbCFBitmap)
+    ' Instancia a stdImage a partir da imagem atual e envia para a área de transferência
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromStdPicture(Picture1.Picture)
+    imgObj.ToClipboard
   End If
 End Sub
 
 Private Sub Command1_Click()
   escpffim.Show vbModal, Me
   If lRETU Then
-    TXT(1) = eRETU02
-    TXT(2) = eRETU03
+    txt(1) = eRETU02
+    txt(2) = eRETU03
   End If
 End Sub
 
@@ -836,7 +841,7 @@ Private Sub Command2_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim nNUMERO As Long
-  nNUMERO = FixInt(TXT(4), 0)
+  nNUMERO = FixInt(txt(4), 0)
 
   cARQ = PegPath("PATH", "LOGIXODBC")
   sSQL = "SELECT nom_completo as NOMTEC FROM funcionario WHERE cod_empresa='01' and num_matricula=" & nNUMERO
@@ -848,13 +853,13 @@ Private Sub Command2_Click()
     aRETU = PegSQL(cARQ, sSQL, 1, Array("NOMTEC"), Array("C"), Array(""))
   End If
   If lRETU Then
-    TXT(5) = aRETU(0)
+    txt(5) = aRETU(0)
   End If
 End Sub
 
 Private Sub Command3_Click()
   Dim nSAC As Long
-  Dim nLEN As Long
+  Dim nLen As Long
   Dim cDESC01 As String
   Dim cDESC02 As String
   Dim cDESC03 As String
@@ -869,41 +874,41 @@ Private Sub Command3_Click()
   Dim aCAMJET As Variant
   Dim aVALJET As Variant
 
-  If TXT(8) = "N" Then
+  If txt(8) = "N" Then
     Alert ("Ja respondida")
     Exit Sub
   End If
 
-  If TXT(8) = "S" And FixNum(TXT(7)) > 0 Then
+  If txt(8) = "S" And FixNum(txt(7)) > 0 Then
     Alert ("Ja respondida")
     Exit Sub
   End If
 
   If Not MDG("Gerar Sac") Then
-    TXT(8) = "N"
-    TXT(9) = Today()
+    txt(8) = "N"
+    txt(9) = Today()
     Exit Sub
   End If
-  TXT(8) = "S"
-  TXT(9) = Today()
+  txt(8) = "S"
+  txt(9) = Today()
 
-  cPROBLEMA = FixStr(TXT(3))
-  nLEN = Len(cPROBLEMA)
+  cPROBLEMA = FixStr(txt(3))
+  nLen = Len(cPROBLEMA)
 
   cDESC01 = Mid(cPROBLEMA, 1, 100)
-  If nLEN > 100 Then
+  If nLen > 100 Then
     cDESC02 = Mid(cPROBLEMA, 101, 100)
   End If
-  If nLEN > 200 Then
+  If nLen > 200 Then
     cDESC03 = Mid(cPROBLEMA, 201, 100)
   End If
-  If nLEN > 300 Then
+  If nLen > 300 Then
     cDESC04 = Mid(cPROBLEMA, 301)
   End If
 
   cCAMJET = PegPath("PATH", "MANA5TGQ")
   cCOMJET = GeraConn(cCAM, "FOX")
-  cData = Format(Date, "DD/MM/YY")
+  cData = format(Date, "DD/MM/YY")
   nSAC = PegMAXSQL(cCOMJET, "SAC", "SAC", 1)
   nSAC = nSAC + 1
   
@@ -911,20 +916,20 @@ Private Sub Command3_Click()
  
      aCAMJET = Array("SAC", "INCUSER", "POA", "CODIGO", "NOME", "DESC01", _
      "DESC02", "DESC03", "DESC04", "DOCUMENTO", "DATA", "INCDATA")
-     aVALJET = Array(nSAC, zUSER, FixNum(TXT(0)), FixStr(TXT(1)), FixStr(cDESC01), _
+     aVALJET = Array(nSAC, zUSER, FixNum(txt(0)), FixStr(txt(1)), FixStr(cDESC01), _
                     FixStr(cDESC02), FixStr(cDESC03), FixStr(cDESC04), "Prog. Olhos Abertos", cData, cData)
     IncluiSQL cCOMJET, "SELECT * FROM SAC WHERE SAC=" & nSAC, 12 _
            , aCAMJET _
            , aVALJET, _
            , False, True
            
-  TXT(7) = nSAC
+  txt(7) = nSAC
 
 
 End Sub
 
 Private Sub Command4_Click()
-  salvarpict Me, Picture1, StrZero(TXT(0), 8)
+  salvarpict Me, Picture1, StrZero(txt(0), 8)
 End Sub
 
 Private Sub Command5_Click()
@@ -932,24 +937,24 @@ Private Sub Command5_Click()
   Dim aRETU As Variant
   Dim sSQL As String
   Dim cCODIGO As String
-  cCODIGO = FixStr(TXT(1), "", "TRIM")
+  cCODIGO = FixStr(txt(1), "", "TRIM")
   cARQ = GeraConn(zMANA5EMP, "JETFOX")
   sSQL = "SELECT NOME FROM MS01 WHERE CODIGO='" & cCODIGO & "'"
   aRETU = PegSQL(cARQ, sSQL, 1, Array("NOME"), Array("C"), Array(""))
   If lRETU Then
-    TXT(2) = aRETU(0)
+    txt(2) = aRETU(0)
   End If
 End Sub
 
 Private Sub Command6_Click()
-  TXT(4) = zIDFOLHA
-  TXT(5) = zNOMEFOLHA
+  txt(4) = zIDFOLHA
+  txt(5) = zNOMEFOLHA
 End Sub
 
 Private Sub Command7_Click()
-  TXT(10) = zIDFOLHA
-  TXT(11) = zNOMEFOLHA
-  TXT(12) = Date
+  txt(10) = zIDFOLHA
+  txt(11) = zNOMEFOLHA
+  txt(12) = Date
 End Sub
 
 Private Sub PegCodigoDescricaoPf()
@@ -960,12 +965,12 @@ Private Sub PegCodigoDescricaoPf()
   sSQL = "SELECT CODIGO,DESCR FROM PF WHERE PF=" & nPF
   aRETU = PegSQL(sARQ, sSQL, 2, Array("CODIGO", "DESCR"), Array("C", "C"), Array("", ""))
   If lRETU Then
-    TXT(1) = aRETU(0)
-    TXT(2) = aRETU(1)
-    TXT(1).Enabled = False
-    TXT(2).Enabled = False
-    TXT(1).Locked = True
-    TXT(2).Locked = True
+    txt(1) = aRETU(0)
+    txt(2) = aRETU(1)
+    txt(1).Enabled = False
+    txt(2).Enabled = False
+    txt(1).Locked = True
+    txt(2).Locked = True
     ESCMS01A(0).Enabled = False
     ESCMS01A(0).Visible = False
     ESCMS01A(1).Enabled = False
@@ -1001,14 +1006,14 @@ Private Sub escidfolha_Click(Index As Integer)
   escMP04.Show vbModal, Me
 
   If lRETU Then
-    TXT(4) = eRETU01
-    TXT(5) = eRETU02
+    txt(4) = eRETU01
+    txt(5) = eRETU02
   End If
 End Sub
 
 Private Sub ESCMS01A_Click(Index As Integer)
   Dim cCHAVEBUS As String
-  cCHAVEBUS = TXT(1)
+  cCHAVEBUS = txt(1)
   ePASS01 = "MANA5"
   If Index = 1 Then
     ePASS01 = "LOGIX"
@@ -1018,8 +1023,8 @@ Private Sub ESCMS01A_Click(Index As Integer)
   End If
   escms01.Show vbModal, Me
   If lRETU Then
-    TXT(1) = eRETU01
-    TXT(2) = eRETU02
+    txt(1) = eRETU01
+    txt(2) = eRETU02
   End If
 End Sub
 
@@ -1028,9 +1033,9 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-  PF.text = nPF
-  SEQ.text = nSEQ
-  SSQ.text = nSSQ
+  PF.tEXT = nPF
+  SEQ.tEXT = nSEQ
+  SSQ.tEXT = nSSQ
   CenterFormToScreen Me
 
   lTROCOU = False
@@ -1042,7 +1047,7 @@ Private Sub Form_Load()
   aPAD = Array(0, "", "", "", 0, "", "", 0, "", "", 0, "", "")
   aVAL = PegSQL(cARQ, cSQL, nCAMPOS, aCAM, aFOR, aPAD)
   For iLOOP = 0 To nCAMPOS - 1
-    TXT(iLOOP) = aVAL(iLOOP)
+    txt(iLOOP) = aVAL(iLOOP)
   Next iLOOP
   If ADOPegBlob(Picture1, cARQ, "POA", "numero=" & nPPAP, "FOTO") Then  ' ADOPegBlob(cARQ, cSQL, Picture1, "FOTO") Then
     StretchSourcePictureFromPicture Picture1, Picture2

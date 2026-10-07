@@ -1,14 +1,14 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.0#0"; "VBFLXGRD18.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#15.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmPFS 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFS"
    ClientHeight    =   6540
-   ClientLeft      =   1095
-   ClientTop       =   330
+   ClientLeft      =   1092
+   ClientTop       =   336
    ClientWidth     =   12180
    Icon            =   "frmPFS.frx":0000
    LinkTopic       =   "Form1"
@@ -21,8 +21,8 @@ Begin VB.Form frmPFS
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   9240
       Top             =   120
-      _ExtentX        =   1191
-      _ExtentY        =   1191
+      _ExtentX        =   953
+      _ExtentY        =   953
    End
    Begin VB.CommandButton cmdpeg 
       Height          =   360
@@ -73,12 +73,13 @@ Begin VB.Form frmPFS
       TabIndex        =   13
       Top             =   1320
       Width           =   10455
-      _ExtentX        =   18441
-      _ExtentY        =   9128
+      _ExtentX        =   18436
+      _ExtentY        =   9123
+      ControlJustAdded=   0   'False
       Tabs            =   11
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -86,9 +87,9 @@ Begin VB.Form frmPFS
          Strikethrough   =   0   'False
       EndProperty
       TabsPerRow      =   6
-      Tab             =   5
+      Tab             =   7
       TabHeight       =   706
-      ControlVersion  =   9
+      ControlVersion  =   15
       TabCaption(0)   =   "Mao de Obra"
       Tab(0).ControlCount=   63
       Tab(0).Control(0)=   "escArranjo(2)"
@@ -700,7 +701,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -718,7 +719,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -736,7 +737,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -754,7 +755,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -890,9 +891,9 @@ Begin VB.Form frmPFS
       Begin VB.PictureBox Picture1 
          Height          =   495
          Index           =   3
-         Left            =   -68040
-         ScaleHeight     =   435
-         ScaleWidth      =   195
+         Left            =   6960
+         ScaleHeight     =   444
+         ScaleWidth      =   204
          TabIndex        =   263
          Top             =   3600
          Visible         =   0   'False
@@ -901,9 +902,9 @@ Begin VB.Form frmPFS
       Begin VB.PictureBox Picture2 
          Height          =   2535
          Index           =   3
-         Left            =   -70200
-         ScaleHeight     =   2475
-         ScaleWidth      =   2835
+         Left            =   4800
+         ScaleHeight     =   2484
+         ScaleWidth      =   2844
          TabIndex        =   262
          Top             =   960
          Width           =   2895
@@ -912,8 +913,8 @@ Begin VB.Form frmPFS
          Height          =   495
          Index           =   4
          Left            =   -72480
-         ScaleHeight     =   435
-         ScaleWidth      =   195
+         ScaleHeight     =   444
+         ScaleWidth      =   204
          TabIndex        =   261
          Top             =   3600
          Visible         =   0   'False
@@ -923,8 +924,8 @@ Begin VB.Form frmPFS
          Height          =   495
          Index           =   2
          Left            =   -72720
-         ScaleHeight     =   435
-         ScaleWidth      =   195
+         ScaleHeight     =   444
+         ScaleWidth      =   204
          TabIndex        =   260
          Top             =   3840
          Visible         =   0   'False
@@ -933,9 +934,9 @@ Begin VB.Form frmPFS
       Begin VB.PictureBox Picture2 
          Height          =   2535
          Index           =   4
-         Left            =   120
-         ScaleHeight     =   2475
-         ScaleWidth      =   2835
+         Left            =   -74880
+         ScaleHeight     =   2484
+         ScaleWidth      =   2844
          TabIndex        =   259
          Top             =   960
          Width           =   2895
@@ -944,8 +945,8 @@ Begin VB.Form frmPFS
          Height          =   2535
          Index           =   2
          Left            =   -74880
-         ScaleHeight     =   2475
-         ScaleWidth      =   2835
+         ScaleHeight     =   2484
+         ScaleWidth      =   2844
          TabIndex        =   258
          Top             =   1200
          Width           =   2895
@@ -1113,9 +1114,9 @@ Begin VB.Form frmPFS
       Begin VB.PictureBox Picture2 
          Height          =   2535
          Index           =   1
-         Left            =   -74880
-         ScaleHeight     =   2475
-         ScaleWidth      =   2835
+         Left            =   120
+         ScaleHeight     =   2484
+         ScaleWidth      =   2844
          TabIndex        =   234
          Top             =   960
          Width           =   2895
@@ -1123,9 +1124,9 @@ Begin VB.Form frmPFS
       Begin VB.PictureBox Picture1 
          Height          =   495
          Index           =   1
-         Left            =   -72720
-         ScaleHeight     =   435
-         ScaleWidth      =   195
+         Left            =   2280
+         ScaleHeight     =   444
+         ScaleWidth      =   204
          TabIndex        =   233
          Top             =   3600
          Visible         =   0   'False
@@ -1135,8 +1136,8 @@ Begin VB.Form frmPFS
          Height          =   2535
          Index           =   0
          Left            =   -74760
-         ScaleHeight     =   2475
-         ScaleWidth      =   2835
+         ScaleHeight     =   2484
+         ScaleWidth      =   2844
          TabIndex        =   232
          Top             =   960
          Width           =   2895
@@ -1145,8 +1146,8 @@ Begin VB.Form frmPFS
          Height          =   495
          Index           =   0
          Left            =   -72480
-         ScaleHeight     =   435
-         ScaleWidth      =   315
+         ScaleHeight     =   444
+         ScaleWidth      =   324
          TabIndex        =   231
          Top             =   3600
          Visible         =   0   'False
@@ -1155,7 +1156,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1173,7 +1174,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1191,7 +1192,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1209,7 +1210,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1227,7 +1228,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1245,7 +1246,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1263,7 +1264,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1281,7 +1282,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1319,7 +1320,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1337,7 +1338,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1355,7 +1356,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1373,7 +1374,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1391,7 +1392,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1409,7 +1410,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1427,7 +1428,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1445,7 +1446,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1463,7 +1464,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1481,7 +1482,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1499,7 +1500,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1517,7 +1518,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1535,7 +1536,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1553,7 +1554,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1571,7 +1572,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1589,7 +1590,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1607,7 +1608,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1625,7 +1626,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1643,7 +1644,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1661,7 +1662,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1679,7 +1680,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1697,7 +1698,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1715,7 +1716,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1733,7 +1734,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1751,7 +1752,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1769,7 +1770,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1787,7 +1788,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1805,7 +1806,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1823,7 +1824,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1841,7 +1842,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1859,7 +1860,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1877,7 +1878,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1895,7 +1896,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1913,7 +1914,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1931,7 +1932,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1949,7 +1950,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1967,7 +1968,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -1985,7 +1986,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2003,7 +2004,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2021,7 +2022,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2039,7 +2040,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2057,7 +2058,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2075,7 +2076,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2093,7 +2094,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2111,7 +2112,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2129,7 +2130,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2147,7 +2148,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2165,7 +2166,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2183,7 +2184,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2201,7 +2202,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2219,7 +2220,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2237,7 +2238,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2255,7 +2256,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2273,7 +2274,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2291,7 +2292,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2309,7 +2310,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2327,7 +2328,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2345,7 +2346,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2363,7 +2364,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2381,7 +2382,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2399,7 +2400,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2417,7 +2418,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2435,7 +2436,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2453,7 +2454,7 @@ Begin VB.Form frmPFS
          Caption         =   "¡"
          BeginProperty Font 
             Name            =   "Wingdings"
-            Size            =   8.25
+            Size            =   8.4
             Charset         =   2
             Weight          =   700
             Underline       =   0   'False
@@ -2470,7 +2471,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -2488,7 +2489,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -2506,7 +2507,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -2524,7 +2525,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -2542,7 +2543,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -2560,7 +2561,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -2578,7 +2579,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -2596,7 +2597,7 @@ Begin VB.Form frmPFS
       Begin VB.TextBox TXTFIELDS 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   9.75
+            Size            =   9.6
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -2614,7 +2615,7 @@ Begin VB.Form frmPFS
       Begin VB.CommandButton Command13 
          Caption         =   "Novo"
          Height          =   375
-         Left            =   8760
+         Left            =   -66240
          TabIndex        =   139
          Top             =   960
          Width           =   1095
@@ -2622,7 +2623,7 @@ Begin VB.Form frmPFS
       Begin VB.CommandButton Command14 
          Caption         =   "Apaga"
          Height          =   375
-         Left            =   8760
+         Left            =   -66240
          TabIndex        =   138
          Top             =   1440
          Width           =   1095
@@ -2630,7 +2631,7 @@ Begin VB.Form frmPFS
       Begin VB.CommandButton Command15 
          Caption         =   "Editar"
          Height          =   375
-         Left            =   8760
+         Left            =   -66240
          TabIndex        =   137
          Top             =   1920
          Width           =   1095
@@ -2638,7 +2639,7 @@ Begin VB.Form frmPFS
       Begin VB.CommandButton Command16 
          Caption         =   "Importar"
          Height          =   375
-         Left            =   8760
+         Left            =   -66240
          TabIndex        =   136
          Top             =   2520
          Width           =   1095
@@ -3712,17 +3713,17 @@ Begin VB.Form frmPFS
          TabIndex        =   135
          Top             =   930
          Width           =   8415
-         _ExtentX        =   14843
-         _ExtentY        =   6800
+         _ExtentX        =   14838
+         _ExtentY        =   6795
       End
       Begin VBFLXGRD18.VBFlexGrid GrdQsbLep 
          Height          =   3915
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   140
          Top             =   930
          Width           =   8475
-         _ExtentX        =   14949
-         _ExtentY        =   6906
+         _ExtentX        =   14944
+         _ExtentY        =   6900
       End
       Begin XPControls.XPButton Incimg 
          Height          =   435
@@ -3732,13 +3733,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   1080
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":58A0
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3749,18 +3750,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton Incimg 
          Height          =   435
          Index           =   1
-         Left            =   -71880
+         Left            =   3120
          TabIndex        =   324
          TabStop         =   0   'False
          Top             =   1080
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":5D3A
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3776,13 +3777,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   1200
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":61D4
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3793,18 +3794,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton Incimg 
          Height          =   435
          Index           =   3
-         Left            =   -67200
+         Left            =   7800
          TabIndex        =   326
          TabStop         =   0   'False
          Top             =   960
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":666E
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3820,13 +3821,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   960
          Width           =   1335
-         _ExtentX        =   2355
-         _ExtentY        =   767
+         _ExtentX        =   2350
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":6B08
          Caption         =   "Incluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3842,13 +3843,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   1560
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":6FA2
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3859,18 +3860,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton DelImg 
          Height          =   435
          Index           =   1
-         Left            =   -71880
+         Left            =   3120
          TabIndex        =   329
          TabStop         =   0   'False
          Top             =   1560
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":743C
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3886,13 +3887,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   1680
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":78D6
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3903,18 +3904,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton DelImg 
          Height          =   435
          Index           =   3
-         Left            =   -67200
+         Left            =   7800
          TabIndex        =   331
          TabStop         =   0   'False
          Top             =   1440
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":7D70
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3930,13 +3931,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   1560
          Width           =   1335
-         _ExtentX        =   2355
-         _ExtentY        =   767
+         _ExtentX        =   2350
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":820A
          Caption         =   "Excluir Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3952,13 +3953,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   2040
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":86A4
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3969,18 +3970,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton commandx 
          Height          =   435
          Index           =   1
-         Left            =   -71880
+         Left            =   3120
          TabIndex        =   334
          TabStop         =   0   'False
          Top             =   2040
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":8B3E
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -3996,13 +3997,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   2160
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":8FD8
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4013,18 +4014,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton commandx 
          Height          =   435
          Index           =   3
-         Left            =   -67200
+         Left            =   7800
          TabIndex        =   336
          TabStop         =   0   'False
          Top             =   1920
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":9472
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4040,13 +4041,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   2160
          Width           =   1335
-         _ExtentX        =   2355
-         _ExtentY        =   767
+         _ExtentX        =   2350
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":990C
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4062,13 +4063,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   2520
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":9DA6
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4079,18 +4080,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton cmdimprimir 
          Height          =   435
          Index           =   1
-         Left            =   -71880
+         Left            =   3120
          TabIndex        =   339
          TabStop         =   0   'False
          Top             =   2640
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":A340
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4106,13 +4107,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   2640
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":A8DA
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4123,18 +4124,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton cmdimprimir 
          Height          =   435
          Index           =   3
-         Left            =   -67200
+         Left            =   7800
          TabIndex        =   341
          TabStop         =   0   'False
          Top             =   2520
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":AE74
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4150,13 +4151,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   2760
          Width           =   1335
-         _ExtentX        =   2355
-         _ExtentY        =   767
+         _ExtentX        =   2350
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":B40E
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4172,13 +4173,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   3000
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":B9A8
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4189,18 +4190,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton CmdPaste 
          Height          =   435
          Index           =   1
-         Left            =   -71880
+         Left            =   3120
          TabIndex        =   344
          TabStop         =   0   'False
          Top             =   3240
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":BF42
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4216,13 +4217,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   3120
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":C4DC
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4233,18 +4234,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton CmdPaste 
          Height          =   435
          Index           =   3
-         Left            =   -67200
+         Left            =   7800
          TabIndex        =   346
          TabStop         =   0   'False
          Top             =   3120
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":CA76
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4260,13 +4261,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   3240
          Width           =   1335
-         _ExtentX        =   2355
-         _ExtentY        =   767
+         _ExtentX        =   2350
+         _ExtentY        =   762
          Picture         =   "frmPFS.frx":D010
          Caption         =   "Copia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4282,13 +4283,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   3480
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmPFS.frx":D5AA
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4299,18 +4300,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton VerImg 
          Height          =   495
          Index           =   1
-         Left            =   -71880
+         Left            =   3120
          TabIndex        =   349
          TabStop         =   0   'False
          Top             =   3840
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmPFS.frx":DA44
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4326,13 +4327,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   3600
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmPFS.frx":DEDE
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4343,18 +4344,18 @@ Begin VB.Form frmPFS
       Begin XPControls.XPButton VerImg 
          Height          =   495
          Index           =   3
-         Left            =   -67200
+         Left            =   7800
          TabIndex        =   351
          TabStop         =   0   'False
          Top             =   3720
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmPFS.frx":E378
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4370,13 +4371,13 @@ Begin VB.Form frmPFS
          TabStop         =   0   'False
          Top             =   3720
          Width           =   1335
-         _ExtentX        =   2355
-         _ExtentY        =   873
+         _ExtentX        =   2350
+         _ExtentY        =   868
          Picture         =   "frmPFS.frx":E812
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -4957,13 +4958,13 @@ Begin VB.Form frmPFS
       TabIndex        =   320
       Top             =   600
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+      _ExtentX        =   2667
+      _ExtentY        =   762
       Picture         =   "frmPFS.frx":ECAC
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -4977,13 +4978,13 @@ Begin VB.Form frmPFS
       TabIndex        =   321
       Top             =   120
       Width           =   1515
-      _ExtentX        =   2672
-      _ExtentY        =   767
+      _ExtentX        =   2667
+      _ExtentY        =   762
       Picture         =   "frmPFS.frx":F246
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -4997,13 +4998,13 @@ Begin VB.Form frmPFS
       TabIndex        =   322
       Top             =   2760
       Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   1296
+      _ExtentX        =   2561
+      _ExtentY        =   1291
       Picture         =   "frmPFS.frx":F7E0
       Caption         =   "Configurar Impressora"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -5253,11 +5254,14 @@ Private Sub CmdImprimir_Click(Index As Integer)
 End Sub
 
 Private Sub CmdPaste_Click(Index As Integer)
-  If Picture1(Index).Height = 0 Then
-    Alert ("Sem Imagem")
+' Verifica se existe uma imagem válida carregada no Picture1(Index)
+  If Picture1(Index).Height = 0 Or Picture1(Index).Picture = 0 Then
+    Alert "Sem Imagem"
   Else
-    Clipboard.Clear
-    Clipboard.SetData Picture1(Index).Image, (vbCFBitmap)
+    ' Instancia a stdImage a partir da imagem atual e envia para a área de transferência
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromStdPicture(Picture1(Index).Picture)
+    imgObj.ToClipboard
   End If
 End Sub
 
@@ -5393,25 +5397,25 @@ End Sub
 
 Private Sub Command20_Click()
   Dim x As Integer
-  Dim cTEMP As String
+  Dim cTemp As String
   If Not MDG("Trocar Tipo Almofada") Then
     Exit Sub
   End If
-  If TXTFIELDS(36).text = "6" Then
-    TXTFIELDS(36).text = "8"
+  If TXTFIELDS(36).tEXT = "6" Then
+    TXTFIELDS(36).tEXT = "8"
   Else
-    TXTFIELDS(36).text = "6"
+    TXTFIELDS(36).tEXT = "6"
   End If
   For x = 1 To 8
-    If TXTFIELDS(36).text = "6" Then
-      cTEMP = String(6, "¡") + Space(2)
+    If TXTFIELDS(36).tEXT = "6" Then
+      cTemp = String(6, "¡") + Space(2)
       If x >= 5 Then
-        cTEMP = Space(8)
+        cTemp = Space(8)
       End If
     Else
-      cTEMP = String(8, "¡")
+      cTemp = String(8, "¡")
     End If
-    TXTFIELDS(40 + x).text = cTEMP
+    TXTFIELDS(40 + x).tEXT = cTemp
   Next
 End Sub
 Private Sub Command3_Click()
@@ -5587,11 +5591,11 @@ Private Sub CommandX_Click(Index As Integer)
   End Select
 
   cARQ = cARQ & "_PF_"
-  cARQ = cARQ & StrZero(FixInt(TXTPF.text), 6)
+  cARQ = cARQ & StrZero(FixInt(TXTPF.tEXT), 6)
   cARQ = cARQ & "_SEQ_"
-  cARQ = cARQ & StrZero(FixInt(TXTSEQ.text), 3)
+  cARQ = cARQ & StrZero(FixInt(TXTSEQ.tEXT), 3)
   cARQ = cARQ & "_SSQ_"
-  cARQ = cARQ & StrZero(FixInt(TXTSSQ.text), 3)
+  cARQ = cARQ & StrZero(FixInt(TXTSSQ.tEXT), 3)
   salvarpict Me, Picture1(Index), cARQ
 
 End Sub
@@ -5636,21 +5640,21 @@ End Sub
 Private Sub esc1_Click(Index As Integer)
   Dim linha As Integer
   Dim coluna As Integer
-  Dim cTEMP As String
+  Dim cTemp As String
   Dim cDIG As String
   Dim cGRV As String
   linha = (Int((Index - 1) / 8)) + 1
   coluna = (Index + 8) - (linha * 8)
-  If TXTFIELDS(36).text = "6" And linha > 4 Then
+  If TXTFIELDS(36).tEXT = "6" And linha > 4 Then
     Alert ("Linha Incorreta para Formato 4x6")
     Exit Sub
   End If
-  If TXTFIELDS(36).text = "6" And coluna > 6 Then
+  If TXTFIELDS(36).tEXT = "6" And coluna > 6 Then
     Alert ("Coluna Incorreta para Formato 4x6")
     Exit Sub
   End If
-  cTEMP = TXTFIELDS(40 + linha).text
-  cDIG = Mid(cTEMP, coluna, 1)
+  cTemp = TXTFIELDS(40 + linha).tEXT
+  cDIG = Mid(cTemp, coluna, 1)
   If cDIG = "l" Then
     cDIG = "¡"
   Else
@@ -5658,13 +5662,13 @@ Private Sub esc1_Click(Index As Integer)
   End If
   Select Case coluna
   Case 1
-    cGRV = cDIG & Mid(cTEMP, 2, 7)
+    cGRV = cDIG & Mid(cTemp, 2, 7)
   Case 8
-    cGRV = Mid(cTEMP, 1, 7) + cDIG
+    cGRV = Mid(cTemp, 1, 7) + cDIG
   Case Else
-    cGRV = Mid(cTEMP, 1, coluna - 1) + cDIG + Mid(cTEMP, coluna + 1)
+    cGRV = Mid(cTemp, 1, coluna - 1) + cDIG + Mid(cTemp, coluna + 1)
   End Select
-  TXTFIELDS(40 + linha).text = cGRV
+  TXTFIELDS(40 + linha).tEXT = cGRV
   TXTFIELDS(40 + linha).Refresh
 End Sub
 
@@ -5824,9 +5828,9 @@ Private Sub Form_Load()
   Dim x As Integer
   CenterFormToScreen Me
   lTROCOU = Array(False, False, False, False, False)
-  TXTPF.text = nPF
-  TXTSEQ.text = nSEQ
-  TXTSSQ.text = nSSQ
+  TXTPF.tEXT = nPF
+  TXTSEQ.tEXT = nSEQ
+  TXTSSQ.tEXT = nSSQ
   cARQPF = Sdb        'agora tem que usar sdb pois pode ser pf pfp pfg
 
   'Usando 2 matrizes pois estava com erro string complex
