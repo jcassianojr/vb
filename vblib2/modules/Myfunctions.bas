@@ -1481,10 +1481,10 @@ Public Function Txt2Lin(ByVal cTEXTO As String, Optional ByVal nCOL As Integer =
 End Function
 
 Public Function TrimNull(ByVal sTxt As String) As String
-  Dim Arr() As String
-  Arr() = Split(sTxt, Chr$(0))
-  If UBound(Arr) >= 0 Then
-    TrimNull = Arr(0)
+  Dim arr() As String
+  arr() = Split(sTxt, Chr$(0))
+  If UBound(arr) >= 0 Then
+    TrimNull = arr(0)
   Else
     TrimNull = sTxt
   End If
@@ -1957,12 +1957,12 @@ Public Function WinApiError_ToStr(ByVal MessageID As Long) As String
 End Function
 
 ' --- Sub-rotina Principal Aprimorada ---
-' --- Sub-rotina Principal Aprimorada ---
 Public Sub SayErro(Optional ByVal cERROUSO As String = "", Optional ByVal lMES As Boolean = True)
     Dim nHANDLE As Long, cARQ As String, cERRO As String
     Dim cARQImg As String
     Dim imgObj As Object
     Dim baseName As String
+    ' Dim sTrace As String ' Descomentar no futuro
     
     If Err.Number = 0 Then Exit Sub
     
@@ -1990,28 +1990,36 @@ Public Sub SayErro(Optional ByVal cERROUSO As String = "", Optional ByVal lMES A
     cERRO = cERRO & "Usuario    : " & NetworkUserName & vbCrLf & _
             "Erro Extra : " & cERROUSO & vbCrLf & _
             "Detalhe    : " & WinApiError_ToStr(Err.Number) & vbCrLf & _
-            "Info Sist  : " & infosistema
+            "Info Sist  : " & infosistema & vbCrLf
             
-    ' 1.2 Grava o ficheiro de texto imediatamente
+    ' 1.2 INJETA O STACK TRACE DA CLASSE stdError (PREPARADO PARA O FUTURO)
+    ' On Error Resume Next
+    ' sTrace = stdError.GetTrace()
+    ' If Len(sTrace) > 0 Then
+    '     cERRO = cERRO & vbCrLf & "--- RASTREAMENTO DE PILHA ---" & vbCrLf & sTrace & vbCrLf
+    ' End If
+    ' On Error GoTo 0
+
+    ' 1.3 Grava o ficheiro de texto imediatamente
     nHANDLE = FreeFile
     Open cARQ For Output As #nHANDLE
     Print #nHANDLE, cERRO
     Close #nHANDLE
 
-' =============================================================
+
+    ' =============================================================
     ' FASE 2: GERA E GRAVA A IMAGEM DO ECRÃ (.JPG)
     ' =============================================================
-    On Error Resume Next ' Garante que falhas não abortem o código
+    On Error Resume Next ' Garante que falhas de vídeo não abortem o código
     
     ' 2.1 Tira a "fotografia" do ecrã usando a função nativa da classe stdImage
     Set imgObj = stdImage.CreateFromScreen()
     
     ' 2.2 Se a captura foi bem-sucedida, grava em disco no formato JPEG
     If Not imgObj Is Nothing Then
-        imgObj.SaveAs cARQImg, stdImgFormatJPEG
+        ' O método correto para salvar a imagem é ToFile
+        imgObj.ToFile cARQImg, stdImgFormatJPEG
     End If
-    
-    On Error GoTo 0 ' Restaura o tratamento de erros
     
     On Error GoTo 0 ' Restaura o tratamento de erros
 
