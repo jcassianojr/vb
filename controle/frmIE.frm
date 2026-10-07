@@ -1,9 +1,9 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
-Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
-Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.5#0"; "VBFLXGRD18.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.4#0"; "vbccr18.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#15.0#0"; "newtab01.OCX"
+Object = "{075212A8-C1CF-444E-939D-F6046CCDBC08}#1.8#0"; "VBFLXGRD18.OCX"
 Begin VB.Form frmIE 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "IE"
@@ -62,8 +62,9 @@ Begin VB.Form frmIE
          Strikethrough   =   0   'False
       EndProperty
       TabsPerRow      =   4
+      Tab             =   2
       TabHeight       =   520
-      ControlVersion  =   13
+      ControlVersion  =   15
       TabCaption(0)   =   "Dizeres"
       Tab(0).ControlCount=   19
       Tab(0).Control(0)=   "cmdescIED(5)"
@@ -172,7 +173,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton cmdescIED 
          Height          =   195
          Index           =   5
-         Left            =   1680
+         Left            =   -73320
          TabIndex        =   65
          TabStop         =   0   'False
          Top             =   6120
@@ -205,7 +206,7 @@ Begin VB.Form frmIE
       Begin VB.PictureBox Picture1 
          Height          =   495
          Index           =   2
-         Left            =   -66960
+         Left            =   8040
          ScaleHeight     =   444
          ScaleWidth      =   324
          TabIndex        =   61
@@ -216,7 +217,7 @@ Begin VB.Form frmIE
       Begin VB.PictureBox Picture2 
          Height          =   2535
          Index           =   2
-         Left            =   -68760
+         Left            =   6240
          ScaleHeight     =   2484
          ScaleWidth      =   2844
          TabIndex        =   60
@@ -226,7 +227,7 @@ Begin VB.Form frmIE
       Begin VB.PictureBox Picture1 
          Height          =   495
          Index           =   1
-         Left            =   -69960
+         Left            =   5040
          ScaleHeight     =   444
          ScaleWidth      =   324
          TabIndex        =   59
@@ -237,7 +238,7 @@ Begin VB.Form frmIE
       Begin VB.PictureBox Picture2 
          Height          =   2535
          Index           =   1
-         Left            =   -71760
+         Left            =   3240
          ScaleHeight     =   2484
          ScaleWidth      =   2844
          TabIndex        =   58
@@ -247,7 +248,7 @@ Begin VB.Form frmIE
       Begin VB.PictureBox Picture1 
          Height          =   495
          Index           =   0
-         Left            =   -72960
+         Left            =   2040
          ScaleHeight     =   444
          ScaleWidth      =   324
          TabIndex        =   57
@@ -258,7 +259,7 @@ Begin VB.Form frmIE
       Begin VB.PictureBox Picture2 
          Height          =   2535
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          ScaleHeight     =   2484
          ScaleWidth      =   2844
          TabIndex        =   56
@@ -376,7 +377,7 @@ Begin VB.Form frmIE
       Begin VB.TextBox TXTFIELDS 
          Height          =   285
          Index           =   23
-         Left            =   -68760
+         Left            =   6240
          MaxLength       =   24
          TabIndex        =   35
          Top             =   840
@@ -385,7 +386,7 @@ Begin VB.Form frmIE
       Begin VB.TextBox TXTFIELDS 
          Height          =   285
          Index           =   22
-         Left            =   -71760
+         Left            =   3240
          MaxLength       =   24
          TabIndex        =   34
          Top             =   840
@@ -458,7 +459,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton cmdescIED 
          Height          =   195
          Index           =   4
-         Left            =   1800
+         Left            =   -73200
          TabIndex        =   20
          TabStop         =   0   'False
          Top             =   4200
@@ -479,7 +480,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton cmdescIED 
          Height          =   195
          Index           =   3
-         Left            =   1800
+         Left            =   -73200
          TabIndex        =   19
          TabStop         =   0   'False
          Top             =   3240
@@ -500,7 +501,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton cmdescIED 
          Height          =   195
          Index           =   2
-         Left            =   1800
+         Left            =   -73200
          TabIndex        =   18
          TabStop         =   0   'False
          Top             =   2280
@@ -521,7 +522,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton cmdescIED 
          Height          =   195
          Index           =   1
-         Left            =   1800
+         Left            =   -73200
          TabIndex        =   17
          TabStop         =   0   'False
          Top             =   1320
@@ -542,7 +543,7 @@ Begin VB.Form frmIE
       Begin VB.TextBox TXTFIELDS 
          Height          =   615
          Index           =   15
-         Left            =   120
+         Left            =   -74880
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   16
@@ -552,7 +553,7 @@ Begin VB.Form frmIE
       Begin VB.TextBox TXTFIELDS 
          Height          =   615
          Index           =   6
-         Left            =   120
+         Left            =   -74880
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   15
@@ -562,7 +563,7 @@ Begin VB.Form frmIE
       Begin VB.TextBox TXTFIELDS 
          Height          =   615
          Index           =   5
-         Left            =   120
+         Left            =   -74880
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   14
@@ -572,7 +573,7 @@ Begin VB.Form frmIE
       Begin VB.TextBox TXTFIELDS 
          Height          =   615
          Index           =   3
-         Left            =   120
+         Left            =   -74880
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   13
@@ -582,7 +583,7 @@ Begin VB.Form frmIE
       Begin VB.TextBox TXTFIELDS 
          Height          =   615
          Index           =   2
-         Left            =   120
+         Left            =   -74880
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   12
@@ -592,7 +593,7 @@ Begin VB.Form frmIE
       Begin VB.TextBox TXTFIELDS 
          Height          =   675
          Index           =   18
-         Left            =   120
+         Left            =   -74880
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   11
@@ -602,7 +603,7 @@ Begin VB.Form frmIE
       Begin VB.TextBox TXTFIELDS 
          Height          =   615
          Index           =   1
-         Left            =   120
+         Left            =   -74880
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   10
@@ -632,7 +633,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton cmdimprimir 
          Height          =   375
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   68
          Top             =   5400
          Width           =   1275
@@ -653,7 +654,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton cmdimprimir 
          Height          =   375
          Index           =   1
-         Left            =   -71760
+         Left            =   3240
          TabIndex        =   69
          Top             =   5400
          Width           =   1275
@@ -674,7 +675,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton cmdimprimir 
          Height          =   375
          Index           =   2
-         Left            =   -68640
+         Left            =   6360
          TabIndex        =   70
          Top             =   5400
          Width           =   1275
@@ -695,7 +696,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton CmdPaste 
          Height          =   375
          Index           =   0
-         Left            =   -73320
+         Left            =   1680
          TabIndex        =   71
          Top             =   5400
          Width           =   1215
@@ -716,7 +717,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton CmdPaste 
          Height          =   375
          Index           =   1
-         Left            =   -70320
+         Left            =   4680
          TabIndex        =   72
          Top             =   5400
          Width           =   1215
@@ -737,7 +738,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton CmdPaste 
          Height          =   375
          Index           =   2
-         Left            =   -67200
+         Left            =   7800
          TabIndex        =   73
          Top             =   5400
          Width           =   1215
@@ -757,7 +758,7 @@ Begin VB.Form frmIE
       End
       Begin XPControls.XPButton CmdConfImp 
          Height          =   435
-         Left            =   -66000
+         Left            =   9000
          TabIndex        =   74
          Top             =   720
          Width           =   1575
@@ -862,7 +863,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton Incluirimagem 
          Height          =   435
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   88
          TabStop         =   0   'False
          Top             =   3960
@@ -884,7 +885,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton Incluirimagem 
          Height          =   435
          Index           =   1
-         Left            =   -71760
+         Left            =   3240
          TabIndex        =   89
          TabStop         =   0   'False
          Top             =   3960
@@ -906,7 +907,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton Incluirimagem 
          Height          =   435
          Index           =   2
-         Left            =   -68640
+         Left            =   6360
          TabIndex        =   90
          TabStop         =   0   'False
          Top             =   3960
@@ -928,7 +929,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton DelImg 
          Height          =   435
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   91
          TabStop         =   0   'False
          Top             =   4440
@@ -950,7 +951,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton DelImg 
          Height          =   435
          Index           =   1
-         Left            =   -71760
+         Left            =   3240
          TabIndex        =   92
          TabStop         =   0   'False
          Top             =   4440
@@ -972,7 +973,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton DelImg 
          Height          =   435
          Index           =   2
-         Left            =   -68640
+         Left            =   6360
          TabIndex        =   93
          TabStop         =   0   'False
          Top             =   4440
@@ -994,7 +995,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton imgsave 
          Height          =   435
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   94
          TabStop         =   0   'False
          Top             =   4920
@@ -1016,7 +1017,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton imgsave 
          Height          =   435
          Index           =   1
-         Left            =   -71760
+         Left            =   3240
          TabIndex        =   95
          TabStop         =   0   'False
          Top             =   4920
@@ -1038,7 +1039,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton imgsave 
          Height          =   435
          Index           =   2
-         Left            =   -68640
+         Left            =   6360
          TabIndex        =   96
          TabStop         =   0   'False
          Top             =   4920
@@ -1060,7 +1061,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton VerImg 
          Height          =   495
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   97
          TabStop         =   0   'False
          Top             =   5880
@@ -1082,7 +1083,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton VerImg 
          Height          =   495
          Index           =   1
-         Left            =   -71760
+         Left            =   3240
          TabIndex        =   98
          TabStop         =   0   'False
          Top             =   5880
@@ -1104,7 +1105,7 @@ Begin VB.Form frmIE
       Begin XPControls.XPButton VerImg 
          Height          =   495
          Index           =   2
-         Left            =   -68640
+         Left            =   6360
          TabIndex        =   99
          TabStop         =   0   'False
          Top             =   5880
@@ -1229,7 +1230,7 @@ Begin VB.Form frmIE
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   15
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   27
          Top             =   5160
          Width           =   975
@@ -1240,7 +1241,7 @@ Begin VB.Form frmIE
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   6
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   26
          Top             =   4200
          Width           =   1095
@@ -1251,7 +1252,7 @@ Begin VB.Form frmIE
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   5
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   25
          Top             =   3240
          Width           =   1215
@@ -1262,7 +1263,7 @@ Begin VB.Form frmIE
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   3
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   24
          Top             =   2280
          Width           =   1095
@@ -1273,7 +1274,7 @@ Begin VB.Form frmIE
          ForeColor       =   &H00FF0000&
          Height          =   255
          Index           =   2
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   23
          Top             =   1320
          Width           =   1575
@@ -1284,7 +1285,7 @@ Begin VB.Form frmIE
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   20
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   22
          Top             =   6120
          Width           =   495
@@ -1295,7 +1296,7 @@ Begin VB.Form frmIE
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   1
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   21
          Top             =   360
          Width           =   1095
@@ -1684,7 +1685,7 @@ Private Sub cmdClose_Click()
     If gridrev.Rows > 1 Then
       gridrev.Row = gridrev.Rows - 1
       gridrev.Col = 3
-      TXTFIELDS(21).Text = gridrev
+      TXTFIELDS(21).tEXT = gridrev
     Else
       TXTFIELDS(21) = TXTFIELDS(24)
     End If
@@ -1784,18 +1785,17 @@ Private Sub CmdMotRev_Click()
   ComMotInc.Enabled = True
   Filgridrevi
 End Sub
-
 Private Sub CmdPaste_Click(Index As Integer)
-  If Picture1(Index).Height = 0 Then
-    Alert ("Sem Imagem")
+' Verifica se existe uma imagem válida carregada no Picture1(Index)
+  If Picture1(Index).Height = 0 Or Picture1(Index).Picture = 0 Then
+    Alert "Sem Imagem"
   Else
-    Clipboard.Clear
-    Clipboard.SetData Picture1(Index).Image, (vbCFBitmap)
-
-
+    ' Instancia a stdImage a partir da imagem atual e envia para a área de transferência
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromStdPicture(Picture1(Index).Picture)
+    imgObj.ToClipboard
   End If
-
-End Sub
+  End Sub
 
 Private Sub Command1_Click()
   If nREV = 0 Then
@@ -1922,7 +1922,7 @@ End Sub
 Private Sub Form_Load()
 
   CenterFormToScreen Me
-  TXTPF.Text = nPF
+  TXTPF.tEXT = nPF
   lTROCOU = Array(False, False, False)
   aCAMIMG = Array("IMAGEM", "FOTOESQ", "FOTODIR")
 
@@ -2039,9 +2039,9 @@ Private Sub TXTFIELDS_Change(Index As Integer)
   Select Case Index
   Case 10, 11, 12, 13
     'Peso Liquido=Peso Unitario * N Peca por Embalagem
-    TXTFIELDS(12).Text = CDbl(FixNum(TXTFIELDS(10))) * CDbl(FixNum(TXTFIELDS(11)))
+    TXTFIELDS(12).tEXT = CDbl(FixNum(TXTFIELDS(10))) * CDbl(FixNum(TXTFIELDS(11)))
     'Peso Bruto Peso Liquido + Tara
-    TXTFIELDS(14).Text = CDbl(FixNum(TXTFIELDS(12))) + CDbl(FixNum(TXTFIELDS(13)))
+    TXTFIELDS(14).tEXT = CDbl(FixNum(TXTFIELDS(12))) + CDbl(FixNum(TXTFIELDS(13)))
   End Select
 End Sub
 

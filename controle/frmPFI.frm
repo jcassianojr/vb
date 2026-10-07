@@ -1,27 +1,27 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#15.0#0"; "newtab01.OCX"
 Begin VB.Form frmPFI 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFI"
-   ClientHeight    =   7035
-   ClientLeft      =   1095
-   ClientTop       =   330
-   ClientWidth     =   10170
+   ClientHeight    =   7032
+   ClientLeft      =   1092
+   ClientTop       =   336
+   ClientWidth     =   10176
    Icon            =   "frmPFI.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7035
-   ScaleWidth      =   10170
+   ScaleHeight     =   7032
+   ScaleWidth      =   10176
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin BSPrinter.PrintPreview PrintPreview1 
       Left            =   6960
       Top             =   120
-      _ExtentX        =   1191
-      _ExtentY        =   1191
+      _ExtentX        =   953
+      _ExtentY        =   953
    End
    Begin VB.TextBox TXTSSQ 
       BackColor       =   &H00C0FFFF&
@@ -59,20 +59,22 @@ Begin VB.Form frmPFI
       TabIndex        =   21
       Top             =   1320
       Width           =   9975
-      _ExtentX        =   17595
-      _ExtentY        =   9763
+      _ExtentX        =   17590
+      _ExtentY        =   9758
+      ControlJustAdded=   0   'False
       Tabs            =   2
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      Tab             =   1
       TabHeight       =   520
-      ControlVersion  =   9
+      ControlVersion  =   15
       TabCaption(0)   =   "Item"
       Tab(0).ControlCount=   34
       Tab(0).Control(0)=   "TXTFIELDS(18)"
@@ -123,7 +125,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   375
          Index           =   18
-         Left            =   5880
+         Left            =   -69120
          MaxLength       =   1
          TabIndex        =   18
          Top             =   1920
@@ -132,7 +134,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   375
          Index           =   17
-         Left            =   5880
+         Left            =   -69120
          MaxLength       =   1
          TabIndex        =   17
          Top             =   1560
@@ -140,9 +142,9 @@ Begin VB.Form frmPFI
       End
       Begin VB.PictureBox Picture1 
          Height          =   495
-         Left            =   -74760
-         ScaleHeight     =   435
-         ScaleWidth      =   195
+         Left            =   240
+         ScaleHeight     =   444
+         ScaleWidth      =   204
          TabIndex        =   34
          TabStop         =   0   'False
          Top             =   3960
@@ -151,9 +153,9 @@ Begin VB.Form frmPFI
       End
       Begin VB.PictureBox Picture2 
          Height          =   3375
-         Left            =   -74760
-         ScaleHeight     =   3315
-         ScaleWidth      =   3555
+         Left            =   240
+         ScaleHeight     =   3324
+         ScaleWidth      =   3564
          TabIndex        =   33
          TabStop         =   0   'False
          Top             =   480
@@ -162,7 +164,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   765
          Index           =   12
-         Left            =   1200
+         Left            =   -73800
          MaxLength       =   255
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -173,7 +175,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   765
          Index           =   11
-         Left            =   1200
+         Left            =   -73800
          MaxLength       =   255
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -184,7 +186,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   765
          Index           =   10
-         Left            =   1200
+         Left            =   -73800
          MaxLength       =   255
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -196,7 +198,7 @@ Begin VB.Form frmPFI
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   7
-         Left            =   2040
+         Left            =   -72960
          TabIndex        =   9
          Text            =   "0"
          Top             =   2280
@@ -205,7 +207,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   375
          Index           =   16
-         Left            =   5040
+         Left            =   -69960
          MaxLength       =   1
          TabIndex        =   16
          Top             =   1920
@@ -214,7 +216,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   375
          Index           =   15
-         Left            =   4200
+         Left            =   -70800
          MaxLength       =   1
          TabIndex        =   14
          Top             =   1920
@@ -223,7 +225,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   375
          Index           =   14
-         Left            =   5040
+         Left            =   -69960
          MaxLength       =   1
          TabIndex        =   15
          TabStop         =   0   'False
@@ -233,7 +235,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   375
          Index           =   13
-         Left            =   4200
+         Left            =   -70800
          MaxLength       =   1
          TabIndex        =   13
          Top             =   1560
@@ -243,7 +245,7 @@ Begin VB.Form frmPFI
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   9
-         Left            =   3120
+         Left            =   -71880
          TabIndex        =   8
          Text            =   "0"
          Top             =   1920
@@ -253,7 +255,7 @@ Begin VB.Form frmPFI
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   6
-         Left            =   1440
+         Left            =   -73560
          TabIndex        =   7
          Text            =   "0"
          Top             =   1920
@@ -263,7 +265,7 @@ Begin VB.Form frmPFI
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   8
-         Left            =   3120
+         Left            =   -71880
          TabIndex        =   6
          Text            =   "0"
          Top             =   1560
@@ -273,7 +275,7 @@ Begin VB.Form frmPFI
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   5
-         Left            =   1440
+         Left            =   -73560
          TabIndex        =   5
          Text            =   "0"
          Top             =   1560
@@ -282,7 +284,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   285
          Index           =   4
-         Left            =   1440
+         Left            =   -73560
          MaxLength       =   78
          TabIndex        =   4
          Top             =   1200
@@ -291,7 +293,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   285
          Index           =   2
-         Left            =   1440
+         Left            =   -73560
          MaxLength       =   20
          TabIndex        =   2
          Top             =   480
@@ -300,7 +302,7 @@ Begin VB.Form frmPFI
       Begin VB.TextBox TXTFIELDS 
          Height          =   285
          Index           =   3
-         Left            =   1440
+         Left            =   -73560
          MaxLength       =   78
          TabIndex        =   3
          Top             =   840
@@ -308,18 +310,18 @@ Begin VB.Form frmPFI
       End
       Begin XPControls.XPButton cmdimprimir 
          Height          =   435
-         Left            =   -74280
+         Left            =   720
          TabIndex        =   37
          TabStop         =   0   'False
          Top             =   3960
          Width           =   1515
-         _ExtentX        =   2672
-         _ExtentY        =   767
+         _ExtentX        =   2667
+         _ExtentY        =   762
          Picture         =   "frmPFI.frx":058A
          Caption         =   "Imprimir"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -329,18 +331,18 @@ Begin VB.Form frmPFI
       End
       Begin XPControls.XPButton CmdPaste 
          Height          =   435
-         Left            =   -72720
+         Left            =   2280
          TabIndex        =   38
          TabStop         =   0   'False
          Top             =   3960
          Width           =   2415
-         _ExtentX        =   4260
-         _ExtentY        =   767
+         _ExtentX        =   4255
+         _ExtentY        =   762
          Picture         =   "frmPFI.frx":0B24
          Caption         =   "Copia Area Transferencia"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -350,18 +352,18 @@ Begin VB.Form frmPFI
       End
       Begin XPControls.XPButton CmdConfImp 
          Height          =   435
-         Left            =   -70200
+         Left            =   4800
          TabIndex        =   39
          TabStop         =   0   'False
          Top             =   3960
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFI.frx":10BE
          Caption         =   "Configurar Impressora"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -372,17 +374,17 @@ Begin VB.Form frmPFI
       Begin XPControls.XPButton cmdpeg 
          Height          =   375
          Index           =   13
-         Left            =   4680
+         Left            =   -70320
          TabIndex        =   40
          Top             =   1560
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
+         _ExtentX        =   656
+         _ExtentY        =   656
          Picture         =   "frmPFI.frx":1658
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -393,18 +395,18 @@ Begin VB.Form frmPFI
       Begin XPControls.XPButton cmdpeg 
          Height          =   375
          Index           =   15
-         Left            =   4680
+         Left            =   -70320
          TabIndex        =   41
          TabStop         =   0   'False
          Top             =   1920
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
+         _ExtentX        =   656
+         _ExtentY        =   656
          Picture         =   "frmPFI.frx":1BF2
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -415,18 +417,18 @@ Begin VB.Form frmPFI
       Begin XPControls.XPButton cmdpeg 
          Height          =   375
          Index           =   14
-         Left            =   5520
+         Left            =   -69480
          TabIndex        =   42
          TabStop         =   0   'False
          Top             =   1560
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
+         _ExtentX        =   656
+         _ExtentY        =   656
          Picture         =   "frmPFI.frx":218C
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -437,18 +439,18 @@ Begin VB.Form frmPFI
       Begin XPControls.XPButton cmdpeg 
          Height          =   375
          Index           =   16
-         Left            =   5520
+         Left            =   -69480
          TabIndex        =   43
          TabStop         =   0   'False
          Top             =   1920
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
+         _ExtentX        =   656
+         _ExtentY        =   656
          Picture         =   "frmPFI.frx":2726
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -458,18 +460,18 @@ Begin VB.Form frmPFI
       End
       Begin XPControls.XPButton Incluirimagem 
          Height          =   435
-         Left            =   -70920
+         Left            =   4080
          TabIndex        =   44
          TabStop         =   0   'False
          Top             =   480
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFI.frx":2CC0
          Caption         =   "Incluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -479,18 +481,18 @@ Begin VB.Form frmPFI
       End
       Begin XPControls.XPButton DelImg 
          Height          =   435
-         Left            =   -70920
+         Left            =   4080
          TabIndex        =   45
          TabStop         =   0   'False
          Top             =   960
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFI.frx":315A
          Caption         =   "Excluir Image"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -500,18 +502,18 @@ Begin VB.Form frmPFI
       End
       Begin XPControls.XPButton VerImg 
          Height          =   495
-         Left            =   -70920
+         Left            =   4080
          TabIndex        =   46
          TabStop         =   0   'False
          Top             =   1440
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   873
+         _ExtentX        =   2773
+         _ExtentY        =   868
          Picture         =   "frmPFI.frx":35F4
          Caption         =   "Navegar Imagens"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -521,18 +523,18 @@ Begin VB.Form frmPFI
       End
       Begin XPControls.XPButton Command4 
          Height          =   435
-         Left            =   -70920
+         Left            =   4080
          TabIndex        =   47
          TabStop         =   0   'False
          Top             =   2040
          Width           =   1575
-         _ExtentX        =   2778
-         _ExtentY        =   767
+         _ExtentX        =   2773
+         _ExtentY        =   762
          Picture         =   "frmPFI.frx":3A8E
          Caption         =   "Salvar Imagem"
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -543,18 +545,18 @@ Begin VB.Form frmPFI
       Begin XPControls.XPButton cmdpeg 
          Height          =   375
          Index           =   17
-         Left            =   6360
+         Left            =   -68640
          TabIndex        =   54
          TabStop         =   0   'False
          Top             =   1560
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
+         _ExtentX        =   656
+         _ExtentY        =   656
          Picture         =   "frmPFI.frx":3F28
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -565,18 +567,18 @@ Begin VB.Form frmPFI
       Begin XPControls.XPButton cmdpeg 
          Height          =   375
          Index           =   18
-         Left            =   6360
+         Left            =   -68640
          TabIndex        =   55
          TabStop         =   0   'False
          Top             =   1920
          Width           =   375
-         _ExtentX        =   661
-         _ExtentY        =   661
+         _ExtentX        =   656
+         _ExtentY        =   656
          Picture         =   "frmPFI.frx":44C2
          Caption         =   ""
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Size            =   7.8
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -589,7 +591,7 @@ Begin VB.Form frmPFI
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   12
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   32
          Top             =   4320
          Width           =   855
@@ -599,7 +601,7 @@ Begin VB.Form frmPFI
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   10
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   31
          Top             =   3480
          Width           =   855
@@ -609,7 +611,7 @@ Begin VB.Form frmPFI
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   9
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   30
          Top             =   2640
          Width           =   855
@@ -619,7 +621,7 @@ Begin VB.Form frmPFI
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   7
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   29
          Top             =   2280
          Width           =   1815
@@ -629,7 +631,7 @@ Begin VB.Form frmPFI
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   5
-         Left            =   2400
+         Left            =   -72600
          TabIndex        =   28
          Top             =   1920
          Width           =   615
@@ -639,7 +641,7 @@ Begin VB.Form frmPFI
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   11
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   27
          Top             =   1920
          Width           =   1215
@@ -649,7 +651,7 @@ Begin VB.Form frmPFI
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   6
-         Left            =   2400
+         Left            =   -72600
          TabIndex        =   26
          Top             =   1560
          Width           =   615
@@ -659,7 +661,7 @@ Begin VB.Form frmPFI
          ForeColor       =   &H00C00000&
          Height          =   375
          Index           =   8
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   25
          Top             =   1560
          Width           =   1215
@@ -669,7 +671,7 @@ Begin VB.Form frmPFI
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   4
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   24
          Top             =   1200
          Width           =   855
@@ -679,7 +681,7 @@ Begin VB.Form frmPFI
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   2
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   23
          Top             =   480
          Width           =   1215
@@ -689,7 +691,7 @@ Begin VB.Form frmPFI
          ForeColor       =   &H00C00000&
          Height          =   255
          Index           =   3
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   22
          Top             =   840
          Width           =   975
@@ -725,13 +727,13 @@ Begin VB.Form frmPFI
       TabStop         =   0   'False
       Top             =   600
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "frmPFI.frx":4A5C
       Caption         =   "Retornar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -746,13 +748,13 @@ Begin VB.Form frmPFI
       TabStop         =   0   'False
       Top             =   120
       Width           =   1575
-      _ExtentX        =   2778
-      _ExtentY        =   767
+      _ExtentX        =   2773
+      _ExtentY        =   762
       Picture         =   "frmPFI.frx":4FF6
       Caption         =   "Salvar"
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -858,13 +860,14 @@ Private Sub CmdImprimir_Click()
 End Sub
 
 Private Sub CmdPaste_Click()
-  If Picture1.Height = 0 Then
-    Alert ("Sem Imagem")
+' Verifica se existe uma imagem válida carregada no Picture1
+  If Picture1.Height = 0 Or Picture1.Picture = 0 Then
+    Alert "Sem Imagem"
   Else
-    Clipboard.Clear
-    Clipboard.SetData Picture1.Image, (vbCFBitmap)
-
-    ' CopyEntirePicture Picture1
+    ' Instancia a stdImage a partir da imagem atual e envia para a área de transferência
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromStdPicture(Picture1.Picture)
+    imgObj.ToClipboard
   End If
 
 End Sub
@@ -905,9 +908,9 @@ Private Sub Form_Load()
   CenterFormToScreen Me
   cARQ = Sdb                                   'agora sdb pois pode ser pf pfp pfg
 
-  TXTPF.text = nPF
-  TXTSEQ.text = nSEQ
-  TXTSSQ.text = nSSQ
+  TXTPF.tEXT = nPF
+  TXTSEQ.tEXT = nSEQ
+  TXTSSQ.tEXT = nSSQ
 
   cSQL = "select * from PFI WHERE PF=" & nPF & " AND SEQ=" & nSEQ & " AND SSQ=" & nSSQ & " AND ITEM=" & nORD
 

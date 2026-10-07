@@ -1,8 +1,8 @@
 VERSION 5.00
 Object = "{BDF6FCF6-E2A0-4DA6-8DF8-FA27594705C8}#26.1#0"; "XpControls.ocx"
-Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#1.1#0"; "BSPrin10.ocx"
-Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.3#0"; "vbccr18.ocx"
-Object = "{66E63055-5A66-4C79-9327-4BC077858695}#14.0#0"; "newtab01.OCX"
+Object = "{451B73A5-1563-45D5-A6AC-7B2B7D30B778}#3.0#0"; "BSPrin30.ocx"
+Object = "{379157C5-E9BD-43F1-9F83-B037496BED42}#1.4#0"; "vbccr18.ocx"
+Object = "{66E63055-5A66-4C79-9327-4BC077858695}#15.0#0"; "newtab01.OCX"
 Begin VB.Form frmDISPOI 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PFI"
@@ -43,7 +43,7 @@ Begin VB.Form frmDISPOI
          Strikethrough   =   0   'False
       EndProperty
       TabHeight       =   520
-      ControlVersion  =   13
+      ControlVersion  =   15
       TabCaption(0)   =   "Item"
       Tab(0).ControlCount=   9
       Tab(0).Control(0)=   "Picture1"
@@ -354,13 +354,14 @@ Private Sub CmdImprimir_Click()
 End Sub
 
 Private Sub CmdPaste_Click()
-  If Picture1.Height = 0 Then
-    Alert ("Sem Imagem")
+' Verifica se existe uma imagem válida carregada no Picture1
+  If Picture1.Height = 0 Or Picture1.Picture = 0 Then
+    Alert "Sem Imagem"
   Else
-    Clipboard.Clear
-    Clipboard.SetData Picture1.Image, (vbCFBitmap)
-
-    ' CopyEntirePicture Picture1
+    ' Instancia a stdImage a partir da imagem atual e envia para a área de transferência
+    Dim imgObj As Object
+    Set imgObj = stdImage.CreateFromStdPicture(Picture1.Picture)
+    imgObj.ToClipboard
   End If
 
 End Sub
